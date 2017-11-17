@@ -149,11 +149,11 @@
             <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
-    <template name="pod" value="=head3 $SUBNAME$&#10;&#10;$END$&#10;&#10;=cut&#10;" description="quick pod template" toReformat="true"
-              toShortenFQNames="true">
+  <template name="pod" value="=head3 $SUBNAME$&#10;&#10;$END$&#10;&#10;=cut&#10;" description="quick pod template" toReformat="false"
+            toShortenFQNames="true">
         <variable name="SUBNAME" expression="" defaultValue="&quot;subname&quot;" alwaysStopAt="true"/>
         <context>
-            <option name="PERL5" value="true"/>
+          <option name="PERL5_PREFIX" value="true"/>
         </context>
     </template>
     <template name="cons" value="use constant {&#10;    $CONST_NAME$ =&gt; $CONST_VAL$&#10;};" description="Constant definition"

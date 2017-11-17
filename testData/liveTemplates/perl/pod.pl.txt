@@ -102,18 +102,18 @@ Caret offset: 46
 
 {
   say 'hi';
-    =head3 <selection>subname<caret></selection>
+  =head3 <selection>subname<caret></selection>
 
-        
 
-        = cut
+
+  =cut
 
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -174,23 +174,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 49
@@ -199,7 +199,7 @@ Caret offset: 49
 
 {
   say 'hi';
-  
+
 }
 =head3 <selection>subname<caret></selection>
 
@@ -210,7 +210,7 @@ Caret offset: 49
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -271,23 +271,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 67
@@ -296,17 +296,17 @@ Caret offset: 67
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-    =head3 <selection>subname<caret></selection>
+  =head3 <selection>subname<caret></selection>
 
-        
 
-        = cut
+
+  =cut
 
 } continue {}
 
@@ -368,23 +368,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 82
@@ -393,13 +393,13 @@ Caret offset: 82
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 =head3 <selection>subname<caret></selection>
 
@@ -465,23 +465,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 93
@@ -490,19 +490,19 @@ Caret offset: 93
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
-say 'hi' = head3 <selection>subname<caret></selection>
+say 'hi' =head3 <selection>subname<caret></selection>
 
-    
+
 
 =cut
 ;
@@ -562,120 +562,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
-  when($b){}
-}
 
-given($a){
-  when($b){}
-  
-  default{}
-}--------------------------------------------------------------------------------
-Caret offset: 110
---------------------------------------------------------------------------------
-# Live templates test sample
-
-{
-  say 'hi';
-  
-}
-
-
-{
-  say 'hi';
-  
-} continue {}
-
-
-say 'hi' ;
-
-my $var = 1 + = head3 <selection>subname<caret></selection>
-
-    
-
-=cut
-2;
-
-if($a){}
-
-
-unless($a){}
-
-
-if($a){}
-else{}
-
-
-if($a){}
-elsif($b){}
-
-
-if($a){}
-
-elsif($b){}
-
-if($a){}
-
-else{}
-
-while($a){}
-
-
-until($a){}
-
-
-for($a){}
-
-
-foreach($a){}
-
-
-for($a =1;$a < 1; $++){}
-
-
-foreach($a =1;$a < 1; $++){}
-
-
-while($a){}continue{}
-
-
-until($a){}continue{}
-
-
-for($a){}continue{}
-
-
-foreach($a){}continue{}
-
-
-given($a){
-  
-}
-
-given($a){
-  when($b){}
-  
-}
-
-given($a){
-  when($b){}
-  
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 123
@@ -684,13 +587,13 @@ Caret offset: 123
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -756,23 +659,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 138
@@ -781,13 +684,13 @@ Caret offset: 138
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -853,23 +756,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 156
@@ -878,13 +781,13 @@ Caret offset: 156
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -950,23 +853,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 179
@@ -975,13 +878,13 @@ Caret offset: 179
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1047,23 +950,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 190
@@ -1072,13 +975,13 @@ Caret offset: 190
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1106,6 +1009,7 @@ if($a){}
 
 
 =cut
+
 elsif($b){}
 
 if($a){}
@@ -1143,23 +1047,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 213
@@ -1168,13 +1072,13 @@ Caret offset: 213
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1206,6 +1110,7 @@ if($a){}
 
 
 =cut
+
 else{}
 
 while($a){}
@@ -1239,23 +1144,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 234
@@ -1264,13 +1169,13 @@ Caret offset: 234
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1336,23 +1241,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 248
@@ -1361,13 +1266,13 @@ Caret offset: 248
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1433,23 +1338,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 260
@@ -1458,13 +1363,13 @@ Caret offset: 260
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1530,23 +1435,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 276
@@ -1555,13 +1460,13 @@ Caret offset: 276
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1627,23 +1532,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 303
@@ -1652,13 +1557,13 @@ Caret offset: 303
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1724,23 +1629,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 334
@@ -1749,13 +1654,13 @@ Caret offset: 334
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1821,23 +1726,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 358
@@ -1846,13 +1751,13 @@ Caret offset: 358
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -1918,23 +1823,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 382
@@ -1943,13 +1848,13 @@ Caret offset: 382
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2015,23 +1920,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 404
@@ -2040,13 +1945,13 @@ Caret offset: 404
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2112,23 +2017,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 430
@@ -2137,13 +2042,13 @@ Caret offset: 430
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2209,23 +2114,23 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 445
@@ -2234,13 +2139,13 @@ Caret offset: 445
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2301,28 +2206,28 @@ foreach($a){}continue{}
 
 
 given($a){
-    =head3 <selection>subname<caret></selection>
+  =head3 <selection>subname<caret></selection>
 
-            
 
-            = cut
+
+  =cut
 
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 475
@@ -2331,13 +2236,13 @@ Caret offset: 475
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2398,28 +2303,28 @@ foreach($a){}continue{}
 
 
 given($a){
-  
-}
-
-given($a){
-  when($b){}
-    =head3 <selection>subname<caret></selection>
-
-            
-
-            = cut
 
 }
 
 given($a){
   when($b){}
-  
+  =head3 <selection>subname<caret></selection>
+
+
+
+  =cut
+
+}
+
+given($a){
+  when($b){}
+
   when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 505
@@ -2428,13 +2333,13 @@ Caret offset: 505
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2495,28 +2400,28 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-    =head3 <selection>subname<caret></selection>
+  =head3 <selection>subname<caret></selection>
 
-            
 
-            = cut
 
-    when($b){}
+  =cut
+
+  when($b){}
 }
 
 given($a){
   when($b){}
-  
+
   default{}
 }--------------------------------------------------------------------------------
 Caret offset: 548
@@ -2525,13 +2430,13 @@ Caret offset: 548
 
 {
   say 'hi';
-  
+
 }
 
 
 {
   say 'hi';
-  
+
 } continue {}
 
 
@@ -2592,26 +2497,27 @@ foreach($a){}continue{}
 
 
 given($a){
-  
+
 }
 
 given($a){
   when($b){}
-  
+
 }
 
 given($a){
   when($b){}
-  
+
   when($b){}
 }
 
 given($a){
   when($b){}
-    =head3 <selection>subname<caret></selection>
+  =head3 <selection>subname<caret></selection>
 
-            
 
-            = cut
-    default{}
+
+  =cut
+
+  default{}
 }
