@@ -127,6 +127,17 @@ public class PerlSdkType extends SdkType {
   }
 
   @NotNull
+  @Override
+  public String adjustSelectedSdkHome(@NotNull String homePath) {
+    File file = new File(homePath);
+    if (file.isDirectory()) {
+      return homePath;
+    }
+    File parentFile = file.getParentFile();
+    return parentFile != null && parentFile.isDirectory() ? parentFile.getPath() : homePath;
+  }
+
+  @NotNull
   public String getExecutablePath(@NotNull String sdkHome) {
     if (!(sdkHome.endsWith("/") && sdkHome.endsWith("\\"))) {
       sdkHome += File.separator;
@@ -173,6 +184,9 @@ public class PerlSdkType extends SdkType {
   }
 
 
+  /**
+   * @deprecated use {@link #INSTANCE} instead
+   */
   @Deprecated // use INSTANCE instead
   @NotNull
   public static PerlSdkType getInstance() {

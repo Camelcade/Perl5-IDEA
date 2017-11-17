@@ -44,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -137,11 +136,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   }
 
   private void addSdk(@NotNull String home) {
-    File perlDir = new File(home);
-    if (perlDir.exists() && perlDir.isFile()) {
-      home = perlDir.getParent();
-    }
-    PerlSdkType sdkType = PerlSdkType.getInstance();
+    PerlSdkType sdkType = PerlSdkType.INSTANCE;
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(sdkType,
                                                                  home,
                                                                  Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));

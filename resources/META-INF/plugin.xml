@@ -45,6 +45,7 @@
      </p>
      <p>Fixes:
       <ul>
+        <li>Mac users should not have problems with SDK addition anymore, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1404">bbmielke</a></li>
         <li><code>continue</code> block indentation after <code>while</code> and <code>until</code></li>
         <li>Spacing after <code>for/foreach</code> in compound statement without explicit variable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1607">1607</a></li>
         <li>Completion for methods on annotated variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1598">bakanov</a></li>
