@@ -18,43 +18,79 @@ package com.perl5.lang.perl.idea.editor;
 
 import com.intellij.codeInsight.editorActions.MultiCharQuoteHandler;
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.PerlParserDefinition.LITERALS;
+import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
+import static com.perl5.lang.perl.parser.PerlParserUtil.OPEN_QUOTES;
 
 /**
  * Created by hurricup on 10.06.2015.
  */
 public class PerlQuoteHandler extends SimpleTokenSetQuoteHandler implements MultiCharQuoteHandler, PerlElementTypes {
-  public static final TokenSet OPENING_QUOTES = TokenSet.create(
-    QUOTE_SINGLE_OPEN,
-    QUOTE_DOUBLE_OPEN,
-    QUOTE_TICK_OPEN
-  );
-  public static final TokenSet CLOSING_QUOTES = TokenSet.create(
-    QUOTE_SINGLE_CLOSE,
-    QUOTE_DOUBLE_CLOSE,
-    QUOTE_TICK_CLOSE
-  );
 
   public PerlQuoteHandler() {
-    super(OPENING_QUOTES);
+    super(LITERALS);
   }
 
   @Override
   public boolean isClosingQuote(HighlighterIterator iterator, int offset) {
-    return CLOSING_QUOTES.contains(iterator.getTokenType());
+    return CLOSE_QUOTES.contains(iterator.getTokenType());
   }
 
   @Override
   public boolean isOpeningQuote(HighlighterIterator iterator, int offset) {
-    return OPENING_QUOTES.contains(iterator.getTokenType());
+    return OPEN_QUOTES.contains(iterator.getTokenType());
+  }
+
+  @Override
+  public boolean hasNonClosedLiteral(Editor editor, HighlighterIterator iterator, int offset) {
+    int start = iterator.getStart();
+    try {
+      Document doc = editor.getDocument();
+      CharSequence chars = doc.getCharsSequence();
+
+      while (!iterator.atEnd()) {
+        IElementType tokenType = iterator.getTokenType();
+
+        if (myLiteralTokenSet.contains(tokenType)) {
+          if (isNonClosedLiteral(iterator, chars)) {
+            return true;
+          }
+        }
+        else if (!OPEN_QUOTES.contains(tokenType)) {
+          return false;
+        }
+        iterator.advance();
+      }
+      return true;
+    }
+    finally {
+      while (iterator.atEnd() || iterator.getStart() != start) {
+        iterator.retreat();
+      }
+    }
+  }
+
+  protected boolean isNonClosedLiteral(HighlighterIterator iterator, CharSequence chars) {
+    if (iterator.getStart() >= iterator.getEnd() - 1) {
+      return true;
+    }
+
+    char nextChar = chars.charAt(iterator.getEnd() - 1);
+    return nextChar != '\"' && nextChar != '\'' && nextChar != '`';
   }
 
   @Nullable
   @Override
   public CharSequence getClosingQuote(HighlighterIterator iterator, int offset) {
-    return null;
+    CharSequence documentSequence = iterator.getDocument().getCharsSequence();
+    return Character.toString(PerlBaseLexer.getQuoteCloseChar(documentSequence.charAt(offset - 1)));
   }
 }

@@ -1083,4 +1083,17 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
 
     return sb.toString();
   }
+
+  protected void doTestTypingWithoutFiles(@NotNull String initialText, @NotNull String toType, @NotNull String expected) {
+    initWithTextSmart(initialText);
+    myFixture.type(toType);
+    myFixture.checkResult(expected);
+  }
+
+  protected void doTestBackspaceWithoutFiles(@NotNull String initialText, @NotNull String expected) {
+    initWithTextSmart(initialText);
+    myFixture.performEditorAction(IdeActions.ACTION_EDITOR_BACKSPACE);
+    myFixture.checkResult(expected);
+  }
+
 }
