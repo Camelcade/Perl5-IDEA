@@ -36,6 +36,7 @@
      <p>Updates:
      <ul>
        <li>Editor responsiveness should be much better now</li>
+       <li>Completion is now immediately opens after typing a sigil</li>
        <li>Double-click on variable name should now select variable with sigil</li>
        <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>
        <li>Inspection for <code>use vars</code> legacy pragma usage with quick-fix for converting to <code>our</code> declaration, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/380">380</a></li>
