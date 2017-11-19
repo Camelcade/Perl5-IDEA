@@ -1,3 +1,5 @@
+Lookups: CORE::GLOBAL; Text: CORE::GLOBAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE; Text: CORE; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: ClassAccessor; Text: ClassAccessor; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: Library::Exception2; Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
 Lookups: Library::Exception; Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
@@ -10,4 +12,6 @@ Lookups: MyTest::Constants; Text: MyTest::Constants; Tail: null; Type: null; Ico
 Lookups: MyTest::Exceptions; Text: MyTest::Exceptions; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package; Text: MyTest::Some::Package; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Something; Text: MyTest::Something; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL; Text: UNIVERSAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: __PACKAGE__; Text: __PACKAGE__; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: main; Text: main; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

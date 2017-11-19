@@ -1,5 +1,9 @@
 Lookups: BEGIN; Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: CHECK; Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: ClassAccessor->; Text: ClassAccessor->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: ClassAccessor::; Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: DESTROY; Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -37,3 +41,5 @@ Lookups: MyTest::Some::Package::; Text: MyTest::Some::Package::; Tail: ...; Type
 Lookups: MyTest::Something->; Text: MyTest::Something->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Something::; Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: UNITCHECK; Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL::; Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

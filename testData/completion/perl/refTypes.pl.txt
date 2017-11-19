@@ -1,5 +1,7 @@
 Lookups: ARRAY; Text: ARRAY; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: CODE; Text: CODE; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: CORE::GLOBAL; Text: CORE::GLOBAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE; Text: CORE; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: ClassAccessor; Text: ClassAccessor; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: FORMAT; Text: FORMAT; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: GLOB; Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
@@ -20,5 +22,7 @@ Lookups: MyTest::Something; Text: MyTest::Something; Tail: null; Type: null; Ico
 Lookups: REF; Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: Regexp; Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: SCALAR; Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: UNIVERSAL; Text: UNIVERSAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: VSTRING; Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: __PACKAGE__; Text: __PACKAGE__; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: main; Text: main; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

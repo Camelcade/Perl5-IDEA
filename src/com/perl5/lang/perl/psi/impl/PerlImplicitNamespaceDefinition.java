@@ -55,6 +55,12 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
 
   @Override
   public String getName() {
+    return getPackageName();
+  }
+
+  @Nullable
+  @Override
+  public String getPackageName() {
     return myPackageName;
   }
 

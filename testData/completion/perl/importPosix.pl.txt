@@ -54,6 +54,10 @@ Lookups: CHILD_MAX; Text: CHILD_MAX; Tail: null; Type: POSIX; Icon: /subroutine_
 Lookups: CLK_TCK; Text: CLK_TCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: CLOCAL; Text: CLOCAL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: CLOCKS_PER_SEC; Text: CLOCKS_PER_SEC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: CREAD; Text: CREAD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: CS5; Text: CS5; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: CS6; Text: CS6; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -400,6 +404,8 @@ Lookups: UCHAR_MAX; Text: UCHAR_MAX; Tail: null; Type: POSIX; Icon: /subroutine_
 Lookups: UINT_MAX; Text: UINT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: ULONG_MAX; Text: ULONG_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: UNITCHECK; Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL::; Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: USHRT_MAX; Text: USHRT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: VEOF; Text: VEOF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: VEOL; Text: VEOL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -659,6 +665,8 @@ Lookups: log; Text: log; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.p
 Lookups: longjmp; Text: longjmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: lseek; Text: lseek; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: lstat; Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: malloc; Text: malloc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: map; Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: mblen; Text: mblen; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null

@@ -31,6 +31,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -95,6 +96,11 @@ public class PerlPackageCompletionUtil {
     final Project project = element.getProject();
     GlobalSearchScope resolveScope = element.getResolveScope();
 
+    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespace -> {
+      result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(namespace.getPackageName(), namespace.getIcon(0)));
+      return true;
+    });
+
     result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(__PACKAGE__, PACKAGE_GUTTER_ICON));
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
@@ -115,6 +121,11 @@ public class PerlPackageCompletionUtil {
     final Project project = element.getProject();
     final String prefix = result.getPrefixMatcher().getPrefix();
     GlobalSearchScope resolveScope = element.getResolveScope();
+
+    PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespace -> {
+      addExpandablePackageElement(project, result, namespace.getPackageName(), prefix, namespace.getIcon(0));
+      return true;
+    });
 
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->

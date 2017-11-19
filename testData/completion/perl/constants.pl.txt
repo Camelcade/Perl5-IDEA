@@ -31,6 +31,10 @@ Lookups: ALONECONST3; Text: ALONECONST3; Tail: null; Type: main; Icon: /constant
 Lookups: AUTOLOAD; Text: AUTOLOAD; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: BEGIN; Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: CHECK; Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: ClassAccessor->; Text: ClassAccessor->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: ClassAccessor::; Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: DESTROY; Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -62,6 +66,8 @@ Lookups: MyTest::Some::Package::; Text: MyTest::Some::Package::; Tail: ...; Type
 Lookups: MyTest::Something->; Text: MyTest::Something->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Something::; Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: UNITCHECK; Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: UNIVERSAL::; Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: __DATA__; Text: __DATA__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: __END__; Text: __END__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: __FILE__; Text: __FILE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -167,6 +173,8 @@ Lookups: localtime; Text: localtime; Tail: null; Type: CORE; Icon: /subroutine_g
 Lookups: lock; Text: lock; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: log; Text: log; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: lstat; Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: map; Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: mkdir; Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: msgctl; Text: msgctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

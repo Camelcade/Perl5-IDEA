@@ -19,6 +19,8 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiManager;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashMap;
@@ -43,6 +45,15 @@ public class PerlBuiltInNamespacesService {
   @Nullable
   public PerlBuiltInNamespaceDefinition getNamespaceDefinition(@Nullable String name) {
     return name == null ? null : myNamespacesMap.get(PerlPackageUtil.getCanonicalName(name));
+  }
+
+  public boolean processNamespaces(@NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+    for (PerlBuiltInNamespaceDefinition namespaceDefinition : myNamespacesMap.values()) {
+      if (!processor.process(namespaceDefinition)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @NotNull
