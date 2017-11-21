@@ -1,0 +1,5 @@
+97 - 158; [C:/Repository/untitled5/TestExportOK/MyConfess/Test.pm line 7] => line 6 in C:/Repository/untitled5/TestExportOK/MyConfess/Test.pm
+214 - 255; [C:\Repository\untitled5\confess.pl line 9] => line 8 in C:\Repository\untitled5\confess.pl
+284 - 326; [C:\Repository\untitled5\confess.pl line 13] => line 12 in C:\Repository\untitled5\confess.pl
+356 - 398; [C:\Repository\untitled5\confess.pl line 17] => line 16 in C:\Repository\untitled5\confess.pl
+427 - 469; [C:\Repository\untitled5\confess.pl line 20] => line 19 in C:\Repository\untitled5\confess.pl

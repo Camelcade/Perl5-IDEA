@@ -16,65 +16,73 @@
 
 package com.perl5.lang.perl.idea.execution.filters;
 
+import com.intellij.execution.filters.FileHyperlinkInfoBase;
 import com.intellij.execution.filters.Filter;
-import com.intellij.execution.filters.OpenFileHyperlinkInfo;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by ELI-HOME on 21-Sep-15.
- * This filter detects file paths and stack traces and turns them into code hyperlinks inside consoles (this doesn't affect the Terminal).
- * Attempts to find anything looks like path with optional line number.
- * Detected file should exists on your file system
- */
 public class PerlConsoleFileLinkFilter implements Filter {
-  @NonNls
-  private static final String FILE_PATH_REGEXP = "((?:(?:\\p{Alpha}\\:)|/:)?[0-9a-z_A-Z\\-\\\\./]+)";
-  private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\b" + FILE_PATH_REGEXP + "(?: line (\\d+)\\.?)?\\b");
+  private static final String FILE_PATH_REGEXP = "((?:(?:\\p{Alpha}:)|/:)?[0-9a-z_A-Z\\-\\\\./]+)";
+  private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\bat " + FILE_PATH_REGEXP + " line (\\d+)\\.?\\b");
+  @NotNull
   private final Project myProject;
 
-  public PerlConsoleFileLinkFilter(Project project) {
+  public PerlConsoleFileLinkFilter(@NotNull Project project) {
     myProject = project;
   }
 
   @Nullable
   @Override
-  public Result applyFilter(String textLine, int endPoint) {
-    int startPoint = endPoint - textLine.length();
-    List<ResultItem> results = new ArrayList<>();
-    match(results, textLine, startPoint);
-
-    return new Result(results);
-  }
-
-  private void match(List<ResultItem> results, String textLine, int startPoint) {
-    if (myProject == null || StringUtil.isEmpty(textLine)) {
-      return;
+  public Result applyFilter(String textLine, int endOffset) {
+    if (StringUtil.isEmpty(textLine)) {
+      return null;
+    }
+    Matcher matcher = DIE_PATH_PATTERN.matcher(textLine);
+    if (!matcher.find()) {
+      return null;
     }
 
-    Matcher matcher = DIE_PATH_PATTERN.matcher(textLine);
-    while (matcher.find()) {
-      int startIndex = matcher.start(0);
-      int endIndex = matcher.end(0);
-      String file = matcher.group(1);
-      int line = (matcher.group(2) != null) ? (Integer.valueOf(matcher.group(2)) - 1) : 0;
-      VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(file), false);
-      if (virtualFile != null) {
-        results.add(new Result(
-          startPoint + startIndex,
-          startPoint + endIndex,
-          new OpenFileHyperlinkInfo(myProject, virtualFile, line)));
-      }
+    int lineStartOffset = endOffset - textLine.length();
+    int fileStartOffset = matcher.start(1);
+    int lineNumberEndOffset = matcher.end(2);
+    String filePath = matcher.group(1);
+    int line = Integer.valueOf(matcher.group(2)) - 1;
+
+    return new Result(
+      lineStartOffset + fileStartOffset,
+      lineStartOffset + lineNumberEndOffset,
+      new MyHyperLinkInfo(myProject, line, filePath));
+  }
+
+  private static class MyHyperLinkInfo extends FileHyperlinkInfoBase {
+    @NotNull
+    private final String myFilePath;
+
+    private final int myLine; // testing purposes
+
+    public MyHyperLinkInfo(Project project, int documentLine, @NotNull String filePath) {
+      super(project, documentLine, 0);
+      myFilePath = filePath;
+      myLine = documentLine;
+    }
+
+    @Nullable
+    @Override
+    protected VirtualFile getVirtualFile() {
+      return VfsUtil.findFileByIoFile(new File(myFilePath), false);
+    }
+
+    @Override
+    public String toString() {
+      return "line " + myLine + " in " + myFilePath;
     }
   }
 }

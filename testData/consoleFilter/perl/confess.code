@@ -1,0 +1,8 @@
+C:\Strawberry\perl\bin\perl.exe -IC:/Repository/untitled5 C:\Repository\untitled5\confess.pl
+ at C:/Repository/untitled5/TestExportOK/MyConfess/Test.pm line 7.
+	TestExportOK::MyConfess::Test::something() called at C:\Repository\untitled5\confess.pl line 9
+	main::firstsub() called at C:\Repository\untitled5\confess.pl line 13
+	main::secondsub() called at C:\Repository\untitled5\confess.pl line 17
+	main::thirdsub() called at C:\Repository\untitled5\confess.pl line 20
+
+Process finished with exit code 255

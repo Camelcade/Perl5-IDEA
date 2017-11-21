@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "scratch_10.py", line 16, in <module>
+    main()
+  File "scratch_10.py", line 3, in main
+    a()
+  File "scratch_10.py", line 6, in a
+    b()
+  File "scratch_10.py", line 9, in b
+    c()
+  File "scratch_10.py", line 12, in c
+    raise ValueError('oops')
+ValueError: oops
