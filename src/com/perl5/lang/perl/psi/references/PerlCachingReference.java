@@ -22,6 +22,9 @@ import com.intellij.psi.PsiPolyVariantReferenceBase;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 /**
  * Created by hurricup on 03.11.2016.
@@ -29,16 +32,19 @@ import org.jetbrains.annotations.NotNull;
 public abstract class PerlCachingReference<T extends PsiElement> extends PsiPolyVariantReferenceBase<T> {
   private final static ResolveCache.PolyVariantResolver<PerlCachingReference> RESOLVER = PerlCachingReference::resolveInner;
 
-  public PerlCachingReference(T psiElement) {
-    super(psiElement);
+  private final TextRange myExplicitRange;
+
+  public PerlCachingReference(@NotNull T psiElement) {
+    this(psiElement, null);
   }
 
-  public PerlCachingReference(@NotNull T element, TextRange textRange) {
-    super(element, textRange);
+  public PerlCachingReference(@NotNull T element, @Nullable TextRange textRange) {
+    this(element, textRange, false);
   }
 
-  public PerlCachingReference(T element, TextRange range, boolean soft) {
+  public PerlCachingReference(@NotNull T element, @Nullable TextRange range, boolean soft) {
     super(element, range, soft);
+    myExplicitRange = range;
   }
 
   @NotNull
@@ -47,11 +53,31 @@ public abstract class PerlCachingReference<T extends PsiElement> extends PsiPoly
     return EMPTY_ARRAY;
   }
 
+  @NotNull
   protected abstract ResolveResult[] resolveInner(boolean incompleteCode);
 
   @NotNull
   @Override
   public final ResolveResult[] multiResolve(boolean incompleteCode) {
     return ResolveCache.getInstance(myElement.getProject()).resolveWithCaching(this, RESOLVER, true, incompleteCode);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlCachingReference)) {
+      return false;
+    }
+    PerlCachingReference<?> reference = (PerlCachingReference<?>)o;
+    return Objects.equals(myExplicitRange, reference.myExplicitRange) &&
+           Objects.equals(getElement(), reference.getElement());
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(myExplicitRange, getElement());
   }
 }

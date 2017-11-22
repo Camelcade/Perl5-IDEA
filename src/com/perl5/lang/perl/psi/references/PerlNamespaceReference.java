@@ -50,6 +50,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
     return getRangeInElement().substring(myElement.getText());
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     String packageName = getPackageName();

@@ -48,6 +48,7 @@ public class HTMLMasonComponentParentReference extends HTMLMasonStringReference 
     return myElement;
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiFile psiFile = getElement().getContainingFile();

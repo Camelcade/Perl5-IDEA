@@ -43,6 +43,7 @@ public class HTMLMasonMethodReference extends HTMLMasonStringReference {
     return myElement;
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PerlString element = getElement();

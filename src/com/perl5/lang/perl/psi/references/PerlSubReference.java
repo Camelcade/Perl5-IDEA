@@ -29,6 +29,7 @@ import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     super(psiElement);
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement myElement = getElement();

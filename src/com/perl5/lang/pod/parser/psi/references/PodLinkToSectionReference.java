@@ -22,6 +22,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.pod.parser.psi.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
     return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PodFormatterL podLink = getElement();

@@ -42,40 +42,34 @@ import java.util.List;
  * Created by hurricup on 27.05.2015.
  */
 public class PerlVariableReference extends PerlCachingReference<PsiElement> {
-  private PerlVariable myVariable;
 
   public PerlVariableReference(@NotNull PsiElement element, TextRange textRange) {
     super(element, textRange);
   }
 
-  public PerlVariable getVariable() {
-    if (myVariable == null) {
-      assert myElement.getParent() instanceof PerlVariable;
-      myVariable = (PerlVariable)myElement.getParent();
-    }
-    return myVariable;
-  }
-
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
-    PerlVariable myVariable = getVariable();
+    PsiElement elementParent = myElement.getParent();
+    assert elementParent instanceof PerlVariable;
+    PerlVariable perlVariable = (PerlVariable)elementParent;
 
     List<ResolveResult> result = new ArrayList<>();
 
-    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(myVariable);
+    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(perlVariable);
 
     if (lexicalDeclaration == null ||
         lexicalDeclaration.isGlobalDeclaration() && !(lexicalDeclaration instanceof PerlImplicitVariableDeclaration)) {
       // not found explicit lexically visible declarations
 
       // imports
-      PerlVariableType actualType = myVariable.getActualType();
-      Project project = myVariable.getProject();
-      PerlNamespaceDefinitionElement namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(myVariable);
+      PerlVariableType actualType = perlVariable.getActualType();
+      Project project = perlVariable.getProject();
+      PerlNamespaceDefinitionElement namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(perlVariable);
 
       if (namespaceContainer != null) // not true if LPE in TemplateToolkit
       {
-        String variableName = myVariable.getName();
+        String variableName = perlVariable.getName();
 
         if (actualType == PerlVariableType.SCALAR) {
           for (PerlExportDescriptor importEntry : namespaceContainer.getImportedScalarDescriptors()) {
@@ -110,12 +104,12 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
       }
 
       // our variable declaration
-      for (PerlGlobVariable glob : myVariable.getRelatedGlobs()) {
+      for (PerlGlobVariable glob : perlVariable.getRelatedGlobs()) {
         result.add(new PsiElementResolveResult(glob));
       }
 
       // globs
-      for (PerlVariableDeclarationElement globalDeclaration : myVariable.getGlobalDeclarations()) {
+      for (PerlVariableDeclarationElement globalDeclaration : perlVariable.getGlobalDeclarations()) {
         result.add(new PsiElementResolveResult(globalDeclaration));
       }
     }

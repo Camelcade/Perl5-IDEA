@@ -26,6 +26,7 @@ import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
     super(psiElement);
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not really dry with simpleresolver and superresolver. Need some generics magic

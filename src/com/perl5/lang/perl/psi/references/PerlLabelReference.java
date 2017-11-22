@@ -35,6 +35,7 @@ public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr> {
     super(element, element.getTextRange().shiftRight(-element.getTextOffset()));
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiPerlLabelExpr labelExpr = getElement();

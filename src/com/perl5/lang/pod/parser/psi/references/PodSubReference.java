@@ -56,6 +56,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
     return super.bindToElement(element);
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement element = getElement();

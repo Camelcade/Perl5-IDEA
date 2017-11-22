@@ -25,6 +25,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.tt2.psi.TemplateToolkitNamedBlock;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class TemplateToolkitBlockReference extends PerlCachingReference<PsiEleme
     super(psiElement);
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement element = getElement();

@@ -38,6 +38,7 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
     return myElement.getCanonicalName();
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PerlNamespaceElement myElement = getElement();

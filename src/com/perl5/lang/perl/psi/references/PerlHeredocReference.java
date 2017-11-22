@@ -25,6 +25,7 @@ import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTerminatorElement> {
@@ -33,6 +34,7 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
     super(psiElement);
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement run = getElement().getPrevSibling();

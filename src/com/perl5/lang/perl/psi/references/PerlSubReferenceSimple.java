@@ -60,6 +60,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     super(element, textRange);
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with super resolver, need some generics fix

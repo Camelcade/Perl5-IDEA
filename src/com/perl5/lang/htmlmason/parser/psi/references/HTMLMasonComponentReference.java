@@ -115,6 +115,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     return myElement;
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     List<ResolveResult> result = null;

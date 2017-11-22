@@ -50,6 +50,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
     return myElement;
   }
 
+  @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     List<ResolveResult> result = new ArrayList<>();
