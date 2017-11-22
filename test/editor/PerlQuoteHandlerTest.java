@@ -20,6 +20,10 @@ import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlQuoteHandlerTest extends PerlLightTestCase {
+  public void testSequentionalAdd() {doTest("say <caret>; say 'some';", "'", "say '<caret>'; say 'some';");}
+
+  public void testSequentionalRemove() {doTestBS("say '<caret>'; say 'some';", "say <caret>; say 'some';");}
+
   public void testSingleQuote() {
     doTest("say <caret>;", "'", "say '<caret>';");
   }
