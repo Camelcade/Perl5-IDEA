@@ -1,0 +1,7 @@
+<<EOM;
+<caret>
+EOM
+
+
+
+say 'something';

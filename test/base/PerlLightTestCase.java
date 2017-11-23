@@ -1098,4 +1098,9 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     myFixture.checkResult(expected);
   }
 
+  protected void doTestEnter() {
+    initWithFileSmart();
+    myFixture.type('\n');
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+  }
 }

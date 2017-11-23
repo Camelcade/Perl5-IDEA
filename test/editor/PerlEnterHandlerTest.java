@@ -21,14 +21,53 @@ import base.PerlLightTestCase;
 public class PerlEnterHandlerTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/editor/perl";
+    return "testData/enterHandler/perl";
   }
 
   public void testEnterAfterComma() {doTest();}
 
+  public void testCommentMiddle() {
+    doTest();
+  }
+
+  public void testCommentMiddleIndented() {
+    doTest();
+  }
+
+  public void testHeredocCloseBare() { doTest(); }
+
+  public void testHeredocClosed() { doTest(); }
+
+  public void testHeredocCloseDQ() { doTest(); }
+
+  public void testHeredocCloseEscaped() { doTest(); }
+
+  public void testHeredocCloseSQ() { doTest(); }
+
+  public void testHeredocCloseWithIndentedAhead() { doTest(); }
+
+  public void testHeredocCloseWithNormalAhead() { doTest(); }
+
+  public void testHeredocCloseXQ() { doTest(); }
+
+  public void testIndentedHeredocCloseBare() { doTest(); }
+
+  public void testIndentedHeredocClosed() { doTest(); }
+
+  public void testIndentedHeredocCloseDQ() { doTest(); }
+
+  public void testIndentedHeredocCloseEscaped() { doTest(); }
+
+  public void testIndentedHeredocCloseSQ() { doTest(); }
+
+  public void testIndentedHeredocCloseWithIndentedAhead() { doTest(); }
+
+  public void testIndentedHeredocCloseWithNormalAhead() { doTest(); }
+
+  public void testIndentedHeredocCloseXQ() { doTest(); }
+  
+
   private void doTest() {
-    initWithFileSmart();
-    myFixture.type('\n');
-    myFixture.checkResultByFile(getTestName(true) + ".pl.txt");
+    doTestEnter();
   }
 }
