@@ -119,7 +119,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
       }
     }
 
-    return super.beforeCharTyped(typedChar, project, editor, file, fileType);
+    return Result.CONTINUE;
   }
 
 

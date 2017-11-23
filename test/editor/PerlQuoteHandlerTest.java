@@ -16,10 +16,7 @@
 
 package editor;
 
-import base.PerlLightTestCase;
-import org.jetbrains.annotations.NotNull;
-
-public class PerlQuoteHandlerTest extends PerlLightTestCase {
+public class PerlQuoteHandlerTest extends PerlTypingTestCase {
   public void testSequentionalAdd() {doTest("say <caret>; say 'some';", "'", "say '<caret>'; say 'some';");}
 
   public void testSequentionalRemove() {doTestBS("say '<caret>'; say 'some';", "say <caret>; say 'some';");}
@@ -94,13 +91,5 @@ public class PerlQuoteHandlerTest extends PerlLightTestCase {
 
   public void testTickRemoveClose() {
     doTestBS("say ``<caret>", "say `<caret>");
-  }
-
-  private void doTest(@NotNull String initialText, @NotNull String toType, @NotNull String expected) {
-    doTestTypingWithoutFiles(initialText, toType, expected);
-  }
-
-  private void doTestBS(@NotNull String initialText, @NotNull String expected) {
-    doTestBackspaceWithoutFiles(initialText, expected);
   }
 }
