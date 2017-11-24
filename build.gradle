@@ -84,6 +84,12 @@ runIdea{
 test {
     systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
 
+  if (!System.getenv("WITH_COVERAGE")) {
+    jacoco {
+      enabled = false
+    }
+  }
+
     useJUnit {
         if (project.hasProperty("runtest")) {
             include '**/' + project.property('runtest') + '.class'
