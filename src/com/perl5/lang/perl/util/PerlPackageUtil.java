@@ -87,7 +87,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String PACKAGE_MOOSE_ROLE = PACKAGE_MOOSE_BASE + "Role";
   public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS = PACKAGE_MOOSE_BASE + "Util::TypeConstraints";
   public static final String PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS = PACKAGE_MOOSE_X_BASE + "Types::CheckedUtilExports";
-  public static final String PACKAGE_MOOSE_X_TYPES_CHEKEDUTILEXPORTS = PACKAGE_MOOSE_X_BASE + "Types::CheckedUtilExports";
   public static final String PACKAGE_MOOSE_X_CLASSATTRIBUTE = PACKAGE_MOOSE_X_BASE + "ClassAttribute";
   public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES_ROLE = PACKAGE_MOOSE_X_BASE + "MethodAttributes::Role";
   public static final String PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED = PACKAGE_MOOSE_X_BASE + "Role::Parameterized";
@@ -329,6 +328,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param processor string processor for suitable strings
    * @return collection of constants names
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processNamespaces(@NotNull String packageName,
                                           @NotNull Project project,
                                           @NotNull GlobalSearchScope scope,
@@ -337,6 +337,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
            PerlLightNamespaceIndex.processNamespaces(project, packageName, scope, processor);
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processChildNamespaces(@NotNull String parentPackageName,
                                                @NotNull Project project,
                                                @NotNull GlobalSearchScope scope,
@@ -508,6 +509,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     ;
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processIncFilesForPsiElement(@NotNull PsiElement element,
                                                      @NotNull ClassRootVirtualFileProcessor processor,
                                                      @NotNull FileType fileType) {
@@ -587,30 +589,6 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       namespace,
       () -> CachedValueProvider.Result
         .create(PerlPsiUtil.collectNamespaceMembers(namespace, PerlSubElement.class), namespace));
-  }
-
-  public static void processChildNamespacesSubs(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,
-                                                @Nullable Set<PerlNamespaceDefinitionElement> recursionSet,
-                                                Processor<PerlSubElement> processor) {
-    if (recursionSet == null) {
-      recursionSet = new THashSet<>();
-    }
-
-    recursionSet.add(namespaceDefinition);
-
-    for (PerlNamespaceDefinitionElement childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
-      if (!recursionSet.contains(childNamespace)) {
-        boolean processSubclasses = true;
-
-        for (PsiElement subBase : collectNamespaceSubs(childNamespace)) {
-          processSubclasses = processor.process((PerlSubElement)subBase);
-        }
-
-        if (processSubclasses) {
-          processChildNamespacesSubs(childNamespace, recursionSet, processor);
-        }
-      }
-    }
   }
 
   @Nullable
