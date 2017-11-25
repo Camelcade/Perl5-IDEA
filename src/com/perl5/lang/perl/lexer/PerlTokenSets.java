@@ -17,7 +17,10 @@
 package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
+
+import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
 
 /**
  * Created by hurricup on 23.10.2016.
@@ -217,4 +220,25 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     HEREDOC_QQ,
     HEREDOC_QX
   );
+
+
+  TokenSet QUOTE_MIDDLE = TokenSet.create(REGEX_QUOTE, REGEX_QUOTE_E);
+
+  TokenSet QUOTE_OPEN_ANY = TokenSet.orSet(
+    TokenSet.create(REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E),
+    PerlParserUtil.OPEN_QUOTES,
+    QUOTE_MIDDLE
+  );
+
+  TokenSet QUOTE_CLOSE_FIRST_ANY = TokenSet.orSet(
+    TokenSet.create(REGEX_QUOTE_CLOSE),
+    QUOTE_MIDDLE,
+    CLOSE_QUOTES
+  );
+
+  TokenSet QUOTE_CLOSE_PAIRED = TokenSet.orSet(
+    CLOSE_QUOTES,
+    TokenSet.create(REGEX_QUOTE_CLOSE)
+  );
+
 }

@@ -34,9 +34,144 @@ public abstract class PerlQuoteLikeDoubleTestCase extends PerlQuoteLikeTestCase 
 
   public void testLetter() {doTest(OP + "<caret>", "a", OP + "a<caret>");}
 
-  //public void testLetterWithSpace() {doTest(OP + " <caret>", "a", OP + " a<caret>aa");}
+  public void testLetterWithSpace() {doTest(OP + " <caret>", "a", OP + " a<caret>aa");}
 
   public void testAmbiguousLetter() {doTest(OP + "<caret>", "w", OP + "w<caret>");}
 
-  //public void testAmbiguousLetterWithSpace() {doTest(OP + " <caret>", "w", OP + " w<caret>ww");}
+  public void testAmbiguousLetterWithSpace() {doTest(OP + " <caret>", "w", OP + " w<caret>ww");}
+
+  public void testQuoteSingle() {doTest(OP + "<caret>", "'", OP + "'<caret>''");}
+
+  public void testQuoteSingleWithSpace() {doTest(OP + " <caret>", "'", OP + " '<caret>''");}
+
+  public void testQuoteDouble() {doTest(OP + "<caret>", "\"", OP + "\"<caret>\"\"");}
+
+  public void testQuoteDoubleWithSpace() {doTest(OP + " <caret>", "\"", OP + " \"<caret>\"\"");}
+
+  public void testQuoteTick() {doTest(OP + "<caret>", "`", OP + "`<caret>``");}
+
+  public void testQuoteTickWithSpace() {doTest(OP + " <caret>", "`", OP + " `<caret>``");}
+
+  public void testParen() {doTest(OP + "<caret>", "(", OP + "(<caret>)()");}
+
+  public void testParenWithSpace() {doTest(OP + " <caret>", "(", OP + " (<caret>)()");}
+
+  public void testBracket() {doTest(OP + "<caret>", "[", OP + "[<caret>][]");}
+
+  public void testBracketWithSpace() {doTest(OP + " <caret>", "[", OP + " [<caret>][]");}
+
+  public void testBrace() {doTest(OP + "<caret>", "{", OP + "{<caret>}{}");}
+
+  public void testBraceWithSpace() {doTest(OP + " <caret>", "{", OP + " {<caret>}{}");}
+
+  public void testClosedPaired() {doTest(OP + "<caret>>", "<", OP + "<<caret>>");}
+
+  public void testClosedPairedWithSpace() {doTest(OP + " <caret>>", "<", OP + " <<caret>>");}
+
+  public void testClosedUnPaired() {doTest(OP + "<caret>|", "|", OP + "|<caret>|");}
+
+  public void testClosedUnPairedWithSpace() {doTest(OP + " <caret>|", "|", OP + " |<caret>|");}
+
+  public void testClosedSQ() {doTest(OP + "<caret>'", "'", OP + "'<caret>'");}
+
+  public void testClosedSQWithSpace() {doTest(OP + " <caret>'", "'", OP + " '<caret>'");}
+
+  public void testClosedDQ() {doTest(OP + "<caret>\"", "\"", OP + "\"<caret>\"");}
+
+  public void testClosedDQWithSpace() {doTest(OP + " <caret>\"", "\"", OP + " \"<caret>\"");}
+
+  public void testClosedXQ() {doTest(OP + "<caret>`", "`", OP + "`<caret>`");}
+
+  public void testClosedXQWithSpace() {doTest(OP + " <caret>`", "`", OP + " `<caret>`");}
+
+  public void testSecondBlockPaired() {doTest(OP + "<><caret>", "<", OP + "<><<caret>>");}
+
+  public void testSecondBlockPairedWithSpace() {doTest(OP + "<>  <caret>", "<", OP + "<>  <<caret>>");}
+
+  public void testSecondBlockUnpaired() {doTest(OP + "<><caret>", "|", OP + "<>|<caret>|");}
+
+  public void testSecondBlockUnpairedWithSpace() {doTest(OP + "<> <caret>", "|", OP + "<> |<caret>|");}
+
+  public void testPairedSwapped() {doTest(OP + "<caret>", ">", OP + "><caret>>>");}
+
+  public void testRemovingPaired() {doTestBS(OP + "<<caret>><>", OP + "<caret><>");}
+
+  public void testRemovingPairedWithSpace() {doTestBS(OP + " <<caret>> <>", OP + " <caret> <>");}
+
+  public void testRemovingUnPaired() {doTestBS(OP + "|<caret>||", OP + "<caret>||");}
+
+  public void testRemovingUnPairedWithSpace() {doTestBS(OP + " |<caret>||", OP + " <caret>||");}
+
+  public void testRemovingUnPairedMiddle() {doTestBS(OP + "||<caret>|", OP + "<caret>");}
+
+  public void testRemovingUnPairedMiddleWithSpace() {doTestBS(OP + " ||<caret>|", OP + " <caret>");}
+
+  public void testRemovingSQ() {doTestBS(OP + "'<caret>''", OP + "<caret>''");}
+
+  public void testRemovingSQWithSpace() {doTestBS(OP + " ''<caret>'", OP + " <caret>");}
+
+  public void testRemovingDQ() {doTestBS(OP + "\"<caret>\"\"", OP + "<caret>\"\"");}
+
+  public void testRemovingDQWithSpace() {doTestBS(OP + " \"\"<caret>\"", OP + " <caret>");}
+
+  public void testRemovingXQ() {doTestBS(OP + "`<caret>``", OP + "<caret>``");}
+
+  public void testRemovingXQWithSpace() {doTestBS(OP + " ``<caret>`", OP + " <caret>");}
+
+  public void testRemovingParen() {doTestBS(OP + "(<caret>)()", OP + "<caret>()");}
+
+  public void testRemovingParenWithSpace() {doTestBS(OP + " (<caret>)()", OP + " <caret>()");}
+
+  public void testRemovingParenSecond() {doTestBS(OP + "()(<caret>)", OP + "()<caret>");}
+
+  public void testRemovingParenSecondWithSpace() {doTestBS(OP + " ()(<caret>)", OP + " ()<caret>");}
+
+  public void testRemovingBracket() {doTestBS(OP + "[<caret>][]", OP + "<caret>[]");}
+
+  public void testRemovingBracketWithSpace() {doTestBS(OP + " [<caret>] []", OP + " <caret> []");}
+
+  public void testRemovingBracketSecond() {doTestBS(OP + "[][<caret>]", OP + "[]<caret>");}
+
+  public void testRemovingBracketSecondWithSpace() {doTestBS(OP + " [] [<caret>]", OP + " [] <caret>");}
+
+  public void testRemovingBrace() {doTestBS(OP + "{<caret>}{}", OP + "<caret>{}");}
+
+  public void testRemovingBraceWithSpace() {doTestBS(OP + " {<caret>} {}", OP + " <caret> {}");}
+
+  public void testRemovingBraceSecond() {doTestBS(OP + "{}{<caret>}", OP + "{}<caret>");}
+
+  public void testRemovingBraceSecondWithSpace() {doTestBS(OP + " {} {<caret>}", OP + " {} <caret>");}
+
+  public void testDoubleClosePaired() {doTest(OP + "<<caret>><>", ">", OP + "<><caret><>");}
+
+  public void testDoubleCloseUnPaired() {doTest(OP + "|<caret>||", "|", OP + "||<caret>|");}
+
+  public void testDoubleCloseSQ() {doTest(OP + "'<caret>''", "'", OP + "''<caret>'");}
+
+  public void testDoubleCloseDQ() {doTest(OP + "\"<caret>\"\"", "\"", OP + "\"\"<caret>\"");}
+
+  public void testDoubleCloseXQ() {doTest(OP + "`<caret>``", "`", OP + "``<caret>`");}
+
+  public void testDoubleCloseParen() {doTest(OP + "(<caret>)()", ")", OP + "()<caret>()");}
+
+  public void testDoubleCloseBracket() {doTest(OP + "[<caret>][]", "]", OP + "[]<caret>[]");}
+
+  public void testDoubleCloseBrace() {doTest(OP + "{<caret>}{}", "}", OP + "{}<caret>{}");}
+
+  public void testDoubleClosePairedSecond() {doTest(OP + "<><<caret>>", ">", OP + "<><><caret>");}
+
+  public void testDoubleCloseUnPairedSecond() {doTest(OP + "||<caret>|", "|", OP + "|||<caret>");}
+
+  public void testDoubleCloseSQSecond() {doTest(OP + "''<caret>'", "'", OP + "'''<caret>");}
+
+  public void testDoubleCloseDQSecond() {doTest(OP + "\"\"<caret>\"", "\"", OP + "\"\"\"<caret>");}
+
+  public void testDoubleCloseXQSecond() {doTest(OP + "``<caret>`", "`", OP + "```<caret>");}
+
+  public void testDoubleCloseParenSecond() {doTest(OP + "()(<caret>)", ")", OP + "()()<caret>");}
+
+  public void testDoubleCloseBracketSecond() {doTest(OP + "[][<caret>]", "]", OP + "[][]<caret>");}
+
+  public void testDoubleCloseBraceSecond() {doTest(OP + "{}{<caret>}", "}", OP + "{}{}<caret>");}
+
 }

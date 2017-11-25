@@ -251,6 +251,7 @@
 
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
+    <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>
 
     <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
                           id="PerlEnterHandler" order="first"/>
@@ -322,10 +323,6 @@
     <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
 
     <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
-    <quoteHandler fileType="Perl5 script" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-    <quoteHandler fileType="Perl5 test" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-    <quoteHandler fileType="Perl5 package" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
 
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PsiPerlLabelExpr"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLeafOrLeafOwnerManipulator"/>
@@ -521,7 +518,6 @@
 
     <lang.namesValidator language="Embedded Perl"
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-    <quoteHandler fileType="Embedded perl" className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
     <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
 
     <lang.foldingBuilder language="Embedded Perl"
@@ -571,9 +567,6 @@
         implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
         id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
 
-    <quoteHandler fileType="Mojolicious Perl5 Template"
-                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-
     <lang.refactoringSupport language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
@@ -601,8 +594,6 @@
                          implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
     <lang.findUsagesProvider language="HTML::Mason Templating Language"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
-    <quoteHandler fileType="HTML::Mason component"
-                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
     <lang.refactoringSupport language="HTML::Mason Templating Language"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
     <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
@@ -712,15 +703,9 @@
 
     <lang.namesValidator language="Mason2"
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-    <quoteHandler fileType="Mason2 top-level component"
-                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
     <editorHighlighterProvider filetype="Mason2 top-level component"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
 
-    <quoteHandler fileType="Mason2 internal component"
-                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
-    <quoteHandler fileType="Mason2 pure Perl component"
-                  className="com.perl5.lang.perl.idea.editor.PerlQuoteHandler"/>
     <lang.refactoringSupport language="Mason2"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
     <lang.psiStructureViewFactory language="Mason2"

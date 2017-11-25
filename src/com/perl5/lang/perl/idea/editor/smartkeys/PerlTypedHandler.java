@@ -17,41 +17,31 @@
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
+import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.highlighter.EditorHighlighter;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.psi.PsiPerlHashIndex;
-import com.perl5.lang.perl.psi.PsiPerlStringBare;
-import gnu.trove.THashSet;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Set;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_CLOSE_FIRST_ANY;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_OPEN_ANY;
 
 /**
  * Created by hurricup on 25.07.2015.
  */
 public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElementTypes {
-  private static final String AMBIGUOUS_Q_SUFFIXES = "wqxr"; // these chars are ignored after
-
-  private static final TokenSet SINGLE_QUOTE_OPENERS = TokenSet.create(
-    RESERVED_Q,
-    RESERVED_QW,
-    RESERVED_QQ,
-    RESERVED_QX,
-
-    RESERVED_M,
-    RESERVED_QR
-  );
+  // these chars are automatically closed by IDEA and we can't control this
+  private static final String HANDLED_BY_BRACE_MATCHER = "{([";
 
   private static final TokenSet DOUBLE_QUOTE_OPENERS = TokenSet.create(
     RESERVED_S,
@@ -59,119 +49,65 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     RESERVED_Y
   );
 
-  private static final Set<String> SINGLE_QUOTE_OPENERS_TEXT = new THashSet<>(Arrays.asList(
-    "q",
-    "qx",
-    "qq",
-    "qw",
-    "qr",
-    "m"
-  ));
-
-  private static final Set<String> DOUBLE_QUOTE_OPENERS_TEXT = new THashSet<>(Arrays.asList(
-    "s",
-    "tr",
-    "y"
-  ));
-
   @Override
-  public Result beforeCharTyped(char typedChar, Project project, Editor editor, PsiFile file, FileType fileType) {
-    // regexp quotes
-    if (!Character.isWhitespace(typedChar)) {
-      int offset = editor.getCaretModel().getOffset() - 1;
-      PsiElement element = file.findElementAt(offset);
-      if (element != null) {
-        boolean hasSpace = false;
+  public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+    CaretModel caretModel = editor.getCaretModel();
+    int currentOffset = caretModel.getOffset();
+    CharSequence documentSequence = editor.getDocument().getCharsSequence();
+    if (currentOffset >= documentSequence.length()) {
+      return Result.CONTINUE;
+    }
 
-        while (offset > 0 && element != null && element instanceof PsiWhiteSpace) {
-          hasSpace = true;
-          offset = element.getTextOffset() - 1;
-          element = file.findElementAt(offset);
-        }
-
-        if (element != null) {
-          Result result = null;
-          IElementType elementType = element.getNode().getElementType();
-          if (SINGLE_QUOTE_OPENERS.contains(elementType) ||
-              (typedChar == '/' && (elementType == OPERATOR_RE || elementType == OPERATOR_NOT_RE))
-            ) {
-            if (elementType == RESERVED_Q && StringUtil.containsChar(AMBIGUOUS_Q_SUFFIXES, typedChar)) {
-              return Result.CONTINUE;
-            }
-            result = handleSingleQuote(typedChar, hasSpace, editor);
-          }
-          else if (DOUBLE_QUOTE_OPENERS.contains(elementType)) {
-            result = handleDoubleQuote(typedChar, hasSpace, editor);
-          }
-          else if (elementType == STRING_CONTENT && isInHashIndex(element)) {
-            if (SINGLE_QUOTE_OPENERS_TEXT.contains(element.getText())) {
-              result = handleSingleQuote(typedChar, hasSpace, editor);
-            }
-            else if (DOUBLE_QUOTE_OPENERS_TEXT.contains(element.getText())) {
-              result = handleDoubleQuote(typedChar, hasSpace, editor);
-            }
-          }
-
-          if (result != null) {
-            return result;
-          }
-        }
-      }
+    HighlighterIterator iterator = ((EditorEx)editor).getHighlighter().createIterator(currentOffset);
+    if (QUOTE_CLOSE_FIRST_ANY.contains(iterator.getTokenType()) && c == documentSequence.charAt(currentOffset)) {
+      caretModel.moveToOffset(currentOffset + 1);
+      return Result.STOP;
     }
 
     return Result.CONTINUE;
   }
 
-
-  @Nullable
-  private Result handleSingleQuote(char typedChar, boolean hasSpace, Editor editor) {
-    char closeChar = getRegexCloseChar(typedChar, hasSpace);
-
-    if (closeChar > 0) {
-
-      EditorModificationUtil.insertStringAtCaret(editor, typedChar + "" + closeChar, false, true, 1);
-      return Result.STOP;
+  @Override
+  public Result charTyped(char typedChar, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    int offset = editor.getCaretModel().getOffset() - 1;
+    if (offset < 0) {
+      return Result.CONTINUE;
     }
-    return null;
-  }
-
-  private boolean isInHashIndex(PsiElement element) {
-    return element.getParent() instanceof PsiPerlStringBare && element.getParent().getParent() instanceof PsiPerlHashIndex;
-  }
-
-  @Nullable
-  private Result handleDoubleQuote(char typedChar, boolean hasSpace, Editor editor) {
-    char closeChar = getRegexCloseChar(typedChar, hasSpace);
-
-    if (closeChar > 0) {
-      String appendix = typedChar + "" + closeChar;
-
-      if (closeChar == typedChar) {
-        appendix += closeChar;
+    EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
+    HighlighterIterator iterator = highlighter.createIterator(offset);
+    IElementType elementTokenType = iterator.getTokenType();
+    if (QUOTE_OPEN_ANY.contains(elementTokenType)) {
+      IElementType quotePrefixType = PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1));
+      CharSequence text = editor.getDocument().getCharsSequence();
+      if (offset > text.length() - 1 || text.charAt(offset) != typedChar) {
+        return Result.CONTINUE;
       }
-      else {
-        appendix += appendix;
+      char openChar = text.charAt(offset);
+      char closeChar = PerlBaseLexer.getQuoteCloseChar(openChar);
+      iterator.advance();
+      IElementType possibleCloseQuoteType = iterator.atEnd() ? null : iterator.getTokenType();
+      if (QUOTE_CLOSE_FIRST_ANY.contains(possibleCloseQuoteType) && closeChar == text.charAt(iterator.getStart())) {
+        if (DOUBLE_QUOTE_OPENERS.contains(quotePrefixType) && StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar)) {
+          iterator.advance();
+          if (iterator.atEnd() || !QUOTE_OPEN_ANY.contains(iterator.getTokenType())) {
+            EditorModificationUtil.insertStringAtCaret(editor, Character.toString(closeChar) + openChar, false, false);
+          }
+        }
+        return Result.CONTINUE;
       }
 
-      EditorModificationUtil.insertStringAtCaret(editor, appendix, false, true, 1);
-      return Result.STOP;
-    }
-    return null;
-  }
+      StringBuilder textToAppend = new StringBuilder();
+      textToAppend.append(closeChar);
 
-  private char getRegexCloseChar(char openingChar, boolean hasSpace) {
-    if (hasSpace && openingChar == '#')    // sharp may be only without space
-    {
-      return 0;
-    }
-    //		if (!hasSpace && (openingChar == '_' || Character.isLetterOrDigit(openingChar))) // identifier continuation may be only with space
-    //			return 0;
-    if (openingChar == '_' ||
-        Character.isLetterOrDigit(openingChar)) // temporarily disabled auto-insertion of non-delimiter quotes because of race
-    {
-      return 0;
-    }
+      if (DOUBLE_QUOTE_OPENERS.contains(quotePrefixType)) {
+        textToAppend.append(openChar);
+        if (openChar != closeChar) {
+          textToAppend.append(closeChar);
+        }
+      }
 
-    return PerlLexer.getQuoteCloseChar(openingChar);
+      EditorModificationUtil.insertStringAtCaret(editor, textToAppend.toString(), false, false);
+    }
+    return Result.CONTINUE;
   }
 }

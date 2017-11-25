@@ -22,4 +22,82 @@ public class PerlQuoteWithoutPrefixTest extends PerlTypingTestCase {
   public void testAfterRe() {doTest("$a =~ <caret>", "/", "$a =~ /<caret>/");}
 
   public void testAfterNotRe() {doTest("$a !~ <caret>", "/", "$a !~ /<caret>/");}
+
+  public void testRegexInside() {doTest("$a =~ /<caret>/", "/", "$a =~ //<caret>");}
+
+  public void testSequentionalAdd() {doTest("say <caret>; say 'some';", "'", "say '<caret>'; say 'some';");}
+
+  public void testSequentionalRemove() {doTestBS("say '<caret>'; say 'some';", "say <caret>; say 'some';");}
+
+  public void testSingleQuote() {
+    doTest("say <caret>;", "'", "say '<caret>';");
+  }
+
+  public void testSingleQuoteEof() {
+    doTest("say <caret>", "'", "say '<caret>'");
+  }
+
+  public void testSingleQuoteInside() {
+    doTest("say '<caret>'", "'", "say ''<caret>");
+  }
+
+  public void testSingleQuoteAfter() {
+    doTest("say ''<caret>", "'", "say '''<caret>'");
+  }
+
+  public void testSingleRemoveOpen() {
+    doTestBS("say '<caret>'", "say <caret>");
+  }
+
+  public void testSingleRemoveClose() {
+    doTestBS("say ''<caret>", "say '<caret>");
+  }
+
+  public void testDoubleQuote() {
+    doTest("say <caret>;", "\"", "say \"<caret>\";");
+  }
+
+  public void testDoubleQuoteEof() {
+    doTest("say <caret>", "\"", "say \"<caret>\"");
+  }
+
+  public void testDoubleQuoteInside() {
+    doTest("say \"<caret>\"", "\"", "say \"\"<caret>");
+  }
+
+  public void testDoubleQuoteAfter() {
+    doTest("say \"\"<caret>", "\"", "say \"\"\"<caret>\"");
+  }
+
+  public void testDoubleRemoveOpen() {
+    doTestBS("say \"<caret>\"", "say <caret>");
+  }
+
+  public void testDoubleRemoveClose() {
+    doTestBS("say \"\"<caret>", "say \"<caret>");
+  }
+
+  public void testTickQuote() {
+    doTest("say <caret>;", "`", "say `<caret>`;");
+  }
+
+  public void testTickQuoteEof() {
+    doTest("say <caret>", "`", "say `<caret>`");
+  }
+
+  public void testTickQuoteInside() {
+    doTest("say `<caret>`", "`", "say ``<caret>");
+  }
+
+  public void testTickQuoteAfter() {
+    doTest("say ``<caret>", "`", "say ```<caret>`");
+  }
+
+  public void testTickRemoveOpen() {
+    doTestBS("say `<caret>`", "say <caret>");
+  }
+
+  public void testTickRemoveClose() {
+    doTestBS("say ``<caret>", "say `<caret>");
+  }
 }
