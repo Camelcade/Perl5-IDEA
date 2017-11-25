@@ -37,15 +37,24 @@ jacocoTestReport {
     reports {
         xml.enabled true
     }
-    afterEvaluate {
-        classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it,
-                     exclude: [
-                       '**/psi/impl/Psi**',
-                       '**/psi/Psi**',
-                     ])
-        })
-    }
+//    afterEvaluate {
+//        classDirectories = files(classDirectories.files.collect {
+//            fileTree(dir: it,
+//                     exclude: [
+//                       '**/psi/impl/Psi**',
+//                       '**/psi/Psi**',
+//                       '**/EmbeddedPerlLexer.class',
+//                       '**/HTMLMasonLexer.class',
+//                       '**/Mason2TemplatingLexer.class',
+//                       '**/MojoliciousLexer.class',
+//                       '**/*ElementTypesGenerated.class',
+//                       '**/PerlLexer.class',
+//                       '**/*ParserGenerated.class',
+//                       '**/*LexerGenerated.class',
+//                       '**/PodParser.class',
+//                     ])
+//        })
+//    }
 }
 
 version = "$version$buildNumber"
