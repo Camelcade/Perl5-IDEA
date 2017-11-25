@@ -41,12 +41,8 @@ jacocoTestReport {
         classDirectories = files(classDirectories.files.collect {
             fileTree(dir: it,
                      exclude: [
-                       'com/perl5/lang/perl/psi/impl/Psi**',
-                       'com/perl5/lang/perl/psi/Psi**',
-                       'com/perl5/lang/tt2/psi/impl/Psi**',
-                       'com/perl5/lang/tt2/psi/Psi**',
-                       'com/perl5/lang/pod/psi/impl/Psi**',
-                       'com/perl5/lang/pod/psi/Psi**'
+                       '**/psi/impl/Psi**',
+                       '**/psi/Psi**',
                      ])
         })
     }
@@ -97,7 +93,7 @@ runIdea{
 test {
     systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
 
-  if (!System.getenv("WITH_COVERAGE")) {
+  if (!System.getenv("WITH_COVERAGE") && !project.hasProperty("with_coverage")) {
     jacoco {
       enabled = false
     }
@@ -254,7 +250,4 @@ jar.archiveName = "camelcade.jar"
 compileJava {
     dependsOn generateLexers
 }
-
-
-
 
