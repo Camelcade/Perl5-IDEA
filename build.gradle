@@ -37,6 +37,19 @@ jacocoTestReport {
     reports {
         xml.enabled true
     }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it,
+                     exclude: [
+                       'com/perl5/lang/lang/perl/psi/impl/Psi**',
+                       'com/perl5/lang/lang/perl/psi/Psi**',
+                       'com/perl5/lang/lang/tt2/psi/impl/Psi**',
+                       'com/perl5/lang/lang/tt2/psi/Psi**',
+                       'com/perl5/lang/lang/pod/psi/impl/Psi**',
+                       'com/perl5/lang/lang/pod/psi/Psi**'
+                     ])
+        })
+    }
 }
 
 version = "$version$buildNumber"
