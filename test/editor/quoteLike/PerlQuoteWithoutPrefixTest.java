@@ -100,4 +100,8 @@ public class PerlQuoteWithoutPrefixTest extends PerlTypingTestCase {
   public void testTickRemoveClose() {
     doTestBS("say ``<caret>", "say `<caret>");
   }
+
+  public void testOpenBegin() {doTest("<caret>", "'", "'<caret>'");}
+
+  public void testRemoveOpenBegin() {doTestBS("'<caret>'", "<caret>");}
 }

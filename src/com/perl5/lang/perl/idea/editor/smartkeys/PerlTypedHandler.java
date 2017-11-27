@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
+import com.intellij.codeInsight.AutoPopupController;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
@@ -77,10 +78,13 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     HighlighterIterator iterator = highlighter.createIterator(offset);
     IElementType elementTokenType = iterator.getTokenType();
     if (QUOTE_OPEN_ANY.contains(elementTokenType)) {
-      IElementType quotePrefixType = PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1));
+      IElementType quotePrefixType = offset > 0 ? PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1)) : null;
       CharSequence text = editor.getDocument().getCharsSequence();
       if (offset > text.length() - 1 || text.charAt(offset) != typedChar) {
         return Result.CONTINUE;
+      }
+      if (elementTokenType == QUOTE_DOUBLE_OPEN || elementTokenType == QUOTE_SINGLE_OPEN) {
+        AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
       }
       char openChar = text.charAt(offset);
       char closeChar = PerlBaseLexer.getQuoteCloseChar(openChar);

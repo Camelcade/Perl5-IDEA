@@ -73,6 +73,16 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
     doTest("\n<caret>", "$#");
   }
 
+  public void testDQOpen() {doTest("", "\"");}
+
+  public void testSQOpen() {doTest("", "'");}
+
+  public void testQOpen() {doTest("q<caret>", "/");}
+
+  public void testQQOpen() {doTest("qq<caret>", "/");}
+
+  public void testQWOpen() {doTest("qw<caret>", "/");}
+
   @Override
   protected boolean runInDispatchThread() {
     return false;
