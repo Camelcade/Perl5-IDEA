@@ -83,6 +83,8 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
 
   public void testQWOpen() {doTest("qw<caret>", "/");}
 
+  public void testQWContinue() {doTest("qw(text1<caret>)", " ");}
+
   /* // tester can't handle completion invoked using {@link com.intellij.psi.impl.PsiDocumentManagerBase.addRunOnCommit}
   also test: glob index, non-ref has index
   public void testHashIndexOpen() {doTest("say $a->{something};say $b-><caret>", "{");}

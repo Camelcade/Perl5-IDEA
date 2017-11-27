@@ -40,6 +40,7 @@
            <li>a sigil</li>
            <li>an opening quote</li>
            <li>an opening brace in a hash index</li>
+           <li>space inside of the <code>qw</code> list</li>
        </ul></li>
        <li>Double-click on variable name should now select variable with sigil</li>
        <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>

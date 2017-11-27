@@ -28,6 +28,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlStringList;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -130,7 +131,8 @@ public class PerlCompletionContributor extends CompletionContributor implements 
     else if (typedChar == ':' && elementType == COLON) {
       return true;
     }
-    else if (typedChar == ' ' && AUTO_OPENED_TOKENS.contains(elementType)) {
+    else if (typedChar == ' ' && (
+      AUTO_OPENED_TOKENS.contains(elementType)) || element.getParent() instanceof PsiPerlStringList) {
       return true;
     }
     else if (StringUtil.containsChar("$@%#", typedChar)) {
