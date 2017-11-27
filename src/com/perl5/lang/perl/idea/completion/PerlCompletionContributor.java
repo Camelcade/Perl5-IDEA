@@ -31,6 +31,8 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlStringList;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.SIGILS;
+
 /**
  * Created by hurricup on 25.04.2015.
  */
@@ -133,6 +135,9 @@ public class PerlCompletionContributor extends CompletionContributor implements 
     }
     else if (typedChar == ' ' && (
       AUTO_OPENED_TOKENS.contains(elementType)) || element.getParent() instanceof PsiPerlStringList) {
+      return true;
+    }
+    else if (typedChar == '{' && SIGILS.contains(elementType)) {
       return true;
     }
     else if (StringUtil.containsChar("$@%#", typedChar)) {

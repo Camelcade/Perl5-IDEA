@@ -241,4 +241,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     TokenSet.create(REGEX_QUOTE_CLOSE)
   );
 
+  TokenSet SIGILS = TokenSet.create(
+    SIGIL_SCALAR, SIGIL_ARRAY, SIGIL_HASH, SIGIL_GLOB, SIGIL_CODE, SIGIL_SCALAR_INDEX
+  );
+
 }
