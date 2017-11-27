@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.editor.smartkeys;
 import com.intellij.codeInsight.AutoPopupController;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.ex.EditorEx;
@@ -27,11 +28,15 @@ import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.PsiDocumentManagerBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_CLOSE_FIRST_ANY;
@@ -77,9 +82,10 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
     HighlighterIterator iterator = highlighter.createIterator(offset);
     IElementType elementTokenType = iterator.getTokenType();
+    Document document = editor.getDocument();
     if (QUOTE_OPEN_ANY.contains(elementTokenType)) {
       IElementType quotePrefixType = offset > 0 ? PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1)) : null;
-      CharSequence text = editor.getDocument().getCharsSequence();
+      CharSequence text = document.getCharsSequence();
       if (offset > text.length() - 1 || text.charAt(offset) != typedChar) {
         return Result.CONTINUE;
       }
@@ -112,6 +118,16 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 
       EditorModificationUtil.insertStringAtCaret(editor, textToAppend.toString(), false, false);
     }
+    else if (elementTokenType == LEFT_BRACE) {
+      PsiDocumentManagerBase.addRunOnCommit(document, () -> {
+        PsiElement newElement = file.findElementAt(offset);
+        if (PsiUtilCore.getElementType(newElement) == elementTokenType &&
+            newElement.getParent() instanceof PsiPerlHashIndex) {
+          AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
+        }
+      });
+    }
+
     return Result.CONTINUE;
   }
 }
