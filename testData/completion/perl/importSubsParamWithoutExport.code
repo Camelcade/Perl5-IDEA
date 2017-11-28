@@ -1,0 +1,1 @@
+use MyTest::Some::Package qw/somesub1 <caret>/;

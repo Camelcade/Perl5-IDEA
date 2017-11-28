@@ -150,6 +150,27 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     doTestCompletion();
   }
 
+  public void testImportSubsParamWithoutExport() {
+    doTestCompletion();
+  }
+
+
+  public void testImportSubsParamWithoutExportOk() {
+    doTestCompletion();
+  }
+
+  public void testImportParamWithoutOption() {
+    doTestCompletion();
+  }
+
+  public void testImportParamWithoutOptionBundles() {
+    doTestCompletion();
+  }
+
+  public void testImportParamWithoutParent() {
+    doTestCompletion();
+  }
+
   private void doTestExportArray() {
     doTestCompletion();
   }

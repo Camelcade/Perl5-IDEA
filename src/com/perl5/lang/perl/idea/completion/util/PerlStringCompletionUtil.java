@@ -38,9 +38,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.perl5.lang.perl.idea.intellilang.AbstractPerlLanguageInjector.LANGUAGE_MAP;
 
@@ -153,23 +151,32 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     PsiPerlUseStatement useStatement =
       PsiTreeUtil.getParentOfType(stringContentElement, PsiPerlUseStatement.class, true, PsiPerlStatement.class);
 
-    if (useStatement != null) {
-      PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-      // fixme we should allow lookup elements customization by package processor
-      if (packageProcessor instanceof PerlPackageOptionsProvider) {
-        Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
+    if (useStatement == null) {
+      return;
+    }
 
-        for (Map.Entry<String, String> option : options.entrySet()) {
+    List<String> typedParameters = useStatement.getImportParameters();
+    Set<String> typedStringsSet = typedParameters == null ? Collections.emptySet() : new THashSet<>(typedParameters);
+
+    PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
+    // fixme we should allow lookup elements customization by package processor
+    if (packageProcessor instanceof PerlPackageOptionsProvider) {
+      Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
+
+      for (Map.Entry<String, String> option : options.entrySet()) {
+        if (!typedStringsSet.contains(option.getKey())) {
           resultSet.addElement(LookupElementBuilder
                                  .create(option.getKey())
                                  .withTypeText(option.getValue(), true)
                                  .withIcon(PerlIcons.PERL_OPTION)
           );
         }
+      }
 
-        options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
+      options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
 
-        for (Map.Entry<String, String> option : options.entrySet()) {
+      for (Map.Entry<String, String> option : options.entrySet()) {
+        if (!typedStringsSet.contains(option.getKey())) {
           resultSet.addElement(LookupElementBuilder
                                  .create(option.getKey())
                                  .withTypeText(option.getValue(), true)
@@ -177,28 +184,34 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
           );
         }
       }
+    }
 
-      if (packageProcessor instanceof PerlPackageParentsProvider &&
-          ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
-        PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
+    if (packageProcessor instanceof PerlPackageParentsProvider &&
+        ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
+      PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
+        if (!typedStringsSet.contains(s)) {
           resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
-          return true;
-        });
-      }
+        }
+        return true;
+      });
+    }
 
-      Set<String> export = new HashSet<>();
-      Set<String> exportOk = new HashSet<>();
-      packageProcessor.addExports(useStatement, export, exportOk);
-      exportOk.removeAll(export);
+    Set<String> export = new HashSet<>();
+    Set<String> exportOk = new HashSet<>();
+    packageProcessor.addExports(useStatement, export, exportOk);
+    exportOk.removeAll(export);
 
-      for (String subName : export) {
+    for (String subName : export) {
+      if (!typedStringsSet.contains(subName)) {
         resultSet.addElement(LookupElementBuilder
                                .create(subName)
                                .withIcon(PerlIcons.SUB_GUTTER_ICON)
                                .withTypeText("default", true)
         );
       }
-      for (String subName : exportOk) {
+    }
+    for (String subName : exportOk) {
+      if (!typedStringsSet.contains(subName)) {
         resultSet.addElement(LookupElementBuilder
                                .create(subName)
                                .withIcon(PerlIcons.SUB_GUTTER_ICON)

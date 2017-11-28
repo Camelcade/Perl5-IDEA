@@ -1,0 +1,2 @@
+Lookups: subs; Text: subs; Tail: null; Type: generates a compile-time error if you try to use a bareword identifier that's not a subroutine; Icon: /option.png; Type Icon: null
+Lookups: vars; Text: vars; Tail: null; Type: generates a compile-time error if you access a variable that was neither explicitly declared; Icon: /option.png; Type Icon: null
