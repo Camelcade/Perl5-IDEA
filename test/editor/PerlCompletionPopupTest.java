@@ -101,6 +101,8 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
 
   public void testHashGlobIndexOpen() {doTest("say $a->{something};say *b<caret>", "{");}
 
+  public void testSpaceBug() {doTestNegative("qw//<caret>", ";");}
+
   @Override
   protected boolean runInDispatchThread() {
     return false;
@@ -116,5 +118,12 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
     myTester.typeWithPauses(toType);
     LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
     assertNotNull(activeLookup);
+  }
+
+  private void doTestNegative(@NotNull String initial, @NotNull String toType) {
+    initWithTextSmart(initial);
+    myTester.typeWithPauses(toType);
+    LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
+    assertNull(activeLookup);
   }
 }

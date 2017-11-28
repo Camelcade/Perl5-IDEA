@@ -133,8 +133,7 @@ public class PerlCompletionContributor extends CompletionContributor implements 
     else if (typedChar == ':' && elementType == COLON) {
       return true;
     }
-    else if (typedChar == ' ' && (
-      AUTO_OPENED_TOKENS.contains(elementType)) || element.getParent() instanceof PsiPerlStringList) {
+    else if (typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) || element.getParent() instanceof PsiPerlStringList)) {
       return true;
     }
     else if (typedChar == '{' && SIGILS.contains(elementType)) {
