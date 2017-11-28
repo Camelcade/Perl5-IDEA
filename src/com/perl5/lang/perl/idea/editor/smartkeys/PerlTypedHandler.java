@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.editor.smartkeys;
 
 import com.intellij.codeInsight.AutoPopupController;
+import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
@@ -30,7 +31,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.PsiDocumentManagerBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
@@ -119,12 +119,10 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
       EditorModificationUtil.insertStringAtCaret(editor, textToAppend.toString(), false, false);
     }
     else if (elementTokenType == LEFT_BRACE) {
-      PsiDocumentManagerBase.addRunOnCommit(document, () -> {
-        PsiElement newElement = file.findElementAt(offset);
-        if (PsiUtilCore.getElementType(newElement) == elementTokenType &&
-            newElement.getParent() instanceof PsiPerlHashIndex) {
-          AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
-        }
+      AutoPopupController.getInstance(project).scheduleAutoPopup(editor, CompletionType.BASIC, psiFile -> {
+        PsiElement newElement = psiFile.findElementAt(offset);
+        return PsiUtilCore.getElementType(newElement) == elementTokenType &&
+               newElement.getParent() instanceof PsiPerlHashIndex;
       });
     }
 
