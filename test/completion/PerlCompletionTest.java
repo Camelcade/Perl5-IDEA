@@ -380,4 +380,6 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testPackageVarTypeAnnotation() {doTestCompletion();}
 
   public void testLazyExportOkQw() {doTestCompletion();}
+
+  public void testGlobSlots() {doTestCompletion();}
 }

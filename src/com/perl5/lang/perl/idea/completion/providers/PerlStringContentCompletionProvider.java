@@ -22,11 +22,14 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationInject;
+import com.perl5.lang.perl.psi.PsiPerlGlobSlot;
+import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -50,7 +53,13 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
     }
     else if (SIMPLE_HASH_INDEX.accepts(element))    // hash indexes
     {
-      PerlStringCompletionUtil.fillWithHashIndexes(element, result);
+      PsiPerlHashIndex indexElement = PsiTreeUtil.getParentOfType(element, PsiPerlHashIndex.class);
+      if (indexElement != null && indexElement.getParent() instanceof PsiPerlGlobSlot) {
+        PerlStringCompletionUtil.fillWithRefTypes(result);
+      }
+      else {
+        PerlStringCompletionUtil.fillWithHashIndexes(element, result);
+      }
     }
     else if (USE_PARAMETERS_PATTERN.accepts(element))    // use or no parameters
     {

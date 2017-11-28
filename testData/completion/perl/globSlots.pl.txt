@@ -1,0 +1,11 @@
+Lookups: ARRAY; Text: ARRAY; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: CODE; Text: CODE; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: FORMAT; Text: FORMAT; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: GLOB; Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: HASH; Text: HASH; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: IO; Text: IO; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: LVALUE; Text: LVALUE; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: REF; Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: Regexp; Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: SCALAR; Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
+Lookups: VSTRING; Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null

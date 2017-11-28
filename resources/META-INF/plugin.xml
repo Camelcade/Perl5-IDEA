@@ -49,6 +49,7 @@
        <li>Intention to convert statement with modifier to compound statement and vice versa, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1604">cjelli</a>
        <li>Re-worked live templates: abbreviations, defaults and so on (need a feedback)</li>
        <li>Already typed import parameters are now excluded from completion</li>
+       <li>Completion in braces after typeglobs now contains slots names</li>
      </ul>
      </p>
      <p>Fixes:
