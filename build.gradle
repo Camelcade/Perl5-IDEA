@@ -62,7 +62,7 @@ apply plugin: 'org.jetbrains.intellij'
 intellij {
     version "$platformVersion$platformBuild"
     downloadSources Boolean.valueOf(downloadIdeaSource)
-    intellij.plugins = ['IntelliLang', 'PsiViewer:3.28.93']
+    intellij.plugins = ['IntelliLang', 'PsiViewer:3.28.93', 'coverage']
     if (project.hasProperty('idea_sandbox')) {
         sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
     } else {
@@ -118,6 +118,10 @@ project.afterEvaluate {
         copy {
             from XSParser
             into perlUtils
+        }
+        copy {
+            from file("perl-utils/Devel/")
+            into "$perlUtils/lib/Devel/"
         }
     }
 }

@@ -16,6 +16,10 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.WriteAction;
@@ -23,6 +27,7 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -42,7 +47,9 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.messages.MessageBusConnection;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
+import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSdkLibrary;
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
@@ -246,6 +253,35 @@ public class PerlProjectManager {
       return null;
     }
     return getInstance(module.getProject()).getProjectSdk();
+  }
+
+  /**
+   * @return sdk for project. If not configured - suggests to configure
+   */
+  public static Sdk getSdkWithNotification(@NotNull Project project) {
+    Sdk sdk = getSdk(project);
+    if (sdk != null) {
+      return sdk;
+    }
+    showUnconfiguredInterpreterNotification(project);
+    return null;
+  }
+
+  public static void showUnconfiguredInterpreterNotification(@NotNull Project project) {
+    Notification notification = new Notification(
+      PerlBundle.message("perl.select.sdk.notification"),
+      PerlBundle.message("perl.select.sdk.notification.title"),
+      PerlBundle.message("perl.select.sdk.notification.message"),
+      NotificationType.ERROR
+    );
+    notification.addAction(new DumbAwareAction(PerlBundle.message("perl.configure.interpreter.action")) {
+      @Override
+      public void actionPerformed(AnActionEvent e) {
+        Perl5SettingsConfigurable.open(project);
+        notification.expire();
+      }
+    });
+    Notifications.Bus.notify(notification, project);
   }
 
   @Nullable

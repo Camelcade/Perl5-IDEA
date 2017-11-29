@@ -74,7 +74,7 @@ public class PerlSdkType extends SdkType {
   public List<String> getINCPaths(String sdkHomePath) {
     String executablePath = getExecutablePath(sdkHomePath);
     List<String> perlLibPaths = new ArrayList<>();
-    for (String path : PerlRunUtil.getDataFromProgram(
+    for (String path : PerlRunUtil.getOutputFromProgram(
       executablePath,
       "-le",
       "print for @INC"
@@ -173,7 +173,7 @@ public class PerlSdkType extends SdkType {
 
   @Nullable
   private VersionDescriptor getPerlVersionDescriptor(@NotNull String sdkHomePath) {
-    List<String> versionLines = PerlRunUtil.getDataFromProgram(getExecutablePath(sdkHomePath), "-v");
+    List<String> versionLines = PerlRunUtil.getOutputFromProgram(getExecutablePath(sdkHomePath), "-v");
 
     if (versionLines.isEmpty()) {
       return null;

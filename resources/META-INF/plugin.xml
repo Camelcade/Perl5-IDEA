@@ -41,34 +41,15 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-       <li>Editor responsiveness should be much better now</li>
-       <li>Completion is now opens automatically after typing:<ul>
-           <li>a sigil</li>
-           <li>an opening quote</li>
-           <li>an opening brace in a hash index</li>
-           <li>an opening brace after a sigil</li>
-           <li>a space inside of the <code>qw</code> list</li>
-       </ul></li>
-       <li>Double-click on variable name should now select variable with sigil</li>
-       <li><code>__PACKAGE__</code> now may be used as class specifier in <code>my/our/state</code> and annotations <code>#@type/#@returns</code>, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1599">aldem</a></li>
-       <li>Inspection for <code>use vars</code> legacy pragma usage with quick-fix for converting to <code>our</code> declaration, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/380">380</a></li>
-       <li>Intention to convert statement with modifier to compound statement and vice versa, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1604">cjelli</a>
-       <li>Re-worked live templates: abbreviations, defaults and so on (need a feedback)</li>
-       <li>Already typed import parameters are now excluded from the completion</li>
-       <li>Completion in braces after typeglobs now contains slots names</li>
+       <li>Run with Coverage is now available. Requires <code>Devel::Cover</code> module</li>
      </ul>
      </p>
+<!--
      <p>Fixes:
       <ul>
-        <li>Mac users should not have problems with SDK addition anymore, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1404">bbmielke</a></li>
-        <li><code>continue</code> block indentation after <code>while</code> and <code>until</code></li>
-        <li>Spacing after <code>for/foreach</code> in compound statement without explicit variable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1607">1607</a></li>
-        <li>Completion for methods on annotated variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1598">bakanov</a></li>
-        <li><code>@EXPORT</code> and <code>@EXPORT_OK</code> handling for large lists of exported variables, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1592">johndunlap</a></li>
-        <li>Unresolved variable inspection false positive on <code>$1</code> and friends, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1605">#1605</a> (hardcoded variables 1-20)</li>
-        <li>Console filter should be more selective, to avoid linking other languages exceptions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1630">#1630</a></li>
       </ul>
      </p>
+-->
     ]]>
   </change-notes>
 
@@ -78,6 +59,7 @@
   <depends>com.intellij.modules.lang</depends>
   <depends optional="true" config-file="intellilang-deps.xml">org.intellij.intelliLang</depends>
   <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
+  <depends optional="true" config-file="coverage-deps.xml">com.intellij.modules.coverage</depends>
 
   <extensionPoints>
     <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">

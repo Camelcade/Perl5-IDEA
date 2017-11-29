@@ -67,6 +67,15 @@ public class PerlPluginUtil {
     return pluginRoot == null ? null : pluginRoot + "/perl";
   }
 
+  /**
+   * @return path to libraries root shipped with plugins to use in -I
+   */
+  @Nullable
+  public static String getPluginPerlLibRoot() {
+    String perlScriptsRoot = getPluginPerlScriptsRoot();
+    return perlScriptsRoot == null ? null : FileUtil.join(perlScriptsRoot, "lib");
+  }
+
   @Nullable
   public static VirtualFile getPluginScriptVirtualFile(String scriptName) {
     String scriptsRoot = getPluginPerlScriptsRoot();
@@ -79,10 +88,10 @@ public class PerlPluginUtil {
   }
 
   @Nullable
-  public static GeneralCommandLine getPluginScriptCommandLine(Project project, String script, String... params) {
+  public static GeneralCommandLine getPluginScriptCommandLine(Project project, String script, String... perlParams) {
     VirtualFile scriptVirtualFile = getPluginScriptVirtualFile(script);
     if (scriptVirtualFile != null) {
-      return PerlRunUtil.getPerlCommandLine(project, scriptVirtualFile, params);
+      return PerlRunUtil.getPerlCommandLine(project, scriptVirtualFile, perlParams);
     }
     return null;
   }
