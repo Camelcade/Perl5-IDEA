@@ -41,7 +41,7 @@ import java.util.ArrayList;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlConfiguration> {
+public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRunConfiguration> {
   private TextFieldWithBrowseButton myScriptField;
   private CommonProgramParametersPanel myParametersPanel;
   private ComboBox myConsoleCharset;
@@ -53,24 +53,24 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlCon
   }
 
   @Override
-  protected void resetEditorFrom(@NotNull PerlConfiguration perlConfiguration) {
-    myScriptField.setText(perlConfiguration.getScriptPath());
-    myParametersPanel.reset(perlConfiguration);
-    myConsoleCharset.setSelectedItem(perlConfiguration.getConsoleCharset());
-    myPerlParametersPanel.setText(perlConfiguration.getPerlParameters());
-    myAlternativeSdkPanel.reset(perlConfiguration.getAlternativeSdkPath(), perlConfiguration.isUseAlternativeSdk());
-    super.resetEditorFrom(perlConfiguration);
+  protected void resetEditorFrom(@NotNull PerlRunConfiguration perlRunConfiguration) {
+    myScriptField.setText(perlRunConfiguration.getScriptPath());
+    myParametersPanel.reset(perlRunConfiguration);
+    myConsoleCharset.setSelectedItem(perlRunConfiguration.getConsoleCharset());
+    myPerlParametersPanel.setText(perlRunConfiguration.getPerlParameters());
+    myAlternativeSdkPanel.reset(perlRunConfiguration.getAlternativeSdkPath(), perlRunConfiguration.isUseAlternativeSdk());
+    super.resetEditorFrom(perlRunConfiguration);
   }
 
   @Override
-  protected void applyEditorTo(@NotNull PerlConfiguration perlConfiguration) throws ConfigurationException {
-    perlConfiguration.setScriptPath(myScriptField.getText());
-    myParametersPanel.applyTo(perlConfiguration);
-    perlConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
-    perlConfiguration.setPerlParameters(myPerlParametersPanel.getText());
-    perlConfiguration.setUseAlternativeSdk(myAlternativeSdkPanel.isPathEnabled());
-    perlConfiguration.setAlternativeSdkPath(myAlternativeSdkPanel.getPath());
-    super.applyEditorTo(perlConfiguration);
+  protected void applyEditorTo(@NotNull PerlRunConfiguration perlRunConfiguration) throws ConfigurationException {
+    perlRunConfiguration.setScriptPath(myScriptField.getText());
+    myParametersPanel.applyTo(perlRunConfiguration);
+    perlRunConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
+    perlRunConfiguration.setPerlParameters(myPerlParametersPanel.getText());
+    perlRunConfiguration.setUseAlternativeSdk(myAlternativeSdkPanel.isPathEnabled());
+    perlRunConfiguration.setAlternativeSdkPath(myAlternativeSdkPanel.getPath());
+    super.applyEditorTo(perlRunConfiguration);
   }
 
   @Nullable

@@ -52,7 +52,7 @@ public class PerlRunProfileState extends CommandLineState {
   @NotNull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
-    PerlConfiguration runProfile = (PerlConfiguration)getEnvironment().getRunProfile();
+    PerlRunConfiguration runProfile = (PerlRunConfiguration)getEnvironment().getRunProfile();
 
     VirtualFile scriptFile = runProfile.getScriptFile();
     if (scriptFile == null) {
@@ -122,7 +122,7 @@ public class PerlRunProfileState extends CommandLineState {
   }
 
   @NotNull
-  protected String[] getPerlParameters(PerlConfiguration runProfile) {
+  protected String[] getPerlParameters(PerlRunConfiguration runProfile) {
 
     String perlParameters = runProfile.getPerlParameters();
     if (perlParameters == null) {
@@ -132,7 +132,7 @@ public class PerlRunProfileState extends CommandLineState {
     return result.toArray(new String[result.size()]);
   }
 
-  protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException {
+  protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
     return runProfile.getEnvs();
   }
 }

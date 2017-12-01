@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
  * @author VISTALL
  * @since 19-Sep-15
  */
-public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConfiguration> {
+public class PerlConfigurationProducer extends RunConfigurationProducer<PerlRunConfiguration> {
   public PerlConfigurationProducer() {
     super(PerlConfigurationType.getInstance().getConfigurationFactories()[0]);
   }
@@ -46,13 +46,15 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlConf
   }
 
   @Override
-  public boolean isConfigurationFromContext(PerlConfiguration runConfiguration, ConfigurationContext configurationContext) {
+  public boolean isConfigurationFromContext(PerlRunConfiguration runConfiguration, ConfigurationContext configurationContext) {
     VirtualFile perlFile = findPerlFile(configurationContext);
     return perlFile != null && Comparing.equal(runConfiguration.getScriptFile(), perlFile);
   }
 
   @Override
-  protected boolean setupConfigurationFromContext(PerlConfiguration runConfiguration, ConfigurationContext configurationContext, Ref ref) {
+  protected boolean setupConfigurationFromContext(PerlRunConfiguration runConfiguration,
+                                                  ConfigurationContext configurationContext,
+                                                  Ref ref) {
     VirtualFile perlFile = findPerlFile(configurationContext);
     if (perlFile != null) {
       runConfiguration.setScriptPath(perlFile.getPath());

@@ -34,7 +34,7 @@ public class PerlConfigurationType extends ConfigurationTypeBase {
     addFactory(new ConfigurationFactory(this) {
       @Override
       public RunConfiguration createTemplateConfiguration(Project project) {
-        return new PerlConfiguration(project, this, "Unnamed");
+        return new PerlRunConfiguration(project, this, "Unnamed");
       }
     });
   }

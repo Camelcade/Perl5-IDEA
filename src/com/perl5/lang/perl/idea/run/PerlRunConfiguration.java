@@ -47,7 +47,7 @@ import java.util.Map;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions {
+public class PerlRunConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions {
   public String SCRIPT_PATH;
   public String PROGRAM_PARAMETERS;    // these are script parameters
 
@@ -68,7 +68,7 @@ public class PerlConfiguration extends LocatableConfigurationBase implements Com
 
   private transient Integer debugPort;
 
-  public PerlConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
+  public PerlRunConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
     super(project, factory, name);
   }
 

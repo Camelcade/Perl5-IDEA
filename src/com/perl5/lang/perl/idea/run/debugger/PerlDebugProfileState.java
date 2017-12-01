@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.idea.run.PerlConfiguration;
+import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,7 +41,7 @@ public class PerlDebugProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected String[] getPerlParameters(PerlConfiguration runProfile) {
+  protected String[] getPerlParameters(PerlRunConfiguration runProfile) {
     List<String> result = new ArrayList<>();
     result.add(DEBUG_ARGUMENT);
 
@@ -55,7 +55,7 @@ public class PerlDebugProfileState extends PerlRunProfileState {
   }
 
   @Override
-  protected Map<String, String> calcEnv(PerlConfiguration runProfile) throws ExecutionException {
+  protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
     Map<String, String> stringStringMap = new HashMap<>(super.calcEnv(runProfile));
     PerlDebugOptions debugOptions = getDebugOptions();
     stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());

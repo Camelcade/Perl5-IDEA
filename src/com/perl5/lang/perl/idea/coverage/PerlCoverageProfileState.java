@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.coverage;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.idea.run.PerlConfiguration;
+import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,10 +33,10 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected String[] getPerlParameters(PerlConfiguration runProfile) {
+  protected String[] getPerlParameters(PerlRunConfiguration runProfile) {
     List<String> result = new ArrayList<>();
     result.add("-MDevel::Cover=-silent,1,-db," +
-               CoverageEnabledConfiguration.getOrCreate((PerlConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath() +
+               CoverageEnabledConfiguration.getOrCreate((PerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath() +
                ",-dir,.");
 
     for (String argument : super.getPerlParameters(runProfile)) {
