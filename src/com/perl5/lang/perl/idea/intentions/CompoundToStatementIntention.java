@@ -73,10 +73,12 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   private static void convertForCompound(@NotNull PerlForCompound forCompound) throws IncorrectOperationException {
     PsiPerlExpr statementExpr = getStatementExpression(forCompound);
 
-    List<PsiPerlExpr> exprList = forCompound.getExprList();
-    String statementText = computeStatementText(exprList, statementExpr);
+    String statementText = computeStatementText(forCompound, statementExpr);
 
-    PsiPerlExpr controlExpr = exprList.get(exprList.size() - 1);
+    PsiPerlExpr controlExpr = forCompound.getConditionExpr();
+    if (controlExpr == null) {
+      return;
+    }
 
     replaceWithStatement(forCompound, statementText, controlExpr);
   }
@@ -99,21 +101,19 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   /**
    * Computes statement text for foreach compound block. Replacing iterator variable with $_ if necessary
    *
-   * @param expressionsList for expressions list
-   * @param statementExpr   statement expression
+   * @param forCompound   for compound statement
+   * @param statementExpr statement expression
    * @return adjusted text or null if something went wrong
    */
   @NotNull
-  private static String computeStatementText(@NotNull List<PsiPerlExpr> expressionsList, @NotNull PsiPerlExpr statementExpr) {
-    if (expressionsList.isEmpty()) {
-      error("perl.intention.convert.to.statement.error.no.control");
-    }
+  private static String computeStatementText(@NotNull PerlForCompound forCompound, @NotNull PsiPerlExpr statementExpr) {
     String statementText = statementExpr.getText();
-    if (expressionsList.size() == 1) {
+    PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
+    if (foreachIterator == null) {
       return statementText;
     }
 
-    PsiPerlExpr variableExpression = expressionsList.get(0);
+    PsiPerlExpr variableExpression = foreachIterator.getExpr();
     if (variableExpression instanceof PerlVariableDeclarationExpr) {
       List<PerlVariable> variables = ((PerlVariableDeclarationExpr)variableExpression).getVariables();
       if (variables.size() == 1) {

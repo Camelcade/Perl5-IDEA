@@ -1,0 +1,99 @@
+PerlVariableReference at (25,29); text in range: 'ARGV' => 1 results:
+	Built-in: @ARGV
+
+PerlVariableReference at (46,50); text in range: 'team' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 17 in issue1646.pl
+
+PerlVariableReference at (85,93); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 69 in issue1646.pl
+
+PerlVariableReference at (100,108); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 69 in issue1646.pl
+
+PerlVariableReference at (127,135); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 69 in issue1646.pl
+
+PerlVariableReference at (180,183); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in issue1646.pl
+
+PerlVariableReference at (236,244); text in range: 'othervar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 204 in issue1646.pl
+
+PerlVariableReference at (293,296); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 267 in issue1646.pl
+
+PerlVariableReference at (349,357); text in range: 'othervar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 317 in issue1646.pl
+
+PerlVariableReference at (404,407); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 378 in issue1646.pl
+
+PerlVariableReference at (454,457); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 428 in issue1646.pl
+
+PerlVariableReference at (493,497); text in range: 'ARGV' => 1 results:
+	Built-in: @ARGV
+
+PerlVariableReference at (514,518); text in range: 'team' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 485 in issue1646.pl
+
+PerlVariableReference at (553,561); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 537 in issue1646.pl
+
+PerlVariableReference at (568,576); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 537 in issue1646.pl
+
+PerlVariableReference at (595,603); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 537 in issue1646.pl
+
+PerlVariableReference at (648,651); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 622 in issue1646.pl
+
+PerlVariableReference at (704,712); text in range: 'othervar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 672 in issue1646.pl
+
+PerlVariableReference at (761,764); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 735 in issue1646.pl
+
+PerlVariableReference at (817,825); text in range: 'othervar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 785 in issue1646.pl
+
+PerlVariableReference at (872,875); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 846 in issue1646.pl
+
+PerlVariableReference at (922,925); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 896 in issue1646.pl
+
+PerlVariableReference at (963,967); text in range: 'ARGV' => 1 results:
+	Built-in: @ARGV
+
+PerlVariableReference at (984,988); text in range: 'team' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 955 in issue1646.pl
+
+PerlVariableReference at (1023,1031); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1007 in issue1646.pl
+
+PerlVariableReference at (1038,1046); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1007 in issue1646.pl
+
+PerlVariableReference at (1065,1073); text in range: 'iterator' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1007 in issue1646.pl
+
+PerlVariableReference at (1118,1121); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1092 in issue1646.pl
+
+PerlVariableReference at (1174,1182); text in range: 'othervar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1142 in issue1646.pl
+
+PerlVariableReference at (1231,1234); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1205 in issue1646.pl
+
+PerlVariableReference at (1287,1295); text in range: 'othervar' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1255 in issue1646.pl
+
+PerlVariableReference at (1342,1345); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1316 in issue1646.pl
+
+PerlVariableReference at (1392,1395); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1366 in issue1646.pl
+

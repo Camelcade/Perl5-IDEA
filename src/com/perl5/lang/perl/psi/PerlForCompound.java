@@ -18,10 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlConvertableCompound;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -42,9 +39,13 @@ public interface PerlForCompound extends PerlConvertableCompound, PerlLoop {
   @Nullable
   PsiPerlBlock getBlock();
 
-  @NotNull
-  List<PsiPerlExpr> getExprList();
-
   @Nullable
   PsiPerlForIterator getForIterator();
+
+  @Nullable
+  PsiPerlForeachIterator getForeachIterator();
+
+  @Nullable
+  PsiPerlConditionExpr getConditionExpr();
+
 }

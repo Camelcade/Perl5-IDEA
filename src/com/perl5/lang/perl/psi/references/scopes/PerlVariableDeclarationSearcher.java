@@ -21,9 +21,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PerlStatement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +54,7 @@ public class PerlVariableDeclarationSearcher extends BaseScopeProcessor {
       PerlVariable variable = ((PerlVariableDeclarationElement)element).getVariable();
       if (variable != null && !variable.equals(myVariable)) {
         if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
-          PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PsiPerlStatement.class);
+          PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PerlStatement.class);
 
           if (declarationStatement == null || !PsiTreeUtil.isAncestor(declarationStatement, myVariable, false)) {
             myResult = (PerlVariableDeclarationElement)element;

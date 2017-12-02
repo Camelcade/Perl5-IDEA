@@ -1754,6 +1754,16 @@ public class PerlElementTypeFactory {
       };
     }
 
+    if (name.equals("FOREACH_ITERATOR")) {
+      return new PerlElementTypeEx(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiPerlForeachIteratorImpl(node);
+        }
+      };
+    }
+
 /*
                 if (name.equals("CUSTOM_CHAR_CLASS"))
 		{

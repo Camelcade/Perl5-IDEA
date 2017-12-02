@@ -1,0 +1,80 @@
+sub {
+    for my $team (@ARGV) {
+        say $team;
+    }
+    for(my $iterator = 0; $iterator < 0; $iterator++) {
+        say $iterator;
+    }
+    if( my $var = 123){
+        say $var;
+    }
+    elsif(my $othervar = 123) {
+        say $othervar;
+    }
+    unless( my $var = 123){
+        say $var;
+    }
+    elsif(my $othervar = 123) {
+        say $othervar;
+    }
+    while(my $var = <>) {
+        say $var;
+    }
+    until(my $var = <>) {
+        say $var;
+    }
+};
+
+do {
+    for my $team (@ARGV) {
+        say $team;
+    }
+    for(my $iterator = 0; $iterator < 0; $iterator++) {
+        say $iterator;
+    }
+    if( my $var = 123){
+        say $var;
+    }
+    elsif(my $othervar = 123) {
+        say $othervar;
+    }
+    unless( my $var = 123){
+        say $var;
+    }
+    elsif(my $othervar = 123) {
+        say $othervar;
+    }
+    while(my $var = <>) {
+        say $var;
+    }
+    until(my $var = <>) {
+        say $var;
+    }
+};
+
+eval {
+    for my $team (@ARGV) {
+        say $team;
+    }
+    for(my $iterator = 0; $iterator < 0; $iterator++) {
+        say $iterator;
+    }
+    if( my $var = 123){
+        say $var;
+    }
+    elsif(my $othervar = 123) {
+        say $othervar;
+    }
+    unless( my $var = 123){
+        say $var;
+    }
+    elsif(my $othervar = 123) {
+        say $othervar;
+    }
+    while(my $var = <>) {
+        say $var;
+    }
+    until(my $var = <>) {
+        say $var;
+    }
+};

@@ -29,8 +29,6 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
  * Created by bcardoso on 7/28/16.
  */
@@ -55,9 +53,11 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
       return null;
     }
 
-    List<PsiPerlExpr> variableAndList = forCompound.getExprList();
     // fixme we should work without variable and without declaration
-    return variableAndList.size() == 2 && variableAndList.get(0) instanceof PsiPerlVariableDeclarationLexical ? forCompound : null;
+    PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
+    return forCompound.getConditionExpr() != null &&
+           foreachIterator != null &&
+           foreachIterator.getExpr() instanceof PsiPerlVariableDeclarationLexical ? forCompound : null;
   }
 
   @Override
@@ -69,14 +69,15 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
     PsiPerlForCompound forCompound = getForStatement(element);
     assert forCompound != null;
-    List<PsiPerlExpr> exprList = forCompound.getExprList();
-    assert exprList.size() == 2;
 
-    PsiPerlExpr variableDeclaration = exprList.get(0);
+    PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
+    assert foreachIterator != null;
+
+    PsiPerlExpr variableDeclaration = foreachIterator.getExpr();
     assert variableDeclaration instanceof PsiPerlVariableDeclarationLexical;
 
-    PsiPerlExpr iterableList = exprList.get(1);
-    assert iterableList instanceof PsiPerlConditionExpr;
+    PsiPerlExpr iterableList = forCompound.getConditionExpr();
+    assert iterableList != null;
 
     PsiPerlBlock block = forCompound.getBlock();
     assert block != null;

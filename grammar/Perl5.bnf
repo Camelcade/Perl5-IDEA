@@ -363,6 +363,8 @@ limitations under the License.
     name(".+expr")="expression"
     extends("number_constant")=expr
 
+    implements("condition_expr|foreach_iterator")="com.perl5.lang.perl.psi.PerlStatement"
+
 	implements(".+_cast_expr")="com.perl5.lang.perl.psi.PerlCastExpression"
 	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"
 
@@ -597,7 +599,9 @@ private block_compound ::= parse_block [[POD] continue_block]
 for_compound ::=  {'for'|'foreach'} for_arguments {pin=1}
 private for_arguments ::=
     for_iterator parse_block |
-    [ variable_declaration | variable ] condition_expr block_compound
+    [ foreach_iterator ] condition_expr block_compound
+
+foreach_iterator ::= variable_declaration | variable
 
 for_iterator ::= '(' [for_iterator_statement]  ';' [for_iterator_statement] ';' [for_iterator_statement] ')' {pin=3}
 for_iterator_statement ::= expr {recoverWhile=recover_parenthesised}
