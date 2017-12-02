@@ -22,17 +22,49 @@ import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.function.Function;
+
 /**
  * Created by hurricup on 19.01.2016.
  */
 public class PerlElementTypeEx extends PerlElementType implements PsiElementProvider {
+  private final Function<ASTNode, PsiElement> myInstanceFactory;
+
   public PerlElementTypeEx(@NotNull @NonNls String debugName) {
+    this(debugName, PerlCompositeElementImpl.class);
+  }
+
+  public PerlElementTypeEx(@NotNull @NonNls String debugName, Class<? extends PsiElement> clazz) {
     super(debugName);
+    myInstanceFactory = createInstanceFactory(clazz);
+  }
+
+  @NotNull
+  static Function<ASTNode, PsiElement> createInstanceFactory(Class<? extends PsiElement> clazz) {
+    Constructor<? extends PsiElement> constructor;
+    try {
+      constructor = clazz.getDeclaredConstructor(ASTNode.class);
+      constructor.setAccessible(true);
+    }
+    catch (NoSuchMethodException e) {
+      throw new RuntimeException(e);
+    }
+
+    return p1 -> {
+      try {
+        return constructor.newInstance(p1);
+      }
+      catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        throw new RuntimeException(e);
+      }
+    };
   }
 
   @NotNull
   @Override
   public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlCompositeElementImpl(node);
+    return myInstanceFactory.apply(node);
   }
 }

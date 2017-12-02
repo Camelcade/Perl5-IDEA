@@ -30,12 +30,21 @@ import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Function;
+
 /**
  * Created by hurricup on 23.10.2016.
  */
 public abstract class PerlLazyBlockElementType extends ILazyParseableElementType implements PsiElementProvider {
+  private final Function<ASTNode, PsiElement> myInstanceFactory;
+
   public PerlLazyBlockElementType(@NotNull @NonNls String debugName) {
+    this(debugName, PerlCompositeElementImpl.class);
+  }
+
+  public PerlLazyBlockElementType(@NotNull @NonNls String debugName, @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, PerlLanguage.INSTANCE);
+    myInstanceFactory = PerlElementTypeEx.createInstanceFactory(clazz);
   }
 
   @Override
@@ -66,7 +75,7 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
 
   @NotNull
   @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlCompositeElementImpl(node);
+  public final PsiElement getPsiElement(@NotNull ASTNode node) {
+    return myInstanceFactory.apply(node);
   }
 }

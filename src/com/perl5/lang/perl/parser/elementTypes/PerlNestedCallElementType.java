@@ -23,13 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlNestedCallElementType extends PerlElementTypeEx {
   public PerlNestedCallElementType(@NotNull String debugName) {
-    super(debugName);
-  }
-
-  @NotNull
-  @Override
-  public PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlNestedCallImpl(node);
+    super(debugName, PsiPerlNestedCallImpl.class);
   }
 }
 

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
 import com.perl5.lang.perl.parser.PerlLazyQXStringContentParser;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +30,10 @@ import org.jetbrains.annotations.NotNull;
 public class PerlLazyQXStringElementType extends PerlLazyBlockElementType {
   public PerlLazyQXStringElementType(String name) {
     super(name);
+  }
+
+  public PerlLazyQXStringElementType(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
+    super(debugName, clazz);
   }
 
   @NotNull
