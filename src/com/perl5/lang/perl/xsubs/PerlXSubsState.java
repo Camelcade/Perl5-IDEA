@@ -28,6 +28,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.Result;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.*;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
@@ -73,6 +74,7 @@ import java.util.Set;
 )
 
 public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> {
+  private static final Logger LOG = Logger.getInstance(PerlXSubsState.class);
   @Transient
   public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
   @Transient
@@ -213,6 +215,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     }
 
     try {
+      LOG.info("Deparsing: " + commandLine.getCommandLineString());
       final CapturingProcessHandler processHandler =
         new CapturingProcessHandler(commandLine.createProcess(), CharsetToolkit.UTF8_CHARSET, commandLine.getCommandLineString());
 
@@ -285,6 +288,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
                   }
                 }
                 catch (IOException e) {
+                  LOG.warn("Error creating deparsed file", e);
                   Notifications.Bus.notify(new Notification(
                     "PERL5_DEPARSING_ERROR",
                     "Error creating XSubs deparsed file",
@@ -304,6 +308,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       parserTask.queue();
     }
     catch (ExecutionException e) {
+      LOG.warn("Error deparsing", e);
       Notifications.Bus.notify(new Notification(
         "PERL5_START_ERROR",
         "XSubs deparser report",
