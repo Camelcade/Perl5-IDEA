@@ -259,7 +259,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
           if (!stdout.isEmpty() && !myProject.isDisposed()) {
             new WriteAction<Object>() {
               @Override
-              protected void run(@NotNull Result<Object> result) throws Throwable {
+              protected void run(@NotNull Result<Object> result) {
                 try {
                   VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
                   newFile.setWritable(true);
@@ -321,21 +321,6 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
 
     persisted.setProject(project);
     return persisted;
-  }
-
-  private static boolean isXSFile(@NotNull VirtualFile file) {
-    if (!file.isValid() || file.isDirectory() || file instanceof LightVirtualFile) {
-      return false;
-    }
-
-    String name = file.getName();
-
-
-    if (StringUtil.endsWith(name, getXSBinaryExtension())) {
-      String path = file.getCanonicalPath();
-      return path != null && StringUtil.contains(path, "/auto/");
-    }
-    return false;
   }
 
   @NotNull

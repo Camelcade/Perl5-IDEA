@@ -34,10 +34,7 @@ public class PerlXSubsProjectComponent implements ProjectComponent {
 
   @Override
   public void projectOpened() {
-    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() ->
-                                                                      {
-                                                                        PerlXSubsState.getInstance(myProject).rescanFiles();
-                                                                      });
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> PerlXSubsState.getInstance(myProject).rescanFiles());
   }
 
   @Override
