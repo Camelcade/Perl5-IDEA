@@ -19,10 +19,26 @@ package com.perl5.lang.perl.idea.coverage;
 import com.intellij.coverage.CoverageRunner;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.io.FileUtil;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfiguration {
+  private static final Logger LOG = Logger.getInstance(PerlCoverageEnabledConfiguration.class);
+
   public PerlCoverageEnabledConfiguration(RunConfigurationBase configuration) {
     super(configuration);
     setCoverageRunner(CoverageRunner.getInstance(PerlCoverageRunner.class));
+  }
+
+  @Nullable
+  @Override
+  public String getCoverageFilePath() {
+    String coverageBasePath = super.getCoverageFilePath();
+    if (coverageBasePath == null) {
+      LOG.warn("Empty coverage database path");
+      return ".";
+    }
+    return FileUtil.toSystemIndependentName(coverageBasePath);
   }
 }
