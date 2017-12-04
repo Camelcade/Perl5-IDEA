@@ -28,8 +28,12 @@ import com.intellij.execution.util.ExecUtil;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -57,26 +61,49 @@ public class PerlCoverageRunner extends CoverageRunner {
     if (!(baseCoverageSuite instanceof PerlCoverageSuite)) {
       return null;
     }
-    Project project = baseCoverageSuite.getProject();
-    VirtualFile coverFile = PerlRunUtil.findLibraryScriptWithNotification(project, COVER, COVER_LIB);
-    if (coverFile == null) {
-      return null;
-    }
+    if (ApplicationManager.getApplication().isDispatchThread()) {
+      final Ref<ProjectData> projectDataRef = new Ref<>();
 
-    String libRoot = PerlPluginUtil.getPluginPerlLibRoot();
-    if (libRoot == null) {
-      return null;
-    }
+      ProgressManager.getInstance().runProcessWithProgressSynchronously(
+        () -> projectDataRef.set(doLoadCoverageData(sessionDataFile, (PerlCoverageSuite)baseCoverageSuite)),
+        "Loading Coverage Data...", true, baseCoverageSuite.getProject());
 
-    GeneralCommandLine perlCommandLine = PerlRunUtil.getPerlCommandLine(project, coverFile,
-                                                                        "-I" + FileUtil.toSystemIndependentName(libRoot));
-    if (perlCommandLine == null) {
-      return null; // fixme should be a notification
+      return projectDataRef.get();
     }
+    else {
+      return doLoadCoverageData(sessionDataFile, (PerlCoverageSuite)baseCoverageSuite);
+    }
+  }
 
-    perlCommandLine.addParameters(
-      "--silent", "--nosummary", "-report", "camelcade", sessionDataFile.getAbsolutePath()
-    );
+  @Nullable
+  private static ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
+    Project project = perlCoverageSuite.getProject();
+    GeneralCommandLine perlCommandLine = ReadAction.compute(() -> {
+      if (project.isDisposed()) {
+        return null;
+      }
+      VirtualFile coverFile = PerlRunUtil.findLibraryScriptWithNotification(project, COVER, COVER_LIB);
+      if (coverFile == null) {
+        return null;
+      }
+
+      String libRoot = PerlPluginUtil.getPluginPerlLibRoot();
+      if (libRoot == null) {
+        return null;
+      }
+
+      GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, coverFile,
+                                                                      "-I" + FileUtil.toSystemIndependentName(libRoot));
+      if (commandLine == null) {
+        return null; // fixme should be a notification
+      }
+
+      commandLine.addParameters(
+        "--silent", "--nosummary", "-report", "camelcade", sessionDataFile.getAbsolutePath()
+      );
+      return commandLine;
+    });
+
 
     try {
       LOG.info("Loading coverage by: " + perlCommandLine.getCommandLineString());
@@ -115,6 +142,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     return null;
   }
 
+  @NotNull
   private static ProjectData parsePerlFileData(@NotNull PerlFileData[] filesData) {
     ProjectData projectData = new ProjectData();
     for (PerlFileData perlFileData : filesData) {
@@ -151,15 +179,19 @@ public class PerlCoverageRunner extends CoverageRunner {
   }
 
   private static void showError(@NotNull Project project, @NotNull String message) {
-    Notifications.Bus.notify(
-      new Notification(
-        PerlBundle.message("perl.coverage.loading.error"),
-        PerlBundle.message("perl.coverage.loading.error"),
-        message,
-        NotificationType.ERROR
-      ),
-      project
-    );
+    ReadAction.run(() -> {
+      if (!project.isDisposed()) {
+        Notifications.Bus.notify(
+          new Notification(
+            PerlBundle.message("perl.coverage.loading.error"),
+            PerlBundle.message("perl.coverage.loading.error"),
+            message,
+            NotificationType.ERROR
+          ),
+          project
+        );
+      }
+    });
   }
 
   @Override
