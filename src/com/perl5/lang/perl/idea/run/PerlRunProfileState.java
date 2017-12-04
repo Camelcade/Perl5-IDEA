@@ -21,6 +21,7 @@ import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessOutputTypes;
 import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
@@ -114,9 +115,19 @@ public class PerlRunProfileState extends CommandLineState {
 
     commandLine.setCharset(charset);
     commandLine.withWorkDirectory(homePath);
-    commandLine.withEnvironment(calcEnv(runProfile));
+    Map<String, String> environment = calcEnv(runProfile);
+    commandLine.withEnvironment(environment);
     commandLine.setPassParentEnvironment(runProfile.isPassParentEnvs());
-    OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset);
+    OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset) {
+      @Override
+      public void startNotify() {
+        super.startNotify();
+        String perl5Opt = environment.get(PerlRunUtil.PERL5OPT);
+        if (StringUtil.isNotEmpty(perl5Opt)) {
+          notifyTextAvailable(" - " + PerlRunUtil.PERL5OPT + "=" + perl5Opt + '\n', ProcessOutputTypes.SYSTEM);
+        }
+      }
+    };
     ProcessTerminatedListener.attach(handler, project);
     return handler;
   }
