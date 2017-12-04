@@ -32,18 +32,18 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by hurricup on 26.04.2016.
  */
 public class PerlRunUtil {
+  public static final String PERL5OPT = "PERL5OPT";
+
   @Nullable
   public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
                                                       @Nullable VirtualFile scriptFile,
@@ -51,6 +51,29 @@ public class PerlRunUtil {
     String perlPath = PerlProjectManager.getSdkPath(project, scriptFile);
     return perlPath == null ? null : getPerlCommandLine(project, perlPath, scriptFile, perlParameters);
   }
+
+  /**
+   * Creates or appends additionalOpts separated by space to PERL5OPT environment variable
+   *
+   * @param originalMap    original environment
+   * @param additionalOpts options to add
+   * @return patched environment
+   **/
+  @NotNull
+  public static Map<String, String> withPerl5Opts(@NotNull Map<String, String> originalMap, @NotNull String... additionalOpts) {
+    THashMap<String, String> newMap = new THashMap<>(originalMap);
+    String currentOpt = originalMap.get(PERL5OPT);
+
+    ArrayList<String> options = new ArrayList<>();
+    if (StringUtil.isNotEmpty(currentOpt)) {
+      options.add(currentOpt);
+    }
+    options.addAll(Arrays.asList(additionalOpts));
+
+    newMap.put(PERL5OPT, StringUtil.join(options, " "));
+    return newMap;
+  }
+
 
   @NotNull
   public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
