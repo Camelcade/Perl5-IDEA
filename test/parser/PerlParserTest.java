@@ -30,6 +30,8 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testIssue1655() {doTest();}
+
   public void testForIndexedContinue() {doTest(false);}
 
   public void testForEachIndexedContinue() {doTest(false);}
