@@ -21,11 +21,13 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.Result;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.diagnostic.Logger;
@@ -46,6 +48,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.GlobalSearchScopesCore;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.FileContentUtil;
+import com.intellij.util.Function;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
@@ -57,7 +60,6 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
@@ -77,12 +79,10 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   private static final Logger LOG = Logger.getInstance(PerlXSubsState.class);
   @Transient
   public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
-  @Transient
-  public static final String PERL_XSUBS_NOTIFICATION_GROUP = "PERL5_XSUBS";
   public boolean isActual = true;
-  public Map<String, Long> filesMap = new THashMap<>();
+  public Map<String, Long> myFilesMap = new THashMap<>();
   @Transient
-  private Task.Backgroundable parserTask = null;
+  private Task.Backgroundable myParserTask = null;
   @Transient
   private Project myProject;
 
@@ -158,7 +158,18 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
         isActual = isActual && (filesCounter == 0 || myProject.getBaseDir().findFileByRelativePath(DEPARSED_FILE_NAME) != null);
 
         if (!isActual) {
-          notifyUser();
+          showNotification(
+            PerlBundle.message("perl.deparsing.change.detected.title"),
+            PerlBundle.message("perl.deparsing.change.detected.message"),
+            NotificationType.INFORMATION,
+            notification -> Collections.singletonList(new AnAction(PerlBundle.message("perl.deparsing.action")) {
+              @Override
+              public void actionPerformed(AnActionEvent e) {
+                notification.expire();
+                reparseXSubs();
+              }
+            })
+          );
         }
       }
 
@@ -173,29 +184,10 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     String path = virtualFile.getCanonicalPath();
 
     if (path != null) {
-      Long modificationStamp = filesMap.get(path);
+      Long modificationStamp = myFilesMap.get(path);
       return modificationStamp != null && modificationStamp == VfsUtilCore.virtualToIoFile(virtualFile).lastModified();
     }
     return false;
-  }
-
-  public void notifyUser() {
-    Notification notification = new Notification(
-      PERL_XSUBS_NOTIFICATION_GROUP,
-      "XSubs change detected",
-      "<p>It seems that yor XSubs declarations file is absent or outdated.</p><br/>" +
-      "<p>We recommend you to <a href=\"http://regenerate\">regenerate</a> it.</p><br/>" +
-      "<p>You may do it any time in Perl5 settings.</p><br/>",
-      NotificationType.INFORMATION,
-      new NotificationListener.UrlOpeningListener(false) {
-        @Override
-        protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
-          reparseXSubs();
-          notification.expire();
-        }
-      }
-    );
-    Notifications.Bus.notify(notification);
   }
 
   public void reparseXSubs() {
@@ -203,9 +195,12 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       return;
     }
 
-    if (parserTask != null) {
-      Messages.showErrorDialog(myProject, "Another process currently deparsing XSubs, please wait for further notifications",
-                               "XSubs Deparsing In Process");
+    if (myParserTask != null) {
+      Messages.showErrorDialog(
+        myProject,
+        PerlBundle.message("perl.deparsing.in.progress.message"),
+        PerlBundle.message("perl.deparsing.in.progress.title")
+      );
       return;
     }
 
@@ -219,50 +214,51 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       final CapturingProcessHandler processHandler =
         new CapturingProcessHandler(commandLine.createProcess(), CharsetToolkit.UTF8_CHARSET, commandLine.getCommandLineString());
 
-      parserTask = new Task.Backgroundable(myProject, PerlBundle.message("perl.deparsing.xsubs"), false) {
+      myParserTask = new Task.Backgroundable(myProject, PerlBundle.message("perl.deparsing.xsubs"), false) {
         @Override
         public void run(@NotNull ProgressIndicator indicator) {
-          if (myProject.isDisposed()) {
+          Map<String, Long> newFilesMap = ReadAction.compute(() -> {
+            if (myProject.isDisposed()) {
+              return null;
+            }
+            final Map<String, Long> result = new THashMap<>();
+            for (VirtualFile virtualFile : getAllXSFiles(myProject)) {
+              if (virtualFile.isValid()) {
+                String filePath = virtualFile.getCanonicalPath();
+                if (filePath != null) {
+                  result.put(filePath, VfsUtilCore.virtualToIoFile(virtualFile)
+                    .lastModified());
+                }
+              }
+            }
+            return result;
+          });
+          if (newFilesMap == null) {
+            myParserTask = null;
             return;
           }
 
-          final Map<String, Long> newFilesMap = new THashMap<>();
-
-          ApplicationManager.getApplication().runReadAction(() ->
-                                                            {
-                                                              for (VirtualFile virtualFile : getAllXSFiles(myProject)) {
-                                                                if (virtualFile.isValid()) {
-                                                                  String filePath = virtualFile.getCanonicalPath();
-                                                                  if (filePath != null) {
-                                                                    newFilesMap.put(filePath, VfsUtilCore.virtualToIoFile(virtualFile)
-                                                                      .lastModified());
-                                                                  }
-                                                                }
-                                                              }
-                                                            });
-
           ProcessOutput processOutput = processHandler.runProcess();
           final String stdout = processOutput.getStdout();
-          List<String> stderr = processOutput.getStderrLines(false);
+          String stderr = processOutput.getStderr();
+          int exitCode = processOutput.getExitCode();
+          LOG.info("Deparsing finished with exit code: " + exitCode +
+                   (StringUtil.isEmpty(stderr) ? "" : ". STDERR:\n" + stderr));
 
-          final StringBuilder messageBuilder = new StringBuilder();
-          if (!stderr.isEmpty()) {
-            for (String errorMessage : stderr) {
-              if (errorMessage.equals("\n")) {
-                messageBuilder.append("<br/>");
-              }
-              else {
-                messageBuilder.append("<p>");
-                messageBuilder.append(errorMessage);
-                messageBuilder.append("</p>");
-              }
-            }
+          if (exitCode != 0) {
+            showNotification(
+              PerlBundle.message("perl.deparsing.error.execution"),
+              stderr,
+              NotificationType.ERROR
+            );
           }
-
-          if (!stdout.isEmpty() && !myProject.isDisposed()) {
-            new WriteAction<Object>() {
-              @Override
-              protected void run(@NotNull Result<Object> result) {
+          else if (!stdout.isEmpty()) {
+            Application application = ApplicationManager.getApplication();
+            application.invokeAndWait(
+              () -> WriteAction.run(() -> {
+                if (myProject.isDisposed()) {
+                  return;
+              }
                 try {
                   VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
                   newFile.setWritable(true);
@@ -272,50 +268,61 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
                   newFile.setWritable(false);
                   FileContentUtil.reparseFiles(newFile);
 
+                  myFilesMap = newFilesMap;
                   isActual = true;
 
-                  messageBuilder.append("<p>");
-                  messageBuilder.append("Deparsing completed successfully!");
-                  messageBuilder.append("</p><br/>");
-
-                  if (messageBuilder.length() > 0) {
-                    Notifications.Bus.notify(new Notification(
-                      "PERL5_DEPARSING_REPORT",
-                      "XSubs deparsing finished",
-                      messageBuilder.toString(),
-                      NotificationType.INFORMATION
-                    ));
-                  }
+                  showNotification(
+                    PerlBundle.message("perl.deparsing.finished"),
+                    "",
+                    NotificationType.INFORMATION
+                  );
                 }
                 catch (IOException e) {
                   LOG.warn("Error creating deparsed file", e);
-                  Notifications.Bus.notify(new Notification(
-                    "PERL5_DEPARSING_ERROR",
-                    "Error creating XSubs deparsed file",
+                  showNotification(
+                    PerlBundle.message("perl.deparsing.error.creating.file"),
                     e.getMessage(),
                     NotificationType.ERROR
-                  ));
+                  );
                 }
-                finally {
-                  PerlXSubsState.this.parserTask = null;
-                  filesMap = newFilesMap;
-                }
-              }
-            }.execute();
+                // fixme fix modality state
+              }));
           }
+          myParserTask = null;
         }
       };
-      parserTask.queue();
+      myParserTask.queue();
     }
     catch (ExecutionException e) {
       LOG.warn("Error deparsing", e);
-      Notifications.Bus.notify(new Notification(
-        "PERL5_START_ERROR",
-        "XSubs deparser report",
+
+      showNotification(
+        PerlBundle.message("perl.deparsing.error.execution"),
         e.getMessage(),
         NotificationType.ERROR
-      ));
+      );
     }
+  }
+
+  private void showNotification(@NotNull String title,
+                                @NotNull String message,
+                                @NotNull NotificationType type) {
+    showNotification(title, message, type, null);
+  }
+
+  private void showNotification(@NotNull String title,
+                                @NotNull String message,
+                                @NotNull NotificationType type,
+                                @Nullable Function<Notification, List<AnAction>> actionsProvider) {
+    Notification notification = new Notification(PerlBundle.message("perl.deparsing.notification"), title, message, type);
+
+    if (actionsProvider != null) {
+      List<AnAction> actions = actionsProvider.fun(notification);
+      if (actions != null) {
+        actions.forEach(notification::addAction);
+      }
+    }
+    Notifications.Bus.notify(notification, myProject);
   }
 
   public static PerlXSubsState getInstance(@NotNull Project project) {
