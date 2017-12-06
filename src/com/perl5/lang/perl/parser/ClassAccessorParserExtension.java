@@ -43,6 +43,11 @@ public class ClassAccessorParserExtension extends PerlParserExtensionBase {
     TOKENS_MAP.put("mk_wo_accessors", RESERVED_MK_WO_ACCESSORS);
 
     TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
+  }
+
+  @Override
+  public void addHighlighting() {
+    super.addHighlighting();
     PerlSyntaxHighlighter.safeMap(PERL_SUB_DEFINITION, TOKENS_SET);
   }
 

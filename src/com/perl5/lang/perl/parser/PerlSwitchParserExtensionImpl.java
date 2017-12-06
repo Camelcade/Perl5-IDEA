@@ -35,7 +35,9 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension implement
     RESERVED_CASE, RESERVED_SWITCH
   );
 
-  static {
+  @Override
+  public void addHighlighting() {
+    super.addHighlighting();
     PerlSyntaxHighlighter.safeMap(PerlSyntaxHighlighter.PERL_KEYWORD, TOKENS_SET);
   }
 

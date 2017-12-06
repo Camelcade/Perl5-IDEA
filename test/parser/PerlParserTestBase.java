@@ -16,10 +16,9 @@
 
 package parser;
 
-import com.intellij.core.CoreApplicationEnvironment;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.openapi.extensions.Extensions;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
@@ -28,10 +27,19 @@ import com.intellij.testFramework.ParsingTestCase;
 import com.intellij.testFramework.TestDataFile;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor;
+import com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor;
+import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
+import com.perl5.lang.perl.parser.ClassAccessorParserExtension;
+import com.perl5.lang.perl.parser.MojoParserExtension;
+import com.perl5.lang.perl.parser.MooseParserExtension;
+import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodParserDefinition;
 import org.jetbrains.annotations.NonNls;
@@ -94,14 +102,29 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    CoreApplicationEnvironment.registerExtensionPointAndExtensions(new File("resources"), "plugin.xml", Extensions.getRootArea());
     registerApplicationService(TemplateDataLanguageMappings.class, new TemplateDataLanguageMappings(getProject()));
     registerApplicationService(TemplateDataLanguagePatterns.class, new TemplateDataLanguagePatterns());
-    LanguageParserDefinitions.INSTANCE.addExplicitExtension(PerlLanguage.INSTANCE, new PerlParserDefinition());
-    LanguageParserDefinitions.INSTANCE.addExplicitExtension(PodLanguage.INSTANCE, new PodParserDefinition());
-    myProject.addComponent(PerlNamesCache.class, new PerlNamesCache(myProject));
-    new PerlParserExtensions().initComponent();
-    getProject().registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
+
+    addExplicitExtension(LanguageParserDefinitions.INSTANCE, PerlLanguage.INSTANCE, new PerlParserDefinition());
+    addExplicitExtension(LanguageParserDefinitions.INSTANCE, PodLanguage.INSTANCE, new PodParserDefinition());
+
+    registerComponentInstance(myProject, PerlNamesCache.class, new PerlNamesCache(myProject));
+
+    registerExtensionPoint(PerlParserExtension.EP_NAME, PerlParserExtension.class);
+    registerExtension(PerlParserExtension.EP_NAME, new MooseParserExtension());
+    registerExtension(PerlParserExtension.EP_NAME, new PerlSwitchParserExtensionImpl());
+    registerExtension(PerlParserExtension.EP_NAME, new ClassAccessorParserExtension());
+    registerExtension(PerlParserExtension.EP_NAME, new MojoParserExtension());
+
+    PerlParserExtensions parserExtensions = new PerlParserExtensions();
+    registerComponentInstance(ApplicationManager.getApplication(), PerlParserExtensions.class, parserExtensions);
+    parserExtensions.initComponent();
+
+    PerlPackageProcessorEP.EP.addExplicitExtension("constant", new ConstantProcessor());
+    PerlPackageProcessorEP.EP.addExplicitExtension("vars", new VarsProcessor());
+    PerlPackageProcessorEP.EP.addExplicitExtension("Exception::Class", new ExceptionClassProcessor());
+
+    myProject.registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
   }
 
   protected String loadFile(@NonNls @TestDataFile String name) throws IOException {

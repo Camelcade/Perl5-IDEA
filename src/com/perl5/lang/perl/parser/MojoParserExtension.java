@@ -40,6 +40,11 @@ public class MojoParserExtension extends PerlParserExtensionBase implements Mojo
     TOKENS_MAP.put(KEYWORD_MOJO_HELPER_METHOD, MOJO_HELPER_METHOD);
 
     TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(new IElementType[TOKENS_MAP.values().size()]));
+  }
+
+  @Override
+  public void addHighlighting() {
+    super.addHighlighting();
     PerlSyntaxHighlighter.safeMap(PERL_SUB_DEFINITION, TOKENS_SET);
   }
 

@@ -28,6 +28,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.adapters.PerlHighlightingLexerAdapter;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
@@ -172,6 +173,9 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
     safeMap(TokenSet.andNot(OPERATORS_TOKENSET, TokenSet.create(COMMA, FAT_COMMA, OPERATOR_DEREFERENCE)), PERL_OPERATOR);
 
     //		safeMap(PERL_REGEX_CHAR_CLASS, REGEX_CHAR_CLASS, REGEX_POSIX_CLASS_NAME);
+    for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions()) {
+      extension.addHighlighting();
+    }
   }
 
 

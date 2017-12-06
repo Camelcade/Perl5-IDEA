@@ -113,4 +113,10 @@ public abstract class PerlParserExtension {
   public boolean parseNestedElement(PerlBuilder b, int l) {
     return false;
   }
+
+  /**
+   * Callback to add highlighting tokens
+   */
+  public void addHighlighting() {
+  }
 }
