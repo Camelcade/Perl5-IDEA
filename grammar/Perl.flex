@@ -62,14 +62,15 @@ FARROW = "=>"
 BAREWORD_MINUS = "-" ? {IDENTIFIER}
 
 // qualified identifer can't start with ', but variable can
-QUALIFIED_IDENTIFIER = ("::"+ "'" ?) ? {IDENTIFIER} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER_CONTINUE} )*  "::" *
+QUALIFIED_IDENTIFIER_TAIL = ("::"+ "'" ? | "::"* "'" ) {IDENTIFIER_CONTINUE}
+QUALIFIED_IDENTIFIER = ("::"+ "'" ?) ? {IDENTIFIER} {QUALIFIED_IDENTIFIER_TAIL}*  "::" *
 VARIABLE_QUALIFIED_IDENTIFIER = ("::"* "'" ?) ? {IDENTIFIER_CONTINUE} (("::"+ "'" ? | "::"* "'" ) {IDENTIFIER_CONTINUE} )*  "::" *
 
 DQ_STRING = "\"" ([^\"]|"\\\\"|"\\\"" )* "\""?
 SQ_STRING = "\'" ([^\']|"\\\\"|"\\\'" )* "\'"?
 XQ_STRING = "\`" ([^\`]|"\\\\"|"\\\`" )* "\`"?
 
-QUOTE_LIKE_SUFFIX= ("'" {IDENTIFIER_CONTINUE}? ("'" {IDENTIFIER_CONTINUE}? "'") ? )?
+QUOTE_LIKE_SUFFIX= ("'" ({IDENTIFIER_CONTINUE} {QUALIFIED_IDENTIFIER_TAIL}*)? ("'" {IDENTIFIER_CONTINUE}? "'") ? )?
 CORE_PREFIX = "CORE::"?
 
 PERL_VERSION_CHUNK = [0-9][0-9_]*

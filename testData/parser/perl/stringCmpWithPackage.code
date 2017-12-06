@@ -1,0 +1,19 @@
+$a eq'some::thing';
+$a lt'some::thing';
+$a gt'some::thing';
+$a le'some::thing';
+$a ge'some::thing';
+$a eq'some::thing';
+$a ne'some::thing';
+$a cmp'some::thing';
+
+$a eq'some::other::thing';
+$a lt'some::other::thing';
+$a gt'some::other::thing';
+$a le'some::other::thing';
+$a ge'some::other::thing';
+$a eq'some::other::thing';
+$a ne'some::other::thing';
+$a cmp'some::other::thing';
+
+*{$M.'is::e'}=sub{my($P,$e,$o)=@_;$o->{is}=sub{my($m,$n,%a)=@_;$a{is}or return$m;sub{$#_&&$a{is}eq'ro'&&caller ne'Mo::coerce'?die$n.' is ro':$m->(@_)}}};
