@@ -5,7 +5,7 @@ out/
 classes/
 gen/
 *.iml
-camelcade.jar
-.idea/misc.xml
-.idea/vcs.xml
-.idea/compiler.xml
+.idea/
+tmp/
+icons/*.psd
+
