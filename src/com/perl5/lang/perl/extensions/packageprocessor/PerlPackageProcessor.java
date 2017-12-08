@@ -36,7 +36,7 @@ public interface PerlPackageProcessor {
   boolean isPragma();
 
   /**
-   * Retuns list of imported descriptors
+   * Returns list of imported descriptors
    *
    * @param useStatement use statement psi element
    * @return list of imported descriptors
