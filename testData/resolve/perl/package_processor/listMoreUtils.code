@@ -1,0 +1,4 @@
+package Foo::Bar;
+
+use List::MoreUtils qw/apply singleton zip/<caret>;
+

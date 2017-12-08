@@ -1,0 +1,5 @@
+Subs:
+    apply => List::MoreUtils::PP::apply
+    singleton => List::MoreUtils::PP::singleton
+    zip => List::MoreUtils::PP::zip
+

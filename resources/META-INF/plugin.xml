@@ -42,6 +42,7 @@
      <p>Updates:
      <ul>
        <li>Run with Coverage is now available. Requires <code>Devel::Cover</code> module</li>
+       <li><code>List::MoreUtils</code> imports should work properly. Plugin supposes PP implementations. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1658">#1658</a></li>
      </ul>
      </p>
 <!--
@@ -127,6 +128,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor"/>
     <packageProcessor key="Exception::Class"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor"/>
+    <packageProcessor key="List::MoreUtils"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ListMoreUtilsProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>

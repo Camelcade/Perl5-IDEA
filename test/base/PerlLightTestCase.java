@@ -81,6 +81,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -91,13 +92,11 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashSet;
 import junit.framework.AssertionFailedError;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
@@ -1109,4 +1108,38 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     myFixture.type('\n');
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
+
+  protected void doTestPackageProcessorDescriptors() {
+    initWithFileSmartWithoutErrors();
+    PsiElement elementAtCaret = getElementAtCaretWithoutInjection();
+    assertNotNull(elementAtCaret);
+    PerlNamespaceDefinitionElement namespace = PerlPackageUtil.getNamespaceContainerForElement(elementAtCaret);
+    assertNotNull(namespace);
+    StringBuilder sb = new StringBuilder();
+
+    appendDescriptors("Scalars", sb, namespace.getImportedScalarDescriptors());
+    appendDescriptors("Arrays", sb, namespace.getImportedArrayDescriptors());
+    appendDescriptors("Hashes", sb, namespace.getImportedHashDescriptors());
+    appendDescriptors("Subs", sb, namespace.getImportedSubsDescriptors());
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  private void appendDescriptors(@NotNull String sectionLabel,
+                                 @NotNull StringBuilder sb,
+                                 @NotNull List<PerlExportDescriptor> exportDescriptors) {
+    if (exportDescriptors.isEmpty()) {
+      return;
+    }
+    sb.append(sectionLabel).append(":\n");
+    for (PerlExportDescriptor descriptor : exportDescriptors) {
+      sb.append("    ")
+        .append(descriptor.getImportedName())
+        .append(" => ")
+        .append(descriptor.getTargetCanonicalName())
+        .append("\n");
+    }
+    sb.append("\n");
+  }
+
 }
