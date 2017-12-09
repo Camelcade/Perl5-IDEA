@@ -25,10 +25,11 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -64,32 +65,36 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     List<PerlExportDescriptor> result = new ArrayList<>();
     String packageName = useStatement.getPackageName();
     if (packageName != null) {
-      List<String> parameters = useStatement.getImportParameters();
-      //			System.err.println("Import parameters for " + packageName + " are " + parameters);
-      Set<String> exportNames = new HashSet<>();
-      Set<String> exportOkNames = new HashSet<>();
+      List<String> importParameters = getImportParameters(useStatement);
+      Set<String> exportNames = new THashSet<>();
+      Set<String> exportOkNames = new THashSet<>();
 
       addExports(useStatement, exportNames, exportOkNames);
 
-      if (parameters == null)    // default import
-      {
-        for (String item : exportNames) {
-          result.add(PerlExportDescriptor.create(packageName, item));
-        }
+      if (importParameters == null) {
+        exportNames.forEach(name -> result.add(PerlExportDescriptor.create(packageName, name)));
       }
       else {
-        for (String parameter : parameters) {
-          if (exportOkNames.contains(parameter)) {
-            result.add(PerlExportDescriptor.create(packageName, parameter));
-          }
-        }
+        importParameters.stream()
+          .filter(exportOkNames::contains)
+          .forEach(name -> result.add(PerlExportDescriptor.create(packageName, name)));
       }
     }
 
-    //		System.err.println("Imported from " + packageName + ": " + result);
-
     return result;
   }
+
+  /**
+   * Returns import parameters. Here you may filter some meaningless params
+   *
+   * @param useStatement use statement we are processing
+   * @return list of imported parameters or null if use has no parameters
+   */
+  @Nullable
+  protected List<String> getImportParameters(@NotNull PerlUseStatement useStatement) {
+    return useStatement.getImportParameters();
+  }
+
 
   protected static boolean wrapExpression(@NotNull IElementType elementType, @NotNull PerlBuilder b, int l) {
     PerlParserUtil.passPackageAndVersion(b, l);
