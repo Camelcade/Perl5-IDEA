@@ -19,6 +19,14 @@ package editor.quoteLike;
 import editor.PerlTypingTestCase;
 
 public class PerlQuoteWithoutPrefixTest extends PerlTypingTestCase {
+  public void testHeredocReplace() {doTest("<<caret>>", "<", "<<<caret>");}
+
+  public void testHeredocNotReplace() {doTest("qq<<caret>>", "<", "qq<<<caret>>");}
+
+  public void testHeredocReplaceWithOffset() {doTest("say <<caret>>", "<", "say <<<caret>");}
+
+  public void testHeredocNotReplaceWithOffset() {doTest("say qq<<caret>>", "<", "say qq<<<caret>>");}
+
   public void testAfterRe() {doTest("$a =~ <caret>", "/", "$a =~ /<caret>/");}
 
   public void testAfterNotRe() {doTest("$a !~ <caret>", "/", "$a !~ /<caret>/");}

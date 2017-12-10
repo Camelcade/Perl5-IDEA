@@ -59,13 +59,25 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
   public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset();
-    CharSequence documentSequence = editor.getDocument().getCharsSequence();
+    Document document = editor.getDocument();
+    CharSequence documentSequence = document.getCharsSequence();
     if (currentOffset >= documentSequence.length()) {
       return Result.CONTINUE;
     }
 
-    HighlighterIterator iterator = ((EditorEx)editor).getHighlighter().createIterator(currentOffset);
-    if (QUOTE_CLOSE_FIRST_ANY.contains(iterator.getTokenType()) && c == documentSequence.charAt(currentOffset)) {
+    EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
+    HighlighterIterator iterator = highlighter.createIterator(currentOffset);
+    IElementType nextTokenType = iterator.getTokenType();
+    char nextChar = documentSequence.charAt(currentOffset);
+    if (c == '<' && nextTokenType == QUOTE_DOUBLE_CLOSE && nextChar == '>' &&
+        currentOffset > 0 && documentSequence.charAt(currentOffset - 1) == '<' &&
+        (currentOffset < 3 || PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(currentOffset - 2)) != RESERVED_QQ)) {
+      document.replaceString(currentOffset, currentOffset + 1, "<");
+      caretModel.moveToOffset(currentOffset + 1);
+      return Result.STOP;
+    }
+
+    if (QUOTE_CLOSE_FIRST_ANY.contains(nextTokenType) && c == nextChar) {
       caretModel.moveToOffset(currentOffset + 1);
       return Result.STOP;
     }
