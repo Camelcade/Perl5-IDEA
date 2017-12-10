@@ -1,0 +1,7 @@
+package MySome;
+
+use Test::More tests => 123;
+
+ok();
+can_ok();
+isa_ok();

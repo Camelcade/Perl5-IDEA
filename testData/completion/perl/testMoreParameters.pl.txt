@@ -1,0 +1,31 @@
+Lookups: $TODO; Text: $TODO; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: BAIL_OUT; Text: BAIL_OUT; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: can_ok; Text: can_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: cmp_ok; Text: cmp_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: diag; Text: diag; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: done_testing; Text: done_testing; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: eq_array; Text: eq_array; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: eq_hash; Text: eq_hash; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: eq_set; Text: eq_set; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: explain; Text: explain; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: fail; Text: fail; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: is; Text: is; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: is_deeply; Text: is_deeply; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: isa_ok; Text: isa_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: isnt; Text: isnt; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: like; Text: like; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: new_ok; Text: new_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: no_plan; Text: no_plan; Tail: null; Type: ; Icon: /option.png; Type Icon: null
+Lookups: note; Text: note; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: ok; Text: ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: pass; Text: pass; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: plan; Text: plan; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: require_ok; Text: require_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: skip; Text: skip; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: skip_all; Text: skip_all; Tail: null; Type: Skip all tests; Icon: /option.png; Type Icon: null
+Lookups: subtest; Text: subtest; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: tests; Text: tests; Tail: null; Type: Number of tests expected; Icon: /option.png; Type Icon: null
+Lookups: todo; Text: todo; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: todo_skip; Text: todo_skip; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: unlike; Text: unlike; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: use_ok; Text: use_ok; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null

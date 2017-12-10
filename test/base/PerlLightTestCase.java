@@ -192,6 +192,31 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       }));
   }
 
+  /**
+   * Adds a library from testData/testLibSets as external dependency
+   *
+   * @param testLibraryName library name
+   */
+  protected void addTestLibrary(@NotNull String testLibraryName) {
+    Application application = ApplicationManager.getApplication();
+    application.invokeAndWait(() -> application.runWriteAction(
+      () -> {
+        VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath(
+          FileUtil.join("testData", "testLibSets", testLibraryName)
+        );
+        assert libdir != null;
+
+        PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
+        perlProjectManager.addExternalLibrary(libdir);
+
+        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+      }));
+  }
+
+  protected void addTestMore() {
+    addTestLibrary("test_more");
+  }
+
   public void initWithPerlTidy() {
     initWithPerlTidy("perlTidy");
   }

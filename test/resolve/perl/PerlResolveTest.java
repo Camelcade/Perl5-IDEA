@@ -28,6 +28,11 @@ public class PerlResolveTest extends PerlLightTestCase {
     return "testData/resolve/perl";
   }
 
+  public void testTestMoreWithPlan() {
+    addTestMore();
+    doTestResolve();
+  }
+
   public void testIssue1646() {doTestResolve();}
 
   public void testRegexpMatchesVariables() {doTestResolve();}

@@ -35,6 +35,11 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     return "testData/completion/perl";
   }
 
+  public void testTestMoreParameters() {
+    addTestMore();
+    doTestCompletion();
+  }
+
   public void testListMoreUtilsParams() {doTestCompletion();}
 
   public void testBuiltInPackageExtension() {doTestCompletion();}

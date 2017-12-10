@@ -7,11 +7,11 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     multiconst1 in Package.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 257 in Package.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
-    somesub1 in Package.pm; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub1 at 151 in Package.pm
-    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
-
     someconst1 in Package.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 194 in Package.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
+
+    somesub1 in Package.pm; /subroutine_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub1 at 151 in Package.pm
+    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
   ImportOk in perlImports.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ImportOk at 45 in perlImports.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
@@ -33,4 +33,3 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
 
     MULTICONST2 in Package.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 276 in Package.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
-
