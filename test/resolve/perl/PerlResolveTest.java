@@ -30,127 +30,127 @@ public class PerlResolveTest extends PerlLightTestCase {
 
   public void testTestMoreWithPlan() {
     addTestMore();
-    doTestResolve();
+    doTest();
   }
 
-  public void testIssue1646() {doTestResolve();}
+  public void testIssue1646() {doTest();}
 
-  public void testRegexpMatchesVariables() {doTestResolve();}
+  public void testRegexpMatchesVariables() {doTest();}
 
-  public void testWildCardReturns() {doTestResolve();}
+  public void testWildCardReturns() {doTest();}
 
-  public void testProperSelfType() {doTestResolve();}
+  public void testProperSelfType() {doTest();}
 
-  public void testCoreGlobal() {doTestResolve();}
+  public void testCoreGlobal() {doTest();}
 
-  public void testBuiltInNamespaces() {doTestResolve();}
+  public void testBuiltInNamespaces() {doTest();}
 
-  public void testSignaturesVariables() {doTestResolve();}
+  public void testSignaturesVariables() {doTest();}
 
-  public void testFancyMethodCall() {doTestResolve();}
+  public void testFancyMethodCall() {doTest();}
 
-  public void testMooseAttrs() {doTestResolve();}
+  public void testMooseAttrs() {doTest();}
 
-  public void testMooseDoesIsa() {doTestResolve();}
+  public void testMooseDoesIsa() {doTest();}
 
-  public void testMojoAttrSmartResolve() {doTestResolve();}
+  public void testMojoAttrSmartResolve() {doTest();}
 
-  public void testMojoAttrs() {doTestResolve();}
+  public void testMojoAttrs() {doTest();}
 
-  public void testIssue1483() {doTestResolve();}
+  public void testIssue1483() {doTest();}
 
-  public void testClassAccessorLib() {doTestResolve();}
+  public void testClassAccessorLib() {doTest();}
 
-  public void testClassAccessor() {doTestResolve();}
+  public void testClassAccessor() {doTest();}
 
-  public void testExceptionClassFields() {doTestResolve();}
+  public void testExceptionClassFields() {doTest();}
 
-  public void testExceptionClassAlias() {doTestResolve();}
+  public void testExceptionClassAlias() {doTest();}
 
-  public void testConstantsWithCollapsedLists() {doTestResolve();}
+  public void testConstantsWithCollapsedLists() {doTest();}
 
-  public void testLibraryNamespace() {doTestResolve();}
+  public void testLibraryNamespace() {doTest();}
 
-  public void testLibraryConstant() {doTestResolve();}
+  public void testLibraryConstant() {doTest();}
 
-  public void testExceptionClass() {doTestResolve();}
+  public void testExceptionClass() {doTest();}
 
-  public void testReferenceResolve() {doTestResolve();}
+  public void testReferenceResolve() {doTest();}
 
   public void testExportedSubs() {
-    doTestResolve();
+    doTest();
   }
 
   public void testDerefWithComments() {
-    doTestResolve();
+    doTest();
   }
 
   public void testStringToPackage() {
-    doTestResolve();
+    doTest();
   }
 
   public void testConstant() {
-    doTestResolve();
+    doTest();
   }
 
   public void testConstantEx() {
-    doTestResolve();
+    doTest();
   }
 
   public void testMojoliciousHelper() {
-    doTestResolve();
+    doTest();
   }
 
   public void testMojoHelperNamespace() {
-    doTestResolve();
+    doTest();
   }
 
   public void testVariableIsa() {
-    doTestResolve();
+    doTest();
   }
 
   public void testSequentionalHereDocs() {
-    doTestResolve();
+    doTest();
   }
 
   public void testIndentableHeredocs() {
-    doTestResolve();
+    doTest();
   }
 
   public void testIndentableHeredocSequentional() {
-    doTestResolve();
+    doTest();
   }
 
   public void testVariablesAndElements() {
-    doTestResolve();
+    doTest();
   }
 
-  public void testVariableBuiltInComplex() {doTestResolve();}
+  public void testVariableBuiltInComplex() {doTest();}
 
   public void testMainSubs() {
-    doTestResolve();
+    doTest();
   }
 
   public void testInterpolatedElements() {
-    doTestResolve();
+    doTest();
   }
 
   public void testSingleWordPackages() {
-    doTestResolve();
+    doTest();
   }
 
   public void testPackageRanges() {
-    doTestResolve();
+    doTest();
   }
 
-  public void testReturnsPackageTag() {doTestResolve();}
+  public void testReturnsPackageTag() {doTest();}
 
-  public void testPackageTagVarType() {doTestResolve();}
+  public void testPackageTagVarType() {doTest();}
 
   public void testUsePackage() {
     addCustomPackage();
     setTargetPerlVersion(PerlVersion.V5_10);
-    doTestResolve();
+    doTest();
     setTargetPerlVersion(PerlVersion.V5_12);
     checkSerializedReferencesWithFile();
     setTargetPerlVersion(PerlVersion.V5_14);
@@ -169,5 +169,9 @@ public class PerlResolveTest extends PerlLightTestCase {
     checkSerializedReferencesWithFile("no_resolve");
   }
 
-  public void testLazyExportOkQw() {doTestResolve();}
+  public void testLazyExportOkQw() {doTest();}
+
+  private void doTest() {
+    doTestResolve();
+  }
 }
