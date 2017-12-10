@@ -2,11 +2,11 @@ PerlNamespaceFileReference at (21,31); text in range: 'Test::More' => 1 results:
 	Perl5 at 0 in More.pm
 
 PerlSubReference at (47,49); text in range: 'ok' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Test::More::ok($test, $name) at 8038 in More.pm
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Test::More::ok($test, $name) at 8010 in More.pm
 
 PerlSubReference at (53,59); text in range: 'can_ok' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Test::More::can_ok($proto, @methods) at 13529 in More.pm
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Test::More::can_ok($proto, @methods) at 13500 in More.pm
 
 PerlSubReference at (63,69); text in range: 'isa_ok' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Test::More::isa_ok($thing, $class, $thing_name) at 15254 in More.pm
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Test::More::isa_ok($thing, $class, $thing_name) at 15180 in More.pm
 
