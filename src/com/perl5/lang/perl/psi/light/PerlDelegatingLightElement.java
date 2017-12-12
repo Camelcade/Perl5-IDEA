@@ -229,6 +229,7 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
 
   @Override
   public void checkAdd(@NotNull PsiElement element) throws IncorrectOperationException {
+    //noinspection deprecation
     getDelegate().checkAdd(element);
   }
 
@@ -254,6 +255,7 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
 
   @Override
   public void checkDelete() throws IncorrectOperationException {
+    //noinspection deprecation
     getDelegate().checkDelete();
   }
 
