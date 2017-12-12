@@ -31,8 +31,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
@@ -94,14 +96,17 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 
     try {
-      GeneralCommandLine perlcritic = getPerlCriticExecutable(sourcePsiFile.getProject());
-      final Process process = perlcritic.createProcess();
+      GeneralCommandLine criticCommandLine = getPerlCriticExecutable(sourcePsiFile.getProject());
+      final Process process = criticCommandLine.createProcess();
 
       OutputStream outputStream = process.getOutputStream();
       outputStream.write(sourceBytes);
       outputStream.close();
 
-      final CapturingProcessHandler processHandler = new CapturingProcessHandler(process);
+      VirtualFile virtualFile = PsiUtilCore.getVirtualFile(sourcePsiFile);
+      final CapturingProcessHandler processHandler = new CapturingProcessHandler(process,
+                                                                                 virtualFile == null ? null : virtualFile.getCharset(),
+                                                                                 criticCommandLine.getCommandLineString());
 
       List<PerlCriticErrorDescriptor> errors = new ArrayList<>();
       PerlCriticErrorDescriptor lastDescriptor = null;

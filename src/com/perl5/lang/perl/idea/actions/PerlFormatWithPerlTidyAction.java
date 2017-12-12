@@ -129,7 +129,9 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               }
             });
 
-            final CapturingProcessHandler processHandler = new CapturingProcessHandler(process, virtualFile.getCharset());
+            final CapturingProcessHandler processHandler = new CapturingProcessHandler(process,
+                                                                                       virtualFile.getCharset(),
+                                                                                       perlTidyCommandLine.getCommandLineString());
             ProcessOutput processOutput = processHandler.runProcess();
 
             final List<String> stdoutLines = processOutput.getStdoutLines(false);
