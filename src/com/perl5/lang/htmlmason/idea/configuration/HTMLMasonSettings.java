@@ -16,7 +16,10 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.openapi.components.*;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
@@ -44,10 +47,8 @@ import java.util.Map;
  */
 @State(
   name = "HTMLMasonSettings",
-  storages = {
-    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-  }
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
+
 )
 
 public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings>, HTMLMasonElementTypes {

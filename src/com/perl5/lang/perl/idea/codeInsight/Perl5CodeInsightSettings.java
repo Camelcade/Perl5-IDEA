@@ -29,11 +29,8 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(
   name = "Perl5CodeInsightSettings",
-  storages = {
-    @Storage(
-      file = PerlPathMacros.APP_OTHER_SETTINGS_FILE
-    )
-  }
+  storages = @Storage(PerlPathMacros.APP_OTHER_SETTINGS_FILE)
+
 )
 
 public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings> {

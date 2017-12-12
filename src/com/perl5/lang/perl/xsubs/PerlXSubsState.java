@@ -29,7 +29,10 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
-import com.intellij.openapi.components.*;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -69,10 +72,7 @@ import java.util.Set;
 
 @State(
   name = "Perl5XSubsState",
-  storages = {
-    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-  }
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
 )
 
 public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> {

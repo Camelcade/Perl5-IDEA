@@ -17,7 +17,10 @@
 package com.perl5.lang.perl.idea.configuration.settings;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
-import com.intellij.openapi.components.*;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.xmlb.XmlSerializerUtil;
@@ -40,10 +43,8 @@ import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
  */
 @State(
   name = "Perl5Settings",
-  storages = {
-    @Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-    @Storage(id = "dir", file = PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE, scheme = StorageScheme.DIRECTORY_BASED)
-  }
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
+
 )
 
 public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {

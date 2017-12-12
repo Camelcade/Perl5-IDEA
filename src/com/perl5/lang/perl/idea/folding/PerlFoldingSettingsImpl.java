@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 @State(
   name = "PerlCodeFoldingSettings",
-  storages = @Storage(file = PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
+  storages = @Storage(PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
 )
 public class PerlFoldingSettingsImpl extends PerlFoldingSettings implements PersistentStateComponent<PerlFoldingSettings> {
   @Nullable
