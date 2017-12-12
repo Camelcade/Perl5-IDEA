@@ -32,7 +32,7 @@ import java.util.Set;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonVirtualFileListener extends VirtualFileAdapter {
+public class MasonVirtualFileListener implements VirtualFileListener {
   public static final Key<Boolean> FORCE_REINDEX = new Key<>("Force re-indexing");
 
   private final Project myProject;
