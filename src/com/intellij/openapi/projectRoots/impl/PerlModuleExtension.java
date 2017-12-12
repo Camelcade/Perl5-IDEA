@@ -55,10 +55,10 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   private long myModificationTracker;
   private PerlModuleExtension myOriginal;
   private Module myModule;
-  private static FactoryMap<String, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_ID_MAP =
-    FactoryMap.createMap(key -> getSerializer(serializer -> serializer != null && serializer.getTypeId().equals(key)));
-  private static FactoryMap<PerlSourceRootType, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_TYPE_MAP =
-    FactoryMap.createMap(key -> getSerializer(serializer -> serializer != null && serializer.getType().equals(key)));
+  private static Map<String, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_ID_MAP =
+    FactoryMap.create(key -> getSerializer(serializer -> serializer != null && serializer.getTypeId().equals(key)));
+  private static Map<PerlSourceRootType, JpsModuleSourceRootPropertiesSerializer> SERIALIZER_BY_TYPE_MAP =
+    FactoryMap.create(key -> getSerializer(serializer -> serializer != null && serializer.getType().equals(key)));
   private Map<VirtualFile, PerlSourceRootType> myRoots = new LinkedHashMap<>();
 
   public PerlModuleExtension(Module module) {

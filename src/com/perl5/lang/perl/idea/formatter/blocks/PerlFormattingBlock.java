@@ -42,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
@@ -159,7 +160,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     }
     else if ((elementType == STRING_LIST || elementType == LP_STRING_QW) && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-      FactoryMap<Integer, Alignment> alignmentMap = FactoryMap.createMap(key -> Alignment.createAlignment(true));
+      Map<Integer, Alignment> alignmentMap = FactoryMap.create(key -> Alignment.createAlignment(true));
       int[] elementIndex = new int[]{0};
       int[] lastRelativeLineNumber = new int[]{0};
 

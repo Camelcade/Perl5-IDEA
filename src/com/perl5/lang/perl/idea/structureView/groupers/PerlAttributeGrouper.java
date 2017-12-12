@@ -32,10 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class PerlAttributeGrouper implements Grouper, ActionPresentation {
   private static final String GROUPER_ID = "perl.structure.group.attributes";
@@ -47,7 +44,7 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
       return Collections.emptyList();
     }
 
-    FactoryMap<PerlMooseAttributeWrapper, AttributeGroup> groupMap = FactoryMap.createMap(AttributeGroup::new);
+    Map<PerlMooseAttributeWrapper, AttributeGroup> groupMap = FactoryMap.create(AttributeGroup::new);
 
     for (TreeElement childTreeElement : children) {
       if (!(childTreeElement instanceof PerlStructureViewElement)) {

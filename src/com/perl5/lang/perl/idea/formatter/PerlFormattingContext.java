@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 
@@ -42,7 +43,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
-  private final FactoryMap<PsiFile, List<TextRange>> myHeredocRangesMap = FactoryMap.createMap(file -> {
+  private final Map<PsiFile, List<TextRange>> myHeredocRangesMap = FactoryMap.create(file -> {
     if (!(file instanceof PerlFileImpl)) {
       return Collections.emptyList();
     }

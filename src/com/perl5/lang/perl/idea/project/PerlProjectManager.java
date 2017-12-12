@@ -76,7 +76,7 @@ public class PerlProjectManager {
   public PerlProjectManager(@NotNull Project project) {
     myProject = project;
     myPerlSettings = PerlLocalSettings.getInstance(project);
-    myModulesRootsProvider = FactoryMap.createMap(type -> type.getRoots(myProject));
+    myModulesRootsProvider = FactoryMap.create(type -> type.getRoots(myProject));
     resetProjectCaches();
     MessageBusConnection connection = myProject.getMessageBus().connect();
     connection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, new ProjectJdkTable.Listener() {
