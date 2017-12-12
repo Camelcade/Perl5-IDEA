@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.editor.smartkeys.options;
 import com.intellij.openapi.options.BeanConfigurable;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.ui.IdeBorderFactory;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 
 import javax.swing.*;
@@ -29,7 +30,9 @@ import javax.swing.*;
 public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettings> implements UnnamedConfigurable {
   public PerlSmartKeyOptions() {
     super(Perl5CodeInsightSettings.getInstance());
-    checkBox("HEREDOC_AUTO_INSERTION", "Automatically insert here-doc terminator");
+    checkBox(PerlBundle.message("perl.options.auto.heredoc"),
+             () -> getInstance().HEREDOC_AUTO_INSERTION,
+             value -> getInstance().HEREDOC_AUTO_INSERTION = value);
   }
 
   @Override
