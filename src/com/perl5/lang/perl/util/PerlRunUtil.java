@@ -81,7 +81,7 @@ public class PerlRunUtil {
                                                       @Nullable VirtualFile scriptFile,
                                                       String... perlParameters) {
     GeneralCommandLine commandLine = new GeneralCommandLine();
-    String executablePath = PerlSdkType.getInstance().getExecutablePath(perlDirectory);
+    String executablePath = PerlSdkType.INSTANCE.getExecutablePath(perlDirectory);
     commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
       commandLine.addParameter("-I" + libRoot.getCanonicalPath());

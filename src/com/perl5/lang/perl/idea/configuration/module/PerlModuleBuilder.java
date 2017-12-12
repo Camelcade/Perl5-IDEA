@@ -96,7 +96,7 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
 
   @Override
   public boolean isSuitableSdkType(SdkTypeId sdkType) {
-    return sdkType == PerlSdkType.getInstance();
+    return sdkType == PerlSdkType.INSTANCE;
   }
 
   @Override

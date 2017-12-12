@@ -55,10 +55,10 @@ public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {
     myFieldWithHistory = new TextFieldWithHistory();
     myFieldWithHistory.setHistorySize(-1);
     final ArrayList<String> foundSdks = new ArrayList<>();
-    final List<Sdk> perlSdks = ProjectJdkTable.getInstance().getSdksOfType(PerlSdkType.getInstance());
+    final List<Sdk> perlSdks = ProjectJdkTable.getInstance().getSdksOfType(PerlSdkType.INSTANCE);
 
     for (Sdk sdk : perlSdks) {
-      if (sdk.getSdkType() == PerlSdkType.getInstance()) {
+      if (sdk.getSdkType() == PerlSdkType.INSTANCE) {
         foundSdks.add(sdk.getName());
       }
     }
@@ -77,7 +77,7 @@ public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {
                                         null, new FileChooserDescriptor(false, true, false, false, false, false) {
         @Override
         public boolean isFileSelectable(VirtualFile file) {
-          return super.isFileSelectable(file) && PerlSdkType.getInstance().isValidSdkHome(file.getPath());
+          return super.isFileSelectable(file) && PerlSdkType.INSTANCE.isValidSdkHome(file.getPath());
         }
       },
                                         TextComponentAccessor.TEXT_FIELD_WITH_HISTORY_WHOLE_TEXT);

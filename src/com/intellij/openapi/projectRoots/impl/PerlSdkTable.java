@@ -156,19 +156,19 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   @NotNull
   @Override
   public SdkTypeId getDefaultSdkType() {
-    return PerlSdkType.getInstance();
+    return PerlSdkType.INSTANCE;
   }
 
   @NotNull
   @Override
   public SdkTypeId getSdkTypeByName(@NotNull String name) {
-    return PerlSdkType.getInstance();
+    return PerlSdkType.INSTANCE;
   }
 
   @NotNull
   @Override
   public Sdk createSdk(@NotNull String name, @NotNull SdkTypeId sdkType) {
-    return ProjectJdkTable.getInstance().createSdk(name, PerlSdkType.getInstance());
+    return ProjectJdkTable.getInstance().createSdk(name, PerlSdkType.INSTANCE);
   }
 
   public static PerlSdkTable getInstance() {
