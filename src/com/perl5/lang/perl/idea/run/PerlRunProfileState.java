@@ -41,6 +41,9 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.List;
 import java.util.Map;
 
+import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
+import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
+
 /**
  * @author VISTALL
  * @since 16-Sep-15
@@ -117,7 +120,7 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withWorkDirectory(homePath);
     Map<String, String> environment = calcEnv(runProfile);
     commandLine.withEnvironment(environment);
-    commandLine.setPassParentEnvironment(runProfile.isPassParentEnvs());
+    commandLine.withParentEnvironmentType(runProfile.isPassParentEnvs() ? CONSOLE : NONE);
     OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset) {
       @Override
       public void startNotify() {
