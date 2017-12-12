@@ -1,6 +1,8 @@
 /*
  * Copyright 2013 Jon S Akhtar (Sylvanaar)
  * Copyright 2013-2014 must-be.org
+ * Copyright 2015 VISTALL
+ * Copyright 2015-2017 Alexandr Evstigneev
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -41,6 +43,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.Consumer;
 import com.intellij.util.SystemProperties;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -60,11 +63,6 @@ import java.util.regex.PatternSyntaxException;
 import static com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus.*;
 import static com.intellij.openapi.util.text.StringUtil.isEmpty;
 
-/**
- * @author Jon S Akhtar
- * @since 11:35:35 AM Oct 19, 2010
- */
-
 public class YoutrackErrorHandler extends ErrorReportSubmitter {
   public static final String PROJECT = "CAMELCADE";
   private static final Logger LOGGER = Logger.getInstance(YoutrackErrorHandler.class);
@@ -76,21 +74,17 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
 
   private final CookieManager cookieManager = new CookieManager();
 
+  @NotNull
   @Override
   public String getReportActionText() {
-    return "Report to Camelcade issue tracker";
+    return PerlBundle.message("perl.issue.report");
   }
 
   @Override
-  public SubmittedReportInfo submit(IdeaLoggingEvent[] ideaLoggingEvents, Component component) {
-    return new SubmittedReportInfo(null, "0", SubmittedReportInfo.SubmissionStatus.FAILED);
-  }
-
-  @Override
-  public boolean trySubmitAsync(final IdeaLoggingEvent[] events,
-                                final String additionalInfo,
-                                final Component parentComponent,
-                                final Consumer<SubmittedReportInfo> consumer) {
+  public boolean submit(@NotNull IdeaLoggingEvent[] events,
+                        @Nullable String additionalInfo,
+                        @NotNull Component parentComponent,
+                        @NotNull Consumer<SubmittedReportInfo> consumer) {
     final DataContext dataContext = DataManager.getInstance().getDataContext(parentComponent);
     final Project project = CommonDataKeys.PROJECT.getData(dataContext);
 
@@ -173,20 +167,12 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       // Syntax error in the regular expression
     }
 
-    SubmittedReportInfo.SubmissionStatus status = NEW_ISSUE;
-
     if (ResultString == null) {
       return new SubmittedReportInfo(SERVER_ISSUE_URL, "", FAILED);
     }
 
 
-    final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + ResultString, ResultString, status);
-
-
-    /* Now try to set the autosubmit user using a custom command */
-   /* if (user != null) {
-          runCommand(ResultString, "Autosubmit User " + user);
-    }  */
+    final SubmittedReportInfo reportInfo = new SubmittedReportInfo(SERVER_URL + "issue/" + ResultString, ResultString, NEW_ISSUE);
 
     if (signature != 0) {
       runCommand(ResultString, "Exception Signature " + signature);
@@ -202,7 +188,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       throw new RuntimeException(DiagnosticBundle.message("error.report.failure.message"));
     }
 
-    String response = "";
+    StringBuilder response = new StringBuilder();
 
     //Create Post String
     String data;
@@ -225,10 +211,10 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       String line;
 
       while ((line = rd.readLine()) != null) {
-        response += line;
+        response.append(line);
       }
 
-      LOGGER.info(response);
+      LOGGER.info(response.toString());
       cookieManager.storeCookies(conn);
 
       // project=TST&assignee=beto&summary=new issue&description=description of new issue
@@ -273,14 +259,14 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       // Get The Response
       rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
       while ((line = rd.readLine()) != null) {
-        response += line;
+        response.append(line);
       }
     }
     catch (Exception e) {
       e.printStackTrace();
     }
 
-    return response;
+    return response.toString();
   }
 
   //http://sylvanaar.myjetbrains.com/youtrack/rest/issue?filter=Exception%20Signature%3A801961033
@@ -354,12 +340,12 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       // Get The Response
       BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
       String line;
-      String response = "";
+      StringBuilder response = new StringBuilder();
       while ((line = rd.readLine()) != null) {
-        response += line;
+        response.append(line);
       }
 
-      LOGGER.debug(response);
+      LOGGER.debug(response.toString());
     }
     catch (IOException e) {
       LOGGER.info("Command Failed", e);
@@ -393,7 +379,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
         type = NotificationType.INFORMATION;
       }
       NotificationListener listener = url != null ? (notification, event) -> {
-        BrowserUtil.launchBrowser(url);
+        BrowserUtil.browse(url);
         notification.expire();
       } : null;
       ReportMessages.GROUP.createNotification(ReportMessages.ERROR_REPORT, text.toString(), type, listener).notify(project);
