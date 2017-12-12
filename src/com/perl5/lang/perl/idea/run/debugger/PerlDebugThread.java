@@ -20,11 +20,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
@@ -53,7 +53,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by hurricup on 04.05.2016.
  */
 public class PerlDebugThread extends Thread {
-  public static final boolean DEV_MODE = false; //ApplicationManager.getApplication().isInternal();
+  static final boolean DEV_MODE = false;
+  private static final Logger LOG = Logger.getInstance(PerlDebugThread.class);
   private static Executor ourExecutor = Executors.newSingleThreadExecutor();
   private final ExecutionResult myExecutionResult;
   private final Gson myGson;
@@ -89,7 +90,7 @@ public class PerlDebugThread extends Thread {
 
   public void queueLineBreakpointDescriptor(PerlLineBreakPointDescriptor descriptor) {
     if (descriptor != null) {
-      // fixme potentially risk of race condition between clar and add
+      // fixme potentially risk of race condition between clear and add
       breakpointsDescriptorsQueue.add(descriptor);
       if (isReady) {
         sendQueuedBreakpoints();
@@ -136,7 +137,7 @@ public class PerlDebugThread extends Thread {
         response.clear();
 
         if (DEV_MODE) {
-          System.err.println("\nReading data");
+          LOG.debug("Reading data");
         }
 
         // reading bytes
@@ -154,21 +155,14 @@ public class PerlDebugThread extends Thread {
         }
 
         if (DEV_MODE) {
-          System.err.println("Got response " + response.size());
-          System.err.println(new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
+          LOG.debug("Got response " + response.size() + "\n" + new String(response.toNativeArray(), CharsetToolkit.UTF8_CHARSET));
         }
 
         processResponse(response);
       }
     }
-    catch (IOException e) {
-      //			e.printStackTrace();
-    }
-    catch (ExecutionException e) {
-      //			e.printStackTrace();
-    }
     catch (Exception e) {
-      //			e.printStackTrace();
+      LOG.warn(e);
     }
     finally {
       setStop();
@@ -207,13 +201,13 @@ public class PerlDebugThread extends Thread {
 
     try {
       if (DEV_MODE) {
-        System.err.println("Going to send string " + string);
+        LOG.debug("Going to send string " + string);
       }
 
       lock.lock();
 
       if (DEV_MODE) {
-        System.err.println("Sent string " + string);
+        LOG.debug("Sent string " + string);
       }
 
 
@@ -257,6 +251,7 @@ public class PerlDebugThread extends Thread {
     }
 
     myStop = true;
+    //noinspection Duplicates
     try {
       if (myInputStream != null) {
         myInputStream.close();
@@ -264,7 +259,10 @@ public class PerlDebugThread extends Thread {
       }
     }
     catch (IOException e) {
+      LOG.warn(e);
     }
+
+    //noinspection Duplicates
     try {
       if (myOutputStream != null) {
         myOutputStream.close();
@@ -272,7 +270,10 @@ public class PerlDebugThread extends Thread {
       }
     }
     catch (IOException e) {
+      LOG.warn(e);
     }
+
+    //noinspection Duplicates
     try {
       if (mySocket != null) {
         mySocket.close();
@@ -280,6 +281,7 @@ public class PerlDebugThread extends Thread {
       }
     }
     catch (IOException e) {
+      LOG.warn(e);
     }
     try {
       if (myServerSocket != null) {
@@ -288,7 +290,7 @@ public class PerlDebugThread extends Thread {
       }
     }
     catch (IOException e) {
-      e.printStackTrace();
+      LOG.warn(e);
     }
 
     StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
@@ -315,14 +317,10 @@ public class PerlDebugThread extends Thread {
     return myEvalsListPanel;
   }
 
-  public PerlRemoteFileSystem getPerlRemoteFileSystem() {
-    return myPerlRemoteFileSystem;
-  }
-
   @Nullable
   public VirtualFile loadRemoteSource(String filePath) {
     if (DEV_MODE) {
-      System.err.println("Loading file " + filePath);
+      LOG.debug("Loading file " + filePath);
     }
     final Semaphore responseSemaphore = new Semaphore();
     responseSemaphore.down();

@@ -25,6 +25,7 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.ui.content.Content;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
@@ -34,6 +35,7 @@ import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.intellij.xdebugger.frame.XSuspendContext;
 import com.intellij.xdebugger.ui.XDebugTabLayouter;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
@@ -51,6 +53,7 @@ import java.util.Collection;
  * Created by hurricup on 04.05.2016.
  */
 public class PerlDebugProcess extends XDebugProcess {
+  private static final Logger LOG = Logger.getInstance(PerlDebugProcess.class);
   private final ExecutionResult myExecutionResult;
   private final PerlDebugThread myDebugThread;
   private final PerlRunProfileState myDebugProfileState;
@@ -72,7 +75,7 @@ public class PerlDebugProcess extends XDebugProcess {
   @Override
   public boolean checkCanInitBreakpoints() {
     if (PerlDebugThread.DEV_MODE) {
-      System.err.println("Check can init breakpoints");
+      LOG.debug("Check can init breakpoints");
     }
     return true;
   }
@@ -86,7 +89,7 @@ public class PerlDebugProcess extends XDebugProcess {
   @Override
   public void sessionInitialized() {
     if (PerlDebugThread.DEV_MODE) {
-      System.err.println("Session initialized");
+      LOG.debug("Session initialized");
     }
     super.sessionInitialized();
   }
@@ -104,17 +107,17 @@ public class PerlDebugProcess extends XDebugProcess {
   }
 
   @Override
-  public void startStepOver() {
+  public void startStepOver(@Nullable XSuspendContext context) {
     myDebugThread.sendString("o");
   }
 
   @Override
-  public void startStepInto() {
+  public void startStepInto(@Nullable XSuspendContext context) {
     myDebugThread.sendString("");
   }
 
   @Override
-  public void startStepOut() {
+  public void startStepOut(@Nullable XSuspendContext context) {
     myDebugThread.sendString("u");
   }
 
@@ -134,7 +137,7 @@ public class PerlDebugProcess extends XDebugProcess {
   }
 
   @Override
-  public void resume() {
+  public void resume(@Nullable XSuspendContext context) {
     myDebugThread.sendString("g");
   }
 
@@ -155,7 +158,7 @@ public class PerlDebugProcess extends XDebugProcess {
   }
 
   @Override
-  public void runToPosition(@NotNull XSourcePosition position) {
+  public void runToPosition(@NotNull XSourcePosition position, @Nullable XSuspendContext context) {
     PerlLineBreakPointDescriptor descriptor = PerlLineBreakPointDescriptor.createFromSourcePosition(position, myDebugThread);
     if (descriptor != null) {
       myDebugThread.sendCommand("p", descriptor);
