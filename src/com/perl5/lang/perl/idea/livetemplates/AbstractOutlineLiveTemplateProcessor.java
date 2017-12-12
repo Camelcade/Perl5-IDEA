@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.Template;
+import com.intellij.codeInsight.template.impl.TemplateContext;
 import com.intellij.codeInsight.template.impl.TemplateOptionalProcessor;
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Document;
@@ -81,7 +82,7 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
   }
 
   @Override
-  public boolean isVisible(Template template) {
+  public boolean isVisible(@NotNull Template template, @NotNull TemplateContext context) {
     return false;
   }
 

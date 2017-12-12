@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.Template;
+import com.intellij.codeInsight.template.impl.TemplateContext;
 import com.intellij.codeInsight.template.impl.TemplateImpl;
 import com.intellij.codeInsight.template.impl.TemplateOptionalProcessor;
 import com.intellij.openapi.editor.Document;
@@ -24,6 +25,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.RangeMarker;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Pattern;
 
@@ -73,7 +75,7 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor {
   }
 
   @Override
-  public boolean isVisible(Template template) {
+  public boolean isVisible(@NotNull Template template, @NotNull TemplateContext context) {
     return false;
   }
 }
