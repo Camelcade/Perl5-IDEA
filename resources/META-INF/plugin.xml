@@ -39,19 +39,15 @@
     ]]></description>
 
   <change-notes><![CDATA[
+<!--
      <p>Updates:
      <ul>
-       <li>Run with Coverage is now available. Requires <code>Devel::Cover</code> module</li>
-       <li><code>List::MoreUtils</code> imports should work properly. Plugin supposes PP implementations. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1658">#1658</a></li>
-       <li><code>Test::More</code> imports should work properly even with import argument. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1657">#1657</a></li>
-       <li>Typing the <code>&lt;</code> inside bare <code>&lt;&gt;</code> transforms diamond to here-doc opener. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1660">#1660</a></li>
-       <li>Deparsing errors are now more informative. <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1650">#1650</a></li>
      </ul>
      </p>
+-->
      <p>Fixes:
       <ul>
-        <li>Resolving to declarations in compounds, nested in do/eval/sub, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1646">#1646</a></li>
-        <li>Parsing <code>&&</code> after <code>__PACKAGE__</code>, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1655">#1655</a></li>
+        <li>Parsing <code>$1x</code> as variable name and <code>x</code> operator, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1667">#1667</a></li>
       </ul>
      </p>
     ]]>

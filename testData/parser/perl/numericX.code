@@ -1,0 +1,4 @@
+say $1;
+say $1x1;
+say $0;
+say $0x1;
