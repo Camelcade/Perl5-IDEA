@@ -57,7 +57,7 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
 
     if (isValid()) {
-      newImplicitVariables.add(PerlImplicitVariableDeclaration.createDefaultInvocant(this));
+      newImplicitVariables.add(PerlImplicitVariableDeclaration.createInvocant(this));
     }
     return newImplicitVariables;
   }

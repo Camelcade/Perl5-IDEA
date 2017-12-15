@@ -1,0 +1,8 @@
+PerlSubReference at (24,27); text in range: 'has' => 0 results:
+
+PerlVariableReference at (124,128); text in range: 'self' => 1 results:
+	$self@MySomePackage
+
+PerlSubReference at (130,133); text in range: 'bar' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::bar; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in issue1669.pl
+

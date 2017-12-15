@@ -1,0 +1,10 @@
+package MySomePackage;
+
+has bar => (
+        is        => 'ro',
+        predicate => 1,
+    );
+
+method foobar {
+    return $self->bar;  # the 'bar' here is highlighted with "Unable to find sub definition ..."
+}

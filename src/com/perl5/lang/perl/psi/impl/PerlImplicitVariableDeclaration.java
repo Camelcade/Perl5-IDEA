@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -319,15 +320,9 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @NotNull
-  public static PerlImplicitVariableDeclaration createDefaultInvocant(@NotNull PsiElement parent) {
-    return createInvocant(parent, PerlMethodDefinitionMixin.getDefaultInvocantName());
-  }
-
-  @NotNull
-  public static PerlImplicitVariableDeclaration createInvocant(@NotNull PsiElement parent,
-                                                               @NotNull String variableName
-  ) {
-    return create(parent, variableName, null, true, false, true);
+  public static PerlImplicitVariableDeclaration createInvocant(@NotNull PsiElement parent) {
+    return create(parent, PerlMethodDefinitionMixin.getDefaultInvocantName(), PerlPackageUtil.getContextPackageName(parent), true, false,
+                  true);
   }
 
   @NotNull
