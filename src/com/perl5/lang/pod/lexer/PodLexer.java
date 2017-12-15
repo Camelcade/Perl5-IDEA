@@ -70,12 +70,11 @@ public class PodLexer extends PodLexerGenerated {
     int state = getRealLexicalState();
 
     if (state == LEX_COMMAND_WAITING &&
-        result != TokenType.NEW_LINE_INDENT &&
+        result != TokenType.WHITE_SPACE &&
         result != POD_NEWLINE &&
         result != POD_CODE &&
         result != POD_CUT ||
         state == LEX_COMMAND_READY &&
-        result != TokenType.NEW_LINE_INDENT &&
         result != TokenType.WHITE_SPACE &&
         result != POD_NEWLINE &&
         result != POD_CODE) {

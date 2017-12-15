@@ -408,7 +408,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       startHeredocCapture();
     }
     setHeredocLike(false);
-    return TokenType.NEW_LINE_INDENT;
+    return TokenType.WHITE_SPACE;
   }
 
   /**
@@ -692,7 +692,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
       if (currentChar == '\n') {
         // fixme check heredocs ?
-        pushPreparsedToken(currentOffset++, currentOffset, TokenType.NEW_LINE_INDENT);
+        pushPreparsedToken(currentOffset++, currentOffset, TokenType.WHITE_SPACE);
       }
       else if (Character.isWhitespace(currentChar))    // white spaces
       {

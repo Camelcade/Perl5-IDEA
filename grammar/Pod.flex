@@ -80,14 +80,14 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 }
 
 <LEX_COMMAND_READY>{
-	{NEW_LINE} {yybegin(LEX_COMMAND_WAITING); return TokenType.NEW_LINE_INDENT;}
+	{NEW_LINE} {yybegin(LEX_COMMAND_WAITING); return TokenType.WHITE_SPACE;}
 }
 
 <YYINITIAL>
 {
 	{HARD_NEW_LINE} {yypushback(yylength()-1);yybegin(LEX_COMMAND_READY);return POD_NEWLINE;}
 }
-{NEW_LINE} {return TokenType.NEW_LINE_INDENT;}
+{NEW_LINE} {return TokenType.WHITE_SPACE;}
 {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
 ">" {return parseCloseAngle();}
 "(" {return POD_PAREN_LEFT;}

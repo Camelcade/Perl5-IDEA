@@ -56,7 +56,7 @@ NUMBER = {NUMBER_INT} //| {NUMBER_HEX} | {NUMBER_BIN}
 
 %%
 
-{NEW_LINE}   {return TokenType.NEW_LINE_INDENT;}
+{NEW_LINE}   {return TokenType.WHITE_SPACE;}
 {WHITE_SPACE}+   {return TokenType.WHITE_SPACE;}
 
 "," {return TT2_COMMA;}

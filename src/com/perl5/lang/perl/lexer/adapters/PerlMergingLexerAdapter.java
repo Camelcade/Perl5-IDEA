@@ -19,6 +19,7 @@ package com.perl5.lang.perl.lexer.adapters;
 import com.intellij.lexer.Lexer;
 import com.intellij.lexer.MergingLexerAdapter;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes {
   public final static TokenSet TOKENS_TO_MERGE = TokenSet.create(
-    STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ
+    STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ, TokenType.WHITE_SPACE
   );
 
   public PerlMergingLexerAdapter(@Nullable Project project) {

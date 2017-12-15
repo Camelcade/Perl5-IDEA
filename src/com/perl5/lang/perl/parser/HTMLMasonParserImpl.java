@@ -268,7 +268,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     if (b.getTokenType() == HTML_MASON_HARD_NEWLINE) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
-      m.collapse(TokenType.NEW_LINE_INDENT);
+      m.collapse(TokenType.WHITE_SPACE);
       return true;
     }
     return false;

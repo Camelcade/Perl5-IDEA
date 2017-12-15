@@ -176,7 +176,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   public static ASTNode getNextSignificantSibling(ASTNode node) {
     ASTNode result = node.getTreeNext();
     while (true) {
-      if (result == null || result.getElementType() != TokenType.NEW_LINE_INDENT && result.getElementType() != TokenType.WHITE_SPACE) {
+      if (result == null || result.getElementType() != TokenType.WHITE_SPACE) {
         break;
       }
       result = result.getTreeNext();

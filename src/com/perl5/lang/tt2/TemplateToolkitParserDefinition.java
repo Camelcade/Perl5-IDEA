@@ -39,8 +39,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TemplateToolkitParserDefinition implements ParserDefinition, TemplateToolkitElementTypes {
   public static final TokenSet WHITE_SPACES = TokenSet.create(
-    TokenType.WHITE_SPACE,
-    TokenType.NEW_LINE_INDENT
+    TokenType.WHITE_SPACE
   );
   public static final TokenSet COMMENTS = TokenSet.create(
     TT2_HTML,

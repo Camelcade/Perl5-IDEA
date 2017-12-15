@@ -49,8 +49,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
   public static final List<PerlParserExtension> PARSER_EXTENSIONS = new ArrayList<>();
 
   public static final TokenSet WHITE_SPACES = TokenSet.create(
-    TokenType.WHITE_SPACE,
-    TokenType.NEW_LINE_INDENT
+    TokenType.WHITE_SPACE
   );
   public static final TokenSet COMMENTS = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,

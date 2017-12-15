@@ -286,7 +286,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
           tokens.add(new CustomToken(whiteSpaceTokenStart, blockStart, TokenType.WHITE_SPACE));
           whiteSpaceTokenStart = -1;
         }
-        tokens.add(new CustomToken(blockStart, blockStart + 1, TokenType.NEW_LINE_INDENT));
+        tokens.add(new CustomToken(blockStart, blockStart + 1, TokenType.WHITE_SPACE));
       }
       else if (Character.isWhitespace(currentChar)) {
         if (whiteSpaceTokenStart == -1) {

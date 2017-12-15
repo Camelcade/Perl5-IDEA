@@ -240,7 +240,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
         }
         // parseHardNewLine(b, l); // fixme this breaks lastMarker mechanism, need to figure out something
         if (b.getTokenType() == TT2_HARD_NEWLINE) {
-          b.remapCurrentToken(TokenType.NEW_LINE_INDENT); // this is irreversable change, so not sure it's a good idea
+          b.remapCurrentToken(TokenType.WHITE_SPACE); // this is irreversable change, so not sure it's a good idea
           b.advanceLexer();
         }
       }

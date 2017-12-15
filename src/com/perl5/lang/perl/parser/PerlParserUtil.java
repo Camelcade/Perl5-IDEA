@@ -66,7 +66,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
       if (currentToken == COMMENT_ANNOTATION || currentToken == COMMENT_LINE) {
         result = i;
       }
-      else if (currentToken != TokenType.WHITE_SPACE && currentToken != TokenType.NEW_LINE_INDENT) {
+      else if (currentToken != TokenType.WHITE_SPACE) {
         break;
       }
     }

@@ -22,6 +22,7 @@ import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
@@ -129,7 +130,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
             }
             else if (lastComment instanceof PsiWhiteSpace) {
               // whitespace with newline
-              if (lastComment.getText().equals("\n")) {
+              if (StringUtil.containsLineBreak(lastComment.getNode().getChars())) {
                 isCollapsable = true;
                 break;
               }

@@ -18,10 +18,10 @@ package com.perl5.lang.perl.idea.intentions;
 
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
@@ -62,42 +62,37 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
     );
 
     PsiFile currentFile = stringElement.getContainingFile();
-    int newLineIndex = currentFile.getText().indexOf("\n", stringElement.getTextOffset() + stringElement.getTextLength());
-    PsiElement anchor = null;
-
+    int newLineIndex = StringUtil.indexOf(currentFile.getNode().getChars(), "\n", stringElement.getTextRange().getEndOffset());
     if (newLineIndex > 1) {
-      anchor = currentFile.findElementAt(newLineIndex);
+      PsiElement anchor = currentFile.findElementAt(newLineIndex);
       // fixme we should check here if \n in unbreakable entity - regex, qw, string, something else...
       if (anchor != null && (anchor.getParent() instanceof PerlString || anchor.getParent() instanceof PsiPerlStringList)) {
-        anchor = null;
+        return;
       }
     }
 
     final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
-    final Document document = manager.getDocument(element.getContainingFile());
+    final Document document = manager.getDocument(currentFile);
 
-    stringElement = stringElement.replace(heredocElements.get(0)); // replace string with heredoc opener
-
-    if (document != null) {
-      String heredocString =
-        contentText +
-        "\n" +
-        HEREDOC_MARKER +
-        "\n";
-
-      ASTNode predecessor = anchor == null ? stringElement.getNode() : anchor.getNode();
-      int offset = predecessor.getTextRange().getEndOffset();
-
-      manager.doPostponedOperationsAndUnblockDocument(document);
-      if (anchor == null) {
-        document.insertString(offset, "\n" + heredocString);
-      }
-      else {
-
-        document.insertString(offset, heredocString);
-      }
-      manager.commitDocument(document);
+    if (document == null) {
+      return;
     }
+
+    newLineIndex -= stringElement.getTextLength();
+    PsiElement heredocOpener = heredocElements.get(0);
+    newLineIndex += heredocOpener.getTextLength();
+    stringElement.replace(heredocOpener); // replace string with heredoc opener
+    manager.doPostponedOperationsAndUnblockDocument(document);
+
+    String heredocString =
+      contentText +
+      "\n" +
+      HEREDOC_MARKER +
+      "\n";
+
+    manager.doPostponedOperationsAndUnblockDocument(document);
+    document.insertString(newLineIndex + 1, heredocString);
+    manager.commitDocument(document);
   }
 
   @Override

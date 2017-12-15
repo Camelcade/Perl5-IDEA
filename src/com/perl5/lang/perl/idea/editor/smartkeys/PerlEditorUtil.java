@@ -30,7 +30,7 @@ public class PerlEditorUtil {
   public static HighlighterIterator moveToPreviousMeaningfulToken(@NotNull HighlighterIterator iterator) {
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
-      if (tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT) {
+      if (tokenType != TokenType.WHITE_SPACE) {
         break;
       }
       iterator.retreat();
@@ -46,7 +46,7 @@ public class PerlEditorUtil {
     iterator.advance();
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
-      if (tokenType != TokenType.WHITE_SPACE && tokenType != TokenType.NEW_LINE_INDENT) {
+      if (tokenType != TokenType.WHITE_SPACE) {
         break;
       }
       iterator.advance();
