@@ -110,7 +110,8 @@ UNQUOTED_HEREDOC_MARKER = [a-zA-Z_] \d* {IDENTIFIER}?
 END_BLOCK = "__END__" [^]+
 DATA_BLOCK = "__DATA__" [^] +
 
-SUB_PROTOTYPE = [\s\[\$\@\%\&\*\]\;\+\\_]+
+SUB_PROTOTYPE = [\[\$\@\%\&\*\]\;\+\\_]+
+SUB_PROTOTYPE_WITH_SPACES = ({WHITE_SPACE} | {SUB_PROTOTYPE})+
 
 POD_START = "="[\w].* {NEW_LINE} ?
 POD_END = "=cut" ({WHITE_SPACE} .*)?
@@ -584,7 +585,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <SUB_DECLARATION>{
-	"(" / {SUB_PROTOTYPE}? ")"	{return startParethesizedBlock(SUB_ATTRIBUTES, SUB_PROTOTYPE);}
+	"(" / {SUB_PROTOTYPE_WITH_SPACES}? ")"	{return startParethesizedBlock(SUB_ATTRIBUTES, SUB_PROTOTYPE);}
 	"(" 						{return startSubSignatureBlock();}
 }
 
@@ -598,6 +599,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <SUB_PROTOTYPE>{
+        {WHITE_SPACE}                   {return TokenType.WHITE_SPACE;}
 	{SUB_PROTOTYPE}			{return SUB_PROTOTYPE_TOKEN;}
 	")"						{return getRightParen(SUB_ATTRIBUTES);}
 }
