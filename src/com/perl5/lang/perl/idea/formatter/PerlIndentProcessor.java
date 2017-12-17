@@ -76,6 +76,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     LP_STRING_XQ
   );
 
+  static final TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
+    GREP_EXPR, MAP_EXPR, SORT_EXPR
+  );
+
   public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
     BLOCK
   );
@@ -156,6 +160,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
     if (getAbsoluteUnindentableTokens().contains(nodeType)) {
       return Indent.getAbsoluteNoneIndent();
+    }
+
+    if (nodeType == BLOCK && MULTI_PARAM_BLOCK_CONTAINERS.contains(parentType)) {
+      return Indent.getNoneIndent();
     }
 
     if (parent == null || grandParent == null && nodeType != HEREDOC_END_INDENTABLE && !HEREDOC_BODIES_TOKENSET.contains(nodeType)) {

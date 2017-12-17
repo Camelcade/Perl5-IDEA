@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static com.perl5.lang.perl.idea.formatter.PerlIndentProcessor.MULTI_PARAM_BLOCK_CONTAINERS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
@@ -128,6 +129,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
       .before(COMMA).spaceIf(mySettings.SPACE_BEFORE_COMMA)
       .after(COMMA).spaceIf(mySettings.SPACE_AFTER_COMMA)
+
+      .afterInside(BLOCK, MULTI_PARAM_BLOCK_CONTAINERS).spaces(1)
 
       .beforeInside(COLON, TRENAR_EXPR).spaceIf(mySettings.SPACE_BEFORE_COLON)
       .afterInside(COLON, TRENAR_EXPR).spaceIf(mySettings.SPACE_AFTER_COLON)

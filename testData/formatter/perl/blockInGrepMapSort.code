@@ -1,0 +1,86 @@
+grep   {
+
+}   @ARGV;
+
+grep
+{
+
+}   @ARGV;
+
+@ARGV   =   grep   {
+
+}   @ARGV;
+
+@ARGV   =   grep
+{
+
+}   @ARGV;
+
+@ARGV   =
+            grep   {
+
+            }   @ARGV;
+
+@ARGV   =
+            grep
+            {
+
+            }   @ARGV;
+
+map   {
+
+}   @ARGV;
+
+map
+{
+
+}   @ARGV;
+
+@ARGV   =   map   {
+
+}   @ARGV;
+
+@ARGV   =   map
+{
+
+}   @ARGV;
+
+@ARGV   =
+            map   {
+
+            }   @ARGV;
+
+@ARGV   =
+            map
+            {
+
+            }   @ARGV;
+
+sort   {
+
+}   @ARGV;
+
+sort
+{
+
+}   @ARGV;
+
+@ARGV   =   sort   {
+
+}   @ARGV;
+
+@ARGV   =   sort
+{
+
+}   @ARGV;
+
+@ARGV   =
+            sort   {
+
+            }   @ARGV;
+
+@ARGV   =
+            sort
+            {
+
+            }   @ARGV;
