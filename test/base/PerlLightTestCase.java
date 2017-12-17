@@ -497,6 +497,10 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
 
   protected void doFormatTest(@NotNull String sourceFileName, @NotNull String resultFileName, @NotNull String resultSuffix) {
     initWithFileSmartWithoutErrors(sourceFileName);
+    doFormatTestWithoutInitialization(resultFileName, resultSuffix);
+  }
+
+  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
     new WriteCommandAction.Simple(getProject()) {
       @Override
       protected void run() throws Throwable {
@@ -514,6 +518,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());
     assertNoErrorElements();
   }
+
 
   protected void assertNoErrorElements() {
     assertFalse(

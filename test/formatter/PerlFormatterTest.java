@@ -42,6 +42,12 @@ public class PerlFormatterTest extends PerlLightTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testPerlTidy() {
+    initWithPerlTidy();
+    assertNoErrorElements();
+    doFormatTestWithoutInitialization(getTestName(true), "");
+  }
+
   public void testNewLineAfterComment() {doFormatTest();}
 
   public void testCallArguments() {doFormatTest();}
