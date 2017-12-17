@@ -76,6 +76,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   protected SpacingBuilder createSpacingBuilder() {
     return new SpacingBuilder(mySettings)
+      .after(COMMENT_LINE).lineBreakOrForceSpace(true, false)
       // standard settings
       .around(OPERATOR_X).spaces(1)
       .before(OPERATOR_X_ASSIGN).spaces(1)
@@ -89,6 +90,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATORS_SHIFT).spaceIf(mySettings.SPACE_AROUND_SHIFT_OPERATORS)
       .around(OPERATORS_UNARY).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
       .aroundInside(OPERATORS_RANGE, FLIPFLOP_EXPR).spaceIf(myPerlSettings.SPACE_AROUND_RANGE_OPERATORS)
+
+      .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)
+      .afterInside(RESERVED_SUB, SUB_DECLARATION).spaces(1)
+      .afterInside(RESERVED_METHOD, METHOD_DEFINITION).spaces(1)
+      .afterInside(RESERVED_FUNC, FUNC_DEFINITION).spaces(1)
 
       .between(NUMBER_CONSTANT, OPERATOR_CONCAT).spaces(1)
       .aroundInside(OPERATOR_CONCAT, ADD_EXPR).spaceIf(myPerlSettings.SPACE_AROUND_CONCAT_OPERATOR)
@@ -152,6 +158,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .between(RESERVED_COMPOUND_CONDITIONAL, CONDITION_EXPR).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
       .between(FOR_OR_FOREACH, FOR_ITERATOR).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
       .between(FOR_OR_FOREACH, CONDITION_EXPR).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)
+      .between(FOREACH_ITERATOR, CONDITION_EXPR).spaces(1)
       .afterInside(FOR_OR_FOREACH, FOR_COMPOUND).spaces(1)
 
       .betweenInside(RESERVED_IF, PARENTHESISED_EXPR, IF_STATEMENT_MODIFIER).spaceIf(mySettings.SPACE_BEFORE_IF_PARENTHESES)

@@ -47,8 +47,10 @@
 -->
      <p>Fixes:
       <ul>
+        <li>Moving opening brace to the comment after compound statement beginning, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1578">#1578</a></li>
         <li>Parsing <code>$1x</code> as variable name and <code>x</code> operator, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1667">#1667</a></li>
         <li>Resolve from methods declared with <code>method</code> keyword in certain frameworks, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1669">#1669</a></li>
+        <li>Additional formatting cases</li>
       </ul>
      </p>
     ]]>

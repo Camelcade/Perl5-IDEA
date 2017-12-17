@@ -1,0 +1,110 @@
+if            (        $a        )    #    comment
+{
+    say    'hi';
+}
+elsif            (        $cond        )        #    comment
+{
+
+}
+else    #    comment
+{
+
+}
+
+unless            (        $expr        )    #    coment
+{
+
+}
+
+while            (        $expr        )    #comment
+{
+
+}
+
+until            (        $expr        )    #comment
+{
+
+}
+
+sub    subname    #comment
+{
+}
+
+method    subname    #comment
+{
+}
+
+func    subname    #comment
+{
+}
+
+foreach    my    $element            (        @list        )    #comment
+{
+
+}
+
+foreach             (        @list        )    #comment
+{
+
+}
+
+for            (        my    $i    =    0;    $i    <    0;    $i++        )    #    comment
+{
+
+}
+
+if            (        $a        )
+{
+    say    'hi';
+}
+elsif            (        $cond        )
+{
+
+}
+else
+{
+
+}
+
+unless            (        $expr        )  
+{
+
+}
+
+while            (        $expr        )    
+{
+
+}
+
+until            (        $expr        )    
+{
+
+}
+
+sub    subname    
+{
+}
+
+method    subname    
+{
+}
+
+func    subname    
+{
+}
+
+foreach    my    $element            (        @list        )    
+{
+
+}
+
+foreach             (        @list        )
+{
+
+}
+
+for            (        my    $i    =    0;    $i    <    0;    $i++        )
+{
+
+}
+
