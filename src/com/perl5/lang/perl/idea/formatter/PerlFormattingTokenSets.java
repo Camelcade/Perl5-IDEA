@@ -36,7 +36,8 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     METHOD_DEFINITION,
     FUNC_DEFINITION,
 
-    SUB_DEFINITION
+    SUB_DEFINITION,
+    SUB_DECLARATION
   );
 
   TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(

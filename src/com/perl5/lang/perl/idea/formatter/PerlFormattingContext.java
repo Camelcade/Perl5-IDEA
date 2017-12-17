@@ -91,6 +91,31 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATORS_UNARY).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
       .aroundInside(OPERATORS_RANGE, FLIPFLOP_EXPR).spaceIf(myPerlSettings.SPACE_AROUND_RANGE_OPERATORS)
 
+      .betweenInside(SUB_NAME, LEFT_PAREN, SUB_DEFINITION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
+      .betweenInside(SUB_NAME, LEFT_PAREN, SUB_DECLARATION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
+      .betweenInside(SUB_NAME, LEFT_PAREN, METHOD_DEFINITION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
+      .betweenInside(SUB_NAME, LEFT_PAREN, FUNC_DEFINITION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
+
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DEFINITION).spaceIf(mySettings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DECLARATION).spaceIf(mySettings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, METHOD_DEFINITION).spaceIf(mySettings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+      .betweenInside(LEFT_PAREN, RIGHT_PAREN, FUNC_DEFINITION).spaceIf(mySettings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
+
+      .afterInside(LEFT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(mySettings.SPACE_WITHIN_METHOD_PARENTHESES)
+      .beforeInside(RIGHT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(mySettings.SPACE_WITHIN_METHOD_PARENTHESES)
+
+      .betweenInside(SUB_NAME, COLON, SUB_DEFINITION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .betweenInside(SUB_NAME, COLON, SUB_DECLARATION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .betweenInside(SUB_NAME, COLON, METHOD_DEFINITION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .betweenInside(SUB_NAME, COLON, FUNC_DEFINITION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+
+      .betweenInside(RIGHT_PAREN, COLON, SUB_DEFINITION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .betweenInside(RIGHT_PAREN, COLON, SUB_DECLARATION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .betweenInside(RIGHT_PAREN, COLON, METHOD_DEFINITION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .betweenInside(RIGHT_PAREN, COLON, FUNC_DEFINITION).spaceIf(myPerlSettings.SPACE_BEFORE_ATTRIBUTE)
+
+      .between(COLON, ATTRIBUTE).spaces(0)
+
       .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)
       .afterInside(RESERVED_SUB, SUB_DECLARATION).spaces(1)
       .afterInside(RESERVED_METHOD, METHOD_DEFINITION).spaces(1)
@@ -227,7 +252,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       )
 
       // unconditional
-      .beforeInside(SEMICOLON, STATEMENT).spaces(0)
+      .before(SEMICOLON).spaces(0)
       .before(HEREDOC_END).none()
       .around(OPERATORS_STR).spaces(1)
 

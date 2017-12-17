@@ -29,3 +29,8 @@ if ($var1 == $var2) {
     say $var1 for @ARGV;
 }
 qw/some string here/;
+
+sub subname :method {}
+sub subname () :method {}
+sub subname ($var1,$var2) :method {}
+sub subname ($$$) :method {}

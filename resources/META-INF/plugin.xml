@@ -39,12 +39,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
-<!--
      <p>Updates:
      <ul>
+        <li>Formatting options available for subs signatures, prototypes and attributes.</li>
      </ul>
      </p>
--->
      <p>Fixes:
       <ul>
         <li>Moving opening brace to the comment after compound statement beginning, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1578">#1578</a></li>

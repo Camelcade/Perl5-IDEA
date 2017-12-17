@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 {
@@ -99,7 +99,7 @@ Caret offset: 46
 
 {
   say 'hi';
-    func <selection>funcname<caret></selection> ($arg) {
+    func <selection>funcname<caret></selection>($arg) {
         
     }
 }
@@ -195,7 +195,7 @@ Caret offset: 49
   say 'hi';
   
 }
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -293,7 +293,7 @@ Caret offset: 67
 
 {
   say 'hi';
-    func <selection>funcname<caret></selection> ($arg) {
+    func <selection>funcname<caret></selection>($arg) {
         
     }
 } continue {}
@@ -389,7 +389,7 @@ Caret offset: 82
   say 'hi';
   
 } continue {}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -586,7 +586,7 @@ say 'hi' ;
 my $var = 1 + 2;
 
 if($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -683,7 +683,7 @@ if($a){}
 
 
 unless($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -781,7 +781,7 @@ unless($a){}
 
 if($a){}
 else{}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -879,7 +879,7 @@ else{}
 
 if($a){}
 elsif($b){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -976,7 +976,7 @@ elsif($b){}
 
 
 if($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 elsif($b){}
@@ -1074,7 +1074,7 @@ if($a){}
 elsif($b){}
 
 if($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 else{}
@@ -1172,7 +1172,7 @@ if($a){}
 else{}
 
 while($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1269,7 +1269,7 @@ while($a){}
 
 
 until($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1366,7 +1366,7 @@ until($a){}
 
 
 for($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1463,7 +1463,7 @@ for($a){}
 
 
 foreach($a){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1560,7 +1560,7 @@ foreach($a){}
 
 
 for($a =1;$a < 1; $++){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1657,7 +1657,7 @@ for($a =1;$a < 1; $++){}
 
 
 foreach($a =1;$a < 1; $++){}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1754,7 +1754,7 @@ foreach($a =1;$a < 1; $++){}
 
 
 while($a){}continue{}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1851,7 +1851,7 @@ while($a){}continue{}
 
 
 until($a){}continue{}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -1948,7 +1948,7 @@ until($a){}continue{}
 
 
 for($a){}continue{}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -2045,7 +2045,7 @@ for($a){}continue{}
 
 
 foreach($a){}continue{}
-func <selection>funcname<caret></selection> ($arg) {
+func <selection>funcname<caret></selection>($arg) {
     
 }
 
@@ -2142,7 +2142,7 @@ foreach($a){}continue{}
 
 
 given($a){
-    func <selection>funcname<caret></selection> ($arg) {
+    func <selection>funcname<caret></selection>($arg) {
         
     }
 }
@@ -2241,7 +2241,7 @@ given($a){
 
 given($a){
   when($b){}
-    func <selection>funcname<caret></selection> ($arg) {
+    func <selection>funcname<caret></selection>($arg) {
         
     }
 }
@@ -2340,7 +2340,7 @@ given($a){
 
 given($a){
   when($b){}
-    func <selection>funcname<caret></selection> ($arg) {
+    func <selection>funcname<caret></selection>($arg) {
         
     }
   when($b){}
@@ -2440,7 +2440,7 @@ given($a){
 
 given($a){
   when($b){}
-    func <selection>funcname<caret></selection> ($arg) {
+    func <selection>funcname<caret></selection>($arg) {
         
     }
   default{}

@@ -42,6 +42,50 @@ public class PerlFormatterTest extends PerlLightTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testDeclarationsBeforeSignatureTrue() {
+    getSettings().SPACE_BEFORE_METHOD_PARENTHESES = true;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsBeforeSignatureFalse() {
+    getSettings().SPACE_BEFORE_METHOD_PARENTHESES = false;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsWithinSignatureTrue() {
+    getSettings().SPACE_WITHIN_METHOD_PARENTHESES = true;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsWithinSignatureFalse() {
+    getSettings().SPACE_WITHIN_METHOD_PARENTHESES = false;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsWithinEmptySignatureTrue() {
+    getSettings().SPACE_WITHIN_EMPTY_METHOD_PARENTHESES = true;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsWithinEmptySignatureFalse() {
+    getSettings().SPACE_WITHIN_EMPTY_METHOD_PARENTHESES = false;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsBeforeAttributeTrue() {
+    getCustomSettings().SPACE_BEFORE_ATTRIBUTE = true;
+    doTestDeclarations();
+  }
+
+  public void testDeclarationsBeforeAttributeFalse() {
+    getCustomSettings().SPACE_BEFORE_ATTRIBUTE = false;
+    doTestDeclarations();
+  }
+
+  private void doTestDeclarations() {
+    doTestSingleSource("declarations");
+  }
+
   public void testPerlTidy() {
     initWithPerlTidy();
     assertNoErrorElements();

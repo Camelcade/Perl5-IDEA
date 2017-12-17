@@ -492,10 +492,10 @@ Caret offset: 93
 
 say 'hi'
 sub <selection>subname<caret></selection>
-        {
-            my ($self) = @_;
-            
-        };
+    {
+        my ($self) = @_;
+        
+    };
 
 my $var = 1 + 2;
 

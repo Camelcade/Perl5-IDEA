@@ -63,6 +63,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "SPACE_AROUND_SHIFT_OPERATORS",            // implemented
         "SPACE_AROUND_UNARY_OPERATOR",            // implemented
 
+        "SPACE_BEFORE_METHOD_PARENTHESES",
+        "SPACE_WITHIN_METHOD_PARENTHESES",
+        "SPACE_WITHIN_EMPTY_METHOD_PARENTHESES",
+
         "SPACE_WITHIN_METHOD_CALL_PARENTHESES", // method()
 
         "SPACE_AFTER_COMMA",    // implemented
@@ -94,6 +98,16 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", PerlBundle.message("perl.formatting.term.block"));
       consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
       consumer.renameStandardOption("SPACE_WITHIN_BRACES", PerlBundle.message("perl.formatting.within.code.block"));
+      consumer.renameStandardOption("SPACE_BEFORE_METHOD_PARENTHESES", PerlBundle.message("perl.formatting.sub.signature"));
+      consumer.renameStandardOption("SPACE_WITHIN_METHOD_PARENTHESES", PerlBundle.message("perl.formatting.signature.parentheses"));
+      consumer
+        .renameStandardOption("SPACE_WITHIN_EMPTY_METHOD_PARENTHESES", PerlBundle.message("perl.formatting.empty.signature.parentheses"));
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACE_BEFORE_ATTRIBUTE",
+                                PerlBundle.message("perl.formatting.attribute"),
+                                SPACES_OTHER
+      );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AROUND_CONCAT_OPERATOR",

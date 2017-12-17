@@ -65,8 +65,8 @@ Caret offset: 45
 
 say 'hi'
 try {
-    <caret>    
-    };
+    <caret>
+};
 
 my $var = 1 + 2;
 

@@ -487,8 +487,8 @@ Caret offset: 93
 
 say 'hi'
 use constant {
-            <selection>CONST<caret></selection> => 42
-        };;
+    <selection>CONST<caret></selection> => 42
+};;
 
 my $var = 1 + 2;
 

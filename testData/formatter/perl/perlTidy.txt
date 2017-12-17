@@ -372,14 +372,14 @@ EOM
         $fh_stderr = *STDERR;
     }
 
-    sub Warn ($) {$fh_stderr->print($_[0]);}
+    sub Warn($) {$fh_stderr->print($_[0]);}
 
-    sub Exit ($) {
+    sub Exit($) {
         if ($_[0]) {goto ERROR_EXIT}
         else {goto NORMAL_EXIT}
     }
 
-    sub Die ($) {
+    sub Die($) {
         Warn $_[0];
         Exit(1);
     }
