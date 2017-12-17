@@ -486,7 +486,7 @@ Caret offset: 93
 
 
 say 'hi'
-given (<selection>$expr<caret></selection>)
+given(<selection>$expr<caret></selection>)
 {
     
 };

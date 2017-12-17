@@ -64,7 +64,7 @@ Caret offset: 45
 }
 
 say 'hi'
-try{
+try {
     <caret>    
     };
 
@@ -80,6 +80,3 @@ catch($a){}
 
 try{}
 catch{}
-
-
-

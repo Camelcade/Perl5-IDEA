@@ -123,6 +123,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(HASH_INDEX).spaces(0)
       .around(OPERATOR_DEREFERENCE).spaces(0)
 
+      .before(CALL_ARGUMENTS).spaces(1)
+      .before(PARENTHESISED_CALL_ARGUMENTS).spaces(0)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaces(0)
       .afterInside(LEFT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(mySettings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
       .beforeInside(RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(mySettings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)

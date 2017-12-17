@@ -486,7 +486,7 @@ Caret offset: 93
 
 
 say 'hi'
-func <selection>funcname<caret></selection> ($arg)
+func <selection>funcname<caret></selection>($arg)
 {
     
 };

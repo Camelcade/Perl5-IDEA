@@ -1,0 +1,24 @@
+foobar 1, 2, 3;
+
+foobar
+    1, 2, 3;
+
+foobar
+    1,
+    2,
+    3;
+
+foobar 1,
+    2,
+    3;
+
+foobar(1, 2, 3);
+foobar(
+    1, 2, 3);
+foobar(
+    1,
+    2,
+    3);
+foobar(1,
+    2,
+    3);

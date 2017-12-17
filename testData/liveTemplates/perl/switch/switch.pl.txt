@@ -125,7 +125,7 @@ switch($a){
 
 switch($a){
   case $b { say 'hi' }
-    switch (<selection>$expr<caret></selection>)
+    switch(<selection>$expr<caret></selection>)
     {
         
     }
@@ -208,7 +208,7 @@ switch($a){
 
 switch($a){
   case $b { say 'hi' }
-    switch (<selection>$expr<caret></selection>)
+    switch(<selection>$expr<caret></selection>)
     {
         
     }
