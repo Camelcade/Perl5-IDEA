@@ -3885,12 +3885,12 @@ EOM
     }
 
     return bless {
-            _fh                => $fh,
-            _filename          => $input_file,
-            _input_line_ending => $input_line_ending,
-            _rinput_buffer     => [],
-            _started           => 0,
-        }, $class;
+        _fh                => $fh,
+        _filename          => $input_file,
+        _input_line_ending => $input_line_ending,
+        _rinput_buffer     => [],
+        _started           => 0,
+    }, $class;
 }
 
 sub close_input_file {
@@ -3983,16 +3983,16 @@ EOM
     }
 
     bless {
-            _fh               => $fh,
-            _fh_tee           => $fh_tee,
-            _output_file      => $output_file,
-            _output_file_open => $output_file_open,
-            _tee_flag         => 0,
-            _tee_file         => $tee_file,
-            _tee_file_opened  => 0,
-            _line_separator   => $line_separator,
-            _binmode          => $binmode,
-        }, $class;
+        _fh               => $fh,
+        _fh_tee           => $fh_tee,
+        _output_file      => $output_file,
+        _output_file_open => $output_file_open,
+        _tee_flag         => 0,
+        _tee_file         => $tee_file,
+        _tee_file_opened  => 0,
+        _line_separator   => $line_separator,
+        _binmode          => $binmode,
+    }, $class;
 }
 
 sub write_line {
@@ -4075,11 +4075,11 @@ sub new {
 
     my $class = shift;
     bless {
-            _write_diagnostics_count => 0,
-            _last_diagnostic_file    => "",
-            _input_file              => "",
-            _fh                      => undef,
-        }, $class;
+        _write_diagnostics_count => 0,
+        _last_diagnostic_file    => "",
+        _input_file              => "",
+        _fh                      => undef,
+    }, $class;
 }
 
 sub set_input_file {
@@ -4137,26 +4137,26 @@ sub new {
     if ($logfile_gap == 0) {$logfile_gap = 1}
 
     bless {
-            _log_file                      => $log_file,
-            _logfile_gap                   => $logfile_gap,
-            _rOpts                         => $rOpts,
-            _fh_warnings                   => $fh_warnings,
-            _last_input_line_written       => 0,
-            _at_end_of_file                => 0,
-            _use_prefix                    => 1,
-            _block_log_output              => 0,
-            _line_of_tokens                => undef,
-            _output_line_number            => undef,
-            _wrote_line_information_string => 0,
-            _wrote_column_headings         => 0,
-            _warning_file                  => $warning_file,
-            _warning_count                 => 0,
-            _complaint_count               => 0,
-            _saw_code_bug                  => - 1, # -1=no 0=maybe 1=for sure
-            _saw_brace_error               => 0,
-            _saw_extrude                   => $saw_extrude,
-            _output_array                  => [],
-        }, $class;
+        _log_file                      => $log_file,
+        _logfile_gap                   => $logfile_gap,
+        _rOpts                         => $rOpts,
+        _fh_warnings                   => $fh_warnings,
+        _last_input_line_written       => 0,
+        _at_end_of_file                => 0,
+        _use_prefix                    => 1,
+        _block_log_output              => 0,
+        _line_of_tokens                => undef,
+        _output_line_number            => undef,
+        _wrote_line_information_string => 0,
+        _wrote_column_headings         => 0,
+        _warning_file                  => $warning_file,
+        _warning_count                 => 0,
+        _complaint_count               => 0,
+        _saw_code_bug                  => - 1, # -1=no 0=maybe 1=for sure
+        _saw_brace_error               => 0,
+        _saw_extrude                   => $saw_extrude,
+        _output_array                  => [],
+    }, $class;
 }
 
 sub get_warning_count {
@@ -4684,27 +4684,27 @@ PRE_END
     my $in_toc_package = "";
     my $last_level = 0;
     bless {
-            _input_file        => $input_file, # name of input file
-            _title             => $title, # title, unescaped
-            _html_file         => $html_file, # name of .html output file
-            _toc_filename      => $toc_filename, # for frames option
-            _src_filename      => $src_filename, # for frames option
-            _html_file_opened  => $html_file_opened, # a flag
-            _html_fh           => $html_fh, # the output stream
-            _html_pre_fh       => $html_pre_fh, # pre section goes here
-            _rpre_string_stack => \@pre_string_stack, # stack of pre sections
-            _html_pod_fh       => $html_pod_fh, # pod goes here if pod2html
-            _rpod_string       => \$pod_string, # string holding pod
-            _pod_cut_count     => 0, # how many =cut's?
-            _html_toc_fh       => $html_toc_fh, # fh for table of contents
-            _rtoc_string       => \$toc_string, # string holding toc
-            _rtoc_item_count   => \$toc_item_count, # how many toc items
-            _rin_toc_package   => \$in_toc_package, # package name
-            _rtoc_name_count   => {}, # hash to track unique names
-            _rpackage_stack    => [], # stack to check for package
-            # name changes
-            _rlast_level       => \$last_level,         # brace indentation level
-        }, $class;
+        _input_file        => $input_file, # name of input file
+        _title             => $title, # title, unescaped
+        _html_file         => $html_file, # name of .html output file
+        _toc_filename      => $toc_filename, # for frames option
+        _src_filename      => $src_filename, # for frames option
+        _html_file_opened  => $html_file_opened, # a flag
+        _html_fh           => $html_fh, # the output stream
+        _html_pre_fh       => $html_pre_fh, # pre section goes here
+        _rpre_string_stack => \@pre_string_stack, # stack of pre sections
+        _html_pod_fh       => $html_pod_fh, # pod goes here if pod2html
+        _rpod_string       => \$pod_string, # string holding pod
+        _pod_cut_count     => 0, # how many =cut's?
+        _html_toc_fh       => $html_toc_fh, # fh for table of contents
+        _rtoc_string       => \$toc_string, # string holding toc
+        _rtoc_item_count   => \$toc_item_count, # how many toc items
+        _rin_toc_package   => \$in_toc_package, # package name
+        _rtoc_name_count   => {}, # hash to track unique names
+        _rpackage_stack    => [], # stack to check for package
+        # name changes
+        _rlast_level       => \$last_level,         # brace indentation level
+    }, $class;
 }
 
 sub add_toc_item {
@@ -22233,22 +22233,22 @@ sub new {
     my ( $line_sink_object, $rOpts, $logger_object ) = @_;
 
     bless {
-            _line_sink_object           => $line_sink_object,
-            _logger_object              => $logger_object,
-            _rOpts                      => $rOpts,
-            _output_line_number         => 1,
-            _consecutive_blank_lines    => 0,
-            _consecutive_nonblank_lines => 0,
-            _first_line_length_error    => 0,
-            _max_line_length_error      => 0,
-            _last_line_length_error     => 0,
-            _first_line_length_error_at => 0,
-            _max_line_length_error_at   => 0,
-            _last_line_length_error_at  => 0,
-            _line_length_error_count    => 0,
-            _max_output_line_length     => 0,
-            _max_output_line_length_at  => 0,
-        }, $class;
+        _line_sink_object           => $line_sink_object,
+        _logger_object              => $logger_object,
+        _rOpts                      => $rOpts,
+        _output_line_number         => 1,
+        _consecutive_blank_lines    => 0,
+        _consecutive_nonblank_lines => 0,
+        _first_line_length_error    => 0,
+        _max_line_length_error      => 0,
+        _last_line_length_error     => 0,
+        _first_line_length_error_at => 0,
+        _max_line_length_error_at   => 0,
+        _last_line_length_error_at  => 0,
+        _line_length_error_count    => 0,
+        _max_output_line_length     => 0,
+        _max_output_line_length_at  => 0,
+    }, $class;
 }
 
 sub tee_on {
@@ -22438,10 +22438,10 @@ sub new {
     my ( $class, $filename ) = @_;
 
     bless {
-            _debug_file        => $filename,
-            _debug_file_opened => 0,
-            _fh                => undef,
-        }, $class;
+        _debug_file        => $filename,
+        _debug_file_opened => 0,
+        _fh                => undef,
+    }, $class;
 }
 
 sub really_open_debug_file {
@@ -22557,9 +22557,9 @@ sub new {
     my $line_source_object = shift;
 
     return bless {
-            _line_source_object => $line_source_object,
-            _rlookahead_buffer  => [],
-        }, $class;
+        _line_source_object => $line_source_object,
+        _rlookahead_buffer  => [],
+    }, $class;
 }
 
 sub peek_ahead {

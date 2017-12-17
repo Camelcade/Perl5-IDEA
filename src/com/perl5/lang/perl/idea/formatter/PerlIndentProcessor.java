@@ -194,7 +194,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     }
 
     if (parentType == CALL_ARGUMENTS) {
-      return Indent.getIndent(Indent.Type.CONTINUATION, false, true);
+      return Indent.getContinuationIndent();
     }
 
     if (getBlockLikeContainers().contains(parentType)) {
