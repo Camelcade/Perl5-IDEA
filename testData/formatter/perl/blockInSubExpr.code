@@ -1,0 +1,32 @@
+sub
+  {
+        say 'hi';
+      };
+
+sub       {
+        say 'hi';
+      };
+
+$a = sub    {
+          say 'hi';
+
+      };
+
+$a = sub
+      {
+            say 'hi';
+
+    };
+
+$a =
+        sub     {
+           say 'hi';
+
+   };
+
+$a =
+        sub
+        {
+        say 'hi';
+
+ };

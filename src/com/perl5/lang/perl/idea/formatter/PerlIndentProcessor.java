@@ -63,6 +63,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
     DO_EXPR,
     EVAL_EXPR,
+    SUB_EXPR,
     PerlParserDefinition.FILE,
 
     LP_REGEX,
@@ -160,7 +161,6 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     if (parent == null || grandParent == null && nodeType != HEREDOC_END_INDENTABLE && !HEREDOC_BODIES_TOKENSET.contains(nodeType)) {
       return Indent.getNoneIndent();
     }
-
 
     if (getUnindentableTokens().contains(nodeType) ||
         (nodeType instanceof PerlPolyNamedElementType && !(node.getPsi() instanceof PerlPolyNamedNestedCallElementBase))) {
