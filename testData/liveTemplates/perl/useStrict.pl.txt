@@ -2441,5 +2441,6 @@ given($a){
   when($b){}
     use strict;
     <caret>
+
     default{}
 }
