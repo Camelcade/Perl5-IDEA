@@ -85,6 +85,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATORS_RELATIONAL).spaceIf(mySettings.SPACE_AROUND_RELATIONAL_OPERATORS)
       .around(OPERATORS_LOGICAL).spaceIf(mySettings.SPACE_AROUND_LOGICAL_OPERATORS)
       .around(OPERATORS_BITWISE).spaceIf(mySettings.SPACE_AROUND_BITWISE_OPERATORS)
+
+      .afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
+      .afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
+
       .around(OPERATORS_ADDITIVE).spaceIf(mySettings.SPACE_AROUND_ADDITIVE_OPERATORS)
       .around(OPERATORS_MULTIPLICATIVE).spaceIf(mySettings.SPACE_AROUND_MULTIPLICATIVE_OPERATORS)
       .around(OPERATORS_SHIFT).spaceIf(mySettings.SPACE_AROUND_SHIFT_OPERATORS)
@@ -149,9 +153,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .betweenInside(LEFT_BRACKET, RIGHT_BRACKET, ANON_ARRAY).spaces(0)
       .afterInside(LEFT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_ARRAY)
       .beforeInside(RIGHT_BRACKET, ANON_ARRAY).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_ARRAY)
-
-      .afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaces(0)
-      .afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaces(0)
 
       .around(ARRAY_INDEX).spaces(0)
       .around(HASH_INDEX).spaces(0)

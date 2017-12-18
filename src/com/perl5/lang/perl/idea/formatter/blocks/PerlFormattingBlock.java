@@ -30,6 +30,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
 import com.intellij.util.containers.FactoryMap;
+import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -86,6 +87,20 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
     SEMICOLON
   );
+
+  private final static MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
+
+  static {
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS_PLUS, OPERATOR_PLUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS, OPERATOR_PLUS_PLUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS, OPERATOR_PLUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_MINUS_MINUS, OPERATOR_MINUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_MINUS, OPERATOR_MINUS_MINUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_MINUS, OPERATOR_MINUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT);
+  }
+
+
   protected final PerlFormattingContext myContext;
   private final Indent myIndent;
   private final boolean myIsFirst;
@@ -277,6 +292,21 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
           PsiUtilCore.getElementType(PsiTreeUtil.getDeepestLast(child1Node.getPsi())) == RIGHT_PAREN
         ) {
         return Spacing.createSpacing(0, 0, 0, true, 0);
+      }
+
+      // hack for + ++/- --/~~ ~
+      if ((child2Type == PREFIX_UNARY_EXPR || child2Type == PREF_PP_EXPR) && OPERATOR_COLLISIONS_MAP.containsKey(child1Type)) {
+        IElementType rightSignType = PsiUtilCore.getElementType(child2Node.getFirstChildNode());
+        if (OPERATOR_COLLISIONS_MAP.get(child1Type).contains(rightSignType)) {
+          return Spacing.createSpacing(1, 1, 0, true, 1);
+        }
+      }
+      // hack for ++ +/-- -
+      else if (child1Type == SUFF_PP_EXPR && OPERATOR_COLLISIONS_MAP.containsKey(child2Type)) {
+        IElementType leftSignType = PsiUtilCore.getElementType(child1Node.getLastChildNode());
+        if (OPERATOR_COLLISIONS_MAP.get(child2Type).contains(leftSignType)) {
+          return Spacing.createSpacing(1, 1, 0, true, 1);
+        }
       }
     }
     return myContext.getSpacingBuilder().getSpacing(this, child1, child2);

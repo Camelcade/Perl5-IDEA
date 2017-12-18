@@ -67,16 +67,36 @@ $a cmp $b;
 $a .. $b;
 $a ... $b;
 
-# suffix
+#  suffix
 $a++;
 $a--;
+$a++ + $a;
+$a-- - $a;
+$a++ - $a;
+$a-- + $a;
 
-# prefix
+#  prefix
 --$a;
 ++$a;
 !$a;
 ~$a;
 not $a;
++{};
+-$b;
++$a;
+$a ~~ ~$a;
+$a + +$b;
+$b + -$b;
+$a + --$a;
+$a - --$a;
+$a + ++$a;
+$a - ++$a;
+$a + !$a;
+$a - !$a;
+$a + ~$a;
+$a - ~$a;
+$a - not $a;
+$a + not $a;
 
 # assign
 $a = $b;
