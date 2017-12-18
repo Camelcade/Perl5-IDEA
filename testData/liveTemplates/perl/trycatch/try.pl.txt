@@ -2,7 +2,7 @@
 Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
-try{
+try {
     <caret>
 }
 {
@@ -32,7 +32,7 @@ Caret offset: 32
 # Live templates test sample
 
 {
-    try{
+    try {
     <caret>    
     }
 }
