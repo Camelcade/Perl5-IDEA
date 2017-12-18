@@ -34,4 +34,4 @@ func something(){}
 func something($var){}
 
 package FooBar{}
-package FooBar  v1.5{}
+package FooBar v1.5{}

@@ -42,6 +42,10 @@ public class PerlFormatterTest extends PerlLightTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testNamespaceDefinition() {
+    doFormatTest();
+  }
+
   public void testDeclarationsBeforeSignatureTrue() {
     getSettings().SPACE_BEFORE_METHOD_PARENTHESES = true;
     doTestDeclarations();

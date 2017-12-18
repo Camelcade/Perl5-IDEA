@@ -1,0 +1,17 @@
+package Foo::Bar v1.4;
+package Foo::Baz;
+package Foo::Boo v1.4 {
+
+}
+package Foo::Foo {
+
+}
+package Foo::Boo v1.4 {
+
+}
+
+package Foo::Foo {
+
+}
+
+

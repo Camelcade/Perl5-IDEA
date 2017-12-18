@@ -91,6 +91,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATORS_UNARY).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
       .aroundInside(OPERATORS_RANGE, FLIPFLOP_EXPR).spaceIf(myPerlSettings.SPACE_AROUND_RANGE_OPERATORS)
 
+      .between(RESERVED_PACKAGE, PACKAGE).spaces(1)
+      .between(PACKAGE, VERSION_ELEMENT).spaces(1)
+
       .betweenInside(SUB_NAME, LEFT_PAREN, SUB_DEFINITION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
       .betweenInside(SUB_NAME, LEFT_PAREN, SUB_DECLARATION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
       .betweenInside(SUB_NAME, LEFT_PAREN, METHOD_DEFINITION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
