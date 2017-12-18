@@ -97,6 +97,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
       .between(RESERVED_PACKAGE, PACKAGE).spaces(1)
       .between(PACKAGE, VERSION_ELEMENT).spaces(1)
+      .between(RESERVED_FORMAT, SUB_NAME).spaces(1)
 
       .betweenInside(SUB_NAME, LEFT_PAREN, SUB_DEFINITION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)
       .betweenInside(SUB_NAME, LEFT_PAREN, SUB_DECLARATION).spaceIf(mySettings.SPACE_BEFORE_METHOD_PARENTHESES)

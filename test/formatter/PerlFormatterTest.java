@@ -42,6 +42,8 @@ public class PerlFormatterTest extends PerlLightTestCase {
     return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
+  public void testFormatDeclaration() {doFormatTest();}
+
   public void testNamespaceDefinition() {
     doFormatTest();
   }
