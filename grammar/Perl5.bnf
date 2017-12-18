@@ -801,10 +801,8 @@ private recover_parenthesised ::= !(')' | '{' | '}' | <<checkSemicolon>> )
 
 deref_expr ::= expr (<<parseArrowSmart>> nested_element_variation) + //{pin(".*")=1}
 
-private op_3_expr ::= pref_pp_expr | pref_mm_expr | suff_pp_expr
-pref_pp_expr ::= '++' expr
-pref_mm_expr ::= '--' expr
-
+private op_3_expr ::= pref_pp_expr | suff_pp_expr
+pref_pp_expr ::= ('++'|'--') expr
 suff_pp_expr ::= expr ('++'|'--')
 
 pow_expr ::= expr ('**' expr)+ { rightAssociative=true }

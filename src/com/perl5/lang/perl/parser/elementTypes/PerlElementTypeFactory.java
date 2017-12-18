@@ -268,8 +268,6 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlPowExprImpl.class);
       case "PREFIX_UNARY_EXPR":
         return new PerlElementTypeEx(name, PsiPerlPrefixUnaryExprImpl.class);
-      case "PREF_MM_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlPrefMmExprImpl.class);
       case "PREF_PP_EXPR":
         return new PerlElementTypeEx(name, PsiPerlPrefPpExprImpl.class);
       case "PRINT_EXPR":
