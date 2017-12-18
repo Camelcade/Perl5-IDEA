@@ -70,7 +70,7 @@ package Foo::Bar {
     }
     continue
     {
-        say 'or not';
+        say 'or  not';
     }
 
     when ($a)
@@ -85,63 +85,115 @@ package Foo::Bar {
 }
 
 sub something {
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
 }
 
 method something {
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
 }
 
 func something {
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
-    say 'this is a long sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
+    say 'this  is  a  long  sub';
 }
 
+
+try
+{
+    say 'hi';
+}
+catch
+{
+    say 'hi';
+}
+finally
+{
+    say 'hi';
+};
+
+try
+{
+    say 'hi';
+}
+catch
+{
+    say 'hi';
+}
+finally
+{
+    say 'hi';
+};
+
+try
+{
+    say 'hi';
+}
+catch
+{
+    say 'hi';
+}
+finally
+{
+    say 'hi';
+};
+
+try
+{
+    say 'hi';
+}
+catch
+{
+    say 'hi';
+}
+finally
+{
+    say 'hi';
+};
 

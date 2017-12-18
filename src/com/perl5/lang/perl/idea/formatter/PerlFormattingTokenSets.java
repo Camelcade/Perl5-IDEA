@@ -44,7 +44,9 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     CONTINUE_BLOCK,
     RESERVED_ELSE,
     RESERVED_ELSIF,
-    DEFAULT_COMPOUND
+    DEFAULT_COMPOUND,
+    CATCH_EXPR,
+    FINALLY_EXPR
   );
 
   TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.create(
@@ -56,7 +58,11 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     GIVEN_COMPOUND,
     WHEN_COMPOUND,
     CONTINUE_BLOCK,
-    DEFAULT_COMPOUND
+    DEFAULT_COMPOUND,
+
+    TRY_EXPR,
+    CATCH_EXPR,
+    FINALLY_EXPR
   );
 
   TokenSet STATEMENT_MODIFIERS = TokenSet.create(
