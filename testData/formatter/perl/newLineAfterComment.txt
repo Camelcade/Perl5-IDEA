@@ -1,6 +1,6 @@
 if ($a)    #    comment
 {
-    say    'hi';
+    say 'hi';
 }
 elsif ($cond)        #    comment
 {
@@ -54,7 +54,7 @@ for (my $i = 0; $i < 0; $i++)    #    comment
 }
 
 if ($a) {
-    say    'hi';
+    say 'hi';
 }
 elsif ($cond) {
 

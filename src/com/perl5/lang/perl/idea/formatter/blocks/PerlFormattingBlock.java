@@ -56,9 +56,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
    */
   public final static TokenSet LEAF_ELEMENTS =
     TokenSet.create(
-      STRING_SQ,
-      STRING_DQ,
-      STRING_XQ,
       POD,
       PerlParserUtil.DUMMY_BLOCK
     );

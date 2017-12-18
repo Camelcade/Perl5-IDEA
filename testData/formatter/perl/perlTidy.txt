@@ -1364,7 +1364,7 @@ sub get_stream_as_named_file {
             $fname = $stream;
         }
     }
-    return ($fname, $is_tmpfile);
+    return($fname, $is_tmpfile);
 }
 
 sub fileglob_to_re {
@@ -2124,7 +2124,7 @@ sub generate_options {
 
     # Uncomment next line to dump all expansions for debugging:
     # dump_short_names(\%expansion);
-    return (
+    return(
         \@option_string, \@defaults, \%expansion,
         \%option_category, \%option_range
     );
@@ -2419,7 +2419,7 @@ EOM
         Die "Error on command line; for help try 'perltidy -h'\n";
     }
 
-    return (\%Opts, $config_file, \@raw_options, $roption_string,
+    return(\%Opts, $config_file, \@raw_options, $roption_string,
         $rexpansion, $roption_category, $roption_range);
 }    # end of _process_command_line
 
@@ -2679,7 +2679,7 @@ sub expand_command_abbreviations {
 
                     # stuff all of the words that it expands to into the
                     # new arg list for the next pass
-                    foreach my $abbrev (@{ $rexpansion->{$abr} }) {
+                    foreach my $abbrev (@{$rexpansion->{$abr}}) {
                         next unless $abbrev;    # for safety; shouldn't happen
                         push(@new_argv, '--' . $abbrev . $flags);
                     }
@@ -2749,7 +2749,7 @@ For a list of all long names, use perltidy --dump-long-names (-dln).
 --------------------------------------------------------------------------
 EOM
     foreach my $abbrev (sort keys %$rexpansion) {
-        my @list = @{ $$rexpansion{$abbrev} };
+        my @list = @{$$rexpansion{$abbrev}};
         print STDOUT "$abbrev --> @list\n";
     }
 }
@@ -2783,7 +2783,7 @@ sub check_vms_filename {
 
     # if we don't already have an extension then we just append the extension
     my $separator = ($base =~ /\.$/) ? "" : "_";
-    return ($path . $base, $separator);
+    return($path . $base, $separator);
 }
 
 sub Win_OS_Type {
@@ -2863,7 +2863,7 @@ sub look_for_Windows {
     my $rpending_complaint = shift;
     my $is_Windows = ($^O =~ /win32|dos/i);
     my $Windows_type = Win_OS_Type($rpending_complaint) if $is_Windows;
-    return ($is_Windows, $Windows_type);
+    return($is_Windows, $Windows_type);
 }
 
 sub find_config_file {
@@ -3121,7 +3121,7 @@ EOM
 
                 # remove leading dashes if this is an alias
                 foreach (@$rbody_parts) {s/^\-+//;}
-                push @{ ${$rexpansion}{$name} }, @$rbody_parts;
+                push @{${$rexpansion}{$name}}, @$rbody_parts;
             }
             else {
                 push(@config_list, @$rbody_parts);
@@ -3134,7 +3134,7 @@ EOM
             "Didn't see a '}' to match the '{' at line $opening_brace_line in config file '$config_file'\n";
     }
     eval {$fh->close()};
-    return (\@config_list, $death_message);
+    return(\@config_list, $death_message);
 }
 
 sub strip_comment {
@@ -3145,12 +3145,12 @@ sub strip_comment {
 
     # check for full-line comment
     if ($instr =~ /^\s*#/) {
-        return ("", $msg);
+        return("", $msg);
     }
 
     # nothing to do if no comments
     if ($instr !~ /#/) {
-        return ($instr, $msg);
+        return($instr, $msg);
     }
 
     # handle case of no quotes
@@ -3162,7 +3162,7 @@ sub strip_comment {
         # Otherwise, it would have to be quoted:
         #    -sbcp='#'
         $instr =~ s/\s+\#.*$//;
-        return ($instr, $msg);
+        return($instr, $msg);
     }
 
     # handle comments and quotes
@@ -3212,7 +3212,7 @@ EOM
             }
         }
     }
-    return ($outstr, $msg);
+    return($outstr, $msg);
 }
 
 sub parse_args {
@@ -3270,7 +3270,7 @@ EOM
             }
         }
     }
-    return (\@body_parts, $msg);
+    return(\@body_parts, $msg);
 }
 
 sub dump_long_names {
@@ -3773,7 +3773,7 @@ print call requires mode = 'w' but mode = ($mode); trace follows:
 ------------------------------------------------------------------------
 EOM
     }
-    ${ $self->[0] } .= $_[0];
+    ${$self->[0]} .= $_[0];
 }
 sub close {return}
 
@@ -3844,7 +3844,7 @@ print requires mode = 'w' but mode = ($mode); trace follows:
 ------------------------------------------------------------------------
 EOM
     }
-    push @{ $self->[0] }, $_[0];
+    push @{$self->[0]}, $_[0];
 }
 sub close {return}
 
@@ -5815,7 +5815,7 @@ sub markup_tokens {
         $token = $self->markup_html_element($token, $type);
         push @colored_tokens, $token;
     }
-    return (\@colored_tokens);
+    return(\@colored_tokens);
 }
 
 sub markup_html_element {
@@ -8424,7 +8424,7 @@ EOM
         # first token => [list, list, ...]
         foreach my $value (values(%secret_operators)) {
             my $tok = $value->[0];
-            push @{ $is_leading_secret_token{$tok} }, $value;
+            push @{$is_leading_secret_token{$tok}}, $value;
         }
     }
 
@@ -8444,7 +8444,7 @@ EOM
             next unless ($is_leading_secret_token{$token});
 
             #      Loop over all secret operators with this leading token
-            foreach my $rpattern (@{ $is_leading_secret_token{$token} }) {
+            foreach my $rpattern (@{$is_leading_secret_token{$token}}) {
                 my $jend = $j - 1;
                 foreach my $tok (@{$rpattern}) {
                     $jend++;
@@ -11749,7 +11749,7 @@ sub accumulate_block_text {
                     # restore any leading text saved when we entered this block
                     if (defined($block_leading_text{$type_sequence})) {
                         ($block_leading_text, $rblock_leading_if_elsif_text)
-                            = @{ $block_leading_text{$type_sequence} };
+                            = @{$block_leading_text{$type_sequence}};
                         $i_block_leading_text = $i;
                         delete $block_leading_text{$type_sequence};
                         $rleading_block_if_elsif_text =
@@ -11862,7 +11862,7 @@ sub accumulate_block_text {
             $csc_last_label = $tokens_to_go[$i_terminal];
         }
 
-        return ($terminal_type, $i_terminal, $i_block_leading_text,
+        return($terminal_type, $i_terminal, $i_block_leading_text,
             $block_leading_text, $block_line_count, $block_label);
     }
 }
@@ -12648,7 +12648,7 @@ sub send_lines_to_vertical_aligner {
 
         # done with this line .. join text of tokens to make the last field
         push(@fields, join('', @tokens_to_go[ $i_start .. $iend ]));
-        return (\@tokens, \@fields, \@patterns);
+        return(\@tokens, \@fields, \@patterns);
     }
 
 }    # end make_alignment_patterns
@@ -12796,7 +12796,7 @@ sub get_opening_indentation {
         if ($seqno) {
             if ($saved_opening_indentation{$seqno}) {
                 ($indent, $offset, $is_leading) =
-                    @{ $saved_opening_indentation{$seqno} };
+                    @{$saved_opening_indentation{$seqno}};
             }
 
             # some kind of serious error
@@ -12817,7 +12817,7 @@ sub get_opening_indentation {
             $exists = 0;
         }
     }
-    return ($indent, $offset, $is_leading, $exists);
+    return($indent, $offset, $is_leading, $exists);
 }
 
 sub lookup_opening_indentation {
@@ -12867,7 +12867,7 @@ sub lookup_opening_indentation {
     my $ibeg = $ri_start->[$nline];
     my $offset = token_sequence_length($ibeg, $i_opening) - 1;
     my $is_leading = ($ibeg == $i_opening);
-    return ($rindentation_list->[ $nline + 1 ], $offset, $is_leading);
+    return($rindentation_list->[ $nline + 1 ], $offset, $is_leading);
 }
 
 {
@@ -13326,7 +13326,7 @@ sub lookup_opening_indentation {
             }
         }
 
-        return ($indentation, $lev, $level_end, $terminal_type,
+        return($indentation, $lev, $level_end, $terminal_type,
             $is_semicolon_terminated, $is_outdented_line);
     }
 }
@@ -13610,7 +13610,7 @@ sub get_seqno {
             }
         }
     }
-    return ($seqno);
+    return($seqno);
 }
 
 {
@@ -14889,7 +14889,7 @@ sub pad_array_to_go {
                 $do_not_break_apart = 0 if $must_break_open;
             }
         }
-        return ($bp_count, $do_not_break_apart);
+        return($bp_count, $do_not_break_apart);
     }
 
     sub do_uncontained_comma_breaks {
@@ -14908,7 +14908,7 @@ sub pad_array_to_go {
         my $dd = shift;
         my $bias = -.01;
         my $old_comma_break_count = 0;
-        foreach my $ii (@{ $comma_index[$dd] }) {
+        foreach my $ii (@{$comma_index[$dd]}) {
             if ($old_breakpoint_to_go[$ii]) {
                 $old_comma_break_count++;
                 $bond_strength_to_go[$ii] = $bias;
@@ -14985,7 +14985,7 @@ sub pad_array_to_go {
 
     sub set_for_semicolon_breakpoints {
         my $dd = shift;
-        foreach (@{ $rfor_semicolon_list[$dd] }) {
+        foreach (@{$rfor_semicolon_list[$dd]}) {
             set_forced_breakpoint($_);
         }
     }
@@ -15004,12 +15004,12 @@ sub pad_array_to_go {
             # or  and  ||  &&
             foreach my $i (0 .. 3) {
                 if ($rand_or_list[$dd][$i]) {
-                    foreach (@{ $rand_or_list[$dd][$i] }) {
+                    foreach (@{$rand_or_list[$dd][$i]}) {
                         set_forced_breakpoint($_);
                     }
 
                     # break at any 'if' and 'unless' too
-                    foreach (@{ $rand_or_list[$dd][4] }) {
+                    foreach (@{$rand_or_list[$dd][4]}) {
                         set_forced_breakpoint($_);
                     }
                     $rand_or_list[$dd] = [];
@@ -15186,23 +15186,23 @@ sub pad_array_to_go {
             # remember locations of '||'  and '&&' for possible breaks if we
             # decide this is a long logical expression.
             if ($type eq '||') {
-                push @{ $rand_or_list[$depth][2] }, $i;
+                push @{$rand_or_list[$depth][2]}, $i;
                 ++$has_old_logical_breakpoints[$depth]
                     if (($i == $i_line_start || $i == $i_line_end)
                         && $rOpts_break_at_old_logical_breakpoints);
             } ## end if ( $type eq '||' )
             elsif ($type eq '&&') {
-                push @{ $rand_or_list[$depth][3] }, $i;
+                push @{$rand_or_list[$depth][3]}, $i;
                 ++$has_old_logical_breakpoints[$depth]
                     if (($i == $i_line_start || $i == $i_line_end)
                         && $rOpts_break_at_old_logical_breakpoints);
             } ## end elsif ( $type eq '&&' )
             elsif ($type eq 'f') {
-                push @{ $rfor_semicolon_list[$depth] }, $i;
+                push @{$rfor_semicolon_list[$depth]}, $i;
             }
             elsif ($type eq 'k') {
                 if ($token eq 'and') {
-                    push @{ $rand_or_list[$depth][1] }, $i;
+                    push @{$rand_or_list[$depth][1]}, $i;
                     ++$has_old_logical_breakpoints[$depth]
                         if (($i == $i_line_start || $i == $i_line_end)
                             && $rOpts_break_at_old_logical_breakpoints);
@@ -15212,7 +15212,7 @@ sub pad_array_to_go {
                 # block -- but we will break in logical breaks below so that
                 # they do not add to the forced_breakpoint_count
                 elsif ($token eq 'or') {
-                    push @{ $rand_or_list[$depth][0] }, $i;
+                    push @{$rand_or_list[$depth][0]}, $i;
                     ++$has_old_logical_breakpoints[$depth]
                         if (($i == $i_line_start || $i == $i_line_end)
                             && $rOpts_break_at_old_logical_breakpoints);
@@ -15227,7 +15227,7 @@ sub pad_array_to_go {
                     } ## end else [ if ( $is_logical_container...)]
                 } ## end elsif ( $token eq 'or' )
                 elsif ($token eq 'if' || $token eq 'unless') {
-                    push @{ $rand_or_list[$depth][4] }, $i;
+                    push @{$rand_or_list[$depth][4]}, $i;
                     if (($i == $i_line_start || $i == $i_line_end)
                         && $rOpts_break_at_old_logical_breakpoints) {
                         set_forced_breakpoint($i);
@@ -15595,7 +15595,7 @@ sub pad_array_to_go {
                 } ## end if ( $item_count_stack...)
 
                 if ($is_long_term
-                    && @{ $rfor_semicolon_list[$current_depth] }) {
+                    && @{$rfor_semicolon_list[$current_depth]}) {
                     set_for_semicolon_breakpoints($current_depth);
 
                     # open up a long 'for' or 'foreach' container to allow
@@ -16798,7 +16798,7 @@ sub study_list_complexity {
         $number_of_fields_best = 1;
     }
 
-    return ($number_of_fields_best, \@i_ragged_break_list, $identifier_count);
+    return($number_of_fields_best, \@i_ragged_break_list, $identifier_count);
 }
 
 sub get_maximum_fields_wanted {
@@ -16859,7 +16859,7 @@ sub get_maximum_fields_wanted {
             $number_of_fields_best = 1;
         }
     }
-    return ($number_of_fields_best);
+    return($number_of_fields_best);
 }
 
 sub table_columns_available {
@@ -17234,7 +17234,7 @@ sub undo_forced_breakpoint_stack {
                 # left or right of an operator.
                 #----------------------------------------------------------
 
-                my ($itok) = @{ $joint[$n] };
+                my ($itok) = @{$joint[$n]};
                 if ($itok) {
 
                     # FIXME: Patch - may not be necessary
@@ -18070,7 +18070,7 @@ sub undo_forced_breakpoint_stack {
                 $more_to_do++;
             }
         }
-        return ($ri_beg, $ri_end);
+        return($ri_beg, $ri_end);
     }
 }    # end recombine_breakpoints
 
@@ -18105,13 +18105,13 @@ sub break_all_chain_tokens {
 
         if ($is_chain_operator{$tokenl} && $want_break_before{$typel}) {
             next if ($typel eq '?');
-            push @{ $left_chain_type{$typel} }, $il;
+            push @{$left_chain_type{$typel}}, $il;
             $saw_chain_type{$typel} = 1;
             $count++;
         }
         if ($is_chain_operator{$tokenr} && !$want_break_before{$typer}) {
             next if ($typer eq '?');
-            push @{ $right_chain_type{$typer} }, $ir;
+            push @{$right_chain_type{$typer}}, $ir;
             $saw_chain_type{$typer} = 1;
             $count++;
         }
@@ -18128,7 +18128,7 @@ sub break_all_chain_tokens {
             $type = '+' if ($type eq '-');
             $type = '*' if ($type eq '/');
             if ($saw_chain_type{$type}) {
-                push @{ $interior_chain_type{$type} }, $i;
+                push @{$interior_chain_type{$type}}, $i;
                 $count++;
             }
         }
@@ -18147,12 +18147,12 @@ sub break_all_chain_tokens {
         last if ($nmax == 1 && $type =~ /^[\.\+]$/);
 
         # loop over all interior chain tokens
-        foreach my $itest (@{ $interior_chain_type{$type} }) {
+        foreach my $itest (@{$interior_chain_type{$type}}) {
 
             # loop over all left end tokens of same type
             if ($left_chain_type{$type}) {
                 next if $nobreak_to_go[ $itest - 1 ];
-                foreach my $i (@{ $left_chain_type{$type} }) {
+                foreach my $i (@{$left_chain_type{$type}}) {
                     next unless in_same_container($i, $itest);
                     push @insert_list, $itest - 1;
 
@@ -18178,7 +18178,7 @@ sub break_all_chain_tokens {
             # loop over all right end tokens of same type
             if ($right_chain_type{$type}) {
                 next if $nobreak_to_go[$itest];
-                foreach my $i (@{ $right_chain_type{$type} }) {
+                foreach my $i (@{$right_chain_type{$type}}) {
                     next unless in_same_container($i, $itest);
                     push @insert_list, $itest;
 
@@ -18981,7 +18981,7 @@ sub set_continuation_breaks {
             }
         }
     }
-    return (\@i_first, \@i_last, $colon_count);
+    return(\@i_first, \@i_last, $colon_count);
 }
 
 sub insert_additional_breaks {
@@ -19448,7 +19448,7 @@ package Perl::Tidy::VerticalAligner::Line;
 
     sub set_column {$_[0]->[RALIGNMENTS]->[ $_[1] ]->set_column($_[2])}
     sub get_alignment {$_[0]->[RALIGNMENTS]->[ $_[1] ]}
-    sub get_alignments {@{ $_[0]->[RALIGNMENTS] }}
+    sub get_alignments {@{$_[0]->[RALIGNMENTS]}}
     sub get_column {$_[0]->[RALIGNMENTS]->[ $_[1] ]->get_column()}
 
     sub get_starting_column {
@@ -19460,7 +19460,7 @@ package Perl::Tidy::VerticalAligner::Line;
     }
     sub set_alignments {
         my $self = shift;
-        @{ $self->[RALIGNMENTS] } = @_;
+        @{$self->[RALIGNMENTS]} = @_;
     }
 
     sub current_field_width {
@@ -21228,7 +21228,7 @@ sub reduce_valign_buffer_indentation {
         my $max_valign_buffer = @valign_buffer;
         for (my $i = 0; $i < $max_valign_buffer; $i++) {
             my ( $line, $leading_space_count, $level ) =
-                @{ $valign_buffer[$i] };
+                @{$valign_buffer[$i]};
             my $ws = substr($line, 0, $diff);
             if ((length($ws) == $diff) && $ws =~ /^\s+$/) {
                 $line = substr($line, $diff);
@@ -23013,7 +23013,7 @@ sub report_tokenization_errors {
     # for legibility and to avoid code breakage as new keywords are introduced
     if ($tokenizer_self->{_rlower_case_labels_at}) {
         my @lower_case_labels_at =
-            @{ $tokenizer_self->{_rlower_case_labels_at} };
+            @{$tokenizer_self->{_rlower_case_labels_at}};
         write_logfile_entry(
             "Suggest using upper case characters in label(s)\n");
         local $" = ')(';
@@ -23137,7 +23137,7 @@ sub get_line {
             if (@$rhere_target_list) {
                 # there can be multiple here targets
                 ($here_doc_target, $here_quote_character) =
-                    @{ shift @$rhere_target_list };
+                    @{shift @$rhere_target_list};
                 $tokenizer_self->{_here_doc_target} = $here_doc_target;
                 $tokenizer_self->{_here_quote_character} =
                     $here_quote_character;
@@ -23363,7 +23363,7 @@ sub get_line {
     if (@$rhere_target_list) {
 
         my ( $here_doc_target, $here_quote_character ) =
-            @{ shift @$rhere_target_list };
+            @{shift @$rhere_target_list};
         $tokenizer_self->{_in_here_doc} = 1;
         $tokenizer_self->{_here_doc_target} = $here_doc_target;
         $tokenizer_self->{_here_quote_character} = $here_quote_character;
@@ -23534,7 +23534,7 @@ sub guess_old_indentation_level {
     my $indent_columns = $tokenizer_self->{_indent_columns};
     $indent_columns = 4 if (!$indent_columns);
     $level = int($spaces / $indent_columns);
-    return ($level);
+    return($level);
 }
 
 # This is a currently unused debug routine
@@ -23545,7 +23545,7 @@ sub dump_functions {
     foreach $pkg (keys %is_user_function) {
         print $fh "\nnon-constant subs in package $pkg\n";
 
-        foreach $sub (keys %{ $is_user_function{$pkg} }) {
+        foreach $sub (keys %{$is_user_function{$pkg}}) {
             my $msg = "";
             if ($is_block_list_function{$pkg}{$sub}) {
                 $msg = 'block_list';
@@ -23561,7 +23561,7 @@ sub dump_functions {
     foreach $pkg (keys %is_constant) {
         print $fh "\nconstants and constant subs in package $pkg\n";
 
-        foreach $sub (keys %{ $is_constant{$pkg} }) {
+        foreach $sub (keys %{$is_constant{$pkg}}) {
             print $fh "$sub\n";
         }
     }
@@ -23924,7 +23924,7 @@ sub prepare_for_a_new_file {
                     $tokenizer_self->{_here_quote_character}
                 ];
             if ($tokenizer_self->{_rhere_target_list}) {
-                push @{$rht}, @{ $tokenizer_self->{_rhere_target_list} };
+                push @{$rht}, @{$tokenizer_self->{_rhere_target_list}};
                 $tokenizer_self->{_rhere_target_list} = undef;
             }
             $tokenizer_self->{_in_here_doc} = undef;
@@ -25610,7 +25610,7 @@ EOM
                         && label_ok()
                 ) {
                     if ($tok !~ /[A-Z]/) {
-                        push @{ $tokenizer_self->{_rlower_case_labels_at} },
+                        push @{$tokenizer_self->{_rlower_case_labels_at}},
                             $input_line_number;
                     }
                     $type = 'J';
@@ -26765,7 +26765,7 @@ sub label_ok {
     # otherwise, it is a label if and only if it follows a ';' (real or fake)
     # or another label
     else {
-        return ($last_nonblank_type eq ';' || $last_nonblank_type eq 'J');
+        return($last_nonblank_type eq ';' || $last_nonblank_type eq 'J');
     }
 }
 
@@ -27197,7 +27197,7 @@ sub increase_nesting_depth {
     }
     $nested_statement_type[$aa][ $current_depth[$aa] ] = $statement_type;
     $statement_type = "";
-    return ($seqno, $indent);
+    return($seqno, $indent);
 }
 
 sub decrease_nesting_depth {
@@ -27295,7 +27295,7 @@ EOM
         }
         increment_brace_error();
     }
-    return ($seqno, $outdent);
+    return($seqno, $outdent);
 }
 
 sub check_final_nesting_depths {
@@ -27341,7 +27341,7 @@ sub peek_ahead_for_n_nonblank_pre_tokens {
             pre_tokenize($line, $max_pretokens);
         last;
     }
-    return ($rpre_tokens, $rpre_types);
+    return($rpre_tokens, $rpre_types);
 }
 
 # look ahead for next non-blank, non-comment line of code
@@ -27429,7 +27429,7 @@ sub guess_if_pattern_or_conditional {
             }
         }
     }
-    return ($is_pattern, $msg);
+    return($is_pattern, $msg);
 }
 
 sub guess_if_pattern_or_division {
@@ -27520,7 +27520,7 @@ sub guess_if_pattern_or_division {
             }
         }
     }
-    return ($is_pattern, $msg);
+    return($is_pattern, $msg);
 }
 
 # try to resolve here-doc vs. shift by looking ahead for
@@ -27773,7 +27773,7 @@ sub scan_bare_identifier_do {
         # change this warning to log message if it becomes annoying
         warning("didn't find identifier after leading ::\n");
     }
-    return ($i, $tok, $type, $prototype);
+    return($i, $tok, $type, $prototype);
 }
 
 sub scan_id_do {
@@ -27879,7 +27879,7 @@ sub scan_id_do {
         print STDOUT
             "NSCAN: returns i=$i, tok=$tok, type=$type, state=$id_scan_state\n";
     };
-    return ($i, $tok, $type, $id_scan_state);
+    return($i, $tok, $type, $id_scan_state);
 }
 
 sub check_prototype {
@@ -27996,7 +27996,7 @@ sub do_scan_package {
         $type = 'k';
     }
 
-    return ($i, $tok, $type);
+    return($i, $tok, $type);
 }
 
 sub scan_identifier_do {
@@ -28531,7 +28531,7 @@ sub scan_identifier_do {
         print STDOUT
             "SCANID: returned with tok, i, state, identifier =$tok, $i, $id_scan_state, $identifier\n";
     };
-    return ($i, $tok, $type, $id_scan_state, $identifier);
+    return($i, $tok, $type, $id_scan_state, $identifier);
 }
 
 {
@@ -28730,7 +28730,7 @@ sub scan_identifier_do {
         # no match but line not blank
         else {
         }
-        return ($i, $tok, $type, $id_scan_state);
+        return($i, $tok, $type, $id_scan_state);
     }
 }
 
@@ -28753,7 +28753,7 @@ sub find_next_nonblank_token {
     if ($next_nonblank_token =~ /^\s*$/) {
         $next_nonblank_token = $$rtokens[ ++$i ];
     }
-    return ($next_nonblank_token, $i);
+    return($next_nonblank_token, $i);
 }
 
 sub numerator_expected {
@@ -28834,7 +28834,7 @@ sub find_next_nonblank_token_on_this_line {
     else {
         $next_nonblank_token = "";
     }
-    return ($next_nonblank_token, $i);
+    return($next_nonblank_token, $i);
 }
 
 sub find_angle_operator_termination {
@@ -28902,7 +28902,7 @@ sub find_angle_operator_termination {
             if ($expecting eq UNKNOWN) {
                 my $check = substr($input_line, $pos - 2, 1);
                 if ($check eq '-') {
-                    return ($i, $type);
+                    return($i, $type);
                 }
             }
 
@@ -28975,7 +28975,7 @@ sub find_angle_operator_termination {
             }
         }
     }
-    return ($i, $type);
+    return($i, $type);
 }
 
 sub scan_number_do {
@@ -29004,7 +29004,7 @@ sub scan_number_do {
     if ($first_char !~ /[\d\.\+\-Ee]/) {
         warning("Program bug - scan_number given character $first_char\n");
         report_definite_bug();
-        return ($i, $type, $number);
+        return($i, $type, $number);
     }
 
     # handle v-string without leading 'v' character ('Two Dot' rule)
@@ -29058,7 +29058,7 @@ sub scan_number_do {
     ) {
         $number = undef;
         $type = $input_type;
-        return ($i, $type, $number);
+        return($i, $type, $number);
     }
 
     # Found a number; now we must convert back from character position
@@ -29069,7 +29069,7 @@ sub scan_number_do {
         inverse_pretoken_map($i, $pos, $rtoken_map, $max_token_index);
     if ($error) {warning("Possibly invalid number\n")}
 
-    return ($i, $type, $number);
+    return($i, $type, $number);
 }
 
 sub inverse_pretoken_map {
@@ -29091,7 +29091,7 @@ sub inverse_pretoken_map {
             last;
         }
     }
-    return ($i, $error);
+    return($i, $error);
 }
 
 sub find_here_doc {
@@ -29206,7 +29206,7 @@ sub find_here_doc {
     # patch to neglect any prepended backslash
     if ($found_target && $backslash) {$i++}
 
-    return ($found_target, $here_doc_target, $here_quote_character, $i,
+    return($found_target, $here_doc_target, $here_quote_character, $i,
         $saw_error);
 }
 
@@ -29264,7 +29264,7 @@ sub do_quote {
             $quoted_string_1 .= "\n";
         }
     }
-    return ($i, $in_quote, $quote_character, $quote_pos, $quote_depth,
+    return($i, $in_quote, $quote_character, $quote_pos, $quote_depth,
         $quoted_string_1, $quoted_string_2);
 }
 
@@ -29425,7 +29425,7 @@ sub follow_quoted_string {
         }
     }
     if ($i > $max_token_index) {$i = $max_token_index}
-    return ($i, $in_quote, $beginning_tok, $quote_pos, $quote_depth,
+    return($i, $in_quote, $beginning_tok, $quote_pos, $quote_depth,
         $quoted_string);
 }
 
@@ -29503,7 +29503,7 @@ sub make_numbered_line {
     $offset -= length($numbered_line);
     $numbered_line .= $str;
     my $underline = " " x length($numbered_line);
-    return ($offset, $numbered_line, $underline);
+    return($offset, $numbered_line, $underline);
 }
 
 sub write_on_underline {
@@ -29537,7 +29537,7 @@ sub write_on_underline {
         $pos_chr = substr($pos_chr, 0, length($pos_chr) - $excess);
     }
     substr($underline, $pos, length($pos_chr)) = $pos_chr;
-    return ($underline);
+    return($underline);
 }
 
 sub pre_tokenize {
@@ -29575,7 +29575,7 @@ sub pre_tokenize {
 
         # that's all..
         else {
-            return (\@tokens, \@token_map, \@type);
+            return(\@tokens, \@token_map, \@type);
         }
 
         push @tokens, $1;
@@ -29583,7 +29583,7 @@ sub pre_tokenize {
 
     } while (--$max_tokens_wanted != 0);
 
-    return (\@tokens, \@token_map, \@type);
+    return(\@tokens, \@token_map, \@type);
 }
 
 sub show_tokens {

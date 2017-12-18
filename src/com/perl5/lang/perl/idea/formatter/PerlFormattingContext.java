@@ -143,9 +143,12 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .afterInside(LEFT_PAREN, PARENTHESISED_EXPR).spaceIf(mySettings.SPACE_WITHIN_PARENTHESES)
       .beforeInside(RIGHT_PAREN, PARENTHESISED_EXPR).spaceIf(mySettings.SPACE_WITHIN_PARENTHESES)
 
-      .betweenInside(LEFT_BRACE, RIGHT_BRACE, BLOCK).spaces(0)
-      .afterInside(LEFT_BRACE, BLOCK).spaceIf(mySettings.SPACE_WITHIN_BRACES)
-      .beforeInside(RIGHT_BRACE, BLOCK).spaceIf(mySettings.SPACE_WITHIN_BRACES)
+      .betweenInside(BLOCK_LEFT_BRACES, BLOCK_RIGHT_BRACES, BLOCK).spaces(0)
+      .afterInside(BLOCK_LEFT_BRACES, BLOCK).spaceIf(mySettings.SPACE_WITHIN_BRACES)
+      .beforeInside(BLOCK_RIGHT_BRACES, BLOCK).spaceIf(mySettings.SPACE_WITHIN_BRACES)
+
+      .after(VARIABLE_LEFT_BRACES).spaces(0)
+      .before(VARIABLE_RIGHT_BRACES).spaces(0)
 
       .betweenInside(LEFT_BRACE, RIGHT_BRACE, ANON_HASH).spaces(0)
       .afterInside(LEFT_BRACE, ANON_HASH).spaceIf(myPerlSettings.SPACES_WITHIN_ANON_HASH)
@@ -160,7 +163,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATOR_DEREFERENCE).spaces(0)
 
       .before(CALL_ARGUMENTS).spaces(1)
-      .after(RESERVED_SAY).spaces(1)
       .before(PARENTHESISED_CALL_ARGUMENTS).spaces(0)
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaces(0)
       .afterInside(LEFT_PAREN, PARENTHESISED_CALL_ARGUMENTS).spaceIf(mySettings.SPACE_WITHIN_METHOD_CALL_PARENTHESES)
@@ -206,6 +208,27 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .afterInside(RESERVED_UNTIL, UNTIL_STATEMENT_MODIFIER).spaces(1)
       .afterInside(FOR_OR_FOREACH, FOR_STATEMENT_MODIFIER).spaces(1)
       .afterInside(RESERVED_WHEN, WHEN_STATEMENT_MODIFIER).spaces(1)
+
+      .between(LABEL_KEYWORDS, SEMICOLON).spaces(0)
+      .after(LABEL_KEYWORDS).spaces(1)
+
+      .afterInside(PERL_HANDLE_EXPR, PRINT_EXPR).spaces(1)
+
+      .between(CUSTOM_EXPR_KEYWORDS, SEMICOLON).spaces(0)
+      .between(CUSTOM_EXPR_KEYWORDS, PARENTHESISED_EXPR).spaces(0)
+      .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
+
+      .after(QUOTE_LIKE_OPENERS).spaces(0)
+
+      .betweenInside(PACKAGE, SEMICOLON, USE_STATEMENT).spaces(0)
+      .betweenInside(VERSION_ELEMENT, SEMICOLON, USE_STATEMENT).spaces(0)
+      .afterInside(PACKAGE, USE_STATEMENT).spaces(1)
+      .afterInside(VERSION_ELEMENT, USE_STATEMENT).spaces(1)
+
+      .betweenInside(PACKAGE, SEMICOLON, NO_STATEMENT).spaces(0)
+      .betweenInside(VERSION_ELEMENT, SEMICOLON, NO_STATEMENT).spaces(0)
+      .afterInside(PACKAGE, NO_STATEMENT).spaces(1)
+      .afterInside(VERSION_ELEMENT, NO_STATEMENT).spaces(1)
 
       .beforeInside(BLOCK, SUB_DEFINITIONS_TOKENSET).spacing(
         mySettings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,

@@ -199,4 +199,67 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_LOCAL,
     RESERVED_STATE
   );
+
+  TokenSet LABEL_KEYWORDS = TokenSet.create(
+    RESERVED_LAST,
+    RESERVED_NEXT,
+    RESERVED_REDO,
+    RESERVED_GOTO
+  );
+
+  TokenSet CUSTOM_EXPR_KEYWORDS = TokenSet.create(
+    RESERVED_GREP,
+    RESERVED_MAP,
+    RESERVED_SORT,
+
+    RESERVED_SAY,
+    RESERVED_PRINT,
+    RESERVED_PRINTF,
+
+    RESERVED_USE,
+    RESERVED_NO,
+    RESERVED_REQUIRE,
+
+    RESERVED_UNDEF,
+    RESERVED_RETURN
+  );
+
+  TokenSet QUOTE_LIKE_OPENERS = TokenSet.create(
+    RESERVED_M,
+    RESERVED_QR,
+    RESERVED_S,
+    RESERVED_TR,
+    RESERVED_Y,
+    RESERVED_Q,
+    RESERVED_QQ,
+    RESERVED_QX,
+    RESERVED_QW,
+    OPERATOR_HEREDOC
+  );
+
+  TokenSet VARIABLE_LEFT_BRACES = TokenSet.create(
+    LEFT_BRACE_SCALAR,
+    LEFT_BRACE_ARRAY,
+    LEFT_BRACE_HASH,
+    LEFT_BRACE_GLOB,
+    LEFT_BRACE_CODE
+  );
+
+  TokenSet BLOCK_LEFT_BRACES = TokenSet.orSet(
+    VARIABLE_LEFT_BRACES,
+    TokenSet.create(LEFT_BRACE)
+  );
+
+  TokenSet VARIABLE_RIGHT_BRACES = TokenSet.create(
+    RIGHT_BRACE_SCALAR,
+    RIGHT_BRACE_ARRAY,
+    RIGHT_BRACE_HASH,
+    RIGHT_BRACE_GLOB,
+    RIGHT_BRACE_CODE
+  );
+
+  TokenSet BLOCK_RIGHT_BRACES = TokenSet.orSet(
+    VARIABLE_RIGHT_BRACES,
+    TokenSet.create(RIGHT_BRACE)
+  );
 }

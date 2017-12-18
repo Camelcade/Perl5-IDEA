@@ -17,4 +17,10 @@ elsif ($a) { say 'hi' }
 else {}
 say ${a};
 say "${a}";
-say "${\'hi'}";
+say "${ \'hi' }";
+${ say 'hi' };
+@{ say 'hi' };
+%{ say 'hi' };
+$#{ say 'hi' };
+*{ say 'hi' };
+&{ say 'hi' };

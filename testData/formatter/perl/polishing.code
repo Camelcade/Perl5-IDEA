@@ -1,0 +1,248 @@
+FOO:
+last  ;
+next  ;
+redo  ;
+goto  ;
+last    FOO;
+next    FOO;
+redo    FOO;
+last    $a;
+next    $a;
+redo    $a;
+goto    FOO;
+return    $a;
+return   (  $a  ) ;
+my    $a;
+our    $a;
+state    $a;
+local    $a;
+use    Foo::Bar;
+use    Foo::Bar    -strict;
+use    Foo::Bar    v1.5;
+use    Foo::Bar    v1.5    -strict;
+no    Foo::Bar;
+no    Foo::Bar    -strict;
+no    Foo::Bar    v1.5;
+no    Foo::Bar    v1.5    -strict;
+undef   ;
+undef   (  $a  ) ;
+undef    $a;
+require    Foo::Bar;
+require    'Bar.pm';
+require         v1.50;
+grep    {    $_    }    @ARGV;
+grep    {    $_    },    @ARGV;
+grep    @ARGV;
+grep    subname,    @ARGV;
+map    {    $_    }    @ARGV;
+map    {    $_    },    @ARGV;
+map    @ARGV;
+map    subname,    @ARGV;
+sort    {    $_    }    @ARGV;
+sort    {    $_    },    @ARGV;
+sort    subname,    @ARGV;
+sort    @ARGV;
+print    STDOUT    $a;
+say    STDOUT    $a;
+printf    STOUT    $a,    $b;
+print    $a;
+say    $a;
+printf    $a,    $b;
+sub    {        };
+m        /something/;
+m        {    something    };
+m#something#;
+qr        /something/;
+qr        {    something    };
+qr#something#;
+s        /something/asdf/;
+s        {    something    }{    asdf    };
+s#something#asdf#;
+tr        /something/asdf/;
+tr        {    something    }{    asdf    };
+tr#something#asdf#;
+y        /something/asdf/;
+y        {    something    }{    asdf    };
+y#something#asdf#;
+q        /something/;
+q        {    something    };
+q#something#;
+qq        /something/;
+qq        {    something    };
+qq#something#;
+qx        /something/;
+qx        {    something    };
+qx#something#;
+qw        /something/;
+qw        {    something    };
+qw#something#;
+<<EOF;
+EOF
+<<\EOF;
+EOF
+<<        "EOF";
+EOF
+<<        'EOF';
+EOF
+${    say    'hi'    };
+@{    say    'hi'    };
+%{    say    'hi'    };
+$#{    say    'hi'    };
+*{    say    'hi'    };
+&{    say    'hi'    };
+${    varname    };
+@{    varname    };
+%{    varname    };
+$#{    varname    };
+*{    varname    };
+&{    varname    };
+
+last
+  FOO;
+next
+  FOO;
+redo
+  FOO;
+last
+  $a;
+next
+  $a;
+redo
+  $a;
+goto
+  FOO;
+return
+  $a;
+my
+  $a;
+our
+  $a;
+state
+  $a;
+local
+  $a;
+use
+  Foo::Bar;
+use
+  Foo::Bar    -strict;
+use
+  Foo::Bar    v1.5;
+use
+  Foo::Bar    v1.5    -strict;
+no
+  Foo::Bar;
+no
+  Foo::Bar    -strict;
+no
+  Foo::Bar    v1.5;
+no
+  Foo::Bar    v1.5    -strict;
+undef
+  $a;
+require
+  Foo::Bar;
+require
+  'Bar.pm';
+grep
+{    $_    }    @ARGV;
+grep
+{    $_    },    @ARGV;
+grep
+  @ARGV;
+grep
+  subname,    @ARGV;
+map
+{    $_    }    @ARGV;
+map
+{    $_    },    @ARGV;
+map
+  @ARGV;
+map
+  subname,    @ARGV;
+sort
+{    $_    }    @ARGV;
+sort
+{    $_    },    @ARGV;
+sort
+  subname,    @ARGV;
+sort
+  @ARGV;
+print
+  STDOUT    $a;
+say
+  STDOUT    $a;
+printf
+  STOUT    $a,    $b;
+print
+  $a;
+say
+  $a;
+printf
+  $a,    $b;
+sub
+{        };
+m
+  /something/;
+m
+  {    something    };
+m#something#;
+qr
+  /something/;
+qr
+  {    something    };
+qr#something#;
+s
+  /something/asdf/;
+s
+  {    something    }{    asdf    };
+s#something#asdf#;
+tr
+  /something/asdf/;
+tr
+  {    something    }{    asdf    };
+tr#something#asdf#;
+y
+  /something/asdf/;
+y
+  {    something    }{    asdf    };
+y#something#asdf#;
+q
+/something/;
+q
+{    something    };
+q#something#;
+qq
+/something/;
+qq
+{    something    };
+qq#something#;
+qx
+/something/;
+qx
+{    something    };
+qx#something#;
+qw
+  /something/;
+qw
+  {    something    };
+qw#something#;
+<<EOF;
+EOF
+<<\EOF;
+EOF
+<<        "EOF";
+EOF
+<<        'EOF';
+EOF
+${
+    say    'hi'    };
+@{
+    say    'hi'    };
+%{
+    say    'hi'    };
+$#{
+    say    'hi'    };
+*{
+    say    'hi'    };
+&{
+  say    'hi'    };

@@ -18,3 +18,9 @@ else {}
 say ${a};
 say "${a}";
 say "${\'hi'}";
+${say 'hi'};
+@{say 'hi'};
+%{say 'hi'};
+$#{say 'hi'};
+*{say 'hi'};
+&{say 'hi'};
