@@ -28,6 +28,7 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
@@ -43,6 +44,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
   final static GeneratedParserUtilBase.Parser SUPER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_SUPER);
   final static GeneratedParserUtilBase.Parser INNER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_INNER);
   protected static TokenSet PARSER_TOKEN_SET;
+  public static final TokenSet MOOSE_RESERVED_TOKENSET;
 
   static {
     // in regular case, these tokens should be created in extension class
@@ -74,6 +76,9 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
 
     PARSER_TOKEN_SET =
       TokenSet.create(RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()]));
+
+    Collection<IElementType> reservedTokens = TOKENS_MAP.values();
+    MOOSE_RESERVED_TOKENSET = TokenSet.create(reservedTokens.toArray(new IElementType[reservedTokens.size()]));
   }
 
   @Override

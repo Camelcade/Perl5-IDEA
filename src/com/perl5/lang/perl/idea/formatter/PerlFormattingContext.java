@@ -39,6 +39,7 @@ import java.util.Map;
 
 import static com.perl5.lang.perl.idea.formatter.PerlIndentProcessor.MULTI_PARAM_BLOCK_CONTAINERS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
+import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final CommonCodeStyleSettings mySettings;
@@ -217,6 +218,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .between(CUSTOM_EXPR_KEYWORDS, SEMICOLON).spaces(0)
       .between(CUSTOM_EXPR_KEYWORDS, PARENTHESISED_EXPR).spaces(0)
       .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
+      .after(MOOSE_RESERVED_TOKENSET).spaces(1)
 
       .after(QUOTE_LIKE_OPENERS).spaces(0)
 

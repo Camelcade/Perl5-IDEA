@@ -20,6 +20,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
+import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
 
 /**
@@ -176,23 +177,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_FUNC
   );
 
-  TokenSet MOOSE_KEYWORDS_TOKENSET = TokenSet.create(
-    RESERVED_INNER,
-    RESERVED_WITH,
-    RESERVED_EXTENDS,
-    RESERVED_META,
-    RESERVED_OVERRIDE,
-    RESERVED_AROUND,
-    RESERVED_SUPER,
-    RESERVED_AUGMENT,
-    RESERVED_AFTER,
-    RESERVED_BEFORE,
-    RESERVED_HAS
-  );
-
   TokenSet KEYWORDS_TOKENSET = TokenSet.orSet(
     DEFAULT_KEYWORDS_TOKENSET,
-    MOOSE_KEYWORDS_TOKENSET,
+    MOOSE_RESERVED_TOKENSET,
     METHOD_SIGNATURES_KEYWORDS_TOKENSET,
     TRY_CATCH_KEYWORDS_TOKENSET
   );
