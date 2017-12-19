@@ -17,12 +17,14 @@
 package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
+import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.htmlmason.idea.formatter.AbstractMasonFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import org.jetbrains.annotations.NotNull;
 
-public class MasonFormattingContext extends PerlFormattingContext implements Mason2ElementTypes {
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_LINE_OPENER;
+
+public class MasonFormattingContext extends AbstractMasonFormattingContext {
   public MasonFormattingContext(@NotNull CodeStyleSettings settings) {
     super(settings);
   }
@@ -30,5 +32,10 @@ public class MasonFormattingContext extends PerlFormattingContext implements Mas
   @Override
   public PerlIndentProcessor getIndentProcessor() {
     return MasonIndentProcessor.INSTANCE;
+  }
+
+  @Override
+  protected IElementType getLineOpenerToken() {
+    return MASON_LINE_OPENER;
   }
 }

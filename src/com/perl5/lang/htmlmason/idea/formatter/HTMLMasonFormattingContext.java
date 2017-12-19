@@ -17,14 +17,17 @@
 package com.perl5.lang.htmlmason.idea.formatter;
 
 import com.intellij.formatting.SpacingBuilder;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import org.jetbrains.annotations.NotNull;
 
-public class HTMLMasonFormattingContext extends PerlFormattingContext implements HTMLMasonElementTypes {
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.ATTR_OR_ARG_ELEMENT_PATTERN;
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+
+public class HTMLMasonFormattingContext extends AbstractMasonFormattingContext {
   private static final TokenSet SIMPLE_OPENERS = TokenSet.create(
     HTML_MASON_BLOCK_OPENER,
     HTML_MASON_CALL_OPENER,
@@ -51,5 +54,15 @@ public class HTMLMasonFormattingContext extends PerlFormattingContext implements
   @Override
   public PerlIndentProcessor getIndentProcessor() {
     return HTMLMasonIndentProcessor.INSTANCE;
+  }
+
+  @Override
+  public boolean isNewLineForbiddenAt(@NotNull ASTNode node) {
+    return super.isNewLineForbiddenAt(node) || ATTR_OR_ARG_ELEMENT_PATTERN.accepts(node.getPsi());
+  }
+
+  @Override
+  protected IElementType getLineOpenerToken() {
+    return HTML_MASON_LINE_OPENER;
   }
 }

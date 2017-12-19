@@ -19,14 +19,6 @@ package com.perl5.lang.mojolicious.idea.formatter.blocks;
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.editor.Document;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiWhiteSpace;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
@@ -35,10 +27,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MojoliciousFormattingBlock extends PerlFormattingBlock implements MojoliciousElementTypes {
-  private static final TokenSet LINE_OPENERS = TokenSet.create(
-    MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
-  );
+public class MojoliciousFormattingBlock extends PerlFormattingBlock {
 
   public MojoliciousFormattingBlock(@NotNull ASTNode node,
                                     @Nullable Wrap wrap,
@@ -46,45 +35,6 @@ public class MojoliciousFormattingBlock extends PerlFormattingBlock implements M
                                     @NotNull PerlFormattingContext context
   ) {
     super(node, wrap, alignment, context);
-  }
-
-  @Override
-  protected boolean isNewLineForbidden(@NotNull ASTNode node) {
-    if (super.isNewLineForbidden(node)) {
-      return true;
-    }
-
-    PsiElement element = node.getPsi();
-    PsiFile file = element.getContainingFile();
-    Document document = PsiDocumentManager.getInstance(file.getProject()).getDocument(file);
-    if (document != null) {
-      int offset = node.getTextRange().getStartOffset();
-      int lineNumber = document.getLineNumber(offset);
-      int lineStartOffset = document.getLineStartOffset(lineNumber);
-      PsiElement firstElement = file.findElementAt(lineStartOffset);
-
-
-      while (!element.equals(firstElement)) {
-        if (firstElement == null) {
-          return false;
-        }
-
-        if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement))) {
-          return true;
-        }
-        if (!(firstElement instanceof PsiWhiteSpace)) {
-          return false;
-        }
-
-        firstElement = firstElement.getNextSibling();
-      }
-
-      if (LINE_OPENERS.contains(PsiUtilCore.getElementType(firstElement))) {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   @Override

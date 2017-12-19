@@ -16,36 +16,26 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
-import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 08.03.2016.
- */
-public abstract class AbstractMasonFormattingBlock extends PerlFormattingBlock {
-  public AbstractMasonFormattingBlock(@NotNull ASTNode node,
-                                      @Nullable Wrap wrap,
-                                      @Nullable Alignment alignment,
-                                      @NotNull PerlFormattingContext context
-  ) {
-    super(node, wrap, alignment, context);
+public abstract class AbstractMasonFormattingContext extends PerlFormattingContext {
+  public AbstractMasonFormattingContext(@NotNull CodeStyleSettings settings) {
+    super(settings);
   }
 
   protected abstract IElementType getLineOpenerToken();
 
   @Override
-  protected boolean isNewLineForbidden(@NotNull ASTNode node) {
-    if (super.isNewLineForbidden(node)) {
+  public boolean isNewLineForbiddenAt(@NotNull ASTNode node) {
+    if (super.isNewLineForbiddenAt(node)) {
       return true;
     }
 

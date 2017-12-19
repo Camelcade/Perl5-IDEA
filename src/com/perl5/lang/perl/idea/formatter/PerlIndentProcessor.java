@@ -23,7 +23,6 @@ import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -31,6 +30,8 @@ import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLOSERS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 /**
@@ -130,6 +131,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     return UNINDENTABLE_TOKENS;
   }
 
+  @NotNull
   public Indent getNodeIndent(@NotNull ASTNode node) {
     IElementType nodeType = node.getElementType();
     ASTNode parent = node.getTreeParent();
@@ -147,8 +149,8 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     boolean isFirst = prevSibling == null;
     boolean isLast = nextSibling == null;
 
-    if (isFirst && PerlFormattingBlock.BLOCK_OPENERS.contains(nodeType)
-        || isLast && PerlFormattingBlock.BLOCK_CLOSERS.contains(nodeType)
+    if (isFirst && BLOCK_OPENERS.contains(nodeType)
+        || isLast && BLOCK_CLOSERS.contains(nodeType)
       ) {
       return Indent.getNoneIndent();
     }

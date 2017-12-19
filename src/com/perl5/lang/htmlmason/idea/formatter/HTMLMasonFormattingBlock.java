@@ -31,23 +31,13 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 08.03.2016.
  */
-public class HTMLMasonFormattingBlock extends AbstractMasonFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
+public class HTMLMasonFormattingBlock extends PerlFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
   public HTMLMasonFormattingBlock(@NotNull ASTNode node,
                                   @Nullable Wrap wrap,
                                   @Nullable Alignment alignment,
                                   @NotNull PerlFormattingContext context
   ) {
     super(node, wrap, alignment, context);
-  }
-
-  @Override
-  protected IElementType getLineOpenerToken() {
-    return HTML_MASON_LINE_OPENER;
-  }
-
-  @Override
-  protected boolean isNewLineForbidden(@NotNull ASTNode node) {
-    return super.isNewLineForbidden(node) || ATTR_OR_ARG_ELEMENT_PATTERN.accepts(node.getPsi());
   }
 
   @Override

@@ -19,9 +19,6 @@ package com.perl5.lang.mason2.idea.formatter;
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.idea.formatter.AbstractMasonFormattingBlock;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 09.01.2016.
  */
-public class MasonFormattingBlock extends AbstractMasonFormattingBlock implements Mason2ElementTypes {
+public class MasonFormattingBlock extends PerlFormattingBlock {
   public MasonFormattingBlock(@NotNull ASTNode node,
                               @Nullable Wrap wrap,
                               @Nullable Alignment alignment,
@@ -39,10 +36,6 @@ public class MasonFormattingBlock extends AbstractMasonFormattingBlock implement
     super(node, wrap, alignment, context);
   }
 
-  @Override
-  protected IElementType getLineOpenerToken() {
-    return MASON_LINE_OPENER;
-  }
 
   @Override
   protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {

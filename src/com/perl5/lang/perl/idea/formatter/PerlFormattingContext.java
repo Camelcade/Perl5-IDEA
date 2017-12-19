@@ -16,21 +16,34 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
+import com.intellij.formatting.ASTBlock;
+import com.intellij.formatting.Block;
+import com.intellij.formatting.Spacing;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
+import com.intellij.psi.impl.source.tree.CompositeElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.FactoryMap;
+import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +55,18 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
+  public final static TokenSet BLOCK_OPENERS = TokenSet.create(
+    LEFT_BRACE,
+    LEFT_BRACKET,
+    LEFT_PAREN
+  );
+  public final static TokenSet BLOCK_CLOSERS = TokenSet.create(
+    RIGHT_BRACE,
+    RIGHT_BRACKET,
+    RIGHT_PAREN,
+
+    SEMICOLON
+  );
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
@@ -68,6 +93,30 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     });
     return result;
   });
+  /**
+   * Elements that must have LF between them
+   */
+  public final static TokenSet LF_ELEMENTS = TokenSet.create(
+    LABEL_DECLARATION,
+    STATEMENT,
+    FOR_COMPOUND,
+    WHILE_COMPOUND,
+    WHEN_COMPOUND,
+    UNTIL_COMPOUND,
+    IF_COMPOUND,
+    USE_STATEMENT
+  );
+  private final static MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
+
+  static {
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS_PLUS, OPERATOR_PLUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS, OPERATOR_PLUS_PLUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_PLUS, OPERATOR_PLUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_MINUS_MINUS, OPERATOR_MINUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_MINUS, OPERATOR_MINUS_MINUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_MINUS, OPERATOR_MINUS);
+    OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT);
+  }
 
   public PerlFormattingContext(@NotNull CodeStyleSettings settings) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
@@ -327,5 +376,115 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
 
     return false;
+  }
+
+  @Nullable
+  public Spacing getSpacing(@NotNull ASTBlock parent, Block child1, @NotNull Block child2) {
+    if (child1 instanceof ASTBlock && child2 instanceof ASTBlock) {
+      ASTNode parentNode = parent.getNode();
+      IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
+      ASTNode child1Node = ((ASTBlock)child1).getNode();
+      IElementType child1Type = child1Node.getElementType();
+      ASTNode child2Node = ((ASTBlock)child2).getNode();
+      IElementType child2Type = child2Node.getElementType();
+
+      if (parentNodeType == PARENTHESISED_EXPR &&
+          (child1Type == LEFT_PAREN || child2Type == RIGHT_PAREN) &&
+          parentNode.getPsi().getParent() instanceof PsiPerlStatementModifier) {
+        return getSettings().SPACE_WITHIN_IF_PARENTHESES ?
+               Spacing.createSpacing(1, 1, 0, true, 1) :
+               Spacing.createSpacing(0, 0, 0, true, 1);
+      }
+
+      // fix for number/concat
+      if (child2Type == OPERATOR_CONCAT) {
+        ASTNode run = child1Node;
+        while (run instanceof CompositeElement) {
+          run = run.getLastChildNode();
+        }
+
+        if (run != null) {
+          IElementType runType = run.getElementType();
+          if (runType == NUMBER_SIMPLE || runType == NUMBER && StringUtil.endsWith(run.getText(), ".")) {
+            return Spacing.createSpacing(1, 1, 0, true, 1);
+          }
+        }
+      }
+
+      // LF after opening brace and before closing need to check if here-doc opener is in the line
+      if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type)) {
+        if (!isNewLineForbiddenAt(child1Node)) {
+          return Spacing.createSpacing(0, 0, 1, true, 1);
+        }
+        else {
+          return Spacing.createSpacing(1, Integer.MAX_VALUE, 0, true, 1);
+        }
+      }
+
+      // small inline blocks
+      if (parentNodeType == BLOCK && !inGrepMapSort(parentNode) && !blockHasLessChildrenThan(parentNode, 2) &&
+          (BLOCK_OPENERS.contains(child1Type) && ((PerlFormattingBlock)child1).isFirst()
+           || BLOCK_CLOSERS.contains(child2Type) && ((PerlFormattingBlock)child2).isLast()
+          )
+          && !isNewLineForbiddenAt(child1Node)
+        ) {
+        return Spacing.createSpacing(0, 0, 1, true, 1);
+      }
+
+      if (parentNodeType == PARENTHESISED_CALL_ARGUMENTS &&
+          child2Type == RIGHT_PAREN &&
+          PsiUtilCore.getElementType(PsiTreeUtil.getDeepestLast(child1Node.getPsi())) == RIGHT_PAREN
+        ) {
+        return Spacing.createSpacing(0, 0, 0, true, 0);
+      }
+
+      // hack for + ++/- --/~~ ~
+      if ((child2Type == PREFIX_UNARY_EXPR || child2Type == PREF_PP_EXPR) && OPERATOR_COLLISIONS_MAP.containsKey(child1Type)) {
+        IElementType rightSignType = PsiUtilCore.getElementType(child2Node.getFirstChildNode());
+        if (OPERATOR_COLLISIONS_MAP.get(child1Type).contains(rightSignType)) {
+          return Spacing.createSpacing(1, 1, 0, true, 1);
+        }
+      }
+      // hack for ++ +/-- -
+      else if (child1Type == SUFF_PP_EXPR && OPERATOR_COLLISIONS_MAP.containsKey(child2Type)) {
+        IElementType leftSignType = PsiUtilCore.getElementType(child1Node.getLastChildNode());
+        if (OPERATOR_COLLISIONS_MAP.get(child2Type).contains(leftSignType)) {
+          return Spacing.createSpacing(1, 1, 0, true, 1);
+        }
+      }
+    }
+    return getSpacingBuilder().getSpacing(parent, child1, child2);
+  }
+
+  /**
+   * Check if we are in grep map or sort
+   *
+   * @return check result
+   */
+  private static boolean inGrepMapSort(@NotNull ASTNode node) {
+    ASTNode parent = node.getTreeParent();
+    IElementType parentElementType;
+    return parent != null &&
+           ((parentElementType = parent.getElementType()) == GREP_EXPR || parentElementType == SORT_EXPR || parentElementType == MAP_EXPR);
+  }
+
+  /**
+   * Checks if block contains more than specified number of meaningful children. Spaces and line comments are being ignored
+   *
+   * @return check result
+   */
+  private static boolean blockHasLessChildrenThan(@NotNull ASTNode node, int maxChildren) {
+    int counter = -2; // for braces
+    ASTNode childNode = node.getFirstChildNode();
+    while (childNode != null) {
+      IElementType nodeType = childNode.getElementType();
+      if (nodeType != TokenType.WHITE_SPACE && nodeType != COMMENT_LINE && nodeType != SEMICOLON) {
+        if (++counter >= maxChildren) {
+          return false;
+        }
+      }
+      childNode = childNode.getTreeNext();
+    }
+    return true;
   }
 }
