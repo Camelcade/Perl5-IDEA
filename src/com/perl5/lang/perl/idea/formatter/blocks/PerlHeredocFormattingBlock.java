@@ -57,6 +57,7 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
     return InjectedLanguageManager.getInstance(psi.getProject()).getInjectedPsiFiles(psi) == null;
   }
 
+  @NotNull
   @Override
   protected List<Block> buildSubBlocks() {
     return PerlInjectedLanguageBlocksBuilder.compute(myContext.getSettings().getRootSettings(), getNode(), getTextRange());

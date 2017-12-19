@@ -108,6 +108,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return mySubBlocksProvider.getValue();
   }
 
+  @NotNull
   protected List<Block> buildSubBlocks() {
     final List<Block> blocks = new ArrayList<>();
 
