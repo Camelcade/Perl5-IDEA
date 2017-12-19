@@ -27,6 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.FactoryMap;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
@@ -62,7 +63,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   private final boolean myIsLast;
   private final IElementType myElementType;
   private final AtomicNotNullLazyValue<Boolean> myIsIncomple;
-  private List<Block> mySubBlocks;
+  private final AtomicNotNullLazyValue<List<Block>> mySubBlocksProvider = AtomicNotNullLazyValue.createValue(
+    () -> ContainerUtil.immutableList(buildSubBlocks())
+  );
 
   public PerlFormattingBlock(
     @NotNull ASTNode node,
@@ -98,19 +101,14 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   @NotNull
   @Override
-  protected List<Block> buildChildren() {
-    if (mySubBlocks == null) {
-      mySubBlocks = buildSubBlocks();
-    }
-
-    // fixme what is re-creation for?
-    return new ArrayList<>(mySubBlocks);
-  }
-
-  protected List<Block> buildSubBlocks() {
+  protected final List<Block> buildChildren() {
     if (isLeaf()) {
       return Collections.emptyList();
     }
+    return mySubBlocksProvider.getValue();
+  }
+
+  protected List<Block> buildSubBlocks() {
     final List<Block> blocks = new ArrayList<>();
 
     int[] relativeLineNumber = new int[]{0};
@@ -191,7 +189,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   @Nullable
   @Override
-  public Spacing getSpacing(Block child1, @NotNull Block child2) {
+  public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
     return myContext.getSpacing(this, child1, child2);
   }
 

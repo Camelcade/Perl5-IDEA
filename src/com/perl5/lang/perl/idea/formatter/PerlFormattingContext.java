@@ -379,7 +379,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   }
 
   @Nullable
-  public Spacing getSpacing(@NotNull ASTBlock parent, Block child1, @NotNull Block child2) {
+  public Spacing getSpacing(@NotNull ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
     if (child1 instanceof ASTBlock && child2 instanceof ASTBlock) {
       ASTNode parentNode = parent.getNode();
       IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
