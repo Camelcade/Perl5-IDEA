@@ -30,6 +30,8 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testMoose() {doTest();}
+
   public void testDeclarations() {doTest();}
 
   public void testNumericX() {doTest();}

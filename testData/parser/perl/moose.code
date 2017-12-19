@@ -1,0 +1,139 @@
+package Point;
+use Moose; # automatically turns on strict and warnings
+
+has 'x' => (is => 'rw', isa => 'Int');
+has 'y' => (is => 'rw', isa => 'Int');
+
+sub clear {
+    my $self = shift;
+    $self->x(0);
+    $self->y(0);
+}
+
+package Point3D;
+use Moose;
+
+extends 'Point';
+
+has 'z' => (is => 'rw', isa => 'Int');
+
+after 'clear' => sub {
+      my $self = shift;
+      $self->z(0);
+  };
+
+extends 'My::Parent'      => { -version => 0.01 },
+  'My::OtherParent' => { -version => 0.03 };
+
+with 'My::Role'      => { -version => 0.32 },
+  'My::Otherrole' => { -version => 0.23 };
+
+package Tree;
+use Moose;
+
+has 'node' => (is => 'rw', isa => 'Any');
+
+has 'children' => (
+    is      => 'ro',
+    isa     => 'ArrayRef',
+    default => sub { [] }
+  );
+
+has 'parent' => (
+    is          => 'rw',
+    isa         => 'Tree',
+    weak_ref    => 1,
+    handles     => {
+      parent_node => 'node',
+      siblings    => 'children',
+    }
+  );
+
+package Foo;
+use Moose;
+
+has 'message' => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => 'Hello, I am a Foo'
+  );
+
+package My::Foo;
+use Moose;
+
+extends 'Foo';
+
+has '+message' => (default => 'Hello I am My::Foo');
+
+package Foo::Role;
+use Moose::Role;
+
+has 'message' => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => 'Hello, I am a Foo'
+  );
+
+package My::Foo;
+use Moose;
+
+with 'Foo::Role';
+
+has '+message' => (default => 'Hello I am My::Foo');
+
+before name => sub{
+      say 'hi';
+  };
+
+before name => name2 => name3 => sub{
+      say 'hi';
+  };
+
+before [qw/name1 name2 name3 name4/]=> sub{
+      say 'hi';
+  };
+
+before qr/name\d+/=> sub{
+      say 'hi';
+  };
+
+
+after name => sub{
+      say 'hi';
+  };
+after name => name2 => name3 => sub{
+      say 'hi';
+  };
+
+after [qw/name1 name2 name3 name4/]=> sub{
+      say 'hi';
+  };
+
+after qr/name\d+/=> sub{
+      say 'hi';
+  };
+
+around name => sub{
+      say 'hi';
+  };
+around name => name2 => name3 => sub{
+      say 'hi';
+  };
+
+around [qw/name1 name2 name3 name4/]=> sub{
+      say 'hi';
+  };
+
+around qr/name\d+/=> sub{
+      say 'hi';
+  };
+
+override name => sub{
+      super;
+      say 'hi';
+  };
+
+augment name => sub{
+      say 'hi';
+      inner;
+  };

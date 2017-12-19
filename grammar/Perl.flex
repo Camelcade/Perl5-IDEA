@@ -878,6 +878,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"after"					{yybegin(YYINITIAL); return RESERVED_AFTER;}
 	"before"				{yybegin(YYINITIAL); return RESERVED_BEFORE;}
 	"has"					{yybegin(YYINITIAL); return RESERVED_HAS;}
+	"super"				        {yybegin(YYINITIAL); return RESERVED_SUPER;}
+	"inner"				        {yybegin(YYINITIAL); return RESERVED_INNER;}
 
 	// special treatment?
 	{CORE_PREFIX}"print"	 	{yybegin(LEX_PRINT_HANDLE); return RESERVED_PRINT;}

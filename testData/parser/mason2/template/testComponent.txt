@@ -917,7 +917,7 @@ Mason2 template file
             PsiElement(Mason2: <% )('<% ')
             PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
               PsiPerlMethodImpl(Perl5: METHOD)
-                PerlSubNameElementImpl(Perl5: subname)('super')
+                PerlMooseKeywordSubNameElementImpl(Perl5: super)('super')
               PsiPerlParenthesisedCallArgumentsImpl(Perl5: PARENTHESISED_CALL_ARGUMENTS)
                 PsiElement(Perl5: ()('(')
                 PsiElement(Perl5: ))(')')
