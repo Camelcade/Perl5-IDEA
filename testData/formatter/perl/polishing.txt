@@ -98,133 +98,133 @@ $#{varname};
 &{varname};
 
 last
-    FOO;
+        FOO;
 next
-    FOO;
+        FOO;
 redo
-    FOO;
+        FOO;
 last
-    $a;
+        $a;
 next
-    $a;
+        $a;
 redo
-    $a;
+        $a;
 goto
-    FOO;
+        FOO;
 return
-    $a;
+        $a;
 my
-    $a;
+        $a;
 our
-    $a;
+        $a;
 state
-    $a;
+        $a;
 local
-    $a;
+        $a;
 use
-    Foo::Bar;
+        Foo::Bar;
 use
-    Foo::Bar -strict;
+        Foo::Bar -strict;
 use
-    Foo::Bar v1.5;
+        Foo::Bar v1.5;
 use
-    Foo::Bar v1.5 -strict;
+        Foo::Bar v1.5 -strict;
 no
-    Foo::Bar;
+        Foo::Bar;
 no
-    Foo::Bar -strict;
+        Foo::Bar -strict;
 no
-    Foo::Bar v1.5;
+        Foo::Bar v1.5;
 no
-    Foo::Bar v1.5 -strict;
+        Foo::Bar v1.5 -strict;
 undef
-    $a;
+        $a;
 require
-    Foo::Bar;
+        Foo::Bar;
 require
-    'Bar.pm';
+        'Bar.pm';
 grep
 {$_} @ARGV;
 grep
 {$_}, @ARGV;
 grep
-    @ARGV;
+        @ARGV;
 grep
-    subname, @ARGV;
+        subname, @ARGV;
 map
 {$_} @ARGV;
 map
 {$_}, @ARGV;
 map
-    @ARGV;
+        @ARGV;
 map
-    subname, @ARGV;
+        subname, @ARGV;
 sort
 {$_} @ARGV;
 sort
 {$_}, @ARGV;
 sort
-    subname, @ARGV;
+        subname, @ARGV;
 sort
-    @ARGV;
+        @ARGV;
 print
-    STDOUT $a;
+        STDOUT $a;
 say
-    STDOUT $a;
+        STDOUT $a;
 printf
-    STOUT $a, $b;
+        STOUT $a, $b;
 print
-    $a;
+        $a;
 say
-    $a;
+        $a;
 printf
-    $a, $b;
+        $a, $b;
 sub
 {};
 m
-    /something/;
+        /something/;
 m
-    {    something    };
+        {    something    };
 m#something#;
 qr
-    /something/;
+        /something/;
 qr
-    {    something    };
+        {    something    };
 qr#something#;
 s
-    /something/asdf/;
+        /something/asdf/;
 s
-    {    something    }{    asdf    };
+        {    something    }{    asdf    };
 s#something#asdf#;
 tr
-    /something/asdf/;
+        /something/asdf/;
 tr
-    {    something    }{    asdf    };
+        {    something    }{    asdf    };
 tr#something#asdf#;
 y
-    /something/asdf/;
+        /something/asdf/;
 y
-    {    something    }{    asdf    };
+        {    something    }{    asdf    };
 y#something#asdf#;
 q
-    /something/;
+        /something/;
 q
-    {    something    };
+        {    something    };
 q#something#;
 qq
-    /something/;
+        /something/;
 qq
-    {    something    };
+        {    something    };
 qq#something#;
 qx
-    /something/;
+        /something/;
 qx
-    {    something    };
+        {    something    };
 qx#something#;
 qw
-    /something/;
+        /something/;
 qw
-    {something};
+        {something};
 qw#something#;
 <<EOF;
 EOF

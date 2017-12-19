@@ -16,11 +16,6 @@
 
 package formatter;
 
-import base.PerlLightTestCase;
-import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
@@ -28,18 +23,10 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTest extends PerlLightTestCase {
+public class PerlFormatterTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl";
-  }
-
-  private CommonCodeStyleSettings getSettings() {
-    return CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
-  }
-
-  private PerlCodeStyleSettings getCustomSettings() {
-    return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
   public void testMoose() {doFormatTest();}

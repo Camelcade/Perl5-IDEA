@@ -1,5 +1,5 @@
 my $hashref = {
-    key      => 42,
-    otherkey => 42,
-    third    => 42
+        key      => 42,
+        otherkey => 42,
+        third    => 42
 };

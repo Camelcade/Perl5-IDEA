@@ -16,9 +16,7 @@
 
 package formatter;
 
-import base.PerlLightTestCase;
-
-public class PerlInjectedHeredocFormatterTest extends PerlLightTestCase {
+public class PerlInjectedHeredocFormatterTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl/injected_heredoc";

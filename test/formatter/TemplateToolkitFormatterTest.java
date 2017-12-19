@@ -21,7 +21,7 @@ import base.TemplateToolkitLightTestCase;
 /**
  * Created by hurricup on 11.07.2016.
  */
-public class TemplateToolkitFormatterTestCase extends TemplateToolkitLightTestCase {
+public class TemplateToolkitFormatterTest extends TemplateToolkitLightTestCase {
   TemplateToolkitTestSettings myTestSettings;
 
   @Override

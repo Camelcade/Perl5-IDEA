@@ -17,15 +17,15 @@ grep
 } @ARGV;
 
 @ARGV =
-    grep {
+        grep {
 
-    } @ARGV;
+        } @ARGV;
 
 @ARGV =
-    grep
-    {
+        grep
+        {
 
-    } @ARGV;
+        } @ARGV;
 
 map {
 
@@ -46,15 +46,15 @@ map
 } @ARGV;
 
 @ARGV =
-    map {
+        map {
 
-    } @ARGV;
+        } @ARGV;
 
 @ARGV =
-    map
-    {
+        map
+        {
 
-    } @ARGV;
+        } @ARGV;
 
 sort {
 
@@ -75,12 +75,12 @@ sort
 } @ARGV;
 
 @ARGV =
-    sort {
+        sort {
 
-    } @ARGV;
+        } @ARGV;
 
 @ARGV =
-    sort
-    {
+        sort
+        {
 
-    } @ARGV;
+        } @ARGV;

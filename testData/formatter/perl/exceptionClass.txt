@@ -1,7 +1,7 @@
 use Exception::Class
-    'Exception1',
-    "Exception2",
-    q'Exception3',
-    qq"Exception4",
-    Exception5 => {}
+        'Exception1',
+        "Exception2",
+        q'Exception3',
+        qq"Exception4",
+        Exception5 => {}
 ;
