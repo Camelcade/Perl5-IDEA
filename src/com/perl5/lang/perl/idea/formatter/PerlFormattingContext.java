@@ -563,8 +563,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
 
-    if (parentNodeType == COMMA_SEQUENCE_EXPR) {
-      return childNodeType == COMMA || isNewLineForbiddenAt(childNode) ? null : myCommaSequenceWrapMap.get(parentNode);
+    if (parentNodeType == COMMA_SEQUENCE_EXPR &&
+        childNodeType != COMMA &&
+        !isNewLineForbiddenAt(childNode)) {
+      return myCommaSequenceWrapMap.get(parentNode);
     }
 
     return null;
