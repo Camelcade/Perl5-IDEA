@@ -1,0 +1,19 @@
+bless        [
+                some    =>    1
+        ],    @ARGV;
+
+return    bless        [
+                some    =>    42
+        ],
+        @ARGV;
+
+bless
+            [
+                some    =>    1
+        ],    @ARGV;
+
+return    bless
+            [
+                some    =>    42
+        ],
+        @ARGV;

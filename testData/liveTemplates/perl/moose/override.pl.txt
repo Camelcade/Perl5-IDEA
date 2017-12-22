@@ -3,8 +3,8 @@ Caret offset: 29
 --------------------------------------------------------------------------------
 # Live templates test sample
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 {
   say 'hi';
@@ -101,8 +101,8 @@ Caret offset: 46
 {
   say 'hi';
     override <selection>sub_name<caret></selection> => sub {
-            
-        };
+        
+    };
 
 }
 
@@ -198,8 +198,8 @@ Caret offset: 49
   
 }
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 
 {
@@ -297,8 +297,8 @@ Caret offset: 67
 {
   say 'hi';
     override <selection>sub_name<caret></selection> => sub {
-            
-        };
+        
+    };
 
 } continue {}
 
@@ -394,8 +394,8 @@ Caret offset: 82
   
 } continue {}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 say 'hi' ;
 
@@ -491,8 +491,8 @@ Caret offset: 93
 
 say 'hi'
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 ;
 
 my $var = 1 + 2;
@@ -591,8 +591,8 @@ my $var = 1 + 2;
 
 if($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 
 unless($a){}
@@ -689,8 +689,8 @@ if($a){}
 
 unless($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 if($a){}
 else{}
@@ -787,8 +787,8 @@ unless($a){}
 if($a){}
 else{}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 if($a){}
 elsif($b){}
@@ -885,8 +885,8 @@ else{}
 if($a){}
 elsif($b){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 if($a){}
 
@@ -982,8 +982,8 @@ elsif($b){}
 
 if($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 elsif($b){}
 
@@ -1081,8 +1081,8 @@ elsif($b){}
 
 if($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 else{}
 
@@ -1180,8 +1180,8 @@ else{}
 
 while($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 until($a){}
 
@@ -1277,8 +1277,8 @@ while($a){}
 
 until($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 for($a){}
 
@@ -1374,8 +1374,8 @@ until($a){}
 
 for($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 foreach($a){}
 
@@ -1471,8 +1471,8 @@ for($a){}
 
 foreach($a){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 for($a =1;$a < 1; $++){}
 
@@ -1568,8 +1568,8 @@ foreach($a){}
 
 for($a =1;$a < 1; $++){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 foreach($a =1;$a < 1; $++){}
 
@@ -1665,8 +1665,8 @@ for($a =1;$a < 1; $++){}
 
 foreach($a =1;$a < 1; $++){}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 while($a){}continue{}
 
@@ -1762,8 +1762,8 @@ foreach($a =1;$a < 1; $++){}
 
 while($a){}continue{}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 until($a){}continue{}
 
@@ -1859,8 +1859,8 @@ while($a){}continue{}
 
 until($a){}continue{}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 for($a){}continue{}
 
@@ -1956,8 +1956,8 @@ until($a){}continue{}
 
 for($a){}continue{}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 foreach($a){}continue{}
 
@@ -2053,8 +2053,8 @@ for($a){}continue{}
 
 foreach($a){}continue{}
 override <selection>sub_name<caret></selection> => sub {
-        
-    };
+    
+};
 
 
 given($a){
@@ -2151,8 +2151,8 @@ foreach($a){}continue{}
 
 given($a){
     override <selection>sub_name<caret></selection> => sub {
-            
-        };
+        
+    };
 
 }
 
@@ -2251,8 +2251,8 @@ given($a){
 given($a){
   when($b){}
     override <selection>sub_name<caret></selection> => sub {
-            
-        };
+        
+    };
 
 }
 
@@ -2351,8 +2351,8 @@ given($a){
 given($a){
   when($b){}
     override <selection>sub_name<caret></selection> => sub {
-            
-        };
+        
+    };
 
     when($b){}
 }
@@ -2452,7 +2452,7 @@ given($a){
 given($a){
   when($b){}
     override <selection>sub_name<caret></selection> => sub {
-            
-        };
+        
+    };
     default{}
 }

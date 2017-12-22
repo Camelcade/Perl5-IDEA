@@ -1,0 +1,65 @@
+$a, $b, 1, 2;
+$a,
+        $b,
+        1,
+        2;
+
+($a, $b, 1, 2);
+($a,
+        $b,
+        1,
+        2);
+
+$a ? $b : 42;
+
+$a         ?
+        $b :
+        42;
+
+$a
+        ? $b
+        : 42;
+
+($a ? $b : 42);
+
+($a        ?
+        $b :
+        42);
+
+($a
+        ? $b
+        : 42);
+
+
+sub subname($a, $b, $c) {}
+
+sub subname($a,
+        $b,
+        $c) {}
+
+sub subname(
+        $a,
+        $b,
+        $c) {}
+
+method methodname($a, $b, $c) {}
+
+method methodname($a,
+        $b,
+        $c) {}
+
+method methodname(
+        $a,
+        $b,
+        $c) {}
+
+func funcname($a, $b, $c) {}
+
+func funcname($a,
+        $b,
+        $c) {}
+
+func funcname(
+        $a,
+        $b,
+        $c) {}

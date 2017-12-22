@@ -16,6 +16,9 @@ use  Moose  ;
 extends  'Point'  ;
 
 has  'z'  =>  (is  =>  'rw',  isa  =>  'Int')  ;
+has 'z' => (is => 'rw',  'isa' => 'Int');
+has 'z' => (is => 'rw',  "isa" => 'Int');
+has 'z' => (is => 'rw',  `isa` => 'Int');
 
 after  'clear'  =>  sub          {
             my  $self  =  shift  ;

@@ -39,6 +39,7 @@ import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -378,8 +379,21 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return false;
   }
 
+
   @Nullable
   public Spacing getSpacing(@NotNull ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
+    if (parent instanceof PerlSyntheticBlock) {
+      parent = ((PerlSyntheticBlock)parent).getRealBlock();
+    }
+
+    if (child1 instanceof PerlSyntheticBlock) {
+      child1 = ((PerlSyntheticBlock)child1).getLastRealBlock();
+    }
+
+    if (child2 instanceof PerlSyntheticBlock) {
+      child2 = ((PerlSyntheticBlock)child2).getFirstRealBlock();
+    }
+
     if (child1 instanceof ASTBlock && child2 instanceof ASTBlock) {
       ASTNode parentNode = parent.getNode();
       IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);

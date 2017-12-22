@@ -1,0 +1,93 @@
+$a  =  {  key    =>  {
+        otherkey  =>  [
+            sub  =>  sub  {
+                say  'hi';
+        }
+    ]
+}  ,
+    something  =>  42
+};
+
+$a  =  {
+            key    =>  {
+        otherkey  =>  [
+            sub  =>  sub  {
+                say  'hi';
+        }
+    ]
+}  ,
+    something  =>  42
+};
+
+$a  =  {
+         $a,
+                 $b,
+    foo  =>  1  ,  # some comment
+  bar  =>  2  ,
+    zoo  =>  3,
+  # other comment
+    bar  =>  2  ,
+            zoo            =>  goo  =>
+        blah      =>  some  =>  42  ,
+      zoo  =>  3,
+  otherbla => sub{
+      say 'hi'
+  }
+};
+
+$a  =  {  key  =>  {
+        otherkey  =>  [
+            sub  =>  sub  {
+                say  'hi';
+        }  ,
+    ]  ,
+    otherthing  =>  42
+}  };
+
+$a  =  {  key  =>  {  otherkey  =>  [
+        sub  =>  sub  {
+            say  'hi';
+    }  ,
+    also    =>  42
+]  }  };
+
+$a  =  {  key  =>  {  otherkey  =>  [  sub  =>  sub  {
+        say  'hi';
+}  ]  }  };
+
+$a  ,
+    $b  ,
+    $c;
+
+sub  something    (  $a  ,
+    $b  ,
+    $c  )    {
+}
+method  something    (  $a  ,
+    $b  ,
+    $c  )    {
+}
+func  something    (  $a  ,
+    $b  ,
+    $c  )    {
+}
+
+sub  something    (
+    $a  ,
+    $b  ,
+    $c  )    {
+}
+method  something    (
+    $a  ,
+    $b  ,
+    $c  )    {
+}
+func  something    (
+    $a  ,
+    $b  ,
+    $c  )    {
+}
+
+$a      ?
+    $a  :
+    $b;

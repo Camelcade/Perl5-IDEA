@@ -16,11 +16,14 @@ use Moose;
 extends 'Point';
 
 has 'z' => (is => 'rw', isa => 'Int');
+has 'z' => (is => 'rw', 'isa' => 'Int');
+has 'z' => (is => 'rw', "isa" => 'Int');
+has 'z' => (is => 'rw', `isa` => 'Int');
 
 after 'clear' => sub {
-            my $self = shift;
-            $self->z(0);
-        };
+    my $self = shift;
+    $self->z(0);
+};
 
 extends 'My::Parent'      => { -version => 0.01 },
         'My::OtherParent' => { -version => 0.03 };
@@ -34,29 +37,29 @@ use Moose;
 has 'node' => (is => 'rw', isa => 'Any');
 
 has 'children' => (
-                is      => 'ro',
-                isa     => 'ArrayRef',
-                default => sub {[]}
-        );
+        is      => 'ro',
+        isa     => 'ArrayRef',
+        default => sub {[]}
+);
 
 has 'parent' => (
-                is       => 'rw',
-                isa      => 'Tree',
-                weak_ref => 1,
-                handles  => {
-                        parent_node => 'node',
-                        siblings    => 'children',
-                }
-        );
+        is       => 'rw',
+        isa      => 'Tree',
+        weak_ref => 1,
+        handles  => {
+                parent_node => 'node',
+                siblings    => 'children',
+        }
+);
 
 package Foo;
 use Moose;
 
 has 'message' => (
-                is      => 'rw',
-                isa     => 'Str',
-                default => 'Hello,  I  am  a  Foo'
-        );
+        is      => 'rw',
+        isa     => 'Str',
+        default => 'Hello,  I  am  a  Foo'
+);
 
 package My::Foo;
 use Moose;
@@ -69,10 +72,10 @@ package Foo::Role;
 use Moose::Role;
 
 has 'message' => (
-                is      => 'rw',
-                isa     => 'Str',
-                default => 'Hello,  I  am  a  Foo'
-        );
+        is      => 'rw',
+        isa     => 'Str',
+        default => 'Hello,  I  am  a  Foo'
+);
 
 package My::Foo;
 use Moose;
@@ -82,57 +85,57 @@ with 'Foo::Role';
 has '+message' => (default => 'Hello  I  am  My::Foo');
 
 before name => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 before name => name2 => name3 => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 before [ qw/name1 name2 name3 name4/ ] => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 before qr/name\d+/ => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 after name => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 after name => name2 => name3 => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 after [ qw/name1 name2 name3 name4/ ] => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 after qr/name\d+/ => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 around name => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 around name => name2 => name3 => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 around [ qw/name1 name2 name3 name4/ ] => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 around qr/name\d+/ => sub {
-            say 'hi';
-        };
+    say 'hi';
+};
 
 override name => sub {
-            super;
-            say 'hi';
-        };
+    super;
+    say 'hi';
+};
 
 augment name => sub {
-            say 'hi';
-            inner;
-        };
+    say 'hi';
+    inner;
+};

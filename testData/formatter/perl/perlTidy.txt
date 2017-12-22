@@ -1093,7 +1093,7 @@ EOM
                     extended_syntax          => $rOpts->{'extended-syntax'},
 
                     continuation_indentation =>
-                    $rOpts->{'continuation-indentation'},
+                            $rOpts->{'continuation-indentation'},
                     outdent_labels           => $rOpts->{'outdent-labels'},
             );
 
@@ -1932,26 +1932,26 @@ sub generate_options {
             'freeze-whitespace'                => [ qw(noadd-whitespace nodelete-old-whitespace) ],
             'fws'                              => [ qw(freeze-whitespace) ],
             'freeze-blank-lines'               =>
-            [ qw(maximum-consecutive-blank-lines=0 keep-old-blank-lines=2) ],
+                    [ qw(maximum-consecutive-blank-lines=0 keep-old-blank-lines=2) ],
             'fbl'                              => [ qw(freeze-blank-lines) ],
             'indent-only'                      => [ qw(freeze-newlines freeze-whitespace) ],
             'outdent-long-lines'               => [ qw(outdent-long-quotes outdent-long-comments) ],
             'nooutdent-long-lines'             =>
-            [ qw(nooutdent-long-quotes nooutdent-long-comments) ],
+                    [ qw(nooutdent-long-quotes nooutdent-long-comments) ],
             'noll'                             => [ qw(nooutdent-long-lines) ],
             'io'                               => [ qw(indent-only) ],
             'delete-all-comments'              =>
-            [ qw(delete-block-comments delete-side-comments delete-pod) ],
+                    [ qw(delete-block-comments delete-side-comments delete-pod) ],
             'nodelete-all-comments'            =>
-            [ qw(nodelete-block-comments nodelete-side-comments nodelete-pod) ],
+                    [ qw(nodelete-block-comments nodelete-side-comments nodelete-pod) ],
             'dac'                              => [ qw(delete-all-comments) ],
             'ndac'                             => [ qw(nodelete-all-comments) ],
             'gnu'                              => [ qw(gnu-style) ],
             'pbp'                              => [ qw(perl-best-practices) ],
             'tee-all-comments'                 =>
-            [ qw(tee-block-comments tee-side-comments tee-pod) ],
+                    [ qw(tee-block-comments tee-side-comments tee-pod) ],
             'notee-all-comments'               =>
-            [ qw(notee-block-comments notee-side-comments notee-pod) ],
+                    [ qw(notee-block-comments notee-side-comments notee-pod) ],
             'tac'                              => [ qw(tee-all-comments) ],
             'ntac'                             => [ qw(notee-all-comments) ],
             'html'                             => [ qw(format=html) ],
@@ -9816,10 +9816,10 @@ sub set_white_space_flag {
 
                         # use -sbl flag for a named sub block
                         : $block_type !~ /^sub\W*$/
-                                ? $rOpts->{'opening-sub-brace-on-new-line'}
+                        ? $rOpts->{'opening-sub-brace-on-new-line'}
 
-                                # use -asbl flag for an anonymous sub block
-                                : $rOpts->{'opening-anonymous-sub-brace-on-new-line'};
+                        # use -asbl flag for an anonymous sub block
+                        : $rOpts->{'opening-anonymous-sub-brace-on-new-line'};
 
                 # Break before an opening '{' ...
                 if (
@@ -19149,12 +19149,12 @@ sub new {
     my $want_right_spaces = 0;
     my $marked = 0;
     bless [
-                    $spaces, $level, $ci_level,
-                    $available_spaces, $closed, $comma_count,
-                    $gnu_sequence_number, $index, $have_child,
-                    $want_right_spaces, $align_paren, $marked,
-                    $stack_depth, $starting_index, $arrow_count,
-            ], $class;
+            $spaces, $level, $ci_level,
+            $available_spaces, $closed, $comma_count,
+            $gnu_sequence_number, $index, $have_child,
+            $want_right_spaces, $align_paren, $marked,
+            $stack_depth, $starting_index, $arrow_count,
+    ], $class;
 }
 
 sub permanently_decrease_AVAILABLE_SPACES {

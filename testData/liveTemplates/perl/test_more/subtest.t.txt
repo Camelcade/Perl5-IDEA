@@ -3,8 +3,8 @@ Caret offset: 35
 --------------------------------------------------------------------------------
 # Test::More templates test sample
 subtest <selection>testname<caret></selection> => sub {
-        
-    };
+    
+};
 
 {
 
@@ -21,8 +21,8 @@ Caret offset: 39
 
 {
     subtest <selection>testname<caret></selection> => sub {
-            
-        };
+        
+    };
 }
 
 say 'hi' ;
@@ -40,7 +40,7 @@ Caret offset: 52
 
 say 'hi'
 subtest <selection>testname<caret></selection> => sub {
-        
-    };;
+    
+};;
 
 my $var = 1 + 2;

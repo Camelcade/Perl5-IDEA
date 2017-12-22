@@ -29,6 +29,14 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testAnonArrayArgument() {doFormatTest();}
+
+  public void testAnonHashArgument() {doFormatTest();}
+
+  public void testSequenceLike() {doFormatTest();}
+
+  public void testSmarterHashFormatting() {doFormatTest();}
+
   public void testMoose() {doFormatTest();}
 
   public void testPolishing() {doFormatTest();}

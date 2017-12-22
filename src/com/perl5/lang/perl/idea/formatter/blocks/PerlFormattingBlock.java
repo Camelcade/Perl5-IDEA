@@ -47,7 +47,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 /**
  * Created by hurricup on 03.09.2015.
  */
-public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes {
+public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes, PerlAstBlock {
   /**
    * Composite elements that should be treated as leaf elements, no children
    */
@@ -58,7 +58,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     );
 
   protected final PerlFormattingContext myContext;
-  private final Indent myIndent;
+  private Indent myIndent;
   private final boolean myIsFirst;
   private final boolean myIsLast;
   private final IElementType myElementType;
@@ -97,6 +97,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
       return PerlFormattingBlock.super.isIncomplete();
     });
+  }
+
+  @Override
+  public void setIndent(@Nullable Indent indent) {
+    myIndent = indent;
   }
 
   @NotNull
@@ -176,7 +181,49 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       IElementType childElementType = PsiUtilCore.getElementType(child);
       blocks.add(createBlock(child, wrapFunction.fun(child), alignmentFunction.fun(childElementType)));
     }
-    return blocks;
+    return processSubBlocks(blocks);
+  }
+
+  @NotNull
+  private List<Block> processSubBlocks(@NotNull List<Block> rawBlocks) {
+    if (getElementType() != COMMA_SEQUENCE_EXPR) {
+      return rawBlocks;
+    }
+
+    List<Block> result = new ArrayList<>();
+    List<Block> blocksToGroup = new ArrayList<>();
+    boolean[] hasFatComma = new boolean[]{false};
+    Runnable blocksDispatcher = () -> {
+      if (blocksToGroup.isEmpty()) {
+        return;
+      }
+      if (hasFatComma[0]) {
+        result.add(new PerlSyntheticBlock(this, blocksToGroup, null, null, myContext));
+        hasFatComma[0] = false;
+      }
+      else {
+        result.addAll(blocksToGroup);
+      }
+      blocksToGroup.clear();
+    };
+
+    for (Block block : rawBlocks) {
+      IElementType blockType = block instanceof ASTBlock ? PsiUtilCore.getElementType(((ASTBlock)block).getNode()) : null;
+      if ((blockType == null || blockType == COMMA)) {
+        blocksToGroup.add(block);
+        blocksDispatcher.run();
+      }
+      else if (blocksToGroup.isEmpty() && (blockType == COMMENT_LINE || blockType == COMMENT_ANNOTATION)) {
+        result.add(block);
+      }
+      else {
+        blocksToGroup.add(block);
+        hasFatComma[0] |= blockType == FAT_COMMA;
+      }
+    }
+    blocksDispatcher.run();
+
+    return result;
   }
 
   protected PerlFormattingBlock createBlock(@NotNull ASTNode node,
