@@ -162,6 +162,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       .around(OPERATORS_RELATIONAL).spaceIf(mySettings.SPACE_AROUND_RELATIONAL_OPERATORS)
       .around(OPERATORS_LOGICAL).spaceIf(mySettings.SPACE_AROUND_LOGICAL_OPERATORS)
       .around(OPERATORS_BITWISE).spaceIf(mySettings.SPACE_AROUND_BITWISE_OPERATORS)
+      .after(OPERATOR_REFERENCE).spaces(0)
 
       .afterInside(OPERATOR_MINUS, PREFIX_UNARY_EXPR).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)
       .afterInside(OPERATOR_PLUS, PREFIX_UNARY_EXPR).spaceIf(mySettings.SPACE_AROUND_UNARY_OPERATOR)

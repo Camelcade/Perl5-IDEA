@@ -41,13 +41,14 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-        <li>Formatting options available for subs signatures, prototypes and attributes.</li>
+        <li>Formatting options available for subs signatures, prototypes and attributes</li>
         <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
      </ul>
      </p>
      <p>Fixes:
       <ul>
-        <li>New line won't be inserted before fat comma on wrapping.</li>
+        <li>New line won't be inserted before fat comma on wrapping</li>
+        <li>Formatter now removes spaces after <code>\</code> operator</li>
         <li>Moving opening brace to the comment after compound statement beginning, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1578">#1578</a></li>
         <li>Parsing <code>$1x</code> as variable name and <code>x</code> operator, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1667">#1667</a></li>
         <li>Resolve from methods declared with <code>method</code> keyword in certain frameworks, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1669">#1669</a></li>

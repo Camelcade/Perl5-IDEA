@@ -1,0 +1,5 @@
+\$asdfsdf;
+\@asdfsdf;
+\%asdfsdf;
+\&asdfsdf;
+\*asdfsdf;
