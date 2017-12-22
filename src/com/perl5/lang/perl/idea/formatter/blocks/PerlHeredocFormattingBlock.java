@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
-import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.TextRange;
@@ -38,11 +37,10 @@ public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
 
   public PerlHeredocFormattingBlock(@NotNull ASTNode node,
-                                    @Nullable Wrap wrap,
                                     @Nullable Alignment alignment,
                                     @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, alignment, context);
+    super(node, alignment, context);
     assert node.getPsi() instanceof PerlHeredocElementImpl : "Got " + node + "instead of heredoc.";
   }
 

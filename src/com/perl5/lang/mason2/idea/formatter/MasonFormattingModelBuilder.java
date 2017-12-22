@@ -31,7 +31,7 @@ public class MasonFormattingModelBuilder extends PerlFormattingModelBuilder {
   @NotNull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock block = new MasonFormattingBlock(element.getNode(), null, null, new MasonFormattingContext(settings));
+    PerlFormattingBlock block = new MasonFormattingBlock(element.getNode(), null, new MasonFormattingContext(settings));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

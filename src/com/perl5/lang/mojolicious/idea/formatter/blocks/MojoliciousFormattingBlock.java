@@ -17,7 +17,6 @@
 package com.perl5.lang.mojolicious.idea.formatter.blocks;
 
 import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
@@ -30,15 +29,14 @@ import org.jetbrains.annotations.Nullable;
 public class MojoliciousFormattingBlock extends PerlFormattingBlock {
 
   public MojoliciousFormattingBlock(@NotNull ASTNode node,
-                                    @Nullable Wrap wrap,
                                     @Nullable Alignment alignment,
                                     @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, alignment, context);
+    super(node, alignment, context);
   }
 
   @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
-    return new MojoliciousFormattingBlock(node, wrap, alignment, myContext);
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Alignment alignment) {
+    return new MojoliciousFormattingBlock(node, alignment, myContext);
   }
 }

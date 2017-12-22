@@ -69,11 +69,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   public PerlFormattingBlock(
     @NotNull ASTNode node,
-    @Nullable Wrap wrap,
     @Nullable Alignment alignment,
     @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, alignment);
+    super(node, context.getWrap(node), alignment);
     myContext = context;
     myIndent = context.getIndentProcessor().getNodeIndent(node);
     myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
@@ -155,22 +154,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       alignmentFunction = childElementType -> null;
     }
 
-
-    Function<ASTNode, Wrap> wrapFunction;
-
-    if (elementType == COMMA_SEQUENCE_EXPR) {
-      Wrap wrap = Wrap.createWrap(WrapType.NORMAL, true);
-      wrapFunction = childNode -> {
-        if (PsiUtilCore.getElementType(childNode) == COMMA || myContext.isNewLineForbiddenAt(childNode)) {
-          return null;
-        }
-        return wrap;
-      };
-    }
-    else {
-      wrapFunction = childNode -> null;
-    }
-
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
       if (!shouldCreateBlockFor(child)) {
         if (StringUtil.containsLineBreak(child.getChars())) {
@@ -179,7 +162,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
         continue;
       }
       IElementType childElementType = PsiUtilCore.getElementType(child);
-      blocks.add(createBlock(child, wrapFunction.fun(child), alignmentFunction.fun(childElementType)));
+      blocks.add(createBlock(child, alignmentFunction.fun(childElementType)));
     }
     return processSubBlocks(blocks);
   }
@@ -227,12 +210,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   }
 
   protected PerlFormattingBlock createBlock(@NotNull ASTNode node,
-                                            @Nullable Wrap wrap,
                                             @Nullable Alignment alignment) {
     if (HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
-      return new PerlHeredocFormattingBlock(node, wrap, alignment, myContext);
+      return new PerlHeredocFormattingBlock(node, alignment, myContext);
     }
-    return new PerlFormattingBlock(node, wrap, alignment, myContext);
+    return new PerlFormattingBlock(node, alignment, myContext);
   }
 
   @Nullable

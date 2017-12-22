@@ -17,7 +17,6 @@
 package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.formatting.Alignment;
-import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
@@ -29,16 +28,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MasonFormattingBlock extends PerlFormattingBlock {
   public MasonFormattingBlock(@NotNull ASTNode node,
-                              @Nullable Wrap wrap,
                               @Nullable Alignment alignment,
                               @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, alignment, context);
+    super(node, alignment, context);
   }
 
 
   @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
-    return new MasonFormattingBlock(node, wrap, alignment, myContext);
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Alignment alignment) {
+    return new MasonFormattingBlock(node, alignment, myContext);
   }
 }

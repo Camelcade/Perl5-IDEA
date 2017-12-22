@@ -18,7 +18,6 @@ package com.perl5.lang.htmlmason.idea.formatter;
 
 import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Indent;
-import com.intellij.formatting.Wrap;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
@@ -33,16 +32,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class HTMLMasonFormattingBlock extends PerlFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
   public HTMLMasonFormattingBlock(@NotNull ASTNode node,
-                                  @Nullable Wrap wrap,
                                   @Nullable Alignment alignment,
                                   @NotNull PerlFormattingContext context
   ) {
-    super(node, wrap, alignment, context);
+    super(node, alignment, context);
   }
 
   @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Wrap wrap, @Nullable Alignment alignment) {
-    return new HTMLMasonFormattingBlock(node, wrap, alignment, myContext);
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Alignment alignment) {
+    return new HTMLMasonFormattingBlock(node, alignment, myContext);
   }
 
   @Nullable

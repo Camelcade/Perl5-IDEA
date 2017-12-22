@@ -35,7 +35,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder {
   @NotNull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock rootBlock = new PerlFormattingBlock(element.getNode(), null, null, new PerlFormattingContext(settings));
+    PerlFormattingBlock rootBlock = new PerlFormattingBlock(element.getNode(), null, new PerlFormattingContext(settings));
     return new PerlDocumentBasedFormattingModel(rootBlock, element, settings);
   }
 

@@ -16,10 +16,7 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
-import com.intellij.formatting.ASTBlock;
-import com.intellij.formatting.Block;
-import com.intellij.formatting.Spacing;
-import com.intellij.formatting.SpacingBuilder;
+import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
@@ -68,6 +65,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
     SEMICOLON
   );
+  private final Map<ASTNode, Wrap> myCommaSequenceWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
@@ -501,4 +499,19 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     return true;
   }
+
+  @Nullable
+  public Wrap getWrap(@NotNull ASTNode childNode) {
+    ASTNode parentNode = childNode.getTreeParent();
+    IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
+    IElementType childNodeType = PsiUtilCore.getElementType(childNode);
+
+    if (parentNodeType == COMMA_SEQUENCE_EXPR) {
+      return childNodeType == COMMA || isNewLineForbiddenAt(childNode) ? null : myCommaSequenceWrapMap.get(parentNode);
+    }
+
+    return null;
+  }
+
+
 }
