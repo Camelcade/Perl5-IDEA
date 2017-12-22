@@ -27,7 +27,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
-import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
@@ -206,7 +205,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   private Alignment getChildAlignment() {
 
     IElementType elementType = getElementType();
-    if (PerlIndentProcessor.COMMA_LIKE_SEQUENCES.contains(elementType)) {
+    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(elementType)) {
       return null;
     }
 

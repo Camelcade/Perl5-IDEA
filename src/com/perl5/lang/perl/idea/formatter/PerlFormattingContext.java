@@ -66,6 +66,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
     SEMICOLON
   );
+  public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(
+    COMMA_SEQUENCE_EXPR,
+    SUB_SIGNATURE,
+    METHOD_SIGNATURE_CONTENT,
+    FUNC_SIGNATURE_CONTENT,
+    TRENAR_EXPR
+  );
   private final Map<ASTNode, Wrap> myCommaSequenceWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
   private final Map<ASTNode, Alignment> mySimpleAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {

@@ -95,14 +95,6 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     CALL_ARGUMENTS
   );
 
-  public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(
-    COMMA_SEQUENCE_EXPR,
-    SUB_SIGNATURE,
-    METHOD_SIGNATURE_CONTENT,
-    FUNC_SIGNATURE_CONTENT,
-    TRENAR_EXPR
-  );
-
   /**
    * Tokens that must be suppressed for indentation
    */
@@ -196,7 +188,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNoneIndent();
     }
 
-    if (COMMA_LIKE_SEQUENCES.contains(parentType)) {
+    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(parentType)) {
       return grandParentType == STATEMENT ? Indent.getContinuationWithoutFirstIndent() : Indent.getContinuationIndent();
     }
 
