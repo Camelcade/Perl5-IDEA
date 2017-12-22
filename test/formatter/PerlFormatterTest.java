@@ -29,6 +29,8 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testFatCommaWrapping() {doFormatTest();}
+
   public void testAnonArrayArgument() {doFormatTest();}
 
   public void testAnonHashArgument() {doFormatTest();}
