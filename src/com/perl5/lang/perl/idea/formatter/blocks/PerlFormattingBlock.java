@@ -19,19 +19,15 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.containers.FactoryMap;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
-import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +36,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
@@ -67,12 +62,8 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     () -> ContainerUtil.immutableList(buildSubBlocks())
   );
 
-  public PerlFormattingBlock(
-    @NotNull ASTNode node,
-    @Nullable Alignment alignment,
-    @NotNull PerlFormattingContext context
-  ) {
-    super(node, context.getWrap(node), alignment);
+  public PerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
+    super(node, context.getWrap(node), context.getAlignment(node));
     myContext = context;
     myIndent = context.getIndentProcessor().getNodeIndent(node);
     myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
@@ -116,53 +107,10 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   protected List<Block> buildSubBlocks() {
     final List<Block> blocks = new ArrayList<>();
 
-    int[] relativeLineNumber = new int[]{0};
-
-    IElementType elementType = getElementType();
-    Alignment alignment = Alignment.createAlignment(true);
-    Function<IElementType, Alignment> alignmentFunction;
-    PerlCodeStyleSettings perlCodeStyleSettings = myContext.getPerlSettings();
-    if (elementType == COMMA_SEQUENCE_EXPR && perlCodeStyleSettings.ALIGN_FAT_COMMA) {
-      alignmentFunction = childElementType -> childElementType == FAT_COMMA ? alignment : null;
-    }
-    else if (elementType == TRENAR_EXPR && perlCodeStyleSettings.ALIGN_TERNARY) {
-      alignmentFunction = childElementType -> childElementType == QUESTION || childElementType == COLON ? alignment : null;
-    }
-    else if (elementType == DEREF_EXPR && perlCodeStyleSettings.ALIGN_DEREFERENCE_IN_CHAIN) {
-      alignmentFunction = childElementType -> childElementType == OPERATOR_DEREFERENCE ? alignment : null;
-    }
-    else if ((elementType == STRING_LIST || elementType == LP_STRING_QW) && perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
-      @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-      Map<Integer, Alignment> alignmentMap = FactoryMap.create(key -> Alignment.createAlignment(true));
-      int[] elementIndex = new int[]{0};
-      int[] lastRelativeLineNumber = new int[]{0};
-
-      alignmentFunction = childElementType -> {
-        if (childElementType != STRING_CONTENT) {
-          return null;
-        }
-
-        if (lastRelativeLineNumber[0] != relativeLineNumber[0]) {
-          lastRelativeLineNumber[0] = relativeLineNumber[0];
-          elementIndex[0] = 0;
-        }
-
-        return alignmentMap.get(elementIndex[0]++);
-      };
-    }
-    else {
-      alignmentFunction = childElementType -> null;
-    }
-
     for (ASTNode child = myNode.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-      if (!shouldCreateBlockFor(child)) {
-        if (StringUtil.containsLineBreak(child.getChars())) {
-          relativeLineNumber[0]++;
-        }
-        continue;
+      if (shouldCreateBlockFor(child)) {
+        blocks.add(createBlock(child));
       }
-      IElementType childElementType = PsiUtilCore.getElementType(child);
-      blocks.add(createBlock(child, alignmentFunction.fun(childElementType)));
     }
     return processSubBlocks(blocks);
   }
@@ -209,12 +157,11 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return result;
   }
 
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node,
-                                            @Nullable Alignment alignment) {
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
     if (HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
-      return new PerlHeredocFormattingBlock(node, alignment, myContext);
+      return new PerlHeredocFormattingBlock(node, myContext);
     }
-    return new PerlFormattingBlock(node, alignment, myContext);
+    return new PerlFormattingBlock(node, myContext);
   }
 
   @Nullable

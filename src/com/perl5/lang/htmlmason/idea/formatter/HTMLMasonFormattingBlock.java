@@ -16,7 +16,6 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
-import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.IElementType;
@@ -31,16 +30,14 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 08.03.2016.
  */
 public class HTMLMasonFormattingBlock extends PerlFormattingBlock implements HTMLMasonElementTypes, HTMLMasonElementPatterns {
-  public HTMLMasonFormattingBlock(@NotNull ASTNode node,
-                                  @Nullable Alignment alignment,
-                                  @NotNull PerlFormattingContext context
+  public HTMLMasonFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
   ) {
-    super(node, alignment, context);
+    super(node, context);
   }
 
   @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Alignment alignment) {
-    return new HTMLMasonFormattingBlock(node, alignment, myContext);
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
+    return new HTMLMasonFormattingBlock(node, myContext);
   }
 
   @Nullable

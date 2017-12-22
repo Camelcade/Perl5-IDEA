@@ -40,6 +40,7 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,6 +67,26 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     SEMICOLON
   );
   private final Map<ASTNode, Wrap> myCommaSequenceWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
+  private final Map<ASTNode, Alignment> mySimpleAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
+  private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {
+    Map<Integer, Alignment> generatingMap = FactoryMap.create(key -> Alignment.createAlignment(true));
+
+    int column = 0;
+    Map<ASTNode, Alignment> itemsMap = new THashMap<>();
+    ASTNode run = listNode.getFirstChildNode();
+    while (run != null) {
+      if (PsiUtilCore.getElementType(run) == STRING_CONTENT) {
+        itemsMap.put(run, generatingMap.get(column++));
+      }
+      else if (StringUtil.containsLineBreak(run.getChars())) {
+        column = 0;
+      }
+      run = run.getTreeNext();
+    }
+
+    return itemsMap;
+  });
+
   private final CommonCodeStyleSettings mySettings;
   private final PerlCodeStyleSettings myPerlSettings;
   private final SpacingBuilder mySpacingBuilder;
@@ -498,6 +519,35 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       childNode = childNode.getTreeNext();
     }
     return true;
+  }
+
+  @Nullable
+  public Alignment getAlignment(@NotNull ASTNode childNode) {
+    ASTNode parentNode = childNode.getTreeParent();
+    IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
+    IElementType childNodeType = PsiUtilCore.getElementType(childNode);
+    PerlCodeStyleSettings perlCodeStyleSettings = getPerlSettings();
+    if (childNodeType == FAT_COMMA &&
+        parentNodeType == COMMA_SEQUENCE_EXPR &&
+        perlCodeStyleSettings.ALIGN_FAT_COMMA) {
+      return mySimpleAlignmentsMap.get(parentNode);
+    }
+    else if (parentNodeType == TRENAR_EXPR &&
+             (childNodeType == QUESTION || childNodeType == COLON) &&
+             perlCodeStyleSettings.ALIGN_TERNARY) {
+      return mySimpleAlignmentsMap.get(parentNode);
+    }
+    else if (childNodeType == OPERATOR_DEREFERENCE &&
+             parentNodeType == DEREF_EXPR &&
+             perlCodeStyleSettings.ALIGN_DEREFERENCE_IN_CHAIN) {
+      return mySimpleAlignmentsMap.get(parentNode);
+    }
+    else if (childNodeType == STRING_CONTENT &&
+             (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
+             perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
+      return myStringListAlignmentMap.get(parentNode).get(childNode);
+    }
+    return null;
   }
 
   @Nullable

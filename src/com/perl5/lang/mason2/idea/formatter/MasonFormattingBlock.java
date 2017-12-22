@@ -16,27 +16,23 @@
 
 package com.perl5.lang.mason2.idea.formatter;
 
-import com.intellij.formatting.Alignment;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 09.01.2016.
  */
 public class MasonFormattingBlock extends PerlFormattingBlock {
-  public MasonFormattingBlock(@NotNull ASTNode node,
-                              @Nullable Alignment alignment,
-                              @NotNull PerlFormattingContext context
+  public MasonFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
   ) {
-    super(node, alignment, context);
+    super(node, context);
   }
 
 
   @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Alignment alignment) {
-    return new MasonFormattingBlock(node, alignment, myContext);
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
+    return new MasonFormattingBlock(node, myContext);
   }
 }

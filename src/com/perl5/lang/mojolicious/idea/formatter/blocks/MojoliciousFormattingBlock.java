@@ -16,27 +16,23 @@
 
 package com.perl5.lang.mojolicious.idea.formatter.blocks;
 
-import com.intellij.formatting.Alignment;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 09.01.2016.
  */
 public class MojoliciousFormattingBlock extends PerlFormattingBlock {
 
-  public MojoliciousFormattingBlock(@NotNull ASTNode node,
-                                    @Nullable Alignment alignment,
-                                    @NotNull PerlFormattingContext context
+  public MojoliciousFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
   ) {
-    super(node, alignment, context);
+    super(node, context);
   }
 
   @Override
-  protected PerlFormattingBlock createBlock(@NotNull ASTNode node, @Nullable Alignment alignment) {
-    return new MojoliciousFormattingBlock(node, alignment, myContext);
+  protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
+    return new MojoliciousFormattingBlock(node, myContext);
   }
 }

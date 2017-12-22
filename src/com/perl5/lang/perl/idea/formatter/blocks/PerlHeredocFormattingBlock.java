@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.formatter.blocks;
 
-import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Block;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.injection.InjectedLanguageManager;
@@ -26,7 +25,6 @@ import com.perl5.lang.perl.idea.formatter.PerlInjectedLanguageBlocksBuilder;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -36,11 +34,8 @@ import java.util.List;
 public class PerlHeredocFormattingBlock extends PerlFormattingBlock {
 
 
-  public PerlHeredocFormattingBlock(@NotNull ASTNode node,
-                                    @Nullable Alignment alignment,
-                                    @NotNull PerlFormattingContext context
-  ) {
-    super(node, alignment, context);
+  public PerlHeredocFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
+    super(node, context);
     assert node.getPsi() instanceof PerlHeredocElementImpl : "Got " + node + "instead of heredoc.";
   }
 

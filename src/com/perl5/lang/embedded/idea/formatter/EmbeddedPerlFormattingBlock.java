@@ -16,7 +16,6 @@
 
 package com.perl5.lang.embedded.idea.formatter;
 
-import com.intellij.formatting.Alignment;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
@@ -29,12 +28,10 @@ import org.jetbrains.annotations.Nullable;
  * Created by hurricup on 11.01.2016.
  */
 public class EmbeddedPerlFormattingBlock extends PerlFormattingBlock {
-  public EmbeddedPerlFormattingBlock(@NotNull ASTNode node,
-                                     @Nullable Alignment alignment,
-                                     @NotNull PerlFormattingContext context
+  public EmbeddedPerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context
 
   ) {
-    super(node, alignment, context);
+    super(node, context);
   }
 
   @Nullable
