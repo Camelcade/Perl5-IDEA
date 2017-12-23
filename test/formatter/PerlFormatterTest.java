@@ -29,6 +29,25 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testCommentsWrapping() {
+    getSettings().RIGHT_MARGIN = 12;
+    doFormatTest();
+  }
+
+  public void testAlignListCommentsTrue() {
+    getCustomSettings().ALIGN_COMMENTS_IN_LIST = true;
+    doTestAlignListComments();
+  }
+
+  public void testAlignListCommentsFalse() {
+    getCustomSettings().ALIGN_COMMENTS_IN_LIST = false;
+    doTestAlignListComments();
+  }
+
+  private void doTestAlignListComments() {
+    doTestSingleSource("alignListComments");
+  }
+
   public void testSpacingAfterReference() {doFormatTest();}
 
   public void testFatCommaWrapping() {doFormatTest();}

@@ -43,6 +43,7 @@
      <ul>
         <li>Formatting options available for subs signatures, prototypes and attributes</li>
         <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
+        <li>Formatting option to align comments inside lists, enabled by default, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
      </ul>
      </p>
      <p>Fixes:

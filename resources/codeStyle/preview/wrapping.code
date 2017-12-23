@@ -1,9 +1,11 @@
 package Foo::Bar{
 
 my $hashref = {
-    key      => 42,
-    otherkey => 42,
-    third    => 42
+# base comment
+    key      => 42, # some comment
+    otherkey => 424242, # other comment
+    # other base comment
+    third    => 4 # final comment
 };
 
 sub somesub{

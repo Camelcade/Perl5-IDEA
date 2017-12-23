@@ -69,8 +69,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     FUNC_SIGNATURE_CONTENT,
     TRENAR_EXPR
   );
+
   private final Map<ASTNode, Wrap> myCommaSequenceWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
   private final Map<ASTNode, Alignment> mySimpleAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
+  private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
   private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {
     Map<Integer, Alignment> generatingMap = FactoryMap.create(key -> Alignment.createAlignment(true));
 
@@ -335,7 +337,26 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       return myStringListAlignmentMap.get(parentNode).get(childNode);
     }
+    else if (childNodeType == COMMENT_LINE && myPerlSettings.ALIGN_COMMENTS_IN_LIST) {
+      ASTNode prevNode = childNode.getTreePrev();
+      if (prevNode == null || StringUtil.containsLineBreak(prevNode.getChars())) {
+        return null;
+      }
+      if (parentNodeType == COMMA_SEQUENCE_EXPR) {
+        return myCommentsAlignmentMap.get(parentNode);
+      }
+      ASTNode prevNonSpaceNode = getPrevNonSpaceNode(childNode);
+      if (PsiUtilCore.getElementType(prevNonSpaceNode) == COMMA_SEQUENCE_EXPR) {
+        return myCommentsAlignmentMap.get(prevNonSpaceNode);
+      }
+    }
     return null;
+  }
+
+  @Nullable
+  private ASTNode getPrevNonSpaceNode(@NotNull ASTNode node) {
+    ASTNode prevNode = node.getTreePrev();
+    return PsiUtilCore.getElementType(prevNode) != TokenType.WHITE_SPACE ? prevNode : prevNode.getTreePrev();
   }
 
   @Nullable
@@ -344,7 +365,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
 
-    if (parentNodeType == COMMA_SEQUENCE_EXPR &&
+    if (childNodeType == COMMENT_LINE) {
+      return null;
+    }
+    else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
         childNodeType != COMMA && childNodeType != FAT_COMMA &&
         !isNewLineForbiddenAt(childNode)) {
       return myCommaSequenceWrapMap.get(parentNode);

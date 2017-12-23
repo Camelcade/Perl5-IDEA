@@ -1,0 +1,17 @@
+$a = (
+        #    base    comment
+        1, #    additional    comment
+        $something,
+        'this    is    a    vetry    long    string', #    comment
+        #    other    base    comment
+        'other'         => 'blah', #    pair    comment
+        'somethinglong' => #    fat    comma    comment
+                'blah',
+        'somethinglong'    #    before    fat    comma    comment
+                        => 'blah',
+        #    base
+        'somethinglong'    #some
+                        => #    blah
+                'blah',    #    bob
+
+);

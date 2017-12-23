@@ -169,6 +169,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_COMMENTS_IN_LIST",
+                                PerlBundle.message("perl.formatting.align.comments.in.list"),
+                                GROUP_ALIGNMENT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_FAT_COMMA",
                                 PerlBundle.message("perl.formatting.align.fat.comma"),
                                 GROUP_ALIGNMENT);
@@ -280,6 +285,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       return LANGUAGE_SPECIFIC_CODE_SAMPLE;
     }
     return DEFAULT_CODE_SAMPLE;
+  }
+
+  @Override
+  public int getRightMargin(@NotNull SettingsType settingsType) {
+    return settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS ? 45 : super.getRightMargin(settingsType);
   }
 
   @NotNull

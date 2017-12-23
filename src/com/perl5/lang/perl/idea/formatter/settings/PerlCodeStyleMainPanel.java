@@ -34,12 +34,16 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel {
 
   @Override
   protected void addWrappingAndBracesTab(CodeStyleSettings settings) {
-    super.addWrappingAndBracesTab(settings);
+    addTab(new PerlWrappingAndBracesPanel(settings));
   }
 
   @Override
   protected void addBlankLinesTab(CodeStyleSettings settings) {
-    //		super.addBlankLinesTab(settings);
+  }
+
+  @Override
+  protected void initTabs(CodeStyleSettings settings) {
+    super.initTabs(settings);
     addTab(new PerlSpecificCodeStylePanel(settings));
   }
 
@@ -63,4 +67,16 @@ public class PerlCodeStyleMainPanel extends TabbedLanguageCodeStylePanel {
       return LanguageCodeStyleSettingsProvider.SettingsType.LANGUAGE_SPECIFIC;
     }
   }
+
+  protected class PerlWrappingAndBracesPanel extends MyWrappingAndBracesPanel {
+    public PerlWrappingAndBracesPanel(CodeStyleSettings settings) {
+      super(settings);
+    }
+
+    @Override
+    protected String getTabTitle() {
+      return PerlBundle.message("perl.formatting.wrap.tab.name");
+    }
+  }
+
 }

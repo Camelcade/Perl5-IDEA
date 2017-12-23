@@ -4684,24 +4684,24 @@ PRE_END
     my $in_toc_package = "";
     my $last_level = 0;
     bless {
-            _input_file        => $input_file, # name of input file
-            _title             => $title, # title, unescaped
-            _html_file         => $html_file, # name of .html output file
-            _toc_filename      => $toc_filename, # for frames option
-            _src_filename      => $src_filename, # for frames option
-            _html_file_opened  => $html_file_opened, # a flag
-            _html_fh           => $html_fh, # the output stream
-            _html_pre_fh       => $html_pre_fh, # pre section goes here
-            _rpre_string_stack => \@pre_string_stack, # stack of pre sections
-            _html_pod_fh       => $html_pod_fh, # pod goes here if pod2html
-            _rpod_string       => \$pod_string, # string holding pod
-            _pod_cut_count     => 0, # how many =cut's?
-            _html_toc_fh       => $html_toc_fh, # fh for table of contents
-            _rtoc_string       => \$toc_string, # string holding toc
-            _rtoc_item_count   => \$toc_item_count, # how many toc items
-            _rin_toc_package   => \$in_toc_package, # package name
-            _rtoc_name_count   => {}, # hash to track unique names
-            _rpackage_stack    => [], # stack to check for package
+            _input_file        => $input_file,          # name of input file
+            _title             => $title,               # title, unescaped
+            _html_file         => $html_file,           # name of .html output file
+            _toc_filename      => $toc_filename,        # for frames option
+            _src_filename      => $src_filename,        # for frames option
+            _html_file_opened  => $html_file_opened,    # a flag
+            _html_fh           => $html_fh,             # the output stream
+            _html_pre_fh       => $html_pre_fh,         # pre section goes here
+            _rpre_string_stack => \@pre_string_stack,   # stack of pre sections
+            _html_pod_fh       => $html_pod_fh,         # pod goes here if pod2html
+            _rpod_string       => \$pod_string,         # string holding pod
+            _pod_cut_count     => 0,                    # how many =cut's?
+            _html_toc_fh       => $html_toc_fh,         # fh for table of contents
+            _rtoc_string       => \$toc_string,         # string holding toc
+            _rtoc_item_count   => \$toc_item_count,     # how many toc items
+            _rin_toc_package   => \$in_toc_package,     # package name
+            _rtoc_name_count   => {},                   # hash to track unique names
+            _rpackage_stack    => [],                   # stack to check for package
             # name changes
             _rlast_level       => \$last_level,         # brace indentation level
     }, $class;
@@ -8406,12 +8406,12 @@ EOM
         # token lists for perl secret operators as compiled by Philippe Bruhat
         # at: https://metacpan.org/module/perlsecret
         %secret_operators = (
-                'Goatse'            => [ qw#= ( ) =# ], #=( )=
-                'Venus1'            => [ qw#0 +# ], # 0+
-                'Venus2'            => [ qw#+ 0# ], # +0
-                'Enterprise'        => [ qw#) x ! !# ], # ()x!!
-                'Kite1'             => [ qw#~ ~ <># ], # ~~<>
-                'Kite2'             => [ qw#~~ <># ], # ~~<>
+                'Goatse'            => [ qw#= ( ) =# ],    #=( )=
+                'Venus1'            => [ qw#0 +# ],        # 0+
+                'Venus2'            => [ qw#+ 0# ],        # +0
+                'Enterprise'        => [ qw#) x ! !# ],    # ()x!!
+                'Kite1'             => [ qw#~ ~ <># ],     # ~~<>
+                'Kite2'             => [ qw#~~ <># ],      # ~~<>
                 'Winking Fat Comma' => [ (',', '=>') ],    # ,=>
         );
 

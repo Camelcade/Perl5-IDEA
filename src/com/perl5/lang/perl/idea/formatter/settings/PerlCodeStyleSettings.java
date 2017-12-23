@@ -56,6 +56,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean ALIGN_QW_ELEMENTS = false;
   public boolean ALIGN_TERNARY = true;
   public boolean ALIGN_DEREFERENCE_IN_CHAIN = false;
+  public boolean ALIGN_COMMENTS_IN_LIST = true;
 
   public int BRACE_STYLE_NAMESPACE = SAME_LINE;
   public int BRACE_STYLE_SUB = SAME_LINE;
