@@ -1,7 +1,7 @@
 my @list = qw/
         this is        a list
         of   different strings
-        /;
+/;
 
 # Lazy
 my @list = qw/
@@ -21,4 +21,4 @@ my @list = qw/
         of   different strings
         this is        a list
         of   different strings
-        /;
+/;

@@ -29,6 +29,8 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testQwQuotesAndContent() {doFormatTest();}
+
   public void testCommentsWrapping() {
     getSettings().RIGHT_MARGIN = 12;
     doFormatTest();

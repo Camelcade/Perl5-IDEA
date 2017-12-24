@@ -222,9 +222,9 @@ qx
         {    something    };
 qx#something#;
 qw
-        /something/;
+/something/;
 qw
-        {something};
+{something};
 qw#something#;
 <<EOF;
 EOF

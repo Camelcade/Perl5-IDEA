@@ -1,0 +1,80 @@
+qw
+/test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla
+/;
+qw
+/test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla/;
+qw
+/
+        test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla
+/;
+qw/test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla
+/;
+
+$a = qw
+/test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla
+/;
+$a = qw
+/
+        test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla
+/;
+$a = qw/test some sub bla test some sub bla test some sub bla test some sub bla
+        test some sub blatest some sub blatest some sub blatest some sub bla
+/;
+
+$a =
+        qw
+        /test some sub bla test some sub bla test some sub bla test some sub bla
+                test some sub blatest some sub blatest some sub blatest some sub bla
+        /;
+$a =
+        qw
+        /
+                test some sub bla test some sub bla test some sub bla test some sub bla
+                test some sub blatest some sub blatest some sub blatest some sub bla
+        /;
+$a =
+        qw/test some sub bla test some sub bla test some sub bla test some sub bla
+                test some sub blatest some sub blatest some sub blatest some sub bla
+        /;
+
+qw
+/some sdf
+        testsdf
+/;
+qw
+/
+        some sdf
+        testsdf
+/;
+qw/some sdf
+        testsdf
+/;
+
+$a = qw
+/some sdf
+        testsdf
+/;
+$a = qw
+/
+        some sdf
+        testsdf
+/;
+$a = qw/some sdf
+        testsdf
+/;
+
+$a =
+        qw
+        /some sdf
+                testsdf
+        /;
+$a =
+        qw/some sdf
+                testsdf
+        /;

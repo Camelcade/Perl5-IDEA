@@ -70,7 +70,7 @@ use vars qw{
         $missing_file_spec
         $fh_stderr
         $rOpts_character_encoding
-        };
+};
 
 @ISA = qw(Exporter);
 @EXPORT = qw(&perltidy);
@@ -1512,7 +1512,7 @@ sub generate_options {
             recombine!
             valign!
             notidy
-            );
+    );
 
     my $category = 13;    # Debugging
     foreach (@option_string) {
@@ -1917,7 +1917,7 @@ sub generate_options {
             pod2html
             html-table-of-contents
             html-entities
-            );
+    );
 
     push @defaults, "perl-syntax-check-flags=-c -T";
 
@@ -2069,7 +2069,7 @@ sub generate_options {
                             blank-lines-before-subs=0
                             blank-lines-before-packages=0
                             notabs
-                            )
+                    )
             ],
 
             # 'extrude' originally deleted pod and comments, but to keep it
@@ -2099,7 +2099,7 @@ sub generate_options {
                             nofuzzy-line-length
                             notabs
                             norecombine
-                            )
+                    )
             ],
 
             # this style tries to follow the GNU Coding Standards (which do
@@ -2108,7 +2108,7 @@ sub generate_options {
             'gnu-style'                        => [
                     qw(
                             lp bl noll pt=2 bt=2 sbt=2 cpi=1 csbi=1 cbi=1
-                            )
+                    )
             ],
 
             # Style suggested in Damian Conway's Perl Best Practices
@@ -2397,7 +2397,7 @@ EOM
                                 help
                                 stylesheet
                                 version
-                                }
+                        }
                 ) {
 
                     if (defined($Opts{$_})) {
@@ -4584,7 +4584,7 @@ use vars qw{
                 $css_filename
                 $css_linkname
                 $missing_html_entities
-        };
+};
 
 # replace unsafe characters with HTML entity representation if HTML::Entities
 # is available
@@ -6253,7 +6253,7 @@ use vars qw{
                 %is_opening_type
                 %is_closing_token
                 %is_opening_token
-        };
+};
 
 BEGIN {
 
@@ -6263,7 +6263,7 @@ BEGIN {
     @_ = qw(
             .. :: << >> ** && .. || // -> => += -= .= %= &= |= ^= *= <>
             <= >= == =~ !~ != ++ -- /= x=
-            );
+    );
     @is_digraph{@_} = (1) x scalar(@_);
 
     @_ = qw(... **= <<= >>= &&= ||= //= <=>);
@@ -6274,7 +6274,7 @@ BEGIN {
             -= /= |= >>= ||= //=
             .= %= ^=
             x=
-            );
+    );
     @is_assignment{@_} = (1) x scalar(@_);
 
     @_ = qw(
@@ -6284,7 +6284,7 @@ BEGIN {
             reverse
             sort
             split
-            );
+    );
     @is_keyword_returning_list{@_} = (1) x scalar(@_);
 
     @_ = qw(is if unless and or err last next redo return);
@@ -7730,7 +7730,7 @@ EOM
     my @all_operators = qw(% + - * / x != == >= <= =~ !~ < > | &
             = **= += *= &= <<= &&= -= /= |= >>= ||= //= .= %= ^= x=
             . : ? && || and or err xor
-            );
+    );
 
     my $break_after = sub {
         foreach my $tok (@_) {
@@ -8526,16 +8526,16 @@ sub set_white_space_flag {
                 + - * / % ? = . : x < > | & ^ .. << >> ** && .. || // => += -=
                 .= %= x= &= |= ^= *= <> <= >= == =~ !~ /= != ... <<= >>= ~~ !~~
                 &&= ||= //= <=> A k f w F n C Y U G v
-                ";
+        ";
 
         my @spaces_left_side = qw"
                 t ! ~ m p { \ h pp mm Z j
-                ";
+        ";
         push(@spaces_left_side, '#');    # avoids warning message
 
         my @spaces_right_side = qw"
                 ; } ) ] R J ++ -- **=
-                ";
+        ";
         push(@spaces_right_side, ',');    # avoids warning message
 
         # Note that we are in a BEGIN block here.  Later in processing
@@ -13624,7 +13624,7 @@ sub get_seqno {
         @_ = qw#
                 = **= += *= &= <<= &&= -= /= |= >>= ||= //= .= %= ^= x=
                 { ? : => && || // ~~ !~~
-                #;
+        #;
         @is_vertical_alignment_type{@_} = (1) x scalar(@_);
 
         # only align these at end of line
@@ -14083,7 +14083,7 @@ sub terminal_type {
                     -= /= |= >>= ||= //=
                     .= %= ^=
                     x=
-                    );
+            );
 
             # Default is to break AFTER various assignment operators
             @left_bond_strength{@_} = (STRONG) x scalar(@_);
@@ -19713,7 +19713,7 @@ use vars qw(
                 $rOpts_fixed_position_side_comment
                 $rOpts_minimum_space_to_comment
 
-        );
+);
 
 sub initialize {
 
@@ -22681,7 +22681,7 @@ use vars qw{
                 @nested_ternary_flag
                 @nested_statement_type
                 @starting_line_of_current_depth
-        };
+};
 
 # GLOBAL CONSTANTS for routines in this package
 use vars qw{
@@ -22702,7 +22702,7 @@ use vars qw{
                 @closing_brace_names
                 %is_keyword_taking_list
                 %is_q_qq_qw_qx_qr_s_y_tr_m
-        };
+};
 
 # possible values of operator_expected()
 use constant TERM => -1;
@@ -29705,7 +29705,7 @@ BEGIN {
     my @digraphs = qw(
             .. :: << >> ** && .. || // -> => += -= .= %= &= |= ^= *= <>
             <= >= == =~ !~ != ++ -- /= x= ~~ ~. |. &. ^.
-            );
+    );
     @is_digraph{@digraphs} = (1) x scalar(@digraphs);
 
     my @trigraphs = qw(... **= <<= >>= &&= ||= //= <=> !~~ &.= |.= ^.=);
@@ -29716,7 +29716,7 @@ BEGIN {
     my @valid_token_types = qw#
             A b C G L R f h Q k t w i q n p m F pp mm U j J Y Z v
             { } ( ) [ ] ; + - / * | % ! x ~ = \ ? : . < > ^ &
-            #;
+    #;
     push(@valid_token_types, @digraphs);
     push(@valid_token_types, @trigraphs);
     push(@valid_token_types, ('#', ',', 'CORE::'));
@@ -29742,9 +29742,9 @@ BEGIN {
     # patched for SWITCH/CASE/CATCH.  Actually these could be removed
     # now and we could let the extended-syntax coding handle them
     @_ =
-            qw( BEGIN END CHECK INIT AUTOLOAD DESTROY UNITCHECK continue if elsif else
-            unless do while until eval for foreach map grep sort
-            switch case given when catch);
+            qw(BEGIN END CHECK INIT AUTOLOAD DESTROY UNITCHECK continue if elsif else
+                    unless do while until eval for foreach map grep sort
+                    switch case given when catch);
     @is_code_block_token{@_} = (1) x scalar(@_);
 
     # I'll build the list of keywords incrementally
@@ -29973,7 +29973,7 @@ BEGIN {
             when
             err
             say
-            );
+    );
 
     # patched above for SWITCH/CASE given/when err say
     # 'err' is a fairly safe addition.
@@ -29986,7 +29986,7 @@ BEGIN {
     my @extra_vr = qw(
             constant
             vars
-            );
+    );
     push(@value_requestor, @extra_vr);
 
     @expecting_term_token{@value_requestor} = (1) x scalar(@value_requestor);
@@ -30016,7 +30016,7 @@ BEGIN {
             times
             wait
             wantarray
-            );
+    );
 
     push(@Keywords, @operator_requestor);
 
@@ -30025,7 +30025,7 @@ BEGIN {
             STDERR
             STDIN
             STDOUT
-            );
+    );
 
     push(@operator_requestor, @extra_or);
 
@@ -30047,7 +30047,7 @@ BEGIN {
             <= >= == != => \ > < % * / ? & | ** <=> ~~ !~~
             f F pp mm Y p m U J G j >> << ^ t
             ~. ^. |. &. ^.= |.= &.=
-            #;
+    #;
     push(@value_requestor_type, ',')
     ;    # (perl doesn't like a ',' in a qw block)
     @expecting_term_types{@value_requestor_type} =
@@ -30088,7 +30088,7 @@ BEGIN {
             sub
             tr
             y
-            );
+    );
     push(@Keywords, @special_keywords);
 
     # Keywords after which list formatting may be used
@@ -30167,7 +30167,7 @@ BEGIN {
             while
             given
             when
-            );
+    );
     @is_keyword_taking_list{@keyword_taking_list} =
             (1) x scalar(@keyword_taking_list);
 

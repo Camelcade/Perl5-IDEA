@@ -91,6 +91,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
   );
 
   public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
+    LP_STRING_QW,
     COMMA_SEQUENCE_EXPR,
     CALL_ARGUMENTS
   );
@@ -172,6 +173,14 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     if (getUnindentableTokens().contains(nodeType) ||
         (nodeType instanceof PerlPolyNamedElementType && !(node.getPsi() instanceof PerlPolyNamedNestedCallElementBase))) {
       return Indent.getNoneIndent();
+    }
+
+    if (parentType == STRING_LIST && (nodeType == QUOTE_SINGLE_OPEN || nodeType == QUOTE_SINGLE_CLOSE)) {
+      return Indent.getNoneIndent();
+    }
+
+    if (nodeType == STRING_CONTENT && (parentType == STRING_LIST || parentType == LP_STRING_QW)) {
+      return Indent.getContinuationIndent();
     }
 
     // defined by parent

@@ -91,8 +91,8 @@ public class PerlSpacingBuilderFactory {
       .betweenInside(STRING_CONTENT, STRING_CONTENT, STRING_LIST).spaces(1)
 
       .betweenInside(QUOTE_SINGLE_OPEN, QUOTE_SINGLE_CLOSE, STRING_LIST).spaces(0)
-      .betweenInside(QUOTE_SINGLE_OPEN, STRING_CONTENT, STRING_LIST).spaceIf(perlSettings.SPACE_WITHIN_QW_QUOTES)
-      .betweenInside(STRING_CONTENT, QUOTE_SINGLE_CLOSE, STRING_LIST).spaceIf(perlSettings.SPACE_WITHIN_QW_QUOTES)
+      .afterInside(QUOTE_SINGLE_OPEN, STRING_LIST).spaceIf(perlSettings.SPACE_WITHIN_QW_QUOTES)
+      .beforeInside(QUOTE_SINGLE_CLOSE, STRING_LIST).spaceIf(perlSettings.SPACE_WITHIN_QW_QUOTES)
 
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, PARENTHESISED_EXPR).spaces(0)
       .afterInside(LEFT_PAREN, PARENTHESISED_EXPR).spaceIf(settings.SPACE_WITHIN_PARENTHESES)
