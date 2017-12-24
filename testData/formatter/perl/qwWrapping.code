@@ -1,0 +1,6 @@
+# Lazy
+my @list = qw/
+  this is a list of different strings this is a list of different strings this is a list of different strings this is a list of different strings this is a list of different strings this is a list of different strings this is a list of different strings this is a list of different strings/;
+
+my @list = qw/
+  this is a list of different strings this is a list of different strings this is a list of different strings this is af/;

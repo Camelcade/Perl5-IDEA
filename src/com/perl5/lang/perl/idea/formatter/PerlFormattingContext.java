@@ -70,7 +70,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     TRENAR_EXPR
   );
 
-  private final Map<ASTNode, Wrap> myCommaSequenceWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
+  private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
   private final Map<ASTNode, Alignment> mySimpleAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
   private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {
@@ -365,13 +365,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
 
-    if (childNodeType == COMMENT_LINE) {
+    if (childNodeType == COMMENT_LINE || isNewLineForbiddenAt(childNode)) {
       return null;
     }
-    else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
-        childNodeType != COMMA && childNodeType != FAT_COMMA &&
-        !isNewLineForbiddenAt(childNode)) {
-      return myCommaSequenceWrapMap.get(parentNode);
+    else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
+      return mySimpleWrapMap.get(parentNode);
+    }
+    else if ((parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
+             (childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
+      return mySimpleWrapMap.get(parentNode);
     }
 
     return null;
