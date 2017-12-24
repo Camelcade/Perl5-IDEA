@@ -16,8 +16,6 @@
 
 package formatter;
 
-import org.jetbrains.annotations.NotNull;
-
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
 /**
@@ -27,6 +25,20 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/formatter/perl";
+  }
+
+  public void testAlignListElementsTrue() {
+    getCustomSettings().ALIGN_LIST_ELEMENTS = true;
+    doTestAlignListElements();
+  }
+
+  public void testAlignListElementsFalse() {
+    getCustomSettings().ALIGN_LIST_ELEMENTS = false;
+    doTestAlignListElements();
+  }
+
+  private void doTestAlignListElements() {
+    doWrappingTestSingleSource("alignListElements");
   }
 
   public void testDeclarationsWrapping() {doWrappingFormatTest();}
@@ -299,10 +311,6 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
   public void testSpacingAfterCommaFalse() {
     getSettings().SPACE_AFTER_COMMA = false;
     doTestComma();
-  }
-
-  private void doTestSingleSource(@NotNull String sourceFile) {
-    doFormatTest(sourceFile, getTestName(true), "");
   }
 
   private void doTestComma() {

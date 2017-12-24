@@ -21,6 +21,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlFormatterTestCase extends PerlLightTestCase {
   @Override
@@ -35,6 +36,15 @@ public abstract class PerlFormatterTestCase extends PerlLightTestCase {
   protected void doWrappingFormatTest() {
     getSettings().RIGHT_MARGIN = 20;
     doFormatTest();
+  }
+
+  protected void doWrappingTestSingleSource(@NotNull String sourceFile) {
+    getSettings().RIGHT_MARGIN = 20;
+    doTestSingleSource(sourceFile);
+  }
+
+  protected void doTestSingleSource(@NotNull String sourceFile) {
+    doFormatTest(sourceFile, getTestName(true), "");
   }
 
   protected CommonCodeStyleSettings getSettings() {

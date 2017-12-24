@@ -141,10 +141,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
 
+
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ELSE_ON_NEW_LINE",
                                 PerlBundle.message("perl.formatting.compound.secondary"),
                                 GROUP_NEW_LINE_BEFORE
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_LIST_ELEMENTS",
+                                PerlBundle.message("perl.formatting.align.list.elements"),
+                                GROUP_ALIGNMENT
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,

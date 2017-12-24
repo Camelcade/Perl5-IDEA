@@ -23,7 +23,6 @@ if($a){
   say 'dunno';
 }
 
-
 my @list = qw/
     this is   a    list
     of   some cool strings
@@ -35,5 +34,9 @@ say $a == 42 ? 'true'
 $someobject->somemethod()
     ->othermethod()
     ->andagain();
-
 }
+
+my $variable = ('this', 'is', 'list', 'of', 'strings');
+sub foo($variable1, $variable2, $variable3, $variable4){}
+foo($variable1, $variable2, $variable3, $variable4);
+my($variable1, $variable2, $variable3, $variable4);

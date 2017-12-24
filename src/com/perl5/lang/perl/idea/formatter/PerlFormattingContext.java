@@ -74,7 +74,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, true));
   private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
-  private final Map<ASTNode, Alignment> mySimpleAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
+  private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
+  private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
   private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {
     Map<Integer, Alignment> generatingMap = FactoryMap.create(key -> Alignment.createAlignment(true));
@@ -322,17 +323,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     if (childNodeType == FAT_COMMA &&
         parentNodeType == COMMA_SEQUENCE_EXPR &&
         perlCodeStyleSettings.ALIGN_FAT_COMMA) {
-      return mySimpleAlignmentsMap.get(parentNode);
+      return myOperatorsAlignmentsMap.get(parentNode);
     }
     else if (parentNodeType == TRENAR_EXPR &&
              (childNodeType == QUESTION || childNodeType == COLON) &&
              perlCodeStyleSettings.ALIGN_TERNARY) {
-      return mySimpleAlignmentsMap.get(parentNode);
+      return myOperatorsAlignmentsMap.get(parentNode);
     }
     else if (childNodeType == OPERATOR_DEREFERENCE &&
              parentNodeType == DEREF_EXPR &&
              perlCodeStyleSettings.ALIGN_DEREFERENCE_IN_CHAIN) {
-      return mySimpleAlignmentsMap.get(parentNode);
+      return myOperatorsAlignmentsMap.get(parentNode);
     }
     else if (childNodeType == STRING_CONTENT &&
              (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
@@ -351,6 +352,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       if (PsiUtilCore.getElementType(prevNonSpaceNode) == COMMA_SEQUENCE_EXPR) {
         return myCommentsAlignmentMap.get(prevNonSpaceNode);
       }
+    }
+    else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
+             childNodeType != COMMA &&
+             childNodeType != FAT_COMMA &&
+             myPerlSettings.ALIGN_LIST_ELEMENTS) {
+      return myElementsALignmentsMap.get(parentNode);
+    }
+    else if (( childNodeType == VARIABLE_DECLARATION_ELEMENT ||
+               ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) ) ) &&
+             myPerlSettings.ALIGN_LIST_ELEMENTS) {
+      return myElementsALignmentsMap.get(parentNode);
     }
     return null;
   }

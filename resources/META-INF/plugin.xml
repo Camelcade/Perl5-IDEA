@@ -42,6 +42,7 @@
      <p>Updates:
      <ul>
         <li>Formatting options available for subs signatures, prototypes and attributes</li>
+        <li>Formatting option available to align multi-line list items, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
         <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
         <li>Formatting option to align comments inside lists, enabled by default, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
         <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
