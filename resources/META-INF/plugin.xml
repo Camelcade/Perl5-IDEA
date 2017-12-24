@@ -46,6 +46,8 @@
         <li>Formatting option to align comments inside lists, enabled by default, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
         <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
         <li><code>qw</code> contents is now wrapped on long lines string or closing quote may be moved to the next line</li>
+        <li>subs, methods and funcs signatures are now wrapped if long</li>
+        <li>variable declarations lists are now wrapped if long</li>
      </ul>
      </p>
      <p>Fixes:

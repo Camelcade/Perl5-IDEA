@@ -386,6 +386,12 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
       return mySimpleWrapMap.get(parentNode);
     }
+    else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
+             ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {
+      return PsiUtilCore.getElementType(getPrevNonSpaceNode(childNode)) == LEFT_PAREN
+             ? mySimpleWrapMap.get(parentNode)
+             : myChopDownWrapMap.get(parentNode);
+    }
 
     return null;
   }

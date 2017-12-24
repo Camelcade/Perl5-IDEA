@@ -1,0 +1,9 @@
+my ($var1, $var2, undef, $var3 );
+my ($var1, $var2, $var3 );
+our ($var1, $var2, undef, $var3 );
+our ($var1, $var2, $var3 );
+local ($var1, $var2, undef, $var3 );
+local ($var1, $var2, $var3 );
+state ($var1, $var2, undef, $var3 );
+state ($var1, $var2, $var3 );
+

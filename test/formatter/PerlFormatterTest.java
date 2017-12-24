@@ -29,6 +29,8 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testDeclarationsWrapping() {doWrappingFormatTest();}
+
   public void testSignaturesWrapping() {doWrappingFormatTest();}
 
   public void testTernaryWrapping() {doWrappingFormatTest();}

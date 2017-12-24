@@ -40,6 +40,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SUB_DECLARATION
   );
 
+  TokenSet VARIABLE_DECLARATIONS = TokenSet.create(
+    VARIABLE_DECLARATION_GLOBAL,
+    VARIABLE_DECLARATION_LEXICAL,
+    VARIABLE_DECLARATION_LOCAL
+  );
+
   TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(
     CONTINUE_BLOCK,
     RESERVED_ELSE,
