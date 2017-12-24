@@ -253,7 +253,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         ) {
         return Spacing.createSpacing(0, 0, 1, true, 1);
       }
-
       if (parentNodeType == PARENTHESISED_CALL_ARGUMENTS &&
           child2Type == RIGHT_PAREN &&
           PsiUtilCore.getElementType(PsiTreeUtil.getDeepestLast(child1Node.getPsi())) == RIGHT_PAREN
@@ -368,11 +367,14 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     if (childNodeType == COMMENT_LINE || isNewLineForbiddenAt(childNode)) {
       return null;
     }
+    else if (parentNodeType == TRENAR_EXPR && childNodeType != COLON && childNodeType != QUESTION) {
+      return mySimpleWrapMap.get(parentNode);
+    }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
       return mySimpleWrapMap.get(parentNode);
     }
-    else if ((parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
-             (childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
+    else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
+             ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
       return mySimpleWrapMap.get(parentNode);
     }
 

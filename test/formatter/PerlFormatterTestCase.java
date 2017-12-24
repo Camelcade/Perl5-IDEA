@@ -32,6 +32,11 @@ public abstract class PerlFormatterTestCase extends PerlLightTestCase {
     options.CONTINUATION_INDENT_SIZE = 8;
   }
 
+  protected void doWrappingFormatTest() {
+    getSettings().RIGHT_MARGIN = 20;
+    doFormatTest();
+  }
+
   protected CommonCodeStyleSettings getSettings() {
     return CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
   }

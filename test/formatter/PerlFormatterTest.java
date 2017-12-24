@@ -29,13 +29,14 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testTernaryWrapping() {doWrappingFormatTest();}
+
   public void testQwWrapping() {doFormatTest();}
 
   public void testQwQuotesAndContent() {doFormatTest();}
 
   public void testCommentsWrapping() {
-    getSettings().RIGHT_MARGIN = 12;
-    doFormatTest();
+    doWrappingFormatTest();
   }
 
   public void testAlignListCommentsTrue() {
