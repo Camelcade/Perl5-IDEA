@@ -49,6 +49,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static com.intellij.formatting.WrapType.CHOP_DOWN_IF_LONG;
+
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   public final static TokenSet BLOCK_OPENERS = TokenSet.create(
     LEFT_BRACE,
@@ -70,6 +72,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     TRENAR_EXPR
   );
 
+  private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, true));
   private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(WrapType.NORMAL, true));
   private final Map<ASTNode, Alignment> mySimpleAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
@@ -368,10 +371,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return null;
     }
     else if (parentNodeType == TRENAR_EXPR && childNodeType != COLON && childNodeType != QUESTION) {
-      return mySimpleWrapMap.get(parentNode);
+      return childNode.getTreePrev() == null ? mySimpleWrapMap.get(parentNode) : myChopDownWrapMap.get(parentNode);
     }
-    else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
-      return mySimpleWrapMap.get(parentNode);
+    else if (parentNodeType != TRENAR_EXPR &&
+             COMMA_LIKE_SEQUENCES.contains(parentNodeType) &&
+             childNodeType != COMMA &&
+             childNodeType != FAT_COMMA) {
+      if (parentNodeType == COMMA_SEQUENCE_EXPR) {
+        return mySimpleWrapMap.get(parentNode);
+      }
+      return childNode.getTreePrev() == null ? mySimpleWrapMap.get(parentNode) : myChopDownWrapMap.get(parentNode);
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {

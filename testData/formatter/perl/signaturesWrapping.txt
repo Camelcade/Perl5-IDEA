@@ -1,0 +1,30 @@
+sub some($var1,
+        $var2,
+        $var3) {};
+method some($var1,
+        $var2,
+        $var3) {};
+func some($var1,
+        $var2,
+        $var3) {};
+func some($var11111,
+        $var2,
+        $var3) {};
+sub some($var111111,
+        $var2,
+        $var3) {};
+method some($var111,
+        $var2,
+        $var3) {};
+func some(
+        $var111111,
+        $var2,
+        $var3) {};
+sub some(
+        $var1111111,
+        $var2,
+        $var3) {};
+method some(
+        $var1111,
+        $var2,
+        $var3) {};

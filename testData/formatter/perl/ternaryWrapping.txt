@@ -1,4 +1,5 @@
-$var ? 'true' :
+$var           ?
+        'true' :
         'false';
 $var                 ?
         'true------' :
