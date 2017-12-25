@@ -41,6 +41,7 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
+        <li>Formatting option available for wrapping of binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
         <li>Formatting options available for subs signatures, prototypes and attributes</li>
         <li>Formatting option available to align multi-line list items, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
         <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>

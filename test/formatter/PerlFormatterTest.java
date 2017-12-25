@@ -16,7 +16,9 @@
 
 package formatter;
 
+import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.NEXT_LINE;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -26,6 +28,28 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
   protected String getTestDataPath() {
     return "testData/formatter/perl";
   }
+
+  public void testWrapBinaryExpressionsNever() {
+    doTestWrapBinaryExpressions(DO_NOT_WRAP);
+  }
+
+  public void testWrapBinaryExpressionsAlways() {
+    doTestWrapBinaryExpressions(WRAP_ALWAYS);
+  }
+
+  public void testWrapBinaryExpressionsLong() {
+    doTestWrapBinaryExpressions(WRAP_AS_NEEDED);
+  }
+
+  public void testWrapBinaryExpressionsChomp() {
+    doTestWrapBinaryExpressions(WRAP_ON_EVERY_ITEM);
+  }
+
+  private void doTestWrapBinaryExpressions(int wrapType) {
+    getSettings().BINARY_OPERATION_WRAP = wrapType;
+    doWrappingTestSingleSource("wrapBinaryExpressions");
+  }
+
 
   public void testWrapDereference() {doWrappingFormatTest();}
 

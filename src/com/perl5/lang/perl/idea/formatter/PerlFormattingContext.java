@@ -49,8 +49,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static com.intellij.formatting.WrapType.CHOP_DOWN_IF_LONG;
-import static com.intellij.formatting.WrapType.NORMAL;
+import static com.intellij.formatting.WrapType.*;
+import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   public final static TokenSet BLOCK_OPENERS = TokenSet.create(
@@ -83,6 +83,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, false));
   private final Map<ASTNode, Wrap> myChopDownWrapMapWithFirst = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, true));
   private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(NORMAL, false));
+  private final Map<ASTNode, Wrap> myAlwaysWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(ALWAYS, false));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
@@ -413,6 +414,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
       return myChopDownWrapMapWithFirst.get(parentNode);
+    }
+    else if (BINARY_EXPRESSIONS.contains(parentNodeType) && !BINARY_OPERATORS.contains(childNodeType)) {
+      if (mySettings.BINARY_OPERATION_WRAP == WRAP_AS_NEEDED) {
+        return mySimpleWrapMap.get(parentNode);
+      }
+      else if (( mySettings.BINARY_OPERATION_WRAP & WRAP_ON_EVERY_ITEM ) != 0) {
+        return myChopDownWrapMap.get(parentNode);
+      }
+      else if (mySettings.BINARY_OPERATION_WRAP == WRAP_ALWAYS) {
+        return myAlwaysWrapMap.get(parentNode);
+      }
     }
     else if (NORMAL_WRAP_ELEMENTS.contains(childNodeType)) {
       return Wrap.createWrap(WrapType.NORMAL, false);

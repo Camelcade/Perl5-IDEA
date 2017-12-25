@@ -140,7 +140,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 SPACES_WITHIN);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
-
+      consumer.showStandardOptions(
+        "BINARY_OPERATION_WRAP"
+      );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ELSE_ON_NEW_LINE",

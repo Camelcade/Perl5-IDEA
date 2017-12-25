@@ -179,6 +179,24 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_XOR_LP
   );
 
+  TokenSet BINARY_EXPRESSIONS = TokenSet.create(
+    LP_OR_XOR_EXPR,
+    LP_AND_EXPR,
+    ASSIGN_EXPR,
+    FLIPFLOP_EXPR,
+    OR_EXPR,
+    AND_EXPR,
+    BITWISE_OR_XOR_EXPR,
+    BITWISE_AND_EXPR,
+    EQUAL_EXPR,
+    COMPARE_EXPR,
+    SHIFT_EXPR,
+    ADD_EXPR,
+    MUL_EXPR,
+    REGEX_EXPR,
+    POW_EXPR
+  );
+
   TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(
     OPERATOR_ASSIGN,
     OPERATOR_POW_ASSIGN,
@@ -198,6 +216,20 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_OR_ASSIGN,
     OPERATOR_OR_DEFINED_ASSIGN
   );
+
+  TokenSet BINARY_OPERATORS = TokenSet.orSet(
+    OPERATORS_ADDITIVE,
+    OPERATORS_RELATIONAL,
+    OPERATORS_ASSIGNMENT,
+    OPERATORS_BITWISE,
+    OPERATORS_EQUALITY,
+    OPERATORS_LOGICAL,
+    OPERATORS_RANGE,
+    OPERATORS_MULTIPLICATIVE,
+    OPERATORS_STR,
+    OPERATORS_SHIFT
+  );
+
 
   TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
     RESERVED_MY,
