@@ -1,0 +1,2 @@
+$foo->bar->baz->blah->some;
+$foo->{key}->[0]->{var}->[1];

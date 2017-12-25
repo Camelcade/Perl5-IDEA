@@ -49,6 +49,7 @@
         <li><code>qw</code> contents is now wrapped on long lines string or closing quote may be moved to the next line</li>
         <li>subs, methods and funcs signatures are now wrapped if long</li>
         <li>variable declarations lists are now wrapped if long</li>
+        <li>Dereference chain is now wrapped if long, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
      </ul>
      </p>
      <p>Fixes:

@@ -27,6 +27,8 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
+  public void testWrapDereference() {doWrappingFormatTest();}
+
   public void testAlignListElementsTrue() {
     getCustomSettings().ALIGN_LIST_ELEMENTS = true;
     doTestAlignListElements();

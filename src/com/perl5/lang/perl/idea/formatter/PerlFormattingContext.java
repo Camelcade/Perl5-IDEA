@@ -81,6 +81,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   );
 
   private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, false));
+  private final Map<ASTNode, Wrap> myChopDownWrapMapWithFirst = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, true));
   private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(NORMAL, false));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
@@ -409,6 +410,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
              ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {
       return myChopDownWrapMap.get(parentNode);
+    }
+    else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
+      return myChopDownWrapMapWithFirst.get(parentNode);
     }
     else if (NORMAL_WRAP_ELEMENTS.contains(childNodeType)) {
       return Wrap.createWrap(WrapType.NORMAL, false);
