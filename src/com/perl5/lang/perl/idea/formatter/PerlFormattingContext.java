@@ -73,8 +73,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     TRENAR_EXPR
   );
 
-  private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, true));
-  private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(NORMAL, true));
+  private static final TokenSet NORMAL_WRAP_ELEMENTS = TokenSet.create(
+    SUB_SIGNATURE,
+    METHOD_SIGNATURE_CONTENT,
+    FUNC_SIGNATURE_CONTENT,
+    COMMA_SEQUENCE_EXPR
+  );
+
+  private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, false));
+  private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(NORMAL, false));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
@@ -384,7 +391,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return null;
     }
     else if (parentNodeType == TRENAR_EXPR && childNodeType != COLON && childNodeType != QUESTION) {
-      return childNode.getTreePrev() == null ? mySimpleWrapMap.get(parentNode) : myChopDownWrapMap.get(parentNode);
+      return myChopDownWrapMap.get(parentNode);
     }
     else if (parentNodeType != TRENAR_EXPR &&
              COMMA_LIKE_SEQUENCES.contains(parentNodeType) &&
@@ -393,7 +400,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       if (parentNodeType == COMMA_SEQUENCE_EXPR) {
         return mySimpleWrapMap.get(parentNode);
       }
-      return childNode.getTreePrev() == null ? mySimpleWrapMap.get(parentNode) : myChopDownWrapMap.get(parentNode);
+      return myChopDownWrapMap.get(parentNode);
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
@@ -401,9 +408,10 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
              ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {
-      return PsiUtilCore.getElementType(getPrevNonSpaceNode(childNode)) == LEFT_PAREN
-             ? mySimpleWrapMap.get(parentNode)
-             : myChopDownWrapMap.get(parentNode);
+      return myChopDownWrapMap.get(parentNode);
+    }
+    else if (NORMAL_WRAP_ELEMENTS.contains(childNodeType)) {
+      return Wrap.createWrap(WrapType.NORMAL, false);
     }
 
     return null;
