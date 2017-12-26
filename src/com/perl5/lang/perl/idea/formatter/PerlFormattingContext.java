@@ -69,8 +69,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     COMMA_SEQUENCE_EXPR,
     SUB_SIGNATURE,
     METHOD_SIGNATURE_CONTENT,
-    FUNC_SIGNATURE_CONTENT,
-    TRENAR_EXPR
+    FUNC_SIGNATURE_CONTENT
   );
 
   private static final TokenSet NORMAL_WRAP_ELEMENTS = TokenSet.create(
@@ -332,10 +331,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         perlCodeStyleSettings.ALIGN_FAT_COMMA) {
       return myOperatorsAlignmentsMap.get(parentNode);
     }
-    else if (parentNodeType == TRENAR_EXPR &&
-             (childNodeType == QUESTION || childNodeType == COLON) &&
-             perlCodeStyleSettings.ALIGN_TERNARY) {
-      return myOperatorsAlignmentsMap.get(parentNode);
+    else if (parentNodeType == TRENAR_EXPR && mySettings.ALIGN_MULTILINE_TERNARY_OPERATION) {
+      return myElementsALignmentsMap.get(parentNode);
     }
     else if (childNodeType == OPERATOR_DEREFERENCE &&
              parentNodeType == DEREF_EXPR &&
@@ -392,11 +389,17 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (childNodeType == COMMENT_LINE) {
       return mySettings.WRAP_COMMENTS ? Wrap.createWrap(WRAP_AS_NEEDED, false) : Wrap.createWrap(NONE, false);
     }
-    else if (parentNodeType == TRENAR_EXPR && childNodeType != COLON && childNodeType != QUESTION) {
-      return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
+    else if (parentNodeType == TRENAR_EXPR) {
+      if (mySettings.TERNARY_OPERATION_SIGNS_ON_NEXT_LINE) {
+        if (childNodeType == COLON || childNodeType == QUESTION) {
+          return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, true);
+        }
+      }
+      else if (childNodeType != COLON && childNodeType != QUESTION) {
+        return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, false);
+      }
     }
-    else if (parentNodeType != TRENAR_EXPR &&
-             COMMA_LIKE_SEQUENCES.contains(parentNodeType) &&
+    else if (COMMA_LIKE_SEQUENCES.contains(parentNodeType) &&
              childNodeType != COMMA &&
              childNodeType != FAT_COMMA) {
       if (parentNodeType == COMMA_SEQUENCE_EXPR) {

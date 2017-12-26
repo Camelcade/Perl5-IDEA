@@ -82,13 +82,16 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
-  public void testAlignTernaryTrue() {
-    getCustomSettings().ALIGN_TERNARY = true;
-    doFormatTest();
+  public void testTernaryTrue() {
+    doTestTernary(true);
   }
 
-  public void testAlignTernaryFalse() {
-    getCustomSettings().ALIGN_TERNARY = false;
-    doFormatTest();
+  public void testTernaryFalse() {
+    doTestTernary(false);
+  }
+
+  private void doTestTernary(boolean value) {
+    getSettings().ALIGN_MULTILINE_TERNARY_OPERATION = value;
+    doTestSingleSource("ternary");
   }
 }

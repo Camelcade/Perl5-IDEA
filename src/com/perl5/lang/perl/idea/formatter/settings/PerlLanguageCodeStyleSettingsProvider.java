@@ -143,7 +143,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showStandardOptions(
         "BINARY_OPERATION_WRAP",
         "WRAP_COMMENTS",
-        "METHOD_CALL_CHAIN_WRAP"
+        "METHOD_CALL_CHAIN_WRAP",
+        "TERNARY_OPERATION_WRAP",
+        "TERNARY_OPERATION_SIGNS_ON_NEXT_LINE",
+        "ALIGN_MULTILINE_TERNARY_OPERATION"
       );
 
       consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
@@ -194,11 +197,6 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_QW_ELEMENTS",
                                 PerlBundle.message("perl.formatting.align.qw.elements"),
-                                GROUP_ALIGNMENT);
-
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "ALIGN_TERNARY",
-                                PerlBundle.message("perl.formatting.align.ternary"),
                                 GROUP_ALIGNMENT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,

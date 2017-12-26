@@ -70,7 +70,27 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
 
   public void testSignaturesWrapping() {doWrappingFormatTest();}
 
-  public void testTernaryWrapping() {doWrappingFormatTest();}
+  public void testTernaryNone() {doTestTernary(DO_NOT_WRAP, false);}
+
+  public void testTernaryAlways() {doTestTernary(WRAP_ALWAYS, false);}
+
+  public void testTernaryLong() {doTestTernary(WRAP_AS_NEEDED, false);}
+
+  public void testTernaryChomp() {doTestTernary(WRAP_ON_EVERY_ITEM, false);}
+
+  public void testTernaryNoneSignNewLine() {doTestTernary(DO_NOT_WRAP, true);}
+
+  public void testTernaryAlwaysSignNewLine() {doTestTernary(WRAP_ALWAYS, true);}
+
+  public void testTernaryLongSignNewLine() {doTestTernary(WRAP_AS_NEEDED, true);}
+
+  public void testTernaryChompSignNewLine() {doTestTernary(WRAP_ON_EVERY_ITEM, true);}
+
+  private void doTestTernary(int wrapType, boolean signNewLine) {
+    getSettings().TERNARY_OPERATION_WRAP = wrapType;
+    getSettings().TERNARY_OPERATION_SIGNS_ON_NEXT_LINE = signNewLine;
+    doWrappingTestSingleSource("ternary");
+  }
 
   public void testQwWrapping() {doFormatTest();}
 

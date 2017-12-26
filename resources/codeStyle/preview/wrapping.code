@@ -28,8 +28,8 @@ my @list = qw/
     of   some cool strings
     /;
 
-say $a == 42 ? 'true'
-    : 'false';
+say $a == 42 ? 'long true'   : 'long expression meaning false';
+$a ? $a : $b;
 
 $someobject->somemethod()    ->othermethod()    ->andagain()->andlastone();
 }

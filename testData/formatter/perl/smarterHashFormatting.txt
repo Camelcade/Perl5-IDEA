@@ -88,6 +88,6 @@ func something(
         $c) {
 }
 
-$a         ?
+$a ?
         $a :
         $b;

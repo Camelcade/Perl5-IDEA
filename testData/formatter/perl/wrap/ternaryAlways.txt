@@ -1,0 +1,30 @@
+$var ?
+        'true' :
+        'false';
+$var ?
+        'true------' :
+        'false';
+$var ?
+        'true---------' :
+        'false';
+$varvarvarvarvarvar ?
+        'true' :
+        'false';
+$var ?
+        $a :
+        $b;
+$a = $var ?
+        'true' :
+        'false';
+$a = $var ?
+        'true------' :
+        'false';
+$a = $var ?
+        'true---------' :
+        'false';
+$a = $varvarvarvarvarvar ?
+        'true' :
+        'false';
+$a = $var ?
+        $a :
+        $b;

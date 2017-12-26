@@ -1,0 +1,19 @@
+say $a == 42 ?
+        'true' : 'false';
+
+say $a == 42
+        ? 'true' : 'false';
+
+say $a == 42
+        ? 'true'
+        : 'false';
+
+say $a == 42 ?
+        'true'
+        : 'false';
+
+say $a == 42 ?
+        'true' :
+        'false';
+
+

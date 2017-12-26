@@ -1,4 +1,0 @@
-$var ? 'true' : 'false';
-$var ? 'true------' : 'false';
-$var ? 'true---------' : 'false';
-$varvarvarvarvarvar ? 'true' : 'false';

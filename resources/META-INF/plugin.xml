@@ -42,11 +42,12 @@
      <p>Updates:
      <ul>
         <li>New formatting options available for:<ul>
-        <li>wrapping of binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
-        <li>wrapping of chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
-        <li>spacing for signatures, attributes and subs prototypes </li>
-        <li>aligning multi-line list items, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
-        <li>aligning comments inside lists, enabled by default, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
+          <li>wrapping of binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
+          <li>wrapping of chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
+          <li>spacing for signatures, attributes and subs prototypes </li>
+          <li>aligning multi-line list items, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
+          <li>aligning comments inside lists, enabled by default, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
+          <li>wrapping and alignment of ternary expression</li>
         </ul>
         <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
         <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
