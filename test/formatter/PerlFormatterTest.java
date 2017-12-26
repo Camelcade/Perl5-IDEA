@@ -16,9 +16,7 @@
 
 package formatter;
 
-import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
-import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.NEXT_LINE;
 
 /**
  * Created by hurricup on 13.03.2016.
@@ -29,75 +27,10 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl";
   }
 
-  public void testWrapBinaryExpressionsNever() {
-    doTestWrapBinaryExpressions(DO_NOT_WRAP);
-  }
-
-  public void testWrapBinaryExpressionsAlways() {
-    doTestWrapBinaryExpressions(WRAP_ALWAYS);
-  }
-
-  public void testWrapBinaryExpressionsLong() {
-    doTestWrapBinaryExpressions(WRAP_AS_NEEDED);
-  }
-
-  public void testWrapBinaryExpressionsChomp() {
-    doTestWrapBinaryExpressions(WRAP_ON_EVERY_ITEM);
-  }
-
-  private void doTestWrapBinaryExpressions(int wrapType) {
-    getSettings().BINARY_OPERATION_WRAP = wrapType;
-    doWrappingTestSingleSource("wrapBinaryExpressions");
-  }
-
-
-  public void testWrapDereference() {doWrappingFormatTest();}
-
-  public void testAlignListElementsTrue() {
-    getCustomSettings().ALIGN_LIST_ELEMENTS = true;
-    doTestAlignListElements();
-  }
-
-  public void testAlignListElementsFalse() {
-    getCustomSettings().ALIGN_LIST_ELEMENTS = false;
-    doTestAlignListElements();
-  }
-
-  private void doTestAlignListElements() {
-    doWrappingTestSingleSource("alignListElements");
-  }
-
-  public void testDeclarationsWrapping() {doWrappingFormatTest();}
-
-  public void testSignaturesWrapping() {doWrappingFormatTest();}
-
-  public void testTernaryWrapping() {doWrappingFormatTest();}
-
-  public void testQwWrapping() {doFormatTest();}
 
   public void testQwQuotesAndContent() {doFormatTest();}
 
-  public void testCommentsWrapping() {
-    doWrappingFormatTest();
-  }
-
-  public void testAlignListCommentsTrue() {
-    getCustomSettings().ALIGN_COMMENTS_IN_LIST = true;
-    doTestAlignListComments();
-  }
-
-  public void testAlignListCommentsFalse() {
-    getCustomSettings().ALIGN_COMMENTS_IN_LIST = false;
-    doTestAlignListComments();
-  }
-
-  private void doTestAlignListComments() {
-    doTestSingleSource("alignListComments");
-  }
-
   public void testSpacingAfterReference() {doFormatTest();}
-
-  public void testFatCommaWrapping() {doFormatTest();}
 
   public void testAnonArrayArgument() {doFormatTest();}
 
@@ -186,14 +119,6 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
 
   public void testIssue1607disabled() {
     getSettings().SPACE_BEFORE_IF_PARENTHESES = false;
-    doFormatTest();
-  }
-
-  public void testCommaWrapping() {
-    doFormatTest();
-  }
-
-  public void testHeredocWrapping() {
     doFormatTest();
   }
 
@@ -657,15 +582,6 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
-  public void testAlignDereferenceFalse() {
-    getCustomSettings().ALIGN_DEREFERENCE_IN_CHAIN = false;
-    doFormatTest();
-  }
-
-  public void testAlignDereferenceTrue() {
-    getCustomSettings().ALIGN_DEREFERENCE_IN_CHAIN = true;
-    doFormatTest();
-  }
 
   public void testSpacingBeforeConditionTrue() {
     getSettings().SPACE_BEFORE_IF_PARENTHESES = true;
@@ -677,35 +593,7 @@ public class PerlFormatterTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
-  public void testAlignFatCommaTrue() {
-    getCustomSettings().ALIGN_FAT_COMMA = true;
-    doFormatTest();
-  }
 
-  public void testAlignFatCommaFalse() {
-    getCustomSettings().ALIGN_FAT_COMMA = false;
-    doFormatTest();
-  }
-
-  public void testAlignQwTrue() {
-    getCustomSettings().ALIGN_QW_ELEMENTS = true;
-    doFormatTest();
-  }
-
-  public void testAlignQwFalse() {
-    getCustomSettings().ALIGN_QW_ELEMENTS = false;
-    doFormatTest();
-  }
-
-  public void testAlignTernaryTrue() {
-    getCustomSettings().ALIGN_TERNARY = true;
-    doFormatTest();
-  }
-
-  public void testAlignTernaryFalse() {
-    getCustomSettings().ALIGN_TERNARY = false;
-    doFormatTest();
-  }
 
   public void testExceptionClass() {doFormatTest();}
 
