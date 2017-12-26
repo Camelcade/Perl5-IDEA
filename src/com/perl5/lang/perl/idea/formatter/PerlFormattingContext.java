@@ -368,6 +368,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              myPerlSettings.ALIGN_LIST_ELEMENTS) {
       return myElementsALignmentsMap.get(parentNode);
     }
+    else if (BINARY_EXPRESSIONS.contains(parentNodeType) && mySettings.ALIGN_MULTILINE_BINARY_OPERATION) {
+      return myElementsALignmentsMap.get(parentNode);
+    }
     return null;
   }
 
@@ -418,12 +421,18 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
       return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, true);
     }
-    else if (BINARY_EXPRESSIONS.contains(parentNodeType) && !BINARY_OPERATORS.contains(childNodeType)) {
-      return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, false);
+    else if (BINARY_EXPRESSIONS.contains(parentNodeType)) {
+      if (mySettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && BINARY_OPERATORS.contains(childNodeType)) {
+        return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, true);
+      }
+      else if (!mySettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && !BINARY_OPERATORS.contains(childNodeType)) {
+        return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, false);
+      }
     }
     else if (NORMAL_WRAP_ELEMENTS.contains(childNodeType)) {
       return Wrap.createWrap(WrapType.NORMAL, false);
     }
+
     return null;
   }
 

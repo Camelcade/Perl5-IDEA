@@ -142,6 +142,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
       consumer.showStandardOptions(
         "BINARY_OPERATION_WRAP",
+        "BINARY_OPERATION_SIGN_ON_NEXT_LINE",
+        "ALIGN_MULTILINE_BINARY_OPERATION",
+
         "WRAP_COMMENTS",
         "METHOD_CALL_CHAIN_WRAP",
         "TERNARY_OPERATION_WRAP",

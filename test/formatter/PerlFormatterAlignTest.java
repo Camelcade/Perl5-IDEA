@@ -94,4 +94,18 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     getSettings().ALIGN_MULTILINE_TERNARY_OPERATION = value;
     doTestSingleSource("ternary");
   }
+
+  public void testBinaryTrue() {
+    doTestBinary(true);
+  }
+
+  public void testBinaryFalse() {
+    doTestBinary(false);
+  }
+
+  private void doTestBinary(boolean value) {
+    getSettings().ALIGN_MULTILINE_BINARY_OPERATION = value;
+    doTestSingleSource("binary");
+  }
+
 }

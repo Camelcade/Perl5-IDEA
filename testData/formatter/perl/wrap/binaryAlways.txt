@@ -1,0 +1,190 @@
+# logical
+$a = $a &&
+        $a &&
+        $a &&
+        $a &&
+        $a &&
+        $a &&
+        $a;
+$a = $a ||
+        $a ||
+        $a ||
+        $a ||
+        $a ||
+        $a ||
+        $a;
+$a = $a and
+        $a and
+        $a and
+        $a and
+        $a and
+        $a and
+        $a;
+$a = $a or
+        $a or
+        $a or
+        $a or
+        $a or
+        $a or
+        $a;
+$a = $a //
+        $a //
+        $a //
+        $a //
+        $a //
+        $a //
+        $a;
+
+$a = $a &&
+        $a;
+$a = $a ||
+        $a;
+$a = $a and
+        $a;
+$a = $a or
+        $a;
+$a = $a //
+        $a;
+
+# bitwise
+$a = $a &
+        $a &
+        $a &
+        $a &
+        $a &
+        $a &
+        $a;
+$a = $a |
+        $a |
+        $a |
+        $a |
+        $a |
+        $a |
+        $a;
+$a = $a ^
+        $a ^
+        $a ^
+        $a ^
+        $a ^
+        $a ^
+        $a;
+$a = $a xor
+        $a xor
+        $a xor
+        $a xor
+        $a xor
+        $a xor
+        $a;
+$a = $a &
+        $a;
+$a = $a |
+        $a;
+$a = $a ^
+        $a;
+$a = $a xor
+        $a;
+
+# additive
+$a = $a +
+        $a +
+        $a +
+        $a +
+        $a +
+        $a +
+        $a;
+$a = $a -
+        $a -
+        $a -
+        $a -
+        $a -
+        $a -
+        $a;
+$a = $a +
+        $a;
+$a = $a -
+        $a;
+
+# multiplicative
+$a = $a *
+        $a *
+        $a *
+        $a *
+        $a *
+        $a *
+        $a;
+$a = $a /
+        $a /
+        $a /
+        $a /
+        $a /
+        $a /
+        $a;
+$a = $a **
+        $a **
+        $a **
+        $a **
+        $a **
+        $a **
+        $a;
+$a = $a %
+        $a %
+        $a %
+        $a %
+        $a %
+        $a %
+        $a;
+$a = $a *
+        $a;
+$a = $a /
+        $a;
+$a = $a **
+        $a;
+$a = $a %
+        $a;
+
+# shift
+$a = $a >>
+        $a >>
+        $a >>
+        $a >>
+        $a >>
+        $a >>
+        $a;
+$a = $a <<
+        $a <<
+        $a <<
+        $a <<
+        $a <<
+        $a <<
+        $a;
+$a = $a >>
+        $a;
+$a = $a <<
+        $a;
+
+# range
+$a = $a ..
+        $a ..
+        $a ..
+        $a ..
+        $a ..
+        $a ..
+        $a;
+$a = $a ...
+        $a ...
+        $a ...
+        $a ...
+        $a ...
+        $a ...
+        $a;
+
+$a = $a ..
+        $a;
+$a = $a ...
+        $a;
+
+# complex
+$a = !$a &&
+        $b ||
+        $a &&
+                $b;

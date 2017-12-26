@@ -24,25 +24,42 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/wrap";
   }
 
-  public void testWrapBinaryExpressionsNever() {
-    doTestWrapBinaryExpressions(DO_NOT_WRAP);
+  public void testBinaryNever() {
+    doTestBinary(DO_NOT_WRAP, false);
   }
 
-  public void testWrapBinaryExpressionsAlways() {
-    doTestWrapBinaryExpressions(WRAP_ALWAYS);
+  public void testBinaryAlways() {
+    doTestBinary(WRAP_ALWAYS, false);
   }
 
-  public void testWrapBinaryExpressionsLong() {
-    doTestWrapBinaryExpressions(WRAP_AS_NEEDED);
+  public void testBinaryLong() {
+    doTestBinary(WRAP_AS_NEEDED, false);
   }
 
-  public void testWrapBinaryExpressionsChomp() {
-    doTestWrapBinaryExpressions(WRAP_ON_EVERY_ITEM);
+  public void testBinaryChomp() {
+    doTestBinary(WRAP_ON_EVERY_ITEM, false);
   }
 
-  private void doTestWrapBinaryExpressions(int wrapType) {
+  public void testBinaryNeverSignNewLine() {
+    doTestBinary(DO_NOT_WRAP, true);
+  }
+
+  public void testBinaryAlwaysSignNewLine() {
+    doTestBinary(WRAP_ALWAYS, true);
+  }
+
+  public void testBinaryLongSignNewLine() {
+    doTestBinary(WRAP_AS_NEEDED, true);
+  }
+
+  public void testBinaryChompSignNewLine() {
+    doTestBinary(WRAP_ON_EVERY_ITEM, true);
+  }
+
+  private void doTestBinary(int wrapType, boolean signNewLine) {
     getSettings().BINARY_OPERATION_WRAP = wrapType;
-    doWrappingTestSingleSource("wrapBinaryExpressions");
+    getSettings().BINARY_OPERATION_SIGN_ON_NEXT_LINE = signNewLine;
+    doWrappingTestSingleSource("binary");
   }
 
   public void testDereferenceNone() {
