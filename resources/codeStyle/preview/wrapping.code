@@ -39,5 +39,7 @@ $someobject->somemethod()    ->othermethod()    ->andagain()->andlastone();
 
 my $variable = ('this', 'is', 'list', 'of', 'strings');
 sub foo($variable1, $variable2, $variable3, $variable4){}
+method meth($var1, $var2){}
+
 foo($variable1, $variable2, $variable3, $variable4);
 my($variable1, $variable2, $variable3, $variable4);

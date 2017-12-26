@@ -146,12 +146,18 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "ALIGN_MULTILINE_BINARY_OPERATION",
 
         "WRAP_COMMENTS",
+
+        "METHOD_PARAMETERS_WRAP",
+        "ALIGN_MULTILINE_PARAMETERS",
+
         "METHOD_CALL_CHAIN_WRAP",
+
         "TERNARY_OPERATION_WRAP",
         "TERNARY_OPERATION_SIGNS_ON_NEXT_LINE",
         "ALIGN_MULTILINE_TERNARY_OPERATION"
       );
 
+      consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));
       consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,

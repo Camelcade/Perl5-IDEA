@@ -108,4 +108,20 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("binary");
   }
 
+  public void testSignaturesTrue() {
+    doTestSignatures(true);
+  }
+
+  public void testSignaturesFalse() {
+    doTestSignatures(false);
+  }
+
+  private void doTestSignatures(boolean value) {
+    getSettings().ALIGN_MULTILINE_PARAMETERS = value;
+    doTestSingleSource("signatures");
+  }
+
+
+
+
 }

@@ -60,16 +60,16 @@ $a,
         $c;
 
 sub something($a,
-        $b,
-        $c) {
+              $b,
+              $c) {
 }
 method something($a,
-        $b,
-        $c) {
+                 $b,
+                 $c) {
 }
 func something($a,
-        $b,
-        $c) {
+               $b,
+               $c) {
 }
 
 sub something(

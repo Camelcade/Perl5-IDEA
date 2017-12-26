@@ -7,3 +7,6 @@ method some ($var111, $var2, $var3) {};
 func some ($var111111, $var2, $var3) {};
 sub some ($var1111111, $var2, $var3) {};
 method some ($var1111, $var2, $var3) {};
+sub s($b,$c,$d){}
+method s($b,$c,$d){}
+func s($b,$c,$d){}

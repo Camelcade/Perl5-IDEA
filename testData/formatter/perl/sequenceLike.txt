@@ -34,8 +34,8 @@ $a
 sub subname($a, $b, $c) {}
 
 sub subname($a,
-        $b,
-        $c) {}
+            $b,
+            $c) {}
 
 sub subname(
         $a,
@@ -45,8 +45,8 @@ sub subname(
 method methodname($a, $b, $c) {}
 
 method methodname($a,
-        $b,
-        $c) {}
+                  $b,
+                  $c) {}
 
 method methodname(
         $a,
@@ -56,8 +56,8 @@ method methodname(
 func funcname($a, $b, $c) {}
 
 func funcname($a,
-        $b,
-        $c) {}
+              $b,
+              $c) {}
 
 func funcname(
         $a,

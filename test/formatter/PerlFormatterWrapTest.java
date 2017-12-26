@@ -85,7 +85,18 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
 
   public void testDeclarationsWrapping() {doWrappingFormatTest();}
 
-  public void testSignaturesWrapping() {doWrappingFormatTest();}
+  public void testSignaturesNone() {doTestSignatures(DO_NOT_WRAP);}
+
+  public void testSignaturesAlways() {doTestSignatures(WRAP_ALWAYS);}
+
+  public void testSignaturesLong() {doTestSignatures(WRAP_AS_NEEDED);}
+
+  public void testSignaturesChomp() {doTestSignatures(WRAP_ON_EVERY_ITEM);}
+
+  private void doTestSignatures(int wrapType) {
+    getSettings().METHOD_PARAMETERS_WRAP = wrapType;
+    doWrappingTestSingleSource("signatures");
+  }
 
   public void testTernaryNone() {doTestTernary(DO_NOT_WRAP, false);}
 

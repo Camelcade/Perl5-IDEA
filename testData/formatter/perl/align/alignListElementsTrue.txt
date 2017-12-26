@@ -3,10 +3,7 @@ my $var = ('this',
            'list',
            'of',
            'strings');
-sub f($variable1,
-      $variable2,
-      $variable3,
-      $variable4) {}
+sub f($variable1, $variable2, $variable3, $variable4) {}
 foo($variable1,
     $variable2,
     $variable3,

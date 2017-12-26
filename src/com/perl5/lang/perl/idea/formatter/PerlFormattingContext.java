@@ -65,18 +65,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
     SEMICOLON
   );
-  public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(
-    COMMA_SEQUENCE_EXPR,
+
+  public static final TokenSet SIGNATURES_CONTAINERS = TokenSet.create(
     SUB_SIGNATURE,
     METHOD_SIGNATURE_CONTENT,
     FUNC_SIGNATURE_CONTENT
   );
 
-  private static final TokenSet NORMAL_WRAP_ELEMENTS = TokenSet.create(
-    SUB_SIGNATURE,
-    METHOD_SIGNATURE_CONTENT,
-    FUNC_SIGNATURE_CONTENT,
-    COMMA_SEQUENCE_EXPR
+  public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.orSet(
+    SIGNATURES_CONTAINERS,
+    TokenSet.create(COMMA_SEQUENCE_EXPR)
   );
 
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
@@ -363,6 +361,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              myPerlSettings.ALIGN_LIST_ELEMENTS) {
       return myElementsALignmentsMap.get(parentNode);
     }
+    else if (SIGNATURES_CONTAINERS.contains(parentNodeType)) {
+      return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
+    }
     else if (( childNodeType == VARIABLE_DECLARATION_ELEMENT ||
                ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) ) ) &&
              myPerlSettings.ALIGN_LIST_ELEMENTS) {
@@ -402,13 +403,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, false);
       }
     }
-    else if (COMMA_LIKE_SEQUENCES.contains(parentNodeType) &&
-             childNodeType != COMMA &&
-             childNodeType != FAT_COMMA) {
-      if (parentNodeType == COMMA_SEQUENCE_EXPR) {
+    else if (SIGNATURES_CONTAINERS.contains(parentNodeType) && childNodeType != COMMA && childNodeType != FAT_COMMA) {
+      return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
+    }
+    else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
         return getWrap(parentNode, NORMAL, false);
-      }
-      return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
@@ -428,9 +427,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       else if (!mySettings.BINARY_OPERATION_SIGN_ON_NEXT_LINE && !BINARY_OPERATORS.contains(childNodeType)) {
         return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, false);
       }
-    }
-    else if (NORMAL_WRAP_ELEMENTS.contains(childNodeType)) {
-      return Wrap.createWrap(WrapType.NORMAL, false);
     }
 
     return null;
