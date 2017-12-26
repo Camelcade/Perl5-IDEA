@@ -20,6 +20,7 @@ import com.intellij.application.options.CodeStyleAbstractPanel;
 import com.intellij.application.options.IndentOptionsEditor;
 import com.intellij.application.options.SmartIndentOptionsEditor;
 import com.intellij.lang.Language;
+import com.intellij.openapi.application.ApplicationBundle;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
@@ -155,6 +156,20 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "TERNARY_OPERATION_WRAP",
         "TERNARY_OPERATION_SIGNS_ON_NEXT_LINE",
         "ALIGN_MULTILINE_TERNARY_OPERATION"
+      );
+
+      String variableDeclarationGroup = PerlBundle.message("perl.formatting.wrap.variable.declarations");
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "VARIABLE_DECLARATION_WRAP",
+                                variableDeclarationGroup,
+                                null,
+                                CodeStyleSettingsCustomizable.OptionAnchor.AFTER, "METHOD_PARAMETERS_WRAP",
+                                WRAP_OPTIONS, WRAP_VALUES);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_VARIABLE_DECLARATIONS",
+                                ApplicationBundle.message("wrapping.align.when.multiline"),
+                                variableDeclarationGroup
       );
 
       consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));

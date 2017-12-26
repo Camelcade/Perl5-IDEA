@@ -121,7 +121,17 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("signatures");
   }
 
+  public void testVariableDeclarationsTrue() {
+    doTestVariablesDeclarations(true);
+  }
 
+  public void testVariableDeclarationsFalse() {
+    doTestVariablesDeclarations(false);
+  }
 
+  private void doTestVariablesDeclarations(boolean value) {
+    getCustomSettings().ALIGN_VARIABLE_DECLARATIONS = value;
+    doTestSingleSource("variablesDeclaration");
+  }
 
 }

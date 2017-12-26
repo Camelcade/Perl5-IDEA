@@ -83,7 +83,18 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     doWrappingTestSingleSource("dereference");
   }
 
-  public void testDeclarationsWrapping() {doWrappingFormatTest();}
+  public void testVariableDeclarationsNone() {doTestVariableDeclarations(DO_NOT_WRAP);}
+
+  public void testVariableDeclarationsAlways() {doTestVariableDeclarations(WRAP_ALWAYS);}
+
+  public void testVariableDeclarationsLong() {doTestVariableDeclarations(WRAP_AS_NEEDED);}
+
+  public void testVariableDeclarationsChomp() {doTestVariableDeclarations(WRAP_ON_EVERY_ITEM);}
+
+  private void doTestVariableDeclarations(int wrapType) {
+    getCustomSettings().VARIABLE_DECLARATION_WRAP = wrapType;
+    doWrappingTestSingleSource("variableDeclarations");
+  }
 
   public void testSignaturesNone() {doTestSignatures(DO_NOT_WRAP);}
 

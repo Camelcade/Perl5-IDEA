@@ -21,6 +21,7 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
 import com.perl5.PerlBundle;
 
+import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.DO_NOT_WRAP;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.WHATEVER;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_PACKAGE_FULL;
@@ -63,6 +64,9 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public int BRACE_STYLE_COMPOUND = SAME_LINE;
 
   public boolean ELSE_ON_NEW_LINE = true;
+
+  public int VARIABLE_DECLARATION_WRAP = DO_NOT_WRAP;
+  public boolean ALIGN_VARIABLE_DECLARATIONS = false;
 
   public PerlCodeStyleSettings(CodeStyleSettings container) {
     super("Perl5CodeStyleSettings", container);

@@ -43,3 +43,4 @@ method meth($var1, $var2){}
 
 foo($variable1, $variable2, $variable3, $variable4);
 my($variable1, $variable2, $variable3, $variable4);
+our($v1,$v2,$v3);

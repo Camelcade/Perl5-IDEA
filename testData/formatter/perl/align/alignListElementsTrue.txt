@@ -8,7 +8,4 @@ foo($variable1,
     $variable2,
     $variable3,
     $variable4);
-my ($variable1,
-    $variable2,
-    $variable3,
-    $variable4);
+my ($variable1, $variable2, $variable3, $variable4);

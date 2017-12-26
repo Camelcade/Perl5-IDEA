@@ -366,7 +366,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (( childNodeType == VARIABLE_DECLARATION_ELEMENT ||
                ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) ) ) &&
-             myPerlSettings.ALIGN_LIST_ELEMENTS) {
+             myPerlSettings.ALIGN_VARIABLE_DECLARATIONS) {
       return myElementsALignmentsMap.get(parentNode);
     }
     else if (BINARY_EXPRESSIONS.contains(parentNodeType) && mySettings.ALIGN_MULTILINE_BINARY_OPERATION) {
@@ -415,7 +415,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
              ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {
-      return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
+      return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
       return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, true);
