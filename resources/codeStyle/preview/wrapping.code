@@ -31,9 +31,7 @@ my @list = qw/
 say $a == 42 ? 'true'
     : 'false';
 
-$someobject->somemethod()
-    ->othermethod()
-    ->andagain();
+$someobject->somemethod()    ->othermethod()    ->andagain()->andlastone();
 }
 
 my $variable = ('this', 'is', 'list', 'of', 'strings');

@@ -142,8 +142,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
       consumer.showStandardOptions(
         "BINARY_OPERATION_WRAP",
-        "WRAP_COMMENTS"
+        "WRAP_COMMENTS",
+        "METHOD_CALL_CHAIN_WRAP"
       );
+
+      consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ELSE_ON_NEW_LINE",

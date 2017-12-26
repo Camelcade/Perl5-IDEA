@@ -45,8 +45,26 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     doWrappingTestSingleSource("wrapBinaryExpressions");
   }
 
+  public void testDereferenceNone() {
+    doTestDereferenceWrap(DO_NOT_WRAP);
+  }
 
-  public void testWrapDereference() {doWrappingFormatTest();}
+  public void testDereferenceAlways() {
+    doTestDereferenceWrap(WRAP_ALWAYS);
+  }
+
+  public void testDereferenceLong() {
+    doTestDereferenceWrap(WRAP_AS_NEEDED);
+  }
+
+  public void testDereferenceChomp() {
+    doTestDereferenceWrap(WRAP_ON_EVERY_ITEM);
+  }
+
+  private void doTestDereferenceWrap(int wrapType) {
+    getSettings().METHOD_CALL_CHAIN_WRAP = wrapType;
+    doWrappingTestSingleSource("dereference");
+  }
 
   public void testDeclarationsWrapping() {doWrappingFormatTest();}
 

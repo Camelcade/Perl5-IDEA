@@ -413,7 +413,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
-      return getWrap(parentNode, CHOP_DOWN_IF_LONG, true);
+      return getWrapBySettings(parentNode, mySettings.METHOD_CALL_CHAIN_WRAP, true);
     }
     else if (BINARY_EXPRESSIONS.contains(parentNodeType) && !BINARY_OPERATORS.contains(childNodeType)) {
       return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, false);
