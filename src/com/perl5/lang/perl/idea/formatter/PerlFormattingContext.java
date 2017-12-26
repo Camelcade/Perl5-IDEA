@@ -80,10 +80,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     COMMA_SEQUENCE_EXPR
   );
 
-  private final Map<ASTNode, Wrap> myChopDownWrapMap = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, false));
-  private final Map<ASTNode, Wrap> myChopDownWrapMapWithFirst = FactoryMap.create(parent -> Wrap.createWrap(CHOP_DOWN_IF_LONG, true));
-  private final Map<ASTNode, Wrap> mySimpleWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(NORMAL, false));
-  private final Map<ASTNode, Wrap> myAlwaysWrapMap = FactoryMap.create(sequence -> Wrap.createWrap(ALWAYS, false));
+  private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
@@ -393,45 +390,53 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return null;
     }
     else if (parentNodeType == TRENAR_EXPR && childNodeType != COLON && childNodeType != QUESTION) {
-      return myChopDownWrapMap.get(parentNode);
+      return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
     }
     else if (parentNodeType != TRENAR_EXPR &&
              COMMA_LIKE_SEQUENCES.contains(parentNodeType) &&
              childNodeType != COMMA &&
              childNodeType != FAT_COMMA) {
       if (parentNodeType == COMMA_SEQUENCE_EXPR) {
-        return mySimpleWrapMap.get(parentNode);
+        return getWrap(parentNode, NORMAL, false);
       }
-      return myChopDownWrapMap.get(parentNode);
+      return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
-      return mySimpleWrapMap.get(parentNode);
+      return getWrap(parentNode, NORMAL, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
              ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {
-      return myChopDownWrapMap.get(parentNode);
+      return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
-      return myChopDownWrapMapWithFirst.get(parentNode);
+      return getWrap(parentNode, CHOP_DOWN_IF_LONG, true);
     }
     else if (BINARY_EXPRESSIONS.contains(parentNodeType) && !BINARY_OPERATORS.contains(childNodeType)) {
-      if (mySettings.BINARY_OPERATION_WRAP == WRAP_AS_NEEDED) {
-        return mySimpleWrapMap.get(parentNode);
-      }
-      else if (( mySettings.BINARY_OPERATION_WRAP & WRAP_ON_EVERY_ITEM ) != 0) {
-        return myChopDownWrapMap.get(parentNode);
-      }
-      else if (mySettings.BINARY_OPERATION_WRAP == WRAP_ALWAYS) {
-        return myAlwaysWrapMap.get(parentNode);
-      }
+      return getWrapBySettings(parentNode, mySettings.BINARY_OPERATION_WRAP, false);
     }
     else if (NORMAL_WRAP_ELEMENTS.contains(childNodeType)) {
       return Wrap.createWrap(WrapType.NORMAL, false);
     }
-
     return null;
   }
 
+  @NotNull
+  private Wrap getWrapBySettings(@NotNull ASTNode parentNode, int settingsOption, boolean wrapFirst) {
+    if (( settingsOption & WRAP_ON_EVERY_ITEM ) != 0) {
+      return getWrap(parentNode, CHOP_DOWN_IF_LONG, wrapFirst);
+    }
+    else if (( settingsOption & WRAP_ALWAYS ) != 0) {
+      return getWrap(parentNode, ALWAYS, wrapFirst);
+    }
+    else if (( settingsOption & WRAP_AS_NEEDED ) != 0) {
+      return getWrap(parentNode, NORMAL, wrapFirst);
+    }
+    return getWrap(parentNode, WrapType.NONE, wrapFirst);
+  }
 
+  @NotNull
+  private Wrap getWrap(@NotNull ASTNode parentNode, @NotNull WrapType type, boolean wrapFirst) {
+    return myWrapMap.computeIfAbsent(parentNode, key -> Wrap.createWrap(type, wrapFirst));
+  }
 }
