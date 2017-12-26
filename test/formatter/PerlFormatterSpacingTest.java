@@ -21,10 +21,10 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 /**
  * Created by hurricup on 13.03.2016.
  */
-public class PerlFormatterTest extends PerlFormatterTestCase {
+public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/formatter/perl";
+    return "testData/formatter/perl/spacing";
   }
 
 
