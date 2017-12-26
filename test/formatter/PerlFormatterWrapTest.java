@@ -57,9 +57,17 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
   public void testQwWrapping() {doFormatTest();}
 
 
-  public void testCommentsWrapping() {
-    doWrappingFormatTest();
+  public void testCommentsWrapTrue() {
+    getSettings().WRAP_COMMENTS = true;
+    doTestCommentsWrapping();
   }
+
+  public void testCommentsWrapFalse() {
+    getSettings().WRAP_COMMENTS = false;
+    doTestCommentsWrapping();
+  }
+
+  private void doTestCommentsWrapping() {doWrappingTestSingleSource("comments");}
 
   public void testFatCommaWrapping() {doFormatTest();}
 

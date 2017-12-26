@@ -386,8 +386,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     IElementType parentNodeType = PsiUtilCore.getElementType(parentNode);
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
 
-    if (childNodeType == COMMENT_LINE || isNewLineForbiddenAt(childNode)) {
+    if (isNewLineForbiddenAt(childNode)) {
       return null;
+    }
+    else if (childNodeType == COMMENT_LINE) {
+      return mySettings.WRAP_COMMENTS ? Wrap.createWrap(WRAP_AS_NEEDED, false) : Wrap.createWrap(NONE, false);
     }
     else if (parentNodeType == TRENAR_EXPR && childNodeType != COLON && childNodeType != QUESTION) {
       return getWrap(parentNode, CHOP_DOWN_IF_LONG, false);
@@ -423,16 +426,21 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   @NotNull
   private Wrap getWrapBySettings(@NotNull ASTNode parentNode, int settingsOption, boolean wrapFirst) {
+    return getWrap(parentNode, getWrapType(settingsOption), wrapFirst);
+  }
+
+  @NotNull
+  private WrapType getWrapType(int settingsOption) {
     if (( settingsOption & WRAP_ON_EVERY_ITEM ) != 0) {
-      return getWrap(parentNode, CHOP_DOWN_IF_LONG, wrapFirst);
+      return CHOP_DOWN_IF_LONG;
     }
     else if (( settingsOption & WRAP_ALWAYS ) != 0) {
-      return getWrap(parentNode, ALWAYS, wrapFirst);
+      return ALWAYS;
     }
     else if (( settingsOption & WRAP_AS_NEEDED ) != 0) {
-      return getWrap(parentNode, NORMAL, wrapFirst);
+      return NORMAL;
     }
-    return getWrap(parentNode, WrapType.NONE, wrapFirst);
+    return NONE;
   }
 
   @NotNull

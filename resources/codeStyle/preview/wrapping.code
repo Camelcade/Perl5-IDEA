@@ -16,7 +16,7 @@ sub{say 'hi'};
 map {defined} @INC;
 
 if($a){
-  say 'yes';
+  say 'yes'; # this is a very long comment line
 }elsif($b){
   say 'no';
 }else{
