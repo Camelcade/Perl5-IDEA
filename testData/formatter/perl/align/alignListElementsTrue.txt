@@ -3,9 +3,152 @@ my $var = ('this',
            'list',
            'of',
            'strings');
-sub f($variable1, $variable2, $variable3, $variable4) {}
+sub f($variable1,
+      $variable2,
+      $variable3,
+      $variable4) {}
 foo($variable1,
     $variable2,
     $variable3,
     $variable4);
-my ($variable1, $variable2, $variable3, $variable4);
+my ($variable1,
+        $variable2,
+        $variable3,
+        $variable4);
+
+foo('This', 'is',
+    'a',
+    'large',
+    'list');
+'This', 'is', 'a',
+'large',
+'list';
+$a = 'This', 'is',
+'a',
+'large',
+'list';
+'a', 'b', 'c';
+$a = 'a', 'b', 'c';
+key      =>
+42, blah =>
+42,
+'long'   =>
+45;
+$a = key =>
+42, blah =>
+42,
+'long'   =>
+45;
+bla =>
+bla =>
+bla =>
+bla =>
+bla =>
+bla => 1;
+$a = bla =>
+bla      =>
+bla      =>
+bla      =>
+bla      =>
+bla      => 1;
+y => 1, h => 2;
+$a = y => 1, h => 2;
+
+$a = ('This', 'is',
+      'a',
+      'large',
+      'list');
+('a', 'b', 'c');
+$a = ('a', 'b',
+      'c');
+(key      =>
+ 42, blah =>
+ 42,
+ 'long'   =>
+ 45);
+$a = (key      =>
+      42, blah =>
+      42,
+      'long'   =>
+      45);
+(bla =>
+ bla =>
+ bla =>
+ bla =>
+ bla =>
+ bla => 1);
+$a = (bla =>
+      bla =>
+      bla =>
+      bla =>
+      bla =>
+      bla => 1);
+(y => 1, h => 2);
+$a = (y => 1, h =>
+      2);
+
+$a = [ 'This', 'is',
+       'a',
+       'large',
+       'list' ];
+[ 'a', 'b', 'c' ];
+$a = [ 'a', 'b',
+       'c' ];
+[ key      =>
+  42, blah =>
+  42,
+  'long'   =>
+  45 ];
+$a = [ key      =>
+       42, blah =>
+       42,
+       'long'   =>
+       45 ];
+[ bla =>
+  bla =>
+  bla =>
+  bla =>
+  bla =>
+  bla => 1 ];
+$a = [ bla =>
+       bla =>
+       bla =>
+       bla =>
+       bla =>
+       bla => 1 ];
+[ y => 1, h => 2 ];
+$a = [ y => 1, h =>
+       2 ];
+
+$a = { 'This', 'is',
+       'a',
+       'large',
+       'list' };
+{ 'a', 'b', 'c' };
+$a = { 'a', 'b',
+       'c' };
+{ key      =>
+  42, blah =>
+  42,
+  'long'   =>
+  45 };
+$a = { key      =>
+       42, blah =>
+       42,
+       'long'   =>
+       45 };
+{ bla =>
+  bla =>
+  bla =>
+  bla =>
+  bla =>
+  bla => 1 };
+$a = { bla =>
+       bla =>
+       bla =>
+       bla =>
+       bla =>
+       bla => 1 };
+{ y => 1, h => 2 };
+$a = { y => 1, h =>
+       2 };

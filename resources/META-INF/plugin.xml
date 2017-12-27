@@ -44,6 +44,7 @@
         <li>New formatting options available for:<ul>
           <li>wrapping and alignment of binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
           <li>wrapping of chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
+          <li>wrapping and alignment of comma-separated sequences</li>
           <li>spacing for signatures, attributes and subs prototypes</li>
           <li>wrapping and alignment for signatures</li>
           <li>aligning multi-line list items, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>

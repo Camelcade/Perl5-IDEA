@@ -24,6 +24,27 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/wrap";
   }
 
+  public void testCommaSequenceNever() {
+    doTestCommaSequence(DO_NOT_WRAP);
+  }
+
+  public void testCommaSequenceAlways() {
+    doTestCommaSequence(WRAP_ALWAYS);
+  }
+
+  public void testCommaSequenceLong() {
+    doTestCommaSequence(WRAP_AS_NEEDED);
+  }
+
+  public void testCommaSequenceChomp() {
+    doTestCommaSequence(WRAP_ON_EVERY_ITEM);
+  }
+
+  private void doTestCommaSequence(int wrapType) {
+    getSettings().ARRAY_INITIALIZER_WRAP = wrapType;
+    doWrappingTestSingleSource("commaSequence");
+  }
+
   public void testBinaryNever() {
     doTestBinary(DO_NOT_WRAP, false);
   }
@@ -146,13 +167,13 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
 
   private void doTestCommentsWrapping() {doWrappingTestSingleSource("comments");}
 
-  public void testFatCommaWrapping() {doFormatTest();}
-
-  public void testCommaWrapping() {
+  public void testFatCommaWrapping() {
+    getSettings().ARRAY_INITIALIZER_WRAP = WRAP_AS_NEEDED;
     doFormatTest();
   }
 
   public void testHeredocWrapping() {
+    getSettings().ARRAY_INITIALIZER_WRAP = WRAP_AS_NEEDED;
     doFormatTest();
   }
 }

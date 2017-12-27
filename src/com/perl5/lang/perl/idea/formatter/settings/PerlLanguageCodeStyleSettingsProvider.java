@@ -48,6 +48,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_SUB = PerlBundle.message("perl.formatting.brace.style.sub");
   private static final String GROUP_VARIABLE_DECLARATION = PerlBundle.message("perl.formatting.wrap.variable.declarations");
   private static final String GROUP_COMMENT = WRAPPING_COMMENTS;
+  private static final String GROUP_LIST = WRAPPING_ARRAY_INITIALIZER;
 
   private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
@@ -153,6 +154,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "WRAP_COMMENTS",
 
+        "ARRAY_INITIALIZER_WRAP",
+        "ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION",
+
         "METHOD_PARAMETERS_WRAP",
         "ALIGN_MULTILINE_PARAMETERS",
 
@@ -163,6 +167,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "TERNARY_OPERATION_SIGNS_ON_NEXT_LINE",
         "ALIGN_MULTILINE_TERNARY_OPERATION"
       );
+
+      consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));
+      consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_COMMENTS_IN_LIST",
@@ -181,9 +188,6 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 ApplicationBundle.message("wrapping.align.when.multiline"),
                                 GROUP_VARIABLE_DECLARATION
       );
-
-      consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));
-      consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "BRACE_STYLE_NAMESPACE",
@@ -212,16 +216,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 BRACE_PLACEMENT_OPTIONS
       );
 
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "ALIGN_LIST_ELEMENTS",
-                                PerlBundle.message("perl.formatting.align.list.elements"),
-                                GROUP_ALIGNMENT
-      );
 
+      consumer.renameStandardOption("ARRAY_INITIALIZER_WRAP", PerlBundle.message("perl.formatting.align.list.elements"));
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_FAT_COMMA",
                                 PerlBundle.message("perl.formatting.align.fat.comma"),
-                                GROUP_ALIGNMENT);
+                                GROUP_LIST);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_QW_ELEMENTS",

@@ -16,6 +16,8 @@
 
 package formatter;
 
+import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
+
 public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   @Override
   protected String getTestDataPath() {
@@ -24,12 +26,14 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
 
 
   public void testAlignListElementsTrue() {
-    getCustomSettings().ALIGN_LIST_ELEMENTS = true;
+    getSettings().ARRAY_INITIALIZER_WRAP = WRAP_AS_NEEDED;
+    getSettings().ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION = true;
     doTestAlignListElements();
   }
 
   public void testAlignListElementsFalse() {
-    getCustomSettings().ALIGN_LIST_ELEMENTS = false;
+    getSettings().ARRAY_INITIALIZER_WRAP = WRAP_AS_NEEDED;
+    getSettings().ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION = false;
     doTestAlignListElements();
   }
 

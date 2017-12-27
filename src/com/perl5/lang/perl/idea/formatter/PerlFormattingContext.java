@@ -358,7 +358,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
              childNodeType != COMMA &&
              childNodeType != FAT_COMMA &&
-             myPerlSettings.ALIGN_LIST_ELEMENTS) {
+             mySettings.ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION) {
       return myElementsALignmentsMap.get(parentNode);
     }
     else if (SIGNATURES_CONTAINERS.contains(parentNodeType)) {
@@ -407,7 +407,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
-        return getWrap(parentNode, NORMAL, false);
+      return getWrapBySettings(parentNode, mySettings.ARRAY_INITIALIZER_WRAP, false);
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {

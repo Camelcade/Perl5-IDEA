@@ -1,0 +1,42 @@
+foo('This', 'is', 'a', 'large', 'list');
+'This', 'is', 'a', 'large', 'list';
+$a = 'This', 'is', 'a', 'large', 'list';
+'a', 'b', 'c';
+$a = 'a', 'b', 'c';
+key => 42, blah => 42, 'long' => 45;
+$a = key => 42, blah => 42, 'long' => 45;
+bla => bla => bla => bla => bla => bla => 1;
+$a = bla => bla => bla => bla => bla => bla => 1;
+y => 1, h => 2;
+$a = y => 1, h => 2;
+
+$a = ('This', 'is', 'a', 'large', 'list');
+('a', 'b', 'c');
+$a = ('a', 'b', 'c');
+(key => 42, blah => 42, 'long' => 45);
+$a = (key => 42, blah => 42, 'long' => 45);
+(bla => bla => bla => bla => bla => bla => 1);
+$a = (bla => bla => bla => bla => bla => bla => 1);
+(y => 1, h => 2);
+$a = (y => 1, h => 2);
+
+$a = [ 'This', 'is', 'a', 'large', 'list' ];
+[ 'a', 'b', 'c' ];
+$a = [ 'a', 'b', 'c' ];
+[ key => 42, blah => 42, 'long' => 45 ];
+$a = [ key => 42, blah => 42, 'long' => 45 ];
+[ bla => bla => bla => bla => bla => bla => 1 ];
+$a = [ bla => bla => bla => bla => bla => bla => 1 ];
+[ y => 1, h => 2 ];
+$a = [ y => 1, h => 2 ];
+
+$a = { 'This', 'is', 'a', 'large', 'list' };
+{ 'a', 'b', 'c' };
+$a = { 'a', 'b', 'c' };
+{ key => 42, blah => 42, 'long' => 45 };
+$a = { key => 42, blah => 42, 'long' => 45 };
+{ bla => bla => bla => bla => bla => bla => 1 };
+$a = { bla => bla => bla => bla => bla => bla => 1 };
+{ y => 1, h => 2 };
+$a = { y => 1, h => 2 };
+
