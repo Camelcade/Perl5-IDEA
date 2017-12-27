@@ -42,7 +42,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");
   private static final String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
   private static final String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
-  private static final String GROUP_NEW_LINE_BEFORE = PerlBundle.message("perl.formatting.group.new.line.before");
+  private static final String GROUP_COMPOUND = PerlBundle.message("perl.formatting.group.compound");
 
   private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
@@ -179,7 +179,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ELSE_ON_NEW_LINE",
                                 PerlBundle.message("perl.formatting.compound.secondary"),
-                                GROUP_NEW_LINE_BEFORE
+                                GROUP_COMPOUND
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
