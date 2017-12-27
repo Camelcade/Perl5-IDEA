@@ -152,6 +152,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "ALIGN_MULTILINE_PARAMETERS",
 
         "METHOD_CALL_CHAIN_WRAP",
+        "ALIGN_MULTILINE_CHAINED_METHODS",
 
         "TERNARY_OPERATION_WRAP",
         "TERNARY_OPERATION_SIGNS_ON_NEXT_LINE",
@@ -221,11 +222,6 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_QW_ELEMENTS",
                                 PerlBundle.message("perl.formatting.align.qw.elements"),
-                                GROUP_ALIGNMENT);
-
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "ALIGN_DEREFERENCE_IN_CHAIN",
-                                PerlBundle.message("perl.formatting.align.dereference"),
                                 GROUP_ALIGNMENT);
     }
     else if (settingsType == LANGUAGE_SPECIFIC) {

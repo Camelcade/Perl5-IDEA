@@ -53,12 +53,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
   public void testAlignDereferenceFalse() {
-    getCustomSettings().ALIGN_DEREFERENCE_IN_CHAIN = false;
+    getSettings().ALIGN_MULTILINE_CHAINED_METHODS = false;
     doFormatTest();
   }
 
   public void testAlignDereferenceTrue() {
-    getCustomSettings().ALIGN_DEREFERENCE_IN_CHAIN = true;
+    getSettings().ALIGN_MULTILINE_CHAINED_METHODS = true;
     doFormatTest();
   }
 

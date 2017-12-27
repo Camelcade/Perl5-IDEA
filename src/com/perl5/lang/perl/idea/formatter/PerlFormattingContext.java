@@ -334,7 +334,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (childNodeType == OPERATOR_DEREFERENCE &&
              parentNodeType == DEREF_EXPR &&
-             perlCodeStyleSettings.ALIGN_DEREFERENCE_IN_CHAIN) {
+             mySettings.ALIGN_MULTILINE_CHAINED_METHODS) {
       return myOperatorsAlignmentsMap.get(parentNode);
     }
     else if (childNodeType == STRING_CONTENT &&
