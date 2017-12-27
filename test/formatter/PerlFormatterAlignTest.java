@@ -138,4 +138,17 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("variablesDeclaration");
   }
 
+  public void testCallArgumentsTrue() {
+    doTestCallArguments(true);
+  }
+
+  public void testCallArgumentsFalse() {
+    doTestCallArguments(false);
+  }
+
+  private void doTestCallArguments(boolean value) {
+    getSettings().ALIGN_MULTILINE_PARAMETERS_IN_CALLS = value;
+    doTestSingleSource("callArguments");
+  }
+
 }

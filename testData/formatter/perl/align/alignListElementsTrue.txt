@@ -8,18 +8,18 @@ sub f($variable1,
       $variable3,
       $variable4) {}
 foo($variable1,
-    $variable2,
-    $variable3,
-    $variable4);
+        $variable2,
+        $variable3,
+        $variable4);
 my ($variable1,
         $variable2,
         $variable3,
         $variable4);
 
 foo('This', 'is',
-    'a',
-    'large',
-    'list');
+        'a',
+        'large',
+        'list');
 'This', 'is', 'a',
 'large',
 'list';

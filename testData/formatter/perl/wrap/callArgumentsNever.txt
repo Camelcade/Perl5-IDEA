@@ -1,0 +1,8 @@
+foo(1, 2, 3, 4, 'long string');
+foo 1, 2, 3, 4, 'long string';
+Foo::->foo(1, 2, 3, 4, 'long string');
+Foo::foo(1, 2, 3, 4, 'long string');
+foo(1, 2, 3, 4);
+foo 1, 2, 3, 4;
+Foo::->foo(1, 2);
+Foo::foo(1, 2);

@@ -1,7 +1,4 @@
-foo('This', 'is',
-        'a',
-        'large',
-        'list');
+foo('This', 'is', 'a', 'large', 'list');
 'This', 'is', 'a',
         'large',
         'list';
@@ -134,4 +131,3 @@ $a = { bla  =>
 { y => 1, h => 2 };
 $a = { y => 1, h =>
         2 };
-

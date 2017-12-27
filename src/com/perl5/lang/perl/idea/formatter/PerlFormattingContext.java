@@ -357,9 +357,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
              childNodeType != COMMA &&
-             childNodeType != FAT_COMMA &&
-             mySettings.ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION) {
-      return myElementsALignmentsMap.get(parentNode);
+             childNodeType != FAT_COMMA) {
+      IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());
+      if (grandParentNodeType == CALL_ARGUMENTS || grandParentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
+        if (mySettings.ALIGN_MULTILINE_PARAMETERS_IN_CALLS) {
+          return myElementsALignmentsMap.get(parentNode);
+        }
+      }
+      else if (mySettings.ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION) {
+        return myElementsALignmentsMap.get(parentNode);
+      }
     }
     else if (SIGNATURES_CONTAINERS.contains(parentNodeType)) {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
@@ -407,7 +414,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return getWrapBySettings(parentNode, mySettings.METHOD_PARAMETERS_WRAP, false);
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
-      return getWrapBySettings(parentNode, mySettings.ARRAY_INITIALIZER_WRAP, false);
+      IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());
+      if (grandParentNodeType == CALL_ARGUMENTS || grandParentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
+        return getWrapBySettings(parentNode, mySettings.CALL_PARAMETERS_WRAP, false);
+      }
+      else {
+        return getWrapBySettings(parentNode, mySettings.ARRAY_INITIALIZER_WRAP, false);
+      }
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {

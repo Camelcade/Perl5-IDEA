@@ -157,6 +157,9 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "ARRAY_INITIALIZER_WRAP",
         "ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION",
 
+        "CALL_PARAMETERS_WRAP",
+        "ALIGN_MULTILINE_PARAMETERS_IN_CALLS",
+
         "METHOD_PARAMETERS_WRAP",
         "ALIGN_MULTILINE_PARAMETERS",
 
