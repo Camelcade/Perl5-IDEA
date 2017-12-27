@@ -1,3 +1,2 @@
 qw/ some string here /;
-qw/ some string here some string here some string here some string here some string here some string here some string
-        here /;
+qw/ some string here some string here some string here some string here some string here some string here some string here /;

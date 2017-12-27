@@ -411,7 +411,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
-      return getWrap(parentNode, NORMAL, false);
+      return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
              ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {

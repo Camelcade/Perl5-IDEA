@@ -39,7 +39,7 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
  * Created by hurricup on 03.09.2015.
  */
 public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
-  private static final String GROUP_ALIGNMENT = PerlBundle.message("perl.formatting.group.alignment");
+  private static final String GROUP_QW = PerlBundle.message("perl.qw.list");
   private static final String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");
   private static final String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
   private static final String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
@@ -143,7 +143,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_WITHIN_QW_QUOTES",
-                                PerlBundle.message("perl.formatting.space.inside.qw"),
+                                PerlBundle.message("perl.qw.list"),
                                 SPACES_WITHIN);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
@@ -224,9 +224,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 GROUP_LIST);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "QW_LIST_WRAP",
+                                GROUP_QW,
+                                null,
+                                AFTER, "ARRAY_INITIALIZER_WRAP",
+                                WRAP_OPTIONS, WRAP_VALUES
+      );
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_QW_ELEMENTS",
                                 PerlBundle.message("perl.formatting.align.qw.elements"),
-                                GROUP_ALIGNMENT);
+                                GROUP_QW);
+
     }
     else if (settingsType == LANGUAGE_SPECIFIC) {
 

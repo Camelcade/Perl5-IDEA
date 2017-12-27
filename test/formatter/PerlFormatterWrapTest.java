@@ -152,7 +152,26 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     doWrappingTestSingleSource("ternary");
   }
 
-  public void testQwWrapping() {doFormatTest();}
+  public void testQwListNever() {
+    doTestQwList(DO_NOT_WRAP);
+  }
+
+  public void testQwListAlways() {
+    doTestQwList(WRAP_ALWAYS);
+  }
+
+  public void testQwListLong() {
+    doTestQwList(WRAP_AS_NEEDED);
+  }
+
+  public void testQwListChomp() {
+    doTestQwList(WRAP_ON_EVERY_ITEM);
+  }
+
+  private void doTestQwList(int wrapType) {
+    getCustomSettings().QW_LIST_WRAP = wrapType;
+    doWrappingTestSingleSource("qwList");
+  }
 
 
   public void testCommentsWrapTrue() {
