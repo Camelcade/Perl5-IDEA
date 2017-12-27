@@ -29,6 +29,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.OptionAnchor.AFTER;
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.BRACE_PLACEMENT_OPTIONS;
@@ -43,6 +44,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
   private static final String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
   private static final String GROUP_COMPOUND = PerlBundle.message("perl.formatting.group.compound");
+  private static final String GROUP_NAMESPACE = PerlBundle.message("perl.formatting.brace.style.namespace");
+  private static final String GROUP_SUB = PerlBundle.message("perl.formatting.brace.style.sub");
+  private static final String GROUP_VARIABLE_DECLARATION = PerlBundle.message("perl.formatting.wrap.variable.declarations");
+  private static final String GROUP_COMMENT = WRAPPING_COMMENTS;
 
   private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
@@ -159,22 +164,40 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "ALIGN_MULTILINE_TERNARY_OPERATION"
       );
 
-      String variableDeclarationGroup = PerlBundle.message("perl.formatting.wrap.variable.declarations");
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_COMMENTS_IN_LIST",
+                                PerlBundle.message("perl.formatting.align.comments.in.list"),
+                                GROUP_COMMENT);
+
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "VARIABLE_DECLARATION_WRAP",
-                                variableDeclarationGroup,
+                                GROUP_VARIABLE_DECLARATION,
                                 null,
-                                CodeStyleSettingsCustomizable.OptionAnchor.AFTER, "METHOD_PARAMETERS_WRAP",
+                                AFTER, "METHOD_PARAMETERS_WRAP",
                                 WRAP_OPTIONS, WRAP_VALUES);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_VARIABLE_DECLARATIONS",
                                 ApplicationBundle.message("wrapping.align.when.multiline"),
-                                variableDeclarationGroup
+                                GROUP_VARIABLE_DECLARATION
       );
 
       consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));
       consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "BRACE_STYLE_NAMESPACE",
+                                WRAPPING_BRACES,
+                                GROUP_NAMESPACE,
+                                BRACE_PLACEMENT_OPTIONS
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "BRACE_STYLE_SUB",
+                                WRAPPING_BRACES,
+                                GROUP_SUB,
+                                BRACE_PLACEMENT_OPTIONS
+      );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ELSE_ON_NEW_LINE",
@@ -183,36 +206,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "BRACE_STYLE_COMPOUND",
+                                WRAPPING_BRACES,
+                                GROUP_COMPOUND,
+                                BRACE_PLACEMENT_OPTIONS
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_LIST_ELEMENTS",
                                 PerlBundle.message("perl.formatting.align.list.elements"),
                                 GROUP_ALIGNMENT
       );
-
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "BRACE_STYLE_NAMESPACE",
-                                PerlBundle.message("perl.formatting.brace.style.namespace"),
-                                WRAPPING_BRACES,
-                                BRACE_PLACEMENT_OPTIONS
-      );
-
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "BRACE_STYLE_SUB",
-                                PerlBundle.message("perl.formatting.brace.style.sub"),
-                                WRAPPING_BRACES,
-                                BRACE_PLACEMENT_OPTIONS
-      );
-
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "BRACE_STYLE_COMPOUND",
-                                PerlBundle.message("perl.formatting.brace.style.compound"),
-                                WRAPPING_BRACES,
-                                BRACE_PLACEMENT_OPTIONS
-      );
-
-      consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "ALIGN_COMMENTS_IN_LIST",
-                                PerlBundle.message("perl.formatting.align.comments.in.list"),
-                                GROUP_ALIGNMENT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_FAT_COMMA",
