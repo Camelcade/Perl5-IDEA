@@ -50,7 +50,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
   TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(
     METHOD_DEFINITION,
     FUNC_DEFINITION,
-
+    SUB_EXPR,
     SUB_DEFINITION,
     SUB_DECLARATION
   );
