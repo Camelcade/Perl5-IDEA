@@ -1,0 +1,45 @@
+    my (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+    our (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+    local (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+    state (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+
+      my
+      (
+        $rOpts ,         $logger_object ,  $config_file ,
+          $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+    our
+      (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+    local
+      (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+
+    state
+      (
+          $rOpts ,         $logger_object ,  $config_file ,
+        $rraw_options ,  $Windows_type ,   $readable_options
+    ) = @_;
+

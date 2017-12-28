@@ -32,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLOSERS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VARIABLE_DECLARATIONS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 /**
@@ -149,6 +150,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     if (isFirst && BLOCK_OPENERS.contains(nodeType)
         || isLast && BLOCK_CLOSERS.contains(nodeType)
       ) {
+      return Indent.getNoneIndent();
+    }
+
+    if (VARIABLE_DECLARATIONS.contains(parentNodeType) && ( nodeType == LEFT_PAREN || nodeType == RIGHT_PAREN )) {
       return Indent.getNoneIndent();
     }
 
