@@ -130,8 +130,8 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     ASTNode parent = node.getTreeParent();
     ASTNode grandParent = parent != null ? parent.getTreeParent() : null;
 
-    IElementType parentType = parent != null ? parent.getElementType() : null;
-    IElementType grandParentType = grandParent != null ? grandParent.getElementType() : null;
+    IElementType parentNodeType = parent != null ? parent.getElementType() : null;
+    IElementType grandParentNodeType = grandParent != null ? grandParent.getElementType() : null;
 
     ASTNode prevSibling = FormatterUtil.getPreviousNonWhitespaceSibling(node);
     IElementType prevSiblingElementType = prevSibling != null ? prevSibling.getElementType() : null;
@@ -142,7 +142,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     boolean isFirst = prevSibling == null;
     boolean isLast = nextSibling == null;
 
-    if (parentType == ATTRIBUTES) {
+    if (parentNodeType == ATTRIBUTES) {
       return Indent.getContinuationIndent();
     }
 
@@ -166,7 +166,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getAbsoluteNoneIndent();
     }
 
-    if (nodeType == BLOCK && MULTI_PARAM_BLOCK_CONTAINERS.contains(parentType)) {
+    if (nodeType == BLOCK && MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
       return Indent.getNoneIndent();
     }
 
@@ -179,18 +179,18 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNoneIndent();
     }
 
-    if (parentType == STRING_LIST && (nodeType == QUOTE_SINGLE_OPEN || nodeType == QUOTE_SINGLE_CLOSE)) {
+    if (parentNodeType == STRING_LIST && ( nodeType == QUOTE_SINGLE_OPEN || nodeType == QUOTE_SINGLE_CLOSE )) {
       return Indent.getNoneIndent();
     }
 
-    if (nodeType == STRING_CONTENT && (parentType == STRING_LIST || parentType == LP_STRING_QW)) {
+    if (nodeType == STRING_CONTENT && ( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW )) {
       return Indent.getContinuationIndent();
     }
 
     // defined by parent
-    if (getUnindentableContainers().contains(parentType)) {
+    if (getUnindentableContainers().contains(parentNodeType)) {
       // a little magic for sub attributes
-      if (parentType == SUB_DEFINITION) {
+      if (parentNodeType == SUB_DEFINITION) {
         if (nodeType == COLON && nextSiblingElementType == ATTRIBUTE ||
             nodeType == ATTRIBUTE && prevSiblingElementType != COLON
           ) {
@@ -201,15 +201,15 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNoneIndent();
     }
 
-    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(parentType)) {
-      return grandParentType == STATEMENT ? Indent.getContinuationWithoutFirstIndent() : Indent.getContinuationIndent();
+    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(parentNodeType)) {
+      return grandParentNodeType == STATEMENT ? Indent.getContinuationWithoutFirstIndent() : Indent.getContinuationIndent();
     }
 
-    if (parentType == CALL_ARGUMENTS) {
+    if (parentNodeType == CALL_ARGUMENTS) {
       return Indent.getContinuationIndent();
     }
 
-    if (getBlockLikeContainers().contains(parentType)) {
+    if (getBlockLikeContainers().contains(parentNodeType)) {
       return Indent.getNormalIndent();
     }
 
