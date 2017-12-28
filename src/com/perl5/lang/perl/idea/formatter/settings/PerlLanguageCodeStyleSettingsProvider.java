@@ -49,6 +49,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_VARIABLE_DECLARATION = PerlBundle.message("perl.formatting.wrap.variable.declarations");
   private static final String GROUP_COMMENT = WRAPPING_COMMENTS;
   private static final String GROUP_LIST = WRAPPING_ARRAY_INITIALIZER;
+  private static final String GROUP_ATTRIBUTES_WRAP = PerlBundle.message("perl.formatting.wrap.attributes");
 
   private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
   private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
@@ -224,6 +225,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 BRACE_PLACEMENT_OPTIONS
       );
 
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ATTRIBUTES_WRAP",
+                                GROUP_ATTRIBUTES_WRAP,
+                                null,
+                                WRAP_OPTIONS, WRAP_VALUES);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_ATTRIBUTES",
+                                ApplicationBundle.message("wrapping.align.when.multiline"),
+                                GROUP_ATTRIBUTES_WRAP
+      );
 
       consumer.renameStandardOption("ARRAY_INITIALIZER_WRAP", PerlBundle.message("perl.formatting.align.list.elements"));
       consumer.showCustomOption(PerlCodeStyleSettings.class,

@@ -142,6 +142,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     boolean isFirst = prevSibling == null;
     boolean isLast = nextSibling == null;
 
+    if (parentType == ATTRIBUTES) {
+      return Indent.getContinuationIndent();
+    }
+
     if (isFirst && BLOCK_OPENERS.contains(nodeType)
         || isLast && BLOCK_CLOSERS.contains(nodeType)
       ) {

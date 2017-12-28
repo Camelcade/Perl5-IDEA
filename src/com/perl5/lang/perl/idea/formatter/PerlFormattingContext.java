@@ -383,6 +383,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (parentNodeType == ASSIGN_EXPR && mySettings.ALIGN_MULTILINE_ASSIGNMENT) {
       return myElementsALignmentsMap.get(parentNode);
     }
+    else if (parentNodeType == ATTRIBUTES && childNodeType == COLON && myPerlSettings.ALIGN_ATTRIBUTES) {
+      return myElementsALignmentsMap.get(parentNode);
+    }
     return null;
   }
 
@@ -448,6 +451,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (parentNodeType == ASSIGN_EXPR &&
              OPERATORS_ASSIGNMENT.contains(childNodeType) == mySettings.PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE) {
       return getWrapBySettings(parentNode, mySettings.ASSIGNMENT_WRAP, OPERATORS_ASSIGNMENT.contains(childNodeType));
+    }
+    else if (parentNodeType == ATTRIBUTES && childNodeType == COLON) {
+      return getWrapBySettings(parentNode, myPerlSettings.ATTRIBUTES_WRAP, false);
     }
     return null;
   }

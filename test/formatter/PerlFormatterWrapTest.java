@@ -83,6 +83,27 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     doWrappingTestSingleSource("commaSequence");
   }
 
+  public void testAttributesNever() {
+    doTestAttributes(DO_NOT_WRAP);
+  }
+
+  public void testAttributesAlways() {
+    doTestAttributes(WRAP_ALWAYS);
+  }
+
+  public void testAttributesLong() {
+    doTestAttributes(WRAP_AS_NEEDED);
+  }
+
+  public void testAttributesChomp() {
+    doTestAttributes(WRAP_ON_EVERY_ITEM);
+  }
+
+  private void doTestAttributes(int wrapType) {
+    getCustomSettings().ATTRIBUTES_WRAP = wrapType;
+    doWrappingTestSingleSource("attributes");
+  }
+
   public void testCallArgumentsNever() {
     doTestCallArguments(DO_NOT_WRAP);
   }

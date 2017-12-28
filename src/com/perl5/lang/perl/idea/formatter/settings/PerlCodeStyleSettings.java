@@ -53,6 +53,8 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean SPACE_WITHIN_QW_QUOTES = false;
 
   public boolean SPACE_BEFORE_ATTRIBUTE = true;
+  public int ATTRIBUTES_WRAP = DO_NOT_WRAP;
+  public boolean ALIGN_ATTRIBUTES = false;
 
   public boolean ALIGN_FAT_COMMA = true;
 

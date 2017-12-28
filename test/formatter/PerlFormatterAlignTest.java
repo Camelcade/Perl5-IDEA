@@ -164,4 +164,18 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("assignments");
   }
 
+
+  public void testAttributesTrue() {
+    doTestAttributes(true);
+  }
+
+  public void testAttributesFalse() {
+    doTestAttributes(false);
+  }
+
+  private void doTestAttributes(boolean value) {
+    getCustomSettings().ALIGN_ATTRIBUTES = value;
+    doTestSingleSource("attributes");
+  }
+  
 }

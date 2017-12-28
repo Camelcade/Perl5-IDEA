@@ -45,6 +45,7 @@
             <li>Wrapping and Alignment<ul>
               <li>subs and methods signatures</li>
               <li>variable declarations lists</li>
+              <li>subs and variables attributes, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1684">#1684</a></li>
               <li>ternary expression</li>
               <li><code>qw</code> lists</li>
               <li>call arguments</li>
