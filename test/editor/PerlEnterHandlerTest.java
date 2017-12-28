@@ -24,8 +24,6 @@ public class PerlEnterHandlerTest extends PerlLightTestCase {
     return "testData/enterHandler/perl";
   }
 
-  public void testEnterAfterComma() {doTest();}
-
   public void testCommentMiddle() {
     doTest();
   }
@@ -65,7 +63,7 @@ public class PerlEnterHandlerTest extends PerlLightTestCase {
   public void testIndentedHeredocCloseWithNormalAhead() { doTest(); }
 
   public void testIndentedHeredocCloseXQ() { doTest(); }
-  
+
 
   private void doTest() {
     doTestEnter();
