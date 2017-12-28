@@ -26,6 +26,8 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
 
   public void testAfterStatement() {doTest();}
 
+  public void testAfterStatementInMethod() {doTest();}
+
   public void testAfterStatementInBlock() {doTest();}
 
   public void testAfterStatementInContinue() {doTest();}

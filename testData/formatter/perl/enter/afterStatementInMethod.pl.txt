@@ -1,0 +1,4 @@
+method somesub{
+  say $element;
+    <caret>
+}
