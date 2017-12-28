@@ -18,6 +18,9 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 
 import com.intellij.formatting.ASTBlock;
 import com.intellij.formatting.Indent;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface PerlAstBlock extends ASTBlock {
@@ -25,5 +28,10 @@ public interface PerlAstBlock extends ASTBlock {
 
   default ASTBlock getRealBlock() {
     return this;
+  }
+
+  @NotNull
+  default IElementType getElementType() {
+    return PsiUtilCore.getElementType(getNode());
   }
 }

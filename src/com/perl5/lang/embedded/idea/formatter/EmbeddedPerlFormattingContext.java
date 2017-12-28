@@ -16,16 +16,25 @@
 
 package com.perl5.lang.embedded.idea.formatter;
 
-import com.intellij.lang.ASTNode;
+import com.intellij.formatting.Indent;
+import com.intellij.psi.codeStyle.CodeStyleSettings;
+import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 11.01.2016.
- */
-public class EmbeddedPerlFormattingBlock extends PerlFormattingBlock {
-  public EmbeddedPerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
-    super(node, context);
+public class EmbeddedPerlFormattingContext extends PerlFormattingContext {
+  public EmbeddedPerlFormattingContext(@NotNull CodeStyleSettings settings) {
+    super(settings);
+  }
+
+  @Nullable
+  @Override
+  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+    if (block.getElementType() == EmbeddedPerlParserDefinition.FILE) {
+      return Indent.getNoneIndent();
+    }
+    return super.getChildIndent(block, newChildIndex);
   }
 }

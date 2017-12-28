@@ -20,7 +20,6 @@ import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,7 @@ public class EmbeddedPerlFormattingModelBuilder extends PerlFormattingModelBuild
   @NotNull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), new PerlFormattingContext(settings));
+    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), new EmbeddedPerlFormattingContext(settings));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

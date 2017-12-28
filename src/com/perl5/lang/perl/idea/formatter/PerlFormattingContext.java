@@ -35,6 +35,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.containers.MultiMap;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -474,4 +475,65 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private Wrap getWrap(@NotNull ASTNode parentNode, @NotNull WrapType type, boolean wrapFirst) {
     return myWrapMap.computeIfAbsent(parentNode, key -> Wrap.createWrap(type, wrapFirst));
   }
+
+  @NotNull
+  public final ChildAttributes getChildAttributes(@NotNull PerlAstBlock block, int newChildIndex) {
+    return new ChildAttributes(getChildIndent(block, newChildIndex), getChildAlignment(block, newChildIndex));
+  }
+
+  @Nullable
+  public Alignment getChildAlignment(@NotNull PerlAstBlock block, int newChildIndex) {
+    ASTNode node = block.getNode();
+    IElementType elementType = PsiUtilCore.getElementType(node);
+    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(elementType)) {
+      return null;
+    }
+
+    // this is default algorythm from AbstractBlock#getFirstChildAlignment()
+    List<Block> subBlocks = block.getSubBlocks();
+    for (final Block subBlock : subBlocks) {
+      Alignment alignment = subBlock.getAlignment();
+      if (alignment != null) {
+        return alignment;
+      }
+    }
+    return null;
+  }
+
+  @Nullable
+  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+    IElementType elementType = block.getElementType();
+
+    PerlIndentProcessor indentProcessor = getIndentProcessor();
+    if (indentProcessor.getUnindentableContainers().contains(elementType)) {
+      return Indent.getNoneIndent();
+    }
+
+    if (indentProcessor.getBlockLikeContainers().contains(elementType)) {
+      return Indent.getNormalIndent();
+    }
+
+    return null;
+  }
+
+  @Nullable
+  public Boolean isIncomplete(@NotNull PerlAstBlock block) {
+    if (block.getElementType() == COMMA_SEQUENCE_EXPR) {
+      IElementType lastNodeType = PsiUtilCore.getElementType(block.getNode().getLastChildNode());
+      if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
+        return true;
+      }
+    }
+
+    List<Block> blocks = block.getSubBlocks();
+    if (!blocks.isEmpty()) {
+      Block lastBlock = blocks.get(blocks.size() - 1);
+      if (lastBlock.isIncomplete()) {
+        return true;
+      }
+    }
+
+    return null;
+  }
+
 }

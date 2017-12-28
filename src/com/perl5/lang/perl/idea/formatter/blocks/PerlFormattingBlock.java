@@ -53,10 +53,9 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   protected final PerlFormattingContext myContext;
   private Indent myIndent;
-  private final boolean myIsFirst;
-  private final boolean myIsLast;
-  private final IElementType myElementType;
-  private final AtomicNotNullLazyValue<Boolean> myIsIncomple;
+  private Boolean myIsFirst;
+  private Boolean myIsLast;
+  private Boolean myIsIncomple;
   private final AtomicNotNullLazyValue<List<Block>> mySubBlocksProvider = AtomicNotNullLazyValue.createValue(
     () -> ContainerUtil.immutableList(buildSubBlocks())
   );
@@ -65,27 +64,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     super(node, context.getWrap(node), context.getAlignment(node));
     myContext = context;
     myIndent = context.getIndentProcessor().getNodeIndent(node);
-    myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(node) == null;
-    myIsLast = FormatterUtil.getNextNonWhitespaceSibling(node) == null;
-    myElementType = node.getElementType();
-    myIsIncomple = AtomicNotNullLazyValue.createValue(() -> {
-      if (myElementType == COMMA_SEQUENCE_EXPR) {
-        IElementType lastNodeType = PsiUtilCore.getElementType(myNode.getLastChildNode());
-        if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
-          return true;
-        }
-      }
-
-      List<Block> blocks = getSubBlocks();
-      if (!blocks.isEmpty()) {
-        Block lastBlock = blocks.get(blocks.size() - 1);
-        if (lastBlock.isIncomplete()) {
-          return true;
-        }
-      }
-
-      return PerlFormattingBlock.super.isIncomplete();
-    });
   }
 
   @Override
@@ -181,60 +159,39 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
 
   @Nullable
   @Override
-  protected Indent getChildIndent() {
-    IElementType elementType = getElementType();
-
-    if (myContext.getIndentProcessor().getUnindentableContainers().contains(elementType)) {
-      return Indent.getNoneIndent();
-    }
-
-    if (myContext.getIndentProcessor().getBlockLikeContainers().contains(elementType)) {
-      return Indent.getNormalIndent();
-    }
-
-    return super.getChildIndent();
+  protected final Indent getChildIndent() {
+    throw new IllegalArgumentException("Formatting context must be used for this");
   }
 
   @NotNull
   @Override
-  public ChildAttributes getChildAttributes(int newChildIndex) {
-    return new ChildAttributes(getChildIndent(), getChildAlignment());
-  }
-
-  @Nullable
-  private Alignment getChildAlignment() {
-
-    IElementType elementType = getElementType();
-    if (PerlFormattingContext.COMMA_LIKE_SEQUENCES.contains(elementType)) {
-      return null;
-    }
-
-    // this is default algorythm from AbstractBlock#getFirstChildAlignment()
-    List<Block> subBlocks = getSubBlocks();
-    for (final Block subBlock : subBlocks) {
-      Alignment alignment = subBlock.getAlignment();
-      if (alignment != null) {
-        return alignment;
-      }
-    }
-    return null;
+  public final ChildAttributes getChildAttributes(int newChildIndex) {
+    return myContext.getChildAttributes(this, newChildIndex);
   }
 
   public boolean isLast() {
+    if (myIsLast == null) {
+      myIsLast = FormatterUtil.getNextNonWhitespaceSibling(myNode) == null;
+    }
     return myIsLast;
   }
 
   public boolean isFirst() {
+    if (myIsFirst == null) {
+      myIsFirst = FormatterUtil.getPreviousNonWhitespaceSibling(myNode) == null;
+    }
     return myIsFirst;
   }
 
-  public IElementType getElementType() {
-    return myElementType;
-  }
-
   @Override
-  public boolean isIncomplete() {
-    return myIsIncomple.getValue();
+  public final boolean isIncomplete() {
+    if (myIsIncomple == null) {
+      myIsIncomple = myContext.isIncomplete(this);
+      if (myIsIncomple == null) {
+        myIsIncomple = super.isIncomplete();
+      }
+    }
+    return myIsIncomple;
   }
 
   protected static boolean shouldCreateBlockFor(ASTNode node) {

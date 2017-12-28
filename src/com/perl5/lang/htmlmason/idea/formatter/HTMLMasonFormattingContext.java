@@ -16,13 +16,16 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
+import com.intellij.formatting.Indent;
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.ATTR_OR_ARG_ELEMENT_PATTERN;
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
@@ -64,5 +67,15 @@ public class HTMLMasonFormattingContext extends AbstractMasonFormattingContext {
   @Override
   protected IElementType getLineOpenerToken() {
     return HTML_MASON_LINE_OPENER;
+  }
+
+  @Nullable
+  @Override
+  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+    IElementType elementType = block.getElementType();
+    if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK) {
+      return Indent.getNormalIndent();
+    }
+    return super.getChildIndent(block, newChildIndex);
   }
 }

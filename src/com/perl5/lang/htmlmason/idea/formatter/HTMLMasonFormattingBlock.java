@@ -16,15 +16,12 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
-import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 08.03.2016.
@@ -38,15 +35,5 @@ public class HTMLMasonFormattingBlock extends PerlFormattingBlock implements HTM
   @Override
   protected PerlFormattingBlock createBlock(@NotNull ASTNode node) {
     return new HTMLMasonFormattingBlock(node, myContext);
-  }
-
-  @Nullable
-  @Override
-  protected Indent getChildIndent() {
-    IElementType elementType = getElementType();
-    if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK) {
-      return Indent.getNormalIndent();
-    }
-    return super.getChildIndent();
   }
 }
