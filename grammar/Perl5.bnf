@@ -638,8 +638,11 @@ sub_signature_element_ignore ::= '$$' | '$@' | '$%'
 
 /************************************* Sub signatures *****************************************************************/
 
-private sub_attributes ::= ':' attribute ([':'] attribute)*  {pin=1}
-private var_attributes ::= ':' attribute ([':'] attribute)*  // {pin=1} pin disable because of $something ? my $var : $other;
+private sub_attributes ::= <<attributes <<parse_sub_attributes>>>>
+private parse_sub_attributes ::= ':' attribute ([':'] attribute)*  {pin=1}
+private var_attributes ::= <<attributes <<parse_var_attributes>>>>
+private parse_var_attributes ::= ':' attribute ([':'] attribute)*  // {pin=1} pin disable because of $something ? my $var : $other;
+meta attributes ::= <<x1>>
 attribute ::= ATTRIBUTE_IDENTIFIER [quoted_sq_string]
 
 last_expr ::=  'last' [lnr_param] {pin=1}

@@ -420,6 +420,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlHashrefTypeImpl.class);
       case "FOREACH_ITERATOR":
         return new PerlElementTypeEx(name, PsiPerlForeachIteratorImpl.class);
+      case "ATTRIBUTES":
+        return new PerlElementTypeEx(name, PsiPerlAttributesImpl.class);
       default: {
         LOG.error("Unknown token:" + name);
         throw new RuntimeException("Unknown token:" + name);

@@ -67,7 +67,8 @@ public class PerlSpacingBuilderFactory {
       .afterInside(LEFT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
       .beforeInside(RIGHT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
 
-      .beforeInside(COLON, SUBS_OR_VARIABLES_DECLARATION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .before(ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
+      .beforeInside(COLON, ATTRIBUTES).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(COLON, ATTRIBUTE).spaces(0)
 
       .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)
