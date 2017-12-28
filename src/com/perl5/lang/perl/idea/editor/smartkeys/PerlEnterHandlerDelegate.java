@@ -29,10 +29,10 @@ import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -54,21 +54,25 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
                                 @NotNull Ref<Integer> caretAdvance,
                                 @NotNull DataContext dataContext,
                                 EditorActionHandler originalHandler) {
-    if (file instanceof PerlFileImpl) {
-      int offset = caretOffset.get();
-      PsiElement currentElement = file.findElementAt(offset);
+    if (!file.getLanguage().is(PerlLanguage.INSTANCE)) {
+      return Result.Continue;
+    }
 
-      //noinspection ConstantConditions
-      if (PsiUtilCore.getElementType(currentElement) == COMMENT_LINE && offset > currentElement.getTextOffset()) {
-        Document document = file.getViewProvider().getDocument();
+    int offset = caretOffset.get();
 
-        if (document != null) {
-          int lineNumber = document.getLineNumber(offset);
-          int lineEnd = document.getLineEndOffset(lineNumber);
+    // psi is outdated, remember
+    PsiElement currentElement = file.findElementAt(offset);
 
-          if (lineEnd > offset) {
-            document.insertString(offset, "# ");
-          }
+    //noinspection ConstantConditions
+    if (PsiUtilCore.getElementType(currentElement) == COMMENT_LINE && offset > currentElement.getTextOffset()) {
+      Document document = file.getViewProvider().getDocument();
+
+      if (document != null) {
+        int lineNumber = document.getLineNumber(offset);
+        int lineEnd = document.getLineEndOffset(lineNumber);
+
+        if (lineEnd > offset) {
+          document.insertString(offset, "# ");
         }
       }
     }
@@ -77,124 +81,126 @@ public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlEleme
 
   @Override
   public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
-    if (file instanceof PerlFileImpl) {
-      final CaretModel caretModel = editor.getCaretModel();
-      int offset = caretModel.getOffset();
-      PsiElement currentElement = file.findElementAt(offset);
+    if (!file.getLanguage().is(PerlLanguage.INSTANCE)) {
+      return Result.Continue;
+    }
 
-      if (currentElement == null ||
-          currentElement.getParent() instanceof PerlHeredocElementImpl && Perl5CodeInsightSettings.getInstance().HEREDOC_AUTO_INSERTION) {
-        LogicalPosition currentPosition = caretModel.getLogicalPosition();
-        final int enterLine = currentPosition.line - 1;
-        final int currentOffset = caretModel.getOffset();
-        if (enterLine > -1 && currentOffset > 0) {
-          final Document document = editor.getDocument();
-          final PsiDocumentManager manager = PsiDocumentManager.getInstance(file.getProject());
-          manager.commitDocument(document);
+    final CaretModel caretModel = editor.getCaretModel();
+    int offset = caretModel.getOffset();
+    PsiElement currentElement = file.findElementAt(offset);
 
-          final int lineStartOffset = document.getLineStartOffset(enterLine);
+    if (currentElement == null ||
+        currentElement.getParent() instanceof PerlHeredocElementImpl && Perl5CodeInsightSettings.getInstance().HEREDOC_AUTO_INSERTION) {
+      LogicalPosition currentPosition = caretModel.getLogicalPosition();
+      final int enterLine = currentPosition.line - 1;
+      final int currentOffset = caretModel.getOffset();
+      if (enterLine > -1 && currentOffset > 0) {
+        final Document document = editor.getDocument();
+        final PsiDocumentManager manager = PsiDocumentManager.getInstance(file.getProject());
+        manager.commitDocument(document);
 
-          PsiElement firstLineElement = file.findElementAt(lineStartOffset);
-          if (firstLineElement != null) {
-            HeredocCollector collector = new HeredocCollector(currentOffset - 1);
-            PerlPsiUtil.iteratePsiElementsRight(firstLineElement, collector);
+        final int lineStartOffset = document.getLineStartOffset(enterLine);
 
-            SmartPsiElementPointer<PerlHeredocOpener> lastOpenerPointer = null;
-            for (SmartPsiElementPointer<PerlHeredocOpener> currentOpenerPointer : collector.getResult()) {
+        PsiElement firstLineElement = file.findElementAt(lineStartOffset);
+        if (firstLineElement != null) {
+          HeredocCollector collector = new HeredocCollector(currentOffset - 1);
+          PerlPsiUtil.iteratePsiElementsRight(firstLineElement, collector);
 
-              PerlHeredocOpener currentOpener = currentOpenerPointer.getElement();
+          SmartPsiElementPointer<PerlHeredocOpener> lastOpenerPointer = null;
+          for (SmartPsiElementPointer<PerlHeredocOpener> currentOpenerPointer : collector.getResult()) {
+
+            PerlHeredocOpener currentOpener = currentOpenerPointer.getElement();
+
+            if (currentOpener == null) {
+              //								System.err.println("Opener invalidated on reparse");
+              return Result.Continue;
+            }
+
+
+            String openerName = currentOpener.getName();
+            boolean emptyOpener = StringUtil.isEmpty(openerName);
+            PsiReference inboundReference = ReferencesSearch.search(currentOpener).findFirst();
+
+            if (inboundReference != null) {
+              boolean falseAlarm = false;
+
+              PsiElement run = inboundReference.getElement().getPrevSibling();
+              while (run instanceof PsiWhiteSpace) {
+                run = run.getPrevSibling();
+              }
+
+              if (run instanceof PerlHeredocElementImpl) {
+                Pattern openerPattern = EMPTY_OPENER_PATTERN;
+                if (!emptyOpener) {
+                  openerPattern = Pattern.compile("<<~?(\\s*)(?:" +
+                                                  "\"" + openerName + "\"" + "|" +
+                                                  "`" + openerName + "`" + "|" +
+                                                  "'" + openerName + "'" + "|" +
+                                                  "\\\\" + openerName + "|" +
+                                                  openerName +
+                                                  ")"
+                  );
+                }
+
+                falseAlarm = openerPattern.matcher(run.getNode().getChars()).find();
+              }
+
+              if (falseAlarm) // looks like overlapping heredocs
+              {
+                inboundReference = null;
+              }
+              else {
+                lastOpenerPointer = currentOpenerPointer;
+              }
+            }
+
+
+            if (inboundReference == null) // disclosed marker
+            {
+              int addOffset = -1;
+              String closeMarker = "\n" + openerName + "\n";
+
+              if (lastOpenerPointer == null) // first one
+              {
+                addOffset = currentOffset;
+              }
+              else // sequentional
+              {
+                PerlHeredocOpener lastOpener = lastOpenerPointer.getElement();
+                if (lastOpener == null) {
+                  return Result.Continue;
+                }
+
+                PsiReference lastOpenerReference = ReferencesSearch.search(lastOpener).findFirst();
+                if (lastOpenerReference != null) {
+                  PsiElement element = lastOpenerReference.getElement();
+                  addOffset = element.getTextRange().getEndOffset();
+                  if (!emptyOpener) {
+                    closeMarker = "\n" + closeMarker;
+                  }
+                }
+                else {
+                  return Result.Continue;
+                }
+              }
+
+              document.insertString(addOffset, closeMarker);
+              manager.commitDocument(document);
+              CodeStyleManager.getInstance(file.getProject()).reformatRange(file, addOffset, addOffset + closeMarker.length());
+
+              currentOpener = currentOpenerPointer.getElement();
 
               if (currentOpener == null) {
-                //								System.err.println("Opener invalidated on reparse");
                 return Result.Continue;
               }
 
-
-              String openerName = currentOpener.getName();
-              boolean emptyOpener = StringUtil.isEmpty(openerName);
-              PsiReference inboundReference = ReferencesSearch.search(currentOpener).findFirst();
+              inboundReference = ReferencesSearch.search(currentOpener).findFirst();
 
               if (inboundReference != null) {
-                boolean falseAlarm = false;
-
-                PsiElement run = inboundReference.getElement().getPrevSibling();
-                while (run instanceof PsiWhiteSpace) {
-                  run = run.getPrevSibling();
-                }
-
-                if (run instanceof PerlHeredocElementImpl) {
-                  Pattern openerPattern = EMPTY_OPENER_PATTERN;
-                  if (!emptyOpener) {
-                    openerPattern = Pattern.compile("<<~?(\\s*)(?:" +
-                                                    "\"" + openerName + "\"" + "|" +
-                                                    "`" + openerName + "`" + "|" +
-                                                    "'" + openerName + "'" + "|" +
-                                                    "\\\\" + openerName + "|" +
-                                                    openerName +
-                                                    ")"
-                    );
-                  }
-
-                  falseAlarm = openerPattern.matcher(run.getNode().getChars()).find();
-                }
-
-                if (falseAlarm) // looks like overlapping heredocs
-                {
-                  inboundReference = null;
-                }
-                else {
-                  lastOpenerPointer = currentOpenerPointer;
-                }
+                lastOpenerPointer = currentOpenerPointer;
               }
-
-
-              if (inboundReference == null) // disclosed marker
-              {
-                int addOffset = -1;
-                String closeMarker = "\n" + openerName + "\n";
-
-                if (lastOpenerPointer == null) // first one
-                {
-                  addOffset = currentOffset;
-                }
-                else // sequentional
-                {
-                  PerlHeredocOpener lastOpener = lastOpenerPointer.getElement();
-                  if (lastOpener == null) {
-                    return Result.Continue;
-                  }
-
-                  PsiReference lastOpenerReference = ReferencesSearch.search(lastOpener).findFirst();
-                  if (lastOpenerReference != null) {
-                    PsiElement element = lastOpenerReference.getElement();
-                    addOffset = element.getTextRange().getEndOffset();
-                    if (!emptyOpener) {
-                      closeMarker = "\n" + closeMarker;
-                    }
-                  }
-                  else {
-                    return Result.Continue;
-                  }
-                }
-
-                document.insertString(addOffset, closeMarker);
-                manager.commitDocument(document);
-                CodeStyleManager.getInstance(file.getProject()).reformatRange(file, addOffset, addOffset + closeMarker.length());
-
-                currentOpener = currentOpenerPointer.getElement();
-
-                if (currentOpener == null) {
-                  return Result.Continue;
-                }
-
-                inboundReference = ReferencesSearch.search(currentOpener).findFirst();
-
-                if (inboundReference != null) {
-                  lastOpenerPointer = currentOpenerPointer;
-                }
-                else {
-                  return Result.Continue;
-                }
+              else {
+                return Result.Continue;
               }
             }
           }
