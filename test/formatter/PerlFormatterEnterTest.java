@@ -24,6 +24,39 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
 
   public void testCommaSequenceTop() {doTest();}
 
+  public void testAfterStatement() {doTest();}
+
+  public void testAfterStatementInBlock() {doTest();}
+
+  public void testAfterStatementInContinue() {doTest();}
+
+  public void testAfterStatementInElse() {doTest();}
+
+  public void testAfterStatementInElseIf() {doTest();}
+
+  public void testAfterStatementInFor() {doTest();}
+
+  public void testAfterStatementInForeach() {doTest();}
+
+  public void testAfterStatementInFunc() {doTest();}
+
+  public void testAfterStatementInGiven() {doTest();}
+
+  public void testAfterStatementInIf() {doTest();}
+
+  public void testAfterStatementInNamedBlock() {doTest();}
+
+  public void testAfterStatementInSub() {doTest();}
+
+  public void testAfterStatementInUnless() {doTest();}
+
+  public void testAfterStatementInUntil() {doTest();}
+
+  public void testAfterStatementInWhen() {doTest();}
+
+  public void testAfterStatementInWhile() {doTest();}
+
+
   private void doTest() {
     doTestEnter();
   }

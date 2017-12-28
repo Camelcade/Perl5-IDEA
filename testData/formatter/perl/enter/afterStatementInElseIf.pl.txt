@@ -1,0 +1,6 @@
+if($a) {
+}
+elsif($b){
+  say $element;
+    <caret>
+}

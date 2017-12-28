@@ -1,0 +1,4 @@
+foreach(@ARGV) {
+  say $element;
+    <caret>
+}

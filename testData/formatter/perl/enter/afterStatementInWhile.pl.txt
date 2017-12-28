@@ -1,0 +1,4 @@
+while($a) {
+  say $element;
+    <caret>
+}

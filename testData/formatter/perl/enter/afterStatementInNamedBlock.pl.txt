@@ -1,0 +1,4 @@
+BEGIN{
+  say $element;
+    <caret>
+}

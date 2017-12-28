@@ -1,0 +1,7 @@
+{
+  say 'again';
+}
+continue{
+  say 'hi';
+    <caret>
+}

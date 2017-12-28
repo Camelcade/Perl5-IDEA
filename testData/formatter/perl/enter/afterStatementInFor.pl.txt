@@ -1,0 +1,4 @@
+for my $element (@list) {
+  say $element;
+    <caret>
+}
