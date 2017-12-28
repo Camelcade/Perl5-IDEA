@@ -35,5 +35,5 @@ sub subname () :method: other  {}
 sub subname ($var1,$var2) :method : other {}
 sub subname ($$$) :method : other {}
 my  $var    :  method    :  other    :  something;
-my  (  $var1,  $var2,  $var3)    :  method    :  other    :  something;
+my  (  $var1,  $var2,  $var3   )    :  method    :  other    :  something;
 

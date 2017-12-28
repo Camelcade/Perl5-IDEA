@@ -24,7 +24,7 @@ func something():method:other:something {}
 
 my $var:method:other:something;
 
-my (  $var1, $var2, $var3):method:other:something;
+my ($var1, $var2, $var3):method:other:something;
 
 sub so():me:ot:so {}
 
@@ -36,4 +36,4 @@ func so():me:ot:so {}
 
 my $var:me:ot:so;
 
-my (  $v1, $v2, $v3):me:ot:so;
+my ($v1, $v2, $v3):me:ot:so;

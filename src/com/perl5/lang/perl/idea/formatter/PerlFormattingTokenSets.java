@@ -215,6 +215,13 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     REGEX_EXPR
   );
 
+  TokenSet PARENTHESISED_LIKE_EXPRESSIONS = TokenSet.create(
+    PARENTHESISED_EXPR,
+    VARIABLE_DECLARATION_LOCAL,
+    VARIABLE_DECLARATION_LEXICAL,
+    VARIABLE_DECLARATION_GLOBAL
+  );
+
   TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(
     OPERATOR_ASSIGN,
     OPERATOR_POW_ASSIGN,

@@ -36,4 +36,4 @@ func  so  (  )    :  me          :  ot                    :  so      {  }
 
 my  $var    :  me          :  ot                    :  so  ;
 
-my  (  $v1,  $v2,  $v3)    :  me          :  ot                    :  so  ;
+my  (  $v1,  $v2,  $v3   )    :  me          :  ot                    :  so  ;

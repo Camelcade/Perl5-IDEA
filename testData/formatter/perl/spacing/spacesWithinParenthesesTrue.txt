@@ -1,2 +1,6 @@
 @a = ( 1, 2, 3 );
 @a = ();
+my ( $something, $other );
+our ( $something, $other );
+local ( $something, $other );
+state ( $something, $other );

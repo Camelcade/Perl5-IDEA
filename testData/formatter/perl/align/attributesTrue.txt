@@ -18,9 +18,9 @@ my $var :method
         :other
         :something;
 
-my (      $var1, $var2, $var3 ) :method
-                                :other
-                                :something;
+my ($var1, $var2, $var3) :method
+                         :other
+                         :something;
 
 sub so() :me
          :ot
@@ -42,9 +42,9 @@ my $var :me
         :ot
         :so;
 
-my (      $v1, $v2, $v3 ) :me
-                          :ot
-                          :so;
+my ($v1, $v2, $v3) :me
+                   :ot
+                   :so;
 
 
 sub something()
@@ -72,7 +72,7 @@ my $var
                 :other
                 :something;
 
-my (      $var1, $var2, $var3 )
+my ($var1, $var2, $var3)
                 :method
                 :other
                 :something;
@@ -102,7 +102,7 @@ my $var
                 :ot
                 :so;
 
-my (      $v1, $v2, $v3 )
+my ($v1, $v2, $v3)
                 :me
                 :ot
                 :so;
