@@ -59,7 +59,7 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
   private void doTestAssignments(int wrapType, boolean nextLine) {
     getSettings().ASSIGNMENT_WRAP = wrapType;
     getSettings().PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE = nextLine;
-    doWrappingTestSingleSource("Assignments");
+    doWrappingTestSingleSource("assignments");
   }
 
   public void testCommaSequenceNever() {
