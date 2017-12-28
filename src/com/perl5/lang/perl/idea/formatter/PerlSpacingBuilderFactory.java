@@ -67,16 +67,7 @@ public class PerlSpacingBuilderFactory {
       .afterInside(LEFT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
       .beforeInside(RIGHT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_WITHIN_METHOD_PARENTHESES)
 
-      .betweenInside(SUB_NAME, COLON, SUB_DEFINITION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .betweenInside(SUB_NAME, COLON, SUB_DECLARATION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .betweenInside(SUB_NAME, COLON, METHOD_DEFINITION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .betweenInside(SUB_NAME, COLON, FUNC_DEFINITION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-
-      .betweenInside(RIGHT_PAREN, COLON, SUB_DEFINITION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .betweenInside(RIGHT_PAREN, COLON, SUB_DECLARATION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .betweenInside(RIGHT_PAREN, COLON, METHOD_DEFINITION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-      .betweenInside(RIGHT_PAREN, COLON, FUNC_DEFINITION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
-
+      .beforeInside(COLON, SUBS_OR_VARIABLES_DECLARATION).spaceIf(perlSettings.SPACE_BEFORE_ATTRIBUTE)
       .between(COLON, ATTRIBUTE).spaces(0)
 
       .afterInside(RESERVED_SUB, SUB_DEFINITION).spaces(1)

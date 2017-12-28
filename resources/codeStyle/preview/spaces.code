@@ -30,7 +30,10 @@ if ($var1 == $var2) {
 }
 qw/some string here/;
 
-sub subname :method {}
-sub subname () :method {}
-sub subname ($var1,$var2) :method {}
-sub subname ($$$) :method {}
+sub subname :method  : other {}
+sub subname () :method: other  {}
+sub subname ($var1,$var2) :method : other {}
+sub subname ($$$) :method : other {}
+my  $var    :  method    :  other    :  something;
+my  (  $var1,  $var2,  $var3)    :  method    :  other    :  something;
+
