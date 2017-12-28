@@ -152,6 +152,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "BINARY_OPERATION_SIGN_ON_NEXT_LINE",
         "ALIGN_MULTILINE_BINARY_OPERATION",
 
+        "ASSIGNMENT_WRAP",
+        "PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE",
+        "ALIGN_MULTILINE_ASSIGNMENT",
+
         "WRAP_COMMENTS",
 
         "ARRAY_INITIALIZER_WRAP",
@@ -171,6 +175,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
         "ALIGN_MULTILINE_TERNARY_OPERATION"
       );
 
+      consumer.renameStandardOption("ASSIGNMENT_WRAP", PerlBundle.message("perl.formatting.wrap.assignment.expression"));
       consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));
       consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
 

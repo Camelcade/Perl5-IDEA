@@ -30,10 +30,15 @@ my @list = qw/
 say $a == 42 ? 'long true'   : 'long expression meaning false';
 $a ? $a : $b;
 
-$a = something() || other() && $something;
-$a = $a && $b;
+$a = $b = something() || other() && $something;
+$a = $b = $a && $b;
 
 $someobject->somemethod()    ->othermethod()    ->andagain()->andlastone();
+}
+
+if( $a > $b){
+  if( $something_very_long == $something_other){
+  }
 }
 
 my $variable = ('this', 'is', 'list', 'of', 'strings');

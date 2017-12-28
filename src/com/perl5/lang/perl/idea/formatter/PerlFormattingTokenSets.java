@@ -179,13 +179,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_XOR_LP
   );
 
-  TokenSet ASSIGN_LIKE_EXPRESSIONS = TokenSet.create(
-    ASSIGN_EXPR,
-    EQUAL_EXPR,
-    COMPARE_EXPR,
-    REGEX_EXPR
-  );
-
   TokenSet BINARY_EXPRESSIONS = TokenSet.create(
     LP_OR_XOR_EXPR,
     LP_AND_EXPR,
@@ -197,7 +190,10 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SHIFT_EXPR,
     ADD_EXPR,
     MUL_EXPR,
-    POW_EXPR
+    POW_EXPR,
+    EQUAL_EXPR,
+    COMPARE_EXPR,
+    REGEX_EXPR
   );
 
   TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(
@@ -225,6 +221,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATORS_ADDITIVE,
     OPERATORS_BITWISE,
     OPERATORS_EQUALITY,
+    OPERATORS_RELATIONAL,
     OPERATORS_LOGICAL,
     OPERATORS_RANGE,
     OPERATORS_MULTIPLICATIVE,

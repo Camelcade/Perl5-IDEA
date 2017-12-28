@@ -43,14 +43,15 @@
      <ul>
         <li>New formatting options available<ul>
             <li>Wrapping and Alignment<ul>
-              <li>binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
-              <li>chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
-              <li>comma-separated lists, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
               <li>subs and methods signatures</li>
-              <li>ternary expression</li>
               <li>variable declarations lists</li>
+              <li>ternary expression</li>
               <li><code>qw</code> lists</li>
               <li>call arguments</li>
+              <li>binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
+              <li>assignments</li>
+              <li>chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
+              <li>comma-separated lists, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
               <li>comments, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
           </ul></li>
           <li>spacing for signatures, attributes and subs prototypes</li>

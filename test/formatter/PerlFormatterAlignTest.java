@@ -151,4 +151,17 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("callArguments");
   }
 
+  public void testAssignmentsTrue() {
+    doTestAssignments(true);
+  }
+
+  public void testAssignmentsFalse() {
+    doTestAssignments(false);
+  }
+
+  private void doTestAssignments(boolean value) {
+    getSettings().ALIGN_MULTILINE_ASSIGNMENT = value;
+    doTestSingleSource("assignments");
+  }
+
 }

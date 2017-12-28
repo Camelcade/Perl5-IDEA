@@ -24,6 +24,44 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/wrap";
   }
 
+  public void testAssignmentsNever() {
+    doTestAssignments(DO_NOT_WRAP, false);
+  }
+
+  public void testAssignmentsAlways() {
+    doTestAssignments(WRAP_ALWAYS, false);
+  }
+
+  public void testAssignmentsLong() {
+    doTestAssignments(WRAP_AS_NEEDED, false);
+  }
+
+  public void testAssignmentsChomp() {
+    doTestAssignments(WRAP_ON_EVERY_ITEM, false);
+  }
+
+  public void testAssignmentsNeverNextLine() {
+    doTestAssignments(DO_NOT_WRAP, true);
+  }
+
+  public void testAssignmentsAlwaysNextLine() {
+    doTestAssignments(WRAP_ALWAYS, true);
+  }
+
+  public void testAssignmentsLongNextLine() {
+    doTestAssignments(WRAP_AS_NEEDED, true);
+  }
+
+  public void testAssignmentsChompNextLine() {
+    doTestAssignments(WRAP_ON_EVERY_ITEM, true);
+  }
+
+  private void doTestAssignments(int wrapType, boolean nextLine) {
+    getSettings().ASSIGNMENT_WRAP = wrapType;
+    getSettings().PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE = nextLine;
+    doWrappingTestSingleSource("Assignments");
+  }
+
   public void testCommaSequenceNever() {
     doTestCommaSequence(DO_NOT_WRAP);
   }
