@@ -86,13 +86,11 @@ public class PerlXNamedValue extends XNamedValue {
       childrenList.add(new PerlXLayersNamedValue(layers));
     }
 
-    //if(tiedWith != null ){
-    //  childrenList.add(new PerlXNamedValue(tiedWith, myStackFrame));
-    //}
-
-    if (childrenList.size() > 0) {
-      node.addChildren(childrenList, false);
+    if (tiedWith != null) {
+      childrenList.addTopGroup(new PerlTiedNamedValue(tiedWith, myStackFrame));
     }
+
+    node.addChildren(childrenList, !isExpandable);
 
     if (isExpandable) {
       PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
@@ -102,7 +100,7 @@ public class PerlXNamedValue extends XNamedValue {
 
   @Override
   public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place) {
-    node.setPresentation(calculateIcon(), calculateType(), myPerlValueDescriptor.getValue(), myPerlValueDescriptor.isExpandable());
+    node.setPresentation(calculateIcon(), calculateType(), myPerlValueDescriptor.getValue(), myPerlValueDescriptor.isExpandableNode());
   }
 
   protected String calculateType() {
@@ -118,6 +116,10 @@ public class PerlXNamedValue extends XNamedValue {
 
     if (myPerlValueDescriptor.getLayers() != null) {
       value += ", IOLayers";
+    }
+
+    if (myPerlValueDescriptor.getTiedWith() != null) {
+      value += ", Tied";
     }
 
     return value;

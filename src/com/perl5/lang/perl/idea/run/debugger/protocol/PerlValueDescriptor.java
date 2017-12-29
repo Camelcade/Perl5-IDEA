@@ -81,4 +81,8 @@ public class PerlValueDescriptor {
   public PerlValueDescriptor getTiedWith() {
     return tied_with;
   }
+
+  public boolean isExpandableNode() {
+    return isExpandable() || getLayers() != null || getTiedWith() != null;
+  }
 }
