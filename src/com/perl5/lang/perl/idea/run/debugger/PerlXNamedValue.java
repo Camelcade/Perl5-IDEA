@@ -30,6 +30,7 @@ import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.*;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.run.debugger.protocol.PerlLayersDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -72,11 +73,29 @@ public class PerlXNamedValue extends XNamedValue {
 
   @Override
   public void computeChildren(@NotNull XCompositeNode node) {
-    if (!myPerlValueDescriptor.isExpandable() || StringUtil.isEmpty(myPerlValueDescriptor.getKey())) {
+    boolean isExpandable = myPerlValueDescriptor.isExpandable();
+    PerlLayersDescriptor layers = myPerlValueDescriptor.getLayers();
+    PerlValueDescriptor tiedWith = myPerlValueDescriptor.getTiedWith();
+    if (!isExpandable && layers == null && tiedWith == null || StringUtil.isEmpty(myPerlValueDescriptor.getKey())) {
       super.computeChildren(node);
     }
-    //
-    PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
+
+    XValueChildrenList childrenList = new XValueChildrenList();
+    if (layers != null) {
+      childrenList.add(new PerlXLayersNamedValue(layers));
+    }
+
+    //if(tiedWith != null ){
+    //  childrenList.add(new PerlXNamedValue(tiedWith, myStackFrame));
+    //}
+
+    if (childrenList.size() > 0) {
+      node.addChildren(childrenList, false);
+    }
+
+    if (isExpandable) {
+      PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
+    }
   }
 
 
@@ -96,6 +115,9 @@ public class PerlXNamedValue extends XNamedValue {
       value = "REF(" + refDepth + ") to " + value;
     }
 
+    if (myPerlValueDescriptor.getLayers() != null) {
+      value += ", IOLayers";
+    }
 
     return value;
   }

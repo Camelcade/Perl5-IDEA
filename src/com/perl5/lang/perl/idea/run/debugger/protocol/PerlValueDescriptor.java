@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by hurricup on 08.05.2016.
  */
@@ -29,6 +31,10 @@ public class PerlValueDescriptor {
   private boolean expandable;
   private boolean blessed;
   private boolean is_utf;
+  @Nullable
+  private PerlLayersDescriptor layers;
+  @Nullable
+  private PerlValueDescriptor tied_with;
 
   public String getName() {
     return name;
@@ -64,5 +70,15 @@ public class PerlValueDescriptor {
 
   public boolean isUtf() {
     return is_utf;
+  }
+
+  @Nullable
+  public PerlLayersDescriptor getLayers() {
+    return layers;
+  }
+
+  @Nullable
+  public PerlValueDescriptor getTiedWith() {
+    return tied_with;
   }
 }
