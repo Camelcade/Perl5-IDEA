@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.debugger;
+package com.perl5.lang.perl.idea.run.debugger.values;
 
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
@@ -30,6 +30,7 @@ import com.intellij.xdebugger.XSourcePosition;
 import com.intellij.xdebugger.frame.*;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlLayersDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.psi.PerlVariable;

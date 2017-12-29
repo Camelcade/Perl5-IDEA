@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.debugger;
+package com.perl5.lang.perl.idea.run.debugger.values;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.xdebugger.frame.*;

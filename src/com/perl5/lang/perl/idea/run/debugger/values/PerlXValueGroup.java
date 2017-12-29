@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.debugger;
+package com.perl5.lang.perl.idea.run.debugger.values;
 
 import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.frame.XValueGroup;
+import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -33,6 +33,9 @@ import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
+import com.perl5.lang.perl.idea.run.debugger.values.PerlXMainGroup;
+import com.perl5.lang.perl.idea.run.debugger.values.PerlXNamedValue;
+import com.perl5.lang.perl.idea.run.debugger.values.PerlXValueGroup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

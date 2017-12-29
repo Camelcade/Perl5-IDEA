@@ -30,13 +30,13 @@ import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugThread;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import com.perl5.lang.perl.idea.run.debugger.PerlStackFrame;
-import com.perl5.lang.perl.idea.run.debugger.PerlXNamedValue;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventBreakpoint;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingTransactionHandler;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.PerlValueRequestDescriptor;
+import com.perl5.lang.perl.idea.run.debugger.values.PerlXNamedValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
