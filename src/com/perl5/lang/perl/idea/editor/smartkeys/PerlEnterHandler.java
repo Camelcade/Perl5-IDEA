@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
 /**
  * Created by hurricup on 06.09.2015.
  */
-public class PerlEnterHandlerDelegate implements EnterHandlerDelegate, PerlElementTypes {
+public class PerlEnterHandler implements EnterHandlerDelegate, PerlElementTypes {
   private final Pattern EMPTY_OPENER_PATTERN = Pattern.compile("<<\\s*(?:\"\"|''|``)");
 
   @Override

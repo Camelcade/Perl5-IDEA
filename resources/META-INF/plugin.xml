@@ -275,7 +275,7 @@
                   id="PerlTypedHandler" order="first"/>
     <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>
 
-    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandlerDelegate"
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandler"
                           id="PerlEnterHandler" order="first"/>
 
     <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
