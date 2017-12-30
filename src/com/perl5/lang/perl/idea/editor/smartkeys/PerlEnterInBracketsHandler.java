@@ -33,6 +33,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -48,7 +49,7 @@ public class PerlEnterInBracketsHandler extends EnterHandlerDelegateAdapter {
                                 @NotNull DataContext dataContext,
                                 EditorActionHandler originalHandler) {
 
-    if (!CodeInsightSettings.getInstance().SMART_INDENT_ON_ENTER) {
+    if (!file.getLanguage().is(PerlLanguage.INSTANCE) || !CodeInsightSettings.getInstance().SMART_INDENT_ON_ENTER) {
       return Result.Continue;
     }
     Integer currentOffset = caretOffset.get();
