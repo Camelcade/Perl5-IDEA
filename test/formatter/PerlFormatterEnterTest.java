@@ -22,13 +22,13 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/enter";
   }
 
-  public void testPlainQQString() {doTest();}
+  public void testPlainQqString() {doTest();}
 
   public void testPlainQString() {doTest();}
 
   public void testPlainQxString() {doTest();}
 
-  public void testQQString() {doTest();}
+  public void testQqString() {doTest();}
 
   public void testQString() {doTest();}
 
