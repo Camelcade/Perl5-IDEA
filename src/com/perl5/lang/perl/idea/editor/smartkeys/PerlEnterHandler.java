@@ -23,12 +23,14 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
+import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.search.searches.ReferencesSearch;
-import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -58,21 +60,23 @@ public class PerlEnterHandler implements EnterHandlerDelegate, PerlElementTypes 
       return Result.Continue;
     }
 
-    int offset = caretOffset.get();
+    int currentOffset = caretOffset.get();
 
-    // psi is outdated, remember
-    PsiElement currentElement = file.findElementAt(offset);
+    assert editor instanceof EditorEx;
+    HighlighterIterator highlighterIterator = ((EditorEx)editor).getHighlighter().createIterator(currentOffset);
+    IElementType currentTokenType = highlighterIterator.getTokenType();
+    int currentTokenStart = highlighterIterator.getStart();
 
     //noinspection ConstantConditions
-    if (PsiUtilCore.getElementType(currentElement) == COMMENT_LINE && offset > currentElement.getTextOffset()) {
+    if (currentTokenType == COMMENT_LINE && currentOffset > currentTokenStart) {
       Document document = file.getViewProvider().getDocument();
 
       if (document != null) {
-        int lineNumber = document.getLineNumber(offset);
+        int lineNumber = document.getLineNumber(currentOffset);
         int lineEnd = document.getLineEndOffset(lineNumber);
 
-        if (lineEnd > offset) {
-          document.insertString(offset, "# ");
+        if (lineEnd > currentOffset) {
+          document.insertString(currentOffset, "# ");
         }
       }
     }
