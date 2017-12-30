@@ -22,6 +22,26 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/enter";
   }
 
+  public void testPlainQQString() {doTest();}
+
+  public void testPlainQString() {doTest();}
+
+  public void testPlainQxString() {doTest();}
+
+  public void testQQString() {doTest();}
+
+  public void testQString() {doTest();}
+
+  public void testQxString() {doTest();}
+
+  public void testAnonHash() {doTest();}
+
+  public void testAnonList() {doTest();}
+
+  public void testAnonArray() {doTest();}
+
+  public void testQwList() {doTest();}
+
   public void testCommaSequenceTop() {doTest();}
 
   public void testAfterStatement() {doTest();}

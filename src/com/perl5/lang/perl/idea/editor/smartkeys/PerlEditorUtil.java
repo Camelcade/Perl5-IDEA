@@ -62,4 +62,13 @@ public class PerlEditorUtil {
     moveToPreviousMeaningfulToken(iterator);
     return iterator.atEnd() ? null : iterator.getTokenType();
   }
+
+  /**
+   * @return next non-space token type; NB: current token is skipped
+   */
+  @Nullable
+  public static IElementType getNextTokenType(@NotNull HighlighterIterator iterator) {
+    moveToNextMeaningfulToken(iterator);
+    return iterator.atEnd() ? null : iterator.getTokenType();
+  }
 }

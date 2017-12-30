@@ -277,6 +277,7 @@
 
     <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandler"
                           id="PerlEnterHandler" order="first"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInBracketsHandler"/>
 
     <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
                            order="first"/>
