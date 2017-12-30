@@ -136,7 +136,6 @@
       <option name="ALIGN_MULTILINE_THROWS_LIST" value="true" />
       <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
       <option name="ALIGN_MULTILINE_PARENTHESIZED_EXPRESSION" value="true" />
-      <option name="SPACE_WITHIN_PARENTHESES" value="true" />
       <option name="SPACE_WITHIN_BRACES" value="true" />
       <option name="SPACE_AFTER_TYPE_CAST" value="false" />
       <option name="CALL_PARAMETERS_WRAP" value="1" />
