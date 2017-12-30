@@ -275,9 +275,10 @@
                   id="PerlTypedHandler" order="first"/>
     <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>
 
-    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHandler"
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHeredocClosingHandler"
                           id="PerlEnterHandler" order="first"/>
     <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInBracketsHandler"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInCommentHandler"/>
 
     <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
                            order="first"/>
