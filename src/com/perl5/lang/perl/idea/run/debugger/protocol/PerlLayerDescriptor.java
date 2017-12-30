@@ -27,6 +27,7 @@ import java.util.Map;
 
 public class PerlLayerDescriptor {
   private static Map<Integer, String> FLAGS_MAP = new LinkedHashMap<>();
+  private static final int UTF_FLAG = 0x00008000;
 
   static {
     FLAGS_MAP.put(0x00000100, "EOF");
@@ -36,7 +37,7 @@ public class PerlLayerDescriptor {
     FLAGS_MAP.put(0x00001000, "TRUNCATE");
     FLAGS_MAP.put(0x00002000, "APPEND");
     FLAGS_MAP.put(0x00004000, "CRLF");
-    FLAGS_MAP.put(0x00008000, "UTF8");
+    FLAGS_MAP.put(UTF_FLAG, "UTF8");
     FLAGS_MAP.put(0x00010000, "UNBUF");
     FLAGS_MAP.put(0x00020000, "WRBUF");
     FLAGS_MAP.put(0x00040000, "RDBUF");
@@ -78,7 +79,7 @@ public class PerlLayerDescriptor {
       return null;
     }
     StringBuilder sb = new StringBuilder();
-    int flagValue = Integer.parseInt(flags);
+    int flagValue = getIntFlag();
     sb.append("0x").append(Integer.toHexString(flagValue)).append(":");
 
     List<String> flagNames = new ArrayList<>();
@@ -92,9 +93,27 @@ public class PerlLayerDescriptor {
     return sb.toString();
   }
 
+  private int getIntFlag() {
+    if (flags == null) {
+      return 0;
+    }
+    try {
+      return Integer.parseInt(flags);
+    }
+    catch (NumberFormatException e) {
+      return 0;
+    }
+  }
+
   @NotNull
   public String getPresentableName() {
     String name = ":" + getName();
-    return param == null ? name : name + "(" + param + ")";
+    if (param != null) {
+      name += "(" + param + ")";
+    }
+    if (( getIntFlag() & UTF_FLAG ) != 0) {
+      name += " :utf8";
+    }
+    return name;
   }
 }
