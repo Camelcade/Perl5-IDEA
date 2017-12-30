@@ -60,6 +60,7 @@
         <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
         <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
         <li>Debugger now allows you to inspect IO layers (requires <code>Devel::Camelcadedb</code> v2017.100.3+)</li>
+        <li><code>Data::Printer</code> exports should work fine now, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1698">#1698</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -153,6 +154,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.ListMoreUtilsProcessor"/>
     <packageProcessor key="Test::More"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.TestMoreProcessor"/>
+    <packageProcessor key="Data::Printer"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>

@@ -40,6 +40,8 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     doTestCompletion();
   }
 
+  public void testDataPrinter() {doTestCompletion();}
+
   public void testListMoreUtilsParams() {doTestCompletion();}
 
   public void testBuiltInPackageExtension() {doTestCompletion();}
