@@ -156,6 +156,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.TestMoreProcessor"/>
     <packageProcessor key="Data::Printer"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
+    <packageProcessor key="DDP"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
