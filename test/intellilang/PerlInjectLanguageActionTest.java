@@ -17,6 +17,7 @@
 package intellilang;
 
 import base.PerlLightTestCase;
+import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 
 public class PerlInjectLanguageActionTest extends PerlLightTestCase {
@@ -169,6 +170,7 @@ public class PerlInjectLanguageActionTest extends PerlLightTestCase {
     assertNotInjectable();
 
     mySharedSettings.AUTOMATIC_HEREDOC_INJECTIONS = false;
+    FileContentUtil.reparseOpenedFiles();
     initWithFileSmartWithoutErrors();
     assertNotInjected();
     assertInjectable();
