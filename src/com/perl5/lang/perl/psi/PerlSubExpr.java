@@ -18,12 +18,13 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlSubExpr extends PsiElement, PerlLabelScope {
+public interface PerlSubExpr extends PsiElement, PerlLabelScope, PerlLexicalScope {
   @Nullable
   PsiPerlBlock getBlock();
 }

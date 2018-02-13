@@ -17,10 +17,16 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by hurricup on 27.05.2015.
  */
 public interface PerlLexicalScopeMember extends PsiElement {
-  PerlLexicalScope getLexicalScope();
+  @Nullable
+  default PerlLexicalScope getLexicalScope() {
+    return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
+  }
 }
