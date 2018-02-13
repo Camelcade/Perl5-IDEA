@@ -40,6 +40,14 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     doTestCompletion();
   }
 
+  public void testVariableSubSignature() {doTestCompletion();}
+
+  public void testVariableAnonSubSignature() {doTestCompletion();}
+
+  public void testVariableMethodSignature() {doTestCompletion();}
+
+  public void testVariableFuncSignature() {doTestCompletion();}
+
   public void testDataPrinter() {doTestCompletion();}
 
   public void testListMoreUtilsParams() {doTestCompletion();}

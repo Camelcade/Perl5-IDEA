@@ -1,0 +1,4 @@
+method somemethod ($varmethod1, @varmethod2, %varmethod3) {
+  $v<caret>
+}
+

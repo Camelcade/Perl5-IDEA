@@ -1,0 +1,3 @@
+sub somesub ($varsub1, @varsub2, %varsub3) {
+  $v<caret>
+}
