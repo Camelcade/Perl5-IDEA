@@ -236,7 +236,7 @@ public class PerlVariableCompletionUtil {
           PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
 
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
-          if (declarationStatement != null && PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
+          if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
             return true;
           }
 
