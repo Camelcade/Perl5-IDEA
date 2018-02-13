@@ -33,6 +33,8 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testIssue1723() {doTest();}
+
   public void testIssue1669() {doTest();}
 
   public void testIssue1646() {doTest();}

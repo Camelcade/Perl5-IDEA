@@ -363,7 +363,7 @@ limitations under the License.
     name(".+expr")="expression"
     extends("number_constant")=expr
 
-    implements("condition_expr|foreach_iterator")="com.perl5.lang.perl.psi.PerlStatement"
+    implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content")="com.perl5.lang.perl.psi.PerlStatement"
 
 	implements(".+_cast_expr")="com.perl5.lang.perl.psi.PerlCastExpression"
 	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"

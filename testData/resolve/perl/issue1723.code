@@ -1,0 +1,28 @@
+sub ($, $p1, $, @p2, $, %p3) {
+    say $p1;
+    say @p2;
+    say %p3;
+};
+$self->helper( blabla => sub ($, $p1, $, @p2, $, %p3) {
+    say $p1;
+    say @p2;
+    say %p3;
+} );
+
+eval{
+    sub examples ($, $p1, $, @p2, $, %p3) {
+        say $p1;
+        say @p2;
+        say %p3;
+    }
+    method examples ($p1, @p2, %p3) {
+        say $p1;
+        say @p2;
+        say %p3;
+    }
+    func examples ($p1, @p2, %p3) {
+        say $p1;
+        say @p2;
+        say %p3;
+    }
+};
