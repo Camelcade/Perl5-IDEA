@@ -426,7 +426,6 @@ limitations under the License.
     implements("if_compound|unless_compound")="com.perl5.lang.perl.psi.PerlIfUnlessCompound"
     implements("when_compound")="com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple"
     implements("given_compound|default_compound")="com.perl5.lang.perl.psi.properties.PerlCompound";
-    mixin("block|.*_compound")="com.perl5.lang.perl.psi.mixins.PerlLexicalScopeMemberMixin"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"

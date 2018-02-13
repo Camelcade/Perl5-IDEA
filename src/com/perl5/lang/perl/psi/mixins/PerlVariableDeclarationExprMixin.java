@@ -19,12 +19,13 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationExpr;
+import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 01.06.2015.
  */
-public abstract class PerlVariableDeclarationExprMixin extends PerlLexicalScopeMemberMixin implements PerlVariableDeclarationExpr {
+public abstract class PerlVariableDeclarationExprMixin extends PerlCompositeElementImpl implements PerlVariableDeclarationExpr {
   public PerlVariableDeclarationExprMixin(ASTNode node) {
     super(node);
   }

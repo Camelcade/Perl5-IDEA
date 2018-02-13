@@ -51,11 +51,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     super(node);
   }
 
-  @Override
-  public PerlLexicalScope getLexicalScope() {
-    return PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
-  }
-
   @Nullable
   @Override
   public String getPackageName() {
