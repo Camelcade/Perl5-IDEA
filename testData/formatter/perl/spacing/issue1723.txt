@@ -1,0 +1,39 @@
+sub examples($p1, @p2, %p3) {
+}
+sub examples($, $p1, @p2, %p3) {
+}
+sub examples($p1, $, @p2, %p3) {
+}
+sub examples($p1, @p2, $, %p3) {
+}
+
+sub examples($p1 = $a, @p2 = @b, %p3 = %c) {
+}
+
+sub examples($, $p1 = $a, @p2 = @b, %p3 = %c) {
+}
+
+sub examples($p1 = $a, $, @p2 = @b, %p3 = %c) {
+}
+
+sub examples($p1 = $a, @p2 = @b, $, %p3 = %c) {
+}
+
+sub($p1, @p2, %p3) {
+};
+sub($, $p1, @p2, %p3) {
+};
+sub($p1, $, @p2, %p3) {
+};
+sub($p1, @p2, $, %     p3) {
+};
+sub($p1 = $a, @p2 = @b, %p3 = %c) {
+};
+sub($, $p1 = $a, @p2 = @b, %p3 = %c) {
+};
+sub($p1 = $a, $, @p2 = @b, %p3 = %c) {
+};
+sub($p1 = $a, @p2 = @b, $, %p3 = %c) {
+};
+
+
