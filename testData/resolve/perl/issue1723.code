@@ -26,3 +26,8 @@ eval{
         say %p3;
     }
 };
+sub ($var1, @var2, %var3){
+    say $var1;
+    say @var2;
+    say %var3;
+}() && $var1 && @var2 && %var3;
