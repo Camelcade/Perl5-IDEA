@@ -21,7 +21,6 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -59,14 +58,6 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     List<PerlSubArgument> arguments = getSubArgumentsList();
     return !arguments.isEmpty() && arguments.get(0).isSelf(getProject());
   }
-
-  @Override
-  public PerlLexicalScope getLexicalScope() {
-    PerlLexicalScope scope = PsiTreeUtil.getParentOfType(this, PerlLexicalScope.class);
-    assert scope != null;
-    return scope;
-  }
-
 
   @NotNull
   @Override
