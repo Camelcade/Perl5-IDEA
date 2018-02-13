@@ -36,6 +36,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testUseVarsEmptyInspection() {doTestUseVarsInspection();}
 
+  public void testIssue1723() {doShadowingTest();}
+
   public void testUseVarsShadowing() {doShadowingTest();}
 
   public void testUseVarsShadowingReversal() {doShadowingTest();}
