@@ -65,6 +65,7 @@
      </p>
      <p>Fixes:
       <ul>
+        <li>Missing completion of variables declared in anon sub signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
         <li>False variables resolve from statement to anon sub signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
         <li>Variables resolve to signatures in anon subs or subs nested in statements, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
         <li>Parsing of hash variable after omitted argument in perl signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>

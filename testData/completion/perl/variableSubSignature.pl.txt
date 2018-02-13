@@ -1,0 +1,14 @@
+Lookups: ARGV; Text: ARGV; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Lookups: ARGV; Text: ARGV; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: EFFECTIVE_GROUP_ID; Text: EFFECTIVE_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: EFFECTIVE_USER_ID; Text: EFFECTIVE_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: ENV; Text: ENV; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: EVAL_ERROR; Text: EVAL_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: OLD_PERL_VERSION; Text: OLD_PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: OVERLOAD; Text: OVERLOAD; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: PERL_VERSION; Text: PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: ^CHILD_ERROR_NATIVE; Text: ^CHILD_ERROR_NATIVE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: ^V; Text: ^V; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: varsub1; Text: varsub1; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: varsub2; Text: varsub2; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Lookups: varsub3; Text: varsub3; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null

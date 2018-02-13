@@ -1,0 +1,4 @@
+func somefunc ($varfunc1, @varfunc2, %varfunc3) {
+  $v<caret>
+}
+
