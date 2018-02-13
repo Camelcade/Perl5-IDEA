@@ -65,6 +65,7 @@
      </p>
      <p>Fixes:
       <ul>
+        <li>Bug with variables resolve to signatures in anon subs or subs nested in statements, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
         <li>Bug with parsing hash variable after omitted argument in perl signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
         <li>New line won't be inserted before fat comma on wrapping</li>
         <li>Formatter now removes spaces after <code>\</code> operator</li>
