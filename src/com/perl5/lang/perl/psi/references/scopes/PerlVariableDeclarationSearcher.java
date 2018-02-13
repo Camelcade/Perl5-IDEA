@@ -56,7 +56,7 @@ public class PerlVariableDeclarationSearcher extends BaseScopeProcessor {
         if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PerlStatement.class);
 
-          if (declarationStatement == null || !PsiTreeUtil.isAncestor(declarationStatement, myVariable, false)) {
+          if (!PsiTreeUtil.isAncestor(declarationStatement, myVariable, false)) {
             myResult = (PerlVariableDeclarationElement)element;
             return false;
           }
