@@ -334,9 +334,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       myParensStack.peek() == 1 &&
       myParensStack.peekAdditional() == SUB_SIGNATURE) {
       if (currentChar == ',') {
+        yybegin(YYINITIAL);
         return COMMA;
       }
       else if (currentChar == '=') {
+        yybegin(BLOCK_AS_VALUE);
         return OPERATOR_ASSIGN;
       }
       else if (currentChar == ')') {
