@@ -61,6 +61,7 @@
         <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
         <li>Debugger now allows you to inspect IO layers (requires <code>Devel::Camelcadedb</code> v2017.100.3+)</li>
         <li><code>Data::Printer</code> exports should work fine now, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1698">#1698</a></li>
+        <li><code>cpanfile</code> is now recognized as a perl file. To make resolve and completion work, you should have <a href="http://search.cpan.org/~miyagawa/Carton/"><code>carton</code></a> installed, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1716">Nowaker</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -95,6 +96,7 @@
     </extensionPoint>
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"/>
     <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
+    <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension"/>
   </extensionPoints>
@@ -176,6 +178,8 @@
 
     <fileTypeProvider implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeProvider"/>
     <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
+
+    <importsProvider implementation="com.perl5.lang.perl.extensions.imports.PerlCpanfileImportProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

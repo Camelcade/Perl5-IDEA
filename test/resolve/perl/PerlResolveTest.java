@@ -33,6 +33,12 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testCpanfile() {
+    addTestLibrary("cpanfile");
+    initWithCpanFile();
+    checkSerializedReferencesWithFile();
+  }
+
   public void testIssue1723() {doTest();}
 
   public void testIssue1669() {doTest();}

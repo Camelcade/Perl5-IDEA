@@ -16,11 +16,13 @@
 
 package com.perl5.lang.perl.fileTypes;
 
+import com.intellij.openapi.fileTypes.ExactFileNameMatcher;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlFileTypeFactory extends FileTypeFactory {
+
   @Override
   public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
     fileTypeConsumer.consume(PerlFileTypePackage.INSTANCE, PerlFileTypePackage.EXTENSION);
@@ -30,5 +32,6 @@ public class PerlFileTypeFactory extends FileTypeFactory {
     fileTypeConsumer.consume(PerlFileTypeScript.INSTANCE, PerlFileTypeScript.EXTENSION_AL);
 
     fileTypeConsumer.consume(PerlFileTypeTest.INSTANCE, PerlFileTypeTest.EXTENSION);
+    fileTypeConsumer.consume(PerlFileTypeCpanfile.INSTANCE, new ExactFileNameMatcher(PerlFileTypeCpanfile.CPANFILE, false));
   }
 }
