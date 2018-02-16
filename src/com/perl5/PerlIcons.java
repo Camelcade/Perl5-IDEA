@@ -52,6 +52,7 @@ public class PerlIcons {
   public static final Icon TTK2_BLOCK_ICON = IconLoader.getIcon("/icons/template_toolkit_block_gutter_icon.png");
 
   public static final Icon LIB_ROOT = IconLoader.getIcon("/icons/library_root.png");
+  public static final Icon METACPAN = IconLoader.getIcon("/icons/metacpan.png");
 
   public static final Icon PACKAGE_GUTTER_ICON = IconLoader.getIcon("/icons/package_gutter_icon.png");
   public static final Icon PRAGMA_GUTTER_ICON = IconLoader.getIcon("/icons/pragmaicon.png");

@@ -1,0 +1,34 @@
+PerlSubReference at (0,8); text in range: 'requires' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::requires($self) at 2246 in Environment.pm
+
+PerlSubReference at (51,61); text in range: 'recommends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::recommends($self) at 2325 in Environment.pm
+
+PerlSubReference at (89,99); text in range: 'recommends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::recommends($self) at 2325 in Environment.pm
+
+PerlNamespaceReference at (101,116); text in range: 'URL::Encode::XS' => 0 results:
+
+PerlSubReference at (127,137); text in range: 'recommends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::recommends($self) at 2325 in Environment.pm
+
+PerlNamespaceReference at (139,153); text in range: 'CGI::Deurl::XS' => 0 results:
+
+PerlSubReference at (165,175); text in range: 'recommends' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::recommends($self) at 2325 in Environment.pm
+
+PerlNamespaceReference at (177,193); text in range: 'HTTP::Parser::XS' => 0 results:
+
+PerlSubReference at (204,206); text in range: 'on' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::on($self, $phase, $code) at 1268 in Environment.pm
+
+PerlSubReference at (227,235); text in range: 'requires' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::requires($self) at 2246 in Environment.pm
+
+PerlNamespaceReference at (237,247); text in range: 'Test::More' => 0 results:
+
+PerlSubReference at (272,280); text in range: 'requires' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::requires($self) at 2246 in Environment.pm
+
+PerlNamespaceReference at (282,303); text in range: 'HTTP::Request::Common' => 0 results:
+

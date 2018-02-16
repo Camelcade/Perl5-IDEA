@@ -30,6 +30,17 @@ public class PerlParserTest extends PerlParserTestBase {
     return "testData/parser/perl";
   }
 
+  public void testCpanfile() {
+    String ext = myFileExt;
+    try {
+      myFileExt = "";
+      doTest();
+    }
+    finally {
+      myFileExt = ext;
+    }
+  }
+
   public void testIssue1723() {doTest();}
 
   public void testMoose() {doTest();}

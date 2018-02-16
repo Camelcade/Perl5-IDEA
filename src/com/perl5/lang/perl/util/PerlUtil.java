@@ -26,6 +26,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -145,6 +146,15 @@ public class PerlUtil implements PerlElementTypes {
         }
       }
     }
+
+    PerlImportsProvider.processProviders(namespace, provider -> {
+      for (PerlExportDescriptor descriptor : provider.getImports()) {
+        if (!processor.process(namespace.getPackageName(), descriptor)) {
+          return false;
+        }
+      }
+      return true;
+    });
   }
 
   /**

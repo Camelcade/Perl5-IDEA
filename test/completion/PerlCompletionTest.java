@@ -40,6 +40,12 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
     doTestCompletion();
   }
 
+  public void testCpanfile() {
+    addTestLibrary("cpanfile");
+    initWithCpanFile();
+    doTestCompletionCheck("");
+  }
+
   public void testVariableSubSignature() {doTestCompletion();}
 
   public void testVariableAnonSubSignature() {doTestCompletion();}

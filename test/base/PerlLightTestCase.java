@@ -221,6 +221,15 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     initWithPerlTidy("perlTidy");
   }
 
+  protected void initWithCpanFile() {
+    try {
+      initWithFile("cpanfile", "");
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   public void initWithPerlTidy(@NotNull String targetName) {
     try {
       initWithFileContent(targetName, getFileExtension(),
@@ -316,7 +325,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   public void initWithFile(String filename, String extension) throws IOException {
-    initWithFile(filename, extension, filename + ".code");
+    initWithFile(filename, extension, filename + (extension.isEmpty() ? "" : ".code"));
   }
 
   public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException {
@@ -325,7 +334,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   public void initWithFileContent(String filename, String extension, String content) throws IOException {
-    myFixture.configureByText(filename + "." + extension, content);
+    myFixture.configureByText(filename + (extension.isEmpty() ? "" : "." + extension), content);
   }
 
   @NotNull
@@ -424,15 +433,15 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     doTestCompletionCheck("");
   }
 
-  private void addVirtualFileFilter() {
+  protected void addVirtualFileFilter() {
     ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, myDisposable);
   }
 
-  private void removeVirtualFileFilter() {
+  protected void removeVirtualFileFilter() {
     ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, myDisposable);
   }
 
-  private void doTestCompletionCheck(@NotNull String answerSuffix) {
+  protected void doTestCompletionCheck(@NotNull String answerSuffix) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     addVirtualFileFilter();
     myFixture.complete(CompletionType.BASIC, 1);

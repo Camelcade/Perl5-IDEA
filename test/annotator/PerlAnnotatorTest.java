@@ -20,6 +20,7 @@ import base.PerlLightTestCase;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
+import com.perl5.lang.perl.psi.PerlFile;
 
 /**
  * Created by hurricup on 09.11.2016.
@@ -75,6 +76,15 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testFileLevelVariableInspection() {doInspectionTest(PerlFileLevelVariableInspection.class);}
 
   public void testBuiltInVariableRedeclarationInspection() {doInspectionTest(PerlBuiltinVariableRedeclarationInspection.class);}
+
+  public void testCpanfile() {
+    initWithCpanFile();
+    assertInstanceOf(myFixture.getFile(), PerlFile.class);
+    addVirtualFileFilter();
+    myFixture.enableInspections(PerlUseStrictInspection.class, PerlUseWarningsInspection.class);
+    myFixture.checkHighlighting(true, false, false);
+    removeVirtualFileFilter();
+  }
 
   public void testUseStrictInspection() {doInspectionTest(PerlUseStrictInspection.class);}
 

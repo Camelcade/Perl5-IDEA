@@ -64,11 +64,15 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
   protected void doTest(boolean checkErrors) {
     super.doTest(true);
     if (checkErrors) {
-      assertFalse(
-        "PsiFile contains error elements",
-        toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
-      );
+      doCheckErrors();
     }
+  }
+
+  protected void doCheckErrors() {
+    assertFalse(
+      "PsiFile contains error elements",
+      toParseTreeText(myFile, skipSpaces(), includeRanges()).contains("PsiErrorElement")
+    );
   }
 
   @Deprecated // this is legacy for heavy tests
@@ -128,7 +132,8 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
   }
 
   protected String loadFile(@NonNls @TestDataFile String name) throws IOException {
-    return FileUtil.loadFile(new File(myFullDataPath, name.replace("." + myFileExt, ".code")), CharsetToolkit.UTF8, true).trim();
+    String adjustedName = myFileExt.isEmpty() ? name.replace(".", "") : name.replace("." + myFileExt, ".code");
+    return FileUtil.loadFile(new File(myFullDataPath, adjustedName), CharsetToolkit.UTF8, true).trim();
   }
 
   @Override
