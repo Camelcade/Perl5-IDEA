@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.HelpTooltip;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl;
 import com.intellij.openapi.ui.ComboBox;
@@ -76,7 +75,7 @@ public class Perl5SdkPanel {
         ListPopup actionGroupPopup = JBPopupFactory.getInstance().
           createActionGroupPopup(null, myActionGroup, e.getDataContext(), true, null, Integer.MAX_VALUE);
 
-        HelpTooltip.setMasterPopup(e.getInputEvent().getComponent(), actionGroupPopup);
+        //HelpTooltip.setMasterPopup(e.getInputEvent().getComponent(), actionGroupPopup);
         actionGroupPopup.show(new RelativePoint(toolbar, getPopupPoint()));
       }
 
