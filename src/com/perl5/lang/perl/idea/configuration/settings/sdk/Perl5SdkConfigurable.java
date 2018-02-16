@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
@@ -42,15 +45,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
 import java.util.Arrays;
 import java.util.List;
 
 public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
   public static final Perl5SdkWrapper DISABLE_PERL_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.disable.perl.support"));
   public static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
-
 
   private Perl5SdkPanel myPanel;
   @NotNull
@@ -92,19 +92,44 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
         }
       }
     });
-    sdkComboBox.addItemListener(e -> {
-      if (e.getStateChange() != ItemEvent.SELECTED) {
-        return;
-      }
-      updateSdkButtons();
-    });
 
     myConnection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
 
     // add sdk button
-    myPanel.getAddButton().addActionListener(e -> SdkConfigurationUtil.selectSdkHome(PerlSdkType.INSTANCE, this::addSdk));
-    myPanel.getDeleteButton().addActionListener(this::removeSdk);
-    myPanel.getEditButton().addActionListener(this::renameSdk);
+    DefaultActionGroup panelActionGroup = myPanel.getActionGroup();
+    panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.new")) {
+      @Override
+      public void actionPerformed(AnActionEvent e) {
+        SdkConfigurationUtil.selectSdkHome(PerlSdkType.INSTANCE, Perl5SdkConfigurable.this::addSdk);
+      }
+
+      @Override
+      public void update(AnActionEvent e) {
+        e.getPresentation().setEnabledAndVisible(true);
+      }
+    });
+    panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.edit")) {
+      @Override
+      public void update(AnActionEvent e) {
+        e.getPresentation().setEnabledAndVisible(getSelectedSdk() != null);
+      }
+
+      @Override
+      public void actionPerformed(AnActionEvent e) {
+        renameSdk(e);
+      }
+    });
+    panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.delete")) {
+      @Override
+      public void update(AnActionEvent e) {
+        e.getPresentation().setEnabledAndVisible(getSelectedSdk() != null);
+      }
+
+      @Override
+      public void actionPerformed(AnActionEvent e) {
+        removeSdk(e);
+      }
+    });
   }
 
   private void updateSdkModel(@Nullable Perl5SdkWrapper itemToSelect) {
@@ -114,13 +139,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
       itemToSelect = allItems.isEmpty() ? null : allItems.get(0);
     }
     sdkComboBox.setModel(new CollectionComboBoxModel<>(allItems, itemToSelect));
-    updateSdkButtons();
-  }
-
-  private void updateSdkButtons() {
-    boolean buttonsState = getSelectedSdk() != null;
-    myPanel.getDeleteButton().setEnabled(buttonsState);
-    myPanel.getEditButton().setEnabled(buttonsState);
   }
 
   @Nullable
@@ -148,14 +166,14 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     PerlSdkTable.getInstance().addJdk(newSdk);
   }
 
-  private void removeSdk(ActionEvent e) {
+  private void removeSdk(AnActionEvent e) {
     Sdk selectedSdk = getSelectedSdk();
     if (selectedSdk != null) {
       PerlSdkTable.getInstance().removeJdk(selectedSdk);
     }
   }
 
-  private void renameSdk(ActionEvent e) {
+  private void renameSdk(AnActionEvent e) {
     Sdk selectedSdk = getSelectedSdk();
     if (selectedSdk == null) {
       return;
@@ -213,7 +231,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   @Override
   public void reset() {
     myPanel.getSdkComboBox().setSelectedItem(mySdkManipulator.getCurrentSdkWrapper());
-    updateSdkButtons();
   }
 
   @Override

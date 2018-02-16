@@ -16,17 +16,27 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.icons.AllIcons;
+import com.intellij.ide.HelpTooltip;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl;
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.ui.popup.ListPopup;
+import com.intellij.ui.awt.RelativePoint;
+import com.intellij.util.ui.JBUI;
+import com.intellij.util.ui.UIUtil;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Perl5SdkPanel {
   private ComboBox<Perl5SdkWrapper> mySdkComboBox;
-  private JButton myAddButton;
-  private JButton myEditButton;
-  private JButton myDeleteButton;
   private JPanel myMainPanel;
+  private final DefaultActionGroup myActionGroup = new DefaultActionGroup();
+  private JPanel myToolBar;
 
   public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
     return mySdkComboBox;
@@ -36,20 +46,47 @@ public class Perl5SdkPanel {
     return myMainPanel;
   }
 
-  public JButton getAddButton() {
-    return myAddButton;
+  @NotNull
+  public DefaultActionGroup getActionGroup() {
+    return myActionGroup;
   }
 
-  public JButton getEditButton() {
-    return myEditButton;
-  }
-
-  public JButton getDeleteButton() {
-    return myDeleteButton;
-  }
-
+  /**
+   * popup taken from {@link com.intellij.application.options.schemes.AbstractSchemesPanel}
+   */
   private void createUIComponents() {
-    // TODO: place custom component creation code here
-    mySdkComboBox = new ComboBox<>(375);
+    DefaultActionGroup toolbarActionGroup = new DefaultActionGroup();
+
+    ActionToolbarImpl toolbar =
+      (ActionToolbarImpl)ActionManager.getInstance().createActionToolbar(ActionPlaces.NAVIGATION_BAR_TOOLBAR, toolbarActionGroup, true);
+    toolbar.setReservePlaceAutoPopupIcon(false);
+    toolbar.setLayoutPolicy(ActionToolbar.NOWRAP_LAYOUT_POLICY);
+    toolbar.getComponent().setBorder(JBUI.Borders.empty());
+
+    toolbarActionGroup.add(new AnAction() {
+      @Override
+      public void update(AnActionEvent e) {
+        Presentation p = e.getPresentation();
+        p.setIcon(AllIcons.General.Gear);
+        p.setEnabledAndVisible(true);
+      }
+
+      @Override
+      public void actionPerformed(AnActionEvent e) {
+        ListPopup actionGroupPopup = JBPopupFactory.getInstance().
+          createActionGroupPopup(null, myActionGroup, e.getDataContext(), true, null, Integer.MAX_VALUE);
+
+        HelpTooltip.setMasterPopup(e.getInputEvent().getComponent(), actionGroupPopup);
+        actionGroupPopup.show(new RelativePoint(toolbar, getPopupPoint()));
+      }
+
+      private Point getPopupPoint() {
+        int dH = UIUtil.isUnderWin10LookAndFeel() ? JBUI.scale(1) : 0;
+        return new Point(JBUI.scale(2), toolbar.getHeight() - dH);
+      }
+    });
+    myToolBar = toolbar;
   }
+
+
 }
