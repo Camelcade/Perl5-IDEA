@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.Function;
-import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
@@ -143,10 +142,5 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
   @Override
   public boolean isInplaceRefactoringAllowed() {
     return !isFollowBestPractice();
-  }
-
-  @Override
-  public PsiElement setName(@NotNull String newBaseName) throws IncorrectOperationException {
-    return isValid() ? super.setName(newBaseName) : null;
   }
 }

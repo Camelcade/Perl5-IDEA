@@ -23,7 +23,7 @@ public class PerlRenameDialogTest extends PerlRenameTestCase {
     return "testData/rename/perl";
   }
 
-  //public void testClassAccessorFbp() {doTest();}
+  public void testClassAccessorFbp() {doTest();}
 
   public void testExceptionClassFieldField() {doTest();}
 
