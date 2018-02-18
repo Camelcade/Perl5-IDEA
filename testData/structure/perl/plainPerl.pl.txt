@@ -4,13 +4,13 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
   Documentation in null; /perl5language.png -> POD file at 0 in plainPerl.pl
   Passed by filters: SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    SYNOPSIS in null; /perl5language.png -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 653 in plainPerl.pl
+    SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 653 in plainPerl.pl
     Passed by filters: SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-      NAME in null; /perl5language.png -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 670 in plainPerl.pl
+      NAME in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 670 in plainPerl.pl
       Passed by filters: SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-        SOMETHING in null; /perl5language.png -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 683 in plainPerl.pl
+        SOMETHING in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 683 in plainPerl.pl
         Passed by filters: SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Foo::Bar in plainPerl.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in plainPerl.pl
@@ -78,4 +78,3 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
 
     definition_method_deprecated() in plainPerl.pl; /method_gutter_icon.png; DEPRECATED_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Deprecated::Bar::definition_method_deprecated at 610 in plainPerl.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
-
