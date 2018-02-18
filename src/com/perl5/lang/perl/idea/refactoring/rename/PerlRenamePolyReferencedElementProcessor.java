@@ -26,14 +26,17 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.PsiElementRenameHandler;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.PodLanguage;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hurricup on 03.10.2015.
@@ -67,6 +70,18 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
           allRenames.put(overridingSub, newName);
         }
       }
+
+      // following is the hack until #1730 is fixed
+      Set<PsiElement> allElements = new THashSet<>(allRenames.keySet());
+      allElements.stream()
+        .filter(e -> e instanceof PerlClassAccessorMethod)
+        .forEach(e -> {
+          PerlClassAccessorMethod pairedMethod = ((PerlClassAccessorMethod)e).getPairedMethod();
+          if (pairedMethod != null && allRenames.containsKey(e)) {
+            allRenames.remove(pairedMethod);
+          }
+        });
+
     }
   }
 
