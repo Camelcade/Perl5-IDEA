@@ -39,6 +39,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testIssue1723() {doShadowingTest();}
 
+  public void testIssue1726() {doTestUnresolvedSubInspection();}
+
   public void testUseVarsShadowing() {doShadowingTest();}
 
   public void testUseVarsShadowingReversal() {doShadowingTest();}
@@ -94,7 +96,11 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testUnusedSubInspection() {doInspectionTest(PerlUnusedSubInspection.class);}
 
-  public void testUnresolvedSubInspection() {doInspectionTest(PerlUnresolvedSubInspection.class);}
+  public void testUnresolvedSubInspection() {doTestUnresolvedSubInspection();}
+
+  private void doTestUnresolvedSubInspection() {
+    doInspectionTest(PerlUnresolvedSubInspection.class);
+  }
 
   public void testSimpleMainResolutionTrue() {doTestSimpleMainResolution(true);}
 

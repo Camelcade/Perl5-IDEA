@@ -27,7 +27,9 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 14.06.2015.
@@ -40,12 +42,10 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
       @Override
       public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {
         if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o)) {
-          PsiReference reference = o.getReference();
-          if (reference == null || reference.resolve() == null) {
+          if (!isResolvable(o.getReference())) {
             registerProblem(holder, o, PerlBundle.message("perl.inspection.no.exported.entity"));
           }
         }
-        super.visitStringContentElement(o);
       }
 
       @Override
@@ -61,15 +61,24 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
         }
 
         for (PsiReference reference : subNameElement.getReferences()) {
-          if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length > 0) {
-            return;
-          }
-          else if (reference.resolve() != null) {
+          if (isResolvable(reference)) {
             return;
           }
         }
         registerProblem(holder, subNameElement, PerlBundle.message("perl.inspection.no.sub.definition"));
       }
     };
+  }
+
+  @Contract("null->false")
+  private static boolean isResolvable(@Nullable PsiReference reference) {
+    if (reference == null) {
+      return false;
+    }
+
+    if (reference instanceof PsiPolyVariantReference) {
+      return ((PsiPolyVariantReference)reference).multiResolve(false).length > 0;
+    }
+    return reference.resolve() != null;
   }
 }

@@ -1,0 +1,7 @@
+package Foo::Something;
+
+our @EXPORT = qw/somesub/;
+
+sub somesub;
+
+sub somesub{}
