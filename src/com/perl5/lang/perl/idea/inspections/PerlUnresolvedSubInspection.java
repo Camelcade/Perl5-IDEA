@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
@@ -41,7 +42,7 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
         if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o)) {
           PsiReference reference = o.getReference();
           if (reference == null || reference.resolve() == null) {
-            registerProblem(holder, o, "Unable to find exported entity");
+            registerProblem(holder, o, PerlBundle.message("perl.inspection.no.exported.entity"));
           }
         }
         super.visitStringContentElement(o);
@@ -51,8 +52,6 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
       public void visitPerlMethod(@NotNull PerlMethod o) {
         PerlNamespaceElement namespaceElement = o.getNamespaceElement();
         PerlSubNameElement subNameElement = o.getSubNameElement();
-
-        boolean hasExplicitNamespace = namespaceElement != null && !namespaceElement.isCORE();
 
         // fixme adjust built in checking to the file; Remove second condition after implementing annotations
         if (subNameElement == null ||
@@ -69,7 +68,7 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
             return;
           }
         }
-        registerProblem(holder, subNameElement, "Unable to find sub definition, declaration, constant definition or typeglob aliasing");
+        registerProblem(holder, subNameElement, PerlBundle.message("perl.inspection.no.sub.definition"));
       }
     };
   }
