@@ -129,11 +129,6 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return this;
   }
 
-  @Override
-  public String getPresentableName() {
-    return myPackageName;
-  }
-
   @Nullable
   @Override
   public PerlNamespaceElement getNamespaceElement() {

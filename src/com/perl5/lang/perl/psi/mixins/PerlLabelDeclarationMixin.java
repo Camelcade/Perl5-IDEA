@@ -37,11 +37,6 @@ public class PerlLabelDeclarationMixin extends PerlCompositeElementImpl implemen
   }
 
   @Override
-  public String getPresentableName() {
-    return getName();
-  }
-
-  @Override
   public String getName() {
     PsiElement nameIdentifier = getNameIdentifier();
     if (nameIdentifier != null) {

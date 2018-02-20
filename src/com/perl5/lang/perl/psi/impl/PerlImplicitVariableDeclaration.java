@@ -208,7 +208,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Override
   public String getPresentableName() {
-    return getCanonicalName();
+    return isLocalDeclaration() ? getName() : getCanonicalName();
   }
 
   @Nullable
