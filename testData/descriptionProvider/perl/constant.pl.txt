@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: CONST_NAME
+UsageViewLongNameLocation: constant 'CONST_NAME'
+UsageViewTypeLocation: constant
+UsageViewNodeTextLocation: CONST_NAME
+NonCodeSearchDescriptionLocation: CONST_NAME
+DeleteNameDescriptionLocation: CONST_NAME
+DeleteTypeDescriptionLocation: constant
+DeleteTypeDescriptionLocation: constants

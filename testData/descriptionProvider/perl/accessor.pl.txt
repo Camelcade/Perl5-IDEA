@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: accessor_name
+UsageViewLongNameLocation: accessor 'accessor_name'
+UsageViewTypeLocation: accessor
+UsageViewNodeTextLocation: accessor_name
+NonCodeSearchDescriptionLocation: accessor_name
+DeleteNameDescriptionLocation: accessor_name
+DeleteTypeDescriptionLocation: accessor
+DeleteTypeDescriptionLocation: accessors

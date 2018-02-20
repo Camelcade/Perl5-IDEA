@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: sub_name
+UsageViewLongNameLocation: sub declaration 'sub_name'
+UsageViewTypeLocation: sub declaration
+UsageViewNodeTextLocation: sub_name
+NonCodeSearchDescriptionLocation: sub_name
+DeleteNameDescriptionLocation: sub_name
+DeleteTypeDescriptionLocation: sub declaration
+DeleteTypeDescriptionLocation: sub declarations

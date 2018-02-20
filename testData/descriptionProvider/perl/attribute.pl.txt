@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: attr_name
+UsageViewLongNameLocation: method 'attr_name'
+UsageViewTypeLocation: method
+UsageViewNodeTextLocation: attr_name
+NonCodeSearchDescriptionLocation: attr_name
+DeleteNameDescriptionLocation: attr_name
+DeleteTypeDescriptionLocation: method
+DeleteTypeDescriptionLocation: methods

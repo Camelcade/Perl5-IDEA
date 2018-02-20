@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: sub_name
+UsageViewLongNameLocation: sub definition 'sub_name'
+UsageViewTypeLocation: sub definition
+UsageViewNodeTextLocation: sub_name
+NonCodeSearchDescriptionLocation: sub_name
+DeleteNameDescriptionLocation: sub_name
+DeleteTypeDescriptionLocation: sub definition
+DeleteTypeDescriptionLocation: sub definitions

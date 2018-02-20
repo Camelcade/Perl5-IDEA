@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: Foo::Bazzz
+UsageViewLongNameLocation: namespace 'Foo::Bazzz'
+UsageViewTypeLocation: namespace
+UsageViewNodeTextLocation: Foo::Bazzz
+NonCodeSearchDescriptionLocation: Foo::Bazzz
+DeleteNameDescriptionLocation: Foo::Bazzz
+DeleteTypeDescriptionLocation: namespace
+DeleteTypeDescriptionLocation: namespaces

@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: func_name
+UsageViewLongNameLocation: function 'func_name'
+UsageViewTypeLocation: function
+UsageViewNodeTextLocation: func_name
+NonCodeSearchDescriptionLocation: func_name
+DeleteNameDescriptionLocation: func_name
+DeleteTypeDescriptionLocation: function
+DeleteTypeDescriptionLocation: functions

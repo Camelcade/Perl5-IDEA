@@ -34,8 +34,6 @@ import com.perl5.lang.perl.parser.moose.psi.impl.PerlAttributeDefinition;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.mixins.PerlFuncDefinitionMixin;
-import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -53,9 +51,6 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
     if (location == DeleteNameDescriptionLocation.INSTANCE) {
       return ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
     }
-    else if (location == UsageViewNodeTextLocation.INSTANCE) {
-      return ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
-    }
     else if (location == DeleteTypeDescriptionLocation.SINGULAR) {
       return ElementDescriptionUtil.getElementDescription(element, UsageViewTypeLocation.INSTANCE);
     }
@@ -63,15 +58,19 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       return StringUtil.pluralize(ElementDescriptionUtil.getElementDescription(element, DeleteTypeDescriptionLocation.SINGULAR));
     }
     else if (location == UsageViewShortNameLocation.INSTANCE) {
-      if (element instanceof PerlIdentifierOwner) {
-        return ((PerlIdentifierOwner)element).getPresentableName();
-      }
-      else if (element instanceof PerlPackageMember) {
-        return ((PerlPackageMember)element).getCanonicalName();
-      }
-      else if (element instanceof PsiNamedElement) {
+      if (element instanceof PsiNamedElement) {
         return ((PsiNamedElement)element).getName();
       }
+    }
+    else if (location == UsageViewLongNameLocation.INSTANCE) {
+      return MessageFormat.format(
+        "{0} ''{1}''",
+        ElementDescriptionUtil.getElementDescription(element, UsageViewTypeLocation.INSTANCE),
+        ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
+      );
+    }
+    else if (location == UsageViewNodeTextLocation.INSTANCE) {
+      return ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
     }
     else if (location == UsageViewTypeLocation.INSTANCE) {
       if (element instanceof MojoHelperDefinition) {
@@ -86,7 +85,10 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       else if (element instanceof PerlLightExceptionClassDefinition) {
         return PerlBundle.message("perl.type.exception");
       }
-      else if (element instanceof PerlMethodDefinition || (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod())) {
+      else if (element instanceof PerlLightConstantDefinitionElement) {
+        return PerlBundle.message("perl.type.constant");
+      }
+      else if (element instanceof PerlMethodDefinition || element instanceof PerlSubDefinition && ((PerlSubDefinition)element).isMethod()) {
         return PerlBundle.message("perl.type.method");
       }
       else if (element instanceof PerlSubDeclarationElement) {
@@ -97,9 +99,6 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       }
       else if (element instanceof PerlFuncDefinitionMixin) {
         return PerlBundle.message("perl.type.function");
-      }
-      else if (element instanceof PerlLightConstantDefinitionElement) {
-        return PerlBundle.message("perl.type.constant");
       }
       else if (element instanceof PerlSubDefinitionElement) {
         return PerlBundle.message("perl.type.sub.definition");
@@ -116,12 +115,8 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       else if (element instanceof PerlGlobVariable) {
         return PerlBundle.message("perl.type.typeglob");
       }
-      else if (element instanceof PerlVariable || element instanceof PerlVariableDeclarationElement) {
-        if (element instanceof PerlVariableDeclarationElement) {
-          element = ((PerlVariableDeclarationElement)element).getVariable();
-        }
-
-        PerlVariableType actualType = ((PerlVariable)element).getActualType();
+      else if (element instanceof PerlVariableDeclarationElement) {
+        PerlVariableType actualType = ((PerlVariableDeclarationElement)element).getVariable().getActualType();
         if (actualType == PerlVariableType.ARRAY) {
           return PerlBundle.message("perl.type.array");
         }
@@ -136,17 +131,6 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
         return getElementDescription(element.getParent(), location);
       }
     }
-    else if (location == UsageViewLongNameLocation.INSTANCE) {
-      return MessageFormat.format(
-        "{0} ''{1}''",
-        ElementDescriptionUtil.getElementDescription(element, UsageViewTypeLocation.INSTANCE),
-        ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
-      );
-    }
-    else {
-      return "Unhandled location " + location;
-    }
-
     return null;
   }
 }
