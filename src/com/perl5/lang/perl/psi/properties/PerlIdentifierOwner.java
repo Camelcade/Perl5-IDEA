@@ -17,15 +17,15 @@
 package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiNameIdentifierOwner;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.04.2015.
  */
 public interface PerlIdentifierOwner extends PsiNameIdentifierOwner {
   /**
-   * Getting name for presentation
-   *
-   * @return ^^
+   * @return name for element presentation
    */
-  String getPresentableName();
+  @Nullable
+  default String getPresentableName() {return getName();}
 }

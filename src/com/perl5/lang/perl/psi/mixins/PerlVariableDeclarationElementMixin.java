@@ -68,11 +68,6 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
 
   @Override
-  public String getPresentableName() {
-    return getName();
-  }
-
-  @Override
   public String getVariableName() {
     return getName();
   }

@@ -124,11 +124,6 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
     return myExportTags;
   }
 
-  @Override
-  public String getPresentableName() {
-    return getPackageName();
-  }
-
   @Nullable
   @Override
   public PerlNamespaceElement getNamespaceElement() {

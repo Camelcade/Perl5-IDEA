@@ -181,10 +181,6 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
 
-  @Override
-  public String getPresentableName() {
-    return getName();
-  }
 
   @NotNull
   @Override

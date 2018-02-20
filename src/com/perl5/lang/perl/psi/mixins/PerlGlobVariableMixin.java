@@ -170,10 +170,6 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     return getParent() instanceof PsiPerlAssignExpr && getNextSibling() != null;
   }
 
-  @Override
-  public String getPresentableName() {
-    return getName();
-  }
 
   @Override
   public int getTextOffset() {

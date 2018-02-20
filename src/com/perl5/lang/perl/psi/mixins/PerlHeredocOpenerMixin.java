@@ -93,8 +93,4 @@ public abstract class PerlHeredocOpenerMixin extends PerlCompositeElementImpl im
     return new LocalSearchScope(getContainingFile());
   }
 
-  @Override
-  public String getPresentableName() {
-    return getName();
-  }
 }

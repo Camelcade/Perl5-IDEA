@@ -57,11 +57,6 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
   }
 
   @Override
-  public String getPresentableName() {
-    return this.getName();
-  }
-
-  @Override
   public boolean isMethod() {
     return true;
   }
