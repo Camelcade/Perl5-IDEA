@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: helper_name
+UsageViewLongNameLocation: helper 'helper_name'
+UsageViewTypeLocation: helper
+UsageViewNodeTextLocation: helper_name
+NonCodeSearchDescriptionLocation: helper_name
+DeleteNameDescriptionLocation: helper_name
+DeleteTypeDescriptionLocation: helper
+DeleteTypeDescriptionLocation: helpers

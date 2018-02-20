@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: typeglob_name
+UsageViewLongNameLocation: typeglob 'typeglob_name'
+UsageViewTypeLocation: typeglob
+UsageViewNodeTextLocation: typeglob_name
+NonCodeSearchDescriptionLocation: typeglob_name
+DeleteNameDescriptionLocation: typeglob_name
+DeleteTypeDescriptionLocation: typeglob
+DeleteTypeDescriptionLocation: typeglobs

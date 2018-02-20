@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: method_name
+UsageViewLongNameLocation: method 'method_name'
+UsageViewTypeLocation: method
+UsageViewNodeTextLocation: method_name
+NonCodeSearchDescriptionLocation: method_name
+DeleteNameDescriptionLocation: method_name
+DeleteTypeDescriptionLocation: method
+DeleteTypeDescriptionLocation: methods

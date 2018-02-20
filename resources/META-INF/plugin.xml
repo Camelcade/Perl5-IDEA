@@ -77,7 +77,8 @@
         <li>Parsing <code>$1x</code> as variable name and <code>x</code> operator, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1667">#1667</a></li>
         <li>Resolve from methods declared with <code>method</code> keyword in certain frameworks, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1669">#1669</a></li>
         <li>Additional formatting cases</li>
-        <li>False unresolved sub warning in <code>Exporter</code> array in case of multiple targets available, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1669">#1726</a></li>
+        <li>False unresolved sub warning in <code>Exporter</code> array in case of multiple targets available, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1726">#1726</a></li>
+        <li>Dialog rename for accessors now suggests proper name, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1719">#1719</a></li>
       </ul>
      </p>
     ]]>

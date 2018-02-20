@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: EOM
+UsageViewLongNameLocation: heredoc marker 'EOM'
+UsageViewTypeLocation: heredoc marker
+UsageViewNodeTextLocation: EOM
+NonCodeSearchDescriptionLocation: EOM
+DeleteNameDescriptionLocation: EOM
+DeleteTypeDescriptionLocation: heredoc marker
+DeleteTypeDescriptionLocation: heredoc markers

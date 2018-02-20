@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: variable_name
+UsageViewLongNameLocation: hash 'variable_name'
+UsageViewTypeLocation: hash
+UsageViewNodeTextLocation: variable_name
+NonCodeSearchDescriptionLocation: variable_name
+DeleteNameDescriptionLocation: variable_name
+DeleteTypeDescriptionLocation: hash
+DeleteTypeDescriptionLocation: hashes

@@ -33,6 +33,8 @@ import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.util.DeleteNameDescriptionLocation;
+import com.intellij.ide.util.DeleteTypeDescriptionLocation;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
@@ -71,11 +73,12 @@ import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
-import com.intellij.usageView.UsageInfo;
+import com.intellij.usageView.*;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -1181,4 +1184,42 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     sb.append("\n");
   }
 
+  private static final List<ElementDescriptionLocation> LOCATIONS = Arrays.asList(
+    UsageViewShortNameLocation.INSTANCE,
+    UsageViewLongNameLocation.INSTANCE,
+    UsageViewTypeLocation.INSTANCE,
+    UsageViewNodeTextLocation.INSTANCE,
+    NonCodeSearchDescriptionLocation.STRINGS_AND_COMMENTS,
+    DeleteNameDescriptionLocation.INSTANCE,
+    DeleteTypeDescriptionLocation.SINGULAR,
+    DeleteTypeDescriptionLocation.PLURAL
+  );
+
+  protected void doElementDescriptionTest() {
+    initWithFileSmartWithoutErrors();
+    doElementDescriptionCheck();
+  }
+
+  protected void doElementDescriptionTest(@NotNull String content) {
+    initWithTextSmart(content);
+    assertNoErrorElements();
+    doElementDescriptionCheck();
+  }
+
+  private void doElementDescriptionCheck() {
+    PsiElement elementAtCaret = myFixture.getElementAtCaret();
+    assertNotNull(elementAtCaret);
+    StringBuilder actualDump = new StringBuilder();
+    LOCATIONS.forEach(
+      location -> {
+        String actual = ElementDescriptionUtil.getElementDescription(elementAtCaret, location);
+        String locationName = location.getClass().getSimpleName();
+        actualDump.append(locationName)
+          .append(": ")
+          .append(actual)
+          .append("\n");
+      }
+    );
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), actualDump.toString());
+  }
 }

@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: variable_name
+UsageViewLongNameLocation: array 'variable_name'
+UsageViewTypeLocation: array
+UsageViewNodeTextLocation: variable_name
+NonCodeSearchDescriptionLocation: variable_name
+DeleteNameDescriptionLocation: variable_name
+DeleteTypeDescriptionLocation: array
+DeleteTypeDescriptionLocation: arrays

@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: variable_name
+UsageViewLongNameLocation: scalar 'variable_name'
+UsageViewTypeLocation: scalar
+UsageViewNodeTextLocation: variable_name
+NonCodeSearchDescriptionLocation: variable_name
+DeleteNameDescriptionLocation: variable_name
+DeleteTypeDescriptionLocation: scalar
+DeleteTypeDescriptionLocation: scalars

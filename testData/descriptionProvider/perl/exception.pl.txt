@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: Seption1
+UsageViewLongNameLocation: exception 'Seption1'
+UsageViewTypeLocation: exception
+UsageViewNodeTextLocation: Seption1
+NonCodeSearchDescriptionLocation: Seption1
+DeleteNameDescriptionLocation: Seption1
+DeleteTypeDescriptionLocation: exception
+DeleteTypeDescriptionLocation: exceptions
