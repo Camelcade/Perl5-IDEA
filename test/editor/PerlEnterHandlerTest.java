@@ -24,6 +24,8 @@ public class PerlEnterHandlerTest extends PerlLightTestCase {
     return "testData/enterHandler/perl";
   }
 
+  public void testEmpty() {doTest();}
+
   public void testCommentMiddle() {
     doTest();
   }
