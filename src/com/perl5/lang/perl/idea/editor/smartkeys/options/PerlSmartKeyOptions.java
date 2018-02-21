@@ -33,6 +33,10 @@ public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettin
     checkBox(PerlBundle.message("perl.options.auto.heredoc"),
              () -> getInstance().HEREDOC_AUTO_INSERTION,
              value -> getInstance().HEREDOC_AUTO_INSERTION = value);
+    checkBox(PerlBundle.message("perl.options.auto.colon"),
+             () -> getInstance().AUTO_INSERT_COLON,
+             value -> getInstance().AUTO_INSERT_COLON = value);
+
   }
 
   @Override

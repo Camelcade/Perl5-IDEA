@@ -22,7 +22,9 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 /**
  * Created by hurricup on 22.11.2015.
@@ -33,8 +35,9 @@ import org.jetbrains.annotations.Nullable;
 
 )
 
-public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings> {
+public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings>, Cloneable {
   public boolean HEREDOC_AUTO_INSERTION = true;
+  public boolean AUTO_INSERT_COLON = true;
 
   @Nullable
   @Override
@@ -43,11 +46,16 @@ public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5C
   }
 
   @Override
-  public void loadState(Perl5CodeInsightSettings state) {
+  public void loadState(@NotNull Perl5CodeInsightSettings state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 
   public static Perl5CodeInsightSettings getInstance() {
     return ServiceManager.getService(Perl5CodeInsightSettings.class);
+  }
+
+  @TestOnly
+  public Perl5CodeInsightSettings copy() throws CloneNotSupportedException {
+    return (Perl5CodeInsightSettings)super.clone();
   }
 }
