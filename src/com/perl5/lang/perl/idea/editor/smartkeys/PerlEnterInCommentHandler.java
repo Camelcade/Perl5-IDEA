@@ -47,6 +47,9 @@ public class PerlEnterInCommentHandler extends EnterHandlerDelegateAdapter {
 
     assert editor instanceof EditorEx;
     HighlighterIterator highlighterIterator = ((EditorEx)editor).getHighlighter().createIterator(currentOffset);
+    if (highlighterIterator.atEnd()) {
+      return Result.Continue;
+    }
     IElementType currentTokenType = highlighterIterator.getTokenType();
     int currentTokenStart = highlighterIterator.getStart();
 
