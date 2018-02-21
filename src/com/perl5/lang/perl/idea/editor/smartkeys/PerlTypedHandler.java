@@ -56,8 +56,13 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     RESERVED_Y
   );
 
+  @NotNull
   @Override
-  public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+  public Result beforeCharTyped(char c,
+                                @NotNull Project project,
+                                @NotNull Editor editor,
+                                @NotNull PsiFile file,
+                                @NotNull FileType fileType) {
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset();
     Document document = editor.getDocument();
@@ -86,8 +91,9 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     return Result.CONTINUE;
   }
 
+  @NotNull
   @Override
-  public Result charTyped(char typedChar, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     int offset = editor.getCaretModel().getOffset() - 1;
     if (offset < 0) {
       return Result.CONTINUE;
