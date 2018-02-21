@@ -36,7 +36,8 @@ public class PerlUnresolvedNamespaceInspection extends PerlInspection {
         PsiElement parent = o.getParent();
 
         if (parent instanceof PsiPerlRequireExpr ||
-            parent instanceof PsiPerlUseStatement && !(parent instanceof PsiPerlNoStatement) ||
+            parent instanceof PsiPerlUseStatement ||
+            parent instanceof PsiPerlNoStatement ||
             parent instanceof PerlNamespaceDefinitionWithIdentifier) {
           return;
         }

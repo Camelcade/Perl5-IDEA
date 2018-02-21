@@ -18,10 +18,7 @@ package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
-import com.perl5.lang.perl.psi.PsiPerlUseStatement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +35,13 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
 
       @Override
       public void visitUseStatement(@NotNull PsiPerlUseStatement o) {
+        if (o.getNamespaceElement() != null) {
+          checkPackageFile(o.getNamespaceElement());
+        }
+      }
+
+      @Override
+      public void visitNoStatement(@NotNull PsiPerlNoStatement o) {
         if (o.getNamespaceElement() != null) {
           checkPackageFile(o.getNamespaceElement());
         }

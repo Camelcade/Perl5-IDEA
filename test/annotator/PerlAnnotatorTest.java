@@ -119,7 +119,15 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testUnresolvedPackageFileInspection() {doInspectionTest(PerlUnresolvedPackageFileInspection.class);}
 
-  public void testUnresolvedNamespaceInspection() {doInspectionTest(PerlUnresolvedNamespaceInspection.class);}
+  public void testUnresolvedNamespaceInspection() {doTestUnresolvedNamespaceInspection();}
+
+  public void testIssue1733() {
+    doTestUnresolvedNamespaceInspection();
+  }
+
+  private void doTestUnresolvedNamespaceInspection() {
+    doInspectionTest(PerlUnresolvedNamespaceInspection.class);
+  }
 
   public void testMultipleNamespaceDefinitionInspection() {doInspectionTest(PerlMultipleNamespaceDefinitionsInspection.class);}
 
