@@ -6,5 +6,5 @@ Mojolicious::Controller->app();
 UNIVERSAL->can();
 
 use Foo::Bar24;
-no <warning descr="Unable to find namespace definition">Foo::Bar24</warning>;
+no Foo::Bar24;
 require Foo::Bar24;

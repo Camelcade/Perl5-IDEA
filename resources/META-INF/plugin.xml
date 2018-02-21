@@ -80,6 +80,7 @@
         <li>Additional formatting cases</li>
         <li>False unresolved sub warning in <code>Exporter</code> array in case of multiple targets available, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1726">#1726</a></li>
         <li>Dialog rename for accessors now suggests proper name, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1719">#1719</a></li>
+        <li>False unresolved namespace warning in <code>no</code> statements, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1733">#1733</a></li>
       </ul>
      </p>
     ]]>
