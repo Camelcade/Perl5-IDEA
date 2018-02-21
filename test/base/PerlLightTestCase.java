@@ -87,6 +87,7 @@ import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
+import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
@@ -125,6 +126,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
   private Disposable myDisposable;
+  private Perl5CodeInsightSettings myCodeInsightSettings;
 
   public String getFileExtension() {
     return PerlFileTypeScript.EXTENSION_PL;
@@ -141,11 +143,13 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
     setUpLibrary();
+    myCodeInsightSettings = Perl5CodeInsightSettings.getInstance().copy();
   }
 
   @Override
   protected void tearDown() throws Exception {
     try {
+      Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
       ApplicationManager.getApplication()
         .invokeAndWait(() -> PerlProjectManager.getInstance(getProject()).setExternalLibraries(Collections.emptyList()));
       Disposer.dispose(myDisposable);

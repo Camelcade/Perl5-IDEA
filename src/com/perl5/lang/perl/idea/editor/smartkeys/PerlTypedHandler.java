@@ -35,6 +35,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
@@ -67,14 +68,14 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     int currentOffset = caretModel.getOffset();
     Document document = editor.getDocument();
     CharSequence documentSequence = document.getCharsSequence();
-    if (currentOffset >= documentSequence.length()) {
+    if (currentOffset > documentSequence.length()) {
       return Result.CONTINUE;
     }
 
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
     HighlighterIterator iterator = highlighter.createIterator(currentOffset);
-    IElementType nextTokenType = iterator.getTokenType();
-    char nextChar = documentSequence.charAt(currentOffset);
+    IElementType nextTokenType = iterator.atEnd() ? null : iterator.getTokenType();
+    char nextChar = currentOffset == documentSequence.length() ? 0 : documentSequence.charAt(currentOffset);
     if (c == '<' && nextTokenType == QUOTE_DOUBLE_CLOSE && nextChar == '>' &&
         currentOffset > 0 && documentSequence.charAt(currentOffset - 1) == '<' &&
         (currentOffset < 3 || PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(currentOffset - 2)) != RESERVED_QQ)) {
@@ -88,6 +89,13 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
       return Result.STOP;
     }
 
+    if (c == ':' && nextTokenType == PACKAGE && Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON) {
+      document.insertString(currentOffset, "::");
+      caretModel.moveToOffset(currentOffset + 2);
+      AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
+      return Result.STOP;
+    }
+
     return Result.CONTINUE;
   }
 
@@ -98,6 +106,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     if (offset < 0) {
       return Result.CONTINUE;
     }
+
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
     HighlighterIterator iterator = highlighter.createIterator(offset);
     IElementType elementTokenType = iterator.getTokenType();

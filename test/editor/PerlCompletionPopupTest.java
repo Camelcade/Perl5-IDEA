@@ -21,6 +21,7 @@ import com.intellij.codeInsight.lookup.LookupEx;
 import com.intellij.codeInsight.lookup.LookupManager;
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlCompletionPopupTest extends PerlLightTestCase {
@@ -35,6 +36,16 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
   @Override
   public String getFileExtension() {
     return PerlFileTypePackage.EXTENSION; // requires for package.. test
+  }
+
+  public void testAutoColonUseEnabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
+    doTest("use Mojolicious<caret>", ":");
+  }
+
+  public void testAutoColonUseDisabled() {
+    Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
+    doTestNegative("use Mojolicious<caret>", ":");
   }
 
   public void testUse() {doTest("use<caret>", " ");}

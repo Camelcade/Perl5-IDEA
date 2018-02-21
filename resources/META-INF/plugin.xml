@@ -62,6 +62,7 @@
         <li>Debugger now allows you to inspect IO layers (requires <code>Devel::Camelcadedb</code> v2017.100.3+)</li>
         <li><code>Data::Printer</code> exports should work fine now, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1698">#1698</a></li>
         <li><code>cpanfile</code> is now recognized as a perl file. To make resolve and completion work, you should have <a href="http://search.cpan.org/~miyagawa/Carton/"><code>carton</code></a> installed, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1716">@Nowaker</a></li>
+        <li>Typing colon after a package automatically inserting a second one and opening completion popup, configurable via Smart Keys settings, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1732">#1732</a></li>
      </ul>
      </p>
      <p>Fixes:
