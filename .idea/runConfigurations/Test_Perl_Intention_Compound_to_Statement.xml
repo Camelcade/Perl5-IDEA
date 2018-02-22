@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Usages Highlighting" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests" singleton="true">
+  <configuration default="false" name="Test Perl Intention Compound to Statement" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=editor/PerlUsagesHighlightingTest" />
+      <option name="scriptParameters" value="-Pruntest=editor/intentions/PerlCompoundToStatementIntentionsTest" />
       <option name="taskDescriptions">
         <list />
       </option>
