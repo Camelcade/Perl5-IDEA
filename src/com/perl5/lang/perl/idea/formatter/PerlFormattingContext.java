@@ -515,14 +515,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       }
     }
 
-    List<Block> blocks = block.getSubBlocks();
-    if (!blocks.isEmpty()) {
-      Block lastBlock = blocks.get(blocks.size() - 1);
-      if (lastBlock.isIncomplete()) {
-        return true;
-      }
-    }
-
     return null;
   }
 
