@@ -131,16 +131,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   /**
    * Elements that must have LF between them
    */
-  public final static TokenSet LF_ELEMENTS = TokenSet.create(
-    LABEL_DECLARATION,
-    STATEMENT,
-    FOR_COMPOUND,
-    WHILE_COMPOUND,
-    WHEN_COMPOUND,
-    UNTIL_COMPOUND,
-    IF_COMPOUND,
-    USE_STATEMENT
-  );
+  public final static TokenSet LF_ELEMENTS = TokenSet.orSet(
+    STATEMENTS,
+    TokenSet.create(
+      LABEL_DECLARATION,
+      FOR_COMPOUND,
+      WHILE_COMPOUND,
+      WHEN_COMPOUND,
+      UNTIL_COMPOUND,
+      IF_COMPOUND
+    ));
   private final static MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
 
   static {
@@ -373,8 +373,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (SIGNATURES_CONTAINERS.contains(parentNodeType)) {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
     }
-    else if (( childNodeType == VARIABLE_DECLARATION_ELEMENT ||
-               ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) ) ) &&
+    else if ((childNodeType == VARIABLE_DECLARATION_ELEMENT ||
+              (childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType))) &&
              myPerlSettings.ALIGN_VARIABLE_DECLARATIONS) {
       return myElementsALignmentsMap.get(parentNode);
     }
@@ -430,12 +430,12 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return getWrapBySettings(parentNode, mySettings.ARRAY_INITIALIZER_WRAP, false);
       }
     }
-    else if (( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
-             ( childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
+    else if ((parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
+             (childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
       return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
-             ( childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType) )) {
+             (childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType))) {
       return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
@@ -466,13 +466,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   @NotNull
   private WrapType getWrapType(int settingsOption) {
-    if (( settingsOption & WRAP_ON_EVERY_ITEM ) != 0) {
+    if ((settingsOption & WRAP_ON_EVERY_ITEM) != 0) {
       return CHOP_DOWN_IF_LONG;
     }
-    else if (( settingsOption & WRAP_ALWAYS ) != 0) {
+    else if ((settingsOption & WRAP_ALWAYS) != 0) {
       return ALWAYS;
     }
-    else if (( settingsOption & WRAP_AS_NEEDED ) != 0) {
+    else if ((settingsOption & WRAP_AS_NEEDED) != 0) {
       return NORMAL;
     }
     return NONE;
@@ -523,5 +523,4 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
     return null;
   }
-
 }
