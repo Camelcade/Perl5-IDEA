@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Perl Live Templates" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl LiveTemplates Tests" singleton="true">
+  <configuration default="false" name="Test Perl Live Templates" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />

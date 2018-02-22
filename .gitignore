@@ -6,6 +6,7 @@ classes/
 gen/
 *.iml
 .idea/
+!.idea/runConfigurations/
 tmp/
 icons/*.psd
 
