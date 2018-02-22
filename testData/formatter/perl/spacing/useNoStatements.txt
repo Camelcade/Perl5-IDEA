@@ -1,0 +1,7 @@
+use Foo;
+no Bar;
+$a;
+$b;
+$c;
+no Foo;
+use Bar;
