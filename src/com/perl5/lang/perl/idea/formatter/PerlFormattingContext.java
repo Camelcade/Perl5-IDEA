@@ -52,6 +52,7 @@ import java.util.Map;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
   public final static TokenSet BLOCK_OPENERS = TokenSet.create(
@@ -508,11 +509,16 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   @Nullable
   public Boolean isIncomplete(@NotNull PerlAstBlock block) {
-    if (block.getElementType() == COMMA_SEQUENCE_EXPR) {
+    IElementType elementType = block.getElementType();
+    if (elementType == COMMA_SEQUENCE_EXPR) {
       IElementType lastNodeType = PsiUtilCore.getElementType(block.getNode().getLastChildNode());
       if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
         return true;
       }
+    }
+    else if (STATEMENTS.contains(elementType)) {
+      PsiElement lastLeaf = PsiTreeUtil.getDeepestLast(block.getNode().getPsi());
+      return PsiUtilCore.getElementType(lastLeaf) != SEMICOLON;
     }
 
     return null;

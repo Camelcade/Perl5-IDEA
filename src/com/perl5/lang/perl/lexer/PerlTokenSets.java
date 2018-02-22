@@ -232,4 +232,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     SIGIL_SCALAR, SIGIL_ARRAY, SIGIL_HASH, SIGIL_GLOB, SIGIL_CODE, SIGIL_SCALAR_INDEX
   );
 
+  TokenSet STATEMENTS = TokenSet.create(
+    STATEMENT, USE_STATEMENT, NO_STATEMENT
+  );
 }
