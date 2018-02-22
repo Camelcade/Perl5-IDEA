@@ -22,8 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -233,6 +235,12 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
     if (getBlockLikeContainers().contains(elementType)) {
       return Indent.getNormalIndent();
+    }
+
+    if (block instanceof PerlSyntheticBlock && block.getSubBlocks().size() == newChildIndex) {
+      ASTNode parentNode = block.getNode();
+      ASTNode grandParentNode = parentNode.getTreeParent();
+      return PsiUtilCore.getElementType(grandParentNode) == STATEMENT ? Indent.getNormalIndent() : Indent.getNoneIndent();
     }
 
     return null;

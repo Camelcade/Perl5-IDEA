@@ -117,7 +117,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
     return myWrap;
   }
 
-  @NotNull
+  @Nullable
   @Override
   public Indent getIndent() {
     return myIndent;
@@ -143,7 +143,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
   @NotNull
   @Override
   public ChildAttributes getChildAttributes(int newChildIndex) {
-    return new ChildAttributes(null, null);
+    return myContext.getChildAttributes(this, newChildIndex);
   }
 
   @Override
