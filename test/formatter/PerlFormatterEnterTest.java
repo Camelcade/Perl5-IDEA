@@ -22,6 +22,8 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/enter";
   }
 
+  public void testIncompleteStatement() {doTest();}
+
   public void testPlainQqString() {doTest();}
 
   public void testPlainQString() {doTest();}
