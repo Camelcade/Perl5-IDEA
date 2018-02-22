@@ -484,7 +484,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   @NotNull
   public final ChildAttributes getChildAttributes(@NotNull PerlAstBlock block, int newChildIndex) {
-    return new ChildAttributes(getChildIndent(block, newChildIndex), getChildAlignment(block, newChildIndex));
+    return new ChildAttributes(getIndentProcessor().getChildIndent(block, newChildIndex), getChildAlignment(block, newChildIndex));
   }
 
   @Nullable
@@ -503,22 +503,6 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         return alignment;
       }
     }
-    return null;
-  }
-
-  @Nullable
-  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
-    IElementType elementType = block.getElementType();
-
-    PerlIndentProcessor indentProcessor = getIndentProcessor();
-    if (indentProcessor.getUnindentableContainers().contains(elementType)) {
-      return Indent.getNoneIndent();
-    }
-
-    if (indentProcessor.getBlockLikeContainers().contains(elementType)) {
-      return Indent.getNormalIndent();
-    }
-
     return null;
   }
 

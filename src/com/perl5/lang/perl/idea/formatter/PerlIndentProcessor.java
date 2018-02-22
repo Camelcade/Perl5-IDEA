@@ -23,12 +23,14 @@ import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLOSERS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
@@ -220,5 +222,21 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
 
     return forceFirstIndent ? Indent.getContinuationIndent() : Indent.getContinuationWithoutFirstIndent();
   }
+
+  @Nullable
+  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+    IElementType elementType = block.getElementType();
+
+    if (getUnindentableContainers().contains(elementType)) {
+      return Indent.getNoneIndent();
+    }
+
+    if (getBlockLikeContainers().contains(elementType)) {
+      return Indent.getNormalIndent();
+    }
+
+    return null;
+  }
+
 }
 

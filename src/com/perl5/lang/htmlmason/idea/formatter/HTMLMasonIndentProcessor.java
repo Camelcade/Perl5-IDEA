@@ -16,10 +16,15 @@
 
 package com.perl5.lang.htmlmason.idea.formatter;
 
+import com.intellij.formatting.Indent;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 07.03.2016.
@@ -101,4 +106,15 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
   public TokenSet getBlockLikeContainers() {
     return BLOCK_LIKE_CONTAINERS;
   }
+
+  @Nullable
+  @Override
+  public Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
+    IElementType elementType = block.getElementType();
+    if (elementType == HTML_MASON_ARGS_BLOCK || elementType == HTML_MASON_ATTR_BLOCK) {
+      return Indent.getNormalIndent();
+    }
+    return super.getChildIndent(block, newChildIndex);
+  }
 }
+
