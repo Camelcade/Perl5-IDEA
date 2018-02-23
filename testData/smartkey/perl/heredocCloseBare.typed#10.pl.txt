@@ -1,7 +1,0 @@
-<<EOM;
-
-EOM
-
-
-
-say 'something';
