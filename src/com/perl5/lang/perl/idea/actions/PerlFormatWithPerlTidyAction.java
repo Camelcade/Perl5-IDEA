@@ -21,7 +21,6 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -31,6 +30,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -44,7 +44,6 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigur
 import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.event.HyperlinkEvent;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -54,7 +53,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   public static final String PERL_TIDY_WINDOWS_NAME = PERL_TIDY_LINUX_NAME + ".bat";
   public static final String PERL_TIDY_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_TIDY_WINDOWS_NAME : PERL_TIDY_LINUX_NAME;
 
-  public static final String PERL_TIDY_GROUP = "PERL5_PERL_TIDY";
+  public static final String PERL_TIDY_GROUP = PerlBundle.message("perl.action.perl.tidy.notification.group");
 
   public PerlFormatWithPerlTidyAction() {
     getTemplatePresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
@@ -67,7 +66,11 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     }
     final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
     //noinspection ConstantConditions
-    return super.isMyFile(file) && file.isWritable();
+    if (!super.isMyFile(file) || !file.isWritable()) {
+      return false;
+    }
+    event.getPresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy.specific", file.getName()));
+    return true;
   }
 
   protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException {
@@ -75,7 +78,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
     String executable = localSettings.PERL_TIDY_PATH;
     if (StringUtil.isEmpty(executable)) {
-      throw new ExecutionException("Path to PerlTidy executable must be configured in perl settings");
+      throw new ExecutionException(PerlBundle.message("perl.action.perl.tidy.execution.exception"));
     }
     GeneralCommandLine commandLine = new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
 
@@ -126,7 +129,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               catch (IOException e) {
                 Notifications.Bus.notify(new Notification(
                   PERL_TIDY_GROUP,
-                  "Re-formatting error",
+                  PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
                   e.getMessage(),
                   NotificationType.ERROR
                 ));
@@ -150,7 +153,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
             else {
               Notifications.Bus.notify(new Notification(
                 PERL_TIDY_GROUP,
-                "Perl::Tidy formatting error",
+                PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
                 StringUtil.join(stderrLines, "<br>"),
                 NotificationType.ERROR
               ));
@@ -159,17 +162,16 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
           catch (ExecutionException e) {
             Notifications.Bus.notify(new Notification(
               PERL_TIDY_GROUP,
-              "Error running Perl::Tidy",
-              "Try to specify path to perltidy manually in <a href=\"configure\">Perl5 settings</a>.<br/>" + e.getMessage(),
-              NotificationType.ERROR,
-              new NotificationListener.Adapter() {
-                @Override
-                protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e) {
-                  Perl5SettingsConfigurable.open(file);
-                  notification.expire();
-                }
+              PerlBundle.message("perl.action.perl.tidy.running.error.title"),
+              PerlBundle.message("perl.action.perl.tidy.running.error.message", e.getMessage().replaceAll("\\n", "<br/>")),
+              NotificationType.ERROR
+            ).addAction(new DumbAwareAction(PerlBundle.message("perl.configure")) {
+              @Override
+              public void actionPerformed(AnActionEvent e) {
+                Notification.get(e).expire();
+                Perl5SettingsConfigurable.open(file);
               }
-            ));
+            }));
           }
         }
       }.queue();
