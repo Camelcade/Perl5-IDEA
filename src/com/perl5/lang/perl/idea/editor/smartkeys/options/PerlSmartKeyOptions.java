@@ -36,7 +36,9 @@ public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettin
     checkBox(PerlBundle.message("perl.options.auto.colon"),
              () -> getInstance().AUTO_INSERT_COLON,
              value -> getInstance().AUTO_INSERT_COLON = value);
-
+    checkBox(PerlBundle.message("perl.options.smart.comma.sequence"),
+             () -> getInstance().SMART_COMMA_SEQUENCE_TYPING,
+             value -> getInstance().SMART_COMMA_SEQUENCE_TYPING = value);
   }
 
   @Override

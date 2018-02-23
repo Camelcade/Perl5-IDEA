@@ -20,6 +20,32 @@ import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 
 public class PerlTypedHandlerTest extends PerlTypingTestCase {
 
+  @Override
+  protected String getTestDataPath() {
+    return "testData/smartKeys/perl";
+  }
+
+  public void testSmartHashLonger() {
+    doTestSmartCommaSequence();
+  }
+
+  public void testSmartHashShorter() {
+    doTestSmartCommaSequence();
+  }
+
+  public void testSmartHashDisabled() {
+    doTestSmartCommaSequence(false);
+  }
+
+  private void doTestSmartCommaSequence() {
+    doTestSmartCommaSequence(true);
+  }
+
+  private void doTestSmartCommaSequence(boolean enabled) {
+    Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING = enabled;
+    doTest(" ");
+  }
+
   public void testDoubleColonInUseEnabled() {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
     doTest("use Mojolicious<caret>", ":", "use Mojolicious::<caret>");

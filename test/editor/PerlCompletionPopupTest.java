@@ -28,6 +28,11 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
   protected CompletionAutoPopupTester myTester;
 
   @Override
+  protected String getTestDataPath() {
+    return "testData/completionPopup/perl";
+  }
+
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     myTester = new CompletionAutoPopupTester(myFixture);
@@ -36,6 +41,16 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
   @Override
   public String getFileExtension() {
     return PerlFileTypePackage.EXTENSION; // requires for package.. test
+  }
+
+  public void testSmartCommaSequence() {
+    Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING = true;
+    doTest(" ");
+  }
+
+  public void testSmartCommaSequenceDisabled() {
+    Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING = false;
+    doTestNegative(" ");
   }
 
   public void testAutoColonUseEnabled() {
@@ -126,15 +141,32 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
 
   private void doTest(@NotNull String initial, @NotNull String toType) {
     initWithTextSmart(initial);
-    myTester.typeWithPauses(toType);
-    LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
-    assertNotNull(activeLookup);
+    doCheckAutopopupResult(toType, true);
+  }
+
+  private void doTest(@NotNull String toType) {
+    initWithFileSmart();
+    doCheckAutopopupResult(toType, true);
   }
 
   private void doTestNegative(@NotNull String initial, @NotNull String toType) {
     initWithTextSmart(initial);
-    myTester.typeWithPauses(toType);
+    doCheckAutopopupResult(toType, false);
+  }
+
+  private void doTestNegative(@NotNull String toType) {
+    initWithFileSmart();
+    doCheckAutopopupResult(toType, false);
+  }
+
+  private void doCheckAutopopupResult(@NotNull String type, boolean result) {
+    myTester.typeWithPauses(type);
     LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
-    assertNull(activeLookup);
+    if (result) {
+      assertNotNull(activeLookup);
+    }
+    else {
+      assertNull(activeLookup);
+    }
   }
 }
