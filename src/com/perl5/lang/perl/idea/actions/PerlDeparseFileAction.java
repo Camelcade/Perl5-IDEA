@@ -32,6 +32,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -41,6 +42,10 @@ import com.perl5.lang.perl.util.PerlRunUtil;
  */
 public class PerlDeparseFileAction extends PurePerlActionBase {
   private static final String PERL_DEPARSE_GROUP = "PERL5_DEPARSE_FILE";
+
+  public PerlDeparseFileAction() {
+    getTemplatePresentation().setText(PerlBundle.message("perl.action.deparse.file"));
+  }
 
   @Override
   public void actionPerformed(AnActionEvent event) {
