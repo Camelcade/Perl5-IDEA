@@ -24,6 +24,7 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
@@ -55,12 +56,10 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
 
   public static final String PERL_TIDY_GROUP = PerlBundle.message("perl.action.perl.tidy.notification.group");
 
-  public PerlFormatWithPerlTidyAction() {
-    getTemplatePresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
-  }
-
   @Override
   protected boolean isEnabled(AnActionEvent event) {
+    Presentation presentation = event.getPresentation();
+    presentation.setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
     if (!super.isEnabled(event)) {
       return false;
     }
@@ -69,7 +68,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     if (!super.isMyFile(file) || !file.isWritable()) {
       return false;
     }
-    event.getPresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy.specific", file.getName()));
+    presentation.setText(PerlBundle.message("perl.action.reformat.perl.tidy.specific", file.getName()));
     return true;
   }
 
