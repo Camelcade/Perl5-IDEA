@@ -43,6 +43,7 @@ import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -185,13 +186,14 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   @Nullable
-  public static PsiElement getPrevSignificantSibling(PsiElement element) {
+  @Contract("null -> null")
+  public static PsiElement getPrevSignificantSibling(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
     PsiElement result = element.getPrevSibling();
-    while (true) {
-      if (result == null ||
-          !(result instanceof PsiComment || result instanceof PsiWhiteSpace || result.getNode().getElementType() == PerlElementTypes.POD)) {
-        break;
-      }
+    while (result != null &&
+           (result instanceof PsiComment || result instanceof PsiWhiteSpace || result.getNode().getElementType() == PerlElementTypes.POD)) {
       result = result.getPrevSibling();
     }
     return result;
