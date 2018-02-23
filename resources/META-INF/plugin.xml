@@ -74,6 +74,7 @@
 
         <li>Interface<ul>
         <li><code>Re-generate XSubs declaration</code> aciton removed from Perl5 settings. It's now available in <code>Tools -> Perl5</code> menu and via <code>Run Action...</code> (Ctrl+Shift+A)</li>
+        <li><code>Re-format with Perl::Tidy</code> and <code>Deparse file...</code> actions also moved to the <code>Tools -> Perl5</code> menu.</li>
         </ul></li>
 
         <li><code>Data::Printer</code> exports should work fine now, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1698">#1698</a></li>
@@ -1060,23 +1061,10 @@
   <actions>
     <group id="Perl5.Tools" text="Perl5" popup="true" icon="/icons/perl5language.png">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
-      <action id="Perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
+      <action id="perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
+      <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
+      <action id="perl5.DeparseFile" class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction"/>
     </group>
-
-    <group>
-      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
-      <add-to-group group-id="CodeMenu" anchor="first"/>
-      <add-to-group group-id="NavbarPopupMenu" anchor="first"/>
-      <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
-      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-
-      <action class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction" id="perl5.FormatWithPerlTidy"
-              text="Re-format with Perl::Tidy"/>
-      <action class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction" id="perl5.DeparseFile"
-              text="Deparse file..."/>
-      <separator/>
-    </group>
-
 
     <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
       <add-to-group group-id="NewGroup" anchor="first"/>

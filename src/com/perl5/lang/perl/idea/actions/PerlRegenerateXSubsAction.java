@@ -26,7 +26,7 @@ public class PerlRegenerateXSubsAction extends PerlActionBase {
 
   public PerlRegenerateXSubsAction() {
     Presentation presentation = getTemplatePresentation();
-    presentation.setText(PerlBundle.message("perl.config.generate.xsubs"));
+    presentation.setText(PerlBundle.message("perl.action.generate.xsubs"));
   }
 
   @Override
