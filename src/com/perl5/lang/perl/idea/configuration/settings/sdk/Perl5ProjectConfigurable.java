@@ -46,13 +46,11 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdk
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -217,12 +215,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
         LabeledComponent.create(perlTidyArgsInputField, PerlBundle.message("perl.config.tidy.options.label")),
         PerlBundle.message("perl.config.tidy.options.label.short")
       ));
-
-    JPanel regeneratePanel = new JPanel(new BorderLayout());
-    JButton regenerateButton = new JButton(PerlBundle.message("perl.config.generate.xsubs"));
-    regenerateButton.addActionListener(e -> PerlXSubsState.getInstance(myProject).reparseXSubs());
-    regeneratePanel.add(regenerateButton, BorderLayout.WEST);
-    builder.addComponent(regeneratePanel);
 
     deparseArgumentsTextField = new JTextField();
     builder.addLabeledComponent(PerlBundle.message("perl.config.deparse.options.label"), deparseArgumentsTextField);
