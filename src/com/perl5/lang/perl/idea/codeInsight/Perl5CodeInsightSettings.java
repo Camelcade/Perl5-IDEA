@@ -38,6 +38,7 @@ import org.jetbrains.annotations.TestOnly;
 public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings>, Cloneable {
   public boolean HEREDOC_AUTO_INSERTION = true;
   public boolean AUTO_INSERT_COLON = true;
+  public boolean SMART_COMMA_SEQUENCE_TYPING = true;
 
   @Nullable
   @Override

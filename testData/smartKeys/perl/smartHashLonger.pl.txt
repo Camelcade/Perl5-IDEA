@@ -1,0 +1,4 @@
+$a = {
+    key           => 123,
+    some_long_key => <caret>
+}

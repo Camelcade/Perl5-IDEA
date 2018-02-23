@@ -30,16 +30,22 @@ import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_CLOSE_FIRST_ANY;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_OPEN_ANY;
@@ -96,13 +102,20 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
       return Result.STOP;
     }
 
+    if (c == ' ') {
+      Result result = tryToAddFatComma(editor, file, currentOffset);
+      if (result != null) {
+        return result;
+      }
+    }
+
     return Result.CONTINUE;
   }
 
   @NotNull
   @Override
   public Result charTyped(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-    int offset = editor.getCaretModel().getOffset() - 1;
+    final int offset = editor.getCaretModel().getOffset() - 1;
     if (offset < 0) {
       return Result.CONTINUE;
     }
@@ -153,6 +166,51 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
                newElement.getParent() instanceof PsiPerlHashIndex;
       });
     }
+
+    return Result.CONTINUE;
+  }
+
+  @Nullable
+  private Result tryToAddFatComma(@NotNull Editor editor, @NotNull PsiFile file, int offset) {
+    if (!Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING) {
+      return null;
+    }
+
+    PsiElement elementAtCaret = file.findElementAt(offset);
+    if (!(elementAtCaret instanceof PsiWhiteSpace)) {
+      return null;
+    }
+
+    PsiElement commaSequence = elementAtCaret.getPrevSibling();
+    if (!(commaSequence instanceof PsiPerlCommaSequenceExpr)) {
+      return null;
+    }
+
+    PsiElement lastChild = commaSequence.getLastChild();
+    IElementType lastChildElementType = PsiUtilCore.getElementType(lastChild);
+    if (lastChildElementType == COMMA || lastChildElementType == FAT_COMMA) {
+      return null;
+    }
+
+    PsiElement commaElement = PerlPsiUtil.getPrevSignificantSibling(lastChild);
+    if (PsiUtilCore.getElementType(commaElement) != COMMA) {
+      return null;
+    }
+
+    PsiElement fatCommaElement = PerlPsiUtil.getPrevSignificantSibling(PerlPsiUtil.getPrevSignificantSibling(commaElement));
+    if (PsiUtilCore.getElementType(fatCommaElement) != FAT_COMMA) {
+      return null;
+    }
+
+    int reformatFrom = commaSequence.getNode().getStartOffset();
+
+    Document document = editor.getDocument();
+    document.insertString(offset, "=>");
+    editor.getCaretModel().moveToOffset(offset + 2);
+    Project project = file.getProject();
+    PsiDocumentManager.getInstance(project).commitDocument(document);
+    CodeStyleManager.getInstance(project).reformatText(file, reformatFrom, offset + 2);
+    AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
 
     return Result.CONTINUE;
   }

@@ -41,28 +41,39 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-        <li>New formatting options available<ul>
-            <li>Wrapping and Alignment<ul>
-              <li>subs and methods signatures</li>
-              <li>variable declarations lists</li>
-              <li>subs and variables attributes, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1684">#1684</a></li>
-              <li>ternary expression</li>
-              <li><code>qw</code> lists</li>
-              <li>call arguments</li>
-              <li>binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
-              <li>assignments</li>
-              <li>chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
-              <li>comma-separated lists, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
-              <li>comments, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
-          </ul></li>
-          <li>spacing for signatures, attributes and subs prototypes</li>
-        </ul>
-        <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
-        <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
-        <li>Debugger now allows you to inspect IO layers (requires <code>Devel::Camelcadedb</code> v2017.100.3+)</li>
+        <li>Formatter<ul>
+          <li>New formatting options available<ul>
+              <li>Wrapping and Alignment<ul>
+                <li>subs and methods signatures</li>
+                <li>variable declarations lists</li>
+                <li>subs and variables attributes, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1684">#1684</a></li>
+                <li>ternary expression</li>
+                <li><code>qw</code> lists</li>
+                <li>call arguments</li>
+                <li>binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
+                <li>assignments</li>
+                <li>chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
+                <li>comma-separated lists, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
+                <li>comments, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
+            </ul></li>
+            <li>spacing for signatures, attributes and subs prototypes</li>
+          </ul>
+          <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
+          <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
+        </ul></li>
+
+        <li>Debugger (requires <code>Devel::Camelcadedb</code> v2017.100.3+)<ul>
+        <li>You may now <a href="https://twitter.com/CamelcadeIDE/status/946817467539775489">inspect IO layers</a></li>
+        <li>You may now <a href="https://twitter.com/CamelcadeIDE/status/946836035002163200">see the tied information</a> in variables section</li>
+        </ul></li>
+
+        <li>Smart keys<ul>
+        <li>Typing colon after a package automatically inserting a second one and opening completion popup, configurable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1732">#1732</a></li>
+        <li>Typing space after a key inside comma sequence with fat commas now <a href="https://twitter.com/CamelcadeIDE/status/966783433312821248">adds a fat comma and re-format the sequence</a>, configurable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1736">#1736</a></li>
+        </ul></li>
+
         <li><code>Data::Printer</code> exports should work fine now, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1698">#1698</a></li>
         <li><code>cpanfile</code> is now recognized as a perl file. To make resolve and completion work, you should have <a href="http://search.cpan.org/~miyagawa/Carton/"><code>carton</code></a> installed, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1716">@Nowaker</a></li>
-        <li>Typing colon after a package automatically inserting a second one and opening completion popup, configurable via Smart Keys settings, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1732">#1732</a></li>
      </ul>
      </p>
      <p>Fixes:
