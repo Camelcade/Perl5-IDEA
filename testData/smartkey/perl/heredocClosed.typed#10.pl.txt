@@ -1,5 +1,0 @@
-
-<<EOM;
-
-blah
-EOM
