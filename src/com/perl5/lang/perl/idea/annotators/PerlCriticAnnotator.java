@@ -26,6 +26,7 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
@@ -89,7 +90,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return null;
     }
 
-    byte[] sourceBytes = sourcePsiFile.getPerlContentInBytes();
+    byte[] sourceBytes = ReadAction.compute(sourcePsiFile::getPerlContentInBytes);
     if (sourceBytes == null) {
       return null;
     }
