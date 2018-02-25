@@ -104,6 +104,9 @@ public class PerlCoverageRunner extends CoverageRunner {
       return commandLine;
     });
 
+    if (perlCommandLine == null) {
+      return null;
+    }
 
     try {
       LOG.info("Loading coverage by: " + perlCommandLine.getCommandLineString());
