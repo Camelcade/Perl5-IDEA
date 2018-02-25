@@ -20,6 +20,7 @@ import com.intellij.navigation.ColoredItemPresentation;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlDeprecatable;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +46,8 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
     if (!myElement.isValid()) {
       return null;
     }
-    return getElement().getContainingFile().getName();// + suffix;
+    PsiFile containingFile = getElement().getContainingFile();
+    return containingFile == null ? null : containingFile.getName();// + suffix;
   }
 
   @Nullable
