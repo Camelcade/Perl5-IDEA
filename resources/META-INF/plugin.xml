@@ -73,7 +73,7 @@
         </ul></li>
 
         <li>Interface<ul>
-        <li><code>Re-generate XSubs declaration</code> aciton removed from Perl5 settings. It's now available in <code>Tools -> Perl5</code> menu and via <code>Run Action...</code> (Ctrl+Shift+A)</li>
+        <li><code>Re-generate XSubs declaration</code> action removed from Perl5 settings. It's now available in <code>Tools -> Perl5</code> menu and via <code>Run Action...</code> (Ctrl+Shift+A)</li>
         <li><code>Re-format with Perl::Tidy</code> and <code>Deparse file...</code> actions also moved to the <code>Tools -> Perl5</code> menu.</li>
         </ul></li>
 
