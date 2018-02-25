@@ -65,7 +65,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     }
     final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
     //noinspection ConstantConditions
-    if (!super.isMyFile(file) || !file.isWritable()) {
+    if (!file.isWritable()) {
       return false;
     }
     presentation.setText(PerlBundle.message("perl.action.reformat.perl.tidy.specific", file.getName()));
