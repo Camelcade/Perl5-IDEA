@@ -73,13 +73,21 @@ public class Perl5ProjectComponent implements ProjectComponent {
     if (settings.shouldShowAnnounce()) {
       StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
         settings.setAnnounceShown();
-        NotificationGroup group = new NotificationGroup("PERL5_GROUP", NotificationDisplayType.STICKY_BALLOON, true);
+        NotificationGroup group =
+          new NotificationGroup(PerlBundle.message("plugin.update.baloon.group"), NotificationDisplayType.STICKY_BALLOON, true);
         Notification notification = group.createNotification(
           PerlBundle.message("plugin.update.baloon.title", PerlPluginUtil.getPluginVersion()),
           PerlBundle.message("plugin.update.baloon.text"),
           NotificationType.INFORMATION,
           new NotificationListener.UrlOpeningListener(false)
-        ).setImportant(true);
+        ).setImportant(true)
+          .addAction(
+            new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.changes"), "https://plugins.jetbrains.com/plugin/7796"))
+          .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.tracker"),
+                                                  "https://github.com/hurricup/Perl5-IDEA/issues"))
+          .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.support"),
+                                                  "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"));
+
         Notifications.Bus.notify(notification);
       });
     }
