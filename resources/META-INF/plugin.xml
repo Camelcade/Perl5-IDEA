@@ -41,62 +41,10 @@
   <change-notes><![CDATA[
      <p>Updates:
      <ul>
-        <li>Formatter<ul>
-          <li>New formatting options available<ul>
-              <li>Wrapping and Alignment<ul>
-                <li>subs and methods signatures</li>
-                <li>variable declarations lists</li>
-                <li>subs and variables attributes, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1684">#1684</a></li>
-                <li>ternary expression</li>
-                <li><code>qw</code> lists</li>
-                <li>call arguments</li>
-                <li>binary expressions, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1680">#1680</a></li>
-                <li>assignments</li>
-                <li>chained dereference, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1681">#1681</a></li>
-                <li>comma-separated lists, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1677">#1677</a></li>
-                <li>comments, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1676">#1676</a></li>
-            </ul></li>
-            <li>spacing for signatures, attributes and subs prototypes</li>
-          </ul>
-          <li>Formatting for anon subs, hashes, arrays and lists is much better now, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1525">@aptituz</a></li>
-          <li><code>qw</code> list is now formatted like a block, meaning quotes being formatted same way as braces, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1678">#1678</a></li>
-        </ul></li>
-
-        <li>Debugger (requires <code>Devel::Camelcadedb</code> v2017.100.3+)<ul>
-        <li>You may now <a href="https://twitter.com/CamelcadeIDE/status/946817467539775489">inspect IO layers</a></li>
-        <li>You may now <a href="https://twitter.com/CamelcadeIDE/status/946836035002163200">see the tied information</a> in variables section</li>
-        </ul></li>
-
-        <li>Smart keys<ul>
-        <li>Typing colon after a package automatically inserting a second one and opening completion popup, configurable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1732">#1732</a></li>
-        <li>Typing space after a key inside comma sequence with fat commas now <a href="https://twitter.com/CamelcadeIDE/status/966783433312821248">adds a fat comma and re-format the sequence</a>, configurable, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1736">#1736</a></li>
-        </ul></li>
-
-        <li>Interface<ul>
-        <li><code>Re-generate XSubs declaration</code> action removed from Perl5 settings. It's now available in <code>Tools -> Perl5</code> menu and via <code>Run Action...</code> (Ctrl+Shift+A)</li>
-        <li><code>Re-format with Perl::Tidy</code> and <code>Deparse file...</code> actions also moved to the <code>Tools -> Perl5</code> menu.</li>
-        </ul></li>
-
-        <li><code>Data::Printer</code> exports should work fine now, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1698">#1698</a></li>
-        <li><code>cpanfile</code> is now recognized as a perl file. To make resolve and completion work, you should have <a href="http://search.cpan.org/~miyagawa/Carton/"><code>carton</code></a> installed, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1716">@Nowaker</a></li>
      </ul>
      </p>
      <p>Fixes:
       <ul>
-        <li>Perl interpreters manipulation now has minimalistic UI, should help with buttons unavailability, by  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1714">@alexqfredrickson</a></li>
-        <li>Missing completion of variables declared in anon sub signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
-        <li>False variables resolve from statement to anon sub signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
-        <li>Variables resolve to signatures in anon subs or subs nested in statements, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
-        <li>Parsing of hash variable after omitted argument in perl signature, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1723">@elcamlost</a></li>
-        <li>New line won't be inserted before fat comma on wrapping</li>
-        <li>Formatter now removes spaces after <code>\</code> operator</li>
-        <li>Moving opening brace to the comment after compound statement beginning, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1578">#1578</a></li>
-        <li>Parsing <code>$1x</code> as variable name and <code>x</code> operator, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1667">#1667</a></li>
-        <li>Resolve from methods declared with <code>method</code> keyword in certain frameworks, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1669">#1669</a></li>
-        <li>Additional formatting cases</li>
-        <li>False unresolved sub warning in <code>Exporter</code> array in case of multiple targets available, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1726">#1726</a></li>
-        <li>Dialog rename for accessors now suggests proper name, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1719">#1719</a></li>
-        <li>False unresolved namespace warning in <code>no</code> statements, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1733">#1733</a></li>
       </ul>
      </p>
     ]]>
