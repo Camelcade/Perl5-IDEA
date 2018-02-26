@@ -45,6 +45,7 @@
      </p>
      <p>Fixes:
       <ul>
+      <li>Perl interpreter manipulation is now available even when IDE indexing files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1741">@brnrc</a></li>
       </ul>
      </p>
     ]]>
