@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
@@ -62,7 +63,7 @@ public class Perl5SdkPanel {
     toolbar.setLayoutPolicy(ActionToolbar.NOWRAP_LAYOUT_POLICY);
     toolbar.getComponent().setBorder(JBUI.Borders.empty());
 
-    toolbarActionGroup.add(new AnAction() {
+    toolbarActionGroup.add(new DumbAwareAction() {
       @Override
       public void update(AnActionEvent e) {
         Presentation p = e.getPresentation();
