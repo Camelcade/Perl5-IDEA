@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ProcessingContext;
@@ -65,7 +66,7 @@ public class PerlSubStaticCompletionProvider extends CompletionProvider<Completi
 
     // Globs
     for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName)) {
-      if (globVariable.getName() != null) {
+      if (StringUtil.isNotEmpty(globVariable.getName())) {
         resultSet.addElement(PerlSubCompletionUtil.getGlobLookupElement(globVariable));
       }
     }
