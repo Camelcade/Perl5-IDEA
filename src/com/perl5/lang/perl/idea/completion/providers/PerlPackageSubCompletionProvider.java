@@ -35,10 +35,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlPackageSubCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
-  protected void addCompletions(
-    @NotNull CompletionParameters parameters,
-    ProcessingContext context,
-    @NotNull CompletionResultSet result) {
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                ProcessingContext context,
+                                @NotNull CompletionResultSet result) {
     PsiElement method = parameters.getPosition().getParent();
     assert method instanceof PsiPerlMethod : "Expected PsiPerlMethod, got " + method.getClass();
 
@@ -59,33 +58,5 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
         result.addElement(newElement);
       }
     }
-
-
-    //
-    //		final String finalNameFilter = nameFilter;
-    //
-    //		if (!isObjectMethod)
-    //		{
-    //			// fixme not dry with PerlPackageNamesCompletionProvider
-    //			PerlPackageUtil.processDefinedPackageNames(PerlScopes.getProjectAndLibrariesScope(project), new PerlInternalIndexKeysProcessor()
-    //			{
-    //				@Override
-    //				public boolean process(String s)
-    //				{
-    //					if (super.process(s))
-    //					{
-    //						if (finalNameFilter == null)
-    //						{
-    //							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s));
-    //						}
-    //						else if (s.startsWith(finalNameFilter))
-    //						{
-    //							result.addElement(PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(project, s.substring(finalNameFilter.length())));
-    //						}
-    //					}
-    //					return true;
-    //				}
-    //			});
-    //		}
   }
 }
