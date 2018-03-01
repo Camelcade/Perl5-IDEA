@@ -46,6 +46,7 @@
      <p>Fixes:
       <ul>
       <li>Perl interpreter manipulation is now available even when IDE indexing files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1741">@brnrc</a></li>
+      <li>Fixed Perl5 actions names for better search by name and keymap interface, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1745">@ElMoselYEE</a></li>
       </ul>
      </p>
     ]]>

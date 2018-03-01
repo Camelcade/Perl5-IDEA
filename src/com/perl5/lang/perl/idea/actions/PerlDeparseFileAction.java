@@ -45,6 +45,10 @@ import java.util.Objects;
 public class PerlDeparseFileAction extends PurePerlActionBase {
   private static final String PERL_DEPARSE_GROUP = PerlBundle.message("perl.action.deparse.notification.group");
 
+  public PerlDeparseFileAction() {
+    getTemplatePresentation().setText(PerlBundle.message("perl.action.deparse.file"));
+  }
+
   @Override
   protected boolean isEnabled(AnActionEvent event) {
     boolean isEnabled = super.isEnabled(event);
