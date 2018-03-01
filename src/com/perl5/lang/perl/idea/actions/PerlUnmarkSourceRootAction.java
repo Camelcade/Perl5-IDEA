@@ -33,6 +33,10 @@ import java.util.List;
 
 public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
 
+  public PerlUnmarkSourceRootAction() {
+    getTemplatePresentation().setText(PerlBundle.message("perl.action.unmark.default"));
+  }
+
   @Override
   public void update(AnActionEvent e) {
     Presentation presentation = e.getPresentation();

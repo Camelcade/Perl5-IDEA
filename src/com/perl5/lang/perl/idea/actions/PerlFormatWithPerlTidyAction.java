@@ -56,6 +56,10 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
 
   public static final String PERL_TIDY_GROUP = PerlBundle.message("perl.action.perl.tidy.notification.group");
 
+  public PerlFormatWithPerlTidyAction() {
+    getTemplatePresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
+  }
+
   @Override
   protected boolean isEnabled(AnActionEvent event) {
     Presentation presentation = event.getPresentation();
