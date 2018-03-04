@@ -74,11 +74,13 @@ intellij {
     updateSinceUntilBuild = true
 }
 
-runIdea{
+runIde{
     if( project.hasProperty("nocancel")){
         systemProperty("idea.ProcessCanceledException", "disabled")
     }
-//    jvmArgs '-Xmx4000m'
+    if( project.hasProperty("traverseUI")){
+        args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
+    }
 }
 
 test {
