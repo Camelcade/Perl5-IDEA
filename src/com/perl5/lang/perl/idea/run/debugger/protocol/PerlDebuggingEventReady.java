@@ -27,6 +27,7 @@ import com.perl5.PerlBundle;
  */
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase {
   private static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
+  private static final String MODULE_VERSION_PREFIX_V = "v" + MODULE_VERSION_PREFIX;
   public String version;
 
   @Override
@@ -34,7 +35,8 @@ public class PerlDebuggingEventReady extends PerlDebuggingEventBase {
   }
 
   public boolean isValid() {
-    if (StringUtil.isNotEmpty(version) && StringUtil.startsWith(version, MODULE_VERSION_PREFIX)) {
+    if (StringUtil.isNotEmpty(version) &&
+        (StringUtil.startsWith(version, MODULE_VERSION_PREFIX_V) || StringUtil.startsWith(version, MODULE_VERSION_PREFIX))) {
       return true;
     }
 
