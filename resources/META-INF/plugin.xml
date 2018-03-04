@@ -45,6 +45,7 @@
      </p>
      <p>Fixes:
       <ul>
+      <li>Perl options are now searchable in settings panel, by  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1746">@RickMeasham</a></li>
       <li>Perl interpreter manipulation is now available even when IDE indexing files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1741">@brnrc</a></li>
       <li>Fixed Perl5 actions names for better search by name and keymap interface, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1745">@ElMoselYEE</a></li>
       </ul>
@@ -986,7 +987,9 @@
     <component>
       <implementation-class>com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem</implementation-class>
     </component>
-
+    <component>
+      <implementation-class>com.perl5.lang.app.PerlSearchableOptionsLoader</implementation-class>
+    </component>
   </application-components>
 
   <project-components>
