@@ -16,14 +16,15 @@
 
 package com.perl5.lang.embedded.idea.formatter;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import org.jetbrains.annotations.NotNull;
 
 public class EmbeddedPerlFormattingContext extends PerlFormattingContext {
-  public EmbeddedPerlFormattingContext(@NotNull CodeStyleSettings settings) {
-    super(settings);
+  public EmbeddedPerlFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
+    super(element, settings);
   }
 
   @Override

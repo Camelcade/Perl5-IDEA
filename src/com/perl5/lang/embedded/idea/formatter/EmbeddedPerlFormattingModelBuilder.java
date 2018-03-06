@@ -31,7 +31,7 @@ public class EmbeddedPerlFormattingModelBuilder extends PerlFormattingModelBuild
   @NotNull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), new EmbeddedPerlFormattingContext(settings));
+    PerlFormattingBlock block = new EmbeddedPerlFormattingBlock(element.getNode(), new EmbeddedPerlFormattingContext(element, settings));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

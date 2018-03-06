@@ -36,8 +36,8 @@ public class MojoliciousFormattingContext extends PerlFormattingContext {
     MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER
   );
 
-  public MojoliciousFormattingContext(@NotNull CodeStyleSettings settings) {
-    super(settings);
+  public MojoliciousFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
+    super(element, settings);
   }
 
   @Override

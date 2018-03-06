@@ -30,8 +30,10 @@ my @list = qw/
 say $a == 42 ? 'long true'   : 'long expression meaning false';
 $a ? $a : $b;
 
-$a = $b = something() || other() && $something;
-$a = $b = $a && $b;
+$some = $other_thing = something() || other() && $something;
+
+$other_a = $a;
+$some = $b;
 
 $someobject->somemethod()    ->othermethod()    ->andagain()->andlastone();
 }

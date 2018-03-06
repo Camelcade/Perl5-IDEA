@@ -32,8 +32,8 @@ import org.jetbrains.annotations.Nullable;
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.OptionAnchor.AFTER;
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
-import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.BRACE_PLACEMENT_OPTIONS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.BRACE_PLACEMENT_OPTIONS;
 
 /**
  * Created by hurricup on 03.09.2015.
@@ -155,7 +155,6 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
 
         "ASSIGNMENT_WRAP",
         "PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE",
-        "ALIGN_MULTILINE_ASSIGNMENT",
 
         "WRAP_COMMENTS",
 
@@ -179,6 +178,13 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.renameStandardOption("ASSIGNMENT_WRAP", PerlBundle.message("perl.formatting.wrap.assignment.expression"));
       consumer.renameStandardOption("METHOD_PARAMETERS_WRAP", PerlBundle.message("perl.formatting.wrap.declarations.parameters"));
       consumer.renameStandardOption("METHOD_CALL_CHAIN_WRAP", PerlBundle.message("perl.formatting.wrap.dereference"));
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_CONSECUTIVE_ASSIGNMENTS",
+                                PerlBundle.message("perl.formatting.align.consecutive.assignments"),
+                                WRAPPING_ASSIGNMENT,
+                                ALIGN_ASSIGNMENTS_OPTIONS
+      );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_COMMENTS_IN_LIST",

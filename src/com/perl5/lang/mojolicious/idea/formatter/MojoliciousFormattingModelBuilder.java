@@ -32,7 +32,7 @@ public class MojoliciousFormattingModelBuilder extends PerlFormattingModelBuilde
   @NotNull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), new MojoliciousFormattingContext(settings));
+    PerlFormattingBlock block = new MojoliciousFormattingBlock(element.getNode(), new MojoliciousFormattingContext(element, settings));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

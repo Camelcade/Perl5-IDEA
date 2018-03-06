@@ -55,6 +55,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean SPACE_BEFORE_ATTRIBUTE = true;
   public int ATTRIBUTES_WRAP = DO_NOT_WRAP;
   public boolean ALIGN_ATTRIBUTES = false;
+  public int ALIGN_CONSECUTIVE_ASSIGNMENTS = 0;
 
   public boolean ALIGN_FAT_COMMA = true;
 
@@ -96,6 +97,18 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
       {AS_IS, PerlBundle.message("perl.formatting.option.hashref.braced"), PerlBundle.message("perl.formatting.option.hashref.unbraced")};
     Object[] OPTIONS_SIMPLE_DEREF_STYLE = {LABELS_SIMPLE_DEREF_STYLE, VALUES};
 
+    int NO_ALIGN = 0;
+    int ALIGN_IN_STATEMENT = 1;
+    int ALIGN_LINES = 2;
+    int[] ALIGN_ASSIGNMENTS_VALUES = {
+      NO_ALIGN, ALIGN_IN_STATEMENT, ALIGN_LINES
+    };
+    String[] ALIGN_ASSIGNMENTS_LABELS = {
+      PerlBundle.message("perl.formatting.align.assignments.no"),
+      PerlBundle.message("perl.formatting.align.assignments.statement"),
+      PerlBundle.message("perl.formatting.align.assignments.lines")
+    };
+    Object[] ALIGN_ASSIGNMENTS_OPTIONS = {ALIGN_ASSIGNMENTS_LABELS, ALIGN_ASSIGNMENTS_VALUES};
 
     int SAME_LINE = 0;
     int NEXT_LINE = 1;

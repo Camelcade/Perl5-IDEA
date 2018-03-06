@@ -31,7 +31,7 @@ public class HTMLMasonFormattingModelBuilder extends PerlFormattingModelBuilder 
   @NotNull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
-    PerlFormattingBlock block = new HTMLMasonFormattingBlock(element.getNode(), new HTMLMasonFormattingContext(settings));
+    PerlFormattingBlock block = new HTMLMasonFormattingBlock(element.getNode(), new HTMLMasonFormattingContext(element, settings));
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 }

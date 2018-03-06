@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mason2.idea.formatter;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.idea.formatter.AbstractMasonFormattingContext;
@@ -25,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_LINE_OPENER;
 
 public class MasonFormattingContext extends AbstractMasonFormattingContext {
-  public MasonFormattingContext(@NotNull CodeStyleSettings settings) {
-    super(settings);
+  public MasonFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
+    super(element, settings);
   }
 
   @Override

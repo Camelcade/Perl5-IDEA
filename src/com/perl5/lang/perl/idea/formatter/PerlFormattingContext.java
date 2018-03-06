@@ -52,6 +52,8 @@ import java.util.Map;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.ALIGN_IN_STATEMENT;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.ALIGN_LINES;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
@@ -80,6 +82,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   );
 
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
+  private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
@@ -102,8 +105,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return itemsMap;
   });
 
+  @Nullable
+  private final Document myDocument;
+  @NotNull
   private final CommonCodeStyleSettings mySettings;
+  @NotNull
   private final PerlCodeStyleSettings myPerlSettings;
+  @NotNull
   private final SpacingBuilder mySpacingBuilder;
   private final Map<PsiFile, List<TextRange>> myHeredocRangesMap = FactoryMap.create(file -> {
     if (!(file instanceof PerlFileImpl)) {
@@ -153,26 +161,36 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     OPERATOR_COLLISIONS_MAP.putValue(OPERATOR_SMARTMATCH, OPERATOR_BITWISE_NOT);
   }
 
-  public PerlFormattingContext(@NotNull CodeStyleSettings settings) {
+  public PerlFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
     mySettings = settings.getCommonSettings(PerlLanguage.INSTANCE);
     myPerlSettings = settings.getCustomSettings(PerlCodeStyleSettings.class);
     mySpacingBuilder = createSpacingBuilder();
+    PsiFile containingFile = element.getContainingFile();
+    myDocument = containingFile == null ? null : containingFile.getViewProvider().getDocument();
   }
 
   protected SpacingBuilder createSpacingBuilder() {
     return PerlSpacingBuilderFactory.createSpacingBuilder(mySettings, myPerlSettings);
   }
 
+  @NotNull
   public CommonCodeStyleSettings getSettings() {
     return mySettings;
   }
 
+  @NotNull
   public PerlCodeStyleSettings getPerlSettings() {
     return myPerlSettings;
   }
 
+  @NotNull
   public SpacingBuilder getSpacingBuilder() {
     return mySpacingBuilder;
+  }
+
+  @Nullable
+  private Document getDocument() {
+    return myDocument;
   }
 
   public PerlIndentProcessor getIndentProcessor() {
@@ -381,8 +399,25 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (BINARY_EXPRESSIONS.contains(parentNodeType) && mySettings.ALIGN_MULTILINE_BINARY_OPERATION) {
       return myElementsALignmentsMap.get(parentNode);
     }
-    else if (parentNodeType == ASSIGN_EXPR && mySettings.ALIGN_MULTILINE_ASSIGNMENT) {
-      return myElementsALignmentsMap.get(parentNode);
+    else if (parentNodeType == ASSIGN_EXPR && OPERATORS_ASSIGNMENT.contains(childNodeType)) {
+      if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
+        int nodeLine = getNodeLine(childNode);
+        if (nodeLine < 0) {
+          return null;
+        }
+        Alignment alignment = myAssignmentsAlignmentsMap.get(nodeLine);
+        if (alignment == null) {
+          alignment = myAssignmentsAlignmentsMap.get(nodeLine - 1);
+        }
+        if (alignment == null) {
+          alignment = Alignment.createAlignment(true);
+        }
+        myAssignmentsAlignmentsMap.put(nodeLine, alignment);
+        return alignment;
+      }
+      else if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
+        return myElementsALignmentsMap.get(parentNode);
+      }
     }
     else if (parentNodeType == ATTRIBUTES && childNodeType == COLON && myPerlSettings.ALIGN_ATTRIBUTES) {
       return myElementsALignmentsMap.get(parentNode);
@@ -522,5 +557,13 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
 
     return null;
+  }
+
+  /**
+   * @return line number of the node or -1 if node is null or document missing
+   */
+  private int getNodeLine(@Nullable ASTNode node) {
+    Document document = getDocument();
+    return node == null || document == null ? -1 : document.getLineNumber(node.getStartOffset());
   }
 }

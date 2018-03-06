@@ -276,10 +276,9 @@ $a
 $a
         //= $a;
 
-
 $some_thing = 1;
 $some = 2;
 
 $smething = 1
-= $otherthing =
-4;
+        = $otherthing =
+        4;

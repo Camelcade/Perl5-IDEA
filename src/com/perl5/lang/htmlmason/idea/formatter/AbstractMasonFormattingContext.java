@@ -27,8 +27,8 @@ import com.perl5.lang.perl.idea.formatter.PerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractMasonFormattingContext extends PerlFormattingContext {
-  public AbstractMasonFormattingContext(@NotNull CodeStyleSettings settings) {
-    super(settings);
+  public AbstractMasonFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
+    super(element, settings);
   }
 
   protected abstract IElementType getLineOpenerToken();
