@@ -18,6 +18,7 @@ package com.perl5.lang.htmlmason.idea.formatter;
 
 import com.intellij.formatting.SpacingBuilder;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -34,8 +35,8 @@ public class HTMLMasonFormattingContext extends AbstractMasonFormattingContext {
     HTML_MASON_CALL_FILTERING_OPENER
   );
 
-  public HTMLMasonFormattingContext(@NotNull CodeStyleSettings settings) {
-    super(settings);
+  public HTMLMasonFormattingContext(@NotNull PsiElement element, @NotNull CodeStyleSettings settings) {
+    super(element, settings);
   }
 
   @Override

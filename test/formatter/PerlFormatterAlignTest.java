@@ -17,6 +17,7 @@
 package formatter;
 
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
+import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
 public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   @Override
@@ -151,16 +152,20 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     doTestSingleSource("callArguments");
   }
 
-  public void testAssignmentsTrue() {
-    doTestAssignments(true);
+  public void testAssignmentsStatement() {
+    doTestAssignments(ALIGN_IN_STATEMENT);
   }
 
-  public void testAssignmentsFalse() {
-    doTestAssignments(false);
+  public void testAssignmentsLines() {
+    doTestAssignments(ALIGN_LINES);
   }
 
-  private void doTestAssignments(boolean value) {
-    getSettings().ALIGN_MULTILINE_ASSIGNMENT = value;
+  public void testAssignmentsNone() {
+    doTestAssignments(NO_ALIGN);
+  }
+
+  private void doTestAssignments(int value) {
+    getCustomSettings().ALIGN_CONSECUTIVE_ASSIGNMENTS = value;
     doTestSingleSource("assignments");
   }
 

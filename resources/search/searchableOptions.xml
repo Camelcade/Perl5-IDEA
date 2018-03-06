@@ -261,6 +261,7 @@
     <option name="align" hit="Align simple methods in columns"/>
     <option name="align" hit="Align variables in columns"/>
     <option name="align" hit="Align when multiline"/>
+    <option name="alignment" hit="Alignment"/>
     <option name="alignments" path="Wrapping, Braces &amp; Alignments" hit="Wrapping, Braces &amp; Alignments"/>
     <option name="and" hit="'?' and ':' signs on next line"/>
     <option name="and" hit="Subs, methods and funcs"/>
