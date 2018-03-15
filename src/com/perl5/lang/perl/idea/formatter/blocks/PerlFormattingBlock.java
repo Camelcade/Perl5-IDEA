@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.formatter.blocks;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.formatter.common.AbstractBlock;
@@ -51,6 +52,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
       PerlParserUtil.DUMMY_BLOCK
     );
 
+  @NotNull
   protected final PerlFormattingContext myContext;
   private Indent myIndent;
   private Boolean myIsFirst;
@@ -59,16 +61,31 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
   private final AtomicNotNullLazyValue<List<Block>> mySubBlocksProvider = AtomicNotNullLazyValue.createValue(
     () -> ContainerUtil.immutableList(buildSubBlocks())
   );
+  private final AtomicNullableLazyValue<Alignment> myAlignmentProvider = AtomicNullableLazyValue.createValue(
+    () -> getContext().getAlignment(myNode)
+  );
 
   public PerlFormattingBlock(@NotNull ASTNode node, @NotNull PerlFormattingContext context) {
-    super(node, context.getWrap(node), context.getAlignment(node));
+    super(context.registerNode(node), context.getWrap(node), null);
     myContext = context;
+    buildChildren();
     myIndent = context.getIndentProcessor().getNodeIndent(node);
   }
 
   @Override
   public void setIndent(@Nullable Indent indent) {
     myIndent = indent;
+  }
+
+  @NotNull
+  protected final PerlFormattingContext getContext() {
+    return myContext;
+  }
+
+  @Nullable
+  @Override
+  public final Alignment getAlignment() {
+    return myAlignmentProvider.getValue();
   }
 
   @NotNull

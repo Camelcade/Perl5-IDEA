@@ -30,6 +30,7 @@ public class PerlSpacingBuilderFactory {
   @NotNull
   static SpacingBuilder createSpacingBuilder(CommonCodeStyleSettings settings, PerlCodeStyleSettings perlSettings) {
     return new SpacingBuilder(settings)
+      .before(COMMENT_LINE).spaceIf(perlSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES)
       .after(COMMENT_LINE).lineBreakOrForceSpace(true, false)
       // standard settings
       .around(OPERATOR_X).spaces(1)

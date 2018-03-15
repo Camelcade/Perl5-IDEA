@@ -45,10 +45,7 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
@@ -83,9 +80,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
+  private final Map<Integer, Alignment> myCommentsAlignmentMap = FactoryMap.create(line -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
-  private final Map<ASTNode, Alignment> myCommentsAlignmentMap = FactoryMap.create(parent -> Alignment.createAlignment(true));
   private final Map<ASTNode, Map<ASTNode, Alignment>> myStringListAlignmentMap = FactoryMap.create(listNode -> {
     Map<Integer, Alignment> generatingMap = FactoryMap.create(key -> Alignment.createAlignment(true));
 
@@ -105,6 +102,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     return itemsMap;
   });
 
+  /**
+   * Contains a bitmask of lines with comments not started with newline
+   */
+  @NotNull
+  private final BitSet myCommentsLines;
   @Nullable
   private final Document myDocument;
   @NotNull
@@ -167,10 +169,31 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     mySpacingBuilder = createSpacingBuilder();
     PsiFile containingFile = element.getContainingFile();
     myDocument = containingFile == null ? null : containingFile.getViewProvider().getDocument();
+    myCommentsLines = myDocument == null ? new BitSet() : new BitSet(myDocument.getLineCount());
   }
 
   protected SpacingBuilder createSpacingBuilder() {
     return PerlSpacingBuilderFactory.createSpacingBuilder(mySettings, myPerlSettings);
+  }
+
+  /**
+   * registers an ASTNode in some internal structure if it's necessary.
+   * e.g. comments, here-docs
+   */
+  @NotNull
+  public ASTNode registerNode(@NotNull ASTNode node) {
+    if (getDocument() == null) {
+      return node;
+    }
+    IElementType nodeType = PsiUtilCore.getElementType(node);
+    if (nodeType == COMMENT_LINE) {
+      ASTNode prevNode = node.getTreePrev();
+      if (prevNode != null && !StringUtil.containsLineBreak(prevNode.getChars())) {
+        myCommentsLines.set(getNodeLine(node));
+      }
+    }
+
+    return node;
   }
 
   @NotNull
@@ -362,17 +385,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       return myStringListAlignmentMap.get(parentNode).get(childNode);
     }
-    else if (childNodeType == COMMENT_LINE && myPerlSettings.ALIGN_COMMENTS_IN_LIST) {
-      ASTNode prevNode = childNode.getTreePrev();
-      if (prevNode == null || StringUtil.containsLineBreak(prevNode.getChars())) {
-        return null;
-      }
-      if (parentNodeType == COMMA_SEQUENCE_EXPR) {
-        return myCommentsAlignmentMap.get(parentNode);
-      }
-      ASTNode prevNonSpaceNode = getPrevNonSpaceNode(childNode);
-      if (PsiUtilCore.getElementType(prevNonSpaceNode) == COMMA_SEQUENCE_EXPR) {
-        return myCommentsAlignmentMap.get(prevNonSpaceNode);
+    else if (childNodeType == COMMENT_LINE &&
+             myPerlSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES) {
+      int commentLine = getNodeLine(childNode);
+      if (myCommentsLines.get(commentLine)) {
+        return myCommentsAlignmentMap.get(myCommentsLines.previousClearBit(commentLine));
       }
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
@@ -401,19 +418,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     }
     else if (parentNodeType == ASSIGN_EXPR && OPERATORS_ASSIGNMENT.contains(childNodeType)) {
       if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_LINES) {
-        int nodeLine = getNodeLine(childNode);
-        if (nodeLine < 0) {
-          return null;
-        }
-        Alignment alignment = myAssignmentsAlignmentsMap.get(nodeLine);
-        if (alignment == null) {
-          alignment = myAssignmentsAlignmentsMap.get(nodeLine - 1);
-        }
-        if (alignment == null) {
-          alignment = Alignment.createAlignment(true);
-        }
-        myAssignmentsAlignmentsMap.put(nodeLine, alignment);
-        return alignment;
+        return getLineBasedAlignment(childNode, myAssignmentsAlignmentsMap);
       }
       else if (myPerlSettings.ALIGN_CONSECUTIVE_ASSIGNMENTS == ALIGN_IN_STATEMENT) {
         return myElementsALignmentsMap.get(parentNode);
@@ -423,6 +428,33 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return myElementsALignmentsMap.get(parentNode);
     }
     return null;
+  }
+
+  /**
+   * Returns line-based alignment for the {@code childNode}. Uses previous line alignment from the {@code alignmentsMap}
+   * or creates a new one.
+   *
+   * @param alignmentsMap map for caching line-based values
+   */
+  @Nullable
+  private Alignment getLineBasedAlignment(@NotNull ASTNode childNode, @NotNull Map<Integer, Alignment> alignmentsMap) {
+    int nodeLine = getNodeLine(childNode);
+    if (nodeLine < 0) {
+      return null;
+    }
+    Alignment alignment = alignmentsMap.get(nodeLine);
+    if (alignment != null) {
+      return alignment;
+    }
+    alignment = alignmentsMap.get(nodeLine - 1);
+    if (alignment == null) {
+      alignment = alignmentsMap.get(nodeLine + 1);
+    }
+    if (alignment == null) {
+      alignment = Alignment.createAlignment(true);
+    }
+    alignmentsMap.put(nodeLine, alignment);
+    return alignment;
   }
 
   @Nullable

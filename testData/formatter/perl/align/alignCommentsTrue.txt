@@ -1,0 +1,62 @@
+$a = (
+        #    base    comment
+        1, #    additional    comment
+        $something,
+        'this    is    a    vetry    long    string', #    comment
+        #    other    base    comment
+        'other'         => 'blah', #    pair    comment
+        'somethinglong' =>         #    fat    comma    comment
+                'blah',
+        'somethinglong' #    before    fat    comma    comment
+                        => 'blah',
+        #    base
+        'somethinglong'    #some
+                        => #    blah
+                'blah',    #    bob
+
+);
+
+# something
+$somethign = 1;               #com
+$o = 1232323;                 # metn
+$somthingother = 'blabla';    #df sdf
+$blaser = 234234234234234234; # asdf
+
+$somethign = 1; # com
+$o = 1232323;   # metn
+
+sub subname {
+    my ($self) = @_;
+
+    # something
+    $somethign = 1;               #com
+    $o = 1232323;                 # metn
+    $somthingother = 'blabla';    #df sdf
+    $blaser = 234234234234234234; # asdf
+
+    # something
+    $somethign = 1; # com
+    $o = 1232323;   # metn
+}
+
+$input_line =~ m/\G(\s*\([^\)\(\}\{\,]*\))? # PROTO
+        (\s*:)?                             # ATTRS leading ':'
+        /gcx;
+
+$input_line =~ m/\G\s*
+        ((?:\w*(?:'|::))*) # package - something that ends in :: or '
+        (\w+)              # NAME    - required
+        /gcx;
+
+if ($tok =~ /^[\$A-Za-z_]/) {
+    # alphanumeric ..
+    $id_scan_state = ':'; # now need ::
+    $saw_alpha = 1;
+    $identifier .= $tok;
+}
+
+$input_line =~ m/\G\s*
+        (asdfasdf(?:\w*(? # something else
+        :'|::))*)         # package - something that ends in :: or '
+        (\w+)             # NAME    - required
+        /gcx;

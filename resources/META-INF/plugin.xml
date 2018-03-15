@@ -42,6 +42,7 @@
      <p>Updates:
      <ul>
       <li>Assignments alignment now supports a <code>Perl::Tidy</code> mode - alignment on consecutive lines, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1745">@ElMoselYEE</a></li>
+      <li>Comments are now alignment on consecutive lines, configurable</li>
      </ul>
      </p>
      <p>Fixes:
