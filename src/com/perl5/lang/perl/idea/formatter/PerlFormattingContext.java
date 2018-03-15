@@ -22,7 +22,6 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
@@ -40,12 +39,14 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
-import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
+import java.util.Map;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
@@ -115,29 +116,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
   private final PerlCodeStyleSettings myPerlSettings;
   @NotNull
   private final SpacingBuilder mySpacingBuilder;
-  private final Map<PsiFile, List<TextRange>> myHeredocRangesMap = FactoryMap.create(file -> {
-    if (!(file instanceof PerlFileImpl)) {
-      return Collections.emptyList();
-    }
-    final Document document = file.getViewProvider().getDocument();
-    if (document == null) {
-      return Collections.emptyList();
-    }
-    List<TextRange> result = new ArrayList<>();
-    file.accept(new PsiElementVisitor() {
-      @Override
-      public void visitElement(PsiElement element) {
-        if (PsiUtilCore.getElementType(element) == HEREDOC_OPENER) {
-          int startOffset = element.getNode().getStartOffset();
-          result.add(TextRange.create(startOffset + 1, document.getLineEndOffset(document.getLineNumber(startOffset))));
-        }
-        else {
-          element.acceptChildren(this);
-        }
-      }
-    });
-    return result;
-  });
+  private final List<TextRange> myHeredocRangesList = new ArrayList<>();
+
   /**
    * Elements that must have LF between them
    */
@@ -192,6 +172,11 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         myCommentsLines.set(getNodeLine(node));
       }
     }
+    else if (nodeType == HEREDOC_OPENER) {
+      myHeredocRangesList.add(
+        TextRange.create(node.getStartOffset() + 1, getDocument().getLineEndOffset(getNodeLine(node)))
+      );
+    }
 
     return node;
   }
@@ -227,10 +212,8 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
    * @return check result
    */
   public boolean isNewLineForbiddenAt(@NotNull ASTNode node) {
-    List<TextRange> heredocRanges = myHeredocRangesMap.get(node.getPsi().getContainingFile());
-
     int startOffset = node.getStartOffset();
-    for (TextRange range : heredocRanges) {
+    for (TextRange range : myHeredocRangesList) {
       if (range.contains(startOffset)) {
         return true;
       }
