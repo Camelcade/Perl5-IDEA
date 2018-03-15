@@ -62,7 +62,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public int QW_LIST_WRAP = DO_NOT_WRAP;
   public boolean ALIGN_QW_ELEMENTS = false;
 
-  public boolean ALIGN_COMMENTS_IN_LIST = true;
+  public boolean ALIGN_COMMENTS_ON_CONSEQUENT_LINES = true;
 
   public int BRACE_STYLE_NAMESPACE = SAME_LINE;
   public int BRACE_STYLE_SUB = SAME_LINE;

@@ -1,54 +1,54 @@
-if ($a)    #    comment
+if ($a) #    comment
 {
     say 'hi';
 }
-elsif ($cond)        #    comment
+elsif ($cond) #    comment
 {
 
 }
-else    #    comment
-{
-
-}
-
-unless ($expr)    #    coment
+else #    comment
 {
 
 }
 
-while ($expr)    #comment
+unless ($expr) #    coment
 {
 
 }
 
-until ($expr)    #comment
+while ($expr) #comment
 {
 
 }
 
-sub subname    #comment
-{
-}
-
-method subname    #comment
-{
-}
-
-func subname    #comment
-{
-}
-
-foreach my $element (@list)    #comment
+until ($expr) #comment
 {
 
 }
 
-foreach (@list)    #comment
+sub subname #comment
+{
+}
+
+method subname #comment
+{
+}
+
+func subname #comment
+{
+}
+
+foreach my $element (@list) #comment
 {
 
 }
 
-for (my $i = 0; $i < 0; $i++)    #    comment
+foreach (@list) #comment
+{
+
+}
+
+for (my $i = 0; $i < 0; $i++) #    comment
 {
 
 }
@@ -95,4 +95,3 @@ foreach (@list) {
 for (my $i = 0; $i < 0; $i++) {
 
 }
-

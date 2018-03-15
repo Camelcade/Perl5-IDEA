@@ -43,18 +43,17 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
 
-  public void testAlignListCommentsTrue() {
-    getCustomSettings().ALIGN_COMMENTS_IN_LIST = true;
-    doTestAlignListComments();
+  public void testAlignCommentsTrue() {
+    doTestAlignComments(true);
   }
 
-  public void testAlignListCommentsFalse() {
-    getCustomSettings().ALIGN_COMMENTS_IN_LIST = false;
-    doTestAlignListComments();
+  public void testAlignCommentsFalse() {
+    doTestAlignComments(false);
   }
 
-  private void doTestAlignListComments() {
-    doTestSingleSource("alignListComments");
+  private void doTestAlignComments(boolean value) {
+    getCustomSettings().ALIGN_COMMENTS_ON_CONSEQUENT_LINES = value;
+    doTestSingleSource("alignComments");
   }
 
   public void testAlignDereferenceFalse() {

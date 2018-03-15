@@ -187,7 +187,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
-                                "ALIGN_COMMENTS_IN_LIST",
+                                "ALIGN_COMMENTS_ON_CONSEQUENT_LINES",
                                 PerlBundle.message("perl.formatting.align.comments.in.list"),
                                 GROUP_COMMENT);
 

@@ -1,5 +1,5 @@
 package Point;
-use Moose;    #  automatically  turns  on  strict  and  warnings
+use Moose; #  automatically  turns  on  strict  and  warnings
 
 has 'x' => (is => 'rw', isa => 'Int');
 has 'y' => (is => 'rw', isa => 'Int');
