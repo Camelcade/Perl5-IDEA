@@ -21,7 +21,6 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
@@ -30,6 +29,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationInject;
 import com.perl5.lang.perl.psi.PsiPerlGlobSlot;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
+import com.perl5.lang.perl.util.PerlInjectionUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -43,7 +43,7 @@ public class PerlStringContentCompletionProvider extends CompletionProvider<Comp
     PsiElement element = parameters.getPosition();
     PsiElement parent = element.getParent();
 
-    if (parent instanceof PsiLanguageInjectionHost && InjectedLanguageUtil.hasInjections((PsiLanguageInjectionHost)parent)) {
+    if (parent instanceof PsiLanguageInjectionHost && PerlInjectionUtil.hasInjections(parent)) {
       return;
     }
 

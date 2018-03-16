@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.editor;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.spellchecker.inspections.IdentifierSplitter;
@@ -28,6 +27,7 @@ import com.intellij.spellchecker.tokenizer.TokenConsumer;
 import com.intellij.spellchecker.tokenizer.Tokenizer;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2;
+import com.perl5.lang.perl.util.PerlInjectionUtil;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
@@ -61,7 +61,7 @@ public class PerlSpellCheckingStrategy extends SpellcheckingStrategy {
       }
 
       PsiLanguageInjectionHost injectionHost = PsiTreeUtil.getParentOfType(element, PsiLanguageInjectionHost.class);
-      if (injectionHost != null && InjectedLanguageUtil.hasInjections(injectionHost)) {
+      if (PerlInjectionUtil.hasInjections(injectionHost)) {
         return EMPTY_TOKENIZER;
       }
       return TEXT_TOKENIZER;
