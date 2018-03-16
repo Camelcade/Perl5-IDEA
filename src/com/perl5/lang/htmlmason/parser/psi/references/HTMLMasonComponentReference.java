@@ -52,7 +52,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     }
     else if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches()) {
       String newContent = newElementName + currentContent.substring(getRangeInElement().getLength());
-      return setStringContent(newContent);
+      return ElementManipulators.handleContentChange(myElement, newContent);
     }
     return myElement;
   }
@@ -96,7 +96,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
       }
 
       if (newContent != null) {
-        setStringContent(newContent + currentContent.substring(getRangeInElement().getLength()));
+        ElementManipulators.handleContentChange(myElement, newContent + currentContent.substring(getRangeInElement().getLength()));
       }
     }
     return myElement;

@@ -17,8 +17,6 @@
 package com.perl5.lang.htmlmason.parser.psi.references;
 
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import org.jetbrains.annotations.NotNull;
@@ -29,10 +27,5 @@ import org.jetbrains.annotations.NotNull;
 public abstract class HTMLMasonStringReference extends PerlCachingReference<PerlString> {
   public HTMLMasonStringReference(@NotNull PerlString element, TextRange textRange) {
     super(element, textRange);
-  }
-
-  @Deprecated // use manipulators instead
-  protected PsiElement setStringContent(String newContent) {
-    return ElementManipulators.handleContentChange(myElement, newContent);
   }
 }
