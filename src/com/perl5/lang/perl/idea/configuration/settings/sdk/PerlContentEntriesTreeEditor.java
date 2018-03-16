@@ -36,7 +36,6 @@ import com.intellij.openapi.fileChooser.ex.FileNodeDescriptor;
 import com.intellij.openapi.fileChooser.ex.FileSystemTreeImpl;
 import com.intellij.openapi.fileChooser.impl.FileTreeBuilder;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -161,7 +160,7 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     assert myModifiableModel != null;
     myModifiableModel.commit();
   }

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mason2.idea.configuration;
 
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -73,7 +72,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     mySettings.autobaseNames.clear();
     mySettings.autobaseNames.addAll(autobaseModel.getItems());
 

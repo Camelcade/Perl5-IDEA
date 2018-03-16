@@ -31,15 +31,15 @@ public class HTMLMasonConcurrentBlocksResolveTest extends PerlLightTestCase {
     return "mas";
   }
 
-  public void testArgs() throws Exception {
+  public void testArgs() {
     doTestResolve();
   }
 
-  public void testInit() throws Exception {
+  public void testInit() {
     doTestResolve();
   }
 
-  public void testFromFilter() throws Exception {
+  public void testFromFilter() {
     doTestResolve();
   }
 }

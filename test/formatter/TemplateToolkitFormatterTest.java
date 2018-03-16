@@ -51,139 +51,139 @@ public class TemplateToolkitFormatterTest extends TemplateToolkitLightTestCase {
     return "tt";
   }
 
-  public void testArray() throws Exception {
+  public void testArray() {
     doFormatTest();
   }
 
-  public void testBlockAnon() throws Exception {
+  public void testBlockAnon() {
     doFormatTest();
   }
 
-  public void testBlockNamed() throws Exception {
+  public void testBlockNamed() {
     doFormatTest();
   }
 
-  public void testCall() throws Exception {
+  public void testCall() {
     doFormatTest();
   }
 
-  public void testChompMarkers() throws Exception {
+  public void testChompMarkers() {
     doFormatTest();
   }
 
-  public void testClear() throws Exception {
+  public void testClear() {
     doFormatTest();
   }
 
-  public void testDebug() throws Exception {
+  public void testDebug() {
     doFormatTest();
   }
 
-  public void testDefault() throws Exception {
+  public void testDefault() {
     doFormatTest();
   }
 
-  public void testExpressions() throws Exception {
+  public void testExpressions() {
     doFormatTest();
   }
 
-  public void testFilter() throws Exception {
+  public void testFilter() {
     doFormatTest();
   }
 
-  public void testFilterPostfix() throws Exception {
+  public void testFilterPostfix() {
     doFormatTest();
   }
 
-  public void testForeach() throws Exception {
+  public void testForeach() {
     doFormatTest();
   }
 
-  public void testGet() throws Exception {
+  public void testGet() {
     doFormatTest();
   }
 
-  public void testHash() throws Exception {
+  public void testHash() {
     doFormatTest();
   }
 
-  public void testIf() throws Exception {
+  public void testIf() {
     doFormatTest();
   }
 
-  public void testInclude() throws Exception {
+  public void testInclude() {
     doFormatTest();
   }
 
-  public void testInsert() throws Exception {
+  public void testInsert() {
     doFormatTest();
   }
 
-  public void testLast() throws Exception {
+  public void testLast() {
     doFormatTest();
   }
 
-  public void testMacro() throws Exception {
+  public void testMacro() {
     doFormatTest();
   }
 
-  public void testMeta() throws Exception {
+  public void testMeta() {
     doFormatTest();
   }
 
-  public void testMultiDirectives() throws Exception {
+  public void testMultiDirectives() {
     doFormatTest();
   }
 
-  public void testNext() throws Exception {
+  public void testNext() {
     doFormatTest();
   }
 
-  public void testPerl() throws Exception {
+  public void testPerl() {
     doFormatTest();
   }
 
-  public void testProcess() throws Exception {
+  public void testProcess() {
     doFormatTest();
   }
 
-  public void testReturn() throws Exception {
+  public void testReturn() {
     doFormatTest();
   }
 
-  public void testSet() throws Exception {
+  public void testSet() {
     doFormatTest();
   }
 
-  public void testStop() throws Exception {
+  public void testStop() {
     doFormatTest();
   }
 
-  public void testSubCall() throws Exception {
+  public void testSubCall() {
     doFormatTest();
   }
 
-  public void testSwitch() throws Exception {
+  public void testSwitch() {
     doFormatTest();
   }
 
-  public void testThrow() throws Exception {
+  public void testThrow() {
     doFormatTest();
   }
 
-  public void testTryCatch() throws Exception {
+  public void testTryCatch() {
     doFormatTest();
   }
 
-  public void testUse() throws Exception {
+  public void testUse() {
     doFormatTest();
   }
 
-  public void testWhile() throws Exception {
+  public void testWhile() {
     doFormatTest();
   }
 
-  public void testWrapper() throws Exception {
+  public void testWrapper() {
     doFormatTest();
   }
 }

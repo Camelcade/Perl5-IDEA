@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.run.remote;
 
 import com.intellij.execution.DefaultExecutionResult;
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
@@ -49,7 +48,7 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
 
   @NotNull
   @Override
-  public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException {
+  public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) {
     return new DefaultExecutionResult(TextConsoleBuilderFactory.getInstance().createBuilder(myProject).getConsole(),
                                       new DefaultDebugProcessHandler());
   }

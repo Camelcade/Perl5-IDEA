@@ -77,9 +77,8 @@ public class CookieManager {
    * method or a IOException will be thrown.
    *
    * @param conn a java.net.URLConnection - must be open, or IOException will be thrown
-   * @throws java.io.IOException Thrown if <i>conn</i> is not open.
    */
-  public void storeCookies(URLConnection conn) throws IOException {
+  public void storeCookies(URLConnection conn) {
 
     // let's determine the domain from where these cookies are being sent
     String domain = getDomainFromHost(conn.getURL().getHost());

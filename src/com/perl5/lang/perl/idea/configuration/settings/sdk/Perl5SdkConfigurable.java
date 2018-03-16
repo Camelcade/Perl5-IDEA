@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
@@ -222,7 +221,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     if (isSdkModified()) {
       mySdkManipulator.setSdk(getSelectedSdk());
     }

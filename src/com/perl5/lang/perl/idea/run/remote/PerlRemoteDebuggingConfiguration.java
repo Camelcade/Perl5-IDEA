@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.idea.run.remote;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.*;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunConfigurationBase;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
@@ -59,7 +61,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
   }
 
   @Override
-  public void checkConfiguration() throws RuntimeConfigurationException {
+  public void checkConfiguration() {
 
   }
 
@@ -77,7 +79,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
 
   @Nullable
   @Override
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) throws ExecutionException {
+  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {
     if (executor instanceof DefaultDebugExecutor) {
       return new PerlRemoteDebuggingRunProfileState(environment);
     }

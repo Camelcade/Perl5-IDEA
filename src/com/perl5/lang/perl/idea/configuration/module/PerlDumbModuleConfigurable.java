@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.configuration.module;
 
 import com.intellij.openapi.module.ModuleConfigurationEditor;
-import com.intellij.openapi.options.ConfigurationException;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -45,7 +44,7 @@ public class PerlDumbModuleConfigurable implements ModuleConfigurationEditor {
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
 
   }
 }

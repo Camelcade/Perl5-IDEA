@@ -294,12 +294,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   public void initWithTextSmart(String content) {
-    try {
-      initWithFileContent("test", getFileExtension(), content);
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    initWithFileContent("test", getFileExtension(), content);
   }
 
   @Deprecated // use initWithFileSmart
@@ -321,7 +316,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
                         FileUtil.loadFile(new File(getTestDataPath(), sourceFileNameWithExtension), CharsetToolkit.UTF8, true));
   }
 
-  public void initWithFileContent(String filename, String extension, String content) throws IOException {
+  public void initWithFileContent(String filename, String extension, String content) {
     myFixture.configureByText(filename + (extension.isEmpty() ? "" : "." + extension), content);
   }
 
@@ -471,7 +466,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
     new WriteCommandAction.Simple(getProject()) {
       @Override
-      protected void run() throws Throwable {
+      protected void run() {
         PsiFile file = myFixture.getFile();
         if (file.getViewProvider() instanceof InjectedFileViewProvider) {
           //noinspection ConstantConditions

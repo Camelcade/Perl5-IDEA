@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.configuration.module;
 import com.intellij.ide.util.projectWizard.ModuleBuilder;
 import com.intellij.ide.util.projectWizard.SourcePathsBuilder;
 import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.CompilerModuleExtension;
 import com.intellij.openapi.roots.ContentEntry;
@@ -48,7 +47,7 @@ public class PerlModuleBuilder extends ModuleBuilder implements SourcePathsBuild
   private List<Pair<String, String>> mySourcePaths;
 
   @Override
-  public void setupRootModel(ModifiableRootModel rootModel) throws ConfigurationException {
+  public void setupRootModel(ModifiableRootModel rootModel) {
     final CompilerModuleExtension compilerModuleExtension = rootModel.getModuleExtension(CompilerModuleExtension.class);
     compilerModuleExtension.setExcludeOutput(true);
     if (myJdk != null) {

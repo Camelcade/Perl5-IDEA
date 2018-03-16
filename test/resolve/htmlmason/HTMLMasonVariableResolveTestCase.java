@@ -28,59 +28,59 @@ public abstract class HTMLMasonVariableResolveTestCase extends PerlLightTestCase
     return "mas";
   }
 
-  public void testFromCleanup() throws Exception {
+  public void testFromCleanup() {
     doTestResolve();
   }
 
-  public void testFromDef() throws Exception {
+  public void testFromDef() {
     doTestResolve();
   }
 
-  public void testFromFilter() throws Exception {
+  public void testFromFilter() {
     doTestResolve();
   }
 
-  public void testFromFilteredBlockAhead() throws Exception {
+  public void testFromFilteredBlockAhead() {
     doTestResolve();
   }
 
-  public void testFromFilteredBlockBehind() throws Exception {
+  public void testFromFilteredBlockBehind() {
     doTestResolve();
   }
 
-  public void testFromInit() throws Exception {
+  public void testFromInit() {
     doTestResolve();
   }
 
-  public void testFromLineAhead() throws Exception {
+  public void testFromLineAhead() {
     doTestResolve();
   }
 
-  public void testFromLineBehind() throws Exception {
+  public void testFromLineBehind() {
     doTestResolve();
   }
 
-  public void testFromMethod() throws Exception {
+  public void testFromMethod() {
     doTestResolve();
   }
 
-  public void testFromOnce() throws Exception {
+  public void testFromOnce() {
     doTestResolve();
   }
 
-  public void testFromPerlAhead() throws Exception {
+  public void testFromPerlAhead() {
     doTestResolve();
   }
 
-  public void testFromPerlBehind() throws Exception {
+  public void testFromPerlBehind() {
     doTestResolve();
   }
 
-  public void testFromShared() throws Exception {
+  public void testFromShared() {
     doTestResolve();
   }
 
-  public void testFromFileArgs() throws Exception {
+  public void testFromFileArgs() {
     doTestResolve();
   }
 }

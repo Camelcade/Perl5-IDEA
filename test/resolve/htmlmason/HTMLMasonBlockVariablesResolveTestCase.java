@@ -21,7 +21,7 @@ package resolve.htmlmason;
  */
 public abstract class HTMLMasonBlockVariablesResolveTestCase extends HTMLMasonVariableResolveTestCase {
 
-  public void testSecondEntry() throws Exception {
+  public void testSecondEntry() {
     doTestResolve();
   }
 

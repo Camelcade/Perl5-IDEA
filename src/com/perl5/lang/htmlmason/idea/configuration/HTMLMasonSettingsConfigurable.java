@@ -18,7 +18,6 @@ package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.Messages;
@@ -114,7 +113,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     boolean forceReparse = isStructureModified();
 
     Set<String> extDiff = getDiff(mySettings.substitutedExtensions, substitutedExtensionsModel.getItems());

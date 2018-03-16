@@ -30,7 +30,7 @@ public class HTMLMasonFormatterTest extends PerlFormatterTestCase {
     return "mas";
   }
 
-  public void testSpacelessTags() throws Exception {
+  public void testSpacelessTags() {
     doFormatTest("spaceless", "");
   }
 }

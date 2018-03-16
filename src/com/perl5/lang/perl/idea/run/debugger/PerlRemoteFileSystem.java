@@ -93,30 +93,32 @@ public class PerlRemoteFileSystem extends DeprecatedVirtualFileSystem {
   }
 
   @Override
-  public void deleteFile(Object requestor, @NotNull VirtualFile vFile) throws IOException {
+  public void deleteFile(Object requestor, @NotNull VirtualFile vFile) {
     throw new UnsupportedOperationException();
   }
 
   @Override
-  public void moveFile(Object requestor, @NotNull VirtualFile vFile, @NotNull VirtualFile newParent) throws IOException {
-    throw new UnsupportedOperationException();
-  }
-
-  @NotNull
-  @Override
-  public VirtualFile copyFile(Object requestor, @NotNull VirtualFile vFile, @NotNull VirtualFile newParent, @NotNull final String copyName)
-    throws IOException {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void renameFile(Object requestor, @NotNull VirtualFile vFile, @NotNull String newName) throws IOException {
+  public void moveFile(Object requestor, @NotNull VirtualFile vFile, @NotNull VirtualFile newParent) {
     throw new UnsupportedOperationException();
   }
 
   @NotNull
   @Override
-  public VirtualFile createChildFile(Object requestor, @NotNull VirtualFile vDir, @NotNull String fileName) throws IOException {
+  public VirtualFile copyFile(Object requestor,
+                              @NotNull VirtualFile vFile,
+                              @NotNull VirtualFile newParent,
+                              @NotNull final String copyName) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public void renameFile(Object requestor, @NotNull VirtualFile vFile, @NotNull String newName) {
+    throw new UnsupportedOperationException();
+  }
+
+  @NotNull
+  @Override
+  public VirtualFile createChildFile(Object requestor, @NotNull VirtualFile vDir, @NotNull String fileName) {
     throw new UnsupportedOperationException();
   }
 

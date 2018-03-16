@@ -87,7 +87,7 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
   private void doTest(@NotNull String textToUpdate) {
     new WriteCommandAction.Simple(getProject()) {
       @Override
-      protected void run() throws Throwable {
+      protected void run() {
         getHeredocUnderCursor().updateText(textToUpdate);
       }
     }.execute().throwException();

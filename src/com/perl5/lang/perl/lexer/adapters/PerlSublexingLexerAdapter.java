@@ -34,7 +34,6 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes {
@@ -175,7 +174,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     }
   }
 
-  private void lexToken(Lexer lexer) throws IOException {
+  private void lexToken(Lexer lexer) {
     myTokenType = lexer.getTokenType();
     if (myTokenType == LEFT_BRACE_CODE_START) {
       myTokenType = LEFT_BRACE;
