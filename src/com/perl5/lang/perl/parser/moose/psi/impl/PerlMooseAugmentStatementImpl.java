@@ -97,12 +97,7 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
 
   @Override
   public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-    PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier != null) {
-      PerlPsiUtil.renameElement(nameIdentifier, name);
-    }
-
-    return this;
+    return PerlPsiUtil.renameNamedElement(this, name);
   }
 
   @Nullable

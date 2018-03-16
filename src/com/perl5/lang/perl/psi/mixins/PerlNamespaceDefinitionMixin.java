@@ -93,11 +93,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   @Override
   public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-    PerlNamespaceElement namespaceElement = getNamespaceElement();
-    if (namespaceElement != null) {
-      PerlPsiUtil.renameElement(namespaceElement, name);
-    }
-    return this;
+    return PerlPsiUtil.renameNamedElement(this, name);
   }
 
 

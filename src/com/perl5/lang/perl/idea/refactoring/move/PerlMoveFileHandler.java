@@ -67,7 +67,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
 
       if (newPackageName != null) {
         for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll()) {
-          PerlPsiUtil.renameFileReferencee(reference.getElement(), newPackageName);
+          PerlPsiUtil.renameElement(reference.getElement(), newPackageName);
         }
       }
     }

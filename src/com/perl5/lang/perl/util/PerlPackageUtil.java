@@ -486,7 +486,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
                 String newRelativePath = newPackagePath.substring(newInnermostRoot.getPath().length());
                 String newPackageName = getPackageNameByPath(newRelativePath);
 
-                PerlPsiUtil.renameFileReferencee(inboundReference.getElement(), newPackageName);
+                PerlPsiUtil.renameElement(inboundReference.getElement(), newPackageName);
               }
             }
           }

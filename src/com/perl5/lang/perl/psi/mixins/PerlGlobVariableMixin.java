@@ -130,12 +130,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-    PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement != null) {
-      PerlPsiUtil.renameElement(variableNameElement, name);
-    }
-
-    return this;
+    return PerlPsiUtil.renameNamedElement(this, name);
   }
 
   @Nullable

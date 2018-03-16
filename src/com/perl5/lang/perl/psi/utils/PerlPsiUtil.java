@@ -135,31 +135,29 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
 
+  @NotNull
+  public static PsiElement renameNamedElement(@NotNull PsiNameIdentifierOwner nameIdentifierOwner, @Nullable String newName) {
+    renameElement(nameIdentifierOwner.getNameIdentifier(), newName);
+    return nameIdentifierOwner;
+  }
+
   /**
    * Renaming PsiElement using manipulator
-   *
-   * @param element PsiElement to rename
-   * @param newName newName
-   * @return manipulator return value
    */
-  @Deprecated // we need to pass named element
-  public static PsiElement renameElement(PsiElement element, String newName) {
+  @SuppressWarnings("UnusedReturnValue")
+  @Nullable
+  @Contract("null, _ -> null; !null, null -> !null")
+  public static PsiElement renameElement(@Nullable PsiElement element, @Nullable String newName) {
+    if (element == null) {
+      return null;
+    }
+    if (StringUtil.isEmpty(newName)) {
+      return element;
+    }
     //noinspection unchecked
     return PerlPsiUtil.getManipulator(element).handleContentChange(element, newName);
   }
 
-
-  /**
-   * Renames file referencee element. Specific method required, cause somewhere we should put package name, and somewhere filename
-   *
-   * @param element        element to rename
-   * @param newPackageName new package name
-   */
-  public static void renameFileReferencee(PsiElement element, String newPackageName) {
-    if (element instanceof PerlNamespaceElement) {
-      PerlPsiUtil.renameElement(element, newPackageName);
-    }
-  }
 
   @Nullable
   public static PsiElement getNextSignificantSibling(PsiElement element) {

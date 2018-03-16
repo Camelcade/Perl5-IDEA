@@ -75,12 +75,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
 
   @Override
   public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-    PsiElement subNameElement = getNameIdentifier();
-    if (subNameElement != null) {
-      PerlPsiUtil.renameElement(subNameElement, name);
-    }
-
-    return this;
+    return PerlPsiUtil.renameNamedElement(this, name);
   }
 
   @Override

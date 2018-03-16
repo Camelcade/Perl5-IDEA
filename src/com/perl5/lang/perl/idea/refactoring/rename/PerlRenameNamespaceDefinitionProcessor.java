@@ -72,7 +72,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
         @Override
         public void run() {
           for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll()) {
-            PerlPsiUtil.renameFileReferencee(reference.getElement(), newName);
+            PerlPsiUtil.renameElement(reference.getElement(), newName);
           }
 
           // rename file

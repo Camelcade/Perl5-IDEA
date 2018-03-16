@@ -54,11 +54,7 @@ public class PerlLabelDeclarationMixin extends PerlCompositeElementImpl implemen
 
   @Override
   public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
-    PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier != null) {
-      PerlPsiUtil.renameElement(nameIdentifier, name);
-    }
-    return null;
+    return PerlPsiUtil.renameNamedElement(this, name);
   }
 
   @NotNull

@@ -82,10 +82,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-    PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier != null) {
-      PerlPsiUtil.renameElement(nameIdentifier, name);
-    }
+    PerlPsiUtil.renameNamedElement(this, name);
     return this;
   }
 
