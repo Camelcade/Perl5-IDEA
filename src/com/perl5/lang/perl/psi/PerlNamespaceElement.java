@@ -31,7 +31,6 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
    *
    * @return result
    */
-  @Deprecated // use utility method instead
   default boolean isBuiltin() {
     return PerlPackageUtil.isBuiltIn(getCanonicalName());
   }

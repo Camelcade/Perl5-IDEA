@@ -68,7 +68,7 @@ public class PerlArgsExtractionTest extends PerlLightTestCase {
 
 
   protected void doTest(String fileName, String argsString) {
-    initWithFileAsScript(fileName);
+    initWithFileSmart(fileName);
     PsiElement elementAtCaret = myFixture.getElementAtCaret();
     assertNotNull(elementAtCaret);
     PerlSubDefinitionElement subBase = PsiTreeUtil.getParentOfType(elementAtCaret, PerlSubDefinitionElement.class, false);

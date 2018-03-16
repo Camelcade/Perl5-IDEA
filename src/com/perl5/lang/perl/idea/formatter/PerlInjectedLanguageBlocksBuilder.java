@@ -22,6 +22,7 @@ import com.intellij.formatting.FormattingModel;
 import com.intellij.formatting.FormattingModelBuilder;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageFormatting;
+import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -29,7 +30,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.PsiLanguageInjectionHost.Shred;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,7 +104,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     if (hostPsi == null) {
       return false;
     }
-    InjectedLanguageUtil.enumerate(hostPsi, hostPsi.getContainingFile(), false, this);
+    InjectedLanguageManager.getInstance(hostPsi.getProject()).enumerateEx(hostPsi, hostPsi.getContainingFile(), false, this);
     return getInjectedBuilder() != null;
   }
 

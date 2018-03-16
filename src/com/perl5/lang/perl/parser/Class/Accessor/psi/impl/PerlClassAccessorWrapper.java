@@ -20,8 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Function;
@@ -129,20 +127,17 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
     boolean[] result = new boolean[]{false};
 
     // fixme we need a smarter treewalkup here, scopes are not necessary here
-    PerlResolveUtil.treeWalkUp(this, new BaseScopeProcessor() {
-      @Override
-      public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-        if (element instanceof PsiPerlNamespaceContent) {
-          return false;
-        }
-
-        if (PsiUtilCore.getElementType(element) == CLASS_ACCESSOR_FBP) {
-          result[0] = true;
-          return false;
-        }
-
-        return true;
+    PerlResolveUtil.treeWalkUp(this, (element, state) -> {
+      if (element instanceof PsiPerlNamespaceContent) {
+        return false;
       }
+
+      if (PsiUtilCore.getElementType(element) == CLASS_ACCESSOR_FBP) {
+        result[0] = true;
+        return false;
+      }
+
+      return true;
     });
     return result[0];
   }

@@ -16,14 +16,13 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
+import com.intellij.application.options.CodeStyle;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.codeStyle.CodeStyleSettings;
-import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.formatter.operations.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -46,7 +45,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
   public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
 
   protected final Project myProject;
-  protected final CodeStyleSettings mySettings;
   protected final PerlCodeStyleSettings myPerlSettings;
 
   private final List<PerlFormattingOperation> myFormattingOperations = new ArrayList<>();
@@ -54,8 +52,7 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
   public PerlPreFormatter(Project project) {
     myProject = project;
-    mySettings = CodeStyleSettingsManager.getSettings(project);
-    myPerlSettings = mySettings.getCustomSettings(PerlCodeStyleSettings.class);
+    myPerlSettings = CodeStyle.getSettings(project).getCustomSettings(PerlCodeStyleSettings.class);
   }
 
   public TextRange process(PsiElement element, TextRange range) {

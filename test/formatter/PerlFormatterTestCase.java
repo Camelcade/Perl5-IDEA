@@ -17,7 +17,7 @@
 package formatter;
 
 import base.PerlLightTestCase;
-import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
+import com.intellij.application.options.CodeStyle;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
@@ -48,10 +48,10 @@ public abstract class PerlFormatterTestCase extends PerlLightTestCase {
   }
 
   protected CommonCodeStyleSettings getSettings() {
-    return CodeStyleSettingsManager.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
+    return CodeStyle.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE);
   }
 
   protected PerlCodeStyleSettings getCustomSettings() {
-    return CodeStyleSettingsManager.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
+    return CodeStyle.getSettings(getProject()).getCustomSettings(PerlCodeStyleSettings.class);
   }
 }

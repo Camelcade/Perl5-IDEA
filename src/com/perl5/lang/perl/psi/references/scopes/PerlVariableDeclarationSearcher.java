@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.references.scopes;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.BaseScopeProcessor;
+import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlStatement;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 17.02.2016.
  */
-public class PerlVariableDeclarationSearcher extends BaseScopeProcessor {
+public class PerlVariableDeclarationSearcher implements PsiScopeProcessor {
   private final String myName;
   private final PerlVariableType myVariableType;
   private final PsiElement myVariable;

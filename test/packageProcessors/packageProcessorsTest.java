@@ -32,7 +32,7 @@ public class packageProcessorsTest extends PerlLightTestCase {
   }
 
   public void testModernPerl() {
-    initWithFileAsScript("ModernPerl");
+    initWithFileSmart("ModernPerl");
     PerlNamespaceDefinitionElement namespaceDefinition = getElementAtCaret(PerlNamespaceDefinitionElement.class);
     assertNotNull(namespaceDefinition);
     assertEquals(PerlMroType.C3, namespaceDefinition.getMroType());

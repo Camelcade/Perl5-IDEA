@@ -21,8 +21,6 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.ResolveState;
-import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlIcons;
@@ -146,81 +144,57 @@ public class PerlVariableCompletionUtil {
     PerlBuiltInVariablesService perlBuiltInVariablesService = PerlBuiltInVariablesService.getInstance(variableNameElement.getProject());
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      perlBuiltInVariablesService.processScalars(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getScalarLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processScalars((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getScalarLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
 
-      perlBuiltInVariablesService.processArrays(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getArrayElementLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processArrays((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getArrayElementLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
 
-      perlBuiltInVariablesService.processHashes(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getHashElementLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processHashes((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getHashElementLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
-      perlBuiltInVariablesService.processArrays(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getArrayLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          //noinspection ConstantConditions
-          resultSet.addElement(getArraySliceLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processArrays((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getArrayLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        //noinspection ConstantConditions
+        resultSet.addElement(getArraySliceLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
-      perlBuiltInVariablesService.processHashes(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getHashSliceLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processHashes((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getHashSliceLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-      perlBuiltInVariablesService.processArrays(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getArrayLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processArrays((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getArrayLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
-      perlBuiltInVariablesService.processHashes(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getHashLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processHashes((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getHashLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
     }
     else if (perlVariable instanceof PsiPerlGlobVariable) {
-      perlBuiltInVariablesService.processGlobs(new BaseScopeProcessor() {
-        @Override
-        public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-          //noinspection ConstantConditions
-          resultSet.addElement(getGlobLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-          return true;
-        }
+      perlBuiltInVariablesService.processGlobs((element, state) -> {
+        //noinspection ConstantConditions
+        resultSet.addElement(getGlobLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        return true;
       });
     }
   }
@@ -229,63 +203,60 @@ public class PerlVariableCompletionUtil {
                                               @NotNull final CompletionResultSet resultSet) {
     final PsiElement perlVariable = variableNameElement.getParent();
 
-    PsiScopeProcessor processor = new BaseScopeProcessor() {
-      @Override
-      public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-        if (element instanceof PerlVariableDeclarationElement) {
-          PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
+    PsiScopeProcessor processor = (element, state) -> {
+      if (element instanceof PerlVariableDeclarationElement) {
+        PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
 
-          PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
-          if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
-            return true;
-          }
+        PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
+        if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
+          return true;
+        }
 
-          if (perlVariable instanceof PsiPerlScalarVariable) {
-            String variableName = variable.getName();
-            if (variableName != null) {
-              if (variable.getActualType() == PerlVariableType.SCALAR) {
-                resultSet.addElement(setLexical(getScalarLookupElement(variableName)));
-              }
-              else if (variable.getActualType() == PerlVariableType.ARRAY) {
-                resultSet.addElement(setLexical(getArrayElementLookupElement(variableName)));
-              }
-              else if (variable.getActualType() == PerlVariableType.HASH) {
-                resultSet.addElement(setLexical(getHashElementLookupElement(variableName)));
-              }
+        if (perlVariable instanceof PsiPerlScalarVariable) {
+          String variableName = variable.getName();
+          if (variableName != null) {
+            if (variable.getActualType() == PerlVariableType.SCALAR) {
+              resultSet.addElement(setLexical(getScalarLookupElement(variableName)));
             }
-          }
-          else if (perlVariable instanceof PsiPerlArrayVariable) {
-            String variableName = variable.getName();
-            if (variableName != null) {
-              if (variable.getActualType() == PerlVariableType.ARRAY) {
-                resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
-                resultSet.addElement(setLexical(getArraySliceLookupElement(variableName)));
-              }
-              else if (variable.getActualType() == PerlVariableType.HASH) {
-                resultSet.addElement(setLexical(getHashSliceLookupElement(variableName)));
-              }
+            else if (variable.getActualType() == PerlVariableType.ARRAY) {
+              resultSet.addElement(setLexical(getArrayElementLookupElement(variableName)));
             }
-          }
-          else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-            String variableName = variable.getName();
-            if (variableName != null) {
-              if (variable.getActualType() == PerlVariableType.ARRAY) {
-                resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
-              }
-            }
-          }
-          else if (perlVariable instanceof PsiPerlHashVariable) {
-            String variableName = variable.getName();
-            if (variableName != null) {
-              if (variable.getActualType() == PerlVariableType.HASH) {
-                resultSet.addElement(setLexical(getHashLookupElement(variableName)));
-              }
+            else if (variable.getActualType() == PerlVariableType.HASH) {
+              resultSet.addElement(setLexical(getHashElementLookupElement(variableName)));
             }
           }
         }
-
-        return true;
+        else if (perlVariable instanceof PsiPerlArrayVariable) {
+          String variableName = variable.getName();
+          if (variableName != null) {
+            if (variable.getActualType() == PerlVariableType.ARRAY) {
+              resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
+              resultSet.addElement(setLexical(getArraySliceLookupElement(variableName)));
+            }
+            else if (variable.getActualType() == PerlVariableType.HASH) {
+              resultSet.addElement(setLexical(getHashSliceLookupElement(variableName)));
+            }
+          }
+        }
+        else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
+          String variableName = variable.getName();
+          if (variableName != null) {
+            if (variable.getActualType() == PerlVariableType.ARRAY) {
+              resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
+            }
+          }
+        }
+        else if (perlVariable instanceof PsiPerlHashVariable) {
+          String variableName = variable.getName();
+          if (variableName != null) {
+            if (variable.getActualType() == PerlVariableType.HASH) {
+              resultSet.addElement(setLexical(getHashLookupElement(variableName)));
+            }
+          }
+        }
       }
+
+      return true;
     };
     PerlResolveUtil.treeWalkUp(variableNameElement, processor);
     PerlBuiltInVariablesService.getInstance(variableNameElement.getProject()).processVariables(processor);

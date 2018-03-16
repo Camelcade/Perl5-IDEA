@@ -81,17 +81,6 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     parameterInfo.setUpUIPresentation(context);
   }
 
-  @Nullable
-  @Override
-  public String getParameterCloseChars() {
-    return null;
-  }
-
-  @Override
-  public boolean tracksParameterIndex() {
-    return false;
-  }
-
   @Override
   public boolean couldShowInLookup() {
     return false;
@@ -100,12 +89,6 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
   @Nullable
   @Override
   public Object[] getParametersForLookup(LookupElement item, ParameterInfoContext context) {
-    return ArrayUtil.EMPTY_OBJECT_ARRAY;  // we don't
-  }
-
-  @Nullable
-  @Override
-  public Object[] getParametersForDocumentation(PerlParameterInfo p, ParameterInfoContext context) {
     return ArrayUtil.EMPTY_OBJECT_ARRAY;  // we don't
   }
 

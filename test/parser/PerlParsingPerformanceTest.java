@@ -129,7 +129,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
       }
       long length = System.currentTimeMillis() - start;
       System.err.println("Parsing done in " + length / iterations + " ms per iteration of " + time);
-    }).cpuBound().useLegacyScaling().assertTiming();
+    }).assertTiming();
 
     //		analyzeFile(psiFile);
   }

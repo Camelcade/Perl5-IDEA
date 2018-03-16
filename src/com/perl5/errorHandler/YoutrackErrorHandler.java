@@ -42,7 +42,6 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.Consumer;
-import com.intellij.util.SystemProperties;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -122,7 +121,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     descBuilder.append("Build: ").append(ApplicationInfo.getInstance().getBuild()).append('\n');
     descBuilder.append("OS: ").append(SystemInfo.OS_NAME).append(" ").append(SystemInfo.OS_ARCH).append(" ").append(SystemInfo.OS_VERSION)
       .append('\n');
-    descBuilder.append("Java Vendor: ").append(SystemProperties.getJavaVmVendor()).append('\n');
+    descBuilder.append("Java Vendor: ").append(SystemInfo.JAVA_VENDOR).append('\n');
     descBuilder.append("Java Version: ").append(SystemInfo.JAVA_VERSION).append('\n');
     descBuilder.append("Java Arch: ").append(SystemInfo.ARCH_DATA_MODEL).append('\n');
     descBuilder.append("Java Runtime Version: ").append(SystemInfo.JAVA_RUNTIME_VERSION).append('\n');

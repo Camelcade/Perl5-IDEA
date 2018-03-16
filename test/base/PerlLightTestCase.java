@@ -247,25 +247,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     }
   }
 
-  @NotNull
-  protected PsiFile getTopFile() {
-    PsiFile file = getFile();
-    if (file.getViewProvider() instanceof InjectedFileViewProvider) {
-      //noinspection ConstantConditions
-      file = file.getContext().getContainingFile();
-    }
-    return file;
-  }
-
-  @NotNull
-  protected Editor getTopEditor() {
-    Editor editor = getEditor();
-    while (editor instanceof EditorWindow) {
-      editor = ((EditorWindow)editor).getDelegate();
-    }
-    return editor;
-  }
-
   protected void assertInjectable() {
     assertTrue(
       "InjectLanguageAction should be available at cursor",
@@ -351,16 +332,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
-  @NotNull
-  protected <T extends PsiElement> T getElementAtCaret(int caretIndex, @NotNull Class<T> clazz) {
-    CaretModel caretModel = myFixture.getEditor().getCaretModel();
-    assertTrue(caretModel.getCaretCount() > caretIndex);
-    Caret caret = caretModel.getAllCarets().get(caretIndex);
-    int offset = caret.getOffset();
-    PsiElement focused = myFixture.getFile().findElementAt(offset);
-    return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
-  }
-
   protected <T extends PsiElement> T getElementAtCaretWithoutInjection(@NotNull Class<T> clazz) {
     return ObjectUtils.assertNotNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
   }
@@ -401,29 +372,10 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     Assert.assertEquals(expectedContent, actual);
   }
 
-  protected void testSmartKeyFile(String filename, char typed) {
-    initWithFileSmart(filename);
-    myFixture.type(typed);
-    checkResultByFile(filename);
-  }
-
   protected void testSmartKey(String original, char typed, String expected) {
     initWithTextSmart(original);
     myFixture.type(typed);
     myFixture.checkResult(expected);
-  }
-
-  protected void testLiveTemplateFile(String filename) {
-    initWithFileSmart(filename);
-    myFixture.performEditorAction(IdeActions.ACTION_EXPAND_LIVE_TEMPLATE_BY_TAB);
-    checkResultByFile(filename);
-  }
-
-  protected void checkResultByFile(String filenameWithoutExtension) {
-    String checkFileName = filenameWithoutExtension + ".txt";
-
-
-    myFixture.checkResultByFile(checkFileName);
   }
 
   public final void doTestCompletion() {
@@ -1030,10 +982,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     }
 
     return sb.toString();
-  }
-
-  protected void doLiveTemplateTest(@NotNull String textToType) {
-    doLiveTemplateTest(getTestName(true), textToType);
   }
 
   protected void doLiveTemplateTest(@NotNull String fileName, @NotNull String textToType) {

@@ -46,7 +46,7 @@ public class PerlLexerPerformanceTest extends PerlParserTestBase {
         length += testLexing(testData);
       }
       System.err.println("Lexing done in " + length / iterations + " ms per iteration of " + time);
-    }).cpuBound().useLegacyScaling().attempts(1).assertTiming();
+    }).attempts(1).assertTiming();
   }
 
   private long testLexing(String testData) {

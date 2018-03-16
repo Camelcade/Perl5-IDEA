@@ -56,7 +56,7 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
       }
       long length = System.currentTimeMillis() - start;
       System.err.println("Typing enter done in " + length / iterations + " ms per iteration  of " + time);
-    }).cpuBound().useLegacyScaling().assertTiming();
+    }).assertTiming();
   }
 
   public void testHighlighting() {
@@ -88,6 +88,6 @@ public class PerlUXPerformanceTest extends PerlLightTestCase {
       }
       long length = System.currentTimeMillis() - start;
       System.err.println("Highlighting done in " + length / iterations + " ms per iteration of " + time);
-    }).cpuBound().useLegacyScaling().assertTiming();
+    }).assertTiming();
   }
 }

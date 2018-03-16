@@ -16,11 +16,11 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
+import com.intellij.application.options.CodeStyle;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
-import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
@@ -58,9 +58,7 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
   @NotNull
   private static String getIndenter(@NotNull Project project, int indentSize) {
     CommonCodeStyleSettings.IndentOptions indentOptions =
-      CodeStyleSettingsManager.getInstance(project).getCurrentSettings().
-        getCommonSettings(PerlLanguage.INSTANCE)
-        .getIndentOptions();
+      CodeStyle.getSettings(project).getCommonSettings(PerlLanguage.INSTANCE).getIndentOptions();
 
     return StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
   }

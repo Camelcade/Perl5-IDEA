@@ -55,7 +55,7 @@ public class PerlStringCollectionTest extends PerlLightTestCase {
   }
 
   protected void doTest(String fileName, String... result) {
-    initWithFileAsScript(fileName);
+    initWithFileSmart(fileName);
     PerlUseStatement useStatement = getElementAtCaret(PerlUseStatement.class);
     assertNotNull(useStatement);
     assertEquals(Arrays.asList(result), useStatement.getImportParameters());

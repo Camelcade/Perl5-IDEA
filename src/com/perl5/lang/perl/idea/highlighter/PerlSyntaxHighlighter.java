@@ -111,6 +111,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
 
   static {
     EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
+    //noinspection deprecation
     UNUSED_DEPRECATED = TextAttributesKey.createTextAttributesKey("UNUSED_DEPRECATED",
                                                                   TextAttributes.merge(
                                                                     currentScheme

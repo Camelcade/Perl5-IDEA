@@ -55,8 +55,8 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
 
         // fixme adjust built in checking to the file; Remove second condition after implementing annotations
         if (subNameElement == null ||
-            (namespaceElement != null && namespaceElement.isBuiltin()) ||
-            (subNameElement.isBuiltIn())) {
+            namespaceElement != null && namespaceElement.isBuiltin() ||
+            subNameElement.isBuiltIn()) {
           return;
         }
 

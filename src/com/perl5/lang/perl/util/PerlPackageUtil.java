@@ -122,13 +122,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   }
 
   /**
-   * Checks if package is built in
-   *
-   * @param pacakgeName package name
-   * @return result
+   * @return true if package name is in CoreList
    */
-  public static boolean isBuiltIn(String pacakgeName) {
-    return CORE_PACKAGES_ALL.contains(getCanonicalPackageName(pacakgeName));
+  @Contract("null -> false")
+  public static boolean isBuiltIn(@Nullable String packageName) {
+    return packageName != null && CORE_PACKAGES_ALL.contains(getCanonicalPackageName(packageName));
   }
 
   /**

@@ -97,7 +97,7 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
 
 
   public void doTest(String filename, String type) {
-    initWithFileAsScript(filename);
+    initWithFileSmart(filename);
     PsiElement element = getElementAtCaret(PerlVariable.class);
     assertNotNull(element);
     assertInstanceOf(element, PerlVariable.class);
