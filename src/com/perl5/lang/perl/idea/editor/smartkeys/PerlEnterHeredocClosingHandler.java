@@ -131,7 +131,7 @@ public class PerlEnterHeredocClosingHandler extends EnterHandlerDelegateAdapter 
 
       if (inboundReference == null) // disclosed marker
       {
-        int addOffset = -1;
+        int addOffset;
         String closeMarker = "\n" + openerName + "\n";
 
         if (lastOpenerPointer == null) // first one

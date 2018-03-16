@@ -64,7 +64,7 @@ public class PerlGotoVariableContributor implements ChooseByNameContributor {
   public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
 
     if (name.length() > 0) {
-      Collection<PerlVariableDeclarationElement> result = null;
+      Collection<PerlVariableDeclarationElement> result;
       GlobalSearchScope scope =
         includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
 

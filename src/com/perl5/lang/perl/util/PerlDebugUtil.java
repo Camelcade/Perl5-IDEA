@@ -54,8 +54,8 @@ public class PerlDebugUtil {
     ApplicationManager.getApplication().runReadAction(() -> {
       String path = breakpointBase.getPath();
 
-      VirtualFile virtualFile = null;
-      String virtualFileUrl = null;
+      VirtualFile virtualFile;
+      String virtualFileUrl;
 
       virtualFile = VfsUtil.findFileByIoFile(new File(breakpointBase.getDebugThread().getDebugProfileState().mapPathToLocal(path)), true);
 

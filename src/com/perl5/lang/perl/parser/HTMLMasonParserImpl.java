@@ -140,7 +140,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       b.advanceLexer();
       PerlParserImpl.expr(b, l, -1);
 
-      if (r = MasonParserUtil.endOrRecover(b, HTML_MASON_CALL_CLOSER_UNMATCHED)) {
+      if (MasonParserUtil.endOrRecover(b, HTML_MASON_CALL_CLOSER_UNMATCHED)) {
         statementMarker.done(HTML_MASON_CALL_STATEMENT);
       }
 
@@ -248,7 +248,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
   }
 
   public static boolean parseArgsBlock(PsiBuilder b, int l) {
-    boolean r = false;
+    boolean r;
     PsiBuilder.Marker innerMarker = b.mark();
 
     if (PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_OPENER)) {

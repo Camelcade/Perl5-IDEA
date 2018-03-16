@@ -112,7 +112,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
 
     final int iterations = 30;
 
-    PsiFile psiFile = null;
+    PsiFile psiFile;
     for (int i = 0; i < iterations; i++) {
       psiFile = createPsiFile("test", testData);
       psiFile.getFirstChild();

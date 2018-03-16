@@ -104,7 +104,7 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
 
   static private class HeredocSeeker extends PerlPsiUtil.HeredocProcessor {
     protected PerlHeredocOpener myResult = null;
-    protected PsiElement myAnchor = null;
+    protected PsiElement myAnchor;
 
     public HeredocSeeker(int lineEndOffset, @Nullable PsiElement anchor) {
       super(lineEndOffset);

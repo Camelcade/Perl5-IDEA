@@ -99,7 +99,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
       return getPreParsedToken();
     }
     else if (currentCustomState == LEX_TEMPLATE_BLOCK) {
-      int closeTagLength = -1;
+      int closeTagLength;
       if (currentState != LEX_DQ_STRING &&
           currentState != LEX_SQ_STRING &&
           (closeTagLength = checkCloseTagAndGetLength(buffer, tokenStart, bufferEnd)) > 0) {

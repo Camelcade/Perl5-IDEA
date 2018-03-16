@@ -43,7 +43,7 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PerlNamespaceElement myElement = getElement();
     PsiFile file = myElement.getContainingFile();
-    PsiFile targetFile = null;
+    PsiFile targetFile;
 
     targetFile = PerlPackageUtil.resolvePackageNameToPsi(file, getPackageName());
 

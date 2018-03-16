@@ -58,7 +58,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
       PsiFile psiFile = position.getContainingFile();
       if (psiFile instanceof MasonFileImpl) {
         final VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(psiFile);
-        VirtualFile containingDir = null;
+        VirtualFile containingDir;
         if (containingFile != null && (containingDir = containingFile.getParent()) != null) {
           VfsUtil.processFilesRecursively(containingDir, new MasonRootsProcessor(containingDir) {
             @Override

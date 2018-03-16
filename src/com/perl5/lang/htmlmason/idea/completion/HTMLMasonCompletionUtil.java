@@ -78,7 +78,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
                                                    @NotNull Project project,
                                                    @NotNull HTMLMasonFileImpl component) {
     VirtualFile containingFile = component.getComponentVirtualFile();
-    VirtualFile root = null;
+    VirtualFile root;
     if (containingFile != null && (root = containingFile.getParent()) != null) {
       VfsUtil.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));
     }

@@ -27,7 +27,7 @@ import java.io.IOException;
  * Created by hurricup on 20.12.2015.
  */
 public class PerlLexerWithCustomStatesAdapter extends LexerBase {
-  private PerlLexerWithCustomStates myFlex = null;
+  private PerlLexerWithCustomStates myFlex;
   private IElementType myTokenType = null;
   private CharSequence myText;
 
