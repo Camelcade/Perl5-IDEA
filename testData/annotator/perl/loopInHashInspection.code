@@ -1,0 +1,33 @@
+use strict;
+use warnings;
+use v5.10;
+
+my %hash;
+my $scalar;
+my @array;
+foreach my $element (<error descr="Hash iterating. You've probably missed 'keys' or 'values'">%hash</error>) {}
+for my $element (<error descr="Hash iterating. You've probably missed 'keys' or 'values'">%hash</error>) {}
+say for <error descr="Hash iterating. You've probably missed 'keys' or 'values'">%hash</error>;
+say foreach <error descr="Hash iterating. You've probably missed 'keys' or 'values'">%hash</error>;
+
+foreach my $element (<error descr="Hash iterating. You've probably missed 'keys' or 'values'">%$scalar</error>) {}
+for my $element (<error descr="Hash iterating. You've probably missed 'keys' or 'values'">%$scalar</error>) {}
+say for <error descr="Hash iterating. You've probably missed 'keys' or 'values'">%$scalar</error>;
+say foreach <error descr="Hash iterating. You've probably missed 'keys' or 'values'">%$scalar</error>;
+
+foreach my $element (<error descr="Hash iterating. You've probably missed 'keys' or 'values'">%{say 'hi'}</error>) {}
+for my $element (<error descr="Hash iterating. You've probably missed 'keys' or 'values'">%{say 'hi'}</error>) {}
+say for <error descr="Hash iterating. You've probably missed 'keys' or 'values'">%{say 'hi'}</error>;
+say foreach <error descr="Hash iterating. You've probably missed 'keys' or 'values'">%{say 'hi'}</error>;
+
+
+foreach my $element (@hash{1}) {}
+for my $element (@hash{1}) {}
+say for @hash{1};
+say foreach @hash{1};
+
+foreach my $element (@array) {}
+for my $element (@array) {}
+say for @array;
+say foreach @array;
+

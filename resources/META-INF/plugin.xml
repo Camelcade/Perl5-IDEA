@@ -42,6 +42,7 @@
      <ul>
       <li>Assignments alignment now supports a <code>Perl::Tidy</code> mode - alignment on consecutive lines, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1745">@ElMoselYEE</a></li>
       <li>Comments are now aligned on consecutive lines, configurable</li>
+      <li>Loop on hash inspection, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1748">#1748</a></li>
      </ul>
      </p>
      <p>Fixes:
@@ -945,6 +946,10 @@
                      shortName="IdentifierInspection" displayName="Correct identifiers" groupName="Perl5"
                      enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlIdentifierInspection"/>
+    <localInspection language="Perl5"
+                     shortName="HashLoopInspection" displayName="Loop on hash" groupName="Perl5"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlHashLoopInspection"/>
 
     <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.StatementToCompoundIntention</className>

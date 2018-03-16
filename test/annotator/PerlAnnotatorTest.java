@@ -33,6 +33,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   private void doTestUseVarsInspection() {doInspectionTest(PerlUseVarsInspection.class);}
 
+  public void testLoopInHashInspection() {doInspectionTest(PerlHashLoopInspection.class);}
+
   public void testUseVarsInspection() {doTestUseVarsInspection();}
 
   public void testUseVarsEmptyInspection() {doTestUseVarsInspection();}
