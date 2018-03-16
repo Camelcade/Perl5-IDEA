@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -39,7 +40,7 @@ public enum PerlReturnType {
   }
 
   public static PerlReturnType deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    return PerlReturnType.valueOf(dataStream.readName().toString());
+    return PerlReturnType.valueOf(PerlStubSerializationUtil.readString(dataStream));
   }
 
 }

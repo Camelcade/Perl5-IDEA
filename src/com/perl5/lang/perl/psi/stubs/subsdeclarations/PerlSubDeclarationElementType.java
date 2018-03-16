@@ -24,6 +24,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
 
@@ -78,8 +79,8 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
   @NotNull
   @Override
   public PerlSubDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    String packageName = dataStream.readName().toString();
-    String subName = dataStream.readName().toString();
+    String packageName = PerlStubSerializationUtil.readString(dataStream);
+    String subName = PerlStubSerializationUtil.readString(dataStream);
     PerlSubAnnotations annotations = null;
     if (dataStream.readBoolean()) {
       annotations = PerlSubAnnotations.deserialize(dataStream);
@@ -89,8 +90,14 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
 
   @Override
   public void indexStub(@NotNull PerlSubDeclarationStub stub, @NotNull IndexSink sink) {
-    sink.occurrence(PerlSubDeclarationIndex.KEY, stub.getCanonicalName());
-    sink.occurrence(PerlSubDeclarationReverseIndex.KEY, stub.getPackageName());
+    String canonicalName = stub.getCanonicalName();
+    if (canonicalName != null) {
+      sink.occurrence(PerlSubDeclarationIndex.KEY, canonicalName);
+    }
+    String packageName = stub.getPackageName();
+    if (packageName != null) {
+      sink.occurrence(PerlSubDeclarationReverseIndex.KEY, packageName);
+    }
   }
 
   @Override

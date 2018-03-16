@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
@@ -105,7 +106,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
 
         for (PerlSubElement untargetedSub : possibleTargets) {
           result.addElement(LookupElementBuilder
-                              .create(untargetedSub.getPresentableName())
+                              .create(StringUtil.notNullize(untargetedSub.getPresentableName()))
                               .withIcon(untargetedSub.getIcon(0))
           );
         }

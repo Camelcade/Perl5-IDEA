@@ -75,8 +75,14 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
 
   @Override
   public void indexStub(@NotNull PerlSubDefinitionStub stub, @NotNull IndexSink sink) {
-    sink.occurrence(getDirectKey(), stub.getCanonicalName());
-    sink.occurrence(getReverseKey(), stub.getPackageName());
+    String canonicalName = stub.getCanonicalName();
+    if (canonicalName != null) {
+      sink.occurrence(getDirectKey(), canonicalName);
+    }
+    String packageName = stub.getPackageName();
+    if (packageName != null) {
+      sink.occurrence(getReverseKey(), packageName);
+    }
   }
 
   protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {

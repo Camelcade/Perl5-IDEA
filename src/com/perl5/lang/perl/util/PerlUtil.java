@@ -162,11 +162,8 @@ public class PerlUtil implements PerlElementTypes {
    *
    * @return like scalar for scalars, strings and so on, lists for arrays, hashes, can be null if we not sure
    */
-  @Nullable
+  @NotNull
   public static PerlContextType getElementContextType(PsiElement element) {
-    if (LIST_CONTEXT_ELEMENTS.contains(PsiUtilCore.getElementType(element))) {
-      return PerlContextType.LIST;
-    }
-    return PerlContextType.SCALAR;
+    return LIST_CONTEXT_ELEMENTS.contains(PsiUtilCore.getElementType(element)) ? PerlContextType.LIST : PerlContextType.SCALAR;
   }
 }

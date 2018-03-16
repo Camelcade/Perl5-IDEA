@@ -46,8 +46,7 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public boolean isPragma() {
-    PerlPackageProcessor packageProcessor = getPackageProcessor();
-    return packageProcessor != null && packageProcessor.isPragma();
+    return getPackageProcessor().isPragma();
   }
 
   @Override

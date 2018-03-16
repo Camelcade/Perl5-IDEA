@@ -74,7 +74,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     if (lists == null || lists.first.isEmpty()) {
       return Collections.emptyList();
     }
-    return lists.first.stream().map(ElementManipulators::getValueText).filter(Objects::nonNull).collect(Collectors.toList());
+    return lists.first.stream().map(ElementManipulators::getValueText).collect(Collectors.toList());
   }
 
   @NotNull

@@ -26,6 +26,7 @@ import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonMethodDefinitionImpl;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
 import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonMethodDefinitionStubImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -64,7 +65,7 @@ public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethod
   @NotNull
   @Override
   public HTMLMasonMethodDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, dataStream.readName().toString());
+    return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
   @Override

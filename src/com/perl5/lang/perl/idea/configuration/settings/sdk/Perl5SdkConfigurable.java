@@ -236,8 +236,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   public void disposeUIResources() {
     myConnection.deliverImmediately();
     myConnection.disconnect();
-    myConnection = null;
-    mySdkManipulator = null;
     myPanel = null;
   }
 

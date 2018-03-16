@@ -111,7 +111,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
       }
     }
     else if (currentCustomState == LEX_TEMPLATE_LINE) {
-      if (tokenStart < bufferEnd && buffer.charAt(tokenStart) == '\n') {
+      if (buffer.charAt(tokenStart) == '\n') {
         endTemplate(tokenStart, 1);
         return TT2_HARD_NEWLINE;
       }

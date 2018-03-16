@@ -144,12 +144,17 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   @NotNull
   @Override
   public PerlNamespaceDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    String packageName = dataStream.readName().toString();
-    PerlMroType mroType = PerlMroType.valueOf(dataStream.readName().toString());
+    String packageName = PerlStubSerializationUtil.readString(dataStream);
+    PerlMroType mroType = PerlMroType.valueOf(PerlStubSerializationUtil.readString(dataStream));
     List<String> parentNamespaces = PerlStubSerializationUtil.readStringsList(dataStream);
     List<String> EXPORT = PerlStubSerializationUtil.readStringsList(dataStream);
     List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
     Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
+
+    assert packageName != null;
+    assert parentNamespaces != null;
+    assert EXPORT != null;
+    assert EXPORT_OK != null;
 
     return createStubElement(
       parentStub,

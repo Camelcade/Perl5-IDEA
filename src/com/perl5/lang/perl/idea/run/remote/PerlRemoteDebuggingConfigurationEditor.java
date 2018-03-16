@@ -59,7 +59,9 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
   @Override
   protected void applyEditorTo(@NotNull PerlRemoteDebuggingConfiguration perlConfiguration) throws ConfigurationException {
     perlConfiguration.setRemoteProjectRoot(myWorkingDirectoryComponent.getText());
-    perlConfiguration.setPerlRole(myPerlRole.getSelectedItem().toString());
+    Object selectedItem = myPerlRole.getSelectedItem();
+    assert selectedItem != null;
+    perlConfiguration.setPerlRole(selectedItem.toString());
     perlConfiguration.setDebugHost(myDebuggingHost.getText());
     String debuggingPort = myDebuggingPort.getText();
     if (StringUtil.isNotEmpty(debuggingPort)) {

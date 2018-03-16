@@ -143,7 +143,10 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       // globs
       PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob ->
       {
-        finalResultSet.addElement(PerlVariableCompletionUtil.getGlobLookupElement(adjustName(typeglob.getCanonicalName(), forceShortMain)));
+        String adjustedName = adjustName(typeglob.getCanonicalName(), forceShortMain);
+        if (adjustedName != null) {
+          finalResultSet.addElement(PerlVariableCompletionUtil.getGlobLookupElement(adjustedName));
+        }
         return true;
       });
     }

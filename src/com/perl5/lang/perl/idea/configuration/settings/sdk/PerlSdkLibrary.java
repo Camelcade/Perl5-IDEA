@@ -68,14 +68,16 @@ public class PerlSdkLibrary extends SyntheticLibrary implements ItemPresentation
 
     PerlSdkLibrary library = (PerlSdkLibrary)o;
 
-    if (myRoots != null ? !myRoots.equals(library.myRoots) : library.myRoots != null) return false;
-    return mySdk != null ? mySdk.equals(library.mySdk) : library.mySdk == null;
+    if (!myRoots.equals(library.myRoots)) {
+      return false;
+    }
+    return mySdk.equals(library.mySdk);
   }
 
   @Override
   public int hashCode() {
-    int result = myRoots != null ? myRoots.hashCode() : 0;
-    result = 31 * result + (mySdk != null ? mySdk.hashCode() : 0);
+    int result = myRoots.hashCode();
+    result = 31 * result + mySdk.hashCode();
     return result;
   }
 }

@@ -181,6 +181,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
 
+  @NotNull
   @Override
   public PerlVariable getVariable() {
     return this;

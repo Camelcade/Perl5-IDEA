@@ -29,6 +29,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readString;
+import static com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil.readStringsList;
+
 /**
  * Created by hurricup on 20.08.2015.
  */
@@ -75,8 +78,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
   @NotNull
   @Override
   public PerlUseStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlUseStatementStubImpl(parentStub, dataStream.readName().toString(), dataStream.readName().toString(),
-                                        PerlStubSerializationUtil.readStringsList(dataStream));
+    return new PerlUseStatementStubImpl(parentStub, readString(dataStream), readString(dataStream), readStringsList(dataStream));
   }
 
   @Override

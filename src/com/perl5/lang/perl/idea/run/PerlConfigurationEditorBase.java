@@ -90,7 +90,6 @@ public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOpti
     scriptCharset.setLabelLocation(BorderLayout.WEST);
     panel.add(scriptCharset);
 
-    //noinspection Since15
     myStartMode = new ComboBox(new MapComboBoxModel<>(PerlDebugOptionsSets.STARTUP_OPTIONS)) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {

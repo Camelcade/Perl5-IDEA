@@ -27,6 +27,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
@@ -36,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -51,19 +53,16 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     super(stub, nodeType);
   }
 
+  @NotNull
   @Override
   public PerlVariable getVariable() {
-    return findChildByClass(PerlVariable.class);
+    return Objects.requireNonNull(findChildByClass(PerlVariable.class));
   }
 
   @Nullable
   @Override
   public PsiElement getNameIdentifier() {
-    PerlVariable perlVariable = getVariable();
-    if (perlVariable != null) {
-      return perlVariable.getVariableNameElement();
-    }
-    return null;
+    return getVariable().getVariableNameElement();
   }
 
 
@@ -155,7 +154,10 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   @Override
   public SearchScope getUseScope() {
     if (isLexicalDeclaration()) {
-      return new LocalSearchScope(getVariable().getLexicalScope());
+      PerlLexicalScope lexicalScope = getVariable().getLexicalScope();
+      if (lexicalScope != null) {
+        return new LocalSearchScope(lexicalScope);
+      }
     }
 
     return super.getUseScope();

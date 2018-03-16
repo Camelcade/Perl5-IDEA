@@ -729,20 +729,15 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     boolean isCharGroup = false;
     boolean isQuotesDiffers = closingChar != openingChar;
 
-    int braceLevel = 0;
-    int parenLevel = 0;
     int delimiterLevel = 0;
 
     int currentOffset = startOffset;
 
-    while (true) {
-      if (currentOffset >= bufferEnd) {
-        break;
-      }
+    while (currentOffset < bufferEnd) {
 
       char currentChar = buffer.charAt(currentOffset);
 
-      if (delimiterLevel == 0 && braceLevel == 0 && !isCharGroup && !isEscaped && parenLevel == 0 && closingChar == currentChar) {
+      if (delimiterLevel == 0 && !isCharGroup && !isEscaped && closingChar == currentChar) {
         return currentOffset;
       }
 

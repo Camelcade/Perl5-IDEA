@@ -57,7 +57,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
 
       // fixme support different roots here
       VirtualFile virtualFile = ((PsiDirectoryNode)node).getVirtualFile();
-      if (roots.containsKey(virtualFile)) {
+      if (virtualFile != null && roots.containsKey(virtualFile)) {
         PerlSourceRootType rootType = roots.get(virtualFile);
         ModuleSourceRootEditHandler handler = rootType.getEditHandler();
         node = new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {

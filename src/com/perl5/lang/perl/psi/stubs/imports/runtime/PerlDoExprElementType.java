@@ -23,6 +23,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
+import com.twelvemonkeys.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -74,8 +76,8 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
   @NotNull
   @Override
   public PerlRuntimeImportStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    String importPath = dataStream.readName().toString();
-    if (importPath.isEmpty()) {
+    String importPath = PerlStubSerializationUtil.readString(dataStream);
+    if (StringUtil.isEmpty(importPath)) {
       importPath = null;
     }
     return new PerlRuntimeImportStubImpl(parentStub, this, importPath);

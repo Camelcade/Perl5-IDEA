@@ -89,7 +89,7 @@ public class PerlFormattingReplace implements PerlFormattingOperation {
       assert targetContainer != null;
 
       // adding the rest of targets
-      while (currentTargetElement != null && currentTargetElement != myTargetToElement) {
+      while (currentTargetElement != myTargetToElement) {
         currentTargetElement = currentTargetElement.getNextSibling();
         assert currentTargetElement != null && currentTargetElement.isValid();
         result += currentTargetElement.getNode().getTextLength();

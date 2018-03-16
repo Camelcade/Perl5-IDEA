@@ -25,6 +25,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,7 +70,7 @@ public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlM
   @NotNull
   @Override
   public PerlMooseAugmentStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlMooseAugmentStatementStubImpl(parentStub, this, dataStream.readName().toString());
+    return new PerlMooseAugmentStatementStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
   @Override

@@ -25,6 +25,7 @@ import com.perl5.lang.mason2.psi.MasonFlagsStatement;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -79,9 +80,10 @@ public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements Mas
     return null;
   }
 
+  @Contract("null -> true")
   private boolean isNullOrNotComma(@Nullable PsiElement element) {
     if (element == null) {
-      return false;
+      return true;
     }
 
     IElementType elementType = element.getNode().getElementType();

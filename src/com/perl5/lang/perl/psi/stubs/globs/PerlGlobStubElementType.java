@@ -25,6 +25,7 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -78,7 +79,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
   @NotNull
   @Override
   public PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlGlobStubImpl(parentStub, dataStream.readName().getString(), dataStream.readName().getString(), dataStream.readBoolean());
+    return new PerlGlobStubImpl(parentStub, PerlStubSerializationUtil.readString(dataStream),
+                                PerlStubSerializationUtil.readString(dataStream), dataStream.readBoolean());
   }
 
   @Override

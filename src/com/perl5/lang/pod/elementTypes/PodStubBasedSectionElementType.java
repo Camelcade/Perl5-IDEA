@@ -19,6 +19,7 @@ package com.perl5.lang.pod.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
@@ -56,7 +57,7 @@ public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSecti
   @NotNull
   @Override
   public PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PodSectionStubImpl(parentStub, this, dataStream.readName().toString());
+    return new PodSectionStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
   @Override

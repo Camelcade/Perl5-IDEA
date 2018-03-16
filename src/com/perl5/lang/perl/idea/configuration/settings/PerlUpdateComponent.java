@@ -87,42 +87,38 @@ public class PerlUpdateComponent implements ApplicationComponent, Disposable {
     PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
     long lastUpdate = propertiesComponent.getOrInitLong(KEY, 0);
     if (lastUpdate == 0 || System.currentTimeMillis() - lastUpdate > TimeUnit.DAYS.toMillis(1)) {
-      ApplicationManager.getApplication().executeOnPooledThread(() ->
-                                                                {
-                                                                  try {
-                                                                    String buildNumber =
-                                                                      ApplicationInfo.getInstance().getBuild().asString();
-                                                                    IdeaPluginDescriptor plugin = getPlugin();
-                                                                    String pluginVersion = plugin.getVersion();
-                                                                    String pluginId = plugin.getPluginId().getIdString();
-                                                                    String os = URLEncoder
-                                                                      .encode(SystemInfo.OS_NAME + " " + SystemInfo.OS_VERSION,
-                                                                              CharsetToolkit.UTF8);
-                                                                    String uid = PermanentInstallationID.get();
-                                                                    String url =
-                                                                      "https://plugins.jetbrains.com/plugins/list" +
-                                                                      "?pluginId=" + pluginId +
-                                                                      "&build=" + buildNumber +
-                                                                      "&pluginVersion=" + pluginVersion +
-                                                                      "&os=" + os +
-                                                                      "&uuid=" + uid;
-                                                                    PropertiesComponent.getInstance()
-                                                                      .setValue(KEY, String.valueOf(System.currentTimeMillis()));
-                                                                    HttpRequests.request(url).connect(
-                                                                      request ->
-                                                                      {
-                                                                        try {
-                                                                          JDOMUtil.load(request.getReader());
-                                                                        }
-                                                                        catch (JDOMException ignore) {
-                                                                        }
-                                                                        return null;
-                                                                      }
-                                                                    );
-                                                                  }
-                                                                  catch (Exception ignored) {
-                                                                  }
-                                                                });
+      ApplicationManager.getApplication().executeOnPooledThread(
+        () -> {
+          try {
+            String buildNumber =
+              ApplicationInfo.getInstance().getBuild().asString();
+            IdeaPluginDescriptor plugin = getPlugin();
+            String pluginVersion = plugin.getVersion();
+            String pluginId = plugin.getPluginId().getIdString();
+            String os = URLEncoder.encode(SystemInfo.OS_NAME + " " + SystemInfo.OS_VERSION, CharsetToolkit.UTF8);
+            String uid = PermanentInstallationID.get();
+            String url =
+              "https://plugins.jetbrains.com/plugins/list" +
+              "?pluginId=" + pluginId +
+              "&build=" + buildNumber +
+              "&pluginVersion=" + pluginVersion +
+              "&os=" + os +
+              "&uuid=" + uid;
+            PropertiesComponent.getInstance().setValue(KEY, String.valueOf(System.currentTimeMillis()));
+            HttpRequests.request(url).connect(
+              request -> {
+                try {
+                  JDOMUtil.load(request.getReader());
+                }
+                catch (JDOMException ignore) {
+                }
+                return null;
+              }
+            );
+          }
+          catch (Exception ignored) {
+          }
+        });
     }
   }
 }

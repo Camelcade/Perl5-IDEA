@@ -78,7 +78,6 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
     }
     if (isEscaped) // end with escape, not sure if possible
     {
-      assert sourceOffset > 0;
       outChars.append('\\');
       offsetsMap.put(targetOffset++, sourceOffset - 1);
     }

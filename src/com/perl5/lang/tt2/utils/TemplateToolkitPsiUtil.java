@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -48,7 +49,11 @@ public class TemplateToolkitPsiUtil {
   }
 
   @Nullable
-  public static IElementType getLastOpenMarker(Editor editor) {
+  @Contract("null -> null")
+  public static IElementType getLastOpenMarker(@Nullable Editor editor) {
+    if (editor == null) {
+      return null;
+    }
     int offset = editor.getCaretModel().getOffset();
     HighlighterIterator iterator = ((EditorEx)editor).getHighlighter().createIterator(offset);
 

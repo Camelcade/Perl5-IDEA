@@ -53,7 +53,9 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
 
     PsiDirectory currentRoot = ((PsiDirectory)element).getParentDirectory();
 
-    recursiveDirectoryMove(element.getProject(), (PsiDirectory)element, getOrCreateSubDir(currentRoot, newName));
+    if (currentRoot != null) {
+      recursiveDirectoryMove(element.getProject(), (PsiDirectory)element, getOrCreateSubDir(currentRoot, newName));
+    }
     //		element.delete();
   }
 

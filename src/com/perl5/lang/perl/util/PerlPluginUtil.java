@@ -24,10 +24,12 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 16.04.2016.
@@ -35,29 +37,26 @@ import java.io.IOException;
 public class PerlPluginUtil {
   public static final String PLUGIN_ID = "com.perl5";
 
-  @Nullable
+  @NotNull
   public static IdeaPluginDescriptor getPlugin() {
-    return PluginManager.getPlugin(PluginId.getId(PLUGIN_ID));
+    return Objects.requireNonNull(PluginManager.getPlugin(PluginId.getId(PLUGIN_ID)));
   }
 
   @Nullable
   public static String getPluginVersion() {
     IdeaPluginDescriptor plugin = getPlugin();
-    return plugin == null ? null : plugin.getVersion();
+    return plugin.getVersion();
   }
 
   @Nullable
   public static String getPluginRoot() {
     IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
-    if (plugin != null) {
-      try {
-        return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
-      }
-      catch (IOException e) {
-        return null;
-      }
+    try {
+      return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
     }
-    return null;
+    catch (IOException e) {
+      return null;
+    }
   }
 
 

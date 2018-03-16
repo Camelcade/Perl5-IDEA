@@ -164,10 +164,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   @Nullable
   public static PsiElement getNextSignificantSibling(PsiElement element) {
     PsiElement result = element.getNextSibling();
-    while (true) {
-      if (result == null || !(result instanceof PsiComment || result instanceof PsiWhiteSpace)) {
-        break;
-      }
+    while ((result instanceof PsiComment || result instanceof PsiWhiteSpace)) {
       result = result.getNextSibling();
     }
     return result;
@@ -176,10 +173,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   @Nullable
   public static ASTNode getNextSignificantSibling(ASTNode node) {
     ASTNode result = node.getTreeNext();
-    while (true) {
-      if (result == null || result.getElementType() != TokenType.WHITE_SPACE) {
-        break;
-      }
+    while (result != null && result.getElementType() == TokenType.WHITE_SPACE) {
       result = result.getTreeNext();
     }
     return result;

@@ -33,9 +33,8 @@ import java.util.Map;
  */
 public class PerlStubSerializationUtil {
   @Nullable
-  public static String readNullableString(@NotNull StubInputStream dataStream) throws IOException {
-    StringRef stringRef = dataStream.readName();
-    return stringRef == null ? null : stringRef.getString();
+  public static String readString(@NotNull StubInputStream dataStream) throws IOException {
+    return StringRef.toString(dataStream.readName());
   }
 
 
@@ -61,7 +60,7 @@ public class PerlStubSerializationUtil {
 
     ArrayList<String> result = new ArrayList<>(listSize);
     for (int i = 0; i < listSize; i++) {
-      result.add(dataStream.readName().toString());
+      result.add(readString(dataStream));
     }
     return result;
   }
@@ -78,8 +77,7 @@ public class PerlStubSerializationUtil {
     int mapSize = dataStream.readInt();
     Map<String, List<String>> stringListMap = new HashMap<>(mapSize);
     for (int i = 0; i < mapSize; i++) {
-      String key = dataStream.readName().toString();
-      stringListMap.put(key, readStringsList(dataStream));
+      stringListMap.put(readString(dataStream), readStringsList(dataStream));
     }
     return stringListMap;
   }

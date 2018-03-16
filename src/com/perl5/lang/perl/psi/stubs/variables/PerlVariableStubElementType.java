@@ -25,6 +25,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl;
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -105,16 +106,16 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
   @NotNull
   @Override
   public PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    String variableType = dataStream.readName().toString();
-    if (variableType.isEmpty()) {
+    String variableType = PerlStubSerializationUtil.readString(dataStream);
+    if (StringUtil.isEmpty(variableType)) {
       variableType = null;
     }
 
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
-      dataStream.readName().toString(),
-      dataStream.readName().toString(),
+      PerlStubSerializationUtil.readString(dataStream),
+      PerlStubSerializationUtil.readString(dataStream),
       variableType,
       PerlVariableType.values()[dataStream.readByte()],
       readAnnotations(dataStream)

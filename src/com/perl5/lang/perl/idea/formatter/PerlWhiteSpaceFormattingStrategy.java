@@ -37,7 +37,7 @@ public class PerlWhiteSpaceFormattingStrategy extends AbstractWhiteSpaceFormatti
                                                   CodeStyleSettings codeStyleSettings,
                                                   ASTNode nodeAfter) {
     if (nodeAfter == null) {
-      return super.adjustWhiteSpaceIfNecessary(whiteSpaceText, text, startOffset, endOffset, codeStyleSettings, nodeAfter);
+      return super.adjustWhiteSpaceIfNecessary(whiteSpaceText, text, startOffset, endOffset, codeStyleSettings, null);
     }
 
     PsiElement psi = nodeAfter.getPsi();

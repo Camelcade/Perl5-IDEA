@@ -127,7 +127,7 @@ public class PerlSubAnnotations {
   public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlSubAnnotations(
       dataStream.readByte(),
-      PerlStubSerializationUtil.readNullableString(dataStream),
+      PerlStubSerializationUtil.readString(dataStream),
       PerlReturnType.deserialize(dataStream)
     );
   }

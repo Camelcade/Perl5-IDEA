@@ -84,7 +84,7 @@ public class PerlVariableAnnotations {
   public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlVariableAnnotations(
       dataStream.readByte(),
-      PerlStubSerializationUtil.readNullableString(dataStream),
+      PerlStubSerializationUtil.readString(dataStream),
       PerlReturnType.deserialize(dataStream)
     );
   }

@@ -110,8 +110,9 @@ public class PerlSubCompletionUtil {
   @NotNull
   public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable,
                                                           @Nullable PerlExportDescriptor exportDescriptor) {
+    String lookupString = exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName();
     return LookupElementBuilder
-      .create(exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName())
+      .create(lookupString == null ? "" : lookupString)
       .withIcon(globVariable.getIcon(0))
       .withInsertHandler(SUB_SELECTION_HANDLER)
       .withTypeText(globVariable.getPackageName(), true)

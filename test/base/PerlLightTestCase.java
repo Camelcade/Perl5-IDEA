@@ -616,8 +616,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       }
       else if (intentionAction.getText().startsWith(prefixOrName)) {
         if (intention != null) {
-          assertNull("Clarify prefix, too many with: " + prefixOrName + " " + intention.getText() + " and " + intentionAction.getText(),
-                     intention);
+          fail("Clarify prefix, too many with: " + prefixOrName + " " + intention.getText() + " and " + intentionAction.getText());
         }
         intention = intentionAction;
       }

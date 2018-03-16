@@ -34,12 +34,10 @@ import javax.swing.*;
 public interface PerlVariableDeclarationElement
   extends StubBasedPsiElement<PerlVariableDeclarationStub>, PerlIdentifierOwner, PerlCompositeElement, PerlVariableDeclaration {
   /**
-   * Returns declared variable object
-   *
-   * @return variable object
+   * @return Returns declared variable object
    */
+  @NotNull
   PerlVariable getVariable();
-
 
   @Nullable
   default Icon getIconByType(@NotNull PerlVariableType type) {
