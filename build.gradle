@@ -74,6 +74,11 @@ intellij {
     updateSinceUntilBuild = true
 }
 
+patchPluginXml{
+    pluginDescription(file(descriptionFile).text)
+    changeNotes(file(changesFile).text)
+}
+
 runIde{
     if( project.hasProperty("nocancel")){
         systemProperty("idea.ProcessCanceledException", "disabled")
