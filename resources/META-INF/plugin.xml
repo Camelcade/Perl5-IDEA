@@ -20,41 +20,6 @@
   <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
   <category>Custom Languages</category>
 
-  <description><![CDATA[
-    <p>Camelcade plugin provides support for the following languages and frameworks:<ul>
-    <li>Perl5 & Pod</li>
-    <li>Mojolicious</li>
-    <li>HTML::Mason</li>
-    <li>Mason2</li>
-    <li>Template Toolkit 2</li>
-    </ul>
-    More information may be found in our <a href="https://github.com/hurricup/Perl5-IDEA/wiki">Wiki</a>.</p>
-    <br><br>
-    <a href="https://github.com/hurricup/Perl5-IDEA/issues">Bug Tracker</a>
-    | <a href="https://twitter.com/CamelcadeIDE">Twitter</a>
-    | <a href="https://groups.google.com/forum/#!forum/camelcade">Google Group</a>
-    | <a href="https://github.com/hurricup/Perl5-IDEA">Sources</a>
-    | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E">PayPal</a>
-    ]]></description>
-
-  <change-notes><![CDATA[
-     <p>Updates:
-     <ul>
-      <li>Assignments alignment now supports a <code>Perl::Tidy</code> mode - alignment on consecutive lines, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1745">@ElMoselYEE</a></li>
-      <li>Comments are now aligned on consecutive lines, configurable</li>
-      <li>Loop on hash inspection, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1748">#1748</a></li>
-     </ul>
-     </p>
-     <p>Fixes:
-      <ul>
-      <li>Perl options are now searchable in settings panel, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1746">@RickMeasham</a></li>
-      <li>Perl interpreter manipulation is now available even when IDE indexing files, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1741">@brnrc</a></li>
-      <li>Fixed Perl5 actions names for better search by name and keymap interface, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1745">@ElMoselYEE</a></li>
-      </ul>
-     </p>
-    ]]>
-  </change-notes>
-
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products  -->
 
