@@ -1,0 +1,2 @@
+Perl5
+  PsiComment(Perl5: COMMENT_BLOCK)('__DATA__')
