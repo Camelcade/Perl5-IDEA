@@ -1,0 +1,1183 @@
+<error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+<error descr="'break' outside of the 'given' block">break</error>;
+<error descr="'next' outside of the loop or block">next</error>;
+<error descr="'redo' outside of the loop or block">redo</error>;
+<error descr="'last' outside of the loop or block">last</error>;
+
+sub subname{
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+}
+
+sub subname{
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+}
+
+method subname{
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+}
+
+method subname{
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+}
+
+func subname{
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+}
+
+func subname{
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    # should be a lazy parsable block
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+}
+
+for (;;) {
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+}
+foreach (@ARGV) {
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+}
+while () {
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+}
+until () {
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+}
+
+BEGIN{
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used in the named block">last</error> while shift;
+    say and <error descr="'last' can't be used in the named block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used in the named block">next</error> while shift;
+    say and <error descr="'next' can't be used in the named block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used in the named block">redo</error> while shift;
+    say and <error descr="'redo' can't be used in the named block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used in the named block">next</error>;
+    <error descr="'redo' can't be used in the named block">redo</error>;
+    <error descr="'last' can't be used in the named block">last</error>;
+}
+
+{
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+    {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    continue {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+}
+continue {
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+}
+
+map {
+    say and last for 1,2,3;
+    say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> while shift;
+    say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> while shift;
+    say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> while shift;
+    say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error>;
+    <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error>;
+    <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error>;
+} @ARGV;
+
+grep {
+    say and last for 1,2,3;
+    say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> while shift;
+    say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> while shift;
+    say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> while shift;
+    say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error>;
+    <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error>;
+    <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error>;
+} @ARGV;
+
+sub {
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+};
+
+do {
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+};
+
+eval {
+    say and last for 1,2,3;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+    say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+    say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+    say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+    <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+    <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+};
+
+given ($a) {
+    say and last for 1,2,3;
+    say and <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error> while shift;
+    say and <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    break;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error>;
+    {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    when (/blabla/) {
+        say and last for 1,2,3;
+        say and <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error> while shift;
+        say and <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' inside the 'when'/'default' block, did you mean 'continue'?">next</error> while shift;
+        say and <error descr="'next' inside the 'when'/'default' block, did you mean 'continue'?">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+        say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+        continue;
+        break;
+        <error descr="'next' inside the 'when'/'default' block, did you mean 'continue'?">next</error>;
+        <error descr="'redo' outside of the loop or block">redo</error>;
+        <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error>;
+        {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            break;
+            next;
+            redo;
+            last;
+        }
+    }
+    default {
+        say and last for 1,2,3;
+        say and <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error> while shift;
+        say and <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' inside the 'when'/'default' block, did you mean 'continue'?">next</error> while shift;
+        say and <error descr="'next' inside the 'when'/'default' block, did you mean 'continue'?">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+        say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+        continue;
+        break;
+        <error descr="'next' inside the 'when'/'default' block, did you mean 'continue'?">next</error>;
+        <error descr="'redo' outside of the loop or block">redo</error>;
+        <error descr="'last' inside the 'given' block, did you mean 'break'?">last</error>;
+        {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            break;
+            next;
+            redo;
+            last;
+        }
+    }
+}
+if ($cond) {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+}
+elsif ($cond) {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+}
+else {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+}
+unless ($cond) {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+}
+
+try {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+}
+catch {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+}
+finally {
+    say and last for 1,2,3;
+    say and <error descr="'last' outside of the loop or block">last</error> while shift;
+    say and <error descr="'last' outside of the loop or block">last</error> until shift;
+    say and next for 1,2,3;
+    say and <error descr="'next' outside of the loop or block">next</error> while shift;
+    say and <error descr="'next' outside of the loop or block">next</error> until shift;
+    say and redo for 1,2,3;
+    say and <error descr="'redo' outside of the loop or block">redo</error> while shift;
+    say and <error descr="'redo' outside of the loop or block">redo</error> until shift;
+    <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+    <error descr="'break' outside of the 'given' block">break</error>;
+    <error descr="'next' outside of the loop or block">next</error>;
+    <error descr="'redo' outside of the loop or block">redo</error>;
+    <error descr="'last' outside of the loop or block">last</error>;
+};
+
+package Test::Package {
+    say and last for 1,2,3;
+    say and last while shift;
+    say and last until shift;
+    say and next for 1,2,3;
+    say and next while shift;
+    say and next until shift;
+    say and redo for 1,2,3;
+    say and redo while shift;
+    say and redo until shift;
+    <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+    <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+    next;
+    redo;
+    last;
+}
+
+{
+    sub subname{
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    }
+
+    sub subname{
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    }
+
+    method subname{
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    }
+
+    method subname{
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    }
+
+    func subname{
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    }
+
+    func subname{
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        # should be a lazy parsable block
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    }
+
+    for (;;) {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    foreach (@ARGV) {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    while () {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    until () {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+
+    BEGIN{
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used in the named block">last</error> while shift;
+        say and <error descr="'last' can't be used in the named block">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used in the named block">next</error> while shift;
+        say and <error descr="'next' can't be used in the named block">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used in the named block">redo</error> while shift;
+        say and <error descr="'redo' can't be used in the named block">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used in the named block">next</error>;
+        <error descr="'redo' can't be used in the named block">redo</error>;
+        <error descr="'last' can't be used in the named block">last</error>;
+    }
+
+    {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+        {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+            next;
+            redo;
+            last;
+        }
+        continue {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+            next;
+            redo;
+            last;
+        }
+    }
+    continue {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+
+    map {
+        say and last for 1,2,3;
+        say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> while shift;
+        say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> while shift;
+        say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> while shift;
+        say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error>;
+        <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error>;
+        <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error>;
+    } @ARGV;
+
+    grep {
+        say and last for 1,2,3;
+        say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> while shift;
+        say and <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> while shift;
+        say and <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> while shift;
+        say and <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' should not be used to exit a 'grep' or 'map'">next</error>;
+        <error descr="'redo' should not be used to exit a 'grep' or 'map'">redo</error>;
+        <error descr="'last' should not be used to exit a 'grep' or 'map'">last</error>;
+    } @ARGV;
+
+    sub {
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    };
+
+    do {
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    };
+
+    eval {
+        say and last for 1,2,3;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> while shift;
+        say and <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error> until shift;
+        say and next for 1,2,3;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> while shift;
+        say and <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error> until shift;
+        say and redo for 1,2,3;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> while shift;
+        say and <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error> until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        <error descr="'break' outside of the 'given' block">break</error>;
+        <error descr="'next' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">next</error>;
+        <error descr="'redo' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">redo</error>;
+        <error descr="'last' can't be used inside the block with return value, such as 'eval'/'sub'/'do'">last</error>;
+    };
+
+    given ($a) {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' outside of the 'when' or 'default' block">continue</error>;
+        break;
+        next;
+        redo;
+        last;
+        {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+            next;
+            redo;
+            last;
+        }
+        when (/blabla/) {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            continue;
+            break;
+            next;
+            redo;
+            last;
+            {
+                say and last for 1,2,3;
+                say and last while shift;
+                say and last until shift;
+                say and next for 1,2,3;
+                say and next while shift;
+                say and next until shift;
+                say and redo for 1,2,3;
+                say and redo while shift;
+                say and redo until shift;
+                <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+                break;
+                next;
+                redo;
+                last;
+            }
+        }
+        default {
+            say and last for 1,2,3;
+            say and last while shift;
+            say and last until shift;
+            say and next for 1,2,3;
+            say and next while shift;
+            say and next until shift;
+            say and redo for 1,2,3;
+            say and redo while shift;
+            say and redo until shift;
+            continue;
+            break;
+            next;
+            redo;
+            last;
+            {
+                say and last for 1,2,3;
+                say and last while shift;
+                say and last until shift;
+                say and next for 1,2,3;
+                say and next while shift;
+                say and next until shift;
+                say and redo for 1,2,3;
+                say and redo while shift;
+                say and redo until shift;
+                <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+                break;
+                next;
+                redo;
+                last;
+            }
+        }
+    }
+    if ($cond) {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    elsif ($cond) {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    else {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    unless ($cond) {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+
+    try {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    catch {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+    finally {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    };
+
+    package Test::Package {
+        say and last for 1,2,3;
+        say and last while shift;
+        say and last until shift;
+        say and next for 1,2,3;
+        say and next while shift;
+        say and next until shift;
+        say and redo for 1,2,3;
+        say and redo while shift;
+        say and redo until shift;
+        <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        next;
+        redo;
+        last;
+    }
+}

@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright 2015-2017 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html>
+<body>
+<p>Inspection controls usage of the following functions:
+  <a href="http://perldoc.perl.org/functions/next.html">next</a>,
+  <a href="http://perldoc.perl.org/functions/continue.html">continue</a> (as function),
+  <a href="http://perldoc.perl.org/functions/last.html">last</a>,
+  <a href="http://perldoc.perl.org/functions/break.html">break</a>,
+  <a href="http://perldoc.perl.org/functions/redo.html">redo</a>.
+</p>
+
+<p>NB: this inspection controls usages for these keywords as they are described in perldocs. Actual behaviour is pretty different
+  and keywords being used other way in a lot of modules.</p>
+<p>Undocumented usages may be handy, but also - dangerous and lead to heavily predicted results.</p>
+<p>More details about real behaviour available <a href="http://www.perlmonks.org/?node_id=1211372">here</a> and <a
+    href="https://rt.perl.org/Public/Bug/Display.html?id=29238">here</a>.</p>
+</body>
+</html>
