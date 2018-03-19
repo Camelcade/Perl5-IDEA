@@ -18,10 +18,7 @@ package annotator;
 
 import base.PerlLightTestCase;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection;
-import com.perl5.lang.perl.idea.inspections.PerlUseStrictInspection;
-import com.perl5.lang.perl.idea.inspections.PerlUseVarsInspection;
-import com.perl5.lang.perl.idea.inspections.PerlUseWarningsInspection;
+import com.perl5.lang.perl.idea.inspections.*;
 
 public class PerlQuickFixesTest extends PerlLightTestCase {
   @Override
@@ -52,4 +49,13 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
   public void testUseVars() {
     doTestAnnotationQuickFix(PerlUseVarsInspection.class, PerlBundle.message("perl.quickfix.use.vars"));
   }
+
+  public void testBreakToLast() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
+
+  public void testLastToBreak() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
+
+  public void testNextToContinue() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
+
+  public void testContinueToNext() {doTestAnnotationQuickFix(PerlLoopControlInspection.class, "Replace with '");}
+
 }

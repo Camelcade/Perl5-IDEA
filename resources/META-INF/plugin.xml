@@ -915,6 +915,10 @@
                      shortName="HashLoopInspection" displayName="Loop on hash" groupName="Perl5"
                      enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlHashLoopInspection"/>
+    <localInspection language="Perl5"
+                     shortName="LoopControlInspection" displayName="Loop control keywords" groupName="Perl5"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlLoopControlInspection"/>
 
     <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.StatementToCompoundIntention</className>

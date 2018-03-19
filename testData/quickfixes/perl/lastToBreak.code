@@ -1,0 +1,5 @@
+given($a){
+  when($b){
+    la<caret>st;
+  }
+}
