@@ -37,6 +37,7 @@ import java.net.URLDecoder;
  * Created by hurricup on 03.04.2016.
  */
 public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider {
+  @Nullable
   @Override
   public String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
     String result = null;
@@ -53,6 +54,7 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
   }
 
 
+  @Nullable
   @Override
   public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
     if (context instanceof PodCompositeElement || context instanceof PerlFile) {
