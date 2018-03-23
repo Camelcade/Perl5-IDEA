@@ -23,7 +23,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath "com.github.hurricup:gradle-grammar-kit-plugin:2017.1.1"
+        classpath "com.github.JetBrains:gradle-grammar-kit-plugin:2018.1"
     }
 }
 
@@ -145,11 +145,6 @@ idea {
 }
 
 apply plugin: 'org.jetbrains.grammarkit'
-
-grammarKit {
-    jflexRelease = jflex_version
-    grammarKitRelease = grammarkit_version
-}
 
 task generatePerl5Parser(type: GenerateParser) {
     source = "grammar/Perl5.bnf"
