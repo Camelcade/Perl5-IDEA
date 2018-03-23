@@ -177,7 +177,12 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   public String getTestResultsFilePath(@NotNull String appendix) {
-    return getResultsTestDataPath() + "/" + getTestName(true) + appendix + "." + getFileExtension() + ".txt";
+    return getResultsTestDataPath() + "/" + getTestName(true) + appendix + "." + getResultsFileExtension();
+  }
+
+  @NotNull
+  protected String getResultsFileExtension() {
+    return getFileExtension() + ".txt";
   }
 
   protected void setTargetPerlVersion(@NotNull PerlVersion perlVersion) {

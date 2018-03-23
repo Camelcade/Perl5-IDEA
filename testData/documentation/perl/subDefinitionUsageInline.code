@@ -1,0 +1,10 @@
+package Foo::Bar;
+
+=pod somesub
+
+Test documentation
+
+=cut
+sub somesub{}
+
+som<caret>esub();

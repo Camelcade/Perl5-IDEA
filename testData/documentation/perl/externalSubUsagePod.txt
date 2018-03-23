@@ -1,0 +1,9 @@
+<p><a href="psi_element://Mojolicious%3A%3AController">Mojolicious::Controller</a>: <a href="psi_element://Mojolicious%3A%3AController%2FATTRIBUTES">ATTRIBUTES</a></p><h2>app</h2><div style="padding-bottom: 10px;"><pre><code>  my $app = $c-&gt;app;
+  $c      = $c-&gt;app(Mojolicious-&gt;new);</code></pre></div>
+<p style="padding-bottom: 10px;">A reference back to the application that dispatched to this controller, usually
+a <a href="psi_element://Mojolicious" style="color:red">Mojolicious</a> object.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Use application logger
+  $c-&gt;app-&gt;log-&gt;debug('Hello Mojo');
+
+  # Generate path
+  my $path = $c-&gt;app-&gt;home-&gt;child('templates', 'foo', 'bar.html.ep');</code></pre></div>
