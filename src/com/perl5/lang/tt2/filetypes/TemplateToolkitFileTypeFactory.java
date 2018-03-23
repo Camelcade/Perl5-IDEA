@@ -17,7 +17,7 @@
 package com.perl5.lang.tt2.filetypes;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeFactoryBase;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ import java.util.List;
 /**
  * Created by hurricup on 05.06.2016.
  */
-public class TemplateToolkitFileTypeFactory extends FileTypeFactory {
+public class TemplateToolkitFileTypeFactory extends PerlFileTypeFactoryBase {
   public static final List<String> DEFAULT_EXTENSIONS = new ArrayList<>(Arrays.asList(
     "tt",
     "tt2"
   ));
 
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer consumer) {
+  protected void createFileTypesInner(@NotNull FileTypeConsumer consumer) {
     for (String ext : DEFAULT_EXTENSIONS) {
       consumer.consume(TemplateToolkitFileType.INSTANCE, ext);
     }

@@ -17,15 +17,15 @@
 package com.perl5.lang.mason2.filetypes;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeFactoryBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileTypeFactory extends FileTypeFactory {
+public class MasonFileTypeFactory extends PerlFileTypeFactoryBase {
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+  protected void createFileTypesInner(@NotNull FileTypeConsumer fileTypeConsumer) {
     fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, "mc");
     fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, "mi");
     fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, "mp");

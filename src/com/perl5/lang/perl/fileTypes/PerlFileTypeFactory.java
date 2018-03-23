@@ -18,13 +18,12 @@ package com.perl5.lang.perl.fileTypes;
 
 import com.intellij.openapi.fileTypes.ExactFileNameMatcher;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlFileTypeFactory extends FileTypeFactory {
+public class PerlFileTypeFactory extends PerlFileTypeFactoryBase {
 
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+  protected void createFileTypesInner(@NotNull FileTypeConsumer fileTypeConsumer) {
     fileTypeConsumer.consume(PerlFileTypePackage.INSTANCE, PerlFileTypePackage.EXTENSION);
     fileTypeConsumer.consume(PerlFileTypeScript.INSTANCE, PerlFileTypeScript.EXTENSION_CGI);
     fileTypeConsumer.consume(PerlFileTypeScript.INSTANCE, PerlFileTypeScript.EXTENSION_PL);

@@ -17,15 +17,15 @@
 package com.perl5.lang.mojolicious.filetypes;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeFactoryBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MojoliciousFileTypeFactory extends FileTypeFactory {
+public class MojoliciousFileTypeFactory extends PerlFileTypeFactoryBase {
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+  protected void createFileTypesInner(@NotNull FileTypeConsumer fileTypeConsumer) {
     fileTypeConsumer.consume(MojoliciousFileType.INSTANCE, "ep");
   }
 }

@@ -17,15 +17,15 @@
 package com.perl5.lang.htmlmason.filetypes;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import com.perl5.lang.perl.fileTypes.PerlFileTypeFactoryBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 05.03.2016.
  */
-public class HTMLMasonFileTypeFactory extends FileTypeFactory {
+public class HTMLMasonFileTypeFactory extends PerlFileTypeFactoryBase {
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer consumer) {
+  protected void createFileTypesInner(@NotNull FileTypeConsumer consumer) {
     consumer.consume(HTMLMasonFileType.INSTANCE, "mas");
   }
 }
