@@ -39,7 +39,7 @@ jacocoTestReport {
     }
 }
 
-version = "${pluginVersion}.${platformBranch}${pluginBuild}"
+version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
 apply plugin: 'java'
 sourceCompatibility = javaVersion
@@ -60,7 +60,7 @@ sourceSets {
 
 apply plugin: 'org.jetbrains.intellij'
 intellij {
-    version "${platformVersion}.${platformBranch}.${platformBuild}"
+    version "${platformVersion}${platformBranch}${platformBuild}"
     downloadSources Boolean.valueOf(downloadIdeaSource)
     intellij.plugins = ['IntelliLang', 'PsiViewer:3.28.93', 'coverage']
     if (project.hasProperty('idea_sandbox')) {
