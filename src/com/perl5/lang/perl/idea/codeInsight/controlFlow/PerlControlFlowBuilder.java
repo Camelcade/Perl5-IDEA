@@ -18,60 +18,19 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
-import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PsiPerlAssignExprImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
-import com.perl5.lang.perl.psi.impl.PsiPerlStatementModifierImpl;
-import com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationExprMixin;
+import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
+import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   public ControlFlow build(PsiElement element) {
     return super.build(new PerlControlFlowVisitor(), element);
-  }
-
-  private Instruction read(@NotNull PsiElement element) {
-    return new PerlReadInstruction(PerlControlFlowBuilder.this, element);
-  }
-
-  private Instruction write(@NotNull PsiElement variable, @Nullable PsiElement valueExpr) {
-    return write(variable, valueExpr, 0);
-  }
-
-  private Instruction write(@NotNull PsiElement variable, @Nullable PsiElement valueExpr, int pos) {
-    return new PerlWriteInstruction(this, variable, valueExpr, pos);
-  }
-
-  private Instruction readWrite(@NotNull PsiElement variable, @Nullable PsiElement valueExpr) {
-    return new PerlWriteWithPrefixReadInstruction(this, variable, valueExpr, 0);
-  }
-
-  private Instruction writeRead(@NotNull PsiElement variable, @Nullable PsiElement valueExpr) {
-    return writeRead(variable, valueExpr, 0);
-  }
-
-  private Instruction writeRead(@NotNull PsiElement variable, @Nullable PsiElement valueExpr, int pos) {
-    return new PerlWriteWithPostfixReadInstruction(this, variable, valueExpr, pos);
-  }
-
-  @Override
-  public Instruction startNode(@Nullable PsiElement element) {
-    final Instruction instruction = new PerlDumbInstruction(this, element);
-    addNode(instruction);
-    checkPending(instruction);
-    return instruction;
   }
 
   public static ControlFlow getFor(@NotNull PsiElement element) {
@@ -81,98 +40,19 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     @Override
-    public void visitPerlVariable(@NotNull PerlVariable o) {
-      addNode(createContextDependentInstruction(o));
-    }
-
-    @Override
-    public void visitGlobVariable(@NotNull PsiPerlGlobVariable o) {
-      addNode(createContextDependentInstruction(o));
-    }
-
-    private Instruction createContextDependentInstruction(@NotNull PsiElement variable) {
-      PsiElement containingElement = variable.getParent();
-      if (containingElement instanceof PsiPerlAssignExprImpl) {
-        return createAssignAccessInstruction(variable, (PsiPerlAssignExpr)containingElement, 0);
-      }
-      else if (containingElement instanceof PerlVariableDeclaration) { // wrapper
-        PsiElement declaration = containingElement.getParent();
-        if (declaration instanceof PerlVariableDeclarationExprMixin) { // my/our/local/state
-          PsiElement assignExpr = declaration.getParent();
-          if (assignExpr instanceof PsiPerlAssignExprImpl) {
-            List<PsiElement> declarationElements = Arrays.asList(declaration.getChildren());
-            return createAssignAccessInstruction(variable, (PsiPerlAssignExpr)assignExpr, declarationElements.indexOf(containingElement));
-          }
-        }
-      }
-      else if (containingElement instanceof PsiPerlCommaSequenceExprImpl) {
-        PsiElement parenthesizedExpression = containingElement.getParent();
-        if (parenthesizedExpression instanceof PsiPerlParenthesisedExprImpl) {
-          PsiElement assignExpr = parenthesizedExpression.getParent();
-          if (assignExpr instanceof PsiPerlAssignExpr) {
-            List<PsiElement> listElements = Arrays.asList(containingElement.getChildren());
-            return createAssignAccessInstruction(variable, (PsiPerlAssignExpr)assignExpr, listElements.indexOf(variable));
-          }
-        }
-      }
-
-      return read(variable);
-    }
-
-    /**
-     * @param variable      variable element
-     * @param assignExpr    assign expression element
-     * @param variableIndex index in parallel assignment sequence. 0 for single assignments
-     * @return simple assignment write access, non parallel; read access if something went wrong
-     */
-    @NotNull
-    private Instruction createAssignAccessInstruction(@NotNull PsiElement variable,
-                                                      @NotNull PsiPerlAssignExpr assignExpr,
-                                                      int variableIndex) {
-      List<PsiPerlExpr> expressions = assignExpr.getExprList();
-      assert !expressions.isEmpty();
-      int i;
-
-      for (i = 0; i < expressions.size(); i++) {
-        PsiPerlExpr expression = expressions.get(i);
-        if (PsiTreeUtil.isAncestor(expression, variable, false)) {
-          break;
-        }
-      }
-
-      if (i == expressions.size()) { // unknown
-        return read(variable);
-      }
-      else if (i == 0) { // first
-        return write(variable, expressions.get(1), variableIndex); // fixme check modifying assignments
-      }
-      else if (i == expressions.size() - 1) { // last
-        return read(variable);
-      }
-      return writeRead(variable, expressions.get(i + 1), variableIndex);
-    }
-
-
-    @Override
     public void visitAssignExpr(@NotNull PsiPerlAssignExpr o) {
-      startNode(o);
-      PsiElement run = o.getLastChild();
-      while (run != null) {
-        run.accept(this);
-        run = run.getPrevSibling();
-      }
-    }
-
-    @Override
-    public void visitStatement(@NotNull PsiPerlStatement o) {
-      startNode(o);
-      PsiPerlStatementModifierImpl statementModifier = PsiTreeUtil.getChildOfType(o, PsiPerlStatementModifierImpl.class);
-      if (statementModifier != null) {
-        statementModifier.accept(this);
-      }
-      PsiElement statementBody = o.getFirstChild();
-      if (statementBody != null) {
-        statementBody.accept(this);
+      PsiElement rightSide = o.getLastChild();
+      while (true) {
+        PsiElement operator = PerlPsiUtil.getPrevSignificantSibling(rightSide);
+        if (operator == null) {
+          return;
+        }
+        PsiElement leftSide = PerlPsiUtil.getPrevSignificantSibling(operator);
+        if (leftSide == null) {
+          return;
+        }
+        addNodeAndCheckPending(new PerlAssignInstuction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
+        rightSide = leftSide;
       }
     }
 

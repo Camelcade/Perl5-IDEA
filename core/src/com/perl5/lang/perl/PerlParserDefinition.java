@@ -61,6 +61,11 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
 
   public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
 
+  public static final TokenSet MEANINGLESS_TOKENS = TokenSet.orSet(
+    WHITE_SPACE_AND_COMMENTS,
+    TokenSet.create(POD)
+  );
+
   public static final TokenSet LITERALS = TokenSet.create(
     STRING_CONTENT,
     STRING_CONTENT_XQ,

@@ -30,9 +30,9 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
@@ -51,6 +51,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
 
 /**
  * Created by hurricup on 09.08.2015.
@@ -162,12 +164,13 @@ public class PerlPsiUtil implements PerlElementTypes {
   @Nullable
   public static PsiElement getNextSignificantSibling(PsiElement element) {
     PsiElement result = element.getNextSibling();
-    while ((result instanceof PsiComment || result instanceof PsiWhiteSpace)) {
+    while (isCommentOrSpace(result)) {
       result = result.getNextSibling();
     }
     return result;
   }
 
+  @Deprecated // this one is bad. What about comments and so on?
   @Nullable
   public static ASTNode getNextSignificantSibling(ASTNode node) {
     ASTNode result = node.getTreeNext();
@@ -184,8 +187,7 @@ public class PerlPsiUtil implements PerlElementTypes {
       return null;
     }
     PsiElement result = element.getPrevSibling();
-    while (result != null &&
-           (result instanceof PsiComment || result instanceof PsiWhiteSpace || result.getNode().getElementType() == PerlElementTypes.POD)) {
+    while (isCommentOrSpace(result)) {
       result = result.getPrevSibling();
     }
     return result;
@@ -392,8 +394,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     return result;
   }
 
+
   public static boolean isCommentOrSpace(PsiElement element) {
-    return element != null && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(element.getNode().getElementType());
+    return element != null && MEANINGLESS_TOKENS.contains(PsiUtilCore.getElementType(element));
   }
 
   /**

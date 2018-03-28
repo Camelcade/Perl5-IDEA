@@ -24,6 +24,7 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  /*
   public void testAssignChainParallel() {doTest();}
 
   public void testAssignDeclarationSimple() {doTest();}
@@ -37,10 +38,11 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   public void testAssignSimple() {doTest();}
 
   public void testAssignParallel() {doTest();}
+  */
 
   public void testAssignChain() {doTest();}
 
-  public void testStatementModifier() {doTest();}
+  //public void testStatementModifier() {doTest();}
   /*
   public void test(){doTest();}
   */
