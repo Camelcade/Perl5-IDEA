@@ -22,8 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
-import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
+import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,6 +55,34 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         addNodeAndCheckPending(new PerlAssignInstuction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
         rightSide = leftSide;
       }
+    }
+
+    @Override
+    public void visitStatement(@NotNull PsiPerlStatement o) {
+      if (o instanceof PerlStatementMixin) {
+        PsiPerlStatementModifier modifier = ((PerlStatementMixin)o).getModifier();
+        if (modifier != null) {
+          modifier.accept(this);
+        }
+        PsiPerlExpr expr = o.getExpr();
+        if (expr != null) {
+          expr.accept(this);
+        }
+        startNode(o);
+      }
+      else {
+        super.visitStatement(o);
+      }
+    }
+
+    @Override
+    public void visitPerlStatementModifier(@NotNull PerlStatementModifier o) {
+      PsiPerlExpr condition = o.getExpr();
+      if (condition != null) {
+        condition.accept(this);
+      }
+      addPendingEdge(o.getParent(), prevInstruction);
+      startConditionalNode(o, condition, true);
     }
 
     @Override

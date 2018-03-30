@@ -1,5 +1,5 @@
 0(1) element: null
-1(2) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-2(3) element: PsiPerlAddExprImpl(Perl5: ADD_EXPR)
-3(4) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+1(2) element: PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+2(3) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlAddExprImpl(Perl5: ADD_EXPR)
+3(4) element: PsiPerlStatementImpl(Perl5: STATEMENT)
 4() element: null

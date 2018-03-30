@@ -1,9 +1,9 @@
 0(1) element: null
-1(2) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-2(3) element: PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
-3(4) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
-4(5) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
-5(6) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
-6(7) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
-7(8) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+1(2) element: PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
+2(3) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
+3(4) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+4(5) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+5(6) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+6(7) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+7(8) element: PsiPerlStatementImpl(Perl5: STATEMENT)
 8() element: null

@@ -1,5 +1,5 @@
 0(1) element: null
-1(2) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-2(3) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
-3(4) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+1(2) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+2(3) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+3(4) element: PsiPerlStatementImpl(Perl5: STATEMENT)
 4() element: null

@@ -372,6 +372,7 @@ limitations under the License.
 	mixin("assign_expr")="com.perl5.lang.perl.psi.mixins.PerlAssignExpressionMixin"
 
 	extends(".*statement_modifier")=statement_modifier
+	implements("statement_modifier")="com.perl5.lang.perl.psi.PerlStatementModifier"
 
 	extends(".*_signature_content")=sub_signature
 	implements("sub_signature|variable_declaration_lexical")="com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker"
