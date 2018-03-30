@@ -40,7 +40,7 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testAssignChain() {doTest();}
 
-  public void testAssignExpression() {doTest();}
+  public void testAssignExpressions() {doTest();}
 
   public void testStatementModifier() {doTest();}
 

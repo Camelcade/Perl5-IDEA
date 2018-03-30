@@ -70,6 +70,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
+  // fixme die, carp, croak confess
+  // fixme here-doc opener
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
     @Override
@@ -109,8 +111,20 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         if (leftSide == null) {
           return;
         }
-        // fixme check for &&= ||= //=, should have pending edges
-        startNode(rightSide);
+        IElementType operatorType = PsiUtilCore.getElementType(operator);
+        if (operatorType != OPERATOR_ASSIGN) {
+          leftSide.accept(this);
+        }
+        if (operatorType == OPERATOR_AND_ASSIGN) {
+          addPendingEdge(o, prevInstruction);
+          startConditionalNode(o, leftSide, true);
+        }
+        else if (operatorType == OPERATOR_OR_ASSIGN || operatorType == OPERATOR_OR_DEFINED_ASSIGN) {
+          addPendingEdge(o, prevInstruction);
+          startConditionalNode(o, leftSide, false);
+        }
+
+        rightSide.accept(this);
         addNodeAndCheckPending(new PerlAssignInstuction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
         rightSide = leftSide;
       }
