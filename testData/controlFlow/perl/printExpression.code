@@ -1,0 +1,15 @@
+print $a, $b;
+print($a, $b);
+print OF $a, $b;
+print(OF $a, $b);
+
+printf $a, $b;
+printf($a, $b);
+printf OF $a, $b;
+printf(OF $a, $b);
+
+say $a, $b;
+say($a, $b);
+say OF $a, $b;
+say(OF $a, $b);
+

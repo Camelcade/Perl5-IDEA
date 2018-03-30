@@ -76,6 +76,26 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitCommaSequenceExpr(@NotNull PsiPerlCommaSequenceExpr o) {
+      processChildrenBackwards(o);
+      startNode(o);
+    }
+
+    @Override
+    public void visitPrintExpr(@NotNull PsiPerlPrintExpr o) {
+      PsiPerlParenthesisedCallArguments arguments = o.getParenthesisedCallArguments();
+      processChildrenBackwards(arguments == null ? o : arguments);
+      startNode(o);
+    }
+
+    private void processChildrenBackwards(@NotNull PsiElement psiElement) {
+      PsiElement[] children = psiElement.getChildren();
+      for (int i = children.length - 1; i >= 0; i--) {
+        children[i].accept(this);
+      }
+    }
+
+    @Override
     public void visitPerlStatementModifier(@NotNull PerlStatementModifier o) {
       PsiPerlExpr condition = o.getExpr();
       if (condition != null) {

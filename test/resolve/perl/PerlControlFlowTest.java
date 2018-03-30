@@ -44,5 +44,7 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testStatementModifier() {doTest();}
 
+  public void testPrintExpression() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }
