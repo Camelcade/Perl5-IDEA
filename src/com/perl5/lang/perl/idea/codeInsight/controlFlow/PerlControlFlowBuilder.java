@@ -22,6 +22,7 @@ import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -58,6 +59,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       .getCachedValue(element, () -> CachedValueProvider.Result.create(new PerlControlFlowBuilder().build(element), element));
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public Instruction startPartialConditionalNode(@NotNull PsiElement element,
                                                  @NotNull PsiElement condition,
                                                  @NotNull PsiElement lastConditionElement,
@@ -70,20 +72,30 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
-    /*
     @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
-      IElementType expressionType = PsiUtilCore.getElementType(o);
-      // fixme handle && || // and or
-      if (expressionType == OR_EXPR) {
-        PsiElement run = o.getFirstChild();
-
+      PsiElement run = o.getFirstChild();
+      PsiElement lastRun = null;
+      while (run != null) {
+        if (!PerlPsiUtil.isCommentOrSpace(run)) {
+          run.accept(this);
+          IElementType elementType = PsiUtilCore.getElementType(run);
+          if (lastRun != null) {
+            if (elementType == OPERATOR_AND || elementType == OPERATOR_AND_LP) {
+              addPendingEdge(o, prevInstruction);
+              startPartialConditionalNode(run, o, lastRun, true);
+            }
+            else if (elementType == OPERATOR_OR || elementType == OPERATOR_OR_LP || elementType == OPERATOR_OR_DEFINED) {
+              addPendingEdge(o, prevInstruction);
+              startPartialConditionalNode(run, o, lastRun, false);
+            }
+          }
+        }
+        lastRun = run;
+        run = run.getNextSibling();
       }
-      else {
-        super.visitExpr(o);
-      }
+      startNode(o);
     }
-    */
 
     @Override
     public void visitAssignExpr(@NotNull PsiPerlAssignExpr o) {

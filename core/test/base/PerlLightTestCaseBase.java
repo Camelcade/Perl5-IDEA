@@ -103,6 +103,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PartialConditionalInstructionImpl;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstuction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
@@ -1330,7 +1331,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     for (Instruction instruction : flow.getInstructions()) {
       printInstruction(builder, instruction);
 
-      if (instruction instanceof ConditionalInstruction) {
+      if (instruction instanceof PartialConditionalInstructionImpl) {
+        builder.append("\n").append("Its ").append(((PartialConditionalInstructionImpl)instruction).getResult()).
+          append(" branch, condition: ").append(((PartialConditionalInstructionImpl)instruction).getConditionText());
+      }
+      else if (instruction instanceof ConditionalInstruction) {
         ConditionalInstruction conditionalInstruction = (ConditionalInstruction)instruction;
         builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
           append(" branch, condition: ").append(conditionalInstruction.getCondition().getText());
