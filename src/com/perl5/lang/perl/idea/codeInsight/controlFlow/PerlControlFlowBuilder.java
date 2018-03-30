@@ -26,6 +26,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
@@ -68,7 +69,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         if (expr != null) {
           expr.accept(this);
         }
-        startNode(o);
       }
       else {
         super.visitStatement(o);
@@ -96,6 +96,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitBlock(@NotNull PsiPerlBlock o) {
+      super.visitElement(o);
+    }
+
+    @Override
     public void visitPrintExpr(@NotNull PsiPerlPrintExpr o) {
       PsiPerlParenthesisedCallArguments arguments = o.getParenthesisedCallArguments();
       processChildrenBackwardsAndElement(arguments == null ? o : arguments, o);
@@ -105,17 +110,34 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       processChildrenBackwardsAndElement(psiElement, psiElement);
     }
 
+    private void processChildrenBackwards(@NotNull PsiElement psiElement) {
+      processChildrenBackwardsAndElement(psiElement);
+    }
+
+    @Override
+    public void visitReturnExpr(@NotNull PsiPerlReturnExpr o) {
+      PsiPerlExpr returnValueExpr = o.getReturnValueExpr();
+      if (returnValueExpr != null) {
+        returnValueExpr.accept(this);
+      }
+      startNode(o);
+      addPendingEdge(o.getReturnScope(), prevInstruction);
+      flowAbrupted();
+    }
+
     /**
      * Iterates composite children of {@code parentElement}, creates nodes for them and than,
-     * creates node for {@code realParent}
+     * creates node for {@code realParent} if specified
      */
     private void processChildrenBackwardsAndElement(@NotNull PsiElement parentElement,
-                                                    @NotNull PsiElement realParentElement) {
+                                                    @Nullable PsiElement realParentElement) {
       PsiElement[] children = parentElement.getChildren();
       for (int i = children.length - 1; i >= 0; i--) {
         children[i].accept(this);
       }
-      startNode(realParentElement);
+      if (realParentElement != null) {
+        startNode(realParentElement);
+      }
     }
 
     @Override

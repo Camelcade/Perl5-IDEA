@@ -5,5 +5,4 @@
 4(5) assign PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
 5(6) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
 6(7) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
-7(8) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-8() element: null
+7() element: null

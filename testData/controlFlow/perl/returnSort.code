@@ -1,0 +1,7 @@
+1;
+sort {
+  2;
+  return;
+  3;
+} @array;
+4;

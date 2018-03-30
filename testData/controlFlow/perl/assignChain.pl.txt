@@ -9,5 +9,4 @@
 8(9) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: += PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
 9(10) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
 10(11) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-11(12) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-12() element: null
+11() element: null

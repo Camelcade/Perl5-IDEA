@@ -1,11 +1,8 @@
 0(1) element: null
 1(2) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 2(3) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-3(4) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-4(5) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-5(6) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-6(7) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-7(8) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-8(9) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-9(10) element: PsiPerlStatementImpl(Perl5: STATEMENT)
-10() element: null
+3(4) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+5(6) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+6(7) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+7() element: null

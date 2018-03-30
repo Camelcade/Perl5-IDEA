@@ -1,0 +1,9 @@
+0(1) element: null
+1(2) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+2(3) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+3(4) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+4(7) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
+5(6) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+6(7) element: PsiPerlSortExprImpl(Perl5: SORT_EXPR)
+7(8) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+8() element: null
