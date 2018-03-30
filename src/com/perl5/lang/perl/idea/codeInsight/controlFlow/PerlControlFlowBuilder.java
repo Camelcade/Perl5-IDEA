@@ -51,6 +51,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         if (leftSide == null) {
           return;
         }
+        startNode(rightSide);
         addNodeAndCheckPending(new PerlAssignInstuction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
         rightSide = leftSide;
       }

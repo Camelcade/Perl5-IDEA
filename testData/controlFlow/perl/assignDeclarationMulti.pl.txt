@@ -1,32 +1,11 @@
-0(1) nothing
-1(2) PsiPerlStatementImpl
-2(3) PsiPerlAssignExprImpl
-3(4) PsiPerlNumberConstantImpl
-4(5) PsiPerlVariableDeclarationLexicalImpl
-5(6) PsiPerlVariableDeclarationElementImpl
-6(7) WRITE to $test (PsiPerlScalarVariableImpl) from 1 (PsiPerlNumberConstantImpl)[0]
-7(8) PsiPerlVariableDeclarationElementImpl
-8(9) WRITE to $other (PsiPerlScalarVariableImpl) from 1 (PsiPerlNumberConstantImpl)[1]
-9(10) PsiPerlStatementImpl
-10(11) PsiPerlAssignExprImpl
-11(12) PsiPerlParenthesisedExprImpl
-12(13) PsiPerlCommaSequenceExprImpl
-13(14) READ from $test (PsiPerlScalarVariableImpl)
-14(15) READ from @other (PsiPerlArrayVariableImpl)
-15(16) PsiPerlVariableDeclarationLexicalImpl
-16(17) PsiPerlVariableDeclarationElementImpl
-17(18) WRITE to @test (PsiPerlArrayVariableImpl) from ($test, @other) (PsiPerlParenthesisedExprImpl)[0]
-18(19) PsiPerlVariableDeclarationElementImpl
-19(20) WRITE to @other (PsiPerlArrayVariableImpl) from ($test, @other) (PsiPerlParenthesisedExprImpl)[1]
-20(21) PsiPerlStatementImpl
-21(22) PsiPerlAssignExprImpl
-22(23) PsiPerlParenthesisedExprImpl
-23(24) PsiPerlCommaSequenceExprImpl
-24(25) READ from @test (PsiPerlArrayVariableImpl)
-25(26) READ from @other (PsiPerlArrayVariableImpl)
-26(27) PsiPerlVariableDeclarationLexicalImpl
-27(28) PsiPerlVariableDeclarationElementImpl
-28(29) WRITE to %test (PsiPerlHashVariableImpl) from (@test, @other) (PsiPerlParenthesisedExprImpl)[0]
-29(30) PsiPerlVariableDeclarationElementImpl
-30(31) WRITE to %other (PsiPerlHashVariableImpl) from (@test, @other) (PsiPerlParenthesisedExprImpl)[1]
-31() nothing
+0(1) element: null
+1(2) element: PsiPerlStatementImpl(Perl5: STATEMENT)
+2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+3(4) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+4(5) element: PsiPerlStatementImpl(Perl5: STATEMENT)
+5(6) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+6(7) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+7(8) element: PsiPerlStatementImpl(Perl5: STATEMENT)
+8(9) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+9(10) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+10() element: null
