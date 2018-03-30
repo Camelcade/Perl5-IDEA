@@ -19,7 +19,9 @@ package base;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.actions.MultiCaretCodeInsightAction;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.controlflow.ConditionalInstruction;
 import com.intellij.codeInsight.controlflow.ControlFlow;
+import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
@@ -28,6 +30,10 @@ import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
+import com.intellij.execution.util.ExecUtil;
 import com.intellij.execution.impl.EditorHyperlinkSupport;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.hierarchy.*;
@@ -65,6 +71,7 @@ import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.SystemInfoRt;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -94,9 +101,10 @@ import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstuction;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
@@ -127,6 +135,7 @@ import org.junit.Assert;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -150,6 +159,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
   private Perl5CodeInsightSettings myCodeInsightSettings;
+  private final static boolean ENABLE_SVG_GENERATION = Boolean.parseBoolean(System.getenv("CAMELCADE_GENERATE_SVG"));
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
   private PerlInjectionMarkersService myInjectionMarkersService;
@@ -1280,8 +1290,101 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     initWithFileSmartWithoutErrors();
     ControlFlow controlFlow = PerlControlFlowBuilder.getFor(getFile());
     final String stringifiedControlFlow = StringUtil.join(controlFlow.getInstructions(), Object::toString, "\n");
+
+    if (ENABLE_SVG_GENERATION) {
+      try {
+        String svgDataPath = getSvgDataPath();
+        if (!new File(svgDataPath).exists()) {
+          saveSvgFile(svgDataPath, controlFlow);
+        }
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), stringifiedControlFlow);
   }
+
+  @NotNull
+  private String getSvgDataPath() {
+    return FileUtil.join(getTestDataPath(), "svg", getTestName(true) + ".svg");
+  }
+
+  private void saveSvgFile(@NotNull final String outSvgFile, @NotNull final ControlFlow flow) throws IOException, ExecutionException {
+    String dotUtilName = SystemInfoRt.isUnix ? "dot" : "dot.exe";
+    File dotFullPath = PathEnvironmentVariableUtil.findInPath(dotUtilName);
+    if (dotFullPath == null) {
+      throw new FileNotFoundException("Cannot find dot utility in path");
+    }
+    File tmpFile = FileUtil.createTempFile("control-flow", ".dot", true);
+    FileUtil.writeToFile(tmpFile, convertControlFlowToDot(flow));
+    ExecUtil.execAndGetOutput(new GeneralCommandLine(dotFullPath.getAbsolutePath()).withInput(tmpFile.getAbsoluteFile())
+                                .withParameters("-Tsvg", "-o" + outSvgFile, tmpFile.getAbsolutePath()).withRedirectErrorStream(true));
+  }
+
+  @NotNull
+  private String convertControlFlowToDot(@NotNull final ControlFlow flow) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("digraph {");
+    for (Instruction instruction : flow.getInstructions()) {
+      printInstruction(builder, instruction);
+
+      if (instruction instanceof ConditionalInstruction) {
+        ConditionalInstruction conditionalInstruction = (ConditionalInstruction)instruction;
+        builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
+          append(" branch, condition: ").append(conditionalInstruction.getCondition().getText());
+      }
+      builder.append("\"").append("]");
+
+      builder.append(System.lineSeparator());
+      if (instruction.allPred().isEmpty()) {
+        builder.append("Entry -> Instruction").append(instruction.num()).append(System.lineSeparator());
+      }
+      if (instruction.allSucc().isEmpty()) {
+        builder.append("Instruction").append(instruction.num()).append(" -> Exit").append(System.lineSeparator());
+      }
+      for (Instruction succ : instruction.allSucc()) {
+        builder.append("Instruction").append(instruction.num()).append(" -> ")
+          .append("Instruction").append(succ.num()).append(System.lineSeparator());
+      }
+    }
+    builder.append("}");
+    return builder.toString();
+  }
+
+  private void printInstruction(StringBuilder builder, Instruction instruction) {
+    PsiElement element = instruction.getElement();
+    Class<? extends Instruction> instructionClass = instruction.getClass();
+
+    builder.append("Instruction").append(instruction.num()).append("[font=\"Courier\", label=\"")
+      .append(getInstructionText(instruction))
+      .append(" \\n(").append(instruction.num()).append(")[")
+      .append(element != null ? element.getClass().getSimpleName() : "null").append("]")
+      .append(System.lineSeparator())
+      .append("{")
+      .append(instructionClass.getSimpleName().isEmpty()
+              ? instructionClass.getSuperclass().getSimpleName()
+              : instructionClass.getSimpleName())
+      .append("}");
+  }
+
+  private String getInstructionText(@NotNull Instruction instruction) {
+    if (instruction instanceof PerlAssignInstuction) {
+      return ((PerlAssignInstuction)instruction).getLeftSide().getText() + " "
+             + ((PerlAssignInstuction)instruction).getOperation().getText() + " "
+             + ((PerlAssignInstuction)instruction).getRightSide().getText();
+    }
+    else {
+      PsiElement element = instruction.getElement();
+      return element != null ? escape(element.getText()) : "";
+    }
+  }
+
+  private String escape(String text) {
+    return StringUtil.replace(StringUtil.escapeChars(text, '"'), "\n", "\\n");
+  }
+
 
   protected void doLineCommenterTest() {
     initWithFileSmart();

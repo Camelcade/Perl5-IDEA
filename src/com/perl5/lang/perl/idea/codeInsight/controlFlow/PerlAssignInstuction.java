@@ -30,7 +30,7 @@ public class PerlAssignInstuction extends InstructionImpl {
   @NotNull
   private final PsiElement myRightSide;
   @NotNull
-  private final IElementType myOperation;
+  private final PsiElement myOperation;
 
   public PerlAssignInstuction(@NotNull ControlFlowBuilder builder,
                               @Nullable PsiElement element,
@@ -40,7 +40,7 @@ public class PerlAssignInstuction extends InstructionImpl {
     super(builder, element);
     myLeftSide = leftSide;
     myRightSide = rightSide;
-    myOperation = PsiUtilCore.getElementType(operationElement);
+    myOperation = operationElement;
   }
 
   @NotNull
@@ -54,13 +54,18 @@ public class PerlAssignInstuction extends InstructionImpl {
   }
 
   @NotNull
-  public IElementType getOperation() {
+  public IElementType getOperationType() {
+    return PsiUtilCore.getElementType(myOperation);
+  }
+
+  @NotNull
+  public PsiElement getOperation() {
     return myOperation;
   }
 
   @NotNull
   @Override
   public String getElementPresentation() {
-    return "assign " + myLeftSide + " " + myOperation + " " + myRightSide;
+    return "assign " + myLeftSide + " " + getOperationType() + " " + myRightSide;
   }
 }
