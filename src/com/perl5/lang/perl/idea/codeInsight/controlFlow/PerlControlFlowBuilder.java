@@ -76,12 +76,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitArrayElement(@NotNull PsiPerlArrayElement o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitArraySlice(@NotNull PsiPerlArraySlice o) {
+    public void visitCallArguments(@NotNull PsiPerlCallArguments o) {
       processChildrenBackwardsAndElement(o);
     }
 
@@ -96,22 +91,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitHashElement(@NotNull PsiPerlHashElement o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitHashSlice(@NotNull PsiPerlHashSlice o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitCommaSequenceExpr(@NotNull PsiPerlCommaSequenceExpr o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitGlobSlot(@NotNull PsiPerlGlobSlot o) {
+    public void visitExpr(@NotNull PsiPerlExpr o) {
       processChildrenBackwardsAndElement(o);
     }
 
