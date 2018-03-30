@@ -1,0 +1,5 @@
+say $a[$b];
+say @a[$a, $b];
+say $a{$b};
+say @a{$a, $b};
+say *a{ARRAY};

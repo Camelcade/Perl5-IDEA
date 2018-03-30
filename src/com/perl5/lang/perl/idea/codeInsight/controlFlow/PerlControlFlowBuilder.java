@@ -76,23 +76,66 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitArrayElement(@NotNull PsiPerlArrayElement o) {
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
+    public void visitArraySlice(@NotNull PsiPerlArraySlice o) {
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
+    public void visitArrayIndex(@NotNull PsiPerlArrayIndex o) {
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
+    public void visitHashIndex(@NotNull PsiPerlHashIndex o) {
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
+    public void visitHashElement(@NotNull PsiPerlHashElement o) {
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
+    public void visitHashSlice(@NotNull PsiPerlHashSlice o) {
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
     public void visitCommaSequenceExpr(@NotNull PsiPerlCommaSequenceExpr o) {
-      processChildrenBackwards(o);
-      startNode(o);
+      processChildrenBackwardsAndElement(o);
+    }
+
+    @Override
+    public void visitGlobSlot(@NotNull PsiPerlGlobSlot o) {
+      processChildrenBackwardsAndElement(o);
     }
 
     @Override
     public void visitPrintExpr(@NotNull PsiPerlPrintExpr o) {
       PsiPerlParenthesisedCallArguments arguments = o.getParenthesisedCallArguments();
-      processChildrenBackwards(arguments == null ? o : arguments);
-      startNode(o);
+      processChildrenBackwardsAndElement(arguments == null ? o : arguments, o);
     }
 
-    private void processChildrenBackwards(@NotNull PsiElement psiElement) {
-      PsiElement[] children = psiElement.getChildren();
+    private void processChildrenBackwardsAndElement(@NotNull PsiElement psiElement) {
+      processChildrenBackwardsAndElement(psiElement, psiElement);
+    }
+
+    /**
+     * Iterates composite children of {@code parentElement}, creates nodes for them and than,
+     * creates node for {@code realParent}
+     */
+    private void processChildrenBackwardsAndElement(@NotNull PsiElement parentElement,
+                                                    @NotNull PsiElement realParentElement) {
+      PsiElement[] children = parentElement.getChildren();
       for (int i = children.length - 1; i >= 0; i--) {
         children[i].accept(this);
       }
+      startNode(realParentElement);
     }
 
     @Override
