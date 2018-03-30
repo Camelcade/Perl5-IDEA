@@ -13,4 +13,4 @@ gen/
 testData/controlFlow/perl/svg/
 tmp/
 icons/*.psd
-
+testData/controlFlow/perl/svg
