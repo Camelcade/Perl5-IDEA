@@ -39,6 +39,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     WHILE_STATEMENT_MODIFIER
   );
 
+  /**
+   * Modifiers with false branch, instead of true
+   */
+  private static final TokenSet FALSE_VALUE_MODIFIERS = TokenSet.create(
+    UNLESS_STATEMENT_MODIFIER, UNTIL_STATEMENT_MODIFIER
+  );
+
   private Instruction myLastModifierExpressionInstruction;
 
   public ControlFlow build(PsiElement element) {
@@ -127,7 +134,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         myLastModifierExpressionInstruction = prevInstruction;
       }
       addPendingEdge(o.getParent(), prevInstruction);
-      startConditionalNode(o, condition, true);
+      startConditionalNode(o, condition, !FALSE_VALUE_MODIFIERS.contains(PsiUtilCore.getElementType(o)));
     }
 
     @Override
