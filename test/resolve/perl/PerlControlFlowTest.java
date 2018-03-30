@@ -66,5 +66,7 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testReturnFunc() {doTest();}
 
+  public void testBinaryExpressions() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

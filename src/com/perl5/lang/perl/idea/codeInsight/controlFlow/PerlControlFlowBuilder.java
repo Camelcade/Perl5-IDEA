@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
+import com.intellij.codeInsight.controlflow.ConditionalInstruction;
 import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.codeInsight.controlflow.Instruction;
@@ -57,7 +58,33 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       .getCachedValue(element, () -> CachedValueProvider.Result.create(new PerlControlFlowBuilder().build(element), element));
   }
 
+  public Instruction startPartialConditionalNode(@NotNull PsiElement element,
+                                                 @NotNull PsiElement condition,
+                                                 @NotNull PsiElement lastConditionElement,
+                                                 final boolean result) {
+    final ConditionalInstruction instruction =
+      new PartialConditionalInstructionImpl(this, element, condition, lastConditionElement, result);
+    addNodeAndCheckPending(instruction);
+    return instruction;
+  }
+
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
+
+    /*
+    @Override
+    public void visitExpr(@NotNull PsiPerlExpr o) {
+      IElementType expressionType = PsiUtilCore.getElementType(o);
+      // fixme handle && || // and or
+      if (expressionType == OR_EXPR) {
+        PsiElement run = o.getFirstChild();
+
+      }
+      else {
+        super.visitExpr(o);
+      }
+    }
+    */
+
     @Override
     public void visitAssignExpr(@NotNull PsiPerlAssignExpr o) {
       PsiElement rightSide = o.getLastChild();
@@ -70,6 +97,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         if (leftSide == null) {
           return;
         }
+        // fixme check for &&= ||= //=, should have pending edges
         startNode(rightSide);
         addNodeAndCheckPending(new PerlAssignInstuction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
         rightSide = leftSide;
