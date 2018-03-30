@@ -3,6 +3,6 @@
 2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 3(6) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
 4(5) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-5(6) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+5(6) element: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::something
 6(7) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 7() element: null

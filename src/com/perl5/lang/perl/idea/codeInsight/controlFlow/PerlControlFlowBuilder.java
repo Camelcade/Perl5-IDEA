@@ -29,7 +29,6 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -95,42 +94,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitCallArguments(@NotNull PsiPerlCallArguments o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitArrayIndex(@NotNull PsiPerlArrayIndex o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitHashIndex(@NotNull PsiPerlHashIndex o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
-    public void visitExpr(@NotNull PsiPerlExpr o) {
-      processChildrenBackwardsAndElement(o);
-    }
-
-    @Override
     public void visitBlock(@NotNull PsiPerlBlock o) {
-      super.visitElement(o);
+      o.acceptChildren(this);
     }
 
     @Override
-    public void visitPrintExpr(@NotNull PsiPerlPrintExpr o) {
-      PsiPerlParenthesisedCallArguments arguments = o.getParenthesisedCallArguments();
-      processChildrenBackwardsAndElement(arguments == null ? o : arguments, o);
+    public void visitParenthesisedCallArguments(@NotNull PsiPerlParenthesisedCallArguments o) {
+      o.acceptChildren(this);
     }
 
-    private void processChildrenBackwardsAndElement(@NotNull PsiElement psiElement) {
-      processChildrenBackwardsAndElement(psiElement, psiElement);
-    }
-
-    private void processChildrenBackwards(@NotNull PsiElement psiElement) {
-      processChildrenBackwardsAndElement(psiElement);
+    @Override
+    public void visitCallArguments(@NotNull PsiPerlCallArguments o) {
+      o.acceptChildren(this);
     }
 
     @Override
@@ -142,21 +117,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       startNode(o);
       addPendingEdge(o.getReturnScope(), prevInstruction);
       flowAbrupted();
-    }
-
-    /**
-     * Iterates composite children of {@code parentElement}, creates nodes for them and than,
-     * creates node for {@code realParent} if specified
-     */
-    private void processChildrenBackwardsAndElement(@NotNull PsiElement parentElement,
-                                                    @Nullable PsiElement realParentElement) {
-      PsiElement[] children = parentElement.getChildren();
-      for (int i = children.length - 1; i >= 0; i--) {
-        children[i].accept(this);
-      }
-      if (realParentElement != null) {
-        startNode(realParentElement);
-      }
     }
 
     @Override
@@ -173,8 +133,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitElement(@NotNull PsiElement element) {
       if (!(element instanceof LeafPsiElement)) {
-        startNode(element);
         super.visitElement(element);
+        startNode(element);
       }
     }
   }

@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.mixins.PerlSubDeclarationBase;
+import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +44,7 @@ public interface PerlReturnExpr extends PsiElement {
       PerlSortExpr.class,
       PerlSubExpr.class,
       PerlEvalExpr.class,
-      PerlSubDeclarationBase.class,
+      PerlSubDefinitionBase.class,
       PsiFile.class
     ));
   }

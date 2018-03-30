@@ -62,5 +62,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testReturnSub() {doTest();}
 
+  public void testReturnMethod() {doTest();}
+
+  public void testReturnFunc() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

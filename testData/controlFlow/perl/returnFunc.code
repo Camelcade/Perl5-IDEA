@@ -1,5 +1,5 @@
 1;
-sub something{
+func something{
   2;
   return;
   3;
