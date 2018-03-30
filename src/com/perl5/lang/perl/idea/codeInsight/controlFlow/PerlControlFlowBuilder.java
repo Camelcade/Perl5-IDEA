@@ -18,17 +18,29 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
+import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
+  private static final TokenSet LOOP_MODIFIERS = TokenSet.create(
+    FOR_STATEMENT_MODIFIER,
+    UNTIL_STATEMENT_MODIFIER,
+    WHILE_STATEMENT_MODIFIER
+  );
+
+  private Instruction myLastModifierExpressionInstruction;
 
   public ControlFlow build(PsiElement element) {
     return super.build(new PerlControlFlowVisitor(), element);
@@ -62,12 +74,19 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitStatement(@NotNull PsiPerlStatement o) {
       if (o instanceof PerlStatementMixin) {
         PsiPerlStatementModifier modifier = ((PerlStatementMixin)o).getModifier();
+        Instruction modifierExpression = null;
         if (modifier != null) {
           modifier.accept(this);
+          modifierExpression = myLastModifierExpressionInstruction;
         }
         PsiPerlExpr expr = o.getExpr();
         if (expr != null) {
           expr.accept(this);
+        }
+
+        if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(modifier))) {
+          addEdge(prevInstruction, modifierExpression);
+          prevInstruction = modifierExpression;
         }
       }
       else {
@@ -145,6 +164,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlExpr condition = o.getExpr();
       if (condition != null) {
         condition.accept(this);
+        myLastModifierExpressionInstruction = prevInstruction;
       }
       addPendingEdge(o.getParent(), prevInstruction);
       startConditionalNode(o, condition, true);

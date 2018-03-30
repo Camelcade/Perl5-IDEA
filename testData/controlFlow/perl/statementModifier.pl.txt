@@ -18,20 +18,20 @@
 17(18) element: PsiPerlWhileStatementModifierImpl(Perl5: WHILE_STATEMENT_MODIFIER). Condition: $_:true
 18(19) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
 19(20) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-20(21) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+20(16) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 21(22,26) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
 22(23) element: PsiPerlUntilStatementModifierImpl(Perl5: UNTIL_STATEMENT_MODIFIER). Condition: $_:true
 23(24) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
 24(25) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-25(26) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+25(21) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 26(27,31) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
 27(28) element: PsiPerlForStatementModifierImpl(Perl5: FOR_STATEMENT_MODIFIER). Condition: @_:true
 28(29) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
 29(30) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-30(31) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+30(26) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 31(32,36) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
 32(33) element: PsiPerlForStatementModifierImpl(Perl5: FOR_STATEMENT_MODIFIER). Condition: @_:true
 33(34) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
 34(35) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-35(36) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+35(31) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 36() element: null
