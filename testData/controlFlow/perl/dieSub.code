@@ -1,0 +1,7 @@
+
+sub subname{
+    say 'before';
+    die 'test';;
+    say 'after';
+}
+say 'bla';

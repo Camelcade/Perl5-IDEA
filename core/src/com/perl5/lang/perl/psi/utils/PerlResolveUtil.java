@@ -105,6 +105,7 @@ public class PerlResolveUtil {
    * @param elements  references sources
    * @return processor result
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processElementReferencesResolveResults(@NotNull Processor<Pair<PsiElement, PsiReference>> processor,
                                                                PsiElement... elements) {
     if (elements == null || elements.length == 0) {

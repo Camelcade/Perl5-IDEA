@@ -21,20 +21,34 @@ import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
+import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
+  private static final Set<String> DIE_SUBS = new THashSet<>(Arrays.asList(
+    "die",
+    "croak",
+    "confess"
+  ));
+
   private static final TokenSet LOOP_MODIFIERS = TokenSet.create(
     FOR_STATEMENT_MODIFIER,
     UNTIL_STATEMENT_MODIFIER,
@@ -70,7 +84,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  // fixme die, carp, croak confess
+  // fixme sub elements in return/die
   // fixme here-doc opener
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
@@ -129,6 +143,47 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         rightSide = leftSide;
       }
     }
+
+    @Override
+    public void visitSubCallExpr(@NotNull PsiPerlSubCallExpr o) {
+      PsiPerlMethod method = o.getMethod();
+      if (method == null) {
+        super.visitSubCallExpr(o);
+        return;
+      }
+
+      // this is assumption, because we are building flow on stubbing and can't resolve. For now...
+      //List<PsiElement> targetElements = method.getTargetElements();
+      PerlSubNameElement subNameElement = method.getSubNameElement();
+      if (subNameElement != null && DIE_SUBS.contains(subNameElement.getText())) {
+        PsiPerlCallArguments arguments = o.getCallArguments();
+        if (arguments != null) {
+          arguments.accept(this);
+        }
+        PsiElement dieScope = getDieScope(o);
+        startNode(o);
+        addPendingEdge(dieScope, prevInstruction);
+        flowAbrupted();
+      }
+      else {
+        super.visitSubCallExpr(o);
+      }
+    }
+
+    /**
+     * @return neares scope for die/croak/confess
+     */
+    @NotNull
+    private PsiElement getDieScope(@NotNull PsiElement element) {
+      return Objects.requireNonNull(PsiTreeUtil.getParentOfType(
+        element,
+        PerlSubExpr.class,
+        PerlEvalExpr.class,
+        PerlSubDefinitionBase.class,
+        PsiFile.class
+      ));
+    }
+
 
     @Override
     public void visitStatement(@NotNull PsiPerlStatement o) {

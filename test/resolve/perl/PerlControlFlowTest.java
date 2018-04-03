@@ -70,5 +70,13 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testReturnOrSomething() {doTest();}
 
+  public void testDieSub() {doTest();}
+
+  public void testCroakAnonSub() {doTest();}
+
+  public void testConfessEval() {doTest();}
+
+  public void testDieDo() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

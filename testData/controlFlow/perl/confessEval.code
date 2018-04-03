@@ -1,0 +1,7 @@
+
+eval {
+    say 'before';
+    confess 'test';
+    say 'after';
+};
+say 'bla';

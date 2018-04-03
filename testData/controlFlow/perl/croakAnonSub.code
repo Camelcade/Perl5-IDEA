@@ -1,0 +1,7 @@
+
+sub{
+    say 'before';
+    croak 'test';
+    say 'after';
+};
+say bla;

@@ -1,0 +1,7 @@
+
+do {
+    say 'before';
+    die 'test';;
+    say 'after';
+};
+say 'bla';
