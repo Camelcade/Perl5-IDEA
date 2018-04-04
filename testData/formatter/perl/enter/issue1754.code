@@ -1,0 +1,3 @@
+say 'hi';     # this is
+say 'blasdf'; # asdf
+say 'hi';<caret>

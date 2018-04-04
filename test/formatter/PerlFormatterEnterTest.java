@@ -22,6 +22,11 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/enter";
   }
 
+  public void testIssue1754() {
+    getCustomSettings().ALIGN_COMMENTS_ON_CONSEQUENT_LINES = true;
+    doTest();
+  }
+
   public void testCommaSequenceWithFatInSomething() {doTest();}
 
   public void testCommaSequenceWithFatTop() {doTest();}

@@ -38,6 +38,7 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -549,6 +550,9 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     // this is default algorythm from AbstractBlock#getFirstChildAlignment()
     List<Block> subBlocks = block.getSubBlocks();
     for (final Block subBlock : subBlocks) {
+      if (subBlock instanceof ASTBlock && PsiUtilCore.getElementType(((ASTBlock)subBlock).getNode()) == PerlElementTypes.COMMENT_LINE) {
+        continue;
+      }
       Alignment alignment = subBlock.getAlignment();
       if (alignment != null) {
         return alignment;
