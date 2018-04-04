@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
-import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.PsiPerlBlock;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Created by hurricup on 19.09.2015.
+ * Implement this interface if element contains block
  */
-public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeImportStub>, PerlLabelScope, PerlBlockOwner {
-  /**
-   * Returns imported file relative path or null if unrecognizable
-   *
-   * @return relative path
-   */
+public interface PerlBlockOwner extends PsiElement {
   @Nullable
-  String getImportPath();
+  default PsiPerlBlock getBlock() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
+  }
 }

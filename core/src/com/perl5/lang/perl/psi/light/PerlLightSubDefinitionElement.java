@@ -167,7 +167,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Override
   @Nullable
-  public PsiPerlBlock getSubDefinitionBody() {
+  public PsiPerlBlock getBlock() {
     return mySubDefinitionBody;
   }
 

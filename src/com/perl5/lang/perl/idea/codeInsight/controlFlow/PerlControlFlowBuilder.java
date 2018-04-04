@@ -32,6 +32,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -84,7 +85,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  // fixme sub elements in return/die
   // fixme here-doc opener
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
@@ -175,13 +175,20 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
      */
     @NotNull
     private PsiElement getDieScope(@NotNull PsiElement element) {
-      return Objects.requireNonNull(PsiTreeUtil.getParentOfType(
+      PsiElement containerElement = PsiTreeUtil.getParentOfType(
         element,
         PerlSubExpr.class,
         PerlEvalExpr.class,
         PerlSubDefinitionBase.class,
         PsiFile.class
-      ));
+      );
+      if (containerElement instanceof PerlBlockOwner) {
+        PsiPerlBlock block = ((PerlBlockOwner)containerElement).getBlock();
+        if (block != null) {
+          return block;
+        }
+      }
+      return Objects.requireNonNull(containerElement);
     }
 
 
@@ -231,8 +238,20 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         returnValueExpr.accept(this);
       }
       startNode(o);
-      addPendingEdge(o.getReturnScope(), prevInstruction);
+      addPendingEdge(getReturnScope(o), prevInstruction);
       flowAbrupted();
+    }
+
+    @NotNull
+    private PsiElement getReturnScope(@NotNull PsiPerlReturnExpr o) {
+      PsiElement returnScope = o.getReturnScope();
+      if (returnScope instanceof PerlBlockOwner) {
+        PsiPerlBlock block = ((PerlBlockOwner)returnScope).getBlock();
+        if (block != null) {
+          return block;
+        }
+      }
+      return Objects.requireNonNull(returnScope);
     }
 
     @Override

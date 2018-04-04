@@ -128,7 +128,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   @Nullable
-  public PsiPerlBlock getSubDefinitionBody() {
+  public PsiPerlBlock getBlock() {
     if (this instanceof PsiPerlSubDefinition) {
       PsiPerlBlock block = ((PsiPerlSubDefinition)this).getBlock();
       if (block != null) {

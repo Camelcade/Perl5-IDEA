@@ -37,9 +37,6 @@ public interface PerlForCompound extends PerlConvertableCompound, PerlLoop {
   }
 
   @Nullable
-  PsiPerlBlock getBlock();
-
-  @Nullable
   PsiPerlForIterator getForIterator();
 
   @Nullable

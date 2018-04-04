@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlSubArgumentsExtractor;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement {
+public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement, PerlBlockOwner {
   @Override
   default String getPresentableName() {
     String args = getSubArgumentsListAsString();
@@ -33,19 +34,11 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
   }
 
   /**
-   * @return code block of this sub definition
-   */
-  @Nullable
-  default PsiPerlBlock getSubDefinitionBody() {
-    return null;
-  }
-
-  /**
    * @return sub arguments, extracted from PSI structure of code block
    */
   @NotNull
   default List<PerlSubArgument> getPerlSubArgumentsFromBody() {
-    return getPerlSubArgumentsFromBody(getSubDefinitionBody());
+    return getPerlSubArgumentsFromBody(getBlock());
   }
 
   @NotNull

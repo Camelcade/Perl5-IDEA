@@ -16,16 +16,8 @@
 
 package com.perl5.lang.perl.psi.properties;
 
-import com.perl5.lang.perl.psi.PsiPerlBlock;
-import org.jetbrains.annotations.Nullable;
-
 /**
  * Compound statement with block
  */
-public interface PerlCompound extends PerlLexicalScope {
-  /**
-   * @return code block, main one
-   */
-  @Nullable
-  PsiPerlBlock getBlock();
+public interface PerlCompound extends PerlLexicalScope, PerlBlockOwner {
 }

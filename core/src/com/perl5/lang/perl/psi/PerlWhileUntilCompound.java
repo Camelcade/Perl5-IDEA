@@ -29,9 +29,6 @@ public interface PerlWhileUntilCompound extends PerlConvertableCompoundSimple, P
   }
 
   @Nullable
-  PsiPerlBlock getBlock();
-
-  @Nullable
   PsiPerlConditionExpr getConditionExpr();
 
   @Nullable

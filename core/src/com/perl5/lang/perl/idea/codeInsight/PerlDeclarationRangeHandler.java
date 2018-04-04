@@ -30,7 +30,7 @@ public class PerlDeclarationRangeHandler implements DeclarationRangeHandler<PsiE
   @Override
   public TextRange getDeclarationRange(@NotNull PsiElement container) {
     if (container instanceof PerlSubDefinitionElement) {
-      PsiPerlBlock body = ((PerlSubDefinitionElement)container).getSubDefinitionBody();
+      PsiPerlBlock body = ((PerlSubDefinitionElement)container).getBlock();
       if (body == null) {
         return TextRange.EMPTY_RANGE;
       }
