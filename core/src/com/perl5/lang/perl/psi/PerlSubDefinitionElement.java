@@ -34,11 +34,19 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
   }
 
   /**
+   * @return code block of this sub definition
+   */
+  @Nullable
+  default PsiPerlBlock getSubDefinitionBody() {
+    return null;
+  }
+
+  /**
    * @return sub arguments, extracted from PSI structure of code block
    */
   @NotNull
   default List<PerlSubArgument> getPerlSubArgumentsFromBody() {
-    return getPerlSubArgumentsFromBody(getBlock());
+    return getPerlSubArgumentsFromBody(getSubDefinitionBody());
   }
 
   @NotNull

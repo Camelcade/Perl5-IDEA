@@ -175,20 +175,15 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
      */
     @NotNull
     private PsiElement getDieScope(@NotNull PsiElement element) {
-      PsiElement containerElement = PsiTreeUtil.getParentOfType(
-        element,
-        PerlSubExpr.class,
-        PerlEvalExpr.class,
-        PerlSubDefinitionBase.class,
-        PsiFile.class
-      );
-      if (containerElement instanceof PerlBlockOwner) {
-        PsiPerlBlock block = ((PerlBlockOwner)containerElement).getBlock();
-        if (block != null) {
-          return block;
-        }
-      }
-      return Objects.requireNonNull(containerElement);
+      return getNestedBlockOrElement(
+        Objects.requireNonNull(
+          PsiTreeUtil.getParentOfType(
+            element,
+            PerlSubExpr.class,
+            PerlEvalExpr.class,
+            PerlSubDefinitionBase.class,
+            PsiFile.class
+          )));
     }
 
 
@@ -244,14 +239,27 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @NotNull
     private PsiElement getReturnScope(@NotNull PsiPerlReturnExpr o) {
-      PsiElement returnScope = o.getReturnScope();
-      if (returnScope instanceof PerlBlockOwner) {
-        PsiPerlBlock block = ((PerlBlockOwner)returnScope).getBlock();
+      return getNestedBlockOrElement(o.getReturnScope());
+    }
+
+    /**
+     * @return nested block if any
+     */
+    @NotNull
+    private PsiElement getNestedBlockOrElement(@NotNull PsiElement element) {
+      if (element instanceof PerlSubDefinitionElement) {
+        PsiPerlBlock body = ((PerlSubDefinitionElement)element).getSubDefinitionBody();
+        if (body != null) {
+          return body;
+        }
+      }
+      else if (element instanceof PerlBlockOwner) {
+        PsiPerlBlock block = ((PerlBlockOwner)element).getBlock();
         if (block != null) {
           return block;
         }
       }
-      return Objects.requireNonNull(returnScope);
+      return element;
     }
 
     @Override

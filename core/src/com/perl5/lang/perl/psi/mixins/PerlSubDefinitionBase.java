@@ -77,7 +77,6 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
 
-
   @Override
   public ItemPresentation getPresentation() {
     return new PerlItemPresentationSimple(this, getPresentableName());
@@ -128,12 +127,10 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   @Nullable
-  public PsiPerlBlock getBlock() {
-    if (this instanceof PsiPerlSubDefinition) {
-      PsiPerlBlock block = ((PsiPerlSubDefinition)this).getBlock();
-      if (block != null) {
-        return block;
-      }
+  public PsiPerlBlock getSubDefinitionBody() {
+    PsiPerlBlock block = this.getBlock();
+    if (block != null) {
+      return block;
     }
 
     PsiElement lazyParsableBlock = findChildByType(LP_CODE_BLOCK);
