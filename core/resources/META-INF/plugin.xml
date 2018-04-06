@@ -563,6 +563,10 @@
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlFancyMethodCallInspection"/>
 
     <localInspection language="Perl5"
+                     shortName="UnreachableCode" displayName="Unreachable Code" groupName="Perl5"
+                     enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnreachableCodeInspection"/>
+    <localInspection language="Perl5"
                      shortName="Deprecations" displayName="Deprecations" groupName="Perl5"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlDeprecatedInspection"/>
