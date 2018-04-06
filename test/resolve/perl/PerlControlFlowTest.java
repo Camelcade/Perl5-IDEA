@@ -110,5 +110,25 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testNestedModifier() {doTest();}
 
+  public void testGrepExpr() {doTest();}
+
+  public void testGrepWithArg() {doTest();}
+
+  public void testGrepWithBlock() {doTest();}
+
+  public void testSortExpr() {doTest();}
+
+  public void testSortWithArg() {doTest();}
+
+  public void testSortWithSubName() {doTest();}
+
+  public void testSortWithBlock() {doTest();}
+
+  public void testMapExpr() {doTest();}
+
+  public void testMapWithArg() {doTest();}
+
+  public void testMapWithBlock() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

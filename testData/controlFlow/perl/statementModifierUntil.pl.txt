@@ -1,11 +1,13 @@
 0(1) element: null
 1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-3(4,8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-4(5) element: PsiPerlUntilStatementModifierImpl(Perl5: UNTIL_STATEMENT_MODIFIER). Condition: $_:false
-5(6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-6(7) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-7(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-10() element: null
+3(4) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+5(6,10) element: PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR)
+6(7) element: PsiPerlUntilStatementModifierImpl(Perl5: UNTIL_STATEMENT_MODIFIER). Condition: $c > $d:false
+7(8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+8(9) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+9(5) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(11) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+11(12) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+12() element: null

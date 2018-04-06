@@ -1,3 +1,5 @@
 say 'start';
-say $a = $b for @$INC;
+
+say sort $_, @ARGV;
+
 say 'end';

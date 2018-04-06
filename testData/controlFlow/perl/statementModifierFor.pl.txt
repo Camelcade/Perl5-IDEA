@@ -1,12 +1,13 @@
 0(1) element: null
 1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-4(5,9) iterate null using PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-5(6) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE). Condition: @INC:true
-6(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-7(8) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-8(4) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-11() element: null
+3(4) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) element: PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR)
+5(6,10) iterate null using PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR)
+6(7) element: PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR). Condition: @$INC:true
+7(8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+8(9) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+9(5) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(11) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+11(12) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+12() element: null

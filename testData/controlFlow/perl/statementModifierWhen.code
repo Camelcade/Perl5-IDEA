@@ -1,3 +1,3 @@
 say 'start';
-say $a = $b when $_;
+say $a = $b when $c > $d;
 say 'end';

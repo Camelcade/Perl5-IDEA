@@ -1,0 +1,5 @@
+say 'start';
+
+say map @ARGV; # don't know what it does
+
+say 'end';

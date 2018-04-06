@@ -129,9 +129,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
   // fixme for indexed
-  // fixme foreach
-  // fixme given
-  // fixme grep/map/sort
+  // fixme given & friends
   // fixme next/last/redo
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
@@ -139,6 +137,36 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (o != null) {
         o.accept(this);
       }
+    }
+
+    @Override
+    public void visitGrepExpr(@NotNull PsiPerlGrepExpr o) {
+      processSortMapGrep(o);
+    }
+
+    @Override
+    public void visitMapExpr(@NotNull PsiPerlMapExpr o) {
+      processSortMapGrep(o);
+    }
+
+    @Override
+    public void visitSortExpr(@NotNull PsiPerlSortExpr o) {
+      processSortMapGrep(o);
+    }
+
+    private void processSortMapGrep(@NotNull PsiElement o) {
+      PsiElement[] children = o.getChildren();
+      if (children.length > 0) {
+        PsiElement bodyElement = children.length == 1 ? null : children[0];
+        PsiElement sourceElement = children.length == 1 ? children[0] : children[1];
+        acceptSafe(sourceElement);
+        Instruction loopInstruction = startIterationNode(o, null, sourceElement);
+        startIteratorConditionalNode(sourceElement);
+        acceptSafe(bodyElement);
+        addEdge(prevInstruction, loopInstruction);
+        prevInstruction = loopInstruction;
+      }
+      startNodeSmart(o);
     }
 
     @Override
@@ -156,7 +184,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlConditionExpr sourceElement = o.getConditionExpr();
       acceptSafe(sourceElement);
       Instruction loopInstruction = startIterationNode(o, o.getForeachIterator(), sourceElement);
-      ;
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
       acceptSafe(o.getBlock());
       acceptSafe(o.getContinueBlock());
@@ -390,7 +417,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitForStatementModifier(@NotNull PsiPerlForStatementModifier o) {
       PsiPerlExpr source = o.getExpr();
-      startNodeSmart(source);
+      acceptSafe(source);
       myModifierLoopInstruction = startIterationNode(o, null, source);
       startIteratorConditionalNode(source);
     }
@@ -398,7 +425,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitPerlStatementModifier(@NotNull PerlStatementModifier o) {
       PsiPerlExpr condition = o.getExpr();
-      startNodeSmart(condition);
+      acceptSafe(condition);
       if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(o))) {
         myModifierLoopInstruction = prevInstruction;
       }

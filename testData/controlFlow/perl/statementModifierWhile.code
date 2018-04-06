@@ -1,3 +1,3 @@
 say 'start';
-say $a = $b while $_;
+say $a = $b while $c > $d;
 say 'end';

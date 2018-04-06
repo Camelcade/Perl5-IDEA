@@ -1,0 +1,5 @@
+say 'start';
+
+say sort { $a <=> $b } @ARGV;
+
+say 'end';

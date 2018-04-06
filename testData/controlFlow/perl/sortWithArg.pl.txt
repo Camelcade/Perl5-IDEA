@@ -1,0 +1,13 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+5(6) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+6(7,8) iterate null using PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+7(6) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR). Condition: $_, @ARGV:true
+8(9) element: PsiPerlSortExprImpl(Perl5: SORT_EXPR)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(11) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+11(12) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+12() element: null

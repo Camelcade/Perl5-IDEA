@@ -1,0 +1,5 @@
+say 'start';
+
+say sort somesub @ARGV;
+
+say 'end';
