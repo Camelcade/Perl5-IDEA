@@ -85,7 +85,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  // fixme here-doc opener
+  // fixme shouldn't we move subs elements in the beginning of the subgraph?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
     @Override
@@ -271,6 +271,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
       addPendingEdge(o.getParent(), prevInstruction);
       startConditionalNode(o, condition, !FALSE_VALUE_MODIFIERS.contains(PsiUtilCore.getElementType(o)));
+    }
+
+    @Override
+    public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
+      startNode(o);
     }
 
     @Override
