@@ -66,7 +66,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private Instruction myLastModifierExpressionInstruction;
 
   public ControlFlow build(PsiElement element) {
-    return super.build(new PerlControlFlowVisitor(), element);
+    super.build(new PerlControlFlowVisitor(), element);
+    return getCompleteControlFlow();
   }
 
   public static ControlFlow getFor(@NotNull PsiElement element) {
@@ -87,6 +88,42 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
+
+    @Override
+    public void visitWhileCompound(@NotNull PsiPerlWhileCompound o) {
+      processWhileUntil(o, true);
+    }
+
+    @Override
+    public void visitUntilCompound(@NotNull PsiPerlUntilCompound o) {
+      processWhileUntil(o, false);
+    }
+
+    private void processWhileUntil(@NotNull PerlWhileUntilCompound o, boolean conditionValue) {
+      startTransparentNode(o, "anchor");
+      Instruction startInstruction = prevInstruction;
+
+      PsiPerlConditionExpr conditionExpr = o.getConditionExpr();
+      if (conditionExpr != null) {
+        conditionExpr.accept(this);
+      }
+
+      Instruction conditionInstruction = prevInstruction;
+
+      startConditionalNode(conditionExpr, conditionExpr, conditionValue);
+      PsiPerlBlock block = o.getBlock();
+      if (block != null) {
+        block.accept(this);
+      }
+
+      PsiPerlContinueBlock continueBlock = o.getContinueBlock();
+      if (continueBlock != null) {
+        continueBlock.accept(this);
+      }
+
+      addEdge(prevInstruction, startInstruction);
+      prevInstruction = conditionInstruction;
+    }
 
     @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
@@ -213,6 +250,16 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitBlock(@NotNull PsiPerlBlock o) {
+      o.acceptChildren(this);
+    }
+
+    @Override
+    public void visitContinueBlock(@NotNull PsiPerlContinueBlock o) {
+      o.acceptChildren(this);
+    }
+
+    @Override
+    public void visitConditionExpr(@NotNull PsiPerlConditionExpr o) {
       o.acceptChildren(this);
     }
 
