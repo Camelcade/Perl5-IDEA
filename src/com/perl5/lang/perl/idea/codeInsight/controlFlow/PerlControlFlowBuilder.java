@@ -65,7 +65,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
     CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
     WHILE_COMPOUND, UNTIL_COMPOUND,
-    IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK
+    IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
+    FOR_COMPOUND
   );
 
   /**
@@ -107,6 +108,10 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
   }
 
+  public Instruction startConditionalNode(PsiElement condition, boolean result) {
+    return startConditionalNode(condition, condition, result);
+  }
+
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
   // fixme for indexed
   // fixme foreach
@@ -119,6 +124,33 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (o != null) {
         o.accept(this);
       }
+    }
+
+    @Override
+    public void visitForCompound(@NotNull PsiPerlForCompound o) {
+      if (o.getForIterator() != null) {
+        processIndexedFor(o);
+      }
+      else {
+        processForWithIterator(o);
+      }
+    }
+
+    private void processForWithIterator(@NotNull PsiPerlForCompound o) {
+      startNodeSmart(o);
+      PsiPerlConditionExpr sourceElement = o.getConditionExpr();
+      acceptSafe(sourceElement);
+      addNodeAndCheckPending(new PerlIterateInstruction(PerlControlFlowBuilder.this, o, o.getForeachIterator(), sourceElement));
+      Instruction loopInstruction = prevInstruction;
+      startConditionalNode(sourceElement, true); // fake condition if iterator is not finished yet
+      acceptSafe(o.getBlock());
+      acceptSafe(o.getContinueBlock());
+      addEdge(prevInstruction, loopInstruction);
+      prevInstruction = loopInstruction;
+    }
+
+    private void processIndexedFor(@NotNull PsiPerlForCompound o) {
+      startNodeSmart(o);
     }
 
     @Override
@@ -140,7 +172,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       Instruction conditionInstruction = prevInstruction;
 
-      startConditionalNode(conditionExpr, conditionExpr, conditionValue);
+      startConditionalNode(conditionExpr, conditionValue);
       acceptSafe(o.getBlock());
 
       acceptSafe(o.getContinueBlock());
@@ -189,7 +221,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlConditionExpr mainBranchCondition = branch.getConditionExpr();
       mainBranchCondition.accept(this);
       Instruction elseFlow = prevInstruction;
-      startConditionalNode(mainBranchCondition, mainBranchCondition, conditionValue);
+      startConditionalNode(mainBranchCondition, conditionValue);
       acceptSafe(branch.getBlock());
       addPendingEdge(scope, prevInstruction);
       prevInstruction = elseFlow;

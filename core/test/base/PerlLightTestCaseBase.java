@@ -107,6 +107,7 @@ import com.perl5.lang.perl.idea.codeInsight.controlFlow.PartialConditionalInstru
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlIterateInstruction;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
@@ -1380,10 +1381,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
              + ((PerlAssignInstruction)instruction).getOperation().getText() + " "
              + ((PerlAssignInstruction)instruction).getRightSide().getText();
     }
+    else if (instruction instanceof PerlIterateInstruction) {
+      return "iterate " +
+             getTextSafe(((PerlIterateInstruction)instruction).getSourceElement()) +
+             " using " +
+             getTextSafe(((PerlIterateInstruction)instruction).getTargetElement());
+    }
     else {
       PsiElement element = instruction.getElement();
       return element != null ? escape(element.getText()) : "";
     }
+  }
+
+  private String getTextSafe(@Nullable PsiElement element) {
+    return element == null ? "null" : element.getText();
   }
 
   private String escape(String text) {

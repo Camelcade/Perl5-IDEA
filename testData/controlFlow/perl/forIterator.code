@@ -1,0 +1,5 @@
+say 'start';
+for $a (@ARGV){
+    say 'body';
+}
+say 'end';

@@ -1,0 +1,8 @@
+say 'start';
+for my $a (@ARGV){
+    say 'body';
+}
+continue {
+    say 'continue';
+}
+say 'end';
