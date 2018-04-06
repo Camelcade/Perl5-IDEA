@@ -94,6 +94,15 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
+  private void startNodeSmart(@NotNull PsiElement element) {
+    if (TRANSPARENT_CONTAINERS.contains(PsiUtilCore.getElementType(element))) {
+      startTransparentNode(element, "");
+    }
+    else {
+      startNode(element);
+    }
+  }
+
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
@@ -155,7 +164,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         lastRun = run;
         run = run.getNextSibling();
       }
-      startNodeIfNotTransparent(o);
+      startNodeSmart(o);
     }
 
     @Override
@@ -314,13 +323,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         return;
       }
       element.acceptChildren(this);
-      startNodeIfNotTransparent(element);
-    }
-
-    private void startNodeIfNotTransparent(@NotNull PsiElement element) {
-      if (!TRANSPARENT_CONTAINERS.contains(PsiUtilCore.getElementType(element))) {
-        startNode(element);
-      }
+      startNodeSmart(element);
     }
   }
 }
