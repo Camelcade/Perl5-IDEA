@@ -115,6 +115,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme next/last/redo
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
+    private void acceptSafe(@Nullable PsiElement o) {
+      if (o != null) {
+        o.accept(this);
+      }
+    }
+
     @Override
     public void visitWhileCompound(@NotNull PsiPerlWhileCompound o) {
       processWhileUntil(o, true);
@@ -130,22 +136,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       Instruction startInstruction = prevInstruction;
 
       PsiPerlConditionExpr conditionExpr = o.getConditionExpr();
-      if (conditionExpr != null) {
-        conditionExpr.accept(this);
-      }
+      acceptSafe(conditionExpr);
 
       Instruction conditionInstruction = prevInstruction;
 
       startConditionalNode(conditionExpr, conditionExpr, conditionValue);
-      PsiPerlBlock block = o.getBlock();
-      if (block != null) {
-        block.accept(this);
-      }
+      acceptSafe(o.getBlock());
 
-      PsiPerlContinueBlock continueBlock = o.getContinueBlock();
-      if (continueBlock != null) {
-        continueBlock.accept(this);
-      }
+      acceptSafe(o.getContinueBlock());
 
       addEdge(prevInstruction, startInstruction);
       prevInstruction = conditionInstruction;
@@ -172,10 +170,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       // elsif branches
       conditionBlocks.forEach(branch -> processConditionalBranch(branch, true, o));
 
-      PsiPerlUnconditionalBlock elseBlock = o.getUnconditionalBlock();
-      if (elseBlock != null) {
-        elseBlock.accept(this);
-      }
+      acceptSafe(o.getUnconditionalBlock());
     }
 
     /**
@@ -195,10 +190,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       mainBranchCondition.accept(this);
       Instruction elseFlow = prevInstruction;
       startConditionalNode(mainBranchCondition, mainBranchCondition, conditionValue);
-      PsiPerlBlock mainBranchBlock = branch.getBlock();
-      if (mainBranchBlock != null) {
-        mainBranchBlock.accept(this);
-      }
+      acceptSafe(branch.getBlock());
       addPendingEdge(scope, prevInstruction);
       prevInstruction = elseFlow;
     }
@@ -271,10 +263,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       //List<PsiElement> targetElements = method.getTargetElements();
       PerlSubNameElement subNameElement = method.getSubNameElement();
       if (subNameElement != null && DIE_SUBS.contains(subNameElement.getText())) {
-        PsiPerlCallArguments arguments = o.getCallArguments();
-        if (arguments != null) {
-          arguments.accept(this);
-        }
+        acceptSafe(o.getCallArguments());
         PsiElement dieScope = getDieScope(o);
         startNode(o);
         addPendingEdge(dieScope, prevInstruction);
@@ -310,10 +299,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
           modifier.accept(this);
           modifierExpression = myLastModifierExpressionInstruction;
         }
-        PsiPerlExpr expr = o.getExpr();
-        if (expr != null) {
-          expr.accept(this);
-        }
+        acceptSafe(o.getExpr());
 
         if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(modifier))) {
           addEdge(prevInstruction, modifierExpression);
@@ -327,10 +313,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitReturnExpr(@NotNull PsiPerlReturnExpr o) {
-      PsiPerlExpr returnValueExpr = o.getReturnValueExpr();
-      if (returnValueExpr != null) {
-        returnValueExpr.accept(this);
-      }
+      acceptSafe(o.getReturnValueExpr());
       startNode(o);
       addPendingEdge(getReturnScope(o), prevInstruction);
       flowAbrupted();
