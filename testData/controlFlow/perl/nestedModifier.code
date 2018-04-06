@@ -1,0 +1,6 @@
+say 'start';
+do{
+  say 'do-for body' for $a;
+  say 'do body';
+} while $b;
+say 'end';

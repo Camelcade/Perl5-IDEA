@@ -108,5 +108,7 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testForIteratorWithoutIterator() {doTest();}
 
+  public void testNestedModifier() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

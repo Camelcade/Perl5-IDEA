@@ -76,7 +76,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     UNLESS_STATEMENT_MODIFIER, UNTIL_STATEMENT_MODIFIER
   );
 
-  private Instruction myLastModifierExpressionInstruction;
+  // modifier's loops should be edged back here
+  private Instruction myModifierLoopInstruction = null;
 
   public ControlFlow build(PsiElement element) {
     super.build(new PerlControlFlowVisitor(), element);
@@ -99,17 +100,31 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  private void startNodeSmart(@NotNull PsiElement element) {
+  public Instruction startIterationNode(@Nullable PsiElement element,
+                                        @Nullable PsiElement targetElement,
+                                        @Nullable PsiElement sourceElement) {
+    PerlIterateInstruction instruction = new PerlIterateInstruction(this, element, targetElement, sourceElement);
+    addNodeAndCheckPending(instruction);
+    return instruction;
+  }
+
+  private void startNodeSmart(@Nullable PsiElement element) {
     if (TRANSPARENT_CONTAINERS.contains(PsiUtilCore.getElementType(element))) {
       startTransparentNode(element, "");
     }
-    else {
+    else if (element != null) {
       startNode(element);
     }
   }
 
   public Instruction startConditionalNode(PsiElement condition, boolean result) {
     return startConditionalNode(condition, condition, result);
+  }
+
+  public Instruction startIteratorConditionalNode(@Nullable PsiElement iterator) {
+    PerlIteratorConditionInstruction instruction = new PerlIteratorConditionInstruction(this, iterator, true);
+    addNodeAndCheckPending(instruction);
+    return instruction;
   }
 
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
@@ -140,9 +155,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       startNodeSmart(o);
       PsiPerlConditionExpr sourceElement = o.getConditionExpr();
       acceptSafe(sourceElement);
-      addNodeAndCheckPending(new PerlIterateInstruction(PerlControlFlowBuilder.this, o, o.getForeachIterator(), sourceElement));
-      Instruction loopInstruction = prevInstruction;
-      startConditionalNode(sourceElement, true); // fake condition if iterator is not finished yet
+      Instruction loopInstruction = startIterationNode(o, o.getForeachIterator(), sourceElement);
+      ;
+      startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
       acceptSafe(o.getBlock());
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
@@ -324,22 +339,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitStatement(@NotNull PsiPerlStatement o) {
-      if (o instanceof PerlStatementMixin) {
-        PsiPerlStatementModifier modifier = ((PerlStatementMixin)o).getModifier();
-        Instruction modifierExpression = null;
-        if (modifier != null) {
-          modifier.accept(this);
-          modifierExpression = myLastModifierExpressionInstruction;
-        }
-        acceptSafe(o.getExpr());
-
-        if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(modifier))) {
-          addEdge(prevInstruction, modifierExpression);
-          prevInstruction = modifierExpression;
-        }
-      }
-      else {
+      if (!(o instanceof PerlStatementMixin)) {
         super.visitStatement(o);
+        return;
+      }
+
+      acceptSafe(((PerlStatementMixin)o).getModifier());
+      Instruction modifierLoopInstruction = myModifierLoopInstruction;
+      acceptSafe(o.getExpr());
+      if (modifierLoopInstruction != null) {
+        addEdge(prevInstruction, modifierLoopInstruction);
+        prevInstruction = modifierLoopInstruction;
+        myModifierLoopInstruction = null;
       }
     }
 
@@ -377,13 +388,23 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitForStatementModifier(@NotNull PsiPerlForStatementModifier o) {
+      PsiPerlExpr source = o.getExpr();
+      startNodeSmart(source);
+      myModifierLoopInstruction = startIterationNode(o, null, source);
+      startIteratorConditionalNode(source);
+    }
+
+    @Override
     public void visitPerlStatementModifier(@NotNull PerlStatementModifier o) {
       PsiPerlExpr condition = o.getExpr();
-      if (condition != null) {
-        condition.accept(this);
-        myLastModifierExpressionInstruction = prevInstruction;
+      startNodeSmart(condition);
+      if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(o))) {
+        myModifierLoopInstruction = prevInstruction;
       }
-      addPendingEdge(o.getParent(), prevInstruction);
+      else {
+        addPendingEdge(o.getParent(), prevInstruction);
+      }
       startConditionalNode(o, condition, !FALSE_VALUE_MODIFIERS.contains(PsiUtilCore.getElementType(o)));
     }
 
