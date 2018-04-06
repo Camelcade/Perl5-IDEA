@@ -254,7 +254,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         }
 
         rightSide.accept(this);
-        addNodeAndCheckPending(new PerlAssignInstuction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
+        addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
         rightSide = leftSide;
       }
     }

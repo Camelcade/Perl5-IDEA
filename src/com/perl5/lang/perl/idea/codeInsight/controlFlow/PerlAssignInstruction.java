@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlAssignInstuction extends InstructionImpl {
+public class PerlAssignInstruction extends InstructionImpl {
   @NotNull
   private final PsiElement myLeftSide;
   @NotNull
@@ -32,11 +32,11 @@ public class PerlAssignInstuction extends InstructionImpl {
   @NotNull
   private final PsiElement myOperation;
 
-  public PerlAssignInstuction(@NotNull ControlFlowBuilder builder,
-                              @Nullable PsiElement element,
-                              @NotNull PsiElement leftSide,
-                              @NotNull PsiElement rightSide,
-                              @NotNull PsiElement operationElement) {
+  public PerlAssignInstruction(@NotNull ControlFlowBuilder builder,
+                               @Nullable PsiElement element,
+                               @NotNull PsiElement leftSide,
+                               @NotNull PsiElement rightSide,
+                               @NotNull PsiElement operationElement) {
     super(builder, element);
     myLeftSide = leftSide;
     myRightSide = rightSide;
