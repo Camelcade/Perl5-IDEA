@@ -17,9 +17,8 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase;
+import com.perl5.lang.perl.psi.properties.PerlReturnScope;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,14 +37,7 @@ public interface PerlReturnExpr extends PsiElement {
    * @return PsiElement we are returning from
    */
   @NotNull
-  default PsiElement getReturnScope() {
-    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(
-      this,
-      PerlSortExpr.class,
-      PerlSubExpr.class,
-      PerlEvalExpr.class,
-      PerlSubDefinitionBase.class,
-      PsiFile.class
-    ));
+  default PerlReturnScope getReturnScope() {
+    return Objects.requireNonNull(PsiTreeUtil.getParentOfType(this, PerlReturnScope.class));
   }
 }

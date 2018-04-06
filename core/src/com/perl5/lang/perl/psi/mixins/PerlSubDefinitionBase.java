@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -38,7 +39,8 @@ import java.util.List;
  */
 public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinitionElement,
                                                                                                   PerlLexicalScope,
-                                                                                                  PerlElementTypes {
+                                                                                                  PerlElementTypes,
+                                                                                                  PerlDieScope {
   public PerlSubDefinitionBase(@NotNull ASTNode node) {
     super(node);
   }

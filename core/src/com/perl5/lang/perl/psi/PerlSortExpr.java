@@ -19,9 +19,10 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlReturnScope;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlSortExpr extends PsiElement, PerlLabelScope, PerlBlockOwner {
+public interface PerlSortExpr extends PsiElement, PerlLabelScope, PerlBlockOwner, PerlReturnScope {
 }

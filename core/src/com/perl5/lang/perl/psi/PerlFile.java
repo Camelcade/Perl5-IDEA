@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
+import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
@@ -32,7 +33,7 @@ import java.util.Set;
  * Created by hurricup on 09.08.2015.
  */
 public interface PerlFile
-  extends PsiFile, PerlLexicalScope, PerlNamespaceDefinitionElement, PerlLabelScope, ItemPresentation, PodLinkTarget {
+  extends PsiFile, PerlLexicalScope, PerlNamespaceDefinitionElement, PerlLabelScope, ItemPresentation, PodLinkTarget, PerlDieScope {
   /**
    * Recursively collects virtual files included in current file
    *

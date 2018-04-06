@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
-
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
-import com.perl5.lang.perl.psi.properties.PerlDieScope;
-import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+package com.perl5.lang.perl.psi.properties;
 
 /**
- * Created by hurricup on 04.03.2016.
+ * Marker interface for elements which can be exited with die & friends
  */
-public interface PerlSubExpr extends PsiElement, PerlLabelScope, PerlLexicalScope, PerlBlockOwner, PerlDieScope {
+public interface PerlDieScope extends PerlReturnScope {
 }
