@@ -124,7 +124,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   /**
-   * @return neares scope for die/croak/confess
+   * @return nearest scope for die/croak/confess
    */
   @NotNull
   private static PsiElement getDieScopeBlock(@NotNull PsiElement element) {
