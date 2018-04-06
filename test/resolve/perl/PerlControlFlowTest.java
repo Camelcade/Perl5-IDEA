@@ -86,6 +86,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testUntilCompoundWithContinue() {doTest();}
 
+  public void testIfCompound() {doTest();}
+
+  public void testUnlessCompound() {doTest();}
 
   private void doTest() {doTestControlFlow();}
 }

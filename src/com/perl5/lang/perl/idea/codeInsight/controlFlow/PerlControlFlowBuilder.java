@@ -36,8 +36,10 @@ import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -61,7 +63,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    */
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.create(
     BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
-    CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS
+    CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
+    WHILE_COMPOUND, UNTIL_COMPOUND,
+    IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK
   );
 
   /**
@@ -104,6 +108,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
+  // fixme for indexed
+  // fixme foreach
+  // fixme given
+  // fixme grep/map/sort
+  // fixme next/last/redo
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
     @Override
@@ -117,7 +126,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     private void processWhileUntil(@NotNull PerlWhileUntilCompound o, boolean conditionValue) {
-      startTransparentNode(o, "anchor");
+      startNodeSmart(o);
       Instruction startInstruction = prevInstruction;
 
       PsiPerlConditionExpr conditionExpr = o.getConditionExpr();
@@ -140,6 +149,58 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       addEdge(prevInstruction, startInstruction);
       prevInstruction = conditionInstruction;
+    }
+
+    @Override
+    public void visitIfCompound(@NotNull PsiPerlIfCompound o) {
+      processIfUnlessCompound(o, true);
+    }
+
+    @Override
+    public void visitUnlessCompound(@NotNull PsiPerlUnlessCompound o) {
+      processIfUnlessCompound(o, false);
+    }
+
+    private void processIfUnlessCompound(@NotNull PerlIfUnlessCompound o, boolean conditionValue) {
+      startNodeSmart(o);
+      List<PsiPerlConditionalBlock> conditionBlocks = o.getConditionalBlockList();
+
+      // if/unless branch
+      PsiPerlConditionalBlock mainBranch = conditionBlocks.isEmpty() ? null : conditionBlocks.remove(0);
+      processConditionalBranch(mainBranch, conditionValue, o);
+
+      // elsif branches
+      conditionBlocks.forEach(branch -> processConditionalBranch(branch, true, o));
+
+      PsiPerlUnconditionalBlock elseBlock = o.getUnconditionalBlock();
+      if (elseBlock != null) {
+        elseBlock.accept(this);
+      }
+    }
+
+    /**
+     * Processes conditional branch (if/unless/elsif/etc)
+     *
+     * @param branch         branch to process
+     * @param conditionValue value of condition (if/unless)
+     * @param scope          wrapping scope for pending edges
+     */
+    private void processConditionalBranch(@Nullable PsiPerlConditionalBlock branch,
+                                          boolean conditionValue,
+                                          @NotNull PsiElement scope) {
+      if (branch == null) {
+        return;
+      }
+      PsiPerlConditionExpr mainBranchCondition = branch.getConditionExpr();
+      mainBranchCondition.accept(this);
+      Instruction elseFlow = prevInstruction;
+      startConditionalNode(mainBranchCondition, mainBranchCondition, conditionValue);
+      PsiPerlBlock mainBranchBlock = branch.getBlock();
+      if (mainBranchBlock != null) {
+        mainBranchBlock.accept(this);
+      }
+      addPendingEdge(scope, prevInstruction);
+      prevInstruction = elseFlow;
     }
 
     @Override
@@ -239,7 +300,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
             PsiFile.class
           )));
     }
-
 
     @Override
     public void visitStatement(@NotNull PsiPerlStatement o) {
