@@ -1,0 +1,3 @@
+say 'start';
+say $a = $b while $_;
+say 'end';

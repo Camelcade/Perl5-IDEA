@@ -1,0 +1,3 @@
+say 'start';
+say $a = $b foreach @INC;
+say 'end';

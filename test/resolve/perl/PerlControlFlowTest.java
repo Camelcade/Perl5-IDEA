@@ -42,7 +42,19 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testAssignExpressions() {doTest();}
 
-  public void testStatementModifier() {doTest();}
+  public void testStatementModifierFor() {doTest();}
+
+  public void testStatementModifierForeach() {doTest();}
+
+  public void testStatementModifierIf() {doTest();}
+
+  public void testStatementModifierUnless() {doTest();}
+
+  public void testStatementModifierUntil() {doTest();}
+
+  public void testStatementModifierWhen() {doTest();}
+
+  public void testStatementModifierWhile() {doTest();}
 
   public void testPrintExpression() {doTest();}
 
