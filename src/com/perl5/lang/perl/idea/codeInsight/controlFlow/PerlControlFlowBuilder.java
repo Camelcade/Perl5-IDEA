@@ -57,6 +57,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   );
 
   /**
+   * We should not create a node for following elements, only accept children.
+   */
+  private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.create(
+    BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
+    CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS
+  );
+
+  /**
    * Modifiers with false branch, instead of true
    */
   private static final TokenSet FALSE_VALUE_MODIFIERS = TokenSet.create(
@@ -147,7 +155,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         lastRun = run;
         run = run.getNextSibling();
       }
-      startNode(o);
+      startNodeIfNotTransparent(o);
     }
 
     @Override
@@ -249,31 +257,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitBlock(@NotNull PsiPerlBlock o) {
-      o.acceptChildren(this);
-    }
-
-    @Override
-    public void visitContinueBlock(@NotNull PsiPerlContinueBlock o) {
-      o.acceptChildren(this);
-    }
-
-    @Override
-    public void visitConditionExpr(@NotNull PsiPerlConditionExpr o) {
-      o.acceptChildren(this);
-    }
-
-    @Override
-    public void visitParenthesisedCallArguments(@NotNull PsiPerlParenthesisedCallArguments o) {
-      o.acceptChildren(this);
-    }
-
-    @Override
-    public void visitCallArguments(@NotNull PsiPerlCallArguments o) {
-      o.acceptChildren(this);
-    }
-
-    @Override
     public void visitReturnExpr(@NotNull PsiPerlReturnExpr o) {
       PsiPerlExpr returnValueExpr = o.getReturnValueExpr();
       if (returnValueExpr != null) {
@@ -327,8 +310,15 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitElement(@NotNull PsiElement element) {
-      if (!(element instanceof LeafPsiElement)) {
-        super.visitElement(element);
+      if (element instanceof LeafPsiElement) {
+        return;
+      }
+      element.acceptChildren(this);
+      startNodeIfNotTransparent(element);
+    }
+
+    private void startNodeIfNotTransparent(@NotNull PsiElement element) {
+      if (!TRANSPARENT_CONTAINERS.contains(PsiUtilCore.getElementType(element))) {
         startNode(element);
       }
     }
