@@ -28,12 +28,14 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashSet;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,13 +109,16 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
-  private void startNodeSmart(@Nullable PsiElement element) {
+  @Nullable
+  @Contract("null -> null; !null -> !null")
+  private Instruction startNodeSmart(@Nullable PsiElement element) {
     if (TRANSPARENT_CONTAINERS.contains(PsiUtilCore.getElementType(element))) {
-      startTransparentNode(element, "");
+      return startTransparentNode(element, "");
     }
     else if (element != null) {
-      startNode(element);
+      return startNode(element);
     }
+    return null;
   }
 
   /**
@@ -312,17 +317,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitExpr(@NotNull PsiPerlExpr o) {
       PsiElement run = o.getFirstChild();
       PsiElement lastRun = null;
+      List<Instruction> instructionsToLink = ContainerUtil.newArrayList();
       while (run != null) {
         if (!PerlPsiUtil.isCommentOrSpace(run)) {
           run.accept(this);
           IElementType elementType = PsiUtilCore.getElementType(run);
           if (lastRun != null) {
             if (elementType == OPERATOR_AND || elementType == OPERATOR_AND_LP) {
-              addPendingEdge(o, prevInstruction);
+              instructionsToLink.add(prevInstruction);
               startPartialConditionalNode(run, o, lastRun, true);
             }
             else if (elementType == OPERATOR_OR || elementType == OPERATOR_OR_LP || elementType == OPERATOR_OR_DEFINED) {
-              addPendingEdge(o, prevInstruction);
+              instructionsToLink.add(prevInstruction);
               startPartialConditionalNode(run, o, lastRun, false);
             }
           }
@@ -330,7 +336,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         lastRun = run;
         run = run.getNextSibling();
       }
-      startNodeSmart(o);
+      Instruction outerInstruction = startNodeSmart(o);
+      instructionsToLink.forEach(instruction -> addEdge(instruction, outerInstruction));
     }
 
     @Override
