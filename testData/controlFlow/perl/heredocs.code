@@ -1,0 +1,9 @@
+say <<'EOM';
+test q
+EOM
+say <<"EOM";
+test qq
+EOM
+say <<`EOM`;
+test qx
+EOM

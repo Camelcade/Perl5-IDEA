@@ -92,6 +92,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testExprTernary() {doTest();}
 
+  public void testHeredocs() {doTest();}
+
   public void testReturnOrSomething() {doTest();}
 
   public void testDieSub() {doTest();}
