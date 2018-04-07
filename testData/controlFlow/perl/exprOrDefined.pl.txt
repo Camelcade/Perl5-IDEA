@@ -1,0 +1,12 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4,9) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) element: PsiElement(Perl5: //). Condition: $a // $b // $c:false; Partial condition: $a 
+5(6,9) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+6(7) element: PsiElement(Perl5: //). Condition: $a // $b // $c:false; Partial condition: $a // $b 
+7(8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+8(9) element: PsiPerlOrExprImpl(Perl5: OR_EXPR)
+9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+11() element: null

@@ -1,0 +1,3 @@
+say 'start';
+$a and $b and $c;
+say 'end';

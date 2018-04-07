@@ -1,8 +1,3 @@
-$a && $b && $c;
-$a || $b || $c;
-$a // $b // $c;
-$a and $b and $c;
-$a or $b or $c;
 $a xor $b xor $c;
 $a ? $b : $c;
 $a | $b | $c;
