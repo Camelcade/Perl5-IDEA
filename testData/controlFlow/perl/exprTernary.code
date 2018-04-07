@@ -1,0 +1,3 @@
+say 'hi';
+$a ? $b : $c;
+say 'bye';

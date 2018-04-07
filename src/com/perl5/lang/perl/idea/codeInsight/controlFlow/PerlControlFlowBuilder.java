@@ -314,6 +314,24 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitTrenarExpr(@NotNull PsiPerlTrenarExpr o) {
+      PsiElement[] children = o.getChildren();
+      if (children.length != 3) {
+        super.visitTrenarExpr(o);
+        return;
+      }
+      startNodeSmart(children[0]);
+      Instruction conditionInstruction = prevInstruction;
+      startConditionalNode(o, children[0], true);
+      startNodeSmart(children[1]);
+      Instruction trueInstruction = prevInstruction;
+      prevInstruction = conditionInstruction;
+      startNodeSmart(children[2]);
+      startNodeSmart(o);
+      addEdge(trueInstruction, prevInstruction);
+    }
+
+    @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
       PsiElement run = o.getFirstChild();
       PsiElement lastRun = null;

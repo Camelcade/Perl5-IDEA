@@ -1,0 +1,11 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4,6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) element: PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR). Condition: $a:true
+5(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+6(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+7(8) element: PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10() element: null
