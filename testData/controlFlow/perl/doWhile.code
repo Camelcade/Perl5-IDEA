@@ -1,0 +1,5 @@
+say 'start';
+do{
+say 'body';
+} while 0;
+say 'end';

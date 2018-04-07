@@ -176,6 +176,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme for indexed
   // fixme given & friends
   // fixme next/last/redo
+  // fixme try/catch/finally
+  // fixme do{} while/until
+  // fixme return from block as parameters
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
     private void acceptSafe(@Nullable PsiElement o) {

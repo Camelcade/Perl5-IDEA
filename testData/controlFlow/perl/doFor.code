@@ -1,0 +1,5 @@
+say 'start';
+do{
+say 'body';
+} for();
+say 'end';

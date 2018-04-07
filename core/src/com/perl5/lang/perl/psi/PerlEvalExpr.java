@@ -17,12 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
-import com.perl5.lang.perl.psi.properties.PerlDieScope;
+import com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
-public interface PerlEvalExpr extends PsiElement, PerlLabelScope, PerlBlockOwner, PerlDieScope {
+public interface PerlEvalExpr extends PsiElement, PerlLabelScope, PerlDieScopeWithBLock {
 }

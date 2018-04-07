@@ -1,0 +1,12 @@
+1;
+try{
+  say 'try';
+  return;
+  say 'try after';
+}
+catch{
+  say 'catch';
+  return;
+  say 'catch after';
+};
+4;
