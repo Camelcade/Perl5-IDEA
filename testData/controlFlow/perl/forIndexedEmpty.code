@@ -1,0 +1,5 @@
+say 'begin';
+for (;;) {
+    say 'body';
+}
+say 'end';

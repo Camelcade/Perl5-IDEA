@@ -154,5 +154,15 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testDoUntil() {doTest();}
 
+  public void testForIndexedEmpty() {doTest();}
+
+  public void testForIndexedFull() {doTest();}
+
+  public void testForIndexedNoAlteration() {doTest();}
+
+  public void testForIndexedNoCondition() {doTest();}
+
+  public void testForIndexedNoInit() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

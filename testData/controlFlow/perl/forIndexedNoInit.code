@@ -1,0 +1,5 @@
+say 'begin';
+for (; $i < 0; $i++) {
+    say 'body';
+}
+say 'end';

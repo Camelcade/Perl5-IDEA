@@ -60,7 +60,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   );
 
   /**
-   * We should not create a node for following elements, only accept children.
+   * We should create a trasparent node for following elements
    */
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.create(
     BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
@@ -69,6 +69,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
     FOR_COMPOUND, FOREACH_COMPOUND,
     HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END, HEREDOC_END_INDENTABLE
+  );
+
+  /**
+   * We should not create a node for following elements, only accept children.
+   */
+  private static final TokenSet IGNORED_CONTAINERS = TokenSet.create(
+    FOR_INIT, FOR_CONDITION, FOR_MUTATOR
   );
 
   /**
@@ -113,10 +120,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   @Nullable
   @Contract("null -> null; !null -> !null")
   private Instruction startNodeSmart(@Nullable PsiElement element) {
-    if (TRANSPARENT_CONTAINERS.contains(PsiUtilCore.getElementType(element))) {
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (TRANSPARENT_CONTAINERS.contains(elementType)) {
       return startTransparentNode(element, "");
     }
-    else if (element != null) {
+    else if (element != null && !IGNORED_CONTAINERS.contains(elementType)) {
       return startNode(element);
     }
     return null;
@@ -173,7 +181,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
-  // fixme for indexed
   // fixme given & friends
   // fixme next/last/redo
   // fixme try/catch/finally
@@ -218,7 +225,26 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitForCompound(@NotNull PsiPerlForCompound o) {
-      startNodeSmart(o);
+      acceptSafe(o.getForInit());
+
+      PsiPerlForCondition condition = o.getForCondition();
+      if (condition == null) {
+        startTransparentNode(o, "statement");
+        Instruction loopInstruction = prevInstruction;
+        acceptSafe(o.getBlock());
+        acceptSafe(o.getForMutator());
+        addEdge(prevInstruction, loopInstruction);
+        flowAbrupted();
+      }
+      else {
+        acceptSafe(condition);
+        Instruction loopInstruction = prevInstruction;
+        startConditionalNode(o, condition, true);
+        acceptSafe(o.getBlock());
+        acceptSafe(o.getForMutator());
+        addEdge(prevInstruction, loopInstruction);
+        prevInstruction = loopInstruction;
+      }
     }
 
     @Override
