@@ -79,7 +79,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   );
 
   // modifier's loops should be edged back here
-  private Instruction myModifierLoopInstruction = null;
+  private Instruction myModifierLoopConditionInstruction = null;
 
   public ControlFlow build(PsiElement element) {
     super.build(new PerlControlFlowVisitor(), element);
@@ -177,7 +177,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme given & friends
   // fixme next/last/redo
   // fixme try/catch/finally
-  // fixme do{} while/until
   // fixme return from block as parameters
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
@@ -423,14 +422,31 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         return;
       }
 
-      acceptSafe(((PerlStatementMixin)o).getModifier());
-      Instruction modifierLoopInstruction = myModifierLoopInstruction;
-      acceptSafe(o.getExpr());
-      if (modifierLoopInstruction != null) {
-        addEdge(prevInstruction, modifierLoopInstruction);
-        prevInstruction = modifierLoopInstruction;
-        myModifierLoopInstruction = null;
+
+      PsiPerlStatementModifier modifier = ((PerlStatementMixin)o).getModifier();
+      PsiPerlExpr statementExpression = o.getExpr();
+
+      if (statementExpression instanceof PsiPerlDoExpr &&
+          (modifier instanceof PsiPerlWhileStatementModifier || modifier instanceof PsiPerlUntilStatementModifier)
+        ) {
+        startTransparentNode(o, "statement");
+        Instruction loopInstruction = prevInstruction;
+        acceptSafe(statementExpression);
+        acceptSafe(modifier);
+        Instruction modifierLoopConditionInstruction = myModifierLoopConditionInstruction;
+        addEdge(prevInstruction, loopInstruction);
+        prevInstruction = modifierLoopConditionInstruction;
       }
+      else {
+        acceptSafe(modifier);
+        Instruction modifierLoopConditionInstruction = myModifierLoopConditionInstruction;
+        acceptSafe(statementExpression);
+        if (modifierLoopConditionInstruction != null) {
+          addEdge(prevInstruction, modifierLoopConditionInstruction);
+          prevInstruction = modifierLoopConditionInstruction;
+        }
+      }
+      myModifierLoopConditionInstruction = null;
     }
 
     @Override
@@ -445,7 +461,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitForStatementModifier(@NotNull PsiPerlForStatementModifier o) {
       PsiPerlExpr source = o.getExpr();
       acceptSafe(source);
-      myModifierLoopInstruction = startIterationNode(o, null, source);
+      myModifierLoopConditionInstruction = startIterationNode(o, null, source);
       startIteratorConditionalNode(source);
     }
 
@@ -454,7 +470,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlExpr condition = o.getExpr();
       acceptSafe(condition);
       if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(o))) {
-        myModifierLoopInstruction = prevInstruction;
+        myModifierLoopConditionInstruction = prevInstruction;
       }
       else {
         addPendingEdge(o.getParent(), prevInstruction);

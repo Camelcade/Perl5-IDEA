@@ -150,5 +150,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testMapWithBlock() {doTest();}
 
+  public void testDoWhile() {doTest();}
+
+  public void testDoUntil() {doTest();}
+
   private void doTest() {doTestControlFlow();}
 }

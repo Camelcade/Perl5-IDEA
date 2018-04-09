@@ -1,16 +1,16 @@
 0(1) element: null
 1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-3(4,13) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-4(5) element: PsiPerlWhileStatementModifierImpl(Perl5: WHILE_STATEMENT_MODIFIER). Condition: $b:true
-5(6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-6(7,10) iterate null using PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-7(8) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE). Condition: $a:true
+3(4) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5,8) iterate null using PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+5(6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE). Condition: $a:true
+6(7) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+7(4) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-9(6) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-10(11) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-11(12) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-12(3) element: PsiPerlDoExprImpl(PERL_DO_EXPR)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(11) element: PsiPerlDoExprImpl(PERL_DO_EXPR)
+11(12,13) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+12(3) element: PsiPerlWhileStatementModifierImpl(Perl5: WHILE_STATEMENT_MODIFIER). Condition: $b:true
 13(14) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 14(15) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 15() element: null
