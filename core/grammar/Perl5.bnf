@@ -367,7 +367,7 @@ limitations under the License.
 
     implements("try_expr|catch_expr|finally_expr")="com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock"
 
-    implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content")="com.perl5.lang.perl.psi.PerlStatement"
+    implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content|for_init|for_condition|for_mutator")="com.perl5.lang.perl.psi.PerlStatement"
 
 	implements(".+_cast_expr")="com.perl5.lang.perl.psi.PerlCastExpression"
 	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"
@@ -418,7 +418,6 @@ limitations under the License.
 
     extends("use_statement.*")=statement
     extends("no_statement")=statement
-    extends("for_iterator_statement")=statement
 
 	implements("named_block|conditional_block|unconditional_block")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 
@@ -428,6 +427,7 @@ limitations under the License.
 	implements("block")="com.perl5.lang.perl.psi.PerlBlock"
 
     implements("for_compound")="com.perl5.lang.perl.psi.PerlForCompound"
+    implements("foreach_compound")="com.perl5.lang.perl.psi.PerlForeachCompound"
     implements("while_compound|until_compound")="com.perl5.lang.perl.psi.PerlWhileUntilCompound"
     implements("if_compound|unless_compound")="com.perl5.lang.perl.psi.PerlIfUnlessCompound"
     implements("when_compound")="com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple"
@@ -557,7 +557,7 @@ private compound_statement ::=
     | given_compound
     | while_compound
     | until_compound
-    | for_compound
+    | for_or_foreach
     | when_compound
     | default_compound
     | method_definition
@@ -601,15 +601,18 @@ private block_compound ::= parse_block [[POD] continue_block]
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is a error on "use", both pinned
-for_compound ::=  {'for'|'foreach'} for_arguments {pin=1}
-private for_arguments ::=
-    for_iterator parse_block |
-    [ foreach_iterator ] condition_expr block_compound
+// fixme add recover
+private for_or_foreach ::= for_compound|foreach_compound
 
+for_compound ::= {'for'|'foreach'} for_iterator parse_block {pin=2}
+private for_iterator ::= '(' [for_init]  ';' [for_condition] ';' [for_mutator] ')' {pin=3}
+for_init ::= expr {recoverWhile=recover_parenthesised}
+for_condition ::= expr {recoverWhile=recover_parenthesised}
+for_mutator ::= expr {recoverWhile=recover_parenthesised}
+
+foreach_compound ::= {'for'|'foreach'} [ foreach_iterator ] condition_expr block_compound {pin=1} // foreach works as a fallback
 foreach_iterator ::= variable_declaration | variable
 
-for_iterator ::= '(' [for_iterator_statement]  ';' [for_iterator_statement] ';' [for_iterator_statement] ')' {pin=3}
-for_iterator_statement ::= expr {recoverWhile=recover_parenthesised}
 
 statement ::=
     use_statement

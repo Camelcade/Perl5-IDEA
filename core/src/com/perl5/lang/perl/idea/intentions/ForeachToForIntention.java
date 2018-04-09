@@ -47,27 +47,26 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     return getText();
   }
 
-  private PsiPerlForCompound getForStatement(@NotNull PsiElement element) {
-    PsiPerlForCompound forCompound = PsiTreeUtil.getParentOfType(element, PsiPerlForCompound.class);
-    if (forCompound == null || forCompound.getForIterator() != null) {
+  private PerlForeachCompound getForeachStatement(@NotNull PsiElement element) {
+    PerlForeachCompound forCompound = PsiTreeUtil.getParentOfType(element, PerlForeachCompound.class);
+    if (forCompound == null) {
       return null;
     }
 
     // fixme we should work without variable and without declaration
     PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
-    return forCompound.getConditionExpr() != null &&
-           foreachIterator != null &&
+    return foreachIterator != null &&
            foreachIterator.getExpr() instanceof PsiPerlVariableDeclarationLexical ? forCompound : null;
   }
 
   @Override
   public boolean isAvailable(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
-    return getForStatement(element) != null;
+    return getForeachStatement(element) != null;
   }
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-    PsiPerlForCompound forCompound = getForStatement(element);
+    PerlForeachCompound forCompound = getForeachStatement(element);
     assert forCompound != null;
 
     PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
@@ -77,7 +76,6 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     assert variableDeclaration instanceof PsiPerlVariableDeclarationLexical;
 
     PsiPerlExpr iterableList = forCompound.getConditionExpr();
-    assert iterableList != null;
 
     PsiPerlBlock block = forCompound.getBlock();
     assert block != null;

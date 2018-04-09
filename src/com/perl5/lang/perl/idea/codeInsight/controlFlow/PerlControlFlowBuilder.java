@@ -67,7 +67,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
     WHILE_COMPOUND, UNTIL_COMPOUND,
     IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
-    FOR_COMPOUND,
+    FOR_COMPOUND, FOREACH_COMPOUND,
     HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END, HEREDOC_END_INDENTABLE
   );
 
@@ -218,15 +218,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitForCompound(@NotNull PsiPerlForCompound o) {
-      if (o.getForIterator() != null) {
-        processIndexedFor(o);
-      }
-      else {
-        processForWithIterator(o);
-      }
+      startNodeSmart(o);
     }
 
-    private void processForWithIterator(@NotNull PsiPerlForCompound o) {
+    @Override
+    public void visitForeachCompound(@NotNull PsiPerlForeachCompound o) {
       startNodeSmart(o);
       PsiPerlConditionExpr sourceElement = o.getConditionExpr();
       acceptSafe(sourceElement);
@@ -236,10 +232,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
       prevInstruction = loopInstruction;
-    }
-
-    private void processIndexedFor(@NotNull PsiPerlForCompound o) {
-      startNodeSmart(o);
     }
 
     @Override

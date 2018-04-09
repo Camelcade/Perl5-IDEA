@@ -854,7 +854,7 @@ Mason2 template file
             PsiElement(Mason2:  %>)(' %>')
           PsiComment(Mason2: MASON_TEMPLATE_BLOCK_HTML)('">')
           PsiComment(Mason2: %)('% ')
-          PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND)
+          PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
             PsiElement(Perl5: foreach)('foreach')
             PsiPerlForeachIteratorImpl(Perl5: FOREACH_ITERATOR)
               PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)

@@ -47,6 +47,7 @@ public class PerlLoopControlInspection extends PerlInspection {
     WHILE_COMPOUND,
     UNTIL_COMPOUND,
     FOR_COMPOUND,
+    FOREACH_COMPOUND,
     CONTINUE_BLOCK,
     NAMESPACE_DEFINITION
   );

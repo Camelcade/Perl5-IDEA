@@ -63,7 +63,7 @@ Embedded Perl file
     PsiElement(Perl5: ;)(';')
   PsiComment(Embedded Perl5: EMBED_MARKER_CLOSE)('?>')
   PsiComment(Embedded Perl5: EMBED_MARKER_OPEN)('<?')
-  PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND)
+  PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
     PsiElement(Perl5: foreach)('foreach')
     PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR)
       PsiElement(Perl5: ()('(')

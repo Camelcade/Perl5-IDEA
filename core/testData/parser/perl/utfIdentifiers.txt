@@ -6,7 +6,7 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('обождать_пять_менут')
     PsiPerlBlockImpl(Perl5: BLOCK)
       PsiElement(Perl5: {)('{')
-      PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND)
+      PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
         PsiElement(Perl5: foreach)('foreach')
         PsiPerlForeachIteratorImpl(Perl5: FOREACH_ITERATOR)
           PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)

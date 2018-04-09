@@ -60,6 +60,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     WHEN_COMPOUND,
     DEFAULT_COMPOUND,
     FOR_COMPOUND,
+    FOREACH_COMPOUND,
     CONDITIONAL_BLOCK,
     CONTINUE_BLOCK,
 
@@ -99,6 +100,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     LP_STRING_QW,
     COMMA_SEQUENCE_EXPR,
     CALL_ARGUMENTS
+  );
+
+  private static final TokenSet FOR_ELEMENTS_TOKENSET = TokenSet.create(
+    FOR_INIT, FOR_CONDITION, FOR_MUTATOR
   );
 
   /**
@@ -148,6 +153,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     boolean isLast = nextSibling == null;
 
     if (parentNodeType == ATTRIBUTES) {
+      return Indent.getContinuationIndent();
+    }
+
+    if (FOR_ELEMENTS_TOKENSET.contains(nodeType)) {
       return Indent.getContinuationIndent();
     }
 

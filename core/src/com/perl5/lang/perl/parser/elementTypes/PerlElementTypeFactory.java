@@ -31,6 +31,7 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
  */
 public class PerlElementTypeFactory {
   private static final Logger LOG = Logger.getInstance(PerlElementTypeFactory.class);
+
   @NotNull
   public static IElementType getTokenType(@NotNull String name) {
     switch (name) {
@@ -192,10 +193,22 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlFormatDefinitionImpl.class);
       case "FOR_COMPOUND":
         return new PerlElementTypeEx(name, PsiPerlForCompoundImpl.class);
-      case "FOR_ITERATOR":
-        return new PerlElementTypeEx(name, PsiPerlForIteratorImpl.class);
-      case "FOR_ITERATOR_STATEMENT":
-        return new PerlElementTypeEx(name, PsiPerlForIteratorStatementImpl.class);
+      case "FOREACH_COMPOUND":
+        return new PerlElementTypeEx(name, PsiPerlForeachCompoundImpl.class);
+      case "FOR_OR_FOREACH":
+        return new PerlElementTypeEx(name) {
+          @NotNull
+          @Override
+          public PsiElement getPsiElement(@NotNull ASTNode node) {
+            throw new RuntimeException("Instantiating " + node);
+          }
+        };
+      case "FOR_INIT":
+        return new PerlElementTypeEx(name, PsiPerlForInitImpl.class);
+      case "FOR_CONDITION":
+        return new PerlElementTypeEx(name, PsiPerlForConditionImpl.class);
+      case "FOR_MUTATOR":
+        return new PerlElementTypeEx(name, PsiPerlForMutatorImpl.class);
       case "FOR_STATEMENT_MODIFIER":
         return new PerlElementTypeEx(name, PsiPerlForStatementModifierImpl.class);
       case "FUNC_SIGNATURE_CONTENT":

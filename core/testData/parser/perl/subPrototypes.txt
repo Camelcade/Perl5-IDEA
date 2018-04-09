@@ -327,7 +327,7 @@ Perl5
               PsiElement(Perl5: $@)('@')
               PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('result')
         PsiElement(Perl5: ;)(';')
-      PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND)
+      PsiPerlForeachCompoundImpl(Perl5: FOREACH_COMPOUND)
         PsiElement(Perl5: foreach)('foreach')
         PsiPerlForeachIteratorImpl(Perl5: FOREACH_ITERATOR)
           PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)

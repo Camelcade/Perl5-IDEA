@@ -44,7 +44,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
   TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
     CONDITION_EXPR,
-    FOR_ITERATOR
+    FOR_COMPOUND
   );
 
   TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(
@@ -74,10 +74,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     FINALLY_EXPR
   );
 
+  // fixme doesn't duplicate BlockOwner interface?
   TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.create(
     CONDITIONAL_BLOCK,
     UNCONDITIONAL_BLOCK,
     FOR_COMPOUND,
+    FOREACH_COMPOUND,
     WHILE_COMPOUND,
     UNTIL_COMPOUND,
     GIVEN_COMPOUND,

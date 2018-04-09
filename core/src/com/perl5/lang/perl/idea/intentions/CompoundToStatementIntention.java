@@ -41,8 +41,8 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement elementAtCursor) throws IncorrectOperationException {
     PerlConvertableCompound compound = getCompound(elementAtCursor);
-    if (compound instanceof PerlForCompound) {
-      convertForCompound((PerlForCompound)compound);
+    if (compound instanceof PerlForeachCompound) {
+      convertForCompound((PerlForeachCompound)compound);
     }
     else if (compound instanceof PerlConvertableCompoundSimple) {
       convertSimpleCompound((PerlConvertableCompoundSimple)compound);
@@ -70,7 +70,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   /**
    * Converting for/foreach compound
    */
-  private static void convertForCompound(@NotNull PerlForCompound forCompound) throws IncorrectOperationException {
+  private static void convertForCompound(@NotNull PerlForeachCompound forCompound) throws IncorrectOperationException {
     PsiPerlExpr statementExpr = getStatementExpression(forCompound);
 
     String statementText = computeStatementText(forCompound, statementExpr);
@@ -106,7 +106,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
    * @return adjusted text or null if something went wrong
    */
   @NotNull
-  private static String computeStatementText(@NotNull PerlForCompound forCompound, @NotNull PsiPerlExpr statementExpr) {
+  private static String computeStatementText(@NotNull PerlForeachCompound forCompound, @NotNull PsiPerlExpr statementExpr) {
     String statementText = statementExpr.getText();
     PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
     if (foreachIterator == null) {
