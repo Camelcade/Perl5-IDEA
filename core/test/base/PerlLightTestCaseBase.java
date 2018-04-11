@@ -33,8 +33,8 @@ import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateBy
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
-import com.intellij.execution.util.ExecUtil;
 import com.intellij.execution.impl.EditorHyperlinkSupport;
+import com.intellij.execution.util.ExecUtil;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
@@ -102,13 +102,9 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
-import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PartialConditionalInstructionImpl;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlIterateInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.*;
+import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
@@ -591,6 +587,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     caretModel.removeSecondaryCarets();
     return caretsOffsets;
   }
+  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
+    WriteCommandAction.writeCommandAction(getProject()).run(() -> {
+      PsiFile file = myFixture.getFile();
+      if (file.getViewProvider() instanceof InjectedFileViewProvider) {
+        //noinspection ConstantConditions
+        file = file.getContext().getContainingFile();
+      }
+      TextRange rangeToUse = file.getTextRange();
+      CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
+    });
 
   protected void doTestWorldSelector() {
     initWithFileSmartWithoutErrors();
@@ -1298,7 +1304,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       try {
         String svgDataPath = getSvgDataPath();
         //if (!new File(svgDataPath).exists()) { // fixme this check may be configurable
-          saveSvgFile(svgDataPath, controlFlow);
+        saveSvgFile(svgDataPath, controlFlow);
         //}
       }
       catch (Exception e) {
@@ -1342,7 +1348,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       else if (instruction instanceof ConditionalInstruction) {
         ConditionalInstruction conditionalInstruction = (ConditionalInstruction)instruction;
         builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
-          append(" branch, condition: ").append(conditionalInstruction.getCondition().getText());
+          append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
       }
       builder.append("\"").append("]");
 
@@ -1447,5 +1453,4 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
-
 }

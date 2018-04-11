@@ -63,12 +63,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    * We should create a trasparent node for following elements
    */
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.create(
-    BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
+    BLOCK, CONTINUE_BLOCK, CONDITION_EXPR, LP_CODE_BLOCK,
     CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
     WHILE_COMPOUND, UNTIL_COMPOUND,
     IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
     FOR_COMPOUND, FOREACH_COMPOUND,
-    HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END, HEREDOC_END_INDENTABLE
+    HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END, HEREDOC_END_INDENTABLE,
+    TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION
   );
 
   /**
@@ -185,12 +186,40 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme next/last/redo
   // fixme try/catch/finally
   // fixme return from block as parameters
+  // fixme interpolatable here-docs should be honored because of code injections
+  // fixme regexps
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
 
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null) {
         o.accept(this);
       }
+    }
+
+    @Override
+    public void visitTrycatchExpr(@NotNull PsiPerlTrycatchExpr o) {
+      List<PsiPerlExpr> exprList = o.getExprList();
+      assert exprList.size() > 1;
+      PsiPerlExpr tryExpr = exprList.remove(0);
+
+      int lastElementIndex = exprList.size() - 1;
+      PsiPerlExpr finallyExpr = exprList.get(lastElementIndex) instanceof PsiPerlFinallyExpr ? exprList.remove(lastElementIndex) : null;
+
+      acceptSafe(tryExpr);
+
+      for (PsiPerlExpr catchExpr : exprList) {
+        assert catchExpr instanceof PsiPerlCatchExpr : "PsiPerlCatchExpr expected: " + catchExpr;
+        PsiPerlCatchCondition catchCondition = ((PsiPerlCatchExpr)catchExpr).getCatchCondition();
+
+        if (catchCondition != null) {
+          acceptSafe(catchCondition);
+        }
+        addPendingEdge(catchExpr, prevInstruction);
+        startConditionalNode(catchExpr, catchCondition, true);
+        acceptSafe(((PsiPerlCatchExpr)catchExpr).getBlock());
+      }
+
+      acceptSafe(finallyExpr);
     }
 
     @Override

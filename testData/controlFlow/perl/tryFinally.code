@@ -1,0 +1,10 @@
+say 'start';
+
+try{
+  say 'try';
+}
+finally{
+  say 'finally';
+}
+
+say 'end';

@@ -1,0 +1,13 @@
+say 'start';
+
+try{
+  say 'try';
+}
+catch(Foo $bar){
+  say 'catch Foo $bar';
+}
+catch(Baz $bam){
+  say 'catch Baz $bam';
+}
+
+say 'end';

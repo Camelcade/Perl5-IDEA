@@ -1,0 +1,7 @@
+say 'start';
+
+try{
+  say 'try';
+}
+
+say 'end';

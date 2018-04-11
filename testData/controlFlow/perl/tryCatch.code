@@ -1,0 +1,10 @@
+say 'start';
+
+try{
+  say 'try';
+}
+catch{
+  say 'catch';
+}
+
+say 'end';
