@@ -198,9 +198,14 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 %state AFTER_IDENTIFIER_WITH_LABEL
 %state HASH_ACCEPTOR
-%state CATCH, CATCH_PACKAGE
 %xstate LEX_SUB_NAME
 %xstate INTERPOLATED_VARIABLE_SUFFIX
+
+%xstate AFTER_TRY, AFTER_TRY_BLOCK
+%xstate AFTER_EXCEPT, AFTER_EXCEPT_BLOCK, AFTER_OTHERWISE, AFTER_OTHERWISE_BLOCK
+%xstate AFTER_CONTINUATION, AFTER_CONTINUATION_BLOCK
+%xstate AFTER_CATCH, AFTER_CATCH_BLOCK,BEFORE_CATCH_BLOCK,CATCH_PACKAGE,BEFORE_WITH
+%xstate AFTER_FINALLY, AFTER_FINALLY_BLOCK
 
 %%
 
@@ -517,7 +522,50 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 //////////////////////////////////// END OF REGULAR EXPRESSION /////////////////////////////////////////////////////////
 
-// ,LEX_REGEX_CHAR_CLASS
+//////////////////////////////////// TRY-CATCH SYNTAXES ////////////////////////////////////////////////////////////////
+
+<AFTER_TRY,AFTER_CATCH,AFTER_TRY_BLOCK,AFTER_CATCH_BLOCK,AFTER_FINALLY,AFTER_FINALLY_BLOCK,BEFORE_CATCH_BLOCK,CATCH_PACKAGE,BEFORE_WITH,
+  AFTER_EXCEPT, AFTER_EXCEPT_BLOCK,
+  AFTER_CONTINUATION, AFTER_CONTINUATION_BLOCK,
+  AFTER_OTHERWISE, AFTER_OTHERWISE_BLOCK>{
+  {NEW_LINE}   				{return getNewLineToken();}
+  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  {LINE_COMMENT}			{return COMMENT_LINE;}
+}
+
+<AFTER_TRY>                       "{"            {return startBracedBlock(AFTER_TRY_BLOCK);}
+<AFTER_EXCEPT>                    "{"            {return startBracedBlock(AFTER_EXCEPT_BLOCK);}
+<AFTER_OTHERWISE>                 "{"            {return startBracedBlock(AFTER_OTHERWISE_BLOCK);}
+<AFTER_CATCH,BEFORE_CATCH_BLOCK>  "{"            {return startBracedBlock(AFTER_CATCH_BLOCK);}
+<AFTER_FINALLY>                   "{"            {return startBracedBlock(AFTER_FINALLY_BLOCK);}
+<AFTER_CONTINUATION>              "{"            {return startBracedBlock(AFTER_CONTINUATION_BLOCK);}
+
+<AFTER_CATCH>{
+  // TryCatch:: condition
+  "("            {return startParethesizedBlock(BEFORE_CATCH_BLOCK, CATCH_PACKAGE);}
+
+  // Error:: condition
+  {QUALIFIED_IDENTIFIER}  / {SPACE_OR_COMMENT}"with" {yybegin(BEFORE_WITH);return PACKAGE;}
+}
+
+<BEFORE_WITH>     "with"  {yybegin(BEFORE_CATCH_BLOCK);return RESERVED_CATCH_WITH;}
+<CATCH_PACKAGE>   {QUALIFIED_IDENTIFIER}	{yybegin(YYINITIAL);return PACKAGE;}
+
+<AFTER_TRY_BLOCK,AFTER_CATCH_BLOCK,AFTER_FINALLY_BLOCK,AFTER_EXCEPT_BLOCK,AFTER_OTHERWISE_BLOCK,AFTER_CONTINUATION_BLOCK>{
+  "catch"        {yybegin(AFTER_CATCH); return RESERVED_CATCH;}
+  "except"       {yybegin(AFTER_EXCEPT); return RESERVED_EXCEPT;}
+  "otherwise"    {yybegin(AFTER_OTHERWISE); return RESERVED_OTHERWISE;}
+  "finally"	 {yybegin(AFTER_FINALLY); return RESERVED_FINALLY;}
+  "continuation" {yybegin(AFTER_CONTINUATION); return RESERVED_CONTINUATION;}
+  [^]            {yypushback(1);yybegin(AFTER_VALUE);}
+}
+
+<AFTER_TRY,AFTER_CATCH,AFTER_FINALLY,CATCH_PACKAGE,BEFORE_CATCH_BLOCK,CATCH_PACKAGE,BEFORE_WITH,AFTER_EXCEPT,AFTER_OTHERWISE,AFTER_CONTINUATION>
+  [^]            {yypushback(1);yybegin(YYINITIAL);}
+
+
+//////////////////////////////////// END OF TRY-CATCH SYNTAXES /////////////////////////////////////////////////////////
+
 <STRING_QQ,STRING_QX,MATCH_REGEX,MATCH_REGEX_X,MATCH_REGEX_XX,REGEX_QUOTED_X,REGEX_CHARCLASS_X,REGEX_CHARCLASS_XX,REPLACEMENT_REGEX>
 {
 	"@" /  {NON_SPACE_AHEAD} 	{pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);}
@@ -556,15 +604,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 {DATA_BLOCK}				{yybegin(END_BLOCK);return COMMENT_BLOCK;}
 {LINE_COMMENT_ANNOTATION}	{return COMMENT_ANNOTATION;}
 {LINE_COMMENT}				{return COMMENT_LINE;}
-
-<CATCH_PACKAGE>	{QUALIFIED_IDENTIFIER}	{yybegin(YYINITIAL);return PACKAGE;}
-
-<CATCH>{
-	"("		{return getLeftParen(CATCH_PACKAGE);}
-	<CATCH_PACKAGE>{
-		[^]		{pushback();yybegin(YYINITIAL);}
-	}
-}
 
 <HANDLE_WITH_ANGLE>{
 	{IDENTIFIER} 	{return HANDLE;}
@@ -865,12 +904,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"method"					{yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"						{yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 
-	"try"						{yybegin(YYINITIAL); return RESERVED_TRY;}
-	"catch"						{yybegin(CATCH); return RESERVED_CATCH;}
-	"finally"					{yybegin(YYINITIAL); return RESERVED_FINALLY;}
+	"try" 						{yybegin(AFTER_TRY); return RESERVED_TRY;}
 
+        // this is Moose's with, not Exception's
 	"with"					{yybegin(YYINITIAL); return RESERVED_WITH;}
-	"extends"				{yybegin(YYINITIAL); return RESERVED_EXTENDS;}
+        "extends"				{yybegin(YYINITIAL); return RESERVED_EXTENDS;}
 	"meta"					{yybegin(YYINITIAL); return RESERVED_META;}
 	"override"				{yybegin(YYINITIAL); return RESERVED_OVERRIDE;}
 	"around"				{yybegin(YYINITIAL); return RESERVED_AROUND;}

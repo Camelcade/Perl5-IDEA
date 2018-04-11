@@ -133,6 +133,10 @@ limitations under the License.
     RESERVED_FINALLY = 'finally';
     RESERVED_TRY = 'try';
     RESERVED_CATCH = 'catch';
+    RESERVED_CATCH_WITH = 'catch_with';
+    RESERVED_EXCEPT = 'except';
+    RESERVED_OTHERWISE = 'otherwise';
+    RESERVED_CONTINUATION = 'continuation';
 
     RESERVED_SWITCH='switch'
     RESERVED_CASE='case'
@@ -365,7 +369,7 @@ limitations under the License.
 
     implements("return_expr")="com.perl5.lang.perl.psi.PerlReturnExpr"
 
-    implements("try_expr|catch_expr|finally_expr")="com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock"
+    implements("try_expr|catch_expr|finally_expr|except_expr|otherwise_expr|continuation_expr")="com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock"
 
     implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content|for_init|for_condition|for_mutator")="com.perl5.lang.perl.psi.PerlStatement"
 
@@ -571,16 +575,30 @@ private if_compound_elsif ::= [POD]  'elsif' conditional_block  {pin=2}
 private if_compound_else ::= [POD]  'else' unconditional_block {pin=2}
 unconditional_block ::= parse_block
 
-///////////////////////////////////////// hybrid parsing for Try::Tiny and TryCatch ////////////////////////////////////
-trycatch_expr ::= try_expr (catch_expr|finally_expr)* [expr]
+/*
+ Hybrid parsing for try/catch/finally.
+ Following syntaxes supported:
+ - https://metacpan.org/pod/Try::Catch
+ - https://metacpan.org/pod/Try::Tiny
+ - https://metacpan.org/pod/Exception::Class::TryCatch
+ - https://metacpan.org/pod/TryCatch
+ - https://metacpan.org/pod/Error
+ - https://metacpan.org/pod/Dancer::Exception
+ */
+trycatch_expr ::= try_expr (catch_expr|finally_expr|except_expr|otherwise_expr|continuation_expr)* [expr]
 try_expr ::= 'try' (parse_block|expr) {pin=1}
 catch_expr ::= 'catch' [catch_condition] (parse_block|expr) {pin=1}
-catch_condition ::= '(' catch_condition_content ')' {pin=1}
+catch_condition ::= catch_condition_parenthesised | catch_condition_with
+private catch_condition_parenthesised ::= '(' catch_condition_content ')' {pin=1}
+private catch_condition_with ::= 'package::name' 'catch_with' {pin=2}
 private catch_condition_content ::= [catch_condition_type] variable_declaration_element [expr]
 private catch_condition_type ::=  [type_constraints]
 type_constraints ::= any_package ['[' expr ']']
 
 finally_expr ::= 'finally' (parse_block|expr) {pin=1}
+except_expr ::= 'except' parse_block {pin=1}
+otherwise_expr ::= 'otherwise' parse_block {pin=1}
+continuation_expr ::= 'continuation' parse_block {pin=1}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 conditional_block ::= parse_conditional_block

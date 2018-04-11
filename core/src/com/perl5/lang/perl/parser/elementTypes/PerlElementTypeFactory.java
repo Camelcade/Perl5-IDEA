@@ -395,6 +395,12 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlTypeConstraintsImpl.class);
       case "FINALLY_EXPR":
         return new PerlElementTypeEx(name, PsiPerlFinallyExprImpl.class);
+      case "EXCEPT_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlExceptExprImpl.class);
+      case "OTHERWISE_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlOtherwiseExprImpl.class);
+      case "CONTINUATION_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlContinuationExprImpl.class);
       case "POST_DEREF_EXPR":
         return new PerlElementTypeEx(name, PsiPerlPostDerefExprImpl.class);
       case "POST_DEREF_GLOB_EXPR":

@@ -169,7 +169,11 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet TRY_CATCH_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_TRY,
     RESERVED_CATCH,
-    RESERVED_FINALLY
+    RESERVED_FINALLY,
+    RESERVED_CATCH_WITH,
+    RESERVED_EXCEPT,
+    RESERVED_OTHERWISE,
+    RESERVED_CONTINUATION
   );
 
   TokenSet METHOD_SIGNATURES_KEYWORDS_TOKENSET = TokenSet.create(

@@ -71,7 +71,10 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_ELSIF,
     DEFAULT_COMPOUND,
     CATCH_EXPR,
-    FINALLY_EXPR
+    FINALLY_EXPR,
+    EXCEPT_EXPR,
+    OTHERWISE_EXPR,
+    CONTINUATION_EXPR
   );
 
   // fixme doesn't duplicate BlockOwner interface?
@@ -89,7 +92,10 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
     TRY_EXPR,
     CATCH_EXPR,
-    FINALLY_EXPR
+    FINALLY_EXPR,
+    EXCEPT_EXPR,
+    OTHERWISE_EXPR,
+    CONTINUATION_EXPR
   );
 
   TokenSet STATEMENT_MODIFIERS = TokenSet.create(
