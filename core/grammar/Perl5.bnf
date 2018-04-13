@@ -585,17 +585,18 @@ unconditional_block ::= parse_block
  - https://metacpan.org/pod/Error
  - https://metacpan.org/pod/Dancer::Exception
  */
-trycatch_expr ::= try_expr (catch_expr|finally_expr|except_expr|otherwise_expr|continuation_expr)* [expr]
-try_expr ::= 'try' (parse_block|expr) {pin=1}
-catch_expr ::= 'catch' [catch_condition] (parse_block|expr) {pin=1}
+trycatch_expr ::= try_expr (catch_expr|finally_expr|except_expr|otherwise_expr|continuation_expr)*
+try_expr ::= 'try' parse_block {pin=1}
+catch_expr ::= 'catch' [catch_condition] parse_block {pin=1}
 catch_condition ::= catch_condition_parenthesised | catch_condition_with
 private catch_condition_parenthesised ::= '(' catch_condition_content ')' {pin=1}
 private catch_condition_with ::= 'package::name' 'catch_with' {pin=2}
-private catch_condition_content ::= [catch_condition_type] variable_declaration_element [expr]
+private catch_condition_content ::= [catch_condition_type] variable_declaration_element [where_clause]
+private where_clause ::= expr
 private catch_condition_type ::=  [type_constraints]
 type_constraints ::= any_package ['[' expr ']']
 
-finally_expr ::= 'finally' (parse_block|expr) {pin=1}
+finally_expr ::= 'finally' parse_block {pin=1}
 except_expr ::= 'except' parse_block {pin=1}
 otherwise_expr ::= 'otherwise' parse_block {pin=1}
 continuation_expr ::= 'continuation' parse_block {pin=1}

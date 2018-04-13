@@ -55,6 +55,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   // fixme move somewhere
   public static final String STRING_UNDEF = "undef";
 
+  private static final Pattern USE_TRYCATCH_PATTERN = Pattern.compile("use\\s+TryCatch");
+  private Boolean myHasTryCatch = null;
 
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
@@ -367,6 +369,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     heredocQueue.clear();
     myFormatWaiting = false;
     myIsHeredocLike = false;
+    myHasTryCatch = null;
 
     mySubNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
       assert myProject != null;
@@ -1053,5 +1056,37 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     else {
       return charOpener;
     }
+  }
+
+  /**
+   * Registers used package if necessary. Used for TryCatch logic for now
+   *
+   * @return PACKAGE element type
+   */
+  protected IElementType registerUse() {
+    if (StringUtil.equals(yytext(), "TryCatch")) {
+      myHasTryCatch = true;
+    }
+    return PACKAGE;
+  }
+
+  /**
+   * @return true if we are suppose to use TryCatch compounds
+   * Logic of detection is highly optimized and put some restrictions:
+   * buffer should explicitly contains {@code use TryCatch;} before first try/catch
+   */
+  protected boolean hasTryCatch() {
+    if (myHasTryCatch != null) {
+      return myHasTryCatch;
+    }
+    if (getBufferStart() == 0) {
+      return myHasTryCatch = false;
+    }
+    return myHasTryCatch = USE_TRYCATCH_PATTERN.matcher(getBuffer().subSequence(0, getBufferStart())).find();
+  }
+
+  protected void afterTryCatchFallback() {
+    yypushback(1);
+    yybegin(hasTryCatch() ? YYINITIAL : AFTER_VALUE);
   }
 }
