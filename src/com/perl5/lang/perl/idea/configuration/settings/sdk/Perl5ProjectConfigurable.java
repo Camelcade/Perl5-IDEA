@@ -31,11 +31,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBList;
-import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.JBEmptyBorder;
-import com.intellij.util.ui.JBUI;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
@@ -244,11 +241,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
           }
         }).createPanel());
 
-    JBScrollPane scrollPane = new JBScrollPane(builder.getPanel(),
-                                               ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                               ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    scrollPane.setBorder(new JBEmptyBorder(JBUI.emptyInsets()));
-    return scrollPane;
+    return builder.getPanel();
   }
 
   @Nls

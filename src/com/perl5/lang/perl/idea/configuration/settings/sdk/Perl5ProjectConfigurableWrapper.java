@@ -20,7 +20,9 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
+import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.components.JBTabbedPane;
+import com.intellij.util.ui.JBEmptyBorder;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +59,16 @@ public class Perl5ProjectConfigurableWrapper implements UnnamedConfigurable {
       }
     };
 
-    myConfigurables.forEach(configurable -> tabbedPane.add(configurable.getDisplayName(), configurable.createComponent()));
+    myConfigurables.forEach(configurable -> {
+      JComponent configurableComponent = configurable.createComponent();
+
+      JBScrollPane scrollPane = new JBScrollPane(configurableComponent,
+                                                 ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                                                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+      scrollPane.setBorder(new JBEmptyBorder(JBUI.emptyInsets()));
+
+      tabbedPane.add(configurable.getDisplayName(), scrollPane);
+    });
     return tabbedPane;
   }
 
