@@ -137,6 +137,8 @@ REGEX_HASH_NEGATING = [\^\:\\\[\{]
 HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":")
 PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>")
 
+BRACE_AFTER_SPACE_COMMENTS = {SPACES_OR_COMMENTS}"{"
+
 //REGEX_CHAR_CLASS = "\\" [dswDSW]
 REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
 POSIX_CHARGROUP = "[:" "^"? {REGEX_POSIX_CHARGROUPS} ":]"
@@ -552,11 +554,12 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <CATCH_PACKAGE>   {QUALIFIED_IDENTIFIER}	{yybegin(YYINITIAL);return PACKAGE;}
 
 <AFTER_TRY_BLOCK,AFTER_CATCH_BLOCK,AFTER_FINALLY_BLOCK,AFTER_EXCEPT_BLOCK,AFTER_OTHERWISE_BLOCK,AFTER_CONTINUATION_BLOCK>{
-  "catch"        {yybegin(AFTER_CATCH); return RESERVED_CATCH;}
-  "except"       {yybegin(AFTER_EXCEPT); return RESERVED_EXCEPT;}
-  "otherwise"    {yybegin(AFTER_OTHERWISE); return RESERVED_OTHERWISE;}
-  "finally"	 {yybegin(AFTER_FINALLY); return RESERVED_FINALLY;}
-  "continuation" {yybegin(AFTER_CONTINUATION); return RESERVED_CONTINUATION;}
+  "catch"        / {SPACES_OR_COMMENTS} ("("|"{"|{QUALIFIED_IDENTIFIER}) {yybegin(AFTER_CATCH); return RESERVED_CATCH;}
+
+  "except"       / {BRACE_AFTER_SPACE_COMMENTS} {yybegin(AFTER_EXCEPT); return RESERVED_EXCEPT;}
+  "otherwise"    / {BRACE_AFTER_SPACE_COMMENTS} {yybegin(AFTER_OTHERWISE); return RESERVED_OTHERWISE;}
+  "finally"	 / {BRACE_AFTER_SPACE_COMMENTS} {yybegin(AFTER_FINALLY); return RESERVED_FINALLY;}
+  "continuation" / {BRACE_AFTER_SPACE_COMMENTS} {yybegin(AFTER_CONTINUATION); return RESERVED_CONTINUATION;}
   [^]            {yypushback(1);yybegin(AFTER_VALUE);}
 }
 
@@ -904,7 +907,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"method"					{yybegin(METHOD_DECLARATION); return RESERVED_METHOD;}
 	"func"						{yybegin(METHOD_DECLARATION); return RESERVED_FUNC;}
 
-	"try" 						{yybegin(AFTER_TRY); return RESERVED_TRY;}
+	"try" / {BRACE_AFTER_SPACE_COMMENTS} {yybegin(AFTER_TRY); return RESERVED_TRY;}
 
         // this is Moose's with, not Exception's
 	"with"					{yybegin(YYINITIAL); return RESERVED_WITH;}
@@ -938,7 +941,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 	{CORE_PREFIX}"return"	 { yybegin(YYINITIAL); return RESERVED_RETURN;}
 
-	{BLOCK_NAMES} / {SPACES_OR_COMMENTS}"{"		{yybegin(YYINITIAL);return BLOCK_NAME;}
+	{BLOCK_NAMES} / {BRACE_AFTER_SPACE_COMMENTS}		{yybegin(YYINITIAL);return BLOCK_NAME;}
 	{TAG_NAMES}									{yybegin(AFTER_VALUE); return TAG;}
 
 	{CORE_PREFIX}"y"  / {QUOTE_LIKE_SUFFIX} {pushStateAndBegin(TRANS_OPENER);return RESERVED_Y;}
