@@ -1,1 +1,38 @@
 # https://metacpan.org/pod/Try::Catch
+
+say 'hi';
+
+use Try::Catch;
+
+try {
+    die "something went wrong";
+}
+catch {
+
+}
+finally {
+
+    ##some cleanup code
+
+}; ##<--- semi colon is required.
+
+
+say 'buy';
+
+use Try::Catch;
+for (1) {
+    try {
+        die;
+    }
+    catch {
+        goto skip;
+    }
+    finally {
+        #finally will not be called
+        print "finally was called\n";
+    }
+}
+skip:
+
+say 'buy agagin';
+

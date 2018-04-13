@@ -288,6 +288,20 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
+  public void testTryDancerException() {doTest();}
+
+  public void testTryError() {doTest();}
+
+  public void testTryExceptionClass() {doTest();}
+
+  public void testTryTry__Catch() {doTest();}
+
+  public void testTryTryCatch() {doTest();}
+
+  public void testTryTryTiny() {doTest();}
+
+  public void testTryCatchErrors() {doTest();}
+
   public void testHashAcceptors() {
     doTest();
   }
