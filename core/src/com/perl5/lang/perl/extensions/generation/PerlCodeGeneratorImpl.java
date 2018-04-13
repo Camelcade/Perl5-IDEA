@@ -36,7 +36,7 @@ import com.intellij.ui.SpeedSearchComparator;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -279,7 +279,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
     if (!StringUtil.isEmpty(name)) {
 
       for (String nameChunk : name.split("[ ,]+")) {
-        if (!nameChunk.isEmpty() && PerlLexer.IDENTIFIER_PATTERN.matcher(nameChunk).matches()) {
+        if (!nameChunk.isEmpty() && PerlParserUtil.IDENTIFIER_PATTERN.matcher(nameChunk).matches()) {
           result.add(nameChunk);
         }
       }

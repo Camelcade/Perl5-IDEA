@@ -18,14 +18,14 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 28.05.2015.
  */
 public class PerlNamesValidator implements NamesValidator {
+
   @Override
   public boolean isKeyword(@NotNull String name, Project project) {
     // todo what is this for?
@@ -34,6 +34,6 @@ public class PerlNamesValidator implements NamesValidator {
 
   @Override
   public boolean isIdentifier(@NotNull String name, Project project) {
-    return PerlLexer.IDENTIFIER_PATTERN.matcher(name).matches() || PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(name).matches();
+    return PerlParserUtil.IDENTIFIER_PATTERN.matcher(name).matches() || PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN.matcher(name).matches();
   }
 }

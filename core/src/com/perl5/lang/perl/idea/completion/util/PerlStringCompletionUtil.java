@@ -32,7 +32,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -41,6 +40,8 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+
+import static com.perl5.lang.perl.parser.PerlParserUtil.IDENTIFIER_PATTERN;
 
 /**
  * Created by hurricup on 24.01.2016.
@@ -109,7 +110,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
         protected void processStringElement(PerlStringContentElement stringContentElement) {
           String text = stringContentElement.getText();
-          if (StringUtil.isNotEmpty(text) && !hashIndexesCache.contains(text) && PerlLexer.IDENTIFIER_PATTERN.matcher(text).matches()) {
+          if (StringUtil.isNotEmpty(text) && !hashIndexesCache.contains(text) && IDENTIFIER_PATTERN.matcher(text).matches()) {
             hashIndexesCache.add(text);
             addElement(text, result);
           }

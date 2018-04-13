@@ -34,7 +34,7 @@ import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
@@ -282,7 +282,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     @Override
     public void setValue(HTMLMasonCustomTag customTag, String value) {
       if (!StringUtil.equals(customTag.getText(), value)) {
-        if (!PerlLexer.IDENTIFIER_PATTERN.matcher(value).matches()) {
+        if (!PerlParserUtil.IDENTIFIER_PATTERN.matcher(value).matches()) {
           Messages.showErrorDialog("Tag text should be a valid identifier", "Incorrect Tag Text");
         }
         else if (BUILTIN_TAGS.contains(value)) {

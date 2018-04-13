@@ -54,7 +54,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
              MooseElementTypes {
   // fixme move somewhere
   public static final String STRING_UNDEF = "undef";
-  public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
 
 
   public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
@@ -66,25 +65,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_XQ, QUOTE_TICK_CLOSE);
   private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
-  private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*";
-  // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
-  private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
-    "(?:" +
-    "(?:::)+'?" +
-    "|" +
-    "(?:::)*'" +
-    ")";
-  public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(
-    "(" +
-    PACKAGE_SEPARATOR_PATTERN_TEXT + "?" +        // optional opening separator,
-    "(?:" +
-    BASIC_IDENTIFIER_PATTERN_TEXT +
-    PACKAGE_SEPARATOR_PATTERN_TEXT +
-    ")*" +
-    ")" +
-    "(" +
-    BASIC_IDENTIFIER_PATTERN_TEXT +
-    ")");
 
   private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new THashMap<>();
 

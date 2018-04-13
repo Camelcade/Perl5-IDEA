@@ -28,8 +28,7 @@ import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +43,7 @@ import java.util.regex.Pattern;
  */
 public abstract class AbstractMasonSettingsConfigurable implements Configurable {
   protected static final Pattern VARIABLE_CHECK_PATTERN = Pattern.compile(
-    "[$@%]" + PerlLexer.IDENTIFIER_PATTERN
+    "[$@%]" + PerlParserUtil.IDENTIFIER_PATTERN
   );
 
   protected final Project myProject;
@@ -180,7 +179,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     @Override
     public void setValue(VariableDescription variableDescription, String value) {
       if (StringUtil.isNotEmpty(value)) {
-        if (PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN.matcher(value).matches()) {
+        if (PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN.matcher(value).matches()) {
           variableDescription.variableType = value;
         }
         else {

@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.perl5.lang.perl.lexer.PerlBaseLexer.AMBIGUOUS_PACKAGE_PATTERN;
+import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN;
 
 /**
  * Created by hurricup on 23.05.2015.

@@ -26,11 +26,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.regex.Pattern;
 
 import static com.intellij.lang.WhitespacesBinders.GREEDY_LEFT_BINDER;
 
@@ -55,6 +56,26 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     QUOTE_TICK_CLOSE,
     QUOTE_SINGLE_CLOSE
   );
+  public static final Pattern IDENTIFIER_PATTERN = Pattern.compile("[_\\p{L}][_\\p{L}\\d]*");
+  private static final String BASIC_IDENTIFIER_PATTERN_TEXT = "[_\\p{L}\\d][_\\p{L}\\d]*";
+  // something strange in Java with unicode props; Added digits to opener for package Encode::KR::2022_KR;
+  private static final String PACKAGE_SEPARATOR_PATTERN_TEXT =
+    "(?:" +
+    "(?:::)+'?" +
+    "|" +
+    "(?:::)*'" +
+    ")";
+  public static final Pattern AMBIGUOUS_PACKAGE_PATTERN = Pattern.compile(
+    "(" +
+    PACKAGE_SEPARATOR_PATTERN_TEXT + "?" +        // optional opening separator,
+    "(?:" +
+    BASIC_IDENTIFIER_PATTERN_TEXT +
+    PACKAGE_SEPARATOR_PATTERN_TEXT +
+    ")*" +
+    ")" +
+    "(" +
+    BASIC_IDENTIFIER_PATTERN_TEXT +
+    ")");
   private static WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = (tokens, atStreamEdge, getter) -> {
     int result = tokens.size();
     if (atStreamEdge || tokens.isEmpty()) {
@@ -414,7 +435,7 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
   public static boolean parseLabelDeclaration(PsiBuilder b, @SuppressWarnings("unused") int l) {
     if (b.lookAhead(1) == COLON && b.getTokenType() != RESERVED_SUB) {
       String tokenText = b.getTokenText();
-      if (tokenText != null && PerlBaseLexer.IDENTIFIER_PATTERN.matcher(tokenText).matches()) {
+      if (tokenText != null && IDENTIFIER_PATTERN.matcher(tokenText).matches()) {
         b.advanceLexer();
         b.advanceLexer();
         return true;
