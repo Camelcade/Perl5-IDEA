@@ -188,7 +188,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getAbsoluteNoneIndent();
     }
 
-    if (nodeType == BLOCK && MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
+    if ((nodeType == BLOCK || nodeType == SUB_EXPR) && MULTI_PARAM_BLOCK_CONTAINERS.contains(parentNodeType)) {
       return Indent.getNoneIndent();
     }
 

@@ -122,6 +122,7 @@ public class PerlSpacingBuilderFactory {
       .after(COMMA).spaceIf(settings.SPACE_AFTER_COMMA)
 
       .afterInside(BLOCK, MULTI_PARAM_BLOCK_CONTAINERS).spaces(1)
+      .afterInside(SUB_EXPR, SORT_EXPR).spaces(1)
 
       .beforeInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_BEFORE_COLON)
       .afterInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_COLON)

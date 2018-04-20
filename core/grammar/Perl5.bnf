@@ -824,7 +824,7 @@ private sort_arguments ::=
     | sort_arguments_
 
 private sort_arguments_ ::=
-    parse_block [comma] grep_map_sort_tail
+    sub_expr_simple [comma] grep_map_sort_tail
     | sorter grep_map_sort_tail
     | grep_map_sort_tail
 
