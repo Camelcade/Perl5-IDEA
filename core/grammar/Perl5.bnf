@@ -879,11 +879,11 @@ print_expr ::=  ('print'|'printf'|'say') ( <<parenthesised_call_arguments [print
 private print_arguments ::= perl_handle expr | expr
 
 private sub_expr_full ::= <<sub_expr parse_sub_expr_full>>
-private sub_expr_simple ::= <<sub_expr parse_sub_expr_simple>>
+private parse_sub_expr_full ::= 'sub' sub_definition_parameters parse_block
+
+private sub_expr_simple ::= <<sub_expr parse_block>>
 
 meta sub_expr ::=  <<x1>>  // fixme make sure that this one checked after definition and declaration
-private parse_sub_expr_full ::= 'sub' sub_definition_parameters parse_block
-private parse_sub_expr_simple ::= parse_block
 
 file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
 
@@ -933,9 +933,11 @@ tr_modifiers ::= '/m' +
 
 ////////////////////////// end of regular expressions //////////////////////////////////////////////////////////////////
 
-do_expr ::=  'do' eval_argument {pin=1}
+do_expr ::=  'do' do_argument {pin=1}
+private do_argument ::= parenthesised_expr | parse_block | expr
+
 eval_expr ::=  'eval' [eval_argument] {pin=1}
-private eval_argument ::= parenthesised_expr | parse_block | expr
+private eval_argument ::= parenthesised_expr | sub_expr_simple | expr
 
 private variable_declaration ::=
     variable_declaration_global
