@@ -89,6 +89,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     WHEN_COMPOUND,
     CONTINUE_BLOCK,
     DEFAULT_COMPOUND,
+    TRYCATCH_COMPOUND,
 
     TRY_EXPR,
     CATCH_EXPR,

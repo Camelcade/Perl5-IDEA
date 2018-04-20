@@ -59,6 +59,8 @@ public class PerlElementTypeFactory {
         return new PerlTokenTypeEx(name, PerlNamespaceElementImpl.class);
       case "LAZY_PARSABLE_BLOCK":
         return new PerlLazyCodeBlockElementType(name);
+      case "LAZY_PARSABLE_BLOCK_WITH_TRYCATCH":
+        return new PerlLazyCodeBlockElementTypeWithTryCatch(name);
       case "HEREDOC_END":
       case "HEREDOC_END_INDENTABLE":
         return new PerlTokenTypeEx(name, PerlHeredocTerminatorElementImpl.class);
@@ -385,6 +387,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlWhileStatementModifierImpl.class);
       case "TRYCATCH_EXPR":
         return new PerlElementTypeEx(name, PsiPerlTrycatchExprImpl.class);
+      case "TRYCATCH_COMPOUND":
+        return new PerlElementTypeEx(name, PsiPerlTrycatchCompoundImpl.class);
       case "TRY_EXPR":
         return new PerlElementTypeEx(name, PsiPerlTryExprImpl.class);
       case "CATCH_EXPR":

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,30 +16,21 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
-import com.perl5.lang.perl.parser.PerlLazyBlockParser;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 16.10.2016.
+ * Handles reparsing in context of {@code use TryCatch}
  */
-public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
-  public PerlLazyCodeBlockElementType(@NotNull @NonNls String debugName) {
+public class PerlLazyCodeBlockElementTypeWithTryCatch extends PerlLazyCodeBlockElementType {
+  public PerlLazyCodeBlockElementTypeWithTryCatch(@NotNull String debugName) {
     super(debugName);
   }
 
   @NotNull
   @Override
   protected PerlSublexingLexerAdapter getInnerLexer(@NotNull Project project) {
-    return new PerlSublexingLexerAdapter(project, false, false);
-  }
-
-  @NotNull
-  @Override
-  protected PsiParser getParser() {
-    return PerlLazyBlockParser.INSTANCE;
+    return super.getInnerLexer(project).withTryCatchSyntax();
   }
 }

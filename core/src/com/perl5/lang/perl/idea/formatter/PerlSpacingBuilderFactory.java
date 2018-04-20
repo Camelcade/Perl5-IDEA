@@ -198,6 +198,14 @@ public class PerlSpacingBuilderFactory {
         0
       )
 
+      .beforeInside(LP_CODE_BLOCK_WITH_TRYCATCH, SUB_DEFINITIONS_TOKENSET).spacing(
+        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        perlSettings.BRACE_STYLE_SUB == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
+
       .beforeInside(BLOCK, NAMESPACE_DEFINITION).spacing(
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
@@ -207,6 +215,13 @@ public class PerlSpacingBuilderFactory {
       )
 
       .beforeInside(BLOCK, BLOCK_CONTAINERS_TOKENSET).spacing(
+        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
+        perlSettings.BRACE_STYLE_COMPOUND == SAME_LINE ? 0 : 1,
+        false,
+        0
+      )
+      .beforeInside(SUB_EXPR, BLOCK_CONTAINERS_TOKENSET).spacing(
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         settings.SPACE_BEFORE_IF_LBRACE ? 1 : 0,
         perlSettings.BRACE_STYLE_COMPOUND == SAME_LINE ? 0 : 1,

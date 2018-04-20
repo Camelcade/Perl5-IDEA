@@ -127,6 +127,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     TokenSet.create(
       LABEL_DECLARATION,
       FOR_COMPOUND,
+      TRYCATCH_COMPOUND,
       FOREACH_COMPOUND,
       WHILE_COMPOUND,
       WHEN_COMPOUND,

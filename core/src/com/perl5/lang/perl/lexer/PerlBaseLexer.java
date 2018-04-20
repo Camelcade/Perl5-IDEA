@@ -381,6 +381,14 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       return PerlNamesCache.getInstance(myProject).getPackagesNamesSet();
     });
     myLocalPackages.clear();
+
+    /**
+     * This is a hack for {@link com.perl5.lang.perl.parser.elementTypes.PerlLazyCodeBlockElementTypeWithTryCatch}
+     */
+    if (yystate() == -1) {
+      yybegin(YYINITIAL);
+      myHasTryCatch = true;
+    }
   }
 
   protected IElementType getNewLineToken() {
@@ -916,7 +924,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
           }
         }
         if (secondBlockToken != null) {
-          secondBlockToken.setTokenType(LP_CODE_BLOCK);
+          secondBlockToken.setTokenType(getLPCodeBlockElementType());
         }
       }
 
@@ -1085,8 +1093,23 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     return myHasTryCatch = USE_TRYCATCH_PATTERN.matcher(getBuffer().subSequence(0, getBufferStart())).find();
   }
 
-  protected void afterTryCatchFallback() {
-    yypushback(1);
-    yybegin(hasTryCatch() ? YYINITIAL : AFTER_VALUE);
+  /**
+   * Handles try token depending on TryCatch usege
+   */
+  protected IElementType handleTry() {
+    if (hasTryCatch()) {
+      pushback();
+      yybegin(BEFORE_TRY_TRYCATCH);
+      return RESERVED_TRYCATCH;
+    }
+    else {
+      yybegin(AFTER_TRY);
+      return RESERVED_TRY;
+    }
+  }
+
+  @NotNull
+  public IElementType getLPCodeBlockElementType() {
+    return hasTryCatch() ? LP_CODE_BLOCK_WITH_TRYCATCH : LP_CODE_BLOCK;
   }
 }

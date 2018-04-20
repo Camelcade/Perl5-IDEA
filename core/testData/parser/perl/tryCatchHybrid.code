@@ -75,31 +75,3 @@ sub parent_sub_with_catch {
     say "This text WILL NEVER appear!";
 }
 
-########################################################### TryCatch ###################################################
-use TryCatch;
-
-sub foo {
-    my ($self) = @_;
-
-    try {
-        die Some::Class->new(code => 404 ) if $self->not_found;
-        return "return value from foo";
-    }
-    catch (Some::Class $e where { $_->code > 100 } ) {
-    }
-}
-
-try{}
-catch (TypeFoo $e) { ... }
-catch (Dict[code => Int, message => Str] $err) { ... }
-catch ($err){}
-catch (HTTPError $e where { $_->code >= 400 && $_->code <= 499 } ) {
-    return "4XX error";
-}
-try{}
-catch (HTTPError $e) {
-    return "other http code";
-}
-
-################################################# Error ################################################################
-

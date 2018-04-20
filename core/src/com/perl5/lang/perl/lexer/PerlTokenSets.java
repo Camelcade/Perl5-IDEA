@@ -239,6 +239,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet STATEMENTS = TokenSet.create(
     STATEMENT, USE_STATEMENT, NO_STATEMENT
   );
+
+  TokenSet LAZY_CODE_BLOCKS = TokenSet.create(LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH);
   /**
    * Quote openers with three or four quotes
    */

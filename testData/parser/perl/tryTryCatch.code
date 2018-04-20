@@ -11,7 +11,7 @@ sub foo {
         die Some::Class->new(code => 404 ) if $self->not_found;
         return "return value from foo";
     }
-    catch (Some::Class $e where { $_->code > 100 } ) {
+    catch  {
     }
 }
 
@@ -19,7 +19,7 @@ try {
     die Some::Class->new(code => 404 ) if $self->not_found;
     return "return value from foo";
 }
-catch (Some::Class $e where { $_->code > 100 } ) {
+catch  {
 }
 
 try  #comment
@@ -28,8 +28,8 @@ try  #comment
     return "return value from foo";
 } # comment
 catch # comment
-(Some::Class $e where { $_->code > 100 } ) #comment
- {
+
+{
 
 } # comment
 

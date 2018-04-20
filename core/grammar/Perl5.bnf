@@ -132,6 +132,7 @@ limitations under the License.
 
     RESERVED_FINALLY = 'finally';
     RESERVED_TRY = 'try';
+    RESERVED_TRYCATCH = 'TryCatch::';
     RESERVED_CATCH = 'catch';
     RESERVED_CATCH_WITH = 'catch_with';
     RESERVED_EXCEPT = 'except';
@@ -289,6 +290,7 @@ limitations under the License.
 	LP_REGEX_REPLACEMENT="LP_REGEX_REPLACEMENT"
 
 	LP_CODE_BLOCK="LAZY_PARSABLE_BLOCK"
+	LP_CODE_BLOCK_WITH_TRYCATCH="LAZY_PARSABLE_BLOCK_WITH_TRYCATCH"
 
     STRING_CONTENT='STRING_CONTENT'
     STRING_CONTENT_QQ='STRING_CONTENT_QQ'
@@ -367,9 +369,10 @@ limitations under the License.
     name(".+expr")="expression"
     extends("number_constant")=expr
 
-    implements("return_expr")="com.perl5.lang.perl.psi.PerlReturnExpr"
+    implements("try_expr")="com.perl5.lang.perl.psi.PerlTryExpr"
+    implements("catch_expr")="com.perl5.lang.perl.psi.PerlCatchExpr"
 
-    implements("try_expr|catch_expr|finally_expr|except_expr|otherwise_expr|continuation_expr")="com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock"
+    implements("return_expr")="com.perl5.lang.perl.psi.PerlReturnExpr"
 
     implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content|for_init|for_condition|for_mutator")="com.perl5.lang.perl.psi.PerlStatement"
 
@@ -544,7 +547,7 @@ private namespace_definition_name ::= 'package' any_package [perl_version] {pin=
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=normal_block recoverWhile=recover_statement} //
 
-private parse_block ::= LP_CODE_BLOCK | normal_block
+private parse_block ::= LP_CODE_BLOCK | LP_CODE_BLOCK_WITH_TRYCATCH | normal_block
 private normal_block ::= <<block braced_block_content>> // !-> pin disabled for dereference of anon hash; probably this slows us down
 meta block ::= <<x1>>
 private braced_block_content ::= '{' block_content '}' {pin=1}
@@ -566,6 +569,8 @@ private compound_statement ::=
     | default_compound
     | method_definition
     | func_definition
+    | trycatch_compound
+
 
 named_block ::= BLOCK_NAME parse_block
 
@@ -585,9 +590,11 @@ unconditional_block ::= parse_block
  - https://metacpan.org/pod/Error
  - https://metacpan.org/pod/Dancer::Exception
  */
-trycatch_expr ::= try_expr (catch_expr|finally_expr|except_expr|otherwise_expr|continuation_expr)*
-try_expr ::= 'try' parse_block {pin=1}
-catch_expr ::= 'catch' [catch_condition] parse_block {pin=1}
+trycatch_compound ::= 'TryCatch::' <<try_expr parse_block>> [<<catch_expr parse_block>>]
+
+trycatch_expr ::= <<try_expr sub_expr_simple>> (<<catch_expr sub_expr_simple>>|finally_expr|except_expr|otherwise_expr|continuation_expr)*
+meta try_expr ::= 'try' <<x1>> {pin=1}
+meta catch_expr ::= 'catch' [catch_condition] <<x1>> {pin=1}
 catch_condition ::= catch_condition_parenthesised | catch_condition_with
 private catch_condition_parenthesised ::= '(' catch_condition_content ')' {pin=1}
 private catch_condition_with ::= 'package::name' 'catch_with' {pin=2}
@@ -596,10 +603,10 @@ private where_clause ::= expr
 private catch_condition_type ::=  [type_constraints]
 type_constraints ::= any_package ['[' expr ']']
 
-finally_expr ::= 'finally' parse_block {pin=1}
-except_expr ::= 'except' parse_block {pin=1}
-otherwise_expr ::= 'otherwise' parse_block {pin=1}
-continuation_expr ::= 'continuation' parse_block {pin=1}
+finally_expr ::= 'finally' sub_expr_simple {pin=1}
+except_expr ::= 'except' sub_expr_simple {pin=1}
+otherwise_expr ::= 'otherwise' sub_expr_simple {pin=1}
+continuation_expr ::= 'continuation' sub_expr_simple {pin=1}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 conditional_block ::= parse_conditional_block
@@ -769,7 +776,7 @@ term_expr ::=
     | undef_expr
     | print_expr
     | replacement_regex
-    | full_sub_expr
+    | sub_expr_full
     | eval_expr
     | do_expr
     | anon_hash
@@ -790,8 +797,6 @@ term_expr ::=
     | <<parseParserExtensionTerm>>
 
     | trycatch_expr
-    | catch_expr	// fallback for keyword
-    | finally_expr // fallback for keyword
 
     | sub_call_expr
     | code_primitive
@@ -873,12 +878,12 @@ lp_or_xor_expr ::= expr ({'or'|'xor'} expr)+
 print_expr ::=  ('print'|'printf'|'say') ( <<parenthesised_call_arguments [print_arguments] >> | [print_arguments] ) {pin=1}
 private print_arguments ::= perl_handle expr | expr
 
-private full_sub_expr ::= <<sub_expr parse_full_sub_expr>>
-private short_sub_expr ::= <<sub_expr parse_short_sub_expr>>
+private sub_expr_full ::= <<sub_expr parse_sub_expr_full>>
+private sub_expr_simple ::= <<sub_expr parse_sub_expr_simple>>
 
 meta sub_expr ::=  <<x1>>  // fixme make sure that this one checked after definition and declaration
-private parse_full_sub_expr ::= 'sub' sub_definition_parameters parse_block
-private parse_short_sub_expr ::= parse_block
+private parse_sub_expr_full ::= 'sub' sub_definition_parameters parse_block
+private parse_sub_expr_simple ::= parse_block
 
 file_read_expr ::= LEFT_ANGLE perl_handle_expr RIGHT_ANGLE
 

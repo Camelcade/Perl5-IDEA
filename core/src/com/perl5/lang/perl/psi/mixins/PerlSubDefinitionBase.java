@@ -33,6 +33,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
+
 /**
  * Created by hurricup on 11.11.2015.
  */
@@ -133,7 +135,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
       return block;
     }
 
-    PsiElement lazyParsableBlock = findChildByType(LP_CODE_BLOCK);
+    PsiElement lazyParsableBlock = findChildByFilter(LAZY_CODE_BLOCKS);
     if (lazyParsableBlock != null) {
       PsiElement possibleBlock = lazyParsableBlock.getFirstChild();
       return possibleBlock instanceof PsiPerlBlock ? (PsiPerlBlock)possibleBlock : null;

@@ -17,12 +17,12 @@
 package com.perl5.lang.perl.lexer.adapters;
 
 import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.FlexLexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +37,7 @@ import java.io.IOException;
  */
 public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
-  private final FlexLexer myFlex;
+  private final PerlBaseLexer myPerlLexer;
   private int myBufferStart;
   private IElementType myTokenType;
   private CharSequence myText;
@@ -52,11 +52,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
 
   public PerlCodeMergingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks) {
     myAllowToMergeCodeBlocks = allowToMergeCodeBlocks;
-    myFlex = new PerlLexer(null).withProject(project);
-  }
-
-  public FlexLexer getFlex() {
-    return myFlex;
+    myPerlLexer = new PerlLexer(null).withProject(project);
   }
 
   @Override
@@ -64,7 +60,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
     myText = buffer;
     myTokenStart = myTokenEnd = myBufferStart = startOffset;
     myBufferEnd = endOffset;
-    myFlex.reset(myText, startOffset, endOffset, initialState);
+    myPerlLexer.reset(myText, startOffset, endOffset, initialState);
     myTokenType = null;
   }
 
@@ -115,14 +111,14 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
     }
 
     try {
-      myTokenStart = myFlex.getTokenEnd();
-      myState = myFlex.yystate();
-      myTokenType = myFlex.advance();
-      myTokenEnd = myFlex.getTokenEnd();
+      myTokenStart = myPerlLexer.getTokenEnd();
+      myState = myPerlLexer.yystate();
+      myTokenType = myPerlLexer.advance();
+      myTokenEnd = myPerlLexer.getTokenEnd();
       mergeCode();
     }
     catch (Exception | Error e) {
-      LOG.error(myFlex.getClass().getName(), e);
+      LOG.error(myPerlLexer.getClass().getName(), e);
       myTokenType = TokenType.WHITE_SPACE;
       myTokenEnd = myBufferEnd;
     }
@@ -140,7 +136,7 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
 
     int bracesDepth = 0;
     while (true) {
-      IElementType nextTokenType = myFlex.advance();
+      IElementType nextTokenType = myPerlLexer.advance();
       if (nextTokenType == null) {
         break;
       }
@@ -154,8 +150,8 @@ public class PerlCodeMergingLexerAdapter extends LexerBase implements PerlElemen
         bracesDepth--;
       }
     }
-    myTokenEnd = myFlex.getTokenEnd();
-    myTokenType = LP_CODE_BLOCK;
+    myTokenEnd = myPerlLexer.getTokenEnd();
+    myTokenType = myPerlLexer.getLPCodeBlockElementType();
     myState = PerlLexer.YYINITIAL;
   }
 }

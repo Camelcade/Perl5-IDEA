@@ -52,6 +52,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_REGEX_XX, PerlLexer.MATCH_REGEX_XX);
     SUBLEXINGS_MAP.put(LP_REGEX_REPLACEMENT, PerlLexer.REPLACEMENT_REGEX);
     SUBLEXINGS_MAP.put(LP_CODE_BLOCK, PerlLexer.YYINITIAL);
+    SUBLEXINGS_MAP.put(LP_CODE_BLOCK_WITH_TRYCATCH, PerlLexer.YYINITIAL);
   }
 
   @Nullable
@@ -64,6 +65,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
   private int myTokenEnd;
   private int myState;
   private IElementType myTokenType;
+  private boolean myTryCatchEnabled;
 
   public PerlSublexingLexerAdapter(@Nullable Project project, boolean allowToMergeCodeBlocks, boolean forceSublexing) {
     this(project, new PerlCodeMergingLexerAdapter(project, allowToMergeCodeBlocks), forceSublexing);
@@ -78,10 +80,18 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
 
   @Override
   public void start(@NotNull CharSequence buffer, int startOffset, int endOffset, int initialState) {
+    if (initialState == 0 && myTryCatchEnabled) {
+      initialState = -1;
+    }
     myMainLexer.start(buffer, startOffset, endOffset, initialState);
     myTokenStart = myTokenEnd = startOffset;
     myTokenType = null;
     myIsSublexing = false;
+  }
+
+  public PerlSublexingLexerAdapter withTryCatchSyntax() {
+    myTryCatchEnabled = true;
+    return this;
   }
 
   @Override

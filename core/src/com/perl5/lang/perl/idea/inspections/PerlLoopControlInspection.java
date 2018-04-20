@@ -39,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.PerlParserDefinition.FILE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 public class PerlLoopControlInspection extends PerlInspection {
   private static final TokenSet LOOPS_CONTAINERS = TokenSet.create(
@@ -49,7 +50,9 @@ public class PerlLoopControlInspection extends PerlInspection {
     FOR_COMPOUND,
     FOREACH_COMPOUND,
     CONTINUE_BLOCK,
-    NAMESPACE_DEFINITION
+    NAMESPACE_DEFINITION,
+    TRY_EXPR,
+    CATCH_EXPR
   );
   private static final TokenSet MAP_GREP = TokenSet.create(
     MAP_EXPR, GREP_EXPR
@@ -203,7 +206,8 @@ public class PerlLoopControlInspection extends PerlInspection {
           return null;
         }
         PsiElement blockContainer = enclosingBlock.getParent();
-        return PsiUtilCore.getElementType(blockContainer) == LP_CODE_BLOCK ? blockContainer.getParent() : blockContainer;
+        return LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(blockContainer))
+               ? blockContainer.getParent() : blockContainer;
       }
 
       /**

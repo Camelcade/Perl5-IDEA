@@ -1,0 +1,11 @@
+# trycatch produces real blocks, so last/next are fine there
+use TryCatch;
+
+try{
+  say 'hi';
+  next;
+}
+catch{
+  say 'bla';
+  last;
+}

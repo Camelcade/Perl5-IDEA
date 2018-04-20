@@ -45,6 +45,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private static final Set<String> DIE_SUBS = new THashSet<>(Arrays.asList(
@@ -62,15 +63,17 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   /**
    * We should create a trasparent node for following elements
    */
-  private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.create(
-    BLOCK, CONTINUE_BLOCK, CONDITION_EXPR, LP_CODE_BLOCK,
+  private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.orSet(
+    LAZY_CODE_BLOCKS,
+    TokenSet.create(
+      BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
     CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
     WHILE_COMPOUND, UNTIL_COMPOUND,
     IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
     FOR_COMPOUND, FOREACH_COMPOUND,
     HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END, HEREDOC_END_INDENTABLE,
     TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR
-  );
+    ));
 
   /**
    * We should not create a node for following elements, only accept children.
@@ -193,6 +196,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null) {
         o.accept(this);
+      }
+    }
+
+    @Override
+    public void visitTrycatchCompound(@NotNull PsiPerlTrycatchCompound o) {
+      List<PsiPerlExpr> exprList = o.getExprList();
+      PsiPerlExpr tryExpr = exprList.remove(0);
+      acceptSafe(tryExpr);
+      if (!exprList.isEmpty()) {
+        addPendingEdge(o, prevInstruction);
+        startConditionalNode(exprList.get(0), null, true);
+        acceptSafe(exprList.get(0));
       }
     }
 
