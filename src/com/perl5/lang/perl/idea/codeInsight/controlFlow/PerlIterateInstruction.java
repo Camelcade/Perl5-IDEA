@@ -50,6 +50,6 @@ public class PerlIterateInstruction extends InstructionImpl {
   @NotNull
   @Override
   public String getElementPresentation() {
-    return "iterate " + myTargetElement + " using " + mySourceElement;
+    return "iterate " + mySourceElement + " using " + myTargetElement;
   }
 }

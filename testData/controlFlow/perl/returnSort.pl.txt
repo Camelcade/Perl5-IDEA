@@ -1,7 +1,7 @@
 0(1) element: null
 1(2) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 2(3) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-3(4,9) iterate null using PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+3(4,9) iterate PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) using null
 4(5) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE). Condition: @array:true
 5(6) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 6(8) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
