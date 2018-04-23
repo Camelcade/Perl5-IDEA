@@ -112,6 +112,11 @@ public abstract class PerlProtoLexer implements FlexLexer {
     yybegin(newState);
   }
 
+  public void pushStateAndBegin(int stateToPush, int newState) {
+    yybegin(stateToPush);
+    pushStateAndBegin(newState);
+  }
+
   public void pushState() {
     stateStack.push(getRealLexicalState());
   }

@@ -70,7 +70,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
   private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new THashMap<>();
 
-  private static final String SUB_SIGNATURE = "Sub.Signature";
+  protected static final String SUB_SIGNATURE = "Sub.Signature";
   public static TokenSet BARE_REGEX_PREFIX_TOKENSET = TokenSet.EMPTY;
   public static TokenSet RESERVED_TOKENSET;
   public static TokenSet CUSTOM_TOKENSET;
@@ -194,8 +194,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     return getLeftBrace(blockState);
   }
 
-  protected IElementType getLeftBraceCode(int newState) {
-    return getLeftBrace(LEFT_BRACE_CODE_START, newState);
+  protected IElementType getLeftBraceCode() {
+    myBracesStack.push(0);
+    pushState();
+    return getLeftBrace(LEFT_BRACE_CODE_START, YYINITIAL);
   }
 
   protected IElementType getLeftBrace(int newState) {
@@ -258,10 +260,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     }
     yybegin(afterState);
     return RIGHT_BRACKET;
-  }
-
-  protected IElementType startSubSignatureBlock() {
-    return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL, SUB_SIGNATURE);
   }
 
   protected IElementType startParethesizedBlock(int afterState) {

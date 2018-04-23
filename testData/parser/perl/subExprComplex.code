@@ -1,0 +1,54 @@
+sub { say 'hi'} or 42;
+say 'test';
+sub ($$$) { say 'hi'} or 42;
+say 'test';
+sub ($var){ say 'hi'} or 42;
+say 'test';
+sub :method { say 'hi'} or 42;
+say 'test';
+sub ($$$) :method { say 'hi'} or 42;
+say 'test';
+sub ($var) :method { say 'hi'} or 42;
+say 'test';
+sub {
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    say 'hi'
+} or 42;
+say 'test';
+sub ($$$) {
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    say 'hi'
+} or 42;
+say 'test';
+sub ($var){
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    say 'hi'
+} or 42;
+say 'test';
+sub :method {
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    say 'hi'
+} or 42;
+say 'test';
+sub ($$$) :method {
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    say 'hi'
+} or 42;
+say 'test';
+sub ($var) :method {
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    # force lazy parsing for this particular block
+    say 'hi'
+} or 42;
+say 'test';

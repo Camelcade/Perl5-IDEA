@@ -162,7 +162,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %xstate TRANS_OPENER, TRANS_OPENER_NO_SHARP
 %xstate REGEX_OPENER, REGEX_OPENER_NO_SHARP
 
-%state PACKAGE_ARGUMENTS, VERSION_OR_OPERAND, REQUIRE_ARGUMENTS, SUB_DECLARATION, BRACED_STRING, ATTRIBUTES, METHOD_DECLARATION
+%state PACKAGE_ARGUMENTS, VERSION_OR_OPERAND, REQUIRE_ARGUMENTS, BRACED_STRING
 %state VERSION_OR_OPERAND_USE, BAREWORD_USE
 %state PACKAGE_DECLARATION_ARGUMENTS
 
@@ -174,8 +174,12 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 //%xstate REGEX_POSIX_CHAR_CLASS
 
 %state PREPARSED_ITEMS
-%xstate SUB_PROTOTYPE
-%state SUB_ATTRIBUTES
+
+%xstate SUB_DECLARATION, METHOD_DECLARATION
+%xstate SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT
+%xstate SUB_ATTRIBUTES, SUB_PROTOTYPE
+%xstate SUB_ATTRIBUTE
+
 %state HANDLE_WITH_ANGLE
 
 %state VARIABLE_DECLARATION,VARIABLE_DECLARATION_STRICT,VAR_ATTRIBUTES,VAR_ATTRIBUTES_START
@@ -633,26 +637,50 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	[^]+ 		{return COMMENT_BLOCK;}
 }
 
-<METHOD_DECLARATION,SUB_DECLARATION>{
-	{QUALIFIED_IDENTIFIER} 		{return getIdentifierTokenWithoutIndex();}
-}
-
-<METHOD_DECLARATION>{
-	"(" 						{return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL);}
+/////////////////////////////////  subs, anon subs, methods, etc //////////////////////////////////////////////////////////
+<SUB_DECLARATION,METHOD_DECLARATION,
+  SUB_ATTRIBUTES, SUB_ATTRIBUTE,
+  SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT>{
+  {NEW_LINE}   				{return getNewLineToken();}
+  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  {LINE_COMMENT}			{return COMMENT_LINE;}
 }
 
 <SUB_DECLARATION>{
+	{QUALIFIED_IDENTIFIER} 		{pushStateAndBegin(YYINITIAL, SUB_DECLARATION_CONTENT);return getIdentifierTokenWithoutIndex();}
+	("("|"{"|":")                   {pushStateAndBegin(AFTER_VALUE, SUB_DECLARATION_CONTENT);yypushback(1);}
+}
+
+<METHOD_DECLARATION>{
+	{QUALIFIED_IDENTIFIER} 		{pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT);return getIdentifierTokenWithoutIndex();}
+}
+
+<SUB_DECLARATION,METHOD_DECLARATION>{
+	[^]                             {yypushback(1);yybegin(YYINITIAL);}
+}
+
+<METHOD_DECLARATION_CONTENT>{
+	"(" 						{return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL);}
+}
+
+<SUB_DECLARATION_CONTENT>{
 	"(" / {SUB_PROTOTYPE_WITH_SPACES}? ")"	{return startParethesizedBlock(SUB_ATTRIBUTES, SUB_PROTOTYPE);}
-	"(" 						{return startSubSignatureBlock();}
+	"(" 					{return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL, SUB_SIGNATURE);}
 }
 
-<SUB_DECLARATION,SUB_ATTRIBUTES,ATTRIBUTES,METHOD_DECLARATION>{
-	"{"     					{return getLeftBraceCode(YYINITIAL);}
+<SUB_DECLARATION_CONTENT,SUB_ATTRIBUTES,METHOD_DECLARATION_CONTENT>{
+	"{"     					{popState(); return getLeftBraceCode();}
 }
 
-<SUB_DECLARATION,SUB_ATTRIBUTES, METHOD_DECLARATION>{
-	":"							{yybegin(ATTRIBUTES);return COLON;}
-	[^]							{yypushback(1);yybegin(YYINITIAL);break;}
+<SUB_ATTRIBUTE>{
+	{IDENTIFIER} / "("	{pushState();yybegin(QUOTE_LIKE_OPENER_Q);return ATTRIBUTE_IDENTIFIER;}
+	{IDENTIFIER}		{return ATTRIBUTE_IDENTIFIER;}
+	[^]                     {yypushback(1);popState();}
+}
+
+<SUB_DECLARATION_CONTENT,SUB_ATTRIBUTES, METHOD_DECLARATION_CONTENT>{
+	":"							{yybegin(SUB_ATTRIBUTES);pushState();yybegin(SUB_ATTRIBUTE);return COLON;}
+	[^]							{popState();yypushback(1);yybegin(YYINITIAL);}
 }
 
 <SUB_PROTOTYPE>{
@@ -660,17 +688,17 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{SUB_PROTOTYPE}			{return SUB_PROTOTYPE_TOKEN;}
 	")"						{return getRightParen(SUB_ATTRIBUTES);}
 }
+/////////////////////////////////  END OF subs, anon subs, methods, etc //////////////////////////////////////////////////////////
 
 <VAR_ATTRIBUTES_START> ":"	{yybegin(VAR_ATTRIBUTES); return COLON;}
 
-<ATTRIBUTES,VAR_ATTRIBUTES>
+<VAR_ATTRIBUTES>
 {
 	":"					{return COLON;}
 	{IDENTIFIER} / "("	{pushState();yybegin(QUOTE_LIKE_OPENER_Q);return ATTRIBUTE_IDENTIFIER;}
 	{IDENTIFIER}		{return ATTRIBUTE_IDENTIFIER;}
 }
 
-<ATTRIBUTES> 	 [^]						{yypushback(1);yybegin(YYINITIAL);}
 <VAR_ATTRIBUTES,VAR_ATTRIBUTES_START> [^]	{yypushback(1);yybegin(AFTER_VARIABLE);}
 
 <VARIABLE_DECLARATION>
