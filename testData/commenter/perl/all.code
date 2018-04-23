@@ -1,0 +1,8 @@
+<selection>sub test {
+    my $log           = $self->{__logger};
+    my $sRegexPattern = $self->getMetaFields;
+    my $var = {
+        key  => 12,
+        vavl => 34
+    };
+}</selection>

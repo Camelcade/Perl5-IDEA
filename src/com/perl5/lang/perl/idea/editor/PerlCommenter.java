@@ -16,17 +16,17 @@
 
 package com.perl5.lang.perl.idea.editor;
 
-import com.intellij.lang.Commenter;
+import com.intellij.codeInsight.generation.IndentedCommenter;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 25.04.2015.
  */
-public class PerlCommenter implements Commenter {
+public class PerlCommenter implements IndentedCommenter {
   @Nullable
   @Override
   public String getLineCommentPrefix() {
-    return "#";
+    return "# ";
   }
 
   @Nullable
@@ -51,5 +51,11 @@ public class PerlCommenter implements Commenter {
   @Override
   public String getCommentedBlockCommentSuffix() {
     return null;
+  }
+
+  @Nullable
+  @Override
+  public Boolean forceIndentedLineComment() {
+    return true;
   }
 }

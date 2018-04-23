@@ -17,6 +17,7 @@
 package base;
 
 import com.intellij.codeInsight.TargetElementUtil;
+import com.intellij.codeInsight.actions.MultiCaretCodeInsightAction;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
@@ -42,6 +43,7 @@ import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.Disposable;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.IdeActions;
@@ -1178,5 +1180,12 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       }
     );
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), actualDump.toString());
+  }
+
+  protected void doLineCommenterTest() {
+    initWithFileSmart();
+    MultiCaretCodeInsightAction action = (MultiCaretCodeInsightAction)ActionManager.getInstance().getAction(IdeActions.ACTION_COMMENT_LINE);
+    action.actionPerformedImpl(myModule.getProject(), myFixture.getEditor());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 }

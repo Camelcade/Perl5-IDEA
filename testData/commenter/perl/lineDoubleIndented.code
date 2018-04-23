@@ -1,0 +1,8 @@
+sub test {
+    my $log           = $self->{__logger};
+    my $sRegexPattern = $self->getMetaFields;
+    my $var = {
+        key  => 12,
+ <caret>       vavl => 34
+    };
+}
