@@ -24,6 +24,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testAnonSubAsParameter() {doTest();}
+
   public void testAssignChainParallel() {doTest();}
 
   public void testAssignDeclarationSimple() {doTest();}

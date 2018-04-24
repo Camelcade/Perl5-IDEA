@@ -473,7 +473,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         flowAbrupted();
       }
       else {
-        super.visitSubCallExpr(o);
+        acceptSafe(o.getCallArguments());
+        acceptSafe(o.getMethod());
+        startNodeSmart(o);
       }
     }
 

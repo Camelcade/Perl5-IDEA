@@ -1,0 +1,9 @@
+say 'hi';
+
+reduce{
+    say 'body';
+    return;
+    say 'unreachable';
+}, 42, 69;
+
+say 'end';
