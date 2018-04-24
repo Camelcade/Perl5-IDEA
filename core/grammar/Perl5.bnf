@@ -1079,8 +1079,8 @@ private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parent
 
 //// fixme this should depend on prototype
 private parse_call_arguments ::=
-    anon_hash comma list_expr
-    | parse_block [[comma] list_expr]
+    <<parseHashSmart>>
+    | sub_expr_simple [[comma] list_expr]
     | list_expr
 
 private normal_method ::= <<method method_tokens>>

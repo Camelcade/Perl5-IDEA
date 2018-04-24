@@ -492,4 +492,17 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     PerlParserImpl.perl_version(b, l);
     return true;
   }
+
+  /**
+   * Attempts to parse anon hash as call argument if comma is after it
+   */
+  public static boolean parseHashSmart(@NotNull PsiBuilder b, int l) {
+    if (b.getTokenType() != LEFT_BRACE) {
+      return false;
+    }
+    PsiBuilder.Marker rollbackMarker = b.mark();
+    boolean r = PerlParserImpl.anon_hash(b, l) && b.getTokenType() == COMMA;
+    rollbackMarker.rollbackTo();
+    return r && PerlParserImpl.list_expr(b, l);
+  }
 }
