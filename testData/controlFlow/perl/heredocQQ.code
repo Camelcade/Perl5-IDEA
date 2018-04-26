@@ -1,0 +1,7 @@
+say 'start';
+
+say <<"EOM", 'afterbody';
+    $a text $b
+EOM
+
+say $end;

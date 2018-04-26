@@ -1,0 +1,15 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4) element: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+4(9) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+5(6) element: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
+6(7) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+7(8) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+8(12) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+9(10) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+10(11) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+11(5) element: PerlHeredocElementImpl(HEREDOC_QQ)
+12(13) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+13(14) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+14() element: null

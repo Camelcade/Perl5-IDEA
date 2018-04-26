@@ -1,0 +1,13 @@
+say 'start';
+
+say <<"FIRST", <<"SECOND", <<"EMPTY", <<"THIRD", 'afterbody';
+    text $first
+FIRST
+    text $second
+SECOND
+EMPTY
+    text $third
+THIRD
+
+
+say $end;

@@ -1,0 +1,10 @@
+say 'start';
+
+say <<"EMPTY";
+EMPTY
+
+say <<"EOM", 'afterbody';
+    $a text $b
+EOM
+
+say $end;

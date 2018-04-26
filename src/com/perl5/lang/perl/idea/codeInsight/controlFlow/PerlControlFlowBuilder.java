@@ -20,6 +20,7 @@ import com.intellij.codeInsight.controlflow.ConditionalInstruction;
 import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -29,7 +30,10 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.containers.Queue;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlDieScope;
@@ -39,15 +43,14 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
+  private static final Logger LOG = Logger.getInstance(PerlControlFlowBuilder.class);
+
   private static final Set<String> DIE_SUBS = new THashSet<>(Arrays.asList(
     "die",
     "croak",
@@ -67,12 +70,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     LAZY_CODE_BLOCKS,
     TokenSet.create(
       BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
-    CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
-    WHILE_COMPOUND, UNTIL_COMPOUND,
-    IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
-    FOR_COMPOUND, FOREACH_COMPOUND,
-    HEREDOC, HEREDOC_QQ, HEREDOC_QX, HEREDOC_END, HEREDOC_END_INDENTABLE,
-    TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR
+      CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
+      WHILE_COMPOUND, UNTIL_COMPOUND,
+      IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
+      FOR_COMPOUND, FOREACH_COMPOUND,
+      HEREDOC_END, HEREDOC_END_INDENTABLE,
+      TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR
     ));
 
   /**
@@ -188,10 +191,10 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme given & friends
   // fixme next/last/redo
   // fixme try/catch/finally
-  // fixme return from block as parameters
-  // fixme interpolatable here-docs should be honored because of code injections
-  // fixme regexps
+  // fixme regexps with evaluation
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
+    private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
+
 
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null) {
@@ -544,12 +547,47 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
-      startNode(o);
+      myOpenersQueue.addLast(startNode(o));
+    }
+
+    /**
+     * Prepends here-doc body before opening marker
+     */
+    @Override
+    public void visitHeredocElement(@NotNull PerlHeredocElementImpl o) {
+      if (!myOpenersQueue.isEmpty()) {
+        Instruction openerInstruction = myOpenersQueue.peekFirst();
+        Instruction prevBackup = prevInstruction;
+        // fixme pending edges can shoot here ?
+
+        Collection<Instruction> openerPredecessors = openerInstruction.allPred();
+        if (openerPredecessors.size() != 1) {
+          LOG.warn("Got " + openerPredecessors.size() + " predecessors for " + openerInstruction);
+        }
+        LOG.assertTrue(openerPredecessors.size() > 0);
+        prevInstruction = openerPredecessors.iterator().next();
+
+        super.visitHeredocElement(o);
+
+        openerInstruction.allPred().forEach(pred -> pred.allSucc().removeIf(succ -> succ == openerInstruction));
+        openerInstruction.allPred().clear();
+
+        addEdge(prevInstruction, openerInstruction);
+
+        prevInstruction = prevBackup;
+      }
+      else {
+        super.visitHeredocElement(o);
+      }
     }
 
     @Override
     public void visitElement(@NotNull PsiElement element) {
-      if (element instanceof LeafPsiElement) {
+      IElementType elementType = PsiUtilCore.getElementType(element);
+      if (PerlTokenSets.HEREDOC_ENDS.contains(elementType) && !myOpenersQueue.isEmpty()) {
+        myOpenersQueue.pullFirst();
+      }
+      else if (element instanceof LeafPsiElement) {
         return;
       }
       element.acceptChildren(this);
