@@ -22,8 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.impl.PerlParsableStringWrapperlImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,7 +73,7 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 
   @Nullable
   private PsiElement getClosingQuote(@NotNull PerlStringMixin element) {
-    PsiElement lastChild = getRealString(element).getLastChild();
+    PsiElement lastChild = element.getLastChild();
     if (lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(lastChild.getNode().getElementType())) {
       return lastChild;
     }
@@ -84,7 +82,7 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 
   @NotNull
   public PsiElement getOpeningQuote(@NotNull PerlStringMixin element) {
-    PsiElement firstChild = getRealString(element).getFirstChild();
+    PsiElement firstChild = element.getFirstChild();
 
     while (firstChild != null) {
       if (PerlParserUtil.OPEN_QUOTES.contains(firstChild.getNode().getElementType())) {
@@ -94,15 +92,4 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
     }
     throw new RuntimeException("Unable to find opening quote in: " + element.getText());
   }
-
-  @NotNull
-  protected PerlString getRealString(@NotNull PerlStringMixin element) {
-    if (element.getFirstChild() instanceof PerlParsableStringWrapperlImpl) {
-      PsiElement realString = element.getFirstChild().getFirstChild();
-      assert realString instanceof PerlString : "Got " + realString + " instead of string";
-      return (PerlString)realString;
-    }
-    return element;
-  }
-
 }
