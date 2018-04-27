@@ -1,13 +1,11 @@
+use TryCatch;
 say 'start';
 
-$a = try{
+try{
   say 'try';
 }
 catch{
   say 'catch';
 }
-catch{
-  say 'catch #2';
-};
 
 say 'end';

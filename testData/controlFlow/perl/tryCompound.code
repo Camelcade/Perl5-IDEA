@@ -1,10 +1,8 @@
+use TryCatch;
 say 'start';
 
-$a = try{
+try{
   say 'try';
 }
-finally{
-  say 'finally';
-};
 
 say 'end';

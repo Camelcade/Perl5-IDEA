@@ -369,8 +369,9 @@ limitations under the License.
     name(".+expr")="expression"
     extends("number_constant")=expr
 
+    implements("trycatch_expr")="com.perl5.lang.perl.psi.PerlTryCatchExpr"
     implements("try_expr")="com.perl5.lang.perl.psi.PerlTryExpr"
-    implements("catch_expr")="com.perl5.lang.perl.psi.PerlCatchExpr"
+    implements("catch_expr|continuation_expr")="com.perl5.lang.perl.psi.PerlCatchExpr"
 
     implements("return_expr")="com.perl5.lang.perl.psi.PerlReturnExpr"
 
@@ -439,6 +440,7 @@ limitations under the License.
     implements("if_compound|unless_compound")="com.perl5.lang.perl.psi.PerlIfUnlessCompound"
     implements("when_compound")="com.perl5.lang.perl.psi.properties.PerlConvertableCompoundSimple"
     implements("given_compound|default_compound")="com.perl5.lang.perl.psi.properties.PerlCompound";
+    implements("trycatch_compound")="com.perl5.lang.perl.psi.PerlTryCatchCompound"
 
     implements("heredoc_opener")="com.perl5.lang.perl.psi.PerlHeredocOpener"
     mixin("heredoc_opener")="com.perl5.lang.perl.psi.mixins.PerlHeredocOpenerMixin"

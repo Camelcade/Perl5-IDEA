@@ -178,17 +178,28 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testForIndexedNoInit() {doTest();}
 
-  /*
-  public void testTry() {doTest();}
+  public void testTryCompound() {doTest();}
 
+  public void testTryCatchCompound() {doTest();}
+
+  public void testTry() {doTest();}
   public void testTryCatch() {doTest();}
 
-  public void testTryCatchFinally() {doTest();}
+  public void testTryCatchCatch() {doTest();}
+  public void testTryCatchCatchConditional() {doTest();}
+
+  public void testTryCatchCatchFinally() {doTest();}
 
   public void testTryCatchConditional() {doTest();}
 
-  public void testTryCatchCatchConditional() {doTest();}
-  */
+  public void testTryCatchFinally() {doTest();}
+
+  public void testTryCatchOtherwiseFinally() {doTest();}
+
+  public void testTryExceptCatchFinally() {doTest();}
+
+  public void testTryFinally() {doTest();}
+
 
   private void doTest() {doTestControlFlow();}
 }

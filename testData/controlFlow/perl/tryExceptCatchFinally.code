@@ -1,0 +1,23 @@
+say 'start';
+
+$a = try{
+  say 'try';
+}
+except{
+  say 'except';
+}
+catch{
+  say 'catch #1';
+}
+catch{
+  say 'catch #2';
+}
+finally{
+  say 'finally #1';
+}
+finally{
+  say 'finally #2';
+}
+;
+
+say 'end';

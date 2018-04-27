@@ -1,10 +1,10 @@
 say 'start';
 
-try{
+$a = try{
   say 'try';
 }
 catch{
   say 'catch';
-}
+};
 
 say 'end';

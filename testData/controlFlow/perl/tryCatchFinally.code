@@ -1,6 +1,6 @@
 say 'start';
 
-try{
+$a = try{
   say 'try';
 }
 catch{
@@ -8,6 +8,6 @@ catch{
 }
 finally{
   say 'finally';
-}
+};
 
 say 'end';

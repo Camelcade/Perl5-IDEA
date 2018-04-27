@@ -75,7 +75,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       IF_COMPOUND, UNLESS_COMPOUND, CONDITIONAL_BLOCK, UNCONDITIONAL_BLOCK,
       FOR_COMPOUND, FOREACH_COMPOUND,
       HEREDOC_END, HEREDOC_END_INDENTABLE,
-      TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR
+      TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR, TRYCATCH_COMPOUND
     ));
 
   /**
@@ -190,7 +190,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme shouldn't we move subs elements in the beginning of the subgraph?
   // fixme given & friends
   // fixme next/last/redo
-  // fixme try/catch/finally
   // fixme regexps with evaluation
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
@@ -203,41 +202,52 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitTrycatchCompound(@NotNull PsiPerlTrycatchCompound o) {
-      List<PsiPerlExpr> exprList = o.getExprList();
-      PsiPerlExpr tryExpr = exprList.remove(0);
-      acceptSafe(tryExpr);
-      if (!exprList.isEmpty()) {
-        addPendingEdge(o, prevInstruction);
-        startConditionalNode(exprList.get(0), null, true);
-        acceptSafe(exprList.get(0));
+    public void visitCatchExpr(@NotNull PsiPerlCatchExpr o) {
+      PsiPerlCatchCondition catchCondition = o.getCatchCondition();
+
+      startNode(o);
+      if (catchCondition != null) {
+        acceptSafe(catchCondition);
+      }
+
+      addPendingEdge(o, prevInstruction);
+      startConditionalNode(o, catchCondition, true);
+      PsiPerlSubExpr subExpr = o.getSub();
+      if (subExpr != null) {
+        acceptSafe(subExpr);
+      }
+      else {
+        acceptSafe(o.getBlock());
       }
     }
 
     @Override
     public void visitTrycatchExpr(@NotNull PsiPerlTrycatchExpr o) {
-      List<PsiPerlExpr> exprList = o.getExprList();
-      assert exprList.size() > 1;
-      PsiPerlExpr tryExpr = exprList.remove(0);
+      acceptSafe(o.getTryExpression());
 
-      int lastElementIndex = exprList.size() - 1;
-      PsiPerlExpr finallyExpr = exprList.get(lastElementIndex) instanceof PsiPerlFinallyExpr ? exprList.remove(lastElementIndex) : null;
+      // get map of exceptions and handlers; Internals won't be handled for now
+      o.getExceptExpressions().forEach(this::acceptSafe);
 
-      acceptSafe(tryExpr);
-
-      for (PsiPerlExpr catchExpr : exprList) {
-        assert catchExpr instanceof PsiPerlCatchExpr : "PsiPerlCatchExpr expected: " + catchExpr;
-        PsiPerlCatchCondition catchCondition = ((PsiPerlCatchExpr)catchExpr).getCatchCondition();
-
-        if (catchCondition != null) {
-          acceptSafe(catchCondition);
-        }
-        addPendingEdge(catchExpr, prevInstruction);
-        startConditionalNode(catchExpr, catchCondition, true);
-        acceptSafe(((PsiPerlCatchExpr)catchExpr).getBlock());
+      List<Instruction> catchesTails = ContainerUtil.newArrayList();
+      // catches
+      for (PerlCatchExpr catchExpr : o.getCatchExpressions()) {
+        acceptSafe(catchExpr);
+        catchesTails.add(prevInstruction);
+        flowAbrupted();
       }
 
-      acceptSafe(finallyExpr);
+      // executed in case of uncatched exception
+      o.getOtherwiseExpressions().forEach(this::acceptSafe);
+
+      // executed anyway
+      o.getFinallyExpressions().forEach(finallyExpr -> {
+        startTransparentNode(finallyExpr, "anchor");
+        catchesTails.forEach(tail -> addEdge(tail, prevInstruction));
+        catchesTails.clear();
+        acceptSafe(finallyExpr);
+      });
+
+      catchesTails.forEach(tail -> addPendingEdge(o, tail));
     }
 
     @Override

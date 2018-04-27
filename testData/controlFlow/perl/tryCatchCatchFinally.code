@@ -8,6 +8,13 @@ catch(Foo $bar){
 }
 catch(Baz $bam){
   say 'catch Baz $bam';
-};
+}
+finally{
+  say 'finally #1';
+}
+finally{
+  say 'finally #2';
+}
+;
 
 say 'end';

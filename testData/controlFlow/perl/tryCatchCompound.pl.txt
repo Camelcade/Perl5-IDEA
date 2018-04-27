@@ -1,0 +1,13 @@
+0(1) element: null
+1(2) element: PsiPerlUseStatementImpl(USE_STATEMENT)
+2(3) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+3(4) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+4(5) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+5(6) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+6(7,10) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR)
+7(8) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR). Condition: null:true
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(11) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+11(12) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+12() element: null

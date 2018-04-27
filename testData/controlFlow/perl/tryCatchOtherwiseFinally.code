@@ -1,0 +1,26 @@
+say 'start';
+
+$a = try{
+  say 'try';
+}
+catch($cond1){
+  say 'catch #1';
+}
+catch($cond2){
+  say 'catch #2';
+}
+otherwise{
+  say 'otherwise #1'
+}
+otherwise{
+  say 'otherwise #2'
+}
+finally{
+  say 'finally #1';
+}
+finally{
+  say 'finally #2';
+}
+;
+
+say 'end';
