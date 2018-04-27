@@ -909,7 +909,7 @@ private regex_replace ::= regex_replace_regex | regex_replace_code
 
 private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [LP_REGEX_REPLACEMENT|perl_regex]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
-private regex_code ::= LP_CODE_BLOCK | file_item+
+private regex_code ::= LP_CODE_BLOCK | <<block file_item+>>
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item +
