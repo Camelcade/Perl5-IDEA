@@ -58,7 +58,7 @@ public class PerlStackFrame extends XStackFrame {
     myVirtualFile = AtomicNullableLazyValue.createValue(() -> {
       String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
       String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
-      VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), true);
+      VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), false);
 
       if (result == null) {
         String remoteFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + remoteFilePath;
