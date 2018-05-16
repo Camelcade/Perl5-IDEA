@@ -18,7 +18,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: >)('>')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -32,7 +32,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: <)('<')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -45,7 +45,7 @@ Perl5
         PsiElement(Perl5: $$)('$')
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
       PsiElement(Perl5: =)('=')
-      PsiErrorElement:<expr> or <expression> expected, got '='
+      PsiErrorElement:<expr> expected, got '='
         <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -62,7 +62,7 @@ Perl5
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
       PsiPerlPrefixUnaryExprImpl(Perl5: PREFIX_UNARY_EXPR)
         PsiElement(Perl5: !)('!')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -91,7 +91,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: **)('**')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -105,7 +105,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: +)('+')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -119,7 +119,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: -)('-')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -133,7 +133,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: *)('*')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -147,7 +147,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: /)('/')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -161,7 +161,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: %)('%')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -175,7 +175,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: .)('.')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -189,7 +189,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: x)('x')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -203,7 +203,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: &)('&')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -220,7 +220,7 @@ Perl5
     PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR)
       PsiPerlPrefixUnaryExprImpl(Perl5: PREFIX_UNARY_EXPR)
         PsiElement(Perl5: !)('!')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -234,7 +234,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: ^)('^')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -248,7 +248,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: <<)('<<')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -262,7 +262,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: >>)('>>')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -276,7 +276,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: &&)('&&')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -290,7 +290,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: ||)('||')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
@@ -304,7 +304,7 @@ Perl5
           PsiElement(Perl5: $$)('$')
           PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('a')
         PsiElement(Perl5: //)('//')
-        PsiErrorElement:<expr> or <expression> expected, got '='
+        PsiErrorElement:<expr> expected, got '='
           <empty list>
       PsiElement(Perl5: =)('=')
       PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)

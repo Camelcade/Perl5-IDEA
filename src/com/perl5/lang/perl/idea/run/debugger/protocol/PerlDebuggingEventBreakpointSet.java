@@ -30,7 +30,7 @@ public class PerlDebuggingEventBreakpointSet extends PerlDebuggingEventBreakpoin
   protected void processBreakPoint(@NotNull XLineBreakpoint breakpoint, XDebugSession session) {
     XDebuggerManager.getInstance(session.getProject()).getBreakpointManager().updateBreakpointPresentation(
       breakpoint,
-      AllIcons.Debugger.Db_verified_breakpoint,
+      AllIcons.Debugger.Db_set_breakpoint,
       "Breakpoint set"
     );
   }

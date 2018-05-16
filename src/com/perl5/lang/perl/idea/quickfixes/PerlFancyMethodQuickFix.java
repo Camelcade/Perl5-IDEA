@@ -58,16 +58,27 @@ public class PerlFancyMethodQuickFix implements LocalQuickFix {
     PsiElement method = descriptor.getPsiElement();
     assert method instanceof PerlMethod;
 
-    PsiElement currentCallExpression = method.getParent();
-    assert currentCallExpression instanceof PsiPerlSubCallExpr;
+    PsiElement callExpression = method.getParent();
+    assert callExpression instanceof PsiPerlSubCallExpr;
 
-    // fixme ok, this is works, but we make syntax tree invalid, will be updated with next reparsing. Not sure it's a problem
     PerlNamespaceElement namespaceElement = ((PerlMethod)method).getNamespaceElement();
     assert namespaceElement != null;
 
     PerlSubNameElement subNameElement = ((PerlMethod)method).getSubNameElement();
     assert subNameElement != null;
 
-    method.replace(PerlElementFactory.createMethodCall(project, namespaceElement.getCanonicalName(), subNameElement.getName()));
+    StringBuilder argsBuilder = new StringBuilder();
+    PsiElement run = callExpression.getFirstChild();
+    while (run != null) {
+      if (run != method) {
+        argsBuilder.append(run.getNode().getChars());
+      }
+      run = run.getNextSibling();
+    }
+
+    callExpression.replace(PerlElementFactory.createMethodCall(project,
+                                                               namespaceElement.getText(),
+                                                               subNameElement.getName(),
+                                                               argsBuilder.toString()));
   }
 }

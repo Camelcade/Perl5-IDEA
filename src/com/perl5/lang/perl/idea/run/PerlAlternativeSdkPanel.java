@@ -40,7 +40,6 @@ import java.util.List;
 
 /**
  * @author VISTALL
- * @see com.intellij.execution.ui.AlternativeJREPanel
  * @since 17-Sep-15
  */
 public class PerlAlternativeSdkPanel extends JPanel implements PanelWithAnchor {

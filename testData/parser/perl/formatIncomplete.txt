@@ -4,5 +4,5 @@ Perl5
     PerlSubNameElementImpl(Perl5: subname)('SOME')
     PsiElement(Perl5: =)('=')
     PsiElement(Perl5: FORMAT)('this is\nformat')
-    PsiErrorElement:Perl5: FORMAT_TERMINATOR expected, unexpected end of file
+    PsiErrorElement:Perl5: FORMAT_TERMINATOR expected
       <empty list>

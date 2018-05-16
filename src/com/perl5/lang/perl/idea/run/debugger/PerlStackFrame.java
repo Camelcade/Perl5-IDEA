@@ -86,7 +86,7 @@ public class PerlStackFrame extends XStackFrame {
   @Override
   public void customizePresentation(@NotNull ColoredTextContainer component) {
     component.append(myFrameDescriptor.getFileDescriptor().getNameOrPath(), SimpleTextAttributes.REGULAR_ATTRIBUTES);
-    component.setIcon(AllIcons.Debugger.StackFrame);
+    component.setIcon(AllIcons.Debugger.Frame);
   }
 
   @Nullable

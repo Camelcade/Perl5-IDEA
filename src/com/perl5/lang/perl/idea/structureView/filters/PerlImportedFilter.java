@@ -37,7 +37,7 @@ public class PerlImportedFilter extends PerlFilter {
   @NotNull
   @Override
   public ActionPresentation getPresentation() {
-    return new ActionPresentationData("Show imported", null, AllIcons.Welcome.ImportProject);
+    return new ActionPresentationData("Show imported", null, AllIcons.ToolbarDecorator.Import);
   }
 
   @NotNull

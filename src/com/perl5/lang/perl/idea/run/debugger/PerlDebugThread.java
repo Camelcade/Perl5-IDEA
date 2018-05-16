@@ -28,11 +28,11 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
-import com.intellij.util.containers.ByteArrayList;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
+import gnu.trove.TByteArrayList;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -131,7 +131,7 @@ public class PerlDebugThread extends Thread {
       myOutputStream = mySocket.getOutputStream();
       myInputStream = mySocket.getInputStream();
 
-      ByteArrayList response = new ByteArrayList();
+      TByteArrayList response = new TByteArrayList();
 
       while (!myStop) {
         response.clear();
@@ -169,7 +169,7 @@ public class PerlDebugThread extends Thread {
     }
   }
 
-  private void processResponse(ByteArrayList responseBytes) {
+  private void processResponse(TByteArrayList responseBytes) {
     final String response = new String(responseBytes.toNativeArray(), CharsetToolkit.UTF8_CHARSET);
     final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 

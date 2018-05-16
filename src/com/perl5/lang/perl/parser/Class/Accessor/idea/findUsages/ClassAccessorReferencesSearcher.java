@@ -33,7 +33,7 @@ public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiRefere
   }
 
   @Override
-  public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
+  public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     PsiElement element = queryParameters.getElementToSearch();
     if (element instanceof PerlClassAccessorMethod) {
       queryParameters.getOptimizer()

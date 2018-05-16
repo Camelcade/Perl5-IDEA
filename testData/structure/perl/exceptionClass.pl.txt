@@ -1,49 +1,49 @@
 exceptionClass.pl in /src; /perl5classic.png -> Perl5 at 0 in exceptionClass.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception1 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 25 in exceptionClass.pl
+  Exception1 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 25 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception2 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 43 in exceptionClass.pl
+  Exception2 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 43 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception4 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception4; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 123 in exceptionClass.pl
+  Exception4 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception4; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 123 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception5 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 142 in exceptionClass.pl
+  Exception5 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 142 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception6 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 233 in exceptionClass.pl
+  Exception6 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 233 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception7 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 250 in exceptionClass.pl
+  Exception7 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 250 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception8 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception8; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1018 in exceptionClass.pl
+  Exception8 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception8; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1018 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception9 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception9; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1062 in exceptionClass.pl
+  Exception9 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception9; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1062 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception91 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception91; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1106 in exceptionClass.pl
+  Exception91 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception91; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1106 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception10 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception10; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1155 in exceptionClass.pl
+  Exception10 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception10; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1155 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception101 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception101; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1200 in exceptionClass.pl
+  Exception101 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception101; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1200 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception11 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1250 in exceptionClass.pl
+  Exception11 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1250 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception12 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception12; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1296 in exceptionClass.pl
+  Exception12 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception12; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1296 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception121 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception121; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1343 in exceptionClass.pl
+  Exception121 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception121; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1343 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception13 in exceptionClass.pl; /exceptionClass.png; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception13; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1395 in exceptionClass.pl
+  Exception13 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception13; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1395 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Fields in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 305 in exceptionClass.pl

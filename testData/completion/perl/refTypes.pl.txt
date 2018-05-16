@@ -8,10 +8,10 @@ Lookups: GLOB; Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: HASH; Text: HASH; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: IO; Text: IO; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: LVALUE; Text: LVALUE; Tail: null; Type: null; Icon: null; Type Icon: null
-Lookups: Library::Exception2; Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
-Lookups: Library::Exception; Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
-Lookups: LibraryException3; Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
-Lookups: LibraryException; Text: LibraryException; Tail: null; Type: null; Icon: /exceptionClass.png; Type Icon: null
+Lookups: Library::Exception2; Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Lookups: Library::Exception; Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Lookups: LibraryException3; Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Lookups: LibraryException; Text: LibraryException; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 Lookups: Mojolicious::Controller; Text: Mojolicious::Controller; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: Mojolicious::Plugin::DefaultHelpers; Text: Mojolicious::Plugin::DefaultHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: Mojolicious::Plugin::TagHelpers; Text: Mojolicious::Plugin::TagHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

@@ -78,3 +78,4 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
 
     definition_method_deprecated() in plainPerl.pl; /method_gutter_icon.png; DEPRECATED_ATTRIBUTES -> PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Deprecated::Bar::definition_method_deprecated at 610 in plainPerl.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
+

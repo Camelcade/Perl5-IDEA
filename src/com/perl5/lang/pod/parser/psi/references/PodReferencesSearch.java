@@ -34,7 +34,7 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
   }
 
   @Override
-  public void processQuery(@NotNull final ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<PsiReference> consumer) {
+  public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     final PsiElement element = queryParameters.getElementToSearch();
     if (element instanceof PodTitledSection) {
       final String textTitle = ((PodTitledSection)element).getTitleText();

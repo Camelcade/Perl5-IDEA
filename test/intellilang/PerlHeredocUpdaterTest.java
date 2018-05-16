@@ -85,12 +85,7 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
   }
 
   private void doTest(@NotNull String textToUpdate) {
-    new WriteCommandAction.Simple(getProject()) {
-      @Override
-      protected void run() {
-        getHeredocUnderCursor().updateText(textToUpdate);
-      }
-    }.execute().throwException();
+    WriteCommandAction.writeCommandAction(getProject()).run(() -> getHeredocUnderCursor().updateText(textToUpdate));
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
   }
 }

@@ -114,7 +114,8 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     return new PerlFileImpl(viewProvider);
   }
 
-  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+  @Override
+  public SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
     return SpaceRequirements.MAY;
   }
 

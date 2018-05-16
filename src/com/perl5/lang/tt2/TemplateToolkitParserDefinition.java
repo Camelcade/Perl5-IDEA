@@ -105,7 +105,7 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
   }
 
   @Override
-  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+  public SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
     return null;
   }
 }

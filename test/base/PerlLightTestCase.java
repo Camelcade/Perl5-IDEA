@@ -479,9 +479,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
-    new WriteCommandAction.Simple(getProject()) {
-      @Override
-      protected void run() {
+    WriteCommandAction.writeCommandAction(getProject()).run(() -> {
         PsiFile file = myFixture.getFile();
         if (file.getViewProvider() instanceof InjectedFileViewProvider) {
           //noinspection ConstantConditions
@@ -489,8 +487,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
         }
         TextRange rangeToUse = file.getTextRange();
         CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
-      }
-    }.execute();
+    });
 
     String resultFilePath = getTestDataPath() + "/" + resultFileName + resultSuffix + ".txt";
     UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());

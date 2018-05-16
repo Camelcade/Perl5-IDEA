@@ -59,7 +59,7 @@ apply plugin: 'org.jetbrains.intellij'
 intellij {
     version "${platformVersion}${platformBranch}${platformBuild}"
     downloadSources Boolean.valueOf(downloadIdeaSource)
-    intellij.plugins = ['IntelliLang', 'PsiViewer:3.28.93', 'coverage']
+    intellij.plugins = [ 'PsiViewer:182.2371.1', 'IntelliLang', 'coverage']
     if (project.hasProperty('idea_sandbox')) {
         sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
     } else {

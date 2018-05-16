@@ -57,7 +57,7 @@ public class Perl5SettingsConfigurable extends ModuleAwareProjectConfigurable<Un
   @Nullable
   @Override
   protected Icon getProjectConfigurableItemIcon() {
-    return AllIcons.General.ProjectSettings;
+    return AllIcons.General.GearPlain;
   }
 
   public static void open(@NotNull PsiElement element) {

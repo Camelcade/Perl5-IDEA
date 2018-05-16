@@ -139,6 +139,16 @@ public class PerlLoopControlInspection extends PerlInspection {
           return;
         }
 
+        PsiElement methodElement = o.getParent();
+        if (!(methodElement instanceof PsiPerlMethod)) {
+          return;
+        }
+
+        PsiElement callExpr = methodElement.getParent();
+        if (!(callExpr instanceof PsiPerlSubCallExpr)) {
+          return;
+        }
+
         PsiElement position = o;
         boolean isInsideTheLoop = false;
         while (true) {
@@ -169,7 +179,7 @@ public class PerlLoopControlInspection extends PerlInspection {
 
         if (isInsideTheLoop) {
           holder.registerProblem(
-            o,
+            callExpr,
             PerlBundle.message("perl.inspection.loop.control.break.instead.of.last"),
             new ReplaceWithExpressionQuickFix("last"));
         }

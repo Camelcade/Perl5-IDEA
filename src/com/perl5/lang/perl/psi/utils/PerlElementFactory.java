@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -47,14 +48,14 @@ public class PerlElementFactory {
   }
 
 
-  public static PsiPerlDerefExpr createMethodCall(Project project, String packageName, String subName) {
-    assert packageName != null;
-    assert subName != null;
-
-    PerlFileImpl file = createFile(project, String.format("%s->%s;", packageName, subName));
-    PsiPerlDerefExpr def = PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class);
-    assert def != null;
-    return def;
+  @Contract(pure = true)
+  @NotNull
+  public static PsiPerlDerefExpr createMethodCall(@NotNull Project project,
+                                                  @NotNull String packageName,
+                                                  @NotNull String subName,
+                                                  @NotNull String arguments) {
+    PerlFileImpl file = createFile(project, String.format("%s->%s%s;", packageName, subName, arguments));
+    return Objects.requireNonNull(PsiTreeUtil.findChildOfType(file, PsiPerlDerefExpr.class));
   }
 
   public static PerlUseStatement createUseStatement(Project project, String packageName) {

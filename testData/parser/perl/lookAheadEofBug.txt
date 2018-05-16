@@ -2,5 +2,5 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
       PsiElement(Perl5: my)('my')
-      PsiErrorElement:<variable declaration element>, Perl5: (, Perl5: __PACKAGE__, Perl5: package::name, Perl5: sub or Perl5: undef expected, unexpected end of file
+      PsiErrorElement:<variable declaration element>, Perl5: (, Perl5: __PACKAGE__, Perl5: package::name, Perl5: sub or Perl5: undef expected
         <empty list>
