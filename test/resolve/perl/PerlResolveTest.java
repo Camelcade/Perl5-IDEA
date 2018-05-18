@@ -119,7 +119,7 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTest();
   }
 
-  public void testSequentionalHereDocs() {
+  public void testSequentialHereDocs() {
     doTest();
   }
 
@@ -127,7 +127,7 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTest();
   }
 
-  public void testIndentableHeredocSequentional() {
+  public void testIndentableHeredocSequential() {
     doTest();
   }
 

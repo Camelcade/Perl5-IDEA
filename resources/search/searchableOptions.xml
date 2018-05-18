@@ -5,14 +5,14 @@
     <option name="anonymous" hit="Anonymous hashes"/>
     <option name="arrays" hit="Anonymous arrays"/>
     <option name="block" hit="Block of constants"/>
-    <option name="comments" hit="Sequentional line comments"/>
+    <option name="comments" hit="Sequential line comments"/>
     <option name="constants" hit="Block of constants"/>
     <option name="contents" hit="QW contents"/>
     <option name="etc" hit="Template parts (Mojolicious, Mason, etc.)"/>
     <option name="expressions" hit="Parenthesised expressions"/>
     <option name="hashes" hit="Anonymous hashes"/>
     <option name="here-docs" hit="Here-docs"/>
-    <option name="line" hit="Sequentional line comments"/>
+    <option name="line" hit="Sequential line comments"/>
     <option name="mason" hit="Template parts (Mojolicious, Mason, etc.)"/>
     <option name="mojolicious" hit="Template parts (Mojolicious, Mason, etc.)"/>
     <option name="of" hit="Block of constants"/>
@@ -20,7 +20,7 @@
     <option name="parts" hit="Template parts (Mojolicious, Mason, etc.)"/>
     <option name="perl5" hit="Perl5"/>
     <option name="qw" hit="QW contents"/>
-    <option name="sequentional" hit="Sequentional line comments"/>
+    <option name="sequential" hit="Sequential line comments"/>
     <option name="template" hit="Template parts (Mojolicious, Mason, etc.)"/>
   </configurable>
   <configurable id="editor.preferences.smartKeys" configurable_name="Smart Keys">

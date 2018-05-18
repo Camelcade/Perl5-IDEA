@@ -33,9 +33,9 @@ public class PerlQuoteWithoutPrefixTest extends PerlTypingTestCase {
 
   public void testRegexInside() {doTest("$a =~ /<caret>/", "/", "$a =~ //<caret>");}
 
-  public void testSequentionalAdd() {doTest("say <caret>; say 'some';", "'", "say '<caret>'; say 'some';");}
+  public void testSequentialAdd() {doTest("say <caret>; say 'some';", "'", "say '<caret>'; say 'some';");}
 
-  public void testSequentionalRemove() {doTestBS("say '<caret>'; say 'some';", "say <caret>; say 'some';");}
+  public void testSequentialRemove() {doTestBS("say '<caret>'; say 'some';", "say <caret>; say 'some';");}
 
   public void testSingleQuote() {
     doTest("say <caret>;", "'", "say '<caret>';");

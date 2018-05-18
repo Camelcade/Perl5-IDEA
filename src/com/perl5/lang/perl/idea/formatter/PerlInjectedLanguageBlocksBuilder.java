@@ -78,7 +78,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     Entry lastEntry = myEntries.isEmpty() ? null : myEntries.get(myEntries.size() - 1);
     if (lastEntry != null && lastEntry.myHostRange.getEndOffset() > shredRange.getStartOffset()) {
       throw new IllegalArgumentException(
-        "Non-sequentional range added. Last range: " + lastEntry.myHostRange + " new entry " + shredRange);
+        "Non-sequential range added. Last range: " + lastEntry.myHostRange + " new entry " + shredRange);
     }
     // fixme take prefix and suffix lengths into account
     myEntries.add(new Entry(shredRange, TextRange.from(injectedLength, shredRange.getLength())));
