@@ -138,7 +138,7 @@ public class PerlEnterHeredocClosingHandler extends EnterHandlerDelegateAdapter 
         {
           addOffset = currentOffset;
         }
-        else // sequentional
+        else // sequential
         {
           PerlHeredocOpener lastOpener = lastOpenerPointer.getElement();
           if (lastOpener == null) {

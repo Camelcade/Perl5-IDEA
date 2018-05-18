@@ -221,7 +221,7 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
-  public void testIndentableHeredocSequentional() {
+  public void testIndentableHeredocSequential() {
     doTest();
   }
 
