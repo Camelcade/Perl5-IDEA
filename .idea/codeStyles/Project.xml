@@ -53,7 +53,6 @@
       <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
       <option name="FOR_STATEMENT_WRAP" value="5" />
       <option name="ASSIGNMENT_WRAP" value="1" />
-      <option name="PARENT_SETTINGS_INSTALLED" value="true" />
     </codeStyleSettings>
     <codeStyleSettings language="ECMA Script Level 4">
       <option name="ELSE_ON_NEW_LINE" value="true" />
@@ -78,7 +77,6 @@
       <option name="DOWHILE_BRACE_FORCE" value="1" />
       <option name="WHILE_BRACE_FORCE" value="1" />
       <option name="FOR_BRACE_FORCE" value="1" />
-      <option name="PARENT_SETTINGS_INSTALLED" value="true" />
     </codeStyleSettings>
     <codeStyleSettings language="Groovy">
       <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="0" />
