@@ -28,10 +28,18 @@ public class HTMLMasonArgsDefVariablesResolveTest extends HTMLMasonBlockVariable
   }
 
   @Override
-  public void doTestResolve() {
+  protected void setUp() throws Exception {
+    super.setUp();
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
     settings.globalVariables.add(new VariableDescription("$product", "Foo::Bar"));
     settings.settingsUpdated();
-    super.doTestResolve();
+  }
+
+  @Override
+  protected void tearDown() throws Exception {
+    HTMLMasonSettings settings = HTMLMasonSettings.getInstance(getProject());
+    settings.globalVariables.remove(new VariableDescription("$product", "Foo::Bar"));
+    settings.settingsUpdated();
+    super.tearDown();
   }
 }

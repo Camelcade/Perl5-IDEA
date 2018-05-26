@@ -19,7 +19,7 @@ package resolve.htmlmason;
 /**
  * Created by hurricup on 14.03.2016.
  */
-public class HTMLMasonImplicitVariablesResolveTest extends HTMLMasonBlockVariablesResolveTestCase {
+public class HTMLMasonImplicitVariablesResolveTest extends HTMLMasonArgsDefVariablesResolveTest {
   protected String getTestDataPath() {
     return "testData/resolve/htmlmason/implicit";
   }
