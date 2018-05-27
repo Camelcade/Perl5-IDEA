@@ -21,6 +21,7 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.PlainPrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
@@ -34,13 +35,17 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 24.07.2015.
  */
 public class PerlPackageSubCompletionProvider extends CompletionProvider<CompletionParameters> {
+  private static final Logger LOG = Logger.getInstance(PerlPackageSubCompletionProvider.class);
+
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 ProcessingContext context,
                                 @NotNull CompletionResultSet result) {
     PsiElement method = parameters.getPosition().getParent();
-    assert method instanceof PsiPerlMethod : "Expected PsiPerlMethod, got " + method.getClass();
-
+    if (!(method instanceof PsiPerlMethod)) {
+      LOG.warn("Expected PsiPerlMethod, got psiElement=[" + method.getClass() + "]; text=[" + method.getText() + "]");
+      return;
+    }
     String explicitNamespace = ((PsiPerlMethod)method).getExplicitPackageName();
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
     String newPrefixMathcer =
