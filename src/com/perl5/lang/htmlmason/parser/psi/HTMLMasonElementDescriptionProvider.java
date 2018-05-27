@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason.parser.psi;
 import com.intellij.psi.ElementDescriptionLocation;
 import com.intellij.psi.ElementDescriptionProvider;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
@@ -40,7 +41,7 @@ public class HTMLMasonElementDescriptionProvider implements ElementDescriptionPr
       {
         return ((HTMLMasonFileImpl)element.getContainingFile()).getAbsoluteComponentPath() +
                ":" +
-               ((HTMLMasonMethodDefinition)element).getName();
+               ((PsiNamedElement)element).getName();
       }
       else if (location == UsageViewNodeTextLocation.INSTANCE) // name inside type tree node
       {
