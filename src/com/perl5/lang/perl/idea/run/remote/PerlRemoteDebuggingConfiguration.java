@@ -28,7 +28,6 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import org.jdom.Element;
@@ -107,9 +106,6 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
   }
 
   public void setRemoteProjectRoot(String remoteWorkingDirectory) {
-    while (StringUtil.endsWith(remoteWorkingDirectory, "/")) {
-      remoteWorkingDirectory = remoteWorkingDirectory.substring(0, remoteWorkingDirectory.length() - 1);
-    }
     this.remoteProjectRoot = remoteWorkingDirectory;
   }
 

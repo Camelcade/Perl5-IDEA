@@ -23,27 +23,32 @@ import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import org.jetbrains.annotations.NotNull;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by hurricup on 09.05.2016.
  */
 public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
-  private final PerlRemoteDebuggingConfiguration myDebuggingConfiguration;
+  @NotNull
   private final Project myProject;
-  private final String myLocalProjectRoot;
-  private final String myRemoteProjectRoot;
+  @NotNull
+  private final Path myLocalProjectPath;
+  @NotNull
+  private final Path myRemoteProjectPath;
 
   public PerlRemoteDebuggingRunProfileState(ExecutionEnvironment environment) {
     super(environment);
-    myDebuggingConfiguration = (PerlRemoteDebuggingConfiguration)environment.getRunProfile();
+    PerlRemoteDebuggingConfiguration debuggingConfiguration = (PerlRemoteDebuggingConfiguration)environment.getRunProfile();
     myProject = environment.getProject();
-    myLocalProjectRoot = myProject.getBaseDir().getCanonicalPath();
-    myRemoteProjectRoot = myDebuggingConfiguration.getRemoteProjectRoot();
-    //		System.err.println("Local project root: " + myLocalProjectRoot);
-    //		System.err.println("Remote project root: " + myRemoteProjectRoot);
+    String projectPath = myProject.getBaseDir().getCanonicalPath();
+    myLocalProjectPath = Paths.get(projectPath == null ? "" : projectPath);
+    myRemoteProjectPath = Paths.get(debuggingConfiguration.getRemoteProjectRoot());
   }
 
   @NotNull
@@ -54,22 +59,28 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
   }
 
   @Override
-  public String mapPathToRemote(String localPath) {
-    if (localPath.startsWith(myLocalProjectRoot)) {
-      return localPath.replace(myLocalProjectRoot, myRemoteProjectRoot);
-      //			System.err.println("Mapped to remote: " + localPath + " => " + remotePath);
-      //			return remotePath;
+  public String mapPathToRemote(String localPathName) {
+    Path localPath = Paths.get(localPathName);
+    if (localPath.startsWith(myLocalProjectPath)) {
+      return FileUtil.toSystemIndependentName(
+        myRemoteProjectPath.resolve(myLocalProjectPath.relativize(localPath)).toString()
+      );
     }
-    return super.mapPathToRemote(localPath);
+    else {
+      return localPathName;
+    }
   }
 
   @Override
-  public String mapPathToLocal(String remotePath) {
-    if (remotePath.startsWith(myRemoteProjectRoot)) {
-      return remotePath.replace(myRemoteProjectRoot, myLocalProjectRoot);
-      //			System.err.println("Mapped to local: " + remotePath + " => " + localPath);
-      //			return localPath;
+  public String mapPathToLocal(String remotePathName) {
+    Path remotePath = Paths.get(remotePathName);
+    if (remotePath.startsWith(myRemoteProjectPath)) {
+      return FileUtil.toSystemDependentName(
+        myLocalProjectPath.resolve(myRemoteProjectPath.relativize(remotePath)).toString()
+      );
     }
-    return super.mapPathToLocal(remotePath);
+    else {
+      return remotePathName;
+    }
   }
 }
