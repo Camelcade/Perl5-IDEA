@@ -19,6 +19,7 @@ package com.perl5.lang.perl.fileTypes;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
@@ -31,6 +32,8 @@ import java.util.function.Function;
 
 
 public class PerlFileTypeService implements Disposable {
+  private static final Logger LOG = Logger.getInstance(PerlFileTypeService.class);
+
   private final LightDirectoryIndex<Function<VirtualFile, FileType>> myDirectoryIndex = new LightDirectoryIndex<>(
     this,
     virtualFile -> null,
@@ -40,10 +43,12 @@ public class PerlFileTypeService implements Disposable {
           for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensions()) {
             fileTypeProvider.addRoots(project, (root, function) -> {
               if (!root.isValid()) {
-                throw new IllegalArgumentException("Attempt to create a descriptor for invalid file");
+                LOG.warn("Attempt to create a descriptor for invalid file for " + root);
+                return;
               }
               if (!root.isDirectory()) {
-                throw new IllegalArgumentException("Only directories are accepted");
+                LOG.warn("Attempt to create root for non-directory: " + root);
+                return;
               }
               directoryIndex.putInfo(root, function);
             });
