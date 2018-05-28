@@ -22,6 +22,7 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
+import com.intellij.ui.DocumentAdapter;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.PerlConfigurationEditorBase;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
@@ -30,8 +31,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.text.NumberFormat;
 
 /**
@@ -42,6 +46,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
   private ComboBox myPerlRole;
   private JTextField myDebuggingHost;
   private JFormattedTextField myDebuggingPort;
+  private JTextField myGeneratedCommandLine;
 
   public PerlRemoteDebuggingConfigurationEditor(Project project) {
     super(project);
@@ -53,6 +58,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
     myPerlRole.setSelectedItem(perlConfiguration.getPerlRole());
     myDebuggingHost.setText(perlConfiguration.getDebugHost());
     myDebuggingPort.setText(String.valueOf(perlConfiguration.getDebugPort()));
+    updateCommandLine();
     super.resetEditorFrom(perlConfiguration);
   }
 
@@ -97,12 +103,21 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
         });
       }
     };
+    myPerlRole.addActionListener(e -> updateCommandLine());
 
     LabeledComponent<?> perlRole = LabeledComponent.create(myPerlRole, PerlBundle.message("perl.run.option.debugger.connection.mode"));
     perlRole.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(perlRole);
 
+    DocumentAdapter documentAdapter = new DocumentAdapter() {
+      @Override
+      protected void textChanged(DocumentEvent e) {
+        updateCommandLine();
+      }
+    };
+
     myDebuggingHost = new JTextField();
+    myDebuggingHost.getDocument().addDocumentListener(documentAdapter);
     LabeledComponent<JTextField> debuggingHost =
       LabeledComponent.create(myDebuggingHost, PerlBundle.message("perl.run.option.debugger.host"));
     debuggingHost.setLabelLocation(BorderLayout.WEST);
@@ -118,11 +133,41 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
     formatter.setMinimum(0);
 
     myDebuggingPort = new JFormattedTextField(formatter);
+    myDebuggingPort.getDocument().addDocumentListener(documentAdapter);
     LabeledComponent<JFormattedTextField> debuggingPort =
       LabeledComponent.create(myDebuggingPort, PerlBundle.message("perl.run.option.debugger.port"));
     debuggingPort.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(debuggingPort);
 
+    myGeneratedCommandLine = new JTextField();
+    myGeneratedCommandLine.setEditable(false);
+    myGeneratedCommandLine.setAlignmentX(JTextField.LEFT);
+    myGeneratedCommandLine.addFocusListener(new FocusAdapter() {
+      @Override
+      public void focusGained(FocusEvent e) {
+        myGeneratedCommandLine.selectAll();
+      }
+    });
+    LabeledComponent<JTextField> labeledComponent =
+      LabeledComponent.create(myGeneratedCommandLine, PerlBundle.message("perl.run.option.debugger.command.line"));
+    labeledComponent.setLabelLocation(BorderLayout.WEST);
+    debugPanel.add(labeledComponent);
+
     return debugPanel;
+  }
+
+  /**
+   * Generates and sets command line according to selected settings
+   */
+  private void updateCommandLine() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("PERL5_DEBUG_HOST=")
+      .append(myDebuggingHost.getText())
+      .append(" PERL5_DEBUG_PORT=")
+      .append(myDebuggingPort.getText())
+      .append(" PERL5_DEBUG_ROLE=")
+      .append(myPerlRole.getSelectedItem().toString())
+      .append(" perl -d:Camelcadedb ./your_script.pl");
+    myGeneratedCommandLine.setText(sb.toString());
   }
 }
