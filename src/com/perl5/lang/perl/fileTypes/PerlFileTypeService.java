@@ -63,7 +63,11 @@ public class PerlFileTypeService implements Disposable {
 
   }
 
-  private static PerlFileTypeService getInstance() {
+  void reset() {
+    myDirectoryIndex.resetIndex();
+  }
+
+  static PerlFileTypeService getInstance() {
     return ServiceManager.getService(PerlFileTypeService.class);
   }
 

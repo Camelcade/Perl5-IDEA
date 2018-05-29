@@ -169,6 +169,8 @@
     <moduleExtension implementation="com.intellij.openapi.projectRoots.impl.PerlModuleExtension"/>
 
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
+    <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
+
     <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
     <applicationService serviceImplementation="com.intellij.openapi.projectRoots.impl.PerlSdkTable"/>
@@ -572,7 +574,6 @@
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
     <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-    <!--<filePropertyPusher implementation="com.perl5.lang.htmlmason.idea.lang.HTMLMasonFilePropertyPusher"/>-->
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
 
