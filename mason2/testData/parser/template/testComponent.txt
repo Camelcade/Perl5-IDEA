@@ -222,6 +222,8 @@ Mason2 template file
                 PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
                   PsiElement(Perl5: regex)(' ')
                 PsiElement(Perl5: r/)('/')
+                PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+                  <empty list>
                 PsiElement(Perl5: r})('/')
                 PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
                   PsiElement(Perl5: /m)('g')

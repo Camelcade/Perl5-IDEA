@@ -395,6 +395,7 @@ limitations under the License.
     extends("string_list")=expr
     mixin("string_list")="com.perl5.lang.perl.psi.mixins.PerlStringListMixin"
 
+    implements("replacement_regex")="com.perl5.lang.perl.psi.PerlReplacementRegex"
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
     mixin("perl_regex")="com.perl5.lang.perl.psi.mixins.Perl5RegexpMixin"
@@ -551,6 +552,8 @@ private real_namespace_content ::= {!'package' file_item} *  {extends=normal_blo
 
 private parse_block ::= LP_CODE_BLOCK | LP_CODE_BLOCK_WITH_TRYCATCH | normal_block
 private normal_block ::= <<block braced_block_content>> // !-> pin disabled for dereference of anon hash; probably this slows us down
+// used in com.perl5.lang.perl.parser.PerlLazyBlockParser
+private braceless_block ::= <<block file_items>>
 meta block ::= <<x1>>
 private braced_block_content ::= '{' block_content '}' {pin=1}
 private block_content ::= file_item * {recoverWhile=recover_statement}
@@ -909,10 +912,10 @@ private regex_replace ::= regex_replace_regex | regex_replace_code
 
 private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [LP_REGEX_REPLACEMENT|perl_regex]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
-private regex_code ::= LP_CODE_BLOCK | <<block file_item+>>
+private regex_code ::= LP_CODE_BLOCK | <<block file_item*>>
 
 perl_regex_modifiers ::= '/m' +
-perl_regex ::= perl_regex_item +
+perl_regex ::= perl_regex_item *
 private perl_regex_item ::=
 	'regex' |
 //	'\w'	|

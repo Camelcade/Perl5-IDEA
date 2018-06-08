@@ -2156,6 +2156,8 @@ Perl5
               PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
                 PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX)
                   PsiElement(Perl5: r{)('/')
+                  PsiPerlPerlRegexImpl(Perl5: PERL_REGEX)
+                    <empty list>
                   PsiElement(Perl5: r})('/')
                 PsiElement(Perl5: ,)(',')
                 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
