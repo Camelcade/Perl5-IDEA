@@ -158,4 +158,22 @@ public class PerlVisitor extends PsiPerlVisitor {
     visitExpr(o);
   }
 
+  @Override
+  public void visitNextExpr(@NotNull PsiPerlNextExpr o) {
+    visitPerlFlowControlExpr(o);
+  }
+
+  public void visitPerlFlowControlExpr(PerlFlowControlExpr o) {
+    visitExpr(o);
+  }
+
+  @Override
+  public void visitLastExpr(@NotNull PsiPerlLastExpr o) {
+    visitPerlFlowControlExpr(o);
+  }
+
+  @Override
+  public void visitRedoExpr(@NotNull PsiPerlRedoExpr o) {
+    visitPerlFlowControlExpr(o);
+  }
 }

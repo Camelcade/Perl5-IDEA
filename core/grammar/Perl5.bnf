@@ -369,6 +369,8 @@ limitations under the License.
     name(".+expr")="expression"
     extends("number_constant")=expr
 
+    implements("next_expr|last_expr|redo_expr")="com.perl5.lang.perl.psi.PerlFlowControlExpr"
+
     implements("trycatch_expr")="com.perl5.lang.perl.psi.PerlTryCatchExpr"
     implements("try_expr")="com.perl5.lang.perl.psi.PerlTryExpr"
     implements("catch_expr|continuation_expr")="com.perl5.lang.perl.psi.PerlCatchExpr"
