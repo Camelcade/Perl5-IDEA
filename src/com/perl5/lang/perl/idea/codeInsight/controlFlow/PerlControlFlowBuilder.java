@@ -177,20 +177,20 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return element;
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public Instruction startConditionalNode(PsiElement condition, boolean result) {
     return startConditionalNode(condition, condition, result);
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public Instruction startIteratorConditionalNode(@Nullable PsiElement iterator) {
     PerlIteratorConditionInstruction instruction = new PerlIteratorConditionInstruction(this, iterator, true);
     addNodeAndCheckPending(instruction);
     return instruction;
   }
 
-  // fixme shouldn't we move subs elements in the beginning of the subgraph?
   // fixme given & friends
   // fixme next/last/redo
-  // fixme regexps with evaluation
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
 

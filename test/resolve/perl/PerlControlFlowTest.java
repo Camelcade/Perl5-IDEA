@@ -24,6 +24,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testRegexpEval() {doTest();}
+
+  public void testRegexpReplace() {doTest();}
+
   public void testHeredocQQSequence() {doTest();}
 
   public void testHeredocQQAfterEmpty() {doTest();}

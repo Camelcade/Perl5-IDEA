@@ -1,0 +1,4 @@
+say 'start';
+$test =~ s/pat${a}tern/say 'body';42;/e;
+say 'end';
+
