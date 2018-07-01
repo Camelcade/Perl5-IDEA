@@ -64,7 +64,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
     myContext = context;
     myIndent = getFirstRealBlock().getIndent();
     mySubBlocks.stream()
-      .filter(block -> block instanceof PerlAstBlock)
+      .filter(block -> block instanceof PerlAstBlock && block.getIndent() != Indent.getAbsoluteNoneIndent())
       .forEach(block -> ((PerlAstBlock)block)
         .setIndent(Indent.getContinuationWithoutFirstIndent()));
   }
