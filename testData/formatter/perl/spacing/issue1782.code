@@ -1,0 +1,8 @@
+{
+superduper(
+test => <<EOM
+  this is a test
+EOM
+, test2 => 42
+)
+}

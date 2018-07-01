@@ -621,4 +621,6 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   public void testIndentedHeredocShiftRightWithBadString() {doFormatTest();}
 
   public void testIndentedHeredocShiftRightWithLeadingNewLine() {doFormatTest();}
+
+  public void testIssue1782() {doFormatTest();}
 }
