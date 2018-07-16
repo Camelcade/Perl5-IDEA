@@ -35,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_QQ;
@@ -173,6 +174,11 @@ public class PerlElementFactory {
     PsiPerlParenthesisedExpr result = PsiTreeUtil.findChildOfType(file, PsiPerlParenthesisedExpr.class);
     assert result != null : "While creating PsiPerlParenthesisedExpr";
     return result;
+  }
+
+  @NotNull
+  public static PsiElement createSpace(@NotNull Project project) {
+    return Objects.requireNonNull(createFile(project, " ").getFirstChild());
   }
 
   public static PerlFileImpl createFile(Project project, String text) {

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.internals;
 
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import gnu.trove.THashMap;
 import org.apache.commons.lang.StringUtils;
@@ -38,8 +39,9 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   public static final PerlVersion V5_22 = new PerlVersion(5.022);
   public static final PerlVersion V5_24 = new PerlVersion(5.024);
   public static final PerlVersion V5_26 = new PerlVersion(5.026);
-  public static final List<PerlVersion> ALL_VERSIONS = Arrays.asList(
-    V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26
+  public static final PerlVersion V5_28 = new PerlVersion(5.028);
+  public static final List<PerlVersion> ALL_VERSIONS = ContainerUtil.immutableList(
+    V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28
   );
 
   public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS = new THashMap<>();
@@ -54,6 +56,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
     PERL_VERSION_DESCRIPTIONS.put(V5_22, PerlBundle.message("perl.version.description.5.22"));
     PERL_VERSION_DESCRIPTIONS.put(V5_24, PerlBundle.message("perl.version.description.5.24"));
     PERL_VERSION_DESCRIPTIONS.put(V5_26, PerlBundle.message("perl.version.description.5.26"));
+    PERL_VERSION_DESCRIPTIONS.put(V5_28, PerlBundle.message("perl.version.description.5.28"));
   }
 
   protected boolean isAlpha;
@@ -70,7 +73,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
     try {
       parseDoubleVersion(version);
     }
-    catch (Exception e) {
+    catch (Exception ignore) {
     }
   }
 
@@ -163,7 +166,7 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   }
 
   public String getStrictDottedVersion() {
-    List<String> result = new ArrayList<>(Arrays.asList(Integer.toString(revision)));
+    List<String> result = new ArrayList<>(Collections.singletonList(Integer.toString(revision)));
 
     if (major > 0 || minor > 0 || !extraChunks.isEmpty()) {
       result.add(Integer.toString(major));
@@ -231,10 +234,10 @@ public class PerlVersion implements PerlVersionRegexps, Comparable<PerlVersion> 
   }
 
   public boolean lesserThan(PerlVersion o) {
-    return compareTo(o) == -1;
+    return compareTo(o) < 0;
   }
 
   public boolean greaterThan(PerlVersion o) {
-    return compareTo(o) == 1;
+    return compareTo(o) > 0;
   }
 }

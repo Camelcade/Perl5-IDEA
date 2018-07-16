@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.util.TextRange;
@@ -31,25 +32,26 @@ import static com.intellij.codeInspection.ProblemHighlightType.*;
  */
 public abstract class PerlInspection extends LocalInspectionTool {
 
-  protected void registerProblem(ProblemsHolder holder, PsiElement element, String message) {
-    doRegisterProblem(holder, element, message, GENERIC_ERROR_OR_WARNING);
+  protected void registerProblem(ProblemsHolder holder, PsiElement element, String message, LocalQuickFix... quickFixes) {
+    doRegisterProblem(holder, element, message, GENERIC_ERROR_OR_WARNING, quickFixes);
   }
 
-  protected void registerError(ProblemsHolder holder, PsiElement element, String message) {
-    doRegisterProblem(holder, element, message, GENERIC_ERROR);
+  protected void registerError(ProblemsHolder holder, PsiElement element, String message, LocalQuickFix... quickFixes) {
+    doRegisterProblem(holder, element, message, GENERIC_ERROR, quickFixes);
   }
 
-  protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message) {
-    doRegisterProblem(holder, element, message, LIKE_DEPRECATED);
+  protected void markDeprecated(ProblemsHolder holder, PsiElement element, String message, LocalQuickFix... quickFixes) {
+    doRegisterProblem(holder, element, message, LIKE_DEPRECATED, quickFixes);
   }
 
   private void doRegisterProblem(@NotNull ProblemsHolder holder,
                                  @NotNull PsiElement element,
                                  @NotNull String message,
-                                 @NotNull ProblemHighlightType highlightType) {
+                                 @NotNull ProblemHighlightType highlightType,
+                                 @NotNull LocalQuickFix... quickFixes) {
     TextRange range = ElementManipulators.getValueTextRange(element);
     if (!range.isEmpty()) {
-      holder.registerProblem(element, message, highlightType, range);
+      holder.registerProblem(element, message, highlightType, range, quickFixes);
     }
   }
 }

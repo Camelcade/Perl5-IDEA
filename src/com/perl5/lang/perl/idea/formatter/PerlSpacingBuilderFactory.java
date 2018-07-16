@@ -55,6 +55,7 @@ public class PerlSpacingBuilderFactory {
       .between(PACKAGE, VERSION_ELEMENT).spaces(1)
       .between(RESERVED_FORMAT, SUB_NAME).spaces(1)
 
+      .between(ATTRIBUTES, LEFT_PAREN).spaces(1)
       .beforeInside(LEFT_PAREN, SUB_DEFINITIONS_TOKENSET).spaceIf(settings.SPACE_BEFORE_METHOD_PARENTHESES)
 
       .betweenInside(LEFT_PAREN, RIGHT_PAREN, SUB_DEFINITION).spaceIf(settings.SPACE_WITHIN_EMPTY_METHOD_PARENTHESES)
