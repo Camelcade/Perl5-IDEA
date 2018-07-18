@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.application.options.ModuleAwareProjectConfigurable;
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.options.UnnamedConfigurable;
@@ -64,6 +65,7 @@ public class Perl5SettingsConfigurable extends ModuleAwareProjectConfigurable<Un
   }
 
   public static void open(@NotNull Project project) {
-    ShowSettingsUtil.getInstance().showSettingsDialog(project, Perl5SettingsConfigurable.class);
+    ApplicationManager.getApplication().invokeLater(
+      () -> ShowSettingsUtil.getInstance().showSettingsDialog(project, Perl5SettingsConfigurable.class));
   }
 }
