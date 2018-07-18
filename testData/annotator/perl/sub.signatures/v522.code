@@ -1,0 +1,17 @@
+sub name($sig) {}                 # with signature
+sub name($sig) :lvalue :method {} # with signature, attributes
+sub name($sdjig) :lvalue :method {} # with signature, attributes
+sub name($sig) :prototype($) {}   # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo($left, $right) :prototype($$) {
+    return $left + $right;
+}
+
+sub name($sig) {}                    # with signature
+sub name :lvalue :method (<error descr="In perl v5.22 sub attributes MUST be after the signature. Current format is valid for 5.20 < version < 5.28">$sig</error>) {}   # with signature, attributes
+sub name :lvalue :method (<error descr="In perl v5.22 sub attributes MUST be after the signature. Current format is valid for 5.20 < version < 5.28">$sdjig</error>) {} # with signature, attributes
+sub name :prototype($) (<error descr="In perl v5.22 sub attributes MUST be after the signature. Current format is valid for 5.20 < version < 5.28">$sig</error>) {}     # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo :prototype($$) (<error descr="In perl v5.22 sub attributes MUST be after the signature. Current format is valid for 5.20 < version < 5.28">$left, $right</error>) {
+    return $left + $right;
+}

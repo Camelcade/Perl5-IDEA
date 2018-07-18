@@ -1,0 +1,17 @@
+sub name($sig) {}                 # with signature
+sub name(<error descr="In perl v5.20 sub attributes MUST be before the signature. Current format is valid for 5.20 or 5.28+">$sig</error>) :lvalue :method {} # with signature, attributes
+sub name(<error descr="In perl v5.20 sub attributes MUST be before the signature. Current format is valid for 5.20 or 5.28+">$sdjig</error>) :lvalue :method {} # with signature, attributes
+sub name(<error descr="In perl v5.20 sub attributes MUST be before the signature. Current format is valid for 5.20 or 5.28+">$sig</error>) :prototype($) {}   # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo(<error descr="In perl v5.20 sub attributes MUST be before the signature. Current format is valid for 5.20 or 5.28+">$left, $right</error>) :prototype($$) {
+    return $left + $right;
+}
+
+sub name($sig) {}                    # with signature
+sub name :lvalue :method ($sig) {}   # with signature, attributes
+sub name :lvalue :method ($sdjig) {} # with signature, attributes
+sub name :prototype($) ($sig) {}     # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo :prototype($$) ($left, $right) {
+    return $left + $right;
+}

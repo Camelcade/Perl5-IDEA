@@ -1,0 +1,17 @@
+sub name(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sig</error>) {}                 # with signature
+sub name(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sig</error>) :lvalue :method {} # with signature, attributes
+sub name(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sdjig</error>) :lvalue :method {} # with signature, attributes
+sub name(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sig</error>) :prototype($) {}   # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$left, $right</error>) :prototype($$) {
+    return $left + $right;
+}
+
+sub name(<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sig</error>) {}                    # with signature
+sub name :lvalue :method (<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sig</error>) {}   # with signature, attributes
+sub name :lvalue :method (<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sdjig</error>) {} # with signature, attributes
+sub name :prototype($) (<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$sig</error>) {}     # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo :prototype($$) (<error descr="Sub signatures available since perl 5.20, current project is configured for v5.16">$left, $right</error>) {
+    return $left + $right;
+}
