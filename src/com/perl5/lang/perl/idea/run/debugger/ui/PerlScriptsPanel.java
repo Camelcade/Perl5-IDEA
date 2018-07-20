@@ -43,6 +43,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by hurricup on 14.05.2016.
@@ -127,7 +128,7 @@ public class PerlScriptsPanel extends JPanel {
     }
   }
 
-  public void bulkChange(final java.util.List<PerlLoadedFileDescriptor> toAdd, final java.util.List<PerlLoadedFileDescriptor> toRemove) {
+  public void bulkChange(final List<PerlLoadedFileDescriptor> toAdd, final List<PerlLoadedFileDescriptor> toRemove) {
     // based on synthetic benchmarks, at 5000 items the performance of bulkChangeNow is definitely
     // better than the naive method; the axact number might still need some tweaking
     if (toAdd.size() + toRemove.size() < 5000) {
@@ -145,9 +146,9 @@ public class PerlScriptsPanel extends JPanel {
 
   // so the naive version is good for "small" added/removed; where the exact value needs to be determined with benchamrks;
   // there is a slightly more detailed analysis in the commit message
-  private void bulkChangeNow(final java.util.List<PerlLoadedFileDescriptor> toAdd,
-                             final java.util.List<PerlLoadedFileDescriptor> toRemove) {
-    java.util.List<PerlLoadedFileDescriptor> currentEntries = myModel.getItems();
+  private void bulkChangeNow(final List<PerlLoadedFileDescriptor> toAdd,
+                             final List<PerlLoadedFileDescriptor> toRemove) {
+    List<PerlLoadedFileDescriptor> currentEntries = myModel.getItems();
     if (toRemove.size() > 0) {
       // first find all indices to be removed, then remove them in reverse order by overwriting with
       // the last element and then removing the last element
