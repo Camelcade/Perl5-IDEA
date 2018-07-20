@@ -117,15 +117,19 @@ public class PerlScriptsPanel extends JPanel {
   }
 
   public void add(final PerlLoadedFileDescriptor value) {
-    if (myModel.indexOf(value) == -1) {
-      ApplicationManager.getApplication().invokeLater(() -> myModel.add(value));
-    }
+    ApplicationManager.getApplication().invokeLater(() -> {
+      if (myModel.indexOf(value) == -1) {
+        myModel.add(value);
+      }
+    });
   }
 
   public void remove(final PerlLoadedFileDescriptor value) {
-    if (myModel.indexOf(value) != -1) {
-      ApplicationManager.getApplication().invokeLater(() -> myModel.remove(value));
-    }
+    ApplicationManager.getApplication().invokeLater(() -> {
+      if (myModel.indexOf(value) != -1) {
+        myModel.remove(value);
+      }
+    });
   }
 
   public void bulkChange(final List<PerlLoadedFileDescriptor> toAdd, final List<PerlLoadedFileDescriptor> toRemove) {
