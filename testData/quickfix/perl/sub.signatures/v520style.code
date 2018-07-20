@@ -1,0 +1,1 @@
+sub name    ($s<caret>ig)  :lvalue {}                 # with signature

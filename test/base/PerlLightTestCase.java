@@ -85,11 +85,13 @@ import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
+import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
@@ -129,6 +131,8 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   private TextAttributes myWriteAttributes;
   private Disposable myDisposable;
   private Perl5CodeInsightSettings myCodeInsightSettings;
+  private PerlSharedSettings mySharedSettings;
+  private PerlLocalSettings myLocalSettings;
 
   public String getFileExtension() {
     return PerlFileTypeScript.EXTENSION_PL;
@@ -146,12 +150,16 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
     setUpLibrary();
     myCodeInsightSettings = Perl5CodeInsightSettings.getInstance().copy();
+    mySharedSettings = XmlSerializerUtil.createCopy(PerlSharedSettings.getInstance(getProject()));
+    myLocalSettings = XmlSerializerUtil.createCopy(PerlLocalSettings.getInstance(getProject()));
   }
 
   @Override
   protected void tearDown() throws Exception {
     try {
       Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
+      PerlSharedSettings.getInstance(getProject()).loadState(mySharedSettings);
+      PerlLocalSettings.getInstance(getProject()).loadState(myLocalSettings);
       ApplicationManager.getApplication()
         .invokeAndWait(() -> PerlProjectManager.getInstance(getProject()).setExternalLibraries(Collections.emptyList()));
       Disposer.dispose(myDisposable);
@@ -606,8 +614,17 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
 
+  protected void doTestAnnotationQuickFix(@NotNull String fileName, @NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
+    initWithFileSmartWithoutErrors(fileName);
+    doTestAnnotationQuickFixWithoutInitialization(inspectionClass, quickFixNamePrefix);
+  }
+
   protected void doTestAnnotationQuickFix(@NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
     initWithFileSmartWithoutErrors();
+    doTestAnnotationQuickFixWithoutInitialization(inspectionClass, quickFixNamePrefix);
+  }
+
+  private void doTestAnnotationQuickFixWithoutInitialization(@NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
     myFixture.enableInspections(inspectionClass);
     //myFixture.checkHighlighting(true, false, false);
     doTestIntentionWithoutLoad(quickFixNamePrefix);

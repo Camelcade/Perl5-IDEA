@@ -1,0 +1,1 @@
+sub     name  ($s<caret>ig)     :lvalue :prototype($)       {}     # with signature, prototype
