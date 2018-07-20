@@ -244,6 +244,10 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
+  public void testSubSignaturesFromVimSupport() {
+    doTest();
+  }
+
   public void testFormat() {
     doTest();
   }
