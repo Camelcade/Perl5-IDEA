@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.project;
 
 import com.intellij.notification.*;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.startup.StartupManager;
@@ -94,7 +95,7 @@ public class Perl5ProjectComponent implements ProjectComponent {
 
     StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
       PerlNamesCache.getInstance(myProject).forceCacheUpdate();
-      FileContentUtil.reparseOpenedFiles();
+      ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles);
     });
 
     // called when project is opened
