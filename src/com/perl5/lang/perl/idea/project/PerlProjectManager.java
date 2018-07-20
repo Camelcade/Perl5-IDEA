@@ -313,7 +313,7 @@ public class PerlProjectManager {
   }
 
   public static boolean isPerlEnabled(@Nullable Project project) {
-    return project != null && getInstance(project).getProjectSdk() != null;
+    return project != null && !project.isDisposed() && getInstance(project).getProjectSdk() != null;
   }
 
   public static boolean isPerlEnabled(@NotNull DataContext dataContext) {
