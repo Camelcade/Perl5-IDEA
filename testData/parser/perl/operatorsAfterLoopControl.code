@@ -1,0 +1,4 @@
+$a = 2 and next and $b = die 'end' for @ARGV;
+$a = 2 and last and $b = die 'end' for @ARGV;
+$a = 2 and redo and $b = die 'end' for @ARGV;
+$a = 2 and goto and $b = die 'end' for @ARGV;

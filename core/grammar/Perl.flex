@@ -783,11 +783,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"when"	 	{ yybegin(YYINITIAL); return RESERVED_WHEN;}
 }
 
-<AFTER_IDENTIFIER_WITH_LABEL>{
-	{IDENTIFIER}	{yybegin(YYINITIAL);return IDENTIFIER;}
-	[^]				{yypushback(1);yybegin(YYINITIAL);}
-}
-
 <YYINITIAL,AFTER_COMMA,AFTER_IDENTIFIER>{
 	":"  	{yybegin(YYINITIAL);return COLON;}
 }
@@ -798,22 +793,25 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"&" 	{yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;}
 
 	"<" 	{yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;}
-	"&&" 	{yybegin(YYINITIAL);return OPERATOR_AND;}
-	"**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
-	"%=" 	{yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;}
-	"*=" 	{yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;}
-	"&=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;}
-	"**=" 	{yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;}
-	"&&="	{yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;}
 
-	// ambiguous with double negation
-	"~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
+        <AFTER_IDENTIFIER_WITH_LABEL>{
+          "&&" 	{yybegin(YYINITIAL);return OPERATOR_AND;}
+          "**"	{yybegin(YYINITIAL);return OPERATOR_POW;}
+          "%=" 	{yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;}
+          "*=" 	{yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;}
+          "&=" 	{yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;}
+          "**=" 	{yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;}
+          "&&="	{yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;}
 
-	// ambiguous with nyi
-	"..." 	{yybegin(YYINITIAL);return OPERATOR_HELLIP;}
+          // ambiguous with double negation
+          "~~"	{yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;}
+
+          // ambiguous with nyi
+          "..." 	{yybegin(YYINITIAL);return OPERATOR_HELLIP;}
+        }
 }
 
-<AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER,LEX_HANDLE,LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT>{
+<AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER,LEX_HANDLE,LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT,AFTER_IDENTIFIER_WITH_LABEL>{
 	"x" / [\d]*	{yybegin(YYINITIAL); return OPERATOR_X;}
 	"and"		{yybegin(YYINITIAL); return OPERATOR_AND_LP;}
 	"or"		{yybegin(YYINITIAL); return OPERATOR_OR_LP;}
@@ -825,6 +823,12 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"eq" / {QUOTE_LIKE_SUFFIX} 		{yybegin(YYINITIAL); return OPERATOR_EQ_STR;}
 	"ne" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_NE_STR;}
 	"cmp" / {QUOTE_LIKE_SUFFIX} 	{yybegin(YYINITIAL); return OPERATOR_CMP_STR;}
+}
+
+
+<AFTER_IDENTIFIER_WITH_LABEL>{
+	{IDENTIFIER}	{yybegin(YYINITIAL);return IDENTIFIER;}
+	[^]				{yypushback(1);yybegin(YYINITIAL);}
 }
 
 <YYINITIAL>{

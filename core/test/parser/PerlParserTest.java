@@ -433,6 +433,8 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
+  public void testOperatorsAfterLoopControl() {doTest();}
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
