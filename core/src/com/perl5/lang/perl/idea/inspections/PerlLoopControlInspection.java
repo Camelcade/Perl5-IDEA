@@ -35,35 +35,12 @@ import com.perl5.lang.perl.psi.references.PerlBuiltInSubsService;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.PerlParserDefinition.FILE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 public class PerlLoopControlInspection extends PerlInspection {
-  private static final TokenSet LOOPS_CONTAINERS = TokenSet.create(
-    BLOCK,
-    FILE,
-    WHILE_COMPOUND,
-    UNTIL_COMPOUND,
-    FOR_COMPOUND,
-    FOREACH_COMPOUND,
-    CONTINUE_BLOCK,
-    NAMESPACE_DEFINITION,
-    TRY_EXPR,
-    CATCH_EXPR
-  );
   private static final TokenSet MAP_GREP = TokenSet.create(
     MAP_EXPR, GREP_EXPR
-  );
-  private static final TokenSet BLOCKS_WITH_RETURN_VALUE = TokenSet.create(
-    SUB_EXPR,
-    DO_EXPR,
-    EVAL_EXPR,
-    SUB_DEFINITION,
-    METHOD_DEFINITION,
-    FUNC_DEFINITION
   );
 
   @NotNull
@@ -79,7 +56,7 @@ public class PerlLoopControlInspection extends PerlInspection {
         boolean isInsideTheLoop = false;
         while (true) {
 
-          PsiElement closestBlockContainer = getClosestBlockContainer(position);
+          PsiElement closestBlockContainer = PerlBlock.getClosestBlockContainer(position);
           if (closestBlockContainer == null) {
             break;
           }
@@ -88,7 +65,7 @@ public class PerlLoopControlInspection extends PerlInspection {
           if (blockContainerElementType == WHEN_COMPOUND || blockContainerElementType == DEFAULT_COMPOUND) {
             return;
           }
-          else if (LOOPS_CONTAINERS.contains(blockContainerElementType)) {
+          else if (PerlBlock.LOOPS_CONTAINERS.contains(blockContainerElementType)) {
             isInsideTheLoop = true;
           }
           else if (blockContainerElementType == NAMED_BLOCK) {
@@ -97,7 +74,7 @@ public class PerlLoopControlInspection extends PerlInspection {
           else if (MAP_GREP.contains(blockContainerElementType)) {
             break;
           }
-          else if (BLOCKS_WITH_RETURN_VALUE.contains(blockContainerElementType)) {
+          else if (PerlBlock.BLOCKS_WITH_RETURN_VALUE.contains(blockContainerElementType)) {
             break;
           }
           else if (blockContainerElementType == GIVEN_COMPOUND) {
@@ -141,13 +118,13 @@ public class PerlLoopControlInspection extends PerlInspection {
         PsiElement position = o;
         boolean isInsideTheLoop = false;
         while (true) {
-          PsiElement closestBlockContainer = getClosestBlockContainer(position);
+          PsiElement closestBlockContainer = PerlBlock.getClosestBlockContainer(position);
           if (closestBlockContainer == null) {
             break;
           }
 
           IElementType blockContainerElementType = PsiUtilCore.getElementType(closestBlockContainer);
-          if (LOOPS_CONTAINERS.contains(blockContainerElementType)) {
+          if (PerlBlock.LOOPS_CONTAINERS.contains(blockContainerElementType)) {
             isInsideTheLoop = true;
           }
           else if (blockContainerElementType == NAMED_BLOCK) {
@@ -156,7 +133,7 @@ public class PerlLoopControlInspection extends PerlInspection {
           else if (MAP_GREP.contains(blockContainerElementType)) {
             break;
           }
-          else if (BLOCKS_WITH_RETURN_VALUE.contains(blockContainerElementType)) {
+          else if (PerlBlock.BLOCKS_WITH_RETURN_VALUE.contains(blockContainerElementType)) {
             break;
           }
           else if (blockContainerElementType == GIVEN_COMPOUND) {
@@ -181,24 +158,13 @@ public class PerlLoopControlInspection extends PerlInspection {
         registerProblem(holder, anchor, PerlBundle.message(key, (Object[])args));
       }
 
-      /**
-       * @return parent psi element for closest parent block element
-       */
-      @Nullable
-      private PsiElement getClosestBlockContainer(@NotNull PsiElement position) {
-        PsiPerlBlock enclosingBlock = PsiTreeUtil.getParentOfType(position, PsiPerlBlock.class);
-        if (enclosingBlock == null) {
-          return null;
-        }
-        PsiElement blockContainer = enclosingBlock.getParent();
-        return LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(blockContainer))
-               ? blockContainer.getParent() : blockContainer;
-      }
 
       /**
        * Traversing blocks up, trying to figure out if last/next/redo are in right place.
        *
        * @param expr last/next/redo expression
+       *
+       * @implNote duplicates logic in {@link PerlFlowControlExpr#getTargetScope()}
        */
       @Override
       public void visitPerlFlowControlExpr(PerlFlowControlExpr expr) {
@@ -220,7 +186,7 @@ public class PerlLoopControlInspection extends PerlInspection {
         boolean isInsideGiven = false;
         boolean isInsideWhenOrDefault = false;
         while (true) {
-          PsiElement closestBlockContainer = getClosestBlockContainer(position);
+          PsiElement closestBlockContainer = PerlBlock.getClosestBlockContainer(position);
 
           if (closestBlockContainer == null) {
             break;
@@ -228,7 +194,7 @@ public class PerlLoopControlInspection extends PerlInspection {
 
           IElementType blockContainerType = PsiUtilCore.getElementType(closestBlockContainer);
 
-          if (LOOPS_CONTAINERS.contains(blockContainerType)) {
+          if (PerlBlock.LOOPS_CONTAINERS.contains(blockContainerType)) {
             return;
           }
           else if (blockContainerType == NAMED_BLOCK) {
@@ -239,7 +205,7 @@ public class PerlLoopControlInspection extends PerlInspection {
             problem(expr, "perl.inspection.loop.control.in.map", keywordText);
             return;
           }
-          else if (BLOCKS_WITH_RETURN_VALUE.contains(blockContainerType)) {
+          else if (PerlBlock.BLOCKS_WITH_RETURN_VALUE.contains(blockContainerType)) {
             problem(expr, "perl.inspection.loop.control.in.do", keywordText);
             return;
           }

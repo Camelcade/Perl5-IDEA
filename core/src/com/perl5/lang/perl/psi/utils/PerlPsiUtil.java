@@ -666,6 +666,15 @@ public class PerlPsiUtil implements PerlElementTypes {
     return isSelfShortcut(derefExpr.getFirstChild());
   }
 
+  @NotNull
+  public static PsiElement getClosest(@NotNull PsiElement existingElement, @Nullable PsiElement possibleElement) {
+    if (possibleElement == null) {
+      return existingElement;
+    }
+    return PsiTreeUtil.isAncestor(existingElement, possibleElement, true) ? possibleElement : existingElement;
+  }
+
+
   static public abstract class HeredocProcessor implements Processor<PsiElement> {
     protected final int lineEndOffset;
 

@@ -17,19 +17,62 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.PerlParserDefinition.FILE;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
 public interface PerlBlock extends PerlLoop, PerlLexicalScope {
+  TokenSet LOOPS_CONTAINERS = TokenSet.create(
+    BLOCK,
+    FILE,
+    WHILE_COMPOUND,
+    UNTIL_COMPOUND,
+    FOR_COMPOUND,
+    FOREACH_COMPOUND,
+    CONTINUE_BLOCK,
+    NAMESPACE_DEFINITION,
+    TRY_EXPR,
+    CATCH_EXPR
+  );
+  TokenSet BLOCKS_WITH_RETURN_VALUE = TokenSet.create(
+    SUB_EXPR,
+    DO_EXPR,
+    EVAL_EXPR,
+    SUB_DEFINITION,
+    METHOD_DEFINITION,
+    FUNC_DEFINITION
+  );
+
   @Nullable
   @Override
   default PsiPerlContinueBlock getContinueBlock() {
     PsiElement potentialBlock = PerlPsiUtil.getNextSignificantSibling(this);
     return potentialBlock instanceof PsiPerlContinueBlock ? (PsiPerlContinueBlock)potentialBlock : null;
+  }
+
+  /**
+   * @return parent psi element for closest parent block element
+   */
+  @Nullable
+  static PsiElement getClosestBlockContainer(@NotNull PsiElement position) {
+    PsiPerlBlock enclosingBlock = PsiTreeUtil.getParentOfType(position, PsiPerlBlock.class);
+    if (enclosingBlock == null) {
+      return null;
+    }
+    PsiElement blockContainer = enclosingBlock.getParent();
+    return LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(blockContainer))
+           ? blockContainer.getParent() : blockContainer;
   }
 }
