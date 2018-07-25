@@ -1,0 +1,7 @@
+say 'hi';
+while($a){
+  say 'block hi';
+  next;
+  say 'block end';
+}
+say 'end';

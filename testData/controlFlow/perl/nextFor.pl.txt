@@ -1,0 +1,19 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+4(5) assign PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+5(6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+6(7) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+7(8,16) element: PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR)
+8(9) element: PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND). Condition: $i < 100:true
+9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+11(7) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+12(13) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+13(14) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+14(15) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+15(7) element: PsiPerlSuffPpExprImpl(Perl5: SUFF_PP_EXPR)
+16(17) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+17(18) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+18() element: null

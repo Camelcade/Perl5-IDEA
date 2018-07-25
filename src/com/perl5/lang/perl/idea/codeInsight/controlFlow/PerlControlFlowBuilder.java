@@ -124,6 +124,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
+  /**
+   * Creates an instruction for {@code element} without processing children. If elementType is in the {@code TRANSPARENT_CONTAINERS}
+   * tokenSet - creates a transparent node.
+   * @return new instruction or null if element is null
+   */
   @Nullable
   @Contract("null -> null; !null -> !null")
   private Instruction startNodeSmart(@Nullable PsiElement element) {
@@ -193,7 +198,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme next/last/redo
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
-
+    private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
 
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null) {
@@ -251,6 +256,22 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitPerlFlowControlExpr(PerlFlowControlExpr o) {
+      super.visitPerlFlowControlExpr(o);
+      PsiElement targetLoop = o.getTargetScope();
+      if (targetLoop != null) {
+        Instruction loopInstruction = myLoopNextInstructions.get(targetLoop);
+        if (loopInstruction != null) {
+          addEdge(prevInstruction, loopInstruction);
+        }
+        else {
+          addPendingEdge(targetLoop, prevInstruction);
+        }
+        flowAbrupted();
+      }
+    }
+
+    @Override
     public void visitGrepExpr(@NotNull PsiPerlGrepExpr o) {
       processSortMapGrep(o);
     }
@@ -288,6 +309,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (condition == null) {
         startTransparentNode(o, "statement");
         Instruction loopInstruction = prevInstruction;
+        myLoopNextInstructions.put(o, loopInstruction);
         acceptSafe(o.getBlock());
         acceptSafe(o.getForMutator());
         addEdge(prevInstruction, loopInstruction);
@@ -296,12 +318,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       else {
         acceptSafe(condition);
         Instruction loopInstruction = prevInstruction;
+        myLoopNextInstructions.put(o, loopInstruction);
         startConditionalNode(o, condition, true);
         acceptSafe(o.getBlock());
         acceptSafe(o.getForMutator());
         addEdge(prevInstruction, loopInstruction);
         prevInstruction = loopInstruction;
       }
+      myLoopNextInstructions.remove(o);
     }
 
     @Override
@@ -310,11 +334,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlConditionExpr sourceElement = o.getConditionExpr();
       acceptSafe(sourceElement);
       Instruction loopInstruction = startIterationNode(o, o.getForeachIterator(), sourceElement);
+      myLoopNextInstructions.put(o, loopInstruction);
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
       acceptSafe(o.getBlock());
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
       prevInstruction = loopInstruction;
+      myLoopNextInstructions.remove(o);
     }
 
     @Override
@@ -330,6 +356,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     private void processWhileUntil(@NotNull PerlWhileUntilCompound o, boolean conditionValue) {
       startNodeSmart(o);
       Instruction startInstruction = prevInstruction;
+      myLoopNextInstructions.put(o, startInstruction);
 
       PsiPerlConditionExpr conditionExpr = o.getConditionExpr();
       acceptSafe(conditionExpr);
@@ -343,6 +370,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       addEdge(prevInstruction, startInstruction);
       prevInstruction = conditionInstruction;
+      myLoopNextInstructions.remove(o);
     }
 
     @Override
@@ -505,7 +533,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       if (statementExpression instanceof PsiPerlDoExpr &&
           (modifier instanceof PsiPerlWhileStatementModifier || modifier instanceof PsiPerlUntilStatementModifier)
-        ) {
+      ) {
         startTransparentNode(o, "statement");
         Instruction loopInstruction = prevInstruction;
         acceptSafe(statementExpression);
@@ -517,6 +545,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       else {
         acceptSafe(modifier);
         Instruction modifierLoopConditionInstruction = myModifierLoopConditionInstruction;
+        if (modifierLoopConditionInstruction != null) {
+          myLoopNextInstructions.put(o, modifierLoopConditionInstruction);
+        }
         acceptSafe(statementExpression);
         if (modifierLoopConditionInstruction != null) {
           addEdge(prevInstruction, modifierLoopConditionInstruction);
@@ -524,6 +555,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         }
       }
       myModifierLoopConditionInstruction = null;
+      myLoopNextInstructions.remove(o);
     }
 
     @Override

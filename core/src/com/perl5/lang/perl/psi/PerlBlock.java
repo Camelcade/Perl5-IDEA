@@ -20,9 +20,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,16 +65,31 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
   }
 
   /**
+   * @return closest parent PerlBlock element if any
+   */
+  @Contract("null -> null")
+  @Nullable
+  static PerlBlock getClosestParentFor(@Nullable PsiElement element){
+    return PsiTreeUtil.getParentOfType(element, PerlBlock.class);
+  }
+
+  /**
+   * @return container of this block, omitting lazy-parsable part if any
+   */
+  @NotNull
+  default PsiElement getContainer(){
+    PsiElement container = getParent();
+    return LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(container))
+           ? container.getParent() : container;
+
+  }
+
+  /**
    * @return parent psi element for closest parent block element
    */
+  @Contract("null -> null")
   @Nullable
-  static PsiElement getClosestBlockContainer(@NotNull PsiElement position) {
-    PsiPerlBlock enclosingBlock = PsiTreeUtil.getParentOfType(position, PsiPerlBlock.class);
-    if (enclosingBlock == null) {
-      return null;
-    }
-    PsiElement blockContainer = enclosingBlock.getParent();
-    return LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(blockContainer))
-           ? blockContainer.getParent() : blockContainer;
+  static PsiElement getClosestBlockContainer(@Nullable PsiElement position) {
+    return ObjectUtils.doIfNotNull(getClosestParentFor(position), PerlBlock::getContainer);
   }
 }

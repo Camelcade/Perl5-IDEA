@@ -1,0 +1,7 @@
+say 'start';
+{
+    say 'hi';
+    next;
+    say 'bye';
+}
+say 'end';

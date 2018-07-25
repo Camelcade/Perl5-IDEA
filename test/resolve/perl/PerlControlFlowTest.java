@@ -24,6 +24,18 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testNextForeach() {doTest();}
+
+  public void testNextFor() {doTest();}
+
+  public void testNextWhile() {doTest();}
+
+  public void testNextUntil() {doTest();}
+
+  public void testNextBlock(){doTest();}
+
+  public void testNextForeachModifier() {doTest();}
+
   public void testRegexpEval() {doTest();}
 
   public void testRegexpReplace() {doTest();}
@@ -187,9 +199,11 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   public void testTryCatchCompound() {doTest();}
 
   public void testTry() {doTest();}
+
   public void testTryCatch() {doTest();}
 
   public void testTryCatchCatch() {doTest();}
+
   public void testTryCatchCatchConditional() {doTest();}
 
   public void testTryCatchCatchFinally() {doTest();}

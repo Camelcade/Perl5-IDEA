@@ -62,13 +62,16 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
 
     PsiElement closestBlockContainer = this;
     while (true) {
-      closestBlockContainer = PerlBlock.getClosestBlockContainer(closestBlockContainer);
-
-      if (closestBlockContainer == null) {
+      PerlBlock closestBlock = PerlBlock.getClosestParentFor(closestBlockContainer);
+      if (closestBlock == null) {
         return containingStatement;
       }
 
+      closestBlockContainer = closestBlock.getContainer();
       IElementType blockContainerType = PsiUtilCore.getElementType(closestBlockContainer);
+
+      // we can move out of sort
+      // we are falling through grep and map
 
       if (LOOPS_CONTAINERS.contains(blockContainerType)) {
         if (labelExpr == null) {
