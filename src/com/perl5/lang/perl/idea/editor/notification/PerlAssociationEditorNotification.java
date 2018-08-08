@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.editor.notification;
 
-import com.intellij.ide.plugins.PluginManagerConfigurable;
+import com.intellij.ide.plugins.PluginManagerConfigurableProxy;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
@@ -62,19 +62,19 @@ public class PerlAssociationEditorNotification extends EditorNotifications.Provi
   public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor) {
     PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
     if (perlLocalSettings.DISABLE_ASSOCIATIONS_CHECKING) {
-      return null;
+      //return null;
     }
 
 
     Optional<Map.Entry<FileNameMatcher, FileType>> matchedEntry =
       PERL_FILE_TYPES.entrySet().stream().filter(entry -> entry.getKey().accept(file.getName())).findFirst();
     if (matchedEntry == null || !matchedEntry.isPresent()) {
-      return null;
+      //return null;
     }
 
     FileType expectedType = matchedEntry.get().getValue();
     if (file.getFileType() == expectedType) {
-      return null;
+      //return null;
     }
 
     EditorNotificationPanel panel = new EditorNotificationPanel();
@@ -86,7 +86,7 @@ public class PerlAssociationEditorNotification extends EditorNotifications.Provi
 
     panel.createActionLabel(
       PerlBundle.message("perl.configure.plugins"),
-      () -> ShowSettingsUtil.getInstance().showSettingsDialog(null, PluginManagerConfigurable.class)
+      () -> ShowSettingsUtil.getInstance().editConfigurable((Project)null, new PluginManagerConfigurableProxy())
     );
     panel.createActionLabel(
       PerlBundle.message("perl.configure.associations"),
