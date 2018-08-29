@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.editor.notification;
 
 import com.intellij.ide.plugins.PluginManagerConfigurableProxy;
+import com.intellij.ide.scratch.ScratchUtil;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
@@ -61,20 +62,19 @@ public class PerlAssociationEditorNotification extends EditorNotifications.Provi
   @Override
   public EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file, @NotNull FileEditor fileEditor) {
     PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
-    if (perlLocalSettings.DISABLE_ASSOCIATIONS_CHECKING) {
-      //return null;
+    if (perlLocalSettings.DISABLE_ASSOCIATIONS_CHECKING || ScratchUtil.isScratch(file)) {
+      return null;
     }
-
 
     Optional<Map.Entry<FileNameMatcher, FileType>> matchedEntry =
       PERL_FILE_TYPES.entrySet().stream().filter(entry -> entry.getKey().accept(file.getName())).findFirst();
     if (matchedEntry == null || !matchedEntry.isPresent()) {
-      //return null;
+      return null;
     }
 
     FileType expectedType = matchedEntry.get().getValue();
     if (file.getFileType() == expectedType) {
-      //return null;
+      return null;
     }
 
     EditorNotificationPanel panel = new EditorNotificationPanel();
