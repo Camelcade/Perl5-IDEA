@@ -39,6 +39,7 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
   TokenSet LOOPS_CONTAINERS = TokenSet.create(
     BLOCK,
     FILE,
+    NAMESPACE_CONTENT,
     WHILE_COMPOUND,
     UNTIL_COMPOUND,
     FOR_COMPOUND,

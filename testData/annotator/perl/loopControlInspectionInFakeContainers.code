@@ -1,0 +1,22 @@
+{
+    say 'hi';
+    next;
+
+}
+
+{
+{
+    say 'hi';
+    next;
+
+}
+}
+
+package Blah;
+
+{
+    say 'hi';
+    next;
+
+}
+

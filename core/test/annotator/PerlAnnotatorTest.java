@@ -34,6 +34,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testLoopControlInspection() {doTestLoopControlInspection();}
 
+  public void testLoopControlInspectionInFakeContainers() {doTestLoopControlInspection();}
+
   public void testLoopControlTryCatch() {doTestLoopControlInspection();}
 
   private void doTestLoopControlInspection() {
