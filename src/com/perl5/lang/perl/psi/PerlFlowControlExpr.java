@@ -44,8 +44,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
   }
 
   /**
-   * @return target scope for this control flow: loop, statement with for modifier or invalid block container,
-   * e.g. sub declaration
+   * @return target scope for this control flow: loop, statement with for modifier, invalid block container or null if not found, e.g. statement in file.
    * @implNote partially duplicates logic in {@link PerlLoopControlInspection#buildVisitor(com.intellij.codeInspection.ProblemsHolder, boolean)}
    * but this logic more like real life
    * We also have labels reference resolve logic, which duplicates too. Need to unite.
@@ -55,40 +54,44 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
     PsiPerlLabelExpr labelExpr = getLabelExpr();
     String labelName = labelExpr == null ? null : labelExpr.getText();
 
-    PsiPerlStatementImpl containingStatement = getExpr() != null ? null : PsiTreeUtil.getParentOfType(this, PsiPerlStatementImpl.class);
-    if (containingStatement != null && ObjectUtils.tryCast(containingStatement.getModifier(), PsiPerlForStatementModifier.class) == null) {
-      containingStatement = null;
+    PsiPerlStatementImpl containingStatementWithForModifier =
+      getExpr() != null ? null : PsiTreeUtil.getParentOfType(this, PsiPerlStatementImpl.class);
+    if (containingStatementWithForModifier != null &&
+        ObjectUtils.tryCast(containingStatementWithForModifier.getModifier(), PsiPerlForStatementModifier.class) == null) {
+      containingStatementWithForModifier = null;
     }
 
     PsiElement closestBlockContainer = this;
     while (true) {
       PerlBlock closestBlock = PerlBlock.getClosestParentFor(closestBlockContainer);
       if (closestBlock == null) {
-        return containingStatement;
+        return containingStatementWithForModifier;
       }
 
       closestBlockContainer = closestBlock.getContainer();
       IElementType blockContainerType = PsiUtilCore.getElementType(closestBlockContainer);
 
+
       // we can move out of sort
       // we are falling through grep and map
 
+
       if (LOOPS_CONTAINERS.contains(blockContainerType)) {
         if (labelExpr == null) {
-          return PerlPsiUtil.getClosest(closestBlockContainer, containingStatement);
+          return PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
         }
         else {
           PsiElement potentialLabel = PerlPsiUtil.getPrevSignificantSibling(closestBlockContainer);
           if (potentialLabel instanceof PerlLabelDeclaration &&
               StringUtils.equals(labelName, ((PerlLabelDeclaration)potentialLabel).getName())) {
-            return PerlPsiUtil.getClosest(closestBlockContainer, containingStatement);
+            return PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
           }
         }
       }
       else if (closestBlockContainer instanceof PerlSubDefinition ||
                blockContainerType == NAMED_BLOCK ||
                blockContainerType == SUB_EXPR) {
-        return PerlPsiUtil.getClosest(closestBlockContainer, containingStatement);
+        return PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
       }
     }
   }
