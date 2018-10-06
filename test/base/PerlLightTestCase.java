@@ -806,8 +806,8 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     assertInstanceOf(browser, TypeHierarchyBrowserBase.class);
 
     try {
-      Field myType2TreeMap = HierarchyBrowserBaseEx.class.getDeclaredField("myType2TreeMap");
-      myType2TreeMap.setAccessible(true);
+      Field myType2Sheet = HierarchyBrowserBaseEx.class.getDeclaredField("myType2Sheet");
+      myType2Sheet.setAccessible(true);
       Method createHierarchyTreeStructure =
         browser.getClass().getDeclaredMethod("createHierarchyTreeStructure", String.class, PsiElement.class);
       createHierarchyTreeStructure.setAccessible(true);
@@ -816,7 +816,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       Method getElementFromDescriptor = browser.getClass().getDeclaredMethod("getElementFromDescriptor", HierarchyNodeDescriptor.class);
       getElementFromDescriptor.setAccessible(true);
 
-      Map<String, JTree> subTrees = (Map<String, JTree>)myType2TreeMap.get(browser);
+      Map<String, ?> subTrees = (Map<String, ?>)myType2Sheet.get(browser);
       List<String> treesNames = new ArrayList<>(subTrees.keySet());
       ContainerUtil.sort(treesNames);
       for (String treeName : treesNames) {
