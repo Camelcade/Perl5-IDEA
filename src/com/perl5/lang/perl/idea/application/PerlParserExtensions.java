@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.application;
 
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Created by hurricup on 22.11.2015.
  */
-public class PerlParserExtensions implements ApplicationComponent {
+public class PerlParserExtensions implements BaseComponent {
   public PerlParserExtensions() {
   }
 

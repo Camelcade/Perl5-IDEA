@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.formatter.settings;
 
 import com.intellij.lang.Language;
-import com.intellij.openapi.options.Configurable;
+import com.intellij.psi.codeStyle.CodeStyleConfigurable;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsProvider;
 import com.intellij.psi.codeStyle.CustomCodeStyleSettings;
@@ -32,8 +32,8 @@ public class PerlCodeStyleSettingsProvider extends CodeStyleSettingsProvider {
 
   @NotNull
   @Override
-  public Configurable createSettingsPage(CodeStyleSettings settings, CodeStyleSettings originalSettings) {
-    return new PerlCodeStyleConfigurable(settings, originalSettings);
+  public CodeStyleConfigurable createConfigurable(@NotNull CodeStyleSettings settings, @NotNull CodeStyleSettings modelSettings) {
+    return new PerlCodeStyleConfigurable(settings, modelSettings);
   }
 
   @Nullable

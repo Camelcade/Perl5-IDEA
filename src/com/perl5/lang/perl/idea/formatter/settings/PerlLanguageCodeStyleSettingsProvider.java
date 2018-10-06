@@ -27,7 +27,6 @@ import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.OptionAnchor.AFTER;
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.*;
@@ -321,16 +320,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     return new SmartIndentOptionsEditor();
   }
 
-  @Nullable
   @Override
-  public CommonCodeStyleSettings getDefaultCommonSettings() {
-    CommonCodeStyleSettings defaultSettings = new CommonCodeStyleSettings(getLanguage());
-    CommonCodeStyleSettings.IndentOptions indentOptions = defaultSettings.initIndentOptions();
+  protected void customizeDefaults(@NotNull CommonCodeStyleSettings commonSettings,
+                                   @NotNull CommonCodeStyleSettings.IndentOptions indentOptions) {
     indentOptions.INDENT_SIZE = 4;
     indentOptions.CONTINUATION_INDENT_SIZE = 4;
     indentOptions.TAB_SIZE = 4;
-
-    return defaultSettings;
   }
 
   @NotNull

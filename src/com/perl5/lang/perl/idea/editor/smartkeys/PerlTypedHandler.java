@@ -43,12 +43,12 @@ import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
+import com.perl5.lang.perl.psi.PsiPerlStringList;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_CLOSE_FIRST_ANY;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_OPEN_ANY;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 /**
  * Created by hurricup on 25.07.2015.
@@ -56,6 +56,15 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.QUOTE_OPEN_ANY;
 public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElementTypes {
   // these chars are automatically closed by IDEA and we can't control this
   private static final String HANDLED_BY_BRACE_MATCHER = "{([";
+
+  private static final TokenSet AUTO_OPENED_TOKENS = TokenSet.create(
+    RESERVED_USE,
+    RESERVED_NO,
+    RESERVED_PACKAGE,
+    ANNOTATION_RETURNS_KEY,
+    ANNOTATION_TYPE_KEY
+  );
+
 
   private static final TokenSet DOUBLE_QUOTE_OPENERS = TokenSet.create(
     RESERVED_S,
@@ -213,5 +222,30 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
 
     return Result.CONTINUE;
+  }
+
+  @NotNull
+  @Override
+  public Result checkAutoPopup(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    int currentOffset = editor.getCaretModel().getOffset();
+    if (currentOffset > 0) {
+      currentOffset--;
+    }
+    PsiElement element = file.findElementAt(currentOffset);
+    if (element == null) {
+      return super.checkAutoPopup(typedChar, project, editor, file);
+    }
+    IElementType elementType = PsiUtilCore.getElementType(element);
+
+    if (typedChar == '>' && elementType == OPERATOR_MINUS ||
+        typedChar == ':' && elementType == COLON ||
+        typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) || element.getParent() instanceof PsiPerlStringList) ||
+        typedChar == '{' && SIGILS.contains(elementType) ||
+        StringUtil.containsChar("$@%#", typedChar)) {
+      AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
+      return Result.STOP;
+    }
+
+    return super.checkAutoPopup(typedChar, project, editor, file);
   }
 }

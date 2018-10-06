@@ -22,11 +22,11 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PermanentInstallationID;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.EditorFactory;
-import com.intellij.openapi.editor.event.EditorFactoryAdapter;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
+import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.openapi.util.SystemInfo;
@@ -45,10 +45,10 @@ import static com.perl5.lang.perl.util.PerlPluginUtil.getPlugin;
 /**
  * Created by hurricup on 23.11.2016.
  */
-public class PerlUpdateComponent implements ApplicationComponent, Disposable {
+public class PerlUpdateComponent implements BaseComponent, Disposable {
   private static final String KEY = "perl.last.update.timestamp";
 
-  private final EditorFactoryAdapter myListener = new EditorFactoryAdapter() {
+  private final EditorFactoryListener myListener = new EditorFactoryListener() {
     @Override
     public void editorCreated(@NotNull EditorFactoryEvent event) {
       Document document = event.getEditor().getDocument();

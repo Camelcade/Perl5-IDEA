@@ -17,7 +17,7 @@
 package com.perl5.lang.app;
 
 import com.intellij.ide.ui.search.SearchableOptionsRegistrar;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.util.ResourceUtil;
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Loads UI search words, partial copy-paste of com.intellij.ide.ui.search.SearchableOptionsRegistrarImpl
  */
-public class PerlSearchableOptionsLoader implements ApplicationComponent {
+public class PerlSearchableOptionsLoader implements BaseComponent {
   private static final Logger LOG = Logger.getInstance(PerlSearchableOptionsLoader.class);
 
   @Override
@@ -47,8 +47,7 @@ public class PerlSearchableOptionsLoader implements ApplicationComponent {
         return;
       }
 
-      Document document =
-        JDOMUtil.loadDocument(indexResource);
+      Document document = JDOMUtil.loadDocument(indexResource);
       Element root = document.getRootElement();
       List configurables = root.getChildren("configurable");
       for (final Object o : configurables) {

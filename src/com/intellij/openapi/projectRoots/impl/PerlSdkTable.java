@@ -143,11 +143,13 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     }
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public void addListener(@NotNull Listener listener) {
     myListenerList.add(listener);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public void removeListener(@NotNull Listener listener) {
     myListenerList.remove(listener);

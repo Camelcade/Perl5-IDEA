@@ -123,7 +123,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       .append('\n');
     descBuilder.append("Java Vendor: ").append(SystemInfo.JAVA_VENDOR).append('\n');
     descBuilder.append("Java Version: ").append(SystemInfo.JAVA_VERSION).append('\n');
-    descBuilder.append("Java Arch: ").append(SystemInfo.ARCH_DATA_MODEL).append('\n');
+    descBuilder.append("Java Arch: ").append(SystemInfo.is32Bit ? "32 bit" : "64 bit").append('\n');
     descBuilder.append("Java Runtime Version: ").append(SystemInfo.JAVA_RUNTIME_VERSION).append('\n');
 
     String affectedVersion = null;

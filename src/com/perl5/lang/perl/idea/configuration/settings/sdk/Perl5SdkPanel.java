@@ -68,7 +68,7 @@ public class Perl5SdkPanel {
       @Override
       public void update(AnActionEvent e) {
         Presentation p = e.getPresentation();
-        p.setIcon(AllIcons.General.Gear);
+        p.setIcon(AllIcons.General.GearPlain);
         p.setEnabledAndVisible(true);
       }
 
