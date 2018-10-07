@@ -26,6 +26,8 @@ import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class PerlDocumentationTest extends PerlLightTestCase {
 
   @Override
@@ -40,6 +42,10 @@ public class PerlDocumentationTest extends PerlLightTestCase {
 
   public void testExternalSubUsagePod() {doTest();}
 
+  public void testSubDefinitionCross() {doTest();}
+
+  public void testNamespaceDefinitionInline() {doTest();}
+
   @NotNull
   protected Language getLanguage() {
     return PerlLanguage.INSTANCE;
@@ -53,14 +59,26 @@ public class PerlDocumentationTest extends PerlLightTestCase {
 
   private void doTest() {
     initWithFileSmartWithoutErrors();
-    PsiElement elementAtCaret = getFile().getViewProvider().findElementAt(getEditor().getCaretModel().getOffset(), getLanguage());
-    assertNotNull(elementAtCaret);
-    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(elementAtCaret);
-    assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
-    PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(getEditor(), getFile(), elementAtCaret);
-    assertNotNull(targetElement);
-    String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
-    assertNotNull(generatedDoc);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), generatedDoc);
+    List<Integer> caretsOffsets = getAndRemoveCarets();
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < caretsOffsets.size(); i++) {
+      Integer caretOffset = caretsOffsets.get(i);
+      if (caretsOffsets.size() > 1) {
+        sb.append("---------------------- ").append("Caret #").append(i).append(" at: ").append(caretOffset)
+          .append("-----------------------------\n");
+      }
+      getEditor().getCaretModel().moveToOffset(caretOffset);
+      PsiElement elementAtCaret = getFile().getViewProvider().findElementAt(getEditor().getCaretModel().getOffset(), getLanguage());
+      assertNotNull(elementAtCaret);
+      DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(elementAtCaret);
+      assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
+      PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(getEditor(), getFile(), elementAtCaret);
+      assertNotNull(targetElement);
+      String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
+      assertNotNull(generatedDoc);
+      sb.append(generatedDoc).append("\n");
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 }

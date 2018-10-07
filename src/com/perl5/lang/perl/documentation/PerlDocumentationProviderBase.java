@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -32,6 +33,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.URLDecoder;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
 
 /**
  * Created by hurricup on 03.04.2016.
@@ -49,6 +52,9 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
     }
     else if (element instanceof PodCompositeElement) {
       result = PerlDocUtil.renderElement((PodCompositeElement)element);
+    }
+    else if (PsiUtilCore.getElementType(element) == POD) {
+      result = PerlDocUtil.renderPodElement(element);
     }
     return StringUtil.isEmpty(result) ? super.generateDoc(element, originalElement) : result;
   }

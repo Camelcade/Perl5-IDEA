@@ -17,13 +17,20 @@
 package com.perl5.lang.perl.documentation;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiRecursiveElementVisitor;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiElementProcessor;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
@@ -37,6 +44,7 @@ import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import gnu.trove.THashMap;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -278,92 +286,153 @@ public class PerlDocUtil implements PerlElementTypes {
     tocBuilder.adjustLevelTo(0);
   }
 
+
+  /**
+   * Traversing up from {@code element perl element}, skipping comments and whitespaces, looking for a POD block
+   *
+   * @return POD block or null if not found
+   */
   @Nullable
-  public static String renderElement(PodCompositeElement element) {
-    if (element == null) {
+  @Contract("null -> null")
+  public static PsiElement findPrependingPodBlock(@Nullable PsiElement element) {
+    if (element == null || element instanceof PsiFile || !element.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }
 
-    PodTitledSection podSection = null;
+    while (true) {
+      PsiElement prevElement = element.getPrevSibling();
 
-    if (element instanceof PodTitledSection) {
-      podSection = (PodTitledSection)element;
+      if (prevElement == null) {
+        return findPrependingPodBlock(element.getParent());
+      }
+      element = prevElement;
+
+      IElementType elementType = PsiUtilCore.getElementType(element);
+      if (elementType == POD) {
+        return element;
+      }
+      else if (elementType != TokenType.WHITE_SPACE && elementType != COMMENT_LINE) {
+        return null;
+      }
+    }
+  }
+
+  /**
+   * Attempts to find a named section in the POD element and generates documentation from it.
+   *
+   * @param podElement POD element of the perl file
+   * @return generated documentation or null
+   */
+  @Nullable
+  public static String renderPodElement(@NotNull PsiElement podElement) {
+    PsiFile podPsi = podElement.getContainingFile().getViewProvider().getPsi(PodLanguage.INSTANCE);
+    if (podPsi == null) {
+      return null;
+    }
+    TextRange podElementRange = podElement.getTextRange();
+    Ref<String> resultRef = Ref.create();
+    podPsi.accept(new PsiRecursiveElementVisitor() {
+      private boolean stopProcessing = false;
+
+      @Override
+      public void visitElement(PsiElement element) {
+        if (stopProcessing) {
+          return;
+        }
+        if (!podElementRange.intersects(element.getTextRange())) {
+          return;
+        }
+        else if (element instanceof PodTitledSection && podElementRange.contains(element.getTextRange())) {
+          resultRef.set(renderElement((PodTitledSection)element));
+          stopProcessing = true;
+          return;
+        }
+        super.visitElement(element);
+      }
+    });
+    return resultRef.get();
+  }
+
+
+  @Nullable
+  public static String renderElement(@Nullable PodCompositeElement element) {
+    if (!(element instanceof PodTitledSection)) {
+      return null;
     }
 
-    if (podSection != null) {
-      boolean hasContent = podSection.hasContent();
-      PsiElement run = podSection;
-      PsiElement lastSection = podSection;
+    PodTitledSection podSection = (PodTitledSection)element;
 
-      // detecting first section
-      while (true) {
-        PsiElement prevSibling = run.getPrevSibling();
-        if (prevSibling == null) {
-          break;
-        }
-        if (prevSibling instanceof PodSection && ((PodSection)prevSibling).hasContent()) {
-          break;
-        }
-        if (prevSibling instanceof PodTitledSection) {
-          podSection = (PodTitledSection)prevSibling;
-        }
-        run = prevSibling;
+    boolean hasContent = podSection.hasContent();
+    PsiElement run = podSection;
+    PsiElement lastSection = podSection;
+
+    // detecting first section
+    while (true) {
+      PsiElement prevSibling = run.getPrevSibling();
+      if (prevSibling == null) {
+        break;
       }
-
-      // detecting last section
-      while (!hasContent) {
-        PsiElement nextSibling = lastSection.getNextSibling();
-
-        if (nextSibling == null) {
-          break;
-        }
-        hasContent = nextSibling instanceof PodSection && ((PodSection)nextSibling).hasContent();
-
-        lastSection = nextSibling;
+      if (prevSibling instanceof PodSection && ((PodSection)prevSibling).hasContent()) {
+        break;
       }
-
-      StringBuilder builder = new StringBuilder();
-
-      // appending breadcrumbs
-      List<String> breadCrumbs = new ArrayList<>();
-      run = podSection.getParent();
-      while (true) {
-        if (run instanceof PodLinkTarget) {
-          String bcLink = ((PodLinkTarget)run).getPodLink();
-          if (StringUtil.isNotEmpty(bcLink)) {
-            breadCrumbs.add(0, PodRenderUtil.getHTMLPsiLink(bcLink, ((PodLinkTarget)run).getPodLinkText()));
-          }
-        }
-        if (run instanceof PsiFile) {
-          break;
-        }
-        run = run.getParent();
+      if (prevSibling instanceof PodTitledSection) {
+        podSection = (PodTitledSection)prevSibling;
       }
-
-      if (!breadCrumbs.isEmpty()) {
-        builder.append("<p>");
-        builder.append(StringUtil.join(breadCrumbs, ": "));
-        builder.append("</p>");
-      }
-
-      String closeTag = "";
-
-      if (podSection instanceof PodSectionItem) {
-        if (((PodSectionItem)podSection).isBulleted()) {
-          builder.append("<ul style=\"fon-size:200%;\">");
-          closeTag = "</ul>";
-        }
-        else {
-          builder.append("<dl>");
-          closeTag = "</dl>";
-        }
-      }
-
-      builder.append(PodRenderUtil.renderPsiRangeAsHTML(podSection, lastSection));
-      builder.append(closeTag);
-      return builder.toString();
+      run = prevSibling;
     }
-    return null;
+
+    // detecting last section
+    while (!hasContent) {
+      PsiElement nextSibling = lastSection.getNextSibling();
+
+      if (nextSibling == null) {
+        break;
+      }
+      hasContent = nextSibling instanceof PodSection && ((PodSection)nextSibling).hasContent();
+
+      lastSection = nextSibling;
+    }
+
+    StringBuilder builder = new StringBuilder();
+
+    // appending breadcrumbs
+    List<String> breadCrumbs = new ArrayList<>();
+    run = podSection.getParent();
+    while (true) {
+      if (run instanceof PodLinkTarget) {
+        String bcLink = ((PodLinkTarget)run).getPodLink();
+        if (StringUtil.isNotEmpty(bcLink)) {
+          breadCrumbs.add(0, PodRenderUtil.getHTMLPsiLink(bcLink, ((PodLinkTarget)run).getPodLinkText()));
+        }
+      }
+      if (run instanceof PsiFile) {
+        break;
+      }
+      run = run.getParent();
+    }
+
+    if (!breadCrumbs.isEmpty()) {
+      builder.append("<p>");
+      builder.append(StringUtil.join(breadCrumbs, ": "));
+      builder.append("</p>");
+    }
+
+    String closeTag = "";
+
+    if (podSection instanceof PodSectionItem) {
+      if (((PodSectionItem)podSection).isBulleted()) {
+        builder.append("<ul style=\"fon-size:200%;\">");
+        closeTag = "</ul>";
+      }
+      else {
+        builder.append("<dl>");
+        closeTag = "</dl>";
+      }
+    }
+
+    builder.append(PodRenderUtil.renderPsiRangeAsHTML(podSection, lastSection));
+    builder.append(closeTag);
+    return builder.toString();
   }
 
   private static class PodTocBuilder implements PsiElementProcessor {

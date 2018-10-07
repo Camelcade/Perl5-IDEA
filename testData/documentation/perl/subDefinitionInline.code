@@ -1,6 +1,8 @@
 package Foo::Bar;
 
-=pod somesub
+=pod
+
+=head1 somesub
 
 Test documentation
 

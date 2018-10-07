@@ -5,8 +5,12 @@ out/
 classes/
 gen/
 *.iml
-.idea/
-!.idea/runConfigurations/
+.idea/*.xml
+.idea/modules/
+.idea/libraries/
+.idea/scopes/
+.idea/inspectionProfiles/
+testData/controlFlow/perl/svg/
 tmp/
 icons/*.psd
 

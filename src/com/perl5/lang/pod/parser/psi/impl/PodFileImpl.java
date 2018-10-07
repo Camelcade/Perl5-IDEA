@@ -20,10 +20,12 @@ import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodFile;
@@ -33,6 +35,7 @@ import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 
@@ -61,14 +64,14 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
     return baseFile == this ? super.getIcon(flags) : baseFile.getIcon(flags);
   }
 
-  // fixme this is debugging method
+  @TestOnly
   public String getAsHTML() {
     StringBuilder builder = new StringBuilder();
     renderElementAsHTML(builder, new PodRenderingContext());
     return builder.toString();
   }
 
-  // fixme this is debugging method
+  @TestOnly
   public String getAsText() {
     StringBuilder builder = new StringBuilder();
     renderElementAsText(builder, new PodRenderingContext());
@@ -113,9 +116,20 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
   @Nullable
   @Override
   public String getPresentableText() {
+    String packageName = getNormalizedPackageName();
+    return packageName == null ? getName() : packageName;
+  }
+
+  /**
+   * Returns POD file normalized package name (with optionally trimmed {@code pods::})
+   *
+   * @return POD package name or null if this is a script file file or smth
+   */
+  @Nullable
+  private String getNormalizedPackageName() {
     String packageName = PodFileUtil.getPackageName(this);
     if (StringUtil.isEmpty(packageName)) {
-      return getName();
+      return null;
     }
     if (StringUtil.startsWith(packageName, "pods::")) {
       return packageName.substring(6);
@@ -142,13 +156,21 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
   @Nullable
   @Override
   public String getPodLink() {
-    return getPresentableText();
+    String normalizedPackageName = getNormalizedPackageName();
+    if (StringUtil.isNotEmpty(normalizedPackageName)) {
+      return normalizedPackageName;
+    }
+    return null;
   }
 
   @Nullable
   @Override
   public String getPodLinkText() {
-    return getPodLink();
+    String normalizedPackageName = getNormalizedPackageName();
+    if (StringUtil.isNotEmpty(normalizedPackageName)) {
+      return normalizedPackageName;
+    }
+    return ObjectUtils.doIfNotNull(getVirtualFile(), VirtualFile::getName);
   }
 
   @Override

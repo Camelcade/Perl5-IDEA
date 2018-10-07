@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.documentation;
 
+import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -37,6 +38,8 @@ import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.intellij.codeInsight.TargetElementUtil.ELEMENT_NAME_ACCEPTED;
+import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 /**
@@ -97,6 +100,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return PerlDocUtil.getPerlOpDoc(contextElement);
     }
     else if (contextElement instanceof PerlSubNameElement) {
+      PsiElement targetElement = TargetElementUtil.findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
+      PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
+      if (podBlock != null) {
+        return podBlock;
+      }
+
       String packageName = ((PerlSubNameElement)contextElement).getPackageName();
       String subName = ((PerlSubNameElement)contextElement).getName();
       if (StringUtil.isNotEmpty(subName)) {
@@ -138,6 +147,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       }
     }
     else if (contextElement instanceof PerlNamespaceElement) {
+      PsiElement targetElement = TargetElementUtil.findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
+      PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
+      if (podBlock != null) {
+        return podBlock;
+      }
+
       String packageName = ((PerlNamespaceElement)contextElement).getCanonicalName();
 
       if (StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE, packageName)) {

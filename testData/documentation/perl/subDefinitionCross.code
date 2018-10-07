@@ -1,0 +1,18 @@
+=head1 su<caret>b1
+
+sub 1 desc
+
+=cut
+
+sub s<caret>ub1{
+    su<caret>b2;
+}
+
+=head1 su<caret>b2
+
+sub 2 desc
+
+=cut
+sub sub<caret>2{
+    su<caret>b1;
+}

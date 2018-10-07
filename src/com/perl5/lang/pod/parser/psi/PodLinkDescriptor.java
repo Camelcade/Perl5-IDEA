@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +29,7 @@ import java.util.regex.Pattern;
  * Builds pod link from the string
  */
 public class PodLinkDescriptor {
+  private static final Logger LOG = Logger.getInstance(PodLinkDescriptor.class);
   private static final Pattern FILE_IDENTIFIER_PATTERN = Pattern.compile("([^\\s/\"'`]+)");
   private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"(.*?)\"|(.*?)");
   private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\s*\\|\\s*)?");
@@ -198,7 +200,7 @@ public class PodLinkDescriptor {
 
       return descriptor;
     }
-    System.err.println("Unable to parse: " + link);
+    LOG.warn("Unable to parse: " + link);
     return null;
   }
 }

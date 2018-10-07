@@ -1,0 +1,19 @@
+=head1 MySuperPod
+
+ns test
+
+=cut
+
+package MySuperPacka<caret>ge;
+
+=head1 my_super_sub
+
+sub test
+
+=cut
+
+sub my_sup<caret>er_sub{};
+
+package main;
+
+MySupe<caret>rPackage::my_sup<caret>er_sub();
