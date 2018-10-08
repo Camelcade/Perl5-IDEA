@@ -72,6 +72,7 @@ intellij {
 }
 
 patchPluginXml{
+    inputs.files(descriptionFile, changesFile)
     pluginDescription(file(descriptionFile).text)
     changeNotes(file(changesFile).text)
 }
