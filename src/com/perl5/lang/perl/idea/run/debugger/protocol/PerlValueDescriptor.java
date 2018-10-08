@@ -32,9 +32,16 @@ public class PerlValueDescriptor {
   private boolean blessed;
   private boolean is_utf;
   @Nullable
+  private String fileno;
+  @Nullable
   private PerlLayersDescriptor layers;
   @Nullable
   private PerlValueDescriptor tied_with;
+
+  @Nullable
+  public String getFileno() {
+    return fileno;
+  }
 
   public String getName() {
     return name;
@@ -83,6 +90,6 @@ public class PerlValueDescriptor {
   }
 
   public boolean isExpandableNode() {
-    return isExpandable() || getLayers() != null || getTiedWith() != null;
+    return isExpandable() || getLayers() != null || getTiedWith() != null || getFileno() != null;
   }
 }

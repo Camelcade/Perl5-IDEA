@@ -122,6 +122,10 @@ public class PerlXNamedValue extends XNamedValue {
       value += ", Tied";
     }
 
+    if (myPerlValueDescriptor.getFileno() != null) {
+      value += ", fileno: " + myPerlValueDescriptor.getFileno();
+    }
+
     return value;
   }
 
