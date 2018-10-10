@@ -66,12 +66,6 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
   );
 
 
-  private static final TokenSet DOUBLE_QUOTE_OPENERS = TokenSet.create(
-    RESERVED_S,
-    RESERVED_TR,
-    RESERVED_Y
-  );
-
   @NotNull
   @Override
   public Result beforeCharTyped(char c,
@@ -147,11 +141,17 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
       iterator.advance();
       IElementType possibleCloseQuoteType = iterator.atEnd() ? null : iterator.getTokenType();
       if (QUOTE_CLOSE_FIRST_ANY.contains(possibleCloseQuoteType) && closeChar == text.charAt(iterator.getStart())) {
-        if (DOUBLE_QUOTE_OPENERS.contains(quotePrefixType) && StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar)) {
+        if (COMPLEX_QUOTE_OPENERS.contains(quotePrefixType) && StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar)) {
           iterator.advance();
           if (iterator.atEnd() || !QUOTE_OPEN_ANY.contains(iterator.getTokenType())) {
             EditorModificationUtil.insertStringAtCaret(editor, Character.toString(closeChar) + openChar, false, false);
           }
+        }
+        else if (SIMPLE_QUOTE_OPENERS.contains(quotePrefixType) &&
+                 StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar) &&
+                 !PerlEditorUtil.areMarkersBalanced((EditorEx)editor, offset, openChar)) {
+          EditorModificationUtil.insertStringAtCaret(editor, Character.toString(closeChar), false, false);
+          return Result.STOP;
         }
         return Result.CONTINUE;
       }
@@ -159,7 +159,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
       StringBuilder textToAppend = new StringBuilder();
       textToAppend.append(closeChar);
 
-      if (DOUBLE_QUOTE_OPENERS.contains(quotePrefixType)) {
+      if (COMPLEX_QUOTE_OPENERS.contains(quotePrefixType)) {
         textToAppend.append(openChar);
         if (openChar != closeChar) {
           textToAppend.append(closeChar);

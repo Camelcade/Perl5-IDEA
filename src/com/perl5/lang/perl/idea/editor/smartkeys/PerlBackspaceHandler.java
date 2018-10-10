@@ -22,12 +22,17 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
+import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+
+import java.util.function.Supplier;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
+  private static final Key<Supplier<Boolean>> POST_HANDLER = Key.create("perl.post.handler");
+
   @Override
   public void beforeCharDeleted(char c, PsiFile file, Editor editor) {
     CaretModel caretModel = editor.getCaretModel();
@@ -55,7 +60,9 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
             caretModel.moveToOffset(preQuoteIterator.getEnd());
           }
         }
-
+        else {
+          POST_HANDLER.set(editor, () -> true);
+        }
         editor.getDocument().deleteString(startOffsetToDelete, iterator.getEnd());
       }
     }
@@ -63,6 +70,8 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
 
   @Override
   public boolean charDeleted(char c, PsiFile file, Editor editor) {
-    return false;
+    Supplier<Boolean> postHandler = POST_HANDLER.get(editor);
+    POST_HANDLER.set(editor, null);
+    return postHandler != null && postHandler.get();
   }
 }

@@ -235,4 +235,20 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet STATEMENTS = TokenSet.create(
     STATEMENT, USE_STATEMENT, NO_STATEMENT
   );
+  /**
+   * Quote openers with three or four quotes
+   */
+  TokenSet COMPLEX_QUOTE_OPENERS = TokenSet.create(
+    RESERVED_S,
+    RESERVED_TR,
+    RESERVED_Y
+  );
+  TokenSet SIMPLE_QUOTE_OPENERS = TokenSet.create(
+    RESERVED_Q,
+    RESERVED_QQ,
+    RESERVED_QX,
+    RESERVED_QW,
+    RESERVED_QR,
+    RESERVED_M
+  );
 }

@@ -24,6 +24,14 @@ public abstract class PerlTypingTestCase extends PerlLightTestCase {
     doTestTypingWithoutFiles(initialText, toType, expected);
   }
 
+  /**
+   * Types and checks if backspace returns to initial state
+   */
+  protected void doTestWithBS(@NotNull String initialText, @NotNull String toType, @NotNull String expected) {
+    doTestTypingWithoutFiles(initialText, toType, expected);
+    doTestBackspaceWithoutFiles(expected, initialText);
+  }
+
   protected void doTest(@NotNull String toType) {
     doTestTyping(toType);
   }

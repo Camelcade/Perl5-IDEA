@@ -21,6 +21,22 @@ package editor.quoteLike;
  */
 public abstract class PerlQuoteLikeSingleTestCase extends PerlQuoteLikeTestCase {
 
+  public void testParenInParen() {doTestWithBS("$a = (" + OP + "<caret>);", "(", "$a = (" + OP + "(<caret>));");}
+
+  public void testBracketInBracket() {doTestWithBS("$a = [" + OP + "<caret>];", "[", "$a = [" + OP + "[<caret>]];");}
+
+  public void testBraceInBrace() {doTestWithBS("$a = {" + OP + "<caret>};", "{", "$a = {" + OP + "{<caret>}};");}
+
+  public void testIssue1791() {doTestWithBS("foreach (" + OP + "<caret>){}", "(", "foreach (" + OP + "(<caret>)){}");}
+
+  public void testParenInParenSpaced() {doTestWithBS("$a = ( " + OP + " <caret> );", "(", "$a = ( " + OP + " (<caret>) );");}
+
+  public void testBracketInBracketSpaced() {doTestWithBS("$a = [ " + OP + " <caret> ];", "[", "$a = [ " + OP + " [<caret>] ];");}
+
+  public void testBraceInBraceSpaced() {doTestWithBS("$a = { " + OP + " <caret> };", "{", "$a = { " + OP + " {<caret>} };");}
+
+  public void testIssue1791Spaced() {doTestWithBS("foreach ( " + OP + " <caret> ){}", "(", "foreach ( " + OP + " (<caret>) ){}");}
+
   public void testPaired() {doTest(OP + "<caret>", "<", OP + "<<caret>>");}
 
   public void testPairedWithSpace() {doTest(OP + " <caret>", "{", OP + " {<caret>}");}
