@@ -38,12 +38,10 @@ public class PerlFileLevelVariableInspection extends PerlVariableInspectionBase 
 
     if (PsiTreeUtil.getParentOfType(variableDeclarationWrapper, PerlSubDefinitionElement.class, PsiPerlSubExpr.class) == null) {
       PerlVariable variable = variableDeclarationWrapper.getVariable();
-      if (variable != null) {
-        holder.registerProblem(
-          variable,
-          "File level variable:" + variable.getText(),
-          ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
-      }
+      holder.registerProblem(
+        variable,
+        "File level variable:" + variable.getText(),
+        ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
     }
   }
 }

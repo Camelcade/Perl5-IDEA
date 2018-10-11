@@ -33,7 +33,6 @@ public class PodTreePatcher extends SimpleTreePatcher implements PodElementTypes
     while (anchorBefore.getTreePrev() == null && !(parent instanceof FileElement)) {
       anchorBefore = anchorBefore.getTreeParent();
       parent = anchorBefore.getTreeParent();
-      assert parent != null;
     }
 
     super.insert(parent, anchorBefore, toInsert);

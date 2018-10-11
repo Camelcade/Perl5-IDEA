@@ -35,7 +35,7 @@ public class PerlVariableShadowingInspection extends PerlVariableInspectionBase 
     PerlVariable variable = variableDeclarationWrapper.getVariable();
     PsiElement declarationContainer = variableDeclarationWrapper.getParent();
 
-    if (variable != null && !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
+    if (!(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
       PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
       if (lexicalDeclaration instanceof PerlBuiltInVariable) {
         registerProblem(holder, variable,

@@ -42,14 +42,8 @@ public class TemplateToolkitBlockReference extends PerlCachingReference<PsiEleme
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement element = getElement();
-    if (element == null) {
-      return ResolveResult.EMPTY_ARRAY;
-    }
 
     TextRange range = ElementManipulators.getValueTextRange(element);
-    if (range == null) {
-      return ResolveResult.EMPTY_ARRAY;
-    }
 
     final CharSequence targetName = range.subSequence(element.getText());
     if (StringUtil.isEmpty(targetName)) {

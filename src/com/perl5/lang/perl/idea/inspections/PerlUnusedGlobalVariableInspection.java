@@ -48,12 +48,10 @@ public class PerlUnusedGlobalVariableInspection extends PerlVariableInspectionBa
 
       if (ReferencesSearch.search(variableDeclarationWrapper, variableDeclarationWrapper.getUseScope()).findFirst() == null) {
         PerlVariable variable = variableDeclarationWrapper.getVariable();
-        if (variable != null) {
-          holder.registerProblem(
-            variable,
-            "Unused global variable:" + variable.getText(),
-            ProblemHighlightType.LIKE_UNUSED_SYMBOL);
-        }
+        holder.registerProblem(
+          variable,
+          "Unused global variable:" + variable.getText(),
+          ProblemHighlightType.LIKE_UNUSED_SYMBOL);
       }
     }
   }

@@ -75,16 +75,11 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, P
 
         if (run instanceof PerlVariableDeclarationElement) {
           PerlVariable variable = ((PerlVariableDeclarationElement)run).getVariable();
-          if (variable != null) {
-            newArgument = PerlSubArgument.mandatory(
-              variable.getActualType(),
-              variable.getName(),
-              variableClass
-            );
-          }
-          else {
-            newArgument = PerlSubArgument.empty();
-          }
+          newArgument = PerlSubArgument.mandatory(
+            variable.getActualType(),
+            variable.getName(),
+            variableClass
+          );
         }
         else if (run.getNode().getElementType() == RESERVED_UNDEF) {
           newArgument = myArguments.isEmpty() ? PerlSubArgument.self() : PerlSubArgument.empty();

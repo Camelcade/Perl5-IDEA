@@ -52,7 +52,7 @@ public class PerlVariableDeclarationSearcher implements PsiScopeProcessor {
   public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
     if (element instanceof PerlVariableDeclarationElement) {
       PerlVariable variable = ((PerlVariableDeclarationElement)element).getVariable();
-      if (variable != null && !variable.equals(myVariable)) {
+      if (!variable.equals(myVariable)) {
         if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PerlStatement.class);
 

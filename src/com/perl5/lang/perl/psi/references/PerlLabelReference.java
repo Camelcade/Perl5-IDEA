@@ -39,11 +39,7 @@ public class PerlLabelReference extends PerlCachingReference<PsiPerlLabelExpr> {
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiPerlLabelExpr labelExpr = getElement();
-    PsiElement parent = labelExpr == null ? null : labelExpr.getParent();
-
-    if (labelExpr == null) {
-      return ResolveResult.EMPTY_ARRAY;
-    }
+    PsiElement parent = labelExpr.getParent();
 
     LabelSeeker processor = new LabelSeeker(labelExpr.getText());
 

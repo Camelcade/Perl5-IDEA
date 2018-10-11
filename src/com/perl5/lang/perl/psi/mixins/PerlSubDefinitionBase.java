@@ -112,9 +112,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
     if (signatureElement instanceof PerlVariableDeclarationElement) {
       PerlVariable variable = ((PerlVariableDeclarationElement)signatureElement).getVariable();
-      if (variable != null) {
-        arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()));
-      }
+      arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()));
       return true;
     }
     return false;

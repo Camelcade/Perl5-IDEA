@@ -31,8 +31,7 @@ public class PerlBuiltinVariableRedeclarationInspection extends PerlVariableInsp
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {
     PerlVariable variable = variableDeclarationWrapper.getVariable();
     PsiElement declarationContainer = variableDeclarationWrapper.getParent();
-    if (variable != null &&
-        PerlBuiltInVariablesService.getInstance(variableDeclarationWrapper.getProject())
+    if (PerlBuiltInVariablesService.getInstance(variableDeclarationWrapper.getProject())
           .getVariableDeclaration(variable.getActualType(), variable.getName()) != null &&
         !(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
       registerProblem(holder, variable, PerlBundle.message("perl.inspection.builtin.shadowing"));
