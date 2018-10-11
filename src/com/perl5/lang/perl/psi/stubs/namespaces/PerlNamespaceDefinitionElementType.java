@@ -60,6 +60,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     return new PsiPerlNamespaceDefinitionImpl(node);
   }
 
+  @NotNull
   @Override
   public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
     return createStubElement(parentStub,

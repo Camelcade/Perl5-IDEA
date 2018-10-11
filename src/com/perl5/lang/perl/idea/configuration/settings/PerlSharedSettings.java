@@ -80,7 +80,7 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
   }
 
   @Override
-  public void loadState(PerlSharedSettings state) {
+  public void loadState(@NotNull PerlSharedSettings state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 

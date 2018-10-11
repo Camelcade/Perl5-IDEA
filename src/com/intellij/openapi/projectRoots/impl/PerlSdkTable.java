@@ -59,7 +59,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   }
 
   @Override
-  public void loadState(Element element) {
+  public void loadState(@NotNull Element element) {
     myInterpretersList.clear();
 
     for (Element child : element.getChildren(PERL)) {

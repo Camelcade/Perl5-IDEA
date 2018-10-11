@@ -43,7 +43,10 @@ import java.util.Set;
  */
 public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsiElementProcessor {
   @Override
-  public void prepareRenaming(PsiElement element, String newName, Map<PsiElement, String> allRenames, SearchScope scope) {
+  public void prepareRenaming(@NotNull PsiElement element,
+                              @NotNull String newName,
+                              @NotNull Map<PsiElement, String> allRenames,
+                              @NotNull SearchScope scope) {
     final String currentBaseName = ((PsiNameIdentifierOwner)element).getName();
 
     if (currentBaseName != null && StringUtil.isNotEmpty(newName)) {
@@ -104,7 +107,7 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
 
   @Nullable
   @Override
-  public PsiElement substituteElementToRename(PsiElement element, @Nullable Editor editor) {
+  public PsiElement substituteElementToRename(@NotNull PsiElement element, @Nullable Editor editor) {
     if (PsiElementRenameHandler.isVetoed(element)) {
       return null;
     }

@@ -131,7 +131,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     myProject.registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
   }
 
-  protected String loadFile(@NonNls @TestDataFile String name) throws IOException {
+  protected String loadFile(@NotNull @NonNls @TestDataFile String name) throws IOException {
     String adjustedName = myFileExt.isEmpty() ? name.replace(".", "") : name.replace("." + myFileExt, ".code");
     return FileUtil.loadFile(new File(myFullDataPath, adjustedName), CharsetToolkit.UTF8, true).trim();
   }

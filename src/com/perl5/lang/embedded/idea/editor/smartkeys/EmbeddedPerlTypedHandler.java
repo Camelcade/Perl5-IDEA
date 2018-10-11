@@ -27,8 +27,9 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 07.01.2016.
  */
 public class EmbeddedPerlTypedHandler extends TypedHandlerDelegate {
+  @NotNull
   @Override
-  public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char c, @NotNull final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof EmbeddedPerlFileViewProvider) {
       if (c == ' ') {
         EmbeddedPerlSmartKeysUtil.addCloseMarker(editor, file, " ?>");

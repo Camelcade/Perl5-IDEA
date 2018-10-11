@@ -84,8 +84,9 @@ public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewP
     return Mason2Language.INSTANCE;
   }
 
+  @NotNull
   @Override
-  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy) {
+  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
     return new Mason2FileViewProvider(getManager(), fileCopy, false);
   }
 

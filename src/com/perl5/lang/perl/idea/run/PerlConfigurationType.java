@@ -32,8 +32,9 @@ public class PerlConfigurationType extends ConfigurationTypeBase {
     super("#PerlConfigurationType", "Perl", "", PerlIcons.PERL_LANGUAGE_ICON);
 
     addFactory(new ConfigurationFactory(this) {
+      @NotNull
       @Override
-      public RunConfiguration createTemplateConfiguration(Project project) {
+      public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRunConfiguration(project, this, "Unnamed");
       }
     });

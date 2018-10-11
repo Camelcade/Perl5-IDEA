@@ -46,6 +46,7 @@ public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethod
     return new HTMLMasonMethodDefinitionImpl(stub, this);
   }
 
+  @NotNull
   @Override
   public HTMLMasonMethodDefinitionStub createStub(@NotNull HTMLMasonMethodDefinition psi, StubElement parentStub) {
     return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, psi.getName());

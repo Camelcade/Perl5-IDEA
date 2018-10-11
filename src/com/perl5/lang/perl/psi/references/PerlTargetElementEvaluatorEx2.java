@@ -32,8 +32,8 @@ import org.jetbrains.annotations.Nullable;
 public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
   @Nullable
   @Override
-  public PsiElement adjustReferenceOrReferencedElement(PsiFile file,
-                                                       Editor editor,
+  public PsiElement adjustReferenceOrReferencedElement(@NotNull PsiFile file,
+                                                       @NotNull Editor editor,
                                                        int offset,
                                                        int flags,
                                                        @Nullable PsiElement refElement) {

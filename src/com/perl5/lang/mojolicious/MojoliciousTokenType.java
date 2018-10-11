@@ -38,7 +38,7 @@ public class MojoliciousTokenType extends IElementType implements ILeafElementTy
 
   @NotNull
   @Override
-  public ASTNode createLeafNode(CharSequence leafText) {
+  public ASTNode createLeafNode(@NotNull CharSequence leafText) {
     if (MojoliciousParserDefinition.COMMENTS.contains(this)) {
       return new PsiCommentImpl(this, leafText);
     }

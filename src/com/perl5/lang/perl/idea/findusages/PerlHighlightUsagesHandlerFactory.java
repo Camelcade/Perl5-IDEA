@@ -41,7 +41,7 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
 
   @Nullable
   @Override
-  public HighlightUsagesHandlerBase createHighlightUsagesHandler(Editor editor, PsiFile file) {
+  public HighlightUsagesHandlerBase createHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file) {
     int offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
     PsiElement target = file.getViewProvider().findElementAt(offset, PerlLanguage.INSTANCE);
     return target == null ? null : new PerlHighlightUsagesHandler(editor, file, target, offset);

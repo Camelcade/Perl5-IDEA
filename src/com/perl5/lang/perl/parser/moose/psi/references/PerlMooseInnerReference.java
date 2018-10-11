@@ -46,7 +46,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     return myElement;
   }
 

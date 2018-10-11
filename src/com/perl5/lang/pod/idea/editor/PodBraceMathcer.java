@@ -37,6 +37,7 @@ public class PodBraceMathcer implements PairedBraceMatcher, PodElementTypes {
     new BracePair(POD_BRACKET_LEFT, POD_BRACKET_RIGHT, false),
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

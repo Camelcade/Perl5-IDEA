@@ -36,6 +36,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -63,7 +64,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
   }
 
   @Override
-  public void actionPerformed(AnActionEvent event) {
+  public void actionPerformed(@NotNull AnActionEvent event) {
     PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
     if (file == null) {

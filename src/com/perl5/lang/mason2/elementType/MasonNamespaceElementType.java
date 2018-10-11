@@ -47,6 +47,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
     return new MasonNamespaceDefinitionImpl(stub, this);
   }
 
+  @NotNull
   @Override
   public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
     assert psi instanceof MasonNamespaceDefinitionImpl;

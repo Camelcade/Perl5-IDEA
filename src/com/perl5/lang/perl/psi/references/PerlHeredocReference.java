@@ -89,7 +89,7 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     // fixme this is not invoked!
     boolean appendNewLine = StringUtil.equals(myElement.getText(), "\n");
     PsiElement result = super.handleElementRename(newElementName);

@@ -101,7 +101,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   }
 
   @Override
-  public void loadState(HTMLMasonSettings state) {
+  public void loadState(@NotNull HTMLMasonSettings state) {
     XmlSerializerUtil.copyBean(state, this);
     changeCounter++;
   }

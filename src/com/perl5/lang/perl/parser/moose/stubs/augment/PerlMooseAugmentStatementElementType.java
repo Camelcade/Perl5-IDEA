@@ -51,6 +51,7 @@ public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlM
     return new PerlMooseAugmentStatementImpl(stub, this);
   }
 
+  @NotNull
   @Override
   public PerlMooseAugmentStatementStub createStub(@NotNull PerlMooseAugmentStatement psi, StubElement parentStub) {
     return new PerlMooseAugmentStatementStubImpl(parentStub, this, psi.getSubName());

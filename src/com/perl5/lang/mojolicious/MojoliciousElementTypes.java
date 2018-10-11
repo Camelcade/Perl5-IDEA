@@ -37,7 +37,7 @@ public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
   IElementType MOJO_HELPER_METHOD = new MojoliciousTokenType(KEYWORD_MOJO_HELPER_METHOD) {
     @NotNull
     @Override
-    public ASTNode createLeafNode(CharSequence leafText) {
+    public ASTNode createLeafNode(@NotNull CharSequence leafText) {
       return new PerlSubNameElementImpl(this, leafText);
     }
   };

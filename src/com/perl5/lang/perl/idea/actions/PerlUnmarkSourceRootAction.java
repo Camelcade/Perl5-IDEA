@@ -38,7 +38,7 @@ public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
   }
 
   @Override
-  public void update(AnActionEvent e) {
+  public void update(@NotNull AnActionEvent e) {
     Presentation presentation = e.getPresentation();
     RootsSelection selection = getSelection(e);
     if (selection.myModule == null) {
@@ -73,7 +73,7 @@ public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
   }
 
   @Override
-  public void actionPerformed(AnActionEvent e) {
+  public void actionPerformed(@NotNull AnActionEvent e) {
     RootsSelection selection = getSelection(e);
     PerlModuleExtension perlModuleExtension =
       (PerlModuleExtension)PerlModuleExtension.getInstance(selection.myModule).getModifiableModel(true);

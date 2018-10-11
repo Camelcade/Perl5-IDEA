@@ -39,8 +39,9 @@ import java.util.Map;
  */
 public class HTMLMasonTypedHandler extends TypedHandlerDelegate
   implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns {
+  @NotNull
   @Override
-  public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof HTMLMasonFileViewProvider) {
       if (c == '>') {
         PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);

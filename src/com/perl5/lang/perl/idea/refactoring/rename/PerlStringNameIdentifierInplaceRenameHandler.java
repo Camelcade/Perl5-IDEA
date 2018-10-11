@@ -36,12 +36,12 @@ import org.jetbrains.annotations.Nullable;
 public class PerlStringNameIdentifierInplaceRenameHandler extends VariableInplaceRenameHandler {
   @Nullable
   @Override
-  protected VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, Editor editor) {
+  protected VariableInplaceRenamer createRenamer(@NotNull PsiElement elementToRename, @NotNull Editor editor) {
     return new PerlVariableInplaceRenamer((PsiNamedElement)elementToRename, editor);
   }
 
   @Override
-  protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
+  protected boolean isAvailable(PsiElement element, @NotNull Editor editor, @NotNull PsiFile file) {
 
     return
       editor.getSettings().isVariableInplaceRenameEnabled()

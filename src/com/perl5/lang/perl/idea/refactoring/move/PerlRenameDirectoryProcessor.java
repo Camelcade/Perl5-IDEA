@@ -43,7 +43,9 @@ public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
   }
 
   @Override
-  public void prepareRenaming(final PsiElement element, final String newName, Map<PsiElement, String> allRenames) {
+  public void prepareRenaming(@NotNull final PsiElement element,
+                              @NotNull final String newName,
+                              @NotNull Map<PsiElement, String> allRenames) {
     allRenames.clear();
     ApplicationManager.getApplication().runWriteAction(() -> renamePsiElement(element, newName));
   }

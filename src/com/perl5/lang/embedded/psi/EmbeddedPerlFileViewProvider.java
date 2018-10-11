@@ -53,8 +53,9 @@ public class EmbeddedPerlFileViewProvider extends PerlMultiplePsiFilesPerDocumen
     return EmbeddedPerlElementTypes.EMBED_POD_TEMPLATE_DATA;
   }
 
+  @NotNull
   @Override
-  protected EmbeddedPerlFileViewProvider cloneInner(final VirtualFile copy) {
+  protected EmbeddedPerlFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
     return new EmbeddedPerlFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

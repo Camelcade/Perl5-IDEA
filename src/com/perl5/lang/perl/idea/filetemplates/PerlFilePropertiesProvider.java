@@ -22,6 +22,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Properties;
 
@@ -30,7 +31,7 @@ import java.util.Properties;
  */
 public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProvider {
   @Override
-  public void fillProperties(PsiDirectory directory, Properties props) {
+  public void fillProperties(@NotNull PsiDirectory directory, @NotNull Properties props) {
     VirtualFile directoryFile = directory.getVirtualFile();
     VirtualFile newInnermostRoot = PerlUtil.getFileClassRoot(directory.getProject(), directoryFile);
 

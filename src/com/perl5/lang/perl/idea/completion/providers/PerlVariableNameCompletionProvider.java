@@ -43,7 +43,7 @@ import static com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor
 public class PerlVariableNameCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
 
   public void addCompletions(@NotNull CompletionParameters parameters,
-                             ProcessingContext context,
+                             @NotNull ProcessingContext context,
                              @NotNull CompletionResultSet resultSet) {
     PsiElement variableNameElement = parameters.getPosition();
 

@@ -97,7 +97,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
       public void setRenderer(ListCellRenderer renderer) {
         super.setRenderer(new ColoredListCellRenderer<String>() {
           @Override
-          protected void customizeCellRenderer(JList list, String value, int index, boolean selected, boolean hasFocus) {
+          protected void customizeCellRenderer(@NotNull JList list, String value, int index, boolean selected, boolean hasFocus) {
             append(PerlDebugOptionsSets.ROLE_OPTIONS.get(value));
           }
         });
@@ -111,7 +111,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
 
     DocumentAdapter documentAdapter = new DocumentAdapter() {
       @Override
-      protected void textChanged(DocumentEvent e) {
+      protected void textChanged(@NotNull DocumentEvent e) {
         updateCommandLine();
       }
     };

@@ -41,6 +41,7 @@ public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousE
     new BracePair(MOJO_BEGIN, MOJO_END, false),
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

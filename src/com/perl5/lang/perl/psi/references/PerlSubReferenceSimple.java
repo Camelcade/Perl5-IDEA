@@ -187,7 +187,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
 
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     PsiElement target = resolve();
     if (target instanceof PerlRenameUsagesHelper) {
       newElementName = ((PerlRenameUsagesHelper)target).getSubstitutedUsageName(newElementName, myElement);

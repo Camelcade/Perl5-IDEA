@@ -31,7 +31,7 @@ public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub {
   @Nullable
   private final StubElement myParent;
 
-  public PerlLightSubDefinitionStub(StubElement parent,
+  public PerlLightSubDefinitionStub(@Nullable StubElement parent,
                                     String packageName,
                                     String subName,
                                     List<PerlSubArgument> arguments,

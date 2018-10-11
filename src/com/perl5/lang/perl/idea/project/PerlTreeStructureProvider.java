@@ -62,7 +62,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
         ModuleSourceRootEditHandler handler = rootType.getEditHandler();
         node = new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
           @Override
-          protected void updateImpl(PresentationData data) {
+          protected void updateImpl(@NotNull PresentationData data) {
             super.updateImpl(data);
             data.setIcon(handler.getRootIcon());
             data.addText(virtualFile.getName(), SimpleTextAttributes.REGULAR_ATTRIBUTES);

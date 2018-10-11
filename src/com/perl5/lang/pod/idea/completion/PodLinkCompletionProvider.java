@@ -52,7 +52,9 @@ import java.util.Set;
  */
 public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes {
   @Override
-  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                @NotNull ProcessingContext context,
+                                @NotNull CompletionResultSet result) {
     PsiElement element = parameters.getOriginalPosition();
     if (element == null) {
       return;

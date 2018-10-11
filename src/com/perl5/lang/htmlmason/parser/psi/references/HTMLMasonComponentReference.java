@@ -43,7 +43,7 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     ResolveResult[] results = multiResolve(false);
     String currentContent = ElementManipulators.getValueText(myElement);
 

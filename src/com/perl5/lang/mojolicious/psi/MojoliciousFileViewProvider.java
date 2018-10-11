@@ -55,8 +55,9 @@ public class MojoliciousFileViewProvider extends PerlMultiplePsiFilesPerDocument
     return MOJO_POD_TEMPLATE_DATA;
   }
 
+  @NotNull
   @Override
-  protected MojoliciousFileViewProvider cloneInner(final VirtualFile copy) {
+  protected MojoliciousFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
     return new MojoliciousFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

@@ -43,7 +43,7 @@ public class PerlToggleSourceRootAction extends ToggleAction {
   }
 
   @Override
-  public boolean isSelected(AnActionEvent e) {
+  public boolean isSelected(@NotNull AnActionEvent e) {
     VirtualFile[] files = myEditor.getSelectedFiles();
     if (files.length == 0) {
       return false;
@@ -52,7 +52,7 @@ public class PerlToggleSourceRootAction extends ToggleAction {
   }
 
   @Override
-  public void setSelected(AnActionEvent e, boolean state) {
+  public void setSelected(@NotNull AnActionEvent e, boolean state) {
     PerlModuleExtension modifiableModel = myEditor.getModifiableModel();
     for (VirtualFile virtualFile : myEditor.getSelectedFiles()) {
       if (state) {

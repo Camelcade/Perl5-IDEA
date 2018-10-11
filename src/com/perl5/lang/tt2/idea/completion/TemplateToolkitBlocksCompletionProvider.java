@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
-                                ProcessingContext context,
+                                @NotNull ProcessingContext context,
                                 @NotNull final CompletionResultSet result) {
     PsiElement element = parameters.getOriginalPosition();
 

@@ -46,8 +46,9 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2Ele
     SIMPLE_COMPLETION_MAP.put(KEYWORD_TEXT_OPENER_UNCLOSED, KEYWORD_TEXT_CLOSER);
   }
 
+  @NotNull
   @Override
-  public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char c, @NotNull final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof Mason2TemplatingFileViewProvider) {
       if (c == '>') {
         PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);

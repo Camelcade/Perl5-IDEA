@@ -39,7 +39,7 @@ public class HTMLMasonHierarchyBrowser extends PerlHierarchyBrowser {
   }
 
   @Override
-  protected void prependActions(DefaultActionGroup actionGroup) {
+  protected void prependActions(@NotNull DefaultActionGroup actionGroup) {
     actionGroup.add(new ViewClassHierarchyAction());
     super.prependActions(actionGroup);
   }

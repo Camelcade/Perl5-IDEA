@@ -40,7 +40,7 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
   }
 
   @Override
-  protected boolean isInterface(PsiElement psiElement) {
+  protected boolean isInterface(@NotNull PsiElement psiElement) {
     return false;
   }
 
@@ -81,7 +81,7 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
   }
 
   @Override
-  protected void prependActions(final DefaultActionGroup actionGroup) {
+  protected void prependActions(@NotNull final DefaultActionGroup actionGroup) {
     actionGroup.add(new ViewSupertypesHierarchyAction());
     actionGroup.add(new ViewSubtypesHierarchyAction());
     actionGroup.add(new AlphaSortAction());

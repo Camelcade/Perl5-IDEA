@@ -32,6 +32,7 @@ public class EmbeddedPerlBraceMatcher implements PairedBraceMatcher, EmbeddedPer
     new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE, false),
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

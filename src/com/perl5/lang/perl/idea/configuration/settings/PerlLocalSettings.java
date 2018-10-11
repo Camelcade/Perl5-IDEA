@@ -72,7 +72,7 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
   }
 
   @Override
-  public void loadState(PerlLocalSettings state) {
+  public void loadState(@NotNull PerlLocalSettings state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 

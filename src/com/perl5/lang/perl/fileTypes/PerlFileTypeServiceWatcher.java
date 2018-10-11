@@ -52,7 +52,7 @@ class PerlFileTypeServiceWatcher implements StartupActivity, ModuleListener, Mod
   }
 
   @Override
-  public void rootsChanged(ModuleRootEvent event) {
+  public void rootsChanged(@NotNull ModuleRootEvent event) {
     reset();
   }
 

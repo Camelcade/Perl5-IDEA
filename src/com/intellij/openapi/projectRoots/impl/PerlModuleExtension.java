@@ -177,7 +177,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   }
 
   @Override
-  public void loadState(Element state) {
+  public void loadState(@NotNull Element state) {
     state = state.getChild(PERL_CONFIG);
     myRoots.clear();
     if (state == null) {

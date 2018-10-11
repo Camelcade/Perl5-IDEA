@@ -58,7 +58,7 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
     if (descriptor != null) {
       String currentName = descriptor.getFileId();

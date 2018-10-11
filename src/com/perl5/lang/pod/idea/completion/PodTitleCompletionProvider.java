@@ -60,7 +60,9 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
   );
 
   @Override
-  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                @NotNull ProcessingContext context,
+                                @NotNull CompletionResultSet result) {
     final PsiElement element = parameters.getOriginalPosition();
     if (element == null) {
       return;

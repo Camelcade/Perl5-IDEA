@@ -22,6 +22,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.06.2016.
@@ -30,13 +31,13 @@ public class PerlCreateFileFromTemplateHandler extends DefaultCreateFromTemplate
   public static final PerlCreateFileFromTemplateHandler INSTANCE = new PerlCreateFileFromTemplateHandler();
 
   @Override
-  public boolean handlesTemplate(FileTemplate template) {
+  public boolean handlesTemplate(@NotNull FileTemplate template) {
     FileType templateFileType = FileTypeManagerEx.getInstanceEx().getFileTypeByExtension(template.getExtension());
     return templateFileType instanceof PerlFileType;
   }
 
   @Override
-  public boolean canCreate(PsiDirectory[] dirs) {
+  public boolean canCreate(@NotNull PsiDirectory[] dirs) {
     return false;
   }
 }

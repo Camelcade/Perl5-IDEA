@@ -38,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlStringContentCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
-                                ProcessingContext context,
+                                @NotNull ProcessingContext context,
                                 @NotNull final CompletionResultSet result) {
     PsiElement element = parameters.getPosition();
     PsiElement parent = element.getParent();

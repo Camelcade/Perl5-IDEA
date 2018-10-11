@@ -66,14 +66,14 @@ public class Perl5SdkPanel {
 
     toolbarActionGroup.add(new DumbAwareAction() {
       @Override
-      public void update(AnActionEvent e) {
+      public void update(@NotNull AnActionEvent e) {
         Presentation p = e.getPresentation();
         p.setIcon(AllIcons.General.GearPlain);
         p.setEnabledAndVisible(true);
       }
 
       @Override
-      public void actionPerformed(AnActionEvent e) {
+      public void actionPerformed(@NotNull AnActionEvent e) {
         ListPopup actionGroupPopup = JBPopupFactory.getInstance().
           createActionGroupPopup(null, myActionGroup, e.getDataContext(), true, null, Integer.MAX_VALUE);
 

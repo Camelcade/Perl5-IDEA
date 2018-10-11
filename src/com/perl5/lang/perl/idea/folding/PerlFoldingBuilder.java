@@ -359,7 +359,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     }
 
     @Override
-    public void visitElement(PsiElement element) {
+    public void visitElement(@NotNull PsiElement element) {
       if (PsiUtilCore.getElementType(element) == POD) {
         addDescriptorFor(myDescriptors, myDocument, element, 0, 0, 0);
       }

@@ -36,7 +36,7 @@ public class HTMLMasonMethodReference extends HTMLMasonStringReference {
 
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches()) { // fixme should be in other place
       return ElementManipulators.handleContentChange(myElement, newElementName);
     }

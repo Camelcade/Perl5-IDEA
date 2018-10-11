@@ -46,6 +46,7 @@ public class HTMLMasonSubcomponentElementType
     return new HTMLMasonSubcomponentDefitnitionImpl(stub, this);
   }
 
+  @NotNull
   @Override
   public HTMLMasonSubcomponentDefinitionStub createStub(@NotNull HTMLMasonSubcomponentDefitnition psi, StubElement parentStub) {
     return new HTMLMasonSubcomponentDefinitionStubImpl(parentStub, this, psi.getName());

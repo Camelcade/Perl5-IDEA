@@ -105,8 +105,13 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
     return insertedChars + 2;
   }
 
+  @NotNull
   @Override
-  public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+  public Result beforeCharTyped(char c,
+                                @NotNull Project project,
+                                @NotNull Editor editor,
+                                @NotNull PsiFile file,
+                                @NotNull FileType fileType) {
     if (file instanceof PodFile) {
       if (c == '<') {
         CaretModel caretModel = editor.getCaretModel();
@@ -153,8 +158,9 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
     return super.beforeCharTyped(c, project, editor, file, fileType);
   }
 
+  @NotNull
   @Override
-  public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     return super.charTyped(c, project, editor, file);
   }
 }

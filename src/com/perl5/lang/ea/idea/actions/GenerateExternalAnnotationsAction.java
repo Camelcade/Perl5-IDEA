@@ -18,6 +18,7 @@ package com.perl5.lang.ea.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 13.08.2016.
@@ -29,7 +30,7 @@ public class GenerateExternalAnnotationsAction extends PerlActionBase {
   }
 
   @Override
-  public void actionPerformed(AnActionEvent e) {
+  public void actionPerformed(@NotNull AnActionEvent e) {
 
   }
 }

@@ -28,8 +28,9 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 08.01.2016.
  */
 public class MojoliciousTypedHandler extends TypedHandlerDelegate implements MojoliciousElementTypes {
+  @NotNull
   @Override
-  public Result charTyped(char c, final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char c, @NotNull final Project project, @NotNull final Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof MojoliciousFileViewProvider) {
       if (c == ' ') {
         MojoliciousSmartKeysUtil.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);

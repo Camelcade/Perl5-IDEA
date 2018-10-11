@@ -17,13 +17,14 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 03.04.2016.
  */
 public class PodRecursiveVisitor extends PodVisitor {
   @Override
-  public void visitElement(PsiElement element) {
+  public void visitElement(@NotNull PsiElement element) {
     element.acceptChildren(this);
   }
 }

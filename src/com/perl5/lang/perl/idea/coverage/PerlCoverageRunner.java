@@ -202,6 +202,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     return PerlBundle.message("perl.perl5");
   }
 
+  @NotNull
   @Override
   public String getId() {
     return "Perl5CoverageRunner";

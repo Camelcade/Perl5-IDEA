@@ -36,12 +36,14 @@ import org.jetbrains.annotations.NotNull;
 public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
   @NotNull
   @Override
-  protected MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element, PsiNameIdentifierOwner elementToRename, Editor editor) {
+  protected MemberInplaceRenamer createMemberRenamer(@NotNull PsiElement element,
+                                                     @NotNull PsiNameIdentifierOwner elementToRename,
+                                                     @NotNull Editor editor) {
     return new PerlMemberInplaceRenamer(elementToRename, element, editor);
   }
 
   @Override
-  protected boolean isAvailable(PsiElement element, Editor editor, PsiFile file) {
+  protected boolean isAvailable(PsiElement element, @NotNull Editor editor, @NotNull PsiFile file) {
     PsiElement nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset());
     if (nameSuggestionContext == null && editor.getCaretModel().getOffset() > 0) {
       nameSuggestionContext = file.findElementAt(editor.getCaretModel().getOffset() - 1);

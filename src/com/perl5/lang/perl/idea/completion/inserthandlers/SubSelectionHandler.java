@@ -24,13 +24,14 @@ import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 25.07.2015.
  */
 public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlElementTypes {
   @Override
-  public void handleInsert(final InsertionContext context, LookupElement item) {
+  public void handleInsert(@NotNull final InsertionContext context, @NotNull LookupElement item) {
     final Editor editor = context.getEditor();
     int caretOffset = editor.getCaretModel().getOffset();
     PsiElement targetElement = context.getFile().findElementAt(caretOffset);

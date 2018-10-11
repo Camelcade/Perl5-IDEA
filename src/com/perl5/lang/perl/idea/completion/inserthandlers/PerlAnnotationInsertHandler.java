@@ -27,6 +27,7 @@ import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Auto-open autocompletion with package after space
@@ -35,7 +36,7 @@ public class PerlAnnotationInsertHandler implements InsertHandler<LookupElement>
   public static final InsertHandler<LookupElement> INSTANCE = new PerlAnnotationInsertHandler();
 
   @Override
-  public void handleInsert(final InsertionContext context, LookupElement item) {
+  public void handleInsert(@NotNull final InsertionContext context, @NotNull LookupElement item) {
 
     final Editor editor = context.getEditor();
     if ("returns".equals(item.getLookupString())) {

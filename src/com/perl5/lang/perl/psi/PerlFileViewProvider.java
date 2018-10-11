@@ -92,8 +92,9 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     return PerlLanguage.INSTANCE;
   }
 
+  @NotNull
   @Override
-  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy) {
+  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
     return new PerlFileViewProvider(getManager(), fileCopy, false);
   }
 

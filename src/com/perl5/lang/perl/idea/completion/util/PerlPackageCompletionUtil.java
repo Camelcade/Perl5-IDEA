@@ -202,7 +202,7 @@ public class PerlPackageCompletionUtil {
    */
   static class CompletionOpener implements InsertHandler<LookupElement> {
     @Override
-    public void handleInsert(final InsertionContext context, final LookupElement item) {
+    public void handleInsert(@NotNull final InsertionContext context, @NotNull final LookupElement item) {
       // fixme this is bad check for auto-inserting, i belive
       if (context.getCompletionChar() != '\u0000') {
         context.setLaterRunnable(() -> {

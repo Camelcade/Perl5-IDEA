@@ -21,6 +21,7 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -39,7 +40,7 @@ public class PerlFoldingSettingsImpl extends PerlFoldingSettings implements Pers
   }
 
   @Override
-  public void loadState(PerlFoldingSettings state) {
+  public void loadState(@NotNull PerlFoldingSettings state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 }

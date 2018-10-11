@@ -31,8 +31,9 @@ public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase 
     super("#PerlRemoteDebuggingConfigurationType", "Perl Remote Debugging", "", PerlIcons.PERL_LANGUAGE_ICON);
 
     addFactory(new ConfigurationFactory(this) {
+      @NotNull
       @Override
-      public RunConfiguration createTemplateConfiguration(Project project) {
+      public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRemoteDebuggingConfiguration(project, this, "Unnamed");
       }
     });

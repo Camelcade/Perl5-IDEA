@@ -47,7 +47,9 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
 
   @Nullable
   @Override
-  public Runnable getPostRenameCallback(final PsiElement element, String newName, RefactoringElementListener elementListener) {
+  public Runnable getPostRenameCallback(@NotNull final PsiElement element,
+                                        @NotNull String newName,
+                                        @NotNull RefactoringElementListener elementListener) {
     if (newName.endsWith(".pm")) {
       final Project project = element.getProject();
       final String currentPackageName = ((PerlFileImpl)element).getFilePackageName();

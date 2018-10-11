@@ -52,6 +52,7 @@ public class HTMLMasonArgsBlockElementType extends IStubElementType<HTMLMasonArg
     return new HTMLMasonArgsBlockImpl(stub, this);
   }
 
+  @NotNull
   @Override
   public HTMLMasonArgsBlockStub createStub(@NotNull HTMLMasonArgsBlock psi, StubElement parentStub) {
     return new HTMLMasonArgsBlockStubImpl(parentStub, this, psi.getArgumentsList());

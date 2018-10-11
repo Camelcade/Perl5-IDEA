@@ -48,7 +48,7 @@ public abstract class PerlLazyBlockElementType extends ILazyParseableElementType
   }
 
   @Override
-  public ASTNode parseContents(ASTNode chameleon) {
+  public ASTNode parseContents(@NotNull ASTNode chameleon) {
     PsiElement parentElement = chameleon.getTreeParent().getPsi();
     Project project = parentElement.getProject();
     PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(

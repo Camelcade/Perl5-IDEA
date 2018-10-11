@@ -33,7 +33,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlLabelCompletionProvider extends CompletionProvider<CompletionParameters> implements PerlElementPatterns {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
-                                ProcessingContext context,
+                                @NotNull ProcessingContext context,
                                 final @NotNull CompletionResultSet result) {
     final PsiElement element = parameters.getOriginalPosition();
     if (LABEL_DECLARATION_PATTERN.accepts(element)) {

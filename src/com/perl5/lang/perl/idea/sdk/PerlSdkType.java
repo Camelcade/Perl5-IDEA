@@ -115,6 +115,7 @@ public class PerlSdkType extends SdkType {
     return System.getenv("PERL_HOME");
   }
 
+  @NotNull
   @Override
   public String suggestSdkName(String currentSdkName, String sdkHome) {
     VersionDescriptor descriptor = getPerlVersionDescriptor(sdkHome);

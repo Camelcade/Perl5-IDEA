@@ -123,7 +123,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   }
 
   @Override
-  public void loadState(TemplateToolkitSettings state) {
+  public void loadState(@NotNull TemplateToolkitSettings state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 

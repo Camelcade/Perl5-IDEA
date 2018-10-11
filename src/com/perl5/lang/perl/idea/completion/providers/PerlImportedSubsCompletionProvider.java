@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlImportedSubsCompletionProvider extends CompletionProvider<CompletionParameters> {
   public void addCompletions(@NotNull final CompletionParameters parameters,
-                             ProcessingContext context,
+                             @NotNull ProcessingContext context,
                              @NotNull final CompletionResultSet resultSet) {
     PsiElement position = parameters.getPosition();
 

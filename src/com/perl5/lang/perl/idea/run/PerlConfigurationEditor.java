@@ -88,7 +88,7 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
 
     myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
       @Override
-      protected void textChanged(DocumentEvent documentEvent) {
+      protected void textChanged(@NotNull DocumentEvent documentEvent) {
         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
         if (file != null) {
           myConsoleCharset.setSelectedItem(file.getCharset().displayName());

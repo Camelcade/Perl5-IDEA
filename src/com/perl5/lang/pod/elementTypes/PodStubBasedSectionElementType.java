@@ -38,6 +38,7 @@ public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSecti
     super(debugName, PodLanguage.INSTANCE);
   }
 
+  @NotNull
   @Override
   public PodSectionStub createStub(@NotNull T psi, StubElement parentStub) {
     return new PodSectionStubImpl(parentStub, this, psi.getTitleText());

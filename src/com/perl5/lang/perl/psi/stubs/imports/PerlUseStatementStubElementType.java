@@ -52,6 +52,7 @@ public class PerlUseStatementStubElementType extends IStubElementType<PerlUseSta
     return new PsiPerlUseStatementImpl(node);
   }
 
+  @NotNull
   @Override
   public PerlUseStatementStub createStub(@NotNull PerlUseStatement psi, StubElement parentStub) {
     return new PerlUseStatementStubImpl(

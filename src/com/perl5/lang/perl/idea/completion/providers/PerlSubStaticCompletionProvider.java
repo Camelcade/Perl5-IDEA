@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlSubStaticCompletionProvider extends CompletionProvider<CompletionParameters> {
   public void addCompletions(@NotNull CompletionParameters parameters,
-                             ProcessingContext context,
+                             @NotNull ProcessingContext context,
                              @NotNull CompletionResultSet resultSet) {
     PsiElement method = parameters.getPosition().getParent();
     assert method instanceof PsiPerlMethod;

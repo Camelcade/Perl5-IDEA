@@ -59,6 +59,7 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
 */
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

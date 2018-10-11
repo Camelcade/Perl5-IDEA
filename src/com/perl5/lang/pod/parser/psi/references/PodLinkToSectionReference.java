@@ -37,7 +37,7 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
 
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     return super.handleElementRename(PodElementFactory.getHeaderText(myElement.getProject(), newElementName));
   }
 

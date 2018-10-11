@@ -51,6 +51,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
     return new PsiPerlGlobVariableImpl(node);
   }
 
+  @NotNull
   @Override
   public PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub) {
     return new PerlGlobStubImpl(parentStub, psi.getPackageName(), psi.getName(), psi.isLeftSideOfAssignment());

@@ -32,7 +32,7 @@ public class PerlStringContentTokenType extends PerlTokenType implements ILeafEl
 
   @NotNull
   @Override
-  public ASTNode createLeafNode(CharSequence leafText) {
+  public ASTNode createLeafNode(@NotNull CharSequence leafText) {
     return new PerlStringContentElementImpl(this, leafText);
   }
 }

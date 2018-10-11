@@ -53,6 +53,7 @@ public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMas
   }
 
 
+  @NotNull
   @Override
   public HTMLMasonFlagsStatementStub createStub(@NotNull HTMLMasonFlagsStatement psi, StubElement parentStub) {
     return new HTMLMasonFlagsStatementStubImpl(parentStub, this, psi.getParentComponentPath());

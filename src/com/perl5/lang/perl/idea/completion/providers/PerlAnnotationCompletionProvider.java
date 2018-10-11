@@ -46,7 +46,7 @@ public class PerlAnnotationCompletionProvider extends CompletionProvider<Complet
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
-                                ProcessingContext context,
+                                @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet resultSet) {
     resultSet.addAllElements(ANNOTATIONS_LOOKUP_ELEMENTS);
   }

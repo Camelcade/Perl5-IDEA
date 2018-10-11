@@ -50,7 +50,7 @@ public class PerlCoverageProgramRunner extends DefaultProgramRunner {
   }
 
   @Override
-  protected void execute(ExecutionEnvironment environment, Callback callback, RunProfileState state)
+  protected void execute(@NotNull ExecutionEnvironment environment, Callback callback, @NotNull RunProfileState state)
     throws ExecutionException {
     super.execute(environment, descriptor -> {
       ProcessHandler processHandler = descriptor.getProcessHandler();

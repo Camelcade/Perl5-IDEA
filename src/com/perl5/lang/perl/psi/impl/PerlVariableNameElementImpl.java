@@ -40,6 +40,7 @@ public class PerlVariableNameElementImpl extends PerlLeafPsiElementWithReference
     }
   }
 
+  @NotNull
   @Override
   public String getName() {
     return getText();

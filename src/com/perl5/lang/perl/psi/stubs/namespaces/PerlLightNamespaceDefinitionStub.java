@@ -32,7 +32,7 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
   @Nullable
   private final StubElement myParent;
 
-  public PerlLightNamespaceDefinitionStub(StubElement parent,
+  public PerlLightNamespaceDefinitionStub(@Nullable StubElement parent,
                                           IStubElementType elementType,
                                           String packageName,
                                           PerlMroType mroType,

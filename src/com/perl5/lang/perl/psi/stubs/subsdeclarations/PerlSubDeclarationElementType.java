@@ -50,6 +50,7 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
     return new PsiPerlSubDeclarationImpl(node);
   }
 
+  @NotNull
   @Override
   public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclarationElement psi, StubElement parentStub) {
     return new PerlSubDeclarationStub(parentStub, psi.getPackageName(), psi.getSubName(), psi.getAnnotations(), this);

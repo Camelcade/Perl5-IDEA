@@ -30,7 +30,9 @@ import java.util.Arrays;
  */
 public class TemplateToolkitFilterNamesCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
-  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                @NotNull ProcessingContext context,
+                                @NotNull CompletionResultSet result) {
     result.addAllElements(Arrays.asList(TemplateToolkitFilterNameMacro.LOOKUP_ELEMENTS));
   }
 }

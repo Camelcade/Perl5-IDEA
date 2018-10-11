@@ -25,6 +25,7 @@ import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -34,7 +35,7 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
   private static final Key<Supplier<Boolean>> POST_HANDLER = Key.create("perl.post.handler");
 
   @Override
-  public void beforeCharDeleted(char c, PsiFile file, Editor editor) {
+  public void beforeCharDeleted(char c, @NotNull PsiFile file, @NotNull Editor editor) {
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset() - 1;
     if (currentOffset < 0) {
@@ -69,7 +70,7 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
   }
 
   @Override
-  public boolean charDeleted(char c, PsiFile file, Editor editor) {
+  public boolean charDeleted(char c, @NotNull PsiFile file, @NotNull Editor editor) {
     Supplier<Boolean> postHandler = POST_HANDLER.get(editor);
     POST_HANDLER.set(editor, null);
     return postHandler != null && postHandler.get();

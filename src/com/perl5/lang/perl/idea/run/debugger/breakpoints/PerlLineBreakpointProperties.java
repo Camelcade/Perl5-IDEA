@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.run.debugger.breakpoints;
 
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.xdebugger.breakpoints.XBreakpointProperties;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -31,7 +32,7 @@ public class PerlLineBreakpointProperties extends XBreakpointProperties<PerlLine
   }
 
   @Override
-  public void loadState(PerlLineBreakpointProperties state) {
+  public void loadState(@NotNull PerlLineBreakpointProperties state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 }

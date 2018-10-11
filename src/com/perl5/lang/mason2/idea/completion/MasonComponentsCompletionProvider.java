@@ -40,7 +40,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MasonComponentsCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
-  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                @NotNull ProcessingContext context,
+                                @NotNull CompletionResultSet result) {
     PsiElement position = parameters.getPosition();
     PsiElement parent = position.getParent();
 

@@ -66,8 +66,9 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
     return myBaseLanguage;
   }
 
+  @NotNull
   @Override
-  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(VirtualFile fileCopy) {
+  protected MultiplePsiFilesPerDocumentFileViewProvider cloneInner(@NotNull VirtualFile fileCopy) {
     return new TemplateToolkitFileViewProvider(getManager(), fileCopy, false);
   }
 

@@ -46,7 +46,7 @@ public class HTMLMasonTypeHierarchyProvider extends PerlTypeHierarchyProvider {
 
   @NotNull
   @Override
-  public HierarchyBrowser createHierarchyBrowser(PsiElement target) {
+  public HierarchyBrowser createHierarchyBrowser(@NotNull PsiElement target) {
     return new HTMLMasonHierarchyBrowser(target);
   }
 

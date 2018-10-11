@@ -46,6 +46,7 @@ public class MasonBraceMatcher implements PairedBraceMatcher, Mason2ElementTypes
     new BracePair(MASON_FILTERED_BLOCK_OPENER, MASON_FILTERED_BLOCK_CLOSER, false),
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

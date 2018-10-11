@@ -48,6 +48,7 @@ public class PerlDoExprElementType extends IStubElementType<PerlRuntimeImportStu
     return new PsiPerlDoExprImpl(node);
   }
 
+  @NotNull
   @Override
   public PerlRuntimeImportStub createStub(@NotNull PerlDoExpr psi, StubElement parentStub) {
     return new PerlRuntimeImportStubImpl(

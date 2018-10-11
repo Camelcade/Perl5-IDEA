@@ -61,7 +61,7 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
   }
 
   @Override
-  public void loadState(MasonSettings state) {
+  public void loadState(@NotNull MasonSettings state) {
     XmlSerializerUtil.copyBean(state, this);
     changeCounter++;
   }

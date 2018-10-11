@@ -101,7 +101,7 @@ public class PerlProjectManager {
     });
     connection.subscribe(PROJECT_ROOTS, new ModuleRootListener() {
       @Override
-      public void rootsChanged(ModuleRootEvent event) {
+      public void rootsChanged(@NotNull ModuleRootEvent event) {
         resetProjectCaches();
       }
     });
@@ -276,7 +276,7 @@ public class PerlProjectManager {
     );
     notification.addAction(new DumbAwareAction(PerlBundle.message("perl.configure.interpreter.action")) {
       @Override
-      public void actionPerformed(AnActionEvent e) {
+      public void actionPerformed(@NotNull AnActionEvent e) {
         Perl5SettingsConfigurable.open(project);
         notification.expire();
       }

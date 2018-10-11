@@ -72,7 +72,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     if (myElement instanceof PerlNamespaceElement && ((PerlNamespaceElement)myElement).isTag()) {
       return myElement;
     }

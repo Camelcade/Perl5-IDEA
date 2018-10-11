@@ -21,6 +21,7 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
+import org.jetbrains.annotations.NotNull;
 
 public class PerlRegenerateXSubsAction extends PerlActionBase {
 
@@ -35,7 +36,7 @@ public class PerlRegenerateXSubsAction extends PerlActionBase {
   }
 
   @Override
-  public void actionPerformed(AnActionEvent e) {
+  public void actionPerformed(@NotNull AnActionEvent e) {
     Project project = getEventProject(e);
     if (project == null) {
       return;

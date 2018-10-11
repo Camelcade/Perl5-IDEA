@@ -58,8 +58,9 @@ public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDoc
     return MASON_POD_TEMPLATE_DATA;
   }
 
+  @NotNull
   @Override
-  protected Mason2TemplatingFileViewProvider cloneInner(final VirtualFile copy) {
+  protected Mason2TemplatingFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
     return new Mason2TemplatingFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

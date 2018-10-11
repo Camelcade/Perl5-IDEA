@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -33,7 +34,7 @@ public class PerlInsertHandlers {
    */
   static class ArrayElementInsertHandler implements InsertHandler<LookupElement> {
     @Override
-    public void handleInsert(final InsertionContext context, LookupElement item) {
+    public void handleInsert(@NotNull final InsertionContext context, @NotNull LookupElement item) {
       EditorModificationUtil.insertStringAtCaret(context.getEditor(), "[]", false, true, 1);
     }
   }
@@ -43,7 +44,7 @@ public class PerlInsertHandlers {
    */
   static class HashElementInsertHandler implements InsertHandler<LookupElement> {
     @Override
-    public void handleInsert(final InsertionContext context, LookupElement item) {
+    public void handleInsert(@NotNull final InsertionContext context, @NotNull LookupElement item) {
       EditorModificationUtil.insertStringAtCaret(context.getEditor(), "{}", false, true, 1);
     }
   }

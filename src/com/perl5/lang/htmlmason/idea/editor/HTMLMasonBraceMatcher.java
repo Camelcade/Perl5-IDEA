@@ -46,6 +46,7 @@ public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonEleme
     new BracePair(HTML_MASON_FLAGS_OPENER, HTML_MASON_FLAGS_CLOSER, false),
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

@@ -25,6 +25,7 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -131,7 +132,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
 
   @Nullable
   @Override
-  public String getActionText(DataContext context) {
+  public String getActionText(@NotNull DataContext context) {
     return null;
   }
 }

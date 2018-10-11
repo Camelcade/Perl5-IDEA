@@ -55,8 +55,9 @@ public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFi
     return HTML_MASON_POD_TEMPLATE_DATA;
   }
 
+  @NotNull
   @Override
-  protected HTMLMasonFileViewProvider cloneInner(final VirtualFile copy) {
+  protected HTMLMasonFileViewProvider cloneInner(@NotNull final VirtualFile copy) {
     return new HTMLMasonFileViewProvider(getManager(), copy, false, getTemplateDataLanguage());
   }
 }

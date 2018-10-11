@@ -24,18 +24,19 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodFile;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 16.04.2016.
  */
 public class PodBackspaceHandler extends BackspaceHandlerDelegate implements PodElementTypes {
   @Override
-  public void beforeCharDeleted(char c, PsiFile file, Editor editor) {
+  public void beforeCharDeleted(char c, @NotNull PsiFile file, @NotNull Editor editor) {
 
   }
 
   @Override
-  public boolean charDeleted(char c, PsiFile file, Editor editor) {
+  public boolean charDeleted(char c, @NotNull PsiFile file, @NotNull Editor editor) {
     if (file instanceof PodFile) {
       CaretModel caretModel = editor.getCaretModel();
       int offset = caretModel.getOffset();

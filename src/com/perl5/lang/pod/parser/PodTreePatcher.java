@@ -22,13 +22,14 @@ import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.templateLanguages.OuterLanguageElement;
 import com.intellij.psi.templateLanguages.SimpleTreePatcher;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 30.03.2016.
  */
 public class PodTreePatcher extends SimpleTreePatcher implements PodElementTypes {
   @Override
-  public void insert(CompositeElement parent, TreeElement anchorBefore, OuterLanguageElement toInsert) {
+  public void insert(@NotNull CompositeElement parent, TreeElement anchorBefore, @NotNull OuterLanguageElement toInsert) {
     while (anchorBefore.getTreePrev() == null && !(parent instanceof FileElement)) {
       anchorBefore = anchorBefore.getTreeParent();
       parent = anchorBefore.getTreeParent();

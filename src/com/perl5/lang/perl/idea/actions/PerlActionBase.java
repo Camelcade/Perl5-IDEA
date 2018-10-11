@@ -20,6 +20,7 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.04.2016.
@@ -30,7 +31,7 @@ public abstract class PerlActionBase extends AnAction {
   }
 
   @Override
-  public void update(AnActionEvent event) {
+  public void update(@NotNull AnActionEvent event) {
     final boolean enabled = isEnabled(event);
     event.getPresentation().setEnabled(enabled);
     if (ActionPlaces.isPopupPlace(event.getPlace())) {

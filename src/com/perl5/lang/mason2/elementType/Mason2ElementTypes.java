@@ -42,7 +42,7 @@ public interface Mason2ElementTypes extends Mason2SyntaxElements {
   IElementType MASON_METHOD_MODIFIER_NAME = new MasonTemplatingTokenTypeEx("MASON_METHOD_MODIFIER_NAME") {
     @NotNull
     @Override
-    public ASTNode createLeafNode(CharSequence leafText) {
+    public ASTNode createLeafNode(@NotNull CharSequence leafText) {
       return new MasonMethodModifierNameImpl(this, leafText);
     }
   };

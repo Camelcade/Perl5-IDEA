@@ -93,7 +93,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   }
 
   @Override
-  public void actionPerformed(AnActionEvent event) {
+  public void actionPerformed(@NotNull AnActionEvent event) {
     if (isEnabled(event)) {
       final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
 
@@ -170,7 +170,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               NotificationType.ERROR
             ).addAction(new DumbAwareAction(PerlBundle.message("perl.configure")) {
               @Override
-              public void actionPerformed(AnActionEvent e) {
+              public void actionPerformed(@NotNull AnActionEvent e) {
                 Notification.get(e).expire();
                 Perl5SettingsConfigurable.open(file);
               }

@@ -35,6 +35,7 @@ public class TemplateToolkitBraceMatcher implements PairedBraceMatcher, Template
     new BracePair(TT2_LEFT_PAREN, TT2_RIGHT_PAREN, true),
   };
 
+  @NotNull
   @Override
   public BracePair[] getPairs() {
     return PAIRS;

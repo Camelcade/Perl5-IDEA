@@ -98,34 +98,34 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     DefaultActionGroup panelActionGroup = myPanel.getActionGroup();
     panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.new")) {
       @Override
-      public void actionPerformed(AnActionEvent e) {
+      public void actionPerformed(@NotNull AnActionEvent e) {
         SdkConfigurationUtil.selectSdkHome(PerlSdkType.INSTANCE, Perl5SdkConfigurable.this::addSdk);
       }
 
       @Override
-      public void update(AnActionEvent e) {
+      public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(true);
       }
     });
     panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.edit")) {
       @Override
-      public void update(AnActionEvent e) {
+      public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(getSelectedSdk() != null);
       }
 
       @Override
-      public void actionPerformed(AnActionEvent e) {
+      public void actionPerformed(@NotNull AnActionEvent e) {
         renameSdk(e);
       }
     });
     panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.delete")) {
       @Override
-      public void update(AnActionEvent e) {
+      public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(getSelectedSdk() != null);
       }
 
       @Override
-      public void actionPerformed(AnActionEvent e) {
+      public void actionPerformed(@NotNull AnActionEvent e) {
         removeSdk(e);
       }
     });

@@ -30,13 +30,19 @@ import com.perl5.lang.tt2.TemplateToolkitFileViewProvider;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 12.06.2016.
  */
 public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements TemplateToolkitElementTypes {
+  @NotNull
   @Override
-  public Result beforeCharTyped(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+  public Result beforeCharTyped(char c,
+                                @NotNull Project project,
+                                @NotNull Editor editor,
+                                @NotNull PsiFile file,
+                                @NotNull FileType fileType) {
     Result result = processChar(c, project, editor, file, fileType);
     return result == null ? super.beforeCharTyped(c, project, editor, file, fileType) : result;
   }

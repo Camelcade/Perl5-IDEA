@@ -28,7 +28,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TryCatchPackageCompletionProvider extends CompletionProvider<CompletionParameters> {
   @Override
-  protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+  protected void addCompletions(@NotNull CompletionParameters parameters,
+                                @NotNull ProcessingContext context,
+                                @NotNull CompletionResultSet result) {
     PerlPackageCompletionUtil.fillWithAllPackageNames(parameters.getPosition(), result);
   }
 }

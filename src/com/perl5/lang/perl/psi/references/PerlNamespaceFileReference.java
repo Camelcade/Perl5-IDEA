@@ -53,7 +53,7 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     String currentName = myElement.getCanonicalName();
     if (currentName != null && newElementName.endsWith(".pm")) {
       String[] nameChunks = currentName.split(PerlPackageUtil.PACKAGE_SEPARATOR);

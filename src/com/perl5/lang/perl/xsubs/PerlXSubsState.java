@@ -97,7 +97,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   @Override
-  public void loadState(PerlXSubsState state) {
+  public void loadState(@NotNull PerlXSubsState state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 
@@ -164,7 +164,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
             NotificationType.INFORMATION,
             notification -> Collections.singletonList(new AnAction(PerlBundle.message("perl.deparsing.action")) {
               @Override
-              public void actionPerformed(AnActionEvent e) {
+              public void actionPerformed(@NotNull AnActionEvent e) {
                 notification.expire();
                 reparseXSubs();
               }
