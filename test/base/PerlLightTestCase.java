@@ -93,6 +93,7 @@ import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
@@ -133,6 +134,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   private Perl5CodeInsightSettings myCodeInsightSettings;
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
+  private PerlInjectionMarkersService myInjectionMarkersService;
 
   public String getFileExtension() {
     return PerlFileTypeScript.EXTENSION_PL;
@@ -152,11 +154,13 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     myCodeInsightSettings = Perl5CodeInsightSettings.getInstance().copy();
     mySharedSettings = XmlSerializerUtil.createCopy(PerlSharedSettings.getInstance(getProject()));
     myLocalSettings = XmlSerializerUtil.createCopy(PerlLocalSettings.getInstance(getProject()));
+    myInjectionMarkersService = XmlSerializerUtil.createCopy(PerlInjectionMarkersService.getInstance(getProject()));
   }
 
   @Override
   protected void tearDown() throws Exception {
     try {
+      PerlInjectionMarkersService.getInstance(getProject()).loadState(myInjectionMarkersService);
       Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
       PerlSharedSettings.getInstance(getProject()).loadState(mySharedSettings);
       PerlLocalSettings.getInstance(getProject()).loadState(myLocalSettings);

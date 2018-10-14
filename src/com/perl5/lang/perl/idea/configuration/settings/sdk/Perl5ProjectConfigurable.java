@@ -82,7 +82,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   private CollectionListModel<String> selfNamesModel;
   private ComboBox<PerlVersion> myTargetPerlVersionComboBox;
 
-
   public Perl5ProjectConfigurable(@NotNull Project project) {
     myProject = project;
     mySharedSettings = PerlSharedSettings.getInstance(myProject);
@@ -377,6 +376,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     mySharedSettings.selfNames.addAll(selfNamesModel.getItems());
 
     mySharedSettings.settingsUpdated();
+
     if (reparseOpenFiles) {
       FileContentUtil.reparseOpenedFiles();
     }

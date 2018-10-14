@@ -114,6 +114,7 @@
     <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableExtension"/>
+    <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
 
     <fileTypeProvider implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeProvider"/>
     <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
@@ -157,6 +158,7 @@
         implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
     <editorNotificationProvider implementation="com.perl5.lang.perl.idea.editor.notification.PerlAssociationEditorNotification"/>
 
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInSubsService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>

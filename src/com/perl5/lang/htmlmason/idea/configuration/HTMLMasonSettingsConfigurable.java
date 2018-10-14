@@ -57,7 +57,6 @@ import java.util.Set;
 public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigurable {
   final HTMLMasonSettings mySettings;
 
-  @SuppressWarnings("Since15")
   protected CollectionListModel<String> substitutedExtensionsModel;
   protected JBList substitutedExtensionsList;
   protected JPanel substitutedExtensionsPanel;

@@ -30,6 +30,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvide
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -39,8 +40,6 @@ import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-
-import static com.perl5.lang.perl.idea.intellilang.AbstractPerlLanguageInjector.LANGUAGE_MAP;
 
 /**
  * Created by hurricup on 24.01.2016.
@@ -229,12 +228,15 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
   public static void fillWithInjectableMarkers(@NotNull PsiElement element, @NotNull final CompletionResultSet resultSet) {
     // injectable markers
-    for (Map.Entry<String, Language> entry : LANGUAGE_MAP.entrySet()) {
-      String abbreviation = entry.getKey();
-      Language language = entry.getValue();
+    PerlInjectionMarkersService injectionService = PerlInjectionMarkersService.getInstance(element.getProject());
+    for (String marker : injectionService.getSupportedMarkers()) {
+      Language language = injectionService.getLanguageByMarker(marker);
+      if (language == null) {
+        continue;
+      }
 
       LookupElementBuilder newItem = LookupElementBuilder
-        .create(abbreviation)
+        .create(marker)
         .withTypeText("inject with " + language.getDisplayName(), true);
 
       if (language.getAssociatedFileType() != null) {
@@ -251,6 +253,8 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
       resultSet.addElement(LookupElementBuilder.create(marker));
     }
 
+    PerlInjectionMarkersService injectionService = PerlInjectionMarkersService.getInstance(element.getProject());
+
     // collect new values
     PsiFile file = element.getContainingFile();
     if (file != null) {
@@ -260,7 +264,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
           String openerName = o.getName();
           if (StringUtil.isNotEmpty(openerName) &&
               !HEREDOC_OPENERS_CACHE.contains(openerName) &&
-              !LANGUAGE_MAP.containsKey(openerName)) {
+              injectionService.getLanguageByMarker(openerName) == null) {
             HEREDOC_OPENERS_CACHE.add(openerName);
             resultSet.addElement(LookupElementBuilder.create(openerName));
           }

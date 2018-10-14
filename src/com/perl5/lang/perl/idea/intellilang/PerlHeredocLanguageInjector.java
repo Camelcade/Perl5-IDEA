@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Created by hurricup on 30.05.2017.
  */
-public class PerlHeredocLanguageInjector extends AbstractPerlLanguageInjector implements MultiHostInjector {
+public class PerlHeredocLanguageInjector implements MultiHostInjector {
   private static final List<? extends Class<? extends PsiElement>> ELEMENTS_TO_INJECT =
     Collections.singletonList(PerlHeredocElementImpl.class);
 
@@ -64,7 +64,7 @@ public class PerlHeredocLanguageInjector extends AbstractPerlLanguageInjector im
     }
 
     String terminatorText = terminator.getText();
-    Language mappedLanguage = LANGUAGE_MAP.get(terminatorText);
+    Language mappedLanguage = PerlInjectionMarkersService.getInstance(terminator.getProject()).getLanguageByMarker(terminatorText);
 
     if (mappedLanguage != null) {
       return mappedLanguage;

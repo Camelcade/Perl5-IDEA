@@ -19,12 +19,11 @@ package com.perl5.lang.perl.idea.refactoring;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
+import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
-
-import static com.perl5.lang.perl.idea.intellilang.AbstractPerlLanguageInjector.LANGUAGE_MAP;
 
 /**
  * Created by hurricup on 12.06.2015.
@@ -34,7 +33,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   @Override
   public SuggestedNameInfo getSuggestedNames(PsiElement element, PsiElement nameSuggestionContext, Set<String> result) {
     if (element instanceof PerlHeredocOpener) {
-      result.addAll(LANGUAGE_MAP.keySet());
+      result.addAll(PerlInjectionMarkersService.getInstance(element.getProject()).getSupportedMarkers());
     }
 
     // todo play with this

@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 30.05.2017.
  */
-public class PerlStringLanguageInjector extends AbstractPerlLanguageInjector implements LanguageInjector {
+public class PerlStringLanguageInjector implements LanguageInjector {
   @Override
   public void getLanguagesToInject(@NotNull PsiLanguageInjectionHost host, @NotNull InjectedLanguagePlaces injectionPlacesRegistrar) {
     if (host instanceof PerlString && host.isValidHost()) {
@@ -40,7 +40,7 @@ public class PerlStringLanguageInjector extends AbstractPerlLanguageInjector imp
       if (injectAnnotation != null) {
         String languageMarker = injectAnnotation.getLanguageMarker();
         if (languageMarker != null) {
-          Language targetLanguage = LANGUAGE_MAP.get(languageMarker);
+          Language targetLanguage = PerlInjectionMarkersService.getInstance(host.getProject()).getLanguageByMarker(languageMarker);
           if (targetLanguage != null) {
             TextRange contentRange = ElementManipulators.getValueTextRange(host);
             if (!contentRange.isEmpty()) {
