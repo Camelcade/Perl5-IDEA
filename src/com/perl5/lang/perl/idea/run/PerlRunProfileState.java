@@ -19,10 +19,8 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.process.OSProcessHandler;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessOutputTypes;
-import com.intellij.execution.process.ProcessTerminatedListener;
+import com.intellij.execution.configurations.PtyCommandLine;
+import com.intellij.execution.process.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
@@ -121,7 +119,8 @@ public class PerlRunProfileState extends CommandLineState {
     Map<String, String> environment = calcEnv(runProfile);
     commandLine.withEnvironment(environment);
     commandLine.withParentEnvironmentType(runProfile.isPassParentEnvs() ? CONSOLE : NONE);
-    OSProcessHandler handler = new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString(), charset) {
+    PtyCommandLine ptyCommandLine = new PtyCommandLine(commandLine);
+    OSProcessHandler handler = new ColoredProcessHandler(ptyCommandLine.createProcess(), ptyCommandLine.getCommandLineString(), charset) {
       @Override
       public void startNotify() {
         super.startNotify();
@@ -143,7 +142,7 @@ public class PerlRunProfileState extends CommandLineState {
       return new String[0];
     }
     List<String> result = StringUtil.split(perlParameters, " ");
-    return result.toArray(new String[result.size()]);
+    return result.toArray(new String[0]);
   }
 
   protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
