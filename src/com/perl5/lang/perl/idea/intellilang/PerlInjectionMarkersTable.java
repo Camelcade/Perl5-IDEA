@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.intellilang;
 import com.intellij.lang.Language;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBoxTableRenderer;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -148,7 +147,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     if (!isModified()) {
       return;
     }

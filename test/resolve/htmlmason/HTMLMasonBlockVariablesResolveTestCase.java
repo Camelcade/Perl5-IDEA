@@ -25,7 +25,7 @@ public abstract class HTMLMasonBlockVariablesResolveTestCase extends HTMLMasonVa
     doTestResolve();
   }
 
-  public void testFromSecondEntryBackwards() throws Exception {
+  public void testFromSecondEntryBackwards() {
     doTestResolve();
   }
 }

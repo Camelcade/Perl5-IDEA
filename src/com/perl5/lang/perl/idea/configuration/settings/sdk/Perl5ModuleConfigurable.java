@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.util.Disposer;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +48,7 @@ public class Perl5ModuleConfigurable implements UnnamedConfigurable {
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     myPerlContentEntriesTreeEditor.apply();
   }
 

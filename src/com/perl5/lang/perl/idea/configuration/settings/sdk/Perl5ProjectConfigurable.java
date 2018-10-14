@@ -21,7 +21,6 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.*;
@@ -341,7 +340,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   }
 
   @Override
-  public void apply() throws ConfigurationException {
+  public void apply() {
     myPerl5SdkConfigurable.apply();
     if (isLibsModified()) {
       PerlProjectManager.getInstance(myProject).setExternalLibraries(myLibsModel.getItems());
