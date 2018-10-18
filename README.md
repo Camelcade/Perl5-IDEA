@@ -20,6 +20,7 @@ If you want to participate in development, don't forget to read our [contributio
 
 * [Camelcade twitter](https://twitter.com/CamelcadeIDE) - here you may find links to the most recent dev builds
 * [Camelcade wiki](https://github.com/hurricup/Perl5-IDEA/wiki)
+* [Gitter chat](https://gitter.im/IntelliJ-Plugin-Perl5/Lobby)
 * [Google group](https://groups.google.com/forum/#!forum/camelcade)
 * [Onion parsing comparision](http://evstigneev.com/onion_all.png)
 
