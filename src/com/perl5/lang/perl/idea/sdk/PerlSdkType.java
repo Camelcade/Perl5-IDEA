@@ -17,6 +17,9 @@
 package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.openapi.projectRoots.*;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
+import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
+import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
@@ -36,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -68,8 +72,7 @@ public class PerlSdkType extends SdkType {
   @Override
   public void setupSdkPaths(@NotNull Sdk sdk) {
     SdkModificator sdkModificator = sdk.getSdkModificator();
-
-    for (String perlLibPath : getINCPaths(sdk.getHomePath())) {
+    for (String perlLibPath : getINCPaths(sdk)) {
       File libDir = new File(perlLibPath);
 
       if (libDir.exists() && libDir.isDirectory()) {
@@ -83,11 +86,11 @@ public class PerlSdkType extends SdkType {
     sdkModificator.commitChanges();
   }
 
-  public List<String> getINCPaths(String sdkHomePath) {
-    String executablePath = getExecutablePath(sdkHomePath);
+  @NotNull
+  private static List<String> getINCPaths(@NotNull Sdk sdk) {
     List<String> perlLibPaths = new ArrayList<>();
     for (String path : PerlRunUtil.getOutputFromProgram(
-      executablePath,
+      sdk.getHomePath(),
       "-le",
       "print for @INC"
     )) {
@@ -113,6 +116,7 @@ public class PerlSdkType extends SdkType {
 
   @Nullable
   @Override
+  // fixme move this to the hostHandler
   public String suggestHomePath() {
     String perlPath = PerlRunUtil.getPathFromPerl();
 
@@ -121,10 +125,10 @@ public class PerlSdkType extends SdkType {
     }
 
     if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD) {
-      return "/usr/bin/";
+      return "/usr/bin/" + getPerlExecutableName();
     }
 
-    return System.getenv("PERL_HOME");
+    return FileUtil.join(System.getenv("PERL_HOME"), getPerlExecutableName());
   }
 
   @NotNull
@@ -136,8 +140,7 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public boolean isValidSdkHome(String sdkHome) {
-    File f = new File(getExecutablePath(sdkHome));
-    return f.exists();
+    throw new RuntimeException("Unsupported");
   }
 
   @NotNull
@@ -152,15 +155,9 @@ public class PerlSdkType extends SdkType {
   }
 
   @NotNull
-  public String getExecutablePath(@NotNull String sdkHome) {
-    return FileUtil.join(sdkHome, getPerlExecutableName());
-  }
-
-  @NotNull
-  private String getPerlExecutableName() {
+  public String getPerlExecutableName() {
     return SystemInfo.isWindows ? "perl.exe" : "perl";
   }
-
 
   @Override
   public Icon getIcon() {
@@ -186,7 +183,7 @@ public class PerlSdkType extends SdkType {
 
   @Nullable
   private VersionDescriptor getPerlVersionDescriptor(@NotNull String sdkHomePath) {
-    List<String> versionLines = PerlRunUtil.getOutputFromProgram(getExecutablePath(sdkHomePath), "-v");
+    List<String> versionLines = PerlRunUtil.getOutputFromProgram(sdkHomePath, "-v");
 
     if (versionLines.isEmpty()) {
       return null;

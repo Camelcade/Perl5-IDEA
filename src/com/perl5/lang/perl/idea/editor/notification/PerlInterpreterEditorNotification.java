@@ -63,7 +63,7 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
 
       EditorNotificationPanel panel;
 
-      String sdkPath = PerlProjectManager.getSdkPath(myProject, virtualFile);
+      String sdkPath = PerlProjectManager.getInterpreterPath(myProject, virtualFile);
       if (sdkPath != null && VfsUtil.findFileByIoFile(new File(sdkPath), true) != null) {
         return null;
       }

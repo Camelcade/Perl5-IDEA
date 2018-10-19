@@ -48,8 +48,8 @@ public class PerlRunUtil {
   public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
                                                       @Nullable VirtualFile scriptFile,
                                                       String... perlParameters) {
-    String perlPath = PerlProjectManager.getSdkPath(project, scriptFile);
-    return perlPath == null ? null : getPerlCommandLine(project, perlPath, scriptFile, perlParameters);
+    String interpreterPath = PerlProjectManager.getInterpreterPath(project, scriptFile);
+    return interpreterPath == null ? null : getPerlCommandLine(project, interpreterPath, scriptFile, perlParameters);
   }
 
   /**
@@ -77,12 +77,11 @@ public class PerlRunUtil {
 
   @NotNull
   public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
-                                                      @NotNull String perlDirectory,
+                                                      @NotNull String interpreterPath,
                                                       @Nullable VirtualFile scriptFile,
                                                       String... perlParameters) {
     GeneralCommandLine commandLine = new GeneralCommandLine();
-    String executablePath = PerlSdkType.INSTANCE.getExecutablePath(perlDirectory);
-    commandLine.setExePath(FileUtil.toSystemDependentName(executablePath));
+    commandLine.setExePath(FileUtil.toSystemDependentName(interpreterPath));
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
       commandLine.addParameter("-I" + libRoot.getCanonicalPath());
     }
@@ -209,14 +208,7 @@ public class PerlRunUtil {
   @Nullable
   public static String getPathFromPerl() {
     List<String> perlPathLines = getOutputFromProgram("perl", "-le", "print $^X");
-
-    if (perlPathLines.size() == 1) {
-      int perlIndex = perlPathLines.get(0).lastIndexOf("perl");
-      if (perlIndex > 0) {
-        return perlPathLines.get(0).substring(0, perlIndex);
-      }
-    }
-    return null;
+    return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
   }
 
   @NotNull

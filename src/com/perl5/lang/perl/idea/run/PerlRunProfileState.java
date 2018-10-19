@@ -62,7 +62,7 @@ public class PerlRunProfileState extends CommandLineState {
     }
 
     Project project = getEnvironment().getProject();
-    String perlSdkPath = PerlProjectManager.getSdkPath(project, scriptFile);
+    String perlSdkPath = PerlProjectManager.getInterpreterPath(project, scriptFile);
 
     String alternativeSdkPath = runProfile.getAlternativeSdkPath();
     if (runProfile.isUseAlternativeSdk() && !StringUtil.isEmpty(alternativeSdkPath)) {

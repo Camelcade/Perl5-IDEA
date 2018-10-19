@@ -59,7 +59,7 @@ import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -99,7 +99,6 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -211,7 +210,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
         assert libdir != null;
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
-        perlProjectManager.setProjectSdk(new ProjectJdkImpl("test", PerlSdkType.INSTANCE));
+        perlProjectManager.setProjectSdk(PerlSdkTable.getInstance().createSdk("test"));
         perlProjectManager.addExternalLibrary(libdir);
 
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());

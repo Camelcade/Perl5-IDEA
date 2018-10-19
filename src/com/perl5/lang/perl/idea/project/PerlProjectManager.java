@@ -31,6 +31,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootEvent;
@@ -40,6 +41,7 @@ import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -53,10 +55,13 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigur
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSdkLibrary;
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.*;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
@@ -293,23 +298,43 @@ public class PerlProjectManager {
   }
 
   @Nullable
-  public static String getSdkPath(@Nullable Module module) {
-    Sdk sdk = getSdk(module);
-    return sdk == null ? null : sdk.getHomePath();
+  public static String getInterpreterPath(@Nullable Module module) {
+    return getInterpreterPathWithUpdate(getSdk(module));
+  }
+
+  /**
+   * Migration method for 2018.3. Updates sdk path to interpreter path, not bin dir
+   *
+   * @param sdk in question
+   * @return path to interpreter
+   */
+  @Contract("null->null")
+  @Nullable
+  private static String getInterpreterPathWithUpdate(@Nullable Sdk sdk) {
+    if (sdk == null) {
+      return null;
+    }
+    String homePath = sdk.getHomePath();
+    if (homePath != null && !StringUtil.contains(Paths.get(homePath).getFileName().toString(), "perl")) {
+      homePath = FileUtil.join(homePath, PerlSdkType.INSTANCE.getPerlExecutableName());
+      SdkModificator modificator = sdk.getSdkModificator();
+      modificator.setHomePath(homePath);
+      modificator.commitChanges();
+    }
+    return homePath;
   }
 
   @Nullable
-  public static String getSdkPath(@Nullable Project project) {
-    Sdk sdk = getSdk(project);
-    return sdk == null ? null : sdk.getHomePath();
+  public static String getInterpreterPath(@Nullable Project project) {
+    return getInterpreterPathWithUpdate(getSdk(project));
   }
 
-  public static String getSdkPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+  public static String getInterpreterPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
     if (virtualFile == null) {
-      return getSdkPath(project);
+      return getInterpreterPath(project);
     }
     Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
-    return module == null ? getSdkPath(project) : getSdkPath(module);
+    return module == null ? getInterpreterPath(project) : getInterpreterPath(module);
   }
 
   public static boolean isPerlEnabled(@Nullable Project project) {
