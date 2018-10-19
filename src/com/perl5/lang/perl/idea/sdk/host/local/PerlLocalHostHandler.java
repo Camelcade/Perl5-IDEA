@@ -52,6 +52,12 @@ public class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, Per
 
   @NotNull
   @Override
+  public String getShortName() {
+    return PerlBundle.message("perl.host.handler.localhost.short.name");
+  }
+
+  @NotNull
+  @Override
   public PerlLocalHostData createData() {
     return new PerlLocalHostData(this);
   }

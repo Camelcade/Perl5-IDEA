@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk.host.local;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.execution.configurations.PtyCommandLine;
 import com.intellij.execution.process.ColoredProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
@@ -29,6 +30,7 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -68,6 +70,15 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
     }
 
     return getOsHandler().getDefaultHomePath();
+  }
+
+  @Nullable
+  @Override
+  public Path findFile(@NotNull String fileName) {
+    return PathEnvironmentVariableUtil.findAllExeFilesInPath(fileName).stream()
+      .map(File::toPath)
+      .findFirst()
+      .orElse(null);
   }
 
   @Override

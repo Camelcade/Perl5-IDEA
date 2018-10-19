@@ -136,6 +136,8 @@
                            implementationClass="com.perl5.lang.perl.idea.sdk.implementation.porters.PerlPortersHandler"/>
     <versionManagerHandler key="system"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.system.PerlSystemHandler"/>
+    <versionManagerHandler key="perlbrew"
+                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewHandler"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

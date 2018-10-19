@@ -44,6 +44,14 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   @NotNull
   public abstract GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine);
 
+  /**
+   * @return short lowercased name, for interpreters list
+   */
+  @NotNull
+  public String getShortName() {
+    return getHandler().getShortName();
+  }
+
   @Contract("null->null")
   @Nullable
   static PerlVersionManagerData from(@Nullable Sdk sdk) {

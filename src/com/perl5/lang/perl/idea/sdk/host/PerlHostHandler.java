@@ -71,6 +71,12 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   public abstract String getMenuItemTitle();
 
   /**
+   * @return short lowercased name, for interpreters list
+   */
+  @NotNull
+  public abstract String getShortName();
+
+  /**
    * Attempts to create a host data for {@code sdk}.
    *
    * @param sdk newly created sdk with user-selected path set as a home path.

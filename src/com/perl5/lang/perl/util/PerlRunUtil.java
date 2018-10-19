@@ -47,6 +47,8 @@ import java.util.*;
  * Created by hurricup on 26.04.2016.
  */
 public class PerlRunUtil {
+  public static final String PERL_LE = "-le";
+  public static final String PERL_CTRL_X = "print $^X";
   public static final String PERL5OPT = "PERL5OPT";
   private static final Logger LOG = Logger.getInstance(PerlRunUtil.class);
 
@@ -219,7 +221,7 @@ public class PerlRunUtil {
   @Nullable
   public static String getPathFromPerl(@NotNull PerlHostData hostData) {
     List<String> perlPathLines = getOutputFromProgram(
-      hostData, hostData.getOsHandler().getPerlExecutableName(), "-le", "print $^X");
+      hostData, hostData.getOsHandler().getPerlExecutableName(), PERL_LE, PERL_CTRL_X);
     return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
   }
 

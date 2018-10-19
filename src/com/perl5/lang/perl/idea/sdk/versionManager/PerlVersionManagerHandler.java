@@ -56,6 +56,14 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   public abstract String getMenuItemTitle();
 
   /**
+   * @return short lowercased name, for interpreters list
+   */
+  @NotNull
+  public String getShortName() {
+    return getPresentableName();
+  }
+
+  /**
    * @return Version Manager presentable name
    */
   @NotNull

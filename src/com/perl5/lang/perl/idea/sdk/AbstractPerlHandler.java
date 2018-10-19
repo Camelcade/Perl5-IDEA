@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
+import com.intellij.util.xmlb.XmlSerializer;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,6 +67,7 @@ public abstract class AbstractPerlHandler<Data extends AbstractPerlData<Data, Ha
    */
   @Nullable
   protected Data doLoadData(@NotNull Element element, @NotNull Data data) {
+    XmlSerializer.deserializeInto(data, element);
     return data;
   }
 
@@ -83,5 +85,6 @@ public abstract class AbstractPerlHandler<Data extends AbstractPerlData<Data, Ha
    * Saves additional fields of the {@code data} to the {@code targetElement}
    */
   protected void doSaveData(@NotNull Element targetElement, Data data) {
+    XmlSerializer.serializeInto(data, targetElement);
   }
 }

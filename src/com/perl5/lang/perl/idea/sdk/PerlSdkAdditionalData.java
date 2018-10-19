@@ -50,17 +50,17 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
   }
 
   @NotNull
-  public PerlHostData getHostData() {
+  public PerlHostData<?, ?> getHostData() {
     return myHostData;
   }
 
   @NotNull
-  public PerlVersionManagerData getVersionManagerData() {
+  public PerlVersionManagerData<?, ?> getVersionManagerData() {
     return myVersionManagerData;
   }
 
   @NotNull
-  public PerlImplementationData getImplementationData() {
+  public PerlImplementationData<?, ?> getImplementationData() {
     return myImplementationData;
   }
 

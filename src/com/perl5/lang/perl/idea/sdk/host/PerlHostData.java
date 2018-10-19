@@ -59,6 +59,20 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   public abstract Path suggestHomePath();
 
   /**
+   * @return short lowercased name, for interpreters list
+   */
+  @NotNull
+  public String getShortName() {
+    return getHandler().getShortName();
+  }
+
+  /**
+   * Attempts to find a file at host
+   */
+  @Nullable
+  public abstract Path findFile(@NotNull String fileName);
+
+  /**
    * Creates a process and process handler to be run in console.
    */
   @NotNull
