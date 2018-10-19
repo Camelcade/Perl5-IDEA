@@ -16,6 +16,7 @@
 
 package com.perl5.lang.tt2.idea.settings;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
@@ -79,7 +80,8 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   public void settingsUpdated() {
     createLazyObjects();
-    WriteAction.run(() -> FileTypeManagerEx.getInstanceEx().fireFileTypesChanged());
+    ApplicationManager.getApplication().invokeLater(
+      () -> WriteAction.run(() -> FileTypeManagerEx.getInstanceEx().fireFileTypesChanged()));
   }
 
   protected void setProject(Project project) {
