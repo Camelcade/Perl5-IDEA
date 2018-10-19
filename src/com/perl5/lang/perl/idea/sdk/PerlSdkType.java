@@ -24,6 +24,10 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationData;
+import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +54,15 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public void saveAdditionalData(@NotNull SdkAdditionalData sdkAdditionalData, @NotNull Element element) {
+    if (sdkAdditionalData instanceof PerlSdkAdditionalData) {
+      ((PerlSdkAdditionalData)sdkAdditionalData).save(element);
+    }
+  }
 
+  @NotNull
+  @Override
+  public PerlSdkAdditionalData loadAdditionalData(Element additional) {
+    return PerlSdkAdditionalData.load(additional);
   }
 
   @Override
@@ -190,6 +202,40 @@ public class PerlSdkType extends SdkType {
   @NotNull
   public static PerlSdkType getInstance() {
     return INSTANCE;
+  }
+
+  /**
+   * Creates and adds new Perl SDK
+   *
+   * @param interpreterPath interpreter path
+   * @param successCallback optional callback to invoke on success
+   */
+  public static void createAndAddSdk(@NotNull String interpreterPath,
+                                     @NotNull PerlHostData hostData,
+                                     @NotNull PerlVersionManagerData versionManagerData,
+                                     @Nullable Runnable successCallback) {
+    PerlSdkType sdkType = INSTANCE;
+    String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
+      sdkType, interpreterPath, Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
+
+    final ProjectJdkImpl newSdk = PerlSdkTable.getInstance().createSdk(newSdkName);
+    newSdk.setHomePath(interpreterPath);
+
+    PerlImplementationData<?, ?> implementationData = PerlImplementationHandler.createData(
+      interpreterPath, hostData, versionManagerData);
+
+    if (implementationData == null) {
+      return;
+    }
+
+    newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData));
+
+    sdkType.setupSdkPaths(newSdk);
+    // should we check for version string?
+    if (successCallback != null) {
+      successCallback.run();
+    }
+    PerlSdkTable.getInstance().addJdk(newSdk);
   }
 
   private static class VersionDescriptor {

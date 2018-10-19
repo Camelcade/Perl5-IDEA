@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
@@ -25,8 +27,6 @@ import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
-import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
-import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
@@ -39,13 +39,14 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
   public static final Perl5SdkWrapper DISABLE_PERL_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.disable.perl.support"));
@@ -96,17 +97,39 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
     // add sdk button
     DefaultActionGroup panelActionGroup = myPanel.getActionGroup();
-    panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.new")) {
-      @Override
-      public void actionPerformed(@NotNull AnActionEvent e) {
-        SdkConfigurationUtil.selectSdkHome(PerlSdkType.INSTANCE, Perl5SdkConfigurable.this::addSdk);
-      }
 
-      @Override
-      public void update(@NotNull AnActionEvent e) {
-        e.getPresentation().setEnabledAndVisible(true);
+    List<ActionGroup> groups = PerlHostHandler.stream().map(hostHandler -> {
+      List<DumbAwareAction> groupItems = PerlVersionManagerHandler.stream().map(
+        versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
+          @Override
+          public void actionPerformed(@NotNull AnActionEvent e) {
+            versionManagerHandler.createSdkInteractively(hostHandler, () -> myChange = true);
+          }
+
+          @Override
+          public void update(@NotNull AnActionEvent e) {
+            e.getPresentation().setEnabledAndVisible(true);
+          }
+        }).collect(Collectors.toList());
+
+      return new ActionGroup(hostHandler.getMenuItemTitle(), true) {
+        @NotNull
+        @Override
+        public AnAction[] getChildren(@Nullable AnActionEvent e) {
+          return groupItems.toArray(AnAction.EMPTY_ARRAY);
+        }
+      };
+    }).collect(Collectors.toList());
+
+    if (groups.size() == 1) {
+      for (AnAction action : groups.get(0).getChildren(null)) {
+        panelActionGroup.add(action);
       }
-    });
+    }
+    else {
+      groups.forEach(panelActionGroup::add);
+    }
+
     panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.edit")) {
       @Override
       public void update(@NotNull AnActionEvent e) {
@@ -150,19 +173,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   public Perl5SdkWrapper getSelectedSdkWrapper() {
     ComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
     return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
-  }
-
-  private void addSdk(@NotNull String home) {
-    PerlSdkType sdkType = PerlSdkType.INSTANCE;
-    String newSdkName = SdkConfigurationUtil.createUniqueSdkName(sdkType,
-                                                                 home,
-                                                                 Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
-    final ProjectJdkImpl newSdk = new ProjectJdkImpl(newSdkName, sdkType);
-    newSdk.setHomePath(home);
-    sdkType.setupSdkPaths(newSdk);
-    // should we check for version string?
-    myChange = true;
-    PerlSdkTable.getInstance().addJdk(newSdk);
   }
 
   private void removeSdk(AnActionEvent e) {

@@ -33,6 +33,15 @@
       <with attribute="implementationClass"
             implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
     </extensionPoint>
+    <extensionPoint name="hostHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
+      <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.host.PerlHostHandler"/>
+    </extensionPoint>
+    <extensionPoint name="implementationHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
+      <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler"/>
+    </extensionPoint>
+    <extensionPoint name="versionManagerHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean">
+      <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler"/>
+    </extensionPoint>
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"/>
     <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider"/>
@@ -120,6 +129,13 @@
     <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
 
     <importsProvider implementation="com.perl5.lang.perl.extensions.imports.PerlCpanfileImportProvider"/>
+
+    <hostHandler key="localhost"
+                 implementationClass="com.perl5.lang.perl.idea.sdk.host.local.PerlLocalHostHandler"/>
+    <implementationHandler key="porters"
+                           implementationClass="com.perl5.lang.perl.idea.sdk.implementation.porters.PerlPortersHandler"/>
+    <versionManagerHandler key="system"
+                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.system.PerlSystemVersionManagerHandler"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
