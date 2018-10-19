@@ -16,6 +16,10 @@
 
 package com.perl5.lang.perl.idea.sdk.host;
 
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -24,6 +28,10 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Contains data necessary to access a perl host. E.g. local, wsl, ssh, docker
@@ -40,9 +48,35 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @NotNull
   public abstract PerlOsHandler getOsHandler();
 
+  /**
+   * Returns a recommended starting path for a file chooser (where SDKs of this type are usually may be found),
+   * or {@code null} if not applicable/no SDKs found.
+   * <p/>
+   * E.g. for Python SDK on Unix the method may return either {@code "/usr/bin"} or {@code "/usr/bin/python"}
+   * (if there is only one Python interpreter installed on a host).
+   */
+  @Nullable
+  public abstract Path suggestHomePath();
+
+  /**
+   * Creates a process and process handler to be run in console.
+   */
+  @NotNull
+  public abstract ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine,
+                                                             @NotNull Charset charset) throws ExecutionException;
+
+
+  @NotNull
+  public abstract ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException;
+
   @Contract("null->null")
   @Nullable
-  static PerlHostData from(@Nullable Sdk sdk) {
+  public static PerlHostData from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getHostData);
   }
+
+  public static PerlHostData notNullFrom(@NotNull Sdk sdk) {
+    return Objects.requireNonNull(from(sdk), () -> "No host data in " + sdk);
+  }
 }
+

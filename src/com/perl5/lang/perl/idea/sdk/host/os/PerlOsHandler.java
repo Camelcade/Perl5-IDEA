@@ -18,6 +18,8 @@ package com.perl5.lang.perl.idea.sdk.host.os;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.file.Path;
+
 public abstract class PerlOsHandler {
   @NotNull
   private final String myName;
@@ -25,6 +27,12 @@ public abstract class PerlOsHandler {
   public PerlOsHandler(@NotNull String name) {
     myName = name;
   }
+
+  @NotNull
+  public abstract String getPerlExecutableName();
+
+  @NotNull
+  public abstract Path getDefaultHomePath();
 
   /**
    * @return operation system presentable name

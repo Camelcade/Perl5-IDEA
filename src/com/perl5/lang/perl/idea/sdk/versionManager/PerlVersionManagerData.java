@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -33,6 +34,15 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   public PerlVersionManagerData(@NotNull Handler handler) {
     super(handler);
   }
+
+  /**
+   * Patched commandline according to the rules of the version manager and current version manager data
+   *
+   * @param originalCommandLine non-patched commandline
+   * @return patched or original commandline
+   */
+  @NotNull
+  public abstract GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine);
 
   @Contract("null->null")
   @Nullable

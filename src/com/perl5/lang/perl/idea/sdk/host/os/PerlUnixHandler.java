@@ -18,13 +18,27 @@ package com.perl5.lang.perl.idea.sdk.host.os;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 class PerlUnixHandler extends PerlOsHandler {
   public PerlUnixHandler(@NotNull String name) {
     super(name);
   }
 
+  @NotNull
+  public String getPerlExecutableName() {
+    return "perl";
+  }
+
   @Override
   public final boolean isMsWindows() {
     return false;
+  }
+
+  @NotNull
+  @Override
+  public Path getDefaultHomePath() {
+    return Paths.get("/usr/bin", getPerlExecutableName());
   }
 }

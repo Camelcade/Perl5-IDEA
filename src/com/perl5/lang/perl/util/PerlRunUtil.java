@@ -16,12 +16,14 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.util.ExecUtil;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
@@ -31,11 +33,14 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -43,13 +48,15 @@ import java.util.*;
  */
 public class PerlRunUtil {
   public static final String PERL5OPT = "PERL5OPT";
+  private static final Logger LOG = Logger.getInstance(PerlRunUtil.class);
 
   @Nullable
   public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
                                                       @Nullable VirtualFile scriptFile,
                                                       String... perlParameters) {
     String interpreterPath = PerlProjectManager.getInterpreterPath(project, scriptFile);
-    return interpreterPath == null ? null : getPerlCommandLine(project, interpreterPath, scriptFile, perlParameters);
+    return interpreterPath == null ? null :
+           getPerlCommandLine(project, interpreterPath, scriptFile, Arrays.asList(perlParameters), Collections.emptyList());
   }
 
   /**
@@ -79,7 +86,8 @@ public class PerlRunUtil {
   public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
                                                       @NotNull String interpreterPath,
                                                       @Nullable VirtualFile scriptFile,
-                                                      String... perlParameters) {
+                                                      @NotNull List<String> perlParameters,
+                                                      @NotNull List<String> scriptParameters) {
     GeneralCommandLine commandLine = new GeneralCommandLine();
     commandLine.setExePath(FileUtil.toSystemDependentName(interpreterPath));
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
@@ -91,6 +99,9 @@ public class PerlRunUtil {
     if (scriptFile != null) {
       commandLine.addParameter(FileUtil.toSystemDependentName(scriptFile.getPath()));
     }
+
+    commandLine.addParameters(scriptParameters);
+
     return commandLine;
   }
 
@@ -206,20 +217,30 @@ public class PerlRunUtil {
   }
 
   @Nullable
-  public static String getPathFromPerl() {
-    List<String> perlPathLines = getOutputFromProgram("perl", "-le", "print $^X");
+  public static String getPathFromPerl(@NotNull PerlHostData hostData) {
+    List<String> perlPathLines = getOutputFromProgram(
+      hostData, hostData.getOsHandler().getPerlExecutableName(), "-le", "print $^X");
     return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
   }
 
   @NotNull
-  public static List<String> getOutputFromProgram(String... command) {
+  public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull String... command) {
+    GeneralCommandLine commandLine = new GeneralCommandLine(command);
     try {
-      GeneralCommandLine commandLine = new GeneralCommandLine(command);
-      return ExecUtil.execAndGetOutput(commandLine).getStdoutLines();
+      return hostData.execAndGetOutput(commandLine).getStdoutLines();
     }
     catch (Exception e) {
-      //			throw new IncorrectOperationException("Error executing external perl, please report to plugin developers: " + e.getMessage());
+      LOG.warn("Error executing " + commandLine, e);
       return Collections.emptyList();
     }
+  }
+
+  @NotNull
+  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlSdkAdditionalData perlSdkAdditionalData,
+                                                           @NotNull GeneralCommandLine commandLine,
+                                                           @NotNull Charset charset) throws ExecutionException {
+    return perlSdkAdditionalData.getHostData().createConsoleProcessHandler(
+      perlSdkAdditionalData.getVersionManagerData().patchCommandLine(commandLine), charset
+    );
   }
 }

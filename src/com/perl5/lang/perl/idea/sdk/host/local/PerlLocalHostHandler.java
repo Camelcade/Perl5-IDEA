@@ -58,7 +58,7 @@ public class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, Per
 
   @Override
   public void chooseFileInteractively(@NotNull String dialogTitle,
-                                      @Nullable Path defaultPath,
+                                      @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
                                       @NotNull Predicate<String> nameValidator,
                                       @NotNull Function<String, String> pathValidator,
                                       @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer) {
@@ -79,11 +79,13 @@ public class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, Per
       }
     };
     descriptor.setTitle(dialogTitle);
+    PerlLocalHostData hostData = createData();
+    Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
     VirtualFile fileToStart = defaultPath == null ? null : VfsUtil.findFile(defaultPath, false);
     FileChooser.chooseFiles(descriptor, null, fileToStart, chosen -> {
       String selectedPath = chosen.get(0).getPath();
       if (StringUtil.isEmpty(pathValidator.apply(selectedPath))) {
-        selectionConsumer.accept(selectedPath, createData());
+        selectionConsumer.accept(selectedPath, hostData);
       }
     });
   }

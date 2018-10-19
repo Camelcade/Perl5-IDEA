@@ -16,16 +16,23 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.system;
 
+import com.intellij.execution.configurations.GeneralCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
-class PerlSystemVersionManagerData extends PerlVersionManagerData<PerlSystemVersionManagerData, PerlSystemVersionManagerHandler> {
-  PerlSystemVersionManagerData(@NotNull PerlSystemVersionManagerHandler handler) {
+class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHandler> {
+  PerlSystemData(@NotNull PerlSystemHandler handler) {
     super(handler);
   }
 
   @Override
-  protected PerlSystemVersionManagerData self() {
+  protected PerlSystemData self() {
     return this;
+  }
+
+  @NotNull
+  @Override
+  public GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine) {
+    return originalCommandLine;
   }
 }

@@ -20,6 +20,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
@@ -28,17 +29,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
 
-public class PerlSystemVersionManagerHandler
-  extends PerlVersionManagerHandler<PerlSystemVersionManagerData, PerlSystemVersionManagerHandler> {
+public class PerlSystemHandler
+  extends PerlVersionManagerHandler<PerlSystemData, PerlSystemHandler> {
 
-  public PerlSystemVersionManagerHandler(@NotNull PerlHandlerBean bean) {
+  public PerlSystemHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
 
   @NotNull
   @Override
-  public PerlSystemVersionManagerData createData() {
-    return new PerlSystemVersionManagerData(this);
+  public PerlSystemData createData() {
+    return new PerlSystemData(this);
   }
 
   @NotNull
@@ -55,10 +56,10 @@ public class PerlSystemVersionManagerHandler
 
   @Override
   public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Runnable successCallback) {
-    String suggestedPath = PerlSdkType.INSTANCE.suggestHomePath();
+    PerlSystemData hostData = createData();
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
-      suggestedPath == null ? null : Paths.get(suggestedPath),
+      PerlHostData::suggestHomePath,
       it -> StringUtil.contains(it, "perl"),
       it -> {
         String fileName = Paths.get(it).getFileName().toString();
@@ -66,7 +67,7 @@ public class PerlSystemVersionManagerHandler
       },
       (path, perlHostData) -> {
         if (StringUtil.isNotEmpty(path) && perlHostData != null) {
-          PerlSdkType.createAndAddSdk(path, perlHostData, createData(), successCallback);
+          PerlSdkType.createAndAddSdk(path, perlHostData, hostData, successCallback);
         }
       });
   }

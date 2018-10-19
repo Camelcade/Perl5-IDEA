@@ -16,9 +16,22 @@
 
 package com.perl5.lang.perl.idea.sdk.host.local;
 
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.configurations.PtyCommandLine;
+import com.intellij.execution.process.ColoredProcessHandler;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.util.ExecUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHandler> {
   public PerlLocalHostData(@NotNull PerlLocalHostHandler handler) {
@@ -29,6 +42,32 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   @Override
   public PerlOsHandler getOsHandler() {
     return getHandler().getOsHandler();
+  }
+
+  @NotNull
+  @Override
+  public ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException {
+    return ExecUtil.execAndGetOutput(commandLine);
+  }
+
+  @NotNull
+  @Override
+  public ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine, @NotNull Charset charset)
+    throws ExecutionException {
+    PtyCommandLine ptyCommandLine = new PtyCommandLine(commandLine);
+    return new ColoredProcessHandler(ptyCommandLine.createProcess(), ptyCommandLine.getCommandLineString(), charset);
+  }
+
+  @Nullable
+  @Override
+  public Path suggestHomePath() {
+    String perlPath = PerlRunUtil.getPathFromPerl(this);
+
+    if (perlPath != null) {
+      return Paths.get(perlPath);
+    }
+
+    return getOsHandler().getDefaultHomePath();
   }
 
   @Override

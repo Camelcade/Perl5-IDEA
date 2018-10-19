@@ -22,7 +22,6 @@ import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
@@ -38,11 +37,11 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by ELI-HOME on 04-Jun-15.
@@ -86,19 +85,10 @@ public class PerlSdkType extends SdkType {
     sdkModificator.commitChanges();
   }
 
-  @NotNull
-  private static List<String> getINCPaths(@NotNull Sdk sdk) {
-    List<String> perlLibPaths = new ArrayList<>();
-    for (String path : PerlRunUtil.getOutputFromProgram(
-      sdk.getHomePath(),
-      "-le",
-      "print for @INC"
-    )) {
-      if (!".".equals(path)) {
-        perlLibPaths.add(path);
-      }
-    }
-    return perlLibPaths;
+  @Nullable
+  @Override
+  public String suggestHomePath() {
+    throw new RuntimeException("unsupported");
   }
 
   @Nullable
@@ -114,28 +104,29 @@ public class PerlSdkType extends SdkType {
     return PerlBundle.message("perl.config.interpreter.title");
   }
 
-  @Nullable
-  @Override
-  // fixme move this to the hostHandler
-  public String suggestHomePath() {
-    String perlPath = PerlRunUtil.getPathFromPerl();
-
-    if (perlPath != null) {
-      return perlPath;
-    }
-
-    if (SystemInfo.isLinux || SystemInfo.isUnix || SystemInfo.isFreeBSD) {
-      return "/usr/bin/" + getPerlExecutableName();
-    }
-
-    return FileUtil.join(System.getenv("PERL_HOME"), getPerlExecutableName());
-  }
-
   @NotNull
   @Override
   public String suggestSdkName(String currentSdkName, String sdkHome) {
-    VersionDescriptor descriptor = getPerlVersionDescriptor(sdkHome);
-    return "Perl" + (descriptor == null ? "" : " " + descriptor.version);
+    throw new RuntimeException("Should not be invoked");
+  }
+
+  @Nullable
+  @Override
+  public String getVersionString(@NotNull Sdk sdk) {
+    String sdkHomePath = sdk.getHomePath();
+    if (sdkHomePath == null) {
+      return null;
+    }
+    VersionDescriptor descriptor = getPerlVersionDescriptor(PerlHostData.notNullFrom(sdk), sdkHomePath);
+    return descriptor == null ? null : PerlBundle.message("perl.version.string", descriptor.version, descriptor.platform);
+  }
+
+  @NotNull
+  private static List<String> getINCPaths(@NotNull Sdk sdk) {
+    return PerlRunUtil.getOutputFromProgram(
+      PerlHostData.notNullFrom(sdk), sdk.getHomePath(), "-le", "print for @INC").stream()
+      .filter(it -> !".".equals(it))
+      .collect(Collectors.toList());
   }
 
   @Override
@@ -170,20 +161,15 @@ public class PerlSdkType extends SdkType {
     return getIcon();
   }
 
-  @Nullable
-  @Override
-  public String getVersionString(@NotNull Sdk sdk) {
-    String sdkHomePath = sdk.getHomePath();
-    if (sdkHomePath == null) {
-      return null;
-    }
-    VersionDescriptor descriptor = getPerlVersionDescriptor(sdkHomePath);
-    return descriptor == null ? null : PerlBundle.message("perl.version.string", descriptor.version, descriptor.platform);
+  @NotNull
+  private static String suggestSdkName(@NotNull PerlHostData hostData, String sdkHome) {
+    VersionDescriptor descriptor = getPerlVersionDescriptor(hostData, sdkHome);
+    return "Perl" + (descriptor == null ? "" : " " + descriptor.version);
   }
 
   @Nullable
-  private VersionDescriptor getPerlVersionDescriptor(@NotNull String sdkHomePath) {
-    List<String> versionLines = PerlRunUtil.getOutputFromProgram(sdkHomePath, "-v");
+  private static VersionDescriptor getPerlVersionDescriptor(@NotNull PerlHostData hostData, @NotNull String sdkHomePath) {
+    List<String> versionLines = PerlRunUtil.getOutputFromProgram(hostData, sdkHomePath, "-v");
 
     if (versionLines.isEmpty()) {
       return null;
@@ -211,9 +197,8 @@ public class PerlSdkType extends SdkType {
                                      @NotNull PerlHostData hostData,
                                      @NotNull PerlVersionManagerData versionManagerData,
                                      @Nullable Runnable successCallback) {
-    PerlSdkType sdkType = INSTANCE;
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
-      sdkType, interpreterPath, Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
+      suggestSdkName(hostData, interpreterPath), Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
 
     final ProjectJdkImpl newSdk = PerlSdkTable.getInstance().createSdk(newSdkName);
     newSdk.setHomePath(interpreterPath);
@@ -227,7 +212,7 @@ public class PerlSdkType extends SdkType {
 
     newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData));
 
-    sdkType.setupSdkPaths(newSdk);
+    INSTANCE.setupSdkPaths(newSdk);
     // should we check for version string?
     if (successCallback != null) {
       successCallback.run();

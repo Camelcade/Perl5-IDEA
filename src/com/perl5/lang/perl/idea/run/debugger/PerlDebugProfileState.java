@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import org.jetbrains.annotations.NotNull;
@@ -41,17 +40,10 @@ public class PerlDebugProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected String[] getPerlParameters(PerlRunConfiguration runProfile) {
-    List<String> result = new ArrayList<>();
-    result.add(DEBUG_ARGUMENT);
-
-    for (String argument : super.getPerlParameters(runProfile)) {
-      if (StringUtil.isNotEmpty(argument)) {
-        result.add(argument);
-      }
-    }
-
-    return result.toArray(new String[result.size()]);
+  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) {
+    List<String> result = new ArrayList<>(super.getPerlParameters(runProfile));
+    result.add(0, DEBUG_ARGUMENT);
+    return result;
   }
 
   @Override
