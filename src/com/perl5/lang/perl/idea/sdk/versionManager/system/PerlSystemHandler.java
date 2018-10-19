@@ -56,7 +56,6 @@ public class PerlSystemHandler
 
   @Override
   public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Runnable successCallback) {
-    PerlSystemData hostData = createData();
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
       PerlHostData::suggestHomePath,
@@ -67,7 +66,7 @@ public class PerlSystemHandler
       },
       (path, perlHostData) -> {
         if (StringUtil.isNotEmpty(path) && perlHostData != null) {
-          PerlSdkType.createAndAddSdk(path, perlHostData, hostData, successCallback);
+          PerlSdkType.createAndAddSdk(path, perlHostData, createData(), successCallback);
         }
       });
   }
