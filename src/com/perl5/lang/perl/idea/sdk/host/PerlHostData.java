@@ -20,6 +20,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -87,6 +88,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @Nullable
   public static PerlHostData from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getHostData);
+  }
+
+  protected static void assertNotEdt() {
+    if (ApplicationManager.getApplication().isDispatchThread()) {
+      throw new RuntimeException("Executions should not be performed on EDT");
+    }
   }
 
   public static PerlHostData notNullFrom(@NotNull Sdk sdk) {

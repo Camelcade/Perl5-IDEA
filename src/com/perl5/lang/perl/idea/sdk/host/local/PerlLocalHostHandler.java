@@ -16,9 +16,11 @@
 
 package com.perl5.lang.perl.idea.sdk.host.local;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -88,12 +90,16 @@ public class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, Per
     PerlLocalHostData hostData = createData();
     Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
     VirtualFile fileToStart = defaultPath == null ? null : VfsUtil.findFile(defaultPath, false);
-    FileChooser.chooseFiles(descriptor, null, fileToStart, chosen -> {
+    Ref<String> pathRef = Ref.create();
+    ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, fileToStart, chosen -> {
       String selectedPath = chosen.get(0).getPath();
       if (StringUtil.isEmpty(pathValidator.apply(selectedPath))) {
-        selectionConsumer.accept(selectedPath, hostData);
+        pathRef.set(selectedPath);
       }
-    });
+    }));
+    if (!pathRef.isNull()) {
+      selectionConsumer.accept(pathRef.get(), hostData);
+    }
   }
 
   @Nullable

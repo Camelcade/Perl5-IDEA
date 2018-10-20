@@ -22,6 +22,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.UnnamedConfigurable;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -103,7 +105,12 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
         versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
           @Override
           public void actionPerformed(@NotNull AnActionEvent e) {
-            versionManagerHandler.createSdkInteractively(hostHandler, () -> myChange = true);
+            new Task.Modal(null, PerlBundle.message("perl.create.interpreter.progress"), false) {
+              @Override
+              public void run(@NotNull ProgressIndicator indicator) {
+                versionManagerHandler.createSdkInteractively(hostHandler, () -> myChange = true);
+              }
+            }.queue();
           }
 
           @Override
