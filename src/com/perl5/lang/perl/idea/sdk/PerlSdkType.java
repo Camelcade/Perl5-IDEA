@@ -70,6 +70,8 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public void setupSdkPaths(@NotNull Sdk sdk) {
+    // this invocation initializes version string
+    sdk.getVersionString();
     SdkModificator sdkModificator = sdk.getSdkModificator();
     for (String perlLibPath : getINCPaths(sdk)) {
       File libDir = new File(perlLibPath);
