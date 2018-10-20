@@ -39,6 +39,6 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
       LOG.warn("Empty coverage database path");
       return ".";
     }
-    return FileUtil.toSystemIndependentName(coverageBasePath);
+    return FileUtil.toSystemIndependentName(coverageBasePath.replaceAll("\\$", "_S_"));
   }
 }

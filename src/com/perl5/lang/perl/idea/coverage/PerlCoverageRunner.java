@@ -135,13 +135,13 @@ public class PerlCoverageRunner extends CoverageRunner {
         }
       }
       catch (JsonParseException e) {
-        showError(project, e.getMessage());
         LOG.warn("Error parsing JSON", e);
+        showError(project, e.getMessage());
       }
     }
     catch (ExecutionException e) {
-      showError(project, e.getMessage());
       LOG.warn("Error loading coverage", e);
+      showError(project, e.getMessage());
     }
     return null;
   }

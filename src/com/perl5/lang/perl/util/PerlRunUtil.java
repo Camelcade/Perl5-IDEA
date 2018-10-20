@@ -40,6 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by hurricup on 26.04.2016.
@@ -199,11 +200,11 @@ public class PerlRunUtil {
    **/
   @Nullable
   public static VirtualFile findScript(@Nullable Sdk sdk, @Nullable String scriptName) {
-    if (sdk == null || scriptName == null) {
-      return null;
-    }
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return getBinDirectories(sdk).stream().map(root -> root.findChild(scriptName)).filter(Objects::nonNull).findFirst().orElse(null);
+    return sdk == null || StringUtil.isEmpty(scriptName) ? null : getBinDirectories(sdk)
+      .map(root -> root.findChild(scriptName))
+      .filter(Objects::nonNull)
+      .findFirst().orElse(null);
   }
 
 
@@ -211,23 +212,33 @@ public class PerlRunUtil {
    * @return list of perl bin directories where script from library may be located
    **/
   @NotNull
-  public static List<VirtualFile> getBinDirectories(@NotNull Sdk sdk) {
+  public static Stream<VirtualFile> getBinDirectories(@NotNull Sdk sdk) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
     SdkTypeId sdkType = sdk.getSdkType();
     if (!(sdkType instanceof PerlSdkType)) {
       throw new IllegalArgumentException("Got non-perl sdk: " + sdk);
     }
-    VirtualFile[] roots = sdk.getRootProvider().getFiles(OrderRootType.CLASSES);
-    List<VirtualFile> result = new ArrayList<>();
-    for (VirtualFile root : roots) {
-      if (root.isValid()) {
-        VirtualFile binDir = root.findFileByRelativePath("../bin");
-        if (binDir != null && binDir.isValid() && binDir.isDirectory()) {
-          result.add(binDir);
-        }
-      }
+    return Arrays.stream(sdk.getRootProvider().getFiles(OrderRootType.CLASSES))
+      .map(PerlRunUtil::findLibsBin)
+      .filter(Objects::nonNull)
+      .distinct();
+  }
+
+  /**
+   * Finds a bin dir for a library root
+   *
+   * @return bin root or null if not available
+   * @implSpec for now we are traversing tree up to lib dir and resolving {@code ../bin}
+   */
+  @Nullable
+  private static VirtualFile findLibsBin(@Nullable VirtualFile libraryRoot) {
+    if (libraryRoot == null || !libraryRoot.isValid()) {
+      return null;
     }
-    return result;
+    if ("lib".equals(libraryRoot.getName())) {
+      return libraryRoot.findFileByRelativePath("../bin");
+    }
+    return findLibsBin(libraryRoot.getParent());
   }
 
   /**

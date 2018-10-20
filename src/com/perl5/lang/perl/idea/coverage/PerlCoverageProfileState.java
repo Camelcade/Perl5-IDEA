@@ -16,24 +16,29 @@
 
 package com.perl5.lang.perl.idea.coverage;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
-import com.perl5.lang.perl.util.PerlRunUtil;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PerlCoverageProfileState extends PerlRunProfileState {
   public PerlCoverageProfileState(ExecutionEnvironment environment) {
     super(environment);
   }
 
+  @NotNull
   @Override
-  protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
+  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) {
+    List<String> perlParameters = new ArrayList<>(super.getPerlParameters(runProfile));
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((PerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
-    return PerlRunUtil.withPerl5Opts(super.calcEnv(runProfile), "-MDevel::Cover=-silent,1,-db," + coverageBasePath + ",-dir,.");
+
+    perlParameters.add(0, "-MDevel::Cover=-silent,1,-db," + coverageBasePath + ",-dir,.");
+
+    return perlParameters;
   }
 }
