@@ -16,9 +16,6 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
-import com.intellij.execution.process.ProcessHandler;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -31,9 +28,10 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
@@ -41,25 +39,29 @@ import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
  * Created by hurricup on 26.04.2016.
  */
 public class PerlRunUtil {
+  public static final String PERL_I = "-I";
   public static final String PERL_LE = "-le";
   public static final String PERL_CTRL_X = "print $^X";
   public static final String PERL5OPT = "PERL5OPT";
   private static final Logger LOG = Logger.getInstance(PerlRunUtil.class);
 
+  /**
+   * Builds non-patched perl command line for {@code project}'s sdk (without patching by version manager)
+   *
+   * @return command line if perl support for project or scriptFile is enabled
+   */
   @Nullable
-  public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
-                                                      @Nullable VirtualFile scriptFile,
-                                                      String... perlParameters) {
-    String interpreterPath = PerlProjectManager.getInterpreterPath(project, scriptFile);
-    return interpreterPath == null ? null :
-           getPerlCommandLine(project, interpreterPath, scriptFile, Arrays.asList(perlParameters), Collections.emptyList());
+  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                   @Nullable VirtualFile scriptFile,
+                                                   String... perlParameters) {
+    return getPerlCommandLine(
+      project, PerlProjectManager.getSdk(project, scriptFile), scriptFile, Arrays.asList(perlParameters), Collections.emptyList());
   }
 
   /**
@@ -85,16 +87,25 @@ public class PerlRunUtil {
   }
 
 
-  @NotNull
-  public static GeneralCommandLine getPerlCommandLine(@NotNull Project project,
-                                                      @NotNull String interpreterPath,
+  /**
+   * Builds non-patched perl command line (without patching by version manager)
+   *
+   * @return new perl command line or null if sdk is missing or corrupted
+   */
+  @Nullable
+  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                   @Nullable Sdk perlSdk,
                                                       @Nullable VirtualFile scriptFile,
                                                       @NotNull List<String> perlParameters,
                                                       @NotNull List<String> scriptParameters) {
-    GeneralCommandLine commandLine = new GeneralCommandLine();
+    String interpreterPath = ObjectUtils.doIfNotNull(perlSdk, Sdk::getHomePath);
+    if (StringUtil.isEmpty(interpreterPath)) {
+      return null;
+    }
+    PerlCommandLine commandLine = new PerlCommandLine(perlSdk);
     commandLine.setExePath(FileUtil.toSystemDependentName(interpreterPath));
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
-      commandLine.addParameter("-I" + libRoot.getCanonicalPath());
+      commandLine.addParameter(PERL_I + libRoot.getCanonicalPath());
     }
 
     commandLine.addParameters(perlParameters);
@@ -236,9 +247,7 @@ public class PerlRunUtil {
    */
   @NotNull
   public static List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
-    GeneralCommandLine commandLine = new GeneralCommandLine(perlSdk.getHomePath()).withParameters(parameters);
-    return getOutputFromProgram(PerlHostData.notNullFrom(perlSdk),
-                                PerlVersionManagerData.notNullFrom(perlSdk).patchCommandLine(commandLine));
+    return getOutputFromProgram(new PerlCommandLine(perlSdk.getHomePath()).withParameters(parameters).withSdk(perlSdk));
   }
 
 
@@ -250,7 +259,7 @@ public class PerlRunUtil {
   public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData,
                                                   @NotNull PerlVersionManagerData versionManagerData,
                                                   @NotNull String... commands) {
-    return getOutputFromProgram(hostData, versionManagerData.patchCommandLine(new GeneralCommandLine(commands)));
+    return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData).withVersionManagerData(versionManagerData));
   }
 
   /**
@@ -260,34 +269,20 @@ public class PerlRunUtil {
    */
   @NotNull
   public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull String... commands) {
-    return getOutputFromProgram(hostData, new GeneralCommandLine(commands));
+    return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData));
   }
 
   /**
    * Gets stdout from a {@code commandLine} at host represented by {@code hostData}
    */
   @NotNull
-  private static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull GeneralCommandLine commandLine) {
+  private static List<String> getOutputFromProgram(@NotNull PerlCommandLine commandLine) {
     try {
-      return PerlHostData.execAndGetOutput(hostData, commandLine).getStdoutLines();
+      return PerlHostData.execAndGetOutput(commandLine).getStdoutLines();
     }
     catch (Exception e) {
       LOG.warn("Error executing " + commandLine, e);
       return Collections.emptyList();
     }
-  }
-
-  /**
-   * Creates a console process handler for the {@code commandLine} in the context of {@code perlSdkAdditionalData}
-   *
-   * @param perlSdkAdditionalData container for hostData for execution and versionManager for commandLinePatching
-   */
-  @NotNull
-  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlSdkAdditionalData perlSdkAdditionalData,
-                                                           @NotNull GeneralCommandLine commandLine,
-                                                           @NotNull Charset charset) throws ExecutionException {
-    return PerlHostData.createConsoleProcessHandler(
-      perlSdkAdditionalData.getHostData(), perlSdkAdditionalData.getVersionManagerData().patchCommandLine(commandLine), charset
-    );
   }
 }

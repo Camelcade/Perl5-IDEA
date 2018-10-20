@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.system;
 
-import com.intellij.execution.configurations.GeneralCommandLine;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHa
 
   @NotNull
   @Override
-  public GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine) {
+  public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     return originalCommandLine;
   }
 }

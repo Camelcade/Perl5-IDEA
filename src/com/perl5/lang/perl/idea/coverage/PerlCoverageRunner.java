@@ -22,9 +22,7 @@ import com.intellij.coverage.CoverageEngine;
 import com.intellij.coverage.CoverageRunner;
 import com.intellij.coverage.CoverageSuite;
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.ProcessOutput;
-import com.intellij.execution.util.ExecUtil;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -42,6 +40,8 @@ import com.intellij.rt.coverage.data.LineCoverage;
 import com.intellij.rt.coverage.data.LineData;
 import com.intellij.rt.coverage.data.ProjectData;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -78,7 +78,7 @@ public class PerlCoverageRunner extends CoverageRunner {
   @Nullable
   private static ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
     Project project = perlCoverageSuite.getProject();
-    GeneralCommandLine perlCommandLine = ReadAction.compute(() -> {
+    PerlCommandLine perlCommandLine = ReadAction.compute(() -> {
       if (project.isDisposed()) {
         return null;
       }
@@ -92,8 +92,9 @@ public class PerlCoverageRunner extends CoverageRunner {
         return null;
       }
 
-      GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, coverFile,
-                                                                      "-I" + FileUtil.toSystemIndependentName(libRoot));
+      PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
+        project, coverFile, PerlRunUtil.PERL_I + FileUtil.toSystemIndependentName(libRoot));
+
       if (commandLine == null) {
         return null; // fixme should be a notification
       }
@@ -110,7 +111,7 @@ public class PerlCoverageRunner extends CoverageRunner {
 
     try {
       LOG.info("Loading coverage by: " + perlCommandLine.getCommandLineString());
-      ProcessOutput output = ExecUtil.execAndGetOutput(perlCommandLine);
+      ProcessOutput output = PerlHostData.execAndGetOutput(perlCommandLine);
       if (output.getExitCode() != 0) {
         String errorMessage = output.getStderr();
         if (StringUtil.isEmpty(errorMessage)) {

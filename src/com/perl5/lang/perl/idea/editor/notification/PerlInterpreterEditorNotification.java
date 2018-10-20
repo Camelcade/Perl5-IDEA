@@ -20,7 +20,6 @@ import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
@@ -32,8 +31,6 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigur
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
 
 /**
  * Created by hurricup on 30.04.2016.
@@ -61,14 +58,11 @@ public class PerlInterpreterEditorNotification extends EditorNotifications.Provi
         return null;
       }
 
-      EditorNotificationPanel panel;
-
-      String sdkPath = PerlProjectManager.getInterpreterPath(myProject, virtualFile);
-      if (sdkPath != null && VfsUtil.findFileByIoFile(new File(sdkPath), true) != null) {
+      if (PerlProjectManager.getSdk(myProject, virtualFile) != null) {
         return null;
       }
 
-      panel = new EditorNotificationPanel();
+      EditorNotificationPanel panel = new EditorNotificationPanel();
       panel.setText(PerlBundle.message("perl.notification.sdk.not.configured"));
       panel.createActionLabel(PerlBundle.message("perl.notification.configure"),
                               () -> Perl5SettingsConfigurable.open(myProject));

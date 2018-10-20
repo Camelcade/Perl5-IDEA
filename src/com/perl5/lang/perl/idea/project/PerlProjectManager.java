@@ -329,12 +329,18 @@ public class PerlProjectManager {
     return getInterpreterPathWithUpdate(getSdk(project));
   }
 
-  public static String getInterpreterPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+  @Nullable
+  public static Sdk getSdk(@NotNull Project project, @Nullable VirtualFile virtualFile) {
     if (virtualFile == null) {
-      return getInterpreterPath(project);
+      return getSdk(project);
     }
     Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
-    return module == null ? getInterpreterPath(project) : getInterpreterPath(module);
+    return module == null ? getSdk(project) : getSdk(module);
+  }
+
+  @Nullable
+  public static String getInterpreterPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
+    return getInterpreterPathWithUpdate(getSdk(project, virtualFile));
   }
 
   public static boolean isPerlEnabled(@Nullable Project project) {

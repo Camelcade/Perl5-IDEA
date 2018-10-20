@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.extensions.PluginId;
@@ -24,6 +23,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,11 +88,7 @@ public class PerlPluginUtil {
   }
 
   @Nullable
-  public static GeneralCommandLine getPluginScriptCommandLine(Project project, String script, String... perlParams) {
-    VirtualFile scriptVirtualFile = getPluginScriptVirtualFile(script);
-    if (scriptVirtualFile != null) {
-      return PerlRunUtil.getPerlCommandLine(project, scriptVirtualFile, perlParams);
-    }
-    return null;
+  public static PerlCommandLine getPluginScriptCommandLine(Project project, String script, String... perlParams) {
+    return ObjectUtils.doIfNotNull(getPluginScriptVirtualFile(script), it -> PerlRunUtil.getPerlCommandLine(project, it, perlParams));
   }
 }

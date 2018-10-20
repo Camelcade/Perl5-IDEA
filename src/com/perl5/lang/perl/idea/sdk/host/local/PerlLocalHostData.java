@@ -17,13 +17,12 @@
 package com.perl5.lang.perl.idea.sdk.host.local;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
-import com.intellij.execution.configurations.PtyCommandLine;
 import com.intellij.execution.process.ColoredProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.util.ExecUtil;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -31,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -48,17 +46,16 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @NotNull
   @Override
-  protected ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException {
+  protected ProcessOutput doExecAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     assertNotEdt();
     return ExecUtil.execAndGetOutput(commandLine);
   }
 
   @NotNull
   @Override
-  protected ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine, @NotNull Charset charset)
-    throws ExecutionException {
-    PtyCommandLine ptyCommandLine = new PtyCommandLine(commandLine);
-    return new ColoredProcessHandler(ptyCommandLine.createProcess(), ptyCommandLine.getCommandLineString(), charset);
+  protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return new ColoredProcessHandler(commandLine.withPty(true).createProcess(), commandLine.getCommandLineString(),
+                                     commandLine.getCharset());
   }
 
   @Nullable

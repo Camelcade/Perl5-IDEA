@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.xsubs;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
@@ -56,6 +55,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import gnu.trove.THashMap;
@@ -204,7 +204,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       return;
     }
 
-    GeneralCommandLine commandLine = PerlPluginUtil.getPluginScriptCommandLine(myProject, "xs_parser_simple.pl");
+    PerlCommandLine commandLine = PerlPluginUtil.getPluginScriptCommandLine(myProject, "xs_parser_simple.pl");
     if (commandLine == null) {
       return;
     }

@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import org.jetbrains.annotations.Contract;
@@ -44,7 +44,7 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
    * @return patched or original commandline
    */
   @NotNull
-  public abstract GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine);
+  public abstract PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine);
 
   /**
    * @return short lowercased name, for interpreters list
@@ -54,14 +54,19 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
     return getHandler().getShortName();
   }
 
-  @Contract("null->null")
-  @Nullable
-  static PerlVersionManagerData from(@Nullable Sdk sdk) {
-    return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getVersionManagerData);
+  @Override
+  public String toString() {
+    return getShortName();
   }
 
   @NotNull
   public static PerlVersionManagerData notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No version manager data in " + sdk);
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public static PerlVersionManagerData from(@Nullable Sdk sdk) {
+    return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getVersionManagerData);
   }
 }

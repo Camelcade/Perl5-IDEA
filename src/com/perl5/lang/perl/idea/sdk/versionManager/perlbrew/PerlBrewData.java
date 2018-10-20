@@ -16,11 +16,11 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.ParametersList;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.annotations.Tag;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -87,7 +87,7 @@ class PerlBrewData extends PerlVersionManagerData<PerlBrewData, PerlBrewHandler>
 
   @NotNull
   @Override
-  public GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine) {
+  public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     ArrayList<String> params =
       ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_WITH, getDistributionId(), originalCommandLine.getExePath());
     originalCommandLine.setExePath(getVersionManagerPath());
@@ -99,5 +99,10 @@ class PerlBrewData extends PerlVersionManagerData<PerlBrewData, PerlBrewHandler>
   @Override
   protected final PerlBrewData self() {
     return this;
+  }
+
+  @Override
+  public String toString() {
+    return getHandler().getShortName() + "[" + getDistributionId() + "]";
   }
 }

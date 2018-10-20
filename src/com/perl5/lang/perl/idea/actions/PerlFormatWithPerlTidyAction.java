@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
@@ -42,6 +41,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -76,14 +76,14 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     return true;
   }
 
-  protected GeneralCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException {
+  protected PerlCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
     String executable = localSettings.PERL_TIDY_PATH;
     if (StringUtil.isEmpty(executable)) {
       throw new ExecutionException(PerlBundle.message("perl.action.perl.tidy.execution.exception"));
     }
-    GeneralCommandLine commandLine = new GeneralCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
+    PerlCommandLine commandLine = new PerlCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
 
     if (StringUtil.isNotEmpty(sharedSettings.PERL_TIDY_ARGS)) {
       commandLine.addParameters(StringUtil.split(sharedSettings.PERL_TIDY_ARGS, " "));
@@ -120,7 +120,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
         @Override
         public void run(@NotNull ProgressIndicator indicator) {
           try {
-            GeneralCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
+            PerlCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
             final Process process = perlTidyCommandLine.createProcess();
             final OutputStream outputStream = process.getOutputStream();
             ApplicationManager.getApplication().executeOnPooledThread(() -> {

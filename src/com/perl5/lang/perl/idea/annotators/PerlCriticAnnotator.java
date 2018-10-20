@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.ExternalAnnotator;
@@ -39,6 +38,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.psi.PerlFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +65,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
            : null;
   }
 
-  protected GeneralCommandLine getPerlCriticExecutable(Project project) throws ExecutionException {
+  protected PerlCommandLine getPerlCriticExecutable(Project project) throws ExecutionException {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
     String executable = localSettings.PERL_CRITIC_PATH;
@@ -73,7 +73,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
     if (StringUtil.isEmpty(executable)) {
       throw new ExecutionException("Path to Perl::Critic executable must be configured in perl settings");
     }
-    GeneralCommandLine commandLine = new GeneralCommandLine(executable).withWorkDirectory(project.getBasePath());
+    PerlCommandLine commandLine = new PerlCommandLine(executable).withWorkDirectory(project.getBasePath());
 
     if (StringUtil.isNotEmpty(sharedSettings.PERL_CRITIC_ARGS)) {
       commandLine.addParameters(StringUtil.split(sharedSettings.PERL_CRITIC_ARGS, " "));
@@ -97,7 +97,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
 
     try {
-      GeneralCommandLine criticCommandLine = getPerlCriticExecutable(sourcePsiFile.getProject());
+      PerlCommandLine criticCommandLine = getPerlCriticExecutable(sourcePsiFile.getProject());
       final Process process = criticCommandLine.createProcess();
 
       OutputStream outputStream = process.getOutputStream();

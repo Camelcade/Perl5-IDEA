@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
@@ -25,6 +24,7 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -74,9 +74,9 @@ class PerlBrewAdapter {
    */
   @Nullable
   private List<String> getOutput(@NotNull List<String> parameters) {
-    GeneralCommandLine commandLine = new GeneralCommandLine(myPerlBrewPath).withParameters(parameters);
+    PerlCommandLine commandLine = new PerlCommandLine(myPerlBrewPath).withParameters(parameters).withHostData(myHostData);
     try {
-      ProcessOutput processOutput = PerlHostData.execAndGetOutput(myHostData, commandLine);
+      ProcessOutput processOutput = PerlHostData.execAndGetOutput(commandLine);
       if (processOutput.getExitCode() == 0) {
         return processOutput.getStdoutLines(true);
       }

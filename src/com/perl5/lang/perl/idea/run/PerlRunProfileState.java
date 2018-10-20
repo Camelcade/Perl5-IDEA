@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.CommandLineState;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
@@ -27,8 +26,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
@@ -67,9 +67,11 @@ public class PerlRunProfileState extends CommandLineState {
       throw new ExecutionException("Unable to detect perl sdk for a project " + project);
     }
 
-    String perlInterpreterPath = perlSdk.getHomePath();
-    if (perlInterpreterPath == null) {
-      throw new ExecutionException("Perl sdk is corrupted: " + perlSdk);
+    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
+      project, perlSdk, scriptFile, getPerlParameters(runProfile), getScriptParameters(runProfile));
+
+    if (commandLine == null) {
+      throw new ExecutionException("Perl sdk is missing or corrupted: " + perlSdk);
     }
 
     String workDirectory = runProfile.getWorkingDirectory();
@@ -82,9 +84,6 @@ public class PerlRunProfileState extends CommandLineState {
         workDirectory = project.getBasePath();
       }
     }
-
-    GeneralCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
-      project, perlInterpreterPath, scriptFile, getPerlParameters(runProfile), getScriptParameters(runProfile));
 
     String charsetName = runProfile.getConsoleCharset();
     Charset charset;
@@ -106,7 +105,7 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withEnvironment(environment);
     commandLine.withParentEnvironmentType(runProfile.isPassParentEnvs() ? CONSOLE : NONE);
 
-    ProcessHandler handler = PerlRunUtil.createConsoleProcessHandler(PerlSdkAdditionalData.notNullFrom(perlSdk), commandLine, charset);
+    ProcessHandler handler = PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset));
     handler.addProcessListener(new ProcessAdapter() {
       @Override
       public void startNotified(@NotNull ProcessEvent event) {

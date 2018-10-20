@@ -17,21 +17,21 @@
 package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.Objects;
 
@@ -80,25 +80,38 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Creates a process and process handler to be run in console.
    */
   @NotNull
-  protected abstract ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine,
-                                                                @NotNull Charset charset) throws ExecutionException;
+  protected abstract ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
   @NotNull
-  protected abstract ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException;
+  protected abstract ProcessOutput doExecAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
   @NotNull
-  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlHostData hostData,
-                                                           @NotNull GeneralCommandLine commandLine,
-                                                           @NotNull Charset charset) throws ExecutionException {
-    LOG.info("Creating console process handler from " + commandLine + " at " + hostData);
-    return hostData.createConsoleProcessHandler(commandLine, charset);
+  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    PerlHostData hostData = commandLine.getEffectiveHostData();
+    if (hostData == null) {
+      throw new ExecutionException("No host data in the command line " + commandLine);
+    }
+
+    PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
+    if (versionManagerData != null) {
+      commandLine = versionManagerData.patchCommandLine(commandLine);
+    }
+    return hostData.doCreateConsoleProcessHandler(commandLine);
   }
 
   @NotNull
-  public static ProcessOutput execAndGetOutput(@NotNull PerlHostData hostData, @NotNull GeneralCommandLine commandLine)
+  public static ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine)
     throws ExecutionException {
-    LOG.info("Fetching output from " + commandLine + " at " + hostData);
-    return hostData.execAndGetOutput(commandLine);
+    PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
+    if (versionManagerData != null) {
+      commandLine = versionManagerData.patchCommandLine(commandLine);
+    }
+
+    PerlHostData perlHostData = commandLine.getEffectiveHostData();
+    if (perlHostData == null) {
+      throw new ExecutionException("No host data in " + commandLine);
+    }
+    return perlHostData.doExecAndGetOutput(commandLine);
   }
 
   @Contract("null->null")
