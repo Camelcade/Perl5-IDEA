@@ -17,14 +17,20 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.configurations.ParametersList;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.PERLBREW_EXEC;
+import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.PERLBREW_WITH;
 import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewHandler.LIB_SEPARATOR;
 
 class PerlBrewData extends PerlVersionManagerData<PerlBrewData, PerlBrewHandler> {
@@ -58,9 +64,9 @@ class PerlBrewData extends PerlVersionManagerData<PerlBrewData, PerlBrewHandler>
            versionString + LIB_SEPARATOR + libName;
   }
 
-  @Nullable
+  @NotNull
   String getVersionManagerPath() {
-    return myVersionManagerPath;
+    return Objects.requireNonNull(myVersionManagerPath);
   }
 
   @NotNull
@@ -69,9 +75,9 @@ class PerlBrewData extends PerlVersionManagerData<PerlBrewData, PerlBrewHandler>
     return super.getShortName() + ", " + getDistributionId();
   }
 
-  @Nullable
+  @NotNull
   String getPerlVersionString() {
-    return myPerlVersionString;
+    return Objects.requireNonNull(myPerlVersionString);
   }
 
   @Nullable
@@ -82,6 +88,11 @@ class PerlBrewData extends PerlVersionManagerData<PerlBrewData, PerlBrewHandler>
   @NotNull
   @Override
   public GeneralCommandLine patchCommandLine(@NotNull GeneralCommandLine originalCommandLine) {
+    ArrayList<String> params =
+      ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_WITH, getDistributionId(), originalCommandLine.getExePath());
+    originalCommandLine.setExePath(getVersionManagerPath());
+    ParametersList parametersList = originalCommandLine.getParametersList();
+    ContainerUtil.reverse(params).forEach(it -> parametersList.addAt(0, it));
     return originalCommandLine;
   }
 

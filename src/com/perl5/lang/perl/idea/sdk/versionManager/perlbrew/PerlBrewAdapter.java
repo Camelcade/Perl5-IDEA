@@ -36,6 +36,9 @@ import java.util.List;
  * Api to the perlbrew cli
  */
 class PerlBrewAdapter {
+  static final String PERLBREW_EXEC = "exec";
+  static final String PERLBREW_WITH = "--with";
+
   private static final Logger LOG = Logger.getInstance(PerlBrewAdapter.class);
   @NotNull
   private final String myPerlBrewPath;
@@ -49,7 +52,7 @@ class PerlBrewAdapter {
 
   @Nullable
   List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
-    List<String> commandsList = ContainerUtil.newArrayList("exec", "--with", distributionId);
+    List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
   }
@@ -73,7 +76,7 @@ class PerlBrewAdapter {
   private List<String> getOutput(@NotNull List<String> parameters) {
     GeneralCommandLine commandLine = new GeneralCommandLine(myPerlBrewPath).withParameters(parameters);
     try {
-      ProcessOutput processOutput = myHostData.execAndGetOutput(commandLine);
+      ProcessOutput processOutput = PerlHostData.execAndGetOutput(myHostData, commandLine);
       if (processOutput.getExitCode() == 0) {
         return processOutput.getStdoutLines(true);
       }

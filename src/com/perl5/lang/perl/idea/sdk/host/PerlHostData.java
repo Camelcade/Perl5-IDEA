@@ -21,6 +21,7 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -39,6 +40,8 @@ import java.util.Objects;
  */
 public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Handler extends PerlHostHandler<Data, Handler>>
   extends AbstractPerlData<Data, Handler> {
+  private static final Logger LOG = Logger.getInstance(PerlHostData.class);
+
   public PerlHostData(@NotNull Handler handler) {
     super(handler);
   }
@@ -77,12 +80,26 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Creates a process and process handler to be run in console.
    */
   @NotNull
-  public abstract ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine,
-                                                             @NotNull Charset charset) throws ExecutionException;
-
+  protected abstract ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine,
+                                                                @NotNull Charset charset) throws ExecutionException;
 
   @NotNull
-  public abstract ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException;
+  protected abstract ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException;
+
+  @NotNull
+  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlHostData hostData,
+                                                           @NotNull GeneralCommandLine commandLine,
+                                                           @NotNull Charset charset) throws ExecutionException {
+    LOG.info("Creating console process handler from " + commandLine + " at " + hostData);
+    return hostData.createConsoleProcessHandler(commandLine, charset);
+  }
+
+  @NotNull
+  public static ProcessOutput execAndGetOutput(@NotNull PerlHostData hostData, @NotNull GeneralCommandLine commandLine)
+    throws ExecutionException {
+    LOG.info("Fetching output from " + commandLine + " at " + hostData);
+    return hostData.execAndGetOutput(commandLine);
+  }
 
   @Contract("null->null")
   @Nullable

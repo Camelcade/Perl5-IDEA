@@ -48,14 +48,14 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @NotNull
   @Override
-  public ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException {
+  protected ProcessOutput execAndGetOutput(@NotNull GeneralCommandLine commandLine) throws ExecutionException {
     assertNotEdt();
     return ExecUtil.execAndGetOutput(commandLine);
   }
 
   @NotNull
   @Override
-  public ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine, @NotNull Charset charset)
+  protected ProcessHandler createConsoleProcessHandler(@NotNull GeneralCommandLine commandLine, @NotNull Charset charset)
     throws ExecutionException {
     PtyCommandLine ptyCommandLine = new PtyCommandLine(commandLine);
     return new ColoredProcessHandler(ptyCommandLine.createProcess(), ptyCommandLine.getCommandLineString(), charset);
@@ -85,5 +85,10 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   @Override
   protected PerlLocalHostData self() {
     return this;
+  }
+
+  @Override
+  public String toString() {
+    return getShortName();
   }
 }

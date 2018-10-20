@@ -221,7 +221,6 @@ public class PerlRunUtil {
 
   /**
    * Requests perl path using introspection variable $^X: {@code perl -le print $^X}
-   *
    * @param hostData host to execute command on
    * @return version string or null if response was wrong
    */
@@ -270,7 +269,7 @@ public class PerlRunUtil {
   @NotNull
   private static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull GeneralCommandLine commandLine) {
     try {
-      return hostData.execAndGetOutput(commandLine).getStdoutLines();
+      return PerlHostData.execAndGetOutput(hostData, commandLine).getStdoutLines();
     }
     catch (Exception e) {
       LOG.warn("Error executing " + commandLine, e);
@@ -287,8 +286,8 @@ public class PerlRunUtil {
   public static ProcessHandler createConsoleProcessHandler(@NotNull PerlSdkAdditionalData perlSdkAdditionalData,
                                                            @NotNull GeneralCommandLine commandLine,
                                                            @NotNull Charset charset) throws ExecutionException {
-    return perlSdkAdditionalData.getHostData().createConsoleProcessHandler(
-      perlSdkAdditionalData.getVersionManagerData().patchCommandLine(commandLine), charset
+    return PerlHostData.createConsoleProcessHandler(
+      perlSdkAdditionalData.getHostData(), perlSdkAdditionalData.getVersionManagerData().patchCommandLine(commandLine), charset
     );
   }
 }

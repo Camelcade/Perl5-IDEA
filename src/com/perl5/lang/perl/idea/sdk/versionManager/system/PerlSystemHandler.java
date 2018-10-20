@@ -75,4 +75,9 @@ public class PerlSystemHandler
   public boolean isApplicable(@NotNull PerlOsHandler osHandler) {
     return true;
   }
+
+  @Override
+  public String toString() {
+    return getShortName();
+  }
 }
