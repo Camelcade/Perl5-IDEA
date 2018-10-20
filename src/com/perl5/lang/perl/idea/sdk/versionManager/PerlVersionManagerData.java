@@ -25,6 +25,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
  * Data necessary for version manager. E.g. system, perbrew, plenv, asdf, berrybrew
  */
@@ -56,5 +58,10 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   @Nullable
   static PerlVersionManagerData from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getVersionManagerData);
+  }
+
+  @NotNull
+  public static PerlVersionManagerData notNullFrom(@NotNull Sdk sdk) {
+    return Objects.requireNonNull(from(sdk), () -> "No version manager data in " + sdk);
   }
 }

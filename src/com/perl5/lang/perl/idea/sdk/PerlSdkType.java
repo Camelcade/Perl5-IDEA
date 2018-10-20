@@ -22,8 +22,11 @@ import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ObjectUtils;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -32,6 +35,7 @@ import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +45,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Created by ELI-HOME on 04-Jun-15.
@@ -70,10 +73,8 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public void setupSdkPaths(@NotNull Sdk sdk) {
-    // this invocation initializes version string
-    sdk.getVersionString();
     SdkModificator sdkModificator = sdk.getSdkModificator();
-    for (String perlLibPath : getINCPaths(sdk)) {
+    for (String perlLibPath : computeIncPaths(sdk)) {
       File libDir = new File(perlLibPath);
 
       if (libDir.exists() && libDir.isDirectory()) {
@@ -115,20 +116,14 @@ public class PerlSdkType extends SdkType {
   @Nullable
   @Override
   public String getVersionString(@NotNull Sdk sdk) {
-    String sdkHomePath = sdk.getHomePath();
-    if (sdkHomePath == null) {
-      return null;
-    }
-    VersionDescriptor descriptor = getPerlVersionDescriptor(PerlHostData.notNullFrom(sdk), sdkHomePath);
-    return descriptor == null ? null : PerlBundle.message("perl.version.string", descriptor.version, descriptor.platform);
+    return ObjectUtils.doIfNotNull(
+      getPerlVersionDescriptor(sdk.getHomePath(), PerlHostData.notNullFrom(sdk), PerlVersionManagerData.notNullFrom(sdk)),
+      VersionDescriptor::getVersionString);
   }
 
   @NotNull
-  private static List<String> getINCPaths(@NotNull Sdk sdk) {
-    return PerlRunUtil.getOutputFromProgram(
-      PerlHostData.notNullFrom(sdk), sdk.getHomePath(), "-le", "print for @INC").stream()
-      .filter(it -> !".".equals(it))
-      .collect(Collectors.toList());
+  private static List<String> computeIncPaths(@NotNull Sdk sdk) {
+    return ContainerUtil.filter(PerlRunUtil.getOutputFromPerl(sdk, PerlRunUtil.PERL_LE, "print for @INC"), it -> !".".equals(it));
   }
 
   @Override
@@ -164,19 +159,21 @@ public class PerlSdkType extends SdkType {
   }
 
   @NotNull
-  private static String suggestSdkName(@NotNull PerlHostData hostData, String sdkHome) {
-    VersionDescriptor descriptor = getPerlVersionDescriptor(hostData, sdkHome);
+  private static String suggestSdkName(@Nullable VersionDescriptor descriptor) {
     return "Perl" + (descriptor == null ? "" : " " + descriptor.version);
   }
 
+  @Contract("null, _,_->null")
   @Nullable
-  private static VersionDescriptor getPerlVersionDescriptor(@NotNull PerlHostData hostData, @NotNull String sdkHomePath) {
-    List<String> versionLines = PerlRunUtil.getOutputFromProgram(hostData, sdkHomePath, "-v");
-
-    if (versionLines.isEmpty()) {
+  public static VersionDescriptor getPerlVersionDescriptor(@Nullable String interpreterPath,
+                                                           @NotNull PerlHostData hostData,
+                                                           @NotNull PerlVersionManagerData versionManagerData) {
+    if (StringUtil.isEmpty(interpreterPath)) {
       return null;
     }
-    return VersionDescriptor.create(versionLines.get(0));
+    List<String> versionLines = PerlRunUtil.getOutputFromProgram(hostData, versionManagerData, interpreterPath, "-v");
+
+    return versionLines.isEmpty() ? null : VersionDescriptor.create(versionLines.get(0));
   }
 
 
@@ -199,8 +196,10 @@ public class PerlSdkType extends SdkType {
                                      @NotNull PerlHostData hostData,
                                      @NotNull PerlVersionManagerData versionManagerData,
                                      @Nullable Runnable successCallback) {
+    VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
+
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
-      suggestSdkName(hostData, interpreterPath), Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
+      suggestSdkName(perlVersionDescriptor), Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
 
     final ProjectJdkImpl newSdk = PerlSdkTable.getInstance().createSdk(newSdkName);
     newSdk.setHomePath(interpreterPath);
@@ -212,6 +211,7 @@ public class PerlSdkType extends SdkType {
       return;
     }
 
+    newSdk.setVersionString(perlVersionDescriptor == null ? null : perlVersionDescriptor.getVersionString());
     newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData));
 
     INSTANCE.setupSdkPaths(newSdk);
@@ -241,6 +241,11 @@ public class PerlSdkType extends SdkType {
       result.version = m.group(1);
       result.platform = m.group(2);
       return result;
+    }
+
+    @NotNull
+    public String getVersionString() {
+      return PerlBundle.message("perl.version.string", version, platform);
     }
   }
 }

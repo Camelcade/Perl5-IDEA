@@ -36,6 +36,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -218,6 +219,12 @@ public class PerlRunUtil {
     return result;
   }
 
+  /**
+   * Requests perl path using introspection variable $^X: {@code perl -le print $^X}
+   *
+   * @param hostData host to execute command on
+   * @return version string or null if response was wrong
+   */
   @Nullable
   public static String getPathFromPerl(@NotNull PerlHostData hostData) {
     List<String> perlPathLines = getOutputFromProgram(
@@ -225,9 +232,43 @@ public class PerlRunUtil {
     return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
   }
 
+  /**
+   * Gets stdout from executing a perl command with a given parameters, command represented by {@code parameters}.
+   */
   @NotNull
-  public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull String... command) {
-    GeneralCommandLine commandLine = new GeneralCommandLine(command);
+  public static List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
+    GeneralCommandLine commandLine = new GeneralCommandLine(perlSdk.getHomePath()).withParameters(parameters);
+    return getOutputFromProgram(PerlHostData.notNullFrom(perlSdk),
+                                PerlVersionManagerData.notNullFrom(perlSdk).patchCommandLine(commandLine));
+  }
+
+
+  /**
+   * Gets stdout from executing a command represented by {@code commands} on the host represented by {@code hostData}
+   * Commands are going to be patched with version manager, represented by {@code versionManagerData}
+   */
+  @NotNull
+  public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData,
+                                                  @NotNull PerlVersionManagerData versionManagerData,
+                                                  @NotNull String... commands) {
+    return getOutputFromProgram(hostData, versionManagerData.patchCommandLine(new GeneralCommandLine(commands)));
+  }
+
+  /**
+   * Gets stdout from executing a command represented by {@code commands} on the host represented by {@code hostData}
+   *
+   * @apiNote MUST not be used for executing perl scripts
+   */
+  @NotNull
+  public static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull String... commands) {
+    return getOutputFromProgram(hostData, new GeneralCommandLine(commands));
+  }
+
+  /**
+   * Gets stdout from a {@code commandLine} at host represented by {@code hostData}
+   */
+  @NotNull
+  private static List<String> getOutputFromProgram(@NotNull PerlHostData hostData, @NotNull GeneralCommandLine commandLine) {
     try {
       return hostData.execAndGetOutput(commandLine).getStdoutLines();
     }
@@ -237,6 +278,11 @@ public class PerlRunUtil {
     }
   }
 
+  /**
+   * Creates a console process handler for the {@code commandLine} in the context of {@code perlSdkAdditionalData}
+   *
+   * @param perlSdkAdditionalData container for hostData for execution and versionManager for commandLinePatching
+   */
   @NotNull
   public static ProcessHandler createConsoleProcessHandler(@NotNull PerlSdkAdditionalData perlSdkAdditionalData,
                                                            @NotNull GeneralCommandLine commandLine,
