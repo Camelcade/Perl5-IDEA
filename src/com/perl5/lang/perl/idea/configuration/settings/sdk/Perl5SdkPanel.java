@@ -38,6 +38,7 @@ public class Perl5SdkPanel {
   private JPanel myMainPanel;
   private final DefaultActionGroup myActionGroup = new DefaultActionGroup();
   private JPanel myToolBar;
+  private JLabel myLabel;
 
   public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
     return mySdkComboBox;
@@ -69,7 +70,8 @@ public class Perl5SdkPanel {
       public void update(@NotNull AnActionEvent e) {
         Presentation p = e.getPresentation();
         p.setIcon(AllIcons.General.GearPlain);
-        p.setEnabledAndVisible(true);
+        p.setVisible(true);
+        p.setEnabled(toolbar.isEnabled());
       }
 
       @Override
@@ -89,5 +91,13 @@ public class Perl5SdkPanel {
     myToolBar = toolbar;
   }
 
+  public void setEnabled(boolean isEnabled) {
+    myLabel.setEnabled(isEnabled);
+    mySdkComboBox.setEnabled(isEnabled);
+    myToolBar.setEnabled(isEnabled);
+  }
 
+  public void setLabelText(@NotNull String text) {
+    myLabel.setText(text);
+  }
 }

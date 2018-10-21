@@ -6,7 +6,8 @@
   <li>Markers for automatic injections into here-docs and literals using <code>#@inject</code> annotation are now configurable in the Perl
     settings, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1789">@aldem</a></li>
   <li>Scripts, executed in console is now ran with Pty and supports ANSI colorized output.</li>
-  <li>Alternative sdk configuration removed from run configuration options</li>
+  <li>Alternative sdk configuration re-worked and allows to choose one of the registered interpreters (NB: old configurations may break if
+    used alternative paths), <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1423">#1423</a></li>
   <li><code>plenv</code> version manager is now supported, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1383">@aptituz</a>
   </li>
   <li><code>perlbrew</code> version manager is now supported, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/320">#320</a>
@@ -15,7 +16,7 @@
 <p>Fixes:</p>
 <ul>
   <li>Sdk selection panel is not wrapped on resize, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1786">#1786</a></li>
-  <li><code>Run With Coverage</code> should work fine with <code>perlbrew</code>, by <a
+  <li><code>Run With Coverage</code> should work fine with version managers, by <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1787">@floreal</a></li>
   <li>Typing and removing parens, brackets and braces as quotes for quote-like operators inside normal parens, brackets and braces now works
     properly, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1791">@aldem</a></li>

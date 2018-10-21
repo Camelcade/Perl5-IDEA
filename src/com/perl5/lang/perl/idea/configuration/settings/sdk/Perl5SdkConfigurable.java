@@ -48,6 +48,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
@@ -228,7 +229,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   }
 
   private boolean isSdkModified() {
-    return !mySdkManipulator.getCurrentSdkWrapper().equals(getSelectedSdkWrapper());
+    return !Objects.equals(mySdkManipulator.getCurrentSdkWrapper(), getSelectedSdkWrapper());
   }
 
 
@@ -273,5 +274,13 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
   @Override
   public void jdkNameChanged(@NotNull Sdk jdk, @NotNull String previousName) {
+  }
+
+  public void setEnabled(boolean isEnabled) {
+    myPanel.setEnabled(isEnabled);
+  }
+
+  public void setLabelText(@NotNull String text) {
+    myPanel.setLabelText(text);
   }
 }

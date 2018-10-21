@@ -113,7 +113,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
         }
       }
     });
-    JPanel versionPanel = new JPanel(new BorderLayout());
+    JPanel versionPanel = new JPanel(new BorderLayout(5, 0));
     versionPanel.add(new JLabel(PerlBundle.message("perl.config.language.level")), BorderLayout.WEST);
     versionPanel.add(myTargetPerlVersionComboBox, BorderLayout.CENTER);
     builder.addComponent(versionPanel);

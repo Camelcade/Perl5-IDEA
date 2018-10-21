@@ -57,7 +57,7 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
   public boolean PASS_PARENT_ENVS = true;
   public String CHARSET;
   public boolean USE_ALTERNATIVE_SDK;
-  public String ALTERNATIVE_SDK_PATH;
+  public String ALTERNATIVE_SDK_NAME;
 
   // debugging-related options
   public String scriptCharset = "utf8";
@@ -126,12 +126,12 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
     SCRIPT_PATH = scriptPath;
   }
 
-  public String getAlternativeSdkPath() {
-    return ALTERNATIVE_SDK_PATH;
+  public String getAlternativeSdkName() {
+    return ALTERNATIVE_SDK_NAME;
   }
 
-  public void setAlternativeSdkPath(String path) {
-    this.ALTERNATIVE_SDK_PATH = path;
+  public void setAlternativeSdkName(String path) {
+    this.ALTERNATIVE_SDK_NAME = path;
   }
 
   public boolean isUseAlternativeSdk() {

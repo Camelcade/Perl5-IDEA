@@ -24,8 +24,10 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -62,16 +64,28 @@ public class PerlRunProfileState extends CommandLineState {
     }
 
     Project project = getEnvironment().getProject();
-    Sdk perlSdk = PerlProjectManager.getSdk(project);
-    if (perlSdk == null) {
-      throw new ExecutionException("Unable to detect perl sdk for a project " + project);
+
+    Sdk perlSdk = null;
+    if (runConfiguration.isUseAlternativeSdk()) {
+      String alternativeSdkName = runConfiguration.getAlternativeSdkName();
+      perlSdk = PerlSdkTable.getInstance().findJdk(alternativeSdkName);
+      if (perlSdk == null) {
+        throw new ExecutionException(PerlBundle.message("perl.run.error.no.alternative.sdk", alternativeSdkName));
+      }
     }
+    else {
+      perlSdk = PerlProjectManager.getSdk(project);
+      if (perlSdk == null) {
+        throw new ExecutionException(PerlBundle.message("perl.run.error.no.sdk", project));
+      }
+    }
+
 
     PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
       project, perlSdk, scriptFile, getPerlParameters(runConfiguration), getScriptParameters(runConfiguration));
 
     if (commandLine == null) {
-      throw new ExecutionException("Perl sdk is missing or corrupted: " + perlSdk);
+      throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", perlSdk));
     }
 
     String workDirectory = runConfiguration.getWorkingDirectory();
@@ -92,7 +106,7 @@ public class PerlRunProfileState extends CommandLineState {
         charset = Charset.forName(charsetName);
       }
       catch (UnsupportedCharsetException e) {
-        throw new ExecutionException("Unknown charset: " + charsetName);
+        throw new ExecutionException(PerlBundle.message("perl.run.error.unknown.charset", charsetName));
       }
     }
     else {

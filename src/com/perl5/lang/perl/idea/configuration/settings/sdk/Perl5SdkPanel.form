@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkPanel">
-  <grid id="27dc6" binding="myMainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+  <grid id="27dc6" binding="myMainPanel" layout-manager="BorderLayout" hgap="5" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="250" height="40"/>
+      <xy x="20" y="20" width="252" height="40"/>
     </constraints>
     <properties>
       <maximumSize width="2147483647" height="34"/>
     </properties>
     <border type="none"/>
     <children>
-      <component id="4f99" class="javax.swing.JLabel">
+      <component id="4f99" class="javax.swing.JLabel" binding="myLabel">
         <constraints border-constraint="West"/>
         <properties>
           <text resource-bundle="messages/PerlBundle" key="perl.config.interpreter.label"/>
