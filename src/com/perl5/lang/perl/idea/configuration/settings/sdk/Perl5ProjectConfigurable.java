@@ -47,6 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +97,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
     builder.addComponent(myPerl5SdkConfigurable.createComponent());
 
-    FormBuilder versionBuilder = FormBuilder.createFormBuilder();
     ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
     myTargetPerlVersionComboBox = new ComboBox<>(versionModel);
     myTargetPerlVersionComboBox.setRenderer(new ColoredListCellRenderer<PerlVersion>() {
@@ -113,8 +113,10 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
         }
       }
     });
-    versionBuilder.addLabeledComponent(PerlBundle.message("perl.config.language.level"), myTargetPerlVersionComboBox);
-    builder.addComponent(versionBuilder.getPanel());
+    JPanel versionPanel = new JPanel(new BorderLayout());
+    versionPanel.add(new JLabel(PerlBundle.message("perl.config.language.level")), BorderLayout.WEST);
+    versionPanel.add(myTargetPerlVersionComboBox, BorderLayout.CENTER);
+    builder.addComponent(versionPanel);
 
     myLibsModel = new CollectionListModel<>();
     myLibsList = new JBList<>(myLibsModel);
@@ -386,6 +388,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     PerlProjectManager.getInstance(myProject).setProjectSdk(sdk);
   }
 
+  @NotNull
   @Override
   public List<Perl5SdkWrapper> getAllSdkWrappers() {
     List<Perl5SdkWrapper> defaultItems = new ArrayList<>(Perl5SdkManipulator.super.getAllSdkWrappers());
