@@ -54,11 +54,11 @@ public class PerlRunProfileState extends CommandLineState {
   @NotNull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
-    PerlRunConfiguration runProfile = (PerlRunConfiguration)getEnvironment().getRunProfile();
+    PerlRunConfiguration runConfiguration = (PerlRunConfiguration)getEnvironment().getRunProfile();
 
-    VirtualFile scriptFile = runProfile.getScriptFile();
+    VirtualFile scriptFile = runConfiguration.getScriptFile();
     if (scriptFile == null) {
-      throw new ExecutionException("Script file: " + runProfile.getScriptPath() + " is not exists");
+      throw new ExecutionException("Script file: " + runConfiguration.getScriptPath() + " is not exists");
     }
 
     Project project = getEnvironment().getProject();
@@ -68,13 +68,13 @@ public class PerlRunProfileState extends CommandLineState {
     }
 
     PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
-      project, perlSdk, scriptFile, getPerlParameters(runProfile), getScriptParameters(runProfile));
+      project, perlSdk, scriptFile, getPerlParameters(runConfiguration), getScriptParameters(runConfiguration));
 
     if (commandLine == null) {
       throw new ExecutionException("Perl sdk is missing or corrupted: " + perlSdk);
     }
 
-    String workDirectory = runProfile.getWorkingDirectory();
+    String workDirectory = runConfiguration.getWorkingDirectory();
     if (StringUtil.isEmpty(workDirectory)) {
       Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, project);
       if (moduleForFile != null) {
@@ -85,7 +85,7 @@ public class PerlRunProfileState extends CommandLineState {
       }
     }
 
-    String charsetName = runProfile.getConsoleCharset();
+    String charsetName = runConfiguration.getConsoleCharset();
     Charset charset;
     if (!StringUtil.isEmpty(charsetName)) {
       try {
@@ -101,9 +101,9 @@ public class PerlRunProfileState extends CommandLineState {
 
     commandLine.setCharset(charset);
     commandLine.withWorkDirectory(workDirectory);
-    Map<String, String> environment = calcEnv(runProfile);
+    Map<String, String> environment = calcEnv(runConfiguration);
     commandLine.withEnvironment(environment);
-    commandLine.withParentEnvironmentType(runProfile.isPassParentEnvs() ? CONSOLE : NONE);
+    commandLine.withParentEnvironmentType(runConfiguration.isPassParentEnvs() ? CONSOLE : NONE);
 
     ProcessHandler handler = PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset));
     handler.addProcessListener(new ProcessAdapter() {
