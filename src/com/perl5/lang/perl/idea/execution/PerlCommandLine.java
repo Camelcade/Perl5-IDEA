@@ -18,9 +18,11 @@ package com.perl5.lang.perl.idea.execution;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
+import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.configurations.PtyCommandLine;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +30,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PerlCommandLine extends GeneralCommandLine {
   private static final Logger LOG = Logger.getInstance(PerlCommandLine.class);
@@ -63,6 +67,18 @@ public class PerlCommandLine extends GeneralCommandLine {
     if (original instanceof PerlCommandLine) {
       mySdk = ((PerlCommandLine)original).mySdk;
     }
+  }
+
+  @NotNull
+  @Override
+  public PerlCommandLine withEnvironment(@Nullable Map<String, String> environment) {
+    return (PerlCommandLine)super.withEnvironment(environment);
+  }
+
+  @NotNull
+  @Override
+  public PerlCommandLine withEnvironment(@NotNull String key, @NotNull String value) {
+    return (PerlCommandLine)super.withEnvironment(key, value);
   }
 
   @NotNull
@@ -134,6 +150,18 @@ public class PerlCommandLine extends GeneralCommandLine {
 
   public PerlCommandLine withVersionManagerData(@Nullable PerlVersionManagerData versionManagerData) {
     myVersionManagerData = versionManagerData;
+    return this;
+  }
+
+  @NotNull
+  public PerlCommandLine prependLineWith(@NotNull String... commands) {
+    ArrayList<String> commandsList = ContainerUtil.newArrayList(commands);
+    commandsList.add(getExePath());
+    setExePath(commandsList.remove(0));
+    if (!commandsList.isEmpty()) {
+      ParametersList parametersList = getParametersList();
+      ContainerUtil.reverse(commandsList).forEach(it -> parametersList.addAt(0, it));
+    }
     return this;
   }
 

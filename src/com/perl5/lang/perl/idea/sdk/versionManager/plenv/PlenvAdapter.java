@@ -14,57 +14,56 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
+package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
-import com.intellij.util.containers.ContainerUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * Api to the perlbrew cli
- */
-class PerlBrewAdapter extends PerlVersionManagerAdapter {
-  static final String PERLBREW_EXEC = "exec";
-  static final String PERLBREW_WITH = "--with";
+class PlenvAdapter extends PerlVersionManagerAdapter {
+  static final String PLENV_VERSION = "PLENV_VERSION";
+  static final String PLENV_EXEC = "exec";
 
-  public PerlBrewAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData hostData) {
+  public PlenvAdapter(@NotNull String versionManagerPath,
+                      @NotNull PerlHostData hostData) {
     super(versionManagerPath, hostData);
   }
 
   @Nullable
+  @Override
   protected List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
-    List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_WITH, distributionId);
-    commandsList.addAll(Arrays.asList(commands));
-    return getOutput(commandsList);
+    return getOutput(new PerlCommandLine(getVersionManagerPath())
+                       .withParameters(PLENV_EXEC)
+                       .withParameters(commands)
+                       .withEnvironment(PLENV_VERSION, distributionId));
   }
 
-  /**
-   * @return list of {@code perlbrew list} items trimmed or null if error happened
-   */
   @Nullable
+  @Override
   protected List<String> getDistributionsList() {
-    List<String> output = getOutput("list");
-    if (output == null) {
-      return null;
-    }
-    return ContainerUtil.map(output, String::trim);
+    List<String> rawVersions = getOutput("versions");
+    return rawVersions == null ? null : rawVersions.stream()
+      .filter(it -> !StringUtil.contains(it, "system"))
+      .map(String::trim)
+      .collect(Collectors.toList());
   }
 
   @NotNull
   @Override
   protected String getNotificationGroup() {
-    return PerlBundle.message("perl.vm.perlbrew.notification.group");
+    return PerlBundle.message("perl.vm.plenv.notification.group");
   }
 
   @NotNull
   @Override
   protected String getErrorNotificationTitle() {
-    return PerlBundle.message("perl.vm.perlbrew.notification.title");
+    return PerlBundle.message("perl.vm.plenv.notification.title");
   }
 }

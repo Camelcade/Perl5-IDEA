@@ -14,36 +14,37 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
+package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.PERLBREW_EXEC;
-import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.PERLBREW_WITH;
+import java.nio.file.Paths;
 
-class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHandler> {
+import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.PLENV_EXEC;
+import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.PLENV_VERSION;
 
-  PerlBrewData(@NotNull PerlBrewHandler handler) {
+class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
+  PlenvData(@NotNull PlenvHandler handler) {
     super(handler);
   }
 
-  PerlBrewData(@NotNull String versionManagerPath,
-               @NotNull String distributionId,
-               @NotNull PerlBrewHandler handler) {
+  PlenvData(@NotNull String versionManagerPath,
+            @NotNull String distributionId,
+            @NotNull PlenvHandler handler) {
     super(versionManagerPath, distributionId, handler);
   }
-
 
   @NotNull
   @Override
   public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
-    return originalCommandLine.prependLineWith(getVersionManagerPath(), PERLBREW_EXEC, PERLBREW_WITH, getDistributionId());
+    originalCommandLine.setExePath(Paths.get(originalCommandLine.getExePath()).getFileName().toString());
+    return originalCommandLine.prependLineWith(getVersionManagerPath(), PLENV_EXEC).withEnvironment(PLENV_VERSION, getDistributionId());
   }
 
   @Override
-  protected final PerlBrewData self() {
+  protected PlenvData self() {
     return this;
   }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
+package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -23,36 +23,37 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBrewHandler> {
-  public PerlBrewHandler(@NotNull PerlHandlerBean bean) {
+public class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler> {
+
+  public PlenvHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
 
   @NotNull
   @Override
+  public String getPresentableName() {
+    return PerlBundle.message("perl.vm.plenv.presentable.name");
+  }
+
+  @NotNull
+  @Override
   protected String getExecutableName() {
-    return "perlbrew";
+    return "plenv";
+  }
+
+  @NotNull
+  @Override
+  public PlenvData createData() {
+    return new PlenvData(this);
   }
 
   @Override
   protected PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData) {
-    return new PerlBrewAdapter(pathToVersionManager, hostData);
+    return new PlenvAdapter(pathToVersionManager, hostData);
   }
 
   @NotNull
-  @Override
-  public String getPresentableName() {
-    return PerlBundle.message("perl.vm.perlbrew.presentable.name");
-  }
-
-  @NotNull
-  @Override
-  public PerlBrewData createData() {
-    return new PerlBrewData(this);
-  }
-
-  @NotNull
-  protected PerlBrewData createData(@NotNull String versionManagerPath, @NotNull String distributionId) {
-    return new PerlBrewData(versionManagerPath, distributionId, this);
+  protected PlenvData createData(@NotNull String versionManagerPath, @NotNull String distributionId) {
+    return new PlenvData(versionManagerPath, distributionId, this);
   }
 }
