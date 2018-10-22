@@ -27,6 +27,7 @@ import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ReflectionUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
 import com.intellij.util.messages.impl.MessageListenerList;
@@ -97,10 +98,18 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     return findJdk(name);
   }
 
+  /**
+   * @deprecated use com.intellij.openapi.projectRoots.impl.PerlSdkTable#getInterpreters() instead
+   */
   @NotNull
   @Override
   public Sdk[] getAllJdks() {
-    return myInterpretersList.toArray(new Sdk[myInterpretersList.size()]);
+    return myInterpretersList.toArray(new Sdk[0]);
+  }
+
+  @NotNull
+  public List<Sdk> getInterpreters() {
+    return ContainerUtil.newArrayList(myInterpretersList);
   }
 
   @NotNull

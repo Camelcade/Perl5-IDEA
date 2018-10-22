@@ -34,7 +34,7 @@ public interface Perl5SdkManipulator {
    */
   @NotNull
   default List<Perl5SdkWrapper> getAllSdkWrappers() {
-    return ContainerUtil.map(PerlSdkTable.getInstance().getAllJdks(), Perl5RealSdkWrapper::new);
+    return ContainerUtil.map(PerlSdkTable.getInstance().getInterpreters(), Perl5RealSdkWrapper::new);
   }
 
   /**

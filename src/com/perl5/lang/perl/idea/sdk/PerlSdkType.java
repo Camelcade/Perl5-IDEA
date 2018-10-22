@@ -41,7 +41,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -203,7 +202,7 @@ public class PerlSdkType extends SdkType {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
 
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
-      suggestSdkName(perlVersionDescriptor, hostData, versionManagerData), Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
+      suggestSdkName(perlVersionDescriptor, hostData, versionManagerData), PerlSdkTable.getInstance().getInterpreters());
 
     final ProjectJdkImpl newSdk = PerlSdkTable.getInstance().createSdk(newSdkName);
     newSdk.setHomePath(interpreterPath);
