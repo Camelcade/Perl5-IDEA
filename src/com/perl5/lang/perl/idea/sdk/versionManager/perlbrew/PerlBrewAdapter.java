@@ -53,7 +53,7 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
     if (output == null) {
       return null;
     }
-    return ContainerUtil.map(output, String::trim);
+    return ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").trim());
   }
 
   @NotNull
