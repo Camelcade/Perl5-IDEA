@@ -40,7 +40,7 @@ import java.util.function.Predicate;
 
 import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.*;
 
-public class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
+class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
 
   public PerlLocalHostHandler(@NotNull PerlHandlerBean bean) {
     super(bean);

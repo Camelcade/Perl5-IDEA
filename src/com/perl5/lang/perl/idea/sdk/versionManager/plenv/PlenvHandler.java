@@ -23,7 +23,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler> {
+class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler> {
 
   public PlenvHandler(@NotNull PerlHandlerBean bean) {
     super(bean);

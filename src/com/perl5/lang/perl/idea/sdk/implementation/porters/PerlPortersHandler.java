@@ -23,7 +23,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlPortersHandler
+class PerlPortersHandler
   extends PerlImplementationHandler<PerlPortersData, PerlPortersHandler> {
 
   public PerlPortersHandler(@NotNull PerlHandlerBean bean) {

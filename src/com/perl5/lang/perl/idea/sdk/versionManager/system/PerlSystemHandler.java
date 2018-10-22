@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
 
-public class PerlSystemHandler
+class PerlSystemHandler
   extends PerlVersionManagerHandler<PerlSystemData, PerlSystemHandler> {
 
   public PerlSystemHandler(@NotNull PerlHandlerBean bean) {
