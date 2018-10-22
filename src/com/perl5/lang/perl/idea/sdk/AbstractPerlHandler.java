@@ -42,7 +42,7 @@ public abstract class AbstractPerlHandler<Data extends AbstractPerlData<Data, Ha
    * @implSpec this id MUST be the same as {@code key} in plugin.xml
    */
   @NotNull
-  protected final String getId() {
+  public final String getId() {
     return myId;
   }
 

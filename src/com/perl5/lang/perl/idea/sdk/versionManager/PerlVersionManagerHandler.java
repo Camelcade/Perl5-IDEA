@@ -103,6 +103,16 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   }
 
   /**
+   * @return true iff {@code sdk} has the same version handler as this one
+   */
+  @Contract("null -> false")
+  public boolean isSameHandler(@Nullable Sdk sdk) {
+    PerlVersionManagerHandler handler = PerlVersionManagerHandler.from(sdk);
+    return handler != null && handler.getId().equals(getId());
+  }
+
+
+  /**
    * Attempts to load {@link PerlVersionManagerData} from the {@code parentElement}
    *
    * @return data read or new empty data created by defaultHandler

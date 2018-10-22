@@ -41,6 +41,7 @@ import java.util.function.Predicate;
 import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.*;
 
 class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
+  private final PerlLocalHostData DATA_INSTANCE = new PerlLocalHostData(this);
 
   public PerlLocalHostHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
@@ -61,7 +62,7 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
   @NotNull
   @Override
   public PerlLocalHostData createData() {
-    return new PerlLocalHostData(this);
+    return DATA_INSTANCE;
   }
 
   @Override

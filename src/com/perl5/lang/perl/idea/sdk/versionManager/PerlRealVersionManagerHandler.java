@@ -34,6 +34,7 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -76,7 +77,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Runnable successCallback) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.choose.executable", StringUtil.capitalize(getPresentableName())),
-      it -> it.findFile(getExecutableName()),
+      this::suggestDefaultVersionManagerPath,
       it -> StringUtil.equals(it, getExecutableName()),
       it -> {
         String fileName = Paths.get(it).getFileName().toString();
@@ -85,6 +86,22 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
                : PerlBundle.message("perl.vm.wrong.file", fileName, getPresentableName());
       },
       (path, perlHostData) -> createSdkInteractively(path, perlHostData, successCallback));
+  }
+
+  /**
+   * Suggests a default path for a file chooser or text input
+   *
+   * @param hostData host we are creating interpreter for
+   * @return suggested path
+   * @implSpec for now we are trying to find a path in the existing sdks from the same host, supported by the same version manager, or
+   * just trying to find the executable file on the host
+   */
+  @Nullable
+  private Path suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData) {
+    return hostData.getHostSdkStream()
+      .filter(this::isSameHandler)
+      .map(it -> Paths.get(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
+      .findFirst().orElseGet(() -> hostData.findFile(getExecutableName()));
   }
 
   protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);

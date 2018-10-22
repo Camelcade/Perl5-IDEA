@@ -22,6 +22,7 @@ import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -34,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Contains data necessary to access a perl host. E.g. local, wsl, ssh, docker
@@ -112,6 +114,14 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
       throw new ExecutionException("No host data in " + commandLine);
     }
     return perlHostData.doExecAndGetOutput(commandLine);
+  }
+
+  /**
+   * @return stream of existing sdks from this host
+   */
+  @NotNull
+  public final Stream<Sdk> getHostSdkStream() {
+    return PerlSdkTable.getInstance().getInterpreters().stream().filter(it -> this.equals(PerlHostData.from(it)));
   }
 
   @Contract("null->null")

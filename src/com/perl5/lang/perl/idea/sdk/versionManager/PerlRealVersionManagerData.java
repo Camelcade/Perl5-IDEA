@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.annotations.Tag;
 import org.jetbrains.annotations.NotNull;
@@ -83,6 +84,16 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
            StringUtil.isEmpty(versionString) ? "" :
            versionString + LIB_SEPARATOR + libName;
   }
+
+  @NotNull
+  public static PerlRealVersionManagerData notNullFrom(@NotNull Sdk sdk) {
+    PerlVersionManagerData data = PerlVersionManagerData.notNullFrom(sdk);
+    if (data instanceof PerlRealVersionManagerData) {
+      return (PerlRealVersionManagerData)data;
+    }
+    throw new NullPointerException("Additional data supposed to be " + PerlRealVersionManagerData.class.getSimpleName() + " not " + data);
+  }
+
 
   @Override
   public String toString() {
