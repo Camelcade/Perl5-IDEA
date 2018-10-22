@@ -20,8 +20,7 @@ import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.PERLBREW_EXEC;
-import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.PERLBREW_WITH;
+import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.*;
 
 class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHandler> {
 
@@ -36,10 +35,13 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
   }
 
 
+  /**
+   * @see PerlBrewAdapter#execWith(java.lang.String, java.lang.String...)
+   */
   @NotNull
   @Override
   public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
-    return originalCommandLine.prependLineWith(getVersionManagerPath(), PERLBREW_EXEC, PERLBREW_WITH, getDistributionId());
+    return originalCommandLine.prependLineWith(getVersionManagerPath(), PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, getDistributionId());
   }
 
   @Override

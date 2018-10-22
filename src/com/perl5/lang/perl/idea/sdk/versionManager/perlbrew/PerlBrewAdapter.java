@@ -32,14 +32,18 @@ import java.util.List;
 class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_EXEC = "exec";
   static final String PERLBREW_WITH = "--with";
+  static final String PERLBREW_QUIET = "-q";
 
   public PerlBrewAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData hostData) {
     super(versionManagerPath, hostData);
   }
 
+  /**
+   * @see PerlBrewData#patchCommandLine(com.perl5.lang.perl.idea.execution.PerlCommandLine)
+   */
   @Nullable
   protected List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
-    List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_WITH, distributionId);
+    List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
   }
