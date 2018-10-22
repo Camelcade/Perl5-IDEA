@@ -103,7 +103,9 @@ public abstract class PerlVersionManagerAdapter {
   }
 
   @NotNull
-  protected abstract String getNotificationGroup();
+  protected String getNotificationGroup() {
+    return PerlBundle.message("perl.vm.notification.group");
+  }
 
   @NotNull
   protected abstract String getErrorNotificationTitle();

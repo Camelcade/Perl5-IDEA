@@ -58,12 +58,6 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
 
   @NotNull
   @Override
-  protected String getNotificationGroup() {
-    return PerlBundle.message("perl.vm.perlbrew.notification.group");
-  }
-
-  @NotNull
-  @Override
   protected String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.perlbrew.notification.title");
   }

@@ -57,12 +57,6 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
 
   @NotNull
   @Override
-  protected String getNotificationGroup() {
-    return PerlBundle.message("perl.vm.plenv.notification.group");
-  }
-
-  @NotNull
-  @Override
   protected String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.plenv.notification.title");
   }

@@ -16,7 +16,11 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
@@ -41,6 +45,7 @@ import static com.perl5.lang.perl.util.PerlRunUtil.PERL_LE;
  */
 public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersionManagerData<Data, Handler>, Handler extends PerlRealVersionManagerHandler<Data, Handler>>
   extends PerlVersionManagerHandler<Data, Handler> {
+  private static final Logger LOG = Logger.getInstance(PerlRealVersionManagerHandler.class);
   static final String LIB_SEPARATOR = "@";
 
   public PerlRealVersionManagerHandler(@NotNull PerlHandlerBean bean) {
@@ -122,6 +127,14 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
 
     List<String> perlPath = vmAdapter.execWith(installation, "perl", PERL_LE, PERL_CTRL_X);
     if (perlPath == null || perlPath.size() != 1) {
+      LOG.warn("Error getting perl location from interpreter. One line with path expected, got:\n" +
+               (perlPath == null ? "nothing" : StringUtil.join(perlPath, "\n")));
+      Notifications.Bus.notify(new Notification(
+        PerlBundle.message("perl.vm.notification.group"),
+        PerlBundle.message("perl.vm.error.getting.interpreter.path.title"),
+        PerlBundle.message("perl.vm.error.getting.interpreter.path.message"),
+        NotificationType.ERROR
+      ));
       return;
     }
 
