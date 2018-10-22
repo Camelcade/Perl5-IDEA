@@ -159,8 +159,12 @@ public class PerlSdkType extends SdkType {
   }
 
   @NotNull
-  private static String suggestSdkName(@Nullable VersionDescriptor descriptor) {
-    return "Perl" + (descriptor == null ? "" : " " + descriptor.version);
+  private static String suggestSdkName(@Nullable VersionDescriptor descriptor,
+                                       @NotNull PerlHostData hostData,
+                                       @NotNull PerlVersionManagerData versionManagerData) {
+    return StringUtil.capitalize(hostData.getShortName()) + ", " +
+           StringUtil.capitalize(versionManagerData.getShortName()) + ": " +
+           "Perl" + (descriptor == null ? "" : " " + descriptor.version);
   }
 
   @Contract("null, _,_->null")
@@ -199,7 +203,7 @@ public class PerlSdkType extends SdkType {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
 
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
-      suggestSdkName(perlVersionDescriptor), Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
+      suggestSdkName(perlVersionDescriptor, hostData, versionManagerData), Arrays.asList(PerlSdkTable.getInstance().getAllJdks()));
 
     final ProjectJdkImpl newSdk = PerlSdkTable.getInstance().createSdk(newSdkName);
     newSdk.setHomePath(interpreterPath);

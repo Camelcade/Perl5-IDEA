@@ -62,7 +62,7 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
   @NotNull
   @Override
   public String getShortName() {
-    return super.getShortName() + ", " + getDistributionId();
+    return super.getShortName() + "[" + getDistributionId() + "]";
   }
 
   @NotNull
