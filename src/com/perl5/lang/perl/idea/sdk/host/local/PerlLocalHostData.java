@@ -47,7 +47,6 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   @NotNull
   @Override
   protected ProcessOutput doExecAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    assertNotEdt();
     return ExecUtil.execAndGetOutput(commandLine);
   }
 

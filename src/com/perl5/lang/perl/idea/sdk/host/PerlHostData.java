@@ -125,6 +125,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     if (perlHostData == null) {
       throw new ExecutionException("No host data in " + commandLine);
     }
+    assertNotEdt();
     return perlHostData.doExecAndGetOutput(commandLine);
   }
 
