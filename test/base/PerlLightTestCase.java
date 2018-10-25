@@ -27,6 +27,7 @@ import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
+import com.intellij.execution.impl.EditorHyperlinkSupport;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.hierarchy.*;
 import com.intellij.ide.hierarchy.actions.BrowseHierarchyActionBase;
@@ -1223,4 +1224,41 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     action.actionPerformedImpl(myModule.getProject(), myFixture.getEditor());
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
+
+  protected void doTestConsoleFilter(@NotNull com.intellij.execution.filters.Filter filter) {
+    initWithFileSmart();
+    Document document = getEditor().getDocument();
+    int lines = document.getLineCount();
+
+    String documentText = document.getText();
+
+    StringBuilder sb = new StringBuilder();
+    for (int lineNumber = 0; lineNumber < lines; lineNumber++) {
+      int lineStart = document.getLineStartOffset(lineNumber);
+
+      String lineText = EditorHyperlinkSupport.getLineText(document, lineNumber, true);
+      int endOffset = lineStart + lineText.length();
+      com.intellij.execution.filters.Filter.Result result = filter.applyFilter(lineText, endOffset);
+      if (result == null) {
+        continue;
+      }
+      for (com.intellij.execution.filters.Filter.ResultItem resultItem : result.getResultItems()) {
+        int linkStartOffset = resultItem.getHighlightStartOffset();
+        int linkEndOffset = resultItem.getHighlightEndOffset();
+        sb.append(linkStartOffset)
+          .append(" - ")
+          .append(linkEndOffset)
+          .append("; ")
+          .append('[')
+          .append(documentText, linkStartOffset, linkEndOffset)
+          .append(']')
+          .append(" => ")
+          .append(resultItem.getHyperlinkInfo())
+          .append("\n");
+      }
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
 }

@@ -16,6 +16,14 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionManager;
+import com.intellij.execution.Executor;
+import com.intellij.execution.executors.DefaultRunExecutor;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessTerminatedListener;
+import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -30,7 +38,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -170,7 +180,7 @@ public class PerlRunUtil {
     Notification notification = new Notification(
       PerlBundle.message("perl.missing.library.notification"),
       PerlBundle.message("perl.missing.library.notification.title", libraryName),
-      PerlBundle.message("perl.missing.library.notification.message"),
+      PerlBundle.message("perl.missing.library.notification.message", libraryName),
       NotificationType.ERROR
     );
     // fixme add installation action here, see #1645
@@ -295,5 +305,35 @@ public class PerlRunUtil {
       LOG.warn("Error executing " + commandLine, e);
       return Collections.emptyList();
     }
+  }
+
+  public static void runInConsole(@NotNull Project project,
+                                  @NotNull PerlCommandLine perlCommandLine) {
+    Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
+    PerlRunConsole consoleView = new PerlRunConsole(project, true);
+    ProcessHandler processHandler = null;
+    try {
+      processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine);
+    }
+    catch (ExecutionException e) {
+      consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
+      LOG.error(e);
+    }
+
+    RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
+      consoleView,
+      processHandler,
+      consoleView.buildPanel(),
+      ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
+      PerlIcons.PERL_LANGUAGE_ICON
+    );
+
+    ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
+    if (processHandler != null) {
+      consoleView.attachToProcess(processHandler);
+      ProcessTerminatedListener.attach(processHandler, project);
+      processHandler.startNotify();
+    }
+    consoleView.addCloseAction(runExecutor, runContentDescriptor);
   }
 }

@@ -16,16 +16,12 @@
 
 package com.perl5.lang.perl.idea.execution.filters;
 
-import com.intellij.execution.filters.FileHyperlinkInfoBase;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,29 +56,5 @@ public class PerlConsoleFileLinkFilter implements Filter {
       lineStartOffset + fileStartOffset,
       lineStartOffset + lineNumberEndOffset,
       new MyHyperLinkInfo(myProject, line, filePath));
-  }
-
-  private static class MyHyperLinkInfo extends FileHyperlinkInfoBase {
-    @NotNull
-    private final String myFilePath;
-
-    private final int myLine; // testing purposes
-
-    public MyHyperLinkInfo(Project project, int documentLine, @NotNull String filePath) {
-      super(project, documentLine, 0);
-      myFilePath = filePath;
-      myLine = documentLine;
-    }
-
-    @Nullable
-    @Override
-    protected VirtualFile getVirtualFile() {
-      return VfsUtil.findFileByIoFile(new File(myFilePath), false);
-    }
-
-    @Override
-    public String toString() {
-      return "line " + myLine + " in " + myFilePath;
-    }
   }
 }

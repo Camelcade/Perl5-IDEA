@@ -17,10 +17,7 @@
 package editor;
 
 import base.PerlLightTestCase;
-import com.intellij.execution.filters.Filter;
-import com.intellij.execution.impl.EditorHyperlinkSupport;
-import com.intellij.openapi.editor.Document;
-import com.intellij.testFramework.UsefulTestCase;
+import com.perl5.lang.perl.idea.execution.filters.PerlAbsolutePathConsoleFilter;
 import com.perl5.lang.perl.idea.execution.filters.PerlConsoleFileLinkFilter;
 
 public class PerlConsoleFilterTest extends PerlLightTestCase {
@@ -29,46 +26,28 @@ public class PerlConsoleFilterTest extends PerlLightTestCase {
     return "testData/consoleFilter/perl";
   }
 
-  public void testConfess() {doTest();}
+  public void testConfess() {doTestDie();}
 
-  public void testDie() {doTest();}
+  public void testDie() {doTestDie();}
 
-  public void testPythonBug() {doTest();}
+  public void testPythonBug() {doTestDie();}
 
-  private void doTest() {
-    initWithFileSmart();
-    Document document = getEditor().getDocument();
-    int lines = document.getLineCount();
-
-    PerlConsoleFileLinkFilter filter = new PerlConsoleFileLinkFilter(getProject());
-    String documentText = document.getText();
-
-    StringBuilder sb = new StringBuilder();
-    for (int lineNumber = 0; lineNumber < lines; lineNumber++) {
-      int lineStart = document.getLineStartOffset(lineNumber);
-
-      String lineText = EditorHyperlinkSupport.getLineText(document, lineNumber, true);
-      int endOffset = lineStart + lineText.length();
-      Filter.Result result = filter.applyFilter(lineText, endOffset);
-      if (result == null) {
-        continue;
-      }
-      for (Filter.ResultItem resultItem : result.getResultItems()) {
-        int linkStartOffset = resultItem.getHighlightStartOffset();
-        int linkEndOffset = resultItem.getHighlightEndOffset();
-        sb.append(linkStartOffset)
-          .append(" - ")
-          .append(linkEndOffset)
-          .append("; ")
-          .append('[')
-          .append(documentText.substring(linkStartOffset, linkEndOffset))
-          .append(']')
-          .append(" => ")
-          .append(resultItem.getHyperlinkInfo())
-          .append("\n");
-      }
-    }
-
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  public void testInstallDtlFast() {
+    doTestAbsolute();
   }
+
+  public void testLibraryPath() {
+    doTestAbsolute();
+  }
+
+  public void testSemicolons() {doTestAbsolute();}
+
+  private void doTestAbsolute() {
+    doTestConsoleFilter(new PerlAbsolutePathConsoleFilter(getProject()));
+  }
+
+  private void doTestDie() {
+    doTestConsoleFilter(new PerlConsoleFileLinkFilter(getProject()));
+  }
+
 }

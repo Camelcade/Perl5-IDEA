@@ -1,0 +1,863 @@
+/home/user/perl5/perlbrew/bin/perlbrew exec -q --with perl-5.28.0@test6 /home/user/perl5/perlbrew/perls/perl-5.28.0/bin/cpanm -v DTL::Fast
+cpanm (App::cpanminus) 1.7044 on perl 5.028000 built for x86_64-linux
+Work directory is /home/user/.cpanm/work/1540544765.26466
+You have make /usr/bin/make
+You have /usr/bin/wget
+You have /bin/tar: tar (GNU tar) 1.28
+Copyright (C) 2014 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by John Gilmore and Jay Fenlason.
+You have /usr/bin/unzip
+Searching DTL::Fast () on cpanmetadb ...
+--2018-10-26 12:06:05--  http://cpanmetadb.plackperl.org/v1.0/package/DTL::Fast
+Resolving cpanmetadb.plackperl.org (cpanmetadb.plackperl.org)... 151.101.114.217
+Connecting to cpanmetadb.plackperl.org (cpanmetadb.plackperl.org)|151.101.114.217|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5286 (5.2K) [text/yaml]
+Saving to: ‘STDOUT’
+
+-                   100%[===================>]   5.16K  --.-KB/s    in 0s
+
+2018-10-26 12:06:05 (514 MB/s) - written to stdout [5286/5286]
+
+--> Working on DTL::Fast
+Fetching http://www.cpan.org/authors/id/H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz ... --2018-10-26 12:06:05--  http://www.cpan.org/authors/id/H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz
+Resolving www.cpan.org (www.cpan.org)... 151.101.114.217, 2a04:4e42:1b::729
+Connecting to www.cpan.org (www.cpan.org)|151.101.114.217|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 126438 (123K) [application/x-gzip]
+Saving to: ‘DTL-Fast-2017.1.tar.gz’
+
+DTL-Fast-2017.1.tar 100%[===================>] 123.47K  --.-KB/s    in 0.1s
+
+2018-10-26 12:06:05 (908 KB/s) - ‘DTL-Fast-2017.1.tar.gz’ saved [126438/126438]
+
+OK
+Unpacking DTL-Fast-2017.1.tar.gz
+DTL-Fast-2017.1/
+DTL-Fast-2017.1/t/
+DTL-Fast-2017.1/t/xs/
+DTL-Fast-2017.1/t/xs/count_lines.t
+DTL-Fast-2017.1/t/xs/html_protect.t
+DTL-Fast-2017.1/t/xs/spaceless.t
+DTL-Fast-2017.1/t/xs/eval_sequence.t
+DTL-Fast-2017.1/t/core/
+DTL-Fast-2017.1/t/core/utils.t
+DTL-Fast-2017.1/t/core/errors.t
+DTL-Fast-2017.1/t/core/expression.t
+DTL-Fast-2017.1/t/core/loader.t
+DTL-Fast-2017.1/t/core/critic.t
+DTL-Fast-2017.1/t/core/context.t
+DTL-Fast-2017.1/t/core/template.t
+DTL-Fast-2017.1/t/filter/
+DTL-Fast-2017.1/t/filter/make_list.t
+DTL-Fast-2017.1/t/filter/removetags.t
+DTL-Fast-2017.1/t/filter/rjust.t
+DTL-Fast-2017.1/t/filter/addslashes.t
+DTL-Fast-2017.1/t/filter/linenumbers.t
+DTL-Fast-2017.1/t/filter/default_if_none.t
+DTL-Fast-2017.1/t/filter/last.t
+DTL-Fast-2017.1/t/filter/length.t
+DTL-Fast-2017.1/t/filter/pluralize.t
+DTL-Fast-2017.1/t/filter/capfirst.t
+DTL-Fast-2017.1/t/filter/escapejs.t
+DTL-Fast-2017.1/t/filter/dictsortreversed.t
+DTL-Fast-2017.1/t/filter/reverse.t
+DTL-Fast-2017.1/t/filter/urlizetrunc.t
+DTL-Fast-2017.1/t/filter/truncatewords.t
+DTL-Fast-2017.1/t/filter/add.t
+DTL-Fast-2017.1/t/filter/strftime.t
+DTL-Fast-2017.1/t/filter/linebreaksbr.t
+DTL-Fast-2017.1/t/filter/urlencode.t
+DTL-Fast-2017.1/t/filter/length_is.t
+DTL-Fast-2017.1/t/filter/truncatechars_html.t
+DTL-Fast-2017.1/t/filter/upper.t
+DTL-Fast-2017.1/t/filter/split.t
+DTL-Fast-2017.1/t/filter/linebreaks.t
+DTL-Fast-2017.1/t/filter/ljust.t
+DTL-Fast-2017.1/t/filter/timesince.t
+DTL-Fast-2017.1/t/filter/yesno.t
+DTL-Fast-2017.1/t/filter/urlize.t
+DTL-Fast-2017.1/t/filter/safe.t
+DTL-Fast-2017.1/t/filter/unordered_list.t
+DTL-Fast-2017.1/t/filter/iriencode.t
+DTL-Fast-2017.1/t/filter/wordwrap.t
+DTL-Fast-2017.1/t/filter/title.t
+DTL-Fast-2017.1/t/filter/stringformat.t
+DTL-Fast-2017.1/t/filter/slice.t
+DTL-Fast-2017.1/t/filter/first.t
+DTL-Fast-2017.1/t/filter/wordcount.t
+DTL-Fast-2017.1/t/filter/phone2numeric.t
+DTL-Fast-2017.1/t/filter/random.t
+DTL-Fast-2017.1/t/filter/truncatewords_html.t
+DTL-Fast-2017.1/t/filter/escape.t
+DTL-Fast-2017.1/t/filter/default.t
+DTL-Fast-2017.1/t/filter/divisibleby.t
+DTL-Fast-2017.1/t/filter/truncatechars.t
+DTL-Fast-2017.1/t/filter/get_digit.t
+DTL-Fast-2017.1/t/filter/slugify.t
+DTL-Fast-2017.1/t/filter/time.t
+DTL-Fast-2017.1/t/filter/floatformat.t
+DTL-Fast-2017.1/t/filter/dictsort.t
+DTL-Fast-2017.1/t/filter/striptags.t
+DTL-Fast-2017.1/t/filter/timeuntil.t
+DTL-Fast-2017.1/t/filter/join.t
+DTL-Fast-2017.1/t/filter/safeseq.t
+DTL-Fast-2017.1/t/filter/lower.t
+DTL-Fast-2017.1/t/filter/pluralize_ru.t
+DTL-Fast-2017.1/t/filter/filesizeformat.t
+DTL-Fast-2017.1/t/filter/numberformat.t
+DTL-Fast-2017.1/t/filter/center.t
+DTL-Fast-2017.1/t/filter/cut.t
+DTL-Fast-2017.1/t/tag/
+DTL-Fast-2017.1/t/tag/regroup.t
+DTL-Fast-2017.1/t/tag/firstof.t
+DTL-Fast-2017.1/t/tag/ifequal.t
+DTL-Fast-2017.1/t/tag/cycle.t
+DTL-Fast-2017.1/t/tag/verbatim.t
+DTL-Fast-2017.1/t/tag/autoescape.t
+DTL-Fast-2017.1/t/tag/sprintf.t
+DTL-Fast-2017.1/t/tag/widthratio.t
+DTL-Fast-2017.1/t/tag/for.t
+DTL-Fast-2017.1/t/tag/ifnotequal.t
+DTL-Fast-2017.1/t/tag/templatetag.t
+DTL-Fast-2017.1/t/tag/include.t
+DTL-Fast-2017.1/t/tag/debug.t
+DTL-Fast-2017.1/t/tag/comment.t
+DTL-Fast-2017.1/t/tag/firstofdefined.t
+DTL-Fast-2017.1/t/tag/with.t
+DTL-Fast-2017.1/t/tag/load.t
+DTL-Fast-2017.1/t/tag/spaceless.t
+DTL-Fast-2017.1/t/tag/dump_warn.t
+DTL-Fast-2017.1/t/tag/Foo/
+DTL-Fast-2017.1/t/tag/Foo/Bar.pm
+DTL-Fast-2017.1/t/tag/filter.t
+DTL-Fast-2017.1/t/tag/dump_html.t
+DTL-Fast-2017.1/t/tag/ifchanged.t
+DTL-Fast-2017.1/t/tag/ssi.t
+DTL-Fast-2017.1/t/tag/dump.t
+DTL-Fast-2017.1/t/tag/if.t
+DTL-Fast-2017.1/t/tag/now.t
+DTL-Fast-2017.1/t/tag/url.t
+DTL-Fast-2017.1/t/expression/
+DTL-Fast-2017.1/t/expression/eq.t
+DTL-Fast-2017.1/t/expression/defined.t
+DTL-Fast-2017.1/t/expression/logic.t
+DTL-Fast-2017.1/t/expression/in.t
+DTL-Fast-2017.1/t/tmpl/
+DTL-Fast-2017.1/t/tmpl/block_super_child_tag.txt
+DTL-Fast-2017.1/t/tmpl/cycle_as.txt
+DTL-Fast-2017.1/t/tmpl/error_double_empty.txt
+DTL-Fast-2017.1/t/tmpl/error_expression_unpaired_brackets.txt
+DTL-Fast-2017.1/t/tmpl/error_render_variable_include.txt
+DTL-Fast-2017.1/t/tmpl/error_tag.txt
+DTL-Fast-2017.1/t/tmpl/parent.txt
+DTL-Fast-2017.1/t/tmpl/autoescape_top.txt
+DTL-Fast-2017.1/t/tmpl/error_slice_value.txt
+DTL-Fast-2017.1/t/tmpl/included2.txt
+DTL-Fast-2017.1/t/tmpl/included_lvl_2.txt
+DTL-Fast-2017.1/t/tmpl/complex.txt
+DTL-Fast-2017.1/t/tmpl/cycle_as_silent.txt
+DTL-Fast-2017.1/t/tmpl/cycle_for.txt
+DTL-Fast-2017.1/t/tmpl/child0.txt
+DTL-Fast-2017.1/t/tmpl/included_lvl_1.txt
+DTL-Fast-2017.1/t/tmpl/error_block_duplicated.txt
+DTL-Fast-2017.1/t/tmpl/cycle_escape_safe.txt
+DTL-Fast-2017.1/t/tmpl/uncomment_nested.txt
+DTL-Fast-2017.1/t/tmpl/child1.txt
+DTL-Fast-2017.1/t/tmpl/block_super_parent.txt
+DTL-Fast-2017.1/t/tmpl/child2.txt
+DTL-Fast-2017.1/t/tmpl/error_render_variable.txt
+DTL-Fast-2017.1/t/tmpl/uncomment_include.txt
+DTL-Fast-2017.1/t/tmpl/error_expression_unary_got_left.txt
+DTL-Fast-2017.1/t/tmpl/error_unknown_filter.txt
+DTL-Fast-2017.1/t/tmpl/error_variable_name.txt
+DTL-Fast-2017.1/t/tmpl/included_lvl_0.txt
+DTL-Fast-2017.1/t/tmpl/autoescape_included.txt
+DTL-Fast-2017.1/t/tmpl/included_with.txt
+DTL-Fast-2017.1/t/tmpl/uncomment_top.txt
+DTL-Fast-2017.1/t/tmpl/error_undisclosed.txt
+DTL-Fast-2017.1/t/tmpl/badinclude.txt
+DTL-Fast-2017.1/t/tmpl/error_in_operator.txt
+DTL-Fast-2017.1/t/tmpl/orphan.txt
+DTL-Fast-2017.1/t/tmpl/error_with_params.txt
+DTL-Fast-2017.1/t/tmpl/error_slice_noarg.txt
+DTL-Fast-2017.1/t/tmpl/included_dynamic.txt
+DTL-Fast-2017.1/t/tmpl/include_recursive2.txt
+DTL-Fast-2017.1/t/tmpl/include_recursive1.txt
+DTL-Fast-2017.1/t/tmpl/cycle_escape_autoescape.txt
+DTL-Fast-2017.1/t/tmpl/inherit_recursive3.txt
+DTL-Fast-2017.1/t/tmpl/uncomment_if.txt
+DTL-Fast-2017.1/t/tmpl/inherit_recursive1.txt
+DTL-Fast-2017.1/t/tmpl/child3.txt
+DTL-Fast-2017.1/t/tmpl/error_autoescape_bla.txt
+DTL-Fast-2017.1/t/tmpl/simple.txt
+DTL-Fast-2017.1/t/tmpl/comment_include.txt
+DTL-Fast-2017.1/t/tmpl/error_expression_binary_no_right.txt
+DTL-Fast-2017.1/t/tmpl/inherit_recursive0.txt
+DTL-Fast-2017.1/t/tmpl/block_super_child_django.txt
+DTL-Fast-2017.1/t/tmpl/include_with.txt
+DTL-Fast-2017.1/t/tmpl/error_block_unnamed.txt
+DTL-Fast-2017.1/t/tmpl/ssi_parsed.txt
+DTL-Fast-2017.1/t/tmpl/cycle_simple.txt
+DTL-Fast-2017.1/t/tmpl/cycle_escape.txt
+DTL-Fast-2017.1/t/tmpl/inherit_recursive2.txt
+DTL-Fast-2017.1/t/tmpl/included.txt
+DTL-Fast-2017.1/t/tmpl/ssi_static.txt
+DTL-Fast-2017.1/t/tmpl/autoescape_sample.txt
+DTL-Fast-2017.1/t/tmpl/error_now_parameter.txt
+DTL-Fast-2017.1/t/tmpl/include_recursive0.txt
+DTL-Fast-2017.1/t/tmpl/comment_top.txt
+DTL-Fast-2017.1/t/tmpl/error_expression_binary_no_left.txt
+DTL-Fast-2017.1/t/tmpl2/
+DTL-Fast-2017.1/t/tmpl2/simple2.txt
+DTL-Fast-2017.1/t/tmpl2/simple3.txt
+DTL-Fast-2017.1/t/tmpl2/childother.txt
+DTL-Fast-2017.1/t/tmpl2/simple.txt
+DTL-Fast-2017.1/t/ssi/
+DTL-Fast-2017.1/t/ssi/parsed.txt
+DTL-Fast-2017.1/t/ssi/static.txt
+DTL-Fast-2017.1/src/
+DTL-Fast-2017.1/src/count_lines.h
+DTL-Fast-2017.1/src/html_protect.h
+DTL-Fast-2017.1/src/spaceless.h
+DTL-Fast-2017.1/src/perl_mnemonic.h
+DTL-Fast-2017.1/Changes
+DTL-Fast-2017.1/TODO
+DTL-Fast-2017.1/Fast.xs
+DTL-Fast-2017.1/timetheese/
+DTL-Fast-2017.1/timetheese/profile_rendering.pl
+DTL-Fast-2017.1/timetheese/cgi_dtl_dotiac.pl
+DTL-Fast-2017.1/timetheese/performance.pl
+DTL-Fast-2017.1/timetheese/compare.pl
+DTL-Fast-2017.1/timetheese/cache/
+DTL-Fast-2017.1/timetheese/cache/.dir
+DTL-Fast-2017.1/timetheese/cache/dump_cache.pl
+DTL-Fast-2017.1/timetheese/performance_libs.pl
+DTL-Fast-2017.1/timetheese/tpl/
+DTL-Fast-2017.1/timetheese/tpl/django_tutorial_page.html
+DTL-Fast-2017.1/timetheese/tpl/parent.txt
+DTL-Fast-2017.1/timetheese/tpl/child1.txt
+DTL-Fast-2017.1/timetheese/tpl/child2.txt
+DTL-Fast-2017.1/timetheese/tpl/root.txt
+DTL-Fast-2017.1/timetheese/tpl/stackoverflow_homepage.html
+DTL-Fast-2017.1/timetheese/tpl/child4.txt
+DTL-Fast-2017.1/timetheese/tpl/results.html
+DTL-Fast-2017.1/timetheese/tpl/child3.txt
+DTL-Fast-2017.1/timetheese/tpl/empty_template.html
+DTL-Fast-2017.1/timetheese/tpl/child5.txt
+DTL-Fast-2017.1/timetheese/howslow_django.pl
+DTL-Fast-2017.1/timetheese/performance_perl.pl
+DTL-Fast-2017.1/timetheese/profile_parsing.pl
+DTL-Fast-2017.1/timetheese/structure.pl
+DTL-Fast-2017.1/timetheese/cgi_dtl_fast_cached.pl
+DTL-Fast-2017.1/timetheese/cgi_dtl_fast.pl
+DTL-Fast-2017.1/META.json
+DTL-Fast-2017.1/MANIFEST
+DTL-Fast-2017.1/test.pl
+DTL-Fast-2017.1/Makefile.PL
+DTL-Fast-2017.1/lib/
+DTL-Fast-2017.1/lib/DTL/
+DTL-Fast-2017.1/lib/DTL/Fast/
+DTL-Fast-2017.1/lib/DTL/Fast/Cache.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Text.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Parser.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Entity.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filters.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Template.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Renderer.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Variable.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/And.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Minus.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Mul.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Lt.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Plus.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Pow.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Logical.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Div.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Eq.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Ge.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Mod.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Or.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/In.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/NotIn.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Ne.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Le.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary/Gt.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Unary.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Unary/
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Unary/Not.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Unary/Logical.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Unary/Defined.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator/Binary.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression/Operator.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Replacer.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Replacer/
+DTL-Fast-2017.1/lib/DTL/Fast/Replacer/Replacement.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Context.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Utils.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Firstof.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Sprintf.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Debug.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Ifnotequal.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Widthratio.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/If/
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/If/Condition.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Url.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Ssi.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Block.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Load.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/DumpWarn.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Ifequal.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Regroup.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Spaceless.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/With.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Autoescape.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/For.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Comment.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Simple.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Templatetag.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Filter.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Extends.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Now.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Include.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/BlockSuper.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Firstofdefined.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/If.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/DumpHTML.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Dump.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Cycle.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Verbatim.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tag/Ifchanged.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Expression.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Strftime.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Date.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Default.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Divisibleby.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Truncatechars.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Add.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/First.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Pluralize.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Join.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Time.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Lengthis.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Lower.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Filesizeformat.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Urlizetrunc.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Slugify.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Urlencode.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Title.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Escape.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Striptags.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Slice.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Linebreaksbr.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Random.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Ljust.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Upper.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Linenumbers.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Reverse.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Last.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Getdigit.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/SafeSeq.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Wordcount.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Rjust.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Escapejs.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Numberformat.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Truncatecharshtml.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Iriencode.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Unorderedlist.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Addslashes.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Linebreaks.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Urlize.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Ru/
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Ru/Pluralize.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Dictsortreversed.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Split.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Timesince.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/MakeList.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Floatformat.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/PhoneToNumeric.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Wordwrap.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Length.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Dictsort.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Yesno.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Center.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Cut.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Capfirst.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/DefaultIfNone.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Truncatewordshtml.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Truncatewords.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Stringformat.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Timeuntil.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Safe.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Filter/Removetags.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Cache/
+DTL-Fast-2017.1/lib/DTL/Fast/Cache/Runtime.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Cache/Memcached.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Cache/Serialized.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Cache/File.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Cache/Compressed.pm
+DTL-Fast-2017.1/lib/DTL/Fast/FilterManager.pm
+DTL-Fast-2017.1/lib/DTL/Fast/Tags.pm
+DTL-Fast-2017.1/lib/DTL/Fast.pod
+DTL-Fast-2017.1/lib/DTL/Fast.pm
+DTL-Fast-2017.1/META.yml
+Entering DTL-Fast-2017.1
+Checking configure dependencies from META.json
+Checking if you have ExtUtils::MakeMaker 6.58 ... Yes (7.34)
+Running Makefile.PL
+Configuring DTL-Fast-2017.1 ... Checking if your kit is complete...
+Warning: the following files are missing in your kit:
+	README
+Please inform the author.
+WARNING: Setting ABSTRACT via file 'lib/DTL/Fast.pm' failed
+ at /home/user/perl5/perlbrew/perls/perl-5.28.0/lib/5.28.0/ExtUtils/MakeMaker.pm line 754.
+Generating a Unix-style Makefile
+Writing Makefile for DTL::Fast
+Writing MYMETA.yml and MYMETA.json
+OK
+Checking dependencies from MYMETA.json ...
+Checking if you have Storable 0 ... Yes (3.08)
+Checking if you have XSLoader 0 ... Yes (0.30)
+Checking if you have Test::Harness 0 ... Yes (3.42)
+Checking if you have POSIX 0 ... Yes (1.84)
+Checking if you have parent 0 ... Yes (0.236)
+Checking if you have Module::Load 0 ... Yes (0.32)
+Checking if you have Compress::Zlib 0 ... Yes (2.074)
+Checking if you have Digest::MD5 0 ... Yes (2.55)
+Checking if you have Test::More 0 ... Yes (1.302133)
+Checking if you have URI::Escape::XS 0.12 ... Yes (0.14)
+Checking if you have Date::Format 0 ... Yes (2.24)
+Building and testing DTL-Fast-2017.1 ... cp lib/DTL/Fast/Expression/Operator.pm blib/lib/DTL/Fast/Expression/Operator.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Logical.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Logical.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Mul.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Mul.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/In.pm blib/lib/DTL/Fast/Expression/Operator/Binary/In.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Pow.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Pow.pm
+cp lib/DTL/Fast/Cache.pm blib/lib/DTL/Fast/Cache.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Eq.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Eq.pm
+cp lib/DTL/Fast/Entity.pm blib/lib/DTL/Fast/Entity.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Or.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Or.pm
+cp lib/DTL/Fast/Cache/Compressed.pm blib/lib/DTL/Fast/Cache/Compressed.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Ge.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Ge.pm
+cp lib/DTL/Fast.pod blib/lib/DTL/Fast.pod
+cp lib/DTL/Fast/Expression/Operator/Binary/Mod.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Mod.pm
+cp lib/DTL/Fast/Cache/Serialized.pm blib/lib/DTL/Fast/Cache/Serialized.pm
+cp lib/DTL/Fast/Expression.pm blib/lib/DTL/Fast/Expression.pm
+cp lib/DTL/Fast/Cache/File.pm blib/lib/DTL/Fast/Cache/File.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Ne.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Ne.pm
+cp lib/DTL/Fast/Expression/Operator/Binary.pm blib/lib/DTL/Fast/Expression/Operator/Binary.pm
+cp lib/DTL/Fast.pm blib/lib/DTL/Fast.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Minus.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Minus.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Div.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Div.pm
+cp lib/DTL/Fast/Context.pm blib/lib/DTL/Fast/Context.pm
+cp lib/DTL/Fast/Cache/Memcached.pm blib/lib/DTL/Fast/Cache/Memcached.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/NotIn.pm blib/lib/DTL/Fast/Expression/Operator/Binary/NotIn.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/And.pm blib/lib/DTL/Fast/Expression/Operator/Binary/And.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Plus.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Plus.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Le.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Le.pm
+cp lib/DTL/Fast/Cache/Runtime.pm blib/lib/DTL/Fast/Cache/Runtime.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Gt.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Gt.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Lt.pm blib/lib/DTL/Fast/Expression/Operator/Binary/Lt.pm
+cp lib/DTL/Fast/Filter/Numberformat.pm blib/lib/DTL/Fast/Filter/Numberformat.pm
+cp lib/DTL/Fast/Filter.pm blib/lib/DTL/Fast/Filter.pm
+cp lib/DTL/Fast/Filter/Linenumbers.pm blib/lib/DTL/Fast/Filter/Linenumbers.pm
+cp lib/DTL/Fast/Expression/Operator/Unary/Defined.pm blib/lib/DTL/Fast/Expression/Operator/Unary/Defined.pm
+cp lib/DTL/Fast/Filter/Iriencode.pm blib/lib/DTL/Fast/Filter/Iriencode.pm
+cp lib/DTL/Fast/Filter/Escapejs.pm blib/lib/DTL/Fast/Filter/Escapejs.pm
+cp lib/DTL/Fast/Filter/Getdigit.pm blib/lib/DTL/Fast/Filter/Getdigit.pm
+cp lib/DTL/Fast/Filter/Center.pm blib/lib/DTL/Fast/Filter/Center.pm
+cp lib/DTL/Fast/Expression/Operator/Unary.pm blib/lib/DTL/Fast/Expression/Operator/Unary.pm
+cp lib/DTL/Fast/Filter/Ljust.pm blib/lib/DTL/Fast/Filter/Ljust.pm
+cp lib/DTL/Fast/Filter/Cut.pm blib/lib/DTL/Fast/Filter/Cut.pm
+cp lib/DTL/Fast/Filter/Addslashes.pm blib/lib/DTL/Fast/Filter/Addslashes.pm
+cp lib/DTL/Fast/Filter/Dictsortreversed.pm blib/lib/DTL/Fast/Filter/Dictsortreversed.pm
+cp lib/DTL/Fast/Filter/Dictsort.pm blib/lib/DTL/Fast/Filter/Dictsort.pm
+cp lib/DTL/Fast/Filter/Default.pm blib/lib/DTL/Fast/Filter/Default.pm
+cp lib/DTL/Fast/Filter/DefaultIfNone.pm blib/lib/DTL/Fast/Filter/DefaultIfNone.pm
+cp lib/DTL/Fast/Filter/Last.pm blib/lib/DTL/Fast/Filter/Last.pm
+cp lib/DTL/Fast/Filter/MakeList.pm blib/lib/DTL/Fast/Filter/MakeList.pm
+cp lib/DTL/Fast/Expression/Operator/Unary/Not.pm blib/lib/DTL/Fast/Expression/Operator/Unary/Not.pm
+cp lib/DTL/Fast/Filter/Linebreaks.pm blib/lib/DTL/Fast/Filter/Linebreaks.pm
+cp lib/DTL/Fast/Filter/Lengthis.pm blib/lib/DTL/Fast/Filter/Lengthis.pm
+cp lib/DTL/Fast/Filter/First.pm blib/lib/DTL/Fast/Filter/First.pm
+cp lib/DTL/Fast/Expression/Operator/Unary/Logical.pm blib/lib/DTL/Fast/Expression/Operator/Unary/Logical.pm
+cp lib/DTL/Fast/Filter/Filesizeformat.pm blib/lib/DTL/Fast/Filter/Filesizeformat.pm
+cp lib/DTL/Fast/Filter/Escape.pm blib/lib/DTL/Fast/Filter/Escape.pm
+cp lib/DTL/Fast/Filter/Join.pm blib/lib/DTL/Fast/Filter/Join.pm
+cp lib/DTL/Fast/Filter/Lower.pm blib/lib/DTL/Fast/Filter/Lower.pm
+cp lib/DTL/Fast/Filter/Floatformat.pm blib/lib/DTL/Fast/Filter/Floatformat.pm
+cp lib/DTL/Fast/Filter/Capfirst.pm blib/lib/DTL/Fast/Filter/Capfirst.pm
+cp lib/DTL/Fast/Filter/Length.pm blib/lib/DTL/Fast/Filter/Length.pm
+cp lib/DTL/Fast/Filter/Add.pm blib/lib/DTL/Fast/Filter/Add.pm
+cp lib/DTL/Fast/Filter/Divisibleby.pm blib/lib/DTL/Fast/Filter/Divisibleby.pm
+cp lib/DTL/Fast/Filter/Linebreaksbr.pm blib/lib/DTL/Fast/Filter/Linebreaksbr.pm
+cp lib/DTL/Fast/Filter/Date.pm blib/lib/DTL/Fast/Filter/Date.pm
+cp lib/DTL/Fast/Filter/Urlencode.pm blib/lib/DTL/Fast/Filter/Urlencode.pm
+cp lib/DTL/Fast/Filter/Stringformat.pm blib/lib/DTL/Fast/Filter/Stringformat.pm
+cp lib/DTL/Fast/Filter/Strftime.pm blib/lib/DTL/Fast/Filter/Strftime.pm
+cp lib/DTL/Fast/Filter/Timesince.pm blib/lib/DTL/Fast/Filter/Timesince.pm
+cp lib/DTL/Fast/Filter/Truncatechars.pm blib/lib/DTL/Fast/Filter/Truncatechars.pm
+cp lib/DTL/Fast/Filter/Slice.pm blib/lib/DTL/Fast/Filter/Slice.pm
+cp lib/DTL/Fast/Filter/Striptags.pm blib/lib/DTL/Fast/Filter/Striptags.pm
+cp lib/DTL/Fast/Renderer.pm blib/lib/DTL/Fast/Renderer.pm
+cp lib/DTL/Fast/Filter/Urlize.pm blib/lib/DTL/Fast/Filter/Urlize.pm
+cp lib/DTL/Fast/Filter/Split.pm blib/lib/DTL/Fast/Filter/Split.pm
+cp lib/DTL/Fast/Filter/Truncatewordshtml.pm blib/lib/DTL/Fast/Filter/Truncatewordshtml.pm
+cp lib/DTL/Fast/Filter/Safe.pm blib/lib/DTL/Fast/Filter/Safe.pm
+cp lib/DTL/Fast/Filter/Wordwrap.pm blib/lib/DTL/Fast/Filter/Wordwrap.pm
+cp lib/DTL/Fast/Filter/Slugify.pm blib/lib/DTL/Fast/Filter/Slugify.pm
+cp lib/DTL/Fast/Filter/Reverse.pm blib/lib/DTL/Fast/Filter/Reverse.pm
+cp lib/DTL/Fast/Filter/PhoneToNumeric.pm blib/lib/DTL/Fast/Filter/PhoneToNumeric.pm
+cp lib/DTL/Fast/Filters.pm blib/lib/DTL/Fast/Filters.pm
+cp lib/DTL/Fast/Filter/Random.pm blib/lib/DTL/Fast/Filter/Random.pm
+cp lib/DTL/Fast/Filter/Truncatewords.pm blib/lib/DTL/Fast/Filter/Truncatewords.pm
+cp lib/DTL/Fast/Filter/Removetags.pm blib/lib/DTL/Fast/Filter/Removetags.pm
+cp lib/DTL/Fast/Filter/Upper.pm blib/lib/DTL/Fast/Filter/Upper.pm
+cp lib/DTL/Fast/Filter/Timeuntil.pm blib/lib/DTL/Fast/Filter/Timeuntil.pm
+cp lib/DTL/Fast/FilterManager.pm blib/lib/DTL/Fast/FilterManager.pm
+cp lib/DTL/Fast/Filter/Rjust.pm blib/lib/DTL/Fast/Filter/Rjust.pm
+cp lib/DTL/Fast/Filter/Time.pm blib/lib/DTL/Fast/Filter/Time.pm
+cp lib/DTL/Fast/Filter/Unorderedlist.pm blib/lib/DTL/Fast/Filter/Unorderedlist.pm
+cp lib/DTL/Fast/Parser.pm blib/lib/DTL/Fast/Parser.pm
+cp lib/DTL/Fast/Filter/Title.pm blib/lib/DTL/Fast/Filter/Title.pm
+cp lib/DTL/Fast/Filter/SafeSeq.pm blib/lib/DTL/Fast/Filter/SafeSeq.pm
+cp lib/DTL/Fast/Filter/Pluralize.pm blib/lib/DTL/Fast/Filter/Pluralize.pm
+cp lib/DTL/Fast/Filter/Yesno.pm blib/lib/DTL/Fast/Filter/Yesno.pm
+cp lib/DTL/Fast/Filter/Urlizetrunc.pm blib/lib/DTL/Fast/Filter/Urlizetrunc.pm
+cp lib/DTL/Fast/Filter/Ru/Pluralize.pm blib/lib/DTL/Fast/Filter/Ru/Pluralize.pm
+cp lib/DTL/Fast/Filter/Truncatecharshtml.pm blib/lib/DTL/Fast/Filter/Truncatecharshtml.pm
+cp lib/DTL/Fast/Filter/Wordcount.pm blib/lib/DTL/Fast/Filter/Wordcount.pm
+cp lib/DTL/Fast/Tags.pm blib/lib/DTL/Fast/Tags.pm
+cp lib/DTL/Fast/Tag/Load.pm blib/lib/DTL/Fast/Tag/Load.pm
+cp lib/DTL/Fast/Tag/With.pm blib/lib/DTL/Fast/Tag/With.pm
+cp lib/DTL/Fast/Replacer/Replacement.pm blib/lib/DTL/Fast/Replacer/Replacement.pm
+cp lib/DTL/Fast/Tag/Spaceless.pm blib/lib/DTL/Fast/Tag/Spaceless.pm
+cp lib/DTL/Fast/Tag/BlockSuper.pm blib/lib/DTL/Fast/Tag/BlockSuper.pm
+cp lib/DTL/Fast/Tag/Templatetag.pm blib/lib/DTL/Fast/Tag/Templatetag.pm
+cp lib/DTL/Fast/Tag/Firstofdefined.pm blib/lib/DTL/Fast/Tag/Firstofdefined.pm
+cp lib/DTL/Fast/Tag/Firstof.pm blib/lib/DTL/Fast/Tag/Firstof.pm
+cp lib/DTL/Fast/Tag/Simple.pm blib/lib/DTL/Fast/Tag/Simple.pm
+cp lib/DTL/Fast/Replacer.pm blib/lib/DTL/Fast/Replacer.pm
+cp lib/DTL/Fast/Tag/If/Condition.pm blib/lib/DTL/Fast/Tag/If/Condition.pm
+cp lib/DTL/Fast/Tag/Widthratio.pm blib/lib/DTL/Fast/Tag/Widthratio.pm
+cp lib/DTL/Fast/Text.pm blib/lib/DTL/Fast/Text.pm
+cp lib/DTL/Fast/Tag/Verbatim.pm blib/lib/DTL/Fast/Tag/Verbatim.pm
+cp lib/DTL/Fast/Tag/Ifnotequal.pm blib/lib/DTL/Fast/Tag/Ifnotequal.pm
+cp lib/DTL/Fast/Template.pm blib/lib/DTL/Fast/Template.pm
+cp lib/DTL/Fast/Tag/Cycle.pm blib/lib/DTL/Fast/Tag/Cycle.pm
+cp lib/DTL/Fast/Tag/Now.pm blib/lib/DTL/Fast/Tag/Now.pm
+cp lib/DTL/Fast/Tag/Ssi.pm blib/lib/DTL/Fast/Tag/Ssi.pm
+cp lib/DTL/Fast/Tag/Debug.pm blib/lib/DTL/Fast/Tag/Debug.pm
+cp lib/DTL/Fast/Tag/Dump.pm blib/lib/DTL/Fast/Tag/Dump.pm
+cp lib/DTL/Fast/Tag/Comment.pm blib/lib/DTL/Fast/Tag/Comment.pm
+cp lib/DTL/Fast/Tag.pm blib/lib/DTL/Fast/Tag.pm
+cp lib/DTL/Fast/Tag/Block.pm blib/lib/DTL/Fast/Tag/Block.pm
+cp lib/DTL/Fast/Tag/Ifequal.pm blib/lib/DTL/Fast/Tag/Ifequal.pm
+cp lib/DTL/Fast/Tag/Regroup.pm blib/lib/DTL/Fast/Tag/Regroup.pm
+cp lib/DTL/Fast/Variable.pm blib/lib/DTL/Fast/Variable.pm
+cp lib/DTL/Fast/Utils.pm blib/lib/DTL/Fast/Utils.pm
+cp lib/DTL/Fast/Tag/DumpHTML.pm blib/lib/DTL/Fast/Tag/DumpHTML.pm
+cp lib/DTL/Fast/Tag/Filter.pm blib/lib/DTL/Fast/Tag/Filter.pm
+cp lib/DTL/Fast/Tag/Ifchanged.pm blib/lib/DTL/Fast/Tag/Ifchanged.pm
+cp lib/DTL/Fast/Tag/For.pm blib/lib/DTL/Fast/Tag/For.pm
+cp lib/DTL/Fast/Tag/Extends.pm blib/lib/DTL/Fast/Tag/Extends.pm
+cp lib/DTL/Fast/Tag/Autoescape.pm blib/lib/DTL/Fast/Tag/Autoescape.pm
+cp lib/DTL/Fast/Tag/Sprintf.pm blib/lib/DTL/Fast/Tag/Sprintf.pm
+cp lib/DTL/Fast/Tag/Url.pm blib/lib/DTL/Fast/Tag/Url.pm
+cp lib/DTL/Fast/Tag/If.pm blib/lib/DTL/Fast/Tag/If.pm
+cp lib/DTL/Fast/Tag/Include.pm blib/lib/DTL/Fast/Tag/Include.pm
+cp lib/DTL/Fast/Tag/DumpWarn.pm blib/lib/DTL/Fast/Tag/DumpWarn.pm
+Running Mkbootstrap for Fast ()
+chmod 644 "Fast.bs"
+"/home/user/perl5/perlbrew/perls/perl-5.28.0/bin/perl" -MExtUtils::Command::MM -e 'cp_nonempty' -- Fast.bs blib/arch/auto/DTL/Fast/Fast.bs 644
+"/home/user/perl5/perlbrew/perls/perl-5.28.0/bin/perl" "/home/user/perl5/perlbrew/perls/perl-5.28.0/lib/5.28.0/ExtUtils/xsubpp"  -typemap '/home/user/perl5/perlbrew/perls/perl-5.28.0/lib/5.28.0/ExtUtils/typemap'  Fast.xs > Fast.xsc
+Please specify prototyping behavior for Fast.xs (see perlxs manual)
+mv Fast.xsc Fast.c
+cc -c   -fwrapv -fno-strict-aliasing -pipe -fstack-protector-strong -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O2   -DVERSION=\"2017.1\" -DXS_VERSION=\"2017.1\" -fPIC "-I/home/user/perl5/perlbrew/perls/perl-5.28.0/lib/5.28.0/x86_64-linux/CORE"   Fast.c
+rm -f blib/arch/auto/DTL/Fast/Fast.so
+cc  -shared -O2 -L/usr/local/lib -fstack-protector-strong  Fast.o  -o blib/arch/auto/DTL/Fast/Fast.so  \
+      \
+
+chmod 755 blib/arch/auto/DTL/Fast/Fast.so
+Manifying 1 pod document
+"/home/user/perl5/perlbrew/perls/perl-5.28.0/bin/perl" -MExtUtils::Command::MM -e 'cp_nonempty' -- Fast.bs blib/arch/auto/DTL/Fast/Fast.bs 644
+PERL_DL_NONLAZY=1 "/home/user/perl5/perlbrew/perls/perl-5.28.0/bin/perl" "-Iblib/lib" "-Iblib/arch" test.pl
+t/core/context.t ............... 1/? Rendering error: non-reference value encountered on step `unknown` while traversing context path
+Traversing path: unknown.path
+Traversed variable: $VAR1 = 1;
+
+Rendering error: non-reference value encountered on step `unknown` while traversing context path
+Traversing path: unknown.path
+Traversed variable: $VAR1 = 1;
+
+t/core/context.t ............... ok
+t/core/errors.t ................ ok
+t/core/expression.t ............ ok
+t/core/loader.t ................ ok
+t/core/template.t .............. ok
+t/core/utils.t ................. skipped: Nothing to test. is_lvalue method removed
+t/expression/logic.t ........... ok
+t/expression/in.t .............. ok
+t/expression/eq.t .............. ok
+t/expression/defined.t ......... ok
+t/filter/add.t ................. ok
+t/filter/addslashes.t .......... ok
+t/filter/capfirst.t ............ ok
+t/filter/center.t .............. ok
+t/filter/cut.t ................. ok
+t/filter/default.t ............. ok
+t/filter/default_if_none.t ..... ok
+t/filter/dictsort.t ............ ok
+t/filter/dictsortreversed.t .... ok
+t/filter/divisibleby.t ......... ok
+t/filter/escape.t .............. ok
+t/filter/escapejs.t ............ ok
+t/filter/filesizeformat.t ...... ok
+t/filter/first.t ............... ok
+t/filter/floatformat.t ......... ok
+t/filter/get_digit.t ........... ok
+t/filter/iriencode.t ........... ok
+t/filter/join.t ................ ok
+t/filter/last.t ................ ok
+t/filter/length.t .............. ok
+t/filter/length_is.t ........... ok
+t/filter/linebreaks.t .......... ok
+t/filter/linebreaksbr.t ........ ok
+t/filter/linenumbers.t ......... ok
+t/filter/ljust.t ............... ok
+t/filter/lower.t ............... ok
+t/filter/make_list.t ........... ok
+t/filter/numberformat.t ........ ok
+t/filter/phone2numeric.t ....... ok
+t/filter/pluralize.t ........... ok
+t/filter/pluralize_ru.t ........ ok
+t/filter/random.t .............. ok
+t/filter/removetags.t .......... ok
+t/filter/reverse.t ............. ok
+t/filter/rjust.t ............... ok
+t/filter/safe.t ................ ok
+t/filter/safeseq.t ............. ok
+t/filter/slice.t ............... ok
+t/filter/slugify.t ............. ok
+t/filter/split.t ............... ok
+t/filter/strftime.t ............ ok
+t/filter/stringformat.t ........ ok
+t/filter/striptags.t ........... ok
+t/filter/time.t ................ ok
+t/filter/timesince.t ........... ok
+t/filter/timeuntil.t ........... ok
+t/filter/title.t ............... ok
+t/filter/truncatechars.t ....... ok
+t/filter/truncatechars_html.t .. ok
+t/filter/truncatewords.t ....... ok
+t/filter/truncatewords_html.t .. ok
+t/filter/unordered_list.t ...... ok
+t/filter/upper.t ............... ok
+t/filter/urlencode.t ........... ok
+t/filter/urlize.t .............. ok
+t/filter/urlizetrunc.t ......... ok
+t/filter/wordcount.t ........... ok
+t/filter/wordwrap.t ............ ok
+t/filter/yesno.t ............... ok
+t/tag/autoescape.t ............. ok
+t/tag/comment.t ................ ok
+t/tag/cycle.t .................. ok
+t/tag/debug.t .................. ok
+t/tag/dump.t ................... ok
+t/tag/dump_html.t .............. ok
+t/tag/dump_warn.t .............. ok
+t/tag/filter.t ................. ok
+t/tag/firstof.t ................ ok
+t/tag/firstofdefined.t ......... ok
+t/tag/for.t .................... ok
+t/tag/if.t ..................... ok
+t/tag/ifchanged.t .............. ok
+t/tag/ifequal.t ................ ok
+t/tag/ifnotequal.t ............. ok
+t/tag/include.t ................ ok
+t/tag/load.t ................... ok
+t/tag/now.t .................... ok
+t/tag/regroup.t ................ ok
+t/tag/spaceless.t .............. ok
+t/tag/sprintf.t ................ ok
+t/tag/ssi.t .................... Parsing warning: `ssi` tag is now depricated and will be removed in future versions. Please, use `include` tag
+       Template: ./t/tmpl/ssi_static.txt
+           Line: 1
+t/tag/ssi.t .................... 1/? Parsing warning: `ssi` tag is now depricated and will be removed in future versions. Please, use `include` tag
+       Template: ./t/tmpl/ssi_parsed.txt
+           Line: 1
+t/tag/ssi.t .................... ok
+t/tag/templatetag.t ............ ok
+t/tag/url.t .................... ok
+t/tag/verbatim.t ............... ok
+t/tag/widthratio.t ............. ok
+t/tag/with.t ................... ok
+t/xs/count_lines.t ............. ok
+t/xs/spaceless.t ............... ok
+t/xs/eval_sequence.t ........... ok
+t/xs/html_protect.t ............ ok
+All tests successful.
+Files=100, Tests=856, 10 wallclock secs ( 0.40 usr  0.08 sys +  8.77 cusr  0.70 csys =  9.95 CPU)
+Result: PASS
+PERL_DL_NONLAZY=1 "/home/user/perl5/perlbrew/perls/perl-5.28.0/bin/perl" "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+Files=0, Tests=0,  0 wallclock secs ( 0.00 usr +  0.00 sys =  0.00 CPU)
+Result: NOTESTS
+"/home/user/perl5/perlbrew/perls/perl-5.28.0/bin/perl" -MExtUtils::Command::MM -e 'cp_nonempty' -- Fast.bs blib/arch/auto/DTL/Fast/Fast.bs 644
+Manifying 1 pod document
+Files found in blib/arch: installing files in blib/lib into architecture dependent library tree
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast.pod
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/FilterManager.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tags.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Utils.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Replacer.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Template.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Renderer.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Variable.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Context.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Entity.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Text.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Cache.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filters.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Parser.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Spaceless.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Url.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Dump.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Cycle.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/For.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Debug.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/If.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Widthratio.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Firstof.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Extends.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Sprintf.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Ifequal.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/BlockSuper.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Filter.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Simple.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Ssi.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Ifnotequal.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Regroup.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Firstofdefined.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Autoescape.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Templatetag.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Load.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Verbatim.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Comment.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Ifchanged.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Include.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/DumpWarn.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/With.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Now.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/Block.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/DumpHTML.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Tag/If/Condition.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Replacer/Replacement.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Cache/Memcached.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Cache/File.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Cache/Compressed.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Cache/Runtime.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Cache/Serialized.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Unary.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Ge.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/NotIn.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Lt.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/And.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Logical.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Eq.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Mod.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Ne.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Plus.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Mul.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Minus.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Pow.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/In.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Div.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Or.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Gt.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Binary/Le.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Unary/Logical.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Unary/Defined.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Expression/Operator/Unary/Not.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Random.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Truncatecharshtml.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Wordcount.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Slice.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Linebreaks.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Slugify.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Unorderedlist.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Striptags.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/SafeSeq.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Filesizeformat.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Date.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Reverse.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Timeuntil.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Truncatewords.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Truncatechars.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Lengthis.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Split.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Ljust.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Dictsortreversed.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Urlencode.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Center.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/MakeList.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Capfirst.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/PhoneToNumeric.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Urlize.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Safe.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Rjust.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Removetags.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Length.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Title.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Cut.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Escape.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/First.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Stringformat.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Timesince.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Truncatewordshtml.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Getdigit.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Default.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Divisibleby.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Dictsort.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Last.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Urlizetrunc.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Wordwrap.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Strftime.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Upper.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Add.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Time.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Linebreaksbr.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Numberformat.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Floatformat.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Lower.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Addslashes.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Pluralize.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Iriencode.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Join.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Linenumbers.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Yesno.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Escapejs.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/DefaultIfNone.pm
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/DTL/Fast/Filter/Ru/Pluralize.pm
+Appending installation info to /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/perllocal.pod
+OK
+Successfully installed DTL-Fast-2017.1
+Installing /home/user/.perlbrew/libs/perl-5.28.0@test6/lib/perl5/x86_64-linux/.meta/DTL-Fast-2017.1/install.json
+1 distribution installed
+
+Process finished with exit code 0

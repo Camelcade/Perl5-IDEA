@@ -16,26 +16,30 @@
 
 package com.perl5.lang.perl.idea.execution.filters;
 
-import com.intellij.execution.filters.ConsoleFilterProviderEx;
+import com.intellij.execution.filters.ConsoleDependentFilterProvider;
 import com.intellij.execution.filters.Filter;
+import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 /**
  * Created by ELI-HOME on 21-Sep-15.
  * this filter provider allows us to add our own perl filter
  */
-public class PerlConsoleFilterProvider implements ConsoleFilterProviderEx {
+public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
+
   @NotNull
   @Override
-  public Filter[] getDefaultFilters(@NotNull Project project) {
-    Filter filter = new PerlConsoleFileLinkFilter(project);
-    return new Filter[]{filter};
-  }
-
-  @Override
-  public Filter[] getDefaultFilters(@NotNull Project project, @NotNull GlobalSearchScope globalSearchScope) {
-    return getDefaultFilters(project);
+  public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
+    ArrayList<Filter> filters = ContainerUtil.newArrayList(new PerlConsoleFileLinkFilter(project));
+    if (consoleView instanceof PerlRunConsole) {
+      filters.add(new PerlAbsolutePathConsoleFilter(project));
+    }
+    return filters.toArray(Filter.EMPTY_ARRAY);
   }
 }
