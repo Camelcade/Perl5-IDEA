@@ -16,6 +16,7 @@
 
 package com.intellij.openapi.projectRoots.impl;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
@@ -24,6 +25,7 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ReflectionUtil;
@@ -128,6 +130,9 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   public void removeJdk(@NotNull Sdk jdk) {
     myInterpretersList.remove(jdk);
     myMessageBus.syncPublisher(PERL_TABLE_TOPIC).jdkRemoved(jdk);
+    if (jdk instanceof Disposable) {
+      Disposer.dispose((Disposable)jdk);
+    }
   }
 
   @Override
