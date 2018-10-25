@@ -47,7 +47,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
    * Shows a UI to create an sdk for this version manager on the host described by the {@code hostHandler}
    */
   public abstract void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler,
-                                              @Nullable Runnable successCallback);
+                                              @Nullable Consumer<Sdk> sdkConsumer);
 
   /**
    * @return title for menu item in add interpreter dialog

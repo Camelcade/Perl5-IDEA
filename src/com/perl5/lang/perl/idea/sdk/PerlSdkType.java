@@ -42,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.io.File;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -189,16 +190,29 @@ public class PerlSdkType extends SdkType {
     return INSTANCE;
   }
 
+
+  public static void createAndAddSdk(@NotNull String interpreterPath,
+                                     @NotNull PerlHostData hostData,
+                                     @NotNull PerlVersionManagerData versionManagerData,
+                                     @Nullable Consumer<Sdk> sdkConsumer) {
+    createSdk(interpreterPath, hostData, versionManagerData, sdk -> {
+      PerlSdkTable.getInstance().addJdk(sdk);
+      if (sdkConsumer != null) {
+        sdkConsumer.accept(sdk);
+      }
+    });
+  }
+
   /**
    * Creates and adds new Perl SDK
    *
    * @param interpreterPath interpreter path
-   * @param successCallback optional callback to invoke on success
+   * @param sdkConsumer created sdk consumer
    */
-  public static void createAndAddSdk(@NotNull String interpreterPath,
-                                     @NotNull PerlHostData hostData,
-                                     @NotNull PerlVersionManagerData versionManagerData,
-                                     @Nullable Runnable successCallback) {
+  public static void createSdk(@NotNull String interpreterPath,
+                               @NotNull PerlHostData hostData,
+                               @NotNull PerlVersionManagerData versionManagerData,
+                               @NotNull Consumer<Sdk> sdkConsumer) {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
 
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
@@ -219,10 +233,7 @@ public class PerlSdkType extends SdkType {
 
     INSTANCE.setupSdkPaths(newSdk);
     // should we check for version string?
-    if (successCallback != null) {
-      successCallback.run();
-    }
-    PerlSdkTable.getInstance().addJdk(newSdk);
+    sdkConsumer.accept(newSdk);
   }
 
   private static class VersionDescriptor {

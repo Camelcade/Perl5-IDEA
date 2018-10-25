@@ -60,7 +60,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   private MessageBusConnection myConnection;
   @NotNull
   private Perl5SdkManipulator mySdkManipulator;
-  private boolean myChange = false;
 
   public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator) {
     myConnection = ApplicationManager.getApplication().getMessageBus().connect();
@@ -109,7 +108,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
             new Task.Modal(null, PerlBundle.message("perl.create.interpreter.progress"), false) {
               @Override
               public void run(@NotNull ProgressIndicator indicator) {
-                versionManagerHandler.createSdkInteractively(hostHandler, () -> myChange = true);
+                versionManagerHandler.createSdkInteractively(hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)));
               }
             }.queue();
           }
@@ -259,12 +258,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
   @Override
   public void jdkAdded(@NotNull Sdk sdk) {
-    Perl5SdkWrapper itemToSelect = getSelectedSdkWrapper();
-    if (myChange) {
-      myChange = false;
-      itemToSelect = new Perl5RealSdkWrapper(sdk);
-    }
-    updateSdkModel(itemToSelect);
+    updateSdkModel(getSelectedSdkWrapper());
   }
 
   @Override

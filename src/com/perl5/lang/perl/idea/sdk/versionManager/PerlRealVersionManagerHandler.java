@@ -21,6 +21,7 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
@@ -37,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.perl5.lang.perl.util.PerlRunUtil.PERL_CTRL_X;
 import static com.perl5.lang.perl.util.PerlRunUtil.PERL_LE;
@@ -74,7 +76,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   }
 
   @Override
-  public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Runnable successCallback) {
+  public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Consumer<Sdk> sdkConsumer) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.choose.executable", StringUtil.capitalize(getPresentableName())),
       this::suggestDefaultVersionManagerPath,
@@ -85,7 +87,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
                ? null
                : PerlBundle.message("perl.vm.wrong.file", fileName, getPresentableName());
       },
-      (path, perlHostData) -> createSdkInteractively(path, perlHostData, successCallback));
+      (path, perlHostData) -> createSdkInteractively(path, perlHostData, sdkConsumer));
   }
 
   /**
@@ -108,7 +110,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
 
   private void createSdkInteractively(@Nullable String selectedPath,
                                       @Nullable PerlHostData perlHostData,
-                                      @Nullable Runnable successCallback) {
+                                      @Nullable Consumer<Sdk> sdkConsumer) {
     if (!StringUtil.isNotEmpty(selectedPath) || perlHostData == null) {
       return;
     }
@@ -156,6 +158,6 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     }
 
     PerlRealVersionManagerData perlBrewData = createData(selectedPath, installation);
-    PerlSdkType.createAndAddSdk(perlPath.get(0), perlHostData, perlBrewData, successCallback);
+    PerlSdkType.createAndAddSdk(perlPath.get(0), perlHostData, perlBrewData, sdkConsumer);
   }
 }

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.system;
 
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
+import java.util.function.Consumer;
 
 class PerlSystemHandler
   extends PerlVersionManagerHandler<PerlSystemData, PerlSystemHandler> {
@@ -55,7 +57,7 @@ class PerlSystemHandler
   }
 
   @Override
-  public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Runnable successCallback) {
+  public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Consumer<Sdk> sdkConsumer) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
       PerlHostData::suggestHomePath,
@@ -66,7 +68,7 @@ class PerlSystemHandler
       },
       (path, perlHostData) -> {
         if (StringUtil.isNotEmpty(path) && perlHostData != null) {
-          PerlSdkType.createAndAddSdk(path, perlHostData, createData(), successCallback);
+          PerlSdkType.createAndAddSdk(path, perlHostData, createData(), sdkConsumer);
         }
       });
   }
