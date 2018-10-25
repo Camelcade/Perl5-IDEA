@@ -101,6 +101,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     }
     final Map<String, String> environment = commandLine.getEnvironment();
     ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine);
+    commandLine.getProcessListeners().forEach(handler::addProcessListener);
     handler.addProcessListener(new ProcessAdapter() {
       @Override
       public void startNotified(@NotNull ProcessEvent event) {
