@@ -17,23 +17,25 @@
 package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessOutput;
+import com.intellij.execution.process.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -93,12 +95,22 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     if (hostData == null) {
       throw new ExecutionException("No host data in the command line " + commandLine);
     }
-
     PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
     }
-    return hostData.doCreateConsoleProcessHandler(commandLine);
+    final Map<String, String> environment = commandLine.getEnvironment();
+    ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine);
+    handler.addProcessListener(new ProcessAdapter() {
+      @Override
+      public void startNotified(@NotNull ProcessEvent event) {
+        String perl5Opt = environment.get(PerlRunUtil.PERL5OPT);
+        if (StringUtil.isNotEmpty(perl5Opt)) {
+          handler.notifyTextAvailable(" - " + PerlRunUtil.PERL5OPT + "=" + perl5Opt + '\n', ProcessOutputTypes.SYSTEM);
+        }
+      }
+    });
+    return handler;
   }
 
   @NotNull
