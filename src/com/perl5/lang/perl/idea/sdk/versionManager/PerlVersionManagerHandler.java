@@ -133,7 +133,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   }
 
   @NotNull
-  private static PerlVersionManagerHandler<?, ?> getDefaultHandler() {
+  public static PerlVersionManagerHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("system"), "System perl handler must always present");
   }
 }

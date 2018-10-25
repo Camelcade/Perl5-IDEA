@@ -60,6 +60,7 @@ import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
+import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -69,6 +70,7 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
+import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.DebugUtil;
@@ -100,6 +102,9 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -130,7 +135,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
-  private Disposable myDisposable;
   private Perl5CodeInsightSettings myCodeInsightSettings;
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
@@ -143,7 +147,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    myDisposable = Disposer.newDisposable();
+    VfsRootAccess.allowRootAccess(getTestRootDisposable(), "/");
     EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
     myReadAttributes = scheme.getAttributes(EditorColors.SEARCH_RESULT_ATTRIBUTES);
     myWriteAttributes = scheme.getAttributes(EditorColors.WRITE_SEARCH_RESULT_ATTRIBUTES);
@@ -168,7 +172,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       PerlLocalSettings.getInstance(getProject()).loadState(myLocalSettings);
       ApplicationManager.getApplication()
         .invokeAndWait(() -> PerlProjectManager.getInstance(getProject()).setExternalLibraries(Collections.emptyList()));
-      Disposer.dispose(myDisposable);
     }
     finally {
       super.tearDown();
@@ -176,8 +179,18 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   protected final void addTearDownListener(@NotNull Disposable disposable) {
-    assert myDisposable != null;
-    Disposer.register(myDisposable, disposable);
+    Disposer.register(getTestRootDisposable(), disposable);
+  }
+
+  protected void addSdk() {
+    PerlSdkType.createSdk(
+      "/usr/bin/perl",
+      PerlHostHandler.getDefaultHandler().createData(),
+      PerlVersionManagerHandler.getDefaultHandler().createData(),
+      sdk -> {
+        PerlSdkTable.getInstance().addJdk(sdk, getTestRootDisposable());
+        PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
+      });
   }
 
   protected void enableLiveTemplatesTesting() {
@@ -213,7 +226,9 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
         assert libdir != null;
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
-        perlProjectManager.setProjectSdk(PerlSdkTable.getInstance().createSdk("test"));
+        ProjectJdkImpl testSdk = PerlSdkTable.getInstance().createSdk("test");
+        PerlSdkTable.getInstance().addJdk(testSdk, getTestRootDisposable());
+        perlProjectManager.setProjectSdk(testSdk);
         perlProjectManager.addExternalLibrary(libdir);
 
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
@@ -409,11 +424,11 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   }
 
   protected void addVirtualFileFilter() {
-    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, myDisposable);
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, getTestRootDisposable());
   }
 
   protected void removeVirtualFileFilter() {
-    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, myDisposable);
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(VirtualFileFilter.NONE, getTestRootDisposable());
   }
 
   protected void doTestCompletionCheck(@NotNull String answerSuffix) {

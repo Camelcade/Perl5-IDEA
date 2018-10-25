@@ -147,7 +147,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   }
 
   @NotNull
-  private static PerlHostHandler<?, ?> getDefaultHandler() {
+  public static PerlHostHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("localhost"), "Local handler MUST always present");
   }
 }
