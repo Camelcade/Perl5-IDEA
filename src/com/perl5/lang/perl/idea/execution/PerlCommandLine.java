@@ -20,6 +20,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.configurations.PtyCommandLine;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.containers.ContainerUtil;
@@ -30,9 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PerlCommandLine extends GeneralCommandLine {
   private static final Logger LOG = Logger.getInstance(PerlCommandLine.class);
@@ -46,6 +45,12 @@ public class PerlCommandLine extends GeneralCommandLine {
   private PerlVersionManagerData myVersionManagerData;
 
   private boolean myUsePty = false;
+
+  @Nullable
+  private String myConsoleTitle;
+
+  @NotNull
+  private List<ProcessListener> myProcessListeners = Collections.emptyList();
 
   public PerlCommandLine() {
   }
@@ -66,6 +71,11 @@ public class PerlCommandLine extends GeneralCommandLine {
     super(original);
     if (original instanceof PerlCommandLine) {
       mySdk = ((PerlCommandLine)original).mySdk;
+      myHostData = ((PerlCommandLine)original).myHostData;
+      myVersionManagerData = ((PerlCommandLine)original).myVersionManagerData;
+      myUsePty = ((PerlCommandLine)original).myUsePty;
+      myConsoleTitle = ((PerlCommandLine)original).myConsoleTitle;
+      myProcessListeners = new ArrayList<>(((PerlCommandLine)original).myProcessListeners);
     }
   }
 
@@ -148,8 +158,20 @@ public class PerlCommandLine extends GeneralCommandLine {
     return myVersionManagerData == null ? PerlVersionManagerData.from(mySdk) : myVersionManagerData;
   }
 
+  @NotNull
   public PerlCommandLine withVersionManagerData(@Nullable PerlVersionManagerData versionManagerData) {
     myVersionManagerData = versionManagerData;
+    return this;
+  }
+
+  @Nullable
+  public String getConsoleTitle() {
+    return myConsoleTitle;
+  }
+
+  @NotNull
+  public PerlCommandLine withConsoleTitle(@Nullable String consoleTitle) {
+    myConsoleTitle = consoleTitle;
     return this;
   }
 
@@ -162,6 +184,18 @@ public class PerlCommandLine extends GeneralCommandLine {
       ParametersList parametersList = getParametersList();
       ContainerUtil.reverse(commandsList).forEach(it -> parametersList.addAt(0, it));
     }
+    return this;
+  }
+
+  @NotNull
+  public List<ProcessListener> getProcessListeners() {
+    return Collections.unmodifiableList(myProcessListeners);
+  }
+
+  @NotNull
+  public PerlCommandLine withProcessListener(@NotNull ProcessListener... listeners) {
+    myProcessListeners = new ArrayList<>(myProcessListeners);
+    myProcessListeners.addAll(Arrays.asList(listeners));
     return this;
   }
 
