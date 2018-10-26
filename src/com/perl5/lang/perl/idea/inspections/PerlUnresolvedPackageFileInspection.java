@@ -16,12 +16,24 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
+import com.intellij.codeInspection.LocalQuickFix;
+import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElementVisitor;
+import com.perl5.PerlBundle;
+import com.perl5.lang.perl.adapters.CpanAdapter;
+import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,11 +68,58 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
 
       public void checkPackageFile(PerlNamespaceElement o) {
         List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
+        String packageName = o.getCanonicalName();
 
-        if (namespaceFiles.isEmpty()) {
-          registerProblem(holder, o, "Unable to find package file");
+        if (namespaceFiles.isEmpty() && StringUtil.isNotEmpty(packageName)) {
+          List<LocalQuickFix> fixes = new ArrayList<>();
+          Project project = o.getProject();
+          Sdk perlSdk = PerlProjectManager.getSdk(project);
+          if (perlSdk != null) {
+            if (CpanminusAdapter.isAvailable(perlSdk)) {
+              fixes.add(new InstallPackageQuickfix(new CpanminusAdapter(perlSdk, project), packageName));
+            }
+            else {
+              fixes.add(new InstallPackageQuickfix(new CpanAdapter(perlSdk, project), packageName));
+            }
+          }
+
+          registerProblem(holder, o,
+                          PerlBundle.message("perl.inspection.missing.package.file", packageName),
+                          fixes.toArray(LocalQuickFix.EMPTY_ARRAY));
         }
       }
     };
+  }
+
+  private static class InstallPackageQuickfix implements LocalQuickFix {
+    @NotNull
+    private final PackageManagerAdapter myAdapter;
+
+    @NotNull
+    private final String myPackageName;
+
+    public InstallPackageQuickfix(@NotNull PackageManagerAdapter adapter, @NotNull String packageName) {
+      myAdapter = adapter;
+      myPackageName = packageName;
+    }
+
+    @Nls(capitalization = Nls.Capitalization.Sentence)
+    @NotNull
+    @Override
+    public String getFamilyName() {
+      return PerlBundle.message("perl.quickfix.install.family", myAdapter.getPresentableName());
+    }
+
+    @Nls(capitalization = Nls.Capitalization.Sentence)
+    @NotNull
+    @Override
+    public String getName() {
+      return PerlBundle.message("perl.quickfix.install.name", myPackageName, myAdapter.getPresentableName());
+    }
+
+    @Override
+    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+      myAdapter.install(myPackageName);
+    }
   }
 }

@@ -26,6 +26,13 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
     return "testData/quickfix/perl";
   }
 
+  public void testUnresolvedPackageFileInspection() {
+    //addSdk();
+    initWithFileSmartWithoutErrors();
+    myFixture.enableInspections(PerlUnresolvedPackageFileInspection.class);
+    getSingleIntention("Install Foo::Bar24 using cpan");
+  }
+
   public void testFancyMethodCall() {
     doTestAnnotationQuickFix(PerlFancyMethodCallInspection.class, PerlBundle.message("perl.quickfix.fancy.method.prefix"));
   }

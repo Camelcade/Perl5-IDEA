@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
@@ -23,7 +25,7 @@ import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -50,6 +52,7 @@ import java.util.regex.Pattern;
  * Created by ELI-HOME on 04-Jun-15.
  */
 public class PerlSdkType extends SdkType {
+  private static final Logger LOG = Logger.getInstance(PerlSdkType.class);
   public static final String PERL_SDK_TYPE_ID = "Perl5 Interpreter";
   public static final PerlSdkType INSTANCE = new PerlSdkType();
 
@@ -73,19 +76,25 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public void setupSdkPaths(@NotNull Sdk sdk) {
+    if (ApplicationManager.getApplication().isDispatchThread()) {
+      throw new RuntimeException("Do not call from EDT, refreshes FS");
+    }
+    PerlRunUtil.setProgressText2(PerlBundle.message("perl.progress.refreshing.inc", sdk.getName()));
+    LOG.info("Refreshing @INC for " + sdk);
     SdkModificator sdkModificator = sdk.getSdkModificator();
+    sdkModificator.removeAllRoots();
     for (String perlLibPath : computeIncPaths(sdk)) {
       File libDir = new File(perlLibPath);
 
       if (libDir.exists() && libDir.isDirectory()) {
-        VirtualFile virtualDir = LocalFileSystem.getInstance().findFileByIoFile(libDir);
+        VirtualFile virtualDir = VfsUtil.findFileByIoFile(libDir, true);
         if (virtualDir != null) {
           sdkModificator.addRoot(virtualDir, OrderRootType.CLASSES);
         }
       }
     }
 
-    sdkModificator.commitChanges();
+    ApplicationManager.getApplication().invokeAndWait(sdkModificator::commitChanges);
   }
 
   @Nullable
@@ -232,7 +241,6 @@ public class PerlSdkType extends SdkType {
     newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData));
 
     INSTANCE.setupSdkPaths(newSdk);
-    // should we check for version string?
     sdkConsumer.accept(newSdk);
   }
 

@@ -1,5 +1,5 @@
 
 Foo::Bar24::->method;
-use <warning descr="Unable to find package file">Foo::Bar24</warning>;
-no <warning descr="Unable to find package file">Foo::Bar24</warning>;
-require <warning descr="Unable to find package file">Foo::Bar24</warning>;
+use <warning descr="Unable to find a package file for Foo::Bar24">Foo::Bar24</warning>;
+no <warning descr="Unable to find a package file for Foo::Bar24">Foo::Bar24</warning>;
+require <warning descr="Unable to find a package file for Foo::Bar24">Foo::Bar24</warning>;

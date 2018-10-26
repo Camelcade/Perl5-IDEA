@@ -1,0 +1,2 @@
+
+use Foo::B<caret>ar24;

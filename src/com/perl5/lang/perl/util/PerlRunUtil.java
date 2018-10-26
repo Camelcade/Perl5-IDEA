@@ -29,6 +29,8 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
@@ -309,6 +311,7 @@ public class PerlRunUtil {
 
   public static void runInConsole(@NotNull Project project,
                                   @NotNull PerlCommandLine perlCommandLine) {
+    ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     PerlRunConsole consoleView = new PerlRunConsole(project, true);
     ProcessHandler processHandler = null;
@@ -335,5 +338,19 @@ public class PerlRunUtil {
       processHandler.startNotify();
     }
     consoleView.addCloseAction(runExecutor, runContentDescriptor);
+  }
+
+  public static void setProgressText(@NotNull String string) {
+    ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
+    if (indicator != null) {
+      indicator.setText(string);
+    }
+  }
+
+  public static void setProgressText2(@NotNull String string) {
+    ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
+    if (indicator != null) {
+      indicator.setText2(string);
+    }
   }
 }
