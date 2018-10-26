@@ -81,6 +81,18 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   public abstract Path findFile(@NotNull String fileName);
 
   /**
+   * @return true iff {@code path} exists on the host
+   */
+  @Contract("null -> false")
+  public abstract boolean isFileExists(@Nullable Path path);
+
+  /**
+   * @return true iff {@code path} is directory
+   */
+  @Contract("null -> false")
+  public abstract boolean isDirectory(@Nullable Path path);
+
+  /**
    * Creates a process and process handler to be run in console.
    */
   @NotNull

@@ -61,6 +61,7 @@ class PerlSystemHandler
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
       PerlHostData::suggestHomePath,
+      false,
       it -> StringUtil.contains(it, "perl"),
       it -> {
         String fileName = Paths.get(it).getFileName().toString();

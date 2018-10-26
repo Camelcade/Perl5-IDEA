@@ -68,9 +68,17 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
   @Override
   public void chooseFileInteractively(@NotNull String dialogTitle,
                                       @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
+                                      boolean useDefaultIfExists,
                                       @NotNull Predicate<String> nameValidator,
                                       @NotNull Function<String, String> pathValidator,
                                       @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer) {
+    PerlLocalHostData hostData = createData();
+    Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
+    if (useDefaultIfExists && hostData.isFileExists(defaultPath) && !hostData.isDirectory(defaultPath)) {
+      selectionConsumer.accept(defaultPath.toString(), hostData);
+      return;
+    }
+
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, false, false, false, false, false) {
       @Override
       public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
@@ -88,8 +96,6 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
       }
     };
     descriptor.setTitle(dialogTitle);
-    PerlLocalHostData hostData = createData();
-    Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
     VirtualFile fileToStart = defaultPath == null ? null : VfsUtil.findFile(defaultPath, false);
     Ref<String> pathRef = Ref.create();
     ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, fileToStart, chosen -> {

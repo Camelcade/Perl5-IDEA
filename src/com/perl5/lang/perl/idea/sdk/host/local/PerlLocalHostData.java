@@ -57,6 +57,16 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
                                      commandLine.getCharset());
   }
 
+  @Override
+  public boolean isFileExists(@Nullable Path path) {
+    return path != null && path.toFile().exists();
+  }
+
+  @Override
+  public boolean isDirectory(@Nullable Path path) {
+    return path != null && path.toFile().isDirectory();
+  }
+
   @Nullable
   @Override
   public Path suggestHomePath() {

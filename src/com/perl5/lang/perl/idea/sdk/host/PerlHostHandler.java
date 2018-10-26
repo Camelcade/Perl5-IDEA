@@ -55,13 +55,14 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    * to the {@code selectionConsumer}
    *
    * @param defaultPathFunction function computing a default path from {@code hostData}
+   * @param useDefaultIfExists  true if default path should be used silently if exists
    * @param nameValidator       restricts visible file names
    * @param pathValidator       validates a path selected by user and returns error message or null if everything is fine
    * @param selectionConsumer   a callback for selected result. Accepts path selected and the host data
    */
   public abstract void chooseFileInteractively(@NotNull String dialogTitle,
                                                @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
-                                               @NotNull Predicate<String> nameValidator,
+                                               boolean useDefaultIfExists, @NotNull Predicate<String> nameValidator,
                                                @NotNull Function<String, String> pathValidator,
                                                @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer);
 

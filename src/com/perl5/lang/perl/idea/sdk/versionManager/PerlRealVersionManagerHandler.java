@@ -80,6 +80,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.choose.executable", StringUtil.capitalize(getPresentableName())),
       this::suggestDefaultVersionManagerPath,
+      true,
       it -> StringUtil.equals(it, getExecutableName()),
       it -> {
         String fileName = Paths.get(it).getFileName().toString();
