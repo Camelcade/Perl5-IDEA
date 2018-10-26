@@ -76,7 +76,7 @@ public class PerlSdkType extends SdkType {
 
   @Override
   public void setupSdkPaths(@NotNull Sdk sdk) {
-    if (ApplicationManager.getApplication().isDispatchThread()) {
+    if (ApplicationManager.getApplication().isDispatchThread() && !ApplicationManager.getApplication().isHeadlessEnvironment()) {
       throw new RuntimeException("Do not call from EDT, refreshes FS");
     }
     PerlRunUtil.setProgressText2(PerlBundle.message("perl.progress.refreshing.inc", sdk.getName()));

@@ -27,7 +27,6 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
   }
 
   public void testUnresolvedPackageFileInspection() {
-    //addSdk();
     initWithFileSmartWithoutErrors();
     myFixture.enableInspections(PerlUnresolvedPackageFileInspection.class);
     getSingleIntention("Install Foo::Bar24 using cpan");
