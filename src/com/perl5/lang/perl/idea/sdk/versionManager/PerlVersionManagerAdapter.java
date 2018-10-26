@@ -79,16 +79,25 @@ public abstract class PerlVersionManagerAdapter {
    */
   @Nullable
   protected List<String> getOutput(@NotNull PerlCommandLine commandLine) {
+    ProcessOutput processOutput = getProcessOutput(commandLine.withHostData(getHostData()));
+    if (processOutput == null) {
+      return null;
+    }
+    if (processOutput.getExitCode() == 0) {
+      return processOutput.getStdoutLines(true);
+    }
+    LOG.warn("Process exited with non-zero code. Command line: " + commandLine +
+             "; exit code: " + processOutput.getExitCode() +
+             "; stdout: " + processOutput.getStdout() +
+             "; stderr: " + processOutput.getStderr());
+    notifyUser(PerlBundle.message("perl.vm.adapter.notification.message.exitcode"));
+    return null;
+  }
+
+  @Nullable
+  protected ProcessOutput getProcessOutput(@NotNull PerlCommandLine commandLine) {
     try {
-      ProcessOutput processOutput = PerlHostData.execAndGetOutput(commandLine.withHostData(getHostData()));
-      if (processOutput.getExitCode() == 0) {
-        return processOutput.getStdoutLines(true);
-      }
-      LOG.warn("Process exited with non-zero code. Command line: " + commandLine +
-               "; exit code: " + processOutput.getExitCode() +
-               "; stdout: " + processOutput.getStdout() +
-               "; stderr: " + processOutput.getStderr());
-      notifyUser(PerlBundle.message("perl.vm.adapter.notification.message.exitcode"));
+      return PerlHostData.execAndGetOutput(commandLine.withHostData(getHostData()));
     }
     catch (ExecutionException e) {
       LOG.warn("Error running " + commandLine, e);

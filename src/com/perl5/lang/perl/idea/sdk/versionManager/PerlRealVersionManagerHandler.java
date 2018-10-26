@@ -145,7 +145,20 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       installation = distributions.get(0);
     }
 
-    List<String> perlPath = vmAdapter.execWith(installation, "perl", PERL_LE, PERL_CTRL_X);
+    createInterpreter(installation, vmAdapter, sdkConsumer);
+  }
+
+  /**
+   * Creates an interpreter for version manager.
+   *
+   * @param distributionId distribution id
+   * @param vmAdapter      adapter representing vm and host data
+   * @param sdkConsumer    optional sdk consumer to invoke on success
+   */
+  public void createInterpreter(@NotNull String distributionId,
+                                @NotNull PerlVersionManagerAdapter vmAdapter,
+                                @Nullable Consumer<Sdk> sdkConsumer) {
+    List<String> perlPath = vmAdapter.execWith(distributionId, "perl", PERL_LE, PERL_CTRL_X);
     if (perlPath == null || perlPath.size() != 1) {
       LOG.warn("Error getting perl location from interpreter. One line with path expected, got:\n" +
                (perlPath == null ? "nothing" : StringUtil.join(perlPath, "\n")));
@@ -157,8 +170,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       ));
       return;
     }
-
-    PerlRealVersionManagerData perlBrewData = createData(selectedPath, installation);
-    PerlSdkType.createAndAddSdk(perlPath.get(0), perlHostData, perlBrewData, sdkConsumer);
+    PerlRealVersionManagerData versionManagerData = createData(vmAdapter.getVersionManagerPath(), distributionId);
+    PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer);
   }
 }

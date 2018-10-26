@@ -1027,6 +1027,11 @@
       <add-to-group group-id="NewGroup" anchor="first"/>
     </action>
 
+    <group id="Perl5.Perlbrew" popup="true" text="Perlbrew">
+      <add-to-group group-id="Perl5.Tools" anchor="last"/>
+      <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"/>
+    </group>
+
     <group>
       <add-to-group group-id="GenerateGroup" anchor="first"/>
 

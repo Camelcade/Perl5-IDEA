@@ -28,6 +28,7 @@ import javax.swing.*;
 public class PerlIcons {
   public static final Icon PERL_LANGUAGE_ICON = IconLoader.getIcon("/icons/perl5language.png");
   public static final Icon PERL_MODIFIER = IconLoader.getIcon("/icons/perl_modifier.png");
+  public static final Icon PERLBREW_ICON = PERL_LANGUAGE_ICON;
 
   public static final Icon PERL_OPTION = IconLoader.getIcon("/icons/option.png");
   public static final Icon PERL_OPTIONS = IconLoader.getIcon("/icons/options.png");

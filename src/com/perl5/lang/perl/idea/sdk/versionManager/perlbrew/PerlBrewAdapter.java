@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
+import com.intellij.execution.process.ProcessOutput;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -46,6 +48,15 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
     List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
+  }
+
+  /**
+   * Creates a library with {@code libararyName} for the perl with {@code perlVersion}. Optionally invokes the {@code successCallback} on success
+   */
+  @Nullable
+  ProcessOutput createLibrary(@NotNull String perlVersion, @NotNull String libraryName) {
+    return getProcessOutput(
+      new PerlCommandLine(getVersionManagerPath(), "lib", "create", perlVersion + "@" + libraryName).withHostData(getHostData()));
   }
 
   /**
