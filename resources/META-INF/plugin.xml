@@ -138,6 +138,8 @@
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.system.PerlSystemHandler"/>
     <versionManagerHandler key="perlbrew"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewHandler"/>
+    <versionManagerHandler key="berrybrew"
+                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewHandler"/>
     <versionManagerHandler key="plenv"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
   </extensions>
