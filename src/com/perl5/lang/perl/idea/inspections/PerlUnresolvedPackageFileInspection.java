@@ -78,9 +78,7 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
             if (CpanminusAdapter.isAvailable(perlSdk)) {
               fixes.add(new InstallPackageQuickfix(new CpanminusAdapter(perlSdk, project), packageName));
             }
-            else {
-              fixes.add(new InstallPackageQuickfix(new CpanAdapter(perlSdk, project), packageName));
-            }
+            fixes.add(new InstallPackageQuickfix(new CpanAdapter(perlSdk, project), packageName));
           }
 
           registerProblem(holder, o,
