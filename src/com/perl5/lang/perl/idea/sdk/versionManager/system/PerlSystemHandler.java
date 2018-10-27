@@ -75,7 +75,7 @@ class PerlSystemHandler
   }
 
   @Override
-  public boolean isApplicable(@NotNull PerlOsHandler osHandler) {
+  public boolean isApplicable(@Nullable PerlOsHandler osHandler) {
     return true;
   }
 

@@ -101,8 +101,9 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     DefaultActionGroup panelActionGroup = myPanel.getActionGroup();
 
     List<ActionGroup> groups = PerlHostHandler.stream().map(hostHandler -> {
-      List<DumbAwareAction> groupItems = PerlVersionManagerHandler.stream().map(
-        versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
+      List<DumbAwareAction> groupItems = PerlVersionManagerHandler.stream()
+        .filter(it -> it.isApplicable(hostHandler.getOsHandler()))
+        .map(versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
           @Override
           public void actionPerformed(@NotNull AnActionEvent e) {
             new Task.Modal(null, PerlBundle.message("perl.create.interpreter.progress"), false) {

@@ -72,8 +72,9 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   /**
    * @return true iff version manager is supported by OS described with {@code osHandler}
    * E.g. perlbrew is not available on windows systems
+   * @apiNote if {@code osHandler} is null, we suppose that it's applicable
    */
-  public abstract boolean isApplicable(@NotNull PerlOsHandler osHandler);
+  public abstract boolean isApplicable(@Nullable PerlOsHandler osHandler);
 
   @NotNull
   @Override

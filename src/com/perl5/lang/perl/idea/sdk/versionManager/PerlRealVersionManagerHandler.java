@@ -56,8 +56,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   }
 
   @Override
-  public boolean isApplicable(@NotNull PerlOsHandler osHandler) {
-    return !osHandler.isMsWindows();
+  public boolean isApplicable(@Nullable PerlOsHandler osHandler) {
+    return osHandler == null || !osHandler.isMsWindows();
   }
 
   @NotNull
