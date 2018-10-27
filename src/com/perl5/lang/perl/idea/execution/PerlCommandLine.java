@@ -224,6 +224,8 @@ public class PerlCommandLine extends GeneralCommandLine {
              "; vm = " + getEffectiveVersionManagerData() +
              "; pty = " + isUsePty() +
              "; charset: " + getCharset());
-    return myUsePty ? new PtyCommandLine(this).createProcess() : super.createProcess();
+    return myUsePty ?
+           new PtyCommandLine(this).withInitialColumns(PtyCommandLine.MAX_COLUMNS).createProcess() :
+           super.createProcess();
   }
 }
