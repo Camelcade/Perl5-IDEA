@@ -22,6 +22,7 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -75,7 +76,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   public static boolean isAvailable(@NotNull Sdk sdk) {
     for (VirtualFile root : sdk.getRootProvider().getFiles(OrderRootType.CLASSES)) {
       if (root.findFileByRelativePath(PACKAGE_PATH) != null) {
-        return true;
+        return PerlRunUtil.findScript(sdk, SCRIPT_NAME) != null;
       }
     }
     return false;
