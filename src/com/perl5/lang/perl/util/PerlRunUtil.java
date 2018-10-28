@@ -69,6 +69,8 @@ public class PerlRunUtil {
   private static final Logger LOG = Logger.getInstance(PerlRunUtil.class);
   private static final String MISSING_MODULE_PREFIX = "(you may need to install the ";
   private static final String MISSING_MODULE_SUFFIX = " module)";
+  private static final String LEGACY_MODULE_PREFIX = "Can't locate ";
+  private static final String LEGACY_MODULE_SUFFIX = " in @INC";
 
   /**
    * Builds non-patched perl command line for {@code project}'s sdk (without patching by version manager)
@@ -396,6 +398,7 @@ public class PerlRunUtil {
         }
         int keyOffset = text.indexOf(MISSING_MODULE_PREFIX);
         if (keyOffset == -1) {
+          checkLegacyPrefix(text);
           return;
         }
         int startOffset = keyOffset + MISSING_MODULE_PREFIX.length();
@@ -404,6 +407,19 @@ public class PerlRunUtil {
           return;
         }
         showMissingLibraryNotification(project, finalSdk, text.substring(startOffset, endOffset));
+      }
+
+      private void checkLegacyPrefix(@NotNull String text) {
+        int keyOffset = text.indexOf(LEGACY_MODULE_PREFIX);
+        if (keyOffset == -1) {
+          return;
+        }
+        int startOffset = keyOffset + LEGACY_MODULE_PREFIX.length();
+        int endOffset = text.indexOf(LEGACY_MODULE_SUFFIX, startOffset);
+        if (endOffset == -1) {
+          return;
+        }
+        showMissingLibraryNotification(project, finalSdk, PerlPackageUtil.getPackageNameByPath(text.substring(startOffset, endOffset)));
       }
     };
   }
