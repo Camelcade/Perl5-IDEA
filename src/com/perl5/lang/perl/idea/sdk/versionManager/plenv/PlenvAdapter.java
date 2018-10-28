@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
+import com.intellij.execution.process.ProcessListener;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -43,6 +45,14 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
                        .withParameters(PLENV_EXEC)
                        .withParameters(commands)
                        .withEnvironment(PLENV_VERSION, distributionId));
+  }
+
+  @Override
+  public void installPerl(@NotNull Project project,
+                          @NotNull String distributionId,
+                          @NotNull List<String> params,
+                          @Nullable ProcessListener processListener) {
+    throw new RuntimeException("not implemented");
   }
 
   @Nullable

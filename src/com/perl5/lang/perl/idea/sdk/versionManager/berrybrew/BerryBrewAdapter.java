@@ -16,10 +16,17 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
+import com.intellij.execution.process.ProcessListener;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,6 +34,8 @@ import java.util.Arrays;
 import java.util.List;
 
 class BerryBrewAdapter extends PerlVersionManagerAdapter {
+  private static final String BERRYREW_AVAILABLE = "available";
+  private static final String BERRYBREW_INSTALL = "install";
   static final String BERRYBREW_EXEC = "exec";
   static final String BERRYBREW_WITH = "--with";
 
@@ -42,6 +51,21 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     return getOutput(commandsList);
   }
 
+  public void installPerl(@NotNull Project project,
+                          @NotNull String distributionId,
+                          @NotNull List<String> params,
+                          @Nullable ProcessListener processListener) {
+    PerlRunUtil.runInConsole(
+      new PerlCommandLine(getVersionManagerPath(), BERRYBREW_INSTALL, distributionId)
+        .withParameters(params)
+        .withProject(project)
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing.perl", distributionId))
+        .withConsoleIcon(PerlIcons.STRAWBERRY_ICON)
+        .withVersionManagerData(PerlVersionManagerData.getDefault())
+        .withProcessListener(processListener)
+    );
+  }
+
   @Nullable
   @Override
   protected List<String> getDistributionsList() {
@@ -55,7 +79,17 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
   @Nullable
   @Override
   protected List<String> getAvailableDistributionsList() {
-    throw new RuntimeException("Not implemented");
+    List<String> output = getOutput(BERRYREW_AVAILABLE);
+    if (output == null) {
+      return null;
+    }
+    return ContainerUtil.filter(output, it -> {
+      String trimmed = it.trim();
+      if (StringUtil.isEmpty(trimmed)) {
+        return false;
+      }
+      return trimmed.indexOf("Currently using") <= 0 && trimmed.indexOf("are available") <= 0;
+    });
   }
 
   @NotNull

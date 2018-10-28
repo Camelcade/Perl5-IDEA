@@ -17,23 +17,17 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.CollectionComboBoxModel;
-import com.intellij.ui.ColoredListCellRenderer;
-import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.text.VersionComparatorUtil;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallFormOptions;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class PerlBrewInstallPerlForm {
-  @NotNull
-  private final ChangeListener myListener;
+import static com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallForm.configureThreadsCombobox;
 
-  private JComboBox<String> myDistributionsComboBox;
+class PerlBrewInstallPerlForm extends PerlInstallFormOptions {
   private JComboBox<Integer> myThreadsComboBox;
   private JTextField myNameTextField;
   private JCheckBox myForceInstallationCheckBox;
@@ -48,95 +42,24 @@ class PerlBrewInstallPerlForm {
   private JCheckBox myUseClangCheckBox;
   private JCheckBox myDonTCallPatchperlCheckBox;
   private JPanel myRootPanel;
-  private JCheckBox myAddInstalledPerl5ToCheckBox;
-  private JCheckBox myChooseForCurrentProjectCheckBox;
 
-  public PerlBrewInstallPerlForm(@NotNull ChangeListener listener, @NotNull List<String> distributionsList) {
-    myListener = listener;
-    List<Integer> threadsList = new ArrayList<>(16);
-    for (int i = 1; i <= 16; i++) {
-      threadsList.add(i);
-    }
-    myThreadsComboBox.setModel(new CollectionComboBoxModel<>(threadsList));
-    myThreadsComboBox.setRenderer(new ColoredListCellRenderer<Integer>() {
-      @Override
-      protected void customizeCellRenderer(@NotNull JList<? extends Integer> list,
-                                           Integer value,
-                                           int index,
-                                           boolean selected,
-                                           boolean hasFocus) {
-        if (value == 1) {
-          append("Single thread");
-        }
-        else {
-          append(Integer.toString(value)).append(" threads");
-        }
-      }
-    });
-    myThreadsComboBox.setSelectedIndex(0);
-
-    distributionsList.sort((a, b) -> {
-      int wordIndex = a.indexOf("-");
-      a = wordIndex == -1 ? a : a.substring(wordIndex + 1);
-      wordIndex = b.indexOf("-");
-      b = wordIndex == -1 ? a : b.substring(wordIndex + 1);
-      return VersionComparatorUtil.compare(b, a);
-    });
-
-    myDistributionsComboBox.setModel(new CollectionComboBoxModel<>(distributionsList));
-    myDistributionsComboBox.addActionListener(e -> updateState());
-    myDistributionsComboBox.setRenderer(new ColoredListCellRenderer<String>() {
-      @Override
-      protected void customizeCellRenderer(@NotNull JList<? extends String> list,
-                                           String value,
-                                           int index,
-                                           boolean selected,
-                                           boolean hasFocus) {
-        if (value.startsWith("i ")) {
-          append(cleanDistributionItem(value)).append(" (installed)", SimpleTextAttributes.GRAY_ATTRIBUTES);
-        }
-        else {
-          append(value);
-        }
-      }
-    });
-    myAddInstalledPerl5ToCheckBox.addChangeListener(e -> updateState());
-    updateState();
+  public PerlBrewInstallPerlForm() {
+    configureThreadsCombobox(myThreadsComboBox);
   }
 
-  private void updateState() {
-    myChooseForCurrentProjectCheckBox.setEnabled(myAddInstalledPerl5ToCheckBox.isSelected());
-    myListener.changed(this);
-  }
-
+  @NotNull
   public JPanel getRootPanel() {
     return myRootPanel;
   }
 
-  public JCheckBox getAddInstalledPerl5ToCheckBox() {
-    return myAddInstalledPerl5ToCheckBox;
-  }
-
-  public JCheckBox getChooseForCurrentProjectCheckBox() {
-    return myChooseForCurrentProjectCheckBox;
-  }
-
-  public JComboBox<String> getDistributionsComboBox() {
-    return myDistributionsComboBox;
+  @NotNull
+  public String getTargetName(@NotNull String distributionId) {
+    String userText = StringUtil.notNullize(myNameTextField.getText()).trim();
+    return StringUtil.isEmpty(userText) ? distributionId : userText;
   }
 
   @NotNull
-  public String getSelectedDistributionId() {
-    return cleanDistributionItem(ObjectUtils.notNull((String)getDistributionsComboBox().getSelectedItem(), ""));
-  }
-
-  @Nullable
-  public String getTargetName() {
-    return StringUtil.notNullize(myNameTextField.getText()).trim();
-  }
-
-  @NotNull
-  List<String> buildParametersList() {
+  public List<String> buildParametersList() {
     List<String> buildParams = new ArrayList<>();
     if (myForceInstallationCheckBox.isSelected()) {
       buildParams.add("--force");
@@ -192,14 +115,5 @@ class PerlBrewInstallPerlForm {
       buildParams.add("--no-patchperl");
     }
     return buildParams;
-  }
-
-  @NotNull
-  private static String cleanDistributionItem(@NotNull String original) {
-    return StringUtil.trimStart(original, "i ").trim();
-  }
-
-  interface ChangeListener {
-    void changed(@NotNull PerlBrewInstallPerlForm form);
   }
 }

@@ -1035,6 +1035,11 @@
       <action id="perl5.perlbrew.install" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlAction"/>
     </group>
 
+    <group id="Perl5.Berrybrew" popup="true" text="Berrybrew" icon="/icons/strawberry.png">
+      <add-to-group group-id="Perl5.Tools" anchor="after" relative-to-action="Perl5.Perlbrew"/>
+      <action id="perl5.berrybrew.install" class="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewInstallPerlAction"/>
+    </group>
+
     <group>
       <add-to-group group-id="GenerateGroup" anchor="first"/>
 

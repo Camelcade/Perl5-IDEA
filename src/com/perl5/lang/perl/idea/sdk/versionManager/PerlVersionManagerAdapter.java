@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -62,6 +64,19 @@ public abstract class PerlVersionManagerAdapter {
    */
   @Nullable
   protected abstract List<String> execWith(@NotNull String distributionId, @NotNull String... commands);
+
+  /**
+   * Installs perl to the version manager
+   *
+   * @param project         context project
+   * @param distributionId  perl to install
+   * @param params          additional params
+   * @param processListener optional process listener
+   */
+  public abstract void installPerl(@NotNull Project project,
+                                   @NotNull String distributionId,
+                                   @NotNull List<String> params,
+                                   @Nullable ProcessListener processListener);
 
   /**
    * @return list of installed distributions

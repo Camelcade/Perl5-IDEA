@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewAdapter.BERRYBREW_EXEC;
 import static com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewAdapter.BERRYBREW_WITH;
@@ -43,5 +47,10 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
   @Override
   protected BerryBrewData self() {
     return this;
+  }
+
+  @Nullable
+  public static BerryBrewData from(@Nullable Sdk sdk) {
+    return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), BerryBrewData.class);
   }
 }

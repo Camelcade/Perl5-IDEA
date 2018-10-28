@@ -14,52 +14,54 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
+package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallFormOptions;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlBrewInstallPerlAction extends PerlInstallAction {
+public class BerryBrewInstallPerlAction extends PerlInstallAction {
+  private static final String INSTALLED_MARK = "[installed]";
+
 
   @Override
   protected boolean isEnabled(AnActionEvent event) {
-    return PerlBrewData.from(getPerlSdk(event)) != null;
-  }
-
-  @Nullable
-  @Override
-  protected PerlBrewData getData(@Nullable Sdk perlSdk) {
-    return PerlBrewData.from(perlSdk);
-  }
-
-  @NotNull
-  @Override
-  protected PerlInstallFormOptions createOptionsForm() {
-    return new PerlBrewInstallPerlForm();
-  }
-
-  @NotNull
-  @Override
-  protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData hostData) {
-    return new PerlBrewAdapter(vmPath, hostData);
+    return BerryBrewData.from(getPerlSdk(event)) != null;
   }
 
   @NotNull
   @Override
   protected String doCleanDistributionItem(@NotNull String rawItem) {
-    return StringUtil.trimStart(rawItem, "i ").trim();
+    return rawItem.replace(INSTALLED_MARK, "").replaceAll("\\*", "").trim();
   }
 
   @Override
   protected boolean doIsInstalled(@NotNull String rawItem) {
-    return rawItem.startsWith("i ");
+    return rawItem.indexOf(INSTALLED_MARK) > 0;
   }
 
+  @Nullable
+  @Override
+  protected PerlRealVersionManagerData getData(@Nullable Sdk sdk) {
+    return BerryBrewData.from(sdk);
+  }
+
+  @NotNull
+  @Override
+  protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData hostData) {
+    return new BerryBrewAdapter(vmPath, hostData);
+  }
+
+  @NotNull
+  @Override
+  protected PerlInstallFormOptions createOptionsForm() {
+    return new PerlInstallFormOptions() {
+    };
+  }
 }

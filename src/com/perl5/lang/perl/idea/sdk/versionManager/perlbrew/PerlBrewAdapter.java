@@ -90,7 +90,7 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
       new PerlCommandLine(getVersionManagerPath(), PERLBREW_INSTALL, PERLBREW_VERBOSE, distributionId)
         .withParameters(params)
         .withProject(project)
-        .withConsoleTitle(PerlBundle.message("perl.vm.perlbrew.installing.perl", distributionId))
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing.perl", distributionId))
         .withConsoleIcon(PerlIcons.PERLBREW_ICON)
         .withVersionManagerData(PerlVersionManagerData.getDefault())
         .withProcessListener(processListener)
