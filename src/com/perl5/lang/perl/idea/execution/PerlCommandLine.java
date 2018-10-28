@@ -22,8 +22,12 @@ import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.configurations.PtyCommandLine;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +49,12 @@ public class PerlCommandLine extends GeneralCommandLine {
   private PerlVersionManagerData myVersionManagerData;
 
   private boolean myUsePty = false;
+
+  @Nullable
+  private Project myProject;
+
+  @Nullable
+  private Module myModule;
 
   @Nullable
   private String myConsoleTitle;
@@ -76,6 +86,8 @@ public class PerlCommandLine extends GeneralCommandLine {
       myUsePty = ((PerlCommandLine)original).myUsePty;
       myConsoleTitle = ((PerlCommandLine)original).myConsoleTitle;
       myProcessListeners = new ArrayList<>(((PerlCommandLine)original).myProcessListeners);
+      myProject = ((PerlCommandLine)original).myProject;
+      myModule = ((PerlCommandLine)original).myModule;
     }
   }
 
@@ -116,8 +128,8 @@ public class PerlCommandLine extends GeneralCommandLine {
   }
 
   @Nullable
-  public Sdk getSdk() {
-    return mySdk;
+  public Sdk getEffectiveSdk() {
+    return mySdk != null ? mySdk : PerlProjectManager.getSdk(getEffectiveProject());
   }
 
   @NotNull
@@ -126,17 +138,12 @@ public class PerlCommandLine extends GeneralCommandLine {
     return this;
   }
 
-  @Nullable
-  public PerlHostData getHostData() {
-    return myHostData;
-  }
-
   /**
    * @return explicit data or data from sdk if any, null otherwise
    */
   @Nullable
   public PerlHostData getEffectiveHostData() {
-    return myHostData == null ? PerlHostData.from(mySdk) : myHostData;
+    return myHostData == null ? PerlHostData.from(getEffectiveSdk()) : myHostData;
   }
 
   @NotNull
@@ -145,17 +152,12 @@ public class PerlCommandLine extends GeneralCommandLine {
     return this;
   }
 
-  @Nullable
-  public PerlVersionManagerData getVersionManagerData() {
-    return myVersionManagerData;
-  }
-
   /**
    * @return explicit data or data from sdk if any, null otherwise
    */
   @Nullable
   public PerlVersionManagerData getEffectiveVersionManagerData() {
-    return myVersionManagerData == null ? PerlVersionManagerData.from(mySdk) : myVersionManagerData;
+    return myVersionManagerData == null ? PerlVersionManagerData.from(getEffectiveSdk()) : myVersionManagerData;
   }
 
   @NotNull
@@ -195,7 +197,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   public PerlCommandLine withProcessListener(@NotNull ProcessListener... listeners) {
     myProcessListeners = new ArrayList<>(myProcessListeners);
-    myProcessListeners.addAll(Arrays.asList(listeners));
+    myProcessListeners.addAll(ContainerUtil.filter(listeners, Objects::nonNull));
     return this;
   }
 
@@ -212,6 +214,28 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   public PerlCommandLine withPty(boolean usePty) {
     myUsePty = usePty;
+    return this;
+  }
+
+  @Nullable
+  public Project getEffectiveProject() {
+    return myProject != null ? myProject : ObjectUtils.doIfNotNull(getModule(), Module::getProject);
+  }
+
+  @NotNull
+  public PerlCommandLine withProject(@Nullable Project project) {
+    myProject = project;
+    return this;
+  }
+
+  @Nullable
+  public Module getModule() {
+    return myModule;
+  }
+
+  @NotNull
+  public PerlCommandLine withModule(@Nullable Module module) {
+    myModule = module;
     return this;
   }
 
