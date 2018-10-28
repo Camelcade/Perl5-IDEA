@@ -324,10 +324,11 @@ public class PerlRunUtil {
     }
   }
 
-  public static void runInConsole(@NotNull Project project,
-                                  @NotNull PerlCommandLine perlCommandLine) {
+  public static void runInConsole(@NotNull PerlCommandLine perlCommandLine) {
+
     ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
+    Project project = perlCommandLine.getNonNullEffectiveProject();
     PerlRunConsole consoleView = new PerlRunConsole(project, true);
     ProcessHandler processHandler = null;
     try {
@@ -343,7 +344,7 @@ public class PerlRunUtil {
       processHandler,
       consoleView.buildPanel(),
       ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
-      PerlIcons.PERL_LANGUAGE_ICON
+      ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
     );
 
     ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);

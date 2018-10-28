@@ -86,10 +86,10 @@ public abstract class PackageManagerAdapter {
       return;
     }
     PerlRunUtil.runInConsole(
-      getProject(),
       new PerlCommandLine(script.getPath())
         .withParameters(getInstallParameters(packageNames))
         .withSdk(getSdk())
+        .withProject(getProject())
         .withConsoleTitle(PerlBundle.message("perl.cpan.console.installing", StringUtil.join(packageNames, ", ")))
         .withProcessListener(new ProcessAdapter() {
           @Override

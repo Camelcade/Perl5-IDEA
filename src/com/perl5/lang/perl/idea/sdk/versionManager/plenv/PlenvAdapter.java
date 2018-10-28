@@ -47,6 +47,20 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
 
   @Nullable
   @Override
+  protected List<String> getAvailableDistributionsList() {
+    List<String> versions = getOutput("install", "-l");
+    if (versions == null) {
+      return null;
+    }
+    return versions.stream()
+      .map(String::trim)
+      .filter(StringUtil::isNotEmpty)
+      .filter(it -> !StringUtil.contains(it, "Available"))
+      .collect(Collectors.toList());
+  }
+
+  @Nullable
+  @Override
   protected List<String> getDistributionsList() {
     List<String> rawVersions = getOutput("versions");
     return rawVersions == null ? null : rawVersions.stream()

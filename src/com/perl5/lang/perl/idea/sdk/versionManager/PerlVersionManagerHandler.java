@@ -83,7 +83,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   }
 
   @NotNull
-  public static List<? extends PerlVersionManagerHandler<?, ?>> all() {
+  public static List<PerlVersionManagerHandler<?, ?>> all() {
     return EP.getExtensions();
   }
 

@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.*;
@@ -58,6 +59,9 @@ public class PerlCommandLine extends GeneralCommandLine {
 
   @Nullable
   private String myConsoleTitle;
+
+  @Nullable
+  private Icon myConsoleIcon;
 
   @NotNull
   private List<ProcessListener> myProcessListeners = Collections.emptyList();
@@ -85,6 +89,7 @@ public class PerlCommandLine extends GeneralCommandLine {
       myVersionManagerData = ((PerlCommandLine)original).myVersionManagerData;
       myUsePty = ((PerlCommandLine)original).myUsePty;
       myConsoleTitle = ((PerlCommandLine)original).myConsoleTitle;
+      myConsoleIcon = ((PerlCommandLine)original).myConsoleIcon;
       myProcessListeners = new ArrayList<>(((PerlCommandLine)original).myProcessListeners);
       myProject = ((PerlCommandLine)original).myProject;
       myModule = ((PerlCommandLine)original).myModule;
@@ -223,6 +228,11 @@ public class PerlCommandLine extends GeneralCommandLine {
   }
 
   @NotNull
+  public Project getNonNullEffectiveProject() {
+    return ObjectUtils.notNull(getEffectiveProject());
+  }
+
+  @NotNull
   public PerlCommandLine withProject(@Nullable Project project) {
     myProject = project;
     return this;
@@ -236,6 +246,17 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   public PerlCommandLine withModule(@Nullable Module module) {
     myModule = module;
+    return this;
+  }
+
+  @Nullable
+  public Icon getConsoleIcon() {
+    return myConsoleIcon;
+  }
+
+  @NotNull
+  public PerlCommandLine withConsoleIcon(@Nullable Icon consoleIcon) {
+    myConsoleIcon = consoleIcon;
     return this;
   }
 

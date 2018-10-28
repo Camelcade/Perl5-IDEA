@@ -1029,9 +1029,10 @@
       <add-to-group group-id="NewGroup" anchor="first"/>
     </action>
 
-    <group id="Perl5.Perlbrew" popup="true" text="Perlbrew">
+    <group id="Perl5.Perlbrew" popup="true" text="Perlbrew" icon="/icons/perlbrew.png">
       <add-to-group group-id="Perl5.Tools" anchor="last"/>
       <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"/>
+      <action id="perl5.perlbrew.install" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlAction"/>
     </group>
 
     <group>

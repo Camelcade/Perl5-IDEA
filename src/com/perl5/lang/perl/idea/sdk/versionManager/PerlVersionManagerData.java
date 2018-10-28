@@ -69,4 +69,12 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   public static PerlVersionManagerData from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getVersionManagerData);
   }
+
+  /**
+   * @return default, system version manager. Is necessary to avoid patching of external executions
+   */
+  @NotNull
+  public static PerlVersionManagerData<?, ?> getDefault() {
+    return PerlVersionManagerHandler.getDefaultHandler().createData();
+  }
 }

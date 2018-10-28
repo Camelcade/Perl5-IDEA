@@ -21,7 +21,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
@@ -29,21 +28,15 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlBrewCreateLibraryAction extends PerlActionBase implements DumbAware {
+public class PerlBrewCreateLibraryAction extends PerlBrewAction {
 
   public PerlBrewCreateLibraryAction() {
     getTemplatePresentation().setText(PerlBundle.message("perl.vm.perlbrew.create.lib"));
-  }
-
-  @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return PerlVersionManagerData.from(getPerlSdk(event)) instanceof PerlBrewData;
   }
 
   @Override
@@ -98,13 +91,14 @@ public class PerlBrewCreateLibraryAction extends PerlActionBase implements DumbA
 
       // fixme we could avoid creating duplicated sdks here
       private void doCreateSdk(@NotNull PerlBrewAdapter perlBrewAdapter, @NotNull String distirbutionId) {
-        perlBrewData.getHandler().createInterpreter(
+        PerlBrewHandler.getInstance().createInterpreter(
           distirbutionId, perlBrewAdapter, sdk -> ApplicationManager.getApplication().invokeLater(
             () -> {
-              if (Messages.showYesNoDialog(
+              PerlBrewData perlBrewData = PerlBrewData.from(sdk);
+              if (perlBrewData != null && Messages.showYesNoDialog(
                 myProject,
-                PerlBundle.message("perl.vm.perlbrew.create.lib.select", distirbutionId),
-                PerlBundle.message("perl.vm.perlbrew.create.lib.title", perlVersionString), null) == Messages.YES) {
+                PerlBundle.message("perl.vm.perlbrew.create.lib.select", perlBrewData.getDistributionId()),
+                PerlBundle.message("perl.vm.perlbrew.create.lib.title", perlBrewData.getPerlVersionString()), null) == Messages.YES) {
                 PerlProjectManager.getInstance(myProject).setProjectSdk(sdk);
               }
             }));

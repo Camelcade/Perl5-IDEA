@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlForm">
+  <grid id="719a8" binding="myRootPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="382" height="511"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="27dc6" default-binding="true" layout-manager="FormLayout">
+        <rowspec value="center:d:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="e56e7" class="javax.swing.JComboBox" binding="myDistributionsComboBox">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="297c5" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.select.distribution"/>
+            </properties>
+          </component>
+          <component id="8fbc5" class="javax.swing.JComboBox" binding="myThreadsComboBox">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="6843d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.threads.label"/>
+            </properties>
+          </component>
+          <component id="e2b47" class="javax.swing.JTextField" binding="myNameTextField">
+            <constraints>
+              <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="ca7e6" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.install.as"/>
+            </properties>
+          </component>
+          <component id="f3ec5" class="javax.swing.JCheckBox" binding="myForceInstallationCheckBox" default-binding="true">
+            <constraints>
+              <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.force"/>
+            </properties>
+          </component>
+          <component id="77427" class="javax.swing.JCheckBox" binding="mySkipTestingCheckBox" default-binding="true">
+            <constraints>
+              <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.no.testing"/>
+            </properties>
+          </component>
+          <component id="115de" class="javax.swing.JCheckBox" binding="myNoManpagesCheckBox" default-binding="true">
+            <constraints>
+              <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.no.man"/>
+            </properties>
+          </component>
+          <component id="aa74e" class="javax.swing.JCheckBox" binding="myWithUsethreadsCheckBox" default-binding="true">
+            <constraints>
+              <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.usethreads"/>
+            </properties>
+          </component>
+          <component id="a4d9b" class="javax.swing.JCheckBox" binding="myWithUsemultiplicityCheckBox" default-binding="true">
+            <constraints>
+              <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.multiplicity"/>
+            </properties>
+          </component>
+          <component id="3ec2c" class="javax.swing.JCheckBox" binding="myWithUse64bitintCheckBox" default-binding="true">
+            <constraints>
+              <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.use64int"/>
+            </properties>
+          </component>
+          <component id="ad135" class="javax.swing.JCheckBox" binding="myWithUse64bitallCheckBox" default-binding="true">
+            <constraints>
+              <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.use64all"/>
+            </properties>
+          </component>
+          <component id="1b891" class="javax.swing.JCheckBox" binding="myWithUselongdoubleCheckBox" default-binding="true">
+            <constraints>
+              <grid row="20" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.longdouble"/>
+            </properties>
+          </component>
+          <component id="2e527" class="javax.swing.JCheckBox" binding="myWithDEBUGGINGEnabledCheckBox" default-binding="true">
+            <constraints>
+              <grid row="22" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.debugging"/>
+            </properties>
+          </component>
+          <component id="948fd" class="javax.swing.JCheckBox" binding="myUseClangCheckBox" default-binding="true">
+            <constraints>
+              <grid row="24" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.clang"/>
+            </properties>
+          </component>
+          <component id="d4096" class="javax.swing.JCheckBox" binding="myDonTCallPatchperlCheckBox" default-binding="true">
+            <constraints>
+              <grid row="26" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.no.patchperl"/>
+            </properties>
+          </component>
+          <component id="655ab" class="javax.swing.JCheckBox" binding="myAddInstalledPerl5ToCheckBox" default-binding="true">
+            <constraints>
+              <grid row="28" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.add"/>
+            </properties>
+          </component>
+          <component id="4b192" class="javax.swing.JCheckBox" binding="myChooseForCurrentProjectCheckBox" default-binding="true">
+            <constraints>
+              <grid row="30" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <selected value="true"/>
+              <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.select"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="75251" class="javax.swing.JTextPane" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.message"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

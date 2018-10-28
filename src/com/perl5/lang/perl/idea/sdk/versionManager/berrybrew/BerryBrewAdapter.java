@@ -52,6 +52,12 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
     return ContainerUtil.map(output, it -> it.replaceAll("\\[.+?]", "").replaceAll("\\*", "").trim());
   }
 
+  @Nullable
+  @Override
+  protected List<String> getAvailableDistributionsList() {
+    throw new RuntimeException("Not implemented");
+  }
+
   @NotNull
   @Override
   protected String getErrorNotificationTitle() {

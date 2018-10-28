@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.*;
 
@@ -47,5 +51,10 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
   @Override
   protected final PerlBrewData self() {
     return this;
+  }
+
+  @Nullable
+  public static PerlBrewData from(@Nullable Sdk sdk) {
+    return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PerlBrewData.class);
   }
 }

@@ -16,25 +16,36 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutput;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Api to the perlbrew cli
  */
 class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_EXEC = "exec";
+  static final String PERLBREW_INSTALL = "install";
+  static final String PERLBREW_LIST = "list";
+  static final String PERLBREW_AVAILABLE = "available";
   static final String PERLBREW_WITH = "--with";
   static final String PERLBREW_QUIET = "-q";
+  static final String PERLBREW_VERBOSE = "--verbose";
 
   public PerlBrewAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData hostData) {
     super(versionManagerPath, hostData);
@@ -64,11 +75,36 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
    */
   @Nullable
   protected List<String> getDistributionsList() {
-    List<String> output = getOutput("list");
+    List<String> output = getOutput(PERLBREW_LIST);
     if (output == null) {
       return null;
     }
     return ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").trim());
+  }
+
+  public void installPerl(@NotNull Project project,
+                          @NotNull String distributionId,
+                          @NotNull List<String> params,
+                          @Nullable ProcessListener processListener) {
+    PerlRunUtil.runInConsole(
+      new PerlCommandLine(getVersionManagerPath(), PERLBREW_INSTALL, PERLBREW_VERBOSE, distributionId)
+        .withParameters(params)
+        .withProject(project)
+        .withConsoleTitle(PerlBundle.message("perl.vm.perlbrew.installing.perl", distributionId))
+        .withConsoleIcon(PerlIcons.PERLBREW_ICON)
+        .withVersionManagerData(PerlVersionManagerData.getDefault())
+        .withProcessListener(processListener)
+    );
+  }
+
+  @Nullable
+  @Override
+  protected List<String> getAvailableDistributionsList() {
+    List<String> rawAvailable = getOutput(PERLBREW_AVAILABLE);
+    if (rawAvailable == null) {
+      return null;
+    }
+    return rawAvailable.stream().map(String::trim).filter(StringUtil::isNotEmpty).collect(Collectors.toList());
   }
 
   @NotNull

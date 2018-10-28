@@ -21,6 +21,7 @@ import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 
 class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBrewHandler> {
@@ -55,4 +56,15 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
   protected PerlBrewData createData(@NotNull String versionManagerPath, @NotNull String distributionId) {
     return new PerlBrewData(versionManagerPath, distributionId, this);
   }
+
+  @NotNull
+  static PerlBrewHandler getInstance() {
+    for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
+      if (handler instanceof PerlBrewHandler) {
+        return (PerlBrewHandler)handler;
+      }
+    }
+    throw new NullPointerException();
+  }
+
 }

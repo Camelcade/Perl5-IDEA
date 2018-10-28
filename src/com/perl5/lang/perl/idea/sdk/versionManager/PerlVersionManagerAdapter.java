@@ -69,6 +69,12 @@ public abstract class PerlVersionManagerAdapter {
   @Nullable
   protected abstract List<String> getDistributionsList();
 
+  /**
+   * @return list of available distributions
+   */
+  @Nullable
+  protected abstract List<String> getAvailableDistributionsList();
+
   @Nullable
   protected List<String> getOutput(@NotNull List<String> parameters) {
     return getOutput(new PerlCommandLine(getVersionManagerPath()).withParameters(parameters));
