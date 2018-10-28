@@ -347,11 +347,67 @@ public class PerlRunUtil {
     ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
     if (processHandler != null) {
       consoleView.attachToProcess(processHandler);
+      PerlRunUtil.addMissingPackageListener(project, perlCommandLine.getEffectiveSdk(), processHandler);
       ProcessTerminatedListener.attach(processHandler, project);
       processHandler.startNotify();
     }
     consoleView.addCloseAction(runExecutor, runContentDescriptor);
   }
+
+  public static void addMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk, @NotNull ProcessHandler handler) {
+    ProcessListener listener = createMissingPackageListener(project, sdk);
+    if (listener != null) {
+      handler.addProcessListener(listener);
+    }
+  }
+
+  /**
+   * @see PerlRunUtil#createMissingPackageListener(com.intellij.openapi.project.Project, com.intellij.openapi.projectRoots.Sdk)
+   */
+  @Nullable
+  public static ProcessListener createMissingPackageListener(@Nullable Project project) {
+    return createMissingPackageListener(project, null);
+  }
+
+  /**
+   * Creates a listener watching process output and showing notifications about missing libraries
+   */
+  @Nullable
+  public static ProcessListener createMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk) {
+    if (project == null) {
+      return null;
+    }
+
+    if (sdk == null) {
+      sdk = PerlProjectManager.getSdk(project);
+      if (sdk == null) {
+        return null;
+      }
+    }
+
+    Sdk finalSdk = sdk;
+
+    return new ProcessAdapter() {
+      @Override
+      public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+        String text = event.getText();
+        if (StringUtil.isEmpty(text)) {
+          return;
+        }
+        int keyOffset = text.indexOf(MISSING_MODULE_PREFIX);
+        if (keyOffset == -1) {
+          return;
+        }
+        int startOffset = keyOffset + MISSING_MODULE_PREFIX.length();
+        int endOffset = text.indexOf(MISSING_MODULE_SUFFIX, startOffset);
+        if (endOffset == -1) {
+          return;
+        }
+        showMissingLibraryNotification(project, finalSdk, text.substring(startOffset, endOffset));
+      }
+    };
+  }
+
 
   public static void setProgressText(@NotNull String string) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();

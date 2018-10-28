@@ -102,6 +102,9 @@ public class PerlCoverageRunner extends CoverageRunner {
       commandLine.addParameters(
         "--silent", "--nosummary", "-report", "camelcade", sessionDataFile.getAbsolutePath()
       );
+
+      commandLine.withProcessListener(PerlRunUtil.createMissingPackageListener(project));
+
       return commandLine;
     });
 

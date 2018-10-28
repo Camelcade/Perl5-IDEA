@@ -121,6 +121,7 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withParentEnvironmentType(runConfiguration.isPassParentEnvs() ? CONSOLE : NONE);
 
     ProcessHandler handler = PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset));
+    PerlRunUtil.addMissingPackageListener(project, perlSdk, handler);
     ProcessTerminatedListener.attach(handler, project);
     return handler;
   }
