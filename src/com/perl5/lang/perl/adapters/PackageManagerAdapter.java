@@ -80,7 +80,8 @@ public abstract class PackageManagerAdapter {
     if (myProject.isDisposed()) {
       return;
     }
-    VirtualFile script = PerlRunUtil.findLibraryScriptWithNotification(getSdk(), getManagerScriptName(), getManagerScriptName());
+    VirtualFile script = PerlRunUtil.findLibraryScriptWithNotification(
+      getSdk(), getProject(), getManagerScriptName(), getManagerScriptName());
     if (script == null) {
       return;
     }

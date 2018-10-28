@@ -20,14 +20,15 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
 import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessTerminatedListener;
+import com.intellij.execution.process.*;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
@@ -35,12 +36,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.adapters.CpanAdapter;
+import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -63,6 +67,8 @@ public class PerlRunUtil {
   public static final String PERL_CTRL_X = "print $^X";
   public static final String PERL5OPT = "PERL5OPT";
   private static final Logger LOG = Logger.getInstance(PerlRunUtil.class);
+  private static final String MISSING_MODULE_PREFIX = "(you may need to install the ";
+  private static final String MISSING_MODULE_SUFFIX = " module)";
 
   /**
    * Builds non-patched perl command line for {@code project}'s sdk (without patching by version manager)
@@ -145,15 +151,9 @@ public class PerlRunUtil {
   public static VirtualFile findLibraryScriptWithNotification(@NotNull Project project,
                                                               @NotNull String scriptName,
                                                               @Nullable String libraryName) {
-    Sdk sdk = PerlProjectManager.getSdkWithNotification(project);
-    if (sdk == null) {
-      return null;
-    }
-    return findLibraryScriptWithNotification(
-      sdk,
-      scriptName,
-      libraryName
-    );
+    return ObjectUtils.doIfNotNull(
+      PerlProjectManager.getSdkWithNotification(project),
+      it -> findLibraryScriptWithNotification(it, project, scriptName, libraryName));
   }
 
 
@@ -168,6 +168,7 @@ public class PerlRunUtil {
    */
   @Nullable
   public static VirtualFile findLibraryScriptWithNotification(@NotNull Sdk sdk,
+                                                              @NotNull Project project,
                                                               @NotNull String scriptName,
                                                               @Nullable String libraryName) {
     VirtualFile scriptFile = findScript(sdk, scriptName);
@@ -179,17 +180,29 @@ public class PerlRunUtil {
       return null;
     }
 
+    showMissingLibraryNotification(project, sdk, libraryName);
+
+    return null;
+  }
+
+  public static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull String libraryName) {
     Notification notification = new Notification(
       PerlBundle.message("perl.missing.library.notification"),
       PerlBundle.message("perl.missing.library.notification.title", libraryName),
       PerlBundle.message("perl.missing.library.notification.message", libraryName),
       NotificationType.ERROR
     );
-    // fixme add installation action here, see #1645
-    Notifications.Bus.notify(notification);
 
-    return null;
+    AnAction installCpanmAction =
+      ReadAction.compute(() -> CpanminusAdapter.createInstallAction(sdk, project, libraryName, notification::expire));
+    if (installCpanmAction != null) {
+      notification.addAction(installCpanmAction);
+    }
+    notification.addAction(CpanAdapter.createInstallAction(sdk, project, libraryName, notification::expire));
+
+    Notifications.Bus.notify(notification, project);
   }
+
 
   /**
    * Attempts to find a script by name in perl's libraries path

@@ -16,13 +16,18 @@
 
 package com.perl5.lang.perl.adapters;
 
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CpanAdapter extends PackageManagerAdapter {
   private static final String PACKAGE_NAME = "CPAN";
-  private static final String SCRIPT_NAME = "cpan";
+  public static final String SCRIPT_NAME = "cpan";
 
   public CpanAdapter(@NotNull Sdk sdk, @NotNull Project project) {
     super(sdk, project);
@@ -44,5 +49,21 @@ public class CpanAdapter extends PackageManagerAdapter {
   @Override
   protected String getManagerPackageName() {
     return PACKAGE_NAME;
+  }
+
+  @NotNull
+  public static AnAction createInstallAction(@NotNull Sdk sdk,
+                                             @NotNull Project project,
+                                             @NotNull String libraryName,
+                                             @Nullable Runnable actionCallback) {
+    return new DumbAwareAction(PerlBundle.message("perl.quickfix.install.family", SCRIPT_NAME)) {
+      @Override
+      public void actionPerformed(@NotNull AnActionEvent e) {
+        new CpanAdapter(sdk, project).install(libraryName);
+        if (actionCallback != null) {
+          actionCallback.run();
+        }
+      }
+    };
   }
 }

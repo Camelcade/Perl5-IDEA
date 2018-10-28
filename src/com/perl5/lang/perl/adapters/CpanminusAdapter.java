@@ -16,14 +16,20 @@
 
 package com.perl5.lang.perl.adapters;
 
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -74,11 +80,29 @@ public class CpanminusAdapter extends PackageManagerAdapter {
    * @return true iff App::cpanminus is available in sdk classpath
    */
   public static boolean isAvailable(@NotNull Sdk sdk) {
+    ApplicationManager.getApplication().assertReadAccessAllowed();
     for (VirtualFile root : sdk.getRootProvider().getFiles(OrderRootType.CLASSES)) {
       if (root.findFileByRelativePath(PACKAGE_PATH) != null) {
         return PerlRunUtil.findScript(sdk, SCRIPT_NAME) != null;
       }
     }
     return false;
+  }
+
+  @Nullable
+  public static AnAction createInstallAction(@NotNull Sdk sdk,
+                                             @NotNull Project project,
+                                             @NotNull String libraryName,
+                                             @Nullable Runnable actionCallback) {
+    ApplicationManager.getApplication().assertReadAccessAllowed();
+    return !isAvailable(sdk) ? null : new DumbAwareAction(PerlBundle.message("perl.quickfix.install.family", SCRIPT_NAME)) {
+      @Override
+      public void actionPerformed(@NotNull AnActionEvent e) {
+        new CpanminusAdapter(sdk, project).install(libraryName);
+        if (actionCallback != null) {
+          actionCallback.run();
+        }
+      }
+    };
   }
 }
