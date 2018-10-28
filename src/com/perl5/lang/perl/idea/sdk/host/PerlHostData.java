@@ -98,8 +98,11 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @NotNull
   protected abstract ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
+  /**
+   * Creates a process and process handler to be run in background.
+   */
   @NotNull
-  protected abstract ProcessOutput doExecAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException;
+  protected abstract CapturingProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
   @NotNull
   public static ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
@@ -129,6 +132,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @NotNull
   public static ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine)
     throws ExecutionException {
+    assertNotEdt();
     PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
@@ -138,8 +142,9 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     if (perlHostData == null) {
       throw new ExecutionException("No host data in " + commandLine);
     }
-    assertNotEdt();
-    return perlHostData.doExecAndGetOutput(commandLine);
+    CapturingProcessHandler processHandler = perlHostData.doCreateProcessHandler(commandLine);
+    commandLine.getProcessListeners().forEach(processHandler::addProcessListener);
+    return processHandler.runProcess();
   }
 
   /**

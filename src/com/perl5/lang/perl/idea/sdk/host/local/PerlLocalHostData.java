@@ -18,10 +18,9 @@ package com.perl5.lang.perl.idea.sdk.host.local;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
+import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ColoredProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessOutput;
-import com.intellij.execution.util.ExecUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
@@ -46,8 +45,8 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @NotNull
   @Override
-  protected ProcessOutput doExecAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return ExecUtil.execAndGetOutput(commandLine);
+  protected CapturingProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return new CapturingProcessHandler(commandLine);
   }
 
   @NotNull
