@@ -47,6 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -160,6 +161,11 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
         removeSdk(e);
       }
     });
+    myPanel.getSdkComboBox().registerKeyboardAction(e -> {
+      if (getSelectedSdk() != null) {
+        PerlSdkTable.getInstance().removeJdk(getSelectedSdk());
+      }
+    }, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), 0);
   }
 
   private void updateSdkModel(@Nullable Perl5SdkWrapper itemToSelect) {
