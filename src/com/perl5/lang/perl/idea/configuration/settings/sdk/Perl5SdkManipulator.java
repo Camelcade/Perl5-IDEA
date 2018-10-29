@@ -24,6 +24,7 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrap
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface Perl5SdkManipulator {
@@ -34,7 +35,9 @@ public interface Perl5SdkManipulator {
    */
   @NotNull
   default List<Perl5SdkWrapper> getAllSdkWrappers() {
-    return ContainerUtil.map(PerlSdkTable.getInstance().getInterpreters(), Perl5RealSdkWrapper::new);
+    List<Sdk> interpreters = PerlSdkTable.getInstance().getInterpreters();
+    interpreters.sort(Comparator.comparing(Sdk::getName));
+    return ContainerUtil.map(interpreters, Perl5RealSdkWrapper::new);
   }
 
   /**
