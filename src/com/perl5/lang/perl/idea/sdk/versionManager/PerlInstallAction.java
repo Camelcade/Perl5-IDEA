@@ -28,6 +28,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.text.VersionComparatorUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -57,6 +58,10 @@ public abstract class PerlInstallAction extends PerlActionBase implements DumbAw
 
   @NotNull
   protected abstract PerlInstallFormOptions createOptionsForm();
+
+  protected int doCompareVersions(String a, String b) {
+    return VersionComparatorUtil.compare(b, a);
+  }
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
@@ -127,6 +132,11 @@ public abstract class PerlInstallAction extends PerlActionBase implements DumbAw
     @Override
     public void changed(@NotNull PerlInstallForm form) {
       getOKAction().setEnabled(StringUtil.isNotEmpty(form.getSelectedDistributionId()));
+    }
+
+    @Override
+    public int compare(String o1, String o2) {
+      return doCompareVersions(o1, o2);
     }
 
     @Override

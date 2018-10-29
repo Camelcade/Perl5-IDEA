@@ -20,13 +20,13 @@ import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.text.VersionComparatorUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PerlInstallForm {
@@ -47,13 +47,7 @@ public class PerlInstallForm {
     }
     myHelper = helper;
 
-    distributionsList.sort((a, b) -> {
-      int wordIndex = a.indexOf("-");
-      a = wordIndex == -1 ? a : a.substring(wordIndex + 1);
-      wordIndex = b.indexOf("-");
-      b = wordIndex == -1 ? a : b.substring(wordIndex + 1);
-      return VersionComparatorUtil.compare(b, a);
-    });
+    distributionsList.sort(helper);
 
     myDistributionsComboBox.setModel(new CollectionComboBoxModel<>(distributionsList));
     myDistributionsComboBox.addActionListener(e -> updateState());
@@ -122,7 +116,7 @@ public class PerlInstallForm {
     threadsComboBox.setSelectedIndex(0);
   }
 
-  public interface InstallFormHelper {
+  public interface InstallFormHelper extends Comparator<String> {
     /**
      * Invoked on sdk combobox change
      */

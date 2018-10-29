@@ -45,6 +45,15 @@ public class PerlBrewInstallPerlAction extends PerlInstallAction {
     return new PerlBrewInstallPerlForm();
   }
 
+  @Override
+  protected int doCompareVersions(String a, String b) {
+    int wordIndex = a.indexOf("-");
+    a = wordIndex == -1 ? a : a.substring(wordIndex + 1);
+    wordIndex = b.indexOf("-");
+    b = wordIndex == -1 ? a : b.substring(wordIndex + 1);
+    return super.doCompareVersions(a, b);
+  }
+
   @NotNull
   @Override
   protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData hostData) {
