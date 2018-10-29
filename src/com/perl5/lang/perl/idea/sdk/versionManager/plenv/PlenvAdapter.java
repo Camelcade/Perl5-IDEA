@@ -20,9 +20,12 @@ import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,6 +35,8 @@ import java.util.stream.Collectors;
 class PlenvAdapter extends PerlVersionManagerAdapter {
   static final String PLENV_VERSION = "PLENV_VERSION";
   static final String PLENV_EXEC = "exec";
+  private static final String PLENV_INSTALL = "install";
+  private static final String PLENV_VERBOSE = "--verbose";
 
   public PlenvAdapter(@NotNull String versionManagerPath,
                       @NotNull PerlHostData hostData) {
@@ -52,7 +57,15 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
                           @NotNull String distributionId,
                           @NotNull List<String> params,
                           @Nullable ProcessListener processListener) {
-    throw new RuntimeException("not implemented");
+    PerlRunUtil.runInConsole(
+      new PerlCommandLine(getVersionManagerPath(), PLENV_INSTALL, distributionId)
+        .withParameters(params)
+        .withProject(project)
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing.perl", distributionId))
+        .withConsoleIcon(PerlIcons.PLENV_ICON)
+        .withVersionManagerData(PerlVersionManagerData.getDefault())
+        .withProcessListener(processListener)
+    );
   }
 
   @Nullable

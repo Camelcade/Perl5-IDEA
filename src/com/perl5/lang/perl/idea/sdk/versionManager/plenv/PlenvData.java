@@ -16,9 +16,13 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
 
@@ -46,5 +50,10 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
   @Override
   protected PlenvData self() {
     return this;
+  }
+
+  @Nullable
+  public static PlenvData from(@Nullable Sdk sdk) {
+    return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PlenvData.class);
   }
 }

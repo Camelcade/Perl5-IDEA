@@ -45,7 +45,7 @@
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.message"/>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.message"/>
         </properties>
       </component>
       <component id="8fbc5" class="javax.swing.JComboBox" binding="myThreadsComboBox">
@@ -61,7 +61,7 @@
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
-          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.threads.label"/>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.threads.label"/>
         </properties>
       </component>
       <component id="e2b47" class="javax.swing.JTextField" binding="myNameTextField">
@@ -79,7 +79,7 @@
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
-          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.install.as"/>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.install.as"/>
         </properties>
       </component>
       <component id="f3ec5" class="javax.swing.JCheckBox" binding="myForceInstallationCheckBox" default-binding="true">
@@ -97,7 +97,7 @@
           <forms/>
         </constraints>
         <properties>
-          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.no.testing"/>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.no.testing"/>
         </properties>
       </component>
       <component id="115de" class="javax.swing.JCheckBox" binding="myNoManpagesCheckBox" default-binding="true">
@@ -107,7 +107,7 @@
         </constraints>
         <properties>
           <selected value="true"/>
-          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.no.man"/>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.no.man"/>
         </properties>
       </component>
       <component id="aa74e" class="javax.swing.JCheckBox" binding="myWithUsethreadsCheckBox" default-binding="true">
