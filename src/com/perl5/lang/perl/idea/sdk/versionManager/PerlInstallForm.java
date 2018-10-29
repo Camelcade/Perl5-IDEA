@@ -58,6 +58,7 @@ public class PerlInstallForm {
                                            int index,
                                            boolean selected,
                                            boolean hasFocus) {
+        setIcon(myHelper.getIcon(value));
         if (myHelper.isInstalled(value)) {
           append(myHelper.cleanDistributionItem(value)).append(" (installed)", SimpleTextAttributes.GRAY_ATTRIBUTES);
         }
@@ -131,5 +132,8 @@ public class PerlInstallForm {
      * @return true iff rawItem is marked as installed
      */
     boolean isInstalled(@NotNull String rawItem);
+
+    @Nullable
+    Icon getIcon(@NotNull String distribution);
   }
 }

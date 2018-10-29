@@ -30,6 +30,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.text.VersionComparatorUtil;
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -61,6 +62,11 @@ public abstract class PerlInstallAction extends PerlActionBase implements DumbAw
 
   protected int doCompareVersions(String a, String b) {
     return VersionComparatorUtil.compare(b, a);
+  }
+
+  @Nullable
+  public Icon doGetIcon(@NotNull String distribution) {
+    return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
   @Override
@@ -137,6 +143,12 @@ public abstract class PerlInstallAction extends PerlActionBase implements DumbAw
     @Override
     public int compare(String o1, String o2) {
       return doCompareVersions(o1, o2);
+    }
+
+    @Nullable
+    @Override
+    public Icon getIcon(@NotNull String distribution) {
+      return doGetIcon(distribution);
     }
 
     @Override

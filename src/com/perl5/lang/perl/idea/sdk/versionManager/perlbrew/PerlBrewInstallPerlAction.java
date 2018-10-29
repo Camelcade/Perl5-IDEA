@@ -26,6 +26,8 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+
 public class PerlBrewInstallPerlAction extends PerlInstallAction {
 
   @Override
@@ -52,6 +54,12 @@ public class PerlBrewInstallPerlAction extends PerlInstallAction {
     wordIndex = b.indexOf("-");
     b = wordIndex == -1 ? a : b.substring(wordIndex + 1);
     return super.doCompareVersions(a, b);
+  }
+
+  @Nullable
+  @Override
+  public Icon doGetIcon(@NotNull String distribution) {
+    return StringUtil.contains(distribution, "cperl") ? null : super.doGetIcon(distribution);
   }
 
   @NotNull
