@@ -8,7 +8,11 @@
   <li>Scripts, executed in console is now ran with Pty and supports ANSI colorized output.</li>
   <li>Alternative sdk configuration re-worked and allows to choose one of the registered interpreters (NB: old configurations may break if
     used alternative paths), <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1423">#1423</a></li>
-  <li>Missing libarary notification now have actions to install a missing package with cpan or cpanminus.</li>
+  <li>Missing library notification now have actions to install a missing package with cpan or cpanminus.</li>
+  <li><code>Perl::Tidy</code> script is now discovered automatically in the selected interpreter and manual configuration is no longer
+    possible,
+    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1809">#1809</a>.
+  </li>
   <li>IDE listens process output for a missing package warnings and suggests to install them.</li>
   <li><code>plenv</code> version manager is now supported, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1383">@aptituz</a>
     <ul>

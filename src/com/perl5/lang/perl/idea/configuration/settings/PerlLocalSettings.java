@@ -23,7 +23,6 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.idea.PerlPathMacros;
-import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,8 +39,6 @@ import java.util.List;
 )
 
 public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings> {
-  public String PERL_PATH = "";
-  public String PERL_TIDY_PATH = PerlFormatWithPerlTidyAction.PERL_TIDY_OS_DEPENDENT_NAME;
   public String PERL_CRITIC_PATH = PerlCriticAnnotator.PERL_CRITIC_OS_DEPENDENT_NAME;
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
   public boolean DISABLE_ASSOCIATIONS_CHECKING = false;

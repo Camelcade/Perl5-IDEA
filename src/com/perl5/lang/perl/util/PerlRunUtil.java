@@ -99,11 +99,12 @@ public class PerlRunUtil {
   @Nullable
   public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
                                                    @Nullable Sdk perlSdk,
-                                                      @Nullable VirtualFile scriptFile,
-                                                      @NotNull List<String> perlParameters,
-                                                      @NotNull List<String> scriptParameters) {
+                                                   @Nullable VirtualFile scriptFile,
+                                                   @NotNull List<String> perlParameters,
+                                                   @NotNull List<String> scriptParameters) {
     String interpreterPath = ObjectUtils.doIfNotNull(perlSdk, Sdk::getHomePath);
     if (StringUtil.isEmpty(interpreterPath)) {
+      LOG.warn("Empty interpreter path in " + perlSdk + " while building command line for " + scriptFile);
       return null;
     }
     PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);

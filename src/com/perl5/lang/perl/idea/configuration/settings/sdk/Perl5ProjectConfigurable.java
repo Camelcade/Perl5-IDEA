@@ -34,7 +34,6 @@ import com.intellij.util.FileContentUtil;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -69,7 +68,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
   private TextFieldWithBrowseButton perlCriticPathInputField;
   private RawCommandLineEditor perlCriticArgsInputField;
-  private TextFieldWithBrowseButton perlTidyPathInputField;
   private RawCommandLineEditor perlTidyArgsInputField;
   private JTextField deparseArgumentsTextField;
   private JCheckBox simpleMainCheckbox;
@@ -187,25 +185,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
         PerlBundle.message("perl.config.critic.cmd.arguments")
       )
     );
-
-    perlTidyPathInputField = new TextFieldWithBrowseButton();
-    perlTidyPathInputField.setEditable(false);
-    FileChooserDescriptor perlTidyDescriptor = new FileChooserDescriptor(true, false, false, false, false, false) {
-      @Override
-      public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
-        return super.isFileVisible(file, showHiddenFiles) &&
-               (file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlFormatWithPerlTidyAction.PERL_TIDY_LINUX_NAME));
-      }
-    };
-
-    //noinspection DialogTitleCapitalization
-    perlTidyPathInputField.addBrowseFolderListener(
-      PerlBundle.message("perl.config.select.file.title"),
-      PerlBundle.message("perl.config.select.tidy"),
-      null, // project
-      perlTidyDescriptor
-    );
-    builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.path.tidy")), perlTidyPathInputField);
     perlTidyArgsInputField = new RawCommandLineEditor();
     builder.addComponent(
       copyDialogCaption(
@@ -307,7 +286,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
            !StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
            !StringUtil.equals(myLocalSettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
-           !StringUtil.equals(myLocalSettings.PERL_TIDY_PATH, perlTidyPathInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
            !mySharedSettings.selfNames.equals(selfNamesModel.getItems());
   }
@@ -337,7 +315,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     perlCriticPathInputField.setText(myLocalSettings.PERL_CRITIC_PATH);
     perlCriticArgsInputField.setText(mySharedSettings.PERL_CRITIC_ARGS);
 
-    perlTidyPathInputField.setText(myLocalSettings.PERL_TIDY_PATH);
     perlTidyArgsInputField.setText(mySharedSettings.PERL_TIDY_ARGS);
   }
 
@@ -370,7 +347,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
       reparseOpenFiles = true;
     }
 
-    myLocalSettings.PERL_TIDY_PATH = perlTidyPathInputField.getText();
     mySharedSettings.PERL_TIDY_ARGS = perlTidyArgsInputField.getText();
 
     mySharedSettings.selfNames.clear();

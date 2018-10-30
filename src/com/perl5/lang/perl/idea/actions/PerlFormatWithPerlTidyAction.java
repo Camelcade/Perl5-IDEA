@@ -25,6 +25,7 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -32,32 +33,35 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlActionUtil;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
 public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
-  public static final String PERL_TIDY_LINUX_NAME = "perltidy";
-  public static final String PERL_TIDY_WINDOWS_NAME = PERL_TIDY_LINUX_NAME + ".bat";
-  public static final String PERL_TIDY_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_TIDY_WINDOWS_NAME : PERL_TIDY_LINUX_NAME;
-
-  public static final String PERL_TIDY_GROUP = PerlBundle.message("perl.action.perl.tidy.notification.group");
+  private static final String PACKAGE_NAME = "Perl::Tidy";
+  private static final String SCRIPT_PATH = "perltidy";
 
   public PerlFormatWithPerlTidyAction() {
     getTemplatePresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
+  }
+
+  @NotNull
+  private String getGroup() {
+    return PerlBundle.message("perl.action.perl.tidy.notification.group");
   }
 
   @Override
@@ -76,14 +80,19 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     return true;
   }
 
-  protected PerlCommandLine getPerlTidyCommandLine(Project project) throws ExecutionException {
+  @Nullable
+  private PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) throws ExecutionException {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
-    PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
-    String executable = localSettings.PERL_TIDY_PATH;
-    if (StringUtil.isEmpty(executable)) {
-      throw new ExecutionException(PerlBundle.message("perl.action.perl.tidy.execution.exception"));
+    VirtualFile perlTidyScript =
+      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_PATH, PACKAGE_NAME));
+    if (perlTidyScript == null) {
+      return null;
     }
-    PerlCommandLine commandLine = new PerlCommandLine(executable, "-st", "-se").withWorkDirectory(project.getBasePath());
+    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlTidyScript);
+    if (commandLine == null) {
+      return null;
+    }
+    commandLine.withParameters("-st", "-se").withWorkDirectory(project.getBasePath());
 
     if (StringUtil.isNotEmpty(sharedSettings.PERL_TIDY_ARGS)) {
       commandLine.addParameters(StringUtil.split(sharedSettings.PERL_TIDY_ARGS, " "));
@@ -119,9 +128,16 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
       new Task.Backgroundable(project, PerlBundle.message("perl.tidy.formatting"), false) {
         @Override
         public void run(@NotNull ProgressIndicator indicator) {
+          indicator.setIndeterminate(true);
           try {
             PerlCommandLine perlTidyCommandLine = getPerlTidyCommandLine(project);
-            final Process process = perlTidyCommandLine.createProcess();
+            if (perlTidyCommandLine == null) {
+              return;
+            }
+            CapturingProcessHandler processHandler = PerlHostData.createProcessHandler(
+              perlTidyCommandLine.withCharset(virtualFile.getCharset()));
+
+            final Process process = processHandler.getProcess();
             final OutputStream outputStream = process.getOutputStream();
             ApplicationManager.getApplication().executeOnPooledThread(() -> {
               try {
@@ -131,7 +147,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               }
               catch (IOException e) {
                 Notifications.Bus.notify(new Notification(
-                  PERL_TIDY_GROUP,
+                  getGroup(),
                   PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
                   e.getMessage(),
                   NotificationType.ERROR
@@ -139,11 +155,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               }
             });
 
-            final CapturingProcessHandler processHandler = new CapturingProcessHandler(process,
-                                                                                       virtualFile.getCharset(),
-                                                                                       perlTidyCommandLine.getCommandLineString());
             ProcessOutput processOutput = processHandler.runProcess();
-
             final List<String> stdoutLines = processOutput.getStdoutLines(false);
             List<String> stderrLines = processOutput.getStderrLines();
 
@@ -155,7 +167,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
             }
             else {
               Notifications.Bus.notify(new Notification(
-                PERL_TIDY_GROUP,
+                getGroup(),
                 PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
                 StringUtil.join(stderrLines, "<br>"),
                 NotificationType.ERROR
@@ -164,7 +176,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
           }
           catch (ExecutionException e) {
             Notifications.Bus.notify(new Notification(
-              PERL_TIDY_GROUP,
+              getGroup(),
               PerlBundle.message("perl.action.perl.tidy.running.error.title"),
               PerlBundle.message("perl.action.perl.tidy.running.error.message", e.getMessage().replaceAll("\\n", "<br/>")),
               NotificationType.ERROR
