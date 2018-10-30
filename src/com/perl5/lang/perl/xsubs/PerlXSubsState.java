@@ -249,6 +249,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
             e.getMessage(),
             NotificationType.ERROR
           );
+          myParserTask = null;
           return;
         }
         final String stdout = processOutput.getStdout();
