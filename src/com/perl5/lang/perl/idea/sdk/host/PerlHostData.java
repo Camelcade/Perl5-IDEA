@@ -126,6 +126,10 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
         }
       }
     });
+
+    PerlRunUtil.addMissingPackageListener(handler, commandLine);
+    ProcessTerminatedListener.attach(handler, commandLine.getEffectiveProject());
+
     return handler;
   }
 
@@ -144,6 +148,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     }
     CapturingProcessHandler processHandler = perlHostData.doCreateProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(processHandler::addProcessListener);
+    PerlRunUtil.addMissingPackageListener(processHandler, commandLine);
     return processHandler.runProcess();
   }
 

@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.process.ProcessTerminatedListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
@@ -120,9 +119,8 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withEnvironment(environment);
     commandLine.withParentEnvironmentType(runConfiguration.isPassParentEnvs() ? CONSOLE : NONE);
 
-    ProcessHandler handler = PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset));
-    PerlRunUtil.addMissingPackageListener(project, perlSdk, handler);
-    ProcessTerminatedListener.attach(handler, project);
+    ProcessHandler handler =
+      PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset).withProject(project));
     return handler;
   }
 

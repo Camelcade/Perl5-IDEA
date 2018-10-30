@@ -20,7 +20,10 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
 import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.process.*;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
@@ -51,11 +54,13 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -85,28 +90,6 @@ public class PerlRunUtil {
       project, PerlProjectManager.getSdk(project, scriptFile), scriptFile, Arrays.asList(perlParameters), Collections.emptyList());
   }
 
-  /**
-   * Creates or appends additionalOpts separated by space to PERL5OPT environment variable
-   *
-   * @param originalMap    original environment
-   * @param additionalOpts options to add
-   * @return patched environment
-   **/
-  @NotNull
-  public static Map<String, String> withPerl5Opts(@NotNull Map<String, String> originalMap, @NotNull String... additionalOpts) {
-    THashMap<String, String> newMap = new THashMap<>(originalMap);
-    String currentOpt = originalMap.get(PERL5OPT);
-
-    ArrayList<String> options = new ArrayList<>();
-    if (StringUtil.isNotEmpty(currentOpt)) {
-      options.add(currentOpt);
-    }
-    options.addAll(Arrays.asList(additionalOpts));
-
-    newMap.put(PERL5OPT, StringUtil.join(options, " "));
-    return newMap;
-  }
-
 
   /**
    * Builds non-patched perl command line (without patching by version manager)
@@ -123,7 +106,7 @@ public class PerlRunUtil {
     if (StringUtil.isEmpty(interpreterPath)) {
       return null;
     }
-    PerlCommandLine commandLine = new PerlCommandLine(perlSdk);
+    PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);
     commandLine.setExePath(FileUtil.toSystemDependentName(interpreterPath));
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
       commandLine.addParameter(PERL_I + libRoot.getCanonicalPath());
@@ -350,33 +333,24 @@ public class PerlRunUtil {
     ExecutionManager.getInstance(project).getContentManager().showRunContent(runExecutor, runContentDescriptor);
     if (processHandler != null) {
       consoleView.attachToProcess(processHandler);
-      PerlRunUtil.addMissingPackageListener(project, perlCommandLine.getEffectiveSdk(), processHandler);
-      ProcessTerminatedListener.attach(processHandler, project);
       processHandler.startNotify();
     }
     consoleView.addCloseAction(runExecutor, runContentDescriptor);
   }
 
-  public static void addMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk, @NotNull ProcessHandler handler) {
-    ProcessListener listener = createMissingPackageListener(project, sdk);
+  public static void addMissingPackageListener(@NotNull ProcessHandler handler,
+                                               @NotNull PerlCommandLine commandLine) {
+    ProcessListener listener = createMissingPackageListener(commandLine.getEffectiveProject(), commandLine.getEffectiveSdk());
     if (listener != null) {
       handler.addProcessListener(listener);
     }
   }
 
   /**
-   * @see PerlRunUtil#createMissingPackageListener(com.intellij.openapi.project.Project, com.intellij.openapi.projectRoots.Sdk)
-   */
-  @Nullable
-  public static ProcessListener createMissingPackageListener(@Nullable Project project) {
-    return createMissingPackageListener(project, null);
-  }
-
-  /**
    * Creates a listener watching process output and showing notifications about missing libraries
    */
   @Nullable
-  public static ProcessListener createMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk) {
+  private static ProcessListener createMissingPackageListener(@Nullable Project project, @Nullable Sdk sdk) {
     if (project == null) {
       return null;
     }
