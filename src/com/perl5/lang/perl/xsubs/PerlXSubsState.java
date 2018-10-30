@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.xsubs;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
@@ -57,6 +56,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -208,100 +208,102 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     if (commandLine == null) {
       return;
     }
+    commandLine.withCharset(CharsetToolkit.UTF8_CHARSET);
 
-    try {
-      LOG.info("Deparsing: " + commandLine.getCommandLineString());
-      final CapturingProcessHandler processHandler =
-        new CapturingProcessHandler(commandLine.createProcess(), CharsetToolkit.UTF8_CHARSET, commandLine.getCommandLineString());
+    LOG.info("Deparsing: " + commandLine.getCommandLineString());
 
-      myParserTask = new Task.Backgroundable(myProject, PerlBundle.message("perl.deparsing.xsubs"), false) {
-        @Override
-        public void run(@NotNull ProgressIndicator indicator) {
-          Map<String, Long> newFilesMap = ReadAction.compute(() -> {
-            if (myProject.isDisposed()) {
-              return null;
-            }
-            final Map<String, Long> result = new THashMap<>();
-            for (VirtualFile virtualFile : getAllXSFiles(myProject)) {
-              if (virtualFile.isValid()) {
-                String filePath = virtualFile.getCanonicalPath();
-                if (filePath != null) {
-                  result.put(filePath, VfsUtilCore.virtualToIoFile(virtualFile)
-                    .lastModified());
-                }
+    myParserTask = new Task.Backgroundable(myProject, PerlBundle.message("perl.deparsing.xsubs"), false) {
+      @Override
+      public void run(@NotNull ProgressIndicator indicator) {
+        indicator.setIndeterminate(true);
+        Map<String, Long> newFilesMap = ReadAction.compute(() -> {
+          if (myProject.isDisposed()) {
+            return null;
+          }
+          final Map<String, Long> result = new THashMap<>();
+          for (VirtualFile virtualFile : getAllXSFiles(myProject)) {
+            if (virtualFile.isValid()) {
+              String filePath = virtualFile.getCanonicalPath();
+              if (filePath != null) {
+                result.put(filePath, VfsUtilCore.virtualToIoFile(virtualFile)
+                  .lastModified());
               }
             }
-            return result;
-          });
-          if (newFilesMap == null) {
-            myParserTask = null;
-            return;
           }
-
-          ProcessOutput processOutput = processHandler.runProcess();
-          final String stdout = processOutput.getStdout();
-          String stderr = processOutput.getStderr();
-          int exitCode = processOutput.getExitCode();
-          LOG.info("Deparsing finished with exit code: " + exitCode +
-                   (StringUtil.isEmpty(stderr) ? "" : ". STDERR:\n" + stderr));
-
-          if (exitCode != 0) {
-            showNotification(
-              PerlBundle.message("perl.deparsing.error.execution"),
-              stderr,
-              NotificationType.ERROR
-            );
-          }
-          else if (!stdout.isEmpty()) {
-            Application application = ApplicationManager.getApplication();
-            application.invokeAndWait(
-              () -> WriteAction.run(() -> {
-                if (myProject.isDisposed()) {
-                  return;
-              }
-                try {
-                  VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
-                  newFile.setWritable(true);
-                  OutputStream outputStream = newFile.getOutputStream(null);
-                  outputStream.write(stdout.getBytes());
-                  outputStream.close();
-                  newFile.setWritable(false);
-                  FileContentUtil.reparseFiles(newFile);
-
-                  myFilesMap = newFilesMap;
-                  isActual = true;
-
-                  showNotification(
-                    PerlBundle.message("perl.deparsing.finished"),
-                    "",
-                    NotificationType.INFORMATION
-                  );
-                }
-                catch (IOException e) {
-                  LOG.warn("Error creating deparsed file", e);
-                  showNotification(
-                    PerlBundle.message("perl.deparsing.error.creating.file"),
-                    e.getMessage(),
-                    NotificationType.ERROR
-                  );
-                }
-                // fixme fix modality state
-              }));
-          }
+          return result;
+        });
+        if (newFilesMap == null) {
           myParserTask = null;
+          return;
         }
-      };
-      myParserTask.queue();
-    }
-    catch (ExecutionException e) {
-      LOG.warn("Error deparsing", e);
 
-      showNotification(
-        PerlBundle.message("perl.deparsing.error.execution"),
-        e.getMessage(),
-        NotificationType.ERROR
-      );
-    }
+        ProcessOutput processOutput = null;
+        try {
+          processOutput = PerlHostData.createProcessHandler(commandLine).runProcess();
+        }
+        catch (ExecutionException e) {
+          LOG.warn("Error deparsing", e);
+
+          showNotification(
+            PerlBundle.message("perl.deparsing.error.execution"),
+            e.getMessage(),
+            NotificationType.ERROR
+          );
+          return;
+        }
+        final String stdout = processOutput.getStdout();
+        String stderr = processOutput.getStderr();
+        int exitCode = processOutput.getExitCode();
+        LOG.info("Deparsing finished with exit code: " + exitCode +
+                 (StringUtil.isEmpty(stderr) ? "" : ". STDERR:\n" + stderr));
+
+        if (exitCode != 0) {
+          showNotification(
+            PerlBundle.message("perl.deparsing.error.execution"),
+            stderr,
+            NotificationType.ERROR
+          );
+        }
+        else if (!stdout.isEmpty()) {
+          Application application = ApplicationManager.getApplication();
+          application.invokeAndWait(
+            () -> WriteAction.run(() -> {
+              if (myProject.isDisposed()) {
+                return;
+              }
+              try {
+                VirtualFile newFile = myProject.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
+                newFile.setWritable(true);
+                OutputStream outputStream = newFile.getOutputStream(null);
+                outputStream.write(stdout.getBytes());
+                outputStream.close();
+                newFile.setWritable(false);
+                FileContentUtil.reparseFiles(newFile);
+
+                myFilesMap = newFilesMap;
+                isActual = true;
+
+                showNotification(
+                  PerlBundle.message("perl.deparsing.finished"),
+                  "",
+                  NotificationType.INFORMATION
+                );
+              }
+              catch (IOException e) {
+                LOG.warn("Error creating deparsed file", e);
+                showNotification(
+                  PerlBundle.message("perl.deparsing.error.creating.file"),
+                  e.getMessage(),
+                  NotificationType.ERROR
+                );
+              }
+              // fixme fix modality state
+            }));
+        }
+        myParserTask = null;
+      }
+    };
+    myParserTask.queue();
   }
 
   private void showNotification(@NotNull String title,

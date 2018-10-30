@@ -52,8 +52,7 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   @NotNull
   @Override
   protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new ColoredProcessHandler(commandLine.withPty(true).createProcess(), commandLine.getCommandLineString(),
-                                     commandLine.getCharset());
+    return new ColoredProcessHandler(commandLine.withPty(true));
   }
 
   @Override

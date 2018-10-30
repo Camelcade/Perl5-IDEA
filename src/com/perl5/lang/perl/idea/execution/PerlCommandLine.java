@@ -21,6 +21,7 @@ import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.ParametersList;
 import com.intellij.execution.configurations.PtyCommandLine;
 import com.intellij.execution.process.ProcessListener;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -263,6 +264,9 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   @Override
   public Process createProcess() throws ExecutionException {
+    if (!myUsePty && ApplicationManager.getApplication().isDispatchThread()) {
+      throw new RuntimeException("Non-console executions should not be performed on EDT");
+    }
     LOG.info("Executing: " + getCommandLineString());
     LOG.info("  environment: " + getEnvironment() + " (+" + getParentEnvironmentType() + ")");
     LOG.info("  host = " + getEffectiveHostData() +

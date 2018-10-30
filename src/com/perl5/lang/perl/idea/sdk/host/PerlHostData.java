@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.*;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -134,9 +133,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   @NotNull
-  public static ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine)
-    throws ExecutionException {
-    assertNotEdt();
+  public static ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return createProcessHandler(commandLine).runProcess();
+  }
+
+  @NotNull
+  public static CapturingProcessHandler createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
@@ -149,7 +151,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     CapturingProcessHandler processHandler = perlHostData.doCreateProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(processHandler::addProcessListener);
     PerlRunUtil.addMissingPackageListener(processHandler, commandLine);
-    return processHandler.runProcess();
+    return processHandler;
   }
 
   /**
@@ -164,12 +166,6 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @Nullable
   public static PerlHostData from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getHostData);
-  }
-
-  protected static void assertNotEdt() {
-    if (ApplicationManager.getApplication().isDispatchThread()) {
-      throw new RuntimeException("Executions should not be performed on EDT");
-    }
   }
 
   @NotNull
