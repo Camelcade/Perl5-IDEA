@@ -16,14 +16,16 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.*;
+import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -34,7 +36,6 @@ import com.intellij.util.FileContentUtil;
 import com.intellij.util.ui.FormBuilder;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
@@ -66,7 +67,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   protected JBList<VirtualFile> myLibsList;
   private CollectionListModel<VirtualFile> myLibsModel;
 
-  private TextFieldWithBrowseButton perlCriticPathInputField;
   private RawCommandLineEditor perlCriticArgsInputField;
   private RawCommandLineEditor perlTidyArgsInputField;
   private JTextField deparseArgumentsTextField;
@@ -159,25 +159,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
     enablePerlSwitchCheckbox = new JCheckBox(PerlBundle.message("perl.config.enable.switch"));
     builder.addComponent(enablePerlSwitchCheckbox);
-
-    perlCriticPathInputField = new TextFieldWithBrowseButton();
-    perlCriticPathInputField.setEditable(false);
-    FileChooserDescriptor perlCriticDescriptor = new FileChooserDescriptor(true, false, false, false, false, false) {
-      @Override
-      public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
-        return super.isFileVisible(file, showHiddenFiles) &&
-               (file.isDirectory() || StringUtil.equals(file.getNameWithoutExtension(), PerlCriticAnnotator.PERL_CRITIC_LINUX_NAME));
-      }
-    };
-
-    //noinspection DialogTitleCapitalization
-    perlCriticPathInputField.addBrowseFolderListener(
-      PerlBundle.message("perl.config.select.file.title"),
-      PerlBundle.message("perl.config.select.critic"),
-      null, // project
-      perlCriticDescriptor
-    );
-    builder.addLabeledComponent(new JLabel(PerlBundle.message("perl.config.path.critic")), perlCriticPathInputField);
     perlCriticArgsInputField = new RawCommandLineEditor();
     builder.addComponent(
       copyDialogCaption(
@@ -284,7 +265,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
            mySharedSettings.PERL_SWITCH_ENABLED != enablePerlSwitchCheckbox.isSelected() ||
            !mySharedSettings.getTargetPerlVersion().equals(myTargetPerlVersionComboBox.getSelectedItem()) ||
            !StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
-           !StringUtil.equals(myLocalSettings.PERL_CRITIC_PATH, perlCriticPathInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
            !mySharedSettings.selfNames.equals(selfNamesModel.getItems());
@@ -312,7 +292,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     enablePerlSwitchCheckbox.setSelected(mySharedSettings.PERL_SWITCH_ENABLED);
 
     perlCriticCheckBox.setSelected(mySharedSettings.PERL_CRITIC_ENABLED);
-    perlCriticPathInputField.setText(myLocalSettings.PERL_CRITIC_PATH);
     perlCriticArgsInputField.setText(mySharedSettings.PERL_CRITIC_ARGS);
 
     perlTidyArgsInputField.setText(mySharedSettings.PERL_TIDY_ARGS);
@@ -334,7 +313,6 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     mySharedSettings.setTargetPerlVersion((PerlVersion)myTargetPerlVersionComboBox.getSelectedItem());
 
     mySharedSettings.PERL_CRITIC_ENABLED = perlCriticCheckBox.isSelected();
-    myLocalSettings.PERL_CRITIC_PATH = perlCriticPathInputField.getText();
     mySharedSettings.PERL_CRITIC_ARGS = perlCriticArgsInputField.getText();
 
     if (mySharedSettings.PERL_SWITCH_ENABLED != enablePerlSwitchCheckbox.isSelected()) {

@@ -22,28 +22,27 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.event.HyperlinkEvent;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,28 +51,30 @@ import java.util.List;
  * Created by hurricup on 16.04.2016.
  */
 public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCriticErrorDescriptor>> {
-  public static final String PERL_CRITIC_LINUX_NAME = "perlcritic";
-  public static final String PERL_CRITIC_WINDOWS_NAME = PERL_CRITIC_LINUX_NAME + ".bat";
-  public static final String PERL_CRITIC_OS_DEPENDENT_NAME = SystemInfo.isWindows ? PERL_CRITIC_WINDOWS_NAME : PERL_CRITIC_LINUX_NAME;
-
+  private static final String SCRIPT_NAME = "perlcritic";
+  private static final String PACKAGE_NAME = "Perl::Critic";
+  private static final Logger LOG = Logger.getInstance(PerlCriticAnnotator.class);
 
   @Nullable
   @Override
   public PerlFile collectInformation(@NotNull PsiFile file) {
     return file instanceof PerlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED
-           ? (PerlFile)file
-           : null;
+           ? (PerlFile)file : null;
   }
 
-  protected PerlCommandLine getPerlCriticExecutable(Project project) throws ExecutionException {
+  @Nullable
+  protected PerlCommandLine getPerlCriticCommandLine(Project project) throws ExecutionException {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
-    PerlLocalSettings localSettings = PerlLocalSettings.getInstance(project);
-    String executable = localSettings.PERL_CRITIC_PATH;
-
-    if (StringUtil.isEmpty(executable)) {
-      throw new ExecutionException("Path to Perl::Critic executable must be configured in perl settings");
+    VirtualFile perlCriticScript =
+      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
+    if (perlCriticScript == null) {
+      return null;
     }
-    PerlCommandLine commandLine = new PerlCommandLine(executable).withWorkDirectory(project.getBasePath());
+    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(project, perlCriticScript);
+    if (commandLine == null) {
+      return null;
+    }
+    commandLine.withWorkDirectory(project.getBasePath());
 
     if (StringUtil.isNotEmpty(sharedSettings.PERL_CRITIC_ARGS)) {
       commandLine.addParameters(StringUtil.split(sharedSettings.PERL_CRITIC_ARGS, " "));
@@ -90,24 +91,31 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return null;
     }
 
+    VirtualFile virtualFile = PsiUtilCore.getVirtualFile(sourcePsiFile);
+    if (virtualFile == null) {
+      return null;
+    }
+
     byte[] sourceBytes = ReadAction.compute(sourcePsiFile::getPerlContentInBytes);
     if (sourceBytes == null) {
       return null;
     }
 
-
     try {
-      PerlCommandLine criticCommandLine = getPerlCriticExecutable(sourcePsiFile.getProject());
-      final Process process = criticCommandLine.createProcess();
+      PerlCommandLine criticCommandLine = getPerlCriticCommandLine(sourcePsiFile.getProject());
+      if (criticCommandLine == null) {
+        PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
+        return null;
+      }
+
+      CapturingProcessHandler processHandler = PerlHostData.createProcessHandler(
+        criticCommandLine.withCharset(virtualFile.getCharset())
+      );
+      final Process process = processHandler.getProcess();
 
       OutputStream outputStream = process.getOutputStream();
       outputStream.write(sourceBytes);
       outputStream.close();
-
-      VirtualFile virtualFile = PsiUtilCore.getVirtualFile(sourcePsiFile);
-      final CapturingProcessHandler processHandler = new CapturingProcessHandler(process,
-                                                                                 virtualFile == null ? null : virtualFile.getCharset(),
-                                                                                 criticCommandLine.getCommandLineString());
 
       List<PerlCriticErrorDescriptor> errors = new ArrayList<>();
       PerlCriticErrorDescriptor lastDescriptor = null;
@@ -120,34 +128,21 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
           lastDescriptor.append(" " + output);
         }
         else if (!StringUtil.equals(output, "source OK")) {
-          // fixme we could make some popup here
-          System.err.println("Could not parse line: " + output);
+          LOG.warn("Could not parse line: " + output);
         }
       }
       return errors;
     }
-    catch (ExecutionException e) {
+    catch (Exception e) {
+      LOG.error("Error running perlcritic", e);
+
       Notifications.Bus.notify(new Notification(
-        "PerlCritic error",
-        "Perl::Critic failed to start and has been disabled",
-        "<ul style=\"padding-left:10px;margin-left:0px;\">" +
-        "<li>Make sure that Perl::Critic module is installed</li>" +
-        "<li>Configure path to perlcritic executable in <a href=\"configure\">Perl5 settings</a> and re-enable it</li>" +
-        "</ul>"
-        ,
-        NotificationType.ERROR,
-        new NotificationListener.Adapter() {
-          @Override
-          protected void hyperlinkActivated(@NotNull Notification notification, @NotNull HyperlinkEvent e) {
-            Perl5SettingsConfigurable.open(sourcePsiFile);
-            notification.expire();
-          }
-        }
+        PerlBundle.message("perl.critic.notification.group"),
+        PerlBundle.message("perl.critic.execution.error.title"),
+        PerlBundle.message("perl.critic.execution.error.message", e.getMessage()),
+        NotificationType.ERROR
       ));
       PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
-    }
-    catch (Exception e) {
-      e.printStackTrace();
     }
     return null;
   }
@@ -177,7 +172,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
             warningRange = targetElement.getTextRange();
           }
           else {
-            System.err.println("Error creating annotation for " + descriptor);
+            LOG.warn("Error creating annotation for " + descriptor);
           }
         }
 
