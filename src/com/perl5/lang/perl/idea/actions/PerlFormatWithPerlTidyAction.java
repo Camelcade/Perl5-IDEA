@@ -53,7 +53,7 @@ import java.util.List;
 
 public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private static final String PACKAGE_NAME = "Perl::Tidy";
-  private static final String SCRIPT_PATH = "perltidy";
+  private static final String SCRIPT_NAME = "perltidy";
 
   public PerlFormatWithPerlTidyAction() {
     getTemplatePresentation().setText(PerlBundle.message("perl.action.reformat.perl.tidy"));
@@ -84,7 +84,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) throws ExecutionException {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlTidyScript =
-      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_PATH, PACKAGE_NAME));
+      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
     if (perlTidyScript == null) {
       return null;
     }
