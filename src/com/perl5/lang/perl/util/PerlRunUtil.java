@@ -44,6 +44,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.adapters.CpanAdapter;
@@ -57,10 +58,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -171,7 +169,33 @@ public class PerlRunUtil {
     return null;
   }
 
-  public static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull String libraryName) {
+  private static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull Collection<String> packageNames) {
+    if (packageNames.isEmpty()) {
+      return;
+    }
+    if (packageNames.size() == 1) {
+      showMissingLibraryNotification(project, sdk, packageNames.iterator().next());
+      return;
+    }
+
+    Notification notification = new Notification(
+      PerlBundle.message("perl.missing.library.notification"),
+      PerlBundle.message("perl.missing.library.notification.title", packageNames.size()),
+      StringUtil.join(ContainerUtil.sorted(packageNames), ", "),
+      NotificationType.ERROR
+    );
+
+    AnAction installCpanmAction =
+      ReadAction.compute(() -> CpanminusAdapter.createInstallAction(sdk, project, packageNames, notification::expire));
+    if (installCpanmAction != null) {
+      notification.addAction(installCpanmAction);
+    }
+    notification.addAction(CpanAdapter.createInstallAction(sdk, project, packageNames, notification::expire));
+
+    Notifications.Bus.notify(notification, project);
+  }
+
+  private static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull String libraryName) {
     Notification notification = new Notification(
       PerlBundle.message("perl.missing.library.notification"),
       PerlBundle.message("perl.missing.library.notification.title", libraryName),
@@ -180,11 +204,12 @@ public class PerlRunUtil {
     );
 
     AnAction installCpanmAction =
-      ReadAction.compute(() -> CpanminusAdapter.createInstallAction(sdk, project, libraryName, notification::expire));
+      ReadAction
+        .compute(() -> CpanminusAdapter.createInstallAction(sdk, project, Collections.singletonList(libraryName), notification::expire));
     if (installCpanmAction != null) {
       notification.addAction(installCpanmAction);
     }
-    notification.addAction(CpanAdapter.createInstallAction(sdk, project, libraryName, notification::expire));
+    notification.addAction(CpanAdapter.createInstallAction(sdk, project, Collections.singletonList(libraryName), notification::expire));
 
     Notifications.Bus.notify(notification, project);
   }
@@ -364,6 +389,7 @@ public class PerlRunUtil {
     }
 
     Sdk finalSdk = sdk;
+    Set<String> missingPackages = ContainerUtil.newHashSet();
 
     return new ProcessAdapter() {
       @Override
@@ -382,7 +408,7 @@ public class PerlRunUtil {
         if (endOffset == -1) {
           return;
         }
-        showMissingLibraryNotification(project, finalSdk, text.substring(startOffset, endOffset));
+        processPackage(text.substring(startOffset, endOffset));
       }
 
       private void checkLegacyPrefix(@NotNull String text) {
@@ -395,7 +421,13 @@ public class PerlRunUtil {
         if (endOffset == -1) {
           return;
         }
-        showMissingLibraryNotification(project, finalSdk, PerlPackageUtil.getPackageNameByPath(text.substring(startOffset, endOffset)));
+        processPackage(PerlPackageUtil.getPackageNameByPath(text.substring(startOffset, endOffset)));
+      }
+
+      private void processPackage(@Nullable String packageName) {
+        if (StringUtil.isNotEmpty(packageName) && missingPackages.add(packageName)) {
+          showMissingLibraryNotification(project, finalSdk, missingPackages);
+        }
       }
     };
   }

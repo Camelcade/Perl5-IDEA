@@ -37,10 +37,7 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class PackageManagerAdapter {
@@ -108,8 +105,12 @@ public abstract class PackageManagerAdapter {
     );
   }
 
+  public final void install(@NotNull Collection<String> packageNames) {
+    QUEUE.queue(new InstallUpdate(this, packageNames));
+  }
+
   public final void install(@NotNull String packageName) {
-    QUEUE.queue(new InstallUpdate(this, packageName));
+    install(Collections.singletonList(packageName));
   }
 
   @Override
@@ -153,10 +154,10 @@ public abstract class PackageManagerAdapter {
     @NotNull
     private final Set<String> myPackages = ContainerUtil.newHashSet();
 
-    public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull String packageName) {
-      super(Pair.create(adapter, packageName));
+    public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull Collection<String> packageNames) {
+      super(Pair.create(adapter, packageNames));
       myAdapter = adapter;
-      myPackages.add(packageName);
+      myPackages.addAll(packageNames);
     }
 
     @Override

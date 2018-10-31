@@ -92,13 +92,13 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   @Nullable
   public static AnAction createInstallAction(@NotNull Sdk sdk,
                                              @NotNull Project project,
-                                             @NotNull String libraryName,
+                                             @NotNull Collection<String> libraryNames,
                                              @Nullable Runnable actionCallback) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
     return !isAvailable(sdk) ? null : new DumbAwareAction(PerlBundle.message("perl.quickfix.install.family", SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        new CpanminusAdapter(sdk, project).install(libraryName);
+        new CpanminusAdapter(sdk, project).install(libraryNames);
         if (actionCallback != null) {
           actionCallback.run();
         }

@@ -25,6 +25,8 @@ import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+
 public class CpanAdapter extends PackageManagerAdapter {
   private static final String PACKAGE_NAME = "CPAN";
   public static final String SCRIPT_NAME = "cpan";
@@ -54,12 +56,12 @@ public class CpanAdapter extends PackageManagerAdapter {
   @NotNull
   public static AnAction createInstallAction(@NotNull Sdk sdk,
                                              @NotNull Project project,
-                                             @NotNull String libraryName,
+                                             @NotNull Collection<String> libraryNames,
                                              @Nullable Runnable actionCallback) {
     return new DumbAwareAction(PerlBundle.message("perl.quickfix.install.family", SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        new CpanAdapter(sdk, project).install(libraryName);
+        new CpanAdapter(sdk, project).install(libraryNames);
         if (actionCallback != null) {
           actionCallback.run();
         }
