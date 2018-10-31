@@ -9,44 +9,30 @@
   <li>Alternative sdk configuration re-worked and allows to choose one of the registered interpreters (NB: old configurations may break if
     used alternative paths), <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1423">#1423</a></li>
   <li>Missing library notification now have actions to install a missing package with cpan or cpanminus.</li>
-  <li><code>Perl::Tidy</code> script is now discovered automatically in the selected interpreter and manual configuration is no longer
-    possible,
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1809">#1809</a>.
-  </li>
-  <li><code>Perl::Critic</code> script is now discovered automatically in the selected interpreter and manual configuration is no longer
-    possible,
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1810">#1810</a>.
+  <li><code>perltidy</code> and <code>perlcritic</code> scripts are now discovered automatically in the selected interpreter and manual
+    configuration is no longer
+    possible, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1809">#1809</a> &amp; <a
+        href="https://github.com/Camelcade/Perl5-IDEA/issues/1810">#1810</a>.
   </li>
   <li>IDE listens process output for a missing package warnings and suggests to install them.</li>
   <li><code>plenv</code> version manager is now supported, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1383">@aptituz</a>
-    <ul>
-      <li>Action to install a Perl5 available in <code>Tools: Perl</code> section. Available if <code>plenv</code> is selected as a current
-        interpreter.
-      </li>
-    </ul>
   </li>
-  <li><code>berrybrew</code> version manager is now supported, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1643">#1643</a>
-    <ul>
-      <li>Action to install a Perl5 available in <code>Tools: Perl</code> section. Available if <code>berrybrew</code> is selected as a
-        current
-        interpreter.
-      </li>
-    </ul>
-  </li>
+  <li><code>berrybrew</code> version manager is now supported, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1643">#1643</a></li>
   <li><code>perlbrew</code> version manager is now supported, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/320">#320</a>
     <ul>
       <li>Action to create a library available in <code>Tools: Perl</code> section. Available if <code>perlbrew</code> is selected as a
         current
         interpreter.
       </li>
-      <li>Action to install a Perl5 available in <code>Tools: Perl</code> section. Available if <code>perlbrew</code> is selected as a
-        current
-        interpreter.
-      </li>
     </ul>
   </li>
+  <li>Action to install a Perl5 for the version manager is available in <code>Tools: Perl</code> section. Available if vm-based perl is
+    selected as
+    current interpreter.
+  </li>
+
   <li>There is now an action for installing <code>App::cpanminus</code> in <code>Tools: Perl</code> section</li>
-  <li>Missing package file inspection now allows to install a package using cpan/cpanminus, by <a
+  <li>Missing package file inspection suggests a quickfix to install a package using cpan/cpanminus, by <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1775">@yxliang01</a></li>
 </ul>
 <p>Fixes:</p>
