@@ -94,7 +94,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
-import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
@@ -165,8 +164,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   @Override
   protected void tearDown() throws Exception {
     try {
-      PerlStringCompletionUtil.HASH_INDEXES_CACHE.clear();
-      PerlStringCompletionUtil.HEREDOC_OPENERS_CACHE.clear();
       PerlInjectionMarkersService.getInstance(getProject()).loadState(myInjectionMarkersService);
       Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
       PerlSharedSettings.getInstance(getProject()).loadState(mySharedSettings);

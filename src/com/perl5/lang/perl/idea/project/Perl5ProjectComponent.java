@@ -24,7 +24,6 @@ import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.util.FileContentUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.completion.util.PerlStringCompletionUtil;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import com.perl5.lang.perl.util.PerlPluginUtil;
@@ -36,7 +35,6 @@ import org.jetbrains.annotations.NotNull;
 public class Perl5ProjectComponent implements ProjectComponent {
   private Project myProject;
   private VirtualFileListener myChangeListener;
-  //	private PsiTreeChangeListener myPsiTreeChangeListener;
 
   public Perl5ProjectComponent(Project project) {
     myProject = project;
@@ -45,20 +43,10 @@ public class Perl5ProjectComponent implements ProjectComponent {
 
   public void initComponent() {
     // TODO: insert component initialization logic here
-/*
-                if (myChangeListener == null)
-		{
-			myChangeListener = new PerlVirtualFileListener(myProject);
-			VirtualFileManager.getInstance().addVirtualFileListener(myChangeListener);
-		}
-*/
   }
 
   public void disposeComponent() {
     // TODO: insert component disposal logic here
-    //		System.out.println("Unregistered listener");
-    //		VirtualFileManager.getInstance().removeVirtualFileListener(myChangeListener);
-
   }
 
   @NotNull
@@ -67,9 +55,6 @@ public class Perl5ProjectComponent implements ProjectComponent {
   }
 
   public void projectOpened() {
-    PerlStringCompletionUtil.HASH_INDEXES_CACHE.clear();
-    PerlStringCompletionUtil.HEREDOC_OPENERS_CACHE.clear();
-
     PerlApplicationSettings settings = PerlApplicationSettings.getInstance();
     if (settings.shouldShowAnnounce()) {
       StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
@@ -97,16 +82,9 @@ public class Perl5ProjectComponent implements ProjectComponent {
       PerlNamesCache.getInstance(myProject).forceCacheUpdate();
       ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles);
     });
-
-    // called when project is opened
-    //		myPsiTreeChangeListener = new ClassAccessorPsiTreeChangeListener();
-    //		PsiManager.getInstance(myProject).addPsiTreeChangeListener(myPsiTreeChangeListener);
   }
 
   public void projectClosed() {
     PerlRemoteFileSystem.getInstance().dropFiles();
-
-    // called when project is being closed
-    //		PsiManager.getInstance(myProject).removePsiTreeChangeListener(myPsiTreeChangeListener);
   }
 }
