@@ -27,11 +27,11 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -39,7 +39,6 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlActionUtil;
@@ -52,6 +51,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
+  private static final Logger LOG = Logger.getInstance(PerlFormatWithPerlTidyAction.class);
   private static final String PACKAGE_NAME = "Perl::Tidy";
   private static final String SCRIPT_NAME = "perltidy";
 
@@ -146,6 +146,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
                 outputStream.close();
               }
               catch (IOException e) {
+                LOG.error(e);
                 Notifications.Bus.notify(new Notification(
                   getGroup(),
                   PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
@@ -166,6 +167,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               });
             }
             else {
+              LOG.error("Non-empty stderr: ", processOutput.getStderr());
               Notifications.Bus.notify(new Notification(
                 getGroup(),
                 PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
@@ -175,18 +177,13 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
             }
           }
           catch (ExecutionException e) {
+            LOG.error(e);
             Notifications.Bus.notify(new Notification(
               getGroup(),
               PerlBundle.message("perl.action.perl.tidy.running.error.title"),
-              PerlBundle.message("perl.action.perl.tidy.running.error.message", e.getMessage().replaceAll("\\n", "<br/>")),
+              e.getMessage(),
               NotificationType.ERROR
-            ).addAction(new DumbAwareAction(PerlBundle.message("perl.configure")) {
-              @Override
-              public void actionPerformed(@NotNull AnActionEvent e) {
-                Notification.get(e).expire();
-                Perl5SettingsConfigurable.open(file);
-              }
-            }));
+            ));
           }
         }
       }.queue();
