@@ -29,7 +29,7 @@ public class PerlQuickFixesTest extends PerlLightTestCase {
   public void testUnresolvedPackageFileInspection() {
     initWithFileSmartWithoutErrors();
     myFixture.enableInspections(PerlUnresolvedPackageFileInspection.class);
-    getSingleIntention("Install Foo::Bar24 using cpan");
+    getSingleIntention("Install Foo::Bar24 with cpan");
   }
 
   public void testFancyMethodCall() {
