@@ -16,6 +16,7 @@
 package com.perl5.errorHandler;
 
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ import java.util.*;
  */
 
 public class CookieManager {
-
+  private static final Logger LOG = Logger.getInstance(CookieManager.class);
   private static final String SET_COOKIE = "Set-Cookie";
   private static final String COOKIE_VALUE_DELIMITER = ";";
   private static final String PATH = "path";
@@ -196,7 +197,7 @@ public class CookieManager {
       return (now.compareTo(dateFormat.parse(cookieExpires))) <= 0;
     }
     catch (java.text.ParseException pe) {
-      pe.printStackTrace();
+      LOG.error(pe);
       return false;
     }
   }

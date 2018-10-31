@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.run.debugger.values;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -51,6 +52,7 @@ import java.lang.reflect.Method;
  * Created by hurricup on 08.05.2016.
  */
 public class PerlXNamedValue extends XNamedValue {
+  private static final Logger LOG = Logger.getInstance(PerlXNamedValue.class);
   private static Method mySourcePositionMethod;
   private static Method myLegacyMethod;
 
@@ -260,11 +262,8 @@ public class PerlXNamedValue extends XNamedValue {
               found[0] = false;
             }
           }
-          catch (InvocationTargetException e) {
-            e.printStackTrace();
-          }
-          catch (IllegalAccessException e) {
-            e.printStackTrace();
+          catch (InvocationTargetException | IllegalAccessException e) {
+            LOG.error(e);
           }
         }
       };

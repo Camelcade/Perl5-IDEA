@@ -42,6 +42,7 @@ import java.lang.reflect.Modifier;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -211,10 +212,10 @@ public class PerlDebugThread extends Thread {
       }
 
 
-      myOutputStream.write(string.getBytes(CharsetToolkit.UTF8));
+      myOutputStream.write(string.getBytes(StandardCharsets.UTF_8));
     }
     catch (IOException e) {
-      e.printStackTrace();
+      LOG.error(e);
     }
     finally {
       lock.unlock();

@@ -262,7 +262,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       }
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOGGER.error(e);
     }
 
     return response.toString();
