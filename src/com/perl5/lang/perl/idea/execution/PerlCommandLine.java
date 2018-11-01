@@ -274,8 +274,11 @@ public class PerlCommandLine extends GeneralCommandLine {
              "; pty = " + isUsePty() +
              "; charset: " + getCharset());
     return myUsePty ?
-           new PtyCommandLine(this).withInitialColumns(PtyCommandLine.MAX_COLUMNS).withEnvironment("TERM", "xterm-256color").createProcess()
-                    :
+           new PtyCommandLine(this)
+             .withConsoleMode(false)
+             .withInitialColumns(PtyCommandLine.MAX_COLUMNS)
+             .withEnvironment("TERM", "xterm-256color")
+             .createProcess() :
            super.createProcess();
   }
 }
