@@ -16,15 +16,22 @@
 
 package com.perl5.lang.perl.adapters;
 
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collection;
 
 public class CpanAdapter extends PackageManagerAdapter {
@@ -64,6 +71,26 @@ public class CpanAdapter extends PackageManagerAdapter {
         new CpanAdapter(sdk, project).install(libraryNames);
         if (actionCallback != null) {
           actionCallback.run();
+        }
+      }
+    };
+  }
+
+  @Nullable
+  @Override
+  protected ProcessListener getAdditionalListener() {
+    return new ProcessAdapter() {
+      @Override
+      public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+        if (StringUtil.startsWith(event.getText(), "Would you like to configure as much as possible automatically")) {
+          try {
+            OutputStream processInput = event.getProcessHandler().getProcessInput();
+            if (processInput != null) {
+              processInput.write(new byte[]{13, 13, 13, 13});
+            }
+          }
+          catch (IOException ignore) {
+          }
         }
       }
     };

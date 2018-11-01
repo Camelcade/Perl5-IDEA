@@ -18,6 +18,7 @@ package com.perl5.lang.perl.adapters;
 
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.project.Project;
@@ -36,6 +37,7 @@ import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -102,7 +104,13 @@ public abstract class PackageManagerAdapter {
             VfsUtil.markDirtyAndRefresh(true, true, true, dirsToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
           }
         })
+        .withProcessListener(getAdditionalListener())
     );
+  }
+
+  @Nullable
+  protected ProcessListener getAdditionalListener() {
+    return null;
   }
 
   public final void install(@NotNull Collection<String> packageNames) {
