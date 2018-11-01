@@ -79,7 +79,7 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
       return;
     }
 
-    final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, false, false, false, false, false) {
+    final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, SystemInfo.isMac, false, false, false, false) {
       @Override
       public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
         return super.isFileVisible(file, showHiddenFiles) && (file.isDirectory() || nameValidator.test(file.getName()));
