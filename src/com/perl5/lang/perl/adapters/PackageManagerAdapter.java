@@ -82,7 +82,7 @@ public abstract class PackageManagerAdapter {
       return;
     }
     VirtualFile script = PerlRunUtil.findLibraryScriptWithNotification(
-      getSdk(), getProject(), getManagerScriptName(), getManagerScriptName());
+      getSdk(), getProject(), getManagerScriptName(), getManagerPackageName());
     if (script == null) {
       return;
     }
