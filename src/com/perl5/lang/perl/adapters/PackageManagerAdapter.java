@@ -20,12 +20,9 @@ import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.update.MergingUpdateQueue;
@@ -39,8 +36,10 @@ import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public abstract class PackageManagerAdapter {
   private static final MergingUpdateQueue QUEUE =
@@ -98,10 +97,7 @@ public abstract class PackageManagerAdapter {
           public void processTerminated(@NotNull ProcessEvent event) {
             PerlSdkType.INSTANCE.setupSdkPaths(mySdk);
             ApplicationManager.getApplication().invokeAndWait(() -> PerlProjectManager.getInstance(myProject).setProjectSdk(mySdk));
-            List<VirtualFile> dirsToRefresh =
-              ReadAction.compute(() -> PerlRunUtil.getBinDirectories(mySdk).distinct().collect(Collectors.toList()));
-            dirsToRefresh.addAll(Arrays.asList(mySdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
-            VfsUtil.markDirtyAndRefresh(true, true, true, dirsToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
+            PerlRunUtil.refreshSdkDirs(mySdk, myProject);
           }
         })
         .withProcessListener(getAdditionalListener())

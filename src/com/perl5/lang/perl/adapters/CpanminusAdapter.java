@@ -22,8 +22,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.OrderRootType;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -35,9 +33,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class CpanminusAdapter extends PackageManagerAdapter {
-  private static final String PACKAGE_NAME = "App::cpanminus";
+  public static final String PACKAGE_NAME = "App::cpanminus";
   private static final String PACKAGE_PATH = PerlPackageUtil.getPackagePathByName(PACKAGE_NAME);
-  private static final String SCRIPT_NAME = "cpanm";
+  public static final String SCRIPT_NAME = "cpanm";
 
   public CpanminusAdapter(@NotNull Sdk sdk, @NotNull Project project) {
     super(sdk, project);
@@ -81,12 +79,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
    */
   public static boolean isAvailable(@NotNull Sdk sdk) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    for (VirtualFile root : sdk.getRootProvider().getFiles(OrderRootType.CLASSES)) {
-      if (root.findFileByRelativePath(PACKAGE_PATH) != null) {
-        return PerlRunUtil.findScript(sdk, SCRIPT_NAME) != null;
-      }
-    }
-    return false;
+    return PerlRunUtil.findScript(sdk, SCRIPT_NAME) != null;
   }
 
   @Nullable

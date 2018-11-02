@@ -59,7 +59,7 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
       new PerlCommandLine(getVersionManagerPath(), BERRYBREW_INSTALL, distributionId)
         .withParameters(params)
         .withProject(project)
-        .withConsoleTitle(PerlBundle.message("perl.vm.installing.perl", distributionId))
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing", distributionId))
         .withConsoleIcon(PerlIcons.STRAWBERRY_ICON)
         .withVersionManagerData(PerlVersionManagerData.getDefault())
         .withProcessListener(processListener)

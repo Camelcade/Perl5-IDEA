@@ -17,12 +17,18 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.nio.file.Paths;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.*;
 
@@ -38,6 +44,11 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
     super(versionManagerPath, distributionId, handler);
   }
 
+  @Override
+  public void addBinDirs(@NotNull List<VirtualFile> dirs) {
+    super.addBinDirs(dirs);
+    ContainerUtil.addIfNotNull(dirs, VfsUtil.findFile(Paths.get(getVersionManagerPath()).getParent(), false));
+  }
 
   /**
    * @see PerlBrewAdapter#execWith(java.lang.String, java.lang.String...)

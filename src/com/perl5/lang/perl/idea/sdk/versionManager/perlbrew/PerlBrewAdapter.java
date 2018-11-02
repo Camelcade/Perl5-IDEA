@@ -16,18 +16,23 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +51,8 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_WITH = "--with";
   static final String PERLBREW_QUIET = "-q";
   static final String PERLBREW_VERBOSE = "--verbose";
+  static final String PERLBREW_INSTALL_PATCHPERL = "install-patchperl";
+  static final String PERLBREW_INSTALL_CPANM = "install-cpanm";
 
   public PerlBrewAdapter(@NotNull String versionManagerPath, @NotNull PerlHostData hostData) {
     super(versionManagerPath, hostData);
@@ -86,15 +93,35 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
                           @NotNull String distributionId,
                           @NotNull List<String> params,
                           @Nullable ProcessListener processListener) {
-    PerlRunUtil.runInConsole(
+    runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), PERLBREW_INSTALL, PERLBREW_VERBOSE, distributionId)
         .withParameters(params)
         .withProject(project)
-        .withConsoleTitle(PerlBundle.message("perl.vm.installing.perl", distributionId))
+        .withProcessListener(processListener),
+      distributionId
+    );
+  }
+
+  public void runInstallInConsole(@NotNull PerlCommandLine commandLine, @NotNull String entityName) {
+    PerlRunUtil.runInConsole(
+      commandLine
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing", entityName))
         .withConsoleIcon(PerlIcons.PERLBREW_ICON)
         .withVersionManagerData(PerlVersionManagerData.getDefault())
-        .withProcessListener(processListener)
     );
+  }
+
+  public void runInstallInConsole(@NotNull Project project, @NotNull String packageName, @NotNull String command) {
+    runInstallInConsole(
+      new PerlCommandLine(getVersionManagerPath(), command, PERLBREW_VERBOSE)
+        .withProject(project)
+        .withProcessListener(new ProcessAdapter() {
+          @Override
+          public void processTerminated(@NotNull ProcessEvent event) {
+            PerlRunUtil.refreshSdkDirs(project);
+          }
+        }),
+      packageName);
   }
 
   @Nullable
@@ -111,5 +138,18 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
   @Override
   protected String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.perlbrew.notification.title");
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public static PerlBrewAdapter create(@Nullable Project project) {
+    return create(PerlProjectManager.getSdk(project));
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public static PerlBrewAdapter create(@Nullable Sdk perlSdk) {
+    PerlBrewData perlBrewData = PerlBrewData.from(perlSdk);
+    return perlBrewData == null ? null : new PerlBrewAdapter(perlBrewData.getVersionManagerPath(), PerlHostData.notNullFrom(perlSdk));
   }
 }

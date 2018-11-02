@@ -14,49 +14,42 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.adapters.CpanminusAdapter;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlInstallCpanmAction extends PerlActionBase {
-  public PerlInstallCpanmAction() {
+public abstract class InstallPerlBrewPackageAction extends PerlBrewActionBase {
+  private final String myPackageName;
+
+  protected InstallPerlBrewPackageAction(@NotNull String packageName) {
+    myPackageName = packageName;
     Presentation templatePresentation = getTemplatePresentation();
-    templatePresentation.setText(PerlBundle.message("perl.action.install.cpanm"));
+    templatePresentation.setText(PerlBundle.message("perl.vm.perlbrew.install.action", packageName));
   }
+
+  @NotNull
+  protected abstract String getScriptName();
+
+  @NotNull
+  protected abstract String getInstallCommand();
 
   @Override
   protected boolean isEnabled(AnActionEvent event) {
-    if (!super.isEnabled(event)) {
-      return false;
-    }
-    Project project = event.getProject();
-    if (project == null) {
-      return false;
-    }
-    Sdk perlSdk = PerlProjectManager.getSdk(project);
-    if (perlSdk == null) {
-      return false;
-    }
-    return !CpanminusAdapter.isAvailable(perlSdk);
+    return super.isEnabled(event) && PerlRunUtil.findScript(getEventProject(event), getScriptName()) == null;
   }
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    Project project = e.getProject();
-    if (project == null) {
+    Project project = getEventProject(e);
+    PerlBrewAdapter perlBrewAdapter = PerlBrewAdapter.create(project);
+    if (perlBrewAdapter == null) {
       return;
     }
-    Sdk perlSdk = PerlProjectManager.getSdk(project);
-    if (perlSdk == null) {
-      return;
-    }
-    CpanminusAdapter.install(project, perlSdk);
+    perlBrewAdapter.runInstallInConsole(project, myPackageName, getInstallCommand());
   }
 }

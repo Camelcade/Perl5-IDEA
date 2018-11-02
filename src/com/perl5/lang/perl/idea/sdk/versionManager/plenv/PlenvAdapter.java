@@ -61,7 +61,7 @@ class PlenvAdapter extends PerlVersionManagerAdapter {
       new PerlCommandLine(getVersionManagerPath(), PLENV_INSTALL, distributionId)
         .withParameters(params)
         .withProject(project)
-        .withConsoleTitle(PerlBundle.message("perl.vm.installing.perl", distributionId))
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing", distributionId))
         .withConsoleIcon(PerlIcons.PLENV_ICON)
         .withVersionManagerData(PerlVersionManagerData.getDefault())
         .withProcessListener(processListener)

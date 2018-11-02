@@ -32,7 +32,6 @@ public abstract class PerlActionBase extends AnAction {
     return PerlProjectManager.isPerlEnabled(event.getDataContext());
   }
 
-
   @Nullable
   protected Sdk getPerlSdk(AnActionEvent event) {
     return PerlProjectManager.getSdk(event.getProject());

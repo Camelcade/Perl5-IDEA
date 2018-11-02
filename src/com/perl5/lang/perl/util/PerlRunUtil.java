@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.Executor;
@@ -42,6 +43,7 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
@@ -61,6 +63,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -250,7 +253,10 @@ public class PerlRunUtil {
    * @return list of perl bin directories where script from library may be located
    **/
   @NotNull
-  public static Stream<VirtualFile> getBinDirectories(@NotNull Sdk sdk) {
+  public static Stream<VirtualFile> getBinDirectories(@Nullable Sdk sdk) {
+    if (sdk == null) {
+      return Stream.empty();
+    }
     ApplicationManager.getApplication().assertReadAccessAllowed();
     SdkTypeId sdkType = sdk.getSdkType();
     if (!(sdkType instanceof PerlSdkType)) {
@@ -258,6 +264,7 @@ public class PerlRunUtil {
     }
     List<VirtualFile> files = ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin);
     files.add(VfsUtil.findFile(Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent(), false));
+    PerlVersionManagerData.notNullFrom(sdk).addBinDirs(files);
 
     return files.stream().filter(Objects::nonNull).distinct();
   }
@@ -447,5 +454,39 @@ public class PerlRunUtil {
     if (indicator != null) {
       indicator.setText2(string);
     }
+  }
+
+  public static void refreshSdkDirs(@Nullable Project project) {
+    if (project == null) {
+      return;
+    }
+    refreshSdkDirs(PerlProjectManager.getSdk(project), project);
+  }
+
+  /**
+   * Asynchronously refreshes directories of sdk. Need to be invoked after installations
+   */
+  public static void refreshSdkDirs(@Nullable Sdk sdk, @Nullable Project project) {
+    if (sdk == null) {
+      return;
+    }
+    List<VirtualFile> dirsToRefresh =
+      ReadAction.compute(() -> getBinDirectories(sdk).distinct().collect(Collectors.toList()));
+    dirsToRefresh.addAll(Arrays.asList(sdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
+
+    /**
+     * copy-paste from {@link VfsUtil#markDirtyAndRefresh(boolean, boolean, boolean, com.intellij.openapi.vfs.VirtualFile...)}
+     * for a callback
+     */
+    //
+    List<VirtualFile> list = VfsUtil.markDirty(true, true, dirsToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
+    if (list.isEmpty()) {
+      return;
+    }
+    LocalFileSystem.getInstance().refreshFiles(list, true, true, () -> {
+      if (project != null) {
+        DaemonCodeAnalyzer.getInstance(project).restart();
+      }
+    });
   }
 }

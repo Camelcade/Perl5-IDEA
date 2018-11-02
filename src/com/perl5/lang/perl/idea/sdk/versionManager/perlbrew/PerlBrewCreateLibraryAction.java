@@ -29,21 +29,15 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlBrewCreateLibraryAction extends PerlActionBase implements DumbAware {
+public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements DumbAware {
 
   public PerlBrewCreateLibraryAction() {
     getTemplatePresentation().setText(PerlBundle.message("perl.vm.perlbrew.create.lib"));
-  }
-
-  @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return PerlBrewData.from(getPerlSdk(event)) != null;
   }
 
   @Override

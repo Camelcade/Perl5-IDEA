@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -36,6 +38,11 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   public PerlVersionManagerData(@NotNull Handler handler) {
     super(handler);
   }
+
+  /**
+   * Adds bin dirs for script searching. E.g. perlbrew may have patchperl and cpanm installed into perlbrew's home
+   */
+  public void addBinDirs(@NotNull List<VirtualFile> dirs) {}
 
   /**
    * Patched commandline according to the rules of the version manager and current version manager data
