@@ -36,6 +36,10 @@ public class PerlConsoleFilterTest extends PerlLightTestCase {
     doTestAbsolute();
   }
 
+  public void testInstallDtlFastWin() {
+    doTestAbsolute();
+  }
+
   public void testLibraryPath() {
     doTestAbsolute();
   }

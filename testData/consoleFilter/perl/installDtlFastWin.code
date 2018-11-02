@@ -1,0 +1,412 @@
+C:\Berrybrew\bin\berrybrew.exe exec --with 5.28.0_64 C:/Users/Alexandr.Evstigneev/perl5/5.28.0_64/perl/bin/cpan.bat DTL::Fast
+Loading internal logger. Log::Log4perl recommended for better logging
+CPAN: CPAN::SQLite loaded ok (v0.211)
+CPAN: LWP::UserAgent loaded ok (v6.34)
+Fetching with LWP:
+http://cpan.strawberryperl.com/authors/01mailrc.txt.gz
+CPAN: YAML::XS loaded ok (v0.70)
+Fetching with LWP:
+http://cpan.strawberryperl.com/modules/02packages.details.txt.gz
+Fetching with LWP:
+http://cpan.strawberryperl.com/modules/03modlist.data.gz
+Creating database file ...
+Done!
+Running install for module 'DTL::Fast'
+Fetching with LWP:
+http://cpan.strawberryperl.com/authors/id/H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz
+CPAN: Digest::SHA loaded ok (v6.02)
+Fetching with LWP:
+http://cpan.strawberryperl.com/authors/id/H/HU/HURRICUP/CHECKSUMS
+CPAN: Compress::Zlib loaded ok (v2.081)
+Checksum for C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\cpan\sources\authors\id\H\HU\HURRICUP\DTL-Fast-2017.1.tar.gz ok
+CPAN: Archive::Tar loaded ok (v2.30)
+CPAN: CPAN::Meta::Requirements loaded ok (v2.140)
+CPAN: Parse::CPAN::Meta loaded ok (v2.150010)
+CPAN: CPAN::Meta loaded ok (v2.150010)
+CPAN: Module::CoreList loaded ok (v5.20180622)
+Configuring H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz with Makefile.PL
+Warning: prerequisite URI::Escape::XS 0.12 not found.
+Checking if your kit is complete...
+Warning: the following files are missing in your kit:
+        README
+Please inform the author.
+WARNING: Setting ABSTRACT via file 'lib/DTL/Fast.pm' failed
+ at C:/Users/Alexandr.Evstigneev/perl5/5.28.0_64/perl/lib/ExtUtils/MakeMaker.pm line 754.
+Generating a gmake-style Makefile
+Writing Makefile for DTL::Fast
+Writing MYMETA.yml and MYMETA.json
+  HURRICUP/DTL-Fast-2017.1.tar.gz
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe Makefile.PL -- OK
+Running make for H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz
+---- Unsatisfied dependencies detected during ----
+----      HURRICUP/DTL-Fast-2017.1.tar.gz     ----
+    URI::Escape::XS [requires]
+Running install for module 'URI::Escape::XS'
+Fetching with LWP:
+http://cpan.strawberryperl.com/authors/id/D/DA/DANKOGAI/URI-Escape-XS-0.14.tar.gz
+Fetching with LWP:
+http://cpan.strawberryperl.com/authors/id/D/DA/DANKOGAI/CHECKSUMS
+Checksum for C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\cpan\sources\authors\id\D\DA\DANKOGAI\URI-Escape-XS-0.14.tar.gz ok
+Configuring D/DA/DANKOGAI/URI-Escape-XS-0.14.tar.gz with Makefile.PL
+Checking if your kit is complete...
+Looks good
+Generating a gmake-style Makefile
+Writing Makefile for URI::Escape::XS
+Writing MYMETA.yml and MYMETA.json
+  DANKOGAI/URI-Escape-XS-0.14.tar.gz
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe Makefile.PL -- OK
+Running make for D/DA/DANKOGAI/URI-Escape-XS-0.14.tar.gz
+cp lib/URI/Escape/XS.pm blib\lib\URI\Escape\XS.pm
+Running Mkbootstrap for XS ()
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command -e chmod -- 644 "XS.bs"
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command::MM -e cp_nonempty -- XS.bs blib\arch\auto\URI\Escape\XS\XS.bs 644
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" "C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\ExtUtils/xsubpp"  -typemap C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\ExtUtils\typemap  XS.xs > XS.xsc
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command -e mv -- XS.xsc XS.c
+gcc -c   -s -O2 -DWIN32 -DWIN64 -DCONSERVATIVE -D__USE_MINGW_ANSI_STDIO -DPERL_TEXTMODE_SCRIPTS -DPERL_IMPLICIT_CONTEXT -DPERL_IMPLICIT_SYS -DUSE_PERLIO -fwrapv -fno-strict-aliasing -mms-bitfields -s -O2   -DVERSION=\"0.14\" -DXS_VERSION=\"0.14\"  "-IC:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\CORE"   XS.c
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Mksymlists \
+     -e "Mksymlists('NAME'=>\"URI::Escape::XS\", 'DLBASE' => 'XS', 'DL_FUNCS' => {  }, 'FUNCLIST' => [], 'IMPORTS' => {  }, 'DL_VARS' => []);"
+g++.exe XS.def -o blib\arch\auto\URI\Escape\XS\XS.xs.dll -mdll -s -L"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\CORE" -L"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\lib" XS.o   "C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\CORE\libperl528.a" -lmoldname -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -lnetapi32 -luuid -lws2_32 -lmpr -lwinmm -lversion -lodbc32 -lodbccp32 -lcomctl32 -Wl,--enable-auto-image-base
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command -e chmod -- 755 blib\arch\auto\URI\Escape\XS\XS.xs.dll
+  DANKOGAI/URI-Escape-XS-0.14.tar.gz
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\bin\gmake.exe -- OK
+Running make test
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command::MM -e cp_nonempty -- XS.bs blib\arch\auto\URI\Escape\XS\XS.bs 644
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness(0, 'blib\lib', 'blib\arch')" t/*.t
+# Testing URI::Escape::XS 0.14, Perl 5.028000, C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe
+t/00-load.t ....... ok
+t/01-compat.t ..... ok
+t/02-basic.t ...... ok
+t/03-hashu.t ...... ok
+t/04-idn.t ........ ok
+t/05-null.t ....... ok
+t/06-nonstr.t ..... ok
+t/boilerplate.t ... ok
+t/pod-coverage.t .. skipped: Test::Pod::Coverage 1.04 required for testing POD coverage
+t/pod.t ........... ok
+All tests successful.
+Files=10, Tests=733,  2 wallclock secs ( 0.11 usr +  0.06 sys =  0.17 CPU)
+Result: PASS
+  DANKOGAI/URI-Escape-XS-0.14.tar.gz
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\bin\gmake.exe test -- OK
+Running make install
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command::MM -e cp_nonempty -- XS.bs blib\arch\auto\URI\Escape\XS\XS.bs 644
+Files found in blib\arch: installing files in blib\lib into architecture dependent library tree
+Installing C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\site\lib\auto\URI\Escape\XS\XS.xs.dll
+Installing C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\site\lib\URI\Escape\XS.pm
+Appending installation info to C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib/perllocal.pod
+  DANKOGAI/URI-Escape-XS-0.14.tar.gz
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\bin\gmake.exe install UNINST=1 -- OK
+  HURRICUP/DTL-Fast-2017.1.tar.gz
+  Has already been unwrapped into directory C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\cpan\build\DTL-Fast-2017.1-0
+  HURRICUP/DTL-Fast-2017.1.tar.gz
+  Has already been prepared
+Running make for H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz
+cp lib/DTL/Fast/Expression/Operator.pm blib\lib\DTL\Fast\Expression\Operator.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Eq.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Eq.pm
+cp lib/DTL/Fast/Entity.pm blib\lib\DTL\Fast\Entity.pm
+cp lib/DTL/Fast/Cache/Compressed.pm blib\lib\DTL\Fast\Cache\Compressed.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Div.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Div.pm
+cp lib/DTL/Fast/Cache/Memcached.pm blib\lib\DTL\Fast\Cache\Memcached.pm
+cp lib/DTL/Fast/Cache/Serialized.pm blib\lib\DTL\Fast\Cache\Serialized.pm
+cp lib/DTL/Fast/Expression.pm blib\lib\DTL\Fast\Expression.pm
+cp lib/DTL/Fast.pod blib\lib\DTL\Fast.pod
+cp lib/DTL/Fast/Expression/Operator/Binary.pm blib\lib\DTL\Fast\Expression\Operator\Binary.pm
+cp lib/DTL/Fast/Cache/File.pm blib\lib\DTL\Fast\Cache\File.pm
+cp lib/DTL/Fast/Context.pm blib\lib\DTL\Fast\Context.pm
+cp lib/DTL/Fast/Cache/Runtime.pm blib\lib\DTL\Fast\Cache\Runtime.pm
+cp lib/DTL/Fast.pm blib\lib\DTL\Fast.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Ge.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Ge.pm
+cp lib/DTL/Fast/Cache.pm blib\lib\DTL\Fast\Cache.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/And.pm blib\lib\DTL\Fast\Expression\Operator\Binary\And.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Ne.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Ne.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Lt.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Lt.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Minus.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Minus.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Le.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Le.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Mod.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Mod.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Or.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Or.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Plus.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Plus.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Mul.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Mul.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Gt.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Gt.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/NotIn.pm blib\lib\DTL\Fast\Expression\Operator\Binary\NotIn.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/In.pm blib\lib\DTL\Fast\Expression\Operator\Binary\In.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Logical.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Logical.pm
+cp lib/DTL/Fast/Filter/Default.pm blib\lib\DTL\Fast\Filter\Default.pm
+cp lib/DTL/Fast/Filter/DefaultIfNone.pm blib\lib\DTL\Fast\Filter\DefaultIfNone.pm
+cp lib/DTL/Fast/Filter/Addslashes.pm blib\lib\DTL\Fast\Filter\Addslashes.pm
+cp lib/DTL/Fast/Filter/Date.pm blib\lib\DTL\Fast\Filter\Date.pm
+cp lib/DTL/Fast/Expression/Operator/Unary/Defined.pm blib\lib\DTL\Fast\Expression\Operator\Unary\Defined.pm
+cp lib/DTL/Fast/Filter/Capfirst.pm blib\lib\DTL\Fast\Filter\Capfirst.pm
+cp lib/DTL/Fast/Filter/Center.pm blib\lib\DTL\Fast\Filter\Center.pm
+cp lib/DTL/Fast/Filter/Cut.pm blib\lib\DTL\Fast\Filter\Cut.pm
+cp lib/DTL/Fast/Filter.pm blib\lib\DTL\Fast\Filter.pm
+cp lib/DTL/Fast/Filter/Add.pm blib\lib\DTL\Fast\Filter\Add.pm
+cp lib/DTL/Fast/Expression/Operator/Unary.pm blib\lib\DTL\Fast\Expression\Operator\Unary.pm
+cp lib/DTL/Fast/Expression/Operator/Unary/Not.pm blib\lib\DTL\Fast\Expression\Operator\Unary\Not.pm
+cp lib/DTL/Fast/Filter/Dictsortreversed.pm blib\lib\DTL\Fast\Filter\Dictsortreversed.pm
+cp lib/DTL/Fast/Expression/Operator/Binary/Pow.pm blib\lib\DTL\Fast\Expression\Operator\Binary\Pow.pm
+cp lib/DTL/Fast/Filter/Dictsort.pm blib\lib\DTL\Fast\Filter\Dictsort.pm
+cp lib/DTL/Fast/Expression/Operator/Unary/Logical.pm blib\lib\DTL\Fast\Expression\Operator\Unary\Logical.pm
+cp lib/DTL/Fast/Filter/Length.pm blib\lib\DTL\Fast\Filter\Length.pm
+cp lib/DTL/Fast/Filter/Lower.pm blib\lib\DTL\Fast\Filter\Lower.pm
+cp lib/DTL/Fast/Filter/Lengthis.pm blib\lib\DTL\Fast\Filter\Lengthis.pm
+cp lib/DTL/Fast/Filter/Divisibleby.pm blib\lib\DTL\Fast\Filter\Divisibleby.pm
+cp lib/DTL/Fast/Filter/Ljust.pm blib\lib\DTL\Fast\Filter\Ljust.pm
+cp lib/DTL/Fast/Filter/Getdigit.pm blib\lib\DTL\Fast\Filter\Getdigit.pm
+cp lib/DTL/Fast/Filter/Iriencode.pm blib\lib\DTL\Fast\Filter\Iriencode.pm
+cp lib/DTL/Fast/Filter/Last.pm blib\lib\DTL\Fast\Filter\Last.pm
+cp lib/DTL/Fast/Filter/Linebreaksbr.pm blib\lib\DTL\Fast\Filter\Linebreaksbr.pm
+cp lib/DTL/Fast/Filter/First.pm blib\lib\DTL\Fast\Filter\First.pm
+cp lib/DTL/Fast/Filter/Linebreaks.pm blib\lib\DTL\Fast\Filter\Linebreaks.pm
+cp lib/DTL/Fast/Filter/Filesizeformat.pm blib\lib\DTL\Fast\Filter\Filesizeformat.pm
+cp lib/DTL/Fast/Filter/Linenumbers.pm blib\lib\DTL\Fast\Filter\Linenumbers.pm
+cp lib/DTL/Fast/Filter/MakeList.pm blib\lib\DTL\Fast\Filter\MakeList.pm
+cp lib/DTL/Fast/Filter/Escape.pm blib\lib\DTL\Fast\Filter\Escape.pm
+cp lib/DTL/Fast/Filter/Floatformat.pm blib\lib\DTL\Fast\Filter\Floatformat.pm
+cp lib/DTL/Fast/Filter/Escapejs.pm blib\lib\DTL\Fast\Filter\Escapejs.pm
+cp lib/DTL/Fast/Filter/Join.pm blib\lib\DTL\Fast\Filter\Join.pm
+cp lib/DTL/Fast/Filter/Timesince.pm blib\lib\DTL\Fast\Filter\Timesince.pm
+cp lib/DTL/Fast/Filter/Strftime.pm blib\lib\DTL\Fast\Filter\Strftime.pm
+cp lib/DTL/Fast/Filter/Safe.pm blib\lib\DTL\Fast\Filter\Safe.pm
+cp lib/DTL/Fast/Filter/Time.pm blib\lib\DTL\Fast\Filter\Time.pm
+cp lib/DTL/Fast/Filter/PhoneToNumeric.pm blib\lib\DTL\Fast\Filter\PhoneToNumeric.pm
+cp lib/DTL/Fast/Filter/Slice.pm blib\lib\DTL\Fast\Filter\Slice.pm
+cp lib/DTL/Fast/Filter/Removetags.pm blib\lib\DTL\Fast\Filter\Removetags.pm
+cp lib/DTL/Fast/Filter/Numberformat.pm blib\lib\DTL\Fast\Filter\Numberformat.pm
+cp lib/DTL/Fast/Filter/Ru/Pluralize.pm blib\lib\DTL\Fast\Filter\Ru\Pluralize.pm
+cp lib/DTL/Fast/Filter/Pluralize.pm blib\lib\DTL\Fast\Filter\Pluralize.pm
+cp lib/DTL/Fast/Filter/Striptags.pm blib\lib\DTL\Fast\Filter\Striptags.pm
+cp lib/DTL/Fast/Filter/Split.pm blib\lib\DTL\Fast\Filter\Split.pm
+cp lib/DTL/Fast/Filter/Random.pm blib\lib\DTL\Fast\Filter\Random.pm
+cp lib/DTL/Fast/Filter/SafeSeq.pm blib\lib\DTL\Fast\Filter\SafeSeq.pm
+cp lib/DTL/Fast/Filter/Slugify.pm blib\lib\DTL\Fast\Filter\Slugify.pm
+cp lib/DTL/Fast/Filter/Rjust.pm blib\lib\DTL\Fast\Filter\Rjust.pm
+cp lib/DTL/Fast/Filter/Stringformat.pm blib\lib\DTL\Fast\Filter\Stringformat.pm
+cp lib/DTL/Fast/Filter/Reverse.pm blib\lib\DTL\Fast\Filter\Reverse.pm
+cp lib/DTL/Fast/Filter/Timeuntil.pm blib\lib\DTL\Fast\Filter\Timeuntil.pm
+cp lib/DTL/Fast/Filter/Unorderedlist.pm blib\lib\DTL\Fast\Filter\Unorderedlist.pm
+cp lib/DTL/Fast/Filters.pm blib\lib\DTL\Fast\Filters.pm
+cp lib/DTL/Fast/Parser.pm blib\lib\DTL\Fast\Parser.pm
+cp lib/DTL/Fast/Filter/Truncatewords.pm blib\lib\DTL\Fast\Filter\Truncatewords.pm
+cp lib/DTL/Fast/Filter/Upper.pm blib\lib\DTL\Fast\Filter\Upper.pm
+cp lib/DTL/Fast/Filter/Wordwrap.pm blib\lib\DTL\Fast\Filter\Wordwrap.pm
+cp lib/DTL/Fast/Renderer.pm blib\lib\DTL\Fast\Renderer.pm
+cp lib/DTL/Fast/Filter/Yesno.pm blib\lib\DTL\Fast\Filter\Yesno.pm
+cp lib/DTL/Fast/Filter/Truncatecharshtml.pm blib\lib\DTL\Fast\Filter\Truncatecharshtml.pm
+cp lib/DTL/Fast/Filter/Urlize.pm blib\lib\DTL\Fast\Filter\Urlize.pm
+cp lib/DTL/Fast/FilterManager.pm blib\lib\DTL\Fast\FilterManager.pm
+cp lib/DTL/Fast/Filter/Truncatechars.pm blib\lib\DTL\Fast\Filter\Truncatechars.pm
+cp lib/DTL/Fast/Filter/Wordcount.pm blib\lib\DTL\Fast\Filter\Wordcount.pm
+cp lib/DTL/Fast/Filter/Urlizetrunc.pm blib\lib\DTL\Fast\Filter\Urlizetrunc.pm
+cp lib/DTL/Fast/Filter/Title.pm blib\lib\DTL\Fast\Filter\Title.pm
+cp lib/DTL/Fast/Filter/Truncatewordshtml.pm blib\lib\DTL\Fast\Filter\Truncatewordshtml.pm
+cp lib/DTL/Fast/Filter/Urlencode.pm blib\lib\DTL\Fast\Filter\Urlencode.pm
+cp lib/DTL/Fast/Tag/Firstofdefined.pm blib\lib\DTL\Fast\Tag\Firstofdefined.pm
+cp lib/DTL/Fast/Tag/Comment.pm blib\lib\DTL\Fast\Tag\Comment.pm
+cp lib/DTL/Fast/Tag/If.pm blib\lib\DTL\Fast\Tag\If.pm
+cp lib/DTL/Fast/Tag/Filter.pm blib\lib\DTL\Fast\Tag\Filter.pm
+cp lib/DTL/Fast/Tag/DumpWarn.pm blib\lib\DTL\Fast\Tag\DumpWarn.pm
+cp lib/DTL/Fast/Tag/If/Condition.pm blib\lib\DTL\Fast\Tag\If\Condition.pm
+cp lib/DTL/Fast/Tag.pm blib\lib\DTL\Fast\Tag.pm
+cp lib/DTL/Fast/Tag/BlockSuper.pm blib\lib\DTL\Fast\Tag\BlockSuper.pm
+cp lib/DTL/Fast/Tag/Debug.pm blib\lib\DTL\Fast\Tag\Debug.pm
+cp lib/DTL/Fast/Tag/Cycle.pm blib\lib\DTL\Fast\Tag\Cycle.pm
+cp lib/DTL/Fast/Replacer.pm blib\lib\DTL\Fast\Replacer.pm
+cp lib/DTL/Fast/Tag/Ifchanged.pm blib\lib\DTL\Fast\Tag\Ifchanged.pm
+cp lib/DTL/Fast/Tag/Block.pm blib\lib\DTL\Fast\Tag\Block.pm
+cp lib/DTL/Fast/Tag/DumpHTML.pm blib\lib\DTL\Fast\Tag\DumpHTML.pm
+cp lib/DTL/Fast/Tag/Firstof.pm blib\lib\DTL\Fast\Tag\Firstof.pm
+cp lib/DTL/Fast/Tag/Autoescape.pm blib\lib\DTL\Fast\Tag\Autoescape.pm
+cp lib/DTL/Fast/Replacer/Replacement.pm blib\lib\DTL\Fast\Replacer\Replacement.pm
+cp lib/DTL/Fast/Tag/Dump.pm blib\lib\DTL\Fast\Tag\Dump.pm
+cp lib/DTL/Fast/Tag/Extends.pm blib\lib\DTL\Fast\Tag\Extends.pm
+cp lib/DTL/Fast/Tag/For.pm blib\lib\DTL\Fast\Tag\For.pm
+cp lib/DTL/Fast/Template.pm blib\lib\DTL\Fast\Template.pm
+cp lib/DTL/Fast/Tag/Simple.pm blib\lib\DTL\Fast\Tag\Simple.pm
+cp lib/DTL/Fast/Tag/Include.pm blib\lib\DTL\Fast\Tag\Include.pm
+cp lib/DTL/Fast/Tag/Ifequal.pm blib\lib\DTL\Fast\Tag\Ifequal.pm
+cp lib/DTL/Fast/Tag/Regroup.pm blib\lib\DTL\Fast\Tag\Regroup.pm
+cp lib/DTL/Fast/Tag/Ifnotequal.pm blib\lib\DTL\Fast\Tag\Ifnotequal.pm
+cp lib/DTL/Fast/Tag/Verbatim.pm blib\lib\DTL\Fast\Tag\Verbatim.pm
+cp lib/DTL/Fast/Tag/Url.pm blib\lib\DTL\Fast\Tag\Url.pm
+cp lib/DTL/Fast/Tag/With.pm blib\lib\DTL\Fast\Tag\With.pm
+cp lib/DTL/Fast/Utils.pm blib\lib\DTL\Fast\Utils.pm
+cp lib/DTL/Fast/Text.pm blib\lib\DTL\Fast\Text.pm
+cp lib/DTL/Fast/Tag/Templatetag.pm blib\lib\DTL\Fast\Tag\Templatetag.pm
+cp lib/DTL/Fast/Tag/Widthratio.pm blib\lib\DTL\Fast\Tag\Widthratio.pm
+cp lib/DTL/Fast/Tag/Spaceless.pm blib\lib\DTL\Fast\Tag\Spaceless.pm
+cp lib/DTL/Fast/Variable.pm blib\lib\DTL\Fast\Variable.pm
+cp lib/DTL/Fast/Tag/Sprintf.pm blib\lib\DTL\Fast\Tag\Sprintf.pm
+cp lib/DTL/Fast/Tags.pm blib\lib\DTL\Fast\Tags.pm
+cp lib/DTL/Fast/Tag/Ssi.pm blib\lib\DTL\Fast\Tag\Ssi.pm
+cp lib/DTL/Fast/Tag/Now.pm blib\lib\DTL\Fast\Tag\Now.pm
+cp lib/DTL/Fast/Tag/Load.pm blib\lib\DTL\Fast\Tag\Load.pm
+Running Mkbootstrap for Fast ()
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command -e chmod -- 644 "Fast.bs"
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command::MM -e cp_nonempty -- Fast.bs blib\arch\auto\DTL\Fast\Fast.bs 644
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" "C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\ExtUtils/xsubpp"  -typemap C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\ExtUtils\typemap  Fast.xs > Fast.xsc
+Please specify prototyping behavior for Fast.xs (see perlxs manual)
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command -e mv -- Fast.xsc Fast.c
+gcc -c   -s -O2 -DWIN32 -DWIN64 -DCONSERVATIVE -D__USE_MINGW_ANSI_STDIO -DPERL_TEXTMODE_SCRIPTS -DPERL_IMPLICIT_CONTEXT -DPERL_IMPLICIT_SYS -DUSE_PERLIO -fwrapv -fno-strict-aliasing -mms-bitfields -s -O2   -DVERSION=\"2017.1\" -DXS_VERSION=\"2017.1\"  "-IC:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\CORE"   Fast.c
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Mksymlists \
+     -e "Mksymlists('NAME'=>\"DTL::Fast\", 'DLBASE' => 'Fast', 'DL_FUNCS' => {  }, 'FUNCLIST' => [], 'IMPORTS' => {  }, 'DL_VARS' => []);"
+g++.exe Fast.def -o blib\arch\auto\DTL\Fast\Fast.xs.dll -mdll -s -L"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\CORE" -L"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\lib" Fast.o   "C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\lib\CORE\libperl528.a" -lmoldname -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 -lole32 -loleaut32 -lnetapi32 -luuid -lws2_32 -lmpr -lwinmm -lversion -lodbc32 -lodbccp32 -lcomctl32 -Wl,--enable-auto-image-base
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command -e chmod -- 755 blib\arch\auto\DTL\Fast\Fast.xs.dll
+  HURRICUP/DTL-Fast-2017.1.tar.gz
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\bin\gmake.exe -- OK
+Running make test
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" -MExtUtils::Command::MM -e cp_nonempty -- Fast.bs blib\arch\auto\DTL\Fast\Fast.bs 644
+"C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\perl\bin\perl.exe" "-Iblib\lib" "-Iblib\arch" test.pl
+Rendering error: non-reference value encountered on step `unknown` while traversing context path
+Traversing path: unknown.path
+Traversed variable: $VAR1 = 1;
+
+Rendering error: non-reference value encountered on step `unknown` while traversing context path
+Traversing path: unknown.path
+Traversed variable: $VAR1 = 1;
+
+t/core/context.t ............... ok
+t/core/errors.t ................ ok
+t/core/expression.t ............ ok
+t/core/loader.t ................ ok
+t/core/template.t .............. ok
+t/core/utils.t ................. skipped: Nothing to test. is_lvalue method removed
+t/expression/logic.t ........... ok
+t/expression/in.t .............. ok
+t/expression/eq.t .............. ok
+t/expression/defined.t ......... ok
+t/filter/add.t ................. ok
+t/filter/addslashes.t .......... ok
+Locale 'Russian_Russia.1251' may not work well.
+The following characters (and maybe others) may not have the same meaning as the Perl program expects:
+\t
+
+t/filter/capfirst.t ............
+Dubious, test returned 255 (wstat 65280, 0xff00)
+No subtests run
+t/filter/center.t .............. ok
+t/filter/cut.t ................. ok
+t/filter/default.t ............. ok
+t/filter/default_if_none.t ..... ok
+Locale 'Russian_Russia.1251' may not work well.
+The following characters (and maybe others) may not have the same meaning as the Perl program expects:
+\t
+
+t/filter/dictsort.t ............
+Dubious, test returned 255 (wstat 65280, 0xff00)
+No subtests run
+t/filter/dictsortreversed.t .... ok
+t/filter/divisibleby.t ......... ok
+t/filter/escape.t .............. ok
+t/filter/escapejs.t ............ ok
+t/filter/filesizeformat.t ...... ok
+t/filter/first.t ............... ok
+t/filter/floatformat.t ......... ok
+t/filter/get_digit.t ........... ok
+t/filter/iriencode.t ........... ok
+t/filter/join.t ................ ok
+t/filter/last.t ................ ok
+t/filter/length.t .............. ok
+t/filter/length_is.t ........... ok
+t/filter/linebreaks.t .......... ok
+t/filter/linebreaksbr.t ........ ok
+t/filter/linenumbers.t ......... ok
+t/filter/ljust.t ............... ok
+t/filter/lower.t ............... ok
+t/filter/make_list.t ........... ok
+t/filter/numberformat.t ........ ok
+t/filter/phone2numeric.t ....... ok
+t/filter/pluralize.t ........... ok
+t/filter/pluralize_ru.t ........ ok
+t/filter/random.t .............. ok
+t/filter/removetags.t .......... ok
+t/filter/reverse.t ............. ok
+t/filter/rjust.t ............... ok
+t/filter/safe.t ................ ok
+t/filter/safeseq.t ............. ok
+t/filter/slice.t ............... ok
+t/filter/slugify.t ............. ok
+t/filter/split.t ............... ok
+t/filter/strftime.t ............ ok
+t/filter/stringformat.t ........ ok
+t/filter/striptags.t ........... ok
+t/filter/time.t ................ ok
+t/filter/timesince.t ........... ok
+t/filter/timeuntil.t ........... ok
+t/filter/title.t ............... ok
+t/filter/truncatechars.t ....... ok
+t/filter/truncatechars_html.t .. ok
+t/filter/truncatewords.t ....... ok
+t/filter/truncatewords_html.t .. ok
+t/filter/unordered_list.t ...... ok
+Locale 'Russian_Russia.1251' may not work well.
+The following characters (and maybe others) may not have the same meaning as the Perl program expects:
+\t
+
+t/filter/upper.t ...............
+Dubious, test returned 255 (wstat 65280, 0xff00)
+No subtests run
+t/filter/urlencode.t ........... ok
+t/filter/urlize.t .............. ok
+t/filter/urlizetrunc.t ......... ok
+t/filter/wordcount.t ........... ok
+t/filter/wordwrap.t ............ ok
+t/filter/yesno.t ............... ok
+t/tag/autoescape.t ............. ok
+t/tag/comment.t ................ ok
+t/tag/cycle.t .................. ok
+t/tag/debug.t .................. ok
+t/tag/dump.t ................... ok
+t/tag/dump_html.t .............. ok
+t/tag/dump_warn.t .............. ok
+t/tag/filter.t ................. ok
+t/tag/firstof.t ................ ok
+t/tag/firstofdefined.t ......... ok
+t/tag/for.t .................... ok
+t/tag/if.t ..................... ok
+t/tag/ifchanged.t .............. ok
+t/tag/ifequal.t ................ ok
+t/tag/ifnotequal.t ............. ok
+t/tag/include.t ................ ok
+t/tag/load.t ................... ok
+t/tag/now.t .................... ok
+t/tag/regroup.t ................ ok
+t/tag/spaceless.t .............. ok
+t/tag/sprintf.t ................ ok
+Parsing warning: `ssi` tag is now depricated and will be removed in future versions. Please, use `include` tag
+       Template: ./t/tmpl/ssi_static.txt
+           Line: 1
+Parsing warning: `ssi` tag is now depricated and will be removed in future versions. Please, use `include` tag
+       Template: ./t/tmpl/ssi_parsed.txt
+           Line: 1
+t/tag/ssi.t .................... ok
+t/tag/templatetag.t ............ ok
+t/tag/url.t .................... ok
+t/tag/verbatim.t ............... ok
+t/tag/widthratio.t ............. ok
+t/tag/with.t ................... ok
+t/xs/count_lines.t ............. ok
+t/xs/spaceless.t ............... ok
+t/xs/eval_sequence.t ........... ok
+t/xs/html_protect.t ............ ok
+
+Test Summary Report
+-------------------
+t/filter/capfirst.t          (Wstat: 65280 Tests: 0 Failed: 0)
+  Non-zero exit status: 255
+  Parse errors: No plan found in TAP output
+t/filter/dictsort.t          (Wstat: 65280 Tests: 0 Failed: 0)
+Failed 3/100 test programs. 0/847 subtests failed.
+  Non-zero exit status: 255
+  Parse errors: No plan found in TAP output
+t/filter/upper.t             (Wstat: 65280 Tests: 0 Failed: 0)
+  Non-zero exit status: 255
+  Parse errors: No plan found in TAP output
+Files=100, Tests=847, 40 wallclock secs ( 0.39 usr +  0.30 sys =  0.69 CPU)
+Result: FAIL
+gmake: *** [Makefile:1202: test_dynamic] Error 255
+  HURRICUP/DTL-Fast-2017.1.tar.gz
+one dependency not OK (URI::Escape::XS); additionally test harness failed
+  C:\Users\Alexandr.Evstigneev\perl5\5.28.0_64\c\bin\gmake.exe test -- NOT OK
+//hint// to see the cpan-testers results for installing this module, try:
+  reports HURRICUP/DTL-Fast-2017.1.tar.gz
+Stopping: 'install' failed for 'H/HU/HURRICUP/DTL-Fast-2017.1.tar.gz'.

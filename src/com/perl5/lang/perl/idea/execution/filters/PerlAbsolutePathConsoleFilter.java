@@ -33,7 +33,8 @@ import java.util.regex.Pattern;
 public class PerlAbsolutePathConsoleFilter implements Filter {
   private static final Pattern PATTERN = Pattern.compile(
     "(?<=^|-I|[^.\\w/~:])" +
-    "([/~][-@\\w./~:\\\\]+[-@\\w.~])"
+    "((?:[/~]|\\w:)" +
+    "[-@\\w./~:\\\\]+[-@\\w.~])"
   );
 
   @NotNull
