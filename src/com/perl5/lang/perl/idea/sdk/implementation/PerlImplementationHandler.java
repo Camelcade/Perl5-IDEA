@@ -124,7 +124,7 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
   }
 
   @NotNull
-  private static PerlImplementationHandler<?, ?> getDefaultHandler() {
+  public static PerlImplementationHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("porters"), "Perl porters implementation handler must always present");
   }
 }

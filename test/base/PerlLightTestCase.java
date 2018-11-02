@@ -94,6 +94,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
@@ -102,8 +103,11 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
@@ -164,6 +168,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
   @Override
   protected void tearDown() throws Exception {
     try {
+      PerlStringCompletionCache.getInstance(getProject()).clear();
       PerlInjectionMarkersService.getInstance(getProject()).loadState(myInjectionMarkersService);
       Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
       PerlSharedSettings.getInstance(getProject()).loadState(mySharedSettings);
@@ -225,6 +230,10 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
         ProjectJdkImpl testSdk = PerlSdkTable.getInstance().createSdk("test");
+        testSdk.setSdkAdditionalData(new PerlSdkAdditionalData(
+          PerlHostHandler.getDefaultHandler().createData(),
+          PerlVersionManagerData.getDefault(),
+          PerlImplementationHandler.getDefaultHandler().createData()));
         PerlSdkTable.getInstance().addJdk(testSdk, getTestRootDisposable());
         perlProjectManager.setProjectSdk(testSdk);
         perlProjectManager.addExternalLibrary(libdir);

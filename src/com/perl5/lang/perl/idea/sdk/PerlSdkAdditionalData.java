@@ -41,9 +41,9 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
   private final PerlImplementationData myImplementationData;
 
 
-  PerlSdkAdditionalData(@NotNull PerlHostData hostData,
-                        @NotNull PerlVersionManagerData versionManagerData,
-                        @NotNull PerlImplementationData implementationData) {
+  public PerlSdkAdditionalData(@NotNull PerlHostData hostData,
+                               @NotNull PerlVersionManagerData versionManagerData,
+                               @NotNull PerlImplementationData implementationData) {
     myHostData = hostData;
     myVersionManagerData = versionManagerData;
     myImplementationData = implementationData;

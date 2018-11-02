@@ -61,6 +61,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -263,7 +264,10 @@ public class PerlRunUtil {
       throw new IllegalArgumentException("Got non-perl sdk: " + sdk);
     }
     List<VirtualFile> files = ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin);
-    files.add(VfsUtil.findFile(Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent(), false));
+    Path sdkBinDir = Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent();
+    if (sdkBinDir != null) {
+      files.add(VfsUtil.findFile(sdkBinDir, false));
+    }
     PerlVersionManagerData.notNullFrom(sdk).addBinDirs(files);
 
     return files.stream().filter(Objects::nonNull).distinct();

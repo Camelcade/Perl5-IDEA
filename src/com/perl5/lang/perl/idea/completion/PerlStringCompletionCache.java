@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +34,12 @@ public class PerlStringCompletionCache {
 
   public Set<String> getHeredocOpenersCache() {
     return myHeredocOpenersCache;
+  }
+
+  @TestOnly
+  public void clear() {
+    myHashIndexesCache.clear();
+    myHeredocOpenersCache.clear();
   }
 
   @NotNull
