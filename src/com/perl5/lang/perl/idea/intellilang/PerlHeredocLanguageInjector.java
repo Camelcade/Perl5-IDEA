@@ -42,7 +42,9 @@ public class PerlHeredocLanguageInjector implements MultiHostInjector {
   public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement context) {
     assert context instanceof PerlHeredocElementImpl;
 
-    if (context.getTextLength() == 0 || !PerlSharedSettings.getInstance(context.getProject()).AUTOMATIC_HEREDOC_INJECTIONS) {
+    if (context.getTextLength() == 0 ||
+        !PerlSharedSettings.getInstance(context.getProject()).AUTOMATIC_HEREDOC_INJECTIONS ||
+        !((PerlHeredocElementImpl)context).isValidHost()) {
       return;
     }
 
