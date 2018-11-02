@@ -1020,7 +1020,9 @@
   <actions>
     <group id="Perl5.Tools" text="Perl5" popup="true" icon="/icons/perl5language.png">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
-      <action id="perl5.cpanList" class="com.perl5.lang.perl.idea.actions.PerlInstallCpanmAction"/>
+      <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallCpanmAction"/>
+      <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanminusAction"/>
+      <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
       <action id="perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
       <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
       <action id="perl5.DeparseFile" class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction"/>

@@ -27,6 +27,8 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,5 +96,12 @@ public class CpanAdapter extends PackageManagerAdapter {
         }
       }
     };
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public static CpanAdapter create(@Nullable Project project) {
+    Sdk sdk = PerlProjectManager.getSdk(project);
+    return sdk == null ? null : new CpanAdapter(sdk, project);
   }
 }

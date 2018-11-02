@@ -24,8 +24,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,7 +79,8 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   /**
    * @return true iff App::cpanminus is available in sdk classpath
    */
-  public static boolean isAvailable(@NotNull Sdk sdk) {
+  @Contract("null->false")
+  public static boolean isAvailable(@Nullable Sdk sdk) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
     return PerlRunUtil.findScript(sdk, SCRIPT_NAME) != null;
   }
@@ -97,5 +100,12 @@ public class CpanminusAdapter extends PackageManagerAdapter {
         }
       }
     };
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public static CpanminusAdapter create(@Nullable Project project) {
+    Sdk sdk = PerlProjectManager.getSdk(project);
+    return isAvailable(sdk) ? new CpanminusAdapter(sdk, project) : null;
   }
 }

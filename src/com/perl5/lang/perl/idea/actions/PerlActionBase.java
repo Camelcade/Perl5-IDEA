@@ -41,8 +41,12 @@ public abstract class PerlActionBase extends AnAction {
   public void update(@NotNull AnActionEvent event) {
     final boolean enabled = isEnabled(event);
     event.getPresentation().setEnabled(enabled);
-    if (ActionPlaces.isPopupPlace(event.getPlace())) {
+    if (alwaysHideDisabled() || ActionPlaces.isPopupPlace(event.getPlace())) {
       event.getPresentation().setVisible(enabled);
     }
+  }
+
+  protected boolean alwaysHideDisabled() {
+    return false;
   }
 }

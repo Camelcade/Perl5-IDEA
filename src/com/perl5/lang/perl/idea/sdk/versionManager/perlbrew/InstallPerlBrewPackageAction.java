@@ -32,6 +32,11 @@ public abstract class InstallPerlBrewPackageAction extends PerlBrewActionBase {
     templatePresentation.setText(PerlBundle.message("perl.vm.perlbrew.install.action", packageName));
   }
 
+  @Override
+  protected boolean alwaysHideDisabled() {
+    return true;
+  }
+
   @NotNull
   protected abstract String getScriptName();
 

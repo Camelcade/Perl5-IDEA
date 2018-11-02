@@ -32,6 +32,11 @@ public class PerlInstallCpanmAction extends PerlActionBase {
   }
 
   @Override
+  protected boolean alwaysHideDisabled() {
+    return true;
+  }
+
+  @Override
   protected boolean isEnabled(AnActionEvent event) {
     if (!super.isEnabled(event)) {
       return false;
