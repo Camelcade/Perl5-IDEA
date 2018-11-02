@@ -276,7 +276,8 @@ public class PerlRunUtil {
     if (!(sdkType instanceof PerlSdkType)) {
       throw new IllegalArgumentException("Got non-perl sdk: " + sdk);
     }
-    List<VirtualFile> files = ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin);
+    List<VirtualFile> files =
+      new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
     Path sdkBinDir = Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent();
     if (sdkBinDir != null) {
       files.add(VfsUtil.findFile(sdkBinDir, false));
