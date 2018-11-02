@@ -43,6 +43,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.Consumer;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -125,6 +126,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     descBuilder.append("Java Version: ").append(SystemInfo.JAVA_VERSION).append('\n');
     descBuilder.append("Java Arch: ").append(SystemInfo.is32Bit ? "32 bit" : "64 bit").append('\n');
     descBuilder.append("Java Runtime Version: ").append(SystemInfo.JAVA_RUNTIME_VERSION).append('\n');
+    descBuilder.append("Perl Plugin Version: ").append(PerlPluginUtil.getPluginVersion()).append('\n');
 
     String affectedVersion = null;
     Throwable t = ideaLoggingEvent.getThrowable();
