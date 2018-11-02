@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
@@ -27,9 +29,11 @@ import com.intellij.openapi.project.Project;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,6 +61,38 @@ public abstract class PerlVersionManagerAdapter {
   @NotNull
   public PerlHostData getHostData() {
     return myHostData;
+  }
+
+  @Nullable
+  protected abstract Icon getIcon();
+
+  protected void runInstallInConsole(@NotNull PerlCommandLine commandLine, @NotNull String entityName) {
+    PerlRunUtil.runInConsole(
+      commandLine
+        .withConsoleTitle(PerlBundle.message("perl.vm.installing", entityName))
+        .withConsoleIcon(getIcon())
+        .withVersionManagerData(PerlVersionManagerData.getDefault())
+    );
+  }
+
+  /**
+   * Used for installing packages using version manager, e.g. {@code install-cpanm}
+   */
+  public void runInstallInConsole(@NotNull Project project, @NotNull String packageName, @NotNull String command) {
+    runInstallInConsole(createInstallCommandLine(project, command), packageName);
+  }
+
+  @NotNull
+  protected PerlCommandLine createInstallCommandLine(@NotNull Project project,
+                                                     @NotNull String command) {
+    return new PerlCommandLine(getVersionManagerPath(), command)
+      .withProject(project)
+      .withProcessListener(new ProcessAdapter() {
+        @Override
+        public void processTerminated(@NotNull ProcessEvent event) {
+          PerlRunUtil.refreshSdkDirs(project);
+        }
+      });
   }
 
   /**

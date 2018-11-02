@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -26,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
 
-import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.PLENV_EXEC;
-import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.PLENV_VERSION;
+import static com.perl5.lang.perl.adapters.CpanminusAdapter.PACKAGE_NAME;
+import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.*;
 
 class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
   PlenvData(@NotNull PlenvHandler handler) {
@@ -45,6 +46,15 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
   public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
     originalCommandLine.setExePath(Paths.get(originalCommandLine.getExePath()).getFileName().toString());
     return originalCommandLine.prependLineWith(getVersionManagerPath(), PLENV_EXEC).withEnvironment(PLENV_VERSION, getDistributionId());
+  }
+
+  @Override
+  public void installCpanminus(@Nullable Project project) {
+    PlenvAdapter plenvAdapter = PlenvAdapter.create(project);
+    if (plenvAdapter == null) {
+      return;
+    }
+    plenvAdapter.runInstallInConsole(project, PACKAGE_NAME, PLENV_INSTALL_CPANM, getDistributionId());
   }
 
   @Override

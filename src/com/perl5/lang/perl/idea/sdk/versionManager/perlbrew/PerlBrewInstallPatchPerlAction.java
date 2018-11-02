@@ -23,13 +23,13 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class InstallPerlBrewPackageAction extends PerlBrewActionBase {
-  private final String myPackageName;
+public class PerlBrewInstallPatchPerlAction extends PerlBrewActionBase {
+  private static final String PACKAGE_NAME = "Devel::PatchPerl";
+  private static final String SCRIPT_NAME = "patchperl";
 
-  protected InstallPerlBrewPackageAction(@NotNull String packageName) {
-    myPackageName = packageName;
+  protected PerlBrewInstallPatchPerlAction() {
     Presentation templatePresentation = getTemplatePresentation();
-    templatePresentation.setText(PerlBundle.message("perl.vm.perlbrew.install.action", packageName));
+    templatePresentation.setText(PerlBundle.message("perl.vm.perlbrew.install.action", PACKAGE_NAME));
   }
 
   @Override
@@ -37,15 +37,9 @@ public abstract class InstallPerlBrewPackageAction extends PerlBrewActionBase {
     return true;
   }
 
-  @NotNull
-  protected abstract String getScriptName();
-
-  @NotNull
-  protected abstract String getInstallCommand();
-
   @Override
   protected boolean isEnabled(AnActionEvent event) {
-    return super.isEnabled(event) && PerlRunUtil.findScript(getEventProject(event), getScriptName()) == null;
+    return super.isEnabled(event) && PerlRunUtil.findScript(getEventProject(event), SCRIPT_NAME) == null;
   }
 
   @Override
@@ -55,6 +49,6 @@ public abstract class InstallPerlBrewPackageAction extends PerlBrewActionBase {
     if (perlBrewAdapter == null) {
       return;
     }
-    perlBrewAdapter.runInstallInConsole(project, myPackageName, getInstallCommand());
+    perlBrewAdapter.runInstallInConsole(project, PACKAGE_NAME, PerlBrewAdapter.PERLBREW_INSTALL_PATCHPERL);
   }
 }

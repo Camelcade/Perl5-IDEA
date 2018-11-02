@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
@@ -65,6 +66,8 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   public String toString() {
     return getShortName();
   }
+
+  public abstract void installCpanminus(@Nullable Project project);
 
   @NotNull
   public static PerlVersionManagerData notNullFrom(@NotNull Sdk sdk) {

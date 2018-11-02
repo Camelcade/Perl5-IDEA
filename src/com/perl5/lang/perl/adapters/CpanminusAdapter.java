@@ -72,8 +72,15 @@ public class CpanminusAdapter extends PackageManagerAdapter {
    *
    * @see CpanAdapter
    */
-  public static void install(@NotNull Project project, @NotNull Sdk sdk) {
+  public static void install(@Nullable Project project, @Nullable Sdk sdk) {
+    if (project == null || sdk == null) {
+      return;
+    }
     new CpanAdapter(sdk, project).install(PACKAGE_NAME);
+  }
+
+  public static void install(@Nullable Project project) {
+    install(project, PerlProjectManager.getSdk(project));
   }
 
   /**

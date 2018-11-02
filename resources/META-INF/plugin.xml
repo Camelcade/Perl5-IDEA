@@ -1036,8 +1036,8 @@
       <add-to-group group-id="Perl5.Tools" anchor="last"/>
       <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"/>
       <action id="perl5.perlbrew.install" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlAction"/>
-      <action id="perl5.perlbrew.install.cpanm" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.InstallCpanMinusAction"/>
-      <action id="perl5.perlbrew.install.patchperl" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.InstallPatchPerlAction"/>
+      <action id="perl5.perlbrew.install.patchperl"
+              class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction"/>
     </group>
 
     <group id="Perl5.Plenv" popup="true" text="Plenv" icon="/icons/perl5language.png">

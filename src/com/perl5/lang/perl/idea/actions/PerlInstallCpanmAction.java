@@ -23,6 +23,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlInstallCpanmAction extends PerlActionBase {
@@ -54,14 +55,9 @@ public class PerlInstallCpanmAction extends PerlActionBase {
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
-    Project project = e.getProject();
-    if (project == null) {
-      return;
+    PerlVersionManagerData versionManagerData = PerlVersionManagerData.from(getPerlSdk(e));
+    if (versionManagerData != null) {
+      versionManagerData.installCpanminus(getEventProject(e));
     }
-    Sdk perlSdk = PerlProjectManager.getSdk(project);
-    if (perlSdk == null) {
-      return;
-    }
-    CpanminusAdapter.install(project, perlSdk);
   }
 }

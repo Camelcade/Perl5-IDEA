@@ -25,11 +25,10 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,15 +54,19 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
                           @NotNull String distributionId,
                           @NotNull List<String> params,
                           @Nullable ProcessListener processListener) {
-    PerlRunUtil.runInConsole(
+    runInstallInConsole(
       new PerlCommandLine(getVersionManagerPath(), BERRYBREW_INSTALL, distributionId)
         .withParameters(params)
         .withProject(project)
-        .withConsoleTitle(PerlBundle.message("perl.vm.installing", distributionId))
-        .withConsoleIcon(PerlIcons.STRAWBERRY_ICON)
-        .withVersionManagerData(PerlVersionManagerData.getDefault())
-        .withProcessListener(processListener)
+        .withProcessListener(processListener),
+      distributionId
     );
+  }
+
+  @Nullable
+  @Override
+  protected Icon getIcon() {
+    return PerlIcons.STRAWBERRY_ICON;
   }
 
   @Nullable

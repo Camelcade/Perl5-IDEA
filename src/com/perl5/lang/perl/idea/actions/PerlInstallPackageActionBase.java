@@ -37,6 +37,11 @@ public abstract class PerlInstallPackageActionBase extends PerlActionBase {
     return super.isEnabled(event) && getAdapter(event) != null;
   }
 
+  @Override
+  protected boolean alwaysHideDisabled() {
+    return true;
+  }
+
   @Nullable
   protected abstract PackageManagerAdapter getAdapter(@NotNull AnActionEvent e);
 
