@@ -57,7 +57,9 @@ import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -240,11 +242,22 @@ public class PerlRunUtil {
    * @param scriptName script name to find
    * @return script's virtual file if available
    **/
+  @Contract("null,_->null; _,null->null")
   @Nullable
   public static VirtualFile findScript(@Nullable Sdk sdk, @Nullable String scriptName) {
+    if (sdk == null || StringUtil.isEmpty(scriptName)) {
+      return null;
+    }
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return sdk == null || StringUtil.isEmpty(scriptName) ? null : getBinDirectories(sdk)
-      .map(root -> root.findChild(scriptName))
+    PerlOsHandler osHandler = PerlOsHandler.notNullFrom(sdk);
+    return getBinDirectories(sdk)
+      .map(root -> {
+        VirtualFile scriptFile = null;
+        if (osHandler.isMsWindows()) {
+          scriptFile = root.findChild(scriptName + ".bat");
+        }
+        return scriptFile != null ? scriptFile : root.findChild(scriptName);
+      })
       .filter(Objects::nonNull)
       .findFirst().orElse(null);
   }

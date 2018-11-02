@@ -16,9 +16,15 @@
 
 package com.perl5.lang.perl.idea.sdk.host.os;
 
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.util.ObjectUtils;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
+import java.util.Objects;
 
 public abstract class PerlOsHandler {
   @NotNull
@@ -51,4 +57,15 @@ public abstract class PerlOsHandler {
    * @return true iff OS has Windows Subsystem for Linux support
    */
   public boolean hasWslSupport() {return false;}
+
+  @NotNull
+  public static PerlOsHandler notNullFrom(@NotNull Sdk sdk) {
+    return Objects.requireNonNull(from(sdk));
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public static PerlOsHandler from(@Nullable Sdk sdk) {
+    return ObjectUtils.doIfNotNull(PerlHostData.from(sdk), PerlHostData::getOsHandler);
+  }
 }
