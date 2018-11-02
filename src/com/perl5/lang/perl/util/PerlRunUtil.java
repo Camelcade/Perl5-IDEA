@@ -42,6 +42,7 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -58,6 +59,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -254,10 +256,10 @@ public class PerlRunUtil {
     if (!(sdkType instanceof PerlSdkType)) {
       throw new IllegalArgumentException("Got non-perl sdk: " + sdk);
     }
-    return Arrays.stream(sdk.getRootProvider().getFiles(OrderRootType.CLASSES))
-      .map(PerlRunUtil::findLibsBin)
-      .filter(Objects::nonNull)
-      .distinct();
+    List<VirtualFile> files = ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin);
+    files.add(VfsUtil.findFile(Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent(), false));
+
+    return files.stream().filter(Objects::nonNull).distinct();
   }
 
   /**
