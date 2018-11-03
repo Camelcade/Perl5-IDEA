@@ -18,10 +18,8 @@ package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
@@ -29,27 +27,44 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter.*;
 
 class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHandler> {
+  @Tag("info")
+  private final Map<String, String> myInfo = new HashMap<>();
 
   PerlBrewData(@NotNull PerlBrewHandler handler) {
     super(handler);
   }
 
+  /**
+   * @param infoData see {@link PerlBrewHandler#computeInfoData}
+   */
   PerlBrewData(@NotNull String versionManagerPath,
                @NotNull String distributionId,
-               @NotNull PerlBrewHandler handler) {
+               @NotNull PerlBrewHandler handler,
+               @NotNull Map<String, String> infoData) {
     super(versionManagerPath, distributionId, handler);
+    myInfo.putAll(infoData);
   }
 
+  @NotNull
   @Override
-  public void addBinDirs(@NotNull List<VirtualFile> dirs) {
-    super.addBinDirs(dirs);
-    ContainerUtil.addIfNotNull(dirs, VfsUtil.findFile(Paths.get(getVersionManagerPath()).getParent(), false));
+  public List<Path> getBinDirsPath() {
+    String perlbrewRoot = getPerlbrewRoot();
+    return perlbrewRoot == null ? Collections.emptyList() : Collections.singletonList(Paths.get(perlbrewRoot, "bin"));
+  }
+
+  @Nullable
+  private String getPerlbrewRoot() {
+    return myInfo.get(PERLBREW_ROOT);
   }
 
   /**
@@ -70,6 +85,7 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
     perlBrewAdapter.runInstallInConsole(project, CpanminusAdapter.PACKAGE_NAME, PerlBrewAdapter.PERLBREW_INSTALL_CPANM);
   }
 
+  @NotNull
   @Override
   protected final PerlBrewData self() {
     return this;

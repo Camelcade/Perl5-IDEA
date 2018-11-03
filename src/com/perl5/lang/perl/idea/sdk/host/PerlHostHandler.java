@@ -16,7 +16,15 @@
 
 package com.perl5.lang.perl.idea.sdk.host;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerCollector;
@@ -40,7 +48,7 @@ import java.util.stream.Stream;
  */
 public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, Handler extends PerlHostHandler<Data, Handler>>
   extends AbstractPerlHandler<Data, Handler> {
-
+  private static final Logger LOG = Logger.getInstance(PerlHostHandler.class);
   private static final String TAG_NAME = "host";
 
   private static final PerlHandlerCollector<PerlHostHandler<?, ?>> EP = new PerlHandlerCollector<>("com.perl5.hostHandler");
@@ -59,11 +67,77 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    * @param pathValidator       validates a path selected by user and returns error message or null if everything is fine
    * @param selectionConsumer   a callback for selected result. Accepts path selected and the host data
    */
-  public abstract void chooseFileInteractively(@NotNull String dialogTitle,
-                                               @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
-                                               boolean useDefaultIfExists, @NotNull Predicate<String> nameValidator,
-                                               @NotNull Function<String, String> pathValidator,
-                                               @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer);
+  public void chooseFileInteractively(@NotNull String dialogTitle,
+                                      @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
+                                      boolean useDefaultIfExists, @NotNull Predicate<String> nameValidator,
+                                      @NotNull Function<String, String> pathValidator,
+                                      @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer) {
+    Data hostData = createDataInteractively();
+    if (hostData == null) {
+      return;
+    }
+    VirtualFileSystem fileSystem = hostData.getFileSystem();
+    if (fileSystem == null) {
+      LOG.error("No filesystem for " + hostData);
+      return;
+    }
+    Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
+    VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.toString());
+
+    if (useDefaultIfExists && defaultFile != null && defaultFile.exists() && !defaultFile.isDirectory()) {
+      selectionConsumer.accept(defaultFile.getPath(), hostData);
+      return;
+    }
+
+    final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, isChooseFolders(), false, false, false, false) {
+      @Override
+      public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
+        return super.isFileVisible(file, showHiddenFiles) && (file.isDirectory() || nameValidator.test(file.getName()));
+      }
+
+      @Override
+      public void validateSelectedFiles(VirtualFile[] files) throws Exception {
+        if (files.length != 0) {
+          String errorMessage = pathValidator.apply(files[0].getPath());
+          if (StringUtil.isNotEmpty(errorMessage)) {
+            throw new Exception(errorMessage);
+          }
+        }
+      }
+    };
+    descriptor.setTitle(dialogTitle);
+    customizeFileChooser(descriptor, hostData);
+    Ref<String> pathRef = Ref.create();
+    ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, defaultFile, chosen -> {
+      String selectedPath = chosen.get(0).getPath();
+      if (StringUtil.isEmpty(pathValidator.apply(selectedPath))) {
+        pathRef.set(selectedPath);
+      }
+    }));
+    if (!pathRef.isNull()) {
+      selectionConsumer.accept(pathRef.get(), hostData);
+    }
+  }
+
+  /**
+   * @return true iff we should allow to choose folders - only case is local mac chooser
+   */
+  protected boolean isChooseFolders() {return false;}
+
+  /**
+   * host handler may customize a chooser descriptor if necessary
+   */
+  protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull Data hostData) {
+
+  }
+
+  /**
+   * Creates a necessary host data with possible interactions with user
+   *
+   * @return host data or null if user cancelled the process
+   */
+  @Nullable
+  protected abstract Data createDataInteractively();
 
   /**
    * @return a menu item title for this handler, used in UI. E.g. new interpreter menu item

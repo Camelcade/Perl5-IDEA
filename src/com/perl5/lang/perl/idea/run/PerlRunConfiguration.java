@@ -27,12 +27,16 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.net.NetUtils;
 import com.intellij.util.xmlb.XmlSerializer;
+import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import org.apache.commons.lang.StringUtils;
@@ -97,6 +101,26 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
       return new PerlDebugProfileState(executionEnvironment);
     }
     return new PerlRunProfileState(executionEnvironment);
+  }
+
+  @NotNull
+  public Sdk getEffectiveSdk() throws ExecutionException {
+    Sdk perlSdk;
+    if (isUseAlternativeSdk()) {
+      String alternativeSdkName = getAlternativeSdkName();
+      perlSdk = PerlSdkTable.getInstance().findJdk(alternativeSdkName);
+      if (perlSdk == null) {
+        throw new ExecutionException(PerlBundle.message("perl.run.error.no.alternative.sdk", alternativeSdkName));
+      }
+      return perlSdk;
+    }
+    else {
+      perlSdk = PerlProjectManager.getSdk(getProject());
+      if (perlSdk == null) {
+        throw new ExecutionException(PerlBundle.message("perl.run.error.no.sdk", getProject()));
+      }
+    }
+    return perlSdk;
   }
 
   @Override

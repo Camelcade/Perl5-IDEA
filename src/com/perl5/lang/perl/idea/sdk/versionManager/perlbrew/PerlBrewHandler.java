@@ -24,7 +24,15 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBrewHandler> {
+  private static final Pattern KEY_VAL_PATTERN = Pattern.compile("\\s+([\\w_]+):\\s*(\\S+)");
   public PerlBrewHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
@@ -53,8 +61,9 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
   }
 
   @NotNull
-  protected PerlBrewData createData(@NotNull String versionManagerPath, @NotNull String distributionId) {
-    return new PerlBrewData(versionManagerPath, distributionId, this);
+  @Override
+  protected PerlBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
+    return new PerlBrewData(vmAdapter.getVersionManagerPath(), distributionId, this, computeInfoData((PerlBrewAdapter)vmAdapter));
   }
 
   @NotNull
@@ -67,4 +76,22 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
     throw new NullPointerException();
   }
 
+  /**
+   * Builds a map of key-val from {@code perlbrew info}
+   */
+  @NotNull
+  static Map<String, String> computeInfoData(@NotNull PerlBrewAdapter adapter) {
+    List<String> infoOutput = adapter.getInfo();
+    if (infoOutput == null || infoOutput.isEmpty()) {
+      return Collections.emptyMap();
+    }
+    HashMap<String, String> result = new HashMap<>();
+    infoOutput.forEach(it -> {
+      Matcher matcher = KEY_VAL_PATTERN.matcher(it);
+      if (matcher.matches()) {
+        result.put(matcher.group(1), matcher.group(2));
+      }
+    });
+    return result;
+  }
 }

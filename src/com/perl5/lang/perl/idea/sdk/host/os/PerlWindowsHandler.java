@@ -18,9 +18,6 @@ package com.perl5.lang.perl.idea.sdk.host.os;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 class PerlWindowsHandler extends PerlOsHandler {
   public PerlWindowsHandler(@NotNull String name) {
     super(name);
@@ -35,11 +32,5 @@ class PerlWindowsHandler extends PerlOsHandler {
   @Override
   public final boolean isMsWindows() {
     return true;
-  }
-
-  @NotNull
-  @Override
-  public Path getDefaultHomePath() {
-    return Paths.get("c:\\Strawberry\\bin", getPerlExecutableName());
   }
 }

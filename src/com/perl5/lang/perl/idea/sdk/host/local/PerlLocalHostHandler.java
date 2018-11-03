@@ -16,26 +16,13 @@
 
 package com.perl5.lang.perl.idea.sdk.host.local;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.fileChooser.FileChooser;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.nio.file.Path;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.*;
 
@@ -65,47 +52,14 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
   }
 
   @Override
-  public void chooseFileInteractively(@NotNull String dialogTitle,
-                                      @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
-                                      boolean useDefaultIfExists,
-                                      @NotNull Predicate<String> nameValidator,
-                                      @NotNull Function<String, String> pathValidator,
-                                      @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer) {
-    PerlLocalHostData hostData = createData();
-    Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
-    if (useDefaultIfExists && hostData.isFileExists(defaultPath) && !hostData.isDirectory(defaultPath)) {
-      selectionConsumer.accept(defaultPath.toString(), hostData);
-      return;
-    }
+  protected boolean isChooseFolders() {
+    return SystemInfo.isMac;
+  }
 
-    final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, SystemInfo.isMac, false, false, false, false) {
-      @Override
-      public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
-        return super.isFileVisible(file, showHiddenFiles) && (file.isDirectory() || nameValidator.test(file.getName()));
-      }
-
-      @Override
-      public void validateSelectedFiles(VirtualFile[] files) throws Exception {
-        if (files.length != 0) {
-          String errorMessage = pathValidator.apply(files[0].getPath());
-          if (StringUtil.isNotEmpty(errorMessage)) {
-            throw new Exception(errorMessage);
-          }
-        }
-      }
-    };
-    descriptor.setTitle(dialogTitle);
-    VirtualFile fileToStart = defaultPath == null ? null : VfsUtil.findFile(defaultPath, false);
-    Ref<String> pathRef = Ref.create();
-    ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, fileToStart, chosen -> {
-      String selectedPath = chosen.get(0).getPath();
-      if (StringUtil.isEmpty(pathValidator.apply(selectedPath))) {
-        pathRef.set(selectedPath);
-      }
-    }));
-    if (!pathRef.isNull()) {
-      selectionConsumer.accept(pathRef.get(), hostData);
-    }
+  @Nullable
+  @Override
+  protected PerlLocalHostData createDataInteractively() {
+    return DATA_INSTANCE;
   }
 
   @Override

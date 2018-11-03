@@ -51,6 +51,7 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
     CpanminusAdapter.install(project);
   }
 
+  @NotNull
   @Override
   protected BerryBrewData self() {
     return this;

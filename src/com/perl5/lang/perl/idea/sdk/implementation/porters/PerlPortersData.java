@@ -24,6 +24,7 @@ class PerlPortersData extends PerlImplementationData<PerlPortersData, PerlPorter
     super(handler);
   }
 
+  @NotNull
   @Override
   protected PerlPortersData self() {
     return this;

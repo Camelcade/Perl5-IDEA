@@ -31,6 +31,7 @@ import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -48,6 +49,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -78,11 +80,21 @@ public class PerlCoverageRunner extends CoverageRunner {
   @Nullable
   private static ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
     Project project = perlCoverageSuite.getProject();
+    Sdk effectiveSdk;
+    try {
+      effectiveSdk = perlCoverageSuite.getConfiguration().getEffectiveSdk();
+    }
+    catch (ExecutionException e) {
+      LOG.error(e);
+      return null;
+    }
+
     PerlCommandLine perlCommandLine = ReadAction.compute(() -> {
       if (project.isDisposed()) {
         return null;
       }
-      VirtualFile coverFile = PerlRunUtil.findLibraryScriptWithNotification(project, COVER, COVER_LIB);
+
+      VirtualFile coverFile = PerlRunUtil.findLibraryScriptWithNotification(effectiveSdk, project, COVER, COVER_LIB);
       if (coverFile == null) {
         return null;
       }
@@ -92,17 +104,20 @@ public class PerlCoverageRunner extends CoverageRunner {
         return null;
       }
 
+      PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
       PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
-        project, coverFile, PerlRunUtil.PERL_I + FileUtil.toSystemIndependentName(libRoot));
+        project, effectiveSdk, coverFile,
+        Collections.singletonList(PerlRunUtil.PERL_I + FileUtil.toSystemIndependentName(
+          hostData.getRemotePath(libRoot))),
+        Collections.emptyList());
 
       if (commandLine == null) {
         return null; // fixme should be a notification
       }
 
-      commandLine.addParameters(
-        "--silent", "--nosummary", "-report", "camelcade", sessionDataFile.getAbsolutePath()
-      );
-
+      commandLine
+        .addParameters("--silent", "--nosummary", "-report", "camelcade", hostData.getRemotePath(sessionDataFile.getAbsolutePath()));
+      commandLine.withSdk(effectiveSdk);
       commandLine.withProject(project);
 
       return commandLine;
@@ -134,7 +149,7 @@ public class PerlCoverageRunner extends CoverageRunner {
       try {
         PerlFileData[] filesData = new Gson().fromJson(stdout, PerlFileData[].class);
         if (filesData != null) {
-          return parsePerlFileData(filesData);
+          return parsePerlFileData(PerlHostData.notNullFrom(effectiveSdk), filesData);
         }
       }
       catch (JsonParseException e) {
@@ -150,13 +165,15 @@ public class PerlCoverageRunner extends CoverageRunner {
   }
 
   @NotNull
-  private static ProjectData parsePerlFileData(@NotNull PerlFileData[] filesData) {
+  private static ProjectData parsePerlFileData(@NotNull PerlHostData hostData, @NotNull PerlFileData[] filesData) {
     ProjectData projectData = new ProjectData();
     for (PerlFileData perlFileData : filesData) {
       if (StringUtil.isEmpty(perlFileData.name) || perlFileData.lines == null) {
         continue;
       }
-      ClassData classData = projectData.getOrCreateClassData(FileUtil.toSystemIndependentName(perlFileData.name));
+      ClassData classData = projectData.getOrCreateClassData(
+        FileUtil.toSystemIndependentName(hostData.getLocalPath(perlFileData.name))
+      );
       Set<Map.Entry<Integer, PerlLineData>> linesEntries = perlFileData.lines.entrySet();
       Integer maxLineNumber = linesEntries.stream().map(Map.Entry::getKey).max(Integer::compare).orElse(0);
       LineData[] linesData = new LineData[maxLineNumber + 1];

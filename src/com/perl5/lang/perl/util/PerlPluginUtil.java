@@ -18,6 +18,7 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
+import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
@@ -37,6 +38,8 @@ import java.util.Objects;
  */
 public class PerlPluginUtil {
   public static final String PLUGIN_ID = "com.perl5";
+  private static final String PERL_DIR = "perl5";
+  private static final String REMOTES_DIR = "remote";
 
   @NotNull
   public static IdeaPluginDescriptor getPlugin() {
@@ -90,5 +93,26 @@ public class PerlPluginUtil {
   @Nullable
   public static PerlCommandLine getPluginScriptCommandLine(Project project, String script, String... perlParams) {
     return ObjectUtils.doIfNotNull(getPluginScriptVirtualFile(script), it -> PerlRunUtil.getPerlCommandLine(project, it, perlParams));
+  }
+
+  /**
+   * @return perl5 dir in the ide's {@code system} dir
+   */
+  @NotNull
+  public static String getPerlSystemPath() {
+    String systemPath = PathManager.getSystemPath();
+    String perlDirectory = FileUtil.join(systemPath, PERL_DIR);
+    FileUtil.createDirectory(new File(perlDirectory));
+    return perlDirectory;
+  }
+
+  /**
+   * @return root for remote filesystems cache
+   */
+  @NotNull
+  public static String getRemotesCachePath() {
+    String remotesCachePath = FileUtil.join(getPerlSystemPath(), REMOTES_DIR);
+    FileUtil.createDirectory(new File(remotesCachePath));
+    return remotesCachePath;
   }
 }

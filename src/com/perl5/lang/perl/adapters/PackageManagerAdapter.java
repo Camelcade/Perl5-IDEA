@@ -29,8 +29,7 @@ import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -87,7 +86,7 @@ public abstract class PackageManagerAdapter {
       return;
     }
     PerlRunUtil.runInConsole(
-      new PerlCommandLine(script.getPath())
+      new PerlCommandLine(PerlHostData.notNullFrom(mySdk).getRemotePath(script.getPath()))
         .withParameters(getInstallParameters(packageNames))
         .withSdk(getSdk())
         .withProject(getProject())
@@ -95,8 +94,6 @@ public abstract class PackageManagerAdapter {
         .withProcessListener(new ProcessAdapter() {
           @Override
           public void processTerminated(@NotNull ProcessEvent event) {
-            PerlSdkType.INSTANCE.setupSdkPaths(mySdk);
-            ApplicationManager.getApplication().invokeAndWait(() -> PerlProjectManager.getInstance(myProject).setProjectSdk(mySdk));
             PerlRunUtil.refreshSdkDirs(mySdk, myProject);
           }
         })

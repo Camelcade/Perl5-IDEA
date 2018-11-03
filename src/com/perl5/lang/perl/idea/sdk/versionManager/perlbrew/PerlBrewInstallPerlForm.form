@@ -97,6 +97,7 @@
           <forms/>
         </constraints>
         <properties>
+          <selected value="true"/>
           <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.no.testing"/>
         </properties>
       </component>

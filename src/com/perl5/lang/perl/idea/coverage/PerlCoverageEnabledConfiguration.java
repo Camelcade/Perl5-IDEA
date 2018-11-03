@@ -19,26 +19,45 @@ package com.perl5.lang.perl.idea.coverage;
 import com.intellij.coverage.CoverageRunner;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
-import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.application.PathManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
+import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfiguration {
-  private static final Logger LOG = Logger.getInstance(PerlCoverageEnabledConfiguration.class);
+import java.io.File;
 
+public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfiguration {
   public PerlCoverageEnabledConfiguration(RunConfigurationBase configuration) {
     super(configuration);
     setCoverageRunner(CoverageRunner.getInstance(PerlCoverageRunner.class));
   }
 
+  @Override
+  public PerlRunConfiguration getConfiguration() {
+    return (PerlRunConfiguration)super.getConfiguration();
+  }
+
   @Nullable
   @Override
-  public String getCoverageFilePath() {
-    String coverageBasePath = super.getCoverageFilePath();
-    if (coverageBasePath == null) {
-      LOG.warn("Empty coverage database path");
-      return ".";
+  protected String createCoverageFile() {
+    CoverageRunner coverageRunner = getCoverageRunner();
+    if (coverageRunner == null) {
+      return null;
     }
-    return FileUtil.toSystemIndependentName(coverageBasePath.replaceAll("\\$", "_S_"));
+    String coverageRootPath = PathManager.getSystemPath() + File.separator + "coverage";
+    PerlRunConfiguration perlRunConfiguration = getConfiguration();
+    Project project = perlRunConfiguration.getProject();
+    String path = coverageRootPath + File.separator +
+                  FileUtil.sanitizeFileName(project.getName()) +
+                  this.coverageFileNameSeparator() +
+                  FileUtil.sanitizeFileName(perlRunConfiguration.getName()) + "." + coverageRunner.getDataFileExtension();
+    (new File(coverageRootPath)).mkdirs();
+    return path;
+  }
+
+  @Override
+  protected String coverageFileNameSeparator() {
+    return "_S_";
   }
 }

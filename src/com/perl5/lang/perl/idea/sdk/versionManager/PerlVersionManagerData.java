@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -27,6 +26,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,8 +43,12 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
 
   /**
    * Adds bin dirs for script searching. E.g. perlbrew may have patchperl and cpanm installed into perlbrew's home
+   * @apiNote returns paths on the target host, not local
    */
-  public void addBinDirs(@NotNull List<VirtualFile> dirs) {}
+  @NotNull
+  public List<Path> getBinDirsPath() {
+    return Collections.emptyList();
+  }
 
   /**
    * Patched commandline according to the rules of the version manager and current version manager data
@@ -70,13 +75,13 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   public abstract void installCpanminus(@Nullable Project project);
 
   @NotNull
-  public static PerlVersionManagerData notNullFrom(@NotNull Sdk sdk) {
+  public static PerlVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No version manager data in " + sdk);
   }
 
   @Contract("null->null")
   @Nullable
-  public static PerlVersionManagerData from(@Nullable Sdk sdk) {
+  public static PerlVersionManagerData<?, ?> from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getVersionManagerData);
   }
 

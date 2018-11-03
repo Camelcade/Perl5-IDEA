@@ -28,6 +28,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Consumer;
 
@@ -60,7 +61,7 @@ class PerlSystemHandler
   public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Consumer<Sdk> sdkConsumer) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
-      PerlHostData::suggestHomePath,
+      this::suggestHomePath,
       false,
       it -> StringUtil.contains(it, "perl"),
       it -> {
@@ -72,6 +73,14 @@ class PerlSystemHandler
           PerlSdkType.createAndAddSdk(path, perlHostData, createData(), sdkConsumer);
         }
       });
+  }
+
+  /**
+   * Suggests a default path for a file chooser or text input
+   */
+  @Nullable
+  private Path suggestHomePath(@NotNull PerlHostData<?, ?> hostData) {
+    return hostData.findFileByName(hostData.getOsHandler().getPerlExecutableName());
   }
 
   @Override

@@ -30,10 +30,11 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
     super(bean);
   }
 
+
   @NotNull
   @Override
-  protected BerryBrewData createData(@NotNull String versionManagerPath, @NotNull String distributionId) {
-    return new BerryBrewData(versionManagerPath, distributionId, this);
+  protected BerryBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
+    return new BerryBrewData(vmAdapter.getVersionManagerPath(), distributionId, this);
   }
 
   @NotNull

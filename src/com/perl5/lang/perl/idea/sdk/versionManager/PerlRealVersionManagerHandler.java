@@ -25,6 +25,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -61,7 +62,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   }
 
   @NotNull
-  protected abstract Data createData(@NotNull String versionManagerPath, @NotNull String distributionId);
+  protected abstract Data createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId);
 
   /**
    * @return version manager's executable name;
@@ -100,11 +101,17 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
    * just trying to find the executable file on the host
    */
   @Nullable
-  private Path suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData) {
+  protected Path suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData) {
+    VirtualFileSystem fileSystem = hostData.getFileSystem();
+    if (fileSystem == null) {
+      return null;
+    }
     return hostData.getHostSdkStream()
       .filter(this::isSameHandler)
-      .map(it -> Paths.get(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
-      .findFirst().orElseGet(() -> hostData.findFile(getExecutableName()));
+      .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
+      .filter(it -> it != null && it.isValid() && it.exists())
+      .map(it -> Paths.get(it.getPath()))
+      .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
   }
 
   protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
@@ -170,7 +177,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       ));
       return;
     }
-    PerlRealVersionManagerData versionManagerData = createData(vmAdapter.getVersionManagerPath(), distributionId);
+    PerlRealVersionManagerData versionManagerData = createData(vmAdapter, distributionId);
     PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer);
   }
 }

@@ -36,14 +36,13 @@ import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ObjectUtils;
@@ -66,7 +65,6 @@ import org.jetbrains.annotations.Nullable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -108,21 +106,29 @@ public class PerlRunUtil {
                                                    @Nullable VirtualFile scriptFile,
                                                    @NotNull List<String> perlParameters,
                                                    @NotNull List<String> scriptParameters) {
-    String interpreterPath = ObjectUtils.doIfNotNull(perlSdk, Sdk::getHomePath);
+    if (perlSdk == null) {
+      perlSdk = PerlProjectManager.getSdk(project);
+    }
+    if (perlSdk == null) {
+      LOG.error("No sdk provided or available in project " + project);
+      return null;
+    }
+    String interpreterPath = perlSdk.getHomePath();
     if (StringUtil.isEmpty(interpreterPath)) {
       LOG.warn("Empty interpreter path in " + perlSdk + " while building command line for " + scriptFile);
       return null;
     }
     PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);
-    commandLine.setExePath(FileUtil.toSystemDependentName(interpreterPath));
+    commandLine.setExePath(interpreterPath);
+    PerlHostData hostData = PerlHostData.notNullFrom(perlSdk);
     for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
-      commandLine.addParameter(PERL_I + libRoot.getCanonicalPath());
+      commandLine.addParameter(PERL_I + hostData.getRemotePath(libRoot.getCanonicalPath()));
     }
 
     commandLine.addParameters(perlParameters);
 
     if (scriptFile != null) {
-      commandLine.addParameter(FileUtil.toSystemDependentName(scriptFile.getPath()));
+      commandLine.addParameter(hostData.getRemotePath(scriptFile.getPath()));
     }
 
     commandLine.addParameters(scriptParameters);
@@ -241,6 +247,7 @@ public class PerlRunUtil {
    * @param sdk        perl sdk to search in
    * @param scriptName script name to find
    * @return script's virtual file if available
+   * @apiNote returns virtual file of local file, not remote
    **/
   @Contract("null,_->null; _,null->null")
   @Nullable
@@ -278,12 +285,13 @@ public class PerlRunUtil {
     }
     List<VirtualFile> files =
       new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
-    Path sdkBinDir = Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent();
+
+    PerlHostData hostData = PerlHostData.notNullFrom(sdk);
+    Path sdkBinDir = Paths.get(hostData.getLocalPath(StringUtil.notNullize(sdk.getHomePath()))).getParent();
     if (sdkBinDir != null) {
       files.add(VfsUtil.findFile(sdkBinDir, false));
     }
-    PerlVersionManagerData.notNullFrom(sdk).addBinDirs(files);
-
+    PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> files.add(VfsUtil.findFile(hostData.getLocalPath(it), false)));
     return files.stream().filter(Objects::nonNull).distinct();
   }
 
@@ -298,14 +306,34 @@ public class PerlRunUtil {
     if (libraryRoot == null || !libraryRoot.isValid()) {
       return null;
     }
-    if ("lib".equals(libraryRoot.getName())) {
-      return libraryRoot.findFileByRelativePath("../bin");
+    Path binPath = findLibsBin(Paths.get(libraryRoot.getPath()));
+    return binPath == null ? null : VfsUtil.findFile(binPath, false);
+  }
+
+  /**
+   * Finds a bin dir for a library root path
+   *
+   * @return bin root path or null if not found
+   * @implSpec for now we are traversing tree up to {@code lib} dir and resolving {@code ../bin}
+   */
+  @Nullable
+  public static Path findLibsBin(@Nullable Path libraryRoot) {
+    if (libraryRoot == null) {
+      return null;
+    }
+    Path fileName = libraryRoot.getFileName();
+    if (fileName == null) {
+      return null;
+    }
+    if ("lib".equals(fileName.toString())) {
+      return libraryRoot.resolve("../bin");
     }
     return findLibsBin(libraryRoot.getParent());
   }
 
   /**
    * Requests perl path using introspection variable $^X: {@code perl -le print $^X}
+   *
    * @param hostData host to execute command on
    * @return version string or null if response was wrong
    */
@@ -460,24 +488,39 @@ public class PerlRunUtil {
   }
 
 
-  public static void setProgressText(@NotNull String string) {
+  /**
+   * Sets {@code newText} to the progress indicator if available.
+   *
+   * @return old indicator text
+   */
+  @Nullable
+  public static String setProgressText(@Nullable String newText) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
     if (indicator != null) {
-      indicator.setText(string);
+      String oldText = indicator.getText();
+      indicator.setText(newText);
+      return oldText;
     }
+    return null;
   }
 
-  public static void setProgressText2(@NotNull String string) {
+  /**
+   * Sets {@code newText} to the progress indicator secondary text, if indicator is available
+   *
+   * @return old indicator text
+   */
+  @Nullable
+  public static String setProgressText2(@Nullable String newText) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
     if (indicator != null) {
-      indicator.setText2(string);
+      String oldText = indicator.getText2();
+      indicator.setText2(newText);
+      return oldText;
     }
+    return null;
   }
 
   public static void refreshSdkDirs(@Nullable Project project) {
-    if (project == null) {
-      return;
-    }
     refreshSdkDirs(PerlProjectManager.getSdk(project), project);
   }
 
@@ -488,23 +531,15 @@ public class PerlRunUtil {
     if (sdk == null) {
       return;
     }
-    List<VirtualFile> dirsToRefresh =
-      ReadAction.compute(() -> getBinDirectories(sdk).distinct().collect(Collectors.toList()));
-    dirsToRefresh.addAll(Arrays.asList(sdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
 
-    /**
-     * copy-paste from {@link VfsUtil#markDirtyAndRefresh(boolean, boolean, boolean, com.intellij.openapi.vfs.VirtualFile...)}
-     * for a callback
-     */
-    //
-    List<VirtualFile> list = VfsUtil.markDirty(true, true, dirsToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
-    if (list.isEmpty()) {
-      return;
-    }
-    LocalFileSystem.getInstance().refreshFiles(list, true, true, () -> {
-      if (project != null) {
-        DaemonCodeAnalyzer.getInstance(project).restart();
+    new Task.Backgroundable(project, PerlBundle.message("perl.progress.refreshing.interpreter.information"), false) {
+      @Override
+      public void run(@NotNull ProgressIndicator indicator) {
+        PerlSdkType.INSTANCE.setupSdkPaths(sdk);
+        if (project != null) {
+          DaemonCodeAnalyzer.getInstance(project).restart();
+        }
       }
-    });
+    }.queue();
   }
 }

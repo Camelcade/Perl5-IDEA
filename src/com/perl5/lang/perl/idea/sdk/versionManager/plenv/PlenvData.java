@@ -57,6 +57,7 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
     plenvAdapter.runInstallInConsole(project, PACKAGE_NAME, PLENV_INSTALL_CPANM, getDistributionId());
   }
 
+  @NotNull
   @Override
   protected PlenvData self() {
     return this;

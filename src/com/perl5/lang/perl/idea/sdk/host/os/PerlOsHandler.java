@@ -23,7 +23,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
 import java.util.Objects;
 
 public abstract class PerlOsHandler {
@@ -36,9 +35,6 @@ public abstract class PerlOsHandler {
 
   @NotNull
   public abstract String getPerlExecutableName();
-
-  @NotNull
-  public abstract Path getDefaultHomePath();
 
   /**
    * @return operation system presentable name

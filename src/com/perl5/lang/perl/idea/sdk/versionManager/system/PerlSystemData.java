@@ -28,6 +28,7 @@ class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHa
     super(handler);
   }
 
+  @NotNull
   @Override
   protected PerlSystemData self() {
     return this;

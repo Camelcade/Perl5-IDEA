@@ -36,6 +36,7 @@ public abstract class AbstractPerlData<Data extends AbstractPerlData<Data, Handl
     getHandler().saveData(target, self());
   }
 
+  @NotNull
   protected abstract Data self();
 
   @NotNull

@@ -53,7 +53,8 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
   }
 
   @NotNull
-  protected PlenvData createData(@NotNull String versionManagerPath, @NotNull String distributionId) {
-    return new PlenvData(versionManagerPath, distributionId, this);
+  @Override
+  protected PlenvData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
+    return new PlenvData(vmAdapter.getVersionManagerPath(), distributionId, this);
   }
 }

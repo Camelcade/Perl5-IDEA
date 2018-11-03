@@ -42,9 +42,14 @@ import static com.perl5.PerlIcons.PERLBREW_ICON;
  * Api to the perlbrew cli
  */
 class PerlBrewAdapter extends PerlVersionManagerAdapter {
+  static final String PERLBREW_ROOT = "PERLBREW_ROOT";
+  static final String PERLBREW_HOME = "PERLBREW_HOME";
+  static final String PERLBREW_PATH = "PERLBREW_PATH";
+  static final String PERLBREW_MANPATH = "PERLBREW_MANPATH";
   static final String PERLBREW_EXEC = "exec";
   static final String PERLBREW_INSTALL = "install";
   static final String PERLBREW_LIST = "list";
+  static final String PERLBREW_INFO = "info";
   static final String PERLBREW_AVAILABLE = "available";
   static final String PERLBREW_WITH = "--with";
   static final String PERLBREW_QUIET = "-q";
@@ -73,6 +78,15 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
   ProcessOutput createLibrary(@NotNull String perlVersion, @NotNull String libraryName) {
     return getProcessOutput(
       new PerlCommandLine(getVersionManagerPath(), "lib", "create", perlVersion + "@" + libraryName).withHostData(getHostData()));
+  }
+
+  /**
+   * @return result of {@code perlbrew info} command
+   */
+  @Nullable
+  List<String> getInfo() {
+    return getOutput(
+      new PerlCommandLine("bash", "-cl", new PerlCommandLine(getVersionManagerPath(), PERLBREW_INFO).getCommandLineString()));
   }
 
   /**

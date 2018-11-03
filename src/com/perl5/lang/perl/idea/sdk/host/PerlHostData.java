@@ -22,6 +22,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
@@ -34,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -56,16 +58,6 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   public abstract PerlOsHandler getOsHandler();
 
   /**
-   * Returns a recommended starting path for a file chooser (where SDKs of this type are usually may be found),
-   * or {@code null} if not applicable/no SDKs found.
-   * <p/>
-   * E.g. for Python SDK on Unix the method may return either {@code "/usr/bin"} or {@code "/usr/bin/python"}
-   * (if there is only one Python interpreter installed on a host).
-   */
-  @Nullable
-  public abstract Path suggestHomePath();
-
-  /**
    * @return short lowercased name, for interpreters list
    */
   @NotNull
@@ -74,22 +66,16 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   /**
+   * @return a filesystem for this host if available
+   */
+  @Nullable
+  public abstract VirtualFileSystem getFileSystem();
+
+  /**
    * Attempts to find a file at host
    */
   @Nullable
-  public abstract Path findFile(@NotNull String fileName);
-
-  /**
-   * @return true iff {@code path} exists on the host
-   */
-  @Contract("null -> false")
-  public abstract boolean isFileExists(@Nullable Path path);
-
-  /**
-   * @return true iff {@code path} is directory
-   */
-  @Contract("null -> false")
-  public abstract boolean isDirectory(@Nullable Path path);
+  public abstract Path findFileByName(@NotNull String fileName);
 
   /**
    * Creates a process and process handler to be run in console.
@@ -103,33 +89,55 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @NotNull
   protected abstract CapturingProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
-  @NotNull
-  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    PerlHostData hostData = commandLine.getEffectiveHostData();
-    if (hostData == null) {
-      throw new ExecutionException("No host data in the command line " + commandLine);
-    }
-    PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
-    if (versionManagerData != null) {
-      commandLine = versionManagerData.patchCommandLine(commandLine);
-    }
-    final Map<String, String> environment = commandLine.getEnvironment();
-    ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine);
-    commandLine.getProcessListeners().forEach(handler::addProcessListener);
-    handler.addProcessListener(new ProcessAdapter() {
-      @Override
-      public void startNotified(@NotNull ProcessEvent event) {
-        String perl5Opt = environment.get(PerlRunUtil.PERL5OPT);
-        if (StringUtil.isNotEmpty(perl5Opt)) {
-          handler.notifyTextAvailable(" - " + PerlRunUtil.PERL5OPT + "=" + perl5Opt + '\n', ProcessOutputTypes.SYSTEM);
-        }
-      }
-    });
+  /**
+   * @return a path on local machine to the file identified by {@code remotePath}
+   */
+  @Contract("null->null; !null->!null")
+  @Nullable
+  public abstract String getLocalPath(@Nullable String remotePath);
 
-    PerlRunUtil.addMissingPackageListener(handler, commandLine);
-    ProcessTerminatedListener.attach(handler, commandLine.getEffectiveProject());
+  @Contract("null->null; !null->!null")
+  @Nullable
+  public final Path getLocalPath(@Nullable Path remotePath) {
+    return remotePath == null ? null : Paths.get(getLocalPath(remotePath.toString()));
+  }
 
-    return handler;
+  /**
+   * @return a path on remote machine to the file identified by {@code localPath}
+   */
+  @Contract("null->null; !null->!null")
+  @Nullable
+  public abstract String getRemotePath(@Nullable String localPath);
+
+  @Contract("null->null; !null->!null")
+  @Nullable
+  public final Path getRemotePath(@Nullable Path localPath) {
+    return localPath == null ? null : Paths.get(getRemotePath(localPath.toString()));
+  }
+
+  /**
+   * @return a path to a local cache of the remote files or null if we have a direct access to the FS   *
+   */
+  @Nullable
+  public abstract String getLocalCacheRoot();
+
+  /**
+   * synchronizes {@code remotePath} with local cache
+   *
+   * @implSpec should check that we are not on edt
+   */
+  public abstract void syncPath(@Nullable String remotePath);
+
+  public final void syncPath(@Nullable Path remotePath) {
+    if (remotePath == null) {
+      return;
+    }
+    syncPath(remotePath.toString());
+  }
+
+  @Override
+  public String toString() {
+    return getShortName();
   }
 
   @NotNull
@@ -171,6 +179,35 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   @NotNull
   public static PerlHostData notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No host data in " + sdk);
+  }
+
+  @NotNull
+  public static ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    PerlHostData hostData = commandLine.getEffectiveHostData();
+    if (hostData == null) {
+      throw new ExecutionException("No host data in the command line " + commandLine);
+    }
+    PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
+    if (versionManagerData != null) {
+      commandLine = versionManagerData.patchCommandLine(commandLine);
+    }
+    final Map<String, String> environment = commandLine.getEnvironment();
+    ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine.withPty(true));
+    commandLine.getProcessListeners().forEach(handler::addProcessListener);
+    handler.addProcessListener(new ProcessAdapter() {
+      @Override
+      public void startNotified(@NotNull ProcessEvent event) {
+        String perl5Opt = environment.get(PerlRunUtil.PERL5OPT);
+        if (StringUtil.isNotEmpty(perl5Opt)) {
+          handler.notifyTextAvailable(" - " + PerlRunUtil.PERL5OPT + "=" + perl5Opt + '\n', ProcessOutputTypes.SYSTEM);
+        }
+      }
+    });
+
+    PerlRunUtil.addMissingPackageListener(handler, commandLine);
+    ProcessTerminatedListener.attach(handler, commandLine.getEffectiveProject());
+
+    return handler;
   }
 }
 

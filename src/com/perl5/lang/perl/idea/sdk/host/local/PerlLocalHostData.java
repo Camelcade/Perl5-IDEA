@@ -21,16 +21,16 @@ import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ColoredProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHandler> {
   public PerlLocalHostData(@NotNull PerlLocalHostHandler handler) {
@@ -52,47 +52,49 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   @NotNull
   @Override
   protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new ColoredProcessHandler(commandLine.withPty(true));
-  }
-
-  @Override
-  public boolean isFileExists(@Nullable Path path) {
-    return path != null && path.toFile().exists();
-  }
-
-  @Override
-  public boolean isDirectory(@Nullable Path path) {
-    return path != null && path.toFile().isDirectory();
+    return new ColoredProcessHandler(commandLine);
   }
 
   @Nullable
   @Override
-  public Path suggestHomePath() {
-    String perlPath = PerlRunUtil.getPathFromPerl(this);
-
-    if (perlPath != null) {
-      return Paths.get(perlPath);
-    }
-
-    return getOsHandler().getDefaultHomePath();
+  public VirtualFileSystem getFileSystem() {
+    return LocalFileSystem.getInstance();
   }
 
   @Nullable
   @Override
-  public Path findFile(@NotNull String fileName) {
+  public Path findFileByName(@NotNull String fileName) {
     return PathEnvironmentVariableUtil.findAllExeFilesInPath(fileName).stream()
       .map(File::toPath)
       .findFirst()
       .orElse(null);
   }
 
+  @Nullable
   @Override
-  protected PerlLocalHostData self() {
-    return this;
+  public String getLocalPath(@Nullable String remotePath) {
+    return remotePath;
+  }
+
+  @Nullable
+  @Override
+  public String getLocalCacheRoot() {
+    return null;
+  }
+
+  @Nullable
+  @Override
+  public String getRemotePath(@Nullable String localPath) {
+    return localPath;
   }
 
   @Override
-  public String toString() {
-    return getShortName();
+  public void syncPath(@Nullable String remotePath) {
+  }
+
+  @NotNull
+  @Override
+  protected PerlLocalHostData self() {
+    return this;
   }
 }

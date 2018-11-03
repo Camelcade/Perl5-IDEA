@@ -40,7 +40,7 @@ public class PerlDebugProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) {
+  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) throws ExecutionException {
     List<String> result = new ArrayList<>(super.getPerlParameters(runProfile));
     result.add(0, DEBUG_ARGUMENT);
     return result;

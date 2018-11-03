@@ -20,9 +20,13 @@ import com.intellij.coverage.BaseCoverageSuite;
 import com.intellij.coverage.CoverageEngine;
 import com.intellij.coverage.CoverageFileProvider;
 import com.intellij.coverage.CoverageRunner;
+import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class PerlCoverageSuite extends BaseCoverageSuite {
   public PerlCoverageSuite() {
@@ -36,6 +40,20 @@ public class PerlCoverageSuite extends BaseCoverageSuite {
                            boolean trackTestFolders,
                            CoverageRunner coverageRunner, Project project) {
     super(name, fileProvider, lastCoverageTimeStamp, coverageByTestEnabled, tracingEnabled, trackTestFolders, coverageRunner, project);
+  }
+
+  @NotNull
+  @Override
+  public PerlRunConfiguration getConfiguration() {
+    return Objects.requireNonNull((PerlRunConfiguration)super.getConfiguration());
+  }
+
+  @Override
+  public void setConfiguration(RunConfigurationBase configuration) {
+    if (!(configuration instanceof PerlRunConfiguration)) {
+      throw new RuntimeException("Got " + configuration);
+    }
+    super.setConfiguration(configuration);
   }
 
   @NotNull

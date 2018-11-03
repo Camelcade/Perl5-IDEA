@@ -24,12 +24,10 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -65,22 +63,7 @@ public class PerlRunProfileState extends CommandLineState {
 
     Project project = getEnvironment().getProject();
 
-    Sdk perlSdk = null;
-    if (runConfiguration.isUseAlternativeSdk()) {
-      String alternativeSdkName = runConfiguration.getAlternativeSdkName();
-      perlSdk = PerlSdkTable.getInstance().findJdk(alternativeSdkName);
-      if (perlSdk == null) {
-        throw new ExecutionException(PerlBundle.message("perl.run.error.no.alternative.sdk", alternativeSdkName));
-      }
-    }
-    else {
-      perlSdk = PerlProjectManager.getSdk(project);
-      if (perlSdk == null) {
-        throw new ExecutionException(PerlBundle.message("perl.run.error.no.sdk", project));
-      }
-    }
-
-
+    Sdk perlSdk = runConfiguration.getEffectiveSdk();
     PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
       project, perlSdk, scriptFile, getPerlParameters(runConfiguration), getScriptParameters(runConfiguration));
 
@@ -119,14 +102,11 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withEnvironment(environment);
     commandLine.withParentEnvironmentType(runConfiguration.isPassParentEnvs() ? CONSOLE : NONE);
 
-    ProcessHandler handler =
-      PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset).withProject(project));
-    return handler;
+    return PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset).withProject(project));
   }
 
   @NotNull
-  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) {
-
+  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) throws ExecutionException {
     String perlParameters = runProfile.getPerlParameters();
     return StringUtil.isEmpty(perlParameters) ? Collections.emptyList() : StringUtil.split(perlParameters, " ");
   }

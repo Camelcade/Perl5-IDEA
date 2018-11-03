@@ -16,28 +16,36 @@
 
 package com.perl5.lang.perl.idea.coverage;
 
+import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PerlCoverageProfileState extends PerlRunProfileState {
+  private static final Logger LOG = Logger.getInstance(PerlCoverageProfileState.class);
   public PerlCoverageProfileState(ExecutionEnvironment environment) {
     super(environment);
   }
 
   @NotNull
   @Override
-  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) {
+  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) throws ExecutionException {
     List<String> perlParameters = new ArrayList<>(super.getPerlParameters(runProfile));
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((PerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
-    perlParameters.add(0, "-MDevel::Cover=-silent,1,-db," + coverageBasePath + ",-dir,.");
+    Sdk effectiveSdk = runProfile.getEffectiveSdk();
+    PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
+
+    perlParameters.add(0, "-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
 
     return perlParameters;
   }
