@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerCollector;
@@ -77,17 +76,6 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    */
   @NotNull
   public abstract String getShortName();
-
-  /**
-   * Attempts to create a host data for {@code sdk}.
-   *
-   * @param sdk newly created sdk with user-selected path set as a home path.
-   * @return new host data or null if something went wrong. Handler should handle errors by itself.
-   * @implSpec handler is free to adjust sdk with necessary data
-   */
-  @Contract("null -> null")
-  @Nullable
-  public abstract Data createData(@Nullable ProjectJdkImpl sdk);
 
   /**
    * @return true iff this handler can be used in the application. E.g. has proper os, proper plugins, etc.

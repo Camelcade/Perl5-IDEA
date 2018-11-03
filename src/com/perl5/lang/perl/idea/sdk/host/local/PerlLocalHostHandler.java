@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.sdk.host.local;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -107,12 +106,6 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
     if (!pathRef.isNull()) {
       selectionConsumer.accept(pathRef.get(), hostData);
     }
-  }
-
-  @Nullable
-  @Override
-  public PerlLocalHostData createData(@Nullable ProjectJdkImpl sdk) {
-    return sdk == null ? null : createData();
   }
 
   @Override
