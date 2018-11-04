@@ -18,8 +18,10 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,9 +35,19 @@ import java.util.Map;
 public class PerlDebugProfileState extends PerlRunProfileState {
   private static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
   private Integer myDebugPort;
+  @NotNull
+  private final PerlHostData myHostData;
 
   public PerlDebugProfileState(ExecutionEnvironment environment) {
     super(environment);
+    PerlRunConfiguration perlRunConfiguration = (PerlRunConfiguration)environment.getRunProfile();
+    try {
+      Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
+      myHostData = PerlHostData.notNullFrom(effectiveSdk);
+    }
+    catch (ExecutionException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   @NotNull
@@ -61,11 +73,14 @@ public class PerlDebugProfileState extends PerlRunProfileState {
   }
 
   public String mapPathToRemote(String localPath) {
-    return localPath;
+    String remotePath = myHostData.getRemotePath(localPath);
+    return remotePath == null ? localPath : remotePath;
   }
 
+  @NotNull
   public String mapPathToLocal(String remotePath) {
-    return remotePath;
+    String localPath = myHostData.getLocalPath(remotePath);
+    return localPath == null ? remotePath : localPath;
   }
 
 

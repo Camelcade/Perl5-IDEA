@@ -71,6 +71,7 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
     }
   }
 
+  @NotNull
   @Override
   public String mapPathToLocal(String remotePathName) {
     Path remotePath = Paths.get(remotePathName);
