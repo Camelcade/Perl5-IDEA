@@ -33,6 +33,12 @@
   </li>
   <li>Action to install arbitrary packages using <code>cpan</code> or <code>cpanmn</code>.</li>
   <li>Action for installing <code>App::cpanminus</code> in <code>Tools: Perl</code> section</li>
+  <li>Action to refresh current interpreter information. Plugin watches for the filesystem changes and most likely catches external changes
+    to the interpreter (e.g. installing
+    package from console), but not always (and for sure can't do this in the remote case). This action forces IDE to refresh current
+    interpreter data, so all changes should be catched. (NB: this action is more like an emergency thing, so if you often forced to use it,
+    it's probably worth to start an issue in the <a href="https://github.com/Camelcade/Perl5-IDEA/issues">tracker</a>.)
+  </li>
   <li>Missing package file inspection suggests a quickfix to install a package using <code>cpan</code>/<code>cpanminus</code>, by <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1775">@yxliang01</a></li>
   <li><code>Windows Subsystem for Linux</code> support. Windows users may use not only system perl and <code>berrybrew</code>, but WSL

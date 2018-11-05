@@ -1028,6 +1028,7 @@
       <action id="perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
       <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
       <action id="perl5.DeparseFile" class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction"/>
+      <action id="perl5.sync.interpreter" class="com.perl5.lang.perl.idea.actions.PerlSynInterpreterAction"/>
     </group>
 
     <action id="Perl5.NewFile" class="com.perl5.lang.perl.idea.actions.PerlFileFromTemplateAction">
