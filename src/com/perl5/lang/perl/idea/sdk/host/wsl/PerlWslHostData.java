@@ -20,13 +20,22 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.*;
 import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.execution.wsl.WSLUtil;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.ui.update.MergingUpdateQueue;
+import com.intellij.util.ui.update.Update;
 import com.intellij.util.xmlb.annotations.Attribute;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -44,6 +53,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHandler> {
+  private static final MergingUpdateQueue NOTIFICATIONS_QUEUE = new MergingUpdateQueue(
+    "notifications.queue", 3000, true, null);
+
   private static final Logger LOG = Logger.getInstance(PerlWslHostData.class);
   private static final int TIMEOUT = 10000;
 
@@ -147,7 +159,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
     LOG.info("Syncing " + myDistributionId + ": " + remotePath + " => " + localPath);
     PerlRunUtil.setProgressText("Syncing: " + remotePath);
     try {
-      distribution.copyFromWsl(
+      ProcessOutput output = distribution.copyFromWsl(
         remotePath, localPath, ContainerUtil.newArrayList("-v", "--exclude", "'*.so'", "--delete"),
         it -> it.addProcessListener(
           new ProcessAdapter() {
@@ -159,6 +171,34 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
               }
             }
           }));
+      int exitCode = output.getExitCode();
+      if (exitCode == 0) {
+        return;
+      }
+
+      LOG.warn("Error while copying: " + remotePath + "; Exit code: " + exitCode + "; Stderr: " + output.getStderr());
+      if (exitCode == 127) {
+        NOTIFICATIONS_QUEUE.queue(Update.create(this, () -> {
+          AnAction action = ActionManagerEx.getInstanceEx().getAction("perl5.sync.interpreter");
+          Notification notification = new Notification(
+            PerlBundle.message("perl.host.handler.wsl.notification.group"),
+            PerlBundle.message("perl.host.handler.wsl.missing.rsync.title"),
+            PerlBundle.message("perl.host.handler.wsl.missing.rsync.message"),
+            NotificationType.ERROR
+          );
+          Notifications.Bus.notify(notification.addAction(
+            new DumbAwareAction(action.getTemplatePresentation().getText()) {
+              @Override
+              public void actionPerformed(@NotNull AnActionEvent e) {
+                notification.expire();
+                action.update(e);
+                if (e.getPresentation().isEnabled()) {
+                  action.actionPerformed(e);
+                }
+              }
+            }));
+        }));
+      }
     }
     catch (ExecutionException e) {
       LOG.error(e);
