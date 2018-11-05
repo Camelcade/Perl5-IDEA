@@ -298,6 +298,7 @@
 
     <consoleFilterProvider order="last"
                            implementation="com.perl5.lang.perl.idea.execution.filters.PerlConsoleFilterProvider"/>
+    <consoleInputFilterProvider implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslInputFilterProvider"/>
 
     <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotator"
                id="PERL_SUBS_ANNOTATOR" order="first"/>
