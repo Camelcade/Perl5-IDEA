@@ -38,7 +38,7 @@ public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
   public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
     ArrayList<Filter> filters = ContainerUtil.newArrayList(new PerlConsoleFileLinkFilter(project));
     if (consoleView instanceof PerlRunConsole) {
-      filters.add(new PerlAbsolutePathConsoleFilter(project));
+      filters.add(new PerlAbsolutePathConsoleFilter(project, ((PerlRunConsole)consoleView)));
     }
     return filters.toArray(Filter.EMPTY_ARRAY);
   }

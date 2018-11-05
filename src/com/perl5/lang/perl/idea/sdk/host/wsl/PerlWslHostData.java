@@ -106,7 +106,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
       return null;
     }
     String windowsPath = WSLUtil.getWindowsPath(remotePathName);
-    return windowsPath != null ? windowsPath : FileUtil.join(getLocalCacheRoot(), remotePathName);
+    return windowsPath != null ? windowsPath : FileUtil.toSystemDependentName(new File(getLocalCacheRoot(), remotePathName).getPath());
   }
 
   @Nullable

@@ -20,9 +20,12 @@ package com.perl5.lang.perl.idea.execution.filters;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.nio.file.InvalidPathException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,15 +36,19 @@ import java.util.regex.Pattern;
 public class PerlAbsolutePathConsoleFilter implements Filter {
   private static final Pattern PATTERN = Pattern.compile(
     "(?<=^|-I|[^.\\w/~:])" +
-    "((?:[/~]|\\w:)" +
+    "((?:[/~]|\\w:[/\\\\])" +
     "[-@\\w./~:\\\\]+[-@\\w.~])"
   );
 
   @NotNull
   private final Project myProject;
 
-  public PerlAbsolutePathConsoleFilter(@NotNull Project project) {
+  @NotNull
+  private final PerlRunConsole myRunConsole;
+
+  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @NotNull PerlRunConsole runConsole) {
     myProject = project;
+    myRunConsole = runConsole;
   }
 
   @Nullable
@@ -50,11 +57,19 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
     int startOffset = entireLength - line.length();
     List<ResultItem> resultList = ContainerUtil.newArrayList();
     Matcher matcher = PATTERN.matcher(line);
+    PerlHostData hostData = myRunConsole.getHostData();
     while (matcher.find()) {
+      String filePath;
+      try {
+        filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
+      }
+      catch (InvalidPathException e) {
+        filePath = null;
+      }
       resultList.add(new Result(
         startOffset + matcher.start(1),
         startOffset + matcher.end(1),
-        new MyHyperLinkInfo(myProject, 0, matcher.group(1))));
+        new MyHyperLinkInfo(myProject, 0, filePath == null ? matcher.group(1) : filePath)));
     }
 
     return resultList.isEmpty() ? null :

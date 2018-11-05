@@ -24,15 +24,21 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.execution.ui.actions.CloseAction;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PerlRunConsole extends ConsoleViewImpl {
   private final DefaultActionGroup myActionGroup = new DefaultActionGroup();
-  public PerlRunConsole(@NotNull Project project, boolean viewer) {
-    super(project, viewer);
+  @Nullable
+  private final PerlHostData myHostData;
+
+  public PerlRunConsole(@NotNull Project project, @Nullable PerlHostData hostData) {
+    super(project, false);
+    myHostData = hostData;
   }
 
   public JPanel buildPanel() {
@@ -42,6 +48,11 @@ public class PerlRunConsole extends ConsoleViewImpl {
     consolePanel.add(getComponent(), BorderLayout.CENTER);
     consolePanel.add(toolbar.getComponent(), BorderLayout.WEST);
     return consolePanel;
+  }
+
+  @Nullable
+  public PerlHostData getHostData() {
+    return myHostData;
   }
 
   @Override
