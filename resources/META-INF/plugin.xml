@@ -197,6 +197,7 @@
 
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
+    <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>
 
     <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
