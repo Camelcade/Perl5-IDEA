@@ -17,9 +17,11 @@
 package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -28,9 +30,11 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.nio.charset.Charset;
@@ -103,6 +107,13 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withParentEnvironmentType(runConfiguration.isPassParentEnvs() ? CONSOLE : NONE);
 
     return PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset).withProject(project));
+  }
+
+  @Nullable
+  @Override
+  protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
+    PerlRunConfiguration perlRunConfiguration = (PerlRunConfiguration)getEnvironment().getRunProfile();
+    return new PerlRunConsole(perlRunConfiguration.getProject(), PerlHostData.from(perlRunConfiguration.getEffectiveSdk()));
   }
 
   @NotNull
