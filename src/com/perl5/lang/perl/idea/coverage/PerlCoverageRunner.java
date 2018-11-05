@@ -99,16 +99,10 @@ public class PerlCoverageRunner extends CoverageRunner {
         return null;
       }
 
-      String libRoot = PerlPluginUtil.getPluginPerlLibRoot();
-      if (libRoot == null) {
-        return null;
-      }
-
       PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
       PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
         project, effectiveSdk, coverFile,
-        Collections.singletonList(PerlRunUtil.PERL_I + FileUtil.toSystemIndependentName(
-          hostData.getRemotePath(libRoot))),
+        Collections.singletonList(PerlRunUtil.PERL_I + hostData.getRemotePath(PerlPluginUtil.getHelpersLibPath())),
         Collections.emptyList());
 
       if (commandLine == null) {
@@ -169,11 +163,14 @@ public class PerlCoverageRunner extends CoverageRunner {
     ProjectData projectData = new ProjectData();
     for (PerlFileData perlFileData : filesData) {
       if (StringUtil.isEmpty(perlFileData.name) || perlFileData.lines == null) {
+        LOG.warn("Name or lines is null in " + perlFileData);
         continue;
       }
-      ClassData classData = projectData.getOrCreateClassData(
-        FileUtil.toSystemIndependentName(hostData.getLocalPath(perlFileData.name))
-      );
+      String localPath = hostData.getLocalPath(perlFileData.name);
+      if (localPath == null) {
+        continue;
+      }
+      ClassData classData = projectData.getOrCreateClassData(FileUtil.toSystemIndependentName(localPath));
       Set<Map.Entry<Integer, PerlLineData>> linesEntries = perlFileData.lines.entrySet();
       Integer maxLineNumber = linesEntries.stream().map(Map.Entry::getKey).max(Integer::compare).orElse(0);
       LineData[] linesData = new LineData[maxLineNumber + 1];

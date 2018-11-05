@@ -86,32 +86,31 @@ public class PerlSdkType extends SdkType {
     String oldText = PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.inc", sdk.getName()));
     LOG.info("Refreshing @INC for " + sdk);
     PerlHostData hostData = PerlHostData.notNullFrom(sdk);
+
     List<String> pathsToRefresh = ContainerUtil.newArrayList();
     // syncing data if necessary
     List<String> incPaths = computeIncPaths(sdk);
     for (String hostPath : incPaths) {
-      hostData.syncPath(hostPath);
-      String localPath = hostData.getLocalPath(hostPath);
-      pathsToRefresh.add(localPath);
+      pathsToRefresh.add(hostData.syncPath(hostPath));
 
-      Path binDirectory = PerlRunUtil.findLibsBin(Paths.get(hostPath));
-      hostData.syncPath(binDirectory);
-      if (binDirectory != null) {
-        pathsToRefresh.add(hostData.getLocalPath(binDirectory).toString());
+      Path localBindDirectory = hostData.syncPath(PerlRunUtil.findLibsBin(Paths.get(hostPath)));
+      if (localBindDirectory != null) {
+        pathsToRefresh.add(localBindDirectory.toString());
       }
     }
     // additional bin dirs from version manager
     PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> {
-      hostData.syncPath(it);
-      pathsToRefresh.add(hostData.getLocalPath(it).toString());
+      Path localPath = hostData.syncPath(it);
+      if (localPath != null) {
+        pathsToRefresh.add(localPath.toString());
+      }
     });
 
     // sdk home path
     Path interpreterPath = Paths.get(Objects.requireNonNull(sdk.getHomePath()));
-    Path interpreterDirPath = interpreterPath.getParent();
-    hostData.syncPath(interpreterDirPath);
-    if (interpreterDirPath != null) {
-      pathsToRefresh.add(hostData.getLocalPath(interpreterDirPath.toString()));
+    Path localInterpreterDir = hostData.syncPath(interpreterPath.getParent());
+    if (localInterpreterDir != null) {
+      pathsToRefresh.add(localInterpreterDir.toString());
     }
 
     List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
@@ -124,11 +123,16 @@ public class PerlSdkType extends SdkType {
       VfsUtil.markDirtyAndRefresh(false, true, true, filesToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
     }
 
+    hostData.syncHelpers();
+
     // updating sdk
     SdkModificator sdkModificator = sdk.getSdkModificator();
     sdkModificator.removeAllRoots();
     for (String hostPath : incPaths) {
       String localPath = hostData.getLocalPath(hostPath);
+      if (localPath == null) {
+        continue;
+      }
       File libDir = new File(localPath);
 
       if (libDir.exists() && libDir.isDirectory()) {

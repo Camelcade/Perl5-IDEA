@@ -20,17 +20,13 @@ import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.extensions.PluginId;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ObjectUtils;
-import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
@@ -52,47 +48,38 @@ public class PerlPluginUtil {
     return plugin.getVersion();
   }
 
-  @Nullable
+  @NotNull
   public static String getPluginRoot() {
     IdeaPluginDescriptor plugin = PerlPluginUtil.getPlugin();
     try {
       return FileUtil.toSystemIndependentName(plugin.getPath().getCanonicalPath());
     }
     catch (IOException e) {
-      return null;
+      throw new RuntimeException(e);
     }
-  }
-
-
-  @Nullable
-  public static String getPluginPerlScriptsRoot() {
-    String pluginRoot = getPluginRoot();
-    return pluginRoot == null ? null : pluginRoot + "/perl";
   }
 
   /**
-   * @return path to libraries root shipped with plugins to use in -I
+   * @return path to IDE perl helper scripts
    */
-  @Nullable
-  public static String getPluginPerlLibRoot() {
-    String perlScriptsRoot = getPluginPerlScriptsRoot();
-    return perlScriptsRoot == null ? null : FileUtil.join(perlScriptsRoot, "lib");
+  @NotNull
+  public static String getPluginHelpersRoot() {
+    return FileUtil.join(getPluginRoot(), "perl");
   }
 
-  @Nullable
-  public static VirtualFile getPluginScriptVirtualFile(String scriptName) {
-    String scriptsRoot = getPluginPerlScriptsRoot();
-
-    if (scriptsRoot != null) {
-      String scriptPath = scriptsRoot + "/" + scriptName;
-      return VfsUtil.findFileByIoFile(new File(scriptPath), true);
-    }
-    return null;
+  /**
+   * @return path to the helpers libs dir
+   */
+  @NotNull
+  public static String getHelpersLibPath() {
+    return getHelperPath("lib");
   }
 
-  @Nullable
-  public static PerlCommandLine getPluginScriptCommandLine(Project project, String script, String... perlParams) {
-    return ObjectUtils.doIfNotNull(getPluginScriptVirtualFile(script), it -> PerlRunUtil.getPerlCommandLine(project, it, perlParams));
+  /**
+   * @return path to a helper with {@code relativePath}
+   */
+  public static String getHelperPath(@NotNull String relativePath) {
+    return FileUtil.toSystemIndependentName(Paths.get(getPluginHelpersRoot(), relativePath).toString());
   }
 
   /**

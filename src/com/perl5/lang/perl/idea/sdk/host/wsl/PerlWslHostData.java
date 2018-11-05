@@ -26,7 +26,6 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.Key;
@@ -96,6 +95,20 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
     return ObjectUtils.doIfNotNull(WSLUtil.getDistributionById(getDistributionId()), WSLDistributionWithRoot::new);
   }
 
+  @Override
+  protected void doSyncHelpers() {
+  }
+
+  @NotNull
+  @Override
+  public String getHelpersRootPath() {
+    WSLDistributionWithRoot distribution = getDistribution();
+    if (distribution == null) {
+      throw new RuntimeException("No distribution for " + myDistributionId);
+    }
+    return Objects.requireNonNull(distribution.getWslPath(PerlPluginUtil.getPluginHelpersRoot()));
+  }
+
   @NotNull
   @Override
   public PerlOsHandler getOsHandler() {
@@ -113,20 +126,14 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
 
   @Nullable
   @Override
-  public String getLocalPath(@Nullable String remotePathName) {
-    if (remotePathName == null) {
-      return null;
-    }
+  public String doGetLocalPath(@NotNull String remotePathName) {
     String windowsPath = WSLUtil.getWindowsPath(remotePathName);
     return windowsPath != null ? windowsPath : FileUtil.toSystemDependentName(new File(getLocalCacheRoot(), remotePathName).getPath());
   }
 
   @Nullable
   @Override
-  public String getRemotePath(@Nullable String localPathName) {
-    if (localPathName == null) {
-      return null;
-    }
+  public String doGetRemotePath(@NotNull String localPathName) {
     Path cachePath = Paths.get(getLocalCacheRoot());
     Path localPath = Paths.get(localPathName);
     if (localPath.startsWith(cachePath)) {
@@ -140,24 +147,21 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
     return distribution.getWslPath(localPathName);
   }
 
+  @NotNull
   @Override
-  public void syncPath(@Nullable String remotePath) {
-    if (remotePath == null) {
-      return;
-    }
-    if (ApplicationManager.getApplication().isDispatchThread()) {
-      throw new RuntimeException("Should not be invoked from EDT");
+  protected String doSyncPath(@NotNull String remotePath) {
+    String localPath = getLocalPath(remotePath);
+    if (localPath == null) {
+      throw new RuntimeException("Unable to compute local path for " + remotePath);
     }
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.error("No distribution available for " + myDistributionId);
-      return;
+      return localPath;
     }
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
-    String localPath = getLocalPath(remotePath);
     LOG.info("Syncing " + myDistributionId + ": " + remotePath + " => " + localPath);
-    PerlRunUtil.setProgressText("Syncing: " + remotePath);
     try {
       ProcessOutput output = distribution.copyFromWsl(
         remotePath, localPath, ContainerUtil.newArrayList("-v", "--exclude", "'*.so'", "--delete"),
@@ -173,7 +177,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
           }));
       int exitCode = output.getExitCode();
       if (exitCode == 0) {
-        return;
+        return localPath;
       }
 
       LOG.warn("Error while copying: " + remotePath + "; Exit code: " + exitCode + "; Stderr: " + output.getStderr());
@@ -203,6 +207,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
     catch (ExecutionException e) {
       LOG.error(e);
     }
+    return localPath;
   }
 
   @Nullable

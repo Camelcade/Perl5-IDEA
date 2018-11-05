@@ -26,6 +26,7 @@ import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,6 +62,16 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
     return null;
   }
 
+  @Override
+  protected void doSyncHelpers() {
+  }
+
+  @NotNull
+  @Override
+  public String getHelpersRootPath() {
+    return PerlPluginUtil.getPluginHelpersRoot();
+  }
+
   @Nullable
   @Override
   public VirtualFileSystem getFileSystem() {
@@ -76,9 +87,9 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
       .orElse(null);
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String getLocalPath(@Nullable String remotePath) {
+  public String doGetLocalPath(@NotNull String remotePath) {
     return remotePath;
   }
 
@@ -88,14 +99,16 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
     return null;
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String getRemotePath(@Nullable String localPath) {
+  public String doGetRemotePath(@NotNull String localPath) {
     return localPath;
   }
 
+  @NotNull
   @Override
-  public void syncPath(@Nullable String remotePath) {
+  protected String doSyncPath(@NotNull String remotePath) {
+    return remotePath;
   }
 
   @NotNull

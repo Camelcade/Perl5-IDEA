@@ -58,6 +58,7 @@ import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
@@ -204,8 +205,10 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       return;
     }
 
-    PerlCommandLine commandLine = PerlPluginUtil.getPluginScriptCommandLine(myProject, "xs_parser_simple.pl");
+    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(myProject, PerlPluginUtil.getHelperPath("xs_parser_simple.pl"));
+
     if (commandLine == null) {
+      LOG.warn("Unable to create deparser command line");
       return;
     }
     commandLine.withCharset(CharsetToolkit.UTF8_CHARSET);

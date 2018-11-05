@@ -97,6 +97,23 @@ public class PerlRunUtil {
       project, PerlProjectManager.getSdk(project, scriptFile), scriptFile, Arrays.asList(perlParameters), Collections.emptyList());
   }
 
+  @Nullable
+  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                   @Nullable Sdk perlSdk,
+                                                   @Nullable VirtualFile scriptFile,
+                                                   @NotNull List<String> perlParameters,
+                                                   @NotNull List<String> scriptParameters) {
+    if (perlSdk == null) {
+      perlSdk = PerlProjectManager.getSdk(project, scriptFile);
+    }
+    return getPerlCommandLine(project, perlSdk, ObjectUtils.doIfNotNull(scriptFile, VirtualFile::getPath), perlParameters,
+                              scriptParameters);
+  }
+
+  public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
+                                                   @Nullable String localScriptPath) {
+    return getPerlCommandLine(project, null, localScriptPath, Collections.emptyList(), Collections.emptyList());
+  }
 
   /**
    * Builds non-patched perl command line (without patching by version manager)
@@ -106,7 +123,7 @@ public class PerlRunUtil {
   @Nullable
   public static PerlCommandLine getPerlCommandLine(@NotNull Project project,
                                                    @Nullable Sdk perlSdk,
-                                                   @Nullable VirtualFile scriptFile,
+                                                   @Nullable String localScriptPath,
                                                    @NotNull List<String> perlParameters,
                                                    @NotNull List<String> scriptParameters) {
     if (perlSdk == null) {
@@ -118,7 +135,7 @@ public class PerlRunUtil {
     }
     String interpreterPath = perlSdk.getHomePath();
     if (StringUtil.isEmpty(interpreterPath)) {
-      LOG.warn("Empty interpreter path in " + perlSdk + " while building command line for " + scriptFile);
+      LOG.warn("Empty interpreter path in " + perlSdk + " while building command line for " + localScriptPath);
       return null;
     }
     PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);
@@ -130,8 +147,11 @@ public class PerlRunUtil {
 
     commandLine.addParameters(perlParameters);
 
-    if (scriptFile != null) {
-      commandLine.addParameter(hostData.getRemotePath(scriptFile.getPath()));
+    if (StringUtil.isNotEmpty(localScriptPath)) {
+      String remoteScriptPath = hostData.getRemotePath(localScriptPath);
+      if (remoteScriptPath != null) {
+        commandLine.addParameter(remoteScriptPath);
+      }
     }
 
     commandLine.addParameters(scriptParameters);
@@ -290,11 +310,12 @@ public class PerlRunUtil {
       new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
 
     PerlHostData hostData = PerlHostData.notNullFrom(sdk);
-    Path sdkBinDir = Paths.get(hostData.getLocalPath(StringUtil.notNullize(sdk.getHomePath()))).getParent();
-    if (sdkBinDir != null) {
-      files.add(VfsUtil.findFile(sdkBinDir, false));
+    Path localSdkBinDir = hostData.getLocalPath(Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent());
+    if (localSdkBinDir != null) {
+      files.add(VfsUtil.findFile(localSdkBinDir, false));
     }
-    PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> files.add(VfsUtil.findFile(hostData.getLocalPath(it), false)));
+    PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(
+      it -> ObjectUtils.doIfNotNull(hostData.getLocalPath(it), localPath -> files.add(VfsUtil.findFile(localPath, false))));
     return files.stream().filter(Objects::nonNull).distinct();
   }
 
