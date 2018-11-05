@@ -81,7 +81,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
     // combo box
     JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
-    //noinspection unchecked
     sdkComboBox.setModel(new CollectionComboBoxModel<>(mySdkManipulator.getAllSdkWrappers()));
     sdkComboBox.setRenderer(new ColoredListCellRenderer<Perl5SdkWrapper>() {
       @Override
@@ -270,7 +269,23 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
   @Override
   public void jdkRemoved(@NotNull Sdk sdk) {
-    updateSdkModel(getSelectedSdkWrapper());
+    // fixme we should create a wrapper here and find it in combobox
+    ComboBox<Perl5SdkWrapper> comboBox = myPanel.getSdkComboBox();
+    int selectedIndex = comboBox.getSelectedIndex();
+    int totalItems = comboBox.getItemCount();
+
+    Perl5SdkWrapper itemToSelect = null;
+    if (selectedIndex >= 0 && selectedIndex < totalItems - 1) {
+      itemToSelect = comboBox.getItemAt(selectedIndex + 1);
+    }
+    else if (selectedIndex > 0) {
+      itemToSelect = comboBox.getItemAt(selectedIndex - 1);
+    }
+    else if (totalItems > 0) {
+      itemToSelect = comboBox.getItemAt(0);
+    }
+
+    updateSdkModel(itemToSelect);
   }
 
   @Override
