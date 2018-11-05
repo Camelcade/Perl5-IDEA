@@ -57,6 +57,12 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @Nullable
   @Override
+  public String getSecondaryShortName() {
+    return null;
+  }
+
+  @Nullable
+  @Override
   public VirtualFileSystem getFileSystem() {
     return LocalFileSystem.getInstance();
   }

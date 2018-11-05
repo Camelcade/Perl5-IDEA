@@ -63,9 +63,24 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
    * @return short lowercased name, for interpreters list
    */
   @NotNull
-  public String getShortName() {
+  public final String getShortName() {
+    String secondaryShortName = getSecondaryShortName();
+    return secondaryShortName == null ? getPrimaryShortName() : getPrimaryShortName() + getSecondaryShortName();
+  }
+
+  /**
+   * @return primary part of short name, e.g. 'perlbrew'
+   */
+  @NotNull
+  public final String getPrimaryShortName() {
     return getHandler().getShortName();
   }
+
+  /**
+   * @return optional secondary short name, e.g. '[perlVersion@library]'
+   */
+  @Nullable
+  public abstract String getSecondaryShortName();
 
   @Override
   public String toString() {

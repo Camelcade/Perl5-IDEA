@@ -60,10 +60,10 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     return Objects.requireNonNull(myVersionManagerPath);
   }
 
-  @NotNull
+  @Nullable
   @Override
-  public String getShortName() {
-    return super.getShortName() + "[" + getDistributionId() + "]";
+  public String getSecondaryShortName() {
+    return "[" + getDistributionId() + "]";
   }
 
   @NotNull

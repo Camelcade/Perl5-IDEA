@@ -61,9 +61,24 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * @return short lowercased name, for interpreters list
    */
   @NotNull
-  public String getShortName() {
+  public final String getShortName() {
+    String secondaryShortName = getSecondaryShortName();
+    return secondaryShortName == null ? getPrimaryShortName() : getPrimaryShortName() + getSecondaryShortName();
+  }
+
+  /**
+   * @return primary part of short name, e.g. 'docker'
+   */
+  @NotNull
+  public final String getPrimaryShortName() {
     return getHandler().getShortName();
   }
+
+  /**
+   * @return optional secondary short name, e.g. '[docker_image_name]'
+   */
+  @Nullable
+  public abstract String getSecondaryShortName();
 
   /**
    * @return a filesystem for this host if available

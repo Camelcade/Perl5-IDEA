@@ -40,6 +40,12 @@ class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHa
     return originalCommandLine;
   }
 
+  @Nullable
+  @Override
+  public String getSecondaryShortName() {
+    return null;
+  }
+
   @Override
   public void installCpanminus(@Nullable Project project) {
     CpanminusAdapter.install(project);

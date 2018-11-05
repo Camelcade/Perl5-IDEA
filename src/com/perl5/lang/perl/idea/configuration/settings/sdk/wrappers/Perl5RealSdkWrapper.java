@@ -21,7 +21,10 @@ import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   @NotNull
@@ -37,7 +40,6 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
     renderer.setIcon(sdkType.getIcon());
     appendSdkString(renderer, mySdk);
   }
-
 
   @NotNull
   public Sdk getSdk() {
@@ -65,10 +67,21 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   }
 
   public static void appendSdkString(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer, @NotNull Sdk sdk) {
-    renderer.append(sdk.getName());
-    String versionString = sdk.getVersionString();
-    if (StringUtil.isNotEmpty(versionString)) {
-      renderer.append(" (" + StringUtil.shortenTextWithEllipsis(versionString, 30, 10) + ")", SimpleTextAttributes.GRAY_ATTRIBUTES);
-    }
+    PerlHostData hostData = PerlHostData.notNullFrom(sdk);
+    renderPair(renderer, hostData.getPrimaryShortName(), hostData.getSecondaryShortName());
+    PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerData.notNullFrom(sdk);
+    renderPair(renderer, versionManagerData.getPrimaryShortName(), versionManagerData.getSecondaryShortName());
+    renderer.append(StringUtil.notNullize(sdk.getVersionString()));
   }
+
+  private static void renderPair(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer,
+                                 @NotNull String primary,
+                                 @Nullable String secondary) {
+    renderer.append(StringUtil.capitalize(primary));
+    if (secondary != null) {
+      renderer.append(secondary, SimpleTextAttributes.GRAY_ATTRIBUTES);
+    }
+    renderer.append(", ");
+  }
+
 }

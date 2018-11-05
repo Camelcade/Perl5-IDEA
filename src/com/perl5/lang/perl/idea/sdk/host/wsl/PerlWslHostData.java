@@ -75,10 +75,10 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
     myDistributionId = distributionId;
   }
 
-  @NotNull
+  @Nullable
   @Override
-  public String getShortName() {
-    return super.getShortName() + "[" + myDistributionId + "]";
+  public String getSecondaryShortName() {
+    return "[" + myDistributionId.toLowerCase() + "]";
   }
 
   @Nullable
