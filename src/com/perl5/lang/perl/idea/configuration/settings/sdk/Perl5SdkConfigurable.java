@@ -100,27 +100,29 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     // add sdk button
     DefaultActionGroup panelActionGroup = myPanel.getActionGroup();
 
-    List<ActionGroup> groups = PerlHostHandler.stream().map(hostHandler -> {
-      List<DumbAwareAction> groupItems = PerlVersionManagerHandler.stream()
-        .filter(it -> it.isApplicable(hostHandler.getOsHandler()))
-        .map(versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
-          @Override
-          public void actionPerformed(@NotNull AnActionEvent e) {
-            new Task.Modal(null, PerlBundle.message("perl.create.interpreter.progress"), false) {
-              @Override
-              public void run(@NotNull ProgressIndicator indicator) {
-                versionManagerHandler.createSdkInteractively(hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)));
-              }
-            }.queue();
-          }
+    List<ActionGroup> groups = PerlHostHandler.stream()
+      .filter(PerlHostHandler::isApplicable)
+      .map(hostHandler -> {
+        List<DumbAwareAction> groupItems = PerlVersionManagerHandler.stream()
+          .filter(it -> it.isApplicable(hostHandler.getOsHandler()))
+          .map(versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
+            @Override
+            public void actionPerformed(@NotNull AnActionEvent e) {
+              new Task.Modal(null, PerlBundle.message("perl.create.interpreter.progress"), false) {
+                @Override
+                public void run(@NotNull ProgressIndicator indicator) {
+                  versionManagerHandler.createSdkInteractively(hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)));
+                }
+              }.queue();
+            }
 
-          @Override
-          public void update(@NotNull AnActionEvent e) {
-            e.getPresentation().setEnabledAndVisible(true);
-          }
-        }).collect(Collectors.toList());
+            @Override
+            public void update(@NotNull AnActionEvent e) {
+              e.getPresentation().setEnabledAndVisible(true);
+            }
+          }).collect(Collectors.toList());
 
-      return new ActionGroup(hostHandler.getMenuItemTitle(), true) {
+        return new ActionGroup(hostHandler.getMenuItemTitle(), true) {
         @NotNull
         @Override
         public AnAction[] getChildren(@Nullable AnActionEvent e) {
