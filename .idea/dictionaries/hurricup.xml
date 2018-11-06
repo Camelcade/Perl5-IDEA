@@ -4,12 +4,14 @@
       <w>camelcade</w>
       <w>camelcadedb</w>
       <w>cpanfile</w>
+      <w>cpanminus</w>
       <w>deparse</w>
       <w>evals</w>
       <w>evstigneev</w>
       <w>heredoc</w>
       <w>hurricup</w>
       <w>mojolicious</w>
+      <w>perlbrew</w>
     </words>
   </dictionary>
 </component>
