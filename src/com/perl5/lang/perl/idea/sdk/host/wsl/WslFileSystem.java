@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -75,12 +74,6 @@ class WslFileSystem extends DeprecatedVirtualFileSystem {
     String windowsPath = myDistribution.getWindowsPath(path);
     VirtualFile realFile = windowsPath == null ? null : VfsUtil.findFile(Paths.get(windowsPath), false);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
-  }
-
-  @Contract("null->null")
-  @Nullable
-  public VirtualFile findFile(@Nullable Path path) {
-    return ObjectUtils.doIfNotNull(path, it -> findFileByPath(it.toString()));
   }
 
   @Contract("null->null")
@@ -153,9 +146,9 @@ class WslFileSystem extends DeprecatedVirtualFileSystem {
 
     @Override
     public VirtualFile getParent() {
-      Path currentFilePath = Paths.get(myPath);
-      Path parentPath = currentFilePath.getParent();
-      return parentPath == null ? null : new WslVirtualFile(getOriginalFile().getParent(), parentPath.toString());
+      File currentFilePath = new File(myPath);
+      File parentPath = currentFilePath.getParentFile();
+      return parentPath == null ? null : new WslVirtualFile(getOriginalFile().getParent(), parentPath.getPath());
     }
 
     @Override

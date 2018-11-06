@@ -43,8 +43,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -93,24 +91,24 @@ public class PerlSdkType extends SdkType {
     for (String hostPath : incPaths) {
       pathsToRefresh.add(hostData.syncPath(hostPath));
 
-      Path localBindDirectory = hostData.syncPath(PerlRunUtil.findLibsBin(Paths.get(hostPath)));
+      File localBindDirectory = hostData.syncPath(PerlRunUtil.findLibsBin(new File(hostPath)));
       if (localBindDirectory != null) {
-        pathsToRefresh.add(localBindDirectory.toString());
+        pathsToRefresh.add(localBindDirectory.getPath());
       }
     }
     // additional bin dirs from version manager
     PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> {
-      Path localPath = hostData.syncPath(it);
+      File localPath = hostData.syncPath(it);
       if (localPath != null) {
-        pathsToRefresh.add(localPath.toString());
+        pathsToRefresh.add(localPath.getPath());
       }
     });
 
     // sdk home path
-    Path interpreterPath = Paths.get(Objects.requireNonNull(sdk.getHomePath()));
-    Path localInterpreterDir = hostData.syncPath(interpreterPath.getParent());
+    File interpreterPath = new File(Objects.requireNonNull(sdk.getHomePath()));
+    File localInterpreterDir = hostData.syncPath(interpreterPath.getParentFile());
     if (localInterpreterDir != null) {
-      pathsToRefresh.add(localInterpreterDir.toString());
+      pathsToRefresh.add(localInterpreterDir.getPath());
     }
 
     List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
@@ -267,7 +265,7 @@ public class PerlSdkType extends SdkType {
    * Creates and adds new Perl SDK
    *
    * @param interpreterPath interpreter path
-   * @param sdkConsumer created sdk consumer
+   * @param sdkConsumer     created sdk consumer
    */
   public static void createSdk(@NotNull String interpreterPath,
                                @NotNull PerlHostData hostData,

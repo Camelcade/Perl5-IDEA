@@ -23,6 +23,7 @@ import com.intellij.execution.process.ColoredProcessHandler;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFileSystem;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
@@ -31,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.file.Path;
 
 class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHandler> {
   public PerlLocalHostData(@NotNull PerlLocalHostHandler handler) {
@@ -80,11 +80,8 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @Nullable
   @Override
-  public Path findFileByName(@NotNull String fileName) {
-    return PathEnvironmentVariableUtil.findAllExeFilesInPath(fileName).stream()
-      .map(File::toPath)
-      .findFirst()
-      .orElse(null);
+  public File findFileByName(@NotNull String fileName) {
+    return ContainerUtil.getFirstItem(PathEnvironmentVariableUtil.findAllExeFilesInPath(fileName));
   }
 
   @NotNull

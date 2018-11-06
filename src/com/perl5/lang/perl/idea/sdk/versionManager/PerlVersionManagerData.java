@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -43,10 +43,11 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
 
   /**
    * Adds bin dirs for script searching. E.g. perlbrew may have patchperl and cpanm installed into perlbrew's home
+   *
    * @apiNote returns paths on the target host, not local
    */
   @NotNull
-  public List<Path> getBinDirsPath() {
+  public List<File> getBinDirsPath() {
     return Collections.emptyList();
   }
 

@@ -39,8 +39,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -95,7 +93,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Attempts to find a file at host
    */
   @Nullable
-  public abstract Path findFileByName(@NotNull String fileName);
+  public abstract File findFileByName(@NotNull String fileName);
 
   /**
    * Creates a process and process handler to be run in console.
@@ -122,10 +120,11 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
       return null;
     }
 
-    Path remotePath = Paths.get(remotePathname);
-    Path remoteHelpersPath = Paths.get(getHelpersRootPath());
-    if (remotePath.startsWith(remoteHelpersPath)) {
-      return new File(PerlPluginUtil.getPluginHelpersRoot(), remoteHelpersPath.relativize(remotePath).toString()).getPath();
+    File remotePath = new File(remotePathname);
+    File remoteHelpersPath = new File(getHelpersRootPath());
+    if (FileUtil.isAncestor(remoteHelpersPath, remotePath, false)) {
+      return new File(
+        PerlPluginUtil.getPluginHelpersRoot(), Objects.requireNonNull(FileUtil.getRelativePath(remoteHelpersPath, remotePath))).getPath();
     }
 
     String localPath = doGetLocalPath(remotePathname);
@@ -137,12 +136,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   @Contract("null->null")
   @Nullable
-  public final Path getLocalPath(@Nullable Path remotePath) {
+  public final File getLocalPath(@Nullable File remotePath) {
     if (remotePath == null) {
       return null;
     }
-    String localPath = getLocalPath(remotePath.toString());
-    return localPath == null ? null : Paths.get(localPath);
+    String localPath = getLocalPath(remotePath.getPath());
+    return localPath == null ? null : new File(localPath);
   }
 
   /**
@@ -158,11 +157,11 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
       return null;
     }
 
-    Path localPath = Paths.get(localPathName);
-    Path localHelpersPath = Paths.get(PerlPluginUtil.getPluginHelpersRoot());
-    if (localPath.startsWith(localHelpersPath)) {
+    File localPath = new File(localPathName);
+    File localHelpersPath = new File(PerlPluginUtil.getPluginHelpersRoot());
+    if (FileUtil.isAncestor(localHelpersPath, localPath, false)) {
       return FileUtil.toSystemIndependentName(
-        new File(getHelpersRootPath(), localHelpersPath.relativize(localPath).toString()).getPath());
+        new File(getHelpersRootPath(), Objects.requireNonNull(FileUtil.getRelativePath(localHelpersPath, localPath))).getPath());
     }
 
     String remotePath = doGetRemotePath(localPathName);
@@ -174,12 +173,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   @Contract("null->null")
   @Nullable
-  public final Path getRemotePath(@Nullable Path localPath) {
+  public final File getRemotePath(@Nullable File localPath) {
     if (localPath == null) {
       return null;
     }
-    String remotePath = getRemotePath(localPath.toString());
-    return remotePath == null ? null : Paths.get(remotePath);
+    String remotePath = getRemotePath(localPath.getPath());
+    return remotePath == null ? null : new File(remotePath);
   }
 
   /**
@@ -190,6 +189,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   /**
    * synchronizes {@code remotePath} with local cache
+   *
    * @return returns a path to a local copy of {@code remotePath}
    * @implNote always invoked on pooled thread
    * @implSpec fixme we probably should be able to throw from here
@@ -218,11 +218,11 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    */
   @Contract("null->null; !null->!null")
   @Nullable
-  public final Path syncPath(@Nullable Path remotePath) {
+  public final File syncPath(@Nullable File remotePath) {
     if (remotePath == null) {
       return null;
     }
-    return Paths.get(syncPath(FileUtil.toSystemIndependentName(remotePath.toString())));
+    return new File(syncPath(FileUtil.toSystemIndependentName(remotePath.getPath())));
   }
 
   /**

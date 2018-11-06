@@ -28,7 +28,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.function.Consumer;
 
@@ -79,7 +79,7 @@ class PerlSystemHandler
    * Suggests a default path for a file chooser or text input
    */
   @Nullable
-  private Path suggestHomePath(@NotNull PerlHostData<?, ?> hostData) {
+  private File suggestHomePath(@NotNull PerlHostData<?, ?> hostData) {
     return hostData.findFileByName(hostData.getOsHandler().getPerlExecutableName());
   }
 

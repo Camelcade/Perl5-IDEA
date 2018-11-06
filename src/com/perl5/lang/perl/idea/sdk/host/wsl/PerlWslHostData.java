@@ -46,8 +46,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -134,10 +132,10 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
   @Nullable
   @Override
   public String doGetRemotePath(@NotNull String localPathName) {
-    Path cachePath = Paths.get(getLocalCacheRoot());
-    Path localPath = Paths.get(localPathName);
-    if (localPath.startsWith(cachePath)) {
-      return FileUtil.toSystemIndependentName("/" + cachePath.relativize(localPath));
+    File cachePath = new File(getLocalCacheRoot());
+    File localPath = new File(localPathName);
+    if (FileUtil.isAncestor(cachePath, localPath, false)) {
+      return FileUtil.toSystemIndependentName("/" + FileUtil.getRelativePath(cachePath, localPath));
     }
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
@@ -212,7 +210,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
 
   @Nullable
   @Override
-  public Path findFileByName(@NotNull String fileName) {
+  public File findFileByName(@NotNull String fileName) {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       return null;
@@ -221,7 +219,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
       // fixme these commands should be handled by osHandler?
       ProcessOutput output = distribution.executeOnWsl(TIMEOUT, "bash", "-cl", "which " + fileName);
       List<String> lines = output.getStdoutLines();
-      return lines.isEmpty() ? null : Paths.get(lines.get(0));
+      return lines.isEmpty() ? null : new File(lines.get(0));
     }
     catch (ExecutionException e) {
       LOG.warn("Error looking for " + fileName, e);

@@ -25,7 +25,6 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.InvalidPathException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,12 +59,7 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
     PerlHostData hostData = myRunConsole.getHostData();
     while (matcher.find()) {
       String filePath;
-      try {
-        filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
-      }
-      catch (InvalidPathException e) {
-        filePath = null;
-      }
+      filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
       resultList.add(new Result(
         startOffset + matcher.start(1),
         startOffset + matcher.end(1),

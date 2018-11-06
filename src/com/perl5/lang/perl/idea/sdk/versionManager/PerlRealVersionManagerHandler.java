@@ -36,7 +36,7 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Consumer;
@@ -101,7 +101,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
    * just trying to find the executable file on the host
    */
   @Nullable
-  protected Path suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData) {
+  protected File suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData) {
     VirtualFileSystem fileSystem = hostData.getFileSystem();
     if (fileSystem == null) {
       return null;
@@ -110,7 +110,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       .filter(this::isSameHandler)
       .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
       .filter(it -> it != null && it.isValid() && it.exists())
-      .map(it -> Paths.get(it.getPath()))
+      .map(it -> new File(it.getPath()))
       .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
   }
 

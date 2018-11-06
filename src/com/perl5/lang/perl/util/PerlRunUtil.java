@@ -65,8 +65,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -310,12 +309,12 @@ public class PerlRunUtil {
       new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
 
     PerlHostData hostData = PerlHostData.notNullFrom(sdk);
-    Path localSdkBinDir = hostData.getLocalPath(Paths.get(StringUtil.notNullize(sdk.getHomePath())).getParent());
+    File localSdkBinDir = hostData.getLocalPath(new File(StringUtil.notNullize(sdk.getHomePath())).getParentFile());
     if (localSdkBinDir != null) {
-      files.add(VfsUtil.findFile(localSdkBinDir, false));
+      files.add(VfsUtil.findFileByIoFile(localSdkBinDir, false));
     }
     PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(
-      it -> ObjectUtils.doIfNotNull(hostData.getLocalPath(it), localPath -> files.add(VfsUtil.findFile(localPath, false))));
+      it -> ObjectUtils.doIfNotNull(hostData.getLocalPath(it), localPath -> files.add(VfsUtil.findFileByIoFile(localPath, false))));
     return files.stream().filter(Objects::nonNull).distinct();
   }
 
@@ -330,8 +329,8 @@ public class PerlRunUtil {
     if (libraryRoot == null || !libraryRoot.isValid()) {
       return null;
     }
-    Path binPath = findLibsBin(Paths.get(libraryRoot.getPath()));
-    return binPath == null ? null : VfsUtil.findFile(binPath, false);
+    File binPath = findLibsBin(new File(libraryRoot.getPath()));
+    return binPath == null ? null : VfsUtil.findFileByIoFile(binPath, false);
   }
 
   /**
@@ -341,18 +340,15 @@ public class PerlRunUtil {
    * @implSpec for now we are traversing tree up to {@code lib} dir and resolving {@code ../bin}
    */
   @Nullable
-  public static Path findLibsBin(@Nullable Path libraryRoot) {
+  public static File findLibsBin(@Nullable File libraryRoot) {
     if (libraryRoot == null) {
       return null;
     }
-    Path fileName = libraryRoot.getFileName();
-    if (fileName == null) {
-      return null;
+    String fileName = libraryRoot.getName();
+    if ("lib".equals(fileName)) {
+      return new File(libraryRoot.getParentFile(), "bin");
     }
-    if ("lib".equals(fileName.toString())) {
-      return libraryRoot.resolve("../bin");
-    }
-    return findLibsBin(libraryRoot.getParent());
+    return findLibsBin(libraryRoot.getParentFile());
   }
 
   /**

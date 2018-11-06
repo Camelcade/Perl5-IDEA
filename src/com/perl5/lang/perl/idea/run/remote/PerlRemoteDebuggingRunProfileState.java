@@ -28,8 +28,8 @@ import com.intellij.xdebugger.DefaultDebugProcessHandler;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 09.05.2016.
@@ -38,17 +38,17 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
   @NotNull
   private final Project myProject;
   @NotNull
-  private final Path myLocalProjectPath;
+  private final File myLocalProjectPath;
   @NotNull
-  private final Path myRemoteProjectPath;
+  private final File myRemoteProjectPath;
 
   public PerlRemoteDebuggingRunProfileState(ExecutionEnvironment environment) {
     super(environment);
     PerlRemoteDebuggingConfiguration debuggingConfiguration = (PerlRemoteDebuggingConfiguration)environment.getRunProfile();
     myProject = environment.getProject();
     String projectPath = myProject.getBaseDir().getCanonicalPath();
-    myLocalProjectPath = Paths.get(projectPath == null ? "" : projectPath);
-    myRemoteProjectPath = Paths.get(debuggingConfiguration.getRemoteProjectRoot());
+    myLocalProjectPath = new File(projectPath == null ? "" : projectPath);
+    myRemoteProjectPath = new File(debuggingConfiguration.getRemoteProjectRoot());
   }
 
   @NotNull
@@ -60,10 +60,10 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
 
   @Override
   public String mapPathToRemote(String localPathName) {
-    Path localPath = Paths.get(localPathName);
-    if (localPath.startsWith(myLocalProjectPath)) {
+    File localPath = new File(localPathName);
+    if (FileUtil.isAncestor(myLocalProjectPath, localPath, false)) {
       return FileUtil.toSystemIndependentName(
-        myRemoteProjectPath.resolve(myLocalProjectPath.relativize(localPath)).toString()
+        new File(myRemoteProjectPath, Objects.requireNonNull(FileUtil.getRelativePath(myLocalProjectPath, localPath))).getPath()
       );
     }
     else {
@@ -74,10 +74,10 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
   @NotNull
   @Override
   public String mapPathToLocal(String remotePathName) {
-    Path remotePath = Paths.get(remotePathName);
-    if (remotePath.startsWith(myRemoteProjectPath)) {
+    File remotePath = new File(remotePathName);
+    if (FileUtil.isAncestor(myRemoteProjectPath, remotePath, false)) {
       return FileUtil.toSystemDependentName(
-        myLocalProjectPath.resolve(myRemoteProjectPath.relativize(remotePath)).toString()
+        new File(myLocalProjectPath, Objects.requireNonNull(FileUtil.getRelativePath(myRemoteProjectPath, remotePath))).getPath()
       );
     }
     else {

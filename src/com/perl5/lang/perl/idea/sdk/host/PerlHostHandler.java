@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
+import java.io.File;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -68,7 +68,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    * @param selectionConsumer   a callback for selected result. Accepts path selected and the host data
    */
   public void chooseFileInteractively(@NotNull String dialogTitle,
-                                      @Nullable Function<PerlHostData<?, ?>, Path> defaultPathFunction,
+                                      @Nullable Function<PerlHostData<?, ?>, File> defaultPathFunction,
                                       boolean useDefaultIfExists, @NotNull Predicate<String> nameValidator,
                                       @NotNull Function<String, String> pathValidator,
                                       @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer) {
@@ -81,8 +81,8 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
       LOG.error("No filesystem for " + hostData);
       return;
     }
-    Path defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
-    VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.toString());
+    File defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
+    VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.getPath());
 
     if (useDefaultIfExists && defaultFile != null && defaultFile.exists() && !defaultFile.isDirectory()) {
       selectionConsumer.accept(defaultFile.getPath(), hostData);

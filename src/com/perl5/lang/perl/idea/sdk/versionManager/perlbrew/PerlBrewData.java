@@ -27,8 +27,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -57,9 +56,9 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
 
   @NotNull
   @Override
-  public List<Path> getBinDirsPath() {
+  public List<File> getBinDirsPath() {
     String perlbrewRoot = getPerlbrewRoot();
-    return perlbrewRoot == null ? Collections.emptyList() : Collections.singletonList(Paths.get(perlbrewRoot, "bin"));
+    return perlbrewRoot == null ? Collections.emptyList() : Collections.singletonList(new File(perlbrewRoot, "bin"));
   }
 
   @Nullable
