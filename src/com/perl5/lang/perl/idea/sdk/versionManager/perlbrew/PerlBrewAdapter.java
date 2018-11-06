@@ -85,8 +85,9 @@ class PerlBrewAdapter extends PerlVersionManagerAdapter {
    */
   @Nullable
   List<String> getInfo() {
-    return getOutput(
-      new PerlCommandLine("bash", "-cl", new PerlCommandLine(getVersionManagerPath(), PERLBREW_INFO).getCommandLineString()));
+    String verionsManagerPath = getVersionManagerPath();
+    return getOutput(new PerlCommandLine(
+      "bash", "-c", "eval $(" + verionsManagerPath + " init|grep source);" + verionsManagerPath + " " + PERLBREW_INFO));
   }
 
   /**
