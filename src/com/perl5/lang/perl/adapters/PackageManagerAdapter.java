@@ -18,7 +18,6 @@ package com.perl5.lang.perl.adapters;
 
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -33,7 +32,6 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -97,13 +95,7 @@ public abstract class PackageManagerAdapter {
             PerlRunUtil.refreshSdkDirs(mySdk, myProject);
           }
         })
-        .withProcessListener(getAdditionalListener())
     );
-  }
-
-  @Nullable
-  protected ProcessListener getAdditionalListener() {
-    return null;
   }
 
   public final void install(@NotNull Collection<String> packageNames) {
