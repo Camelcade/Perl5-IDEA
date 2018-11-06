@@ -276,7 +276,7 @@ public class PerlCommandLine extends GeneralCommandLine {
     return myUsePty ?
            new PtyCommandLine(this)
              .withConsoleMode(false)
-             .withInitialColumns(PtyCommandLine.MAX_COLUMNS)
+             .withInitialColumns(256)
              .withEnvironment("TERM", "xterm-256color")
              .createProcess() :
            super.createProcess();
