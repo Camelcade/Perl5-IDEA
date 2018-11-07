@@ -117,7 +117,9 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
     if (StringUtil.isEmpty(endTagField.getText())) {
       throw new ConfigurationException(PerlBundle.message("ttk2.error.emptyclosetag"));
     }
-
+    if (!isModified()) {
+      return;
+    }
     mySettings.START_TAG = startTagField.getText();
     mySettings.END_TAG = endTagField.getText();
     mySettings.OUTLINE_TAG = outlineTagField.getText();

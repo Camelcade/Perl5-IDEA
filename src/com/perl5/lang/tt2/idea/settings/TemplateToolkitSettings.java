@@ -26,9 +26,10 @@ import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
@@ -80,8 +81,8 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
 
   public void settingsUpdated() {
     createLazyObjects();
-    ApplicationManager.getApplication().invokeLater(
-      () -> WriteAction.run(() -> FileTypeManagerEx.getInstanceEx().fireFileTypesChanged()));
+    ApplicationManager.getApplication().invokeLater(() -> WriteAction.run(
+      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(EmptyRunnable.getInstance(), true, true)));
   }
 
   protected void setProject(Project project) {
