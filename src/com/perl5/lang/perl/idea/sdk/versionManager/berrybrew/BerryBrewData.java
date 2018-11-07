@@ -21,6 +21,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +56,12 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
   @Override
   protected BerryBrewData self() {
     return this;
+  }
+
+  @Nullable
+  @Override
+  public InstallPerlHandler getInstallPerlHandler() {
+    return new BerryBrewInstallPerlHandler(getVersionManagerPath(), getHandler());
   }
 
   @Nullable

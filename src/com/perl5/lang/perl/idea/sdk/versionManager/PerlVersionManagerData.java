@@ -78,6 +78,12 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   }
 
   /**
+   * @return handler to install a Perl for this version manager or null if installation is not supported
+   */
+  @Nullable
+  public abstract InstallPerlHandler getInstallPerlHandler();
+
+  /**
    * @return optional secondary short name, e.g. '[perlVersion@library]'
    */
   @Nullable

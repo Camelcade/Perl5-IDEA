@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
@@ -24,6 +25,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -93,5 +95,11 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
       }
     });
     return result;
+  }
+
+  @NotNull
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.PERLBREW_ICON;
   }
 }

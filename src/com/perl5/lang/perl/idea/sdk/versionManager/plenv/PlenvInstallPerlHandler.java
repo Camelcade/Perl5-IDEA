@@ -14,54 +14,41 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
+package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction;
+import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallFormOptions;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class BerryBrewInstallPerlAction extends PerlInstallAction {
-  private static final String INSTALLED_MARK = "[installed]";
-
-
-  @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return BerryBrewData.from(getPerlSdk(event)) != null;
+class PlenvInstallPerlHandler extends InstallPerlHandler {
+  public PlenvInstallPerlHandler(@NotNull String versionManagerPath,
+                                 @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
+    super(versionManagerPath, versionManageHandler);
   }
 
   @NotNull
   @Override
   protected String doCleanDistributionItem(@NotNull String rawItem) {
-    return rawItem.replace(INSTALLED_MARK, "").replaceAll("\\*", "").trim();
+    return rawItem;
   }
 
   @Override
   protected boolean doIsInstalled(@NotNull String rawItem) {
-    return rawItem.indexOf(INSTALLED_MARK) > 0;
-  }
-
-  @Nullable
-  @Override
-  protected PerlRealVersionManagerData getData(@Nullable Sdk sdk) {
-    return BerryBrewData.from(sdk);
+    return false;
   }
 
   @NotNull
   @Override
   protected PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData hostData) {
-    return new BerryBrewAdapter(vmPath, hostData);
+    return new PlenvAdapter(vmPath, hostData);
   }
 
   @NotNull
   @Override
   protected PerlInstallFormOptions createOptionsForm() {
-    return new PerlInstallFormOptions() {
-    };
+    return new PlenvInstallPerlForm();
   }
 }

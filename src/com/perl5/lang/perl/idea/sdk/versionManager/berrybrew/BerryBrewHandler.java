@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
 import com.perl5.PerlBundle;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
@@ -24,6 +25,8 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, BerryBrewHandler> {
   public BerryBrewHandler(@NotNull PerlHandlerBean bean) {
@@ -63,5 +66,11 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
   @Override
   public BerryBrewData createData() {
     return new BerryBrewData(this);
+  }
+
+  @NotNull
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.STRAWBERRY_ICON;
   }
 }

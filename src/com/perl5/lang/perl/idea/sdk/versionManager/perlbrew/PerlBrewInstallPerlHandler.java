@@ -16,29 +16,21 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction;
+import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallFormOptions;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class PerlBrewInstallPerlAction extends PerlInstallAction {
-
-  @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return PerlBrewData.from(getPerlSdk(event)) != null;
-  }
-
-  @Nullable
-  @Override
-  protected PerlBrewData getData(@Nullable Sdk perlSdk) {
-    return PerlBrewData.from(perlSdk);
+class PerlBrewInstallPerlHandler extends InstallPerlHandler {
+  public PerlBrewInstallPerlHandler(@NotNull String versionManagerPath,
+                                    @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
+    super(versionManagerPath, versionManageHandler);
   }
 
   @NotNull
@@ -78,5 +70,4 @@ public class PerlBrewInstallPerlAction extends PerlInstallAction {
   protected boolean doIsInstalled(@NotNull String rawItem) {
     return rawItem.startsWith("i ");
   }
-
 }

@@ -36,6 +36,7 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
@@ -154,6 +155,12 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
 
     createInterpreter(installation, vmAdapter, sdkConsumer);
   }
+
+  /**
+   * @return icon for this version manager
+   */
+  @NotNull
+  public abstract Icon getIcon();
 
   /**
    * Creates an interpreter for version manager.

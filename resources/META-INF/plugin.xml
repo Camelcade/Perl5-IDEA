@@ -1030,6 +1030,7 @@
       <action id="perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
       <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
       <action id="perl5.DeparseFile" class="com.perl5.lang.perl.idea.actions.PerlDeparseFileAction"/>
+      <action id="perl5.install.perl" class="com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction"/>
       <action id="perl5.sync.interpreter" class="com.perl5.lang.perl.idea.actions.PerlSynInterpreterAction"/>
     </group>
 
@@ -1040,19 +1041,8 @@
     <group id="Perl5.Perlbrew" popup="true" text="Perlbrew" icon="/icons/perlbrew.png">
       <add-to-group group-id="Perl5.Tools" anchor="last"/>
       <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"/>
-      <action id="perl5.perlbrew.install" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlAction"/>
       <action id="perl5.perlbrew.install.patchperl"
               class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction"/>
-    </group>
-
-    <group id="Perl5.Plenv" popup="true" text="Plenv" icon="/icons/perl5language.png">
-      <add-to-group group-id="Perl5.Tools" anchor="after" relative-to-action="Perl5.Perlbrew"/>
-      <action id="perl5.plenv.install" class="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvInstallPerlAction"/>
-    </group>
-
-    <group id="Perl5.Berrybrew" popup="true" text="Berrybrew" icon="/icons/strawberry.png">
-      <add-to-group group-id="Perl5.Tools" anchor="after" relative-to-action="Perl5.Plenv"/>
-      <action id="perl5.berrybrew.install" class="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewInstallPerlAction"/>
     </group>
 
     <group>
