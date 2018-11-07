@@ -21,6 +21,7 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
@@ -78,7 +79,9 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   }
 
   @Override
-  public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Consumer<Sdk> sdkConsumer) {
+  public void createSdkInteractively(@NotNull Project project,
+                                     @NotNull PerlHostHandler<?, ?> hostHandler,
+                                     @Nullable Consumer<Sdk> sdkConsumer) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.choose.executable", StringUtil.capitalize(getPresentableName())),
       this::suggestDefaultVersionManagerPath,
@@ -90,7 +93,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
                ? null
                : PerlBundle.message("perl.vm.wrong.file", fileName, getPresentableName());
       },
-      (path, perlHostData) -> createSdkInteractively(path, perlHostData, sdkConsumer));
+      (path, perlHostData) -> createSdkInteractively(project, path, perlHostData, sdkConsumer));
   }
 
   /**
@@ -117,7 +120,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
 
   protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
 
-  private void createSdkInteractively(@Nullable String selectedPath,
+  private void createSdkInteractively(@NotNull Project project,
+                                      @Nullable String selectedPath,
                                       @Nullable PerlHostData perlHostData,
                                       @Nullable Consumer<Sdk> sdkConsumer) {
     if (!StringUtil.isNotEmpty(selectedPath) || perlHostData == null) {
@@ -129,8 +133,21 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       return;
     }
     if (distributions.isEmpty()) {
-      Messages.showInfoMessage(PerlBundle.message("perl.vm.perlbrew.empty.list.message"),
-                               PerlBundle.message("perl.vm.perlbrew.empty.list.title"));
+      InstallPerlHandler installHandler = createInstallHandler(selectedPath);
+      if (installHandler != null) {
+        int[] response = new int[]{-1};
+        ApplicationManager.getApplication().invokeAndWait(() -> {
+          response[0] = Messages.showYesNoDialog(PerlBundle.message("perl.vm.would.you.like.to.install"),
+                                                 PerlBundle.message("perl.vm.empty.list.title"),
+                                                 getIcon());
+        });
+        if (response[0] == Messages.YES) {
+          installHandler.doInstall(perlHostData, project);
+          return;
+        }
+      }
+      ApplicationManager.getApplication().invokeAndWait(
+        () -> Messages.showInfoMessage(PerlBundle.message("perl.vm.empty.list.message"), PerlBundle.message("perl.vm.empty.list.title")));
       return;
     }
 
@@ -155,6 +172,9 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
 
     createInterpreter(installation, vmAdapter, sdkConsumer);
   }
+
+  @Nullable
+  public abstract InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager);
 
   /**
    * @return icon for this version manager

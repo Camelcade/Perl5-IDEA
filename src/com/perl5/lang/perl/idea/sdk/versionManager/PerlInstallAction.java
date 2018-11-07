@@ -59,7 +59,7 @@ public class PerlInstallAction extends PerlActionBase implements DumbAware {
   public void actionPerformed(@NotNull AnActionEvent e) {
     InstallPerlHandler handler = getHandler(e);
     if (handler != null) {
-      handler.doInstall(Objects.requireNonNull(PerlHostData.from(getPerlSdk(e))), Objects.requireNonNull(getEventProject(e)));
+      handler.install(Objects.requireNonNull(PerlHostData.from(getPerlSdk(e))), Objects.requireNonNull(getEventProject(e)));
     }
   }
 }

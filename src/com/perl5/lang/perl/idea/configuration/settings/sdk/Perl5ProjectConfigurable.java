@@ -84,7 +84,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     myProject = project;
     mySharedSettings = PerlSharedSettings.getInstance(myProject);
     myLocalSettings = PerlLocalSettings.getInstance(myProject);
-    myPerl5SdkConfigurable = new Perl5SdkConfigurable(this);
+    myPerl5SdkConfigurable = new Perl5SdkConfigurable(this, project);
   }
 
   @Nullable

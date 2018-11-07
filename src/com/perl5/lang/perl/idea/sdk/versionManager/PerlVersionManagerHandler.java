@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -46,7 +47,8 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   /**
    * Shows a UI to create an sdk for this version manager on the host described by the {@code hostHandler}
    */
-  public abstract void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler,
+  public abstract void createSdkInteractively(@NotNull Project project,
+                                              @NotNull PerlHostHandler<?, ?> hostHandler,
                                               @Nullable Consumer<Sdk> sdkConsumer);
 
   /**

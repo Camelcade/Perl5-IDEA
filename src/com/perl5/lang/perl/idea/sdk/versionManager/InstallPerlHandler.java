@@ -29,6 +29,7 @@ import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,47 +48,55 @@ public abstract class InstallPerlHandler {
     myVersionManageHandler = versionManageHandler;
   }
 
-  void doInstall(@NotNull PerlHostData hostData, @NotNull Project project) {
-    new Task.Modal(project, PerlBundle.message("perl.vm.fetching.available.perls"), false) {
+  void install(@NotNull PerlHostData hostData, @NotNull Project project) {
+    new Task.Modal(project, PerlBundle.message("perl.vm.installing.perl"), false) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
         indicator.setIndeterminate(true);
-        PerlVersionManagerAdapter vmAdapter = createAdapter(myVersionManagerPath, hostData);
-        List<String> distributionsList = vmAdapter.getAvailableDistributionsList();
-        if (distributionsList == null) {
-          return;
-        }
-        ApplicationManager.getApplication().invokeLater(() -> {
-          PerlInstallFormOptions optionsForm = createOptionsForm();
-          MyDialog dialog = new MyDialog(project, optionsForm, distributionsList);
-          if (dialog.showAndGet()) {
-            PerlInstallForm installForm = dialog.getForm();
+        doInstall(hostData, project);
+      }
+    }.queue();
+  }
 
-            boolean createInterpreter = installForm.isAddInstalledPerl();
-            boolean chooseInterpreter = installForm.isChooseInstalledPerl();
+  void doInstall(@NotNull PerlHostData hostData, @NotNull Project project) {
+    if (ApplicationManager.getApplication().isDispatchThread()) {
+      throw new RuntimeException("Should not be invoked on EDT");
+    }
+    PerlVersionManagerAdapter vmAdapter = createAdapter(myVersionManagerPath, hostData);
+    PerlRunUtil.setProgressText(PerlBundle.message("perl.vm.fetching.available.perls"));
+    List<String> distributionsList = vmAdapter.getAvailableDistributionsList();
+    if (distributionsList == null) {
+      return;
+    }
+    ApplicationManager.getApplication().invokeLater(() -> {
+      PerlInstallFormOptions optionsForm = createOptionsForm();
+      MyDialog dialog = new MyDialog(project, optionsForm, distributionsList);
+      if (dialog.showAndGet()) {
+        PerlInstallForm installForm = dialog.getForm();
 
-            String distributionId = installForm.getSelectedDistributionId();
-            String targetName = optionsForm.getTargetName(distributionId);
+        boolean createInterpreter = installForm.isAddInstalledPerl();
+        boolean chooseInterpreter = installForm.isChooseInstalledPerl();
 
-            vmAdapter.installPerl(myProject, distributionId, optionsForm.buildParametersList(), new ProcessAdapter() {
-              @Override
-              public void processTerminated(@NotNull ProcessEvent event) {
-                if (!createInterpreter || event.getExitCode() != 0) {
-                  return;
+        String distributionId = installForm.getSelectedDistributionId();
+        String targetName = optionsForm.getTargetName(distributionId);
+
+        vmAdapter.installPerl(project, distributionId, optionsForm.buildParametersList(), new ProcessAdapter() {
+          @Override
+          public void processTerminated(@NotNull ProcessEvent event) {
+            if (!createInterpreter || event.getExitCode() != 0) {
+              return;
+            }
+            myVersionManageHandler.createInterpreter(
+              targetName, vmAdapter, sdk -> {
+                if (chooseInterpreter) {
+                  ApplicationManager.getApplication().invokeLater(
+                    () -> PerlProjectManager.getInstance(project).setProjectSdk(sdk));
                 }
-                myVersionManageHandler.createInterpreter(
-                  targetName, vmAdapter, sdk -> {
-                    if (chooseInterpreter) {
-                      ApplicationManager.getApplication().invokeLater(
-                        () -> PerlProjectManager.getInstance(myProject).setProjectSdk(sdk));
-                    }
-                  });
-              }
-            });
+              });
           }
         });
       }
-    }.queue();
+    });
   }
 
   @NotNull

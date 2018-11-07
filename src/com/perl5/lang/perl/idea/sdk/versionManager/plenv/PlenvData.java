@@ -20,7 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
@@ -56,12 +55,6 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
       return;
     }
     plenvAdapter.runInstallInConsole(project, PACKAGE_NAME, PLENV_INSTALL_CPANM, getDistributionId());
-  }
-
-  @Nullable
-  @Override
-  public InstallPerlHandler getInstallPerlHandler() {
-    return new PlenvInstallPerlHandler(getVersionManagerPath(), getHandler());
   }
 
   @NotNull

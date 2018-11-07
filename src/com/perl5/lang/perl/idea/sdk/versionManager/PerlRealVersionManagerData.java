@@ -94,9 +94,14 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     throw new NullPointerException("Additional data supposed to be " + PerlRealVersionManagerData.class.getSimpleName() + " not " + data);
   }
 
-
   @Override
   public String toString() {
     return getHandler().getShortName() + "[" + getDistributionId() + "]";
+  }
+
+  @Nullable
+  @Override
+  public InstallPerlHandler getInstallPerlHandler() {
+    return getHandler().createInstallHandler(getVersionManagerPath());
   }
 }

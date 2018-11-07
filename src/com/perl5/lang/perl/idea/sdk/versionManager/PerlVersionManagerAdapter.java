@@ -69,6 +69,7 @@ public abstract class PerlVersionManagerAdapter {
   protected void runInstallInConsole(@NotNull PerlCommandLine commandLine, @NotNull String entityName) {
     PerlRunUtil.runInConsole(
       commandLine
+        .withHostData(myHostData)
         .withConsoleTitle(PerlBundle.message("perl.vm.installing", entityName))
         .withConsoleIcon(getIcon())
         .withVersionManagerData(PerlVersionManagerData.getDefault())
@@ -87,6 +88,7 @@ public abstract class PerlVersionManagerAdapter {
                                                      @NotNull String command) {
     return new PerlCommandLine(getVersionManagerPath(), command)
       .withProject(project)
+      .withHostData(myHostData)
       .withProcessListener(new ProcessAdapter() {
         @Override
         public void processTerminated(@NotNull ProcessEvent event) {

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.system;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
@@ -58,7 +59,9 @@ class PerlSystemHandler
   }
 
   @Override
-  public void createSdkInteractively(@NotNull PerlHostHandler<?, ?> hostHandler, @Nullable Consumer<Sdk> sdkConsumer) {
+  public void createSdkInteractively(@NotNull Project project,
+                                     @NotNull PerlHostHandler<?, ?> hostHandler,
+                                     @Nullable Consumer<Sdk> sdkConsumer) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
       this::suggestHomePath,

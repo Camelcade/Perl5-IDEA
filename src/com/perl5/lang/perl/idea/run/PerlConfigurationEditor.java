@@ -117,7 +117,7 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
 
     JPanel alternativeSdkPanel = new JPanel(new MigLayout("ins 0, gap 10, fill, flowx"));
     myAlternativeSdkCheckbox = new JBCheckBox();
-    mySdkConfigurable = new Perl5SdkConfigurable(this);
+    mySdkConfigurable = new Perl5SdkConfigurable(this, myProject);
     alternativeSdkPanel.add(myAlternativeSdkCheckbox, "shrinkx");
     JComponent sdkComponent = mySdkConfigurable.createComponent();
     mySdkConfigurable.setLabelText(PerlBundle.message("perl.run.config.use.alternative.label"));

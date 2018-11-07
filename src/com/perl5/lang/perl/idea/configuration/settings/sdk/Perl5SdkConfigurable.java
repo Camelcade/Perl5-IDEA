@@ -25,6 +25,7 @@ import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbAwareAction;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
@@ -61,10 +62,13 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   private MessageBusConnection myConnection;
   @NotNull
   private Perl5SdkManipulator mySdkManipulator;
+  @NotNull
+  private Project myProject;
 
-  public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator) {
+  public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator, @NotNull Project project) {
     myConnection = ApplicationManager.getApplication().getMessageBus().connect();
     mySdkManipulator = sdkManipulator;
+    myProject = project;
   }
 
   @NotNull
@@ -108,10 +112,10 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
           .map(versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
             @Override
             public void actionPerformed(@NotNull AnActionEvent e) {
-              new Task.Modal(null, PerlBundle.message("perl.create.interpreter.progress"), false) {
+              new Task.Modal(myProject, PerlBundle.message("perl.create.interpreter.progress"), false) {
                 @Override
                 public void run(@NotNull ProgressIndicator indicator) {
-                  versionManagerHandler.createSdkInteractively(hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)));
+                  versionManagerHandler.createSdkInteractively(myProject, hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)));
                 }
               }.queue();
             }

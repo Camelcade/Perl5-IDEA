@@ -21,6 +21,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -72,5 +73,11 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
   @Override
   public Icon getIcon() {
     return PerlIcons.STRAWBERRY_ICON;
+  }
+
+  @Nullable
+  @Override
+  public InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
+    return new BerryBrewInstallPerlHandler(pathToVersionManager, this);
   }
 }
