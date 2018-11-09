@@ -105,7 +105,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Creates a process and process handler to be run in background.
    */
   @NotNull
-  protected abstract CapturingProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
+  protected abstract BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
   /**
    * @return a path on local machine to the file identified by {@code remotePath}
@@ -257,11 +257,19 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   @NotNull
   public static ProcessOutput execAndGetOutput(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return createProcessHandler(commandLine).runProcess();
+    return getOutput(createProcessHandler(commandLine));
+  }
+
+  public static ProcessOutput getOutput(@NotNull ProcessHandler processHandler) {
+    CapturingProcessAdapter adapter = new CapturingProcessAdapter();
+    processHandler.addProcessListener(adapter);
+    processHandler.startNotify();
+    processHandler.waitFor();
+    return adapter.getOutput();
   }
 
   @NotNull
-  public static CapturingProcessHandler createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+  public static BaseProcessHandler createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     PerlVersionManagerData versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
@@ -271,7 +279,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     if (perlHostData == null) {
       throw new ExecutionException("No host data in " + commandLine);
     }
-    CapturingProcessHandler processHandler = perlHostData.doCreateProcessHandler(commandLine);
+    BaseProcessHandler processHandler = perlHostData.doCreateProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(processHandler::addProcessListener);
     PerlRunUtil.addMissingPackageListener(processHandler, commandLine);
     return processHandler;

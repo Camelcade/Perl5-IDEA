@@ -47,14 +47,14 @@ import java.util.Objects;
  * - changes are not watched
  * - listeners not supported
  */
-class WslFileSystem extends DeprecatedVirtualFileSystem {
-  private static final Logger LOG = Logger.getInstance(WslFileSystem.class);
-  private static final Map<WSLDistributionWithRoot, WslFileSystem> CACHE = new HashMap<>();
+class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
+  private static final Logger LOG = Logger.getInstance(PerlWslFileSystem.class);
+  private static final Map<WSLDistributionWithRoot, PerlWslFileSystem> CACHE = new HashMap<>();
 
   @NotNull
   private final WSLDistributionWithRoot myDistribution;
 
-  private WslFileSystem(@NotNull WSLDistributionWithRoot distribution) {
+  private PerlWslFileSystem(@NotNull WSLDistributionWithRoot distribution) {
     myDistribution = distribution;
   }
 
@@ -98,9 +98,9 @@ class WslFileSystem extends DeprecatedVirtualFileSystem {
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
-  static WslFileSystem getOrCreate(@NotNull WSLDistributionWithRoot distributionWithRoot) {
+  static PerlWslFileSystem getOrCreate(@NotNull WSLDistributionWithRoot distributionWithRoot) {
     return CACHE.computeIfAbsent(distributionWithRoot, distribution -> {
-      WslFileSystem fileSystem = new WslFileSystem(distribution);
+      PerlWslFileSystem fileSystem = new PerlWslFileSystem(distribution);
       try {
         Field collectorField = ReflectionUtil.findField(VirtualFileManagerImpl.class, KeyedExtensionCollector.class, "myCollector");
         collectorField.setAccessible(true);
@@ -130,7 +130,7 @@ class WslFileSystem extends DeprecatedVirtualFileSystem {
     @NotNull
     @Override
     public VirtualFileSystem getFileSystem() {
-      return WslFileSystem.this;
+      return PerlWslFileSystem.this;
     }
 
     @NotNull

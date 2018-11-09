@@ -31,13 +31,13 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlWslHostHandler extends PerlHostHandler<PerlWslHostData, PerlWslHostHandler> {
-  public PerlWslHostHandler(@NotNull PerlHandlerBean bean) {
+class PerlWslHandler extends PerlHostHandler<PerlWslData, PerlWslHandler> {
+  public PerlWslHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
 
   @Nullable
-  protected PerlWslHostData createDataInteractively() {
+  protected PerlWslData createDataInteractively() {
     String[] ids = ArrayUtil.toStringArray(ContainerUtil.map(WSLUtil.getAvailableDistributions(), WSLDistribution::getId));
     if (ids.length < 1) {
       return null;
@@ -54,16 +54,16 @@ public class PerlWslHostHandler extends PerlHostHandler<PerlWslHostData, PerlWsl
       return null;
     }
 
-    PerlWslHostData hostData = createData();
+    PerlWslData hostData = createData();
     hostData.setDistributionId(ids[index]);
     return hostData;
   }
 
   @Override
-  protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull PerlWslHostData hostData) {
+  protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull PerlWslData hostData) {
     descriptor.setForcedToUseIdeaFileChooser(true);
     descriptor.setShowFileSystemRoots(false);
-    WslFileSystem fileSystem = hostData.getFileSystem();
+    PerlWslFileSystem fileSystem = hostData.getFileSystem();
     if (fileSystem != null) {
       descriptor.setRoots(fileSystem.findFileByPath("/"));
     }
@@ -94,7 +94,7 @@ public class PerlWslHostHandler extends PerlHostHandler<PerlWslHostData, PerlWsl
 
   @NotNull
   @Override
-  public PerlWslHostData createData() {
-    return new PerlWslHostData(this);
+  public PerlWslData createData() {
+    return new PerlWslData(this);
   }
 }

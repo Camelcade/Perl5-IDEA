@@ -38,7 +38,7 @@ public class PerlWslInputFilterProvider implements ConsoleInputFilterProvider {
   @NotNull
   @Override
   public InputFilter[] getDefaultFilters(@NotNull Project project) {
-    return PerlWslHostData.from(PerlProjectManager.getSdk(project)) == null ? EMPTY_ARRAY : new InputFilter[]{new WslFilter()};
+    return PerlWslData.from(PerlProjectManager.getSdk(project)) == null ? EMPTY_ARRAY : new InputFilter[]{new WslFilter()};
   }
 
   private static class WslFilter implements InputFilter {

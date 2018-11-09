@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.process.BaseProcessHandler;
 import com.intellij.execution.process.CapturingProcessHandler;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -46,6 +48,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 16.04.2016.
@@ -108,18 +111,17 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
         return null;
       }
 
-      CapturingProcessHandler processHandler = PerlHostData.createProcessHandler(
+      BaseProcessHandler processHandler = PerlHostData.createProcessHandler(
         criticCommandLine.withCharset(virtualFile.getCharset())
       );
-      final Process process = processHandler.getProcess();
 
-      OutputStream outputStream = process.getOutputStream();
+      OutputStream outputStream = Objects.requireNonNull(processHandler.getProcessInput());
       outputStream.write(sourceBytes);
       outputStream.close();
 
       List<PerlCriticErrorDescriptor> errors = new ArrayList<>();
       PerlCriticErrorDescriptor lastDescriptor = null;
-      for (String output : processHandler.runProcess().getStdoutLines()) {
+      for (String output : PerlHostData.getOutput(processHandler).getStdoutLines()) {
         PerlCriticErrorDescriptor fromString = PerlCriticErrorDescriptor.getFromString(output);
         if (fromString != null) {
           errors.add(lastDescriptor = fromString);

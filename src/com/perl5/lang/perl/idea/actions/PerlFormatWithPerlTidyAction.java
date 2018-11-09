@@ -17,14 +17,13 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.CapturingProcessHandler;
+import com.intellij.execution.process.BaseProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
@@ -49,6 +48,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Objects;
 
 public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private static final Logger LOG = Logger.getInstance(PerlFormatWithPerlTidyAction.class);
@@ -134,29 +134,28 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
             if (perlTidyCommandLine == null) {
               return;
             }
-            CapturingProcessHandler processHandler = PerlHostData.createProcessHandler(
+            BaseProcessHandler processHandler = PerlHostData.createProcessHandler(
               perlTidyCommandLine.withCharset(virtualFile.getCharset()));
 
-            final Process process = processHandler.getProcess();
-            final OutputStream outputStream = process.getOutputStream();
-            ApplicationManager.getApplication().executeOnPooledThread(() -> {
-              try {
-                final byte[] sourceBytes = virtualFile.contentsToByteArray();
-                outputStream.write(sourceBytes);
-                outputStream.close();
-              }
-              catch (IOException e) {
-                LOG.error(e);
-                Notifications.Bus.notify(new Notification(
-                  getGroup(),
-                  PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
-                  e.getMessage(),
-                  NotificationType.ERROR
-                ));
-              }
-            });
+            final OutputStream outputStream = Objects.requireNonNull(processHandler.getProcessInput());
 
-            ProcessOutput processOutput = processHandler.runProcess();
+            try {
+              final byte[] sourceBytes = virtualFile.contentsToByteArray();
+              outputStream.write(sourceBytes);
+              outputStream.close();
+            }
+            catch (IOException e) {
+              LOG.error(e);
+              Notifications.Bus.notify(new Notification(
+                getGroup(),
+                PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
+                e.getMessage(),
+                NotificationType.ERROR
+              ));
+              return;
+            }
+
+            ProcessOutput processOutput = PerlHostData.getOutput(processHandler);
             final List<String> stdoutLines = processOutput.getStdoutLines(false);
             List<String> stderrLines = processOutput.getStderrLines();
 

@@ -49,17 +49,17 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHandler> {
+class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   private static final MergingUpdateQueue NOTIFICATIONS_QUEUE = new MergingUpdateQueue(
     "notifications.queue", 3000, true, null);
 
-  private static final Logger LOG = Logger.getInstance(PerlWslHostData.class);
+  private static final Logger LOG = Logger.getInstance(PerlWslData.class);
   private static final int TIMEOUT = 10000;
 
   @Attribute("distribution-id")
   private String myDistributionId;
 
-  public PerlWslHostData(@NotNull PerlWslHostHandler handler) {
+  public PerlWslData(@NotNull PerlWslHandler handler) {
     super(handler);
   }
 
@@ -79,13 +79,13 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
   }
 
   @Nullable
-  public WslFileSystem getFileSystem() {
+  public PerlWslFileSystem getFileSystem() {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
       return null;
     }
-    return WslFileSystem.getOrCreate(distribution);
+    return PerlWslFileSystem.getOrCreate(distribution);
   }
 
   @Nullable
@@ -235,8 +235,8 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
 
   @NotNull
   @Override
-  protected CapturingProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new CapturingProcessHandler(patchCommandLine(commandLine));
+  protected BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return new KillableProcessHandler(patchCommandLine(commandLine));
   }
 
   private PerlCommandLine patchCommandLine(@NotNull PerlCommandLine perlCommandLine) throws ExecutionException {
@@ -255,7 +255,7 @@ public class PerlWslHostData extends PerlHostData<PerlWslHostData, PerlWslHostHa
 
   @NotNull
   @Override
-  protected PerlWslHostData self() {
+  protected PerlWslData self() {
     return this;
   }
 }

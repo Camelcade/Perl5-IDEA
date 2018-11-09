@@ -240,9 +240,9 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
           return;
         }
 
-        ProcessOutput processOutput = null;
+        ProcessOutput processOutput;
         try {
-          processOutput = PerlHostData.createProcessHandler(commandLine).runProcess();
+          processOutput = PerlHostData.execAndGetOutput(commandLine);
         }
         catch (ExecutionException e) {
           LOG.warn("Error deparsing", e);
