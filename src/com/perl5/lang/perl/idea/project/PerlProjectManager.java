@@ -61,7 +61,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.*;
 
 import static com.intellij.ProjectTopics.PROJECT_ROOTS;
@@ -315,7 +314,7 @@ public class PerlProjectManager {
       return null;
     }
     String homePath = sdk.getHomePath();
-    if (homePath != null && !StringUtil.contains(Paths.get(homePath).getFileName().toString(), "perl")) {
+    if (homePath != null && !StringUtil.contains(new File(homePath).getName(), "perl")) {
       homePath = FileUtil.join(homePath, PerlSdkType.INSTANCE.getPerlExecutableName());
       SdkModificator modificator = sdk.getSdkModificator();
       modificator.setHomePath(homePath);

@@ -25,7 +25,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.file.Paths;
+import java.io.File;
 
 import static com.perl5.lang.perl.adapters.CpanminusAdapter.PACKAGE_NAME;
 import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.*;
@@ -44,7 +44,7 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
   @NotNull
   @Override
   public PerlCommandLine patchCommandLine(@NotNull PerlCommandLine originalCommandLine) {
-    originalCommandLine.setExePath(Paths.get(originalCommandLine.getExePath()).getFileName().toString());
+    originalCommandLine.setExePath(new File(originalCommandLine.getExePath()).getName());
     return originalCommandLine.prependLineWith(getVersionManagerPath(), PLENV_EXEC).withEnvironment(PLENV_VERSION, getDistributionId());
   }
 

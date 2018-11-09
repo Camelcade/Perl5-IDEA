@@ -30,7 +30,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.function.Consumer;
 
 class PerlSystemHandler
@@ -68,7 +67,7 @@ class PerlSystemHandler
       false,
       it -> StringUtil.contains(it, "perl"),
       it -> {
-        String fileName = Paths.get(it).getFileName().toString();
+        String fileName = new File(it).getName();
         return StringUtil.contains(fileName, "perl") ? null : PerlBundle.message("perl.vm.system.perl.wrong.name", fileName);
       },
       (path, perlHostData) -> {

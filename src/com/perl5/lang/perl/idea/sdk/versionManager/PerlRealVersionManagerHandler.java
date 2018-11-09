@@ -39,7 +39,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -88,7 +87,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       true,
       it -> StringUtil.equals(it, getExecutableName()),
       it -> {
-        String fileName = Paths.get(it).getFileName().toString();
+        String fileName = new File(it).getName();
         return StringUtil.equals(fileName, getExecutableName())
                ? null
                : PerlBundle.message("perl.vm.wrong.file", fileName, getPresentableName());

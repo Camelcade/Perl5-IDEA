@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
@@ -79,7 +78,7 @@ public class PerlPluginUtil {
    * @return path to a helper with {@code relativePath}
    */
   public static String getHelperPath(@NotNull String relativePath) {
-    return FileUtil.toSystemIndependentName(Paths.get(getPluginHelpersRoot(), relativePath).toString());
+    return FileUtil.toSystemIndependentName(new File(getPluginHelpersRoot(), relativePath).getPath());
   }
 
   /**
