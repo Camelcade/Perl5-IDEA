@@ -134,6 +134,8 @@
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.local.PerlLocalHostHandler"/>
     <hostHandler key="wsl"
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslHandler"/>
+    <hostHandler key="docker"
+                 implementationClass="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerHandler"/>
     <implementationHandler key="porters"
                            implementationClass="com.perl5.lang.perl.idea.sdk.implementation.porters.PerlPortersHandler"/>
     <versionManagerHandler key="system"

@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.run.debugger;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.execution.PortMapping;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -58,6 +60,12 @@ public class PerlDebugProfileState extends PerlRunProfileState {
     return result;
   }
 
+  @NotNull
+  @Override
+  protected PerlCommandLine customizeCommandLine(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return super.customizeCommandLine(commandLine).withPortMappings(PortMapping.create(getDebugPort()));
+  }
+
   @Override
   protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
     Map<String, String> stringStringMap = new HashMap<>(super.calcEnv(runProfile));
@@ -82,7 +90,6 @@ public class PerlDebugProfileState extends PerlRunProfileState {
     String localPath = myHostData.getLocalPath(remotePath);
     return localPath == null ? remotePath : localPath;
   }
-
 
   public Integer getDebugPort() throws ExecutionException {
     if (myDebugPort == null) {

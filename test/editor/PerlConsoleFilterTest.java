@@ -54,7 +54,7 @@ public class PerlConsoleFilterTest extends PerlLightTestCase {
   }
 
   private void doTestDie() {
-    doTestConsoleFilter(new PerlConsoleFileLinkFilter(getProject()));
+    doTestConsoleFilter(new PerlConsoleFileLinkFilter(getProject(), new PerlRunConsole(getProject(), null)));
   }
 
 }

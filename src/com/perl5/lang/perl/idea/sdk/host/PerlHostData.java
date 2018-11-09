@@ -165,6 +165,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   /**
    * @return a path on remote machine to the file identified by {@code localPath}
+   * @apiNote this method invoked after checking that file is not under helpers root and not cached copy of remote files
    */
   @Nullable
   protected abstract String doGetRemotePath(@NotNull String localPath);
@@ -176,13 +177,24 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
       return null;
     }
 
-    File localPath = new File(localPathName);
+    // checking helpers
+    File localPathFile = new File(localPathName);
     File localHelpersPath = new File(PerlPluginUtil.getPluginHelpersRoot());
-    if (FileUtil.isAncestor(localHelpersPath, localPath, false)) {
+    if (FileUtil.isAncestor(localHelpersPath, localPathFile, false)) {
       return FileUtil.toSystemIndependentName(
-        new File(getHelpersRootPath(), Objects.requireNonNull(FileUtil.getRelativePath(localHelpersPath, localPath))).getPath());
+        new File(getHelpersRootPath(), Objects.requireNonNull(FileUtil.getRelativePath(localHelpersPath, localPathFile))).getPath());
     }
 
+    // checking local cache if any
+    String localCacheRoot = getLocalCacheRoot();
+    if (localCacheRoot != null) {
+      File localCacheFile = new File(localCacheRoot);
+      if (FileUtil.isAncestor(localCacheFile, localPathFile, false)) {
+        return FileUtil.toSystemIndependentName("/" + FileUtil.getRelativePath(localCacheFile, localPathFile));
+      }
+    }
+
+    // mapping with host data
     String remotePath = doGetRemotePath(localPathName);
     if (remotePath == null) {
       LOG.warn("Unable to map local to remote " + localPathName + " for " + this);
@@ -209,12 +221,10 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   /**
    * synchronizes {@code remotePath} with local cache
    *
-   * @return returns a path to a local copy of {@code remotePath}
    * @implNote always invoked on pooled thread
    * @implSpec fixme we probably should be able to throw from here
    */
-  @NotNull
-  protected abstract String doSyncPath(@NotNull String remotePath);
+  protected abstract void doSyncPath(@NotNull String remotePath, String localPath) throws ExecutionException;
 
   /**
    * synchronizes {@code remotePath} with local cache
@@ -228,8 +238,19 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     if (ApplicationManager.getApplication().isDispatchThread()) {
       throw new RuntimeException("Should not be invoked from EDT");
     }
+    String localPath = getLocalPath(remotePath);
+    if (localPath == null) {
+      throw new RuntimeException("Unable to compute local path for " + remotePath);
+    }
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.syncing", remotePath));
-    return doSyncPath(remotePath);
+    try {
+      doSyncPath(remotePath, localPath);
+    }
+    catch (ExecutionException e) {
+      LOG.error(e);
+      return null;
+    }
+    return localPath;
   }
 
   /**

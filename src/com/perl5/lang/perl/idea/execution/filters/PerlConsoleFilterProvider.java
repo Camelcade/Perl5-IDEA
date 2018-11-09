@@ -21,11 +21,8 @@ import com.intellij.execution.filters.Filter;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 /**
  * Created by ELI-HOME on 21-Sep-15.
@@ -36,10 +33,10 @@ public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
   @NotNull
   @Override
   public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
-    ArrayList<Filter> filters = ContainerUtil.newArrayList(new PerlConsoleFileLinkFilter(project));
-    if (consoleView instanceof PerlRunConsole) {
-      filters.add(new PerlAbsolutePathConsoleFilter(project, ((PerlRunConsole)consoleView)));
-    }
-    return filters.toArray(Filter.EMPTY_ARRAY);
+    return consoleView instanceof PerlRunConsole ?
+           new Filter[]{
+             new PerlConsoleFileLinkFilter(project, (PerlRunConsole)consoleView),
+             new PerlAbsolutePathConsoleFilter(project, ((PerlRunConsole)consoleView))
+           } : Filter.EMPTY_ARRAY;
   }
 }

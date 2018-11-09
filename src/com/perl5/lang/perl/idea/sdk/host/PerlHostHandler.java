@@ -25,6 +25,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileSystem;
@@ -106,7 +107,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     ApplicationManager.getApplication().invokeAndWait(
       () -> pathRef.set(Messages.showInputDialog(
         (Project)null, null, dialogTitle, null,
-        defaultPath == null ? null : defaultPath.getPath(),
+        defaultPath == null ? null : FileUtil.toSystemIndependentName(defaultPath.getPath()),
         new InputValidator() {
           @Override
           public boolean checkInput(String inputString) {

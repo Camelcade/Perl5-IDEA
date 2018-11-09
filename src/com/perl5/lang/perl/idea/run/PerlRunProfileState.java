@@ -106,7 +106,13 @@ public class PerlRunProfileState extends CommandLineState {
     commandLine.withEnvironment(environment);
     commandLine.withParentEnvironmentType(runConfiguration.isPassParentEnvs() ? CONSOLE : NONE);
 
-    return PerlHostData.createConsoleProcessHandler(commandLine.withSdk(perlSdk).withCharset(charset).withProject(project));
+    return PerlHostData.createConsoleProcessHandler(
+      customizeCommandLine(commandLine.withSdk(perlSdk).withCharset(charset).withProject(project)));
+  }
+
+  @NotNull
+  protected PerlCommandLine customizeCommandLine(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return commandLine;
   }
 
   @Nullable

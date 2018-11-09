@@ -17,7 +17,9 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.*;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.notification.Notification;
@@ -132,11 +134,6 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Nullable
   @Override
   public String doGetRemotePath(@NotNull String localPathName) {
-    File cachePath = new File(getLocalCacheRoot());
-    File localPath = new File(localPathName);
-    if (FileUtil.isAncestor(cachePath, localPath, false)) {
-      return FileUtil.toSystemIndependentName("/" + FileUtil.getRelativePath(cachePath, localPath));
-    }
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
@@ -145,17 +142,12 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return distribution.getWslPath(localPathName);
   }
 
-  @NotNull
   @Override
-  protected String doSyncPath(@NotNull String remotePath) {
-    String localPath = getLocalPath(remotePath);
-    if (localPath == null) {
-      throw new RuntimeException("Unable to compute local path for " + remotePath);
-    }
+  protected void doSyncPath(@NotNull String remotePath, String localPath) {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.error("No distribution available for " + myDistributionId);
-      return localPath;
+      return;
     }
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
@@ -175,7 +167,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
           }));
       int exitCode = output.getExitCode();
       if (exitCode == 0) {
-        return localPath;
+        return;
       }
 
       LOG.warn("Error while copying: " + remotePath + "; Exit code: " + exitCode + "; Stderr: " + output.getStderr());
@@ -205,7 +197,6 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     catch (ExecutionException e) {
       LOG.error(e);
     }
-    return localPath;
   }
 
   @Nullable

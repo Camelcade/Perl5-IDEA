@@ -23,6 +23,7 @@ import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil;
 import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -272,7 +273,11 @@ public class PerlSdkType extends SdkType {
                                @NotNull PerlVersionManagerData versionManagerData,
                                @NotNull Consumer<Sdk> sdkConsumer) {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
-
+    if (perlVersionDescriptor == null) {
+      ApplicationManager.getApplication().invokeLater(
+        () -> Messages.showErrorDialog("Failed to fetch perl version, see logs for more details", "Failed to Create Interpreter"));
+      return;
+    }
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
       suggestSdkName(perlVersionDescriptor, hostData, versionManagerData), PerlSdkTable.getInstance().getInterpreters());
 

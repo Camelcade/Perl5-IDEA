@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescr
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
 import gnu.trove.TByteArrayList;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -110,6 +111,10 @@ public class PerlDebugThread extends Thread {
     breakpointsDescriptorsQueue.clear();
   }
 
+  private void printConsole(@NotNull String message) {
+    ((ConsoleView)myExecutionResult.getExecutionConsole()).print(message, ConsoleViewContentType.SYSTEM_OUTPUT);
+  }
+
   @Override
   public void run() {
     try {
@@ -117,17 +122,15 @@ public class PerlDebugThread extends Thread {
       int debugPort = myDebugProfileState.getDebugPort();
       String debugName = debugHost + ":" + debugPort;
       if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
-        ((ConsoleView)myExecutionResult.getExecutionConsole())
-          .print("Connecting to " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+        printConsole("Connecting to " + debugName + "...\n");
         mySocket = new Socket(debugHost, debugPort);
       }
       else {
-        ((ConsoleView)myExecutionResult.getExecutionConsole())
-          .print("Listening on " + debugName + "...\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+        printConsole("Listening on " + debugName + "...\n");
         myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
         mySocket = myServerSocket.accept();
       }
-      ((ConsoleView)myExecutionResult.getExecutionConsole()).print("Connected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+      printConsole("Connected\n");
 
       myOutputStream = mySocket.getOutputStream();
       myInputStream = mySocket.getInputStream();
@@ -188,7 +191,6 @@ public class PerlDebugThread extends Thread {
         newEvent.setDebugSession(mySession);
         newEvent.setDebugThread(this);
         ourExecutor.execute(newEvent);
-        //				ApplicationManager.getApplication().executeOnPooledThread()invokeLater( // executeOnPooledThread - fixme concurrency problems
       }
     }
   }
@@ -296,7 +298,7 @@ public class PerlDebugThread extends Thread {
 
     StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
 
-    ((ConsoleView)myExecutionResult.getExecutionConsole()).print("Disconnected\n", ConsoleViewContentType.SYSTEM_OUTPUT);
+    printConsole("Disconnected\n");
   }
 
   protected Gson createGson() {

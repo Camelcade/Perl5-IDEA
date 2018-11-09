@@ -228,12 +228,12 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
 
   @Override
   public String getPerlRole() {
-    return PerlDebugOptions.ROLE_CLIENT;
+    return PerlDebugOptions.ROLE_SERVER;
   }
 
   @Override
   public String getDebugHost() {
-    return "localhost";
+    return "0.0.0.0";
   }
 
   @Override

@@ -30,6 +30,10 @@ plugins {
     id 'org.jetbrains.grammarkit' version '2018.2.1'
 }
 
+repositories {
+    mavenCentral()
+}
+
 jacocoTestReport {
     reports {
         xml.enabled true
@@ -112,10 +116,6 @@ test {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 project.afterEvaluate {
     prepareSandbox.doLast {
         def perlUtils = "$it.destinationDir/$intellij.pluginName/perl/"
@@ -141,6 +141,20 @@ idea {
         generatedSourceDirs += genRoot
     }
 }
+
+task pathingJar(type: Jar) {
+    dependsOn configurations.compile
+    appendix = 'pathing'
+
+    doFirst {
+        manifest {
+            attributes "Class-Path": configurations.compile.files.collect {
+                it.toPath().toString()
+            }.join(' ')
+        }
+    }
+}
+
 
 apply plugin: 'org.jetbrains.grammarkit'
 
@@ -217,6 +231,10 @@ tasks.withType(GenerateLexer).each {
 }
 
 tasks.withType(GenerateParser).each {
+    it.dependsOn pathingJar
+    it.doFirst{
+        classpath = files(pathingJar.archivePath)+project.configurations.compileOnly
+    }
     it.targetRoot = genRoot
     it.purgeOldFiles = true
 }

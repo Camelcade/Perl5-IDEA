@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.execution.filters;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,9 +32,12 @@ public class PerlConsoleFileLinkFilter implements Filter {
   private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\bat " + FILE_PATH_REGEXP + " line (\\d+)\\.?\\b");
   @NotNull
   private final Project myProject;
+  @NotNull
+  private final PerlRunConsole myRunConsole;
 
-  public PerlConsoleFileLinkFilter(@NotNull Project project) {
+  public PerlConsoleFileLinkFilter(@NotNull Project project, @NotNull PerlRunConsole runConsole) {
     myProject = project;
+    myRunConsole = runConsole;
   }
 
   @Nullable
@@ -49,12 +54,13 @@ public class PerlConsoleFileLinkFilter implements Filter {
     int lineStartOffset = endOffset - textLine.length();
     int fileStartOffset = matcher.start(1);
     int lineNumberEndOffset = matcher.end(2);
-    String filePath = matcher.group(1);
+    PerlHostData hostData = myRunConsole.getHostData();
+    String filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
     int line = Integer.valueOf(matcher.group(2)) - 1;
 
     return new Result(
       lineStartOffset + fileStartOffset,
       lineStartOffset + lineNumberEndOffset,
-      new MyHyperLinkInfo(myProject, line, filePath));
+      new MyHyperLinkInfo(myProject, line, filePath == null ? matcher.group(1) : filePath));
   }
 }

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.sdk.host.local;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
-import com.intellij.execution.process.*;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.containers.ContainerUtil;
@@ -94,10 +93,8 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
     return localPath;
   }
 
-  @NotNull
   @Override
-  protected String doSyncPath(@NotNull String remotePath) {
-    return remotePath;
+  protected void doSyncPath(@NotNull String remotePath, String localPath) {
   }
 
   @NotNull

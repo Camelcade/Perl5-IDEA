@@ -67,6 +67,9 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   private List<ProcessListener> myProcessListeners = Collections.emptyList();
 
+  @NotNull
+  private Set<PortMapping> myPortMappings = Collections.emptySet();
+
   public PerlCommandLine() {
   }
 
@@ -258,6 +261,22 @@ public class PerlCommandLine extends GeneralCommandLine {
   @NotNull
   public PerlCommandLine withConsoleIcon(@Nullable Icon consoleIcon) {
     myConsoleIcon = consoleIcon;
+    return this;
+  }
+
+  @NotNull
+  public Set<PortMapping> getPortMappings() {
+    return Collections.unmodifiableSet(myPortMappings);
+  }
+
+  /**
+   * Appends mappings of ports
+   */
+  @NotNull
+  public PerlCommandLine withPortMappings(PortMapping... mappings) {
+    Set<PortMapping> newMappings = ContainerUtil.newHashSet(mappings);
+    newMappings.addAll(myPortMappings);
+    myPortMappings = newMappings;
     return this;
   }
 
