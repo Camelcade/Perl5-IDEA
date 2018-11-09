@@ -20,7 +20,10 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.ui.InputValidator;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -77,15 +80,68 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
       return;
     }
     VirtualFileSystem fileSystem = hostData.getFileSystem();
-    if (fileSystem == null) {
-      LOG.error("No filesystem for " + hostData);
-      return;
-    }
     File defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
+    Consumer<String> resultConsumer = it -> selectionConsumer.accept(it, hostData);
+    if (fileSystem != null) {
+      chooseFileInteractively(
+        dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, hostData, fileSystem);
+    }
+    else {
+      chooseFileInteractively(
+        dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, hostData);
+    }
+  }
+
+  /**
+   * Choose a file if host does not provide a file system
+   */
+  protected void chooseFileInteractively(@NotNull String dialogTitle,
+                                         @Nullable File defaultPath,
+                                         boolean useDefaultIfExists,
+                                         @NotNull Predicate<String> nameValidator,
+                                         @NotNull Function<String, String> pathValidator,
+                                         @NotNull Consumer<String> selectionConsumer,
+                                         @NotNull Data hostData) {
+    Ref<String> pathRef = Ref.create();
+    ApplicationManager.getApplication().invokeAndWait(
+      () -> pathRef.set(Messages.showInputDialog(
+        (Project)null, null, dialogTitle, null,
+        defaultPath == null ? null : defaultPath.getPath(),
+        new InputValidator() {
+          @Override
+          public boolean checkInput(String inputString) {
+            if (StringUtil.isEmpty(inputString)) {
+              return false;
+            }
+            return nameValidator.test(new File(inputString).getName());
+          }
+
+          @Override
+          public boolean canClose(String inputString) {
+            return StringUtil.isNotEmpty(inputString) && pathValidator.apply(inputString) == null;
+          }
+        })));
+    String chosenPath = pathRef.get();
+    if (StringUtil.isNotEmpty(chosenPath)) {
+      selectionConsumer.accept(chosenPath);
+    }
+  }
+
+  /**
+   * Choose a file if host provides a file system
+   */
+  protected void chooseFileInteractively(@NotNull String dialogTitle,
+                                         @Nullable File defaultPath,
+                                         boolean useDefaultIfExists,
+                                         @NotNull Predicate<String> nameValidator,
+                                         @NotNull Function<String, String> pathValidator,
+                                         @NotNull Consumer<String> selectionConsumer,
+                                         @NotNull Data hostData,
+                                         @NotNull VirtualFileSystem fileSystem) {
     VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.getPath());
 
     if (useDefaultIfExists && defaultFile != null && defaultFile.exists() && !defaultFile.isDirectory()) {
-      selectionConsumer.accept(defaultFile.getPath(), hostData);
+      selectionConsumer.accept(defaultFile.getPath());
       return;
     }
 
@@ -115,7 +171,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
       }
     }));
     if (!pathRef.isNull()) {
-      selectionConsumer.accept(pathRef.get(), hostData);
+      selectionConsumer.accept(pathRef.get());
     }
   }
 
