@@ -44,14 +44,8 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @NotNull
   @Override
-  protected BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new KillableProcessHandler(commandLine);
-  }
-
-  @NotNull
-  @Override
-  protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new ColoredProcessHandler(commandLine);
+  protected Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return commandLine.createProcess();
   }
 
   @Nullable

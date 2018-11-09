@@ -99,13 +99,32 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Creates a process and process handler to be run in console.
    */
   @NotNull
-  protected abstract ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
+  protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return new KillableColoredProcessHandler(createConsoleProcess(commandLine), commandLine.getCommandLineString(),
+                                             commandLine.getCharset());
+  }
+
+  /**
+   * @return process created from {@code commandLine} to execute in console
+   */
+  @NotNull
+  protected Process createConsoleProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return createProcess(commandLine);
+  }
 
   /**
    * Creates a process and process handler to be run in background.
    */
   @NotNull
-  protected abstract BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException;
+  protected BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return new KillableProcessHandler(createProcess(commandLine), commandLine.getCommandLineString(), commandLine.getCharset());
+  }
+
+  /***
+   * @return process created from {@code commandLine} to execute directly
+   */
+  @NotNull
+  protected abstract Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException;
 
   /**
    * @return a path on local machine to the file identified by {@code remotePath}

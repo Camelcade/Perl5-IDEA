@@ -229,14 +229,8 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @NotNull
   @Override
-  protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new ColoredProcessHandler(patchCommandLine(commandLine));
-  }
-
-  @NotNull
-  @Override
-  protected BaseProcessHandler doCreateProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new KillableProcessHandler(patchCommandLine(commandLine));
+  protected Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return patchCommandLine(commandLine).createProcess();
   }
 
   private PerlCommandLine patchCommandLine(@NotNull PerlCommandLine perlCommandLine) throws ExecutionException {
