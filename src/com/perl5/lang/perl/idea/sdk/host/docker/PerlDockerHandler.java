@@ -23,7 +23,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-class PerlDockerHandler extends PerlHostHandler<PerlDockerData, PerlDockerHandler> {
+class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, PerlDockerHandler> {
   private static final Logger LOG = Logger.getInstance(PerlDockerHandler.class);
   public PerlDockerHandler(@NotNull PerlHandlerBean bean) {
     super(bean);

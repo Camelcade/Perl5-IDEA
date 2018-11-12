@@ -29,10 +29,12 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlExecutionException;
+import com.perl5.lang.perl.idea.sdk.host.PerlFileDescriptor;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
@@ -40,9 +42,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -50,6 +50,31 @@ import java.util.stream.Collectors;
  */
 class PerlDockerAdapter {
   private static final Logger LOG = Logger.getInstance(PerlDockerAdapter.class);
+  private static final String KILL = "kill";
+  private static final String RUN = "run";
+  private static final String EXEC = "exec";
+  private static final String WITH_AUTOREMOVE = "--rm";
+  private static final String AS_DAEMON = "-d";
+  private static final String CONTAINER = "container";
+  private static final String REMOVE = "rm";
+  private static final String CREATE = "create";
+  private static final String WITH_CONTAINER_NAME = "--name";
+  private static final String COPY = "cp";
+  private static final String AS_ARCHIVE = "--archive";
+  private static final String FOLLOWING_LINKS = "--follow-link";
+  private static final String IMAGE = "image";
+  private static final String LIST_IMAGE = "ls";
+  private static final String IN_FORMAT = "--format";
+  private static final String INTERACTIVELY = "-i";
+  private static final String WITH_ATTACHED = "-a";
+  private static final String STDOUT = "stdout";
+  private static final String STDERR = "stderr";
+  private static final String STDIN = "stdin";
+  private static final String WITH_TTY = "-t";
+  private static final String WITH_VOLUME = "-v";
+  private static final String EXPOSE_PORT = "--expose";
+  private static final String PUBLISH_PORT = "-p";
+
   @NotNull
   private final PerlDockerData myData;
 
@@ -58,12 +83,20 @@ class PerlDockerAdapter {
   }
 
   private void createContainer(@NotNull String containerName) throws ExecutionException {
-    checkOutput(PerlHostData.execAndGetOutput(
-      baseCommandLine().withParameters("container", "create", "--name", containerName, myData.getImageName())));
+    runCommand(CONTAINER, CREATE, WITH_CONTAINER_NAME, containerName, myData.getImageName());
+  }
+
+  public void createRunningContainer(@NotNull String containerName) throws ExecutionException {
+    runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE, WITH_CONTAINER_NAME,
+               containerName, myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
+  }
+
+  public void killContainer(@NotNull String... containers) throws ExecutionException {
+    runCommand(ArrayUtil.mergeArrays(new String[]{KILL}, containers));
   }
 
   private void dropContainer(@NotNull String containerName) throws ExecutionException {
-    checkOutput(PerlHostData.execAndGetOutput(baseCommandLine().withParameters("container", "rm", containerName)));
+    runCommand(CONTAINER, REMOVE, containerName);
   }
 
   @NotNull
@@ -74,16 +107,37 @@ class PerlDockerAdapter {
     return output;
   }
 
+  @NotNull
+  public PerlDockerData getData() {
+    return myData;
+  }
+
+  /**
+   * @return contents of {@code path} in the container.
+   */
+  @NotNull
+  public List<PerlFileDescriptor> listFiles(@NotNull String containerName, @NotNull String path) {
+    try {
+      ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
+      return output.getStdoutLines().stream()
+        .map(it -> PerlFileDescriptor.create(path, it))
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+    }
+    catch (ExecutionException e) {
+      LOG.error(e);
+      return Collections.emptyList();
+    }
+  }
+
   public void copyRemote(@NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
-    String containerName = "copying_" + myData.getSafeImageName() + Math.random();
+    String containerName = "copying_" + myData.getSafeImageName() + System.currentTimeMillis();
     createContainer(containerName);
 
     try {
       File localPathFile = new File(localPath);
       FileUtil.createDirectory(localPathFile);
-      checkOutput(PerlHostData.execAndGetOutput(
-        baseCommandLine().withParameters("cp", "--archive", containerName + ':' + remotePath, localPathFile.getParent()) // "--follow-link"
-      ));
+      runCommand(COPY, AS_ARCHIVE, FOLLOWING_LINKS, containerName + ':' + remotePath, localPathFile.getParent());
     }
     catch (PerlExecutionException e) {
       ProcessOutput processOutput = e.getProcessOutput();
@@ -99,6 +153,11 @@ class PerlDockerAdapter {
     }
   }
 
+  @NotNull
+  private ProcessOutput runCommand(@NotNull String... params) throws ExecutionException {
+    return checkOutput(PerlHostData.execAndGetOutput(baseCommandLine().withParameters(params)));
+  }
+
   private PerlCommandLine baseCommandLine() {
     return new PerlCommandLine("docker").withHostData(PerlHostHandler.getDefaultHandler().createData());
   }
@@ -107,8 +166,7 @@ class PerlDockerAdapter {
    * @return list of images in {@code name[:tag]} format
    */
   List<String> listImages() throws ExecutionException {
-    ProcessOutput output =
-      checkOutput(PerlHostData.execAndGetOutput(baseCommandLine().withParameters("image", "ls", "--format", "{{.Repository}}:{{.Tag}}")));
+    ProcessOutput output = runCommand(IMAGE, LIST_IMAGE, IN_FORMAT, "{{.Repository}}:{{.Tag}}");
     return output.getStdoutLines().stream().map(it -> StringUtil.replace(it, ":<none>", "")).sorted().collect(Collectors.toList());
   }
 
@@ -116,22 +174,18 @@ class PerlDockerAdapter {
    * Wrapping a {@code commandLine} to a script and runs it using {@code docker} command, returning it's process
    */
   public Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    File script = createCommandScript(commandLine);
     PerlCommandLine dockerCommandLine = baseCommandLine()
-      .withParameters("run", "--rm", "-i")
-      .withParameters("-a", "stdout", "-a", "stderr", "-a", "stdin")
+      .withParameters(RUN, WITH_AUTOREMOVE, INTERACTIVELY)
+      .withParameters(WITH_ATTACHED, STDOUT, WITH_ATTACHED, STDERR, WITH_ATTACHED, STDIN)
       .withCharset(commandLine.getCharset());
+
     if (commandLine.isUsePty()) {
-      dockerCommandLine.withParameters("-t");
+      dockerCommandLine.withParameters(WITH_TTY);
       dockerCommandLine.withPty(true);
     }
 
-    // mounting script
-    String dockerScriptPath = PerlDockerData.CONTAINER_ROOT + '/' + script.getName();
-    dockerCommandLine.withParameters("-v=" + script.getPath() + ':' + dockerScriptPath + ":ro");
-
     // mounting helpers
-    dockerCommandLine.withParameters("-v=" + PerlPluginUtil.getPluginHelpersRoot() + ':' + myData.getHelpersRootPath() + ":ro");
+    dockerCommandLine.withParameters(WITH_VOLUME, PerlPluginUtil.getPluginHelpersRoot() + ':' + myData.getHelpersRootPath());
 
     Project project = commandLine.getEffectiveProject();
     if (project != null) {
@@ -144,18 +198,23 @@ class PerlDockerAdapter {
       for (VirtualFile rootToMount : VfsUtil.getCommonAncestors(roots.toArray(VirtualFile.EMPTY_ARRAY))) {
         String localPath = rootToMount.getPath();
         String remotePath = myData.getRemotePath(localPath);
-        dockerCommandLine.withParameters("-v=" + localPath + ':' + remotePath + ":rw");
+        dockerCommandLine.withParameters(WITH_VOLUME, localPath + ':' + remotePath);
       }
     }
 
-    // required by coverage, probably we should have a getter for this
+    // required by coverage, probably we should have a getter for this; Also contains a temp path
     String localSystemPath = PathManager.getSystemPath();
-    dockerCommandLine.withParameters("-v=" + localSystemPath + ':' + myData.getRemotePath(localSystemPath) + ":rw");
+    dockerCommandLine.withParameters(WITH_VOLUME, localSystemPath + ':' + myData.getRemotePath(localSystemPath));
 
     // mapping ports
     commandLine.getPortMappings().forEach(
-      it -> dockerCommandLine.withParameters("--expose=" + it.getRemote(), "-p=" + it.getLocal() + ":" + it.getRemote()));
+      it -> dockerCommandLine.withParameters(EXPOSE_PORT,
+                                             String.valueOf(it.getRemote()),
+                                             PUBLISH_PORT, it.getLocal() + ":" + it.getRemote()));
 
+    // we sure that command script is under system dir
+    File script = createCommandScript(commandLine);
+    String dockerScriptPath = myData.getRemotePath(script.getPath());
     return dockerCommandLine.withParameters(myData.getImageName(), "sh", dockerScriptPath).createProcess();
   }
 
@@ -163,9 +222,7 @@ class PerlDockerAdapter {
   @NotNull
   private File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     StringBuilder sb = new StringBuilder();
-    commandLine.getEnvironment().forEach((key, val) -> {
-      sb.append("export ").append(key).append('=').append(val).append("\n");
-    });
+    commandLine.getEnvironment().forEach((key, val) -> sb.append("export ").append(key).append('=').append(val).append("\n"));
     sb.append(commandLine.getCommandLineString());
 
     try {

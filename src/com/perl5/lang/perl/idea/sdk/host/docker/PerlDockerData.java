@@ -20,10 +20,10 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import com.perl5.lang.perl.util.PerlFileUtil;
@@ -76,10 +76,15 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return this;
   }
 
-  @Nullable
+  /**
+   * @apiNote don't forget to call {@link PerlHostVirtualFileSystem#resetDelegate()} after using this filesystem
+   */
+  @NotNull
   @Override
-  public VirtualFileSystem getFileSystem() {
-    return null;
+  public PerlHostVirtualFileSystem getFileSystem() {
+    PerlHostVirtualFileSystem hostSystem = PerlHostVirtualFileSystem.getInstance();
+    hostSystem.setDelegate(PerlDockerFileSystem.create(new PerlDockerAdapter(this)));
+    return hostSystem;
   }
 
   @Nullable
@@ -87,8 +92,9 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   public File findFileByName(@NotNull String fileName) {
     try {
       ProcessOutput output = execAndGetOutput(new PerlCommandLine("\\which", fileName).withHostData(this));
-      if (output.getExitCode() != 0) {
-        LOG.error("Got non-zero code from script " + output.getExitCode() + "; stderr: " + output.getStderr());
+      int exitCode = output.getExitCode();
+      if (exitCode != 0 && exitCode != 1) {
+        LOG.error("Got non-zero code from script " + exitCode + "; stderr: " + output.getStderr());
         return null;
       }
       List<String> lines = output.getStdoutLines();

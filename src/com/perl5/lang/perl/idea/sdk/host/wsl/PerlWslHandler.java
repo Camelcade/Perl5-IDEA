@@ -19,19 +19,18 @@ package com.perl5.lang.perl.idea.sdk.host.wsl;
 import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class PerlWslHandler extends PerlHostHandler<PerlWslData, PerlWslHandler> {
+class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslHandler> {
   public PerlWslHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
@@ -57,16 +56,6 @@ class PerlWslHandler extends PerlHostHandler<PerlWslData, PerlWslHandler> {
     PerlWslData hostData = createData();
     hostData.setDistributionId(ids[index]);
     return hostData;
-  }
-
-  @Override
-  protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull PerlWslData hostData) {
-    descriptor.setForcedToUseIdeaFileChooser(true);
-    descriptor.setShowFileSystemRoots(false);
-    PerlWslFileSystem fileSystem = hostData.getFileSystem();
-    if (fileSystem != null) {
-      descriptor.setRoots(fileSystem.findFileByPath("/"));
-    }
   }
 
   @NotNull

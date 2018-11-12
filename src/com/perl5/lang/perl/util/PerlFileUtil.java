@@ -16,11 +16,13 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlFileUtil {
+  private static final Logger LOG = Logger.getInstance(PerlFileUtil.class);
   /**
    * Linuxies path if local system is windows. Changing {@code c:\some\path} to {@code /c/some/path}
    */

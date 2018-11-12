@@ -63,7 +63,7 @@ public class PerlPluginUtil {
    */
   @NotNull
   public static String getPluginHelpersRoot() {
-    return FileUtil.join(getPluginRoot(), "perl");
+    return FileUtil.toSystemIndependentName(new File(getPluginRoot(), "perl").getPath());
   }
 
   /**

@@ -41,6 +41,7 @@ import com.intellij.util.xmlb.annotations.Attribute;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -80,14 +81,19 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return "[" + myDistributionId.toLowerCase() + "]";
   }
 
+  /**
+   * @apiNote don't forget to call {@link PerlHostVirtualFileSystem#resetDelegate()} after using this filesystem
+   */
   @Nullable
-  public PerlWslFileSystem getFileSystem() {
+  public PerlHostVirtualFileSystem getFileSystem() {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
       LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
       return null;
     }
-    return PerlWslFileSystem.getOrCreate(distribution);
+    PerlHostVirtualFileSystem hostFileSystem = PerlHostVirtualFileSystem.getInstance();
+    hostFileSystem.setDelegate(PerlWslFileSystem.create(distribution));
+    return hostFileSystem;
   }
 
   @Nullable

@@ -86,6 +86,9 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     if (fileSystem != null) {
       chooseFileInteractively(
         dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, hostData, fileSystem);
+      if (fileSystem instanceof PerlHostVirtualFileSystem) {
+        ((PerlHostVirtualFileSystem)fileSystem).resetDelegate();
+      }
     }
     else {
       chooseFileInteractively(
@@ -163,7 +166,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
       }
     };
     descriptor.setTitle(dialogTitle);
-    customizeFileChooser(descriptor, hostData);
+    customizeFileChooser(descriptor, fileSystem);
     Ref<String> pathRef = Ref.create();
     ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, defaultFile, chosen -> {
       String selectedPath = chosen.get(0).getPath();
@@ -182,10 +185,9 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   protected boolean isChooseFolders() {return false;}
 
   /**
-   * host handler may customize a chooser descriptor if necessary
+   * host handler may customize a chooser descriptor if necessary, e.g. add fs roots
    */
-  protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull Data hostData) {
-
+  protected void customizeFileChooser(@NotNull FileChooserDescriptor descriptor, @NotNull VirtualFileSystem fileSystem) {
   }
 
   /**

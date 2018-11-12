@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -109,12 +110,19 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     if (fileSystem == null) {
       return null;
     }
-    return hostData.getHostSdkStream()
-      .filter(this::isSameHandler)
-      .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
-      .filter(it -> it != null && it.isValid() && it.exists())
-      .map(it -> new File(it.getPath()))
-      .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
+    try {
+      return hostData.getHostSdkStream()
+        .filter(this::isSameHandler)
+        .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
+        .filter(it -> it != null && it.isValid() && it.exists())
+        .map(it -> new File(it.getPath()))
+        .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
+    }
+    finally {
+      if (fileSystem instanceof PerlHostVirtualFileSystem) {
+        ((PerlHostVirtualFileSystem)fileSystem).resetDelegate();
+      }
+    }
   }
 
   protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);

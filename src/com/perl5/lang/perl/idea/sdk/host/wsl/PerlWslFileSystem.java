@@ -18,23 +18,17 @@ package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.*;
-import com.intellij.openapi.vfs.impl.VirtualFileManagerImpl;
-import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.util.ObjectUtils;
-import com.intellij.util.ReflectionUtil;
+import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.Contract;
+import com.perl5.lang.perl.idea.sdk.host.PerlPluggableVirtualFileSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -46,9 +40,8 @@ import java.util.Objects;
  * - changes are not watched
  * - listeners not supported
  */
-class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
+class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   private static final Logger LOG = Logger.getInstance(PerlWslFileSystem.class);
-  private static final Map<WSLDistributionWithRoot, PerlWslFileSystem> CACHE = new HashMap<>();
 
   @NotNull
   private final WSLDistributionWithRoot myDistribution;
@@ -57,28 +50,12 @@ class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
     myDistribution = distribution;
   }
 
-  /**
-   * @implNote this id is wrong. Theoretically we should be able to find an FS by this key in EP. but we don't
-   * This FS is supposed to be obtained from host only
-   */
-  @NotNull
-  @Override
-  public String getProtocol() {
-    return "wsl-" + myDistribution.getId().toLowerCase();
-  }
-
   @Nullable
   @Override
   public VirtualFile findFileByPath(@NotNull String path) {
     String windowsPath = myDistribution.getWindowsPath(path);
     VirtualFile realFile = windowsPath == null ? null : VfsUtil.findFileByIoFile(new File(windowsPath), false);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
-  }
-
-  @Contract("null->null")
-  @Nullable
-  public VirtualFile findFile(@Nullable File path) {
-    return ObjectUtils.doIfNotNull(path, it -> findFileByPath(it.toString()));
   }
 
   @Override
@@ -97,26 +74,11 @@ class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
-  static PerlWslFileSystem getOrCreate(@NotNull WSLDistributionWithRoot distributionWithRoot) {
-    return CACHE.computeIfAbsent(distributionWithRoot, distribution -> {
-      PerlWslFileSystem fileSystem = new PerlWslFileSystem(distribution);
-      try {
-        Field collectorField = ReflectionUtil.findField(VirtualFileManagerImpl.class, KeyedExtensionCollector.class, "myCollector");
-        collectorField.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        KeyedExtensionCollector<VirtualFileSystem, String> collector =
-          (KeyedExtensionCollector<VirtualFileSystem, String>)collectorField.get(VirtualFileManagerImpl.getInstance());
-        collector.addExplicitExtension(fileSystem.getProtocol(), fileSystem);
-        return fileSystem;
-      }
-      catch (NoSuchFieldException | IllegalAccessException e) {
-        LOG.error(e);
-      }
-      return null;
-    });
+  static PerlWslFileSystem create(@NotNull WSLDistributionWithRoot distributionWithRoot) {
+    return new PerlWslFileSystem(distributionWithRoot);
   }
 
-  private class WslVirtualFile extends LightVirtualFile {
+  private class WslVirtualFile extends PerlPluggableVirtualFile {
     // fixme this is introduced because wsl improperly map root file
     @NotNull
     private final String myPath;
@@ -124,12 +86,6 @@ class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
     public WslVirtualFile(@NotNull VirtualFile originalVirtualFile, @NotNull String path) {
       setOriginalFile(originalVirtualFile);
       myPath = FileUtil.toSystemIndependentName(path);
-    }
-
-    @NotNull
-    @Override
-    public VirtualFileSystem getFileSystem() {
-      return PerlWslFileSystem.this;
     }
 
     @NotNull
@@ -167,12 +123,6 @@ class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
 
     @NotNull
     @Override
-    public CharSequence getNameSequence() {
-      return getOriginalFile().getNameSequence();
-    }
-
-    @NotNull
-    @Override
     public String getName() {
       return getOriginalFile().getName();
     }
@@ -187,11 +137,6 @@ class PerlWslFileSystem extends DeprecatedVirtualFileSystem {
     @Override
     public String getNameWithoutExtension() {
       return getOriginalFile().getNameWithoutExtension();
-    }
-
-    @Override
-    public boolean is(@NotNull VFileProperty property) {
-      return false;
     }
 
     @Override
