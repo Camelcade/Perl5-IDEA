@@ -552,7 +552,7 @@ public class PerlRunUtil {
       return;
     }
 
-    new Task.Backgroundable(project, PerlBundle.message("perl.progress.refreshing.interpreter.information", sdk), false) {
+    new Task.Backgroundable(project, PerlBundle.message("perl.progress.refreshing.interpreter.information", sdk.getName()), false) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
         PerlSdkType.INSTANCE.setupSdkPaths(sdk);
