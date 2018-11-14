@@ -92,7 +92,7 @@ public abstract class InstallPerlHandler {
                   ApplicationManager.getApplication().invokeLater(
                     () -> PerlProjectManager.getInstance(project).setProjectSdk(sdk));
                 }
-              });
+              }, project);
           }
         });
       }

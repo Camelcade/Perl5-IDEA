@@ -102,7 +102,7 @@ public class PerlBrewCreateLibraryAction extends PerlBrewActionBase implements D
                 PerlBundle.message("perl.vm.perlbrew.create.lib.title", perlBrewData.getPerlVersionString()), null) == Messages.YES) {
                 PerlProjectManager.getInstance(myProject).setProjectSdk(sdk);
               }
-            }));
+            }), myProject);
       }
     }.queue();
   }

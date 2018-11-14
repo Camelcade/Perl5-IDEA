@@ -171,7 +171,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       installation = distributions.get(0);
     }
 
-    createInterpreter(installation, vmAdapter, sdkConsumer);
+    createInterpreter(installation, vmAdapter, sdkConsumer, project);
   }
 
   @Nullable
@@ -192,7 +192,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
    */
   public void createInterpreter(@NotNull String distributionId,
                                 @NotNull PerlVersionManagerAdapter vmAdapter,
-                                @Nullable Consumer<Sdk> sdkConsumer) {
+                                @Nullable Consumer<Sdk> sdkConsumer,
+                                @NotNull Project project) {
     List<String> perlPath = vmAdapter.execWith(distributionId, "perl", PERL_LE, PERL_CTRL_X);
     if (perlPath == null || perlPath.size() != 1) {
       LOG.warn("Error getting perl location from interpreter. One line with path expected, got:\n" +
@@ -206,6 +207,6 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       return;
     }
     PerlRealVersionManagerData versionManagerData = createData(vmAdapter, distributionId);
-    PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer);
+    PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer, project);
   }
 }

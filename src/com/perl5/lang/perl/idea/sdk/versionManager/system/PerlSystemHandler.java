@@ -74,7 +74,7 @@ class PerlSystemHandler
       },
       (path, perlHostData) -> {
         if (StringUtil.isNotEmpty(path) && perlHostData != null) {
-          PerlSdkType.createAndAddSdk(path, perlHostData, createData(), sdkConsumer);
+          PerlSdkType.createAndAddSdk(path, perlHostData, createData(), sdkConsumer, project);
         }
       },
       disposable);

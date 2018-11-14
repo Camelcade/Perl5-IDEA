@@ -115,6 +115,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import gnu.trove.THashSet;
 import junit.framework.AssertionFailedError;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
@@ -193,6 +194,7 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
       sdk -> {
         PerlSdkTable.getInstance().addJdk(sdk, getTestRootDisposable());
         PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
+        PerlRunUtil.refreshSdkDirs(sdk, getProject());
       });
   }
 

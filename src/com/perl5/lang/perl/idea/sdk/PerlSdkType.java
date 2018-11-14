@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.*;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
@@ -253,12 +254,14 @@ public class PerlSdkType extends SdkType {
   public static void createAndAddSdk(@NotNull String interpreterPath,
                                      @NotNull PerlHostData hostData,
                                      @NotNull PerlVersionManagerData versionManagerData,
-                                     @Nullable Consumer<Sdk> sdkConsumer) {
+                                     @Nullable Consumer<Sdk> sdkConsumer,
+                                     @NotNull Project project) {
     createSdk(interpreterPath, hostData, versionManagerData, sdk -> {
       PerlSdkTable.getInstance().addJdk(sdk);
       if (sdkConsumer != null) {
         sdkConsumer.accept(sdk);
       }
+      PerlRunUtil.refreshSdkDirs(sdk, project);
     });
   }
 
@@ -291,10 +294,9 @@ public class PerlSdkType extends SdkType {
       return;
     }
 
-    newSdk.setVersionString(perlVersionDescriptor == null ? null : perlVersionDescriptor.getVersionString());
+    newSdk.setVersionString(perlVersionDescriptor.getVersionString());
     newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData));
 
-    INSTANCE.setupSdkPaths(newSdk);
     sdkConsumer.accept(newSdk);
   }
 

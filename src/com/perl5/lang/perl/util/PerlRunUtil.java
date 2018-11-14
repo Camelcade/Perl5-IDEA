@@ -552,14 +552,17 @@ public class PerlRunUtil {
       return;
     }
 
-    new Task.Backgroundable(project, PerlBundle.message("perl.progress.refreshing.interpreter.information"), false) {
+    new Task.Backgroundable(project, PerlBundle.message("perl.progress.refreshing.interpreter.information", sdk), false) {
       @Override
       public void run(@NotNull ProgressIndicator indicator) {
         PerlSdkType.INSTANCE.setupSdkPaths(sdk);
-        WriteAction.runAndWait(
-          () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(EmptyRunnable.getInstance(), false, true));
         if (project != null) {
-          DaemonCodeAnalyzer.getInstance(project).restart();
+          WriteAction.runAndWait(() -> {
+            if (!myProject.isDisposed()) {
+              ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(EmptyRunnable.getInstance(), false, true);
+              DaemonCodeAnalyzer.getInstance(project).restart();
+            }
+          });
         }
       }
     }.queue();
