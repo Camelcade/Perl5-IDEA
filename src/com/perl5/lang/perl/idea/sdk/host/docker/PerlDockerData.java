@@ -18,9 +18,13 @@ package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.xmlb.annotations.Tag;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
@@ -40,6 +44,10 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   static final File CONTAINER_ROOT_FILE = new File(CONTAINER_ROOT);
   static final String HELPERS_ROOT = CONTAINER_ROOT + PerlFileUtil.linuxisePath(PerlPluginUtil.getPluginHelpersRoot());
   private static final Logger LOG = Logger.getInstance(PerlDockerData.class);
+
+  @Transient
+  @Nullable
+  private PerlDockerFileSystem myFileSystem;
 
   @Nullable
   @Tag("image-name")
@@ -76,14 +84,23 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return this;
   }
 
-  /**
-   * @apiNote don't forget to call {@link PerlHostVirtualFileSystem#resetDelegate()} after using this filesystem
-   */
   @NotNull
   @Override
-  public PerlHostVirtualFileSystem getFileSystem() {
+  public synchronized PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
+    if (myFileSystem == null) {
+      myFileSystem = PerlDockerFileSystem.create(new PerlDockerAdapter(this));
+      Disposer.register(disposable, () -> {
+        PerlDockerFileSystem fileSystem = myFileSystem;
+        ApplicationManager.getApplication().executeOnPooledThread(() -> {
+          if (fileSystem != null) {
+            fileSystem.clean();
+          }
+        });
+        myFileSystem = null;
+      });
+    }
     PerlHostVirtualFileSystem hostSystem = PerlHostVirtualFileSystem.getInstance();
-    hostSystem.setDelegate(PerlDockerFileSystem.create(new PerlDockerAdapter(this)));
+    hostSystem.setDelegate(myFileSystem);
     return hostSystem;
   }
 

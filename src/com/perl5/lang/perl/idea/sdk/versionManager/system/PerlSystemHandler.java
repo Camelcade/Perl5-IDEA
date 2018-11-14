@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.system;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
@@ -60,7 +61,8 @@ class PerlSystemHandler
   @Override
   public void createSdkInteractively(@NotNull Project project,
                                      @NotNull PerlHostHandler<?, ?> hostHandler,
-                                     @Nullable Consumer<Sdk> sdkConsumer) {
+                                     @Nullable Consumer<Sdk> sdkConsumer,
+                                     @NotNull Disposable disposable) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.system.choose.interpreter"),
       this::suggestHomePath,
@@ -74,7 +76,8 @@ class PerlSystemHandler
         if (StringUtil.isNotEmpty(path) && perlHostData != null) {
           PerlSdkType.createAndAddSdk(path, perlHostData, createData(), sdkConsumer);
         }
-      });
+      },
+      disposable);
   }
 
   /**

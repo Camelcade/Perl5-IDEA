@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.host;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileChooser.FileChooser;
@@ -70,25 +71,25 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    * @param nameValidator       restricts visible file names
    * @param pathValidator       validates a path selected by user and returns error message or null if everything is fine
    * @param selectionConsumer   a callback for selected result. Accepts path selected and the host data
+   * @param disposable          session-bound things may be attached to this disposable, which is going to be disposed by parent configurable
    */
   public void chooseFileInteractively(@NotNull String dialogTitle,
                                       @Nullable Function<PerlHostData<?, ?>, File> defaultPathFunction,
-                                      boolean useDefaultIfExists, @NotNull Predicate<String> nameValidator,
+                                      boolean useDefaultIfExists,
+                                      @NotNull Predicate<String> nameValidator,
                                       @NotNull Function<String, String> pathValidator,
-                                      @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer) {
+                                      @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer,
+                                      @NotNull Disposable disposable) {
     Data hostData = createDataInteractively();
     if (hostData == null) {
       return;
     }
-    VirtualFileSystem fileSystem = hostData.getFileSystem();
+    VirtualFileSystem fileSystem = hostData.getFileSystem(disposable);
     File defaultPath = defaultPathFunction == null ? null : defaultPathFunction.apply(hostData);
     Consumer<String> resultConsumer = it -> selectionConsumer.accept(it, hostData);
     if (fileSystem != null) {
       chooseFileInteractively(
         dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, hostData, fileSystem);
-      if (fileSystem instanceof PerlHostVirtualFileSystem) {
-        ((PerlHostVirtualFileSystem)fileSystem).resetDelegate();
-      }
     }
     else {
       chooseFileInteractively(

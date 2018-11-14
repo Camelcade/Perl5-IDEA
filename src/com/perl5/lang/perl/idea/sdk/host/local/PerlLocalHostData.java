@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk.host.local;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.containers.ContainerUtil;
@@ -65,7 +66,7 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
 
   @Nullable
   @Override
-  public VirtualFileSystem getFileSystem() {
+  public VirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
     return LocalFileSystem.getInstance();
   }
 

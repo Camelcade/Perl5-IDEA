@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -33,6 +34,7 @@ import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
@@ -64,6 +66,8 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   private Perl5SdkManipulator mySdkManipulator;
   @NotNull
   private Project myProject;
+
+  private final Disposable myDisposable = Disposer.newDisposable();
 
   public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator, @NotNull Project project) {
     myConnection = ApplicationManager.getApplication().getMessageBus().connect();
@@ -115,7 +119,8 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
               new Task.Modal(myProject, PerlBundle.message("perl.create.interpreter.progress"), false) {
                 @Override
                 public void run(@NotNull ProgressIndicator indicator) {
-                  versionManagerHandler.createSdkInteractively(myProject, hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)));
+                  versionManagerHandler.createSdkInteractively(
+                    myProject, hostHandler, sdk -> updateSdkModel(new Perl5RealSdkWrapper(sdk)), myDisposable);
                 }
               }.queue();
             }
@@ -266,6 +271,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     myConnection.deliverImmediately();
     myConnection.disconnect();
     myPanel = null;
+    Disposer.dispose(myDisposable);
   }
 
   @Override

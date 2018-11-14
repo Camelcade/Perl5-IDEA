@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
@@ -46,10 +47,12 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
 
   /**
    * Shows a UI to create an sdk for this version manager on the host described by the {@code hostHandler}
+   * @param disposable any temporary things may be bound to the disposable which is going to be disposed by invoker
    */
   public abstract void createSdkInteractively(@NotNull Project project,
                                               @NotNull PerlHostHandler<?, ?> hostHandler,
-                                              @Nullable Consumer<Sdk> sdkConsumer);
+                                              @Nullable Consumer<Sdk> sdkConsumer,
+                                              @NotNull Disposable disposable);
 
   /**
    * @return title for menu item in add interpreter dialog

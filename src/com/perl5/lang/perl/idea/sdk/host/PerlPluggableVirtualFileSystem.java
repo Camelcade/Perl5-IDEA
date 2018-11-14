@@ -27,8 +27,6 @@ public abstract class PerlPluggableVirtualFileSystem extends DeprecatedVirtualFi
    */
   public void clean() {}
 
-  ;
-
   @Override
   public void refresh(boolean asynchronous) {
   }

@@ -155,6 +155,12 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
   }
 
   @Override
+  protected void disposeEditor() {
+    super.disposeEditor();
+    mySdkConfigurable.disposeUIResources();
+  }
+
+  @Override
   public Perl5SdkWrapper getCurrentSdkWrapper() {
     return mySdkProxy == null ? null : new Perl5RealSdkWrapper(mySdkProxy);
   }

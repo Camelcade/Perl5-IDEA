@@ -65,19 +65,14 @@ public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
     return myDelegate != null && myDelegate.isCaseSensitive();
   }
 
-  public synchronized void setDelegate(@NotNull PerlPluggableVirtualFileSystem delegate) {
-    if (myDelegate != null) {
-      resetDelegate();
-    }
+  public void setDelegate(@NotNull PerlPluggableVirtualFileSystem delegate) {
     myDelegate = delegate;
   }
 
-  public synchronized void resetDelegate() {
-    if (myDelegate == null) {
-      return;
+  public void resetDelegate(@NotNull PerlPluggableVirtualFileSystem delegate) {
+    if (myDelegate == delegate) {
+      myDelegate = null;
     }
-    Objects.requireNonNull(myDelegate).clean();
-    myDelegate = null;
   }
 
   @NotNull

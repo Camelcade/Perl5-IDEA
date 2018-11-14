@@ -25,11 +25,14 @@ import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.DumbAwareAction;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -38,6 +41,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.intellij.util.xmlb.annotations.Attribute;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -62,6 +66,10 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Attribute("distribution-id")
   private String myDistributionId;
 
+  @Transient
+  @Nullable
+  private PerlWslFileSystem myFileSystem;
+
   public PerlWslData(@NotNull PerlWslHandler handler) {
     super(handler);
   }
@@ -81,18 +89,27 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return "[" + myDistributionId.toLowerCase() + "]";
   }
 
-  /**
-   * @apiNote don't forget to call {@link PerlHostVirtualFileSystem#resetDelegate()} after using this filesystem
-   */
   @Nullable
-  public PerlHostVirtualFileSystem getFileSystem() {
-    WSLDistributionWithRoot distribution = getDistribution();
-    if (distribution == null) {
-      LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
-      return null;
+  public synchronized PerlHostVirtualFileSystem getFileSystem(@NotNull Disposable disposable) {
+    if (myFileSystem == null) {
+      WSLDistributionWithRoot distribution = getDistribution();
+      if (distribution == null) {
+        LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
+        return null;
+      }
+      myFileSystem = PerlWslFileSystem.create(distribution);
+      Disposer.register(disposable, () -> {
+        PerlWslFileSystem fileSystem = myFileSystem;
+        ApplicationManager.getApplication().executeOnPooledThread(() -> {
+          if (fileSystem != null) {
+            fileSystem.clean();
+          }
+        });
+        myFileSystem = null;
+      });
     }
     PerlHostVirtualFileSystem hostFileSystem = PerlHostVirtualFileSystem.getInstance();
-    hostFileSystem.setDelegate(PerlWslFileSystem.create(distribution));
+    hostFileSystem.setDelegate(myFileSystem);
     return hostFileSystem;
   }
 

@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.*;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -85,9 +86,10 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   /**
    * @return a filesystem for this host if available
+   * @param disposable if filesystem is temporary, it may be bound by this disposable
    */
   @Nullable
-  public abstract VirtualFileSystem getFileSystem();
+  public abstract VirtualFileSystem getFileSystem(@NotNull Disposable disposable);
 
   /**
    * Attempts to find a file at host

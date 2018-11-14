@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.sdk.versionManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -33,7 +34,6 @@ import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -81,10 +81,10 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   @Override
   public void createSdkInteractively(@NotNull Project project,
                                      @NotNull PerlHostHandler<?, ?> hostHandler,
-                                     @Nullable Consumer<Sdk> sdkConsumer) {
+                                     @Nullable Consumer<Sdk> sdkConsumer, @NotNull Disposable disposable) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.choose.executable", StringUtil.capitalize(getPresentableName())),
-      this::suggestDefaultVersionManagerPath,
+      hostData -> suggestDefaultVersionManagerPath(hostData, disposable),
       true,
       it -> StringUtil.equals(it, getExecutableName()),
       it -> {
@@ -93,7 +93,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
                ? null
                : PerlBundle.message("perl.vm.wrong.file", fileName, getPresentableName());
       },
-      (path, perlHostData) -> createSdkInteractively(project, path, perlHostData, sdkConsumer));
+      (path, perlHostData) -> createSdkInteractively(project, path, perlHostData, sdkConsumer),
+      disposable);
   }
 
   /**
@@ -105,24 +106,17 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
    * just trying to find the executable file on the host
    */
   @Nullable
-  protected File suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData) {
-    VirtualFileSystem fileSystem = hostData.getFileSystem();
+  protected File suggestDefaultVersionManagerPath(@NotNull PerlHostData<?, ?> hostData, @NotNull Disposable disposable) {
+    VirtualFileSystem fileSystem = hostData.getFileSystem(disposable);
     if (fileSystem == null) {
       return null;
     }
-    try {
-      return hostData.getHostSdkStream()
-        .filter(this::isSameHandler)
-        .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
-        .filter(it -> it != null && it.isValid() && it.exists())
-        .map(it -> new File(it.getPath()))
-        .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
-    }
-    finally {
-      if (fileSystem instanceof PerlHostVirtualFileSystem) {
-        ((PerlHostVirtualFileSystem)fileSystem).resetDelegate();
-      }
-    }
+    return hostData.getHostSdkStream()
+      .filter(this::isSameHandler)
+      .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
+      .filter(it -> it != null && it.isValid() && it.exists())
+      .map(it -> new File(it.getPath()))
+      .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
   }
 
   protected abstract PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData hostData);
