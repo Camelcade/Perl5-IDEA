@@ -104,9 +104,7 @@ class PerlDockerAdapter {
     return containerName;
   }
 
-  public void copyRemote(@NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
-    String containerName = createContainer("copying_" + myData.getSafeImageName());
-
+  public void copyRemote(@NotNull String containerName, @NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
     try {
       File localPathFile = new File(localPath);
       FileUtil.createDirectory(localPathFile);
@@ -120,9 +118,6 @@ class PerlDockerAdapter {
           !stderr.contains("No such container:path")) {
         throw e;
       }
-    }
-    finally {
-      dropContainer(containerName);
     }
   }
 

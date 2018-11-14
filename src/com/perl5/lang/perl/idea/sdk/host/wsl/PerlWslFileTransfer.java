@@ -53,15 +53,13 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   }
 
   @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) {
+  protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
     WSLDistributionWithRoot distribution = myHostData.getDistribution();
     if (distribution == null) {
-      LOG.error("No distribution available for " + myHostData.getDistributionId());
-      return;
+      throw new IOException("No distribution available for " + myHostData.getDistributionId());
     }
     remotePath = FileUtil.toSystemIndependentName(remotePath);
 
-    LOG.info("Syncing " + myHostData.getDistributionId() + ": " + remotePath + " => " + localPath);
     try {
       ProcessOutput output = distribution.copyFromWsl(
         remotePath, localPath, ContainerUtil.newArrayList("-v", "--exclude", "'*.so'", "--delete"),
@@ -105,7 +103,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
       }
     }
     catch (ExecutionException e) {
-      LOG.error(e);
+      throw new IOException(e);
     }
   }
 

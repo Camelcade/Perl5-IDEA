@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.sdk.host;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
@@ -29,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.Closeable;
 import java.io.File;
+import java.io.IOException;
 
 public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> implements Closeable {
   private static final Logger LOG = Logger.getInstance(PerlHostFileTransfer.class);
@@ -69,10 +69,11 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
     }
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.syncing", remotePath));
     try {
+      LOG.info("Syncing " + myHostData + ": " + remotePath + " => " + localPath);
       doSyncPath(remotePath, localPath);
     }
-    catch (ExecutionException e) {
-      LOG.error(e);
+    catch (IOException e) {
+      LOG.error("Error copying " + remotePath + " to " + localPath + " for " + myHostData, e);
       return null;
     }
     return localPath;
@@ -86,7 +87,12 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
       throw new RuntimeException("Should not be invoked from EDT");
     }
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.uploading.helpers"));
-    doSyncHelpers();
+    try {
+      doSyncHelpers();
+    }
+    catch (IOException e) {
+      LOG.error(e);
+    }
   }
 
   /**
@@ -94,7 +100,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    *
    * @implNote always invoked on pooled thread
    */
-  protected abstract void doSyncPath(@NotNull String remotePath, String localPath) throws ExecutionException;
+  protected abstract void doSyncPath(@NotNull String remotePath, String localPath) throws IOException;
 
 
   /**
@@ -102,5 +108,5 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    *
    * @implNote always invoked on pooled thread
    */
-  protected abstract void doSyncHelpers();
+  protected abstract void doSyncHelpers() throws IOException;
 }
