@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -43,14 +44,15 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
   private volatile boolean myContainerCreated = false;
 
   @NotNull
-  private final AtomicNotNullLazyValue<String> myContainerNameProvider = AtomicNotNullLazyValue.createValue(() -> {
+  private final AtomicNullableLazyValue<String> myContainerNameProvider = AtomicNullableLazyValue.createValue(() -> {
     PerlDockerAdapter dockerAdapter = getAdapter();
-    String containerName = dockerAdapter.getData().getSafeImageName() + System.currentTimeMillis();
+    String containerName;
     try {
-      dockerAdapter.createRunningContainer(containerName);
+      containerName = dockerAdapter.createRunningContainer("filesystem_" + dockerAdapter.getData().getSafeImageName());
     }
     catch (ExecutionException e) {
-      LOG.error("Error creating container " + containerName + " from data: " + dockerAdapter.getData(), e);
+      LOG.error("Error creating container from data: " + dockerAdapter.getData(), e);
+      return null;
     }
     myContainerCreated = true;
     return containerName;
@@ -82,8 +84,10 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
     });
   }
 
+  @NotNull
   private List<PerlFileDescriptor> listFiles(@NotNull String path) {
-    return myAdapter.listFiles(myContainerNameProvider.getValue(), FileUtil.toSystemIndependentName(path));
+    String containerName = myContainerNameProvider.getValue();
+    return containerName == null ? Collections.emptyList() : myAdapter.listFiles(containerName, FileUtil.toSystemIndependentName(path));
   }
 
   @Nullable

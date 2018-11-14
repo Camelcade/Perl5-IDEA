@@ -50,6 +50,7 @@ import java.util.stream.Collectors;
  */
 class PerlDockerAdapter {
   private static final Logger LOG = Logger.getInstance(PerlDockerAdapter.class);
+  private static final String CONTAINER_NAME_PREFIX = "intellijPerl_";
   private static final String KILL = "kill";
   private static final String RUN = "run";
   private static final String EXEC = "exec";
@@ -82,13 +83,47 @@ class PerlDockerAdapter {
     myData = data;
   }
 
-  private void createContainer(@NotNull String containerName) throws ExecutionException {
+  /**
+   * @return new container name, generated from {@code containerNameSeed}
+   */
+  @NotNull
+  public String createContainer(@NotNull String containerNameSeed) throws ExecutionException {
+    String containerName = createContainerName(containerNameSeed);
     runCommand(CONTAINER, CREATE, WITH_CONTAINER_NAME, containerName, myData.getImageName());
+    return containerName;
   }
 
-  public void createRunningContainer(@NotNull String containerName) throws ExecutionException {
+  /**
+   * @return new container name, generated from {@code containerNameSeed}
+   */
+  @NotNull
+  public String createRunningContainer(@NotNull String containerNameSeed) throws ExecutionException {
+    String containerName = createContainerName(containerNameSeed);
     runCommand(RUN, AS_DAEMON, WITH_AUTOREMOVE, WITH_CONTAINER_NAME,
                containerName, myData.getImageName(), "bash", "-c", "while true;do sleep 1000000;done");
+    return containerName;
+  }
+
+  public void copyRemote(@NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
+    String containerName = createContainer("copying_" + myData.getSafeImageName());
+
+    try {
+      File localPathFile = new File(localPath);
+      FileUtil.createDirectory(localPathFile);
+      runCommand(COPY, AS_ARCHIVE, FOLLOWING_LINKS, containerName + ':' + remotePath, localPathFile.getParent());
+    }
+    catch (PerlExecutionException e) {
+      ProcessOutput processOutput = e.getProcessOutput();
+      String stderr = processOutput.getStderr();
+      if (!stderr.contains("no such file or directory") &&
+          !stderr.contains("Could not find the file") &&
+          !stderr.contains("No such container:path")) {
+        throw e;
+      }
+    }
+    finally {
+      dropContainer(containerName);
+    }
   }
 
   public void killContainer(@NotNull String... containers) throws ExecutionException {
@@ -130,27 +165,8 @@ class PerlDockerAdapter {
     }
   }
 
-  public void copyRemote(@NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
-    String containerName = "copying_" + myData.getSafeImageName() + System.currentTimeMillis();
-    createContainer(containerName);
-
-    try {
-      File localPathFile = new File(localPath);
-      FileUtil.createDirectory(localPathFile);
-      runCommand(COPY, AS_ARCHIVE, FOLLOWING_LINKS, containerName + ':' + remotePath, localPathFile.getParent());
-    }
-    catch (PerlExecutionException e) {
-      ProcessOutput processOutput = e.getProcessOutput();
-      String stderr = processOutput.getStderr();
-      if (!stderr.contains("no such file or directory") &&
-          !stderr.contains("Could not find the file") &&
-          !stderr.contains("No such container:path")) {
-        throw e;
-      }
-    }
-    finally {
-      dropContainer(containerName);
-    }
+  private static String createContainerName(@NotNull String seed) {
+    return CONTAINER_NAME_PREFIX + seed + "_" + System.currentTimeMillis();
   }
 
   @NotNull
