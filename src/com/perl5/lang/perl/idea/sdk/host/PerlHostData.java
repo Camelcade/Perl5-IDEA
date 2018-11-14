@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.sdk.host;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.*;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -27,7 +26,6 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.ObjectUtils;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
@@ -155,6 +153,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     return localPath;
   }
 
+  /**
+   * @return file transfer object, responsible for syncing files and helpers
+   */
+  @NotNull
+  public abstract PerlHostFileTransfer<Data> getFileTransfer();
+
   @Contract("null->null")
   @Nullable
   public final File getLocalPath(@Nullable File remotePath) {
@@ -219,71 +223,6 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    */
   @Nullable
   public abstract String getLocalCacheRoot();
-
-  /**
-   * synchronizes {@code remotePath} with local cache
-   *
-   * @implNote always invoked on pooled thread
-   * @implSpec fixme we probably should be able to throw from here
-   */
-  protected abstract void doSyncPath(@NotNull String remotePath, String localPath) throws ExecutionException;
-
-  /**
-   * synchronizes {@code remotePath} with local cache
-   */
-  @Contract("null->null; !null->!null")
-  @Nullable
-  public final String syncPath(@Nullable String remotePath) {
-    if (remotePath == null) {
-      return null;
-    }
-    if (ApplicationManager.getApplication().isDispatchThread()) {
-      throw new RuntimeException("Should not be invoked from EDT");
-    }
-    String localPath = getLocalPath(remotePath);
-    if (localPath == null) {
-      throw new RuntimeException("Unable to compute local path for " + remotePath);
-    }
-    PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.syncing", remotePath));
-    try {
-      doSyncPath(remotePath, localPath);
-    }
-    catch (ExecutionException e) {
-      LOG.error(e);
-      return null;
-    }
-    return localPath;
-  }
-
-  /**
-   * synchronizes {@code remotePath} with local cache
-   */
-  @Contract("null->null; !null->!null")
-  @Nullable
-  public final File syncPath(@Nullable File remotePath) {
-    if (remotePath == null) {
-      return null;
-    }
-    return new File(syncPath(FileUtil.toSystemIndependentName(remotePath.getPath())));
-  }
-
-  /**
-   * Synchronizes local helpers from {@link PerlPluginUtil#getPluginHelpersRoot() helpers root} with remote machine
-   */
-  public final void syncHelpers() {
-    if (ApplicationManager.getApplication().isDispatchThread()) {
-      throw new RuntimeException("Should not be invoked from EDT");
-    }
-    PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.uploading.helpers"));
-    doSyncHelpers();
-  }
-
-  /**
-   * synchronizes local helpers with remote machine
-   *
-   * @implNote always invoked on pooled thread
-   */
-  protected abstract void doSyncHelpers();
 
   /**
    * @return path to the helpers root on the target host

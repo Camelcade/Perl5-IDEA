@@ -17,38 +17,24 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.ProcessAdapter;
-import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.wsl.WSLDistributionWithRoot;
 import com.intellij.execution.wsl.WSLUtil;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.Disposer;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.ui.update.MergingUpdateQueue;
-import com.intellij.util.ui.update.Update;
 import com.intellij.util.xmlb.annotations.Attribute;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,9 +43,6 @@ import java.util.List;
 import java.util.Objects;
 
 class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
-  private static final MergingUpdateQueue NOTIFICATIONS_QUEUE = new MergingUpdateQueue(
-    "notifications.queue", 3000, true, null);
-
   private static final Logger LOG = Logger.getInstance(PerlWslData.class);
   private static final int TIMEOUT = 10000;
 
@@ -69,6 +52,9 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   @Transient
   @Nullable
   private PerlWslFileSystem myFileSystem;
+
+  @Transient
+  private final PerlWslFileTransfer myFileTransfer = new PerlWslFileTransfer(this);
 
   public PerlWslData(@NotNull PerlWslHandler handler) {
     super(handler);
@@ -118,10 +104,6 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return ObjectUtils.doIfNotNull(WSLUtil.getDistributionById(getDistributionId()), WSLDistributionWithRoot::new);
   }
 
-  @Override
-  protected void doSyncHelpers() {
-  }
-
   @NotNull
   @Override
   public String getHelpersRootPath() {
@@ -165,62 +147,6 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     return distribution.getWslPath(localPathName);
   }
 
-  @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) {
-    WSLDistributionWithRoot distribution = getDistribution();
-    if (distribution == null) {
-      LOG.error("No distribution available for " + myDistributionId);
-      return;
-    }
-    remotePath = FileUtil.toSystemIndependentName(remotePath);
-
-    LOG.info("Syncing " + myDistributionId + ": " + remotePath + " => " + localPath);
-    try {
-      ProcessOutput output = distribution.copyFromWsl(
-        remotePath, localPath, ContainerUtil.newArrayList("-v", "--exclude", "'*.so'", "--delete"),
-        it -> it.addProcessListener(
-          new ProcessAdapter() {
-            @Override
-            public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
-              String text = event.getText();
-              if (StringUtil.isNotEmpty(text)) {
-                PerlRunUtil.setProgressText2(text);
-              }
-            }
-          }));
-      int exitCode = output.getExitCode();
-      if (exitCode == 0) {
-        return;
-      }
-
-      LOG.warn("Error while copying: " + remotePath + "; Exit code: " + exitCode + "; Stderr: " + output.getStderr());
-      if (exitCode == 127) {
-        NOTIFICATIONS_QUEUE.queue(Update.create(this, () -> {
-          AnAction action = ActionManagerEx.getInstanceEx().getAction("perl5.sync.interpreter");
-          Notification notification = new Notification(
-            PerlBundle.message("perl.host.handler.wsl.notification.group"),
-            PerlBundle.message("perl.host.handler.wsl.missing.rsync.title"),
-            PerlBundle.message("perl.host.handler.wsl.missing.rsync.message"),
-            NotificationType.ERROR
-          );
-          Notifications.Bus.notify(notification.addAction(
-            new DumbAwareAction(action.getTemplatePresentation().getText()) {
-              @Override
-              public void actionPerformed(@NotNull AnActionEvent e) {
-                notification.expire();
-                action.update(e);
-                if (e.getPresentation().isEnabled()) {
-                  action.actionPerformed(e);
-                }
-              }
-            }));
-        }));
-      }
-    }
-    catch (ExecutionException e) {
-      LOG.error(e);
-    }
-  }
 
   @Nullable
   @Override
@@ -259,6 +185,12 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       perlCommandLine.getEffectiveProject(),
       getRemotePath(workingDir),
       false);
+  }
+
+  @NotNull
+  @Override
+  public PerlHostFileTransfer<PerlWslData> getFileTransfer() {
+    return myFileTransfer;
   }
 
   @NotNull

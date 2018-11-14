@@ -24,6 +24,7 @@ import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +33,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 
 class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHandler> {
+  private final PerlLocalFileTransfer FILE_TRANSFER = new PerlLocalFileTransfer(this);
+
   public PerlLocalHostData(@NotNull PerlLocalHostHandler handler) {
     super(handler);
   }
@@ -52,10 +55,6 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   @Override
   public String getSecondaryShortName() {
     return null;
-  }
-
-  @Override
-  protected void doSyncHelpers() {
   }
 
   @NotNull
@@ -94,13 +93,15 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
     return localPath;
   }
 
-  @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) {
-  }
-
   @NotNull
   @Override
   protected PerlLocalHostData self() {
     return this;
+  }
+
+  @NotNull
+  @Override
+  public PerlHostFileTransfer<PerlLocalHostData> getFileTransfer() {
+    return FILE_TRANSFER;
   }
 }

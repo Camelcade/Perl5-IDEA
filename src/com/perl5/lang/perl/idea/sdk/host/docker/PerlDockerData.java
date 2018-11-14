@@ -27,6 +27,7 @@ import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
@@ -154,13 +155,10 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
     return cacheRoot.getAbsolutePath();
   }
 
+  @NotNull
   @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) throws ExecutionException {
-    new PerlDockerAdapter(this).copyRemote(remotePath, localPath);
-  }
-
-  @Override
-  protected void doSyncHelpers() {
+  public PerlHostFileTransfer<PerlDockerData> getFileTransfer() {
+    return new PerlDockerFileTransfer(this);
   }
 
   @NotNull

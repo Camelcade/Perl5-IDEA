@@ -34,6 +34,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationData;
 import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
@@ -45,6 +46,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -86,44 +88,49 @@ public class PerlSdkType extends SdkType {
     String oldText = PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.inc", sdk.getName()));
     LOG.info("Refreshing @INC for " + sdk);
     PerlHostData hostData = PerlHostData.notNullFrom(sdk);
-
     List<String> pathsToRefresh = ContainerUtil.newArrayList();
     // syncing data if necessary
     List<String> incPaths = computeIncPaths(sdk);
-    for (String hostPath : incPaths) {
-      pathsToRefresh.add(hostData.syncPath(hostPath));
 
-      File localBindDirectory = hostData.syncPath(PerlRunUtil.findLibsBin(new File(hostPath)));
-      if (localBindDirectory != null) {
-        pathsToRefresh.add(localBindDirectory.getPath());
+    try (PerlHostFileTransfer fileTransfer = hostData.getFileTransfer()) {
+      for (String hostPath : incPaths) {
+        pathsToRefresh.add(fileTransfer.syncFile(hostPath));
+
+        File localBindDirectory = fileTransfer.syncFile(PerlRunUtil.findLibsBin(new File(hostPath)));
+        if (localBindDirectory != null) {
+          pathsToRefresh.add(localBindDirectory.getPath());
+        }
       }
-    }
-    // additional bin dirs from version manager
-    PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> {
-      File localPath = hostData.syncPath(it);
-      if (localPath != null) {
-        pathsToRefresh.add(localPath.getPath());
+      // additional bin dirs from version manager
+      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> {
+        File localPath = fileTransfer.syncFile(it);
+        if (localPath != null) {
+          pathsToRefresh.add(localPath.getPath());
+        }
+      });
+
+      // sdk home path
+      File interpreterPath = new File(Objects.requireNonNull(sdk.getHomePath()));
+      File localInterpreterDir = fileTransfer.syncFile(interpreterPath.getParentFile());
+      if (localInterpreterDir != null) {
+        pathsToRefresh.add(localInterpreterDir.getPath());
       }
-    });
 
-    // sdk home path
-    File interpreterPath = new File(Objects.requireNonNull(sdk.getHomePath()));
-    File localInterpreterDir = hostData.syncPath(interpreterPath.getParentFile());
-    if (localInterpreterDir != null) {
-      pathsToRefresh.add(localInterpreterDir.getPath());
+      List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
+        .map(it -> VfsUtil.findFileByIoFile(new File(it), true))
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+
+      if (!filesToRefresh.isEmpty()) {
+        PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.filesystem"));
+        VfsUtil.markDirtyAndRefresh(false, true, true, filesToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
+      }
+
+      fileTransfer.syncHelpers();
     }
-
-    List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
-      .map(it -> VfsUtil.findFileByIoFile(new File(it), true))
-      .filter(Objects::nonNull)
-      .collect(Collectors.toList());
-
-    if (!filesToRefresh.isEmpty()) {
-      PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.filesystem"));
-      VfsUtil.markDirtyAndRefresh(false, true, true, filesToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
+    catch (IOException e) {
+      LOG.warn("Error closing transfer for " + sdk, e);
     }
-
-    hostData.syncHelpers();
 
     // updating sdk
     SdkModificator sdkModificator = sdk.getSdkModificator();
@@ -144,7 +151,6 @@ public class PerlSdkType extends SdkType {
     }
 
     ApplicationManager.getApplication().invokeAndWait(sdkModificator::commitChanges);
-
     PerlRunUtil.setProgressText(oldText);
   }
 
