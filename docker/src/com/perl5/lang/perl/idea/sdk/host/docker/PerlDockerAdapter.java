@@ -178,7 +178,10 @@ class PerlDockerAdapter {
    */
   List<String> listImages() throws ExecutionException {
     ProcessOutput output = runCommand(IMAGE, LIST_IMAGE, IN_FORMAT, "{{.Repository}}:{{.Tag}}");
-    return output.getStdoutLines().stream().map(it -> StringUtil.replace(it, ":<none>", "")).sorted().collect(Collectors.toList());
+    return output.getStdoutLines().stream()
+      .map(it -> StringUtil.replace(it, ":<none>", ""))
+      .filter(it -> !StringUtil.equals(it, "<none>"))
+      .sorted().collect(Collectors.toList());
   }
 
   /**
