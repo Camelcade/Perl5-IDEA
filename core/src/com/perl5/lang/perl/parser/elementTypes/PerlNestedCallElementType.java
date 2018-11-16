@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNestedCallImpl;
 import org.jetbrains.annotations.NotNull;
 

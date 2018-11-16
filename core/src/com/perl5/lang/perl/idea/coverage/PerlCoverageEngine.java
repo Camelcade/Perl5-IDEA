@@ -32,7 +32,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PurePerlFileType;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
-import com.perl5.lang.perl.psi.PerlFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

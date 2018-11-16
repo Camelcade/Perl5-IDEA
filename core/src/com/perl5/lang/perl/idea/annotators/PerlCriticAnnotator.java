@@ -18,8 +18,6 @@ package com.perl5.lang.perl.idea.annotators;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.BaseProcessHandler;
-import com.intellij.execution.process.CapturingProcessHandler;
-import com.intellij.execution.process.ProcessHandler;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.ExternalAnnotator;
 import com.intellij.lang.annotation.HighlightSeverity;
