@@ -18,8 +18,7 @@ package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 27.05.2015.
