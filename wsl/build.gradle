@@ -1,0 +1,14 @@
+sourceSets {
+  main {
+    java.srcDirs 'src'
+    resources.srcDir 'resources'
+  }
+  test {
+    java.srcDir 'test'
+    resources.srcDirs 'testData'
+  }
+}
+
+dependencies{
+  compileOnly project(":perl5.core")
+}
