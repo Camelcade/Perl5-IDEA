@@ -1,6 +1,3 @@
-import org.jetbrains.grammarkit.tasks.GenerateLexer
-import org.jetbrains.grammarkit.tasks.GenerateParser
-
 /*
  * Copyright 2016 Alexandr Evstigneev
  *
@@ -27,11 +24,63 @@ plugins {
     id "org.jetbrains.intellij" version "0.3.12"
     id "jacoco"
     id 'com.github.kt3k.coveralls' version '2.8.2'
-    id 'org.jetbrains.grammarkit' version '2018.2.1'
+    id 'org.jetbrains.grammarkit' version '2018.2.2'
 }
 
 repositories {
     mavenCentral()
+}
+
+dependencies{
+    compile project(':perl5.core')
+    compile project(':perl5.transport.docker')
+    compile project(':perl5.transport.wsl')
+}
+
+allprojects{
+    apply plugin: 'java'
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaTargetVersion
+    tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+    apply plugin: 'org.jetbrains.intellij'
+    version = "${pluginVersion}${platformBranch}${pluginBuild}"
+
+    intellij{
+        type 'IU'
+        version "${platformVersion}${platformBranch}${platformBuild}"
+        updateSinceUntilBuild = true
+    }
+
+    test{
+        useJUnit {
+            if (project.hasProperty("runtest")) {
+                include '**/' + project.property('runtest') + '.class'
+            } else {
+                if (project.hasProperty("perf")) {
+                    includeCategories 'categories.Performance'
+                } else {
+                    excludeCategories 'categories.Performance'
+                }
+            }
+        }
+    }
+}
+
+subprojects{
+    patchPluginXml{
+        inputs.files(descriptionFile, changesFile)
+        pluginDescription(file(descriptionFile).text)
+        changeNotes(file(changesFile).text)
+    }
+}
+
+apply plugin: 'idea'
+idea {
+    project {
+        jdkName = javaVersion
+        languageLevel = javaVersion
+    }
 }
 
 jacocoTestReport {
@@ -40,30 +89,8 @@ jacocoTestReport {
     }
 }
 
-version = "${pluginVersion}${platformBranch}${pluginBuild}"
-
-apply plugin: 'java'
-sourceCompatibility = javaVersion
-targetCompatibility = javaTargetVersion
-tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
-def genRoot = file('gen')
-
-sourceSets {
-    main {
-        java.srcDirs 'src', genRoot
-        resources.srcDir 'resources'
-    }
-    test {
-        java.srcDir 'test'
-        resources.srcDirs 'testData'
-    }
-}
-
-apply plugin: 'org.jetbrains.intellij'
 intellij {
-    version "${platformVersion}${platformBranch}${platformBuild}"
     downloadSources Boolean.valueOf(downloadIdeaSource)
-    intellij.plugins = [ 'PsiViewer:183.2153', 'IntelliLang', 'coverage']
     if (project.hasProperty('idea_sandbox')) {
         sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
     } else {
@@ -72,13 +99,7 @@ intellij {
     if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
     }
-    updateSinceUntilBuild = true
-}
-
-patchPluginXml{
-    inputs.files(descriptionFile, changesFile)
-    pluginDescription(file(descriptionFile).text)
-    changeNotes(file(changesFile).text)
+    plugins = [project(':perl5.core'), project(':perl5.transport.docker'), project(':perl5.transport.wsl')]
 }
 
 runIde{
@@ -93,21 +114,9 @@ runIde{
 test {
     systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
 
-  if (!System.getenv("WITH_COVERAGE") && !project.hasProperty("with_coverage")) {
-    jacoco {
-      enabled = false
-    }
-  }
-
-    useJUnit {
-        if (project.hasProperty("runtest")) {
-            include '**/' + project.property('runtest') + '.class'
-        } else {
-            if (project.hasProperty("perf")) {
-                includeCategories 'categories.Performance'
-            } else {
-                excludeCategories 'categories.Performance'
-            }
+    if (!System.getenv("WITH_COVERAGE") && !project.hasProperty("with_coverage")) {
+        jacoco {
+            enabled = false
         }
     }
     testLogging {
@@ -115,148 +124,3 @@ test {
         showStandardStreams = true
     }
 }
-
-project.afterEvaluate {
-    prepareSandbox.doLast {
-        def perlUtils = "$it.destinationDir/$intellij.pluginName/perl/"
-        def XSParser = file("perl-utils/xs_parser_simple.pl")
-        copy {
-            from XSParser
-            into perlUtils
-        }
-        copy {
-            from file("perl-utils/Devel/")
-            into "$perlUtils/lib/Devel/"
-        }
-    }
-}
-
-apply plugin: 'idea'
-idea {
-    project {
-        jdkName = javaVersion
-        languageLevel = javaVersion
-    }
-    module {
-        generatedSourceDirs += genRoot
-    }
-}
-
-task pathingJar(type: Jar) {
-    dependsOn configurations.compile
-    appendix = 'pathing'
-
-    doFirst {
-        manifest {
-            attributes "Class-Path": configurations.compile.files.collect {
-                it.toPath().toString()
-            }.join(' ')
-        }
-    }
-}
-
-
-apply plugin: 'org.jetbrains.grammarkit'
-
-task generatePerl5Parser(type: GenerateParser) {
-    source = "grammar/Perl5.bnf"
-    pathToParser = '/com/perl5/lang/perl/parser/PerlParserGenerated.java'
-    pathToPsiRoot = '/com/perl5/lang/perl/psi'
-}
-
-task generatePodParser(type: GenerateParser) {
-    source = "grammar/Pod.bnf"
-    pathToParser = '/com/perl5/lang/pod/parser/PodParserGenerated.java'
-    pathToPsiRoot = '/com/perl5/lang/pod/psi'
-}
-
-task generateTT2Parser(type: GenerateParser) {
-    source = "grammar/TemplateToolkit.bnf"
-    pathToParser = '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java'
-    pathToPsiRoot = '/com/perl5/lang/tt2/psi'
-}
-
-
-task generatePerlLexer(type: GenerateLexer) {
-    dependsOn generatePerl5Parser
-    source = "grammar/Perl.flex"
-    targetDir = "gen/com/perl5/lang/perl/lexer/"
-    targetClass = "PerlLexer"
-}
-
-task generatePodLexer(type: GenerateLexer) {
-    dependsOn generatePodParser
-    source = "grammar/Pod.flex"
-    targetDir = "gen/com/perl5/lang/pod/lexer/"
-    targetClass = "PodLexerGenerated"
-}
-
-task generateTT2Lexer(type: GenerateLexer) {
-    dependsOn generateTT2Parser
-    source = "grammar/TemplateToolkit.flex"
-    targetDir = "gen/com/perl5/lang/tt2/lexer/"
-    targetClass = "TemplateToolkitLexerGenerated"
-}
-
-
-task generateEmbeddedPerlLexer(type: GenerateLexer) {
-    dependsOn generatePerl5Parser
-    source = "grammar/EmbeddedPerl.flex"
-    targetDir = "gen/com/perl5/lang/embedded/lexer/"
-    targetClass = "EmbeddedPerlLexer"
-}
-
-task generateHTMLMasonLexer(type: GenerateLexer) {
-    dependsOn generatePerl5Parser
-    source = "grammar/HTMLMason.flex"
-    targetDir = "gen/com/perl5/lang/htmlmason/lexer/"
-    targetClass = "HTMLMasonLexer"
-}
-task generateMason2Lexer(type: GenerateLexer) {
-    dependsOn generatePerl5Parser
-    source = "grammar/Mason2.flex"
-    targetDir = "gen/com/perl5/lang/mason2/lexer/"
-    targetClass = "Mason2TemplatingLexer"
-}
-task generateMojoliciousLexer(type: GenerateLexer) {
-    dependsOn generatePerl5Parser
-    source = "grammar/Mojolicious.flex"
-    targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
-    targetClass = "MojoliciousLexer"
-}
-
-tasks.withType(GenerateLexer).each {
-    it.skeleton = lexer_skeleton
-    it.purgeOldFiles = true
-}
-
-tasks.withType(GenerateParser).each {
-    it.dependsOn pathingJar
-    it.doFirst{
-        classpath = files(pathingJar.archivePath)+project.configurations.compileOnly
-    }
-    it.targetRoot = genRoot
-    it.purgeOldFiles = true
-}
-
-
-task generateLexers {
-    dependsOn generatePerlLexer
-    dependsOn generatePodLexer
-    dependsOn generateTT2Lexer
-
-    dependsOn generateEmbeddedPerlLexer
-    dependsOn generateHTMLMasonLexer
-    dependsOn generateMason2Lexer
-    dependsOn generateMojoliciousLexer
-
-}
-
-// doesn't work
-jar.archiveName = "camelcade.jar"
-
-
-compileJava {
-    dependsOn generateLexers
-}
-
