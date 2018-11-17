@@ -4,7 +4,6 @@ Lookups: HTML; Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; 
 Lookups: JAVA; Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
 Lookups: JSON; Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 Lookups: MANIFEST; Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
-Lookups: MOJO; Text: MOJO; Tail: null; Type: inject with Mojolicious Perl; Icon: /mojolicious.png; Type Icon: null
 Lookups: MYSUPERMARKER; Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
 Lookups: PERL5; Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5.png; Type Icon: null
 Lookups: XHTML; Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null

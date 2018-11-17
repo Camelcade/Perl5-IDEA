@@ -123,10 +123,6 @@ public class PerlParserTest extends PerlParserTestBase {
     doTest();
   }
 
-  public void testMojoliciousHelperDeclaration() {
-    doTest();
-  }
-
   public void testCoreModules() {
     doTest();
   }

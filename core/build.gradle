@@ -88,12 +88,6 @@ task generateMason2Lexer(type: GenerateLexer) {
   targetDir = "gen/com/perl5/lang/mason2/lexer/"
   targetClass = "Mason2TemplatingLexer"
 }
-task generateMojoliciousLexer(type: GenerateLexer) {
-  dependsOn generatePerl5Parser
-  source = "grammar/Mojolicious.flex"
-  targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
-  targetClass = "MojoliciousLexer"
-}
 
 tasks.withType(GenerateLexer).each {
   it.skeleton = rootProject.file(lexer_skeleton)
@@ -113,8 +107,6 @@ task generateLexers {
   dependsOn generateEmbeddedPerlLexer
   dependsOn generateHTMLMasonLexer
   dependsOn generateMason2Lexer
-  dependsOn generateMojoliciousLexer
-
 }
 
 compileJava {

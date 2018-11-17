@@ -105,10 +105,6 @@ public class PerlRenameTest extends PerlRenameTestCase {
     doTest();
   }
 
-  public void testMojoHelper() {
-    doTest("newName");
-  }
-
   public void testPackageName() {
     doTest("Foo::Bar::Moo");
   }

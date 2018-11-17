@@ -102,10 +102,12 @@ intellij {
     if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
     }
-    plugins = [project(':perl5.core'),
+    plugins = [ 'PsiViewer:183.2153', 'IntelliLang', 'coverage', // would be nice to have transient plugins
+               project(':perl5.core'),
                project(':perl5.transport.docker'),
                project(':perl5.transport.wsl'),
-               project(':perl5.lang.tt2')
+               project(':perl5.lang.tt2'),
+               project(':perl5.lang.mojo'),
     ]
 }
 
@@ -129,5 +131,11 @@ test {
     testLogging {
         exceptionFormat = 'full'
         showStandardStreams = true
+    }
+}
+
+sourceSets {
+    test {
+        resources.srcDirs file('testData')
     }
 }

@@ -26,8 +26,6 @@ public class PerlLightElementsTest extends PerlLightTestCase {
 
   public void testMooseAttrs() {doTest();}
 
-  public void testMojoHelpers() {doTest();}
-
   public void testConstants() {doTest();}
 
   public void testExceptionClass() {doTest();}

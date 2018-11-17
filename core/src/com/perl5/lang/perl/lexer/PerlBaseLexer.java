@@ -24,7 +24,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.Queue;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
@@ -52,7 +51,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   implements PerlElementTypes,
              PerlSwitchElementTypes,
              ClassAccessorElementTypes,
-             MojoliciousElementTypes,
              MooseElementTypes {
   // fixme move somewhere
   public static final String STRING_UNDEF = "undef";
@@ -456,7 +454,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
     if ((tokenType = RESERVED_TOKEN_TYPES.get(tokenText)) == null &&
         (tokenType = CUSTOM_TOKEN_TYPES.get(tokenText)) == null
-      ) {
+    ) {
       if (StringUtil.endsWithChar(tokenText, ':')) {
         tokenType = PACKAGE;
       }

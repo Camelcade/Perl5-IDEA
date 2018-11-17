@@ -18,12 +18,10 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
-import static com.intellij.patterns.PlatformPatterns.psiFile;
 
 /**
  * Created by hurricup on 31.05.2015.
@@ -101,9 +99,6 @@ public interface PerlElementPatterns extends PerlElementTypes {
   PsiElementPattern.Capture IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
 
   PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
-
-  // fixme move this to mojo patterns
-  PsiElementPattern.Capture IN_MOJOLICIOUS_FILE = psiElement().inFile(psiFile(MojoliciousFileImpl.class));
 
   PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
   PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_DECLARATION_PATTERN = VARIABLE_NAME_PATTERN.withParent(

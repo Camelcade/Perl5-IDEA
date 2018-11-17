@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.intellilang;
 
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.perl.PerlLanguage;
 
 import java.util.Map;
@@ -69,6 +68,5 @@ public interface PerlDefaultInjectionMarkers {
 
     .put(PERL5_MARKER, PerlLanguage.INSTANCE.getID())
     .put("EPERL5", EmbeddedPerlLanguage.INSTANCE.getID())
-    .put("MOJO", MojoliciousLanguage.INSTANCE.getID())
     .build();
 }

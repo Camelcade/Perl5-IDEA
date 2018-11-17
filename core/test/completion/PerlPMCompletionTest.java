@@ -16,9 +16,18 @@
 
 package completion;
 
+import base.PerlLightTestCase;
+import base.PerlLightTestCaseBase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
-public class PerlPMCompletionTest extends PerlCompletionTestCase {
+public class PerlPMCompletionTest extends PerlLightTestCase {
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+  }
 
   @Override
   protected String getTestDataPath() {

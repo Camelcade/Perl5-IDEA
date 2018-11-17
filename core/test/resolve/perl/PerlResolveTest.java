@@ -107,14 +107,6 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTest();
   }
 
-  public void testMojoliciousHelper() {
-    doTest();
-  }
-
-  public void testMojoHelperNamespace() {
-    doTest();
-  }
-
   public void testVariableIsa() {
     doTest();
   }

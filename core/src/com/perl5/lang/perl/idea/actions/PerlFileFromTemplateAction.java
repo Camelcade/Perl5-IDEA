@@ -53,7 +53,6 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
       .addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
       .addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
       .addKind("POD file", PerlIcons.POD_FILE, "Perl5 pod")
-      .addKind("Mojolicious Template File", PerlIcons.MOJO_FILE, "Perl5 mojolicious")
       .addKind("Embedded Perl5 File", PerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded")
     ;
 

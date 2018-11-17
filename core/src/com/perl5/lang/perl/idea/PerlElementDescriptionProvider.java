@@ -25,7 +25,6 @@ import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
 import com.perl5.PerlBundle;
-import com.perl5.lang.mojolicious.psi.impl.MojoHelperDefinition;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod;
 import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionClassDefinition;
@@ -73,10 +72,7 @@ public class PerlElementDescriptionProvider implements ElementDescriptionProvide
       return ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE);
     }
     else if (location == UsageViewTypeLocation.INSTANCE) {
-      if (element instanceof MojoHelperDefinition) {
-        return PerlBundle.message("perl.type.mojo.helper");
-      }
-      else if (element instanceof PerlAttributeDefinition) {
+      if (element instanceof PerlAttributeDefinition) {
         return PerlBundle.message("perl.type.attribute");
       }
       else if (element instanceof PerlClassAccessorMethod) {

@@ -917,7 +917,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <AFTER_DEREFERENCE>{
-	"helper"			{yybegin(AFTER_VALUE);return MOJO_HELPER_METHOD;}
 	{QUALIFIED_IDENTIFIER} 		{yybegin(AFTER_VALUE);return getIdentifierTokenWithoutIndexWithCustomTokens();}
 }
 

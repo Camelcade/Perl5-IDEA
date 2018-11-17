@@ -50,10 +50,6 @@ public class PerlDescriptionProviderTest extends PerlLightTestCase {
     doTest("package Foo::Bar; our %variable<caret>_name;");
   }
 
-  public void testMojoHelper() {
-    doTest("$self->helper(helper_<caret>name=>sub{});");
-  }
-
   public void testAttribute() {
     doTest("has attr_n<caret>ame => {};");
   }

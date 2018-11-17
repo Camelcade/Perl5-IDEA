@@ -37,7 +37,6 @@ import com.perl5.lang.perl.idea.application.PerlParserExtensions;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.ClassAccessorParserExtension;
-import com.perl5.lang.perl.parser.MojoParserExtension;
 import com.perl5.lang.perl.parser.MooseParserExtension;
 import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
 import com.perl5.lang.pod.PodLanguage;
@@ -114,11 +113,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
 
     registerComponentInstance(myProject, PerlNamesCache.class, new PerlNamesCache(myProject));
 
-    registerExtensionPoint(PerlParserExtension.EP_NAME, PerlParserExtension.class);
-    registerExtension(PerlParserExtension.EP_NAME, new MooseParserExtension());
-    registerExtension(PerlParserExtension.EP_NAME, new PerlSwitchParserExtensionImpl());
-    registerExtension(PerlParserExtension.EP_NAME, new ClassAccessorParserExtension());
-    registerExtension(PerlParserExtension.EP_NAME, new MojoParserExtension());
+    registerParserExtensions();
 
     PerlParserExtensions parserExtensions = new PerlParserExtensions();
     registerComponentInstance(ApplicationManager.getApplication(), PerlParserExtensions.class, parserExtensions);
@@ -129,6 +124,14 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     PerlPackageProcessorEP.EP.addExplicitExtension("Exception::Class", new ExceptionClassProcessor());
 
     myProject.registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
+  }
+
+  protected void registerParserExtensions(){
+    registerExtensionPoint(PerlParserExtension.EP_NAME, PerlParserExtension.class);
+    registerExtension(PerlParserExtension.EP_NAME, new MooseParserExtension());
+    registerExtension(PerlParserExtension.EP_NAME, new PerlSwitchParserExtensionImpl());
+    registerExtension(PerlParserExtension.EP_NAME, new ClassAccessorParserExtension());
+
   }
 
   protected String loadFile(@NotNull @NonNls @TestDataFile String name) throws IOException {

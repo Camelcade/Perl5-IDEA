@@ -20,7 +20,6 @@ import base.PerlLightTestCase;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
-import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,10 +42,6 @@ public class PerlFoldingTestCase extends PerlLightTestCase {
 
   public void testHtmlMason() {
     doTest(HTMLMasonFileType.INSTANCE);
-  }
-
-  public void testMojolicious() {
-    doTest(MojoliciousFileType.INSTANCE);
   }
 
   private void doTest(@NotNull LanguageFileType fileType) {
