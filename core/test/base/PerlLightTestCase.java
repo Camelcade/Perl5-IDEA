@@ -134,7 +134,7 @@ import java.util.stream.Collectors;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase {
+public abstract class PerlLightTestCase extends PerlLightTestCaseBase {
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
   private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;
@@ -316,32 +316,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     assertFalse("File is injected", getFile() instanceof InjectedFileViewProvider);
   }
 
-  public void initWithFileSmartWithoutErrors() {
-    initWithFileSmartWithoutErrors(getTestName(true));
-  }
-
-  public void initWithFileSmartWithoutErrors(@NotNull String filename) {
-    initWithFileSmart(filename);
-    assertNoErrorElements();
-  }
-
-  public void initWithFileSmart() {
-    initWithFileSmart(getTestName(true));
-  }
-
-  public void initWithFileSmart(String filename) {
-    try {
-      initWithFile(filename, getFileExtension());
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  public void initWithTextSmart(String content) {
-    initWithFileContent("test", getFileExtension(), content);
-  }
-
   @Deprecated // use initWithFileSmart
   public void initWithFileAsScript(String filename) {
     try {
@@ -352,18 +326,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     }
   }
 
-  public void initWithFile(String filename, String extension) throws IOException {
-    initWithFile(filename, extension, filename + (extension.isEmpty() ? "" : ".code"));
-  }
-
-  public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException {
-    initWithFileContent(targetFileName, targetFileExtension,
-                        FileUtil.loadFile(new File(getTestDataPath(), sourceFileNameWithExtension), CharsetToolkit.UTF8, true));
-  }
-
-  public void initWithFileContent(String filename, String extension, String content) {
-    myFixture.configureByText(filename + (extension.isEmpty() ? "" : "." + extension), content);
-  }
 
   @NotNull
   protected <T extends PsiElement> T getElementAtCaret(@NotNull Class<T> clazz) {
@@ -410,12 +372,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     final String actual = ((CodeInsightTestFixtureImpl)myFixture).getFoldingDescription(doCheckCollapseStatus);
 
     Assert.assertEquals(expectedContent, actual);
-  }
-
-  protected void testSmartKey(String original, char typed, String expected) {
-    initWithTextSmart(original);
-    myFixture.type(typed);
-    myFixture.checkResult(expected);
   }
 
   public final void doTestCompletion() {
@@ -491,46 +447,6 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     UsefulTestCase.assertDoesntContain(lookups, expected);
   }
 
-  protected void doFormatTest() {
-    doFormatTest("");
-  }
-
-  protected void doFormatTest(@NotNull String answerSuffix) {
-    doFormatTest(getTestName(true), answerSuffix);
-  }
-
-  protected void doFormatTest(@NotNull String filename, @NotNull String resultSuffix) {
-    doFormatTest(filename, filename, resultSuffix);
-  }
-
-  protected void doFormatTest(@NotNull String sourceFileName, @NotNull String resultFileName, @NotNull String resultSuffix) {
-    initWithFileSmartWithoutErrors(sourceFileName);
-    doFormatTestWithoutInitialization(resultFileName, resultSuffix);
-  }
-
-  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
-    WriteCommandAction.writeCommandAction(getProject()).run(() -> {
-        PsiFile file = myFixture.getFile();
-        if (file.getViewProvider() instanceof InjectedFileViewProvider) {
-          //noinspection ConstantConditions
-          file = file.getContext().getContainingFile();
-        }
-        TextRange rangeToUse = file.getTextRange();
-        CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
-    });
-
-    String resultFilePath = getTestDataPath() + "/" + resultFileName + resultSuffix + ".txt";
-    UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());
-    assertNoErrorElements();
-  }
-
-
-  protected void assertNoErrorElements() {
-    assertFalse(
-      "PsiFile contains error elements:\n" + getFile().getText(),
-      DebugUtil.psiToString(getFile(), true, false).contains("PsiErrorElement")
-    );
-  }
 
   protected void addCustomPackage() {
     myFixture.copyFileToProject("MyCustomPackage.pm");

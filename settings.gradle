@@ -15,7 +15,11 @@
  */
 
 rootProject.name = 'perl5'
-include 'perl5.core', 'perl5.transport.docker', 'perl5.transport.wsl'
+include 'perl5.core'
 project(':perl5.core').projectDir = file('core')
+include 'perl5.transport.docker'
 project(':perl5.transport.docker').projectDir = file('docker')
+include 'perl5.transport.wsl'
 project(':perl5.transport.wsl').projectDir = file('wsl')
+include 'perl5.lang.tt2'
+project(':perl5.lang.tt2').projectDir=file('tt2')

@@ -1,0 +1,108 @@
+<!--
+  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
+  <id>com.perl5.lang.tt2</id>
+  <name>Template Toolkit Support</name>
+  <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
+  <category>Custom Languages</category>
+
+  <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products  -->
+
+  <depends>com.perl5</depends>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
+    <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
+    <lang.fileViewProviderFactory language="Template Toolkit 2"
+                                  implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
+    <lang.parserDefinition language="Template Toolkit 2"
+                           implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
+    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <lang.syntaxHighlighterFactory language="Template Toolkit 2"
+                                   implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitTemplateLanguageErrorFilter"/>
+    <lang.braceMatcher language="Template Toolkit 2"
+                       implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
+    <annotator language="Template Toolkit 2"
+               implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
+    <quoteHandler fileType="Template Toolkit"
+                  className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
+    <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
+                  order="first"/>
+
+    <defaultLiveTemplatesProvider
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitLiveTemplatesProvider"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionElsif"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCase"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCatch"/>
+    <liveTemplateContext
+        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Postfix"/>
+    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitFilterNameMacro"/>
+    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
+    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
+
+    <lang.indentStrategy language="Template Toolkit 2"
+                         implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
+
+    <completion.contributor language="Template Toolkit 2"
+                            implementationClass="com.perl5.lang.tt2.idea.completion.TemplateToolkitCompletionContributor"/>
+    <editorNotificationProvider
+        implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
+                             implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
+
+    <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
+    <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
+
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
+
+    <localInspection language="Template Toolkit 2"
+                     shortName="TT2OrphanReply" displayName="Orphan nested directives"
+                     groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"
+                     implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"/>
+
+    <lang.refactoringSupport language="Template Toolkit 2"
+                             implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
+    <lang.formatter language="Template Toolkit 2"
+                    implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
+
+  </extensions>
+
+  <actions>
+    <action id="Perl.MarkAdTT2Root" class="com.perl5.lang.tt2.idea.settings.TemplateToolkitMarkTemplatesRootAction">
+      <add-to-group group-id="MarkRootGroup"/>
+    </action>
+  </actions>
+
+
+</idea-plugin>

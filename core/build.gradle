@@ -54,12 +54,6 @@ task generatePodParser(type: GenerateParser) {
   pathToPsiRoot = '/com/perl5/lang/pod/psi'
 }
 
-task generateTT2Parser(type: GenerateParser) {
-  source = "grammar/TemplateToolkit.bnf"
-  pathToParser = '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java'
-  pathToPsiRoot = '/com/perl5/lang/tt2/psi'
-}
-
 
 task generatePerlLexer(type: GenerateLexer) {
   dependsOn generatePerl5Parser
@@ -74,14 +68,6 @@ task generatePodLexer(type: GenerateLexer) {
   targetDir = "gen/com/perl5/lang/pod/lexer/"
   targetClass = "PodLexerGenerated"
 }
-
-task generateTT2Lexer(type: GenerateLexer) {
-  dependsOn generateTT2Parser
-  source = "grammar/TemplateToolkit.flex"
-  targetDir = "gen/com/perl5/lang/tt2/lexer/"
-  targetClass = "TemplateToolkitLexerGenerated"
-}
-
 
 task generateEmbeddedPerlLexer(type: GenerateLexer) {
   dependsOn generatePerl5Parser
@@ -110,7 +96,7 @@ task generateMojoliciousLexer(type: GenerateLexer) {
 }
 
 tasks.withType(GenerateLexer).each {
-  it.skeleton = lexer_skeleton
+  it.skeleton = rootProject.file(lexer_skeleton)
   it.purgeOldFiles = true
 }
 
@@ -123,7 +109,6 @@ tasks.withType(GenerateParser).each {
 task generateLexers {
   dependsOn generatePerlLexer
   dependsOn generatePodLexer
-  dependsOn generateTT2Lexer
 
   dependsOn generateEmbeddedPerlLexer
   dependsOn generateHTMLMasonLexer

@@ -120,13 +120,11 @@
 
     <settings.configurable.extension
         implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
-    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableExtension"/>
     <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
 
     <fileTypeProvider implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeProvider"/>
-    <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
 
     <importsProvider implementation="com.perl5.lang.perl.extensions.imports.PerlCpanfileImportProvider"/>
 
@@ -430,74 +428,6 @@
     <regExpLanguageHost forClass="com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl"
                         implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
     <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
-
-    <!-- Template Toolkit -->
-    <fileTypeFactory implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeFactory"/>
-    <lang.fileViewProviderFactory language="Template Toolkit 2"
-                                  implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
-    <lang.parserDefinition language="Template Toolkit 2"
-                           implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
-    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
-    <lang.syntaxHighlighterFactory language="Template Toolkit 2"
-                                   implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
-    <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
-    <highlightErrorFilter
-        implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitTemplateLanguageErrorFilter"/>
-    <lang.braceMatcher language="Template Toolkit 2"
-                       implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
-    <annotator language="Template Toolkit 2"
-               implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
-    <quoteHandler fileType="Template Toolkit"
-                  className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
-    <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
-                  order="first"/>
-
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitLiveTemplatesProvider"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Generic"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPosition"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionElsif"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCase"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$CommandPositionCatch"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitTemplateContextType$Postfix"/>
-    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitFilterNameMacro"/>
-    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
-    <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
-
-    <lang.indentStrategy language="Template Toolkit 2"
-                         implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
-
-    <completion.contributor language="Template Toolkit 2"
-                            implementationClass="com.perl5.lang.tt2.idea.completion.TemplateToolkitCompletionContributor"/>
-    <editorNotificationProvider
-        implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
-
-    <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
-                             implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
-
-    <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
-    <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
-
-    <projectStructure.sourceRootEditHandler
-        implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
-
-    <localInspection language="Template Toolkit 2"
-                     shortName="TT2OrphanReply" displayName="Orphan nested directives"
-                     groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"
-                     implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"/>
-
-    <lang.refactoringSupport language="Template Toolkit 2"
-                             implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
-    <lang.formatter language="Template Toolkit 2"
-                    implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
-
-    <!-- End of template toolkit -->
 
     <!--Embedded Perl-->
     <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
@@ -1060,7 +990,6 @@
     <group>
       <add-to-group group-id="MarkRootGroup"/>
       <action id="Perl.MarkAsLibraryDirectory" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction"/>
-      <action id="Perl.MarkAdTT2Root" class="com.perl5.lang.tt2.idea.settings.TemplateToolkitMarkTemplatesRootAction"/>
       <action id="Perl.MarkMason2Root" class="com.perl5.lang.mason2.idea.configuration.Mason2MarkSourceRootAction"/>
       <action id="Perl.MarkHTMLMasonRoot" class="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonMarkSourceRootAction"/>
       <action id="Perl.UnPerlRoot" class="com.perl5.lang.perl.idea.actions.PerlUnmarkSourceRootAction"/>

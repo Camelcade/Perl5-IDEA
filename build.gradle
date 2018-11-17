@@ -31,11 +31,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies{
-    compile project(':perl5.core')
-    compile project(':perl5.transport.docker')
-    compile project(':perl5.transport.wsl')
-}
 
 allprojects{
     apply plugin: 'java'
@@ -50,9 +45,22 @@ allprojects{
         type 'IU'
         version "${platformVersion}${platformBranch}${platformBuild}"
         updateSinceUntilBuild = true
+
+        if (project.hasProperty('idea_sandbox')) {
+            sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
+        } else {
+            sandboxDirectory "${project.buildDir}/idea-sandbox"
+        }
     }
 
     test{
+        intellij{
+            if (project.hasProperty('idea_sandbox')) {
+                sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
+            } else {
+                sandboxDirectory "${project.buildDir}/idea-test-sandbox"
+            }
+        }
         useJUnit {
             if (project.hasProperty("runtest")) {
                 include '**/' + project.property('runtest') + '.class'
@@ -91,15 +99,14 @@ jacocoTestReport {
 
 intellij {
     downloadSources Boolean.valueOf(downloadIdeaSource)
-    if (project.hasProperty('idea_sandbox')) {
-        sandboxDirectory project.rootDir.canonicalPath + "/" + project.idea_sandbox
-    } else {
-        sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
-    }
     if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
     }
-    plugins = [project(':perl5.core'), project(':perl5.transport.docker'), project(':perl5.transport.wsl')]
+    plugins = [project(':perl5.core'),
+               project(':perl5.transport.docker'),
+               project(':perl5.transport.wsl'),
+               project(':perl5.lang.tt2')
+    ]
 }
 
 runIde{

@@ -49,11 +49,6 @@ public class PerlIcons {
   public static final Icon EMBEDDED_MODIFIER = IconLoader.getIcon("/icons/embedded-modifier.png");
   public static final Icon EMBEDDED_ROOT = new LayeredIcon(TEMPLATE_ROOT, EMBEDDED_MODIFIER);
 
-  public static final Icon TTK2_ICON = IconLoader.getIcon("/icons/template_toolkit_gutter_icon.png");
-  public static final Icon TTK2_MODIFIER = IconLoader.getIcon("/icons/tt-modifier.png");
-  public static final Icon TTK2_ROOT = new LayeredIcon(TEMPLATE_ROOT, TTK2_MODIFIER);
-  public static final Icon TTK2_BLOCK_ICON = IconLoader.getIcon("/icons/template_toolkit_block_gutter_icon.png");
-
   public static final Icon LIB_ROOT = IconLoader.getIcon("/icons/library_root.png");
   public static final Icon METACPAN = IconLoader.getIcon("/icons/metacpan.png");
 
