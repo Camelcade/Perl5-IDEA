@@ -24,7 +24,7 @@
        on how to target different products  -->
 
   <depends>com.perl5</depends>
-  <depends>com.intellij.modules.ultimate</depends>
+  <depends>org.jetbrains.plugins.remote-run</depends>
 
   <extensions defaultExtensionNs="com.perl5">
     <hostHandler key="wsl"

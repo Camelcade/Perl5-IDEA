@@ -9,6 +9,10 @@ sourceSets {
   }
 }
 
+intellij{
+  plugins = [project(':perl5.core'), 'remote-run']
+}
+
 dependencies{
   compileOnly project(":perl5.core")
 }
