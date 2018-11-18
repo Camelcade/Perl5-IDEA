@@ -29,6 +29,7 @@ sourceSets {
 }
 
 intellij{
+  type 'IC'
   plugins = [project(':perl5.core')]
 }
 

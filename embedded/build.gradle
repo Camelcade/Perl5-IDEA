@@ -37,6 +37,7 @@ idea{
 }
 
 intellij{
+  type 'IC'
   plugins = [project(':perl5.core')]
 }
 

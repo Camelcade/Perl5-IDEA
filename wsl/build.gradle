@@ -10,6 +10,7 @@ sourceSets {
 }
 
 intellij{
+  type 'IU'
   plugins = [project(':perl5.core'), 'remote-run']
 }
 

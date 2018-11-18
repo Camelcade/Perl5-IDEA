@@ -42,7 +42,6 @@ allprojects{
     version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
     intellij{
-        type 'IU'
         version "${platformVersion}${platformBranch}${platformBuild}"
         updateSinceUntilBuild = true
 
@@ -98,6 +97,7 @@ jacocoTestReport {
 }
 
 intellij {
+    type 'IU'
     downloadSources Boolean.valueOf(downloadIdeaSource)
     if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
