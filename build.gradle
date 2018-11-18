@@ -109,6 +109,9 @@ intellij {
                project(':perl5.lang.tt2'),
                project(':perl5.lang.mojo'),
                project(':perl5.lang.embedded'),
+               project(':perl5.lang.mason.framework'),
+               project(':perl5.lang.mason.htmlmason'),
+               project(':perl5.lang.mason.mason2'),
     ]
 }
 

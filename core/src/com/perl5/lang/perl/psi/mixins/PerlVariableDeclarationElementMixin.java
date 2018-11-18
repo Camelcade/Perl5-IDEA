@@ -24,7 +24,6 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -166,22 +165,14 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
       return false;
     }
     PsiElement parent = getParent();
-    return parent instanceof PsiPerlVariableDeclarationLexical ||
-           parent instanceof PsiPerlSubSignature ||
-           isInvocantDeclaration() ||
-           isLocalDeclaration() ||
-           isArgsDeclaration()
+    return parent instanceof PerlLexicalVariableDeclarationMarker ||
+           isInvocantDeclaration() || isLocalDeclaration()
       ;
   }
 
   @Override
   public boolean isInvocantDeclaration() {
     return getParent() instanceof PsiPerlMethodSignatureInvocant;
-  }
-
-  // fixme temporary hack, see #899
-  public boolean isArgsDeclaration() {
-    return getParent() instanceof HTMLMasonArgsBlock;
   }
 
   @Override

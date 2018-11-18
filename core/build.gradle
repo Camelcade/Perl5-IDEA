@@ -69,40 +69,19 @@ task generatePodLexer(type: GenerateLexer) {
   targetClass = "PodLexerGenerated"
 }
 
-task generateHTMLMasonLexer(type: GenerateLexer) {
-  dependsOn generatePerl5Parser
-  source = "grammar/HTMLMason.flex"
-  targetDir = "gen/com/perl5/lang/htmlmason/lexer/"
-  targetClass = "HTMLMasonLexer"
-}
-task generateMason2Lexer(type: GenerateLexer) {
-  dependsOn generatePerl5Parser
-  source = "grammar/Mason2.flex"
-  targetDir = "gen/com/perl5/lang/mason2/lexer/"
-  targetClass = "Mason2TemplatingLexer"
-}
-
 tasks.withType(GenerateLexer).each {
   it.skeleton = rootProject.file(lexer_skeleton)
   it.purgeOldFiles = true
 }
-
 
 tasks.withType(GenerateParser).each {
   it.targetRoot = genRoot
   it.purgeOldFiles = true
 }
 
-task generateLexers {
+compileJava {
   dependsOn generatePerlLexer
   dependsOn generatePodLexer
-
-  dependsOn generateHTMLMasonLexer
-  dependsOn generateMason2Lexer
-}
-
-compileJava {
-  dependsOn generateLexers
 }
 
 project.afterEvaluate {

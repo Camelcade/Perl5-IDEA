@@ -374,6 +374,7 @@ limitations under the License.
 	extends(".*statement_modifier")=statement_modifier
 
 	extends(".*_signature_content")=sub_signature
+	implements("sub_signature|variable_declaration_lexical")="com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker"
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr

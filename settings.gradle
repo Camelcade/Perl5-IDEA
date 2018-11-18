@@ -27,3 +27,9 @@ include 'perl5.lang.mojo'
 project(':perl5.lang.mojo').projectDir=file('mojo')
 include 'perl5.lang.embedded'
 project(':perl5.lang.embedded').projectDir=file('embedded')
+include 'perl5.lang.mason.framework'
+project(':perl5.lang.mason.framework').projectDir=file('mason-core')
+include 'perl5.lang.mason.mason2'
+project(':perl5.lang.mason.mason2').projectDir=file('mason2')
+include 'perl5.lang.mason.htmlmason'
+project(':perl5.lang.mason.htmlmason').projectDir=file('htmlmason')

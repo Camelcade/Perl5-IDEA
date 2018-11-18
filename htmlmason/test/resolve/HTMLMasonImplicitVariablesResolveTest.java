@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,14 @@
  * limitations under the License.
  */
 
-package editor;
-
-import base.PerlLightTestCase;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import org.jetbrains.annotations.NotNull;
+package resolve;
 
 /**
- * Created by hurricup on 23.02.2016.
+ * Created by hurricup on 14.03.2016.
  */
-public class PerlFoldingTestCase extends PerlLightTestCase {
-  @Override
+public class HTMLMasonImplicitVariablesResolveTest extends HTMLMasonArgsDefVariablesResolveTest {
   protected String getTestDataPath() {
-    return "testData/folding";
+    return "testData/resolve/implicit";
   }
 
-  public void testPerl() {
-    doTest(PerlFileTypeScript.INSTANCE);
-  }
-
-  private void doTest(@NotNull LanguageFileType fileType) {
-    testFoldingRegions(getTestName(true), fileType);
-  }
 }

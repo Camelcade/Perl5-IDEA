@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,32 @@
  * limitations under the License.
  */
 
-package editor;
+package resolve;
 
 import base.PerlLightTestCase;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by hurricup on 23.02.2016.
+ * Created by hurricup on 15.03.2016.
  */
-public class PerlFoldingTestCase extends PerlLightTestCase {
-  @Override
+public class HTMLMasonConcurrentBlocksResolveTest extends PerlLightTestCase {
   protected String getTestDataPath() {
-    return "testData/folding";
+    return "testData/resolve/concurrent_blocks";
   }
 
-  public void testPerl() {
-    doTest(PerlFileTypeScript.INSTANCE);
+  @Override
+  public String getFileExtension() {
+    return "mas";
   }
 
-  private void doTest(@NotNull LanguageFileType fileType) {
-    testFoldingRegions(getTestName(true), fileType);
+  public void testArgs() {
+    doTestResolve();
+  }
+
+  public void testInit() {
+    doTestResolve();
+  }
+
+  public void testFromFilter() {
+    doTestResolve();
   }
 }
