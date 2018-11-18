@@ -1,18 +1,30 @@
-# Perl5 plugin for IntelliJ IDEA
+# Perl5 plugins for IntelliJ IDEA
 
 [![Build Status](https://travis-ci.org/Camelcade/Perl5-IDEA.svg)](https://travis-ci.org/Camelcade/Perl5-IDEA) [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg)](https://coveralls.io/github/Camelcade/Perl5-IDEA)
 
-Camelcade adds Perl5 support to any Java-based JetBrains product.
+This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/). 
 
-Current version Perl5 plugin for IntelliJ IDEA is available in [JetBrains repo](https://plugins.jetbrains.com/plugin/7796).
+Current versions of plugins may be found tn [JetBrains repo](https://plugins.jetbrains.com/).
 
-You can always build and install current development version of the plugin:
+#### This repository contains following plugins:
+
+- Perl plugin (`core`) - base plugin with perl & pod support and all basic features.  
+  - [Docker](https://www.docker.com/) Support (`transport.docker`) - allows to use interpreters from Docker containers.
+  - [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) Support (`transport.wsl`) - allows to use interpreters from WSL (Windows Subsystem for Linux).
+- [Template Toolkit](http://www.template-toolkit.org/) Support (`lang.tt2`) 
+- [Mojolicious](https://mojolicious.org/) Support (`lang.mojo`) 
+- Mason framework (`lang.mason.framework`) - core plugin of Mason plugins:
+  - [HTML::Mason](https://metacpan.org/pod/HTML::Mason) Support (`lang.mason.htmlmason`) 
+  - [Mason2](https://metacpan.org/pod/Mason) Support (`lang.mason.mason2`) 
+- Embedded Perl Support (`lang.embedded`) - adds support for php-like perl syntax with `<?` and `?>` markers.
+
+You can always build and install current development version of any plugin:
 
 1. Clone this repo to your hard drive
 2. Go to the repo directory
-3. Run `./gradlew buildPlugin`
+3. Run `./gradlew buildPlugin` (this builds all plugins from the repo)
 4. In the plugins dialog of your IDE, use `Install plugin from disk...` option
-5. Choose plugin file in the `build/distributions` directory of this repo 
+5. Choose plugin file in the `build/distributions` directory of the respective plugin root  
 
 If you want to participate in development, don't forget to read our [contribution policy](https://github.com/hurricup/Perl5-IDEA/wiki/Contribution-policy).
 
