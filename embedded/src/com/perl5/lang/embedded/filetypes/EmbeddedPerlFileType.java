@@ -17,7 +17,7 @@
 package com.perl5.lang.embedded.filetypes;
 
 import com.intellij.openapi.fileTypes.FileTypeEditorHighlighterProviders;
-import com.perl5.PerlIcons;
+import com.perl5.lang.embedded.EmbeddedPerlIcons;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlHighlighter;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
@@ -61,7 +61,7 @@ public class EmbeddedPerlFileType extends PerlFileType {
   @Nullable
   @Override
   public Icon getIcon() {
-    return PerlIcons.EMBEDDED_PERL_FILE;
+    return EmbeddedPerlIcons.EMBEDDED_PERL_FILE;
   }
 
   @Override

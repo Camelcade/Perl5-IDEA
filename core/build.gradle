@@ -69,13 +69,6 @@ task generatePodLexer(type: GenerateLexer) {
   targetClass = "PodLexerGenerated"
 }
 
-task generateEmbeddedPerlLexer(type: GenerateLexer) {
-  dependsOn generatePerl5Parser
-  source = "grammar/EmbeddedPerl.flex"
-  targetDir = "gen/com/perl5/lang/embedded/lexer/"
-  targetClass = "EmbeddedPerlLexer"
-}
-
 task generateHTMLMasonLexer(type: GenerateLexer) {
   dependsOn generatePerl5Parser
   source = "grammar/HTMLMason.flex"
@@ -104,7 +97,6 @@ task generateLexers {
   dependsOn generatePerlLexer
   dependsOn generatePodLexer
 
-  dependsOn generateEmbeddedPerlLexer
   dependsOn generateHTMLMasonLexer
   dependsOn generateMason2Lexer
 }

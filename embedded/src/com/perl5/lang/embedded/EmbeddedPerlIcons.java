@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-rootProject.name = 'perl5'
-include 'perl5.core'
-project(':perl5.core').projectDir = file('core')
-include 'perl5.transport.docker'
-project(':perl5.transport.docker').projectDir = file('docker')
-include 'perl5.transport.wsl'
-project(':perl5.transport.wsl').projectDir = file('wsl')
-include 'perl5.lang.tt2'
-project(':perl5.lang.tt2').projectDir=file('tt2')
-include 'perl5.lang.mojo'
-project(':perl5.lang.mojo').projectDir=file('mojo')
-include 'perl5.lang.embedded'
-project(':perl5.lang.embedded').projectDir=file('embedded')
+package com.perl5.lang.embedded;
+
+import com.intellij.openapi.util.IconLoader;
+import com.intellij.ui.LayeredIcon;
+import com.perl5.PerlIcons;
+
+import javax.swing.*;
+
+public final class EmbeddedPerlIcons {
+  public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
+  public static final Icon EMBEDDED_MODIFIER = IconLoader.getIcon("/icons/embedded-modifier.png");
+  public static final Icon EMBEDDED_ROOT = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, EMBEDDED_MODIFIER);
+
+  private EmbeddedPerlIcons() {
+  }
+}

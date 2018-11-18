@@ -1,0 +1,85 @@
+<!--
+  ~ Copyright 2015-2018 Alexandr Evstigneev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
+  <id>com.perl5.lang.embedded</id>
+  <name>Embedded Perl Support</name>
+  <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
+  <category>Custom Languages</category>
+
+  <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products  -->
+
+  <depends>com.perl5</depends>
+
+  <extensions defaultExtensionNs="com.perl5">
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <internalFileTemplate name="Perl5 embedded"/>
+    <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
+    <lang.parserDefinition language="Embedded Perl"
+                           implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
+    <lang.fileViewProviderFactory language="Embedded Perl"
+                                  implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
+    <lang.syntaxHighlighterFactory language="Embedded Perl"
+                                   implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
+    <lang.findUsagesProvider language="Embedded Perl"
+                             implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
+    <lang.braceMatcher language="Embedded Perl"
+                       implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
+
+    <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
+                  order="first"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
+                          id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
+    <lang.formatter language="Embedded Perl"
+                    implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
+
+
+    <lang.namesValidator language="Embedded Perl"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+    <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
+
+    <lang.foldingBuilder language="Embedded Perl"
+                         implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
+
+    <!--<lang.formatter language="Embedded Perl"-->
+    <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
+
+    <lang.psiStructureViewFactory language="Embedded Perl"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
+    <lang.refactoringSupport language="Embedded Perl"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+
+    <!--Temporary solution, better than nothing-->
+    <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
+
+    <!-- Here should be an EmbeddedPerlCommenter -->
+    <lang.commenter language="Embedded Perl"
+                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
+  </extensions>
+
+  <actions>
+      <action id="Embedded.Perl.newFile" class="com.perl5.lang.embedded.idea.actions.EmbeddedPerlCreateFileFromTemplateAction">
+        <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
+      </action>
+  </actions>
+
+</idea-plugin>

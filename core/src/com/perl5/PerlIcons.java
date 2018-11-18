@@ -42,9 +42,6 @@ public class PerlIcons {
   public static final Icon CAMEL_MODIFIER = IconLoader.getIcon("/icons/camel_modifier.png");
   public static final Icon TEST_FILE = IconLoader.getIcon("/icons/file-test.png");
   public static final Icon XS_FILE = IconLoader.getIcon("/icons/xsicon.png");
-  public static final Icon EMBEDDED_PERL_FILE = IconLoader.getIcon("/icons/embeddedperl.png");
-  public static final Icon EMBEDDED_MODIFIER = IconLoader.getIcon("/icons/embedded-modifier.png");
-  public static final Icon EMBEDDED_ROOT = new LayeredIcon(TEMPLATE_ROOT, EMBEDDED_MODIFIER);
 
   public static final Icon LIB_ROOT = IconLoader.getIcon("/icons/library_root.png");
   public static final Icon METACPAN = IconLoader.getIcon("/icons/metacpan.png");

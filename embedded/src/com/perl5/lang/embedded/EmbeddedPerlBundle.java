@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.ea.idea.actions;
+package com.perl5.lang.embedded;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.perl5.lang.perl.idea.actions.PerlActionBase;
+import com.intellij.AbstractBundle;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.PropertyKey;
 
-/**
- * Created by hurricup on 13.08.2016.
- */
-public class GenerateExternalAnnotationsAction extends PerlActionBase {
-  @Override
-  protected boolean isEnabled(AnActionEvent event) {
-    return false;
+public final class EmbeddedPerlBundle extends AbstractBundle {
+  private static final EmbeddedPerlBundle INSTANCE = new EmbeddedPerlBundle();
+  private static final String PATH_TO_BUNDLE = "messages.EmbeddedPerlBundle";
+
+  private EmbeddedPerlBundle() {
+    super(PATH_TO_BUNDLE);
   }
 
-  @Override
-  public void actionPerformed(@NotNull AnActionEvent e) {
-
+  public static String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
+    return INSTANCE.getMessage(key, params);
   }
 }

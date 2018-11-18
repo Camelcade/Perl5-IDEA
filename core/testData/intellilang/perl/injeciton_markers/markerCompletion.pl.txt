@@ -1,5 +1,4 @@
 Lookups: DTD; Text: DTD; Tail: null; Type: inject with DTD; Icon: /dtd.svg; Type Icon: null
-Lookups: EPERL5; Text: EPERL5; Tail: null; Type: inject with Embedded Perl; Icon: /embeddedperl.png; Type Icon: null
 Lookups: HTML; Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
 Lookups: JAVA; Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
 Lookups: JSON; Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null

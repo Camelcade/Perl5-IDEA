@@ -144,7 +144,6 @@
   <extensions defaultExtensionNs="com.intellij">
     <internalFileTemplate name="Perl5 package"/>
     <internalFileTemplate name="Perl5 script"/>
-    <internalFileTemplate name="Perl5 embedded"/>
     <internalFileTemplate name="Perl5 test"/>
     <internalFileTemplate name="Perl5 pod"/>
 
@@ -426,54 +425,6 @@
     <regExpLanguageHost forClass="com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl"
                         implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
     <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
-
-    <!--Embedded Perl-->
-    <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
-    <lang.parserDefinition language="Embedded Perl"
-                           implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
-    <lang.fileViewProviderFactory language="Embedded Perl"
-                                  implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
-    <lang.syntaxHighlighterFactory language="Embedded Perl"
-                                   implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
-    <lang.findUsagesProvider language="Embedded Perl"
-                             implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
-    <lang.braceMatcher language="Embedded Perl"
-                       implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
-
-    <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
-                  order="first"/>
-    <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
-                          id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
-    <lang.formatter language="Embedded Perl"
-                    implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
-
-
-    <lang.namesValidator language="Embedded Perl"
-                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-    <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
-
-    <lang.foldingBuilder language="Embedded Perl"
-                         implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
-
-    <!--<lang.formatter language="Embedded Perl"-->
-    <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
-
-    <lang.psiStructureViewFactory language="Embedded Perl"
-                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-
-    <lang.refactoringSupport language="Embedded Perl"
-                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-
-    <!--Temporary solution, better than nothing-->
-    <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
-
-    <!-- Here should be an EmbeddedPerlCommenter -->
-    <lang.commenter language="Embedded Perl"
-                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
-    <highlightErrorFilter
-        implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
-    <!--End of Embedded Perl-->
-
 
 
     <!-- HTML::Mason settings -->

@@ -31,7 +31,7 @@ public class EmbeddedPerlParserTest extends PerlParserTestBase {
 
   @Override
   protected String getTestDataPath() {
-    return "testData/parser/embedded";
+    return "testData/parser";
   }
 
   public void testWithPod() {
