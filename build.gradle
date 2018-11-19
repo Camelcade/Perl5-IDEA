@@ -65,8 +65,8 @@ allprojects{
     }
 
     publishPlugin{
-        username=jbRepoUser
-        password=jbRepoPass
+        username=project.findProperty('jbRepoUser') ?: ''
+        password=project.findProperty('jbRepoPass') ?: ''
     }
 }
 
