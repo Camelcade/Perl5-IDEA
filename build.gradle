@@ -63,6 +63,11 @@ allprojects{
             }
         }
     }
+
+    publishPlugin{
+        username=jbRepoUser
+        password=jbRepoPass
+    }
 }
 
 subprojects{
@@ -80,7 +85,6 @@ idea {
         languageLevel = javaVersion
     }
 }
-
 jacocoTestReport {
     reports {
         xml.enabled true

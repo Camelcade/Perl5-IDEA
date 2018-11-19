@@ -25,7 +25,7 @@
 
   <depends>com.perl5</depends>
   <depends>Docker</depends>
-  <depends>org.jetbrains.plugins.remote-run</depends>
+  <depends>com.intellij.modules.ultimate</depends>
 
   <extensions defaultExtensionNs="com.perl5">
     <hostHandler key="docker"
