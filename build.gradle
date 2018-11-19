@@ -47,19 +47,10 @@ allprojects{
 
         if (project.hasProperty('idea_sandbox')) {
             sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
-        } else {
-            sandboxDirectory "${project.buildDir}/idea-sandbox"
         }
     }
 
     test{
-        intellij{
-            if (project.hasProperty('idea_sandbox')) {
-                sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
-            } else {
-                sandboxDirectory "${project.buildDir}/idea-test-sandbox"
-            }
-        }
         useJUnit {
             if (project.hasProperty("runtest")) {
                 include '**/' + project.property('runtest') + '.class'
