@@ -24,6 +24,7 @@
        on how to target different products  -->
 
   <depends>com.perl5</depends>
+  <depends>com.intellij.modules.lang</depends>
 
   <extensions defaultExtensionNs="com.perl5">
     <parserExtension implementation="com.perl5.lang.perl.parser.MojoParserExtension"/>
