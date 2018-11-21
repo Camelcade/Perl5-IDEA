@@ -22,6 +22,7 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.module.Module;
@@ -314,7 +315,9 @@ public class PerlProjectManager {
       return null;
     }
     String homePath = sdk.getHomePath();
-    if (homePath != null && !StringUtil.contains(new File(homePath).getName(), "perl")) {
+    if (homePath != null &&
+        !StringUtil.contains(new File(homePath).getName(), "perl") &&
+        !ApplicationManager.getApplication().isHeadlessEnvironment()) {
       homePath = FileUtil.join(homePath, PerlSdkType.INSTANCE.getPerlExecutableName());
       String versionString = sdk.getVersionString();
       SdkModificator modificator = sdk.getSdkModificator();
