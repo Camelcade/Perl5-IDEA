@@ -33,6 +33,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationData;
@@ -110,7 +111,7 @@ public class PerlSdkType extends SdkType {
       });
 
       // sdk home path
-      File interpreterPath = new File(Objects.requireNonNull(sdk.getHomePath()));
+      File interpreterPath = new File(Objects.requireNonNull(PerlProjectManager.getInterpreterPath(sdk)));
       File localInterpreterDir = fileTransfer.syncFile(interpreterPath.getParentFile());
       if (localInterpreterDir != null) {
         pathsToRefresh.add(localInterpreterDir.getPath());
@@ -183,7 +184,9 @@ public class PerlSdkType extends SdkType {
   @Override
   public String getVersionString(@NotNull Sdk sdk) {
     return ObjectUtils.doIfNotNull(
-      getPerlVersionDescriptor(sdk.getHomePath(), PerlHostData.notNullFrom(sdk), PerlVersionManagerData.notNullFrom(sdk)),
+      getPerlVersionDescriptor(PerlProjectManager.getInterpreterPath(sdk),
+                               PerlHostData.notNullFrom(sdk),
+                               PerlVersionManagerData.notNullFrom(sdk)),
       VersionDescriptor::getVersionString);
   }
 

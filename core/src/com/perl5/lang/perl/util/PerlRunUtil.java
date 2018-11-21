@@ -132,7 +132,7 @@ public class PerlRunUtil {
       LOG.error("No sdk provided or available in project " + project);
       return null;
     }
-    String interpreterPath = perlSdk.getHomePath();
+    String interpreterPath = PerlProjectManager.getInterpreterPath(perlSdk);
     if (StringUtil.isEmpty(interpreterPath)) {
       LOG.warn("Empty interpreter path in " + perlSdk + " while building command line for " + localScriptPath);
       return null;
@@ -309,7 +309,8 @@ public class PerlRunUtil {
       new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
 
     PerlHostData hostData = PerlHostData.notNullFrom(sdk);
-    File localSdkBinDir = hostData.getLocalPath(new File(StringUtil.notNullize(sdk.getHomePath())).getParentFile());
+    File localSdkBinDir = hostData.getLocalPath(new File(
+      StringUtil.notNullize(PerlProjectManager.getInterpreterPath(sdk))).getParentFile());
     if (localSdkBinDir != null) {
       files.add(VfsUtil.findFileByIoFile(localSdkBinDir, false));
     }
@@ -369,7 +370,8 @@ public class PerlRunUtil {
    */
   @NotNull
   public static List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
-    return getOutputFromProgram(new PerlCommandLine(perlSdk.getHomePath()).withParameters(parameters).withSdk(perlSdk));
+    return getOutputFromProgram(new PerlCommandLine(
+      PerlProjectManager.getInterpreterPath(perlSdk)).withParameters(parameters).withSdk(perlSdk));
   }
 
 

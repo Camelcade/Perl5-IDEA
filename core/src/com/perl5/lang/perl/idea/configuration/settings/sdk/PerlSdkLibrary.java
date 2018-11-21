@@ -21,6 +21,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +47,7 @@ public class PerlSdkLibrary extends SyntheticLibrary implements ItemPresentation
   @Nullable
   @Override
   public String getLocationString() {
-    return mySdk.getHomePath();
+    return PerlProjectManager.getInterpreterPath(mySdk);
   }
 
   @Nullable

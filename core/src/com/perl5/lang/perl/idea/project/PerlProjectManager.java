@@ -298,7 +298,7 @@ public class PerlProjectManager {
 
   @Nullable
   public static String getInterpreterPath(@Nullable Module module) {
-    return getInterpreterPathWithUpdate(getSdk(module));
+    return getInterpreterPath(getSdk(module));
   }
 
   /**
@@ -309,15 +309,17 @@ public class PerlProjectManager {
    */
   @Contract("null->null")
   @Nullable
-  private static String getInterpreterPathWithUpdate(@Nullable Sdk sdk) {
+  public static String getInterpreterPath(@Nullable Sdk sdk) {
     if (sdk == null) {
       return null;
     }
     String homePath = sdk.getHomePath();
     if (homePath != null && !StringUtil.contains(new File(homePath).getName(), "perl")) {
       homePath = FileUtil.join(homePath, PerlSdkType.INSTANCE.getPerlExecutableName());
+      String versionString = sdk.getVersionString();
       SdkModificator modificator = sdk.getSdkModificator();
       modificator.setHomePath(homePath);
+      modificator.setVersionString(versionString);
       modificator.commitChanges();
     }
     return homePath;
@@ -325,7 +327,7 @@ public class PerlProjectManager {
 
   @Nullable
   public static String getInterpreterPath(@Nullable Project project) {
-    return getInterpreterPathWithUpdate(getSdk(project));
+    return getInterpreterPath(getSdk(project));
   }
 
   @Nullable
@@ -339,7 +341,7 @@ public class PerlProjectManager {
 
   @Nullable
   public static String getInterpreterPath(@NotNull Project project, @Nullable VirtualFile virtualFile) {
-    return getInterpreterPathWithUpdate(getSdk(project, virtualFile));
+    return getInterpreterPath(getSdk(project, virtualFile));
   }
 
   public static boolean isPerlEnabled(@Nullable Project project) {
