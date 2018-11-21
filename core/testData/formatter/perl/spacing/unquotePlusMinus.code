@@ -1,0 +1,20 @@
+package Foo;
+use Moo;
+has attr => (
+    'is' => 'ro',
+);
+
+package Bar;
+use Moo;
+extends 'Foo';
+has '+attr' => (
+    default => 'test',
+);
+
+my $composie = {
+    'key' => 1,
+    '+key' => 1,
+    '++key' => 1,
+    '-key' => 1,
+    '--key' => 1,
+};

@@ -41,8 +41,8 @@ import java.util.regex.Pattern;
  * Created by hurricup on 12.11.2015.
  */
 public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes {
-  public static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
-  public static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("[-+]*[_a-zA-Z][_\\w]*");
+  private static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
+  private static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("-?[_a-zA-Z][_\\w]*");
 
   protected final Project myProject;
   protected final PerlCodeStyleSettings myPerlSettings;

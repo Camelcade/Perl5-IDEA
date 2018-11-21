@@ -544,13 +544,15 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
     doFormatTest();
   }
 
-  public void testFatCommaAsIs() {doTestFatComma(WHATEVER);}
+  public void testUnquotePlusMinus() {doTestOptionalQuotation(SUPPRESS);}
 
-  public void testFatCommaForce() {doTestFatComma(FORCE);}
+  public void testFatCommaAsIs() {doTestOptionalQuotation(WHATEVER);}
 
-  public void testFatCommaSuppress() {doTestFatComma(SUPPRESS);}
+  public void testFatCommaForce() {doTestOptionalQuotation(FORCE);}
 
-  private void doTestFatComma(int value) {
+  public void testFatCommaSuppress() {doTestOptionalQuotation(SUPPRESS);}
+
+  private void doTestOptionalQuotation(int value) {
     getCustomSettings().OPTIONAL_QUOTES = value;
     doFormatTest();
   }
