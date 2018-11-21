@@ -1,0 +1,8 @@
+$status_updater->(
+    stop        => scalar localtime(), # <= here is wrong alignment
+    done        => scalar(@$poll),
+    total       => scalar(@$poll),
+    in_progress => 0,
+    queued      => 0,
+    comment     => "poll complete",
+);

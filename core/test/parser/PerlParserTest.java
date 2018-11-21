@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testScalarUnary() {doTest();}
+
   public void testAttributes528() {doTest();}
 
   public void testEndSimple() {doTest();}
