@@ -135,7 +135,7 @@ REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
 REGEX_HASH_NEGATING = [\^\:\\\[\{]
 HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":")
-PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";")
+PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>")
 
 //REGEX_CHAR_CLASS = "\\" [dswDSW]
 REGEX_POSIX_CHARGROUPS = "alpha"|"alnum"|"ascii"|"cntrl"|"digit"|"graph"|"lower"|"print"|"punct"|"space"|"uppper"|"xdigit"|"word"|"blank"
