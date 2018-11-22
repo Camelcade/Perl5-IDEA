@@ -29,7 +29,7 @@ public class MasonParserUtil {
     b.advanceLexer();
 
     while (!b.eof() && b.getTokenType() != closeToken) {
-      if (!PerlParserImpl.file_item(b, l)) {
+      if (!PerlParserProxy.file_item(b, l)) {
         break;
       }
     }

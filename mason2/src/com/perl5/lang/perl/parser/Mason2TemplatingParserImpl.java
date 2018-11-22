@@ -35,7 +35,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
     if (tokenType == MASON_BLOCK_OPENER) {
       PsiBuilder.Marker statementMarker = b.mark();
       b.advanceLexer();
-      if (PerlParserImpl.expr(b, l, -1)) {
+      if (PerlParserProxy.expr(b, l, -1)) {
         // parseStatement filter
         if (PerlParserUtil.consumeToken(b, MASON_EXPR_FILTER_PIPE)) {
           while (b.getTokenType() == IDENTIFIER) {
@@ -57,7 +57,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
     if (tokenType == MASON_CALL_OPENER) {
       PsiBuilder.Marker statementMarker = b.mark();
       b.advanceLexer();
-      PerlParserImpl.expr(b, l, -1);
+      PerlParserProxy.expr(b, l, -1);
       if (r = MasonParserUtil.endOrRecover(b, MASON_CALL_CLOSER)) {
         statementMarker.done(MASON_CALL_STATEMENT);
       }
@@ -76,7 +76,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
       PsiBuilder.Marker statementMarker = b.mark();
 
       while (!b.eof() && b.getTokenType() != MASON_FLAGS_CLOSER) {
-        if (!PerlParserImpl.expr(b, l, -1)) {
+        if (!PerlParserProxy.expr(b, l, -1)) {
           break;
         }
       }
@@ -117,7 +117,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
 
       if (PerlParserUtil.consumeToken(b, SUB_NAME) && PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
-        PerlParserImpl.block_content(b, l);
+        PerlParserProxy.block_content(b, l);
         blockMarker.done(BLOCK);
         blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
@@ -176,10 +176,10 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
     PsiBuilder.Marker subMarker = b.mark();
     if (PerlParserUtil.consumeToken(b, SUB_NAME)) {
       subMarker.collapse(SUB_NAME);
-      PerlParserImpl.method_signature(b, l);
+      PerlParserProxy.method_signature(b, l);
       if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
-        PerlParserImpl.block_content(b, l);
+        PerlParserProxy.block_content(b, l);
 
         if (b.getTokenType() == closeToken) {
           blockMarker.done(BLOCK);

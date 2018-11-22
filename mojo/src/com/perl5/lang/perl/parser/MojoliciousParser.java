@@ -57,7 +57,7 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
       b.advanceLexer();
       PsiBuilder.Marker blockMarker = b.mark();
 
-      PerlParserImpl.block_content(b, l);
+      PerlParserProxy.block_content(b, l);
 
       if (b.getTokenType() == MOJO_END) {
         blockMarker.done(BLOCK);

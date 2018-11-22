@@ -107,7 +107,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     if (tokenType == HTML_MASON_BLOCK_OPENER) {
       PsiBuilder.Marker statementMarker = b.mark();
       b.advanceLexer();
-      if (PerlParserImpl.expr(b, l, -1)) {
+      if (PerlParserProxy.expr(b, l, -1)) {
         // parseStatement filter
         if (PerlParserUtil.consumeToken(b, HTML_MASON_EXPR_FILTER_PIPE)) {
           while ((tokenType = b.getTokenType()) == HTML_MASON_DEFAULT_ESCAPER_NAME || tokenType == HTML_MASON_ESCAPER_NAME) {
@@ -130,7 +130,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     else if (tokenType == HTML_MASON_CALL_OPENER) {
       PsiBuilder.Marker statementMarker = b.mark();
       b.advanceLexer();
-      PerlParserImpl.expr(b, l, -1);
+      PerlParserProxy.expr(b, l, -1);
       if (r = MasonParserUtil.endOrRecover(b, HTML_MASON_CALL_CLOSER)) {
         statementMarker.done(HTML_MASON_CALL_STATEMENT);
       }
@@ -138,14 +138,14 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     else if (tokenType == HTML_MASON_CALL_FILTERING_OPENER) {
       PsiBuilder.Marker statementMarker = b.mark();
       b.advanceLexer();
-      PerlParserImpl.expr(b, l, -1);
+      PerlParserProxy.expr(b, l, -1);
 
       if (MasonParserUtil.endOrRecover(b, HTML_MASON_CALL_CLOSER_UNMATCHED)) {
         statementMarker.done(HTML_MASON_CALL_STATEMENT);
       }
 
       PsiBuilder.Marker blockMarker = b.mark();
-      PerlParserImpl.block_content(b, l);
+      PerlParserProxy.block_content(b, l);
 
       if (b.getTokenType() != HTML_MASON_CALL_CLOSE_TAG_START) // need recover
       {
@@ -198,7 +198,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       b.advanceLexer();
 
       while (!b.eof() && b.getTokenType() != HTML_MASON_FLAGS_CLOSER) {
-        if (!PerlParserImpl.expr(b, l, -1)) {
+        if (!PerlParserProxy.expr(b, l, -1)) {
           break;
         }
       }
@@ -210,7 +210,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       b.advanceLexer();
 
       while (!b.eof() && b.getTokenType() != HTML_MASON_ATTR_CLOSER) {
-        if (!PerlParserImpl.expr(b, l, -1) && !parseHardNewline(b)) {
+        if (!PerlParserProxy.expr(b, l, -1) && !parseHardNewline(b)) {
           break;
         }
       }
@@ -292,7 +292,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       subMarker.collapse(SUB_NAME);
       if (PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
-        PerlParserImpl.block_content(b, l);
+        PerlParserProxy.block_content(b, l);
 
         if (b.getTokenType() == closeToken) {
           blockMarker.done(HTML_MASON_BLOCK);
