@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -24,6 +25,7 @@ import com.perl5.lang.perl.idea.execution.PortMapping;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -42,13 +44,18 @@ public class PerlDebugProfileState extends PerlRunProfileState {
 
   public PerlDebugProfileState(ExecutionEnvironment environment) {
     super(environment);
-    PerlRunConfiguration perlRunConfiguration = (PerlRunConfiguration)environment.getRunProfile();
-    try {
-      Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
-      myHostData = PerlHostData.notNullFrom(effectiveSdk);
+    RunProfile runProfile = environment.getRunProfile();
+    if (runProfile instanceof PerlRunConfiguration) {
+      try {
+        Sdk effectiveSdk = ((PerlRunConfiguration)runProfile).getEffectiveSdk();
+        myHostData = PerlHostData.notNullFrom(effectiveSdk);
+      }
+      catch (ExecutionException e) {
+        throw new RuntimeException(e);
+      }
     }
-    catch (ExecutionException e) {
-      throw new RuntimeException(e);
+    else {
+      myHostData = PerlHostHandler.getDefaultHandler().createData();
     }
   }
 
