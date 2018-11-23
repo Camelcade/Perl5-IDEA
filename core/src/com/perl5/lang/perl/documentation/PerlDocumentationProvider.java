@@ -18,6 +18,7 @@ package com.perl5.lang.perl.documentation;
 
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -100,10 +101,9 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return PerlDocUtil.getPerlOpDoc(contextElement);
     }
     else if (contextElement instanceof PerlSubNameElement) {
-      PsiElement targetElement = TargetElementUtil.findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
-      PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
-      if (podBlock != null) {
-        return podBlock;
+      PsiElement targetElement = findInlinePodElement(editor);
+      if (targetElement != null) {
+        return targetElement;
       }
 
       String packageName = ((PerlSubNameElement)contextElement).getPackageName();
@@ -147,11 +147,11 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       }
     }
     else if (contextElement instanceof PerlNamespaceElement) {
-      PsiElement targetElement = TargetElementUtil.findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
-      PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
-      if (podBlock != null) {
-        return podBlock;
+      PsiElement targetElement = findInlinePodElement(editor);
+      if (targetElement != null) {
+        return targetElement;
       }
+
 
       String packageName = ((PerlNamespaceElement)contextElement).getCanonicalName();
 
@@ -164,6 +164,37 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     }
 
     return super.getCustomDocumentationElement(editor, file, contextElement);
+  }
+
+
+  @Nullable
+  protected PsiElement findInlinePodElement(@NotNull Editor editor) {
+    PsiElement targetElement = findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
+    PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
+    if (podBlock != null) {
+      return podBlock;
+    }
+    return null;
+  }
+
+  /**
+   * This is a copy of {@link TargetElementUtil#findTargetElement(com.intellij.openapi.editor.Editor, int)} without obsolete EDT assertion
+   * fixme remove after assertion removal
+   */
+  @Nullable
+  private static PsiElement findTargetElement(Editor editor, int flags) {
+
+    int offset = editor.getCaretModel().getOffset();
+    final PsiElement result = TargetElementUtil.getInstance().findTargetElement(editor, flags, offset);
+    if (result != null) {
+      return result;
+    }
+
+    int expectedCaretOffset = editor instanceof EditorEx ? ((EditorEx)editor).getExpectedCaretOffset() : offset;
+    if (expectedCaretOffset != offset) {
+      return TargetElementUtil.getInstance().findTargetElement(editor, flags, expectedCaretOffset);
+    }
+    return null;
   }
 
   protected static boolean isFunc(PsiElement element) {
