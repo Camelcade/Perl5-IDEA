@@ -385,6 +385,8 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     myBracketsStack.clear();
     myParensStack.clear();
     heredocQueue.clear();
+    myFormatWaiting = false;
+    myIsHeredocLike = false;
 
     mySubNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
       assert myProject != null;
