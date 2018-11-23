@@ -23,6 +23,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
@@ -97,5 +98,15 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   @Override
   public PerlDockerData createData() {
     return new PerlDockerData(this);
+  }
+
+  @NotNull
+  static PerlDockerHandler getInstance() {
+    for (PerlHostHandler<?, ?> handler : PerlHostHandler.all()) {
+      if (handler instanceof PerlDockerHandler) {
+        return (PerlDockerHandler)handler;
+      }
+    }
+    throw new RuntimeException("Can't be");
   }
 }

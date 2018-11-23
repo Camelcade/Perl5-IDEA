@@ -32,4 +32,11 @@
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerHandler"/>
   </extensions>
 
+  <actions>
+    <group icon="/icons/perl5language.png" text="Perl5" id="Docker.perl5" popup="true"
+           class="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerActionGroup">
+      <add-to-group group-id="Docker.RemoteServersViewToolbar"/>
+    </group>
+  </actions>
+
 </idea-plugin>
