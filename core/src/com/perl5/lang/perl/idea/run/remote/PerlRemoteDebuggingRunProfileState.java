@@ -17,26 +17,24 @@
 package com.perl5.lang.perl.idea.run.remote;
 
 import com.intellij.execution.DefaultExecutionResult;
+import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
-import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileStateBase;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Objects;
 
 /**
- * Created by hurricup on 09.05.2016.
+ * For attaching to the remote process
  */
-public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
-  @NotNull
-  private final Project myProject;
+public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBase {
   @NotNull
   private final File myLocalProjectPath;
   @NotNull
@@ -45,21 +43,20 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
   public PerlRemoteDebuggingRunProfileState(ExecutionEnvironment environment) {
     super(environment);
     PerlRemoteDebuggingConfiguration debuggingConfiguration = (PerlRemoteDebuggingConfiguration)environment.getRunProfile();
-    myProject = environment.getProject();
-    String projectPath = myProject.getBaseDir().getCanonicalPath();
+    Project project = environment.getProject();
+    String projectPath = project.getBaseDir().getCanonicalPath();
     myLocalProjectPath = new File(projectPath == null ? "" : projectPath);
     myRemoteProjectPath = new File(debuggingConfiguration.getRemoteProjectRoot());
   }
 
   @NotNull
   @Override
-  public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) {
-    return new DefaultExecutionResult(TextConsoleBuilderFactory.getInstance().createBuilder(myProject).getConsole(),
-                                      new DefaultDebugProcessHandler());
+  public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException {
+    return new DefaultExecutionResult(createConsole(executor), new DefaultDebugProcessHandler());
   }
 
   @Override
-  public String mapPathToRemote(String localPathName) {
+  public String mapPathToRemote(@NotNull String localPathName) {
     File localPath = new File(localPathName);
     if (FileUtil.isAncestor(myLocalProjectPath, localPath, false)) {
       return FileUtil.toSystemIndependentName(
@@ -73,7 +70,7 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileState {
 
   @NotNull
   @Override
-  public String mapPathToLocal(String remotePathName) {
+  public String mapPathToLocal(@NotNull String remotePathName) {
     File remotePath = new File(remotePathName);
     if (FileUtil.isAncestor(myRemoteProjectPath, remotePath, false)) {
       return FileUtil.toSystemDependentName(

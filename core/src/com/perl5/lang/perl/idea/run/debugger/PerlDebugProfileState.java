@@ -23,7 +23,6 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PortMapping;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
-import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import org.jetbrains.annotations.NotNull;
@@ -32,11 +31,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 /**
- * Created by hurricup on 04.05.2016.
+ * For execution and debugging
  */
-public class PerlDebugProfileState extends PerlRunProfileState {
-  private static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
-  private Integer myDebugPort;
+public class PerlDebugProfileState extends PerlDebugProfileStateBase {
+  public static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
+  public static final String PERL5_DEBUG_HOST = "PERL5_DEBUG_HOST";
+  public static final String PERL5_DEBUG_PORT = "PERL5_DEBUG_PORT";
+  public static final String PERL5_DEBUG_ROLE = "PERL5_DEBUG_ROLE";
   @Nullable
   private PerlHostData myHostData;
 
@@ -81,31 +82,20 @@ public class PerlDebugProfileState extends PerlRunProfileState {
   protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
     Map<String, String> stringStringMap = new HashMap<>(super.calcEnv(runProfile));
     PerlDebugOptions debugOptions = getDebugOptions();
-    stringStringMap.put("PERL5_DEBUG_ROLE", debugOptions.getPerlRole());
-    stringStringMap.put("PERL5_DEBUG_HOST", debugOptions.getDebugHost());
-    stringStringMap.put("PERL5_DEBUG_PORT", String.valueOf(getDebugPort()));
+    stringStringMap.put(PERL5_DEBUG_ROLE, debugOptions.getPerlRole());
+    stringStringMap.put(PERL5_DEBUG_HOST, debugOptions.getDebugHost());
+    stringStringMap.put(PERL5_DEBUG_PORT, String.valueOf(getDebugPort()));
     return stringStringMap;
   }
 
-  public PerlDebugOptions getDebugOptions() {
-    return (PerlDebugOptions)getEnvironment().getRunProfile();
-  }
-
-  public String mapPathToRemote(String localPath) {
+  public String mapPathToRemote(@NotNull String localPath) {
     String remotePath = getHostData().getRemotePath(localPath);
     return remotePath == null ? localPath : remotePath;
   }
 
   @NotNull
-  public String mapPathToLocal(String remotePath) {
+  public String mapPathToLocal(@NotNull String remotePath) {
     String localPath = getHostData().getLocalPath(remotePath);
     return localPath == null ? remotePath : localPath;
-  }
-
-  public Integer getDebugPort() throws ExecutionException {
-    if (myDebugPort == null) {
-      myDebugPort = getDebugOptions().getDebugPort();
-    }
-    return myDebugPort;
   }
 }

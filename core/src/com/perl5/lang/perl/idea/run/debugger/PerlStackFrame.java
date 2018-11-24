@@ -64,8 +64,7 @@ public class PerlStackFrame extends XStackFrame {
         String remoteFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + remoteFilePath;
         result = VirtualFileManager.getInstance().findFileByUrl(remoteFileUrl);
 
-        if (result == null)    // suppose that we need to fetch file
-        {
+        if (result == null) {    // suppose that we need to fetch file
           result = myDebugThread.loadRemoteSource(remoteFilePath);
         }
       }

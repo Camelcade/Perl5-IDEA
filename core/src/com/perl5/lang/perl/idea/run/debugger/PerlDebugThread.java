@@ -60,7 +60,7 @@ public class PerlDebugThread extends Thread {
   private static Executor ourExecutor = Executors.newSingleThreadExecutor();
   private final ExecutionResult myExecutionResult;
   private final Gson myGson;
-  private final PerlDebugProfileState myDebugProfileState;
+  private final PerlDebugProfileStateBase myDebugProfileState;
   private final PerlScriptsPanel myScriptListPanel;
   private final PerlScriptsPanel myEvalsListPanel;
   private XDebugSession mySession;
@@ -78,7 +78,7 @@ public class PerlDebugThread extends Thread {
   private PerlRemoteFileSystem myPerlRemoteFileSystem = PerlRemoteFileSystem.getInstance();
   private PerlDebugOptions myPerlDebugOptions;
 
-  public PerlDebugThread(XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult) {
+  public PerlDebugThread(XDebugSession session, PerlDebugProfileStateBase state, ExecutionResult executionResult) {
     super("PerlDebugThread");
     mySession = session;
     myGson = createGson();
@@ -347,7 +347,7 @@ public class PerlDebugThread extends Thread {
     return myPerlRemoteFileSystem.registerRemoteFile(filePath, response[0]);
   }
 
-  public PerlDebugProfileState getDebugProfileState() {
+  public PerlDebugProfileStateBase getDebugProfileState() {
     return myDebugProfileState;
   }
 }

@@ -58,7 +58,7 @@ public class PerlDebugProcess extends XDebugProcess {
   private final PerlDebugThread myDebugThread;
   private final PerlRunProfileState myDebugProfileState;
 
-  public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileState state, ExecutionResult executionResult) {
+  public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileStateBase state, ExecutionResult executionResult) {
     super(session);
     this.myExecutionResult = executionResult;
     myDebugThread = new PerlDebugThread(session, state, executionResult);

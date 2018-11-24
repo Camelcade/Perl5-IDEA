@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
+import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.ConsoleView;
@@ -118,8 +119,12 @@ public class PerlRunProfileState extends CommandLineState {
   @Nullable
   @Override
   protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
-    PerlRunConfiguration perlRunConfiguration = (PerlRunConfiguration)getEnvironment().getRunProfile();
-    return new PerlRunConsole(perlRunConfiguration.getProject(), PerlHostData.from(perlRunConfiguration.getEffectiveSdk()));
+    RunProfile runProfile = getEnvironment().getRunProfile();
+    PerlHostData hostData = null;
+    if (runProfile instanceof PerlRunConfiguration) {
+      hostData = PerlHostData.from(((PerlRunConfiguration)runProfile).getEffectiveSdk());
+    }
+    return new PerlRunConsole(getEnvironment().getProject(), hostData);
   }
 
   @NotNull

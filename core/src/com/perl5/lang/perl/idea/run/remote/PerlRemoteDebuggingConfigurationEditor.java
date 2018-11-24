@@ -37,11 +37,16 @@ import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.NumberFormat;
+import java.util.Objects;
+
+import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.*;
 
 /**
  * Created by hurricup on 09.05.2016.
  */
 public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase<PerlRemoteDebuggingConfiguration> {
+
+
   private JTextField myWorkingDirectoryComponent;
   private ComboBox myPerlRole;
   private JTextField myDebuggingHost;
@@ -160,14 +165,10 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
    * Generates and sets command line according to selected settings
    */
   private void updateCommandLine() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("PERL5_DEBUG_HOST=")
-      .append(myDebuggingHost.getText())
-      .append(" PERL5_DEBUG_PORT=")
-      .append(myDebuggingPort.getText())
-      .append(" PERL5_DEBUG_ROLE=")
-      .append(myPerlRole.getSelectedItem().toString())
-      .append(" perl -d:Camelcadedb ./your_script.pl");
-    myGeneratedCommandLine.setText(sb.toString());
+    String sb = PERL5_DEBUG_HOST + "=" + myDebuggingHost.getText() +
+                " " + PERL5_DEBUG_PORT + "=" + myDebuggingPort.getText() +
+                " " + PERL5_DEBUG_ROLE + "=" + Objects.requireNonNull(myPerlRole.getSelectedItem()).toString() +
+                " perl " + DEBUG_ARGUMENT + " ./your_script.pl";
+    myGeneratedCommandLine.setText(sb);
   }
 }

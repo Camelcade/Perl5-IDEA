@@ -56,33 +56,34 @@ public class PerlLineBreakPointDescriptor {
   @Nullable
   public static PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
                                                                   PerlDebugThread debugThread) {
-    String filePath = null;
-
     String fileUrl = breakpoint.getFileUrl();
 
     VirtualFile virtualFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl);
-    if (virtualFile != null) {
-      filePath = debugThread.getDebugProfileState().mapPathToRemote(virtualFile.getCanonicalPath());
+    if (virtualFile == null) {
+      return null;
     }
-
-    PerlLineBreakPointDescriptor descriptor = null;
-
-    if (filePath != null) {
-      descriptor = new PerlLineBreakPointDescriptor();
-      descriptor.path = filePath;
-      descriptor.line = breakpoint.getLine();
-      descriptor.enabled = breakpoint.isEnabled();
-      descriptor.remove = false;
-      XExpression logExpressionObject = breakpoint.getLogExpressionObject();
-      if (logExpressionObject != null) {
-        descriptor.action = logExpressionObject.getExpression();
-      }
-      SuspendPolicy suspendPolicy = breakpoint.getSuspendPolicy();
-      descriptor.suspend = suspendPolicy != SuspendPolicy.NONE;
-
-      XExpression conditionExpression = breakpoint.getConditionExpression();
-      descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
+    String virtualFilePath = virtualFile.getCanonicalPath();
+    if (virtualFilePath == null) {
+      return null;
     }
+    String filePath = debugThread.getDebugProfileState().mapPathToRemote(virtualFilePath);
+    if (filePath == null) {
+      return null;
+    }
+    PerlLineBreakPointDescriptor descriptor = new PerlLineBreakPointDescriptor();
+    descriptor.path = filePath;
+    descriptor.line = breakpoint.getLine();
+    descriptor.enabled = breakpoint.isEnabled();
+    descriptor.remove = false;
+    XExpression logExpressionObject = breakpoint.getLogExpressionObject();
+    if (logExpressionObject != null) {
+      descriptor.action = logExpressionObject.getExpression();
+    }
+    SuspendPolicy suspendPolicy = breakpoint.getSuspendPolicy();
+    descriptor.suspend = suspendPolicy != SuspendPolicy.NONE;
+
+    XExpression conditionExpression = breakpoint.getConditionExpression();
+    descriptor.condition = conditionExpression != null ? conditionExpression.getExpression() : "";
     return descriptor;
   }
 
@@ -101,16 +102,18 @@ public class PerlLineBreakPointDescriptor {
   @Nullable
   public static PerlLineBreakPointDescriptor createFromSourcePosition(XSourcePosition position, PerlDebugThread debugThread) {
     VirtualFile virtualFile = position.getFile();
-
-    String filePath = debugThread.getDebugProfileState().mapPathToRemote(virtualFile.getCanonicalPath());
-
-    PerlLineBreakPointDescriptor descriptor = null;
-
-    if (filePath != null) {
-      descriptor = new PerlLineBreakPointDescriptor();
-      descriptor.path = filePath;
-      descriptor.line = position.getLine();
+    String virtualFilePath = virtualFile.getCanonicalPath();
+    if (virtualFilePath == null) {
+      return null;
     }
+    String filePath = debugThread.getDebugProfileState().mapPathToRemote(virtualFilePath);
+    if (filePath == null) {
+      return null;
+    }
+
+    PerlLineBreakPointDescriptor descriptor = new PerlLineBreakPointDescriptor();
+    descriptor.path = filePath;
+    descriptor.line = position.getLine();
     return descriptor;
   }
 }
