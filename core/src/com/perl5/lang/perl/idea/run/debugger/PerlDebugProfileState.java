@@ -18,8 +18,8 @@ package com.perl5.lang.perl.idea.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PortMapping;
 import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
@@ -27,11 +27,9 @@ import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -39,24 +37,30 @@ import java.util.Map;
 public class PerlDebugProfileState extends PerlRunProfileState {
   private static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
   private Integer myDebugPort;
-  @NotNull
-  private final PerlHostData myHostData;
+  @Nullable
+  private PerlHostData myHostData;
 
   public PerlDebugProfileState(ExecutionEnvironment environment) {
     super(environment);
-    RunProfile runProfile = environment.getRunProfile();
+  }
+
+  @NotNull
+  private PerlHostData getHostData() {
+    return Objects.requireNonNull(myHostData);
+  }
+
+  @NotNull
+  @Override
+  protected ProcessHandler startProcess() throws ExecutionException {
+    ProcessHandler process = super.startProcess();
+    RunProfile runProfile = getEnvironment().getRunProfile();
     if (runProfile instanceof PerlRunConfiguration) {
-      try {
-        Sdk effectiveSdk = ((PerlRunConfiguration)runProfile).getEffectiveSdk();
-        myHostData = PerlHostData.notNullFrom(effectiveSdk);
-      }
-      catch (ExecutionException e) {
-        throw new RuntimeException(e);
-      }
+      myHostData = PerlHostData.notNullFrom(((PerlRunConfiguration)runProfile).getEffectiveSdk());
     }
     else {
       myHostData = PerlHostHandler.getDefaultHandler().createData();
     }
+    return process;
   }
 
   @NotNull
@@ -88,13 +92,13 @@ public class PerlDebugProfileState extends PerlRunProfileState {
   }
 
   public String mapPathToRemote(String localPath) {
-    String remotePath = myHostData.getRemotePath(localPath);
+    String remotePath = getHostData().getRemotePath(localPath);
     return remotePath == null ? localPath : remotePath;
   }
 
   @NotNull
   public String mapPathToLocal(String remotePath) {
-    String localPath = myHostData.getLocalPath(remotePath);
+    String localPath = getHostData().getLocalPath(remotePath);
     return localPath == null ? remotePath : localPath;
   }
 
