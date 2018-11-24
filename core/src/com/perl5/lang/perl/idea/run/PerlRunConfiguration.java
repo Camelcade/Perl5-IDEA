@@ -52,25 +52,25 @@ import java.util.Map;
  * @since 16-Sep-15
  */
 public class PerlRunConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions {
-  public String SCRIPT_PATH;
-  public String PROGRAM_PARAMETERS;    // these are script parameters
+  private String myScriptPath;
+  private String myScriptParameters;    // these are script parameters
 
-  public String PERL_PARAMETERS = "";
-  public String WORKING_DIRECTORY;
-  public Map<String, String> ENVS = new HashMap<>();
-  public boolean PASS_PARENT_ENVS = true;
-  public String CHARSET;
-  public boolean USE_ALTERNATIVE_SDK;
-  public String ALTERNATIVE_SDK_NAME;
+  private String myPerlParameters = "";
+  private String myWorkingDirectory;
+  private Map<String, String> myEnvs = new HashMap<>();
+  private boolean myPassParentEnvs = true;
+  private String myConsoleCharset;
+  private boolean myUseAlternativeSdk;
+  private String myAlternativeSdkName;
 
   // debugging-related options
-  public String scriptCharset = "utf8";
-  public String startMode = "RUN";
-  public boolean isNonInteractiveModeEnabled = false;
-  public boolean isCompileTimeBreakpointsEnabled = false;
-  public String initCode = "";
+  private String myScriptCharset = "utf8";
+  private String myStartMode = "RUN";
+  private boolean myIsNonInteractiveModeEnabled = false;
+  private boolean myIsCompileTimeBreakpointsEnabled = false;
+  private String myInitCode = "";
 
-  private transient Integer debugPort;
+  private transient Integer myDebugPort;
 
   public PerlRunConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
     super(project, factory, name);
@@ -131,99 +131,99 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
 
   @Nullable
   public VirtualFile getScriptFile() {
-    return StringUtils.isEmpty(SCRIPT_PATH) ? null : LocalFileSystem.getInstance().findFileByPath(SCRIPT_PATH);
+    return StringUtils.isEmpty(myScriptPath) ? null : LocalFileSystem.getInstance().findFileByPath(myScriptPath);
   }
 
   public String getConsoleCharset() {
-    return CHARSET;
+    return myConsoleCharset;
   }
 
   public void setConsoleCharset(String charset) {
-    CHARSET = charset;
+    myConsoleCharset = charset;
   }
 
   public String getScriptPath() {
-    return SCRIPT_PATH;
+    return myScriptPath;
   }
 
   public void setScriptPath(String scriptPath) {
-    SCRIPT_PATH = scriptPath;
+    myScriptPath = scriptPath;
   }
 
   public String getAlternativeSdkName() {
-    return ALTERNATIVE_SDK_NAME;
+    return myAlternativeSdkName;
   }
 
-  public void setAlternativeSdkName(String path) {
-    this.ALTERNATIVE_SDK_NAME = path;
+  public void setAlternativeSdkName(String name) {
+    myAlternativeSdkName = name;
   }
 
   public boolean isUseAlternativeSdk() {
-    return USE_ALTERNATIVE_SDK;
+    return myUseAlternativeSdk;
   }
 
   public void setUseAlternativeSdk(boolean value) {
-    this.USE_ALTERNATIVE_SDK = value;
+    myUseAlternativeSdk = value;
   }
 
   @Nullable
   @Override
   public String getProgramParameters() {
-    return PROGRAM_PARAMETERS;
+    return myScriptParameters;
   }
 
   @Override
   public void setProgramParameters(@Nullable String s) {
-    PROGRAM_PARAMETERS = s;
+    myScriptParameters = s;
   }
 
   @Nullable
   @Override
   public String getWorkingDirectory() {
-    return WORKING_DIRECTORY;
+    return myWorkingDirectory;
   }
 
   @Override
   public void setWorkingDirectory(@Nullable String s) {
-    WORKING_DIRECTORY = s;
+    myWorkingDirectory = s;
   }
 
   @NotNull
   @Override
   public Map<String, String> getEnvs() {
-    return ENVS;
+    return myEnvs;
   }
 
   @Override
   public void setEnvs(@NotNull Map<String, String> map) {
-    ENVS = map;
+    myEnvs = map;
   }
 
   @Override
   public boolean isPassParentEnvs() {
-    return PASS_PARENT_ENVS;
+    return myPassParentEnvs;
   }
 
   @Override
   public void setPassParentEnvs(boolean b) {
-    PASS_PARENT_ENVS = b;
+    myPassParentEnvs = b;
   }
 
   public String getPerlParameters() {
-    return PERL_PARAMETERS;
+    return myPerlParameters;
   }
 
   public void setPerlParameters(String PERL_PARAMETERS) {
-    this.PERL_PARAMETERS = PERL_PARAMETERS;
+    this.myPerlParameters = PERL_PARAMETERS;
   }
 
   @Override
   public String getStartMode() {
-    return startMode;
+    return myStartMode;
   }
 
   public void setStartMode(String startMode) {
-    this.startMode = startMode;
+    this.myStartMode = startMode;
   }
 
   @Override
@@ -238,14 +238,14 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
 
   @Override
   public int getDebugPort() throws ExecutionException {
-    if (debugPort == null) {
-      debugPort = NetUtils.tryToFindAvailableSocketPort();
-      if (debugPort == -1) {
+    if (myDebugPort == null) {
+      myDebugPort = NetUtils.tryToFindAvailableSocketPort();
+      if (myDebugPort == -1) {
         throw new ExecutionException("No free port to work on");
       }
     }
 
-    return debugPort;
+    return myDebugPort;
   }
 
   @Override
@@ -255,37 +255,37 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
 
   @Override
   public String getScriptCharset() {
-    return scriptCharset;
+    return myScriptCharset;
   }
 
   public void setScriptCharset(String scriptCharset) {
-    this.scriptCharset = scriptCharset;
+    this.myScriptCharset = scriptCharset;
   }
 
   @Override
   public boolean isNonInteractiveModeEnabled() {
-    return isNonInteractiveModeEnabled;
+    return myIsNonInteractiveModeEnabled;
   }
 
   public void setNonInteractiveModeEnabled(boolean nonInteractiveModeEnabled) {
-    isNonInteractiveModeEnabled = nonInteractiveModeEnabled;
+    myIsNonInteractiveModeEnabled = nonInteractiveModeEnabled;
   }
 
   @Override
   public boolean isCompileTimeBreakpointsEnabled() {
-    return isCompileTimeBreakpointsEnabled;
+    return myIsCompileTimeBreakpointsEnabled;
   }
 
   public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled) {
-    isCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
+    myIsCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
   }
 
   @Override
   public String getInitCode() {
-    return initCode;
+    return myInitCode;
   }
 
   public void setInitCode(String initCode) {
-    this.initCode = initCode;
+    this.myInitCode = initCode;
   }
 }
