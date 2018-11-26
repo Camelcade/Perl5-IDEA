@@ -16,8 +16,8 @@
 
 package com.perl5.lang.mason2.idea.configuration;
 
-import com.perl5.PerlBundle;
 import com.perl5.lang.mason2.Mason2Icons;
+import com.perl5.lang.mason2.MasonBundle;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlTemplatesRootEditHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ public class Mason2SourceRootTypeEditHandler extends PerlTemplatesRootEditHandle
   @NotNull
   @Override
   public String getRootTypeName() {
-    return PerlBundle.message("mason2.root.type");
+    return MasonBundle.message("mason2.root.type");
   }
 
   @NotNull
@@ -43,6 +43,6 @@ public class Mason2SourceRootTypeEditHandler extends PerlTemplatesRootEditHandle
   @NotNull
   @Override
   public String getUnmarkRootButtonText() {
-    return PerlBundle.message("mason2.root.unmark");
+    return MasonBundle.message("mason2.root.unmark");
   }
 }

@@ -16,8 +16,8 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.perl5.PerlBundle;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
+import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlTemplatesRootEditHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ public class HTMLMasonSourceRootEditHandler extends PerlTemplatesRootEditHandler
   @NotNull
   @Override
   public String getRootTypeName() {
-    return PerlBundle.message("html.mason.root.type");
+    return HtmlMasonBundle.message("html.mason.root.type");
   }
 
   @NotNull
@@ -43,6 +43,6 @@ public class HTMLMasonSourceRootEditHandler extends PerlTemplatesRootEditHandler
   @NotNull
   @Override
   public String getUnmarkRootButtonText() {
-    return PerlBundle.message("html.mason.root.unmark");
+    return HtmlMasonBundle.message("html.mason.root.unmark");
   }
 }
