@@ -22,7 +22,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
@@ -44,8 +43,8 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
     int[] result = new int[]{-1};
     ApplicationManager.getApplication().invokeAndWait(
       () -> result[0] = Messages.showChooseDialog(
-        PerlBundle.message("perl.host.handler.wsl.choose.distro.message"),
-        PerlBundle.message("perl.host.handler.wsl.choose.distro.title"),
+        PerlWslBundle.message("perl.host.handler.wsl.choose.distro.message"),
+        PerlWslBundle.message("perl.host.handler.wsl.choose.distro.title"),
         ids, ids[0], null));
     int index = result[0];
 
@@ -61,13 +60,13 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
   @NotNull
   @Override
   public String getMenuItemTitle() {
-    return PerlBundle.message("perl.host.handler.wsl.menu.title");
+    return PerlWslBundle.message("perl.host.handler.wsl.menu.title");
   }
 
   @NotNull
   @Override
   public String getShortName() {
-    return PerlBundle.message("perl.host.handler.wsl.short.name");
+    return PerlWslBundle.message("perl.host.handler.wsl.short.name");
   }
 
   @Override

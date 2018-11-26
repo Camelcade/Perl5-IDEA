@@ -28,7 +28,6 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.xmlb.annotations.Attribute;
 import com.intellij.util.xmlb.annotations.Transient;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
@@ -80,7 +79,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     if (myFileSystem == null) {
       WSLDistributionWithRoot distribution = getDistribution();
       if (distribution == null) {
-        LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
+        LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
         return null;
       }
       myFileSystem = PerlWslFileSystem.create(distribution);
@@ -141,7 +140,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   public String doGetRemotePath(@NotNull String localPathName) {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
-      LOG.error(PerlBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
+      LOG.error(PerlWslBundle.message("perl.host.handler.distribution.unavailable", myDistributionId));
       return null;
     }
     return distribution.getWslPath(localPathName);
@@ -176,7 +175,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   private PerlCommandLine patchCommandLine(@NotNull PerlCommandLine perlCommandLine) throws ExecutionException {
     WSLDistributionWithRoot distribution = getDistribution();
     if (distribution == null) {
-      throw new ExecutionException(PerlBundle.message("perl.host.handler.distribution.unavailable", getDistributionId()));
+      throw new ExecutionException(PerlWslBundle.message("perl.host.handler.distribution.unavailable", getDistributionId()));
     }
     String workingDir = ObjectUtils.doIfNotNull(perlCommandLine.getWorkDirectory(), File::toString);
     perlCommandLine.withWorkDirectory((String)null);

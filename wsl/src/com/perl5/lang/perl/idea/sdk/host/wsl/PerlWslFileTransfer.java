@@ -35,7 +35,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -83,9 +82,9 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
         NOTIFICATIONS_QUEUE.queue(Update.create(this, () -> {
           AnAction action = ActionManagerEx.getInstanceEx().getAction("perl5.sync.interpreter");
           Notification notification = new Notification(
-            PerlBundle.message("perl.host.handler.wsl.notification.group"),
-            PerlBundle.message("perl.host.handler.wsl.missing.rsync.title"),
-            PerlBundle.message("perl.host.handler.wsl.missing.rsync.message"),
+            PerlWslBundle.message("perl.host.handler.wsl.notification.group"),
+            PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.title"),
+            PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.message"),
             NotificationType.ERROR
           );
           Notifications.Bus.notify(notification.addAction(
