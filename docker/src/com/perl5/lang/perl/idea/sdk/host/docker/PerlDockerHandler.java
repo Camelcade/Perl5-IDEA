@@ -21,7 +21,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
@@ -58,8 +57,8 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     int[] resultIndex = new int[]{-1};
     ApplicationManager.getApplication().invokeAndWait(
       () -> resultIndex[0] = Messages.showChooseDialog(
-        PerlBundle.message("perl.host.handler.docker.choose.distro.message"),
-        PerlBundle.message("perl.host.handler.docker.choose.distro.title"),
+        PerlDockerBundle.message("perl.host.handler.docker.choose.distro.message"),
+        PerlDockerBundle.message("perl.host.handler.docker.choose.distro.title"),
         imagesArray, imagesArray[0], null));
     int index = resultIndex[0];
 
@@ -73,13 +72,13 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   @NotNull
   @Override
   public String getMenuItemTitle() {
-    return PerlBundle.message("perl.host.handler.docker.menu.title");
+    return PerlDockerBundle.message("perl.host.handler.docker.menu.title");
   }
 
   @NotNull
   @Override
   public String getShortName() {
-    return PerlBundle.message("perl.host.handler.docker.short.name");
+    return PerlDockerBundle.message("perl.host.handler.docker.short.name");
   }
 
   @Override
