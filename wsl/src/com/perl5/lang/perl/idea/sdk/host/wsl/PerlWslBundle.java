@@ -17,15 +17,14 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.AbstractBundle;
-import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
 class PerlWslBundle extends AbstractBundle {
-  private static final PerlBundle INSTANCE = new PerlBundle();
+  private static final PerlWslBundle INSTANCE = new PerlWslBundle();
   private static final String PATH_TO_BUNDLE = "messages.WslBundle";
 
-  public PerlWslBundle() {
+  private PerlWslBundle() {
     super(PATH_TO_BUNDLE);
   }
 

@@ -24,7 +24,7 @@ public class TemplateToolkitBundle extends AbstractBundle {
   private static final TemplateToolkitBundle INSTANCE = new TemplateToolkitBundle();
   private static final String PATH_TO_BUNDLE = "messages.TemplateToolkitBundle";
 
-  public TemplateToolkitBundle() {
+  private TemplateToolkitBundle() {
     super(PATH_TO_BUNDLE);
   }
 

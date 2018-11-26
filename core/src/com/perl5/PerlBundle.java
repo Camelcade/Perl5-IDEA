@@ -16,10 +16,6 @@
 
 package com.perl5;
 
-/**
- * Created by hurricup on 12.04.2015.
- */
-
 import com.intellij.AbstractBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
@@ -28,7 +24,7 @@ public class PerlBundle extends AbstractBundle {
   private static final PerlBundle INSTANCE = new PerlBundle();
   private static final String PATH_TO_BUNDLE = "messages.PerlBundle";
 
-  public PerlBundle() {
+  private PerlBundle() {
     super(PATH_TO_BUNDLE);
   }
 

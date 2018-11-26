@@ -20,7 +20,7 @@ import com.intellij.AbstractBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-public final class EmbeddedPerlBundle extends AbstractBundle {
+public class EmbeddedPerlBundle extends AbstractBundle {
   private static final EmbeddedPerlBundle INSTANCE = new EmbeddedPerlBundle();
   private static final String PATH_TO_BUNDLE = "messages.EmbeddedPerlBundle";
 

@@ -17,12 +17,11 @@
 package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.AbstractBundle;
-import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
 class PerlDockerBundle extends AbstractBundle {
-  private static final PerlBundle INSTANCE = new PerlBundle();
+  private static final PerlDockerBundle INSTANCE = new PerlDockerBundle();
   private static final String PATH_TO_BUNDLE = "messages.PerlDockerBundle";
 
   private PerlDockerBundle() {
