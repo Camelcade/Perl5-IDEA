@@ -17,11 +17,7 @@
 package completion;
 
 import base.MojoLightTestCase;
-import base.PerlLightTestCase;
-import base.PerlLightTestCaseBase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
-
-import static com.perl5.lang.mojolicious.filetypes.MojoliciousFileType.MOJO_DEFAULT_EXTENSION;
 
 public class MojoCompletionTest extends MojoLightTestCase {
 

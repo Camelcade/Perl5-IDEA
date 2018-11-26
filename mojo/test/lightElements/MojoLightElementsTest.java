@@ -17,8 +17,6 @@
 package lightElements;
 
 import base.MojoLightTestCase;
-import base.PerlLightTestCase;
-import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 
 public class MojoLightElementsTest extends MojoLightTestCase {
   @Override

@@ -17,9 +17,6 @@
 package resolve;
 
 import base.MojoLightTestCase;
-import base.PerlLightTestCase;
-
-import static com.perl5.lang.mojolicious.filetypes.MojoliciousFileType.MOJO_DEFAULT_EXTENSION;
 
 public class MojoResolveTest extends MojoLightTestCase {
   protected String getTestDataPath() {

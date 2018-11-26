@@ -17,7 +17,6 @@
 package editor;
 
 import base.MojoLightTestCase;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 
 public class MojoElementDescriptionProviderTest extends MojoLightTestCase {

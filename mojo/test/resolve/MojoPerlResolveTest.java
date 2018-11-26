@@ -17,8 +17,6 @@
 package resolve;
 
 import base.MojoLightTestCase;
-import com.perl5.lang.perl.fileTypes.PerlFileType;
-import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 
 public class MojoPerlResolveTest extends MojoLightTestCase {

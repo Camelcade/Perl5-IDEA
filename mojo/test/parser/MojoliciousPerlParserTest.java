@@ -16,9 +16,6 @@
 
 package parser;
 
-import com.intellij.lang.ParserDefinition;
-import org.jetbrains.annotations.NotNull;
-
 public class MojoliciousPerlParserTest extends MojoliciousParserTestBase{
   @Override
   protected String getTestDataPath() {
