@@ -19,6 +19,7 @@ package com.perl5.lang.embedded.idea.actions;
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.embedded.EmbeddedPerlBundle;
@@ -26,7 +27,7 @@ import com.perl5.lang.embedded.EmbeddedPerlIcons;
 import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 
-public class EmbeddedPerlCreateFileFromTemplateAction extends CreateFileFromTemplateAction {
+public class EmbeddedPerlCreateFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware {
   public EmbeddedPerlCreateFileFromTemplateAction() {
     super(EmbeddedPerlBundle.message("action.new.file.title"), EmbeddedPerlBundle.message("action.new.file.description"), EmbeddedPerlIcons.EMBEDDED_PERL_FILE);
   }

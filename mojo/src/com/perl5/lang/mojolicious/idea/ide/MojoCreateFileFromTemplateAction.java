@@ -19,6 +19,7 @@ package com.perl5.lang.mojolicious.idea.ide;
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.mojolicious.MojoBundle;
@@ -26,7 +27,7 @@ import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 
-public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateAction {
+public class MojoCreateFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware {
   public MojoCreateFileFromTemplateAction() {
     super(MojoBundle.message("action.new.file.title"), MojoBundle.message("action.new.file.description"), MojoIcons.MOJO_FILE);
   }
