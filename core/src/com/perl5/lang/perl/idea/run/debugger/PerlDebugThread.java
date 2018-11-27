@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Modifier;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -123,7 +124,20 @@ public class PerlDebugThread extends Thread {
       String debugName = debugHost + ":" + debugPort;
       if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
         printConsole("Connecting to " + debugName + "...\n");
-        mySocket = new Socket(debugHost, debugPort);
+        for (int i = 1; i < 11; i++) {
+          try {
+            mySocket = new Socket(debugHost, debugPort);
+            break;
+          }
+          catch (ConnectException e) {
+            if (i == 10) {
+              throw e;
+            }
+            printConsole(e.getMessage() + "\n");
+            printConsole("Attempting again in a second...\n");
+            Thread.sleep(1000);
+          }
+        }
       }
       else {
         printConsole("Listening on " + debugName + "...\n");
