@@ -166,7 +166,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
               });
             }
             else {
-              LOG.error("Non-empty stderr: ", processOutput.getStderr());
+              LOG.warn("Non-empty stderr: " + processOutput.getStderr());
               Notifications.Bus.notify(new Notification(
                 getGroup(),
                 PerlBundle.message("perl.action.perl.tidy.formatting.error.title"),
