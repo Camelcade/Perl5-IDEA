@@ -192,7 +192,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   public void reparseXSubs() {
-    if (myProject.isDisposed()) {
+    if (!PerlProjectManager.isPerlEnabled(myProject)) {
       return;
     }
 
