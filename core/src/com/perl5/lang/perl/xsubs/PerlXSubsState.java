@@ -127,7 +127,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     ProgressIndicatorUtils.scheduleWithWriteActionPriority(new ReadTask() {
       @Override
       public void computeInReadAction(@NotNull ProgressIndicator indicator) throws ProcessCanceledException {
-        if (myProject.isDisposed()) {
+        if (!PerlProjectManager.isPerlEnabled(myProject)) {
           return;
         }
         int filesCounter = 0;
