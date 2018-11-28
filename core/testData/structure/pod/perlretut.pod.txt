@@ -1,0 +1,202 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlretut.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlretut.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60 in perlretut.pod
+
+  Part 1: The basics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2825 in perlretut.pod
+
+    Simple word matching in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2852 in perlretut.pod
+
+    Using character classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11937 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16319 in perlretut.pod
+
+        \d matches a digit, not just [0-9] but also digits from non-roman scripts in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16328 in perlretut.pod
+
+        \s matches a whitespace character, the set [\ \t\r\n\f] and others in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16412 in perlretut.pod
+
+        \w matches a word character (alphanumeric or _), not just [0-9a-zA-Z_] but also ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16489 in perlretut.pod
+
+        \D is a negated \d; it represents any other character than a digit, or [^\d] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16624 in perlretut.pod
+
+        \S is a negated \s; it represents any non-whitespace character [^\s] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16711 in perlretut.pod
+
+        \W is a negated \w; it represents any non-word character [^\w] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16790 in perlretut.pod
+
+        The period '.' matches any character but "\n" (unless the modifier //s is in eff... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16863 in perlretut.pod
+
+        \N, like the period, matches any character but "\n", but it does so regardless o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16982 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 20880 in perlretut.pod
+
+        no modifiers (//): Default behavior.  '.' matches any character except "\n".  ^ ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20889 in perlretut.pod
+
+        s modifier (//s): Treat string as a single long line.  '.' matches any character... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21097 in perlretut.pod
+
+        m modifier (//m): Treat string as a set of multiple lines.  '.' matches any char... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21321 in perlretut.pod
+
+        both s and m modifiers (//sm): Treat string as a single long line, but detect mu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21523 in perlretut.pod
+
+    Matching this or that in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23306 in perlretut.pod
+
+    Grouping things and hierarchical matching in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24808 in perlretut.pod
+
+      0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27934 in perlretut.pod
+
+      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27994 in perlretut.pod
+
+      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28059 in perlretut.pod
+
+      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28115 in perlretut.pod
+
+      4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28279 in perlretut.pod
+
+      5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28406 in perlretut.pod
+
+      6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28484 in perlretut.pod
+
+      7 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28512 in perlretut.pod
+
+      8 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28673 in perlretut.pod
+
+      9 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28751 in perlretut.pod
+
+    Extracting matches in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29774 in perlretut.pod
+
+    Backreferences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31441 in perlretut.pod
+
+    Relative backreferences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32659 in perlretut.pod
+
+    Named backreferences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34072 in perlretut.pod
+
+    Alternative capture group numbering in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35334 in perlretut.pod
+
+    Position information in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36408 in perlretut.pod
+
+    Non-capturing groupings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38815 in perlretut.pod
+
+    Matching repetitions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40396 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 41079 in perlretut.pod
+
+        a? means: match 'a' 1 or 0 times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41088 in perlretut.pod
+
+        a* means: match 'a' 0 or more times, i.e., any number of times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41134 in perlretut.pod
+
+        a+ means: match 'a' 1 or more times, i.e., at least once in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41210 in perlretut.pod
+
+        a{n,m} means: match at least n times, but not more than m times. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41280 in perlretut.pod
+
+        a{n,} means: match at least n or more times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41364 in perlretut.pod
+
+        a{n} means: match exactly n times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41424 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 44159 in perlretut.pod
+
+        Principle 0: Taken as a whole, any regexp will be matched at the earliest possib... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44168 in perlretut.pod
+
+        Principle 1: In an alternation a|b|c..., the leftmost alternative that allows a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44285 in perlretut.pod
+
+        Principle 2: The maximal matching quantifiers ?, *, + and {n,m} will in general ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44427 in perlretut.pod
+
+        Principle 3: If there are two or more elements in a regexp, the leftmost greedy ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44617 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 47291 in perlretut.pod
+
+        a?? means: match 'a' 0 or 1 times. Try 0 first, then 1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47300 in perlretut.pod
+
+        a*? means: match 'a' 0 or more times, i.e., any number of times, but as few time... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47369 in perlretut.pod
+
+        a+? means: match 'a' 1 or more times, i.e., at least once, but as few times as p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47476 in perlretut.pod
+
+        a{n,m}? means: match at least n times, not more than m times, as few times as po... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47577 in perlretut.pod
+
+        a{n,}? means: match at least n times, but as few times as possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47683 in perlretut.pod
+
+        a{n}? means: match exactly n times.  Because we match exactly n times, a{n}? is ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47766 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 50162 in perlretut.pod
+
+        Principle 3: If there are two or more elements in a regexp, the leftmost greedy ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50171 in perlretut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 50994 in perlretut.pod
+
+        0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51003 in perlretut.pod
+
+        1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51063 in perlretut.pod
+
+        2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51164 in perlretut.pod
+
+        3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51271 in perlretut.pod
+
+        4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51403 in perlretut.pod
+
+        5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51454 in perlretut.pod
+
+        6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51597 in perlretut.pod
+
+    Possessive quantifiers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52662 in perlretut.pod
+
+      a{n,m}+ means: match at least n times, not more than m times, as many times as p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53674 in perlretut.pod
+
+      a{n,}+ means: match at least n times, but as many times as possible, and don't g... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53841 in perlretut.pod
+
+      a{n}+ means: match exactly n times.  It is just there for notational consistency... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54019 in perlretut.pod
+
+    Building a regexp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54749 in perlretut.pod
+
+      specifying the task in detail, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59610 in perlretut.pod
+
+      breaking down the problem into smaller parts, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59651 in perlretut.pod
+
+      translating the small parts into regexps, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59707 in perlretut.pod
+
+      combining the regexps, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59759 in perlretut.pod
+
+      and optimizing the final combined regexp. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59792 in perlretut.pod
+
+    Using regular expressions in Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 60068 in perlretut.pod
+
+      Prohibiting substitution in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 60674 in perlretut.pod
+
+      Global matching in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 61317 in perlretut.pod
+
+      Search and replace in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 65960 in perlretut.pod
+
+      The split function in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 70460 in perlretut.pod
+
+  Part 2: Power tools in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 72427 in perlretut.pod
+
+    More on characters, strings, and character classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73068 in perlretut.pod
+
+    Compiling and saving regular expressions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82310 in perlretut.pod
+
+    Composing regular expressions at runtime in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84264 in perlretut.pod
+
+    Embedding comments and modifiers in a regular expression in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86817 in perlretut.pod
+
+    Looking ahead and looking behind in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 89304 in perlretut.pod
+
+    Using independent subexpressions to prevent backtracking in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 93196 in perlretut.pod
+
+    Conditional expressions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 96254 in perlretut.pod
+
+    Defining named patterns in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 98517 in perlretut.pod
+
+    Recursive patterns in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 99597 in perlretut.pod
+
+    A bit of magic: executing Perl code in a regular expression in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 101136 in perlretut.pod
+
+    Backtracking control verbs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 110276 in perlretut.pod
+
+    Pragmas and debugging in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 112173 in perlretut.pod
+
+  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 117172 in perlretut.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 117320 in perlretut.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 117854 in perlretut.pod
+
+    Acknowledgments in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 118006 in perlretut.pod
+

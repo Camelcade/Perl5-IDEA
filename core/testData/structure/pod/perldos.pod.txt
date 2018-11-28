@@ -1,0 +1,54 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perldos.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perldos.pod
+
+  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 228 in perldos.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 376 in perldos.pod
+
+    Prerequisites for Compiling Perl on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 977 in perldos.pod
+
+      DJGPP in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1034 in perldos.pod
+
+      Pthreads in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2060 in perldos.pod
+
+    Shortcomings of Perl under DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2148 in perldos.pod
+
+      fork() and pipe() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2312 in perldos.pod
+
+      some features of the UNIX filesystem regarding link count and file dates in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2340 in perldos.pod
+
+      in-place operation is a little bit broken with short filenames in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2423 in perldos.pod
+
+      sockets in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2496 in perldos.pod
+
+    Building Perl on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2521 in perldos.pod
+
+      Unpack the source package perl5.8*.tar.gz with djtarx. If you want to use long f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2559 in perldos.pod
+
+      Create a "symlink" or copy your bash.exe to sh.exe in your ($DJDIR)/bin director... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2807 in perldos.pod
+
+      If you have split.exe and gsplit.exe in your path, then rename  split.exe to djs... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3270 in perldos.pod
+
+      Chdir to the djgpp subdirectory of perl toplevel and type the following commands... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3708 in perldos.pod
+
+      Now you can compile Perl. Type:          make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5680 in perldos.pod
+
+    Testing Perl on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5743 in perldos.pod
+
+    Installation of Perl on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6039 in perldos.pod
+
+  BUILDING AND INSTALLING MODULES ON DOS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6357 in perldos.pod
+
+    Building Prerequisites for Perl on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6404 in perldos.pod
+
+    Unpacking CPAN Modules on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7304 in perldos.pod
+
+    Building Non-XS Modules on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8582 in perldos.pod
+
+    Building XS Modules on DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8994 in perldos.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10325 in perldos.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10489 in perldos.pod
+

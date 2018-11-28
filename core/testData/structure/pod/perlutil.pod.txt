@@ -1,0 +1,76 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlutil.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlutil.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 71 in perlutil.pod
+
+  LIST OF UTILITIES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 460 in perlutil.pod
+
+    Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 486 in perlutil.pod
+
+      perldoc|perldoc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 517 in perlutil.pod
+
+      pod2man|pod2man and pod2text|pod2text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 985 in perlutil.pod
+
+      pod2html|pod2html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1347 in perlutil.pod
+
+      pod2usage|pod2usage in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1472 in perlutil.pod
+
+      podselect|podselect in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1728 in perlutil.pod
+
+      podchecker|podchecker in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2049 in perlutil.pod
+
+      splain|splain in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2194 in perlutil.pod
+
+      roffitall in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2327 in perlutil.pod
+
+    Converters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2613 in perlutil.pod
+
+    Administration in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2794 in perlutil.pod
+
+      libnetcfg|libnetcfg in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2826 in perlutil.pod
+
+      perlivp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2931 in perlutil.pod
+
+    Development in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3223 in perlutil.pod
+
+      perlbug|perlbug in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3369 in perlutil.pod
+
+      perlthanks|perlbug in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3643 in perlutil.pod
+
+      h2ph|h2ph in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3831 in perlutil.pod
+
+      c2ph|c2ph and pstruct|pstruct in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4245 in perlutil.pod
+
+      h2xs|h2xs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4572 in perlutil.pod
+
+      enc2xs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4793 in perlutil.pod
+
+      xsubpp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5110 in perlutil.pod
+
+      prove in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5452 in perlutil.pod
+
+      corelist in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5599 in perlutil.pod
+
+    General tools in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5739 in perlutil.pod
+
+      piconv in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5896 in perlutil.pod
+
+      ptar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6168 in perlutil.pod
+
+      ptardiff in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6237 in perlutil.pod
+
+      ptargrep in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6516 in perlutil.pod
+
+      shasum in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6631 in perlutil.pod
+
+      zipdetails in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6748 in perlutil.pod
+
+    Installation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6960 in perlutil.pod
+
+      cpan in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7082 in perlutil.pod
+
+      instmodsh in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7349 in perlutil.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7525 in perlutil.pod
+

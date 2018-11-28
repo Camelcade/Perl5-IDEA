@@ -1,0 +1,1990 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perldiag.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldiag.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50 in perldiag.pod
+
+    accept() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1766 in perldiag.pod
+
+    Aliasing via reference is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1950 in perldiag.pod
+
+    Allocation too large: %x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2452 in perldiag.pod
+
+    '%c' allowed only after types %s in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2544 in perldiag.pod
+
+    alpha->numify() is lossy in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2709 in perldiag.pod
+
+    Ambiguous call resolved as CORE::%s(), qualify as such or use & in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2819 in perldiag.pod
+
+    Ambiguous range in transliteration operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3590 in perldiag.pod
+
+    Ambiguous use of %s resolved as %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3917 in perldiag.pod
+
+    Ambiguous use of -%s resolved as -&%s() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4161 in perldiag.pod
+
+    Ambiguous use of %c resolved as operator %c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4435 in perldiag.pod
+
+    Ambiguous use of %c{%s} resolved to %c%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4969 in perldiag.pod
+
+    Ambiguous use of %c{%s[...]} resolved to %c%s[...] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5430 in perldiag.pod
+
+    Ambiguous use of %c{%s{...}} resolved to %c%s{...} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5488 in perldiag.pod
+
+    '|' and '<' may not both be specified on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6476 in perldiag.pod
+
+    '|' and '>' may not both be specified on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6745 in perldiag.pod
+
+    Applying %s to %s will act on scalar(%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7273 in perldiag.pod
+
+    Arg too short for msgsnd in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7746 in perldiag.pod
+
+    Argument "%s" isn't numeric%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7844 in perldiag.pod
+
+    Argument list not closed for PerlIO layer "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8303 in perldiag.pod
+
+    Argument "%s" treated as 0 in increment (++) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8792 in perldiag.pod
+
+    Array passed to stat will be coerced to a scalar%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9061 in perldiag.pod
+
+    assertion botched: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9243 in perldiag.pod
+
+    Assertion %s failed: file "%s", line %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9342 in perldiag.pod
+
+    Assigned value is not a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9462 in perldiag.pod
+
+    Assigned value is not %s reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9666 in perldiag.pod
+
+    Assigning non-zero to $[ is no longer possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10018 in perldiag.pod
+
+    Assignment to both a list and a scalar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10223 in perldiag.pod
+
+    Assuming NOT a POSIX class since %s in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10457 in perldiag.pod
+
+    <> at require-statement should be quotes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11169 in perldiag.pod
+
+    Attempt to access disallowed key '%s' in a restricted hash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11302 in perldiag.pod
+
+    Attempt to bless into a freed package in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11494 in perldiag.pod
+
+    Attempt to bless into a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11714 in perldiag.pod
+
+    Attempt to clear deleted array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12206 in perldiag.pod
+
+    Attempt to delete disallowed key '%s' from a restricted hash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12461 in perldiag.pod
+
+    Attempt to delete readonly key '%s' from a restricted hash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12629 in perldiag.pod
+
+    Attempt to free non-arena SV: 0x%x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12806 in perldiag.pod
+
+    Attempt to free nonexistent shared string '%s'%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13015 in perldiag.pod
+
+    Attempt to free temp prematurely: SV 0x%x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13330 in perldiag.pod
+
+    Attempt to free unreferenced glob pointers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13674 in perldiag.pod
+
+    Attempt to free unreferenced scalar: SV 0x%x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13793 in perldiag.pod
+
+    Attempt to pack pointer to temporary value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14267 in perldiag.pod
+
+    Attempt to reload %s aborted. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14680 in perldiag.pod
+
+    Attempt to set length of freed array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14941 in perldiag.pod
+
+    Attempt to use reference as lvalue in substr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15250 in perldiag.pod
+
+    Attribute "locked" is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15487 in perldiag.pod
+
+    Attribute prototype(%s) discards earlier prototype attribute in same sub in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15771 in perldiag.pod
+
+    Attribute "unique" is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16055 in perldiag.pod
+
+    av_reify called on tied array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16328 in perldiag.pod
+
+    Bad arg length for %s, is %u, should be %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16491 in perldiag.pod
+
+    Bad evalled substitution pattern in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16773 in perldiag.pod
+
+    Bad filehandle: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16993 in perldiag.pod
+
+    Bad free() ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17196 in perldiag.pod
+
+    Bad hash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17633 in perldiag.pod
+
+    Badly placed ()'s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17718 in perldiag.pod
+
+    Bad name after %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17885 in perldiag.pod
+
+    Bad plugin affecting keyword '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18180 in perldiag.pod
+
+    Bad realloc() ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18299 in perldiag.pod
+
+    Bad symbol for array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18531 in perldiag.pod
+
+    Bad symbol for dirhandle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18659 in perldiag.pod
+
+    Bad symbol for filehandle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18794 in perldiag.pod
+
+    Bad symbol for hash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18931 in perldiag.pod
+
+    Bad symbol for scalar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19056 in perldiag.pod
+
+    Bareword found in conditional in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19185 in perldiag.pod
+
+    Bareword "%s" not allowed while "strict subs" in use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19641 in perldiag.pod
+
+    Bareword "%s" refers to nonexistent package in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19887 in perldiag.pod
+
+    BEGIN failed--compilation aborted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20119 in perldiag.pod
+
+    BEGIN not safe after errors--compilation aborted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20297 in perldiag.pod
+
+    \%d better written as $%d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20689 in perldiag.pod
+
+    Binary number > 0b11111111111111111111111111111111 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21037 in perldiag.pod
+
+    bind() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21285 in perldiag.pod
+
+    binmode() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21462 in perldiag.pod
+
+    Bit vector size > 32 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21625 in perldiag.pod
+
+    Bizarre copy of %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21735 in perldiag.pod
+
+    Bizarre SvTYPE [%d] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21839 in perldiag.pod
+
+    Both or neither range ends should be Unicode in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21972 in perldiag.pod
+
+    Buffer overflow in prime_env_iter: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22799 in perldiag.pod
+
+    Callback called exit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23045 in perldiag.pod
+
+    %s() called too early to check prototype in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23162 in perldiag.pod
+
+    Calling POSIX::%s() is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23727 in perldiag.pod
+
+    Cannot chr %f in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23881 in perldiag.pod
+
+    Cannot compress %f in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23982 in perldiag.pod
+
+    Cannot compress integer in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24126 in perldiag.pod
+
+    Cannot compress negative numbers in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24384 in perldiag.pod
+
+    Cannot convert a reference to %s to typeglob in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24579 in perldiag.pod
+
+    Cannot copy to %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24904 in perldiag.pod
+
+    Cannot find encoding "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25032 in perldiag.pod
+
+    Cannot pack %f with '%c' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25173 in perldiag.pod
+
+    Cannot printf %f with '%c' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25296 in perldiag.pod
+
+    Cannot set tied @DB::args in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25473 in perldiag.pod
+
+    Cannot tie unreifiable array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25655 in perldiag.pod
+
+    Cannot yet reorder sv_catpvfn() arguments from va_list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25922 in perldiag.pod
+
+    Can only compress unsigned integers in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26331 in perldiag.pod
+
+    Can't bless non-reference value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26581 in perldiag.pod
+
+    Can't "break" in a loop topicalizer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26734 in perldiag.pod
+
+    Can't "break" outside a given block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26913 in perldiag.pod
+
+    Can't call method "%s" on an undefined value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27022 in perldiag.pod
+
+    Can't call method "%s" on unblessed reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27331 in perldiag.pod
+
+    Can't call method "%s" without a package or object reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27658 in perldiag.pod
+
+    Can't call mro_isa_changed_in() on anonymous symbol table in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28059 in perldiag.pod
+
+    Can't call mro_method_changed_in() on anonymous symbol table in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28243 in perldiag.pod
+
+    Can't chdir to %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28421 in perldiag.pod
+
+    Can't check filesystem of script "%s" for nosuid in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28575 in perldiag.pod
+
+    Can't coerce %s to %s in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28709 in perldiag.pod
+
+    Can't "continue" outside a when block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29004 in perldiag.pod
+
+    Can't create pipe mailbox in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29131 in perldiag.pod
+
+    Can't declare %s in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29271 in perldiag.pod
+
+    Can't "default" outside a topicalizer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29447 in perldiag.pod
+
+    Can't do inplace edit: %s is not a regular file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29725 in perldiag.pod
+
+    Can't do inplace edit on %s: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29928 in perldiag.pod
+
+    Can't do inplace edit without backup in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30042 in perldiag.pod
+
+    Can't do inplace edit: %s would not be unique in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30245 in perldiag.pod
+
+    Can't do %s("%s") on non-UTF-8 locale; resolved to "%s". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30497 in perldiag.pod
+
+    Can't do waitpid with flags in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31954 in perldiag.pod
+
+    Can't emulate -%s on #! line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32094 in perldiag.pod
+
+    Can't %s %s-endian %ss on this platform in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32272 in perldiag.pod
+
+    Can't exec "%s": %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32554 in perldiag.pod
+
+    Can't exec %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33006 in perldiag.pod
+
+    Can't execute %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33216 in perldiag.pod
+
+    Can't find an opnumber for "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33364 in perldiag.pod
+
+    Can't find label %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33514 in perldiag.pod
+
+    Can't find %s on PATH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33660 in perldiag.pod
+
+    Can't find %s on PATH, '.' not in PATH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33779 in perldiag.pod
+
+    Can't find string terminator %s anywhere before EOF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34037 in perldiag.pod
+
+    Can't find Unicode property definition "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34684 in perldiag.pod
+
+    Can't find Unicode property definition "%s" in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34735 in perldiag.pod
+
+    Can't fork: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35377 in perldiag.pod
+
+    Can't fork, trying again in 5 seconds in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35474 in perldiag.pod
+
+    Can't get filespec - stale stat buffer? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35611 in perldiag.pod
+
+    Can't get pipe mailbox device name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36709 in perldiag.pod
+
+    Can't get SYSGEN parameter value for MAXBUF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36870 in perldiag.pod
+
+    Can't "goto" into the middle of a foreach loop in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37043 in perldiag.pod
+
+    Can't "goto" out of a pseudo block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37232 in perldiag.pod
+
+    Can't goto subroutine from an eval-%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37512 in perldiag.pod
+
+    Can't goto subroutine from a sort sub (or similar callback) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37645 in perldiag.pod
+
+    Can't goto subroutine outside a subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37880 in perldiag.pod
+
+    Can't ignore signal CHLD, forcing to default in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38173 in perldiag.pod
+
+    Can't kill a non-numeric process ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38619 in perldiag.pod
+
+    Can't "last" outside a loop block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38828 in perldiag.pod
+
+    Can't linearize anonymous symbol table in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39305 in perldiag.pod
+
+    Can't load '%s' for module %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39478 in perldiag.pod
+
+    Can't localize lexical variable %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39948 in perldiag.pod
+
+    Can't localize through a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40221 in perldiag.pod
+
+    Can't locate %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40515 in perldiag.pod
+
+    Can't locate auto/%s.al in @INC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40994 in perldiag.pod
+
+    Can't locate loadable object for module %s in @INC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41279 in perldiag.pod
+
+    Can't locate object method "%s" via package "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41530 in perldiag.pod
+
+    Can't locate object method "%s" via package "%s" (perhaps you forgot to load "%s"?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41790 in perldiag.pod
+
+    Can't locate package %s for @%s::ISA in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42062 in perldiag.pod
+
+    Can't locate PerlIO%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42199 in perldiag.pod
+
+    Can't make list assignment to %ENV on this system in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42340 in perldiag.pod
+
+    Can't make loaded symbols global on this platform while loading %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42473 in perldiag.pod
+
+    Can't modify %s in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42972 in perldiag.pod
+
+    Can't modify nonexistent substring in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43121 in perldiag.pod
+
+    Can't modify non-lvalue subroutine call of &%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43243 in perldiag.pod
+
+    Can't modify reference to %s in %s assignment in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43415 in perldiag.pod
+
+    Can't modify reference to localized parenthesized array in list assignment in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43684 in perldiag.pod
+
+    Can't modify reference to parenthesized hash in list assignment in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44111 in perldiag.pod
+
+    Can't msgrcv to read-only var in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44477 in perldiag.pod
+
+    Can't "next" outside a loop block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44593 in perldiag.pod
+
+    Can't open %s: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45020 in perldiag.pod
+
+    Can't open a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45477 in perldiag.pod
+
+    Can't open bidirectional pipe in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45726 in perldiag.pod
+
+    Can't open error file %s as stderr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46035 in perldiag.pod
+
+    Can't open input file %s as stdin in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46243 in perldiag.pod
+
+    Can't open output file %s as stdout in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46440 in perldiag.pod
+
+    Can't open output pipe (name: %s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46647 in perldiag.pod
+
+    Can't open perl script "%s": %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46836 in perldiag.pod
+
+    Can't read CRTL environ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47147 in perldiag.pod
+
+    Can't redeclare "%s" in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47471 in perldiag.pod
+
+    Can't "redo" outside a loop block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47637 in perldiag.pod
+
+    Can't remove %s: %s, skipping file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48062 in perldiag.pod
+
+    Can't rename %s to %s: %s, skipping file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48293 in perldiag.pod
+
+    Can't reopen input pipe (name: %s) in binary mode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48481 in perldiag.pod
+
+    Can't represent character for Ox%X on this platform in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48665 in perldiag.pod
+
+    Can't reset %ENV on this system in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48965 in perldiag.pod
+
+    Can't resolve method "%s" overloading "%s" in package "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49229 in perldiag.pod
+
+    Can't return %s from lvalue subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49497 in perldiag.pod
+
+    Can't return outside a subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49697 in perldiag.pod
+
+    Can't return %s to lvalue scalar context in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49874 in perldiag.pod
+
+    Can't stat script "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50228 in perldiag.pod
+
+    Can't take log of %g in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50356 in perldiag.pod
+
+    Can't take sqrt of %g in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50603 in perldiag.pod
+
+    Can't undef active subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50820 in perldiag.pod
+
+    Can't upgrade %s (%d) to %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51062 in perldiag.pod
+
+    Can't use '%c' after -mname in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51358 in perldiag.pod
+
+    Can't use a hash as a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51504 in perldiag.pod
+
+    Can't use an array as a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51754 in perldiag.pod
+
+    Can't use anonymous symbol table for method lookup in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52000 in perldiag.pod
+
+    Can't use an undefined value as %s reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52258 in perldiag.pod
+
+    Can't use bareword ("%s") as %s ref while "strict refs" in use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52449 in perldiag.pod
+
+    Can't use %! because Errno.pm is not available in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52629 in perldiag.pod
+
+    Can't use both '<' and '>' after type '%c' in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52872 in perldiag.pod
+
+    Can't use 'defined(@array)' (Maybe you should just omit the defined()?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53100 in perldiag.pod
+
+    Can't use 'defined(%hash)' (Maybe you should just omit the defined()?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53366 in perldiag.pod
+
+    Can't use %s for loop variable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54183 in perldiag.pod
+
+    Can't use global %s in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54290 in perldiag.pod
+
+    Can't use '%c' in a group with different byte-order in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54614 in perldiag.pod
+
+    Can't use "my %s" in sort comparison in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54891 in perldiag.pod
+
+    Can't use %s ref as %s ref in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55228 in perldiag.pod
+
+    Can't use string ("%s") as %s ref while "strict refs" in use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55441 in perldiag.pod
+
+    Can't use string ("%s"...) as %s ref while "strict refs" in use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55509 in perldiag.pod
+
+    Can't use subscript on %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56077 in perldiag.pod
+
+    Can't use \%c to mean $%c in expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56318 in perldiag.pod
+
+    Can't weaken a nonreference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56734 in perldiag.pod
+
+    Can't "when" outside a topicalizer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56868 in perldiag.pod
+
+    Can't x= to read-only value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57159 in perldiag.pod
+
+    Character following "\c" must be printable ASCII in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57403 in perldiag.pod
+
+    Character following \%c must be '{' or a single-character Unicode property name in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57714 in perldiag.pod
+
+    Character in 'C' format wrapped in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58097 in perldiag.pod
+
+    Character in 'c' format wrapped in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58503 in perldiag.pod
+
+    Character in '%c' format wrapped in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58913 in perldiag.pod
+
+    Character in 'W' format wrapped in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59242 in perldiag.pod
+
+    Character(s) in '%c' format wrapped in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59513 in perldiag.pod
+
+    Character(s) in '%c' format wrapped in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59867 in perldiag.pod
+
+    charnames alias definitions may not contain a sequence of multiple spaces in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60229 in perldiag.pod
+
+    charnames alias definitions may not contain trailing white-space in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60618 in perldiag.pod
+
+    chdir() on unopened filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60985 in perldiag.pod
+
+    "\c%c" is more clearly written simply as "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61097 in perldiag.pod
+
+    Cloning substitution context is unimplemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61458 in perldiag.pod
+
+    closedir() attempted on invalid dirhandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61584 in perldiag.pod
+
+    close() on unopened filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61747 in perldiag.pod
+
+    Closure prototype called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61857 in perldiag.pod
+
+    \C no longer supported in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62066 in perldiag.pod
+
+    Code missing after '/' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62508 in perldiag.pod
+
+    Code point 0x%X is not Unicode, and not portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62671 in perldiag.pod
+
+    Code point 0x%X is not Unicode, may not be portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63559 in perldiag.pod
+
+    %s: Command not found in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64297 in perldiag.pod
+
+    Compilation failed in require in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64560 in perldiag.pod
+
+    Complex regular subexpression recursion limit (%d) exceeded in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64796 in perldiag.pod
+
+    connect() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65469 in perldiag.pod
+
+    Constant(%s): Call to &{$^H{%s}} did not return a defined value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65655 in perldiag.pod
+
+    Constant(%s): $^H{%s} is not defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65903 in perldiag.pod
+
+    Constant is not %s reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66102 in perldiag.pod
+
+    Constants from lexical variables potentially modified elsewhere are deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66474 in perldiag.pod
+
+    Constant subroutine %s redefined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67798 in perldiag.pod
+
+    Constant subroutine %s undefined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68000 in perldiag.pod
+
+    Constant(%s) unknown in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68195 in perldiag.pod
+
+    :const is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68463 in perldiag.pod
+
+    :const is not permitted on named subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68763 in perldiag.pod
+
+    Copy method did not return a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69028 in perldiag.pod
+
+    &CORE::%s cannot be called directly in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69155 in perldiag.pod
+
+    CORE::%s is not a keyword in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69520 in perldiag.pod
+
+    Corrupted regexp opcode %d > %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69610 in perldiag.pod
+
+    corrupted regexp pointers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69835 in perldiag.pod
+
+    corrupted regexp program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69965 in perldiag.pod
+
+    Corrupt malloc ptr 0x%x at 0x%x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70090 in perldiag.pod
+
+    Count after length/code in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70199 in perldiag.pod
+
+    Deep recursion on anonymous subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70551 in perldiag.pod
+
+    Deep recursion on subroutine "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70597 in perldiag.pod
+
+    (?(DEFINE)....) does not allow branches in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71045 in perldiag.pod
+
+    %s defines neither package nor VERSION--version check failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71390 in perldiag.pod
+
+    delete argument is index/value array slice, use array slice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71584 in perldiag.pod
+
+    delete argument is key/value hash slice, use hash slice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71804 in perldiag.pod
+
+    delete argument is not a HASH or ARRAY element or slice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72015 in perldiag.pod
+
+    Delimiter for here document is too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72300 in perldiag.pod
+
+    Deprecated use of my() in false conditional in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72519 in perldiag.pod
+
+    DESTROY created new reference to dead object '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73315 in perldiag.pod
+
+    Did not produce a valid header in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73549 in perldiag.pod
+
+    %s did not return a true value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73606 in perldiag.pod
+
+    (Did you mean &%s instead?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73890 in perldiag.pod
+
+    (Did you mean "local" instead of "our"?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74010 in perldiag.pod
+
+    (Did you mean $ or @ instead of %?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74216 in perldiag.pod
+
+    Died in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74407 in perldiag.pod
+
+    Document contains no data in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74538 in perldiag.pod
+
+    %s does not define %s::VERSION--version check failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74590 in perldiag.pod
+
+    '/' does not take a repeat count in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74740 in perldiag.pod
+
+    Don't know how to get file name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74875 in perldiag.pod
+
+    Don't know how to handle magic of type \%o in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75049 in perldiag.pod
+
+    do_study: out of memory in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75164 in perldiag.pod
+
+    (Do you need to predeclare %s?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75254 in perldiag.pod
+
+    dump() better written as CORE::dump() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75859 in perldiag.pod
+
+    dump is not supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76059 in perldiag.pod
+
+    Duplicate free() ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76135 in perldiag.pod
+
+    Duplicate modifier '%c' after '%c' in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76255 in perldiag.pod
+
+    elseif should be elsif in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76421 in perldiag.pod
+
+    Empty \%c in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76695 in perldiag.pod
+
+    Empty \%c{} in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76753 in perldiag.pod
+
+    entering effective %s failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77015 in perldiag.pod
+
+    %ENV is aliased to %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77150 in perldiag.pod
+
+    Error converting file specification %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77377 in perldiag.pod
+
+    Eval-group in insecure regular expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77742 in perldiag.pod
+
+    Eval-group not allowed at runtime, use re 'eval' in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77982 in perldiag.pod
+
+    Eval-group not allowed, use re 'eval' in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78480 in perldiag.pod
+
+    EVAL without pos change exceeded limit in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78726 in perldiag.pod
+
+    Excessively long <> operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79037 in perldiag.pod
+
+    exec? I'm not *that* kind of operating system in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79302 in perldiag.pod
+
+    Execution of %s aborted due to compilation errors. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79453 in perldiag.pod
+
+    exists argument is not a HASH or ARRAY element or a subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79573 in perldiag.pod
+
+    exists argument is not a subroutine name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79808 in perldiag.pod
+
+    Exiting eval via %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80004 in perldiag.pod
+
+    Exiting format via %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80138 in perldiag.pod
+
+    Exiting pseudo-block via %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80275 in perldiag.pod
+
+    Exiting subroutine via %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80499 in perldiag.pod
+
+    Exiting substitution via %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80644 in perldiag.pod
+
+    Expecting close bracket in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80803 in perldiag.pod
+
+    Expecting '(?flags:(?[...' in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81042 in perldiag.pod
+
+    Experimental aliasing via reference not enabled in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81662 in perldiag.pod
+
+    Experimental %s on scalar is now forbidden in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81880 in perldiag.pod
+
+    Experimental subroutine signatures not enabled in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82226 in perldiag.pod
+
+    Experimental "%s" subs not enabled in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82454 in perldiag.pod
+
+    Explicit blessing to '' (assuming package main) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82652 in perldiag.pod
+
+    %s: Expression syntax in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82960 in perldiag.pod
+
+    %s failed--call queue aborted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83130 in perldiag.pod
+
+    Failed to close in-place edit file %s: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83354 in perldiag.pod
+
+    False [] range "%s" in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83501 in perldiag.pod
+
+    Fatal VMS error (status=%d) at %s, line %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83977 in perldiag.pod
+
+    fcntl is not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84295 in perldiag.pod
+
+    FETCHSIZE returned a negative value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84421 in perldiag.pod
+
+    Field too wide in 'u' format in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84552 in perldiag.pod
+
+    Filehandle %s opened only for input in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84834 in perldiag.pod
+
+    Filehandle %s opened only for output in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85144 in perldiag.pod
+
+    Filehandle %s reopened as %s only for input in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85590 in perldiag.pod
+
+    Filehandle STDIN reopened as %s only for output in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85801 in perldiag.pod
+
+    Final $ should be \$ or $name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85994 in perldiag.pod
+
+    flock() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86251 in perldiag.pod
+
+    Format not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86515 in perldiag.pod
+
+    Format %s redefined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86671 in perldiag.pod
+
+    Found = in conditional, should be == in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86831 in perldiag.pod
+
+    %s found where operator expected in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86982 in perldiag.pod
+
+    gdbm store returned %d, errno %d, key "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87289 in perldiag.pod
+
+    gethostent not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87404 in perldiag.pod
+
+    get%sname() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87599 in perldiag.pod
+
+    getpwnam returned invalid UIC %#o for user "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87781 in perldiag.pod
+
+    getsockopt() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87956 in perldiag.pod
+
+    given is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88155 in perldiag.pod
+
+    Global symbol "%s" requires explicit package name (did you forget to declare "my %s"?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88424 in perldiag.pod
+
+    glob failed (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88783 in perldiag.pod
+
+    Glob not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89533 in perldiag.pod
+
+    gmtime(%f) failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89828 in perldiag.pod
+
+    gmtime(%f) too large in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89991 in perldiag.pod
+
+    gmtime(%f) too small in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90235 in perldiag.pod
+
+    Got an error from DosAllocMem in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90405 in perldiag.pod
+
+    goto must have label in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90566 in perldiag.pod
+
+    Goto undefined subroutine%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90707 in perldiag.pod
+
+    Group name must start with a non-digit word character in regex; marked by  <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90897 in perldiag.pod
+
+    ()-group starts with a count in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91196 in perldiag.pod
+
+    %s had compilation errors. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91371 in perldiag.pod
+
+    Had to create %s unexpectedly in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91461 in perldiag.pod
+
+    %s has too many errors in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91696 in perldiag.pod
+
+    Having more than one /%c regexp modifier is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91854 in perldiag.pod
+
+    Hexadecimal float: exponent overflow in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92149 in perldiag.pod
+
+    Hexadecimal float: exponent underflow in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92294 in perldiag.pod
+
+    Hexadecimal float: internal error (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92441 in perldiag.pod
+
+    Hexadecimal float: mantissa overflow in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92551 in perldiag.pod
+
+    Hexadecimal float: precision loss in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92802 in perldiag.pod
+
+    Hexadecimal float: unsupported long double format in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93094 in perldiag.pod
+
+    Hexadecimal number > 0xffffffff non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93312 in perldiag.pod
+
+    Identifier too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93546 in perldiag.pod
+
+    Ignoring zero length \N{} in character class in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93847 in perldiag.pod
+
+    Illegal binary digit %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94208 in perldiag.pod
+
+    Illegal binary digit %s ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94299 in perldiag.pod
+
+    Illegal character after '_' in prototype for %s : %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94494 in perldiag.pod
+
+    Illegal character \%o (carriage return) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94812 in perldiag.pod
+
+    Illegal character in prototype for %s : %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95166 in perldiag.pod
+
+    Illegal declaration of anonymous subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95548 in perldiag.pod
+
+    Illegal declaration of subroutine %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95730 in perldiag.pod
+
+    Illegal division by zero in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95837 in perldiag.pod
+
+    Illegal hexadecimal digit %s ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96024 in perldiag.pod
+
+    Illegal modulus zero in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96255 in perldiag.pod
+
+    Illegal number of bits in vec in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96385 in perldiag.pod
+
+    Illegal octal digit %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96553 in perldiag.pod
+
+    Illegal octal digit %s ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96627 in perldiag.pod
+
+    Illegal pattern in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96794 in perldiag.pod
+
+    Illegal suidscript in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97049 in perldiag.pod
+
+    Illegal switch in PERL5OPT: -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97131 in perldiag.pod
+
+    Illegal user-defined property name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97274 in perldiag.pod
+
+    Ill-formed CRTL environ value "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97689 in perldiag.pod
+
+    Ill-formed message in prime_env_iter: |%s| in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97941 in perldiag.pod
+
+    (in cleanup) %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98215 in perldiag.pod
+
+    Incomplete expression within '(?[ ])' in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98710 in perldiag.pod
+
+    Inconsistent hierarchy during C3 merge of class '%s': merging failed on  parent '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99081 in perldiag.pod
+
+    Infinite recursion in regex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99359 in perldiag.pod
+
+    Initialization of state variables in list context currently forbidden in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99568 in perldiag.pod
+
+    %%s[%s] in scalar context better written as $%s[%s] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99938 in perldiag.pod
+
+    %%s{%s} in scalar context better written as $%s{%s} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100555 in perldiag.pod
+
+    Insecure dependency in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101145 in perldiag.pod
+
+    Insecure directory in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101629 in perldiag.pod
+
+    Insecure $ENV{%s} while running %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101885 in perldiag.pod
+
+    Insecure user-defined property %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102273 in perldiag.pod
+
+    Integer overflow in format string for %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102562 in perldiag.pod
+
+    Integer overflow in %s number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102790 in perldiag.pod
+
+    Integer overflow in srand in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103386 in perldiag.pod
+
+    Integer overflow in version in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103799 in perldiag.pod
+
+    Integer overflow in version %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103834 in perldiag.pod
+
+    Internal disaster in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104215 in perldiag.pod
+
+    Internal inconsistency in tracking vforks in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104435 in perldiag.pod
+
+    internal %<num>p might conflict with future printf extensions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104892 in perldiag.pod
+
+    Internal urp in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105326 in perldiag.pod
+
+    %s (...) interpreted as function in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105541 in perldiag.pod
+
+    In '(?...)', the '(' and '?' must be adjacent in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105822 in perldiag.pod
+
+    Invalid %s attribute: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106136 in perldiag.pod
+
+    Invalid %s attributes: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106304 in perldiag.pod
+
+    Invalid character in charnames alias definition; marked by <-- HERE in '%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106475 in perldiag.pod
+
+    Invalid \0 character in %s for %s: %s\0%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106765 in perldiag.pod
+
+    Invalid character in \N{...}; marked by <-- HERE in \N{%s} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106988 in perldiag.pod
+
+    Invalid conversion in %s: "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107177 in perldiag.pod
+
+    Invalid escape in the specified encoding in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107307 in perldiag.pod
+
+    Invalid hexadecimal number in \N{U+...} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107795 in perldiag.pod
+
+    Invalid hexadecimal number in \N{U+...} in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107842 in perldiag.pod
+
+    Invalid module name %s with -%c option: contains single ':' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108126 in perldiag.pod
+
+    Invalid mro name: '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108423 in perldiag.pod
+
+    Invalid negative number (%s) in chr in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108736 in perldiag.pod
+
+    Invalid number '%s' for -C option. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108938 in perldiag.pod
+
+    invalid option -D%c, use -D'' to see choices in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109114 in perldiag.pod
+
+    Invalid quantifier in {,} in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109342 in perldiag.pod
+
+    Invalid [] range "%s" in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109704 in perldiag.pod
+
+    Invalid range "%s" in transliteration operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110114 in perldiag.pod
+
+    Invalid separator character %s in attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110299 in perldiag.pod
+
+    Invalid separator character %s in PerlIO layer specification %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110580 in perldiag.pod
+
+    Invalid strict version format (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110903 in perldiag.pod
+
+    Invalid type '%s' in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111351 in perldiag.pod
+
+    Invalid version format (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111558 in perldiag.pod
+
+    Invalid version object in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112230 in perldiag.pod
+
+    In '(*VERB...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112444 in perldiag.pod
+
+    ioctl is not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112746 in perldiag.pod
+
+    ioctl() on unopened %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112889 in perldiag.pod
+
+    IO layers (like '%s') unavailable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113039 in perldiag.pod
+
+    IO::Socket::atmark not implemented on this architecture in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113234 in perldiag.pod
+
+    '%s' is an unknown bound type in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113422 in perldiag.pod
+
+    %s() is deprecated on :utf8 handles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113652 in perldiag.pod
+
+    "%s" is more clearly written simply as "%s" in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114656 in perldiag.pod
+
+    $* is no longer supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114969 in perldiag.pod
+
+    $# is no longer supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115542 in perldiag.pod
+
+    '%s' is not a code reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115766 in perldiag.pod
+
+    '%s' is not an overloadable type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115974 in perldiag.pod
+
+    -i used with no filenames on the command line, reading from STDIN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116102 in perldiag.pod
+
+    Junk on end of regexp in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116639 in perldiag.pod
+
+    Label not found for "last %s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116731 in perldiag.pod
+
+    Label not found for "next %s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116929 in perldiag.pod
+
+    Label not found for "redo %s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117123 in perldiag.pod
+
+    leaving effective %s failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117316 in perldiag.pod
+
+    length/code after end of string in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117450 in perldiag.pod
+
+    length() used on %s (did you mean "scalar(%s)"?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117700 in perldiag.pod
+
+    Lexing code attempted to stuff non-Latin-1 character into Latin-1 input in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118003 in perldiag.pod
+
+    Lexing code internal error (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118454 in perldiag.pod
+
+    listen() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118581 in perldiag.pod
+
+    List form of piped open not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118764 in perldiag.pod
+
+    %s: loadable library and perl binaries are mismatched (got handshake key %p, needed %p) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119029 in perldiag.pod
+
+    Locale '%s' may not work well.%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119356 in perldiag.pod
+
+    localtime(%f) failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120820 in perldiag.pod
+
+    localtime(%f) too large in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120989 in perldiag.pod
+
+    localtime(%f) too small in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121242 in perldiag.pod
+
+    Lookbehind longer than %d not implemented in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121421 in perldiag.pod
+
+    Lost precision when %s %f by 1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121623 in perldiag.pod
+
+    lstat() on filehandle%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122103 in perldiag.pod
+
+    lvalue attribute %s already-defined subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122301 in perldiag.pod
+
+    lvalue attribute ignored after the subroutine has been defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122729 in perldiag.pod
+
+    Magical list constants are not supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123135 in perldiag.pod
+
+    Malformed integer in [] in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123394 in perldiag.pod
+
+    Malformed integer in [] in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123542 in perldiag.pod
+
+    Malformed PERLLIB_PREFIX in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123692 in perldiag.pod
+
+    Malformed prototype for %s: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124072 in perldiag.pod
+
+    Malformed UTF-8 character (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124547 in perldiag.pod
+
+    Malformed UTF-8 character immediately after '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125181 in perldiag.pod
+
+    Malformed UTF-8 returned by \N{%s} immediately after '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125527 in perldiag.pod
+
+    Malformed UTF-8 string in '%c' format in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125645 in perldiag.pod
+
+    Malformed UTF-8 string in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125836 in perldiag.pod
+
+    Malformed UTF-8 string in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126008 in perldiag.pod
+
+    Malformed UTF-16 surrogate in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126184 in perldiag.pod
+
+    Mandatory parameter follows optional parameter in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126340 in perldiag.pod
+
+    Matched non-Unicode code point 0x%X against Unicode property; may not be portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126822 in perldiag.pod
+
+    %s matches null string many times in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128491 in perldiag.pod
+
+    Maximal count of pending signals (%u) exceeded in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128813 in perldiag.pod
+
+    "%s" may clash with future reserved word in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129206 in perldiag.pod
+
+    '%' may not be used in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129406 in perldiag.pod
+
+    Method for operation %s not found in package %s during blessing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129603 in perldiag.pod
+
+    Method %s not permitted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129805 in perldiag.pod
+
+    Might be a runaway multi-line %s string starting on line %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129855 in perldiag.pod
+
+    Misplaced _ in number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130099 in perldiag.pod
+
+    Missing argument in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130216 in perldiag.pod
+
+    Missing argument to -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130620 in perldiag.pod
+
+    Missing braces on \N{} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130776 in perldiag.pod
+
+    Missing braces on \N{} in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130806 in perldiag.pod
+
+    Missing braces on \o{} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131183 in perldiag.pod
+
+    Missing comma after first argument to %s function in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131292 in perldiag.pod
+
+    Missing command in piped open in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131486 in perldiag.pod
+
+    Missing control char name in \c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131651 in perldiag.pod
+
+    Missing ']' in prototype for %s : %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131780 in perldiag.pod
+
+    Missing name in "%s sub" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131903 in perldiag.pod
+
+    Missing $ on loop variable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132045 in perldiag.pod
+
+    (Missing operator before %s?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132258 in perldiag.pod
+
+    Missing or undefined argument to require in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132446 in perldiag.pod
+
+    Missing right brace on \%c{} in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132690 in perldiag.pod
+
+    Missing right brace on \N{} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132846 in perldiag.pod
+
+    Missing right brace on \N{} or unescaped left brace after \N in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 132881 in perldiag.pod
+
+    Missing right curly or square bracket in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134232 in perldiag.pod
+
+    (Missing semicolon on previous line?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134440 in perldiag.pod
+
+    Modification of a read-only value attempted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134689 in perldiag.pod
+
+    Modification of non-creatable array value attempted, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135291 in perldiag.pod
+
+    Modification of non-creatable hash value attempted, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135503 in perldiag.pod
+
+    Module name must be constant in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135677 in perldiag.pod
+
+    Module name required with -%c option in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135787 in perldiag.pod
+
+    More than one argument to '%s' open in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136002 in perldiag.pod
+
+    mprotect for COW string %p %u failed with %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136288 in perldiag.pod
+
+    mprotect for %p %u failed with %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136488 in perldiag.pod
+
+    mprotect RW for COW string %p %u failed with %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136653 in perldiag.pod
+
+    mprotect RW for %p %u failed with %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136864 in perldiag.pod
+
+    msg%s not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137062 in perldiag.pod
+
+    Multidimensional syntax %s not supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137148 in perldiag.pod
+
+    '/' must follow a numeric type in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137316 in perldiag.pod
+
+    %s must not be a named sequence in transliteration operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137517 in perldiag.pod
+
+    "my sub" not yet implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137796 in perldiag.pod
+
+    "my" subroutine %s can't be in a package in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137912 in perldiag.pod
+
+    "my %s" used in sort comparison in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138101 in perldiag.pod
+
+    "my" variable %s can't be in a package in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138474 in perldiag.pod
+
+    Name "%s::%s" used only once: possible typo in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138716 in perldiag.pod
+
+    Need exactly 3 octal digits in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 139520 in perldiag.pod
+
+    Negative '/' count in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140259 in perldiag.pod
+
+    Negative length in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140399 in perldiag.pod
+
+    Negative offset to vec in lvalue context in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140549 in perldiag.pod
+
+    Negative repeat count does nothing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140705 in perldiag.pod
+
+    Nested quantifiers in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140891 in perldiag.pod
+
+    %s never introduced in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 141290 in perldiag.pod
+
+    next::method/next::can/maybe::next::method cannot find enclosing method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 141438 in perldiag.pod
+
+    \N in a character class must be a named character: \N{...} in regex;  marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 141662 in perldiag.pod
+
+    \N{} in inverted character class or as a range end-point is restricted to one character in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 142016 in perldiag.pod
+
+    \N{NAME} must be resolved by the lexer in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 142914 in perldiag.pod
+
+    No %s allowed while running setuid in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 143874 in perldiag.pod
+
+    NO-BREAK SPACE in a charnames alias definition is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 144158 in perldiag.pod
+
+    No code specified for -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 144543 in perldiag.pod
+
+    No comma allowed after %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 144819 in perldiag.pod
+
+    No command into which to pipe on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 145764 in perldiag.pod
+
+    No DB::DB routine defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146016 in perldiag.pod
+
+    No dbm on this machine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146277 in perldiag.pod
+
+    No DB::sub routine defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146449 in perldiag.pod
+
+    No directory specified for -I in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146737 in perldiag.pod
+
+    No error file after 2> or 2>> on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146920 in perldiag.pod
+
+    No group ending character '%c' found in template in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147181 in perldiag.pod
+
+    No input file after < on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147351 in perldiag.pod
+
+    No next::method '%s' found for %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147583 in perldiag.pod
+
+    Non-finite repeat count does nothing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 147846 in perldiag.pod
+
+    Non-hex character in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148051 in perldiag.pod
+
+    Non-octal character in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148259 in perldiag.pod
+
+    Non-octal character '%c'.  Resolved as "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148449 in perldiag.pod
+
+    "no" not allowed in expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148646 in perldiag.pod
+
+    Non-string passed as bitmask in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148796 in perldiag.pod
+
+    No output file after > on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149004 in perldiag.pod
+
+    No output file after > or >> on command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149238 in perldiag.pod
+
+    No package name allowed for variable %s in "our" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149496 in perldiag.pod
+
+    No Perl script found in input in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149734 in perldiag.pod
+
+    No setregid available in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149883 in perldiag.pod
+
+    No setreuid available in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149996 in perldiag.pod
+
+    No such class %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 150109 in perldiag.pod
+
+    No such class field "%s" in variable %s of type %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 150270 in perldiag.pod
+
+    No such hook: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 150558 in perldiag.pod
+
+    No such pipe open in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 150722 in perldiag.pod
+
+    No such signal: SIG%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 150945 in perldiag.pod
+
+    Not a CODE reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 151138 in perldiag.pod
+
+    Not a GLOB reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 151399 in perldiag.pod
+
+    Not a HASH reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 151687 in perldiag.pod
+
+    Not an ARRAY reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 151919 in perldiag.pod
+
+    Not an unblessed ARRAY reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 152155 in perldiag.pod
+
+    Not a SCALAR reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 152378 in perldiag.pod
+
+    Not a subroutine reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 152614 in perldiag.pod
+
+    Not a subroutine reference in overload table in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 152881 in perldiag.pod
+
+    Not enough arguments for %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153070 in perldiag.pod
+
+    Not enough format arguments in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153167 in perldiag.pod
+
+    %s: not found in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153300 in perldiag.pod
+
+    (?[...]) not valid in locale in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153473 in perldiag.pod
+
+    no UTC offset information; assuming local time is UTC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153793 in perldiag.pod
+
+    NULL OP IN RUN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154154 in perldiag.pod
+
+    Null picture in formline in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154254 in perldiag.pod
+
+    Null realloc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154474 in perldiag.pod
+
+    NULL regexp argument in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154536 in perldiag.pod
+
+    NULL regexp parameter in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154626 in perldiag.pod
+
+    Number too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154723 in perldiag.pod
+
+    Number with no digits in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155029 in perldiag.pod
+
+    Octal number > 037777777777 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155214 in perldiag.pod
+
+    Odd name/value argument for subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155438 in perldiag.pod
+
+    Odd number of arguments for overload::constant in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155845 in perldiag.pod
+
+    Odd number of elements in anonymous hash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 156019 in perldiag.pod
+
+    Odd number of elements in hash assignment in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 156193 in perldiag.pod
+
+    Offset outside string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 156368 in perldiag.pod
+
+    %s() on unopened %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 156816 in perldiag.pod
+
+    -%s on unopened filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157043 in perldiag.pod
+
+    oops: oopsAV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157220 in perldiag.pod
+
+    oops: oopsHV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157306 in perldiag.pod
+
+    Opening dirhandle %s also as a file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157392 in perldiag.pod
+
+    Opening filehandle %s also as a directory in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157637 in perldiag.pod
+
+    Operand with no preceding operator in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157891 in perldiag.pod
+
+    Operation "%s": no method found, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 158110 in perldiag.pod
+
+    Operation "%s" returns its argument for non-Unicode code point 0x%X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 158446 in perldiag.pod
+
+    Operation "%s" returns its argument for UTF-16 surrogate U+%X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 158945 in perldiag.pod
+
+    Operator or semicolon missing before %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 159578 in perldiag.pod
+
+    Optional parameter lacks default expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 159918 in perldiag.pod
+
+    "our" variable %s redeclared in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 160242 in perldiag.pod
+
+    Out of memory! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 160380 in perldiag.pod
+
+    Out of memory during %s extend in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 160881 in perldiag.pod
+
+    Out of memory during "large" request for %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 161031 in perldiag.pod
+
+    Out of memory during request for %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 161358 in perldiag.pod
+
+    Out of memory during ridiculously large request in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 161932 in perldiag.pod
+
+    Out of memory for yacc stack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 162166 in perldiag.pod
+
+    '.' outside of string in pack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 162344 in perldiag.pod
+
+    '@' outside of string in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 162514 in perldiag.pod
+
+    '@' outside of string with malformed UTF-8 in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 162671 in perldiag.pod
+
+    overload arg '%s' is invalid in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 162900 in perldiag.pod
+
+    Overloaded dereference did not return a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 163048 in perldiag.pod
+
+    Overloaded qr did not return a REGEXP in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 163253 in perldiag.pod
+
+    %s package attribute may clash with future reserved word: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 163444 in perldiag.pod
+
+    pack/unpack repeat count overflow in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 163766 in perldiag.pod
+
+    page overflow in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 163917 in perldiag.pod
+
+    panic: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164033 in perldiag.pod
+
+    panic: attempt to call %s in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164074 in perldiag.pod
+
+    panic: child pseudo-process was never scheduled in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164351 in perldiag.pod
+
+    panic: ck_grep, type=%u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164576 in perldiag.pod
+
+    panic: ck_split, type=%u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164675 in perldiag.pod
+
+    panic: corrupt saved stack index %ld in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164776 in perldiag.pod
+
+    panic: del_backref in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164919 in perldiag.pod
+
+    panic: do_subst in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165027 in perldiag.pod
+
+    panic: do_trans_%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165129 in perldiag.pod
+
+    panic: fold_constants JMPENV_PUSH returned %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165234 in perldiag.pod
+
+    panic: frexp: %f in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165382 in perldiag.pod
+
+    panic: goto, type=%u, ix=%ld in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165480 in perldiag.pod
+
+    panic: gp_free failed to free glob pointer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165657 in perldiag.pod
+
+    panic: INTERPCASEMOD, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165969 in perldiag.pod
+
+    panic: INTERPCONCAT, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166057 in perldiag.pod
+
+    panic: kid popen errno read in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166156 in perldiag.pod
+
+    panic: last, type=%u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166265 in perldiag.pod
+
+    panic: leave_scope clearsv in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166393 in perldiag.pod
+
+    panic: leave_scope inconsistency %u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166503 in perldiag.pod
+
+    panic: magic_killbackrefs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166646 in perldiag.pod
+
+    panic: malloc, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166777 in perldiag.pod
+
+    panic: memory wrap in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166865 in perldiag.pod
+
+    panic: pad_alloc, %p!=%p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 166979 in perldiag.pod
+
+    panic: pad_free curpad, %p!=%p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167127 in perldiag.pod
+
+    panic: pad_free po in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167281 in perldiag.pod
+
+    panic: pad_reset curpad, %p!=%p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167444 in perldiag.pod
+
+    panic: pad_sv po in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167599 in perldiag.pod
+
+    panic: pad_swipe curpad, %p!=%p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167780 in perldiag.pod
+
+    panic: pad_swipe po in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 167935 in perldiag.pod
+
+    panic: pp_iter, type=%u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168022 in perldiag.pod
+
+    panic: pp_match%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168119 in perldiag.pod
+
+    panic: pp_split, pm=%p, s=%p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168223 in perldiag.pod
+
+    panic: realloc, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168323 in perldiag.pod
+
+    panic: reference miscount on nsv in sv_replace() (%d != 1) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168413 in perldiag.pod
+
+    panic: restartop in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168576 in perldiag.pod
+
+    panic: return, type=%u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168709 in perldiag.pod
+
+    panic: scan_num, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168865 in perldiag.pod
+
+    panic: Sequence (?{...}): no code block found in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 168954 in perldiag.pod
+
+    panic: strxfrm() gets absurd - a => %u, ab => %u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 169237 in perldiag.pod
+
+    panic: sv_chop %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 169497 in perldiag.pod
+
+    panic: sv_insert, midend=%p, bigend=%p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 169618 in perldiag.pod
+
+    panic: top_env in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 169747 in perldiag.pod
+
+    panic: unimplemented op %s (#%d) called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 169841 in perldiag.pod
+
+    panic: utf16_to_utf8: odd bytelen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 169981 in perldiag.pod
+
+    panic: utf16_to_utf8_reversed: odd bytelen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170111 in perldiag.pod
+
+    panic: yylex, %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170259 in perldiag.pod
+
+    Parentheses missing around "%s" list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170353 in perldiag.pod
+
+    Parsing code internal error (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170579 in perldiag.pod
+
+    Passing malformed UTF-8 to "%s" is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170709 in perldiag.pod
+
+    Pattern subroutine nesting without pos change exceeded limit in regex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 171287 in perldiag.pod
+
+    -p destination: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 171542 in perldiag.pod
+
+    Perl API version %s of %s does not match %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 171736 in perldiag.pod
+
+    Perl folding rules are not up-to-date for 0x%X; please use the perlbug utility to report; in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 171924 in perldiag.pod
+
+    PerlIO layer ':win32' is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172331 in perldiag.pod
+
+    Perl_my_%s() not available in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172579 in perldiag.pod
+
+    Perl %s required (did you mean %s?)--this is only %s, stopped in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 172882 in perldiag.pod
+
+    Perl %s required--this is only %s, stopped in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173313 in perldiag.pod
+
+    PERL_SH_DIR too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173550 in perldiag.pod
+
+    PERL_SIGNALS illegal: "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173702 in perldiag.pod
+
+    Perls since %s too modern--this is %s, stopped in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173787 in perldiag.pod
+
+    perl: warning: Non hex character in '$ENV{PERL_HASH_SEED}', seed only partially set in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 174070 in perldiag.pod
+
+    perl: warning: Setting locale failed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 174331 in perldiag.pod
+
+    perl: warning: strange setting in '$ENV{PERL_PERTURB_KEYS}': '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 175349 in perldiag.pod
+
+    pid %x not a child in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176066 in perldiag.pod
+
+    'P' must have an explicit size in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176301 in perldiag.pod
+
+    POSIX class [:%s:] unknown in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176411 in perldiag.pod
+
+    POSIX getpgrp can't take an argument in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176814 in perldiag.pod
+
+    POSIX syntax [%c %c] belongs inside character classes%s in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176964 in perldiag.pod
+
+    POSIX syntax [. .] is reserved for future extensions in regex; marked by  <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 177993 in perldiag.pod
+
+    POSIX syntax [= =] is reserved for future extensions in regex; marked by  <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 178506 in perldiag.pod
+
+    Possible attempt to put comments in qw() list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179019 in perldiag.pod
+
+    Possible attempt to separate words with commas in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179698 in perldiag.pod
+
+    Possible memory corruption: %s overflowed 3rd argument in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 180179 in perldiag.pod
+
+    Possible precedence issue with control flow operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 180521 in perldiag.pod
+
+    Possible precedence problem on bitwise %s operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 181017 in perldiag.pod
+
+    Possible unintended interpolation of $\ in regex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 181499 in perldiag.pod
+
+    Possible unintended interpolation of %s in string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 182109 in perldiag.pod
+
+    Precedence problem: open %s should be open(%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 182422 in perldiag.pod
+
+    Premature end of script headers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 182813 in perldiag.pod
+
+    printf() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 182871 in perldiag.pod
+
+    print() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 183021 in perldiag.pod
+
+    Process terminated by SIG%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 183171 in perldiag.pod
+
+    Prototype after '%c' for %s : %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 183500 in perldiag.pod
+
+    Prototype mismatch: %s vs %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 183678 in perldiag.pod
+
+    Prototype not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 183847 in perldiag.pod
+
+    Prototype '%s' overridden by attribute 'prototype(%s)' in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 183959 in perldiag.pod
+
+    Quantifier follows nothing in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 184270 in perldiag.pod
+
+    Quantifier in {,} bigger than %d in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 184548 in perldiag.pod
+
+    Quantifier {n,m} with n > m can't match in regex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 184832 in perldiag.pod
+
+    Quantifier {n,m} with n > m can't match in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 184888 in perldiag.pod
+
+    Quantifier unexpected on zero-length expression in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185109 in perldiag.pod
+
+    Range iterator outside integer range in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185511 in perldiag.pod
+
+    Ranges of ASCII printables should be some subset of "0-9", "A-Z", or "a-z" in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185805 in perldiag.pod
+
+    Ranges of digits should be from the same group in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 187177 in perldiag.pod
+
+    readdir() attempted on invalid dirhandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 187595 in perldiag.pod
+
+    readline() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 187758 in perldiag.pod
+
+    read() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 187912 in perldiag.pod
+
+    read() on unopened filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 188006 in perldiag.pod
+
+    Reallocation too large: %x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 188119 in perldiag.pod
+
+    realloc() of freed memory ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 188213 in perldiag.pod
+
+    Recompile perl with -DDEBUGGING to use -D switch in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 188345 in perldiag.pod
+
+    Recursive call to Perl_load_module in PerlIO_find_layer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 188602 in perldiag.pod
+
+    Recursive inheritance detected in package '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 188902 in perldiag.pod
+
+    Redundant argument in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 189166 in perldiag.pod
+
+    refcnt_dec: fd %d%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 189470 in perldiag.pod
+
+    refcnt: fd %d%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 189497 in perldiag.pod
+
+    refcnt_inc: fd %d%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 189520 in perldiag.pod
+
+    Reference found where even-sized list expected in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 189667 in perldiag.pod
+
+    Reference is already weak in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 190172 in perldiag.pod
+
+    Reference to invalid group 0 in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 190302 in perldiag.pod
+
+    Reference to nonexistent group in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 190629 in perldiag.pod
+
+    Reference to nonexistent named group in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 191085 in perldiag.pod
+
+    Reference to nonexistent or unclosed group in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 191546 in perldiag.pod
+
+    regexp memory corruption in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 191921 in perldiag.pod
+
+    Regexp modifier "/%c" may appear a maximum of twice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192050 in perldiag.pod
+
+    Regexp modifier "%c" may appear a maximum of twice in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192109 in perldiag.pod
+
+    Regexp modifier "%c" may not appear after the "-" in regex; marked by <--  HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192325 in perldiag.pod
+
+    Regexp modifier "/%c" may not appear twice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192685 in perldiag.pod
+
+    Regexp modifier "%c" may not appear twice in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192735 in perldiag.pod
+
+    Regexp modifiers "/%c" and "/%c" are mutually exclusive in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192939 in perldiag.pod
+
+    Regexp modifiers "%c" and "%c" are mutually exclusive in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193002 in perldiag.pod
+
+    Regexp out of space in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193253 in perldiag.pod
+
+    Repeated format line will never terminate (~~ and @#) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193376 in perldiag.pod
+
+    Replacement list is longer than search list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193629 in perldiag.pod
+
+    '%s' resolved to '\o{%s}%d' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193829 in perldiag.pod
+
+    Reversed %s= operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 194236 in perldiag.pod
+
+    rewinddir() attempted on invalid dirhandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 194405 in perldiag.pod
+
+    Scalars leaked: %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 194583 in perldiag.pod
+
+    Scalar value @%s[%s] better written as $%s[%s] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 194888 in perldiag.pod
+
+    Scalar value @%s{%s} better written as $%s{%s} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 195629 in perldiag.pod
+
+    Search pattern not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 196365 in perldiag.pod
+
+    seekdir() attempted on invalid dirhandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 196873 in perldiag.pod
+
+    %sseek() on unopened filehandle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197045 in perldiag.pod
+
+    select not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197219 in perldiag.pod
+
+    Self-ties of arrays and hashes are not supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197311 in perldiag.pod
+
+    Semicolon seems to be missing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197456 in perldiag.pod
+
+    semi-panic: attempt to dup freed string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197632 in perldiag.pod
+
+    sem%s not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197798 in perldiag.pod
+
+    send() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197886 in perldiag.pod
+
+    Sequence "\c{" invalid in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198026 in perldiag.pod
+
+    Sequence (? incomplete in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198369 in perldiag.pod
+
+    Sequence (?%c...) not implemented in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198610 in perldiag.pod
+
+    Sequence (?%s...) not recognized in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198899 in perldiag.pod
+
+    Sequence (?#... not terminated in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 199335 in perldiag.pod
+
+    Sequence (?&... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 199521 in perldiag.pod
+
+    Sequence (?%c... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 199793 in perldiag.pod
+
+    Sequence (?(%c... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200078 in perldiag.pod
+
+    Sequence (?... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200393 in perldiag.pod
+
+    Sequence \%s... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200620 in perldiag.pod
+
+    Sequence (?{...}) not terminated with ')' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200836 in perldiag.pod
+
+    Sequence (?P>... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200981 in perldiag.pod
+
+    Sequence (?P<... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 201263 in perldiag.pod
+
+    Sequence ?P=... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 201534 in perldiag.pod
+
+    Sequence (?R) not terminated in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 201807 in perldiag.pod
+
+    Server error (a.k.a. "500 Server error") in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 201953 in perldiag.pod
+
+    setegid() not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 202977 in perldiag.pod
+
+    seteuid() not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203169 in perldiag.pod
+
+    setpgrp can't take arguments in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203365 in perldiag.pod
+
+    setrgid() not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203547 in perldiag.pod
+
+    setruid() not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203739 in perldiag.pod
+
+    setsockopt() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203931 in perldiag.pod
+
+    Setting ${^ENCODING} is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204130 in perldiag.pod
+
+    Setting $/ to a reference to %s as a form of slurp is deprecated, treating as undef in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204306 in perldiag.pod
+
+    Setting $/ to %s reference is forbidden in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205089 in perldiag.pod
+
+    shm%s not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205483 in perldiag.pod
+
+    !=~ should be !~ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205575 in perldiag.pod
+
+    /%s/ should probably be written as "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 205774 in perldiag.pod
+
+    shutdown() on closed socket %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206068 in perldiag.pod
+
+    SIG%s handler "%s" not defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206191 in perldiag.pod
+
+    Slab leaked from cv %p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206342 in perldiag.pod
+
+    sleep(%u) too large in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206587 in perldiag.pod
+
+    Slurpy parameter not last in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206764 in perldiag.pod
+
+    Smart matching a non-overloaded object breaks encapsulation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 206999 in perldiag.pod
+
+    Smartmatch is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 207224 in perldiag.pod
+
+    sort is now a reserved word in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 207599 in perldiag.pod
+
+    Source filters apply only to byte streams in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 207780 in perldiag.pod
+
+    splice() offset past end of array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 208064 in perldiag.pod
+
+    Split loop in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 208408 in perldiag.pod
+
+    Statement unlikely to be reached in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 208600 in perldiag.pod
+
+    "state" subroutine %s can't be in a package in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 208936 in perldiag.pod
+
+    "state %s" used in sort comparison in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209128 in perldiag.pod
+
+    "state" variable %s can't be in a package in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209504 in perldiag.pod
+
+    stat() on unopened filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209749 in perldiag.pod
+
+    Strings with code points over 0xFF may not be mapped into in-memory file handles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209911 in perldiag.pod
+
+    Stub found while resolving method "%s" overloading "%s" in package "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 210185 in perldiag.pod
+
+    Subroutine "&%s" is not available in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 210431 in perldiag.pod
+
+    "%s" subroutine &%s masks earlier declaration in same %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 211545 in perldiag.pod
+
+    Subroutine %s redefined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 211940 in perldiag.pod
+
+    Subroutine "%s" will not stay shared in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 212108 in perldiag.pod
+
+    Substitution loop in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213069 in perldiag.pod
+
+    Substitution pattern not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213338 in perldiag.pod
+
+    Substitution replacement not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213589 in perldiag.pod
+
+    substr outside of string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213841 in perldiag.pod
+
+    sv_upgrade from type %d down to type %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 214210 in perldiag.pod
+
+    SWASHNEW didn't return an HV ref in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 214362 in perldiag.pod
+
+    Switch (?(condition)... contains too many branches in regex; marked by  <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 214491 in perldiag.pod
+
+    Switch condition not recognized in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 214988 in perldiag.pod
+
+    Switch (?(condition)... not terminated in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 215821 in perldiag.pod
+
+    switching effective %s is not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216058 in perldiag.pod
+
+    syntax error in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216206 in perldiag.pod
+
+    syntax error at line %d: '%s' unexpected in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217134 in perldiag.pod
+
+    syntax error in file %s at line %d, next 2 tokens "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217334 in perldiag.pod
+
+    Syntax error in (?[...]) in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217563 in perldiag.pod
+
+    %s syntax OK in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217726 in perldiag.pod
+
+    sysread() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217805 in perldiag.pod
+
+    sysread() on unopened filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217902 in perldiag.pod
+
+    System V %s is not implemented on this machine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218018 in perldiag.pod
+
+    syswrite() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218312 in perldiag.pod
+
+    -T and -B not implemented on filehandles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218464 in perldiag.pod
+
+    Target of goto is too deeply nested in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218661 in perldiag.pod
+
+    telldir() attempted on invalid dirhandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 218837 in perldiag.pod
+
+    tell() on unopened filehandle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219003 in perldiag.pod
+
+    That use of $[ is unsupported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219162 in perldiag.pod
+
+    The bitwise feature is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219548 in perldiag.pod
+
+    The crypt() function is unimplemented due to excessive paranoia. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220016 in perldiag.pod
+
+    The %s function is unimplemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220377 in perldiag.pod
+
+    The lexical_subs feature is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220525 in perldiag.pod
+
+    The regex_sets feature is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220977 in perldiag.pod
+
+    The signatures feature is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221424 in perldiag.pod
+
+    The stat preceding %s wasn't an lstat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221894 in perldiag.pod
+
+    The 'unique' attribute may only be applied to 'our' variables in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 222151 in perldiag.pod
+
+    This Perl can't reset CRTL environ elements (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 222293 in perldiag.pod
+
+    This Perl can't set CRTL environ elements (%s=%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 222349 in perldiag.pod
+
+    This Perl has not been built with support for randomized hash key traversal but something called Perl_hv_rand_set(). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 222804 in perldiag.pod
+
+    times not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 223230 in perldiag.pod
+
+    "-T" is on the #! line, it must also be used on the command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 223364 in perldiag.pod
+
+    To%s: illegal mapping '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 224162 in perldiag.pod
+
+    Too deeply nested ()-groups in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 224413 in perldiag.pod
+
+    Too few args to syscall in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 224526 in perldiag.pod
+
+    Too few arguments for subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 224662 in perldiag.pod
+
+    Too late for "-%s" option in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 224952 in perldiag.pod
+
+    Too late to run %s block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 225523 in perldiag.pod
+
+    Too many args to syscall in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 225852 in perldiag.pod
+
+    Too many arguments for %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 225943 in perldiag.pod
+
+    Too many arguments for subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 226039 in perldiag.pod
+
+    Too many )'s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 226329 in perldiag.pod
+
+    Too many ('s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 226490 in perldiag.pod
+
+    Trailing \ in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 226651 in perldiag.pod
+
+    Transliteration pattern not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 226781 in perldiag.pod
+
+    Transliteration replacement not terminated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227007 in perldiag.pod
+
+    '%s' trapped by operation mask in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227151 in perldiag.pod
+
+    truncate not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227287 in perldiag.pod
+
+    Type of arg %d to &CORE::%s must be %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227411 in perldiag.pod
+
+    Type of arg %d to %s must be %s (not %s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 227744 in perldiag.pod
+
+    umask not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228054 in perldiag.pod
+
+    Unbalanced context: %d more PUSHes than POPs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228214 in perldiag.pod
+
+    Unbalanced saves: %d more saves than restores in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228383 in perldiag.pod
+
+    Unbalanced scopes: %d more ENTERs than LEAVEs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228546 in perldiag.pod
+
+    Unbalanced string table refcount: (%d) for "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228704 in perldiag.pod
+
+    Unbalanced tmps: %d more allocs than frees in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228957 in perldiag.pod
+
+    Undefined format "%s" called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229123 in perldiag.pod
+
+    Undefined sort subroutine "%s" called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229267 in perldiag.pod
+
+    Undefined subroutine &%s called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229438 in perldiag.pod
+
+    Undefined subroutine called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229571 in perldiag.pod
+
+    Undefined subroutine in sort in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229722 in perldiag.pod
+
+    Undefined top format "%s" called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229879 in perldiag.pod
+
+    Undefined value assigned to typeglob in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 230027 in perldiag.pod
+
+    %s: Undefined variable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 230221 in perldiag.pod
+
+    Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 230392 in perldiag.pod
+
+    unexec of %s into %s failed! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 230898 in perldiag.pod
+
+    Unexpected binary operator '%c' with no preceding operand in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 231066 in perldiag.pod
+
+    Unexpected character in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 231324 in perldiag.pod
+
+    Unexpected constant lvalue entersub entry via type/targ %d:%d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 231683 in perldiag.pod
+
+    Unexpected exit %u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 231889 in perldiag.pod
+
+    Unexpected exit failure %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232034 in perldiag.pod
+
+    Unexpected ')' in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232154 in perldiag.pod
+
+    Unexpected '(' with no preceding operator in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232472 in perldiag.pod
+
+    Unicode non-character U+%X is not recommended for open interchange in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232800 in perldiag.pod
+
+    Unicode surrogate U+%X is illegal in UTF-8 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 233494 in perldiag.pod
+
+    Unknown charname '' is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234088 in perldiag.pod
+
+    Unknown charname '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234281 in perldiag.pod
+
+    Unknown error in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234751 in perldiag.pod
+
+    Unknown open() mode '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234902 in perldiag.pod
+
+    Unknown PerlIO layer "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 235123 in perldiag.pod
+
+    Unknown process %x sent message to prime_env_iter: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 235542 in perldiag.pod
+
+    Unknown regex modifier "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 235869 in perldiag.pod
+
+    Unknown "re" subpragma '%s' (known ones are: %s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 236429 in perldiag.pod
+
+    Unknown switch condition (?(...)) in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 236548 in perldiag.pod
+
+    Unknown Unicode option letter '%c' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 237383 in perldiag.pod
+
+    Unknown Unicode option value %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 237552 in perldiag.pod
+
+    Unknown verb pattern '%s' in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 237718 in perldiag.pod
+
+    Unknown warnings category '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 237975 in perldiag.pod
+
+    Unmatched [ in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238288 in perldiag.pod
+
+    Unmatched ( in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238602 in perldiag.pod
+
+    Unmatched ) in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238662 in perldiag.pod
+
+    Unmatched right %s bracket in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238988 in perldiag.pod
+
+    Unquoted string "%s" may clash with future reserved word in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 239257 in perldiag.pod
+
+    Unrecognized character %s; marked by <-- HERE after %s near column %d in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 239547 in perldiag.pod
+
+    Unrecognized escape \%c in character class in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 239857 in perldiag.pod
+
+    Unrecognized escape \%c in character class passed through in regex;  marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240128 in perldiag.pod
+
+    Unrecognized escape \%c passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240525 in perldiag.pod
+
+    Unrecognized escape \%s passed through in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240747 in perldiag.pod
+
+    Unrecognized signal name "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241104 in perldiag.pod
+
+    Unrecognized switch: -%s  (-h will show valid options) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241298 in perldiag.pod
+
+    Unsuccessful %s on filename containing newline in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241532 in perldiag.pod
+
+    Unsupported directory function "%s" called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241794 in perldiag.pod
+
+    Unsupported function %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241903 in perldiag.pod
+
+    Unsupported function fork in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242044 in perldiag.pod
+
+    Unsupported script encoding %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242346 in perldiag.pod
+
+    Unsupported socket function "%s" called in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242520 in perldiag.pod
+
+    Unterminated attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242675 in perldiag.pod
+
+    Unterminated attribute parameter in attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242952 in perldiag.pod
+
+    Unterminated compressed integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243283 in perldiag.pod
+
+    Unterminated delimiter for here document in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243478 in perldiag.pod
+
+    Unterminated \g... pattern in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243707 in perldiag.pod
+
+    Unterminated \g{...} pattern in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243782 in perldiag.pod
+
+    Unterminated <> operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244089 in perldiag.pod
+
+    Unterminated verb pattern argument in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244389 in perldiag.pod
+
+    Unterminated verb pattern in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244598 in perldiag.pod
+
+    untie attempted while %d inner references still exist in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244794 in perldiag.pod
+
+    Usage: POSIX::%s(%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244963 in perldiag.pod
+
+    Usage: Win32::%s(%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245095 in perldiag.pod
+
+    $[ used in %s (did you mean $] ?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245217 in perldiag.pod
+
+    Use "%s" instead of "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245473 in perldiag.pod
+
+    Useless assignment to a temporary in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245586 in perldiag.pod
+
+    Useless (?-%s) - don't use /%s modifier in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 245787 in perldiag.pod
+
+    Useless localization of %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 246206 in perldiag.pod
+
+    Useless (?%s) - use /%s modifier in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 246455 in perldiag.pod
+
+    Useless use of attribute "const" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 246863 in perldiag.pod
+
+    Useless use of /d modifier in transliteration operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 247133 in perldiag.pod
+
+    Useless use of \E in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 247355 in perldiag.pod
+
+    Useless use of greediness modifier '%c' in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 247477 in perldiag.pod
+
+    Useless use of %s in void context in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 247840 in perldiag.pod
+
+    Useless use of (?-p) in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249155 in perldiag.pod
+
+    Useless use of "re" pragma in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249313 in perldiag.pod
+
+    Useless use of sort in scalar context in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249419 in perldiag.pod
+
+    Useless use of %s with no values in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 249603 in perldiag.pod
+
+    "use" not allowed in expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 250064 in perldiag.pod
+
+    Use of assignment to $[ is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 250216 in perldiag.pod
+
+    Use of bare << to mean <<"" is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 250374 in perldiag.pod
+
+    Use of /c modifier is meaningless in s/// in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 250569 in perldiag.pod
+
+    Use of /c modifier is meaningless without /g in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 250737 in perldiag.pod
+
+    Use of code point 0x%s is deprecated; the permissible max is 0x%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 250965 in perldiag.pod
+
+    Use of comma-less variable list is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 251657 in perldiag.pod
+
+    Use of each() on hash after insertion without resetting hash iterator results in undefined behavior in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 251817 in perldiag.pod
+
+    Use of := for an empty attribute list is not allowed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 252092 in perldiag.pod
+
+    Use of %s for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 252519 in perldiag.pod
+
+    Use of freed value in iteration in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 252911 in perldiag.pod
+
+    Use of *glob{FILEHANDLE} is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253386 in perldiag.pod
+
+    Use of /g modifier is meaningless in split in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253554 in perldiag.pod
+
+    Use of "goto" to jump into a construct is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253768 in perldiag.pod
+
+    Use of inherited AUTOLOAD for non-method %s() is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253943 in perldiag.pod
+
+    Use of %s in printf format not supported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 255054 in perldiag.pod
+
+    Use of %s is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 255239 in perldiag.pod
+
+    Use of literal control characters in variable names is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 255444 in perldiag.pod
+
+    Use of literal non-graphic characters in variable names is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 255517 in perldiag.pod
+
+    Use of -l on filehandle%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 256250 in perldiag.pod
+
+    Use of %s on a handle without * is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 256490 in perldiag.pod
+
+    Use of reference "%s" as array index in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 257026 in perldiag.pod
+
+    Use of state $_ is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 257541 in perldiag.pod
+
+    Use of strings with code points over 0xFF as arguments to %s operator is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 257770 in perldiag.pod
+
+    Use of tainted arguments in %s is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 258136 in perldiag.pod
+
+    Use of uninitialized value%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 258441 in perldiag.pod
+
+    "use re 'strict'" is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 259244 in perldiag.pod
+
+    Use \x{...} for more than two hex characters in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 259601 in perldiag.pod
+
+    Using just the first character returned by \N{} in character class in  regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 259929 in perldiag.pod
+
+    Using /u for '%s' instead of /%s in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260553 in perldiag.pod
+
+    Using !~ with %s doesn't make sense in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261056 in perldiag.pod
+
+    UTF-16 surrogate U+%X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261348 in perldiag.pod
+
+    Value of %s can be "0"; test with defined() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261921 in perldiag.pod
+
+    Value of CLI symbol "%s" too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262338 in perldiag.pod
+
+    Variable "%s" is not available in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262605 in perldiag.pod
+
+    Variable "%s" is not imported%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 263664 in perldiag.pod
+
+    Variable length lookbehind not implemented in regex m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264012 in perldiag.pod
+
+    "%s" variable %s masks earlier declaration in same %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264970 in perldiag.pod
+
+    Variable syntax in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265366 in perldiag.pod
+
+    Variable "%s" will not stay shared in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265531 in perldiag.pod
+
+    vector argument not supported with alpha versions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 266339 in perldiag.pod
+
+    Verb pattern '%s' has a mandatory argument in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 266484 in perldiag.pod
+
+    Verb pattern '%s' may not have an argument in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 266696 in perldiag.pod
+
+    Version number must be a constant number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 266916 in perldiag.pod
+
+    Version string '%s' contains invalid data; ignoring: '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267121 in perldiag.pod
+
+    Warning: something's wrong in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267280 in perldiag.pod
+
+    Warning: unable to close filehandle %s properly in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267435 in perldiag.pod
+
+    Warning: unable to close filehandle properly: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267638 in perldiag.pod
+
+    Warning: unable to close filehandle %s properly: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267694 in perldiag.pod
+
+    Warning: Use of "%s" without parentheses is ambiguous in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268429 in perldiag.pod
+
+    when is experimental in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268921 in perldiag.pod
+
+    Wide character in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269272 in perldiag.pod
+
+    Wide character (U+%X) in %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269776 in perldiag.pod
+
+    Within []-length '%c' not allowed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 270463 in perldiag.pod
+
+    %s() with negative argument in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 270799 in perldiag.pod
+
+    write() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 270950 in perldiag.pod
+
+    %s "\x%X" does not map to Unicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 271099 in perldiag.pod
+
+    'X' outside of string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 271407 in perldiag.pod
+
+    'x' outside of string in unpack in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 271580 in perldiag.pod
+
+    YOU HAVEN'T DISABLED SET-ID SCRIPTS IN THE KERNEL YET! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 271750 in perldiag.pod
+
+    You need to quote "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 272035 in perldiag.pod
+
+    Your random numbers are not that random in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 272367 in perldiag.pod
+
+    Zero length \N{} in regex; marked by <-- HERE in m/%s/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 272573 in perldiag.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 273040 in perldiag.pod
+

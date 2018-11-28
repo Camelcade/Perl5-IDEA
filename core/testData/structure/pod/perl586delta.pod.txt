@@ -1,0 +1,52 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl586delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perl586delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 57 in perl586delta.pod
+
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 163 in perl586delta.pod
+
+  Core Enhancements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 239 in perl586delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 554 in perl586delta.pod
+
+    With the base pragma, an intermediate class with no fields used to messes up pri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 592 in perl586delta.pod
+
+    Cwd upgraded to version 3.01 (as part of the new PathTools distribution) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 737 in perl586delta.pod
+
+    Devel::PPPort upgraded to version 3.03 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 820 in perl586delta.pod
+
+    File::Spec upgraded to version 3.01 (as part of the new PathTools distribution) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 869 in perl586delta.pod
+
+    Encode upgraded to version 2.08 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 959 in perl586delta.pod
+
+    ExtUtils::MakeMaker remains at version 6.17, as later stable releases currently ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1001 in perl586delta.pod
+
+    I18N::LangTags upgraded to version 0.35 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1168 in perl586delta.pod
+
+    Math::BigInt upgraded to version 1.73 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1218 in perl586delta.pod
+
+    Math::BigRat upgraded to version 0.13 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1266 in perl586delta.pod
+
+    MIME::Base64 upgraded to version 3.05 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1314 in perl586delta.pod
+
+    POSIX::sigprocmask function can now retrieve the current signal mask without als... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1362 in perl586delta.pod
+
+    Time::HiRes upgraded to version 1.65 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1466 in perl586delta.pod
+
+  Utility Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1520 in perl586delta.pod
+
+  Performance Enhancements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1630 in perl586delta.pod
+
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1881 in perl586delta.pod
+
+  New or Changed Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3151 in perl586delta.pod
+
+  Changed Internals in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3339 in perl586delta.pod
+
+  New Tests in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3692 in perl586delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3777 in perl586delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4420 in perl586delta.pod
+

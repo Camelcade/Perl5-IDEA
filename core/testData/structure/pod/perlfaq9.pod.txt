@@ -1,0 +1,66 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfaq9.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq9.pod
+
+  VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51 in perlfaq9.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 85 in perlfaq9.pod
+
+    Should I use a web framework? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 229 in perlfaq9.pod
+
+    Which web framework should I use? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+
+      Catalyst in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1247 in perlfaq9.pod
+
+      Dancer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1483 in perlfaq9.pod
+
+      Mojolicious in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1687 in perlfaq9.pod
+
+      Web::Simple in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1796 in perlfaq9.pod
+
+    What is Plack and PSGI? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2280 in perlfaq9.pod
+
+    How do I remove HTML from a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2970 in perlfaq9.pod
+
+    How do I extract URLs? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3166 in perlfaq9.pod
+
+    How do I fetch an HTML file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3633 in perlfaq9.pod
+
+    How do I automate an HTML form submission? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4320 in perlfaq9.pod
+
+    How do I decode or create those %-encodings on the web? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5211 in perlfaq9.pod
+
+    How do I redirect to another page? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5999 in perlfaq9.pod
+
+    How do I put a password on my web pages? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6382 in perlfaq9.pod
+
+    How do I make sure users can't enter values into a form that causes my CGI script to do bad things? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6680 in perlfaq9.pod
+
+    How do I parse a mail header? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7629 in perlfaq9.pod
+
+    How do I check a valid mail address? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8316 in perlfaq9.pod
+
+    How do I decode a MIME/BASE64 string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9665 in perlfaq9.pod
+
+    How do I find the user's mail address? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10028 in perlfaq9.pod
+
+    How do I send email? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10628 in perlfaq9.pod
+
+      Email::Sender::Transport::Sendmail in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11435 in perlfaq9.pod
+
+      Email::Sender::Transport::SMTP in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11639 in perlfaq9.pod
+
+      Email::Sender::Transport::SMTP::TLS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11804 in perlfaq9.pod
+
+    How do I use MIME to make an attachment to a mail message? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12190 in perlfaq9.pod
+
+    How do I read email? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12537 in perlfaq9.pod
+
+    How do I find out my hostname, domainname, or IP address? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13111 in perlfaq9.pod
+
+    How do I fetch/put an (S)FTP file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14305 in perlfaq9.pod
+
+    How can I do RPC in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14441 in perlfaq9.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14544 in perlfaq9.pod
+

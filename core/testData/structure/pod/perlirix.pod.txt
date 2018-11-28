@@ -1,0 +1,22 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlirix.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlirix.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 238 in perlirix.pod
+
+    Building 32-bit Perl in Irix in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 391 in perlirix.pod
+
+    Building 64-bit Perl in Irix in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 617 in perlirix.pod
+
+    About Compiler Versions of Irix in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1218 in perlirix.pod
+
+    Linker Problems in Irix in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1662 in perlirix.pod
+
+    Malloc in Irix in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1883 in perlirix.pod
+
+    Building with threads in Irix in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2016 in perlirix.pod
+
+    Irix 5.3 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2746 in perlirix.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4273 in perlirix.pod
+

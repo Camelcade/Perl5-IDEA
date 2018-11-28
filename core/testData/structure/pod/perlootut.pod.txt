@@ -1,0 +1,100 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlootut.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perlootut.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 126 in perlootut.pod
+
+  DATE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 197 in perlootut.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 525 in perlootut.pod
+
+  OBJECT-ORIENTED FUNDAMENTALS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1541 in perlootut.pod
+
+    Object in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2258 in perlootut.pod
+
+    Class in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3254 in perlootut.pod
+
+      Blessing in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4321 in perlootut.pod
+
+      Constructor in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5134 in perlootut.pod
+
+    Methods in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5411 in perlootut.pod
+
+    Attributes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6596 in perlootut.pod
+
+    Polymorphism in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7906 in perlootut.pod
+
+    Inheritance in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8561 in perlootut.pod
+
+      Overriding methods and method resolution in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 9890 in perlootut.pod
+
+    Encapsulation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12084 in perlootut.pod
+
+    Composition in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13189 in perlootut.pod
+
+    Roles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13668 in perlootut.pod
+
+    When to Use OO in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14850 in perlootut.pod
+
+      The system being designed is large, or is likely to become large. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15128 in perlootut.pod
+
+      The data can be aggregated into obvious structures, especially if there's a larg... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15204 in perlootut.pod
+
+      The various types of data aggregate form a natural hierarchy that facilitates th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15330 in perlootut.pod
+
+      You have a piece of data on which many different operations are applied. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15459 in perlootut.pod
+
+      You need to perform the same general operations on related types of data, but wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15542 in perlootut.pod
+
+      It's likely you'll have to add new data types later. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15723 in perlootut.pod
+
+      The typical interactions between pieces of data are best represented by operator... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15786 in perlootut.pod
+
+      The implementation of individual components of the system is likely to change ov... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15879 in perlootut.pod
+
+      The system design is already object-oriented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15978 in perlootut.pod
+
+      Large numbers of other programmers will be using your code modules. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16034 in perlootut.pod
+
+  PERL OO SYSTEMS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16119 in perlootut.pod
+
+    Moose in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16663 in perlootut.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17477 in perlootut.pod
+
+        Moose provides a layer of declarative "sugar" for defining classes. That sugar i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17486 in perlootut.pod
+
+        Moose lets you define roles the same way you define classes:    package HasOnOfS... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18092 in perlootut.pod
+
+        In the example above, you can see that we passed isa => 'Bool' to has() when cre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18426 in perlootut.pod
+
+        Perl's built-in introspection features are fairly minimal. Moose builds on top o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18716 in perlootut.pod
+
+        Moose describes itself using its own introspection API. Besides being a cool tri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19043 in perlootut.pod
+
+        There is a rich ecosystem of Moose extensions on CPAN under the MooseX|http://se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19230 in perlootut.pod
+
+        Moose is a very powerful tool, and we can't cover all of its features here. We e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19503 in perlootut.pod
+
+      Moo in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20831 in perlootut.pod
+
+    Class::Accessor in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22019 in perlootut.pod
+
+    Class::Tiny in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23174 in perlootut.pod
+
+    Role::Tiny in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23848 in perlootut.pod
+
+    OO System Summary in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24452 in perlootut.pod
+
+      Moose is the maximal option. It has a lot of features, a big ecosystem, and a th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24536 in perlootut.pod
+
+      Class::Accessor does a lot less than Moose, and is a nice alternative if you fin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24788 in perlootut.pod
+
+      Class::Tiny is the absolute minimal option. It has no dependencies, and almost n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25095 in perlootut.pod
+
+      Use Role::Tiny with Class::Accessor or Class::Tiny if you find yourself consider... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25356 in perlootut.pod
+
+    Other OO Systems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25570 in perlootut.pod
+
+  CONCLUSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 26004 in perlootut.pod
+

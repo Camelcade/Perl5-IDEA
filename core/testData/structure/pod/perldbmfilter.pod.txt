@@ -1,0 +1,28 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perldbmfilter.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldbmfilter.pod
+
+  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47 in perldbmfilter.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 330 in perldbmfilter.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 703 in perldbmfilter.pod
+
+      filter_store_key in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 712 in perldbmfilter.pod
+
+      filter_store_value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 854 in perldbmfilter.pod
+
+      filter_fetch_key in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1000 in perldbmfilter.pod
+
+      filter_fetch_value in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1143 in perldbmfilter.pod
+
+    The Filter in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1485 in perldbmfilter.pod
+
+    An Example: the NULL termination problem. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1711 in perldbmfilter.pod
+
+    Another Example: Key is a C int. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3711 in perldbmfilter.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4862 in perldbmfilter.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4951 in perldbmfilter.pod
+

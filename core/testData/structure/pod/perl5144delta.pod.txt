@@ -1,0 +1,80 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl5144delta.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perl5144delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5144delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5144delta.pod
+
+  Core Enhancements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5144delta.pod
+
+  Security in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 381 in perl5144delta.pod
+
+    CVE-2013-1667: memory exhaustion with arbitrary hash keys in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 608 in perl5144delta.pod
+
+    memory leak in Encode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 907 in perl5144delta.pod
+
+    [perl #111594] Socket::unpack_sockaddr_un heap-buffer-overflow in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1025 in perl5144delta.pod
+
+    [perl #111586] SDBM_File: fix off-by-one access to global ".dir" in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1213 in perl5144delta.pod
+
+    off-by-two error in List::Util in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1391 in perl5144delta.pod
+
+    [perl #115994] fix segv in regcomp.c:S_join_exact() in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1564 in perl5144delta.pod
+
+    [perl #115992] PL_eval_start use-after-free in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1832 in perl5144delta.pod
+
+    wrap-around with IO on long strings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2038 in perl5144delta.pod
+
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2215 in perl5144delta.pod
+
+  Deprecations in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2359 in perl5144delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2427 in perl5144delta.pod
+
+    New Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2456 in perl5144delta.pod
+
+    Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2495 in perl5144delta.pod
+
+      Socket in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2663 in perl5144delta.pod
+
+      SDBM_File in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2677 in perl5144delta.pod
+
+      List::Util in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2694 in perl5144delta.pod
+
+    Removed Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2876 in perl5144delta.pod
+
+  Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2920 in perl5144delta.pod
+
+    New Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2942 in perl5144delta.pod
+
+    Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2975 in perl5144delta.pod
+
+  Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3024 in perl5144delta.pod
+
+  Utility Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3076 in perl5144delta.pod
+
+  Configuration and Compilation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3106 in perl5144delta.pod
+
+  Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3157 in perl5144delta.pod
+
+    New Platforms in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3182 in perl5144delta.pod
+
+    Discontinued Platforms in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3211 in perl5144delta.pod
+
+    Platform-Specific Notes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3249 in perl5144delta.pod
+
+      VMS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3290 in perl5144delta.pod
+
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3549 in perl5144delta.pod
+
+    In Perl 5.14.0, $tainted ~~ @array stopped working properly.  Sometimes it would... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3585 in perl5144delta.pod
+
+  Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3880 in perl5144delta.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3910 in perl5144delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4878 in perl5144delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6066 in perl5144delta.pod
+

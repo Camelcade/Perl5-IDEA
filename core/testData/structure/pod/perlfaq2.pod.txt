@@ -1,0 +1,54 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfaq2.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq2.pod
+
+  VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 59 in perlfaq2.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 93 in perlfaq2.pod
+
+    What machines support Perl? Where do I get it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 241 in perlfaq2.pod
+
+    How can I get a binary version of Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1286 in perlfaq2.pod
+
+    I don't have a C compiler. How can I build my own Perl interpreter? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1380 in perlfaq2.pod
+
+    I copied the Perl binary from one machine to another, but scripts don't work. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1822 in perlfaq2.pod
+
+    I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linking/... failed. How do I make it work? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2678 in perlfaq2.pod
+
+    What modules and extensions are available for Perl? What is CPAN? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3018 in perlfaq2.pod
+
+    Where can I get information on Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3861 in perlfaq2.pod
+
+      * http://www.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3915 in perlfaq2.pod
+
+      * http://perldoc.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3948 in perlfaq2.pod
+
+      * http://learn.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3985 in perlfaq2.pod
+
+    What is perl.com? Perl Mongers? pm.org? perl.org? cpan.org? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4542 in perlfaq2.pod
+
+      * http://www.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5303 in perlfaq2.pod
+
+      * http://learn.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5336 in perlfaq2.pod
+
+      * http://jobs.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5371 in perlfaq2.pod
+
+      * http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5405 in perlfaq2.pod
+
+    Where can I post questions? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5973 in perlfaq2.pod
+
+    Perl Books in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6328 in perlfaq2.pod
+
+    Which magazines have Perl content? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6425 in perlfaq2.pod
+
+    Which Perl blogs should I read? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6760 in perlfaq2.pod
+
+    What mailing lists are there for Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7184 in perlfaq2.pod
+
+    Where can I buy a commercial version of Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7325 in perlfaq2.pod
+
+    Where do I send bug reports? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7742 in perlfaq2.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8933 in perlfaq2.pod
+

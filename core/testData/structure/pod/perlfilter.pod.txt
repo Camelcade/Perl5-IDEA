@@ -1,0 +1,40 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfilter.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfilter.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42 in perlfilter.pod
+
+  CONCEPTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 588 in perlfilter.pod
+
+    1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1597 in perlfilter.pod
+
+    2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1716 in perlfilter.pod
+
+  USING FILTERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2625 in perlfilter.pod
+
+  WRITING A SOURCE FILTER in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6299 in perlfilter.pod
+
+  WRITING A SOURCE FILTER IN C in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6647 in perlfilter.pod
+
+    Decryption Filters in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7458 in perlfilter.pod
+
+  CREATING A SOURCE FILTER AS A SEPARATE EXECUTABLE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8440 in perlfilter.pod
+
+  WRITING A SOURCE FILTER IN PERL in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10214 in perlfilter.pod
+
+  USING CONTEXT: THE DEBUG FILTER in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13938 in perlfilter.pod
+
+  CONCLUSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18392 in perlfilter.pod
+
+  LIMITATIONS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20005 in perlfilter.pod
+
+  THINGS TO LOOK OUT FOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21105 in perlfilter.pod
+
+    Some Filters Clobber the DATA Handle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21145 in perlfilter.pod
+
+  REQUIREMENTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21571 in perlfilter.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21904 in perlfilter.pod
+
+  Copyrights in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22012 in perlfilter.pod
+

@@ -1,0 +1,52 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl5182delta.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perl5182delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5182delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5182delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5182delta.pod
+
+    Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 358 in perl5182delta.pod
+
+      B has been upgraded from version 1.42_01 to 1.42_02.  The fix for [perl #118525]... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404 in perl5182delta.pod
+
+      B::Concise has been upgraded from version 0.95 to 0.95_01.  This fixes a bug in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 725 in perl5182delta.pod
+
+      English has been upgraded from version 1.06 to 1.06_01.  This fixes an error abo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 847 in perl5182delta.pod
+
+      File::Glob has been upgraded from version 1.20 to 1.20_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 987 in perl5182delta.pod
+
+  Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1066 in perl5182delta.pod
+
+    Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1088 in perl5182delta.pod
+
+      perlrepository has been restored with a pointer to more useful pages. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1139 in perl5182delta.pod
+
+      perlhack has been updated with the latest changes from blead. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1222 in perl5182delta.pod
+
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1304 in perl5182delta.pod
+
+    Perl 5.18.1 introduced a regression along with a bugfix for lexical subs. Some B... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1340 in perl5182delta.pod
+
+    Perl 5.18.0 introduced a regression whereby [:^ascii:], if used in the same char... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1572 in perl5182delta.pod
+
+    Perl 5.18.0 introduced a regression when using ->SUPER::method with AUTOLOAD by ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1789 in perl5182delta.pod
+
+    Perl 5.18.0 introduced a regression whereby -bareword was no longer permitted un... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2008 in perl5182delta.pod
+
+    Previously PerlIOBase_dup didn't check if pushing the new layer succeeded before... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2201 in perl5182delta.pod
+
+    A buffer overflow with very long identifiers has been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2393 in perl5182delta.pod
+
+    A regression from 5.16 in the handling of padranges led to assertion failures if... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2464 in perl5182delta.pod
+
+    The construct $r=qr/.../; /$r/p is now handled properly, an issue which had been... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2730 in perl5182delta.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2878 in perl5182delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3873 in perl5182delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5068 in perl5182delta.pod
+

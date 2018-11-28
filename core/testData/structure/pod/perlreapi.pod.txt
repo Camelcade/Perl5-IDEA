@@ -1,0 +1,128 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlreapi.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlreapi.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlreapi.pod
+
+  Callbacks in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3093 in perlreapi.pod
+
+    comp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3111 in perlreapi.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 5159 in perlreapi.pod
+
+        /m - RXf_PMf_MULTILINE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5168 in perlreapi.pod
+
+        /s - RXf_PMf_SINGLELINE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5350 in perlreapi.pod
+
+        /i - RXf_PMf_FOLD in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5384 in perlreapi.pod
+
+        /x - RXf_PMf_EXTENDED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5412 in perlreapi.pod
+
+        /p - RXf_PMf_KEEPCOPY in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5573 in perlreapi.pod
+
+        Character set in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5626 in perlreapi.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 6350 in perlreapi.pod
+
+        RXf_SPLIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6359 in perlreapi.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 7047 in perlreapi.pod
+
+        RXf_SKIPWHITE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7056 in perlreapi.pod
+
+        RXf_START_ONLY in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7589 in perlreapi.pod
+
+        RXf_WHITE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7945 in perlreapi.pod
+
+        RXf_NULL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8242 in perlreapi.pod
+
+        RXf_NO_INPLACE_SUBST in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8574 in perlreapi.pod
+
+    exec in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8939 in perlreapi.pod
+
+      rx in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9169 in perlreapi.pod
+
+      sv in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9215 in perlreapi.pod
+
+      strbeg in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9422 in perlreapi.pod
+
+      strend in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9482 in perlreapi.pod
+
+      stringarg in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9589 in perlreapi.pod
+
+      minend in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9758 in perlreapi.pod
+
+      data in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9960 in perlreapi.pod
+
+      flags in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10011 in perlreapi.pod
+
+    intuit in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10071 in perlreapi.pod
+
+    checkstr in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11113 in perlreapi.pod
+
+    free in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11281 in perlreapi.pod
+
+    Numbered capture callbacks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11628 in perlreapi.pod
+
+      numbered_buff_FETCH in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12581 in perlreapi.pod
+
+      numbered_buff_STORE in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13345 in perlreapi.pod
+
+      numbered_buff_LENGTH in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15330 in perlreapi.pod
+
+    Named capture callbacks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16071 in perlreapi.pod
+
+      named_buff in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17527 in perlreapi.pod
+
+      named_buff_iter in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17672 in perlreapi.pod
+
+    qr_package in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17894 in perlreapi.pod
+
+    dupe in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18974 in perlreapi.pod
+
+    op_comp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19774 in perlreapi.pod
+
+  The REGEXP structure in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 19868 in perlreapi.pod
+
+    engine in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23388 in perlreapi.pod
+
+    mother_re in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23830 in perlreapi.pod
+
+    extflags in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23930 in perlreapi.pod
+
+    minlen minlenret in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24172 in perlreapi.pod
+
+    gofs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25121 in perlreapi.pod
+
+    substrs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25180 in perlreapi.pod
+
+    nparens, lastparen, and lastcloseparen in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25391 in perlreapi.pod
+
+    intflags in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25637 in perlreapi.pod
+
+    pprivate in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25815 in perlreapi.pod
+
+    swap in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26028 in perlreapi.pod
+
+    offs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26098 in perlreapi.pod
+
+    precomp prelen in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26666 in perlreapi.pod
+
+    paren_names in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27229 in perlreapi.pod
+
+    substrs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27619 in perlreapi.pod
+
+    subbeg sublen saved_copy suboffset subcoffset in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27984 in perlreapi.pod
+
+    wrapped wraplen in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29005 in perlreapi.pod
+
+    seen_evals in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29580 in perlreapi.pod
+
+    refcnt in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29760 in perlreapi.pod
+
+  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29968 in perlreapi.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30019 in perlreapi.pod
+
+  LICENSE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30125 in perlreapi.pod
+

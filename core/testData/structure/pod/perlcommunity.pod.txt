@@ -1,0 +1,46 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlcommunity.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlcommunity.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69 in perlcommunity.pod
+
+    Where to Find the Community in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 598 in perlcommunity.pod
+
+    Mailing Lists and Newsgroups in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 853 in perlcommunity.pod
+
+    IRC in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1496 in perlcommunity.pod
+
+    Websites in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2225 in perlcommunity.pod
+
+      News sites in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2450 in perlcommunity.pod
+
+        http://perl.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2478 in perlcommunity.pod
+
+        http://blogs.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2661 in perlcommunity.pod
+
+        http://perlsphere.net/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2818 in perlcommunity.pod
+
+        http://perlweekly.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2921 in perlcommunity.pod
+
+        http://use.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3067 in perlcommunity.pod
+
+      Forums in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3401 in perlcommunity.pod
+
+        http://www.perlmonks.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3425 in perlcommunity.pod
+
+        http://stackoverflow.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3684 in perlcommunity.pod
+
+        http://prepan.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3936 in perlcommunity.pod
+
+    User Groups in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4122 in perlcommunity.pod
+
+    Workshops in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4637 in perlcommunity.pod
+
+    Hackathons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5192 in perlcommunity.pod
+
+    Conventions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5885 in perlcommunity.pod
+
+    Calendar of Perl Events in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6701 in perlcommunity.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7240 in perlcommunity.pod
+

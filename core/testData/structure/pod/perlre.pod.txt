@@ -1,0 +1,236 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlre.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlre.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 89 in perlre.pod
+
+    Modifiers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 761 in perlre.pod
+
+      Overview in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 779 in perlre.pod
+
+        m in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1132 in perlre.pod
+
+        s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1441 in perlre.pod
+
+        i in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1883 in perlre.pod
+
+        x in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3439 in perlre.pod
+
+        p in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3553 in perlre.pod
+
+        a, d, l, and u in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3936 in perlre.pod
+
+        n in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4151 in perlre.pod
+
+        Other Modifiers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4863 in perlre.pod
+
+      Details on some modifiers in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6014 in perlre.pod
+
+        /x in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 6134 in perlre.pod
+
+        Character set modifiers in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 8812 in perlre.pod
+
+        /l in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 11628 in perlre.pod
+
+        /u in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 13276 in perlre.pod
+
+        /d in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 15392 in perlre.pod
+
+          1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15552 in perlre.pod
+
+          2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15604 in perlre.pod
+
+          3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15650 in perlre.pod
+
+          4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15747 in perlre.pod
+
+          5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15807 in perlre.pod
+
+          6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15884 in perlre.pod
+
+          7 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15958 in perlre.pod
+
+        /a (and /aa) in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 17059 in perlre.pod
+
+        Which character set modifier is in effect? in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 20094 in perlre.pod
+
+        Character set modifier behavior prior to Perl 5.14 in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 21869 in perlre.pod
+
+    Regular Expressions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22489 in perlre.pod
+
+      Metacharacters in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22517 in perlre.pod
+
+      Quantifiers in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 24276 in perlre.pod
+
+      Escape sequences in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 28058 in perlre.pod
+
+      Character Classes and other Special Escapes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29086 in perlre.pod
+
+        [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31102 in perlre.pod
+
+        [2] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31178 in perlre.pod
+
+        [3] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31250 in perlre.pod
+
+        [4] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31318 in perlre.pod
+
+        [5] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31371 in perlre.pod
+
+        [6] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31425 in perlre.pod
+
+        [7] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31482 in perlre.pod
+
+        [8] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31785 in perlre.pod
+
+      Assertions in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 31877 in perlre.pod
+
+      Capture groups in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 34958 in perlre.pod
+
+    Quoting metacharacters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43397 in perlre.pod
+
+    Extended Patterns in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44667 in perlre.pod
+
+      (?#text) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45519 in perlre.pod
+
+      (?adlupimnsx-imnsx) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45859 in perlre.pod
+
+      (?^alupimnsx) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45889 in perlre.pod
+
+      (?:pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47998 in perlre.pod
+
+      (?adluimnsx-imnsx:pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48028 in perlre.pod
+
+      (?^aluimnsx:pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48065 in perlre.pod
+
+      (?|pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49832 in perlre.pod
+
+      Lookaround Assertions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51547 in perlre.pod
+
+        (?=pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52003 in perlre.pod
+
+        (?!pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52223 in perlre.pod
+
+        (?<=pattern) \K in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52819 in perlre.pod
+
+        (?<!pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53803 in perlre.pod
+
+      (?'NAME'pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54066 in perlre.pod
+
+      (?<NAME>pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54093 in perlre.pod
+
+      \k<NAME> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55642 in perlre.pod
+
+      \k'NAME' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55665 in perlre.pod
+
+      (?{ code }) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56212 in perlre.pod
+
+      (??{ code }) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60549 in perlre.pod
+
+      (?PARNO) (?-PARNO) (?+PARNO) (?R) (?0) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62636 in perlre.pod
+
+      (?&NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66240 in perlre.pod
+
+      (?(condition)yes-pattern|no-pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66736 in perlre.pod
+
+      (?(condition)yes-pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66791 in perlre.pod
+
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 67013 in perlre.pod
+
+          an integer in parentheses in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67022 in perlre.pod
+
+          a lookahead/lookbehind/evaluate zero-width assertion; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67123 in perlre.pod
+
+          a name in angle brackets or single quotes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67184 in perlre.pod
+
+          the special symbol (R) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67291 in perlre.pod
+
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 67668 in perlre.pod
+
+          (1) (2) ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67677 in perlre.pod
+
+          (<NAME>) ('NAME') in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67765 in perlre.pod
+
+          (?=...) (?!...) (?<=...) (?<!...) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67872 in perlre.pod
+
+          (?{ CODE }) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68007 in perlre.pod
+
+          (R) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68093 in perlre.pod
+
+          (R1) (R2) ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68173 in perlre.pod
+
+          (R&NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68447 in perlre.pod
+
+          (DEFINE) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68746 in perlre.pod
+
+      (?>pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70645 in perlre.pod
+
+      (?[ ]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75228 in perlre.pod
+
+    Special Backtracking Control Verbs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75314 in perlre.pod
+
+      Verbs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76812 in perlre.pod
+
+        (*PRUNE) (*PRUNE:NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76834 in perlre.pod
+
+        (*SKIP) (*SKIP:NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78389 in perlre.pod
+
+        (*MARK:NAME) (*:NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79602 in perlre.pod
+
+        (*THEN) (*THEN:NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81031 in perlre.pod
+
+        (*COMMIT) (*COMMIT:args) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82124 in perlre.pod
+
+        (*FAIL) (*F) (*FAIL:arg) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82768 in perlre.pod
+
+        (*ACCEPT) (*ACCEPT:arg) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83241 in perlre.pod
+
+    Backtracking in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84196 in perlre.pod
+
+    Version 8 Regular Expressions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 92536 in perlre.pod
+
+    Warning on \1 Instead of $1 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 97981 in perlre.pod
+
+    Repeated Patterns Matching a Zero-length Substring in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 98952 in perlre.pod
+
+    Combining RE Pieces in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 102258 in perlre.pod
+
+      ST in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103715 in perlre.pod
+
+      S|T in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104097 in perlre.pod
+
+      S{REPEAT_COUNT} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104279 in perlre.pod
+
+      S{min,max} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104367 in perlre.pod
+
+      S{min,max}? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104440 in perlre.pod
+
+      S?, S*, S+ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104514 in perlre.pod
+
+      S??, S*?, S+? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104614 in perlre.pod
+
+      (?>S) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104720 in perlre.pod
+
+      (?=S), (?<=S) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104788 in perlre.pod
+
+      (?!S), (?<!S) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104997 in perlre.pod
+
+      (??{ EXPR }), (?PARNO) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105150 in perlre.pod
+
+      (?(condition)yes-pattern|no-pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105326 in perlre.pod
+
+    Creating Custom RE Engines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 105804 in perlre.pod
+
+    Embedded Code Execution Frequency in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 107705 in perlre.pod
+
+    PCRE/Python Support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 109019 in perlre.pod
+
+      (?P<NAME>pattern) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109255 in perlre.pod
+
+      (?P=NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109365 in perlre.pod
+
+      (?P>NAME) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109461 in perlre.pod
+
+  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 109566 in perlre.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 109963 in perlre.pod
+

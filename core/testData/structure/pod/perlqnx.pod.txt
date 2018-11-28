@@ -1,0 +1,38 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlqnx.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlqnx.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 224 in perlqnx.pod
+
+    Required Software for Compiling Perl on QNX4 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 638 in perlqnx.pod
+
+      /bin/sh in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 823 in perlqnx.pod
+
+      ar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1029 in perlqnx.pod
+
+      nm in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1237 in perlqnx.pod
+
+      cpp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1387 in perlqnx.pod
+
+      make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1672 in perlqnx.pod
+
+    Outstanding Issues with Perl on QNX4 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1827 in perlqnx.pod
+
+    QNX auxiliary files in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3190 in perlqnx.pod
+
+      qnx/ar in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3266 in perlqnx.pod
+
+      qnx/cpp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3547 in perlqnx.pod
+
+    Outstanding issues with perl under QNX6 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3791 in perlqnx.pod
+
+    Cross-compilation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4186 in perlqnx.pod
+
+      Setting up a cross-compilation environment in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4404 in perlqnx.pod
+
+      Preparing the target system in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5528 in perlqnx.pod
+
+      Calling Configure in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5943 in perlqnx.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6615 in perlqnx.pod
+

@@ -1,0 +1,60 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlnetware.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlnetware.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlnetware.pod
+
+  BUILD in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 585 in perlnetware.pod
+
+    Tools & SDK in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 696 in perlnetware.pod
+
+    Setup in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1049 in perlnetware.pod
+
+      SetNWBld.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1265 in perlnetware.pod
+
+      Buildtype.bat in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1528 in perlnetware.pod
+
+        1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perlnetware.pod
+
+        2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1800 in perlnetware.pod
+
+        3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1939 in perlnetware.pod
+
+    Make in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2038 in perlnetware.pod
+
+      USE_MULTI, USE_ITHREADS & USE_IMP_SYS defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2617 in perlnetware.pod
+
+      USE_MULTI & USE_IMP_SYS defined and USE_ITHREADS not defined in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2673 in perlnetware.pod
+
+    Interpreter in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2751 in perlnetware.pod
+
+    Extensions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3045 in perlnetware.pod
+
+  INSTALL in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3137 in perlnetware.pod
+
+  BUILD NEW EXTENSIONS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3907 in perlnetware.pod
+
+    Change to the extension directory where its source files are present. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4625 in perlnetware.pod
+
+    Run the following command at the command prompt:      perl -II<path to NetWare l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4705 in perlnetware.pod
+
+    nmake in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5108 in perlnetware.pod
+
+    nmake install  Install will copy the files into the Windows machine where NetWar... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5124 in perlnetware.pod
+
+    Note: Some modules downloaded from CPAN may require NetWare related API in order... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5949 in perlnetware.pod
+
+  ACKNOWLEDGEMENTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6174 in perlnetware.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6398 in perlnetware.pod
+
+  DATE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6487 in perlnetware.pod
+
+    Created - 18 Jan 2001 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6509 in perlnetware.pod
+
+    Modified - 25 June 2001 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6541 in perlnetware.pod
+
+    Modified - 13 July 2001 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6575 in perlnetware.pod
+
+    Modified - 28 May 2002 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6609 in perlnetware.pod
+

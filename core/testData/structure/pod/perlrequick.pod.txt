@@ -1,0 +1,62 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlrequick.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlrequick.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65 in perlrequick.pod
+
+  The Guide in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 198 in perlrequick.pod
+
+    Simple word matching in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 216 in perlrequick.pod
+
+    Using character classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4050 in perlrequick.pod
+
+      \d is a digit and represents      [0-9] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6528 in perlrequick.pod
+
+      \s is a whitespace character and represents      [\ \t\r\n\f] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6578 in perlrequick.pod
+
+      \w is a word character (alphanumeric or _) and represents      [0-9a-zA-Z_] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6650 in perlrequick.pod
+
+      \D is a negated \d; it represents any character but a digit      [^0-9] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6736 in perlrequick.pod
+
+      \S is a negated \s; it represents any non-whitespace character      [^\s] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6818 in perlrequick.pod
+
+      \W is a negated \w; it represents any non-word character      [^\w] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6902 in perlrequick.pod
+
+      The period '.' matches any character but "\n" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6980 in perlrequick.pod
+
+    Matching this or that in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8124 in perlrequick.pod
+
+    Grouping things and hierarchical matching in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9221 in perlrequick.pod
+
+    Extracting matches in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9979 in perlrequick.pod
+
+    Matching repetitions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11231 in perlrequick.pod
+
+      a? = match 'a' 1 or 0 times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11569 in perlrequick.pod
+
+      a* = match 'a' 0 or more times, i.e., any number of times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11610 in perlrequick.pod
+
+      a+ = match 'a' 1 or more times, i.e., at least once in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11681 in perlrequick.pod
+
+      a{n,m} = match at least n times, but not more than m times. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11746 in perlrequick.pod
+
+      a{n,} = match at least n or more times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11825 in perlrequick.pod
+
+      a{n} = match exactly n times in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11880 in perlrequick.pod
+
+    More matching in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12847 in perlrequick.pod
+
+    Search and replace in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14036 in perlrequick.pod
+
+    The split operator in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16355 in perlrequick.pod
+
+    use re 'strict' in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17618 in perlrequick.pod
+
+  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17857 in perlrequick.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17877 in perlrequick.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18031 in perlrequick.pod
+
+    Acknowledgments in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18183 in perlrequick.pod
+

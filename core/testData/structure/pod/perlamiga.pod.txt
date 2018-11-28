@@ -1,0 +1,78 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlamiga.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlamiga.pod
+
+  NOTE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlamiga.pod
+
+  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 514 in perlamiga.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 921 in perlamiga.pod
+
+    Prerequisites for running Perl 5.22.1 under AmigaOS 4.1 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 941 in perlamiga.pod
+
+      AmigaOS 4.1 update 6 with all updates applied as of 9th October 2013 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1014 in perlamiga.pod
+
+      newlib.library version 53.28 or greater in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1126 in perlamiga.pod
+
+      AmigaOS SDK in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1176 in perlamiga.pod
+
+      abc-shell in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1365 in perlamiga.pod
+
+    Starting Perl programs under AmigaOS 4.1 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1593 in perlamiga.pod
+
+    Limitations of Perl under AmigaOS 4.1 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2265 in perlamiga.pod
+
+      Nested Piped programs can crash when run from older abc-shells in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2320 in perlamiga.pod
+
+      Incorrect or unexpected command line unescaping in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2561 in perlamiga.pod
+
+      Starting subprocesses via open has limitations in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2751 in perlamiga.pod
+
+      If you find any other limitations or bugs then let me know. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2956 in perlamiga.pod
+
+  INSTALLATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3124 in perlamiga.pod
+
+  Amiga Specific Modules in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3780 in perlamiga.pod
+
+    Amiga::ARexx in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3811 in perlamiga.pod
+
+    Amiga::Exec in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3998 in perlamiga.pod
+
+  BUILDING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4116 in perlamiga.pod
+
+  CHANGES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4570 in perlamiga.pod
+
+    August 2015 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4595 in perlamiga.pod
+
+      Port to Perl 5.22 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4626 in perlamiga.pod
+
+      Add handling of NIL: to afstat() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4651 in perlamiga.pod
+
+      Fix inheritance of environment variables by subprocesses. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4691 in perlamiga.pod
+
+      Fix exec, and exit in "forked" subprocesses. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4756 in perlamiga.pod
+
+      Fix issue with newlib's unlink, which could cause infinite loops. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4808 in perlamiga.pod
+
+      Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4881 in perlamiga.pod
+
+      Fix issue where kill was using the wrong kind of process ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4973 in perlamiga.pod
+
+    27th November 2013 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5047 in perlamiga.pod
+
+      Create new installation system based on installperl links and Amiga protection bits now set correctly. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5085 in perlamiga.pod
+
+      Pod now defaults to text. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5195 in perlamiga.pod
+
+      File::Spec should now recognise an Amiga style absolute path as well as an Unix style one. Relative paths must always be Unix style. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5228 in perlamiga.pod
+
+    20th November 2013 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5375 in perlamiga.pod
+
+      Configured to use SDK:Local/C/perl to start standard scripts in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5413 in perlamiga.pod
+
+      Added Amiga::Exec module with support for Wait() and AmigaOS signal numbers. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5481 in perlamiga.pod
+
+    10th October 13 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5572 in perlamiga.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5639 in perlamiga.pod
+

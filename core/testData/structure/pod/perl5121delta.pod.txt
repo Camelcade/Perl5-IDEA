@@ -1,0 +1,138 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl5121delta.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perl5121delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5121delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5121delta.pod
+
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5121delta.pod
+
+  Core Enhancements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 499 in perl5121delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 643 in perl5121delta.pod
+
+    Pragmata Changes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 672 in perl5121delta.pod
+
+      We fixed exporting of is_strict and is_lax from version.  These were being expor... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 705 in perl5121delta.pod
+
+    Updated Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1049 in perl5121delta.pod
+
+      We upgraded CGI.pm to version 3.49 to incorporate fixes for regressions introduc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1081 in perl5121delta.pod
+
+      We upgraded Pod::Simple to version 3.14 to get an improvement to \C\<\< \>\> par... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1221 in perl5121delta.pod
+
+      We made a small fix to the CPANPLUS test suite to fix an occasional spurious tes... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1320 in perl5121delta.pod
+
+      We upgraded Safe to version 2.27 to wrap coderefs returned by reval() and rdo(). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1424 in perl5121delta.pod
+
+  Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1531 in perl5121delta.pod
+
+    We added the new maintenance release policy to perlpolicy.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1580 in perl5121delta.pod
+
+    We've clarified the multiple-angle-bracket construct in the spec for POD in perl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1655 in perl5121delta.pod
+
+    We added a missing explanation for a warning about := to perldiag.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1756 in perl5121delta.pod
+
+    We removed a false claim in perlunitut that all text strings are Unicode strings... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1842 in perl5121delta.pod
+
+    We updated the Github mirror link in perlrepository to mirrors/perl, not github/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1945 in perl5121delta.pod
+
+    We fixed a minor error in perl5114delta.pod. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2043 in perl5121delta.pod
+
+    We replaced a mention of the now-obsolete Switch.pm with given/when. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2101 in perl5121delta.pod
+
+    We improved documentation about $sitelibexp/sitecustomize.pl in perlrun. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2190 in perl5121delta.pod
+
+    We corrected perlmodlib.pod which had unintentionally omitted a number of module... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2279 in perl5121delta.pod
+
+    We updated the documentation for 'require' in perlfunc.pod relating to putting P... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2376 in perl5121delta.pod
+
+    We reinstated some erroneously-removed documentation about quotemeta in perlfunc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2488 in perl5121delta.pod
+
+    We fixed an a2p example in perlutil.pod. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2583 in perl5121delta.pod
+
+    We filled in a blank in perlport.pod with the release date of Perl 5.12. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2640 in perl5121delta.pod
+
+    We fixed broken links in a number of perldelta files. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2727 in perl5121delta.pod
+
+    The documentation for Carp.pm incorrectly stated that the $Carp::Verbose variabl... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2792 in perl5121delta.pod
+
+    We fixed a number of typos in Pod::Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2927 in perl5121delta.pod
+
+    We improved documentation of case-changing functions in perlfunc.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2985 in perl5121delta.pod
+
+    We corrected perlgpl.pod to contain the correct version of the GNU General Publi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3067 in perl5121delta.pod
+
+  Testing in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3180 in perl5121delta.pod
+
+    Testing Improvements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3196 in perl5121delta.pod
+
+      t/op/sselect.t is now less prone to clock jitter during timing checks on Windows... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3232 in perl5121delta.pod
+
+      lib/blib.t and lib/locale.t: Fixes for test failures on Darwin/PPC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3410 in perl5121delta.pod
+
+      perl5db.t: Fix for test failures when Term::ReadLine::Gnu is installed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3493 in perl5121delta.pod
+
+  Installation and Configuration Improvements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3588 in perl5121delta.pod
+
+    Configuration improvements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3640 in perl5121delta.pod
+
+      We updated INSTALL with notes about how to deal with broken dbm.h on OpenSUSE (a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3683 in perl5121delta.pod
+
+  Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3816 in perl5121delta.pod
+
+    A bug in how we process filetest operations could cause a segfault. Filetests do... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3843 in perl5121delta.pod
+
+    When deparsing a nextstate op that has both a change of package (relative to the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4176 in perl5121delta.pod
+
+    XSUB.h now correctly redefines fgets under PERL_IMPLICIT_SYS  See also: http://r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4433 in perl5121delta.pod
+
+    utf8::is_utf8 now respects GMAGIC (e.g. $1) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4571 in perl5121delta.pod
+
+    XS code using fputc() or fputs(): on Windows could cause an error due to their a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4626 in perl5121delta.pod
+
+    We fixed a small bug in lex_stuff_pvn() that caused spurious syntax errors in an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4817 in perl5121delta.pod
+
+    We fixed a bug that could cause \N{} constructs followed by a single . to be par... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5140 in perl5121delta.pod
+
+    We fixed a bug that caused when(scalar) without an argument not to be treated as... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5317 in perl5121delta.pod
+
+    We fixed a regression in the handling of labels immediately before string evals ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5495 in perl5121delta.pod
+
+    We fixed a regression in case-insensitive matching of folded characters in regul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5691 in perl5121delta.pod
+
+  Platform Specific Notes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5900 in perl5121delta.pod
+
+    HP-UX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5932 in perl5121delta.pod
+
+      Perl now allows -Duse64bitint without promoting to use64bitall on HP-UX in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5954 in perl5121delta.pod
+
+    AIX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6043 in perl5121delta.pod
+
+      Perl now builds on AIX 4.2  The changes required work around AIX 4.2s' lack of s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6062 in perl5121delta.pod
+
+    FreeBSD 7 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6223 in perl5121delta.pod
+
+      FreeBSD 7 no longer contains /usr/bin/objformat. At build time, Perl now skips t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6248 in perl5121delta.pod
+
+    VMS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6414 in perl5121delta.pod
+
+      It's now possible to build extensions on older (pre 7.3-2) VMS systems.  DCL sym... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6433 in perl5121delta.pod
+
+      We fixed the previously-broken -Uuseperlio build on VMS.  We were checking a var... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6699 in perl5121delta.pod
+
+      We fixed the -Uuseperlio command-line option in configure.com.  Formerly it only... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6902 in perl5121delta.pod
+
+  Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7087 in perl5121delta.pod
+
+    List::Util::first misbehaves in the presence of a lexical $_ (typically introduc... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7117 in perl5121delta.pod
+
+    Module::Load::Conditional and version have an unfortunate interaction which can ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7571 in perl5121delta.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7857 in perl5121delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8683 in perl5121delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9876 in perl5121delta.pod
+

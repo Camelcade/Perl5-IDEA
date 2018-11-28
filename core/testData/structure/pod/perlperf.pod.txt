@@ -1,0 +1,60 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlperf.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlperf.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 70 in perlperf.pod
+
+  OVERVIEW in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 603 in perlperf.pod
+
+    ONE STEP SIDEWAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1183 in perlperf.pod
+
+    ONE STEP FORWARD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1634 in perlperf.pod
+
+    ANOTHER STEP SIDEWAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2072 in perlperf.pod
+
+  GENERAL GUIDELINES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2380 in perlperf.pod
+
+  BENCHMARKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5627 in perlperf.pod
+
+    Assigning and Dereferencing Variables. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5722 in perlperf.pod
+
+    Search and replace or tr in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8325 in perlperf.pod
+
+  PROFILING TOOLS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9788 in perlperf.pod
+
+    Devel::DProf in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12865 in perlperf.pod
+
+    Devel::Profiler in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15777 in perlperf.pod
+
+    Devel::SmallProf in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18679 in perlperf.pod
+
+    Devel::FastProf in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21431 in perlperf.pod
+
+    Devel::NYTProf in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23396 in perlperf.pod
+
+  SORTING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33596 in perlperf.pod
+
+    Elapsed Real Time in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40915 in perlperf.pod
+
+    User CPU Time in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41222 in perlperf.pod
+
+    System CPU Time in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41366 in perlperf.pod
+
+  LOGGING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43314 in perlperf.pod
+
+    Logging if DEBUG (constant) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45945 in perlperf.pod
+
+  POSTSCRIPT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47980 in perlperf.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 48593 in perlperf.pod
+
+    PERLDOCS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48675 in perlperf.pod
+
+    MAN PAGES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48809 in perlperf.pod
+
+    MODULES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48837 in perlperf.pod
+
+    URLS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49355 in perlperf.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49789 in perlperf.pod
+

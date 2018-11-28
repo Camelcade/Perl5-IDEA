@@ -1,0 +1,12 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlpragma.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlpragma.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlpragma.pod
+
+  A basic example in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 378 in perlpragma.pod
+
+  Key naming in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3189 in perlpragma.pod
+
+  Implementation details in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4039 in perlpragma.pod
+

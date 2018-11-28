@@ -1,0 +1,265 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlunicode.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlunicode.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52 in perlunicode.pod
+
+    Important Caveats in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1144 in perlunicode.pod
+
+      Safest if you use feature 'unicode_strings' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1715 in perlunicode.pod
+
+      Input and Output Layers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2343 in perlunicode.pod
+
+      You should convert your non-ASCII, non-UTF-8 Perl scripts to be UTF-8. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2492 in perlunicode.pod
+
+      use utf8 still needed to enable UTF-8|/Unicode Encodings in scripts in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2588 in perlunicode.pod
+
+      BOM-marked scripts and UTF-16|/Unicode Encodings scripts autodetected in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2977 in perlunicode.pod
+
+    Byte and Character Semantics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3426 in perlunicode.pod
+
+      String handling functions, for the most part, continue to operate in terms of ch... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4673 in perlunicode.pod
+
+        the bit-oriented vec    in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5169 in perlunicode.pod
+
+        the byte-oriented pack/unpack "C" format  However, the W specifier does operate ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5212 in perlunicode.pod
+
+        some operators that interact with the platform's operating system  Operators dea... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5363 in perlunicode.pod
+
+        when the functions are called from within the scope of the use bytes|bytes pragm... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5487 in perlunicode.pod
+
+      Strings--including hash keys--and regular expression patterns may contain charac... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5651 in perlunicode.pod
+
+      The chr() and ord() functions work on whole characters. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6109 in perlunicode.pod
+
+      Regular expressions match whole characters.  For example, "." matches a whole ch... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6181 in perlunicode.pod
+
+      The tr/// operator translates whole characters.  (Note that the tr///CU function... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6313 in perlunicode.pod
+
+      scalar reverse() reverses by character rather than by byte. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6517 in perlunicode.pod
+
+      The bit string operators, & | ^ ~ and (starting in v5.22) &. |. ^.  ~. can opera... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6590 in perlunicode.pod
+
+    ASCII Rules versus Unicode Rules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7181 in perlunicode.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 8109 in perlunicode.pod
+
+        Within the scope of use utf8  If the whole program is Unicode (signified by usin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8116 in perlunicode.pod
+
+        Within the scope of use feature 'unicode_strings'|feature/The 'unicode_strings' ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8305 in perlunicode.pod
+
+        Within the scope of use 5.012 or higher  This implicitly turns on use feature 'u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8613 in perlunicode.pod
+
+        Within the scope of use locale 'not_characters'|perllocale/Unicode and UTF-8, or... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8732 in perlunicode.pod
+
+        When the string contains a Unicode-only code point  Perl has never accepted code... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9055 in perlunicode.pod
+
+        When the string contains a Unicode named code point \N{...}  The \N{...} constru... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9242 in perlunicode.pod
+
+        When the string has come from an external source marked as Unicode  The -C|perlr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9478 in perlunicode.pod
+
+        The function utf8::utf8_upgrade()|utf8/Utility functions can be explicitly used ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9763 in perlunicode.pod
+
+        A pattern that is compiled with the /u or /a modifiers is treated as Unicode (th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10016 in perlunicode.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10644 in perlunicode.pod
+
+        Case translation operators use the Unicode case translation tables.  Note that u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10653 in perlunicode.pod
+
+        Character classes in regular expressions match based on the character properties... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11404 in perlunicode.pod
+
+        Named Unicode properties, scripts, and block ranges may be used (like bracketed ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11642 in perlunicode.pod
+
+    Extended Grapheme Clusters (Logical characters) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12104 in perlunicode.pod
+
+    Unicode Character Properties in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14887 in perlunicode.pod
+
+      General_Category in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20023 in perlunicode.pod
+
+      Bidirectional Character Types in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22128 in perlunicode.pod
+
+      Scripts in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 23552 in perlunicode.pod
+
+      Use of the "Is" Prefix in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 26964 in perlunicode.pod
+
+      Blocks in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 27276 in perlunicode.pod
+
+      Other Properties in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 30332 in perlunicode.pod
+
+        \p{All} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31054 in perlunicode.pod
+
+        \p{Alnum} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31349 in perlunicode.pod
+
+        \p{Any} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31444 in perlunicode.pod
+
+        \p{ASCII} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31558 in perlunicode.pod
+
+        \p{Assigned} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31682 in perlunicode.pod
+
+        \p{Blank} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31866 in perlunicode.pod
+
+        \p{Decomposition_Type: Non_Canonical}    (Short: \p{Dt=NonCanon}) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31991 in perlunicode.pod
+
+        \p{Graph} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33199 in perlunicode.pod
+
+        \p{HorizSpace} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33347 in perlunicode.pod
+
+        \p{In=*} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33472 in perlunicode.pod
+
+        \p{PerlSpace} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33537 in perlunicode.pod
+
+        \p{PerlWord} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33717 in perlunicode.pod
+
+        \p{Posix...} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33850 in perlunicode.pod
+
+        \p{Present_In: *}    (Short: \p{In=*}) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34039 in perlunicode.pod
+
+        \p{Print} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35921 in perlunicode.pod
+
+        \p{SpacePerl} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36017 in perlunicode.pod
+
+        \p{Title} and  \p{Titlecase} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36251 in perlunicode.pod
+
+        \p{Unicode} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36572 in perlunicode.pod
+
+        \p{VertSpace} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36665 in perlunicode.pod
+
+        \p{Word} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36770 in perlunicode.pod
+
+        \p{XPosix...} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36868 in perlunicode.pod
+
+    User-Defined Character Properties in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37072 in perlunicode.pod
+
+      A single hexadecimal number denoting a code point to include. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38652 in perlunicode.pod
+
+      Two hexadecimal numbers separated by horizontal whitespace (space or tabular cha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38724 in perlunicode.pod
+
+      Something to include, prefixed by "+": a built-in character property (prefixed b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38867 in perlunicode.pod
+
+      Something to exclude, prefixed by "-": an existing character property (prefixed ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39181 in perlunicode.pod
+
+      Something to negate, prefixed "!": an existing character property (prefixed by "... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39496 in perlunicode.pod
+
+      Something to intersect with, prefixed by "&": an existing character property (pr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39807 in perlunicode.pod
+
+    User-Defined Case Mappings (for serious hackers only) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41865 in perlunicode.pod
+
+    Character Encodings for Input and Output in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42316 in perlunicode.pod
+
+    Unicode Regular Expression Support Level in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42381 in perlunicode.pod
+
+      Level 1 - Basic Unicode Support   RL1.1   Hex Notation                     - don... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42738 in perlunicode.pod
+
+        [1] \N{U+...} and \x{...} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43293 in perlunicode.pod
+
+        [2] \p{...} \P{...} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43332 in perlunicode.pod
+
+        [3] supports not only minimal list, but all Unicode character properties (see Unicode Character Properties above) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43365 in perlunicode.pod
+
+        [4] \d \D \s \S \w \W \X [:prop:] [:^prop:] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43486 in perlunicode.pod
+
+        [5] The experimental feature starting in v5.18 "(?[...])" accomplishes this. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43570 in perlunicode.pod
+
+          Regular expression lookahead  You can mimic class subtraction using lookahead. F... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43774 in perlunicode.pod
+
+          CPAN module Unicode::Regex::Set  It does implement the full UTS#18 grouping, int... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44191 in perlunicode.pod
+
+          /"User-Defined Character Properties"  "+" for union, "-" for removal (set-differ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44339 in perlunicode.pod
+
+        [6] \b \B in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44476 in perlunicode.pod
+
+        [7] Note that Perl does Full case-folding in matching, not Simple: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44499 in perlunicode.pod
+
+        [8] Perl treats \n as the start- and end-line delimiter.  Unicode specifies more characters that should be so-interpreted. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44859 in perlunicode.pod
+
+        [9] But qr/\b{lb}/ and Unicode::LineBreak are available. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45443 in perlunicode.pod
+
+        [10] UTF-8/UTF-EBDDIC used in Perl allows not only U+10000 to U+10FFFF but also beyond U+10FFFF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45803 in perlunicode.pod
+
+      Level 2 - Extended Unicode Support   RL2.1   Canonical Equivalents           - M... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45922 in perlunicode.pod
+
+      Level 3 - Tailored Support   RL3.1   Tailored Punctuation            - MISSING
+ ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46592 in perlunicode.pod
+
+    Unicode Encodings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47648 in perlunicode.pod
+
+      UTF-8  UTF-8 is a variable-length (1 to 4 bytes), byte-order independent encodin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47816 in perlunicode.pod
+
+      UTF-EBCDIC  Like UTF-8, but EBCDIC-safe, in the way that UTF-8 is ASCII-safe. Th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50293 in perlunicode.pod
+
+      UTF-16, UTF-16BE, UTF-16LE, Surrogates, and BOM's (Byte Order Marks)  The follow... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50846 in perlunicode.pod
+
+      UTF-32, UTF-32BE, UTF-32LE  The UTF-32 family is pretty much like the UTF-16 fam... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53816 in perlunicode.pod
+
+      UCS-2, UCS-4  Legacy, fixed-width encodings defined by the ISO 10646 standard.  ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54122 in perlunicode.pod
+
+      UTF-7  A seven-bit safe (non-eight-bit) encoding, which is useful if the transpo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54499 in perlunicode.pod
+
+    Noncharacter code points in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54655 in perlunicode.pod
+
+    Beyond Unicode code points in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57977 in perlunicode.pod
+
+    Security Implications of Unicode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64146 in perlunicode.pod
+
+      Malformed UTF-8  Unfortunately, the original specification of UTF-8 leaves some ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64308 in perlunicode.pod
+
+      Regular expression pattern matching may surprise you if you're not accustomed to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64941 in perlunicode.pod
+
+    Unicode in Perl on EBCDIC in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65518 in perlunicode.pod
+
+    Locales in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66102 in perlunicode.pod
+
+    When Unicode Does Not Happen in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66155 in perlunicode.pod
+
+      chdir, chmod, chown, chroot, exec, link, lstat, mkdir, rename, rmdir, stat, syml... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67208 in perlunicode.pod
+
+      %ENV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67379 in perlunicode.pod
+
+      glob (aka the <*>) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67397 in perlunicode.pod
+
+      open, opendir, sysopen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67440 in perlunicode.pod
+
+      qx (aka the backtick operator), system in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67482 in perlunicode.pod
+
+      readdir, readlink in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67537 in perlunicode.pod
+
+    The "Unicode Bug" in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 67578 in perlunicode.pod
+
+      Changing the case of a scalar, that is, using uc(), ucfirst(), lc(), and lcfirst... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69340 in perlunicode.pod
+
+      Using caseless (/i) regular expression matching.  Starting in Perl 5.14.0, regul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69727 in perlunicode.pod
+
+      Matching any of several properties in regular expressions.  These properties are... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69983 in perlunicode.pod
+
+      In quotemeta or its inline equivalent \Q.  Starting in Perl 5.16.0, consistent q... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70406 in perlunicode.pod
+
+    Forcing Unicode in Perl (Or Unforcing Unicode in Perl) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71295 in perlunicode.pod
+
+    Using Unicode in XS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72024 in perlunicode.pod
+
+    Hacking Perl to work on earlier Unicode versions (for very serious hackers only) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72187 in perlunicode.pod
+
+    Porting code from perl-5.6.X in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72867 in perlunicode.pod
+
+      A filehandle that should read or write UTF-8    if ($] > 5.008) {
+    binmode $f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73394 in perlunicode.pod
+
+      A scalar that is going to be passed to some extension  Be it Compress::Zlib, Apa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73510 in perlunicode.pod
+
+      A scalar we got back from an extension  If you believe the scalar comes back as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73998 in perlunicode.pod
+
+      Same thing, if you are really sure it is UTF-8    if ($] > 5.008) {
+    require ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74228 in perlunicode.pod
+
+      A wrapper for DBI fetchrow_array and fetchrow_hashref  When the database contain... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74358 in perlunicode.pod
+
+      A large scalar that you know can only contain ASCII  Scalars that contain only A... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75605 in perlunicode.pod
+
+  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75871 in perlunicode.pod
+
+    Interaction with Extensions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75923 in perlunicode.pod
+
+    Speed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78777 in perlunicode.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79577 in perlunicode.pod
+

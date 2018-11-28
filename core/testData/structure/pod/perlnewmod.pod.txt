@@ -1,0 +1,56 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlnewmod.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlnewmod.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlnewmod.pod
+
+    Warning in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1100 in perlnewmod.pod
+
+    What should I make into a module? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1573 in perlnewmod.pod
+
+    Step-by-step: Preparing the ground in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3041 in perlnewmod.pod
+
+      Look around in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3190 in perlnewmod.pod
+
+      Check it's new in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3641 in perlnewmod.pod
+
+      Discuss the need in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3895 in perlnewmod.pod
+
+      Choose a name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4376 in perlnewmod.pod
+
+      Check again in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4749 in perlnewmod.pod
+
+    Step-by-step: Making the module in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5025 in perlnewmod.pod
+
+      Start with module-starter or h2xs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5074 in perlnewmod.pod
+
+      Use strict|strict and warnings|warnings in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6066 in perlnewmod.pod
+
+      Use Carp|Carp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6336 in perlnewmod.pod
+
+      Use Exporter|Exporter - wisely! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7115 in perlnewmod.pod
+
+      Use plain old documentation|perlpod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7777 in perlnewmod.pod
+
+      Write tests in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8333 in perlnewmod.pod
+
+      Write the README in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8866 in perlnewmod.pod
+
+    Step-by-step: Distributing your module in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9253 in perlnewmod.pod
+
+      Get a CPAN user ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9309 in perlnewmod.pod
+
+      perl Makefile.PL; make test; make dist in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9532 in perlnewmod.pod
+
+      Upload the tarball in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10005 in perlnewmod.pod
+
+      Announce to the modules list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10209 in perlnewmod.pod
+
+      Announce to clpa in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10502 in perlnewmod.pod
+
+      Fix bugs! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10670 in perlnewmod.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10865 in perlnewmod.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10965 in perlnewmod.pod
+

@@ -1,0 +1,226 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfaq3.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq3.pod
+
+  VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq3.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77 in perlfaq3.pod
+
+    How do I do (anything)? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 193 in perlfaq3.pod
+
+      Basics in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 427 in perlfaq3.pod
+
+        perldata - Perl data types in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 450 in perlfaq3.pod
+
+        perlvar - Perl pre-defined variables in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 487 in perlfaq3.pod
+
+        perlsyn - Perl syntax in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 534 in perlfaq3.pod
+
+        perlop - Perl operators and precedence in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 566 in perlfaq3.pod
+
+        perlsub - Perl subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 615 in perlfaq3.pod
+
+      Execution in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 660 in perlfaq3.pod
+
+        perlrun - how to execute the Perl interpreter in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 686 in perlfaq3.pod
+
+        perldebug - Perl debugging in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 742 in perlfaq3.pod
+
+      Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 787 in perlfaq3.pod
+
+        perlfunc - Perl builtin functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 813 in perlfaq3.pod
+
+      Objects in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 864 in perlfaq3.pod
+
+        perlref - Perl references and nested data structures in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 888 in perlfaq3.pod
+
+        perlmod - Perl modules (packages and symbol tables) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 951 in perlfaq3.pod
+
+        perlobj - Perl objects in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1013 in perlfaq3.pod
+
+        perltie - how to hide an object class in a simple variable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1046 in perlfaq3.pod
+
+      Data Structures in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1123 in perlfaq3.pod
+
+        perlref - Perl references and nested data structures in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1155 in perlfaq3.pod
+
+        perllol - Manipulating arrays of arrays in Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1218 in perlfaq3.pod
+
+        perldsc - Perl Data Structures Cookbook in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1276 in perlfaq3.pod
+
+      Modules in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1333 in perlfaq3.pod
+
+        perlmod - Perl modules (packages and symbol tables) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1357 in perlfaq3.pod
+
+        perlmodlib - constructing new Perl modules and finding existing ones in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1419 in perlfaq3.pod
+
+      Regexes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1506 in perlfaq3.pod
+
+        perlre - Perl regular expressions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1530 in perlfaq3.pod
+
+        perlfunc - Perl builtin functions> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1574 in perlfaq3.pod
+
+        perlop - Perl operators and precedence in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1619 in perlfaq3.pod
+
+        perllocale - Perl locale handling (internationalization and localization) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1668 in perlfaq3.pod
+
+      Moving to perl5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1760 in perlfaq3.pod
+
+        perltrap - Perl traps for the unwary in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1792 in perlfaq3.pod
+
+        perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1839 in perlfaq3.pod
+
+      Linking with C in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1862 in perlfaq3.pod
+
+        perlxstut - Tutorial for writing XSUBs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1893 in perlfaq3.pod
+
+        perlxs - XS language reference manual in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1942 in perlfaq3.pod
+
+        perlcall - Perl calling conventions from C in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1990 in perlfaq3.pod
+
+        perlguts - Introduction to the Perl API in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2043 in perlfaq3.pod
+
+        perlembed - how to embed perl in your C program in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2093 in perlfaq3.pod
+
+      Various in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2158 in perlfaq3.pod
+
+    How can I use Perl interactively? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2391 in perlfaq3.pod
+
+    How do I find which modules are installed on my system? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2975 in perlfaq3.pod
+
+    How do I debug my Perl programs? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4854 in perlfaq3.pod
+
+    How do I profile my Perl programs? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6234 in perlfaq3.pod
+
+    How do I cross-reference my Perl programs? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7860 in perlfaq3.pod
+
+    Is there a pretty-printer (formatter) for Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8045 in perlfaq3.pod
+
+    Is there an IDE or Windows Perl Editor? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9215 in perlfaq3.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 9604 in perlfaq3.pod
+
+        Eclipse in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9613 in perlfaq3.pod
+
+        Enginsite in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9741 in perlfaq3.pod
+
+        Kephra in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9971 in perlfaq3.pod
+
+        Komodo in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10219 in perlfaq3.pod
+
+        Notepad++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10468 in perlfaq3.pod
+
+        Open Perl IDE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10526 in perlfaq3.pod
+
+        OptiPerl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10756 in perlfaq3.pod
+
+        Padre in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10911 in perlfaq3.pod
+
+        PerlBuilder in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11138 in perlfaq3.pod
+
+        visiPerl+ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11296 in perlfaq3.pod
+
+        Visual Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11399 in perlfaq3.pod
+
+        Zeus in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11533 in perlfaq3.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12744 in perlfaq3.pod
+
+        GNU Emacs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12753 in perlfaq3.pod
+
+        MicroEMACS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12829 in perlfaq3.pod
+
+        XEmacs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12877 in perlfaq3.pod
+
+        Jed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12937 in perlfaq3.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13015 in perlfaq3.pod
+
+        Vim in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13024 in perlfaq3.pod
+
+        Vile in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13059 in perlfaq3.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13189 in perlfaq3.pod
+
+        MultiEdit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13198 in perlfaq3.pod
+
+        SlickEdit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13245 in perlfaq3.pod
+
+        ConTEXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13292 in perlfaq3.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13803 in perlfaq3.pod
+
+        bash in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13812 in perlfaq3.pod
+
+        zsh in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13875 in perlfaq3.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14111 in perlfaq3.pod
+
+        BBEdit and TextWrangler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14120 in perlfaq3.pod
+
+    Where can I get Perl macros for vi? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14253 in perlfaq3.pod
+
+    Where can I get perl-mode or cperl-mode for emacs? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14665 in perlfaq3.pod
+
+    How can I use curses with Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15212 in perlfaq3.pod
+
+    How can I write a GUI (X, Tk, Gtk, etc.) in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15574 in perlfaq3.pod
+
+      Tk in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15871 in perlfaq3.pod
+
+      Wx in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16208 in perlfaq3.pod
+
+      Gtk and Gtk2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16580 in perlfaq3.pod
+
+      Win32::GUI in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17117 in perlfaq3.pod
+
+      CamelBones in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17477 in perlfaq3.pod
+
+      Qt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17950 in perlfaq3.pod
+
+      Athena in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18055 in perlfaq3.pod
+
+    How can I make my Perl program run faster? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18192 in perlfaq3.pod
+
+    How can I make my Perl program take less memory? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19826 in perlfaq3.pod
+
+      Don't slurp! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21322 in perlfaq3.pod
+
+      Use map and grep selectively in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21818 in perlfaq3.pod
+
+      Avoid unnecessary quotes and stringification in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22151 in perlfaq3.pod
+
+      Pass by reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22672 in perlfaq3.pod
+
+      Tie large variables to disk in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23113 in perlfaq3.pod
+
+    Is it safe to return a reference to local or lexical data? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23427 in perlfaq3.pod
+
+    How can I free an array or hash so my program shrinks? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23769 in perlfaq3.pod
+
+    How can I make my CGI script more efficient? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24731 in perlfaq3.pod
+
+    How can I hide the source for my Perl program? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26702 in perlfaq3.pod
+
+    How can I compile my Perl program into byte code or C? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28995 in perlfaq3.pod
+
+    How can I get #!perl to work on [MS-DOS,NT,...]? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30174 in perlfaq3.pod
+
+    Can I write useful Perl programs on the command line? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31674 in perlfaq3.pod
+
+    Why don't Perl one-liners work on my DOS/Mac/VMS system? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32505 in perlfaq3.pod
+
+    Where can I learn about CGI or Web programming in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34049 in perlfaq3.pod
+
+    Where can I learn about object-oriented Perl programming? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34719 in perlfaq3.pod
+
+    Where can I learn about linking C with Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35061 in perlfaq3.pod
+
+    I've read perlembed, perlguts, etc., but I can't embed perl in my C program; what am I doing wrong? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35736 in perlfaq3.pod
+
+    When I tried to run my script, I got this message. What does it mean? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36090 in perlfaq3.pod
+
+    What's MakeMaker? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36538 in perlfaq3.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36853 in perlfaq3.pod
+

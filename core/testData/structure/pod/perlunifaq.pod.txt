@@ -1,0 +1,58 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlunifaq.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlunifaq.pod
+
+  Q and A in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 44 in perlunifaq.pod
+
+    perlunitut isn't really a Unicode tutorial, is it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 165 in perlunifaq.pod
+
+    What character encodings does Perl support? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 558 in perlunifaq.pod
+
+    Which version of perl should I use? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 735 in perlunifaq.pod
+
+    What about binary data, like images? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1099 in perlunifaq.pod
+
+    When should I decode or encode? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1556 in perlunifaq.pod
+
+    What if I don't decode? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1814 in perlunifaq.pod
+
+    What if I don't encode? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2440 in perlunifaq.pod
+
+    Is there a way to automatically decode or encode? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3022 in perlunifaq.pod
+
+    What if I don't know which encoding was used? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3777 in perlunifaq.pod
+
+    Can I use Unicode in my Perl sources? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4278 in perlunifaq.pod
+
+    Data::Dumper doesn't restore the UTF8 flag; is it broken? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4702 in perlunifaq.pod
+
+    Why do regex character classes sometimes match only in the ASCII range? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5496 in perlunifaq.pod
+
+    Why do some characters not uppercase or lowercase correctly? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6956 in perlunifaq.pod
+
+    How can I determine if a string is a text string or a binary string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7067 in perlunifaq.pod
+
+    How do I convert from encoding FOO to encoding BAR? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7545 in perlunifaq.pod
+
+    What are decode_utf8 and encode_utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8242 in perlunifaq.pod
+
+    What is a "wide character"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8379 in perlunifaq.pod
+
+  INTERNALS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8938 in perlunifaq.pod
+
+    What is "the UTF8 flag"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8956 in perlunifaq.pod
+
+    What about the use bytes pragma? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9853 in perlunifaq.pod
+
+    What about the use encoding pragma? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10277 in perlunifaq.pod
+
+    What is the difference between :encoding and :utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10853 in perlunifaq.pod
+
+    What's the difference between UTF-8 and utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11792 in perlunifaq.pod
+
+    I lost track; what encoding is the internal format really? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12730 in perlunifaq.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13340 in perlunifaq.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13388 in perlunifaq.pod
+

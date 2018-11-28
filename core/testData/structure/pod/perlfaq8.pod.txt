@@ -1,0 +1,162 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfaq8.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq8.pod
+
+  VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 44 in perlfaq8.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78 in perlfaq8.pod
+
+    How do I find out which operating system I'm running under? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 565 in perlfaq8.pod
+
+    How come exec() doesn't return? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 810 in perlfaq8.pod
+
+    How do I do fancy stuff with the keyboard/screen/mouse? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1201 in perlfaq8.pod
+
+      Keyboard in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1396 in perlfaq8.pod
+
+      Screen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1600 in perlfaq8.pod
+
+      Mouse in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1736 in perlfaq8.pod
+
+    How do I print something out in color? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2006 in perlfaq8.pod
+
+    How do I read just one key without waiting for a return key? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2527 in perlfaq8.pod
+
+    How do I check whether input is ready on the keyboard? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4682 in perlfaq8.pod
+
+    How do I clear the screen? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5171 in perlfaq8.pod
+
+    How do I get the screen size? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6469 in perlfaq8.pod
+
+    How do I ask the user for a password? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7279 in perlfaq8.pod
+
+    How do I read and write the serial port? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7960 in perlfaq8.pod
+
+      lockfiles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8297 in perlfaq8.pod
+
+      open mode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8499 in perlfaq8.pod
+
+      end of line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8891 in perlfaq8.pod
+
+      flushing output in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9704 in perlfaq8.pod
+
+      non-blocking input in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10584 in perlfaq8.pod
+
+    How do I decode encrypted password files? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11708 in perlfaq8.pod
+
+    How do I start a process in the background? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12424 in perlfaq8.pod
+
+      STDIN, STDOUT, and STDERR are shared in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13356 in perlfaq8.pod
+
+      Signals in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13792 in perlfaq8.pod
+
+      Zombies in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14117 in perlfaq8.pod
+
+    How do I trap control characters/signals? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14720 in perlfaq8.pod
+
+    How do I modify the shadow password file on a Unix system? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15928 in perlfaq8.pod
+
+    How do I set the time and date? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16411 in perlfaq8.pod
+
+    How can I sleep() or alarm() for under a second? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17020 in perlfaq8.pod
+
+    How can I measure time under a second? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17461 in perlfaq8.pod
+
+    How can I do an atexit() or setjmp()/longjmp()? (Exception handling) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17938 in perlfaq8.pod
+
+    Why doesn't my sockets program work under System V (Solaris)? What does the error message "Protocol not supported" mean? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19123 in perlfaq8.pod
+
+    How can I call my system's unique C functions from Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19625 in perlfaq8.pod
+
+    Where do I get the include files to do ioctl() or syscall()? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20282 in perlfaq8.pod
+
+    Why do setuid perl scripts complain about kernel problems? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21487 in perlfaq8.pod
+
+    How can I open a pipe both to and from a command? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21738 in perlfaq8.pod
+
+    Why can't I get the output of a command with system()? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22360 in perlfaq8.pod
+
+    How can I capture STDERR from an external command? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22821 in perlfaq8.pod
+
+    Why doesn't open() return an error when a pipe open fails? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28069 in perlfaq8.pod
+
+    What's wrong with using backticks in a void context? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28870 in perlfaq8.pod
+
+    How can I call backticks without shell processing? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29986 in perlfaq8.pod
+
+    Why can't my script read from STDIN after I gave it EOF (^D on Unix, ^Z on MS-DOS)? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31009 in perlfaq8.pod
+
+      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31432 in perlfaq8.pod
+
+      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31564 in perlfaq8.pod
+
+      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31655 in perlfaq8.pod
+
+      4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31774 in perlfaq8.pod
+
+    How can I convert my shell script to perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31860 in perlfaq8.pod
+
+    Can I use perl to run a telnet or ftp session? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32350 in perlfaq8.pod
+
+    How can I write expect in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33260 in perlfaq8.pod
+
+    Is there a way to hide perl's command line from programs such as "ps"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33635 in perlfaq8.pod
+
+    I {changed directory, modified my environment} in a perl script. How come the change disappeared when I exited the script? How do I get my changes to be visible? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34252 in perlfaq8.pod
+
+      Unix in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34431 in perlfaq8.pod
+
+    How do I close a process's filehandle without waiting for it to complete? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34826 in perlfaq8.pod
+
+    How do I fork a daemon process? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35131 in perlfaq8.pod
+
+      Open /dev/tty and use the TIOCNOTTY ioctl on it. See tty(1) for details. Or bett... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35412 in perlfaq8.pod
+
+      Change directory to / in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35612 in perlfaq8.pod
+
+      Reopen STDIN, STDOUT, and STDERR so they're not connected to the old tty. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35644 in perlfaq8.pod
+
+      Background yourself like this:      fork && exit; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35728 in perlfaq8.pod
+
+    How do I find out if I'm running interactively or not? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35899 in perlfaq8.pod
+
+    How do I timeout a slow event? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37295 in perlfaq8.pod
+
+    How do I set CPU limits? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37707 in perlfaq8.pod
+
+    How do I avoid zombies on a Unix system? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38390 in perlfaq8.pod
+
+    How do I use an SQL database? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38642 in perlfaq8.pod
+
+    How do I make a system() exit on control-C? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39223 in perlfaq8.pod
+
+    How do I open a file without blocking? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39548 in perlfaq8.pod
+
+    How do I tell the difference between errors from the shell and perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39951 in perlfaq8.pod
+
+    How do I install a module from CPAN? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42414 in perlfaq8.pod
+
+    What's the difference between require and use? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43553 in perlfaq8.pod
+
+    How do I keep my own module/library directory? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44507 in perlfaq8.pod
+
+    How do I add the directory my program lives in to the module/library search path? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46280 in perlfaq8.pod
+
+    How do I add a directory to my include path (@INC) at runtime? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47753 in perlfaq8.pod
+
+      the PERLLIB environment variable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47970 in perlfaq8.pod
+
+      the PERL5LIB environment variable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48073 in perlfaq8.pod
+
+      the perl -Idir command line flag in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48178 in perlfaq8.pod
+
+      the lib pragma: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48262 in perlfaq8.pod
+
+      the local::lib module: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48329 in perlfaq8.pod
+
+    Where are modules installed? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48600 in perlfaq8.pod
+
+    What is socket.ph and where do I get it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49297 in perlfaq8.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49559 in perlfaq8.pod
+

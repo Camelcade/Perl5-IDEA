@@ -1,0 +1,128 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlxstypemap.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlxstypemap.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58 in perlxstypemap.pod
+
+    Anatomy of a typemap in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1288 in perlxstypemap.pod
+
+    The Role of the typemap File in Your Distribution in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5383 in perlxstypemap.pod
+
+    Sharing typemaps Between CPAN Distributions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6772 in perlxstypemap.pod
+
+      Declare ExtUtils::Typemaps::Basic as a build-time dependency in Makefile.PL (use... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7325 in perlxstypemap.pod
+
+      Include the following line in the XS section of your XS file: (don't break the l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7490 in perlxstypemap.pod
+
+    Writing typemap Entries in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7701 in perlxstypemap.pod
+
+      $var - the name of the input or output variable, eg. RETVAL for return values. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8471 in perlxstypemap.pod
+
+      $type - the raw C type of the parameter, any : replaced with _. e.g. for a type ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8563 in perlxstypemap.pod
+
+      $ntype - the supplied type with * replaced with Ptr. e.g. for a type of Foo*, $n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8702 in perlxstypemap.pod
+
+      $arg - the stack entry, that the parameter is input from or output to, e.g. ST(0... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8825 in perlxstypemap.pod
+
+      $argoff - the argument stack offset of the argument.  ie. 0 for the first argume... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8923 in perlxstypemap.pod
+
+      $pname - the full name of the XSUB, with including the PACKAGE name, with any PR... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9025 in perlxstypemap.pod
+
+      $Package - the package specified by the most recent PACKAGE keyword. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9168 in perlxstypemap.pod
+
+      $ALIAS - non-zero if the current XSUB has any aliases declared with ALIAS. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9253 in perlxstypemap.pod
+
+    Full Listing of Core Typemaps in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9351 in perlxstypemap.pod
+
+      T_SV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9627 in perlxstypemap.pod
+
+      T_SVREF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9816 in perlxstypemap.pod
+
+      T_SVREF_FIXED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10017 in perlxstypemap.pod
+
+      T_AVREF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10231 in perlxstypemap.pod
+
+      T_AVREF_REFCOUNT_FIXED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10468 in perlxstypemap.pod
+
+      T_HVREF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10729 in perlxstypemap.pod
+
+      T_HVREF_REFCOUNT_FIXED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10965 in perlxstypemap.pod
+
+      T_CVREF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11225 in perlxstypemap.pod
+
+      T_CVREF_REFCOUNT_FIXED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11491 in perlxstypemap.pod
+
+      T_SYSRET in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11782 in perlxstypemap.pod
+
+      T_UV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12389 in perlxstypemap.pod
+
+      T_IV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12423 in perlxstypemap.pod
+
+      T_INT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12562 in perlxstypemap.pod
+
+      T_ENUM in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12846 in perlxstypemap.pod
+
+      T_BOOL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13006 in perlxstypemap.pod
+
+      T_U_INT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13099 in perlxstypemap.pod
+
+      T_SHORT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13282 in perlxstypemap.pod
+
+      T_U_SHORT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13433 in perlxstypemap.pod
+
+      T_LONG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13673 in perlxstypemap.pod
+
+      T_U_LONG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13820 in perlxstypemap.pod
+
+      T_CHAR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14055 in perlxstypemap.pod
+
+      T_U_CHAR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14095 in perlxstypemap.pod
+
+      T_FLOAT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14130 in perlxstypemap.pod
+
+      T_NV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14236 in perlxstypemap.pod
+
+      T_DOUBLE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14398 in perlxstypemap.pod
+
+      T_PV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14523 in perlxstypemap.pod
+
+      T_PTR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14555 in perlxstypemap.pod
+
+      T_PTRREF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14641 in perlxstypemap.pod
+
+      T_PTROBJ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14982 in perlxstypemap.pod
+
+      T_REF_IV_REF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15524 in perlxstypemap.pod
+
+      T_REF_IV_PTR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15553 in perlxstypemap.pod
+
+      T_PTRDESC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16058 in perlxstypemap.pod
+
+      T_REFREF in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16084 in perlxstypemap.pod
+
+      T_REFOBJ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16414 in perlxstypemap.pod
+
+      T_OPAQUEPTR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16620 in perlxstypemap.pod
+
+      T_OPAQUE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17489 in perlxstypemap.pod
+
+      Implicit array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18198 in perlxstypemap.pod
+
+      T_PACKED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18820 in perlxstypemap.pod
+
+      T_PACKEDARRAY in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20263 in perlxstypemap.pod
+
+      T_DATAUNIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21593 in perlxstypemap.pod
+
+      T_CALLBACK in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21620 in perlxstypemap.pod
+
+      T_ARRAY in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21647 in perlxstypemap.pod
+
+      T_STDIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23111 in perlxstypemap.pod
+
+      T_INOUT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23211 in perlxstypemap.pod
+
+      T_IN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23746 in perlxstypemap.pod
+
+      T_OUT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23873 in perlxstypemap.pod
+

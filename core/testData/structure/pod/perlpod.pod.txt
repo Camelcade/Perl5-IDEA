@@ -1,0 +1,120 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlpod.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 107 in perlpod.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 200 in perlpod.pod
+
+    Ordinary Paragraph in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 609 in perlpod.pod
+
+    Verbatim Paragraph in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1236 in perlpod.pod
+
+    Command Paragraph in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1824 in perlpod.pod
+
+      =head1 Heading Text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2476 in perlpod.pod
+
+      =head2 Heading Text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2585 in perlpod.pod
+
+      =head3 Heading Text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2618 in perlpod.pod
+
+      =head4 Heading Text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2651 in perlpod.pod
+
+      =over indentlevel in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3131 in perlpod.pod
+
+      =item stuff... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3213 in perlpod.pod
+
+      =back in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3241 in perlpod.pod
+
+        Don't use "=item"s outside of an "=over" ... "=back" region. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4131 in perlpod.pod
+
+        The first thing after the "=over" command should be an "=item", unless there are... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4202 in perlpod.pod
+
+        Don't put "=headn" commands inside an "=over" ... "=back" region. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4361 in perlpod.pod
+
+        And perhaps most importantly, keep the items consistent: either use "=item *" fo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4440 in perlpod.pod
+
+      =cut in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4864 in perlpod.pod
+
+      =pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5190 in perlpod.pod
+
+      =begin formatname in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5731 in perlpod.pod
+
+      =end formatname in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5811 in perlpod.pod
+
+      =for formatname text... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5840 in perlpod.pod
+
+      =encoding encodingname in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8172 in perlpod.pod
+
+    Formatting Codes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9525 in perlpod.pod
+
+      I<text> -- italic text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9867 in perlpod.pod
+
+      B<text> -- bold text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10062 in perlpod.pod
+
+      C<code> -- code text in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10393 in perlpod.pod
+
+      L<name> -- a hyperlink in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10684 in perlpod.pod
+
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10973 in perlpod.pod
+
+          L<name>  Link to a Perl manual page (e.g., L<Net::Ping>).  Note that name should... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10980 in perlpod.pod
+
+          L<name/"sec"> or L<name/sec>  Link to a section in other manual page.  E.g., L<p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11221 in perlpod.pod
+
+          L</"sec"> or L</sec>  Link to a section in this manual page.  E.g., L</"Object M... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11364 in perlpod.pod
+
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11914 in perlpod.pod
+
+          L<text|name>  Link this text to that manual page.  E.g., L<Perl Error Messages|p... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11921 in perlpod.pod
+
+          L<text|name/"sec"> or L<text|name/sec>  Link this text to that section in that m... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12042 in perlpod.pod
+
+          L<text|/"sec"> or L<text|/sec> or L<text|"sec">  Link this text to that section ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12230 in perlpod.pod
+
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12472 in perlpod.pod
+
+          L<scheme:...>  L<text|scheme:...>  Links to an absolute URL.  For example, L<htt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12479 in perlpod.pod
+
+      E<escape> -- a character escape in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12686 in perlpod.pod
+
+        E<lt> -- a literal < (less than) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12863 in perlpod.pod
+
+        E<gt> -- a literal > (greater than) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12921 in perlpod.pod
+
+        E<verbar> -- a literal | (vertical bar) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12982 in perlpod.pod
+
+        E<sol> -- a literal / (solidus)  The above four are optional except in other for... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13049 in perlpod.pod
+
+        E<htmlname>  Some non-numeric HTML entity name, such as E<eacute>, meaning the s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13234 in perlpod.pod
+
+        E<number>  The ASCII/Latin-1/Unicode character with that number.  A leading "0x"... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13435 in perlpod.pod
+
+      F<filename> -- used for filenames in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14057 in perlpod.pod
+
+      S<text> -- text contains non-breaking spaces in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14240 in perlpod.pod
+
+      X<topic name> -- an index entry in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14503 in perlpod.pod
+
+      Z<> -- a null (zero-effect) formatting code in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14789 in perlpod.pod
+
+    The Intent in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17867 in perlpod.pod
+
+    Embedding Pods in Perl Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18794 in perlpod.pod
+
+    Hints for Writing Pod in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19705 in perlpod.pod
+
+      The podchecker command is provided for checking Pod syntax for errors and warnin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19742 in perlpod.pod
+
+      If you're more familiar with writing in HTML than with writing in Pod, you can t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20234 in perlpod.pod
+
+      Many older Pod translators require the lines before every Pod command and after ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20598 in perlpod.pod
+
+      Some older Pod translators require paragraphs (including command paragraphs like... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21143 in perlpod.pod
+
+      Older translators might add wording around an L<> link, so that L<Foo::Bar> may ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21458 in perlpod.pod
+
+      Going past the 70th column in a verbatim block might be ungracefully wrapped by ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21891 in perlpod.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22005 in perlpod.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22149 in perlpod.pod
+

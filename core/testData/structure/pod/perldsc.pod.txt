@@ -1,0 +1,74 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perldsc.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldsc.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 108 in perldsc.pod
+
+    * arrays of arrays in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1601 in perldsc.pod
+
+    * hashes of arrays in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1627 in perldsc.pod
+
+    * arrays of hashes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1653 in perldsc.pod
+
+    * hashes of hashes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perldsc.pod
+
+    * more elaborate constructs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1705 in perldsc.pod
+
+  REFERENCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1836 in perldsc.pod
+
+  COMMON MISTAKES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4241 in perldsc.pod
+
+  CAVEAT ON PRECEDENCE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9286 in perldsc.pod
+
+  WHY YOU SHOULD ALWAYS use strict in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10424 in perldsc.pod
+
+  DEBUGGING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11298 in perldsc.pod
+
+  CODE EXAMPLES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12124 in perldsc.pod
+
+  ARRAYS OF ARRAYS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12307 in perldsc.pod
+
+    Declaration of an ARRAY OF ARRAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12358 in perldsc.pod
+
+    Generation of an ARRAY OF ARRAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12527 in perldsc.pod
+
+    Access and Printing of an ARRAY OF ARRAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12880 in perldsc.pod
+
+  HASHES OF ARRAYS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13371 in perldsc.pod
+
+    Declaration of a HASH OF ARRAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13421 in perldsc.pod
+
+    Generation of a HASH OF ARRAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13654 in perldsc.pod
+
+    Access and Printing of a HASH OF ARRAYS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14440 in perldsc.pod
+
+  ARRAYS OF HASHES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15411 in perldsc.pod
+
+    Declaration of an ARRAY OF HASHES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15462 in perldsc.pod
+
+    Generation of an ARRAY OF HASHES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15845 in perldsc.pod
+
+    Access and Printing of an ARRAY OF HASHES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16598 in perldsc.pod
+
+  HASHES OF HASHES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17280 in perldsc.pod
+
+    Declaration of a HASH OF HASHES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17330 in perldsc.pod
+
+    Generation of a HASH OF HASHES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17796 in perldsc.pod
+
+    Access and Printing of a HASH OF HASHES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18858 in perldsc.pod
+
+  MORE ELABORATE RECORDS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20403 in perldsc.pod
+
+    Declaration of MORE ELABORATE RECORDS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20467 in perldsc.pod
+
+    Declaration of a HASH OF COMPLEX RECORDS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21332 in perldsc.pod
+
+    Generation of a HASH OF COMPLEX RECORDS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22503 in perldsc.pod
+
+  Database Ties in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25028 in perldsc.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25494 in perldsc.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25560 in perldsc.pod
+

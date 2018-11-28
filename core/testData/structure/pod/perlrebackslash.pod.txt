@@ -1,0 +1,106 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlrebackslash.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlrebackslash.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88 in perlrebackslash.pod
+
+    The backslash in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 616 in perlrebackslash.pod
+
+      [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2004 in perlrebackslash.pod
+
+    All the sequences and escapes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2319 in perlrebackslash.pod
+
+    Character Escapes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4776 in perlrebackslash.pod
+
+      Fixed characters in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4802 in perlrebackslash.pod
+
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 5527 in perlrebackslash.pod
+
+          [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5536 in perlrebackslash.pod
+
+          [2] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5744 in perlrebackslash.pod
+
+        Example in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 5907 in perlrebackslash.pod
+
+      Control characters in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5988 in perlrebackslash.pod
+
+        Example in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 6792 in perlrebackslash.pod
+
+      Named or numbered characters and character sequences in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6881 in perlrebackslash.pod
+
+        Example in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 8419 in perlrebackslash.pod
+
+      Octal escapes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8642 in perlrebackslash.pod
+
+        Examples (assuming an ASCII platform) in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 10276 in perlrebackslash.pod
+
+        Disambiguation rules between old-style octal escapes and backreferences in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 10739 in perlrebackslash.pod
+
+          1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11184 in perlrebackslash.pod
+
+          2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11264 in perlrebackslash.pod
+
+          3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11347 in perlrebackslash.pod
+
+      Hexadecimal escapes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12184 in perlrebackslash.pod
+
+        Examples (assuming an ASCII platform) in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 12724 in perlrebackslash.pod
+
+    Modifiers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13261 in perlrebackslash.pod
+
+      Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 14669 in perlrebackslash.pod
+
+    Character classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14983 in perlrebackslash.pod
+
+      Unicode classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16191 in perlrebackslash.pod
+
+    Referencing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16681 in perlrebackslash.pod
+
+      Absolute referencing in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16994 in perlrebackslash.pod
+
+        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 17990 in perlrebackslash.pod
+
+      Relative referencing in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18187 in perlrebackslash.pod
+
+        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 18580 in perlrebackslash.pod
+
+      Named referencing in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18902 in perlrebackslash.pod
+
+        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 19311 in perlrebackslash.pod
+
+    Assertions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19586 in perlrebackslash.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 19770 in perlrebackslash.pod
+
+        \A in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19779 in perlrebackslash.pod
+
+        \z, \Z in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20148 in perlrebackslash.pod
+
+        \G in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20917 in perlrebackslash.pod
+
+        \b{}, \b, \B{}, \B in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21412 in perlrebackslash.pod
+
+          \b{gcb} or \b{g} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23302 in perlrebackslash.pod
+
+          \b{lb} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23655 in perlrebackslash.pod
+
+          \b{sb} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24103 in perlrebackslash.pod
+
+          \b{wb} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25096 in perlrebackslash.pod
+
+      Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 27871 in perlrebackslash.pod
+
+    Misc in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28634 in perlrebackslash.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 28748 in perlrebackslash.pod
+
+        \K in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28757 in perlrebackslash.pod
+
+        \N in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29057 in perlrebackslash.pod
+
+        \R in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29474 in perlrebackslash.pod
+
+        \X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30681 in perlrebackslash.pod
+
+      Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 31359 in perlrebackslash.pod
+

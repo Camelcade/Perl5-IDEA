@@ -1,0 +1,10 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perllinux.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perllinux.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 240 in perllinux.pod
+
+    Experimental Support for Sun Studio Compilers for Linux OS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 394 in perllinux.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1360 in perllinux.pod
+

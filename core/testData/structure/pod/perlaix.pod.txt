@@ -1,0 +1,56 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlaix.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlaix.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 243 in perlaix.pod
+
+    Compiling Perl 5 on AIX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 423 in perlaix.pod
+
+    Supported Compilers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 828 in perlaix.pod
+
+    Incompatibility with AIX Toolbox lib gdbm in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2590 in perlaix.pod
+
+    Perl 5 was successfully compiled and tested on: in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3103 in perlaix.pod
+
+    Building Dynamic Extensions on AIX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4697 in perlaix.pod
+
+    Using Large Files with Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5482 in perlaix.pod
+
+    Threaded Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5545 in perlaix.pod
+
+    64-bit Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6189 in perlaix.pod
+
+    Long doubles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6850 in perlaix.pod
+
+    Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/32-bit) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7669 in perlaix.pod
+
+    Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (32-bit) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8167 in perlaix.pod
+
+    Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/64-bit) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8543 in perlaix.pod
+
+    Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (64-bit) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8921 in perlaix.pod
+
+    Compiling Perl 5 on AIX 7.1.0 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9480 in perlaix.pod
+
+    Compiling Perl 5 on older AIX versions up to 4.3.3 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9875 in perlaix.pod
+
+    OS level in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11837 in perlaix.pod
+
+    Building Dynamic Extensions on AIX < 5L in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12674 in perlaix.pod
+
+    The IBM ANSI C Compiler in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13718 in perlaix.pod
+
+    The usenm option in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17620 in perlaix.pod
+
+    Using GNU's gcc for building Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18572 in perlaix.pod
+
+    Using Large Files with Perl < 5L in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18864 in perlaix.pod
+
+    Threaded Perl < 5L in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18936 in perlaix.pod
+
+    64-bit Perl < 5L in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19693 in perlaix.pod
+
+    AIX 4.2 and extensions using C++ with statics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19872 in perlaix.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20376 in perlaix.pod
+

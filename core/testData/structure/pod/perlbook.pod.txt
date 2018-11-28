@@ -1,0 +1,92 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlbook.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlbook.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 57 in perlbook.pod
+
+    The most popular books in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 533 in perlbook.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 655 in perlbook.pod
+
+        Programming Perl (the "Camel Book"): in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 664 in perlbook.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1000 in perlbook.pod
+
+        The Perl Cookbook (the "Ram Book"): in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1009 in perlbook.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1404 in perlbook.pod
+
+        Learning Perl  (the "Llama Book") in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1413 in perlbook.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1806 in perlbook.pod
+
+        Intermediate Perl (the "Alpaca Book") in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1815 in perlbook.pod
+
+    References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2079 in perlbook.pod
+
+      Perl 5 Pocket Reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2180 in perlbook.pod
+
+      Perl Debugger Pocket Reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2356 in perlbook.pod
+
+      Regular Expression Pocket Reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2542 in perlbook.pod
+
+    Tutorials in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2740 in perlbook.pod
+
+      Beginning Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2767 in perlbook.pod
+
+      Learning Perl (the "Llama Book") in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3047 in perlbook.pod
+
+      Intermediate Perl (the "Alpaca Book") in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3255 in perlbook.pod
+
+      Mastering Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3512 in perlbook.pod
+
+      Effective Perl Programming in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3672 in perlbook.pod
+
+    Task-Oriented in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3849 in perlbook.pod
+
+      Writing Perl Modules for CPAN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3880 in perlbook.pod
+
+      The Perl Cookbook in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4027 in perlbook.pod
+
+      Automating System Administration with Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4258 in perlbook.pod
+
+      Real World SQL Server Administration with Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4460 in perlbook.pod
+
+    Special Topics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4630 in perlbook.pod
+
+      Regular Expressions Cookbook in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4662 in perlbook.pod
+
+      Programming the Perl DBI in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4872 in perlbook.pod
+
+      Perl Best Practices in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5060 in perlbook.pod
+
+      Higher-Order Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5231 in perlbook.pod
+
+      Mastering Regular Expressions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5402 in perlbook.pod
+
+      Network Programming with Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5592 in perlbook.pod
+
+      Perl Template Toolkit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5788 in perlbook.pod
+
+      Object Oriented Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5988 in perlbook.pod
+
+      Data Munging with Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6165 in perlbook.pod
+
+      Mastering Perl/Tk in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6291 in perlbook.pod
+
+      Extending and Embedding Perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6477 in perlbook.pod
+
+      Pro Perl Debugging in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6636 in perlbook.pod
+
+    Free (as in beer) books in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6797 in perlbook.pod
+
+    Other interesting, non-Perl books in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6996 in perlbook.pod
+
+      Programming Pearls in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7248 in perlbook.pod
+
+      More Programming Pearls in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7344 in perlbook.pod
+
+    A note on freshness in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7437 in perlbook.pod
+
+    Get your book listed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8198 in perlbook.pod
+

@@ -1,0 +1,98 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlthrtut.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perlthrtut.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlthrtut.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 71 in perlthrtut.pod
+
+  What Is A Thread Anyway? in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1227 in perlthrtut.pod
+
+  Threaded Program Models in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1650 in perlthrtut.pod
+
+    Boss/Worker in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1940 in perlthrtut.pod
+
+    Work Crew in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2608 in perlthrtut.pod
+
+    Pipeline in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3180 in perlthrtut.pod
+
+  What kind of threads are Perl threads? in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4221 in perlthrtut.pod
+
+  Thread-Safe Modules in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5446 in perlthrtut.pod
+
+  Thread Basics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6824 in perlthrtut.pod
+
+    Basic Thread Support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7162 in perlthrtut.pod
+
+    A Note about the Examples in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8351 in perlthrtut.pod
+
+    Creating Threads in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8762 in perlthrtut.pod
+
+    Waiting For A Thread To Exit in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10317 in perlthrtut.pod
+
+    Ignoring A Thread in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11507 in perlthrtut.pod
+
+    Process and Thread Termination in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12725 in perlthrtut.pod
+
+  Threads And Data in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13627 in perlthrtut.pod
+
+    Shared And Unshared Data in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13852 in perlthrtut.pod
+
+    Thread Pitfalls: Races in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16115 in perlthrtut.pod
+
+  Synchronization and control in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17951 in perlthrtut.pod
+
+    Controlling access: lock() in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18483 in perlthrtut.pod
+
+    A Thread Pitfall: Deadlocks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21420 in perlthrtut.pod
+
+    Queues: Passing Data Around in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23319 in perlthrtut.pod
+
+    Semaphores: Synchronizing Data Access in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24383 in perlthrtut.pod
+
+    Basic semaphores in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24755 in perlthrtut.pod
+
+    Advanced Semaphores in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26010 in perlthrtut.pod
+
+    Waiting for a Condition in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28576 in perlthrtut.pod
+
+    Giving up control in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28948 in perlthrtut.pod
+
+  General Thread Utility Routines in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30216 in perlthrtut.pod
+
+    What Thread Am I In? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30490 in perlthrtut.pod
+
+    Thread IDs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30737 in perlthrtut.pod
+
+    Are These Threads The Same? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31221 in perlthrtut.pod
+
+    What Threads Are Running? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31518 in perlthrtut.pod
+
+  A Complete Example in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 32231 in perlthrtut.pod
+
+  Different implementations of threads in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35820 in perlthrtut.pod
+
+  Performance considerations in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39275 in perlthrtut.pod
+
+  Process-scope Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40161 in perlthrtut.pod
+
+  Thread-Safety of System Libraries in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 41653 in perlthrtut.pod
+
+  Conclusion in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42862 in perlthrtut.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43067 in perlthrtut.pod
+
+  Bibliography in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43556 in perlthrtut.pod
+
+    Introductory Texts in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43638 in perlthrtut.pod
+
+    OS-Related References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44448 in perlthrtut.pod
+
+    Other References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44844 in perlthrtut.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45503 in perlthrtut.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45842 in perlthrtut.pod
+
+  Copyrights in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 46179 in perlthrtut.pod
+

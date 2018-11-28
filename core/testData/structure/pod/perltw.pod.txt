@@ -1,0 +1,48 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perltw.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perltw.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 130 in perltw.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 166 in perltw.pod
+
+    額外的中文編碼 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1240 in perltw.pod
+
+    進一步的資訊 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1793 in perltw.pod
+
+    提供 Perl 資源的網址 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1892 in perltw.pod
+
+      http://www.perl.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1923 in perltw.pod
+
+      http://www.cpan.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1975 in perltw.pod
+
+      http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2055 in perltw.pod
+
+    學習 Perl 的網址 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2108 in perltw.pod
+
+      http://www.oreilly.com.tw/product_perl.php?id=index_perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2137 in perltw.pod
+
+      http://groups.google.com/groups?q=tw.bbs.comp.lang.perl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2223 in perltw.pod
+
+    Perl 使用者集會 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2334 in perltw.pod
+
+      http://www.pm.org/groups/taiwan.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2362 in perltw.pod
+
+      irc://irc.freenode.org/#perl.tw in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2424 in perltw.pod
+
+    Unicode 相關網址 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2488 in perltw.pod
+
+      http://www.unicode.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2518 in perltw.pod
+
+      http://www.cl.cam.ac.uk/%7Emgk25/unicode.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2583 in perltw.pod
+
+    中文化資訊 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2681 in perltw.pod
+
+      中文化軟體聯盟 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2704 in perltw.pod
+
+      Linux 軟體中文化計劃 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2746 in perltw.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2808 in perltw.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2884 in perltw.pod
+

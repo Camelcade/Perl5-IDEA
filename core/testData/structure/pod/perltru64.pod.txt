@@ -1,0 +1,30 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perltru64.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perltru64.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 297 in perltru64.pod
+
+    Compiling Perl 5 on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 532 in perltru64.pod
+
+    Using Large Files with Perl on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2419 in perltru64.pod
+
+    Threaded Perl on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2685 in perltru64.pod
+
+    Long Doubles on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3252 in perltru64.pod
+
+    DB_File tests failing on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4102 in perltru64.pod
+
+    64-bit Perl on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5326 in perltru64.pod
+
+    Warnings about floating-point overflow when compiling Perl on Tru64 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5589 in perltru64.pod
+
+  Testing Perl on Tru64 in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6725 in perltru64.pod
+
+  ext/ODBM_File/odbm Test Failing With Static Builds in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6936 in perltru64.pod
+
+  Perl Fails Because Of Unresolved Symbol sockatmark in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7305 in perltru64.pod
+
+  read_cur_obj_info: bad file magic number in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7809 in perltru64.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8440 in perltru64.pod
+

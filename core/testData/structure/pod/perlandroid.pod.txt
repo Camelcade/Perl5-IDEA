@@ -1,0 +1,34 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlandroid.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlandroid.pod
+
+  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 225 in perlandroid.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 502 in perlandroid.pod
+
+  Cross-compilation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 626 in perlandroid.pod
+
+    Get the Android Native Development Kit (NDK) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1282 in perlandroid.pod
+
+    Determine the architecture you'll be cross-compiling for in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1469 in perlandroid.pod
+
+    Set up a standalone toolchain in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1997 in perlandroid.pod
+
+    adb or ssh? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2457 in perlandroid.pod
+
+      adb in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3210 in perlandroid.pod
+
+      ssh in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4856 in perlandroid.pod
+
+    Configure and beyond in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5516 in perlandroid.pod
+
+      Notes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6624 in perlandroid.pod
+
+        If you are targetting x86 Android, you will have to change $TARGETARCH-gcc to i6... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6645 in perlandroid.pod
+
+        On some older low-end devices -- think early 2.2 era -- some tests, particularly... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6763 in perlandroid.pod
+
+  Native Builds in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6962 in perlandroid.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7816 in perlandroid.pod
+

@@ -1,0 +1,138 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlxs.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlxs.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52 in perlxs.pod
+
+    Introduction in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72 in perlxs.pod
+
+    On The Road in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4076 in perlxs.pod
+
+    The Anatomy of an XSUB in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7172 in perlxs.pod
+
+    The Argument Stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9682 in perlxs.pod
+
+    The RETVAL Variable in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10647 in perlxs.pod
+
+    Returning SVs, AVs and HVs through RETVAL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12199 in perlxs.pod
+
+    The MODULE Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14396 in perlxs.pod
+
+    The PACKAGE Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15120 in perlxs.pod
+
+    The PREFIX Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15898 in perlxs.pod
+
+    The OUTPUT: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16355 in perlxs.pod
+
+    The NO_OUTPUT Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18434 in perlxs.pod
+
+    The CODE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19461 in perlxs.pod
+
+    The INIT: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20100 in perlxs.pod
+
+    The NO_INIT Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20785 in perlxs.pod
+
+    The TYPEMAP: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21575 in perlxs.pod
+
+    Initializing Function Parameters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22230 in perlxs.pod
+
+    Default Parameter Values in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24913 in perlxs.pod
+
+    The PREINIT: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25984 in perlxs.pod
+
+    The SCOPE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28923 in perlxs.pod
+
+    The INPUT: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29343 in perlxs.pod
+
+    The IN/OUTLIST/IN_OUTLIST/OUT/IN_OUT Keywords in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31065 in perlxs.pod
+
+    The length(NAME) Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34076 in perlxs.pod
+
+    Variable-length Parameter Lists in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34729 in perlxs.pod
+
+    The C_ARGS: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35864 in perlxs.pod
+
+    The PPCODE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36620 in perlxs.pod
+
+    Returning Undef And Empty Lists in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39657 in perlxs.pod
+
+    The REQUIRE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42430 in perlxs.pod
+
+    The CLEANUP: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42709 in perlxs.pod
+
+    The POSTCALL: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43038 in perlxs.pod
+
+    The BOOT: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43526 in perlxs.pod
+
+    The VERSIONCHECK: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44203 in perlxs.pod
+
+    The PROTOTYPES: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45014 in perlxs.pod
+
+    The PROTOTYPE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45682 in perlxs.pod
+
+    The ALIAS: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46500 in perlxs.pod
+
+    The OVERLOAD: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47226 in perlxs.pod
+
+    The FALLBACK: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48587 in perlxs.pod
+
+    The INTERFACE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49160 in perlxs.pod
+
+    The INTERFACE_MACRO: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50489 in perlxs.pod
+
+    The INCLUDE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51745 in perlxs.pod
+
+    The INCLUDE_COMMAND: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52719 in perlxs.pod
+
+    The CASE: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53038 in perlxs.pod
+
+    The EXPORT_XSUB_SYMBOLS: Keyword in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54605 in perlxs.pod
+
+    The & Unary Operator in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55237 in perlxs.pod
+
+    Inserting POD, Comments and C Preprocessor Directives in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 56518 in perlxs.pod
+
+    Using XS With C++ in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58062 in perlxs.pod
+
+    Interface Strategy in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 61167 in perlxs.pod
+
+    Perl Objects And C Structures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64051 in perlxs.pod
+
+    Safely Storing Static Data in XS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66717 in perlxs.pod
+
+      MY_CXT REFERENCE in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 68599 in perlxs.pod
+
+        MY_CXT_KEY in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68633 in perlxs.pod
+
+        typedef my_cxt_t in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68944 in perlxs.pod
+
+        START_MY_CXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69288 in perlxs.pod
+
+        MY_CXT_INIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69392 in perlxs.pod
+
+        dMY_CXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69734 in perlxs.pod
+
+        MY_CXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69829 in perlxs.pod
+
+        aMY_CXT/pMY_CXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70079 in perlxs.pod
+
+        MY_CXT_CLONE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70649 in perlxs.pod
+
+        MY_CXT_INIT_INTERP(my_perl) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71042 in perlxs.pod
+
+        dMY_CXT_INTERP(my_perl) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71077 in perlxs.pod
+
+    Thread-aware system interfaces in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71391 in perlxs.pod
+
+  EXAMPLES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 72254 in perlxs.pod
+
+  CAVEATS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73758 in perlxs.pod
+
+    Non-locale-aware XS code in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76401 in perlxs.pod
+
+    Locale-aware XS code in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77769 in perlxs.pod
+
+  XS VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78660 in perlxs.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78779 in perlxs.pod
+

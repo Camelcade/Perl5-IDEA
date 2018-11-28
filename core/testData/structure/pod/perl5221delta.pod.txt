@@ -1,0 +1,102 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl5221delta.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perl5221delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5221delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5221delta.pod
+
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5221delta.pod
+
+    Bounds Checking Constructs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 819 in perl5221delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1197 in perl5221delta.pod
+
+    Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1226 in perl5221delta.pod
+
+      Module::CoreList has been upgraded from version 5.20150520 to 5.20151213. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1272 in perl5221delta.pod
+
+      PerlIO::scalar has been upgraded from version 0.22 to 0.23. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1359 in perl5221delta.pod
+
+      POSIX has been upgraded from version 1.53 to 1.53_01.  If POSIX::strerror was pa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1432 in perl5221delta.pod
+
+      Storable has been upgraded from version 2.53 to 2.53_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1681 in perl5221delta.pod
+
+      warnings has been upgraded from version 1.32 to 1.34.  The warnings::enabled exa... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1751 in perl5221delta.pod
+
+      Win32 has been upgraded from version 0.51 to 0.52.  This has been updated for Wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1960 in perl5221delta.pod
+
+  Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2094 in perl5221delta.pod
+
+    Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2116 in perl5221delta.pod
+
+      perltie in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2158 in perl5221delta.pod
+
+        The usage of FIRSTKEY and NEXTKEY has been clarified. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2186 in perl5221delta.pod
+
+      perlvar in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2263 in perl5221delta.pod
+
+        The specific true value of $!{E...} is now documented, noting that it is subject... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2291 in perl5221delta.pod
+
+  Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2422 in perl5221delta.pod
+
+    Changes to Existing Diagnostics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2624 in perl5221delta.pod
+
+      The printf and sprintf builtins are now more careful about the warnings they emi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2673 in perl5221delta.pod
+
+  Configuration and Compilation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2927 in perl5221delta.pod
+
+    Using the NO_HASH_SEED define in combination with the default hash algorithm PER... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2974 in perl5221delta.pod
+
+    Configuring with ccflags containing quotes (e.g. -Accflags='-DAPPLLIB_EXP=\"/usr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3202 in perl5221delta.pod
+
+  Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3443 in perl5221delta.pod
+
+    Platform-Specific Notes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3468 in perl5221delta.pod
+
+      IRIX in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3509 in perl5221delta.pod
+
+        Under some circumstances IRIX stdio fgetc() and fread() set the errno to ENOENT,... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3528 in perl5221delta.pod
+
+        Problems when multiplying long doubles by infinity have been fixed. [perl #12639... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3787 in perl5221delta.pod
+
+        All tests pass now on IRIX with the default build configuration. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3933 in perl5221delta.pod
+
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4022 in perl5221delta.pod
+
+    qr/(?[ () ])/ no longer segfaults, giving a syntax error message instead. [perl ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4058 in perl5221delta.pod
+
+    Regular expression possessive quantifier Perl 5.20 regression now fixed. qr/PAT{... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4213 in perl5221delta.pod
+
+    Certain syntax errors in perlrecharclass/Extended Bracketed Character Classes ca... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4552 in perl5221delta.pod
+
+    BEGIN <> no longer segfaults and properly produces an error message. [perl #1253... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4788 in perl5221delta.pod
+
+    A regression from Perl 5.20 has been fixed, in which some syntax errors in (?[..... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4942 in perl5221delta.pod
+
+    Another problem with (?[...])|perlrecharclass/Extended Bracketed Character Class... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5267 in perl5221delta.pod
+
+    In Perl 5.22.0, the logic changed when parsing a numeric parameter to the -C opt... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5507 in perl5221delta.pod
+
+    Warning fatality is now ignored when rewinding the stack.  This prevents infinit... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5786 in perl5221delta.pod
+
+    A crash with %::=(); J->${\"::"} has been fixed. [perl #125541]|https://rt.perl.... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6017 in perl5221delta.pod
+
+    Nested quantifiers such as /.{1}??/ should cause perl to throw a fatal error, bu... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6151 in perl5221delta.pod
+
+    Regular expression sequences such as /(?i/ (and similarly with other recognized ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6384 in perl5221delta.pod
+
+    A bug in hexadecimal floating point literal support meant that high-order bits c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6692 in perl5221delta.pod
+
+    Another hexadecimal floating point bug, causing low-order bits to be lost in cas... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6980 in perl5221delta.pod
+
+    Further hexadecimal floating point bugs have been fixed: In some circumstances, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7289 in perl5221delta.pod
+
+    A crash caused by incomplete expressions within /(?[ ])/ (e.g. /(?[[0]+()+])/) h... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7610 in perl5221delta.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7804 in perl5221delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9318 in perl5221delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10506 in perl5221delta.pod
+

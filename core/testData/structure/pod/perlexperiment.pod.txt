@@ -1,0 +1,96 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlexperiment.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlexperiment.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 74 in perlexperiment.pod
+
+    Current experiments in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 471 in perlexperiment.pod
+
+      our can now have an experimental optional attribute unique in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 508 in perlexperiment.pod
+
+      Smart match (~~) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 738 in perlexperiment.pod
+
+      Pluggable keywords in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1013 in perlexperiment.pod
+
+      Lexical subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1224 in perlexperiment.pod
+
+      Regular Expression Set Operations in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1508 in perlexperiment.pod
+
+      Subroutine signatures in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1829 in perlexperiment.pod
+
+      Aliasing via reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2069 in perlexperiment.pod
+
+      The "const" attribute in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2361 in perlexperiment.pod
+
+      use re 'strict'; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2646 in perlexperiment.pod
+
+      String- and number-specific bitwise operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2804 in perlexperiment.pod
+
+      The <:win32> IO pseudolayer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3115 in perlexperiment.pod
+
+      There is an installhtml target in the Makefile. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3276 in perlexperiment.pod
+
+      Unicode in Perl on EBCDIC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3439 in perlexperiment.pod
+
+    Accepted features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3479 in perlexperiment.pod
+
+      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3802 in perlexperiment.pod
+
+      die accepts a reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3850 in perlexperiment.pod
+
+      DB module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3907 in perlexperiment.pod
+
+      Weak references in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3988 in perlexperiment.pod
+
+      Internal file glob in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4037 in perlexperiment.pod
+
+      fork() emulation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4089 in perlexperiment.pod
+
+      -Dusemultiplicity -Duseithreads in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4161 in perlexperiment.pod
+
+      Support for long doubles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4250 in perlexperiment.pod
+
+      The \N regex character class in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4332 in perlexperiment.pod
+
+      (?{code}) and (??{ code }) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4616 in perlexperiment.pod
+
+      Linux abstract Unix domain sockets in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4727 in perlexperiment.pod
+
+      Lvalue subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4932 in perlexperiment.pod
+
+      Backtracking control verbs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5030 in perlexperiment.pod
+
+      The <:pop> IO pseudolayer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5128 in perlexperiment.pod
+
+      \s in regexp matches vertical tab in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5207 in perlexperiment.pod
+
+      Postfix dereference syntax in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5276 in perlexperiment.pod
+
+    Removed features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5369 in perlexperiment.pod
+
+      5.005-style threading in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5629 in perlexperiment.pod
+
+      perlcc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5706 in perlexperiment.pod
+
+      The pseudo-hash data type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5777 in perlexperiment.pod
+
+      GetOpt::Long Options can now take multiple values at once (experimental) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5859 in perlexperiment.pod
+
+      Assertions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6004 in perlexperiment.pod
+
+      Test::Harness::Straps in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6102 in perlexperiment.pod
+
+      legacy in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6163 in perlexperiment.pod
+
+      Lexical $_ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6306 in perlexperiment.pod
+
+      Array and hash container functions accept references in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6465 in perlexperiment.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6713 in perlexperiment.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6781 in perlexperiment.pod
+
+  COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6901 in perlexperiment.pod
+
+  LICENSE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6979 in perlexperiment.pod
+

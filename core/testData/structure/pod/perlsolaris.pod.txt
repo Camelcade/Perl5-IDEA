@@ -1,0 +1,98 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlsolaris.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlsolaris.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 244 in perlsolaris.pod
+
+    Solaris Version Numbers. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3537 in perlsolaris.pod
+
+  RESOURCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4308 in perlsolaris.pod
+
+    Solaris FAQ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4429 in perlsolaris.pod
+
+    Precompiled Binaries in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4628 in perlsolaris.pod
+
+    Solaris Documentation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4802 in perlsolaris.pod
+
+  SETTING UP in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4914 in perlsolaris.pod
+
+    File Extraction Problems on Solaris. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4933 in perlsolaris.pod
+
+    Compiler and Related Tools on Solaris. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5548 in perlsolaris.pod
+
+      Include /usr/ccs/bin/ in your PATH. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5768 in perlsolaris.pod
+
+      Avoid /usr/ucb/cc. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6895 in perlsolaris.pod
+
+      Sun's C Compiler in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7127 in perlsolaris.pod
+
+      GCC in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7279 in perlsolaris.pod
+
+      GNU as and GNU ld in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8632 in perlsolaris.pod
+
+      Sun and GNU make in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 10443 in perlsolaris.pod
+
+      Avoid libucb. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11195 in perlsolaris.pod
+
+    Environment for Compiling perl on Solaris in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11596 in perlsolaris.pod
+
+      PATH in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11646 in perlsolaris.pod
+
+      LD_LIBRARY_PATH in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12043 in perlsolaris.pod
+
+  RUN CONFIGURE. in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12928 in perlsolaris.pod
+
+    64-bit perl on Solaris. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13106 in perlsolaris.pod
+
+      General 32-bit vs. 64-bit issues. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13377 in perlsolaris.pod
+
+      Large File Support in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14600 in perlsolaris.pod
+
+      Building an LP64 perl in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16788 in perlsolaris.pod
+
+      Long Doubles. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18188 in perlsolaris.pod
+
+    Threads in perl on Solaris. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18338 in perlsolaris.pod
+
+    Malloc Issues with perl on Solaris. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18520 in perlsolaris.pod
+
+  MAKE PROBLEMS. in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 19266 in perlsolaris.pod
+
+    Dynamic Loading Problems With GNU as and GNU ld in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19298 in perlsolaris.pod
+
+    ld.so.1: ./perl: fatal: relocation error: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19510 in perlsolaris.pod
+
+    dlopen: stub interception failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19715 in perlsolaris.pod
+
+    #error "No DATAMODEL_NATIVE specified" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19974 in perlsolaris.pod
+
+    sh: ar: not found in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20327 in perlsolaris.pod
+
+  MAKE TEST in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20644 in perlsolaris.pod
+
+    op/stat.t test 4 in Solaris in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20662 in perlsolaris.pod
+
+    nss_delete core dump from op/pwent or op/grent in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20919 in perlsolaris.pod
+
+  CROSS-COMPILATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21041 in perlsolaris.pod
+
+  PREBUILT BINARIES OF PERL FOR SOLARIS. in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21536 in perlsolaris.pod
+
+  RUNTIME ISSUES FOR PERL ON SOLARIS. in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21964 in perlsolaris.pod
+
+    Limits on Numbers of Open Files on Solaris. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22008 in perlsolaris.pod
+
+  SOLARIS-SPECIFIC MODULES. in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22687 in perlsolaris.pod
+
+  SOLARIS-SPECIFIC PROBLEMS WITH MODULES. in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22900 in perlsolaris.pod
+
+    Proc::ProcessTable on Solaris in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22948 in perlsolaris.pod
+
+    BSD::Resource on Solaris in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23891 in perlsolaris.pod
+
+    Net::SSLeay on Solaris in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24141 in perlsolaris.pod
+
+  SunOS 4.x in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24995 in perlsolaris.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29539 in perlsolaris.pod
+

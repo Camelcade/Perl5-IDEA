@@ -1,0 +1,408 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlvar.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlvar.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50 in perlvar.pod
+
+    The Syntax of Variable Names in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70 in perlvar.pod
+
+  SPECIAL VARIABLES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2173 in perlvar.pod
+
+    General Variables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3002 in perlvar.pod
+
+      $ARG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3037 in perlvar.pod
+
+      $_ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3049 in perlvar.pod
+
+        The following functions use $_ as a default argument:  abs, alarm, chomp, chop, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3434 in perlvar.pod
+
+        All file tests (-f, -d) except for -t, which defaults to STDIN. See perlfunc/-X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3843 in perlvar.pod
+
+        The pattern matching operations m//, s/// and tr/// (aka y///) when used without... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3945 in perlvar.pod
+
+        The default iterator variable in a foreach loop if no other variable is supplied... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4067 in perlvar.pod
+
+        The implicit iterator variable in the grep() and map() functions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4162 in perlvar.pod
+
+        The implicit variable of given(). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4244 in perlvar.pod
+
+        The default place to put the next value or input record when a <FH>, readline, r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4291 in perlvar.pod
+
+      @ARG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5491 in perlvar.pod
+
+      @_ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5503 in perlvar.pod
+
+      $LIST_SEPARATOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5726 in perlvar.pod
+
+      $" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5749 in perlvar.pod
+
+      $PROCESS_ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6142 in perlvar.pod
+
+      $PID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6161 in perlvar.pod
+
+      $$ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6173 in perlvar.pod
+
+      $PROGRAM_NAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7342 in perlvar.pod
+
+      $0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7363 in perlvar.pod
+
+      $REAL_GROUP_ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9481 in perlvar.pod
+
+      $GID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9503 in perlvar.pod
+
+      $( in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9515 in perlvar.pod
+
+      $EFFECTIVE_GROUP_ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10482 in perlvar.pod
+
+      $EGID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10509 in perlvar.pod
+
+      $) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10522 in perlvar.pod
+
+      $REAL_USER_ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11842 in perlvar.pod
+
+      $UID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11863 in perlvar.pod
+
+      $< in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11875 in perlvar.pod
+
+      $EFFECTIVE_USER_ID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12238 in perlvar.pod
+
+      $EUID in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12264 in perlvar.pod
+
+      $> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12277 in perlvar.pod
+
+      $SUBSCRIPT_SEPARATOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12841 in perlvar.pod
+
+      $SUBSEP in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12869 in perlvar.pod
+
+      $; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12884 in perlvar.pod
+
+      $a in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13483 in perlvar.pod
+
+      $b in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13493 in perlvar.pod
+
+      %ENV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13865 in perlvar.pod
+
+      $OLD_PERL_VERSION in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14599 in perlvar.pod
+
+      $] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14624 in perlvar.pod
+
+      $SYSTEM_FD_MAX in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16228 in perlvar.pod
+
+      $^F in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16250 in perlvar.pod
+
+      @F in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16790 in perlvar.pod
+
+      @INC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17079 in perlvar.pod
+
+      %INC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17921 in perlvar.pod
+
+      $INPLACE_EDIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18590 in perlvar.pod
+
+      $^I in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18611 in perlvar.pod
+
+      $^M in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18772 in perlvar.pod
+
+      $OSNAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19427 in perlvar.pod
+
+      $^O in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19442 in perlvar.pod
+
+      %SIG in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20074 in perlvar.pod
+
+      $BASETIME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24155 in perlvar.pod
+
+      $^T in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24172 in perlvar.pod
+
+      $PERL_VERSION in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24384 in perlvar.pod
+
+      $^V in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24405 in perlvar.pod
+
+      ${^WIN32_SLOPPY_STAT} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25760 in perlvar.pod
+
+      $EXECUTABLE_NAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26492 in perlvar.pod
+
+      $^X in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26516 in perlvar.pod
+
+    Variables related to regular expressions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28511 in perlvar.pod
+
+      Performance issues in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29899 in perlvar.pod
+
+        $<digits> ($1, $2, ...) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31649 in perlvar.pod
+
+        $MATCH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31976 in perlvar.pod
+
+        $& in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31990 in perlvar.pod
+
+        ${^MATCH} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32380 in perlvar.pod
+
+        $PREMATCH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32904 in perlvar.pod
+
+        $` in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32921 in perlvar.pod
+
+        ${^PREMATCH} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33360 in perlvar.pod
+
+        $POSTMATCH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33902 in perlvar.pod
+
+        $' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33920 in perlvar.pod
+
+        ${^POSTMATCH} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34466 in perlvar.pod
+
+        $LAST_PAREN_MATCH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35030 in perlvar.pod
+
+        $+ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35055 in perlvar.pod
+
+        $LAST_SUBMATCH_RESULT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35416 in perlvar.pod
+
+        $^N in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35445 in perlvar.pod
+
+        @LAST_MATCH_END in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36126 in perlvar.pod
+
+        @+ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36149 in perlvar.pod
+
+        %LAST_PAREN_MATCH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36839 in perlvar.pod
+
+        %+ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36864 in perlvar.pod
+
+        @LAST_MATCH_START in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37777 in perlvar.pod
+
+        @- in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37802 in perlvar.pod
+
+          $` is the same as substr($var, 0, $-[0]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38891 in perlvar.pod
+
+          $& is the same as substr($var, $-[0], $+[0] - $-[0]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38945 in perlvar.pod
+
+          $' is the same as substr($var, $+[0]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39011 in perlvar.pod
+
+          $1 is the same as substr($var, $-[1], $+[1] - $-[1]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39062 in perlvar.pod
+
+          $2 is the same as substr($var, $-[2], $+[2] - $-[2]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39128 in perlvar.pod
+
+          $3 is the same as substr($var, $-[3], $+[3] - $-[3]) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39194 in perlvar.pod
+
+        %- in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39308 in perlvar.pod
+
+        $LAST_REGEXP_CODE_RESULT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40791 in perlvar.pod
+
+        $^R in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40823 in perlvar.pod
+
+        ${^RE_DEBUG_FLAGS} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41039 in perlvar.pod
+
+        ${^RE_TRIE_MAXBUF} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41278 in perlvar.pod
+
+    Variables related to filehandles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41905 in perlvar.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 45010 in perlvar.pod
+
+        $ARGV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45019 in perlvar.pod
+
+        @ARGV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45109 in perlvar.pod
+
+        ARGV in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45390 in perlvar.pod
+
+        ARGVOUT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45924 in perlvar.pod
+
+        IO::Handle->output_field_separator( EXPR ) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46193 in perlvar.pod
+
+        $OUTPUT_FIELD_SEPARATOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46243 in perlvar.pod
+
+        $OFS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46274 in perlvar.pod
+
+        $, in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46286 in perlvar.pod
+
+        HANDLE->input_line_number( EXPR ) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46667 in perlvar.pod
+
+        $INPUT_LINE_NUMBER in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46708 in perlvar.pod
+
+        $NR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46734 in perlvar.pod
+
+        $. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46745 in perlvar.pod
+
+        IO::Handle->input_record_separator( EXPR ) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48033 in perlvar.pod
+
+        $INPUT_RECORD_SEPARATOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48083 in perlvar.pod
+
+        $RS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48114 in perlvar.pod
+
+        $/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48125 in perlvar.pod
+
+        IO::Handle->output_record_separator( EXPR ) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50623 in perlvar.pod
+
+        $OUTPUT_RECORD_SEPARATOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50674 in perlvar.pod
+
+        $ORS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50706 in perlvar.pod
+
+        $\ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50718 in perlvar.pod
+
+        HANDLE->autoflush( EXPR ) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51173 in perlvar.pod
+
+        $OUTPUT_AUTOFLUSH in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51206 in perlvar.pod
+
+        $| in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51231 in perlvar.pod
+
+        ${^LAST_FH} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52087 in perlvar.pod
+
+      Variables related to formats in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 52497 in perlvar.pod
+
+        $ACCUMULATOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52677 in perlvar.pod
+
+        $^A in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52697 in perlvar.pod
+
+        IO::Handle->format_formfeed(EXPR) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53127 in perlvar.pod
+
+        $FORMAT_FORMFEED in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53168 in perlvar.pod
+
+        $^L in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53192 in perlvar.pod
+
+        HANDLE->format_page_number(EXPR) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53397 in perlvar.pod
+
+        $FORMAT_PAGE_NUMBER in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53437 in perlvar.pod
+
+        $% in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53464 in perlvar.pod
+
+        HANDLE->format_lines_left(EXPR) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53614 in perlvar.pod
+
+        $FORMAT_LINES_LEFT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53653 in perlvar.pod
+
+        $- in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53679 in perlvar.pod
+
+        IO::Handle->format_line_break_characters EXPR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53839 in perlvar.pod
+
+        $FORMAT_LINE_BREAK_CHARACTERS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53892 in perlvar.pod
+
+        $: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53929 in perlvar.pod
+
+        HANDLE->format_lines_per_page(EXPR) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54347 in perlvar.pod
+
+        $FORMAT_LINES_PER_PAGE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54390 in perlvar.pod
+
+        $= in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54420 in perlvar.pod
+
+        HANDLE->format_top_name(EXPR) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54602 in perlvar.pod
+
+        $FORMAT_TOP_NAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54639 in perlvar.pod
+
+        $^ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54663 in perlvar.pod
+
+        HANDLE->format_name(EXPR) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54975 in perlvar.pod
+
+        $FORMAT_NAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55008 in perlvar.pod
+
+        $~ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55028 in perlvar.pod
+
+    Error Variables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55325 in perlvar.pod
+
+      ${^CHILD_ERROR_NATIVE} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57638 in perlvar.pod
+
+      $EXTENDED_OS_ERROR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58213 in perlvar.pod
+
+      $^E in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58239 in perlvar.pod
+
+      $EXCEPTIONS_BEING_CAUGHT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59333 in perlvar.pod
+
+      $^S in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59365 in perlvar.pod
+
+      $WARNING in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59956 in perlvar.pod
+
+      $^W in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59972 in perlvar.pod
+
+      ${^WARNING_BITS} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60183 in perlvar.pod
+
+      $OS_ERROR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60511 in perlvar.pod
+
+      $ERRNO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60528 in perlvar.pod
+
+      $! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60542 in perlvar.pod
+
+      %OS_ERROR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61712 in perlvar.pod
+
+      %ERRNO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61729 in perlvar.pod
+
+      %! in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61743 in perlvar.pod
+
+      $CHILD_ERROR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62458 in perlvar.pod
+
+      $? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62478 in perlvar.pod
+
+      $EVAL_ERROR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63708 in perlvar.pod
+
+      $@ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63727 in perlvar.pod
+
+    Variables related to the interpreter state in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64314 in perlvar.pod
+
+      $COMPILING in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64448 in perlvar.pod
+
+      $^C in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64466 in perlvar.pod
+
+      $DEBUGGING in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64837 in perlvar.pod
+
+      $^D in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64855 in perlvar.pod
+
+      ${^ENCODING} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65262 in perlvar.pod
+
+      ${^GLOBAL_PHASE} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66558 in perlvar.pod
+
+        CONSTRUCT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66677 in perlvar.pod
+
+        START in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66970 in perlvar.pod
+
+        CHECK in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67522 in perlvar.pod
+
+        INIT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67570 in perlvar.pod
+
+        RUN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67648 in perlvar.pod
+
+        END in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67718 in perlvar.pod
+
+        DESTRUCT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67762 in perlvar.pod
+
+      $^H in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69218 in perlvar.pod
+
+      %^H in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70956 in perlvar.pod
+
+      ${^OPEN} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71655 in perlvar.pod
+
+      $PERLDB in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71901 in perlvar.pod
+
+      $^P in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71916 in perlvar.pod
+
+        0x01 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72081 in perlvar.pod
+
+        0x02 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72123 in perlvar.pod
+
+        0x04 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72285 in perlvar.pod
+
+        0x08 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72324 in perlvar.pod
+
+        0x10 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72392 in perlvar.pod
+
+        0x20 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72468 in perlvar.pod
+
+        0x40 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72508 in perlvar.pod
+
+        0x80 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72576 in perlvar.pod
+
+        0x100 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72625 in perlvar.pod
+
+        0x200 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72721 in perlvar.pod
+
+        0x400 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72825 in perlvar.pod
+
+        0x800 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72888 in perlvar.pod
+
+        0x1000 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72966 in perlvar.pod
+
+      ${^TAINT} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73195 in perlvar.pod
+
+      ${^UNICODE} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73457 in perlvar.pod
+
+      ${^UTF8CACHE} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73746 in perlvar.pod
+
+      ${^UTF8LOCALE} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74202 in perlvar.pod
+
+    Deprecated and removed variables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74538 in perlvar.pod
+
+      $# in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74953 in perlvar.pod
+
+      $* in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75422 in perlvar.pod
+
+      $[ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75748 in perlvar.pod
+

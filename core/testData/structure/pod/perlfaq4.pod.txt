@@ -1,0 +1,200 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfaq4.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq4.pod
+
+  VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq4.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77 in perlfaq4.pod
+
+  Data: Numbers in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 236 in perlfaq4.pod
+
+    Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I should be getting (eg, 19.95)? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 258 in perlfaq4.pod
+
+    Why is int() broken? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1175 in perlfaq4.pod
+
+    Why isn't my octal data interpreted correctly? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1722 in perlfaq4.pod
+
+    Does Perl have a round() function? What about ceil() and floor()? Trig functions? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3230 in perlfaq4.pod
+
+    How do I convert between numeric representations/bases/radixes? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4893 in perlfaq4.pod
+
+      How do I convert hexadecimal into decimal in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5516 in perlfaq4.pod
+
+      How do I convert from decimal to hexadecimal in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5938 in perlfaq4.pod
+
+      How do I convert from octal to decimal in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6527 in perlfaq4.pod
+
+      How do I convert from decimal to octal in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6928 in perlfaq4.pod
+
+      How do I convert from binary to decimal in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7190 in perlfaq4.pod
+
+      How do I convert from decimal to binary in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7883 in perlfaq4.pod
+
+    Why doesn't & work the way I want it to? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8322 in perlfaq4.pod
+
+    How do I multiply matrices? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9422 in perlfaq4.pod
+
+    How do I perform an operation on a series of integers? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9588 in perlfaq4.pod
+
+    How can I output Roman numerals? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10674 in perlfaq4.pod
+
+    Why aren't my random numbers random? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10779 in perlfaq4.pod
+
+    How do I get a random number between X and Y? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12194 in perlfaq4.pod
+
+  Data: Dates in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13270 in perlfaq4.pod
+
+    How do I find the day or week of the year? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13290 in perlfaq4.pod
+
+    How do I find the current century or millennium? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14391 in perlfaq4.pod
+
+    How can I compare two dates and find the difference? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15034 in perlfaq4.pod
+
+    How can I take a string and turn it into epoch seconds? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15914 in perlfaq4.pod
+
+    How can I find the Julian Day? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16246 in perlfaq4.pod
+
+    How do I find yesterday's date? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17344 in perlfaq4.pod
+
+    Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19467 in perlfaq4.pod
+
+  Data: Strings in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20351 in perlfaq4.pod
+
+    How do I validate input? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20373 in perlfaq4.pod
+
+    How do I unescape a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20865 in perlfaq4.pod
+
+    How do I remove consecutive pairs of characters? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfaq4.pod
+
+    How do I expand function calls in a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22255 in perlfaq4.pod
+
+    How do I find matching/nesting anything? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23885 in perlfaq4.pod
+
+    How do I reverse a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24670 in perlfaq4.pod
+
+    How do I expand tabs in a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24817 in perlfaq4.pod
+
+    How do I reformat a paragraph? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25117 in perlfaq4.pod
+
+    How can I access or change N characters of a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25712 in perlfaq4.pod
+
+    How do I change the Nth occurrence of something? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26268 in perlfaq4.pod
+
+    How can I count the number of occurrences of a substring within a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27243 in perlfaq4.pod
+
+    How do I capitalize all the words on one line? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28274 in perlfaq4.pod
+
+    How can I split a [character]-delimited string except when inside [character]? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29654 in perlfaq4.pod
+
+    How do I strip blank space from the beginning/end of a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31213 in perlfaq4.pod
+
+    How do I pad a string with blanks or pad a number with zeroes? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33073 in perlfaq4.pod
+
+    How do I extract selected columns from a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35118 in perlfaq4.pod
+
+    How do I find the soundex value of a string? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36462 in perlfaq4.pod
+
+    How can I expand variables in text strings? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36734 in perlfaq4.pod
+
+    What's wrong with always quoting "$vars"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38746 in perlfaq4.pod
+
+    Why don't my <<HERE documents work? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40001 in perlfaq4.pod
+
+      There must be no space after the << part. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40132 in perlfaq4.pod
+
+      There (probably) should be a semicolon at the end of the opening token in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40189 in perlfaq4.pod
+
+      You can't (easily) have any space in front of the tag. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40267 in perlfaq4.pod
+
+      There needs to be at least a line separator after the end token. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40329 in perlfaq4.pod
+
+  Data: Arrays in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42602 in perlfaq4.pod
+
+    What is the difference between a list and an array? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42623 in perlfaq4.pod
+
+    What is the difference between $array[1] and @array[1]? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45303 in perlfaq4.pod
+
+    How can I remove duplicate elements from a list or array? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46765 in perlfaq4.pod
+
+    How can I tell whether a certain element is contained in a list or array? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48555 in perlfaq4.pod
+
+    How do I compute the difference of two arrays? How do I compute the intersection of two arrays? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51440 in perlfaq4.pod
+
+    How do I test whether two arrays or hashes are equal? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52078 in perlfaq4.pod
+
+    How do I find the first array element for which a condition is true? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53927 in perlfaq4.pod
+
+    How do I handle linked lists? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55048 in perlfaq4.pod
+
+    How do I handle circular lists? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55888 in perlfaq4.pod
+
+    How do I shuffle an array randomly? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 56873 in perlfaq4.pod
+
+    How do I process/modify each element of an array? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58270 in perlfaq4.pod
+
+    How do I select a random element from an array? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59327 in perlfaq4.pod
+
+    How do I permute N elements of a list? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
+
+    How do I sort an array by (anything)? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 61674 in perlfaq4.pod
+
+    How do I manipulate arrays of bits? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 63301 in perlfaq4.pod
+
+    Why does defined() return true on empty arrays and hashes? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66887 in perlfaq4.pod
+
+  Data: Hashes (Associative Arrays) in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67159 in perlfaq4.pod
+
+    How do I process an entire hash? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 67201 in perlfaq4.pod
+
+    How do I merge two hashes? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69124 in perlfaq4.pod
+
+    What happens if I add or remove keys from a hash while iterating over it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70759 in perlfaq4.pod
+
+    How do I look up a hash element by value? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71188 in perlfaq4.pod
+
+    How can I know how many entries are in a hash? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71822 in perlfaq4.pod
+
+    How do I sort a hash (optionally by value instead of key)? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72969 in perlfaq4.pod
+
+    How can I always keep my hash sorted? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74491 in perlfaq4.pod
+
+    What's the difference between "delete" and "undef" with hashes? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74931 in perlfaq4.pod
+
+    Why don't my tied hashes make the defined/exists distinction? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77130 in perlfaq4.pod
+
+    How do I reset an each() operation part-way through? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77495 in perlfaq4.pod
+
+    How can I get the unique keys from two hashes? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77911 in perlfaq4.pod
+
+    How can I store a multidimensional array in a DBM file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78507 in perlfaq4.pod
+
+    How can I make my hash remember the order I put elements into it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78795 in perlfaq4.pod
+
+    Why does passing a subroutine an undefined element in a hash create it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79088 in perlfaq4.pod
+
+    How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80347 in perlfaq4.pod
+
+    How can I use a reference as a hash key? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80906 in perlfaq4.pod
+
+    How can I check if a key exists in a multilevel hash? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82182 in perlfaq4.pod
+
+    How can I prevent addition of unwanted keys into a hash? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 83950 in perlfaq4.pod
+
+  Data: Misc in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 84196 in perlfaq4.pod
+
+    How do I handle binary data correctly? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84215 in perlfaq4.pod
+
+    How do I determine whether a scalar is a number/whole/integer/float? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84759 in perlfaq4.pod
+
+    How do I keep persistent data across program calls? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86891 in perlfaq4.pod
+
+    How do I print out or copy a recursive data structure? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87455 in perlfaq4.pod
+
+    How do I define methods for every class/object? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88095 in perlfaq4.pod
+
+    How do I verify a credit card checksum? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88543 in perlfaq4.pod
+
+    How do I pack arrays of doubles or floats for XS code? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88642 in perlfaq4.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88976 in perlfaq4.pod
+

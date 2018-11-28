@@ -1,0 +1,64 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlfaq6.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq6.pod
+
+  VERSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45 in perlfaq6.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79 in perlfaq6.pod
+
+    How can I hope to use regular expressions without creating illegible and unmaintainable code? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 564 in perlfaq6.pod
+
+      Comments Outside the Regex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 838 in perlfaq6.pod
+
+      Comments Inside the Regex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1113 in perlfaq6.pod
+
+      Different Delimiters in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2188 in perlfaq6.pod
+
+    I'm having trouble matching over more than one line. What's wrong? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2737 in perlfaq6.pod
+
+    How can I pull out lines between two patterns that are themselves on different lines? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4933 in perlfaq6.pod
+
+    How do I match XML, HTML, or other nasty, ugly things with a regex? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5681 in perlfaq6.pod
+
+    I put a regular expression into $/ but it didn't work. What's wrong? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6244 in perlfaq6.pod
+
+    How do I substitute case-insensitively on the LHS while preserving case on the RHS? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7481 in perlfaq6.pod
+
+    How can I make \w match national character sets? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10364 in perlfaq6.pod
+
+    How can I match a locale-smart version of /[a-zA-Z]/? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10555 in perlfaq6.pod
+
+    How can I quote a variable to use in a regex? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11007 in perlfaq6.pod
+
+    What is /o really for? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12134 in perlfaq6.pod
+
+    How do I use a regular expression to strip C-style comments from a file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14376 in perlfaq6.pod
+
+    Can I use Perl regular expressions to match balanced text? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16484 in perlfaq6.pod
+
+    What does it mean that regexes are greedy? How can I get around it? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21121 in perlfaq6.pod
+
+    How do I process each word on each line? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22000 in perlfaq6.pod
+
+    How can I print out a word-frequency or line-frequency summary? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22512 in perlfaq6.pod
+
+    How can I do approximate matching? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23403 in perlfaq6.pod
+
+    How do I efficiently match many regular expressions at once? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23548 in perlfaq6.pod
+
+    Why don't word-boundary searches with \b work for me? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25690 in perlfaq6.pod
+
+    Why does using $&, $`, or $' slow my program down? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27734 in perlfaq6.pod
+
+    What good is \G in a regular expression? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29042 in perlfaq6.pod
+
+    Are Perl regexes DFAs or NFAs? Are they POSIX compliant? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32457 in perlfaq6.pod
+
+    What's wrong with using grep in a void context? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33169 in perlfaq6.pod
+
+    How can I match strings with multibyte characters? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33716 in perlfaq6.pod
+
+    How do I match a regular expression that's in a variable? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36500 in perlfaq6.pod
+
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39070 in perlfaq6.pod
+

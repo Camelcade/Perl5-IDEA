@@ -1,0 +1,244 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlmodstyle.pod
+
+  INTRODUCTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 53 in perlmodstyle.pod
+
+  QUICK CHECKLIST in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1618 in perlmodstyle.pod
+
+    Before you start in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1702 in perlmodstyle.pod
+
+      Don't re-invent the wheel in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1736 in perlmodstyle.pod
+
+      Patch, extend or subclass an existing module where possible in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1772 in perlmodstyle.pod
+
+      Do one thing and do it well in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1842 in perlmodstyle.pod
+
+      Choose an appropriate name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1880 in perlmodstyle.pod
+
+      Get feedback before publishing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1917 in perlmodstyle.pod
+
+    The API in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1965 in perlmodstyle.pod
+
+      API should be understandable by the average programmer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1990 in perlmodstyle.pod
+
+      Simple methods for simple tasks in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2055 in perlmodstyle.pod
+
+      Separate functionality from output in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2097 in perlmodstyle.pod
+
+      Consistent naming of subroutines or methods in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2142 in perlmodstyle.pod
+
+      Use named parameters (a hash or hashref) when there are more than two parameters in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2196 in perlmodstyle.pod
+
+    Stability in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2294 in perlmodstyle.pod
+
+      Ensure your module works under use strict and -w in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2321 in perlmodstyle.pod
+
+      Stable modules should maintain backwards compatibility in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2386 in perlmodstyle.pod
+
+    Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2458 in perlmodstyle.pod
+
+      Write documentation in POD in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2489 in perlmodstyle.pod
+
+      Document purpose, scope and target applications in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2526 in perlmodstyle.pod
+
+      Document each publically accessible method or subroutine, including params and r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2584 in perlmodstyle.pod
+
+      Give examples of use in your documentation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2687 in perlmodstyle.pod
+
+      Provide a README file and perhaps also release notes, changelog, etc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2740 in perlmodstyle.pod
+
+      Provide links to further information (URL, email) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2819 in perlmodstyle.pod
+
+    Release considerations in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2886 in perlmodstyle.pod
+
+      Specify pre-requisites in Makefile.PL or Build.PL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2926 in perlmodstyle.pod
+
+      Specify Perl version requirements with use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2986 in perlmodstyle.pod
+
+      Include tests with your module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3042 in perlmodstyle.pod
+
+      Choose a sensible and consistent version numbering scheme (X.YY is the common Pe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3083 in perlmodstyle.pod
+
+      Increment the version number for every change, no matter how small in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3201 in perlmodstyle.pod
+
+      Package the module using "make dist" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3278 in perlmodstyle.pod
+
+      Choose an appropriate license (GPL/Artistic is a good default) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3325 in perlmodstyle.pod
+
+  BEFORE YOU START WRITING A MODULE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3405 in perlmodstyle.pod
+
+    Has it been done before? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3615 in perlmodstyle.pod
+
+    Do one thing and do it well in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4176 in perlmodstyle.pod
+
+    What's in a name? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5062 in perlmodstyle.pod
+
+      Be descriptive (i.e. accurately describes the purpose of the module). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5323 in perlmodstyle.pod
+
+      Be consistent with existing modules. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5403 in perlmodstyle.pod
+
+      Reflect the functionality of the module, not the implementation. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5451 in perlmodstyle.pod
+
+      Avoid starting a new top-level hierarchy, especially if a suitable hierarchy alr... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5526 in perlmodstyle.pod
+
+    Get feedback before publishing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5676 in perlmodstyle.pod
+
+  DESIGNING AND WRITING YOUR MODULE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6322 in perlmodstyle.pod
+
+    To OO or not to OO? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6410 in perlmodstyle.pod
+
+      The system being designed is large, or is likely to become large. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6830 in perlmodstyle.pod
+
+      The data can be aggregated into obvious structures, especially if there's a larg... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6906 in perlmodstyle.pod
+
+      The various types of data aggregate form a natural hierarchy that facilitates th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7032 in perlmodstyle.pod
+
+      You have a piece of data on which many different operations are applied. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7161 in perlmodstyle.pod
+
+      You need to perform the same general operations on related types of data, but wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7244 in perlmodstyle.pod
+
+      It's likely you'll have to add new data types later. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7425 in perlmodstyle.pod
+
+      The typical interactions between pieces of data are best represented by operator... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7488 in perlmodstyle.pod
+
+      The implementation of individual components of the system is likely to change ov... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7581 in perlmodstyle.pod
+
+      The system design is already object-oriented. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7680 in perlmodstyle.pod
+
+      Large numbers of other programmers will be using your code modules. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7736 in perlmodstyle.pod
+
+    Designing your API in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8011 in perlmodstyle.pod
+
+      Write simple routines to do simple things. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8216 in perlmodstyle.pod
+
+      Separate functionality from output. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8482 in perlmodstyle.pod
+
+      Provide sensible shortcuts and defaults. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9096 in perlmodstyle.pod
+
+      Naming conventions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9631 in perlmodstyle.pod
+
+      Parameter passing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9967 in perlmodstyle.pod
+
+    Strictness and warnings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11462 in perlmodstyle.pod
+
+    Backwards compatibility in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11720 in perlmodstyle.pod
+
+    Error handling and messages in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11900 in perlmodstyle.pod
+
+      Return an undefined value. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12012 in perlmodstyle.pod
+
+      set $Module::errstr or similar (errstr is a common name used by DBI and other po... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12049 in perlmodstyle.pod
+
+      warn() or carp() a message to STDERR. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12223 in perlmodstyle.pod
+
+      croak() only when your module absolutely cannot figure out what to do.  (croak()... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12279 in perlmodstyle.pod
+
+      As an alternative to the above, you may prefer to throw exceptions using  the Er... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12573 in perlmodstyle.pod
+
+  DOCUMENTING YOUR MODULE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12990 in perlmodstyle.pod
+
+    POD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13022 in perlmodstyle.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 13350 in perlmodstyle.pod
+
+        A synopsis of the common uses of the module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13359 in perlmodstyle.pod
+
+        The purpose, scope and target applications of your module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13413 in perlmodstyle.pod
+
+        Use of each publically accessible method or subroutine, including parameters and... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13481 in perlmodstyle.pod
+
+        Examples of use in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13586 in perlmodstyle.pod
+
+        Sources of further information in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13612 in perlmodstyle.pod
+
+        A contact email address for the author/maintainer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13653 in perlmodstyle.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 14535 in perlmodstyle.pod
+
+        NAME in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14544 in perlmodstyle.pod
+
+        SYNOPSIS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14560 in perlmodstyle.pod
+
+        DESCRIPTION in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14579 in perlmodstyle.pod
+
+        One or more sections or subsections giving greater detail of available  methods ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14601 in perlmodstyle.pod
+
+        BUGS/CAVEATS/etc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14740 in perlmodstyle.pod
+
+        AUTHOR in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14767 in perlmodstyle.pod
+
+        SEE ALSO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14784 in perlmodstyle.pod
+
+        COPYRIGHT and LICENSE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14803 in perlmodstyle.pod
+
+    README, INSTALL, release notes, changelogs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15142 in perlmodstyle.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15477 in perlmodstyle.pod
+
+        perl Makefile.PL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15486 in perlmodstyle.pod
+
+        make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15510 in perlmodstyle.pod
+
+        make test in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15522 in perlmodstyle.pod
+
+        make install in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15539 in perlmodstyle.pod
+
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 15615 in perlmodstyle.pod
+
+        perl Build.PL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15624 in perlmodstyle.pod
+
+        perl Build in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15645 in perlmodstyle.pod
+
+        perl Build test in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15663 in perlmodstyle.pod
+
+        perl Build install in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15686 in perlmodstyle.pod
+
+  RELEASE CONSIDERATIONS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16115 in perlmodstyle.pod
+
+    Version numbering in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16146 in perlmodstyle.pod
+
+    Pre-requisites in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18444 in perlmodstyle.pod
+
+      Core Perl modules in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18675 in perlmodstyle.pod
+
+      Stable CPAN modules in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18703 in perlmodstyle.pod
+
+      Unstable CPAN modules in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18733 in perlmodstyle.pod
+
+      Modules not available from CPAN in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18765 in perlmodstyle.pod
+
+    Testing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19109 in perlmodstyle.pod
+
+    Packaging in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19829 in perlmodstyle.pod
+
+    Licensing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20310 in perlmodstyle.pod
+
+  COMMON PITFALLS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20690 in perlmodstyle.pod
+
+    Reinventing the wheel in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20714 in perlmodstyle.pod
+
+    Trying to do too much in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21082 in perlmodstyle.pod
+
+    Inappropriate documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21339 in perlmodstyle.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21971 in perlmodstyle.pod
+
+    perlstyle in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21997 in perlmodstyle.pod
+
+    perlnewmod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22043 in perlmodstyle.pod
+
+    perlpod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22092 in perlmodstyle.pod
+
+    podchecker in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22129 in perlmodstyle.pod
+
+    Packaging Tools in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22183 in perlmodstyle.pod
+
+    Testing tools in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22248 in perlmodstyle.pod
+
+    http://pause.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22356 in perlmodstyle.pod
+
+    Any good book on software engineering in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22466 in perlmodstyle.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22518 in perlmodstyle.pod
+

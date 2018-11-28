@@ -1,0 +1,26 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlplan9.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlplan9.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 243 in perlplan9.pod
+
+    Invoking Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 618 in perlplan9.pod
+
+    What's in Plan 9 Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1405 in perlplan9.pod
+
+    What's not in Plan 9 Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1656 in perlplan9.pod
+
+    Perl5 Functions not currently supported in Plan 9 Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1807 in perlplan9.pod
+
+    Signals in Plan 9 Perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2542 in perlplan9.pod
+
+  COMPILING AND INSTALLING PERL ON PLAN 9 in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2992 in perlplan9.pod
+
+    Installing Perl Documentation on Plan 9 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4296 in perlplan9.pod
+
+  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4759 in perlplan9.pod
+
+  Revision date in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4863 in perlplan9.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4946 in perlplan9.pod
+

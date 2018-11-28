@@ -1,0 +1,38 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlcn.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perlcn.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 130 in perlcn.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 166 in perlcn.pod
+
+    额外的中文编码 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1600 in perlcn.pod
+
+    进一步的信息 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2046 in perlcn.pod
+
+    提供 Perl 资源的网址 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2145 in perlcn.pod
+
+      http://www.perl.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2176 in perlcn.pod
+
+      http://www.cpan.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2228 in perlcn.pod
+
+      http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2308 in perlcn.pod
+
+    学习 Perl 的网址 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2361 in perlcn.pod
+
+      http://www.oreilly.com.cn/index.php?func=booklist&cat=68 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2390 in perlcn.pod
+
+    Perl 使用者集会 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2483 in perlcn.pod
+
+      http://www.pm.org/groups/asia.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2511 in perlcn.pod
+
+    Unicode 相关网址 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2578 in perlcn.pod
+
+      http://www.unicode.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2608 in perlcn.pod
+
+      http://www.cl.cam.ac.uk/%7Emgk25/unicode.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2673 in perlcn.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2771 in perlcn.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2860 in perlcn.pod
+

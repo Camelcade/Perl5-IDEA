@@ -1,0 +1,20 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlcheat.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlcheat.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45 in perlcheat.pod
+
+    The sheet in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 220 in perlcheat.pod
+
+  ACKNOWLEDGEMENTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3777 in perlcheat.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4131 in perlcheat.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4214 in perlcheat.pod
+
+    http://perlmonks.org/?node_id=216602 - the original PM post in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4240 in perlcheat.pod
+
+    http://perlmonks.org/?node_id=238031 - Damian Conway's Perl 6 version in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4313 in perlcheat.pod
+
+    http://juerd.nl/site.plp/perlcheat - home of the Perl Cheat Sheet in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4396 in perlcheat.pod
+

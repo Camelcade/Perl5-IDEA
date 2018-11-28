@@ -1,0 +1,53 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlsec.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlsec.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38 in perlsec.pod
+
+  SECURITY VULNERABILITY CONTACT INFORMATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 533 in perlsec.pod
+
+  SECURITY MECHANISMS AND CONCERNS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1742 in perlsec.pod
+
+    Taint mode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1783 in perlsec.pod
+
+      Arguments to print and syswrite are not checked for taintedness. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3505 in perlsec.pod
+
+      Symbolic methods      $obj->$method(@args);
+ and symbolic sub references      &{... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3589 in perlsec.pod
+
+      Hash keys are never tainted. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4042 in perlsec.pod
+
+    Laundering and Detecting Tainted Data in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6625 in perlsec.pod
+
+    Switches On the "#!" Line in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9688 in perlsec.pod
+
+    Taint mode and @INC in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10266 in perlsec.pod
+
+    Cleaning Up Your Path in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11215 in perlsec.pod
+
+    Security Bugs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16371 in perlsec.pod
+
+    Protecting Your Programs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18514 in perlsec.pod
+
+    Unicode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20433 in perlsec.pod
+
+    Algorithmic Complexity Attacks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20709 in perlsec.pod
+
+      Hash Algorithm - Hash algorithms like the one used in Perl are well known to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20997 in perlsec.pod
+
+        Hash Seed Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21849 in perlsec.pod
+
+        Hash Traversal Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22252 in perlsec.pod
+
+        Bucket Order Perturbance in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22784 in perlsec.pod
+
+        New Default Hash Function in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23125 in perlsec.pod
+
+        Alternative Hash Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23266 in perlsec.pod
+
+      Regular expressions - Perl's regular expression engine is so called NFA (Non-det... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24849 in perlsec.pod
+
+      Sorting - the quicksort algorithm used in Perls before 5.8.0 to implement the so... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25380 in perlsec.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25824 in perlsec.pod
+

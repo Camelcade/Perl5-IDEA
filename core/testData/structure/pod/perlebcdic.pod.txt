@@ -1,0 +1,166 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlebcdic.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perlebcdic.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlebcdic.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95 in perlebcdic.pod
+
+  COMMON CHARACTER CODE SETS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2842 in perlebcdic.pod
+
+    ASCII in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2877 in perlebcdic.pod
+
+    ISO 8859 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4150 in perlebcdic.pod
+
+    Latin 1 (ISO 8859-1) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4594 in perlebcdic.pod
+
+    EBCDIC in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5339 in perlebcdic.pod
+
+      The 13 variant characters in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6239 in perlebcdic.pod
+
+      EBCDIC code sets recognized by Perl in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6834 in perlebcdic.pod
+
+        0037 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6885 in perlebcdic.pod
+
+        1047 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7231 in perlebcdic.pod
+
+        POSIX-BC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7535 in perlebcdic.pod
+
+    Unicode code points versus EBCDIC code points in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7767 in perlebcdic.pod
+
+    Unicode and UTF in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10013 in perlebcdic.pod
+
+    Using Encode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13486 in perlebcdic.pod
+
+  SINGLE OCTET TABLES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15274 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16298 in perlebcdic.pod
+
+      recipe 0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16307 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 16571 in perlebcdic.pod
+
+      recipe 1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16580 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17493 in perlebcdic.pod
+
+      recipe 2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17502 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 17738 in perlebcdic.pod
+
+      recipe 3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17747 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35203 in perlebcdic.pod
+
+      recipe 4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35212 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35599 in perlebcdic.pod
+
+      recipe 5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35608 in perlebcdic.pod
+
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35989 in perlebcdic.pod
+
+      recipe 6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35998 in perlebcdic.pod
+
+    Table in hex, sorted in 1047 order in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36276 in perlebcdic.pod
+
+  IDENTIFYING CHARACTER CODE SETS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52955 in perlebcdic.pod
+
+  CONVERSIONS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54997 in perlebcdic.pod
+
+    utf8::unicode_to_native() and utf8::native_to_unicode() in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55017 in perlebcdic.pod
+
+    tr/// in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55221 in perlebcdic.pod
+
+    iconv in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57689 in perlebcdic.pod
+
+    C RTL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58310 in perlebcdic.pod
+
+  OPERATOR DIFFERENCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58411 in perlebcdic.pod
+
+  FUNCTION DIFFERENCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62287 in perlebcdic.pod
+
+    chr() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62325 in perlebcdic.pod
+
+    ord() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62510 in perlebcdic.pod
+
+    pack() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62643 in perlebcdic.pod
+
+    print() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63322 in perlebcdic.pod
+
+    printf() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63979 in perlebcdic.pod
+
+    sort() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64218 in perlebcdic.pod
+
+    sprintf() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64379 in perlebcdic.pod
+
+    unpack() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64533 in perlebcdic.pod
+
+  REGULAR EXPRESSION DIFFERENCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65009 in perlebcdic.pod
+
+  SOCKETS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69752 in perlebcdic.pod
+
+  SORTING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 70050 in perlebcdic.pod
+
+    Ignore ASCII vs. EBCDIC sort differences. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71672 in perlebcdic.pod
+
+    Use a sort helper function in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71814 in perlebcdic.pod
+
+    MONO CASE then sort data (for non-digits, non-underscore) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72652 in perlebcdic.pod
+
+    Perform sorting on one type of platform only. in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73815 in perlebcdic.pod
+
+  TRANSFORMATION FORMATS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73965 in perlebcdic.pod
+
+    URL decoding and encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74238 in perlebcdic.pod
+
+    uu encoding and decoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75408 in perlebcdic.pod
+
+    Quoted-Printable encoding and decoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 76968 in perlebcdic.pod
+
+    Caesarean ciphers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78565 in perlebcdic.pod
+
+  Hashing order and checksums in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79461 in perlebcdic.pod
+
+  I18N AND L10N in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79682 in perlebcdic.pod
+
+  MULTI-OCTET CHARACTER SETS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79905 in perlebcdic.pod
+
+  OS ISSUES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 80106 in perlebcdic.pod
+
+    OS/400 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80207 in perlebcdic.pod
+
+      PASE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80231 in perlebcdic.pod
+
+      IFS access in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80428 in perlebcdic.pod
+
+    OS/390, z/OS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80459 in perlebcdic.pod
+
+      sigaction in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80536 in perlebcdic.pod
+
+      chcp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80601 in perlebcdic.pod
+
+      dataset access in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80724 in perlebcdic.pod
+
+      iconv in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80913 in perlebcdic.pod
+
+      locales in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81052 in perlebcdic.pod
+
+    POSIX-BC? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81519 in perlebcdic.pod
+
+  BUGS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 81543 in perlebcdic.pod
+
+    Not all shells will allow multiple -e string arguments to perl to be concatenate... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81565 in perlebcdic.pod
+
+    There are a significant number of test failures in the CPAN modules shipped with... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81745 in perlebcdic.pod
+
+    In earlier Perl versions, when byte and character data were concatenated, the ne... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82310 in perlebcdic.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 82539 in perlebcdic.pod
+
+  REFERENCES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 82610 in perlebcdic.pod
+
+  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83592 in perlebcdic.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83672 in perlebcdic.pod
+

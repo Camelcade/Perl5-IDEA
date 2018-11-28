@@ -1,0 +1,36 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perlbs2000.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 273 in perlbs2000.pod
+
+  SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 488 in perlbs2000.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 608 in perlbs2000.pod
+
+    gzip on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 899 in perlbs2000.pod
+
+    bison on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1024 in perlbs2000.pod
+
+    Unpacking Perl Distribution on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1335 in perlbs2000.pod
+
+    Compiling Perl on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2089 in perlbs2000.pod
+
+    Testing Perl on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3244 in perlbs2000.pod
+
+    Installing Perl on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4009 in perlbs2000.pod
+
+    Using Perl in the Posix-Shell of BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4146 in perlbs2000.pod
+
+    Using Perl in "native" BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4425 in perlbs2000.pod
+
+    Floating point anomalies on BS2000 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5295 in perlbs2000.pod
+
+    Using PerlIO and different encodings on ASCII and EBCDIC partitions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5968 in perlbs2000.pod
+
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7370 in perlbs2000.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7401 in perlbs2000.pod
+
+    Mailing list in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7444 in perlbs2000.pod
+
+  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7881 in perlbs2000.pod
+
