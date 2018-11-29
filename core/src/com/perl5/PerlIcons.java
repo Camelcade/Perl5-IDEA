@@ -36,8 +36,8 @@ public class PerlIcons {
   public static final Icon TEMPLATE_ROOT = IconLoader.getIcon("/icons/templateRoot.png");
 
   public static final Icon PM_FILE = IconLoader.getIcon("/icons/perl5.png");
-  public static final Icon POD_FILE = PERL_LANGUAGE_ICON;
-  public static final Icon PERL_SCRIPT_FILE_ICON = IconLoader.getIcon("/icons/perl5classic.png");
+  public static final Icon POD_FILE = IconLoader.getIcon("/icons/perl5classic.png");
+  public static final Icon PERL_SCRIPT_FILE_ICON = IconLoader.getIcon("/icons/perl_file.png");
   public static final Icon CAMEL_MODIFIER = IconLoader.getIcon("/icons/camel_modifier.png");
   public static final Icon TEST_FILE = IconLoader.getIcon("/icons/file-test.png");
   public static final Icon XS_FILE = IconLoader.getIcon("/icons/xsicon.png");
