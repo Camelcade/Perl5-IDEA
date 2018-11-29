@@ -81,6 +81,7 @@ subprojects {
     changeNotes(file(changesFile).text)
   }
 
+/*
   apply plugin: 'jacoco'
   test {
     jacocoTestReport {
@@ -97,6 +98,7 @@ subprojects {
       enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
     }
   }
+*/
 }
 
 apply plugin: 'idea'
@@ -107,6 +109,7 @@ idea {
     }
 }
 
+/*
 task jacocoRootReport(type: JacocoReport) {
     additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
     sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
@@ -126,6 +129,7 @@ task jacocoRootReport(type: JacocoReport) {
         })
     }
 }
+*/
 
 intellij {
     type 'IU'
