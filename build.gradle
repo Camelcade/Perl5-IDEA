@@ -74,31 +74,29 @@ allprojects{
     }
 }
 
-subprojects{
-    patchPluginXml{
-        inputs.files(descriptionFile, changesFile)
-        pluginDescription(file(descriptionFile).text)
-        changeNotes(file(changesFile).text)
-    }
+subprojects {
+  patchPluginXml {
+    inputs.files(descriptionFile, changesFile)
+    pluginDescription(file(descriptionFile).text)
+    changeNotes(file(changesFile).text)
+  }
 
-    test{
-        if (!System.getenv("WITH_COVERAGE") && !project.hasProperty("with_coverage")) {
-            apply plugin: 'jacoco'
-            jacoco {
-                enabled = false
-            }
-            jacocoTestReport {
-                additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
-                sourceDirectories = files(sourceSets.main.allSource.srcDirs)
-                classDirectories =  files(sourceSets.main.output)
-                reports {
-                    xml.enabled true
-                    html.enabled true
-                    csv.enabled false
-                }
-            }
-        }
+  apply plugin: 'jacoco'
+  test {
+    jacocoTestReport {
+      additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+      sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+      classDirectories = files(sourceSets.main.output)
+      reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+      }
     }
+    jacoco {
+      enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
+    }
+  }
 }
 
 apply plugin: 'idea'
@@ -110,7 +108,6 @@ idea {
 }
 
 task jacocoRootReport(type: JacocoReport) {
-    dependsOn = subprojects.test
     additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
     sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
     classDirectories =  files(subprojects.sourceSets.main.output)
