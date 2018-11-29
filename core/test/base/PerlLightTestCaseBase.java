@@ -1000,6 +1000,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     StructureView structureView = builder.createStructureView(fileEditor, getProject());
     assertNotNull(structureView);
+    addTearDownListener(structureView);
 
     StructureViewModel structureViewModel = structureView.getTreeModel();
     StringBuilder sb = new StringBuilder();
