@@ -7,4 +7,4 @@ git:
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 
 after_success:
-- ./gradlew jacocoTestReport coveralls
+  - ./gradlew jacocoRootReport coveralls

@@ -62,6 +62,10 @@ allprojects{
                 }
             }
         }
+        testLogging {
+            exceptionFormat = 'full'
+            showStandardStreams = true
+        }
     }
 
     publishPlugin{
@@ -76,6 +80,25 @@ subprojects{
         pluginDescription(file(descriptionFile).text)
         changeNotes(file(changesFile).text)
     }
+
+    test{
+        if (!System.getenv("WITH_COVERAGE") && !project.hasProperty("with_coverage")) {
+            apply plugin: 'jacoco'
+            jacoco {
+                enabled = false
+            }
+            jacocoTestReport {
+                additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+                sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+                classDirectories =  files(sourceSets.main.output)
+                reports {
+                    xml.enabled true
+                    html.enabled true
+                    csv.enabled false
+                }
+            }
+        }
+    }
 }
 
 apply plugin: 'idea'
@@ -85,9 +108,25 @@ idea {
         languageLevel = javaVersion
     }
 }
-jacocoTestReport {
+
+task jacocoRootReport(type: JacocoReport) {
+    dependsOn = subprojects.test
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories =  files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
     reports {
-        xml.enabled true
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = false
+    }
+    onlyIf{
+        true
+    }
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
     }
 }
 
@@ -118,21 +157,6 @@ runIde{
         args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
     }
 }
-
-test {
-    systemProperty("idea.plugins.path", project.rootDir.canonicalPath + "/.test-plugins")
-
-    if (!System.getenv("WITH_COVERAGE") && !project.hasProperty("with_coverage")) {
-        jacoco {
-            enabled = false
-        }
-    }
-    testLogging {
-        exceptionFormat = 'full'
-        showStandardStreams = true
-    }
-}
-
 sourceSets {
     test {
         resources.srcDirs file('testData')
