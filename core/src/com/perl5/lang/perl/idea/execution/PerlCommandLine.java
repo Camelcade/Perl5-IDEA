@@ -294,7 +294,7 @@ public class PerlCommandLine extends GeneralCommandLine {
              "; charset: " + getCharset());
     return myUsePty ?
            new PtyCommandLine(this)
-             .withConsoleMode(false)
+             .withConsoleMode(true)
              .withInitialColumns(256)
              .withEnvironment("TERM", "xterm-256color")
              .createProcess() :
