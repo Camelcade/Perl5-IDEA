@@ -34,6 +34,8 @@ import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashEntry;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -151,9 +153,11 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
   @NotNull
   private PerlLightMethodDefinitionElement setMojoReturnsComputation(
     @NotNull PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod) {
-    PairFunction<String, List<PsiElement>, String> defaultComputation = newMethod.getReturnsComputation();
+    PairFunction<String, List<PsiElement>, PerlType> defaultComputation = newMethod.getReturnsComputation();
     newMethod.setReturnsComputation(
-      (context, args) -> args.isEmpty() ? defaultComputation.fun(context, args) : newMethod.getPackageName()
+      (context, args) -> args.isEmpty()
+                         ? defaultComputation.fun(context, args)
+                         : PerlTypeNamespace.fromNamespace(newMethod.getPackageName())
     );
     return newMethod;
   }
@@ -173,16 +177,13 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
 
     // handling isa and does
     PerlHashEntry isaEntry = parameters.get("isa");
-    String valueClass = null;
+    PerlType valueType = null;
     if (isaEntry == null) {
       isaEntry = parameters.get("does");
     }
 
     if (isaEntry != null && isaEntry.valueElement != null && isAcceptableIdentifierElement(isaEntry.valueElement)) {
-      valueClass = isaEntry.getValueString();
-      if (StringUtil.isEmpty(valueClass)) {
-        valueClass = null;
-      }
+      valueType = PerlType.fromTypeString(isaEntry.getValueString());
     }
 
     // handling accessor, reader, etc.
@@ -219,13 +220,16 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
         LIGHT_METHOD_DEFINITION,
         identifier,
         packageName,
-        key.equals(MUTATOR_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value", valueClass))
-                                : Collections.emptyList(),
+        key.equals(MUTATOR_KEY) ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument
+          .optionalScalar(
+            "new_value",
+            valueType != null ? valueType.getNamespaceName() : null
+          )) : Collections.emptyList(),
         PerlSubAnnotations.tryToFindAnnotations(identifier, entry.keyElement, getParent())
       );
 
-      if (key.equals(READER_KEY) && valueClass != null) {
-        String finalClass = valueClass;
+      if (key.equals(READER_KEY) && valueType != null) {
+        PerlType finalClass = valueType;
         secondaryElement.setReturnsComputation((a, b) -> finalClass);
       }
 
@@ -295,12 +299,13 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
         identifier,
         packageName,
         isWritable
-        ? Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value", valueClass))
+        ? Arrays.asList(PerlSubArgument.self(),
+                        PerlSubArgument.optionalScalar("new_value", valueType != null ? valueType.getNamespaceName() : null))
         : Collections.emptyList(),
         PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
       );
-      if (valueClass != null) {
-        String finalClass = valueClass;
+      if (valueType != null) {
+        PerlType finalClass = valueType;
         newElement.setReturnsComputation((a, b) -> finalClass);
       }
       result.add(newElement);

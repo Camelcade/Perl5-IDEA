@@ -41,6 +41,10 @@ import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeArray;
+import com.perl5.lang.perl.types.PerlTypeArrayRef;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
@@ -573,22 +577,26 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   @Nullable
-  public static String getPerlExpressionNamespace(@Nullable PsiElement element) {
+  public static PerlType getPerlExpressionNamespace(@Nullable PsiElement element) {
+    // fixme change arg type to PsiPerlExpr
     if (element == null) {
       return null;
     }
 
     if (element instanceof PsiPerlPackageExpr) {
-      return ((PerlNamespaceElement)element.getFirstChild()).getCanonicalName();
+      String namespace = ((PerlNamespaceElement)element.getFirstChild()).getCanonicalName();
+      return !namespace.isEmpty() ? new PerlTypeNamespace(namespace) : null;
     }
     else if (element instanceof PerlString) {
-      return ElementManipulators.getValueText(element);
+      String namespace = ElementManipulators.getValueText(element);
+      return !namespace.isEmpty() ? new PerlTypeNamespace(namespace) : null;
     }
     else if (element instanceof PerlVariable) {
       return ((PerlVariable)element).guessVariableType();
     }
     else if (isSelfShortcut(element)) {
-      return PerlPackageUtil.getContextPackageName(element);
+      String namespace = PerlPackageUtil.getContextPackageName(element);
+      return namespace != null && !namespace.isEmpty() ? new PerlTypeNamespace(namespace) : null;
     }
     else if (element instanceof PerlMethodContainer) {
       return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)element);
@@ -598,6 +606,87 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
     else if (element instanceof PsiPerlDerefExprImpl) {
       return getPerlExpressionNamespace(element.getLastChild());
+    }
+    else if (element instanceof PsiPerlGrepExpr) {
+      // fixme generated PSI should have following process
+      PsiPerlExpr expr = ((PsiPerlGrepExpr)element).getExpr();
+      if (((PsiPerlGrepExpr)element).getBlock() == null) {
+        // map EXPR, EXPR
+        // seek second EXPR
+        expr = PsiTreeUtil.getNextSiblingOfType(expr, PsiPerlExpr.class);
+      }
+      return getPerlExpressionNamespace(expr);
+    }
+    else if (element instanceof PsiPerlSortExpr) {
+      return getPerlExpressionNamespace(((PsiPerlSortExpr)element).getExpr());
+    }
+    else if (element instanceof PsiPerlMapExpr) {
+      // fixme generated PSI should have following process
+      PsiPerlBlock block = ((PsiPerlMapExpr)element).getBlock();
+      if (block != null) {
+        // map BLOCK EXPR
+        return PerlTypeArray.fromInnerType(block.guessReturnType());
+      }
+      else {
+        // map EXPR, EXPR
+        PsiPerlExpr firstExpr = ((PsiPerlMapExpr)element).getExpr();
+        PerlType innerType = PerlPsiUtil.getPerlExpressionNamespace(firstExpr);
+        return PerlTypeArray.fromInnerType(innerType);
+      }
+    }
+    else if (element instanceof PsiPerlArrayIndexImpl) {
+      // EXPR->[0]
+      PsiElement parent = element.getParent();
+      if (parent instanceof PsiPerlDerefExpr) {
+        PerlType type = ((PsiPerlDerefExpr)parent).getCurrentElementNamespace(element.getPrevSibling());
+        if (type instanceof PerlTypeArrayRef) {
+          return ((PerlTypeArrayRef)type).getInnerType();
+        }
+      }
+    }
+    else if (element instanceof PsiPerlArrayElementImpl) {
+      // $var[0]
+      PsiPerlExpr expr = ((PsiPerlArrayElement)element).getExpr();
+      if(expr instanceof PsiPerlScalarVariableImpl){
+        PerlType type = getPerlExpressionNamespace(expr);
+        if (type instanceof PerlTypeArray) {
+          return ((PerlTypeArray)type).getInnerType();
+        }
+      }
+    }
+    else if (element instanceof PsiPerlArraySliceImpl) {
+      // $var[0]
+      PerlType type = getPerlExpressionNamespace(((PsiPerlArraySlice)element).getExpr());
+      if (type instanceof PerlTypeArray) {
+        return type;
+      }
+    }
+    else if (element instanceof PsiPerlArrayCastExprImpl) {
+      PerlType type = null;
+
+      PsiPerlBlock block = ((PsiPerlArrayCastExpr)element).getBlock();
+      if (block != null) {
+        // @{ ... }
+        type = block.guessReturnType();
+      }
+      else {
+        // @$some_var
+        PsiPerlExpr castedExpr = ((PsiPerlArrayCastExpr)element).getExpr();
+        if (castedExpr != null) {
+          type = PerlPsiUtil.getPerlExpressionNamespace(castedExpr);
+        }
+      }
+
+      if (type instanceof PerlTypeArrayRef) {
+        return ((PerlTypeArrayRef)type).getDereferencedType();
+      }
+      return null;
+    }
+    else if (element instanceof PsiPerlRefExprImpl) {
+      PerlType referencedType = getPerlExpressionNamespace(((PsiPerlRefExprImpl)element).getExpr());
+      if (referencedType instanceof PerlTypeArray) {
+        return ((PerlTypeArray)referencedType).getReferencedType();
+      }
     }
 
     return null;

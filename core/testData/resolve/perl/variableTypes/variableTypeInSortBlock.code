@@ -1,0 +1,8 @@
+#@type ArrayRef[JSON::XS]
+my $arr;
+
+sort {
+    say $<caret>a;
+    say $b;
+} @$arr;
+

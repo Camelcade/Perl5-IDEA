@@ -1,0 +1,7 @@
+#@type ArrayRef[JSON::XS]
+my $refarr;
+
+my @arr = @$refarr;
+my $elem = $arr[0];
+
+say $e<caret>lem;

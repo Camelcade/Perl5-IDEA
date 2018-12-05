@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
@@ -36,10 +37,10 @@ public interface PerlVariableDeclaration extends PerlDeprecatable {
   /**
    * Returns declaration type in annotation or declaration
    *
-   * @return type string or null
+   * @return type or null
    */
   @Nullable
-  String getDeclaredType();
+  PerlType getDeclaredType();
 
   /**
    * Guessing actual variable type from context

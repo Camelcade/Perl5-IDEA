@@ -20,6 +20,7 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,10 +32,10 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlP
   /**
    * Guesses variable type from definition or context (uses containing perl file to cache types)
    *
-   * @return Package name if found
+   * @return type of variable if found
    */
   @Nullable
-  String guessVariableType();
+  PerlType guessVariableType();
 
   /**
    * Guessing actual variable type from context

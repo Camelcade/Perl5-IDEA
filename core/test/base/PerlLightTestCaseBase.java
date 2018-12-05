@@ -114,6 +114,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import com.perl5.lang.perl.types.PerlType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import gnu.trove.THashSet;
@@ -303,6 +304,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       "PsiFile contains error elements:\n" + getFile().getText(),
       DebugUtil.psiToString(getFile(), true, false).contains("PsiErrorElement")
     );
+  }
+
+  protected void moveCaretToNextLine(){
+    myFixture.getEditor().getCaretModel().moveCaretRelatively(0, 1, false,false,false);
   }
 
   protected void doFormatTest() {

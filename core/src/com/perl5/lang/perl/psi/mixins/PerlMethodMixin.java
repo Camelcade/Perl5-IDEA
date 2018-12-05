@@ -22,6 +22,7 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.types.PerlType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,7 +92,8 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     PsiElement grandParent = parent == null ? null : parent.getParent();
 
     if (grandParent instanceof PsiPerlDerefExpr) {
-      return ((PsiPerlDerefExpr)grandParent).getPreviousElementNamespace(parent);
+      PerlType type = ((PsiPerlDerefExpr)grandParent).getPreviousElementNamespace(parent);
+      return type != null ? type.getNamespaceName() : null;
     }
 
     return PerlPackageUtil.getContextPackageName(this);

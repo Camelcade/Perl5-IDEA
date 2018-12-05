@@ -17,10 +17,15 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
 public interface PerlSortExpr extends PsiElement, PerlLabelScope {
+  default PsiPerlExpr getExpr(){
+    //fixme this method must be auto generated
+    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
+  }
 }

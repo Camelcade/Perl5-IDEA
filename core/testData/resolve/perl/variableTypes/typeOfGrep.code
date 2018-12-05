@@ -1,0 +1,10 @@
+#@type ArrayRef[Foo::Bar]
+my $arr;
+
+my @mapped1 = grep { return 1; } @$arr;
+my @mapped2 = grep { 1 } @$arr;
+my @mapped3 = grep 1, @$arr;
+
+say @<caret>mapped1;
+say @mapped2;
+say @mapped3;

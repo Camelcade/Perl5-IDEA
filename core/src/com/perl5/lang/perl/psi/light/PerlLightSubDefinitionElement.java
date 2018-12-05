@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +46,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   private List<PerlSubArgument> mySubArguments;
   @NotNull // fixme should we make a static TrioFunction to save memory? or even inherit?
-  private PairFunction<String, List<PsiElement>, String> myReturnsComputation = (context, arguments) ->
+  private PairFunction<String, List<PsiElement>, PerlType> myReturnsComputation = (context, arguments) ->
     PerlSubDefinitionElement.super.getReturns(context, arguments);
 
   // fixme should we actualize this on fly, like identifier?
@@ -178,16 +179,16 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Nullable
   @Override
-  public String getReturns(@Nullable String contextPackage, @NotNull List<PsiElement> arguments) {
+  public PerlType getReturns(@Nullable String contextPackage, @NotNull List<PsiElement> arguments) {
     return myReturnsComputation.fun(contextPackage, arguments);
   }
 
   @NotNull
-  public PairFunction<String, List<PsiElement>, String> getReturnsComputation() {
+  public PairFunction<String, List<PsiElement>, PerlType> getReturnsComputation() {
     return myReturnsComputation;
   }
 
-  public void setReturnsComputation(@NotNull PairFunction<String, List<PsiElement>, String> returnsComputation) {
+  public void setReturnsComputation(@NotNull PairFunction<String, List<PsiElement>, PerlType> returnsComputation) {
     myReturnsComputation = returnsComputation;
   }
 }

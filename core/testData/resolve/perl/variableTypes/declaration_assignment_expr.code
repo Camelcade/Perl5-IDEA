@@ -1,0 +1,6 @@
+my $myvar = Foo::Bar::->new();
+
+my $myvar1 = $myvar;
+
+say $my<caret>var1;
+

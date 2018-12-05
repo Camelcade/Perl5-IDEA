@@ -1,0 +1,19 @@
+#@type ArrayRef[JSON::XS]
+my $arrref;
+
+#@returns ArrayRef[JSON::XS]
+sub getarr{
+
+}
+
+my @arr1 = @$arrref;
+my @arr2 = @{$arrref};
+my @arr3 = @{getarr()};
+my @arr4 = @{ return $arrref; };
+my @arr5 = @{ return getarr(); };
+
+say @<caret>arr1;
+say @arr2;
+say @arr3;
+say @arr4;
+say @arr5;

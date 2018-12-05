@@ -1,0 +1,14 @@
+#@type ArrayRef[Foo]
+my $arr_foo;
+
+#@type ArrayRef[JSON::XS]
+my $arr_json;
+
+for (@$arr_foo){
+    my $default_val = $_;
+    for my $json (@$arr_json){
+        my $outer_default_val = $_;
+        say $<caret>default_val;
+        say $outer_default_val;
+    }
+}

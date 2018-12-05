@@ -17,9 +17,12 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationExpr;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -32,11 +35,21 @@ public abstract class PerlVariableDeclarationExprMixin extends PerlCompositeElem
 
   @Nullable
   @Override
-  public String getDeclarationType() {
+  public PerlType getDeclarationType() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     if (namespaceElement != null) {
-      return namespaceElement.getCanonicalName();
+      return PerlTypeNamespace.fromNamespace(namespaceElement.getCanonicalName());
     }
+
+    // assignment
+    PsiElement parent = getParent();
+    if(parent instanceof PsiPerlAssignExpr){
+      PsiElement rightSide = ((PsiPerlAssignExpr)parent).getRightSide();
+      if(rightSide instanceof PsiPerlExpr){
+        return PerlPsiUtil.getPerlExpressionNamespace(rightSide);
+      }
+    }
+
     return null;
   }
 

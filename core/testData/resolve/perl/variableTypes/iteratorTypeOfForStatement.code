@@ -1,0 +1,7 @@
+#@type ArrayRef[JSON::XS]
+my $arr;
+
+for my $elem (@$arr){
+    say $<caret>elem;
+    say $_;
+}

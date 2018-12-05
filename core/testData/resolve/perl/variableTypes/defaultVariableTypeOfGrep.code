@@ -1,0 +1,9 @@
+#@type ArrayRef[JSON::XS]
+my $arr;
+
+grep { $<caret>_ } @$arr;
+grep { $_ } @{$arr};
+grep { $_ } @{return $arr;};
+grep   $_, @$arr;
+grep   $_, @{$arr};
+grep   $_, @{return $arr;};

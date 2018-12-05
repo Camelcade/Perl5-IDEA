@@ -28,6 +28,8 @@ import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,7 +90,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
       dataStream.writeName("");
     }
     else {
-      dataStream.writeName(stub.getDeclaredType());
+      dataStream.writeName(stub.getDeclaredType().getNamespaceName());
     }
     dataStream.writeName(stub.getPackageName());
     dataStream.writeName(stub.getVariableName());
@@ -108,16 +110,14 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
   @Override
   public PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
     String variableType = PerlStubSerializationUtil.readString(dataStream);
-    if (StringUtil.isEmpty(variableType)) {
-      variableType = null;
-    }
+    PerlType type = StringUtil.isEmpty(variableType) ? null : new PerlTypeNamespace(variableType);
 
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
       PerlStubSerializationUtil.readString(dataStream),
       PerlStubSerializationUtil.readString(dataStream),
-      variableType,
+      type,
       PerlVariableType.values()[dataStream.readByte()],
       readAnnotations(dataStream)
     );

@@ -35,6 +35,8 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReve
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
 import gnu.trove.THashSet;
@@ -203,9 +205,10 @@ public class PerlSubUtil implements PerlElementTypes {
    * @return package name or null
    */
   @Nullable
-  public static String getMethodReturnValue(PerlMethodContainer methodContainer) {
+  public static PerlType getMethodReturnValue(PerlMethodContainer methodContainer) {
     if (methodContainer instanceof PerlSmartMethodContainer) {
-      return ((PerlSmartMethodContainer)methodContainer).getReturnPackageName();
+      String name = ((PerlSmartMethodContainer)methodContainer).getReturnPackageName();
+      return StringUtil.isEmpty(name) ? null : new PerlTypeNamespace(name);
     }
     PerlMethod methodElement = methodContainer.getMethod();
     if (methodElement == null) {
@@ -219,7 +222,8 @@ public class PerlSubUtil implements PerlElementTypes {
     // fixme this should be moved to a method
 
     if ("new".equals(subNameElement.getName())) {
-      return methodElement.getPackageName();
+      String name = methodElement.getPackageName();
+      return StringUtil.isEmpty(name) ? null : new PerlTypeNamespace(name);
     }
 
     PsiReference reference = subNameElement.getReference();
@@ -228,11 +232,10 @@ public class PerlSubUtil implements PerlElementTypes {
       for (ResolveResult resolveResult : ((PerlSubReference)reference).multiResolve(false)) {
         PsiElement targetElement = resolveResult.getElement();
         if (targetElement instanceof PerlSub) {
-          String returnType = ((PerlSub)targetElement).getReturns(subNameElement.getPackageName(),
-                                                                  methodContainer.getCallArgumentsList());
-          if (returnType != null) {
-            return returnType;
-          }
+          return ((PerlSub)targetElement).getReturns(
+            subNameElement.getPackageName(),
+            methodContainer.getCallArgumentsList()
+          );
         }
       }
     }
@@ -350,7 +353,7 @@ public class PerlSubUtil implements PerlElementTypes {
       return;
     }
     if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor::process)) {
-        return;
+      return;
     }
     for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {

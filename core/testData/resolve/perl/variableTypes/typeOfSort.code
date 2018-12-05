@@ -1,0 +1,12 @@
+#@type ArrayRef[JSON::XS]
+my $arr;
+
+sub cmp {}
+
+my @mapped1 = sort @$arr;
+my @mapped2 = sort { $a <=> $b } @$arr;
+my @mapped3 = sort cmp @$arr;
+
+say @<caret>mapped1;
+say @mapped2;
+say @mapped3;

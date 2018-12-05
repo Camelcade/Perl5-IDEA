@@ -50,4 +50,9 @@ public abstract class PerlTypeWrapping extends PerlType {
   public String toString() {
     return "[" + myInnerType.toString() + "]";
   }
+
+  @Override
+  public String getNamespaceName(){
+    return null;
+  }
 }

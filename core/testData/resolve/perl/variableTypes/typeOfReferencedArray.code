@@ -1,0 +1,7 @@
+#@type ArrayRef[JSON::XS]
+my $arrref;
+my @arr = @$arrref;
+
+my $arrref2 = \@arr;
+
+say $<caret>arrref2;

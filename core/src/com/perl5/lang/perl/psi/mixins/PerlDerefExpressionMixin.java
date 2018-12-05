@@ -24,6 +24,8 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,18 +41,18 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
   @Nullable
   @Override
-  public String getPreviousElementNamespace(PsiElement methodElement) {
+  public PerlType getPreviousElementNamespace(PsiElement methodElement) {
     // todo add some caching here
     if (methodElement == getFirstChild())    // first element
     {
-      return PerlPackageUtil.getContextPackageName(this);
+      return PerlTypeNamespace.fromNamespace(PerlPackageUtil.getContextPackageName(this));
     }
 
     return getCurrentElementNamespace(methodElement.getPrevSibling());
   }
 
   @Nullable
-  public String getCurrentElementNamespace(PsiElement currentElement) {
+  public PerlType getCurrentElementNamespace(PsiElement currentElement) {
     IElementType currentElementType;
     while (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(currentElementType = PsiUtilCore.getElementType(currentElement))
            || currentElementType == OPERATOR_DEREFERENCE) {
@@ -60,7 +62,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
     return PerlPsiUtil.getPerlExpressionNamespace(currentElement);
   }
 
-  public String guessType() {
+  public PerlType guessType() {
     PsiElement[] children = getChildren();
     if (children.length > 0) {
       return getCurrentElementNamespace(children[children.length - 1]);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,32 +17,19 @@
 package com.perl5.lang.perl.types;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class PerlTypeArrayRef extends PerlTypeWrapping {
-  public PerlTypeArrayRef(@NotNull PerlType innerType) {
+public class PerlTypeHash extends PerlTypeWrapping {
+  public PerlTypeHash(@NotNull PerlType innerType) {
     super(innerType);
-  }
-
-  @Nullable
-  public static PerlTypeArrayRef fromInnerType(@Nullable PerlType innerType) {
-    if (innerType == null) {
-      return null;
-    }
-    return new PerlTypeArrayRef(innerType);
-  }
-
-  public PerlTypeArray getDereferencedType(){
-    return PerlTypeArray.fromInnerType(getInnerType());
   }
 
   @Override
   public boolean equals(Object o) {
-    return o instanceof PerlTypeArrayRef && super.equals(o);
+    return o instanceof PerlTypeHash && super.equals(o);
   }
 
   @Override
   public String toString() {
-    return ARRAY_REF + super.toString();
+    return HASH + super.toString();
   }
 }

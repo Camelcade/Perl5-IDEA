@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.CachedValueProvider;
@@ -32,9 +31,14 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.impl.PsiPerlConditionExprImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeArray;
+import com.perl5.lang.perl.types.PerlTypeArrayRef;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -101,22 +105,96 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Nullable
   @Override
-  public String guessVariableType() {
+  public PerlType guessVariableType() {
     return CachedValuesManager
       .getCachedValue(this, () -> CachedValueProvider.Result.create(getVariableTypeHeavy(), PsiModificationTracker.MODIFICATION_COUNT));
   }
 
+
   @Nullable
-  private String getVariableTypeHeavy() {
-    if (this instanceof PsiPerlScalarVariable) {
-      //			System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
+  private PerlType getVariableTypeHeavy() {
+    // System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
+
+    if (this instanceof PsiPerlScalarVariable || this instanceof PsiPerlArrayVariable) {
+
+      if (isBuiltIn() && getActualType() == PerlVariableType.SCALAR) {
+
+        // get type of builtin variables
+        // fixme too long if and while block
+        PsiPerlExpr arrayExpr = null;
+        if ("_".equals(getName())) {
+          PsiElement run = getParent();
+          // search parents
+          while (run != null) {
+            if (run instanceof PsiPerlStatement) {
+              PsiPerlForStatementModifier type = PsiTreeUtil.getChildOfType(run, PsiPerlForStatementModifier.class);
+              arrayExpr = type == null ? null : type.getExpr();
+            }
+            else if (run instanceof PsiPerlMapExpr) {
+              if (((PsiPerlMapExpr)run).getBlock() != null) {
+                // map BLOCK EXPR
+                arrayExpr = ((PsiPerlMapExpr)run).getExpr();
+              }
+              else {
+                // map EXPR, EXPR
+                // seek second EXPR
+                arrayExpr = PsiTreeUtil.getNextSiblingOfType(((PsiPerlMapExpr)run).getExpr(), PsiPerlExpr.class);
+              }
+              break;
+            }
+            else if (run instanceof PsiPerlGrepExpr) {
+              // fixme generated PSI should have following process
+              arrayExpr = ((PsiPerlGrepExpr)run).getExpr();
+              if (((PsiPerlGrepExpr)run).getBlock() == null) {
+                // map EXPR, EXPR
+                // seek second EXPR
+                arrayExpr = PsiTreeUtil.getNextSiblingOfType(arrayExpr, PsiPerlExpr.class);
+              }
+              break;
+            }
+            else if (run instanceof PsiPerlForCompound) {
+              PsiPerlForeachIterator iterator = PsiTreeUtil.getChildOfType(run, PsiPerlForeachIterator.class);
+              if (iterator == null) {
+                // default variable is only used when there is no itarator
+                PsiPerlConditionExpr cond = ((PsiPerlForCompound)run).getConditionExpr();
+                arrayExpr = cond == null ? null : cond.getExpr();
+              }
+            }
+            run = run.getParent();
+          }
+        }
+        else if ("a".equals(getName()) || "b".equals(getName())) {
+          PsiElement run = getParent();
+          // search parents
+          while (run != null) {
+            if (run instanceof PsiPerlSortExpr) {
+              if (((PsiPerlSortExpr)run).getBlock() != null) {
+                // sort BLOCK EXPR
+                arrayExpr = ((PsiPerlSortExpr)run).getExpr();
+                break;
+              }
+            }
+            run = run.getParent();
+          }
+        }
+
+        if (arrayExpr != null) {
+          PerlType type = PerlPsiUtil.getPerlExpressionNamespace(arrayExpr);
+          if (type instanceof PerlTypeArray) {
+            return ((PerlTypeArray)type).getInnerType();
+          }
+          return null;
+        }
+      }
 
       PerlVariableNameElement variableNameElement = getVariableNameElement();
 
       if (variableNameElement != null) {
         // find lexicaly visible declaration and check type
         final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
+
         if (declarationWrapper != null) {
+
           if (declarationWrapper instanceof PerlImplicitVariableDeclaration) {
             return ((PerlImplicitVariableDeclaration)declarationWrapper).getVariableClass();
           }
@@ -124,16 +202,15 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
           if (declarationWrapper.isInvocantDeclaration() || declarationWrapper.isSelf()) {
             PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(declarationWrapper, PerlSelfHinter.class);
             if (selfHinter != null) {
-              return selfHinter.getSelfNamespace();
+              return new PerlTypeNamespace(selfHinter.getSelfNamespace());
             }
-            return PerlPackageUtil.getContextPackageName(declarationWrapper);
+            return new PerlTypeNamespace(PerlPackageUtil.getContextPackageName(declarationWrapper));
           }
 
           // check explicit type in declaration
-          String declarationPackageName = declarationWrapper.getDeclaredType();
-          if (declarationPackageName != null) {
-            assert !declarationPackageName.equals("");
-            return declarationPackageName;
+          PerlType type = declarationWrapper.getDeclaredType();
+          if (type != null) {
+            return type;
           }
 
           // check assignment around declaration
@@ -148,12 +225,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
                 if (lastExpression != declaration) {
                   // source element is on the left side
-                  if (lastExpression instanceof PerlMethodContainer) {
-                    return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
-                  }
-                  if (lastExpression instanceof PerlDerefExpression) {
-                    return ((PerlDerefExpression)lastExpression).guessType();
-                  }
+                  return PerlPsiUtil.getPerlExpressionNamespace(lastExpression);
                 }
               }
             }
@@ -168,7 +240,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
                                             " in " +
                                             declarationWrapper.getContainingFile();
 
-          final String[] guessResult = new String[]{null};
+          final PerlType[] guessResult = new PerlType[]{null};
 
           int startOffset = declarationWrapper.getTextRange().getEndOffset();
           int endOffset = getTextRange().getStartOffset();
@@ -198,14 +270,14 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
                       if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset()) {
                         // source element is on the left side
                         // fixme implement variables assignment support. Need to build kinda visitor with recursion control
-                        String returnValue = null;
+                        PerlType returnValue = null;
                         if (lastExpression instanceof PerlMethodContainer) {
                           returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
                         }
                         if (lastExpression instanceof PerlDerefExpression) {
                           returnValue = ((PerlDerefExpression)lastExpression).guessType();
                         }
-                        if (StringUtil.isNotEmpty(returnValue)) {
+                        if (returnValue != null) {
                           guessResult[0] = returnValue;
                           return false;
                         }

@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.types;
 
+import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlTypeNamespace extends PerlType {
   @NotNull
@@ -49,5 +51,10 @@ public class PerlTypeNamespace extends PerlType {
   @Override
   public String toString() {
     return myNamespaceName;
+  }
+
+  @Nullable
+  public static PerlTypeNamespace fromNamespace(String namespaceName){
+    return StringUtil.isEmpty(namespaceName) ? null : new PerlTypeNamespace(namespaceName);
   }
 }

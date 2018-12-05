@@ -22,6 +22,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
+import com.perl5.lang.perl.types.PerlType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 
 import java.util.ArrayList;
@@ -60,7 +61,11 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, P
         return false;
       }
 
-      String variableClass = variableDeclaration.getDeclarationType();
+      PerlType variableType = variableDeclaration.getDeclarationType();
+      String variableClass = null;
+      if (variableType != null) {
+        variableClass = variableType.getNamespaceName();
+      }
       if (variableClass == null) {
         variableClass = "";
       }

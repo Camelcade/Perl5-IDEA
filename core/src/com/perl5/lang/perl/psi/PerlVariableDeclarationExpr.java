@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,10 +33,10 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
   /**
    * Returns explicit declared type
    *
-   * @return declaration type name or null
+   * @return declaration type or null
    */
   @Nullable
-  String getDeclarationType();
+  PerlType getDeclarationType();
 
   @NotNull
   List<PsiPerlVariableDeclarationElement> getVariableDeclarationElementList();

@@ -17,9 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -31,5 +33,29 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
   default PsiPerlContinueBlock getContinueBlock() {
     PsiElement potentialBlock = PerlPsiUtil.getNextSignificantSibling(this);
     return potentialBlock instanceof PsiPerlContinueBlock ? (PsiPerlContinueBlock)potentialBlock : null;
+  }
+
+  @Nullable
+  default PsiPerlStatement getLastStatement(){
+    PsiPerlStatement[] children = PsiTreeUtil.getChildrenOfType(this, PsiPerlStatement.class);
+    if(children != null && children.length>0){
+      return children[children.length-1];
+    }
+    return null;
+  }
+
+  @Nullable
+  default PerlType guessReturnType(){
+    // regards type of last expression in block as returned type
+    PsiPerlStatement statement = getLastStatement();
+    if (statement != null) {
+      PsiPerlExpr expr = statement.getExpr();
+      if (expr instanceof PsiPerlReturnExpr) {
+        // fixme psiPerlReturnExpr.getExpr() should be auto generated
+        expr = PsiTreeUtil.getChildOfType(expr, PsiPerlExpr.class);
+      }
+      return PerlPsiUtil.getPerlExpressionNamespace(expr);
+    }
+    return null;
   }
 }

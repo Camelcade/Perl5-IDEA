@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -30,7 +31,7 @@ public interface PerlDerefExpression extends PsiPerlExpr {
    * @return package name or null
    */
   @Nullable
-  String getPreviousElementNamespace(PsiElement methodElement);
+  PerlType getPreviousElementNamespace(PsiElement methodElement);
 
   /**
    * Attempting to traverse dereference chain in order to detect package name retuning by current element
@@ -39,7 +40,7 @@ public interface PerlDerefExpression extends PsiPerlExpr {
    * @return type or null
    */
   @Nullable
-  String getCurrentElementNamespace(PsiElement currentElement);
+  PerlType getCurrentElementNamespace(PsiElement currentElement);
 
   /**
    * Attempting to guess dereference chain result
@@ -47,5 +48,5 @@ public interface PerlDerefExpression extends PsiPerlExpr {
    * @return type or null
    */
   @Nullable
-  String guessType();
+  PerlType guessType();
 }

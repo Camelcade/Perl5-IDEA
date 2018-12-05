@@ -16,7 +16,34 @@
 
 package com.perl5.lang.perl.types;
 
+import com.intellij.openapi.util.text.StringUtil;
+import org.jetbrains.annotations.Nullable;
+
 public abstract class PerlType {
   public static final String ARRAY_REF = "ArrayRef";
   public static final String HASH_REF = "HashRef";
+
+  public static final String ARRAY = "Array";
+  public static final String HASH = "Hash";
+
+  @Nullable
+  public abstract String getNamespaceName();
+
+  @Nullable
+  public static PerlType fromTypeString(@Nullable String typeString) {
+    if (StringUtil.isEmpty(typeString)) {
+      return null;
+    }
+    // fixme dirty implementation
+    String arrayRefStart = ARRAY_REF + "[";
+    String arrayRefEnd = "]";
+    if( typeString.startsWith(arrayRefStart) && typeString.endsWith(arrayRefEnd) ){
+      // fixme handle deep nested inner type
+      String innerType = typeString
+        .substring(arrayRefStart.length(), typeString.length() - arrayRefEnd.length());
+      return PerlTypeArrayRef.fromInnerType(PerlTypeNamespace.fromNamespace(innerType));
+    }else{
+      return PerlTypeNamespace.fromNamespace(typeString);
+    }
+  }
 }

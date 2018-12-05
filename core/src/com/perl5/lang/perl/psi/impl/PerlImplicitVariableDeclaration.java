@@ -33,7 +33,10 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.twelvemonkeys.lang.StringUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,7 +53,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   @NotNull
   protected final String myVariableName;
   @Nullable
-  protected final String myVariableClass;
+  protected final PerlType myVariableClass;
   protected final boolean myIsLexical;
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
@@ -83,7 +86,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     if (type != null) {
       myVariableType = type;
       myVariableName = variableNameWithSigil.substring(1);
-      myVariableClass = variableClass;
+      myVariableClass = StringUtil.isEmpty(variableClass) ? null : new PerlTypeNamespace(variableClass);
       myIsLexical = isLexical;
       myIsLocal = isLocal;
       myIsInvocant = isInvocant;
@@ -100,19 +103,19 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Nullable
   @Override
-  public String getDeclaredType() {
+  public PerlType getDeclaredType() {
     return getVariableClass();
   }
 
   @Nullable
   @Override
-  public String guessVariableType() {
+  public PerlType guessVariableType() {
     return getVariableClass();
   }
 
   @Nullable
   @Override
-  public String getLocallyDeclaredType() {
+  public PerlType getLocallyDeclaredType() {
     return getVariableClass();
   }
 
@@ -176,7 +179,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Nullable
-  public String getVariableClass() {
+  public PerlType getVariableClass() {
     return myVariableClass;
   }
 

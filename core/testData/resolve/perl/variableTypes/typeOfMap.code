@@ -1,0 +1,10 @@
+#@returns Foo::Bar
+sub mapfunc{}
+
+my @mapped1 = map { mapfunc() } 1..5;
+my @mapped2 = map { return mapfunc; } 1..5;
+my @mapped3 = map mapfunc(), 1..5;
+
+say @<caret>mapped1;
+say @mapped2;
+say @mapped3;

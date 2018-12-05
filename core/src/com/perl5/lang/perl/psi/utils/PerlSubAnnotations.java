@@ -20,8 +20,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
+import com.perl5.lang.perl.types.PerlType;
+import com.perl5.lang.perl.types.PerlTypeArrayRef;
+import com.perl5.lang.perl.types.PerlTypeNamespace;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,19 +44,22 @@ public class PerlSubAnnotations {
   private byte myFlags = 0;
   private PerlReturnType myReturnType = PerlReturnType.VALUE;
   private String myReturns = null;
+  private String myInnerReturns = null;
 
   public PerlSubAnnotations() {
   }
 
-  public PerlSubAnnotations(byte flags, String returns, PerlReturnType returnType) {
+  public PerlSubAnnotations(byte flags, String returns, String innerReturns, PerlReturnType returnType) {
     myFlags = flags;
     myReturnType = returnType;
+    myInnerReturns = innerReturns;
     myReturns = returns;
   }
 
   public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeByte(myFlags);
     dataStream.writeName(myReturns);
+    dataStream.writeName(myInnerReturns);
     myReturnType.serialize(dataStream);
   }
 
@@ -92,8 +99,16 @@ public class PerlSubAnnotations {
     return myReturns;
   }
 
+  public String getInnerReturns() {
+    return myInnerReturns;
+  }
+
   public void setReturns(String returns) {
     myReturns = returns;
+  }
+
+  public void setInnerReturns(String returns) {
+    myInnerReturns = returns;
   }
 
   public PerlReturnType getReturnType() {
@@ -106,13 +121,21 @@ public class PerlSubAnnotations {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlSubAnnotations)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PerlSubAnnotations)) {
+      return false;
+    }
 
     PerlSubAnnotations that = (PerlSubAnnotations)o;
 
-    if (myFlags != that.myFlags) return false;
-    if (getReturnType() != that.getReturnType()) return false;
+    if (myFlags != that.myFlags) {
+      return false;
+    }
+    if (getReturnType() != that.getReturnType()) {
+      return false;
+    }
     return getReturns() != null ? getReturns().equals(that.getReturns()) : that.getReturns() == null;
   }
 
@@ -127,6 +150,7 @@ public class PerlSubAnnotations {
   public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlSubAnnotations(
       dataStream.readByte(),
+      PerlStubSerializationUtil.readString(dataStream),
       PerlStubSerializationUtil.readString(dataStream),
       PerlReturnType.deserialize(dataStream)
     );
@@ -182,7 +206,16 @@ public class PerlSubAnnotations {
         if (StringUtil.isNotEmpty(returnClass)) {
           myAnnotations.setReturns(returnClass);
           myAnnotations.setReturnType(PerlReturnType.REF);
-          // todo implement brackets and braces
+        }
+        else {
+          // inner type
+          // fixme cannot handle deep nested inner type
+          PsiPerlArrayrefType type = ((PsiPerlAnnotationReturns)annotation).getArrayrefType();
+          PerlNamespaceElement ns = PsiTreeUtil.getChildOfType(type, PerlNamespaceElement.class);
+          if (ns != null) {
+            myAnnotations.setInnerReturns(ns.getCanonicalName());
+            myAnnotations.setReturnType(PerlReturnType.ARRAY_REF);
+          }
         }
       }
     }

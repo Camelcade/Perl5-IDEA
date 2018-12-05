@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.types.PerlType;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
   private final String myPackageName;
   private final String myVariableName;
-  private final String myDeclaredType;
+  private final PerlType myDeclaredType;
   private final PerlVariableType myVariableType;
   private final PerlVariableAnnotations myPerlVariableAnnotations;
 
@@ -41,7 +42,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
     IStubElementType elementType,
     String packageName,
     String variableName,
-    String declaredType,
+    PerlType declaredType,
     PerlVariableType variableType,
     PerlVariableAnnotations variableAnnotations
   ) {
@@ -64,7 +65,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
   }
 
   @Override
-  public String getDeclaredType() {
+  public PerlType getDeclaredType() {
     return myDeclaredType;
   }
 
