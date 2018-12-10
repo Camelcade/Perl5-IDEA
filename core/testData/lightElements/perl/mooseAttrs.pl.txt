@@ -126,7 +126,4 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1878 in moo
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1941 in mooseAttrs.pl
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1948 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1889 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1917 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1941 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1948 in mooseAttrs.pl
 

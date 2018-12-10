@@ -247,16 +247,3 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     test73 in mooseAttrs.pl; /method_gutter_icon.png; null -> PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1889 in mooseAttrs.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
     Grouped by: 'Group attributes' (perl.structure.group.attributes) to test72, test73 in mooseAttrs.pl
-
-    test74 in mooseAttrs.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1917 in mooseAttrs.pl
-    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
-    Grouped by: 'Group attributes' (perl.structure.group.attributes) to test72, test73 in mooseAttrs.pl
-
-    test75 in mooseAttrs.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1941 in mooseAttrs.pl
-    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
-    Grouped by: 'Group attributes' (perl.structure.group.attributes) to test72, test73 in mooseAttrs.pl
-
-    test76 in mooseAttrs.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1948 in mooseAttrs.pl
-    Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
-    Grouped by: 'Group attributes' (perl.structure.group.attributes) to test72, test73 in mooseAttrs.pl
-

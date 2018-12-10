@@ -305,6 +305,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       }
       result.add(newElement);
       result.addAll(secondaryResult);
+      secondaryResult.clear();
     }
 
     return result;

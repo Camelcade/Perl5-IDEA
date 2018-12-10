@@ -524,22 +524,19 @@ PerlSubReference at (3326,3332); text in range: 'test73' => 1 results:
 PerlNamespaceReference at (3333,3344); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MySomePackage at 16 in mooseAttrs.pl
 
-PerlSubReference at (3346,3352); text in range: 'test74' => 2 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1833 in mooseAttrs.pl
+PerlSubReference at (3346,3352); text in range: 'test74' => 1 results:
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1833 in mooseAttrs.pl
 
 PerlNamespaceReference at (3353,3364); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MySomePackage at 16 in mooseAttrs.pl
 
-PerlSubReference at (3366,3372); text in range: 'test75' => 2 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1857 in mooseAttrs.pl
+PerlSubReference at (3366,3372); text in range: 'test75' => 1 results:
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1857 in mooseAttrs.pl
 
 PerlNamespaceReference at (3373,3384); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MySomePackage at 16 in mooseAttrs.pl
 
-PerlSubReference at (3386,3392); text in range: 'test76' => 2 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1864 in mooseAttrs.pl
+PerlSubReference at (3386,3392); text in range: 'test76' => 1 results:
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1864 in mooseAttrs.pl
 
 PerlNamespaceReference at (3393,3404); text in range: '__PACKAGE__' => 1 results:

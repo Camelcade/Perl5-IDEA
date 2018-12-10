@@ -17,7 +17,7 @@ has other   => qw/
         /,
     handles => [ qw/<warning descr="Multiple subs definitions found">testsub</warning>/ ];
 
-has [qw/dupes blabla/] => is => 'rw', reader => '<warning descr="Multiple subs definitions found"><warning descr="Multiple subs definitions found">something</warning></warning>';
+has [qw/dupes blabla/] => is => 'rw', reader => 'something';
 
 use constant <warning descr="Multiple subs definitions found">testsub</warning> => 42;
 
