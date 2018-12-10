@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -34,12 +35,13 @@ public class PerlSubStructureViewElement extends PerlStructureViewElement {
   }
 
   public boolean isDeclaration() {
-    return myElement instanceof PerlSubDeclarationElement;
+    return getElement() instanceof PerlSubDeclarationElement;
   }
 
   public boolean isMethod() {
-    return myElement instanceof PerlSubElement && ((PerlSubElement)myElement).isMethod();
+    PsiElement element = getElement();
+    return element instanceof PerlSubElement && ((PerlSubElement)element).isMethod();
   }
 
-  public boolean isConstant() {return myElement instanceof PerlLightConstantDefinitionElement;}
+  public boolean isConstant() {return getElement() instanceof PerlLightConstantDefinitionElement;}
 }

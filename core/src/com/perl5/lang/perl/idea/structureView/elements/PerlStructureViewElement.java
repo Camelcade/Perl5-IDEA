@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.idea.structureView.elements;
 
 import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.structureView.impl.common.PsiTreeElementBase;
 import com.intellij.ide.util.treeView.smartTree.SortableTreeElement;
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
@@ -50,14 +50,13 @@ import java.util.*;
 /**
  * Created by hurricup on 15.08.2015.
  */
-public abstract class PerlStructureViewElement implements StructureViewTreeElement, SortableTreeElement {
-  protected PsiElement myElement;
+public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiElement> implements SortableTreeElement {
   protected boolean myIsInherited;
   @Nullable
   private PerlExportDescriptor myExportDescriptor;
 
-  public PerlStructureViewElement(PsiElement element) {
-    myElement = element;
+  public PerlStructureViewElement(PsiElement psiElement) {
+    super(psiElement);
   }
 
   public PerlStructureViewElement setInherited() {
@@ -83,43 +82,28 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
     return myExportDescriptor;
   }
 
-  @Override
-  public Object getValue() {
-    return myElement;
-  }
-
-  @Override
-  public void navigate(boolean requestFocus) {
-    if (myElement instanceof NavigationItem) {
-      ((NavigationItem)myElement).navigate(requestFocus);
-    }
-  }
-
-  @Override
-  public boolean canNavigate() {
-    return myElement instanceof NavigationItem &&
-           ((NavigationItem)myElement).canNavigate();
-  }
-
-  @Override
-  public boolean canNavigateToSource() {
-    return myElement instanceof NavigationItem &&
-           ((NavigationItem)myElement).canNavigateToSource();
-  }
-
   @NotNull
   @Override
   public String getAlphaSortKey() {
-    assert myElement instanceof PsiNamedElement;
+    PsiElement element = getElement();
+    if (!(element instanceof PsiNamedElement)) {
+      return "";
+    }
     PerlExportDescriptor exportDescriptor = getExportDescriptor();
     if (exportDescriptor != null) {
       return exportDescriptor.getImportedName();
     }
-    String name = ((PsiNamedElement)myElement).getName();
+    String name = ((PsiNamedElement)element).getName();
     if (name == null) {
-      name = "Empty named " + myElement;
+      name = "Empty named " + element;
     }
     return name;
+  }
+
+  @Nullable
+  @Override
+  public String getPresentableText() {
+    throw new RuntimeException("Should not be invoked or should be overrode");
   }
 
   @NotNull
@@ -149,23 +133,29 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
   @NotNull
   protected ItemPresentation createPresentation() {
     ItemPresentation result = null;
-    if (myElement instanceof NavigationItem) {
-      result = ((NavigationItem)myElement).getPresentation();
+    PsiElement element = getElement();
+    if (element instanceof NavigationItem) {
+      result = ((NavigationItem)element).getPresentation();
     }
 
-    return result == null ? new PerlItemPresentationSimple(myElement, "FIXME") : result;
+    return result == null ? new PerlItemPresentationSimple(element, "FIXME") : result;
   }
-
 
   @NotNull
   @Override
-  public TreeElement[] getChildren() {
-    List<TreeElement> result = new ArrayList<>();
+  public Collection<StructureViewTreeElement> getChildrenBase() {
+
+    PsiElement psiElement = getElement();
+    if (psiElement == null) {
+      return Collections.emptyList();
+    }
+
+    List<StructureViewTreeElement> result = new ArrayList<>();
 
     Set<String> implementedMethods = new HashSet<>();
 
-    if (myElement instanceof PerlFile) {
-      FileViewProvider viewProvider = ((PerlFile)myElement).getViewProvider();
+    if (psiElement instanceof PerlFile) {
+      FileViewProvider viewProvider = ((PerlFile)psiElement).getViewProvider();
       PsiFile podFile = viewProvider.getPsi(PodLanguage.INSTANCE);
       if (podFile != null && podFile.getChildren().length > 1) {
         result.add(new PodStructureViewElement(podFile));
@@ -192,19 +182,19 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
         });
       }
     }
-    if (myElement instanceof PerlNamespaceDefinitionElement) {
+    if (psiElement instanceof PerlNamespaceDefinitionElement) {
       // global variables
-      for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(myElement, PerlVariableDeclarationElement.class)) {
-        if (child.isGlobalDeclaration() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+      for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(psiElement, PerlVariableDeclarationElement.class)) {
+        if (child.isGlobalDeclaration() && psiElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
           result.add(new PerlVariableDeclarationStructureViewElement(child));
         }
       }
 
-      Project project = myElement.getProject();
+      Project project = psiElement.getProject();
       GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
 
       // imported scalars
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedScalarDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedScalarDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationElement> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
@@ -225,7 +215,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
       }
 
       // imported arrays
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedArrayDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedArrayDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationElement> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
@@ -246,7 +236,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
       }
 
       // imported hashes
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedHashDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedHashDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         Collection<PerlVariableDeclarationElement> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
@@ -267,7 +257,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
       }
 
       // Imported subs
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)myElement).getImportedSubsDescriptors()) {
+      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedSubsDescriptors()) {
         String canonicalName = exportDescritptor.getTargetCanonicalName();
 
         // declarations
@@ -301,10 +291,10 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
         }
       }
 
-      myElement.accept(new PerlRecursiveVisitor() {
+      psiElement.accept(new PerlRecursiveVisitor() {
         @Override
         public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement child) {
-          if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+          if (psiElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
             implementedMethods.add(child.getName());
 
             result.add(new PerlSubStructureViewElement(child));
@@ -314,7 +304,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
 
         @Override
         public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement child) {
-          if (myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+          if (psiElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
             result.add(new PerlSubStructureViewElement(child));
           }
           super.visitSubDeclarationElement(child);
@@ -322,7 +312,7 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
 
         @Override
         public void visitGlobVariable(@NotNull PsiPerlGlobVariable child) {
-          if (child.isLeftSideOfAssignment() && myElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
+          if (child.isLeftSideOfAssignment() && psiElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
             implementedMethods.add(child.getName());
             result.add(new PerlGlobStructureViewElement(child));
           }
@@ -332,13 +322,13 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
     }
 
     // inherited elements
-    if (myElement instanceof PerlNamespaceDefinitionWithIdentifier) {
-      List<TreeElement> inheritedResult = new ArrayList<>();
+    if (psiElement instanceof PerlNamespaceDefinitionWithIdentifier) {
+      List<StructureViewTreeElement> inheritedResult = new ArrayList<>();
 
-      String packageName = ((PerlNamespaceDefinitionElement)myElement).getPackageName();
+      String packageName = ((PerlNamespaceDefinitionElement)psiElement).getPackageName();
 
       if (packageName != null) {
-        for (PsiElement element : PerlMro.getVariants(myElement, packageName, true)) {
+        for (PsiElement element : PerlMro.getVariants(psiElement, packageName, true)) {
           if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
             if (element instanceof PerlLightConstantDefinitionElement) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());
@@ -363,6 +353,6 @@ public abstract class PerlStructureViewElement implements StructureViewTreeEleme
       }
     }
 
-    return result.toArray(new TreeElement[result.size()]);
+    return result;
   }
 }

@@ -16,9 +16,12 @@
 
 package com.perl5.lang.perl.idea.structureView.elements;
 
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
+import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by hurricup on 15.08.2015.
@@ -30,7 +33,7 @@ public class PerlLeafStructureViewElement extends PerlStructureViewElement {
 
   @NotNull
   @Override
-  public TreeElement[] getChildren() {
-    return new TreeElement[0];
+  public Collection<StructureViewTreeElement> getChildrenBase() {
+    return Collections.emptyList();
   }
 }
