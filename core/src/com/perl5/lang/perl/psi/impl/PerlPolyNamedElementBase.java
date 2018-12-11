@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.codeInsight.daemon.impl.Divider;
+import com.intellij.codeInsight.daemon.impl.LocalInspectionsPass;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -58,6 +60,12 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
     return calcLightElementsFromPsi();
   }
 
+  /**
+   * @implNote we need to accept light elements here, because in non-recursive visitors case, platform collects elements by itself by
+   * traversing the tree
+   * @see LocalInspectionsPass#inspect(java.util.List, com.intellij.codeInspection.InspectionManager, boolean, com.intellij.openapi.progress.ProgressIndicator)
+   * @see Divider#divideInsideAndOutsideInOneRoot(com.intellij.psi.PsiFile, com.intellij.openapi.util.TextRange, com.intellij.openapi.util.TextRange, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, boolean)
+   */
   @Override
   public final void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PerlVisitor) {
