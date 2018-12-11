@@ -20,6 +20,7 @@ import base.PerlLightTestCase;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
+import com.perl5.lang.perl.parser.moose.idea.inspections.MooseMultiAttributeAccessorInspection;
 import com.perl5.lang.perl.psi.PerlFile;
 
 /**
@@ -196,5 +197,17 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   private void doShadowingTest() {
     doInspectionTest(PerlVariableShadowingInspection.class);
+  }
+
+  public void testMooseAttrAccessorsHandles() {
+    doMooseMultiAttributesAccessorsTest();
+  }
+
+  public void testMooseAttrsAccessorsHandles() {
+    doMooseMultiAttributesAccessorsTest();
+  }
+
+  private void doMooseMultiAttributesAccessorsTest() {
+    doInspectionTest(MooseMultiAttributeAccessorInspection.class);
   }
 }

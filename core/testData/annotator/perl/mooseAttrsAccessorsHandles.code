@@ -1,0 +1,23 @@
+has [ qw/test test2/ ] => (is => 'rw',
+    reader              => '<error descr="Creating accessor or delegate when declaring multiple attributes">reader</error>',
+    writer              => '<error descr="Creating accessor or delegate when declaring multiple attributes">writer</error>',
+    accessor            => '<error descr="Creating accessor or delegate when declaring multiple attributes">accessor</error>',
+    clearer             => '<error descr="Creating accessor or delegate when declaring multiple attributes">clearer</error>',
+    predicate           => '<error descr="Creating accessor or delegate when declaring multiple attributes">predicate</error>',
+    handles             => [ qw/
+        <error descr="Creating accessor or delegate when declaring multiple attributes">blaa</error>
+        <error descr="Creating accessor or delegate when declaring multiple attributes">asdasdf</error>
+        <error descr="Creating accessor or delegate when declaring multiple attributes">asdfasdf</error>
+    / ]);
+
+has [ qw/test3 test4/ ] => (is => 'ro',
+    reader              => 'reader',
+    writer              => 'writer',
+    accessor            => '<error descr="Creating accessor or delegate when declaring multiple attributes">accessor</error>',
+    clearer             => '<error descr="Creating accessor or delegate when declaring multiple attributes">clearer</error>',
+    predicate           => '<error descr="Creating accessor or delegate when declaring multiple attributes">predicate</error>',
+    handles             => [ qw/
+        <error descr="Creating accessor or delegate when declaring multiple attributes">blaa</error>
+        <error descr="Creating accessor or delegate when declaring multiple attributes">asdasdf</error>
+        <error descr="Creating accessor or delegate when declaring multiple attributes">asdfasdf</error>
+    / ]);

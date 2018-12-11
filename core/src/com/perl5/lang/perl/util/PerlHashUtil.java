@@ -32,7 +32,6 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -148,7 +147,10 @@ public class PerlHashUtil implements PerlElementTypes {
   }
 
   public static Map<String, PerlHashEntry> packToHash(@NotNull List<PsiElement> elements) {
-    Map<String, PerlHashEntry> result = new THashMap<>();
+    if (elements.isEmpty()) {
+      return Collections.emptyMap();
+    }
+    Map<String, PerlHashEntry> result = new HashMap<>();
 
     processAsHash(elements, (keyElement, valElement) -> {
       String keyText = ElementManipulators.getValueText(keyElement);

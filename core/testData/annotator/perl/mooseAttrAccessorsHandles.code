@@ -1,0 +1,23 @@
+has [ qw/test/ ] => (is => 'rw',
+    reader              => 'reader',
+    writer              => 'writer',
+    accessor            => 'accessor',
+    clearer             => 'clearer',
+    predicate           => 'predicate',
+    handles             => [ qw/
+        blaa
+        asdasdf
+        asdfasdf
+    / ]);
+
+has [ qw/test/ ] => (is => 'ro',
+    reader              => 'reader',
+    writer              => 'writer',
+    accessor            => 'accessor',
+    clearer             => 'clearer',
+    predicate           => 'predicate',
+    handles             => [ qw/
+        blaa
+        asdasdf
+        asdfasdf
+    / ]);
