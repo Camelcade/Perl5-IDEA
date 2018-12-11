@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeWrapper;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
@@ -113,6 +114,10 @@ public class PerlVisitor extends PsiPerlVisitor {
   @Override
   public void visitPerlMethodDefinition(@NotNull PerlMethodDefinition o) {
     visitPerlSubDefinitionElement(o);
+  }
+
+  public void visitMooseAttributeWrapper(@NotNull PerlMooseAttributeWrapper o) {
+    visitPolyNamedElement(o);
   }
 
   public void visitPolyNamedElement(@NotNull PerlPolyNamedElement o) {

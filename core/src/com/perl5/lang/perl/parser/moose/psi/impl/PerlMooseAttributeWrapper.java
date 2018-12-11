@@ -25,6 +25,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -62,6 +63,11 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
 
   public PerlMooseAttributeWrapper(@NotNull ASTNode node) {
     super(node);
+  }
+
+  @Override
+  protected void visitWrapper(@NotNull PerlVisitor visitor) {
+    visitor.visitMooseAttributeWrapper(this);
   }
 
   @NotNull
