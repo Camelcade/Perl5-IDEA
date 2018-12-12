@@ -112,14 +112,14 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
       ProcessOutput output = execAndGetOutput(new PerlCommandLine("\\which", fileName).withHostData(this));
       int exitCode = output.getExitCode();
       if (exitCode != 0 && exitCode != 1) {
-        LOG.error("Got non-zero code from script " + exitCode + "; stderr: " + output.getStderr());
+        LOG.warn("Got non-zero code from script " + exitCode + "; stderr: " + output.getStderr());
         return null;
       }
       List<String> lines = output.getStdoutLines();
       return lines.isEmpty() ? null : new File(lines.get(0));
     }
     catch (ExecutionException e) {
-      LOG.error("Error seeking for " + fileName, e);
+      LOG.warn("Error seeking for " + fileName, e);
     }
     return null;
   }
