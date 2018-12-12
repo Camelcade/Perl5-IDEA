@@ -231,7 +231,7 @@ public class PerlDebugThread extends Thread {
       myOutputStream.write(string.getBytes(StandardCharsets.UTF_8));
     }
     catch (IOException e) {
-      LOG.error(e);
+      LOG.warn(e);
     }
     finally {
       lock.unlock();
