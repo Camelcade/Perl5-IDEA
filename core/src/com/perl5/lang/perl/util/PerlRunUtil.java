@@ -422,7 +422,7 @@ public class PerlRunUtil {
     }
     catch (ExecutionException e) {
       consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);
-      LOG.error(e);
+      LOG.warn(e);
     }
 
     RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
