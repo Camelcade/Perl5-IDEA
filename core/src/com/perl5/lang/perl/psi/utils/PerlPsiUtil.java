@@ -532,20 +532,21 @@ public class PerlPsiUtil implements PerlElementTypes {
     return (T)result[0];
   }
 
-
+  /**
+   * Checking the tree before the {@code element} and looking for annotions in code. Each annotation is processed by {@code annotationProcessor}
+   */
   public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor) {
+    if (element instanceof PsiFile) {
+      return;
+    }
     PsiElement run = element.getPrevSibling();
 
-    if (run == null)    // first element, check parents
-    {
+    if (run == null) {
       run = element;
+      int elementOffset = element.getNode().getStartOffset();
       while (true) {
-        if (run instanceof PsiFile) {
-          return;
-        }
-
         PsiElement parent = run.getParent();
-        if (parent != null && parent.getNode().getStartOffset() == run.getNode().getStartOffset()) {
+        if (parent != null && !(parent instanceof PsiFile) && parent.getNode().getStartOffset() == elementOffset) {
           run = parent;
         }
         else {
