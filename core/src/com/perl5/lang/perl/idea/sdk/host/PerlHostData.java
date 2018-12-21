@@ -276,12 +276,12 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   @Contract("null->null")
   @Nullable
-  public static PerlHostData from(@Nullable Sdk sdk) {
+  public static PerlHostData<?, ?> from(@Nullable Sdk sdk) {
     return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getHostData);
   }
 
   @NotNull
-  public static PerlHostData notNullFrom(@NotNull Sdk sdk) {
+  public static PerlHostData<?, ?> notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No host data in " + sdk);
   }
 
