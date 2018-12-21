@@ -169,34 +169,11 @@ class PerlDockerAdapter {
     return checkOutput(PerlHostData.execAndGetOutput(baseCommandLine().withParameters(params)));
   }
 
-  private PerlCommandLine baseCommandLine() {
-    return new PerlCommandLine("docker").withHostData(PerlHostHandler.getDefaultHandler().createData());
-  }
-
-  /**
-   * @return list of images in {@code name[:tag]} format
-   */
-  List<String> listImages() throws ExecutionException {
-    ProcessOutput output = runCommand(IMAGE, LIST_IMAGE, IN_FORMAT, "{{.Repository}}:{{.Tag}}");
-    return output.getStdoutLines().stream()
-      .map(it -> StringUtil.replace(it, ":<none>", ""))
-      .filter(it -> !StringUtil.equals(it, "<none>"))
-      .sorted().collect(Collectors.toList());
-  }
-
   /**
    * Wrapping a {@code commandLine} to a script and runs it using {@code docker} command, returning it's process
    */
   public Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    PerlCommandLine dockerCommandLine = baseCommandLine()
-      .withParameters(RUN, WITH_AUTOREMOVE, INTERACTIVELY)
-      .withParameters(WITH_ATTACHED, STDOUT, WITH_ATTACHED, STDERR, WITH_ATTACHED, STDIN)
-      .withCharset(commandLine.getCharset());
-
-    if (commandLine.isUsePty()) {
-      dockerCommandLine.withParameters(WITH_TTY);
-      dockerCommandLine.withPty(true);
-    }
+    PerlCommandLine dockerCommandLine = buildBaseProcessCommandLine(commandLine);
 
     // mounting helpers
     dockerCommandLine.withParameters(WITH_VOLUME, PerlPluginUtil.getPluginHelpersRoot() + ':' + myData.getHelpersRootPath());
@@ -214,17 +191,15 @@ class PerlDockerAdapter {
         String remotePath = myData.getRemotePath(localPath);
         dockerCommandLine.withParameters(WITH_VOLUME, localPath + ':' + remotePath);
       }
+
+      // adding project settings if possible
+      dockerCommandLine
+        .withParameters(StringUtil.split(PerlDockerProjectSettings.getInstance(project).getAdditionalDockerParameters(), " "));
     }
 
     // required by coverage, probably we should have a getter for this; Also contains a temp path
     String localSystemPath = PathManager.getSystemPath();
     dockerCommandLine.withParameters(WITH_VOLUME, localSystemPath + ':' + myData.getRemotePath(localSystemPath));
-
-    // mapping ports
-    commandLine.getPortMappings().forEach(
-      it -> dockerCommandLine.withParameters(EXPOSE_PORT,
-                                             String.valueOf(it.getRemote()),
-                                             PUBLISH_PORT, it.getLocal() + ":" + it.getRemote()));
 
     // we sure that command script is under system dir
     File script = createCommandScript(commandLine);
@@ -232,6 +207,40 @@ class PerlDockerAdapter {
     return dockerCommandLine.withParameters(myData.getImageName(), "sh", dockerScriptPath).createProcess();
   }
 
+  /**
+   * @return list of images in {@code name[:tag]} format
+   */
+  List<String> listImages() throws ExecutionException {
+    ProcessOutput output = runCommand(IMAGE, LIST_IMAGE, IN_FORMAT, "{{.Repository}}:{{.Tag}}");
+    return output.getStdoutLines().stream()
+      .map(it -> StringUtil.replace(it, ":<none>", ""))
+      .filter(it -> !StringUtil.equals(it, "<none>"))
+      .sorted().collect(Collectors.toList());
+  }
+
+  private static PerlCommandLine baseCommandLine() {
+    return new PerlCommandLine("docker").withHostData(PerlHostHandler.getDefaultHandler().createData());
+  }
+
+  @NotNull
+  static PerlCommandLine buildBaseProcessCommandLine(@NotNull PerlCommandLine commandLine) {
+    PerlCommandLine dockerCommandLine = baseCommandLine()
+      .withParameters(RUN, WITH_AUTOREMOVE, INTERACTIVELY)
+      .withParameters(WITH_ATTACHED, STDOUT, WITH_ATTACHED, STDERR, WITH_ATTACHED, STDIN)
+      .withCharset(commandLine.getCharset());
+
+    if (commandLine.isUsePty()) {
+      dockerCommandLine.withParameters(WITH_TTY);
+      dockerCommandLine.withPty(true);
+    }
+
+    // mapping ports
+    commandLine.getPortMappings().forEach(
+      it -> dockerCommandLine.withParameters(EXPOSE_PORT,
+                                             String.valueOf(it.getRemote()),
+                                             PUBLISH_PORT, it.getLocal() + ":" + it.getRemote()));
+    return dockerCommandLine;
+  }
 
   @NotNull
   private File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {

@@ -32,4 +32,9 @@
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerHandler"/>
   </extensions>
 
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerProjectSettings"/>
+  </extensions>
+
+
 </idea-plugin>

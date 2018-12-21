@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.sdk.host.docker;
 import com.intellij.execution.ExecutionException;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.options.UnnamedConfigurable;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -96,5 +98,11 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   @Override
   public PerlDockerData createData() {
     return new PerlDockerData(this);
+  }
+
+  @Nullable
+  @Override
+  public UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
+    return new PerlDockerProjectSettingsConfigurable(project);
   }
 }
