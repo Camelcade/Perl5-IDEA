@@ -587,17 +587,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     caretModel.removeSecondaryCarets();
     return caretsOffsets;
   }
-  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
-    WriteCommandAction.writeCommandAction(getProject()).run(() -> {
-      PsiFile file = myFixture.getFile();
-      if (file.getViewProvider() instanceof InjectedFileViewProvider) {
-        //noinspection ConstantConditions
-        file = file.getContext().getContainingFile();
-      }
-      TextRange rangeToUse = file.getTextRange();
-      CodeStyleManager.getInstance(getProject()).reformatText(file, rangeToUse.getStartOffset(), rangeToUse.getEndOffset());
-    });
-
   protected void doTestWorldSelector() {
     initWithFileSmartWithoutErrors();
     List<Integer> offsets = getAndRemoveCarets();
@@ -782,77 +771,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
-  }
-
-  protected void doElementDescriptionTest() {
-    initWithFileSmartWithoutErrors();
-    doElementDescriptionCheck();
-  }
-
-  protected void doElementDescriptionTest(@NotNull String content) {
-    initWithTextSmart(content);
-    assertNoErrorElements();
-    doElementDescriptionCheck();
-  }
-
-  private void doElementDescriptionCheck() {
-    PsiElement elementAtCaret = myFixture.getElementAtCaret();
-    assertNotNull(elementAtCaret);
-    StringBuilder actualDump = new StringBuilder();
-    LOCATIONS.forEach(
-      location -> {
-        String actual = ElementDescriptionUtil.getElementDescription(elementAtCaret, location);
-        String locationName = location.getClass().getSimpleName();
-        actualDump.append(locationName)
-          .append(": ")
-          .append(actual)
-          .append("\n");
-      }
-    );
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), actualDump.toString());
-  }
-
-  protected void doLineCommenterTest() {
-    initWithFileSmart();
-    MultiCaretCodeInsightAction action = (MultiCaretCodeInsightAction)ActionManager.getInstance().getAction(IdeActions.ACTION_COMMENT_LINE);
-    action.actionPerformedImpl(myModule.getProject(), myFixture.getEditor());
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
-  }
-
-  protected void doTestConsoleFilter(@NotNull com.intellij.execution.filters.Filter filter) {
-    initWithFileSmart();
-    Document document = getEditor().getDocument();
-    int lines = document.getLineCount();
-
-    String documentText = document.getText();
-
-    StringBuilder sb = new StringBuilder();
-    for (int lineNumber = 0; lineNumber < lines; lineNumber++) {
-      int lineStart = document.getLineStartOffset(lineNumber);
-
-      String lineText = EditorHyperlinkSupport.getLineText(document, lineNumber, true);
-      int endOffset = lineStart + lineText.length();
-      com.intellij.execution.filters.Filter.Result result = filter.applyFilter(lineText, endOffset);
-      if (result == null) {
-        continue;
-      }
-      for (com.intellij.execution.filters.Filter.ResultItem resultItem : result.getResultItems()) {
-        int linkStartOffset = resultItem.getHighlightStartOffset();
-        int linkEndOffset = resultItem.getHighlightEndOffset();
-        sb.append(linkStartOffset)
-          .append(" - ")
-          .append(linkEndOffset)
-          .append("; ")
-          .append('[')
-          .append(documentText, linkStartOffset, linkEndOffset)
-          .append(']')
-          .append(" => ")
-          .append(resultItem.getHyperlinkInfo())
-          .append("\n");
-      }
-    }
-
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void testFoldingRegions(@NotNull String verificationFileName, LanguageFileType fileType) {
@@ -1255,17 +1173,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
     sb.append("\n");
   }
-
-  private static final List<ElementDescriptionLocation> LOCATIONS = Arrays.asList(
-    UsageViewShortNameLocation.INSTANCE,
-    UsageViewLongNameLocation.INSTANCE,
-    UsageViewTypeLocation.INSTANCE,
-    UsageViewNodeTextLocation.INSTANCE,
-    NonCodeSearchDescriptionLocation.STRINGS_AND_COMMENTS,
-    DeleteNameDescriptionLocation.INSTANCE,
-    DeleteTypeDescriptionLocation.SINGULAR,
-    DeleteTypeDescriptionLocation.PLURAL
-  );
 
   protected void doElementDescriptionTest() {
     initWithFileSmartWithoutErrors();

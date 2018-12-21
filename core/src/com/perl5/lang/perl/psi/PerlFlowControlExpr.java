@@ -29,7 +29,6 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_EXPR;
 import static com.perl5.lang.perl.psi.PerlBlock.LOOPS_CONTAINERS;
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.NAMED_BLOCK;
 
 
 /**
@@ -89,7 +88,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
         }
       }
       else if (closestBlockContainer instanceof PerlSubDefinition ||
-               blockContainerType == NAMED_BLOCK ||
+               //blockContainerType == NAMED_BLOCK ||
                blockContainerType == SUB_EXPR) {
         return PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
       }
