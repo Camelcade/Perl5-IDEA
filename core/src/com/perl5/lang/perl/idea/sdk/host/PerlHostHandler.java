@@ -21,6 +21,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.InputValidator;
@@ -228,6 +229,14 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     return TAG_NAME;
   }
 
+  /**
+   * @return configurable for the {@code project} settings related to this host data type if any. E.g. docker has additional cli arguments on project level
+   */
+  @Nullable
+  public UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
+    return null;
+  }
+
   @NotNull
   public static List<? extends PerlHostHandler<?, ?>> all() {
     return EP.getExtensions();
@@ -244,7 +253,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
 
   @Contract("null->null")
   @Nullable
-  static PerlHostHandler from(@Nullable Sdk sdk) {
+  public static PerlHostHandler<?, ?> from(@Nullable Sdk sdk) {
     PerlHostData<?, ?> perlHostData = PerlHostData.from(sdk);
     return perlHostData == null ? null : perlHostData.getHandler();
   }

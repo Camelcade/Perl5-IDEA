@@ -50,4 +50,9 @@ public interface Perl5SdkManipulator {
    * Changes sdk
    */
   void setSdk(@Nullable Sdk sdk);
+
+  /**
+   * Invoked when {@code sdkWrapper} has been selected in combo-box
+   */
+  default void selectionChanged(@Nullable Perl5SdkWrapper sdkWrapper) {}
 }

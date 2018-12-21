@@ -50,6 +50,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Objects;
@@ -102,7 +103,11 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
         }
       }
     });
-
+    sdkComboBox.addItemListener(e -> {
+      if (e.getStateChange() == ItemEvent.SELECTED) {
+        mySdkManipulator.selectionChanged((Perl5SdkWrapper)e.getItem());
+      }
+    });
     myConnection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
 
     // add sdk button
@@ -185,6 +190,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
       itemToSelect = allItems.isEmpty() ? null : allItems.get(0);
     }
     sdkComboBox.setModel(new CollectionComboBoxModel<>(allItems, itemToSelect));
+    mySdkManipulator.selectionChanged(itemToSelect);
   }
 
   @Nullable
@@ -264,6 +270,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   @Override
   public void reset() {
     myPanel.getSdkComboBox().setSelectedItem(mySdkManipulator.getCurrentSdkWrapper());
+    mySdkManipulator.selectionChanged(mySdkManipulator.getCurrentSdkWrapper());
   }
 
   @Override

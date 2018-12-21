@@ -20,6 +20,8 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.ComboBox;
@@ -41,6 +43,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -48,8 +51,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 import static com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable.DISABLE_PERL_ITEM;
 
@@ -63,6 +66,11 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
   @NotNull
   private Perl5SdkConfigurable myPerl5SdkConfigurable;
+
+  private final JPanel mySdkProjectSettingsPanel = new JPanel(new BorderLayout());
+
+  private final Map<PerlHostHandler<?, ?>, UnnamedConfigurable> myHostConfigurablesMap = new HashMap<>();
+  private UnnamedConfigurable myHostProjectConfigurable;
 
   protected JBList<VirtualFile> myLibsList;
   private CollectionListModel<VirtualFile> myLibsModel;
@@ -94,6 +102,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
     builder.addComponent(myPerl5SdkConfigurable.createComponent());
+    builder.addComponent(mySdkProjectSettingsPanel);
 
     ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
     myTargetPerlVersionComboBox = new ComboBox<>(versionModel);
@@ -267,7 +276,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
            !StringUtil.equals(mySharedSettings.PERL_DEPARSE_ARGUMENTS, deparseArgumentsTextField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
-           !mySharedSettings.selfNames.equals(selfNamesModel.getItems());
+           !mySharedSettings.selfNames.equals(selfNamesModel.getItems()) ||
+           myHostProjectConfigurable != null && myHostProjectConfigurable.isModified();
   }
 
   private boolean isLibsModified() {
@@ -276,6 +286,9 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
   @Override
   public void reset() {
+    if (myHostProjectConfigurable != null) {
+      myHostProjectConfigurable.reset();
+    }
     myPerl5SdkConfigurable.reset();
     myLibsModel.removeAll();
     myLibsModel.add(PerlProjectManager.getInstance(myProject).getExternalLibraryRoots());
@@ -298,7 +311,11 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   }
 
   @Override
-  public void apply() {
+  public void apply() throws ConfigurationException {
+    if (myHostProjectConfigurable != null) {
+      myHostProjectConfigurable.apply();
+    }
+
     myPerl5SdkConfigurable.apply();
     if (isLibsModified()) {
       PerlProjectManager.getInstance(myProject).setExternalLibraries(myLibsModel.getItems());
@@ -342,6 +359,32 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     PerlProjectManager.getInstance(myProject).setProjectSdk(sdk);
   }
 
+  /**
+   * Removes existing (if any) and adds new (if available) panel for project sdk settings. E.g. Docker settings
+   */
+  @Override
+  public void selectionChanged(@Nullable Perl5SdkWrapper sdkWrapper) {
+    Perl5SdkManipulator.super.selectionChanged(sdkWrapper);
+    for (Component component : mySdkProjectSettingsPanel.getComponents()) {
+      mySdkProjectSettingsPanel.remove(component);
+    }
+
+    if (sdkWrapper instanceof Perl5RealSdkWrapper) {
+      PerlHostHandler<?, ?> perlHostHandler = PerlHostHandler.from(((Perl5RealSdkWrapper)sdkWrapper).getSdk());
+      if (perlHostHandler != null) {
+        myHostProjectConfigurable = myHostConfigurablesMap.computeIfAbsent(perlHostHandler, it -> it.getSettingsConfigurable(myProject));
+        if (myHostProjectConfigurable != null) {
+          mySdkProjectSettingsPanel.add(Objects.requireNonNull(myHostProjectConfigurable.createComponent()), BorderLayout.CENTER);
+          myHostProjectConfigurable.reset();
+        }
+      }
+    }
+    else {
+      myHostProjectConfigurable = null;
+    }
+    mySdkProjectSettingsPanel.setVisible(myHostProjectConfigurable != null);
+  }
+
   @NotNull
   @Override
   public List<Perl5SdkWrapper> getAllSdkWrappers() {
@@ -354,6 +397,13 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   public void disposeUIResources() {
     myLibsList = null;
     myPerl5SdkConfigurable.disposeUIResources();
+    myHostProjectConfigurable = null;
+    myHostConfigurablesMap.values().forEach(it -> {
+      if (it != null) {
+        it.disposeUIResources();
+      }
+    });
+    myHostConfigurablesMap.clear();
   }
 
   @NotNull
