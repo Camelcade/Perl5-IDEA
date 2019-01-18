@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
@@ -58,11 +59,30 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
     FUNC_DEFINITION
   );
 
+  /**
+   * @return continue block for this one or null if there is none
+   */
   @Nullable
   @Override
   default PsiPerlContinueBlock getContinueBlock() {
-    PsiElement potentialBlock = PerlPsiUtil.getNextSignificantSibling(this);
-    return potentialBlock instanceof PsiPerlContinueBlock ? (PsiPerlContinueBlock)potentialBlock : null;
+    return ObjectUtils.tryCast(PerlPsiUtil.getNextSignificantSibling(this), PsiPerlContinueBlock.class);
+  }
+
+  /**
+   * @return container of this block, omitting lazy-parsable part if any. If this is a bare block, returns itself.
+   */
+  @Contract(pure = true)
+  @NotNull
+  default PsiElement getContainer(){
+    PsiElement container = getParent();
+    if (LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(container))) {
+      container = container.getParent();
+    }
+
+    if (container instanceof PsiFile || container instanceof PerlBlock) {
+      return this;
+    }
+    return container;
   }
 
   /**
@@ -70,27 +90,16 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
    */
   @Contract("null -> null")
   @Nullable
-  static PerlBlock getClosestParentFor(@Nullable PsiElement element){
+  static PerlBlock getClosestTo(@Nullable PsiElement element) {
     return PsiTreeUtil.getParentOfType(element, PerlBlock.class);
   }
 
   /**
-   * @return container of this block, omitting lazy-parsable part if any
-   */
-  @NotNull
-  default PsiElement getContainer(){
-    PsiElement container = getParent();
-    return LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(container))
-           ? container.getParent() : container;
-
-  }
-
-  /**
-   * @return parent psi element for closest parent block element
+   * @return container of closest parent block for the {@code position}
    */
   @Contract("null -> null")
   @Nullable
   static PsiElement getClosestBlockContainer(@Nullable PsiElement position) {
-    return ObjectUtils.doIfNotNull(getClosestParentFor(position), PerlBlock::getContainer);
+    return ObjectUtils.doIfNotNull(getClosestTo(position), PerlBlock::getContainer);
   }
 }

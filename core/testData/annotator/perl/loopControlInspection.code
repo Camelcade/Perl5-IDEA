@@ -391,7 +391,7 @@ given ($a) {
         say and redo while shift;
         say and redo until shift;
         <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
-        <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+        break;
         next;
         redo;
         last;
@@ -421,7 +421,7 @@ given ($a) {
             say and redo for 1,2,3;
             say and redo while shift;
             say and redo until shift;
-            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            continue;
             break;
             next;
             redo;
@@ -453,7 +453,7 @@ given ($a) {
             say and redo for 1,2,3;
             say and redo while shift;
             say and redo until shift;
-            <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+            continue;
             break;
             next;
             redo;
@@ -980,7 +980,7 @@ package Test::Package {
             say and redo while shift;
             say and redo until shift;
             <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
-            <error descr="'break' inside the loop or code block, did you mean 'last'?">break</error>;
+            break;
             next;
             redo;
             last;
@@ -1010,7 +1010,7 @@ package Test::Package {
                 say and redo for 1,2,3;
                 say and redo while shift;
                 say and redo until shift;
-                <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+                continue;
                 break;
                 next;
                 redo;
@@ -1042,7 +1042,7 @@ package Test::Package {
                 say and redo for 1,2,3;
                 say and redo while shift;
                 say and redo until shift;
-                <error descr="'continue' inside the loop or code block, did you mean 'next'?">continue</error>;
+                continue;
                 break;
                 next;
                 redo;
