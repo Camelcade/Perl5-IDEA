@@ -35,12 +35,18 @@ public abstract class PerlParserExtension {
   public static final ExtensionPointName<PerlParserExtension> EP_NAME = ExtensionPointName.create("com.perl5.parserExtension");
 
   /**
-   * Returns a set of keywords and element types to lex.
-   *
-   * @return set of custom keywords
+   * @return a set of keywords and element types to lex that can be anywhere
    */
   @NotNull
   public Map<String, IElementType> getCustomTokensMap() {
+    return Collections.emptyMap();
+  }
+
+  /**
+   * @return a map of keywords and token types for identifiers after dereference, e.g. {@code $self->mk_accessors}.
+   */
+  @NotNull
+  public Map<String, IElementType> getCustomTokensAfterDereferenceMap() {
     return Collections.emptyMap();
   }
 

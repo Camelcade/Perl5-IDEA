@@ -16,10 +16,15 @@
 
 package com.perl5.lang.perl.parser;
 
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
 import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.*;
@@ -28,17 +33,25 @@ import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementType
  * Created by hurricup on 21.01.2016.
  */
 public class ClassAccessorParserExtension extends PerlParserExtensionBase {
-  protected static TokenSet TOKENS_SET = TokenSet.create(
-    RESERVED_FOLLOW_BEST_PRACTICE,
-    RESERVED_MK_ACCESSORS,
-    RESERVED_MK_RO_ACCESSORS,
-    RESERVED_MK_WO_ACCESSORS
+  protected static final Map<String, IElementType> TOKENS_MAP = ContainerUtil.newHashMap(
+    Pair.create("follow_best_practice", RESERVED_FOLLOW_BEST_PRACTICE),
+    Pair.create("mk_accessors", RESERVED_MK_ACCESSORS),
+    Pair.create("mk_ro_accessors", RESERVED_MK_RO_ACCESSORS),
+    Pair.create("mk_wo_accessors", RESERVED_MK_WO_ACCESSORS)
   );
+
+  protected static TokenSet TOKENS_SET = TokenSet.create(TOKENS_MAP.values().toArray(IElementType.EMPTY_ARRAY));
 
   @Override
   public void addHighlighting() {
     super.addHighlighting();
     PerlSyntaxHighlighter.safeMap(PERL_SUB_DEFINITION, TOKENS_SET);
+  }
+
+  @NotNull
+  @Override
+  public Map<String, IElementType> getCustomTokensAfterDereferenceMap() {
+    return TOKENS_MAP;
   }
 
   @Override

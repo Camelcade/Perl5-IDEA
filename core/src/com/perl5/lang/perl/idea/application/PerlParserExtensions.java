@@ -27,7 +27,6 @@ import com.perl5.lang.perl.parser.PerlParserImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hurricup on 22.11.2015.
@@ -37,7 +36,7 @@ public class PerlParserExtensions implements BaseComponent {
   }
 
   @Override
-  public void initComponent() {
+  public final void initComponent() {
     PerlParserDefinition.PARSER_EXTENSIONS.clear();
     PerlLexer.initReservedTokensMap();
     for (PerlParserExtension extension : PerlParserExtension.EP_NAME.getExtensions()) {
@@ -45,8 +44,8 @@ public class PerlParserExtensions implements BaseComponent {
       PerlParserDefinition.PARSER_EXTENSIONS.add(extension);
 
       // add tokens to lex
-      Map<String, IElementType> customTokensMap = extension.getCustomTokensMap();
-      PerlLexer.CUSTOM_TOKEN_TYPES.putAll(customTokensMap);
+      PerlLexer.CUSTOM_TOKEN_TYPES.putAll(extension.getCustomTokensMap());
+      PerlLexer.CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE.putAll(extension.getCustomTokensAfterDereferenceMap());
 
       // add regex prefix tokenset
       if (extension.getRegexPrefixTokenSet() != null) {

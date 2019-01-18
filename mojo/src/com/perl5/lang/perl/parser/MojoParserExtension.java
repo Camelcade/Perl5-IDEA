@@ -45,7 +45,7 @@ public class MojoParserExtension extends PerlParserExtensionBase implements Mojo
 
   @NotNull
   @Override
-  public Map<String, IElementType> getCustomTokensMap() {
+  public Map<String, IElementType> getCustomTokensAfterDereferenceMap() {
     return TOKENS_MAP;
   }
 

@@ -63,6 +63,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   public static final Pattern POSIX_CHAR_CLASS_PATTERN = Pattern.compile("\\[\\[:\\^?\\w*:\\]\\]");
   public static final Map<String, IElementType> RESERVED_TOKEN_TYPES = new THashMap<>();
   public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES = new THashMap<>();
+  public static final Map<String, IElementType> CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE = new THashMap<>();
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, STRING_CONTENT, QUOTE_SINGLE_CLOSE);
   private static final List<IElementType> XQ_TOKENS = Arrays.asList(QUOTE_TICK_OPEN, LP_STRING_XQ, QUOTE_TICK_CLOSE);
@@ -425,13 +426,19 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   }
 
   @NotNull
-  protected IElementType getIdentifierTokenWithoutIndexWithCustomTokens() {
+  protected IElementType getAfterDereferenceIdentifierToken() {
     IElementType defaultToken = getIdentifierTokenWithoutIndex();
     if (defaultToken != SUB_NAME) {
       return defaultToken;
     }
-    IElementType tokenType = CUSTOM_TOKEN_TYPES.get(yytext().toString());
-    return tokenType == null ? defaultToken : tokenType;
+    String tokenText = yytext().toString();
+    IElementType tokenType = CUSTOM_TOKEN_TYPES_AFTER_DEREFERENCE.get(tokenText);
+    if (tokenType != null) {
+      return tokenType;
+    }
+
+    tokenType = CUSTOM_TOKEN_TYPES.get(yytext().toString());
+    return tokenType != null ? tokenType : defaultToken;
   }
 
   /**
