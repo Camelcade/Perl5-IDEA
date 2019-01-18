@@ -9,11 +9,11 @@
 8(9) element: PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND). Condition: $i < 100:true
 9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-11(7) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+11(14) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
 12(13) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 13(14) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 14(15) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-15(7) element: PsiPerlSuffPpExprImpl(Perl5: SUFF_PP_EXPR)
+15(5) element: PsiPerlSuffPpExprImpl(Perl5: SUFF_PP_EXPR)
 16(17) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 17(18) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 18() element: null

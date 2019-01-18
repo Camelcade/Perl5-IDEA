@@ -10,7 +10,7 @@
 9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 11(12) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
-12(7) element: PsiPerlSuffPpExprImpl(Perl5: SUFF_PP_EXPR)
+12(5) element: PsiPerlSuffPpExprImpl(Perl5: SUFF_PP_EXPR)
 13(14) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 14(15) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 15() element: null

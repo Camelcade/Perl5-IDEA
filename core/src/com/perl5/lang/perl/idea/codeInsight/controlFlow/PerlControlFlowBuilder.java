@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
-import com.intellij.codeInsight.controlflow.ConditionalInstruction;
-import com.intellij.codeInsight.controlflow.ControlFlow;
-import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
-import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.codeInsight.controlflow.*;
+import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -256,8 +254,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitPerlFlowControlExpr(PerlFlowControlExpr o) {
-      super.visitPerlFlowControlExpr(o);
+    public void visitNextExpr(@NotNull PsiPerlNextExpr o) {
+      super.visitNextExpr(o);
       PsiElement targetLoop = o.getTargetScope();
       Instruction loopInstruction = myLoopNextInstructions.get(targetLoop);
       if (loopInstruction != null) {
@@ -303,27 +301,33 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitForCompound(@NotNull PsiPerlForCompound o) {
       acceptSafe(o.getForInit());
 
+      TransparentInstruction loopInstruction = startTransparentNode(o, "loopAnchor");
+      TransparentInstructionImpl nextAnchor = new TransparentInstructionImpl(PerlControlFlowBuilder.this, o, "nextAnchor");
+
+      PsiPerlForMutator mutator = o.getForMutator();
+      if (mutator == null) {
+        addNodeAndCheckPending(nextAnchor);
+      }
+
       PsiPerlForCondition condition = o.getForCondition();
-      if (condition == null) {
-        startTransparentNode(o, "statement");
-        Instruction loopInstruction = prevInstruction;
-        myLoopNextInstructions.put(o, loopInstruction);
-        acceptSafe(o.getBlock());
-        acceptSafe(o.getForMutator());
-        addEdge(prevInstruction, loopInstruction);
-        flowAbrupted();
-      }
-      else {
+      Instruction conditionalInstruction = null;
+      if (condition != null) {
         acceptSafe(condition);
-        Instruction loopInstruction = prevInstruction;
-        myLoopNextInstructions.put(o, loopInstruction);
+        conditionalInstruction = prevInstruction;
         startConditionalNode(o, condition, true);
-        acceptSafe(o.getBlock());
-        acceptSafe(o.getForMutator());
-        addEdge(prevInstruction, loopInstruction);
-        prevInstruction = loopInstruction;
       }
+
+      myLoopNextInstructions.put(o, nextAnchor);
+      acceptSafe(o.getBlock());
+
+      if (mutator != null) {
+        addNodeAndCheckPending(nextAnchor);
+        acceptSafe(mutator);
+      }
+
+      addEdge(prevInstruction, loopInstruction);
       myLoopNextInstructions.remove(o);
+      prevInstruction = conditionalInstruction;
     }
 
     @Override

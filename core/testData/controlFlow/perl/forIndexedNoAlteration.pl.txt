@@ -8,7 +8,7 @@
 7(8,11) element: PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR)
 8(9) element: PsiPerlForCompoundImpl(Perl5: FOR_COMPOUND). Condition: $i < 1:true
 9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-10(7) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(5) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 11(12) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 12(13) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 13() element: null
