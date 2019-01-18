@@ -4,6 +4,7 @@ build/
 out/
 classes/
 gen/
+core/testData/controlFlow/perl/svg/
 *.iml
 .idea/*.xml
 .idea/modules/
@@ -12,5 +13,6 @@ gen/
 .idea/inspectionProfiles/
 testData/controlFlow/perl/svg/
 tmp/
+temp/
 icons/*.psd
 testData/controlFlow/perl/svg
