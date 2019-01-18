@@ -259,16 +259,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitPerlFlowControlExpr(PerlFlowControlExpr o) {
       super.visitPerlFlowControlExpr(o);
       PsiElement targetLoop = o.getTargetScope();
-      if (targetLoop != null) {
-        Instruction loopInstruction = myLoopNextInstructions.get(targetLoop);
-        if (loopInstruction != null) {
-          addEdge(prevInstruction, loopInstruction);
-        }
-        else {
-          addPendingEdge(targetLoop, prevInstruction);
-        }
-        flowAbrupted();
+      Instruction loopInstruction = myLoopNextInstructions.get(targetLoop);
+      if (loopInstruction != null) {
+        addEdge(prevInstruction, loopInstruction);
       }
+      else {
+        addPendingEdge(targetLoop, prevInstruction);
+      }
+      flowAbrupted();
     }
 
     @Override
