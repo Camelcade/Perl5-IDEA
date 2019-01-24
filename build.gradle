@@ -137,7 +137,7 @@ intellij {
     if (project.hasProperty('idea_path')) {
         alternativeIdePath = project.idea_path
     }
-    plugins = ['PsiViewer:183.2153', 'IntelliLang', 'coverage', 'Docker', 'remote-run', // would be nice to have transient plugins
+    plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'Docker', 'remote-run', // would be nice to have transient plugins
                project(':perl5.core'),
                project(':perl5.transport.docker'),
                project(':perl5.transport.wsl'),
