@@ -18,6 +18,7 @@ package annotator;
 
 import base.PerlLightTestCase;
 import com.intellij.spellchecker.inspections.SpellCheckingInspection;
+import com.intellij.testFramework.ExpectedHighlightingData;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
 import com.perl5.lang.perl.parser.moose.idea.inspections.MooseMultiAttributeAccessorInspection;
@@ -64,7 +65,10 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testBuiltInVariables() {doAnnotatorTest();}
 
-  public void testSpellChecker() {doInspectionTest(SpellCheckingInspection.class);}
+  // duplicates caused by injection (double check)
+  public void testSpellChecker() {
+    ExpectedHighlightingData.expectedDuplicatedHighlighting(() -> doInspectionTest(SpellCheckingInspection.class));
+  }
 
   public void testBuiltInWithShadowing() {doAnnotatorTest();}
 
@@ -187,8 +191,9 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     doDeprecationTest();
   }
 
+  // Caused by multiple entities created from one identifier
   public void testClassAccessorDeprecation() {
-    doDeprecationTest();
+    ExpectedHighlightingData.expectedDuplicatedHighlighting(this::doDeprecationTest);
   }
 
   public void testExceptionClassDeprecation() {
