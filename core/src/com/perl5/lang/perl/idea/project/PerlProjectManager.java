@@ -238,7 +238,7 @@ public class PerlProjectManager {
             paths.add(canonicalPath);
           }
         }
-        if (!doChange) {
+        if (!doChange && !paths.isEmpty()) {
           return;
         }
 
