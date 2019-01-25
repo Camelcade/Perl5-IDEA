@@ -17,14 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlLoop;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,11 +31,11 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 /**
- * Created by hurricup on 04.03.2016.
+ * This is just a block, part of other constructions: loops, declarations or blocks compounds
  */
-public interface PerlBlock extends PerlLoop, PerlLexicalScope {
+public interface PerlBlock extends PerlLexicalScope {
   TokenSet LOOPS_CONTAINERS = TokenSet.create(
-    BLOCK,
+    BLOCK_COMPOUND,
     FILE,
     NAMESPACE_CONTENT,
     WHILE_COMPOUND,
@@ -60,15 +57,6 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
   );
 
   /**
-   * @return continue block for this one or null if there is none
-   */
-  @Nullable
-  @Override
-  default PsiPerlContinueBlock getContinueBlock() {
-    return ObjectUtils.tryCast(PerlPsiUtil.getNextSignificantSibling(this), PsiPerlContinueBlock.class);
-  }
-
-  /**
    * @return container of this block, omitting lazy-parsable part if any. If this is a bare block, returns itself.
    */
   @Contract(pure = true)
@@ -77,10 +65,6 @@ public interface PerlBlock extends PerlLoop, PerlLexicalScope {
     PsiElement container = getParent();
     if (LAZY_CODE_BLOCKS.contains(PsiUtilCore.getElementType(container))) {
       container = container.getParent();
-    }
-
-    if (container instanceof PsiFile || container instanceof PerlBlock) {
-      return this;
     }
     return container;
   }

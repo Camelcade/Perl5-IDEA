@@ -437,6 +437,7 @@ limitations under the License.
 
 	implements("block")="com.perl5.lang.perl.psi.PerlBlock"
 
+    implements("block_compound")="com.perl5.lang.perl.psi.PerlBlockCompound"
     implements("for_compound")="com.perl5.lang.perl.psi.PerlForCompound"
     implements("foreach_compound")="com.perl5.lang.perl.psi.PerlForeachCompound"
     implements("while_compound|until_compound")="com.perl5.lang.perl.psi.PerlWhileUntilCompound"
@@ -630,7 +631,8 @@ until_compound ::=  'until' parse_conditional_block [[POD] continue_block]  {pin
 continue_block ::= continue_block_opener parse_block {pin=1}
 private continue_block_opener ::= 'continue' &'{'
 
-private block_compound ::= parse_block [[POD] continue_block]
+block_compound ::= parse_block_compound
+private parse_block_compound ::= parse_block [[POD] continue_block]
 
 // for/foreach
 // fixme why the heck there is no parsing error on "for" and there is a error on "use", both pinned
@@ -643,7 +645,7 @@ for_init ::= expr {recoverWhile=recover_parenthesised}
 for_condition ::= expr {recoverWhile=recover_parenthesised}
 for_mutator ::= expr {recoverWhile=recover_parenthesised}
 
-foreach_compound ::= {'for'|'foreach'} [ foreach_iterator ] condition_expr block_compound {pin=1} // foreach works as a fallback
+foreach_compound ::= {'for'|'foreach'} [ foreach_iterator ] condition_expr parse_block_compound {pin=1} // foreach works as a fallback
 foreach_iterator ::= variable_declaration | variable
 
 

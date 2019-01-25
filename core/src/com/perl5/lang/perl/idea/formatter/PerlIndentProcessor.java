@@ -64,6 +64,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     FOREACH_COMPOUND,
     CONDITIONAL_BLOCK,
     CONTINUE_BLOCK,
+    BLOCK_COMPOUND,
 
     TRYCATCH_EXPR,
     TRY_EXPR,

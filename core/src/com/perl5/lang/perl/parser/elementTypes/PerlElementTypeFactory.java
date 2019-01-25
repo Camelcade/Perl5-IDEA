@@ -151,6 +151,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlBitwiseOrXorExprImpl.class);
       case "BLOCK":
         return new PerlElementTypeEx(name, PsiPerlBlockImpl.class);
+      case "BLOCK_COMPOUND":
+        return new PerlElementTypeEx(name, PsiPerlBlockCompoundImpl.class);
       case "CALL_ARGUMENTS":
         return new PerlElementTypeEx(name, PsiPerlCallArgumentsImpl.class);
       case "CODE_CAST_EXPR":
