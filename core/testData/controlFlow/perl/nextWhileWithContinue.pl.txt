@@ -1,0 +1,15 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4,12) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+4(5) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: ($a):true
+5(6) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+6(7) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+7(10) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(11) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+11(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+12(13) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+13(14) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+14() element: null

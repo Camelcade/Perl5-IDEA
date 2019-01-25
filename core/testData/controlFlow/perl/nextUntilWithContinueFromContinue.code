@@ -1,0 +1,10 @@
+say 'start';
+until($a){
+  say 'block';
+}
+continue{
+  say 'continue start';
+  next;
+  say 'continue end';
+}
+say 'end';

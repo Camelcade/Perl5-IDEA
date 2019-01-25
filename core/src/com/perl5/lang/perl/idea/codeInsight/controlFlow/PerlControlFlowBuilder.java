@@ -375,7 +375,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     private void processWhileUntil(@NotNull PerlWhileUntilCompound o, boolean conditionValue) {
       startNodeSmart(o);
       Instruction startInstruction = prevInstruction;
-      myLoopNextInstructions.put(o, startInstruction);
+      TransparentInstruction nextInstruction = createNextInstruction(o);
+      myLoopNextInstructions.put(o, nextInstruction);
 
       PsiPerlConditionExpr conditionExpr = o.getConditionExpr();
       acceptSafe(conditionExpr);
@@ -384,7 +385,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       startConditionalNode(conditionExpr, conditionValue);
       acceptSafe(o.getBlock());
-
+      addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
 
       addEdge(prevInstruction, startInstruction);
