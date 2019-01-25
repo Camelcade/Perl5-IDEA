@@ -19,11 +19,13 @@ package parser;
 import categories.Performance;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
+import org.junit.Ignore;
 import org.junit.experimental.categories.Category;
 
 /**
  * Created by hurricup on 12.10.2016.
  */
+@Ignore
 @Category(Performance.class)
 public class PerlLexerPerformanceTest extends PerlParserTestBase {
   public void testPerlTidyLexing() {
