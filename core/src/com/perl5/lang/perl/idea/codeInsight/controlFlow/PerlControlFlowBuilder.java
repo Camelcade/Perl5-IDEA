@@ -36,7 +36,6 @@ import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,11 +48,11 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private static final Logger LOG = Logger.getInstance(PerlControlFlowBuilder.class);
 
-  private static final Set<String> DIE_SUBS = new THashSet<>(Arrays.asList(
+  private static final Set<String> DIE_SUBS = ContainerUtil.newHashSet(
     "die",
     "croak",
     "confess"
-  ));
+  );
 
   private static final TokenSet LOOP_MODIFIERS = TokenSet.create(
     FOR_STATEMENT_MODIFIER,
