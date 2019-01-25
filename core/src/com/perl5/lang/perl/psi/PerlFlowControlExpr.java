@@ -28,7 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_EXPR;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.PerlBlock.LOOPS_CONTAINERS;
 
 
@@ -54,13 +54,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
     PsiPerlLabelExpr labelExpr = getLabelExpr();
     String labelName = labelExpr == null ? null : labelExpr.getText();
 
-    PsiPerlStatementImpl containingStatementWithForModifier =
-      getExpr() != null ? null : PsiTreeUtil.getParentOfType(this, PsiPerlStatementImpl.class);
-    if (containingStatementWithForModifier != null &&
-        labelName == null && // fixme technically it can be here (???)
-        ObjectUtils.tryCast(containingStatementWithForModifier.getModifier(), PsiPerlForStatementModifier.class) == null) {
-      containingStatementWithForModifier = null;
-    }
+    PsiPerlStatementImpl containingStatementWithForModifier = getExpr() != null ? null : getWrappingStatementWithForModifier(this);
 
     PsiElement closestBlockContainer = this;
     while (true) {
@@ -92,7 +86,26 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
                blockContainerType == SUB_EXPR) {
         return PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
       }
+      else if (blockContainerType == DO_EXPR || blockContainerType == EVAL_EXPR) {
+        PsiPerlStatementImpl statementWithModifier = getWrappingStatementWithForModifier(closestBlockContainer);
+        if (statementWithModifier != null) {
+          return PerlPsiUtil.getClosest(statementWithModifier, containingStatementWithForModifier);
+        }
+      }
     }
+  }
+
+  /**
+   * @return wrapping stement for {@code element} if it has for modifier
+   */
+  @Nullable
+  static PsiPerlStatementImpl getWrappingStatementWithForModifier(@NotNull PsiElement element) {
+    PsiPerlStatementImpl containingStatementWithForModifier = PsiTreeUtil.getParentOfType(element, PsiPerlStatementImpl.class);
+    if (containingStatementWithForModifier != null &&
+        ObjectUtils.tryCast(containingStatementWithForModifier.getModifier(), PsiPerlForStatementModifier.class) == null) {
+      return null;
+    }
+    return containingStatementWithForModifier;
   }
 
   @Nullable

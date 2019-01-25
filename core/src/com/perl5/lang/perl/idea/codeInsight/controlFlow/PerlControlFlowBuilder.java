@@ -90,8 +90,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     UNLESS_STATEMENT_MODIFIER, UNTIL_STATEMENT_MODIFIER
   );
 
-  // modifier's loops should be edged back here
-  private Instruction myModifierLoopConditionInstruction = null;
+  // modifier's loops should be edged back here. Maps statement -> modifier
+  private Map<PsiElement, Instruction> myStatementsModifiersMap = ContainerUtil.newHashMap();
 
   public ControlFlow build(PsiElement element) {
     super.build(new PerlControlFlowVisitor(), element);
@@ -540,13 +540,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         Instruction loopInstruction = prevInstruction;
         acceptSafe(statementExpression);
         acceptSafe(modifier);
-        Instruction modifierLoopConditionInstruction = myModifierLoopConditionInstruction;
+        Instruction modifierLoopConditionInstruction = Objects.requireNonNull(myStatementsModifiersMap.get(o));
         addEdge(prevInstruction, loopInstruction);
         prevInstruction = modifierLoopConditionInstruction;
       }
       else {
         acceptSafe(modifier);
-        Instruction modifierLoopConditionInstruction = myModifierLoopConditionInstruction;
+        Instruction modifierLoopConditionInstruction = myStatementsModifiersMap.get(o);
         if (modifierLoopConditionInstruction != null) {
           myLoopNextInstructions.put(o, modifierLoopConditionInstruction);
         }
@@ -556,7 +556,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
           prevInstruction = modifierLoopConditionInstruction;
         }
       }
-      myModifierLoopConditionInstruction = null;
+      myStatementsModifiersMap.remove(o);
       myLoopNextInstructions.remove(o);
     }
 
@@ -572,7 +572,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitForStatementModifier(@NotNull PsiPerlForStatementModifier o) {
       PsiPerlExpr source = o.getExpr();
       acceptSafe(source);
-      myModifierLoopConditionInstruction = startIterationNode(o, null, source);
+      myStatementsModifiersMap.put(Objects.requireNonNull(o.getParent()), startIterationNode(o, null, source));
       startIteratorConditionalNode(source);
     }
 
@@ -581,7 +581,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlExpr condition = o.getExpr();
       acceptSafe(condition);
       if (LOOP_MODIFIERS.contains(PsiUtilCore.getElementType(o))) {
-        myModifierLoopConditionInstruction = prevInstruction;
+        myStatementsModifiersMap.put(Objects.requireNonNull(o.getParent()), prevInstruction);
       }
       else {
         addPendingEdge(o.getParent(), prevInstruction);
