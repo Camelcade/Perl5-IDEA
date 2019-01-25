@@ -3,10 +3,9 @@
 2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 3(4) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 4(5) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-5(9) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+5(8) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
 6(7) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 7(8) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-8(9) element: PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
-9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-11() element: null
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10() element: null

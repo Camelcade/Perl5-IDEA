@@ -1,0 +1,10 @@
+
+say 'before';
+{
+    say 'block';
+}
+continue
+{
+    say 'continue';
+}
+say 'after';
