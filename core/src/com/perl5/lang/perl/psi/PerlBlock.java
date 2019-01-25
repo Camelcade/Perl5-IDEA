@@ -69,13 +69,20 @@ public interface PerlBlock extends PerlLexicalScope {
   }
 
   /**
-   * @return compound container of this block. Similar to {@link #getContainer()}, but passes continue blocks.
+   * @return compound container of this block. Similar to {@link #getContainer()}, but passes continue blocks and eval anon subs.
    */
   @Contract(pure = true)
   @NotNull
   default PsiElement getCompoundContainer() {
     PsiElement container = getContainer();
-    return container instanceof PsiPerlContinueBlock ? container.getParent() : container;
+    if (container instanceof PsiPerlContinueBlock) {
+      return container.getParent();
+    }
+    if (!(container instanceof PerlSubExpr)) {
+      return container;
+    }
+    PsiElement containerParent = container.getParent();
+    return containerParent instanceof PsiPerlEvalExpr ? containerParent : container;
   }
 
   /**

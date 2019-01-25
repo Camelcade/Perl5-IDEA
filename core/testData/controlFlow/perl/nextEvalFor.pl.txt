@@ -9,7 +9,7 @@
 8(9) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR). Condition: (1, 2):true
 9(10) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 10(11) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-11(15) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+11(7) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
 12(13) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 13(14) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 14(15) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR)
