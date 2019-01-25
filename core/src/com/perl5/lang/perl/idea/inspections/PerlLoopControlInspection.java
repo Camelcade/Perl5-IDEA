@@ -56,7 +56,7 @@ public class PerlLoopControlInspection extends PerlInspection {
         boolean isInsideTheLoop = false;
         while (true) {
 
-          PsiElement closestBlockContainer = PerlBlock.getClosestBlockContainer(position);
+          PsiElement closestBlockContainer = PerlBlock.getClosestBlockCompoundContainer(position);
           if (closestBlockContainer == null) {
             break;
           }
@@ -118,7 +118,7 @@ public class PerlLoopControlInspection extends PerlInspection {
         PsiElement position = o;
         boolean isInsideTheLoop = false;
         while (true) {
-          PsiElement closestBlockContainer = PerlBlock.getClosestBlockContainer(position);
+          PsiElement closestBlockContainer = PerlBlock.getClosestBlockCompoundContainer(position);
           if (closestBlockContainer == null) {
             break;
           }
@@ -186,7 +186,7 @@ public class PerlLoopControlInspection extends PerlInspection {
         boolean isInsideGiven = false;
         boolean isInsideWhenOrDefault = false;
         while (true) {
-          PsiElement closestBlockContainer = PerlBlock.getClosestBlockContainer(position);
+          PsiElement closestBlockContainer = PerlBlock.getClosestBlockCompoundContainer(position);
 
           if (closestBlockContainer == null) {
             break;

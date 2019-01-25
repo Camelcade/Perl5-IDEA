@@ -42,7 +42,6 @@ public interface PerlBlock extends PerlLexicalScope {
     UNTIL_COMPOUND,
     FOR_COMPOUND,
     FOREACH_COMPOUND,
-    CONTINUE_BLOCK,
     NAMESPACE_DEFINITION,
     TRY_EXPR,
     CATCH_EXPR
@@ -57,7 +56,7 @@ public interface PerlBlock extends PerlLexicalScope {
   );
 
   /**
-   * @return container of this block, omitting lazy-parsable part if any. If this is a bare block, returns itself.
+   * @return container of this block, omitting lazy-parsable part if any.
    */
   @Contract(pure = true)
   @NotNull
@@ -67,6 +66,16 @@ public interface PerlBlock extends PerlLexicalScope {
       container = container.getParent();
     }
     return container;
+  }
+
+  /**
+   * @return compound container of this block. Similar to {@link #getContainer()}, but passes continue blocks.
+   */
+  @Contract(pure = true)
+  @NotNull
+  default PsiElement getCompoundContainer() {
+    PsiElement container = getContainer();
+    return container instanceof PsiPerlContinueBlock ? container.getParent() : container;
   }
 
   /**
@@ -83,7 +92,7 @@ public interface PerlBlock extends PerlLexicalScope {
    */
   @Contract("null -> null")
   @Nullable
-  static PsiElement getClosestBlockContainer(@Nullable PsiElement position) {
-    return ObjectUtils.doIfNotNull(getClosestTo(position), PerlBlock::getContainer);
+  static PsiElement getClosestBlockCompoundContainer(@Nullable PsiElement position) {
+    return ObjectUtils.doIfNotNull(getClosestTo(position), PerlBlock::getCompoundContainer);
   }
 }

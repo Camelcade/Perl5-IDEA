@@ -1,0 +1,10 @@
+say 'start';
+{
+  say 'block';
+}
+continue{
+  say 'continue before';
+  next;
+  say 'continue after';
+}
+say 'end';

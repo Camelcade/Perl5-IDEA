@@ -257,6 +257,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitNextExpr(@NotNull PsiPerlNextExpr o) {
       super.visitNextExpr(o);
       PsiElement targetLoop = o.getTargetScope();
+
       Instruction loopInstruction = myLoopNextInstructions.get(targetLoop);
       if (loopInstruction != null) {
         addEdge(prevInstruction, loopInstruction);
@@ -298,11 +299,21 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitBlockCompound(@NotNull PsiPerlBlockCompound o) {
+      TransparentInstruction nextInstruction = new TransparentInstructionImpl(PerlControlFlowBuilder.this, o, "next");
+      myLoopNextInstructions.put(o, nextInstruction);
+      acceptSafe(o.getBlock());
+      addNodeAndCheckPending(nextInstruction);
+      acceptSafe(o.getContinueBlock());
+      myLoopNextInstructions.remove(o);
+    }
+
+    @Override
     public void visitForCompound(@NotNull PsiPerlForCompound o) {
       acceptSafe(o.getForInit());
 
       TransparentInstruction loopInstruction = startTransparentNode(o, "loopAnchor");
-      TransparentInstructionImpl nextAnchor = new TransparentInstructionImpl(PerlControlFlowBuilder.this, o, "nextAnchor");
+      TransparentInstructionImpl nextAnchor = new TransparentInstructionImpl(PerlControlFlowBuilder.this, o, "next");
 
       PsiPerlForMutator mutator = o.getForMutator();
       if (mutator == null) {

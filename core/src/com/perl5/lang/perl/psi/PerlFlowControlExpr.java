@@ -63,7 +63,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
         return ObjectUtils.notNull(containingStatementWithForModifier, getContainingFile());
       }
 
-      closestBlockContainer = closestBlock.getContainer();
+      closestBlockContainer = closestBlock.getCompoundContainer();
       IElementType blockContainerType = PsiUtilCore.getElementType(closestBlockContainer);
 
 
