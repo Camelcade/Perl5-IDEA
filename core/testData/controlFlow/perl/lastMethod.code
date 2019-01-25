@@ -1,0 +1,7 @@
+say 'before';
+sub method{
+  say 'sub-before';
+  last;
+  say 'sub-after';
+};
+say 'after';

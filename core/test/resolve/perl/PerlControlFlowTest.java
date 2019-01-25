@@ -24,6 +24,55 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testLastAnonSub() {doTest();}
+
+  public void testLastBlock() {doTest();}
+
+  public void testLastBlockWithContinue() {doTest();}
+
+  public void testLastBlockWithContinueFromContinue() {doTest();}
+
+  public void testLastDoFor() {doTest();}
+
+  public void testLastEvalFor() {doTest();}
+
+  public void testLastFor() {doTest();}
+
+  public void testLastForeach() {doTest();}
+
+  public void testLastForeachModifier() {doTest();}
+
+  public void testLastForeachWithContinue() {doTest();}
+
+  public void testLastForeachWithContinueFromContinue() {doTest();}
+
+  public void testLastForNested() {doTest();}
+
+  public void testLastFunc() {doTest();}
+
+  public void testLastGrep() {doTest();}
+
+  public void testLastMap() {doTest();}
+
+  public void testLastMethod() {doTest();}
+
+  public void testLastSort() {doTest();}
+
+  public void testLastSub() {doTest();}
+
+  public void testLastUntil() {doTest();}
+
+  public void testLastUntilWithContinue() {doTest();}
+
+  public void testLastUntilWithContinueFromContinue() {doTest();}
+
+  public void testLastWhile() {doTest();}
+
+  public void testLastWhileWithContinue() {doTest();}
+
+  public void testLastWhileWithContinueFromContinue() {doTest();}
+
+
   public void testBlockContinue() {doTest();}
 
   public void testNextGrep() {doTest();}
@@ -66,7 +115,7 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testNextUntilWithContinueFromContinue() {doTest();}
 
-  public void testNextBlock(){doTest();}
+  public void testNextBlock() {doTest();}
 
   public void testNextBlockWithContinue() {doTest();}
 

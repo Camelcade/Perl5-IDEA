@@ -1,0 +1,7 @@
+say 'hi';
+until($a){
+  say 'block hi';
+  last;
+  say 'block end';
+}
+say 'end';

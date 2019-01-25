@@ -1,0 +1,18 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+4(5) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+5(6) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+6(7,15) iterate PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR) using null
+7(8) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: (1,2):true
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10(15) element: PsiPerlLastExprImpl(Perl5: LAST_EXPR)
+11(12) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+12(13) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+13(14) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+14(6) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+15(16) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+16(17) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+17() element: null

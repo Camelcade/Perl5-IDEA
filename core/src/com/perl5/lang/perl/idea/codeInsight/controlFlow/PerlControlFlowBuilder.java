@@ -198,6 +198,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   // fixme given & friends
   // fixme next/last/redo
+  // fixme next/last in indexed for
+  // fixme probably revert anon sub in eval and sort ?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
     private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
@@ -255,6 +257,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       });
 
       catchesTails.forEach(tail -> addPendingEdge(o, tail));
+    }
+
+    @Override
+    public void visitLastExpr(@NotNull PsiPerlLastExpr o) {
+      super.visitLastExpr(o);
+      addPendingEdge(o.getTargetScope(), prevInstruction);
+      flowAbrupted();
     }
 
     @Override
