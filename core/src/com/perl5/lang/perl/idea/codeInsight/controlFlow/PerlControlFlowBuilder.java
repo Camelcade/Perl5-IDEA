@@ -121,13 +121,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
+  @NotNull
+  private TransparentInstruction createNextInstruction(@NotNull PsiElement element) {
+    return new TransparentInstructionImpl(this, element, "next");
+  }
+
   /**
    * Creates an instruction for {@code element} without processing children. If elementType is in the {@code TRANSPARENT_CONTAINERS}
    * tokenSet - creates a transparent node.
    * @return new instruction or null if element is null
    */
   @Nullable
-  @Contract("null -> null; !null -> !null")
+  @Contract("null -> null")
   private Instruction startNodeSmart(@Nullable PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (TRANSPARENT_CONTAINERS.contains(elementType)) {
@@ -299,7 +304,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitBlockCompound(@NotNull PsiPerlBlockCompound o) {
-      TransparentInstruction nextInstruction = new TransparentInstructionImpl(PerlControlFlowBuilder.this, o, "next");
+      TransparentInstruction nextInstruction = createNextInstruction(o);
       myLoopNextInstructions.put(o, nextInstruction);
       acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
@@ -312,7 +317,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       acceptSafe(o.getForInit());
 
       TransparentInstruction loopInstruction = startTransparentNode(o, "loopAnchor");
-      TransparentInstructionImpl nextAnchor = new TransparentInstructionImpl(PerlControlFlowBuilder.this, o, "next");
+      TransparentInstruction nextAnchor = createNextInstruction(o);
 
       PsiPerlForMutator mutator = o.getForMutator();
       if (mutator == null) {
@@ -346,9 +351,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       PsiPerlConditionExpr sourceElement = o.getConditionExpr();
       acceptSafe(sourceElement);
       Instruction loopInstruction = startIterationNode(o, o.getForeachIterator(), sourceElement);
-      myLoopNextInstructions.put(o, loopInstruction);
+      TransparentInstruction nextInstruction = createNextInstruction(o);
+      myLoopNextInstructions.put(o, nextInstruction);
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
       acceptSafe(o.getBlock());
+      addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
       prevInstruction = loopInstruction;

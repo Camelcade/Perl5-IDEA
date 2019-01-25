@@ -48,6 +48,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testNextForeach() {doTest();}
 
+  public void testNextForeachWithContinue() {doTest();}
+
+  public void testNextForeachWithContinueFromContinue() {doTest();}
+
   public void testNextFor() {doTest();}
 
   public void testNextWhile() {doTest();}
