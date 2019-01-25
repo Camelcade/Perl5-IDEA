@@ -1,0 +1,7 @@
+say 'before';
+sub somesub{
+  say 'sub-before';
+  next;
+  say 'sub-after';
+};
+say 'after';
