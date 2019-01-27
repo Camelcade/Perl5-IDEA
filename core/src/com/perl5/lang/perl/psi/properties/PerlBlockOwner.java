@@ -16,10 +16,14 @@
 
 package com.perl5.lang.perl.psi.properties;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 /**
  * Implement this interface if element contains block
@@ -28,5 +32,24 @@ public interface PerlBlockOwner extends PsiElement {
   @Nullable
   default PsiPerlBlock getBlock() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
+  }
+
+  /**
+   * @return a block for the {@code blockOwner}, omiting lazy-parsable blocks if any
+   */
+  @Nullable
+  static PsiPerlBlock findBlock(@NotNull PerlBlockOwner blockOwner) {
+    PsiPerlBlock block = blockOwner.getBlock();
+    if (block != null) {
+      return block;
+    }
+
+    ASTNode[] children = blockOwner.getNode().getChildren(LAZY_CODE_BLOCKS);
+    PsiElement lazyParsableBlock = children.length == 0 ? null : children[0].getPsi();
+    if (lazyParsableBlock != null) {
+      PsiElement possibleBlock = lazyParsableBlock.getFirstChild();
+      return possibleBlock instanceof PsiPerlBlock ? (PsiPerlBlock)possibleBlock : null;
+    }
+    return null;
   }
 }

@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.properties;
 
 /**
  * Die scope with block. All except file
+ * fixme shouldn't eval be here too?
  */
 public interface PerlDieScopeWithBLock extends PerlDieScope, PerlBlockOwner {
 }

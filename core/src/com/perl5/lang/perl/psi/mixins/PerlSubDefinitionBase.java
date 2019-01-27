@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -32,8 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 /**
  * Created by hurricup on 11.11.2015.
@@ -130,17 +129,6 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   @Nullable
   public PsiPerlBlock getSubDefinitionBody() {
-    PsiPerlBlock block = this.getBlock();
-    if (block != null) {
-      return block;
-    }
-
-    PsiElement lazyParsableBlock = findChildByFilter(LAZY_CODE_BLOCKS);
-    if (lazyParsableBlock != null) {
-      PsiElement possibleBlock = lazyParsableBlock.getFirstChild();
-      return possibleBlock instanceof PsiPerlBlock ? (PsiPerlBlock)possibleBlock : null;
-    }
-
-    return null;
+    return PerlBlockOwner.findBlock(this);
   }
 }

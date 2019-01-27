@@ -176,7 +176,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
     }
     else if (element instanceof PerlBlockOwner) {
-      PsiPerlBlock block = ((PerlBlockOwner)element).getBlock();
+      PsiPerlBlock block = PerlBlockOwner.findBlock((PerlBlockOwner)element);
       if (block != null) {
         return block;
       }

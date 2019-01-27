@@ -24,6 +24,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testSubExprLazyParsable() {doTest();}
+
+  ;
+
   public void testExitFor() {doTest();}
 
   public void testRedoAnonSub() {doTest();}

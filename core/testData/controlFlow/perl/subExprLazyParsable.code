@@ -1,0 +1,12 @@
+has 'name' => (
+    easy => sub{
+        return $first;
+    },
+    default => sub {
+        # lazy parasable block
+        # lazy parasable block
+        # lazy parasable block
+        # lazy parasable block
+        return $second;
+    },
+);
