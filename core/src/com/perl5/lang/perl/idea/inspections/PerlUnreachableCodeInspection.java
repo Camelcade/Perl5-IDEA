@@ -22,16 +22,22 @@ import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMA_SEQUENCE_EXPR;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.DO_EXPR;
 
 public class PerlUnreachableCodeInspection extends PerlInspection {
+  private TokenSet TRANSPARENT_ELEMENTS = TokenSet.create(
+    COMMA_SEQUENCE_EXPR, DO_EXPR
+  );
+
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
@@ -40,21 +46,37 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
         ControlFlow flow = PerlControlFlowBuilder.getFor(o);
         final Instruction[] instructions = flow.getInstructions();
-        final List<PsiElement> unreachable = new ArrayList<>();
         if (instructions.length > 0) {
           ControlFlowUtil.iteratePrev(instructions.length - 1, instructions, instruction -> {
             if (instruction.allPred().isEmpty() && !isFirstInstruction(instruction)) {
-              unreachable.add(instruction.getElement());
+              processInstruction(instruction);
             }
             return ControlFlowUtil.Operation.NEXT;
           });
         }
-        for (PsiElement e : unreachable) {
-          registerProblem(holder, e, PerlBundle.message("perl.inspection.unreachable.code"));
+      }
+
+      private void processInstruction(@NotNull Instruction instruction) {
+        PsiElement element = instruction.getElement();
+        if (element == null) {
+          return;
+        }
+
+        if (TRANSPARENT_ELEMENTS.contains(PsiUtilCore.getElementType(element))) {
+          instruction.allSucc().forEach(it -> {
+            // this is just a weak check for next unreachable instruction
+            if (it.allPred().size() < 2) {
+              processInstruction(it);
+            }
+          });
+        }
+        else {
+          registerProblem(holder, element, PerlBundle.message("perl.inspection.unreachable.code"));
         }
       }
     };
   }
+
 
   private static boolean isFirstInstruction(Instruction instruction) {
     return instruction.num() == 0;

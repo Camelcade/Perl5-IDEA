@@ -1,0 +1,4 @@
+sub some{
+    some(), return;
+    say '<error descr="Unreachable code">hi</error>';
+}

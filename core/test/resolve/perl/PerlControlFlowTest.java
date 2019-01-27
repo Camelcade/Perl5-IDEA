@@ -17,7 +17,6 @@
 package resolve.perl;
 
 import base.PerlLightTestCase;
-import com.intellij.testFramework.UsefulTestCase;
 
 public class PerlControlFlowTest extends PerlLightTestCase {
   @Override
@@ -26,6 +25,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   public void testSubExprLazyParsable() {doTest();}
+
+  public void testCommaSequenceWithReturn() {doTest();}
+
+  public void testCommaSequenceWithReturnConditional() {doTest();}
 
   public void testDieDoSub() {doTest();}
 
