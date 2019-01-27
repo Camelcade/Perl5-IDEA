@@ -201,6 +201,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme next/last in indexed for
   // fixme next/last/redo in do..while/until
   // fixme goto
+  // fixme revert do transparency?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
     private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();

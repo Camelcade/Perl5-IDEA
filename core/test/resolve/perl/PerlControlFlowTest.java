@@ -26,6 +26,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testSubExprLazyParsable() {doTest();}
 
+  public void testCustomDieDeref() {doTest();}
+
   public void testCommaSequenceWithReturn() {doTest();}
 
   public void testCommaSequenceWithReturnConditional() {doTest();}

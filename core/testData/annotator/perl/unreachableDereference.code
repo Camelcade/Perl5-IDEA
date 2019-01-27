@@ -1,0 +1,4 @@
+sub some{
+$self->die('test');
+say '<error descr="Unreachable code">end</error>';
+}

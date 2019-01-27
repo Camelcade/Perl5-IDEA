@@ -33,6 +33,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testUnreachableDereference() {doTestUnreachableCode();}
+
   public void testUnreachableCommaSequence() {doTestUnreachableCode();}
 
   public void testUnreachableCommaSequenceConditional() {doTestUnreachableCode();}
