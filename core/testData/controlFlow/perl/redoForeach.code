@@ -1,0 +1,7 @@
+say 'hi';
+for(@ARGV){
+  say 'block hi';
+  redo;
+  say 'block end';
+}
+say 'end';

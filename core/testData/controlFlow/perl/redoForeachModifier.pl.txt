@@ -1,0 +1,17 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+4(5,14) iterate PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) using null
+5(6) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE). Condition: @ARGV:true
+6(7) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+7(8,13) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+8(9) element: PsiElement(Perl5: and). Condition: $a = 1 and redo and $b = 2:true; Partial condition: $a = 1 
+9(6) element: PsiPerlRedoExprImpl(Perl5: REDO_EXPR)
+10(11) element: PsiElement(Perl5: and). Condition: $a = 1 and redo and $b = 2:true; Partial condition: $a = 1 and redo 
+11(12) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+12(13) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+13(4) element: PsiPerlLpAndExprImpl(Perl5: LP_AND_EXPR)
+14(15) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+15(16) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+16() element: null

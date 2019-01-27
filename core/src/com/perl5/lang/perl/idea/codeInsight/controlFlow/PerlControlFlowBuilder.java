@@ -197,12 +197,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   // fixme given & friends
-  // fixme next/last/redo
   // fixme next/last in indexed for
-  // fixme probably revert anon sub in eval and sort ?
+  // fixme next/last/redo in do..while/until
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
     private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
+    private final Map<PsiElement, Instruction> myLoopRedoInstructions = ContainerUtil.newHashMap();
 
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null) {
@@ -267,11 +267,15 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitNextExpr(@NotNull PsiPerlNextExpr o) {
-      super.visitNextExpr(o);
+    public void visitRedoExpr(@NotNull PsiPerlRedoExpr o) {
+      super.visitRedoExpr(o);
+      visitNextRedo(o, myLoopRedoInstructions);
+    }
+
+    private void visitNextRedo(@NotNull PerlFlowControlExpr o, @NotNull Map<PsiElement, Instruction> targetMap) {
       PsiElement targetLoop = o.getTargetScope();
 
-      Instruction loopInstruction = myLoopNextInstructions.get(targetLoop);
+      Instruction loopInstruction = targetMap.get(targetLoop);
       if (loopInstruction != null) {
         addEdge(prevInstruction, loopInstruction);
       }
@@ -279,6 +283,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         addPendingEdge(targetLoop, prevInstruction);
       }
       flowAbrupted();
+    }
+
+    @Override
+    public void visitNextExpr(@NotNull PsiPerlNextExpr o) {
+      super.visitNextExpr(o);
+      visitNextRedo(o, myLoopNextInstructions);
     }
 
     @Override
@@ -315,10 +325,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitBlockCompound(@NotNull PsiPerlBlockCompound o) {
       TransparentInstruction nextInstruction = createNextInstruction(o);
       myLoopNextInstructions.put(o, nextInstruction);
+      myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
       acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       myLoopNextInstructions.remove(o);
+      myLoopRedoInstructions.remove(o);
     }
 
     @Override
@@ -342,6 +354,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
 
       myLoopNextInstructions.put(o, nextAnchor);
+      myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
       acceptSafe(o.getBlock());
 
       if (mutator != null) {
@@ -351,6 +364,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
       addEdge(prevInstruction, loopInstruction);
       myLoopNextInstructions.remove(o);
+      myLoopRedoInstructions.remove(o);
       prevInstruction = conditionalInstruction;
     }
 
@@ -363,12 +377,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       TransparentInstruction nextInstruction = createNextInstruction(o);
       myLoopNextInstructions.put(o, nextInstruction);
       startIteratorConditionalNode(sourceElement); // fake condition if iterator is not finished yet
+      myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
       acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
       addEdge(prevInstruction, loopInstruction);
       prevInstruction = loopInstruction;
       myLoopNextInstructions.remove(o);
+      myLoopRedoInstructions.remove(o);
     }
 
     @Override
@@ -393,6 +409,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       Instruction conditionInstruction = prevInstruction;
 
       startConditionalNode(conditionExpr, conditionValue);
+      myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
       acceptSafe(o.getBlock());
       addNodeAndCheckPending(nextInstruction);
       acceptSafe(o.getContinueBlock());
@@ -400,6 +417,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       addEdge(prevInstruction, startInstruction);
       prevInstruction = conditionInstruction;
       myLoopNextInstructions.remove(o);
+      myLoopRedoInstructions.remove(o);
     }
 
     @Override
@@ -556,15 +574,20 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         return;
       }
 
-
       PsiPerlStatementModifier modifier = ((PerlStatementMixin)o).getModifier();
       PsiPerlExpr statementExpression = o.getExpr();
 
+      /**
+       * The while and until modifiers have the usual "while loop" semantics (conditional evaluated first),
+       * except when applied to a do-BLOCK (or to the Perl4 do-SUBROUTINE statement), in which case the block
+       * executes once before the conditional is evaluated.
+       */
       if (statementExpression instanceof PsiPerlDoExpr &&
           (modifier instanceof PsiPerlWhileStatementModifier || modifier instanceof PsiPerlUntilStatementModifier)
       ) {
         startTransparentNode(o, "statement");
         Instruction loopInstruction = prevInstruction;
+        myLoopRedoInstructions.put(o, loopInstruction);
         acceptSafe(statementExpression);
         acceptSafe(modifier);
         Instruction modifierLoopConditionInstruction = Objects.requireNonNull(myStatementsModifiersMap.get(o));
@@ -577,6 +600,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         if (modifierLoopConditionInstruction != null) {
           myLoopNextInstructions.put(o, modifierLoopConditionInstruction);
         }
+        myLoopRedoInstructions.put(o, startTransparentNode(o, "redo"));
         acceptSafe(statementExpression);
         if (modifierLoopConditionInstruction != null) {
           addEdge(prevInstruction, modifierLoopConditionInstruction);
@@ -585,6 +609,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
       myStatementsModifiersMap.remove(o);
       myLoopNextInstructions.remove(o);
+      myLoopRedoInstructions.remove(o);
     }
 
     @Override

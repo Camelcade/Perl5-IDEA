@@ -1,0 +1,11 @@
+say 'before';
+for (1,2) {
+    say 'for-before';
+    say map {
+        say 'map-before';
+        redo;
+        say 'map-after'
+    } (2, 1);
+    say 'for-after';
+}
+say 'after';

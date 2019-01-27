@@ -1,0 +1,11 @@
+say 'before';
+for (1,2) {
+    say 'for-before';
+    say grep {
+        say 'grep-before';
+        redo;
+        say 'grep-after'
+    } (2, 1);
+    say 'for-after';
+}
+say 'after';

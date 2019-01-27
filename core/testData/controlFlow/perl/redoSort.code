@@ -1,0 +1,11 @@
+say 'before';
+for (1,2) {
+    say 'for-before';
+    say sort {
+        say 'sort-before';
+        redo;
+        say 'sort-after'
+    } (2, 1);
+    say 'for-after';
+}
+say 'after';

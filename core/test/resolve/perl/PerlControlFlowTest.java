@@ -24,6 +24,54 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testRedoAnonSub() {doTest();}
+
+  public void testRedoBlock() {doTest();}
+
+  public void testRedoBlockWithContinue() {doTest();}
+
+  public void testRedoBlockWithContinueFromContinue() {doTest();}
+
+  public void testRedoDoFor() {doTest();}
+
+  public void testRedoEvalFor() {doTest();}
+
+  public void testRedoFor() {doTest();}
+
+  public void testRedoForeach() {doTest();}
+
+  public void testRedoForeachModifier() {doTest();}
+
+  public void testRedoForeachWithContinue() {doTest();}
+
+  public void testRedoForeachWithContinueFromContinue() {doTest();}
+
+  public void testRedoForNested() {doTest();}
+
+  public void testRedoFunc() {doTest();}
+
+  public void testRedoGrep() {doTest();}
+
+  public void testRedoMap() {doTest();}
+
+  public void testRedoMethod() {doTest();}
+
+  public void testRedoSort() {doTest();}
+
+  public void testRedoSub() {doTest();}
+
+  public void testRedoUntil() {doTest();}
+
+  public void testRedoUntilWithContinue() {doTest();}
+
+  public void testRedoUntilWithContinueFromContinue() {doTest();}
+
+  public void testRedoWhile() {doTest();}
+
+  public void testRedoWhileWithContinue() {doTest();}
+
+  public void testRedoWhileWithContinueFromContinue() {doTest();}
+
   public void testLastAnonSub() {doTest();}
 
   public void testLastBlock() {doTest();}
@@ -71,7 +119,6 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   public void testLastWhileWithContinue() {doTest();}
 
   public void testLastWhileWithContinueFromContinue() {doTest();}
-
 
   public void testBlockContinue() {doTest();}
 

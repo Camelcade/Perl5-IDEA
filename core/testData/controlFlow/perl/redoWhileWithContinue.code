@@ -1,0 +1,10 @@
+say 'start';
+while($a){
+    say 'block start';
+    redo;
+    say 'block end';
+}
+continue{
+    say 'continue';
+}
+say 'end';

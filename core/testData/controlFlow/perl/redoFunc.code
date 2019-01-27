@@ -1,0 +1,7 @@
+say 'before';
+sub func{
+  say 'sub-before';
+  redo;
+  say 'sub-after';
+};
+say 'after';

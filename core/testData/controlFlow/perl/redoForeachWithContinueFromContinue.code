@@ -1,0 +1,10 @@
+say 'start';
+for(1,2){
+  say 'block';
+}
+continue{
+  say 'continue start';
+  redo;
+  say 'continue end';
+}
+say 'end';

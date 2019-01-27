@@ -1,0 +1,7 @@
+say 'hi';
+for(my $i = 0; $i < 100; $i++){
+  say 'block hi';
+  redo;
+  say 'block end';
+}
+say 'end';

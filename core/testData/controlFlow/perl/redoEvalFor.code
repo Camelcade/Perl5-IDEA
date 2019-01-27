@@ -1,0 +1,7 @@
+say 'before';
+say eval {
+    say 'do-before';
+    redo;
+    say 'do-after';
+} for (1, 2);
+say 'after';
