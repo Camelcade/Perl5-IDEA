@@ -51,6 +51,9 @@ allprojects{
     }
 
     test{
+        if(project.hasProperty("overwrite.results")){
+            systemProperty "idea.tests.overwrite.data", "true"
+        }
         useJUnit {
             if (project.hasProperty("runtest")) {
                 include '**/' + project.property('runtest') + '.class'
