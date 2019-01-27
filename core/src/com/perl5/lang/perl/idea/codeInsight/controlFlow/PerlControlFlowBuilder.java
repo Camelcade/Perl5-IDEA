@@ -678,6 +678,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitExitExpr(@NotNull PsiPerlExitExpr o) {
+      super.visitExitExpr(o);
+      addPendingEdge(o.getContainingFile(), prevInstruction);
+      flowAbrupted();
+    }
+
+    @Override
     public void visitElement(@NotNull PsiElement element) {
       IElementType elementType = PsiUtilCore.getElementType(element);
       if (PerlTokenSets.HEREDOC_ENDS.contains(elementType) && !myOpenersQueue.isEmpty()) {

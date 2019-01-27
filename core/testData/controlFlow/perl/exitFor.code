@@ -1,0 +1,9 @@
+sub somesub{
+  say 'hi';
+  for(my $i = 0; $i < 100; $i++){
+    say 'block hi';
+    grep{ exit } @some;
+    say 'block end';
+  }
+  say 'end';
+}
