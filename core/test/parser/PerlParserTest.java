@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testExitKeyword() {doTest();}
+
   public void testSayWithFatComma() {doTest();}
 
   public void testScalarUnary() {doTest();}

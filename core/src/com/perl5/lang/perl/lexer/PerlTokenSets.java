@@ -146,6 +146,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_NEXT,
     RESERVED_LAST,
     RESERVED_RETURN,
+    RESERVED_EXIT,
 
     RESERVED_Y,
     RESERVED_TR,

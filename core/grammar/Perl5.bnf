@@ -155,10 +155,12 @@ limitations under the License.
     RESERVED_NEXT='next'
     RESERVED_LAST='last'
 
-	RESERVED_RETURN='return'
+    RESERVED_RETURN='return'
+    RESERVED_EXIT='exit'
 
-	RESERVED_METHOD='method'
-	RESERVED_FUNC='func'
+
+    RESERVED_METHOD='method'
+    RESERVED_FUNC='func'
 
     // Operators
 
@@ -697,6 +699,7 @@ redo_expr ::=  'redo' [lnr_param] {pin=1}
 goto_expr ::=  'goto' [goto_param] {pin=1}
 
 return_expr ::=  'return' [list_expr] {pin=1}
+exit_expr ::= 'exit' [scalar_expr] {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_cast_expr | code_variable | expr
@@ -777,6 +780,7 @@ term_expr ::=
     | array_or_slice
     | match_regex
     | return_expr
+    | exit_expr
     | hash_variable
     | hash_cast_expr
     | array_index_variable

@@ -1,0 +1,5 @@
+exit 1,2;
+exit;
+exit 1;
+exit 1 or 2;
+exit(1);
