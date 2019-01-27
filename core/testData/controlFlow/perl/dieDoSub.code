@@ -1,0 +1,6 @@
+# we don't want `do` to be
+sub foo {
+    do {
+        die;
+    };
+}

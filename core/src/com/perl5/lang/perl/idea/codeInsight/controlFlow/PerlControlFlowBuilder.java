@@ -66,6 +66,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private static final TokenSet TRANSPARENT_CONTAINERS = TokenSet.orSet(
     LAZY_CODE_BLOCKS,
     TokenSet.create(
+      DO_EXPR,
       BLOCK, CONTINUE_BLOCK, CONDITION_EXPR,
       CALL_ARGUMENTS, PARENTHESISED_CALL_ARGUMENTS,
       WHILE_COMPOUND, UNTIL_COMPOUND,
