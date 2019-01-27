@@ -30,6 +30,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testCommaSequenceWithReturnConditional() {doTest();}
 
+  public void testCommaSequenceWithReturnParens() {doTest();}
+
+  public void testCommaSequenceWithReturnParensConditional() {doTest();}
+
   public void testDieDoSub() {doTest();}
 
   public void testExitFor() {doTest();}

@@ -1,0 +1,11 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+3(4) element: PsiPerlMethodImpl(Perl5: METHOD)
+4(5) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+5(10) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
+6(7) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+7(8) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
+10() element: null

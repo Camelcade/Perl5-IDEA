@@ -1,0 +1,3 @@
+say 'start';
+(some(), return) if $a;
+say 'end';

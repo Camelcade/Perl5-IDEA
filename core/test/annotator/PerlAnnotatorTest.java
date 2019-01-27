@@ -37,6 +37,10 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testUnreachableCommaSequenceConditional() {doTestUnreachableCode();}
 
+  public void testUnreachableCommaSequenceParens() {doTestUnreachableCode();}
+
+  public void testUnreachableCommaSequenceParensConditional() {doTestUnreachableCode();}
+
   private void doTestUnreachableCode() {
     doInspectionTest(PerlUnreachableCodeInspection.class);
   }

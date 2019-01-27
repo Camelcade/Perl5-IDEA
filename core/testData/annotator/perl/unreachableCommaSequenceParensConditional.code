@@ -1,0 +1,4 @@
+sub some{
+    (some(), return) if $a;
+    say 'hi';
+}
