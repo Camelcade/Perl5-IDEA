@@ -1,0 +1,13 @@
+sub some{
+    say 'begin';
+    if ( $a) {
+        package DB;
+        return CORE::caller($height);
+    }
+    elsif($b){
+        package DB{
+          return CORE::caller($height);
+        }
+    }
+    say 'end';
+}
