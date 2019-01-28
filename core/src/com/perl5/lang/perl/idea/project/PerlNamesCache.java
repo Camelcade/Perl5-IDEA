@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.DumbService;
@@ -35,27 +33,26 @@ import java.util.Set;
  * Created by hurricup on 04.09.2015.
  */
 public class PerlNamesCache implements ProjectComponent {
-  final Application myApplication = ApplicationManager.getApplication();
-  final NamesCacheUpdater updaterRunner = new NamesCacheUpdater();
-  final Thread updaterThread = new Thread(updaterRunner);
+  private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
+  private final Thread myUpdaterThread = new Thread(myUpdaterRunner);
   private final Project myProject;
-  private Set<String> KNOWN_SUBS = new THashSet<>();
-  private Set<String> KNOWN_PACKAGES = new THashSet<>();
-  final Runnable cacheUpdaterWorker = new Runnable() {
+  private Set<String> myKnownSubs = new THashSet<>();
+  private Set<String> myKnownPackages = new THashSet<>();
+  private final Runnable myCacheUpdaterWorker = new Runnable() {
     @Override
     public void run() {
-      if (isTestMode() || !DumbService.isDumb(myProject)) {
+      DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
         Set<String> newSet = new THashSet<>();
         newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
         newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
         newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-        KNOWN_SUBS = newSet;
+        myKnownSubs = newSet;
 
         newSet = new THashSet<>();
         newSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
         newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-        KNOWN_PACKAGES = newSet;
-      }
+        myKnownPackages = newSet;
+      });
     }
   };
   //	long notifyCounter = 0;
@@ -76,17 +73,17 @@ public class PerlNamesCache implements ProjectComponent {
   }
 
   public void forceCacheUpdate() {
-    cacheUpdaterWorker.run();
+    myCacheUpdaterWorker.run();
   }
 
   @Override
   public void initComponent() {
-    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(updaterThread::start);
+    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(myUpdaterThread::start);
   }
 
   @Override
   public void disposeComponent() {
-    updaterRunner.stopUpdater();
+    myUpdaterRunner.stopUpdater();
   }
 
   @NotNull
@@ -96,17 +93,13 @@ public class PerlNamesCache implements ProjectComponent {
   }
 
   public Set<String> getSubsNamesSet() {
-    updaterRunner.update();
-    return KNOWN_SUBS;
-  }
-
-  public boolean isTestMode() {
-    return myApplication != null && (myApplication.isUnitTestMode() || myApplication.isHeadlessEnvironment());
+    myUpdaterRunner.update();
+    return myKnownSubs;
   }
 
   public Set<String> getPackagesNamesSet() {
-    updaterRunner.update();
-    return KNOWN_PACKAGES;
+    myUpdaterRunner.update();
+    return myKnownPackages;
   }
 
   @NotNull
@@ -124,7 +117,7 @@ public class PerlNamesCache implements ProjectComponent {
 
       while (!stopThis) {
         try {
-          myApplication.runReadAction(cacheUpdaterWorker);
+          myCacheUpdaterWorker.run();
         }
         catch (ProcessCanceledException ignore) {
         }
