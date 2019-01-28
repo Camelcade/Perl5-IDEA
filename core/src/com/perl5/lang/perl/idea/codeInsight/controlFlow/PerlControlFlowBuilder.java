@@ -234,6 +234,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitSubExpr(@NotNull PsiPerlSubExpr o) {
+      addPendingEdge(o, prevInstruction);
+      super.visitSubExpr(o);
+    }
+
+    @Override
     public void visitTrycatchExpr(@NotNull PsiPerlTrycatchExpr o) {
       acceptSafe(o.getTryExpression());
 

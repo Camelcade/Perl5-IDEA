@@ -1,0 +1,7 @@
+sub some{
+    say 'begin';
+    sub{
+        exit;
+    };
+    say 'end';
+}

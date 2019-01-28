@@ -1,5 +1,5 @@
 0(1) element: null
-1(2) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+1(6,2) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 2(3) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 3(5) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
 4(5) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)

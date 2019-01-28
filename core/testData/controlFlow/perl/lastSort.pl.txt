@@ -13,7 +13,7 @@
 12(13) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
 13(14) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
 14(15,22) iterate PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR) using null
-15(16) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR). Condition: (2, 1):true
+15(22,16) element: PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR). Condition: (2, 1):true
 16(17) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 17(18) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 18(22) element: PsiPerlLastExprImpl(Perl5: LAST_EXPR)
