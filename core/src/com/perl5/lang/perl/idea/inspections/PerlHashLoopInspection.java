@@ -23,6 +23,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVisitor;
+import com.perl5.lang.perl.psi.PsiPerlConditionExpr;
 import com.perl5.lang.perl.psi.PsiPerlForStatementModifier;
 import com.perl5.lang.perl.psi.PsiPerlForeachCompound;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +49,11 @@ public class PerlHashLoopInspection extends PerlInspection {
 
       @Override
       public void visitForeachCompound(@NotNull PsiPerlForeachCompound o) {
-        checkExpression(o.getConditionExpr().getExpr());
+        PsiPerlConditionExpr conditionExpr = o.getConditionExpr();
+        if (conditionExpr == null) {
+          return;
+        }
+        checkExpression(conditionExpr.getExpr());
       }
 
       private void checkExpression(@Nullable PsiElement expr) {

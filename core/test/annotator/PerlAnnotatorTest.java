@@ -33,6 +33,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testIssue1884() {doTestHashLoopInspection();}
+
   public void testUnreachableDereference() {doTestUnreachableCode();}
 
   public void testUnreachableCommaSequence() {doTestUnreachableCode();}
@@ -59,7 +61,11 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   private void doTestUseVarsInspection() {doInspectionTest(PerlUseVarsInspection.class);}
 
-  public void testLoopInHashInspection() {doInspectionTest(PerlHashLoopInspection.class);}
+  public void testLoopInHashInspection() {doTestHashLoopInspection();}
+
+  private void doTestHashLoopInspection() {
+    doInspectionTest(PerlHashLoopInspection.class);
+  }
 
   public void testUseVarsInspection() {doTestUseVarsInspection();}
 
