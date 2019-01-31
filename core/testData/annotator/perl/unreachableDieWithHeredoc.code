@@ -1,0 +1,7 @@
+sub some{
+    die "asdf" unless $a;
+    die <<"HEREDOC" unless $a;
+asdf
+HEREDOC
+    say 'hi';
+}

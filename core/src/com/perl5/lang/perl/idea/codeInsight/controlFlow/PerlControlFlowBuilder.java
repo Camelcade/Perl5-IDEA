@@ -19,6 +19,8 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 import com.intellij.codeInsight.controlflow.*;
 import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -27,11 +29,11 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.containers.Queue;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlDieScope;
@@ -95,8 +97,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private Map<PsiElement, Instruction> myStatementsModifiersMap = ContainerUtil.newHashMap();
 
   public ControlFlow build(PsiElement element) {
-    super.build(new PerlControlFlowVisitor(), element);
-    return getCompleteControlFlow();
+    return super.build(new PerlControlFlowVisitor(element), element);
   }
 
   public static ControlFlow getFor(@NotNull PsiElement element) {
@@ -131,6 +132,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   /**
    * Creates an instruction for {@code element} without processing children. If elementType is in the {@code TRANSPARENT_CONTAINERS}
    * tokenSet - creates a transparent node.
+   *
    * @return new instruction or null if element is null
    */
   @Nullable
@@ -204,9 +206,26 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   // fixme goto
   // fixme revert do transparency?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
-    private final Queue<Instruction> myOpenersQueue = new Queue<>(1);
     private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
     private final Map<PsiElement, Instruction> myLoopRedoInstructions = ContainerUtil.newHashMap();
+    @NotNull
+    private final PsiElement myElement;
+    private final AtomicNotNullLazyValue<HeredocCollector> myCollectorProvider = AtomicNotNullLazyValue.createValue(
+      () -> {
+        HeredocCollector collector = new HeredocCollector();
+        getElement().accept(collector);
+        return collector;
+      }
+    );
+
+    public PerlControlFlowVisitor(@NotNull PsiElement element) {
+      myElement = element;
+    }
+
+    @NotNull
+    public PsiElement getElement() {
+      return myElement;
+    }
 
     private void acceptSafe(@Nullable PsiElement o) {
       if (o != null) {
@@ -653,38 +672,26 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
-      myOpenersQueue.addLast(startNode(o));
+      Instruction openerInstruction = startNode(o);
+      PerlHeredocElementImpl heredocBody = myCollectorProvider.getValue().getBody(o);
+      if (heredocBody == null) {
+        return;
+      }
+      ArrayList<Pair<PsiElement, Instruction>> pendingBackup = new ArrayList<>(pending);
+      flowAbrupted();
+      startTransparentNode(heredocBody, "pendingCatcher");
+      Collection<Pair<PsiElement, Instruction>> pendingToRestore = ContainerUtil.subtract(pendingBackup, pending);
+
+      prevInstruction = openerInstruction;
+      visitElement(heredocBody);
+
+      pendingToRestore.forEach(it -> addPendingEdge(it.first, it.second));
+
     }
 
-    /**
-     * Prepends here-doc body before opening marker
-     */
     @Override
     public void visitHeredocElement(@NotNull PerlHeredocElementImpl o) {
-      if (!myOpenersQueue.isEmpty()) {
-        Instruction openerInstruction = myOpenersQueue.peekFirst();
-        Instruction prevBackup = prevInstruction;
-        // fixme pending edges can shoot here ?
-
-        Collection<Instruction> openerPredecessors = openerInstruction.allPred();
-        if (openerPredecessors.size() != 1) {
-          LOG.warn("Got " + openerPredecessors.size() + " predecessors for " + openerInstruction);
-        }
-        LOG.assertTrue(openerPredecessors.size() > 0);
-        prevInstruction = openerPredecessors.iterator().next();
-
-        super.visitHeredocElement(o);
-
-        openerInstruction.allPred().forEach(pred -> pred.allSucc().removeIf(succ -> succ == openerInstruction));
-        openerInstruction.allPred().clear();
-
-        addEdge(prevInstruction, openerInstruction);
-
-        prevInstruction = prevBackup;
-      }
-      else {
-        super.visitHeredocElement(o);
-      }
+      // we are inlining this after opener
     }
 
     @Override
@@ -696,15 +703,50 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitElement(@NotNull PsiElement element) {
-      IElementType elementType = PsiUtilCore.getElementType(element);
-      if (PerlTokenSets.HEREDOC_ENDS.contains(elementType) && !myOpenersQueue.isEmpty()) {
-        myOpenersQueue.pullFirst();
-      }
-      else if (element instanceof LeafPsiElement) {
+      if (element instanceof LeafPsiElement) {
         return;
       }
       element.acceptChildren(this);
       startNodeSmart(element);
+    }
+  }
+
+  // this won't handle nested heredocs.
+  private class HeredocCollector extends PerlRecursiveVisitor {
+    private final List<PsiElement> myOpeners = ContainerUtil.newArrayList();
+    // may contain nulls for heredocs without bodies
+    private final List<PsiElement> myBodies = ContainerUtil.newArrayList();
+    private int myTerminatorCounter = 0;
+
+    @Override
+    public void visitHeredocOpener(@NotNull PsiPerlHeredocOpener o) {
+      myOpeners.add(o);
+    }
+
+    @Override
+    public void visitHeredocElement(@NotNull PerlHeredocElementImpl o) {
+      myBodies.add(o);
+      super.visitHeredocElement(o);
+    }
+
+    @Override
+    public void visitHeredocTeminator(@NotNull PerlHeredocTerminatorElementImpl o) {
+      myTerminatorCounter++;
+      if (myTerminatorCounter > myBodies.size()) {
+        myBodies.add(null);
+      }
+    }
+
+    /**
+     * @return body psi element for opener if any
+     */
+    @Nullable
+    public PerlHeredocElementImpl getBody(@NotNull PsiPerlHeredocOpener opener) {
+      int openerIndex = myOpeners.indexOf(opener);
+      if (openerIndex == -1 || myBodies.size() <= openerIndex) {
+        return null;
+      }
+      return ObjectUtils.tryCast(myBodies.get(openerIndex), PerlHeredocElementImpl.class);
     }
   }
 }

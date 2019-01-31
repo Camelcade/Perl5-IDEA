@@ -1,11 +1,11 @@
-0(3) element: null
+0(1) element: null
 1(2) element: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
-2(6) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-3(1) element: PerlHeredocElementImpl(HEREDOC)
+2(3) element: PerlHeredocElementImpl(HEREDOC)
+3(4) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 4(5) element: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
-5(9) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-6(4) element: PerlHeredocElementImpl(HEREDOC_QQ)
+5(6) element: PerlHeredocElementImpl(HEREDOC_QQ)
+6(7) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 7(8) element: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER)
-8(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-9(7) element: PerlHeredocElementImpl(HEREDOC_QX)
+8(9) element: PerlHeredocElementImpl(HEREDOC_QX)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 10() element: null

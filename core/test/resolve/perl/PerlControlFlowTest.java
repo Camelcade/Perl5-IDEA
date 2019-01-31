@@ -24,6 +24,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testUnreachableDieWithHeredoc() {doTest();}
+
   public void testUnreachableDbReturn() {doTest();}
 
   public void testUnreachableInnerSub() {doTest();}
