@@ -1,0 +1,3 @@
+say 'begin';
+goto $b if $a;
+say 'end';

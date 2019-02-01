@@ -35,6 +35,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
 
   public void testIssue1884() {doTestHashLoopInspection();}
 
+  public void testUnreachableGotoLabel() {doTestUnreachableCode();}
+
   public void testUnreachableDieWithHeredoc() {doTestUnreachableCode();}
 
   public void testUnreachableDbReturn() {doTestUnreachableCode();}

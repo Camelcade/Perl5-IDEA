@@ -1,0 +1,11 @@
+say 'begin';
+goto body;
+somesub:
+say 'end';
+return;
+body:
+say 'body';
+goto somesub;
+say 'after label';
+body:
+say 'second label';

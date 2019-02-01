@@ -20,6 +20,7 @@ import com.intellij.codeInsight.controlflow.*;
 import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -92,10 +93,39 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   );
 
   // modifier's loops should be edged back here. Maps statement -> modifier
-  private Map<PsiElement, Instruction> myStatementsModifiersMap = ContainerUtil.newHashMap();
+  private final Map<PsiElement, Instruction> myStatementsModifiersMap = ContainerUtil.newHashMap();
+  private final Map<String, Instruction> myLabelsDeclarations = ContainerUtil.newHashMap();
+  private final List<Instruction> myGotos = ContainerUtil.newArrayList();
 
   public ControlFlow build(PsiElement element) {
-    return super.build(new PerlControlFlowVisitor(element), element);
+    addEntryPointNode(element);
+
+    element.acceptChildren(new PerlControlFlowVisitor(element));
+
+    // create end pseudo node and close all pending edges
+    Instruction exitInstruction = startNode(null);
+    processGotos();
+    checkPending(exitInstruction);
+
+    return getCompleteControlFlow();
+  }
+
+  /**
+   * links gotos or add pending edges
+   */
+  private void processGotos() {
+    for (Instruction gotoInstruction : myGotos) {
+      PsiPerlGotoExpr perlGotoExpr = Objects.requireNonNull(ObjectUtils.tryCast(gotoInstruction.getElement(), PsiPerlGotoExpr.class));
+      PsiPerlExpr expr = perlGotoExpr.getExpr();
+      if (expr instanceof PsiPerlLabelExpr) {
+        Instruction labelDeclaration = myLabelsDeclarations.get(expr.getText());
+        if (labelDeclaration != null) {
+          addEdge(gotoInstruction, labelDeclaration);
+          continue;
+        }
+      }
+      addPendingEdge(null, gotoInstruction);
+    }
   }
 
   public static ControlFlow getFor(@NotNull PsiElement element) {
@@ -199,10 +229,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   // fixme given & friends
-  // fixme next/last in indexed for
-  // fixme next/last/redo in do..while/until
-  // fixme goto
   // fixme revert do transparency?
+  // fixme next/last/redo with labels
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
     private final Map<PsiElement, Instruction> myLoopRedoInstructions = ContainerUtil.newHashMap();
@@ -684,7 +712,22 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       visitElement(heredocBody);
 
       pendingToRestore.forEach(it -> addPendingEdge(it.first, it.second));
+    }
 
+    @Override
+    public void visitLabelDeclaration(@NotNull PsiPerlLabelDeclaration o) {
+      Instruction declarationInstruction = startNode(o);
+      String labelName = o.getName();
+      if (StringUtil.isNotEmpty(labelName)) {
+        myLabelsDeclarations.putIfAbsent(labelName, declarationInstruction);
+      }
+    }
+
+    @Override
+    public void visitGotoExpr(@NotNull PsiPerlGotoExpr o) {
+      super.visitGotoExpr(o);
+      myGotos.add(prevInstruction);
+      flowAbrupted();
     }
 
     @Override

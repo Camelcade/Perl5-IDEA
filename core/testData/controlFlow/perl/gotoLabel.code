@@ -1,0 +1,5 @@
+say 'begin';
+goto somesub if $a;
+say 'end';
+somesub:
+say 'after label';
