@@ -1,0 +1,11 @@
+sub some{
+  goto FIRST if $a;
+  goto LAST  if $b;
+  return;
+
+  FIRST: say 'first';
+  return;
+
+  LAST: say 'last';
+  return;
+}

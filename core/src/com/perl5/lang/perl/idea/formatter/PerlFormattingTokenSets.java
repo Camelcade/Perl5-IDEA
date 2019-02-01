@@ -33,6 +33,7 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 
 /**
  * Created by hurricup on 06.09.2015.
@@ -270,12 +271,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_STATE
   );
 
-  TokenSet LABEL_KEYWORDS = TokenSet.create(
-    RESERVED_LAST,
-    RESERVED_NEXT,
-    RESERVED_REDO,
-    RESERVED_GOTO
-  );
+  TokenSet LABEL_KEYWORDS = TokenSet.orSet(PerlTokenSets.LOOP_CONTROL_KEYWORDS, TokenSet.create(RESERVED_GOTO));
 
   TokenSet CUSTOM_EXPR_KEYWORDS = TokenSet.create(
     RESERVED_GREP,

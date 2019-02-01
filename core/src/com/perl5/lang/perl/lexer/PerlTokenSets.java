@@ -267,4 +267,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_QR,
     RESERVED_M
   );
+  TokenSet LOOP_CONTROL_KEYWORDS = TokenSet.create(
+    RESERVED_NEXT, RESERVED_LAST, RESERVED_REDO
+  );
 }

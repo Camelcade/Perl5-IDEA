@@ -24,6 +24,8 @@ public class PerlExitPointsHighlightingTest extends PerlLightTestCase {
     return "testData/highlighting/exitPoints";
   }
 
+  public void testNextLastRedo() {doTest();}
+
   public void testAnonSubNested() {doTest();}
 
   public void testDoNested() {doTest();}

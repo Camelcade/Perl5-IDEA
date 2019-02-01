@@ -24,14 +24,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.PsiPerlSubCallExpr;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_EXIT;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_RETURN;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LOOP_CONTROL_KEYWORDS;
 
 public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandlerFactoryBase {
   private static final TokenSet EXIT_KEYWORDS = TokenSet.create(
@@ -49,6 +48,12 @@ public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandle
         PerlControlFlowBuilder.DIE_SUBS.contains(target.getText()) ||
         EXIT_KEYWORDS.contains(PsiUtilCore.getElementType(target))) {
       return new PerlHighlightExitPointsHandler(editor, file, target);
+    }
+    else if (LOOP_CONTROL_KEYWORDS.contains(PsiUtilCore.getElementType(target)) && target.getParent() instanceof PerlFlowControlExpr) {
+      PsiElement flowTarget = ((PerlFlowControlExpr)target.getParent()).getTargetScope();
+      if (flowTarget instanceof PerlSubDefinition) {
+        return new PerlHighlightExitPointsHandler(editor, file, target);
+      }
     }
     return null;
   }

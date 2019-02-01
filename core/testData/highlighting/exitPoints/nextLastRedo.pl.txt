@@ -1,0 +1,130 @@
+sub subname {
+    {
+        return if $a;
+        die if $a;
+        croak if $a;
+        confess if $a;
+        exit if $a;
+        la<caret>st if $a;
+        next if $a;
+        redo if $a;
+    }
+    return if $a;
+    die if $a;
+    croak if $a;
+    confess if $a;
+    exit if $a;
+    last if $a;
+    next if $a;
+    redo if $a;
+}
+
+===============================================================
+sub subname {
+    {
+        return if $a;
+        die if $a;
+        croak if $a;
+        confess if $a;
+        exit if $a;
+        last if $a;
+        ne<caret>xt if $a;
+        redo if $a;
+    }
+    return if $a;
+    die if $a;
+    croak if $a;
+    confess if $a;
+    exit if $a;
+    last if $a;
+    next if $a;
+    redo if $a;
+}
+
+===============================================================
+sub subname {
+    {
+        return if $a;
+        die if $a;
+        croak if $a;
+        confess if $a;
+        exit if $a;
+        last if $a;
+        next if $a;
+        re<caret>do if $a;
+    }
+    return if $a;
+    die if $a;
+    croak if $a;
+    confess if $a;
+    exit if $a;
+    last if $a;
+    next if $a;
+    redo if $a;
+}
+
+===============================================================
+sub subname {
+    {
+        <READ>return</READ> if $a;
+        <READ>die</READ> if $a;
+        <READ>croak</READ> if $a;
+        <READ>confess</READ> if $a;
+        <READ>exit</READ> if $a;
+        last if $a;
+        next if $a;
+        redo if $a;
+    }
+    <READ>return</READ> if $a;
+    <READ>die</READ> if $a;
+    <READ>croak</READ> if $a;
+    <READ>confess</READ> if $a;
+    <READ>exit</READ> if $a;
+    <READ>la<caret>st</READ> if $a;
+    <READ>next</READ> if $a;
+    <READ>redo</READ> if <READ>$a</READ>;
+}
+
+===============================================================
+sub subname {
+    {
+        <READ>return</READ> if $a;
+        <READ>die</READ> if $a;
+        <READ>croak</READ> if $a;
+        <READ>confess</READ> if $a;
+        <READ>exit</READ> if $a;
+        last if $a;
+        next if $a;
+        redo if $a;
+    }
+    <READ>return</READ> if $a;
+    <READ>die</READ> if $a;
+    <READ>croak</READ> if $a;
+    <READ>confess</READ> if $a;
+    <READ>exit</READ> if $a;
+    <READ>last</READ> if $a;
+    <READ>ne<caret>xt</READ> if $a;
+    <READ>redo</READ> if <READ>$a</READ>;
+}
+
+===============================================================
+sub subname {
+    {
+        <READ>return</READ> if $a;
+        <READ>die</READ> if $a;
+        <READ>croak</READ> if $a;
+        <READ>confess</READ> if $a;
+        <READ>exit</READ> if $a;
+        last if $a;
+        next if $a;
+        redo if $a;
+    }
+    <READ>return</READ> if $a;
+    <READ>die</READ> if $a;
+    <READ>croak</READ> if $a;
+    <READ>confess</READ> if $a;
+    <READ>exit</READ> if $a;
+    <READ>last</READ> if $a;
+    <READ>next</READ> if $a;
+    <READ>re<caret>do</READ> if <READ>$a</READ>;
+}

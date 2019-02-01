@@ -1,0 +1,20 @@
+sub subname {
+    {
+        return if $a;
+        die if $a;
+        croak if $a;
+        confess if $a;
+        exit if $a;
+        la<caret>st if $a;
+        ne<caret>xt if $a;
+        re<caret>do if $a;
+    }
+    return if $a;
+    die if $a;
+    croak if $a;
+    confess if $a;
+    exit if $a;
+    la<caret>st if $a;
+    ne<caret>xt if $a;
+    re<caret>do if $a;
+}
