@@ -1,0 +1,13 @@
+
+sub some{
+    return $a <error descr="Unreachable code">or</error> $b;
+}
+sub some{
+    return $a <error descr="Unreachable code">and</error> $b;
+}
+sub some{
+    return $a || $b;
+}
+sub some{
+    return $a && $b;
+}
