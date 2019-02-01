@@ -1,0 +1,26 @@
+say 'start';
+
+OUTER:
+{
+    say 'outer start';
+    {
+      redo OUTER if $a;
+    }
+    continue{
+      say 'inner continue start';
+      {
+        redo OUTER if $a;
+      }
+      say 'inner continue end'
+    }
+    say 'outer end'
+}
+continue{
+    say 'outer continue start';
+    {
+      redo OUTER if $a;
+    }
+    say 'outer continue end'
+}
+
+say 'end';

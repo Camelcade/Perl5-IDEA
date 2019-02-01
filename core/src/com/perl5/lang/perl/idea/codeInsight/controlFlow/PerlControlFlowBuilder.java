@@ -230,7 +230,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
   // fixme given & friends
   // fixme revert do transparency?
-  // fixme next/last/redo with labels
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
     private final Map<PsiElement, Instruction> myLoopNextInstructions = ContainerUtil.newHashMap();
     private final Map<PsiElement, Instruction> myLoopRedoInstructions = ContainerUtil.newHashMap();
