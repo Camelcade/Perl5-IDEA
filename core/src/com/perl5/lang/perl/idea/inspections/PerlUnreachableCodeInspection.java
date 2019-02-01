@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.inspections;
 
-import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.ControlFlowUtil;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInspection.ProblemsHolder;
@@ -43,16 +42,12 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
-        ControlFlow flow = PerlControlFlowBuilder.getFor(o);
-        final Instruction[] instructions = flow.getInstructions();
-        if (instructions.length > 0) {
-          ControlFlowUtil.iteratePrev(instructions.length - 1, instructions, instruction -> {
-            if (instruction.allPred().isEmpty() && !isFirstInstruction(instruction)) {
-              processInstruction(instruction);
-            }
-            return ControlFlowUtil.Operation.NEXT;
-          });
-        }
+        PerlControlFlowBuilder.iteratePrev(o, instruction -> {
+          if (instruction.allPred().isEmpty() && instruction.num() != 0) {
+            processInstruction(instruction);
+          }
+          return ControlFlowUtil.Operation.NEXT;
+        });
       }
 
       private void processInstruction(@NotNull Instruction instruction) {
@@ -74,10 +69,5 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
         }
       }
     };
-  }
-
-
-  private static boolean isFirstInstruction(Instruction instruction) {
-    return instruction.num() == 0;
   }
 }

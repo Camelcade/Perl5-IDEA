@@ -1,0 +1,47 @@
+sub somesub {
+    say 'Some real code...';
+    eval {
+        return 'Eval return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sub {
+        return 'Anon sub return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    do {
+        return 'Do return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sort {
+        ret<caret>urn 'Sort return is not highlighted.' if $a;
+        say 'Some real code...';
+        d<caret>ie 'And we are dead' if $b;
+        say 'Some real code...';
+        e<caret>xit -1 if $b;
+        say 'Some real code...';
+        42;
+    } @ARGV;
+    return 'this is a proper return' if $a;
+    say 'Some real code...';
+    die 'And we are dead' if $b;
+    say 'Some real code...';
+    exit 42 if $b;
+    say 'Some real code...';
+    say 'This is a last statement exit point';
+}
+

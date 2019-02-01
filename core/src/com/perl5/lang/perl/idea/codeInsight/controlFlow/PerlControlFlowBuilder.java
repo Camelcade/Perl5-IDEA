@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.*;
 import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
@@ -29,6 +28,7 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
@@ -48,9 +48,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
-  private static final Logger LOG = Logger.getInstance(PerlControlFlowBuilder.class);
-
-  private static final Set<String> DIE_SUBS = ContainerUtil.newHashSet(
+  public static final Set<String> DIE_SUBS = ContainerUtil.newHashSet(
     "die",
     "croak",
     "confess"
@@ -748,5 +746,17 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
       return ObjectUtils.tryCast(myBodies.get(openerIndex), PerlHeredocElementImpl.class);
     }
+  }
+
+  public static void iteratePrev(@Nullable PsiElement element,
+                                 @NotNull final Function<? super Instruction, ControlFlowUtil.Operation> processor) {
+    if (element != null) {
+      iteratePrev(PerlControlFlowBuilder.getFor(element).getInstructions(), processor);
+    }
+  }
+
+  public static void iteratePrev(@NotNull Instruction[] instructions,
+                                 @NotNull final Function<? super Instruction, ControlFlowUtil.Operation> processor) {
+    ControlFlowUtil.iteratePrev(instructions.length - 1, instructions, processor);
   }
 }

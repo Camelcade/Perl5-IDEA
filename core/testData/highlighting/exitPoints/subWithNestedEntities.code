@@ -1,0 +1,81 @@
+sub somesub {
+    say 'Some real code...';
+    eval {
+        return 'Eval return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sub {
+        return 'Anon sub return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    do {
+        return 'Do return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sort {
+        return 'Sort return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    } @ARGV;
+
+    grep {
+        return 'grep should return' if $a;
+        exit -1 if $b;
+    } @ARGV;
+
+    map {
+        return 'map should return' if $a;
+        exit -1 if $b;
+    } @ARGV;
+
+    "string should retrun ${
+        return 'map should return' if $a;
+        exit -1 if $b;
+    } text";
+
+    <<EOM;
+    some text
+    ${
+        return 'map should return' if $a;
+        exit -1 if $b;
+        } here
+EOM
+
+    s/    some text
+         ${
+             return 'map should return' if $a;
+             exit -1 if $b;
+             } here
+    /
+             return 'map should return' if $a;
+             exit -1 if $b;
+/xe;
+
+    ret<caret>urn 'this is a proper return' if $a;
+    say 'Some real code...';
+    d<caret>ie 'And we are dead' if $b;
+    say 'Some real code...';
+    e<caret>xit 42 if $b;
+    say 'Some real code...';
+    say 'This is a last statement exit point';
+}
+

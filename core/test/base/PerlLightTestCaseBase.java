@@ -23,6 +23,7 @@ import com.intellij.codeInsight.controlflow.ConditionalInstruction;
 import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
+import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -737,11 +738,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     List<Integer> caretsOffsets = getAndRemoveCarets();
     StringBuilder sb = new StringBuilder();
+    HighlightManager highlightManager = HighlightManager.getInstance(getProject());
+    Editor editor = getEditor();
 
     for (Integer caretOffset : caretsOffsets) {
-      getEditor().getCaretModel().moveToOffset(caretOffset);
+      editor.getCaretModel().moveToOffset(caretOffset);
       myFixture.testAction(new HighlightUsagesAction());
-      List<RangeHighlighter> highlighters = Arrays.asList(getEditor().getMarkupModel().getAllHighlighters());
+      List<RangeHighlighter> highlighters = Arrays.asList(editor.getMarkupModel().getAllHighlighters());
       ContainerUtil.sort(highlighters, Comparator.comparingInt(RangeMarker::getStartOffset));
 
       List<Pair<Integer, String>> macroses = addCaretsMacroses(new ArrayList<>());
@@ -764,6 +767,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
         macroses.add(Pair.create(highlighter.getStartOffset(), "<" + type + ">"));
         macroses.add(Pair.create(highlighter.getEndOffset(), "</" + type + ">"));
+        highlightManager.removeSegmentHighlighter(editor, highlighter);
       }
       if (sb.length() > 0) {
         sb.append("\n===============================================================\n");

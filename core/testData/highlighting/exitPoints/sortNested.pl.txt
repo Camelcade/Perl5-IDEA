@@ -1,0 +1,145 @@
+sub somesub {
+    say 'Some real code...';
+    eval {
+        return 'Eval return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sub {
+        return 'Anon sub return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    do {
+        return 'Do return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sort {
+        <READ>ret<caret>urn 'Sort return is not highlighted.'</READ> if $a;
+        say 'Some real code...';
+        <READ>die 'And we are dead'</READ> if $b;
+        say 'Some real code...';
+        <READ>exit -1</READ> if $b;
+        say 'Some real code...';
+        <READ>42</READ>;
+    } @ARGV;
+    return 'this is a proper return' if $a;
+    say 'Some real code...';
+    die 'And we are dead' if $b;
+    say 'Some real code...';
+    exit 42 if $b;
+    say 'Some real code...';
+    say 'This is a last statement exit point';
+}
+
+
+===============================================================
+sub somesub {
+    say 'Some real code...';
+    eval {
+        return 'Eval return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sub {
+        return 'Anon sub return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    do {
+        return 'Do return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sort {
+        <READ>return 'Sort return is not highlighted.'</READ> if $a;
+        say 'Some real code...';
+        <READ>d<caret>ie 'And we are dead'</READ> if $b;
+        say 'Some real code...';
+        <READ>exit -1</READ> if $b;
+        say 'Some real code...';
+        <READ>42</READ>;
+    } @ARGV;
+    return 'this is a proper return' if $a;
+    say 'Some real code...';
+    die 'And we are dead' if $b;
+    say 'Some real code...';
+    exit 42 if $b;
+    say 'Some real code...';
+    say 'This is a last statement exit point';
+}
+
+
+===============================================================
+sub somesub {
+    say 'Some real code...';
+    eval {
+        return 'Eval return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sub {
+        return 'Anon sub return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    do {
+        return 'Do return is not highlighted.' if $a;
+        say 'Some real code...';
+        die 'And we are dead' if $b;
+        say 'Some real code...';
+        exit -1 if $b;
+        say 'Some real code...';
+        42;
+    };
+    sort {
+        <READ>return 'Sort return is not highlighted.'</READ> if $a;
+        say 'Some real code...';
+        <READ>die 'And we are dead'</READ> if $b;
+        say 'Some real code...';
+        <READ>e<caret>xit -1</READ> if $b;
+        say 'Some real code...';
+        <READ>42</READ>;
+    } @ARGV;
+    return 'this is a proper return' if $a;
+    say 'Some real code...';
+    die 'And we are dead' if $b;
+    say 'Some real code...';
+    exit 42 if $b;
+    say 'Some real code...';
+    say 'This is a last statement exit point';
+}
+
