@@ -1,15 +1,52 @@
-(6,10) - 'ARGV': READ
-(17,21) - 'ARGV': READ
-(35,39) - 'ARGV': READ
-(124,128) - 'ARGV': READ
-(135,139) - 'ARGV': READ
-(153,157) - 'ARGV': READ
-(244,248) - 'ARGV': READ
-(255,259) - 'ARGV': READ
-(273,277) - 'ARGV': READ
-(362,366) - 'ARGV': READ
-(373,377) - 'ARGV': READ
-(391,395) - 'ARGV': READ
-(483,487) - 'ARGV': READ
-(494,498) - 'ARGV': READ
-(512,516) - 'ARGV': READ
+
+say @<READ>ARGV</READ>;
+say @<READ>ARGV</READ>[1,2,3];
+say $<READ>ARGV</READ>[1];
+
+{
+    my @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @<READ>ARGV</READ>;
+say @<READ>ARGV</READ>[1,2,3];
+say $<READ>A<caret>RGV</READ>[1];
+
+{
+   state @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @<READ>ARGV</READ>;
+say @<READ>ARGV</READ>[1,2,3];
+say $<READ>ARGV</READ>[1];
+{
+    our @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @<READ>ARGV</READ>;
+say @<READ>ARGV</READ>[1,2,3];
+say $<READ>ARGV</READ>[1];
+
+{
+    local @ARGV;
+    say @ARGV;
+    say @ARGV[1,2,3];
+    say $ARGV[1];
+}
+
+say @<READ>ARGV</READ>;
+say @<READ>ARGV</READ>[1,2,3];
+say $<READ>ARGV</READ>[1];
+
+local @ARGV;
+say @ARGV;
+say @ARGV[1,2,3];
+say $ARGV[1];

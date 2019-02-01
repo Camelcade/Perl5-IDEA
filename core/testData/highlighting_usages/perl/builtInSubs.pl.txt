@@ -1,2 +1,3 @@
-(1,8) - 'opendir': READ
-(18,25) - 'opendir': READ
+
+<READ>ope<caret>ndir</READ>();
+CORE::<READ>opendir</READ>();

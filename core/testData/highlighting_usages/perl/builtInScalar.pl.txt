@@ -1,5 +1,30 @@
-(7,16) - '^ENCODING': READ
-(73,82) - '^ENCODING': READ
-(142,151) - '^ENCODING': READ
-(209,218) - '^ENCODING': READ
-(279,288) - '^ENCODING': READ
+
+say ${<READ>^ENCODING</READ>};
+{
+    my ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${<READ>^ENCODING</READ>};
+{
+    state ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${<READ>^ENCODING</READ>};
+{
+    our ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${<READ>^ENCODING</READ>};
+
+{
+    local ${^ENCODING};
+    say ${^ENCODING};
+}
+
+say ${<READ>^ENCO<caret>DING</READ>};
+
+local ${^ENCODING};
+say ${^ENCODING};

@@ -1,5 +1,5 @@
-(0,4) - 'main': READ
-(12,16) - 'main': READ
-(24,28) - 'main': READ
-(36,40) - 'main': READ
-(48,52) - 'main': READ
+<READ>main</READ>::bla;
+$<READ>main</READ>::var;
+@<READ>main</READ>::var;
+%<READ>main</READ>::var;
+*<READ>m<caret>ain</READ>::some;

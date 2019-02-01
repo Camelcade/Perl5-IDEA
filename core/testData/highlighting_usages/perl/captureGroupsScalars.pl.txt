@@ -1,2 +1,3 @@
-(6,7) - '1': READ
-(15,16) - '1': READ
+
+say $<caret><READ>1</READ>;
+$a = $<READ>1</READ>;

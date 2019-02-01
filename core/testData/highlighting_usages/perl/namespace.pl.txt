@@ -1,13 +1,21 @@
-(8,16) - 'My::Test': WRITE
-(23,31) - 'My::Test': READ
-(46,54) - 'My::Test': READ
-(72,83) - '__PACKAGE__': READ
-(101,112) - '__PACKAGE__': READ
-(128,136) - 'My::Test': READ
-(157,165) - 'My::Test': READ
-(186,197) - '__PACKAGE__': READ
-(216,227) - '__PACKAGE__': READ
-(261,269) - 'My::Test': READ
-(284,292) - 'My::Test': READ
-(309,317) - 'My::Test': READ
-(331,339) - 'My::Test': READ
+package <WRITE>My::Test</WRITE>;
+
+our <READ>My::Test</READ> $somevar;
+our <READ>My::Test</READ> ($somevar1);
+our <READ>__PACKAGE__</READ> ($somevar2);
+our <READ>__PACKAGE__</READ> ($somevar3);
+
+$<READ>My::Test</READ>::othervar = 1;
+say $<READ>My::Test</READ>::somevar;
+#@returns <READ>__PACKAGE__</READ>
+sub somemethod{}
+
+<READ>__PACKAGE__</READ>->somemethod;
+
+package main;
+say $<READ>My::Test</READ>::somevar;
+sub <READ>My::Test</READ>::othermethod{}
+
+<READ>My::Test</READ>::somemethod;
+<READ>My::Te<caret>st</READ>->othermethod;
+__PACKAGE__->somemethod;

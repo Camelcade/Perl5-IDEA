@@ -622,13 +622,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   private String getEditorTextWithCaretsAndSelections() {
-    Editor editor = getEditor();
+    return getEditorTextWithMacroses(addCaretsMacroses(new ArrayList<>()));
+  }
 
-    // fixme add active templates?
-    List<Pair<Integer, String>> macroses = new ArrayList<>();
-    editor.getCaretModel().getAllCarets().forEach(caret -> addCaretInfo(caret, macroses));
-
-    return getEditorTextWithMacroses(macroses);
+  @NotNull
+  private List<Pair<Integer, String>> addCaretsMacroses(@NotNull List<Pair<Integer, String>> macroses) {
+    getEditor().getCaretModel().getAllCarets().forEach(caret -> addCaretInfo(caret, macroses));
+    return macroses;
   }
 
   @NotNull
@@ -735,42 +735,43 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void doTestUsagesHighlighting() {
     initWithFileSmartWithoutErrors();
 
-    StringBuilder result = new StringBuilder();
-    myFixture.testAction(new HighlightUsagesAction());
-    List<RangeHighlighter> highlighters = Arrays.asList(getEditor().getMarkupModel().getAllHighlighters());
-    ContainerUtil.sort(highlighters, Comparator.comparingInt(RangeMarker::getStartOffset));
+    List<Integer> caretsOffsets = getAndRemoveCarets();
+    StringBuilder sb = new StringBuilder();
 
-    for (RangeHighlighter highlighter : highlighters) {
-      TextAttributes attributes = highlighter.getTextAttributes();
+    for (Integer caretOffset : caretsOffsets) {
+      getEditor().getCaretModel().moveToOffset(caretOffset);
+      myFixture.testAction(new HighlightUsagesAction());
+      List<RangeHighlighter> highlighters = Arrays.asList(getEditor().getMarkupModel().getAllHighlighters());
+      ContainerUtil.sort(highlighters, Comparator.comparingInt(RangeMarker::getStartOffset));
 
-      TextRange range = TextRange.create(highlighter.getStartOffset(), highlighter.getEndOffset());
-      CharSequence text = highlighter.getDocument().getCharsSequence();
+      List<Pair<Integer, String>> macroses = addCaretsMacroses(new ArrayList<>());
 
-      String type;
-      if (attributes == myReadAttributes) {
-        type = "READ";
-      }
-      else if (attributes == myWriteAttributes) {
-        type = "WRITE";
-      }
-      else if (attributes == null) {
-        type = "n/a";
-      }
-      else {
-        type = attributes.toString();
-      }
+      for (RangeHighlighter highlighter : highlighters) {
+        TextAttributes attributes = highlighter.getTextAttributes();
+        String type;
+        if (attributes == myReadAttributes) {
+          type = "READ";
+        }
+        else if (attributes == myWriteAttributes) {
+          type = "WRITE";
+        }
+        else if (attributes == null) {
+          type = "UNKNOWN";
+        }
+        else {
+          type = attributes.toString();
+        }
 
-      result
-        .append(range)
-        .append(" - '")
-        .append(range.subSequence(text))
-        .append("': ")
-        .append(type)
-        .append("\n");
+        macroses.add(Pair.create(highlighter.getStartOffset(), "<" + type + ">"));
+        macroses.add(Pair.create(highlighter.getEndOffset(), "</" + type + ">"));
+      }
+      if (sb.length() > 0) {
+        sb.append("\n===============================================================\n");
+      }
+      sb.append(getEditorTextWithMacroses(macroses));
     }
 
-
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void testFoldingRegions(@NotNull String verificationFileName, LanguageFileType fileType) {

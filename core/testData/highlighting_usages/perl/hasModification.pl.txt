@@ -1,2 +1,3 @@
-(24,29) - 'mojo1': WRITE
-(59,64) - 'mojo1': READ
+package Foo::Bar;
+has '+<WRITE>mojo1</WRITE>' => is => 'rw';
+__PACKAGE__-><READ>mo<caret>jo1</READ>();
