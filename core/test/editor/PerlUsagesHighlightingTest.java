@@ -21,7 +21,7 @@ import base.PerlLightTestCase;
 public class PerlUsagesHighlightingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/highlighting_usages/perl";
+    return "testData/highlighting/usages/perl";
   }
 
   public void testCaptureGroupsScalars() {doTest();}
