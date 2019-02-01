@@ -20,13 +20,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
+import com.perl5.lang.perl.psi.properties.PerlReturnScope;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 19.09.2015.
  */
-public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeImportStub>, PerlLabelScope, PerlBlockOwner {
+public interface PerlDoExpr extends PsiElement, StubBasedPsiElement<PerlRuntimeImportStub>, PerlLabelScope, PerlBlockOwner,
+                                    PerlReturnScope {
   /**
    * Returns imported file relative path or null if unrecognizable
    *
