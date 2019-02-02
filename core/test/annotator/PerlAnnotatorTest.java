@@ -33,33 +33,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
-  public void testDeleteInList() {doTestUnreachableCode();}
-
-  public void testUnreachableReturnWithLpLogic() {doTestUnreachableCode();}
-
   public void testIssue1884() {doTestHashLoopInspection();}
-
-  public void testUnreachableGotoLabel() {doTestUnreachableCode();}
-
-  public void testUnreachableDieWithHeredoc() {doTestUnreachableCode();}
-
-  public void testUnreachableDbReturn() {doTestUnreachableCode();}
-
-  public void testUnreachableInnerSub() {doTestUnreachableCode();}
-
-  public void testUnreachableDereference() {doTestUnreachableCode();}
-
-  public void testUnreachableCommaSequence() {doTestUnreachableCode();}
-
-  public void testUnreachableCommaSequenceConditional() {doTestUnreachableCode();}
-
-  public void testUnreachableCommaSequenceParens() {doTestUnreachableCode();}
-
-  public void testUnreachableCommaSequenceParensConditional() {doTestUnreachableCode();}
-
-  private void doTestUnreachableCode() {
-    doInspectionTest(PerlUnreachableCodeInspection.class);
-  }
 
   public void testLoopControlInspection() {doTestLoopControlInspection();}
 

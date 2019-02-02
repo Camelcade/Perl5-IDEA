@@ -1,0 +1,5 @@
+sub somesub{
+    func Exit {
+        goto something;
+    }
+}

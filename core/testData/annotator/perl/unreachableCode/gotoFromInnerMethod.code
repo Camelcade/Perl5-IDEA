@@ -1,0 +1,5 @@
+sub somesub{
+    method Exit {
+        goto something;
+    }
+}

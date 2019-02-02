@@ -1,0 +1,6 @@
+0(1) element: null
+1(2) element: PsiPerlLabelExprImpl(Perl5: LABEL_EXPR)
+2(5) element: PsiPerlGotoExprImpl(Perl5: GOTO_EXPR)
+3(4) element: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::Exit
+4(5) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
+5() element: null
