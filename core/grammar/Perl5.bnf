@@ -1098,7 +1098,9 @@ private parse_call_arguments ::=
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback
-private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' | [QUALIFYING_PACKAGE] SUB_NAME [PACKAGE] |
+private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
+  QUALIFYING_PACKAGE SUB_NAME |
+  SUB_NAME [PACKAGE !SUB_NAME] |
   'method' | 'func' |
   'finally' | 'try' | 'catch' |
   'switch' | 'case'

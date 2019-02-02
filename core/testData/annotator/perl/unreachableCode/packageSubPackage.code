@@ -1,0 +1,2 @@
+CORE::die Mojo::Exception->new(shift)
+    ->trace->inspect($self->unparsed, $self->code)->verbose(1);

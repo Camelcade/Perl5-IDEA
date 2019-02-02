@@ -25,6 +25,8 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
     return "testData/annotator/perl/unreachableCode";
   }
 
+  public void testPackageSubPackage() {doTest();}
+
   public void testGotoFromInnerSub() {doTest();}
 
   public void testGotoFromInnerFunc() {doTest();}
