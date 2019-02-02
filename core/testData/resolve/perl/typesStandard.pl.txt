@@ -1,0 +1,1168 @@
+PerlSubReference at (29,32); text in range: 'Any' => 1 results:
+	Implicit sub: Any()
+
+PerlSubReference at (38,42); text in range: 'Item' => 1 results:
+	Implicit sub: Item()
+
+PerlSubReference at (48,52); text in range: 'Bool' => 1 results:
+	Implicit sub: Bool()
+
+PerlSubReference at (58,63); text in range: 'Undef' => 1 results:
+	Implicit sub: Undef()
+
+PerlSubReference at (69,76); text in range: 'Defined' => 1 results:
+	Implicit sub: Defined()
+
+PerlSubReference at (82,87); text in range: 'Value' => 1 results:
+	Implicit sub: Value()
+
+PerlSubReference at (93,96); text in range: 'Str' => 1 results:
+	Implicit sub: Str()
+
+PerlSubReference at (102,108); text in range: 'LaxNum' => 1 results:
+	Implicit sub: LaxNum()
+
+PerlSubReference at (114,123); text in range: 'StrictNum' => 1 results:
+	Implicit sub: StrictNum()
+
+PerlSubReference at (129,132); text in range: 'Num' => 1 results:
+	Implicit sub: Num()
+
+PerlSubReference at (138,141); text in range: 'Int' => 1 results:
+	Implicit sub: Int()
+
+PerlSubReference at (147,156); text in range: 'ClassName' => 1 results:
+	Implicit sub: ClassName()
+
+PerlSubReference at (162,170); text in range: 'RoleName' => 1 results:
+	Implicit sub: RoleName()
+
+PerlSubReference at (176,179); text in range: 'Ref' => 1 results:
+	Implicit sub: Ref()
+
+PerlSubReference at (185,192); text in range: 'CodeRef' => 1 results:
+	Implicit sub: CodeRef()
+
+PerlSubReference at (198,207); text in range: 'RegexpRef' => 1 results:
+	Implicit sub: RegexpRef()
+
+PerlSubReference at (213,220); text in range: 'GlobRef' => 1 results:
+	Implicit sub: GlobRef()
+
+PerlNamespaceReference at (226,236); text in range: 'FileHandle' => 0 results:
+
+PerlSubReference at (242,250); text in range: 'ArrayRef' => 1 results:
+	Implicit sub: ArrayRef()
+
+PerlSubReference at (256,263); text in range: 'HashRef' => 1 results:
+	Implicit sub: HashRef()
+
+PerlSubReference at (269,278); text in range: 'ScalarRef' => 1 results:
+	Implicit sub: ScalarRef()
+
+PerlSubReference at (284,290); text in range: 'Object' => 1 results:
+	Implicit sub: Object()
+
+PerlSubReference at (296,301); text in range: 'Maybe' => 1 results:
+	Implicit sub: Maybe()
+
+PerlSubReference at (307,310); text in range: 'Map' => 1 results:
+	Implicit sub: Map()
+
+PerlSubReference at (316,324); text in range: 'Optional' => 1 results:
+	Implicit sub: Optional()
+
+PerlSubReference at (330,335); text in range: 'Tuple' => 1 results:
+	Implicit sub: Tuple()
+
+PerlSubReference at (341,351); text in range: 'CycleTuple' => 1 results:
+	Implicit sub: CycleTuple()
+
+PerlSubReference at (357,361); text in range: 'Dict' => 1 results:
+	Implicit sub: Dict()
+
+PerlSubReference at (367,375); text in range: 'Overload' => 1 results:
+	Implicit sub: Overload()
+
+PerlSubReference at (381,389); text in range: 'StrMatch' => 1 results:
+	Implicit sub: StrMatch()
+
+PerlSubReference at (395,402); text in range: 'OptList' => 1 results:
+	Implicit sub: OptList()
+
+PerlSubReference at (408,412); text in range: 'Tied' => 1 results:
+	Implicit sub: Tied()
+
+PerlSubReference at (418,428); text in range: 'InstanceOf' => 1 results:
+	Implicit sub: InstanceOf()
+
+PerlSubReference at (434,444); text in range: 'ConsumerOf' => 1 results:
+	Implicit sub: ConsumerOf()
+
+PerlSubReference at (450,460); text in range: 'HasMethods' => 1 results:
+	Implicit sub: HasMethods()
+
+PerlSubReference at (466,470); text in range: 'Enum' => 1 results:
+	Implicit sub: Enum()
+
+PerlSubReference at (476,481); text in range: 'MkOpt' => 1 results:
+	Implicit sub: MkOpt()
+
+PerlSubReference at (487,491); text in range: 'Join' => 1 results:
+	Implicit sub: Join()
+
+PerlSubReference at (497,502); text in range: 'Split' => 1 results:
+	Implicit sub: Split()
+
+PerlSubReference at (508,511); text in range: 'Any' => 1 results:
+	Implicit sub: Any()
+
+PerlSubReference at (519,523); text in range: 'Item' => 1 results:
+	Implicit sub: Item()
+
+PerlSubReference at (531,535); text in range: 'Bool' => 1 results:
+	Implicit sub: Bool()
+
+PerlSubReference at (543,548); text in range: 'Undef' => 1 results:
+	Implicit sub: Undef()
+
+PerlSubReference at (556,563); text in range: 'Defined' => 1 results:
+	Implicit sub: Defined()
+
+PerlSubReference at (571,576); text in range: 'Value' => 1 results:
+	Implicit sub: Value()
+
+PerlSubReference at (584,587); text in range: 'Str' => 1 results:
+	Implicit sub: Str()
+
+PerlSubReference at (595,601); text in range: 'LaxNum' => 1 results:
+	Implicit sub: LaxNum()
+
+PerlSubReference at (609,618); text in range: 'StrictNum' => 1 results:
+	Implicit sub: StrictNum()
+
+PerlSubReference at (626,629); text in range: 'Num' => 1 results:
+	Implicit sub: Num()
+
+PerlSubReference at (637,640); text in range: 'Int' => 1 results:
+	Implicit sub: Int()
+
+PerlSubReference at (648,657); text in range: 'ClassName' => 1 results:
+	Implicit sub: ClassName()
+
+PerlSubReference at (665,673); text in range: 'RoleName' => 1 results:
+	Implicit sub: RoleName()
+
+PerlSubReference at (681,684); text in range: 'Ref' => 1 results:
+	Implicit sub: Ref()
+
+PerlSubReference at (692,699); text in range: 'CodeRef' => 1 results:
+	Implicit sub: CodeRef()
+
+PerlSubReference at (707,716); text in range: 'RegexpRef' => 1 results:
+	Implicit sub: RegexpRef()
+
+PerlSubReference at (724,731); text in range: 'GlobRef' => 1 results:
+	Implicit sub: GlobRef()
+
+PerlNamespaceReference at (739,749); text in range: 'FileHandle' => 0 results:
+
+PerlSubReference at (757,765); text in range: 'ArrayRef' => 1 results:
+	Implicit sub: ArrayRef()
+
+PerlSubReference at (773,780); text in range: 'HashRef' => 1 results:
+	Implicit sub: HashRef()
+
+PerlSubReference at (788,797); text in range: 'ScalarRef' => 1 results:
+	Implicit sub: ScalarRef()
+
+PerlSubReference at (805,811); text in range: 'Object' => 1 results:
+	Implicit sub: Object()
+
+PerlSubReference at (819,824); text in range: 'Maybe' => 1 results:
+	Implicit sub: Maybe()
+
+PerlSubReference at (832,835); text in range: 'Map' => 1 results:
+	Implicit sub: Map()
+
+PerlSubReference at (843,851); text in range: 'Optional' => 1 results:
+	Implicit sub: Optional()
+
+PerlSubReference at (859,864); text in range: 'Tuple' => 1 results:
+	Implicit sub: Tuple()
+
+PerlSubReference at (872,882); text in range: 'CycleTuple' => 1 results:
+	Implicit sub: CycleTuple()
+
+PerlSubReference at (890,894); text in range: 'Dict' => 1 results:
+	Implicit sub: Dict()
+
+PerlSubReference at (902,910); text in range: 'Overload' => 1 results:
+	Implicit sub: Overload()
+
+PerlSubReference at (918,926); text in range: 'StrMatch' => 1 results:
+	Implicit sub: StrMatch()
+
+PerlSubReference at (934,941); text in range: 'OptList' => 1 results:
+	Implicit sub: OptList()
+
+PerlSubReference at (949,953); text in range: 'Tied' => 1 results:
+	Implicit sub: Tied()
+
+PerlSubReference at (961,971); text in range: 'InstanceOf' => 1 results:
+	Implicit sub: InstanceOf()
+
+PerlSubReference at (979,989); text in range: 'ConsumerOf' => 1 results:
+	Implicit sub: ConsumerOf()
+
+PerlSubReference at (997,1007); text in range: 'HasMethods' => 1 results:
+	Implicit sub: HasMethods()
+
+PerlSubReference at (1015,1019); text in range: 'Enum' => 1 results:
+	Implicit sub: Enum()
+
+PerlSubReference at (1027,1032); text in range: 'MkOpt' => 1 results:
+	Implicit sub: MkOpt()
+
+PerlSubReference at (1040,1044); text in range: 'Join' => 1 results:
+	Implicit sub: Join()
+
+PerlSubReference at (1052,1057); text in range: 'Split' => 1 results:
+	Implicit sub: Split()
+
+PerlNamespaceReference at (1080,1095); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1097,1100); text in range: 'Any' => 1 results:
+	Implicit sub: Any()
+
+PerlNamespaceReference at (1106,1121); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1123,1126); text in range: 'Any' => 1 results:
+	Implicit sub: Any()
+
+PerlNamespaceReference at (1132,1147); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1149,1152); text in range: 'Any' => 1 results:
+	Implicit sub: Any()
+
+PerlNamespaceReference at (1160,1175); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1177,1180); text in range: 'Any' => 1 results:
+	Implicit sub: Any()
+
+PerlNamespaceReference at (1188,1203); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1205,1213); text in range: 'ArrayRef' => 1 results:
+	Implicit sub: ArrayRef()
+
+PerlNamespaceReference at (1219,1234); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1236,1244); text in range: 'ArrayRef' => 1 results:
+	Implicit sub: ArrayRef()
+
+PerlNamespaceReference at (1250,1265); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1267,1275); text in range: 'ArrayRef' => 1 results:
+	Implicit sub: ArrayRef()
+
+PerlNamespaceReference at (1283,1298); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1300,1308); text in range: 'ArrayRef' => 1 results:
+	Implicit sub: ArrayRef()
+
+PerlNamespaceReference at (1316,1331); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1333,1337); text in range: 'Bool' => 1 results:
+	Implicit sub: Bool()
+
+PerlNamespaceReference at (1343,1358); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1360,1364); text in range: 'Bool' => 1 results:
+	Implicit sub: Bool()
+
+PerlNamespaceReference at (1370,1385); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1387,1391); text in range: 'Bool' => 1 results:
+	Implicit sub: Bool()
+
+PerlNamespaceReference at (1399,1414); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1416,1420); text in range: 'Bool' => 1 results:
+	Implicit sub: Bool()
+
+PerlNamespaceReference at (1428,1443); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1445,1454); text in range: 'ClassName' => 1 results:
+	Implicit sub: ClassName()
+
+PerlNamespaceReference at (1460,1475); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1477,1486); text in range: 'ClassName' => 1 results:
+	Implicit sub: ClassName()
+
+PerlNamespaceReference at (1492,1507); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1509,1518); text in range: 'ClassName' => 1 results:
+	Implicit sub: ClassName()
+
+PerlNamespaceReference at (1526,1541); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1543,1552); text in range: 'ClassName' => 1 results:
+	Implicit sub: ClassName()
+
+PerlNamespaceReference at (1560,1575); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1577,1584); text in range: 'CodeRef' => 1 results:
+	Implicit sub: CodeRef()
+
+PerlNamespaceReference at (1590,1605); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1607,1614); text in range: 'CodeRef' => 1 results:
+	Implicit sub: CodeRef()
+
+PerlNamespaceReference at (1620,1635); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1637,1644); text in range: 'CodeRef' => 1 results:
+	Implicit sub: CodeRef()
+
+PerlNamespaceReference at (1652,1667); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1669,1676); text in range: 'CodeRef' => 1 results:
+	Implicit sub: CodeRef()
+
+PerlNamespaceReference at (1684,1699); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1701,1711); text in range: 'ConsumerOf' => 1 results:
+	Implicit sub: ConsumerOf()
+
+PerlNamespaceReference at (1717,1732); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1734,1744); text in range: 'ConsumerOf' => 1 results:
+	Implicit sub: ConsumerOf()
+
+PerlNamespaceReference at (1750,1765); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1767,1777); text in range: 'ConsumerOf' => 1 results:
+	Implicit sub: ConsumerOf()
+
+PerlNamespaceReference at (1785,1800); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1802,1812); text in range: 'ConsumerOf' => 1 results:
+	Implicit sub: ConsumerOf()
+
+PerlNamespaceReference at (1820,1835); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1837,1847); text in range: 'CycleTuple' => 1 results:
+	Implicit sub: CycleTuple()
+
+PerlNamespaceReference at (1853,1868); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1870,1880); text in range: 'CycleTuple' => 1 results:
+	Implicit sub: CycleTuple()
+
+PerlNamespaceReference at (1886,1901); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1903,1913); text in range: 'CycleTuple' => 1 results:
+	Implicit sub: CycleTuple()
+
+PerlNamespaceReference at (1921,1936); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1938,1948); text in range: 'CycleTuple' => 1 results:
+	Implicit sub: CycleTuple()
+
+PerlNamespaceReference at (1956,1971); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (1973,1980); text in range: 'Defined' => 1 results:
+	Implicit sub: Defined()
+
+PerlNamespaceReference at (1986,2001); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2003,2010); text in range: 'Defined' => 1 results:
+	Implicit sub: Defined()
+
+PerlNamespaceReference at (2016,2031); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2033,2040); text in range: 'Defined' => 1 results:
+	Implicit sub: Defined()
+
+PerlNamespaceReference at (2048,2063); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2065,2072); text in range: 'Defined' => 1 results:
+	Implicit sub: Defined()
+
+PerlNamespaceReference at (2080,2095); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2097,2101); text in range: 'Dict' => 1 results:
+	Implicit sub: Dict()
+
+PerlNamespaceReference at (2107,2122); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2124,2128); text in range: 'Dict' => 1 results:
+	Implicit sub: Dict()
+
+PerlNamespaceReference at (2134,2149); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2151,2155); text in range: 'Dict' => 1 results:
+	Implicit sub: Dict()
+
+PerlNamespaceReference at (2163,2178); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2180,2184); text in range: 'Dict' => 1 results:
+	Implicit sub: Dict()
+
+PerlNamespaceReference at (2192,2207); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2209,2213); text in range: 'Enum' => 1 results:
+	Implicit sub: Enum()
+
+PerlNamespaceReference at (2219,2234); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2236,2240); text in range: 'Enum' => 1 results:
+	Implicit sub: Enum()
+
+PerlNamespaceReference at (2246,2261); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2263,2267); text in range: 'Enum' => 1 results:
+	Implicit sub: Enum()
+
+PerlNamespaceReference at (2275,2290); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2292,2296); text in range: 'Enum' => 1 results:
+	Implicit sub: Enum()
+
+PerlNamespaceReference at (2304,2319); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2321,2331); text in range: 'FileHandle' => 1 results:
+	Implicit sub: FileHandle()
+
+PerlNamespaceReference at (2337,2352); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2354,2364); text in range: 'FileHandle' => 1 results:
+	Implicit sub: FileHandle()
+
+PerlNamespaceReference at (2370,2385); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2387,2397); text in range: 'FileHandle' => 1 results:
+	Implicit sub: FileHandle()
+
+PerlNamespaceReference at (2405,2420); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2422,2432); text in range: 'FileHandle' => 1 results:
+	Implicit sub: FileHandle()
+
+PerlNamespaceReference at (2440,2455); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2457,2464); text in range: 'GlobRef' => 1 results:
+	Implicit sub: GlobRef()
+
+PerlNamespaceReference at (2470,2485); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2487,2494); text in range: 'GlobRef' => 1 results:
+	Implicit sub: GlobRef()
+
+PerlNamespaceReference at (2500,2515); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2517,2524); text in range: 'GlobRef' => 1 results:
+	Implicit sub: GlobRef()
+
+PerlNamespaceReference at (2532,2547); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2549,2556); text in range: 'GlobRef' => 1 results:
+	Implicit sub: GlobRef()
+
+PerlNamespaceReference at (2564,2579); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2581,2591); text in range: 'HasMethods' => 1 results:
+	Implicit sub: HasMethods()
+
+PerlNamespaceReference at (2597,2612); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2614,2624); text in range: 'HasMethods' => 1 results:
+	Implicit sub: HasMethods()
+
+PerlNamespaceReference at (2630,2645); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2647,2657); text in range: 'HasMethods' => 1 results:
+	Implicit sub: HasMethods()
+
+PerlNamespaceReference at (2665,2680); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2682,2692); text in range: 'HasMethods' => 1 results:
+	Implicit sub: HasMethods()
+
+PerlNamespaceReference at (2700,2715); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2717,2724); text in range: 'HashRef' => 1 results:
+	Implicit sub: HashRef()
+
+PerlNamespaceReference at (2730,2745); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2747,2754); text in range: 'HashRef' => 1 results:
+	Implicit sub: HashRef()
+
+PerlNamespaceReference at (2760,2775); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2777,2784); text in range: 'HashRef' => 1 results:
+	Implicit sub: HashRef()
+
+PerlNamespaceReference at (2792,2807); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2809,2816); text in range: 'HashRef' => 1 results:
+	Implicit sub: HashRef()
+
+PerlNamespaceReference at (2824,2839); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2841,2851); text in range: 'InstanceOf' => 1 results:
+	Implicit sub: InstanceOf()
+
+PerlNamespaceReference at (2857,2872); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2874,2884); text in range: 'InstanceOf' => 1 results:
+	Implicit sub: InstanceOf()
+
+PerlNamespaceReference at (2890,2905); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2907,2917); text in range: 'InstanceOf' => 1 results:
+	Implicit sub: InstanceOf()
+
+PerlNamespaceReference at (2925,2940); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2942,2952); text in range: 'InstanceOf' => 1 results:
+	Implicit sub: InstanceOf()
+
+PerlNamespaceReference at (2960,2975); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (2977,2980); text in range: 'Int' => 1 results:
+	Implicit sub: Int()
+
+PerlNamespaceReference at (2986,3001); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3003,3006); text in range: 'Int' => 1 results:
+	Implicit sub: Int()
+
+PerlNamespaceReference at (3012,3027); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3029,3032); text in range: 'Int' => 1 results:
+	Implicit sub: Int()
+
+PerlNamespaceReference at (3040,3055); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3057,3060); text in range: 'Int' => 1 results:
+	Implicit sub: Int()
+
+PerlNamespaceReference at (3068,3083); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3085,3089); text in range: 'Item' => 1 results:
+	Implicit sub: Item()
+
+PerlNamespaceReference at (3095,3110); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3112,3116); text in range: 'Item' => 1 results:
+	Implicit sub: Item()
+
+PerlNamespaceReference at (3122,3137); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3139,3143); text in range: 'Item' => 1 results:
+	Implicit sub: Item()
+
+PerlNamespaceReference at (3151,3166); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3168,3172); text in range: 'Item' => 1 results:
+	Implicit sub: Item()
+
+PerlNamespaceReference at (3180,3195); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3197,3201); text in range: 'Join' => 1 results:
+	Implicit sub: Join()
+
+PerlNamespaceReference at (3207,3222); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3224,3228); text in range: 'Join' => 1 results:
+	Implicit sub: Join()
+
+PerlNamespaceReference at (3234,3249); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3251,3255); text in range: 'Join' => 1 results:
+	Implicit sub: Join()
+
+PerlNamespaceReference at (3263,3278); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3280,3284); text in range: 'Join' => 1 results:
+	Implicit sub: Join()
+
+PerlNamespaceReference at (3292,3307); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3309,3315); text in range: 'LaxNum' => 1 results:
+	Implicit sub: LaxNum()
+
+PerlNamespaceReference at (3321,3336); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3338,3344); text in range: 'LaxNum' => 1 results:
+	Implicit sub: LaxNum()
+
+PerlNamespaceReference at (3350,3365); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3367,3373); text in range: 'LaxNum' => 1 results:
+	Implicit sub: LaxNum()
+
+PerlNamespaceReference at (3381,3396); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3398,3404); text in range: 'LaxNum' => 1 results:
+	Implicit sub: LaxNum()
+
+PerlNamespaceReference at (3412,3427); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3429,3432); text in range: 'Map' => 1 results:
+	Implicit sub: Map()
+
+PerlNamespaceReference at (3438,3453); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3455,3458); text in range: 'Map' => 1 results:
+	Implicit sub: Map()
+
+PerlNamespaceReference at (3464,3479); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3481,3484); text in range: 'Map' => 1 results:
+	Implicit sub: Map()
+
+PerlNamespaceReference at (3492,3507); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3509,3512); text in range: 'Map' => 1 results:
+	Implicit sub: Map()
+
+PerlNamespaceReference at (3520,3535); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3537,3542); text in range: 'Maybe' => 1 results:
+	Implicit sub: Maybe()
+
+PerlNamespaceReference at (3548,3563); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3565,3570); text in range: 'Maybe' => 1 results:
+	Implicit sub: Maybe()
+
+PerlNamespaceReference at (3576,3591); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3593,3598); text in range: 'Maybe' => 1 results:
+	Implicit sub: Maybe()
+
+PerlNamespaceReference at (3606,3621); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3623,3628); text in range: 'Maybe' => 1 results:
+	Implicit sub: Maybe()
+
+PerlNamespaceReference at (3636,3651); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3653,3658); text in range: 'MkOpt' => 1 results:
+	Implicit sub: MkOpt()
+
+PerlNamespaceReference at (3664,3679); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3681,3686); text in range: 'MkOpt' => 1 results:
+	Implicit sub: MkOpt()
+
+PerlNamespaceReference at (3692,3707); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3709,3714); text in range: 'MkOpt' => 1 results:
+	Implicit sub: MkOpt()
+
+PerlNamespaceReference at (3722,3737); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3739,3744); text in range: 'MkOpt' => 1 results:
+	Implicit sub: MkOpt()
+
+PerlNamespaceReference at (3752,3767); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3769,3772); text in range: 'Num' => 1 results:
+	Implicit sub: Num()
+
+PerlNamespaceReference at (3778,3793); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3795,3798); text in range: 'Num' => 1 results:
+	Implicit sub: Num()
+
+PerlNamespaceReference at (3804,3819); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3821,3824); text in range: 'Num' => 1 results:
+	Implicit sub: Num()
+
+PerlNamespaceReference at (3832,3847); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3849,3852); text in range: 'Num' => 1 results:
+	Implicit sub: Num()
+
+PerlNamespaceReference at (3860,3875); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3877,3883); text in range: 'Object' => 1 results:
+	Implicit sub: Object()
+
+PerlNamespaceReference at (3889,3904); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3906,3912); text in range: 'Object' => 1 results:
+	Implicit sub: Object()
+
+PerlNamespaceReference at (3918,3933); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3935,3941); text in range: 'Object' => 1 results:
+	Implicit sub: Object()
+
+PerlNamespaceReference at (3949,3964); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3966,3972); text in range: 'Object' => 1 results:
+	Implicit sub: Object()
+
+PerlNamespaceReference at (3980,3995); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (3997,4004); text in range: 'OptList' => 1 results:
+	Implicit sub: OptList()
+
+PerlNamespaceReference at (4010,4025); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4027,4034); text in range: 'OptList' => 1 results:
+	Implicit sub: OptList()
+
+PerlNamespaceReference at (4040,4055); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4057,4064); text in range: 'OptList' => 1 results:
+	Implicit sub: OptList()
+
+PerlNamespaceReference at (4072,4087); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4089,4096); text in range: 'OptList' => 1 results:
+	Implicit sub: OptList()
+
+PerlNamespaceReference at (4104,4119); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4121,4129); text in range: 'Optional' => 1 results:
+	Implicit sub: Optional()
+
+PerlNamespaceReference at (4135,4150); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4152,4160); text in range: 'Optional' => 1 results:
+	Implicit sub: Optional()
+
+PerlNamespaceReference at (4166,4181); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4183,4191); text in range: 'Optional' => 1 results:
+	Implicit sub: Optional()
+
+PerlNamespaceReference at (4199,4214); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4216,4224); text in range: 'Optional' => 1 results:
+	Implicit sub: Optional()
+
+PerlNamespaceReference at (4232,4247); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4249,4257); text in range: 'Overload' => 1 results:
+	Implicit sub: Overload()
+
+PerlNamespaceReference at (4263,4278); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4280,4288); text in range: 'Overload' => 1 results:
+	Implicit sub: Overload()
+
+PerlNamespaceReference at (4294,4309); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4311,4319); text in range: 'Overload' => 1 results:
+	Implicit sub: Overload()
+
+PerlNamespaceReference at (4327,4342); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4344,4352); text in range: 'Overload' => 1 results:
+	Implicit sub: Overload()
+
+PerlNamespaceReference at (4360,4375); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4377,4380); text in range: 'Ref' => 1 results:
+	Implicit sub: Ref()
+
+PerlNamespaceReference at (4386,4401); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4403,4406); text in range: 'Ref' => 1 results:
+	Implicit sub: Ref()
+
+PerlNamespaceReference at (4412,4427); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4429,4432); text in range: 'Ref' => 1 results:
+	Implicit sub: Ref()
+
+PerlNamespaceReference at (4440,4455); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4457,4460); text in range: 'Ref' => 1 results:
+	Implicit sub: Ref()
+
+PerlNamespaceReference at (4468,4483); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4485,4494); text in range: 'RegexpRef' => 1 results:
+	Implicit sub: RegexpRef()
+
+PerlNamespaceReference at (4500,4515); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4517,4526); text in range: 'RegexpRef' => 1 results:
+	Implicit sub: RegexpRef()
+
+PerlNamespaceReference at (4532,4547); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4549,4558); text in range: 'RegexpRef' => 1 results:
+	Implicit sub: RegexpRef()
+
+PerlNamespaceReference at (4566,4581); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4583,4592); text in range: 'RegexpRef' => 1 results:
+	Implicit sub: RegexpRef()
+
+PerlNamespaceReference at (4600,4615); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4617,4625); text in range: 'RoleName' => 1 results:
+	Implicit sub: RoleName()
+
+PerlNamespaceReference at (4631,4646); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4648,4656); text in range: 'RoleName' => 1 results:
+	Implicit sub: RoleName()
+
+PerlNamespaceReference at (4662,4677); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4679,4687); text in range: 'RoleName' => 1 results:
+	Implicit sub: RoleName()
+
+PerlNamespaceReference at (4695,4710); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4712,4720); text in range: 'RoleName' => 1 results:
+	Implicit sub: RoleName()
+
+PerlNamespaceReference at (4728,4743); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4745,4754); text in range: 'ScalarRef' => 1 results:
+	Implicit sub: ScalarRef()
+
+PerlNamespaceReference at (4760,4775); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4777,4786); text in range: 'ScalarRef' => 1 results:
+	Implicit sub: ScalarRef()
+
+PerlNamespaceReference at (4792,4807); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4809,4818); text in range: 'ScalarRef' => 1 results:
+	Implicit sub: ScalarRef()
+
+PerlNamespaceReference at (4826,4841); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4843,4852); text in range: 'ScalarRef' => 1 results:
+	Implicit sub: ScalarRef()
+
+PerlNamespaceReference at (4860,4875); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4877,4882); text in range: 'Split' => 1 results:
+	Implicit sub: Split()
+
+PerlNamespaceReference at (4888,4903); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4905,4910); text in range: 'Split' => 1 results:
+	Implicit sub: Split()
+
+PerlNamespaceReference at (4916,4931); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4933,4938); text in range: 'Split' => 1 results:
+	Implicit sub: Split()
+
+PerlNamespaceReference at (4946,4961); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4963,4968); text in range: 'Split' => 1 results:
+	Implicit sub: Split()
+
+PerlNamespaceReference at (4976,4991); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (4993,4996); text in range: 'Str' => 1 results:
+	Implicit sub: Str()
+
+PerlNamespaceReference at (5002,5017); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5019,5022); text in range: 'Str' => 1 results:
+	Implicit sub: Str()
+
+PerlNamespaceReference at (5028,5043); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5045,5048); text in range: 'Str' => 1 results:
+	Implicit sub: Str()
+
+PerlNamespaceReference at (5056,5071); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5073,5076); text in range: 'Str' => 1 results:
+	Implicit sub: Str()
+
+PerlNamespaceReference at (5084,5099); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5101,5109); text in range: 'StrMatch' => 1 results:
+	Implicit sub: StrMatch()
+
+PerlNamespaceReference at (5115,5130); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5132,5140); text in range: 'StrMatch' => 1 results:
+	Implicit sub: StrMatch()
+
+PerlNamespaceReference at (5146,5161); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5163,5171); text in range: 'StrMatch' => 1 results:
+	Implicit sub: StrMatch()
+
+PerlNamespaceReference at (5179,5194); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5196,5204); text in range: 'StrMatch' => 1 results:
+	Implicit sub: StrMatch()
+
+PerlNamespaceReference at (5212,5227); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5229,5238); text in range: 'StrictNum' => 1 results:
+	Implicit sub: StrictNum()
+
+PerlNamespaceReference at (5244,5259); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5261,5270); text in range: 'StrictNum' => 1 results:
+	Implicit sub: StrictNum()
+
+PerlNamespaceReference at (5276,5291); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5293,5302); text in range: 'StrictNum' => 1 results:
+	Implicit sub: StrictNum()
+
+PerlNamespaceReference at (5310,5325); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5327,5336); text in range: 'StrictNum' => 1 results:
+	Implicit sub: StrictNum()
+
+PerlNamespaceReference at (5344,5359); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5361,5365); text in range: 'Tied' => 1 results:
+	Implicit sub: Tied()
+
+PerlNamespaceReference at (5371,5386); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5388,5392); text in range: 'Tied' => 1 results:
+	Implicit sub: Tied()
+
+PerlNamespaceReference at (5398,5413); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5415,5419); text in range: 'Tied' => 1 results:
+	Implicit sub: Tied()
+
+PerlNamespaceReference at (5427,5442); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5444,5448); text in range: 'Tied' => 1 results:
+	Implicit sub: Tied()
+
+PerlNamespaceReference at (5456,5471); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5473,5478); text in range: 'Tuple' => 1 results:
+	Implicit sub: Tuple()
+
+PerlNamespaceReference at (5484,5499); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5501,5506); text in range: 'Tuple' => 1 results:
+	Implicit sub: Tuple()
+
+PerlNamespaceReference at (5512,5527); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5529,5534); text in range: 'Tuple' => 1 results:
+	Implicit sub: Tuple()
+
+PerlNamespaceReference at (5542,5557); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5559,5564); text in range: 'Tuple' => 1 results:
+	Implicit sub: Tuple()
+
+PerlNamespaceReference at (5572,5587); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5589,5594); text in range: 'Undef' => 1 results:
+	Implicit sub: Undef()
+
+PerlNamespaceReference at (5600,5615); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5617,5622); text in range: 'Undef' => 1 results:
+	Implicit sub: Undef()
+
+PerlNamespaceReference at (5628,5643); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5645,5650); text in range: 'Undef' => 1 results:
+	Implicit sub: Undef()
+
+PerlNamespaceReference at (5658,5673); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5675,5680); text in range: 'Undef' => 1 results:
+	Implicit sub: Undef()
+
+PerlNamespaceReference at (5688,5703); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5705,5710); text in range: 'Value' => 1 results:
+	Implicit sub: Value()
+
+PerlNamespaceReference at (5716,5731); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5733,5738); text in range: 'Value' => 1 results:
+	Implicit sub: Value()
+
+PerlNamespaceReference at (5744,5759); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5761,5766); text in range: 'Value' => 1 results:
+	Implicit sub: Value()
+
+PerlNamespaceReference at (5774,5789); text in range: 'Types::Standard' => 1 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Types::Standard at 0 in typesStandard.pl
+
+PerlSubReference at (5791,5796); text in range: 'Value' => 1 results:
+	Implicit sub: Value()
+

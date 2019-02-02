@@ -1,0 +1,18 @@
+# isn't it list?
+delete $hash{key}, next if $a;
+
+# looks like proper one
+local $SIG{__DIE__} = sub {
+  CORE::die $_[0] if ref $_[0];
+  CORE::die Mojo::Exception->new(shift)
+    ->trace->inspect($self->unparsed, $self->code)->verbose(1);
+};
+
+# from Perl::Tidy
+sub Warn { my $msg = shift; $fh_stderr->print($msg); return }
+
+sub Exit {
+    my $flag = shift;
+    if   ($flag) { goto ERROR_EXIT }
+    else         { goto NORMAL_EXIT }
+}

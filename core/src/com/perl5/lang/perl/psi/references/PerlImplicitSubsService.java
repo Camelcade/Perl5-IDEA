@@ -170,11 +170,20 @@ public class PerlImplicitSubsService {
 
   @Nullable
   public PerlSubDefinitionElement findSub(@Nullable String packageName, @Nullable String subName) {
-    return mySubsMap.get(packageName + PACKAGE_SEPARATOR + subName);
+    return findSub(packageName + PACKAGE_SEPARATOR + subName);
   }
 
-  public boolean processSubs(@NotNull String packageName, @NotNull Processor<PerlImplicitSubDefinition> processor) {
+  @Nullable
+  public PerlSubDefinitionElement findSub(@Nullable String canonicalName) {
+    return mySubsMap.get(canonicalName);
+  }
+
+  public boolean processSubsInPackage(@NotNull String packageName, @NotNull Processor<? super PerlImplicitSubDefinition> processor) {
     return processSubs(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+  }
+
+  public boolean processSubs(@NotNull String subFqn, @NotNull Processor<? super PerlImplicitSubDefinition> processor) {
+    return processSubs(it -> !subFqn.equals(it.getCanonicalName()) || processor.process(it));
   }
 
   public boolean processSubs(@NotNull Processor<PerlImplicitSubDefinition> processor) {

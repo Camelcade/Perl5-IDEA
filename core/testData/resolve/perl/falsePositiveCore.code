@@ -1,0 +1,3 @@
+
+opendir();
+Some::Bar::opendir;

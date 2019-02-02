@@ -161,7 +161,8 @@ public class PerlSubReference extends PerlSubReferenceSimple {
           }
 
           // check for builtins
-          if (relatedItems.isEmpty()) {
+          // fixme actually, bare words may be resolved to the CORE::GLOBAL subs.
+          if (relatedItems.isEmpty() && expliclitPackageElement == null) {
             PerlSubDefinitionElement builtInSub = PerlImplicitSubsService.getInstance(project).findCoreSub(subName);
             if (builtInSub != null) {
               relatedItems.add(builtInSub);
@@ -171,7 +172,8 @@ public class PerlSubReference extends PerlSubReferenceSimple {
           // check for autoload
           if (relatedItems.isEmpty()
               && !PerlPackageUtil.isUNIVERSAL(packageName)    // don't check for UNIVERSAL::AUTOLOAD
-            ) {
+              && !PerlPackageUtil.isCORE(packageName)
+          ) {
             collectRelatedItems(
               packageName + PerlSubUtil.SUB_AUTOLOAD_WITH_PREFIX,
               project,

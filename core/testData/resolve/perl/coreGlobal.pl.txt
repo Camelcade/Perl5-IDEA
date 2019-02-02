@@ -1,8 +1,7 @@
 PerlNamespaceReference at (0,12); text in range: 'CORE::GLOBAL' => 1 results:
 	Implicit namespace: CORE::GLOBAL
 
-PerlSubReference at (14,17); text in range: 'say' => 1 results:
-	Implicit sub: say()
+PerlSubReference at (14,17); text in range: 'say' => 0 results:
 
 PerlNamespaceReference at (19,31); text in range: 'CORE::GLOBAL' => 1 results:
 	Implicit namespace: CORE::GLOBAL
@@ -31,4 +30,3 @@ PerlVariableReference at (128,131); text in range: 'var' => 0 results:
 
 PerlNamespaceReference at (134,146); text in range: 'CORE::GLOBAL' => 1 results:
 	Implicit namespace: CORE::GLOBAL
-

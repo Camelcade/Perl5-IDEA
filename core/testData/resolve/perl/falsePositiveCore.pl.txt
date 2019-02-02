@@ -1,0 +1,7 @@
+PerlSubReference at (1,8); text in range: 'opendir' => 1 results:
+	Implicit sub: opendir($handle, $name)($handle, $name)
+
+PerlNamespaceReference at (12,21); text in range: 'Some::Bar' => 0 results:
+
+PerlSubReference at (23,30); text in range: 'opendir' => 0 results:
+

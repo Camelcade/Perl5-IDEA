@@ -39,6 +39,8 @@ public class PerlResolveTest extends PerlLightTestCase {
     checkSerializedReferencesWithFile();
   }
 
+  public void testTypesStandard() {doTest();}
+
   public void testIssue1723() {doTest();}
 
   public void testIssue1669() {doTest();}
@@ -54,6 +56,8 @@ public class PerlResolveTest extends PerlLightTestCase {
   public void testCoreGlobal() {doTest();}
 
   public void testBuiltInNamespaces() {doTest();}
+
+  public void testFalsePositiveCore() {doTest();}
 
   public void testSignaturesVariables() {doTest();}
 

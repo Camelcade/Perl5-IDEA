@@ -31,6 +31,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
+import com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitSubsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.application.PerlParserExtensions;
@@ -39,6 +40,9 @@ import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.ClassAccessorParserExtension;
 import com.perl5.lang.perl.parser.MooseParserExtension;
 import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
+import com.perl5.lang.perl.psi.references.PerlCoreSubsProvider;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsProvider;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodParserDefinition;
 import org.jetbrains.annotations.NonNls;
@@ -124,6 +128,13 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     PerlPackageProcessorEP.EP.addExplicitExtension("Exception::Class", new ExceptionClassProcessor());
 
     myProject.registerService(PerlSharedSettings.class, new PerlSharedSettings(getProject()));
+
+    registerExtensionPoint(PerlImplicitSubsProvider.EP_NAME, PerlImplicitSubsProvider.class);
+    registerExtension(PerlImplicitSubsProvider.EP_NAME, new PerlCoreSubsProvider());
+    registerExtension(PerlImplicitSubsProvider.EP_NAME, new TypesStandardImplicitSubsProvider());
+
+    myProject.registerService(PerlImplicitSubsService.class, new PerlImplicitSubsService(getProject()));
+
   }
 
   protected void registerParserExtensions(){

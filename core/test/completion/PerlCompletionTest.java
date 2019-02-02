@@ -54,6 +54,8 @@ public class PerlCompletionTest extends PerlLightTestCase {
     doTestCompletionCheck("");
   }
 
+  public void testTypesStandard() {doTestCompletion();}
+
   public void testVariableSubSignature() {doTestCompletion();}
 
   public void testVariableAnonSubSignature() {doTestCompletion();}

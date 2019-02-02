@@ -138,6 +138,7 @@
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
 
     <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitSubsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

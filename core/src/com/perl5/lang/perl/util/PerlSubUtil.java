@@ -27,6 +27,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
@@ -116,7 +117,8 @@ public class PerlSubUtil implements PerlElementTypes {
                                                        @NotNull String packageName,
                                                        @NotNull GlobalSearchScope scope,
                                                        @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return PerlSubDefinitionReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor) &&
+    return PerlImplicitSubsService.getInstance(project).processSubsInPackage(packageName, processor) &&
+           PerlSubDefinitionReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor) &&
            PerlLightSubDefinitionsReverseIndex.processSubDefinitionsInPackage(project, packageName, scope, processor);
   }
 
@@ -131,7 +133,8 @@ public class PerlSubUtil implements PerlElementTypes {
                                               @NotNull String canonicalName,
                                               @NotNull GlobalSearchScope scope,
                                               @NotNull Processor<PerlSubDefinitionElement> processor) {
-    return PerlSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor) &&
+    return PerlImplicitSubsService.getInstance(project).processSubs(canonicalName, processor) &&
+           PerlSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor) &&
            PerlLightSubDefinitionsIndex.processSubDefinitions(project, canonicalName, scope, processor);
   }
 
