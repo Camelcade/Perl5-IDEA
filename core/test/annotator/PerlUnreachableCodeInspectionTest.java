@@ -25,35 +25,35 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
     return "testData/annotator/perl/unreachableCode";
   }
 
-  public void testGotoFromInnerSub() {doTestUnreachableCode();}
+  public void testGotoFromInnerSub() {doTest();}
 
-  public void testGotoFromInnerFunc() {doTestUnreachableCode();}
+  public void testGotoFromInnerFunc() {doTest();}
 
-  public void testGotoFromInnerMethod() {doTestUnreachableCode();}
+  public void testGotoFromInnerMethod() {doTest();}
 
-  public void testDeleteInList() {doTestUnreachableCode();}
+  public void testDeleteInList() {doTest();}
 
-  public void testUnreachableReturnWithLpLogic() {doTestUnreachableCode();}
+  public void testUnreachableReturnWithLpLogic() {doTest();}
 
-  public void testUnreachableGotoLabel() {doTestUnreachableCode();}
+  public void testUnreachableGotoLabel() {doTest();}
 
-  public void testUnreachableDieWithHeredoc() {doTestUnreachableCode();}
+  public void testUnreachableDieWithHeredoc() {doTest();}
 
-  public void testUnreachableDbReturn() {doTestUnreachableCode();}
+  public void testUnreachableDbReturn() {doTest();}
 
-  public void testUnreachableInnerSub() {doTestUnreachableCode();}
+  public void testUnreachableInnerSub() {doTest();}
 
-  public void testUnreachableDereference() {doTestUnreachableCode();}
+  public void testUnreachableDereference() {doTest();}
 
-  public void testUnreachableCommaSequence() {doTestUnreachableCode();}
+  public void testUnreachableCommaSequence() {doTest();}
 
-  public void testUnreachableCommaSequenceConditional() {doTestUnreachableCode();}
+  public void testUnreachableCommaSequenceConditional() {doTest();}
 
-  public void testUnreachableCommaSequenceParens() {doTestUnreachableCode();}
+  public void testUnreachableCommaSequenceParens() {doTest();}
 
-  public void testUnreachableCommaSequenceParensConditional() {doTestUnreachableCode();}
+  public void testUnreachableCommaSequenceParensConditional() {doTest();}
 
-  private void doTestUnreachableCode() {
+  private void doTest() {
     doInspectionTest(PerlUnreachableCodeInspection.class);
   }
 }
