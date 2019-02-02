@@ -33,7 +33,8 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlUnreachableCodeInspection extends PerlInspection {
   private TokenSet TRANSPARENT_ELEMENTS = TokenSet.create(
-    COMMA_SEQUENCE_EXPR, DO_EXPR, PARENTHESISED_EXPR, DEREF_EXPR, SUB_EXPR, SUB_DEFINITION, METHOD_DEFINITION, FUNC_DEFINITION
+    COMMA_SEQUENCE_EXPR, DO_EXPR, PARENTHESISED_EXPR, DEREF_EXPR, SUB_EXPR, SUB_DEFINITION, METHOD_DEFINITION, FUNC_DEFINITION,
+    LP_OR_XOR_EXPR
   );
 
   @NotNull

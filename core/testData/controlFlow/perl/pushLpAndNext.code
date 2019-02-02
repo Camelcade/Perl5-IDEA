@@ -1,0 +1,5 @@
+sub something{
+    for my $arg (@$args) {
+        push @versions => $arg and next if $a;
+    }
+}

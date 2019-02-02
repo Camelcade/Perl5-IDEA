@@ -1,0 +1,16 @@
+0(1) element: null
+1(2) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+2(3) element: PsiPerlArrayCastExprImpl(Perl5: ARRAY_CAST_EXPR)
+3(4,14) iterate PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR) using PsiPerlForeachIteratorImpl(Perl5: FOREACH_ITERATOR)
+4(5) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: (@$args):true
+5(6,3) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+6(7) element: PsiPerlIfStatementModifierImpl(Perl5: IF_STATEMENT_MODIFIER). Condition: $a:true
+7(8) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+8(9) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+9(10) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+10(11) element: PsiPerlMethodImpl(Perl5: METHOD)
+11(12) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+12(3) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+13(3) element: PsiPerlLpOrXorExprImpl(Perl5: LP_OR_XOR_EXPR)
+14(15) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::something
+15() element: null
