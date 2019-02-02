@@ -1,6 +1,3 @@
-# isn't it list?
-delete $hash{key}, next if $a;
-
 # looks like proper one
 local $SIG{__DIE__} = sub {
   CORE::die $_[0] if ref $_[0];
@@ -16,3 +13,8 @@ sub Exit {
     if   ($flag) { goto ERROR_EXIT }
     else         { goto NORMAL_EXIT }
 }
+
+#
+push @sets     => $arg and next if ref($arg) eq 'CODE';
+push @versions => $arg xor next if $NUMERIC{substr($arg, 0, 1)};
+push @leftover => $arg;

@@ -33,6 +33,8 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testDeleteInList() {doTestUnreachableCode();}
+
   public void testUnreachableReturnWithLpLogic() {doTestUnreachableCode();}
 
   public void testIssue1884() {doTestHashLoopInspection();}

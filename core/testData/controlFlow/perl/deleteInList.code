@@ -1,0 +1,3 @@
+say 'start';
+delete $hash{key}, next if $a;
+say 'end';
