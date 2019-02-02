@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.psi.references.PerlBuiltInSubsService;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,10 +37,12 @@ public class PerlSubBuiltInCompletionProvider extends CompletionProvider<Complet
     assert method instanceof PsiPerlMethod;
 
     if (!((PsiPerlMethod)method).hasExplicitNamespace() && !((PsiPerlMethod)method).isObjectMethod()) {
-      PerlBuiltInSubsService.getInstance(method.getProject()).processSubs(sub -> {
-        resultSet.addElement(
-          PerlSubCompletionUtil.getSubDefinitionLookupElement(sub).withBoldness(true)
-        );
+      PerlImplicitSubsService.getInstance(method.getProject()).processSubs(sub -> {
+        if (sub.isBuiltIn()) {
+          resultSet.addElement(
+            PerlSubCompletionUtil.getSubDefinitionLookupElement(sub).withBoldness(true)
+          );
+        }
         return true;
       });
     }

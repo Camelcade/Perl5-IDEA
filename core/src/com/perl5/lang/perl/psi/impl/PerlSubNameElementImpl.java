@@ -73,7 +73,8 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
   @Override
   public boolean isBuiltIn() {
     for (PsiReference reference : getReferences()) {
-      if (reference.resolve() instanceof PerlBuiltInSubDefinition) {
+      PsiElement target = reference.resolve();
+      if (target instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)target).isBuiltIn()) {
         return true;
       }
     }

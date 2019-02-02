@@ -162,7 +162,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
 
           // check for builtins
           if (relatedItems.isEmpty()) {
-            PerlSubDefinitionElement builtInSub = PerlBuiltInSubsService.getInstance(project).findSub(subName);
+            PerlSubDefinitionElement builtInSub = PerlImplicitSubsService.getInstance(project).findCoreSub(subName);
             if (builtInSub != null) {
               relatedItems.add(builtInSub);
             }

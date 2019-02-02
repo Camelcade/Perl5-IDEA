@@ -120,4 +120,8 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     result = 31 * result + mySubArguments.hashCode();
     return result;
   }
+
+  public boolean isBuiltIn() {
+    return false;
+  }
 }

@@ -32,4 +32,9 @@ public class PerlBuiltInSubDefinition extends PerlImplicitSubDefinition {
                                   @Nullable PsiElement parent) {
     super(manager, subName, packageName, argumentList, parent);
   }
+
+  @Override
+  public boolean isBuiltIn() {
+    return true;
+  }
 }

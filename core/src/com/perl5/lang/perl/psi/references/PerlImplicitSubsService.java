@@ -26,6 +26,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
+import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -36,47 +37,84 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class PerlBuiltInSubsService {
-  private static final Logger LOG = Logger.getInstance(PerlBuiltInSubsService.class);
+import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_PACKAGE;
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
+
+/**
+ * Service for a common tricky-defined subs:<ul>
+ * <li>Built-in subs</li>
+ * <li>Subs from extensions</li>
+ * </ul>
+ */
+public class PerlImplicitSubsService {
+  private static final Logger LOG = Logger.getInstance(PerlImplicitSubsService.class);
+  private static final String PACKAGE = "package";
   private static final String SUB_ELEMENT = "sub";
   private static final String ARGUMENTS_ELEMENT = "arguments";
   private static final String OPTIONAL_ELEMENT = "optional";
   private static final String ARGUMENT_ELEMENT = "argument";
-  private static String XML_PATH = "perlData/subs.xml";
-  private final Map<String, PerlBuiltInSubDefinition> mySubsMap = new THashMap<>();
+  private final Map<String, PerlImplicitSubDefinition> mySubsMap = new THashMap<>();
   @NotNull
   private final PsiManager myPsiManager;
 
-  public PerlBuiltInSubsService(@NotNull Project project) {
+  public PerlImplicitSubsService(@NotNull Project project) {
     myPsiManager = PsiManager.getInstance(project);
 
-    readExternal();
+    PerlImplicitSubsProvider.EP_NAME.extensions().forEach(it -> readSubs(it, it.getSubsFileName()));
   }
 
-  private void readExternal() {
+  /**
+   * Reads subs from xml file.
+   * @param classLoaderProvider source of the classLoader for loading a resource
+   * @param fileName resource file name
+   */
+  private void readSubs(@NotNull Object classLoaderProvider, @NotNull String fileName) {
+    ClassLoader classLoader = classLoaderProvider.getClass().getClassLoader();
+    final Element xmlElement;
     try {
-      Element xmlElement = JDOMUtil.load(this.getClass().getClassLoader().getResourceAsStream(XML_PATH));
-      readSubs(xmlElement);
+      xmlElement = JDOMUtil.load(classLoader.getResourceAsStream(fileName));
     }
     catch (Exception e) {
-      throw new RuntimeException(e);
+      LOG.warn("Error loading resources from " + classLoader + " " + fileName, e);
+      return;
     }
-  }
-
-  private void readSubs(@NotNull Element xmlElement) {
-    for (Element subElement : xmlElement.getChildren(SUB_ELEMENT)) {
-      String subName = subElement.getAttribute("name").getValue();
-      if (StringUtil.isEmpty(subName)) {
-        LOG.warn("Missing or empty name attribute for sub");
+    if (xmlElement == null) {
+      LOG.warn("Error loading resources from " + classLoader + " " + fileName);
+      return;
+    }
+    for (Element namespaceElement : xmlElement.getChildren(PACKAGE)) {
+      String namespaceName = namespaceElement.getAttribute("name").getValue();
+      if (StringUtil.isEmpty(namespaceName)) {
+        LOG.warn("Missing or empty package name");
+        continue;
       }
-      else {
-        mySubsMap.put(subName, new PerlBuiltInSubDefinition(
-          myPsiManager,
-          subName,
-          PerlPackageUtil.CORE_PACKAGE,
-          readArguments(subElement.getChild(ARGUMENTS_ELEMENT), subName),
-          null
-        ));
+      for (Element subElement : namespaceElement.getChildren(SUB_ELEMENT)) {
+        String subName = subElement.getAttribute("name").getValue();
+        if (StringUtil.isEmpty(subName)) {
+          LOG.warn("Missing or empty name attribute for sub");
+        }
+        else {
+          PerlImplicitSubDefinition subDefinition;
+          if (PerlPackageUtil.CORE_PACKAGE.equals(namespaceName)) {
+            subDefinition = new PerlBuiltInSubDefinition(
+              myPsiManager,
+              subName,
+              PerlPackageUtil.CORE_PACKAGE,
+              readArguments(subElement.getChild(ARGUMENTS_ELEMENT), subName),
+              null
+            );
+          }
+          else {
+            subDefinition = new PerlImplicitSubDefinition(
+              myPsiManager,
+              subName,
+              namespaceName,
+              readArguments(subElement.getChild(ARGUMENTS_ELEMENT), subName),
+              null
+            );
+          }
+          mySubsMap.put(subDefinition.getCanonicalName(), subDefinition);
+        }
       }
     }
   }
@@ -126,12 +164,21 @@ public class PerlBuiltInSubsService {
   }
 
   @Nullable
-  public PerlSubDefinitionElement findSub(@Nullable String subName) {
-    return mySubsMap.get(subName);
+  public PerlSubDefinitionElement findCoreSub(@Nullable String subName) {
+    return findSub(CORE_PACKAGE, subName);
   }
 
-  public boolean processSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
-    for (PerlBuiltInSubDefinition subDefinition : mySubsMap.values()) {
+  @Nullable
+  public PerlSubDefinitionElement findSub(@Nullable String packageName, @Nullable String subName) {
+    return mySubsMap.get(packageName + PACKAGE_SEPARATOR + subName);
+  }
+
+  public boolean processSubs(@NotNull String packageName, @NotNull Processor<PerlImplicitSubDefinition> processor) {
+    return processSubs(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+  }
+
+  public boolean processSubs(@NotNull Processor<PerlImplicitSubDefinition> processor) {
+    for (PerlImplicitSubDefinition subDefinition : mySubsMap.values()) {
       ProgressManager.checkCanceled();
       if (!processor.process(subDefinition)) {
         return false;
@@ -140,9 +187,8 @@ public class PerlBuiltInSubsService {
     return true;
   }
 
-
   @NotNull
-  public static PerlBuiltInSubsService getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlBuiltInSubsService.class);
+  public static PerlImplicitSubsService getInstance(@NotNull Project project) {
+    return ServiceManager.getService(project, PerlImplicitSubsService.class);
   }
 }

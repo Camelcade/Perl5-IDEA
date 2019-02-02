@@ -16,303 +16,305 @@
 <!--http://perldoc.perl.org/perlfunc.html-->
 
 <xml>
-  <sub name="-A"/>
-  <sub name="-B"/>
-  <sub name="-C"/>
-  <sub name="-M"/>
-  <sub name="-O"/>
-  <sub name="-R"/>
-  <sub name="-S"/>
-  <sub name="-T"/>
-  <sub name="-W"/>
-  <sub name="-X"/>
-  <sub name="-b"/>
-  <sub name="-c"/>
-  <sub name="-d"/>
-  <sub name="-e"/>
-  <sub name="-f"/>
-  <sub name="-g"/>
-  <sub name="-k"/>
-  <sub name="-l"/>
-  <sub name="-o"/>
-  <sub name="-p"/>
-  <sub name="-r"/>
-  <sub name="-s"/>
-  <sub name="-t"/>
-  <sub name="-u"/>
-  <sub name="-w"/>
-  <sub name="-x"/>
-  <sub name="-z"/>
-  <sub name="AUTOLOAD"/>
-  <sub name="BEGIN"/>
-  <sub name="CHECK"/>
-  <sub name="DESTROY"/>
-  <sub name="END"/>
-  <sub name="INIT"/>
-  <sub name="UNITCHECK"/>
-  <sub name="__DATA__"/>
-  <sub name="__END__"/>
-  <sub name="__FILE__"/>
-  <sub name="__LINE__"/>
-  <sub name="__PACKAGE__"/>
-  <sub name="__SUB__"/>
-  <sub name="abs"/>
-  <sub name="accept"/>
-  <sub name="alarm"/>
-  <sub name="atan2"/>
-  <sub name="bind"/>
-  <sub name="binmode"/>
-  <sub name="bless"/>
-  <sub name="break"/>
-  <sub name="caller"/>
-  <sub name="caller"/>
-  <sub name="chdir"/>
-  <sub name="chmod"/>
-  <sub name="chomp"/>
-  <sub name="chop"/>
-  <sub name="chown"/>
-  <sub name="chr"/>
-  <sub name="chroot"/>
-  <sub name="close">
-    <arguments>
-      <argument name="fh" type="$"/>
-    </arguments>
-  </sub>
-  <sub name="closedir"/>
-  <sub name="connect"/>
-  <sub name="continue"/>
-  <sub name="cos"/>
-  <sub name="crypt"/>
-  <sub name="dbmclose"/>
-  <sub name="dbmclose"/>
-  <sub name="dbmopen"/>
-  <sub name="dbmopen"/>
-  <sub name="default"/>
-  <sub name="defined"/>
-  <sub name="delete"/>
-  <sub name="die"/>
-  <sub name="die"/>
-  <sub name="do"/>
-  <sub name="do"/>
-  <sub name="dump"/>
-  <sub name="each"/>
-  <sub name="each"/>
-  <sub name="endgrent"/>
-  <sub name="endhostent"/>
-  <sub name="endnetent"/>
-  <sub name="endprotoent"/>
-  <sub name="endpwent"/>
-  <sub name="endservent"/>
-  <sub name="eof"/>
-  <sub name="evalbytes"/>
-  <sub name="exec"/>
-  <sub name="exists"/>
-  <sub name="exit"/>
-  <sub name="exp"/>
-  <sub name="fc"/>
-  <sub name="fc"/>
-  <sub name="fcntl"/>
-  <sub name="fileno"/>
-  <sub name="flock"/>
-  <sub name="fork"/>
-  <sub name="format"/>
-  <sub name="formline"/>
-  <sub name="getc"/>
-  <sub name="getgrent"/>
-  <sub name="getgrgid"/>
-  <sub name="getgrnam"/>
-  <sub name="gethostbyaddr"/>
-  <sub name="gethostbyname"/>
-  <sub name="gethostent"/>
-  <sub name="getlogin"/>
-  <sub name="getnetbyaddr"/>
-  <sub name="getnetbyname"/>
-  <sub name="getnetent"/>
-  <sub name="getpeername"/>
-  <sub name="getpgrp"/>
-  <sub name="getppid"/>
-  <sub name="getpriority"/>
-  <sub name="getprotobyname"/>
-  <sub name="getprotobynumber"/>
-  <sub name="getprotoent"/>
-  <sub name="getpwent"/>
-  <sub name="getpwnam"/>
-  <sub name="getpwuid"/>
-  <sub name="getservbyname"/>
-  <sub name="getservbyport"/>
-  <sub name="getservent"/>
-  <sub name="getsockname"/>
-  <sub name="getsockopt"/>
-  <sub name="glob"/>
-  <sub name="gmtime"/>
-  <sub name="goto"/>
-  <sub name="grep"/>
-  <sub name="hex"/>
-  <sub name="hex"/>
-  <sub name="import"/>
-  <sub name="import"/>
-  <sub name="index"/>
-  <sub name="int"/>
-  <sub name="ioctl"/>
-  <sub name="join"/>
-  <sub name="keys"/>
-  <sub name="keys"/>
-  <sub name="kill"/>
-  <sub name="last"/>
-  <sub name="lc"/>
-  <sub name="lcfirst"/>
-  <sub name="length"/>
-  <sub name="link"/>
-  <sub name="listen"/>
-  <sub name="local"/>
-  <sub name="localtime"/>
-  <sub name="lock"/>
-  <sub name="log"/>
-  <sub name="lstat"/>
-  <sub name="map"/>
-  <sub name="mkdir"/>
-  <sub name="msgctl"/>
-  <sub name="msgget"/>
-  <sub name="msgrcv"/>
-  <sub name="msgsnd"/>
-  <sub name="my"/>
-  <sub name="next"/>
-  <sub name="oct">
-    <arguments>
-      <optional>
-        <argument name="expr" type="$"/>
-      </optional>
-    </arguments>
-  </sub>
-  <sub name="open">
-    <arguments>
-      <argument name="handle" type="$"/>
-      <optional>
-        <argument name="mode" type="$"/>
-        <argument name="name_or_ref" type="$"/>
-        <argument name="args" type="@"/>
-      </optional>
-    </arguments>
-  </sub>
-  <sub name="opendir">
-    <arguments>
-      <argument name="handle" type="$"/>
-      <argument name="name" type="$"/>
-    </arguments>
-  </sub>
-  <sub name="ord">
-    <arguments>
-      <optional>
-        <argument name="expr" type="$"/>
-      </optional>
-    </arguments>
-  </sub>
-  <sub name="pack"/>
-  <sub name="pack"/>
-  <sub name="package"/>
-  <sub name="package"/>
-  <sub name="pipe"/>
-  <sub name="pop"/>
-  <sub name="pos"/>
-  <sub name="print"/>
-  <sub name="printf"/>
-  <sub name="prototype"/>
-  <sub name="push"/>
-  <sub name="quotemeta"/>
-  <sub name="rand"/>
-  <sub name="read"/>
-  <sub name="read"/>
-  <sub name="readdir"/>
-  <sub name="readline"/>
-  <sub name="readlink"/>
-  <sub name="readpipe"/>
-  <sub name="recv"/>
-  <sub name="redo"/>
-  <sub name="ref"/>
-  <sub name="rename"/>
-  <sub name="reset"/>
-  <sub name="return"/>
-  <sub name="reverse"/>
-  <sub name="reverse"/>
-  <sub name="rewinddir"/>
-  <sub name="rindex"/>
-  <sub name="rmdir"/>
-  <sub name="say"/>
-  <sub name="scalar"/>
-  <sub name="seek"/>
-  <sub name="seekdir"/>
-  <sub name="select"/>
-  <sub name="semctl"/>
-  <sub name="semget"/>
-  <sub name="semop"/>
-  <sub name="send"/>
-  <sub name="setgrent"/>
-  <sub name="sethostent"/>
-  <sub name="setnetent"/>
-  <sub name="setpgrp"/>
-  <sub name="setpriority"/>
-  <sub name="setprotoent"/>
-  <sub name="setpwent"/>
-  <sub name="setservent"/>
-  <sub name="setsockopt"/>
-  <sub name="shift"/>
-  <sub name="shmctl"/>
-  <sub name="shmget"/>
-  <sub name="shmread"/>
-  <sub name="shmwrite"/>
-  <sub name="shutdown"/>
-  <sub name="sin"/>
-  <sub name="sleep"/>
-  <sub name="socket"/>
-  <sub name="socketpair"/>
-  <sub name="sort"/>
-  <sub name="splice"/>
-  <sub name="split"/>
-  <sub name="sprintf"/>
-  <sub name="sqrt"/>
-  <sub name="srand"/>
-  <sub name="stat"/>
-  <sub name="state"/>
-  <sub name="study"/>
-  <sub name="sub"/>
-  <sub name="substr"/>
-  <sub name="symlink"/>
-  <sub name="syscall"/>
-  <sub name="syscall"/>
-  <sub name="sysopen"/>
-  <sub name="sysread"/>
-  <sub name="sysread"/>
-  <sub name="sysseek"/>
-  <sub name="sysseek"/>
-  <sub name="system"/>
-  <sub name="syswrite"/>
-  <sub name="syswrite"/>
-  <sub name="tell"/>
-  <sub name="telldir"/>
-  <sub name="tie"/>
-  <sub name="tied"/>
-  <sub name="time"/>
-  <sub name="times"/>
-  <sub name="times"/>
-  <sub name="truncate"/>
-  <sub name="uc"/>
-  <sub name="ucfirst"/>
-  <sub name="umask"/>
-  <sub name="undef"/>
-  <sub name="unlink"/>
-  <sub name="unpack"/>
-  <sub name="unpack"/>
-  <sub name="unshift"/>
-  <sub name="untie"/>
-  <sub name="use"/>
-  <sub name="utime"/>
-  <sub name="values"/>
-  <sub name="values"/>
-  <sub name="vec"/>
-  <sub name="wait"/>
-  <sub name="waitpid"/>
-  <sub name="wantarray"/>
-  <sub name="warn"/>
-  <sub name="write"/>
-  <sub name="x"/>
+  <package name="CORE">
+    <sub name="-A"/>
+    <sub name="-B"/>
+    <sub name="-C"/>
+    <sub name="-M"/>
+    <sub name="-O"/>
+    <sub name="-R"/>
+    <sub name="-S"/>
+    <sub name="-T"/>
+    <sub name="-W"/>
+    <sub name="-X"/>
+    <sub name="-b"/>
+    <sub name="-c"/>
+    <sub name="-d"/>
+    <sub name="-e"/>
+    <sub name="-f"/>
+    <sub name="-g"/>
+    <sub name="-k"/>
+    <sub name="-l"/>
+    <sub name="-o"/>
+    <sub name="-p"/>
+    <sub name="-r"/>
+    <sub name="-s"/>
+    <sub name="-t"/>
+    <sub name="-u"/>
+    <sub name="-w"/>
+    <sub name="-x"/>
+    <sub name="-z"/>
+    <sub name="AUTOLOAD"/>
+    <sub name="BEGIN"/>
+    <sub name="CHECK"/>
+    <sub name="DESTROY"/>
+    <sub name="END"/>
+    <sub name="INIT"/>
+    <sub name="UNITCHECK"/>
+    <sub name="__DATA__"/>
+    <sub name="__END__"/>
+    <sub name="__FILE__"/>
+    <sub name="__LINE__"/>
+    <sub name="__PACKAGE__"/>
+    <sub name="__SUB__"/>
+    <sub name="abs"/>
+    <sub name="accept"/>
+    <sub name="alarm"/>
+    <sub name="atan2"/>
+    <sub name="bind"/>
+    <sub name="binmode"/>
+    <sub name="bless"/>
+    <sub name="break"/>
+    <sub name="caller"/>
+    <sub name="caller"/>
+    <sub name="chdir"/>
+    <sub name="chmod"/>
+    <sub name="chomp"/>
+    <sub name="chop"/>
+    <sub name="chown"/>
+    <sub name="chr"/>
+    <sub name="chroot"/>
+    <sub name="close">
+      <arguments>
+        <argument name="fh" type="$"/>
+      </arguments>
+    </sub>
+    <sub name="closedir"/>
+    <sub name="connect"/>
+    <sub name="continue"/>
+    <sub name="cos"/>
+    <sub name="crypt"/>
+    <sub name="dbmclose"/>
+    <sub name="dbmclose"/>
+    <sub name="dbmopen"/>
+    <sub name="dbmopen"/>
+    <sub name="default"/>
+    <sub name="defined"/>
+    <sub name="delete"/>
+    <sub name="die"/>
+    <sub name="die"/>
+    <sub name="do"/>
+    <sub name="do"/>
+    <sub name="dump"/>
+    <sub name="each"/>
+    <sub name="each"/>
+    <sub name="endgrent"/>
+    <sub name="endhostent"/>
+    <sub name="endnetent"/>
+    <sub name="endprotoent"/>
+    <sub name="endpwent"/>
+    <sub name="endservent"/>
+    <sub name="eof"/>
+    <sub name="evalbytes"/>
+    <sub name="exec"/>
+    <sub name="exists"/>
+    <sub name="exit"/>
+    <sub name="exp"/>
+    <sub name="fc"/>
+    <sub name="fc"/>
+    <sub name="fcntl"/>
+    <sub name="fileno"/>
+    <sub name="flock"/>
+    <sub name="fork"/>
+    <sub name="format"/>
+    <sub name="formline"/>
+    <sub name="getc"/>
+    <sub name="getgrent"/>
+    <sub name="getgrgid"/>
+    <sub name="getgrnam"/>
+    <sub name="gethostbyaddr"/>
+    <sub name="gethostbyname"/>
+    <sub name="gethostent"/>
+    <sub name="getlogin"/>
+    <sub name="getnetbyaddr"/>
+    <sub name="getnetbyname"/>
+    <sub name="getnetent"/>
+    <sub name="getpeername"/>
+    <sub name="getpgrp"/>
+    <sub name="getppid"/>
+    <sub name="getpriority"/>
+    <sub name="getprotobyname"/>
+    <sub name="getprotobynumber"/>
+    <sub name="getprotoent"/>
+    <sub name="getpwent"/>
+    <sub name="getpwnam"/>
+    <sub name="getpwuid"/>
+    <sub name="getservbyname"/>
+    <sub name="getservbyport"/>
+    <sub name="getservent"/>
+    <sub name="getsockname"/>
+    <sub name="getsockopt"/>
+    <sub name="glob"/>
+    <sub name="gmtime"/>
+    <sub name="goto"/>
+    <sub name="grep"/>
+    <sub name="hex"/>
+    <sub name="hex"/>
+    <sub name="import"/>
+    <sub name="import"/>
+    <sub name="index"/>
+    <sub name="int"/>
+    <sub name="ioctl"/>
+    <sub name="join"/>
+    <sub name="keys"/>
+    <sub name="keys"/>
+    <sub name="kill"/>
+    <sub name="last"/>
+    <sub name="lc"/>
+    <sub name="lcfirst"/>
+    <sub name="length"/>
+    <sub name="link"/>
+    <sub name="listen"/>
+    <sub name="local"/>
+    <sub name="localtime"/>
+    <sub name="lock"/>
+    <sub name="log"/>
+    <sub name="lstat"/>
+    <sub name="map"/>
+    <sub name="mkdir"/>
+    <sub name="msgctl"/>
+    <sub name="msgget"/>
+    <sub name="msgrcv"/>
+    <sub name="msgsnd"/>
+    <sub name="my"/>
+    <sub name="next"/>
+    <sub name="oct">
+      <arguments>
+        <optional>
+          <argument name="expr" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="open">
+      <arguments>
+        <argument name="handle" type="$"/>
+        <optional>
+          <argument name="mode" type="$"/>
+          <argument name="name_or_ref" type="$"/>
+          <argument name="args" type="@"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="opendir">
+      <arguments>
+        <argument name="handle" type="$"/>
+        <argument name="name" type="$"/>
+      </arguments>
+    </sub>
+    <sub name="ord">
+      <arguments>
+        <optional>
+          <argument name="expr" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="pack"/>
+    <sub name="pack"/>
+    <sub name="package"/>
+    <sub name="package"/>
+    <sub name="pipe"/>
+    <sub name="pop"/>
+    <sub name="pos"/>
+    <sub name="print"/>
+    <sub name="printf"/>
+    <sub name="prototype"/>
+    <sub name="push"/>
+    <sub name="quotemeta"/>
+    <sub name="rand"/>
+    <sub name="read"/>
+    <sub name="read"/>
+    <sub name="readdir"/>
+    <sub name="readline"/>
+    <sub name="readlink"/>
+    <sub name="readpipe"/>
+    <sub name="recv"/>
+    <sub name="redo"/>
+    <sub name="ref"/>
+    <sub name="rename"/>
+    <sub name="reset"/>
+    <sub name="return"/>
+    <sub name="reverse"/>
+    <sub name="reverse"/>
+    <sub name="rewinddir"/>
+    <sub name="rindex"/>
+    <sub name="rmdir"/>
+    <sub name="say"/>
+    <sub name="scalar"/>
+    <sub name="seek"/>
+    <sub name="seekdir"/>
+    <sub name="select"/>
+    <sub name="semctl"/>
+    <sub name="semget"/>
+    <sub name="semop"/>
+    <sub name="send"/>
+    <sub name="setgrent"/>
+    <sub name="sethostent"/>
+    <sub name="setnetent"/>
+    <sub name="setpgrp"/>
+    <sub name="setpriority"/>
+    <sub name="setprotoent"/>
+    <sub name="setpwent"/>
+    <sub name="setservent"/>
+    <sub name="setsockopt"/>
+    <sub name="shift"/>
+    <sub name="shmctl"/>
+    <sub name="shmget"/>
+    <sub name="shmread"/>
+    <sub name="shmwrite"/>
+    <sub name="shutdown"/>
+    <sub name="sin"/>
+    <sub name="sleep"/>
+    <sub name="socket"/>
+    <sub name="socketpair"/>
+    <sub name="sort"/>
+    <sub name="splice"/>
+    <sub name="split"/>
+    <sub name="sprintf"/>
+    <sub name="sqrt"/>
+    <sub name="srand"/>
+    <sub name="stat"/>
+    <sub name="state"/>
+    <sub name="study"/>
+    <sub name="sub"/>
+    <sub name="substr"/>
+    <sub name="symlink"/>
+    <sub name="syscall"/>
+    <sub name="syscall"/>
+    <sub name="sysopen"/>
+    <sub name="sysread"/>
+    <sub name="sysread"/>
+    <sub name="sysseek"/>
+    <sub name="sysseek"/>
+    <sub name="system"/>
+    <sub name="syswrite"/>
+    <sub name="syswrite"/>
+    <sub name="tell"/>
+    <sub name="telldir"/>
+    <sub name="tie"/>
+    <sub name="tied"/>
+    <sub name="time"/>
+    <sub name="times"/>
+    <sub name="times"/>
+    <sub name="truncate"/>
+    <sub name="uc"/>
+    <sub name="ucfirst"/>
+    <sub name="umask"/>
+    <sub name="undef"/>
+    <sub name="unlink"/>
+    <sub name="unpack"/>
+    <sub name="unpack"/>
+    <sub name="unshift"/>
+    <sub name="untie"/>
+    <sub name="use"/>
+    <sub name="utime"/>
+    <sub name="values"/>
+    <sub name="values"/>
+    <sub name="vec"/>
+    <sub name="wait"/>
+    <sub name="waitpid"/>
+    <sub name="wantarray"/>
+    <sub name="warn"/>
+    <sub name="write"/>
+    <sub name="x"/>
+  </package>
 </xml>

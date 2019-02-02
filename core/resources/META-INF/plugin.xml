@@ -45,6 +45,7 @@
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"/>
     <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider"/>
+    <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitSubsProvider"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension"/>
   </extensionPoints>
@@ -135,6 +136,8 @@
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewHandler"/>
     <versionManagerHandler key="plenv"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
+
+    <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreSubsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
@@ -177,7 +180,7 @@
     <projectService serviceImplementation="com.perl5.lang.perl.idea.completion.PerlStringCompletionCache"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInSubsService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitSubsService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
 
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
