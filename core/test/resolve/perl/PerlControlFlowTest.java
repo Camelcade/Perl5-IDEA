@@ -24,6 +24,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testReturnConfessIf() {doTest();}
+
   public void testPushLpAndNext() {doTest();}
 
   public void testPushLpOrNext() {doTest();}

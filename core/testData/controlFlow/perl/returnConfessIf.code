@@ -1,0 +1,5 @@
+sub throw {
+    return Carp::confess(@_)
+        if $self->_confess;
+    return Carp::croak(@_);
+}

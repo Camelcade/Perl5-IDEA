@@ -1,0 +1,5 @@
+sub throw {
+    <error descr="Unreachable code">return Carp::confess(@_)</error>
+        if $self->_confess;
+    <error descr="Unreachable code">return Carp::croak(@_)</error>;
+}
