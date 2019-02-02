@@ -22,6 +22,6 @@ public class PerlCoreSubsProvider implements PerlImplicitSubsProvider {
   @NotNull
   @Override
   public String getSubsFileName() {
-    return "perlData/subs.xml";
+    return "perlData/CORE.xml";
   }
 }
