@@ -23,11 +23,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -40,6 +43,7 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
+    Set<PsiElement> notifiedElements = ContainerUtil.newHashSet();
     return new PerlVisitor() {
       @Override
       public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
@@ -53,7 +57,7 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
 
       private void processInstruction(@NotNull Instruction instruction) {
         PsiElement element = instruction.getElement();
-        if (element == null) {
+        if (element == null || !notifiedElements.add(element)) {
           return;
         }
 

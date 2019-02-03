@@ -5,7 +5,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     };
@@ -14,7 +14,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     };
@@ -32,7 +32,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     } @ARGV;
@@ -88,7 +88,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     };
@@ -97,7 +97,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     };
@@ -115,7 +115,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     } @ARGV;
@@ -171,7 +171,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     };
@@ -180,7 +180,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     };
@@ -198,7 +198,7 @@ sub somesub {
         say 'Some real code...';
         die 'And we are dead' if $b;
         say 'Some real code...';
-        <READ>exit -1</READ> if $b;
+        exit -1 if $b;
         say 'Some real code...';
         42;
     } @ARGV;
@@ -244,4 +244,3 @@ EOM
     say 'Some real code...';
     <READ>say 'This is a last statement exit point'</READ>;
 }
-

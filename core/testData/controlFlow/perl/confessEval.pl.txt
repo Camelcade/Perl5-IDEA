@@ -1,4 +1,4 @@
-0(8,1) element: null
+0(1) element: null
 1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
 2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
 3(4) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)

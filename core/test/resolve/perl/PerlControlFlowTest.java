@@ -38,6 +38,12 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testGotoFromInnerMethod() {doTest();}
 
+  public void testExitFromInnerSub() {doTest();}
+
+  public void testExitFromInnerFunc() {doTest();}
+
+  public void testExitFromInnerMethod() {doTest();}
+
   public void testDeleteInList() {doTest();}
 
   public void testNextLabeled() {doTest();}

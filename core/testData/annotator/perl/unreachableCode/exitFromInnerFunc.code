@@ -1,13 +1,14 @@
 sub somesub{
     'before';
-    sub Exit {
+    func Exit {
         'inner before';
-        goto something;
+        exit;
         '<error descr="Unreachable code">inner after</error>';
     }
     'after';
-    sub preload {
-        goto something;
+    func preload {
+        'inner before';
+        exit;
     }
     'after';
 }

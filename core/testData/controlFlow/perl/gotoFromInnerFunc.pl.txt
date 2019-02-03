@@ -1,6 +1,19 @@
 0(1) element: null
-1(2) element: PsiPerlLabelExprImpl(Perl5: LABEL_EXPR)
-2(5) element: PsiPerlGotoExprImpl(Perl5: GOTO_EXPR)
-3(4) element: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::Exit
-4(5) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
-5() element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+3(4) element: PsiPerlLabelExprImpl(Perl5: LABEL_EXPR)
+4(6) element: PsiPerlGotoExprImpl(Perl5: GOTO_EXPR)
+5(6) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+6(7) element: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::Exit
+7(8) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+8(9) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+9(10) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+10(11) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+11(12) element: PsiPerlArrayIndexImpl(Perl5: ARRAY_INDEX)
+12(13) element: PsiPerlArrayElementImpl(Perl5: ARRAY_ELEMENT)
+13(14) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+14(15) element: PsiPerlMethodImpl(Perl5: METHOD)
+15(16) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+16(17) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::preload
+17(18) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
+18() element: null

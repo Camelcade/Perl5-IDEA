@@ -2,12 +2,13 @@ sub somesub{
     'before';
     sub Exit {
         'inner before';
-        goto something;
+        exit;
         '<error descr="Unreachable code">inner after</error>';
     }
     'after';
     sub preload {
-        goto something;
+        'inner before';
+        exit;
     }
     'after';
 }

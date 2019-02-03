@@ -31,6 +31,12 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
 
   public void testPackageSubPackage() {doTest();}
 
+  public void testExitFromInnerSub() {doTest();}
+
+  public void testExitFromInnerFunc() {doTest();}
+
+  public void testExitFromInnerMethod() {doTest();}
+
   public void testGotoFromInnerSub() {doTest();}
 
   public void testGotoFromInnerFunc() {doTest();}

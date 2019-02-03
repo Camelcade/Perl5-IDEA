@@ -1,8 +1,8 @@
 sub somesub{
     'before';
-    sub Exit {
+    method Exit {
         'inner before';
-        goto something;
+        exit;
         'inner after';
     }
     'after';

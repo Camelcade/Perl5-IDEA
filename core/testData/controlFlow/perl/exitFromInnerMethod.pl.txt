@@ -1,0 +1,18 @@
+0(1) element: null
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+2(3) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+3(6) element: PsiPerlExitExprImpl(Perl5: EXIT_EXPR)
+4(5) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+5(6) element: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::Exit
+6(7) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
+7(8) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+8(9) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+9(10) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+10(11) element: PsiPerlArrayIndexImpl(Perl5: ARRAY_INDEX)
+11(12) element: PsiPerlArrayElementImpl(Perl5: ARRAY_ELEMENT)
+12(13) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+13(14) element: PsiPerlMethodImpl(Perl5: METHOD)
+14(15) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+15(16) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::preload
+16(17) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
+17() element: null

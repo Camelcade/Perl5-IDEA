@@ -1,5 +1,12 @@
 sub somesub{
+    'before';
     func Exit {
+        'inner before';
         goto something;
+        'inner after';
+    }
+    'after';
+    sub preload {
+        push @Alien::Build::rc::PRELOAD, $_[0];
     }
 }

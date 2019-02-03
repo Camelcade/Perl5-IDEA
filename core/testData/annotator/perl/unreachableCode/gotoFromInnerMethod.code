@@ -1,5 +1,13 @@
 sub somesub{
+    'before';
     method Exit {
+        'inner before';
+        goto something;
+        '<error descr="Unreachable code">inner after</error>';
+    }
+    'after';
+    method preload {
         goto something;
     }
+    'after';
 }

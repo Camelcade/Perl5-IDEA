@@ -2,7 +2,7 @@ sub somesub{
     'before';
     sub Exit {
         'inner before';
-        goto something;
+        exit;
         'inner after';
     }
     'after';

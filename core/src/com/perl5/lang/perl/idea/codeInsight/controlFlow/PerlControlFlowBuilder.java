@@ -120,11 +120,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (expr instanceof PsiPerlLabelExpr) {
         Instruction labelDeclaration = myLabelsDeclarations.get(expr.getText());
         if (labelDeclaration != null) {
+          Collection<Instruction> gotoEdges = gotoInstruction.allSucc();
+          gotoEdges.forEach(it -> it.allPred().remove(gotoInstruction));
+          gotoEdges.clear();
           addEdge(gotoInstruction, labelDeclaration);
-          continue;
         }
       }
-      addPendingEdge(null, gotoInstruction);
     }
   }
 
@@ -276,12 +277,6 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       else {
         acceptSafe(o.getBlock());
       }
-    }
-
-    @Override
-    public void visitSubExpr(@NotNull PsiPerlSubExpr o) {
-      addPendingEdge(o, prevInstruction);
-      super.visitSubExpr(o);
     }
 
     @Override
@@ -726,6 +721,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitGotoExpr(@NotNull PsiPerlGotoExpr o) {
       super.visitGotoExpr(o);
       myGotos.add(prevInstruction);
+      addPendingEdge(Objects.requireNonNull(getDieScopeBlock(o)), prevInstruction);
       flowAbrupted();
     }
 
@@ -737,7 +733,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitExitExpr(@NotNull PsiPerlExitExpr o) {
       super.visitExitExpr(o);
-      addPendingEdge(o.getContainingFile(), prevInstruction);
+      addPendingEdge(getDieScope(o), prevInstruction);
       flowAbrupted();
     }
 
