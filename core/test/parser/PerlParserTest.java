@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testRightwardFancyCall() {doTest();}
+
   public void testPrintSubAndSomething() {doTest();}
 
   public void testDiamondAfterScalar() {doTest();}

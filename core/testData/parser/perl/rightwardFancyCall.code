@@ -1,0 +1,1 @@
+my $old = new SelectSaver qualify($_[0], caller);
