@@ -1,0 +1,6 @@
+sub something{
+    something $a, $b, or die "there";
+    something $a, $b, and die "there";
+    something $a, $b, xor die "there";
+    say '<error descr="Unreachable code">hi</error>';
+}

@@ -1,0 +1,3 @@
+something $a, $b, or die "there";
+something $a, $b, and die "there";
+something $a, $b, xor die "there";

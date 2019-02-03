@@ -813,9 +813,11 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <AFTER_VALUE,AFTER_VARIABLE,AFTER_IDENTIFIER,LEX_HANDLE,LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT,AFTER_IDENTIFIER_WITH_LABEL>{
 	"x" / [\d]*	{yybegin(YYINITIAL); return OPERATOR_X;}
-	"and"		{yybegin(YYINITIAL); return OPERATOR_AND_LP;}
-	"or"		{yybegin(YYINITIAL); return OPERATOR_OR_LP;}
-	"xor"		{yybegin(YYINITIAL); return OPERATOR_XOR_LP;}
+        <AFTER_COMMA>{
+          "and"		{yybegin(YYINITIAL); return OPERATOR_AND_LP;}
+          "or"		{yybegin(YYINITIAL); return OPERATOR_OR_LP;}
+          "xor"		{yybegin(YYINITIAL); return OPERATOR_XOR_LP;}
+        }
 	"lt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_LT_STR;}
 	"gt" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_GT_STR;}
 	"le" / {QUOTE_LIKE_SUFFIX}		{yybegin(YYINITIAL); return OPERATOR_LE_STR;}
