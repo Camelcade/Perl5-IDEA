@@ -896,7 +896,10 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 // operands and starters
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA>{
-	"<" / {IDENTIFIER}">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
+        <AFTER_IDENTIFIER,AFTER_VARIABLE> {
+          "<" / {IDENTIFIER}">"  		{yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;}
+          "<" / "$"{IDENTIFIER}">"  		{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
+        }
 	"<"							{yybegin(AFTER_VALUE);pushState();yybegin(QUOTE_LIKE_OPENER_QQ);return captureString();}
 }
 

@@ -1,0 +1,21 @@
+scalar <$fh>;
+scalar <STDIN>;
+
+# dunno (angles after unary)
+($size, $share) = (split /\s/, scalar <$fh>)[0,2];
+
+# something with angles
+return scalar <STDIN>;
+
+my $content = do {
+    local $/;
+    scalar <FH>;
+};
+
+<$fh> =~ /$re/;
+
+
+$_tmp_cs -= length <$_IN_FILE> || 0;
+
+print $css <DATA>;
+print $css <$something>;
