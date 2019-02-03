@@ -113,6 +113,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
     <packageProcessor key="DDP"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
+    <packageProcessor key="Readonly"
+                      implementationClass="com.perl5.lang.perl.extensions.readonly.ReadonlyPackageProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
@@ -139,6 +141,7 @@
 
     <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreSubsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitSubsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

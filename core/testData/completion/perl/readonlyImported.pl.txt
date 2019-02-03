@@ -1,0 +1,2 @@
+Lookups: Scalar1; Text: Scalar1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar; Text: Scalar; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null

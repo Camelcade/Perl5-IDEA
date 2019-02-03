@@ -39,6 +39,8 @@ public class PerlResolveTest extends PerlLightTestCase {
     checkSerializedReferencesWithFile();
   }
 
+  public void testReadonly() {doTest();}
+
   public void testTypesStandard() {doTest();}
 
   public void testIssue1723() {doTest();}

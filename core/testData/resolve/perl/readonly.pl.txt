@@ -1,0 +1,186 @@
+PerlNamespaceFileReference at (4,12); text in range: 'Readonly' => 0 results:
+
+PerlNamespaceReference at (39,47); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (49,55); text in range: 'Scalar' => 1 results:
+	Implicit sub: Scalar()
+
+PerlVariableReference at (60,63); text in range: 'sca' => 0 results:
+
+PerlVariableReference at (68,81); text in range: 'initial_value' => 0 results:
+
+PerlNamespaceReference at (83,91); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (93,99); text in range: 'Scalar' => 1 results:
+	Implicit sub: Scalar()
+
+PerlVariableReference at (112,125); text in range: 'initial_value' => 0 results:
+
+PerlNamespaceReference at (151,159); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (161,166); text in range: 'Array' => 1 results:
+	Implicit sub: Array()
+
+PerlVariableReference at (171,174); text in range: 'arr' => 0 results:
+
+PerlVariableReference at (179,185); text in range: 'values' => 0 results:
+
+PerlNamespaceReference at (187,195); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (197,202); text in range: 'Array' => 1 results:
+	Implicit sub: Array()
+
+PerlVariableReference at (215,221); text in range: 'values' => 0 results:
+
+PerlNamespaceReference at (246,254); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (256,260); text in range: 'Hash' => 1 results:
+	Implicit sub: Hash()
+
+PerlVariableReference at (265,268); text in range: 'has' => 0 results:
+
+PerlSubReference at (280,285); text in range: 'value' => 0 results:
+
+PerlSubReference at (294,299); text in range: 'value' => 0 results:
+
+PerlNamespaceReference at (303,311); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (313,317); text in range: 'Hash' => 1 results:
+	Implicit sub: Hash()
+
+PerlSubReference at (337,342); text in range: 'value' => 0 results:
+
+PerlSubReference at (351,356); text in range: 'value' => 0 results:
+
+PerlNamespaceReference at (366,374); text in range: 'Readonly' => 0 results:
+
+PerlSubReference at (376,380); text in range: 'Hash' => 1 results:
+	Implicit sub: Hash()
+
+PerlVariableReference at (385,388); text in range: 'has' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 321 in readonly.pl
+
+PerlSubReference at (400,405); text in range: 'value' => 0 results:
+
+PerlSubReference at (414,419); text in range: 'value' => 0 results:
+
+PerlVariableReference at (497,500); text in range: 'sca' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 103 in readonly.pl
+
+PerlVariableReference at (503,512); text in range: 'something' => 0 results:
+
+PerlVariableReference at (516,519); text in range: 'sca' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 103 in readonly.pl
+
+PerlVariableReference at (523,526); text in range: 'arr' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 206 in readonly.pl
+
+PerlVariableReference at (540,543); text in range: 'has' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 321 in readonly.pl
+
+PerlVariableReference at (545,553); text in range: 'some_key' => 0 results:
+
+PerlVariableReference at (617,620); text in range: 'sca' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 103 in readonly.pl
+
+PerlSubReference at (626,630); text in range: 'push' => 1 results:
+	Implicit sub: push()
+
+PerlVariableReference at (632,635); text in range: 'arr' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 206 in readonly.pl
+
+PerlSubReference at (646,652); text in range: 'delete' => 1 results:
+	Implicit sub: delete()
+
+PerlVariableReference at (654,657); text in range: 'has' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 321 in readonly.pl
+
+PerlSubReference at (772,780); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (785,788); text in range: 'sca' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 103 in readonly.pl
+
+PerlVariableReference at (793,806); text in range: 'initial_value' => 0 results:
+
+PerlSubReference at (808,816); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (829,842); text in range: 'initial_value' => 0 results:
+
+PerlSubReference at (844,852); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (857,860); text in range: 'arr' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 206 in readonly.pl
+
+PerlVariableReference at (865,871); text in range: 'values' => 0 results:
+
+PerlSubReference at (873,881); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (894,900); text in range: 'values' => 0 results:
+
+PerlSubReference at (902,910); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (915,918); text in range: 'has' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 321 in readonly.pl
+
+PerlSubReference at (930,935); text in range: 'value' => 0 results:
+
+PerlSubReference at (944,949); text in range: 'value' => 0 results:
+
+PerlSubReference at (953,961); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlSubReference at (981,986); text in range: 'value' => 0 results:
+
+PerlSubReference at (995,1000); text in range: 'value' => 0 results:
+
+PerlSubReference at (1004,1012); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlSubReference at (1103,1111); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (1117,1120); text in range: 'sca' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 1016 in readonly.pl
+
+PerlVariableReference at (1125,1138); text in range: 'initial_value' => 0 results:
+
+PerlSubReference at (1140,1148); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (1162,1175); text in range: 'initial_value' => 0 results:
+
+PerlSubReference at (1177,1185); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (1191,1194); text in range: 'arr' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 885 in readonly.pl
+
+PerlVariableReference at (1199,1205); text in range: 'values' => 0 results:
+
+PerlSubReference at (1207,1215); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (1229,1235); text in range: 'values' => 0 results:
+
+PerlSubReference at (1237,1245); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlVariableReference at (1251,1254); text in range: 'has' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 965 in readonly.pl
+
+PerlSubReference at (1266,1271); text in range: 'value' => 0 results:
+
+PerlSubReference at (1280,1285); text in range: 'value' => 0 results:
+
+PerlSubReference at (1290,1298); text in range: 'Readonly' => 1 results:
+	Implicit sub: Readonly()
+
+PerlSubReference at (1319,1324); text in range: 'value' => 0 results:
+
+PerlSubReference at (1333,1338); text in range: 'value' => 0 results:
+

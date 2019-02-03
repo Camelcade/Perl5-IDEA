@@ -1,0 +1,1 @@
+use Readonly qw/<caret>/

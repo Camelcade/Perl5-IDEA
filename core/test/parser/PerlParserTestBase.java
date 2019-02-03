@@ -31,6 +31,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.impl.ConstantProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.ExceptionClassProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.VarsProcessor;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
+import com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitSubsProvider;
 import com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitSubsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
@@ -132,6 +133,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     registerExtensionPoint(PerlImplicitSubsProvider.EP_NAME, PerlImplicitSubsProvider.class);
     registerExtension(PerlImplicitSubsProvider.EP_NAME, new PerlCoreSubsProvider());
     registerExtension(PerlImplicitSubsProvider.EP_NAME, new TypesStandardImplicitSubsProvider());
+    registerExtension(PerlImplicitSubsProvider.EP_NAME, new ReadonlyImplicitSubsProvider());
 
     myProject.registerService(PerlImplicitSubsService.class, new PerlImplicitSubsService(getProject()));
 

@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testReadonly() {doTest();}
+
   public void testRightwardFancyCall() {doTest();}
 
   public void testPrintSubAndSomething() {doTest();}

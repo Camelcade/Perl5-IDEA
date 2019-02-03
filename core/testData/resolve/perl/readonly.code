@@ -1,0 +1,43 @@
+use Readonly;
+
+# Deep Read-only scalar
+Readonly::Scalar    $sca => $initial_value;
+Readonly::Scalar my $sca => $initial_value;
+
+# Deep Read-only array
+Readonly::Array    @arr => @values;
+Readonly::Array my @arr => @values;
+
+# Deep Read-only hash
+Readonly::Hash    %has => (key => value, key => value,);
+Readonly::Hash my %has => (key => value, key => value,);
+# or:
+Readonly::Hash    %has => {key => value, key => value,};
+
+# You can use the read-only variables like any regular variables:
+print $sca;
+$something = $sca + $arr[2];
+next if $has{$some_key};
+
+# But if you try to modify a value, your program will die:
+$sca = 7;
+push @arr, 'seven';
+delete $has{key};
+# The error message is "Modification of a read-only value attempted"
+
+# Alternate form (Perl 5.8 and later)
+Readonly    $sca => $initial_value;
+Readonly my $sca => $initial_value;
+Readonly    @arr => @values;
+Readonly my @arr => @values;
+Readonly    %has => (key => value, key => value,);
+Readonly my %has => (key => value, key => value,);
+Readonly my $sca; # Implicit undef, readonly value
+
+# Alternate form (for Perls earlier than v5.8)
+Readonly    \$sca => $initial_value;
+Readonly \my $sca => $initial_value;
+Readonly    \@arr => @values;
+Readonly \my @arr => @values;
+Readonly    \%has => (key => value, key => value, );
+Readonly \my %has => (key => value, key => value, );

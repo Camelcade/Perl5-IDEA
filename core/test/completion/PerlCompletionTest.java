@@ -54,6 +54,14 @@ public class PerlCompletionTest extends PerlLightTestCase {
     doTestCompletionCheck("");
   }
 
+  public void testReadonlyBare() {doTestCompletion();}
+
+  public void testReadonlyImport() {doTestCompletion();}
+
+  public void testReadonlyImported() {doTestCompletion();}
+
+  public void testReadonlyMethod() {doTestCompletion();}
+
   public void testTypesStandard() {doTestCompletion();}
 
   public void testVariableSubSignature() {doTestCompletion();}

@@ -1,0 +1,8 @@
+Lookups: Array1; Text: Array1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Array; Text: Array; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Clone; Text: Clone; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Hash1; Text: Hash1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Hash; Text: Hash; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Readonly; Text: Readonly; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar1; Text: Scalar1; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: Scalar; Text: Scalar; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
