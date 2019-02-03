@@ -702,7 +702,7 @@ return_expr ::=  'return' [list_expr] {pin=1}
 exit_expr ::= 'exit' [scalar_expr] {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
-private goto_param ::= label_expr | code_cast_expr | code_variable | expr
+private goto_param ::= label_expr | code_primitive  !'(' | expr
 
 
 statement_modifier ::=
@@ -1110,7 +1110,7 @@ private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
 ////////////////////////////////END OF CALLABLE ////////////////////////////////////////////////////////////////////////
 
 label_declaration ::= <<parseLabelDeclaration>> // custom faster method
-label_expr ::= IDENTIFIER|SUB_NAME
+label_expr ::= IDENTIFIER|SUB_NAME !'('
 private perl_version ::= <<parsePerlVersion>>
 private perl_handle ::=  perl_handle_expr | parse_block | scalar_variable !('{'|'['|<<isOperatorToken>>)
 perl_handle_expr ::= HANDLE

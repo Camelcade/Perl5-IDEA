@@ -827,6 +827,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 
 <AFTER_IDENTIFIER_WITH_LABEL>{
+        {IDENTIFIER} / "::" {yybegin(YYINITIAL);pushback();}
+        {IDENTIFIER} / {SPACES_OR_COMMENTS} "(" {yybegin(YYINITIAL);pushback();}
 	{IDENTIFIER}	{yybegin(YYINITIAL);return IDENTIFIER;}
 	[^]				{yypushback(1);yybegin(YYINITIAL);}
 }

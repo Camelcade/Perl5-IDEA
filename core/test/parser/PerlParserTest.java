@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testFlowControlWithDeref() {doTest();}
+
   public void testPackageSubPackage() {doTest();}
 
   public void testDeleteInList() {doTest();}

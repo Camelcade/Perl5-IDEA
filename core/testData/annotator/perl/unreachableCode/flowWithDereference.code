@@ -1,0 +1,37 @@
+sub something{
+    goto &Foo::Bar::something(1,2,3) if $a;
+    goto Foo::Bar::something(1,2,3) if $a;
+    goto &something(1,2,3) if $a;
+    goto something(1,2,3) if $a;
+    goto $something if $a;
+    goto something if $a;
+    goto &$something if $a;
+    goto &$something(123) if $a;
+
+    next &Foo::Bar::something(1,2,3) if $a;
+    next Foo::Bar::something(1,2,3) if $a;
+    next &something(1,2,3) if $a;
+    next something(1,2,3) if $a;
+    next $something if $a;
+    next something if $a;
+    next &$something if $a;
+    next &$something(123) if $a;
+
+    last &Foo::Bar::something(1,2,3) if $a;
+    last Foo::Bar::something(1,2,3) if $a;
+    last &something(1,2,3) if $a;
+    last something(1,2,3) if $a;
+    last $something if $a;
+    last something if $a;
+    last &$something if $a;
+    last &$something(123) if $a;
+
+    redo &Foo::Bar::something(1,2,3) if $a;
+    redo Foo::Bar::something(1,2,3) if $a;
+    redo &something(1,2,3) if $a;
+    redo something(1,2,3) if $a;
+    redo $something if $a;
+    redo something if $a;
+    redo &$something if $a;
+    redo &$something(123) if $a;
+}
