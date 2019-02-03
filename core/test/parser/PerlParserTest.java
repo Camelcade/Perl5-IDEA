@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testPrintSubAndSomething() {doTest();}
+
   public void testDiamondAfterScalar() {doTest();}
 
   public void testLpLogicAfterComma() {doTest();}
