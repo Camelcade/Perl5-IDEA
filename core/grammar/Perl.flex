@@ -134,8 +134,8 @@ IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"r
 CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|"bigint"|"autodie"|"Socket"|"DB_File"|"parent"|"Encode"|"Digest"|"Fatal"|"perlfaq"|"CPAN"|"encoding"
 
 REGEX_COMMENT = "(?#"[^)]*")"
-REGEX_ARRAY_NEGATING = [\^\:\\\[\{]
-REGEX_HASH_NEGATING = [\^\:\\\[\{]
+REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,]
+REGEX_HASH_NEGATING = [\^\:\\\[\{\.\,]
 HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":")
 PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||")
 
