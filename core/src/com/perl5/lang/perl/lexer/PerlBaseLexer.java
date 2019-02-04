@@ -1124,4 +1124,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   public IElementType getLPCodeBlockElementType() {
     return hasTryCatch() ? LP_CODE_BLOCK_WITH_TRYCATCH : LP_CODE_BLOCK;
   }
+
+  /**
+   * @return true iff current token ends at the end of a buffer
+   */
+  protected boolean isLastChar() {
+    return getTokenEnd() == getBufferEnd();
+  }
 }

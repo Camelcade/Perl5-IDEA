@@ -425,10 +425,24 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <INTERPOLATED_VARIABLE_SUFFIX>{
 	"{" / {WHITE_SPACE}* {BAREWORD_MINUS} {WHITE_SPACE}* "}"
 											{return startBracedBlockWithState(BRACED_STRING);	}
-	"["										{return startBracketedBlock();}
+	"["										{
+                    if( isLastChar()){
+                      pushback();popState();
+                    }
+                    else{
+                      return startBracketedBlock();
+                    }
+                }
 	"["	/ {REGEX_ARRAY_NEGATING}			{pushback();popState();}
 	"{"	/ {REGEX_HASH_NEGATING}				{pushback();popState();}
-	"{"										{return startBracedBlock();}
+	"{"										{
+                    if( isLastChar()){
+                      pushback();popState();
+                    }
+                    else{
+                      return startBracedBlock();
+                    }
+                }
 	"->" / [\{\[] {REGEX_ARRAY_NEGATING} 	{pushback();popState();}
 	"->" / [\{\[]							{return OPERATOR_DEREFERENCE;}
 	[^]										{yypushback(1);popState();}
