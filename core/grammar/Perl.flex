@@ -755,6 +755,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <VARIABLE_UNBRACED>{
+        // we are here after a sigil, and we can't cast to the $OLD_PERL_VERSION variable $]
+        "$" / "]" {return getUnbracedVariableNameToken();}
 	// this is a subset of builtins, $;, $, for example, can't be dereferenced
 	"$" / [\{\"\'\[\]\`\\\!\%\&\(\+\-\.\/\<\=\>\|\~\?\:\*\^\@\_\$\:\w_\d]		{return processUnbracedScalarSigil();}
 	"{"											{return startBracedVariable();}

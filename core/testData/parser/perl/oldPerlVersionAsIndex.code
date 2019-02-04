@@ -1,0 +1,10 @@
+say $$;
+say "$$";
+say /$$/;
+say $a[$$];
+say "$a[$$]";
+say /$a[$$]/;
+say $a{$$};
+say "$a{$$}";
+say /$a{$$}/;
+return "${magic}[$$]" . join("\n$magic", @_) . "\n";
