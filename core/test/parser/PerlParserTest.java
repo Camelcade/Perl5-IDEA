@@ -41,6 +41,10 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testPodInTheData() {doTest();}
+
+  public void testPodInTheEnd() {doTest();}
+
   public void testPeriodInIndex() {doTest();}
 
   public void testVariableIndexWithConcatenation() {doTest();}

@@ -1,0 +1,18 @@
+say 'hi';
+
+=pod
+
+doc
+
+=cut
+
+__PACKAGE__
+__END__
+
+=pod
+
+some doc
+
+=cut
+
+other
