@@ -154,7 +154,7 @@ private pod_file_item ::=
 private any_level_item ::=
 	pod_section
 	| over_section
-	| begin_section
+//	| begin_section
 	| for_section
 	| encoding_section
 	| unknown_section
@@ -205,10 +205,9 @@ item_section ::= POD_ITEM [parse_item_section_title [item_section_content]] {pin
 item_section_content ::= any_level_item +
 private recover_over_section ::= !(<<eof>>|POD_BACK|POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
 
+// these are not commented to keep PSI elements, need to be reworked
 begin_section ::= POD_BEGIN parse_begin_section_content begin_section_closer  {pin=1}
 private begin_section_closer ::= POD_END pod_section_format POD_NEWLINE* {pin=1}
-
-pod_section_format ::= POD_COLON ? <<collapseNonSpaceTo 'POD_FORMAT_NAME '>>
 
 private parse_begin_section_content ::=
 	&POD_COLON pod_section_format begin_section_content
@@ -217,7 +216,9 @@ private parse_begin_section_content ::=
 begin_section_content ::= {pod_term|POD_NEWLINE}* {recoverWhile=recover_begin_section} // fixme we should merge when no colon in format
 private recover_begin_section ::= !(<<eof>>|POD_END|POD_HEAD1|POD_HEAD2|POD_HEAD3|POD_HEAD4)
 
-for_section ::= POD_FOR parse_for_section_content POD_NEWLINE *{pin=1}
+pod_section_format ::= POD_COLON ? <<collapseNonSpaceTo 'POD_FORMAT_NAME '>>
+
+for_section ::= {POD_FOR|POD_BEGIN|POD_END} parse_for_section_content POD_NEWLINE *{pin=1}
 private parse_for_section_content ::=
 	&POD_COLON pod_section_format for_section_content
 	 | pod_section_format <<parsePodSectionContent 'POD_NEWLINE, FOR_SECTION_CONTENT, "Unclosed for section"'>>
