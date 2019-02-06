@@ -1,0 +1,32 @@
+use Test;
+use JSON;
+use version;
+
+sub { $exitcode = 0; version() };
+my @b = split /\./, ${ref($_[1]) ? $_[1] : version($_[1])};
+Test( $class, $symbol, $code_ref, $attr, $args );
+
+$json = JSON()->new;
+sub Dump     () { YAML(Dump => @_)     };
+
+new version();
+new JSON();
+new Test();
+new
+    version();
+new
+    JSON();
+new
+    Test();
+new #comment
+    version();
+new #comment
+    JSON();
+new #comment
+    Test();
+new #@inject HTML
+    version();
+new #@inject HTML
+    JSON();
+new #@inject HTML
+    Test();

@@ -133,6 +133,7 @@ LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"tied"|"tie"|"
 NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"break"
 IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"rmdir"|"reverse"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"defined"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
 CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|"bigint"|"autodie"|"Socket"|"DB_File"|"parent"|"Encode"|"Digest"|"Fatal"|"perlfaq"|"CPAN"|"encoding"
+AMBIGOUS_PACKAGES="version"|"JSON"|"YAML"|"Test"
 
 REGEX_COMMENT = "(?#"[^)]*")"
 REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,]
@@ -218,6 +219,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %xstate AFTER_CONTINUATION, AFTER_CONTINUATION_BLOCK
 %xstate AFTER_CATCH, AFTER_CATCH_BLOCK, BEFORE_CATCH_BLOCK,CATCH_PACKAGE,BEFORE_WITH
 %xstate AFTER_FINALLY, AFTER_FINALLY_BLOCK
+
+%xstate FORCE_PACKAGE_TOKEN
 
 %%
 
@@ -1153,8 +1156,20 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	}
 }
 
+<FORCE_PACKAGE_TOKEN>{
+  {NEW_LINE}   				{return getNewLineToken();}
+  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
+  {LINE_COMMENT}			{return COMMENT_LINE;}
+
+  {IDENTIFIER}                          {popState();return PACKAGE;}
+}
+
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_VARIABLE,AFTER_VALUE,AFTER_IDENTIFIER,AFTER_POSSIBLE_SIGIL>{
-        "parent" / {SPACES_OR_COMMENTS}"{"          {return SUB_NAME;}
+        "new" / {SPACES_OR_COMMENTS}{AMBIGOUS_PACKAGES}{ANY_SPACE}* "("  {pushStateAndBegin(FORCE_PACKAGE_TOKEN);return SUB_NAME;}
+        {AMBIGOUS_PACKAGES} / {ANY_SPACE}* "("                           {return SUB_NAME;}
+
+        "parent" / {SPACES_OR_COMMENTS}"{"      {return SUB_NAME;}
 	{CORE_LIST}				{return PACKAGE;}
 	"__PACKAGE__"           {yybegin(AFTER_IDENTIFIER);return TAG_PACKAGE;}
 	{QUALIFIED_IDENTIFIER} 	{return getIdentifierToken();}
