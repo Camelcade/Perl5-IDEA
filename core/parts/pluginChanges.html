@@ -1,84 +1,22 @@
 <p>Updates:</p>
 <ul>
-  <li><b>IMPORTANT:</b> - in 2018.3, Perl plugin was split into several plugins. One for each framework or extension. Don't forget
-    to install them if necessary.
-  </li>
-  <li><code>fileno</code> information is now available in the debugger, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1794">@ivanych</a>
-    (requires <a href="https://metacpan.org/release/Devel-Camelcadedb">debugger module</a> 2018.3+)
-  </li>
-  <li>Markers for automatic injections into here-docs and literals using <code>#@inject</code> annotation are now configurable in the Perl
-    settings, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1789">@aldem</a></li>
-  <li>Scripts, executed in console is now ran with Pty and supports ANSI colorized output.</li>
-  <li>Alternative sdk configuration re-worked and allows to choose one of the registered interpreters (NB: old configurations may break if
-    used alternative paths), <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1423">#1423</a></li>
-  <li>Missing library notification now have actions to install a missing package with cpan or cpanminus.</li>
-  <li><code>perltidy</code> and <code>perlcritic</code> scripts are now discovered automatically in the selected interpreter and manual
-    configuration is no longer
-    possible, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1809">#1809</a> &amp; <a
-        href="https://github.com/Camelcade/Perl5-IDEA/issues/1810">#1810</a>.
-  </li>
-  <li>IDE listens process output for a missing package warnings and suggests to install them.</li>
-  <li><code>plenv</code> version manager is now supported, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1383">@aptituz</a>
-  </li>
-  <li><code>berrybrew</code> version manager is now supported, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1643">#1643</a></li>
-  <li><code>perlbrew</code> version manager is now supported, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/320">#320</a>
-    <ul>
-      <li>Action to create a library available in <code>Tools: Perl</code> section. Available if <code>perlbrew</code> is selected as a
-        current
-        interpreter.
-      </li>
-      <li>Action to install a <code>cpanm</code> and <code>patchperl</code> using <code>perlbrew</code>.</li>
-    </ul>
-  </li>
-  <li>Action to install a Perl5 for the version manager is available in <code>Tools: Perl</code> section. Available if vm-based perl is
-    selected as
-    current interpreter.
-  </li>
-  <li>Action to install arbitrary packages using <code>cpan</code> or <code>cpanmn</code>.</li>
-  <li>Action for installing <code>App::cpanminus</code> in <code>Tools: Perl</code> section</li>
-  <li>Action to refresh current interpreter information. Plugin watches for the filesystem changes and most likely catches external changes
-    to the interpreter (e.g. installing
-    package from console), but not always (and for sure can't do this in the remote case). This action forces IDE to refresh current
-    interpreter data, so all changes should be catched. (NB: this action is more like an emergency thing, so if you often forced to use it,
-    it's probably worth to start an issue in the <a href="https://github.com/Camelcade/Perl5-IDEA/issues">tracker</a>.)
-  </li>
-  <li>Missing package file inspection suggests a quickfix to install a package using <code>cpan</code>/<code>cpanminus</code>, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1775">@yxliang01</a></li>
-  <li><code>WSL</code> support. Windows users may use not only system perl and <code>berrybrew</code>, but WSL
-    distributions with version managers in them, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1820">#1820</a> (via <a href="https://plugins.jetbrains.com/plugin/11329">separate plugin</a>)</li>
-  <li><code>Docker</code> support. You may use a Perl5 from Docker container, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1740">@drmmr763</a> (via <a href="https://plugins.jetbrains.com/plugin/11328">separate plugin</a>)</li>
+  <li>Control flow graph is now computed for your sources, moving plugin to the next level of intelligence.</li>
+  <li>Unreachable code inspection.</li>
+  <li>Exit points highlighting.</li>
+  <li><code>Readonly</code> syntax support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1415">@pJungler</a>.</li>
+  <li>Support for the POD in the <code>__END__</code> block, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1896">#1896</a>.</li>
+  <li></li>
 </ul>
 <p>Fixes:</p>
+<li>Better parsing for <code>Types::Standard</code> things, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1887">#1887</a>.</li>
+<li>Better parsing of different <code>try-catch</code> syntaxes.</li>
+<li>Minor parser improvements: <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1890">#1890</a>,
+  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1891">#1891</a>,
+  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1893">#1893</a>,
+  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1894">#1894</a>,
+  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1895">#1895</a>,
+  <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1897">#1897</a>.
+</li>
 <ul>
-  <li>Exception on editing file with opened structure view, ,
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1857">#1857</a></li>
-  <li>Create mojo and embedded file actions are available when IDE indexing files,
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1856">#1856</a></li>
-  <li>Fixed debugger connection problem on MacOs. From now on, debugger will try to connect to the process 10 times with 1 second pause, by
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1854">@seanmostafavi</a></li>
-  <li>Fixed occasional templates in templating languages, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1846">#1846</a></li>
-  <li>Fixed exception with enabled quickdoc on mouseover, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1852">#1852</a></li>
-  <li>Fixed possible exception on remote debugging, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA-Debugger/issues/36">@huckeduster</a></li>
-  <li>Fixed possible stackoverflow on perl interpreter migration</li>
-  <li>Fixed <code>IllegalAccessError</code> in Mojo/Mason plugins, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA-Debugger/issues/1849">@huckeduster</a></li>
-  <li><code>scalar</code> is properly parsed as an unary operator, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1845">@Zaitsev</a>.
-  </li>
-  <li>Bare string in <code>say string => $val;</code> is no longer parsed as handle, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1847">#1847</a></li>
-  <li>Formatter no longer trying to unquote strings with leading `+` or multiple `-` if optional quotation is suppressed, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1844">@NGEfreak</a></li>
-  <li>Improved existing interpreters migration to a new version, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1848">#1848</a></li>
-  <li>Sdk selection panel is not wrapped on resize, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1786">#1786</a></li>
-  <li><code>Run With Coverage</code> should work fine with version managers, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1787">@floreal</a></li>
-  <li>Typing and removing parens, brackets and braces as quotes for quote-like operators inside normal parens, brackets and braces now works
-    properly, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1791">@aldem</a></li>
-  <li>Better inline POD handling, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1795">@Christoffen</a></li>
+
 </ul>
