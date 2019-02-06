@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testParentSub() {doTest();}
+
   public void testPodInTheData() {doTest();}
 
   public void testPodInTheEnd() {doTest();}
