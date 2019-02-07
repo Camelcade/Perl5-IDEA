@@ -1,0 +1,2 @@
+$marked_segment=~s/(['"]$P['"]\s+)$EOS/$1/sg;
+$marked_segment=~s/(['"]$P["']\s+)$EOS/$1/sg;

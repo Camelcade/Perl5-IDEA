@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testFalsePositiveIndexInRegexp() {doTest();}
+
   public void testPackageAsMethod() {doTest();}
 
   public void testParentSub() {doTest();}

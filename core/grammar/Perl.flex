@@ -136,7 +136,7 @@ CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|
 AMBIGOUS_PACKAGES="version"|"JSON"|"YAML"|"Test"
 
 REGEX_COMMENT = "(?#"[^)]*")"
-REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,]
+REGEX_ARRAY_NEGATING = [\^\:\\\[\{\.\,\'\"]
 REGEX_HASH_NEGATING = [\^\:\\\[\{\.\,]
 HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":")
 PRINT_HANDLE_NEGATING = {SPACES_OR_COMMENTS} ("("|"->"|":"|";"|"=>"|"&&"|"||")
