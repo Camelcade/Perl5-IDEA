@@ -928,6 +928,7 @@ private perl_regex_item ::=
 	'regex' |
 //	'\w'	|
 //	custom_char_class |
+        block_compound |
 	interpolated_constructs
 
 //custom_char_class ::= '[[' custom_char_class_body ']]' {pin=1}

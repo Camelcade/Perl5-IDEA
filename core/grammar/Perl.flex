@@ -174,6 +174,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %xstate MATCH_REGEX, MATCH_REGEX_X, MATCH_REGEX_XX, REPLACEMENT_REGEX
 %xstate REGEX_CHARCLASS_X, REGEX_CHARCLASS_XX
 %xstate REGEX_QUOTED_X
+%xstate BLOCK_IN_MATCH_REGEX
 //%xstate LEX_REGEX_CHAR_CLASS, LEX_REGEX_CHAR_CLASS_START
 //%xstate REGEX_POSIX_CHAR_CLASS
 
@@ -455,6 +456,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	<<EOF>>									{yybegin(YYINITIAL);}
 }
 
+
 //////////////////////////////////// REGULAR EXPRESSION ////////////////////////////////////////////////////////////////
 
 /*
@@ -520,6 +522,10 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{LINE_COMMENT}			{return COMMENT_LINE;}
         "["                             {pushStateAndBegin(REGEX_CHARCLASS_X);return REGEX_TOKEN;}
         "\\Q"                           {pushStateAndBegin(REGEX_QUOTED_X);return REGEX_TOKEN;}
+        <MATCH_REGEX>{
+          "(??" / "{"    { pushStateAndBegin(BLOCK_IN_MATCH_REGEX);return REGEX_TOKEN; }
+          "(?" / "{"     { pushStateAndBegin(BLOCK_IN_MATCH_REGEX);return REGEX_TOKEN; }
+        }
 
 	<MATCH_REGEX>
 	{
@@ -534,6 +540,14 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 		}
 	}
 }
+
+<BLOCK_IN_MATCH_REGEX>{
+  "{"	{
+              popState();
+              return startBracedBlock();
+        }
+}
+
 
 <MATCH_REGEX_X,MATCH_REGEX_XX>
 	[^\\ \t\f\n\r$@#\(\[]+	{return REGEX_TOKEN;}

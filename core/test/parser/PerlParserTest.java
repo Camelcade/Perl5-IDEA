@@ -41,6 +41,10 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testMatchRegexWithBlock() {doTest();}
+
+  public void testMatchRegexWithBlockUnclosed() {doTest(false);}
+
   public void testDefaultSub() {doTest();}
 
   public void testFalsePositiveIndexInRegexp() {doTest();}
