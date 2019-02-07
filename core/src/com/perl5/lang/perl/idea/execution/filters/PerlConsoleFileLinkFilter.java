@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.execution.filters;
 
 import com.intellij.execution.filters.Filter;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.execution.PerlRunConsole;
@@ -28,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PerlConsoleFileLinkFilter implements Filter {
+  private static final Logger LOG = Logger.getInstance(PerlConsoleFileLinkFilter.class);
   private static final String FILE_PATH_REGEXP = "((?:(?:\\p{Alpha}:)|/:)?[0-9a-z_A-Z\\-\\\\./]+)";
   private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\bat " + FILE_PATH_REGEXP + " line (\\d+)\\.?\\b");
   @NotNull
@@ -56,7 +58,14 @@ public class PerlConsoleFileLinkFilter implements Filter {
     int lineNumberEndOffset = matcher.end(2);
     PerlHostData hostData = myRunConsole.getHostData();
     String filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
-    int line = Integer.valueOf(matcher.group(2)) - 1;
+    int line;
+    try{
+       line = Integer.valueOf(matcher.group(2)) - 1;
+    }
+    catch (NumberFormatException e){
+      line = 0;
+      LOG.warn("Could not parse int from " + matcher.group(2) + " ; line: " + textLine);
+    }
 
     return new Result(
       lineStartOffset + fileStartOffset,
