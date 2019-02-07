@@ -160,6 +160,7 @@ runIde{
     if( project.hasProperty("traverseUI")){
         args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
     }
+    jvmArgs("-Xmx2048m")
 }
 sourceSets {
     test {
