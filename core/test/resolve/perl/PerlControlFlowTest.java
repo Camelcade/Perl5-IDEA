@@ -144,6 +144,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testLastEvalFor() {doTest();}
 
+  public void testLastEval() {doTest();}
+
+  public void testLastEvalWithLabel() {doTest();}
+
   public void testLastFor() {doTest();}
 
   public void testLastForeach() {doTest();}

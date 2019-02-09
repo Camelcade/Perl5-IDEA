@@ -1,0 +1,10 @@
+'start';
+sub ExceptionFunction {
+    'sub start';
+    eval {
+        'eval start';
+        last;
+    };
+    '<error descr="Unreachable code">sub end</error>';
+}
+'end';

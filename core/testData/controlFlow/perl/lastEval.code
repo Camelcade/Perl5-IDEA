@@ -1,0 +1,10 @@
+'start';
+sub ExceptionFunction {
+    'sub start';
+    eval {
+        'eval start';
+        last;
+    };
+    'sub end';
+}
+'end';
