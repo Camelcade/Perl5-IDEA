@@ -1,0 +1,3 @@
+say <<'HEREDOC';
+<html>This should $var <caret>be <div>sdome</div> injected with  thmls</html>
+HEREDOC

@@ -1,0 +1,4 @@
+say <<"HEREDOC";
+<html>This should <caret>be injected with  thmls</html>
+HEREDOC
+

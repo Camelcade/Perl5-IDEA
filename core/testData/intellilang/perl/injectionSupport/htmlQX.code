@@ -1,0 +1,2 @@
+say `<html>This <caret>should be injected with  thmls</html>`;
+

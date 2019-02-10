@@ -1,0 +1,1 @@
+say '<html>This should <caret>$var be injected with  thmls</html>';

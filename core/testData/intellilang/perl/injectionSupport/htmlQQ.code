@@ -1,0 +1,2 @@
+say "<html>This should be<div><div><b><a <caret>href='test.pl'></a></b></div></div> injected with  thmls</html>";
+

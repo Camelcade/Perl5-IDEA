@@ -15,7 +15,12 @@
   -->
 
 <idea-plugin>
+  <extensions defaultExtensionNs="org.intellij.intelliLang">
+    <languageSupport implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionSupport"/>
+    <injectionConfig config="perlInjections.xml"/>
+  </extensions>
   <extensions defaultExtensionNs="com.intellij">
+    <patterns.patternClass className="com.perl5.lang.perl.idea.intellilang.PerlInjectionPatterns" alias="perl5"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlTemporaryInjectedLanguageDetector"/>
   </extensions>
 </idea-plugin>
