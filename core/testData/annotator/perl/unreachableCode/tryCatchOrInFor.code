@@ -1,0 +1,15 @@
+use Try::Tiny;
+
+sub _filter_tables {
+
+    TABLE: for (@tables) {
+        try {
+            1;
+        }
+        catch {
+            0;
+        } or next TABLE;
+
+        push @filtered_tables, $table;
+    }
+}

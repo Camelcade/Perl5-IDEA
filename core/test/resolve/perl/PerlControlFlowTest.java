@@ -400,6 +400,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testTryCompound() {doTest();}
 
+  public void testTryCatchOrInFor() {doTest();}
+
   public void testTryCatchCompound() {doTest();}
 
   public void testTry() {doTest();}

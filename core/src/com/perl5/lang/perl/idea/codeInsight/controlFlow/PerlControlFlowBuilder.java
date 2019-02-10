@@ -328,7 +328,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         acceptSafe(finallyExpr);
       });
 
-      catchesTails.forEach(tail -> addPendingEdge(o, tail));
+      TransparentInstruction anchor = startTransparentNode(o, "anchor");
+      catchesTails.forEach(tail -> addEdge(tail, anchor));
     }
 
     @Override

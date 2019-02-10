@@ -1,0 +1,33 @@
+0(1) element: null
+1(2) element: PsiPerlUseStatementImpl(USE_STATEMENT)
+2(3) element: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION)
+3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+4(5,21) iterate PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR) using null
+5(6) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: (@tables):true
+6(7) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+7(8) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+8(9,12) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR)
+9(10) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR). Condition: null:true
+10(11) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
+11(12) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+12(13) element: PsiElement(Perl5: or). Condition: try {
+            1;
+        }
+        catch {
+            0;
+        } or next TABLE:false; Partial condition: try {
+            1;
+        }
+        catch {
+            0;
+        } 
+13(14) element: PsiPerlLabelExprImpl(Perl5: LABEL_EXPR)
+14(4) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR)
+15(16) element: PsiPerlLpOrXorExprImpl(Perl5: LP_OR_XOR_EXPR)
+16(17) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+17(18) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+18(19) element: PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
+19(20) element: PsiPerlMethodImpl(Perl5: METHOD)
+20(4) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
+21(22) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::_filter_tables
+22() element: null
