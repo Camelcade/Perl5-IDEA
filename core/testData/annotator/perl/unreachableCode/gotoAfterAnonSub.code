@@ -1,0 +1,12 @@
+sub _worker_sequence_generator {
+    'start';
+    $self->{_last_jmp} = sub {
+      'sub start';
+      goto _WORKER_SEQ_GEN__LAST;
+    };
+    'sub end';
+
+    _WORKER_SEQ_GEN__LAST:
+
+    return;
+}

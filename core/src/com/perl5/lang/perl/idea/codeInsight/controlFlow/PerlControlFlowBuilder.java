@@ -44,6 +44,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
@@ -121,9 +122,25 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         Instruction labelDeclaration = myLabelsDeclarations.get(expr.getText());
         if (labelDeclaration != null) {
           Collection<Instruction> gotoEdges = gotoInstruction.allSucc();
-          gotoEdges.forEach(it -> it.allPred().remove(gotoInstruction));
-          gotoEdges.clear();
-          addEdge(gotoInstruction, labelDeclaration);
+          if (gotoEdges.size() > 1) {
+            throw new RuntimeException(
+              "Goto has more than one out edge: " + gotoEdges.stream().map(
+                instruction -> String.valueOf(instruction.getElement())).collect(Collectors.joining(",")));
+          }
+          else if (gotoEdges.isEmpty()) {
+            addEdge(gotoInstruction, labelDeclaration);
+            LOG.warn("No out edge from goto");
+          }
+          else {
+            PsiElement scopeElement = getGotoScope(perlGotoExpr);
+            PsiElement labelElement = labelDeclaration.getElement();
+            if (labelElement != null && !PsiTreeUtil.isAncestor(scopeElement, labelElement, true)) {
+              continue;
+            }
+            gotoEdges.forEach(it -> it.allPred().remove(gotoInstruction));
+            gotoEdges.clear();
+            addEdge(gotoInstruction, labelDeclaration);
+          }
         }
       }
     }
@@ -191,6 +208,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private static PsiElement getDieScopeBlock(@NotNull PsiElement element) {
     return getNestedBlockOrElement(getDieScope(element));
   }
+
+  @NotNull
+  private static PsiElement getGotoScope(@NotNull PsiPerlGotoExpr o) {
+    return Objects.requireNonNull(getDieScopeBlock(o));
+  }
+
 
   @NotNull
   private static PsiElement getReturnScopeBlock(@NotNull PsiPerlReturnExpr o) {
@@ -721,7 +744,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     public void visitGotoExpr(@NotNull PsiPerlGotoExpr o) {
       super.visitGotoExpr(o);
       myGotos.add(prevInstruction);
-      addPendingEdge(Objects.requireNonNull(getDieScopeBlock(o)), prevInstruction);
+      addPendingEdge(getGotoScope(o), prevInstruction);
       flowAbrupted();
     }
 

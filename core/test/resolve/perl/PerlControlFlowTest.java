@@ -34,6 +34,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testPushLpXorNext() {doTest();}
 
+  public void testGotoAfterAnonSub() {doTest();}
+
   public void testGotoFromInnerSub() {doTest();}
 
   public void testGotoFromInnerFunc() {doTest();}
