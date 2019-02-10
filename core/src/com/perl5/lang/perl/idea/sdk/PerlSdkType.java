@@ -51,8 +51,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -244,9 +242,10 @@ public class PerlSdkType extends SdkType {
     if (StringUtil.isEmpty(interpreterPath)) {
       return null;
     }
-    List<String> versionLines = PerlRunUtil.getOutputFromProgram(hostData, versionManagerData, interpreterPath, "-v");
 
-    return versionLines.isEmpty() ? null : VersionDescriptor.create(versionLines.get(0));
+    return VersionDescriptor.create(PerlRunUtil.getOutputFromProgram(
+      hostData, versionManagerData,
+      interpreterPath, "-MConfig", "-E", "print qq{perl\n};print qq{$_\n} for @Config{qw/version archname/}"));
   }
 
 
@@ -310,23 +309,19 @@ public class PerlSdkType extends SdkType {
   }
 
   private static class VersionDescriptor {
-    private static final Pattern perlVersionStringPattern = Pattern.compile("\\(([^)]+?)\\) built for (.+)");
-
     private String version;
     private String platform;
 
     @Nullable
-    private static VersionDescriptor create(@Nullable String versionString) {
-      if (versionString == null) {
+    private static VersionDescriptor create(@NotNull List<String> perlResponse) {
+      if (perlResponse.size() != 3 || !StringUtil.equals("perl", perlResponse.get(0))) {
+        LOG.warn("Got inappropriate response from perl: " + StringUtil.join(perlResponse, "\n"));
         return null;
       }
-      Matcher m = perlVersionStringPattern.matcher(versionString);
-      if (!m.find()) {
-        return null;
-      }
+
       VersionDescriptor result = new VersionDescriptor();
-      result.version = m.group(1);
-      result.platform = m.group(2);
+      result.version = perlResponse.get(1);
+      result.platform = perlResponse.get(2);
       return result;
     }
 
