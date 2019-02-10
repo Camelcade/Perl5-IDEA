@@ -1,0 +1,9 @@
+# this is probably works
+sub slice_grep_map (&@)
+{
+    my ($code, $href, %map) = @_;
+    %map or <error descr="Unreachable code">return goto &slice_grep</error>;
+    local %_ = %{$href};
+    no warnings 'uninitialized';    ## no critic (TestingAndDebugging::ProhibitNoWarnings)
+    return map { ($map{$_} => $_{$_}) } grep { $code->($_) } keys %map;
+}

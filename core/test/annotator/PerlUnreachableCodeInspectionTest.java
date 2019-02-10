@@ -33,6 +33,8 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
 
   public void testFlowWithDereference() {doTest();}
 
+  public void testReturnGoto() {doTest();}
+
   public void testReturnConfessIf() {doTest();}
 
   public void testPushXorNext() {doTest();}
