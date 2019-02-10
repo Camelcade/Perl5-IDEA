@@ -6,10 +6,10 @@
 5(6) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: (@tables):true
 6(7) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
 7(8) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR)
-8(9,12) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR)
+8(9,12,15) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR)
 9(10) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR). Condition: null:true
 10(11) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
-11(12) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR)
+11(12,15) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR)
 12(13) element: PsiElement(Perl5: or). Condition: try {
             1;
         }
