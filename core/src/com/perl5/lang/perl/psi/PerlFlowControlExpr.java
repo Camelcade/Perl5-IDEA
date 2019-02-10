@@ -55,6 +55,7 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
     String labelName = labelExpr == null ? null : labelExpr.getText();
 
     PsiPerlStatementImpl containingStatementWithForModifier = getExpr() != null ? null : getWrappingStatementWithForModifier(this);
+    PsiElement closestEval = null;
 
     PsiElement closestBlockContainer = this;
     while (true) {
@@ -84,12 +85,16 @@ public interface PerlFlowControlExpr extends PsiPerlExpr {
       else if (closestBlockContainer instanceof PerlSubDefinition ||
                //blockContainerType == NAMED_BLOCK ||
                blockContainerType == SUB_EXPR) {
-        return PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
+        PsiElement closestElement = PerlPsiUtil.getClosest(closestBlockContainer, containingStatementWithForModifier);
+        return closestEval == null ? closestElement : PerlPsiUtil.getClosest(closestElement, closestEval);
       }
       else if (blockContainerType == DO_EXPR || blockContainerType == EVAL_EXPR) {
         PsiPerlStatementImpl statementWithModifier = getWrappingStatementWithForModifier(closestBlockContainer);
         if (statementWithModifier != null) {
           return PerlPsiUtil.getClosest(statementWithModifier, containingStatementWithForModifier);
+        }
+        else if (blockContainerType == EVAL_EXPR && closestEval == null) {
+          closestEval = closestBlockContainer;
         }
       }
     }

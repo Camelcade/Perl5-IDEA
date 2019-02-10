@@ -5,6 +5,6 @@ sub ExceptionFunction {
         'eval start';
         last;
     };
-    '<error descr="Unreachable code">sub end</error>';
+    'sub end';
 }
 'end';
