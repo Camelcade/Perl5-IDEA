@@ -1,0 +1,7 @@
+sub somesub{
+    say 'hi';
+    eval{
+        goto NEXT;
+    };
+    say 'buy';
+}

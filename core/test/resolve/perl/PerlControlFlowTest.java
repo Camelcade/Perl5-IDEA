@@ -36,6 +36,8 @@ public class PerlControlFlowTest extends PerlLightTestCase {
 
   public void testGotoAfterAnonSub() {doTest();}
 
+  public void testGotoFromInnerEval() {doTest();}
+
   public void testGotoFromInnerSub() {doTest();}
 
   public void testGotoFromInnerFunc() {doTest();}
