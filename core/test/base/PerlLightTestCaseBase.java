@@ -92,6 +92,7 @@ import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.ui.components.breadcrumbs.Crumb;
 import com.intellij.usageView.*;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
@@ -1364,5 +1365,28 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doBreadCrumbsTest() {
+    initWithFileSmartWithoutErrors();
+    CaretModel caretModel = getEditor().getCaretModel();
+    List<Pair<Integer, String>> macros = new ArrayList<>();
+    List<Integer> carets = getAndRemoveCarets();
+    carets.forEach(caretOffset -> {
+      caretModel.moveToOffset(caretOffset);
+      macros.add(Pair.create(caretOffset,
+                             "<" +
+                             StringUtil.join(ContainerUtil.map(myFixture.getBreadcrumbsAtCaret(), this::serializeCrumb), ": ") +
+                             ">"));
+    });
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macros));
+  }
+
+  private String serializeCrumb(@Nullable Crumb crumb) {
+    if (crumb == null) {
+      return "EMPTY";
+    }
+    String tooltip = crumb.getTooltip();
+    return "[" + crumb.getText() + (tooltip == null ? "" : "(" + tooltip + ")") + ", " + getIconText(crumb.getIcon());
   }
 }

@@ -1,0 +1,33 @@
+package Foo::Bar;
+$self->helper(some_helper => sub{
+<caret>
+});
+<caret>
+sub somesub {
+    sub {
+<caret>
+    };
+    <caret>
+}
+
+method somemethos {
+<caret>
+    sub {
+<caret>
+    };
+}
+
+func somefunc {
+    <caret>
+    sub {
+<caret>
+    };
+}
+
+sub {
+<caret>
+};
+
+eval {
+<caret>
+};

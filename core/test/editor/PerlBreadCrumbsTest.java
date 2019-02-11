@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl;
+package editor;
 
-/**
- * Created by hurricup on 12.04.2015.
- */
+import base.PerlLightTestCase;
 
-import com.intellij.lang.Language;
-
-public class PerlLanguage extends Language {
-  public static final PerlLanguage INSTANCE = new PerlLanguage();
-  public static final Language[] ARRAY = new Language[]{INSTANCE};
-  public static final String NAME = "Perl5";
-
-  public PerlLanguage() {
-    super(NAME);
+public class PerlBreadCrumbsTest extends PerlLightTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/breadcrumbs/perl";
   }
 
-  @Override
-  public boolean isCaseSensitive() {
-    return true;
+  public void testInFile() {doTest();}
+
+  public void testInPackage() {doTest();}
+
+  public void testInSecondPackage() {doTest();}
+
+  public void testInNestedPackage() {doTest();}
+
+  private void doTest() {
+    doBreadCrumbsTest();
   }
 }
-

@@ -312,6 +312,8 @@
     <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
 
     <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider" id="perl5"/>
+    <breadcrumbsInfoProvider implementation="com.perl5.lang.perl.idea.ui.breadcrumbs.PerlBreadcrumbsProvider"/>
+    <iconProvider implementation="com.perl5.lang.perl.idea.ui.PerlIconProvider"/>
 
     <lang.refactoringSupport language="Perl5"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>

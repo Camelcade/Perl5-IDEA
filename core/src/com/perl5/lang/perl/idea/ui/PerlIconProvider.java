@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl;
+package com.perl5.lang.perl.idea.ui;
 
-/**
- * Created by hurricup on 12.04.2015.
- */
+import com.intellij.ide.IconProvider;
+import com.intellij.psi.PsiElement;
+import com.perl5.PerlIcons;
+import com.perl5.lang.perl.psi.PerlSubExpr;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import com.intellij.lang.Language;
+import javax.swing.*;
 
-public class PerlLanguage extends Language {
-  public static final PerlLanguage INSTANCE = new PerlLanguage();
-  public static final Language[] ARRAY = new Language[]{INSTANCE};
-  public static final String NAME = "Perl5";
-
-  public PerlLanguage() {
-    super(NAME);
-  }
-
+public class PerlIconProvider extends IconProvider {
+  @Nullable
   @Override
-  public boolean isCaseSensitive() {
-    return true;
+  public Icon getIcon(@NotNull PsiElement element, int flags) {
+    if (element instanceof PerlSubExpr) {
+      return PerlIcons.ANON_SUB_ICON;
+    }
+    return null;
   }
 }
 
