@@ -447,6 +447,8 @@
     <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
     <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
 
+    <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>
+    <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
     <lang.foldingBuilder language="Perl5 POD"
                          implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
     <lang.psiStructureViewFactory language="Perl5 POD"

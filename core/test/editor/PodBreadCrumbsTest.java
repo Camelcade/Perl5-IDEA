@@ -16,23 +16,15 @@
 
 package editor;
 
-import base.PerlLightTestCase;
+import base.PodLightTestCase;
 
-public class PerlBreadCrumbsTest extends PerlLightTestCase {
+public class PodBreadCrumbsTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/breadcrumbs/perl";
+    return "testData/breadcrumbs/pod";
   }
 
   public void testInFile() {doTest();}
-
-  public void testInPackage() {doTest();}
-
-  public void testInSecondPackage() {doTest();}
-
-  public void testInNestedPackage() {doTest();}
-
-  public void testPodInFile() {doTest();}
 
   private void doTest() {
     doBreadCrumbsTest();

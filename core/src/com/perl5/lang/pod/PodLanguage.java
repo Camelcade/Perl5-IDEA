@@ -23,6 +23,7 @@ import com.intellij.lang.Language;
  */
 public class PodLanguage extends Language {
   public static final PodLanguage INSTANCE = new PodLanguage();
+  public static final Language[] ARRAY = new Language[]{INSTANCE};
   public static final String NAME = "Perl5 POD";
 
   public PodLanguage() {

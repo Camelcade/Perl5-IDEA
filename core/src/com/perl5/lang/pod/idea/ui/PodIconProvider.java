@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 
-package editor;
+package com.perl5.lang.pod.idea.ui;
 
-import base.PerlLightTestCase;
+import com.intellij.ide.IconProvider;
+import com.intellij.psi.PsiElement;
+import com.perl5.PerlIcons;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class PerlBreadCrumbsTest extends PerlLightTestCase {
+import javax.swing.*;
+
+public class PodIconProvider extends IconProvider {
+
+  @Nullable
   @Override
-  protected String getTestDataPath() {
-    return "testData/breadcrumbs/perl";
-  }
-
-  public void testInFile() {doTest();}
-
-  public void testInPackage() {doTest();}
-
-  public void testInSecondPackage() {doTest();}
-
-  public void testInNestedPackage() {doTest();}
-
-  public void testPodInFile() {doTest();}
-
-  private void doTest() {
-    doBreadCrumbsTest();
+  public Icon getIcon(@NotNull PsiElement element, int flags) {
+    if (element instanceof PodTitledSection) {
+      return PerlIcons.POD_FILE;
+    }
+    return null;
   }
 }

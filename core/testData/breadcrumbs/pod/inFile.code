@@ -1,0 +1,40 @@
+Text<caret>
+
+=head1 header1<caret>
+
+Text<caret>
+
+=head2 header2<caret>
+
+Text<caret>
+
+=head3 header3<caret>
+
+Text<caret>
+
+=head4 header4<caret>
+
+=over<caret>
+
+text<caret>
+
+=item Titled item<caret>
+
+Text<caret>
+
+=Item Other titled item<caret>
+
+Text<caret>
+
+=back<caret>
+
+=over<caret>
+
+text<caret>
+
+=item *<caret>
+
+Text<caret>
+
+=back<caret>
+
