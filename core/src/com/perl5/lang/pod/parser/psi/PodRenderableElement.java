@@ -21,17 +21,13 @@ package com.perl5.lang.pod.parser.psi;
  */
 public interface PodRenderableElement {
   /**
-   * Returns HTML representation of a subtree
-   *
-   * @param builder builder to append to
+   * Appends HTML representation of the section to the {@code builder}
    */
   void renderElementAsHTML(StringBuilder builder, PodRenderingContext context);
 
 
   /**
-   * Returns Text representation of a subtree
-   *
-   * @param builder builder to append to
+   * Appends text representation of the section to the {@code builder}
    */
   void renderElementAsText(StringBuilder builder, PodRenderingContext context);
 }
