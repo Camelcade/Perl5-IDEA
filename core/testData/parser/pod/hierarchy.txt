@@ -807,7 +807,7 @@ POD file
         PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
           <empty list>
         PsiElement(Perl5 POD: POD_NEWLINE)('\n')
-        PsiCutSectionImpl(Perl5 POD: CUT_SECTION)
-          PsiElement(Perl5 POD: POD_CUT)('=cut')
-          PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
-            <empty list>
+      PsiCutSectionImpl(Perl5 POD: CUT_SECTION)
+        PsiElement(Perl5 POD: POD_CUT)('=cut')
+        PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
+          <empty list>

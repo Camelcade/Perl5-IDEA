@@ -23,10 +23,14 @@ import com.perl5.lang.pod.parser.psi.PodSectionParagraph;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.pod.parser.psi.util.PodRenderUtil.PARAGRAPH_PREFIX;
+import static com.perl5.lang.pod.parser.psi.util.PodRenderUtil.PARAGRAPH_SUFFIX;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PodSectionParagraphMixin extends PodSectionMixin implements PodSectionParagraph {
+
   public PodSectionParagraphMixin(@NotNull ASTNode node) {
     super(node);
   }
@@ -36,9 +40,9 @@ public class PodSectionParagraphMixin extends PodSectionMixin implements PodSect
     PsiElement firstChild = getFirstChild();
 
     if (firstChild != null) {
-      builder.append("<p style=\"padding-bottom: 10px;\">");
+      builder.append(PARAGRAPH_PREFIX);
       PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
-      builder.append("</p>");
+      builder.append(PARAGRAPH_SUFFIX);
     }
   }
 

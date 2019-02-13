@@ -32,6 +32,9 @@ import java.net.URLEncoder;
  * Created by hurricup on 26.03.2016.
  */
 public class PodRenderUtil implements PodElementTypes {
+  public static final String PARAGRAPH_PREFIX = "<p style=\"padding-bottom: 10px;\">";
+  public static final String PARAGRAPH_SUFFIX = "</p>";
+
   public static String renderPsiElementAsHTML(@Nullable PsiElement firstElement) {
     return renderPsiRangeAsHTML(firstElement, firstElement);
   }

@@ -22,9 +22,9 @@ text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [
 
 Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Titled item, /perl5language.png, null]>
 
-=Item Other titled item<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Titled item, /perl5language.png, null]: [Other titled item, /perl5language.png, null]>
+=item Other titled item<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Other titled item, /perl5language.png, null]>
 
-Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Titled item, /perl5language.png, null]: [Other titled item, /perl5language.png, null]>
+Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]: [Other titled item, /perl5language.png, null]>
 
 =back<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
 
@@ -37,4 +37,3 @@ text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [
 Text<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
 
 =back<[header1, /perl5language.png, null]: [header2, /perl5language.png, null]: [header3, /perl5language.png, null]: [header4, /perl5language.png, null]>
-

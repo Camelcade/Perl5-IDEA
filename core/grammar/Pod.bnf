@@ -31,6 +31,7 @@ limitations under the License.
   mixin("head4_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH4Mixin"
   mixin("pod_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionParagraphMixin"
   mixin("pod_verbatim_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionVerbatimParagraphMixin"
+  mixin("unknown_section")="com.perl5.lang.pod.parser.psi.mixin.PodUnknownSectionMixIn"
 
   mixin("over_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionOverMixin"
   mixin("over_section_content")="com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContentMixin"
@@ -229,7 +230,7 @@ encoding_section ::= POD_ENCODING <<collapseNonSpaceTo 'POD_ENCODING_NAME '>> PO
 
 cut_section ::= POD_CUT [parse_section_title] POD_NEWLINE* {pin=1}
 
-unknown_section ::= POD_UNKNOWN [parse_section_title [any_level_item*]] POD_NEWLINE*  {pin=1}
+unknown_section ::= POD_UNKNOWN [parse_section_title] POD_NEWLINE*  {pin=1}
 
 
 private pod_term ::=
