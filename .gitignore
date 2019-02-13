@@ -11,6 +11,7 @@ core/testData/controlFlow/perl/svg/
 .idea/libraries/
 .idea/scopes/
 .idea/inspectionProfiles/
+.idea/.name
 testData/controlFlow/perl/svg/
 tmp/
 temp/
