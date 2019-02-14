@@ -33,6 +33,8 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
+import com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
@@ -163,6 +165,13 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       }
     }
 
+    if (PerlTargetElementEvaluatorEx2.getLightNameIdentifierOwner(contextElement) != null) {
+      PsiElement targetElement = findInlinePodElement(editor);
+      if (targetElement != null) {
+        return targetElement;
+      }
+    }
+
     return super.getCustomDocumentationElement(editor, file, contextElement);
   }
 
@@ -170,6 +179,9 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   @Nullable
   protected PsiElement findInlinePodElement(@NotNull Editor editor) {
     PsiElement targetElement = findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
+    if (targetElement instanceof PerlPodAwareElement) {
+      targetElement = ((PerlPodAwareElement)targetElement).getPodAnchor();
+    }
     PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
     if (podBlock != null) {
       return podBlock;

@@ -35,6 +35,12 @@ public class PerlDocumentationTest extends PerlLightTestCase {
     return "testData/documentation/perl";
   }
 
+  public void testPodWeaverAttr() {doTest();}
+
+  public void testPodWeaverFunc() {doTest();}
+
+  public void testPodWeaverMethod() {doTest();}
+
   public void testUnknownSectionWithContent() {doTest();}
 
   public void testSubDefinitionInline() {doTest();}

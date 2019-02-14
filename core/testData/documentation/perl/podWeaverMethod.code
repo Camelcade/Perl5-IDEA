@@ -1,0 +1,35 @@
+=pod
+
+=head1 METHODS
+
+=method somemethod
+
+Method description
+
+=cut
+
+method some<caret>method{
+
+}
+
+=head1 ATTRIBUTES
+
+=attr someattr
+
+Attribute description
+
+=cut
+
+has someattr => (is => 'rw');
+
+=head1 FUNCTIONS
+
+=func somefunc
+
+Function dscription
+
+=cut
+
+func somefunc{
+}
+

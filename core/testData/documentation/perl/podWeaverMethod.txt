@@ -1,0 +1,3 @@
+
+
+<h1>METHODS</h1><h2>somemethod</h2><p style="padding-bottom: 10px;">Method description</p>
