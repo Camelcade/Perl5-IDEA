@@ -1,0 +1,35 @@
+
+=head1 METHODS
+
+=method somemethod<[METHODS, /perl5language.png, null]: [somemethod, /perl5language.png, null]>
+
+Method description<[METHODS, /perl5language.png, null]: [somemethod, /perl5language.png, null]>
+
+=head1 ATTRIBUTES
+
+=attr someattr<[ATTRIBUTES, /perl5language.png, null]: [someattr, /perl5language.png, null]>
+
+Attribute description<[ATTRIBUTES, /perl5language.png, null]: [someattr, /perl5language.png, null]>
+
+=head1 FUNCTIONS
+
+=func somefunc<[FUNCTIONS, /perl5language.png, null]: [somefunc, /perl5language.png, null]>
+
+Function dscription<[FUNCTIONS, /perl5language.png, null]: [somefunc, /perl5language.png, null]>
+
+=head1 OVERVIEW
+
+Some overview text
+
+=method othermethod<[OVERVIEW, /perl5language.png, null]: [othermethod, /perl5language.png, null]>
+
+Other method description<[OVERVIEW, /perl5language.png, null]: [othermethod, /perl5language.png, null]>
+
+=func otherfunc<[OVERVIEW, /perl5language.png, null]: [otherfunc, /perl5language.png, null]>
+
+Other func description<[OVERVIEW, /perl5language.png, null]: [otherfunc, /perl5language.png, null]>
+
+=attr otherattr<[OVERVIEW, /perl5language.png, null]: [otherattr, /perl5language.png, null]>
+
+Other attr description<[OVERVIEW, /perl5language.png, null]: [otherattr, /perl5language.png, null]>
+

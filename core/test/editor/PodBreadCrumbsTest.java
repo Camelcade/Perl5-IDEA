@@ -24,6 +24,8 @@ public class PodBreadCrumbsTest extends PodLightTestCase {
     return "testData/breadcrumbs/pod";
   }
 
+  public void testPodWeaverTags() {doTest();}
+
   public void testInFile() {doTest();}
 
   private void doTest() {
