@@ -1,0 +1,30 @@
+PodSubReference at (13,20); text in range: 'METHODS' => 0 results:
+
+PodSubReference at (30,40); text in range: 'somemethod' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::somemethod at 68 in podWeaverTags.pl
+
+PodSubReference at (98,108); text in range: 'ATTRIBUTES' => 0 results:
+
+PodSubReference at (116,124); text in range: 'someattr' => 1 results:
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::someattr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 159 in podWeaverTags.pl
+
+PerlSubReference at (155,158); text in range: 'has' => 0 results:
+
+PodSubReference at (193,202); text in range: 'FUNCTIONS' => 0 results:
+
+PodSubReference at (210,218); text in range: 'somefunc' => 1 results:
+	PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::somefunc at 247 in podWeaverTags.pl
+
+PodSubReference at (272,280); text in range: 'OVERVIEW' => 0 results:
+
+PodSubReference at (311,322); text in range: 'othermethod' => 1 results:
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::othermethod at 356 in podWeaverTags.pl
+
+PodSubReference at (386,395); text in range: 'otherfunc' => 1 results:
+	PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::otherfunc at 427 in podWeaverTags.pl
+
+PodSubReference at (453,462); text in range: 'otherattr' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::otherattr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 498 in podWeaverTags.pl
+
+PerlSubReference at (494,497); text in range: 'has' => 0 results:
+

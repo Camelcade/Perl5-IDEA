@@ -25,9 +25,11 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -37,6 +39,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by hurricup on 05.04.2016.
@@ -64,6 +67,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
     String subName = element.getText();
     if (StringUtil.isNotEmpty(subName)) {
       final PsiFile containingFile = element.getContainingFile();
+      // this is a bit lame. we could try to detect from perl context. But unsure
       String packageName = PodFileUtil.getPackageName(containingFile);
 
       List<ResolveResult> results = new ArrayList<>();
@@ -79,17 +83,29 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
       }
 
       if (results.isEmpty()) {
-        final PsiFile perlFile = containingFile.getViewProvider().getStubBindingRoot();
-
-        for (PerlSubElement subBase : PsiTreeUtil.findChildrenOfType(perlFile, PerlSubElement.class)) {
-          String subBaseName = subBase.getName();
+        Consumer<? super PerlSubElement> subConsumer = it -> {
+          String subBaseName = it.getName();
           if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
-            results.add(new PsiElementResolveResult(subBase));
+            results.add(new PsiElementResolveResult(it));
           }
-        }
+        };
+
+        PsiTreeUtil.processElements(containingFile.getViewProvider().getStubBindingRoot(), it -> {
+          if (it instanceof PerlSubElement) {
+            subConsumer.accept((PerlSubElement)it);
+          }
+          else if (it instanceof PerlPolyNamedElement) {
+            for (PerlDelegatingLightNamedElement lightElement : ((PerlPolyNamedElement)it).getLightElements()) {
+              if (lightElement instanceof PerlSubElement) {
+                subConsumer.accept((PerlSubElement)lightElement);
+              }
+            }
+          }
+          return true;
+        });
       }
 
-      return results.toArray(new ResolveResult[results.size()]);
+      return results.toArray(ResolveResult.EMPTY_ARRAY);
     }
 
     return ResolveResult.EMPTY_ARRAY;

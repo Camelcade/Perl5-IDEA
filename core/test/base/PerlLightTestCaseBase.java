@@ -99,6 +99,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
@@ -127,6 +128,7 @@ import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
 import junit.framework.AssertionFailedError;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
@@ -505,14 +507,17 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private List<PsiReference> collectFileReferences() {
     final List<PsiReference> references = new ArrayList<>();
 
-    PsiFile file = getFile();
-
-    file.accept(new PsiElementVisitor() {
-      @Override
-      public void visitElement(PsiElement element) {
-        Collections.addAll(references, element.getReferences());
-        element.acceptChildren(this);
+    getFile().getViewProvider().getAllFiles().forEach(file -> {
+      if (!file.getLanguage().isKindOf(PerlLanguage.INSTANCE) && !file.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
+        return;
       }
+      file.accept(new PsiElementVisitor() {
+        @Override
+        public void visitElement(PsiElement element) {
+          Collections.addAll(references, element.getReferences());
+          element.acceptChildren(this);
+        }
+      });
     });
 
     references.sort((o1, o2) -> o1.getElement().getTextRange().getStartOffset() + o1.getRangeInElement().getStartOffset() -
