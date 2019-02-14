@@ -55,6 +55,8 @@ NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 
+HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
+
 %state LEX_PREPARSED_ITEMS
 %state LEX_COMMAND_READY, LEX_COMMAND_WAITING
 %%
@@ -62,7 +64,7 @@ NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 <LEX_COMMAND_WAITING>{
 	"=pod"			{yybegin(YYINITIAL);return POD_POD;}
 	"=head1"		{yybegin(YYINITIAL);return POD_HEAD1;}
-	"=head2"		{yybegin(YYINITIAL);return POD_HEAD2;}
+	{HEAD2_TOKEN}		{yybegin(YYINITIAL);return POD_HEAD2;}
 	"=head3"		{yybegin(YYINITIAL);return POD_HEAD3;}
 	"=head4"		{yybegin(YYINITIAL);return POD_HEAD4;}
 	"=item"			{yybegin(YYINITIAL);return POD_ITEM;}

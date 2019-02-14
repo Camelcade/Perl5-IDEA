@@ -31,6 +31,8 @@ public class PODParserTest extends PerlParserTestBase {
     return "testData/parser/pod";
   }
 
+  public void testPodWeaverTags() {doTest();}
+
   public void testUnknownSectionWIthContent() {doTest();}
 
   public void testHierarchy() {
