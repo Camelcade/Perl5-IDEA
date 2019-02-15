@@ -92,7 +92,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return null;
     }
 
-    VirtualFile virtualFile = PsiUtilCore.getVirtualFile(sourcePsiFile);
+    VirtualFile virtualFile = ReadAction.compute(() -> PsiUtilCore.getVirtualFile(sourcePsiFile));
     if (virtualFile == null) {
       return null;
     }
