@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebuggerSettings;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class PerlSetUpDescriptor {
   private boolean enableCompileTimeBreakpoints;
   private boolean enableNonInteractiveMode;
   private String initCode;
+  private List<PerlDebuggerSettings.Item> renderers;
 
   public PerlSetUpDescriptor(List<PerlLineBreakPointDescriptor> breakpoints, PerlDebugOptions debugProfileState) {
     this.breakpoints = breakpoints;
@@ -39,5 +41,6 @@ public class PerlSetUpDescriptor {
     this.enableCompileTimeBreakpoints = debugProfileState.isCompileTimeBreakpointsEnabled();
     this.enableNonInteractiveMode = debugProfileState.isNonInteractiveModeEnabled();
     this.initCode = debugProfileState.getInitCode();
+    this.renderers = PerlDebuggerSettings.getInstance().getDataRenderers();
   }
 }

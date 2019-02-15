@@ -273,6 +273,7 @@
     <programRunner implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerProgramRunner"/>
     <xdebugger.breakpointType
         implementation="com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType"/>
+    <xdebugger.settings implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerSettings"/>
 
     <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.PerlConfigurationProducer"/>
     <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>

@@ -20,6 +20,12 @@
   <li>Support for the <a href="https://metacpan.org/pod/Pod::Weaver">Pod::Weaver</a> syntax, by <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1839">@Zaitsev</a>.
   </li>
+  <li>Debugger is now displays stringified objects representation if <code>""</code> operator is overloaded. Additionally, you may specify
+    custom renderer for any package, using
+    <code>File | Settings | Build, Execution, Deployment | Debugger | Data Views | Perl5 Type Renderers</code> settings (requires <a
+        href="https://metacpan.org/pod/Devel::Camelcadedb">debugger module</a> 2019.1), by <a
+        href="https://github.com/Camelcade/Perl5-IDEA/issues/1750">@cdalvaro</a>.
+  </li>
 </ul>
 <p>Fixes:</p>
 <li>It's now possible to add perl with non-default <code>-v</code> response, by <a

@@ -25,6 +25,8 @@ public class PerlValueDescriptor {
   private String name;
   private String type;
   private String value;
+  private String rendered;
+  private boolean render_error;
   private int ref_depth; // how many references been skipped
   private String key;        // key to fetch additional elements, basically text representation of reference
   private int size;        // size used for arrays/hashes elements
@@ -77,6 +79,14 @@ public class PerlValueDescriptor {
 
   public boolean isUtf() {
     return is_utf;
+  }
+
+  public String getRendered() {
+    return rendered;
+  }
+
+  public boolean isRenderError() {
+    return render_error;
   }
 
   @Nullable

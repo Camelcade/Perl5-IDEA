@@ -102,33 +102,40 @@ public class PerlXNamedValue extends XNamedValue {
 
   @Override
   public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place) {
-    node.setPresentation(calculateIcon(), calculateType(), myPerlValueDescriptor.getValue(), myPerlValueDescriptor.isExpandableNode());
+    node.setPresentation(calculateIcon(), computeType(), computeValue(), myPerlValueDescriptor.isExpandableNode());
   }
 
-  protected String calculateType() {
-    String value = myPerlValueDescriptor.getType();
+  private String computeValue() {
+    String value = myPerlValueDescriptor.getValue();
+
+    String rendered = myPerlValueDescriptor.getRendered();
+    return StringUtil.isEmpty(rendered) ? value : rendered + " (" + value + ")";
+  }
+
+  protected String computeType() {
+    String type = myPerlValueDescriptor.getType();
 
     int refDepth = myPerlValueDescriptor.getRefDepth();
     if (refDepth == 1) {
-      value = "REF to " + value;
+      type = "REF to " + type;
     }
     else if (refDepth > 0) {
-      value = "REF(" + refDepth + ") to " + value;
+      type = "REF(" + refDepth + ") to " + type;
     }
 
     if (myPerlValueDescriptor.getLayers() != null) {
-      value += ", IOLayers";
+      type += ", IOLayers";
     }
 
     if (myPerlValueDescriptor.getTiedWith() != null) {
-      value += ", Tied";
+      type += ", Tied";
     }
 
     if (myPerlValueDescriptor.getFileno() != null) {
-      value += ", fileno: " + myPerlValueDescriptor.getFileno();
+      type += ", fileno: " + myPerlValueDescriptor.getFileno();
     }
 
-    return value;
+    return type;
   }
 
   @Nullable

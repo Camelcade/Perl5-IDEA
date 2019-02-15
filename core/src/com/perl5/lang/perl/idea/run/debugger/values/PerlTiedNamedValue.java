@@ -51,7 +51,7 @@ public class PerlTiedNamedValue extends XValueGroup {
   @Nullable
   @Override
   public String getComment() {
-    return myPerlXNamedValue.calculateType();
+    return myPerlXNamedValue.computeType();
   }
 
   @Override
