@@ -29,6 +29,27 @@
             <option name="POD_COMMAND" value="true"/>
         </context>
     </template>
+    <template name="at" value="=attr $TEXT$&#10;&#10;$END$&#10;" description="=head2" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="fu" value="=func $TEXT$&#10;&#10;$END$&#10;" description="=head2" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
+    <template name="me" value="=method $TEXT$&#10;&#10;$END$&#10;" description="=head2" toReformat="true"
+              toShortenFQNames="true">
+        <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="POD_COMMAND" value="true"/>
+        </context>
+    </template>
     <template name="h3" value="=head3 $TEXT$&#10;&#10;$END$&#10;" description="=head3" toReformat="true"
               toShortenFQNames="true">
         <variable name="TEXT" expression="&quot;title&quot;" defaultValue="" alwaysStopAt="true"/>

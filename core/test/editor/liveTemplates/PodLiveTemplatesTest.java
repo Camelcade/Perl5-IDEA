@@ -33,6 +33,12 @@ public class PodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testH2() {doTest("h2");}
 
+  public void testAttr() {doTest("at");}
+
+  public void testMethod() {doTest("me");}
+
+  public void testFunc() {doTest("fu");}
+
   public void testH3() {doTest("h3");}
 
   public void testH4() {doTest("h4");}
