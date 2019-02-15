@@ -17,7 +17,6 @@
 package completion;
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 
@@ -25,12 +24,6 @@ import com.perl5.lang.perl.internals.PerlVersion;
  * Created by hurricup on 04.03.2016.
  */
 public class PerlCompletionTest extends PerlLightTestCase {
-
-
-  @Override
-  public String getFileExtension() {
-    return PerlFileTypeScript.EXTENSION_PL;
-  }
 
   @Override
   protected void setUp() throws Exception {

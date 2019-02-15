@@ -1,0 +1,4 @@
+Lookups: mojo_attr([$new_value]); Text: mojo_attr([$new_value]); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: moose_attr([$new_value]); Text: moose_attr([$new_value]); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: somemethod(); Text: somemethod(); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: somesub(); Text: somesub(); Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null

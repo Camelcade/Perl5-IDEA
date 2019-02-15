@@ -23,14 +23,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementResolveResult;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
@@ -39,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * Created by hurricup on 05.04.2016.
@@ -83,23 +79,10 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
       }
 
       if (results.isEmpty()) {
-        Consumer<? super PerlSubElement> subConsumer = it -> {
+        PerlPsiUtil.processSubElements(containingFile.getViewProvider().getStubBindingRoot(), it -> {
           String subBaseName = it.getName();
           if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
             results.add(new PsiElementResolveResult(it));
-          }
-        };
-
-        PsiTreeUtil.processElements(containingFile.getViewProvider().getStubBindingRoot(), it -> {
-          if (it instanceof PerlSubElement) {
-            subConsumer.accept((PerlSubElement)it);
-          }
-          else if (it instanceof PerlPolyNamedElement) {
-            for (PerlDelegatingLightNamedElement lightElement : ((PerlPolyNamedElement)it).getLightElements()) {
-              if (lightElement instanceof PerlSubElement) {
-                subConsumer.accept((PerlSubElement)lightElement);
-              }
-            }
           }
           return true;
         });

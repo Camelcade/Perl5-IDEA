@@ -306,7 +306,7 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   public static boolean processElementsFromPsi(
     @Nullable PsiElement element,
-    @Nullable Processor<PsiElement> processor,
+    @Nullable Processor<? super PsiElement> processor,
     @Nullable Class<? extends PsiElement> avoidClass
   ) {
     if (element == null || processor == null) {
@@ -319,8 +319,7 @@ public class PerlPsiUtil implements PerlElementTypes {
         return false;
       }
 
-      if (avoidClass == null || !avoidClass.isInstance(child)) // don't enter subclasses
-      {
+      if (avoidClass == null || !avoidClass.isInstance(child)) { // don't enter subclasses
         if (!processElementsFromPsi(child, processor, avoidClass)) {
           return false;
         }
@@ -681,5 +680,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     public HeredocProcessor(int lineEndOffset) {
       this.lineEndOffset = lineEndOffset;
     }
+  }
+
+  public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
+    return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
   }
 }

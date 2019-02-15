@@ -1,0 +1,23 @@
+=pod
+
+=method <caret>
+
+=cut
+
+sub somesub{
+
+}
+
+method somemethod{
+
+}
+
+func somefunc{
+
+}
+
+has mojo_attr => sub{
+
+};
+
+has moose_attr => (is => 'rw');
