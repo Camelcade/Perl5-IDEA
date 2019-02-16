@@ -131,7 +131,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   public static ElementManipulator getManipulator(PsiElement element) {
     ElementManipulator manipulator = ElementManipulators.getManipulator(element);
     if (manipulator == null) {
-      throw new IncorrectOperationException("Unable to find manipulator for " + element);
+      throw new IncorrectOperationException("Unable to find manipulator for " + element.getClass().getName());
     }
     return manipulator;
   }
