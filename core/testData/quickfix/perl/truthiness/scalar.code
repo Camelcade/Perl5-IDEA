@@ -1,0 +1,81 @@
+# scalar
+if ($a) {}
+elsif ($a) {}
+say if $a;
+unless ($a) {}
+say unless $a;
+while ($a) {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+

@@ -1,0 +1,81 @@
+# scalar
+if (<warning descr="Ambiguous condition">${somemethod()}</warning>) {}
+elsif (<warning descr="Ambiguous condition">${somemethod()}</warning>) {}
+say if <warning descr="Ambiguous condition">${somemethod()}</warning>;
+unless (<warning descr="Ambiguous condition">${somemethod()}</warning>) {}
+say unless <warning descr="Ambiguous condition">${somemethod()}</warning>;
+while (<warning descr="Ambiguous condition">${somemethod()}</warning>) {}
+say while <warning descr="Ambiguous condition">${somemethod()}</warning>;
+until (<warning descr="Ambiguous condition">${somemethod()}</warning>) {}
+say until <warning descr="Ambiguous condition">${somemethod()}</warning>;
+say for ${somemethod()};
+for (${somemethod()}) {}
+for (; <warning descr="Ambiguous condition">${somemethod()}</warning>;) {}
+when (${somemethod()}) {}
+given (${somemethod()}) {}
+
+# negated scalar
+if (<warning descr="Ambiguous condition">!${somemethod()}</warning>) {}
+elsif (<warning descr="Ambiguous condition">!${somemethod()}</warning>) {}
+say if <warning descr="Ambiguous condition">!${somemethod()}</warning>;
+unless (<warning descr="Ambiguous condition">!${somemethod()}</warning>) {}
+say unless <warning descr="Ambiguous condition">!${somemethod()}</warning>;
+while (<warning descr="Ambiguous condition">!${somemethod()}</warning>) {}
+say while <warning descr="Ambiguous condition">!${somemethod()}</warning>;
+until (<warning descr="Ambiguous condition">!${somemethod()}</warning>) {}
+say until <warning descr="Ambiguous condition">!${somemethod()}</warning>;
+say for !${somemethod()};
+for (!${somemethod()}) {}
+for (; <warning descr="Ambiguous condition">!${somemethod()}</warning>;) {}
+when (!${somemethod()}) {}
+given (!${somemethod()}) {}
+
+# negated scalar
+if (<warning descr="Ambiguous condition">!(${somemethod()})</warning>) {}
+elsif (<warning descr="Ambiguous condition">!(${somemethod()})</warning>) {}
+say if <warning descr="Ambiguous condition">!(${somemethod()})</warning>;
+unless (<warning descr="Ambiguous condition">!(${somemethod()})</warning>) {}
+say unless <warning descr="Ambiguous condition">!(${somemethod()})</warning>;
+while (<warning descr="Ambiguous condition">!(${somemethod()})</warning>) {}
+say while <warning descr="Ambiguous condition">!(${somemethod()})</warning>;
+until (<warning descr="Ambiguous condition">!(${somemethod()})</warning>) {}
+say until <warning descr="Ambiguous condition">!(${somemethod()})</warning>;
+say for !(${somemethod()});
+for (!(${somemethod()})) {}
+for (; <warning descr="Ambiguous condition">!(${somemethod()})</warning>;) {}
+when (!(${somemethod()})) {}
+given (!(${somemethod()})) {}
+
+# negated scalar lp
+if (<warning descr="Ambiguous condition">not ${somemethod()}</warning>) {}
+elsif (<warning descr="Ambiguous condition">not ${somemethod()}</warning>) {}
+say if <warning descr="Ambiguous condition">not ${somemethod()}</warning>;
+unless (<warning descr="Ambiguous condition">not ${somemethod()}</warning>) {}
+say unless <warning descr="Ambiguous condition">not ${somemethod()}</warning>;
+while (<warning descr="Ambiguous condition">not ${somemethod()}</warning>) {}
+say while <warning descr="Ambiguous condition">not ${somemethod()}</warning>;
+until (<warning descr="Ambiguous condition">not ${somemethod()}</warning>) {}
+say until <warning descr="Ambiguous condition">not ${somemethod()}</warning>;
+say for not ${somemethod()};
+for (not ${somemethod()}) {}
+for (; <warning descr="Ambiguous condition">not ${somemethod()}</warning>;) {}
+when (not ${somemethod()}) {}
+given (not ${somemethod()}) {}
+
+# double negated scalar
+if (not !${somemethod()}) {}
+elsif (not !${somemethod()}) {}
+say if not !${somemethod()};
+unless (not !${somemethod()}) {}
+say unless not !${somemethod()};
+while (not !${somemethod()}) {}
+say while not !${somemethod()};
+until (not !${somemethod()}) {}
+say until not !${somemethod()};
+say for not !${somemethod()};
+for (not !${somemethod()}) {}
+for (; not !${somemethod()};) {}
+when (not !${somemethod()}) {}
+given (not !${somemethod()}) {}
+
+

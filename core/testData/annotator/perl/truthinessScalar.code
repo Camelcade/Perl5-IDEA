@@ -1,0 +1,81 @@
+# scalar
+if (<warning descr="Ambiguous condition">$a</warning>) {}
+elsif (<warning descr="Ambiguous condition">$a</warning>) {}
+say if <warning descr="Ambiguous condition">$a</warning>;
+unless (<warning descr="Ambiguous condition">$a</warning>) {}
+say unless <warning descr="Ambiguous condition">$a</warning>;
+while (<warning descr="Ambiguous condition">$a</warning>) {}
+say while <warning descr="Ambiguous condition">$a</warning>;
+until (<warning descr="Ambiguous condition">$a</warning>) {}
+say until <warning descr="Ambiguous condition">$a</warning>;
+say for $a;
+for ($a) {}
+for (; <warning descr="Ambiguous condition">$a</warning>;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (<warning descr="Ambiguous condition">!$a</warning>) {}
+elsif (<warning descr="Ambiguous condition">!$a</warning>) {}
+say if <warning descr="Ambiguous condition">!$a</warning>;
+unless (<warning descr="Ambiguous condition">!$a</warning>) {}
+say unless <warning descr="Ambiguous condition">!$a</warning>;
+while (<warning descr="Ambiguous condition">!$a</warning>) {}
+say while <warning descr="Ambiguous condition">!$a</warning>;
+until (<warning descr="Ambiguous condition">!$a</warning>) {}
+say until <warning descr="Ambiguous condition">!$a</warning>;
+say for !$a;
+for (!$a) {}
+for (; <warning descr="Ambiguous condition">!$a</warning>;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (<warning descr="Ambiguous condition">!($a)</warning>) {}
+elsif (<warning descr="Ambiguous condition">!($a)</warning>) {}
+say if <warning descr="Ambiguous condition">!($a)</warning>;
+unless (<warning descr="Ambiguous condition">!($a)</warning>) {}
+say unless <warning descr="Ambiguous condition">!($a)</warning>;
+while (<warning descr="Ambiguous condition">!($a)</warning>) {}
+say while <warning descr="Ambiguous condition">!($a)</warning>;
+until (<warning descr="Ambiguous condition">!($a)</warning>) {}
+say until <warning descr="Ambiguous condition">!($a)</warning>;
+say for !($a);
+for (!($a)) {}
+for (; <warning descr="Ambiguous condition">!($a)</warning>;) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (<warning descr="Ambiguous condition">not $a</warning>) {}
+elsif (<warning descr="Ambiguous condition">not $a</warning>) {}
+say if <warning descr="Ambiguous condition">not $a</warning>;
+unless (<warning descr="Ambiguous condition">not $a</warning>) {}
+say unless <warning descr="Ambiguous condition">not $a</warning>;
+while (<warning descr="Ambiguous condition">not $a</warning>) {}
+say while <warning descr="Ambiguous condition">not $a</warning>;
+until (<warning descr="Ambiguous condition">not $a</warning>) {}
+say until <warning descr="Ambiguous condition">not $a</warning>;
+say for not $a;
+for (not $a) {}
+for (; <warning descr="Ambiguous condition">not $a</warning>;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+

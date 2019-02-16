@@ -13,6 +13,7 @@
       <w>mojolicious</w>
       <w>perlbrew</w>
       <w>plenv</w>
+      <w>truthiness</w>
     </words>
   </dictionary>
 </component>

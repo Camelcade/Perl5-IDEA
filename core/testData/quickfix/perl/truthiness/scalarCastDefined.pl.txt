@@ -1,0 +1,81 @@
+# scalar
+if (defined ${somesub()}) {}
+elsif (defined ${somesub()}) {}
+say if defined ${somesub()};
+unless (defined ${somesub()}) {}
+say unless defined ${somesub()};
+while (defined ${somesub()}) {}
+say while defined ${somesub()};
+until (defined ${somesub()}) {}
+say until defined ${somesub()};
+say for ${somesub()};
+for (${somesub()}) {}
+for (; defined ${somesub()};) {}
+when (${somesub()}) {}
+given (${somesub()}) {}
+
+# negated scalar
+if (!defined ${somesub()}) {}
+elsif (!defined ${somesub()}) {}
+say if !defined ${somesub()};
+unless (!defined ${somesub()}) {}
+say unless !defined ${somesub()};
+while (!defined ${somesub()}) {}
+say while !defined ${somesub()};
+until (!defined ${somesub()}) {}
+say until !defined ${somesub()};
+say for !${somesub()};
+for (!${somesub()}) {}
+for (; !defined ${somesub()};) {}
+when (!${somesub()}) {}
+given (!${somesub()}) {}
+
+# negated scalar
+if (!(defined ${somesub()})) {}
+elsif (!(defined ${somesub()})) {}
+say if !(defined ${somesub()});
+unless (!(defined ${somesub()})) {}
+say unless !(defined ${somesub()});
+while (!(defined ${somesub()})) {}
+say while !(defined ${somesub()});
+until (!(defined ${somesub()})) {}
+say until !(defined ${somesub()});
+say for !(${somesub()});
+for (!(${somesub()})) {}
+for (; !(defined ${somesub()});) {}
+when (!(${somesub()})) {}
+given (!(${somesub()})) {}
+
+# negated scalar lp
+if (not defined ${somesub()}) {}
+elsif (not defined ${somesub()}) {}
+say if not defined ${somesub()};
+unless (not defined ${somesub()}) {}
+say unless not defined ${somesub()};
+while (not defined ${somesub()}) {}
+say while not defined ${somesub()};
+until (not defined ${somesub()}) {}
+say until not defined ${somesub()};
+say for not ${somesub()};
+for (not ${somesub()}) {}
+for (; not defined ${somesub()};) {}
+when (not ${somesub()}) {}
+given (not ${somesub()}) {}
+
+# double negated scalar
+if (not !${somesub()}) {}
+elsif (not !${somesub()}) {}
+say if not !${somesub()};
+unless (not !${somesub()}) {}
+say unless not !${somesub()};
+while (not !${somesub()}) {}
+say while not !${somesub()};
+until (not !${somesub()}) {}
+say until not !${somesub()};
+say for not !${somesub()};
+for (not !${somesub()}) {}
+for (; not !${somesub()};) {}
+when (not !${somesub()}) {}
+given (not !${somesub()}) {}
+
+

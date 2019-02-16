@@ -1,0 +1,81 @@
+# scalar
+if (defined $a) {}
+elsif (defined $a) {}
+say if defined $a;
+unless (defined $a) {}
+say unless defined $a;
+while (defined $a) {}
+say while defined $a;
+until (defined $a) {}
+say until defined $a;
+say for $a;
+for ($a) {}
+for (; defined $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!defined $a) {}
+elsif (!defined $a) {}
+say if !defined $a;
+unless (!defined $a) {}
+say unless !defined $a;
+while (!defined $a) {}
+say while !defined $a;
+until (!defined $a) {}
+say until !defined $a;
+say for !$a;
+for (!$a) {}
+for (; !defined $a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!(defined $a)) {}
+elsif (!(defined $a)) {}
+say if !(defined $a);
+unless (!(defined $a)) {}
+say unless !(defined $a);
+while (!(defined $a)) {}
+say while !(defined $a);
+until (!(defined $a)) {}
+say until !(defined $a);
+say for !($a);
+for (!($a)) {}
+for (; !(defined $a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not defined $a) {}
+elsif (not defined $a) {}
+say if not defined $a;
+unless (not defined $a) {}
+say unless not defined $a;
+while (not defined $a) {}
+say while not defined $a;
+until (not defined $a) {}
+say until not defined $a;
+say for not $a;
+for (not $a) {}
+for (; not defined $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+

@@ -33,6 +33,14 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     return "testData/annotator/perl";
   }
 
+  public void testTruthinessScalar() {doTruthinessTest();}
+
+  public void testTruthinessScalarCast() {doTruthinessTest();}
+
+  private void doTruthinessTest() {
+    doInspectionTest(PerlTruthinessInspection.class);
+  }
+
   public void testIssue1884() {doTestHashLoopInspection();}
 
   public void testLoopControlInspection() {doTestLoopControlInspection();}

@@ -1,0 +1,81 @@
+# scalar
+if (${somesub()}) {}
+elsif (${somesub()}) {}
+say if ${somesub()};
+unless (${somesub()}) {}
+say unless ${somesub()};
+while (${somesub()}) {}
+say while ${somesub()};
+until (${somesub()}) {}
+say until ${somesub()};
+say for ${somesub()};
+for (${somesub()}) {}
+for (; ${somesub()};) {}
+when (${somesub()}) {}
+given (${somesub()}) {}
+
+# negated scalar
+if (!${somesub()}) {}
+elsif (!${somesub()}) {}
+say if !${somesub()};
+unless (!${somesub()}) {}
+say unless !${somesub()};
+while (!${somesub()}) {}
+say while !${somesub()};
+until (!${somesub()}) {}
+say until !${somesub()};
+say for !${somesub()};
+for (!${somesub()}) {}
+for (; !${somesub()};) {}
+when (!${somesub()}) {}
+given (!${somesub()}) {}
+
+# negated scalar
+if (!(${somesub()})) {}
+elsif (!(${somesub()})) {}
+say if !(${somesub()});
+unless (!(${somesub()})) {}
+say unless !(${somesub()});
+while (!(${somesub()})) {}
+say while !(${somesub()});
+until (!(${somesub()})) {}
+say until !(${somesub()});
+say for !(${somesub()});
+for (!(${somesub()})) {}
+for (; !(${somesub()});) {}
+when (!(${somesub()})) {}
+given (!(${somesub()})) {}
+
+# negated scalar lp
+if (not ${somesub()}) {}
+elsif (not ${somesub()}) {}
+say if not ${somesub()};
+unless (not ${somesub()}) {}
+say unless not ${somesub()};
+while (not ${somesub()}) {}
+say while not ${somesub()};
+until (not ${somesub()}) {}
+say until not ${somesub()};
+say for not ${somesub()};
+for (not ${somesub()}) {}
+for (; not ${somesub()};) {}
+when (not ${somesub()}) {}
+given (not ${somesub()}) {}
+
+# double negated scalar
+if (not !${somesub()}) {}
+elsif (not !${somesub()}) {}
+say if not !${somesub()};
+unless (not !${somesub()}) {}
+say unless not !${somesub()};
+while (not !${somesub()}) {}
+say while not !${somesub()};
+until (not !${somesub()}) {}
+say until not !${somesub()};
+say for not !${somesub()};
+for (not !${somesub()}) {}
+for (; not !${somesub()};) {}
+when (not !${somesub()}) {}
+given (not !${somesub()}) {}
+
+

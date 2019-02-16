@@ -1,0 +1,81 @@
+# scalar
+if ($a == 0) {}
+elsif ($a == 0) {}
+say if $a == 0;
+unless ($a == 0) {}
+say unless $a == 0;
+while ($a == 0) {}
+say while $a == 0;
+until ($a == 0) {}
+say until $a == 0;
+say for $a;
+for ($a) {}
+for (; $a == 0;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a != 0) {}
+elsif ($a != 0) {}
+say if $a != 0;
+unless ($a != 0) {}
+say unless $a != 0;
+while ($a != 0) {}
+say while $a != 0;
+until ($a != 0) {}
+say until $a != 0;
+say for !$a;
+for (!$a) {}
+for (; $a != 0;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a != 0) {}
+elsif ($a != 0) {}
+say if $a != 0;
+unless ($a != 0) {}
+say unless $a != 0;
+while ($a != 0) {}
+say while $a != 0;
+until ($a != 0) {}
+say until $a != 0;
+say for !($a);
+for (!($a)) {}
+for (; $a != 0;) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a != 0) {}
+elsif ($a != 0) {}
+say if $a != 0;
+unless ($a != 0) {}
+say unless $a != 0;
+while ($a != 0) {}
+say while $a != 0;
+until ($a != 0) {}
+say until $a != 0;
+say for not $a;
+for (not $a) {}
+for (; $a != 0;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+

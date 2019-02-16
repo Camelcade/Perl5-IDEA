@@ -873,6 +873,15 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertDoesntContain(lookups, expected);
   }
 
+  protected void doTestMassQuickFixes(@NotNull String fileName, @NotNull Class inspectionClass, @NotNull String quickfixNamePrefix) {
+    initWithFileSmart(fileName);
+    myFixture.enableInspections(inspectionClass);
+    myFixture.getAllQuickFixes().stream()
+      .filter((it) -> it.getText().startsWith(quickfixNamePrefix))
+      .forEach(myFixture::launchAction);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+  }
+
   protected void doTestAnnotationQuickFix(@NotNull String fileName, @NotNull Class inspectionClass, @NotNull String quickFixNamePrefix) {
     initWithFileSmartWithoutErrors(fileName);
     doTestAnnotationQuickFixWithoutInitialization(inspectionClass, quickFixNamePrefix);

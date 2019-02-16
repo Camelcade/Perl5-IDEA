@@ -665,6 +665,10 @@
                      shortName="LoopControlInspection" displayName="Loop control keywords" groupName="Perl5"
                      enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlLoopControlInspection"/>
+    <localInspection language="Perl5"
+                     shortName="TruthinessInspection" displayName="Truthiness" groupName="Perl5"
+                     enabledByDefault="true" level="WARNING"
+                     implementationClass="com.perl5.lang.perl.idea.inspections.PerlTruthinessInspection"/>
 
     <intentionAction>
       <className>com.perl5.lang.perl.idea.intentions.StatementToCompoundIntention</className>
