@@ -27,6 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -75,7 +76,7 @@ public class PerlTruthinessInspection extends PerlInspection {
       private void processExpression(@Nullable PsiElement expression) {
         PsiElement ambiguousExpression = getAmbiguousExpression(expression);
         if (ambiguousExpression != null) {
-          registerProblem(holder, expression, "Ambiguous condition",
+          registerProblem(holder, expression, PerlBundle.message("perl.inspection.truthness.warning"),
                           DefinedQuickFix.INSTANCE, ZeroEqualityFix.INSTANCE, EmptyStringEqualityFix.INSTANCE);
         }
       }
@@ -162,7 +163,7 @@ public class PerlTruthinessInspection extends PerlInspection {
     @NotNull
     @Override
     public String getFamilyName() {
-      return "Add defined check";
+      return PerlBundle.message("perl.inspection.truthness.add.defined");
     }
 
     @Override
@@ -203,7 +204,7 @@ public class PerlTruthinessInspection extends PerlInspection {
     @NotNull
     @Override
     public String getFamilyName() {
-      return "Add zero equality check";
+      return PerlBundle.message("perl.inspection.truthness.add.numeric");
     }
 
     @NotNull
@@ -220,7 +221,7 @@ public class PerlTruthinessInspection extends PerlInspection {
     @NotNull
     @Override
     public String getFamilyName() {
-      return "Add empty string equality check";
+      return PerlBundle.message("perl.inspection.truthness.add.string");
     }
 
     @NotNull
