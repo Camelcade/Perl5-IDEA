@@ -565,16 +565,23 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
   @Nullable
   public Boolean isIncomplete(@NotNull PerlAstBlock block) {
+    ASTNode blockNode = block.getNode();
+    if (blockNode == null) {
+      return null;
+    }
     IElementType elementType = block.getElementType();
     if (elementType == COMMA_SEQUENCE_EXPR) {
-      IElementType lastNodeType = PsiUtilCore.getElementType(block.getNode().getLastChildNode());
+      IElementType lastNodeType = PsiUtilCore.getElementType(blockNode.getLastChildNode());
       if (lastNodeType == COMMA || lastNodeType == FAT_COMMA) {
         return true;
       }
     }
     else if (STATEMENTS.contains(elementType)) {
-      PsiElement lastLeaf = PsiTreeUtil.getDeepestLast(block.getNode().getPsi());
+      PsiElement lastLeaf = PsiTreeUtil.getDeepestLast(blockNode.getPsi());
       return PsiUtilCore.getElementType(lastLeaf) != SEMICOLON;
+    }
+    else if (elementType == BLOCK && PsiUtilCore.getElementType(blockNode.getTreeParent()) == REPLACEMENT_REGEX) {
+      return true;
     }
 
     return null;

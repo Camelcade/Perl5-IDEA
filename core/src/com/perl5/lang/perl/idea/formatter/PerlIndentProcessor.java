@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.idea.formatter;
 
+import com.intellij.formatting.ASTBlock;
+import com.intellij.formatting.Block;
 import com.intellij.formatting.Indent;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -33,6 +35,9 @@ import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLOSERS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
@@ -93,18 +98,18 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     LP_STRING_XQ
   );
 
-  static final TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
-    GREP_EXPR, MAP_EXPR, SORT_EXPR
+  public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
+    LP_STRING_QW,
+    COMMA_SEQUENCE_EXPR,
+    CALL_ARGUMENTS,
+    REGEX_QUOTE_CLOSE
   );
 
   public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
     BLOCK
   );
-
-  public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
-    LP_STRING_QW,
-    COMMA_SEQUENCE_EXPR,
-    CALL_ARGUMENTS
+  static final TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
+    GREP_EXPR, MAP_EXPR, SORT_EXPR, REPLACEMENT_REGEX
   );
 
   private static final TokenSet FOR_ELEMENTS_TOKENSET = TokenSet.create(
@@ -252,9 +257,17 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
     }
 
     if (block instanceof PerlSyntheticBlock && block.getSubBlocks().size() == newChildIndex) {
-      ASTNode parentNode = block.getNode();
+      ASTNode parentNode = Objects.requireNonNull(block.getNode());
       ASTNode grandParentNode = parentNode.getTreeParent();
       return PsiUtilCore.getElementType(grandParentNode) == STATEMENT ? Indent.getNormalIndent() : Indent.getNoneIndent();
+    }
+
+    List<Block> subBlocks = block.getSubBlocks();
+    if (subBlocks.size() > newChildIndex) {
+      Block nextBlock = subBlocks.get(newChildIndex);
+      if (nextBlock instanceof ASTBlock && PsiUtilCore.getElementType(((ASTBlock)nextBlock).getNode()) == BLOCK) {
+        return Indent.getNormalIndent();
+      }
     }
 
     return null;

@@ -28573,7 +28573,7 @@ sub scan_identifier_do {
                 $input_line =~ m/\G\s*
                         ((?:\w*(?:'|::))*) # package - something that ends in :: or '
                         (\w+)              # NAME    - required
-                        /gcx
+                /gcx
         ) {
             $match = 1;
             $subname = $2;
@@ -28602,7 +28602,7 @@ sub scan_identifier_do {
         if (
                 $input_line =~ m/\G(\s*\([^\)\(\}\{\,]*\))? # PROTO
                         (\s*:)?                             # ATTRS leading ':'
-                        /gcx
+                /gcx
                         && ($1 || $2)
         ) {
             $proto = $1;

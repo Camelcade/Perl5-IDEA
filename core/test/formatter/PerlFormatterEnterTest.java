@@ -27,6 +27,12 @@ public class PerlFormatterEnterTest extends PerlFormatterTestCase {
     doTest();
   }
 
+  public void testReplacementBlockBefore() {doTest();}
+
+  public void testReplacementBlockInside() {doTest();}
+
+  public void testReplacementBlockAfter() {doTest();}
+
   public void testCommaSequenceWithFatInSomething() {doTest();}
 
   public void testCommaSequenceWithFatTop() {doTest();}

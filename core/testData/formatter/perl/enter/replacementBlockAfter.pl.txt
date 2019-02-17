@@ -1,0 +1,7 @@
+{
+    $value =~ s{([^\n\r\f\t])}{
+        $char_code = ord($1);
+        $char_code < 32 ? '^' . chr($char_code + 0x40) : $1;
+        <caret>
+    }gsex;
+}

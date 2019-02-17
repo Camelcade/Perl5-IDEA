@@ -23,6 +23,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public interface PerlAstBlock extends ASTBlock {
   void setIndent(@Nullable Indent indent);
 
@@ -32,6 +34,6 @@ public interface PerlAstBlock extends ASTBlock {
 
   @NotNull
   default IElementType getElementType() {
-    return PsiUtilCore.getElementType(getNode());
+    return Objects.requireNonNull(PsiUtilCore.getElementType(getNode()));
   }
 }
