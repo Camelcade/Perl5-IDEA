@@ -19,6 +19,7 @@ package com.perl5.lang.pod.idea.ui.breadcrumbs;
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodSectionItem;
@@ -45,6 +46,25 @@ public class PodBreadCrumbsProvider implements BreadcrumbsProvider {
   @Override
   public Icon getElementIcon(@NotNull PsiElement element) {
     return element.getIcon(0);
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getParent(@NotNull PsiElement element) {
+    return getStructuralParentElement(element);
+  }
+
+  @Nullable
+  public static PsiElement getStructuralParentElement(@NotNull PsiElement element) {
+    PodTitledSection parentSection = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
+    if (parentSection == null) {
+      return null;
+    }
+    if (parentSection instanceof PodSectionItem && ((PodSectionItem)parentSection).isBulleted() ||
+        StringUtil.isEmpty(parentSection.getTitleText())) {
+      return getStructuralParentElement(parentSection);
+    }
+    return parentSection;
   }
 
   @NotNull

@@ -47,6 +47,11 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
   @Nullable
   @Override
   public PsiElement getParent(@NotNull PsiElement element) {
+    return getStructuralParentElement(element);
+  }
+
+  @Nullable
+  public static PsiElement getStructuralParentElement(@NotNull PsiElement element) {
     if (element instanceof PerlFile) {
       return null;
     }
@@ -56,22 +61,34 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
     else if (element instanceof PerlSubDefinitionElement) {
       return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
     }
-    else if (element instanceof PerlSubExpr) {
-      PsiPerlBlock exprBlock = ((PerlSubExpr)element).getBlock();
-      if (exprBlock != null) {
-        PerlPolyNamedElement polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
-        if (polyNamedElement != null) {
-          for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
-            if (lightNamedElement instanceof PerlSubDefinitionElement &&
-                exprBlock.equals(((PerlSubDefinitionElement)lightNamedElement).getSubDefinitionBody())) {
-              return lightNamedElement;
-            }
-          }
+
+    PsiElement nearestParent =
+      PsiTreeUtil.getParentOfType(element, PerlSubDefinitionElement.class, PerlNamespaceDefinitionElement.class, PerlSubExpr.class);
+    if (nearestParent == null ||
+        nearestParent instanceof PerlSubDefinitionElement ||
+        nearestParent instanceof PerlNamespaceDefinitionElement) {
+      return nearestParent;
+    }
+
+    if (nearestParent.getParent() instanceof PerlSubOwner) {
+      return getStructuralParentElement(nearestParent.getParent());
+    }
+
+    PsiPerlBlock exprBlock = ((PerlSubExpr)nearestParent).getBlock();
+    if (exprBlock == null) {
+      return getStructuralParentElement(nearestParent.getParent());
+    }
+
+    PerlPolyNamedElement polyNamedElement = PsiTreeUtil.getParentOfType(nearestParent, PerlPolyNamedElement.class);
+    if (polyNamedElement != null) {
+      for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
+        if (lightNamedElement instanceof PerlSubDefinitionElement &&
+            exprBlock.equals(((PerlSubDefinitionElement)lightNamedElement).getSubDefinitionBody())) {
+          return lightNamedElement;
         }
       }
-      return PsiTreeUtil.getParentOfType(element, PerlSubDefinitionElement.class, PerlNamespaceDefinitionElement.class);
     }
-    return element.getParent();
+    return nearestParent;
   }
 
   @Nullable
