@@ -17,13 +17,20 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
+import com.perl5.lang.perl.psi.impl.PerlImplicitNamespaceDefinition;
 import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +48,25 @@ public interface PerlFile
    */
   void collectIncludedFiles(Set<VirtualFile> includedVirtualFiles);
 
+
+  /**
+   * @return namespace definition psi element from built-in service or synthetic one
+   */
+  @Nullable
+  default PerlNamespaceDefinitionElement getNamespaceDefinitionElement() {
+    String packageName = getPackageName();
+    if (StringUtil.isEmpty(packageName)) {
+      return null;
+    }
+    PerlBuiltInNamespaceDefinition namespaceDefinition =
+      PerlBuiltInNamespacesService.getInstance(getProject()).getNamespaceDefinition(packageName);
+    if (namespaceDefinition != null) {
+      return namespaceDefinition;
+    }
+    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(
+      new PerlImplicitNamespaceDefinition(getManager(), PerlPackageUtil.getCanonicalPackageName(packageName), this),
+      this));
+  }
 
   /**
    * Returns generator for overriding elements
