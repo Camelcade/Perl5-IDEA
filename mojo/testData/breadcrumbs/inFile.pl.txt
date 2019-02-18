@@ -1,0 +1,3 @@
+$self->helper(some_helper => sub{
+<[inFile.pl, /perl5classic.png, null]: [some_helper(), /mojolicious.png>
+});
