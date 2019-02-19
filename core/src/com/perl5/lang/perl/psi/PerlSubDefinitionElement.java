@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlDieScopeWithBLock;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -26,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement, PerlDieScopeWithBLock {
+public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement, PerlDieScopeWithBLock, NavigationItem {
   @Override
   default String getPresentableName() {
     String args = getSubArgumentsListAsString();

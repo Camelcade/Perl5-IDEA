@@ -166,6 +166,7 @@
     <highlightUsagesHandlerFactory order="before mainone"
                                    implementation="com.perl5.lang.perl.idea.codeInsight.highlighting.PerlHighlightExitPointsHandlerFactory"/>
     <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
+    <fileStructureGroupRuleProvider implementation="com.perl5.lang.perl.idea.findusages.PerlFileStructureGroupRuleProvider"/>
     <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlReferencesSearcher"/>
 
     <codeInsight.parameterInfo language="Perl5"

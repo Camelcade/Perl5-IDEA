@@ -16,7 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.navigation.NavigationItem;
+import com.intellij.psi.PsiNamedElement;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
@@ -26,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiElement {
+public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiNamedElement, NavigationItem {
   @NotNull
   default List<PerlExportDescriptor> getImportedSubsDescriptors() {
     return PerlSubUtil.getImportedSubsDescriptors(this);

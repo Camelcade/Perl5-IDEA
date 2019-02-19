@@ -1,0 +1,38 @@
+my $v<caret>ar = 1;
+
+$var = 2;
+say $var;
+
+$var++;
+
+$self->helper(somehelper => sub {
+});
+
+$self->helper(somehelper => sub {
+    $var = 2;
+    say $var;
+
+    $var++;
+});
+
+sub somesub {
+    $var = 2;
+    say $var;
+
+    $var++;
+}
+
+package Foo::Bar;
+
+
+$var = 2;
+say $var;
+
+$var++;
+
+sub somesub {
+    $var = 2;
+    say $var;
+
+    $var++;
+}

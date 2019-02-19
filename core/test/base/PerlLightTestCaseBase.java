@@ -94,6 +94,10 @@ import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.ui.components.breadcrumbs.Crumb;
 import com.intellij.usageView.*;
+import com.intellij.usages.*;
+import com.intellij.usages.impl.UsageViewImpl;
+import com.intellij.usages.rules.UsageGroupingRule;
+import com.intellij.usages.rules.UsageGroupingRuleProvider;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -1403,4 +1407,68 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     String tooltip = crumb.getTooltip();
     return "[" + crumb.getText() + (tooltip == null ? "" : "(" + tooltip + ")") + ", " + getIconText(crumb.getIcon());
   }
+
+  protected void doTestUsagesGrouping() {
+    initWithFileSmartWithoutErrors();
+    PsiElement targetElement = TargetElementUtil
+      .findTargetElement(getEditor(), TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED);
+    assertNotNull(targetElement);
+    Collection<UsageInfo> usages = myFixture.findUsages(targetElement);
+    List<UsageGroupingRule> rules = getActiveGroupingRules(new UsageViewSettings(true, true, true, true, true));
+    StringBuilder sb = new StringBuilder();
+    usages.forEach(usageInfo -> {
+      PsiElement element = Objects.requireNonNull(usageInfo.getElement());
+      sb.append("Usage: ")
+        .append('"').append(element.getText()).append("\"; ")
+        .append(element.getTextRange()).append("; ")
+        .append(serializePsiElement(element)).append("\n");
+
+      rules.forEach(rule -> {
+        String groups = getUsageGroups(usageInfo, rule);
+        if (!groups.isEmpty()) {
+          sb.append(" - Rule: ").append(rule.getClass().getSimpleName()).append("\n").append(groups).append("\n\n");
+        }
+      });
+
+      sb.append("\n");
+    });
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  @NotNull
+  private String getUsageGroups(@NotNull UsageInfo usageInfo, @NotNull UsageGroupingRule groupingRule) {
+    StringBuilder sb = new StringBuilder();
+    groupingRule.getParentGroupsFor(
+      UsageInfoToUsageConverter.convert(PsiElement.EMPTY_ARRAY, usageInfo), UsageTarget.EMPTY_ARRAY).forEach(usageGroup -> {
+      if (sb.length() > 0) {
+        sb.append("\n");
+      }
+      sb.append("    ").append(serializeUsageGroup(usageGroup));
+    });
+    return sb.toString();
+  }
+
+  @NotNull
+  private String serializeUsageGroup(@NotNull UsageGroup usageGroup) {
+    if (usageGroup instanceof PsiElementUsageGroupBase) {
+      return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase)usageGroup).getElement());
+    }
+    return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getText(null) + "; " + getIconText(usageGroup.getIcon(true));
+  }
+
+  /**
+   * Copy-paste of {@link UsageViewImpl#getActiveGroupingRules(com.intellij.openapi.project.Project, com.intellij.usages.UsageViewSettings)}
+   */
+  @NotNull
+  private List<UsageGroupingRule> getActiveGroupingRules(@NotNull UsageViewSettings usageViewSettings) {
+    final List<UsageGroupingRuleProvider> providers = UsageGroupingRuleProvider.EP_NAME.getExtensionList();
+    List<UsageGroupingRule> list = new ArrayList<>(providers.size());
+    for (UsageGroupingRuleProvider provider : providers) {
+      ContainerUtil.addAll(list, provider.getActiveRules(getProject(), usageViewSettings));
+    }
+
+    list.sort(Comparator.comparingInt(UsageGroupingRule::getRank));
+    return list;
+  }
+
 }
