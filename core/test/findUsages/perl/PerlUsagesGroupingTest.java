@@ -26,5 +26,7 @@ public class PerlUsagesGroupingTest extends PerlLightTestCase {
 
   public void testBasic() {doTest();}
 
+  public void testSub() {doTest();}
+
   private void doTest() {doTestUsagesGrouping();}
 }

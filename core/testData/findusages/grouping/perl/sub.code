@@ -1,0 +1,41 @@
+
+Bazooka::somesub;
+
+package Bazooka;
+sub somesub{
+    somesub();
+}
+
+
+somesub;
+
+package Foo::Bar {
+    Bazooka::somesub;
+
+    sub othersub {
+        Bazooka::some<caret>sub;
+    }
+
+    package Bar::Baz;
+
+    Bazooka::somesub;
+
+    sub othersub{
+        Bazooka::somesub;
+    }
+
+}
+
+__END__
+
+=pod
+
+=head1 API
+
+=head2 METHODS
+
+=head3 somesub()
+
+sub descriptionescrip
+
+

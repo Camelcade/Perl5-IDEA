@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.parser.psi;
+package com.perl5.lang.pod.idea.findusages;
 
-import com.intellij.navigation.NavigationItem;
-import com.intellij.pom.PomTarget;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.openapi.project.Project;
+import com.intellij.usages.impl.FileStructureGroupRuleProvider;
+import com.intellij.usages.rules.UsageGroupingRule;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
-public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget,
-                                          NavigationItem {
-  /**
-   * @return text representation of section
-   */
-  @Nullable
-  String getTitleText();
+public class PodFileStructureGroupRuleProvider implements FileStructureGroupRuleProvider {
 
-  PsiElement getTitleBlock();
+  @Nullable
+  @Override
+  public UsageGroupingRule getUsageGroupingRule(@NotNull Project project) {
+    return new PodUsageGroupingRule();
+  }
 }

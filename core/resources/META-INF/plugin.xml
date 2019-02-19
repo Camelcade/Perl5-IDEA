@@ -494,6 +494,7 @@
 
     <lang.findUsagesProvider language="Perl5 POD"
                              implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
+    <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
     <referencesSearch
         implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
     <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
