@@ -1,0 +1,13 @@
+my @arr<caret>ay;
+
+say @array;
+say $array[1];
+say @array[1,2];
+@array = ();
+$array[1] = 2;
+$array[1] =
+        $array[2] =
+        $array[2];
+@array[1,2] =
+        @array[1,2] =
+        @array[1,2];

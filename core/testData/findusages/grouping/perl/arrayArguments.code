@@ -1,0 +1,21 @@
+my @arr<caret>ay;
+
+push @array,
+        @array;
+pop @array;
+unshift @array,
+        @array;
+shift @array;
+splice @array, 1, 2,
+        @array;
+somesub @array;
+
+push(@array,
+        @array);
+pop(@array);
+unshift(@array,
+        @array);
+shift(@array);
+splice(@array, 1, 2,
+        @array);
+somesub(@array);

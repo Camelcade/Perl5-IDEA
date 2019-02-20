@@ -1,0 +1,253 @@
+Usage: "hash"; (16,20); reading; PerlVariableNameElementImpl(Perl5: HASH_NAME) at 16 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (27,31); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 27 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (41,45); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 41 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (53,57); writing; PerlVariableNameElementImpl(Perl5: HASH_NAME) at 53 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value write; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (65,69); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 65 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value write; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (79,83); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 79 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value write; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (98,102); reading; writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 98 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value write; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (117,121); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 117 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (127,131); writing; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 127 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value write; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (148,152); reading; writing; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 148 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value write; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "hash"; (169,173); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 169 in hash.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hash.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+

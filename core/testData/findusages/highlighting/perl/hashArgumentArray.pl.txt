@@ -1,0 +1,12 @@
+my %hash;
+my @<WRITE>ke<caret>ys</WRITE>;
+
+delete @hash{1};
+delete @hash{@<READ>keys</READ>};
+somesub @hash{1};
+somesub @hash{@<READ>keys</READ>};
+
+delete(@hash{1});
+delete(@hash{@<READ>keys</READ>});
+somesub(@hash{1});
+somesub(@hash{@<READ>keys</READ>});

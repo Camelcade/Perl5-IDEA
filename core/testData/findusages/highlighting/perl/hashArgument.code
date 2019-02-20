@@ -1,0 +1,12 @@
+my %ha<caret>sh;
+my @keys;
+
+delete @hash{1};
+delete @hash{@keys};
+somesub @hash{1};
+somesub @hash{1, 2};
+
+delete(@hash{1});
+delete(@hash{@keys});
+somesub(@hash{1});
+somesub(@hash{1, 2});

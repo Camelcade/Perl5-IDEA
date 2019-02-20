@@ -1,0 +1,92 @@
+Usage: "keys"; (52,56); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 52 in hashArgumentArray.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "keys"; (92,96); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 92 in hashArgumentArray.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "keys"; (132,136); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 132 in hashArgumentArray.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+
+Usage: "keys"; (174,178); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) at 174 in hashArgumentArray.pl
+ - Rule: NonCodeUsageGroupingRule
+    CodeUsageGroup: Code usages; null
+
+ - Rule: UsageScopeGroupingRule
+    : Production; /package.svg
+
+ - Rule: UsageTypeGroupingRule
+    UsageTypeGroup: Value read; null
+
+ - Rule: ModuleGroupingRule
+    ModuleUsageGroup: light_idea_test_case; /Module.svg
+
+ - Rule: PackageGroupingRule
+    PackageGroup: ; /nodePlaceholder.svg
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
+
+ - Rule: PerlUsageGroupingRule
+    PsiElement: Implicit namespace: main
+
+

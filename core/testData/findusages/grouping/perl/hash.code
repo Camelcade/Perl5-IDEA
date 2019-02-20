@@ -1,0 +1,13 @@
+my %hash;
+
+say %hash;
+say $h<caret>ash{1};
+say $hash{1,2};
+%hash = ();
+$hash{1} = 2;
+$hash{1} =
+        $hash{1} =
+        $hash{1};
+@hash{1,2} =
+        @hash{1,2} =
+        @hash{1,2};

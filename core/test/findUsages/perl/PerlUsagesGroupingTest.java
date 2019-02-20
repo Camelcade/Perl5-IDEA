@@ -24,6 +24,20 @@ public class PerlUsagesGroupingTest extends PerlLightTestCase {
     return "testData/findusages/grouping/perl/";
   }
 
+  public void testHashArgument() {doTest();}
+
+  public void testHashArgumentArray() {doTest();}
+
+  public void testArrayArguments() {doTest();}
+
+  public void testHash() {doTest();}
+
+  public void testArray() {doTest();}
+
+  public void testForeachIterator() {doTest();}
+
+  public void testScalarWithContext() {doTest();}
+
   public void testScalar() {doTest();}
 
   public void testSub() {doTest();}

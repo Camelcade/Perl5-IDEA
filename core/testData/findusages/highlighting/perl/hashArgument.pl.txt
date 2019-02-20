@@ -1,0 +1,12 @@
+my %<WRITE>ha<caret>sh</WRITE>;
+my @keys;
+
+delete @<WRITE>hash</WRITE>{1};
+delete @<WRITE>hash</WRITE>{@keys};
+somesub @<READ>hash</READ>{1};
+somesub @<READ>hash</READ>{1, 2};
+
+delete(@<WRITE>hash</WRITE>{1});
+delete(@<WRITE>hash</WRITE>{@keys});
+somesub(@<READ>hash</READ>{1});
+somesub(@<READ>hash</READ>{1, 2});

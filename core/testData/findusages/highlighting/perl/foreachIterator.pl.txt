@@ -1,0 +1,4 @@
+my $<WRITE>v<caret>ar</WRITE> = 1;
+for $<WRITE>var</WRITE> (@ARGV){
+    say $<READ>var</READ>;
+}

@@ -1,0 +1,21 @@
+my @<WRITE>arr<caret>ay</WRITE>;
+
+push @<WRITE>array</WRITE>,
+        @<READ>array</READ>;
+pop @<WRITE>array</WRITE>;
+unshift @<WRITE>array</WRITE>,
+        @<READ>array</READ>;
+shift @<WRITE>array</WRITE>;
+splice @<WRITE>array</WRITE>, 1, 2,
+        @<READ>array</READ>;
+somesub @<READ>array</READ>;
+
+push(@<WRITE>array</WRITE>,
+        @<READ>array</READ>);
+pop(@<WRITE>array</WRITE>);
+unshift(@<WRITE>array</WRITE>,
+        @<READ>array</READ>);
+shift(@<WRITE>array</WRITE>);
+splice(@<WRITE>array</WRITE>, 1, 2,
+        @<READ>array</READ>);
+somesub(@<READ>array</READ>);

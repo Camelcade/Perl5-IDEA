@@ -1,0 +1,13 @@
+my @<WRITE>arr<caret>ay</WRITE>;
+
+say @<READ>array</READ>;
+say $<READ>array</READ>[1];
+say @<READ>array</READ>[1,2];
+@<WRITE>array</WRITE> = ();
+$<WRITE>array</WRITE>[1] = 2;
+$<WRITE>array</WRITE>[1] =
+        $<WRITE>array</WRITE>[2] =
+        $<READ>array</READ>[2];
+@<WRITE>array</WRITE>[1,2] =
+        @<WRITE>array</WRITE>[1,2] =
+        @<READ>array</READ>[1,2];

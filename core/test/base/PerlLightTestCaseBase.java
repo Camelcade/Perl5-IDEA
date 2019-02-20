@@ -1413,18 +1413,29 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     PsiElement targetElement = TargetElementUtil
       .findTargetElement(getEditor(), TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED);
     assertNotNull(targetElement);
+    PsiElement[] targetElements = {targetElement};
     Collection<UsageInfo> usages = myFixture.findUsages(targetElement);
     List<UsageGroupingRule> rules = getActiveGroupingRules(new UsageViewSettings(true, true, true, true, true));
     StringBuilder sb = new StringBuilder();
     usages.forEach(usageInfo -> {
       PsiElement element = Objects.requireNonNull(usageInfo.getElement());
+      Usage usage = UsageInfoToUsageConverter.convert(targetElements, usageInfo);
       sb.append("Usage: ")
         .append('"').append(element.getText()).append("\"; ")
-        .append(element.getTextRange()).append("; ")
-        .append(serializePsiElement(element)).append("\n");
+        .append(element.getTextRange()).append("; ");
+
+      if (usage instanceof ReadWriteAccessUsageInfo2UsageAdapter) {
+        if (((ReadWriteAccessUsageInfo2UsageAdapter)usage).isAccessedForReading()) {
+          sb.append("reading; ");
+        }
+        if (((ReadWriteAccessUsageInfo2UsageAdapter)usage).isAccessedForWriting()) {
+          sb.append("writing; ");
+        }
+      }
+      sb.append(serializePsiElement(element)).append("\n");
 
       rules.forEach(rule -> {
-        String groups = getUsageGroups(usageInfo, rule);
+        String groups = getUsageGroups(usage, rule);
         if (!groups.isEmpty()) {
           sb.append(" - Rule: ").append(rule.getClass().getSimpleName()).append("\n").append(groups).append("\n\n");
         }
@@ -1436,10 +1447,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   @NotNull
-  private String getUsageGroups(@NotNull UsageInfo usageInfo, @NotNull UsageGroupingRule groupingRule) {
+  private String getUsageGroups(@NotNull Usage usage, @NotNull UsageGroupingRule groupingRule) {
     StringBuilder sb = new StringBuilder();
-    groupingRule.getParentGroupsFor(
-      UsageInfoToUsageConverter.convert(PsiElement.EMPTY_ARRAY, usageInfo), UsageTarget.EMPTY_ARRAY).forEach(usageGroup -> {
+    groupingRule.getParentGroupsFor(usage, UsageTarget.EMPTY_ARRAY).forEach(usageGroup -> {
       if (sb.length() > 0) {
         sb.append("\n");
       }

@@ -1,0 +1,50 @@
+my $<WRITE>var</WRITE> = 1;
+say $<READ>var</READ>;
+$<WRITE>v<caret>ar</WRITE>++;
+++$<WRITE>var</WRITE>;
+$<WRITE>var</WRITE> = 1;
+$<WRITE>var</WRITE>--;
+--$<WRITE>var</WRITE>;
+($<WRITE>var</WRITE>, $var1) =
+        ($<WRITE>var</WRITE>, $var1) =
+        ($<READ>var</READ>, $var1);
+$<WRITE>var</WRITE> =
+        $<WRITE>var</WRITE> =
+        $<READ>var</READ>;
+$<WRITE>var</WRITE> =~ s/asdf/asdf/;
+$<READ>var</READ> =~ /asdf/;
+$<WRITE>var</WRITE> =~ tr/asdf/asdf/;
+$<WRITE>var</WRITE> += 1;
+$<WRITE>var</WRITE> -= 1;
+$<WRITE>var</WRITE> *= 1;
+$<WRITE>var</WRITE> /= 1;
+$<WRITE>var</WRITE> **= 1;
+$<WRITE>var</WRITE> %= 1;
+$<WRITE>var</WRITE> .= 1;
+$<WRITE>var</WRITE> x= 1;
+$<WRITE>var</WRITE> &= 1;
+$<WRITE>var</WRITE> |= 1;
+$<WRITE>var</WRITE> ^= 1;
+$<WRITE>var</WRITE> <<= 1;
+$<WRITE>var</WRITE> >>= 1;
+$<WRITE>var</WRITE> &&= 1;
+$<WRITE>var</WRITE> ||= 1;
+$<WRITE>var</WRITE> //= 1;
+
+$<READ>var</READ> + 1;
+$<READ>var</READ> - 1;
+$<READ>var</READ> * 1;
+$<READ>var</READ> / 1;
+$<READ>var</READ> ** 1;
+$<READ>var</READ> % 1;
+$<READ>var</READ> . 1;
+$<READ>var</READ> x 1;
+$<READ>var</READ> & 1;
+$<READ>var</READ> | 1;
+$<READ>var</READ> ^ 1;
+$<READ>var</READ> << 1;
+$<READ>var</READ> >> 1;
+$<READ>var</READ> && 1;
+$<READ>var</READ> || 1;
+$<READ>var</READ> // 1;
+

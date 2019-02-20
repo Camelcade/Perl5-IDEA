@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.findusages;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.highlighting.HighlightUsagesHandlerBase;
 import com.intellij.codeInsight.highlighting.HighlightUsagesHandlerFactory;
+import com.intellij.codeInsight.highlighting.ReadWriteAccessDetector;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
@@ -123,7 +124,14 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
         }
 
         for (PsiReference reference : ReferencesSearch.search(target, new LocalSearchScope(myFile)).findAll()) {
-          myReadUsages.add(reference.getRangeInElement().shiftRight(reference.getElement().getNode().getStartOffset()));
+          TextRange rangeToHighlight = reference.getRangeInElement().shiftRight(reference.getElement().getNode().getStartOffset());
+          ReadWriteAccessDetector detector = ReadWriteAccessDetector.findDetector(target);
+          if (detector == null || detector.getReferenceAccess(target, reference) == ReadWriteAccessDetector.Access.Read) {
+            myReadUsages.add(rangeToHighlight);
+          }
+          else {
+            myWriteUsages.add(rangeToHighlight);
+          }
         }
       }
     }

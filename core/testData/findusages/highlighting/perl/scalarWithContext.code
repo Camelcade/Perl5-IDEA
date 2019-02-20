@@ -1,0 +1,50 @@
+my $var = 1;
+say $var;
+$v<caret>ar++;
+++$var;
+$var = 1;
+$var--;
+--$var;
+($var, $var1) =
+        ($var, $var1) =
+        ($var, $var1);
+$var =
+        $var =
+        $var;
+$var =~ s/asdf/asdf/;
+$var =~ /asdf/;
+$var =~ tr/asdf/asdf/;
+$var += 1;
+$var -= 1;
+$var *= 1;
+$var /= 1;
+$var **= 1;
+$var %= 1;
+$var .= 1;
+$var x= 1;
+$var &= 1;
+$var |= 1;
+$var ^= 1;
+$var <<= 1;
+$var >>= 1;
+$var &&= 1;
+$var ||= 1;
+$var //= 1;
+
+$var + 1;
+$var - 1;
+$var * 1;
+$var / 1;
+$var ** 1;
+$var % 1;
+$var . 1;
+$var x 1;
+$var & 1;
+$var | 1;
+$var ^ 1;
+$var << 1;
+$var >> 1;
+$var && 1;
+$var || 1;
+$var // 1;
+
