@@ -115,6 +115,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.DataPrinterProcessor"/>
     <packageProcessor key="Readonly"
                       implementationClass="com.perl5.lang.perl.extensions.readonly.ReadonlyPackageProcessor"/>
+    <packageProcessor key="File::Spec::Functions"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FileSpecFunctionsProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>

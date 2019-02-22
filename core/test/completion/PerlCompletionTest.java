@@ -36,6 +36,11 @@ public class PerlCompletionTest extends PerlLightTestCase {
     return "testData/completion/perl";
   }
 
+  public void testFileSpec() {
+    withFileSpec();
+    doTest();
+  }
+
   public void testTestMoreParameters() {
     addTestMore();
     doTestCompletion();
@@ -412,4 +417,8 @@ public class PerlCompletionTest extends PerlLightTestCase {
   public void testLazyExportOkQw() {doTestCompletion();}
 
   public void testGlobSlots() {doTestCompletion();}
+
+  private void doTest() {
+    doTestCompletion();
+  }
 }

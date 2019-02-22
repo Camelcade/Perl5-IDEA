@@ -39,6 +39,11 @@ public class PerlResolveTest extends PerlLightTestCase {
     checkSerializedReferencesWithFile();
   }
 
+  public void testFileSpec() {
+    withFileSpec();
+    doTest();
+  }
+
   public void testPodWeaverTags() {doTest();}
 
   public void testReadonly() {doTest();}

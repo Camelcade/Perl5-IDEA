@@ -60,6 +60,8 @@ public abstract class PerlLightTestCase extends PerlLightTestCaseBase {
     }
   }
 
+  protected void withFileSpec() { addTestLibrary("fileSpec"); }
+
   protected void addCustomPackage() {
     myFixture.copyFileToProject("MyCustomPackage.pm");
   }

@@ -1,0 +1,17 @@
+Lookups: abs2rel; Text: abs2rel; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: canonpath; Text: canonpath; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: case_tolerant; Text: case_tolerant; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: catdir; Text: catdir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: catfile; Text: catfile; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: catpath; Text: catpath; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: curdir; Text: curdir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: devnull; Text: devnull; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: file_name_is_absolute; Text: file_name_is_absolute; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: no_upwards; Text: no_upwards; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: path; Text: path; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: rel2abs; Text: rel2abs; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: rootdir; Text: rootdir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: splitdir; Text: splitdir; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: splitpath; Text: splitpath; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: tmpdir; Text: tmpdir; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: updir; Text: updir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null

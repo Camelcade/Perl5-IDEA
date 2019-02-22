@@ -72,16 +72,21 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
       addExports(useStatement, exportNames, exportOkNames);
 
       if (importParameters == null) {
-        exportNames.forEach(name -> result.add(PerlExportDescriptor.create(packageName, name)));
+        exportNames.forEach(name -> result.add(createDescriptor(packageName, name)));
       }
       else {
         importParameters.stream()
           .filter(exportOkNames::contains)
-          .forEach(name -> result.add(PerlExportDescriptor.create(packageName, name)));
+          .forEach(name -> result.add(createDescriptor(packageName, name)));
       }
     }
 
     return result;
+  }
+
+  @NotNull
+  protected PerlExportDescriptor createDescriptor(@NotNull String packageName, @NotNull String name) {
+    return PerlExportDescriptor.create(packageName, name);
   }
 
   /**

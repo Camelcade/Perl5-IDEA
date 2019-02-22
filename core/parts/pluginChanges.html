@@ -43,6 +43,10 @@
   <li>New option for the remote debugging: automatic reconnection. Allows to re-connect to the process until manually stopped, by <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1369">@djstauffer</a>.
   </li>
+  <li>Improved resolve for <code>File::Spec::Functions</code> subs. Actual module has tricky exporting, binding OS-specific implementation
+    in runtime. Plugin for now resolves to the Unix implementations from the <code>File::Spec::Unix</code>, by <a
+        href="https://github.com/Camelcade/Perl5-IDEA/issues/1393">@grakkpl</a>.
+  </li>
 </ul>
 <p>Fixes:</p>
 <li>Packages list in <code>Install package</code> action is now split by spaces, commas and semicolons, allowing to install arbitrary
