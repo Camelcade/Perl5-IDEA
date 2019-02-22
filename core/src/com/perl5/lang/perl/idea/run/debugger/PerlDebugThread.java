@@ -75,7 +75,7 @@ public class PerlDebugThread extends Thread {
   private ServerSocket myServerSocket;
   private OutputStream myOutputStream;
   private InputStream myInputStream;
-  private boolean myStop = false;
+  private volatile boolean myStop = false;
   private List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
   private boolean isReady = false;
   private int transactionId = 0;
@@ -132,7 +132,7 @@ public class PerlDebugThread extends Thread {
     String debugName = debugHost + ":" + debugPort;
     if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
       print("perl.debug.connecting.to", debugName);
-      for (int i = 1; i < 11; i++) {
+      for (int i = 1; i < 11 && !myStop; i++) {
         try {
           mySocket = new Socket(debugHost, debugPort);
           break;
@@ -160,6 +160,9 @@ public class PerlDebugThread extends Thread {
   private boolean doRun() {
     try {
       prepareAndConnect();
+      if (myStop) {
+        return false;
+      }
       print("perl.debug.connected");
 
       myOutputStream = mySocket.getOutputStream();
