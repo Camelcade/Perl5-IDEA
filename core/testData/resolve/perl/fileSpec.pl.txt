@@ -1,8 +1,9 @@
-PerlNamespaceFileReference at (4,25); text in range: 'File::Spec::Functions' => 0 results:
+PerlNamespaceFileReference at (4,25); text in range: 'File::Spec::Functions' => 1 results:
+	Perl5 at 0 in Functions.pm
 
 PerlSubReference at (50,59); text in range: 'canonpath' => 1 results:
-	PsiPerlGlobVariableImpl(*) at 2413 in Unix.pm
+	PsiPerlGlobVariableImpl(*) at 2392 in Unix.pm
 
 PerlSubReference at (61,68); text in range: 'abs2rel' => 1 results:
-	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@File::Spec::Unix::abs2rel($self, $path, $base) at 10559 in Unix.pm
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@File::Spec::Unix::abs2rel($self, $path, $base) at 10557 in Unix.pm
 
