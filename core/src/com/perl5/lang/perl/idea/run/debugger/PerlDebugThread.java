@@ -25,16 +25,23 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
+import com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfiguration;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import gnu.trove.TByteArrayList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,7 +56,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
@@ -57,6 +66,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
+import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.DEBUG_PACKAGE;
+import static com.perl5.lang.perl.idea.run.debugger.protocol.PerlDebuggingEventReady.MODULE_VERSION_PREFIX;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -228,6 +239,23 @@ public class PerlDebugThread extends Thread {
           setUpDebugger();
         }
         else {
+          Notification notification = new Notification(
+            PerlBundle.message("perl.debugger.notification.group"),
+            PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
+            PerlBundle.message(
+              "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX, ((PerlDebuggingEventReady)newEvent).version),
+            NotificationType.ERROR
+          );
+          Project project = myDebugProfileState.getEnvironment().getProject();
+          if (myPerlDebugOptions instanceof PerlRemoteDebuggingConfiguration) {
+            Notifications.Bus.notify(notification, project);
+          }
+          else {
+            PerlRunUtil.addInstallActionsAndShow(
+              project, Objects.requireNonNull(PerlProjectManager.getSdk(project)),
+              Collections.singletonList(DEBUG_PACKAGE),
+              notification);
+          }
           setStop();
         }
       }

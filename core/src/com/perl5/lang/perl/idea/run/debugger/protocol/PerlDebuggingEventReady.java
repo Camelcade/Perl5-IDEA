@@ -16,9 +16,6 @@
 
 package com.perl5.lang.perl.idea.run.debugger.protocol;
 
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 
@@ -26,7 +23,7 @@ import com.perl5.PerlBundle;
  * Created by hurricup on 08.05.2016.
  */
 public class PerlDebuggingEventReady extends PerlDebuggingEventBase {
-  private static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
+  public static final String MODULE_VERSION_PREFIX = PerlBundle.message("perl.debugger.version.prefix");
   private static final String MODULE_VERSION_PREFIX_V = "v" + MODULE_VERSION_PREFIX;
   public String version;
 
@@ -35,17 +32,7 @@ public class PerlDebuggingEventReady extends PerlDebuggingEventBase {
   }
 
   public boolean isValid() {
-    if (StringUtil.isNotEmpty(version) &&
-        (StringUtil.startsWith(version, MODULE_VERSION_PREFIX_V) || StringUtil.startsWith(version, MODULE_VERSION_PREFIX))) {
-      return true;
-    }
-
-    Notifications.Bus.notify(new Notification(
-      "PERL_DEBUGGER",
-      PerlBundle.message("perl.debugger.incorrect.version.title"),
-      PerlBundle.message("perl.debugger.incorrect.version.message", MODULE_VERSION_PREFIX, version),
-      NotificationType.ERROR
-    ));
-    return false;
+    return StringUtil.isNotEmpty(version) &&
+           (StringUtil.startsWith(version, MODULE_VERSION_PREFIX_V) || StringUtil.startsWith(version, MODULE_VERSION_PREFIX));
   }
 }

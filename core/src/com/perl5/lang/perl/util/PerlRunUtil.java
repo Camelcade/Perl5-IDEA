@@ -220,16 +220,25 @@ public class PerlRunUtil {
       StringUtil.join(ContainerUtil.sorted(packageNames), ", "),
       NotificationType.ERROR
     );
+    addInstallActionsAndShow(project, sdk, packageNames, notification);
+  }
 
+  /**
+   * Adds installation actions to the {@code notification} and shows it in the context of the {@code project}
+   */
+  public static void addInstallActionsAndShow(@NotNull Project project,
+                                              @NotNull Sdk sdk,
+                                              @NotNull Collection<String> packagesToInstall,
+                                              @NotNull Notification notification) {
     AnAction installCpanmAction =
-      ReadAction.compute(() -> CpanminusAdapter.createInstallAction(sdk, project, packageNames, notification::expire));
+      ReadAction.compute(() -> CpanminusAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire));
     if (installCpanmAction != null) {
       notification.addAction(installCpanmAction);
     }
-    notification.addAction(CpanAdapter.createInstallAction(sdk, project, packageNames, notification::expire));
-
-    Notifications.Bus.notify(notification, project);
+    Notifications.Bus.notify(
+      notification.addAction(CpanAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire)), project);
   }
+
 
   private static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull String libraryName) {
     Notification notification = new Notification(
@@ -239,15 +248,7 @@ public class PerlRunUtil {
       NotificationType.ERROR
     );
 
-    AnAction installCpanmAction =
-      ReadAction
-        .compute(() -> CpanminusAdapter.createInstallAction(sdk, project, Collections.singletonList(libraryName), notification::expire));
-    if (installCpanmAction != null) {
-      notification.addAction(installCpanmAction);
-    }
-    notification.addAction(CpanAdapter.createInstallAction(sdk, project, Collections.singletonList(libraryName), notification::expire));
-
-    Notifications.Bus.notify(notification, project);
+    addInstallActionsAndShow(project, sdk, Collections.singletonList(libraryName), notification);
   }
 
 

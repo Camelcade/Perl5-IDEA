@@ -34,6 +34,7 @@ import java.util.*;
  * For execution and debugging
  */
 public class PerlDebugProfileState extends PerlDebugProfileStateBase {
+  public static final String DEBUG_PACKAGE = "Devel::Camelcadedb";
   public static final String DEBUG_ARGUMENT = "-d:Camelcadedb";
   public static final String PERL5_DEBUG_HOST = "PERL5_DEBUG_HOST";
   public static final String PERL5_DEBUG_PORT = "PERL5_DEBUG_PORT";
