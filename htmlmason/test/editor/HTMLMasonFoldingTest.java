@@ -16,10 +16,10 @@
 
 package editor;
 
-import base.PerlLightTestCase;
+import base.HTMLMasonLightTestCase;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 
-public class HtmlMasonFoldingTest extends PerlLightTestCase {
+public class HTMLMasonFoldingTest extends HTMLMasonLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/folding";

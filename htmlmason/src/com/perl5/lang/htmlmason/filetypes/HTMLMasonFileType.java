@@ -34,6 +34,7 @@ import javax.swing.*;
  */
 public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifiableByVirtualFile {
   public static final HTMLMasonFileType INSTANCE = new HTMLMasonFileType();
+  public static final String DEFAULT_EXTENSION = "mas";
 
   public HTMLMasonFileType() {
     super(HTMLMasonLanguage.INSTANCE);
@@ -57,7 +58,7 @@ public class HTMLMasonFileType extends PerlFileType implements FileTypeIdentifia
   @NotNull
   @Override
   public String getDefaultExtension() {
-    return "mas";
+    return DEFAULT_EXTENSION;
   }
 
   @Nullable

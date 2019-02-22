@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package formatter;
+package base;
 
-import base.HTMLMasonLightTestCase;
+import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
 
-/**
- * Created by hurricup on 15.03.2016.
- */
-public class HTMLMasonFormatterTest extends HTMLMasonLightTestCase {
+public abstract class Mason2InternalComponentTestCase extends Mason2LightTestCase {
   @Override
-  protected String getTestDataPath() {
-    return "testData/formatter";
-  }
-
-  public void testSpacelessTags() {
-    doFormatTest("spaceless", "");
+  public String getFileExtension() {
+    return Mason2FileTypeFactory.INTERNAL_COMPONENT_EXTENSION;
   }
 }

@@ -19,6 +19,7 @@ package parser;
 import com.intellij.psi.LanguageFileViewProviders;
 import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.Mason2ParserDefinition;
+import com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory;
 import com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory;
 
 /**
@@ -26,7 +27,7 @@ import com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory;
  */
 public class Mason2ParserTest extends PerlParserTestBase {
   public Mason2ParserTest() {
-    super("", "mp", new Mason2ParserDefinition());
+    super("", Mason2FileTypeFactory.PURE_PERL_COMPONENT_EXTENSION, new Mason2ParserDefinition());
   }
 
   @Override

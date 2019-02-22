@@ -16,19 +16,14 @@
 
 package resolve;
 
-import base.PerlLightTestCase;
+import base.HTMLMasonLightTestCase;
 
 /**
  * Created by hurricup on 15.03.2016.
  */
-public class HTMLMasonConcurrentBlocksResolveTest extends PerlLightTestCase {
+public class HTMLMasonConcurrentBlocksResolveTest extends HTMLMasonLightTestCase {
   protected String getTestDataPath() {
     return "testData/resolve/concurrent_blocks";
-  }
-
-  @Override
-  public String getFileExtension() {
-    return "mas";
   }
 
   public void testArgs() {

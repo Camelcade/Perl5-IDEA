@@ -16,18 +16,13 @@
 
 package resolve;
 
-import base.PerlLightTestCase;
+import base.HTMLMasonLightTestCase;
 
 /**
  * Created by hurricup on 13.03.2016.
  * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
-public abstract class HTMLMasonVariableResolveTestCase extends PerlLightTestCase {
-  @Override
-  public String getFileExtension() {
-    return "mas";
-  }
-
+public abstract class HTMLMasonVariableResolveTestCase extends HTMLMasonLightTestCase {
   public void testFromCleanup() {
     doTestResolve();
   }

@@ -23,11 +23,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 20.12.2015.
  */
-public class MasonFileTypeFactory extends PerlFileTypeFactoryBase {
+public class Mason2FileTypeFactory extends PerlFileTypeFactoryBase {
+  public static final String TOP_LEVEL_COMPONENT_EXTENSION = "mc";
+  public static final String INTERNAL_COMPONENT_EXTENSION = "mi";
+  public static final String PURE_PERL_COMPONENT_EXTENSION = "mp";
+
   @Override
   protected void createFileTypesInner(@NotNull FileTypeConsumer fileTypeConsumer) {
-    fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, "mc");
-    fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, "mi");
-    fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, "mp");
+    fileTypeConsumer.consume(MasonTopLevelComponentFileType.INSTANCE, TOP_LEVEL_COMPONENT_EXTENSION);
+    fileTypeConsumer.consume(MasonInternalComponentFileType.INSTANCE, INTERNAL_COMPONENT_EXTENSION);
+    fileTypeConsumer.consume(MasonPurePerlComponentFileType.INSTANCE, PURE_PERL_COMPONENT_EXTENSION);
   }
 }

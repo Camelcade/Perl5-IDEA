@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-package formatter;
+package base;
 
-import base.HTMLMasonLightTestCase;
-
-/**
- * Created by hurricup on 15.03.2016.
- */
-public class HTMLMasonFormatterTest extends HTMLMasonLightTestCase {
-  @Override
-  protected String getTestDataPath() {
-    return "testData/formatter";
-  }
-
-  public void testSpacelessTags() {
-    doFormatTest("spaceless", "");
-  }
+public abstract class Mason2LightTestCase extends PerlLightTestCaseBase {
 }

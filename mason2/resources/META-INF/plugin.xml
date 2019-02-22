@@ -65,7 +65,7 @@
                            implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingTypeHierarchyProvider"/>
     <typeHierarchyProvider language="Mason2"
                            implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTypeHierarchyProvider"/>
-    <fileTypeFactory implementation="com.perl5.lang.mason2.filetypes.MasonFileTypeFactory"/>
+    <fileTypeFactory implementation="com.perl5.lang.mason2.filetypes.Mason2FileTypeFactory"/>
     <lang.syntaxHighlighterFactory language="Mason2"
                                    implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
     <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
