@@ -63,6 +63,6 @@ public abstract class PerlInstallPackageActionBase extends PerlActionBase {
       return;
     }
 
-    packageManagerAdapter.install(Arrays.asList(packageNames.split("[^:\\w_]+")));
+    packageManagerAdapter.install(Arrays.asList(packageNames.split("[\\s,;]+")));
   }
 }
