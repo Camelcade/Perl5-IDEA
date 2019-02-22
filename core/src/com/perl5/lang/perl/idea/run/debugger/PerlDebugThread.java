@@ -31,12 +31,14 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.xdebugger.XDebugSession;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.idea.run.debugger.protocol.*;
 import com.perl5.lang.perl.idea.run.debugger.ui.PerlScriptsPanel;
 import gnu.trove.TByteArrayList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.PropertyKey;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,6 +55,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
+
+import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
 
 /**
  * Created by hurricup on 04.05.2016.
@@ -113,8 +117,9 @@ public class PerlDebugThread extends Thread {
     breakpointsDescriptorsQueue.clear();
   }
 
-  private void printConsole(@NotNull String message) {
-    ((ConsoleView)myExecutionResult.getExecutionConsole()).print(message, ConsoleViewContentType.SYSTEM_OUTPUT);
+  private void print(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
+    ((ConsoleView)myExecutionResult.getExecutionConsole()).print(
+      PerlBundle.message(key, params) + "\n", ConsoleViewContentType.SYSTEM_OUTPUT);
   }
 
   private void prepareAndConnect() throws ExecutionException, IOException, InterruptedException {
@@ -126,7 +131,7 @@ public class PerlDebugThread extends Thread {
     int debugPort = myDebugProfileState.getDebugPort();
     String debugName = debugHost + ":" + debugPort;
     if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
-      printConsole("Connecting to " + debugName + "...\n");
+      print("perl.debug.connecting.to", debugName);
       for (int i = 1; i < 11; i++) {
         try {
           mySocket = new Socket(debugHost, debugPort);
@@ -136,14 +141,14 @@ public class PerlDebugThread extends Thread {
           if (i == 10) {
             throw e;
           }
-          printConsole(e.getMessage() + "\n");
-          printConsole("Attempting again in a second...\n");
+          LOG.info("Connection error: " + e.getMessage());
+          print("perl.debug.attempting.again");
           Thread.sleep(1000);
         }
       }
     }
     else {
-      printConsole("Listening on " + debugName + "...\n");
+      print("perl.debug.listening.on", debugName);
       myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
       mySocket = myServerSocket.accept();
     }
@@ -155,7 +160,7 @@ public class PerlDebugThread extends Thread {
   private boolean doRun() {
     try {
       prepareAndConnect();
-      printConsole("Connected\n");
+      print("perl.debug.connected");
 
       myOutputStream = mySocket.getOutputStream();
       myInputStream = mySocket.getInputStream();
@@ -200,7 +205,7 @@ public class PerlDebugThread extends Thread {
   public void run() {
     try {
       while (doRun() && myPerlDebugOptions.isReconnect()) {
-        printConsole("Connection lost, reconnecting...\n");
+        print("perl.debug.reconnecting");
         closeStreamsAndSockets();
       }
     }
@@ -293,7 +298,7 @@ public class PerlDebugThread extends Thread {
     closeStreamsAndSockets();
     StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
 
-    printConsole("Disconnected\n");
+    print("perl.debug.disconnected");
   }
 
   private void closeStreamsAndSockets() {

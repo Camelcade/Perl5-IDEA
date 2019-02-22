@@ -22,7 +22,7 @@ import org.jetbrains.annotations.PropertyKey;
 
 public class PerlBundle extends AbstractBundle {
   private static final PerlBundle INSTANCE = new PerlBundle();
-  private static final String PATH_TO_BUNDLE = "messages.PerlBundle";
+  public static final String PATH_TO_BUNDLE = "messages.PerlBundle";
 
   private PerlBundle() {
     super(PATH_TO_BUNDLE);
