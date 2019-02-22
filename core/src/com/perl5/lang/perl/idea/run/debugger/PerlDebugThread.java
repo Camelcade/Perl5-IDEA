@@ -20,10 +20,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
+import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.actions.StopProcessAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -87,7 +89,6 @@ public class PerlDebugThread extends Thread {
     myExecutionResult = executionResult;
     myScriptListPanel = new PerlScriptsPanel(session.getProject(), this);
     myEvalsListPanel = new PerlScriptsPanel(session.getProject(), this);
-    myPerlRemoteFileSystem.dropFiles();
     myPerlDebugOptions = state.getDebugOptions();
   }
 
@@ -116,34 +117,44 @@ public class PerlDebugThread extends Thread {
     ((ConsoleView)myExecutionResult.getExecutionConsole()).print(message, ConsoleViewContentType.SYSTEM_OUTPUT);
   }
 
-  @Override
-  public void run() {
-    try {
-      String debugHost = myPerlDebugOptions.getDebugHost();
-      int debugPort = myDebugProfileState.getDebugPort();
-      String debugName = debugHost + ":" + debugPort;
-      if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
-        printConsole("Connecting to " + debugName + "...\n");
-        for (int i = 1; i < 11; i++) {
-          try {
-            mySocket = new Socket(debugHost, debugPort);
-            break;
+  private void prepareAndConnect() throws ExecutionException, IOException, InterruptedException {
+    myScriptListPanel.clear();
+    myEvalsListPanel.clear();
+    WriteAction.runAndWait(() -> myPerlRemoteFileSystem.dropFiles());
+
+    String debugHost = myPerlDebugOptions.getDebugHost();
+    int debugPort = myDebugProfileState.getDebugPort();
+    String debugName = debugHost + ":" + debugPort;
+    if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
+      printConsole("Connecting to " + debugName + "...\n");
+      for (int i = 1; i < 11; i++) {
+        try {
+          mySocket = new Socket(debugHost, debugPort);
+          break;
+        }
+        catch (ConnectException e) {
+          if (i == 10) {
+            throw e;
           }
-          catch (ConnectException e) {
-            if (i == 10) {
-              throw e;
-            }
-            printConsole(e.getMessage() + "\n");
-            printConsole("Attempting again in a second...\n");
-            Thread.sleep(1000);
-          }
+          printConsole(e.getMessage() + "\n");
+          printConsole("Attempting again in a second...\n");
+          Thread.sleep(1000);
         }
       }
-      else {
-        printConsole("Listening on " + debugName + "...\n");
-        myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
-        mySocket = myServerSocket.accept();
-      }
+    }
+    else {
+      printConsole("Listening on " + debugName + "...\n");
+      myServerSocket = new ServerSocket(debugPort, 50, InetAddress.getByName(debugHost));
+      mySocket = myServerSocket.accept();
+    }
+  }
+
+  /**
+   * @return true iff we've reached end of stream (interrupted from the script's side)
+   */
+  private boolean doRun() {
+    try {
+      prepareAndConnect();
       printConsole("Connected\n");
 
       myOutputStream = mySocket.getOutputStream();
@@ -165,7 +176,7 @@ public class PerlDebugThread extends Thread {
             break;
           }
           else if (dataByte == -1) {
-            return;
+            return true;
           }
           else {
             response.add((byte)dataByte);
@@ -181,6 +192,17 @@ public class PerlDebugThread extends Thread {
     }
     catch (Exception e) {
       LOG.warn(e);
+    }
+    return false;
+  }
+
+  @Override
+  public void run() {
+    try {
+      while (doRun() && myPerlDebugOptions.isReconnect()) {
+        printConsole("Connection lost, reconnecting...\n");
+        closeStreamsAndSockets();
+      }
     }
     finally {
       setStop();
@@ -268,6 +290,13 @@ public class PerlDebugThread extends Thread {
     }
 
     myStop = true;
+    closeStreamsAndSockets();
+    StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
+
+    printConsole("Disconnected\n");
+  }
+
+  private void closeStreamsAndSockets() {
     //noinspection Duplicates
     try {
       if (myInputStream != null) {
@@ -309,10 +338,6 @@ public class PerlDebugThread extends Thread {
     catch (IOException e) {
       LOG.warn(e);
     }
-
-    StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
-
-    printConsole("Disconnected\n");
   }
 
   protected Gson createGson() {

@@ -54,7 +54,7 @@ public class PerlScriptsPanel extends JPanel {
   @NotNull
   private final Project myProject;
   private final PerlDebugThread myDebugThread;
-  private SortedListModel<PerlLoadedFileDescriptor> myModel = SortedListModel.create(compareEntries);
+  private final SortedListModel<PerlLoadedFileDescriptor> myModel = SortedListModel.create(compareEntries);
 
   public PerlScriptsPanel(@NotNull Project project, PerlDebugThread debugThread) {
     super(new BorderLayout());
@@ -114,6 +114,10 @@ public class PerlScriptsPanel extends JPanel {
     });
 
     add(new JBScrollPane(jbList), BorderLayout.CENTER);
+  }
+
+  public void clear() {
+    myModel.clear();
   }
 
   public void add(final PerlLoadedFileDescriptor value) {

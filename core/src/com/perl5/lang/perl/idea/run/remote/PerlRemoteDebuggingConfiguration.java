@@ -29,6 +29,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
+import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -48,6 +49,8 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
   public boolean isNonInteractiveModeEnabled = false;
   public boolean isCompileTimeBreakpointsEnabled = false;
   public String initCode = "";
+  @Tag("auto-reconnect")
+  private boolean myIsReconnect;
 
   public PerlRemoteDebuggingConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
     super(project, factory, name);
@@ -160,5 +163,14 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
 
   public void setInitCode(String initCode) {
     this.initCode = initCode;
+  }
+
+  @Override
+  public boolean isReconnect() {
+    return myIsReconnect;
+  }
+
+  public void setReconnect(boolean reconnect) {
+    myIsReconnect = reconnect;
   }
 }

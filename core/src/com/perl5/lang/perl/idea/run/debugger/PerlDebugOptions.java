@@ -52,4 +52,9 @@ public interface PerlDebugOptions {
   String getInitCode();
 
   void setInitCode(String code);
+
+  /**
+   * @return true iff process should be restarted in case of disconnecting from the script's side
+   */
+  default boolean isReconnect() {return false;}
 }

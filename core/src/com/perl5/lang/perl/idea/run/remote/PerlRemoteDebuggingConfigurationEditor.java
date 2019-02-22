@@ -52,6 +52,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
   private JTextField myDebuggingHost;
   private JFormattedTextField myDebuggingPort;
   private JTextField myGeneratedCommandLine;
+  private JCheckBox myIsReconnectCheckbox;
 
   public PerlRemoteDebuggingConfigurationEditor(Project project) {
     super(project);
@@ -63,6 +64,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
     myPerlRole.setSelectedItem(perlConfiguration.getPerlRole());
     myDebuggingHost.setText(perlConfiguration.getDebugHost());
     myDebuggingPort.setText(String.valueOf(perlConfiguration.getDebugPort()));
+    myIsReconnectCheckbox.setSelected(perlConfiguration.isReconnect());
     updateCommandLine();
     super.resetEditorFrom(perlConfiguration);
   }
@@ -78,6 +80,7 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
     if (StringUtil.isNotEmpty(debuggingPort)) {
       perlConfiguration.setDebugPort(Integer.parseInt(myDebuggingPort.getText()));
     }
+    perlConfiguration.setReconnect(myIsReconnectCheckbox.isSelected());
     super.applyEditorTo(perlConfiguration);
   }
 
@@ -143,6 +146,9 @@ public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEdi
       LabeledComponent.create(myDebuggingPort, PerlBundle.message("perl.run.option.debugger.port"));
     debuggingPort.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(debuggingPort);
+
+    myIsReconnectCheckbox = new JCheckBox(PerlBundle.message("perl.run.option.debugger.reconnect"));
+    debugPanel.add(myIsReconnectCheckbox);
 
     myGeneratedCommandLine = new JTextField();
     myGeneratedCommandLine.setEditable(false);
