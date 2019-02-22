@@ -54,7 +54,7 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   public void testSubAnon() {doTest("sa");}
 
-  public void testSort() {doTest("sort");}
+  public void testSort() {doTest("so");}
 
   public void testSql() {doTest("sql");}
 

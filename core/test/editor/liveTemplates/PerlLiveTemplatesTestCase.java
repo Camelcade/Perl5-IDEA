@@ -25,14 +25,7 @@ public abstract class PerlLiveTemplatesTestCase extends PerlLightTestCase {
     return "testData/liveTemplates/perl";
   }
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    enableLiveTemplatesTesting();
-  }
-
   protected void doTest(@NotNull String textToType) {
-    doLiveTemplateTest("liveTemplatesTest", textToType);
+    doLiveTemplateTest(textToType);
   }
-
 }

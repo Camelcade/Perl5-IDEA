@@ -555,7 +555,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return sb.toString();
   }
 
+  protected void doLiveTemplateTest(@NotNull String textToType) {
+    doLiveTemplateTest("liveTemplatesTest", textToType);
+  }
+
   protected void doLiveTemplateTest(@NotNull String fileName, @NotNull String textToType) {
+    enableLiveTemplatesTesting();
     initWithFileSmart(fileName);
     Editor editor = getEditor();
     Document document = editor.getDocument();
