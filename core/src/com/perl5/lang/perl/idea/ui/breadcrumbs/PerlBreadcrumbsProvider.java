@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.ui.breadcrumbs;
 
 import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.breadcrumbs.BreadcrumbsProvider;
 import com.perl5.lang.perl.PerlLanguage;
@@ -47,7 +48,8 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
   @Nullable
   @Override
   public PsiElement getParent(@NotNull PsiElement element) {
-    return getStructuralParentElement(element);
+    PsiElement structuralParent = getStructuralParentElement(element);
+    return structuralParent instanceof PsiFile ? null : structuralParent;
   }
 
   @Nullable

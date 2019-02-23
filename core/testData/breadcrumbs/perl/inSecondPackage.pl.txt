@@ -2,34 +2,34 @@ package Bar::Baz;
 
 package Foo::Bar;
 $self->helper(some_helper => sub{
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[Foo::Bar, /package_gutter_icon.png: [sub(), /perl5classic.png, null]>
 });
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png>
+<[Foo::Bar, /package_gutter_icon.png>
 sub somesub {
     sub {
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [somesub(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[Foo::Bar, /package_gutter_icon.png: [somesub(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
     };
-    <[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [somesub(), /subroutine_gutter_icon.png>
+    <[Foo::Bar, /package_gutter_icon.png: [somesub(), /subroutine_gutter_icon.png>
 }
 
 method somemethos {
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [somemethos(), /method_gutter_icon.png>
+<[Foo::Bar, /package_gutter_icon.png: [somemethos(), /method_gutter_icon.png>
     sub {
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [somemethos(), /method_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[Foo::Bar, /package_gutter_icon.png: [somemethos(), /method_gutter_icon.png: [sub(), /perl5classic.png, null]>
     };
 }
 
 func somefunc {
-    <[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [somefunc(), /subroutine_gutter_icon.png>
+    <[Foo::Bar, /package_gutter_icon.png: [somefunc(), /subroutine_gutter_icon.png>
     sub {
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [somefunc(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[Foo::Bar, /package_gutter_icon.png: [somefunc(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
     };
 }
 
 sub {
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[Foo::Bar, /package_gutter_icon.png: [sub(), /perl5classic.png, null]>
 };
 
 eval {
-<[inSecondPackage.pl, /perl5classic.png, null]: [Foo::Bar, /package_gutter_icon.png>
+<[Foo::Bar, /package_gutter_icon.png>
 };

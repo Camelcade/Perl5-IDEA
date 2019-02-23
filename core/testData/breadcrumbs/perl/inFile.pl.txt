@@ -1,32 +1,32 @@
 $self->helper(some_helper => sub{
-<[inFile.pl, /perl5classic.png, null]: [sub(), /perl5classic.png, null]>
+<[sub(), /perl5classic.png, null]>
 });
-<[inFile.pl, /perl5classic.png, null]>
+<>
 sub somesub {
     sub {
-<[inFile.pl, /perl5classic.png, null]: [somesub(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[somesub(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
     };
-    <[inFile.pl, /perl5classic.png, null]: [somesub(), /subroutine_gutter_icon.png>
+    <[somesub(), /subroutine_gutter_icon.png>
 }
 
 method somemethos {
-<[inFile.pl, /perl5classic.png, null]: [somemethos(), /method_gutter_icon.png>
+<[somemethos(), /method_gutter_icon.png>
     sub {
-<[inFile.pl, /perl5classic.png, null]: [somemethos(), /method_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[somemethos(), /method_gutter_icon.png: [sub(), /perl5classic.png, null]>
     };
 }
 
 func somefunc {
-    <[inFile.pl, /perl5classic.png, null]: [somefunc(), /subroutine_gutter_icon.png>
+    <[somefunc(), /subroutine_gutter_icon.png>
     sub {
-<[inFile.pl, /perl5classic.png, null]: [somefunc(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
+<[somefunc(), /subroutine_gutter_icon.png: [sub(), /perl5classic.png, null]>
     };
 }
 
 sub {
-<[inFile.pl, /perl5classic.png, null]: [sub(), /perl5classic.png, null]>
+<[sub(), /perl5classic.png, null]>
 };
 
 eval {
-<[inFile.pl, /perl5classic.png, null]>
+<>
 };
