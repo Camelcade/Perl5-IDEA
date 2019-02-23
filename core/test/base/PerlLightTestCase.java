@@ -33,7 +33,7 @@ public abstract class PerlLightTestCase extends PerlLightTestCaseBase {
     return PerlFileTypeScript.EXTENSION_PL;
   }
 
-  protected void addTestMore() {
+  protected void withTestMore() {
     addTestLibrary("test_more");
   }
 
@@ -59,6 +59,8 @@ public abstract class PerlLightTestCase extends PerlLightTestCaseBase {
       throw new RuntimeException(e);
     }
   }
+
+  protected void withCpanfile() {addTestLibrary("cpanfile");}
 
   protected void withLog4perl() { addTestLibrary("log4perl"); }
 

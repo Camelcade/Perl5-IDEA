@@ -20,6 +20,7 @@ import base.PerlLightTestCase;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -43,14 +44,14 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   public void testTestMoreParameters() {
-    addTestMore();
-    doTestCompletion();
+    withTestMore();
+    doTest();
   }
 
   public void testCpanfile() {
-    addTestLibrary("cpanfile");
+    withCpanfile();
     initWithCpanFile();
-    doTestCompletionCheck("");
+    doTestCompletionCheck();
   }
 
   public void testLog4perlOptions() {doTest();}
@@ -67,165 +68,190 @@ public class PerlCompletionTest extends PerlLightTestCase {
     doTestCompletion((lookup, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), "Log4perl"));
   }
 
-  public void testReadonlyBare() {doTestCompletion();}
+  public void testReadonlyBare() {doTest();}
 
-  public void testReadonlyImport() {doTestCompletion();}
+  public void testReadonlyImport() {doTest();}
 
-  public void testReadonlyImported() {doTestCompletion();}
+  public void testReadonlyImported() {doTest();}
 
-  public void testReadonlyMethod() {doTestCompletion();}
+  public void testReadonlyMethod() {doTest();}
 
-  public void testTypesStandard() {doTestCompletion();}
+  public void testTypesStandard() {doTest();}
 
-  public void testVariableSubSignature() {doTestCompletion();}
+  public void testVariableSubSignature() {doTest();}
 
-  public void testVariableAnonSubSignature() {doTestCompletion();}
+  public void testVariableAnonSubSignature() {doTest();}
 
-  public void testVariableMethodSignature() {doTestCompletion();}
+  public void testVariableMethodSignature() {doTest();}
 
-  public void testVariableFuncSignature() {doTestCompletion();}
+  public void testVariableFuncSignature() {doTest();}
 
-  public void testDataPrinter() {doTestCompletion();}
+  public void testDataPrinter() {doTest();}
 
-  public void testListMoreUtilsParams() {doTestCompletion();}
+  public void testListMoreUtilsParams() {doTest();}
 
-  public void testBuiltInPackageExtension() {doTestCompletion();}
+  public void testBuiltInPackageExtension() {doTest();}
 
-  public void testAnnotatedRefMethod() {doTestCompletion();}
+  public void testAnnotatedRefMethod() {doTest();}
 
-  public void testWildCardReturns() {doTestCompletion();}
+  public void testWildCardReturns() {doTest();}
 
-  public void testVariableArrayInArray() {doTestCompletion();}
+  public void testVariableArrayInArray() {doTest();}
 
-  public void testVariableArrayInScalar() {doTestCompletion();}
+  public void testVariableArrayInScalar() {doTest();}
 
-  public void testVariableHashInArray() {doTestCompletion();}
+  public void testVariableHashInArray() {doTest();}
 
-  public void testVariableHashInHash() {doTestCompletion();}
+  public void testVariableHashInHash() {doTest();}
 
-  public void testVariableHashInScalar() {doTestCompletion();}
+  public void testVariableHashInScalar() {doTest();}
 
-  public void testVariableScalarLocal() {doTestCompletion();}
+  public void testVariableScalarLocal() {doTest();}
 
-  public void testVariableScalarMy() {doTestCompletion();}
+  public void testVariableScalarMy() {doTest();}
 
-  public void testVariableScalarOur() {doTestCompletion();}
+  public void testVariableScalarOur() {doTest();}
 
-  public void testVariableScalarState() {doTestCompletion();}
+  public void testVariableScalarState() {doTest();}
 
-  public void testNotOverridenSubs() {doTestCompletion();}
+  public void testNotOverridenSubs() {doTest();}
 
-  public void testMooseImports() {doTestCompletion();}
+  public void testMooseImports() {doTest();}
 
-  public void testMooseXMethodAttributes() {doTestCompletion();}
+  public void testMooseXMethodAttributes() {doTest();}
 
-  public void testMooseXMethodAttributesRole() {doTestCompletion();}
+  public void testMooseXMethodAttributesRole() {doTest();}
 
-  public void testMooseXRoleWithOverloading() {doTestCompletion();}
+  public void testMooseXRoleWithOverloading() {doTest();}
 
-  public void testMooseXRoleParametrized() {doTestCompletion();}
+  public void testMooseXRoleParametrized() {doTest();}
 
-  public void testMooseXClassAttribute() {doTestCompletion();}
+  public void testMooseXClassAttribute() {doTest();}
 
-  public void testMooseXTypesCheckedUtilExports() {doTestCompletion();}
+  public void testMooseXTypesCheckedUtilExports() {doTest();}
 
-  public void testMooseUtilTypeConstraints() {doTestCompletion();}
+  public void testMooseUtilTypeConstraints() {doTest();}
 
-  public void testMooseRoleImports() {doTestCompletion();}
+  public void testMooseRoleImports() {doTest();}
 
-  public void testMooseAttrs() {doTestCompletion();}
+  public void testMooseAttrs() {doTest();}
 
-  public void testMojoAttrs() {doTestCompletion();}
+  public void testMojoAttrs() {doTest();}
 
 
   public void testClassAccessor() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testExceptionClassAliasLocal() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testExceptionClassAliasStatic() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testExceptionClassAliasMethod() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testLibraryConstants() {
-    doTestCompletion();
+    doTest();
   }
 
-  public void testUsePackageInCurrentDir() {
+  public void testUsePackageInCurrentDir510() {
+    doTest(PerlVersion.V5_10);
+  }
+
+  public void testUsePackageInCurrentDir512() {
+    doTest(PerlVersion.V5_12);
+  }
+
+  public void testUsePackageInCurrentDir514() {
+    doTest(PerlVersion.V5_14);
+  }
+
+  public void testUsePackageInCurrentDir516() {
+    doTest(PerlVersion.V5_16);
+  }
+
+  public void testUsePackageInCurrentDir518() {
+    doTest(PerlVersion.V5_18);
+  }
+
+  public void testUsePackageInCurrentDir520() {
+    doTest(PerlVersion.V5_20);
+  }
+
+  public void testUsePackageInCurrentDir522() {
+    doTest(PerlVersion.V5_22);
+  }
+
+  public void testUsePackageInCurrentDir524() {
+    doTest(PerlVersion.V5_24);
+  }
+
+  public void testUsePackageInCurrentDir526() {
+    doTest(PerlVersion.V5_26);
+  }
+
+  public void testUsePackageInCurrentDir528() {
+    doTest(PerlVersion.V5_28);
+  }
+
+  public void doTest(@NotNull PerlVersion version) {
     addCustomPackage();
-    setTargetPerlVersion(PerlVersion.V5_10);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_12);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_14);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_16);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_18);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_20);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_22);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_24);
-    doTestCompletion("5_10");
-    setTargetPerlVersion(PerlVersion.V5_26);
-    doTestCompletion("5_26");
+    setTargetPerlVersion(version);
+    initWithFileSmart("usePackageInCurrentDir");
+    doTestCompletionCheck("", (__, presentation) -> "MyCustomPackage".equals(presentation.getItemText()));
   }
 
   public void testExceptionClass() {
-    doTestCompletion();
+    doTest();
   }
 
-  public void testReferenceCompletion() {doTestCompletion();}
+  public void testReferenceCompletion() {doTest();}
 
-  public void testCaptureScalar() {doTestCompletion();}
+  public void testCaptureScalar() {doTest();}
 
-  public void testCaptureArray() {doTestCompletion();}
+  public void testCaptureArray() {doTest();}
 
-  public void testCaptureHash() {doTestCompletion();}
+  public void testCaptureHash() {doTest();}
 
   public void testAnnotationReturnsPackage() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testAnnotationTypePackage() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportSubsParam() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportSubsParamWithoutExport() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportSubsParamWithoutExportOk() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportParamWithoutOption() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportParamWithoutOptionBundles() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportParamWithoutParent() {
-    doTestCompletion();
+    doTest();
   }
 
   private void doTestExportArray() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testExportArrayEmpty() {
@@ -249,7 +275,7 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   public void testPackageToStringQPartial() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageToStringQQ() {
@@ -265,83 +291,83 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   private void doTestStringCompletion() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testUnresolvedSubDeclaration() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testUnresolvedSubDefinition() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testConstants() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testConstantsWithPackage() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testVariableInDeclaration() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportSubs() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportHashes() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportArrays() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportScalars() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportDancer() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportDancer2() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportPosixOk() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportPosix() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testImportPosixVar() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testLexicalMy() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testLexicalState() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testLexicalOur() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testSameStatementSimple() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testSameStatementMap() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testHeredocOpenerBare() {
@@ -365,7 +391,7 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   private void doTestHeredoc() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testRefTypes() {
@@ -378,59 +404,59 @@ public class PerlCompletionTest extends PerlLightTestCase {
 
 
   public void testAnnotation() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testInjectMarkers() {
-    doTestCompletion();
+    doTest();
   }
 
 
   public void testNextLabels() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testGotoLabels() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageUse() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageNo() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageRequire() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageMy() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageOur() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testPackageState() {
-    doTestCompletion();
+    doTest();
   }
 
   public void testTryCatch() {
-    doTestCompletion();
+    doTest();
   }
 
-  public void testReturnsPackageTag() {doTestCompletion();}
+  public void testReturnsPackageTag() {doTest();}
 
-  public void testPackageVarTypePerl() {doTestCompletion();}
+  public void testPackageVarTypePerl() {doTest();}
 
-  public void testPackageVarTypeAnnotation() {doTestCompletion();}
+  public void testPackageVarTypeAnnotation() {doTest();}
 
-  public void testLazyExportOkQw() {doTestCompletion();}
+  public void testLazyExportOkQw() {doTest();}
 
-  public void testGlobSlots() {doTestCompletion();}
+  public void testGlobSlots() {doTest();}
 
   private void doTest() {
     doTestCompletion();

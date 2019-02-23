@@ -34,7 +34,7 @@ public class PerlResolveTest extends PerlLightTestCase {
   }
 
   public void testTestMoreWithPlan() {
-    addTestMore();
+    withTestMore();
     doTest();
   }
 
