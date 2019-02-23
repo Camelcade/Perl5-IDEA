@@ -208,18 +208,18 @@ public class PerlImplicitDeclarationsService {
   }
 
   @Nullable
-  public PerlSubDefinitionElement findCoreSub(@Nullable String subName) {
-    return findSub(CORE_PACKAGE, subName);
+  public PerlSubDefinitionElement getCoreSub(@Nullable String subName) {
+    return getSub(CORE_PACKAGE, subName);
   }
 
   @Nullable
-  public PerlSubDefinitionElement findSub(@Nullable String packageName, @Nullable String subName) {
-    return findSub(packageName + PACKAGE_SEPARATOR + subName);
+  public PerlSubDefinitionElement getSub(@Nullable String packageName, @Nullable String subName) {
+    return getSub(packageName + PACKAGE_SEPARATOR + subName);
   }
 
   @Contract("null->null")
   @Nullable
-  public PerlSubDefinitionElement findSub(@Nullable String canonicalName) {
+  public PerlSubDefinitionElement getSub(@Nullable String canonicalName) {
     return mySubsMap.get(canonicalName);
   }
 
@@ -228,7 +228,7 @@ public class PerlImplicitDeclarationsService {
   }
 
   public boolean processSubs(@NotNull String canonicalName, @NotNull Processor<? super PerlSubDefinitionElement> processor) {
-    PerlSubDefinitionElement subDefinitionElement = findSub(canonicalName);
+    PerlSubDefinitionElement subDefinitionElement = getSub(canonicalName);
     return subDefinitionElement == null || processor.process(subDefinitionElement);
   }
 

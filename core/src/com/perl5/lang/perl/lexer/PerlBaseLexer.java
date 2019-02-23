@@ -475,7 +475,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
         else if (StringUtil.equals(canonicalName, "UNIVERSAL::can")) {
           tokenType = QUALIFYING_PACKAGE;
         }
-        else if (myImplicitSubsService.findSub(canonicalName) != null) {
+        else if (myImplicitSubsService.getSub(canonicalName) != null) {
           tokenType = QUALIFYING_PACKAGE;
         }
         else if (mySubNamesProvider.getValue().contains(canonicalName)) {

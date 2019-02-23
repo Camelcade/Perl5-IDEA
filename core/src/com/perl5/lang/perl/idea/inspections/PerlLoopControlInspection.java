@@ -49,7 +49,7 @@ public class PerlLoopControlInspection extends PerlInspection {
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlSubDefinitionElement breakDefinition = Objects.requireNonNull(
-      PerlImplicitDeclarationsService.getInstance(holder.getProject()).findCoreSub("break"));
+      PerlImplicitDeclarationsService.getInstance(holder.getProject()).getCoreSub("break"));
 
     return new PerlVisitor() {
       @Override
