@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.readonly;
+package com.perl5.lang.perl.psi.references;
 
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsProvider;
 import org.jetbrains.annotations.NotNull;
 
-public class ReadonlyImplicitSubsProvider implements PerlImplicitSubsProvider {
+public class PerlCoreDeclarationsProvider implements PerlImplicitDeclarationsProvider {
   @NotNull
   @Override
   public String getSubsFileName() {
-    return "perlData/Readonly.xml";
+    return "perlData/CORE.xml";
   }
 }

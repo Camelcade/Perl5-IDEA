@@ -45,7 +45,7 @@
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"/>
     <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"/>
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider"/>
-    <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitSubsProvider"/>
+    <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension"/>
   </extensionPoints>
@@ -143,10 +143,10 @@
     <versionManagerHandler key="plenv"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
 
-    <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreSubsProvider"/>
-    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitSubsProvider"/>
-    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitSubsProvider"/>
-    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.extensions.typesStandard;
+package com.perl5.lang.perl.extensions.readonly;
 
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsProvider;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
 import org.jetbrains.annotations.NotNull;
 
-public class TypesStandardImplicitSubsProvider implements PerlImplicitSubsProvider {
+public class ReadonlyImplicitDeclarationsProvider implements PerlImplicitDeclarationsProvider {
   @NotNull
   @Override
   public String getSubsFileName() {
-    return "perlData/TypesStandard.xml";
+    return "perlData/Readonly.xml";
   }
 }

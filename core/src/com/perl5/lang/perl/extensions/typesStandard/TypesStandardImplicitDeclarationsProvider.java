@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.extensions.typesStandard;
 
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlCoreSubsProvider implements PerlImplicitSubsProvider {
+public class TypesStandardImplicitDeclarationsProvider implements PerlImplicitDeclarationsProvider {
   @NotNull
   @Override
   public String getSubsFileName() {
-    return "perlData/CORE.xml";
+    return "perlData/TypesStandard.xml";
   }
 }

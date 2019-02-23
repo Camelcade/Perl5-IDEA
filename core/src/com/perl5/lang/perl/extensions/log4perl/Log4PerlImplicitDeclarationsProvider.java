@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.references;
+package com.perl5.lang.perl.extensions.log4perl;
 
-import com.intellij.openapi.extensions.ExtensionPointName;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Provides information about implicitly defined subs, e.g {@code Types::Standard}
- */
-public interface PerlImplicitSubsProvider {
-  ExtensionPointName<PerlImplicitSubsProvider> EP_NAME = ExtensionPointName.create("com.perl5.implicitSubsProvider");
-
-  /**
-   * @return path to XML resource with subs description
-   * @see PerlImplicitDeclarationsService#readSubs(java.lang.ClassLoader, java.lang.String)
-   */
+public class Log4PerlImplicitDeclarationsProvider implements PerlImplicitDeclarationsProvider {
   @NotNull
-  String getSubsFileName();
+  @Override
+  public String getSubsFileName() {
+    return "perlData/Log4perl.xml";
+  }
 }
