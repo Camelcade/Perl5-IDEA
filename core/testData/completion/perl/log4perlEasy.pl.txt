@@ -1,0 +1,15 @@
+Lookups: ALWAYS; Text: ALWAYS; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: DEBUG; Text: DEBUG; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: ERROR; Text: ERROR; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: FATAL; Text: FATAL; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: INFO; Text: INFO; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGCARP; Text: LOGCARP; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGCLUCK; Text: LOGCLUCK; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGCONFESS; Text: LOGCONFESS; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGCROAK; Text: LOGCROAK; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGDIE; Text: LOGDIE; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGEXIT; Text: LOGEXIT; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: LOGWARN; Text: LOGWARN; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: TRACE; Text: TRACE; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: WARN; Text: WARN; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: get_logger; Text: get_logger; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null

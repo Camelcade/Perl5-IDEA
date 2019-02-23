@@ -17,6 +17,7 @@
 package completion;
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.internals.PerlVersion;
 
@@ -50,6 +51,20 @@ public class PerlCompletionTest extends PerlLightTestCase {
     addTestLibrary("cpanfile");
     initWithCpanFile();
     doTestCompletionCheck("");
+  }
+
+  public void testLog4perlOptions() {doTest();}
+
+  public void testLog4perlEasy() {doTestLog4Perl();}
+
+  public void testLog4perlEasyScalar() {doTestLog4Perl();}
+
+  public void testLog4perlGetLogger() {doTestLog4Perl();}
+
+  public void testLog4perlLevels() {doTestLog4Perl();}
+
+  private void doTestLog4Perl() {
+    doTestCompletion((lookup, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), "Log4perl"));
   }
 
   public void testReadonlyBare() {doTestCompletion();}
@@ -192,7 +207,6 @@ public class PerlCompletionTest extends PerlLightTestCase {
   public void testImportSubsParamWithoutExport() {
     doTestCompletion();
   }
-
 
   public void testImportSubsParamWithoutExportOk() {
     doTestCompletion();

@@ -1,0 +1,68 @@
+PerlNamespaceFileReference at (4,17); text in range: 'Log::Log4perl' => 1 results:
+	Perl5 at 0 in Log4perl.pm
+
+PerlSubReference at (30,35); text in range: 'TRACE' => 1 results:
+	Implicit sub: TRACE()
+
+PerlSubReference at (37,42); text in range: 'DEBUG' => 1 results:
+	Implicit sub: DEBUG()
+
+PerlSubReference at (44,48); text in range: 'INFO' => 1 results:
+	Implicit sub: INFO()
+
+PerlSubReference at (50,54); text in range: 'WARN' => 1 results:
+	Implicit sub: WARN()
+
+PerlSubReference at (56,61); text in range: 'ERROR' => 1 results:
+	Implicit sub: ERROR()
+
+PerlSubReference at (63,68); text in range: 'FATAL' => 1 results:
+	Implicit sub: FATAL()
+
+PerlSubReference at (70,76); text in range: 'ALWAYS' => 1 results:
+	Implicit sub: ALWAYS()
+
+PerlSubReference at (79,87); text in range: 'LOGCROAK' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Log::Log4perl::Logger::logcroak($self, $arg) at 29387 in Logger.pm
+
+PerlSubReference at (89,97); text in range: 'LOGCLUCK' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Log::Log4perl::Logger::logcluck($self) at 28268 in Logger.pm
+
+PerlSubReference at (99,106); text in range: 'LOGCARP' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Log::Log4perl::Logger::logcarp($self) at 28788 in Logger.pm
+
+PerlSubReference at (108,118); text in range: 'LOGCONFESS' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Log::Log4perl::Logger::logconfess($self, $arg) at 30143 in Logger.pm
+
+PerlSubReference at (121,127); text in range: 'LOGDIE' => 0 results:
+
+PerlSubReference at (129,136); text in range: 'LOGWARN' => 1 results:
+	Implicit sub: LOGWARN()
+
+PerlSubReference at (138,145); text in range: 'LOGEXIT' => 1 results:
+	Implicit sub: LOGEXIT()
+
+PerlVariableReference at (149,152); text in range: 'OFF' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::OFF@null
+
+PerlVariableReference at (155,160); text in range: 'FATAL' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::FATAL@null
+
+PerlVariableReference at (163,168); text in range: 'ERROR' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::ERROR@null
+
+PerlVariableReference at (171,175); text in range: 'WARN' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::WARN@null
+
+PerlVariableReference at (178,182); text in range: 'INFO' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::INFO@null
+
+PerlVariableReference at (185,190); text in range: 'DEBUG' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::DEBUG@null
+
+PerlVariableReference at (193,198); text in range: 'TRACE' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::TRACE@null
+
+PerlVariableReference at (201,204); text in range: 'ALL' => 1 results:
+	Implicit variable: $Log::Log4perl::Levels::ALL@null
+

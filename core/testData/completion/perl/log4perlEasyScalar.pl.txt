@@ -1,0 +1,8 @@
+Lookups: ALL; Text: ALL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: DEBUG; Text: DEBUG; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: ERROR; Text: ERROR; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: FATAL; Text: FATAL; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: INFO; Text: INFO; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: OFF; Text: OFF; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: TRACE; Text: TRACE; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: WARN; Text: WARN; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null

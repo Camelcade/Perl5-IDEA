@@ -1,0 +1,3 @@
+use Log::Log4perl qw/get_logger/;
+
+<caret>

@@ -1,0 +1,1 @@
+use Log::Log4perl qw/<caret>/;

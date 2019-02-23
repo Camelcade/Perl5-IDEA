@@ -1,0 +1,1 @@
+Lookups: get_logger; Text: get_logger; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null

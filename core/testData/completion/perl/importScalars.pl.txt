@@ -93,6 +93,14 @@ Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /
 Lookups: LAST_REGEXP_CODE_RESULT; Text: LAST_REGEXP_CODE_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: LAST_SUBMATCH_RESULT; Text: LAST_SUBMATCH_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: LIST_SEPARATOR; Text: LIST_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::ALL; Text: Log::Log4perl::Levels::ALL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::DEBUG; Text: Log::Log4perl::Levels::DEBUG; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::ERROR; Text: Log::Log4perl::Levels::ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::FATAL; Text: Log::Log4perl::Levels::FATAL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::INFO; Text: Log::Log4perl::Levels::INFO; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::OFF; Text: Log::Log4perl::Levels::OFF; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::TRACE; Text: Log::Log4perl::Levels::TRACE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+Lookups: Log::Log4perl::Levels::WARN; Text: Log::Log4perl::Levels::WARN; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MATCH; Text: MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MULTILINE_MATCHING; Text: MULTILINE_MATCHING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: Mojolicious::Controller::AUTOLOAD; Text: Mojolicious::Controller::AUTOLOAD; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
