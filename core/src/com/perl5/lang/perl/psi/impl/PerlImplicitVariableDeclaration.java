@@ -51,13 +51,17 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   protected final String myVariableName;
   @Nullable
   protected final String myVariableClass;
+
+  @Nullable
+  protected final String myPackageName;
+
   protected final boolean myIsLexical;
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
 
-
   protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
                                             @NotNull String variableNameWithSigil,
+                                            @Nullable String packageName,
                                             @Nullable String variableClass,
                                             boolean isLexical,
                                             boolean isLocal,
@@ -87,6 +91,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
       myIsLexical = isLexical;
       myIsLocal = isLocal;
       myIsInvocant = isInvocant;
+      myPackageName = packageName;
     }
     else {
       throw new RuntimeException("Incorrect variable name, should start from sigil: " + variableNameWithSigil);
@@ -94,8 +99,14 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
+  @Nullable
+  public final String getPackageName() {
+    return myPackageName != null ? myPackageName : super.getPackageName();
+  }
+
+  @Override
   public String toString() {
-    return getVariableType().getSigil() + getVariableName() + '@' + getVariableClass();
+    return "Implicit variable: " + getVariableType().getSigil() + getCanonicalName() + '@' + getVariableClass();
   }
 
   @Nullable
@@ -306,6 +317,13 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @NotNull
+  public static PerlImplicitVariableDeclaration createGlobal(@NotNull PsiManager psiManager,
+                                                             @NotNull String variableName,
+                                                             @Nullable String packageName) {
+    return create(psiManager, variableName, packageName, null, false, false, false, null);
+  }
+
+  @NotNull
   public static PerlImplicitVariableDeclaration createLexical(@NotNull PsiElement parent,
                                                               @NotNull String variableName
   ) {
@@ -327,22 +345,28 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @NotNull
-  public static PerlImplicitVariableDeclaration create(@NotNull PsiElement parent,
-                                                       @NotNull String variableName,
-                                                       @Nullable String variableClass,
-                                                       boolean isLexical,
-                                                       boolean isLocal,
-                                                       boolean isInvocant
+  private static PerlImplicitVariableDeclaration create(@NotNull PsiElement parent,
+                                                        @NotNull String variableName,
+                                                        @Nullable String variableClass,
+                                                        boolean isLexical,
+                                                        boolean isLocal,
+                                                        boolean isInvocant
+  ) {
+    return create(parent.getManager(), variableName, null, variableClass, isLexical, isLocal, isInvocant, parent);
+  }
+
+  @NotNull
+  private static PerlImplicitVariableDeclaration create(@NotNull PsiManager psiManager,
+                                                        @NotNull String variableNameWithSigil,
+                                                        @Nullable String packageName,
+                                                        @Nullable String variableClass,
+                                                        boolean isLexical,
+                                                        boolean isLocal,
+                                                        boolean isInvocant,
+                                                        @Nullable PsiElement parent
   ) {
     return new PerlImplicitVariableDeclaration(
-      parent.getManager(),
-      variableName,
-      variableClass,
-      isLexical,
-      isLocal,
-      isInvocant,
-      parent
-    );
+      psiManager, variableNameWithSigil, packageName, variableClass, isLexical, isLocal, isInvocant, parent);
   }
 }
 

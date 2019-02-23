@@ -1,12 +1,12 @@
 PerlVariableReference at (14,18); text in range: 'self' => 1 results:
-	$self@Mojolicious::Controller
+	Implicit variable: $Mojo::Template::Sandbox::B604737585B1831AADC8E1B05CD16B19::self@Mojolicious::Controller
 
 PerlVariableReference at (27,28); text in range: 'c' => 1 results:
-	$c@Mojolicious::Controller
+	Implicit variable: $Mojo::Template::Sandbox::B604737585B1831AADC8E1B05CD16B19::c@Mojolicious::Controller
 
 PerlVariableReference at (37,39); text in range: '_O' => 1 results:
-	$_O@null
+	Implicit variable: $Mojo::Template::Sandbox::B604737585B1831AADC8E1B05CD16B19::_O@null
 
 PerlVariableReference at (48,50); text in range: 'cb' => 1 results:
-	$cb@null
+	Implicit variable: $Mojo::Template::Sandbox::B604737585B1831AADC8E1B05CD16B19::cb@null
 

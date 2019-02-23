@@ -1,5 +1,5 @@
 HTMLMasonComponentReference at (5,14); text in range: 'something' => 0 results:
 
 PerlVariableReference at (25,32); text in range: 'product' => 1 results:
-	$product@Foo::Bar
+	Implicit variable: $main::product@Foo::Bar
 

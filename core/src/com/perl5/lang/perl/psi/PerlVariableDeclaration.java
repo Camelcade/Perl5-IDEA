@@ -68,7 +68,7 @@ public interface PerlVariableDeclaration extends PerlDeprecatable {
    * @return fqn or null if name is missing
    */
   @Nullable
-  default String getFullQualifiedName() {
+  default String getCanonicalName() {
     String variableName = getVariableName();
     if (StringUtil.isEmpty(variableName)) {
       return null;

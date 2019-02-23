@@ -81,6 +81,10 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
     return result;
   }
 
+  default boolean isBuiltIn() {
+    return false;
+  }
+
   default boolean processDirectOverridingSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
     String packageName = getPackageName();
     String subName = getSubName();
