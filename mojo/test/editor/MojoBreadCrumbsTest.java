@@ -24,6 +24,8 @@ public class MojoBreadCrumbsTest extends PerlLightTestCase {
     return "testData/breadcrumbs";
   }
 
+  public void testAttribute() {doTest();}
+
   public void testInFile() {doTest();}
 
   private void doTest() {

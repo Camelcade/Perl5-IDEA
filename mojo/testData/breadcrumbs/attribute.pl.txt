@@ -1,0 +1,3 @@
+has something => sub{
+  <[attribute.pl, /perl5classic.png, null]: [something(), /method_gutter_icon.png>
+};

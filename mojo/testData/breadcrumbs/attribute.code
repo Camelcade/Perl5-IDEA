@@ -1,0 +1,3 @@
+has something => sub{
+  <caret>
+};

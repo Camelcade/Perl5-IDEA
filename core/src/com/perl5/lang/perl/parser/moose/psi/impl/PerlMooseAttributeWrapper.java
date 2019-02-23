@@ -25,6 +25,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
+import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
@@ -131,14 +132,17 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     if (lists == null) {
       return Collections.emptyList();
     }
-    return lists.second.size() < 3 ? createMojoAttributes(lists.first) : createMooseAttributes(lists.first, lists.second);
+    return lists.second.size() < 3 ? createMojoAttributes(lists) : createMooseAttributes(lists.first, lists.second);
   }
 
   @NotNull
-  private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull List<PsiElement> identifiers) {
+  private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
+    List<PsiElement> arguments = lists.second.subList(1, lists.second.size());
+    PerlSubExpr bodyExpr = arguments.size() == 1 && arguments.get(0) instanceof PerlSubExpr ? (PerlSubExpr)arguments.get(0) : null;
+
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
     String packageName = PerlPackageUtil.getContextPackageName(this);
-    for (PsiElement identifier : identifiers) {
+    for (PsiElement identifier : lists.first) {
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,
         ElementManipulators.getValueText(identifier),
@@ -146,7 +150,8 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
         identifier,
         packageName,
         Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
-        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
+        PerlSubAnnotations.tryToFindAnnotations(identifier, getParent()),
+        bodyExpr == null ? null : bodyExpr.getBlock()
       );
       result.add(setMojoReturnsComputation(newMethod));
     }
