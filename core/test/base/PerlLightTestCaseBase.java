@@ -147,6 +147,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestCase {
@@ -358,12 +359,21 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public final void doTestCompletion() {
-    doTestCompletion("");
+    doTestCompletion("", null);
+  }
+
+  public final void doTestCompletion(BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
+    doTestCompletion("", predicate);
   }
 
   public final void doTestCompletion(@NotNull String answerSuffix) {
+    doTestCompletion(answerSuffix, null);
+  }
+
+  public final void doTestCompletion(@NotNull String answerSuffix,
+                                     BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     initWithFileSmart();
-    doTestCompletionCheck(answerSuffix);
+    doTestCompletionCheck(answerSuffix, predicate);
   }
 
   public final void doTestCompletionFromText(@NotNull String content) {
@@ -372,6 +382,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestCompletionCheck(@NotNull String answerSuffix) {
+    doTestCompletionCheck(answerSuffix, null);
+  }
+
+  protected void doTestCompletionCheck(@NotNull String answerSuffix,
+                                       @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     addVirtualFileFilter();
     myFixture.complete(CompletionType.BASIC, 1);
@@ -380,9 +395,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     removeVirtualFileFilter();
     if (elements != null) {
       for (LookupElement lookupElement : elements) {
-        StringBuilder sb = new StringBuilder();
         LookupElementPresentation presentation = new LookupElementPresentation();
         lookupElement.renderElement(presentation);
+
+        if (predicate != null && !predicate.test(lookupElement, presentation)) {
+          continue;
+        }
+        StringBuilder sb = new StringBuilder();
 
         sb.append("Lookups: ")
           .append(StringUtil.join(lookupElement.getAllLookupStrings(), ", "))
