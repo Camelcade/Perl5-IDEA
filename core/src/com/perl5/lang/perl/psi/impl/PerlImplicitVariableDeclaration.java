@@ -24,6 +24,8 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -100,8 +102,15 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Override
   @Nullable
-  public final String getPackageName() {
-    return myPackageName != null ? myPackageName : super.getPackageName();
+  public final String getNamespaceName() {
+    String explicitPackageName = this.getExplicitNamespaceName();
+    return explicitPackageName != null ? explicitPackageName : PerlPackageUtil.getContextNamespaceName(this);
+  }
+
+  @Nullable
+  @Override
+  public String getExplicitNamespaceName() {
+    return myPackageName;
   }
 
   @Override
@@ -115,10 +124,10 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     return getVariableClass();
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String guessVariableType() {
-    return getVariableClass();
+  public PerlValue getPerlValue() {
+    return PerlValueStatic.create(getVariableClass());
   }
 
   @Nullable
@@ -190,7 +199,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   public String getVariableClass() {
     return myVariableClass;
   }
-
 
   @NotNull
   @Override
@@ -340,7 +348,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @NotNull
   public static PerlImplicitVariableDeclaration createInvocant(@NotNull PsiElement parent) {
-    return create(parent, PerlMethodDefinitionMixin.getDefaultInvocantName(), PerlPackageUtil.getContextPackageName(parent), true, false,
+    return create(parent, PerlMethodDefinitionMixin.getDefaultInvocantName(), PerlPackageUtil.getContextNamespaceName(parent), true, false,
                   true);
   }
 

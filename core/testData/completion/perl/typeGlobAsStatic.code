@@ -1,0 +1,8 @@
+package Foo::Bar;
+
+*somehting = sub{};
+my $var = *someotherthing;
+
+package main;
+
+Foo::Bar::<caret>

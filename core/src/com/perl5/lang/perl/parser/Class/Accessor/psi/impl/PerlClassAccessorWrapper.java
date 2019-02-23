@@ -67,7 +67,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
   @NotNull
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElementsFromPsi() {
-    String packageName = PerlPackageUtil.getContextPackageName(this);
+    String packageName = PerlPackageUtil.getContextNamespaceName(this);
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
     }

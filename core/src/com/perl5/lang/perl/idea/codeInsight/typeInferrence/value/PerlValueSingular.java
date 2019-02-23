@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.types;
+package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import org.jetbrains.annotations.NotNull;
 
-public class PerlTypeHashRef extends PerlTypeWrapping {
-  public PerlTypeHashRef(@NotNull PerlType innerType) {
-    super(innerType);
+/**
+ * Represents singular entities - scalars and references
+ */
+public abstract class PerlValueSingular extends PerlBlessableValue {
+  protected PerlValueSingular() {
   }
 
-  @Override
-  public boolean equals(Object o) {
-    return o instanceof PerlTypeHashRef && super.equals(o);
+  protected PerlValueSingular(@NotNull PerlValue bless) {
+    super(bless);
   }
 
-  @Override
-  public String toString() {
-    return HASH_REF + super.toString();
+  protected PerlValueSingular(@NotNull PerlValue original,
+                              @NotNull PerlValue bless) {
+    super(original, bless);
   }
 }

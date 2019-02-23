@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IFileElementType;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.moose.psi.elementTypes.PerlMooseAttributeElementType;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubElementType;
 import com.perl5.lang.perl.psi.stubs.imports.PerlNoStatementStubElementType;
@@ -56,4 +58,5 @@ public interface PerlStubElementTypes {
   IStubElementType PERL_GLOB = new PerlGlobStubElementType("*");
 
   IStubElementType PERL_VARIABLE_DECLARATION_ELEMENT = new PerlVariableStubElementType("VARIABLE_DECLARATION_ELEMENT");
+  IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
 }

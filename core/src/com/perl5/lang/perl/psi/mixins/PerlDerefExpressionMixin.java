@@ -21,12 +21,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_DEREFERENCE;
 
 /**
@@ -39,32 +41,25 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
   @Nullable
   @Override
-  public String getPreviousElementNamespace(PsiElement methodElement) {
-    // todo add some caching here
-    if (methodElement == getFirstChild())    // first element
-    {
-      return PerlPackageUtil.getContextPackageName(this);
+  public PsiElement getPreviousElement(@Nullable PsiElement currentElement) {
+    if (currentElement == null) {
+      return null;
     }
-
-    return getCurrentElementNamespace(methodElement.getPrevSibling());
-  }
-
-  @Nullable
-  public String getCurrentElementNamespace(PsiElement currentElement) {
     IElementType currentElementType;
     while (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(currentElementType = PsiUtilCore.getElementType(currentElement))
            || currentElementType == OPERATOR_DEREFERENCE) {
       currentElement = currentElement.getPrevSibling();
     }
-
-    return PerlPsiUtil.getPerlExpressionNamespace(currentElement);
+    return currentElement;
   }
 
-  public String guessType() {
-    PsiElement[] children = getChildren();
-    if (children.length > 0) {
-      return getCurrentElementNamespace(children[children.length - 1]);
+  @NotNull
+  @Override
+  public PerlValue getPerlValue() {
+    PsiElement lastChild = getLastChild();
+    if (!(lastChild instanceof PerlValuableEntity)) {
+      return UNKNOWN_VALUE;
     }
-    return null;
+    return ((PerlValuableEntity)lastChild).getPerlValue();
   }
 }

@@ -27,14 +27,18 @@ public interface PerlSubNameElement extends PsiElement {
    * Trying to get the package name from explicit specification or by traversing
    *
    * @return package name for current element
+   * @deprecated containing method should be used
    */
+  @Deprecated
   String getPackageName();
 
   /**
    * Returns fullname package::element
    *
    * @return name
+   * @deprecated containing method should be used
    */
+  @Deprecated
   String getCanonicalName();
 
 

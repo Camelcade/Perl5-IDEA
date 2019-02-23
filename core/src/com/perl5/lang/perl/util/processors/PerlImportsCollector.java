@@ -20,12 +20,13 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by hurricup on 03.09.2015.
  */
-public abstract class PerlImportsCollector extends PerlNamespaceEntityProcessor<PerlExportDescriptor> {
+public abstract class PerlImportsCollector implements PerlNamespaceEntityProcessor<PerlExportDescriptor> {
   final protected List<PerlExportDescriptor> myResult;
 
   public PerlImportsCollector() {
@@ -44,6 +45,6 @@ public abstract class PerlImportsCollector extends PerlNamespaceEntityProcessor<
 
   @NotNull
   public List<PerlExportDescriptor> getResult() {
-    return myResult;
+    return myResult.isEmpty() ? Collections.emptyList() : myResult;
   }
 }

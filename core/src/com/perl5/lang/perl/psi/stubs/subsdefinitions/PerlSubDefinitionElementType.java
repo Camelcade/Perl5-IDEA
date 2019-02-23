@@ -63,7 +63,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
   @Override
   public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
     //noinspection unchecked
-    return createStubElement(parentStub, psi.getPackageName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getAnnotations());
+    return createStubElement(parentStub, psi.getNamespaceName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getAnnotations());
   }
 
 
@@ -79,7 +79,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
     if (canonicalName != null) {
       sink.occurrence(getDirectKey(), canonicalName);
     }
-    String packageName = stub.getPackageName();
+    String packageName = stub.getNamespaceName();
     if (packageName != null) {
       sink.occurrence(getReverseKey(), packageName);
     }
@@ -95,7 +95,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
 
   @Override
   public void serialize(@NotNull PerlSubDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getSubName());
 
     PerlSubArgument.serializeList(dataStream, stub.getSubArgumentsList());

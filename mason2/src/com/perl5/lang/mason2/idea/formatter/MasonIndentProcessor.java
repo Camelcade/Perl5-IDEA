@@ -17,7 +17,6 @@
 package com.perl5.lang.mason2.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason2.Mason2TemplatingParserDefinition;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
@@ -37,7 +36,7 @@ public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2E
   public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
     PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
     TokenSet.create(
-      Mason2TemplatingParserDefinition.FILE,
+      Mason2ElementTypes.COMPONENT_FILE,
 
       MASON_AUGMENT_MODIFIER,
       MASON_AFTER_MODIFIER,

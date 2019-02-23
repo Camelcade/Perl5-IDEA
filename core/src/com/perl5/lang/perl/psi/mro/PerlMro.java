@@ -17,16 +17,22 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+
+import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 
 /**
  * Created by hurricup on 08.08.2015.
@@ -40,100 +46,102 @@ public abstract class PerlMro {
    * Method should not add package itself or UNIVERSAL, only parents structure. Package itself and UNIVERSAL being added by calee
    *
    * @param project      current project
-   * @param packageNames list of namespaces to check
+   * @param namespaceDefinitions list of namespaces to check
    * @param recursionMap map for controlling recursive inheritance
    * @param result       list of package names to populate
    */
-  public abstract void getLinearISA(Project project,
-                                    List<PerlNamespaceDefinitionElement> packageNames,
-                                    HashSet<String> recursionMap,
-                                    ArrayList<String> result);
+  public abstract void getLinearISA(@NotNull Project project,
+                                    @NotNull List<PerlNamespaceDefinitionElement> namespaceDefinitions,
+                                    @NotNull Set<String> recursionMap,
+                                    @NotNull List<String> result);
 
   /**
    * Resolving method with current MRO;
    *
-   * @param project     current Project
-   * @param packageName package name
-   * @param subName     sub name
-   * @param isSuper     super flag
    * @return collection of first encountered super subs declarations, definitions, constants and typeglobs
+   * @deprecated use {@link #processTargets(Project, GlobalSearchScope, String, Set, boolean, Processor)}
    */
   @NotNull
-  public static Collection<PsiElement> resolveSub(@NotNull Project project, String packageName, String subName, boolean isSuper) {
-    Collection<PsiElement> result = new ArrayList<>();
+  public static Collection<PsiElement> resolveSub(@NotNull Project project,
+                                                  @NotNull GlobalSearchScope searchScope,
+                                                  @Nullable String namespaceName,
+                                                  @Nullable String subName,
+                                                  boolean isSuper) {
     if (subName == null) {
-      return result;
+      return Collections.emptyList();
     }
-
-    if (packageName == null) {
-      packageName = PerlPackageUtil.UNIVERSAL_PACKAGE;
+    if (namespaceName == null) {
+      namespaceName = PerlPackageUtil.UNIVERSAL_PACKAGE;
     }
-
-    Collection<String> linearISA = getLinearISA(project, packageName, isSuper);
-
-    for (String currentPackageName : linearISA) {
-      collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName);
-
-      if (!result.isEmpty()) {
-        break;
-      }
-    }
-
-
-    if (result.isEmpty()) {
-      for (String currentPackageName : linearISA) {
-        if (!PerlPackageUtil.isUNIVERSAL(currentPackageName)) // ignoring UNIVERSAL::AUTOLOAD
-        {
-          collectEntities(result, project, currentPackageName + PerlPackageUtil.PACKAGE_SEPARATOR + "AUTOLOAD");
-
-          if (!result.isEmpty()) {
-            break;
-          }
-        }
-      }
-    }
-
+    Collection<PsiElement> result = new ArrayList<>();
+    processTargets(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
     return result;
   }
 
-  protected static void collectEntities(Collection<PsiElement> result, Project project, String fullName) {
-    result.addAll(PerlSubUtil.getSubDefinitions(project, fullName));
-    result.addAll(PerlSubUtil.getSubDeclarations(project, fullName));
-    result.addAll(PerlGlobUtil.getGlobsDefinitions(project, fullName));
+  public static boolean processTargets(@NotNull Project project,
+                                       @NotNull GlobalSearchScope searchScope,
+                                       @NotNull String baseNamespaceName,
+                                       @NotNull Set<String> subNames,
+                                       boolean isSuper,
+                                       @NotNull Processor<? super PsiNamedElement> processor) {
+    Collection<String> linearISA = getLinearISA(project, searchScope, baseNamespaceName, isSuper);
+
+    Ref<String> stopFlag = Ref.create();
+    for (String currentNamespaceName : linearISA) {
+      for (String subName : subNames) {
+        if (!PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(currentNamespaceName, subName), it -> {
+          stopFlag.set("");
+          return processor.process(it);
+        })) {
+          return false;
+        }
+      }
+      if (!stopFlag.isNull()) {
+        return true;
+      }
+    }
+
+    for (String currentNamespaceName : linearISA) {
+      if (PerlPackageUtil.isUNIVERSAL(currentNamespaceName)) {
+        continue;
+      }
+      if (!PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
+        processor.process(it);
+        return false;
+      })) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**
    * Returns collection of Sub Definitions of class and it's superclasses according perl's default MRO
    *
    * @param psiElement      anchorElement
-   * @param basePackageName base project
+   * @param baseNamespaceName base project
    * @param isSuper         flag for SUPER resolutions
    * @return collection of definitions
    */
-  public static Collection<PsiElement> getVariants(@NotNull PsiElement psiElement, String basePackageName, boolean isSuper) {
+  public static Collection<PsiElement> getVariants(@NotNull PsiElement psiElement,
+                                                   @Nullable String baseNamespaceName,
+                                                   boolean isSuper) {
+    if (baseNamespaceName == null) {
+      return Collections.emptyList();
+    }
     Project project = psiElement.getProject();
-    HashMap<String, PsiElement> methods = new HashMap<>();
+    Map<String, PsiElement> methods = new HashMap<>();
 
-    if (basePackageName != null) {
-      GlobalSearchScope searchScope = psiElement.getResolveScope();
-      for (String packageName : getLinearISA(project, basePackageName, isSuper)) {
-        PerlSubUtil.processSubDefinitionsInPackage(project, packageName, searchScope, subDefinition -> {
-          if (!methods.containsKey(subDefinition.getSubName())) {
-            methods.put(subDefinition.getSubName(), subDefinition);
-          }
-          return true;
-        });
-        PerlSubUtil.processSubDeclarationsInPackage(project, packageName, searchScope, subDeclaration -> {
-          if (!methods.containsKey(subDeclaration.getSubName())) {
-            methods.put(subDeclaration.getSubName(), subDeclaration);
-          }
-          return true;
-        });
-
-        for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName)) {
-          if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName())) {
-            methods.put(globVariable.getName(), globVariable);
-          }
+    GlobalSearchScope searchScope = psiElement.getResolveScope();
+    for (String packageName : getLinearISA(project, psiElement.getResolveScope(), baseNamespaceName, isSuper)) {
+      PerlSubUtil.processRelatedSubsInPackage(project, searchScope, packageName, it -> {
+        methods.putIfAbsent(it.getName(), it);
+        return true;
+      });
+      for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitions(project, "*" + packageName)) {
+        if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName())) {
+          methods.putIfAbsent(globVariable.getName(), globVariable);
         }
       }
     }
@@ -144,12 +152,14 @@ public abstract class PerlMro {
   /**
    * Building linear @ISA list
    *
-   * @param project     current project
    * @param packageName current package name
    * @param isSuper     if false - we include current package into the list, true - otherwise
    * @return list of linear @ISA
    */
-  public static ArrayList<String> getLinearISA(Project project, @NotNull String packageName, boolean isSuper) {
+  public static ArrayList<String> getLinearISA(@NotNull Project project,
+                                               @NotNull GlobalSearchScope searchScope,
+                                               @NotNull String packageName,
+                                               boolean isSuper) {
     HashSet<String> recursionMap = new HashSet<>();
     ArrayList<String> result = new ArrayList<>();
 
@@ -158,7 +168,7 @@ public abstract class PerlMro {
       result.add(packageName);
     }
 
-    getPackageParents(project, packageName, recursionMap, result);
+    getPackageParents(project, searchScope, packageName, recursionMap, result);
 
     if (!recursionMap.contains(PerlPackageUtil.UNIVERSAL_PACKAGE)) {
       result.add(PerlPackageUtil.UNIVERSAL_PACKAGE);
@@ -167,13 +177,14 @@ public abstract class PerlMro {
     return result;
   }
 
-  public static void getPackageParents(Project project,
+  public static void getPackageParents(@NotNull Project project,
+                                       @NotNull GlobalSearchScope searchScope,
                                        @NotNull String packageName,
-                                       HashSet<String> recursionMap,
-                                       ArrayList<String> result) {
+                                       @NotNull Set<String> recursionMap,
+                                       @NotNull List<String> result) {
     // at the moment we are checking all definitions available
     // fixme we should check only those, which are used in currrent file
-    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, packageName)) {
+    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, searchScope, packageName)) {
       namespaceDefinition.getLinearISA(recursionMap, result);
     }
   }

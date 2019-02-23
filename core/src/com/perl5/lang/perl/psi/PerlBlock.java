@@ -26,9 +26,9 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.PerlParserDefinition.FILE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LAZY_CODE_BLOCKS;
+import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.FILE;
 
 /**
  * This is just a block, part of other constructions: loops, declarations or blocks compounds

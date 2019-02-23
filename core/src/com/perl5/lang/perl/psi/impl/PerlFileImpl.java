@@ -123,6 +123,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     return PerlPackageUtil.MAIN_PACKAGE;
   }
 
+  @NotNull
   @Override
   public PerlMroType getMroType() {
     return PerlMroType.DFS;

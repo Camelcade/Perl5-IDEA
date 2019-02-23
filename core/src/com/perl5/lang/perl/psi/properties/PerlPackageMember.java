@@ -28,7 +28,7 @@ public interface PerlPackageMember {
    * @return package name or null if n/a
    */
   @Nullable
-  String getExplicitPackageName();
+  String getExplicitNamespaceName();
 
   /**
    * Trying to get the package name from explicit specification or by traversing
@@ -36,7 +36,7 @@ public interface PerlPackageMember {
    * @return package name for current element
    */
   @Nullable
-  String getPackageName();
+  String getNamespaceName();
 
   /**
    * Returns fullname package::element

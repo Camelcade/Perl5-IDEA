@@ -24,7 +24,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonFileElementType;
 import com.perl5.lang.htmlmason.lexer.HTMLMasonLexerAdapter;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -35,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 05.03.2016.
  */
 public class HTMLMasonParserDefinition extends PerlParserDefinition implements HTMLMasonElementTypes {
-  public static final IFileElementType FILE = new HTMLMasonFileElementType("HTML::Mason component", HTMLMasonLanguage.INSTANCE);
 
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
                                                          TokenSet.create(

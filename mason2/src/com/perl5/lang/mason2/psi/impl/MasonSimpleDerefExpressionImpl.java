@@ -17,9 +17,6 @@
 package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PsiPerlDerefExprImpl;
 
 /**
@@ -28,16 +25,5 @@ import com.perl5.lang.perl.psi.impl.PsiPerlDerefExprImpl;
 public class MasonSimpleDerefExpressionImpl extends PsiPerlDerefExprImpl {
   public MasonSimpleDerefExpressionImpl(ASTNode node) {
     super(node);
-  }
-
-  @Override
-  public String getCurrentElementNamespace(PsiElement currentElement) {
-    MasonNamespaceDefinition namespaceDefinition = PsiTreeUtil.getParentOfType(this, MasonNamespaceDefinition.class);
-
-    if (namespaceDefinition != null) {
-      return namespaceDefinition.getPackageName();
-    }
-
-    return super.getCurrentElementNamespace(currentElement);
   }
 }

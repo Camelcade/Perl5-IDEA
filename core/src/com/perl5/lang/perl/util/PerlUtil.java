@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -26,16 +25,10 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlUseStatement;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
-import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -124,37 +117,6 @@ public class PerlUtil implements PerlElementTypes {
       });
 
     return result;
-  }
-
-  /**
-   * Processing use statements in the namespace or file and processing all imports found
-   *
-   * @param namespace Root element to start searching from
-   */
-  public static void processImportedEntities(
-    @NotNull PerlNamespaceDefinitionElement namespace,
-    @NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor
-  ) {
-    for (PsiElement element : PerlPsiUtil.collectUseStatements(namespace)) {
-      PerlUseStatement useStatement = (PerlUseStatement)element;
-      String packageName = useStatement.getPackageName();
-
-      if (packageName != null) {
-        for (PerlExportDescriptor entry : useStatement.getPackageProcessor().getImports(useStatement)) {
-          ProgressManager.checkCanceled();
-          processor.process(packageName, entry);
-        }
-      }
-    }
-
-    PerlImportsProvider.processProviders(namespace, provider -> {
-      for (PerlExportDescriptor descriptor : provider.getImports()) {
-        if (!processor.process(namespace.getPackageName(), descriptor)) {
-          return false;
-        }
-      }
-      return true;
-    });
   }
 
   /**

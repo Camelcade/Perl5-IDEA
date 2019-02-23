@@ -28,6 +28,7 @@
 
   <extensions defaultExtensionNs="com.perl5">
     <parserExtension implementation="com.perl5.lang.perl.parser.MojoParserExtension"/>
+    <importsProvider implementation="com.perl5.lang.mojolicious.extensions.MojoImplicitImportsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

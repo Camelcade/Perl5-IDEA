@@ -18,7 +18,6 @@ package com.perl5.lang.mojolicious.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
-import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
 /**
@@ -39,7 +38,7 @@ public class MojoliciousIndentProcessor extends PerlIndentProcessor implements M
   public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
     PerlIndentProcessor.UNINDENTABLE_CONTAINERS,
     TokenSet.create(
-      MojoliciousParserDefinition.FILE
+      MojoliciousElementTypes.FILE
     ));
 
 

@@ -38,7 +38,7 @@ import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -80,8 +80,6 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     IDENTIFIER
   );
 
-  public static final IFileElementType FILE = new PerlFileElementType("Perl5", PerlLanguage.INSTANCE);
-
   @NotNull
   @Override
   public Lexer createLexer(Project project) {
@@ -110,7 +108,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
 
   @Override
   public IFileElementType getFileNodeType() {
-    return FILE;
+    return PerlStubElementTypes.FILE;
   }
 
   public PsiFile createFile(FileViewProvider viewProvider) {

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PerlImplicitNamespaceDefinition extends PerlImplicitElement implements PerlNamespaceDefinitionWithIdentifier {
+  @NotNull
   private final String myPackageName;
 
   public PerlImplicitNamespaceDefinition(@NotNull PsiManager manager,
@@ -48,6 +49,7 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return "Implicit namespace: " + getPresentableName();
   }
 
+  @NotNull
   @Override
   public PerlMroType getMroType() {
     return PerlMroType.DFS;
@@ -58,7 +60,7 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     return getPackageName();
   }
 
-  @Nullable
+  @NotNull
   @Override
   public String getPackageName() {
     return myPackageName;

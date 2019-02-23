@@ -1,0 +1,15 @@
+package Bar::Baz;
+
+our @EXPORT = qw/something/;
+
+#@method
+sub something{
+}
+
+package Foo::Bar;
+
+use Bar::Baz;
+
+package main;
+
+Foo::Bar-><caret>

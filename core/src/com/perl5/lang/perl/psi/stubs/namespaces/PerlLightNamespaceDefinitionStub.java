@@ -20,13 +20,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Map;
 
 public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStub {
   @Nullable
@@ -34,15 +29,8 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
 
   public PerlLightNamespaceDefinitionStub(@Nullable StubElement parent,
                                           IStubElementType elementType,
-                                          String packageName,
-                                          PerlMroType mroType,
-                                          List<String> parentNamespaces,
-                                          List<String> EXPORT,
-                                          List<String> EXPORT_OK,
-                                          Map<String, List<String>> EXPORT_TAGS,
-                                          PerlNamespaceAnnotations namespaceAnnotations
-  ) {
-    super(null, elementType, packageName, mroType, parentNamespaces, EXPORT, EXPORT_OK, EXPORT_TAGS, namespaceAnnotations);
+                                          @NotNull PerlNamespaceDefinitionData data) {
+    super(null, elementType, data);
     myParent = parent;
   }
 

@@ -19,28 +19,35 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.ObjectUtils;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_PACKAGE;
 
 /**
@@ -52,28 +59,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Nullable
-  @Override
-  public String getPackageName() {
-    String namespace = getExplicitPackageName();
-
-    if (namespace == null) {
-      namespace = getContextPackageName();
-    }
-
-    return namespace;
-  }
-
-  @Nullable
-  protected String getContextPackageName() {
-    PsiElement parent = getParent();
-    if (parent instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)parent).isLexicalDeclaration()) {
-      return MAIN_PACKAGE;
-    }
-    return PerlPackageUtil.getContextPackageName(this);
-  }
-
-  @Override
-  public String getExplicitPackageName() {
+  public String getExplicitNamespaceName() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
     if (variableNameElement == null) {
       return null;
@@ -81,7 +67,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
     assert variableNameElement instanceof LeafPsiElement;
     CharSequence variableName = ((LeafPsiElement)variableNameElement).getChars();
-
 
     Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableName);
     if (qualifiedRanges.first == null) {
@@ -99,140 +84,131 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     return findChildByClass(PerlVariableNameElement.class);
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String guessVariableType() {
-    return CachedValuesManager
-      .getCachedValue(this, () -> CachedValueProvider.Result.create(getVariableTypeHeavy(), PsiModificationTracker.MODIFICATION_COUNT));
+  public PerlValue getPerlValue() {
+    return CachedValuesManager.getCachedValue(this, () -> {
+      return CachedValueProvider.Result.create(computeVariableType(), getContainingFile());
+    });
   }
 
-  @Nullable
-  private String getVariableTypeHeavy() {
-    if (this instanceof PsiPerlScalarVariable) {
-      //			System.err.println("Guessing type for " + getText() + " at " + getTextOffset());
+  @NotNull
+  private PerlValue computeVariableType() {
+    if (!(this instanceof PsiPerlScalarVariable)) {
+      return UNKNOWN_VALUE;
+    }
 
-      PerlVariableNameElement variableNameElement = getVariableNameElement();
+    PerlVariableNameElement variableNameElement = getVariableNameElement();
 
-      if (variableNameElement != null) {
-        // find lexicaly visible declaration and check type
-        final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
-        if (declarationWrapper != null) {
-          if (declarationWrapper instanceof PerlImplicitVariableDeclaration) {
-            return ((PerlImplicitVariableDeclaration)declarationWrapper).getVariableClass();
+    if (variableNameElement != null) {
+      // find lexically visible declaration and check type
+      final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
+      if (declarationWrapper != null) {
+        if (declarationWrapper instanceof PerlImplicitVariableDeclaration) {
+          return PerlValueStatic.create(((PerlImplicitVariableDeclaration)declarationWrapper).getVariableClass());
+        }
+
+        if (declarationWrapper.isInvocantDeclaration() || declarationWrapper.isSelf()) {
+          PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(declarationWrapper, PerlSelfHinter.class);
+          if (selfHinter != null) {
+            return selfHinter.getSelfType();
           }
+          return PerlValueStatic.create(PerlPackageUtil.getContextNamespaceName(declarationWrapper));
+        }
 
-          if (declarationWrapper.isInvocantDeclaration() || declarationWrapper.isSelf()) {
-            PerlSelfHinter selfHinter = PsiTreeUtil.getParentOfType(declarationWrapper, PerlSelfHinter.class);
-            if (selfHinter != null) {
-              return selfHinter.getSelfNamespace();
-            }
-            return PerlPackageUtil.getContextPackageName(declarationWrapper);
-          }
+        // check explicit type in declaration
+        String declaredType = declarationWrapper.getDeclaredType();
+        if (declaredType != null) {
+          return PerlValueStatic.create(declaredType);
+        }
 
-          // check explicit type in declaration
-          String declarationPackageName = declarationWrapper.getDeclaredType();
-          if (declarationPackageName != null) {
-            assert !declarationPackageName.equals("");
-            return declarationPackageName;
-          }
+        // check assignment around declaration
+        PerlVariableDeclarationExpr declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclarationExpr.class);
+        if (declaration != null) {
+          if (declaration.getParent() instanceof PsiPerlAssignExpr) {
+            PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)declaration.getParent();
+            List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-          // check assignment around declaration
-          PerlVariableDeclarationExpr declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclarationExpr.class);
-          if (declaration != null) {
-            if (declaration.getParent() instanceof PsiPerlAssignExpr) {
-              PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)declaration.getParent();
-              List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+            if (!assignmentElements.isEmpty()) {
+              PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 
-              if (!assignmentElements.isEmpty()) {
-                PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-                if (lastExpression != declaration) {
-                  // source element is on the left side
-                  if (lastExpression instanceof PerlMethodContainer) {
-                    return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
-                  }
-                  if (lastExpression instanceof PerlDerefExpression) {
-                    return ((PerlDerefExpression)lastExpression).guessType();
-                  }
-                }
+              if (lastExpression != declaration && lastExpression instanceof PerlValuableEntity) {
+                return ((PerlValuableEntity)lastExpression).getPerlValue();
               }
             }
           }
+        }
 
-          // fixme this is bad, because my $var1 && print $var1 will be valid, but it's not
-          PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declarationWrapper, PerlLexicalScope.class);
-          assert perlLexicalScope != null : "Unable to find lexical scope for:" +
-                                            declarationWrapper.getClass() +
-                                            " at " +
-                                            declarationWrapper.getTextOffset() +
-                                            " in " +
-                                            declarationWrapper.getContainingFile();
+        // fixme this is bad, because my $var1 && print $var1 will be valid, but it's not
+        PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declarationWrapper, PerlLexicalScope.class);
+        assert perlLexicalScope != null : "Unable to find lexical scope for:" +
+                                          declarationWrapper.getClass() +
+                                          " at " +
+                                          declarationWrapper.getTextOffset() +
+                                          " in " +
+                                          declarationWrapper.getContainingFile();
 
-          final String[] guessResult = new String[]{null};
+        Ref<PerlValue> resultRef = Ref.create();
 
-          int startOffset = declarationWrapper.getTextRange().getEndOffset();
-          int endOffset = getTextRange().getStartOffset();
+        int startOffset = declarationWrapper.getTextRange().getEndOffset();
+        int endOffset = getTextRange().getStartOffset();
 
-          if (startOffset < endOffset) {
-            PerlPsiUtil.processElementsInRange(
-              perlLexicalScope,
-              new TextRange(startOffset, endOffset),
-              element -> {
-                if (element != PerlVariableMixin.this &&
-                    element instanceof PsiPerlScalarVariable &&
-                    element.getParent() instanceof PsiPerlAssignExpr
-                  ) {
-                  PsiElement variableNameElement1 = ((PsiPerlScalarVariable)element).getVariableNameElement();
+        if (startOffset < endOffset) {
+          PerlPsiUtil.processElementsInRange(
+            perlLexicalScope,
+            new TextRange(startOffset, endOffset),
+            element -> {
+              if (element != PerlVariableMixin.this &&
+                  element instanceof PsiPerlScalarVariable &&
+                  element.getParent() instanceof PsiPerlAssignExpr
+              ) {
+                PsiElement variableNameElement1 = ((PsiPerlScalarVariable)element).getVariableNameElement();
 
-                  if (variableNameElement1 != null &&
-                      variableNameElement1.getReference() != null &&
-                      variableNameElement1.getReference().isReferenceTo(declarationWrapper)
-                    ) {
-                    // found variable assignment
-                    PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)element.getParent();
-                    List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
+                if (variableNameElement1 != null &&
+                    variableNameElement1.getReference() != null &&
+                    variableNameElement1.getReference().isReferenceTo(declarationWrapper)
+                ) {
+                  // found variable assignment
+                  PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)element.getParent();
+                  List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
 
-                    if (!assignmentElements.isEmpty()) {
-                      PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
+                  if (!assignmentElements.isEmpty()) {
+                    PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 
-                      if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset()) {
-                        // source element is on the left side
-                        // fixme implement variables assignment support. Need to build kinda visitor with recursion control
-                        String returnValue = null;
-                        if (lastExpression instanceof PerlMethodContainer) {
-                          returnValue = PerlSubUtil.getMethodReturnValue((PerlMethodContainer)lastExpression);
-                        }
-                        if (lastExpression instanceof PerlDerefExpression) {
-                          returnValue = ((PerlDerefExpression)lastExpression).guessType();
-                        }
-                        if (StringUtil.isNotEmpty(returnValue)) {
-                          guessResult[0] = returnValue;
-                          return false;
-                        }
+                    if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset()) {
+                      // source element is on the left side
+                      // fixme implement variables assignment support. Need to build kinda visitor with recursion control
+                      PerlValue returnValue = null;
+                      if (lastExpression instanceof PerlValuableEntity) {
+                        returnValue = ((PerlValuableEntity)lastExpression).getPerlValue();
+                      }
+                      if (PerlValue.isNotEmpty(returnValue)) {
+                        resultRef.set(returnValue);
+                        return false;
                       }
                     }
                   }
                 }
-                return true;
               }
-            );
-          }
-
-          if (guessResult[0] != null) {
-            return guessResult[0];
-          }
+              return true;
+            }
+          );
         }
 
-        // checking global declarations with explicit types
-        for (PerlVariableDeclarationElement declaration : getGlobalDeclarations()) {
-          if (declaration.getDeclaredType() != null) {
-            return declaration.getDeclaredType();
-          }
+        if (!resultRef.isNull()) {
+          return resultRef.get();
+        }
+      }
+
+      // checking global declarations with explicit types
+      for (PerlVariableDeclarationElement declaration : getGlobalDeclarations()) {
+        if (declaration.getDeclaredType() != null) {
+          return PerlValueStatic.create(declaration.getDeclaredType());
         }
       }
     }
 
-    return null;
+    return UNKNOWN_VALUE;
   }
 
   @Override
@@ -321,20 +297,10 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     return qualifiedRanges.second.subSequence(variableName).toString();
   }
 
-  @Nullable
-  @Override
-  public String getCanonicalName() {
-    String packageName = getPackageName();
-    if (packageName == null) {
-      return null;
-    }
-    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-  }
-
   // fixme this need to be improved very much
   @Override
   public PerlVariableDeclarationElement getLexicalDeclaration() {
-    if (getExplicitPackageName() != null) {
+    if (getExplicitNamespaceName() != null) {
       return null;
     }
 
@@ -363,6 +329,19 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     return null;
   }
 
+  private boolean processContainingNamespaceItems(@NotNull Processor<String> processor) {
+    String variableName = getName();
+    if (StringUtil.isEmpty(variableName)) {
+      return true;
+    }
+
+    PerlValue namespaceValue = PerlValueStatic.createOrNull(
+      ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this)));
+
+    return namespaceValue
+      .processNamespaceNames(getProject(), getResolveScope(), it -> processor.process(PerlPackageUtil.join(it, variableName)));
+  }
+
   // fixme this need to be moved to PerlResolveUtil or Resolver
   @Override
   public List<PerlVariableDeclarationElement> getGlobalDeclarations() {
@@ -371,27 +350,30 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
     PsiElement parent = getParent(); // wrapper if any
 
-    if (myType == PerlVariableType.SCALAR) {
-      for (PerlVariableDeclarationElement variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), getCanonicalName())) {
-        if (!variable.equals(parent)) {
-          result.add(variable);
+    processContainingNamespaceItems(canonicalName -> {
+      if (myType == PerlVariableType.SCALAR) {
+        for (PerlVariableDeclarationElement variable : PerlScalarUtil.getGlobalScalarDefinitions(getProject(), canonicalName)) {
+          if (!variable.equals(parent)) {
+            result.add(variable);
+          }
         }
       }
-    }
-    else if (myType == PerlVariableType.ARRAY) {
-      for (PerlVariableDeclarationElement variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), getCanonicalName())) {
-        if (!variable.equals(parent)) {
-          result.add(variable);
+      else if (myType == PerlVariableType.ARRAY) {
+        for (PerlVariableDeclarationElement variable : PerlArrayUtil.getGlobalArrayDefinitions(getProject(), canonicalName)) {
+          if (!variable.equals(parent)) {
+            result.add(variable);
+          }
         }
       }
-    }
-    else if (myType == PerlVariableType.HASH) {
-      for (PerlVariableDeclarationElement variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), getCanonicalName())) {
-        if (!variable.equals(parent)) {
-          result.add(variable);
+      else if (myType == PerlVariableType.HASH) {
+        for (PerlVariableDeclarationElement variable : PerlHashUtil.getGlobalHashDefinitions(getProject(), canonicalName)) {
+          if (!variable.equals(parent)) {
+            result.add(variable);
+          }
         }
       }
-    }
+      return true;
+    });
 
     return result;
   }
@@ -399,11 +381,10 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   @Override
   public List<PerlGlobVariable> getRelatedGlobs() {
     List<PerlGlobVariable> result = new ArrayList<>();
-
-    for (PsiPerlGlobVariable glob : PerlGlobUtil.getGlobsDefinitions(getProject(), getCanonicalName())) {
-      result.add(glob);
-    }
-
+    processContainingNamespaceItems(it -> {
+      result.addAll(PerlGlobUtil.getGlobsDefinitions(getProject(), it));
+      return true;
+    });
     return result;
   }
 

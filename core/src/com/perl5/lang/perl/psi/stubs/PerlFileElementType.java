@@ -18,16 +18,25 @@ package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.lang.*;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.StubBuilder;
+import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.perl.psi.PerlFile;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlFileElementType extends IStubFileElementType {
-  private static final int VERSION = 4;
+public class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
+  private static final int VERSION = 5;
 
   public PerlFileElementType(String debugName, Language language) {
     super(debugName, language);
@@ -57,5 +66,43 @@ public class PerlFileElementType extends IStubFileElementType {
   protected PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
     return PsiBuilderFactory.getInstance()
       .createBuilder(psi.getProject(), chameleon, getLexer(psi), getLanguageForParser(psi), chameleon.getChars());
+  }
+
+  @NotNull
+  @Override
+  public String getExternalId() {
+    return "perl5.file." + toString();
+  }
+
+  @Override
+  public StubBuilder getBuilder() {
+    return new DefaultStubBuilder() {
+      @NotNull
+      @Override
+      protected StubElement createStubForFile(@NotNull PsiFile file) {
+        return new PerlFileStub((PerlFile)file, PerlFileElementType.this);
+      }
+    };
+  }
+
+  @Override
+  public boolean shouldBuildStubFor(VirtualFile file) {
+    return super.shouldBuildStubFor(file);
+  }
+
+  @Override
+  public void indexStub(@NotNull PerlFileStub stub, @NotNull IndexSink sink) {
+    sink.occurrence(PerlNamespaceIndex.KEY, stub.getPackageName());
+  }
+
+  @Override
+  public void serialize(@NotNull PerlFileStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+    stub.getData().serialize(dataStream);
+  }
+
+  @NotNull
+  @Override
+  public PerlFileStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new PerlFileStub(PerlNamespaceDefinitionData.deserialize(dataStream), this);
   }
 }

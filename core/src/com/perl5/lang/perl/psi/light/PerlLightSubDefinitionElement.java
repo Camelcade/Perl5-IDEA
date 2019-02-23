@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -45,8 +46,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   private List<PerlSubArgument> mySubArguments;
   @NotNull // fixme should we make a static TrioFunction to save memory? or even inherit?
-  private PairFunction<String, List<PsiElement>, String> myReturnsComputation = (context, arguments) ->
-    PerlSubDefinitionElement.super.getReturns(context, arguments);
+  private PairFunction<String, List<PerlValue>, PerlValue> myReturnValueComputation = (context, arguments) ->
+    PerlSubDefinitionElement.super.getReturnValue(context, arguments);
 
   // fixme should we actualize this on fly, like identifier?
   @Nullable
@@ -79,7 +80,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate, @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub.getSubName(), stub.getStubType());
-    myPackageName = stub.getPackageName();
+    myPackageName = stub.getNamespaceName();
     mySubArguments = stub.getSubArgumentsList();
     myAnnotations = stub.getAnnotations();
   }
@@ -90,7 +91,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     return myPackageName;
   }
 
@@ -113,7 +114,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Nullable
   @Override
-  public String getExplicitPackageName() {
+  public String getExplicitNamespaceName() {
     return myPackageName;
   }
 
@@ -125,7 +126,9 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
     PerlLightSubDefinitionElement element = (PerlLightSubDefinitionElement)o;
 
-    if (getPackageName() != null ? !getPackageName().equals(element.getPackageName()) : element.getPackageName() != null) return false;
+    if (getNamespaceName() != null ? !getNamespaceName().equals(element.getNamespaceName()) : element.getNamespaceName() != null) {
+      return false;
+    }
     if (!mySubArguments.equals(element.mySubArguments)) return false;
     return getAnnotations() != null ? getAnnotations().equals(element.getAnnotations()) : element.getAnnotations() == null;
   }
@@ -133,7 +136,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + (getPackageName() != null ? getPackageName().hashCode() : 0);
+    result = 31 * result + (getNamespaceName() != null ? getNamespaceName().hashCode() : 0);
     result = 31 * result + mySubArguments.hashCode();
     result = 31 * result + (getAnnotations() != null ? getAnnotations().hashCode() : 0);
     return result;
@@ -176,18 +179,24 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     return super.toString() + "@" + getCanonicalName();
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String getReturns(@Nullable String contextPackage, @NotNull List<PsiElement> arguments) {
-    return myReturnsComputation.fun(contextPackage, arguments);
+  public PerlValue getReturnValue(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
+    return myReturnValueComputation.fun(contextPackage, arguments);
   }
 
   @NotNull
-  public PairFunction<String, List<PsiElement>, String> getReturnsComputation() {
-    return myReturnsComputation;
+  public PairFunction<String, List<PerlValue>, PerlValue> getReturnValueComputation() {
+    return myReturnValueComputation;
   }
 
-  public void setReturnsComputation(@NotNull PairFunction<String, List<PsiElement>, String> returnsComputation) {
-    myReturnsComputation = returnsComputation;
+  public void setReturnValueComputation(@NotNull PairFunction<String, List<PerlValue>, PerlValue> returnValueComputation) {
+    myReturnValueComputation = returnValueComputation;
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getControlFlowElement() {
+    return getSubDefinitionBody();
   }
 }

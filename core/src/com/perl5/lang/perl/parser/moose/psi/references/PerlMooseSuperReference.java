@@ -50,13 +50,13 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
     PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);
 
     if (overrideStatement != null) {
-      String packageName = PerlPackageUtil.getContextPackageName(element);
+      String packageName = PerlPackageUtil.getContextNamespaceName(element);
       String subName = overrideStatement.getSubName();
       Project project = element.getProject();
 
 
       for (PsiElement targetElement : PerlMro.resolveSub(
-        project,
+        project, element.getResolveScope(),
         packageName,
         subName,
         true

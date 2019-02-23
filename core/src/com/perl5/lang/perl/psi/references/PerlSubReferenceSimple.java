@@ -64,15 +64,15 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with super resolver, need some generics fix
-    PsiElement myElement = getElement();
+    PsiElement element = getElement();
     List<PsiElement> relatedItems = new ArrayList<>();
 
-    String packageName = PerlPackageUtil.getContextPackageName(myElement);
-    String subName = myElement.getNode().getText();
-    Project project = myElement.getProject();
+    String packageName = PerlPackageUtil.getContextNamespaceName(element);
+    String subName = element.getNode().getText();
+    Project project = element.getProject();
 
     relatedItems.addAll(PerlMroDfs.resolveSub(
-      project,
+      project, element.getResolveScope(),
       packageName,
       subName,
       false

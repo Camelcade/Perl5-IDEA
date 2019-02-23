@@ -20,9 +20,11 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.parser.psi.impl.*;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -160,4 +162,5 @@ public interface HTMLMasonElementTypes extends HTMLMasonSyntaxElements {
       return new HTMLMasonBlockImpl(node);
     }
   };
+  IFileElementType FILE = new PerlFileElementType("HTML::Mason component", HTMLMasonLanguage.INSTANCE);
 }

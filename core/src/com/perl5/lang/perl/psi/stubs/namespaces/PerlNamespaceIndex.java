@@ -47,7 +47,7 @@ public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitio
   public static boolean processNamespaces(@NotNull Project project,
                                           @NotNull String packageName,
                                           @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+                                          @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
     return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlNamespaceDefinitionElement.class, element -> {
       ProgressManager.checkCanceled();
       return processor.process(element);

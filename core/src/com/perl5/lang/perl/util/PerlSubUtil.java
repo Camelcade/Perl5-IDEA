@@ -18,17 +18,17 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex;
@@ -36,8 +36,6 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReve
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.util.processors.PerlImportsCollector;
-import com.perl5.lang.perl.util.processors.PerlSubImportsCollector;
 import gnu.trove.THashSet;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -200,63 +198,6 @@ public class PerlSubUtil implements PerlElementTypes {
   }
 
   /**
-   * Detects return value of method container
-   *
-   * @param methodContainer method container inspected
-   * @return package name or null
-   */
-  @Nullable
-  public static String getMethodReturnValue(PerlMethodContainer methodContainer) {
-    if (methodContainer instanceof PerlSmartMethodContainer) {
-      return ((PerlSmartMethodContainer)methodContainer).getReturnPackageName();
-    }
-    PerlMethod methodElement = methodContainer.getMethod();
-    if (methodElement == null) {
-      return null;
-    }
-    PerlSubNameElement subNameElement = methodElement.getSubNameElement();
-    if (subNameElement == null) {
-      return null;
-    }
-
-    // fixme this should be moved to a method
-
-    if ("new".equals(subNameElement.getName())) {
-      return methodElement.getPackageName();
-    }
-
-    PsiReference reference = subNameElement.getReference();
-
-    if (reference instanceof PerlSubReference) {
-      for (ResolveResult resolveResult : ((PerlSubReference)reference).multiResolve(false)) {
-        PsiElement targetElement = resolveResult.getElement();
-        if (targetElement instanceof PerlSub) {
-          String returnType = ((PerlSub)targetElement).getReturns(subNameElement.getPackageName(),
-                                                                  methodContainer.getCallArgumentsList());
-          if (returnType != null) {
-            return returnType;
-          }
-        }
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Returns a list of imported descriptors
-   *
-   * @param namespaceDefinitionElement element to start looking from
-   * @return result map
-   */
-  @NotNull
-  public static List<PerlExportDescriptor> getImportedSubsDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement) {
-    PerlImportsCollector collector = new PerlSubImportsCollector();
-    PerlUtil.processImportedEntities(namespaceDefinitionElement, collector);
-    return collector.getResult();
-  }
-
-  /**
    * Builds arguments string for presentation
    *
    * @param subArguments list of arguments
@@ -317,7 +258,7 @@ public class PerlSubUtil implements PerlElementTypes {
     List<PerlSubElement> result;
     result = new ArrayList<>();
     for (PerlSubElement directDescendant : subBase.getDirectOverridingSubs()) {
-      String packageName = directDescendant.getPackageName();
+      String packageName = directDescendant.getNamespaceName();
       if (StringUtil.isNotEmpty(packageName) && !recursionSet.contains(packageName)) {
         recursionSet.add(packageName);
         result.add(directDescendant);
@@ -328,37 +269,37 @@ public class PerlSubUtil implements PerlElementTypes {
     return result;
   }
 
-  @NotNull
-  public static List<PsiElement> collectRelatedItems(@NotNull String canonicalName, @NotNull Project project) {
-    final List<PsiElement> result = new ArrayList<>();
-    processRelatedItems(canonicalName, project, element -> {
-      result.add(element);
-      return true;
-    });
-    return result;
-  }
-
-  public static void processRelatedItems(@NotNull String canonicalName,
-                                         @NotNull Project project,
-                                         @NotNull Processor<PsiElement> processor) {
-    processRelatedItems(canonicalName, project, GlobalSearchScope.allScope(project), processor);
-  }
-
-  // fixme this should replace PerlSubReferenceResolver#collectRelatedItems
-  public static void processRelatedItems(@NotNull String canonicalName,
-                                         @NotNull Project project,
-                                         @NotNull GlobalSearchScope searchScope,
-                                         @NotNull Processor<PsiElement> processor) {
+  public static boolean processRelatedItems(@NotNull Project project,
+                                            @NotNull GlobalSearchScope searchScope,
+                                            @NotNull String canonicalName,
+                                            @NotNull Processor<? super PsiNamedElement> processor) {
     if (!PerlSubUtil.processSubDefinitions(project, canonicalName, searchScope, processor::process)) {
-      return;
+      return false;
     }
     if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor::process)) {
-        return;
+      return false;
     }
     for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {
-        return;
+        return false;
       }
     }
+    return true;
+  }
+
+  public static boolean processRelatedSubsInPackage(@NotNull Project project,
+                                                    @NotNull GlobalSearchScope searchScope,
+                                                    @NotNull String packageName,
+                                                    @NotNull Processor<? super PsiNamedElement> processor) {
+    return processSubDefinitionsInPackage(project, packageName, searchScope, processor::process) &&
+           processSubDeclarationsInPackage(project, packageName, searchScope, processor::process);
+  }
+
+  public static boolean processRelatedItemsInPackage(@NotNull Project project,
+                                                     @NotNull GlobalSearchScope searchScope,
+                                                     @NotNull String packageName,
+                                                     @NotNull Processor<? super PsiNamedElement> processor) {
+    return processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
+           PerlGlobsStubIndex.processElements(project, "*" + packageName, searchScope, processor);
   }
 }

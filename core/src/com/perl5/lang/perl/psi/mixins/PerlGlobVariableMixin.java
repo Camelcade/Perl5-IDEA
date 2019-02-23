@@ -53,13 +53,13 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     PerlGlobStub stub = getStub();
     if (stub != null) {
       return stub.getPackageName();
     }
 
-    String namespace = getExplicitPackageName();
+    String namespace = getExplicitNamespaceName();
 
     if (namespace == null) {
       namespace = getContextPackageName();
@@ -86,12 +86,12 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Nullable
   protected String getContextPackageName() {
-    return PerlPackageUtil.getContextPackageName(this);
+    return PerlPackageUtil.getContextNamespaceName(this);
   }
 
   @Nullable
   @Override
-  public String getExplicitPackageName() {
+  public String getExplicitNamespaceName() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
     if (variableNameElement == null) {
       return null;
@@ -109,7 +109,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public boolean isBuiltIn() {
-    if (getExplicitPackageName() != null) {
+    if (getExplicitNamespaceName() != null) {
       return false;
     }
 
@@ -137,7 +137,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   @Override
   public String getCanonicalName() {
 
-    String packageName = getPackageName();
+    String packageName = getNamespaceName();
     if (packageName == null) {
       return null;
     }

@@ -21,13 +21,8 @@ import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Map;
 
 public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefinitionElementType {
   public PerlLightNamespaceDefinitionElementType(String name) {
@@ -50,23 +45,7 @@ public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefini
   }
 
   @Override
-  protected PerlNamespaceDefinitionStub createStubElement(@Nullable StubElement parentStub,
-                                                          @NotNull String packageName,
-                                                          @NotNull PerlMroType mroType,
-                                                          @NotNull List<String> parentNamespaceNames,
-                                                          @NotNull List<String> export,
-                                                          @NotNull List<String> exportOk,
-                                                          @NotNull Map<String, List<String>> exportTags,
-                                                          @Nullable PerlNamespaceAnnotations annotations) {
-    return new PerlLightNamespaceDefinitionStub(parentStub,
-                                                this,
-                                                packageName,
-                                                mroType,
-                                                parentNamespaceNames,
-                                                export,
-                                                exportOk,
-                                                exportTags,
-                                                annotations
-    );
+  protected PerlNamespaceDefinitionStub createStubElement(@Nullable StubElement parentStub, @NotNull PerlNamespaceDefinitionData data) {
+    return new PerlLightNamespaceDefinitionStub(parentStub, this, data);
   }
 }

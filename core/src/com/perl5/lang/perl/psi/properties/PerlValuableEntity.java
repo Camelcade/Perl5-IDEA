@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.types;
+package com.perl5.lang.perl.psi.properties;
 
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlTypeArrayRef extends PerlTypeWrapping {
-  public PerlTypeArrayRef(@NotNull PerlType innerType) {
-    super(innerType);
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    return o instanceof PerlTypeArrayRef && super.equals(o);
-  }
-
-  @Override
-  public String toString() {
-    return ARRAY_REF + super.toString();
-  }
+/**
+ * Thing with possibly qualifier: method, variable or glob
+ */
+public interface PerlValuableEntity extends PsiElement {
+  /**
+   * @return a {@link PerlValue} describing this entity
+   */
+  @NotNull
+  PerlValue getPerlValue();
 }

@@ -27,14 +27,12 @@ import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MojoliciousParser;
-import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 21.07.2015.
  */
 public class MojoliciousParserDefinition extends PerlParserDefinition implements MojoliciousElementTypes {
-  public static final IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousLanguage.INSTANCE);
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
                                                          TokenSet.create(
                                                            MOJO_TEMPLATE_BLOCK_HTML,

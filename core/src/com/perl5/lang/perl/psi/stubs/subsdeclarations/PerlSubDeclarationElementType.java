@@ -53,7 +53,7 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
   @NotNull
   @Override
   public PerlSubDeclarationStub createStub(@NotNull PerlSubDeclarationElement psi, StubElement parentStub) {
-    return new PerlSubDeclarationStub(parentStub, psi.getPackageName(), psi.getSubName(), psi.getAnnotations(), this);
+    return new PerlSubDeclarationStub(parentStub, psi.getNamespaceName(), psi.getSubName(), psi.getAnnotations(), this);
   }
 
 
@@ -65,7 +65,7 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
 
   @Override
   public void serialize(@NotNull PerlSubDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getSubName());
     PerlSubAnnotations subAnnotations = stub.getAnnotations();
     if (subAnnotations == null) {
@@ -95,7 +95,7 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
     if (canonicalName != null) {
       sink.occurrence(PerlSubDeclarationIndex.KEY, canonicalName);
     }
-    String packageName = stub.getPackageName();
+    String packageName = stub.getNamespaceName();
     if (packageName != null) {
       sink.occurrence(PerlSubDeclarationReverseIndex.KEY, packageName);
     }
@@ -105,7 +105,7 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
     return psi instanceof PerlSubDeclarationElement &&
-           StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getPackageName()) &&
+           StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getNamespaceName()) &&
            StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getSubName())
       ;
   }

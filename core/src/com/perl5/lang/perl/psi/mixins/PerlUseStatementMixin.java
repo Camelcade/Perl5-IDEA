@@ -131,7 +131,7 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
       return stub.getOuterPackageName();
     }
 
-    return PerlPackageUtil.getContextPackageName(this);
+    return PerlPackageUtil.getContextNamespaceName(this);
   }
 
   @Override

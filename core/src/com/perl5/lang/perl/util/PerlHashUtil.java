@@ -26,13 +26,13 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
-import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
-import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -123,19 +123,6 @@ public class PerlHashUtil implements PerlElementTypes {
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processHashes(processor) &&
            PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
-  }
-
-  /**
-   * Returns a map of imported hashes names
-   *
-   * @param namespaceDefinitionElement element to start looking from
-   * @return result map
-   */
-  @NotNull
-  public static List<PerlExportDescriptor> getImportedHashesDescriptors(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement) {
-    PerlImportsCollector collector = new PerlHashImportsCollector();
-    PerlUtil.processImportedEntities(namespaceDefinitionElement, collector);
-    return collector.getResult();
   }
 
   /**

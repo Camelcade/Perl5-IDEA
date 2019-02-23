@@ -39,6 +39,6 @@ public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl i
   @Nullable
   @Override
   public String getPackageName() {
-    return PerlPackageUtil.getContextPackageName(this);
+    return PerlPackageUtil.getContextNamespaceName(this);
   }
 }

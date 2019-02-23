@@ -38,6 +38,18 @@ public class PerlCompletionTest extends PerlLightTestCase {
     return "testData/completion/perl";
   }
 
+  public void testImportInSuperClass() {
+    doTest();
+  }
+
+  public void testTypeGlobAsMethod() {
+    doTest();
+  }
+
+  public void testTypeGlobAsStatic() {
+    doTest();
+  }
+
   public void testFileSpec() {
     withFileSpec();
     doTest();

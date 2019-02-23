@@ -37,6 +37,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlHashVariableImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlScalarVariableImpl;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
@@ -108,17 +109,17 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
       }
       else if (parent instanceof PerlSubDefinitionElement) {
-        if ("AUTOLOAD".equals(((PerlSubNameElement)element).getName())) {
+        if (PerlSubUtil.SUB_AUTOLOAD.equals(((PerlSubNameElement)element).getName())) {
           holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_AUTOLOAD);
         }
         else {
           holder.createInfoAnnotation(element, null).setTextAttributes(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
         }
       }
-      else if (parent instanceof PerlMethod) {
+      else if (parent instanceof PerlMethodCall) {
         // fixme don't we need to take multiple references here?
         PsiElement grandParent = parent.getParent();
-        PerlNamespaceElement methodNamespace = ((PerlMethod)parent).getNamespaceElement();
+        PerlNamespaceElement methodNamespace = ((PerlMethodCall)parent).getNamespaceElement();
 
         if (
           !(grandParent instanceof PsiPerlNestedCall)    /// not ...->method fixme shouldn't we use isObjectMethod here?

@@ -24,6 +24,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -58,7 +60,7 @@ public class PerlSubCompletionUtil {
       .create(subName)
       .withIcon(subDefinition.getIcon(0))
       .withStrikeoutness(subDefinition.isDeprecated())
-      .withTypeText(subDefinition.getPackageName(), true);
+      .withTypeText(subDefinition.getNamespaceName(), true);
 
     String argsString = subDefinition.getSubArgumentsListAsString();
 
@@ -98,7 +100,7 @@ public class PerlSubCompletionUtil {
       .withIcon(subDeclaration.getIcon(0))
       .withStrikeoutness(subDeclaration.isDeprecated())
       .withInsertHandler(SUB_SELECTION_HANDLER)
-      .withTypeText(subDeclaration.getPackageName(), true)
+      .withTypeText(subDeclaration.getNamespaceName(), true)
       ;
   }
 
@@ -115,12 +117,12 @@ public class PerlSubCompletionUtil {
       .create(lookupString == null ? "" : lookupString)
       .withIcon(globVariable.getIcon(0))
       .withInsertHandler(SUB_SELECTION_HANDLER)
-      .withTypeText(globVariable.getPackageName(), true)
+      .withTypeText(globVariable.getNamespaceName(), true)
       ;
   }
 
   public static void fillWithUnresolvedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {
-    final String packageName = subDefinition.getPackageName();
+    final String packageName = subDefinition.getNamespaceName();
     if (packageName == null) {
       return;
     }
@@ -130,7 +132,15 @@ public class PerlSubCompletionUtil {
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
-        if (packageName.equals(method.getPackageName())) {
+        PerlValue methodValue = method.getPerlValue();
+        if (!(methodValue instanceof PerlValueCall)) {
+          super.visitMethod(method);
+          return;
+        }
+
+        PerlValue namespaceValue = ((PerlValueCall)methodValue).getNamespaceNameValue();
+
+        if (namespaceValue.canRepresentNamespace(packageName)) {
           PerlSubNameElement subNameElement = method.getSubNameElement();
 
           if (subNameElement != null && subNameElement.isValid()) {

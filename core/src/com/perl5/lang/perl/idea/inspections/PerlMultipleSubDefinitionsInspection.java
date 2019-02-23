@@ -42,7 +42,7 @@ public class PerlMultipleSubDefinitionsInspection extends PerlInspection {
 
         String canonicalName = o.getCanonicalName();
         if (PerlSubUtil.getSubDefinitions(project, canonicalName, GlobalSearchScope.projectScope(project)).size() > 1) {
-          if (!PerlPackageUtil.isMain(o.getPackageName()) || !PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
+          if (!PerlPackageUtil.isMain(o.getNamespaceName()) || !PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
             registerProblem(holder, o.getNameIdentifier(), String.format("Multiple %ss definitions found", name.toLowerCase()));
           }
         }

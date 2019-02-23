@@ -40,6 +40,8 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -107,6 +109,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
 
   public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
+  public static final PerlValue UNIVERSAL_VALUE = PerlValueStatic.create(UNIVERSAL_PACKAGE);
 
   public static final String CORE_PACKAGE = "CORE";
   public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
@@ -155,7 +158,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return CORE_PACKAGES_DEPRECATED.contains(getCanonicalPackageName(packageName));
   }
 
-  public static boolean isSUPER(String packageName) {
+  @Contract("null->false")
+  public static boolean isSUPER(@Nullable String packageName) {
     return SUPER_PACKAGE.equals(packageName);
   }
 
@@ -171,6 +175,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return UNIVERSAL_PACKAGE.equals(packageName);
   }
 
+  @NotNull
+  public static String join(@NotNull String... chunks) {
+    return StringUtil.join(chunks, PACKAGE_SEPARATOR);
+  }
 
   /**
    * Make canonical package name.
@@ -210,6 +218,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return newName;
   }
 
+  @Contract("null -> null")
+  public static PerlValue getContextType(@Nullable PsiElement element) {
+    return PerlValueStatic.createOrNull(getContextNamespaceName(element));
+  }
+
   @NotNull
   public static List<String> split(@Nullable String packageName) {
     return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalPackageName(packageName), PACKAGE_SEPARATOR);
@@ -221,8 +234,8 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param element psi element to find definition for
    * @return canonical package name
    */
-  @Contract("null -> null")
-  public static String getContextPackageName(@Nullable PsiElement element) {
+  @Contract("null->null;!null->!null")
+  public static String getContextNamespaceName(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }
@@ -242,7 +255,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       PsiElement realParent = file.getParent();
 
       if (contextParent != null && !contextParent.equals(realParent)) {
-        return getContextPackageName(contextParent);
+        return getContextNamespaceName(contextParent);
       }
 
       return ((PerlFileImpl)file).getPackageName();
@@ -281,10 +294,10 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     ArrayList<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<>();
     for (String packageName : packageNames) {
       Collection<PerlNamespaceDefinitionElement> list =
-        getNamespaceDefinitions(project, packageName, GlobalSearchScope.projectScope(project));
+        getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), packageName);
 
       if (list.isEmpty()) {
-        list = getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
+        list = getNamespaceDefinitions(project, GlobalSearchScope.allScope(project), packageName);
       }
 
       namespaceDefinitions.addAll(list);
@@ -298,14 +311,16 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    * @param project     project to search in
    * @param packageName canonical package name (without tailing ::)
    * @return collection of found definitions
+   * @deprecated use {@link #getNamespaceDefinitions(Project, GlobalSearchScope, String)}
    */
+  @Deprecated
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project, @NotNull String packageName) {
-    return getNamespaceDefinitions(project, packageName, GlobalSearchScope.allScope(project));
+    return getNamespaceDefinitions(project, GlobalSearchScope.allScope(project), packageName);
   }
 
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project,
-                                                                                   @NotNull String packageName,
-                                                                                   GlobalSearchScope scope) {
+                                                                                   GlobalSearchScope scope,
+                                                                                   @NotNull String packageName) {
     List<PerlNamespaceDefinitionElement> result = new ArrayList<>();
     processNamespaces(packageName, project, scope, result::add);
     return result;
@@ -335,7 +350,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static boolean processNamespaces(@NotNull String packageName,
                                           @NotNull Project project,
                                           @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+                                          @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
     return PerlNamespaceIndex.processNamespaces(project, packageName, scope, processor) &&
            PerlLightNamespaceIndex.processNamespaces(project, packageName, scope, processor);
   }
@@ -542,7 +557,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       Set<String> namesSet = new THashSet<>();
       // collecting overrided
       for (PerlSubDefinitionElement subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionElement.class)) {
-        if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getPackageName())) {
+        if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getNamespaceName())) {
           namesSet.add(subDefinitionBase.getSubName());
         }
       }

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -29,11 +30,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 08.08.2015.
  */
-public interface PerlString extends PerlQuoted {
+public interface PerlString extends PerlQuoted, PerlValuableEntity  {
   String FILE_PATH_PATTERN_TEXT = "\\.?[\\p{L}\\d\\-_]+(?:\\.[\\p{L}\\d\\-_]*)*";
   String FILE_PATH_DELIMITER_PATTERN_TEXT = "(?:\\\\+|/+)";
   Pattern FILE_PATH_PATTERN = Pattern.compile(
@@ -68,6 +73,12 @@ public interface PerlString extends PerlQuoted {
       run = run.getNextSibling();
     }
     return result;
+  }
+
+  @NotNull
+  @Override
+  default PerlValue getPerlValue() {
+    return PerlValueStatic.create(ElementManipulators.getValueText(this));
   }
 
   @Contract("null->false")

@@ -49,7 +49,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
-      psi.getPackageName(),
+      psi.getNamespaceName(),
       psi.getName(),
       psi.getLocallyDeclaredType(),
       psi.getActualType(),
@@ -90,7 +90,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     else {
       dataStream.writeName(stub.getDeclaredType());
     }
-    dataStream.writeName(stub.getPackageName());
+    dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getVariableName());
     dataStream.writeByte(stub.getActualType().ordinal());
 
@@ -130,8 +130,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
 
   @Override
   public void indexStub(@NotNull PerlVariableDeclarationStub stub, @NotNull IndexSink sink) {
-    String variableName = stub.getPackageName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
+    String variableName = stub.getNamespaceName() + PerlPackageUtil.PACKAGE_SEPARATOR + stub.getVariableName();
     sink.occurrence(stub.getIndexKey(), variableName);
-    sink.occurrence(stub.getIndexKey(), "*" + stub.getPackageName());
+    sink.occurrence(stub.getIndexKey(), "*" + stub.getNamespaceName());
   }
 }

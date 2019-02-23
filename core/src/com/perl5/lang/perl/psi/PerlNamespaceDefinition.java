@@ -16,20 +16,14 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiInvalidElementAccessException;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -37,15 +31,12 @@ import java.util.Map;
  * Describes api for perl namespace definition; Should be used only for inheritance
  */
 public interface PerlNamespaceDefinition extends PerlDeprecatable {
-  @NotNull
-  @Contract(pure = true)
-  Project getProject() throws PsiInvalidElementAccessException;
-
   /**
    * Returns package name
    *
    * @return canonical package name
    */
+  @Nullable
   String getPackageName();
 
   /**
@@ -53,6 +44,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
    *
    * @return mro type
    */
+  @NotNull
   PerlMroType getMroType();
 
   /**
@@ -60,6 +52,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
    *
    * @return mro class instance
    */
+  @NotNull
   default PerlMro getMro() {
     return getMroType() == PerlMroType.C3 ? PerlMroC3.INSTANCE : PerlMroDfs.INSTANCE;
   }
@@ -104,20 +97,6 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
    */
   @NotNull
   Map<String, List<String>> getEXPORT_TAGS();
-
-
-  default List<PerlNamespaceDefinitionElement> getParentNamespaceDefinitions() {
-    return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesNames());
-  }
-
-  @NotNull
-  default List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
-    return PerlPackageUtil.getChildNamespaces(getProject(), getPackageName());
-  }
-
-  default void getLinearISA(HashSet<String> recursionMap, ArrayList<String> result) {
-    getMro().getLinearISA(getProject(), getParentNamespaceDefinitions(), recursionMap, result);
-  }
 
   @Override
   default boolean isDeprecated() {

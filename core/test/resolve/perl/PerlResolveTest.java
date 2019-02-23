@@ -33,6 +33,11 @@ public class PerlResolveTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testLog4perlInFooBar() {
+    withLog4perl();
+    doTest();
+  }
+
   public void testTestMoreWithPlan() {
     withTestMore();
     doTest();

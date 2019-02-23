@@ -224,7 +224,7 @@ public class PerlImplicitDeclarationsService {
   }
 
   public boolean processSubsInPackage(@NotNull String packageName, @NotNull Processor<? super PerlSubDefinitionElement> processor) {
-    return processSubs(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+    return processSubs(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
   public boolean processSubs(@NotNull String canonicalName, @NotNull Processor<? super PerlSubDefinitionElement> processor) {
@@ -277,17 +277,17 @@ public class PerlImplicitDeclarationsService {
 
   public boolean processScalarsInPackage(@Nullable String packageName,
                                          @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
-    return packageName != null && processScalars(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+    return packageName != null && processScalars(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
   public boolean processArraysInPackage(@Nullable String packageName,
                                         @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
-    return packageName != null && processArrays(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+    return packageName != null && processArrays(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
   public boolean processHashesInPackage(@Nullable String packageName,
                                         @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
-    return packageName != null && processHashes(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+    return packageName != null && processHashes(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
   public boolean processScalars(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {

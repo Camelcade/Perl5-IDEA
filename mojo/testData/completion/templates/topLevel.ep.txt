@@ -45,6 +45,8 @@ Lookups: LibraryException->; Text: LibraryException->; Tail: ...; Type: null; Ic
 Lookups: LibraryException3->; Text: LibraryException3->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 Lookups: LibraryException3::; Text: LibraryException3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 Lookups: LibraryException::; Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+Lookups: Mojo::Template::Sandbox->; Text: Mojo::Template::Sandbox->; Tail: ...; Type: null; Icon: /mojolicious.png, null]; Type Icon: null
+Lookups: Mojo::Template::Sandbox::; Text: Mojo::Template::Sandbox::; Tail: ...; Type: null; Icon: /mojolicious.png, null]; Type Icon: null
 Lookups: Mojolicious::Controller->; Text: Mojolicious::Controller->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: Mojolicious::Controller::; Text: Mojolicious::Controller::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 Lookups: Mojolicious::Plugin::DefaultHelpers->; Text: Mojolicious::Plugin::DefaultHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null

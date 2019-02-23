@@ -70,7 +70,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
   @NotNull
   @Override
   public String getName() {
-    return isTag() ? PerlPackageUtil.getContextPackageName(this) : this.getText();
+    return isTag() ? PerlPackageUtil.getContextNamespaceName(this) : this.getText();
   }
 
   public String getCanonicalName() {

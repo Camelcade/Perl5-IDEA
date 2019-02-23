@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.extensions.imports;
 
 import com.intellij.openapi.extensions.ExtensionPointName;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import org.jetbrains.annotations.Contract;
@@ -25,7 +24,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Extension point that can provide additional import descriptors by {@link com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement}
@@ -38,7 +39,7 @@ public interface PerlImportsProvider {
   boolean isApplicable(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement);
 
   @NotNull
-  default List<PerlExportDescriptor> getImports() {
+  default List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
     return Collections.emptyList();
   }
 
@@ -46,12 +47,13 @@ public interface PerlImportsProvider {
    * Iterates all providers applicable to {@code namespaceDefinitionElement} and passes them to {@code providerProcessor} stops if
    * provider returns false
    */
-  static void processProviders(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement,
-                               @NotNull Processor<PerlImportsProvider> providerProcessor) {
+  static Set<PerlExportDescriptor> getAllExportDescriptors(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement) {
+    Set<PerlExportDescriptor> result = new HashSet<>();
     for (PerlImportsProvider importsProvider : EP_NAME.getExtensions()) {
-      if (importsProvider.isApplicable(namespaceDefinitionElement) && !providerProcessor.process(importsProvider)) {
-        return;
+      if (importsProvider.isApplicable(namespaceDefinitionElement)) {
+        result.addAll(importsProvider.getExportDescriptors(namespaceDefinitionElement));
       }
     }
+    return result;
   }
 }

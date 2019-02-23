@@ -64,10 +64,16 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     return this;
   }
 
+  @NotNull
+  @Override
+  public String getExplicitNamespaceName() {
+    return myPackageName;
+  }
+
   @Override
   @NotNull
-  public String getPackageName() {
-    return myPackageName;
+  public String getNamespaceName() {
+    return getExplicitNamespaceName();
   }
 
   @NotNull
@@ -108,7 +114,9 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
     PerlImplicitSubDefinition that = (PerlImplicitSubDefinition)o;
 
     if (!getSubName().equals(that.getSubName())) return false;
-    if (!getPackageName().equals(that.getPackageName())) return false;
+    if (!getNamespaceName().equals(that.getNamespaceName())) {
+      return false;
+    }
     return mySubArguments.equals(that.mySubArguments);
   }
 
@@ -116,8 +124,14 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   public int hashCode() {
     int result = super.hashCode();
     result = 31 * result + getSubName().hashCode();
-    result = 31 * result + getPackageName().hashCode();
+    result = 31 * result + getNamespaceName().hashCode();
     result = 31 * result + mySubArguments.hashCode();
     return result;
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getControlFlowElement() {
+    return null;
   }
 }

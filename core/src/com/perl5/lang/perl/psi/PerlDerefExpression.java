@@ -17,35 +17,18 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 07.06.2015.
  */
-public interface PerlDerefExpression extends PsiPerlExpr {
+public interface PerlDerefExpression extends PsiPerlExpr, PerlValuableEntity {
   /**
-   * Attempting to traverse dereference chain in order to detect package name before method element
-   *
-   * @param methodElement - method, for which we are traversing
-   * @return package name or null
+   * @return previous meaningful element of dereference chain. Returns null if this is a first element
    */
+  @Contract("null->null")
   @Nullable
-  String getPreviousElementNamespace(PsiElement methodElement);
-
-  /**
-   * Attempting to traverse dereference chain in order to detect package name retuning by current element
-   *
-   * @param currentElement current element
-   * @return type or null
-   */
-  @Nullable
-  String getCurrentElementNamespace(PsiElement currentElement);
-
-  /**
-   * Attempting to guess dereference chain result
-   *
-   * @return type or null
-   */
-  @Nullable
-  String guessType();
+  PsiElement getPreviousElement(@Nullable PsiElement currentElement);
 }

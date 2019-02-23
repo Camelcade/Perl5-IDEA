@@ -143,6 +143,11 @@ public class PerlExportDescriptor {
     return null;
   }
 
+  @Override
+  public String toString() {
+    return mySigil + myImportedName + " => " + mySigil + PerlPackageUtil.join(myRealPackage, myRealName);
+  }
+
   public static PerlExportDescriptor create(@NotNull String sourcePackageName, @NotNull String sourceSubName) {
     return new PerlExportDescriptor(sourcePackageName, sourceSubName, sourceSubName);
   }

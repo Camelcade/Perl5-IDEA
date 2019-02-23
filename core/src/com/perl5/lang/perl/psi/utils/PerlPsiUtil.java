@@ -29,8 +29,6 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
@@ -40,7 +38,10 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlArrayElementImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlReturnExprImpl;
+import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
@@ -48,7 +49,6 @@ import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -288,11 +288,6 @@ public class PerlPsiUtil implements PerlElementTypes {
 
       currentStubElement = currentStubElement.getParentStub();
     }
-  }
-
-  public static List<PsiElement> collectUseStatements(@NotNull PerlNamespaceDefinitionElement rootElement) {
-    return CachedValuesManager.getCachedValue(rootElement, () -> CachedValueProvider.Result
-      .create(collectNamespaceMembers(rootElement, PerlUseStatement.class), rootElement));
   }
 
   @NotNull
@@ -636,37 +631,6 @@ public class PerlPsiUtil implements PerlElementTypes {
       }
       run = run.getPrevSibling();
     }
-  }
-
-  @Nullable
-  public static String getPerlExpressionNamespace(@Nullable PsiElement element) {
-    if (element == null) {
-      return null;
-    }
-
-    if (element instanceof PsiPerlPackageExpr) {
-      return ((PerlNamespaceElement)element.getFirstChild()).getCanonicalName();
-    }
-    else if (element instanceof PerlString) {
-      return ElementManipulators.getValueText(element);
-    }
-    else if (element instanceof PerlVariable) {
-      return ((PerlVariable)element).guessVariableType();
-    }
-    else if (isSelfShortcut(element)) {
-      return PerlPackageUtil.getContextPackageName(element);
-    }
-    else if (element instanceof PerlMethodContainer) {
-      return PerlSubUtil.getMethodReturnValue((PerlMethodContainer)element);
-    }
-    else if (element instanceof PsiPerlParenthesisedExprImpl) {
-      return getPerlExpressionNamespace(((PsiPerlParenthesisedExprImpl)element).getExpr());
-    }
-    else if (element instanceof PsiPerlDerefExprImpl) {
-      return getPerlExpressionNamespace(element.getLastChild());
-    }
-
-    return null;
   }
 
   /**

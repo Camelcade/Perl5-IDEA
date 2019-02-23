@@ -38,6 +38,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
 import com.perl5.lang.pod.parser.psi.*;
@@ -73,7 +74,7 @@ public class PerlDocUtil implements PerlElementTypes {
 
     myKeywordsRedirections.put("DESTROY", "perlobj/\"Destructors\"");
 
-    myKeywordsRedirections.put("AUTOLOAD", "perlsub/\"Autoloading\"");
+    myKeywordsRedirections.put(PerlSubUtil.SUB_AUTOLOAD, "perlsub/\"Autoloading\"");
 
     myKeywordsRedirections.put("default", "perlsyn/\"Switch Statements\"");
     myKeywordsRedirections.put("given", "perlsyn/\"Switch Statements\"");

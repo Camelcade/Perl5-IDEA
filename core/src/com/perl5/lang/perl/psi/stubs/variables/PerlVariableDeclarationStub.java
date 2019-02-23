@@ -53,9 +53,15 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
     myPerlVariableAnnotations = variableAnnotations;
   }
 
+  @Nullable
   @Override
-  public String getPackageName() {
+  public String getExplicitNamespaceName() {
     return myPackageName;
+  }
+
+  @Override
+  public String getNamespaceName() {
+    return getExplicitNamespaceName();
   }
 
   @Override

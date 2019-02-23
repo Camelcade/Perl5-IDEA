@@ -22,7 +22,7 @@ import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlMethodCall;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -49,7 +49,7 @@ public class PerlUnresolvedSubInspection extends PerlInspection implements PerlE
       }
 
       @Override
-      public void visitPerlMethod(@NotNull PerlMethod o) {
+      public void visitPerlMethodCall(@NotNull PerlMethodCall o) {
         PerlNamespaceElement namespaceElement = o.getNamespaceElement();
         PerlSubNameElement subNameElement = o.getSubNameElement();
 

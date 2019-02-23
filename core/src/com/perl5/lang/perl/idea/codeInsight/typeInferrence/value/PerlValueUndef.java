@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Implement this interface to method container that has some specific algorythm for calculating return type
- */
-public interface PerlSmartMethodContainer extends PerlMethodContainer {
-  @Nullable
-  String getReturnPackageName();
+public final class PerlValueUndef extends PerlValue {
+  public static final PerlValueUndef TYPE_UNDEF = new PerlValueUndef();
+
+  private PerlValueUndef() {
+  }
+
+  @NotNull
+  @Override
+  PerlValueUndef createBlessedCopy(@NotNull PerlValue bless) {
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    return "Type: undef";
+  }
 }

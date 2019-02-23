@@ -20,6 +20,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +41,7 @@ public class PerlSubAnnotations {
 
   private byte myFlags = 0;
   private PerlReturnType myReturnType = PerlReturnType.VALUE;
+  @Nullable
   private String myReturns = null;
 
   public PerlSubAnnotations() {
@@ -88,8 +91,17 @@ public class PerlSubAnnotations {
     myFlags |= IS_OVERRIDE;
   }
 
+  /**
+   * @deprecated use
+   */
+  @Deprecated
   public String getReturns() {
     return myReturns;
+  }
+
+  @NotNull
+  public PerlValue getReturnValue() {
+    return PerlValueStatic.create(myReturns);
   }
 
   public void setReturns(String returns) {

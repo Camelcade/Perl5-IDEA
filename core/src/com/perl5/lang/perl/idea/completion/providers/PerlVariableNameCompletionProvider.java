@@ -189,65 +189,56 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
     PsiElement perlVariable = variableNameElement.getParent();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      processor = new PerlNamespaceEntityProcessor<PerlExportDescriptor>() {
-        @Override
-        public boolean process(String namespaceName, PerlExportDescriptor entity) {
-          LookupElementBuilder lookupElement = null;
-          if (entity.isScalar()) {
-            lookupElement = PerlVariableCompletionUtil.getScalarLookupElement(entity.getImportedName());
-          }
-          else if (entity.isArray()) {
-            lookupElement = PerlVariableCompletionUtil.getArrayElementLookupElement(entity.getImportedName());
-          }
-          else if (entity.isHash()) {
-            lookupElement = PerlVariableCompletionUtil.getHashElementLookupElement(entity.getImportedName());
-          }
-
-          if (lookupElement != null) {
-            resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
-          }
-          return true;
+      processor = (namespaceName, entity) -> {
+        LookupElementBuilder lookupElement = null;
+        if (entity.isScalar()) {
+          lookupElement = PerlVariableCompletionUtil.getScalarLookupElement(entity.getImportedName());
         }
+        else if (entity.isArray()) {
+          lookupElement = PerlVariableCompletionUtil.getArrayElementLookupElement(entity.getImportedName());
+        }
+        else if (entity.isHash()) {
+          lookupElement = PerlVariableCompletionUtil.getHashElementLookupElement(entity.getImportedName());
+        }
+
+        if (lookupElement != null) {
+          resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
+        }
+        return true;
       };
     }
     else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable) {
-      processor = new PerlNamespaceEntityProcessor<PerlExportDescriptor>() {
-        @Override
-        public boolean process(String namespaceName, PerlExportDescriptor entity) {
-          LookupElementBuilder lookupElement = null;
-          if (entity.isArray()) {
-            lookupElement = PerlVariableCompletionUtil.getArrayLookupElement(entity.getImportedName());
-          }
-          else if (entity.isHash()) {
-            lookupElement = PerlVariableCompletionUtil.getHashSliceLookupElement(entity.getImportedName());
-          }
-
-          if (lookupElement != null) {
-            resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
-          }
-          return true;
+      processor = (namespaceName, entity) -> {
+        LookupElementBuilder lookupElement = null;
+        if (entity.isArray()) {
+          lookupElement = PerlVariableCompletionUtil.getArrayLookupElement(entity.getImportedName());
         }
+        else if (entity.isHash()) {
+          lookupElement = PerlVariableCompletionUtil.getHashSliceLookupElement(entity.getImportedName());
+        }
+
+        if (lookupElement != null) {
+          resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
+        }
+        return true;
       };
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
-      processor = new PerlNamespaceEntityProcessor<PerlExportDescriptor>() {
-        @Override
-        public boolean process(String namespaceName, PerlExportDescriptor entity) {
-          LookupElementBuilder lookupElement = null;
-          if (entity.isHash()) {
-            lookupElement = PerlVariableCompletionUtil.getHashLookupElement(entity.getImportedName());
-          }
-
-          if (lookupElement != null) {
-            resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
-          }
-          return true;
+      processor = (namespaceName, entity) -> {
+        LookupElementBuilder lookupElement = null;
+        if (entity.isHash()) {
+          lookupElement = PerlVariableCompletionUtil.getHashLookupElement(entity.getImportedName());
         }
+
+        if (lookupElement != null) {
+          resultSet.addElement(lookupElement.withTypeText(entity.getRealPackage(), true));
+        }
+        return true;
       };
     }
 
     if (processor != null) {
-      PerlUtil.processImportedEntities(namespaceContainer, processor);
+      namespaceContainer.processExportDescriptors(processor);
     }
   }
 }

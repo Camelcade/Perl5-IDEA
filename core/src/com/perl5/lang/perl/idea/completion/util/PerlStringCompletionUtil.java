@@ -119,7 +119,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
   }
 
   public static void fillWithExportableEntities(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
-    final String contextPackageName = PerlPackageUtil.getContextPackageName(element);
+    final String contextPackageName = PerlPackageUtil.getContextNamespaceName(element);
 
     if (contextPackageName == null) {
       return;
@@ -130,7 +130,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
         @Override
         public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
-          if (contextPackageName.equals(o.getPackageName())) {
+          if (contextPackageName.equals(o.getNamespaceName())) {
             result.addElement(LookupElementBuilder.create(o.getSubName()));
           }
           super.visitSubDeclarationElement(o);
@@ -138,7 +138,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
         @Override
         public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
-          if (contextPackageName.equals(o.getPackageName())) {
+          if (contextPackageName.equals(o.getNamespaceName())) {
             result.addElement(LookupElementBuilder.create(o.getSubName()));
           }
           super.visitPerlSubDefinitionElement(o);

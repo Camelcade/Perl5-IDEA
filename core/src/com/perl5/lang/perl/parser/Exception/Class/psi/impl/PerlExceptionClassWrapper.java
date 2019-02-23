@@ -184,7 +184,7 @@ public class PerlExceptionClassWrapper extends PerlPolyNamedElementBase<PerlPoly
             aliasName,
             LIGHT_SUB_DEFINITION,
             aliasEntry.getNonNullValueElement(),
-            PerlPackageUtil.getContextPackageName(this),
+            PerlPackageUtil.getContextNamespaceName(this),
             new ArrayList<>(throwArguments),
             PerlSubAnnotations.tryToFindAnnotations(aliasEntry.keyElement, aliasEntry.valueElement)
           ));

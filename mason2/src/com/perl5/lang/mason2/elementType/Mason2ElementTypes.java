@@ -20,9 +20,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IFileElementType;
+import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.Mason2SyntaxElements;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.*;
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -162,4 +165,6 @@ public interface Mason2ElementTypes extends Mason2SyntaxElements {
       return new MasonSimpleDerefExpressionImpl(node);
     }
   };
+  IFileElementType PP_FILE = new PerlFileElementType("Mason PP component", Mason2Language.INSTANCE);
+  IFileElementType COMPONENT_FILE = new PerlFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
 }

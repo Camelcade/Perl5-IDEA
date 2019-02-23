@@ -395,6 +395,8 @@ limitations under the License.
     extends("heredoc_opener|anon_array|anon_hash")=expr
 //    extends("glob_slot")=expr
 
+    mixin("package_expr")="com.perl5.lang.perl.psi.mixins.PerlPackageExpression"
+
     extends("string_list")=expr
     mixin("string_list")="com.perl5.lang.perl.psi.mixins.PerlStringListMixin"
 
@@ -454,6 +456,8 @@ limitations under the License.
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
 
+    mixin("parenthesised_expr")="com.perl5.lang.perl.psi.mixins.PerlParenthesizedExpressionMixin"
+
     extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclarationExpr"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationExprMixin"
@@ -512,7 +516,7 @@ limitations under the License.
     stubClass("do_expr")="com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub"
 
     mixin("method")="com.perl5.lang.perl.psi.mixins.PerlMethodMixin";
-    implements("method")="com.perl5.lang.perl.psi.PerlMethod";
+    implements("method")="com.perl5.lang.perl.psi.PerlMethodCall";
 
     implements("namespace_content")="com.perl5.lang.perl.psi.properties.PerlStatementsContainer"
 

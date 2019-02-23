@@ -34,7 +34,7 @@ public class PerlVariableUtil {
     }
     assert v1 != null && v2 != null;
     return v1.getActualType().equals(v2.getActualType()) &&
-           Comparing.equal(v1.getPackageName(), v2.getPackageName()) &&
+           Comparing.equal(v1.getExplicitNamespaceName(), v2.getExplicitNamespaceName()) &&
            Comparing.equal(v1.getName(), v2.getName());
   }
 }

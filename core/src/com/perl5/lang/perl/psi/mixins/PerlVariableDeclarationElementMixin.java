@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
@@ -31,6 +32,7 @@ import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -96,6 +98,12 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Nullable
   @Override
+  public String getExplicitNamespaceName() {
+    return getVariable().getExplicitNamespaceName();
+  }
+
+  @Nullable
+  @Override
   public String getDeclaredType() {
     PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
     if (variableAnnotations != null) {
@@ -129,12 +137,16 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     PerlVariableDeclarationStub stub = getStub();
     if (stub != null) {
-      return stub.getPackageName();
+      return stub.getNamespaceName();
     }
-    return getVariable().getPackageName();
+    String qualifierName = getVariable().getExplicitNamespaceName();
+    if (StringUtil.isNotEmpty(qualifierName)) {
+      return qualifierName;
+    }
+    return PerlPackageUtil.getContextNamespaceName(getVariable());
   }
 
   @Override

@@ -16,28 +16,30 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by hurricup on 31.05.2015.
  * Invocable method class
  */
-public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlPackageMember {
+public interface PerlMethodCall extends PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlValuableEntity {
+  /**
+   * @return explicit namespace name if any
+   */
+  @Nullable
+  String getExplicitNamespaceName();
+
   /**
    * Checks if explicit namespace defined - got object or namespace element
    *
    * @return checking result
    */
-  boolean hasExplicitNamespace();
+  default boolean hasExplicitNamespace() {
+    return getExplicitNamespaceName() != null;
+  }
 
   /**
    * Check if this is an object method invocation
@@ -45,26 +47,4 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
    * @return result
    */
   boolean isObjectMethod();
-
-  /**
-   * Checking for package name with traversing
-   *
-   * @return boolean
-   */
-  @Nullable
-  String getContextPackageNameHeavy();
-
-  /**
-   * @return possible definitions/aliases or empty collection
-   * fixme sub resolving should be move in here
-   */
-  default List<PsiElement> getTargetElements() {
-    PerlSubNameElement subNameElement = getSubNameElement();
-    if (subNameElement == null) {
-      return Collections.emptyList();
-    }
-    List<PsiElement> targets = ContainerUtil.newArrayList();
-    PerlResolveUtil.processElementReferencesResolveResults(pair -> targets.add(pair.first), subNameElement);
-    return targets.isEmpty() ? Collections.emptyList() : targets;
-  }
 }

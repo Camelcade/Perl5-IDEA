@@ -40,7 +40,7 @@ public class PerlRedundantNamespaceInspection extends PerlInspection {
         if (namespaceElement != null) {
           String packageName = namespaceElement.getCanonicalName();
           if (StringUtil.isNotEmpty(packageName)) {
-            String contextPackageName = PerlPackageUtil.getContextPackageName(o);
+            String contextPackageName = PerlPackageUtil.getContextNamespaceName(o);
             if (StringUtil.equals(packageName, contextPackageName)) {
               if (!namespaceElement.getTextRange().isEmpty()) {
                 holder.registerProblem(

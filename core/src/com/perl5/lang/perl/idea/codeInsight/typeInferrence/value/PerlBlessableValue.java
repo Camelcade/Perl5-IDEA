@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.types;
+package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
-public abstract class PerlType {
-  public static final String ARRAY_REF = "ArrayRef";
-  public static final String HASH_REF = "HashRef";
+import org.jetbrains.annotations.NotNull;
+
+public abstract class PerlBlessableValue extends PerlValue {
+  protected PerlBlessableValue() {
+  }
+
+  protected PerlBlessableValue(@NotNull PerlValue original,
+                               @NotNull PerlValue bless) {
+    super(original, bless);
+  }
+
+  protected PerlBlessableValue(@NotNull PerlValue bless) {
+    super(bless);
+  }
 }

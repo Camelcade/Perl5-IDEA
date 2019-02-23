@@ -33,72 +33,59 @@ import java.util.Map;
  * Created by hurricup on 28.05.2015.
  */
 public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitionElement> implements PerlNamespaceDefinition {
-  private final String myPackageName;
-  private final PerlMroType myMroType;
-  private final List<String> myParentNamespaces;
-  private final List<String> myEXPORT;
-  private final List<String> myEXPORT_OK;
-  private final Map<String, List<String>> myEXPORT_TAGS;
-  private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
+  @NotNull
+  private final PerlNamespaceDefinitionData myData;
 
-  public PerlNamespaceDefinitionStub(
-    @Nullable StubElement parent,
-    @NotNull IStubElementType elementType,
-    String packageName,
-    PerlMroType mroType,
-    List<String> parentNamespaces,
-    List<String> EXPORT,
-    List<String> EXPORT_OK,
-    Map<String, List<String>> EXPORT_TAGS,
-    PerlNamespaceAnnotations namespaceAnnotations
-  ) {
+  public PerlNamespaceDefinitionStub(@Nullable StubElement parent,
+                                     @NotNull IStubElementType elementType,
+                                     @NotNull PerlNamespaceDefinitionData data) {
     super(parent, elementType);
-    myPackageName = packageName;
-    myMroType = mroType;
-    myParentNamespaces = parentNamespaces;
-    myPerlNamespaceAnnotations = namespaceAnnotations;
-    myEXPORT = EXPORT;
-    myEXPORT_OK = EXPORT_OK;
-    myEXPORT_TAGS = EXPORT_TAGS;
+    myData = data;
+  }
+
+  @NotNull
+  public PerlNamespaceDefinitionData getData() {
+    return myData;
   }
 
   @Override
   public String getPackageName() {
-    return myPackageName;
+    return myData.getPackageName();
   }
 
+  @NotNull
   @Override
   public PerlMroType getMroType() {
-    return myMroType;
+    return myData.getMroType();
   }
 
   @NotNull
   @Override
   public List<String> getParentNamespacesNames() {
-    return myParentNamespaces;
+    return myData.getParentNamespacesNames();
   }
 
   @Nullable
   @Override
   public PerlNamespaceAnnotations getAnnotations() {
-    return myPerlNamespaceAnnotations;
+    return myData.getAnnotations();
   }
 
   @NotNull
   @Override
   public List<String> getEXPORT() {
-    return myEXPORT;
+    return myData.getEXPORT();
   }
 
   @NotNull
   @Override
   public List<String> getEXPORT_OK() {
-    return myEXPORT_OK;
+    return myData.getEXPORT_OK();
   }
 
   @NotNull
   @Override
   public Map<String, List<String>> getEXPORT_TAGS() {
-    return myEXPORT_TAGS;
+    return myData.getEXPORT_TAGS();
   }
 }

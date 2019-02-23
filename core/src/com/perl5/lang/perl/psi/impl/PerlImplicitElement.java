@@ -23,12 +23,10 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.light.LightElement;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlImplicitElement extends LightElement implements PerlPackageMember {
+public abstract class PerlImplicitElement extends LightElement {
   @Nullable
   private final PsiElement myParent;
 
@@ -44,12 +42,6 @@ public abstract class PerlImplicitElement extends LightElement implements PerlPa
     return myParent;
   }
 
-
-  @Nullable
-  protected String getContextPackageName() {
-    return PerlPackageUtil.getContextPackageName(getParent());
-  }
-
   @Override
   public int getTextOffset() {
     return getParent() == null ? 0 : getParent().getTextOffset();
@@ -60,29 +52,6 @@ public abstract class PerlImplicitElement extends LightElement implements PerlPa
     PsiElement parent = getParent();
     return parent == null ? null : parent.getContainingFile();
   }
-
-  @Nullable
-  @Override
-  public String getPackageName() {
-    return getContextPackageName();
-  }
-
-  @Nullable
-  @Override
-  public String getCanonicalName() {
-    String packageName = getPackageName();
-    if (packageName == null) {
-      return null;
-    }
-    return packageName + PerlPackageUtil.PACKAGE_SEPARATOR + getName();
-  }
-
-
-  @Override
-  public String getExplicitPackageName() {
-    return null;
-  }
-
 
   @Override
   public ItemPresentation getPresentation() {

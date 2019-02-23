@@ -19,11 +19,12 @@ package com.perl5.lang.perl.psi.mro;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 08.08.2015.
@@ -40,11 +41,10 @@ public class PerlMroC3 extends PerlMro {
    * @param result               list to populate
    */
   @Override
-  public void getLinearISA(Project project,
-                           List<PerlNamespaceDefinitionElement> namespaceDefinitions,
-                           HashSet<String> recursionMap,
-                           ArrayList<String> result) {
-    //		System.err.println("Resolving C3 for " + packageNames);
+  public void getLinearISA(@NotNull Project project,
+                           @NotNull List<PerlNamespaceDefinitionElement> namespaceDefinitions,
+                           @NotNull Set<String> recursionMap,
+                           @NotNull List<String> result) {
     ProgressManager.checkCanceled();
     Collection<PerlNamespaceDefinitionElement> nextIterationDefinitions = new ArrayList<>();
     for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {

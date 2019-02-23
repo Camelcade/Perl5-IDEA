@@ -46,7 +46,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
       LOG.warn("Expected PsiPerlMethod, got psiElement=[" + method.getClass() + "]; text=[" + method.getText() + "]");
       return;
     }
-    String explicitNamespace = ((PsiPerlMethod)method).getExplicitPackageName();
+    String explicitNamespace = ((PsiPerlMethod)method).getExplicitNamespaceName();
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
     String newPrefixMathcer =
       (explicitNamespace == null ? currentPrefixMatcher : (explicitNamespace + PerlPackageUtil.PACKAGE_SEPARATOR) + currentPrefixMatcher);

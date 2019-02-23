@@ -21,7 +21,7 @@ import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.PerlMethod;
+import com.perl5.lang.perl.psi.PerlMethodCall;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PsiPerlSubCallExpr;
@@ -56,15 +56,15 @@ public class PerlFancyMethodQuickFix implements LocalQuickFix {
   @Override
   public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
     PsiElement method = descriptor.getPsiElement();
-    assert method instanceof PerlMethod;
+    assert method instanceof PerlMethodCall;
 
     PsiElement callExpression = method.getParent();
     assert callExpression instanceof PsiPerlSubCallExpr;
 
-    PerlNamespaceElement namespaceElement = ((PerlMethod)method).getNamespaceElement();
+    PerlNamespaceElement namespaceElement = ((PerlMethodCall)method).getNamespaceElement();
     assert namespaceElement != null;
 
-    PerlSubNameElement subNameElement = ((PerlMethod)method).getSubNameElement();
+    PerlSubNameElement subNameElement = ((PerlMethodCall)method).getSubNameElement();
     assert subNameElement != null;
 
     StringBuilder argsBuilder = new StringBuilder();

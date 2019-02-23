@@ -70,4 +70,12 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
 
     return extractor.getArguments();
   }
+
+  /**
+   * @return a psi element for the control flow building if available
+   */
+  @Nullable
+  default PsiElement getControlFlowElement() {
+    return this;
+  }
 }

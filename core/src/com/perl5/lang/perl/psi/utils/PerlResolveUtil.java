@@ -88,7 +88,7 @@ public class PerlResolveUtil {
    */
   @Nullable
   public static PerlVariableDeclarationElement getLexicalDeclaration(PerlVariable variable) {
-    if (variable.getExplicitPackageName() != null) {
+    if (variable.getExplicitNamespaceName() != null) {
       return null;
     }
     PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);

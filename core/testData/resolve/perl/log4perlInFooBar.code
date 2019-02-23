@@ -1,0 +1,28 @@
+package Foo::Bar;
+use Log::Log4perl qw/:easy/;
+
+TRACE;
+DEBUG;
+INFO;
+WARN;
+ERROR;
+FATAL;
+ALWAYS;
+
+LOGCROAK;
+LOGCLUCK;
+LOGCARP;
+LOGCONFESS;
+
+LOGDIE;
+LOGWARN;
+LOGEXIT;
+
+$OFF;
+$FATAL;
+$ERROR;
+$WARN;
+$INFO;
+$DEBUG;
+$TRACE;
+$ALL;

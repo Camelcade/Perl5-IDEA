@@ -25,16 +25,11 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hurricup on 28.05.2015.
@@ -63,37 +58,11 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   @NotNull
   @Override
   public PerlNamespaceDefinitionStub createStub(@NotNull PerlNamespaceDefinitionElement psi, StubElement parentStub) {
-    return createStubElement(parentStub,
-                             psi.getPackageName(),
-                             psi.getMroType(),
-                             psi.getParentNamespacesNames(),
-                             psi.getEXPORT(),
-                             psi.getEXPORT_OK(),
-                             psi.getEXPORT_TAGS(),
-                             psi.getAnnotations()
-    );
+    return createStubElement(parentStub, new PerlNamespaceDefinitionData(psi));
   }
 
-  protected PerlNamespaceDefinitionStub createStubElement(@Nullable StubElement parentStub,
-                                                          @NotNull String packageName,
-                                                          @NotNull PerlMroType mroType,
-                                                          @NotNull List<String> parentNamespaceNames,
-                                                          @NotNull List<String> export,
-                                                          @NotNull List<String> exportOk,
-                                                          @NotNull Map<String, List<String>> exportTags,
-                                                          @Nullable PerlNamespaceAnnotations annotations
-
-  ) {
-    return new PerlNamespaceDefinitionStub(parentStub,
-                                           this,
-                                           packageName,
-                                           mroType,
-                                           parentNamespaceNames,
-                                           export,
-                                           exportOk,
-                                           exportTags,
-                                           annotations
-    );
+  protected PerlNamespaceDefinitionStub createStubElement(@Nullable StubElement parentStub, @NotNull PerlNamespaceDefinitionData data) {
+    return new PerlNamespaceDefinitionStub(parentStub, this, data);
   }
 
   @NotNull
@@ -125,53 +94,13 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
 
   @Override
   public void serialize(@NotNull PerlNamespaceDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getPackageName());
-    dataStream.writeName(stub.getMroType().toString());
-    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getParentNamespacesNames());
-    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT());
-    PerlStubSerializationUtil.writeStringsList(dataStream, stub.getEXPORT_OK());
-    PerlStubSerializationUtil.writeStringListMap(dataStream, stub.getEXPORT_TAGS());
-
-    PerlNamespaceAnnotations namespaceAnnotations = stub.getAnnotations();
-    if (namespaceAnnotations == null) {
-      dataStream.writeBoolean(false);
-    }
-    else {
-      dataStream.writeBoolean(true);
-      namespaceAnnotations.serialize(dataStream);
-    }
+    stub.getData().serialize(dataStream);
   }
 
   @NotNull
   @Override
   public PerlNamespaceDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    String packageName = PerlStubSerializationUtil.readString(dataStream);
-    PerlMroType mroType = PerlMroType.valueOf(PerlStubSerializationUtil.readString(dataStream));
-    List<String> parentNamespaces = PerlStubSerializationUtil.readStringsList(dataStream);
-    List<String> EXPORT = PerlStubSerializationUtil.readStringsList(dataStream);
-    List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
-    Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
-
-    assert packageName != null;
-    assert parentNamespaces != null;
-    assert EXPORT != null;
-    assert EXPORT_OK != null;
-
-    return createStubElement(
-      parentStub,
-      packageName,
-      mroType,
-      parentNamespaces,
-      EXPORT,
-      EXPORT_OK,
-      EXPORT_TAGS,
-      desearializeAnnotations(dataStream)
-    );
-  }
-
-  @Nullable
-  private PerlNamespaceAnnotations desearializeAnnotations(@NotNull StubInputStream dataStream) throws IOException {
-    return dataStream.readBoolean() ? PerlNamespaceAnnotations.deserialize(dataStream) : null;
+    return createStubElement(parentStub, PerlNamespaceDefinitionData.deserialize(dataStream));
   }
 
   @Override

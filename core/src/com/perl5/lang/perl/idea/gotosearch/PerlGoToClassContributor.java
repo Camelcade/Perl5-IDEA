@@ -56,8 +56,7 @@ public class PerlGoToClassContributor implements ChooseByNameContributor, GotoCl
   public NavigationItem[] getItemsByName(String packageName, String searchTerm, Project project, boolean includeNonProjectItems) {
     Collection<PerlNamespaceDefinitionElement> result = PerlPackageUtil.getNamespaceDefinitions(
       project,
-      packageName,
-      (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project))
+      (includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project)), packageName
     );
     //noinspection SuspiciousToArrayCall
     return result.toArray(new NavigationItem[result.size()]);

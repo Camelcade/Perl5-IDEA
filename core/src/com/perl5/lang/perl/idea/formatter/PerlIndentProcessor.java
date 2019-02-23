@@ -25,7 +25,6 @@ import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -34,6 +33,7 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -87,10 +87,10 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       SWITCH_COMPOUND,
       CASE_COMPOUND,
 
-      DO_EXPR,
-      EVAL_EXPR,
-      SUB_EXPR,
-      PerlParserDefinition.FILE,
+    DO_EXPR,
+    EVAL_EXPR,
+    SUB_EXPR,
+    PerlStubElementTypes.FILE,
 
       LP_STRING_QW
     ));

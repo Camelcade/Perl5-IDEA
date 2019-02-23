@@ -71,7 +71,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
           ElementManipulators.getValueText(keyElement),
           LIGHT_SUB_DEFINITION,
           keyElement,
-          PerlPackageUtil.getContextPackageName(this),
+          PerlPackageUtil.getContextNamespaceName(this),
           Collections.emptyList(),
           PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent())
         ));

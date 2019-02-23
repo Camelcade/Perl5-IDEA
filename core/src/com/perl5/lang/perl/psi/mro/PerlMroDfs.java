@@ -19,10 +19,10 @@ package com.perl5.lang.perl.psi.mro;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hurricup on 15.06.2015.
@@ -41,12 +41,10 @@ public class PerlMroDfs extends PerlMro {
    * @param result               list to populate
    */
   @Override
-  public void getLinearISA(Project project,
-                           List<PerlNamespaceDefinitionElement> namespaceDefinitions,
-                           HashSet<String> recursionMap,
-                           ArrayList<String> result) {
-    //		System.err.println("Resolving DFS for " + packageNames);
-
+  public void getLinearISA(@NotNull Project project,
+                           @NotNull List<PerlNamespaceDefinitionElement> namespaceDefinitions,
+                           @NotNull Set<String> recursionMap,
+                           @NotNull List<String> result) {
     ProgressManager.checkCanceled();
     for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
       String packageName = namespaceDefinition.getPackageName();

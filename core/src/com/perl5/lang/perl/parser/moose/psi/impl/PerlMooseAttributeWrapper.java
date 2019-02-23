@@ -24,6 +24,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -141,7 +143,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     PerlSubExpr bodyExpr = arguments.size() == 1 && arguments.get(0) instanceof PerlSubExpr ? (PerlSubExpr)arguments.get(0) : null;
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    String packageName = PerlPackageUtil.getContextPackageName(this);
+    String packageName = PerlPackageUtil.getContextNamespaceName(this);
     for (PsiElement identifier : lists.first) {
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,
@@ -162,9 +164,9 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
   @NotNull
   private PerlLightMethodDefinitionElement setMojoReturnsComputation(
     @NotNull PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod) {
-    PairFunction<String, List<PsiElement>, String> defaultComputation = newMethod.getReturnsComputation();
-    newMethod.setReturnsComputation(
-      (context, args) -> args.isEmpty() ? defaultComputation.fun(context, args) : newMethod.getPackageName()
+    PairFunction<String, List<PerlValue>, PerlValue> defaultComputation = newMethod.getReturnValueComputation();
+    newMethod.setReturnValueComputation(
+      (context, args) -> args.isEmpty() ? defaultComputation.fun(context, args) : PerlValueStatic.create(newMethod.getNamespaceName())
     );
     return newMethod;
   }
@@ -174,7 +176,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
                                                                       @NotNull List<PsiElement> listElements) {
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    String packageName = PerlPackageUtil.getContextPackageName(this);
+    String packageName = PerlPackageUtil.getContextNamespaceName(this);
 
     Map<String, PerlHashEntry> parameters = PerlHashUtil.packToHash(listElements.subList(1, listElements.size()));
     // handling is
@@ -236,8 +238,8 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       );
 
       if (key.equals(READER_KEY) && valueClass != null) {
-        String finalClass = valueClass;
-        secondaryElement.setReturnsComputation((a, b) -> finalClass);
+        PerlValue returnValue = PerlValueStatic.create(valueClass);
+        secondaryElement.setReturnValueComputation((a, b) -> returnValue);
       }
 
       secondaryResult.add(
@@ -311,8 +313,8 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
         PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
       );
       if (valueClass != null) {
-        String finalClass = valueClass;
-        newElement.setReturnsComputation((a, b) -> finalClass);
+        PerlValue returnValue = PerlValueStatic.create(valueClass);
+        newElement.setReturnValueComputation((a, b) -> returnValue);
       }
       result.add(newElement);
       result.addAll(secondaryResult);

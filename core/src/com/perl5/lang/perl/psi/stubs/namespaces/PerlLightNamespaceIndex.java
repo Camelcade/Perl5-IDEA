@@ -46,7 +46,7 @@ public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElem
   public static boolean processNamespaces(@NotNull Project project,
                                           @NotNull String packageName,
                                           @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+                                          @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
 
     return StubIndex.getInstance().processElements(KEY, packageName, project, scope, PerlPolyNamedElement.class, polyNamedElement -> {
       ProgressManager.checkCanceled();

@@ -17,7 +17,6 @@
 package resolve.perl;
 
 import base.PerlLightTestCase;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 
 /**
@@ -29,78 +28,73 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
     return "testData/resolve/perl/variableTypes";
   }
 
-  public void testBuiltIn() {doTest(null);}
+  public void testBuiltIn() {doTest("Value: UNKNOWN");}
 
   public void testDeclarationSingle() {
-    doTest("declaration_single", "Foo::Bar");
+    doTest("Value: Foo::Bar");
   }
 
   public void testDeclarationMulti() {
-    doTest("declaration_multi", "Foo::Bar");
+    doTest("Value: Foo::Bar");
   }
 
-  public void testDeclarationAssignment() {
-    doTest("declaration_assignment_new", "Foo::Bar");
+  public void testDeclarationAssignmentNew() {
+    doTest("Object: Value: Foo::Bar->Value: new");
   }
 
-  public void testBeforeAssignment() {
-    doTest("variable_before_assignment", null);
+  public void testVariableBeforeAssignment() {
+    doTest("Value: UNKNOWN");
   }
 
-  public void testAfterAssignment() {
-    doTest("variable_after_assignment", "Foo::Bar");
+  public void testVariableAfterAssignment() {
+    doTest("Object: Value: Foo::Bar->Value: new");
   }
 
   public void testAnnotatedSingleInside() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedSingle() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedMulti() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedMultiNonFirst() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedConcurrentStatement() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedConcurrentStatementOuter() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeInside() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeMulti() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeSingle() {
-    doTest("JSON::XS");
+    doTest("Value: JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeWins() {
-    doTest("DBI");
+    doTest("Value: DBI");
   }
 
   public void doTest(String type) {
-    doTest(getTestName(true), type);
-  }
-
-
-  public void doTest(String filename, String type) {
-    initWithFileSmart(filename);
-    PsiElement element = getElementAtCaret(PerlVariable.class);
+    initWithFileSmart(getTestName(true));
+    PerlVariable element = getElementAtCaret(PerlVariable.class);
     assertNotNull(element);
     assertInstanceOf(element, PerlVariable.class);
-    assertEquals(type, ((PerlVariable)element).guessVariableType());
+    assertEquals(type, element.getPerlValue().toString());
   }
 }

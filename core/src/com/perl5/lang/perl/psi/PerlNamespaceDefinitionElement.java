@@ -17,34 +17,104 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.NavigationItem;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiInvalidElementAccessException;
 import com.intellij.psi.PsiNamedElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementsIndex;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.processors.*;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiNamedElement, NavigationItem {
   @NotNull
+  @Contract(pure = true)
+  Project getProject() throws PsiInvalidElementAccessException;
+
+  default boolean processExportDescriptors(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
+    String namespaceName = getPackageName();
+    if (StringUtil.isEmpty(namespaceName)) {
+      return true;
+    }
+    return processExportDescriptors(
+      getProject(), GlobalSearchScope.fileScope(getContainingFile().getOriginalFile()), namespaceName, processor);
+  }
+
+  @NotNull
+  default List<PerlExportDescriptor> collectImportDescriptors(@NotNull PerlImportsCollector collector) {
+    processExportDescriptors(collector);
+    return collector.getResult();
+  }
+
+  @NotNull
   default List<PerlExportDescriptor> getImportedSubsDescriptors() {
-    return PerlSubUtil.getImportedSubsDescriptors(this);
+    return collectImportDescriptors(new PerlSubImportsCollector());
   }
 
   @NotNull
   default List<PerlExportDescriptor> getImportedScalarDescriptors() {
-    return PerlScalarUtil.getImportedScalarsDescritptors(this);
+    return collectImportDescriptors(new PerlScalarImportsCollector());
   }
 
   @NotNull
   default List<PerlExportDescriptor> getImportedArrayDescriptors() {
-    return PerlArrayUtil.getImportedArraysDescriptors(this);
+    return collectImportDescriptors(new PerlArrayImportsCollector());
   }
 
   @NotNull
   default List<PerlExportDescriptor> getImportedHashDescriptors() {
-    return PerlHashUtil.getImportedHashesDescriptors(this);
+    return collectImportDescriptors(new PerlHashImportsCollector());
+  }
+
+  default List<PerlNamespaceDefinitionElement> getParentNamespaceDefinitions() {
+    return PerlPackageUtil.collectNamespaceDefinitions(getProject(), getParentNamespacesNames());
+  }
+
+  @NotNull
+  default List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
+    return PerlPackageUtil.getChildNamespaces(getProject(), getPackageName());
+  }
+
+  default void getLinearISA(@NotNull Set<String> recursionMap, @NotNull List<String> result) {
+    getMro().getLinearISA(getProject(), getParentNamespaceDefinitions(), recursionMap, result);
+  }
+
+  @NotNull
+  static Set<PerlExportDescriptor> getExportDescriptors(@NotNull Project project,
+                                                        @NotNull GlobalSearchScope searchScope,
+                                                        @NotNull String namespaceName) {
+    Set<PerlExportDescriptor> result = new HashSet<>();
+    PerlNamespaceDefinitionElement.processExportDescriptors(
+      project, searchScope, namespaceName, (__, it) -> {
+        result.add(it);
+        return true;
+      });
+    return result;
+  }
+
+  static boolean processExportDescriptors(@NotNull Project project,
+                                          @NotNull GlobalSearchScope searchScope,
+                                          @NotNull String namespaceName,
+                                          @NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor) {
+    return PerlUseStatementsIndex.processElements(project, searchScope, namespaceName, it -> {
+      String packageName = it.getPackageName();
+
+      if (packageName == null) {
+        return true;
+      }
+      for (PerlExportDescriptor entry : it.getPackageProcessor().getImports(it)) {
+        if (!processor.process(packageName, entry)) {
+          return false;
+        }
+      }
+      return true;
+    });
   }
 }

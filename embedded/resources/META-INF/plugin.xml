@@ -30,6 +30,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <stubElementTypeHolder class="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <internalFileTemplate name="Perl5 embedded"/>
     <fileTypeFactory implementation="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileTypeFactory"/>
     <lang.parserDefinition language="Embedded Perl"

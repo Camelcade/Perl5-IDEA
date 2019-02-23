@@ -19,7 +19,6 @@ package com.perl5.lang.htmlmason.idea.formatter;
 import com.intellij.formatting.Indent;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
@@ -47,7 +46,7 @@ public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTM
     TokenSet.create(
       HTML_MASON_METHOD_DEFINITION,
       HTML_MASON_SUBCOMPONENT_DEFINITION,
-      HTMLMasonParserDefinition.FILE
+      HTMLMasonElementTypes.FILE
     ));
 
   public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(

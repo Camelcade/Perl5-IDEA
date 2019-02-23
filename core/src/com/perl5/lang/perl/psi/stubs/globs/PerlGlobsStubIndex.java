@@ -16,7 +16,13 @@
 
 package com.perl5.lang.perl.psi.stubs.globs;
 
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
@@ -37,5 +43,15 @@ public class PerlGlobsStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
   @Override
   public StubIndexKey<String, PsiPerlGlobVariable> getKey() {
     return KEY;
+  }
+
+  public static boolean processElements(@NotNull Project project,
+                                        @NotNull String canonicalName,
+                                        @NotNull GlobalSearchScope scope,
+                                        @NotNull Processor<? super PerlGlobVariable> processor) {
+    return StubIndex.getInstance().processElements(KEY, canonicalName, project, scope, PsiPerlGlobVariable.class, element -> {
+      ProgressManager.checkCanceled();
+      return processor.process(element);
+    });
   }
 }

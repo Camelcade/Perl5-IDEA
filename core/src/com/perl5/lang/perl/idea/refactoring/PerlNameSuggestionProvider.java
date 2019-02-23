@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulator;
@@ -32,6 +33,8 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -39,10 +42,10 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -311,27 +314,37 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   private static String suggestAndGetForCall(@NotNull PsiPerlSubCallExpr expression, @NotNull Set<String> result, String recommendation) {
     PsiPerlMethod method = expression.getMethod();
-    if (method != null) {
-      PerlSubNameElement subNameElement = method.getSubNameElement();
-      if (subNameElement != null) {
-        String subName = subNameElement.getName();
-        if ("new".equals(subName)) {
-          List<String> variantsFromObjectClass = getVariantsFromNamespaceName(subNameElement.getPackageName());
-          result.addAll(variantsFromObjectClass);
-          if (!variantsFromObjectClass.isEmpty()) {
-            recommendation = variantsFromObjectClass.get(0);
-          }
-        }
-        else {
-          String normalizedName = join(subName.replaceAll("^(_+|get_*|set_*)", ""));
-          if (StringUtil.isNotEmpty(normalizedName)) {
-            result.add(normalizedName);
-            recommendation = normalizedName;
-          }
+    if (method == null) {
+      return recommendation;
+    }
+    PerlValueCall callValue = PerlValueCall.from(method);
+    if (callValue == null) {
+      return recommendation;
+    }
 
-          result.addAll(getVariantsFromNamespaceName(PerlSubUtil.getMethodReturnValue(expression)));
-        }
+    PerlValue subNameValue = callValue.getSubNameValue();
+
+    if (subNameValue.canRepresentSubName("new")) {
+      PerlValue namespaceNameValue = callValue.getNamespaceNameValue();
+      Collection<String> variantsFromObjectClass = getVariantsFromPerlValueNamespaces(method, namespaceNameValue);
+      result.addAll(variantsFromObjectClass);
+      if (!variantsFromObjectClass.isEmpty()) {
+        recommendation = variantsFromObjectClass.iterator().next();
       }
+    }
+    else {
+      Ref<String> recommendationRef = Ref.create(recommendation);
+      subNameValue.processSubNames(method.getProject(), method.getResolveScope(), it -> {
+        String normalizedName = join(it.replaceAll("^(_+|get_*|set_*)", ""));
+        if (StringUtil.isNotEmpty(normalizedName)) {
+          result.add(normalizedName);
+          recommendationRef.set(normalizedName);
+        }
+        return true;
+      });
+
+      recommendation = recommendationRef.get();
+      result.addAll(getVariantsFromEntityValueNamespaces(expression));
     }
     return recommendation;
   }
@@ -489,6 +502,29 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       }
     }
     return recommendation;
+  }
+
+  @NotNull
+  private static Collection<String> getVariantsFromEntityValueNamespaces(@Nullable PerlValuableEntity valuableEntity) {
+    if (valuableEntity == null) {
+      return Collections.emptyList();
+    }
+    PerlValue perlValue = valuableEntity.getPerlValue();
+    return getVariantsFromPerlValueNamespaces(valuableEntity, perlValue);
+  }
+
+  @NotNull
+  private static Collection<String> getVariantsFromPerlValueNamespaces(@NotNull PerlValuableEntity valuableEntity,
+                                                                       @Nullable PerlValue perlValue) {
+    if (PerlValue.isEmpty(perlValue)) {
+      return Collections.emptyList();
+    }
+    Set<String> result = new LinkedHashSet<>();
+    perlValue.processNamespaceNames(valuableEntity.getProject(), valuableEntity.getResolveScope(), it -> {
+      result.addAll(getVariantsFromNamespaceName(it));
+      return true;
+    });
+    return result;
   }
 
   @NotNull

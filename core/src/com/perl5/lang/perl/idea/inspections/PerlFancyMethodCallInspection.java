@@ -38,15 +38,15 @@ public class PerlFancyMethodCallInspection extends PerlInspection {
       @Override
       public void visitMethod(@NotNull PsiPerlMethod o) {
         if (o.isObjectMethod() && o.getLastChild() instanceof PerlNamespaceElement) {
-          String packageName = o.getPackageName();
-          if (packageName == null) {
+          String namespaceName = o.getExplicitNamespaceName();
+          if (namespaceName == null) {
             return;
           }
           PerlSubNameElement subNameElement = o.getSubNameElement();
           if (subNameElement == null) {
             return;
           }
-          String properForm = String.format("%s->%s", packageName, subNameElement.getName());
+          String properForm = String.format("%s->%s", namespaceName, subNameElement.getName());
           holder.registerProblem(
             o,
             PerlBundle.message("perl.inspection.fancy.call", properForm),

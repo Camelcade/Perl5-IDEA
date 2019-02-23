@@ -22,7 +22,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
-import com.perl5.lang.mason2.elementType.MasonFileElementType;
 import com.perl5.lang.mason2.lexer.Mason2TemplatingLexerAdapter;
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
 import com.perl5.lang.perl.parser.Mason2TemplatingParserImpl;
@@ -32,11 +31,10 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 13.01.2016.
  */
 public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition {
-  public static final IFileElementType FILE = new MasonFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
 
   @Override
   public IFileElementType getFileNodeType() {
-    return FILE;
+    return COMPONENT_FILE;
   }
 
   @NotNull

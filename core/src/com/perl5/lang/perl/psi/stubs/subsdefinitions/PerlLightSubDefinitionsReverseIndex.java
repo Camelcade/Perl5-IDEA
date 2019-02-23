@@ -51,7 +51,7 @@ public class PerlLightSubDefinitionsReverseIndex extends PerlStubIndexBase<PerlP
       ProgressManager.checkCanceled();
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlSubDefinitionElement &&
-            packageName.equals(((PerlSubDefinitionElement)lightNamedElement).getPackageName())) {
+            packageName.equals(((PerlSubDefinitionElement)lightNamedElement).getNamespaceName())) {
           if (!processor.process((PerlSubDefinitionElement)lightNamedElement)) {
             return false;
           }

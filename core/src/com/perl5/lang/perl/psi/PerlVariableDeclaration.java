@@ -17,19 +17,20 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
-public interface PerlVariableDeclaration extends PerlDeprecatable {
+public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMember {
   /**
    * Trying to get the package name from explicit specification or by traversing
    *
    * @return package name for current element
    */
-  String getPackageName();
+  String getNamespaceName();
 
   String getVariableName();
 
@@ -74,7 +75,7 @@ public interface PerlVariableDeclaration extends PerlDeprecatable {
       return null;
     }
 
-    String packageName = getPackageName();
+    String packageName = getNamespaceName();
     if (StringUtil.isEmpty(packageName)) {
       return variableName;
     }

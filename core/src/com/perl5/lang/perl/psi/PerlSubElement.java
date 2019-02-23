@@ -42,8 +42,8 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
     }
 
     Collection<PsiElement> resolveTargets = PerlMro.resolveSub(
-      getProject(),
-      getPackageName(),
+      getProject(), getResolveScope(),
+      getNamespaceName(),
       getSubName(),
       true
     );
@@ -62,7 +62,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
 
     PerlSubElement run = this;
     while (true) {
-      String packageName = run.getPackageName();
+      String packageName = run.getNamespaceName();
       if (StringUtil.isEmpty(packageName) || classRecursion.contains(packageName)) {
         return run;
       }
@@ -86,7 +86,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
   }
 
   default boolean processDirectOverridingSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
-    String packageName = getPackageName();
+    String packageName = getNamespaceName();
     String subName = getSubName();
     if (packageName == null || subName == null) {
       return true;

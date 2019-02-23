@@ -51,10 +51,10 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
     PsiElement parent = getParent();
 
     if (parent instanceof PerlPackageMember) {
-      return ((PerlPackageMember)parent).getPackageName();
+      return ((PerlPackageMember)parent).getNamespaceName();
     }
     else {
-      return PerlPackageUtil.getContextPackageName(this);
+      return PerlPackageUtil.getContextNamespaceName(this);
     }
   }
 

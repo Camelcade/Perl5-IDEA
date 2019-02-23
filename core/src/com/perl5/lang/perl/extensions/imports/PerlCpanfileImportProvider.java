@@ -52,7 +52,7 @@ public class PerlCpanfileImportProvider implements PerlImportsProvider {
 
   @NotNull
   @Override
-  public List<PerlExportDescriptor> getImports() {
+  public List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
     return DESCRIPTORS;
   }
 

@@ -25,7 +25,6 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -44,7 +43,6 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBasedPsiElementBase<Stub>
   implements PerlSubElement,
              StubBasedPsiElement<Stub>,
-             PerlPackageMember,
              PerlNamespaceElementContainer,
              PerlDeprecatable,
              PerlLabelScope {
@@ -58,13 +56,13 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     Stub stub = getStub();
     if (stub != null) {
-      return stub.getPackageName();
+      return stub.getNamespaceName();
     }
 
-    String namespace = getExplicitPackageName();
+    String namespace = getExplicitNamespaceName();
     if (namespace == null) {
       namespace = getContextPackageName();
     }
@@ -101,12 +99,12 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
 
   @Nullable
   protected String getContextPackageName() {
-    return PerlPackageUtil.getContextPackageName(this);
+    return PerlPackageUtil.getContextNamespaceName(this);
   }
 
   @Nullable
   @Override
-  public String getExplicitPackageName() {
+  public String getExplicitNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
   }

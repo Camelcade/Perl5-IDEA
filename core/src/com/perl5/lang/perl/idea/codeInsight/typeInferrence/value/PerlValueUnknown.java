@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.htmlmason.elementType;
+package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
-import com.intellij.lang.Language;
-import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
-public class HTMLMasonFileElementType extends PerlFileElementType {
-  public HTMLMasonFileElementType(String debugName, Language language) {
-    super(debugName, language);
+public final class PerlValueUnknown extends PerlValue {
+  public static final PerlValueUnknown UNKNOWN_VALUE = new PerlValueUnknown();
+
+  private PerlValueUnknown() {
+  }
+
+  @NotNull
+  @Override
+  PerlValueUnknown createBlessedCopy(@NotNull PerlValue bless) {
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    return "Value: UNKNOWN";
   }
 }

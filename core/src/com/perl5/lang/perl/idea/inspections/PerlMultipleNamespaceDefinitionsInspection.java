@@ -40,7 +40,7 @@ public class PerlMultipleNamespaceDefinitionsInspection extends PerlInspection {
         String packageName = o.getPackageName();
         if (packageName != null &&
             !PerlPackageUtil.MAIN_PACKAGE.equals(packageName) &&
-            PerlPackageUtil.getNamespaceDefinitions(project, o.getPackageName(), GlobalSearchScope.projectScope(project)).size() > 1 &&
+            PerlPackageUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getPackageName()).size() > 1 &&
             o.getNameIdentifier() != null
           ) {
           registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");

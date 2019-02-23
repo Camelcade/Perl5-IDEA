@@ -161,6 +161,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return new PerlItemPresentationSimple(this, getPresentableName());
   }
 
+  @NotNull
   @Override
   public PerlMroType getMroType() {
     PerlNamespaceDefinitionStub stub = getStub();
@@ -387,7 +388,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
           if (variable != null && StringUtil.equals("ISA", variable.getName())) {
             PsiElement rightSide = assignExpr.getLastChild();
             if (rightSide != null) {
-              String explicitPackageName = variable.getExplicitPackageName();
+              String explicitPackageName = variable.getExplicitNamespaceName();
               if (explicitPackageName == null || StringUtil.equals(explicitPackageName, myPackageName)) {
                 runtimeModifiers.add(new PerlRuntimeParentsProviderFromArray(assignExpr.getLastChild()));
               }
