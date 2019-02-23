@@ -49,8 +49,8 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
  * <li>Global scalars, arrays and hashes defined by modules code</li>
  * </ul>
  */
-public class PerlImplicitSubsService {
-  private static final Logger LOG = Logger.getInstance(PerlImplicitSubsService.class);
+public class PerlImplicitDeclarationsService {
+  private static final Logger LOG = Logger.getInstance(PerlImplicitDeclarationsService.class);
   private static final String PACKAGE = "package";
   private static final String SUB_ELEMENT = "sub";
   private static final String VARIABLE = "var";
@@ -65,7 +65,7 @@ public class PerlImplicitSubsService {
   @NotNull
   private final PsiManager myPsiManager;
 
-  public PerlImplicitSubsService(@NotNull Project project) {
+  public PerlImplicitDeclarationsService(@NotNull Project project) {
     myPsiManager = PsiManager.getInstance(project);
 
     PerlImplicitSubsProvider.EP_NAME.extensions().forEach(it -> readDefinitions(it, it.getSubsFileName()));
@@ -314,7 +314,7 @@ public class PerlImplicitSubsService {
   }
 
   @NotNull
-  public static PerlImplicitSubsService getInstance(@NotNull Project project) {
-    return ServiceManager.getService(project, PerlImplicitSubsService.class);
+  public static PerlImplicitDeclarationsService getInstance(@NotNull Project project) {
+    return ServiceManager.getService(project, PerlImplicitDeclarationsService.class);
   }
 }

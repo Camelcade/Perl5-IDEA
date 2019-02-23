@@ -28,7 +28,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlArrayImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -102,7 +102,7 @@ public class PerlArrayUtil implements PerlElementTypes {
   public static boolean processDefinedGlobalArrays(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor) {
-    return PerlImplicitSubsService.getInstance(project).processArrays(processor) &&
+    return PerlImplicitDeclarationsService.getInstance(project).processArrays(processor) &&
            PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor);
   }
 

@@ -42,8 +42,8 @@ import com.perl5.lang.perl.parser.ClassAccessorParserExtension;
 import com.perl5.lang.perl.parser.MooseParserExtension;
 import com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl;
 import com.perl5.lang.perl.psi.references.PerlCoreSubsProvider;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.references.PerlImplicitSubsProvider;
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodParserDefinition;
 import org.jetbrains.annotations.NonNls;
@@ -135,7 +135,7 @@ public abstract class PerlParserTestBase extends ParsingTestCase {
     registerExtension(PerlImplicitSubsProvider.EP_NAME, new TypesStandardImplicitSubsProvider());
     registerExtension(PerlImplicitSubsProvider.EP_NAME, new ReadonlyImplicitSubsProvider());
 
-    myProject.registerService(PerlImplicitSubsService.class, new PerlImplicitSubsService(getProject()));
+    myProject.registerService(PerlImplicitDeclarationsService.class, new PerlImplicitDeclarationsService(getProject()));
 
   }
 

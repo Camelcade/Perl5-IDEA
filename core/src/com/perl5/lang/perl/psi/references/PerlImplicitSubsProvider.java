@@ -27,7 +27,7 @@ public interface PerlImplicitSubsProvider {
 
   /**
    * @return path to XML resource with subs description
-   * @see PerlImplicitSubsService#readSubs(java.lang.ClassLoader, java.lang.String)
+   * @see PerlImplicitDeclarationsService#readSubs(java.lang.ClassLoader, java.lang.String)
    */
   @NotNull
   String getSubsFileName();

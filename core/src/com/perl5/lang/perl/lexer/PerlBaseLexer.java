@@ -29,7 +29,7 @@ import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -113,7 +113,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   private Project myProject;
   private AtomicNotNullLazyValue<Set<String>> mySubNamesProvider;
   private AtomicNotNullLazyValue<Set<String>> myPackageNamesProvider;
-  private PerlImplicitSubsService myImplicitSubsService;
+  private PerlImplicitDeclarationsService myImplicitSubsService;
   private Set<String> myLocalPackages = new THashSet<>();
 
   public PerlBaseLexer withProject(@Nullable Project project) {
@@ -372,7 +372,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     myIsHeredocLike = false;
     myHasTryCatch = null;
 
-    myImplicitSubsService = myProject == null ? null : PerlImplicitSubsService.getInstance(myProject);
+    myImplicitSubsService = myProject == null ? null : PerlImplicitDeclarationsService.getInstance(myProject);
 
     mySubNamesProvider = AtomicNotNullLazyValue.createValue(() -> {
       assert myProject != null;

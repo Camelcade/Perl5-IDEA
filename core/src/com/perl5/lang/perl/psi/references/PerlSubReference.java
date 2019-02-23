@@ -163,7 +163,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
           // check for builtins
           // fixme actually, bare words may be resolved to the CORE::GLOBAL subs.
           if (relatedItems.isEmpty() && expliclitPackageElement == null) {
-            PerlSubDefinitionElement builtInSub = PerlImplicitSubsService.getInstance(project).findCoreSub(subName);
+            PerlSubDefinitionElement builtInSub = PerlImplicitDeclarationsService.getInstance(project).findCoreSub(subName);
             if (builtInSub != null) {
               relatedItems.add(builtInSub);
             }

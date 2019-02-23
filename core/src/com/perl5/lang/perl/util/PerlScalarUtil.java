@@ -31,7 +31,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlScalarImportsCollector;
@@ -97,7 +97,7 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
   public static boolean processDefinedGlobalScalars(@NotNull Project project,
                                                     @NotNull GlobalSearchScope scope,
                                                     @NotNull Processor<PerlVariableDeclarationElement> processor) {
-    return PerlImplicitSubsService.getInstance(project).processScalars(processor) &&
+    return PerlImplicitDeclarationsService.getInstance(project).processScalars(processor) &&
            processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
   }
 

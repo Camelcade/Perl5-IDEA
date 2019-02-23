@@ -31,7 +31,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
-import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -49,7 +49,7 @@ public class PerlLoopControlInspection extends PerlInspection {
   @Override
   public PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlSubDefinitionElement breakDefinition = Objects.requireNonNull(
-      PerlImplicitSubsService.getInstance(holder.getProject()).findCoreSub("break"));
+      PerlImplicitDeclarationsService.getInstance(holder.getProject()).findCoreSub("break"));
 
     return new PerlVisitor() {
       @Override
