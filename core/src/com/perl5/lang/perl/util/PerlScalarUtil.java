@@ -24,12 +24,14 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
+import com.intellij.util.SmartList;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlScalarImportsCollector;
@@ -59,17 +61,19 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
   }
 
   public static Collection<PerlVariableDeclarationElement> getGlobalScalarDefinitions(Project project,
-                                                                                      String canonicalName,
+                                                                                      @Nullable String canonicalName,
                                                                                       GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlVariablesStubIndex.KEY_SCALAR,
-                                 canonicalName,
-                                 project,
-                                 scope,
-                                 PerlVariableDeclarationElement.class
-    );
+    List<PerlVariableDeclarationElement> result = new SmartList<>();
+    processDefinedGlobalScalars(project, scope, it -> {
+      if (canonicalName.equals(it.getCanonicalName())) {
+        result.add(it);
+      }
+      return true;
+    });
+    return result;
   }
 
 
@@ -93,7 +97,8 @@ public class PerlScalarUtil implements PerlElementTypes, PerlBuiltInScalars {
   public static boolean processDefinedGlobalScalars(@NotNull Project project,
                                                     @NotNull GlobalSearchScope scope,
                                                     @NotNull Processor<PerlVariableDeclarationElement> processor) {
-    return processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
+    return PerlImplicitSubsService.getInstance(project).processScalars(processor) &&
+           processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_SCALAR, project, scope, processor);
   }
 
   /**

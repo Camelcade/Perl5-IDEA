@@ -21,14 +21,15 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
+import com.intellij.util.SmartList;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlHashImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -89,13 +90,14 @@ public class PerlHashUtil implements PerlElementTypes {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(
-      PerlVariablesStubIndex.KEY_HASH,
-      canonicalName,
-      project,
-      scope,
-      PerlVariableDeclarationElement.class
-    );
+    List<PerlVariableDeclarationElement> result = new SmartList<>();
+    processDefinedGlobalHashes(project, scope, it -> {
+      if (canonicalName.equals(it.getCanonicalName())) {
+        result.add(it);
+      }
+      return true;
+    });
+    return result;
   }
 
 
@@ -119,7 +121,8 @@ public class PerlHashUtil implements PerlElementTypes {
   public static boolean processDefinedGlobalHashes(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor) {
-    return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
+    return PerlImplicitSubsService.getInstance(project).processHashes(processor) &&
+           PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_HASH, project, scope, processor);
   }
 
   /**

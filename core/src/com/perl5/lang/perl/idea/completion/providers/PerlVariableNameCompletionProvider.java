@@ -91,7 +91,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     Processor<PerlVariableDeclarationElement> scalarDefaultProcessor = wrapper ->
     {
-      String fullQualifiedName = wrapper.getFullQualifiedName();
+      String fullQualifiedName = wrapper.getCanonicalName();
       if (fullQualifiedName != null) {
         finalResultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(adjustName(fullQualifiedName, forceShortMain)));
       }
@@ -100,7 +100,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     Processor<PerlVariableDeclarationElement> arrayDefaultProcessor = wrapper ->
     {
-      String fullQualifiedName = wrapper.getFullQualifiedName();
+      String fullQualifiedName = wrapper.getCanonicalName();
       if (fullQualifiedName != null) {
         finalResultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(adjustName(fullQualifiedName, forceShortMain)));
       }
@@ -109,7 +109,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     Processor<PerlVariableDeclarationElement> hashDefaultProcessor = wrapper ->
     {
-      String fullQualifiedName = wrapper.getFullQualifiedName();
+      String fullQualifiedName = wrapper.getCanonicalName();
       if (fullQualifiedName != null) {
         finalResultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(adjustName(fullQualifiedName, forceShortMain)));
       }
@@ -120,7 +120,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, scalarDefaultProcessor);
       PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, wrapper ->
       {
-        String fullQualifiedName = wrapper.getFullQualifiedName();
+        String fullQualifiedName = wrapper.getCanonicalName();
         if (fullQualifiedName != null) {
           finalResultSet.addElement(PerlVariableCompletionUtil.getArrayElementLookupElement(adjustName(fullQualifiedName, forceShortMain)));
         }
@@ -128,7 +128,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       });
       PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper ->
       {
-        String fullQualifiedName = wrapper.getFullQualifiedName();
+        String fullQualifiedName = wrapper.getCanonicalName();
         if (fullQualifiedName != null) {
           finalResultSet.addElement(PerlVariableCompletionUtil.getHashElementLookupElement(adjustName(fullQualifiedName, forceShortMain)));
         }
@@ -154,7 +154,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
       PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper ->
       {
-        String fullQualifiedName = wrapper.getFullQualifiedName();
+        String fullQualifiedName = wrapper.getCanonicalName();
         if (fullQualifiedName != null) {
           finalResultSet.addElement(PerlVariableCompletionUtil.getHashSliceLookupElement(adjustName(fullQualifiedName, forceShortMain)));
         }

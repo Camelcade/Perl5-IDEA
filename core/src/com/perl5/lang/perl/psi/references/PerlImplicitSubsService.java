@@ -25,13 +25,15 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashMap;
 import org.jdom.Element;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,26 +43,32 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_PACKAGE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 /**
- * Service for a common tricky-defined subs:<ul>
+ * Service for a common tricky-defined entities:<ul>
  * <li>Built-in subs</li>
  * <li>Subs from extensions</li>
+ * <li>Global scalars, arrays and hashes defined by modules code</li>
  * </ul>
  */
 public class PerlImplicitSubsService {
   private static final Logger LOG = Logger.getInstance(PerlImplicitSubsService.class);
   private static final String PACKAGE = "package";
   private static final String SUB_ELEMENT = "sub";
+  private static final String VARIABLE = "var";
+  private static final String NAME = "name";
   private static final String ARGUMENTS_ELEMENT = "arguments";
   private static final String OPTIONAL_ELEMENT = "optional";
   private static final String ARGUMENT_ELEMENT = "argument";
-  private final Map<String, PerlImplicitSubDefinition> mySubsMap = new THashMap<>();
+  private final Map<String, PerlImplicitSubDefinition> mySubsMap = new HashMap<>();
+  private final Map<String, PerlImplicitVariableDeclaration> myScalarsMap = new HashMap<>();
+  private final Map<String, PerlImplicitVariableDeclaration> myArraysMap = new HashMap<>();
+  private final Map<String, PerlImplicitVariableDeclaration> myHashesMap = new HashMap<>();
   @NotNull
   private final PsiManager myPsiManager;
 
   public PerlImplicitSubsService(@NotNull Project project) {
     myPsiManager = PsiManager.getInstance(project);
 
-    PerlImplicitSubsProvider.EP_NAME.extensions().forEach(it -> readSubs(it, it.getSubsFileName()));
+    PerlImplicitSubsProvider.EP_NAME.extensions().forEach(it -> readDefinitions(it, it.getSubsFileName()));
   }
 
   /**
@@ -68,7 +76,7 @@ public class PerlImplicitSubsService {
    * @param classLoaderProvider source of the classLoader for loading a resource
    * @param fileName resource file name
    */
-  private void readSubs(@NotNull Object classLoaderProvider, @NotNull String fileName) {
+  private void readDefinitions(@NotNull Object classLoaderProvider, @NotNull String fileName) {
     ClassLoader classLoader = classLoaderProvider.getClass().getClassLoader();
     final Element xmlElement;
     try {
@@ -88,36 +96,72 @@ public class PerlImplicitSubsService {
         LOG.warn("Missing or empty package name");
         continue;
       }
-      for (Element subElement : namespaceElement.getChildren(SUB_ELEMENT)) {
-        String subName = subElement.getAttribute("name").getValue();
-        if (StringUtil.isEmpty(subName)) {
-          LOG.warn("Missing or empty name attribute for sub");
-        }
-        else {
-          PerlImplicitSubDefinition subDefinition;
-          if (PerlPackageUtil.CORE_PACKAGE.equals(namespaceName)) {
-            subDefinition = new PerlBuiltInSubDefinition(
-              myPsiManager,
-              subName,
-              PerlPackageUtil.CORE_PACKAGE,
-              readArguments(subElement.getChild(ARGUMENTS_ELEMENT), subName),
-              null
-            );
-          }
-          else {
-            subDefinition = new PerlImplicitSubDefinition(
-              myPsiManager,
-              subName,
-              namespaceName,
-              readArguments(subElement.getChild(ARGUMENTS_ELEMENT), subName),
-              null
-            );
-          }
-          mySubsMap.put(subDefinition.getCanonicalName(), subDefinition);
+      for (Element element : namespaceElement.getChildren()) {
+        switch (element.getName()) {
+          case SUB_ELEMENT:
+            readSub(namespaceName, element);
+            break;
+          case VARIABLE:
+            readVariable(namespaceName, element);
+            break;
+          default:
+            LOG.warn("Don't know what to do with: " + element.getName());
         }
       }
     }
   }
+
+  private void readVariable(@NotNull String namespaceName, @NotNull Element element) {
+    String varName = element.getAttribute(NAME).getValue();
+    if (StringUtil.isEmpty(varName)) {
+      LOG.warn("Missing or empty variable name");
+      return;
+    }
+    PerlImplicitVariableDeclaration implicitVariable = PerlImplicitVariableDeclaration.createGlobal(myPsiManager, varName, namespaceName);
+    String canonicalName = implicitVariable.getCanonicalName();
+    switch (implicitVariable.getVariableType()) {
+      case SCALAR:
+        myScalarsMap.put(canonicalName, implicitVariable);
+        break;
+      case ARRAY:
+        myArraysMap.put(canonicalName, implicitVariable);
+        break;
+      case HASH:
+        myHashesMap.put(canonicalName, implicitVariable);
+        break;
+      default:
+        LOG.warn("Can handle only SCALAR, ARRAY or HASH at the moment, got: " + implicitVariable);
+    }
+  }
+
+  private void readSub(@NotNull String namespaceName, @NotNull Element element) {
+    String subName = element.getAttribute(NAME).getValue();
+    if (StringUtil.isEmpty(subName)) {
+      LOG.warn("Missing or empty name attribute for sub");
+      return;
+    }
+    PerlImplicitSubDefinition subDefinition;
+    if (PerlPackageUtil.CORE_PACKAGE.equals(namespaceName)) {
+      subDefinition = new PerlBuiltInSubDefinition(
+        myPsiManager,
+        subName,
+        PerlPackageUtil.CORE_PACKAGE,
+        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
+        null
+      );
+    }
+    else {
+      subDefinition = new PerlImplicitSubDefinition(
+        myPsiManager,
+        subName,
+        namespaceName,
+        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
+        null
+      );
+    }
+    mySubsMap.put(subDefinition.getCanonicalName(), subDefinition);
+  }
+
 
   @NotNull
   private List<PerlSubArgument> readArguments(@Nullable Element argumentsElement, @NotNull String subName) {
@@ -173,23 +217,96 @@ public class PerlImplicitSubsService {
     return findSub(packageName + PACKAGE_SEPARATOR + subName);
   }
 
+  @Contract("null->null")
   @Nullable
   public PerlSubDefinitionElement findSub(@Nullable String canonicalName) {
     return mySubsMap.get(canonicalName);
   }
 
-  public boolean processSubsInPackage(@NotNull String packageName, @NotNull Processor<? super PerlImplicitSubDefinition> processor) {
+  public boolean processSubsInPackage(@NotNull String packageName, @NotNull Processor<? super PerlSubDefinitionElement> processor) {
     return processSubs(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
   }
 
-  public boolean processSubs(@NotNull String subFqn, @NotNull Processor<? super PerlImplicitSubDefinition> processor) {
-    return processSubs(it -> !subFqn.equals(it.getCanonicalName()) || processor.process(it));
+  public boolean processSubs(@NotNull String canonicalName, @NotNull Processor<? super PerlSubDefinitionElement> processor) {
+    PerlSubDefinitionElement subDefinitionElement = findSub(canonicalName);
+    return subDefinitionElement == null || processor.process(subDefinitionElement);
   }
 
-  public boolean processSubs(@NotNull Processor<PerlImplicitSubDefinition> processor) {
+  public boolean processSubs(@NotNull Processor<? super PerlSubDefinitionElement> processor) {
     for (PerlImplicitSubDefinition subDefinition : mySubsMap.values()) {
       ProgressManager.checkCanceled();
       if (!processor.process(subDefinition)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public PerlVariableDeclarationElement getScalar(@Nullable String canonicalName) {
+    return myScalarsMap.get(canonicalName);
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public PerlVariableDeclarationElement getArray(@Nullable String canonicalName) {
+    return myArraysMap.get(canonicalName);
+  }
+
+  @Contract("null->null")
+  @Nullable
+  public PerlVariableDeclarationElement getHash(@Nullable String canonicalName) {
+    return myHashesMap.get(canonicalName);
+  }
+
+  public boolean processScalars(@NotNull String canonicalName, @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    PerlVariableDeclarationElement scalar = getScalar(canonicalName);
+    return scalar == null || processor.process(scalar);
+  }
+
+  public boolean processArrays(@NotNull String canonicalName, @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    PerlVariableDeclarationElement array = getArray(canonicalName);
+    return array == null || processor.process(array);
+  }
+
+  public boolean processHashes(@NotNull String canonicalName, @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    PerlVariableDeclarationElement hash = getHash(canonicalName);
+    return hash == null || processor.process(hash);
+  }
+
+  public boolean processScalarsInPackage(@Nullable String packageName,
+                                         @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return packageName != null && processScalars(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+  }
+
+  public boolean processArraysInPackage(@Nullable String packageName,
+                                        @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return packageName != null && processArrays(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+  }
+
+  public boolean processHashesInPackage(@Nullable String packageName,
+                                        @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return packageName != null && processHashes(it -> !packageName.equals(it.getPackageName()) || processor.process(it));
+  }
+
+  public boolean processScalars(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return processVariables(myScalarsMap, processor);
+  }
+
+  public boolean processArrays(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return processVariables(myArraysMap, processor);
+  }
+
+  public boolean processHashes(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return processVariables(myHashesMap, processor);
+  }
+
+  private static boolean processVariables(@NotNull Map<String, PerlImplicitVariableDeclaration> variablesMap,
+                                          @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    for (PerlImplicitVariableDeclaration variableDeclaration : variablesMap.values()) {
+      ProgressManager.checkCanceled();
+      if (!processor.process(variableDeclaration)) {
         return false;
       }
     }

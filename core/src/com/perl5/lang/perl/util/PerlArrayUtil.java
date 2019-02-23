@@ -20,14 +20,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
+import com.intellij.util.SmartList;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
+import com.perl5.lang.perl.psi.references.PerlImplicitSubsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlArrayImportsCollector;
 import com.perl5.lang.perl.util.processors.PerlImportsCollector;
@@ -66,18 +67,19 @@ public class PerlArrayUtil implements PerlElementTypes {
   }
 
   public static Collection<PerlVariableDeclarationElement> getGlobalArrayDefinitions(Project project,
-                                                                                     String canonicalName,
+                                                                                     @Nullable String canonicalName,
                                                                                      GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(
-      PerlVariablesStubIndex.KEY_ARRAY,
-      canonicalName,
-      project,
-      scope,
-      PerlVariableDeclarationElement.class
-    );
+    List<PerlVariableDeclarationElement> result = new SmartList<>();
+    processDefinedGlobalArrays(project, scope, it -> {
+      if (canonicalName.equals(it.getCanonicalName())) {
+        result.add(it);
+      }
+      return true;
+    });
+    return result;
   }
 
   /**
@@ -100,7 +102,8 @@ public class PerlArrayUtil implements PerlElementTypes {
   public static boolean processDefinedGlobalArrays(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
                                                    @NotNull Processor<PerlVariableDeclarationElement> processor) {
-    return PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor);
+    return PerlImplicitSubsService.getInstance(project).processArrays(processor) &&
+           PerlScalarUtil.processDefinedGlobalVariables(PerlVariablesStubIndex.KEY_ARRAY, project, scope, processor);
   }
 
   /**
