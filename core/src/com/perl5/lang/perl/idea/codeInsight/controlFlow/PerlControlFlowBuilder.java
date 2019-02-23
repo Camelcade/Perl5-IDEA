@@ -62,6 +62,10 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     WHILE_STATEMENT_MODIFIER
   );
 
+  private static final TokenSet NO_RESULT_INSTRUCTIONS = TokenSet.create(
+    EXIT_EXPR, GOTO_EXPR, NEXT_EXPR, LAST_EXPR, REDO_EXPR
+  );
+
   /**
    * We should create a trasparent node for following elements
    */
@@ -144,6 +148,22 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         }
       }
     }
+  }
+
+  @NotNull
+  @Override
+  public Instruction startNode(@Nullable PsiElement element) {
+    if (NO_RESULT_INSTRUCTIONS.contains(PsiUtilCore.getElementType(element))) {
+      return startNoResultNode(element);
+    }
+    return super.startNode(element);
+  }
+
+  @NotNull
+  public Instruction startNoResultNode(@Nullable PsiElement element) {
+    final Instruction instruction = new PerlNoResultInstruction(this, element);
+    addNodeAndCheckPending(instruction);
+    return instruction;
   }
 
   public static ControlFlow getFor(@NotNull PsiElement element) {
@@ -629,7 +649,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (subNameElement != null && DIE_SUBS.contains(subNameElement.getText())) {
         acceptSafe(o.getCallArguments());
         PsiElement dieScope = getDieScopeBlock(o);
-        startNode(o);
+        startNoResultNode(o);
         addPendingEdge(dieScope, prevInstruction);
         flowAbrupted();
       }

@@ -1,11 +1,11 @@
-0(1) element: null
-1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
-4(5,6) iterate PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) using null
-5(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE). Condition: @ARGV:true
-6(7) element: PsiPerlGrepExprImpl(Perl5: GREP_EXPR)
-7(8) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ)
-9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
-10() element: null
+0(1) element: null (InstructionImpl)
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
+2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR) (InstructionImpl)
+3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
+4(5,6) iterate PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) using null (PerlIterateInstruction)
+5(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE). Condition: @ARGV:true (PerlIteratorConditionInstruction)
+6(7) element: PsiPerlGrepExprImpl(Perl5: GREP_EXPR) (InstructionImpl)
+7(8) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR) (InstructionImpl)
+8(9) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
+9(10) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR) (InstructionImpl)
+10() element: null (InstructionImpl)

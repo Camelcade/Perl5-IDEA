@@ -1253,7 +1253,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected final void doTestControlFlow() {
     initWithFileSmartWithoutErrors();
     ControlFlow controlFlow = PerlControlFlowBuilder.getFor(getFile());
-    final String stringifiedControlFlow = StringUtil.join(controlFlow.getInstructions(), Object::toString, "\n");
+    final String stringifiedControlFlow = Arrays.stream(controlFlow.getInstructions())
+      .map(it -> it.toString() + " (" + it.getClass().getSimpleName() + ")")
+      .collect(Collectors.joining("\n"));
 
     if (ENABLE_SVG_GENERATION) {
       try {
