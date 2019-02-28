@@ -38,7 +38,6 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodElementTypes {
   public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
   public static final TextAttributesKey POD_TAG = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
-  public static final TextAttributesKey POD_TEXT = createTextAttributesKey("POD_TEXT", DefaultLanguageHighlighterColors.DOC_COMMENT);
   public static final TextAttributesKey POD_CODE = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
   public static final HashMap<IElementType, TextAttributesKey[]> attributesMap = new HashMap<>();
   private static final TokenSet POD_TOKENS = TokenSet.create(
@@ -66,8 +65,6 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 
   static {
     attributesMap.put(POD_POD, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
-    //		ATTRIBUTES_MAP.put(PodElementTypes.POD_TEXT, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
-    attributesMap.put(PodElementTypes.POD_NEWLINE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TEXT});
     attributesMap.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
   }
 
