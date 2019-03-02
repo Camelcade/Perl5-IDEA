@@ -245,7 +245,7 @@ public class PerlSdkType extends SdkType {
 
     return VersionDescriptor.create(PerlRunUtil.getOutputFromProgram(
       hostData, versionManagerData,
-      interpreterPath, "-MConfig", "-E", "print qq{perl\n};print qq{$_\n} for @Config{qw/version archname/}"));
+      interpreterPath, "-MConfig", "-E", "print q{perl}.chr(10);do {print;print chr(10)} for @Config{qw/version archname/}"));
   }
 
 
