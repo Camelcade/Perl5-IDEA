@@ -21,7 +21,6 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
@@ -51,7 +50,7 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBas
 
   @NotNull
   @Override
-  public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException {
+  public ExecutionResult execute(@NotNull Executor executor) throws ExecutionException {
     return new DefaultExecutionResult(createConsole(executor), new DefaultDebugProcessHandler());
   }
 

@@ -16,11 +16,12 @@
 
 package com.perl5.lang.perl.idea.run.remote;
 
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunConfigurationBase;
-import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
@@ -30,16 +31,23 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.util.xmlb.annotations.Tag;
+import com.intellij.xdebugger.XDebugProcess;
+import com.intellij.xdebugger.XDebugSession;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.debugger.DebuggableRunConfiguration;
+
+import java.net.InetSocketAddress;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 09.05.2016.
  */
 public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
-  implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebugOptions {
+  implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebugOptions, DebuggableRunConfiguration {
   public String debugHost = "localhost";
   public int debugPort = 12345;
   public String remoteProjectRoot = "/home/";
@@ -81,7 +89,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
 
   @Nullable
   @Override
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {
+  public PerlRemoteDebuggingRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment) {
     if (executor instanceof DefaultDebugExecutor) {
       return new PerlRemoteDebuggingRunProfileState(environment);
     }
@@ -172,5 +180,15 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
 
   public void setReconnect(boolean reconnect) {
     myIsReconnect = reconnect;
+  }
+
+  @NotNull
+  @Override
+  public XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
+                                          @NotNull XDebugSession session,
+                                          @Nullable ExecutionResult executionResult,
+                                          @NotNull ExecutionEnvironment environment) throws ExecutionException {
+    PerlRemoteDebuggingRunProfileState runProfileState = Objects.requireNonNull(getState(environment.getExecutor(), environment));
+    return new PerlDebugProcess(session, runProfileState, runProfileState.execute(environment.getExecutor()));
   }
 }

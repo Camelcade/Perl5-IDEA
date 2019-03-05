@@ -18,11 +18,11 @@ package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
 import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
@@ -35,15 +35,20 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.net.NetUtils;
 import com.intellij.util.xmlb.XmlSerializer;
+import com.intellij.xdebugger.XDebugProcess;
+import com.intellij.xdebugger.XDebugSession;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.debugger.DebuggableRunConfiguration;
 
+import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +56,10 @@ import java.util.Map;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlRunConfiguration extends LocatableConfigurationBase implements CommonProgramRunConfigurationParameters, PerlDebugOptions {
+public class PerlRunConfiguration extends LocatableConfigurationBase implements
+                                                                     CommonProgramRunConfigurationParameters,
+                                                                     DebuggableRunConfiguration,
+                                                                     PerlDebugOptions {
   private String myScriptPath;
   private String myScriptParameters;    // these are script parameters
 
@@ -96,7 +104,7 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
 
   @Nullable
   @Override
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) {
+  public PerlRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) {
     if (executor instanceof DefaultDebugExecutor) {
       return new PerlDebugProfileState(executionEnvironment);
     }
@@ -287,5 +295,18 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements 
 
   public void setInitCode(String initCode) {
     this.myInitCode = initCode;
+  }
+
+  @NotNull
+  @Override
+  public XDebugProcess createDebugProcess(@NotNull InetSocketAddress socketAddress,
+                                          @NotNull XDebugSession session,
+                                          @Nullable ExecutionResult executionResult,
+                                          @NotNull ExecutionEnvironment environment) throws ExecutionException {
+    PerlRunProfileState runProfileState = getState(environment.getExecutor(), environment);
+    if (!(runProfileState instanceof PerlDebugProfileState)) {
+      throw new ExecutionException("Incorrect profile state");
+    }
+    return new PerlDebugProcess(session, (PerlDebugProfileState)runProfileState, runProfileState.execute(environment.getExecutor()));
   }
 }
