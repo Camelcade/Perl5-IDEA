@@ -26,7 +26,7 @@ import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PerlCoverageProfileState extends PerlRunProfileState {
@@ -37,16 +37,13 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) throws ExecutionException {
-    List<String> perlParameters = new ArrayList<>(super.getPerlParameters(runProfile));
+  protected List<String> getAdditionalPerlParameters(@NotNull PerlRunConfiguration perlRunConfiguration) throws ExecutionException {
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((PerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
-    Sdk effectiveSdk = runProfile.getEffectiveSdk();
+    Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
     PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
 
-    perlParameters.add(0, "-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
-
-    return perlParameters;
+    return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
   }
 }

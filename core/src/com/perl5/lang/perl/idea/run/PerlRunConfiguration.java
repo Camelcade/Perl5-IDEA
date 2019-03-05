@@ -25,32 +25,46 @@ import com.intellij.execution.configurations.LocatableConfigurationBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.net.NetUtils;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.debugger.DebuggableRunConfiguration;
+import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
+import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
 
 /**
  * @author VISTALL
@@ -221,6 +235,12 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements
     return myPerlParameters;
   }
 
+  @NotNull
+  protected List<String> getPerlParametersList() {
+    String perlParameters = getPerlParameters();
+    return StringUtil.isEmpty(perlParameters) ? Collections.emptyList() : StringUtil.split(perlParameters, " ");
+  }
+
   public void setPerlParameters(String PERL_PARAMETERS) {
     this.myPerlParameters = PERL_PARAMETERS;
   }
@@ -286,6 +306,66 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements
 
   public void setCompileTimeBreakpointsEnabled(boolean compileTimeBreakpointsEnabled) {
     myIsCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
+  }
+
+
+  @NotNull
+  public PerlCommandLine createCommandLine(@NotNull Project project,
+                                           @NotNull List<String> additionalPerlParameters,
+                                           @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
+    VirtualFile scriptFile = getScriptFile();
+    if (scriptFile == null) {
+      throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
+    }
+
+
+    Sdk perlSdk = getEffectiveSdk();
+    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
+      project, perlSdk, scriptFile, ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters), getScriptParameters());
+
+    if (commandLine == null) {
+      throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", perlSdk));
+    }
+
+    String workDirectory = getWorkingDirectory();
+    if (StringUtil.isEmpty(workDirectory)) {
+      Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, project);
+      if (moduleForFile != null) {
+        workDirectory = PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
+      }
+      else {
+        workDirectory = project.getBasePath();
+      }
+    }
+    commandLine.withWorkDirectory(workDirectory);
+
+    String charsetName = getConsoleCharset();
+    Charset charset;
+    if (!StringUtil.isEmpty(charsetName)) {
+      try {
+        charset = Charset.forName(charsetName);
+      }
+      catch (UnsupportedCharsetException e) {
+        throw new ExecutionException(PerlBundle.message("perl.run.error.unknown.charset", charsetName));
+      }
+    }
+    else {
+      charset = scriptFile.getCharset();
+    }
+    commandLine.withCharset(charset);
+
+    Map<String, String> environment = new HashMap<>(getEnvs());
+    environment.putAll(additionalEnvironmentVariables);
+    commandLine.withEnvironment(environment);
+    commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
+
+    return commandLine.withSdk(perlSdk).withProject(project);
+  }
+
+  @NotNull
+  protected List<String> getScriptParameters() {
+    String programParameters = getProgramParameters();
+    return StringUtil.isEmpty(programParameters) ? Collections.emptyList() : StringUtil.split(programParameters, " ");
   }
 
   @Override

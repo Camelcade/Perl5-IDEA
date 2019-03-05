@@ -67,21 +67,19 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
 
   @NotNull
   @Override
-  protected List<String> getPerlParameters(PerlRunConfiguration runProfile) throws ExecutionException {
-    List<String> result = new ArrayList<>(super.getPerlParameters(runProfile));
-    result.add(0, DEBUG_ARGUMENT);
-    return result;
+  protected List<String> getAdditionalPerlParameters(@NotNull PerlRunConfiguration perlRunConfiguration) {
+    return Collections.singletonList(DEBUG_ARGUMENT);
   }
 
   @NotNull
   @Override
-  protected PerlCommandLine customizeCommandLine(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return super.customizeCommandLine(commandLine).withPortMappings(PortMapping.create(getDebugPort()));
+  protected PerlCommandLine createCommandLine() throws ExecutionException {
+    return super.createCommandLine().withPortMappings(PortMapping.create(getDebugPort()));
   }
 
   @Override
-  protected Map<String, String> calcEnv(PerlRunConfiguration runProfile) throws ExecutionException {
-    Map<String, String> stringStringMap = new HashMap<>(super.calcEnv(runProfile));
+  protected Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
+    Map<String, String> stringStringMap = new HashMap<>();
     PerlDebugOptions debugOptions = getDebugOptions();
     stringStringMap.put(PERL5_DEBUG_ROLE, debugOptions.getPerlRole());
     stringStringMap.put(PERL5_DEBUG_HOST, debugOptions.getDebugHost());
