@@ -245,7 +245,8 @@ class PerlDockerAdapter {
   @NotNull
   private File createCommandScript(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     StringBuilder sb = new StringBuilder();
-    commandLine.getEnvironment().forEach((key, val) -> sb.append("export ").append(key).append('=').append(val).append("\n"));
+    commandLine.getEnvironment().forEach((key, val) -> sb.append("export ").append(key).append('=')
+      .append('\'').append(StringUtil.escapeChars(val, '\'')).append("'\n"));
     sb.append(commandLine.getCommandLineString());
 
     try {
