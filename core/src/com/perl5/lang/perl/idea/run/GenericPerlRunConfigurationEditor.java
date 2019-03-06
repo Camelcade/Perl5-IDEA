@@ -31,6 +31,7 @@ import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.RawCommandLineEditor;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.ui.UIUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkManipulator;
@@ -48,10 +49,17 @@ import java.util.ArrayList;
 
 public abstract class GenericPerlRunConfigurationEditor<Configuration extends GenericPerlRunConfiguration>
   extends PerlConfigurationEditorBase<Configuration> implements Perl5SdkManipulator {
+
+  private LabeledComponent<?> myScriptLabeledField;
   private TextFieldWithBrowseButton myScriptField;
-  private CommonProgramParametersPanel myParametersPanel;
+
+  private LabeledComponent<?> myLabeledConsoleCharset;
   private ComboBox myConsoleCharset;
+
+  private LabeledComponent<RawCommandLineEditor> myLabeledPerlParametersPanel;
   private RawCommandLineEditor myPerlParametersPanel;
+
+  private CommonProgramParametersPanel myParametersPanel;
   private JBCheckBox myAlternativeSdkCheckbox;
   private Perl5SdkConfigurable mySdkConfigurable;
   @Nullable
@@ -92,69 +100,14 @@ public abstract class GenericPerlRunConfigurationEditor<Configuration extends Ge
   @NotNull
   protected abstract GenericPerlRunConfigurationProducer<Configuration> getRunConfigurationProducer();
 
-  @Nullable
+  @NotNull
   @Override
-  protected JComponent getGeneralComponent() {
-    myScriptField = new TextFieldWithBrowseButton();
-    myScriptField.addBrowseFolderListener(
-      PerlBundle.message("perl.run.config.select.script.header"),
-      PerlBundle.message("perl.run.config.select.script.prompt"),
-      myProject,
-      FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(
-        getRunConfigurationProducer()::isOurFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+  protected final JComponent getGeneralComponent() {
+    return myParametersPanel = createCommonParametersPanel();
+  }
 
-    myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<>(Charset.availableCharsets().keySet())));
-
-    myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
-      @Override
-      protected void textChanged(@NotNull DocumentEvent documentEvent) {
-        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
-        if (file != null) {
-          myConsoleCharset.setSelectedItem(file.getCharset().displayName());
-        }
-        else {
-          myConsoleCharset.setSelectedItem(null);
-        }
-      }
-    });
-
-    JPanel alternativeSdkPanel = new JPanel(new MigLayout("ins 0, gap 10, fill, flowx"));
-    myAlternativeSdkCheckbox = new JBCheckBox();
-    mySdkConfigurable = new Perl5SdkConfigurable(this, myProject);
-    alternativeSdkPanel.add(myAlternativeSdkCheckbox, "shrinkx");
-    JComponent sdkComponent = mySdkConfigurable.createComponent();
-    mySdkConfigurable.setLabelText(PerlBundle.message("perl.run.config.use.alternative.label"));
-    alternativeSdkPanel.add(sdkComponent, "growx, pushx");
-    myAlternativeSdkCheckbox.addChangeListener(e -> mySdkConfigurable.setEnabled(myAlternativeSdkCheckbox.isSelected()));
-
-    myParametersPanel = new CommonProgramParametersPanel() {
-      @Override
-      protected void addComponents() {
-
-        LabeledComponent<?> scriptLabel = LabeledComponent.create(myScriptField, PerlBundle.message("perl.run.option.script"));
-        scriptLabel.setLabelLocation(BorderLayout.WEST);
-        add(scriptLabel);
-
-        LabeledComponent<?> consoleEncoding =
-          LabeledComponent.create(myConsoleCharset, PerlBundle.message("perl.run.option.output.encoding"));
-        consoleEncoding.setLabelLocation(BorderLayout.WEST);
-        add(consoleEncoding);
-
-        myPerlParametersPanel = new RawCommandLineEditor();
-        LabeledComponent<RawCommandLineEditor> perlParametersPanel =
-          LabeledComponent.create(myPerlParametersPanel, PerlBundle.message("perl.run.option.perl.parameters"));
-        perlParametersPanel.setLabelLocation(BorderLayout.WEST);
-        copyDialogCaption(perlParametersPanel);
-        add(perlParametersPanel);
-
-        super.addComponents();
-        add(alternativeSdkPanel);
-
-        setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
-      }
-    };
-    myParametersPanel.setProgramParametersLabel(PerlBundle.message("perl.run.option.script.parameters"));
-    return myParametersPanel;
+  protected CommonParametersPanel createCommonParametersPanel() {
+    return new CommonParametersPanel();
   }
 
   @Override
@@ -172,4 +125,84 @@ public abstract class GenericPerlRunConfigurationEditor<Configuration extends Ge
   public void setSdk(@Nullable Sdk sdk) {
     mySdkProxy = sdk;
   }
+
+  protected class CommonParametersPanel extends CommonProgramParametersPanel {
+    @Override
+    protected void addComponents() {
+      addScriptField();
+      addConsoleEncodingField();
+      addPerlParametersField();
+      super.addComponents();
+      addAlternativeSdkPanel();
+
+      setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
+      setProgramParametersLabel(getProgramParametersLabel());
+    }
+
+    @NotNull
+    protected String getProgramParametersLabel() {
+      return PerlBundle.message("perl.run.option.script.parameters");
+    }
+
+    protected void addPerlParametersField() {
+      myPerlParametersPanel = new RawCommandLineEditor();
+      myLabeledPerlParametersPanel = LabeledComponent.create(myPerlParametersPanel, PerlBundle.message("perl.run.option.perl.parameters"));
+      myLabeledPerlParametersPanel.setLabelLocation(BorderLayout.WEST);
+      copyDialogCaption(myLabeledPerlParametersPanel);
+      add(myLabeledPerlParametersPanel);
+    }
+
+    private void addConsoleEncodingField() {
+      myLabeledConsoleCharset = LabeledComponent.create(myConsoleCharset, PerlBundle.message("perl.run.option.output.encoding"));
+      myLabeledConsoleCharset.setLabelLocation(BorderLayout.WEST);
+      add(myLabeledConsoleCharset);
+    }
+
+    private void addScriptField() {
+      myScriptField = new TextFieldWithBrowseButton();
+      myScriptField.addBrowseFolderListener(
+        PerlBundle.message("perl.run.config.select.script.header"),
+        PerlBundle.message("perl.run.config.select.script.prompt"),
+        myProject,
+        FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(
+          getRunConfigurationProducer()::isOurFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+
+      myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<>(Charset.availableCharsets().keySet())));
+
+      myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
+        @Override
+        protected void textChanged(@NotNull DocumentEvent documentEvent) {
+          VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
+          if (file != null) {
+            myConsoleCharset.setSelectedItem(file.getCharset().displayName());
+          }
+          else {
+            myConsoleCharset.setSelectedItem(null);
+          }
+        }
+      });
+      myScriptLabeledField = LabeledComponent.create(myScriptField, PerlBundle.message("perl.run.option.script"));
+      myScriptLabeledField.setLabelLocation(BorderLayout.WEST);
+      add(myScriptLabeledField);
+    }
+
+    private void addAlternativeSdkPanel() {
+      JPanel alternativeSdkPanel = new JPanel(new MigLayout("ins 0, gap 10, fill, flowx"));
+      myAlternativeSdkCheckbox = new JBCheckBox();
+      mySdkConfigurable = new Perl5SdkConfigurable(GenericPerlRunConfigurationEditor.this, myProject);
+      alternativeSdkPanel.add(myAlternativeSdkCheckbox, "shrinkx");
+      JComponent sdkComponent = mySdkConfigurable.createComponent();
+      mySdkConfigurable.setLabelText(PerlBundle.message("perl.run.config.use.alternative.label"));
+      alternativeSdkPanel.add(sdkComponent, "growx, pushx");
+      myAlternativeSdkCheckbox.addChangeListener(e -> mySdkConfigurable.setEnabled(myAlternativeSdkCheckbox.isSelected()));
+      add(alternativeSdkPanel);
+    }
+
+    @Override
+    protected void setupAnchor() {
+      super.setupAnchor();
+      myAnchor = UIUtil.mergeComponentsWithAnchor(this, myScriptLabeledField, myLabeledPerlParametersPanel, myLabeledConsoleCharset);
+    }
+  }
+
 }

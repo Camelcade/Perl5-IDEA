@@ -310,14 +310,15 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
       throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
     }
 
-
     Sdk perlSdk = getEffectiveSdk();
-    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
-      project, perlSdk, scriptFile, ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters), getScriptParameters());
+    PerlCommandLine commandLine =
+      createBaseCommandLine(project, perlSdk, scriptFile, additionalPerlParameters, additionalEnvironmentVariables);
 
     if (commandLine == null) {
       throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", perlSdk));
     }
+
+    commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
 
     String workDirectory = getWorkingDirectory();
     if (StringUtil.isEmpty(workDirectory)) {
@@ -346,12 +347,26 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     }
     commandLine.withCharset(charset);
 
+    return commandLine;
+  }
+
+  @Nullable
+  protected PerlCommandLine createBaseCommandLine(@NotNull Project project,
+                                                  @NotNull Sdk perlSdk,
+                                                  @NotNull VirtualFile scriptFile,
+                                                  @NotNull List<String> additionalPerlParameters,
+                                                  @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
+    PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
+      project, perlSdk, scriptFile, ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters), getScriptParameters());
+
+    if (commandLine == null) {
+      return null;
+    }
+
     Map<String, String> environment = new HashMap<>(getEnvs());
     environment.putAll(additionalEnvironmentVariables);
     commandLine.withEnvironment(environment);
-    commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
-
-    return commandLine.withSdk(perlSdk).withProject(project);
+    return commandLine;
   }
 
   @NotNull

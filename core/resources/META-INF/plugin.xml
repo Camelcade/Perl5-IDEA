@@ -279,6 +279,9 @@
 
     <configurationType implementation="com.perl5.lang.perl.idea.run.remote.PerlRemoteDebuggingConfigurationType"/>
 
+    <configurationType implementation="com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationType"/>
+    <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationProducer"/>
+
     <xdebugger.breakpointType
         implementation="com.perl5.lang.perl.idea.run.debugger.breakpoints.PerlLineBreakpointType"/>
     <xdebugger.settings implementation="com.perl5.lang.perl.idea.run.debugger.PerlDebuggerSettings"/>

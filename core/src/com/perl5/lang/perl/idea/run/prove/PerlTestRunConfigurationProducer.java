@@ -14,37 +14,27 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run.run;
+package com.perl5.lang.perl.idea.run.prove;
 
-import com.intellij.execution.actions.ConfigurationFromContext;
 import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
-import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationType;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlRunConfigurationProducer extends GenericPerlRunConfigurationProducer<PerlRunConfiguration> {
+public class PerlTestRunConfigurationProducer extends GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> {
   @NotNull
   @Override
   public ConfigurationFactory getConfigurationFactory() {
-    return PerlRunConfigurationType.getInstance().getConfigurationFactories()[0];
+    return PerlTestRunConfigurationType.getInstance().getConfigurationFactories()[0];
   }
 
   protected boolean isOurFile(@NotNull VirtualFile virtualFile) {
-    FileType fileType = virtualFile.getFileType();
-    return fileType == PerlFileTypeScript.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
-  }
-
-  @Override
-  public boolean isPreferredConfiguration(ConfigurationFromContext self, ConfigurationFromContext other) {
-    return !other.getConfigurationType().equals(PerlTestRunConfigurationType.getInstance());
+    return virtualFile.getFileType() == PerlFileTypeTest.INSTANCE;
   }
 
   @NotNull
-  public static PerlRunConfigurationProducer getInstance() {
-    return getInstance(PerlRunConfigurationProducer.class);
+  public static PerlTestRunConfigurationProducer getInstance() {
+    return getInstance(PerlTestRunConfigurationProducer.class);
   }
 }
