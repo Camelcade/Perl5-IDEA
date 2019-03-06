@@ -31,7 +31,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PurePerlFileType;
-import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +45,7 @@ public class PerlCoverageEngine extends CoverageEngine {
 
   @Override
   public boolean isApplicableTo(@Nullable RunConfigurationBase conf) {
-    return conf instanceof PerlRunConfiguration;
+    return conf instanceof GenericPerlRunConfiguration;
   }
 
   @Override
@@ -82,7 +82,7 @@ public class PerlCoverageEngine extends CoverageEngine {
                                            @NotNull CoverageFileProvider coverageDataFileProvider,
                                            @NotNull CoverageEnabledConfiguration config) {
     if (config instanceof PerlCoverageEnabledConfiguration) {
-      PerlRunConfiguration perlRunConfiguration = (PerlRunConfiguration)config.getConfiguration();
+      GenericPerlRunConfiguration perlRunConfiguration = (GenericPerlRunConfiguration)config.getConfiguration();
       return createCoverageSuite(covRunner, name, coverageDataFileProvider, null, new Date().getTime(), null, false, false, true,
                                  perlRunConfiguration.getProject());
     }

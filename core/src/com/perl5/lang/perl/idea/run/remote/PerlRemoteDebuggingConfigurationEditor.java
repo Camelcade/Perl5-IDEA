@@ -44,7 +44,7 @@ import static com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState.*;
 /**
  * Created by hurricup on 09.05.2016.
  */
-public class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase<PerlRemoteDebuggingConfiguration> {
+class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase<PerlRemoteDebuggingConfiguration> {
 
 
   private JTextField myWorkingDirectoryComponent;

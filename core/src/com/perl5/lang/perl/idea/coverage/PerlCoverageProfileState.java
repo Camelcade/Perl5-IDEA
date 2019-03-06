@@ -21,7 +21,7 @@ import com.intellij.execution.configurations.coverage.CoverageEnabledConfigurati
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
@@ -37,9 +37,9 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected List<String> getAdditionalPerlParameters(@NotNull PerlRunConfiguration perlRunConfiguration) throws ExecutionException {
+  protected List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
     String coverageBasePath =
-      CoverageEnabledConfiguration.getOrCreate((PerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
+      CoverageEnabledConfiguration.getOrCreate((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
     Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
     PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,11 +46,8 @@ import java.awt.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
-/**
- * @author VISTALL
- * @since 16-Sep-15
- */
-public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRunConfiguration> implements Perl5SdkManipulator {
+public abstract class GenericPerlRunConfigurationEditor<Configuration extends GenericPerlRunConfiguration>
+  extends PerlConfigurationEditorBase<Configuration> implements Perl5SdkManipulator {
   private TextFieldWithBrowseButton myScriptField;
   private CommonProgramParametersPanel myParametersPanel;
   private ComboBox myConsoleCharset;
@@ -60,12 +57,12 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
   @Nullable
   private Sdk mySdkProxy;
 
-  public PerlConfigurationEditor(Project project) {
+  public GenericPerlRunConfigurationEditor(Project project) {
     super(project);
   }
 
   @Override
-  protected void resetEditorFrom(@NotNull PerlRunConfiguration perlRunConfiguration) {
+  protected void resetEditorFrom(@NotNull Configuration perlRunConfiguration) {
     myScriptField.setText(perlRunConfiguration.getScriptPath());
     myParametersPanel.reset(perlRunConfiguration);
     myConsoleCharset.setSelectedItem(perlRunConfiguration.getConsoleCharset());
@@ -78,7 +75,7 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
   }
 
   @Override
-  protected void applyEditorTo(@NotNull PerlRunConfiguration perlRunConfiguration) throws ConfigurationException {
+  protected void applyEditorTo(@NotNull Configuration perlRunConfiguration) throws ConfigurationException {
     perlRunConfiguration.setScriptPath(myScriptField.getText());
     myParametersPanel.applyTo(perlRunConfiguration);
     perlRunConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
@@ -89,6 +86,12 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
     super.applyEditorTo(perlRunConfiguration);
   }
 
+  /**
+   * @return a run configuration producer for the run configuration
+   */
+  @NotNull
+  protected abstract GenericPerlRunConfigurationProducer<Configuration> getRunConfigurationProducer();
+
   @Nullable
   @Override
   protected JComponent getGeneralComponent() {
@@ -98,7 +101,7 @@ public class PerlConfigurationEditor extends PerlConfigurationEditorBase<PerlRun
       PerlBundle.message("perl.run.config.select.script.prompt"),
       myProject,
       FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(
-        PerlConfigurationProducer::isExecutableFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+        getRunConfigurationProducer()::isOurFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
 
     myConsoleCharset = new ComboBox(new CollectionComboBoxModel(new ArrayList<>(Charset.availableCharsets().keySet())));
 

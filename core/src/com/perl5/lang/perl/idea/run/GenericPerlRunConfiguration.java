@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,10 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
-import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -70,7 +68,7 @@ import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnv
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlRunConfiguration extends LocatableConfigurationBase implements
+public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase implements
                                                                      CommonProgramRunConfigurationParameters,
                                                                      DebuggableRunConfiguration,
                                                                      PerlDebugOptions {
@@ -94,7 +92,7 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements
 
   private transient Integer myDebugPort;
 
-  public PerlRunConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
+  public GenericPerlRunConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
     super(project, factory, name);
   }
 
@@ -108,12 +106,6 @@ public class PerlRunConfiguration extends LocatableConfigurationBase implements
   public void writeExternal(@NotNull Element element) throws WriteExternalException {
     super.writeExternal(element);
     XmlSerializer.serializeInto(this, element);
-  }
-
-  @NotNull
-  @Override
-  public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-    return new PerlConfigurationEditor(getProject());
   }
 
   @Nullable

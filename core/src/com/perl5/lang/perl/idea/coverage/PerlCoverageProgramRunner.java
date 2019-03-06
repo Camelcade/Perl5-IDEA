@@ -27,7 +27,7 @@ import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.DefaultProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ public class PerlCoverageProgramRunner extends DefaultProgramRunner {
 
   @Override
   public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
-    return executorId.equals(CoverageExecutor.EXECUTOR_ID) && profile instanceof PerlRunConfiguration;
+    return executorId.equals(CoverageExecutor.EXECUTOR_ID) && profile instanceof GenericPerlRunConfiguration;
   }
 
   @Nullable
@@ -55,7 +55,8 @@ public class PerlCoverageProgramRunner extends DefaultProgramRunner {
     super.execute(environment, descriptor -> {
       ProcessHandler processHandler = descriptor.getProcessHandler();
       if (processHandler != null) {
-        CoverageHelper.attachToProcess((PerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
+        CoverageHelper
+          .attachToProcess((GenericPerlRunConfiguration)environment.getRunProfile(), processHandler, environment.getRunnerSettings());
       }
       if (callback != null) {
         callback.processStarted(descriptor);

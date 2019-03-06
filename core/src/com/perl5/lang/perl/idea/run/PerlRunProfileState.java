@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ public class PerlRunProfileState extends CommandLineState {
 
   @NotNull
   protected PerlCommandLine createCommandLine() throws ExecutionException {
-    PerlRunConfiguration runConfiguration = (PerlRunConfiguration)getEnvironment().getRunProfile();
+    GenericPerlRunConfiguration runConfiguration = (GenericPerlRunConfiguration)getEnvironment().getRunProfile();
     Project project = getEnvironment().getProject();
     return runConfiguration.createCommandLine(project, getAdditionalPerlParameters(runConfiguration), getAdditionalEnvironmentVariables());
   }
@@ -84,14 +84,14 @@ public class PerlRunProfileState extends CommandLineState {
   protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
     RunProfile runProfile = getEnvironment().getRunProfile();
     PerlHostData hostData = null;
-    if (runProfile instanceof PerlRunConfiguration) {
-      hostData = PerlHostData.from(((PerlRunConfiguration)runProfile).getEffectiveSdk());
+    if (runProfile instanceof GenericPerlRunConfiguration) {
+      hostData = PerlHostData.from(((GenericPerlRunConfiguration)runProfile).getEffectiveSdk());
     }
     return new PerlRunConsole(getEnvironment().getProject(), hostData);
   }
 
   @NotNull
-  protected List<String> getAdditionalPerlParameters(@NotNull PerlRunConfiguration perlRunConfiguration) throws ExecutionException {
+  protected List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
     return Collections.emptyList();
   }
 

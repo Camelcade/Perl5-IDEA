@@ -22,7 +22,7 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PortMapping;
-import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import org.jetbrains.annotations.NotNull;
@@ -56,8 +56,8 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   protected ProcessHandler startProcess() throws ExecutionException {
     ProcessHandler process = super.startProcess();
     RunProfile runProfile = getEnvironment().getRunProfile();
-    if (runProfile instanceof PerlRunConfiguration) {
-      myHostData = PerlHostData.notNullFrom(((PerlRunConfiguration)runProfile).getEffectiveSdk());
+    if (runProfile instanceof GenericPerlRunConfiguration) {
+      myHostData = PerlHostData.notNullFrom(((GenericPerlRunConfiguration)runProfile).getEffectiveSdk());
     }
     else {
       myHostData = PerlHostHandler.getDefaultHandler().createData();
@@ -67,7 +67,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
 
   @NotNull
   @Override
-  protected List<String> getAdditionalPerlParameters(@NotNull PerlRunConfiguration perlRunConfiguration) {
+  protected List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
     return Collections.singletonList(DEBUG_ARGUMENT);
   }
 

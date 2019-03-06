@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,43 +18,35 @@ package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;
-import com.intellij.execution.actions.RunConfigurationProducer;
-import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.execution.actions.LazyRunConfigurationProducer;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * @author VISTALL
- * @since 19-Sep-15
- */
-public class PerlConfigurationProducer extends RunConfigurationProducer<PerlRunConfiguration> {
-  public PerlConfigurationProducer() {
-    super(PerlConfigurationType.getInstance().getConfigurationFactories()[0]);
-  }
-
+public abstract class GenericPerlRunConfigurationProducer<Configuration extends GenericPerlRunConfiguration>
+  extends LazyRunConfigurationProducer<Configuration> {
   @Nullable
-  public VirtualFile findPerlFile(ConfigurationContext configurationContext) {
+  private VirtualFile findPerlFile(ConfigurationContext configurationContext) {
     Location location = configurationContext.getLocation();
     VirtualFile virtualFile = location == null ? null : location.getVirtualFile();
-    return virtualFile != null && isExecutableFile(virtualFile) ? virtualFile : null;
+    return virtualFile != null && !(virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile) && isOurFile(virtualFile) ?
+           virtualFile : null;
   }
 
   @Override
-  public boolean isConfigurationFromContext(PerlRunConfiguration runConfiguration, ConfigurationContext configurationContext) {
+  public boolean isConfigurationFromContext(Configuration runConfiguration, ConfigurationContext configurationContext) {
     VirtualFile perlFile = findPerlFile(configurationContext);
     return perlFile != null && Comparing.equal(runConfiguration.getScriptFile(), perlFile);
   }
 
   @Override
-  protected boolean setupConfigurationFromContext(PerlRunConfiguration runConfiguration,
+  protected boolean setupConfigurationFromContext(Configuration runConfiguration,
                                                   ConfigurationContext configurationContext,
-                                                  Ref ref) {
+                                                  Ref<PsiElement> ref) {
     VirtualFile perlFile = findPerlFile(configurationContext);
     if (perlFile != null) {
       runConfiguration.setScriptPath(perlFile.getPath());
@@ -65,12 +57,8 @@ public class PerlConfigurationProducer extends RunConfigurationProducer<PerlRunC
     return false;
   }
 
-  public static boolean isExecutableFile(@NotNull VirtualFile virtualFile) {
-    if (virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile) {
-      return false;
-    }
-
-    FileType fileType = virtualFile.getFileType();
-    return fileType == PerlFileTypeScript.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
-  }
+  /**
+   * @return true iff {@code virtualFile} acceptable for this run configuration prodducer
+   */
+  protected abstract boolean isOurFile(@NotNull VirtualFile virtualFile);
 }

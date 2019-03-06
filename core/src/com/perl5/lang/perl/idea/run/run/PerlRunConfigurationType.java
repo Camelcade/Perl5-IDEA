@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.run;
+package com.perl5.lang.perl.idea.run.run;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
+import com.intellij.util.ObjectUtils;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,9 +28,9 @@ import org.jetbrains.annotations.NotNull;
  * @author VISTALL
  * @since 16-Sep-15
  */
-public class PerlConfigurationType extends ConfigurationTypeBase {
-  public PerlConfigurationType() {
-    super("#PerlConfigurationType", "Perl", "", PerlIcons.PERL_LANGUAGE_ICON);
+public class PerlRunConfigurationType extends ConfigurationTypeBase {
+  public PerlRunConfigurationType() {
+    super("#PerlConfigurationType", "Perl", "Runs perl5 scripts", PerlIcons.PERL_LANGUAGE_ICON);
 
     addFactory(new ConfigurationFactory(this) {
       @NotNull
@@ -41,7 +42,7 @@ public class PerlConfigurationType extends ConfigurationTypeBase {
   }
 
   @NotNull
-  public static PerlConfigurationType getInstance() {
-    return CONFIGURATION_TYPE_EP.findExtension(PerlConfigurationType.class);
+  public static PerlRunConfigurationType getInstance() {
+    return ObjectUtils.notNull(CONFIGURATION_TYPE_EP.findExtension(PerlRunConfigurationType.class));
   }
 }

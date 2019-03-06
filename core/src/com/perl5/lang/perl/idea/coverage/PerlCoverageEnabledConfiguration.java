@@ -22,7 +22,7 @@ import com.intellij.execution.configurations.coverage.CoverageEnabledConfigurati
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
-import com.perl5.lang.perl.idea.run.PerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -34,8 +34,8 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
   }
 
   @Override
-  public PerlRunConfiguration getConfiguration() {
-    return (PerlRunConfiguration)super.getConfiguration();
+  public GenericPerlRunConfiguration getConfiguration() {
+    return (GenericPerlRunConfiguration)super.getConfiguration();
   }
 
   @Nullable
@@ -46,7 +46,7 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
       return null;
     }
     String coverageRootPath = PathManager.getSystemPath() + File.separator + "coverage";
-    PerlRunConfiguration perlRunConfiguration = getConfiguration();
+    GenericPerlRunConfiguration perlRunConfiguration = getConfiguration();
     Project project = perlRunConfiguration.getProject();
     String path = coverageRootPath + File.separator +
                   FileUtil.sanitizeFileName(project.getName()) +

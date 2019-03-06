@@ -73,4 +73,6 @@ public class PerlIcons {
   public static final Icon ARRAY_GUTTER_ICON = IconLoader.getIcon("/icons/array_gutter_icon.png");
   public static final Icon HASH_GUTTER_ICON = IconLoader.getIcon("/icons/hash_gutter_icon.png");
   public static final Icon GLOB_GUTTER_ICON = IconLoader.getIcon("/icons/glob_gutter_icon.png");
+
+  public static final Icon PERL_TEST_CONFIGURATION = TEST_FILE;
 }
