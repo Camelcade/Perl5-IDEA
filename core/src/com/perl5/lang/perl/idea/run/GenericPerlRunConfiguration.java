@@ -32,8 +32,9 @@ import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.LocalFileSystem;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.net.NetUtils;
 import com.intellij.util.xmlb.XmlSerializer;
@@ -46,32 +47,29 @@ import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import org.apache.commons.lang.StringUtils;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.debugger.DebuggableRunConfiguration;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
+import java.io.File;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
 
-/**
- * @author VISTALL
- * @since 16-Sep-15
- */
 public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase implements
                                                                      CommonProgramRunConfigurationParameters,
                                                                      DebuggableRunConfiguration,
                                                                      PerlDebugOptions {
+  public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
+  public static final Function<List<String>, String> FILES_JOINER = strings ->
+    StringUtil.join(ContainerUtil.filter(strings, StringUtil::isNotEmpty), "||");
+
   private String myScriptPath;
   private String myScriptParameters;    // these are script parameters
 
@@ -139,13 +137,22 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   @Override
   public String suggestedName() {
-    VirtualFile scriptFile = getScriptFile();
-    return scriptFile == null ? null : scriptFile.getName();
+    List<VirtualFile> targetFiles = computeTargetFiles();
+    return targetFiles.isEmpty() ? null : targetFiles.get(0).getName();
   }
 
-  @Nullable
-  public VirtualFile getScriptFile() {
-    return StringUtils.isEmpty(myScriptPath) ? null : LocalFileSystem.getInstance().findFileByPath(myScriptPath);
+  @NotNull
+  protected List<VirtualFile> computeTargetFiles() {
+    return computeVirtualFilesFromPaths(getScriptPath());
+  }
+
+  @NotNull
+  private VirtualFile computeNonNullScriptFile() throws ExecutionException {
+    List<VirtualFile> targetFiles = computeTargetFiles();
+    if (targetFiles.isEmpty()) {
+      throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
+    }
+    return targetFiles.get(0);
   }
 
   public String getConsoleCharset() {
@@ -195,6 +202,18 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @Override
   public String getWorkingDirectory() {
     return myWorkingDirectory;
+  }
+
+  /**
+   * @return virtual file for a working directory explicitly set by user
+   */
+  @Nullable
+  protected VirtualFile computeExplicitWorkingDirectory() {
+    String workingDirectory = getWorkingDirectory();
+    if (StringUtil.isEmpty(workingDirectory)) {
+      return null;
+    }
+    return VfsUtil.findFileByIoFile(new File(workingDirectory), true);
   }
 
   @Override
@@ -305,68 +324,64 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   public PerlCommandLine createCommandLine(@NotNull Project project,
                                            @NotNull List<String> additionalPerlParameters,
                                            @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
-    VirtualFile scriptFile = getScriptFile();
-    if (scriptFile == null) {
-      throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
-    }
-
-    Sdk perlSdk = getEffectiveSdk();
-    PerlCommandLine commandLine =
-      createBaseCommandLine(project, perlSdk, scriptFile, additionalPerlParameters, additionalEnvironmentVariables);
-
-    if (commandLine == null) {
-      throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", perlSdk));
-    }
-
+    PerlCommandLine commandLine = createBaseCommandLine(project, additionalPerlParameters, additionalEnvironmentVariables);
     commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
+    commandLine.withWorkDirectory(computeWorkingDirectory(project));
+    commandLine.withCharset(computeCharset());
 
-    String workDirectory = getWorkingDirectory();
-    if (StringUtil.isEmpty(workDirectory)) {
-      Module moduleForFile = ModuleUtilCore.findModuleForFile(scriptFile, project);
-      if (moduleForFile != null) {
-        workDirectory = PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
-      }
-      else {
-        workDirectory = project.getBasePath();
-      }
-    }
-    commandLine.withWorkDirectory(workDirectory);
+    return commandLine;
+  }
 
+  @NotNull
+  protected Charset computeCharset() throws ExecutionException {
     String charsetName = getConsoleCharset();
-    Charset charset;
     if (!StringUtil.isEmpty(charsetName)) {
       try {
-        charset = Charset.forName(charsetName);
+        return Charset.forName(charsetName);
       }
       catch (UnsupportedCharsetException e) {
         throw new ExecutionException(PerlBundle.message("perl.run.error.unknown.charset", charsetName));
       }
     }
     else {
-      charset = scriptFile.getCharset();
+      return computeNonNullScriptFile().getCharset();
     }
-    commandLine.withCharset(charset);
-
-    return commandLine;
   }
 
   @Nullable
+  protected String computeWorkingDirectory(@NotNull Project project) throws ExecutionException {
+    String workDirectory = getWorkingDirectory();
+    if (StringUtil.isNotEmpty(workDirectory)) {
+      return workDirectory;
+    }
+    return computeWorkingDirectory(project, computeNonNullScriptFile());
+  }
+
+  @NotNull
   protected PerlCommandLine createBaseCommandLine(@NotNull Project project,
-                                                  @NotNull Sdk perlSdk,
-                                                  @NotNull VirtualFile scriptFile,
                                                   @NotNull List<String> additionalPerlParameters,
                                                   @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
     PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
-      project, perlSdk, scriptFile, ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters), getScriptParameters());
+      project, getEffectiveSdk(), computeNonNullScriptFile(), ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters),
+      getScriptParameters());
 
     if (commandLine == null) {
-      return null;
+      throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", getEffectiveSdk()));
     }
 
     Map<String, String> environment = new HashMap<>(getEnvs());
     environment.putAll(additionalEnvironmentVariables);
     commandLine.withEnvironment(environment);
     return commandLine;
+  }
+
+  @Nullable
+  protected static String computeWorkingDirectory(@NotNull Project project, @NotNull VirtualFile virtualFile) {
+    Module moduleForFile = ModuleUtilCore.findModuleForFile(virtualFile, project);
+    if (moduleForFile != null) {
+      return PathMacroUtil.getModuleDir(moduleForFile.getModuleFilePath());
+    }
+    return project.getBasePath();
   }
 
   @NotNull
@@ -395,5 +410,32 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
       throw new ExecutionException("Incorrect profile state");
     }
     return new PerlDebugProcess(session, (PerlDebugProfileState)runProfileState, runProfileState.execute(environment.getExecutor()));
+  }
+
+  /**
+   * @return list of VirtualFiles pointed by  {@code paths} joined with pipe. Reverse of {@link #computePathsFromVirtualFiles(List)}
+   */
+  @NotNull
+  public static List<VirtualFile> computeVirtualFilesFromPaths(@NotNull String paths) {
+    List<String> pathNames = FILES_PARSER.fun(paths);
+    if (pathNames.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<VirtualFile> virtualFiles = new ArrayList<>(pathNames.size());
+    for (String pathName : pathNames) {
+      if (StringUtil.isEmpty(pathName)) {
+        continue;
+      }
+      ContainerUtil.addIfNotNull(virtualFiles, VfsUtil.findFileByIoFile(new File(pathName), true));
+    }
+    return virtualFiles;
+  }
+
+  /**
+   * @return paths of {@code virtualFiles} joined with pipe, reverse of {@link #computeVirtualFilesFromPaths(String)}
+   */
+  @NotNull
+  public static String computePathsFromVirtualFiles(@NotNull List<VirtualFile> virtualFiles) {
+    return FILES_JOINER.fun(ContainerUtil.map(virtualFiles, VirtualFile::getPath));
   }
 }

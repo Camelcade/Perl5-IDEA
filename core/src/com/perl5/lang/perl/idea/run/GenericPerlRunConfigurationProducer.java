@@ -19,46 +19,91 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.LazyRunConfigurationProducer;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiUtil;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.*;
+import java.util.function.Consumer;
 
 public abstract class GenericPerlRunConfigurationProducer<Configuration extends GenericPerlRunConfiguration>
   extends LazyRunConfigurationProducer<Configuration> {
-  @Nullable
-  private VirtualFile findPerlFile(ConfigurationContext configurationContext) {
-    Location location = configurationContext.getLocation();
-    VirtualFile virtualFile = location == null ? null : location.getVirtualFile();
-    return virtualFile != null && !(virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile) && isOurFile(virtualFile) ?
-           virtualFile : null;
+  @NotNull
+  private List<VirtualFile> computeTargetFiles(ConfigurationContext configurationContext) {
+    if (configurationContext.containsMultipleSelection() && !allowMultipleFiles()) {
+      return Collections.emptyList();
+    }
+    Set<VirtualFile> virtualFiles = new LinkedHashSet<>();
+    Consumer<Location> locationConsumer = location -> {
+      if (location != null) {
+        VirtualFile virtualFile = location.getVirtualFile();
+        if (virtualFile != null && !(virtualFile instanceof PerlRemoteFileSystem.PerlRemoteVirtualFile) && isOurFile(virtualFile)) {
+          virtualFiles.add(virtualFile);
+        }
+      }
+    };
+
+    DataContext dataContext = configurationContext.getDataContext();
+    Location<?>[] locations = Location.DATA_KEYS.getData(dataContext);
+    if (locations != null) {
+      for (Location<?> location : locations) {
+        locationConsumer.accept(location);
+      }
+    }
+
+    PsiElement[] psiElements = LangDataKeys.PSI_ELEMENT_ARRAY.getData(dataContext);
+    if (psiElements != null) {
+      for (PsiElement psiElement : psiElements) {
+        if (psiElement instanceof PsiFile || psiElement instanceof PsiDirectory) {
+          VirtualFile virtualFile = PsiUtil.getVirtualFile(psiElement);
+          if (virtualFile != null && isOurFile(virtualFile)) {
+            virtualFiles.add(virtualFile);
+          }
+        }
+      }
+    }
+
+    locationConsumer.accept(configurationContext.getLocation());
+
+    return new ArrayList<>(virtualFiles);
   }
 
   @Override
   public boolean isConfigurationFromContext(Configuration runConfiguration, ConfigurationContext configurationContext) {
-    VirtualFile perlFile = findPerlFile(configurationContext);
-    return perlFile != null && Comparing.equal(runConfiguration.getScriptFile(), perlFile);
+    return Comparing.equal(runConfiguration.computeTargetFiles(), computeTargetFiles(configurationContext));
   }
 
   @Override
   protected boolean setupConfigurationFromContext(Configuration runConfiguration,
                                                   ConfigurationContext configurationContext,
                                                   Ref<PsiElement> ref) {
-    VirtualFile perlFile = findPerlFile(configurationContext);
-    if (perlFile != null) {
-      runConfiguration.setScriptPath(perlFile.getPath());
-      runConfiguration.setConsoleCharset(perlFile.getCharset().displayName());
-      runConfiguration.setGeneratedName();
-      return true;
+    List<VirtualFile> targetFiles = computeTargetFiles(configurationContext);
+    if (targetFiles.isEmpty()) {
+      return false;
     }
+    runConfiguration.setScriptPath(GenericPerlRunConfiguration.computePathsFromVirtualFiles(targetFiles));
+    runConfiguration.setConsoleCharset(targetFiles.get(0).getCharset().displayName());
+    runConfiguration.setGeneratedName();
+    return true;
+  }
+
+  /**
+   * @return true iff configuration allows multiple files
+   */
+  public boolean allowMultipleFiles() {
     return false;
   }
 
   /**
-   * @return true iff {@code virtualFile} acceptable for this run configuration prodducer
+   * @return true iff {@code virtualFile} is acceptable for this run configuration producer
    */
-  protected abstract boolean isOurFile(@NotNull VirtualFile virtualFile);
+  public abstract boolean isOurFile(@NotNull VirtualFile virtualFile);
 }

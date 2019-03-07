@@ -21,12 +21,16 @@ import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ObjectUtils;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlTestRunConfigurationType extends ConfigurationTypeBase {
   public PerlTestRunConfigurationType() {
-    super("PerlTestRunConfiguration", "Perl5 Test", "Runs perl5 tests using prove utility", PerlIcons.PERL_TEST_CONFIGURATION);
+    super("PerlTestRunConfiguration",
+          PerlBundle.message("perl.run.prove.configuration.group.title"),
+          PerlBundle.message("perl.run.prove.configuration.group.description"),
+          PerlIcons.PERL_TEST_CONFIGURATION);
     addFactory(new ConfigurationFactory(this) {
       @NotNull
       @Override

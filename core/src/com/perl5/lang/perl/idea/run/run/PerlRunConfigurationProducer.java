@@ -33,8 +33,8 @@ public class PerlRunConfigurationProducer extends GenericPerlRunConfigurationPro
     return PerlRunConfigurationType.getInstance().getConfigurationFactories()[0];
   }
 
-  protected boolean isOurFile(@NotNull VirtualFile virtualFile) {
-    FileType fileType = virtualFile.getFileType();
+  public boolean isOurFile(@NotNull VirtualFile virtualFiles) {
+    FileType fileType = virtualFiles.getFileType();
     return fileType == PerlFileTypeScript.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
   }
 

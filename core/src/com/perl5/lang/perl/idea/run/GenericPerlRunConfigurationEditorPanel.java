@@ -29,6 +29,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.RawCommandLineEditor;
+import com.intellij.ui.TextAccessor;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.ui.UIUtil;
@@ -56,7 +57,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   private Project myProject;
 
   private LabeledComponent<?> myScriptLabeledField;
-  private TextFieldWithBrowseButton myScriptField;
+  private JPanel myScriptField;
 
   private LabeledComponent<?> myLabeledConsoleCharset;
   private ComboBox myConsoleCharset;
@@ -106,19 +107,26 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     myLabeledConsoleCharset.setLabelLocation(BorderLayout.WEST);
   }
 
-  private void createScriptField() {
-    myScriptField = new TextFieldWithBrowseButton();
-    myScriptField.addBrowseFolderListener(
+  @NotNull
+  protected TextFieldWithBrowseButton createTextFieldForScript() {
+    TextFieldWithBrowseButton fieldWithBrowseButton = new TextFieldWithBrowseButton();
+    fieldWithBrowseButton.addBrowseFolderListener(
       PerlBundle.message("perl.run.config.select.script.header"),
       PerlBundle.message("perl.run.config.select.script.prompt"),
       myProject,
       FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(
         getRunConfigurationProducer()::isOurFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+    return fieldWithBrowseButton;
+  }
 
-    myScriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
+  @NotNull
+  protected JPanel doCreateScriptField() {
+    TextFieldWithBrowseButton scriptField = createTextFieldForScript();
+
+    scriptField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
       @Override
       protected void textChanged(@NotNull DocumentEvent documentEvent) {
-        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(myScriptField.getText());
+        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(scriptField.getText());
         if (file != null) {
           myConsoleCharset.setSelectedItem(file.getCharset().displayName());
         }
@@ -127,7 +135,20 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
         }
       }
     });
-    myScriptLabeledField = LabeledComponent.create(myScriptField, PerlBundle.message("perl.run.option.script"));
+    return scriptField;
+  }
+
+  @NotNull
+  protected String getScriptFieldLabelText() {
+    return PerlBundle.message("perl.run.option.script");
+  }
+
+  private void createScriptField() {
+    myScriptField = doCreateScriptField();
+    if (!(myScriptField instanceof TextAccessor)) {
+      throw new RuntimeException("Script field must be a TextAccessor");
+    }
+    myScriptLabeledField = LabeledComponent.create(myScriptField, getScriptFieldLabelText());
     myScriptLabeledField.setLabelLocation(BorderLayout.WEST);
   }
 
@@ -151,7 +172,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   protected void reset(Configuration runConfiguration) {
-    myScriptField.setText(runConfiguration.getScriptPath());
+    ((TextAccessor)myScriptField).setText(runConfiguration.getScriptPath());
     myConsoleCharset.setSelectedItem(runConfiguration.getConsoleCharset());
     myPerlParametersPanel.setText(runConfiguration.getPerlParameters());
     myAlternativeSdkCheckbox.setSelected(runConfiguration.isUseAlternativeSdk());
@@ -162,7 +183,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   protected void applyTo(Configuration runConfiguration) {
-    runConfiguration.setScriptPath(myScriptField.getText());
+    runConfiguration.setScriptPath(((TextAccessor)myScriptField).getText());
     runConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
     runConfiguration.setPerlParameters(myPerlParametersPanel.getText());
     runConfiguration.setUseAlternativeSdk(myAlternativeSdkCheckbox.isSelected());

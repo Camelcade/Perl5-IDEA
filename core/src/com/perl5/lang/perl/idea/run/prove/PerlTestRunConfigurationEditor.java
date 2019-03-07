@@ -16,12 +16,25 @@
 
 package com.perl5.lang.perl.idea.run.prove;
 
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.fileChooser.FileChooserDialog;
+import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.components.fields.ExpandableTextField;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditor;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditorPanel;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_JOINER;
+import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_PARSER;
 
 class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlTestRunConfiguration> {
   public PerlTestRunConfigurationEditor(Project project) {
@@ -43,9 +56,37 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     @NotNull
     @Override
     protected String getProgramParametersLabel() {
-      return PerlBundle.message("perl.run.option.prove.parameters");
+      return PerlBundle.message("perl.run.prove.option.parameters");
     }
 
+    @NotNull
+    @Override
+    protected String getScriptFieldLabelText() {
+      return PerlBundle.message("perl.run.prove.option.script.label");
+    }
+
+    @NotNull
+    @Override
+    protected TextFieldWithBrowseButton createTextFieldForScript() {
+      TextFieldWithBrowseButton fieldWithBrowseButton = new TextFieldWithBrowseButton(new ExpandableTextField(FILES_PARSER, FILES_JOINER));
+      fieldWithBrowseButton.addActionListener(e -> {
+        FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(true, true, false, false, false, true) {
+          @Override
+          public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
+            return getRunConfigurationProducer().isOurFile(file);
+          }
+        };
+        fileChooserDescriptor.setTitle(PerlBundle.message("perl.run.prove.config.select.script.header"));
+        fileChooserDescriptor.setDescription(PerlBundle.message("perl.run.prove.config.select.script.prompt"));
+
+        List<VirtualFile> filesToSelect = PerlTestRunConfiguration.computeVirtualFilesFromPaths(fieldWithBrowseButton.getText());
+        final FileChooserDialog chooser =
+          FileChooserFactory.getInstance().createFileChooser(fileChooserDescriptor, myProject, fieldWithBrowseButton);
+        VirtualFile[] choosenFiles = chooser.choose(myProject, filesToSelect.toArray(VirtualFile.EMPTY_ARRAY));
+        fieldWithBrowseButton.setText(StringUtil.join(ContainerUtil.map(choosenFiles, VirtualFile::getPath), " "));
+      });
+      return fieldWithBrowseButton;
+    }
 
     @NotNull
     @Override

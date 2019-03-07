@@ -119,6 +119,11 @@ public class PerlCommandLine extends GeneralCommandLine {
   }
 
   @NotNull
+  public PerlCommandLine withParameters(@NotNull Set<String> parameters) {
+    return withParameters(new ArrayList<>(parameters));
+  }
+
+  @NotNull
   @Override
   public PerlCommandLine withWorkDirectory(@Nullable String path) {
     return (PerlCommandLine)super.withWorkDirectory(path);

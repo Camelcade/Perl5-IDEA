@@ -29,12 +29,17 @@ public class PerlTestRunConfigurationProducer extends GenericPerlRunConfiguratio
     return PerlTestRunConfigurationType.getInstance().getConfigurationFactories()[0];
   }
 
-  protected boolean isOurFile(@NotNull VirtualFile virtualFile) {
-    return virtualFile.getFileType() == PerlFileTypeTest.INSTANCE;
+  public boolean isOurFile(@NotNull VirtualFile virtualFiles) {
+    return virtualFiles.isDirectory() || virtualFiles.getFileType() == PerlFileTypeTest.INSTANCE;
   }
 
   @NotNull
   public static PerlTestRunConfigurationProducer getInstance() {
     return getInstance(PerlTestRunConfigurationProducer.class);
+  }
+
+  @Override
+  public boolean allowMultipleFiles() {
+    return true;
   }
 }
