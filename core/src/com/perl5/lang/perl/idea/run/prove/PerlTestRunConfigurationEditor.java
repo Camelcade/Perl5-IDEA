@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.run.prove;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditor;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditorPanel;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,20 +30,27 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
 
   @NotNull
   @Override
-  protected GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> getRunConfigurationProducer() {
-    return PerlTestRunConfigurationProducer.getInstance();
+  protected ParametersPanel createCommonParametersPanel() {
+    return new ParametersPanel(myProject);
   }
 
-  @Override
-  protected CommonParametersPanel createCommonParametersPanel() {
-    return new FormPanel();
-  }
 
-  private class FormPanel extends CommonParametersPanel {
+  private class ParametersPanel extends GenericPerlRunConfigurationEditorPanel<PerlTestRunConfiguration> {
+    public ParametersPanel(@NotNull Project project) {
+      super(project);
+    }
+
     @NotNull
     @Override
     protected String getProgramParametersLabel() {
       return PerlBundle.message("perl.run.option.prove.parameters");
+    }
+
+
+    @NotNull
+    @Override
+    protected GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> getRunConfigurationProducer() {
+      return PerlTestRunConfigurationProducer.getInstance();
     }
   }
 }

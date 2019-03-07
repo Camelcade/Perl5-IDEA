@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.run.run;
 
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditor;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditorPanel;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,7 +29,20 @@ class PerlRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlR
 
   @NotNull
   @Override
-  protected GenericPerlRunConfigurationProducer<PerlRunConfiguration> getRunConfigurationProducer() {
-    return PerlRunConfigurationProducer.getInstance();
+  protected GenericPerlRunConfigurationEditorPanel<PerlRunConfiguration> createCommonParametersPanel() {
+    return new ParametersPanel(myProject);
   }
+
+  private static class ParametersPanel extends GenericPerlRunConfigurationEditorPanel<PerlRunConfiguration> {
+    public ParametersPanel(@NotNull Project project) {
+      super(project);
+    }
+
+    @NotNull
+    @Override
+    protected GenericPerlRunConfigurationProducer<PerlRunConfiguration> getRunConfigurationProducer() {
+      return PerlRunConfigurationProducer.getInstance();
+    }
+  }
+
 }

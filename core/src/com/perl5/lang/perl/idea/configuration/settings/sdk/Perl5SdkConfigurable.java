@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
+import com.intellij.execution.ui.CommonProgramParametersPanel;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -65,14 +66,23 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   private MessageBusConnection myConnection;
   @NotNull
   private Perl5SdkManipulator mySdkManipulator;
-  @NotNull
+  @Nullable
   private Project myProject;
 
   private final Disposable myDisposable = Disposer.newDisposable();
 
-  public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator, @NotNull Project project) {
+  /**
+   * @apiNote if you are passing null to the constructor, you MUST then call {@link #setProject(Project)}
+   * with non null project value. This is a hack, introduced to fix problem in {@link CommonProgramParametersPanel}
+   * which invokes some overridable methods from the constructor, namely - {@link CommonProgramParametersPanel#addComponents()}
+   */
+  public Perl5SdkConfigurable(@NotNull Perl5SdkManipulator sdkManipulator, @Nullable Project project) {
     myConnection = ApplicationManager.getApplication().getMessageBus().connect();
     mySdkManipulator = sdkManipulator;
+    myProject = project;
+  }
+
+  public void setProject(@NotNull Project project) {
     myProject = project;
   }
 
