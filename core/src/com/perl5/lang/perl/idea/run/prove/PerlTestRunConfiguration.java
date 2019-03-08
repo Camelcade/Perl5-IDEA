@@ -48,7 +48,7 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final String PROVE = "prove";
   private static final String TEST_HARNESS = "Test::Harness";
   private static final String PROVE_PASS_PREFIX = "PROVE_PASS_";
-  private static final String PROVE_PASS_PLUGIN_PARAMETER = "-PPassEnv";
+  private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList("-PPassEnv", "--formatter", "TAP::Formatter::Camelcade", "-m");
   private static final String PROVE_RECURSIVE = "-r";
   private static final String PROVE_FRAMEWORK_NAME = TEST_HARNESS;
 
@@ -96,8 +96,8 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     PerlHostData<?, ?> perlHostData = PerlHostData.notNullFrom(perlSdk);
 
-    Set<String> proveParameters = new LinkedHashSet<>(getScriptParameters());
-    proveParameters.add(PROVE_PASS_PLUGIN_PARAMETER);
+    Set<String> proveParameters = new LinkedHashSet<>(PROVE_DEFAULT_PARAMETERS);
+    proveParameters.addAll(getScriptParameters());
     VirtualFile workingDirectory = computeExplicitWorkingDirectory();
 
     List<String> testsPaths = new ArrayList<>();

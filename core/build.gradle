@@ -85,6 +85,11 @@ compileJava {
   dependsOn generatePodLexer
 }
 
+prepareSandbox{
+  inputs.dir('scripts')
+  outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
+}
+
 project.afterEvaluate {
   prepareSandbox.doLast {
     def targetPath = "$it.destinationDir/$intellij.pluginName/perl/"
