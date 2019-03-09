@@ -59,11 +59,12 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
     }
 
     if (structuralParentElement instanceof PerlSubDefinitionElement) {
+      String name = StringUtil.notNullize(((PerlSubDefinitionElement)structuralParentElement).getCanonicalName());
       return new PsiNamedElementUsageGroupBase<PerlSubDefinitionElement>((PerlSubDefinitionElement)structuralParentElement) {
         @NotNull
         @Override
         public String getText(UsageView view) {
-          return StringUtil.notNullize(getElement().getCanonicalName());
+          return name;
         }
       };
     }
