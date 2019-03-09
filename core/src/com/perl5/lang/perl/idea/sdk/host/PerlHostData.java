@@ -296,7 +296,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
       commandLine = versionManagerData.patchCommandLine(commandLine);
     }
     final Map<String, String> environment = commandLine.getEnvironment();
-    ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine.withPty(true));
+    ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(handler::addProcessListener);
     handler.addProcessListener(new ProcessAdapter() {
       @Override

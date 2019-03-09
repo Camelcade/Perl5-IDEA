@@ -419,7 +419,7 @@ public class PerlRunUtil {
     PerlRunConsole consoleView = new PerlRunConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
     ProcessHandler processHandler = null;
     try {
-      processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine);
+      processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(true));
     }
     catch (ExecutionException e) {
       consoleView.print(e.getMessage(), ConsoleViewContentType.ERROR_OUTPUT);

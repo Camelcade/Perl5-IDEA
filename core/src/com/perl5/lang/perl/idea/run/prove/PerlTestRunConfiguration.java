@@ -163,4 +163,9 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     SMTestRunnerConnectionUtil.initConsoleView(consoleView, PROVE_FRAMEWORK_NAME);
     return consoleView;
   }
+
+  @Override
+  protected boolean isUsePty() {
+    return false;
+  }
 }

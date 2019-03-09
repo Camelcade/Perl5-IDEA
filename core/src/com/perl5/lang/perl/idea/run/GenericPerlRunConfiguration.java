@@ -332,7 +332,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     commandLine.withWorkDirectory(computeWorkingDirectory(project));
     commandLine.withCharset(computeCharset());
 
-    return commandLine;
+    return commandLine.withPty(isUsePty());
+  }
+
+  protected boolean isUsePty() {
+    return true;
   }
 
   @NotNull
