@@ -75,6 +75,7 @@ class PerlDockerAdapter {
   private static final String WITH_VOLUME = "-v";
   private static final String EXPOSE_PORT = "--expose";
   private static final String PUBLISH_PORT = "-p";
+  private static final String WORKING_DIRECTORY = "-w";
 
   @NotNull
   private final PerlDockerData myData;
@@ -195,6 +196,12 @@ class PerlDockerAdapter {
       // adding project settings if possible
       dockerCommandLine
         .withParameters(StringUtil.split(PerlDockerProjectSettings.getInstance(project).getAdditionalDockerParameters(), " "));
+    }
+
+    // working directory
+    File remoteWorkingDirectory = myData.getRemotePath(commandLine.getWorkDirectory());
+    if (remoteWorkingDirectory != null) {
+      dockerCommandLine.withParameters(WORKING_DIRECTORY + "=" + StringUtil.escapeChar(remoteWorkingDirectory.getAbsolutePath(), ' '));
     }
 
     // required by coverage, probably we should have a getter for this; Also contains a temp path
