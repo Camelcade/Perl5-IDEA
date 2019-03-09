@@ -19,6 +19,9 @@ package com.perl5.lang.perl.idea.run.prove;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil;
+import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
+import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -29,6 +32,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -46,6 +50,7 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final String PROVE_PASS_PREFIX = "PROVE_PASS_";
   private static final String PROVE_PASS_PLUGIN_PARAMETER = "-PPassEnv";
   private static final String PROVE_RECURSIVE = "-r";
+  private static final String PROVE_FRAMEWORK_NAME = TEST_HARNESS;
 
   public PerlTestRunConfiguration(Project project,
                                   @NotNull ConfigurationFactory factory,
@@ -145,5 +150,17 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   @Override
   public boolean isReconnect() {
     return true;
+  }
+
+  @NotNull
+  @Override
+  public ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
+    PerlSMTRunnerConsoleProperties consoleProperties =
+      new PerlSMTRunnerConsoleProperties(this, PROVE_FRAMEWORK_NAME, runProfileState.getEnvironment().getExecutor());
+    String splitterPropertyName = SMTestRunnerConnectionUtil.getSplitterPropertyName(PROVE_FRAMEWORK_NAME);
+    SMTRunnerConsoleView consoleView = new PerlSMTRunnerConsoleView(consoleProperties, splitterPropertyName)
+      .withHostData(PerlHostData.notNullFrom(getEffectiveSdk()));
+    SMTestRunnerConnectionUtil.initConsoleView(consoleView, PROVE_FRAMEWORK_NAME);
+    return consoleView;
   }
 }
