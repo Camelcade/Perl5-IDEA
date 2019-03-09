@@ -21,14 +21,12 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
-import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -82,12 +80,7 @@ public class PerlRunProfileState extends CommandLineState {
   @Nullable
   @Override
   protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
-    RunProfile runProfile = getEnvironment().getRunProfile();
-    PerlHostData hostData = null;
-    if (runProfile instanceof GenericPerlRunConfiguration) {
-      hostData = PerlHostData.from(((GenericPerlRunConfiguration)runProfile).getEffectiveSdk());
-    }
-    return new PerlRunConsole(getEnvironment().getProject()).withHostData(hostData);
+    return ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).createConsole(this);
   }
 
   @NotNull

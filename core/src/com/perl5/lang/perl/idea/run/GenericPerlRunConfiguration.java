@@ -24,6 +24,7 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -42,10 +43,12 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -437,5 +440,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @NotNull
   public static String computePathsFromVirtualFiles(@NotNull List<VirtualFile> virtualFiles) {
     return FILES_JOINER.fun(ContainerUtil.map(virtualFiles, VirtualFile::getPath));
+  }
+
+  @NotNull
+  public ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
+    ExecutionEnvironment executionEnvironment = runProfileState.getEnvironment();
+    return new PerlRunConsole(executionEnvironment.getProject()).withHostData(PerlHostData.from(getEffectiveSdk()));
   }
 }
