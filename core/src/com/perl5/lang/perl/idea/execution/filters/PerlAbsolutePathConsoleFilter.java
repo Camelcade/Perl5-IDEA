@@ -20,7 +20,6 @@ package com.perl5.lang.perl.idea.execution.filters;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,12 +41,12 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
   @NotNull
   private final Project myProject;
 
-  @NotNull
-  private final PerlRunConsole myRunConsole;
+  @Nullable
+  private final PerlHostData myHostData;
 
-  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @NotNull PerlRunConsole runConsole) {
+  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @Nullable PerlHostData hostData) {
     myProject = project;
-    myRunConsole = runConsole;
+    myHostData = hostData;
   }
 
   @Nullable
@@ -56,10 +55,9 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
     int startOffset = entireLength - line.length();
     List<ResultItem> resultList = ContainerUtil.newArrayList();
     Matcher matcher = PATTERN.matcher(line);
-    PerlHostData hostData = myRunConsole.getHostData();
     while (matcher.find()) {
       String filePath;
-      filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
+      filePath = myHostData == null ? matcher.group(1) : myHostData.getLocalPath(matcher.group(1));
       resultList.add(new Result(
         startOffset + matcher.start(1),
         startOffset + matcher.end(1),

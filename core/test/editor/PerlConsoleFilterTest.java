@@ -17,7 +17,6 @@
 package editor;
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.execution.filters.PerlAbsolutePathConsoleFilter;
 import com.perl5.lang.perl.idea.execution.filters.PerlConsoleFileLinkFilter;
 
@@ -50,11 +49,11 @@ public class PerlConsoleFilterTest extends PerlLightTestCase {
   public void testSemicolons() {doTestAbsolute();}
 
   private void doTestAbsolute() {
-    doTestConsoleFilter(new PerlAbsolutePathConsoleFilter(getProject(), new PerlRunConsole(getProject(), null)));
+    doTestConsoleFilter(new PerlAbsolutePathConsoleFilter(getProject(), null));
   }
 
   private void doTestDie() {
-    doTestConsoleFilter(new PerlConsoleFileLinkFilter(getProject(), new PerlRunConsole(getProject(), null)));
+    doTestConsoleFilter(new PerlConsoleFileLinkFilter(getProject(), null));
   }
 
 }

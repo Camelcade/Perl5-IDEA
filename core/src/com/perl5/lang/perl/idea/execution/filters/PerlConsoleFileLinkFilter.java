@@ -20,7 +20,6 @@ import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,12 +33,12 @@ public class PerlConsoleFileLinkFilter implements Filter {
   private static final Pattern DIE_PATH_PATTERN = Pattern.compile("\\bat " + FILE_PATH_REGEXP + " line (\\d+)\\.?\\b");
   @NotNull
   private final Project myProject;
-  @NotNull
-  private final PerlRunConsole myRunConsole;
+  @Nullable
+  private final PerlHostData myHostData;
 
-  public PerlConsoleFileLinkFilter(@NotNull Project project, @NotNull PerlRunConsole runConsole) {
+  public PerlConsoleFileLinkFilter(@NotNull Project project, @Nullable PerlHostData hostData) {
     myProject = project;
-    myRunConsole = runConsole;
+    myHostData = hostData;
   }
 
   @Nullable
@@ -56,8 +55,7 @@ public class PerlConsoleFileLinkFilter implements Filter {
     int lineStartOffset = endOffset - textLine.length();
     int fileStartOffset = matcher.start(1);
     int lineNumberEndOffset = matcher.end(2);
-    PerlHostData hostData = myRunConsole.getHostData();
-    String filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
+    String filePath = myHostData == null ? matcher.group(1) : myHostData.getLocalPath(matcher.group(1));
     int line;
     try{
        line = Integer.valueOf(matcher.group(2)) - 1;

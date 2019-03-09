@@ -416,7 +416,7 @@ public class PerlRunUtil {
     ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     Project project = perlCommandLine.getNonNullEffectiveProject();
-    PerlRunConsole consoleView = new PerlRunConsole(project, perlCommandLine.getEffectiveHostData());
+    PerlRunConsole consoleView = new PerlRunConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
     ProcessHandler processHandler = null;
     try {
       processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine);

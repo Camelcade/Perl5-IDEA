@@ -87,7 +87,7 @@ public class PerlRunProfileState extends CommandLineState {
     if (runProfile instanceof GenericPerlRunConfiguration) {
       hostData = PerlHostData.from(((GenericPerlRunConfiguration)runProfile).getEffectiveSdk());
     }
-    return new PerlRunConsole(getEnvironment().getProject(), hostData);
+    return new PerlRunConsole(getEnvironment().getProject()).withHostData(hostData);
   }
 
   @NotNull

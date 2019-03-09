@@ -21,22 +21,18 @@ import com.intellij.execution.filters.Filter;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by ELI-HOME on 21-Sep-15.
- * this filter provider allows us to add our own perl filter
- */
 public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
 
   @NotNull
   @Override
   public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
-    return consoleView instanceof PerlRunConsole ?
+    return consoleView instanceof PerlHostDataContainer ?
            new Filter[]{
-             new PerlConsoleFileLinkFilter(project, (PerlRunConsole)consoleView),
-             new PerlAbsolutePathConsoleFilter(project, ((PerlRunConsole)consoleView))
+             new PerlConsoleFileLinkFilter(project, ((PerlHostDataContainer)consoleView).getHostData()),
+             new PerlAbsolutePathConsoleFilter(project, ((PerlHostDataContainer)consoleView).getHostData())
            } : Filter.EMPTY_ARRAY;
   }
 }
