@@ -201,7 +201,8 @@ class PerlDockerAdapter {
     // working directory
     File remoteWorkingDirectory = myData.getRemotePath(commandLine.getWorkDirectory());
     if (remoteWorkingDirectory != null) {
-      dockerCommandLine.withParameters(WORKING_DIRECTORY + "=" + StringUtil.escapeChar(remoteWorkingDirectory.getAbsolutePath(), ' '));
+      dockerCommandLine.withParameters(WORKING_DIRECTORY + "=" + StringUtil.escapeChar(
+        FileUtil.toSystemIndependentName(remoteWorkingDirectory.toString()), ' '));
     }
 
     // required by coverage, probably we should have a getter for this; Also contains a temp path
