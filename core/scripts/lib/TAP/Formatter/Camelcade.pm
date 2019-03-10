@@ -13,7 +13,6 @@ sub open_test{
 
     my $location = "myfile://$test";
     $test =~ s/^$pwd[\\\/]//;
-    print STDERR "IAM IN $pwd";
 
     my $session = TAP::Formatter::Camelcade::Session->new({
         name      => $test,
