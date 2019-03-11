@@ -31,6 +31,7 @@ class PerlSMTRunnerConsoleProperties extends SMTRunnerConsoleProperties {
                                         @NotNull String testFrameworkName,
                                         @NotNull Executor executor) {
     super(config, testFrameworkName, executor);
+    setIdBasedTestTree(true);
   }
 
   @Nullable
