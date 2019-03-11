@@ -27,7 +27,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.run.debugger.PerlRemoteFileSystem;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,7 +63,7 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
     if (psiElements != null) {
       for (PsiElement psiElement : psiElements) {
         if (psiElement instanceof PsiFile || psiElement instanceof PsiDirectory) {
-          VirtualFile virtualFile = PsiUtil.getVirtualFile(psiElement);
+          VirtualFile virtualFile = PsiUtilCore.getVirtualFile(psiElement);
           if (virtualFile != null && isOurFile(virtualFile)) {
             virtualFiles.add(virtualFile);
           }
