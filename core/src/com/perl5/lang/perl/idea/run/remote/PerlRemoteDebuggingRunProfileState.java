@@ -21,11 +21,14 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
+import com.perl5.lang.perl.idea.execution.PerlRunConsole;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileStateBase;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Objects;
@@ -65,6 +68,12 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBas
     else {
       return localPathName;
     }
+  }
+
+  @Nullable
+  @Override
+  protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
+    return new PerlRunConsole(getEnvironment().getProject());
   }
 
   @NotNull
