@@ -289,16 +289,20 @@ public class PerlCommandLine extends GeneralCommandLine {
   public Process createProcess() throws ExecutionException {
     LOG.info("Executing: " + getCommandLineString());
     LOG.info("  environment: " + getEnvironment() + " (+" + getParentEnvironmentType() + ")");
-    LOG.info("  host = " + getEffectiveHostData() +
+    PerlHostData hostData = getEffectiveHostData();
+    LOG.info("  host = " + hostData +
              "; vm = " + getEffectiveVersionManagerData() +
              "; pty = " + isUsePty() +
              "; charset: " + getCharset());
-    return myUsePty ?
-           new PtyCommandLine(this)
-             .withConsoleMode(false)
-             .withInitialColumns(256)
-             .withEnvironment("TERM", "xterm-256color")
-             .createProcess() :
-           super.createProcess();
+    if (!myUsePty) {
+      return super.createProcess();
+    }
+
+    PtyCommandLine ptyCommandLine = new PtyCommandLine(this).withConsoleMode(false).withInitialColumns(256);
+    if (hostData == null || !hostData.getOsHandler().isMsWindows()) {
+      ptyCommandLine.withEnvironment("TERM", "xterm-256color");
+    }
+
+    return ptyCommandLine.createProcess();
   }
 }

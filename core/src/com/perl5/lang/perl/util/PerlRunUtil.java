@@ -416,7 +416,8 @@ public class PerlRunUtil {
     ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     Project project = perlCommandLine.getNonNullEffectiveProject();
-    PerlRunConsole consoleView = new PerlRunConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
+    PerlRunConsole consoleView =
+      new PerlRunConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
     ProcessHandler processHandler = null;
     try {
       processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(true));
@@ -429,7 +430,7 @@ public class PerlRunUtil {
     RunContentDescriptor runContentDescriptor = new RunContentDescriptor(
       consoleView,
       processHandler,
-      consoleView.buildPanel(),
+      consoleView.getComponent(),
       ObjectUtils.notNull(perlCommandLine.getConsoleTitle(), perlCommandLine.getCommandLineString()),
       ObjectUtils.notNull(perlCommandLine.getConsoleIcon(), PerlIcons.PERL_LANGUAGE_ICON)
     );
@@ -439,7 +440,6 @@ public class PerlRunUtil {
       consoleView.attachToProcess(processHandler);
       processHandler.startNotify();
     }
-    consoleView.addCloseAction(runExecutor, runContentDescriptor);
   }
 
   public static void addMissingPackageListener(@NotNull ProcessHandler handler,

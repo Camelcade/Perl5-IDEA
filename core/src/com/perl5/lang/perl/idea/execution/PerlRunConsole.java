@@ -16,38 +16,24 @@
 
 package com.perl5.lang.perl.idea.execution;
 
-import com.intellij.execution.Executor;
-import com.intellij.execution.actions.StopProcessAction;
-import com.intellij.execution.impl.ConsoleViewImpl;
-import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.execution.ui.actions.CloseAction;
-import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.terminal.TerminalExecutionConsole;
+import com.perl5.lang.perl.idea.execution.filters.PerlAbsolutePathConsoleFilter;
+import com.perl5.lang.perl.idea.execution.filters.PerlConsoleFileLinkFilter;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-import java.awt.*;
-
-public class PerlRunConsole extends ConsoleViewImpl implements PerlHostDataContainer<PerlRunConsole> {
-  private final DefaultActionGroup myActionGroup = new DefaultActionGroup();
+public class PerlRunConsole extends TerminalExecutionConsole implements PerlHostDataContainer<PerlRunConsole> {
   @Nullable
   private PerlHostData myHostData;
 
+  private final Project myProject;
+
   public PerlRunConsole(@NotNull Project project) {
-    super(project, false);
-  }
-
-  public JPanel buildPanel() {
-
-    ActionToolbar toolbar = ActionManager.getInstance().createActionToolbar(getClass().getSimpleName(), myActionGroup, false);
-    JPanel consolePanel = new JPanel(new BorderLayout());
-    consolePanel.add(getComponent(), BorderLayout.CENTER);
-    consolePanel.add(toolbar.getComponent(), BorderLayout.WEST);
-    return consolePanel;
+    super(project, null);
+    myProject = project;
   }
 
   @Nullable
@@ -56,28 +42,12 @@ public class PerlRunConsole extends ConsoleViewImpl implements PerlHostDataConta
   }
 
   @Override
-  public void attachToProcess(@NotNull ProcessHandler processHandler) {
-    super.attachToProcess(processHandler);
-    addStopAction(processHandler);
-  }
-
-  private void addStopAction(@NotNull ProcessHandler processHandler) {
-    StopProcessAction stopAction = new StopProcessAction("Stop", "Stop", processHandler);
-    AnAction generalStopAction = ActionManager.getInstance().getAction(IdeActions.ACTION_STOP_PROGRAM);
-    if (generalStopAction != null) {
-      stopAction.copyFrom(generalStopAction);
-      stopAction.registerCustomShortcutSet(generalStopAction.getShortcutSet(), this);
-    }
-    myActionGroup.add(stopAction);
-  }
-
-  public void addCloseAction(@NotNull Executor executor, @NotNull RunContentDescriptor contentDescriptor) {
-    myActionGroup.add(new CloseAction(executor, contentDescriptor, getProject()));
-  }
-
-  @Override
   public PerlRunConsole withHostData(@Nullable PerlHostData hostData) {
     myHostData = hostData;
+    if (myHostData != null) {
+      addMessageFilter(new PerlConsoleFileLinkFilter(myProject, myHostData));
+      addMessageFilter(new PerlAbsolutePathConsoleFilter(myProject, myHostData));
+    }
     return this;
   }
 }

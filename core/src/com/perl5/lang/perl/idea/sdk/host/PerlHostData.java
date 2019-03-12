@@ -22,10 +22,13 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.io.BaseDataReader;
+import com.intellij.util.io.BaseOutputReader;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
@@ -83,8 +86,8 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   public abstract String getSecondaryShortName();
 
   /**
-   * @return a filesystem for this host if available
    * @param disposable if filesystem is temporary, it may be bound by this disposable
+   * @return a filesystem for this host if available
    */
   @Nullable
   public abstract VirtualFileSystem getFileSystem(@NotNull Disposable disposable);
@@ -100,8 +103,31 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    */
   @NotNull
   protected ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return new KillableColoredProcessHandler(createConsoleProcess(commandLine), commandLine.getCommandLineString(),
-                                             commandLine.getCharset());
+    KillableProcessHandler processHandler = new KillableProcessHandler(
+      createConsoleProcess(commandLine), commandLine.getCommandLineString(), commandLine.getCharset()) {
+      @NotNull
+      @Override
+      protected BaseOutputReader.Options readerOptions() {
+        return new BaseOutputReader.Options() {
+          @Override
+          public BaseDataReader.SleepingPolicy policy() {
+            return BaseDataReader.SleepingPolicy.BLOCKING;
+          }
+
+          @Override
+          public boolean splitToLines() {
+            return false;
+          }
+
+          @Override
+          public boolean withSeparators() {
+            return true;
+          }
+        };
+      }
+    };
+    processHandler.setShouldKillProcessSoftlyWithWinP(SystemInfo.isWin10OrNewer);
+    return processHandler;
   }
 
   /**
