@@ -55,7 +55,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.adapters.CpanAdapter;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
+import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -416,8 +416,8 @@ public class PerlRunUtil {
     ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     Project project = perlCommandLine.getNonNullEffectiveProject();
-    PerlRunConsole consoleView =
-      new PerlRunConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
+    PerlTerminalExecutionConsole consoleView =
+      new PerlTerminalExecutionConsole(project).withHostData(perlCommandLine.getEffectiveHostData());
     ProcessHandler processHandler = null;
     try {
       processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(true));

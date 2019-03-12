@@ -43,7 +43,7 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.execution.PerlRunConsole;
+import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
@@ -449,6 +449,6 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @NotNull
   public ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = runProfileState.getEnvironment();
-    return new PerlRunConsole(executionEnvironment.getProject()).withHostData(PerlHostData.from(getEffectiveSdk()));
+    return new PerlTerminalExecutionConsole(executionEnvironment.getProject()).withHostData(PerlHostData.from(getEffectiveSdk()));
   }
 }

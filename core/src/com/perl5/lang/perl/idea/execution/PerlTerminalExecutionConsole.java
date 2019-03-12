@@ -25,13 +25,13 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlRunConsole extends TerminalExecutionConsole implements PerlHostDataContainer<PerlRunConsole> {
+public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlHostDataContainer<PerlTerminalExecutionConsole> {
   @Nullable
   private PerlHostData myHostData;
 
   private final Project myProject;
 
-  public PerlRunConsole(@NotNull Project project) {
+  public PerlTerminalExecutionConsole(@NotNull Project project) {
     super(project, null);
     myProject = project;
   }
@@ -42,7 +42,7 @@ public class PerlRunConsole extends TerminalExecutionConsole implements PerlHost
   }
 
   @Override
-  public PerlRunConsole withHostData(@Nullable PerlHostData hostData) {
+  public PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData hostData) {
     myHostData = hostData;
     if (myHostData != null) {
       addMessageFilter(new PerlConsoleFileLinkFilter(myProject, myHostData));
