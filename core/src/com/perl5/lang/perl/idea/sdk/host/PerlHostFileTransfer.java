@@ -44,7 +44,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    */
   @Contract("null->null; !null->!null")
   @Nullable
-  public final File syncFile(@Nullable File remoteFile) {
+  public final File syncFile(@Nullable File remoteFile) throws IOException {
     if (remoteFile == null) {
       return null;
     }
@@ -56,7 +56,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    */
   @Contract("null->null; !null->!null")
   @Nullable
-  public final String syncFile(@Nullable String remotePath) {
+  public final String syncFile(@Nullable String remotePath) throws IOException {
     if (remotePath == null) {
       return null;
     }
@@ -73,8 +73,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
       doSyncPath(remotePath, localPath);
     }
     catch (IOException e) {
-      LOG.error("Error copying " + remotePath + " to " + localPath + " for " + myHostData, e);
-      return null;
+      throw new IOException(PerlBundle.message("perl.sync.error.copying", remotePath, localPath, myHostData.getShortName()), e);
     }
     return localPath;
   }
@@ -82,17 +81,12 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
   /**
    * Synchronizes local helpers from {@link PerlPluginUtil#getPluginHelpersRoot() helpers root} with remote machine
    */
-  public final void syncHelpers() {
+  public final void syncHelpers() throws IOException {
     if (ApplicationManager.getApplication().isDispatchThread()) {
       throw new RuntimeException("Should not be invoked from EDT");
     }
     PerlRunUtil.setProgressText(PerlBundle.message("perl.host.progress.uploading.helpers"));
-    try {
-      doSyncHelpers();
-    }
-    catch (IOException e) {
-      LOG.error(e);
-    }
+    doSyncHelpers();
   }
 
   /**

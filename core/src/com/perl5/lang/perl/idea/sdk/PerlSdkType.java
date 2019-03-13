@@ -16,6 +16,9 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
@@ -48,6 +51,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -90,30 +94,21 @@ public class PerlSdkType extends SdkType {
     List<String> pathsToRefresh = ContainerUtil.newArrayList();
     // syncing data if necessary
     List<String> incPaths = computeIncPaths(sdk);
+    List<Exception> exceptions = new ArrayList<>();
 
     try (PerlHostFileTransfer fileTransfer = hostData.getFileTransfer()) {
+      Consumer<File> downloader = it -> syncAndCollectException(fileTransfer, it, pathsToRefresh, exceptions);
+      ;
       for (String hostPath : incPaths) {
-        pathsToRefresh.add(fileTransfer.syncFile(hostPath));
-
-        File localBindDirectory = fileTransfer.syncFile(PerlRunUtil.findLibsBin(new File(hostPath)));
-        if (localBindDirectory != null) {
-          pathsToRefresh.add(localBindDirectory.getPath());
-        }
+        downloader.accept(new File(hostPath));
+        downloader.accept(PerlRunUtil.findLibsBin(new File(hostPath)));
       }
       // additional bin dirs from version manager
-      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(it -> {
-        File localPath = fileTransfer.syncFile(it);
-        if (localPath != null) {
-          pathsToRefresh.add(localPath.getPath());
-        }
-      });
+      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(downloader);
 
       // sdk home path
       File interpreterPath = new File(Objects.requireNonNull(PerlProjectManager.getInterpreterPath(sdk)));
-      File localInterpreterDir = fileTransfer.syncFile(interpreterPath.getParentFile());
-      if (localInterpreterDir != null) {
-        pathsToRefresh.add(localInterpreterDir.getPath());
-      }
+      downloader.accept(interpreterPath.getParentFile());
 
       List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
         .map(it -> VfsUtil.findFileByIoFile(new File(it), true))
@@ -125,7 +120,25 @@ public class PerlSdkType extends SdkType {
         VfsUtil.markDirtyAndRefresh(false, true, true, filesToRefresh.toArray(VirtualFile.EMPTY_ARRAY));
       }
 
-      fileTransfer.syncHelpers();
+      try {
+        fileTransfer.syncHelpers();
+      }
+      catch (IOException e) {
+        exceptions.add(e);
+      }
+
+      if (!exceptions.isEmpty()) {
+        int copiedFiles = filesToRefresh.size();
+        int errorsNumber = exceptions.size();
+        Notifications.Bus.notify(new Notification(
+          PerlBundle.message("perl.sync.notification.group"),
+          PerlBundle.message("perl.sync.notification.title"),
+          PerlBundle.message("perl.sync.notification.body",
+                             copiedFiles, copiedFiles + errorsNumber, errorsNumber,
+                             StringUtil.pluralize(PerlBundle.message("perl.sync.notification.pluralize"), errorsNumber)),
+          NotificationType.ERROR));
+        exceptions.forEach(LOG::warn);
+      }
     }
     catch (IOException e) {
       LOG.warn("Error closing transfer for " + sdk, e);
@@ -152,6 +165,26 @@ public class PerlSdkType extends SdkType {
     ApplicationManager.getApplication().invokeAndWait(sdkModificator::commitChanges);
     PerlRunUtil.setProgressText(oldText);
   }
+
+  /**
+   * Copying {@code fileToCopy} using the {@code fileTransfer} and collecting local path of copied file to the {@code pathsToRefresh}. In
+   * case exception been thrown by the {@code fileTransfer}, it's collected to the {@code exceptionsThrown}
+   */
+  private static void syncAndCollectException(@NotNull PerlHostFileTransfer fileTransfer,
+                                              @Nullable File fileToCopy,
+                                              @NotNull List<String> pathsToRefresh,
+                                              @NotNull List<Exception> exceptionsThrown) {
+    if (fileToCopy == null) {
+      return;
+    }
+    try {
+      pathsToRefresh.add(fileTransfer.syncFile(fileToCopy).getPath());
+    }
+    catch (IOException e) {
+      exceptionsThrown.add(e);
+    }
+  }
+
 
   @Nullable
   @Override
