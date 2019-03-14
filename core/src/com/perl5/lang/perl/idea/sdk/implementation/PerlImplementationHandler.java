@@ -67,7 +67,7 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
 
   @NotNull
   public static List<? extends PerlImplementationHandler<?, ?>> all() {
-    return EP.getExtensions();
+    return EP.getExtensionsList();
   }
 
   public static void forEach(@NotNull Consumer<? super PerlImplementationHandler<?, ?>> action) {

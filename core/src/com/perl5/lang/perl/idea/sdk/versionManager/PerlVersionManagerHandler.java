@@ -89,7 +89,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
 
   @NotNull
   public static List<PerlVersionManagerHandler<?, ?>> all() {
-    return EP.getExtensions();
+    return EP.getExtensionsList();
   }
 
   public static void forEach(@NotNull Consumer<? super PerlVersionManagerHandler> action) {

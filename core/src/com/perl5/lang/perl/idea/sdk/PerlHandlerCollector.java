@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
-import com.intellij.openapi.extensions.ExtensionPoint;
-import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstance;
@@ -27,23 +25,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class PerlHandlerCollector<Handler extends AbstractPerlHandler<?, ?>> extends KeyedExtensionCollector<Handler, String> {
-  @NotNull
-  private final String myEpName;
-
   private final AtomicNotNullLazyValue<List<Handler>> myHandlers = AtomicNotNullLazyValue.createValue(
-    () -> ContainerUtil.map(getPoint().getExtensions(), KeyedLazyInstance::getInstance));
+    () -> ContainerUtil.map(super.getExtensions(), KeyedLazyInstance::getInstance));
 
   public PerlHandlerCollector(@NotNull String epName) {
     super(epName);
-    myEpName = epName;
   }
 
-  public List<Handler> getExtensions() {
+  public List<Handler> getExtensionsList() {
     return myHandlers.getValue();
-  }
-
-  @NotNull
-  private ExtensionPoint<KeyedLazyInstance<Handler>> getPoint() {
-    return Extensions.getRootArea().getExtensionPoint(myEpName);
   }
 }

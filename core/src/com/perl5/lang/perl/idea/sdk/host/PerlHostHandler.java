@@ -239,7 +239,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
 
   @NotNull
   public static List<? extends PerlHostHandler<?, ?>> all() {
-    return EP.getExtensions();
+    return EP.getExtensionsList();
   }
 
   public static void forEach(@NotNull Consumer<? super PerlHostHandler<?, ?>> action) {
