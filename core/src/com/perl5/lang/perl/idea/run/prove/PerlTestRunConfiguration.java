@@ -34,7 +34,6 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -118,7 +117,6 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     }
 
     PerlCommandLine commandLine = new PerlCommandLine(interpreterPath)
-      .withParameters(PerlRunUtil.PERL_I + perlHostData.getRemotePath(PerlPluginUtil.getHelpersLibPath()))
       .withParameters(perlHostData.getRemotePath(proveScript.getPath()))
       .withParameters(proveParameters)
       .withParameters(testsPaths)
