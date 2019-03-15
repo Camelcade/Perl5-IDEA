@@ -19,12 +19,17 @@ package com.perl5.lang.perl.idea.run.prove;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.process.ProcessAdapter;
+import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil;
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
 import com.intellij.execution.ui.ConsoleView;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -34,10 +39,13 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
@@ -50,6 +58,9 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList("-PPassEnv", "--formatter", "TAP::Formatter::Camelcade", "-m");
   private static final String PROVE_RECURSIVE = "-r";
   private static final String PROVE_FRAMEWORK_NAME = TEST_HARNESS;
+  private static final Pattern MISSING_FILTER_PATTERN = Pattern.compile("Can't load module (\\S+) at .+?/prove line");
+  private static final String PROVE_PLUGIN_NAMESPACE = "App::Prove::Plugin";
+  private static final Logger LOG = Logger.getInstance(PerlTestRunConfiguration.class);
 
   public PerlTestRunConfiguration(Project project,
                                   @NotNull ConfigurationFactory factory,
@@ -165,5 +176,28 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   @Override
   protected boolean isUsePty() {
     return false;
+  }
+
+  @NotNull
+  @Override
+  protected ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
+    try {
+      Sdk effectiveSdk = getEffectiveSdk();
+      processHandler.addProcessListener(new ProcessAdapter() {
+        @Override
+        public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
+          String inputText = event.getText();
+          Matcher matcher = MISSING_FILTER_PATTERN.matcher(inputText);
+          if (matcher.find()) {
+            String libraryName = PROVE_PLUGIN_NAMESPACE + PerlPackageUtil.PACKAGE_SEPARATOR + matcher.group(1);
+            PerlRunUtil.showMissingLibraryNotification(getProject(), effectiveSdk, Collections.singletonList(libraryName));
+          }
+        }
+      });
+    }
+    catch (ExecutionException e) {
+      LOG.warn("Missing effective sdk for test configuration: " + getName());
+    }
+    return processHandler;
   }
 }

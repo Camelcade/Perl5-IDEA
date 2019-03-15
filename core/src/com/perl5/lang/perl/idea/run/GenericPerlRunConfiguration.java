@@ -22,7 +22,9 @@ import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
+import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.executors.DefaultDebugExecutor;
+import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
@@ -51,6 +53,7 @@ import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.debugger.DebuggableRunConfiguration;
@@ -450,5 +453,33 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   public ConsoleView createConsole(@NotNull PerlRunProfileState runProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = runProfileState.getEnvironment();
     return new PerlTerminalExecutionConsole(executionEnvironment.getProject()).withHostData(PerlHostData.from(getEffectiveSdk()));
+  }
+
+  /**
+   * May patch {@code processHandler} created with {@code runProfileState} from current run configuration.
+   *
+   * @return patched process handler
+   */
+  @NotNull
+  protected ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
+    return processHandler;
+  }
+
+  /**
+   * If profileState was build with {@link GenericPerlRunConfiguration}, patches {@code processHandler} using
+   * {@link #doPatchProcessHandler(ProcessHandler, PerlRunProfileState)}
+   *
+   * @return patched process handler
+   */
+  @Contract("null,_->null; !null,_->!null")
+  @Nullable
+  static ProcessHandler patchProcessHandler(@Nullable ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
+    if (processHandler == null) {
+      return null;
+    }
+    RunProfile runConfiguration = runProfileState.getEnvironment().getRunProfile();
+    return runConfiguration instanceof GenericPerlRunConfiguration ?
+           ((GenericPerlRunConfiguration)runConfiguration).doPatchProcessHandler(processHandler, runProfileState) :
+           processHandler;
   }
 }

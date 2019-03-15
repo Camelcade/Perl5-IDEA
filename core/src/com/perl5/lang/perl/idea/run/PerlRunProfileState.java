@@ -61,7 +61,10 @@ public class PerlRunProfileState extends CommandLineState {
     if (console != null) {
       console.attachToProcess(processHandler);
     }
-    return new DefaultExecutionResult(console, processHandler, createActions(console, processHandler, executor));
+    return new DefaultExecutionResult(
+      console,
+      GenericPerlRunConfiguration.patchProcessHandler(processHandler, this),
+      createActions(console, processHandler, executor));
   }
 
   @NotNull

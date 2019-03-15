@@ -205,7 +205,7 @@ public class PerlRunUtil {
     return null;
   }
 
-  private static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull Collection<String> packageNames) {
+  public static void showMissingLibraryNotification(@NotNull Project project, @NotNull Sdk sdk, @NotNull Collection<String> packageNames) {
     if (packageNames.isEmpty()) {
       return;
     }
