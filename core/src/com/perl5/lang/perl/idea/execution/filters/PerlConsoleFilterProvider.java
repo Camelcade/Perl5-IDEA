@@ -21,7 +21,7 @@ import com.intellij.execution.filters.Filter;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
@@ -29,10 +29,14 @@ public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
   @NotNull
   @Override
   public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
-    return consoleView instanceof PerlHostDataContainer ?
-           new Filter[]{
-             new PerlConsoleFileLinkFilter(project, (PerlHostDataContainer)consoleView),
-             new PerlAbsolutePathConsoleFilter(project, (PerlHostDataContainer)consoleView)
-           } : Filter.EMPTY_ARRAY;
+    return consoleView instanceof PerlHostDataProvider ? createFilters(project, (PerlHostDataProvider)consoleView) : Filter.EMPTY_ARRAY;
+  }
+
+  @NotNull
+  private Filter[] createFilters(@NotNull Project project, PerlHostDataProvider hostDataProvider) {
+    return new Filter[]{
+      new PerlConsoleFileLinkFilter(project, hostDataProvider),
+      new PerlAbsolutePathConsoleFilter(project, hostDataProvider)
+    };
   }
 }

@@ -18,9 +18,7 @@ package com.perl5.lang.perl.idea.sdk.host;
 
 import org.jetbrains.annotations.Nullable;
 
-public interface PerlHostDataContainer<Self> {
-  Self withHostData(@Nullable PerlHostData hostData);
-
+public interface PerlHostDataProvider {
   @Nullable
   PerlHostData<?, ?> getHostData();
 }

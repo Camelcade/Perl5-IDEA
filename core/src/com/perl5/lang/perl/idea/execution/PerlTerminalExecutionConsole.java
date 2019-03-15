@@ -26,11 +26,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.terminal.TerminalExecutionConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlHostDataContainer<PerlTerminalExecutionConsole> {
+public class PerlTerminalExecutionConsole extends TerminalExecutionConsole implements PerlHostDataProvider {
   @Nullable
   private PerlHostData myHostData;
 
@@ -44,7 +44,7 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
     return myHostData;
   }
 
-  @Override
+  @NotNull
   public PerlTerminalExecutionConsole withHostData(@Nullable PerlHostData hostData) {
     myHostData = hostData;
     return this;

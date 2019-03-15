@@ -21,7 +21,7 @@ import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,9 +43,9 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
   private final Project myProject;
 
   @NotNull
-  private final PerlHostDataContainer myHostDataContainer;
+  private final PerlHostDataProvider myHostDataContainer;
 
-  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @NotNull PerlHostDataContainer hostDataContainer) {
+  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @NotNull PerlHostDataProvider hostDataContainer) {
     myProject = project;
     myHostDataContainer = hostDataContainer;
   }

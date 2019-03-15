@@ -21,7 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,9 +35,9 @@ public class PerlConsoleFileLinkFilter implements Filter {
   @NotNull
   private final Project myProject;
   @NotNull
-  private final PerlHostDataContainer myHostDataContainer;
+  private final PerlHostDataProvider myHostDataContainer;
 
-  public PerlConsoleFileLinkFilter(@NotNull Project project, @NotNull PerlHostDataContainer hostDataContainer) {
+  public PerlConsoleFileLinkFilter(@NotNull Project project, @NotNull PerlHostDataProvider hostDataContainer) {
     myProject = project;
     myHostDataContainer = hostDataContainer;
   }

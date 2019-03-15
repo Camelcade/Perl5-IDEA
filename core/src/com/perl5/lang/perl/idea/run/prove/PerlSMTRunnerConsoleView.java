@@ -17,20 +17,24 @@
 package com.perl5.lang.perl.idea.run.prove;
 
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlHostDataContainer<PerlSMTRunnerConsoleView> {
+class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlHostDataProvider {
   private PerlHostData myHostData;
 
-  public PerlSMTRunnerConsoleView(@NotNull PerlSMTRunnerConsoleProperties consoleProperties,
+  public PerlSMTRunnerConsoleView(@NotNull Project project,
+                                  @NotNull PerlSMTRunnerConsoleProperties consoleProperties,
                                   @Nullable String splitterProperty) {
     super(consoleProperties, splitterProperty);
+    PerlTerminalExecutionConsole.addFiltersToConsole(project, this);
   }
 
-  @Override
+  @NotNull
   public PerlSMTRunnerConsoleView withHostData(@Nullable PerlHostData hostData) {
     myHostData = hostData;
     return this;
