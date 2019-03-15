@@ -33,6 +33,7 @@ import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -55,17 +56,31 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final String PROVE = "prove";
   private static final String TEST_HARNESS = "Test::Harness";
   private static final String PROVE_PASS_PREFIX = "PROVE_PASS_";
-  private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList("-PPassEnv", "--formatter", "TAP::Formatter::Camelcade", "-m");
-  private static final String PROVE_RECURSIVE = "-r";
+  static final int DEFAULT_JOBS_NUMBER = 1;
+  private static final String PROVE_FORMAT_PARAMETER = "--formatter";
   private static final String PROVE_FRAMEWORK_NAME = TEST_HARNESS;
   private static final Pattern MISSING_FILTER_PATTERN = Pattern.compile("Can't load module (\\S+) at .+?/prove line");
   private static final String PROVE_PLUGIN_NAMESPACE = "App::Prove::Plugin";
+  private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList(
+    "-PPassEnv", PROVE_FORMAT_PARAMETER, "TAP::Formatter::Camelcade", "--merge", "--recurse");
+  private static final String PROVE_JOBS_SHORT_PREFIX = "-j";
+  private static final String PROVE_JOBS_PARAMETER = "--jobs";
   private static final Logger LOG = Logger.getInstance(PerlTestRunConfiguration.class);
+  @Tag("JOBS_NUMBER")
+  private int myJobsNumber = DEFAULT_JOBS_NUMBER;
 
   public PerlTestRunConfiguration(Project project,
                                   @NotNull ConfigurationFactory factory,
                                   String name) {
     super(project, factory, name);
+  }
+
+  int getJobsNumber() {
+    return myJobsNumber;
+  }
+
+  void setJobsNumber(int jobsNumber) {
+    myJobsNumber = jobsNumber;
   }
 
   @NotNull
@@ -108,15 +123,14 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     Set<String> proveParameters = new LinkedHashSet<>(PROVE_DEFAULT_PARAMETERS);
     proveParameters.addAll(getScriptParameters());
+    proveParameters.add(PROVE_JOBS_PARAMETER);
+    proveParameters.add(Integer.toString(getJobsNumber()));
     VirtualFile workingDirectory = computeExplicitWorkingDirectory();
 
     List<String> testsPaths = new ArrayList<>();
     for (VirtualFile testVirtualFile : computeTargetFiles()) {
       if (testVirtualFile == null) {
         continue;
-      }
-      if (testVirtualFile.isDirectory()) {
-        proveParameters.add(PROVE_RECURSIVE);
       }
       String virtualFilePath = testVirtualFile.getPath();
       if (workingDirectory != null && VfsUtil.isAncestor(workingDirectory, testVirtualFile, true)) {
@@ -154,6 +168,27 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
     return commandLine;
+  }
+
+  @NotNull
+  @Override
+  protected List<String> getScriptParameters() {
+
+    List<String> userParameters = super.getScriptParameters();
+    for (Iterator<String> iterator = userParameters.iterator(); iterator.hasNext(); ) {
+      String userParameter = iterator.next();
+      if (StringUtil.startsWith(userParameter, PROVE_JOBS_SHORT_PREFIX)) {
+        iterator.remove();
+      }
+      else if (PROVE_FORMAT_PARAMETER.equals(userParameter) || PROVE_JOBS_PARAMETER.equals(userParameter)) {
+        iterator.remove();
+        if (iterator.hasNext()) {
+          iterator.next();
+          iterator.remove();
+        }
+      }
+    }
+    return userParameters;
   }
 
   @Override

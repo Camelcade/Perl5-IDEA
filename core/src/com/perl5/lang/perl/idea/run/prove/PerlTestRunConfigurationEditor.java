@@ -20,6 +20,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDialog;
 import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -31,6 +32,9 @@ import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditorPanel;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_JOINER;
@@ -49,6 +53,9 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
 
 
   private class ParametersPanel extends GenericPerlRunConfigurationEditorPanel<PerlTestRunConfiguration> {
+    private JComboBox<Integer> myJobsCombobox;
+    private LabeledComponent<JComboBox<Integer>> myLabeledJobsCombobox;
+
     public ParametersPanel(@NotNull Project project) {
       super(project);
     }
@@ -57,6 +64,41 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     @Override
     protected String getProgramParametersLabel() {
       return PerlBundle.message("perl.run.prove.option.parameters");
+    }
+
+    @Override
+    protected void createLabeledComponents() {
+      super.createLabeledComponents();
+
+      ArrayList<Integer> jobs = new ArrayList<>();
+      for (int i = 1; i <= 32; i++) {
+        jobs.add(i);
+      }
+
+      myJobsCombobox = new JComboBox<>(jobs.toArray(new Integer[0]));
+      myLabeledJobsCombobox = LabeledComponent.create(myJobsCombobox, "Parallel jobs number:");
+      myLabeledJobsCombobox.setLabelLocation(BorderLayout.WEST);
+    }
+
+    @Override
+    protected void reset(PerlTestRunConfiguration runConfiguration) {
+      super.reset(runConfiguration);
+      myJobsCombobox.setSelectedItem(Integer.valueOf(runConfiguration.getJobsNumber()));
+    }
+
+    @Override
+    protected void applyTo(PerlTestRunConfiguration runConfiguration) {
+      super.applyTo(runConfiguration);
+      Object item = myJobsCombobox.getSelectedItem();
+      runConfiguration.setJobsNumber(item instanceof Integer ? ((Integer)item).intValue() : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
+    }
+
+    @NotNull
+    @Override
+    protected List<LabeledComponent<?>> getLabeledComponents() {
+      List<LabeledComponent<?>> parentComponents = new ArrayList<>(super.getLabeledComponents());
+      parentComponents.add(myLabeledJobsCombobox);
+      return parentComponents;
     }
 
     @NotNull

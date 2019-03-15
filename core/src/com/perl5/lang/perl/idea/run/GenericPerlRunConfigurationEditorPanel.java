@@ -26,10 +26,7 @@ import com.intellij.openapi.ui.*;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.ui.CollectionComboBoxModel;
-import com.intellij.ui.DocumentAdapter;
-import com.intellij.ui.RawCommandLineEditor;
-import com.intellij.ui.TextAccessor;
+import com.intellij.ui.*;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.ui.UIUtil;
@@ -47,6 +44,8 @@ import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class GenericPerlRunConfigurationEditorPanel<Configuration extends GenericPerlRunConfiguration>
   extends CommonProgramParametersPanel implements Perl5SdkManipulator {
@@ -75,18 +74,24 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
 
   @Override
   protected void addComponents() {
-    createConsoleEncodingField();
-    createPerlParametersField();
-    createScriptField();
-
-    add(myScriptLabeledField);
-    add(myLabeledConsoleCharset);
-    add(myLabeledPerlParametersPanel);
+    createLabeledComponents();
+    getLabeledComponents().forEach(this::add);
     super.addComponents();
     add(createAlternativeSdkPanel());
 
     setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
     setProgramParametersLabel(getProgramParametersLabel());
+  }
+
+  protected void createLabeledComponents() {
+    createConsoleEncodingField();
+    createPerlParametersField();
+    createScriptField();
+  }
+
+  @NotNull
+  protected List<LabeledComponent<?>> getLabeledComponents() {
+    return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlParametersPanel);
   }
 
   @NotNull
@@ -166,9 +171,11 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   @Override
-  protected void setupAnchor() {
+  protected final void setupAnchor() {
     super.setupAnchor();
-    myAnchor = UIUtil.mergeComponentsWithAnchor(this, myScriptLabeledField, myLabeledPerlParametersPanel, myLabeledConsoleCharset);
+    ArrayList<PanelWithAnchor> components = new ArrayList<>(getLabeledComponents());
+    components.add(0, this);
+    myAnchor = UIUtil.mergeComponentsWithAnchor(components);
   }
 
   protected void reset(Configuration runConfiguration) {
