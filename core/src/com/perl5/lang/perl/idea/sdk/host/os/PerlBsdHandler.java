@@ -17,9 +17,16 @@
 package com.perl5.lang.perl.idea.sdk.host.os;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 class PerlBsdHandler extends PerlUnixHandler {
   public PerlBsdHandler(@NotNull String name) {
     super(name);
+  }
+
+  public PerlBsdHandler(@NotNull String name, @Nullable Icon icon) {
+    super(name, icon);
   }
 }

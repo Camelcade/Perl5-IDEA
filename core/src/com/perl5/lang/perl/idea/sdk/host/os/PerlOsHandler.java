@@ -23,14 +23,23 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.Objects;
 
 public abstract class PerlOsHandler {
   @NotNull
   private final String myName;
 
+  @Nullable
+  private final Icon myIcon;
+
   public PerlOsHandler(@NotNull String name) {
+    this(name, null);
+  }
+
+  public PerlOsHandler(@NotNull String name, @Nullable Icon icon) {
     myName = name;
+    myIcon = icon;
   }
 
   @NotNull
@@ -53,6 +62,12 @@ public abstract class PerlOsHandler {
    * @return true iff OS has Windows Subsystem for Linux support
    */
   public boolean hasWslSupport() {return false;}
+
+
+  @Nullable
+  public final Icon getIcon() {
+    return myIcon;
+  }
 
   @NotNull
   public static PerlOsHandler notNullFrom(@NotNull Sdk sdk) {

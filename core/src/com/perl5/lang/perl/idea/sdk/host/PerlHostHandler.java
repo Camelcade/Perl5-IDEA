@@ -40,6 +40,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
@@ -236,6 +237,9 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   public UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
     return null;
   }
+
+  @Nullable
+  public abstract Icon getIcon();
 
   @NotNull
   public static List<? extends PerlHostHandler<?, ?>> all() {

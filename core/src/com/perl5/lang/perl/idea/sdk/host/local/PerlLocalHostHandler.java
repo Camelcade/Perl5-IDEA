@@ -24,6 +24,8 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+
 import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.*;
 
 class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
@@ -65,6 +67,12 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
   @Override
   public boolean isApplicable() {
     return true;
+  }
+
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return getOsHandler().getIcon();
   }
 
   @NotNull

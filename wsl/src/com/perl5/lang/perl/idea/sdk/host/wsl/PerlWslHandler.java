@@ -22,12 +22,15 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslHandler> {
   public PerlWslHandler(@NotNull PerlHandlerBean bean) {
@@ -84,5 +87,11 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
   @Override
   public PerlWslData createData() {
     return new PerlWslData(this);
+  }
+
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.LINUX_ICON;
   }
 }

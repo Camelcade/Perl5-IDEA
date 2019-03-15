@@ -17,10 +17,13 @@
 package com.perl5.lang.perl.idea.sdk.host.os;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 class PerlWindowsHandler extends PerlOsHandler {
-  public PerlWindowsHandler(@NotNull String name) {
-    super(name);
+  public PerlWindowsHandler(@NotNull String name, @Nullable Icon icon) {
+    super(name, icon);
   }
 
   @NotNull

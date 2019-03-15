@@ -31,6 +31,15 @@ public class PerlIcons {
   public static final Icon STRAWBERRY_ICON = IconLoader.getIcon("/icons/strawberry.png");
   public static final Icon PLENV_ICON = PERL_LANGUAGE_ICON;
 
+  public static final Icon WINDOWS10_ICON = IconLoader.getIcon("/icons/windows.svg");
+  public static final Icon WINDOWS_ICON = WINDOWS10_ICON;
+  public static final Icon LINUX_ICON = IconLoader.getIcon("/icons/linux.svg");
+  public static final Icon FREEBSD_ICON = LINUX_ICON;
+  public static final Icon SOLARIS_ICON = LINUX_ICON;
+  public static final Icon UNIX_ICON = LINUX_ICON;
+  public static final Icon MAC_ICON = IconLoader.getIcon("/icons/mac.svg");
+  public static final Icon DOCKER_ICON = IconLoader.getIcon("/icons/docker.svg");
+
   public static final Icon PERL_OPTION = IconLoader.getIcon("/icons/option.png");
   public static final Icon PERL_OPTIONS = IconLoader.getIcon("/icons/options.png");
   public static final Icon TEMPLATE_ROOT = IconLoader.getIcon("/icons/templateRoot.png");

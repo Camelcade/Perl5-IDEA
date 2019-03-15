@@ -18,10 +18,13 @@ package com.perl5.lang.perl.idea.sdk.host.os;
 
 import com.intellij.execution.wsl.WSLUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.*;
 
 class PerlWindows10Handler extends PerlWindowsHandler {
-  public PerlWindows10Handler(@NotNull String name) {
-    super(name);
+  public PerlWindows10Handler(@NotNull String name, @Nullable Icon icon) {
+    super(name, icon);
   }
 
   @Override

@@ -16,12 +16,14 @@
 
 package com.perl5.lang.perl.idea.sdk.host.os;
 
+import com.perl5.PerlIcons;
+
 public interface PerlOsHandlers {
-  PerlOsHandler WINDOWS10 = new PerlWindows10Handler("Windows 10");
-  PerlOsHandler WINDOWS = new PerlWindowsHandler("Windows");
-  PerlOsHandler MACOS = new PerlBsdHandler("MacOs");
-  PerlOsHandler FREEBSD = new PerlBsdHandler("FreeBsd");
-  PerlOsHandler LINUX = new PerlLinuxHandler("Linux");
-  PerlOsHandler SOLARIS = new PerlUnixHandler("Solaris");
-  PerlOsHandler UNIX = new PerlUnixHandler("UNIX");
+  PerlOsHandler WINDOWS10 = new PerlWindows10Handler("Windows 10", PerlIcons.WINDOWS10_ICON);
+  PerlOsHandler WINDOWS = new PerlWindowsHandler("Windows", PerlIcons.WINDOWS_ICON);
+  PerlOsHandler MACOS = new PerlBsdHandler("MacOs", PerlIcons.MAC_ICON);
+  PerlOsHandler FREEBSD = new PerlBsdHandler("FreeBsd", PerlIcons.FREEBSD_ICON);
+  PerlOsHandler LINUX = new PerlLinuxHandler("Linux", PerlIcons.LINUX_ICON);
+  PerlOsHandler SOLARIS = new PerlUnixHandler("Solaris", PerlIcons.SOLARIS_ICON);
+  PerlOsHandler UNIX = new PerlUnixHandler("UNIX", PerlIcons.UNIX_ICON);
 }

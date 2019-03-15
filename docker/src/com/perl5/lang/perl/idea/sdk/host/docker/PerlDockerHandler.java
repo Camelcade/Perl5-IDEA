@@ -23,6 +23,7 @@ import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.ArrayUtil;
+import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostWithFileSystemHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
@@ -30,6 +31,7 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.List;
 
 class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, PerlDockerHandler> {
@@ -104,5 +106,11 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   @Override
   public UnnamedConfigurable getSettingsConfigurable(@NotNull Project project) {
     return new PerlDockerProjectSettingsConfigurable(project);
+  }
+
+  @Nullable
+  @Override
+  public Icon getIcon() {
+    return PerlIcons.DOCKER_ICON;
   }
 }

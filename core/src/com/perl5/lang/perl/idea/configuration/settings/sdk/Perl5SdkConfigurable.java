@@ -146,13 +146,15 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
             }
           }).collect(Collectors.toList());
 
-        return new ActionGroup(hostHandler.getMenuItemTitle(), true) {
-        @NotNull
-        @Override
-        public AnAction[] getChildren(@Nullable AnActionEvent e) {
-          return groupItems.toArray(AnAction.EMPTY_ARRAY);
-        }
-      };
+        ActionGroup hostActionGroup = new ActionGroup(hostHandler.getMenuItemTitle(), true) {
+          @NotNull
+          @Override
+          public AnAction[] getChildren(@Nullable AnActionEvent e) {
+            return groupItems.toArray(AnAction.EMPTY_ARRAY);
+          }
+        };
+        hostActionGroup.getTemplatePresentation().setIcon(hostHandler.getIcon());
+        return hostActionGroup;
     }).collect(Collectors.toList());
 
     if (groups.size() == 1) {
