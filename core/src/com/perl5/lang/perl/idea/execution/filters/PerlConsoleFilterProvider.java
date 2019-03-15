@@ -31,8 +31,8 @@ public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
   public Filter[] getDefaultFilters(@NotNull ConsoleView consoleView, @NotNull Project project, @NotNull GlobalSearchScope scope) {
     return consoleView instanceof PerlHostDataContainer ?
            new Filter[]{
-             new PerlConsoleFileLinkFilter(project, ((PerlHostDataContainer)consoleView).getHostData()),
-             new PerlAbsolutePathConsoleFilter(project, ((PerlHostDataContainer)consoleView).getHostData())
+             new PerlConsoleFileLinkFilter(project, (PerlHostDataContainer)consoleView),
+             new PerlAbsolutePathConsoleFilter(project, (PerlHostDataContainer)consoleView)
            } : Filter.EMPTY_ARRAY;
   }
 }

@@ -21,6 +21,7 @@ import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,12 +42,12 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
   @NotNull
   private final Project myProject;
 
-  @Nullable
-  private final PerlHostData myHostData;
+  @NotNull
+  private final PerlHostDataContainer myHostDataContainer;
 
-  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @Nullable PerlHostData hostData) {
+  public PerlAbsolutePathConsoleFilter(@NotNull Project project, @NotNull PerlHostDataContainer hostDataContainer) {
     myProject = project;
-    myHostData = hostData;
+    myHostDataContainer = hostDataContainer;
   }
 
   @Nullable
@@ -57,7 +58,8 @@ public class PerlAbsolutePathConsoleFilter implements Filter {
     Matcher matcher = PATTERN.matcher(line);
     while (matcher.find()) {
       String filePath;
-      filePath = myHostData == null ? matcher.group(1) : myHostData.getLocalPath(matcher.group(1));
+      PerlHostData hostData = myHostDataContainer.getHostData();
+      filePath = hostData == null ? matcher.group(1) : hostData.getLocalPath(matcher.group(1));
       resultList.add(new Result(
         startOffset + matcher.start(1),
         startOffset + matcher.end(1),
