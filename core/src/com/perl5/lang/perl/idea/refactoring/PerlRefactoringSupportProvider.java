@@ -22,6 +22,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNameIdentifierOwner;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
+import com.intellij.refactoring.RefactoringActionHandler;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition;
@@ -29,6 +30,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 23.05.2015.
@@ -82,5 +84,11 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
   @Override
   public boolean isSafeDeleteAvailable(@NotNull PsiElement element) {
     return false;
+  }
+
+  @Nullable
+  @Override
+  public RefactoringActionHandler getIntroduceVariableHandler() {
+    return new PerlIntroduceVariableHandler();
   }
 }
