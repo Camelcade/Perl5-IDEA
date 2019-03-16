@@ -60,15 +60,33 @@ public class CpanAdapter extends PackageManagerAdapter {
                                              @NotNull Project project,
                                              @NotNull Collection<String> libraryNames,
                                              @Nullable Runnable actionCallback) {
-    return new DumbAwareAction(PerlBundle.message("perl.quickfix.install.family", SCRIPT_NAME)) {
+    return new DumbAwareAction(createInstallActionTitle(libraryNames, SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        new CpanAdapter(sdk, project).install(libraryNames);
-        if (actionCallback != null) {
-          actionCallback.run();
-        }
+        installModules(sdk, project, libraryNames, actionCallback);
       }
     };
+  }
+
+  /**
+   * Installs {@code libraryNames} into {@code sdk} and invoking a {@code callback} if any
+   */
+  public static void installModules(@NotNull Sdk sdk,
+                                    @NotNull Project project,
+                                    @NotNull Collection<String> libraryNames,
+                                    @Nullable Runnable actionCallback) {
+    new CpanAdapter(sdk, project).install(libraryNames);
+    if (actionCallback != null) {
+      actionCallback.run();
+    }
+  }
+
+  /**
+   * @return action title for installing {@code libraryNames} with tool identified by {@code toolName}
+   */
+  @NotNull
+  public static String createInstallActionTitle(@NotNull Collection<String> libraryNames, @NotNull String toolName) {
+    return PerlBundle.message("perl.quickfix.install.family", toolName);
   }
 
   @Contract("null->null")

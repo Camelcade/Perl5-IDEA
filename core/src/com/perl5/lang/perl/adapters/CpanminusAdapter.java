@@ -23,7 +23,6 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -98,7 +97,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
                                              @NotNull Collection<String> libraryNames,
                                              @Nullable Runnable actionCallback) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return !isAvailable(sdk) ? null : new DumbAwareAction(PerlBundle.message("perl.quickfix.install.family", SCRIPT_NAME)) {
+    return !isAvailable(sdk) ? null : new DumbAwareAction(CpanAdapter.createInstallActionTitle(libraryNames, SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         new CpanminusAdapter(sdk, project).install(libraryNames);

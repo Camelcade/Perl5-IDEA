@@ -31,6 +31,7 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
@@ -38,6 +39,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
@@ -82,6 +84,23 @@ public class PerlRunUtil {
   private static final String MISSING_MODULE_SUFFIX = " module)";
   private static final String LEGACY_MODULE_PREFIX = "Can't locate ";
   private static final String LEGACY_MODULE_SUFFIX = " in @INC";
+  public static final String BUNDLED_MODULE_NAME = "Bundle::Camelcade";
+  // should be synchronized with https://github.com/Camelcade/Bundle-Camelcade/blob/master/dist.ini
+  private static final Set<String> BUNDLED_MODULE_PARTS = Collections.unmodifiableSet(ContainerUtil.newHashSet(
+    "App::cpanminus",
+    "App::Prove::Plugin::PassEnv",
+    "B::Deparse",
+    "Config",
+    "Devel::Cover",
+    "Devel::Camelcadedb",
+    "Devel::NYTProf",
+    "File::Find",
+    "JSON",
+    "Perl::Critic",
+    "Perl::Tidy",
+    "TAP::Formatter::Camelcade",
+    "Test::Harness"
+  ));
 
   /**
    * Builds non-patched perl command line for {@code project}'s sdk (without patching by version manager)
@@ -230,13 +249,29 @@ public class PerlRunUtil {
                                               @NotNull Sdk sdk,
                                               @NotNull Collection<String> packagesToInstall,
                                               @NotNull Notification notification) {
-    AnAction installCpanmAction =
-      ReadAction.compute(() -> CpanminusAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire));
-    if (installCpanmAction != null) {
-      notification.addAction(installCpanmAction);
+    List<AnAction> actions = new ArrayList<>();
+    ContainerUtil.addIfNotNull(actions, ReadAction.compute(
+      () -> CpanminusAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire)));
+    actions.add(CpanAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire));
+    boolean hasAlternatives = actions.size() > 1;
+
+    if (new HashSet<>(BUNDLED_MODULE_PARTS).removeAll(packagesToInstall)) {
+      actions.add(new DumbAwareAction(PerlBundle.message("perl.quickfix.install.module", BUNDLED_MODULE_NAME)) {
+        @Override
+        public void actionPerformed(@NotNull AnActionEvent e) {
+          if (hasAlternatives) {
+            notification.expire();
+            showMissingLibraryNotification(project, sdk, BUNDLED_MODULE_NAME);
+          }
+          else {
+            CpanAdapter.installModules(sdk, project, packagesToInstall, notification::expire);
+          }
+        }
+      });
     }
-    Notifications.Bus.notify(
-      notification.addAction(CpanAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire)), project);
+
+    actions.forEach(notification::addAction);
+    Notifications.Bus.notify(notification, project);
   }
 
 
