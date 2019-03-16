@@ -4,7 +4,7 @@
 
 This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/). 
 
-Current versions of plugins may be found tn [JetBrains repo](https://plugins.jetbrains.com/).
+Current versions of plugins may be found in [JetBrains repo](https://plugins.jetbrains.com/).
 
 #### This repository contains following plugins:
 
