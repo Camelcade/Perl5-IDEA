@@ -237,6 +237,9 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
   @Override
   protected void checkConfigurationScriptPath() throws RuntimeConfigurationException {
+    if (StringUtil.isEmptyOrSpaces(getScriptPath())) {
+      throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.test.set"));
+    }
     if (computeTargetFiles().isEmpty()) {
       throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.tests.found"));
     }
@@ -244,6 +247,7 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
   @Override
   public void checkConfiguration() throws RuntimeConfigurationException {
+    super.checkConfiguration();
     try {
       if (PerlRunUtil.findScript(getEffectiveSdk(), PROVE) == null) {
         throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.prove.found"));

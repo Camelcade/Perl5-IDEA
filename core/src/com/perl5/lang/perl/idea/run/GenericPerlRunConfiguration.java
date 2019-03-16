@@ -492,6 +492,9 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
    * @throws RuntimeConfigurationException with human-readable error message
    */
   protected void checkConfigurationScriptPath() throws RuntimeConfigurationException {
+    if (StringUtil.isEmptyOrSpaces(getScriptPath())) {
+      throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.script.set"));
+    }
     if (computeTargetFiles().isEmpty()) {
       throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.script.found", getScriptPath()));
     }
