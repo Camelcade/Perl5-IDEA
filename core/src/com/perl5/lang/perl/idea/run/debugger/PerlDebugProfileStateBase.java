@@ -43,4 +43,9 @@ public abstract class PerlDebugProfileStateBase extends PerlRunProfileState {
   public PerlDebugOptions getDebugOptions() {
     return (PerlDebugOptions)getEnvironment().getRunProfile();
   }
+
+  @Override
+  public boolean isParallelRunAllowed() {
+    return false;
+  }
 }

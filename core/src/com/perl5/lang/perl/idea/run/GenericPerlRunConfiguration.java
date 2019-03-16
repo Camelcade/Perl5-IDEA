@@ -325,14 +325,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myIsCompileTimeBreakpointsEnabled = compileTimeBreakpointsEnabled;
   }
 
-
   @NotNull
-  public PerlCommandLine createCommandLine(@NotNull Project project,
-                                           @NotNull List<String> additionalPerlParameters,
-                                           @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
-    PerlCommandLine commandLine = createBaseCommandLine(project, additionalPerlParameters, additionalEnvironmentVariables);
+  public PerlCommandLine createCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
+    PerlCommandLine commandLine = createBaseCommandLine(perlRunProfileState);
     commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
-    commandLine.withWorkDirectory(computeWorkingDirectory(project));
+    commandLine.withWorkDirectory(computeWorkingDirectory(perlRunProfileState.getEnvironment().getProject()));
     commandLine.withCharset(computeCharset());
 
     return commandLine.withPty(isUsePty());
@@ -368,9 +365,12 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   }
 
   @NotNull
-  protected PerlCommandLine createBaseCommandLine(@NotNull Project project,
-                                                  @NotNull List<String> additionalPerlParameters,
-                                                  @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
+  protected PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
+    ExecutionEnvironment executionEnvironment = perlRunProfileState.getEnvironment();
+    Project project = executionEnvironment.getProject();
+    List<String> additionalPerlParameters = perlRunProfileState.getAdditionalPerlParameters(this);
+    Map<String, String> additionalEnvironmentVariables = perlRunProfileState.getAdditionalEnvironmentVariables();
+
     PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
       project, getEffectiveSdk(), computeNonNullScriptFile(), ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters),
       getScriptParameters());

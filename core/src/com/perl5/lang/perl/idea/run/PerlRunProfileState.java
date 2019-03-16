@@ -25,7 +25,6 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.ConsoleView;
-import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
@@ -75,9 +74,7 @@ public class PerlRunProfileState extends CommandLineState {
 
   @NotNull
   protected PerlCommandLine createCommandLine() throws ExecutionException {
-    GenericPerlRunConfiguration runConfiguration = (GenericPerlRunConfiguration)getEnvironment().getRunProfile();
-    Project project = getEnvironment().getProject();
-    return runConfiguration.createCommandLine(project, getAdditionalPerlParameters(runConfiguration), getAdditionalEnvironmentVariables());
+    return ((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).createCommandLine(this);
   }
 
   @Nullable
@@ -87,12 +84,18 @@ public class PerlRunProfileState extends CommandLineState {
   }
 
   @NotNull
-  protected List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
+  public List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
     return Collections.emptyList();
   }
 
-
-  protected Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
+  public Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
     return Collections.emptyMap();
+  }
+
+  /**
+   * @return true iff this state allows parallel running of inner processes
+   */
+  public boolean isParallelRunAllowed() {
+    return true;
   }
 }

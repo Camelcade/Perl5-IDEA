@@ -37,7 +37,7 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
 
   @NotNull
   @Override
-  protected List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
+  public List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) throws ExecutionException {
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
@@ -45,5 +45,10 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
     PerlHostData hostData = PerlHostData.notNullFrom(effectiveSdk);
 
     return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
+  }
+
+  @Override
+  public boolean isParallelRunAllowed() {
+    return false;
   }
 }

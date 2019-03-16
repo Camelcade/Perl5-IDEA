@@ -16,6 +16,20 @@
       </li>
     </ul>
   </li>
+  <li>Tests running, by
+    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/805">@dimentox</a> and <a
+        href="https://github.com/Camelcade/Perl5-IDEA/issues/1935">@tomk3003</a>
+    <ul>
+      <li><code>Run Configuration</code> to run tests using <code>prove</code> with default IDE tests result UI, (requires <a
+          href="https://metacpan.org/release/TAP-Formatter-Camelcade"><code>Tap::Formatter::Camelcade</code></a>).
+      </li>
+      <li>Diff window for a test failure output: got/expected.</li>
+      <li>Parallel tests running.</li>
+      <li>Debugging tests (parallel running suppressed).</li>
+      <li>Runing tests with coverage (parallel running suppressed).</li>
+    </ul>
+
+  </li>
   <li>Automatic injections can now be configured for strings and heredocs using java regular expressions in <code>File | Settings | Editor |
     Language Injections</code>,
     by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1878">@Christoffen</a>.
@@ -47,11 +61,6 @@
   <li>Improved resolve for <code>File::Spec::Functions</code> subs. Actual module has tricky exporting, binding OS-specific implementation
     in runtime. Plugin for now resolves to the Unix implementations from the <code>File::Spec::Unix</code>, by <a
         href="https://github.com/Camelcade/Perl5-IDEA/issues/1393">@grakkpl</a>.
-  </li>
-  <li><code>Test Run Configuration</code> allows you to run, debug and run with coverage any tests with <code>prove</code>, by
-    <a href="https://github.com/Camelcade/Perl5-IDEA/issues/805">@dimentox</a> and <a
-        href="https://github.com/Camelcade/Perl5-IDEA/issues/1935">@tomk3003</a>
-    (Requires <a href="https://metacpan.org/release/TAP-Formatter-Camelcade"><code>Tap::Formatter::Camelcade</code></a>).
   </li>
 </ul>
 <p>Fixes:</p>

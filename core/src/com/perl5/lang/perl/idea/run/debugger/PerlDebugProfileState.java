@@ -67,7 +67,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
 
   @NotNull
   @Override
-  protected List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
+  public List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
     return Collections.singletonList(DEBUG_ARGUMENT);
   }
 
@@ -78,7 +78,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   }
 
   @Override
-  protected Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
+  public Map<String, String> getAdditionalEnvironmentVariables() throws ExecutionException {
     Map<String, String> stringStringMap = new HashMap<>();
     PerlDebugOptions debugOptions = getDebugOptions();
     stringStringMap.put(PERL5_DEBUG_ROLE, debugOptions.getPerlRole());

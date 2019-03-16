@@ -22,6 +22,7 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil;
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
 import com.intellij.execution.ui.ConsoleView;
@@ -104,9 +105,11 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
   @NotNull
   @Override
-  protected PerlCommandLine createBaseCommandLine(@NotNull Project project,
-                                                  @NotNull List<String> additionalPerlParameters,
-                                                  @NotNull Map<String, String> additionalEnvironmentVariables) throws ExecutionException {
+  protected PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
+    ExecutionEnvironment executionEnvironment = perlRunProfileState.getEnvironment();
+    Project project = executionEnvironment.getProject();
+    List<String> additionalPerlParameters = perlRunProfileState.getAdditionalPerlParameters(this);
+    Map<String, String> additionalEnvironmentVariables = perlRunProfileState.getAdditionalEnvironmentVariables();
 
     Sdk perlSdk = getEffectiveSdk();
     VirtualFile proveScript = PerlRunUtil.findLibraryScriptWithNotification(perlSdk, getProject(), PROVE, TEST_HARNESS);
@@ -124,7 +127,7 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     Set<String> proveParameters = new LinkedHashSet<>(PROVE_DEFAULT_PARAMETERS);
     proveParameters.addAll(getScriptParameters());
     proveParameters.add(PROVE_JOBS_PARAMETER);
-    proveParameters.add(Integer.toString(getJobsNumber()));
+    proveParameters.add(Integer.toString(perlRunProfileState.isParallelRunAllowed() ? getJobsNumber() : 1));
     VirtualFile workingDirectory = computeExplicitWorkingDirectory();
 
     List<String> testsPaths = new ArrayList<>();
