@@ -167,3 +167,7 @@ sourceSets {
         resources.srcDirs file('testData')
     }
 }
+
+task publishAllPlugins{
+    subprojects.each {dependsOn("${it.name}:publishPlugin")}
+}
