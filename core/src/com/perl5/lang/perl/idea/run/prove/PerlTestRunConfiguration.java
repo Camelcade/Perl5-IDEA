@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.run.prove;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
@@ -117,11 +118,6 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       throw new ExecutionException(PerlBundle.message("perl.run.error.prove.missing", perlSdk.getName()));
     }
 
-    String interpreterPath = PerlProjectManager.getInterpreterPath(perlSdk);
-    if (StringUtil.isEmpty(interpreterPath)) {
-      throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", getEffectiveSdk()));
-    }
-
     PerlHostData<?, ?> perlHostData = PerlHostData.notNullFrom(perlSdk);
 
     Set<String> proveParameters = new LinkedHashSet<>(PROVE_DEFAULT_PARAMETERS);
@@ -144,7 +140,7 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       }
     }
 
-    PerlCommandLine commandLine = new PerlCommandLine(interpreterPath)
+    PerlCommandLine commandLine = new PerlCommandLine(getEffectiveInterpreterPath())
       .withParameters(perlHostData.getRemotePath(proveScript.getPath()))
       .withParameters(proveParameters)
       .withParameters(testsPaths)
@@ -237,5 +233,24 @@ class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       LOG.warn("Missing effective sdk for test configuration: " + getName());
     }
     return processHandler;
+  }
+
+  @Override
+  protected void checkConfigurationScriptPath() throws RuntimeConfigurationException {
+    if (computeTargetFiles().isEmpty()) {
+      throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.tests.found"));
+    }
+  }
+
+  @Override
+  public void checkConfiguration() throws RuntimeConfigurationException {
+    try {
+      if (PerlRunUtil.findScript(getEffectiveSdk(), PROVE) == null) {
+        throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.prove.found"));
+      }
+    }
+    catch (ExecutionException e) {
+      throw new RuntimeConfigurationException(e.getMessage());
+    }
   }
 }

@@ -23,6 +23,7 @@ import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.LocatableConfigurationBase;
 import com.intellij.execution.configurations.RunProfile;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -121,11 +122,28 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return new PerlRunProfileState(executionEnvironment);
   }
 
+  /**
+   * @return local path to the perl interpreter for this run configuration
+   * @throws ExecutionException with human readable error message if interpreter path is empty
+   */
+  @NotNull
+  protected String getEffectiveInterpreterPath() throws ExecutionException {
+    Sdk effectiveSdk = getEffectiveSdk();
+    String interpreterPath = PerlProjectManager.getInterpreterPath(effectiveSdk);
+    if (StringUtil.isEmpty(interpreterPath)) {
+      throw new ExecutionException(PerlBundle.message("perl.run.error.no.interpreter.path", effectiveSdk));
+    }
+    return interpreterPath;
+  }
+
   @NotNull
   public Sdk getEffectiveSdk() throws ExecutionException {
     Sdk perlSdk;
     if (isUseAlternativeSdk()) {
       String alternativeSdkName = getAlternativeSdkName();
+      if (StringUtil.isEmpty(alternativeSdkName)) {
+        throw new ExecutionException(PerlBundle.message("perl.run.error.no.alternative.sdk.selected"));
+      }
       perlSdk = PerlSdkTable.getInstance().findJdk(alternativeSdkName);
       if (perlSdk == null) {
         throw new ExecutionException(PerlBundle.message("perl.run.error.no.alternative.sdk", alternativeSdkName));
@@ -463,6 +481,28 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @NotNull
   protected ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler, @NotNull PerlRunProfileState runProfileState) {
     return processHandler;
+  }
+
+  /**
+   * Method checks if specified script(s) path is ok.
+   *
+   * @throws RuntimeConfigurationException with human-readable error message
+   */
+  protected void checkConfigurationScriptPath() throws RuntimeConfigurationException {
+    if (computeTargetFiles().isEmpty()) {
+      throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.script.found", getScriptPath()));
+    }
+  }
+
+  @Override
+  public void checkConfiguration() throws RuntimeConfigurationException {
+    checkConfigurationScriptPath();
+    try {
+      getEffectiveInterpreterPath();
+    }
+    catch (ExecutionException e) {
+      throw new RuntimeConfigurationException(e.getMessage());
+    }
   }
 
   /**
