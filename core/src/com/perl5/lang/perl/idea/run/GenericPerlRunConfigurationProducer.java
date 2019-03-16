@@ -78,7 +78,8 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
 
   @Override
   public boolean isConfigurationFromContext(Configuration runConfiguration, ConfigurationContext configurationContext) {
-    return Comparing.equal(runConfiguration.computeTargetFiles(), computeTargetFiles(configurationContext));
+    List<VirtualFile> targetFiles = computeTargetFiles(configurationContext);
+    return !targetFiles.isEmpty() && Comparing.equal(runConfiguration.computeTargetFiles(), targetFiles);
   }
 
   @Override
