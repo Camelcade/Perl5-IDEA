@@ -444,7 +444,10 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
    * @return list of VirtualFiles pointed by  {@code paths} joined with pipe. Reverse of {@link #computePathsFromVirtualFiles(List)}
    */
   @NotNull
-  public static List<VirtualFile> computeVirtualFilesFromPaths(@NotNull String paths) {
+  public static List<VirtualFile> computeVirtualFilesFromPaths(@Nullable String paths) {
+    if (StringUtil.isEmpty(paths)) {
+      return Collections.emptyList();
+    }
     List<String> pathNames = FILES_PARSER.fun(paths);
     if (pathNames.isEmpty()) {
       return Collections.emptyList();
