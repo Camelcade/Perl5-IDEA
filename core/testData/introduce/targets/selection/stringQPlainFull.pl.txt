@@ -1,0 +1,3 @@
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 4 in stringQPlainFull.pl
+    (0,11)
+    ''something''

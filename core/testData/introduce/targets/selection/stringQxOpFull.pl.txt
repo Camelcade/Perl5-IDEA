@@ -1,0 +1,3 @@
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 4 in stringQxOpFull.pl
+    (0,14)
+    'qx /something/'

@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 20.09.2015.
@@ -41,5 +43,23 @@ public class PerlStringBareMixin extends PerlCompositeElementImpl implements Per
   public PsiReference getReference() {
     PsiReference[] references = getReferences();
     return references.length == 0 ? null : references[0];
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getFirstContentToken() {
+    return getFirstChild();
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getOpenQuoteElement() {
+    return null;
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getCloseQuoteElement() {
+    return null;
   }
 }

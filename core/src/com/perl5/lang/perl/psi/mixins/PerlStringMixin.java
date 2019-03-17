@@ -25,7 +25,9 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 08.08.2015.
@@ -62,5 +64,39 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
     }
 
     return true;
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getFirstContentToken() {
+    PsiElement openQuote = getOpenQuoteElement();
+    if (openQuote == null) {
+      return null;
+    }
+    PsiElement nextSibling = openQuote.getNextSibling();
+    return nextSibling == null || nextSibling.equals(getCloseQuoteElement()) ? null : nextSibling;
+  }
+
+  // fixme see #1981
+  @Nullable
+  @Override
+  public PsiElement getOpenQuoteElement() {
+    PsiElement run = getFirstChild();
+
+    while (run != null) {
+      if (PerlParserUtil.OPEN_QUOTES.contains(PsiUtilCore.getElementType(run))) {
+        return run;
+      }
+      run = run.getNextSibling();
+    }
+    return null;
+  }
+
+  // fixme see #1981
+  @Nullable
+  @Override
+  public PsiElement getCloseQuoteElement() {
+    PsiElement lastChild = getLastChild();
+    return lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
   }
 }

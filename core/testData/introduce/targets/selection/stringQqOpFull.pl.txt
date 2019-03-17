@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 4 in stringQqOpFull.pl
+    (0,14)
+    'qq <something>'

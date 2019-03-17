@@ -1,0 +1,28 @@
+if( <occurrence>"someline"</occurrence> eq $a){
+    $b = <occurrence>"someline"</occurrence>."otherline";
+    say <occurrence>"someline"</occurrence>;
+}
+elsif(<occurrence>qq /someline/</occurrence>){
+    $b = <occurrence>qq"someline"</occurrence>."otherline";
+    say <occurrence>"someline"</occurrence>;
+}
+elsif( <occurrence>'someline'</occurrence> eq $a){
+    $b = <occurrence>'someline'</occurrence>."otherline";
+    say <occurrence>'someline'</occurrence>;
+}
+elsif(<occurrence>q /someline/</occurrence>){
+    $b = <occurrence>q {someline}</occurrence>."otherline";
+    say <occurrence>q <someline></occurrence>;
+}
+elsif( `someline` eq $a){
+    $b = `someline`."otherline";
+    say `someline`;
+}
+elsif(qx /someline/){
+    $b = qx {someline}."otherline";
+    say qx <someline>;
+}
+elsif( <occurrence>someline</occurrence> => $a){
+    my @b = <occurrence>someline</occurrence> => "otherline";
+    say <occurrence>someline</occurrence> => 42;
+}

@@ -1,4 +1,4 @@
-if( "someline" eq $a){
-    $b = "someline"."otherline";
-    say "someline";
+if( <occurrence>"someline"</occurrence> eq $a){
+    $b = <occurrence>"someline"</occurrence>."otherline";
+    say <occurrence>"someline"</occurrence>;
 }

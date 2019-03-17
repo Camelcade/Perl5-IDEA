@@ -29,7 +29,7 @@ public interface PerlQuoted extends PsiElement {
    * @return open quote element if any
    */
   @Nullable
-  default PsiElement getOpenQuote() {
+  default PsiElement getOpenQuoteElement() {
     PsiElement run = getFirstChild();
 
     while (run != null) {
@@ -45,7 +45,7 @@ public interface PerlQuoted extends PsiElement {
    * @return close quote element if any
    */
   @Nullable
-  default PsiElement getCloseQuote() {
+  default PsiElement getCloseQuoteElement() {
     PsiElement lastChild = getLastChild();
     return lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(PsiUtilCore.getElementType(lastChild)) ? lastChild : null;
   }

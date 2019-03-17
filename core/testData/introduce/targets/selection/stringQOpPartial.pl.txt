@@ -1,0 +1,3 @@
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 4 in stringQOpPartial.pl
+    (0,13)
+    'q /something/'

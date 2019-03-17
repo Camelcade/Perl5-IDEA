@@ -74,11 +74,11 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 
   @Nullable
   private PsiElement getClosingQuote(@NotNull PerlStringMixin element) {
-    return element.getCloseQuote();
+    return element.getCloseQuoteElement();
   }
 
   @NotNull
   public PsiElement getOpeningQuote(@NotNull PerlStringMixin element) {
-    return Objects.requireNonNull(element.getOpenQuote(), element.getText());
+    return Objects.requireNonNull(element.getOpenQuoteElement(), element.getText());
   }
 }

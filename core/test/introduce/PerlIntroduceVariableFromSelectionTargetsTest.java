@@ -23,4 +23,30 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
   }
 
   public void testQqStringWithVariableMiddle() {doTest();}
+
+  public void testStringQOpFull() {doTest();}
+
+  public void testStringQOpPartial() {doTest();}
+
+  public void testStringQPlainFull() {doTest();}
+
+  public void testStringQqOpFull() {doTest();}
+
+  public void testStringQqOpPartial() {doTest();}
+
+  public void testStringQqPlainFull() {doTest();}
+
+  public void testStringQwOpFull() {doTest();}
+
+  public void testStringQwOpPartial() {doTest();}
+
+  public void testStringQxOpFull() {doTest();}
+
+  public void testStringQxOpPartial() {doTest();}
+
+  public void testStringQxPlainFull() {doTest();}
+
+  public void testStringBareFull() {doTest();}
+
+  public void testStringBarePartial() {doTest();}
 }

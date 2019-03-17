@@ -24,8 +24,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Pass;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -40,6 +41,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -130,9 +132,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    */
   @NotNull
   public List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
-    // fixme simple matching
     // fixme matching with range
-    // fixme matching with different syntax. E.g. qw/test1 test2/; is the same as ('test1', 'test2');
     PsiElement targetElement = target.getPlace();
     PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
     if (scope == null) {
@@ -146,7 +146,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     scope.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitElement(@NotNull PsiElement element) {
-        if (target.isFullRange() && areElementsSame(targetElement, element)) {
+        if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
           result.add(PerlIntroduceTarget.create(element));
         }
         else {
@@ -155,40 +155,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       }
     });
     return result;
-  }
-
-  /**
-   * @return true iff {@code elmentToCompare} is equal to {@code targetElement}
-   */
-  private boolean areElementsSame(@NotNull PsiElement targetElement, @NotNull PsiElement elementToCompare) {
-    if (!targetElement.getClass().equals(elementToCompare.getClass())) {
-      return false;
-    }
-    PsiElement targetElementRun = targetElement.getFirstChild();
-    PsiElement elementToCompareRun = elementToCompare.getFirstChild();
-    if (targetElementRun == null) {
-      return elementToCompareRun == null &&
-             StringUtil.equals(targetElement.getNode().getChars(), elementToCompare.getNode().getChars());
-    }
-    while (targetElementRun != null && elementToCompareRun != null) {
-      while (targetElementRun instanceof PsiWhiteSpace || targetElementRun instanceof PsiComment) {
-        targetElementRun = targetElementRun.getNextSibling();
-      }
-      while (elementToCompareRun instanceof PsiWhiteSpace || elementToCompareRun instanceof PsiComment) {
-        elementToCompareRun = elementToCompareRun.getNextSibling();
-      }
-      if (targetElementRun == null || elementToCompareRun == null) {
-        break;
-      }
-
-      if (!areElementsSame(targetElementRun, elementToCompareRun)) {
-        return false;
-      }
-
-      targetElementRun = targetElementRun.getNextSibling();
-      elementToCompareRun = elementToCompareRun.getNextSibling();
-    }
-    return targetElementRun == null && elementToCompareRun == null;
   }
 
   /**
@@ -214,9 +180,9 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         }
       }
       else if (run instanceof PerlQuoted) {
-        PsiElement stringRun = ((PerlQuoted)run).getOpenQuote();
+        PsiElement stringRun = ((PerlQuoted)run).getOpenQuoteElement();
         if (stringRun != null) {
-          PsiElement closeQuote = ((PerlQuoted)run).getCloseQuote();
+          PsiElement closeQuote = ((PerlQuoted)run).getCloseQuoteElement();
           PsiElement firstStringElement = stringRun.getNextSibling();
           while ((stringRun = stringRun.getNextSibling()) != null && !stringRun.equals(closeQuote)) {
             IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
@@ -259,6 +225,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     return targets;
   }
 
+  // fixme need to handle spaces in case {@code say <selection> expr </selection>}
   @NotNull
   private List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(Editor editor, PsiFile file) {
     SelectionModel selectionModel = editor.getSelectionModel();
@@ -278,17 +245,30 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, true);
     }
     if (wrappingExpression == null) {
+      // fixme try to find usages by caret in selection
       return Collections.emptyList();
     }
 
     TextRange selectionRange = TextRange.create(selectionStart, selectionEnd);
     IElementType wrappingExpressionElementType = PsiUtilCore.getElementType(wrappingExpression);
+    if (wrappingExpression instanceof PsiPerlStringBare) {
+      TextRange intersectedRange = selectionRange.intersection(wrappingExpression.getTextRange());
+      if (intersectedRange == null) {
+        return Collections.emptyList();
+      }
+      return Collections.singletonList(PerlIntroduceTarget.create(
+        wrappingExpression, intersectedRange.shiftLeft(wrappingExpression.getTextOffset())));
+    }
     if (wrappingExpression instanceof PerlQuoted) {
-      PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuote();
+      PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuoteElement();
       if (run == null) {
         return Collections.emptyList();
       }
-      PsiElement closeQuote = ((PerlQuoted)wrappingExpression).getCloseQuote();
+      PsiElement closeQuote = ((PerlQuoted)wrappingExpression).getCloseQuoteElement();
+      if (selectionRange.contains(run.getTextRange()) && (closeQuote == null || selectionRange.contains(closeQuote.getTextRange()))) {
+        return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
+      }
+
       int startOffset = -1;
       int endOffset = -1;
       while ((run = run.getNextSibling()) != null) {

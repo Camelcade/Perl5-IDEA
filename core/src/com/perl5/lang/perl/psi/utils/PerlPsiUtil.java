@@ -674,6 +674,86 @@ public class PerlPsiUtil implements PerlElementTypes {
     return PsiTreeUtil.isAncestor(existingElement, possibleElement, true) ? possibleElement : existingElement;
   }
 
+  /**
+   * @return true iff {@code elementToCompare} is equal to {@code targetElement}
+   */
+  public static boolean areElementsSame(@NotNull PsiElement targetElement, @NotNull PsiElement elementToCompare) {
+    if (targetElement.equals(elementToCompare)) {
+      return true;
+    }
+    if (targetElement instanceof PerlString) {
+      return areStringElementsSame((PerlString)targetElement, elementToCompare);
+    }
+    return areGenericElementsSame(targetElement, elementToCompare);
+  }
+
+  /**
+   * @return true iff {@code targetString} is non-qx string and represents the same string as {@code elementToCompare}
+   * todo take escaping with different quotes into account
+   */
+  private static boolean areStringElementsSame(@NotNull PerlString targetString, @NotNull PsiElement elementToCompare) {
+    if ((targetString instanceof PsiPerlStringXq || elementToCompare instanceof PsiPerlStringXq)
+        && !targetString.getClass().equals(elementToCompare.getClass())) {
+      return false;
+    }
+    if (!(elementToCompare instanceof PerlString)) {
+      return false;
+    }
+
+    PsiElement targetRun = targetString.getFirstContentToken();
+    PsiElement runToCompare = ((PerlString)elementToCompare).getFirstContentToken();
+    PsiElement targetCloseQuoteElement = targetString.getCloseQuoteElement();
+    PsiElement elementToCompareCloseQuoteElement = ((PerlString)elementToCompare).getCloseQuoteElement();
+
+    while (targetRun != null && runToCompare != null) {
+      if (targetRun.equals(targetCloseQuoteElement) && runToCompare.equals(elementToCompareCloseQuoteElement)) {
+        return true;
+      }
+
+      if (!areElementsSame(targetRun, runToCompare)) {
+        return false;
+      }
+      targetRun = targetRun.getNextSibling();
+      runToCompare = runToCompare.getNextSibling();
+    }
+
+    return (targetRun == null || targetRun.equals(targetCloseQuoteElement)) &&
+           (runToCompare == null || runToCompare.equals(elementToCompareCloseQuoteElement));
+  }
+
+  /**
+   * @return true iff {@code targetElement} equals {@code elementToCompare} in generic way (same tree)
+   */
+  private static boolean areGenericElementsSame(@NotNull PsiElement targetElement, @NotNull PsiElement elementToCompare) {
+    if (!targetElement.getClass().equals(elementToCompare.getClass())) {
+      return false;
+    }
+    PsiElement targetElementRun = targetElement.getFirstChild();
+    PsiElement elementToCompareRun = elementToCompare.getFirstChild();
+    if (targetElementRun == null) {
+      return elementToCompareRun == null &&
+             StringUtil.equals(targetElement.getNode().getChars(), elementToCompare.getNode().getChars());
+    }
+    while (targetElementRun != null && elementToCompareRun != null) {
+      while (targetElementRun instanceof PsiWhiteSpace || targetElementRun instanceof PsiComment) {
+        targetElementRun = targetElementRun.getNextSibling();
+      }
+      while (elementToCompareRun instanceof PsiWhiteSpace || elementToCompareRun instanceof PsiComment) {
+        elementToCompareRun = elementToCompareRun.getNextSibling();
+      }
+      if (targetElementRun == null || elementToCompareRun == null) {
+        break;
+      }
+
+      if (!areElementsSame(targetElementRun, elementToCompareRun)) {
+        return false;
+      }
+
+      targetElementRun = targetElementRun.getNextSibling();
+      elementToCompareRun = elementToCompareRun.getNextSibling();
+    }
+    return targetElementRun == null && elementToCompareRun == null;
+  }
 
   static public abstract class HeredocProcessor implements Processor<PsiElement> {
     protected final int lineEndOffset;

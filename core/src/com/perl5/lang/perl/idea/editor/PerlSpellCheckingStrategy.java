@@ -54,7 +54,6 @@ public class PerlSpellCheckingStrategy extends SpellcheckingStrategy {
       if (lightNameIdentifierOwner != null) {
         return IDENTIFIER_TOKENIZER;
       }
-      ;
 
       if (element.getParent() instanceof PerlStringBareMixin) {
         return TEXT_TOKENIZER;
