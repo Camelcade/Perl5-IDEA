@@ -1,0 +1,3 @@
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 0 in declarationState.pl
+    (0,15)
+    'state $var =123'

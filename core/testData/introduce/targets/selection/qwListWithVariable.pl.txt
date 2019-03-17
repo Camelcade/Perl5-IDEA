@@ -1,0 +1,3 @@
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
+    (10,32)
+    'is some $variable text'

@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in plainStringQQWithVariable.pl
+    (9,23)
+    'some $variable'

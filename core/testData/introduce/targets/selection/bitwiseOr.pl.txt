@@ -1,0 +1,3 @@
+PsiPerlBitwiseOrXorExprImpl(Perl5: BITWISE_OR_XOR_EXPR) at 8 in bitwiseOr.pl
+    (4,17)
+    '2 | 3 | 4 | 5'

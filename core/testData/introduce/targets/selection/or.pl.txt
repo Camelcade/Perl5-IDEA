@@ -1,0 +1,3 @@
+PsiPerlOrExprImpl(Perl5: OR_EXPR) at 8 in or.pl
+    (10,21)
+    '3 || 4 || 5'

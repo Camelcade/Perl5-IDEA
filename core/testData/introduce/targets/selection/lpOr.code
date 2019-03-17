@@ -1,0 +1,1 @@
+my $a = 1 or <selection>2 or <caret>3 or 4</selection> or 5 or 6;

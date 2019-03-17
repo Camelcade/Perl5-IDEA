@@ -1,0 +1,3 @@
+PsiPerlBitwiseAndExprImpl(Perl5: BITWISE_AND_EXPR) at 8 in bitwiseAnd.pl
+    (4,9)
+    '2 & 3'

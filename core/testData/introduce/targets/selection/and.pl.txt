@@ -1,0 +1,3 @@
+PsiPerlAndExprImpl(Perl5: AND_EXPR) at 8 in and.pl
+    (10,16)
+    '3 && 4'

@@ -1,0 +1,1 @@
+say 'hi' if $expr > 1 && <selection>$bla < <caret>1</selection>;

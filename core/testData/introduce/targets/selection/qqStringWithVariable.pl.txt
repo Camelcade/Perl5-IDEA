@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in qqStringWithVariable.pl
+    (10,28)
+    'is some $variable '

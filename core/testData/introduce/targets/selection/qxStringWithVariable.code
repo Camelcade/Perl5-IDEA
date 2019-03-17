@@ -1,0 +1,1 @@
+qx /This <selection>is some<caret> $variable te</selection>xt tail/;

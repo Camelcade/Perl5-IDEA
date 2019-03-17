@@ -1,0 +1,3 @@
+PsiPerlLpAndExprImpl(Perl5: LP_AND_EXPR) at 0 in lpAnd.pl
+    (20,27)
+    '3 and 4'

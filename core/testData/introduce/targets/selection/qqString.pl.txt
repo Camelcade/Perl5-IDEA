@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in qqString.pl
+    (10,17)
+    'is some'

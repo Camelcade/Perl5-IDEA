@@ -1,0 +1,3 @@
+PsiPerlAddExprImpl(Perl5: ADD_EXPR) at 8 in plus.pl
+    (4,13)
+    '2 + 3 + 4'

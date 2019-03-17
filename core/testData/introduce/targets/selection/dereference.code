@@ -1,0 +1,1 @@
+$some->method1-><selection>m<caret>ethod2->method3</selection>->method5;

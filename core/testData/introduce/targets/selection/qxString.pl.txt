@@ -1,0 +1,3 @@
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxString.pl
+    (9,17)
+    'is some '

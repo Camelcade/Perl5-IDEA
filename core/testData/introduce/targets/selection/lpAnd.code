@@ -1,0 +1,1 @@
+my $a = 1 and 2 and <selection>3 <caret>and 4</selection> and 5 and 6;

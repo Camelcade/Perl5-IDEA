@@ -1,0 +1,3 @@
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qStringWithVariable.pl
+    (8,30)
+    'is some $variable text'

@@ -1,0 +1,1 @@
+qw / This <selection>is some <caret>$variable text</selection> tail/;

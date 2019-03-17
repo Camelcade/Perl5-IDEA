@@ -1,0 +1,3 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 9 in condition.pl
+    (0,2)
+    '$b'

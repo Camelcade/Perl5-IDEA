@@ -1,0 +1,3 @@
+PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) at 0 in dereference.pl
+    (0,32)
+    '$some->method1->method2->method3'

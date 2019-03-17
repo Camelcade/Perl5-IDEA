@@ -1,0 +1,1 @@
+my $a = 1 << <selection>2 <<<caret> 3 << 4 <<</selection> 5 << 6;

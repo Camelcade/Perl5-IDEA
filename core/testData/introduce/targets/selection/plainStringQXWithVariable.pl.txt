@@ -1,0 +1,3 @@
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQXWithVariable.pl
+    (9,28)
+    'some $variable text'

@@ -1,0 +1,3 @@
+PsiPerlMulExprImpl(Perl5: MUL_EXPR) at 8 in mul.pl
+    (8,13)
+    '3 * 4'

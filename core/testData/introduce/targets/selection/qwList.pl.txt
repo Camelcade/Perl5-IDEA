@@ -1,0 +1,3 @@
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwList.pl
+    (10,22)
+    'is some text'

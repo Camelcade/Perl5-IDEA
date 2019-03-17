@@ -23,10 +23,10 @@ import com.perl5.lang.perl.idea.refactoring.PerlIntroduceVariableHandler;
 
 import java.util.List;
 
-public class PerlIntroduceVariableTargetsTest extends PerlLightTestCase {
+public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/introduce/targets";
+    return "testData/introduce/targets/caret";
   }
 
   public void testAnd() {doTest();}
@@ -38,6 +38,14 @@ public class PerlIntroduceVariableTargetsTest extends PerlLightTestCase {
   public void testCondition() {doTest();}
 
   public void testConstructorCall() {doTest();}
+
+  public void testDeclarationLocal() {doTest();}
+
+  public void testDeclarationMy() {doTest();}
+
+  public void testDeclarationOur() {doTest();}
+
+  public void testDeclarationState() {doTest();}
 
   public void testDereference() {doTest();}
 
@@ -89,8 +97,7 @@ public class PerlIntroduceVariableTargetsTest extends PerlLightTestCase {
 
   public void testShift() {doTest();}
 
-
-  private void doTest() {
+  protected void doTest() {
     initWithFileSmartWithoutErrors();
     PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
     List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());

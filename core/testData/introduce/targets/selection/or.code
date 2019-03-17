@@ -1,0 +1,1 @@
+my $a = 1 || 2<selection> || 3 |<caret>| 4 || 5 </selection>|| 6;

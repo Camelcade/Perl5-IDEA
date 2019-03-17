@@ -1,0 +1,3 @@
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 0 in parenthesizedArguments.pl
+    (0,18)
+    'somesub(1,2,3,4,5)'

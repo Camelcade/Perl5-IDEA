@@ -1,0 +1,3 @@
+PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR) at 25 in ifModifier.pl
+    (0,8)
+    '$bla < 1'

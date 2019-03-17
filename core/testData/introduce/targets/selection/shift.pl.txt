@@ -1,0 +1,3 @@
+PsiPerlShiftExprImpl(Perl5: SHIFT_EXPR) at 8 in shift.pl
+    (5,16)
+    '2 << 3 << 4'
