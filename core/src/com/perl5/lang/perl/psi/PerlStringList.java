@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.List;
 /**
  * Created by hurricup on 24.05.2016.
  */
-public interface PerlStringList extends PsiElement {
+public interface PerlStringList extends PerlQuoted {
   /**
    * Collects string contents
    *

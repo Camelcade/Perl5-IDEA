@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.psi.PsiElement;
-
 /**
  * Created by hurricup on 08.08.2015.
  */
-public interface PerlString extends PsiElement {
+public interface PerlString extends PerlQuoted {
 }

@@ -21,10 +21,11 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 /**
  * Created by hurricup on 27.02.2016.
@@ -73,23 +74,11 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
 
   @Nullable
   private PsiElement getClosingQuote(@NotNull PerlStringMixin element) {
-    PsiElement lastChild = element.getLastChild();
-    if (lastChild != null && PerlParserUtil.CLOSE_QUOTES.contains(lastChild.getNode().getElementType())) {
-      return lastChild;
-    }
-    return null;
+    return element.getCloseQuote();
   }
 
   @NotNull
   public PsiElement getOpeningQuote(@NotNull PerlStringMixin element) {
-    PsiElement firstChild = element.getFirstChild();
-
-    while (firstChild != null) {
-      if (PerlParserUtil.OPEN_QUOTES.contains(firstChild.getNode().getElementType())) {
-        return firstChild;
-      }
-      firstChild = firstChild.getNextSibling();
-    }
-    throw new RuntimeException("Unable to find opening quote in: " + element.getText());
+    return Objects.requireNonNull(element.getOpenQuote(), element.getText());
   }
 }

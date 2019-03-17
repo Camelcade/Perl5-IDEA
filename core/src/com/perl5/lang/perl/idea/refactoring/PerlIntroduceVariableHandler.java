@@ -16,14 +16,16 @@
 
 package com.perl5.lang.perl.idea.refactoring;
 
-import com.intellij.codeInsight.unwrap.ScopeHighlighter;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pass;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
@@ -33,49 +35,115 @@ import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.refactoring.RefactoringBundle;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.psi.PerlQuoted;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.CONDITION_EXPR;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.NESTED_CALL;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-class PerlIntroduceVariableHandler implements RefactoringActionHandler {
+public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceVariableHandler.class);
   private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
     CONDITION_EXPR, NESTED_CALL
   );
+  private static final TokenSet SEQUENTINAL_TOKENS = TokenSet.create(
+    COMMA_SEQUENCE_EXPR, DEREF_EXPR,
+    ADD_EXPR, MUL_EXPR, SHIFT_EXPR, BITWISE_AND_EXPR, BITWISE_OR_XOR_EXPR, AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR
+  );
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, PsiFile file, DataContext dataContext) {
-    List<PsiElement> expressions = new ArrayList<>();
-    PsiPerlExpr run = PsiTreeUtil.findElementOfClassAtOffset(file, editor.getCaretModel().getOffset(), PsiPerlExpr.class, false);
-    // fixme utilize descriptor for range in repeatance stuff: commas, derefs, additions
-    while (run != null) {
-      if (!UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(run))) {
-        expressions.add(run);
-      }
-      run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
-    }
-    if (expressions.isEmpty()) {
-      showErrorMessage(project, editor, PerlBundle.message("perl.introduce.no.target"));
+    List<PerlIntroduceTarget> targets = computeIntroduceTargets(editor, file);
+    if (targets.isEmpty()) {
+      showErrorMessage(project, editor, RefactoringBundle.getCannotRefactorMessage(PerlBundle.message("perl.introduce.no.target")));
       return;
     }
 
-    if (expressions.size() > 1) {
-      IntroduceTargetChooser.showChooser(
-        editor, expressions, new Pass<PsiElement>() {
+    if (targets.size() > 1) {
+      IntroduceTargetChooser.showIntroduceTargetChooser(
+        editor,
+        targets,
+        new Pass<PerlIntroduceTarget>() {
           @Override
-          public void pass(PsiElement element) {
-            LOG.warn("Introducing " + element);
+          public void pass(PerlIntroduceTarget target) {
+            LOG.warn("Introducing " + target.render());
           }
         },
-        PsiElement::getText,
         PerlBundle.message("perl.introduce.expressions"),
-        ScopeHighlighter.NATURAL_RANGER);
+        -1);
     }
+    else {
+      LOG.warn("Introducing " + targets.iterator().next().render());
+    }
+  }
+
+  /**
+   * @return List of possible introduce targets for {@code file} opened in {@code editor}
+   */
+  @NotNull
+  public List<PerlIntroduceTarget> computeIntroduceTargets(Editor editor, PsiFile file) {
+    List<PerlIntroduceTarget> targets = new ArrayList<>();
+    int caretOffset = editor.getCaretModel().getOffset();
+    // fixme choose target by selection
+    PsiPerlExpr run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
+    while (run != null) {
+      IElementType elementType = PsiUtilCore.getElementType(run);
+      if (SEQUENTINAL_TOKENS.contains(elementType)) {
+        for (PsiElement child : run.getChildren()) {
+          TextRange childTextRange = child.getTextRange();
+          if (childTextRange.contains(caretOffset) || childTextRange.getStartOffset() > caretOffset) {
+            targets.add(PerlIntroduceTarget.create(run, child));
+          }
+        }
+      }
+      else if (run instanceof PerlQuoted) {
+        PsiElement stringRun = ((PerlQuoted)run).getOpenQuote();
+        if (stringRun != null) {
+          PsiElement closeQuote = ((PerlQuoted)run).getCloseQuote();
+          PsiElement firstStringElement = stringRun.getNextSibling();
+          while ((stringRun = stringRun.getNextSibling()) != null && !stringRun.equals(closeQuote)) {
+            IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
+            if (stringRunElementType == TokenType.WHITE_SPACE) {
+              continue;
+            }
+            TextRange stringRunTextRange = stringRun.getTextRange();
+            if (stringRunTextRange.contains(caretOffset) || stringRunTextRange.getStartOffset() > caretOffset) {
+              if (PerlParserDefinition.LITERALS.contains(stringRunElementType)) {
+                String stringRunText = stringRun.getText();
+                boolean isLastWhiteSpace = true;
+                for (int i = 0; i < stringRunText.length(); i++) {
+                  boolean isCurrentWhiteSpace = Character.isWhitespace(stringRunText.charAt(i));
+                  int substringEndOffsetInParent = stringRun.getStartOffsetInParent() + i;
+                  if (isLastWhiteSpace != isCurrentWhiteSpace && isCurrentWhiteSpace &&
+                      substringEndOffsetInParent + stringRunTextRange.getStartOffset() > caretOffset) {
+                    targets.add(PerlIntroduceTarget.create(run, firstStringElement.getStartOffsetInParent(),
+                                                           substringEndOffsetInParent));
+                  }
+                  isLastWhiteSpace = isCurrentWhiteSpace;
+                }
+                if (!isLastWhiteSpace) {
+                  targets.add(PerlIntroduceTarget.create(run, firstStringElement.getStartOffsetInParent(),
+                                                         stringRun.getStartOffsetInParent() + stringRunText.length()));
+                }
+              }
+              else {
+                targets.add(PerlIntroduceTarget.create(run, firstStringElement, stringRun));
+              }
+            }
+          }
+        }
+        targets.add(PerlIntroduceTarget.create(run));
+      }
+      else if (!UNINTRODUCIBLE_TOKENS.contains(elementType)) {
+        targets.add(PerlIntroduceTarget.create(run));
+      }
+      run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
+    }
+    return targets;
   }
 
   protected void showErrorMessage(@NotNull Project project, Editor editor, @NotNull String message) {
