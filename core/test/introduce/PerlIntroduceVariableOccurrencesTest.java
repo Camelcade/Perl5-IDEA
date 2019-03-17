@@ -30,6 +30,8 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
 
   public void testStringFull() {doTest();}
 
+  public void testSubCall() {doTest();}
+
   protected void doTest() {
     doTestIntroduceVariableOccurances();
   }

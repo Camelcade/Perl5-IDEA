@@ -1,0 +1,5 @@
+my $var = <occurrence>somemethod(othermethod(1), $a)</occurrence>;
+if( $var){
+    my $third_var = somemethod(othermethod(2), $a);
+    my $other_var = <occurrence>somemethod(othermethod(1), $a)</occurrence>;
+}
