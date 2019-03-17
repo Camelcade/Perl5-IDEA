@@ -59,7 +59,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   );
 
   @Override
-  public void invoke(@NotNull Project project, Editor editor, PsiFile file, DataContext dataContext) {
+  public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file, DataContext dataContext) {
     List<PerlIntroduceTarget> targets = computeIntroduceTargets(editor, file);
     if (targets.isEmpty()) {
       showErrorMessage(project, editor, RefactoringBundle.getCannotRefactorMessage(PerlBundle.message("perl.introduce.no.target")));
@@ -73,22 +73,43 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         new Pass<PerlIntroduceTarget>() {
           @Override
           public void pass(PerlIntroduceTarget target) {
-            LOG.warn("Introducing " + target.render());
+            introduceTarget(target, editor, file, dataContext);
           }
         },
         PerlBundle.message("perl.introduce.expressions"),
         -1);
     }
     else {
-      LOG.warn("Introducing " + targets.iterator().next().render());
+      introduceTarget(targets.iterator().next(), editor, file, dataContext);
     }
+  }
+
+  /**
+   * Collects occurances of selected {@code target}, suggest to replace all or one, and going on
+   */
+  private void introduceTarget(@NotNull PerlIntroduceTarget target,
+                               @NotNull Editor editor,
+                               @NotNull PsiFile file,
+                               DataContext dataContext) {
+    LOG.warn("Introducing " + target.render());
+  }
+
+  /**
+   * @return occurrences of expression to introduce, represented by {@code target}
+   */
+  @NotNull
+  private List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
+    // fixme simple matching
+    // fixme matching with range
+    // fixme matching with different syntax. E.g. qw/test1 test2/; is the same as ('test1', 'test2');
+    return Collections.singletonList(target);
   }
 
   /**
    * @return List of possible introduce targets for {@code file} opened in {@code editor}
    */
   @NotNull
-  public List<PerlIntroduceTarget> computeIntroduceTargets(Editor editor, PsiFile file) {
+  public List<PerlIntroduceTarget> computeIntroduceTargets(@NotNull Editor editor, @NotNull PsiFile file) {
     if (editor.getSelectionModel().hasSelection()) {
       return computeIntroduceTargetsFromSelection(editor, file);
     }
