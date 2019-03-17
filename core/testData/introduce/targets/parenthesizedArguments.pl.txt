@@ -1,0 +1,15 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 12 in parenthesizedArguments.pl
+    (0,1)
+    '3'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 8 in parenthesizedArguments.pl
+    (0,5)
+    '1,2,3'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 8 in parenthesizedArguments.pl
+    (0,7)
+    '1,2,3,4'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 8 in parenthesizedArguments.pl
+    (0,9)
+    '1,2,3,4,5'
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 0 in parenthesizedArguments.pl
+    (0,18)
+    'somesub(1,2,3,4,5)'

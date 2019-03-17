@@ -53,6 +53,10 @@ public class PerlIntroduceVariableTargetsTest extends PerlLightTestCase {
 
   public void testOr() {doTest();}
 
+  public void testParenthesizedArguments() {doTest();}
+
+  public void testParenthesizedExpr() {doTest();}
+
   public void testPlainStringQ() {doTest();}
 
   public void testPlainStringQQ() {doTest();}

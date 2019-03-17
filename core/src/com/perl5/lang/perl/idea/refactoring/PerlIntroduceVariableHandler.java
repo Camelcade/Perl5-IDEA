@@ -48,7 +48,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceVariableHandler.class);
   private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
-    CONDITION_EXPR, NESTED_CALL
+    CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR
   );
   private static final TokenSet SEQUENTINAL_TOKENS = TokenSet.create(
     COMMA_SEQUENCE_EXPR, DEREF_EXPR,
