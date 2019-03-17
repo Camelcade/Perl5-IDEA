@@ -3,14 +3,6 @@ use warnings FATAL => 'all';
 
 use v5.10;
 
-my $session = TAP::Formatter::Camelcade::Session->new({
-    name      => $test,
-    formatter => $self,
-    parser    => $parser,
-    location  => $location
-});
-
-say 'hi' if $expr > 1 && $bla < 1;
 
 $some->method1->method2->method3->method5;
 

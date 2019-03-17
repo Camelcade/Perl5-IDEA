@@ -1,0 +1,1 @@
+qx /This is some<caret> $variable text tail/;

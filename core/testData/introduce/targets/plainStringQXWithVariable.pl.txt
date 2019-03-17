@@ -1,0 +1,15 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 14 in plainStringQXWithVariable.pl
+    (0,9)
+    '$variable'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQXWithVariable.pl
+    (1,23)
+    'This is some $variable'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQXWithVariable.pl
+    (1,28)
+    'This is some $variable text'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQXWithVariable.pl
+    (1,33)
+    'This is some $variable text tail'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQXWithVariable.pl
+    (0,34)
+    '`This is some $variable text tail`'

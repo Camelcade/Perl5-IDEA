@@ -1,0 +1,12 @@
+PsiPerlBitwiseAndExprImpl(Perl5: BITWISE_AND_EXPR) at 8 in bitwiseAnd.pl
+    (0,13)
+    '1 & 2 & 3 & 4'
+PsiPerlBitwiseAndExprImpl(Perl5: BITWISE_AND_EXPR) at 8 in bitwiseAnd.pl
+    (0,17)
+    '1 & 2 & 3 & 4 & 5'
+PsiPerlBitwiseAndExprImpl(Perl5: BITWISE_AND_EXPR) at 8 in bitwiseAnd.pl
+    (0,21)
+    '1 & 2 & 3 & 4 & 5 & 6'
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 0 in bitwiseAnd.pl
+    (0,29)
+    'my $a = 1 & 2 & 3 & 4 & 5 & 6'

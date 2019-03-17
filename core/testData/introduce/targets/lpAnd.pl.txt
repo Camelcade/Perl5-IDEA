@@ -1,0 +1,9 @@
+PsiPerlLpAndExprImpl(Perl5: LP_AND_EXPR) at 0 in lpAnd.pl
+    (0,27)
+    'my $a = 1 and 2 and 3 and 4'
+PsiPerlLpAndExprImpl(Perl5: LP_AND_EXPR) at 0 in lpAnd.pl
+    (0,33)
+    'my $a = 1 and 2 and 3 and 4 and 5'
+PsiPerlLpAndExprImpl(Perl5: LP_AND_EXPR) at 0 in lpAnd.pl
+    (0,39)
+    'my $a = 1 and 2 and 3 and 4 and 5 and 6'

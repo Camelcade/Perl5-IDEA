@@ -1,0 +1,12 @@
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQX.pl
+    (1,8)
+    'This is'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQX.pl
+    (1,13)
+    'This is some'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQX.pl
+    (1,18)
+    'This is some text'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in plainStringQX.pl
+    (0,19)
+    '`This is some text`'

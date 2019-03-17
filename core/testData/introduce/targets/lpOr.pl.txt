@@ -1,0 +1,15 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 18 in lpOr.pl
+    (0,1)
+    '3'
+PsiPerlLpOrXorExprImpl(Perl5: LP_OR_XOR_EXPR) at 0 in lpOr.pl
+    (0,19)
+    'my $a = 1 or 2 or 3'
+PsiPerlLpOrXorExprImpl(Perl5: LP_OR_XOR_EXPR) at 0 in lpOr.pl
+    (0,24)
+    'my $a = 1 or 2 or 3 or 4'
+PsiPerlLpOrXorExprImpl(Perl5: LP_OR_XOR_EXPR) at 0 in lpOr.pl
+    (0,29)
+    'my $a = 1 or 2 or 3 or 4 or 5'
+PsiPerlLpOrXorExprImpl(Perl5: LP_OR_XOR_EXPR) at 0 in lpOr.pl
+    (0,34)
+    'my $a = 1 or 2 or 3 or 4 or 5 or 6'

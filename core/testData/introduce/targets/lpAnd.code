@@ -1,0 +1,1 @@
+my $a = 1 and 2 and 3 <caret>and 4 and 5 and 6;

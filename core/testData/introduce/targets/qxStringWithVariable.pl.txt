@@ -1,0 +1,15 @@
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxStringWithVariable.pl
+    (4,16)
+    'This is some'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxStringWithVariable.pl
+    (4,26)
+    'This is some $variable'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxStringWithVariable.pl
+    (4,31)
+    'This is some $variable text'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxStringWithVariable.pl
+    (4,36)
+    'This is some $variable text tail'
+PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxStringWithVariable.pl
+    (0,37)
+    'qx /This is some $variable text tail/'

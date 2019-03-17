@@ -1,0 +1,12 @@
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in plainStringQWithVariable.pl
+    (1,23)
+    'This is some $variable'
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in plainStringQWithVariable.pl
+    (1,28)
+    'This is some $variable text'
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in plainStringQWithVariable.pl
+    (1,33)
+    'This is some $variable text tail'
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in plainStringQWithVariable.pl
+    (0,34)
+    ''This is some $variable text tail''

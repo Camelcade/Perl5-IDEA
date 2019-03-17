@@ -1,0 +1,9 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 32 in ifModifier.pl
+    (0,1)
+    '1'
+PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR) at 25 in ifModifier.pl
+    (0,8)
+    '$bla < 1'
+PsiPerlAndExprImpl(Perl5: AND_EXPR) at 12 in ifModifier.pl
+    (0,21)
+    '$expr > 1 && $bla < 1'
