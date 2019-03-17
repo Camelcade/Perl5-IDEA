@@ -1,0 +1,53 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 97 in constructorCall.pl
+    (0,5)
+    '$self'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 60 in constructorCall.pl
+    (0,42)
+    'name      => $test,
+    formatter => $self'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 60 in constructorCall.pl
+    (0,54)
+    'name      => $test,
+    formatter => $self,
+    parser'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 60 in constructorCall.pl
+    (0,68)
+    'name      => $test,
+    formatter => $self,
+    parser    => $parser'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 60 in constructorCall.pl
+    (0,82)
+    'name      => $test,
+    formatter => $self,
+    parser    => $parser,
+    location'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 60 in constructorCall.pl
+    (0,96)
+    'name      => $test,
+    formatter => $self,
+    parser    => $parser,
+    location  => $location'
+PsiPerlAnonHashImpl(Perl5: ANON_HASH) at 54 in constructorCall.pl
+    (0,104)
+    '{
+    name      => $test,
+    formatter => $self,
+    parser    => $parser,
+    location  => $location
+}'
+PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) at 14 in constructorCall.pl
+    (0,145)
+    'TAP::Formatter::Camelcade::Session->new({
+    name      => $test,
+    formatter => $self,
+    parser    => $parser,
+    location  => $location
+})'
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 0 in constructorCall.pl
+    (0,159)
+    'my $session = TAP::Formatter::Camelcade::Session->new({
+    name      => $test,
+    formatter => $self,
+    parser    => $parser,
+    location  => $location
+})'

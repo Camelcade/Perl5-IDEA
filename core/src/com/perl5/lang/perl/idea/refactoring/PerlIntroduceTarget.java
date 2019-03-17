@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see IntroduceTargetChooser.MyIntroduceTarget
  */
-class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
+public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   @NotNull
   private final TextRange myTextRangeInElement;
 

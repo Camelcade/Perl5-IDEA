@@ -1,0 +1,6 @@
+my $session = TAP::Formatter::Camelcade::Session->new({
+    name      => $test,
+    formatter => $sel<caret>f,
+    parser    => $parser,
+    location  => $location
+});
