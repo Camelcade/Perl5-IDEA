@@ -1,0 +1,4 @@
+if( "someline" eq $a){
+    $b = "someline"."otherline";
+    say "someline";
+}

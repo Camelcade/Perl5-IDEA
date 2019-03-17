@@ -17,11 +17,6 @@
 package introduce;
 
 import base.PerlLightTestCase;
-import com.intellij.testFramework.UsefulTestCase;
-import com.perl5.lang.perl.idea.refactoring.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.PerlIntroduceVariableHandler;
-
-import java.util.List;
 
 public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase {
   @Override
@@ -98,18 +93,6 @@ public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase
   public void testShift() {doTest();}
 
   protected void doTest() {
-    initWithFileSmartWithoutErrors();
-    PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
-    List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
-    StringBuilder sb = new StringBuilder();
-
-    introduceTargets.forEach(it -> sb.append(serializePsiElement(it.getPlace()))
-      .append("\n")
-      .append("    ").append(it.getTextRangeInElement())
-      .append("\n")
-      .append("    '").append(it.render()).append("'")
-      .append("\n"));
-
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    doTestIntroduceVariableTargets();
   }
 }

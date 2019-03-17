@@ -1,0 +1,6 @@
+if( <occurrence>$a >$b</occurrence> && $b < $a){
+    if( <occurrence>$a >    $b</occurrence>){
+        say 'hi' if <occurrence>$a > # comment
+          $b</occurrence>;
+    }
+}

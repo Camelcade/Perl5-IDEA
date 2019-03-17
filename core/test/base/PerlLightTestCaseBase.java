@@ -119,6 +119,8 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.refactoring.PerlIntroduceTarget;
+import com.perl5.lang.perl.idea.refactoring.PerlIntroduceVariableHandler;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -663,12 +665,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   @NotNull
-  private String getEditorTextWithMacroses(List<Pair<Integer, String>> macroses) {
-    ContainerUtil.sort(macroses, Comparator.comparingInt(pair -> pair.first));
+  private String getEditorTextWithMacroses(List<Pair<Integer, String>> macros) {
+    ContainerUtil.sort(macros, Comparator.comparingInt(pair -> pair.first));
     StringBuilder sb = new StringBuilder(getEditorText());
 
-    for (int i = macroses.size() - 1; i > -1; i--) {
-      Pair<Integer, String> macro = macroses.get(i);
+    for (int i = macros.size() - 1; i > -1; i--) {
+      Pair<Integer, String> macro = macros.get(i);
       sb.insert(macro.first, macro.second);
     }
 
@@ -1503,4 +1505,33 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return list;
   }
 
+  protected void doTestIntroduceVariableTargets() {
+    initWithFileSmartWithoutErrors();
+    PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
+    List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
+    StringBuilder sb = new StringBuilder();
+
+    introduceTargets.forEach(it -> sb.append(serializePsiElement(it.getPlace()))
+      .append("\n")
+      .append("    ").append(it.getTextRangeInElement())
+      .append("\n")
+      .append("    '").append(it.render()).append("'")
+      .append("\n"));
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doTestIntroduceVariableOccurances() {
+    initWithFileSmartWithoutErrors();
+    PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
+    List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
+    assertSize(1, introduceTargets);
+    List<Pair<Integer, String>> macros = new ArrayList<>();
+    introduceVariableHandler.collectOccurrences(introduceTargets.get(0)).forEach(it -> {
+      TextRange occurenceRange = it.getTextRange();
+      macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
+      macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
+    });
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macros));
+  }
 }

@@ -49,6 +49,14 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
     return myTextRangeInElement.subSequence(super.render()).toString();
   }
 
+  /**
+   * @return true iff range covers all the element
+   */
+  public boolean isFullRange() {
+    PsiElement element = getPlace();
+    return element != null && myTextRangeInElement.getStartOffset() == 0 && myTextRangeInElement.getEndOffset() == element.getTextLength();
+  }
+
   @NotNull
   public TextRange getTextRange() {
     Segment elementRange = super.getTextRange();

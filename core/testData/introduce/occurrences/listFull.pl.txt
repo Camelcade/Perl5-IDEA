@@ -1,0 +1,19 @@
+sub first{
+    my @something = (<occurrence>1,2,3,4,5</occurrence>);
+    if( $a ){
+        my @otherthing = (<occurrence>1,2,3,4,5</occurrence>);
+        if( $b){
+            somesub(<occurrence>1,2,3,4,5</occurrence>);
+        }
+    }
+}
+sub second{
+    my @something = (1,2,3,4,5);
+    if( $a ){
+        my @otherthing = (1,2,3,4,5);
+        if( $b){
+            somesub(1,2,3,4,5);
+        }
+    }
+}
+

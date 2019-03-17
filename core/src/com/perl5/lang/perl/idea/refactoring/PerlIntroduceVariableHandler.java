@@ -21,11 +21,11 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Pass;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -34,16 +34,18 @@ import com.intellij.refactoring.HelpID;
 import com.intellij.refactoring.IntroduceTargetChooser;
 import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.refactoring.RefactoringBundle;
+import com.intellij.refactoring.introduce.inplace.OccurrencesChooser;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.psi.PerlQuoted;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -91,6 +93,35 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                @NotNull Editor editor,
                                @NotNull PsiFile file,
                                DataContext dataContext) {
+    List<PerlIntroduceTarget> allOccurrences = collectOccurrences(target);
+    if (allOccurrences.size() > 1) {
+      Map<PsiElement, PerlIntroduceTarget> occurrencesMap = ContainerUtil.map2Map(allOccurrences, it -> Pair.create(it.getPlace(), it));
+
+      new OccurrencesChooser<PsiElement>(editor) {
+        @Override
+        protected TextRange getOccurrenceRange(PsiElement occurrence) {
+          return occurrencesMap.get(occurrence).getTextRange();
+        }
+      }.showChooser(
+        target.getPlace(),
+        new ArrayList<>(occurrencesMap.keySet()),
+        new Pass<OccurrencesChooser.ReplaceChoice>() {
+          @Override
+          public void pass(OccurrencesChooser.ReplaceChoice replaceChoice) {
+            introduceTarget(target, allOccurrences, replaceChoice, editor, file, dataContext);
+          }
+        }
+      );
+    }
+    introduceTarget(target, allOccurrences, OccurrencesChooser.ReplaceChoice.NO, editor, file, dataContext);
+  }
+
+  private void introduceTarget(@NotNull PerlIntroduceTarget target,
+                               @NotNull List<PerlIntroduceTarget> allTargets,
+                               @NotNull OccurrencesChooser.ReplaceChoice replaceChoice,
+                               @NotNull Editor editor,
+                               @NotNull PsiFile file,
+                               DataContext dataContext) {
     LOG.warn("Introducing " + target.render());
   }
 
@@ -98,11 +129,66 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    * @return occurrences of expression to introduce, represented by {@code target}
    */
   @NotNull
-  private List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
+  public List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
     // fixme simple matching
     // fixme matching with range
     // fixme matching with different syntax. E.g. qw/test1 test2/; is the same as ('test1', 'test2');
-    return Collections.singletonList(target);
+    PsiElement targetElement = target.getPlace();
+    PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
+    if (scope == null) {
+      scope = PsiTreeUtil.getParentOfType(targetElement, PerlNamespaceDefinitionElement.class);
+    }
+    if (scope == null) {
+      return Collections.singletonList(target);
+    }
+
+    List<PerlIntroduceTarget> result = new ArrayList<>();
+    scope.accept(new PerlRecursiveVisitor() {
+      @Override
+      public void visitElement(@NotNull PsiElement element) {
+        if (target.isFullRange() && areElementsSame(targetElement, element)) {
+          result.add(PerlIntroduceTarget.create(element));
+        }
+        else {
+          super.visitElement(element);
+        }
+      }
+    });
+    return result;
+  }
+
+  /**
+   * @return true iff {@code elmentToCompare} is equal to {@code targetElement}
+   */
+  private boolean areElementsSame(@NotNull PsiElement targetElement, @NotNull PsiElement elementToCompare) {
+    if (!targetElement.getClass().equals(elementToCompare.getClass())) {
+      return false;
+    }
+    PsiElement targetElementRun = targetElement.getFirstChild();
+    PsiElement elementToCompareRun = elementToCompare.getFirstChild();
+    if (targetElementRun == null) {
+      return elementToCompareRun == null &&
+             StringUtil.equals(targetElement.getNode().getChars(), elementToCompare.getNode().getChars());
+    }
+    while (targetElementRun != null && elementToCompareRun != null) {
+      while (targetElementRun instanceof PsiWhiteSpace || targetElementRun instanceof PsiComment) {
+        targetElementRun = targetElementRun.getNextSibling();
+      }
+      while (elementToCompareRun instanceof PsiWhiteSpace || elementToCompareRun instanceof PsiComment) {
+        elementToCompareRun = elementToCompareRun.getNextSibling();
+      }
+      if (targetElementRun == null || elementToCompareRun == null) {
+        break;
+      }
+
+      if (!areElementsSame(targetElementRun, elementToCompareRun)) {
+        return false;
+      }
+
+      targetElementRun = targetElementRun.getNextSibling();
+      elementToCompareRun = elementToCompareRun.getNextSibling();
+    }
+    return targetElementRun == null && elementToCompareRun == null;
   }
 
   /**
