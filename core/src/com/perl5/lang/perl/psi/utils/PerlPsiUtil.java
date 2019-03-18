@@ -27,6 +27,7 @@ import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -49,10 +50,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
@@ -131,6 +129,54 @@ public class PerlPsiUtil implements PerlElementTypes {
       }
       run = run.getNextSibling();
     }
+  }
+
+  /**
+   * Traverses {@code element}, entering qw lists, lists of q/qq strings, comma sequences, parenthesized expressions and
+   * collecting string elements.
+   *
+   * @return false if traversing stopped because of bad item
+   * @apiNote returned list are guaranteed to be some kind of strings, but they may contain interpolation in qq case
+   */
+  public static boolean collectStringElementsRecursivelyStrict(@Nullable PsiElement element,
+                                                               @NotNull List<PsiElement> result) {
+    if (element == null) {
+      return true;
+    }
+    if (element instanceof PerlStringList) {
+      PsiElement openQuoteElement = ((PerlStringList)element).getOpenQuoteElement();
+      if (openQuoteElement == null) {
+        return true;
+      }
+      PsiElement run = openQuoteElement.getNextSibling();
+      while (run != null) {
+        IElementType runElementType = PsiUtilCore.getElementType(run);
+        if (runElementType == QUOTE_SINGLE_CLOSE) {
+          break;
+        }
+
+        if (runElementType == STRING_CONTENT) {
+          result.add(run);
+        }
+        run = run.getNextSibling();
+      }
+      return true;
+    }
+    else if (element instanceof PerlQuoted && !(element instanceof PsiPerlStringXq)) {
+      result.add(element);
+      return true;
+    }
+    else if (element instanceof PsiPerlParenthesisedExpr) {
+      return collectStringElementsRecursivelyStrict(((PsiPerlParenthesisedExpr)element).getExpr(), result);
+    }
+    else if (element instanceof PsiPerlCommaSequenceExpr) {
+      for (PsiElement child : element.getChildren()) {
+        if (!collectStringElementsRecursivelyStrict(child, result)) {
+          return false;
+        }
+      }
+    }
+    return false;
   }
 
   /**
@@ -699,6 +745,23 @@ public class PerlPsiUtil implements PerlElementTypes {
     else if (targetElement.equals(elementToCompare)) {
       return true;
     }
+    IElementType targetElementType = PsiUtilCore.getElementType(targetElement);
+    IElementType elementToCompareType = PsiUtilCore.getElementType(elementToCompare);
+    if (targetElementType == STRING_CONTENT && targetElement.getParent() instanceof PerlStringList) {
+      if (elementToCompareType == STRING_CONTENT && elementToCompare.getParent() instanceof PerlStringList) {
+        return Objects.equals(targetElement.getText(), elementToCompare.getText());
+      }
+      if (!(elementToCompare instanceof PsiPerlStringDq) && !(elementToCompare instanceof PsiPerlStringSq)) {
+        return false;
+      }
+      return elementToCompare.getChildren().length == 0 &&
+             Objects.equals(targetElement.getText(), ElementManipulators.getValueText(elementToCompare));
+    }
+
+    if (elementToCompareType == STRING_CONTENT && elementToCompare.getParent() instanceof PerlStringList) {
+      return areElementsSame(elementToCompare, targetElement);
+    }
+
     if (targetElement instanceof PerlString) {
       return areStringElementsSame((PerlString)targetElement, elementToCompare);
     }

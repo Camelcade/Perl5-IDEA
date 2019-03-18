@@ -90,7 +90,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   }
 
   /**
-   * Collects occurances of selected {@code target}, suggest to replace all or one, and going on
+   * Collects occurrences of selected {@code target}, suggest to replace all or one, and going on
    */
   private void introduceTarget(@NotNull PerlIntroduceTarget target,
                                @NotNull Editor editor,
@@ -148,7 +148,10 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       public void visitElement(@NotNull PsiElement element) {
         PerlIntroduceTarget elementTarget = null;
         if (targetElement instanceof PerlDerefExpression) {
-          elementTarget = getDerefTargetIfSame((PerlDerefExpression)targetElement, target.getTextRangeInElement(), element);
+          elementTarget = computeDerefTargetIfSame((PerlDerefExpression)targetElement, target.getTextRangeInElement(), element);
+        }
+        else if (targetElement instanceof PerlStringList) {
+          elementTarget = computeStringListTargetIfSame((PerlStringList)targetElement, target.getTextRangeInElement(), element);
         }
         else if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
           elementTarget = PerlIntroduceTarget.create(element);
@@ -169,9 +172,59 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    * @return an introduce target of an {@code element} if it matches with {@code example} within {@code rangeInExample}, null otherwise
    */
   @Nullable
-  private PerlIntroduceTarget getDerefTargetIfSame(@NotNull PerlDerefExpression example,
-                                                   @NotNull TextRange rangeInExample,
-                                                   @NotNull PsiElement element) {
+  private PerlIntroduceTarget computeStringListTargetIfSame(@NotNull PerlStringList example,
+                                                            @NotNull TextRange rangeInExample,
+                                                            @NotNull PsiElement element) {
+    List<PsiElement> exampleStrings = new ArrayList<>();
+    if (!PerlPsiUtil.collectStringElementsRecursivelyStrict(example, exampleStrings)) {
+      return null;
+    }
+
+    List<PsiElement> stringsToSearch =
+      ContainerUtil.filter(exampleStrings, it -> rangeInExample.contains(it.getTextRangeInParent()));
+    if (stringsToSearch.isEmpty()) {
+      return null;
+    }
+
+    List<PsiElement> elementStrings = new ArrayList<>();
+    PerlPsiUtil.collectStringElementsRecursivelyStrict(example, elementStrings);
+
+    if (stringsToSearch.size() > elementStrings.size()) {
+      return null;
+    }
+
+    PsiElement firstStringToSearch = stringsToSearch.get(0);
+    for (int startIndex = 0; startIndex < elementStrings.size() - stringsToSearch.size(); startIndex++) {
+      PsiElement firstElementString = elementStrings.get(startIndex);
+      if (!PerlPsiUtil.areElementsSame(firstStringToSearch, firstElementString)) {
+        continue;
+      }
+      int offset = 1;
+      for (; offset < stringsToSearch.size(); offset++) {
+        if (!PerlPsiUtil.areElementsSame(stringsToSearch.get(offset), elementStrings.get(startIndex + offset))) {
+          break;
+        }
+      }
+      if (offset == stringsToSearch.size()) {
+        // matches
+        return startIndex == 0 && offset == elementStrings.size() ?
+               PerlIntroduceTarget.create(element) :
+               PerlIntroduceTarget.create(element, TextRange.create(
+                 firstElementString.getTextRange().getStartOffset(),
+                 elementStrings.get(startIndex + offset - 1).getTextRange().getEndOffset()
+               ).shiftLeft(element.getTextRange().getStartOffset()));
+      }
+    }
+    return null;
+  }
+
+  /**
+   * @return an introduce target of an {@code element} if it matches with {@code example} within {@code rangeInExample}, null otherwise
+   */
+  @Nullable
+  private PerlIntroduceTarget computeDerefTargetIfSame(@NotNull PerlDerefExpression example,
+                                                       @NotNull TextRange rangeInExample,
+                                                       @NotNull PsiElement element) {
     if (!(element instanceof PerlDerefExpression)) {
       return null;
     }

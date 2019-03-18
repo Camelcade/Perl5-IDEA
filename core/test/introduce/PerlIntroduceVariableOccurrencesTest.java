@@ -27,6 +27,8 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
     return "testData/introduce/occurrences";
   }
 
+  public void testQwRange() {doTest();}
+
   public void testDerefStyles() {doTest();}
 
   public void testDerefSimple() {doTest();}
