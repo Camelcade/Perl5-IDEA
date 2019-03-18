@@ -18,6 +18,9 @@ package introduce;
 
 import base.PerlLightTestCase;
 
+/**
+ * NB: Test taking TOP most introduce target if there are many of them
+ */
 public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
@@ -45,6 +48,50 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
   public void testStringQxOp() {doTest();}
 
   public void testStringQxPlain() {doTest();}
+
+  public void testStatementSemi() {doTest();}
+
+  public void testStatementNoSemi() {doTest();}
+
+  public void testScalarBraced() {doTest();}
+
+  public void testScalarUnbraced() {doTest();}
+
+  public void testArrayBraced() {doTest();}
+
+  public void testArrayUnbraced() {doTest();}
+
+  public void testHashBraced() {doTest();}
+
+  public void testHashUnbraced() {doTest();}
+
+  public void testGlobBraced() {doTest();}
+
+  public void testGlobUnbraced() {doTest();}
+
+  public void testCodeBraced() {doTest();}
+
+  public void testCodeUnbraced() {doTest();}
+
+  public void testScalarDerefBraced() {doTest();}
+
+  public void testScalarDerefUnbraced() {doTest();}
+
+  public void testArrayDerefBraced() {doTest();}
+
+  public void testArrayDerefUnbraced() {doTest();}
+
+  public void testHashDerefBraced() {doTest();}
+
+  public void testHashDerefUnbraced() {doTest();}
+
+  public void testGlobDerefBraced() {doTest();}
+
+  public void testGlobDerefUnbraced() {doTest();}
+
+  public void testCodeDerefBraced() {doTest();}
+
+  public void testCodeDerefUnbraced() {doTest();}
 
   protected void doTest() {
     doTestIntroduceVariableOccurances();

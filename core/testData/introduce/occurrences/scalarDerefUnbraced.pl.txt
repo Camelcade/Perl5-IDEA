@@ -1,0 +1,4 @@
+<occurrence>$$var</occurrence>;
+${$var};
+<occurrence>$$var</occurrence>;
+${$var};

@@ -1,0 +1,4 @@
+$var = <occurrence>"some ${somemethod(1,2,3);\othermethod(4,5,6)}"</occurrence>;
+$var = <occurrence>"some ${somemethod(1,2,3);\othermethod(4,5,6);}"</occurrence>;
+$var = <occurrence>"some ${somemethod(1,2,3);\othermethod(4,5,6)}"</occurrence>;
+$var = <occurrence>"some ${somemethod(1,2,3);\othermethod(4,5,6)}"</occurrence>;

@@ -1525,9 +1525,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     initWithFileSmartWithoutErrors();
     PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
     List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
-    assertSize(1, introduceTargets);
+    assertTrue(introduceTargets.size() > 0);
     List<Pair<Integer, String>> macros = new ArrayList<>();
-    introduceVariableHandler.collectOccurrences(introduceTargets.get(0)).forEach(it -> {
+    introduceVariableHandler.collectOccurrences(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
       TextRange occurenceRange = it.getTextRange();
       macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));

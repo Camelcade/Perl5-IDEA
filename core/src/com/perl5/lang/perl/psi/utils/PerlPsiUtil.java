@@ -27,6 +27,7 @@ import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -52,12 +53,22 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
+import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
 
 /**
  * Created by hurricup on 09.08.2015.
  */
 public class PerlPsiUtil implements PerlElementTypes {
+  private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
+    WHITE_SPACE, NEW_LINE_INDENT,
+    COMMENT_LINE, COMMENT_ANNOTATION,
+    LEFT_BRACE_ARRAY, LEFT_BRACE_CODE, LEFT_BRACE_GLOB, LEFT_BRACE_HASH, LEFT_BRACE_SCALAR,
+    RIGHT_BRACE_ARRAY, RIGHT_BRACE_CODE, RIGHT_BRACE_GLOB, RIGHT_BRACE_HASH, RIGHT_BRACE_SCALAR,
+    SEMICOLON
+  );
+
   /**
    * Recursively searches for string content elements beginnign from specified PsiElement
    *
@@ -174,7 +185,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   @Nullable
   public static ASTNode getNextSignificantSibling(ASTNode node) {
     ASTNode result = node.getTreeNext();
-    while (result != null && result.getElementType() == TokenType.WHITE_SPACE) {
+    while (result != null && result.getElementType() == WHITE_SPACE) {
       result = result.getTreeNext();
     }
     return result;
@@ -734,11 +745,11 @@ public class PerlPsiUtil implements PerlElementTypes {
       return elementToCompareRun == null &&
              StringUtil.equals(targetElement.getNode().getChars(), elementToCompare.getNode().getChars());
     }
-    while (targetElementRun != null && elementToCompareRun != null) {
-      while (targetElementRun instanceof PsiWhiteSpace || targetElementRun instanceof PsiComment) {
+    while (true) {
+      while (IGNORE_WHEN_COMPARING.contains(PsiUtilCore.getElementType(targetElementRun))) {
         targetElementRun = targetElementRun.getNextSibling();
       }
-      while (elementToCompareRun instanceof PsiWhiteSpace || elementToCompareRun instanceof PsiComment) {
+      while (IGNORE_WHEN_COMPARING.contains(PsiUtilCore.getElementType(elementToCompareRun))) {
         elementToCompareRun = elementToCompareRun.getNextSibling();
       }
       if (targetElementRun == null || elementToCompareRun == null) {
