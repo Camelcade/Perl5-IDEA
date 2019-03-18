@@ -212,42 +212,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         }
       }
       else if (run instanceof PerlQuoted) {
-        PsiElement stringRun = ((PerlQuoted)run).getOpenQuoteElement();
-        if (stringRun != null) {
-          PsiElement closeQuote = ((PerlQuoted)run).getCloseQuoteElement();
-          PsiElement firstStringElement = stringRun.getNextSibling();
-          while ((stringRun = stringRun.getNextSibling()) != null && !stringRun.equals(closeQuote)) {
-            IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
-            if (stringRunElementType == TokenType.WHITE_SPACE) {
-              continue;
-            }
-            TextRange stringRunTextRange = stringRun.getTextRange();
-            if (stringRunTextRange.contains(caretOffset) || stringRunTextRange.getStartOffset() > caretOffset) {
-              if (PerlParserDefinition.LITERALS.contains(stringRunElementType)) {
-                String stringRunText = stringRun.getText();
-                boolean isLastWhiteSpace = true;
-                for (int i = 0; i < stringRunText.length(); i++) {
-                  boolean isCurrentWhiteSpace = Character.isWhitespace(stringRunText.charAt(i));
-                  int substringEndOffsetInParent = stringRun.getStartOffsetInParent() + i;
-                  if (isLastWhiteSpace != isCurrentWhiteSpace && isCurrentWhiteSpace &&
-                      substringEndOffsetInParent + stringRunTextRange.getStartOffset() > caretOffset) {
-                    targets.add(PerlIntroduceTarget.create(run, firstStringElement.getStartOffsetInParent(),
-                                                           substringEndOffsetInParent));
-                  }
-                  isLastWhiteSpace = isCurrentWhiteSpace;
-                }
-                if (!isLastWhiteSpace) {
-                  targets.add(PerlIntroduceTarget.create(run, firstStringElement.getStartOffsetInParent(),
-                                                         stringRun.getStartOffsetInParent() + stringRunText.length()));
-                }
-              }
-              else {
-                targets.add(PerlIntroduceTarget.create(run, firstStringElement, stringRun));
-              }
-            }
-          }
-        }
-        targets.add(PerlIntroduceTarget.create(run));
+        computeTargetFromPerlQuotedByCaret((PerlQuoted)run, caretOffset, targets);
       }
       else if (!UNINTRODUCIBLE_TOKENS.contains(elementType)) {
         targets.add(PerlIntroduceTarget.create(run));
@@ -255,6 +220,50 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
     }
     return targets;
+  }
+
+  /**
+   * Compute target for quoted entities(perl strings or string lists) by caret position.
+   */
+  public void computeTargetFromPerlQuotedByCaret(@NotNull PerlQuoted perlQuotedExpr,
+                                                 int caretOffset,
+                                                 @NotNull List<PerlIntroduceTarget> result) {
+    PsiElement stringRun = perlQuotedExpr.getOpenQuoteElement();
+    if (stringRun != null) {
+      PsiElement closeQuote = perlQuotedExpr.getCloseQuoteElement();
+      PsiElement firstStringElement = stringRun.getNextSibling();
+      while ((stringRun = stringRun.getNextSibling()) != null && !stringRun.equals(closeQuote)) {
+        IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
+        if (stringRunElementType == TokenType.WHITE_SPACE) {
+          continue;
+        }
+        TextRange stringRunTextRange = stringRun.getTextRange();
+        if (stringRunTextRange.contains(caretOffset) || stringRunTextRange.getStartOffset() > caretOffset) {
+          if (PerlParserDefinition.LITERALS.contains(stringRunElementType)) {
+            String stringRunText = stringRun.getText();
+            boolean isLastWhiteSpace = true;
+            for (int i = 0; i < stringRunText.length(); i++) {
+              boolean isCurrentWhiteSpace = Character.isWhitespace(stringRunText.charAt(i));
+              int substringEndOffsetInParent = stringRun.getStartOffsetInParent() + i;
+              if (isLastWhiteSpace != isCurrentWhiteSpace && isCurrentWhiteSpace &&
+                  substringEndOffsetInParent + stringRunTextRange.getStartOffset() > caretOffset) {
+                result.add(PerlIntroduceTarget.create(perlQuotedExpr, firstStringElement.getStartOffsetInParent(),
+                                                      substringEndOffsetInParent));
+              }
+              isLastWhiteSpace = isCurrentWhiteSpace;
+            }
+            if (!isLastWhiteSpace) {
+              result.add(PerlIntroduceTarget.create(perlQuotedExpr, firstStringElement.getStartOffsetInParent(),
+                                                    stringRun.getStartOffsetInParent() + stringRunText.length()));
+            }
+          }
+          else {
+            result.add(PerlIntroduceTarget.create(perlQuotedExpr, firstStringElement, stringRun));
+          }
+        }
+      }
+    }
+    result.add(PerlIntroduceTarget.create(perlQuotedExpr));
   }
 
   @NotNull
@@ -290,65 +299,86 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         wrappingExpression, intersectedRange.shiftLeft(wrappingExpression.getTextOffset())));
     }
     if (wrappingExpression instanceof PerlQuoted) {
-      PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuoteElement();
-      if (run == null) {
-        return Collections.emptyList();
-      }
-      PsiElement closeQuote = ((PerlQuoted)wrappingExpression).getCloseQuoteElement();
-      if (selectionRange.contains(run.getTextRange()) && (closeQuote == null || selectionRange.contains(closeQuote.getTextRange()))) {
-        return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
-      }
-
-      int startOffset = -1;
-      int endOffset = -1;
-      while ((run = run.getNextSibling()) != null) {
-        if (run.equals(closeQuote)) {
-          break;
-        }
-        IElementType runElementType = PsiUtilCore.getElementType(run);
-        if (runElementType == TokenType.WHITE_SPACE) {
-          continue;
-        }
-        TextRange runTextRange = run.getTextRange();
-        if (runTextRange.getEndOffset() <= selectionStart || runTextRange.getStartOffset() >= selectionEnd) {
-          continue;
-        }
-
-        if (startOffset < 0) {
-          startOffset = run.getStartOffsetInParent();
-          if (selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
-            startOffset += selectionStart - runTextRange.getStartOffset();
-          }
-        }
-        endOffset = run.getStartOffsetInParent() + run.getTextLength();
-        if (selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
-          endOffset -= runTextRange.getEndOffset() - selectionEnd;
-        }
-      }
-      return startOffset < 0 || endOffset < 0 ? Collections.emptyList() :
-             Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression, startOffset, endOffset));
+      return computeTargetsForQuotedExpressionsFromSelection(wrappingExpression, selectionRange);
     }
     else if (SEQUENTINAL_TOKENS.contains(wrappingExpressionElementType)) {
-      PsiElement[] children = wrappingExpression.getChildren();
-      PsiElement firstChildToInclude = wrappingExpressionElementType == DEREF_EXPR ? wrappingExpression.getFirstChild() : null;
-      PsiElement lastChildToInclude = null;
-      for (PsiElement child : children) {
-        TextRange childTextRange = child.getTextRange();
-        if (!selectionRange.intersectsStrict(childTextRange)) {
-          continue;
-        }
-        if (firstChildToInclude == null) {
-          firstChildToInclude = child;
-        }
-        lastChildToInclude = child;
-      }
-      if (firstChildToInclude == null || lastChildToInclude == null) {
-        return Collections.emptyList();
-      }
-
-      return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression, firstChildToInclude, lastChildToInclude));
+      return computeTargetsForSequentialExpressionsFromSelection(wrappingExpression, selectionRange);
     }
     return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
+  }
+
+  /**
+   * Computes targets for quoted entities, strings and string lists from selection.
+   */
+  @NotNull
+  private List<PerlIntroduceTarget> computeTargetsForQuotedExpressionsFromSelection(@NotNull PsiElement wrappingExpression,
+                                                                                    @NotNull TextRange selectionRange) {
+    int selectionStart = selectionRange.getStartOffset();
+    int selectionEnd = selectionRange.getEndOffset();
+    PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuoteElement();
+    if (run == null) {
+      return Collections.emptyList();
+    }
+    PsiElement closeQuote = ((PerlQuoted)wrappingExpression).getCloseQuoteElement();
+    if (selectionRange.contains(run.getTextRange()) && (closeQuote == null || selectionRange.contains(closeQuote.getTextRange()))) {
+      return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
+    }
+
+    int startOffset = -1;
+    int endOffset = -1;
+    while ((run = run.getNextSibling()) != null) {
+      if (run.equals(closeQuote)) {
+        break;
+      }
+      IElementType runElementType = PsiUtilCore.getElementType(run);
+      if (runElementType == TokenType.WHITE_SPACE) {
+        continue;
+      }
+      TextRange runTextRange = run.getTextRange();
+      if (runTextRange.getEndOffset() <= selectionStart || runTextRange.getStartOffset() >= selectionEnd) {
+        continue;
+      }
+
+      if (startOffset < 0) {
+        startOffset = run.getStartOffsetInParent();
+        if (selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+          startOffset += selectionStart - runTextRange.getStartOffset();
+        }
+      }
+      endOffset = run.getStartOffsetInParent() + run.getTextLength();
+      if (selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+        endOffset -= runTextRange.getEndOffset() - selectionEnd;
+      }
+    }
+    return startOffset < 0 || endOffset < 0 ? Collections.emptyList() :
+           Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression, startOffset, endOffset));
+  }
+
+  /**
+   * Computes targets for sequential elements from selection: dereference chains, comma sequences, additions, etc.
+   */
+  @NotNull
+  private List<PerlIntroduceTarget> computeTargetsForSequentialExpressionsFromSelection(@NotNull PsiElement wrappingExpression,
+                                                                                        @NotNull TextRange selectionRange) {
+    PsiElement[] children = wrappingExpression.getChildren();
+    PsiElement firstChildToInclude =
+      PsiUtilCore.getElementType(wrappingExpression) == DEREF_EXPR ? wrappingExpression.getFirstChild() : null;
+    PsiElement lastChildToInclude = null;
+    for (PsiElement child : children) {
+      TextRange childTextRange = child.getTextRange();
+      if (!selectionRange.intersectsStrict(childTextRange)) {
+        continue;
+      }
+      if (firstChildToInclude == null) {
+        firstChildToInclude = child;
+      }
+      lastChildToInclude = child;
+    }
+    if (firstChildToInclude == null || lastChildToInclude == null) {
+      return Collections.emptyList();
+    }
+
+    return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression, firstChildToInclude, lastChildToInclude));
   }
 
   protected void showErrorMessage(@NotNull Project project, Editor editor, @NotNull String message) {
