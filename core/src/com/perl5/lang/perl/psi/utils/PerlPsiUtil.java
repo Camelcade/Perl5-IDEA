@@ -38,6 +38,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.properties.PerlStatementsContainer;
@@ -686,21 +687,67 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
-   * @return true iff {@code elementToCompare} is equal to {@code targetElement}
+   * @return true iff {@code elementToCompare} is equal to {@code targetElement} or both nulls
    */
-  public static boolean areElementsSame(@NotNull PsiElement targetElement, @NotNull PsiElement elementToCompare) {
-    if (targetElement.equals(elementToCompare)) {
+  public static boolean areElementsSame(@Nullable PsiElement targetElement, @Nullable PsiElement elementToCompare) {
+    if (targetElement == null && elementToCompare == null) {
+      return true;
+    }
+    else if (targetElement == null || elementToCompare == null) {
+      return false;
+    }
+    else if (targetElement.equals(elementToCompare)) {
       return true;
     }
     if (targetElement instanceof PerlString) {
       return areStringElementsSame((PerlString)targetElement, elementToCompare);
     }
+    else if (targetElement instanceof PerlCastExpression) {
+      return areCastElementsSame((PerlCastExpression)targetElement, elementToCompare);
+    }
     return areGenericElementsSame(targetElement, elementToCompare);
   }
 
   /**
+   * @return true iff cast (deref) {@code targetElement} semantically equals to {@code elementToCompare}. Taking into account blocked and non-blocked versions
+   */
+  private static boolean areCastElementsSame(@NotNull PerlCastExpression targetElement, @NotNull PsiElement elementToCompare) {
+    if (!targetElement.getClass().equals(elementToCompare.getClass())) {
+      return false;
+    }
+    PsiPerlExpr targetExpr = targetElement.getExpr();
+    PsiPerlExpr exprToCompare = ((PerlCastExpression)elementToCompare).getExpr();
+    if (targetExpr != null && exprToCompare != null) {
+      return areElementsSame(targetExpr, exprToCompare);
+    }
+
+    PsiPerlBlock targetBlock = targetElement.getBlock();
+    PsiPerlBlock blockToCompare = ((PerlCastExpression)elementToCompare).getBlock();
+    if (targetBlock != null && blockToCompare != null) {
+      return areElementsSame(targetBlock, blockToCompare);
+    }
+    return targetBlock == null ?
+           areElementsSame(targetExpr, getSingleBlockExpression(blockToCompare)) :
+           areElementsSame(getSingleBlockExpression(targetBlock), exprToCompare);
+  }
+
+  /**
+   * @return if {@code block} contains only single statement with single expression, returns it. False otherwise.
+   */
+  @Nullable
+  private static PsiPerlExpr getSingleBlockExpression(@Nullable PsiPerlBlock block) {
+    if (block == null) {
+      return null;
+    }
+    PsiElement[] children = block.getChildren();
+    if (children.length != 1 || !(children[0] instanceof PerlStatementMixin) || ((PerlStatementMixin)children[0]).getModifier() != null) {
+      return null;
+    }
+    return ((PerlStatementMixin)children[0]).getExpr();
+  }
+
+  /**
    * @return true iff {@code targetString} is non-qx string and represents the same string as {@code elementToCompare}
-   * todo take escaping with different quotes into account
    */
   private static boolean areStringElementsSame(@NotNull PerlString targetString, @NotNull PsiElement elementToCompare) {
     if ((targetString instanceof PsiPerlStringXq || elementToCompare instanceof PsiPerlStringXq)
