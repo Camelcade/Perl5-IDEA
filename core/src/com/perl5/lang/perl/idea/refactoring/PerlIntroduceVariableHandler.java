@@ -132,7 +132,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    */
   @NotNull
   public List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
-    // fixme matching with range
     PsiElement targetElement = target.getPlace();
     PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
     if (scope == null) {
@@ -225,7 +224,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     return targets;
   }
 
-  // fixme need to handle spaces in case {@code say <selection> expr </selection>}
   @NotNull
   private List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(Editor editor, PsiFile file) {
     SelectionModel selectionModel = editor.getSelectionModel();
@@ -245,7 +243,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, true);
     }
     if (wrappingExpression == null) {
-      // fixme try to find usages by caret in selection
       return Collections.emptyList();
     }
 
