@@ -315,6 +315,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                                                                     @NotNull TextRange selectionRange) {
     int selectionStart = selectionRange.getStartOffset();
     int selectionEnd = selectionRange.getEndOffset();
+    boolean canBreakTokens = !(wrappingExpression instanceof PerlStringList);
     PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuoteElement();
     if (run == null) {
       return Collections.emptyList();
@@ -341,12 +342,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
       if (startOffset < 0) {
         startOffset = run.getStartOffsetInParent();
-        if (selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+        if (canBreakTokens && selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
           startOffset += selectionStart - runTextRange.getStartOffset();
         }
       }
       endOffset = run.getStartOffsetInParent() + run.getTextLength();
-      if (selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+      if (canBreakTokens && selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
         endOffset -= runTextRange.getEndOffset() - selectionEnd;
       }
     }
