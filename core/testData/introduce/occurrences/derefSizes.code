@@ -1,0 +1,7 @@
+$var-> sub1;
+$var-> sub1  ->sub2;
+$var->  sub1  ->sub2 ->sub3;
+<selection>$var->   sub1  ->sub2 -</selection>>sub3;
+$var->  sub1 ->sub2;
+$var-> sub1;
+$var;

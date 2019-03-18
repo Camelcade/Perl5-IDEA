@@ -1,0 +1,7 @@
+$var-> sub1;
+<occurrence>$var-> sub1  ->sub2</occurrence>;
+<occurrence>$var->  sub1  ->sub2</occurrence> ->sub3;
+<occurrence>$var->   sub1  ->sub2</occurrence> ->sub3;
+<occurrence>$var->  sub1 ->sub2</occurrence>;
+$var-> sub1;
+$var;

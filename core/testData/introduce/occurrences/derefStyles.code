@@ -1,0 +1,8 @@
+$va<caret>r -> {something}->[1] -> {otherthing};
+$var -> {something} #comment
+  [1] -> {otherthing}->tail;
+$var -> {something}
+  [1]
+  {otherthing}->othertail;
+$var -> {something}[1]{otherthing}->blah();
+$var -> {'something'}->[1] -> { qq/otherthing/ }->[0];

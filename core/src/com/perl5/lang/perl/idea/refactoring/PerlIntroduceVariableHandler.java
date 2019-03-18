@@ -43,6 +43,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -145,8 +146,16 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     scope.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitElement(@NotNull PsiElement element) {
-        if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
-          result.add(PerlIntroduceTarget.create(element));
+        PerlIntroduceTarget elementTarget = null;
+        if (targetElement instanceof PerlDerefExpression) {
+          elementTarget = getDerefTargetIfSame((PerlDerefExpression)targetElement, target.getTextRangeInElement(), element);
+        }
+        else if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
+          elementTarget = PerlIntroduceTarget.create(element);
+        }
+
+        if (elementTarget != null) {
+          result.add(elementTarget);
         }
         else {
           super.visitElement(element);
@@ -154,6 +163,30 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       }
     });
     return result;
+  }
+
+  /**
+   * @return an introduce target of an {@code element} if it matches with {@code example} within {@code rangeInExample}, null otherwise
+   */
+  @Nullable
+  private PerlIntroduceTarget getDerefTargetIfSame(@NotNull PerlDerefExpression example,
+                                                   @NotNull TextRange rangeInExample,
+                                                   @NotNull PsiElement element) {
+    if (!(element instanceof PerlDerefExpression)) {
+      return null;
+    }
+    List<PsiElement> targetChildren = ContainerUtil.filter(example.getChildren(), it -> rangeInExample.contains(it.getTextRangeInParent()));
+    PsiElement[] elementChildren = element.getChildren();
+    if (elementChildren.length < targetChildren.size()) {
+      return null;
+    }
+    for (int i = 0; i < targetChildren.size(); i++) {
+      if (!PerlPsiUtil.areElementsSame(targetChildren.get(i), elementChildren[i])) {
+        return null;
+      }
+    }
+    return PerlIntroduceTarget
+      .create(element, TextRange.create(0, elementChildren[targetChildren.size() - 1].getTextRangeInParent().getEndOffset()));
   }
 
   /**

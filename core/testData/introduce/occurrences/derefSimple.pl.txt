@@ -1,0 +1,7 @@
+<occurrence>$var->some()</occurrence>;
+<occurrence>$var->some()</occurrence>;
+<occurrence>$var -> some()</occurrence>;
+<occurrence>$var # comment
+  -> some( )</occurrence>;
+
+${<occurrence>$var->some()</occurrence>};

@@ -1,0 +1,8 @@
+<occurrence>$var -> {something}->[1] -> {otherthing}</occurrence>;
+<occurrence>$var -> {something} #comment
+  [1] -> {otherthing}</occurrence>->tail;
+<occurrence>$var -> {something}
+  [1]
+  {otherthing}</occurrence>->othertail;
+<occurrence>$var -> {something}[1]{otherthing}</occurrence>->blah();
+<occurrence>$var -> {'something'}->[1] -> { qq/otherthing/ }</occurrence>->[0];
