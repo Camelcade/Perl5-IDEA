@@ -16,9 +16,16 @@
 
 package com.perl5.lang.perl.psi;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by evstigneev on 17.11.2015.
  * This is interface for deref expressions. named cast to make all names consistent. todo rename all related entities
  */
 public interface PerlCastExpression extends PsiPerlExpr {
+  @Nullable
+  PsiPerlBlock getBlock();
+
+  @Nullable
+  PsiPerlExpr getExpr();
 }
