@@ -751,7 +751,9 @@ public class PerlPsiUtil implements PerlElementTypes {
       if (elementToCompareType == STRING_CONTENT && elementToCompare.getParent() instanceof PerlStringList) {
         return Objects.equals(targetElement.getText(), elementToCompare.getText());
       }
-      if (!(elementToCompare instanceof PsiPerlStringDq) && !(elementToCompare instanceof PsiPerlStringSq)) {
+      if (!(elementToCompare instanceof PsiPerlStringDq ||
+            elementToCompare instanceof PsiPerlStringSq ||
+            elementToCompare instanceof PsiPerlStringBare)) {
         return false;
       }
       return elementToCompare.getChildren().length == 0 &&

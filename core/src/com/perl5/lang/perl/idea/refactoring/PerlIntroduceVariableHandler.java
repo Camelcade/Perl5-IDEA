@@ -169,32 +169,35 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   }
 
   /**
-   * @return an introduce target of an {@code element} if it matches with {@code example} within {@code rangeInExample}, null otherwise
+   * @return an introduce target of an {@code element} if it matches with {@code target} within {@code rangeInTarget}, null otherwise
    */
   @Nullable
-  private PerlIntroduceTarget computeStringListTargetIfSame(@NotNull PerlStringList example,
-                                                            @NotNull TextRange rangeInExample,
+  private PerlIntroduceTarget computeStringListTargetIfSame(@NotNull PerlStringList target,
+                                                            @NotNull TextRange rangeInTarget,
                                                             @NotNull PsiElement element) {
+    List<PsiElement> elementStrings = new ArrayList<>();
+    PerlPsiUtil.collectStringElementsRecursivelyStrict(element, elementStrings);
+    if (elementStrings.isEmpty()) {
+      return null;
+    }
+
     List<PsiElement> exampleStrings = new ArrayList<>();
-    if (!PerlPsiUtil.collectStringElementsRecursivelyStrict(example, exampleStrings)) {
+    if (!PerlPsiUtil.collectStringElementsRecursivelyStrict(target, exampleStrings)) {
       return null;
     }
 
     List<PsiElement> stringsToSearch =
-      ContainerUtil.filter(exampleStrings, it -> rangeInExample.contains(it.getTextRangeInParent()));
+      ContainerUtil.filter(exampleStrings, it -> rangeInTarget.contains(it.getTextRangeInParent()));
     if (stringsToSearch.isEmpty()) {
       return null;
     }
-
-    List<PsiElement> elementStrings = new ArrayList<>();
-    PerlPsiUtil.collectStringElementsRecursivelyStrict(example, elementStrings);
 
     if (stringsToSearch.size() > elementStrings.size()) {
       return null;
     }
 
     PsiElement firstStringToSearch = stringsToSearch.get(0);
-    for (int startIndex = 0; startIndex < elementStrings.size() - stringsToSearch.size(); startIndex++) {
+    for (int startIndex = 0; startIndex <= elementStrings.size() - stringsToSearch.size(); startIndex++) {
       PsiElement firstElementString = elementStrings.get(startIndex);
       if (!PerlPsiUtil.areElementsSame(firstStringToSearch, firstElementString)) {
         continue;
