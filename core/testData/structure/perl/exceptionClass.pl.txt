@@ -13,7 +13,7 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
   Exception5 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 142 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  Exception6 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 233 in exceptionClass.pl
+  Exception6 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 233 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Exception7 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 250 in exceptionClass.pl
@@ -61,10 +61,10 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
   field2 in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::field2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 470 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  bla in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::bla; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 577 in exceptionClass.pl
+  bla in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::bla; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 577 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  bla in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::bla; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 581 in exceptionClass.pl
+  bla in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::bla; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 581 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   ThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongName in exceptionClass.pl; /method_gutter_icon.png; null -> PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Exception7::ThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongNameThisIsASuperLongName; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 599 in exceptionClass.pl
@@ -82,6 +82,6 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
   somealias in exceptionClass.pl; /subroutine_gutter_icon.png; null -> PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@main::somealias; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1322 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-  somealias in exceptionClass.pl; /subroutine_gutter_icon.png; null -> PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@main::somealias; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1424 in exceptionClass.pl
+  somealias in exceptionClass.pl; /subroutine_gutter_icon.png; null -> PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@main::somealias; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1424 in exceptionClass.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 

@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Perl Line Markers" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests" singleton="true">
+  <configuration default="false" name="Test Perl Light Elements" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=markers/*" />
+      <option name="scriptParameters" value="-Pruntest=lightElements/*" />
       <option name="taskDescriptions">
         <list />
       </option>

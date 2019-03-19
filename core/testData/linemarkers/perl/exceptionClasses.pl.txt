@@ -40,7 +40,7 @@ Targets: 1
 
 363 - 369: 'fields': Overriden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption6::Fields; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 555 in exceptionClasses.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption6::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 555 in exceptionClasses.pl
 
 363 - 369: 'fields': Overriding method
 Targets: 1
@@ -48,7 +48,7 @@ Targets: 1
 
 400 - 405: 'test2': Overriden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption6::test2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 578 in exceptionClasses.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption6::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 578 in exceptionClasses.pl
 
 428 - 436: 'Seption6': Parent classes
 Targets: 1
@@ -60,4 +60,5 @@ Targets: 1
 
 578 - 583: 'test2': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption5::test2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 400 in exceptionClasses.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption5::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 400 in exceptionClasses.pl
+

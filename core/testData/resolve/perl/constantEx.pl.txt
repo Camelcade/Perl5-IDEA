@@ -16,11 +16,11 @@ PerlSubReference at (233,239); text in range: 'CONST5' => 1 results:
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 107 in constantEx.pl
 
 PerlSubReference at (241,247); text in range: 'CONST6' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 141 in constantEx.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 141 in constantEx.pl
 
 PerlSubReference at (249,255); text in range: 'CONST7' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST7; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 159 in constantEx.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 159 in constantEx.pl
 
 PerlSubReference at (257,263); text in range: 'CONST8' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST8; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 177 in constantEx.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST8; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 177 in constantEx.pl
 

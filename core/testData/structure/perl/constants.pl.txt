@@ -19,12 +19,12 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     CONST5 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 126 in constants.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    CONST6 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 160 in constants.pl
+    CONST6 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 160 in constants.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    CONST7 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST7; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 178 in constants.pl
+    CONST7 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 178 in constants.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    CONST8 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST8; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 196 in constants.pl
+    CONST8 in constants.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Bla::Bla::CONST8; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 196 in constants.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 

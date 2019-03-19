@@ -15,7 +15,7 @@ Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 238 in mojoHelper
 Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 277 in mojoHelpers.pl
 
 Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 317 in mojoHelpers.pl
-	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 328 in mojoHelpers.pl
+	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 328 in mojoHelpers.pl
 
 Poly-named provider: MojoHelperWrapper(MOJO_HELPER_WRAPPER) at 357 in mojoHelpers.pl
 

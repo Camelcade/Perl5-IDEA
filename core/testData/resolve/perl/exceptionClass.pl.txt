@@ -26,17 +26,17 @@ PerlNamespaceReference at (255,265); text in range: 'Exception5' => 1 results:
 PerlSubReference at (269,274); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (278,288); text in range: 'Exception6' => 1 results:
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 126 in exceptionClass.pl
+	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 126 in exceptionClass.pl
 
 PerlSubReference at (292,297); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (301,311); text in range: 'Exception7' => 1 results:
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception7; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 137 in exceptionClass.pl
+	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 137 in exceptionClass.pl
 
 PerlSubReference at (315,320); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (324,334); text in range: 'Exception8' => 1 results:
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception8; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 148 in exceptionClass.pl
+	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception8; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 148 in exceptionClass.pl
 
 PerlSubReference at (338,343); text in range: 'throw' => 0 results:
 

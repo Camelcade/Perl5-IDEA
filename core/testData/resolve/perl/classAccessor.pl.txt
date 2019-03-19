@@ -101,125 +101,125 @@ PerlNamespaceReference at (1078,1089); text in range: '__PACKAGE__' => 1 results
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1091,1101); text in range: 'simple_ro1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_ro1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 231 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_ro1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 231 in classAccessor.pl
 
 PerlNamespaceReference at (1103,1114); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1116,1131); text in range: 'simple_other_ro' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 242 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_ro($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 242 in classAccessor.pl
 
 PerlNamespaceReference at (1133,1144); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1146,1161); text in range: 'simple_third_ro' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_ro($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 416 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_ro($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 416 in classAccessor.pl
 
 PerlNamespaceReference at (1163,1174); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1176,1186); text in range: 'simple_rw1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_rw1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 158 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_rw1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 158 in classAccessor.pl
 
 PerlNamespaceReference at (1188,1199); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1201,1216); text in range: 'simple_other_rw' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 169 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_rw($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 169 in classAccessor.pl
 
 PerlNamespaceReference at (1218,1229); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1231,1246); text in range: 'simple_third_rw' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_rw($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 364 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_rw($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 364 in classAccessor.pl
 
 PerlNamespaceReference at (1248,1259); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1261,1271); text in range: 'simple_wo1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_wo1($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 304 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_wo1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 304 in classAccessor.pl
 
 PerlNamespaceReference at (1273,1284); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1286,1301); text in range: 'simple_other_wo' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 315 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_other_wo($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 315 in classAccessor.pl
 
 PerlNamespaceReference at (1303,1314); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1316,1331); text in range: 'simple_third_wo' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_wo($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 468 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::simple_third_wo($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 468 in classAccessor.pl
 
 PerlNamespaceReference at (1333,1344); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1346,1357); text in range: 'get_fbp_ro1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 653 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 653 in classAccessor.pl
 
 PerlNamespaceReference at (1359,1370); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1372,1383); text in range: 'get_fbp_ro2' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 684 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 684 in classAccessor.pl
 
 PerlNamespaceReference at (1385,1396); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1398,1409); text in range: 'get_fbp_ro3' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 853 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_ro3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 853 in classAccessor.pl
 
 PerlNamespaceReference at (1411,1422); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1424,1435); text in range: 'get_fbp_rw1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 571 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 571 in classAccessor.pl
 
 PerlNamespaceReference at (1437,1448); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1450,1461); text in range: 'get_fbp_rw2' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 599 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 599 in classAccessor.pl
 
 PerlNamespaceReference at (1463,1474); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1476,1487); text in range: 'get_fbp_rw3' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 810 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::get_fbp_rw3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 810 in classAccessor.pl
 
 PerlNamespaceReference at (1489,1500); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1502,1513); text in range: 'set_fbp_wo1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo1($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 738 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo1($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 738 in classAccessor.pl
 
 PerlNamespaceReference at (1515,1526); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1528,1539); text in range: 'set_fbp_wo2' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo2($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 769 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo2($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 769 in classAccessor.pl
 
 PerlNamespaceReference at (1541,1552); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1554,1565); text in range: 'set_fbp_wo3' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo3($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 896 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_wo3($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 896 in classAccessor.pl
 
 PerlNamespaceReference at (1567,1578); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1580,1591); text in range: 'set_fbp_rw1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw1($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 571 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw1($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 571 in classAccessor.pl
 
 PerlNamespaceReference at (1593,1604); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1606,1617); text in range: 'set_fbp_rw2' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw2($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 599 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw2($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 599 in classAccessor.pl
 
 PerlNamespaceReference at (1619,1630); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Class::Accessor::Test at 16 in classAccessor.pl
 
 PerlSubReference at (1632,1643); text in range: 'set_fbp_rw3' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw3($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 810 in classAccessor.pl
+	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Class::Accessor::Test::set_fbp_rw3($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 810 in classAccessor.pl
 

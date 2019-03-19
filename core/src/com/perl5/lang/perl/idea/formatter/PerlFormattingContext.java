@@ -92,7 +92,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     Map<ASTNode, Alignment> itemsMap = new THashMap<>();
     ASTNode run = listNode.getFirstChildNode();
     while (run != null) {
-      if (PsiUtilCore.getElementType(run) == STRING_CONTENT) {
+      if (PsiUtilCore.getElementType(run) == STRING_BARE) {
         itemsMap.put(run, generatingMap.get(column++));
       }
       else if (StringUtil.containsLineBreak(run.getChars())) {
@@ -366,7 +366,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
              mySettings.ALIGN_MULTILINE_CHAINED_METHODS) {
       return myOperatorsAlignmentsMap.get(parentNode);
     }
-    else if (childNodeType == STRING_CONTENT &&
+    else if (childNodeType == STRING_BARE &&
              (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
              perlCodeStyleSettings.ALIGN_QW_ELEMENTS) {
       return myStringListAlignmentMap.get(parentNode).get(childNode);
@@ -484,7 +484,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       }
     }
     else if ((parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW) &&
-             (childNodeType == STRING_CONTENT || childNodeType == QUOTE_SINGLE_CLOSE)) {
+             (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
       return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||

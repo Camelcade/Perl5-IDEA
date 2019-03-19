@@ -79,8 +79,8 @@ public class PerlSpacingBuilderFactory {
       .between(NUMBER_CONSTANT, OPERATOR_CONCAT).spaces(1)
       .aroundInside(OPERATOR_CONCAT, ADD_EXPR).spaceIf(perlSettings.SPACE_AROUND_CONCAT_OPERATOR)
 
-      .betweenInside(STRING_CONTENT, STRING_CONTENT, LP_STRING_QW).spaces(1)
-      .betweenInside(STRING_CONTENT, STRING_CONTENT, STRING_LIST).spaces(1)
+      .betweenInside(STRING_BARE, STRING_BARE, LP_STRING_QW).spaces(1)
+      .betweenInside(STRING_BARE, STRING_BARE, STRING_LIST).spaces(1)
 
       .betweenInside(QUOTE_SINGLE_OPEN, QUOTE_SINGLE_CLOSE, STRING_LIST).spaces(0)
       .afterInside(QUOTE_SINGLE_OPEN, STRING_LIST).spaceIf(perlSettings.SPACE_WITHIN_QW_QUOTES)

@@ -27,7 +27,6 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex;
 import com.perl5.lang.perl.util.processors.PerlArrayImportsCollector;
@@ -138,27 +137,15 @@ public class PerlArrayUtil implements PerlElementTypes {
       return result;
     }
 
-    if (rootElement instanceof PsiPerlParenthesisedExpr || rootElement instanceof PsiPerlCommaSequenceExpr) {
+    if (rootElement instanceof PsiPerlParenthesisedExpr ||
+        rootElement instanceof PsiPerlCommaSequenceExpr ||
+        PsiUtilCore.getElementType(rootElement) == LP_STRING_QW ||
+        rootElement instanceof PerlStringList) {
       for (PsiElement childElement : rootElement.getChildren()) {
         collectListElements(childElement, result);
       }
     }
-    else if (rootElement instanceof PerlStringList) {
-      PsiElement element = rootElement.getFirstChild();
-      while (element != null) {
-        if (PsiUtilCore.getElementType(element) == LP_STRING_QW) {
-          element = element.getFirstChild();
-          if (element == null) {
-            break;
-          }
-        }
-        if (element instanceof PerlStringContentElementImpl) {
-          result.add(element);
-        }
-        element = element.getNextSibling();
-      }
-    }
-    else if (rootElement.getNode() instanceof CompositeElement || rootElement instanceof PerlStringContentElement) {
+    else if (rootElement.getNode() instanceof CompositeElement) {
       result.add(rootElement);
     }
     return result;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.stubs;
+package com.perl5.lang.perl.parser;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
 
 /**
- * Created by hurricup on 13.11.2016.
+ * Created by hurricup on 23.02.2016.
  */
-public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringStubIndexExtension<Psi> {
-  private final static int VERSION = 8;
+public class PerlLazyQWListContentParser extends PerlParserImpl {
+  public static final PsiParser INSTANCE = new PerlLazyQWListContentParser();
 
   @Override
-  public int getVersion() {
-    return super.getVersion() + VERSION;
+  public boolean parseFileContents(PsiBuilder b, int l) {
+    return PerlParserImpl.qw_string_content(b, l);
   }
 }

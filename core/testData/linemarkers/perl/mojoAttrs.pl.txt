@@ -20,11 +20,11 @@ Targets: 1
 
 77 - 82: 'name4': Overriden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name4($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 556 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 556 in mojoAttrs.pl
 
 91 - 96: 'name5': Overriden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name5($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 570 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 570 in mojoAttrs.pl
 
 105 - 106: ''': Overriden methods
 Targets: 1
@@ -104,11 +104,11 @@ Targets: 1
 
 556 - 561: 'name4': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 77 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 77 in mojoAttrs.pl
 
 570 - 575: 'name5': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 91 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 91 in mojoAttrs.pl
 
 584 - 585: ''': Overriding method
 Targets: 1
@@ -165,3 +165,4 @@ Targets: 1
 905 - 906: ''': Overriding method
 Targets: 1
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name38($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 426 in mojoAttrs.pl
+

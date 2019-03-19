@@ -7,14 +7,14 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 109 in moos
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 134 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 136 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test4; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 145 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test5; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 192 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 198 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 192 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 198 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 226 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test7($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 228 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test8($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 238 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test9($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 293 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test10($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 299 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test9($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 293 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test10($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 299 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 328 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 328 in mooseAttrs.pl
@@ -29,12 +29,12 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 476 in moos
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test14($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 476 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 526 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test15; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 531 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test16; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 538 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test15; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 531 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test16; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 538 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 590 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test17($self, [My::Foo::Bar $new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 595 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test18($self, [My::Foo::Bar $new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 602 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test17($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 595 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test18($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 602 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 655 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test20($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 689 in mooseAttrs.pl
@@ -55,14 +55,14 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 841 in moos
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 887 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 933 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test32; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 968 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test32; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 968 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 981 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test35($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1023 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test34; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1007 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test36($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1037 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test37; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1054 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test38; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1069 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test35($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1023 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test34; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1007 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test36($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1037 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test37; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1054 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test38; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1069 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1082 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test40; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1114 in mooseAttrs.pl
@@ -81,7 +81,7 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1253 in moo
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1281 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1309 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test47($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1312 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test47($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1312 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1339 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test45($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1339 in mooseAttrs.pl
@@ -93,25 +93,25 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1395 in moo
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1423 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test48($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1423 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test49; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1461 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test50; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1468 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test51; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1475 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test52; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1482 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test49; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1461 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test50; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1468 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test51; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1475 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test52; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1482 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1497 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test53($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1497 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test55; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1549 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test54; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1535 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test55; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1549 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test54; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1535 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1571 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test57; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1597 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test59; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1628 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test60; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1643 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test57; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1597 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test59; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1628 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test60; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1643 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1656 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test61; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1656 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test63; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1699 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test64; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1714 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test63; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1699 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test64; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1714 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1727 in mooseAttrs.pl
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test64($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1727 in mooseAttrs.pl
@@ -121,9 +121,9 @@ Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1727 in moo
 	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test69; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1802 in mooseAttrs.pl
 
 Poly-named provider: PerlMooseAttributeWrapper(ATTRIBUTE_WRAPPER) at 1878 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test72($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1882 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1917 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1941 in mooseAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1948 in mooseAttrs.pl
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1889 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test72($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1882 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1917 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1941 in mooseAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1948 in mooseAttrs.pl
+	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1889 in mooseAttrs.pl
 

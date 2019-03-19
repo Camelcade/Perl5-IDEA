@@ -34,7 +34,7 @@ PerlNamespaceReference at (569,581); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 341 in exceptionClassAlias.pl
 
 PerlSubReference at (684,699); text in range: 'aliasfor6sdfsdf' => 1 results:
-	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6sdfsdf($somefield); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 529 in exceptionClassAlias.pl
+	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6sdfsdf($somefield); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 529 in exceptionClassAlias.pl
 
 PerlSubReference at (702,713); text in range: 'aliasfor545' => 1 results:
 	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor545($test1, $test2); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 379 in exceptionClassAlias.pl
@@ -47,7 +47,7 @@ PerlNamespaceReference at (763,771); text in range: 'Foo::Bar' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 16 in exceptionClassAlias.pl
 
 PerlSubReference at (773,788); text in range: 'aliasfor6sdfsdf' => 1 results:
-	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6sdfsdf($somefield); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 529 in exceptionClassAlias.pl
+	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6sdfsdf($somefield); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 529 in exceptionClassAlias.pl
 
 PerlNamespaceReference at (791,799); text in range: 'Foo::Bar' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 16 in exceptionClassAlias.pl
@@ -59,7 +59,7 @@ PerlNamespaceReference at (815,823); text in range: 'Foo::Bar' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 16 in exceptionClassAlias.pl
 
 PerlSubReference at (825,840); text in range: 'aliasfor6sdfsdf' => 1 results:
-	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6sdfsdf($somefield); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 529 in exceptionClassAlias.pl
+	PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6sdfsdf($somefield); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 529 in exceptionClassAlias.pl
 
 PerlNamespaceReference at (843,851); text in range: 'Foo::Bar' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 16 in exceptionClassAlias.pl

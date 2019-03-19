@@ -61,13 +61,13 @@ PerlNamespaceReference at (812,824); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in exceptionClassFields.pl
 
 PerlSubReference at (826,831); text in range: 'test1' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 483 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 483 in exceptionClassFields.pl
 
 PerlNamespaceReference at (833,845); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in exceptionClassFields.pl
 
 PerlSubReference at (847,852); text in range: 'test2' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 489 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 489 in exceptionClassFields.pl
 
 PerlNamespaceReference at (854,866); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in exceptionClassFields.pl
@@ -85,13 +85,13 @@ PerlNamespaceReference at (902,914); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in exceptionClassFields.pl
 
 PerlSubReference at (916,921); text in range: 'test1' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 483 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 483 in exceptionClassFields.pl
 
 PerlNamespaceReference at (923,935); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in exceptionClassFields.pl
 
 PerlSubReference at (937,942); text in range: 'test2' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 489 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 489 in exceptionClassFields.pl
 
 PerlNamespaceReference at (944,956); text in range: 'My::Seption5' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption5; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 372 in exceptionClassFields.pl
@@ -108,19 +108,19 @@ PerlNamespaceReference at (992,1004); text in range: 'My::Seption6' => 1 results
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
 
 PerlSubReference at (1006,1015); text in range: 'somefield' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::somefield; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 642 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::somefield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 642 in exceptionClassFields.pl
 
 PerlNamespaceReference at (1017,1029); text in range: 'My::Seption6' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
 
 PerlSubReference at (1031,1036); text in range: 'test1' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test1; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 483 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 483 in exceptionClassFields.pl
 
 PerlNamespaceReference at (1038,1050); text in range: 'My::Seption6' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
 
 PerlSubReference at (1052,1057); text in range: 'test2' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 489 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption5::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 489 in exceptionClassFields.pl
 
 PerlNamespaceReference at (1059,1071); text in range: 'My::Seption6' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
@@ -132,13 +132,13 @@ PerlNamespaceReference at (1084,1096); text in range: 'My::Seption6' => 1 result
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
 
 PerlSubReference at (1098,1104); text in range: 'Fields' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::Fields; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 630 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 630 in exceptionClassFields.pl
 
 PerlNamespaceReference at (1107,1119); text in range: 'My::Seption6' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
 
 PerlSubReference at (1121,1130); text in range: 'somefield' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::somefield; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 642 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::somefield; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 642 in exceptionClassFields.pl
 
 PerlNamespaceReference at (1132,1144); text in range: 'My::Seption6' => 1 results:
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
@@ -159,5 +159,5 @@ PerlNamespaceReference at (1199,1211); text in range: 'My::Seption6' => 1 result
 	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@My::Seption6; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 509 in exceptionClassFields.pl
 
 PerlSubReference at (1213,1219); text in range: 'Fields' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::Fields; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 630 in exceptionClassFields.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@My::Seption6::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 630 in exceptionClassFields.pl
 

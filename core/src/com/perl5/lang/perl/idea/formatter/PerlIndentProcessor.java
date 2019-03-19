@@ -211,7 +211,7 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
       return Indent.getNoneIndent();
     }
 
-    if (nodeType == STRING_CONTENT && ( parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW )) {
+    if (nodeType == STRING_BARE && (parentNodeType == STRING_LIST || parentNodeType == LP_STRING_QW)) {
       return Indent.getContinuationIndent();
     }
 

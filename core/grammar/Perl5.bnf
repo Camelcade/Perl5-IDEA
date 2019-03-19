@@ -1137,11 +1137,14 @@ private interpolated_constructs ::= deref_expr
 string_bare ::= STRING_CONTENT
 
 string_sq ::= [ 'q'] quoted_sq_string
-string_list ::=  'qw' quoted_sq_string
+string_list ::=  'qw' qw_string {pin=1}
+private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
+private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+|qw_string_content
+private qw_string_content ::= LP_STRING_QW|string_bare+
 private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
 private sq_string_content ::= sq_string_content_element +
-private sq_string_content_element ::= LP_STRING_Q |LP_STRING_QW|STRING_CONTENT
+private sq_string_content_element ::= LP_STRING_Q |STRING_CONTENT
 
 heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 

@@ -56,13 +56,13 @@ PerlNamespaceReference at (498,509); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in mojoAttrs.pl
 
 PerlSubReference at (511,516); text in range: 'name4' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 65 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 65 in mojoAttrs.pl
 
 PerlNamespaceReference at (518,529); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in mojoAttrs.pl
 
 PerlSubReference at (531,536); text in range: 'name5' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 71 in mojoAttrs.pl
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 71 in mojoAttrs.pl
 
 PerlNamespaceReference at (538,549); text in range: '__PACKAGE__' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in mojoAttrs.pl

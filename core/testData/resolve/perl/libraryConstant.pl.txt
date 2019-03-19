@@ -14,13 +14,13 @@ PerlNamespaceReference at (71,88); text in range: 'MyTest::Constants' => 1 resul
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 
 PerlSubReference at (90,104); text in range: 'LIBRARY_CONST3' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 111 in Constants.pm
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Constants.pm
 
 PerlNamespaceReference at (106,123); text in range: 'MyTest::Constants' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 
 PerlSubReference at (125,139); text in range: 'LIBRARY_CONST4' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 129 in Constants.pm
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in Constants.pm
 
 PerlNamespaceReference at (141,158); text in range: 'MyTest::Constants' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
@@ -38,11 +38,11 @@ PerlNamespaceReference at (211,228); text in range: 'MyTest::Constants' => 1 res
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 
 PerlSubReference at (230,244); text in range: 'LIBRARY_CONST3' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 111 in Constants.pm
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Constants.pm
 
 PerlNamespaceReference at (246,263); text in range: 'MyTest::Constants' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 
 PerlSubReference at (265,279); text in range: 'LIBRARY_CONST4' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 129 in Constants.pm
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in Constants.pm
 

@@ -27,29 +27,29 @@ PerlSubReference at (2331,2337); text in range: 'CONST5' => 1 results:
 	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST5; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 155 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2339,2345); text in range: 'CONST6' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST6; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1163 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1163 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2347,2353); text in range: 'CONST7' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST7; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1181 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST7; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1181 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2355,2361); text in range: 'CONST8' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST8; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1199 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST8; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1199 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2363,2370); text in range: 'CONST16' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST16; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1217 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST16; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1217 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2372,2379); text in range: 'CONST17' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST17; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1236 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST17; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1236 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2381,2388); text in range: 'CONST18' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST18; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1255 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST18; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1255 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2390,2397); text in range: 'CONST26' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST26; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1274 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST26; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1274 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2399,2406); text in range: 'CONST27' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST27; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1293 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST27; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1293 in constantsWithCollapsedLists.pl
 
 PerlSubReference at (2408,2415); text in range: 'CONST28' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST28; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1312 in constantsWithCollapsedLists.pl
+	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::CONST28; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1312 in constantsWithCollapsedLists.pl
 

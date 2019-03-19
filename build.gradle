@@ -51,6 +51,7 @@ allprojects{
     }
 
     test{
+        outputs.upToDateWhen {false}
         if(project.hasProperty("overwrite.results")){
             systemProperty "idea.tests.overwrite.data", "true"
         }

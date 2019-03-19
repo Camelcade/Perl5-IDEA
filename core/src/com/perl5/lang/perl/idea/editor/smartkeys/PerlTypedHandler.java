@@ -44,6 +44,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
 import com.perl5.lang.perl.psi.PsiPerlStringList;
+import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -239,7 +240,9 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
 
     if (typedChar == '>' && elementType == OPERATOR_MINUS ||
         typedChar == ':' && elementType == COLON ||
-        typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) || element.getParent() instanceof PsiPerlStringList) ||
+        typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) ||
+                             element.getParent() instanceof PerlStringBareMixin &&
+                             element.getParent().getParent() instanceof PsiPerlStringList) ||
         typedChar == '{' && SIGILS.contains(elementType) ||
         StringUtil.containsChar("$@%#", typedChar)) {
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor);

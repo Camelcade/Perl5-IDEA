@@ -22,10 +22,10 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     some in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::some($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 296 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 311 in classAccessor.pl
+    accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 311 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 322 in classAccessor.pl
+    accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 322 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     accessor1 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 363 in classAccessor.pl
@@ -46,10 +46,10 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     some in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::some($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 575 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 590 in classAccessor.pl
+    accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 590 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 601 in classAccessor.pl
+    accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 601 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     accessor1 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 641 in classAccessor.pl
@@ -70,10 +70,10 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     some in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::some($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 853 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 868 in classAccessor.pl
+    accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor11($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 868 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 879 in classAccessor.pl
+    accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::accessor12($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 879 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     get_accessor1 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 943 in classAccessor.pl
@@ -112,16 +112,16 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     set_some in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_some($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1155 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    get_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor11; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1170 in classAccessor.pl
+    get_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1170 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    set_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor11($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1170 in classAccessor.pl
+    set_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor11($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1170 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    get_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor12; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1181 in classAccessor.pl
+    get_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor12; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1181 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    set_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor12($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1181 in classAccessor.pl
+    set_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor12($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1181 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     get_accessor1 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1222 in classAccessor.pl
@@ -142,10 +142,10 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     get_some in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_some; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1434 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    get_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor11; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1449 in classAccessor.pl
+    get_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1449 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    get_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor12; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1460 in classAccessor.pl
+    get_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::get_accessor12; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1460 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
     set_accessor1 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor1($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1500 in classAccessor.pl
@@ -166,9 +166,9 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     set_some in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_some($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1712 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    set_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor11($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1727 in classAccessor.pl
+    set_accessor11 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor11($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1727 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    set_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor12($self, $new_value); navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 1738 in classAccessor.pl
+    set_accessor12 in classAccessor.pl; /method_gutter_icon.png; null -> PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor12($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1738 in classAccessor.pl
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 

@@ -14,12 +14,12 @@ PerlNamespaceReference at (60,76); text in range: 'LibraryException' => 1 result
 PerlSubReference at (78,83); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (87,106); text in range: 'Library::Exception2' => 1 results:
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 111 in Exceptions.pm
+	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 
 PerlSubReference at (108,113); text in range: 'throw' => 0 results:
 
 PerlNamespaceReference at (117,134); text in range: 'LibraryException3' => 1 results:
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 131 in Exceptions.pm
+	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 
 PerlSubReference at (136,141); text in range: 'throw' => 0 results:
 

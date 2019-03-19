@@ -543,8 +543,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
     PsiElement run = element.getPrevSibling();
 
-    if (run == null) {
-      run = element;
+    boolean isListItem = element.getParent() instanceof PerlStringList;
+    if (run == null || isListItem) {
+      run = isListItem ? element.getParent() : element;
       int elementOffset = element.getNode().getStartOffset();
       while (true) {
         PsiElement parent = run.getParent();
