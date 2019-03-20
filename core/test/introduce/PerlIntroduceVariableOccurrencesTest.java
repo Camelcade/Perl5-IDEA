@@ -37,6 +37,8 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
 
   public void testListToQw() {doTest();}
 
+  public void testListToQwSame() {doTest();}
+
   public void testDerefStyles() {doTest();}
 
   public void testDerefSimple() {doTest();}

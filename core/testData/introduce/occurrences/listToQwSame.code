@@ -1,0 +1,17 @@
+my @test = (<selection>"test", test => 'test'</selection>, "test", test => 'test');
+
+qw/
+    test test test test test  test
+    test test test test test  test
+    test test test test test  test
+    test test test test test  test
+    test test test test test  test
+    test test test test test  test
+    test test test test test  test
+    test test test test test  test
+/;
+
+qw/
+    test test test test test  test
+    test test test test test  test
+/;

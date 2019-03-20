@@ -1,0 +1,17 @@
+my @test = (<occurrence>"test", test => 'test'</occurrence>, <occurrence>"test", test => 'test'</occurrence>);
+
+qw/
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+/;
+
+qw/
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+    <occurrence>test test test</occurrence> <occurrence>test test  test</occurrence>
+/;
