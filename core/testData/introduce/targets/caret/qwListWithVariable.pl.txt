@@ -1,12 +1,12 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 18 in qwListWithVariable.pl
+    (0,9)
+    '$variable'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
-    (4,27)
-    ' This is some $variable'
+    (5,27)
+    'This is some $variable'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
-    (4,32)
-    ' This is some $variable text'
+    (5,32)
+    'This is some $variable text'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
-    (4,37)
-    ' This is some $variable text tail'
-PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
-    (0,38)
-    'qw / This is some $variable text tail/'
+    (5,37)
+    'This is some $variable text tail'

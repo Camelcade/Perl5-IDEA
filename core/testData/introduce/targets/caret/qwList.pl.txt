@@ -1,12 +1,12 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 13 in qwList.pl
+    (0,4)
+    'some'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwList.pl
-    (4,17)
-    ' This is some'
+    (5,17)
+    'This is some'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwList.pl
-    (4,22)
-    ' This is some text'
+    (5,22)
+    'This is some text'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwList.pl
-    (4,27)
-    ' This is some text tail'
-PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwList.pl
-    (0,28)
-    'qw / This is some text tail/'
+    (5,27)
+    'This is some text tail'

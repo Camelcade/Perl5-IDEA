@@ -42,6 +42,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,6 +61,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   );
   private static final TokenSet SEQUENTINAL_TOKENS = TokenSet.create(
     COMMA_SEQUENCE_EXPR, DEREF_EXPR,
+    LP_STRING_QW, STRING_LIST,
     ADD_EXPR, MUL_EXPR, SHIFT_EXPR, BITWISE_AND_EXPR, BITWISE_OR_XOR_EXPR, AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR
   );
 
@@ -150,8 +152,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         if (targetElement instanceof PerlDerefExpression) {
           elementTarget = computeDerefTargetIfSame((PerlDerefExpression)targetElement, target.getTextRangeInElement(), element);
         }
-        else if (targetElement instanceof PerlStringList) {
-          elementTarget = computeStringListTargetIfSame((PerlStringList)targetElement, target.getTextRangeInElement(), element);
+        else if (targetElement instanceof PerlStringList || targetElement instanceof PsiPerlCommaSequenceExpr) {
+          elementTarget = computeListTargetIfSame((PerlStringList)targetElement, target.getTextRangeInElement(), element);
         }
         else if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
           elementTarget = PerlIntroduceTarget.create(element);
@@ -172,49 +174,44 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    * @return an introduce target of an {@code element} if it matches with {@code target} within {@code rangeInTarget}, null otherwise
    */
   @Nullable
-  private PerlIntroduceTarget computeStringListTargetIfSame(@NotNull PerlStringList target,
-                                                            @NotNull TextRange rangeInTarget,
-                                                            @NotNull PsiElement element) {
-    List<PsiElement> elementStrings = new ArrayList<>();
-    PerlPsiUtil.collectStringElementsRecursivelyStrict(element, elementStrings);
-    if (elementStrings.isEmpty()) {
+  private PerlIntroduceTarget computeListTargetIfSame(@NotNull PsiElement target,
+                                                      @NotNull TextRange rangeInTarget,
+                                                      @NotNull PsiElement element) {
+    List<PsiElement> elementChildren = PerlArrayUtil.collectListElements(element);
+    if (elementChildren.isEmpty()) {
       return null;
     }
 
-    List<PsiElement> exampleStrings = new ArrayList<>();
-    if (!PerlPsiUtil.collectStringElementsRecursivelyStrict(target, exampleStrings)) {
+    List<PsiElement> targetChildren = PerlArrayUtil.collectListElements(target);
+
+    List<PsiElement> elementsToSearch = ContainerUtil.filter(targetChildren, it -> rangeInTarget.contains(it.getTextRangeInParent()));
+    if (elementsToSearch.isEmpty()) {
       return null;
     }
 
-    List<PsiElement> stringsToSearch =
-      ContainerUtil.filter(exampleStrings, it -> rangeInTarget.contains(it.getTextRangeInParent()));
-    if (stringsToSearch.isEmpty()) {
+    if (elementsToSearch.size() > elementChildren.size()) {
       return null;
     }
 
-    if (stringsToSearch.size() > elementStrings.size()) {
-      return null;
-    }
-
-    PsiElement firstStringToSearch = stringsToSearch.get(0);
-    for (int startIndex = 0; startIndex <= elementStrings.size() - stringsToSearch.size(); startIndex++) {
-      PsiElement firstElementString = elementStrings.get(startIndex);
-      if (!PerlPsiUtil.areElementsSame(firstStringToSearch, firstElementString)) {
+    PsiElement firstStringToSearch = elementsToSearch.get(0);
+    for (int startIndex = 0; startIndex <= elementChildren.size() - elementsToSearch.size(); startIndex++) {
+      PsiElement firstChildElement = elementChildren.get(startIndex);
+      if (!PerlPsiUtil.areElementsSame(firstStringToSearch, firstChildElement)) {
         continue;
       }
       int offset = 1;
-      for (; offset < stringsToSearch.size(); offset++) {
-        if (!PerlPsiUtil.areElementsSame(stringsToSearch.get(offset), elementStrings.get(startIndex + offset))) {
+      for (; offset < elementsToSearch.size(); offset++) {
+        if (!PerlPsiUtil.areElementsSame(elementsToSearch.get(offset), elementChildren.get(startIndex + offset))) {
           break;
         }
       }
-      if (offset == stringsToSearch.size()) {
+      if (offset == elementsToSearch.size()) {
         // matches
-        return startIndex == 0 && offset == elementStrings.size() ?
+        return startIndex == 0 && offset == elementChildren.size() ?
                PerlIntroduceTarget.create(element) :
                PerlIntroduceTarget.create(element, TextRange.create(
-                 firstElementString.getTextRange().getStartOffset(),
-                 elementStrings.get(startIndex + offset - 1).getTextRange().getEndOffset()
+                 firstChildElement.getTextRange().getStartOffset(),
+                 elementChildren.get(startIndex + offset - 1).getTextRange().getEndOffset()
                ).shiftLeft(element.getTextRange().getStartOffset()));
       }
     }
@@ -260,10 +257,11 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     while (run != null) {
       IElementType elementType = PsiUtilCore.getElementType(run);
       if (SEQUENTINAL_TOKENS.contains(elementType)) {
-        for (PsiElement child : run.getChildren()) {
+        PsiElement[] children = run.getChildren();
+        for (PsiElement child : children) {
           TextRange childTextRange = child.getTextRange();
           if (childTextRange.contains(caretOffset) || childTextRange.getStartOffset() > caretOffset) {
-            targets.add(PerlIntroduceTarget.create(run, child));
+            targets.add(PerlIntroduceTarget.create(run, children[0], child));
           }
         }
       }
@@ -346,7 +344,10 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
     TextRange selectionRange = TextRange.create(selectionStart, selectionEnd);
     IElementType wrappingExpressionElementType = PsiUtilCore.getElementType(wrappingExpression);
-    if (wrappingExpression instanceof PsiPerlStringBare) {
+    if (SEQUENTINAL_TOKENS.contains(wrappingExpressionElementType)) {
+      return computeTargetsForSequentialExpressionsFromSelection(wrappingExpression, selectionRange);
+    }
+    else if (wrappingExpression instanceof PsiPerlStringBare) {
       TextRange intersectedRange = selectionRange.intersection(wrappingExpression.getTextRange());
       if (intersectedRange == null) {
         return Collections.emptyList();
@@ -356,9 +357,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     }
     if (wrappingExpression instanceof PerlQuoted) {
       return computeTargetsForQuotedExpressionsFromSelection(wrappingExpression, selectionRange);
-    }
-    else if (SEQUENTINAL_TOKENS.contains(wrappingExpressionElementType)) {
-      return computeTargetsForSequentialExpressionsFromSelection(wrappingExpression, selectionRange);
     }
     return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
   }
@@ -371,7 +369,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                                                                     @NotNull TextRange selectionRange) {
     int selectionStart = selectionRange.getStartOffset();
     int selectionEnd = selectionRange.getEndOffset();
-    boolean canBreakTokens = !(wrappingExpression instanceof PerlStringList);
     PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuoteElement();
     if (run == null) {
       return Collections.emptyList();
@@ -398,12 +395,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
       if (startOffset < 0) {
         startOffset = run.getStartOffsetInParent();
-        if (canBreakTokens && selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+        if (selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
           startOffset += selectionStart - runTextRange.getStartOffset();
         }
       }
       endOffset = run.getStartOffsetInParent() + run.getTextLength();
-      if (canBreakTokens && selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+      if (selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
         endOffset -= runTextRange.getEndOffset() - selectionEnd;
       }
     }
