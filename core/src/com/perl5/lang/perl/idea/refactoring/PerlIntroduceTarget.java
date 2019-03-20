@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.refactoring;
 import com.intellij.openapi.util.Segment;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.IntroduceTargetChooser;
 import com.intellij.refactoring.introduce.PsiIntroduceTarget;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,11 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   private PerlIntroduceTarget(@NotNull PsiElement element, @NotNull TextRange textRangeInElement) {
     super(element);
     myTextRangeInElement = textRangeInElement;
+  }
+
+  @Override
+  public String toString() {
+    return getPlace() + ";" + getTextRange() + "; " + render();
   }
 
   @NotNull
@@ -90,36 +96,37 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
 
   @NotNull
   public static PerlIntroduceTarget create(@NotNull PsiElement element,
-                                           @NotNull PsiElement firstChildToInclude,
-                                           @NotNull PsiElement lastChildToInclude) {
-    if (!element.equals(lastChildToInclude.getParent())) {
-      throw new RuntimeException("Last child is not a child of an element: " +
+                                           @NotNull PsiElement firstDescendantToInclude,
+                                           @NotNull PsiElement lastDescendantToInclude) {
+    if (!PsiTreeUtil.isAncestor(element, lastDescendantToInclude, true)) {
+      throw new RuntimeException("Last descendant is not under an element: " +
                                  "element: " + element + "; " +
-                                 "firstChild: " + firstChildToInclude + "; " +
-                                 "lastChild: " + lastChildToInclude + "; "
+                                 "firstDescendant: " + firstDescendantToInclude + "; " +
+                                 "lastDescendant: " + lastDescendantToInclude + "; "
       );
     }
-    if (!element.equals(firstChildToInclude.getParent())) {
-      throw new RuntimeException("First child is not a child of an element: " +
+    if (!PsiTreeUtil.isAncestor(element, firstDescendantToInclude, true)) {
+      throw new RuntimeException("First descendant is not under an element: " +
                                  "element: " + element + "; " +
-                                 "firstChild: " + firstChildToInclude + "; " +
-                                 "lastChild: " + lastChildToInclude + "; "
+                                 "firstDescendant: " + firstDescendantToInclude + "; " +
+                                 "lastDescendant: " + lastDescendantToInclude + "; "
       );
     }
-    int firstChildStartOffset = firstChildToInclude.getTextRangeInParent().getStartOffset();
-    int lastChildEndOffset = lastChildToInclude.getTextRangeInParent().getEndOffset();
+    int firstChildStartOffset = firstDescendantToInclude.getTextRange().getStartOffset();
+    int lastChildEndOffset = lastDescendantToInclude.getTextRange().getEndOffset();
     if (firstChildStartOffset > lastChildEndOffset) {
       throw new RuntimeException(
         "Inconsistent offsets: " +
         "element: " + element + "; " +
-        "firstChild: " + firstChildToInclude + "; " +
-        "lastChild: " + lastChildToInclude + "; " +
+        "firstDescendant: " + firstDescendantToInclude + "; " +
+        "lastDescendant: " + lastDescendantToInclude + "; " +
         "element range: " + element.getTextRange() + "; " +
-        "firstChild range: " + firstChildToInclude.getTextRange() + "; " +
-        "lastChild: range: " + lastChildToInclude.getTextRange() + "; "
+        "firstDescendant range: " + firstDescendantToInclude.getTextRange() + "; " +
+        "lastDescendant: range: " + lastDescendantToInclude.getTextRange() + "; "
       );
     }
-    return new PerlIntroduceTarget(element, TextRange.create(firstChildStartOffset, lastChildEndOffset));
+    return new PerlIntroduceTarget(
+      element, TextRange.create(firstChildStartOffset, lastChildEndOffset).shiftLeft(element.getTextRange().getStartOffset()));
   }
 
   @NotNull

@@ -1,0 +1,3 @@
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListLazy.pl
+    (228,237)
+    'very long'

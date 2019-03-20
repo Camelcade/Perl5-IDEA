@@ -1,0 +1,10 @@
+qw/
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very lo<caret>ng  list
+/;

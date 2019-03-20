@@ -1,0 +1,23 @@
+qw/test1 <selection>test2</selection> test3 test4     this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+/;
+qw/test1 test2 test4/;
+qw/test2 test3/;
+qw/test1 test2 test3/;
+qw/test2 test3 test4/;
+say 'test2';
+say "test2";
+say `test2`;
+my $var ='test2';
+my $var ="test2";
+my $var =`test2`;
+test1 => test2 => test3 => 'test4';
+'test1' => "test2" => "test3" => "test4";
+'test1' => "te${s}t2" => "test3" => "test4";
+'test1' => `test2` => "test3" => "test4";

@@ -1,0 +1,17 @@
+my @list = (<selection>"very", long => 'list'</selection>, "very", long => 'list');
+
+qw/
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+    this is a very long  list
+/;
+
+qw/
+    this is a very long  list
+    this is a very long  list
+/;

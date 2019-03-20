@@ -1,0 +1,17 @@
+my @list = (<occurrence>"very", long => 'list'</occurrence>, <occurrence>"very", long => 'list'</occurrence>);
+
+qw/
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+/;
+
+qw/
+    this is a <occurrence>very long  list</occurrence>
+    this is a <occurrence>very long  list</occurrence>
+/;

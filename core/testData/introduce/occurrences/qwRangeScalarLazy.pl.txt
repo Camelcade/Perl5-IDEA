@@ -1,0 +1,23 @@
+qw/test1 <occurrence>test2</occurrence> test3 test4     this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+                                                      this is a very long  list
+/;
+qw/test1 <occurrence>test2</occurrence> test4/;
+qw/<occurrence>test2</occurrence> test3/;
+qw/test1 <occurrence>test2</occurrence> test3/;
+qw/<occurrence>test2</occurrence> test3 test4/;
+say <occurrence>'test2'</occurrence>;
+say <occurrence>"test2"</occurrence>;
+say `test2`;
+my $var =<occurrence>'test2'</occurrence>;
+my $var =<occurrence>"test2"</occurrence>;
+my $var =`test2`;
+test1 => <occurrence>test2</occurrence> => test3 => 'test4';
+'test1' => <occurrence>"test2"</occurrence> => "test3" => "test4";
+'test1' => "te${s}t2" => "test3" => "test4";
+'test1' => `test2` => "test3" => "test4";
