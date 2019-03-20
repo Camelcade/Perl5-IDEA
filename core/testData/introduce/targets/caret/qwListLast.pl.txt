@@ -1,0 +1,6 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 23 in qwListLast.pl
+    (0,4)
+    'tail'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListLast.pl
+    (5,27)
+    'This is some text tail'

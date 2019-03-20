@@ -153,7 +153,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
           elementTarget = computeDerefTargetIfSame((PerlDerefExpression)targetElement, target.getTextRangeInElement(), element);
         }
         else if (targetElement instanceof PerlStringList || targetElement instanceof PsiPerlCommaSequenceExpr) {
-          elementTarget = computeListTargetIfSame((PerlStringList)targetElement, target.getTextRangeInElement(), element);
+          elementTarget = computeListTargetIfSame(targetElement, target.getTextRangeInElement(), element);
         }
         else if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
           elementTarget = PerlIntroduceTarget.create(element);
@@ -258,10 +258,13 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       IElementType elementType = PsiUtilCore.getElementType(run);
       if (SEQUENTINAL_TOKENS.contains(elementType)) {
         PsiElement[] children = run.getChildren();
-        for (PsiElement child : children) {
-          TextRange childTextRange = child.getTextRange();
-          if (childTextRange.contains(caretOffset) || childTextRange.getStartOffset() > caretOffset) {
-            targets.add(PerlIntroduceTarget.create(run, children[0], child));
+        if (children.length > 1) {
+          PsiElement firstChild = children[0];
+          for (PsiElement child : children) {
+            TextRange childTextRange = child.getTextRange();
+            if (childTextRange.contains(caretOffset) && !firstChild.equals(child) || childTextRange.getStartOffset() > caretOffset) {
+              targets.add(PerlIntroduceTarget.create(run, firstChild, child));
+            }
           }
         }
       }

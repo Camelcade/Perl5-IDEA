@@ -1,0 +1,3 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 5 in qwListSingle.pl
+    (0,4)
+    'some'

@@ -1,0 +1,3 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 23 in qwListLast.pl
+    (0,4)
+    'tail'

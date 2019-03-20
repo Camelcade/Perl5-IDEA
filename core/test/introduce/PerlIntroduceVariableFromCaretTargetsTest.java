@@ -88,6 +88,12 @@ public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase
 
   public void testQwList() {doTest();}
 
+  public void testQwListSingle() {doTest();}
+
+  public void testQwListFirst() {doTest();}
+
+  public void testQwListLast() {doTest();}
+
   public void testQwListWithVariable() {doTest();}
 
   public void testShift() {doTest();}

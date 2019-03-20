@@ -1,0 +1,15 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 5 in qwListFirst.pl
+    (0,4)
+    'This'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListFirst.pl
+    (5,12)
+    'This is'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListFirst.pl
+    (5,17)
+    'This is some'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListFirst.pl
+    (5,22)
+    'This is some text'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListFirst.pl
+    (5,27)
+    'This is some text tail'

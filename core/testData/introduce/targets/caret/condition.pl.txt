@@ -2,9 +2,6 @@ PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 9 in condition.pl
     (0,2)
     '$b'
 PsiPerlAddExprImpl(Perl5: ADD_EXPR) at 9 in condition.pl
-    (0,2)
-    '$b'
-PsiPerlAddExprImpl(Perl5: ADD_EXPR) at 9 in condition.pl
     (0,6)
     '$b +$c'
 PsiPerlCompareExprImpl(Perl5: COMPARE_EXPR) at 4 in condition.pl
