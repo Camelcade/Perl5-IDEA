@@ -25,7 +25,6 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
-import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileStateBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,7 +72,7 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBas
   @Nullable
   @Override
   protected ConsoleView createConsole(@NotNull Executor executor) throws ExecutionException {
-    return new PerlTerminalExecutionConsole(getEnvironment().getProject());
+    return new PerlRunConsole(getEnvironment().getProject());
   }
 
   @NotNull

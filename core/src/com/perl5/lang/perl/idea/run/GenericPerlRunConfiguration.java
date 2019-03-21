@@ -51,13 +51,13 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProfileState;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebuggableRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.debugger.DebuggableRunConfiguration;
 import org.jetbrains.jps.model.serialization.PathMacroUtil;
 
 import java.io.File;
@@ -70,9 +70,8 @@ import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnv
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
 
 public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase implements
-                                                                     CommonProgramRunConfigurationParameters,
-                                                                     DebuggableRunConfiguration,
-                                                                     PerlDebugOptions {
+                                                                                     CommonProgramRunConfigurationParameters,
+                                                                                     PerlDebuggableRunConfiguration {
   public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
   public static final Function<List<String>, String> FILES_JOINER = strings ->
     StringUtil.join(ContainerUtil.filter(strings, StringUtil::isNotEmpty), "||");

@@ -33,12 +33,11 @@ import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugSession;
-import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugProcess;
+import com.perl5.lang.perl.idea.run.debugger.PerlDebuggableRunConfiguration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.debugger.DebuggableRunConfiguration;
 
 import java.net.InetSocketAddress;
 import java.util.Objects;
@@ -47,7 +46,7 @@ import java.util.Objects;
  * Created by hurricup on 09.05.2016.
  */
 public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
-  implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebugOptions, DebuggableRunConfiguration {
+  implements RunConfigurationWithSuppressedDefaultRunAction, PerlDebuggableRunConfiguration {
   public String debugHost = "localhost";
   public int debugPort = 12345;
   public String remoteProjectRoot = "/home/";
