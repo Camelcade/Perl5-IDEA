@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.refactoring;
+package com.perl5.lang.perl.idea.refactoring.introduce;
 
 import com.intellij.openapi.util.Segment;
 import com.intellij.openapi.util.TextRange;

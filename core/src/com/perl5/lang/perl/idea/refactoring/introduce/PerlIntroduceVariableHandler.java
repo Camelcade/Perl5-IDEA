@@ -36,15 +36,12 @@ import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.refactoring.RefactoringBundle;
 import com.intellij.refactoring.introduce.inplace.OccurrencesChooser;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.refactoring.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.psi.PerlQuoted;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,7 +51,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceVariableHandler.class);
-  private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
+  public static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
     CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
     VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL
   );
@@ -132,120 +129,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    */
   @NotNull
   public List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
-    PsiElement targetElement = target.getPlace();
-    PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
-    if (scope == null) {
-      scope = PsiTreeUtil.getParentOfType(targetElement, PerlNamespaceDefinitionElement.class);
-    }
-    if (scope == null) {
-      return Collections.singletonList(target);
-    }
-
-    List<PerlIntroduceTarget> result = new ArrayList<>();
-    scope.accept(new PerlRecursiveVisitor() {
-      @Override
-      public void visitElement(@NotNull PsiElement element) {
-        PerlIntroduceTarget elementTarget = null;
-        if (UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element))) {
-        }
-        else if (targetElement instanceof PerlDerefExpression) {
-          elementTarget = computeDerefTargetIfSame((PerlDerefExpression)targetElement, target.getTextRangeInElement(), element);
-        }
-        else if (targetElement instanceof PerlStringList || targetElement instanceof PsiPerlCommaSequenceExpr) {
-          if (addListTargets(targetElement, target.getTextRangeInElement(), element, result)) {
-            return;
-          }
-        }
-        else if (target.isFullRange() && PerlPsiUtil.areElementsSame(targetElement, element)) {
-          elementTarget = PerlIntroduceTarget.create(element);
-        }
-
-        if (elementTarget != null) {
-          result.add(elementTarget);
-        }
-        else {
-          super.visitElement(element);
-        }
-      }
-    });
-    return result;
-  }
-
-  /**
-   * Collecting sublists defined by {@code target} and {@code rangeInTarget} in {@code element} and put them into {@code result}
-   * @return true iff target were found
-   */
-  private boolean addListTargets(@NotNull PsiElement target,
-                                 @NotNull TextRange rangeInTarget,
-                                 @NotNull PsiElement element,
-                                 @NotNull List<PerlIntroduceTarget> result) {
-    List<PsiElement> elementChildren = PerlArrayUtil.collectListElements(element);
-    if (elementChildren.isEmpty()) {
-      return false;
-    }
-
-    List<PsiElement> targetChildren = PerlArrayUtil.collectListElements(target);
-
-    List<PsiElement> elementsToSearch = ContainerUtil.filter(targetChildren, it -> rangeInTarget.contains(it.getTextRangeInParent()));
-    if (elementsToSearch.isEmpty()) {
-      return false;
-    }
-
-    if (elementsToSearch.size() > elementChildren.size()) {
-      return false;
-    }
-
-    boolean found = false;
-    PsiElement firstStringToSearch = elementsToSearch.get(0);
-    for (int startIndex = 0; startIndex <= elementChildren.size() - elementsToSearch.size(); startIndex++) {
-      PsiElement firstChildElement = elementChildren.get(startIndex);
-      if (!PerlPsiUtil.areElementsSame(firstStringToSearch, firstChildElement)) {
-        continue;
-      }
-      int offset = 1;
-      for (; offset < elementsToSearch.size(); offset++) {
-        if (!PerlPsiUtil.areElementsSame(elementsToSearch.get(offset), elementChildren.get(startIndex + offset))) {
-          offset = -1;
-          break;
-        }
-      }
-      if (offset == elementsToSearch.size()) {
-        // matches
-        result.add(startIndex == 0 && offset == elementChildren.size() ?
-                   PerlIntroduceTarget.create(element) :
-                   PerlIntroduceTarget.create(element, TextRange.create(
-                     firstChildElement.getTextRange().getStartOffset(),
-                     elementChildren.get(startIndex + offset - 1).getTextRange().getEndOffset()
-                   ).shiftLeft(element.getTextRange().getStartOffset())));
-        startIndex += offset - 1;
-        found = true;
-      }
-    }
-    return found;
-  }
-
-  /**
-   * @return an introduce target of an {@code element} if it matches with {@code example} within {@code rangeInExample}, null otherwise
-   */
-  @Nullable
-  private PerlIntroduceTarget computeDerefTargetIfSame(@NotNull PerlDerefExpression example,
-                                                       @NotNull TextRange rangeInExample,
-                                                       @NotNull PsiElement element) {
-    if (!(element instanceof PerlDerefExpression)) {
-      return null;
-    }
-    List<PsiElement> targetChildren = ContainerUtil.filter(example.getChildren(), it -> rangeInExample.contains(it.getTextRangeInParent()));
-    PsiElement[] elementChildren = element.getChildren();
-    if (elementChildren.length < targetChildren.size()) {
-      return null;
-    }
-    for (int i = 0; i < targetChildren.size(); i++) {
-      if (!PerlPsiUtil.areElementsSame(targetChildren.get(i), elementChildren[i])) {
-        return null;
-      }
-    }
-    return PerlIntroduceTarget
-      .create(element, TextRange.create(0, elementChildren[targetChildren.size() - 1].getTextRangeInParent().getEndOffset()));
+    return PerlTargetOccurrencesCollector.collect(target);
   }
 
   /**
