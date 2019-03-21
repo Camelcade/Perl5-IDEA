@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler.UNINTRODUCIBLE_TOKENS;
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector.UNINTRODUCIBLE_TOKENS;
 
 public abstract class PerlTargetOccurrencesCollector {
   @NotNull

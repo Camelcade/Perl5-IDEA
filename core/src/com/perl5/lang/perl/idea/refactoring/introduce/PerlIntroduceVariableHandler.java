@@ -19,17 +19,11 @@ package com.perl5.lang.perl.idea.refactoring.introduce;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pass;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.HelpID;
 import com.intellij.refactoring.IntroduceTargetChooser;
 import com.intellij.refactoring.RefactoringActionHandler;
@@ -37,34 +31,18 @@ import com.intellij.refactoring.RefactoringBundle;
 import com.intellij.refactoring.introduce.inplace.OccurrencesChooser;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
-import com.perl5.lang.perl.psi.PerlQuoted;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceVariableHandler.class);
-  public static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
-    CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
-    VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL
-  );
-  private static final TokenSet SEQUENTINAL_TOKENS = TokenSet.create(
-    COMMA_SEQUENCE_EXPR, DEREF_EXPR,
-    STRING_LIST,
-    ADD_EXPR, MUL_EXPR, SHIFT_EXPR, BITWISE_AND_EXPR, BITWISE_OR_XOR_EXPR, AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR
-  );
 
   @Override
   public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file, DataContext dataContext) {
-    List<PerlIntroduceTarget> targets = computeIntroduceTargets(editor, file);
+    List<PerlIntroduceTarget> targets = PerlTargetsCollector.getIntroduceTargets(editor, file);
     if (targets.isEmpty()) {
       showErrorMessage(project, editor, RefactoringBundle.getCannotRefactorMessage(PerlBundle.message("perl.introduce.no.target")));
       return;
@@ -125,216 +103,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     LOG.warn("Introducing " + target.render());
   }
 
-  /**
-   * @return List of possible introduce targets for {@code file} opened in {@code editor}
-   */
-  @NotNull
-  public List<PerlIntroduceTarget> computeIntroduceTargets(@NotNull Editor editor, @NotNull PsiFile file) {
-    if (editor.getSelectionModel().hasSelection()) {
-      return computeIntroduceTargetsFromSelection(editor, file);
-    }
-
-    List<PerlIntroduceTarget> targets = new ArrayList<>();
-    int caretOffset = editor.getCaretModel().getOffset();
-    PsiPerlExpr run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
-    while (run != null) {
-      IElementType elementType = PsiUtilCore.getElementType(run);
-      if (SEQUENTINAL_TOKENS.contains(elementType)) {
-        computeIntroduceTargetsForSequentialElements(run, caretOffset, targets);
-      }
-      else if (run instanceof PerlQuoted) {
-        computeTargetFromPerlQuotedByCaret((PerlQuoted)run, caretOffset, targets);
-      }
-      else if (!UNINTRODUCIBLE_TOKENS.contains(elementType)) {
-        targets.add(PerlIntroduceTarget.create(run));
-      }
-      run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
-    }
-    return targets;
-  }
-
-  /**
-   * Computes introduce targets for expr+ elements: comma sequences, lists, additions, etc
-   */
-  private void computeIntroduceTargetsForSequentialElements(@NotNull PsiPerlExpr element,
-                                                            int caretOffset,
-                                                            @NotNull List<PerlIntroduceTarget> targets) {
-    PsiElement[] children = element.getChildren();
-    if (children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QW) {
-      children = children[0].getChildren();
-    }
-    if (children.length > 1) {
-      PsiElement firstChild = children[0];
-      for (PsiElement child : children) {
-        TextRange childTextRange = child.getTextRange();
-        if (childTextRange.contains(caretOffset) && !firstChild.equals(child) || childTextRange.getStartOffset() > caretOffset) {
-          targets.add(PerlIntroduceTarget.create(element, firstChild, child));
-        }
-      }
-    }
-  }
-
-  /**
-   * Compute target for quoted entities(perl strings or string lists) by caret position.
-   */
-  public void computeTargetFromPerlQuotedByCaret(@NotNull PerlQuoted perlQuotedExpr,
-                                                 int caretOffset,
-                                                 @NotNull List<PerlIntroduceTarget> result) {
-    PsiElement stringRun = perlQuotedExpr.getOpenQuoteElement();
-    if (stringRun != null) {
-      PsiElement closeQuote = perlQuotedExpr.getCloseQuoteElement();
-      PsiElement firstStringElement = stringRun.getNextSibling();
-      while ((stringRun = stringRun.getNextSibling()) != null && !stringRun.equals(closeQuote)) {
-        IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
-        if (stringRunElementType == TokenType.WHITE_SPACE) {
-          continue;
-        }
-        TextRange stringRunTextRange = stringRun.getTextRange();
-        if (stringRunTextRange.contains(caretOffset) || stringRunTextRange.getStartOffset() > caretOffset) {
-          if (PerlParserDefinition.LITERALS.contains(stringRunElementType)) {
-            String stringRunText = stringRun.getText();
-            boolean isLastWhiteSpace = true;
-            for (int i = 0; i < stringRunText.length(); i++) {
-              boolean isCurrentWhiteSpace = Character.isWhitespace(stringRunText.charAt(i));
-              int substringEndOffsetInParent = stringRun.getStartOffsetInParent() + i;
-              if (isLastWhiteSpace != isCurrentWhiteSpace && isCurrentWhiteSpace &&
-                  substringEndOffsetInParent + stringRunTextRange.getStartOffset() > caretOffset) {
-                result.add(PerlIntroduceTarget.create(perlQuotedExpr, firstStringElement.getStartOffsetInParent(),
-                                                      substringEndOffsetInParent));
-              }
-              isLastWhiteSpace = isCurrentWhiteSpace;
-            }
-            if (!isLastWhiteSpace) {
-              result.add(PerlIntroduceTarget.create(perlQuotedExpr, firstStringElement.getStartOffsetInParent(),
-                                                    stringRun.getStartOffsetInParent() + stringRunText.length()));
-            }
-          }
-          else {
-            result.add(PerlIntroduceTarget.create(perlQuotedExpr, firstStringElement, stringRun));
-          }
-        }
-      }
-    }
-    result.add(PerlIntroduceTarget.create(perlQuotedExpr));
-  }
-
-  @NotNull
-  private List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(Editor editor, PsiFile file) {
-    SelectionModel selectionModel = editor.getSelectionModel();
-    int selectionStart = selectionModel.getSelectionStart();
-    int selectionEnd = selectionModel.getSelectionEnd();
-    PsiElement startElement = file.findElementAt(selectionStart);
-    PsiElement endElement = file.findElementAt(selectionEnd > selectionStart ? selectionEnd - 1 : selectionEnd);
-    if (startElement == null || endElement == null) {
-      return Collections.emptyList();
-    }
-    PsiElement commonParent = PsiTreeUtil.findCommonParent(startElement, endElement);
-    PsiElement wrappingExpression = PsiTreeUtil.getParentOfType(commonParent, PsiPerlExpr.class, false);
-    while (wrappingExpression != null) {
-      if (!UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(wrappingExpression))) {
-        break;
-      }
-      wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, true);
-    }
-    if (wrappingExpression == null) {
-      return Collections.emptyList();
-    }
-
-    TextRange selectionRange = TextRange.create(selectionStart, selectionEnd);
-    IElementType wrappingExpressionElementType = PsiUtilCore.getElementType(wrappingExpression);
-    if (SEQUENTINAL_TOKENS.contains(wrappingExpressionElementType)) {
-      return computeTargetsForSequentialExpressionsFromSelection(wrappingExpression, selectionRange);
-    }
-    else if (wrappingExpression instanceof PsiPerlStringBare) {
-      TextRange intersectedRange = selectionRange.intersection(wrappingExpression.getTextRange());
-      if (intersectedRange == null) {
-        return Collections.emptyList();
-      }
-      return Collections.singletonList(PerlIntroduceTarget.create(
-        wrappingExpression, intersectedRange.shiftLeft(wrappingExpression.getTextOffset())));
-    }
-    if (wrappingExpression instanceof PerlQuoted) {
-      return computeTargetsForQuotedExpressionsFromSelection(wrappingExpression, selectionRange);
-    }
-    return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
-  }
-
-  /**
-   * Computes targets for quoted entities, strings and string lists from selection.
-   */
-  @NotNull
-  private List<PerlIntroduceTarget> computeTargetsForQuotedExpressionsFromSelection(@NotNull PsiElement wrappingExpression,
-                                                                                    @NotNull TextRange selectionRange) {
-    int selectionStart = selectionRange.getStartOffset();
-    int selectionEnd = selectionRange.getEndOffset();
-    PsiElement run = ((PerlQuoted)wrappingExpression).getOpenQuoteElement();
-    if (run == null) {
-      return Collections.emptyList();
-    }
-    PsiElement closeQuote = ((PerlQuoted)wrappingExpression).getCloseQuoteElement();
-    if (selectionRange.contains(run.getTextRange()) && (closeQuote == null || selectionRange.contains(closeQuote.getTextRange()))) {
-      return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression));
-    }
-
-    int startOffset = -1;
-    int endOffset = -1;
-    while ((run = run.getNextSibling()) != null) {
-      if (run.equals(closeQuote)) {
-        break;
-      }
-      IElementType runElementType = PsiUtilCore.getElementType(run);
-      if (runElementType == TokenType.WHITE_SPACE) {
-        continue;
-      }
-      TextRange runTextRange = run.getTextRange();
-      if (runTextRange.getEndOffset() <= selectionStart || runTextRange.getStartOffset() >= selectionEnd) {
-        continue;
-      }
-
-      if (startOffset < 0) {
-        startOffset = run.getStartOffsetInParent();
-        if (selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
-          startOffset += selectionStart - runTextRange.getStartOffset();
-        }
-      }
-      endOffset = run.getStartOffsetInParent() + run.getTextLength();
-      if (selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
-        endOffset -= runTextRange.getEndOffset() - selectionEnd;
-      }
-    }
-    return startOffset < 0 || endOffset < 0 ? Collections.emptyList() :
-           Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression, startOffset, endOffset));
-  }
-
-  /**
-   * Computes targets for sequential elements from selection: dereference chains, comma sequences, additions, etc.
-   */
-  @NotNull
-  private List<PerlIntroduceTarget> computeTargetsForSequentialExpressionsFromSelection(@NotNull PsiElement wrappingExpression,
-                                                                                        @NotNull TextRange selectionRange) {
-    PsiElement[] children = wrappingExpression.getChildren();
-    if (children.length == 1 && PsiUtilCore.getElementType(children[0]) == LP_STRING_QW) {
-      children = children[0].getChildren();
-    }
-    PsiElement firstChildToInclude =
-      PsiUtilCore.getElementType(wrappingExpression) == DEREF_EXPR ? wrappingExpression.getFirstChild() : null;
-    PsiElement lastChildToInclude = null;
-    for (PsiElement child : children) {
-      TextRange childTextRange = child.getTextRange();
-      if (!selectionRange.intersectsStrict(childTextRange)) {
-        continue;
-      }
-      if (firstChildToInclude == null) {
-        firstChildToInclude = child;
-      }
-      lastChildToInclude = child;
-    }
-    if (firstChildToInclude == null || lastChildToInclude == null) {
-      return Collections.emptyList();
-    }
-
-    return Collections.singletonList(PerlIntroduceTarget.create(wrappingExpression, firstChildToInclude, lastChildToInclude));
-  }
 
   protected void showErrorMessage(@NotNull Project project, Editor editor, @NotNull String message) {
     CommonRefactoringUtil

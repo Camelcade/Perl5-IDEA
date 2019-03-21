@@ -120,8 +120,8 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
+import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -1508,8 +1508,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestIntroduceVariableTargets() {
     initWithFileSmartWithoutErrors();
-    PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
-    List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
+    List<PerlIntroduceTarget> introduceTargets = PerlTargetsCollector.getIntroduceTargets(getEditor(), getFile());
     StringBuilder sb = new StringBuilder();
 
     introduceTargets.forEach(it -> sb.append(serializePsiElement(it.getPlace()))
@@ -1524,8 +1523,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestIntroduceVariableOccurances() {
     initWithFileSmartWithoutErrors();
-    PerlIntroduceVariableHandler introduceVariableHandler = new PerlIntroduceVariableHandler();
-    List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
+    List<PerlIntroduceTarget> introduceTargets = PerlTargetsCollector.getIntroduceTargets(getEditor(), getFile());
     assertTrue(introduceTargets.size() > 0);
     List<Pair<Integer, String>> macros = new ArrayList<>();
     PerlTargetOccurrencesCollector.collect(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
