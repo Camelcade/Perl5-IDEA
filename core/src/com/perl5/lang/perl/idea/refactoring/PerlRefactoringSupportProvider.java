@@ -25,6 +25,7 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.refactoring.RefactoringActionHandler;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
+import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
 import com.perl5.lang.perl.parser.Exception.Class.ide.refactoring.PerlRenamingVetoCondition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;

@@ -120,7 +120,7 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.PerlIntroduceVariableHandler;
+import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
