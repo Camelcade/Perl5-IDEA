@@ -94,7 +94,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                @NotNull Editor editor,
                                @NotNull PsiFile file,
                                DataContext dataContext) {
-    List<PerlIntroduceTarget> allOccurrences = collectOccurrences(target);
+    List<PerlIntroduceTarget> allOccurrences = PerlTargetOccurrencesCollector.collect(target);
     if (allOccurrences.size() > 1) {
       new OccurrencesChooser<PerlIntroduceTarget>(editor) {
         @Override
@@ -122,14 +122,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                @NotNull PsiFile file,
                                DataContext dataContext) {
     LOG.warn("Introducing " + target.render());
-  }
-
-  /**
-   * @return occurrences of expression to introduce, represented by {@code target}
-   */
-  @NotNull
-  public List<PerlIntroduceTarget> collectOccurrences(@NotNull PerlIntroduceTarget target) {
-    return PerlTargetOccurrencesCollector.collect(target);
   }
 
   /**

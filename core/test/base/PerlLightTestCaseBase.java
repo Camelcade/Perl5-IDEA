@@ -121,6 +121,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
+import com.perl5.lang.perl.idea.refactoring.introduce.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -1527,7 +1528,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     List<PerlIntroduceTarget> introduceTargets = introduceVariableHandler.computeIntroduceTargets(getEditor(), getFile());
     assertTrue(introduceTargets.size() > 0);
     List<Pair<Integer, String>> macros = new ArrayList<>();
-    introduceVariableHandler.collectOccurrences(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
+    PerlTargetOccurrencesCollector.collect(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
       TextRange occurenceRange = it.getTextRange();
       macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
