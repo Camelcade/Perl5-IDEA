@@ -20,14 +20,13 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.introduce.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.psi.PerlDerefExpression;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PerlDerefOccurrencesCollector extends PerlTargetOccurrencesCollector {
+class PerlDerefOccurrencesCollector extends PerlTargetOccurrencesCollector {
   @NotNull
   private final List<PsiElement> myTargetChildrenToSearch;
 

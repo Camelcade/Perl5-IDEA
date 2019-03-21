@@ -38,6 +38,7 @@ import com.intellij.refactoring.introduce.inplace.OccurrencesChooser;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.psi.PerlQuoted;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;

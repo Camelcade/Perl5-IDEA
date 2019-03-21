@@ -20,7 +20,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.introduce.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-public class PerlListOccurrencesCollector extends PerlTargetOccurrencesCollector {
+class PerlListOccurrencesCollector extends PerlTargetOccurrencesCollector {
   @NotNull
   private final List<PsiElement> myElementsToSearch;
 

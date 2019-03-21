@@ -18,11 +18,10 @@ package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.introduce.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlGenericOccurrencesCollector extends PerlTargetOccurrencesCollector {
+class PerlGenericOccurrencesCollector extends PerlTargetOccurrencesCollector {
   public PerlGenericOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
   }

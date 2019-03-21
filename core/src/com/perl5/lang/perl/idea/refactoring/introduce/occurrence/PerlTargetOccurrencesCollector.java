@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.refactoring.introduce;
+package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlDerefOccurrencesCollector;
-import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlGenericOccurrencesCollector;
-import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlListOccurrencesCollector;
+import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

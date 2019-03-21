@@ -121,7 +121,7 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
-import com.perl5.lang.perl.idea.refactoring.introduce.PerlTargetOccurrencesCollector;
+import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
