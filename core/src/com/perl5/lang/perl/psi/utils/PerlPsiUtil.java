@@ -36,6 +36,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -741,6 +742,21 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
+   * @return true iff {@code element} is matching part of replace regex
+   */
+  public static boolean isMatchRegex(@NotNull PsiElement element) {
+    if (!(element instanceof PsiPerlPerlRegex)) {
+      return false;
+    }
+
+    PsiElement elementParent = element.getParent();
+    if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(PsiUtilCore.getElementType(elementParent))) {
+      return elementParent.getParent() instanceof PerlReplacementRegex;
+    }
+    return elementParent instanceof PerlReplacementRegex && element.equals(((PerlReplacementRegex)elementParent).getMatchRegex());
+  }
+
+  /**
    * @return true iff nested calls are semantically equal
    */
   private static boolean areNestedCallsSame(@NotNull PerlMethodContainer targetElement, @NotNull PsiElement elementToCompare) {
@@ -757,6 +773,9 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return true iff regexps are semantically equal
    */
   private static boolean areRegexSame(@NotNull PsiPerlPerlRegex targetElement, @NotNull PsiElement elementTocompare) {
+    if (elementTocompare instanceof PerlSimpleRegex) {
+      return areElementsSame(targetElement, ((PerlSimpleRegex)elementTocompare).getRegex());
+    }
     if (!(elementTocompare instanceof PsiPerlPerlRegex)) {
       return false;
     }
@@ -806,6 +825,9 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return true iff {@code targetElement} and {@code elementToCompare} are semantically equal simple regexp elements
    */
   private static boolean areMatchRegexElementsSame(@NotNull PerlSimpleRegex targetElement, @NotNull PsiElement elementToCompare) {
+    if (isMatchRegex(elementToCompare)) {
+      return areElementsSame(targetElement.getRegex(), elementToCompare);
+    }
     if (!(elementToCompare instanceof PerlSimpleRegex)) {
       return false;
     }

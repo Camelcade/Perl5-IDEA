@@ -72,3 +72,24 @@ m/somethi ng${var}else/;
 $a =~ m/som ething${var}else/;
 qr/somethi ng${var}else/;
 $a =~ qr/some thing${var}else/;
+
+s/something${var}el
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    se/asdf/x;
+$a =~ s <so mething${var}else>//xx;
+s#someth ing${var}else##xx;
+

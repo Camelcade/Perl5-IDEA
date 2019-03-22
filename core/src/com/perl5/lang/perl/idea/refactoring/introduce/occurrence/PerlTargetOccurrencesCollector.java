@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector.UNINTRODUCIBLE_TOKENS;
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector.isTargetableElement;
 
 public abstract class PerlTargetOccurrencesCollector {
   @NotNull
@@ -83,7 +82,7 @@ public abstract class PerlTargetOccurrencesCollector {
     searchScope.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitElement(@NotNull PsiElement element) {
-        if (UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) || !collectOccurrences(element)) {
+        if (!isTargetableElement(element) || !collectOccurrences(element)) {
           super.visitElement(element);
         }
       }

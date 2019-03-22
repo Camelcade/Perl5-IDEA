@@ -29,6 +29,7 @@ import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlQuoted;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ import java.util.List;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public abstract class PerlTargetsCollector {
-  public static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
+  private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
     CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
     VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL,
     TR_REPLACEMENTLIST, TR_SEARCHLIST, TR_REGEX,
@@ -92,6 +93,13 @@ public abstract class PerlTargetsCollector {
     return PerlGenericTargetsCollector.INSTANCE;
   }
 
+  /**
+   * @return true iff element can be targeted for extraction
+   */
+  public static boolean isTargetableElement(@NotNull PsiElement element) {
+    return !UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) || PerlPsiUtil.isMatchRegex(element);
+  }
+
   @NotNull
   private static List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(Editor editor, PsiFile file) {
     SelectionModel selectionModel = editor.getSelectionModel();
@@ -105,7 +113,7 @@ public abstract class PerlTargetsCollector {
     PsiElement commonParent = PsiTreeUtil.findCommonParent(startElement, endElement);
     PsiElement wrappingExpression = PsiTreeUtil.getParentOfType(commonParent, PsiPerlExpr.class, false);
     while (wrappingExpression != null) {
-      if (!UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(wrappingExpression))) {
+      if (isTargetableElement(wrappingExpression)) {
         break;
       }
       wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, true);

@@ -39,6 +39,7 @@ $a =~ <occurrence>qr/something${var}else/</occurrence>;
     # commment
     # commment
     se/x</occurrence>;
+
 <occurrence>/someth ing${var}else/x</occurrence>;
 $a =~ <occurrence>/somet hing${var}else/x</occurrence>;
 <occurrence>m/somet hing${var}else/x</occurrence>;
@@ -58,12 +59,12 @@ $a =~ <occurrence>m <so mething${var}else>xx</occurrence>;
 <occurrence>qr#someth ing${var}else#xx</occurrence>;
 $a =~ <occurrence>qr fsomet hing${var}elsefxx</occurrence>;
 
-/something${var}else/ix;
-$a =~ /something${var}else/ix;
-m/something${var}else/ix;
-$a =~ m/something${var}else/ix;
-qr/something${var}else/ix;
-$a =~ qr/something${var}else/ix;
+<occurrence>/something${var}else/ix</occurrence>;
+$a =~ <occurrence>/something${var}else/ix</occurrence>;
+<occurrence>m/something${var}else/ix</occurrence>;
+$a =~ <occurrence>m/something${var}else/ix</occurrence>;
+<occurrence>qr/something${var}else/ix</occurrence>;
+$a =~ <occurrence>qr/something${var}else/ix</occurrence>;
 
 /somethi ng${var}else/;
 $a =~ /som ething${var}else/;
@@ -88,7 +89,8 @@ s/<occurrence>something${var}el
     # commment
     # commment
     # commment
+    # commment
     se</occurrence>/asdf/x;
 $a =~ s <<occurrence>so mething${var}else</occurrence>>//xx;
-s#<occurrence>someth ing${var}else</occurrence># #xx;
+s#<occurrence>someth ing${var}else</occurrence>##xx;
 

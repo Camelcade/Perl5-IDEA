@@ -1,0 +1,3 @@
+PsiPerlPerlRegexImpl(Perl5: PERL_REGEX) at 8 in regexpReplaceNotEmpty.pl
+    (0,4)
+    'some'

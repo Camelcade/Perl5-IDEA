@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.regexp.Perl5RegexpLiteralEscaper;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlReplacementRegex;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 30.11.2016.
  */
-public class Perl5RegexpMixin extends PerlCompositeElementImpl implements PsiLanguageInjectionHost {
+public class Perl5RegexpMixin extends PerlCompositeElementImpl implements PsiLanguageInjectionHost, PsiPerlExpr {
   public Perl5RegexpMixin(@NotNull ASTNode node) {
     super(node);
   }

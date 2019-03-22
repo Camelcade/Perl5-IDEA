@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,14 +33,12 @@ class PerlGenericTargetsCollector extends PerlTargetsCollector {
   @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
-    return UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) ? Collections.emptyList() :
-           Collections.singletonList(PerlIntroduceTarget.create(element));
+    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 
   @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
-    return UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) ? Collections.emptyList() :
-           Collections.singletonList(PerlIntroduceTarget.create(element));
+    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 }

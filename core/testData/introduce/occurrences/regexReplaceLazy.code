@@ -1,16 +1,9 @@
-/some<caret>thing${var}else/;
+/something${var}else/;
 $a =~ /something${var}else/;
 m/something${var}else/;
 $a =~ m/something${var}else/;
 qr/something${var}else/;
 $a =~ qr/something${var}else/;
-
-/so mething${var}else/x;
-$a =~ /som ething${var}else/x;
-m/somethi ng${var}else/x;
-$a =~ m/somet   hing${var}else/x;
-qr/so mething${var}else/x;
-$a =~ qr/some   thing${var}else/x;
 
 /something${var}el
     # commment
@@ -47,18 +40,24 @@ qr/something${var}el
     # commment
     se/x;
 
-/someth ing${var}else/xx;
-$a =~ /som  ething${var}else/xx;
-m/somet hing${var}else/xx;
-$a =~ m/som ething${var}else/xx;
-qr/som  ething${var}else/xx;
-$a =~ qr/some thing${var}else/xx;
+/someth ing${var}else/x;
+$a =~ /somet hing${var}else/x;
+m/somet hing${var}else/x;
+$a =~ m/som ething${var}else/x;
+qr/somet hing${var}else/x;
+$a =~ qr/so mething${var}else/x;
 
-m {somet hing${var}else}xx;
-$a =~ m <somet hing${var}else>xx;
-qr#somet hing${var}else#xx;
-$a =~ qr fso mething${var}elsefxx;
+/somethin g${var}else/xx;
+$a =~ /som ething${var}else/xx;
+m/so mething${var}else/xx;
+$a =~ m/ something${var}else/xx;
+qr/somethin g${var}else/xx;
+$a =~ qr/som ething${var}else/xx;
 
+m {someth ing${var}else}xx;
+$a =~ m <so mething${var}else>xx;
+qr#someth ing${var}else#xx;
+$a =~ qr fsomet hing${var}elsefxx;
 
 /something${var}else/ix;
 $a =~ /something${var}else/ix;
@@ -87,6 +86,7 @@ s/something${var}el
     # commment
     # commment
     # commment
+<caret>    # commment
     # commment
     # commment
     # commment
