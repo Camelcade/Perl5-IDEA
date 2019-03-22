@@ -1,0 +1,3 @@
+PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR) at 0 in packageExpr.pl
+    (0,10)
+    'Foo::Bar::'

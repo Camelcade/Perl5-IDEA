@@ -1,0 +1,4 @@
+package Foo::Bar;
+
+<occurrence>Foo::Bar</occurrence>->method;
+<occurrence>Foo::Bar::</occurrence>->method;

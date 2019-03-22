@@ -713,6 +713,12 @@ public class PerlPsiUtil implements PerlElementTypes {
     else if (targetElement instanceof PsiPerlPerlRegex) {
       return areRegexSame((PsiPerlPerlRegex)targetElement, elementToCompare);
     }
+    else if (targetElement instanceof PsiPerlPackageExpr) {
+      return elementToCompare instanceof PerlString ? areElementsSame(elementToCompare, targetElement) :
+             elementToCompare instanceof PsiPerlPackageExpr &&
+             StringUtil.equals(PerlPackageUtil.getCanonicalName(targetElement.getText()),
+                               PerlPackageUtil.getCanonicalName(elementToCompare.getText()));
+    }
     return areGenericElementsSame(targetElement, elementToCompare);
   }
 

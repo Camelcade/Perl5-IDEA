@@ -1,0 +1,4 @@
+package Foo::Bar;
+
+<selection>Foo::Bar</selection>->method;
+Foo::Bar::->method;
