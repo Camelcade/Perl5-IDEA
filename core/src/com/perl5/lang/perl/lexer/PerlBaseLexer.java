@@ -906,6 +906,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       {
         break;
       }
+      else if (currentChar == 'a' && modifierEndOffset < bufferEnd && buffer.charAt(modifierEndOffset) == 'a') {
+        modifierEndOffset++;
+      }
       else if (currentChar == 'x')    // mark as extended
       {
         if (firstBlockToken != null) {

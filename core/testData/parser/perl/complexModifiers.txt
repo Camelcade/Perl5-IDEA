@@ -16,6 +16,8 @@ Perl5
       PsiPerlPerlRegexModifiersImpl(Perl5: PERL_REGEX_MODIFIERS)
         PsiElement(Perl5: /m)('ee')
         PsiElement(Perl5: /m)('xx')
+        PsiElement(Perl5: /m)('aa')
         PsiElement(Perl5: /m)('e')
         PsiElement(Perl5: /m)('x')
+        PsiElement(Perl5: /m)('a')
     PsiElement(Perl5: ;)(';')
