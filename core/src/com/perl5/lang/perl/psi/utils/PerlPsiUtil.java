@@ -688,6 +688,21 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
+   * True iff all elements from provided lists are semantically equals
+   */
+  public static boolean areElementsSame(@NotNull List<PsiElement> targetElements, @NotNull List<PsiElement> elementsToCompare) {
+    if (targetElements.size() != elementsToCompare.size()) {
+      return false;
+    }
+    for (int i = 0; i < targetElements.size(); i++) {
+      if (!areElementsSame(targetElements.get(i), elementsToCompare.get(i))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * @return true iff {@code elementToCompare} is equal to {@code targetElement} or both nulls
    */
   public static boolean areElementsSame(@Nullable PsiElement targetElement, @Nullable PsiElement elementToCompare) {
@@ -713,6 +728,9 @@ public class PerlPsiUtil implements PerlElementTypes {
     else if (targetElement instanceof PsiPerlPerlRegex) {
       return areRegexSame((PsiPerlPerlRegex)targetElement, elementToCompare);
     }
+    else if (targetElement instanceof PsiPerlNestedCall) {
+      return areNestedCallsSame((PsiPerlNestedCall)targetElement, elementToCompare);
+    }
     else if (targetElement instanceof PsiPerlPackageExpr) {
       return elementToCompare instanceof PerlString ? areElementsSame(elementToCompare, targetElement) :
              elementToCompare instanceof PsiPerlPackageExpr &&
@@ -720,6 +738,19 @@ public class PerlPsiUtil implements PerlElementTypes {
                                PerlPackageUtil.getCanonicalName(elementToCompare.getText()));
     }
     return areGenericElementsSame(targetElement, elementToCompare);
+  }
+
+  /**
+   * @return true iff nested calls are semantically equal
+   */
+  private static boolean areNestedCallsSame(@NotNull PsiPerlNestedCall targetElement, @NotNull PsiElement elementToCompare) {
+    if (!(elementToCompare instanceof PsiPerlNestedCall)) {
+      return false;
+    }
+    if (!areElementsSame(targetElement.getMethod(), ((PsiPerlNestedCall)elementToCompare).getMethod())) {
+      return false;
+    }
+    return areElementsSame(targetElement.getCallArgumentsList(), ((PsiPerlNestedCall)elementToCompare).getCallArgumentsList());
   }
 
   /**
