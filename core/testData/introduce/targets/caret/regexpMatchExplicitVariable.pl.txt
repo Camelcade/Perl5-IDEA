@@ -1,0 +1,6 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 10 in regexpMatchExplicitVariable.pl
+    (0,8)
+    '${thing}'
+PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX) at 6 in regexpMatchExplicitVariable.pl
+    (0,15)
+    'm/so${thing}me/'

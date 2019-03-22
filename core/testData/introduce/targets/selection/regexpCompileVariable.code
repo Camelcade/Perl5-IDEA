@@ -1,0 +1,1 @@
+$a =~ qr/so${t<selection>hin</selection>g}me/;

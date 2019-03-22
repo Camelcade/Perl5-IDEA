@@ -1,0 +1,3 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 11 in regexpCompileVariable.pl
+    (0,8)
+    '${thing}'

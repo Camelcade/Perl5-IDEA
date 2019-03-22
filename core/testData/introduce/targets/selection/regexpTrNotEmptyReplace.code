@@ -1,0 +1,1 @@
+$a =~ tr/some/o<selection>the</selection>r/;

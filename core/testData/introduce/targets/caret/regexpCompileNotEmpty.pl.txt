@@ -1,0 +1,3 @@
+PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX) at 6 in regexpCompileNotEmpty.pl
+    (0,8)
+    'qr/some/'

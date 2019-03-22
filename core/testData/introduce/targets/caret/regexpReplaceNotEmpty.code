@@ -1,0 +1,1 @@
+$a =~ s/so<caret>me/other/;

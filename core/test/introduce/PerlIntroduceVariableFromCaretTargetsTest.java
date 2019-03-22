@@ -24,6 +24,68 @@ public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase
     return "testData/introduce/targets/caret";
   }
 
+  public void testRegexpCompileEmpty() {doTest();}
+
+  public void testRegexpCompileNotEmpty() {doTest();}
+
+  public void testRegexpCompileVariable() {doTest();}
+
+  public void testRegexpMatchExplicitEmpty() {doTest();}
+
+  public void testRegexpMatchExplicitNotEmpty() {doTest();}
+
+  public void testRegexpMatchExplicitVariable() {doTest();}
+
+  public void testRegexpMatchImplicitEmpty() {doTest();}
+
+  public void testRegexpMatchImplicitNotEmpty() {doTest();}
+
+  public void testRegexpMatchImplicitVariable() {doTest();}
+
+  public void testRegexpReplaceBetween() {doTest();}
+
+  public void testRegexpReplaceEmpty() {doTest();}
+
+  public void testRegexpReplaceEmptyReplace() {doTest();}
+
+  public void testRegexpReplaceNotEmpty() {doTest();}
+
+  public void testRegexpReplaceNotEmptyReplace() {doTest();}
+
+  public void testRegexpReplaceNotEmptyReplaceEval() {doTest();}
+
+  public void testRegexpReplaceVariable() {doTest();}
+
+  public void testRegexpReplaceVariableReplace() {doTest();}
+
+  public void testRegexpTrBetween() {doTest();}
+
+  public void testRegexpTrEmpty() {doTest();}
+
+  public void testRegexpTrEmptyReplace() {doTest();}
+
+  public void testRegexpTrNotEmpty() {doTest();}
+
+  public void testRegexpTrNotEmptyReplace() {doTest();}
+
+  public void testRegexpTrVariable() {doTest();}
+
+  public void testRegexpTrVariableReplace() {doTest();}
+
+  public void testRegexpYBetween() {doTest();}
+
+  public void testRegexpYEmpty() {doTest();}
+
+  public void testRegexpYEmptyReplace() {doTest();}
+
+  public void testRegexpYNotEmpty() {doTest();}
+
+  public void testRegexpYNotEmptyReplace() {doTest();}
+
+  public void testRegexpYVariable() {doTest();}
+
+  public void testRegexpYVariableReplace() {doTest();}
+
   public void testAnd() {doTest();}
 
   public void testBitwiseAnd() {doTest();}

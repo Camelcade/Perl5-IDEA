@@ -1,0 +1,1 @@
+$a =~ tr/so${thing}me/ot${th<caret>ing}her/;

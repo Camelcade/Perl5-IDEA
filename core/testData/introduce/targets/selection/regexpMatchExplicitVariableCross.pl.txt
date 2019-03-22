@@ -1,0 +1,3 @@
+PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX) at 6 in regexpMatchExplicitVariableCross.pl
+    (0,15)
+    'm/so${thing}me/'

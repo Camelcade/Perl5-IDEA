@@ -1,0 +1,1 @@
+$a =~ s/some/o<selection>the</selection>r/e;

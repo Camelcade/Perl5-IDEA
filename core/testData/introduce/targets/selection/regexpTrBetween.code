@@ -1,0 +1,1 @@
+$a =~ y  {some} <selection>     </selection> <other>;

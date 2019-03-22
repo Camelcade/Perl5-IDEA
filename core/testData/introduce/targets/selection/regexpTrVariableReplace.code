@@ -1,0 +1,1 @@
+$a =~ tr/so${thing}me/ot${t<selection>hin</selection>g}her/;

@@ -1,0 +1,1 @@
+$a =~ qr/so${t<selection>hing}m</selection>e/;

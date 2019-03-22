@@ -1,0 +1,6 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 11 in regexpCompileVariable.pl
+    (0,8)
+    '${thing}'
+PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX) at 6 in regexpCompileVariable.pl
+    (0,16)
+    'qr/so${thing}me/'

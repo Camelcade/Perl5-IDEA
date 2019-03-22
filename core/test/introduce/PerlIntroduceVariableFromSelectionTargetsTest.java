@@ -22,6 +22,12 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
     return "testData/introduce/targets/selection";
   }
 
+  public void testRegexpCompileVariableCross() {doTest();}
+
+  public void testRegexpMatchExplicitVariableCross() {doTest();}
+
+  public void testRegexpMatchImplicitVariableCross() {doTest();}
+
   public void testQwPartial() {doTest();}
 
   public void testQqStringWithVariableMiddle() {doTest();}

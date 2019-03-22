@@ -1,0 +1,1 @@
+$a =~ tr/so${t<selection>hin</selection>g}me/other/;

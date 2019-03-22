@@ -1,0 +1,1 @@
+$a =~ m/so${t<selection>hing}m</selection>e/;

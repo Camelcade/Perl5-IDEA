@@ -1,0 +1,3 @@
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 13 in regexpReplaceNotEmptyReplaceEval.pl
+    (0,5)
+    'other'

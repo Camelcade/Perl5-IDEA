@@ -1,0 +1,1 @@
+$a =~ y/s<selection>om</selection>e//;
