@@ -29,6 +29,12 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
 
   public void testPackageForms() {doTest();}
 
+  public void testPackageFormsString() {doTest();}
+
+  public void testPackageFormsStringQq() {doTest();}
+
+  public void testPackageFormsStringQx() {doTest();}
+
   public void testPackageFormsReverse() {doTest();}
 
   public void testRegexMatchImplicit() {doTest();}

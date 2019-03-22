@@ -1,16 +1,16 @@
 package Foo::Bar;
 
-<selection>Foo::Bar</selection>->method;
+Foo::Bar->method;
 Foo::Bar::->method;
-'Foo::Bar::'->method;
+<selection>'Foo::Bar::'</selection>->method;
 'Foo::Bar'->method;
 "Foo::Bar::"->method;
 "Foo::Bar"->method;
 `Foo::Bar::`->method;
 `Foo::Bar`->method;
 
-q/Foo::Bar::/->method;
-q/Foo::Bar/->method;
+q#Foo::Bar::#->method;
+q#Foo::Bar#->method;
 qq"Foo::Bar::"->method;
 qq"Foo::Bar"->method;
 qx`Foo::Bar::`->method;

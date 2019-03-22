@@ -9,8 +9,8 @@ package Foo::Bar;
 `Foo::Bar::`->method;
 `Foo::Bar`->method;
 
-<occurrence>q/Foo::Bar::/</occurrence>->method;
-<occurrence>q/Foo::Bar/</occurrence>->method;
+<occurrence>q<Foo::Bar::></occurrence>->method;
+<occurrence>q<Foo::Bar></occurrence>->method;
 <occurrence>qq"Foo::Bar::"</occurrence>->method;
 <occurrence>qq"Foo::Bar"</occurrence>->method;
 qx`Foo::Bar::`->method;

@@ -829,7 +829,12 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return true iff {@code targetString} is non-qx string and represents the same string as {@code elementToCompare}
    */
   private static boolean areStringElementsSame(@NotNull PerlString targetString, @NotNull PsiElement elementToCompare) {
-    if ((targetString instanceof PsiPerlStringXq || elementToCompare instanceof PsiPerlStringXq)
+    boolean isTargetExecutable = targetString instanceof PsiPerlStringXq;
+    if (!isTargetExecutable && elementToCompare instanceof PsiPerlPackageExpr && targetString.getChildren().length == 0) {
+      return StringUtil.equals(PerlPackageUtil.getCanonicalName(ElementManipulators.getValueText(targetString)),
+                               PerlPackageUtil.getCanonicalName(elementToCompare.getText()));
+    }
+    if ((isTargetExecutable || elementToCompare instanceof PsiPerlStringXq)
         && !targetString.getClass().equals(elementToCompare.getClass())) {
       return false;
     }
@@ -837,6 +842,29 @@ public class PerlPsiUtil implements PerlElementTypes {
       return false;
     }
 
+    // textual comparision for simple strings
+    boolean isTargetSimple = targetString.getChildren().length == 0;
+    boolean isElementSimple = elementToCompare.getChildren().length == 0;
+    if (isTargetSimple && isElementSimple) {
+      String targetText = ElementManipulators.getValueText(targetString);
+      String textToCompare = ElementManipulators.getValueText(elementToCompare);
+      if (StringUtil.equals(targetText, textToCompare)) {
+        return true;
+      }
+      else if (isTargetExecutable) {
+        return false;
+      }
+      else if (targetString.getPrevSibling() == null && targetString.getParent() instanceof PerlDerefExpression ||
+               elementToCompare.getPrevSibling() == null && elementToCompare.getParent() instanceof PerlDerefExpression) {
+        return StringUtil.equals(PerlPackageUtil.getCanonicalName(targetText), PerlPackageUtil.getCanonicalName(textToCompare));
+      }
+      return false;
+    }
+    else if (isTargetSimple != isElementSimple) {
+      return false;
+    }
+
+    // traversal comparision
     PsiElement targetRun = targetString.getFirstContentToken();
     PsiElement runToCompare = ((PerlString)elementToCompare).getFirstContentToken();
     PsiElement targetCloseQuoteElement = targetString.getCloseQuoteElement();
