@@ -37,6 +37,7 @@ public class PerlTranslateModifiers {
   private static final int D_MODIFIER = 1;
   private static final int S_MODIFIER = 2;
   private static final int R_MODIFIER = 3;
+  private static final PerlTranslateModifiers EMPTY_MODIFIERS = new PerlTranslateModifiers();
 
   @NotNull
   private final BitSet myModifiers = new BitSet();
@@ -93,11 +94,15 @@ public class PerlTranslateModifiers {
 
   /**
    * @return a model of transliterate modifiers from {@code element} or null if {@code element} is not a {@link PerlElementTypesGenerated#TR_MODIFIERS}
+   * If passed {@code element} is null, returns {@link #EMPTY_MODIFIERS}
    */
   @Nullable
   @Contract("null -> null")
-  public PerlTranslateModifiers create(@Nullable PsiElement element) {
-    if (element == null || PsiUtilCore.getElementType(element) != TR_MODIFIERS) {
+  public static PerlTranslateModifiers create(@Nullable PsiElement element) {
+    if (element == null) {
+      return EMPTY_MODIFIERS;
+    }
+    else if (PsiUtilCore.getElementType(element) != TR_MODIFIERS) {
       return null;
     }
     PerlTranslateModifiers result = new PerlTranslateModifiers();

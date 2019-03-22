@@ -1,0 +1,75 @@
+<occurrence>/something${var}else/</occurrence>;
+$a =~ <occurrence>/something${var}else/</occurrence>;
+<occurrence>m/something${var}else/</occurrence>;
+$a =~ <occurrence>m/something${var}else/</occurrence>;
+<occurrence>qr/something${var}else/</occurrence>;
+$a =~ <occurrence>qr/something${var}else/</occurrence>;
+
+<occurrence>/so mething${var}else/x</occurrence>;
+$a =~ <occurrence>/som ething${var}else/x</occurrence>;
+<occurrence>m/somethi ng${var}else/x</occurrence>;
+$a =~ <occurrence>m/somet   hing${var}else/x</occurrence>;
+<occurrence>qr/so mething${var}else/x</occurrence>;
+$a =~ <occurrence>qr/some   thing${var}else/x</occurrence>;
+
+<occurrence>/something${var}el
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    se/x</occurrence>;
+<occurrence>qr/something${var}el
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    # commment
+    se/x</occurrence>;
+
+<occurrence>/someth ing${var}else/xx</occurrence>;
+$a =~ <occurrence>/som  ething${var}else/xx</occurrence>;
+<occurrence>m/somet hing${var}else/xx</occurrence>;
+$a =~ <occurrence>m/som ething${var}else/xx</occurrence>;
+<occurrence>qr/som  ething${var}else/xx</occurrence>;
+$a =~ <occurrence>qr/some thing${var}else/xx</occurrence>;
+
+<occurrence>m {somet hing${var}else}xx</occurrence>;
+$a =~ <occurrence>m <somet hing${var}else>xx</occurrence>;
+<occurrence>qr#somet hing${var}else#xx</occurrence>;
+$a =~ <occurrence>qr fso mething${var}elsefxx</occurrence>;
+
+
+/something${var}else/ix;
+$a =~ /something${var}else/ix;
+m/something${var}else/ix;
+$a =~ m/something${var}else/ix;
+qr/something${var}else/ix;
+$a =~ qr/something${var}else/ix;
+
+/somethi ng${var}else/;
+$a =~ /som ething${var}else/;
+m/somethi ng${var}else/;
+$a =~ m/som ething${var}else/;
+qr/somethi ng${var}else/;
+$a =~ qr/some thing${var}else/;

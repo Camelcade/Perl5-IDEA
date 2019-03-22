@@ -400,6 +400,7 @@ limitations under the License.
     mixin("string_list")="com.perl5.lang.perl.psi.mixins.PerlStringListMixin"
 
     implements("replacement_regex")="com.perl5.lang.perl.psi.PerlReplacementRegex"
+    implements("match_regex|compile_regex")="com.perl5.lang.perl.psi.PerlSimpleRegex"
     extends("replacement_regex|compile_regex|match_regex|tr_regex")=expr
 
     mixin("perl_regex")="com.perl5.lang.perl.psi.mixins.Perl5RegexpMixin"

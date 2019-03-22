@@ -54,6 +54,8 @@ public class PerlRegexpModifiers {
   public static final int XX_MODIFIER = 16;
   public static final int AA_MODIFIER = 17;
 
+  private static final PerlRegexpModifiers EMPTY_MODIFIERS = new PerlRegexpModifiers();
+
   @NotNull
   private final BitSet myModifiers = new BitSet();
 
@@ -213,12 +215,33 @@ public class PerlRegexpModifiers {
   }
 
   /**
+   * @return true iff modifiers are equals ignoring x/xx modifier
+   */
+  public boolean areRegexpComparable(@Nullable PerlRegexpModifiers other) {
+    if (other == null) {
+      return false;
+    }
+    if (equals(other)) {
+      return true;
+    }
+    BitSet thisModifiers = (BitSet)myModifiers.clone();
+    BitSet otherModifiers = other.myModifiers;
+    thisModifiers.set(X_MODIFIER, otherModifiers.get(X_MODIFIER));
+    thisModifiers.set(XX_MODIFIER, otherModifiers.get(XX_MODIFIER));
+    return thisModifiers.equals(otherModifiers);
+  }
+
+  /**
    * @return a model of regexp modifiers from {@code element} or null if {@code element} is not a {@link PerlElementTypesGenerated#PERL_REGEX_MODIFIERS}
+   * if passed {@code element} is null, we return {@link #EMPTY_MODIFIERS}
    */
   @Nullable
   @Contract("null -> null")
-  public PerlRegexpModifiers create(@Nullable PsiElement element) {
-    if (element == null || PsiUtilCore.getElementType(element) != PERL_REGEX_MODIFIERS) {
+  public static PerlRegexpModifiers create(@Nullable PsiElement element) {
+    if (element == null) {
+      return EMPTY_MODIFIERS;
+    }
+    else if (PsiUtilCore.getElementType(element) != PERL_REGEX_MODIFIERS) {
       return null;
     }
     PerlRegexpModifiers result = new PerlRegexpModifiers();

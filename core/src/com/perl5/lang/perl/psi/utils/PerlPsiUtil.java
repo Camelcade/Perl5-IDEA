@@ -27,6 +27,7 @@ import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -699,13 +700,85 @@ public class PerlPsiUtil implements PerlElementTypes {
     else if (targetElement.equals(elementToCompare)) {
       return true;
     }
+
     if (targetElement instanceof PerlString) {
       return areStringElementsSame((PerlString)targetElement, elementToCompare);
+    }
+    else if (targetElement instanceof PerlSimpleRegex) {
+      return areMatchRegexElementsSame((PerlSimpleRegex)targetElement, elementToCompare);
     }
     else if (targetElement instanceof PerlCastExpression) {
       return areCastElementsSame((PerlCastExpression)targetElement, elementToCompare);
     }
+    else if (targetElement instanceof PsiPerlPerlRegex) {
+      return areRegexSame((PsiPerlPerlRegex)targetElement, elementToCompare);
+    }
     return areGenericElementsSame(targetElement, elementToCompare);
+  }
+
+  /**
+   * @return true iff regexps are semantically equal
+   */
+  private static boolean areRegexSame(@NotNull PsiPerlPerlRegex targetElement, @NotNull PsiElement elementTocompare) {
+    if (!(elementTocompare instanceof PsiPerlPerlRegex)) {
+      return false;
+    }
+    PsiElement targetElementRun = targetElement.getFirstChild();
+    PsiElement runToCompare = elementTocompare.getFirstChild();
+    while (true) {
+      StringBuilder targetBuffer = new StringBuilder();
+      StringBuilder bufferToCompare = new StringBuilder();
+      //noinspection Duplicates
+      while (targetElementRun != null) {
+        IElementType targetElementType = PsiUtilCore.getElementType(targetElementRun);
+        if (targetElementType == REGEX_TOKEN) {
+          targetBuffer.append(targetElementRun.getText());
+        }
+        else if (!IGNORE_WHEN_COMPARING.contains(targetElementType)) {
+          break;
+        }
+        targetElementRun = targetElementRun.getNextSibling();
+      }
+
+      //noinspection Duplicates
+      while (runToCompare != null) {
+        IElementType elementToCompareType = PsiUtilCore.getElementType(runToCompare);
+        if (elementToCompareType == REGEX_TOKEN) {
+          bufferToCompare.append(runToCompare.getText());
+        }
+        else if (!IGNORE_WHEN_COMPARING.contains(elementToCompareType)) {
+          break;
+        }
+        runToCompare = runToCompare.getNextSibling();
+      }
+
+      if (targetElementRun == null && runToCompare == null) {
+        return StringUtil.equals(targetBuffer, bufferToCompare);
+      }
+      if (targetElementRun == null || runToCompare == null ||
+          !StringUtil.equals(targetBuffer, bufferToCompare) ||
+          !areElementsSame(targetElementRun, runToCompare)) {
+        return false;
+      }
+      targetElementRun = targetElementRun.getNextSibling();
+      runToCompare = runToCompare.getNextSibling();
+    }
+  }
+
+  /**
+   * @return true iff {@code targetElement} and {@code elementToCompare} are semantically equal simple regexp elements
+   */
+  private static boolean areMatchRegexElementsSame(@NotNull PerlSimpleRegex targetElement, @NotNull PsiElement elementToCompare) {
+    if (!(elementToCompare instanceof PerlSimpleRegex)) {
+      return false;
+    }
+    if (!areElementsSame(targetElement.getRegex(), ((PerlSimpleRegex)elementToCompare).getRegex())) {
+      return false;
+    }
+    PerlRegexpModifiers targetModifiers = PerlRegexpModifiers.create(targetElement.getPerlRegexModifiers());
+    PerlRegexpModifiers elementModifiers = PerlRegexpModifiers.create(((PerlSimpleRegex)elementToCompare).getPerlRegexModifiers());
+    return targetModifiers == null && elementModifiers == null ||
+           targetModifiers != null && targetModifiers.areRegexpComparable(elementModifiers);
   }
 
   /**

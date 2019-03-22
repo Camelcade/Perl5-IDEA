@@ -27,6 +27,14 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
     return "testData/introduce/occurrences";
   }
 
+  public void testRegexMatchImplicit() {doTest();}
+
+  public void testRegexMatchExplicit() {doTest();}
+
+  public void testRegexMatchLazy() {doTest();}
+
+  public void testRegexMatchEmpty() {doTest();}
+
   public void testListPartial() {doTest();}
 
   public void testPlusMinus() {doTest();}
