@@ -1,0 +1,4 @@
+somemethod;
+somemethod();
+somemethod 1,2,3;
+somem<caret>ethod(1,2,3);

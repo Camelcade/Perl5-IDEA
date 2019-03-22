@@ -38,7 +38,6 @@ public interface PerlMethodContainer extends PsiElement {
     return PsiTreeUtil.getChildOfType(this, PsiPerlCallArguments.class);
   }
 
-
   @NotNull
   default List<PsiElement> getCallArgumentsList() {
     PsiPerlCallArguments callArguments = getCallArguments();

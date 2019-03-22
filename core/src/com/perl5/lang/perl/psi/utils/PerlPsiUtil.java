@@ -728,8 +728,8 @@ public class PerlPsiUtil implements PerlElementTypes {
     else if (targetElement instanceof PsiPerlPerlRegex) {
       return areRegexSame((PsiPerlPerlRegex)targetElement, elementToCompare);
     }
-    else if (targetElement instanceof PsiPerlNestedCall) {
-      return areNestedCallsSame((PsiPerlNestedCall)targetElement, elementToCompare);
+    else if (targetElement instanceof PerlMethodContainer) {
+      return areNestedCallsSame((PerlMethodContainer)targetElement, elementToCompare);
     }
     else if (targetElement instanceof PsiPerlPackageExpr) {
       return elementToCompare instanceof PerlString ? areElementsSame(elementToCompare, targetElement) :
@@ -743,14 +743,14 @@ public class PerlPsiUtil implements PerlElementTypes {
   /**
    * @return true iff nested calls are semantically equal
    */
-  private static boolean areNestedCallsSame(@NotNull PsiPerlNestedCall targetElement, @NotNull PsiElement elementToCompare) {
-    if (!(elementToCompare instanceof PsiPerlNestedCall)) {
+  private static boolean areNestedCallsSame(@NotNull PerlMethodContainer targetElement, @NotNull PsiElement elementToCompare) {
+    if (!(elementToCompare instanceof PerlMethodContainer)) {
       return false;
     }
-    if (!areElementsSame(targetElement.getMethod(), ((PsiPerlNestedCall)elementToCompare).getMethod())) {
+    if (!areElementsSame(targetElement.getMethod(), ((PerlMethodContainer)elementToCompare).getMethod())) {
       return false;
     }
-    return areElementsSame(targetElement.getCallArgumentsList(), ((PsiPerlNestedCall)elementToCompare).getCallArgumentsList());
+    return areElementsSame(targetElement.getCallArgumentsList(), ((PerlMethodContainer)elementToCompare).getCallArgumentsList());
   }
 
   /**

@@ -1,0 +1,4 @@
+somemethod;
+somemethod();
+<occurrence>somemethod 1,2,3</occurrence>;
+<occurrence>somemethod(1,2,3)</occurrence>;

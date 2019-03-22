@@ -27,6 +27,14 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
     return "testData/introduce/occurrences";
   }
 
+  public void testMethodCallNoParens() {doTest();}
+
+  public void testMethodCallNotParenthesized() {doTest();}
+
+  public void testMethodCallParens() {doTest();}
+
+  public void testMethodCallParenthesized() {doTest();}
+
   public void testNestedCallWithParens() {doTest();}
 
   public void testNestedCallWithoutParens() {doTest();}
