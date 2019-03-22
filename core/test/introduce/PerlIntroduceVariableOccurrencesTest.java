@@ -27,6 +27,8 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
     return "testData/introduce/occurrences";
   }
 
+  public void testListPartial() {doTest();}
+
   public void testPlusMinus() {doTest();}
 
   public void testQwRange() {doTest();}
