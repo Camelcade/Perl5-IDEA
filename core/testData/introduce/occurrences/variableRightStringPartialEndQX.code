@@ -1,26 +1,26 @@
-'something here bla';
-"something here bla";
-`something he<selection>re bla</selection>`;
-q /something here bla/;
-qq {something here bla};
-qx fsomething here blaf;
-qw/something here bla/;
-something => "here bla";
+'something here bla${variable}';
+"something here bla${variable}";
+`something he<selection>re bla${vari</selection>able}`;
+q /something here bla${variable}/;
+qq {something here bla${variable}};
+qx fsomething here bla${variable}f;
+qw/something here bla${variable}/;
+something => "here bla${variable}";
 
-'re bla';
-"re bla";
-`re bla`;
-q /re bla/;
-qq {re bla};
-qx fre blaf;
-qw/re bla/;
+'re bla${variable}';
+"re bla${variable}";
+`re bla${variable}`;
+q /re bla${variable}/;
+qq {re bla${variable}};
+qx fre bla${variable}f;
+qw/re bla${variable}/;
 something => "";
 
-'something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ';
-"something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ";
-`something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla `;
-q /something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
-qq {something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla };
-qx fsomething here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla f;
-qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+'something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} ';
+"something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} ";
+`something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} `;
+q /something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} /;
+qq {something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} };
+qx fsomething here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} f;
+qw/something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} /;
 
