@@ -1,11 +1,11 @@
-'someth<selection>ing here b</selection>la';
-"something here bla";
-`something here bla`;
-q /something here bla/;
-qq {something here bla};
-qx fsomething here blaf;
-qw/something here bla/;
-something => "here bla";
+'someth<selection>ing here b${var</selection>iable}la';
+"something here b${variable}la";
+`something here b${variable}la`;
+q /something here b${variable}la/;
+qq {something here b${variable}la};
+qx fsomething here b${variable}laf;
+qw/something here b${variable}la/;
+something => "here b${variable}la";
 
 'ing here b';
 "ing here b";
@@ -16,11 +16,11 @@ qx fing here bf;
 qw/ing here b/;
 something => "";
 
-'something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ';
-"something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ";
-`something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla `;
-q /something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
-qq {something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla };
-qx fsomething here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla f;
-qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+'something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la ';
+"something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la ";
+`something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la `;
+q /something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+qq {something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la };
+qx fsomething here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la f;
+qw/something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
 
