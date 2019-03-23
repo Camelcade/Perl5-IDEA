@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +66,19 @@ public class PerlElementFactory {
     PerlUseStatement def = PsiTreeUtil.findChildOfType(file, PerlUseStatement.class);
     assert def != null;
     return def;
+  }
+
+  /**
+   * @return a statement psi element created from {@code statementText} or null if something went wrong, statement could not be created
+   */
+  @Nullable
+  public static PsiElement createStatement(@NotNull Project project, @NotNull String statementText) {
+    PerlFileImpl perlFile = createFile(project, statementText + ";");
+    if (perlFile == null) {
+      return null;
+    }
+    PsiElement[] children = perlFile.getChildren();
+    return children.length != 1 ? null : children[0];
   }
 
   // fixme probably we don't need package name and sub. just identifier

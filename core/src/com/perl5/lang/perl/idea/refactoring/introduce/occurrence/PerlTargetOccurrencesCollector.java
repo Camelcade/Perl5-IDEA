@@ -69,7 +69,7 @@ public abstract class PerlTargetOccurrencesCollector {
 
   @NotNull
   public final List<PerlIntroduceTarget> collectOccurrences() {
-    PsiElement searchScope = getSearchScope();
+    PsiElement searchScope = computeTargetScope(myTarget);
     if (searchScope == null) {
       return getOccurrences();
     }
@@ -94,8 +94,8 @@ public abstract class PerlTargetOccurrencesCollector {
    * @return psi element we should search for occurrences of the searcher's target.
    */
   @Nullable
-  public final PsiElement getSearchScope() {
-    PsiElement targetElement = myTarget.getPlace();
+  public static final PsiElement computeTargetScope(@NotNull PerlIntroduceTarget target) {
+    PsiElement targetElement = target.getPlace();
     PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
     return scope != null ? scope : PsiTreeUtil.getParentOfType(targetElement, PerlNamespaceDefinitionElement.class);
   }
