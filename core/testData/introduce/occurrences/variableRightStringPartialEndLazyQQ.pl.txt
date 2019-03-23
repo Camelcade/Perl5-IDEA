@@ -1,0 +1,26 @@
+'something he<occurrence>re bla</occurrence>';
+"something he<occurrence>re bla</occurrence>";
+`something he<occurrence>re bla</occurrence>`;
+q /something he<occurrence>re bla</occurrence>/;
+qq {something he<occurrence>re bla</occurrence>};
+qx fsomething he<occurrence>re bla</occurrence>f;
+qw/something here bla/;
+something => "he<occurrence>re bla</occurrence>";
+
+<occurrence>'re bla'</occurrence>;
+<occurrence>"re bla"</occurrence>;
+`<occurrence>re bla</occurrence>`;
+<occurrence>q /re bla/</occurrence>;
+<occurrence>qq {re bla}</occurrence>;
+qx f<occurrence>re bla</occurrence>f;
+qw/re bla/;
+something => "";
+
+'something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> ';
+"something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence>";
+`something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> `;
+q /something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> /;
+qq {something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> };
+qx fsomething he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> something he<occurrence>re bla</occurrence> f;
+qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+
