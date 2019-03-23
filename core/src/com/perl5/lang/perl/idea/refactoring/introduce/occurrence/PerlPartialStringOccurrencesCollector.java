@@ -149,7 +149,7 @@ public class PerlPartialStringOccurrencesCollector extends PerlTargetOccurrences
               endOffset = elementToCompareTextRange.getEndOffset();
             }
             else {
-              if (StringUtil.endsWith(textToCompare, (String)childToFind)) {
+              if (StringUtil.startsWith(textToCompare, (String)childToFind)) {
                 endOffset = elementToCompareTextRange.getStartOffset() + ((String)childToFind).length();
               }
             }

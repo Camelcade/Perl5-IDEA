@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in stringQQVariablePartial.pl
+    (1,22)
+    '${variable}something '
