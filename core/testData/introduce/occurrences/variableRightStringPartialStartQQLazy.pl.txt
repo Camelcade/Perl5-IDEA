@@ -1,26 +1,26 @@
-'<occurrence>something </occurrence>here bla';
-"<occurrence>something </occurrence>here bla";
-`<occurrence>something </occurrence>here bla`;
-q /<occurrence>something </occurrence>here bla/;
-qq {<occurrence>something </occurrence>here bla};
-qx f<occurrence>something </occurrence>here blaf;
-qw/something here bla/;
+'something ${variable}here bla';
+"<occurrence>something ${variable}</occurrence>here bla";
+`<occurrence>something ${variable}</occurrence>here bla`;
+q /something ${variable}here bla/;
+qq {<occurrence>something ${variable}</occurrence>here bla};
+qx f<occurrence>something ${variable}</occurrence>here blaf;
+qw/something ${variable}here bla/;
 something => "here bla";
 
-<occurrence>'something '</occurrence>;
-<occurrence>"something "</occurrence>;
-`<occurrence>something </occurrence>`;
-<occurrence>q /something /</occurrence>;
-<occurrence>qq {something }</occurrence>;
-qx f<occurrence>something </occurrence>f;
+'something ';
+"something ";
+`something `;
+q /something /;
+qq {something };
+qx fsomething f;
 qw/something /;
 something => "";
 
-'<occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla ';
-"<occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla ";
-`<occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla `;
-q /<occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla /;
-qq {<occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla };
-qx f<occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla <occurrence>something </occurrence>here bla f;
-qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+'something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla ';
+"<occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla ";
+`<occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla `;
+q /something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla /;
+qq {<occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla };
+qx f<occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla <occurrence>something ${variable}</occurrence>here bla something ${variable}here bla f;
+qw/something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla something ${variable}here bla /;
 
