@@ -119,6 +119,9 @@ public abstract class PerlTargetOccurrencesCollector {
     else if (targetElement instanceof PerlStringList || targetElement instanceof PsiPerlCommaSequenceExpr) {
       return new PerlListOccurrencesCollector(target);
     }
+    else if (targetElement instanceof PerlString && !target.isFullRange()) {
+      return new PerlPartialStringOccurrencesCollector(target);
+    }
     if (!target.isFullRange()) {
       throw new RuntimeException("Generic collector may handle only full-range targets");
     }

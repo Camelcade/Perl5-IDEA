@@ -33,6 +33,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
@@ -66,11 +67,8 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes 
     TokenSet.create(POD)
   );
 
-  public static final TokenSet LITERALS = TokenSet.create(
-    STRING_CONTENT,
-    STRING_CONTENT_XQ,
-    STRING_CONTENT_QQ
-  );
+  // fixme inline this
+  public static final TokenSet LITERALS = PerlTokenSets.STRING_CONTENT_TOKENSET;
   public static final TokenSet IDENTIFIERS = TokenSet.create(
     SUB_NAME,
     QUALIFYING_PACKAGE,
