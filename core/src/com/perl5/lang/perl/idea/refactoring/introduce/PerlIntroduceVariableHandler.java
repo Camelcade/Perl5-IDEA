@@ -44,6 +44,7 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -167,16 +168,16 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         break;
       }
     }
-    PerlVariableDeclarationElement variableDeclaration = introduceVariable(statement, anchorElement);
+    List<PsiElement> psiOccurrences = new ArrayList<>();
+    PerlVariableDeclarationElement variableDeclaration = introduceVariable(statement, occurrences, anchorElement, psiOccurrences);
 
     if (variableDeclaration == null) {
       return;
     }
 
     editor.getCaretModel().moveToOffset(variableDeclaration.getTextRange().getStartOffset() + 1);
-    new PerlVariableIntroducer(variableDeclaration, editor, PsiElement.EMPTY_ARRAY).performInplaceRefactoring(
-      new LinkedHashSet<>(suggestedNames)
-    );
+    new PerlVariableIntroducer(variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY))
+      .performInplaceRefactoring(new LinkedHashSet<>(suggestedNames));
   }
 
   /**
@@ -186,7 +187,9 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    */
   @Nullable
   private PerlVariableDeclarationElement introduceVariable(@NotNull PsiElement statement,
-                                                           @NotNull PsiElement anchor) {
+                                                           @NotNull List<PerlIntroduceTarget> occurrences,
+                                                           @NotNull PsiElement anchor,
+                                                           @NotNull List<PsiElement> psiOccurrences) {
     Project project = statement.getProject();
     return WriteCommandAction.writeCommandAction(project).compute(() -> {
       final RefactoringEventData afterData = new RefactoringEventData();
@@ -222,7 +225,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         LOG.error("Single variable declaration expected: " + introducedStatement.getText());
       }
 
-      return declarations.get(0);
+      PsiPerlVariableDeclarationElement declarationElement = declarations.get(0);
+      PerlVariable declaredVariable = declarationElement.getVariable();
+
+      occurrences.forEach(it -> psiOccurrences.add(it.getPlace().replace(declaredVariable)));
+
+      return declarationElement;
     });
   }
 
