@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PsiPerlStringXq;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +44,8 @@ public class PerlPartialStringOccurrencesCollector extends PerlTargetOccurrences
     }
 
     PsiElement run = ((PerlString)targetElement).getFirstContentToken();
-    while (run != null) {
+    PsiElement closeQuoteElement = ((PerlString)targetElement).getCloseQuoteElement();
+    while (run != null && run != closeQuoteElement) {
       TextRange runTextRange = run.getTextRange().intersection(targetTextRange);
       if (runTextRange != null) {
         if (STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(run))) {
@@ -65,12 +67,11 @@ public class PerlPartialStringOccurrencesCollector extends PerlTargetOccurrences
       return false;
     }
 
-    PsiElement closeQuote = ((PerlString)element).getCloseQuoteElement();
-    PsiElement run = ((PerlString)element).getFirstContentToken();
-
-    if (run == null) {
+    List<PsiElement> elementChildren = ((PerlString)element).getAllChildrenList();
+    if (elementChildren.isEmpty()) {
       return false;
     }
+
     boolean result = false;
     Object firstChildToFind = myChildrenToFind.get(0);
     boolean startsWithString = firstChildToFind instanceof String;
@@ -78,12 +79,14 @@ public class PerlPartialStringOccurrencesCollector extends PerlTargetOccurrences
     boolean isSimpleString = myChildrenToFind.size() == 1;
     int elementStartOffset = element.getTextRange().getStartOffset();
 
-    while (run != null) {
-      boolean isRunString = STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(run));
+    for (int index = 0; index <= elementChildren.size() - myChildrenToFind.size(); index++) {
+      PsiElement elementChild = elementChildren.get(index);
+
+      boolean isRunString = STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(elementChild));
       int startOffset = -1;
 
       if (startsWithString && isRunString) {
-        String runText = run.getText();
+        String runText = elementChild.getText();
         if (isSimpleString) {
           int i = 0;
           while (true) {
@@ -93,31 +96,74 @@ public class PerlPartialStringOccurrencesCollector extends PerlTargetOccurrences
             }
             else {
               result = true;
-              addOccurrence(PerlIntroduceTarget.create(element, TextRange.from(
-                run.getTextRange().getStartOffset() - elementStartOffset, firstChildLenght)));
+              addOccurrence(
+                index == 0 && elementChildren.size() == 1 && i == 0 && firstChildLenght == runText.length() &&
+                !(element instanceof PsiPerlStringXq) ?
+                PerlIntroduceTarget.create(element) :
+                PerlIntroduceTarget.create(element, TextRange.from(
+                  elementChild.getTextRange().getStartOffset() - elementStartOffset + i, firstChildLenght)));
               i += firstChildLenght;
             }
           }
         }
         else {
           if (StringUtil.endsWith(runText, (String)firstChildToFind)) {
-            startOffset = run.getTextRange().getEndOffset() - firstChildLenght;
+            startOffset = elementChild.getTextRange().getEndOffset() - firstChildLenght;
           }
         }
       }
       else if (!startsWithString && !isRunString) {
-        if (PerlPsiUtil.areElementsSame((PsiElement)firstChildToFind, run)) {
-          startOffset = run.getTextRange().getStartOffset();
+        if (PerlPsiUtil.areElementsSame((PsiElement)firstChildToFind, elementChild)) {
+          startOffset = elementChild.getTextRange().getStartOffset();
         }
       }
 
       if (startOffset > 0) {
-        for (int i = 1; i < myChildrenToFind.size(); i++) {
-          boolean isLast = i == myChildrenToFind.size() - 1;
+        int endOffset = -1;
+        int elementNumber = 1;
+        for (; elementNumber < myChildrenToFind.size(); elementNumber++) {
+          boolean isLast = elementNumber == myChildrenToFind.size() - 1;
+          Object childToFind = myChildrenToFind.get(elementNumber);
+          int elementIndex = index + elementNumber;
+          if (elementIndex >= elementChildren.size()) {
+            endOffset = -1;
+            break;
+          }
+          PsiElement elementToCompare = elementChildren.get(elementIndex);
+
+          TextRange elementToCompareTextRange = elementToCompare.getTextRange();
+          if (childToFind instanceof PsiElement) {
+            if (!PerlPsiUtil.areElementsSame((PsiElement)childToFind, elementToCompare)) {
+              endOffset = -1;
+              break;
+            }
+            endOffset = elementToCompareTextRange.getEndOffset();
+          }
+          else if (childToFind instanceof String && STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(elementToCompare))) {
+            String textToCompare = elementToCompare.getText();
+            if (!isLast) {
+              if (!StringUtil.equals((String)childToFind, textToCompare)) {
+                endOffset = -1;
+                break;
+              }
+              endOffset = elementToCompareTextRange.getEndOffset();
+            }
+            else {
+              if (StringUtil.endsWith(textToCompare, (String)childToFind)) {
+                endOffset = elementToCompareTextRange.getStartOffset() + ((String)childToFind).length();
+              }
+            }
+          }
+          else {
+            endOffset = -1;
+            break;
+          }
+        }
+        if (endOffset > startOffset) {
+          addOccurrence(PerlIntroduceTarget.create(element, TextRange.create(startOffset, endOffset).shiftLeft(elementStartOffset)));
+          index += elementNumber;
         }
       }
-
-      run = run.getNextSibling();
     }
 
     return result;

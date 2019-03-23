@@ -17,6 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by hurricup on 08.08.2015.
@@ -26,4 +31,24 @@ public interface PerlString extends PerlQuoted {
    * @return first element of string content. Or null if string is empty or invalid
    */
   PsiElement getFirstContentToken();
+
+  /**
+   * @return all children, including leaf ones
+   */
+  @NotNull
+  default List<PsiElement> getAllChildrenList() {
+    PsiElement run = getFirstContentToken();
+
+    if (run == null) {
+      return Collections.emptyList();
+    }
+
+    PsiElement closeQuote = getCloseQuoteElement();
+    List<PsiElement> result = new ArrayList<>();
+    while (run != null && run != closeQuote) {
+      result.add(run);
+      run = run.getNextSibling();
+    }
+    return result;
+  }
 }

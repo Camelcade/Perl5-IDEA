@@ -250,6 +250,13 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     LP_REGEX_XX
   );
 
+  TokenSet LAZY_PARSABLE_STRINGS = TokenSet.create(
+    LP_STRING_Q,
+    LP_STRING_QQ,
+    LP_STRING_XQ
+
+  );
+
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
   /**
    * Quote openers with three or four quotes

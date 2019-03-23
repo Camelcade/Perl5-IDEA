@@ -29,6 +29,7 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
@@ -51,52 +52,48 @@ public class PerlIndentProcessor implements PerlElementTypes, PerlSwitchElementT
   public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
 
   // containers which has none indentation
-  public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.create(
-    NAMESPACE_DEFINITION,
-    NAMESPACE_CONTENT,
-    SUB_DEFINITION,
-    METHOD_DEFINITION,
-    FUNC_DEFINITION,
-    IF_COMPOUND,
-    UNLESS_COMPOUND,
-    UNTIL_COMPOUND,
-    WHILE_COMPOUND,
-    GIVEN_COMPOUND,
-    WHEN_COMPOUND,
-    DEFAULT_COMPOUND,
-    TRYCATCH_COMPOUND,
-    FOR_COMPOUND,
-    FOREACH_COMPOUND,
-    CONDITIONAL_BLOCK,
-    CONTINUE_BLOCK,
-    BLOCK_COMPOUND,
+  public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+    PerlTokenSets.LAZY_PARSABLE_STRINGS,
+    PerlTokenSets.LAZY_PARSABLE_REGEXPS,
+    TokenSet.create(
+      NAMESPACE_DEFINITION,
+      NAMESPACE_CONTENT,
+      SUB_DEFINITION,
+      METHOD_DEFINITION,
+      FUNC_DEFINITION,
+      IF_COMPOUND,
+      UNLESS_COMPOUND,
+      UNTIL_COMPOUND,
+      WHILE_COMPOUND,
+      GIVEN_COMPOUND,
+      WHEN_COMPOUND,
+      DEFAULT_COMPOUND,
+      TRYCATCH_COMPOUND,
+      FOR_COMPOUND,
+      FOREACH_COMPOUND,
+      CONDITIONAL_BLOCK,
+      CONTINUE_BLOCK,
+      BLOCK_COMPOUND,
 
-    TRYCATCH_EXPR,
-    TRY_EXPR,
-    CATCH_EXPR,
-    FINALLY_EXPR,
-    EXCEPT_EXPR,
-    OTHERWISE_EXPR,
-    CONTINUATION_EXPR,
+      TRYCATCH_EXPR,
+      TRY_EXPR,
+      CATCH_EXPR,
+      FINALLY_EXPR,
+      EXCEPT_EXPR,
+      OTHERWISE_EXPR,
+      CONTINUATION_EXPR,
 
-    // fixme see #745
-    SWITCH_COMPOUND,
-    CASE_COMPOUND,
+      // fixme see #745
+      SWITCH_COMPOUND,
+      CASE_COMPOUND,
 
-    DO_EXPR,
-    EVAL_EXPR,
-    SUB_EXPR,
-    PerlParserDefinition.FILE,
+      DO_EXPR,
+      EVAL_EXPR,
+      SUB_EXPR,
+      PerlParserDefinition.FILE,
 
-    LP_REGEX,
-    LP_REGEX_REPLACEMENT,
-    LP_REGEX_X,
-    LP_REGEX_XX,
-    LP_STRING_Q,
-    LP_STRING_QQ,
-    LP_STRING_QW,
-    LP_STRING_XQ
-  );
+      LP_STRING_QW
+    ));
 
   public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.create(
     LP_STRING_QW,

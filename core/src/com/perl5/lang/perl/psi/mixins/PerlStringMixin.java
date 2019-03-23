@@ -25,6 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -74,7 +75,13 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
       return null;
     }
     PsiElement nextSibling = openQuote.getNextSibling();
-    return nextSibling == null || nextSibling.equals(getCloseQuoteElement()) ? null : nextSibling;
+    if (nextSibling == null || nextSibling.equals(getCloseQuoteElement())) {
+      return null;
+    }
+    if (PerlTokenSets.LAZY_PARSABLE_STRINGS.contains(PsiUtilCore.getElementType(nextSibling))) {
+      return nextSibling.getFirstChild();
+    }
+    return nextSibling;
   }
 
   // fixme see #1981
