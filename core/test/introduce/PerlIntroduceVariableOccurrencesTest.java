@@ -29,6 +29,16 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
 
   public void testStringPartialStart() {doTest();}
 
+  public void testStringPartialStartLazy() {doTest();}
+
+  public void testStringPartialStartQQ() {doTest();}
+
+  public void testStringPartialStartQQLazy() {doTest();}
+
+  public void testStringPartialStartQX() {doTest();}
+
+  public void testStringPartialStartQXLazy() {doTest();}
+
   public void testStringPartialMid() {doTest();}
 
   public void testStringPartialEnd() {doTest();}

@@ -126,6 +126,7 @@ class PerlStringTargetsCollector extends PerlTargetsCollector {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
 
+    int elementStartOffset = element.getTextRange().getStartOffset();
     int startOffset = -1;
     int endOffset = -1;
     for (PsiElement run : allChildrenList) {
@@ -136,17 +137,17 @@ class PerlStringTargetsCollector extends PerlTargetsCollector {
       }
 
       if (startOffset < 0) {
-        startOffset = run.getStartOffsetInParent();
-        if (selectionStart > runTextRange.getStartOffset() && STRING_CONTENT_TOKENSET.contains(runElementType)) {
-          startOffset += selectionStart - runTextRange.getStartOffset();
+        startOffset = runTextRange.getStartOffset();
+        if (selectionStart > startOffset && STRING_CONTENT_TOKENSET.contains(runElementType)) {
+          startOffset = selectionStart;
         }
       }
-      endOffset = run.getStartOffsetInParent() + run.getTextLength();
-      if (selectionEnd < runTextRange.getEndOffset() && STRING_CONTENT_TOKENSET.contains(runElementType)) {
-        endOffset -= runTextRange.getEndOffset() - selectionEnd;
+      endOffset = runTextRange.getEndOffset();
+      if (selectionEnd < endOffset && STRING_CONTENT_TOKENSET.contains(runElementType)) {
+        endOffset = selectionEnd;
       }
     }
     return startOffset < 0 || endOffset < 0 ? Collections.emptyList() :
-           Collections.singletonList(PerlIntroduceTarget.create(element, startOffset, endOffset));
+           Collections.singletonList(PerlIntroduceTarget.create(element, startOffset - elementStartOffset, endOffset - elementStartOffset));
   }
 }
