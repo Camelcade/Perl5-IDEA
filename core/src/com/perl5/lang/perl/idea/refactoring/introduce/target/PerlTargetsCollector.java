@@ -27,7 +27,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.PerlQuoted;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
@@ -87,8 +87,8 @@ public abstract class PerlTargetsCollector {
     if (SEQUENTINAL_TOKENS.contains(elementType)) {
       return PerlSequentialElementTargetCollector.INSTANCE;
     }
-    else if (run instanceof PerlQuoted) {
-      return PerlQuotedTargetsCollector.INSTANCE;
+    else if (run instanceof PerlString) {
+      return PerlStringTargetsCollector.INSTANCE;
     }
     return PerlGenericTargetsCollector.INSTANCE;
   }

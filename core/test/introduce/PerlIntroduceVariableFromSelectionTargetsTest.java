@@ -22,6 +22,18 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
     return "testData/introduce/targets/selection";
   }
 
+  public void testStringLazy() {doTest();}
+
+  public void testStringLazyOp() {doTest();}
+
+  public void testStringLazyQQ() {doTest();}
+
+  public void testStringLazyQQOp() {doTest();}
+
+  public void testStringLazyQX() {doTest();}
+
+  public void testStringLazyQXOp() {doTest();}
+
   public void testRegexpCompileVariableCross() {doTest();}
 
   public void testRegexpMatchExplicitVariableCross() {doTest();}

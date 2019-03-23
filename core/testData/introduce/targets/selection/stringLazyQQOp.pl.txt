@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in stringLazyQQOp.pl
+    (183,189)
+    'g here'

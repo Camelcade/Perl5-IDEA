@@ -1,0 +1,3 @@
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in stringLazy.pl
+    (184,190)
+    're bla'

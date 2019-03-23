@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in stringLazyQQ.pl
+    (183,189)
+    'ere bl'

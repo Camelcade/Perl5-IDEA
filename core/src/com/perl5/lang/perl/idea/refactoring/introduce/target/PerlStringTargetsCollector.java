@@ -19,55 +19,57 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.PerlQuoted;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.psi.impl.PsiPerlStringBareImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
+
 /**
  * Compute target for quoted entities(perl strings) by caret position.
  */
-class PerlQuotedTargetsCollector extends PerlTargetsCollector {
-  public static final PerlTargetsCollector INSTANCE = new PerlQuotedTargetsCollector();
-  private static final Logger LOG = Logger.getInstance(PerlQuotedTargetsCollector.class);
+class PerlStringTargetsCollector extends PerlTargetsCollector {
+  public static final PerlTargetsCollector INSTANCE = new PerlStringTargetsCollector();
+  private static final Logger LOG = Logger.getInstance(PerlStringTargetsCollector.class);
 
-  private PerlQuotedTargetsCollector() {
+  private PerlStringTargetsCollector() {
   }
 
   @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
-    if (!(element instanceof PerlQuoted)) {
+    if (!(element instanceof PerlString)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
       return Collections.emptyList();
     }
-    PerlQuoted perlQuotedElement = (PerlQuoted)element;
 
-    PsiElement stringRun = perlQuotedElement.getOpenQuoteElement();
-    if (stringRun == null) {
+    if (element instanceof PsiPerlStringBareImpl) {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
 
-    List<PerlIntroduceTarget> result = new ArrayList<>();
+    PerlString perlStringElement = (PerlString)element;
+    List<PsiElement> allChildren = perlStringElement.getAllChildrenList();
+    if (allChildren.isEmpty()) {
+      return Collections.singletonList(PerlIntroduceTarget.create(element));
+    }
 
-    PsiElement closeQuote = perlQuotedElement.getCloseQuoteElement();
-    PsiElement firstStringElement = stringRun.getNextSibling();
-    while ((stringRun = stringRun.getNextSibling()) != null && !stringRun.equals(closeQuote)) {
+
+    List<PerlIntroduceTarget> result = new ArrayList<>();
+    int firstStringElementStartOffsetInParent = allChildren.get(0).getStartOffsetInParent();
+
+    for (PsiElement stringRun : allChildren) {
       IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
-      if (stringRunElementType == TokenType.WHITE_SPACE) {
-        continue;
-      }
       TextRange stringRunTextRange = stringRun.getTextRange();
       if (stringRunTextRange.contains(caretOffset) || stringRunTextRange.getStartOffset() > caretOffset) {
-        if (PerlParserDefinition.LITERALS.contains(stringRunElementType)) {
+        if (STRING_CONTENT_TOKENSET.contains(stringRunElementType)) {
           String stringRunText = stringRun.getText();
           boolean isLastWhiteSpace = true;
           for (int i = 0; i < stringRunText.length(); i++) {
@@ -75,20 +77,21 @@ class PerlQuotedTargetsCollector extends PerlTargetsCollector {
             int substringEndOffsetInParent = stringRun.getStartOffsetInParent() + i;
             if (isLastWhiteSpace != isCurrentWhiteSpace && isCurrentWhiteSpace &&
                 substringEndOffsetInParent + stringRunTextRange.getStartOffset() > caretOffset) {
-              result.add(PerlIntroduceTarget.create(perlQuotedElement, firstStringElement.getStartOffsetInParent(),
+              result.add(PerlIntroduceTarget.create(perlStringElement, firstStringElementStartOffsetInParent,
                                                     substringEndOffsetInParent));
             }
             isLastWhiteSpace = isCurrentWhiteSpace;
           }
           if (!isLastWhiteSpace) {
-            result.add(PerlIntroduceTarget.create(perlQuotedElement, firstStringElement.getStartOffsetInParent(),
+            result.add(PerlIntroduceTarget.create(perlStringElement, firstStringElementStartOffsetInParent,
                                                   stringRun.getStartOffsetInParent() + stringRunText.length()));
           }
         }
         else {
-          result.add(PerlIntroduceTarget.create(perlQuotedElement, firstStringElement, stringRun));
+          result.add(PerlIntroduceTarget.create(perlStringElement, allChildren.get(0), stringRun));
         }
       }
+      stringRun = stringRun.getNextSibling();
     }
     result.add(PerlIntroduceTarget.create(element));
     return result;
@@ -97,7 +100,7 @@ class PerlQuotedTargetsCollector extends PerlTargetsCollector {
   @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
-    if (!(element instanceof PerlQuoted)) {
+    if (!(element instanceof PerlString)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
       return Collections.emptyList();
     }
@@ -110,27 +113,23 @@ class PerlQuotedTargetsCollector extends PerlTargetsCollector {
       return Collections.singletonList(PerlIntroduceTarget.create(element, intersectedRange.shiftLeft(element.getTextOffset())));
     }
 
+    List<PsiElement> allChildrenList = ((PerlString)element).getAllChildrenList();
+    if (allChildrenList.isEmpty()) {
+      return Collections.singletonList(PerlIntroduceTarget.create(element));
+    }
+
     int selectionStart = selectionRange.getStartOffset();
     int selectionEnd = selectionRange.getEndOffset();
-    PsiElement run = ((PerlQuoted)element).getOpenQuoteElement();
-    if (run == null) {
-      return Collections.emptyList();
-    }
-    PsiElement closeQuote = ((PerlQuoted)element).getCloseQuoteElement();
-    if (selectionRange.contains(run.getTextRange()) && (closeQuote == null || selectionRange.contains(closeQuote.getTextRange()))) {
+
+    if (allChildrenList.get(0).getTextRange().getStartOffset() >= selectionStart &&
+        allChildrenList.get(allChildrenList.size() - 1).getTextRange().getEndOffset() <= selectionEnd) {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
 
     int startOffset = -1;
     int endOffset = -1;
-    while ((run = run.getNextSibling()) != null) {
-      if (run.equals(closeQuote)) {
-        break;
-      }
+    for (PsiElement run : allChildrenList) {
       IElementType runElementType = PsiUtilCore.getElementType(run);
-      if (runElementType == TokenType.WHITE_SPACE) {
-        continue;
-      }
       TextRange runTextRange = run.getTextRange();
       if (runTextRange.getEndOffset() <= selectionStart || runTextRange.getStartOffset() >= selectionEnd) {
         continue;
@@ -138,12 +137,12 @@ class PerlQuotedTargetsCollector extends PerlTargetsCollector {
 
       if (startOffset < 0) {
         startOffset = run.getStartOffsetInParent();
-        if (selectionStart > runTextRange.getStartOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+        if (selectionStart > runTextRange.getStartOffset() && STRING_CONTENT_TOKENSET.contains(runElementType)) {
           startOffset += selectionStart - runTextRange.getStartOffset();
         }
       }
       endOffset = run.getStartOffsetInParent() + run.getTextLength();
-      if (selectionEnd < runTextRange.getEndOffset() && PerlParserDefinition.LITERALS.contains(runElementType)) {
+      if (selectionEnd < runTextRange.getEndOffset() && STRING_CONTENT_TOKENSET.contains(runElementType)) {
         endOffset -= runTextRange.getEndOffset() - selectionEnd;
       }
     }

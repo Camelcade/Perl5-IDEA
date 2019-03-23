@@ -1,0 +1,26 @@
+'something h<occurrence>ere bl</occurrence>a';
+"something h<occurrence>ere bl</occurrence>a";
+`something h<occurrence>ere bl</occurrence>a`;
+q /something h<occurrence>ere bl</occurrence>a/;
+qq {something h<occurrence>ere bl</occurrence>a};
+qx fsomething h<occurrence>ere bl</occurrence>af;
+qw/something here bla/;
+something => "h<occurrence>ere bl</occurrence>a";
+
+'re bla';
+"re bla";
+`re bla`;
+q /re bla/;
+qq {re bla};
+qx fre blaf;
+qw/re bla/;
+something => "";
+
+'something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a ';
+"something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a ";
+`something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a`;
+q /something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a /;
+qq {something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a };
+qx fsomething h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a something h<occurrence>ere bl</occurrence>a f;
+qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+
