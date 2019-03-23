@@ -1,26 +1,26 @@
-'someth<occurrence>ing here b</occurrence>la';
-"someth<occurrence>ing here b</occurrence>la";
-`someth<occurrence>ing here b</occurrence>la`;
-q /someth<occurrence>ing here b</occurrence>la/;
-qq {someth<occurrence>ing here b</occurrence>la};
-qx fsometh<occurrence>ing here b</occurrence>laf;
-qw/something here bla/;
+'someth<occurrence>ing he${variable}re b</occurrence>la';
+"something he${variable}re bla";
+`something he${variable}re bla`;
+q /someth<occurrence>ing he${variable}re b</occurrence>la/;
+qq {something he${variable}re bla};
+qx fsomething he${variable}re blaf;
+qw/something he${variable}re bla/;
 something => "here bla";
 
-<occurrence>'ing here b'</occurrence>;
-<occurrence>"ing here b"</occurrence>;
-`<occurrence>ing here b</occurrence>`;
-<occurrence>q /ing here b/</occurrence>;
-<occurrence>qq {ing here b}</occurrence>;
-qx f<occurrence>ing here b</occurrence>f;
-qw/ing here b/;
+<occurrence>'ing he${variable}re b'</occurrence>;
+"ing he${variable}re b";
+`ing he${variable}re b`;
+<occurrence>q /ing he${variable}re b/</occurrence>;
+qq {ing he${variable}re b};
+qx fing he${variable}re bf;
+qw/ing he${variable}re b/;
 something => "";
 
-'someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la ';
-"someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la ";
-`someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la `;
-q /someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la /;
-qq {someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la };
-qx fsometh<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la someth<occurrence>ing here b</occurrence>la f;
-qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+'someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la ';
+"something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla ";
+`something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla `;
+q /someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la someth<occurrence>ing he${variable}re b</occurrence>la /;
+qq {something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla };
+qx fsomething he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla f;
+qw/something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
 

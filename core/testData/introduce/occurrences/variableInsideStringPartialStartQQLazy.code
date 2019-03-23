@@ -1,26 +1,26 @@
-'something here bla';
-"something here bla";
-`something here bla`;
-q /something here bla/;
-qq {something here bla};
-qx fsomething here blaf;
-qw/something here bla/;
+'som${variable}ething here bla';
+"som${variable}ething here bla";
+`som${variable}ething here bla`;
+q /som${variable}ething here bla/;
+qq {som${variable}ething here bla};
+qx fsom${variable}ething here blaf;
+qw/som${variable}ething here bla/;
 something => "here bla";
 
-'something ';
-"something ";
-`something `;
-q /something /;
-qq {something };
-qx fsomething f;
-qw/something /;
+'som${variable}ething ';
+"som${variable}ething ";
+`som${variable}ething `;
+q /som${variable}ething /;
+qq {som${variable}ething };
+qx fsom${variable}ething f;
+qw/som${variable}ething /;
 something => "";
 
-'something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ';
-"<selection>something </selection>here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ";
-`something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla `;
-q /something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
-qq {something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla };
-qx fsomething here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla f;
-qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+'som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla ';
+"<selection>som${variable}ething </selection>here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla ";
+`som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla `;
+q /som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;
+qq {som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla };
+qx fsom${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla f;
+qw/som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;
 
