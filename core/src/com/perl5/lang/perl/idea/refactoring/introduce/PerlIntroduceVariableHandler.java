@@ -36,8 +36,8 @@ import com.intellij.refactoring.listeners.RefactoringEventListener;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
-import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsHandler;
+import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
+import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.properties.PerlCompound;
@@ -54,7 +54,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
   @Override
   public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file, DataContext dataContext) {
-    List<PerlIntroduceTarget> targets = PerlTargetsHandler.getIntroduceTargets(editor, file);
+    List<PerlIntroduceTarget> targets = PerlIntroduceTargetsHandler.getIntroduceTargets(editor, file);
     if (targets.isEmpty()) {
       showErrorMessage(project, editor, RefactoringBundle.getCannotRefactorMessage(PerlBundle.message("perl.introduce.no.target")));
       return;
@@ -85,7 +85,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                  @NotNull Editor editor,
                                  @NotNull PsiFile file,
                                  DataContext dataContext) {
-    List<PerlIntroduceTarget> allOccurrences = PerlTargetOccurrencesCollector.collect(target);
+    List<PerlIntroduceTarget> allOccurrences = PerlIntroduceTargetOccurrencesCollector.collect(target);
     if (allOccurrences.size() > 1) {
       new OccurrencesChooser<PerlIntroduceTarget>(editor) {
         @Override
@@ -123,7 +123,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return;
     }
 
-    List<String> suggestedNames = PerlTargetsHandler.getSuggestedNames(target);
+    List<String> suggestedNames = PerlIntroduceTargetsHandler.getSuggestedNames(target);
     if (suggestedNames.isEmpty()) {
       LOG.error("Suggested names list was empty for " + target);
       return;
@@ -131,7 +131,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     String variableName = suggestedNames.get(0);
 
     Project project = file.getProject();
-    PsiElement declarationStatement = PerlTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
+    PsiElement declarationStatement = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
     if (declarationStatement == null) {
       return;
     }
@@ -160,7 +160,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   @Nullable
   private PsiElement computeAnchor(@NotNull PerlIntroduceTarget target,
                                    @NotNull List<PerlIntroduceTarget> occurrences) {
-    PsiElement enclosingScope = PerlTargetOccurrencesCollector.computeTargetScope(target);
+    PsiElement enclosingScope = PerlIntroduceTargetOccurrencesCollector.computeTargetScope(target);
     if (enclosingScope == null) {
       LOG.error("Unable find enclosing scope for " + target);
       return null;
@@ -252,7 +252,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       PerlVariable declaredVariable = declarationElement.getVariable();
 
       occurrences.forEach(it -> ContainerUtil.addIfNotNull(
-        psiOccurrences, PerlTargetsHandler.replaceOccurence(it, declaredVariable)));
+        psiOccurrences, PerlIntroduceTargetsHandler.replaceOccurence(it, declaredVariable)));
 
       return declarationElement;
     });

@@ -36,8 +36,8 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 /**
  * Compute target for quoted entities(perl strings) by caret position.
  */
-class PerlStringTargetsHandler extends PerlTargetsHandler {
-  public static final PerlTargetsHandler INSTANCE = new PerlStringTargetsHandler();
+class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
+  public static final PerlIntroduceTargetsHandler INSTANCE = new PerlStringTargetsHandler();
   private static final Logger LOG = Logger.getInstance(PerlStringTargetsHandler.class);
 
   private PerlStringTargetsHandler() {

@@ -120,8 +120,8 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
-import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsHandler;
+import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
+import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -1508,7 +1508,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestIntroduceVariableTargets() {
     initWithFileSmartWithoutErrors();
-    List<PerlIntroduceTarget> introduceTargets = PerlTargetsHandler.getIntroduceTargets(getEditor(), getFile());
+    List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
     StringBuilder sb = new StringBuilder();
 
     introduceTargets.forEach(it -> sb.append(serializePsiElement(it.getPlace()))
@@ -1523,10 +1523,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestIntroduceVariableOccurances() {
     initWithFileSmartWithoutErrors();
-    List<PerlIntroduceTarget> introduceTargets = PerlTargetsHandler.getIntroduceTargets(getEditor(), getFile());
+    List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
     assertTrue(introduceTargets.size() > 0);
     List<Pair<Integer, String>> macros = new ArrayList<>();
-    PerlTargetOccurrencesCollector.collect(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
+    PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
       TextRange occurenceRange = it.getTextRange();
       macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));

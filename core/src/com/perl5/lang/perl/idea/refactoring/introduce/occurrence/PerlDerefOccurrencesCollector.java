@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-class PerlDerefOccurrencesCollector extends PerlTargetOccurrencesCollector {
+class PerlDerefOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
   @NotNull
   private final List<PsiElement> myTargetChildrenToSearch;
 

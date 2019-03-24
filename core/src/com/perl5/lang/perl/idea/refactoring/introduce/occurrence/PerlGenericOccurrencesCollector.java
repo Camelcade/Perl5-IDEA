@@ -21,7 +21,7 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
-class PerlGenericOccurrencesCollector extends PerlTargetOccurrencesCollector {
+class PerlGenericOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
   public PerlGenericOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
   }

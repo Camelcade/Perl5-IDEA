@@ -31,7 +31,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
-public class PerlPartialStringOccurrencesCollector extends PerlTargetOccurrencesCollector {
+public class PerlPartialStringOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
   private final List<Object> myChildrenToFind = new ArrayList<>();
 
   public PerlPartialStringOccurrencesCollector(@NotNull PerlIntroduceTarget target) {

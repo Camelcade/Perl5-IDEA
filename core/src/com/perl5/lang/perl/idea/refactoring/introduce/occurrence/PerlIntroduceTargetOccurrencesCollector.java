@@ -27,15 +27,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsHandler.isTargetableElement;
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableElement;
 
-public abstract class PerlTargetOccurrencesCollector {
+public abstract class PerlIntroduceTargetOccurrencesCollector {
   @NotNull
   private final PerlIntroduceTarget myTarget;
   @Nullable
   private List<PerlIntroduceTarget> myOccurrences;
 
-  protected PerlTargetOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
+  protected PerlIntroduceTargetOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     myTarget = target;
   }
 
@@ -111,7 +111,7 @@ public abstract class PerlTargetOccurrencesCollector {
    * @return occurrences collector for the {@code target}
    */
   @NotNull
-  public static PerlTargetOccurrencesCollector create(@NotNull PerlIntroduceTarget target) {
+  public static PerlIntroduceTargetOccurrencesCollector create(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
     if (targetElement instanceof PerlDerefExpression) {
       return new PerlDerefOccurrencesCollector(target);

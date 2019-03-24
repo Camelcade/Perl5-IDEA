@@ -42,8 +42,8 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public abstract class PerlTargetsHandler {
-  private static final Logger LOG = Logger.getInstance(PerlTargetsHandler.class);
+public abstract class PerlIntroduceTargetsHandler {
+  private static final Logger LOG = Logger.getInstance(PerlIntroduceTargetsHandler.class);
   private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
     CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
     VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL,
@@ -87,7 +87,7 @@ public abstract class PerlTargetsHandler {
    * Could be an extension point
    */
   @NotNull
-  private static PerlTargetsHandler getCollector(@NotNull PsiElement run) {
+  private static PerlIntroduceTargetsHandler getCollector(@NotNull PsiElement run) {
     IElementType elementType = PsiUtilCore.getElementType(run);
     if (SEQUENTINAL_TOKENS.contains(elementType)) {
       return PerlSequentialElementTargetHandler.INSTANCE;

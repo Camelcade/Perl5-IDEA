@@ -24,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-class PerlGenericTargetsHandler extends PerlTargetsHandler {
-  public static final PerlTargetsHandler INSTANCE = new PerlGenericTargetsHandler();
+class PerlGenericTargetsHandler extends PerlIntroduceTargetsHandler {
+  public static final PerlIntroduceTargetsHandler INSTANCE = new PerlGenericTargetsHandler();
 
   private PerlGenericTargetsHandler() {
   }
