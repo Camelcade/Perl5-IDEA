@@ -16,12 +16,11 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
-import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.List;
 
 class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   static final PerlListTargetsHandler INSTANCE = new PerlListTargetsHandler();
@@ -33,7 +32,7 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   @Override
   protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     String baseText = super.createTargetExpressionText(target);
-    Pair<PsiElement, PsiElement> childrenInRange = getChildrenInRange(target.getPlace(), target.getTextRangeInElement());
-    return Objects.equals(childrenInRange.first, childrenInRange.second) ? baseText : "(" + baseText + ")";
+    List<PsiElement> childrenInRange = target.getChildren();
+    return childrenInRange.size() < 2 ? baseText : "(" + baseText + ")";
   }
 }

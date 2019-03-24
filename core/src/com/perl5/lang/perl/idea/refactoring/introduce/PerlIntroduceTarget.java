@@ -24,6 +24,10 @@ import com.intellij.refactoring.IntroduceTargetChooser;
 import com.intellij.refactoring.introduce.PsiIntroduceTarget;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Represents part of the composite psi element. E.g. {@code elem1->elem2->elem3->elem4}, or part of the string
  *
@@ -67,6 +71,15 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   public TextRange getTextRange() {
     Segment elementRange = super.getTextRange();
     return TextRange.from(elementRange.getStartOffset() + getTextRangeInElement().getStartOffset(), getTextRangeInElement().getLength());
+  }
+
+  /**
+   * @return matching children of the {@code target}
+   */
+  @NotNull
+  public final List<PsiElement> getChildren() {
+    PsiElement place = getPlace();
+    return place == null ? Collections.emptyList() : getChildrenInRange(place, getTextRangeInElement());
   }
 
   @NotNull
@@ -142,5 +155,19 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
       );
     }
     return new PerlIntroduceTarget(element, TextRange.create(startOffsetInParent, endOffsetInParent));
+  }
+
+  /**
+   * @return all children of {@code element} inside {@code rangeInElement}
+   */
+  @NotNull
+  private static List<PsiElement> getChildrenInRange(@NotNull PsiElement element, TextRange rangeInElement) {
+    List<PsiElement> result = new ArrayList<>();
+    for (PsiElement child : element.getChildren()) {
+      if (rangeInElement.contains(child.getTextRangeInParent())) {
+        result.add(child);
+      }
+    }
+    return result;
   }
 }

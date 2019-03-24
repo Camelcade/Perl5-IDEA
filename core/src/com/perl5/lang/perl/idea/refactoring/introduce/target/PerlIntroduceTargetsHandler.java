@@ -30,6 +30,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -191,10 +192,14 @@ public abstract class PerlIntroduceTargetsHandler {
   @NotNull
   private static PerlIntroduceTargetsHandler getHandler(@NotNull PsiElement run) {
     IElementType elementType = PsiUtilCore.getElementType(run);
-    if (run instanceof PsiPerlCommaSequenceExpr) {
+
+    if (run instanceof PerlStringList) {
+      return PerlStringListTargetsHandler.INSTANCE;
+    }
+    else if (run instanceof PsiPerlCommaSequenceExpr) {
       return PerlListTargetsHandler.INSTANCE;
     }
-    if (SEQUENTINAL_TOKENS.contains(elementType)) {
+    else if (SEQUENTINAL_TOKENS.contains(elementType)) {
       return PerlGenericSequentialElementTargetHandler.INSTANCE;
     }
     else if (run instanceof PerlString) {

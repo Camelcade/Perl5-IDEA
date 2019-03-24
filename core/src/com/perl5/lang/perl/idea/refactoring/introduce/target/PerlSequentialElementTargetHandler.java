@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
@@ -97,36 +96,16 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
       reportEmptyPlace();
       return null;
     }
-    Pair<PsiElement, PsiElement> childrenInRange = getChildrenInRange(occurrencePlace, occurrence.getTextRangeInElement());
+    List<PsiElement> childrenInRange = occurrence.getChildren();
 
-    if (childrenInRange.first == null || !childrenInRange.first.isValid()) {
+    if (childrenInRange.isEmpty()) {
       LOG.error("Unable to detect children to replace, please report developers with source sample");
       return null;
     }
 
-    PsiElement insertedReplacement = occurrencePlace.addBefore(replacement, childrenInRange.first);
-    occurrencePlace.deleteChildRange(childrenInRange.first, childrenInRange.second);
+    PsiElement insertedReplacement = occurrencePlace.addBefore(replacement, childrenInRange.get(0));
+    occurrencePlace.deleteChildRange(childrenInRange.get(0), childrenInRange.get(childrenInRange.size() - 1));
     return insertedReplacement;
-  }
-
-  /**
-   * @return first and last child of {@code element} inside {@code rangeInElement}
-   */
-  @NotNull
-  protected Pair<PsiElement, PsiElement> getChildrenInRange(@NotNull PsiElement element, TextRange rangeInElement) {
-    PsiElement firstChild = null;
-    PsiElement lastChild = null;
-
-    for (PsiElement child : element.getChildren()) {
-      if (!rangeInElement.contains(child.getTextRangeInParent())) {
-        continue;
-      }
-      if (firstChild == null) {
-        firstChild = child;
-      }
-      lastChild = child;
-    }
-    return Pair.create(firstChild, lastChild);
   }
 
   @NotNull
