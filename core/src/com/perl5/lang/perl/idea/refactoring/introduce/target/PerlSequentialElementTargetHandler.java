@@ -32,10 +32,10 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 /**
  * Computes introduce targets for expr+ elements: comma sequences, lists, additions, etc
  */
-class PerlSequentialElementTargetCollector extends PerlTargetsCollector {
-  public static final PerlTargetsCollector INSTANCE = new PerlSequentialElementTargetCollector();
+class PerlSequentialElementTargetHandler extends PerlTargetsHandler {
+  public static final PerlTargetsHandler INSTANCE = new PerlSequentialElementTargetHandler();
 
-  private PerlSequentialElementTargetCollector() {
+  private PerlSequentialElementTargetHandler() {
   }
 
   @NotNull

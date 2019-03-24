@@ -36,11 +36,11 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 /**
  * Compute target for quoted entities(perl strings) by caret position.
  */
-class PerlStringTargetsCollector extends PerlTargetsCollector {
-  public static final PerlTargetsCollector INSTANCE = new PerlStringTargetsCollector();
-  private static final Logger LOG = Logger.getInstance(PerlStringTargetsCollector.class);
+class PerlStringTargetsHandler extends PerlTargetsHandler {
+  public static final PerlTargetsHandler INSTANCE = new PerlStringTargetsHandler();
+  private static final Logger LOG = Logger.getInstance(PerlStringTargetsHandler.class);
 
-  private PerlStringTargetsCollector() {
+  private PerlStringTargetsHandler() {
   }
 
   @NotNull

@@ -37,7 +37,7 @@ import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
-import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector;
+import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.properties.PerlCompound;
@@ -55,7 +55,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
   @Override
   public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file, DataContext dataContext) {
-    List<PerlIntroduceTarget> targets = PerlTargetsCollector.getIntroduceTargets(editor, file);
+    List<PerlIntroduceTarget> targets = PerlTargetsHandler.getIntroduceTargets(editor, file);
     if (targets.isEmpty()) {
       showErrorMessage(project, editor, RefactoringBundle.getCannotRefactorMessage(PerlBundle.message("perl.introduce.no.target")));
       return;

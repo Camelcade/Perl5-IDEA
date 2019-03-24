@@ -24,10 +24,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-class PerlGenericTargetsCollector extends PerlTargetsCollector {
-  public static final PerlTargetsCollector INSTANCE = new PerlGenericTargetsCollector();
+class PerlGenericTargetsHandler extends PerlTargetsHandler {
+  public static final PerlTargetsHandler INSTANCE = new PerlGenericTargetsHandler();
 
-  private PerlGenericTargetsCollector() {
+  private PerlGenericTargetsHandler() {
   }
 
   @NotNull

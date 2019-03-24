@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector.isTargetableElement;
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsHandler.isTargetableElement;
 
 public abstract class PerlTargetOccurrencesCollector {
   @NotNull

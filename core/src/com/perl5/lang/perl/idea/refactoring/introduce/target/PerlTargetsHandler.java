@@ -38,7 +38,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public abstract class PerlTargetsCollector {
+public abstract class PerlTargetsHandler {
   private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
     CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
     VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL,
@@ -82,15 +82,15 @@ public abstract class PerlTargetsCollector {
    * Could be an extension point
    */
   @NotNull
-  private static PerlTargetsCollector getCollector(@NotNull PsiElement run) {
+  private static PerlTargetsHandler getCollector(@NotNull PsiElement run) {
     IElementType elementType = PsiUtilCore.getElementType(run);
     if (SEQUENTINAL_TOKENS.contains(elementType)) {
-      return PerlSequentialElementTargetCollector.INSTANCE;
+      return PerlSequentialElementTargetHandler.INSTANCE;
     }
     else if (run instanceof PerlString) {
-      return PerlStringTargetsCollector.INSTANCE;
+      return PerlStringTargetsHandler.INSTANCE;
     }
-    return PerlGenericTargetsCollector.INSTANCE;
+    return PerlGenericTargetsHandler.INSTANCE;
   }
 
   /**
