@@ -26,6 +26,8 @@ import com.intellij.openapi.util.Pass;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.SmartPointerManager;
+import com.intellij.psi.SmartPsiElementPointer;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.HelpID;
 import com.intellij.refactoring.IntroduceTargetChooser;
@@ -45,10 +47,8 @@ import com.perl5.lang.perl.psi.properties.PerlCompound;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceVariableHandler.class);
@@ -152,15 +152,22 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return;
     }
 
-    List<PsiElement> psiOccurrences = new ArrayList<>();
+    List<SmartPsiElementPointer<PsiElement>> psiOccurrencesPointers = new ArrayList<>();
     PerlVariableDeclarationElement variableDeclaration =
-      introduceVariable(target, declarationStatement, occurrences, anchorElement, psiOccurrences);
+      introduceVariable(target, declarationStatement, occurrences, anchorElement, psiOccurrencesPointers);
 
     if (variableDeclaration == null) {
+      LOG.error("No variable declaration created");
       return;
     }
 
     editor.getCaretModel().moveToOffset(variableDeclaration.getTextRange().getStartOffset() + 1);
+
+    List<PsiElement> psiOccurrences = psiOccurrencesPointers.stream()
+      .map(SmartPsiElementPointer::getElement)
+      .filter(Objects::nonNull)
+      .collect(Collectors.toList());
+
     new PerlVariableIntroducer(variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY))
       .performInplaceRefactoring(new LinkedHashSet<>(suggestedNames));
   }
@@ -214,9 +221,10 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                                            @NotNull PsiElement statement,
                                                            @NotNull List<PerlIntroduceTarget> occurrences,
                                                            @NotNull PsiElement anchor,
-                                                           @NotNull List<PsiElement> psiOccurrences) {
+                                                           @NotNull List<SmartPsiElementPointer<PsiElement>> psiOccurrences) {
     Project project = statement.getProject();
     return WriteCommandAction.writeCommandAction(project).compute(() -> {
+      PsiFile containingFile = anchor.getContainingFile();
       final RefactoringEventData afterData = new RefactoringEventData();
       afterData.addElement(statement);
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)
@@ -257,16 +265,21 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
       if (declarations.size() != 1) {
         LOG.error("Single variable declaration expected: " + introducedStatement.getText());
+        return null;
       }
 
       PsiPerlVariableDeclarationElement declarationElement = declarations.get(0);
       PerlVariable declaredVariable = declarationElement.getVariable();
 
-      occurrences.forEach(it -> ContainerUtil.addIfNotNull(
-        psiOccurrences, PerlIntroduceTargetsHandler.replaceOccurence(it, declaredVariable)));
+      occurrences.forEach(it -> {
+        PsiElement replacement = PerlIntroduceTargetsHandler.replaceOccurence(it, declaredVariable);
+        if (replacement != null) {
+          psiOccurrences.add(SmartPointerManager.createPointer(replacement));
+        }
+      });
 
-      return declarationElement;
-    });
+      return SmartPointerManager.createPointer(declarationElement);
+    }).getElement();
   }
 
   @NotNull

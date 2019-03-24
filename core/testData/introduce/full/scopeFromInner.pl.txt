@@ -1,0 +1,7 @@
+my $<caret>mysupervariable = 'some text';
+if($a){
+my $var = $mysupervariable;
+}
+say $mysupervariable;
+return $mysupervariable . $mysupervariable;
+

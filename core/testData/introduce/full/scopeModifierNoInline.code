@@ -1,0 +1,5 @@
+
+<selection>'some text'</selection> if 42;
+say q/some text/;
+return "some text".qq/some text/;
+

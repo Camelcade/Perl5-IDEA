@@ -1,0 +1,5 @@
+my $<caret>mysupervariable = 'some text';
+my $var = $mysupervariable;
+say $mysupervariable;
+return $mysupervariable . $mysupervariable;
+

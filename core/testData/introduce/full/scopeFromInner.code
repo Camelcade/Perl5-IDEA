@@ -1,0 +1,7 @@
+
+if($a){
+my $var = <selection>'some text'</selection>;
+}
+say q/some text/;
+return "some text".qq/some text/;
+

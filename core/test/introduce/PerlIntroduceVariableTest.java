@@ -24,7 +24,15 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
-  public void testStringFull() { doTest(); }
+  public void testScopeFromInner() { doTest(); }
+
+  public void testScopeInline() { doTest(); }
+
+  public void testScopeModifier() { doTest(); }
+
+  public void testScopeModifierNoInline() { doTest(); }
+
+  public void testScopeNewStatement() { doTest(); }
 
   private void doTest() {
     doTestIntroduceVariable();
