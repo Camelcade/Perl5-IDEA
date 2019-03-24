@@ -1,0 +1,2 @@
+my $<caret>scalar = second;
+qw/first $scalar third/;
