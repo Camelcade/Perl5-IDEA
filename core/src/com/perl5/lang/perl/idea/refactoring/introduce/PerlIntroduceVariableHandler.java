@@ -41,7 +41,6 @@ import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.properties.PerlCompound;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -68,24 +67,24 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         new Pass<PerlIntroduceTarget>() {
           @Override
           public void pass(PerlIntroduceTarget target) {
-            introduceTarget(target, editor, file, dataContext);
+            selectOccurrences(target, editor, file, dataContext);
           }
         },
         PerlBundle.message("perl.introduce.expressions"),
         -1);
     }
     else {
-      introduceTarget(targets.iterator().next(), editor, file, dataContext);
+      selectOccurrences(targets.iterator().next(), editor, file, dataContext);
     }
   }
 
   /**
    * Collects occurrences of selected {@code target}, suggest to replace all or one, and going on
    */
-  private void introduceTarget(@NotNull PerlIntroduceTarget target,
-                               @NotNull Editor editor,
-                               @NotNull PsiFile file,
-                               DataContext dataContext) {
+  private void selectOccurrences(@NotNull PerlIntroduceTarget target,
+                                 @NotNull Editor editor,
+                                 @NotNull PsiFile file,
+                                 DataContext dataContext) {
     List<PerlIntroduceTarget> allOccurrences = PerlTargetOccurrencesCollector.collect(target);
     if (allOccurrences.size() > 1) {
       new OccurrencesChooser<PerlIntroduceTarget>(editor) {
@@ -99,22 +98,22 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         new Pass<OccurrencesChooser.ReplaceChoice>() {
           @Override
           public void pass(OccurrencesChooser.ReplaceChoice replaceChoice) {
-            introduceTarget(target, allOccurrences, replaceChoice, editor, file, dataContext);
+            performIntroduce(target, allOccurrences, replaceChoice, editor, file, dataContext);
           }
         }
       );
     }
     else {
-      introduceTarget(target, allOccurrences, OccurrencesChooser.ReplaceChoice.NO, editor, file, dataContext);
+      performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.NO, editor, file, dataContext);
     }
   }
 
-  private void introduceTarget(@NotNull PerlIntroduceTarget target,
-                               @NotNull List<PerlIntroduceTarget> occurrences,
-                               @NotNull OccurrencesChooser.ReplaceChoice replaceChoice,
-                               @NotNull Editor editor,
-                               @NotNull PsiFile file,
-                               DataContext dataContext) {
+  private void performIntroduce(@NotNull PerlIntroduceTarget target,
+                                @NotNull List<PerlIntroduceTarget> occurrences,
+                                @NotNull OccurrencesChooser.ReplaceChoice replaceChoice,
+                                @NotNull Editor editor,
+                                @NotNull PsiFile file,
+                                DataContext dataContext) {
     if (replaceChoice == OccurrencesChooser.ReplaceChoice.NO) {
       occurrences = Collections.singletonList(target);
     }
@@ -124,53 +123,27 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return;
     }
 
-    List<String> suggestedNames = getSuggestedNames(target);
+    List<String> suggestedNames = PerlTargetsHandler.getSuggestedNames(target);
     if (suggestedNames.isEmpty()) {
       LOG.error("Suggested names list was empty for " + target);
       return;
     }
     String variableName = suggestedNames.get(0);
 
-    String targetExpressionText = createTargetExpressionText(variableName, target);
     Project project = file.getProject();
-    PsiElement statement = PerlElementFactory.createStatement(project, targetExpressionText);
-    if (statement == null) {
-      LOG.error("Unable to create a statement for " + targetExpressionText + "; target was " + target);
+    PsiElement declarationStatement = PerlTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
+    if (declarationStatement == null) {
       return;
     }
 
-    PsiElement enclosingScope = PerlTargetOccurrencesCollector.computeTargetScope(target);
-    if (enclosingScope == null) {
-      LOG.error("Unable find enclosing scope for " + target);
-      return;
-    }
-    PsiElement commonParent = PsiTreeUtil.findCommonParent(ContainerUtil.map(occurrences, PerlIntroduceTarget::getPlace));
-    if (commonParent == null) {
-      LOG.error("Unable to find common parent for target's occurrences: " + target);
-      return;
-    }
-    if (!PsiTreeUtil.isAncestor(enclosingScope, commonParent, false)) {
-      LOG.error("Common parent is not inside enclosing scope: " +
-                "enclosingScope: " + enclosingScope + "; " +
-                "commeonParent: " + commonParent);
+    PsiElement anchorElement = computeAnchor(target, occurrences);
+    if (anchorElement == null) {
       return;
     }
 
-    PsiElement anchorElement = occurrences.get(0).getPlace();
-    //noinspection ConditionalBreakInInfiniteLoop
-    while (true) {
-      anchorElement = anchorElement.getParent();
-      if (enclosingScope.equals(anchorElement)) {
-        LOG.error("Unable to find anchor element (scope reached) for: " + target);
-        return;
-      }
-      if ((anchorElement instanceof PsiPerlStatement || anchorElement instanceof PerlCompound) &&
-          PsiTreeUtil.isAncestor(anchorElement.getParent(), commonParent, false)) {
-        break;
-      }
-    }
     List<PsiElement> psiOccurrences = new ArrayList<>();
-    PerlVariableDeclarationElement variableDeclaration = introduceVariable(target, statement, occurrences, anchorElement, psiOccurrences);
+    PerlVariableDeclarationElement variableDeclaration =
+      introduceVariable(target, declarationStatement, occurrences, anchorElement, psiOccurrences);
 
     if (variableDeclaration == null) {
       return;
@@ -179,6 +152,45 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     editor.getCaretModel().moveToOffset(variableDeclaration.getTextRange().getStartOffset() + 1);
     new PerlVariableIntroducer(variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY))
       .performInplaceRefactoring(new LinkedHashSet<>(suggestedNames));
+  }
+
+  /**
+   * @return anchor statement to add a declaration statement before. Or null if anchor can't be found
+   */
+  @Nullable
+  private PsiElement computeAnchor(@NotNull PerlIntroduceTarget target,
+                                   @NotNull List<PerlIntroduceTarget> occurrences) {
+    PsiElement enclosingScope = PerlTargetOccurrencesCollector.computeTargetScope(target);
+    if (enclosingScope == null) {
+      LOG.error("Unable find enclosing scope for " + target);
+      return null;
+    }
+    PsiElement commonParent = PsiTreeUtil.findCommonParent(ContainerUtil.map(occurrences, PerlIntroduceTarget::getPlace));
+    if (commonParent == null) {
+      LOG.error("Unable to find common parent for target's occurrences: " + target);
+      return null;
+    }
+    if (!PsiTreeUtil.isAncestor(enclosingScope, commonParent, false)) {
+      LOG.error("Common parent is not inside enclosing scope: " +
+                "enclosingScope: " + enclosingScope + "; " +
+                "commeonParent: " + commonParent);
+      return null;
+    }
+
+    PsiElement anchorElement = occurrences.get(0).getPlace();
+    //noinspection ConditionalBreakInInfiniteLoop
+    while (true) {
+      anchorElement = anchorElement.getParent();
+      if (enclosingScope.equals(anchorElement)) {
+        LOG.error("Unable to find anchor element (scope reached) for: " + target);
+        return null;
+      }
+      if ((anchorElement instanceof PsiPerlStatement || anchorElement instanceof PerlCompound) &&
+          PsiTreeUtil.isAncestor(anchorElement.getParent(), commonParent, false)) {
+        break;
+      }
+    }
+    return anchorElement;
   }
 
   /**
@@ -239,12 +251,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       PsiPerlVariableDeclarationElement declarationElement = declarations.get(0);
       PerlVariable declaredVariable = declarationElement.getVariable();
 
-      occurrences.forEach(it -> {
-        PsiElement occurrenceElement = it.getPlace();
-        if (occurrenceElement != null && occurrenceElement.isValid()) {
-          psiOccurrences.add(occurrenceElement.replace(declaredVariable));
-        }
-      });
+      occurrences.forEach(it -> ContainerUtil.addIfNotNull(
+        psiOccurrences, PerlTargetsHandler.replaceOccurence(it, declaredVariable)));
 
       return declarationElement;
     });
@@ -253,22 +261,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   @NotNull
   private String getRefactoringId() {
     return "perl.introduce.variable";
-  }
-
-  /**
-   * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
-   */
-  @NotNull
-  private String createTargetExpressionText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my $" + variableName + " = " + target.getPlace().getText();
-  }
-
-  /**
-   * @return collection of names suggested for variable representing a {@code target}
-   */
-  @NotNull
-  private List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    return Collections.singletonList("mysupervariable");
   }
 
   protected void showErrorMessage(@NotNull Project project, Editor editor, @NotNull String message) {

@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -29,8 +31,10 @@ import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +43,7 @@ import java.util.List;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 public abstract class PerlTargetsHandler {
+  private static final Logger LOG = Logger.getInstance(PerlTargetsHandler.class);
   private static final TokenSet UNINTRODUCIBLE_TOKENS = TokenSet.create(
     CONDITION_EXPR, NESTED_CALL, PARENTHESISED_EXPR,
     VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LOCAL,
@@ -124,5 +129,51 @@ public abstract class PerlTargetsHandler {
 
     TextRange selectionRange = TextRange.create(selectionStart, selectionEnd);
     return getCollector(wrappingExpression).computeTargetsFromSelection(wrappingExpression, selectionRange);
+  }
+
+  /**
+   * @return collection of names suggested for variable representing a {@code target}
+   */
+  @NotNull
+  public static List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
+    return Collections.singletonList("mysupervariable");
+  }
+
+  /**
+   * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
+   */
+  @NotNull
+  public static String createTargetExpressionText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+    return "my $" + variableName + " = " + target.getPlace().getText();
+  }
+
+  /**
+   * @return a statement to declare variable with {@code name} assigned with {@code target} or null if something went wrong
+   */
+  @Nullable
+  public static PsiElement createTargetDeclarationStatement(@NotNull Project project,
+                                                            @NotNull PerlIntroduceTarget target,
+                                                            @NotNull String variableName) {
+    String targetExpressionText = createTargetExpressionText(variableName, target);
+    PsiElement statement = PerlElementFactory.createStatement(project, targetExpressionText);
+    if (statement == null) {
+      LOG.error("Unable to create a statement for " + targetExpressionText + "; target was " + target);
+      return null;
+    }
+    return statement;
+  }
+
+  /**
+   * Replaces a target represented by {@code occurrence} with {@code replacement}
+   *
+   * @return inserted replacement or null if replacement failed
+   */
+  @Nullable
+  public static PsiElement replaceOccurence(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
+    PsiElement occurrenceElement = occurrence.getPlace();
+    if (occurrenceElement != null && occurrenceElement.isValid()) {
+      return occurrenceElement.replace(replacement);
+    }
+    return null;
   }
 }
