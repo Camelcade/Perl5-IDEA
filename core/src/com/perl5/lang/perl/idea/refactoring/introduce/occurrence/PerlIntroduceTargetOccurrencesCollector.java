@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.SEQUENTINAL_TOKENS;
 import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableElement;
 
 public abstract class PerlIntroduceTargetOccurrencesCollector {
@@ -122,10 +124,12 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
     else if (targetElement instanceof PerlString && !target.isFullRange()) {
       return new PerlPartialStringOccurrencesCollector(target);
     }
+    else if (SEQUENTINAL_TOKENS.contains(PsiUtilCore.getElementType(targetElement))) {
+      return new PerlSequentialOccurrencesCollector(target);
+    }
     if (!target.isFullRange()) {
       throw new RuntimeException("Generic collector may handle only full-range targets");
     }
-
     return new PerlGenericOccurrencesCollector(target);
   }
 

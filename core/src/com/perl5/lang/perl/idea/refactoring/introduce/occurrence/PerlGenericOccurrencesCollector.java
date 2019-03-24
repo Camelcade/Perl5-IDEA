@@ -28,7 +28,8 @@ class PerlGenericOccurrencesCollector extends PerlIntroduceTargetOccurrencesColl
 
   @Override
   protected boolean collectOccurrences(@NotNull PsiElement element) {
-    if (PerlPsiUtil.areElementsSame(getTargetElement(), element)) {
+    PsiElement targetElement = getTargetElement();
+    if (PerlPsiUtil.areElementsSame(targetElement, element)) {
       addOccurrence(PerlIntroduceTarget.create(element));
       return true;
     }

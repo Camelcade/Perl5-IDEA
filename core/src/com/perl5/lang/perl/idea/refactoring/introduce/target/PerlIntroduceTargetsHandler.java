@@ -53,9 +53,8 @@ public abstract class PerlIntroduceTargetsHandler {
     PERL_REGEX, REPLACEMENT_REGEX,
     REGEX_EXPR
   );
-  private static final TokenSet SEQUENTINAL_TOKENS = TokenSet.create(
-    COMMA_SEQUENCE_EXPR, DEREF_EXPR,
-    STRING_LIST,
+  public static final TokenSet SEQUENTINAL_TOKENS = TokenSet.create(
+    COMMA_SEQUENCE_EXPR, DEREF_EXPR, STRING_LIST,
     ADD_EXPR, MUL_EXPR, SHIFT_EXPR, BITWISE_AND_EXPR, BITWISE_OR_XOR_EXPR, AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR
   );
   private static final TokenSet ARRAY_CONTEXT_TOKENSET = TokenSet.create(

@@ -1,0 +1,2 @@
+$a + <occurrence>$b + $c</occurrence>;
+$a + $b - $c + $a + $b - $c + $a + $b - $c + $a + $b - $c + $a + $b - $c + $a + $b - $c;

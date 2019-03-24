@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.IntroduceTargetChooser;
 import com.intellij.refactoring.introduce.PsiIntroduceTarget;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -80,6 +81,15 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
   public final List<PsiElement> getChildren() {
     PsiElement place = getPlace();
     return place == null ? Collections.emptyList() : getChildrenInRange(place, getTextRangeInElement());
+  }
+
+  /**
+   * @return matching children of the {@code target}
+   */
+  @NotNull
+  public final List<PsiElement> getMeaningfulChildrenWithLeafs() {
+    PsiElement place = getPlace();
+    return place == null ? Collections.emptyList() : PerlPsiUtil.getMeaningfulChildrenWithLeafs(place, getTextRangeInElement());
   }
 
   @NotNull

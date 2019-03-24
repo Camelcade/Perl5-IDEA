@@ -1,0 +1,3 @@
+<occurrence>$a + $b</occurrence> + $c;
+<occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence> + <occurrence>$a + $b</occurrence>;
+<occurrence>$a + $b</occurrence> + $c + <occurrence>$a + $b</occurrence> + $c + <occurrence>$a + $b</occurrence> + $c + <occurrence>$a + $b</occurrence> + $c + <occurrence>$a + $b</occurrence> + $c + <occurrence>$a + $b</occurrence> + $c;

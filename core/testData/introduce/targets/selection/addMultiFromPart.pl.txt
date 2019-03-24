@@ -1,0 +1,3 @@
+PsiPerlAddExprImpl(Perl5: ADD_EXPR) at 0 in addMultiFromPart.pl
+    (0,7)
+    '$a + $b'

@@ -64,13 +64,48 @@ import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
  * Created by hurricup on 09.08.2015.
  */
 public class PerlPsiUtil implements PerlElementTypes {
-  private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
+  public static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
     WHITE_SPACE, NEW_LINE_INDENT,
     COMMENT_LINE, COMMENT_ANNOTATION,
     LEFT_BRACE_ARRAY, LEFT_BRACE_CODE, LEFT_BRACE_GLOB, LEFT_BRACE_HASH, LEFT_BRACE_SCALAR,
     RIGHT_BRACE_ARRAY, RIGHT_BRACE_CODE, RIGHT_BRACE_GLOB, RIGHT_BRACE_HASH, RIGHT_BRACE_SCALAR,
-    SEMICOLON
+    SEMICOLON,
+    HEREDOC, HEREDOC_END, HEREDOC_END_INDENTABLE, HEREDOC_QQ, HEREDOC_QX
   );
+
+  /**
+   * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on
+   */
+  @NotNull
+  public static List<PsiElement> getMeaningfulChildrenWithLeafs(@Nullable PsiElement psiElement) {
+    return psiElement == null ? Collections.emptyList() :
+           getMeaningfulChildrenWithLeafs(psiElement, TextRange.from(0, psiElement.getTextLength()));
+  }
+
+  /**
+   * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on
+   */
+  @NotNull
+  public static List<PsiElement> getMeaningfulChildrenWithLeafs(@Nullable PsiElement psiElement, @Nullable TextRange rangeInElement) {
+    if (psiElement == null || rangeInElement == null || rangeInElement.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<PsiElement> result = new ArrayList<>();
+    PsiElement run = psiElement.getFirstChild();
+    while (run != null) {
+      if (rangeInElement.contains(run.getTextRangeInParent())) {
+        if (!IGNORE_WHEN_COMPARING.contains(PsiUtilCore.getElementType(run))) {
+          result.add(run);
+        }
+      }
+      else if (!result.isEmpty()) {
+        return result;
+      }
+      run = run.getNextSibling();
+    }
+
+    return result;
+  }
 
   /**
    * Recursively searches for string content elements beginnign from specified PsiElement
