@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 class PerlSequentialOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
-  public PerlSequentialOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
+  PerlSequentialOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
   }
 

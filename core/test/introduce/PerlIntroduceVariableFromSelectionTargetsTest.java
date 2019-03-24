@@ -22,6 +22,8 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
     return "testData/introduce/targets/selection";
   }
 
+  public void testListWithList() {doTest();}
+
   public void testAddMultiFromPart() {doTest();}
 
   public void testStringQQVariablePartial() {doTest();}

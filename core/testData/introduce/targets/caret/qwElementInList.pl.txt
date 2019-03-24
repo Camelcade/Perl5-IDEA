@@ -1,0 +1,15 @@
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 8 in qwElementInList.pl
+    (9,15)
+    'second'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 8 in qwElementInList.pl
+    (3,15)
+    'first second'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 8 in qwElementInList.pl
+    (3,21)
+    'first second third'
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 8 in qwElementInList.pl
+    (3,28)
+    'first second third second'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 0 in qwElementInList.pl
+    (0,37)
+    'zero => qw/first second third second/'

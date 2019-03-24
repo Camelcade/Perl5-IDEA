@@ -74,9 +74,6 @@ public class PerlElementFactory {
   @Nullable
   public static PsiElement createStatement(@NotNull Project project, @NotNull String statementText) {
     PerlFileImpl perlFile = createFile(project, statementText + ";");
-    if (perlFile == null) {
-      return null;
-    }
     PsiElement[] children = perlFile.getChildren();
     return children.length != 1 ? null : children[0];
   }

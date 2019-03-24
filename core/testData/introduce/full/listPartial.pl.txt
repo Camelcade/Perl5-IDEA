@@ -1,9 +1,9 @@
 my @<caret>array = ("test2" => "test3");
-qw/test1 @array test4/;
+('test1', @array, 'test4');
 qw/test1 test2 test4/;
 @array;
-qw/test1 @array/;
-qw/@array test4/;
+('test1', @array);
+(@array, 'test4');
 test1 => @array => 'test4';
 'test1' => @array => "test4";
 'test1' => "te${s}t2" => "test3" => "test4";

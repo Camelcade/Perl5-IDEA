@@ -17,15 +17,18 @@
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringList;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
@@ -72,5 +75,65 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
     return StringUtil.containsWhitespaces(targetElementsText) ?
            "qw " + openQuoteText + targetElementsText + closeQuoteText :
            PerlStringTargetsHandler.createBarewordQuotedText(targetElementsText);
+  }
+
+  @NotNull
+  @Override
+  protected List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+    PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.get(0));
+    PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
+    List<PsiElement> sourceElements = PerlArrayUtil.collectListElements(baseElement);
+
+    List<PsiElement> resultElements = new ArrayList<>();
+
+    for (PerlIntroduceTarget occurrence : occurrences) {
+      TextRange occurrenceTextRange = occurrence.getTextRange();
+      boolean replaced = false;
+      for (Iterator<PsiElement> iterator = sourceElements.iterator(); iterator.hasNext(); ) {
+        PsiElement stringElement = iterator.next();
+        if (!occurrenceTextRange.contains(stringElement.getTextRange())) {
+          if (replaced) {
+            break;
+          }
+          iterator.remove();
+          resultElements.add(stringElement);
+        }
+        else {
+          iterator.remove();
+          replaced = true;
+        }
+      }
+      resultElements.add(replacement);
+    }
+    resultElements.addAll(sourceElements);
+
+    Set<TextRange> replacementsRanges = new HashSet<>();
+    StringBuilder sb = new StringBuilder("(");
+    for (PsiElement element : resultElements) {
+      if (sb.length() > 1) {
+        sb.append(",");
+      }
+      int startOffset = sb.length();
+      if (element instanceof PsiPerlStringBare) {
+        sb.append(PerlStringTargetsHandler.createBarewordQuotedText(element.getText()));
+      }
+      else {
+        sb.append(element.getText());
+        replacementsRanges.add(TextRange.create(startOffset, sb.length()));
+      }
+    }
+    sb.append(")");
+
+    PsiElement sequenceExpression =
+      Objects.requireNonNull(PerlElementFactory.createStatement(baseElement.getProject(), sb.toString())).getFirstChild();
+    List<PsiElement> result = new ArrayList<>();
+    PsiElement newSequenceExpression = baseElement.replace(sequenceExpression);
+    for (PsiElement newSequenceExpressionChild : newSequenceExpression.getChildren()) {
+      if (replacementsRanges.contains(newSequenceExpressionChild.getTextRangeInParent())) {
+        result.add(newSequenceExpressionChild);
+      }
+    }
+
+    return result;
   }
 }

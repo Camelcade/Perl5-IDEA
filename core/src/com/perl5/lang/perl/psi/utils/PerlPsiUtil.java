@@ -64,7 +64,7 @@ import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
  * Created by hurricup on 09.08.2015.
  */
 public class PerlPsiUtil implements PerlElementTypes {
-  public static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
+  private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
     WHITE_SPACE, NEW_LINE_INDENT,
     COMMENT_LINE, COMMENT_ANNOTATION,
     LEFT_BRACE_ARRAY, LEFT_BRACE_CODE, LEFT_BRACE_GLOB, LEFT_BRACE_HASH, LEFT_BRACE_SCALAR,
@@ -108,7 +108,7 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
-   * Recursively searches for string content elements beginnign from specified PsiElement
+   * Recursively searches for string content elements beginning from specified PsiElement
    *
    * @param startWith PsiElement to start from (inclusive)
    * @return list of PerlStringContentElement

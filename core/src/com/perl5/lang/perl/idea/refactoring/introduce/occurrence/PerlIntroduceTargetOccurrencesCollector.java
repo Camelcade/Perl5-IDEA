@@ -54,7 +54,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
     return myOccurrences == null || myOccurrences.isEmpty();
   }
 
-  protected final void addOccurrence(@Nullable PerlIntroduceTarget occurrence) {
+  final void addOccurrence(@Nullable PerlIntroduceTarget occurrence) {
     if (occurrence != null) {
       Objects.requireNonNull(myOccurrences).add(occurrence);
     }
@@ -71,7 +71,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
   }
 
   @NotNull
-  public final List<PerlIntroduceTarget> collectOccurrences() {
+  private List<PerlIntroduceTarget> collectOccurrences() {
     PsiElement searchScope = computeTargetScope(myTarget);
     if (searchScope == null) {
       return getOccurrences();

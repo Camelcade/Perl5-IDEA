@@ -1,0 +1,9 @@
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 10 in listWithList.pl
+    (0,6)
+    'second'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 10 in listWithList.pl
+    (0,28)
+    'second => ('third', 'forth')'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 0 in listWithList.pl
+    (0,39)
+    'first => (second => ('third', 'forth'))'

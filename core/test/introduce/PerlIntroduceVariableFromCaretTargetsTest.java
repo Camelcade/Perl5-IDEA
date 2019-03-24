@@ -24,6 +24,8 @@ public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase
     return "testData/introduce/targets/caret";
   }
 
+  public void testQwElementInList() {doTest();}
+
   public void testPackageExpr() {doTest();}
 
   public void testRegexpCompileEmpty() {doTest();}

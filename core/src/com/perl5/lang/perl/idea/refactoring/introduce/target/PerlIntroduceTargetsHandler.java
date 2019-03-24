@@ -81,7 +81,7 @@ public abstract class PerlIntroduceTargetsHandler {
    * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
    */
   @NotNull
-  protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+  private String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
     return "my " + computeSigil(target) + variableName + " = " + createTargetExpressionText(target);
   }
 

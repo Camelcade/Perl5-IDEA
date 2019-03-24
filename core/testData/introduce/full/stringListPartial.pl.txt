@@ -1,2 +1,2 @@
 my @<caret>string_list = qw/second third/;
-qw/first @string_list/;
+('fi\'rst', @string_list);

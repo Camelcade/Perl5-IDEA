@@ -1,2 +1,2 @@
 my $<caret>string_list_item = 'second';
-qw/first $string_list_item third/;
+('first', $string_list_item, 'third');

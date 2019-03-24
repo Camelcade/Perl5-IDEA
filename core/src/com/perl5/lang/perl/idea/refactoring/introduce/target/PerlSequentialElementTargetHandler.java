@@ -86,10 +86,16 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
 
   @NotNull
   @Override
-  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected final List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
     if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
+    return replaceNonTrivialTarget(occurrences, replacement);
+  }
+
+  @NotNull
+  protected List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
+                                                     @NotNull PsiElement replacement) {
     PsiElement occurrencePlace = occurrences.get(0).getPlace();
     if (occurrencePlace == null) {
       reportEmptyPlace();
