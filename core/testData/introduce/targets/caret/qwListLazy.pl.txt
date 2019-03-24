@@ -1,5 +1,5 @@
-PsiPerlStringBareImpl(Perl5: STRING_BARE) at 233 in qwListLazy.pl
-    (0,4)
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListLazy.pl
+    (233,237)
     'long'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListLazy.pl
     (8,237)

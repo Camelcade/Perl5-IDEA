@@ -52,7 +52,7 @@ allprojects{
 
     test{
         outputs.upToDateWhen {false}
-        if(project.hasProperty("overwrite.results")){
+        if(project.hasProperty("overwrite")){
             systemProperty "idea.tests.overwrite.data", "true"
         }
         useJUnit {

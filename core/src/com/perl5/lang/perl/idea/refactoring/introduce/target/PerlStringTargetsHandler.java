@@ -23,6 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import com.perl5.lang.perl.psi.impl.PsiPerlStringBareImpl;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
 /**
@@ -52,7 +54,14 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
     }
 
     if (element instanceof PsiPerlStringBareImpl) {
-      return Collections.singletonList(PerlIntroduceTarget.create(element));
+      PsiElement elementParent = element.getParent();
+      if (PsiUtilCore.getElementType(elementParent) == LP_STRING_QW) {
+        elementParent = elementParent.getParent();
+      }
+
+      return elementParent instanceof PerlStringList ?
+             Collections.singletonList(PerlIntroduceTarget.create(elementParent, element, element)) :
+             Collections.singletonList(PerlIntroduceTarget.create(element));
     }
 
     PerlString perlStringElement = (PerlString)element;

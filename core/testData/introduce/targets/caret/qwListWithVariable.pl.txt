@@ -1,5 +1,5 @@
-PsiPerlStringBareImpl(Perl5: STRING_BARE) at 18 in qwListWithVariable.pl
-    (0,9)
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
+    (18,27)
     '$variable'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListWithVariable.pl
     (5,27)
