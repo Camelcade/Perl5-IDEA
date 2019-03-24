@@ -29,8 +29,18 @@ public abstract class PerlStatementMixin extends PerlCompositeElementImpl implem
     super(node);
   }
 
+  /**
+   * @return statement modifier or null if none
+   */
   @Nullable
   public PsiPerlStatementModifier getModifier() {
     return findChildByClass(PsiPerlStatementModifier.class);
+  }
+
+  /**
+   * @return true iff statement has any modifier
+   */
+  public boolean hasModifier() {
+    return getModifier() != null;
   }
 }

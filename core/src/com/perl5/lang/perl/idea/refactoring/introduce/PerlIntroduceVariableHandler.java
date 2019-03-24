@@ -39,6 +39,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlTargetsCollector;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.properties.PerlCompound;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -169,7 +170,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       }
     }
     List<PsiElement> psiOccurrences = new ArrayList<>();
-    PerlVariableDeclarationElement variableDeclaration = introduceVariable(statement, occurrences, anchorElement, psiOccurrences);
+    PerlVariableDeclarationElement variableDeclaration = introduceVariable(target, statement, occurrences, anchorElement, psiOccurrences);
 
     if (variableDeclaration == null) {
       return;
@@ -186,7 +187,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    * @return variable introduced by the statement
    */
   @Nullable
-  private PerlVariableDeclarationElement introduceVariable(@NotNull PsiElement statement,
+  private PerlVariableDeclarationElement introduceVariable(@NotNull PerlIntroduceTarget target,
+                                                           @NotNull PsiElement statement,
                                                            @NotNull List<PerlIntroduceTarget> occurrences,
                                                            @NotNull PsiElement anchor,
                                                            @NotNull List<PsiElement> psiOccurrences) {
@@ -205,6 +207,15 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       if (introducedStatement == null) {
         LOG.error("No statement been introduced from " + statement.getText());
         return null;
+      }
+
+      if (target.isFullRange()) {
+        PsiElement targetPlace = target.getPlace();
+        PsiElement targetPlaceParent = targetPlace.getParent();
+        if (targetPlaceParent.equals(anchor) && targetPlaceParent instanceof PsiPerlStatementImpl
+            && !((PsiPerlStatementImpl)targetPlaceParent).hasModifier()) {
+          targetPlaceParent.delete();
+        }
       }
 
       PsiElement assignment = introducedStatement.getFirstChild();
@@ -228,7 +239,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       PsiPerlVariableDeclarationElement declarationElement = declarations.get(0);
       PerlVariable declaredVariable = declarationElement.getVariable();
 
-      occurrences.forEach(it -> psiOccurrences.add(it.getPlace().replace(declaredVariable)));
+      occurrences.forEach(it -> {
+        PsiElement occurrenceElement = it.getPlace();
+        if (occurrenceElement != null && occurrenceElement.isValid()) {
+          psiOccurrences.add(occurrenceElement.replace(declaredVariable));
+        }
+      });
 
       return declarationElement;
     });
