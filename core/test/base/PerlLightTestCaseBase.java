@@ -120,6 +120,7 @@ import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
@@ -1504,6 +1505,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     list.sort(Comparator.comparingInt(UsageGroupingRule::getRank));
     return list;
+  }
+
+  protected void doTestIntroduceVariable() {
+    initWithFileSmartWithoutErrors();
+    new PerlIntroduceVariableHandler().invoke(getProject(), getEditor(), getFile(), null);
+    assertNoErrorElements();
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 
   protected void doTestIntroduceVariableTargets() {

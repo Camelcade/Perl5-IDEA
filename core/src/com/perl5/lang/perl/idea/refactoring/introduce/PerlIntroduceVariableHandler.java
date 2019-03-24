@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.refactoring.introduce;
 
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
@@ -61,17 +62,22 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     }
 
     if (targets.size() > 1) {
-      IntroduceTargetChooser.showIntroduceTargetChooser(
-        editor,
-        targets,
-        new Pass<PerlIntroduceTarget>() {
-          @Override
-          public void pass(PerlIntroduceTarget target) {
-            selectOccurrences(target, editor, file, dataContext);
-          }
-        },
-        PerlBundle.message("perl.introduce.expressions"),
-        -1);
+      if (ApplicationManager.getApplication().isUnitTestMode()) {
+        selectOccurrences(targets.get(targets.size() - 1), editor, file, dataContext);
+      }
+      else {
+        IntroduceTargetChooser.showIntroduceTargetChooser(
+          editor,
+          targets,
+          new Pass<PerlIntroduceTarget>() {
+            @Override
+            public void pass(PerlIntroduceTarget target) {
+              selectOccurrences(target, editor, file, dataContext);
+            }
+          },
+          PerlBundle.message("perl.introduce.expressions"),
+          -1);
+      }
     }
     else {
       selectOccurrences(targets.iterator().next(), editor, file, dataContext);
@@ -87,21 +93,26 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                  DataContext dataContext) {
     List<PerlIntroduceTarget> allOccurrences = PerlIntroduceTargetOccurrencesCollector.collect(target);
     if (allOccurrences.size() > 1) {
-      new OccurrencesChooser<PerlIntroduceTarget>(editor) {
-        @Override
-        protected TextRange getOccurrenceRange(PerlIntroduceTarget occurrence) {
-          return occurrence.getTextRange();
-        }
-      }.showChooser(
-        target,
-        allOccurrences,
-        new Pass<OccurrencesChooser.ReplaceChoice>() {
+      if (ApplicationManager.getApplication().isUnitTestMode()) {
+        performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.ALL, editor, file, dataContext);
+      }
+      else {
+        new OccurrencesChooser<PerlIntroduceTarget>(editor) {
           @Override
-          public void pass(OccurrencesChooser.ReplaceChoice replaceChoice) {
-            performIntroduce(target, allOccurrences, replaceChoice, editor, file, dataContext);
+          protected TextRange getOccurrenceRange(PerlIntroduceTarget occurrence) {
+            return occurrence.getTextRange();
           }
-        }
-      );
+        }.showChooser(
+          target,
+          allOccurrences,
+          new Pass<OccurrencesChooser.ReplaceChoice>() {
+            @Override
+            public void pass(OccurrencesChooser.ReplaceChoice replaceChoice) {
+              performIntroduce(target, allOccurrences, replaceChoice, editor, file, dataContext);
+            }
+          }
+        );
+      }
     }
     else {
       performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.NO, editor, file, dataContext);

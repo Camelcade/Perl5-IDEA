@@ -188,6 +188,7 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @Nullable
   public static PsiElement replaceOccurence(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
-    return getHandler(occurrence.getPlace()).replaceTarget(occurrence, replacement);
+    PsiElement targetPlace = occurrence.getPlace();
+    return targetPlace != null && targetPlace.isValid() ? getHandler(targetPlace).replaceTarget(occurrence, replacement) : null;
   }
 }

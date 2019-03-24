@@ -1,0 +1,4 @@
+'so<caret>me text';
+say q/some text/;
+return "some text".qq/some text/;
+
