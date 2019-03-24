@@ -39,8 +39,7 @@ public class PerlPartialStringOccurrencesCollector extends PerlIntroduceTargetOc
     PsiElement targetElement = target.getPlace();
     TextRange targetTextRange = target.getTextRange();
     if (!(targetElement instanceof PerlString) || target.isFullRange()) {
-      throw new RuntimeException("Expected PerlString thing with partial range, got: " + targetElement.getClass() + "; " +
-                                 targetElement.getTextRange() + "; " + targetTextRange);
+      throw new RuntimeException("Expected PerlString thing with partial range, got: " + target);
     }
 
     PsiElement run = ((PerlString)targetElement).getFirstContentToken();

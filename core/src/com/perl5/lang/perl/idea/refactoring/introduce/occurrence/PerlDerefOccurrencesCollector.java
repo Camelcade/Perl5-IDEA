@@ -16,14 +16,15 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlDerefExpression;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
 import java.util.List;
 
 class PerlDerefOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
@@ -33,8 +34,13 @@ class PerlDerefOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollec
   public PerlDerefOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
     PsiElement targetElement = getTarget().getPlace();
-    TextRange rangeInTarget = getTarget().getTextRangeInElement();
-    myTargetChildrenToSearch = ContainerUtil.filter(targetElement.getChildren(), it -> rangeInTarget.contains(it.getTextRangeInParent()));
+    if (targetElement == null) {
+      Logger.getInstance(PerlDerefOccurrencesCollector.class).error("Invalid target passed");
+      myTargetChildrenToSearch = Collections.emptyList();
+    }
+    else {
+      myTargetChildrenToSearch = target.getChildren();
+    }
   }
 
   @Override

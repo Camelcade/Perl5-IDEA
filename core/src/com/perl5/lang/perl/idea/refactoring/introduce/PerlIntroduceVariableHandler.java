@@ -195,7 +195,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return null;
     }
 
-    PsiElement anchorElement = occurrences.get(0).getPlace();
+    PsiElement anchorElement = Objects.requireNonNull(occurrences.get(0).getPlace());
     //noinspection ConditionalBreakInInfiniteLoop
     while (true) {
       anchorElement = anchorElement.getParent();
@@ -241,7 +241,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       }
 
       if (target.isFullRange()) {
-        PsiElement targetPlace = target.getPlace();
+        PsiElement targetPlace = Objects.requireNonNull(target.getPlace());
         PsiElement targetPlaceParent = targetPlace.getParent();
         if (targetPlaceParent.equals(anchor) && targetPlaceParent instanceof PsiPerlStatementImpl
             && !((PsiPerlStatementImpl)targetPlaceParent).hasModifier()) {

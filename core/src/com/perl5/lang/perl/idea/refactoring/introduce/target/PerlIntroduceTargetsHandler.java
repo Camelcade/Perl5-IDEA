@@ -21,6 +21,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
@@ -41,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -113,7 +115,7 @@ public abstract class PerlIntroduceTargetsHandler {
       return reportEmptyPlace();
     }
 
-    return place.getText();
+    return StringUtil.notNullize(place.getText());
   }
 
   @NotNull
@@ -134,7 +136,7 @@ public abstract class PerlIntroduceTargetsHandler {
       LOG.error("Unexpected multiple occurrences: " + occurrences.stream().map(it -> it.toString()).collect(Collectors.joining("; ")));
       return Collections.emptyList();
     }
-    PsiElement occurrenceElement = occurrences.get(0).getPlace();
+    PsiElement occurrenceElement = Objects.requireNonNull(occurrences.get(0)).getPlace();
     if (occurrenceElement != null && occurrenceElement.isValid()) {
       return Collections.singletonList(occurrenceElement.replace(replacement));
     }
@@ -191,7 +193,12 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @NotNull
   public static List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    return getHandler(target.getPlace()).computeSuggestedNames(target);
+    PsiElement place = target.getPlace();
+    if (place == null) {
+      LOG.error("Invalid target passed");
+      return Collections.singletonList("InternalErrorReportToDevelopers");
+    }
+    return getHandler(place).computeSuggestedNames(target);
   }
 
   /**
@@ -217,7 +224,7 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   @NotNull
-  private static List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(Editor editor, PsiFile file) {
+  private static List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(@NotNull Editor editor, @NotNull PsiFile file) {
     SelectionModel selectionModel = editor.getSelectionModel();
     int selectionStart = selectionModel.getSelectionStart();
     int selectionEnd = selectionModel.getSelectionEnd();
@@ -249,7 +256,8 @@ public abstract class PerlIntroduceTargetsHandler {
   public static PsiElement createTargetDeclarationStatement(@NotNull Project project,
                                                             @NotNull PerlIntroduceTarget target,
                                                             @NotNull String variableName) {
-    String targetExpressionText = getHandler(target.getPlace()).createDeclarationStatementText(variableName, target);
+    String targetExpressionText =
+      getHandler(Objects.requireNonNull(target.getPlace())).createDeclarationStatementText(variableName, target);
     PsiElement statement = PerlElementFactory.createStatement(project, targetExpressionText);
     if (statement == null) {
       LOG.error("Unable to create a statement for " + targetExpressionText + "; target was " + target);
@@ -269,7 +277,7 @@ public abstract class PerlIntroduceTargetsHandler {
     if (occurrences.isEmpty()) {
       LOG.warn("Empty occurrences passed to replacement");
     }
-    PsiElement targetPlace = occurrences.get(0).getPlace();
+    PsiElement targetPlace = Objects.requireNonNull(occurrences.get(0)).getPlace();
     if (targetPlace == null) {
       return Collections.emptyList();
     }
@@ -279,6 +287,6 @@ public abstract class PerlIntroduceTargetsHandler {
         return Collections.emptyList();
       }
     }
-    return targetPlace != null && targetPlace.isValid() ? getHandler(targetPlace).replaceTarget(occurrences, replacement) : null;
+    return targetPlace.isValid() ? getHandler(targetPlace).replaceTarget(occurrences, replacement) : Collections.emptyList();
   }
 }

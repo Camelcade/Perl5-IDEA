@@ -100,7 +100,6 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
           result.add(PerlIntroduceTarget.create(perlStringElement, allChildren.get(0), stringRun));
         }
       }
-      stringRun = stringRun.getNextSibling();
     }
     result.add(PerlIntroduceTarget.create(element));
     return result;

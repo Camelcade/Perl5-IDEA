@@ -27,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.SEQUENTINAL_TOKENS;
 import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableElement;
@@ -55,7 +56,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
 
   protected final void addOccurrence(@Nullable PerlIntroduceTarget occurrence) {
     if (occurrence != null) {
-      myOccurrences.add(occurrence);
+      Objects.requireNonNull(myOccurrences).add(occurrence);
     }
   }
 
@@ -96,7 +97,7 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
    * @return psi element we should search for occurrences of the searcher's target.
    */
   @Nullable
-  public static final PsiElement computeTargetScope(@NotNull PerlIntroduceTarget target) {
+  public static PsiElement computeTargetScope(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
     PsiElement scope = PsiTreeUtil.getParentOfType(targetElement, PerlSubDefinitionElement.class);
     return scope != null ? scope : PsiTreeUtil.getParentOfType(targetElement, PerlNamespaceDefinitionElement.class);
