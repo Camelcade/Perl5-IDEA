@@ -1,0 +1,8 @@
+$var->so<caret>me();
+$var->some();
+$var -> some();
+$var # comment
+  -> some( );
+
+${$var->some()};
+

@@ -30,6 +30,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -56,6 +57,12 @@ public abstract class PerlIntroduceTargetsHandler {
     STRING_LIST,
     ADD_EXPR, MUL_EXPR, SHIFT_EXPR, BITWISE_AND_EXPR, BITWISE_OR_XOR_EXPR, AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR
   );
+  private static final TokenSet ARRAY_CONTEXT_TOKENSET = TokenSet.create(
+    ARRAY_VARIABLE, ARRAY_CAST_EXPR, ARRAY_SLICE, HASH_SLICE, COMMA_SEQUENCE_EXPR
+  );
+  private static final TokenSet HASH_CONTEXT_TOKENSET = TokenSet.create(
+    HASH_VARIABLE, HASH_CAST_EXPR
+  );
 
   @NotNull
   protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
@@ -71,8 +78,47 @@ public abstract class PerlIntroduceTargetsHandler {
    * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
    */
   @NotNull
-  protected String createTargetExpressionText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my $" + variableName + " = " + target.getPlace().getText();
+  protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+    return "my " + computeSigil(target) + variableName + " = " + createTargetExpressionText(target);
+  }
+
+  /**
+   * @return a sigil for variable, that can represent a {@code target}
+   */
+  @NotNull
+  protected String computeSigil(@NotNull PerlIntroduceTarget target) {
+    PsiElement targetPlace = target.getPlace();
+    IElementType targetType = PsiUtilCore.getElementType(targetPlace);
+    String sigil;
+    if (ARRAY_CONTEXT_TOKENSET.contains(targetType)) {
+      sigil = "@";
+    }
+    else if (HASH_CONTEXT_TOKENSET.contains(targetType)) {
+      sigil = "%";
+    }
+    else {
+      sigil = "$";
+    }
+    return sigil;
+  }
+
+  /**
+   * @return text of expression on the right side of declaration statement
+   */
+  @NotNull
+  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+    PsiElement place = target.getPlace();
+    if (place == null) {
+      return reportEmptyPlace();
+    }
+
+    return place.getText();
+  }
+
+  @NotNull
+  protected static String reportEmptyPlace() {
+    LOG.error("Invalid target");
+    return "'Something went wrong, please, report to developers with source sample'";
   }
 
   /**
@@ -130,8 +176,11 @@ public abstract class PerlIntroduceTargetsHandler {
   @NotNull
   private static PerlIntroduceTargetsHandler getHandler(@NotNull PsiElement run) {
     IElementType elementType = PsiUtilCore.getElementType(run);
+    if (run instanceof PsiPerlCommaSequenceExpr) {
+      return PerlListTargetsHandler.INSTANCE;
+    }
     if (SEQUENTINAL_TOKENS.contains(elementType)) {
-      return PerlSequentialElementTargetHandler.INSTANCE;
+      return PerlGenericSequentialElementTargetHandler.INSTANCE;
     }
     else if (run instanceof PerlString) {
       return PerlStringTargetsHandler.INSTANCE;
@@ -172,7 +221,7 @@ public abstract class PerlIntroduceTargetsHandler {
   public static PsiElement createTargetDeclarationStatement(@NotNull Project project,
                                                             @NotNull PerlIntroduceTarget target,
                                                             @NotNull String variableName) {
-    String targetExpressionText = getHandler(target.getPlace()).createTargetExpressionText(variableName, target);
+    String targetExpressionText = getHandler(target.getPlace()).createDeclarationStatementText(variableName, target);
     PsiElement statement = PerlElementFactory.createStatement(project, targetExpressionText);
     if (statement == null) {
       LOG.error("Unable to create a statement for " + targetExpressionText + "; target was " + target);

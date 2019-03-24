@@ -16,11 +16,14 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,11 +35,8 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 /**
  * Computes introduce targets for expr+ elements: comma sequences, lists, additions, etc
  */
-class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHandler {
-  public static final PerlIntroduceTargetsHandler INSTANCE = new PerlSequentialElementTargetHandler();
-
-  private PerlSequentialElementTargetHandler() {
-  }
+abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHandler {
+  private static final Logger LOG = Logger.getInstance(PerlSequentialElementTargetHandler.class);
 
   @NotNull
   @Override
@@ -84,5 +84,61 @@ class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHandler {
     }
 
     return Collections.singletonList(PerlIntroduceTarget.create(element, firstChildToInclude, lastChildToInclude));
+  }
+
+  @Nullable
+  @Override
+  protected PsiElement replaceTarget(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
+    if (occurrence.isFullRange()) {
+      return super.replaceTarget(occurrence, replacement);
+    }
+    PsiElement occurrencePlace = occurrence.getPlace();
+    if (occurrencePlace == null) {
+      reportEmptyPlace();
+      return null;
+    }
+    Pair<PsiElement, PsiElement> childrenInRange = getChildrenInRange(occurrencePlace, occurrence.getTextRangeInElement());
+
+    if (childrenInRange.first == null || !childrenInRange.first.isValid()) {
+      LOG.error("Unable to detect children to replace, please report developers with source sample");
+      return null;
+    }
+
+    PsiElement insertedReplacement = occurrencePlace.addBefore(replacement, childrenInRange.first);
+    occurrencePlace.deleteChildRange(childrenInRange.first, childrenInRange.second);
+    return insertedReplacement;
+  }
+
+  /**
+   * @return first and last child of {@code element} inside {@code rangeInElement}
+   */
+  @NotNull
+  protected Pair<PsiElement, PsiElement> getChildrenInRange(@NotNull PsiElement element, TextRange rangeInElement) {
+    PsiElement firstChild = null;
+    PsiElement lastChild = null;
+
+    for (PsiElement child : element.getChildren()) {
+      if (!rangeInElement.contains(child.getTextRangeInParent())) {
+        continue;
+      }
+      if (firstChild == null) {
+        firstChild = child;
+      }
+      lastChild = child;
+    }
+    return Pair.create(firstChild, lastChild);
+  }
+
+  @NotNull
+  @Override
+  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+    if (target.isFullRange()) {
+      return super.createTargetExpressionText(target);
+    }
+    PsiElement targetPlace = target.getPlace();
+    if (target == null) {
+      return reportEmptyPlace();
+    }
+    return target.getTextRangeInElement().subSequence(targetPlace.getText()).toString();
   }
 }

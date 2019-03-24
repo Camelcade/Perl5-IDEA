@@ -1,0 +1,5 @@
+my @<caret>mysupervariable = @$var;
+@mysupervariable;
+@mysupervariable;
+@mysupervariable;
+@mysupervariable;

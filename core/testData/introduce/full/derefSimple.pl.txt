@@ -1,0 +1,7 @@
+my $<caret>mysupervariable = $var->some();
+$mysupervariable;
+$mysupervariable;
+$mysupervariable;
+
+${$mysupervariable};
+

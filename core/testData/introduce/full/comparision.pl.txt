@@ -1,0 +1,6 @@
+my $<caret>mysupervariable = $a > $b;
+if( $mysupervariable && $b < $a){
+    if($mysupervariable){
+        say 'hi' if $mysupervariable;
+    }
+}

@@ -1,0 +1,5 @@
+my $<caret>mysupervariable = $var->{something}->[1]->{otherthing};
+$mysupervariable->tail;
+$mysupervariable->othertail;
+$mysupervariable->blah();
+$mysupervariable->[0];

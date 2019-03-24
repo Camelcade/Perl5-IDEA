@@ -24,6 +24,34 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testListItemSingle() {doTest();}
+
+  public void testListItemTwo() {doTest();}
+
+  public void testArrayBraced() {doTest();}
+
+  public void testArrayDerefBraced() {doTest();}
+
+  public void testArrayDerefUnbraced() {doTest();}
+
+  public void testArrayUnbraced() {doTest();}
+
+  public void testCodeBraced() {doTest();}
+
+  public void testCodeDerefBraced() {doTest();}
+
+  public void testCodeDerefUnbraced() {doTest();}
+
+  public void testCodeUnbraced() {doTest();}
+
+  public void testComparision() {doTest();}
+
+  public void testDerefSimple() {doTest();}
+
+  public void testDerefSizes() {doTest();}
+
+  public void testDerefStyles() {doTest();}
+
   public void testScopeFromInner() { doTest(); }
 
   public void testScopeInline() { doTest(); }

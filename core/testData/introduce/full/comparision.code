@@ -1,0 +1,6 @@
+if( $a >$b && $b < $a){
+    if( <selection>$a >    $b</selection>){
+        say 'hi' if $a > # comment
+          $b;
+    }
+}
