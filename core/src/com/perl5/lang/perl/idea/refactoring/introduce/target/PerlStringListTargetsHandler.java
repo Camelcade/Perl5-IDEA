@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
@@ -37,14 +38,14 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
   @NotNull
   @Override
   protected String computeSigil(@NotNull PerlIntroduceTarget target) {
-    return "@";
+    return target.getChildren().size() > 1 ? "@" : "$";
   }
 
   @NotNull
   @Override
   protected List<String> computeSuggestedNames(@NotNull PerlIntroduceTarget target) {
     List<String> result = new ArrayList<>();
-    result.add("string_list");
+    result.add(target.getChildren().size() > 1 ? "string_list" : "string_list_item");
     result.addAll(super.computeSuggestedNames(target));
     return result;
   }
@@ -63,11 +64,13 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
     PsiElement closeQuoteElement = ((PerlStringList)targetElement).getCloseQuoteElement();
     if (openQuoteElement == null) {
       LOG.error("Unable to find close quote in: " + targetElement.getText());
-      return "'INTERNAL ERRROR: Unable to find close quote for list'";
+      return "'INTERNAL ERROR: Unable to find close quote for list'";
     }
     String openQuoteText = openQuoteElement.getText();
     String closeQuoteText = closeQuoteElement != null ? closeQuoteElement.getText() :
                             "" + PerlBaseLexer.getQuoteCloseChar(openQuoteText.charAt(0));
-    return "qw " + openQuoteText + targetElementsText + closeQuoteText;
+    return StringUtil.containsWhitespaces(targetElementsText) ?
+           "qw " + openQuoteText + targetElementsText + closeQuoteText :
+           "'" + StringUtil.escapeChar(targetElementsText, '\'') + "'";
   }
 }
