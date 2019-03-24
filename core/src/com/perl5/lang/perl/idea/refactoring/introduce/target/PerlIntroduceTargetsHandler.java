@@ -41,6 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -122,17 +123,25 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   /**
-   * Replaces a target represented by {@code occurrence} with {@code replacement}
+   * Replaces a targets represented by {@code occurrences} with {@code replacement}
    *
-   * @return inserted replacement or null if replacement failed
+   * @return list of inserted elements
+   * @apiNote all occurrences should be from the same element. This api implemented for multi-replacements
    */
-  @Nullable
-  protected PsiElement replaceTarget(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
-    PsiElement occurrenceElement = occurrence.getPlace();
-    if (occurrenceElement != null && occurrenceElement.isValid()) {
-      return occurrenceElement.replace(replacement);
+  @NotNull
+  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+    if (occurrences.size() > 1) {
+      LOG.error("Unexpected multiple occurrences: " + occurrences.stream().map(it -> it.toString()).collect(Collectors.joining("; ")));
+      return Collections.emptyList();
     }
-    return null;
+    PsiElement occurrenceElement = occurrences.get(0).getPlace();
+    if (occurrenceElement != null && occurrenceElement.isValid()) {
+      return Collections.singletonList(occurrenceElement.replace(replacement));
+    }
+    else {
+      LOG.error("Invalid occurrence element");
+    }
+    return Collections.emptyList();
   }
 
   /**
@@ -250,13 +259,26 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   /**
-   * Replaces a target represented by {@code occurrence} with {@code replacement}
+   * Replaces a targets represented by {@code occurrences} with {@code replacement}
    *
-   * @return inserted replacement or null if replacement failed
+   * @return list of inserted elements
+   * @apiNote all occurrences should be from the same element. This api implemented for multi-replacements
    */
-  @Nullable
-  public static PsiElement replaceOccurence(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
-    PsiElement targetPlace = occurrence.getPlace();
-    return targetPlace != null && targetPlace.isValid() ? getHandler(targetPlace).replaceTarget(occurrence, replacement) : null;
+  @NotNull
+  public static List<PsiElement> replaceOccurences(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+    if (occurrences.isEmpty()) {
+      LOG.warn("Empty occurrences passed to replacement");
+    }
+    PsiElement targetPlace = occurrences.get(0).getPlace();
+    if (targetPlace == null) {
+      return Collections.emptyList();
+    }
+    for (PerlIntroduceTarget it : occurrences) {
+      if (!targetPlace.equals(it.getPlace())) {
+        LOG.error("Invalid occurrence in the list of ocurrences");
+        return Collections.emptyList();
+      }
+    }
+    return targetPlace != null && targetPlace.isValid() ? getHandler(targetPlace).replaceTarget(occurrences, replacement) : null;
   }
 }

@@ -271,12 +271,13 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       PsiPerlVariableDeclarationElement declarationElement = declarations.get(0);
       PerlVariable declaredVariable = declarationElement.getVariable();
 
-      occurrences.forEach(it -> {
-        PsiElement replacement = PerlIntroduceTargetsHandler.replaceOccurence(it, declaredVariable);
-        if (replacement != null) {
-          psiOccurrences.add(SmartPointerManager.createPointer(replacement));
-        }
-      });
+      Map<PsiElement, List<PerlIntroduceTarget>> occurrencesMap = new HashMap<>();
+      occurrences.forEach(it -> occurrencesMap.computeIfAbsent(it.getPlace(), __ -> new ArrayList<>()).add(it));
+
+      occurrencesMap.keySet().forEach(it -> psiOccurrences.addAll(ContainerUtil.map(
+        PerlIntroduceTargetsHandler.replaceOccurences(occurrencesMap.get(it), declaredVariable),
+        psiElement -> SmartPointerManager.createPointer(psiElement)))
+      );
 
       return SmartPointerManager.createPointer(declarationElement);
     }).getElement();

@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -85,12 +84,13 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
     return Collections.singletonList(PerlIntroduceTarget.create(element, firstChildToInclude, lastChildToInclude));
   }
 
-  @Nullable
+  @NotNull
   @Override
-  protected PsiElement replaceTarget(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
-    if (occurrence.isFullRange()) {
-      return super.replaceTarget(occurrence, replacement);
+  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+    if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
+      return super.replaceTarget(occurrences, replacement);
     }
+    PerlIntroduceTarget occurrence = occurrences.get(0);
     PsiElement occurrencePlace = occurrence.getPlace();
     if (occurrencePlace == null) {
       reportEmptyPlace();
@@ -105,7 +105,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
 
     PsiElement insertedReplacement = occurrencePlace.addBefore(replacement, childrenInRange.get(0));
     occurrencePlace.deleteChildRange(childrenInRange.get(0), childrenInRange.get(childrenInRange.size() - 1));
-    return insertedReplacement;
+    return Collections.singletonList(insertedReplacement);
   }
 
   @NotNull
