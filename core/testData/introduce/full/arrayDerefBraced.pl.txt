@@ -1,5 +1,5 @@
-my @<caret>mysupervariable = @{$var};
-@mysupervariable;
-@mysupervariable;
-@mysupervariable;
-@mysupervariable;
+my @<caret>array = @{$var};
+@array;
+@array;
+@array;
+@array;

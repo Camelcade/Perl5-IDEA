@@ -1,2 +1,2 @@
-my @<caret>mysupervariable = ($var, 1);
-(@mysupervariable,2,3);
+my @<caret>array = ($var, 1);
+(@array,2,3);

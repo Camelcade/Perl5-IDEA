@@ -166,8 +166,23 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return collection of names suggested for variable representing a {@code target}
    */
   @NotNull
+  protected List<String> computeSuggestedNames(@NotNull PerlIntroduceTarget target) {
+    String sigil = computeSigil(target);
+    if ("$".equals(sigil)) {
+      return Collections.singletonList("scalar");
+    }
+    else if ("@".equals(sigil)) {
+      return Collections.singletonList("array");
+    }
+    return Collections.singletonList("hash");
+  }
+
+  /**
+   * @return collection of names suggested for variable representing a {@code target}
+   */
+  @NotNull
   public static List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    return Collections.singletonList("mysupervariable");
+    return getHandler(target.getPlace()).computeSuggestedNames(target);
   }
 
   /**

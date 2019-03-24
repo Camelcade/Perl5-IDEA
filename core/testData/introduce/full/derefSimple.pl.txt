@@ -1,7 +1,7 @@
-my $<caret>mysupervariable = $var->some();
-$mysupervariable;
-$mysupervariable;
-$mysupervariable;
+my $<caret>scalar = $var->some();
+$scalar;
+$scalar;
+$scalar;
 
-${$mysupervariable};
+${$scalar};
 

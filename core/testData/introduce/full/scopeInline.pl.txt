@@ -1,4 +1,4 @@
-my $<caret>mysupervariable = 'some text';
-say $mysupervariable;
-return $mysupervariable . $mysupervariable;
+my $<caret>scalar = 'some text';
+say $scalar;
+return $scalar . $scalar;
 

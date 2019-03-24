@@ -1,8 +1,8 @@
 $var-> sub1;
-my $<caret>mysupervariable = $var->sub1->sub2;
-$mysupervariable;
-$mysupervariable->sub3;
-$mysupervariable->sub3;
-$mysupervariable;
+my $<caret>scalar = $var->sub1->sub2;
+$scalar;
+$scalar->sub3;
+$scalar->sub3;
+$scalar;
 $var-> sub1;
 $var;

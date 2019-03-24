@@ -1,7 +1,7 @@
-my $<caret>mysupervariable = 'some text';
+my $<caret>scalar = 'some text';
 if($a){
-my $var = $mysupervariable;
+my $var = $scalar;
 }
-say $mysupervariable;
-return $mysupervariable . $mysupervariable;
+say $scalar;
+return $scalar . $scalar;
 
