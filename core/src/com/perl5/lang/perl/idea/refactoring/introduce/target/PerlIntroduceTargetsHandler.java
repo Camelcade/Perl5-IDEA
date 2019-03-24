@@ -58,10 +58,14 @@ public abstract class PerlIntroduceTargetsHandler {
   );
 
   @NotNull
-  protected abstract List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset);
+  protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
+    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
+  }
 
   @NotNull
-  protected abstract List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange);
+  protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
+    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
+  }
 
   /**
    * @return List of possible introduce targets for {@code file} opened in {@code editor}

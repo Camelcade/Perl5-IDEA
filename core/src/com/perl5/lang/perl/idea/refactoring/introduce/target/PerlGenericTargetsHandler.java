@@ -16,29 +16,9 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.List;
-
 class PerlGenericTargetsHandler extends PerlIntroduceTargetsHandler {
   public static final PerlIntroduceTargetsHandler INSTANCE = new PerlGenericTargetsHandler();
 
   private PerlGenericTargetsHandler() {
-  }
-
-  @NotNull
-  @Override
-  protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
-    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
-  }
-
-  @NotNull
-  @Override
-  protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
-    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 }
