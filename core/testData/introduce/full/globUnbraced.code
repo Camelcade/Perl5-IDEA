@@ -1,0 +1,4 @@
+*var;
+*{var};
+*v<caret>ar;
+*{var};

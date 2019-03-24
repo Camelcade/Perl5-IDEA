@@ -1,0 +1,20 @@
+sub first{
+    my @<caret>array = (1, 2, 3, 4, 5);
+    my @something = (@array);
+    if( $a ){
+        my @otherthing = (@array);
+        if( $b){
+            somesub(@array);
+        }
+    }
+}
+sub second{
+    my @something = (1,2,3,4,5);
+    if( $a ){
+        my @otherthing = (1,2,3,4,5);
+        if( $b){
+            somesub(1,2,3,4,5);
+        }
+    }
+}
+
