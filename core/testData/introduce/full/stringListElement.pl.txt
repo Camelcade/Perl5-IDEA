@@ -1,2 +1,2 @@
-my $<caret>scalar = second;
-qw/first $scalar third/;
+my @<caret>string_list = qw/second/;
+qw/first @string_list third/;

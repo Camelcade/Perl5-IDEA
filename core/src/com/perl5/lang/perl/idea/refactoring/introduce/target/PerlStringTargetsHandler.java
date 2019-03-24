@@ -54,14 +54,7 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
     }
 
     if (element instanceof PsiPerlStringBareImpl) {
-      PsiElement elementParent = element.getParent();
-      if (PsiUtilCore.getElementType(elementParent) == LP_STRING_QW) {
-        elementParent = elementParent.getParent();
-      }
-
-      return elementParent instanceof PerlStringList ?
-             Collections.singletonList(PerlIntroduceTarget.create(elementParent, element, element)) :
-             Collections.singletonList(PerlIntroduceTarget.create(element));
+      return computeBareStringTarget(element);
     }
 
     PerlString perlStringElement = (PerlString)element;
@@ -106,6 +99,18 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
   }
 
   @NotNull
+  private List<PerlIntroduceTarget> computeBareStringTarget(@NotNull PsiElement element) {
+    PsiElement elementParent = element.getParent();
+    if (PsiUtilCore.getElementType(elementParent) == LP_STRING_QW) {
+      elementParent = elementParent.getParent();
+    }
+
+    return elementParent instanceof PerlStringList ?
+           Collections.singletonList(PerlIntroduceTarget.create(elementParent, element, element)) :
+           Collections.singletonList(PerlIntroduceTarget.create(element));
+  }
+
+  @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     if (!(element instanceof PerlString)) {
@@ -114,11 +119,7 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
     }
 
     if (element instanceof PsiPerlStringBare) {
-      TextRange intersectedRange = selectionRange.intersection(element.getTextRange());
-      if (intersectedRange == null) {
-        return Collections.emptyList();
-      }
-      return Collections.singletonList(PerlIntroduceTarget.create(element, intersectedRange.shiftLeft(element.getTextOffset())));
+      return computeBareStringTarget(element);
     }
 
     List<PsiElement> allChildrenList = ((PerlString)element).getAllChildrenList();

@@ -31,12 +31,12 @@ class PerlListOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollect
   @NotNull
   private final List<PsiElement> myElementsToSearch;
 
-  public PerlListOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
+  PerlListOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
     List<PsiElement> targetChildren = PerlArrayUtil.collectListElements(getTargetElement());
     myElementsToSearch = Collections.unmodifiableList(
-      ContainerUtil.filter(targetChildren, it -> getTarget().getTextRangeInElement().contains(it.getTextRangeInParent())));
-    assert !myElementsToSearch.isEmpty();
+      ContainerUtil.filter(targetChildren, it -> getTarget().getTextRange().contains(it.getTextRange())));
+    assert !myElementsToSearch.isEmpty() : "Empty elements for " + target;
   }
 
   @Override

@@ -1,4 +1,4 @@
-qw/test1 test2 <occurrence>test3</occurrence> test4     this is a very long  list
+qw/test1 <occurrence>test2 test3</occurrence> test4     this is a very long  list
                                                       this is a very long  list
                                                       this is a very long  list
                                                       this is a very long  list
@@ -8,10 +8,10 @@ qw/test1 test2 <occurrence>test3</occurrence> test4     this is a very long  lis
                                                       this is a very long  list
 /;
 qw/test1 test2 test4/;
-qw/test2 <occurrence>test3</occurrence>/;
-qw/test1 test2 <occurrence>test3</occurrence>/;
-qw/test2 <occurrence>test3</occurrence> test4/;
-test1 => test2 => <occurrence>test3</occurrence> => 'test4';
-'test1' => "test2" => <occurrence>"test3"</occurrence> => "test4";
-'test1' => "te${s}t2" => <occurrence>"test3"</occurrence> => "test4";
-'test1' => `test2` => <occurrence>"test3"</occurrence> => "test4";
+<occurrence>qw/test2 test3/</occurrence>;
+qw/test1 <occurrence>test2 test3</occurrence>/;
+qw/<occurrence>test2 test3</occurrence> test4/;
+test1 => <occurrence>test2 => test3</occurrence> => 'test4';
+'test1' => <occurrence>"test2" => "test3"</occurrence> => "test4";
+'test1' => "te${s}t2" => "test3" => "test4";
+'test1' => `test2` => "test3" => "test4";
