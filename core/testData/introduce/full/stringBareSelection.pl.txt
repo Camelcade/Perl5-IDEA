@@ -1,0 +1,4 @@
+my $<caret>scalar = 'something';
+$scalar => 42;
+say $scalar;
+qw/$scalar else/;

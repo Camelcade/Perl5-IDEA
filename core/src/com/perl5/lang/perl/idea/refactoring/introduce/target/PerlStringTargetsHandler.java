@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
@@ -158,5 +159,20 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
     }
     return startOffset < 0 || endOffset < 0 ? Collections.emptyList() :
            Collections.singletonList(PerlIntroduceTarget.create(element, startOffset - elementStartOffset, endOffset - elementStartOffset));
+  }
+
+  @NotNull
+  @Override
+  protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
+    PsiElement targetPlace = target.getPlace();
+    if (targetPlace instanceof PsiPerlStringBare) {
+      return createBarewordQuotedText(targetPlace.getText());
+    }
+    return super.createTargetExpressionText(target);
+  }
+
+  @NotNull
+  static String createBarewordQuotedText(@NotNull String content) {
+    return "'" + StringUtil.escapeChar(content, '\'') + "'";
   }
 }

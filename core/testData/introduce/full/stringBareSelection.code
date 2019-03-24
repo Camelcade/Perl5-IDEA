@@ -1,0 +1,3 @@
+<selection>something</selection> => 42;
+say "something";
+qw/something else/;
