@@ -1,0 +1,2 @@
+$a + <selection>$b + $c</selection>;
+$a + $b - $c + $a + $b - $c + $a + $b - $c + $a + $b - $c + $a + $b - $c + $a + $b - $c;

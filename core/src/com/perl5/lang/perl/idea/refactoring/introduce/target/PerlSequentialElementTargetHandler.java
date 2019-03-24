@@ -90,22 +90,25 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
     if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
-    PerlIntroduceTarget occurrence = occurrences.get(0);
-    PsiElement occurrencePlace = occurrence.getPlace();
+    PsiElement occurrencePlace = occurrences.get(0).getPlace();
     if (occurrencePlace == null) {
       reportEmptyPlace();
-      return null;
-    }
-    List<PsiElement> childrenInRange = occurrence.getChildren();
-
-    if (childrenInRange.isEmpty()) {
-      LOG.error("Unable to detect children to replace, please report developers with source sample");
-      return null;
+      return Collections.emptyList();
     }
 
-    PsiElement insertedReplacement = occurrencePlace.addBefore(replacement, childrenInRange.get(0));
-    occurrencePlace.deleteChildRange(childrenInRange.get(0), childrenInRange.get(childrenInRange.size() - 1));
-    return Collections.singletonList(insertedReplacement);
+    List<PsiElement> result = new ArrayList<>();
+    for (PerlIntroduceTarget occurrence : occurrences) {
+      List<PsiElement> childrenInRange = occurrence.getChildren();
+
+      if (childrenInRange.isEmpty()) {
+        LOG.error("Unable to detect children to replace, please report developers with source sample");
+        return Collections.emptyList();
+      }
+      result.add(occurrencePlace.addBefore(replacement, childrenInRange.get(0)));
+      occurrencePlace.deleteChildRange(childrenInRange.get(0), childrenInRange.get(childrenInRange.size() - 1));
+    }
+
+    return result;
   }
 
   @NotNull
@@ -115,7 +118,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
       return super.createTargetExpressionText(target);
     }
     PsiElement targetPlace = target.getPlace();
-    if (target == null) {
+    if (targetPlace == null) {
       return reportEmptyPlace();
     }
     return target.getTextRangeInElement().subSequence(targetPlace.getText()).toString();

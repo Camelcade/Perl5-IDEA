@@ -1,0 +1,4 @@
+$a<caret> + $b;
+$a + $b + $a + $b + $a + $b + $a + $b + $a + $b + $a + $b + $a + $b + $a #comment
++ #another comment
+$b;

@@ -1,0 +1,2 @@
+my $<caret>scalar = $a + $b;
+$scalar + $scalar + $scalar + $scalar + $scalar + $scalar + $scalar + $scalar;

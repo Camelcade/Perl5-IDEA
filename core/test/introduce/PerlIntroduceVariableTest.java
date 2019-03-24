@@ -24,6 +24,14 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testAddMulti() {doTest();}
+
+  public void testAddMultiFromPart() {doTest();}
+
+  public void testAddMultiFromPartEnd() {doTest();}
+
+  public void testAddMultiFromPartWrong() {doTest();}
+
   public void testStringListPartial() {doTest();}
 
   public void testStringListElement() {doTest();}
