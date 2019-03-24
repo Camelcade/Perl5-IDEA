@@ -68,6 +68,35 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   /**
+   * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
+   */
+  @NotNull
+  protected String createTargetExpressionText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+    return "my $" + variableName + " = " + target.getPlace().getText();
+  }
+
+  /**
+   * Replaces a target represented by {@code occurrence} with {@code replacement}
+   *
+   * @return inserted replacement or null if replacement failed
+   */
+  @Nullable
+  protected PsiElement replaceTarget(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
+    PsiElement occurrenceElement = occurrence.getPlace();
+    if (occurrenceElement != null && occurrenceElement.isValid()) {
+      return occurrenceElement.replace(replacement);
+    }
+    return null;
+  }
+
+  /**
+   * @return true iff element can be targeted for extraction
+   */
+  public static boolean isTargetableElement(@NotNull PsiElement element) {
+    return !UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) || PerlPsiUtil.isMatchRegex(element);
+  }
+
+  /**
    * @return List of possible introduce targets for {@code file} opened in {@code editor}
    */
   @NotNull
@@ -81,17 +110,25 @@ public abstract class PerlIntroduceTargetsHandler {
     PsiPerlExpr run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
     while (run != null) {
       PsiElement finalRun = run;
-      ObjectUtils.doIfNotNull(getCollector(run), it -> targets.addAll(it.computeTargetsAtCaret(finalRun, caretOffset)));
+      ObjectUtils.doIfNotNull(getHandler(run), it -> targets.addAll(it.computeTargetsAtCaret(finalRun, caretOffset)));
       run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
     }
     return targets;
   }
 
   /**
+   * @return collection of names suggested for variable representing a {@code target}
+   */
+  @NotNull
+  public static List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
+    return Collections.singletonList("mysupervariable");
+  }
+
+  /**
    * Could be an extension point
    */
   @NotNull
-  private static PerlIntroduceTargetsHandler getCollector(@NotNull PsiElement run) {
+  private static PerlIntroduceTargetsHandler getHandler(@NotNull PsiElement run) {
     IElementType elementType = PsiUtilCore.getElementType(run);
     if (SEQUENTINAL_TOKENS.contains(elementType)) {
       return PerlSequentialElementTargetHandler.INSTANCE;
@@ -100,13 +137,6 @@ public abstract class PerlIntroduceTargetsHandler {
       return PerlStringTargetsHandler.INSTANCE;
     }
     return PerlGenericTargetsHandler.INSTANCE;
-  }
-
-  /**
-   * @return true iff element can be targeted for extraction
-   */
-  public static boolean isTargetableElement(@NotNull PsiElement element) {
-    return !UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) || PerlPsiUtil.isMatchRegex(element);
   }
 
   @NotNull
@@ -132,23 +162,7 @@ public abstract class PerlIntroduceTargetsHandler {
     }
 
     TextRange selectionRange = TextRange.create(selectionStart, selectionEnd);
-    return getCollector(wrappingExpression).computeTargetsFromSelection(wrappingExpression, selectionRange);
-  }
-
-  /**
-   * @return collection of names suggested for variable representing a {@code target}
-   */
-  @NotNull
-  public static List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    return Collections.singletonList("mysupervariable");
-  }
-
-  /**
-   * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
-   */
-  @NotNull
-  public static String createTargetExpressionText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my $" + variableName + " = " + target.getPlace().getText();
+    return getHandler(wrappingExpression).computeTargetsFromSelection(wrappingExpression, selectionRange);
   }
 
   /**
@@ -158,7 +172,7 @@ public abstract class PerlIntroduceTargetsHandler {
   public static PsiElement createTargetDeclarationStatement(@NotNull Project project,
                                                             @NotNull PerlIntroduceTarget target,
                                                             @NotNull String variableName) {
-    String targetExpressionText = createTargetExpressionText(variableName, target);
+    String targetExpressionText = getHandler(target.getPlace()).createTargetExpressionText(variableName, target);
     PsiElement statement = PerlElementFactory.createStatement(project, targetExpressionText);
     if (statement == null) {
       LOG.error("Unable to create a statement for " + targetExpressionText + "; target was " + target);
@@ -174,10 +188,6 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @Nullable
   public static PsiElement replaceOccurence(@NotNull PerlIntroduceTarget occurrence, @NotNull PsiElement replacement) {
-    PsiElement occurrenceElement = occurrence.getPlace();
-    if (occurrenceElement != null && occurrenceElement.isValid()) {
-      return occurrenceElement.replace(replacement);
-    }
-    return null;
+    return getHandler(occurrence.getPlace()).replaceTarget(occurrence, replacement);
   }
 }
