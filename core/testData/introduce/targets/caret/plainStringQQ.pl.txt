@@ -2,8 +2,5 @@ PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in plainStringQQ.pl
     (1,13)
     'This is some'
 PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in plainStringQQ.pl
-    (1,18)
-    'This is some text'
-PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in plainStringQQ.pl
     (0,19)
     '"This is some text"'

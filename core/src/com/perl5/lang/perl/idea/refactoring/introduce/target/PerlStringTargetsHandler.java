@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringList;
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
@@ -64,7 +66,7 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
 
-
+    int lastOffsetInParent = Objects.requireNonNull(ContainerUtil.getLastItem(allChildren)).getTextRangeInParent().getEndOffset();
     List<PerlIntroduceTarget> result = new ArrayList<>();
     int firstStringElementStartOffsetInParent = allChildren.get(0).getStartOffsetInParent();
 
@@ -86,8 +88,11 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
             isLastWhiteSpace = isCurrentWhiteSpace;
           }
           if (!isLastWhiteSpace) {
-            result.add(PerlIntroduceTarget.create(perlStringElement, firstStringElementStartOffsetInParent,
-                                                  stringRun.getStartOffsetInParent() + stringRunText.length()));
+            int stringLastOffsetInParent = stringRun.getStartOffsetInParent() + stringRunText.length();
+            if (stringLastOffsetInParent != lastOffsetInParent) {
+              result.add(PerlIntroduceTarget.create(
+                perlStringElement, firstStringElementStartOffsetInParent, stringLastOffsetInParent));
+            }
           }
         }
         else {

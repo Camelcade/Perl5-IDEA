@@ -8,8 +8,5 @@ PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in qqString.pl
     (5,17)
     'This is some'
 PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in qqString.pl
-    (5,22)
-    'This is some text'
-PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in qqString.pl
     (0,23)
     'qq  /This is some text/'

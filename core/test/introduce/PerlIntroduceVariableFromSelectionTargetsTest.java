@@ -22,6 +22,10 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
     return "testData/introduce/targets/selection";
   }
 
+  public void testStringOneWord() {doTest();}
+
+  public void testStringTwoWords() {doTest();}
+
   public void testListWithList() {doTest();}
 
   public void testAddMultiFromPart() {doTest();}

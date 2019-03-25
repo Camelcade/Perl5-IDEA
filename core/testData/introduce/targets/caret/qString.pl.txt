@@ -5,8 +5,5 @@ PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qString.pl
     (3,15)
     'This is some'
 PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qString.pl
-    (3,20)
-    'This is some text'
-PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qString.pl
     (0,21)
     'q /This is some text/'

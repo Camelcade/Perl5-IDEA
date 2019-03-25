@@ -1,0 +1,6 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in stringTwoWords.pl
+    (1,7)
+    'second'
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in stringTwoWords.pl
+    (0,14)
+    '"second third"'

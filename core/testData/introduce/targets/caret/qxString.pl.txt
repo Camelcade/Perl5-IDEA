@@ -8,8 +8,5 @@ PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxString.pl
     (4,16)
     'This is some'
 PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxString.pl
-    (4,21)
-    'This is some text'
-PsiPerlStringXqImpl(Perl5: STRING_XQ) at 0 in qxString.pl
     (0,22)
     'qx /This is some text/'

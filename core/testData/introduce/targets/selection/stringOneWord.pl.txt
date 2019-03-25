@@ -1,0 +1,3 @@
+PsiPerlStringDqImpl(Perl5: STRING_DQ) at 0 in stringOneWord.pl
+    (0,8)
+    '"second"'

@@ -8,8 +8,5 @@ PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qStringWithVariable.pl
     (3,30)
     'This is some $variable text'
 PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qStringWithVariable.pl
-    (3,35)
-    'This is some $variable text tail'
-PsiPerlStringSqImpl(Perl5: STRING_SQ) at 0 in qStringWithVariable.pl
     (0,36)
     'q /This is some $variable text tail/'
