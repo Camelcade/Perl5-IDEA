@@ -1008,6 +1008,14 @@ public class PerlPsiUtil implements PerlElementTypes {
     return targetElementRun == null && elementToCompareRun == null;
   }
 
+  /**
+   * @return true iff element is inside the qw list
+   */
+  public static boolean isInStringList(@NotNull PsiElement element) {
+    IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
+    return parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
+  }
+
   static public abstract class HeredocProcessor implements Processor<PsiElement> {
     protected final int lineEndOffset;
 

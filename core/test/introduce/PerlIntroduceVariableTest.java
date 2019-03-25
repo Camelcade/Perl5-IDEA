@@ -24,6 +24,8 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testStringFromStringList() {doTest();}
+
   public void testListItemFromNestedList() {doTest();}
 
   public void testStringBareSelection() {doTest();}

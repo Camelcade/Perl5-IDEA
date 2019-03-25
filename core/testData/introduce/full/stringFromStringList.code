@@ -1,0 +1,2 @@
+"s<caret>econd";
+first => qw/second third/;

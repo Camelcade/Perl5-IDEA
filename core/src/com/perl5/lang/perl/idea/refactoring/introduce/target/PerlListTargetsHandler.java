@@ -19,16 +19,12 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_LIST;
 
 class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   private static final Logger LOG = Logger.getInstance(PerlListTargetsHandler.class);
@@ -82,7 +78,7 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
           }
           sameParentReplacement = sameParentReplacement &&
                                   parent.equals(stringElementParent) &&
-                                  !isInStringList(stringElement);
+                                  !PerlPsiUtil.isInStringList(stringElement);
           replacementsMap.computeIfAbsent(occurrence, __ -> new ArrayList<>()).add(stringElement);
           iterator.remove();
           replaced = true;
@@ -110,14 +106,5 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
       localContainerElement.deleteChildRange(firstChildToReplace, childrenInRange.get(childrenInRange.size() - 1));
     }
     return result;
-  }
-
-
-  /**
-   * @return true iff element is inside the qw list
-   */
-  private boolean isInStringList(@NotNull PsiElement element) {
-    IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
-    return parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
   }
 }

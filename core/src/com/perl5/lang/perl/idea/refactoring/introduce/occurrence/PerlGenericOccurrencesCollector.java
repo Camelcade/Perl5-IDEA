@@ -17,9 +17,14 @@
 package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.PerlStringList;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 class PerlGenericOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
   public PerlGenericOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
@@ -30,7 +35,13 @@ class PerlGenericOccurrencesCollector extends PerlIntroduceTargetOccurrencesColl
   protected boolean collectOccurrences(@NotNull PsiElement element) {
     PsiElement targetElement = getTargetElement();
     if (PerlPsiUtil.areElementsSame(targetElement, element)) {
-      addOccurrence(PerlIntroduceTarget.create(element));
+      if (element instanceof PsiPerlStringBare && PerlPsiUtil.isInStringList(element)) {
+        addOccurrence(PerlIntroduceTarget.create(
+          Objects.requireNonNull(PsiTreeUtil.getParentOfType(element, PerlStringList.class)), element, element));
+      }
+      else {
+        addOccurrence(PerlIntroduceTarget.create(element));
+      }
       return true;
     }
     return false;
