@@ -16,13 +16,22 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+import java.util.*;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_LIST;
 
 class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
+  private static final Logger LOG = Logger.getInstance(PerlListTargetsHandler.class);
   static final PerlListTargetsHandler INSTANCE = new PerlListTargetsHandler();
 
   private PerlListTargetsHandler() {
@@ -34,5 +43,81 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
     String baseText = super.createTargetExpressionText(target);
     List<PsiElement> childrenInRange = target.getChildren();
     return childrenInRange.size() < 2 ? baseText : "(" + baseText + ")";
+  }
+
+  @NotNull
+  @Override
+  protected List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+    PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.get(0));
+    PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
+    List<PsiElement> sourceElements = PerlArrayUtil.collectListElements(baseElement);
+
+    PsiElement occurrencePlace = occurrences.get(0).getPlace();
+    if (occurrencePlace == null) {
+      reportEmptyPlace();
+      return Collections.emptyList();
+    }
+
+    boolean sameParentReplacement = true;
+    List<PsiElement> resultElements = new ArrayList<>();
+    Map<PerlIntroduceTarget, List<PsiElement>> replacementsMap = new HashMap<>();
+
+    for (PerlIntroduceTarget occurrence : occurrences) {
+      TextRange occurrenceTextRange = occurrence.getTextRange();
+      PsiElement parent = null;
+      boolean replaced = false;
+      for (Iterator<PsiElement> iterator = sourceElements.iterator(); iterator.hasNext(); ) {
+        PsiElement stringElement = iterator.next();
+        if (!occurrenceTextRange.contains(stringElement.getTextRange())) {
+          if (replaced) {
+            break;
+          }
+          iterator.remove();
+          resultElements.add(stringElement);
+        }
+        else {
+          PsiElement stringElementParent = stringElement.getParent();
+          if (parent == null) {
+            parent = stringElementParent;
+          }
+          sameParentReplacement = sameParentReplacement &&
+                                  parent.equals(stringElementParent) &&
+                                  !isInStringList(stringElement);
+          replacementsMap.computeIfAbsent(occurrence, __ -> new ArrayList<>()).add(stringElement);
+          iterator.remove();
+          replaced = true;
+        }
+      }
+      resultElements.add(replacement);
+    }
+    resultElements.addAll(sourceElements);
+
+    if (!sameParentReplacement) {
+      return replaceSequenceWithFlatter(baseElement, replacement, resultElements);
+    }
+
+    List<PsiElement> result = new ArrayList<>();
+    for (PerlIntroduceTarget occurrence : occurrences) {
+      List<PsiElement> childrenInRange = replacementsMap.get(occurrence);
+
+      if (childrenInRange == null || childrenInRange.isEmpty()) {
+        LOG.error("Unable to detect children to replace, please report developers with source sample");
+        return Collections.emptyList();
+      }
+      PsiElement firstChildToReplace = childrenInRange.get(0);
+      PsiElement localContainerElement = firstChildToReplace.getParent();
+      result.add(localContainerElement.addBefore(replacement, firstChildToReplace));
+      localContainerElement.deleteChildRange(firstChildToReplace, childrenInRange.get(childrenInRange.size() - 1));
+    }
+    return result;
+  }
+
+
+  /**
+   * @return true iff element is inside the qw list
+   */
+  private boolean isInStringList(@NotNull PsiElement element) {
+    IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
+    return parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
   }
 }

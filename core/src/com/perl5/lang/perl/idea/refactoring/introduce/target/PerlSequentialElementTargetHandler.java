@@ -21,11 +21,11 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.DEREF_EXPR;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
@@ -128,5 +128,45 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
       return reportEmptyPlace();
     }
     return target.getTextRangeInElement().subSequence(targetPlace.getText()).toString();
+  }
+
+  /**
+   * Builds a comma sequence from {@code sequenceElements} and replaces a {@code baseElement} with it
+   *
+   * @return list of psiElements representing {@code replacement}
+   */
+  @NotNull
+  final List<PsiElement> replaceSequenceWithFlatter(@NotNull PsiElement baseElement,
+                                                    @NotNull PsiElement replacement,
+                                                    @NotNull List<PsiElement> sequenceElement) {
+    Set<TextRange> replacementsRanges = new HashSet<>();
+    StringBuilder sb = new StringBuilder("(");
+    for (PsiElement element : sequenceElement) {
+      if (sb.length() > 1) {
+        sb.append(",");
+      }
+      int startOffset = sb.length();
+      if (element instanceof PsiPerlStringBare) {
+        sb.append(PerlStringTargetsHandler.createBarewordQuotedText(element.getText()));
+      }
+      else {
+        sb.append(element.getText());
+        if (element.equals(replacement)) {
+          replacementsRanges.add(TextRange.create(startOffset, sb.length()));
+        }
+      }
+    }
+    sb.append(")");
+
+    PsiElement sequenceExpression =
+      Objects.requireNonNull(PerlElementFactory.createStatement(baseElement.getProject(), sb.toString())).getFirstChild();
+    List<PsiElement> result = new ArrayList<>();
+    PsiElement newSequenceExpression = baseElement.replace(sequenceExpression);
+    for (PsiElement newSequenceExpressionChild : newSequenceExpression.getChildren()) {
+      if (replacementsRanges.contains(newSequenceExpressionChild.getTextRangeInParent())) {
+        result.add(newSequenceExpressionChild);
+      }
+    }
+    return result;
   }
 }

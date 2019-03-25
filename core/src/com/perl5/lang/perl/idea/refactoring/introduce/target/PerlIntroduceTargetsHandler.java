@@ -118,12 +118,6 @@ public abstract class PerlIntroduceTargetsHandler {
     return StringUtil.notNullize(place.getText());
   }
 
-  @NotNull
-  protected static String reportEmptyPlace() {
-    LOG.error("Invalid target");
-    return "'Something went wrong, please, report to developers with source sample'";
-  }
-
   /**
    * Replaces a targets represented by {@code occurrences} with {@code replacement}
    *
@@ -133,7 +127,8 @@ public abstract class PerlIntroduceTargetsHandler {
   @NotNull
   protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
     if (occurrences.size() > 1) {
-      LOG.error("Unexpected multiple occurrences: " + occurrences.stream().map(it -> it.toString()).collect(Collectors.joining("; ")));
+      LOG.error(
+        "Unexpected multiple occurrences: " + occurrences.stream().map(PerlIntroduceTarget::toString).collect(Collectors.joining("; ")));
       return Collections.emptyList();
     }
     PsiElement occurrenceElement = Objects.requireNonNull(occurrences.get(0)).getPlace();
@@ -144,6 +139,12 @@ public abstract class PerlIntroduceTargetsHandler {
       LOG.error("Invalid occurrence element");
     }
     return Collections.emptyList();
+  }
+
+  @NotNull
+  static String reportEmptyPlace() {
+    LOG.error("Invalid target");
+    return "'Something went wrong, please, report to developers with source sample'";
   }
 
   /**

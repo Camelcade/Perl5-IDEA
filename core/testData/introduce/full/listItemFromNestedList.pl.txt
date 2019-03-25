@@ -1,0 +1,4 @@
+my $<caret>string_list_item = 'second';
+('zero', 'first', $string_list_item, 'third', $string_list_item);
+zero => ('first', $string_list_item, q/third/, $string_list_item);
+('zero', 'first', $string_list_item, 'third', $string_list_item);

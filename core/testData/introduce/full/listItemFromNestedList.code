@@ -1,0 +1,3 @@
+zero => qw/first <selection>second</selection> third second/;
+zero => ('first', "second", q/third/,  q/second/);
+zero => 'first', qw/second third/,  q/second/;

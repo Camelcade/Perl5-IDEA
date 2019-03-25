@@ -23,12 +23,13 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.PerlStringList;
-import com.perl5.lang.perl.psi.PsiPerlStringBare;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
@@ -107,33 +108,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
     }
     resultElements.addAll(sourceElements);
 
-    Set<TextRange> replacementsRanges = new HashSet<>();
-    StringBuilder sb = new StringBuilder("(");
-    for (PsiElement element : resultElements) {
-      if (sb.length() > 1) {
-        sb.append(",");
-      }
-      int startOffset = sb.length();
-      if (element instanceof PsiPerlStringBare) {
-        sb.append(PerlStringTargetsHandler.createBarewordQuotedText(element.getText()));
-      }
-      else {
-        sb.append(element.getText());
-        replacementsRanges.add(TextRange.create(startOffset, sb.length()));
-      }
-    }
-    sb.append(")");
-
-    PsiElement sequenceExpression =
-      Objects.requireNonNull(PerlElementFactory.createStatement(baseElement.getProject(), sb.toString())).getFirstChild();
-    List<PsiElement> result = new ArrayList<>();
-    PsiElement newSequenceExpression = baseElement.replace(sequenceExpression);
-    for (PsiElement newSequenceExpressionChild : newSequenceExpression.getChildren()) {
-      if (replacementsRanges.contains(newSequenceExpressionChild.getTextRangeInParent())) {
-        result.add(newSequenceExpressionChild);
-      }
-    }
-
-    return result;
+    return replaceSequenceWithFlatter(baseElement, replacement, resultElements);
   }
+
 }
