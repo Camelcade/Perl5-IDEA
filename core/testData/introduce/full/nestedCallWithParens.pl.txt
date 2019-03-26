@@ -1,0 +1,3 @@
+my $<caret>scalar = Foo::Bar->method();
+$scalar;
+$scalar;

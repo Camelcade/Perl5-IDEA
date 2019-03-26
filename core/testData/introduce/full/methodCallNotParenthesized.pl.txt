@@ -1,0 +1,4 @@
+somemethod;
+somemethod();
+my $<caret>scalar = somemethod 1, 2, 3;
+$scalar;

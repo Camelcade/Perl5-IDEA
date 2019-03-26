@@ -1,0 +1,18 @@
+package Foo::Bar;
+
+Foo::Bar->method;
+Foo::Bar::->method;
+'Foo::Bar::'->method;
+'Foo::Bar'->method;
+"Foo::Bar::"->method;
+"Foo::Bar"->method;
+`Foo::Bar::`->method;
+my $<caret>scalar = qx`Foo::Bar`;
+$scalar->method;
+
+q fFoo::Bar::f->method;
+q fFoo::Barf->method;
+qq"Foo::Bar::"->method;
+qq"Foo::Bar"->method;
+qx`Foo::Bar::`->method;
+$scalar->method;

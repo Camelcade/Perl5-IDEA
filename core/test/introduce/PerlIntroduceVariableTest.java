@@ -24,6 +24,42 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testListToQw() {doTest();}
+
+  public void testListToQwSame() {doTest();}
+
+  public void testMethodCallNoParens() {doTest();}
+
+  public void testMethodCallNotParenthesized() {doTest();}
+
+  public void testMethodCallParens() {doTest();}
+
+  public void testMethodCallParenthesized() {doTest();}
+
+  public void testNestedCallWithoutParens() {doTest();}
+
+  public void testNestedCallWithParens() {doTest();}
+
+  public void testPackageForms() {doTest();}
+
+  public void testPackageFormsReverse() {doTest();}
+
+  public void testPackageFormsString() {doTest();}
+
+  public void testPackageFormsStringQq() {doTest();}
+
+  public void testPackageFormsStringQx() {doTest();}
+
+  public void testPlusMinus() {doTest();}
+
+  public void testQwRange() {doTest();}
+
+  public void testQwRangeLazy() {doTest();}
+
+  public void testQwRangeScalar() {doTest();}
+
+  public void testQwRangeScalarLazy() {doTest();}
+
   public void testStringFromStringList() {doTest();}
 
   public void testListItemFromNestedList() {doTest();}

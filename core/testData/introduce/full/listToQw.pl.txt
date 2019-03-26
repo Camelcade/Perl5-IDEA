@@ -1,0 +1,6 @@
+my @<caret>array = ("very", long => 'list');
+my @list = (@array, @array);
+
+('this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array);
+
+('this', 'is', 'a', @array, 'this', 'is', 'a', @array);

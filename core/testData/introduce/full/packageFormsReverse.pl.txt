@@ -1,0 +1,5 @@
+package Foo::Bar;
+
+my $<caret>scalar = 'Foo::Bar';
+$scalar->method;
+$scalar->method;

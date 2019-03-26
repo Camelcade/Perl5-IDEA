@@ -1,0 +1,10 @@
+my @<caret>string_list = qw/test2 test3/;
+('test1', @string_list, 'test4');
+qw/test1 test2 test4/;
+@string_list;
+('test1', @string_list);
+(@string_list, 'test4');
+test1 => @string_list => 'test4';
+'test1' => @string_list => "test4";
+'test1' => "te${s}t2" => "test3" => "test4";
+'test1' => `test2` => "test3" => "test4";

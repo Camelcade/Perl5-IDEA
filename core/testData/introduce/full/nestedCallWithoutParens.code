@@ -1,0 +1,2 @@
+Fo<caret>o::Bar->method;
+Foo::Bar->method();

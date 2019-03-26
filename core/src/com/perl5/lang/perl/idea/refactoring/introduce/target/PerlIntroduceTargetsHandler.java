@@ -30,12 +30,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PerlStringList;
-import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -110,12 +108,15 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @NotNull
   protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
-    PsiElement place = target.getPlace();
-    if (place == null) {
+    PsiElement targetElement = target.getPlace();
+    if (targetElement == null) {
       return reportEmptyPlace();
     }
+    if (targetElement instanceof PsiPerlPackageExpr) {
+      return "'" + PerlPackageUtil.getCanonicalPackageName(StringUtil.notNullize(targetElement.getText())) + "'";
+    }
 
-    return StringUtil.notNullize(place.getText());
+    return StringUtil.notNullize(targetElement.getText());
   }
 
   /**
