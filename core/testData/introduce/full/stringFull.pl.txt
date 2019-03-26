@@ -1,0 +1,5 @@
+my $<caret>scalar = "someline";
+if( $scalar eq $a){
+    $b = $scalar ."otherline";
+    say $scalar;
+}
