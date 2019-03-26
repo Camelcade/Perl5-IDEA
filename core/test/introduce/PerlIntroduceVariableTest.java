@@ -17,6 +17,10 @@
 package introduce;
 
 import base.PerlLightTestCase;
+import com.intellij.application.options.CodeStyle;
+import com.perl5.lang.perl.PerlLanguage;
+
+import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
 
 public class PerlIntroduceVariableTest extends PerlLightTestCase {
   @Override
@@ -25,6 +29,11 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
   }
 
   public void testAddMultiLong() {doTest();}
+
+  public void testAddMultiLongWithWrap() {
+    CodeStyle.getSettings(getProject()).getCommonSettings(PerlLanguage.INSTANCE).BINARY_OPERATION_WRAP = WRAP_AS_NEEDED;
+    doTest();
+  }
 
   public void testStringPartialEnd() {doTest();}
 
