@@ -39,7 +39,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import com.perl5.lang.perl.psi.PsiPerlHashIndex;
@@ -138,7 +137,7 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
         AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
       }
       char openChar = text.charAt(offset);
-      char closeChar = PerlBaseLexer.getQuoteCloseChar(openChar);
+      char closeChar = PerlPsiUtil.getQuoteCloseChar(openChar);
       iterator.advance();
       IElementType possibleCloseQuoteType = iterator.atEnd() ? null : iterator.getTokenType();
       if (QUOTE_CLOSE_FIRST_ANY.contains(possibleCloseQuoteType) && closeChar == text.charAt(iterator.getStart())) {

@@ -20,8 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +35,7 @@ public class PerlStringManipulator extends PerlTextContainerManipulator<PerlStri
   public PerlStringMixin handleContentChange(@NotNull PerlStringMixin element, @NotNull TextRange range, String newContent)
     throws IncorrectOperationException {
     PsiElement openingQuote = getOpeningQuote(element);
-    char closeQuote = PerlLexer.getQuoteCloseChar(openingQuote.getText().charAt(0));
+    char closeQuote = PerlPsiUtil.getQuoteCloseChar(openingQuote.getText().charAt(0));
 
     /*
     String currentContent = getNode().getText();

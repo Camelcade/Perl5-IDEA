@@ -30,6 +30,7 @@ import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementTypes;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import gnu.trove.THashMap;
 import gnu.trove.THashSet;
@@ -535,7 +536,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     int bufferEnd = getBufferEnd();
 
     char openQuote = buffer.charAt(currentPosition);
-    char closeQuote = getQuoteCloseChar(openQuote);
+    char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
     boolean quotesDiffer = openQuote != closeQuote;
 
     boolean isEscaped = false;
@@ -594,7 +595,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
 
     // search block
     char openQuote = buffer.charAt(currentOffset);
-    char closeQuote = getQuoteCloseChar(openQuote);
+    char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
     boolean quotesDiffer = openQuote != closeQuote;
     pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
 
@@ -614,7 +615,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
     if (currentOffset < bufferEnd) {
       if (quotesDiffer) {
         openQuote = buffer.charAt(currentOffset);
-        closeQuote = getQuoteCloseChar(openQuote);
+        closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
         pushPreparsedToken(currentOffset++, currentOffset, REGEX_QUOTE_OPEN);
       }
 
@@ -724,7 +725,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   }
 
   public int getRegexBlockEndOffset(int startOffset, char openingChar, boolean isSecondBlock) {
-    char closingChar = getQuoteCloseChar(openingChar);
+    char closingChar = PerlPsiUtil.getQuoteCloseChar(openingChar);
     CharSequence buffer = getBuffer();
     int bufferEnd = getBufferEnd();
 
@@ -864,7 +865,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
       else // should have second part
       {
         char secondBlockOpeningQuote = firstBlockOpeningQuote;
-        if (firstBlockOpeningQuote == getQuoteCloseChar(firstBlockOpeningQuote)) {
+        if (firstBlockOpeningQuote == PerlPsiUtil.getQuoteCloseChar(firstBlockOpeningQuote)) {
           secondBlockOpeningToken = new CustomToken(currentOffset++, currentOffset, REGEX_QUOTE);
           pushPreparsedToken(secondBlockOpeningToken);
         }
@@ -1055,30 +1056,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer
   public static void initReservedTokensSet() {
     RESERVED_TOKENSET = TokenSet.create(RESERVED_TOKEN_TYPES.values().toArray(new IElementType[RESERVED_TOKEN_TYPES.values().size()]));
     CUSTOM_TOKENSET = TokenSet.create(CUSTOM_TOKEN_TYPES.values().toArray(new IElementType[CUSTOM_TOKEN_TYPES.values().size()]));
-  }
-
-  /**
-   * Choosing closing character by opening one
-   *
-   * @param charOpener - char with which sequence started
-   * @return - ending char
-   */
-  public static char getQuoteCloseChar(char charOpener) {
-    if (charOpener == '<') {
-      return '>';
-    }
-    else if (charOpener == '{') {
-      return '}';
-    }
-    else if (charOpener == '(') {
-      return ')';
-    }
-    else if (charOpener == '[') {
-      return ']';
-    }
-    else {
-      return charOpener;
-    }
   }
 
   /**

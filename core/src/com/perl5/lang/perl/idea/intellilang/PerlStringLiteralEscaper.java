@@ -22,8 +22,8 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -45,7 +45,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
     assert manipulator instanceof PerlStringManipulator;
     PsiElement openQuoteElement = ((PerlStringManipulator)manipulator).getOpeningQuote(myHost);
     char openQuote = openQuoteElement.getText().charAt(0);
-    char closeQuote = PerlLexer.getQuoteCloseChar(openQuote);
+    char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
     offsetsMap = new HashMap<>();
     CharSequence sourceText = rangeInsideHost.subSequence(myHost.getText());
     Integer sourceOffset = 0;

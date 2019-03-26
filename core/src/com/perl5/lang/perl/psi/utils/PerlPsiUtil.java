@@ -73,6 +73,10 @@ public class PerlPsiUtil implements PerlElementTypes {
     HEREDOC, HEREDOC_END, HEREDOC_END_INDENTABLE, HEREDOC_QQ, HEREDOC_QX
   );
 
+  private static final String OPEN_QUOTES = "<[{(";
+  private static final String CLOSE_QUOTES = ">]})";
+  private static final String ALTERNATIVE_QUOTES = "/|!~^._=?\\;";
+
   /**
    * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on
    */
@@ -1026,5 +1030,39 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
     return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
+  }
+
+  /**
+   * Suggests a quote to use for a {@code text} with a set of {@code defaultQuote} or non-default non-literal quotes
+   *
+   * @return a quote symbol or 0 if no quote been found
+   */
+  public static char suggestOpenQuoteChar(@NotNull CharSequence text, char defaultQuote) {
+    if (StringUtil.indexOf(text, defaultQuote) < 0) {
+      return defaultQuote;
+    }
+    for (int i = 0; i < OPEN_QUOTES.length(); i++) {
+      if (StringUtil.indexOf(text, OPEN_QUOTES.charAt(i)) < 0 && StringUtil.indexOf(text, CLOSE_QUOTES.charAt(i)) < 0) {
+        return OPEN_QUOTES.charAt(i);
+      }
+    }
+    for (int i = 0; i < ALTERNATIVE_QUOTES.length(); i++) {
+      if (StringUtil.indexOf(text, ALTERNATIVE_QUOTES.charAt(i)) < 0) {
+        return ALTERNATIVE_QUOTES.charAt(i);
+      }
+    }
+    return 0;
+  }
+
+
+  /**
+   * Choosing closing character by opening one
+   *
+   * @param charOpener - char with which sequence started
+   * @return - ending char
+   */
+  public static char getQuoteCloseChar(char charOpener) {
+    int index = OPEN_QUOTES.indexOf(charOpener);
+    return index < 0 ? charOpener : CLOSE_QUOTES.charAt(index);
   }
 }
