@@ -19,6 +19,8 @@ package com.perl5.lang.perl.util;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
+
 /**
  * Created by hurricup on 30.05.2015.
  */
@@ -40,7 +42,7 @@ public interface PerlBuiltInScalars {
     "^",
     "^RE_TRIE_MAXBUF",
     "LAST_REGEXP_CODE_RESULT",
-    "\"",
+    DOUBLE_QUOTE,
     "^S",
     "LIST_SEPARATOR",
     "#",

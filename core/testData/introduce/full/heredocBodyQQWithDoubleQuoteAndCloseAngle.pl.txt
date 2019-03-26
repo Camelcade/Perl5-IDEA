@@ -1,0 +1,17 @@
+my $test_name<caret> = qq[bl"al>ba];
+say <<"EOM";
+test $test_name text
+EOM
+
+say <<EOM;
+test $test_name text
+EOM
+
+say <<'EOM';
+test bl"al>ba text
+EOM
+
+say <<`EOM`;
+test $test_name text
+EOM
+

@@ -1,0 +1,19 @@
+my $test_name<caret> = substr <<EOM, 0, -1;
+bl"al>]})/|!~^._=?\;ba
+EOM
+say <<"EOM";
+test $test_name text
+EOM
+
+say <<EOM;
+test $test_name text
+EOM
+
+say <<'EOM';
+test bl"al>]})/|!~^._=?\;ba text
+EOM
+
+say <<`EOM`;
+test $test_name text
+EOM
+

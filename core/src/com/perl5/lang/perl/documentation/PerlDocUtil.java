@@ -36,6 +36,7 @@ import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
@@ -150,7 +151,7 @@ public class PerlDocUtil implements PerlElementTypes {
       }
     }
 
-    return resolveDocLink("perlre/\"" + anchor + "\"", element);
+    return resolveDocLink("perlre/\"" + anchor + PerlPsiUtil.DOUBLE_QUOTE, element);
   }
 
   @Nullable

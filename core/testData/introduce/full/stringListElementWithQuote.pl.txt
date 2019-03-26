@@ -1,2 +1,2 @@
-my $test_name<caret> = 'sec\'ond';
+my $test_name<caret> = q<sec'ond>;
 ('first', $test_name, 'third');

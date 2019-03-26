@@ -1,2 +1,2 @@
 my @test_name<caret> = qw/second third/;
-('fi\'rst', @test_name);
+(q<fi'rst>, @test_name);

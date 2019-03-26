@@ -165,7 +165,7 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
   protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     if (targetPlace instanceof PsiPerlStringBare) {
-      return createBarewordQuotedText(targetPlace.getText());
+      return PerlPsiUtil.createSingleQuotedString(targetPlace.getText());
     }
     else if (target.isFullRange()) {
       return super.createTargetExpressionText(target);
@@ -239,10 +239,5 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
                                                 @NotNull String safePrefix,
                                                 @NotNull String safeSuffix) {
     return !StringUtil.contains(text, "'") ? "'" + text + "'" : safePrefix + text + safeSuffix;
-  }
-
-  @NotNull
-  static String createBarewordQuotedText(@NotNull String content) {
-    return "'" + StringUtil.escapeChar(content, '\'') + "'";
   }
 }

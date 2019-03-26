@@ -75,7 +75,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
                             "" + PerlPsiUtil.getQuoteCloseChar(openQuoteText.charAt(0));
     return StringUtil.containsWhitespaces(targetElementsText) ?
            "qw " + openQuoteText + targetElementsText + closeQuoteText :
-           PerlGenericStringTargetsHandler.createBarewordQuotedText(targetElementsText);
+           PerlPsiUtil.createSingleQuotedString(targetElementsText);
   }
 
   @NotNull

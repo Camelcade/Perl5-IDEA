@@ -28,6 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.net.URLEncoder;
 
+import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
@@ -177,7 +179,7 @@ public class PodRenderUtil implements PodElementTypes {
       builder.append(link);
     }
 
-    builder.append("\"");
+    builder.append(DOUBLE_QUOTE);
 
     if (isError) {
       builder.append(" style=\"color:red\"");

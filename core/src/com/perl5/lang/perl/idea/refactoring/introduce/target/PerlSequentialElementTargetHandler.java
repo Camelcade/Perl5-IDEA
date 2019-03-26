@@ -23,6 +23,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -147,7 +148,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
       }
       int startOffset = sb.length();
       if (element instanceof PsiPerlStringBare) {
-        sb.append(PerlGenericStringTargetsHandler.createBarewordQuotedText(element.getText()));
+        sb.append(PerlPsiUtil.createSingleQuotedString(element.getText()));
       }
       else {
         sb.append(element.getText());

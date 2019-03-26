@@ -76,6 +76,16 @@ public class PerlPsiUtil implements PerlElementTypes {
   private static final String OPEN_QUOTES = "<[{(";
   private static final String CLOSE_QUOTES = ">]})";
   private static final String ALTERNATIVE_QUOTES = "/|!~^._=?\\;";
+  public static final char SINGLE_QUOTE_CHAR = '\'';
+  public static final String SINGLE_QUOTE = "" + SINGLE_QUOTE_CHAR;
+  public static final char DOUBLE_QUOTE_CHAR = '"';
+  public static final String DOUBLE_QUOTE = "" + DOUBLE_QUOTE_CHAR;
+  public static final char BACK_TICK_CHAR = '`';
+  public static final String BACK_TICK = "" + BACK_TICK_CHAR;
+  public static final String QUOTE_Q = "q";
+  public static final String QUOTE_QQ = "qq";
+  public static final String QUOTE_QX = "qx";
+  public static final String QUOTE_QW = "qw";
 
   /**
    * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on
@@ -1018,6 +1028,17 @@ public class PerlPsiUtil implements PerlElementTypes {
   public static boolean isInStringList(@NotNull PsiElement element) {
     IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
     return parentElementType == LP_STRING_QW || parentElementType == STRING_LIST;
+  }
+
+  /**
+   * @return a single quoted string with content. Attempts to select proper quotes
+   */
+  @NotNull
+  public static String createSingleQuotedString(@NotNull String content) {
+    char openQuoteChar = suggestOpenQuoteChar(content, SINGLE_QUOTE_CHAR);
+    return openQuoteChar == 0 ? SINGLE_QUOTE + StringUtil.escapeChar(content, SINGLE_QUOTE_CHAR) + SINGLE_QUOTE :
+           openQuoteChar == SINGLE_QUOTE_CHAR ? SINGLE_QUOTE + content + SINGLE_QUOTE :
+           PerlPsiUtil.QUOTE_Q + openQuoteChar + content + getQuoteCloseChar(openQuoteChar);
   }
 
   static public abstract class HeredocProcessor implements Processor<PsiElement> {

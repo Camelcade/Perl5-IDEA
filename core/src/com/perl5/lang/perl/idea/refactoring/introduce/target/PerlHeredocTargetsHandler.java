@@ -33,6 +33,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
+import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE_CHAR;
+
 public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
   static final PerlHeredocTargetsHandler INSTANCE = new PerlHeredocTargetsHandler();
   private static final Logger LOG = Logger.getInstance(PerlHeredocTargetsHandler.class);
@@ -72,11 +75,11 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
     }
     CharSequence subSequence = target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars());
     char openQuote = PerlPsiUtil.suggestOpenQuoteChar(subSequence, '"');
-    if (openQuote == '"') {
-      return "\"" + subSequence + "\";";
+    if (openQuote == DOUBLE_QUOTE_CHAR) {
+      return DOUBLE_QUOTE + subSequence + DOUBLE_QUOTE + ";";
     }
     else if (openQuote != 0) {
-      return "qq " + openQuote + subSequence + PerlPsiUtil.getQuoteCloseChar(openQuote) + ";";
+      return PerlPsiUtil.QUOTE_QQ + " " + openQuote + subSequence + PerlPsiUtil.getQuoteCloseChar(openQuote) + ";";
     }
     return "substr <<EOM, 0, -1;\n" + subSequence + "\nEOM\n";
   }

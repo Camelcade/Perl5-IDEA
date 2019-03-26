@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.*;
+
 /**
  * Created by hurricup on 06.09.2015.
  */
@@ -107,9 +109,9 @@ public class PerlEnterHeredocClosingHandler extends EnterHandlerDelegateAdapter 
           Pattern openerPattern = EMPTY_OPENER_PATTERN;
           if (!emptyOpener) {
             openerPattern = Pattern.compile("<<~?(\\s*)(?:" +
-                                            "\"" + openerName + "\"" + "|" +
-                                            "`" + openerName + "`" + "|" +
-                                            "'" + openerName + "'" + "|" +
+                                            DOUBLE_QUOTE + openerName + DOUBLE_QUOTE + "|" +
+                                            BACK_TICK + openerName + BACK_TICK + "|" +
+                                            SINGLE_QUOTE + openerName + SINGLE_QUOTE + "|" +
                                             "\\\\" + openerName + "|" +
                                             openerName +
                                             ")"

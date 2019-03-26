@@ -1,0 +1,16 @@
+say <<"EOM";
+test <selection>bl"alba</selection> text
+EOM
+
+say <<EOM;
+test bl"alba text
+EOM
+
+say <<'EOM';
+test bl"alba text
+EOM
+
+say <<`EOM`;
+test bl"alba text
+EOM
+

@@ -25,6 +25,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -170,9 +171,9 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
       Pair.create("handle", PerlSyntaxHighlighter.PERL_HANDLE),
       Pair.create("handle_builtin", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN),
       Pair.create("autoload", PerlSyntaxHighlighter.PERL_AUTOLOAD),
-      Pair.create("q", PerlSyntaxHighlighter.PERL_SQ_STRING),
-      Pair.create("qx", PerlSyntaxHighlighter.PERL_DX_STRING),
-      Pair.create("qq", PerlSyntaxHighlighter.PERL_DQ_STRING),
+      Pair.create(PerlPsiUtil.QUOTE_Q, PerlSyntaxHighlighter.PERL_SQ_STRING),
+      Pair.create(PerlPsiUtil.QUOTE_QX, PerlSyntaxHighlighter.PERL_DX_STRING),
+      Pair.create(PerlPsiUtil.QUOTE_QQ, PerlSyntaxHighlighter.PERL_DQ_STRING),
       Pair.create("rx", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
       Pair.create("block", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
       Pair.create("const", PerlSyntaxHighlighter.PERL_CONSTANT),

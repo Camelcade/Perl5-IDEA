@@ -134,6 +134,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.pod.PodLanguage;
@@ -1312,7 +1313,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
           append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
       }
-      builder.append("\"").append("]");
+      builder.append(PerlPsiUtil.DOUBLE_QUOTE).append("]");
 
       builder.append(System.lineSeparator());
       if (instruction.allPred().isEmpty()) {

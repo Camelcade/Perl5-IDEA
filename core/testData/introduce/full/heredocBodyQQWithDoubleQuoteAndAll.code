@@ -1,0 +1,16 @@
+say <<"EOM";
+test <selection>bl"al>]})/|!~^._=?\;ba</selection> text
+EOM
+
+say <<EOM;
+test bl"al>]})/|!~^._=?\;ba text
+EOM
+
+say <<'EOM';
+test bl"al>]})/|!~^._=?\;ba text
+EOM
+
+say <<`EOM`;
+test bl"al>]})/|!~^._=?\;ba text
+EOM
+
