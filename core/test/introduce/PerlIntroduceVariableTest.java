@@ -28,6 +28,16 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testStringFromHeredoc() {doTest();}
+
+  public void testStringFromHeredocPartial() {doTest();}
+
+  public void testStringFromHeredocPartialWithVariable() {doTest();}
+
+  public void testStringQFromHeredoc() {doTest();}
+
+  public void testStringQFromHeredocSelection() {doTest();}
+
   public void testHeredocBodyQQWithDoubleQuote() {doTest();}
 
   public void testHeredocBodyQQWithDoubleQuoteAndCloseAngle() {doTest();}

@@ -22,14 +22,16 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlStringXq;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableHeredocElement;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
 /**
@@ -38,7 +40,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 abstract class PerlGenericStringsOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
   private final List<Object> myChildrenToFind = new ArrayList<>();
 
-  protected PerlGenericStringsOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
+  PerlGenericStringsOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
     TextRange targetTextRange = target.getTextRange();
     Pair<PsiElement, PsiElement> rangeToCollect = getChildrenRangeToCollect(target);
@@ -65,19 +67,23 @@ abstract class PerlGenericStringsOccurrencesCollector extends PerlIntroduceTarge
   @NotNull
   protected abstract Pair<PsiElement, PsiElement> getChildrenRangeToCollect(@NotNull PerlIntroduceTarget target);
 
-  /**
-   * @return a list of all children for the {@code element} if it can be handled by this collector
-   */
-  @NotNull
-  protected abstract List<PsiElement> getElementChildren(@Nullable PsiElement element);
-
   @Override
   protected boolean collectOccurrences(@NotNull PsiElement element) {
     if (myChildrenToFind.isEmpty()) {
       return false;
     }
 
-    List<PsiElement> elementChildren = getElementChildren(element);
+    List<PsiElement> elementChildren;
+    if (element instanceof PerlString) {
+      elementChildren = ((PerlString)element).getAllChildrenList();
+    }
+    else if (isTargetableHeredocElement(element)) {
+      elementChildren = ((PerlHeredocElementImpl)element).getAllChildrenList();
+    }
+    else {
+      return false;
+    }
+
     if (elementChildren.isEmpty()) {
       return false;
     }

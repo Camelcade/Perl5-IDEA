@@ -19,17 +19,12 @@ package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.List;
 
 import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableHeredocElement;
 
 class PerlHeredocOccurrencesCollector extends PerlGenericStringsOccurrencesCollector {
-  public PerlHeredocOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
+  PerlHeredocOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
   }
 
@@ -42,11 +37,5 @@ class PerlHeredocOccurrencesCollector extends PerlGenericStringsOccurrencesColle
     }
 
     return Pair.create(targetElement.getFirstChild(), null);
-  }
-
-  @NotNull
-  @Override
-  protected List<PsiElement> getElementChildren(@Nullable PsiElement element) {
-    return !isTargetableHeredocElement(element) ? Collections.emptyList() : ((PerlHeredocElementImpl)element).getAllChildrenList();
   }
 }

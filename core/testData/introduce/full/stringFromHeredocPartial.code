@@ -1,0 +1,26 @@
+"te<selection>st stri</selection>ng";
+
+<<"EOM";
+this
+is a test string
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a test string
+end
+EOM
+
+<<EOM;
+this
+is a test string
+end
+EOM
+

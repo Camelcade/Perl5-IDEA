@@ -1,0 +1,26 @@
+"te<selection>st $variable stri</selection>ng";
+
+<<"EOM";
+this
+is a test $variable string
+end
+EOM
+
+<<'EOM';
+this
+is a test $variable string
+end
+EOM
+
+<<`EOM`;
+this
+is a test $variable string
+end
+EOM
+
+<<EOM;
+this
+is a test $variable string
+end
+EOM
+

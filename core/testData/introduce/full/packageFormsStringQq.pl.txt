@@ -7,12 +7,12 @@ $test_name->method;
 $test_name->method;
 $test_name->method;
 $test_name->method;
-`Foo::Bar::`->method;
+`$test_name`->method;
 `Foo::Bar`->method;
 
 $test_name->method;
 $test_name->method;
 $test_name->method;
 $test_name->method;
-qx`Foo::Bar::`->method;
+qx`$test_name`->method;
 qx`Foo::Bar`->method;

@@ -6,12 +6,12 @@ package Foo::Bar;
 <occurrence>'Foo::Bar'</occurrence>->method;
 <occurrence>"Foo::Bar::"</occurrence>->method;
 <occurrence>"Foo::Bar"</occurrence>->method;
-`Foo::Bar::`->method;
+`<occurrence>Foo::Bar::</occurrence>`->method;
 `Foo::Bar`->method;
 
 <occurrence>q#Foo::Bar::#</occurrence>->method;
 <occurrence>q#Foo::Bar#</occurrence>->method;
 <occurrence>qq"Foo::Bar::"</occurrence>->method;
 <occurrence>qq"Foo::Bar"</occurrence>->method;
-qx`Foo::Bar::`->method;
+qx`<occurrence>Foo::Bar::</occurrence>`->method;
 qx`Foo::Bar`->method;

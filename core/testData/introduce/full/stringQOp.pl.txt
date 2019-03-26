@@ -15,13 +15,13 @@ elsif($test_name){
     $b = $test_name ."otherline";
     say $test_name;
 }
-elsif( `someline` eq $a){
-    $b = `someline`."otherline";
-    say `someline`;
+elsif( `$test_name` eq $a){
+    $b = `$test_name` ."otherline";
+    say `$test_name`;
 }
-elsif(qx /someline/){
-    $b = qx {someline}."otherline";
-    say qx <someline>;
+elsif(qx/$test_name/){
+    $b = qx{$test_name} ."otherline";
+    say qx<$test_name>;
 }
 elsif( $test_name => $a){
     my @b = $test_name => "otherline";

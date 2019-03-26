@@ -121,8 +121,8 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
     else if (targetElement instanceof PerlStringList || targetElement instanceof PsiPerlCommaSequenceExpr) {
       return new PerlListOccurrencesCollector(target);
     }
-    else if (targetElement instanceof PerlString && !target.isFullRange()) {
-      return new PerlPartialStringOccurrencesCollector(target);
+    else if (targetElement instanceof PerlString) {
+      return new PerlStringOccurrencesCollector(target);
     }
     else if (isTargetableHeredocElement(targetElement)) {
       return new PerlHeredocOccurrencesCollector(target);

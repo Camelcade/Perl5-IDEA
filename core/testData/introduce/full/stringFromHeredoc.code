@@ -1,0 +1,26 @@
+"te<caret>st string";
+
+<<"EOM";
+this
+is a test string
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a test string
+end
+EOM
+
+<<EOM;
+this
+is a test string
+end
+EOM
+

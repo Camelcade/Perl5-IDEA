@@ -1,0 +1,26 @@
+'te<selection>st st</selection>ring';
+
+<<"EOM";
+this
+is a test string
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a test string
+end
+EOM
+
+<<EOM;
+this
+is a test string
+end
+EOM
+

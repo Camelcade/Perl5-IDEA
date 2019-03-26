@@ -42,7 +42,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandler {
   private static final Logger LOG = Logger.getInstance(PerlGenericStringTargetsHandler.class);
 
-  protected PerlGenericStringTargetsHandler() {
+  PerlGenericStringTargetsHandler() {
   }
 
   /**
