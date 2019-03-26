@@ -1,0 +1,27 @@
+'something he${variable}re bla';
+my $test_name<caret> = `${variable}re bla`;
+"something he$test_name";
+`something he$test_name`;
+q /something he${variable}re bla/;
+qq{something he$test_name};
+qx fsomething he${test_name}f;
+qw/something he${variable}re bla/;
+something => "he$test_name";
+
+'re bla';
+"re bla";
+`re bla`;
+q /re bla/;
+qq {re bla};
+qx fre blaf;
+qw/re bla/;
+something => "";
+
+'something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla ';
+"something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla ";
+`something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla`;
+q /something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
+qq{something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla };
+qx fsomething he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla something he$test_name something he${variable}re bla f;
+qw/something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
+

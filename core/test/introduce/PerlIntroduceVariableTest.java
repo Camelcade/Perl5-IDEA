@@ -28,6 +28,114 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testVariableInsideStringPartialEnd() {doTest();}
+
+  public void testVariableInsideStringPartialEndLazy() {doTest();}
+
+  public void testVariableInsideStringPartialEndLazyQQ() {doTest();}
+
+  public void testVariableInsideStringPartialEndLazyQX() {doTest();}
+
+  public void testVariableInsideStringPartialEndQQ() {doTest();}
+
+  public void testVariableInsideStringPartialEndQX() {doTest();}
+
+  public void testVariableInsideStringPartialMid() {doTest();}
+
+  public void testVariableInsideStringPartialMidLazy() {doTest();}
+
+  public void testVariableInsideStringPartialMidQQ() {doTest();}
+
+  public void testVariableInsideStringPartialMidQQLazy() {doTest();}
+
+  public void testVariableInsideStringPartialMidQX() {doTest();}
+
+  public void testVariableInsideStringPartialMidQXLazy() {doTest();}
+
+  public void testVariableInsideStringPartialStart() {doTest();}
+
+  public void testVariableInsideStringPartialStartLazy() {doTest();}
+
+  public void testVariableInsideStringPartialStartQQ() {doTest();}
+
+  public void testVariableInsideStringPartialStartQQLazy() {doTest();}
+
+  public void testVariableInsideStringPartialStartQX() {doTest();}
+
+  public void testVariableInsideStringPartialStartQXLazy() {doTest();}
+
+  public void testVariableLeftStringPartialEnd() {doTest();}
+
+  public void testVariableLeftStringPartialEndLazy() {doTest();}
+
+  public void testVariableLeftStringPartialEndLazyQQ() {doTest();}
+
+  public void testVariableLeftStringPartialEndLazyQX() {doTest();}
+
+  public void testVariableLeftStringPartialEndQQ() {doTest();}
+
+  public void testVariableLeftStringPartialEndQX() {doTest();}
+
+  public void testVariableLeftStringPartialMid() {doTest();}
+
+  public void testVariableLeftStringPartialMidLazy() {doTest();}
+
+  public void testVariableLeftStringPartialMidQQ() {doTest();}
+
+  public void testVariableLeftStringPartialMidQQLazy() {doTest();}
+
+  public void testVariableLeftStringPartialMidQX() {doTest();}
+
+  public void testVariableLeftStringPartialMidQXLazy() {doTest();}
+
+  public void testVariableLeftStringPartialStart() {doTest();}
+
+  public void testVariableLeftStringPartialStartLazy() {doTest();}
+
+  public void testVariableLeftStringPartialStartQQ() {doTest();}
+
+  public void testVariableLeftStringPartialStartQQLazy() {doTest();}
+
+  public void testVariableLeftStringPartialStartQX() {doTest();}
+
+  public void testVariableLeftStringPartialStartQXLazy() {doTest();}
+
+  public void testVariableRightStringPartialEnd() {doTest();}
+
+  public void testVariableRightStringPartialEndLazy() {doTest();}
+
+  public void testVariableRightStringPartialEndLazyQQ() {doTest();}
+
+  public void testVariableRightStringPartialEndLazyQX() {doTest();}
+
+  public void testVariableRightStringPartialEndQQ() {doTest();}
+
+  public void testVariableRightStringPartialEndQX() {doTest();}
+
+  public void testVariableRightStringPartialMid() {doTest();}
+
+  public void testVariableRightStringPartialMidLazy() {doTest();}
+
+  public void testVariableRightStringPartialMidQQ() {doTest();}
+
+  public void testVariableRightStringPartialMidQQLazy() {doTest();}
+
+  public void testVariableRightStringPartialMidQX() {doTest();}
+
+  public void testVariableRightStringPartialMidQXLazy() {doTest();}
+
+  public void testVariableRightStringPartialStart() {doTest();}
+
+  public void testVariableRightStringPartialStartLazy() {doTest();}
+
+  public void testVariableRightStringPartialStartQQ() {doTest();}
+
+  public void testVariableRightStringPartialStartQQLazy() {doTest();}
+
+  public void testVariableRightStringPartialStartQX() {doTest();}
+
+  public void testVariableRightStringPartialStartQXLazy() {doTest();}
+
   public void testAddMultiLong() {doTest();}
 
   public void testAddMultiLongWithWrap() {

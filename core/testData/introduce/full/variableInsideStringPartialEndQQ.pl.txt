@@ -1,0 +1,27 @@
+'something here b${variable}la';
+my $test_name<caret> = "re b${variable}la";
+"something he$test_name";
+`something he$test_name`;
+q /something here b${variable}la/;
+qq{something he$test_name};
+qx fsomething he${test_name}f;
+qw/something here b${variable}la/;
+something => "he$test_name";
+
+'re b${variable}la';
+"$test_name";
+`$test_name`;
+q /re b${variable}la/;
+qq{$test_name};
+qx f${test_name}f;
+qw/re b${variable}la/;
+something => "";
+
+'something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la ';
+"something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la ";
+`something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la `;
+q /something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+qq{something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la };
+qx fsomething he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la something he$test_name something here b${variable}la f;
+qw/something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+

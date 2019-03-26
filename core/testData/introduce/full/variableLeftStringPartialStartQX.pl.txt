@@ -1,0 +1,27 @@
+'${variable}something here bla';
+my $test_name<caret> = `${variable}something `;
+"${test_name}here bla";
+`${test_name}here bla`;
+q /${variable}something here bla/;
+qq{${test_name}here bla};
+qx f${test_name}here blaf;
+qw/${variable}something here bla/;
+something => "here bla";
+
+'something ';
+"something ";
+`something `;
+q /something /;
+qq {something };
+qx fsomething f;
+qw/something /;
+something => "";
+
+'${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ';
+"${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ";
+`${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla `;
+q /${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla /;
+qq{${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla };
+qx f${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla ${test_name}here bla ${variable}something here bla f;
+qw/${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla /;
+

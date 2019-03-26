@@ -1,0 +1,26 @@
+'${variable}something here bla';
+"${variable}something here bla";
+`${variable}something here bla`;
+q /${variable}something here bla/;
+qq {${variable}something here bla};
+qx f${variable}something here blaf;
+qw/${variable}something here bla/;
+something => "here bla";
+
+'something ';
+"something ";
+`something `;
+q /something /;
+qq {something };
+qx fsomething f;
+qw/something /;
+something => "";
+
+'${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ';
+"${var<selection>iable}something </selection>here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ";
+`${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla `;
+q /${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla /;
+qq {${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla };
+qx f${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla f;
+qw/${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla /;
+

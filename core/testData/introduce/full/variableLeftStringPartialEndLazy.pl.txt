@@ -1,0 +1,27 @@
+my $test_name<caret> = 'ble}re bla';
+'something he${varia' . $test_name;
+"something he${variable}re bla";
+`something he${variable}re bla`;
+'something he${varia' . $test_name;
+qq {something he${variable}re bla};
+qx fsomething he${variable}re blaf;
+qw/something he${variable}re bla/;
+something => "he${variable}re bla";
+
+'re bla';
+"re bla";
+`re bla`;
+q /re bla/;
+qq {re bla};
+qx fre blaf;
+qw/re bla/;
+something => "";
+
+'something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name;
+"something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla ";
+`something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla `;
+'something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' something he${varia' . $test_name . ' ';
+qq {something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla };
+qx fsomething he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla f;
+qw/something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
+

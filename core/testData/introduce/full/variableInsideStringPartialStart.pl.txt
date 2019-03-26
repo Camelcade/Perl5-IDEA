@@ -1,0 +1,27 @@
+my $test_name<caret> = 'som${variable}ething ';
+$test_name . 'here bla';
+"som${variable}ething here bla";
+`som${variable}ething here bla`;
+$test_name . 'here bla';
+qq {som${variable}ething here bla};
+qx fsom${variable}ething here blaf;
+qw/som${variable}ething here bla/;
+something => "here bla";
+
+$test_name;
+"som${variable}ething ";
+`som${variable}ething `;
+$test_name;
+qq {som${variable}ething };
+qx fsom${variable}ething f;
+qw/som${variable}ething /;
+something => "";
+
+$test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ';
+"som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla ";
+`som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla `;
+$test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ' . $test_name . 'here bla ';
+qq {som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla };
+qx fsom${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla f;
+qw/som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;
+
