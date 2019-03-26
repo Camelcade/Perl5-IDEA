@@ -1,4 +1,4 @@
-my $<caret>string_list_item = 'second';
-('zero', 'first', $string_list_item, 'third', $string_list_item);
-zero => ('first', $string_list_item, q/third/, $string_list_item);
-('zero', 'first', $string_list_item, 'third', $string_list_item);
+my $test_name<caret> = 'second';
+('zero', 'first', $test_name, 'third', $test_name);
+zero => ('first', $test_name, q/third/, $test_name);
+('zero', 'first', $test_name, 'third', $test_name);

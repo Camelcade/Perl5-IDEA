@@ -1,5 +1,5 @@
-my %<caret>hash = %{$var};
-%hash;
-%hash;
-%hash;
-%hash;
+my %test_name<caret> = %{$var};
+%test_name;
+%test_name;
+%test_name;
+%test_name;

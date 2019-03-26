@@ -1,0 +1,19 @@
+"so<selection>me tex</selection>t";
+
+"some tex t some text some text some text some text some text some text some text some text some text some text some text ";
+"some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text ";
+'some tex t some text some text some text some text some text some text some text some text some text some text some text ';
+'some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text ';
+`some tex t some text some text some text some text some text some text some text some text some text some text some text `;
+`some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text `;
+
+qq /some tex t some text some text some text some text some text some text some text some text some text some text some text /;
+qq /some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text /;
+q /some tex t 'some text some text some text some text some text some text some text some text some text some text some text /;
+q /some text 'some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text /;
+qx /some tex t some text some text some text some text some text some text some text some text some text some text some text /;
+qx /some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text /;
+
+qw /some tex t some text some text some text some text some text some text some text some text some text some text some text /;
+qw /some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text /;
+

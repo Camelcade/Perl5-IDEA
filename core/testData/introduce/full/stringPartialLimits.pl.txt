@@ -1,0 +1,20 @@
+my $test_name<caret> = "me tex";
+"so${test_name}t";
+
+"so$test_name t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t ";
+"so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t ";
+'so' . $test_name . ' t so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't ';
+'so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't ';
+`so$test_name t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t `;
+`so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t `;
+
+qq/so$test_name t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t /;
+qq/so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t /;
+'so' . $test_name . q/ t 'so/ . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't ';
+'so' . $test_name . q/t 'so/ . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't so' . $test_name . 't ';
+qx/so$test_name t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t /;
+qx/so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t so${test_name}t /;
+
+qw /some tex t some text some text some text some text some text some text some text some text some text some text some text /;
+qw /some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text /;
+

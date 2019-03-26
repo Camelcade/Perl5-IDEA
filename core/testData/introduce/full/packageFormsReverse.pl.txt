@@ -1,5 +1,5 @@
 package Foo::Bar;
 
-my $<caret>scalar = 'Foo::Bar';
-$scalar->method;
-$scalar->method;
+my $test_name<caret> = 'Foo::Bar';
+$test_name->method;
+$test_name->method;

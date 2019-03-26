@@ -1,18 +1,18 @@
 package Foo::Bar;
 
-my $<caret>scalar = qq"Foo::Bar::";
-$scalar->method;
-$scalar->method;
-$scalar->method;
-$scalar->method;
-$scalar->method;
-$scalar->method;
+my $test_name<caret> = qq"Foo::Bar::";
+$test_name->method;
+$test_name->method;
+$test_name->method;
+$test_name->method;
+$test_name->method;
+$test_name->method;
 `Foo::Bar::`->method;
 `Foo::Bar`->method;
 
-$scalar->method;
-$scalar->method;
-$scalar->method;
-$scalar->method;
+$test_name->method;
+$test_name->method;
+$test_name->method;
+$test_name->method;
 qx`Foo::Bar::`->method;
 qx`Foo::Bar`->method;

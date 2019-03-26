@@ -1,2 +1,2 @@
-my @<caret>array = ($var, 1);
-(@array,2,3);
+my @test_name<caret> = ($var, 1);
+(@test_name,2,3);

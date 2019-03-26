@@ -7,12 +7,12 @@ Foo::Bar::->method;
 "Foo::Bar::"->method;
 "Foo::Bar"->method;
 `Foo::Bar::`->method;
-my $<caret>scalar = qx`Foo::Bar`;
-$scalar->method;
+my $test_name<caret> = qx`Foo::Bar`;
+$test_name->method;
 
 q fFoo::Bar::f->method;
 q fFoo::Barf->method;
 qq"Foo::Bar::"->method;
 qq"Foo::Bar"->method;
 qx`Foo::Bar::`->method;
-$scalar->method;
+$test_name->method;

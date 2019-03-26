@@ -1,10 +1,10 @@
 sub first{
-    my @<caret>array = (1, 2, 3, 4, 5);
-    my @something = (@array);
+    my @test_name<caret> = (1, 2, 3, 4, 5);
+    my @something = (@test_name);
     if( $a ){
-        my @otherthing = (@array);
+        my @otherthing = (@test_name);
         if( $b){
-            somesub(@array);
+            somesub(@test_name);
         }
     }
 }

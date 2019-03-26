@@ -1,2 +1,2 @@
-my $<caret>scalar = Foo::Bar->method;
-$scalar;
+my $test_name<caret> = Foo::Bar->method;
+$test_name;

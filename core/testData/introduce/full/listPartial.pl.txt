@@ -1,10 +1,10 @@
-my @<caret>array = ("test2" => "test3");
-('test1', @array, 'test4');
+my @test_name<caret> = ("test2" => "test3");
+('test1', @test_name, 'test4');
 qw/test1 test2 test4/;
-@array;
-('test1', @array);
-(@array, 'test4');
-test1 => @array => 'test4';
-'test1' => @array => "test4";
+@test_name;
+('test1', @test_name);
+(@test_name, 'test4');
+test1 => @test_name => 'test4';
+'test1' => @test_name => "test4";
 'test1' => "te${s}t2" => "test3" => "test4";
 'test1' => `test2` => "test3" => "test4";

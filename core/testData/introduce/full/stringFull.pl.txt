@@ -1,5 +1,5 @@
-my $<caret>scalar = "someline";
-if( $scalar eq $a){
-    $b = $scalar ."otherline";
-    say $scalar;
+my $test_name<caret> = "someline";
+if( $test_name eq $a){
+    $b = $test_name ."otherline";
+    say $test_name;
 }

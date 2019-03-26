@@ -1509,7 +1509,27 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestIntroduceVariable() {
     initWithFileSmartWithoutErrors();
-    new PerlIntroduceVariableHandler().invoke(getProject(), getEditor(), getFile(), null);
+    Editor editor = getEditor();
+
+    TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
+    if (editor instanceof EditorWindow) {
+      editor = ((EditorWindow)editor).getDelegate();
+    }
+    new PerlIntroduceVariableHandler().invoke(getProject(), editor, getFile(), null);
+    assertNoErrorElements();
+
+    TemplateState state = TemplateManagerImpl.getTemplateState(editor);
+    assert state != null;
+    final TextRange range = state.getCurrentVariableRange();
+    assert range != null;
+    final Editor finalEditor = editor;
+    WriteCommandAction.writeCommandAction(getProject())
+      .run(() -> finalEditor.getDocument().replaceString(range.getStartOffset(), range.getEndOffset(), "test_name"));
+
+    state = TemplateManagerImpl.getTemplateState(editor);
+    assert state != null;
+    state.gotoEnd(false);
+
     assertNoErrorElements();
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }

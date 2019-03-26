@@ -1,6 +1,6 @@
-my @<caret>array = ("very", long => 'list');
-my @list = (@array, @array);
+my @test_name<caret> = ("very", long => 'list');
+my @list = (@test_name, @test_name);
 
-('this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array, 'this', 'is', 'a', @array);
+('this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name);
 
-('this', 'is', 'a', @array, 'this', 'is', 'a', @array);
+('this', 'is', 'a', @test_name, 'this', 'is', 'a', @test_name);

@@ -1,6 +1,6 @@
-my @<caret>array = ("test", test => 'test');
-my @test = (@array, @array);
+my @test_name<caret> = ("test", test => 'test');
+my @test = (@test_name, @test_name);
 
-(@array, @array, @array, @array, @array, @array, @array, @array, @array, @array, @array, @array, @array, @array, @array, @array);
+(@test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name, @test_name);
 
-(@array, @array, @array, @array);
+(@test_name, @test_name, @test_name, @test_name);

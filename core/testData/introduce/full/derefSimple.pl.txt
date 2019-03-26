@@ -1,7 +1,7 @@
-my $<caret>scalar = $var->some();
-$scalar;
-$scalar;
-$scalar;
+my $test_name<caret> = $var->some();
+$test_name;
+$test_name;
+$test_name;
 
-${$scalar};
+${$test_name};
 

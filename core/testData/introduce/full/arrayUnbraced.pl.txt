@@ -1,5 +1,5 @@
-my @<caret>array = @var;
-@array;
-@array;
-@array;
-@array;
+my @test_name<caret> = @var;
+@test_name;
+@test_name;
+@test_name;
+@test_name;

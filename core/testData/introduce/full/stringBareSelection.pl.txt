@@ -1,4 +1,4 @@
-my $<caret>scalar = 'something';
-$scalar => 42;
-say $scalar;
-($scalar, 'else');
+my $test_name<caret> = 'something';
+$test_name => 42;
+say $test_name;
+($test_name, 'else');

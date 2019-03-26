@@ -1,31 +1,31 @@
-my $<caret>scalar = qr/something${var}else/;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
+my $test_name<caret> = qr/something${var}else/;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
 
-$scalar;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
+$test_name;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
 
-$scalar;
-$scalar;
+$test_name;
+$test_name;
 
-$scalar;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
+$test_name;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
 
-$scalar;
-$a =~ $scalar;
-$scalar;
-$a =~ $scalar;
+$test_name;
+$a =~ $test_name;
+$test_name;
+$a =~ $test_name;
 
 
 /something${var}else/ix;
@@ -42,7 +42,7 @@ $a =~ m/som ething${var}else/;
 qr/somethi ng${var}else/;
 $a =~ qr/some thing${var}else/;
 
-s/$scalar/asdf/x;
-$a =~ s <$scalar>//xx;
-s#$scalar##xx;
+s/$test_name/asdf/x;
+$a =~ s <$test_name>//xx;
+s#$test_name##xx;
 

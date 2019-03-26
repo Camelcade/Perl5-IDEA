@@ -1,10 +1,10 @@
-my $<caret>string_list_item = '';
-('test1', $string_list_item, 'test4', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list');
+my $test_name<caret> = '';
+('test1', $test_name, 'test4', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list', 'this', 'is', 'a', 'very', 'long', 'list');
 qw/test1 test2 test4/;
-$string_list_item;
-('test1', $string_list_item);
-($string_list_item, 'test4');
-test1 => $string_list_item => 'test4';
-'test1' => $string_list_item => "test4";
+$test_name;
+('test1', $test_name);
+($test_name, 'test4');
+test1 => $test_name => 'test4';
+'test1' => $test_name => "test4";
 'test1' => "te${s}t2" => "test3" => "test4";
 'test1' => `test2` => "test3" => "test4";

@@ -1,5 +1,5 @@
-my $<caret>scalar = &var;
-$scalar;
-$scalar;
-$scalar;
-$scalar;
+my $test_name<caret> = &var;
+$test_name;
+$test_name;
+$test_name;
+$test_name;

@@ -1,8 +1,8 @@
 $var-> sub1;
-my $<caret>scalar = $var->sub1->sub2;
-$scalar;
-$scalar->sub3;
-$scalar->sub3;
-$scalar;
+my $test_name<caret> = $var->sub1->sub2;
+$test_name;
+$test_name->sub3;
+$test_name->sub3;
+$test_name;
 $var-> sub1;
 $var;

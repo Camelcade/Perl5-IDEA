@@ -1,2 +1,2 @@
-my $<caret>scalar = $var;
-($scalar,1,2,3);
+my $test_name<caret> = $var;
+($test_name,1,2,3);

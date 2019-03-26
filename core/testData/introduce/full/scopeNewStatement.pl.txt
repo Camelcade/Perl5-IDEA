@@ -1,5 +1,5 @@
-my $<caret>scalar = 'some text';
-my $var = $scalar;
-say $scalar;
-return $scalar . $scalar;
+my $test_name<caret> = 'some text';
+my $var = $test_name;
+say $test_name;
+return $test_name . $test_name;
 

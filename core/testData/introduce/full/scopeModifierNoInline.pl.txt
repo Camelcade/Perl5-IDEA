@@ -1,5 +1,5 @@
-my $<caret>scalar = 'some text';
-$scalar if 42;
-say $scalar;
-return $scalar . $scalar;
+my $test_name<caret> = 'some text';
+$test_name if 42;
+say $test_name;
+return $test_name . $test_name;
 

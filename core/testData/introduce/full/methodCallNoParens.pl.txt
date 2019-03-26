@@ -1,4 +1,4 @@
-my $<caret>scalar = somemethod;
-$scalar;
+my $test_name<caret> = somemethod;
+$test_name;
 somemethod 1,2,3;
 somemethod(1,2,3);

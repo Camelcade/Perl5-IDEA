@@ -1,4 +1,4 @@
-my $<caret>scalar = $a + $b;
-$scalar + $c;
-$scalar + $scalar + $scalar + $scalar + $scalar + $scalar + $scalar + $scalar;
-$scalar + $c + $scalar + $c + $scalar + $c + $scalar + $c + $scalar + $c + $scalar + $c;
+my $test_name<caret> = $a + $b;
+$test_name + $c;
+$test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name;
+$test_name + $c + $test_name + $c + $test_name + $c + $test_name + $c + $test_name + $c + $test_name + $c;

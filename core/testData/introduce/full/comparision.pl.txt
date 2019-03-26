@@ -1,6 +1,6 @@
-my $<caret>scalar = $a > $b;
-if( $scalar && $b < $a){
-    if($scalar){
-        say 'hi' if $scalar;
+my $test_name<caret> = $a > $b;
+if( $test_name && $b < $a){
+    if($test_name){
+        say 'hi' if $test_name;
     }
 }

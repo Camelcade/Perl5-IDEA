@@ -1,3 +1,3 @@
-my $<caret>scalar = $a + $b;
-$scalar;
+my $test_name<caret> = $a + $b;
+$test_name;
 $a - $b;

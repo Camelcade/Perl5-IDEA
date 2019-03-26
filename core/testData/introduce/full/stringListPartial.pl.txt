@@ -1,2 +1,2 @@
-my @<caret>string_list = qw/second third/;
-('fi\'rst', @string_list);
+my @test_name<caret> = qw/second third/;
+('fi\'rst', @test_name);

@@ -1,2 +1,2 @@
-my $<caret>scalar = "second";
-first => ($scalar, 'third');
+my $test_name<caret> = "second";
+first => ($test_name, 'third');

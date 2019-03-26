@@ -1,5 +1,5 @@
-my $<caret>scalar = $var->{something}->[1]->{otherthing};
-$scalar->tail;
-$scalar->othertail;
-$scalar->blah();
-$scalar->[0];
+my $test_name<caret> = $var->{something}->[1]->{otherthing};
+$test_name->tail;
+$test_name->othertail;
+$test_name->blah();
+$test_name->[0];

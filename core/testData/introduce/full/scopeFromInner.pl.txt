@@ -1,7 +1,7 @@
-my $<caret>scalar = 'some text';
+my $test_name<caret> = 'some text';
 if($a){
-my $var = $scalar;
+my $var = $test_name;
 }
-say $scalar;
-return $scalar . $scalar;
+say $test_name;
+return $test_name . $test_name;
 
