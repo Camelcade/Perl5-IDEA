@@ -29,6 +29,9 @@ import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
@@ -109,6 +112,25 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
       return null;
     }
     return Objects.requireNonNull(terminatorElement.getReference()).resolve();
+  }
+
+  /**
+   * @return all children, including leaf ones
+   */
+  @NotNull
+  public List<PsiElement> getAllChildrenList() {
+    PsiElement run = getFirstChild();
+
+    if (run == null) {
+      return Collections.emptyList();
+    }
+
+    List<PsiElement> result = new ArrayList<>();
+    while (run != null) {
+      result.add(run);
+      run = run.getNextSibling();
+    }
+    return result;
   }
 
   /**
