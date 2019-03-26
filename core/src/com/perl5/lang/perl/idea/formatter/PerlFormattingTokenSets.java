@@ -290,19 +290,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_RETURN
   );
 
-  TokenSet QUOTE_LIKE_OPENERS = TokenSet.create(
-    RESERVED_M,
-    RESERVED_QR,
-    RESERVED_S,
-    RESERVED_TR,
-    RESERVED_Y,
-    RESERVED_Q,
-    RESERVED_QQ,
-    RESERVED_QX,
-    RESERVED_QW,
-    OPERATOR_HEREDOC
-  );
-
   TokenSet VARIABLE_LEFT_BRACES = TokenSet.create(
     LEFT_BRACE_SCALAR,
     LEFT_BRACE_ARRAY,

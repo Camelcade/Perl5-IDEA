@@ -172,7 +172,7 @@ public class PerlSpacingBuilderFactory {
       .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
       .after(MOOSE_RESERVED_TOKENSET).spaces(1)
 
-      .after(QUOTE_LIKE_OPENERS).spaces(0)
+      .after(OPERATOR_HEREDOC).spaces(0)
 
       .betweenInside(PACKAGE, SEMICOLON, USE_STATEMENT).spaces(0)
       .betweenInside(VERSION_ELEMENT, SEMICOLON, USE_STATEMENT).spaces(0)

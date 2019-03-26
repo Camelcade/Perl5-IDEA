@@ -53,6 +53,7 @@ import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.ALIGN_IN_STATEMENT;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.ALIGN_LINES;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.ALL_QUOTE_OPENERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STATEMENTS;
 
 public class PerlFormattingContext implements PerlFormattingTokenSets {
@@ -247,6 +248,15 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       IElementType child1Type = child1Node.getElementType();
       ASTNode child2Node = ((ASTBlock)child2).getNode();
       IElementType child2Type = child2Node.getElementType();
+
+      if (ALL_QUOTE_OPENERS.contains(child1Type)) {
+        CharSequence openerChars = child2Node.getChars();
+        int spaces = 0;
+        if (openerChars.length() > 0 && Character.isUnicodeIdentifierPart(openerChars.charAt(0))) {
+          spaces = 1;
+        }
+        return Spacing.createSpacing(spaces, spaces, 0, true, 1);
+      }
 
       if (parentNodeType == PARENTHESISED_EXPR &&
           (child1Type == LEFT_PAREN || child2Type == RIGHT_PAREN) &&

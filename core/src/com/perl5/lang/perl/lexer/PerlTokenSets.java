@@ -27,6 +27,24 @@ import static com.perl5.lang.perl.parser.PerlParserUtil.CLOSE_QUOTES;
  * Created by hurricup on 23.10.2016.
  */
 public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
+  /**
+   * Quote openers with three or four quotes
+   */
+  TokenSet COMPLEX_QUOTE_OPENERS = TokenSet.create(
+    RESERVED_S,
+    RESERVED_TR,
+    RESERVED_Y
+  );
+  TokenSet SIMPLE_QUOTE_OPENERS = TokenSet.create(
+    RESERVED_Q,
+    RESERVED_QQ,
+    RESERVED_QX,
+    RESERVED_QW,
+    RESERVED_QR,
+    RESERVED_M
+  );
+  TokenSet ALL_QUOTE_OPENERS = TokenSet.orSet(SIMPLE_QUOTE_OPENERS, COMPLEX_QUOTE_OPENERS);
+
   TokenSet OPERATORS_TOKENSET = TokenSet.create(
     OPERATOR_CMP_NUMERIC,
     OPERATOR_LT_NUMERIC,
@@ -116,7 +134,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     OPERATOR_SMARTMATCH
   );
 
-  TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.create(
+  TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.orSet(
+    ALL_QUOTE_OPENERS,
+    TokenSet.create(
     RESERVED_MY,
     RESERVED_OUR,
     RESERVED_STATE,
@@ -148,16 +168,6 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_RETURN,
     RESERVED_EXIT,
 
-    RESERVED_Y,
-    RESERVED_TR,
-    RESERVED_Q,
-    RESERVED_S,
-    RESERVED_M,
-    RESERVED_QW,
-    RESERVED_QQ,
-    RESERVED_QR,
-    RESERVED_QX,
-
     RESERVED_IF,
     RESERVED_UNTIL,
     RESERVED_UNLESS,
@@ -165,7 +175,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_FOREACH,
     RESERVED_WHEN,
     RESERVED_WHILE
-  );
+    ));
 
   TokenSet TRY_CATCH_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_TRY,
@@ -258,22 +268,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   );
 
   TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
-  /**
-   * Quote openers with three or four quotes
-   */
-  TokenSet COMPLEX_QUOTE_OPENERS = TokenSet.create(
-    RESERVED_S,
-    RESERVED_TR,
-    RESERVED_Y
-  );
-  TokenSet SIMPLE_QUOTE_OPENERS = TokenSet.create(
-    RESERVED_Q,
-    RESERVED_QQ,
-    RESERVED_QX,
-    RESERVED_QW,
-    RESERVED_QR,
-    RESERVED_M
-  );
+
   TokenSet LOOP_CONTROL_KEYWORDS = TokenSet.create(
     RESERVED_NEXT, RESERVED_LAST, RESERVED_REDO
   );

@@ -1,0 +1,6 @@
+$a =~ qw fsomet hing${var}elsef;
+$a =~ qr fsomet hing${var}elsefxx;
+$a =~ m fsomet hing${var}elsefxx;
+$a =~ s fsomet hing${var}elseffxx;
+$a =~ tr fsomet hing${var}elseffc;
+$a =~ y fsomet hing${var}elseffc;
