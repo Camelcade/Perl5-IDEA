@@ -19,23 +19,24 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PerlStringList;
-import com.perl5.lang.perl.psi.PsiPerlStringBare;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
+import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlStringBareImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_Q;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
 /**
@@ -173,7 +174,116 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
     if (targetPlace instanceof PsiPerlStringBare) {
       return createBarewordQuotedText(targetPlace.getText());
     }
-    return super.createTargetExpressionText(target);
+    else if (target.isFullRange()) {
+      return super.createTargetExpressionText(target);
+    }
+    assert targetPlace instanceof PerlString : "Got " + targetPlace;
+    char openQuote = ((PerlString)targetPlace).getOpenQuote();
+    if (openQuote == 0) {
+      LOG.error("Unable to find an open quote in " + target);
+      return reportEmptyPlace();
+    }
+
+    PsiElement firstChild = targetPlace.getFirstChild();
+    String prefix = "";
+    if (PerlTokenSets.SIMPLE_QUOTE_OPENERS.contains(PsiUtilCore.getElementType(firstChild))) {
+      prefix = firstChild.getText() + " ";
+    }
+
+    return prefix + openQuote +
+           target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars()).toString() +
+           PerlLexer.getQuoteCloseChar(openQuote);
+  }
+
+  @NotNull
+  @Override
+  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+    if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
+      return super.replaceTarget(occurrences, replacement);
+    }
+
+    CharSequence replacementChars = replacement.getNode().getChars();
+    assert replacement instanceof PerlVariable : "Got " + replacement;
+    assert replacement.getTextLength() > 1 : "Got " + replacementChars;
+    String replacementText = replacementChars.charAt(0) + "{" + replacementChars.subSequence(1, replacementChars.length()) + "}";
+
+    PsiElement psiElement = Objects.requireNonNull(occurrences.get(0).getPlace());
+    Set<TextRange> replacementRanges = new HashSet<>();
+
+    PsiElement replacedString = psiElement instanceof PsiPerlStringSq ?
+                                replaceWithConcatenation(occurrences, replacementText, (PsiPerlStringSq)psiElement, replacementRanges) :
+                                replaceWithInterpolation(occurrences, replacementText, psiElement, replacementRanges);
+    return ContainerUtil.filter(replacedString.getChildren(), it -> replacementRanges.contains(it.getTextRangeInParent()));
+  }
+
+  private PsiElement replaceWithInterpolation(@NotNull List<PerlIntroduceTarget> occurrences,
+                                              @NotNull String replacementText,
+                                              @NotNull PsiElement elementToReplace,
+                                              @NotNull Set<TextRange> replacementRanges) {
+    CharSequence sourceText = elementToReplace.getNode().getChars();
+
+    StringBuilder result = new StringBuilder();
+    int lastOffset = 0;
+    for (PerlIntroduceTarget occurrence : occurrences) {
+      TextRange rangeInElement = occurrence.getTextRangeInElement();
+      int rangeStartOffset = rangeInElement.getStartOffset();
+      if (rangeStartOffset > lastOffset) {
+        result.append(sourceText.subSequence(lastOffset, rangeStartOffset));
+      }
+
+      int replacementStartOffset = result.length();
+      result.append(replacementText);
+      replacementRanges.add(TextRange.create(replacementStartOffset, result.length()));
+      lastOffset = rangeInElement.getEndOffset();
+    }
+    if (lastOffset < sourceText.length()) {
+      result.append(sourceText.subSequence(lastOffset, sourceText.length()));
+    }
+
+    PerlString newString = PerlElementFactory.createString(elementToReplace.getProject(), result.toString());
+    return elementToReplace.replace(newString);
+  }
+
+  private PsiElement replaceWithConcatenation(@NotNull List<PerlIntroduceTarget> occurrences,
+                                              @NotNull String replacementText,
+                                              @NotNull PsiPerlStringSq elementToReplace,
+                                              @NotNull Set<TextRange> replacementRanges) {
+    TextRange valueTextRange = ElementManipulators.getValueTextRange(elementToReplace);
+    CharSequence sourceText = valueTextRange.subSequence(elementToReplace.getNode().getChars());
+
+    String prefix = "'";
+    char suffix = '\'';
+    PsiElement firstChild = elementToReplace.getFirstChild();
+    if (PsiUtilCore.getElementType(firstChild) == RESERVED_Q) {
+      char openQuote = elementToReplace.getOpenQuote();
+      if (openQuote == 0) {
+        LOG.error("Can't find open quote in " + elementToReplace.getText());
+        return elementToReplace;
+      }
+      prefix = "q " + openQuote;
+      suffix = PerlBaseLexer.getQuoteCloseChar(openQuote);
+    }
+
+    StringBuilder result = new StringBuilder();
+    int lastOffset = 0;
+    for (PerlIntroduceTarget occurrence : occurrences) {
+      TextRange rangeInElement = occurrence.getTextRangeInElement();
+      int rangeStartOffset = rangeInElement.getStartOffset();
+      if (rangeStartOffset > lastOffset) {
+        result.append(sourceText.subSequence(lastOffset, rangeStartOffset));
+      }
+
+      int replacementStartOffset = result.length();
+      result.append(replacementText);
+      replacementRanges.add(TextRange.create(replacementStartOffset, result.length()));
+      lastOffset = rangeInElement.getEndOffset();
+    }
+    if (lastOffset < sourceText.length()) {
+      result.append(sourceText.subSequence(lastOffset, sourceText.length()));
+    }
+
+    PerlString newString = PerlElementFactory.createString(elementToReplace.getProject(), result.toString());
+    return elementToReplace.replace(newString);
   }
 
   @NotNull

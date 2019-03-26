@@ -42,6 +42,18 @@ public interface PerlQuoted extends PsiElement {
   }
 
   /**
+   * @return opening quote character if any or 0 if not found.
+   */
+  default char getOpenQuote() {
+    PsiElement openQuoteElement = getOpenQuoteElement();
+    if (openQuoteElement == null) {
+      return 0;
+    }
+    CharSequence quoteChars = openQuoteElement.getNode().getChars();
+    return quoteChars.length() == 1 ? quoteChars.charAt(0) : 0;
+  }
+
+  /**
    * @return close quote element if any
    */
   @Nullable

@@ -170,7 +170,7 @@ public class PerlElementFactory {
   public static PerlString createString(Project project, String code) {
     PerlFileImpl file = createFile(project, code + ";");
     PerlString string = PsiTreeUtil.findChildOfType(file, PerlString.class);
-    assert string != null : "While creating bare string from: " + code;
+    assert string != null : "While creating string from: " + code;
     return string;
   }
 
