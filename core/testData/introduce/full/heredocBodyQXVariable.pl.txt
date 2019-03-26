@@ -1,5 +1,5 @@
 my $test_name<caret> = "test$variable";
 say <<`EOM`;
-test$variable
+$test_name
 EOM
 

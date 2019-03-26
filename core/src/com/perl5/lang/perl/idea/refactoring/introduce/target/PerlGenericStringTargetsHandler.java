@@ -27,7 +27,6 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
-import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -190,10 +189,10 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
   }
 
   @NotNull
-  protected PsiElement replaceWithInterpolation(@NotNull List<PerlIntroduceTarget> occurrences,
-                                                @NotNull CharSequence replacementText,
-                                                @NotNull PsiElement elementToReplace,
-                                                @NotNull Set<TextRange> replacementRanges) {
+  PsiElement replaceWithInterpolation(@NotNull List<PerlIntroduceTarget> occurrences,
+                                      @NotNull CharSequence replacementText,
+                                      @NotNull PsiElement elementToReplace,
+                                      @NotNull Set<TextRange> replacementRanges) {
     assert replacementText.length() > 1 : "Got " + replacementText;
     CharSequence safeReplacementText = braceVariableText(replacementText);
 
@@ -222,9 +221,12 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
       result.append(sourceText.subSequence(lastOffset, sourceText.length()));
     }
 
-    PerlString newString = PerlElementFactory.createString(elementToReplace.getProject(), result.toString());
-    return elementToReplace.replace(newString);
+    PsiElement replacementElement = createReplacementFromText(elementToReplace, result.toString());
+    return elementToReplace.replace(replacementElement);
   }
+
+  @NotNull
+  abstract PsiElement createReplacementFromText(@NotNull PsiElement originalElement, @NotNull String text);
 
   @NotNull
   static CharSequence braceVariableText(@NotNull CharSequence unbracedVariableText) {

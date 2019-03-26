@@ -17,15 +17,21 @@
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
   static final PerlHeredocTargetsHandler INSTANCE = new PerlHeredocTargetsHandler();
@@ -78,6 +84,19 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
   @NotNull
   @Override
   protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
-    return Collections.emptyList();
+    CharSequence replacementChars = replacement.getNode().getChars();
+    assert replacement instanceof PerlVariable : "Got " + replacement;
+
+    PsiElement psiElement = Objects.requireNonNull(occurrences.get(0).getPlace());
+    Set<TextRange> replacementRanges = new HashSet<>();
+
+    PsiElement replacedString = replaceWithInterpolation(occurrences, replacementChars, psiElement, replacementRanges);
+    return ContainerUtil.filter(replacedString.getChildren(), it -> replacementRanges.contains(it.getTextRangeInParent()));
+  }
+
+  @NotNull
+  @Override
+  PsiElement createReplacementFromText(@NotNull PsiElement originalElement, @NotNull String text) {
+    return PerlElementFactory.createHeredocBodyReplacement((PerlHeredocElementImpl)originalElement, text);
   }
 }

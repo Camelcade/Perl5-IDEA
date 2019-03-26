@@ -172,4 +172,10 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
            Collections.singletonList(PerlIntroduceTarget.create(elementParent, element, element)) :
            Collections.singletonList(PerlIntroduceTarget.create(element));
   }
+
+  @NotNull
+  @Override
+  PsiElement createReplacementFromText(@NotNull PsiElement originalElement, @NotNull String text) {
+    return PerlElementFactory.createString(originalElement.getProject(), text);
+  }
 }

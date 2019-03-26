@@ -1,10 +1,10 @@
 my $test_name<caret> = "$variable bl";
 say <<"EOM";
-test$variable blabla
+test${test_name}abla
 EOM
 
 say <<EOM;
-other test$variable blabla
+other test${test_name}abla
 EOM
 
 say <<'EOM';
@@ -12,6 +12,6 @@ other test$variable blabla
 EOM
 
 say <<`EOM`;
-test$variable blabla
+test${test_name}abla
 EOM
 
