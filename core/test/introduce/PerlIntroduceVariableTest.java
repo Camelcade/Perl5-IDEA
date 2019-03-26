@@ -24,6 +24,14 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testScalarBraced() {doTest();}
+
+  public void testScalarDerefBraced() {doTest();}
+
+  public void testScalarDerefUnbraced() {doTest();}
+
+  public void testScalarUnbraced() {doTest();}
+
   public void testRegexMatchEmpty() {doTest();}
 
   public void testRegexMatchExplicit() {doTest();}

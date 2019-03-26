@@ -1,0 +1,4 @@
+$var = "some ${somemethod(1,2,3);\othermethod(4,5,6)}";
+$var = "some ${somemethod(1,2,3);\othermethod(4,5,6)}";
+$var = <selection>"some ${somemethod(1,2,3);\othermethod(4,5,6);}"</selection>;
+$var = "some ${somemethod(1,2,3);\othermethod(4,5,6)}";
