@@ -24,6 +24,22 @@ public class PerlIntroduceVariableFromCaretTargetsTest extends PerlLightTestCase
     return "testData/introduce/targets/caret";
   }
 
+  public void testHeredocBodyQQVariableMulti() {doTest();}
+
+  public void testHeredocBody() {doTest();}
+
+  public void testHeredocBodyQQ() {doTest();}
+
+  public void testHeredocBodyQQVariable() {doTest();}
+
+  public void testHeredocBodyQQVariableNested() {doTest();}
+
+  public void testHeredocBodyQQVariableUnclosed() {doTest(false);}
+
+  public void testHeredocBodyQX() {doTest();}
+
+  public void testHeredocBodyQXVariable() {doTest();}
+
   public void testHereDocOpener() {doTest();}
 
   public void testHereDocOpenerInSequence() {doTest();}

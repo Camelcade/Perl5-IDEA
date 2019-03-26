@@ -1,0 +1,16 @@
+say <<"EOM";
+test$v<selection>ariable bl</selection>abla
+EOM
+
+say <<EOM;
+other test$variable blabla
+EOM
+
+say <<'EOM';
+other test$variable blabla
+EOM
+
+say <<`EOM`;
+test$variable blabla
+EOM
+

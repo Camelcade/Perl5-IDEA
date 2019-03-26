@@ -1,0 +1,4 @@
+say <<"EOM";
+test$vari<caret>able
+EOM
+

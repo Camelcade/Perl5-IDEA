@@ -1,4 +1,4 @@
 say <<`EOM`;
-test$varia<caret>ble
+test$v<selection>aria</selection>ble
 EOM
 

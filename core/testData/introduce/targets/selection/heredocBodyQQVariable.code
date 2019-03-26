@@ -1,4 +1,4 @@
 say <<"EOM";
-test$vari<caret>able
+test$v<selection>ari</selection>able
 EOM
 

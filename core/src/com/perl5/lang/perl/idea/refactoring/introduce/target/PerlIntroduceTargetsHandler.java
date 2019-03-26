@@ -322,13 +322,15 @@ public abstract class PerlIntroduceTargetsHandler {
     if (startElement == null || endElement == null) {
       return Collections.emptyList();
     }
-    PsiElement commonParent = PsiTreeUtil.findCommonParent(startElement, endElement);
-    PsiElement wrappingExpression = PsiTreeUtil.getParentOfType(commonParent, PsiPerlExpr.class, false);
+    PsiElement wrappingExpression = PsiTreeUtil.findCommonParent(startElement, endElement);
+    if (!(wrappingExpression instanceof PsiPerlExpr) && !(wrappingExpression instanceof PerlHeredocElementImpl)) {
+      wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, PerlHeredocElementImpl.class);
+    }
     while (wrappingExpression != null) {
       if (isTargetableElement(wrappingExpression)) {
         break;
       }
-      wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, true);
+      wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, PerlHeredocElementImpl.class);
     }
     if (wrappingExpression == null) {
       return Collections.emptyList();

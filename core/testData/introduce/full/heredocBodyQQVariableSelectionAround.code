@@ -1,0 +1,16 @@
+say <<"EOM";
+te<selection>st$variable bl</selection>abla
+EOM
+
+say <<EOM;
+other test$variable blabla
+EOM
+
+say <<'EOM';
+other test$variable blabla
+EOM
+
+say <<`EOM`;
+test$variable blabla
+EOM
+

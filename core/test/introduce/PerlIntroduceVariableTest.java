@@ -36,6 +36,14 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
 
   public void testHeredocBodyQQVariableNested() {doTest();}
 
+  public void testHeredocBodyQQVariableSelection() {doTest();}
+
+  public void testHeredocBodyQQVariableSelectionAfter() {doTest();}
+
+  public void testHeredocBodyQQVariableSelectionAround() {doTest();}
+
+  public void testHeredocBodyQQVariableSelectionBefore() {doTest();}
+
   public void testHeredocBodyQXVariable() {doTest();}
 
   public void testVariableInsideStringPartialEnd() {doTest();}

@@ -1,0 +1,4 @@
+say <<`EOM`;
+t<caret>est
+EOM
+

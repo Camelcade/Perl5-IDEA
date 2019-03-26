@@ -1,0 +1,17 @@
+my $test_name<caret> = "st$variable bl";
+say <<"EOM";
+test$variable blabla
+EOM
+
+say <<EOM;
+other test$variable blabla
+EOM
+
+say <<'EOM';
+other test$variable blabla
+EOM
+
+say <<`EOM`;
+test$variable blabla
+EOM
+

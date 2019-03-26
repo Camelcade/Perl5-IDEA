@@ -1,3 +1,6 @@
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 17 in heredocBodyQQVariable.pl
     (0,9)
     '$variable'
+PerlHeredocElementImpl(HEREDOC_QQ) at 13 in heredocBodyQQVariable.pl
+    (0,13)
+    'test$variable'

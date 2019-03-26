@@ -1,4 +1,4 @@
 say <<"EOM";
-t<caret>est
+t<selection>es</selection>t
 EOM
 

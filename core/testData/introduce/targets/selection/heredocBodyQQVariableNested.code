@@ -1,4 +1,4 @@
 say <<"EOM";
-test${\$vari<caret>able} thing
+test${\$v<selection>ariable} th</selection>ing
 EOM
 

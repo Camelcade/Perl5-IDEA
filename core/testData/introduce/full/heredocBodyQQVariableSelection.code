@@ -1,0 +1,16 @@
+say <<"EOM";
+test$v<selection>aria</selection>ble
+EOM
+
+say <<EOM;
+other test$variable blabla
+EOM
+
+say <<'EOM';
+other test$variable blabla
+EOM
+
+say <<`EOM`;
+test$variable other
+EOM
+
