@@ -157,7 +157,6 @@ import java.util.stream.Collectors;
 public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestCase {
   private static final String START_FOLD = "<fold\\stext=\'[^\']*\'(\\sexpand=\'[^\']*\')*>";
   private static final String END_FOLD = "</fold>";
-  private static final VirtualFileFilter PERL_FILE_FLTER = file -> file.getFileType() instanceof PerlPluginBaseFileType;
   private static final List<ElementDescriptionLocation> LOCATIONS = Arrays.asList(
     UsageViewShortNameLocation.INSTANCE,
     UsageViewLongNameLocation.INSTANCE,
@@ -435,7 +434,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void addVirtualFileFilter() {
-    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(PERL_FILE_FLTER, getTestRootDisposable());
+    VirtualFile openedVirtualFile = getFile().getVirtualFile();
+    ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(file -> {
+      if (!(file.getFileType() instanceof PerlPluginBaseFileType)) {
+        return false;
+      }
+      return !openedVirtualFile.equals(file);
+    }, getTestRootDisposable());
   }
 
   protected void removeVirtualFileFilter() {
