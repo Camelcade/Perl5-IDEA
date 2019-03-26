@@ -226,8 +226,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
 
   TokenSet QUOTE_MIDDLE = TokenSet.create(REGEX_QUOTE, REGEX_QUOTE_E);
 
+  TokenSet REGEX_QUOTE_OPEN = TokenSet.create(PerlElementTypesGenerated.REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E);
   TokenSet QUOTE_OPEN_ANY = TokenSet.orSet(
-    TokenSet.create(REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E),
+    REGEX_QUOTE_OPEN,
     PerlParserUtil.OPEN_QUOTES,
     QUOTE_MIDDLE
   );

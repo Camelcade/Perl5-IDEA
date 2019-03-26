@@ -1,0 +1,47 @@
+my $<caret>scalar = qr fsomet hing${var}elsefxx;
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+
+$scalar;
+$scalar;
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+
+$scalar;
+$a =~ $scalar;
+$scalar;
+$a =~ $scalar;
+
+/something${var}else/ix;
+$a =~ /something${var}else/ix;
+m/something${var}else/ix;
+$a =~ m/something${var}else/ix;
+qr/something${var}else/ix;
+$a =~ qr/something${var}else/ix;
+
+/somethi ng${var}else/;
+$a =~ /som ething${var}else/;
+m/somethi ng${var}else/;
+$a =~ m/som ething${var}else/;
+qr/somethi ng${var}else/;
+$a =~ qr/some thing${var}else/;
+
+s/$scalar/asdf/x;
+$a =~ s <$scalar>//xx;
+s#$scalar# #xx;
+

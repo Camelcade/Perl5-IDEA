@@ -1,0 +1,23 @@
+my $<caret>scalar = qr//;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+$scalar;
+s/$scalar/asdfo/;
+s/   $scalar/asdfo/x;
+s/
+ #comment
+    $scalar/asdfo/xx;

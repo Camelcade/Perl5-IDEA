@@ -18,24 +18,38 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Represents match regexp and qr regexp
+ * Common parent for m/s/qr regular expression expressions
  */
-public interface PerlSimpleRegex extends PerlRegexExpression {
+public interface PerlRegexExpression extends PsiElement {
+  /**
+   * @return first opening quote element of the regex
+   */
   @Nullable
-  default PsiPerlPerlRegex getRegex() {
-    PsiElement[] children = getChildren();
-    if (children.length == 0) {
-      return null;
+  default PsiElement getOpenQuoteElement() {
+    PsiElement run = getFirstChild();
+    while (run != null) {
+      if (PerlTokenSets.REGEX_QUOTE_OPEN.contains(PsiUtilCore.getElementType(run))) {
+        return run;
+      }
+      run = run.getNextSibling();
     }
-    if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(PsiUtilCore.getElementType(children[0]))) {
-      children = children[0].getChildren();
+    return null;
+  }
+
+  /**
+   * @return opening quote character if any or 0 if not found.
+   */
+  default char getOpenQuote() {
+    PsiElement openQuoteElement = getOpenQuoteElement();
+    if (openQuoteElement == null) {
+      return 0;
     }
-    return children.length == 0 ? null : ObjectUtils.tryCast(children[0], PsiPerlPerlRegex.class);
+    CharSequence quoteChars = openQuoteElement.getNode().getChars();
+    return quoteChars.length() == 1 ? quoteChars.charAt(0) : 0;
   }
 
   @Nullable

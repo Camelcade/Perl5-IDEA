@@ -30,7 +30,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
-public interface PerlReplacementRegex extends PsiElement {
+public interface PerlReplacementRegex extends PerlRegexExpression {
   @Nullable
   default PsiPerlPerlRegex getMatchRegex() {
     List<PsiElement> parts = getParts();
@@ -73,4 +73,10 @@ public interface PerlReplacementRegex extends PsiElement {
 
     return result;
   }
+
+  @Nullable
+  PsiPerlBlock getBlock();
+
+  @NotNull
+  List<PsiPerlPerlRegex> getPerlRegexList();
 }

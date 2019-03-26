@@ -30,7 +30,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -112,8 +115,31 @@ public abstract class PerlIntroduceTargetsHandler {
     if (targetElement == null) {
       return reportEmptyPlace();
     }
-    if (targetElement instanceof PsiPerlPackageExpr) {
+    else if (targetElement instanceof PsiPerlPackageExpr) {
       return "'" + PerlPackageUtil.getCanonicalPackageName(StringUtil.notNullize(targetElement.getText())) + "'";
+    }
+    else if (targetElement instanceof PsiPerlMatchRegex) {
+      char openQuote = ((PsiPerlMatchRegex)targetElement).getOpenQuote();
+      PsiPerlPerlRegex regex = ((PsiPerlMatchRegex)targetElement).getRegex();
+      if (openQuote != 0 && regex != null) {
+        char closeQuote = PerlBaseLexer.getQuoteCloseChar(openQuote);
+        PsiPerlPerlRegexModifiers modifiers = ((PsiPerlMatchRegex)targetElement).getPerlRegexModifiers();
+        String regexText = "qr " + openQuote + regex.getText() + closeQuote;
+        return modifiers == null ? regexText : regexText + modifiers.getText();
+      }
+    }
+    else if (targetElement instanceof PsiPerlPerlRegexImpl) {
+      PsiElement container = targetElement.getParent();
+      if (PerlTokenSets.LAZY_PARSABLE_REGEXPS.contains(PsiUtilCore.getElementType(container))) {
+        container = container.getParent();
+      }
+      if (container instanceof PerlReplacementRegex) {
+        char openQuote = ((PerlReplacementRegex)container).getOpenQuote();
+        if (openQuote > 0) {
+          char closeQuote = PerlBaseLexer.getQuoteCloseChar(openQuote);
+          return "qr " + openQuote + targetElement.getText() + closeQuote;
+        }
+      }
     }
 
     return StringUtil.notNullize(targetElement.getText());
