@@ -1539,8 +1539,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 
-  protected void doTestIntroduceVariableTargets() {
-    initWithFileSmartWithoutErrors();
+  protected void doTestIntroduceVariableTargets(boolean checkErrors) {
+    if (checkErrors) {
+      initWithFileSmartWithoutErrors();
+    }
+    else {
+      initWithFileSmart();
+    }
     List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
     StringBuilder sb = new StringBuilder();
 

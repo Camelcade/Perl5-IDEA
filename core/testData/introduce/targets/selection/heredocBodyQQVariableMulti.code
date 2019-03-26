@@ -1,0 +1,4 @@
+say <<"EOM";
+te<selection>st$variable test $othervariable </selection> tail
+EOM
+

@@ -58,6 +58,10 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
       return Collections.emptyList();
     }
 
+    if (element.getParent() instanceof PerlHeredocOpener) {
+      return Collections.emptyList();
+    }
+
     if (element instanceof PsiPerlStringBareImpl) {
       return computeBareStringTarget(element);
     }
@@ -123,6 +127,10 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
   protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
     if (!(element instanceof PerlString)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
+      return Collections.emptyList();
+    }
+
+    if (element.getParent() instanceof PerlHeredocOpener) {
       return Collections.emptyList();
     }
 
@@ -220,7 +228,7 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
                                               @NotNull PsiElement elementToReplace,
                                               @NotNull Set<TextRange> replacementRanges) {
     assert replacementText.length() > 1 : "Got " + replacementText;
-    String safeReplacementText = replacementText.charAt(0) + "{" + replacementText.subSequence(1, replacementText.length()) + "}";
+    CharSequence safeReplacementText = braceVariableText(replacementText);
 
     CharSequence sourceText = elementToReplace.getNode().getChars();
 
@@ -249,6 +257,12 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
 
     PerlString newString = PerlElementFactory.createString(elementToReplace.getProject(), result.toString());
     return elementToReplace.replace(newString);
+  }
+
+  @NotNull
+  static CharSequence braceVariableText(@NotNull CharSequence unbracedVariableText) {
+    return unbracedVariableText.length() < 2 ? unbracedVariableText :
+           unbracedVariableText.charAt(0) + "{" + unbracedVariableText.subSequence(1, unbracedVariableText.length()) + "}";
   }
 
   private PsiElement replaceWithConcatenation(@NotNull List<PerlIntroduceTarget> occurrences,

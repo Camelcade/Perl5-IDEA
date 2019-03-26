@@ -42,6 +42,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.properties.PerlCompound;
 import org.jetbrains.annotations.NotNull;
@@ -199,6 +200,14 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     //noinspection ConditionalBreakInInfiniteLoop
     while (true) {
       anchorElement = anchorElement.getParent();
+      if (anchorElement instanceof PerlHeredocElementImpl) {
+        anchorElement = ((PerlHeredocElementImpl)anchorElement).getHeredocOpener();
+        if (anchorElement == null) {
+          LOG.error("Unable to find here-doc opener");
+          return null;
+        }
+      }
+
       if (enclosingScope.equals(anchorElement)) {
         LOG.error("Unable to find anchor element (scope reached) for: " + target);
         return null;
@@ -276,7 +285,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
       occurrencesMap.keySet().forEach(it -> psiOccurrences.addAll(ContainerUtil.map(
         PerlIntroduceTargetsHandler.replaceOccurences(occurrencesMap.get(it), declaredVariable),
-        psiElement -> SmartPointerManager.createPointer(psiElement)))
+        SmartPointerManager::createPointer))
       );
 
       return SmartPointerManager.createPointer(declarationElement);

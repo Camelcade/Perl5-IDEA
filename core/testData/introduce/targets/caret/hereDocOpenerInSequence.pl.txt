@@ -1,0 +1,3 @@
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 18 in hereDocOpenerInSequence.pl
+    (0,6)
+    '$other'

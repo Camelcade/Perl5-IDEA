@@ -1,0 +1,4 @@
+say <<"EOM";
+test${\$<selection>vari</selection>able} thing
+EOM
+

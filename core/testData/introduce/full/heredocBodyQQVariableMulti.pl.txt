@@ -1,0 +1,17 @@
+my $test_name<caret> = $variable;
+say <<"EOM";
+test$test_name
+EOM
+
+say <<EOM;
+other test$test_name blabla ${test_name}other
+EOM
+
+say <<'EOM';
+other test$variable blabla ${variable}other
+EOM
+
+say <<`EOM`;
+test$test_name other  ${test_name}other
+EOM
+

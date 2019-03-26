@@ -1,0 +1,4 @@
+say <<"EOM";
+test${my $test_name<caret> = $variable;\$test_name} thing
+EOM
+

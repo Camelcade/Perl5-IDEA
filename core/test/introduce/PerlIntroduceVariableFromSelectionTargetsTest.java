@@ -22,6 +22,24 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
     return "testData/introduce/targets/selection";
   }
 
+  public void testHereDocOpenerSelected() {doTest();}
+
+  public void testHeredocBodyQQVariableMulti() {doTest();}
+
+  public void testHeredocBody() {doTest();}
+
+  public void testHeredocBodyQQ() {doTest();}
+
+  public void testHeredocBodyQQVariable() {doTest();}
+
+  public void testHeredocBodyQQVariableNested() {doTest();}
+
+  public void testHeredocBodyQQVariableUnclosed() {doTest(false);}
+
+  public void testHeredocBodyQX() {doTest();}
+
+  public void testHeredocBodyQXVariable() {doTest();}
+
   public void testStringOneWord() {doTest();}
 
   public void testStringTwoWords() {doTest();}

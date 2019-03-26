@@ -1,0 +1,3 @@
+<selection>$variable, <<EOM, $other</selection>;
+test
+EOM

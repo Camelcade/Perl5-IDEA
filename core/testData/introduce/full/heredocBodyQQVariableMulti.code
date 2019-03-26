@@ -1,0 +1,16 @@
+say <<"EOM";
+test$vari<caret>able
+EOM
+
+say <<EOM;
+other test$variable blabla ${variable}other
+EOM
+
+say <<'EOM';
+other test$variable blabla ${variable}other
+EOM
+
+say <<`EOM`;
+test$variable other  ${variable}other
+EOM
+

@@ -1,0 +1,3 @@
+$variable, <<EOM, $ot<caret>her;
+test
+EOM

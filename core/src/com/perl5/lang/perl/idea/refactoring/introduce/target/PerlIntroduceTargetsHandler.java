@@ -33,6 +33,7 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -160,6 +161,19 @@ public abstract class PerlIntroduceTargetsHandler {
     }
     PsiElement occurrenceElement = Objects.requireNonNull(occurrences.get(0)).getPlace();
     if (occurrenceElement != null && occurrenceElement.isValid()) {
+      PsiElement occurrenceElementParent = occurrenceElement.getParent();
+      if (occurrenceElementParent instanceof PerlHeredocElementImpl) {
+        PsiElement nextSibling = occurrenceElement.getNextSibling();
+        if (nextSibling != null && Character.isUnicodeIdentifierPart(nextSibling.getNode().getChars().charAt(0))) {
+          CharSequence replacementText = PerlStringTargetsHandler.braceVariableText(replacement.getText());
+          PsiElement statement = PerlElementFactory.createStatement(replacement.getProject(), replacementText.toString());
+          if (statement == null) {
+            LOG.error("Error generating code from: " + replacementText);
+            return Collections.emptyList();
+          }
+          replacement = statement.getFirstChild();
+        }
+      }
       return Collections.singletonList(occurrenceElement.replace(replacement));
     }
     else {
@@ -178,7 +192,14 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return true iff element can be targeted for extraction
    */
   public static boolean isTargetableElement(@NotNull PsiElement element) {
-    return !UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element)) || PerlPsiUtil.isMatchRegex(element);
+    PsiElement context = element.getParent();
+    if (context instanceof PerlHeredocElementImpl && ((PerlHeredocElementImpl)context).getHeredocOpener() == null) {
+      return false;
+    }
+    if (!UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element))) {
+      return true;
+    }
+    return PerlPsiUtil.isMatchRegex(element);
   }
 
   /**
@@ -195,6 +216,16 @@ public abstract class PerlIntroduceTargetsHandler {
     PsiPerlExpr run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
     while (run != null) {
       PsiElement finalRun = run;
+      if (run instanceof PerlHeredocOpener || run.getParent() instanceof PerlHeredocOpener) {
+        return targets;
+      }
+
+      for (PsiElement runChild : run.getChildren()) {
+        if (runChild instanceof PerlHeredocOpener) {
+          return targets;
+        }
+      }
+
       ObjectUtils.doIfNotNull(getHandler(run), it -> targets.addAll(it.computeTargetsAtCaret(finalRun, caretOffset)));
       run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
     }
@@ -270,6 +301,10 @@ public abstract class PerlIntroduceTargetsHandler {
       wrappingExpression = PsiTreeUtil.getParentOfType(wrappingExpression, PsiPerlExpr.class, true);
     }
     if (wrappingExpression == null) {
+      return Collections.emptyList();
+    }
+
+    if (!PsiTreeUtil.processElements(wrappingExpression, it -> !(it instanceof PerlHeredocOpener))) {
       return Collections.emptyList();
     }
 

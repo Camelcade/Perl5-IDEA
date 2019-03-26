@@ -29,6 +29,8 @@ import com.perl5.lang.perl.psi.PsiPerlVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
 /**
@@ -95,6 +97,18 @@ public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements 
     }
 
     return terminatorElement.getTextRange().getStartOffset() - getTextRange().getEndOffset();
+  }
+
+  /**
+   * @return here-doc opener element or null of here-doc is unclosed
+   */
+  @Nullable
+  public PsiElement getHeredocOpener() {
+    PerlHeredocTerminatorElement terminatorElement = getTerminatorElement();
+    if (terminatorElement == null) {
+      return null;
+    }
+    return Objects.requireNonNull(terminatorElement.getReference()).resolve();
   }
 
   /**
