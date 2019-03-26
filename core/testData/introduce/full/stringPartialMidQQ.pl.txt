@@ -1,0 +1,27 @@
+my $test_name<caret> = "ing here b";
+'someth' . $test_name . 'la';
+"someth${test_name}la";
+`someth${test_name}la`;
+'someth' . $test_name . 'la';
+qq{someth${test_name}la};
+qx fsometh${test_name}laf;
+qw/something here bla/;
+something => "here bla";
+
+$test_name;
+$test_name;
+`$test_name`;
+$test_name;
+$test_name;
+qx f${test_name}f;
+qw/ing here b/;
+something => "";
+
+'someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la ';
+"someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la ";
+`someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la `;
+'someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la someth' . $test_name . 'la ';
+qq{someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la };
+qx fsometh${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la someth${test_name}la f;
+qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+

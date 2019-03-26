@@ -1,0 +1,5 @@
+my $var = <selection>somemethod(othermethod(1), $a)</selection>;
+if( $var){
+    my $third_var = somemethod(othermethod(2), $a);
+    my $other_var = somemethod(othermethod(1), $a);
+}

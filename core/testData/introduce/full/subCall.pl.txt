@@ -1,0 +1,6 @@
+my $test_name<caret> = somemethod(othermethod(1), $a);
+my $var = $test_name;
+if( $var){
+    my $third_var = somemethod(othermethod(2), $a);
+    my $other_var = $test_name;
+}

@@ -1,0 +1,28 @@
+if( "someline" eq $a){
+    $b = "someline"."otherline";
+    say "someline";
+}
+elsif(qq /someline/){
+    $b = qq"someline"."otherline";
+    say "someline";
+}
+elsif( 'someline' eq $a){
+    $b = <selection>'someline'</selection>."otherline";
+    say 'someline';
+}
+elsif(q /someline/){
+    $b = q {someline}."otherline";
+    say q <someline>;
+}
+elsif( `someline` eq $a){
+    $b = `someline`."otherline";
+    say `someline`;
+}
+elsif(qx /someline/){
+    $b = qx {someline}."otherline";
+    say qx <someline>;
+}
+elsif( someline => $a){
+    my @b = someline => "otherline";
+    say someline => 42;
+}

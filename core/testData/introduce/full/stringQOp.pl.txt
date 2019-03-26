@@ -1,0 +1,29 @@
+my $test_name<caret> = q/someline/;
+if( $test_name eq $a){
+    $b = $test_name ."otherline";
+    say $test_name;
+}
+elsif($test_name){
+    $b = $test_name ."otherline";
+    say $test_name;
+}
+elsif( $test_name eq $a){
+    $b = $test_name ."otherline";
+    say $test_name;
+}
+elsif($test_name){
+    $b = $test_name ."otherline";
+    say $test_name;
+}
+elsif( `someline` eq $a){
+    $b = `someline`."otherline";
+    say `someline`;
+}
+elsif(qx /someline/){
+    $b = qx {someline}."otherline";
+    say qx <someline>;
+}
+elsif( $test_name => $a){
+    my @b = $test_name => "otherline";
+    say $test_name => 42;
+}

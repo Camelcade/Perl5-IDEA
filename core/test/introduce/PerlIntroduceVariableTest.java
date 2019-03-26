@@ -24,6 +24,56 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testStringPartialEnd() {doTest();}
+
+  public void testStringPartialEndLazy() {doTest();}
+
+  public void testStringPartialEndLazyQQ() {doTest();}
+
+  public void testStringPartialEndLazyQX() {doTest();}
+
+  public void testStringPartialEndQQ() {doTest();}
+
+  public void testStringPartialEndQX() {doTest();}
+
+  public void testStringPartialMid() {doTest();}
+
+  public void testStringPartialMidLazy() {doTest();}
+
+  public void testStringPartialMidQQ() {doTest();}
+
+  public void testStringPartialMidQQLazy() {doTest();}
+
+  public void testStringPartialMidQX() {doTest();}
+
+  public void testStringPartialMidQXLazy() {doTest();}
+
+  public void testStringPartialStart() {doTest();}
+
+  public void testStringPartialStartLazy() {doTest();}
+
+  public void testStringPartialStartQQ() {doTest();}
+
+  public void testStringPartialStartQQLazy() {doTest();}
+
+  public void testStringPartialStartQX() {doTest();}
+
+  public void testStringPartialStartQXLazy() {doTest();}
+
+  public void testStringQOp() {doTest();}
+
+  public void testStringQPlain() {doTest();}
+
+  public void testStringQqOp() {doTest();}
+
+  public void testStringQqPlain() {doTest();}
+
+  public void testStringQxOp() {doTest();}
+
+  public void testStringQxPlain() {doTest();}
+
+  public void testSubCall() {doTest();}
+
   public void testStringPartialLimits() {doTest();}
 
   public void testStringFull() {doTest();}

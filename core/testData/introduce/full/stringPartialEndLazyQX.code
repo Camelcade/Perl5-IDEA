@@ -1,0 +1,26 @@
+'something here bla';
+"something here bla";
+`something here bla`;
+q /something here bla/;
+qq {something here bla};
+qx fsomething here blaf;
+qw/something here bla/;
+something => "here bla";
+
+'re bla';
+"re bla";
+`re bla`;
+q /re bla/;
+qq {re bla};
+qx fre blaf;
+qw/re bla/;
+something => "";
+
+'something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ';
+"something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla ";
+`something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something he<selection>re bla</selection>`;
+q /something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+qq {something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla };
+qx fsomething here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla f;
+qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+
