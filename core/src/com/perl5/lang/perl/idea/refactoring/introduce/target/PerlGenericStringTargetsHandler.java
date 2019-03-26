@@ -19,55 +19,53 @@ package com.perl5.lang.perl.idea.refactoring.introduce.target;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PsiPerlStringBareImpl;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LP_STRING_QW;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_Q;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.STRING_CONTENT_TOKENSET;
 
 /**
- * Compute target for quoted entities(perl strings) by caret position.
+ * Compute target for quoted entities(perl strings).
  */
-class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
-  public static final PerlIntroduceTargetsHandler INSTANCE = new PerlStringTargetsHandler();
-  private static final String CONCATENATION = " . ";
-  private static final Logger LOG = Logger.getInstance(PerlStringTargetsHandler.class);
+abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandler {
+  private static final Logger LOG = Logger.getInstance(PerlGenericStringTargetsHandler.class);
 
-  private PerlStringTargetsHandler() {
+  protected PerlGenericStringTargetsHandler() {
   }
+
+  /**
+   * @return children of the {@code element} if it's handled by this collector
+   */
+  @NotNull
+  protected abstract List<PsiElement> getChildren(@NotNull PsiElement element);
+
+  @Contract("null->false")
+  protected abstract boolean isApplicable(@Nullable PsiElement element);
 
   @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
-    if (!(element instanceof PerlString)) {
+    if (!isApplicable(element)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
       return Collections.emptyList();
     }
 
-    if (element.getParent() instanceof PerlHeredocOpener) {
-      return Collections.emptyList();
-    }
+    List<PsiElement> allChildren = getChildren(element);
 
-    if (element instanceof PsiPerlStringBareImpl) {
-      return computeBareStringTarget(element);
-    }
-
-    PerlString perlStringElement = (PerlString)element;
-    List<PsiElement> allChildren = perlStringElement.getAllChildrenList();
+    // fixme this is bad for here-doc, but should never be here. Anyway - refactor
     if (allChildren.isEmpty()) {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
@@ -88,7 +86,7 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
             int substringEndOffsetInParent = stringRun.getStartOffsetInParent() + i;
             if (isLastWhiteSpace != isCurrentWhiteSpace && isCurrentWhiteSpace &&
                 substringEndOffsetInParent + stringRunTextRange.getStartOffset() > caretOffset) {
-              result.add(PerlIntroduceTarget.create(perlStringElement, firstStringElementStartOffsetInParent,
+              result.add(PerlIntroduceTarget.create(element, firstStringElementStartOffsetInParent,
                                                     substringEndOffsetInParent));
             }
             isLastWhiteSpace = isCurrentWhiteSpace;
@@ -97,48 +95,35 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
             int stringLastOffsetInParent = stringRun.getStartOffsetInParent() + stringRunText.length();
             if (stringLastOffsetInParent != lastOffsetInParent) {
               result.add(PerlIntroduceTarget.create(
-                perlStringElement, firstStringElementStartOffsetInParent, stringLastOffsetInParent));
+                element, firstStringElementStartOffsetInParent, stringLastOffsetInParent));
             }
           }
         }
         else {
-          result.add(PerlIntroduceTarget.create(perlStringElement, allChildren.get(0), stringRun));
+          result.add(PerlIntroduceTarget.create(element, allChildren.get(0), stringRun));
         }
       }
     }
-    result.add(PerlIntroduceTarget.create(element));
+    if (shouldAddElementAsTarget()) {
+      result.add(PerlIntroduceTarget.create(element));
+    }
     return result;
   }
 
-  @NotNull
-  private List<PerlIntroduceTarget> computeBareStringTarget(@NotNull PsiElement element) {
-    PsiElement elementParent = element.getParent();
-    if (PsiUtilCore.getElementType(elementParent) == LP_STRING_QW) {
-      elementParent = elementParent.getParent();
-    }
-
-    return elementParent instanceof PerlStringList ?
-           Collections.singletonList(PerlIntroduceTarget.create(elementParent, element, element)) :
-           Collections.singletonList(PerlIntroduceTarget.create(element));
-  }
+  /**
+   * @return true iff element itself should be added as a target at caret if partial ranges collected
+   */
+  protected abstract boolean shouldAddElementAsTarget();
 
   @NotNull
   @Override
   protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
-    if (!(element instanceof PerlString)) {
+    if (!isApplicable(element)) {
       LOG.error("Incorrect element passed to collector: " + element + " " + element.getClass());
       return Collections.emptyList();
     }
 
-    if (element.getParent() instanceof PerlHeredocOpener) {
-      return Collections.emptyList();
-    }
-
-    if (element instanceof PsiPerlStringBare) {
-      return computeBareStringTarget(element);
-    }
-
-    List<PsiElement> allChildrenList = ((PerlString)element).getAllChildrenList();
+    @SuppressWarnings("Duplicates") List<PsiElement> allChildrenList = getChildren(element);
     if (allChildrenList.isEmpty()) {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
@@ -201,32 +186,14 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
 
     return prefix + openQuote +
            target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars()).toString() +
-           PerlLexer.getQuoteCloseChar(openQuote);
+           PerlPsiUtil.getQuoteCloseChar(openQuote);
   }
 
   @NotNull
-  @Override
-  protected List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
-    if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
-      return super.replaceTarget(occurrences, replacement);
-    }
-
-    CharSequence replacementChars = replacement.getNode().getChars();
-    assert replacement instanceof PerlVariable : "Got " + replacement;
-
-    PsiElement psiElement = Objects.requireNonNull(occurrences.get(0).getPlace());
-    Set<TextRange> replacementRanges = new HashSet<>();
-
-    PsiElement replacedString = psiElement instanceof PsiPerlStringSq ?
-                                replaceWithConcatenation(occurrences, replacementChars, (PsiPerlStringSq)psiElement, replacementRanges) :
-                                replaceWithInterpolation(occurrences, replacementChars, psiElement, replacementRanges);
-    return ContainerUtil.filter(replacedString.getChildren(), it -> replacementRanges.contains(it.getTextRangeInParent()));
-  }
-
-  private PsiElement replaceWithInterpolation(@NotNull List<PerlIntroduceTarget> occurrences,
-                                              @NotNull CharSequence replacementText,
-                                              @NotNull PsiElement elementToReplace,
-                                              @NotNull Set<TextRange> replacementRanges) {
+  protected PsiElement replaceWithInterpolation(@NotNull List<PerlIntroduceTarget> occurrences,
+                                                @NotNull CharSequence replacementText,
+                                                @NotNull PsiElement elementToReplace,
+                                                @NotNull Set<TextRange> replacementRanges) {
     assert replacementText.length() > 1 : "Got " + replacementText;
     CharSequence safeReplacementText = braceVariableText(replacementText);
 
@@ -265,70 +232,10 @@ class PerlStringTargetsHandler extends PerlIntroduceTargetsHandler {
            unbracedVariableText.charAt(0) + "{" + unbracedVariableText.subSequence(1, unbracedVariableText.length()) + "}";
   }
 
-  private PsiElement replaceWithConcatenation(@NotNull List<PerlIntroduceTarget> occurrences,
-                                              @NotNull CharSequence replacementText,
-                                              @NotNull PsiPerlStringSq elementToReplace,
-                                              @NotNull Set<TextRange> replacementRanges) {
-    TextRange valueTextRange = ElementManipulators.getValueTextRange(elementToReplace);
-    CharSequence valueText = valueTextRange.subSequence(elementToReplace.getNode().getChars());
-    int valueOffset = valueTextRange.getStartOffset();
-
-    String prefix = "'";
-    String suffix = "'";
-    PsiElement firstChild = elementToReplace.getFirstChild();
-    if (PsiUtilCore.getElementType(firstChild) == RESERVED_Q) {
-      char openQuote = elementToReplace.getOpenQuote();
-      if (openQuote == 0) {
-        LOG.error("Can't find open quote in " + elementToReplace.getText());
-        return elementToReplace;
-      }
-      prefix = "q " + openQuote;
-      suffix = "" + PerlBaseLexer.getQuoteCloseChar(openQuote);
-    }
-
-    StringBuilder result = new StringBuilder();
-    int positionInContent = 0;
-    for (PerlIntroduceTarget occurrence : occurrences) {
-      TextRange rangeInElement = occurrence.getTextRangeInElement();
-      TextRange rangeInContent = rangeInElement.shiftLeft(valueOffset);
-
-      if (result.length() > 0) {
-        result.append(CONCATENATION);
-      }
-
-      int rangeStartOffset = rangeInContent.getStartOffset();
-      if (rangeStartOffset > positionInContent) {
-        result
-          .append(quoteTextSafelyWithSingleQuotes(valueText.subSequence(positionInContent, rangeStartOffset), prefix, suffix))
-          .append(CONCATENATION);
-      }
-
-      int replacementStartOffset = result.length();
-      result.append(replacementText);
-      replacementRanges.add(TextRange.create(replacementStartOffset, result.length()));
-      positionInContent = rangeInContent.getEndOffset();
-    }
-    if (positionInContent < valueText.length()) {
-      if (result.length() > 0) {
-        result.append(CONCATENATION);
-      }
-      result.append(quoteTextSafelyWithSingleQuotes(valueText.subSequence(positionInContent, valueText.length()), prefix, suffix));
-    }
-
-    PsiElement statement = PerlElementFactory.createStatement(elementToReplace.getProject(), result.toString());
-    if (statement == null) {
-      LOG.error("Unable create a replacement statement from: " + elementToReplace.getText() + "\n text: " + result.toString());
-      replacementRanges.clear();
-      return elementToReplace;
-    }
-    return elementToReplace.replace(statement.getFirstChild());
-  }
-
   @NotNull
-  private String quoteTextSafelyWithSingleQuotes(@NotNull CharSequence text,
-                                                 @NotNull String safePrefix,
-                                                 @NotNull String safeSuffix
-  ) {
+  static String quoteTextSafelyWithSingleQuotes(@NotNull CharSequence text,
+                                                @NotNull String safePrefix,
+                                                @NotNull String safeSuffix) {
     return !StringUtil.contains(text, "'") ? "'" + text + "'" : safePrefix + text + safeSuffix;
   }
 

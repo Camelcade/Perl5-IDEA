@@ -20,6 +20,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -28,9 +29,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
@@ -38,6 +37,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,22 +69,27 @@ public abstract class PerlIntroduceTargetsHandler {
     HASH_VARIABLE, HASH_CAST_EXPR
   );
 
+  private boolean isApplicable(@NotNull PsiElement element) {
+    return isTargetableElement(element) && !(element instanceof PerlHeredocElementImpl) &&
+           (!(element.getParent() instanceof PerlHeredocElementImpl) || isTargetableHeredocElement(element.getParent()));
+  }
+
   @NotNull
   protected List<PerlIntroduceTarget> computeTargetsAtCaret(@NotNull PsiElement element, int caretOffset) {
-    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
+    return isApplicable(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 
   @NotNull
   protected List<PerlIntroduceTarget> computeTargetsFromSelection(@NotNull PsiElement element, @NotNull TextRange selectionRange) {
-    return isTargetableElement(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
+    return isApplicable(element) ? Collections.singletonList(PerlIntroduceTarget.create(element)) : Collections.emptyList();
   }
 
   /**
    * Generates a text for decaration of variable with {@code variableName} expression representing by {@code target}
    */
   @NotNull
-  private String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my " + computeSigil(target) + variableName + " = " + createTargetExpressionText(target);
+  protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
+    return "my " + computeSigil(target) + variableName + " = " + createTargetExpressionText(target) + ";";
   }
 
   /**
@@ -123,7 +128,7 @@ public abstract class PerlIntroduceTargetsHandler {
       char openQuote = ((PsiPerlMatchRegex)targetElement).getOpenQuote();
       PsiPerlPerlRegex regex = ((PsiPerlMatchRegex)targetElement).getRegex();
       if (openQuote != 0 && regex != null) {
-        char closeQuote = PerlBaseLexer.getQuoteCloseChar(openQuote);
+        char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
         PsiPerlPerlRegexModifiers modifiers = ((PsiPerlMatchRegex)targetElement).getPerlRegexModifiers();
         String regexText = "qr " + openQuote + regex.getText() + closeQuote;
         return modifiers == null ? regexText : regexText + modifiers.getText();
@@ -137,7 +142,7 @@ public abstract class PerlIntroduceTargetsHandler {
       if (container instanceof PerlReplacementRegex) {
         char openQuote = ((PerlReplacementRegex)container).getOpenQuote();
         if (openQuote > 0) {
-          char closeQuote = PerlBaseLexer.getQuoteCloseChar(openQuote);
+          char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
           return "qr " + openQuote + targetElement.getText() + closeQuote;
         }
       }
@@ -165,7 +170,7 @@ public abstract class PerlIntroduceTargetsHandler {
       if (occurrenceElementParent instanceof PerlHeredocElementImpl) {
         PsiElement nextSibling = occurrenceElement.getNextSibling();
         if (nextSibling != null && Character.isUnicodeIdentifierPart(nextSibling.getNode().getChars().charAt(0))) {
-          CharSequence replacementText = PerlStringTargetsHandler.braceVariableText(replacement.getText());
+          CharSequence replacementText = PerlGenericStringTargetsHandler.braceVariableText(replacement.getText());
           PsiElement statement = PerlElementFactory.createStatement(replacement.getProject(), replacementText.toString());
           if (statement == null) {
             LOG.error("Error generating code from: " + replacementText);
@@ -192,9 +197,8 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return true iff element can be targeted for extraction
    */
   public static boolean isTargetableElement(@NotNull PsiElement element) {
-    PsiElement context = element.getParent();
-    if (context instanceof PerlHeredocElementImpl && ((PerlHeredocElementImpl)context).getHeredocOpener() == null) {
-      return false;
+    if (isTargetableHeredocElement(element)) {
+      return true;
     }
     if (!UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element))) {
       return true;
@@ -213,23 +217,36 @@ public abstract class PerlIntroduceTargetsHandler {
 
     List<PerlIntroduceTarget> targets = new ArrayList<>();
     int caretOffset = editor.getCaretModel().getOffset();
-    PsiPerlExpr run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
+    PsiElement run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
+    if (run == null) {
+      run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PerlHeredocElementImpl.class, false);
+    }
     while (run != null) {
       PsiElement finalRun = run;
-      if (run instanceof PerlHeredocOpener || run.getParent() instanceof PerlHeredocOpener) {
+      if (isHeredocOpenerInSight(run)) {
         return targets;
       }
 
-      for (PsiElement runChild : run.getChildren()) {
-        if (runChild instanceof PerlHeredocOpener) {
-          return targets;
-        }
-      }
-
-      ObjectUtils.doIfNotNull(getHandler(run), it -> targets.addAll(it.computeTargetsAtCaret(finalRun, caretOffset)));
-      run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class);
+      targets.addAll(getHandler(run).computeTargetsAtCaret(finalRun, caretOffset));
+      run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class, PerlHeredocElementImpl.class);
     }
     return targets;
+  }
+
+  /**
+   * @return true iff element, it's parent or one of it's children is a {@link PerlHeredocOpener}
+   */
+  private static boolean isHeredocOpenerInSight(PsiElement element) {
+    if (element instanceof PerlHeredocOpener || element.getParent() instanceof PerlHeredocOpener) {
+      return true;
+    }
+
+    for (PsiElement runChild : element.getChildren()) {
+      if (runChild instanceof PerlHeredocOpener) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -277,9 +294,22 @@ public abstract class PerlIntroduceTargetsHandler {
       return PerlGenericSequentialElementTargetHandler.INSTANCE;
     }
     else if (run instanceof PerlString) {
-      return PerlStringTargetsHandler.INSTANCE;
+      return PerlStringsTargetsHandler.INSTANCE;
+    }
+    else if (isTargetableHeredocElement(run)) {
+      return PerlHeredocTargetsHandler.INSTANCE;
     }
     return PerlGenericTargetsHandler.INSTANCE;
+  }
+
+  /**
+   * @return true iff {@code element} is interpolatable complete heredoc body
+   */
+  @Contract("null->false")
+  public static boolean isTargetableHeredocElement(@Nullable PsiElement element) {
+    return element instanceof PerlHeredocElementImpl &&
+           PsiUtilCore.getElementType(element) != HEREDOC &&
+           ((PerlHeredocElementImpl)element).getHeredocOpener() != null;
   }
 
   @NotNull
@@ -313,20 +343,29 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   /**
-   * @return a statement to declare variable with {@code name} assigned with {@code target} or null if something went wrong
+   * @return a range of psi elements representing declaration of variable with {@code name} assigned with {@code target} or null if something went wrong
    */
   @Nullable
-  public static PsiElement createTargetDeclarationStatement(@NotNull Project project,
-                                                            @NotNull PerlIntroduceTarget target,
-                                                            @NotNull String variableName) {
+  public static Pair<PsiElement, PsiElement> createTargetDeclarationStatement(@NotNull Project project,
+                                                                              @NotNull PerlIntroduceTarget target,
+                                                                              @NotNull String variableName) {
     String targetExpressionText =
       getHandler(Objects.requireNonNull(target.getPlace())).createDeclarationStatementText(variableName, target);
-    PsiElement statement = PerlElementFactory.createStatement(project, targetExpressionText);
-    if (statement == null) {
+    PsiElement file = PerlElementFactory.createFile(project, targetExpressionText);
+    PsiElement[] children = file.getChildren();
+    if (children.length == 0) {
       LOG.error("Unable to create a statement for " + targetExpressionText + "; target was " + target);
       return null;
     }
-    return statement;
+    PsiElement lastChild = children[children.length - 1];
+    if (lastChild instanceof PerlHeredocElementImpl && lastChild.getNextSibling() != null) {
+      // heredoc end and space are leaf elements, but they are important
+      lastChild = lastChild.getNextSibling();
+      if (lastChild.getNextSibling() != null) {
+        lastChild = lastChild.getNextSibling();
+      }
+    }
+    return Pair.create(children[0], lastChild);
   }
 
   /**

@@ -29,8 +29,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.SEQUENTINAL_TOKENS;
-import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableElement;
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.*;
 
 public abstract class PerlIntroduceTargetOccurrencesCollector {
   @NotNull
@@ -124,6 +123,9 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
     }
     else if (targetElement instanceof PerlString && !target.isFullRange()) {
       return new PerlPartialStringOccurrencesCollector(target);
+    }
+    else if (isTargetableHeredocElement(targetElement)) {
+      return new PerlHeredocOccurrencesCollector(target);
     }
     else if (SEQUENTINAL_TOKENS.contains(PsiUtilCore.getElementType(targetElement))) {
       return new PerlSequentialOccurrencesCollector(target);

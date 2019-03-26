@@ -19,15 +19,17 @@ package com.perl5.lang.perl.idea.refactoring.introduce.occurrence;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
 
-class PerlPartialStringOccurrencesCollector extends PerlGenericStringsOccurrencesCollector {
-  public PerlPartialStringOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
+import static com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler.isTargetableHeredocElement;
+
+class PerlHeredocOccurrencesCollector extends PerlGenericStringsOccurrencesCollector {
+  public PerlHeredocOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
   }
 
@@ -35,16 +37,16 @@ class PerlPartialStringOccurrencesCollector extends PerlGenericStringsOccurrence
   @Override
   protected Pair<PsiElement, PsiElement> getChildrenRangeToCollect(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
-    if (!(targetElement instanceof PerlString) || target.isFullRange()) {
-      throw new RuntimeException("Expected PerlString thing with partial range, got: " + target);
+    if (!isTargetableHeredocElement(targetElement)) {
+      throw new RuntimeException("Expected targetable heredoc element, got: " + target);
     }
 
-    return Pair.create(((PerlString)targetElement).getFirstContentToken(), ((PerlString)targetElement).getCloseQuoteElement());
+    return Pair.create(targetElement.getFirstChild(), null);
   }
 
   @NotNull
   @Override
   protected List<PsiElement> getElementChildren(@Nullable PsiElement element) {
-    return element instanceof PerlString ? ((PerlString)element).getAllChildrenList() : Collections.emptyList();
+    return !isTargetableHeredocElement(element) ? Collections.emptyList() : ((PerlHeredocElementImpl)element).getAllChildrenList();
   }
 }

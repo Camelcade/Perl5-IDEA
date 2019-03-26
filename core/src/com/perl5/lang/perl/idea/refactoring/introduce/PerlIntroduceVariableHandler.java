@@ -22,6 +22,7 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Pass;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -143,8 +144,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     String variableName = suggestedNames.get(0);
 
     Project project = file.getProject();
-    PsiElement declarationStatement = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
-    if (declarationStatement == null) {
+    Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
+    if (declaration == null) {
       return;
     }
 
@@ -155,7 +156,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
     List<SmartPsiElementPointer<PsiElement>> psiOccurrencesPointers = new ArrayList<>();
     PerlVariableDeclarationElement variableDeclaration =
-      introduceVariable(target, declarationStatement, occurrences, anchorElement, psiOccurrencesPointers);
+      introduceVariable(target, declaration, occurrences, anchorElement, psiOccurrencesPointers);
 
     if (variableDeclaration == null) {
       LOG.error("No variable declaration created");
@@ -197,9 +198,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     }
 
     PsiElement anchorElement = Objects.requireNonNull(occurrences.get(0).getPlace());
-    //noinspection ConditionalBreakInInfiniteLoop
     while (true) {
-      anchorElement = anchorElement.getParent();
       if (anchorElement instanceof PerlHeredocElementImpl) {
         anchorElement = ((PerlHeredocElementImpl)anchorElement).getHeredocOpener();
         if (anchorElement == null) {
@@ -216,36 +215,37 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
           PsiTreeUtil.isAncestor(anchorElement.getParent(), commonParent, false)) {
         break;
       }
+      anchorElement = anchorElement.getParent();
     }
     return anchorElement;
   }
 
   /**
-   * Performs introduction of the {@code statement} before the {@code anchor}
+   * Performs introduction of the {@code declarationBlock} before the {@code anchor}
    *
    * @return variable introduced by the statement
    */
   @Nullable
   private PerlVariableDeclarationElement introduceVariable(@NotNull PerlIntroduceTarget target,
-                                                           @NotNull PsiElement statement,
+                                                           @NotNull Pair<PsiElement, PsiElement> declarationBlock,
                                                            @NotNull List<PerlIntroduceTarget> occurrences,
                                                            @NotNull PsiElement anchor,
                                                            @NotNull List<SmartPsiElementPointer<PsiElement>> psiOccurrences) {
-    Project project = statement.getProject();
+    Project project = declarationBlock.first.getProject();
     return WriteCommandAction.writeCommandAction(project).compute(() -> {
       PsiFile containingFile = anchor.getContainingFile();
       final RefactoringEventData afterData = new RefactoringEventData();
-      afterData.addElement(statement);
+      afterData.addElement(declarationBlock.first);
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)
         .refactoringStarted(getRefactoringId(), afterData);
 
-      PsiElement introducedStatement = anchor.getParent().addBefore(statement, anchor);
+      PsiElement introducedStatement = anchor.getParent().addRangeBefore(declarationBlock.first, declarationBlock.second, anchor);
 
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)
         .refactoringDone(getRefactoringId(), afterData);
 
       if (introducedStatement == null) {
-        LOG.error("No statement been introduced from " + statement.getText());
+        LOG.error("No statement been introduced from " + declarationBlock.first.getContainingFile().getText());
         return null;
       }
 
@@ -263,17 +263,17 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         LOG.error("Unable to find assignment in " + introducedStatement.getText());
         return null;
       }
-      PsiElement declaration = assignment.getFirstChild();
-      if (!(declaration instanceof PerlVariableDeclarationExpr)) {
-        LOG.error("Unable to find declaration in " + introducedStatement.getText());
+      PsiElement variableDeclaration = assignment.getFirstChild();
+      if (!(variableDeclaration instanceof PerlVariableDeclarationExpr)) {
+        LOG.error("Unable to find declarationBlock in " + introducedStatement.getText());
         return null;
       }
 
       List<PsiPerlVariableDeclarationElement> declarations =
-        ((PerlVariableDeclarationExpr)declaration).getVariableDeclarationElementList();
+        ((PerlVariableDeclarationExpr)variableDeclaration).getVariableDeclarationElementList();
 
       if (declarations.size() != 1) {
-        LOG.error("Single variable declaration expected: " + introducedStatement.getText());
+        LOG.error("Single variable declarationBlock expected: " + introducedStatement.getText());
         return null;
       }
 

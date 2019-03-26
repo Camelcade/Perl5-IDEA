@@ -147,7 +147,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
       }
       int startOffset = sb.length();
       if (element instanceof PsiPerlStringBare) {
-        sb.append(PerlStringTargetsHandler.createBarewordQuotedText(element.getText()));
+        sb.append(PerlGenericStringTargetsHandler.createBarewordQuotedText(element.getText()));
       }
       else {
         sb.append(element.getText());

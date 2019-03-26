@@ -7,3 +7,9 @@ PsiPerlRefExprImpl(Perl5: REF_EXPR) at 19 in heredocBodyQQVariableNested.pl
 PsiPerlScalarCastExprImpl(Perl5: SCALAR_CAST_EXPR) at 17 in heredocBodyQQVariableNested.pl
     (0,13)
     '${\$variable}'
+PerlHeredocElementImpl(HEREDOC_QQ) at 13 in heredocBodyQQVariableNested.pl
+    (0,17)
+    'test${\$variable}'
+PerlHeredocElementImpl(HEREDOC_QQ) at 13 in heredocBodyQQVariableNested.pl
+    (0,23)
+    'test${\$variable} thing'
