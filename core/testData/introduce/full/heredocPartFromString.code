@@ -1,0 +1,13 @@
+<<EOM
+th<selection>is is a te</selection>st
+EOM
+;
+
+
+'is is a te';
+"is is a te";
+`is is a te`;
+q/is is a te/;
+qq/is is a te/;
+qx/is is a te/;
+qw/is is a te/;

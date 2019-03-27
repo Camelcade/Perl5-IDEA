@@ -1,0 +1,14 @@
+my $test_name<caret> = "is is a te";
+<<EOM
+th${test_name}st
+EOM
+;
+
+
+$test_name;
+$test_name;
+`$test_name`;
+$test_name;
+$test_name;
+qx/$test_name/;
+qw/is is a te/;
