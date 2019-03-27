@@ -1,0 +1,26 @@
+my $test_name<caret> = "test string";
+
+<<"EOM";
+this
+is a $test_name
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a $test_name
+end
+EOM
+
+<<EOM;
+this
+is a $test_name
+end
+EOM
+

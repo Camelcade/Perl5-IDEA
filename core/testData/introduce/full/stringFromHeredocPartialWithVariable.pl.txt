@@ -1,0 +1,27 @@
+my $test_name<caret> = "st $variable stri";
+"te${test_name}ng";
+
+<<"EOM";
+this
+is a te${test_name}ng
+end
+EOM
+
+<<'EOM';
+this
+is a test $variable string
+end
+EOM
+
+<<`EOM`;
+this
+is a te${test_name}ng
+end
+EOM
+
+<<EOM;
+this
+is a te${test_name}ng
+end
+EOM
+

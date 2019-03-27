@@ -1,0 +1,27 @@
+my $test_name<caret> = 'st st';
+'te' . $test_name . 'ring';
+
+<<"EOM";
+this
+is a te${test_name}ring
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a te${test_name}ring
+end
+EOM
+
+<<EOM;
+this
+is a te${test_name}ring
+end
+EOM
+
