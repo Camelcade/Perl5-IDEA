@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce;
 
+import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
@@ -30,13 +32,11 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.SmartPointerManager;
 import com.intellij.psi.SmartPsiElementPointer;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.HelpID;
-import com.intellij.refactoring.IntroduceTargetChooser;
-import com.intellij.refactoring.RefactoringActionHandler;
-import com.intellij.refactoring.RefactoringBundle;
+import com.intellij.refactoring.*;
 import com.intellij.refactoring.introduce.inplace.OccurrencesChooser;
 import com.intellij.refactoring.listeners.RefactoringEventData;
 import com.intellij.refactoring.listeners.RefactoringEventListener;
+import com.intellij.refactoring.rename.PsiElementRenameHandler;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
@@ -170,8 +170,26 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
 
-    new PerlVariableIntroducer(variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY))
-      .performInplaceRefactoring(new LinkedHashSet<>(suggestedNames));
+    PerlVariableIntroducer inplaceIntroducer = new PerlVariableIntroducer(
+      variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY));
+    if (inplaceIntroducer.performInplaceRefactoring(new LinkedHashSet<>(suggestedNames))) {
+      return;
+    }
+    inplaceIntroducer.finish(false);
+    performDialogRename(project, variableDeclaration);
+  }
+
+  private void performDialogRename(@NotNull Project project, @NotNull PerlVariableDeclarationElement variableDeclaration) {
+    DataContext renamingContext = DataManager.getInstance().getDataContext();
+    if (ApplicationManager.getApplication().isUnitTestMode()) {
+      DataContext originalContext = renamingContext;
+      renamingContext = dataId -> PsiElementRenameHandler.DEFAULT_NAME.getName().equals(dataId)
+                                  ? "dialog_test_name"
+                                  : originalContext.getData(dataId);
+    }
+    RefactoringActionHandler handler = RefactoringActionHandlerFactory.getInstance().createRenameHandler();
+    DataContext effectiveContext = renamingContext;
+    TransactionGuard.submitTransaction(project, () -> handler.invoke(project, new PsiElement[]{variableDeclaration}, effectiveContext));
   }
 
   /**
