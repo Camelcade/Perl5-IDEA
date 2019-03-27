@@ -1,18 +1,22 @@
 <p>Updates:</p>
 <ul>
-  <li>Control flow graph is now computed for your sources, moving plugin to the next level of intelligence. For start:
+  <li>Code insight:<br/>
+    Control flow graph is now computed for your sources, moving plugin to the next level of intelligence. For start:
     <ul>
       <li>Unreachable code inspection.</li>
       <li>Exit points highlighting.</li>
     </ul>
   </li>
-  <li>Find Usages:
+  <li>Code navigation:
     <ul>
-      <li>Grouping by the file structure, displaying usage context (sub, package or pod section), <a
+      <li>Grouping usages by the file structure, displaying usage context (sub, package or pod section), <a
           href="https://github.com/Camelcade/Perl5-IDEA/issues/1919">#1919</a>.
       </li>
-      <li>Grouping and filtering by the read/write access type, including list and hash modifying subs, <a
+      <li>Grouping and filtering usages by the read/write access type, including list and hash modifying subs, <a
           href="https://github.com/Camelcade/Perl5-IDEA/issues/1918">#1918</a>.
+      </li>
+      <li>Breadcrumbs for perl and pod files, including inline POD, by <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/1875">@psewi-cpan</a>.
       </li>
     </ul>
   </li>
@@ -30,41 +34,49 @@
     </ul>
 
   </li>
+  <li>Debugger:
+    <ul>
+      <li>Debugger is now displays stringified objects representation if <code>""</code> operator is overloaded. Additionally, you may
+        specify
+        custom renderer for any package, using
+        <code>File | Settings | Build, Execution, Deployment | Debugger | Data Views | Perl5 Type Renderers</code> settings (requires <a
+            href="https://metacpan.org/pod/Devel::Camelcadedb">debugger module</a> 2019.1), by <a
+            href="https://github.com/Camelcade/Perl5-IDEA/issues/1750">@cdalvaro</a>.
+      </li>
+      <li>New option for the remote debugging: automatic reconnection. Allows to re-connect to the process until manually stopped, by <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/1369">@djstauffer</a>.
+      </li>
+    </ul>
+  </li>
+  <li>Perl modules support:
+    <ul>
+      <li><code>Readonly</code> syntax support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1415">@pJungler</a>.</li>
+      <li><code>Log::Log4perl</code> imports support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1412">@giddel</a>.</li>
+      <li>Support for the <a href="https://metacpan.org/pod/Pod::Weaver">Pod::Weaver</a> syntax, by <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/1839">@Zaitsev</a>.
+      </li>
+      <li>Improved resolve for <code>File::Spec::Functions</code> subs. Actual module has tricky exporting, binding OS-specific
+        implementation
+        in runtime. Plugin for now resolves to the Unix implementations from the <code>File::Spec::Unix</code>, by <a
+            href="https://github.com/Camelcade/Perl5-IDEA/issues/1393">@grakkpl</a>.
+      </li>
+      <li><a href="https://github.com/Camelcade/Bundle-Camelcade"><code>Bundle::Camelcade</code></a> module introduced. Installs all modules
+        that may may be required when working with the perl plugin. Going to be suggested for installation as alternative for particular
+        modules, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1946">#1946</a>.
+      </li>
+    </ul>
+
+  </li>
   <li>Automatic injections can now be configured for strings and heredocs using java regular expressions in <code>File | Settings | Editor |
     Language Injections</code>,
     by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1878">@Christoffen</a>.
   </li>
-  <li><code>Readonly</code> syntax support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1415">@pJungler</a>.</li>
-  <li><code>Log::Log4perl</code> imports support, by <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1412">@giddel</a>.</li>
   <li>Support for the POD in the <code>__END__</code> block, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1896">#1896</a>.</li>
   <li>Support for interpolation in match regex with <code>(?{...})</code> and <code>(??{...})</code>, <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1906">#1906</a>.
   </li>
-  <li>Breadcrumbs for perl and pod files, including inline POD, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1875">@psewi-cpan</a>.
-  </li>
-  <li>Support for the <a href="https://metacpan.org/pod/Pod::Weaver">Pod::Weaver</a> syntax, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1839">@Zaitsev</a>.
-  </li>
-  <li>Debugger is now displays stringified objects representation if <code>""</code> operator is overloaded. Additionally, you may specify
-    custom renderer for any package, using
-    <code>File | Settings | Build, Execution, Deployment | Debugger | Data Views | Perl5 Type Renderers</code> settings (requires <a
-        href="https://metacpan.org/pod/Devel::Camelcadedb">debugger module</a> 2019.1), by <a
-        href="https://github.com/Camelcade/Perl5-IDEA/issues/1750">@cdalvaro</a>.
-  </li>
   <li>Truthiness inspection with quickfixes to add explicit <code>defined</code> or string/numeric equality check, by <a
       href="https://github.com/Camelcade/Perl5-IDEA/issues/1715">@RickMeasham</a>.
-  </li>
-  <li>New option for the remote debugging: automatic reconnection. Allows to re-connect to the process until manually stopped, by <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1369">@djstauffer</a>.
-  </li>
-  <li>Improved resolve for <code>File::Spec::Functions</code> subs. Actual module has tricky exporting, binding OS-specific implementation
-    in runtime. Plugin for now resolves to the Unix implementations from the <code>File::Spec::Unix</code>, by <a
-        href="https://github.com/Camelcade/Perl5-IDEA/issues/1393">@grakkpl</a>.
-  </li>
-  <li><a href="https://github.com/Camelcade/Bundle-Camelcade"><code>Bundle::Camelcade</code></a> module introduced. Installs all modules
-    that may may be required when working with the perl plugin. Going to be suggested for installation as alternative for particular
-    modules, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/1946">#1946</a>.
   </li>
 </ul>
 <p>Fixes:</p>
