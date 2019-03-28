@@ -17,6 +17,7 @@
 package editor;
 
 import base.PerlLightTestCase;
+import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler;
 
 public class PerlNamesSuggesterTest extends PerlLightTestCase {
   @Override
@@ -29,6 +30,6 @@ public class PerlNamesSuggesterTest extends PerlLightTestCase {
   public void testHeredocTerminator() {doTest();}
 
   private void doTest() {
-    doTestNameSuggester();
+    doTestSuggesterOnRename(new PerlMemberInplaceRenameHandler());
   }
 }

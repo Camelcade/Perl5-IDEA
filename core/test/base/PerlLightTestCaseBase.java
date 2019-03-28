@@ -87,7 +87,7 @@ import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.rename.NameSuggestionProvider;
+import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
@@ -1575,14 +1575,19 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macros));
   }
 
-  protected void doTestNameSuggester() {
+  protected void doTestSuggesterOnRename(@NotNull VariableInplaceRenameHandler handler) {
     initWithFileSmartWithoutErrors();
-    Set<String> names = new LinkedHashSet<>();
-
-    PsiElement targetElement = TargetElementUtil.findTargetElement(getEditor(), TargetElementUtil.getInstance().getAllAccepted());
-    PsiReference reference = TargetElementUtil.findReference(getEditor());
-    PsiElement contextElement = reference == null ? null : reference.getElement();
-    NameSuggestionProvider.EP_NAME.getExtensionList().forEach(it -> it.getSuggestedNames(targetElement, contextElement, names));
+    TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
+    Editor editor = getEditor();
+    if (editor instanceof EditorWindow) {
+      editor = ((EditorWindow)editor).getDelegate();
+    }
+    handler.doRename(myFixture.getElementAtCaret(), editor, DataManager.getInstance().getDataContext(editor.getComponent()));
+    List<String> names = myFixture.getLookupElementStrings();
+    assertNotNull(names);
+    TemplateState state = TemplateManagerImpl.getTemplateState(editor);
+    assertNotNull(state);
+    state.gotoEnd(false);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
   }
 }
