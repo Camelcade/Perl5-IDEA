@@ -25,7 +25,10 @@ import org.jetbrains.annotations.NotNull;
 public class PerlVariableIntroducer extends InplaceVariableIntroducer<PsiElement> {
   public PerlVariableIntroducer(@NotNull PsiNamedElement elementToRename,
                                 @NotNull Editor editor,
-                                PsiElement[] occurrences) {
+                                PsiElement[] occurrences,
+                                @NotNull String suggestedName) {
     super(elementToRename, editor, elementToRename.getProject(), "Introduce variable", occurrences, null);
+    myInitialName = suggestedName;
+    myOldName = suggestedName;
   }
 }

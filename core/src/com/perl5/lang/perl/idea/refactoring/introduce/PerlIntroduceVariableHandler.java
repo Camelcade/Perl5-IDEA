@@ -40,6 +40,7 @@ import com.intellij.refactoring.rename.PsiElementRenameHandler;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider;
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
 import com.perl5.lang.perl.psi.*;
@@ -136,15 +137,9 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return;
     }
 
-    List<String> suggestedNames = PerlIntroduceTargetsHandler.getSuggestedNames(target);
-    if (suggestedNames.isEmpty()) {
-      LOG.error("Suggested names list was empty for " + target);
-      return;
-    }
-    String variableName = suggestedNames.get(0);
-
     Project project = file.getProject();
-    Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
+    Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(
+      project, target, "new_variable_name");
     if (declaration == null) {
       return;
     }
@@ -170,8 +165,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
 
+
+    Set<String> suggestedNames = new LinkedHashSet<>();
+    String variableName = PerlNameSuggestionProvider.suggestAndGetRecommendedName(variableDeclaration, suggestedNames);
+
     PerlVariableIntroducer inplaceIntroducer = new PerlVariableIntroducer(
-      variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY));
+      variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY), variableName);
     if (inplaceIntroducer.performInplaceRefactoring(new LinkedHashSet<>(suggestedNames))) {
       return;
     }

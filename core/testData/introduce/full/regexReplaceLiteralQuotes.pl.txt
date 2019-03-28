@@ -43,6 +43,6 @@ qr/somethi ng${var}else/;
 $a =~ qr/some thing${var}else/;
 
 s/$test_name/asdf/x;
-$a =~ s f$scalarffxx;
+$a =~ s f$new_variable_nameffxx;
 s#$test_name##xx;
 

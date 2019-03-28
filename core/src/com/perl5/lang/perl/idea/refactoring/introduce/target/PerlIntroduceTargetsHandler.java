@@ -250,34 +250,6 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   /**
-   * @return collection of names suggested for variable representing a {@code target}
-   */
-  @NotNull
-  protected List<String> computeSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    String sigil = computeSigil(target);
-    if ("$".equals(sigil)) {
-      return Collections.singletonList("scalar");
-    }
-    else if ("@".equals(sigil)) {
-      return Collections.singletonList("array");
-    }
-    return Collections.singletonList("hash");
-  }
-
-  /**
-   * @return collection of names suggested for variable representing a {@code target}
-   */
-  @NotNull
-  public static List<String> getSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    PsiElement place = target.getPlace();
-    if (place == null) {
-      LOG.error("Invalid target passed");
-      return Collections.singletonList("InternalErrorReportToDevelopers");
-    }
-    return getHandler(place).computeSuggestedNames(target);
-  }
-
-  /**
    * Could be an extension point
    */
   @NotNull

@@ -17,9 +17,11 @@
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PsiPerlStringBare;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -103,7 +105,8 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
       return Collections.emptyList();
     }
 
-    List<PsiElement> result = new ArrayList<>();
+    List<Pair<PsiElement, PsiElement>> elementsRangesToReplace = new ArrayList<>();
+
     for (PerlIntroduceTarget occurrence : occurrences) {
       List<PsiElement> childrenInRange = occurrence.getChildren();
 
@@ -111,9 +114,15 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
         LOG.error("Unable to detect children to replace, please report developers with source sample");
         return Collections.emptyList();
       }
-      result.add(occurrencePlace.addBefore(replacement, childrenInRange.get(0)));
-      occurrencePlace.deleteChildRange(childrenInRange.get(0), childrenInRange.get(childrenInRange.size() - 1));
+      elementsRangesToReplace.add(Pair.create(childrenInRange.get(0), ContainerUtil.getLastItem(childrenInRange)));
     }
+
+    List<PsiElement> result = new ArrayList<>();
+    for (Pair<PsiElement, PsiElement> elementRangeToReplace : elementsRangesToReplace) {
+      result.add(occurrencePlace.addBefore(replacement, elementRangeToReplace.first));
+      occurrencePlace.deleteChildRange(elementRangeToReplace.first, elementRangeToReplace.second);
+    }
+
 
     return result;
   }

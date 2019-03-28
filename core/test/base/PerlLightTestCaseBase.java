@@ -1582,11 +1582,31 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     if (editor instanceof EditorWindow) {
       editor = ((EditorWindow)editor).getDelegate();
     }
-    handler.doRename(myFixture.getElementAtCaret(), editor, DataManager.getInstance().getDataContext(editor.getComponent()));
+    handler.doRename(myFixture.getElementAtCaret(), editor, getEditorDataContext());
     List<String> names = myFixture.getLookupElementStrings();
     assertNotNull(names);
     TemplateState state = TemplateManagerImpl.getTemplateState(editor);
     assertNotNull(state);
+    state.gotoEnd(false);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
+  }
+
+  protected void doTestIntroduceVariableNamesSuggester() {
+    initWithFileSmartWithoutErrors();
+    Editor editor = getEditor();
+
+    TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
+    if (editor instanceof EditorWindow) {
+      editor = ((EditorWindow)editor).getDelegate();
+    }
+    new PerlIntroduceVariableHandler().invoke(getProject(), editor, getFile(), null);
+    assertNoErrorElements();
+    List<String> names = myFixture.getLookupElementStrings();
+    assertNotNull(names);
+
+    TemplateState state = TemplateManagerImpl.getTemplateState(editor);
+    assertNotNull(state);
+
     state.gotoEnd(false);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
   }

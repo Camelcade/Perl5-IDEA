@@ -47,15 +47,6 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
 
   @NotNull
   @Override
-  protected List<String> computeSuggestedNames(@NotNull PerlIntroduceTarget target) {
-    List<String> result = new ArrayList<>();
-    result.add(target.getChildren().size() > 1 ? "string_list" : "string_list_item");
-    result.addAll(super.computeSuggestedNames(target));
-    return result;
-  }
-
-  @NotNull
-  @Override
   protected String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     if (target.isFullRange()) {
       return super.createTargetExpressionText(target);

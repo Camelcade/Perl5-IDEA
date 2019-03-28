@@ -1,3 +1,6 @@
 my $test_name<caret> = $a + $b;
-$test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $a + $test_name + $test_name + $test_name + $test_name +
-    $test_name + $test_name + $test_name + $a + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name;
+$test_name + $test_name + $test_name + $test_name + $test_name +
+    $test_name + $test_name + $a + $test_name + $test_name + $test_name +
+    $test_name + $test_name + $test_name + $test_name + $a + $test_name +
+    $test_name + $test_name + $test_name + $test_name + $test_name +
+    $test_name + $test_name;
