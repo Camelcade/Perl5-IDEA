@@ -19,8 +19,10 @@ package com.perl5.lang.perl.idea.refactoring;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
@@ -31,9 +33,17 @@ import java.util.Set;
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   @Nullable
   @Override
-  public SuggestedNameInfo getSuggestedNames(PsiElement element, PsiElement nameSuggestionContext, Set<String> result) {
-    if (element instanceof PerlHeredocOpener) {
-      result.addAll(PerlInjectionMarkersService.getInstance(element.getProject()).getSupportedMarkers());
+  public SuggestedNameInfo getSuggestedNames(@NotNull PsiElement currentElement,
+                                             @Nullable PsiElement targetElement,
+                                             @NotNull Set<String> result) {
+    if (!currentElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
+      ;
+    }
+    if (targetElement != null) {
+      currentElement = targetElement;
+    }
+    if (currentElement instanceof PerlHeredocOpener) {
+      result.addAll(PerlInjectionMarkersService.getInstance(currentElement.getProject()).getSupportedMarkers());
     }
 
     // todo play with this

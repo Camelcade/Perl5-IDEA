@@ -87,6 +87,7 @@ import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.refactoring.rename.NameSuggestionProvider;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
@@ -1572,5 +1573,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
     });
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(macros));
+  }
+
+  protected void doTestNameSuggester() {
+    initWithFileSmartWithoutErrors();
+    Set<String> names = new LinkedHashSet<>();
+
+    PsiElement targetElement = TargetElementUtil.findTargetElement(getEditor(), TargetElementUtil.getInstance().getAllAccepted());
+    PsiReference reference = TargetElementUtil.findReference(getEditor());
+    assert targetElement != null;
+    NameSuggestionProvider.EP_NAME.getExtensionList().forEach(it -> it.getSuggestedNames(
+      reference == null ? targetElement : reference.getElement(),
+      reference == null ? null : targetElement,
+      names
+    ));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
   }
 }
