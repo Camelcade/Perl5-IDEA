@@ -1581,12 +1581,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     PsiElement targetElement = TargetElementUtil.findTargetElement(getEditor(), TargetElementUtil.getInstance().getAllAccepted());
     PsiReference reference = TargetElementUtil.findReference(getEditor());
-    assert targetElement != null;
-    NameSuggestionProvider.EP_NAME.getExtensionList().forEach(it -> it.getSuggestedNames(
-      reference == null ? targetElement : reference.getElement(),
-      reference == null ? null : targetElement,
-      names
-    ));
+    PsiElement contextElement = reference == null ? null : reference.getElement();
+    NameSuggestionProvider.EP_NAME.getExtensionList().forEach(it -> it.getSuggestedNames(targetElement, contextElement, names));
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
   }
 }

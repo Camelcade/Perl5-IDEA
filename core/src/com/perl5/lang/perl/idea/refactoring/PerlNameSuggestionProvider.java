@@ -33,17 +33,14 @@ import java.util.Set;
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   @Nullable
   @Override
-  public SuggestedNameInfo getSuggestedNames(@NotNull PsiElement currentElement,
-                                             @Nullable PsiElement targetElement,
+  public SuggestedNameInfo getSuggestedNames(@NotNull PsiElement targetElement,
+                                             @Nullable PsiElement contextElement,
                                              @NotNull Set<String> result) {
-    if (!currentElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
-      ;
+    if (!targetElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
+      return null;
     }
-    if (targetElement != null) {
-      currentElement = targetElement;
-    }
-    if (currentElement instanceof PerlHeredocOpener) {
-      result.addAll(PerlInjectionMarkersService.getInstance(currentElement.getProject()).getSupportedMarkers());
+    if (targetElement instanceof PerlHeredocOpener) {
+      result.addAll(PerlInjectionMarkersService.getInstance(targetElement.getProject()).getSupportedMarkers());
     }
 
     // todo play with this
