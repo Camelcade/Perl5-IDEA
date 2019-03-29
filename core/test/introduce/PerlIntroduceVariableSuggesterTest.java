@@ -24,6 +24,12 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
     return "testData/introduce/suggester";
   }
 
+  public void testRegexCompile() {doTest();}
+
+  public void testRegexMatch() {doTest();}
+
+  public void testRegexReplace() {doTest();}
+
   public void testNumber() {doTest();}
 
   public void testString() {doTest();}

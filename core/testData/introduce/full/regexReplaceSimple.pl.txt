@@ -1,0 +1,2 @@
+my $test_name<caret> = qr/something$here/;
+s/$test_name//;

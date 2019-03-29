@@ -48,6 +48,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String NUMBER = "number";
   private static final String STRING = "string";
   private static final String COMMAND_OUTPUT = "command_output";
+  private static final String PATTERN = "pattern";
+  private static final String REGEX = "regex";
+  private static final List<String> REGEX_BASE_NAMES = Arrays.asList(PATTERN, REGEX);
+
 
   @Nullable
   @Override
@@ -129,6 +133,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (assignee instanceof PsiPerlNumberConstant) {
       result.add(NUMBER);
       return NUMBER;
+    }
+    else if (assignee instanceof PerlRegexExpression) {
+      result.addAll(REGEX_BASE_NAMES);
+      return PATTERN;
     }
     return null;
   }
