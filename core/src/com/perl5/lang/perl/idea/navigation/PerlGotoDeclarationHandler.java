@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 05.06.2015.
@@ -93,33 +94,35 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
       }
     }
     // string content to file jump fixme change to string
-    else if (sourceElement instanceof PerlStringContentElement && ((PerlStringContentElement)sourceElement).looksLikePath()) {
-      String tokenText = ((PerlStringContentElement)sourceElement).getContinuosText().replaceAll("\\\\", "/").replaceAll("/+", "/");
-      Project project = sourceElement.getProject();
+    else if (sourceElement instanceof PerlStringContentElement) {
+      String continuosText = ((PerlStringContentElement)sourceElement).getContinuosText();
+      if (PerlString.looksLikePath(continuosText)) {
+        String tokenText = continuosText.replaceAll("\\\\", "/").replaceAll("/+", "/");
+        Project project = sourceElement.getProject();
 
-      String fileName = ((PerlStringContentElement)sourceElement).getContentFileName();
+        String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
 
-
-      for (String file : FilenameIndex.getAllFilenames(project)) {
-        if (file != null && file.contains(fileName)) {
-          // fixme somehow if includeDirectories is true - no files found
-          for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
-            String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-            if (canonicalPath != null) {
-              if (canonicalPath.contains(tokenText + "."))    // higer priority
-              {
-                result.add(0, fileItem);
-              }
-              else if (canonicalPath.contains(tokenText)) {
-                result.add(fileItem);
+        for (String file : FilenameIndex.getAllFilenames(project)) {
+          if (file != null && file.contains(fileName)) {
+            // fixme somehow if includeDirectories is true - no files found
+            for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
+              String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+              if (canonicalPath != null) {
+                if (canonicalPath.contains(tokenText + "."))    // higer priority
+                {
+                  result.add(0, fileItem);
+                }
+                else if (canonicalPath.contains(tokenText)) {
+                  result.add(fileItem);
+                }
               }
             }
-          }
-          for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
-            String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-            if (canonicalPath != null) {
-              if (canonicalPath.contains(tokenText)) {
-                result.add(fileItem);
+            for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
+              String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+              if (canonicalPath != null) {
+                if (canonicalPath.contains(tokenText)) {
+                  result.add(fileItem);
+                }
               }
             }
           }

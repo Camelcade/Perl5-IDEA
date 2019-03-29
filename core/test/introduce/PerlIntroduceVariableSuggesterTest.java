@@ -32,6 +32,28 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
 
   public void testNumber() {doTest();}
 
+  public void testStringPathAbsolute() {doTest();}
+
+  public void testStringPathAbsoluteWindows() {doTest();}
+
+  public void testStringPathRelative() {doTest();}
+
+  public void testStringPathRelativeWindows() {doTest();}
+
+  public void testStringPathAbsoluteQQ() {doTest();}
+
+  public void testStringPathRelativeQQ() {doTest();}
+
+  public void testStringPathAbsoluteQX() {doTest();}
+
+  public void testStringPathRelativeQX() {doTest();}
+
+  public void testStringPackage() {doTest();}
+
+  public void testStringPackageQQ() {doTest();}
+
+  public void testStringPackageQX() {doTest();}
+
   public void testString() {doTest();}
 
   public void testStringLong() {doTest();}

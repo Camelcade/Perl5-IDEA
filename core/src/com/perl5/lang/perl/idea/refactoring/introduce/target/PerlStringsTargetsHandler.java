@@ -26,7 +26,6 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlStringBareImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,7 +85,7 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
         return elementToReplace;
       }
       prefix = "q " + openQuote;
-      suffix = "" + PerlPsiUtil.getQuoteCloseChar(openQuote);
+      suffix = "" + PerlString.getQuoteCloseChar(openQuote);
     }
 
     StringBuilder result = new StringBuilder();

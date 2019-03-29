@@ -185,7 +185,7 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
 
     return prefix + openQuote +
            target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars()).toString() +
-           PerlPsiUtil.getQuoteCloseChar(openQuote);
+           PerlString.getQuoteCloseChar(openQuote);
   }
 
   @NotNull

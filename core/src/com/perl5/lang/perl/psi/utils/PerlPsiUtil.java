@@ -51,7 +51,10 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
@@ -70,9 +73,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     HEREDOC, HEREDOC_END, HEREDOC_END_INDENTABLE, HEREDOC_QQ, HEREDOC_QX
   );
 
-  private static final String OPEN_QUOTES = "<[{(";
-  private static final String CLOSE_QUOTES = ">]})";
-  private static final String ALTERNATIVE_QUOTES = "/|!~^._=?\\;";
   public static final char SINGLE_QUOTE_CHAR = '\'';
   public static final String SINGLE_QUOTE = "" + SINGLE_QUOTE_CHAR;
   public static final char DOUBLE_QUOTE_CHAR = '"';
@@ -1032,10 +1032,10 @@ public class PerlPsiUtil implements PerlElementTypes {
    */
   @NotNull
   public static String createSingleQuotedString(@NotNull String content) {
-    char openQuoteChar = suggestOpenQuoteChar(content, SINGLE_QUOTE_CHAR);
+    char openQuoteChar = PerlString.suggestOpenQuoteChar(content, SINGLE_QUOTE_CHAR);
     return openQuoteChar == 0 ? SINGLE_QUOTE + StringUtil.escapeChar(content, SINGLE_QUOTE_CHAR) + SINGLE_QUOTE :
            openQuoteChar == SINGLE_QUOTE_CHAR ? SINGLE_QUOTE + content + SINGLE_QUOTE :
-           PerlPsiUtil.QUOTE_Q + openQuoteChar + content + getQuoteCloseChar(openQuoteChar);
+           PerlPsiUtil.QUOTE_Q + openQuoteChar + content + PerlString.getQuoteCloseChar(openQuoteChar);
   }
 
   static public abstract class HeredocProcessor implements Processor<PsiElement> {
@@ -1048,44 +1048,5 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
     return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
-  }
-
-  /**
-   * Suggests a quote to use for a {@code text} with a set of {@code defaultQuote} or non-default non-literal quotes
-   *
-   * @return a quote symbol or 0 if no quote been found
-   */
-  public static char suggestOpenQuoteChar(@NotNull CharSequence text, char defaultQuote) {
-    if (StringUtil.indexOf(text, defaultQuote) < 0) {
-      return defaultQuote;
-    }
-    for (int i = 0; i < OPEN_QUOTES.length(); i++) {
-      if (StringUtil.indexOf(text, OPEN_QUOTES.charAt(i)) < 0 && StringUtil.indexOf(text, CLOSE_QUOTES.charAt(i)) < 0) {
-        return OPEN_QUOTES.charAt(i);
-      }
-    }
-    for (int i = 0; i < ALTERNATIVE_QUOTES.length(); i++) {
-      if (StringUtil.indexOf(text, ALTERNATIVE_QUOTES.charAt(i)) < 0) {
-        return ALTERNATIVE_QUOTES.charAt(i);
-      }
-    }
-    return 0;
-  }
-
-
-  @NotNull
-  public static String toSnakeCase(@NotNull String source) {
-    return StringUtil.join(source.toLowerCase(Locale.getDefault()).split("\\s+"), "_");
-  }
-
-  /**
-   * Choosing closing character by opening one
-   *
-   * @param charOpener - char with which sequence started
-   * @return - ending char
-   */
-  public static char getQuoteCloseChar(char charOpener) {
-    int index = OPEN_QUOTES.indexOf(charOpener);
-    return index < 0 ? charOpener : CLOSE_QUOTES.charAt(index);
   }
 }

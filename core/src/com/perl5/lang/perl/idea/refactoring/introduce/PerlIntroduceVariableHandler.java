@@ -257,7 +257,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                                            @NotNull List<SmartPsiElementPointer<PsiElement>> psiOccurrences) {
     Project project = declarationBlock.first.getProject();
     return WriteCommandAction.writeCommandAction(project).compute(() -> {
-      PsiFile containingFile = anchor.getContainingFile();
       final RefactoringEventData afterData = new RefactoringEventData();
       afterData.addElement(declarationBlock.first);
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)

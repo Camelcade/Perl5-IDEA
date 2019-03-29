@@ -21,6 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -63,7 +64,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
     }
     String openQuoteText = openQuoteElement.getText();
     String closeQuoteText = closeQuoteElement != null ? closeQuoteElement.getText() :
-                            "" + PerlPsiUtil.getQuoteCloseChar(openQuoteText.charAt(0));
+                            "" + PerlString.getQuoteCloseChar(openQuoteText.charAt(0));
     return StringUtil.containsWhitespaces(targetElementsText) ?
            "qw " + openQuoteText + targetElementsText + closeQuoteText :
            PerlPsiUtil.createSingleQuotedString(targetElementsText);

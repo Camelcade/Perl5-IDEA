@@ -21,6 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
+import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
@@ -74,12 +75,12 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
       return "'INTERNAL ERROR, REPORT TO DEVS';";
     }
     CharSequence subSequence = target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars());
-    char openQuote = PerlPsiUtil.suggestOpenQuoteChar(subSequence, '"');
+    char openQuote = PerlString.suggestOpenQuoteChar(subSequence, '"');
     if (openQuote == DOUBLE_QUOTE_CHAR) {
       return DOUBLE_QUOTE + subSequence + DOUBLE_QUOTE + ";";
     }
     else if (openQuote != 0) {
-      return PerlPsiUtil.QUOTE_QQ + " " + openQuote + subSequence + PerlPsiUtil.getQuoteCloseChar(openQuote) + ";";
+      return PerlPsiUtil.QUOTE_QQ + " " + openQuote + subSequence + PerlString.getQuoteCloseChar(openQuote) + ";";
     }
     return "substr <<EOM, 0, -1;\n" + subSequence + "\nEOM\n";
   }

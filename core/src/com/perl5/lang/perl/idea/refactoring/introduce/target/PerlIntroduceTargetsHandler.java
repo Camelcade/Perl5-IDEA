@@ -128,7 +128,7 @@ public abstract class PerlIntroduceTargetsHandler {
       char openQuote = ((PsiPerlMatchRegex)targetElement).getOpenQuote();
       PsiPerlPerlRegex regex = ((PsiPerlMatchRegex)targetElement).getRegex();
       if (openQuote != 0 && regex != null) {
-        char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
+        char closeQuote = PerlString.getQuoteCloseChar(openQuote);
         PsiPerlPerlRegexModifiers modifiers = ((PsiPerlMatchRegex)targetElement).getPerlRegexModifiers();
         String regexText = "qr " + openQuote + regex.getText() + closeQuote;
         return modifiers == null ? regexText : regexText + modifiers.getText();
@@ -142,7 +142,7 @@ public abstract class PerlIntroduceTargetsHandler {
       if (container instanceof PerlReplacementRegex) {
         char openQuote = ((PerlReplacementRegex)container).getOpenQuote();
         if (openQuote > 0) {
-          char closeQuote = PerlPsiUtil.getQuoteCloseChar(openQuote);
+          char closeQuote = PerlString.getQuoteCloseChar(openQuote);
           return "qr " + openQuote + targetElement.getText() + closeQuote;
         }
       }

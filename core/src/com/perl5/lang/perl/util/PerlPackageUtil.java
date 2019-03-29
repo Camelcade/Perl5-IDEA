@@ -210,6 +210,11 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return newName;
   }
 
+  @NotNull
+  public static List<String> split(@Nullable String packageName) {
+    return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalPackageName(packageName), PACKAGE_SEPARATOR);
+  }
+
   /**
    * Searching of namespace element is in. If no explicit namespaces defined, main is returned
    *
