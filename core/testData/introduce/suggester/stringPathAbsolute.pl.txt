@@ -7,8 +7,5 @@ path_to_filename
 filename_thtml
 absolute_path_to_filename_thtml
 path_to_filename_thtml
-filename_thtml_pl
-absolute_path_to_filename_thtml_pl
-path_to_filename_thtml_pl
 scalar
 value

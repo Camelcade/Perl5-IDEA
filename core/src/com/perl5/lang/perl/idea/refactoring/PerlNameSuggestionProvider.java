@@ -65,6 +65,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String RELATIVE_PATH_TO = "relative_path_to";
   private static final String PATH_NAME = "pathname";
   private static final List<String> BASE_PATH_NAMES = Arrays.asList(PATH, PATH_NAME);
+  private static final int FILE_CHUNKS_TO_USE = 2;
 
   @Nullable
   @Override
@@ -203,8 +204,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
 
     List<String> fileNameParts = StringUtil.split(StringUtil.trimLeading(fileName, '.'), ".");
+    int chunksNumber = Math.min(fileNameParts.size(), FILE_CHUNKS_TO_USE);
     List<String> result = new ArrayList<>();
-    for (int i = 1; i <= fileNameParts.size(); i++) {
+    for (int i = 1; i <= chunksNumber; i++) {
       String baseFileName = join(fileNameParts.subList(0, i));
       result.add(baseFileName);
       if (file.isAbsolute()) {
