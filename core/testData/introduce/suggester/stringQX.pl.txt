@@ -1,0 +1,4 @@
+scalar
+value
+string
+> command_output

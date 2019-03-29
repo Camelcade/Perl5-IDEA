@@ -51,10 +51,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
@@ -1075,6 +1072,11 @@ public class PerlPsiUtil implements PerlElementTypes {
     return 0;
   }
 
+
+  @NotNull
+  public static String toSnakeCase(@NotNull String source) {
+    return StringUtil.join(source.toLowerCase(Locale.getDefault()).split("\\s+"), "_");
+  }
 
   /**
    * Choosing closing character by opening one

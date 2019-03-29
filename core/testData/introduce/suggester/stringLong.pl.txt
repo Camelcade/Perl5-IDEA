@@ -1,3 +1,3 @@
 scalar
 value
-> number
+> string

@@ -1606,8 +1606,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
     TemplateState state = TemplateManagerImpl.getTemplateState(editor);
     assertNotNull(state);
+    TextRange currentVariableRange = state.getCurrentVariableRange();
+    assertNotNull(currentVariableRange);
+    String selectedItem = currentVariableRange.substring(getEditorText());
 
     state.gotoEnd(false);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
+    UsefulTestCase.assertSameLinesWithFile(
+      getTestResultsFilePath(),
+      StringUtil.join(ContainerUtil.map(names, it -> Objects.equals(it, selectedItem) ? "> " + it : it), "\n"));
   }
 }

@@ -26,6 +26,22 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
 
   public void testNumber() {doTest();}
 
+  public void testString() {doTest();}
+
+  public void testStringLong() {doTest();}
+
+  public void testStringWithBadCharacter() {doTest();}
+
+  public void testStringQQ() {doTest();}
+
+  public void testStringQQLong() {doTest();}
+
+  public void testStringQQWithBadCharacter() {doTest();}
+
+  public void testStringQQWithInterpolation() {doTest();}
+
+  public void testStringQX() {doTest();}
+
   private void doTest() {
     doTestIntroduceVariableNamesSuggester();
   }
