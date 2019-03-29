@@ -137,9 +137,17 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return;
     }
 
+    PsiElement targetExpressionElement = PerlIntroduceTargetsHandler.createTargetExpressionElement(target);
+    if (targetExpressionElement == null) {
+      LOG.error("Unable to create a target expression element: " + target);
+      return;
+    }
+
+    Set<String> suggestedNames = new LinkedHashSet<>();
+    String variableName = PerlNameSuggestionProvider.suggestAndGetRecommendedName(targetExpressionElement, suggestedNames);
+
     Project project = file.getProject();
-    Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(
-      project, target, "new_variable_name");
+    Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
     if (declaration == null) {
       return;
     }
@@ -166,8 +174,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       .collect(Collectors.toList());
 
 
-    Set<String> suggestedNames = new LinkedHashSet<>();
-    String variableName = PerlNameSuggestionProvider.suggestAndGetRecommendedName(variableDeclaration, suggestedNames);
+    PerlNameSuggestionProvider.suggestNames(variableDeclaration, suggestedNames);
 
     PerlVariableIntroducer inplaceIntroducer = new PerlVariableIntroducer(
       variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY), variableName);

@@ -1,4 +1,4 @@
-scalar
-value
 > pattern
 regex
+scalar
+value

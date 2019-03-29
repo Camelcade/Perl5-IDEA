@@ -75,7 +75,7 @@ public class PerlElementFactory {
   public static PsiElement createStatement(@NotNull Project project, @NotNull String statementText) {
     PerlFileImpl perlFile = createFile(project, statementText + ";");
     PsiElement[] children = perlFile.getChildren();
-    return children.length != 1 ? null : children[0];
+    return children.length == 0 ? null : children[0];
   }
 
   // fixme probably we don't need package name and sub. just identifier

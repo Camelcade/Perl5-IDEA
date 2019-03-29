@@ -1,4 +1,4 @@
-scalar
-value
 string
 > command_output
+scalar
+value

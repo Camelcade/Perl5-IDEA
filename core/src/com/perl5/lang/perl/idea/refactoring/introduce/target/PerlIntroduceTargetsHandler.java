@@ -250,10 +250,36 @@ public abstract class PerlIntroduceTargetsHandler {
   }
 
   /**
+   * Computes a target expression element
+   */
+  @Nullable
+  public static PsiElement createTargetExpressionElement(@NotNull PerlIntroduceTarget target) {
+    PsiElement targetElement = target.getPlace();
+    PerlIntroduceTargetsHandler handler = getHandler(targetElement);
+    if (handler == null) {
+      return null;
+    }
+
+    String targetExpressionText = handler.createTargetExpressionText(target);
+    if (StringUtil.isEmptyOrSpaces(targetExpressionText)) {
+      return null;
+    }
+
+    PsiElement statement = PerlElementFactory.createStatement(targetElement.getProject(), targetExpressionText);
+    if (statement == null) {
+      return null;
+    }
+    return statement.getFirstChild();
+  }
+
+  /**
    * Could be an extension point
    */
-  @NotNull
-  private static PerlIntroduceTargetsHandler getHandler(@NotNull PsiElement run) {
+  @Contract("null->null;!null->!null")
+  private static PerlIntroduceTargetsHandler getHandler(@Nullable PsiElement run) {
+    if (run == null) {
+      return null;
+    }
     IElementType elementType = PsiUtilCore.getElementType(run);
 
     if (run instanceof PerlStringList) {

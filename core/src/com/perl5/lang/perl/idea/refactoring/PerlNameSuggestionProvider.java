@@ -111,14 +111,19 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return null;
     }
     PsiElement assignee = ((PerlAssignExpression)assignment).getRightSide();
-    if (assignee instanceof PerlString) {
+    return suggestAndAddRecommendedName(assignee, result);
+  }
+
+  @Nullable
+  private String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
+    if (expression instanceof PerlString) {
       result.add(STRING);
-      if (assignee instanceof PsiPerlStringXq) {
+      if (expression instanceof PsiPerlStringXq) {
         result.add(COMMAND_OUTPUT);
         return COMMAND_OUTPUT;
       }
-      if (assignee.getChildren().length == 0) {
-        String valueText = ElementManipulators.getValueText(assignee);
+      if (expression.getChildren().length == 0) {
+        String valueText = ElementManipulators.getValueText(expression);
         if (valueText.length() < 30) {
           String variableNameFromString = PerlPsiUtil.toSnakeCase(valueText);
           if (PerlNamesValidator.isIdentifier(variableNameFromString)) {
@@ -130,11 +135,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
       return STRING;
     }
-    else if (assignee instanceof PsiPerlNumberConstant) {
+    else if (expression instanceof PsiPerlNumberConstant) {
       result.add(NUMBER);
       return NUMBER;
     }
-    else if (assignee instanceof PerlRegexExpression) {
+    else if (expression instanceof PerlRegexExpression) {
       result.addAll(REGEX_BASE_NAMES);
       return PATTERN;
     }
@@ -146,9 +151,13 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * Fills {@code result} with names suggested for the {@code targetElement} and returns the recommended name
    */
   @NotNull
-  public static String suggestAndGetRecommendedName(@NotNull PsiElement targetElement, @NotNull Set<String> result) {
+  public static String suggestAndGetRecommendedName(@NotNull PsiElement expression, @NotNull Set<String> result) {
     return StringUtil.notNullize(Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class))
-                                   .suggestAndAddRecommendedName(targetElement, null, result), "new_variable_name");
+                                   .suggestAndAddRecommendedName(expression, result), "new_variable_name");
   }
 
+  public static void suggestNames(@NotNull PerlVariableDeclarationElement variableDeclarationElement, @NotNull Set<String> result) {
+    Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class))
+      .suggestAndAddRecommendedName((PsiElement)variableDeclarationElement, null, result);
+  }
 }
