@@ -24,6 +24,7 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,8 +43,8 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
 
   @NotNull
   @Override
-  protected String computeSigil(@NotNull PerlIntroduceTarget target) {
-    return target.getChildren().size() > 1 ? "@" : "$";
+  protected PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
+    return target.getChildren().size() > 1 ? PerlVariableType.ARRAY : PerlVariableType.SCALAR;
   }
 
   @NotNull

@@ -36,6 +36,7 @@ import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -88,27 +89,25 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @NotNull
   protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my " + computeSigil(target) + variableName + " = " + createTargetExpressionText(target) + ";";
+    return "my " + computeVariableType(target).getSigil() + variableName + " = " + createTargetExpressionText(target) + ";";
   }
 
   /**
    * @return a sigil for variable, that can represent a {@code target}
    */
   @NotNull
-  protected String computeSigil(@NotNull PerlIntroduceTarget target) {
+  protected PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     IElementType targetType = PsiUtilCore.getElementType(targetPlace);
     String sigil;
     if (ARRAY_CONTEXT_TOKENSET.contains(targetType)) {
-      sigil = "@";
+      return PerlVariableType.ARRAY;
     }
     else if (HASH_CONTEXT_TOKENSET.contains(targetType)) {
-      sigil = "%";
+      return PerlVariableType.HASH;
     }
-    else {
-      sigil = "$";
-    }
-    return sigil;
+
+    return PerlVariableType.SCALAR;
   }
 
   /**
