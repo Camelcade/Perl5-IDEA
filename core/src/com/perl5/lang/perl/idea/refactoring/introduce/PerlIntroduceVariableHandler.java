@@ -143,8 +143,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return;
     }
 
-    Set<String> suggestedNames = new LinkedHashSet<>();
-    String variableName = PerlNameSuggestionProvider.suggestAndGetRecommendedName(targetExpressionElement, suggestedNames);
+    String variableName = PerlNameSuggestionProvider.suggestAndGetRecommendedName(targetExpressionElement, new LinkedHashSet<>());
 
     Project project = file.getProject();
     Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
@@ -174,15 +173,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       .collect(Collectors.toList());
 
 
-    PerlNameSuggestionProvider.suggestNames(variableDeclaration, suggestedNames);
-
-    PerlVariableIntroducer inplaceIntroducer = new PerlVariableIntroducer(
-      variableDeclaration, editor, psiOccurrences.toArray(PsiElement.EMPTY_ARRAY), variableName);
-    if (inplaceIntroducer.performInplaceRefactoring(new LinkedHashSet<>(suggestedNames))) {
-      return;
+    if (!new PerlVariableIntroducer(variableDeclaration,
+                                    editor,
+                                    psiOccurrences.toArray(PsiElement.EMPTY_ARRAY),
+                                    variableName).performInplaceRefactoring()) {
+      performDialogRename(project, variableDeclaration);
     }
-    inplaceIntroducer.finish(false);
-    performDialogRename(project, variableDeclaration);
   }
 
   private void performDialogRename(@NotNull Project project, @NotNull PerlVariableDeclarationElement variableDeclaration) {

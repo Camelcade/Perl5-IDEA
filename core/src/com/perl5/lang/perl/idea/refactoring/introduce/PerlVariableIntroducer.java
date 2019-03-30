@@ -18,17 +18,37 @@ package com.perl5.lang.perl.idea.refactoring.introduce;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
 import com.intellij.refactoring.introduce.inplace.InplaceVariableIntroducer;
+import com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashSet;
+
 public class PerlVariableIntroducer extends InplaceVariableIntroducer<PsiElement> {
-  public PerlVariableIntroducer(@NotNull PsiNamedElement elementToRename,
+  public PerlVariableIntroducer(@NotNull PerlVariableDeclarationElement elementToRename,
                                 @NotNull Editor editor,
                                 PsiElement[] occurrences,
                                 @NotNull String suggestedName) {
     super(elementToRename, editor, elementToRename.getProject(), "Introduce variable", occurrences, null);
     myInitialName = suggestedName;
     myOldName = suggestedName;
+  }
+
+  public boolean performInplaceRefactoring() {
+    LinkedHashSet<String> nameSuggestions = new LinkedHashSet<>();
+    assert myElementToRename instanceof PerlVariableDeclaration;
+    PerlNameSuggestionProvider.suggestNames((PerlVariableDeclarationElement)myElementToRename, nameSuggestions);
+    boolean result = super.performInplaceRefactoring(nameSuggestions);
+    if (!result) {
+      finish(false);
+    }
+    return result;
+  }
+
+  @Override
+  protected boolean performRefactoring() {
+    return super.performRefactoring();
   }
 }

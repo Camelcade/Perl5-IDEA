@@ -63,7 +63,7 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
   @NotNull
   @Override
   protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my " + computeVariableType(target) + variableName + " = " + createTargetExpressionText(target);
+    return "my " + computeVariableType(target).getSigil() + variableName + " = " + createTargetExpressionText(target);
   }
 
   @NotNull

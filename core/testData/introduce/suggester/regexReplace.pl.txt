@@ -1,4 +1,4 @@
-> pattern
-regex
 scalar
 value
+> pattern
+regex

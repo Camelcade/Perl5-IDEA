@@ -1,4 +1,4 @@
-string
-> some_cumbersome_string
 scalar
 value
+string
+> some_cumbersome_string

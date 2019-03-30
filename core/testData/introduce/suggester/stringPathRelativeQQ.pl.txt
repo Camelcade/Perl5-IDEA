@@ -1,3 +1,5 @@
+scalar
+value
 string
 path
 pathname
@@ -7,5 +9,3 @@ path_to_filename
 filename_thtml
 relative_path_to_filename_thtml
 path_to_filename_thtml
-scalar
-value
