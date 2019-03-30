@@ -175,40 +175,24 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return STRING;
     }
     else if (expression instanceof PsiPerlHashElement) {
-      String resultString = join(HASH, ELEMENT);
+      String resultString = Objects.requireNonNull(join(HASH, ELEMENT));
       result.add(resultString);
       result.add(join(HASH, ITEM));
-      PsiPerlExpr expr = ((PsiPerlHashElement)expression).getExpr();
-      String singularName = null;
-      if (expr instanceof PerlVariable) {
-        String variableName = ((PerlVariable)expr).getName();
-        if (StringUtil.isNotEmpty(variableName)) {
-          singularName = ObjectUtils.notNull(StringUtil.unpluralize(variableName), variableName);
-          String variableNameElement = join(singularName, ELEMENT);
-          if (StringUtil.isNotEmpty(variableNameElement)) {
-            result.add(variableNameElement);
-            resultString = variableNameElement;
-          }
-          ContainerUtil.addIfNotNull(result, join(singularName, ITEM));
+      return suggestNamesForElements(((PsiPerlHashElement)expression).getExpr(),
+                                     ((PsiPerlHashElement)expression).getHashIndex().getExpr(),
+                                     result,
+                                     resultString);
+    }
+    else if (expression instanceof PerlDerefExpression) {
+      PsiElement[] children = expression.getChildren();
+      if (children.length == 2) {
+        if (children[1] instanceof PsiPerlHashIndex) {
+          String resultString = Objects.requireNonNull(join(HASH, ELEMENT));
+          result.add(resultString);
+          result.add(join(HASH, ITEM));
+          return suggestNamesForElements(children[0], ((PsiPerlHashIndex)children[1]).getExpr(), result, resultString);
         }
       }
-      PsiPerlHashIndex hashIndex = ((PsiPerlHashElement)expression).getHashIndex();
-      PsiPerlExpr indexExpr = hashIndex.getExpr();
-      String nameFromKey = getNameFromManipulator(indexExpr);
-      if (StringUtil.isEmptyOrSpaces(nameFromKey) && indexExpr instanceof PerlVariable) {
-        nameFromKey = join(((PerlVariable)indexExpr).getName());
-      }
-      else {
-        resultString = nameFromKey;
-      }
-      if (StringUtil.isNotEmpty(nameFromKey)) {
-        result.add(nameFromKey);
-        if (StringUtil.isNotEmpty(singularName)) {
-          String join = join(singularName, nameFromKey);
-          ContainerUtil.addIfNotNull(result, join);
-        }
-      }
-      return resultString;
     }
     /*
     else if( expression instanceof PsiPerlArrayElement){
@@ -233,6 +217,52 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return PATTERN;
     }
     return null;
+  }
+
+  /**
+   * Suggests names for hash/array elements
+   *
+   * @param baseExpr       variable from index expression
+   * @param indexExpr      expressions from index expression
+   * @param result         result to add recommendations to
+   * @param recommendation base recommendation name
+   * @return recommended name
+   */
+  @NotNull
+  private static String suggestNamesForElements(@Nullable PsiElement baseExpr,
+                                                @Nullable PsiPerlExpr indexExpr,
+                                                @NotNull Set<String> result,
+                                                @NotNull String recommendation) {
+    String singularName = null;
+    if (baseExpr instanceof PerlVariable) {
+      String variableName = ((PerlVariable)baseExpr).getName();
+      if (StringUtil.isNotEmpty(variableName)) {
+        singularName = ObjectUtils.notNull(StringUtil.unpluralize(variableName), variableName);
+        String variableNameElement = join(singularName, ELEMENT);
+        if (StringUtil.isNotEmpty(variableNameElement)) {
+          result.add(variableNameElement);
+          recommendation = variableNameElement;
+        }
+        ContainerUtil.addIfNotNull(result, join(singularName, ITEM));
+      }
+    }
+    String nameFromKey = getNameFromManipulator(indexExpr);
+    if (StringUtil.isNotEmpty(nameFromKey)) {
+      recommendation = nameFromKey;
+    }
+    else {
+      if (indexExpr instanceof PerlVariable) {
+        nameFromKey = join(((PerlVariable)indexExpr).getName());
+      }
+    }
+    if (StringUtil.isNotEmpty(nameFromKey)) {
+      result.add(nameFromKey);
+      if (StringUtil.isNotEmpty(singularName)) {
+        String join = join(singularName, nameFromKey);
+        ContainerUtil.addIfNotNull(result, join);
+      }
+    }
+    return recommendation;
   }
 
   @NotNull

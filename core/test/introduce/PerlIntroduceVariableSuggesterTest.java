@@ -32,6 +32,14 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
 
   public void testHashIndexVariable() {doTest();}
 
+  public void testHashIndexDerefInvocation() {doTest();}
+
+  public void testHashIndexDerefString() {doTest();}
+
+  public void testHashIndexDerefStringQQ() {doTest();}
+
+  public void testHashIndexDerefVariable() {doTest();}
+
   public void testRegexCompile() {doTest();}
 
   public void testRegexMatch() {doTest();}
