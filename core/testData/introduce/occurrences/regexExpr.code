@@ -1,0 +1,27 @@
+$var =~ /thisisr<caret>egex/;
+$var =~ m/thisisregex/;
+$var =~ m{thisisregex};
+$var =~ /this  isre gex/x;
+$var =~ /this  isre ge x/xx;
+$var =~ m/this  isre ge x/x;
+$var =~ m/this  isre g ex/xx;
+$var =~ m{th  isi  sre gex}x;
+$var =~ m{th  isi  sregex}xx;
+$var =~ s/thisisregex//;
+$var =~ qr/thisisregex/;
+$var =~ qr/thisisr ege x/x;
+$var =~ qr/th is i sregex/xx;
+$var = qr/thisisregex/;
+
+$var !~ m/thisisregex/;
+$var !~ m{thisisregex};
+$var !~ /this  isre gex/x;
+$var !~ /this  isre ge x/xx;
+$var !~ m/this  isre ge x/x;
+$var !~ m/this  isre g ex/xx;
+$var !~ m{th  isi  sre gex}x;
+$var !~ m{th  isi  sregex}xx;
+$var !~ s/thisisregex//;
+$var !~ qr/thisisregex/;
+$var !~ qr/thisisr ege x/x;
+$var != qr/th is i sregex/xx;

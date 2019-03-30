@@ -1,0 +1,27 @@
+<occurrence>$var =~ /thisisregex/</occurrence>;
+<occurrence>$var =~ m/thisisregex/</occurrence>;
+<occurrence>$var =~ m{thisisregex}</occurrence>;
+<occurrence>$var =~ /this  isre gex/x</occurrence>;
+<occurrence>$var =~ /this  isre ge x/xx</occurrence>;
+<occurrence>$var =~ m/this  isre ge x/x</occurrence>;
+<occurrence>$var =~ m/this  isre g ex/xx</occurrence>;
+<occurrence>$var =~ m{th  isi  sre gex}x</occurrence>;
+<occurrence>$var =~ m{th  isi  sregex}xx</occurrence>;
+$var =~ s/thisisregex//;
+<occurrence>$var =~ qr/thisisregex/</occurrence>;
+<occurrence>$var =~ qr/thisisr ege x/x</occurrence>;
+<occurrence>$var =~ qr/th is i sregex/xx</occurrence>;
+$var = qr/thisisregex/;
+
+$var !~ m/thisisregex/;
+$var !~ m{thisisregex};
+$var !~ /this  isre gex/x;
+$var !~ /this  isre ge x/xx;
+$var !~ m/this  isre ge x/x;
+$var !~ m/this  isre g ex/xx;
+$var !~ m{th  isi  sre gex}x;
+$var !~ m{th  isi  sregex}xx;
+$var !~ s/thisisregex//;
+$var !~ qr/thisisregex/;
+$var !~ qr/thisisr ege x/x;
+$var !~ qr/th is i sregex/xx;
