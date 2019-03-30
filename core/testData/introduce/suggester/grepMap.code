@@ -1,0 +1,7 @@
+grep{
+  say 'grep<caret>';
+}
+map{
+  say 'map<caret>';
+}
+@source_array;

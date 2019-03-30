@@ -73,6 +73,15 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String ITEM = "item";
   private static final String SLICE = "slice";
   private static final int MAX_GENERATED_NAME_LENGTH = 40;
+  private static final String ANON_SUB = "anon_sub";
+  private static final String LAMBDA = "lambda";
+  private static final List<String> BASE_ANON_SUB_NAMES = Arrays.asList(ANON_SUB, LAMBDA);
+  private static final String RESULT = "result";
+  private static final String DO_RESULT = "do_result";
+  private static final String EVAL_RESULT = "eval_result";
+  private static final String SORTED = "sorted";
+  private static final String MAPPED = "mapped";
+  private static final String GREPPED = "filtered";
 
   @Nullable
   @Override
@@ -137,64 +146,61 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   @Nullable
   private String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
+    String recommendation = null;
     if (expression instanceof PerlString) {
-      result.add(STRING);
-      if (expression instanceof PsiPerlStringXq) {
-        result.add(COMMAND_OUTPUT);
-        return COMMAND_OUTPUT;
-      }
-      if (expression.getChildren().length == 0) {
-        String nameFromManipulator = getNameFromManipulator(expression);
-        if (nameFromManipulator != null) {
-          result.add(nameFromManipulator);
-          return nameFromManipulator;
-        }
-        String valueText = ElementManipulators.getValueText(expression);
-
-        if (PerlString.looksLikePackage(valueText)) {
-          result.addAll(PACKAGE_BASE_NAMES);
-          List<String> namespaceVariants = getVariantsFromNamespaceName(valueText);
-          result.addAll(namespaceVariants);
-          if (!namespaceVariants.isEmpty()) {
-            return namespaceVariants.get(0);
-          }
-        }
-
-        // this probably should be the last
-        String independentPath = FileUtil.toSystemIndependentName(valueText);
-        if (PerlString.looksLikePath(independentPath)) {
-          result.addAll(BASE_PATH_NAMES);
-          List<String> pathVariants = getVariantsFromPath(independentPath);
-          result.addAll(pathVariants);
-          if (!pathVariants.isEmpty()) {
-            return pathVariants.get(0);
-          }
-        }
-      }
-
-      return STRING;
+      recommendation = suggestAndAddNameForString((PerlString)expression, result);
     }
     else if (expression instanceof PsiPerlHashElement) {
       String resultString = Objects.requireNonNull(join(HASH, ELEMENT));
       result.add(resultString);
       result.add(join(HASH, ITEM));
-      return suggestNamesForElements(((PsiPerlHashElement)expression).getExpr(),
-                                     ((PsiPerlHashElement)expression).getHashIndex().getExpr(),
-                                     result,
-                                     resultString);
+      recommendation = suggestNamesForElements(((PsiPerlHashElement)expression).getExpr(),
+                                               ((PsiPerlHashElement)expression).getHashIndex().getExpr(),
+                                               result,
+                                               resultString);
     }
     else if (expression instanceof PerlDerefExpression) {
       PsiElement[] children = expression.getChildren();
-      if (children.length == 2) {
-        if (children[1] instanceof PsiPerlHashIndex) {
-          String resultString = Objects.requireNonNull(join(HASH, ELEMENT));
-          result.add(resultString);
-          result.add(join(HASH, ITEM));
-          return suggestNamesForElements(children[0], ((PsiPerlHashIndex)children[1]).getExpr(), result, resultString);
-        }
+      PsiElement element = children[children.length - 1];
+      PsiElement baseElement = children[children.length - 2];
+
+      if (element instanceof PsiPerlHashIndex) {
+        recommendation = Objects.requireNonNull(join(HASH, ELEMENT));
+        result.add(recommendation);
+        result.add(join(HASH, ITEM));
+
+        recommendation = suggestNamesForElements(baseElement, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
+      }
+      else if (element instanceof PsiPerlParenthesisedCallArguments) {
+        recommendation = join(getBaseName(baseElement), RESULT);
       }
     }
+    else if (expression instanceof PerlSubExpr) {
+      result.addAll(BASE_ANON_SUB_NAMES);
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlDoExpr) {
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlEvalExpr) {
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlGrepExpr) {
+      recommendation = suggestAndGetGrepMapSortNames(expression, GREPPED, result);
+    }
+    else if (expression instanceof PerlMapExpr) {
+      recommendation = suggestAndGetGrepMapSortNames(expression, MAPPED, result);
+    }
+    else if (expression instanceof PerlSortExpr) {
+      recommendation = suggestAndGetGrepMapSortNames(expression, SORTED, result);
+    }
     /*
+    else if( expression instanceof PsiPerlAnonArray){
+
+    }
+    else if( expression instanceof PsiPerlAnonHash){
+
+    }
     else if( expression instanceof PsiPerlArrayElement){
 
     }
@@ -209,13 +215,99 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
     */
     else if (expression instanceof PsiPerlNumberConstant) {
-      result.add(NUMBER);
-      return NUMBER;
+      recommendation = NUMBER;
     }
     else if (expression instanceof PerlRegexExpression) {
       result.addAll(REGEX_BASE_NAMES);
-      return PATTERN;
+      recommendation = PATTERN;
     }
+    ContainerUtil.addIfNotNull(result, recommendation);
+    return recommendation;
+  }
+
+  private String suggestAndGetGrepMapSortNames(@Nullable PsiElement expression,
+                                               @NotNull String prefix,
+                                               @NotNull Set<String> result) {
+    String recommendedName = join(prefix, VALUE);
+    result.add(recommendedName);
+    String fullName = getBaseName(expression);
+    if (StringUtil.isNotEmpty(fullName)) {
+      recommendedName = fullName;
+      result.add(fullName);
+    }
+    return recommendedName;
+  }
+
+  private static String suggestAndAddNameForString(@NotNull PerlString expression, @NotNull Set<String> result) {
+    result.add(STRING);
+    if (expression instanceof PsiPerlStringXq) {
+      result.add(COMMAND_OUTPUT);
+      return COMMAND_OUTPUT;
+    }
+    if (expression.getChildren().length == 0) {
+      String nameFromManipulator = getNameFromManipulator(expression);
+      if (nameFromManipulator != null) {
+        result.add(nameFromManipulator);
+        return nameFromManipulator;
+      }
+      String valueText = ElementManipulators.getValueText(expression);
+
+      if (PerlString.looksLikePackage(valueText)) {
+        result.addAll(PACKAGE_BASE_NAMES);
+        List<String> namespaceVariants = getVariantsFromNamespaceName(valueText);
+        result.addAll(namespaceVariants);
+        if (!namespaceVariants.isEmpty()) {
+          return namespaceVariants.get(0);
+        }
+      }
+
+      // this probably should be the last
+      String independentPath = FileUtil.toSystemIndependentName(valueText);
+      if (PerlString.looksLikePath(independentPath)) {
+        result.addAll(BASE_PATH_NAMES);
+        List<String> pathVariants = getVariantsFromPath(independentPath);
+        result.addAll(pathVariants);
+        if (!pathVariants.isEmpty()) {
+          return pathVariants.get(0);
+        }
+      }
+    }
+
+    return STRING;
+  }
+
+  @Nullable
+  @Contract("null->null")
+  private static String getBaseName(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
+    String nameFromKey = getNameFromManipulator(element);
+    if (StringUtil.isNotEmpty(nameFromKey)) {
+      return nameFromKey;
+    }
+    if (element instanceof PerlVariable) {
+      return join(((PerlVariable)element).getName());
+    }
+    else if (element instanceof PerlSubExpr) {
+      return ANON_SUB;
+    }
+    else if (element instanceof PerlDoExpr) {
+      return DO_RESULT;
+    }
+    else if (element instanceof PerlEvalExpr) {
+      return EVAL_RESULT;
+    }
+    else if (element instanceof PerlGrepExpr) {
+      return join(GREPPED, getBaseName(((PerlGrepExpr)element).getExpr()));
+    }
+    else if (element instanceof PerlMapExpr) {
+      return join(MAPPED, getBaseName(((PerlMapExpr)element).getExpr()));
+    }
+    else if (element instanceof PerlSortExpr) {
+      return join(SORTED, getBaseName(((PerlSortExpr)element).getTarget()));
+    }
+
     return null;
   }
 
@@ -230,31 +322,26 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    */
   @NotNull
   private static String suggestNamesForElements(@Nullable PsiElement baseExpr,
-                                                @Nullable PsiPerlExpr indexExpr,
+                                                @Nullable PsiElement indexExpr,
                                                 @NotNull Set<String> result,
                                                 @NotNull String recommendation) {
     String singularName = null;
-    if (baseExpr instanceof PerlVariable) {
-      String variableName = ((PerlVariable)baseExpr).getName();
-      if (StringUtil.isNotEmpty(variableName)) {
-        singularName = ObjectUtils.notNull(StringUtil.unpluralize(variableName), variableName);
-        String variableNameElement = join(singularName, ELEMENT);
-        if (StringUtil.isNotEmpty(variableNameElement)) {
-          result.add(variableNameElement);
-          recommendation = variableNameElement;
-        }
-        ContainerUtil.addIfNotNull(result, join(singularName, ITEM));
+    String baseExprName = getBaseName(baseExpr);
+    if (StringUtil.isNotEmpty(baseExprName)) {
+      singularName = ObjectUtils.notNull(StringUtil.unpluralize(baseExprName), baseExprName);
+      String variableNameElement = join(singularName, ELEMENT);
+      if (StringUtil.isNotEmpty(variableNameElement)) {
+        result.add(variableNameElement);
+        recommendation = variableNameElement;
       }
+      ContainerUtil.addIfNotNull(result, join(singularName, ITEM));
     }
-    String nameFromKey = getNameFromManipulator(indexExpr);
-    if (StringUtil.isNotEmpty(nameFromKey)) {
+
+    String nameFromKey = getBaseName(indexExpr);
+    if (indexExpr instanceof PerlString) {
       recommendation = nameFromKey;
     }
-    else {
-      if (indexExpr instanceof PerlVariable) {
-        nameFromKey = join(((PerlVariable)indexExpr).getName());
-      }
-    }
+
     if (StringUtil.isNotEmpty(nameFromKey)) {
       result.add(nameFromKey);
       if (StringUtil.isNotEmpty(singularName)) {
@@ -328,6 +415,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   @Nullable
   private static String join(@NotNull List<String> source) {
+    for (String element : source) {
+      if (StringUtil.isEmptyOrSpaces(element)) {
+        return null;
+      }
+    }
     return validateName(StringUtil.join(ContainerUtil.map(source, it -> it.toLowerCase(Locale.getDefault())), "_"));
   }
 

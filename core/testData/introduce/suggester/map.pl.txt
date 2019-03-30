@@ -1,0 +1,4 @@
+array
+list
+mapped_value
+> mapped_array_to_map

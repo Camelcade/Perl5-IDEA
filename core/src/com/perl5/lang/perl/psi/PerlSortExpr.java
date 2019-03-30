@@ -20,9 +20,25 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlReturnScope;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 04.03.2016.
  */
 public interface PerlSortExpr extends PsiElement, PerlLabelScope, PerlBlockOwner, PerlReturnScope {
+
+  @Nullable
+  PsiPerlExpr getExpr();
+
+  @Nullable
+  PsiPerlMethod getMethod();
+
+  /**
+   * @return psi element to sort if any
+   */
+  @Nullable
+  default PsiElement getTarget() {
+    PsiElement[] children = getChildren();
+    return children.length == 2 ? children[1] : null;
+  }
 }

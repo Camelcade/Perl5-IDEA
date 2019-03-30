@@ -1,0 +1,1 @@
+$hash_variables->get_something->{h<caret>ash_key};

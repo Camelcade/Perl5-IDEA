@@ -1,0 +1,5 @@
+do{
+  say 'hi';
+  my $var = <caret>1;
+  2;
+};
