@@ -1,0 +1,13 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 30 in eval.pl
+    (0,1)
+    '1'
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 20 in eval.pl
+    (0,11)
+    'my $var = 1'
+PsiPerlEvalExprImpl(Perl5: EVAL_EXPR) at 0 in eval.pl
+    (0,39)
+    'eval{
+  say 'hi';
+  my $var = 1;
+  2;
+}'

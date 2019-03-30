@@ -1,0 +1,13 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 29 in map.pl
+    (0,1)
+    '1'
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 19 in map.pl
+    (0,11)
+    'my $var = 1'
+PsiPerlMapExprImpl(Perl5: MAP_EXPR) at 0 in map.pl
+    (0,52)
+    'map{
+  say 'hi';
+  my $var = 1;
+  2;
+} @array_to_map'

@@ -28,6 +28,20 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testGrep() {doTest();}
+
+  public void testMap() {doTest();}
+
+  public void testSort() {doTest();}
+
+  public void testDo() {doTest();}
+
+  public void testEval() {doTest();}
+
+  public void testAnonSub() {doTest();}
+
+  public void testAnonSubCall() {doTest();}
+
   public void testRegexExprMatch() {doTest();}
 
   public void testRegexExprReplace() {doTest();}

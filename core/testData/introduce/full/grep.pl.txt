@@ -1,0 +1,5 @@
+my @test_name<caret> = grep {
+    say 'hi';
+    my $var = 1;
+    2;
+} @array_to_grep;

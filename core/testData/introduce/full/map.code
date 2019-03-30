@@ -1,0 +1,5 @@
+map{
+  say 'hi';
+  my $var = <caret>1;
+  2;
+} @array_to_map;

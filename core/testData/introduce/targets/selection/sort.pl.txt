@@ -1,0 +1,13 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 30 in sort.pl
+    (0,1)
+    '1'
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 20 in sort.pl
+    (0,11)
+    'my $var = 1'
+PsiPerlSortExprImpl(Perl5: SORT_EXPR) at 0 in sort.pl
+    (0,52)
+    'sort{
+  say 'hi';
+  my $var = 1;
+  2;
+} @source_name'

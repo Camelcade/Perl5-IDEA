@@ -1,0 +1,5 @@
+sort{
+  say 'hi';
+  my $var = <caret>1;
+  2;
+} @source_name;

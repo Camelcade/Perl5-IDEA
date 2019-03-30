@@ -1,0 +1,20 @@
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 29 in anonSubCall.pl
+    (0,1)
+    '1'
+PsiPerlAssignExprImpl(Perl5: ASSIGN_EXPR) at 19 in anonSubCall.pl
+    (0,11)
+    'my $var = 1'
+PsiPerlSubExprImpl(Perl5: SUB_EXPR) at 0 in anonSubCall.pl
+    (0,38)
+    'sub{
+  say 'hi';
+  my $var = 1;
+  2;
+}'
+PsiPerlDerefExprImpl(Perl5: DEREF_EXPR) at 0 in anonSubCall.pl
+    (0,47)
+    'sub{
+  say 'hi';
+  my $var = 1;
+  2;
+}->(1,2,3)'

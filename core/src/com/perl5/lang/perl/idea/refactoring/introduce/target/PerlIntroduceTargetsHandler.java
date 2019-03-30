@@ -63,7 +63,11 @@ public abstract class PerlIntroduceTargetsHandler {
     ADD_EXPR, MUL_EXPR, SHIFT_EXPR, BITWISE_AND_EXPR, BITWISE_OR_XOR_EXPR, AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR
   );
   private static final TokenSet ARRAY_CONTEXT_TOKENSET = TokenSet.create(
-    ARRAY_VARIABLE, ARRAY_CAST_EXPR, ARRAY_SLICE, HASH_SLICE, COMMA_SEQUENCE_EXPR
+    ARRAY_VARIABLE, ARRAY_CAST_EXPR, ARRAY_SLICE, HASH_SLICE, COMMA_SEQUENCE_EXPR,
+    SORT_EXPR, GREP_EXPR, MAP_EXPR
+  );
+  private static final TokenSet FAKE_SUB_EXPR_CONTAINERS = TokenSet.create(
+    SORT_EXPR, EVAL_EXPR, DO_EXPR
   );
   private static final TokenSet HASH_CONTEXT_TOKENSET = TokenSet.create(
     HASH_VARIABLE, HASH_CAST_EXPR
@@ -198,7 +202,11 @@ public abstract class PerlIntroduceTargetsHandler {
     if (isTargetableHeredocElement(element)) {
       return true;
     }
-    if (!UNINTRODUCIBLE_TOKENS.contains(PsiUtilCore.getElementType(element))) {
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == SUB_EXPR && FAKE_SUB_EXPR_CONTAINERS.contains(PsiUtilCore.getElementType(element.getParent()))) {
+      return false;
+    }
+    if (!UNINTRODUCIBLE_TOKENS.contains(elementType)) {
       return true;
     }
     return PerlPsiUtil.isMatchRegex(element);
