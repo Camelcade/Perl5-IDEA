@@ -18,16 +18,19 @@ package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,6 +69,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String PATH_NAME = "pathname";
   private static final List<String> BASE_PATH_NAMES = Arrays.asList(PATH, PATH_NAME);
   private static final int FILE_CHUNKS_TO_USE = 2;
+  private static final String ELEMENT = "element";
+  private static final String ITEM = "item";
+  private static final String SLICE = "slice";
+  private static final int MAX_GENERATED_NAME_LENGTH = 40;
 
   @Nullable
   @Override
@@ -137,14 +144,12 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
         return COMMAND_OUTPUT;
       }
       if (expression.getChildren().length == 0) {
-        String valueText = ElementManipulators.getValueText(expression);
-        if (valueText.length() < 30) {
-          String variableNameFromString = spacedToSnakeCase(valueText);
-          if (PerlNamesValidator.isIdentifier(variableNameFromString)) {
-            result.add(variableNameFromString);
-            return variableNameFromString;
-          }
+        String nameFromManipulator = getNameFromManipulator(expression);
+        if (nameFromManipulator != null) {
+          result.add(nameFromManipulator);
+          return nameFromManipulator;
         }
+        String valueText = ElementManipulators.getValueText(expression);
 
         if (PerlString.looksLikePackage(valueText)) {
           result.addAll(PACKAGE_BASE_NAMES);
@@ -169,6 +174,56 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
       return STRING;
     }
+    else if (expression instanceof PsiPerlHashElement) {
+      String resultString = join(HASH, ELEMENT);
+      result.add(resultString);
+      result.add(join(HASH, ITEM));
+      PsiPerlExpr expr = ((PsiPerlHashElement)expression).getExpr();
+      String singularName = null;
+      if (expr instanceof PerlVariable) {
+        String variableName = ((PerlVariable)expr).getName();
+        if (StringUtil.isNotEmpty(variableName)) {
+          singularName = ObjectUtils.notNull(StringUtil.unpluralize(variableName), variableName);
+          String variableNameElement = join(singularName, ELEMENT);
+          if (StringUtil.isNotEmpty(variableNameElement)) {
+            result.add(variableNameElement);
+            resultString = variableNameElement;
+          }
+          ContainerUtil.addIfNotNull(result, join(singularName, ITEM));
+        }
+      }
+      PsiPerlHashIndex hashIndex = ((PsiPerlHashElement)expression).getHashIndex();
+      PsiPerlExpr indexExpr = hashIndex.getExpr();
+      String nameFromKey = getNameFromManipulator(indexExpr);
+      if (StringUtil.isEmptyOrSpaces(nameFromKey) && indexExpr instanceof PerlVariable) {
+        nameFromKey = join(((PerlVariable)indexExpr).getName());
+      }
+      else {
+        resultString = nameFromKey;
+      }
+      if (StringUtil.isNotEmpty(nameFromKey)) {
+        result.add(nameFromKey);
+        if (StringUtil.isNotEmpty(singularName)) {
+          String join = join(singularName, nameFromKey);
+          ContainerUtil.addIfNotNull(result, join);
+        }
+      }
+      return resultString;
+    }
+    /*
+    else if( expression instanceof PsiPerlArrayElement){
+
+    }
+    else if( expression instanceof PsiPerlArrayIndexVariable){
+
+    }
+    else if( expression instanceof PsiPerlArraySlice){
+
+    }
+    else if( expression instanceof PsiPerlHashSlice){
+
+    }
+    */
     else if (expression instanceof PsiPerlNumberConstant) {
       result.add(NUMBER);
       return NUMBER;
@@ -190,9 +245,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     List<String> result = new ArrayList<>(chunksNumber);
     for (int i = 1; i <= chunksNumber; i++) {
       String baseName = join(packageChunks.subList(chunksNumber - i, chunksNumber));
-      result.add(baseName);
+      ContainerUtil.addIfNotNull(result, baseName);
     }
-    return ContainerUtil.filter(result, PerlNamesValidator::isIdentifier);
+    return result;
   }
 
   @NotNull
@@ -208,16 +263,18 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     List<String> result = new ArrayList<>();
     for (int i = 1; i <= chunksNumber; i++) {
       String baseFileName = join(fileNameParts.subList(0, i));
-      result.add(baseFileName);
-      if (file.isAbsolute()) {
-        result.add(join(ABSOLUTE_PATH_TO, baseFileName));
+      if (baseFileName != null) {
+        result.add(baseFileName);
+        if (file.isAbsolute()) {
+          ContainerUtil.addIfNotNull(result, join(ABSOLUTE_PATH_TO, baseFileName));
+        }
+        else {
+          ContainerUtil.addIfNotNull(result, join(RELATIVE_PATH_TO, baseFileName));
+        }
+        ContainerUtil.addIfNotNull(result, join(PATH_TO, baseFileName));
       }
-      else {
-        result.add(join(RELATIVE_PATH_TO, baseFileName));
-      }
-      result.add(join(PATH_TO, baseFileName));
     }
-    return ContainerUtil.filter(result, PerlNamesValidator::isIdentifier);
+    return result;
   }
 
   /**
@@ -234,18 +291,37 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       .suggestAndAddRecommendedName((PsiElement)variableDeclarationElement, null, result);
   }
 
-  @NotNull
+  @Nullable
   private static String join(@NotNull String... source) {
     return join(Arrays.asList(source));
   }
 
-  @NotNull
+  @Nullable
   private static String join(@NotNull List<String> source) {
-    return StringUtil.join(ContainerUtil.map(source, it -> it.toLowerCase(Locale.getDefault())), "_");
+    return validateName(StringUtil.join(ContainerUtil.map(source, it -> it.toLowerCase(Locale.getDefault())), "_"));
   }
 
-  @NotNull
+  @Nullable
   private static String spacedToSnakeCase(@NotNull String source) {
-    return StringUtil.join(source.toLowerCase(Locale.getDefault()).split("\\s+"), "_");
+    return join(source.toLowerCase(Locale.getDefault()).split("\\s+"));
+  }
+
+  @Contract("null->null")
+  @Nullable
+  private static String validateName(@Nullable String name) {
+    return StringUtil.isNotEmpty(name) && name.length() <= MAX_GENERATED_NAME_LENGTH && PerlNamesValidator.isIdentifier(name) ? name : null;
+  }
+
+  @Contract("null->null")
+  @Nullable
+  private static String getNameFromManipulator(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
+    ElementManipulator<PsiElement> manipulator = ElementManipulators.getManipulator(element);
+    if (manipulator == null) {
+      return null;
+    }
+    return spacedToSnakeCase(ElementManipulators.getValueText(element));
   }
 }

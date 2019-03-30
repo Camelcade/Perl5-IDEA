@@ -1,3 +1,4 @@
 scalar
 value
-> string
+string
+> some_cumbersome_strinasdfg_asd
