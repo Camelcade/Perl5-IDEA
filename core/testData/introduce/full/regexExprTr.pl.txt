@@ -1,0 +1,1 @@
+my $test_name<caret> = $var =~ tr/thisisregex/asdf/;

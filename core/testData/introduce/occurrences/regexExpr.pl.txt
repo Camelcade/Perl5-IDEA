@@ -24,4 +24,4 @@ $var !~ m{th  isi  sregex}xx;
 $var !~ s/thisisregex//;
 $var !~ qr/thisisregex/;
 $var !~ qr/thisisr ege x/x;
-$var !~ qr/th is i sregex/xx;
+$var != qr/th is i sregex/xx;

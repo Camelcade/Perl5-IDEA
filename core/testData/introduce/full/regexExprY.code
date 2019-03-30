@@ -1,0 +1,1 @@
+$var =~ y/thisisr<caret>egex/asdf/;
