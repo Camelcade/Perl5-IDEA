@@ -1,3 +1,6 @@
 PsiPerlPerlRegexImpl(Perl5: PERL_REGEX) at 8 in regexpReplaceNotEmpty.pl
     (0,4)
     'some'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpReplaceNotEmpty.pl
+    (0,19)
+    '$a =~ s/some/other/'

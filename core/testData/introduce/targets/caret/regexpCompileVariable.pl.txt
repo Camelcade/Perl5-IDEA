@@ -4,3 +4,6 @@ PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 11 in regexpCompileVariable
 PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX) at 6 in regexpCompileVariable.pl
     (0,16)
     'qr/so${thing}me/'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpCompileVariable.pl
+    (0,22)
+    '$a =~ qr/so${thing}me/'

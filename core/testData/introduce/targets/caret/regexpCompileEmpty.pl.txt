@@ -1,3 +1,6 @@
 PsiPerlCompileRegexImpl(Perl5: COMPILE_REGEX) at 6 in regexpCompileEmpty.pl
     (0,4)
     'qr//'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpCompileEmpty.pl
+    (0,10)
+    '$a =~ qr//'

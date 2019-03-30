@@ -1,0 +1,3 @@
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpTrNotEmptyReplace.pl
+    (0,20)
+    '$a =~ tr/some/other/'

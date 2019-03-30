@@ -1,3 +1,6 @@
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 23 in regexpReplaceVariableReplace.pl
     (0,8)
     '${thing}'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpReplaceVariableReplace.pl
+    (0,35)
+    '$a =~ s/so${thing}me/ot${thing}her/'

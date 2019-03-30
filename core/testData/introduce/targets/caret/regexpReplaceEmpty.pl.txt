@@ -1,0 +1,3 @@
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpReplaceEmpty.pl
+    (0,10)
+    '$a =~ s///'

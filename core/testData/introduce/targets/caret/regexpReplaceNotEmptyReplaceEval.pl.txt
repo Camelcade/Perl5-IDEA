@@ -1,3 +1,6 @@
 PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 13 in regexpReplaceNotEmptyReplaceEval.pl
     (0,5)
     'other'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpReplaceNotEmptyReplaceEval.pl
+    (0,20)
+    '$a =~ s/some/other/e'

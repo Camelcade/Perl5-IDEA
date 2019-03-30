@@ -1,0 +1,3 @@
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpTrBetween.pl
+    (0,24)
+    '$a =~ y  {some}  <other>'

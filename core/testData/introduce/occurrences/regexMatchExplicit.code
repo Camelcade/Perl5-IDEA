@@ -56,7 +56,7 @@ $a =~ qr/som ething${var}else/xx;
 m {someth ing${var}else}xx;
 $a =~ m <so mething${var}else>xx;
 qr#someth ing${var}else#xx;
-$a =~ qr fsomet hi<caret>ng${var}elsefxx;
+$a =~ qr fso<selection>met hi</selection>ng${var}elsefxx;
 
 /something${var}else/ix;
 $a =~ /something${var}else/ix;

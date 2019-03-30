@@ -1,0 +1,3 @@
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpReplaceNotEmptyReplace.pl
+    (0,19)
+    '$a =~ s/some/other/'

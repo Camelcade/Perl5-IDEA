@@ -1,3 +1,6 @@
 PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX) at 6 in regexpMatchExplicitEmpty.pl
     (0,3)
     'm//'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpMatchExplicitEmpty.pl
+    (0,9)
+    '$a =~ m//'

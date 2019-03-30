@@ -1,3 +1,6 @@
 PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX) at 6 in regexpMatchImplicitNotEmpty.pl
     (0,6)
     '/some/'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpMatchImplicitNotEmpty.pl
+    (0,12)
+    '$a =~ /some/'

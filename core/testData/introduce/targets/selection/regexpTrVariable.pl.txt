@@ -1,0 +1,3 @@
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpTrVariable.pl
+    (0,28)
+    '$a =~ tr/so${thing}me/other/'

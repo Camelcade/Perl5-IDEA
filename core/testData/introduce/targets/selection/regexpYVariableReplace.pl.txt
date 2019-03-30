@@ -1,0 +1,3 @@
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpYVariableReplace.pl
+    (0,35)
+    '$a =~ y/so${thing}me/ot${thing}her/'

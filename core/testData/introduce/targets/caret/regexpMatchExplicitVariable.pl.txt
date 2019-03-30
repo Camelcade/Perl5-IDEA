@@ -4,3 +4,6 @@ PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 10 in regexpMatchExplicitVa
 PsiPerlMatchRegexImpl(Perl5: MATCH_REGEX) at 6 in regexpMatchExplicitVariable.pl
     (0,15)
     'm/so${thing}me/'
+PsiPerlRegexExprImpl(Perl5: REGEX_EXPR) at 0 in regexpMatchExplicitVariable.pl
+    (0,21)
+    '$a =~ m/so${thing}me/'

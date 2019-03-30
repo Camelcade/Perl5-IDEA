@@ -90,6 +90,6 @@ s/something${var}el
     # commment
     # commment
     se/asdf/x;
-$a =~ s <so me<caret>thing${var}else>//xx;
+$a =~ s <so<selection> me</selection>thing${var}else>//xx;
 s#someth ing${var}else##xx;
 
