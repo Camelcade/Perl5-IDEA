@@ -1,0 +1,4 @@
+hash
+map
+dict
+> hash_name

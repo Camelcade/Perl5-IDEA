@@ -29,6 +29,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
+import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -207,14 +209,15 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (expression instanceof PsiPerlAnonArray) {
       result.addAll(ANON_HASH_BASE_NAMES);
       recommendation = getBaseName(expression);
-      ;
     }
     else if (expression instanceof PsiPerlAnonHash) {
       result.addAll(ANON_ARRAY_BASE_NAMES);
       recommendation = getBaseName(expression);
-      ;
     }
     else if (expression instanceof PsiPerlNumberConstant) {
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlCastExpression) {
       recommendation = getBaseName(expression);
     }
     /*
@@ -354,6 +357,21 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
     else if (element instanceof PerlRegexExpression) {
       return PATTERN;
+    }
+    else if (element instanceof PerlCastExpression) {
+      PsiPerlExpr targetExpr = ((PerlCastExpression)element).getExpr();
+      PsiPerlBlock targetBlock = ((PerlCastExpression)element).getBlock();
+      return derefName(getBaseName(targetExpr == null ? targetBlock : targetExpr));
+    }
+    else if (element instanceof PsiPerlBlockImpl) {
+      PsiElement[] blockChildren = element.getChildren();
+      if (blockChildren.length == 1) {
+        PsiElement perlStatement = blockChildren[0];
+        if (perlStatement instanceof PerlStatementMixin &&
+            !((PerlStatementMixin)perlStatement).hasModifier()) {
+          return getBaseName(((PsiPerlStatement)perlStatement).getExpr());
+        }
+      }
     }
 
     return null;
