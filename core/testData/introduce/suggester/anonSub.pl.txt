@@ -1,4 +1,6 @@
 scalar
 value
-> anon_sub
+anon_sub
 lambda
+> code_ref
+code_reference

@@ -102,7 +102,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String SUB = "sub";
   private static final String ANON_SUB = Objects.requireNonNull(join(ANON, SUB));
   private static final String LAMBDA = "lambda";
-  private static final List<String> BASE_ANON_SUB_NAMES = Arrays.asList(ANON_SUB, LAMBDA);
+  private static final String CODE_REF = Objects.requireNonNull(join("code", REF));
+  private static final String CODE_REFERENCE = Objects.requireNonNull(join("code", REFERENCE));
+  private static final List<String> BASE_ANON_SUB_NAMES = Arrays.asList(ANON_SUB, LAMBDA, CODE_REF, CODE_REFERENCE);
   private static final String RESULT = "result";
   private static final String DO_RESULT = "do_result";
   private static final String EVAL_RESULT = "eval_result";
@@ -361,7 +363,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return join(((PerlVariable)element).getName());
     }
     else if (element instanceof PerlSubExpr) {
-      return ANON_SUB;
+      return CODE_REF;
     }
     else if (element instanceof PerlDoExpr) {
       return DO_RESULT;
