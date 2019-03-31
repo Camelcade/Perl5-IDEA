@@ -116,6 +116,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   static {
     Map<IElementType, String> namesMap = new HashMap<>();
     namesMap.put(STRING_LIST, STRING_LIST_NAME);
+    namesMap.put(COMMA_SEQUENCE_EXPR, LIST);
     namesMap.put(SUB_EXPR, CODE_REF);
     namesMap.put(DO_EXPR, DO_RESULT);
     namesMap.put(EVAL_EXPR, EVAL_RESULT);
@@ -196,6 +197,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   @Nullable
   private String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
+    if (expression instanceof PsiPerlParenthesisedExpr) {
+      return suggestAndAddRecommendedName(((PsiPerlParenthesisedExpr)expression).getExpr(), result);
+    }
     String recommendation = null;
     IElementType expressionType = PsiUtilCore.getElementType(expression);
     if (STRINGS.contains(expressionType)) {

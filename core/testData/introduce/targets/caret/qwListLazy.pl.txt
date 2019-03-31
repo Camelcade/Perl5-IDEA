@@ -12,12 +12,14 @@ PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListLazy.pl
     this is a very long  list
     this is a very long'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListLazy.pl
-    (8,243)
-    'this is a very long  list
+    (0,245)
+    'qw/
     this is a very long  list
     this is a very long  list
     this is a very long  list
     this is a very long  list
     this is a very long  list
     this is a very long  list
-    this is a very long  list'
+    this is a very long  list
+    this is a very long  list
+/'

@@ -28,6 +28,16 @@ public class PerlIntroduceVariableTest extends PerlLightTestCase {
     return "testData/introduce/full";
   }
 
+  public void testParenthesizedExpr() {doTest();}
+
+  public void testParenthesizedExprWithParens() {doTest();}
+
+  public void testParenthesizedList() {doTest();}
+
+  public void testParenthesizedValue() {doTest();}
+
+  public void testStringListInplace() {doTest();}
+
   public void testArraySlice() {doTest();}
 
   public void testHashSlice() {doTest();}

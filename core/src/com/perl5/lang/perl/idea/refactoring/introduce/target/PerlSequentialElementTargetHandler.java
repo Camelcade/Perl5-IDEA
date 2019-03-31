@@ -51,10 +51,16 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
     }
     List<PerlIntroduceTarget> result = new ArrayList<>();
     PsiElement firstChild = children[0];
+    PsiElement lastChild = children[children.length - 1];
     for (PsiElement child : children) {
       TextRange childTextRange = child.getTextRange();
       if (childTextRange.contains(caretOffset) && !firstChild.equals(child) || childTextRange.getStartOffset() > caretOffset) {
-        result.add(PerlIntroduceTarget.create(element, firstChild, child));
+        if (child.equals(lastChild)) {
+          result.add(PerlIntroduceTarget.create(element));
+        }
+        else {
+          result.add(PerlIntroduceTarget.create(element, firstChild, child));
+        }
       }
     }
     return result;

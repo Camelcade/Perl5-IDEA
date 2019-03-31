@@ -1,7 +1,7 @@
 scalar
 value
-array
-list
-anon_array
-array_ref
+hash
+map
+dict
 > anon_hash
+hash_ref

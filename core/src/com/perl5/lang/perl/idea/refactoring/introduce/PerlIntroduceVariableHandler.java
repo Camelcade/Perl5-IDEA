@@ -275,6 +275,10 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       if (target.isFullRange()) {
         PsiElement targetPlace = Objects.requireNonNull(target.getPlace());
         PsiElement targetPlaceParent = targetPlace.getParent();
+        while (targetPlaceParent instanceof PsiPerlParenthesisedExpr && targetPlaceParent.getChildren().length == 1) {
+          targetPlaceParent = targetPlaceParent.getParent();
+        }
+
         if (targetPlaceParent.equals(anchor) && targetPlaceParent instanceof PsiPerlStatementImpl
             && !((PsiPerlStatementImpl)targetPlaceParent).hasModifier()) {
           targetPlaceParent.delete();

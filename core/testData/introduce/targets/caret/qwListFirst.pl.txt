@@ -11,5 +11,5 @@ PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListFirst.pl
     (5,22)
     'This is some text'
 PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwListFirst.pl
-    (5,27)
-    'This is some text tail'
+    (0,28)
+    'qw / This is some text tail/'

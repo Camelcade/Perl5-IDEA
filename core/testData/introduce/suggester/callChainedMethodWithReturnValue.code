@@ -5,4 +5,4 @@ sub specific_thing{
 
 }
 
-Some::Thing->speci<caret>fic_thing;
+Some::Thing::->speci<caret>fic_thing;
