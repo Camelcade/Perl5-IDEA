@@ -217,9 +217,6 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       recommendation = getBaseName(expression);
     }
     /*
-    else if( expression instanceof PsiPerlArrayElement){
-
-    }
     else if( expression instanceof PsiPerlArrayIndexVariable){
 
     }
