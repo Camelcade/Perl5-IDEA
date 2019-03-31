@@ -1,8 +1,6 @@
 scalar
 value
-hash
-map
-dict
-anon_hash
-hash_ref
+array
+list
 > anon_array
+array_ref

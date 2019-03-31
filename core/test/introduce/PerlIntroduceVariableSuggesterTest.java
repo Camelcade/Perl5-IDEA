@@ -24,6 +24,8 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
     return "testData/introduce/suggester";
   }
 
+  public void testStringList() {doTest();}
+
   public void testCallChainedGetter() {doTest();}
 
   public void testCallChainedGetterWithReturnValue() {doTest();}

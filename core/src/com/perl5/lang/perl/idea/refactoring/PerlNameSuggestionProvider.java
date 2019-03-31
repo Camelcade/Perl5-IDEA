@@ -22,6 +22,7 @@ import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
@@ -31,8 +32,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -44,20 +45,12 @@ import java.io.File;
 import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 /**
  * Created by hurricup on 12.06.2015.
  */
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
-  private static final TokenSet ELEMENTS_WITH_BASE_NAMES = TokenSet.create(
-    PerlElementTypes.ANON_ARRAY, PerlElementTypes.ANON_HASH,
-    REPLACEMENT_REGEX, COMPILE_REGEX, MATCH_REGEX,
-    NUMBER_CONSTANT,
-    DO_EXPR, EVAL_EXPR, SUB_EXPR,
-    HASH_SLICE, ARRAY_SLICE,
-    ARRAY_CAST_EXPR, CODE_CAST_EXPR, GLOB_CAST_EXPR, HASH_CAST_EXPR, SCALAR_INDEX_CAST_EXPR, SCALAR_CAST_EXPR
-  );
-
   private static final String ANON = "anon";
   private static final String REFERENCE = "reference";
   private static final String REF = "ref";
@@ -115,6 +108,29 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String GET_ = GET + "_";
   private static final String SET = "set";
   private static final String SET_ = SET + "_";
+  private static final String STRING_LIST_NAME = "string_list";
+
+  private static final Map<IElementType, String> FIXED_NAMES;
+  private static final TokenSet ELEMENTS_WITH_BASE_NAMES;
+
+  static {
+    Map<IElementType, String> namesMap = new HashMap<>();
+    namesMap.put(STRING_LIST, STRING_LIST_NAME);
+    namesMap.put(SUB_EXPR, CODE_REF);
+    namesMap.put(DO_EXPR, DO_RESULT);
+    namesMap.put(EVAL_EXPR, EVAL_RESULT);
+    namesMap.put(PerlElementTypes.ANON_ARRAY, ANON_ARRAY);
+    namesMap.put(PerlElementTypes.ANON_HASH, ANON_HASH);
+    namesMap.put(NUMBER_CONSTANT, NUMBER);
+    FIXED_NAMES = Collections.unmodifiableMap(namesMap);
+
+    ELEMENTS_WITH_BASE_NAMES = TokenSet.orSet(
+      TokenSet.create(FIXED_NAMES.keySet().toArray(IElementType.EMPTY_ARRAY)),
+      PerlTokenSets.CAST_EXPRESSIONS,
+      PerlTokenSets.SLICES,
+      REGEX_OPERATIONS
+    );
+  }
 
 
   @Nullable
@@ -181,10 +197,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   @Nullable
   private String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
     String recommendation = null;
-    if (expression instanceof PerlString) {
+    IElementType expressionType = PsiUtilCore.getElementType(expression);
+    if (STRINGS.contains(expressionType)) {
       recommendation = suggestAndAddNameForString((PerlString)expression, result);
     }
-    else if (expression instanceof PsiPerlHashElement) {
+    else if (expressionType == HASH_ELEMENT) {
       String resultString = Objects.requireNonNull(join(HASH, ELEMENT));
       result.add(resultString);
       result.add(join(HASH, ITEM));
@@ -193,7 +210,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
                                                result,
                                                resultString);
     }
-    else if (expression instanceof PsiPerlArrayElement) {
+    else if (expressionType == ARRAY_ELEMENT) {
       String resultString = Objects.requireNonNull(join(ARRAY, ELEMENT));
       result.add(resultString);
       result.add(join(ARRAY, ITEM));
@@ -202,40 +219,41 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
                                                result,
                                                resultString);
     }
-    else if (expression instanceof PerlDerefExpression) {
+    else if (expressionType == DEREF_EXPR) {
       recommendation = suggestAndGetForDereference(expression, result, recommendation);
     }
-    else if (expression instanceof PerlGrepExpr) {
+    else if (expressionType == GREP_EXPR) {
       recommendation = suggestAndGetGrepMapSortNames(expression, GREPPED, result);
     }
-    else if (expression instanceof PerlMapExpr) {
+    else if (expressionType == MAP_EXPR) {
       recommendation = suggestAndGetGrepMapSortNames(expression, MAPPED, result);
     }
-    else if (expression instanceof PerlSortExpr) {
+    else if (expressionType == SORT_EXPR) {
       recommendation = suggestAndGetGrepMapSortNames(expression, SORTED, result);
     }
-    else if (expression instanceof PsiPerlSubCallExpr) {
+    else if (CALLS.contains(expressionType)) {
       recommendation = suggestAndGetForCall((PsiPerlSubCallExpr)expression, result, recommendation);
     }
-    else if (expression instanceof PerlSubExpr) {
+    else if (expressionType == SUB_EXPR) {
       result.addAll(BASE_ANON_SUB_NAMES);
     }
-    else if (expression instanceof PerlRegexExpression) {
+    else if (REGEX_OPERATIONS.contains(expressionType)) {
       result.addAll(REGEX_BASE_NAMES);
     }
-    else if (expression instanceof PsiPerlAnonArray) {
+    else if (expressionType == PerlElementTypes.ANON_HASH) {
       result.addAll(ANON_HASH_BASE_NAMES);
     }
-    else if (expression instanceof PsiPerlAnonHash) {
+    else if (expressionType == PerlElementTypes.ANON_ARRAY) {
       result.addAll(ANON_ARRAY_BASE_NAMES);
     }
 
-    if (ELEMENTS_WITH_BASE_NAMES.contains(PsiUtilCore.getElementType(expression))) {
+    if (ELEMENTS_WITH_BASE_NAMES.contains(expressionType)) {
       recommendation = getBaseName(expression);
     }
     /*
-    else if( expression instanceof PsiPerlArrayIndexVariable){
-
+    qw/list/
+    (1,2,3)
+    for my $var (@array){
     }
     */
     ContainerUtil.addIfNotNull(result, recommendation);
@@ -359,51 +377,29 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (StringUtil.isNotEmpty(nameFromKey)) {
       return nameFromKey;
     }
-    if (element instanceof PerlVariable) {
-      return join(((PerlVariable)element).getName());
+
+    IElementType elementType = PsiUtilCore.getElementType(element);
+
+    String fixedName = FIXED_NAMES.get(elementType);
+    if (fixedName != null) {
+      return fixedName;
     }
-    else if (element instanceof PerlSubExpr) {
-      return CODE_REF;
-    }
-    else if (element instanceof PerlDoExpr) {
-      return DO_RESULT;
-    }
-    else if (element instanceof PerlEvalExpr) {
-      return EVAL_RESULT;
-    }
-    else if (element instanceof PerlGrepExpr) {
+    else if (elementType == GREP_EXPR) {
       return join(GREPPED, getBaseName(((PerlGrepExpr)element).getExpr()));
     }
-    else if (element instanceof PerlMapExpr) {
+    else if (elementType == MAP_EXPR) {
       return join(MAPPED, getBaseName(((PerlMapExpr)element).getExpr()));
     }
-    else if (element instanceof PerlSortExpr) {
+    else if (elementType == SORT_EXPR) {
       return join(SORTED, getBaseName(((PerlSortExpr)element).getTarget()));
     }
-    else if (element instanceof PsiPerlAnonArray) {
-      return ANON_ARRAY;
-    }
-    else if (element instanceof PsiPerlAnonHash) {
-      return ANON_HASH;
-    }
-    else if (element instanceof PsiPerlNumberConstant) {
-      return NUMBER;
-    }
-    else if (element instanceof PerlRegexExpression) {
-      return PATTERN;
-    }
-    else if (element instanceof PerlCastExpression) {
-      PsiPerlExpr targetExpr = ((PerlCastExpression)element).getExpr();
-      PsiPerlBlock targetBlock = ((PerlCastExpression)element).getBlock();
-      return derefName(getBaseName(targetExpr == null ? targetBlock : targetExpr));
-    }
-    else if (element instanceof PsiPerlArraySlice) {
+    else if (elementType == ARRAY_SLICE) {
       return join(getBaseName(((PsiPerlArraySlice)element).getExpr()), SLICE);
     }
-    else if (element instanceof PsiPerlHashSlice) {
+    else if (elementType == HASH_SLICE) {
       return join(getBaseName(((PsiPerlHashSlice)element).getExpr()), SLICE);
     }
-    else if (element instanceof PsiPerlBlockImpl) {
+    else if (elementType == BLOCK) {
       PsiElement[] blockChildren = element.getChildren();
       if (blockChildren.length == 1) {
         PsiElement perlStatement = blockChildren[0];
@@ -412,6 +408,17 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
           return getBaseName(((PsiPerlStatement)perlStatement).getExpr());
         }
       }
+    }
+    else if (REGEX_OPERATIONS.contains(elementType)) {
+      return PATTERN;
+    }
+    else if (VARIABLES.contains(elementType)) {
+      return join(((PerlVariable)element).getName());
+    }
+    else if (CAST_EXPRESSIONS.contains(elementType)) {
+      PsiPerlExpr targetExpr = ((PerlCastExpression)element).getExpr();
+      PsiPerlBlock targetBlock = ((PerlCastExpression)element).getBlock();
+      return derefName(getBaseName(targetExpr == null ? targetBlock : targetExpr));
     }
 
     return null;
