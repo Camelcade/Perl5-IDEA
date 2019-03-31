@@ -42,6 +42,7 @@ import java.util.*;
  */
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String ANON = "anon";
+  private static final String REFERENCE = "reference";
   private static final String REF = "ref";
   private static final String SCALAR = "scalar";
   private static final String VALUE = "value";
@@ -164,7 +165,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       result.add(resultString);
       result.add(join(HASH, ITEM));
       recommendation = suggestNamesForElements(((PsiPerlHashElement)expression).getExpr(),
-                                               ((PsiPerlHashElement)expression).getHashIndex().getExpr(),
+                                               false, ((PsiPerlHashElement)expression).getHashIndex().getExpr(),
                                                result,
                                                resultString);
     }
@@ -173,7 +174,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       result.add(resultString);
       result.add(join(ARRAY, ITEM));
       recommendation = suggestNamesForElements(((PsiPerlArrayElement)expression).getExpr(),
-                                               ((PsiPerlArrayElement)expression).getArrayIndex().getExpr(),
+                                               false, ((PsiPerlArrayElement)expression).getArrayIndex().getExpr(),
                                                result,
                                                resultString);
     }
@@ -245,14 +246,14 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       result.add(recommendation);
       result.add(join(HASH, ITEM));
 
-      recommendation = suggestNamesForElements(baseElement, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
+      recommendation = suggestNamesForElements(baseElement, true, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
     }
     else if (element instanceof PsiPerlArrayIndex) {
       recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
       result.add(recommendation);
       result.add(join(ARRAY, ITEM));
 
-      recommendation = suggestNamesForElements(baseElement, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
+      recommendation = suggestNamesForElements(baseElement, true, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
     }
     else if (element instanceof PsiPerlParenthesisedCallArguments) {
       recommendation = join(getBaseName(baseElement), RESULT);
@@ -362,6 +363,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * Suggests names for hash/array elements
    *
    * @param baseExpr       variable from index expression
+   * @param derefBase      if true, base name going to be stripped from ref/reference
    * @param indexExpr      expressions from index expression
    * @param result         result to add recommendations to
    * @param recommendation base recommendation name
@@ -369,11 +371,16 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    */
   @NotNull
   private static String suggestNamesForElements(@Nullable PsiElement baseExpr,
+                                                boolean derefBase,
                                                 @Nullable PsiElement indexExpr,
                                                 @NotNull Set<String> result,
                                                 @NotNull String recommendation) {
     String singularName = null;
     String baseExprName = getBaseName(baseExpr);
+    if (derefBase) {
+      baseExprName = derefName(baseExprName);
+    }
+
     if (StringUtil.isNotEmpty(baseExprName)) {
       singularName = ObjectUtils.notNull(StringUtil.unpluralize(baseExprName), baseExprName);
       String variableNameElement = join(singularName, ELEMENT);
@@ -492,5 +499,23 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return null;
     }
     return spacedToSnakeCase(ElementManipulators.getValueText(element));
+  }
+
+  @Nullable
+  @Contract("null->null")
+  private static String derefName(@Nullable String name) {
+    return removeChunk(removeChunk(name, REFERENCE + "s?"), REF + "s?");
+  }
+
+  /**
+   * @return original {@code name} with {@code chunk} removed. Chunk removed with underscore prefix
+   */
+  @Nullable
+  @Contract("null,_->null")
+  private static String removeChunk(@Nullable String name, @NotNull String chunk) {
+    if (name == null) {
+      return null;
+    }
+    return validateName(name.replaceAll("_+" + chunk + "_+", "_").replaceAll("(_+" + chunk + "$|^" + chunk + "_+)", ""));
   }
 }
