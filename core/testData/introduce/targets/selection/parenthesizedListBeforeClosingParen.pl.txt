@@ -1,0 +1,3 @@
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 1 in parenthesizedListBeforeClosingParen.pl
+    (0,10)
+    '1, 2, 3, 4'

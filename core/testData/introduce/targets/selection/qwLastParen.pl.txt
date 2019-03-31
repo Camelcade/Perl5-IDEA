@@ -1,0 +1,3 @@
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 0 in qwLastParen.pl
+    (0,9)
+    'qw/1 2 3/'

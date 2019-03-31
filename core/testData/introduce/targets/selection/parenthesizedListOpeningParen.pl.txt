@@ -1,0 +1,12 @@
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 1 in parenthesizedListOpeningParen.pl
+    (0,1)
+    '1'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 1 in parenthesizedListOpeningParen.pl
+    (0,4)
+    '1, 2'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 1 in parenthesizedListOpeningParen.pl
+    (0,7)
+    '1, 2, 3'
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 1 in parenthesizedListOpeningParen.pl
+    (0,10)
+    '1, 2, 3, 4'

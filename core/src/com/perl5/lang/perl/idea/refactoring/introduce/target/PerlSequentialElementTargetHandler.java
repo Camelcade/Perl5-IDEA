@@ -62,6 +62,9 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
           result.add(PerlIntroduceTarget.create(element, firstChild, child));
         }
       }
+      else if (child.equals(lastChild)) {
+        result.add(PerlIntroduceTarget.create(element));
+      }
     }
     return result;
   }

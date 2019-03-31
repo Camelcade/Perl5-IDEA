@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce.target;
 
+import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
@@ -222,11 +223,13 @@ public abstract class PerlIntroduceTargetsHandler {
     }
 
     List<PerlIntroduceTarget> targets = new ArrayList<>();
+
     int caretOffset = editor.getCaretModel().getOffset();
-    PsiElement run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
+    PsiElement run = getElementToStart(file, caretOffset);
     if (run == null) {
-      run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PerlHeredocElementImpl.class, false);
+      run = getElementToStart(file, TargetElementUtil.adjustOffset(file, editor.getDocument(), caretOffset));
     }
+
     while (run != null) {
       PsiElement finalRun = run;
       if (isHeredocOpenerInSight(run)) {
@@ -237,6 +240,17 @@ public abstract class PerlIntroduceTargetsHandler {
       run = PsiTreeUtil.getParentOfType(run, PsiPerlExpr.class, PerlHeredocElementImpl.class);
     }
     return targets;
+  }
+
+  private static PsiElement getElementToStart(@NotNull PsiFile file, int caretOffset) {
+    PsiElement run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PsiPerlExpr.class, false);
+    if (run == null) {
+      run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PerlHeredocElementImpl.class, false);
+    }
+    if (run instanceof PsiPerlParenthesisedExpr) {
+      run = ((PsiPerlParenthesisedExpr)run).getExpr();
+    }
+    return run;
   }
 
   /**

@@ -22,6 +22,14 @@ public class PerlIntroduceVariableFromSelectionTargetsTest extends PerlIntroduce
     return "testData/introduce/targets/selection";
   }
 
+  public void testParenthesizedListOpeningParen() {doTest();}
+
+  public void testParenthesizedListBeforeClosingParen() {doTest();}
+
+  public void testParenthesizedListAfterClosingParen() {doTest();}
+
+  public void testQwLastParen() {doTest();}
+
   public void testGrep() {doTest();}
 
   public void testMap() {doTest();}
