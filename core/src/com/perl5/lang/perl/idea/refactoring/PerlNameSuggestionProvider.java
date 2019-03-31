@@ -159,6 +159,15 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
                                                result,
                                                resultString);
     }
+    else if (expression instanceof PsiPerlArrayElement) {
+      String resultString = Objects.requireNonNull(join(ARRAY, ELEMENT));
+      result.add(resultString);
+      result.add(join(ARRAY, ITEM));
+      recommendation = suggestNamesForElements(((PsiPerlArrayElement)expression).getExpr(),
+                                               ((PsiPerlArrayElement)expression).getArrayIndex().getExpr(),
+                                               result,
+                                               resultString);
+    }
     else if (expression instanceof PerlDerefExpression) {
       PsiElement[] children = expression.getChildren();
       PsiElement element = children[children.length - 1];
