@@ -1,0 +1,1 @@
+$array_variables->get_something->[4<caret>2];

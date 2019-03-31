@@ -171,6 +171,13 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
         recommendation = suggestNamesForElements(baseElement, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
       }
+      else if (element instanceof PsiPerlArrayIndex) {
+        recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
+        result.add(recommendation);
+        result.add(join(ARRAY, ITEM));
+
+        recommendation = suggestNamesForElements(baseElement, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
+      }
       else if (element instanceof PsiPerlParenthesisedCallArguments) {
         recommendation = join(getBaseName(baseElement), RESULT);
       }

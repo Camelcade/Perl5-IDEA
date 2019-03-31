@@ -1,0 +1,1 @@
+$array_variable->[array<caret>_index()];
