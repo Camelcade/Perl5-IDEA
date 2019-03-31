@@ -22,12 +22,15 @@ import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
+import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
@@ -40,10 +43,21 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.*;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+
 /**
  * Created by hurricup on 12.06.2015.
  */
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
+  private static final TokenSet ELEMENTS_WITH_BASE_NAMES = TokenSet.create(
+    PerlElementTypes.ANON_ARRAY, PerlElementTypes.ANON_HASH,
+    REPLACEMENT_REGEX, COMPILE_REGEX, MATCH_REGEX,
+    NUMBER_CONSTANT,
+    DO_EXPR, EVAL_EXPR, SUB_EXPR,
+    HASH_SLICE, ARRAY_SLICE,
+    ARRAY_CAST_EXPR, CODE_CAST_EXPR, GLOB_CAST_EXPR, HASH_CAST_EXPR, SCALAR_INDEX_CAST_EXPR, SCALAR_CAST_EXPR
+  );
+
   private static final String ANON = "anon";
   private static final String REFERENCE = "reference";
   private static final String REF = "ref";
@@ -198,42 +212,24 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (expression instanceof PerlSortExpr) {
       recommendation = suggestAndGetGrepMapSortNames(expression, SORTED, result);
     }
+    else if (expression instanceof PsiPerlSubCallExpr) {
+      recommendation = suggestAndGetForCall((PsiPerlSubCallExpr)expression, result, recommendation);
+    }
     else if (expression instanceof PerlSubExpr) {
       result.addAll(BASE_ANON_SUB_NAMES);
-      recommendation = getBaseName(expression);
     }
     else if (expression instanceof PerlRegexExpression) {
       result.addAll(REGEX_BASE_NAMES);
-      recommendation = getBaseName(expression);
-    }
-    else if (expression instanceof PerlDoExpr) {
-      recommendation = getBaseName(expression);
-    }
-    else if (expression instanceof PerlEvalExpr) {
-      recommendation = getBaseName(expression);
     }
     else if (expression instanceof PsiPerlAnonArray) {
       result.addAll(ANON_HASH_BASE_NAMES);
-      recommendation = getBaseName(expression);
     }
     else if (expression instanceof PsiPerlAnonHash) {
       result.addAll(ANON_ARRAY_BASE_NAMES);
-      recommendation = getBaseName(expression);
     }
-    else if (expression instanceof PsiPerlNumberConstant) {
+
+    if (ELEMENTS_WITH_BASE_NAMES.contains(PsiUtilCore.getElementType(expression))) {
       recommendation = getBaseName(expression);
-    }
-    else if (expression instanceof PerlCastExpression) {
-      recommendation = getBaseName(expression);
-    }
-    else if( expression instanceof PsiPerlArraySlice){
-      recommendation = getBaseName(expression);
-    }
-    else if( expression instanceof PsiPerlHashSlice){
-      recommendation = getBaseName(expression);
-    }
-    else if (expression instanceof PsiPerlSubCallExpr) {
-      recommendation = suggestAndGetForCall((PsiPerlSubCallExpr)expression, result, recommendation);
     }
     /*
     else if( expression instanceof PsiPerlArrayIndexVariable){
