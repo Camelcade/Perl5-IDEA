@@ -220,14 +220,14 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (expression instanceof PerlCastExpression) {
       recommendation = getBaseName(expression);
     }
-    /*
-    else if( expression instanceof PsiPerlArrayIndexVariable){
-
-    }
     else if( expression instanceof PsiPerlArraySlice){
-
+      recommendation = getBaseName(expression);
     }
     else if( expression instanceof PsiPerlHashSlice){
+      recommendation = getBaseName(expression);
+    }
+    /*
+    else if( expression instanceof PsiPerlArrayIndexVariable){
 
     }
     else if( expression instanceof SubCallExpr){
@@ -362,6 +362,12 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       PsiPerlExpr targetExpr = ((PerlCastExpression)element).getExpr();
       PsiPerlBlock targetBlock = ((PerlCastExpression)element).getBlock();
       return derefName(getBaseName(targetExpr == null ? targetBlock : targetExpr));
+    }
+    else if (element instanceof PsiPerlArraySlice) {
+      return join(getBaseName(((PsiPerlArraySlice)element).getExpr()), SLICE);
+    }
+    else if (element instanceof PsiPerlHashSlice) {
+      return join(getBaseName(((PsiPerlHashSlice)element).getExpr()), SLICE);
     }
     else if (element instanceof PsiPerlBlockImpl) {
       PsiElement[] blockChildren = element.getChildren();
