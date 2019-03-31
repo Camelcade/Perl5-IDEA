@@ -104,10 +104,6 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String SORTED = "sorted";
   private static final String MAPPED = "mapped";
   private static final String GREPPED = "filtered";
-  private static final String GET = "get";
-  private static final String GET_ = GET + "_";
-  private static final String SET = "set";
-  private static final String SET_ = SET + "_";
   private static final String STRING_LIST_NAME = "string_list";
 
   private static final Map<IElementType, String> FIXED_NAMES;
@@ -307,7 +303,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
           }
         }
         else {
-          String normalizedName = join(StringUtil.trimStart(StringUtil.trimStart(subName, GET_), SET_));
+          String normalizedName = join(subName.replaceAll("^(_+|get_*|set_*)", ""));
           if (StringUtil.isNotEmpty(normalizedName)) {
             result.add(normalizedName);
             recommendation = normalizedName;
