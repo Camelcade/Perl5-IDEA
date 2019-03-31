@@ -1,0 +1,5 @@
+package Some::Thing;
+
+sub new{}
+
+Some::Thing::->ne<caret>w();

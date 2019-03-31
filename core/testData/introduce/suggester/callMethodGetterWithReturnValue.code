@@ -1,0 +1,8 @@
+package Some::Thing;
+
+#@returns Some::Thing
+sub get_otherthing{
+
+}
+
+get_othe<caret>rthing();

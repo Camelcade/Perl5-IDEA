@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -94,6 +95,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String SORTED = "sorted";
   private static final String MAPPED = "mapped";
   private static final String GREPPED = "filtered";
+  private static final String GET = "get";
+  private static final String GET_ = GET + "_";
+  private static final String SET = "set";
+  private static final String SET_ = SET + "_";
+
 
   @Nullable
   @Override
@@ -226,11 +232,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if( expression instanceof PsiPerlHashSlice){
       recommendation = getBaseName(expression);
     }
+    else if (expression instanceof PsiPerlSubCallExpr) {
+      recommendation = suggestAndGetForCall((PsiPerlSubCallExpr)expression, result, recommendation);
+    }
     /*
     else if( expression instanceof PsiPerlArrayIndexVariable){
-
-    }
-    else if( expression instanceof SubCallExpr){
 
     }
     */
@@ -258,8 +264,38 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
       recommendation = suggestNamesForElements(baseElement, true, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
     }
+    else if (element instanceof PsiPerlNestedCall) {
+      recommendation = suggestAndGetForCall((PsiPerlNestedCall)element, result, recommendation);
+    }
     else if (element instanceof PsiPerlParenthesisedCallArguments) {
       recommendation = join(getBaseName(baseElement), RESULT);
+    }
+    return recommendation;
+  }
+
+  private static String suggestAndGetForCall(@NotNull PsiPerlSubCallExpr expression, @NotNull Set<String> result, String recommendation) {
+    PsiPerlMethod method = expression.getMethod();
+    if (method != null) {
+      PerlSubNameElement subNameElement = method.getSubNameElement();
+      if (subNameElement != null) {
+        String subName = subNameElement.getName();
+        if ("new".equals(subName)) {
+          List<String> variantsFromObjectClass = getVariantsFromNamespaceName(subNameElement.getPackageName());
+          result.addAll(variantsFromObjectClass);
+          if (!variantsFromObjectClass.isEmpty()) {
+            recommendation = variantsFromObjectClass.get(0);
+          }
+        }
+        else {
+          String normalizedName = join(StringUtil.trimStart(StringUtil.trimStart(subName, GET_), SET_));
+          if (StringUtil.isNotEmpty(normalizedName)) {
+            result.add(normalizedName);
+            recommendation = normalizedName;
+          }
+
+          result.addAll(getVariantsFromNamespaceName(PerlSubUtil.getMethodReturnValue(expression)));
+        }
+      }
     }
     return recommendation;
   }
@@ -431,7 +467,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   @NotNull
-  private static List<String> getVariantsFromNamespaceName(@NotNull String packageName) {
+  private static List<String> getVariantsFromNamespaceName(@Nullable String packageName) {
+    if (StringUtil.isEmptyOrSpaces(packageName)) {
+      return Collections.emptyList();
+    }
     List<String> packageChunks = PerlPackageUtil.split(packageName);
     if (packageChunks.isEmpty()) {
       return Collections.emptyList();

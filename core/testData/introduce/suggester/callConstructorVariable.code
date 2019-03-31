@@ -1,0 +1,7 @@
+package Some::Thing;
+
+sub new{}
+
+my Some::Thing $object;
+
+$object->ne<caret>w();

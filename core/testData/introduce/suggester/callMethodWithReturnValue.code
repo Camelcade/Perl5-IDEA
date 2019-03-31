@@ -1,0 +1,8 @@
+package Some::Thing;
+
+#@returns Some::Thing
+sub somemethod{
+
+}
+
+some<caret>method();
