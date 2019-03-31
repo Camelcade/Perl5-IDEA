@@ -24,6 +24,10 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
     return "testData/introduce/suggester";
   }
 
+  public void testAnonArray() {doTest();}
+
+  public void testAnonHash() {doTest();}
+
   public void testArrayIndexDerefInvocation() {doTest();}
 
   public void testArrayIndexDerefNumber() {doTest();}

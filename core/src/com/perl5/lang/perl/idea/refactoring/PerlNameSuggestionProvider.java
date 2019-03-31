@@ -41,16 +41,24 @@ import java.util.*;
  * Created by hurricup on 12.06.2015.
  */
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
+  private static final String ANON = "anon";
+  private static final String REF = "ref";
   private static final String SCALAR = "scalar";
   private static final String VALUE = "value";
   private static final List<String> SCALAR_BASE_NAMES = Arrays.asList(SCALAR, VALUE);
   private static final String ARRAY = "array";
+  private static final String ANON_ARRAY = Objects.requireNonNull(join(ANON, ARRAY));
+  private static final String ARRAY_REF = Objects.requireNonNull(join(ARRAY, REF));
   private static final String LIST = "list";
   private static final List<String> ARRAY_BASE_NAMES = Arrays.asList(ARRAY, LIST);
+  private static final List<String> ANON_ARRAY_BASE_NAMES = ContainerUtil.append(ARRAY_BASE_NAMES, ANON_ARRAY, ARRAY_REF);
   private static final String HASH = "hash";
+  private static final String ANON_HASH = Objects.requireNonNull(join(ANON, HASH));
+  private static final String HASH_REF = Objects.requireNonNull(join(HASH, REF));
   private static final String MAP = "map";
   private static final String DICT = "dict";
   private static final List<String> HASH_BASE_NAMES = Arrays.asList(HASH, MAP, DICT);
+  private static final List<String> ANON_HASH_BASE_NAMES = ContainerUtil.append(HASH_BASE_NAMES, ANON_HASH, HASH_REF);
   private static final String NUMBER = "number";
   private static final String STRING = "string";
   private static final String COMMAND_OUTPUT = "command_output";
@@ -73,7 +81,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String ITEM = "item";
   private static final String SLICE = "slice";
   private static final int MAX_GENERATED_NAME_LENGTH = 40;
-  private static final String ANON_SUB = "anon_sub";
+  private static final String SUB = "sub";
+  private static final String ANON_SUB = Objects.requireNonNull(join(ANON, SUB));
   private static final String LAMBDA = "lambda";
   private static final List<String> BASE_ANON_SUB_NAMES = Arrays.asList(ANON_SUB, LAMBDA);
   private static final String RESULT = "result";
@@ -169,37 +178,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
                                                resultString);
     }
     else if (expression instanceof PerlDerefExpression) {
-      PsiElement[] children = expression.getChildren();
-      PsiElement element = children[children.length - 1];
-      PsiElement baseElement = children[children.length - 2];
-
-      if (element instanceof PsiPerlHashIndex) {
-        recommendation = Objects.requireNonNull(join(HASH, ELEMENT));
-        result.add(recommendation);
-        result.add(join(HASH, ITEM));
-
-        recommendation = suggestNamesForElements(baseElement, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
-      }
-      else if (element instanceof PsiPerlArrayIndex) {
-        recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
-        result.add(recommendation);
-        result.add(join(ARRAY, ITEM));
-
-        recommendation = suggestNamesForElements(baseElement, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
-      }
-      else if (element instanceof PsiPerlParenthesisedCallArguments) {
-        recommendation = join(getBaseName(baseElement), RESULT);
-      }
-    }
-    else if (expression instanceof PerlSubExpr) {
-      result.addAll(BASE_ANON_SUB_NAMES);
-      recommendation = getBaseName(expression);
-    }
-    else if (expression instanceof PerlDoExpr) {
-      recommendation = getBaseName(expression);
-    }
-    else if (expression instanceof PerlEvalExpr) {
-      recommendation = getBaseName(expression);
+      recommendation = suggestAndGetForDereference(expression, result, recommendation);
     }
     else if (expression instanceof PerlGrepExpr) {
       recommendation = suggestAndGetGrepMapSortNames(expression, GREPPED, result);
@@ -210,13 +189,34 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (expression instanceof PerlSortExpr) {
       recommendation = suggestAndGetGrepMapSortNames(expression, SORTED, result);
     }
+    else if (expression instanceof PerlSubExpr) {
+      result.addAll(BASE_ANON_SUB_NAMES);
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlRegexExpression) {
+      result.addAll(REGEX_BASE_NAMES);
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlDoExpr) {
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PerlEvalExpr) {
+      recommendation = getBaseName(expression);
+    }
+    else if (expression instanceof PsiPerlAnonArray) {
+      result.addAll(ANON_HASH_BASE_NAMES);
+      recommendation = getBaseName(expression);
+      ;
+    }
+    else if (expression instanceof PsiPerlAnonHash) {
+      result.addAll(ANON_ARRAY_BASE_NAMES);
+      recommendation = getBaseName(expression);
+      ;
+    }
+    else if (expression instanceof PsiPerlNumberConstant) {
+      recommendation = getBaseName(expression);
+    }
     /*
-    else if( expression instanceof PsiPerlAnonArray){
-
-    }
-    else if( expression instanceof PsiPerlAnonHash){
-
-    }
     else if( expression instanceof PsiPerlArrayElement){
 
     }
@@ -229,15 +229,37 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if( expression instanceof PsiPerlHashSlice){
 
     }
+    else if( expression instanceof SubCallExpr){
+
+    }
     */
-    else if (expression instanceof PsiPerlNumberConstant) {
-      recommendation = NUMBER;
-    }
-    else if (expression instanceof PerlRegexExpression) {
-      result.addAll(REGEX_BASE_NAMES);
-      recommendation = PATTERN;
-    }
     ContainerUtil.addIfNotNull(result, recommendation);
+    return recommendation;
+  }
+
+  private String suggestAndGetForDereference(@NotNull PsiElement expression,
+                                             @NotNull Set<String> result, String recommendation) {
+    PsiElement[] children = expression.getChildren();
+    PsiElement element = children[children.length - 1];
+    PsiElement baseElement = children[children.length - 2];
+
+    if (element instanceof PsiPerlHashIndex) {
+      recommendation = Objects.requireNonNull(join(HASH, ELEMENT));
+      result.add(recommendation);
+      result.add(join(HASH, ITEM));
+
+      recommendation = suggestNamesForElements(baseElement, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
+    }
+    else if (element instanceof PsiPerlArrayIndex) {
+      recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
+      result.add(recommendation);
+      result.add(join(ARRAY, ITEM));
+
+      recommendation = suggestNamesForElements(baseElement, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
+    }
+    else if (element instanceof PsiPerlParenthesisedCallArguments) {
+      recommendation = join(getBaseName(baseElement), RESULT);
+    }
     return recommendation;
   }
 
@@ -323,6 +345,18 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (element instanceof PerlSortExpr) {
       return join(SORTED, getBaseName(((PerlSortExpr)element).getTarget()));
     }
+    else if (element instanceof PsiPerlAnonArray) {
+      return ANON_ARRAY;
+    }
+    else if (element instanceof PsiPerlAnonHash) {
+      return ANON_HASH;
+    }
+    else if (element instanceof PsiPerlNumberConstant) {
+      return NUMBER;
+    }
+    else if (element instanceof PerlRegexExpression) {
+      return PATTERN;
+    }
 
     return null;
   }
@@ -358,7 +392,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       recommendation = nameFromKey;
     }
 
-    if (StringUtil.isNotEmpty(nameFromKey)) {
+    if (StringUtil.isNotEmpty(nameFromKey) && !(indexExpr instanceof PsiPerlNumberConstant)) {
       result.add(nameFromKey);
       if (StringUtil.isNotEmpty(singularName)) {
         String join = join(singularName, nameFromKey);

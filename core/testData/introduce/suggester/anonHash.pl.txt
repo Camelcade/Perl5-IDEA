@@ -1,0 +1,7 @@
+scalar
+value
+array
+list
+anon_array
+array_ref
+> anon_hash
