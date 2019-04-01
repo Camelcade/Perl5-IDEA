@@ -1,0 +1,3 @@
+$time[1];
+my @sc<caret>alar  = time;
+@time1[1,2];

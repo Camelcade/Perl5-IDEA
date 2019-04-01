@@ -1,0 +1,13 @@
+
+local @time3;
+if( @b ){
+  local @time;
+  local @sc<caret>alar  = time;
+  local @time1;
+  if( @a ){
+    local @time2;
+  }
+}
+else{
+  local @time4;
+}

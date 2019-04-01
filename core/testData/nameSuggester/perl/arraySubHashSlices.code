@@ -1,0 +1,2 @@
+@time{something => 42};
+my @sc<caret>alar  = time;

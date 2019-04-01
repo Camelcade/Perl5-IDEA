@@ -1,0 +1,13 @@
+
+our %time3;
+if( %b ){
+  our %time;
+  our %sc<caret>alar  = time;
+  our %time1;
+  if( %a ){
+    our %time2;
+  }
+}
+else{
+  our %time4;
+}

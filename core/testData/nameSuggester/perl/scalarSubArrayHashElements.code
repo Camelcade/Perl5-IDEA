@@ -1,0 +1,5 @@
+@time[1,2];
+@time{something => 42};
+$time[1];
+$time{something};
+my $sc<caret>alar  = time;

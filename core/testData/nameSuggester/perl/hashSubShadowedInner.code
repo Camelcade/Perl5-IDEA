@@ -1,0 +1,4 @@
+my %sc<caret>alar  = time;
+if( time){
+  my %time;
+}

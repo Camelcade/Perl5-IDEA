@@ -31,7 +31,17 @@ public class PerlNamesSuggesterTest extends PerlLightTestCase {
 
   public void testScalarSub() {doTest();}
 
+  public void testScalarSubArrayHash() {doTest();}
+
   public void testScalarSubAll() {doTest();}
+
+  public void testScalarSubAllLocal() {doTest();}
+
+  public void testScalarSubAllOur() {doTest();}
+
+  public void testScalarSubAllState() {doTest();}
+
+  public void testScalarSubAllMixed() {doTest();}
 
   public void testScalarSubParallel() {doTest();}
 
@@ -42,6 +52,62 @@ public class PerlNamesSuggesterTest extends PerlLightTestCase {
   public void testScalarSubShadows() {doTest();}
 
   public void testScalarSubShadowsInner() {doTest();}
+
+  public void testScalarSubArrayHashElements() {doTest();}
+
+  public void testArraySub() {doTest();}
+
+  public void testArraySubAll() {doTest();}
+
+  public void testArraySubAllLocal() {doTest();}
+
+  public void testArraySubAllMixed() {doTest();}
+
+  public void testArraySubAllOur() {doTest();}
+
+  public void testArraySubAllState() {doTest();}
+
+  public void testArraySubArrayElementSlice() {doTest();}
+
+  public void testArraySubHashSlices() {doTest();}
+
+  public void testArraySubParallel() {doTest();}
+
+  public void testArraySubScalarHash() {doTest();}
+
+  public void testArraySubShadowed() {doTest();}
+
+  public void testArraySubShadowedInner() {doTest();}
+
+  public void testArraySubShadows() {doTest();}
+
+  public void testArraySubShadowsInner() {doTest();}
+
+  public void testHashSub() {doTest();}
+
+  public void testHashSubAll() {doTest();}
+
+  public void testHashSubAllLocal() {doTest();}
+
+  public void testHashSubAllMixed() {doTest();}
+
+  public void testHashSubAllOur() {doTest();}
+
+  public void testHashSubAllState() {doTest();}
+
+  public void testHashSubArrayScalar() {doTest();}
+
+  public void testHashSubElementSlices() {doTest();}
+
+  public void testHashSubParallel() {doTest();}
+
+  public void testHashSubShadowed() {doTest();}
+
+  public void testHashSubShadowedInner() {doTest();}
+
+  public void testHashSubShadows() {doTest();}
+
+  public void testHashSubShadowsInner() {doTest();}
 
   private void doTest() {
     doTestSuggesterOnRename(new PerlMemberInplaceRenameHandler());

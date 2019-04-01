@@ -1,0 +1,13 @@
+
+my @time3;
+if( @b ){
+  my @time;
+  my @sc<caret>alar  = time;
+  my @time1;
+  if( @a ){
+    my @time2;
+  }
+}
+else{
+  my @time4;
+}

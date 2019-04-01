@@ -1,0 +1,3 @@
+$time{something};
+my %sc<caret>alar  = time;
+@time1{something => 42};

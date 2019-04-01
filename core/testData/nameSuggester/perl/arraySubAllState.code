@@ -1,0 +1,13 @@
+
+state @time3;
+if( @b ){
+  state @time;
+  state @sc<caret>alar  = time;
+  state @time1;
+  if( @a ){
+    state @time2;
+  }
+}
+else{
+  state @time4;
+}

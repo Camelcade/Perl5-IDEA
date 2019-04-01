@@ -1,0 +1,6 @@
+if( @a ){
+  my @sc<caret>alar  = time;
+}
+else{
+  my @time;
+}

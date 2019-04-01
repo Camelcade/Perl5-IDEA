@@ -5,4 +5,4 @@ sub get_specific_thing{
 
 }
 
-Some::Thing->get_s<caret>pecific_thing;
+Some::Thing::->get_s<caret>pecific_thing;
