@@ -1,3 +1,32 @@
+my $<selection>string<caret></selection> = 'iable}something ';
+'${var' . $string . 'here bla';
+"${variable}something here bla";
+`${variable}something here bla`;
+'${var' . $string . 'here bla';
+qq {${variable}something here bla};
+qx f${variable}something here blaf;
+qw/${variable}something here bla/;
+something => "here bla";
+
+'something ';
+"something ";
+`something `;
+q /something /;
+qq {something };
+qx fsomething f;
+qw/something /;
+something => "";
+
+'${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ';
+"${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ";
+`${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla `;
+'${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ';
+qq {${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla };
+qx f${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla f;
+qw/${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla /;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'iable}something ';
 '${var' . $test_name . 'here bla';
 "${variable}something here bla";

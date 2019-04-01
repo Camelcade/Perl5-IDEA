@@ -1,3 +1,34 @@
+my $<selection>command_output<caret></selection> = `someline`;
+if( "someline" eq $a){
+    $b = "someline"."otherline";
+    say "someline";
+}
+elsif(qq /someline/){
+    $b = qq"someline"."otherline";
+    say "someline";
+}
+elsif( 'someline' eq $a){
+    $b = 'someline'."otherline";
+    say 'someline';
+}
+elsif(q /someline/){
+    $b = q {someline}."otherline";
+    say q <someline>;
+}
+elsif( $command_output eq $a){
+    $b = $command_output ."otherline";
+    say $command_output;
+}
+elsif($command_output){
+    $b = $command_output ."otherline";
+    say $command_output;
+}
+elsif( someline => $a){
+    my @b = someline => "otherline";
+    say someline => 42;
+}
+
+================ AFTER RENAME =================
 my $test_name<caret> = `someline`;
 if( "someline" eq $a){
     $b = "someline"."otherline";

@@ -1,3 +1,32 @@
+my $<selection>st_st<caret></selection> = 'st st';
+'te' . $st_st . 'ring';
+
+<<"EOM";
+this
+is a te${st_st}ring
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a te${st_st}ring
+end
+EOM
+
+<<EOM;
+this
+is a te${st_st}ring
+end
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'st st';
 'te' . $test_name . 'ring';
 

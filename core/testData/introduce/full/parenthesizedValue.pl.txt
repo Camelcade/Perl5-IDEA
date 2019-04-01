@@ -1,1 +1,3 @@
+my $<selection>string<caret></selection> = 'string';
+================ AFTER RENAME =================
 my $test_name<caret> = 'string';

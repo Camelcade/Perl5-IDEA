@@ -1,3 +1,10 @@
+my $<selection>somemethod<caret></selection> = somemethod(othermethod(1), $a);
+my $var = $somemethod;
+if( $var){
+    my $third_var = somemethod(othermethod(2), $a);
+    my $other_var = $somemethod;
+}
+================ AFTER RENAME =================
 my $test_name<caret> = somemethod(othermethod(1), $a);
 my $var = $test_name;
 if( $var){

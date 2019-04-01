@@ -1,5 +1,25 @@
 package Foo::Bar;
 
+my $<selection>string<caret></selection> = qq"Foo::Bar::";
+$string->method;
+$string->method;
+$string->method;
+$string->method;
+$string->method;
+$string->method;
+`$string`->method;
+`Foo::Bar`->method;
+
+$string->method;
+$string->method;
+$string->method;
+$string->method;
+qx`$string`->method;
+qx`Foo::Bar`->method;
+
+================ AFTER RENAME =================
+package Foo::Bar;
+
 my $test_name<caret> = qq"Foo::Bar::";
 $test_name->method;
 $test_name->method;

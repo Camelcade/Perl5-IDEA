@@ -1,3 +1,11 @@
+my @<selection>list<caret></selection> = ("very", long => 'list');
+my @somelist = (@list, @list);
+
+('this', 'is', 'a', @list, 'this', 'is', 'a', @list, 'this', 'is', 'a', @list, 'this', 'is', 'a', @list, 'this', 'is', 'a', @list, 'this', 'is', 'a', @list, 'this', 'is', 'a', @list, 'this', 'is', 'a', @list);
+
+('this', 'is', 'a', @list, 'this', 'is', 'a', @list);
+
+================ AFTER RENAME =================
 my @test_name<caret> = ("very", long => 'list');
 my @somelist = (@test_name, @test_name);
 

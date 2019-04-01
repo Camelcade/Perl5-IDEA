@@ -1,1 +1,3 @@
+my $<selection>expression<caret></selection> = $var =~ s/thisisregex/sdf/;
+================ AFTER RENAME =================
 my $test_name<caret> = $var =~ s/thisisregex/sdf/;

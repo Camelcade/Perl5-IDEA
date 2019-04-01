@@ -1,3 +1,32 @@
+my $<selection>st_stri<caret></selection> = "st stri";
+"te${st_stri}ng";
+
+<<"EOM";
+this
+is a te${st_stri}ng
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a te${st_stri}ng
+end
+EOM
+
+<<EOM;
+this
+is a te${st_stri}ng
+end
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = "st stri";
 "te${test_name}ng";
 

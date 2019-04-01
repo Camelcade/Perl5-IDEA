@@ -1,3 +1,9 @@
+my $<selection>second<caret></selection> = 'second';
+('zero', 'first', $second, 'third', $second);
+zero => ('first', $second, q/third/, $second);
+('zero', 'first', $second, 'third', $second);
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'second';
 ('zero', 'first', $test_name, 'third', $test_name);
 zero => ('first', $test_name, q/third/, $test_name);

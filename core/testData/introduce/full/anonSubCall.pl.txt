@@ -1,3 +1,9 @@
+my $<selection>code_ref_result<caret></selection> = sub {
+    say 'hi';
+    my $var = 1;
+    2;
+}->(1, 2, 3);
+================ AFTER RENAME =================
 my $test_name<caret> = sub {
     say 'hi';
     my $var = 1;

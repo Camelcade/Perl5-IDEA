@@ -1,3 +1,9 @@
+my $<selection>some_text<caret></selection> = 'some text';
+say $some_text;
+return $some_text . $some_text;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'some text';
 say $test_name;
 return $test_name . $test_name;

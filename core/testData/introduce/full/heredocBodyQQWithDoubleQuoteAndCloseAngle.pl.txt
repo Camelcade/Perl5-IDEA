@@ -1,3 +1,22 @@
+my $<selection>string<caret></selection> = qq[bl"al>ba];
+say <<"EOM";
+test $string text
+EOM
+
+say <<EOM;
+test $string text
+EOM
+
+say <<'EOM';
+test bl"al>ba text
+EOM
+
+say <<`EOM`;
+test $string text
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = qq[bl"al>ba];
 say <<"EOM";
 test $test_name text

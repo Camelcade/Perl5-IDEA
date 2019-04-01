@@ -1,3 +1,53 @@
+my $<selection>pattern<caret></selection> = qr<so mething${var}else>;
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+
+$pattern;
+$pattern;
+
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+$pattern;
+$a =~ $pattern;
+
+/somethi ng${var}else/;
+$a =~ /som ething${var}else/;
+m/somethi ng${var}else/;
+$a =~ m/som ething${var}else/;
+qr/somethi ng${var}else/;
+$a =~ qr/some thing${var}else/;
+
+s/$pattern/asdf/x;
+$a =~ s <$pattern>//xx;
+s#$pattern##xx;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = qr<so mething${var}else>;
 $test_name;
 $a =~ $test_name;

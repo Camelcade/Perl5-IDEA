@@ -1,3 +1,10 @@
+my $<selection>otherthing<caret></selection> = $var->{something}->[1]->{otherthing};
+$otherthing->tail;
+$otherthing->othertail;
+$otherthing->blah();
+$otherthing->[0];
+
+================ AFTER RENAME =================
 my $test_name<caret> = $var->{something}->[1]->{otherthing};
 $test_name->tail;
 $test_name->othertail;

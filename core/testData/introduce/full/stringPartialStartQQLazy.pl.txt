@@ -1,3 +1,32 @@
+my $<selection>something<caret></selection> = "something ";
+$something . 'here bla';
+"${something}here bla";
+`${something}here bla`;
+$something . 'here bla';
+qq{${something}here bla};
+qx f${something}here blaf;
+qw/something here bla/;
+something => "here bla";
+
+$something;
+$something;
+`$something`;
+$something;
+$something;
+qx f${something}f;
+qw/something /;
+something => "";
+
+$something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ';
+"${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ";
+`${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla `;
+$something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ' . $something . 'here bla ';
+qq{${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla };
+qx f${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla ${something}here bla f;
+qw/something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla something here bla /;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = "something ";
 $test_name . 'here bla';
 "${test_name}here bla";

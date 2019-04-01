@@ -1,1 +1,4 @@
+my @<selection>argv_slice<caret></selection> = @ARGV{some => 42};
+
+================ AFTER RENAME =================
 my @test_name<caret> = @ARGV{some => 42};

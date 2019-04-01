@@ -1,4 +1,33 @@
 'something here b${variable}la';
+my $<selection>string<caret></selection> = "ing here b${variable}";
+"someth${string}la";
+`someth${string}la`;
+q /something here b${variable}la/;
+qq{someth${string}la};
+qx fsometh${string}laf;
+qw/something here b${variable}la/;
+something => "here b${variable}la";
+
+'ing here b';
+"ing here b";
+`ing here b`;
+q /ing here b/;
+qq {ing here b};
+qx fing here bf;
+qw/ing here b/;
+something => "";
+
+'something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la ';
+"someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la ";
+`someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la `;
+q /something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+qq{someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la };
+qx fsometh${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la someth${string}la something here b${variable}la f;
+qw/something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+
+
+================ AFTER RENAME =================
+'something here b${variable}la';
 my $test_name<caret> = "ing here b${variable}";
 "someth${test_name}la";
 `someth${test_name}la`;

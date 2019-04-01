@@ -1,3 +1,12 @@
+my $<selection>some_text<caret></selection> = 'some text';
+if($a){
+my $var = $some_text;
+}
+say $some_text;
+return $some_text . $some_text;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'some text';
 if($a){
 my $var = $test_name;

@@ -1,3 +1,21 @@
+my $<selection>test2<caret></selection> = 'test2';
+('test1', $test2, 'test3', 'test4');
+('test1', $test2, 'test4');
+($test2, 'test3');
+('test1', $test2, 'test3');
+($test2, 'test3', 'test4');
+say $test2;
+say $test2;
+say `test2`;
+my $var = $test2;
+my $var = $test2;
+my $var =`test2`;
+test1 => $test2 => test3 => 'test4';
+'test1' => $test2 => "test3" => "test4";
+'test1' => "te${s}t2" => "test3" => "test4";
+'test1' => `test2` => "test3" => "test4";
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'test2';
 ('test1', $test_name, 'test3', 'test4');
 ('test1', $test_name, 'test4');

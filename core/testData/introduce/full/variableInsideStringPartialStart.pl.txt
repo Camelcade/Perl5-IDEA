@@ -1,3 +1,32 @@
+my $<selection>string<caret></selection> = 'som${variable}ething ';
+$string . 'here bla';
+"som${variable}ething here bla";
+`som${variable}ething here bla`;
+$string . 'here bla';
+qq {som${variable}ething here bla};
+qx fsom${variable}ething here blaf;
+qw/som${variable}ething here bla/;
+something => "here bla";
+
+$string;
+"som${variable}ething ";
+`som${variable}ething `;
+$string;
+qq {som${variable}ething };
+qx fsom${variable}ething f;
+qw/som${variable}ething /;
+something => "";
+
+$string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ';
+"som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla ";
+`som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla `;
+$string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ';
+qq {som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla };
+qx fsom${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla f;
+qw/som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'som${variable}ething ';
 $test_name . 'here bla';
 "som${variable}ething here bla";

@@ -1,4 +1,33 @@
 'som${variable}ething here bla';
+my $<selection>command_output<caret></selection> = qx fsom${variable}ething f;
+"${command_output}here bla";
+`${command_output}here bla`;
+q /som${variable}ething here bla/;
+qq{${command_output}here bla};
+qx f${command_output}here blaf;
+qw/som${variable}ething here bla/;
+something => "here bla";
+
+'som${variable}ething ';
+"$command_output";
+`$command_output`;
+q /som${variable}ething /;
+qq{$command_output};
+qx f${command_output}f;
+qw/som${variable}ething /;
+something => "";
+
+'som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla ';
+"${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ";
+`${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla `;
+q /som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;
+qq{${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla };
+qx f${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla ${command_output}here bla som${variable}ething here bla f;
+qw/som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;
+
+
+================ AFTER RENAME =================
+'som${variable}ething here bla';
 my $test_name<caret> = qx fsom${variable}ething f;
 "${test_name}here bla";
 `${test_name}here bla`;

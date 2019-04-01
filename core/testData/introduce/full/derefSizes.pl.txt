@@ -1,4 +1,14 @@
 $var-> sub1;
+my $<selection>sub2<caret></selection> = $var->sub1->sub2;
+$sub2;
+$sub2->sub3;
+$sub2->sub3;
+$sub2;
+$var-> sub1;
+$var;
+
+================ AFTER RENAME =================
+$var-> sub1;
 my $test_name<caret> = $var->sub1->sub2;
 $test_name;
 $test_name->sub3;

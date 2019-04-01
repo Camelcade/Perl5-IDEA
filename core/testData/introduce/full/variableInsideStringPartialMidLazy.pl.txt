@@ -1,3 +1,32 @@
+my $<selection>string<caret></selection> = 'ing he${variable}re b';
+'someth' . $string . 'la';
+"something he${variable}re bla";
+`something he${variable}re bla`;
+'someth' . $string . 'la';
+qq {something he${variable}re bla};
+qx fsomething he${variable}re blaf;
+qw/something he${variable}re bla/;
+something => "here bla";
+
+$string;
+"ing he${variable}re b";
+`ing he${variable}re b`;
+$string;
+qq {ing he${variable}re b};
+qx fing he${variable}re bf;
+qw/ing he${variable}re b/;
+something => "";
+
+'someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la ';
+"something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla ";
+`something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla `;
+'someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la someth' . $string . 'la ';
+qq {something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla };
+qx fsomething he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla f;
+qw/something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'ing he${variable}re b';
 'someth' . $test_name . 'la';
 "something he${variable}re bla";

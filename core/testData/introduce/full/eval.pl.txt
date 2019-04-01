@@ -1,3 +1,9 @@
+my $<selection>eval_result<caret></selection> = eval {
+    say 'hi';
+    my $var = 1;
+    2;
+};
+================ AFTER RENAME =================
 my $test_name<caret> = eval {
     say 'hi';
     my $var = 1;

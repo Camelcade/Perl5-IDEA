@@ -1525,6 +1525,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     new PerlIntroduceVariableHandler().invoke(getProject(), editor, getFile(), null);
     assertNoErrorElements();
 
+    String beforeRename = getEditorTextWithCaretsAndSelections();
+
     TemplateState state = TemplateManagerImpl.getTemplateState(editor);
     if (state != null) {
       final TextRange range = state.getCurrentVariableRange();
@@ -1539,7 +1541,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
       assertNoErrorElements();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    String afterRename = getEditorTextWithCaretsAndSelections();
+    UsefulTestCase.assertSameLinesWithFile(
+      getTestResultsFilePath(), beforeRename + "\n================ AFTER RENAME =================\n" + afterRename);
   }
 
   protected void doTestIntroduceVariableTargets(boolean checkErrors) {

@@ -1,3 +1,22 @@
+my $<selection>string<caret></selection> = "test$variable";
+say <<"EOM";
+$string
+EOM
+
+say <<EOM;
+other $string blabla ${variable}other
+EOM
+
+say <<'EOM';
+other test$variable blabla ${variable}other
+EOM
+
+say <<`EOM`;
+$string other  ${variable}other
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = "test$variable";
 say <<"EOM";
 $test_name

@@ -1,5 +1,25 @@
 package Foo::Bar;
 
+my $<selection>bar<caret></selection> = 'Foo::Bar';
+$bar->method;
+$bar->method;
+$bar->method;
+$bar->method;
+$bar->method;
+$bar->method;
+`Foo::Bar::`->method;
+`Foo::Bar`->method;
+
+$bar->method;
+$bar->method;
+$bar->method;
+$bar->method;
+qx`Foo::Bar::`->method;
+qx`Foo::Bar`->method;
+
+================ AFTER RENAME =================
+package Foo::Bar;
+
 my $test_name<caret> = 'Foo::Bar';
 $test_name->method;
 $test_name->method;

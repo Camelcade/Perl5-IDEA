@@ -1,1 +1,3 @@
+my $<selection>pattern<caret></selection> = qr/something$here/;
+================ AFTER RENAME =================
 my $test_name<caret> = qr/something$here/;

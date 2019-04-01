@@ -1,3 +1,25 @@
+my $<selection>me_tex<caret></selection> = "me tex";
+"so${me_tex}t";
+
+"so$me_tex t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t ";
+"so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t ";
+'so' . $me_tex . ' t so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't ';
+'so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't ';
+`so$me_tex t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t `;
+`so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t `;
+
+qq/so$me_tex t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t /;
+qq/so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t /;
+'so' . $me_tex . q/ t 'so/ . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't ';
+'so' . $me_tex . q/t 'so/ . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't so' . $me_tex . 't ';
+qx/so$me_tex t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t /;
+qx/so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t so${me_tex}t /;
+
+qw /some tex t some text some text some text some text some text some text some text some text some text some text some text /;
+qw /some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text some text /;
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = "me tex";
 "so${test_name}t";
 

@@ -1,2 +1,5 @@
+my $<selection>expression<caret></selection> = 3 + 4;
+(1+2+ ($expression));
+================ AFTER RENAME =================
 my $test_name<caret> = 3 + 4;
 (1+2+ ($test_name));

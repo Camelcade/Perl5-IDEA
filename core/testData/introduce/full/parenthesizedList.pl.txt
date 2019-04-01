@@ -1,1 +1,3 @@
+my @<selection>list<caret></selection> = (1, 2, some => 42);
+================ AFTER RENAME =================
 my @test_name<caret> = (1, 2, some => 42);

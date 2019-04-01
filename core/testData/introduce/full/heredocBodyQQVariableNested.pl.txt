@@ -1,4 +1,10 @@
 say <<"EOM";
+test${my $<selection>expression<caret></selection> = $variable;\$expression} thing
+EOM
+
+
+================ AFTER RENAME =================
+say <<"EOM";
 test${my $test_name<caret> = $variable;\$test_name} thing
 EOM
 

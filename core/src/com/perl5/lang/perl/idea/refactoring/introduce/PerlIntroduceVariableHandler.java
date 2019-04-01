@@ -147,7 +147,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     if (targetExpressionFile instanceof PerlFile) {
       ((PerlFile)targetExpressionFile).setFileContext(target.getPlace());
     }
-    String variableName = PerlNameSuggestionProvider.suggestAndGetRecommendedName(targetExpressionElement, new LinkedHashSet<>());
+    String variableName = PerlNameSuggestionProvider.getRecommendedName(targetExpressionElement);
 
     Project project = file.getProject();
     Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);

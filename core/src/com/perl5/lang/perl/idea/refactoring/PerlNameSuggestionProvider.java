@@ -51,6 +51,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
  * Created by hurricup on 12.06.2015.
  */
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
+  private static final String EXPRESSION = "expression";
   private static final String ANON = "anon";
   private static final String REFERENCE = "reference";
   private static final String REF = "ref";
@@ -520,9 +521,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * Fills {@code result} with names suggested for the {@code targetElement} and returns the recommended name
    */
   @NotNull
-  public static String suggestAndGetRecommendedName(@NotNull PsiElement expression, @NotNull Set<String> result) {
-    return StringUtil.notNullize(Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class))
-                                   .suggestAndAddRecommendedName(expression, result), "new_variable_name");
+  public static String getRecommendedName(@NotNull PsiElement expression) {
+    String suggestedName = Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class))
+      .suggestAndAddRecommendedName(expression, new LinkedHashSet<>());
+    return StringUtil.notNullize(suggestedName, EXPRESSION);
   }
 
   public static void suggestNames(@NotNull PerlVariableDeclarationElement variableDeclarationElement, @NotNull Set<String> result) {

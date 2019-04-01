@@ -1,4 +1,26 @@
 sub first{
+    my @<selection>list<caret></selection> = (1, 2, 3, 4, 5);
+    my @something = (@list);
+    if( $a ){
+        my @otherthing = (@list);
+        if( $b){
+            somesub(@list);
+        }
+    }
+}
+sub second{
+    my @something = (1,2,3,4,5);
+    if( $a ){
+        my @otherthing = (1,2,3,4,5);
+        if( $b){
+            somesub(1,2,3,4,5);
+        }
+    }
+}
+
+
+================ AFTER RENAME =================
+sub first{
     my @test_name<caret> = (1, 2, 3, 4, 5);
     my @something = (@test_name);
     if( $a ){

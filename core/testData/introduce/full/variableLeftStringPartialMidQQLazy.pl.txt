@@ -1,4 +1,33 @@
 'someth${variable}ing here bla';
+my $<selection>string<caret></selection> = qq{${variable}ing here b};
+"someth${string}la";
+`someth${string}la`;
+q /someth${variable}ing here bla/;
+qq{someth${string}la};
+qx fsometh${string}laf;
+qw/someth${variable}ing here bla/;
+something => "here bla";
+
+'ing here b';
+"ing here b";
+`ing here b`;
+q /ing here b/;
+qq {ing here b};
+qx fing here bf;
+qw/ing here b/;
+something => "";
+
+'someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla ';
+"someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla ";
+`someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla `;
+q /someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla /;
+qq{someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla };
+qx fsometh${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla someth${string}la someth${variable}ing here bla f;
+qw/someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla someth${variable}ing here bla /;
+
+
+================ AFTER RENAME =================
+'someth${variable}ing here bla';
 my $test_name<caret> = qq{${variable}ing here b};
 "someth${test_name}la";
 `someth${test_name}la`;

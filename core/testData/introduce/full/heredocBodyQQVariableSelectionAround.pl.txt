@@ -1,3 +1,22 @@
+my $<selection>string<caret></selection> = "st$variable bl";
+say <<"EOM";
+te${string}abla
+EOM
+
+say <<EOM;
+other te${string}abla
+EOM
+
+say <<'EOM';
+other test$variable blabla
+EOM
+
+say <<`EOM`;
+te${string}abla
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = "st$variable bl";
 say <<"EOM";
 te${test_name}abla

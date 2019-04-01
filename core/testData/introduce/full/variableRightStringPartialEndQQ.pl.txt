@@ -1,4 +1,33 @@
 'something here bla${variable}';
+my $<selection>string<caret></selection> = "re bla${variable}";
+"something he$string";
+`something he$string`;
+q /something here bla${variable}/;
+qq{something he$string};
+qx fsomething he${string}f;
+qw/something here bla${variable}/;
+something => "he$string";
+
+'re bla${variable}';
+"$string";
+`$string`;
+q /re bla${variable}/;
+qq{$string};
+qx f${string}f;
+qw/re bla${variable}/;
+something => "";
+
+'something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} ';
+"something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} ";
+`something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} `;
+q /something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} /;
+qq{something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} };
+qx fsomething he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} something he$string something here bla${variable} f;
+qw/something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} /;
+
+
+================ AFTER RENAME =================
+'something here bla${variable}';
 my $test_name<caret> = "re bla${variable}";
 "something he$test_name";
 `something he$test_name`;

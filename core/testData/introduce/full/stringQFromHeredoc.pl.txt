@@ -1,3 +1,31 @@
+my $<selection>test_string<caret></selection> = 'test string';
+
+<<"EOM";
+this
+is a $test_string
+end
+EOM
+
+<<'EOM';
+this
+is a test string
+end
+EOM
+
+<<`EOM`;
+this
+is a $test_string
+end
+EOM
+
+<<EOM;
+this
+is a $test_string
+end
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = 'test string';
 
 <<"EOM";

@@ -1,2 +1,5 @@
+my $<selection>second<caret></selection> = "second";
+first => ($second, 'third');
+================ AFTER RENAME =================
 my $test_name<caret> = "second";
 first => ($test_name, 'third');

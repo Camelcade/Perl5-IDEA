@@ -1,5 +1,12 @@
 somemethod;
 somemethod();
+my $<selection>somemethod<caret></selection> = somemethod(1, 2, 3);
+$somemethod;
+$somemethod;
+
+================ AFTER RENAME =================
+somemethod;
+somemethod();
 my $test_name<caret> = somemethod(1, 2, 3);
 $test_name;
 $test_name;

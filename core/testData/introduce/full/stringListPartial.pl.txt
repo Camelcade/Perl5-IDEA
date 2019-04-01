@@ -1,2 +1,6 @@
+my @<selection>string_list<caret></selection> = qw/second third/;
+(q<fi'rst>, @string_list);
+
+================ AFTER RENAME =================
 my @test_name<caret> = qw/second third/;
 (q<fi'rst>, @test_name);

@@ -1,3 +1,24 @@
+my $<selection>substr<caret></selection> = substr <<EOM, 0, -1;
+bl"al>]})/|!~^._=?\;ba
+EOM
+say <<"EOM";
+test $substr text
+EOM
+
+say <<EOM;
+test $substr text
+EOM
+
+say <<'EOM';
+test bl"al>]})/|!~^._=?\;ba text
+EOM
+
+say <<`EOM`;
+test $substr text
+EOM
+
+
+================ AFTER RENAME =================
 my $test_name<caret> = substr <<EOM, 0, -1;
 bl"al>]})/|!~^._=?\;ba
 EOM

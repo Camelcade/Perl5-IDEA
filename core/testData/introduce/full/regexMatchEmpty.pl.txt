@@ -1,3 +1,28 @@
+my $<selection>pattern<caret></selection> = qr//;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+$pattern;
+s/$pattern/asdfo/;
+s/   $pattern/asdfo/x;
+s/
+ #comment
+    $pattern/asdfo/xx;
+
+================ AFTER RENAME =================
 my $test_name<caret> = qr//;
 $test_name;
 $test_name;

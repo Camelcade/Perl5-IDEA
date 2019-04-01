@@ -1,2 +1,6 @@
+my $<selection>method<caret></selection> = Foo::Bar->method;
+$method;
+
+================ AFTER RENAME =================
 my $test_name<caret> = Foo::Bar->method;
 $test_name;

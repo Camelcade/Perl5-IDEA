@@ -1,4 +1,33 @@
 'something he${variable}re bla';
+my $<selection>command_output<caret></selection> = qx fing he${variable}re bf;
+"someth${command_output}la";
+`someth${command_output}la`;
+q /something he${variable}re bla/;
+qq{someth${command_output}la};
+qx fsometh${command_output}laf;
+qw/something he${variable}re bla/;
+something => "here bla";
+
+'ing he${variable}re b';
+"$command_output";
+`$command_output`;
+q /ing he${variable}re b/;
+qq{$command_output};
+qx f${command_output}f;
+qw/ing he${variable}re b/;
+something => "";
+
+'something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla ';
+"someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla ";
+`someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla `;
+q /something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
+qq{someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla };
+qx fsometh${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla someth${command_output}la something he${variable}re bla f;
+qw/something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;
+
+
+================ AFTER RENAME =================
+'something he${variable}re bla';
 my $test_name<caret> = qx fing he${variable}re bf;
 "someth${test_name}la";
 `someth${test_name}la`;

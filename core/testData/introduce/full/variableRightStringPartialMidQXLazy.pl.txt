@@ -1,4 +1,33 @@
 'something here b${variable}la';
+my $<selection>command_output<caret></selection> = qx fing here b${variable}f;
+"someth${command_output}la";
+`someth${command_output}la`;
+q /something here b${variable}la/;
+qq{someth${command_output}la};
+qx fsometh${command_output}laf;
+qw/something here b${variable}la/;
+something => "here b${variable}la";
+
+'ing here b';
+"ing here b";
+`ing here b`;
+q /ing here b/;
+qq {ing here b};
+qx fing here bf;
+qw/ing here b/;
+something => "";
+
+'something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la ';
+"someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la ";
+`someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la `;
+q /something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+qq{someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la };
+qx fsometh${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la someth${command_output}la something here b${variable}la f;
+qw/something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;
+
+
+================ AFTER RENAME =================
+'something here b${variable}la';
 my $test_name<caret> = qx fing here b${variable}f;
 "someth${test_name}la";
 `someth${test_name}la`;

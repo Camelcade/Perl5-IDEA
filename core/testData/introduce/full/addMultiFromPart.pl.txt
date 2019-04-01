@@ -1,3 +1,8 @@
+my $<selection>expression<caret></selection> = $a + $b;
+$expression + $c;
+$expression + $expression + $expression + $expression + $expression + $expression + $expression + $expression;
+$expression + $c + $expression + $c + $expression + $c + $expression + $c + $expression + $c + $expression + $c;
+================ AFTER RENAME =================
 my $test_name<caret> = $a + $b;
 $test_name + $c;
 $test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name + $test_name;
