@@ -29,6 +29,20 @@ public class PerlNamesSuggesterTest extends PerlLightTestCase {
 
   public void testHeredocTerminator() {doTest();}
 
+  public void testScalarSub() {doTest();}
+
+  public void testScalarSubAll() {doTest();}
+
+  public void testScalarSubParallel() {doTest();}
+
+  public void testScalarSubShadowed() {doTest();}
+
+  public void testScalarSubShadowedInner() {doTest();}
+
+  public void testScalarSubShadows() {doTest();}
+
+  public void testScalarSubShadowsInner() {doTest();}
+
   private void doTest() {
     doTestSuggesterOnRename(new PerlMemberInplaceRenameHandler());
   }

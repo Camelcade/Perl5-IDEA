@@ -47,6 +47,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlStatementImpl;
 import com.perl5.lang.perl.psi.properties.PerlCompound;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -147,16 +148,25 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     if (targetExpressionFile instanceof PerlFile) {
       ((PerlFile)targetExpressionFile).setFileContext(target.getPlace());
     }
-    String variableName = PerlNameSuggestionProvider.getRecommendedName(targetExpressionElement);
+
+    PerlVariableType variableType = PerlIntroduceTargetsHandler.computeVariableType(target);
+    if (variableType == null) {
+      LOG.error("Unable to get variable type for " + target);
+      return;
+    }
+
+
+    PsiElement anchorElement = computeAnchor(target, occurrences);
+    if (anchorElement == null) {
+      return;
+    }
+
+    String variableName = PerlNameSuggestionProvider.getRecommendedName(targetExpressionElement, anchorElement, variableType);
+
 
     Project project = file.getProject();
     Pair<PsiElement, PsiElement> declaration = PerlIntroduceTargetsHandler.createTargetDeclarationStatement(project, target, variableName);
     if (declaration == null) {
-      return;
-    }
-
-    PsiElement anchorElement = computeAnchor(target, occurrences);
-    if (anchorElement == null) {
       return;
     }
 

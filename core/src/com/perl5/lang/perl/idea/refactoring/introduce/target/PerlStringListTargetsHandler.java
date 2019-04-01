@@ -43,7 +43,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
 
   @NotNull
   @Override
-  protected PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
+  protected PerlVariableType doComputeVariableType(@NotNull PerlIntroduceTarget target) {
     return target.getChildren().size() > 1 ? PerlVariableType.ARRAY : PerlVariableType.SCALAR;
   }
 

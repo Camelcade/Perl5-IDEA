@@ -94,14 +94,14 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @NotNull
   protected String createDeclarationStatementText(@NotNull String variableName, @NotNull PerlIntroduceTarget target) {
-    return "my " + computeVariableType(target).getSigil() + variableName + " = " + createTargetExpressionText(target) + ";";
+    return "my " + doComputeVariableType(target).getSigil() + variableName + " = " + createTargetExpressionText(target) + ";";
   }
 
   /**
    * @return a sigil for variable, that can represent a {@code target}
    */
   @NotNull
-  protected PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
+  protected PerlVariableType doComputeVariableType(@NotNull PerlIntroduceTarget target) {
     PsiElement targetPlace = target.getPlace();
     IElementType targetType = PsiUtilCore.getElementType(targetPlace);
     String sigil;
@@ -113,6 +113,16 @@ public abstract class PerlIntroduceTargetsHandler {
     }
 
     return PerlVariableType.SCALAR;
+  }
+
+  @Nullable
+  public static PerlVariableType computeVariableType(@NotNull PerlIntroduceTarget target) {
+    PsiElement targetPlace = target.getPlace();
+    if (targetPlace == null) {
+      LOG.error("Unable to get target place for " + target);
+      return null;
+    }
+    return getHandler(targetPlace).doComputeVariableType(target);
   }
 
   /**

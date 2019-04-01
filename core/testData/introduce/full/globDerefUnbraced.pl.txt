@@ -1,8 +1,8 @@
-my $<selection>var<caret></selection> = *$var;
-$var;
-$var;
-$var;
-$var;
+my $<selection>var1<caret></selection> = *$var;
+$var1;
+$var1;
+$var1;
+$var1;
 
 ================ AFTER RENAME =================
 my $test_name<caret> = *$var;

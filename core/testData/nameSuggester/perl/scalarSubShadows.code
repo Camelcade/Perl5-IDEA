@@ -1,0 +1,2 @@
+my $time;
+my $sc<caret>alar  = time;

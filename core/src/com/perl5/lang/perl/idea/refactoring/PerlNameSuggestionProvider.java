@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulator;
@@ -24,6 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.SuggestedNameInfo;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.NameSuggestionProvider;
 import com.intellij.util.ObjectUtils;
@@ -35,6 +37,9 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
@@ -43,6 +48,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Function;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
@@ -51,6 +57,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
  * Created by hurricup on 12.06.2015.
  */
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
+  private static final Logger LOG = Logger.getInstance(PerlNameSuggestionProvider.class);
   private static final String EXPRESSION = "expression";
   private static final String ANON = "anon";
   private static final String REFERENCE = "reference";
@@ -165,7 +172,13 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       else if (declaredVariable instanceof PsiPerlHashVariable) {
         suggestedNames.addAll(HASH_BASE_NAMES);
       }
-      recommendedName = suggestAndAddRecommendedName((PerlVariableDeclarationElement)targetElement, contextElement, suggestedNames);
+      recommendedName = adjustNamesToBeUniqueFor(
+        targetElement,
+        ((PerlVariableDeclarationElement)targetElement).getActualType(),
+        declaredVariable.getName(),
+        suggestAndAddRecommendedName((PerlVariableDeclarationElement)targetElement, contextElement, suggestedNames),
+        suggestedNames
+      );
     }
 
     result.addAll(suggestedNames);
@@ -521,15 +534,22 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * Fills {@code result} with names suggested for the {@code targetElement} and returns the recommended name
    */
   @NotNull
-  public static String getRecommendedName(@NotNull PsiElement expression) {
-    String suggestedName = Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class))
-      .suggestAndAddRecommendedName(expression, new LinkedHashSet<>());
-    return StringUtil.notNullize(suggestedName, EXPRESSION);
+  public static String getRecommendedName(@NotNull PsiElement expression,
+                                          @NotNull PsiElement contextElement,
+                                          @NotNull PerlVariableType variableType) {
+    String suggestedName = getInstance().suggestAndAddRecommendedName(expression, new LinkedHashSet<>());
+    return StringUtil.notNullize(
+      adjustNamesToBeUniqueFor(contextElement, variableType, null, suggestedName, Collections.emptySet()),
+      EXPRESSION);
+  }
+
+  @NotNull
+  private static PerlNameSuggestionProvider getInstance() {
+    return Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class));
   }
 
   public static void suggestNames(@NotNull PerlVariableDeclarationElement variableDeclarationElement, @NotNull Set<String> result) {
-    Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class))
-      .suggestAndAddRecommendedName((PsiElement)variableDeclarationElement, null, result);
+    getInstance().suggestAndAddRecommendedName((PsiElement)variableDeclarationElement, null, result);
   }
 
   @Nullable
@@ -587,5 +607,90 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return null;
     }
     return validateName(name.replaceAll("_+" + chunk + "_+", "_").replaceAll("(_+" + chunk + "$|^" + chunk + "_+)", ""));
+  }
+
+  /**
+   * Collects existing variables names for the {@code contextElement} and processing names from the {@code names} by adding
+   * a number if variable of {@code variableType} with original name exists in scope. Modifying passed names.
+   *
+   * @return potentially adjusted {@code recommendedName}
+   */
+  @Nullable
+  @Contract("_,_,_,null,_->null")
+  public static String adjustNamesToBeUniqueFor(@NotNull PsiElement contextElement,
+                                                @NotNull PerlVariableType variableType,
+                                                @Nullable String currentName,
+                                                @Nullable String recommendedName,
+                                                @NotNull Set<String> names) {
+    if (names.isEmpty() && recommendedName == null) {
+      return recommendedName;
+    }
+    Set<String> existingNames = collectExistingNames(contextElement, variableType);
+    Function<String, String> fun = originalName -> {
+      if (originalName == null) {
+        return null;
+      }
+      if (!existingNames.contains(originalName) || originalName.equals(currentName)) {
+        return originalName;
+      }
+      else {
+        for (int i = 1; i < Integer.MAX_VALUE; i++) {
+          String adjustedName = originalName + i;
+          if (!existingNames.contains(adjustedName)) {
+            return adjustedName;
+          }
+        }
+        return null;
+      }
+    };
+    if (!names.isEmpty()) {
+      LinkedHashSet<String> result = new LinkedHashSet<>();
+      names.forEach(it -> result.add(fun.apply(it)));
+      names.clear();
+      names.addAll(result);
+    }
+    return fun.apply(recommendedName);
+  }
+
+  /**
+   * Traverses a subtree after an baseElement and walk ups from the baseElement, collecting all variable names.
+   */
+  @NotNull
+  public static Set<String> collectExistingNames(@Nullable PsiElement baseElement, @NotNull PerlVariableType variableType) {
+    if (baseElement == null) {
+      return Collections.emptySet();
+    }
+    Set<String> names = new HashSet<>();
+    PsiElement closestScope = PsiTreeUtil.getParentOfType(baseElement, PerlLexicalScope.class, false);
+    if (closestScope == null) {
+      LOG.error("Unable to find scope for an " + baseElement);
+    }
+    else {
+      PsiElement[] children = closestScope.getChildren();
+      PerlRecursiveVisitor recursiveVisitor = new PerlRecursiveVisitor() {
+        @Override
+        public void visitPerlVariable(@NotNull PerlVariable o) {
+          if (o.getActualType() == variableType) {
+            ContainerUtil.addIfNotNull(names, o.getName());
+          }
+        }
+      };
+      for (int i = children.length - 1; i >= 0; i--) {
+        PsiElement child = children[i];
+        child.accept(recursiveVisitor);
+        if (PsiTreeUtil.isAncestor(child, baseElement, false)) {
+          break;
+        }
+      }
+    }
+
+    PerlResolveUtil.treeWalkUp(baseElement, (element, __) -> {
+      if (element instanceof PerlVariable && ((PerlVariable)element).getActualType() == variableType) {
+        ContainerUtil.addIfNotNull(names, ((PerlVariable)element).getName());
+      }
+      return true;
+    });
+
+    return names;
   }
 }
