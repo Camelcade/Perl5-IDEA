@@ -20,12 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlAssignExpression;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
-import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by hurricup on 30.04.2016.
@@ -52,26 +48,5 @@ public class PerlAssignExpressionMixin extends PsiPerlExprImpl implements PerlAs
     }
 
     return lastChild;
-  }
-
-  /**
-   * Debugging method
-   */
-  @Nullable
-  public List<String> getRightSideAsList() {
-    PsiElement rightSide = getRightSide();
-
-    if (rightSide == null) {
-      return null;
-    }
-
-    List<PsiElement> resultElements = PerlArrayUtil.collectListElements(rightSide);
-
-    List<String> result = new ArrayList<>();
-    for (PsiElement element : resultElements) {
-      result.add(element.getNode().getText());
-    }
-
-    return result;
   }
 }
