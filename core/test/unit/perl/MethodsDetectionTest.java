@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package oop;
+package unit.perl;
 
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiFile;
@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 public class MethodsDetectionTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/oop/methods";
+    return "testData/unit/perl/methods";
   }
 
   @Override

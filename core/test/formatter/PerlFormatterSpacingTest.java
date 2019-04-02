@@ -27,6 +27,8 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
     return "testData/formatter/perl/spacing";
   }
 
+  public void testVariableDeclarations() {doFormatTest();}
+
   public void testQuoteLikeWIthLiteralQuotes() {doFormatTest();}
 
   public void testBlockInReplace() {doFormatTest();}

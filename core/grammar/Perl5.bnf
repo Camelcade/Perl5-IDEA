@@ -972,8 +972,8 @@ private variable_declaration_variation ::= variable_parenthesised_declaration | 
 private variable_parenthesised_declaration ::= '(' variable_parenthesised_declaration_contents ')' {pin=1}
 private variable_parenthesised_declaration_contents ::= strict_variable_declaration_argument (comma + strict_variable_declaration_argument ) * comma*
 
-private strict_variable_declaration_argument ::= strict_variable_declaration_wrapper |  'undef'
-private variable_declaration_argument ::= variable_declaration_element |  'undef'
+private strict_variable_declaration_argument ::= strict_variable_declaration_wrapper |  undef_expr
+private variable_declaration_argument ::= variable_declaration_element |  undef_expr
 
 private strict_variable_declaration_wrapper ::= variable_declaration_element !('{' | '[' | '->' )
 variable_declaration_element ::= '\\'? lexical_variable

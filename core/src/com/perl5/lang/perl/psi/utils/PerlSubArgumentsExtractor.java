@@ -41,6 +41,7 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, P
       return true;
     }
     else if (DECLARATION_ASSIGNING_PATTERN.accepts(statement)) {
+      // fixme see #2007
       PerlAssignExpression assignExpression = PsiTreeUtil.getChildOfType(statement, PerlAssignExpression.class);
 
       if (assignExpression == null) {
@@ -81,7 +82,7 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, P
             variableClass
           );
         }
-        else if (run.getNode().getElementType() == RESERVED_UNDEF) {
+        else if (run.getNode().getElementType() == UNDEF_EXPR) {
           newArgument = myArguments.isEmpty() ? PerlSubArgument.self() : PerlSubArgument.empty();
         }
 

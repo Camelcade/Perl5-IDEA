@@ -405,7 +405,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
     }
     else if ((childNodeType == VARIABLE_DECLARATION_ELEMENT ||
-              (childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType))) &&
+              (childNodeType == UNDEF_EXPR && VARIABLE_DECLARATIONS.contains(parentNodeType))) &&
              myPerlSettings.ALIGN_VARIABLE_DECLARATIONS) {
       return myElementsALignmentsMap.get(parentNode);
     }
@@ -498,7 +498,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
-             (childNodeType == RESERVED_UNDEF && VARIABLE_DECLARATIONS.contains(parentNodeType))) {
+             (childNodeType == UNDEF_EXPR && VARIABLE_DECLARATIONS.contains(parentNodeType))) {
       return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {

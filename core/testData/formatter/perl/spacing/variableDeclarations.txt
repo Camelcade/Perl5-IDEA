@@ -1,0 +1,4 @@
+my ($var1, undef, $var2);
+our ($var1, undef, $var2);
+state ($var1, undef, $var2);
+local ($var1, undef, $var2);
