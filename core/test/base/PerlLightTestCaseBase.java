@@ -297,8 +297,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  public void initWithTextSmart(String content) {
+  public void initWithTextSmart(@NotNull String content) {
     initWithFileContent("test", getFileExtension(), content);
+  }
+
+  public void initWithTextSmartWithoutErrors(@NotNull String content) {
+    initWithTextSmart(content);
   }
 
   public void initWithFileContent(String filename, String extension, String content) {

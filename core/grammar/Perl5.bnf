@@ -385,7 +385,6 @@ limitations under the License.
 	mixin(".+_cast_expr")="com.perl5.lang.perl.psi.mixins.PerlCastExpressionMixin"
 
 	implements("assign_expr")="com.perl5.lang.perl.psi.PerlAssignExpression"
-	mixin("assign_expr")="com.perl5.lang.perl.psi.mixins.PerlAssignExpressionMixin"
 
 	extends(".*statement_modifier")=statement_modifier
 	implements("statement_modifier")="com.perl5.lang.perl.psi.PerlStatementModifier"

@@ -17,8 +17,14 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.util.PerlArrayUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * Created by hurricup on 30.04.2016.
@@ -30,7 +36,9 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    * @return left side
    */
   @NotNull
-  PsiElement getLeftSide();
+  default PsiElement getLeftSide() {
+    return getFirstChild();
+  }
 
   /**
    * Returns the rightmost side of assignment expression
@@ -38,5 +46,37 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    * @return rightmost side or null if expression is incomplete
    */
   @Nullable
-  PsiElement getRightSide();
+  default PsiElement getRightSide() {
+    PsiElement lastChild = getLastChild();
+    PsiElement firstChild = getFirstChild();
+
+    if (lastChild == firstChild || lastChild == null || lastChild.getFirstChild() == null) {
+      return null;
+    }
+
+    return lastChild;
+  }
+
+  /**
+   * @return an assignment expression if {@code element} is a part of one.
+   * Unwraps multi-variable declarations and passing through any empty wrappers, e.g. variable declaration
+   */
+  @Nullable
+  @Contract("null->null")
+  static PerlAssignExpression getAssignmentExpression(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
+    PerlAssignExpression assignExpression = PsiTreeUtil.getParentOfType(element, PerlAssignExpression.class);
+    if (assignExpression == null) {
+      return null;
+    }
+
+    return Arrays.stream(assignExpression.getChildren())
+             .flatMap(it -> PerlArrayUtil.collectListElements(it).stream())
+             .flatMap(it -> it instanceof PerlVariableDeclarationExpr ?
+                            ((PerlVariableDeclarationExpr)it).getVariableDeclarationElementList().stream() :
+                            Stream.of(it))
+             .anyMatch(it -> it != null && it.getTextRange().equals(element.getTextRange())) ? assignExpression : null;
+  }
 }

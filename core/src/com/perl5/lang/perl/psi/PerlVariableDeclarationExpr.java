@@ -22,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -44,7 +43,6 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
   default List<PerlVariable> getVariables() {
     return getVariableDeclarationElementList().stream()
       .map(PerlVariableDeclarationElement::getVariable)
-      .filter(Objects::nonNull)
       .collect(Collectors.toList());
   }
 }
