@@ -16,14 +16,15 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 /**
@@ -72,11 +73,20 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return null;
     }
 
-    return Arrays.stream(assignExpression.getChildren())
-             .flatMap(it -> PerlArrayUtil.collectListElements(it).stream())
+    TextRange elementTextRange = element.getTextRange();
+    PsiElement container = ContainerUtil.find(assignExpression.getChildren(), it -> it.getTextRange().contains(elementTextRange));
+    if (container == null) {
+      return null;
+    }
+
+    if (container.equals(element)) {
+      return assignExpression;
+    }
+
+    return PerlArrayUtil.collectListElements(container).stream()
              .flatMap(it -> it instanceof PerlVariableDeclarationExpr ?
                             ((PerlVariableDeclarationExpr)it).getVariableDeclarationElementList().stream() :
                             Stream.of(it))
-             .anyMatch(it -> it != null && it.getTextRange().equals(element.getTextRange())) ? assignExpression : null;
+             .anyMatch(it -> it != null && it.getTextRange().equals(elementTextRange)) ? assignExpression : null;
   }
 }
