@@ -199,6 +199,8 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     }
 
     public ValueDescriptor(@NotNull List<PsiElement> elements, int startIndex) {
+      // fixme unflatten elements
+
       myElements = Collections.unmodifiableList(elements);
       myStartIndex = startIndex;
     }
