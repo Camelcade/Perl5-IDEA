@@ -36,6 +36,7 @@ import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlAssignExpression.ValueDescriptor;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -193,16 +194,21 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private String suggestAndAddRecommendedName(@NotNull PerlVariableDeclarationElement declaration,
                                               @Nullable PsiElement contextElement,
                                               @NotNull Set<String> result) {
-    PsiElement declarationWrapper = declaration.getParent();
-    if (declarationWrapper == null) {
+    PerlAssignExpression assignmentExpression = PerlAssignExpression.getAssignmentExpression(declaration);
+    if (assignmentExpression == null) {
       return null;
     }
-    PsiElement assignment = declarationWrapper.getParent();
-    if (!(assignment instanceof PerlAssignExpression)) {
+    ValueDescriptor rightSideDescriptor = assignmentExpression.getRightPartOfAssignment(declaration);
+    if (rightSideDescriptor == null || rightSideDescriptor.getStartIndex() != 0) {
       return null;
     }
-    PsiElement assignee = ((PerlAssignExpression)assignment).getRightSide();
-    return suggestAndAddRecommendedName(assignee, result);
+    List<PsiElement> elements = rightSideDescriptor.getElements();
+    if (elements.isEmpty()) {
+      return null;
+    }
+    // fixme array_element if index is more than one
+    // fixme we could analyze all elements
+    return suggestAndAddRecommendedName(elements.get(0), result);
   }
 
   @Nullable
