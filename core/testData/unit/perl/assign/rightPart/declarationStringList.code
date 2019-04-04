@@ -1,0 +1,1 @@
+my @<caret>var = qw/some thing/;

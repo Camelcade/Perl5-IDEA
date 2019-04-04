@@ -1,0 +1,5 @@
+(my $v<caret>ar) = (get_something);
+Index: 0
+Elements number: 1
+Text: get_something
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 13 in assignScalarParensOutside.pl

@@ -667,7 +667,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  private String getEditorTextWithCaretsAndSelections() {
+  protected String getEditorTextWithCaretsAndSelections() {
     return getEditorTextWithMacroses(addCaretsMacroses(new ArrayList<>()));
   }
 

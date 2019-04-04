@@ -1,0 +1,5 @@
+my($v<caret>ar, $othervar) = (get_first, get_second);
+Index: 0
+Elements number: 1
+Text: get_first
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 23 in assignScalarFirst.pl

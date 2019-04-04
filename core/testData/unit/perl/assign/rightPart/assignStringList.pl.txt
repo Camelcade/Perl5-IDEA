@@ -1,0 +1,5 @@
+@v<caret>ar = qw/some thing/;
+Index: 0
+Elements number: 1
+Text: qw/some thing/
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 7 in assignStringList.pl

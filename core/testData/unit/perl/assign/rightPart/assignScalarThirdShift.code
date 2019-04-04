@@ -1,0 +1,1 @@
+my($othervar, undef, $v<caret>ar) = (shift1,shift2,shift3);

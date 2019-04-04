@@ -1,0 +1,1 @@
+($othervar, undef, $v<caret>ar) = (get_first, get_second, get_third);

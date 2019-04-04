@@ -1,0 +1,5 @@
+my($othervar, undef, $v<caret>ar) = (@some_array, get_first, get_second);
+Index: 2
+Elements number: 1
+Text: @some_array, get_first, get_second
+PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) at 30 in assignScalarListWithValues.pl

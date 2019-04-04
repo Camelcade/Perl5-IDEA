@@ -1,0 +1,5 @@
+my @<caret>var = qw/some thing/;
+Index: 0
+Elements number: 1
+Text: qw/some thing/
+PsiPerlStringListImpl(Perl5: STRING_LIST) at 10 in declarationStringList.pl

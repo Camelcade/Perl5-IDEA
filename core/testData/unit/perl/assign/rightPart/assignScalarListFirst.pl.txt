@@ -1,0 +1,5 @@
+my($v<caret>ar, $othervar, undef) = @some_array;
+Index: 0
+Elements number: 1
+Text: @some_array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 29 in assignScalarListFirst.pl

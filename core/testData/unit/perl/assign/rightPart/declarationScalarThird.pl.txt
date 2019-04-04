@@ -1,0 +1,5 @@
+my($othervar, undef, $v<caret>ar) = (get_first, get_second, get_third);
+Index: 0
+Elements number: 1
+Text: get_third
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 53 in declarationScalarThird.pl

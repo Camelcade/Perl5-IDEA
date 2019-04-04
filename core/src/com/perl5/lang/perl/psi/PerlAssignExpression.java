@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -199,10 +200,43 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     }
 
     public ValueDescriptor(@NotNull List<PsiElement> elements, int startIndex) {
-      // fixme unflatten elements
-
-      myElements = Collections.unmodifiableList(elements);
+      myElements = unflattenElements(elements);
       myStartIndex = startIndex;
+    }
+
+    private List<PsiElement> unflattenElements(@NotNull List<PsiElement> sourceElements) {
+      if (sourceElements.isEmpty()) {
+        return Collections.emptyList();
+      }
+      List<PsiElement> result = new ArrayList<>();
+      for (int i = 0; i < sourceElements.size(); ) {
+        PsiElement element = sourceElements.get(i);
+        PsiElement parent = element.getParent();
+        PsiElement[] children = parent.getChildren();
+        PsiElement effectiveElement;
+
+        // fixme parenthesized expression with a single item probably should be unflatten in a list context,
+        // fixme we should unflatten backwards for non-first elements. E.g. (($var), $some, $list);
+        if (children.length > 1 && element.equals(children[0]) && sourceElements.contains(children[children.length - 1])) {
+          effectiveElement = parent;
+        }
+        else {
+          effectiveElement = element;
+        }
+
+        //while( element instanceof PsiPerlParenthesisedExpr && element.getChildren().length > 0){
+        //  element = element.getChildren()[0];
+        //}
+
+        result.add(effectiveElement);
+        TextRange elementTextRange = effectiveElement.getTextRange();
+        while (i < sourceElements.size() && elementTextRange.contains(sourceElements.get(i).getTextRange())) {
+          i++;
+        }
+      }
+
+
+      return result;
     }
 
     @NotNull

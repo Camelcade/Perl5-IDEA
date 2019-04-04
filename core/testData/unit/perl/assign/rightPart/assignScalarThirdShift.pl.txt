@@ -1,0 +1,5 @@
+my($othervar, undef, $v<caret>ar) = (shift1,shift2,shift3);
+Index: 0
+Elements number: 1
+Text: shift3
+PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) at 44 in assignScalarThirdShift.pl
