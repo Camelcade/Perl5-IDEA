@@ -56,16 +56,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SUB_DECLARATION
   );
 
-  TokenSet VARIABLE_DECLARATIONS = TokenSet.create(
-    VARIABLE_DECLARATION_GLOBAL,
-    VARIABLE_DECLARATION_LEXICAL,
-    VARIABLE_DECLARATION_LOCAL
-  );
-
-  TokenSet SUBS_OR_VARIABLES_DECLARATION = TokenSet.orSet(
-    VARIABLE_DECLARATIONS, SUB_DEFINITIONS_TOKENSET
-  );
-
   TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(
     CONTINUE_BLOCK,
     RESERVED_ELSE,
@@ -227,7 +217,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
   TokenSet PARENTHESISED_LIKE_EXPRESSIONS = TokenSet.orSet(
     TokenSet.create(PARENTHESISED_EXPR),
-    VARIABLE_DECLARATIONS
+    PerlTokenSets.VARIABLE_DECLARATIONS
   );
 
   TokenSet OPERATORS_ASSIGNMENT = TokenSet.create(

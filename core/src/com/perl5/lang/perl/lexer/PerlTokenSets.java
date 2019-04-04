@@ -286,4 +286,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet STRINGS = TokenSet.create(STRING_BARE, STRING_DQ, STRING_XQ, STRING_SQ);
 
   TokenSet CALLS = TokenSet.create(SUB_CALL_EXPR, NESTED_CALL);
+  TokenSet VARIABLE_DECLARATIONS = TokenSet.create(
+    VARIABLE_DECLARATION_GLOBAL,
+    VARIABLE_DECLARATION_LEXICAL,
+    VARIABLE_DECLARATION_LOCAL
+  );
 }

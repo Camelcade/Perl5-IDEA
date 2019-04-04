@@ -208,34 +208,37 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       if (sourceElements.isEmpty()) {
         return Collections.emptyList();
       }
-      List<PsiElement> result = new ArrayList<>();
-      for (int i = 0; i < sourceElements.size(); ) {
-        PsiElement element = sourceElements.get(i);
-        PsiElement parent = element.getParent();
-        PsiElement[] children = parent.getChildren();
-        PsiElement effectiveElement;
+      List<PsiElement> result;
+      while (true) {
+        result = new ArrayList<>();
+        boolean modified = false;
+        for (int i = 0; i < sourceElements.size(); i++) {
+          PsiElement element = sourceElements.get(i);
+          PsiElement parent = element.getParent();
+          PsiElement[] children = parent.getChildren();
+          if (children.length == 1) {
+            result.add(parent);
+            modified = true;
+            continue;
+          }
 
-        // fixme parenthesized expression with a single item probably should be unflatten in a list context,
-        // fixme we should unflatten backwards for non-first elements. E.g. (($var), $some, $list);
-        if (children.length > 1 && element.equals(children[0]) && sourceElements.contains(children[children.length - 1])) {
-          effectiveElement = parent;
-        }
-        else {
-          effectiveElement = element;
-        }
+          if (element.equals(children[0])) {
+            int lastElementIndex = sourceElements.indexOf(children[children.length - 1]);
+            if (lastElementIndex > 0) {
+              result.add(parent);
+              modified = true;
+              i = lastElementIndex;
+              continue;
+            }
+          }
 
-        //while( element instanceof PsiPerlParenthesisedExpr && element.getChildren().length > 0){
-        //  element = element.getChildren()[0];
-        //}
-
-        result.add(effectiveElement);
-        TextRange elementTextRange = effectiveElement.getTextRange();
-        while (i < sourceElements.size() && elementTextRange.contains(sourceElements.get(i).getTextRange())) {
-          i++;
+          result.add(element);
         }
+        if (!modified) {
+          break;
+        }
+        sourceElements = result;
       }
-
-
       return result;
     }
 

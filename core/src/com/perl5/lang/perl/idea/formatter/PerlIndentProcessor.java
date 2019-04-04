@@ -42,8 +42,8 @@ import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_CLOSERS;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingContext.BLOCK_OPENERS;
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.VARIABLE_DECLARATIONS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 
 /**
  * Created by hurricup on 03.09.2015.

@@ -21,10 +21,12 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationExpr;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 
 /**
  * Created by hurricup on 27.06.2016.
@@ -54,7 +56,10 @@ public enum PerlContextType {
     }
     IElementType elementType = PsiUtilCore.getElementType(element);
 
-    if (LIST_CONTEXT_ELEMENTS.contains(elementType)) {
+    if (VARIABLE_DECLARATIONS.contains(elementType)) {
+      return ((PerlVariableDeclarationExpr)element).isParenthesized() ? LIST : SCALAR;
+    }
+    else if (LIST_CONTEXT_ELEMENTS.contains(elementType)) {
       return LIST;
     }
     else if (ELEMENTS_TO_UNWRAP.contains(elementType)) {

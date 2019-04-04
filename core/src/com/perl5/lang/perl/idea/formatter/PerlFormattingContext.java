@@ -39,6 +39,7 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
@@ -405,7 +406,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return mySettings.ALIGN_MULTILINE_PARAMETERS ? myElementsALignmentsMap.get(parentNode) : null;
     }
     else if ((childNodeType == VARIABLE_DECLARATION_ELEMENT ||
-              (childNodeType == UNDEF_EXPR && VARIABLE_DECLARATIONS.contains(parentNodeType))) &&
+              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) &&
              myPerlSettings.ALIGN_VARIABLE_DECLARATIONS) {
       return myElementsALignmentsMap.get(parentNode);
     }
@@ -498,7 +499,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
       return getWrapBySettings(parentNode, myPerlSettings.QW_LIST_WRAP, false);
     }
     else if (childNodeType == VARIABLE_DECLARATION_ELEMENT ||
-             (childNodeType == UNDEF_EXPR && VARIABLE_DECLARATIONS.contains(parentNodeType))) {
+             (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {
       return getWrapBySettings(parentNode, myPerlSettings.VARIABLE_DECLARATION_WRAP, false);
     }
     else if (parentNodeType == DEREF_EXPR && childNodeType == OPERATOR_DEREFERENCE) {
