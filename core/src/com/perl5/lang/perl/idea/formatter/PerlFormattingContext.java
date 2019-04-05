@@ -284,7 +284,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
 
       // LF after opening brace and before closing need to check if here-doc opener is in the line
       if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type)) {
-        if (!isNewLineForbiddenAt(child1Node)) {
+        if (!isNewLineForbiddenAt(child2Node)) {
           return Spacing.createSpacing(0, 0, 1, true, 1);
         }
         else {

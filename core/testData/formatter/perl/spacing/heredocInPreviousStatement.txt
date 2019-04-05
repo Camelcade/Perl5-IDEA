@@ -1,0 +1,4 @@
+<<EOM; $var
+test
+EOM
+        = 42;
