@@ -1,0 +1,6 @@
+my $v<caret>ar = ('first', 'second', 'third');
+
+Index: 0
+Elements number: 1
+Text: 'third'
+PsiPerlStringSqImpl(Perl5: STRING_SQ) at 30 in assignListInScalarContext.pl

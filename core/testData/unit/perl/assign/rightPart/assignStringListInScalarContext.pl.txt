@@ -1,0 +1,6 @@
+my $v<caret>ar = qw/first second third/;
+
+Index: 0
+Elements number: 1
+Text: third
+PsiPerlStringBareImpl(Perl5: STRING_BARE) at 26 in assignStringListInScalarContext.pl

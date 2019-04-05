@@ -31,6 +31,15 @@ import java.util.Objects;
 
 public class PerlAssignExprRightPart extends PerlLightTestCase {
 
+
+  public void testAssignListInListContext() {doTest();}
+
+  public void testAssignListInScalarContext() {doTest();}
+
+  public void testAssignStringListInListContext() {doTest();}
+
+  public void testAssignStringListInScalarContext() {doTest();}
+
   public void testAssignScalarEmpty() {doTest();}
 
   public void testAssignScalarFirst() {doTest();}

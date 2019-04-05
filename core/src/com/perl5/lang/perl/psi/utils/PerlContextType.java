@@ -39,8 +39,21 @@ public enum PerlContextType {
   private static final Logger LOG = Logger.getInstance(PerlContextType.class);
 
   private static final TokenSet LIST_CONTEXT_ELEMENTS = TokenSet.create(
-    ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR, COMMA_SEQUENCE_EXPR, STRING_LIST
+    ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR, COMMA_SEQUENCE_EXPR, STRING_LIST, PARENTHESISED_EXPR
   );
+
+
+  public static boolean isVoid(@Nullable PsiElement element) {
+    return from(element) == VOID;
+  }
+
+  public static boolean isList(@Nullable PsiElement element) {
+    return from(element) == LIST;
+  }
+
+  public static boolean isScalar(@Nullable PsiElement element) {
+    return from(element) == SCALAR;
+  }
 
   /**
    * @return context of the {@code element}
@@ -53,7 +66,11 @@ public enum PerlContextType {
     IElementType elementType = PsiUtilCore.getElementType(element);
 
     if (VARIABLE_DECLARATIONS.contains(elementType)) {
-      return ((PerlVariableDeclarationExpr)element).isParenthesized() ? LIST : SCALAR;
+      if (((PerlVariableDeclarationExpr)element).isParenthesized()) {
+        return LIST;
+      }
+      PsiElement[] children = element.getChildren();
+      return children.length == 0 ? VOID : from(children[0]);
     }
     else if (LIST_CONTEXT_ELEMENTS.contains(elementType)) {
       return LIST;
@@ -67,24 +84,7 @@ public enum PerlContextType {
       if (children.length == 0) {
         return VOID;
       }
-
-      if (LIST_CONTEXT_ELEMENTS.contains(PsiUtilCore.getElementType(children[0]))) {
-        return LIST;
-      }
-
-      if (VARIABLE_DECLARATIONS.contains(PsiUtilCore.getElementType(element.getParent()))) {
-        return from(element.getParent());
-      }
-      return SCALAR;
-    }
-    else if (elementType == SCALAR_VARIABLE) {
-      IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
-      if (parentElementType == VARIABLE_DECLARATION_ELEMENT) {
-        return from(element.getParent());
-      }
-      else if (parentElementType == PARENTHESISED_EXPR) {
-        return LIST;
-      }
+      return from(children[0]);
     }
 
     return SCALAR;

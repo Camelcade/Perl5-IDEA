@@ -1,0 +1,1 @@
+my($v<caret>ar) = ('first', 'second', 'third');

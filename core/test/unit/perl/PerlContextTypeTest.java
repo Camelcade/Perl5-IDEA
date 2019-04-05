@@ -24,6 +24,30 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlContextTypeTest extends PerlLightTestCase {
 
+  public void testScalarDeclarationExpression() {
+    assertScalar("my $ar<caret>ray = 123;", PerlVariableDeclarationExpr.class);
+  }
+
+  public void testScalarDeclarationExpressionParenthesized() {
+    assertList("my( $ar<caret>ray) = 123;", PerlVariableDeclarationExpr.class);
+  }
+
+  public void testArrayDeclarationExpression() {
+    assertList("my @ar<caret>ray = 123;", PerlVariableDeclarationExpr.class);
+  }
+
+  public void testArrayDeclarationExpressionParenthesized() {
+    assertList("my( @ar<caret>ray) = 123;", PerlVariableDeclarationExpr.class);
+  }
+
+  public void testHashDeclarationExpression() {
+    assertList("my %ar<caret>ray = 123;", PerlVariableDeclarationExpr.class);
+  }
+
+  public void testHashDeclarationExpressionParenthesized() {
+    assertList("my( %ar<caret>ray) = 123;", PerlVariableDeclarationExpr.class);
+  }
+
   public void testStringList() {
     assertList("qw/first s<caret>econd third/", PerlStringList.class);
   }
@@ -37,7 +61,7 @@ public class PerlContextTypeTest extends PerlLightTestCase {
   }
 
   public void testScalarParens() {
-    assertListVariable("($v<caret>ar) = @_;");
+    assertScalarVariable("($v<caret>ar) = @_;");
   }
 
   public void testArray() {
@@ -97,7 +121,7 @@ public class PerlContextTypeTest extends PerlLightTestCase {
   }
 
   public void testScalarDeclarationParens() {
-    assertListDeclaration("my( $v<caret>ar )= 123;");
+    assertScalarDeclaration("my( $v<caret>ar )= 123;");
   }
 
   public void testArrayDeclarationParens() {
@@ -109,7 +133,7 @@ public class PerlContextTypeTest extends PerlLightTestCase {
   }
 
   public void testScalarDeclarationParensAttr() {
-    assertListDeclaration("my( $v<caret>ar ): lvalue = 123;");
+    assertScalarDeclaration("my( $v<caret>ar ): lvalue = 123;");
   }
 
   public void testArrayDeclarationParensAttrs() {
@@ -154,6 +178,6 @@ public class PerlContextTypeTest extends PerlLightTestCase {
     initWithTextSmartWithoutErrors(text);
     PsiElement elementAtCaret = getElementAtCaret(clazz);
     assertNotNull(elementAtCaret);
-    assertEquals(expectedType, PerlContextType.from(elementAtCaret));
+    assertEquals(expectedType + "\n" + text, PerlContextType.from(elementAtCaret) + "\n" + text);
   }
 }

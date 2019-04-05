@@ -20,6 +20,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -85,26 +86,26 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return null;
     }
     TextRange leftPartTextRange = leftPartElement.getTextRange();
-    PsiElement currentChild = null;
+    PsiElement leftAssignPart = null;
     for (int i = 0; i < children.length - 1; i++) {
       PsiElement child = children[i];
       if (child.getTextRange().contains(leftPartTextRange)) {
-        currentChild = child;
+        leftAssignPart = child;
         break;
       }
     }
-    if (currentChild == null) {
+    if (leftAssignPart == null) {
       return null;
     }
 
     boolean found = false;
     int leftElementIndex = 0;
-    for (PsiElement leftElement : flattenAssignmentPart(currentChild)) {
+    for (PsiElement leftElement : flattenAssignmentPart(leftAssignPart)) {
       if (leftElement.getTextRange().equals(leftPartTextRange)) {
         found = true;
         break;
       }
-      if (PerlContextType.from(leftElement) == LIST) {
+      if (PerlContextType.isList(leftElement)) {
         return null;
       }
       leftElementIndex++;
@@ -116,12 +117,20 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return null;
     }
 
-    PerlContextType leftContext = PerlContextType.from(leftPartElement);
     List<PsiElement> rightElements = flattenAssignmentPart(children[children.length - 1]);
+    if (rightElements.isEmpty()) {
+      return null;
+    }
+    if (PerlContextType.isScalar(leftAssignPart)) {
+      PsiElement lastItem = ContainerUtil.getLastItem(rightElements);
+      return new ValueDescriptor(ObjectUtils.notNull(lastItem), PerlContextType.isList(lastItem) ? -1 : 0);
+    }
+
+    PerlContextType leftContextType = PerlContextType.from(leftPartElement);
     for (int i = 0; i < rightElements.size(); i++) {
       PsiElement rightElement = rightElements.get(i);
       if (leftElementIndex == 0) {
-        if (leftContext == SCALAR) {
+        if (leftContextType == SCALAR) {
           return new ValueDescriptor(rightElement);
         }
         return new ValueDescriptor(rightElements.subList(i, rightElements.size()));
@@ -239,6 +248,20 @@ public interface PerlAssignExpression extends PsiPerlExpr {
         }
         sourceElements = result;
       }
+      // falling through parens
+      result = ContainerUtil.map(result, it -> {
+        while (it instanceof PsiPerlParenthesisedExpr) {
+          PsiElement[] children = it.getChildren();
+          if (children.length == 1) {
+            it = children[0];
+          }
+          else {
+            break;
+          }
+        }
+        return it;
+      });
+
       return result;
     }
 
@@ -247,6 +270,10 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return myElements;
     }
 
+    /**
+     * @return start index in the target. E.g. for second element of {@code @list} it's going to be 1. For last one {@code -1} just like in
+     * perl itself
+     */
     public int getStartIndex() {
       return myStartIndex;
     }
