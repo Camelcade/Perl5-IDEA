@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlContextTypeTest extends PerlLightTestCase {
 
   public void testStringList() {
-    assertList("qw/first second third/", PerlStringList.class);
+    assertList("qw/first s<caret>econd third/", PerlStringList.class);
   }
 
   public void testStringListParens() {
