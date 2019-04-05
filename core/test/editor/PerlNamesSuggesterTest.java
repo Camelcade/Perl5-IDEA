@@ -25,6 +25,18 @@ public class PerlNamesSuggesterTest extends PerlLightTestCase {
     return "testData/nameSuggester/perl";
   }
 
+  public void testListToScalarDeclaration() {doTest();}
+
+  public void testListToScalarDeclarationInParens() {doTest();}
+
+  public void testListToScalarInParens() {doTest();}
+
+  public void testStringListToScalarDeclaration() {doTest();}
+
+  public void testStringListToScalarDeclarationInParens() {doTest();}
+
+  public void testStringListToScalarInParens() {doTest();}
+
   public void testAssignScalarEmpty() {doTest();}
 
   public void testAssignScalarFirst() {doTest();}
