@@ -38,10 +38,6 @@ public enum PerlContextType {
 
   private static final Logger LOG = Logger.getInstance(PerlContextType.class);
 
-  private static final TokenSet ELEMENTS_TO_UNWRAP = TokenSet.create(
-    VARIABLE_DECLARATION_ELEMENT
-  );
-
   private static final TokenSet LIST_CONTEXT_ELEMENTS = TokenSet.create(
     ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR, COMMA_SEQUENCE_EXPR, STRING_LIST
   );
@@ -62,7 +58,7 @@ public enum PerlContextType {
     else if (LIST_CONTEXT_ELEMENTS.contains(elementType)) {
       return LIST;
     }
-    else if (ELEMENTS_TO_UNWRAP.contains(elementType)) {
+    else if (elementType == VARIABLE_DECLARATION_ELEMENT) {
       PsiElement[] children = element.getChildren();
       if (children.length > 2) {
         LOG.error("Don't know how to unwrap multiple children: " + element.getText());
@@ -71,7 +67,18 @@ public enum PerlContextType {
       if (children.length == 0) {
         return VOID;
       }
-      return from(children[0]);
+
+      if (LIST_CONTEXT_ELEMENTS.contains(PsiUtilCore.getElementType(children[0]))) {
+        return LIST;
+      }
+
+      if (VARIABLE_DECLARATIONS.contains(PsiUtilCore.getElementType(element.getParent()))) {
+        return from(element.getParent());
+      }
+      return SCALAR;
+    }
+    else if (elementType == SCALAR_VARIABLE && PsiUtilCore.getElementType(element.getParent()) == VARIABLE_DECLARATION_ELEMENT) {
+      return from(element.getParent());
     }
 
     return SCALAR;

@@ -59,7 +59,7 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
     PsiElement run = getFirstChild();
     while ((run = run.getNextSibling()) != null) {
       IElementType elementType = PsiUtilCore.getElementType(run);
-      if (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(elementType)) {
+      if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(elementType)) {
         return elementType == LEFT_PAREN;
       }
     }

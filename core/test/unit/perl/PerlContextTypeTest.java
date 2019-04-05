@@ -27,17 +27,72 @@ public class PerlContextTypeTest extends PerlLightTestCase {
 
   public void testScalarDeclaration() {
     String data = "my $v<caret>ar = 123;";
-    assertScalarVariable(data);
     assertScalarDeclaration(data);
   }
 
+  public void testArrayDeclaration() {
+    String data = "my @v<caret>ar = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testHashDeclaration() {
+    String data = "my %v<caret>ar = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testScalarDeclarationAttrs() {
+    String data = "my $v<caret>ar :lvalue = 123;";
+    assertScalarDeclaration(data);
+  }
+
+  public void testArrayDeclarationAttrs() {
+    String data = "my @v<caret>ar :lvalue = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testHashDeclarationAttrs() {
+    String data = "my %v<caret>ar :lvalue = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testScalarDeclarationParens() {
+    String data = "my( $v<caret>ar )= 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testArrayDeclarationParens() {
+    String data = "my( @v<caret>ar) = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testHashDeclarationParens() {
+    String data = "my( %v<caret>ar) = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testScalarDeclarationParensAttr() {
+    String data = "my( $v<caret>ar ): lvalue = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testArrayDeclarationParensAttrs() {
+    String data = "my( @v<caret>ar) :lvalue = 123;";
+    assertListDeclaration(data);
+  }
+
+  public void testHashDeclarationParensAttrs() {
+    String data = "my( %v<caret>ar) :lvalue = 123;";
+    assertListDeclaration(data);
+  }
 
   private void assertScalarDeclaration(@NotNull String text) {
     assertScalar(text, PerlVariableDeclarationElement.class);
+    assertScalarVariable(text);
   }
 
   private void assertListDeclaration(@NotNull String text) {
     assertList(text, PerlVariableDeclarationElement.class);
+    assertListVariable(text);
   }
 
   private void assertScalarVariable(@NotNull String text) {
