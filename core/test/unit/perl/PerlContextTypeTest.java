@@ -18,71 +18,106 @@ package unit.perl;
 
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlContextTypeTest extends PerlLightTestCase {
 
+  public void testStringList() {
+    assertList("qw/first second third/", PerlStringList.class);
+  }
+
+  public void testStringListParens() {
+    assertList("(qw/fi<caret>rst second third/)", PerlStringList.class);
+  }
+
+  public void testScalar() {
+    assertScalarVariable("$v<caret>ar = @_;");
+  }
+
+  public void testScalarParens() {
+    assertListVariable("($v<caret>ar) = @_;");
+  }
+
+  public void testArray() {
+    assertListVariable("@v<caret>ar = @_;");
+  }
+
+  public void testArrayParens() {
+    assertListVariable("(@v<caret>ar) = @_;");
+  }
+
+  public void testArrayCast() {
+    assertList("@$v<caret>ar = @_;", PsiPerlArrayCastExpr.class);
+  }
+
+  public void testArrayCastParens() {
+    assertList("(@$v<caret>ar) = @_;", PsiPerlArrayCastExpr.class);
+  }
+
+  public void testHash() {
+    assertListVariable("%v<caret>ar = @_;");
+  }
+
+  public void testHashParens() {
+    assertListVariable("(%v<caret>ar) = @_;");
+  }
+
+  public void testHashCast() {
+    assertList("%$v<caret>ar = @_;", PsiPerlHashCastExpr.class);
+  }
+
+  public void testHashParensCast() {
+    assertList("(%$v<caret>ar) = @_;", PsiPerlHashCastExpr.class);
+  }
+
   public void testScalarDeclaration() {
-    String data = "my $v<caret>ar = 123;";
-    assertScalarDeclaration(data);
+    assertScalarDeclaration("my $v<caret>ar = 123;");
   }
 
   public void testArrayDeclaration() {
-    String data = "my @v<caret>ar = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my @v<caret>ar = 123;");
   }
 
   public void testHashDeclaration() {
-    String data = "my %v<caret>ar = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my %v<caret>ar = 123;");
   }
 
   public void testScalarDeclarationAttrs() {
-    String data = "my $v<caret>ar :lvalue = 123;";
-    assertScalarDeclaration(data);
+    assertScalarDeclaration("my $v<caret>ar :lvalue = 123;");
   }
 
   public void testArrayDeclarationAttrs() {
-    String data = "my @v<caret>ar :lvalue = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my @v<caret>ar :lvalue = 123;");
   }
 
   public void testHashDeclarationAttrs() {
-    String data = "my %v<caret>ar :lvalue = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my %v<caret>ar :lvalue = 123;");
   }
 
   public void testScalarDeclarationParens() {
-    String data = "my( $v<caret>ar )= 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my( $v<caret>ar )= 123;");
   }
 
   public void testArrayDeclarationParens() {
-    String data = "my( @v<caret>ar) = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my( @v<caret>ar) = 123;");
   }
 
   public void testHashDeclarationParens() {
-    String data = "my( %v<caret>ar) = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my( %v<caret>ar) = 123;");
   }
 
   public void testScalarDeclarationParensAttr() {
-    String data = "my( $v<caret>ar ): lvalue = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my( $v<caret>ar ): lvalue = 123;");
   }
 
   public void testArrayDeclarationParensAttrs() {
-    String data = "my( @v<caret>ar) :lvalue = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my( @v<caret>ar) :lvalue = 123;");
   }
 
   public void testHashDeclarationParensAttrs() {
-    String data = "my( %v<caret>ar) :lvalue = 123;";
-    assertListDeclaration(data);
+    assertListDeclaration("my( %v<caret>ar) :lvalue = 123;");
   }
 
   private void assertScalarDeclaration(@NotNull String text) {

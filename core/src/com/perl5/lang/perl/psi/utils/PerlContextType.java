@@ -77,8 +77,14 @@ public enum PerlContextType {
       }
       return SCALAR;
     }
-    else if (elementType == SCALAR_VARIABLE && PsiUtilCore.getElementType(element.getParent()) == VARIABLE_DECLARATION_ELEMENT) {
-      return from(element.getParent());
+    else if (elementType == SCALAR_VARIABLE) {
+      IElementType parentElementType = PsiUtilCore.getElementType(element.getParent());
+      if (parentElementType == VARIABLE_DECLARATION_ELEMENT) {
+        return from(element.getParent());
+      }
+      else if (parentElementType == PARENTHESISED_EXPR) {
+        return LIST;
+      }
     }
 
     return SCALAR;
