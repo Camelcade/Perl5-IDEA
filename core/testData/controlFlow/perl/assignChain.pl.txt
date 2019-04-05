@@ -10,5 +10,5 @@
 9(10) element: PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) (InstructionImpl)
 10(11) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: += PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) (PerlAssignInstruction)
 11(12) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
-12(13) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (PerlAssignInstruction)
+12(13) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) [-1] (PerlAssignInstruction)
 13() element: null (InstructionImpl)

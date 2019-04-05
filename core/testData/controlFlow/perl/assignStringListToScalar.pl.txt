@@ -1,0 +1,6 @@
+0(1) element: null (InstructionImpl)
+1(2) element: PsiPerlStringBareImpl(Perl5: STRING_BARE) (InstructionImpl)
+2(3) element: PsiPerlStringBareImpl(Perl5: STRING_BARE) (InstructionImpl)
+3(4) element: PsiPerlStringListImpl(Perl5: STRING_LIST) (InstructionImpl)
+4(5) assign PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) Perl5: = PsiPerlStringBareImpl(Perl5: STRING_BARE) (PerlAssignInstruction)
+5() element: null (InstructionImpl)

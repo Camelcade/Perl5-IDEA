@@ -1,0 +1,4 @@
+0(1) element: null (InstructionImpl)
+1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
+2(3) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: = PsiPerlStringSqImpl(Perl5: STRING_SQ) (PerlAssignInstruction)
+3() element: null (InstructionImpl)

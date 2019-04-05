@@ -24,6 +24,20 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testAssignListToList() {doTest();}
+
+  public void testAssignListToScalar() {doTest();}
+
+  public void testAssignListToScalarParallel() {doTest();}
+
+  public void testAssignScalarToList() {doTest();}
+
+  public void testAssignStringListToList() {doTest();}
+
+  public void testAssignStringListToScalar() {doTest();}
+
+  public void testAssignStringListToScalarParallel() {doTest();}
+
   public void testLpLogicAfterComma() {doTest();}
 
   public void testReturnConfessIf() {doTest();}

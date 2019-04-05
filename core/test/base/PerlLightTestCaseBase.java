@@ -1354,9 +1354,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   private String getInstructionText(@NotNull Instruction instruction) {
     if (instruction instanceof PerlAssignInstruction) {
-      return ((PerlAssignInstruction)instruction).getLeftSide().getText() + " "
-             + ((PerlAssignInstruction)instruction).getOperation().getText() + " "
-             + ((PerlAssignInstruction)instruction).getRightSide().getText();
+      PerlAssignInstruction assignInstruction = (PerlAssignInstruction)instruction;
+      PerlAssignExpression.PerlAssignValueDescriptor rightSide = assignInstruction.getRightSide();
+      return assignInstruction.getLeftSide().getText() + " "
+             + assignInstruction.getOperation().getText() + " "
+             + rightSide.getText() + (rightSide.getStartIndex() == 0 ? "" : " [" + rightSide.getStartIndex() + "]");
     }
     else if (instruction instanceof PerlIterateInstruction) {
       return "iterate " +

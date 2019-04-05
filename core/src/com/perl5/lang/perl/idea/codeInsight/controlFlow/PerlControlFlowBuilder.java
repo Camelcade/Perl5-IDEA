@@ -33,6 +33,7 @@ import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
@@ -630,7 +631,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         }
 
         rightSide.accept(this);
-        addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, o, leftSide, rightSide, operator));
+        for (PsiElement target : PerlAssignExpression.flattenAssignmentPart(leftSide)) {
+          PerlAssignValueDescriptor rightPartDescriptor =
+            ObjectUtils.notNull(o.getRightPartOfAssignment(target), PerlAssignValueDescriptor.EMPTY);
+          addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, o, target, rightPartDescriptor, operator));
+        }
         rightSide = leftSide;
       }
     }
