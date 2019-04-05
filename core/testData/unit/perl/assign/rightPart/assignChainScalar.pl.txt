@@ -1,0 +1,6 @@
+$v<caret>ar = $var2 = $var3;
+
+Index: 0
+Elements number: 1
+Text: $var2
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 7 in assignChainScalar.pl

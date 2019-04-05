@@ -36,7 +36,7 @@ import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.PerlAssignExpression.ValueDescriptor;
+import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -198,7 +198,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (assignmentExpression == null) {
       return null;
     }
-    ValueDescriptor rightSideDescriptor = assignmentExpression.getRightPartOfAssignment(declaration);
+    PerlAssignValueDescriptor rightSideDescriptor = assignmentExpression.getRightPartOfAssignment(declaration);
     if (rightSideDescriptor == null || rightSideDescriptor.getStartIndex() != 0) {
       return null;
     }

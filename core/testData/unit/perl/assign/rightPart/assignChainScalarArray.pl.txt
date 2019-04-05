@@ -1,0 +1,6 @@
+($var, $va<caret>rA) = @list = ($var3, $varC);
+
+Index: 1
+Elements number: 1
+Text: @list
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 16 in assignChainScalarArray.pl

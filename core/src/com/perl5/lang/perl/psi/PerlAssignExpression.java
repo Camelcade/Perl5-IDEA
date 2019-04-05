@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
@@ -32,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.psi.utils.PerlContextType.LIST;
 import static com.perl5.lang.perl.psi.utils.PerlContextType.SCALAR;
@@ -78,19 +80,22 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    * {@code $var3} for {@code $var1} and {@code $var2}
    * <br/>
    * In case of {@code my @arr = ($var1, $var2)} will return a descriptor of {@code $var1} and {@code $var2} and zero index.
+   * fixme use real right part. To handle my $var = undef = $var;
    */
   @Nullable
-  default ValueDescriptor getRightPartOfAssignment(@NotNull PsiElement leftPartElement) {
+  default PerlAssignValueDescriptor getRightPartOfAssignment(@NotNull PsiElement leftPartElement) {
     PsiElement[] children = getChildren();
     if (children.length < 2) {
       return null;
     }
     TextRange leftPartTextRange = leftPartElement.getTextRange();
     PsiElement leftAssignPart = null;
+    PsiElement rightAssignPart = null;
     for (int i = 0; i < children.length - 1; i++) {
       PsiElement child = children[i];
       if (child.getTextRange().contains(leftPartTextRange)) {
         leftAssignPart = child;
+        rightAssignPart = children[i + 1];
         break;
       }
     }
@@ -117,13 +122,13 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return null;
     }
 
-    List<PsiElement> rightElements = flattenAssignmentPart(children[children.length - 1]);
+    List<PsiElement> rightElements = flattenAssignmentPart(rightAssignPart);
     if (rightElements.isEmpty()) {
       return null;
     }
     if (PerlContextType.isScalar(leftAssignPart)) {
       PsiElement lastItem = ContainerUtil.getLastItem(rightElements);
-      return new ValueDescriptor(ObjectUtils.notNull(lastItem), PerlContextType.isList(lastItem) ? -1 : 0);
+      return new PerlAssignValueDescriptor(ObjectUtils.notNull(lastItem), PerlContextType.isList(lastItem) ? -1 : 0);
     }
 
     PerlContextType leftContextType = PerlContextType.from(leftPartElement);
@@ -131,12 +136,12 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       PsiElement rightElement = rightElements.get(i);
       if (leftElementIndex == 0) {
         if (leftContextType == SCALAR) {
-          return new ValueDescriptor(rightElement);
+          return new PerlAssignValueDescriptor(rightElement);
         }
-        return new ValueDescriptor(rightElements.subList(i, rightElements.size()));
+        return new PerlAssignValueDescriptor(rightElements.subList(i, rightElements.size()));
       }
       if (PerlContextType.from(rightElement) == LIST) {
-        return new ValueDescriptor(rightElements.subList(i, rightElements.size()), leftElementIndex);
+        return new PerlAssignValueDescriptor(rightElements.subList(i, rightElements.size()), leftElementIndex);
       }
       leftElementIndex--;
     }
@@ -188,27 +193,30 @@ public interface PerlAssignExpression extends PsiPerlExpr {
         result.add(listElement);
       }
     }
-    return result;
+    return ContainerUtil.map(
+      result, it -> it instanceof PerlVariableDeclarationElement && it.getFirstChild() != null ? it.getFirstChild() : it);
   }
 
-  class ValueDescriptor {
+  class PerlAssignValueDescriptor {
+    public static final PerlAssignValueDescriptor EMPTY = new PerlAssignValueDescriptor(Collections.emptyList(), 0);
+
     @NotNull
     private final List<PsiElement> myElements;
     private final int myStartIndex;
 
-    public ValueDescriptor(@NotNull PsiElement element) {
+    public PerlAssignValueDescriptor(@NotNull PsiElement element) {
       this(Collections.singletonList(element), 0);
     }
 
-    public ValueDescriptor(@NotNull List<PsiElement> elements) {
+    public PerlAssignValueDescriptor(@NotNull List<PsiElement> elements) {
       this(elements, 0);
     }
 
-    public ValueDescriptor(@NotNull PsiElement element, int startIndex) {
+    public PerlAssignValueDescriptor(@NotNull PsiElement element, int startIndex) {
       this(Collections.singletonList(element), startIndex);
     }
 
-    public ValueDescriptor(@NotNull List<PsiElement> elements, int startIndex) {
+    public PerlAssignValueDescriptor(@NotNull List<PsiElement> elements, int startIndex) {
       myElements = unflattenElements(elements);
       myStartIndex = startIndex;
     }
@@ -276,6 +284,50 @@ public interface PerlAssignExpression extends PsiPerlExpr {
      */
     public int getStartIndex() {
       return myStartIndex;
+    }
+
+    @Override
+    public String toString() {
+      if (myElements.isEmpty()) {
+        return null;
+      }
+      return StringUtil.join(ContainerUtil.map(myElements, PsiElement::toString), ", ") +
+             (myStartIndex == 0 ? "" : " [" + myStartIndex + "]");
+    }
+
+    @Nullable
+    public String getText() {
+      if (myElements.isEmpty()) {
+        return null;
+      }
+      PsiElement firstElement = myElements.get(0);
+      PsiElement lastElement = Objects.requireNonNull(ContainerUtil.getLastItem(myElements));
+      return firstElement.getContainingFile().getText().substring(
+        firstElement.getTextRange().getStartOffset(), lastElement.getTextRange().getEndOffset());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+
+      PerlAssignValueDescriptor that = (PerlAssignValueDescriptor)o;
+
+      if (myStartIndex != that.myStartIndex) {
+        return false;
+      }
+      return myElements.equals(that.myElements);
+    }
+
+    @Override
+    public int hashCode() {
+      int result = myElements.hashCode();
+      result = 31 * result + myStartIndex;
+      return result;
     }
   }
 }

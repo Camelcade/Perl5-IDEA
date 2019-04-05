@@ -19,18 +19,24 @@ package unit.perl;
 import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.intellij.testFramework.UsefulTestCase;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.PerlAssignExpression;
 import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 public class PerlAssignExprRightPart extends PerlLightTestCase {
 
+  public void testAssignChainScalar() {doTest();}
+
+  public void testAssignChainScalarArray() {doTest();}
+
+  public void testAssignChainScalarParallel() {doTest();}
+
+  public void testAssignChainScalarParallelUndef() {doTest();}
+
+  public void testAssignChainScalarParallelUndefMid() {doTest();}
 
   public void testAssignListInListContext() {doTest();}
 
@@ -60,9 +66,13 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
 
   public void testAssignScalarSimple() {doTest();}
 
-  public void testAssignScalarThird() {doTestVariable();}
+  public void testAssignScalarThird() {
+    doTestRightPart(PerlVariable.class);
+  }
 
-  public void testDeclarationScalarThird() {doTestVariable();}
+  public void testDeclarationScalarThird() {
+    doTestRightPart(PerlVariable.class);
+  }
 
   public void testAssignScalarThirdShift() {doTest();}
 
@@ -71,18 +81,14 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
     return "testData/unit/perl/assign/rightPart";
   }
 
-  public void testAssignStringList() {doTestVariable();}
-
-  public void testDeclarationStringList() {doTest();}
-
-  private void doTestVariable() {
+  public void testAssignStringList() {
     doTestRightPart(PerlVariable.class);
   }
 
+  public void testDeclarationStringList() {doTest();}
+
   private void doTest() {
-    // this should check all a once
-    doTestVariable();
-    doTestRightPart(PerlVariableDeclarationElement.class);
+    doTestRightPart(PerlVariable.class);
   }
 
   private void doTestRightPart(@NotNull Class clazz) {
@@ -91,11 +97,11 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
     assertNotNull(elementAtCaret);
     PerlAssignExpression assignExpression = PerlAssignExpression.getAssignmentExpression(elementAtCaret);
     assertNotNull(assignExpression);
-    PerlAssignExpression.ValueDescriptor valueDescriptor = assignExpression.getRightPartOfAssignment(elementAtCaret);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), serializeValueDescriptor(valueDescriptor));
+    PerlAssignExpression.PerlAssignValueDescriptor perlAssignValueDescriptor = assignExpression.getRightPartOfAssignment(elementAtCaret);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), serializeValueDescriptor(perlAssignValueDescriptor));
   }
 
-  private String serializeValueDescriptor(@Nullable PerlAssignExpression.ValueDescriptor descriptor) {
+  private String serializeValueDescriptor(@Nullable PerlAssignExpression.PerlAssignValueDescriptor descriptor) {
     StringBuilder result = new StringBuilder(getEditorTextWithCaretsAndSelections()).append("\n");
     if (descriptor == null) {
       return result.toString();
@@ -103,13 +109,7 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
     result.append("Index: ").append(descriptor.getStartIndex()).append("\n");
     List<PsiElement> elements = descriptor.getElements();
     result.append("Elements number: ").append(elements.size()).append("\n");
-    PsiElement firstElement = elements.get(0);
-    PsiElement lastElement = Objects.requireNonNull(ContainerUtil.getLastItem(elements));
-    result.append("Text: ")
-      .append(firstElement.getContainingFile().getText(),
-              firstElement.getTextRange().getStartOffset(),
-              lastElement.getTextRange().getEndOffset())
-      .append("\n");
+    result.append("Text: ").append(descriptor.getText()).append("\n");
     elements.forEach(it -> result.append(serializePsiElement(it)).append("\n"));
     return result.toString();
   }

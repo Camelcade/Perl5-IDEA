@@ -1,0 +1,6 @@
+($var, $varA) = (undef, $v<caret>arB) = ($var3, $varC);
+
+Index: 0
+Elements number: 1
+Text: $varC
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 41 in assignChainScalarParallelUndefMid.pl

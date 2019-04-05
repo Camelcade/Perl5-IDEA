@@ -1,0 +1,1 @@
+($var, $va<caret>rA) = @list = ($var3, $varC);

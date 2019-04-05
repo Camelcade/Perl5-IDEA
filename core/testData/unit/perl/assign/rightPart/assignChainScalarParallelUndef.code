@@ -1,0 +1,1 @@
+($v<caret>ar, $varA) = (undef, $varB) = ($var3, $varC);

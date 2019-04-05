@@ -1,0 +1,6 @@
+($v<caret>ar, $varA) = (undef, $varB) = ($var3, $varC);
+
+Index: 0
+Elements number: 1
+Text: undef
+PsiPerlUndefExprImpl(Perl5: UNDEF_EXPR) at 17 in assignChainScalarParallelUndef.pl
