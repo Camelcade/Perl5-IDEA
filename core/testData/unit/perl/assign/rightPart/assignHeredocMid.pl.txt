@@ -1,0 +1,8 @@
+<<EOM; $v<caret>ar
+test
+EOM
+= 42;
+Index: 0
+Elements number: 1
+Text: 42
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 23 in assignHeredocMid.pl

@@ -28,6 +28,14 @@ import java.util.List;
 
 public class PerlAssignExprRightPart extends PerlLightTestCase {
 
+  public void testAssignHeredoc() {doTest();}
+
+  public void testAssignHeredocMid() {doTest();}
+
+  public void testAssignHeredocMidParallel() {doTest();}
+
+  public void testAssignHeredocMidRightPart() {doTest();}
+
   public void testAssignChainScalar() {doTest();}
 
   public void testAssignChainScalarArray() {doTest();}

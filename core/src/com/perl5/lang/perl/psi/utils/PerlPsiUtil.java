@@ -35,6 +35,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
+import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
@@ -1048,5 +1050,21 @@ public class PerlPsiUtil implements PerlElementTypes {
 
   public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
     return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
+  }
+
+  /**
+   * @return removes meaningless elements from the {@code source} list
+   */
+  @NotNull
+  public static <T extends PsiElement> List<T> cleanupChildren(@NotNull List<T> source) {
+    return ContainerUtil.filter(source, it -> !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(PsiUtilCore.getElementType(it)));
+  }
+
+  /**
+   * @return removes meaningless elements from the {@code source} list
+   */
+  @NotNull
+  public static <T extends PsiElement> List<T> cleanupChildren(@NotNull T[] source) {
+    return ContainerUtil.filter(source, it -> !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(PsiUtilCore.getElementType(it)));
   }
 }

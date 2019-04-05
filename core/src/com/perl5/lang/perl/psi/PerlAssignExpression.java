@@ -25,6 +25,7 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -84,18 +85,18 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    */
   @Nullable
   default PerlAssignValueDescriptor getRightPartOfAssignment(@NotNull PsiElement leftPartElement) {
-    PsiElement[] children = getChildren();
-    if (children.length < 2) {
+    List<PsiElement> children = PerlPsiUtil.cleanupChildren(getChildren());
+    if (children.size() < 2) {
       return null;
     }
     TextRange leftPartTextRange = leftPartElement.getTextRange();
     PsiElement leftAssignPart = null;
     PsiElement rightAssignPart = null;
-    for (int i = 0; i < children.length - 1; i++) {
-      PsiElement child = children[i];
+    for (int i = 0; i < children.size() - 1; i++) {
+      PsiElement child = children.get(i);
       if (child.getTextRange().contains(leftPartTextRange)) {
         leftAssignPart = child;
-        rightAssignPart = children[i + 1];
+        rightAssignPart = children.get(i + 1);
         break;
       }
     }

@@ -1,0 +1,4 @@
+<<EOM; $v<caret>ar
+test
+EOM
+= 42;

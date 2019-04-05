@@ -1,0 +1,7 @@
+$v<caret>ar = <<EOM = 42;
+test
+EOM
+Index: 0
+Elements number: 1
+Text: <<EOM
+PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 7 in assignHeredoc.pl

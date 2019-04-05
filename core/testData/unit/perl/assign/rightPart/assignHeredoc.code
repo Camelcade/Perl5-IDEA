@@ -1,0 +1,3 @@
+$v<caret>ar = <<EOM = 42;
+test
+EOM

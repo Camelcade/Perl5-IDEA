@@ -1,0 +1,8 @@
+($var2, $var2, $var3, $v<caret>ar4) = ( one=> two => <<EOM,
+test
+EOM
+42);
+Index: 0
+Elements number: 1
+Text: 42
+PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) at 62 in assignHeredocMidParallel.pl
