@@ -36,6 +36,7 @@ import com.intellij.ui.SpeedSearchComparator;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -79,9 +80,10 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
         if (annotations.isMethod() || subBase instanceof PerlMethodDefinition) {
           code.append("#@method\n");
         }
-        if (StringUtil.isNotEmpty(annotations.getReturns())) {
+        PerlValue returnValue = annotations.getReturnValue();
+        if (!returnValue.isEmpty()) {
           code.append("#@returns ");
-          code.append(annotations.getReturns());
+          code.append(returnValue.toCode());
           code.append("\n");
         }
       }

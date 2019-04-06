@@ -205,6 +205,13 @@ public abstract class PerlValue {
 
   protected abstract void serializeData(@NotNull StubOutputStream dataStream) throws IOException;
 
+  /**
+   * @return code representation, that may be used e.g. in annotation
+   */
+  public String toCode() {
+    return toString();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

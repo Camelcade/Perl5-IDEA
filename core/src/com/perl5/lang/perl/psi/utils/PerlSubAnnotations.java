@@ -16,19 +16,19 @@
 
 package com.perl5.lang.perl.psi.utils;
 
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 03.06.2015.
@@ -40,23 +40,21 @@ public class PerlSubAnnotations {
   private static final byte IS_OVERRIDE = 0x08;
 
   private byte myFlags = 0;
-  private PerlReturnType myReturnType = PerlReturnType.VALUE;
-  @Nullable
-  private String myReturns = null;
+
+  @NotNull
+  private PerlValue myReturnValue = UNKNOWN_VALUE;
 
   public PerlSubAnnotations() {
   }
 
-  public PerlSubAnnotations(byte flags, String returns, PerlReturnType returnType) {
+  private PerlSubAnnotations(byte flags, @NotNull PerlValue returnValue) {
     myFlags = flags;
-    myReturnType = returnType;
-    myReturns = returns;
+    myReturnValue = returnValue;
   }
 
   public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeByte(myFlags);
-    dataStream.writeName(myReturns);
-    myReturnType.serialize(dataStream);
+    myReturnValue.serialize(dataStream);
   }
 
   public boolean isMethod() {
@@ -91,56 +89,43 @@ public class PerlSubAnnotations {
     myFlags |= IS_OVERRIDE;
   }
 
-  /**
-   * @deprecated use
-   */
-  @Deprecated
-  public String getReturns() {
-    return myReturns;
-  }
-
-  @Nullable
+  @NotNull
   public PerlValue getReturnValue() {
-    return PerlValueStatic.createOrNull(myReturns);
+    return myReturnValue;
   }
 
-  public void setReturns(String returns) {
-    myReturns = returns;
-  }
-
-  public PerlReturnType getReturnType() {
-    return myReturnType;
-  }
-
-  public void setReturnType(PerlReturnType returnType) {
-    this.myReturnType = returnType;
+  public void setReturnValue(@NotNull PerlValue returnValue) {
+    myReturnValue = returnValue;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof PerlSubAnnotations)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     PerlSubAnnotations that = (PerlSubAnnotations)o;
 
-    if (myFlags != that.myFlags) return false;
-    if (getReturnType() != that.getReturnType()) return false;
-    return getReturns() != null ? getReturns().equals(that.getReturns()) : that.getReturns() == null;
+    if (myFlags != that.myFlags) {
+      return false;
+    }
+    return myReturnValue.equals(that.myReturnValue);
   }
 
   @Override
   public int hashCode() {
     int result = (int)myFlags;
-    result = 31 * result + (getReturnType() != null ? getReturnType().hashCode() : 0);
-    result = 31 * result + (getReturns() != null ? getReturns().hashCode() : 0);
+    result = 31 * result + myReturnValue.hashCode();
     return result;
   }
 
   public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlSubAnnotations(
       dataStream.readByte(),
-      PerlStubSerializationUtil.readString(dataStream),
-      PerlReturnType.deserialize(dataStream)
+      PerlValuesManager.deserialize(dataStream)
     );
   }
 
@@ -164,7 +149,7 @@ public class PerlSubAnnotations {
 
   @Nullable
   public static PerlSubAnnotations tryToFindAnnotations(@NotNull List<PsiElement> baseElements) {
-    return tryToFindAnnotations(baseElements.toArray(new PsiElement[baseElements.size()]));
+    return tryToFindAnnotations(baseElements.toArray(PsiElement.EMPTY_ARRAY));
   }
 
   @Nullable
@@ -173,32 +158,26 @@ public class PerlSubAnnotations {
       return null;
     }
 
-    PerlSubAnnotations myAnnotations = new PerlSubAnnotations();
+    PerlSubAnnotations result = new PerlSubAnnotations();
 
     for (PerlAnnotation annotation : annotations) {
       if (annotation instanceof PsiPerlAnnotationAbstract) {
-        myAnnotations.setIsAbstract();
+        result.setIsAbstract();
       }
       else if (annotation instanceof PsiPerlAnnotationDeprecated) {
-        myAnnotations.setIsDeprecated();
+        result.setIsDeprecated();
       }
       else if (annotation instanceof PsiPerlAnnotationMethod) {
-        myAnnotations.setIsMethod();
+        result.setIsMethod();
       }
       else if (annotation instanceof PsiPerlAnnotationOverride) {
-        myAnnotations.setIsOverride();
+        result.setIsOverride();
       }
-      else if (annotation instanceof PsiPerlAnnotationReturns) // returns
-      {
-        String returnClass = ((PsiPerlAnnotationReturns)annotation).getReturnClass();
-        if (StringUtil.isNotEmpty(returnClass)) {
-          myAnnotations.setReturns(returnClass);
-          myAnnotations.setReturnType(PerlReturnType.REF);
-          // todo implement brackets and braces
-        }
+      else if (annotation instanceof PsiPerlAnnotationReturns) {
+        result.setReturnValue(((PsiPerlAnnotationReturns)annotation).getValue());
       }
     }
 
-    return myAnnotations;
+    return result;
   }
 }
