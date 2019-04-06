@@ -32,7 +32,7 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY_VALUE;
 /**
  * Created by hurricup on 14.08.2016.
  */
-public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation {
+public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   /**
    * Trying to search for netsted NamespaceElement
    * fixme this is raw, should be a type
