@@ -179,10 +179,10 @@ public final class PerlValueOneOf extends PerlValue {
       }
 
       if (variant instanceof PerlValueOneOf) {
-        ((PerlValueOneOf)variant).myVariants.forEach(this::addVariant);
+        myVariants.addAll(((PerlValueOneOf)variant).myVariants);
       }
       else {
-        myVariants.add(variant);
+        myVariants.add(PerlValuesManager.intern(variant));
       }
     }
 
