@@ -40,7 +40,7 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
   }
 
   public void testDeclarationAssignmentNew() {
-    doTest("Object: Foo::Bar->new");
+    doTest("Foo::Bar->new()");
   }
 
   public void testVariableBeforeAssignment() {
@@ -48,7 +48,7 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
   }
 
   public void testVariableAfterAssignment() {
-    doTest("Object: Foo::Bar->new");
+    doTest("Foo::Bar->new()");
   }
 
   public void testAnnotatedSingleInside() {

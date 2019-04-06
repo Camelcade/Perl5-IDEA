@@ -315,6 +315,15 @@ public abstract class PerlValueCall extends PerlValue {
     public boolean processBuiltIns = true;
   }
 
+  @NotNull
+  protected final String getPresentableArguments() {
+    return StringUtil.join(ContainerUtil.map(myArguments, PerlValue::getPresentableText), ", ");
+  }
+
+  protected final String getArgumentsAsString() {
+    return "(" + StringUtil.join(ContainerUtil.map(myArguments, PerlValue::toString), ", ") + ")";
+  }
+
   @Nullable
   @Contract("null->null")
   public static PerlValueCall from(@Nullable PsiElement element) {

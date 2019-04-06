@@ -142,13 +142,16 @@ public final class PerlValueCallObject extends PerlValueCall {
 
   @Override
   public String toString() {
-    return "Object: " + myNamespaceNameValue + "->" + (myIsSuper ? "SUPER::" : "") + mySubNameValue;
+    return myNamespaceNameValue + "->" + (myIsSuper ? "SUPER::" : "") + mySubNameValue + getArgumentsAsString();
   }
 
   @NotNull
   @Override
   protected String getPresentableValueText() {
-    return PerlBundle
-      .message("perl.value.call.object.presentable", myNamespaceNameValue.getPresentableText(), mySubNameValue.getPresentableText());
+    return PerlBundle.message(
+      "perl.value.call.object.presentable",
+      myNamespaceNameValue.getPresentableText(),
+      mySubNameValue.getPresentableText(),
+      getPresentableArguments());
   }
 }
