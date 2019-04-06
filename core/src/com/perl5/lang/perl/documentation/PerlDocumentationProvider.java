@@ -27,13 +27,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
@@ -74,6 +73,18 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     TAG_DATA,
     OPERATOR_FILETEST
   );
+
+  @Nullable
+  @Override
+  public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+    if (originalElement instanceof PerlVariableNameElement) {
+      return getQuickNavigateInfo(element, originalElement.getParent());
+    }
+    if (originalElement instanceof PerlValuableEntity) {
+      return PerlValue.from((PerlValuableEntity)originalElement).getPresentableText();
+    }
+    return super.getQuickNavigateInfo(element, originalElement);
+  }
 
   @Nullable
   @Override
