@@ -18,29 +18,40 @@ package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
-
-public final class PerlValueReference extends PerlValueSingular {
+public final class PerlValueReference extends PerlValue {
   @NotNull
   private final PerlValue myReferrent;
 
   public PerlValueReference(@NotNull PerlValue referrent) {
-    this(UNKNOWN_VALUE, referrent);
+    this(referrent, null);
   }
 
-  private PerlValueReference(@NotNull PerlValue referrent, @NotNull PerlValue bless) {
+  PerlValueReference(@NotNull PerlValue referrent, @Nullable PerlValue bless) {
     super(bless);
     myReferrent = referrent;
   }
 
-  private PerlValueReference(@NotNull PerlValueReference original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myReferrent = original.myReferrent;
+  public PerlValueReference(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myReferrent = PerlValuesManager.deserialize(dataStream);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.REFERENCE_ID;
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    myReferrent.serialize(dataStream);
   }
 
   @NotNull
@@ -60,7 +71,7 @@ public final class PerlValueReference extends PerlValueSingular {
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueReference(this, bless);
+    return new PerlValueReference(this.myReferrent, bless);
   }
 
   @NotNull
@@ -84,6 +95,9 @@ public final class PerlValueReference extends PerlValueSingular {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlValueReference reference = (PerlValueReference)o;
 
@@ -92,7 +106,9 @@ public final class PerlValueReference extends PerlValueSingular {
 
   @Override
   public int hashCode() {
-    return myReferrent.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myReferrent.hashCode();
+    return result;
   }
 
   @Override

@@ -16,12 +16,35 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 public final class PerlValueUndef extends PerlValue {
-  public static final PerlValueUndef TYPE_UNDEF = new PerlValueUndef();
+  public static final PerlValueUndef UNDEF_VALUE = new PerlValueUndef();
 
   private PerlValueUndef() {
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+  }
+
+  @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+  @Override
+  public boolean equals(Object o) {
+    return o == UNDEF_VALUE;
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.UNDEF_ID;
   }
 
   @NotNull

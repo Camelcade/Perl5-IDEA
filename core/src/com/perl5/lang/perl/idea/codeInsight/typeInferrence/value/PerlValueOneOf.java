@@ -18,10 +18,13 @@ package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,18 +36,41 @@ public final class PerlValueOneOf extends PerlValue {
   private final Set<PerlValue> myVariants;
 
   private PerlValueOneOf(@NotNull Set<PerlValue> variants) {
+    this(variants, null);
+  }
+
+  public PerlValueOneOf(@NotNull Set<PerlValue> variants, @Nullable PerlValue bless) {
+    super(bless);
     myVariants = Collections.unmodifiableSet(new HashSet<>(variants));
   }
 
-  private PerlValueOneOf(@NotNull PerlValueOneOf original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myVariants = original.myVariants;
+  public PerlValueOneOf(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    int elementsNumber = dataStream.readInt();
+    Set<PerlValue> variants = new HashSet<>();
+    for (int i = 0; i < elementsNumber; i++) {
+      variants.add(PerlValuesManager.deserialize(dataStream));
+    }
+    myVariants = Collections.unmodifiableSet(variants);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.ONE_OF_ID;
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeInt(myVariants.size());
+    for (PerlValue variant : myVariants) {
+      variant.serialize(dataStream);
+    }
   }
 
   @NotNull
   @Override
   PerlValueOneOf createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueOneOf(this, bless);
+    return new PerlValueOneOf(this.myVariants, bless);
   }
 
   @NotNull
@@ -101,12 +127,16 @@ public final class PerlValueOneOf extends PerlValue {
     return false;
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
     if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
       return false;
     }
 
@@ -117,7 +147,9 @@ public final class PerlValueOneOf extends PerlValue {
 
   @Override
   public int hashCode() {
-    return myVariants.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myVariants.hashCode();
+    return result;
   }
 
   @Override
@@ -128,6 +160,7 @@ public final class PerlValueOneOf extends PerlValue {
   public static class Builder {
     @NotNull
     private final Set<PerlValue> myVariants = new HashSet<>();
+    private PerlValue myBless;
 
     public void addVariant(@Nullable PerlValue variant) {
       if (variant == null || variant == UNKNOWN_VALUE) {
@@ -142,9 +175,21 @@ public final class PerlValueOneOf extends PerlValue {
       }
     }
 
+    public void bless(@Nullable PerlValue bless) {
+      myBless = bless;
+    }
+
     @NotNull
     public PerlValue build() {
-      return myVariants.isEmpty() ? UNKNOWN_VALUE : myVariants.size() == 1 ? myVariants.iterator().next() : new PerlValueOneOf(myVariants);
+      if (myVariants.isEmpty()) {
+        return UNKNOWN_VALUE;
+      }
+      else if (myVariants.size() == 1 && myBless == null) {
+        return myVariants.iterator().next();
+      }
+      else {
+        return myBless == null ? new PerlValueOneOf(myVariants) : new PerlValueOneOf(myVariants, myBless);
+      }
     }
   }
 }

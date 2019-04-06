@@ -21,6 +21,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -28,6 +30,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -38,19 +41,39 @@ public final class PerlValueCallStatic extends PerlValueCall {
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
                              boolean hasExplicitNamespace) {
-    super(namespaceNameValue, subNameValue, arguments);
+    this(namespaceNameValue, subNameValue, arguments, hasExplicitNamespace, null);
+  }
+
+  public PerlValueCallStatic(@NotNull PerlValue namespaceNameValue,
+                             @NotNull PerlValue subNameValue,
+                             @NotNull List<PerlValue> arguments,
+                             boolean hasExplicitNamespace,
+                             @Nullable PerlValue bless) {
+    super(namespaceNameValue, subNameValue, arguments, bless);
     myHasExplicitNamespace = hasExplicitNamespace;
   }
 
-  private PerlValueCallStatic(@NotNull PerlValueCallStatic original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myHasExplicitNamespace = original.myHasExplicitNamespace;
+  public PerlValueCallStatic(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myHasExplicitNamespace = dataStream.readBoolean();
   }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    super.serializeData(dataStream);
+    dataStream.writeBoolean(myHasExplicitNamespace);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.CALL_STATIC_ID;
+  }
+
 
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueCallStatic(this, bless);
+    return new PerlValueCallStatic(myNamespaceNameValue, mySubNameValue, myArguments, myHasExplicitNamespace, bless);
   }
 
   @Override

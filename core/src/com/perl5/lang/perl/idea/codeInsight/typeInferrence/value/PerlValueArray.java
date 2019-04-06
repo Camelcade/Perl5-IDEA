@@ -16,25 +16,45 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public final class PerlValueArray extends PerlBlessableValue {
+import java.io.IOException;
+
+public final class PerlValueArray extends PerlValue {
   @NotNull
   private final PerlValue myElementsType;
 
   public PerlValueArray(@NotNull PerlValue elementsType) {
+    this(elementsType, null);
+  }
+
+  public PerlValueArray(@NotNull PerlValue elementsType, @Nullable PerlValue bless) {
+    super(bless);
     myElementsType = elementsType;
   }
 
-  private PerlValueArray(@NotNull PerlValueArray original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myElementsType = original.myElementsType;
+  public PerlValueArray(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myElementsType = PerlValuesManager.deserialize(dataStream);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.ARRAY_ID;
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    myElementsType.serialize(dataStream);
   }
 
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueArray(this, bless);
+    return new PerlValueArray(this.myElementsType, bless);
   }
 
   @NotNull
@@ -50,6 +70,9 @@ public final class PerlValueArray extends PerlBlessableValue {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlValueArray array = (PerlValueArray)o;
 
@@ -58,7 +81,9 @@ public final class PerlValueArray extends PerlBlessableValue {
 
   @Override
   public int hashCode() {
-    return myElementsType.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myElementsType.hashCode();
+    return result;
   }
 
   @Override

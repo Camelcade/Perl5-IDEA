@@ -18,11 +18,15 @@ package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
@@ -39,6 +43,21 @@ public final class PerlValueStatic extends PerlValue {
 
   private PerlValueStatic(@NotNull String value) {
     myValue = value;
+  }
+
+  public PerlValueStatic(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myValue = Objects.requireNonNull(dataStream.readNameString());
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeName(myValue);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.STATIC_ID;
   }
 
   @NotNull
@@ -86,15 +105,20 @@ public final class PerlValueStatic extends PerlValue {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
-    PerlValueStatic value = (PerlValueStatic)o;
+    PerlValueStatic aStatic = (PerlValueStatic)o;
 
-    return myValue.equals(value.myValue);
+    return myValue.equals(aStatic.myValue);
   }
 
   @Override
   public int hashCode() {
-    return myValue.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myValue.hashCode();
+    return result;
   }
 
   @NotNull

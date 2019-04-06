@@ -20,6 +20,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.util.ObjectUtils;
@@ -32,10 +34,11 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUndef.TYPE_UNDEF;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUndef.UNDEF_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 
 /**
@@ -46,15 +49,20 @@ public abstract class PerlValue {
   private final PerlValue myBless;
 
   protected PerlValue() {
-    myBless = null;
+    this((PerlValue)null);
   }
 
-  protected PerlValue(@NotNull PerlValue bless) {
+  protected PerlValue(@Nullable PerlValue bless) {
     myBless = bless;
   }
 
-  protected PerlValue(@NotNull PerlValue original, @NotNull PerlValue bless) {
-    myBless = bless;
+  protected PerlValue(@NotNull StubInputStream dataStream) throws IOException {
+    if (dataStream.readBoolean()) {
+      myBless = PerlValuesManager.deserialize(dataStream);
+    }
+    else {
+      myBless = null;
+    }
   }
 
   /**
@@ -76,7 +84,7 @@ public abstract class PerlValue {
    */
   @NotNull
   public PerlValue getBless() {
-    return TYPE_UNDEF;
+    return UNDEF_VALUE;
   }
 
   /**
@@ -174,6 +182,45 @@ public abstract class PerlValue {
   }
 
   /**
+   * @return a serialization id unique for this value.
+   * @see PerlValuesManager
+   */
+  protected abstract int getSerializationId();
+
+  /**
+   * Serializes this value data
+   */
+  public final void serialize(@NotNull StubOutputStream dataStream) throws IOException {
+    dataStream.writeInt(getSerializationId());
+    dataStream.writeBoolean(myBless == null);
+    if (myBless != null) {
+      myBless.serialize(dataStream);
+    }
+    serializeData(dataStream);
+  }
+
+  protected abstract void serializeData(@NotNull StubOutputStream dataStream) throws IOException;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    PerlValue value = (PerlValue)o;
+
+    return myBless != null ? myBless.equals(value.myBless) : value.myBless == null;
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode() + (myBless != null ? 31 * myBless.hashCode() : 0);
+  }
+
+  /**
    * @return true iff {@code type}is null or {@link PerlValueUnknown#UNKNOWN_VALUE}
    */
   @Contract("null->true")
@@ -201,7 +248,7 @@ public abstract class PerlValue {
     return CachedValuesManager.getCachedValue(
       element, () -> {
         //noinspection deprecation
-        PerlValue perlValue = ((PerlValuableEntity)element).computePerlValue();
+        PerlValue perlValue = PerlValuesManager.intern(((PerlValuableEntity)element).computePerlValue());
         return CachedValueProvider.Result.create(perlValue, element.getContainingFile());
       });
   }

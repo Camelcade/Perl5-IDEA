@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StringStubIndexExtension;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
 
 /**
  * Created by hurricup on 13.11.2016.
@@ -27,6 +28,6 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
 
   @Override
   public int getVersion() {
-    return super.getVersion() + VERSION;
+    return super.getVersion() + VERSION + PerlValuesManager.VERSION;
   }
 }

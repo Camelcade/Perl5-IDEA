@@ -16,26 +16,50 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public final class PerlValueHash extends PerlBlessableValue {
+import java.io.IOException;
+
+public final class PerlValueHash extends PerlValue {
   @NotNull
   private final PerlValue myValuesType;
+
+  public PerlValueHash(@NotNull PerlValue valuesType) {
+    this(valuesType, null);
+  }
+
+  public PerlValueHash(@NotNull PerlValue valuesType, @Nullable PerlValue bless) {
+    super(bless);
+    myValuesType = valuesType;
+  }
+
+  public PerlValueHash(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myValuesType = PerlValuesManager.deserialize(dataStream);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.HASH_ID;
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    myValuesType.serialize(dataStream);
+  }
 
   @NotNull
   public PerlValue getValuesType() {
     return myValuesType;
   }
 
-  private PerlValueHash(@NotNull PerlValueHash original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myValuesType = original.myValuesType;
-  }
-
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueHash(this, bless);
+    return new PerlValueHash(this.myValuesType, bless);
   }
 
   @Override
@@ -46,6 +70,9 @@ public final class PerlValueHash extends PerlBlessableValue {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlValueHash hash = (PerlValueHash)o;
 
@@ -54,7 +81,9 @@ public final class PerlValueHash extends PerlBlessableValue {
 
   @Override
   public int hashCode() {
-    return myValuesType.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myValuesType.hashCode();
+    return result;
   }
 
   @Override

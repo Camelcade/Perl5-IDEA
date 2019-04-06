@@ -18,31 +18,49 @@ package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Set;
 
 /**
  * Represents a scalar value
  */
-public final class PerlValueScalar extends PerlValueSingular {
+public final class PerlValueScalar extends PerlValue {
   @NotNull
   private final PerlValue myValue;
 
   public PerlValueScalar(@NotNull PerlValue value) {
+    this(value, null);
+  }
+
+  public PerlValueScalar(@NotNull PerlValue value, @Nullable PerlValue bless) {
+    super(bless);
     myValue = value;
   }
 
-  private PerlValueScalar(@NotNull PerlValueScalar original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myValue = original.myValue;
+  public PerlValueScalar(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myValue = PerlValuesManager.deserialize(dataStream);
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    myValue.serialize(dataStream);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.SCALAR_ID;
   }
 
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueScalar(this, bless);
+    return new PerlValueScalar(this.myValue, bless);
   }
 
   @NotNull
@@ -79,6 +97,9 @@ public final class PerlValueScalar extends PerlValueSingular {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlValueScalar scalar = (PerlValueScalar)o;
 
@@ -87,7 +108,9 @@ public final class PerlValueScalar extends PerlValueSingular {
 
   @Override
   public int hashCode() {
-    return myValue.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myValue.hashCode();
+    return result;
   }
 
   @Override

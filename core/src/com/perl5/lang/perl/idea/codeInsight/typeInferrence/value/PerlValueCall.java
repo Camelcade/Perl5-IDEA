@@ -20,6 +20,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
@@ -34,6 +36,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.*;
 
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
@@ -49,19 +52,36 @@ public abstract class PerlValueCall extends PerlValue {
   @NotNull
   protected final List<PerlValue> myArguments;
 
-  protected PerlValueCall(@NotNull PerlValue namespaceNameValue,
-                          @NotNull PerlValue subNameValue,
-                       @NotNull List<PerlValue> arguments) {
+  public PerlValueCall(@NotNull PerlValue namespaceNameValue,
+                       @NotNull PerlValue subNameValue,
+                       @NotNull List<PerlValue> arguments,
+                       @Nullable PerlValue bless) {
+    super(bless);
     myNamespaceNameValue = namespaceNameValue;
     mySubNameValue = subNameValue;
     myArguments = Collections.unmodifiableList(new ArrayList<>(arguments));
   }
 
-  public PerlValueCall(@NotNull PerlValueCall original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myNamespaceNameValue = original.myNamespaceNameValue;
-    mySubNameValue = original.mySubNameValue;
-    myArguments = original.myArguments;
+  public PerlValueCall(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myNamespaceNameValue = PerlValuesManager.deserialize(dataStream);
+    mySubNameValue = PerlValuesManager.deserialize(dataStream);
+    int argumentsNumber = dataStream.readInt();
+    List<PerlValue> arguments = new ArrayList<>(argumentsNumber);
+    for (int i = 0; i < argumentsNumber; i++) {
+      arguments.add(PerlValuesManager.deserialize(dataStream));
+    }
+    myArguments = Collections.unmodifiableList(arguments);
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    myNamespaceNameValue.serialize(dataStream);
+    mySubNameValue.serialize(dataStream);
+    dataStream.writeInt(myArguments.size());
+    for (PerlValue argument : myArguments) {
+      argument.serialize(dataStream);
+    }
   }
 
   @NotNull
@@ -204,19 +224,27 @@ public abstract class PerlValueCall extends PerlValue {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-
-    PerlValueCall value = (PerlValueCall)o;
-
-    if (!myNamespaceNameValue.equals(value.myNamespaceNameValue)) {
+    if (!super.equals(o)) {
       return false;
     }
-    return mySubNameValue.equals(value.mySubNameValue);
+
+    PerlValueCall call = (PerlValueCall)o;
+
+    if (!myNamespaceNameValue.equals(call.myNamespaceNameValue)) {
+      return false;
+    }
+    if (!mySubNameValue.equals(call.mySubNameValue)) {
+      return false;
+    }
+    return myArguments.equals(call.myArguments);
   }
 
   @Override
   public int hashCode() {
-    int result = myNamespaceNameValue.hashCode();
+    int result = super.hashCode();
+    result = 31 * result + myNamespaceNameValue.hashCode();
     result = 31 * result + mySubNameValue.hashCode();
+    result = 31 * result + myArguments.hashCode();
     return result;
   }
 

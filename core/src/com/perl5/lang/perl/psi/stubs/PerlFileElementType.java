@@ -24,6 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.StubBuilder;
 import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IStubFileElementType;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
@@ -44,7 +45,7 @@ public class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
 
   @Override
   public int getStubVersion() {
-    return super.getStubVersion() + VERSION;
+    return super.getStubVersion() + VERSION + PerlValuesManager.VERSION;
   }
 
   @Override

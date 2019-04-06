@@ -20,11 +20,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -35,19 +38,38 @@ public final class PerlValueCallObject extends PerlValueCall {
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
                              boolean isSuper) {
-    super(namespaceNameValue, subNameValue, arguments);
+    this(namespaceNameValue, subNameValue, arguments, isSuper, null);
+  }
+
+  public PerlValueCallObject(@NotNull PerlValue namespaceNameValue,
+                             @NotNull PerlValue subNameValue,
+                             @NotNull List<PerlValue> arguments,
+                             boolean isSuper,
+                             @Nullable PerlValue bless) {
+    super(namespaceNameValue, subNameValue, arguments, bless);
     myIsSuper = isSuper;
   }
 
-  private PerlValueCallObject(@NotNull PerlValueCallObject original, @NotNull PerlValue bless) {
-    super(original, bless);
-    myIsSuper = original.myIsSuper;
+  public PerlValueCallObject(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
+    myIsSuper = dataStream.readBoolean();
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    super.serializeData(dataStream);
+    dataStream.writeBoolean(myIsSuper);
+  }
+
+  @Override
+  protected int getSerializationId() {
+    return PerlValuesManager.CALL_OBJECT_ID;
   }
 
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueCallObject(this, bless);
+    return new PerlValueCallObject(myNamespaceNameValue, mySubNameValue, myArguments, myIsSuper, bless);
   }
 
   public boolean isSuper() {
