@@ -22,6 +22,7 @@ import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.controlflow.ConditionalInstruction;
 import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
@@ -48,7 +49,10 @@ import com.intellij.ide.util.DeleteTypeDescriptionLocation;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
 import com.intellij.lang.LanguageStructureViewBuilder;
+import com.intellij.lang.documentation.DocumentationProvider;
+import com.intellij.lang.documentation.DocumentationProviderEx;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.Disposable;
@@ -643,6 +647,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     caretModel.removeSecondaryCarets();
     return caretsOffsets;
   }
+
   protected void doTestWorldSelector() {
     initWithFileSmartWithoutErrors();
     List<Integer> offsets = getAndRemoveCarets();
@@ -1634,5 +1639,36 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     UsefulTestCase.assertSameLinesWithFile(
       getTestResultsFilePath(),
       StringUtil.join(ContainerUtil.map(names, it -> Objects.equals(it, selectedItem) ? "> " + it : it), "\n"));
+  }
+
+  @NotNull
+  protected Language getDocumentationElementLanguage() {
+    return PerlLanguage.INSTANCE;
+  }
+
+  protected void doTestDocumentationGeneration() {
+    initWithFileSmartWithoutErrors();
+    List<Integer> caretsOffsets = getAndRemoveCarets();
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < caretsOffsets.size(); i++) {
+      Integer caretOffset = caretsOffsets.get(i);
+      if (caretsOffsets.size() > 1) {
+        sb.append("---------------------- ").append("Caret #").append(i).append(" at: ").append(caretOffset)
+          .append("-----------------------------\n");
+      }
+      getEditor().getCaretModel().moveToOffset(caretOffset);
+      PsiElement elementAtCaret = getFile().getViewProvider().findElementAt(
+        getEditor().getCaretModel().getOffset(), getDocumentationElementLanguage());
+      assertNotNull(elementAtCaret);
+      DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(elementAtCaret);
+      assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
+      PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(getEditor(), getFile(), elementAtCaret);
+      assertNotNull(targetElement);
+      String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
+      assertNotNull(generatedDoc);
+      sb.append(generatedDoc).append("\n");
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 }
