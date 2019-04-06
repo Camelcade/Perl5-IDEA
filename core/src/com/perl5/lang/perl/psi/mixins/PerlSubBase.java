@@ -22,7 +22,10 @@ import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlDeprecatable;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
@@ -33,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
 
@@ -64,7 +66,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
 
     String namespace = getExplicitNamespaceName();
     if (namespace == null) {
-      namespace = getContextPackageName();
+      namespace = PerlPackageUtil.getContextNamespaceName(this);
     }
 
     return namespace;
@@ -98,11 +100,6 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   }
 
   @Nullable
-  protected String getContextPackageName() {
-    return PerlPackageUtil.getContextNamespaceName(this);
-  }
-
-  @Nullable
   @Override
   public String getExplicitNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
@@ -121,35 +118,14 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
     return findChildByClass(PerlNamespaceElement.class);
   }
 
-  @NotNull
-  protected List<PerlAnnotation> collectAnnotationsList() {
-    return PerlPsiUtil.collectAnnotations(this);
-  }
-
   @Nullable
   @Override
   public PerlSubAnnotations getAnnotations() {
-    PerlSubAnnotations annotations;
-
     Stub stub = getStub();
     if (stub != null) {
-      annotations = stub.getAnnotations();
+      return stub.getAnnotations();
     }
-    else {
-      // re-parsing
-      annotations = getLocalAnnotations();
-    }
-
-    if (annotations != null) {
-      return annotations;
-    }
-
-    return null;
-  }
-
-  @Nullable
-  protected PerlSubAnnotations getLocalAnnotations() {
-    return PerlSubAnnotations.createFromAnnotationsList(collectAnnotationsList());
+    return PerlSubAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
   }
 
   @Nullable
@@ -162,7 +138,6 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
       return PerlIcons.SUB_GUTTER_ICON;
     }
   }
-
 
   @Override
   public int getTextOffset() {
