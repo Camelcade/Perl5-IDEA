@@ -20,8 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.ObjectUtils;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -122,13 +120,7 @@ public final class PerlValueStatic extends PerlValue {
 
   @NotNull
   public static PerlValue create(@Nullable String value) {
-    return ObjectUtils.notNull(createOrNull(value), UNKNOWN_VALUE);
-  }
-
-  @Contract("null->null; !null->!null")
-  @Nullable
-  public static PerlValue createOrNull(@Nullable String value) {
-    return value == null ? null : PerlValuesManager.intern(new PerlValueStatic(value));
+    return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlValueStatic(value));
   }
 
   @Override

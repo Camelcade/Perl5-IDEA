@@ -25,8 +25,6 @@ import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
-
 public abstract class PerlPackageExpression extends PsiPerlExprImpl implements PsiPerlPackageExpr, PerlValuableEntity {
   public PerlPackageExpression(ASTNode node) {
     super(node);
@@ -36,14 +34,8 @@ public abstract class PerlPackageExpression extends PsiPerlExprImpl implements P
   @Override
   public PerlValue computePerlValue() {
     String elementText = getText();
-    PerlValue result;
-    if (PerlPackageUtil.__PACKAGE__.equals(elementText)) {
-      result = PerlPackageUtil.getContextType(this);
-    }
-    else {
-      result = PerlValueStatic.createOrNull(PerlPackageUtil.getCanonicalName(elementText));
-    }
-
-    return result != null ? result : UNKNOWN_VALUE;
+    return PerlPackageUtil.__PACKAGE__.equals(elementText)
+           ? PerlPackageUtil.getContextType(this)
+           : PerlValueStatic.create(PerlPackageUtil.getCanonicalName(elementText));
   }
 }

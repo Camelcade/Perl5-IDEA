@@ -337,7 +337,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return true;
     }
 
-    PerlValue namespaceValue = PerlValueStatic.createOrNull(
+    PerlValue namespaceValue = PerlValueStatic.create(
       ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this)));
 
     return namespaceValue

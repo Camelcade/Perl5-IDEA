@@ -219,9 +219,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     return newName;
   }
 
-  @Contract("null -> null")
+  @NotNull
   public static PerlValue getContextType(@Nullable PsiElement element) {
-    return PerlValueStatic.createOrNull(getContextNamespaceName(element));
+    return PerlValueStatic.create(getContextNamespaceName(element));
   }
 
   @NotNull
