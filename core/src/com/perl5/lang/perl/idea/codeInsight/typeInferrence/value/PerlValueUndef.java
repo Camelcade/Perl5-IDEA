@@ -39,7 +39,7 @@ public final class PerlValueUndef extends PerlValue {
   }
 
   @Override
-  public int hashCode() {
+  protected int computeHashCode() {
     return getClass().hashCode();
   }
 

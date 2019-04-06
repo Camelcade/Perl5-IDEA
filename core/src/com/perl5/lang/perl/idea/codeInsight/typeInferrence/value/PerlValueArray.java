@@ -81,8 +81,8 @@ public final class PerlValueArray extends PerlValue {
   }
 
   @Override
-  public int hashCode() {
-    int result = super.hashCode();
+  protected int computeHashCode() {
+    int result = super.computeHashCode();
     result = 31 * result + myElementsType.hashCode();
     return result;
   }

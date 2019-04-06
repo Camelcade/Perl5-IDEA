@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -25,6 +26,7 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSub;
@@ -240,8 +242,8 @@ public abstract class PerlValueCall extends PerlValue {
   }
 
   @Override
-  public int hashCode() {
-    int result = super.hashCode();
+  protected int computeHashCode() {
+    int result = super.computeHashCode();
     result = 31 * result + myNamespaceNameValue.hashCode();
     result = 31 * result + mySubNameValue.hashCode();
     result = 31 * result + myArguments.hashCode();

@@ -49,6 +49,8 @@ public abstract class PerlValue {
   @Nullable
   private final PerlValue myBless;
 
+  private int myHashCode = 0;
+
   protected PerlValue() {
     this((PerlValue)null);
   }
@@ -252,7 +254,11 @@ public abstract class PerlValue {
   }
 
   @Override
-  public int hashCode() {
+  public final int hashCode() {
+    return myHashCode != 0 ? myHashCode : (myHashCode = computeHashCode());
+  }
+
+  protected int computeHashCode() {
     return getClass().hashCode() + (myBless != null ? 31 * myBless.hashCode() : 0);
   }
 

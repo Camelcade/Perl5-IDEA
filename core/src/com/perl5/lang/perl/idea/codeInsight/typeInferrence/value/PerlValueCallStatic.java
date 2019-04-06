@@ -149,8 +149,8 @@ public final class PerlValueCallStatic extends PerlValueCall {
   }
 
   @Override
-  public int hashCode() {
-    int result = super.hashCode();
+  protected int computeHashCode() {
+    int result = super.computeHashCode();
     result = 31 * result + (myHasExplicitNamespace ? 1 : 0);
     return result;
   }
