@@ -99,9 +99,9 @@ public class PerlSubAnnotations {
     return myReturns;
   }
 
-  @NotNull
+  @Nullable
   public PerlValue getReturnValue() {
-    return PerlValueStatic.create(myReturns);
+    return PerlValueStatic.createOrNull(myReturns);
   }
 
   public void setReturns(String returns) {

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown;
@@ -96,14 +97,27 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    * @param arguments      invocation arguments
    * @return type of return value if can be calculated, or {@link PerlValueUnknown#UNKNOWN_VALUE}
    */
-  @NotNull
   default PerlValue getReturnValue(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
+    PerlValue valueFromCode = getReturnValueFromCode(contextPackage, arguments);
+    if (valueFromCode != null) {
+      return valueFromCode;
+    }
+    return ObjectUtils.notNull(getReturnValueFromAnnotations(contextPackage, arguments), UNKNOWN_VALUE);
+  }
+
+  @Nullable
+  default PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
     if (contextPackage != null && "new".equals(getSubName())) {
       return PerlValueStatic.create(contextPackage);
     }
+    return null;
+  }
+
+  @Nullable
+  default PerlValue getReturnValueFromAnnotations(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
     PerlSubAnnotations subAnnotations = getAnnotations();
     if (subAnnotations == null) {
-      return UNKNOWN_VALUE;
+      return null;
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
