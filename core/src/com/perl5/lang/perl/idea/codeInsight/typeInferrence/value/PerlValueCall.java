@@ -27,7 +27,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -289,7 +288,6 @@ public abstract class PerlValueCall extends PerlValue {
   @Nullable
   @Contract("null->null")
   public static PerlValueCall from(@Nullable PsiElement element) {
-    return element instanceof PerlValuableEntity ?
-           ObjectUtils.tryCast(((PerlValuableEntity)element).getPerlValue(), PerlValueCall.class) : null;
+    return ObjectUtils.tryCast(PerlValue.from(element), PerlValueCall.class);
   }
 }

@@ -27,8 +27,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
-
 /**
  * Created by hurricup on 25.07.2015.
  * fixme find a better name. This is a basically PerlCallExpression
@@ -39,9 +37,8 @@ public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
 
   @NotNull
   @Override
-  default PerlValue getPerlValue() {
-    PsiPerlMethod perlMethod = getMethod();
-    return perlMethod == null ? UNKNOWN_VALUE : perlMethod.getPerlValue();
+  default PerlValue computePerlValue() {
+    return PerlValue.fromNonNull(getMethod());
   }
 
   @Nullable

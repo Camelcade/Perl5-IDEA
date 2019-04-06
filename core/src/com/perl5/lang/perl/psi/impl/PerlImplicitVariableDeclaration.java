@@ -126,7 +126,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @NotNull
   @Override
-  public PerlValue getPerlValue() {
+  public PerlValue computePerlValue() {
     return PerlValueStatic.create(getVariableClass());
   }
 

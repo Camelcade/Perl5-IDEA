@@ -19,6 +19,9 @@ package com.perl5.lang.perl.psi;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -30,10 +33,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.parser.PerlParserUtil.AMBIGUOUS_PACKAGE_PATTERN;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 08.08.2015.
@@ -77,7 +76,7 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity  {
 
   @NotNull
   @Override
-  default PerlValue getPerlValue() {
+  default PerlValue computePerlValue() {
     return PerlValueStatic.create(ElementManipulators.getValueText(this));
   }
 

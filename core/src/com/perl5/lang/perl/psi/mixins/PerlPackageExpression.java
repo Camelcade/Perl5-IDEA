@@ -34,7 +34,7 @@ public abstract class PerlPackageExpression extends PsiPerlExprImpl implements P
 
   @NotNull
   @Override
-  public PerlValue getPerlValue() {
+  public PerlValue computePerlValue() {
     String elementText = getText();
     PerlValue result;
     if (PerlPackageUtil.__PACKAGE__.equals(elementText)) {

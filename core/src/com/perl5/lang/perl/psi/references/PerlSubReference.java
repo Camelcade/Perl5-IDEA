@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
 import com.perl5.lang.perl.psi.PerlMethodCall;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -44,14 +43,13 @@ public class PerlSubReference extends PerlSubReferenceSimple {
       return ResolveResult.EMPTY_ARRAY;
     }
 
-    PerlValue perlValue = ((PerlMethodCall)parent).getPerlValue();
-    if (!(perlValue instanceof PerlValueCall)) {
+    PerlValueCall perlValue = PerlValueCall.from(parent);
+    if (perlValue == null) {
       return ResolveResult.EMPTY_ARRAY;
     }
 
     List<PsiElement> relatedItems = new ArrayList<>();
-    ((PerlValueCall)perlValue)
-      .processCallTargets(element.getProject(), element.getResolveScope(), element, (__, it) -> relatedItems.add(it));
+    perlValue.processCallTargets(element.getProject(), element.getResolveScope(), element, (__, it) -> relatedItems.add(it));
     return getResolveResults(relatedItems).toArray(new ResolveResult[0]);
   }
 }

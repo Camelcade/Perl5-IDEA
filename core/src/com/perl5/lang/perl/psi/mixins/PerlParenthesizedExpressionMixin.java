@@ -18,13 +18,10 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.NotNull;
-
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 
 public abstract class PerlParenthesizedExpressionMixin extends PsiPerlExprImpl implements PerlValuableEntity, PsiPerlParenthesisedExpr {
   public PerlParenthesizedExpressionMixin(ASTNode node) {
@@ -33,8 +30,7 @@ public abstract class PerlParenthesizedExpressionMixin extends PsiPerlExprImpl i
 
   @NotNull
   @Override
-  public PerlValue getPerlValue() {
-    PsiPerlExpr nestedExpression = getExpr();
-    return nestedExpression instanceof PerlValuableEntity ? ((PerlValuableEntity)nestedExpression).getPerlValue() : UNKNOWN_VALUE;
+  public PerlValue computePerlValue() {
+    return PerlValue.fromNonNull(getExpr());
   }
 }

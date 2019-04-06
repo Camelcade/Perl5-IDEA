@@ -17,10 +17,15 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
@@ -182,5 +187,30 @@ public abstract class PerlValue {
   @Contract("null->false")
   public static boolean isNotEmpty(@Nullable PerlValue type) {
     return !isEmpty(type);
+  }
+
+  /**
+   * @return a value for {@code element} or null if element is null/not valuable.
+   */
+  @Nullable
+  @Contract("null->null")
+  public static PerlValue from(@Nullable PsiElement element) {
+    if (!(element instanceof PerlValuableEntity)) {
+      return null;
+    }
+    return CachedValuesManager.getCachedValue(
+      element, () -> {
+        //noinspection deprecation
+        PerlValue perlValue = ((PerlValuableEntity)element).computePerlValue();
+        return CachedValueProvider.Result.create(perlValue, element.getContainingFile());
+      });
+  }
+
+  /**
+   * @return a value for {@code element} or {@link PerlValueUnknown#UNKNOWN_VALUE} if element is null/not applicable
+   */
+  @NotNull
+  public static PerlValue fromNonNull(@Nullable PsiElement element) {
+    return ObjectUtils.notNull(from(element), UNKNOWN_VALUE);
   }
 }

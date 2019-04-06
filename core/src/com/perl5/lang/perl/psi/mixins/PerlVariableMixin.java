@@ -86,7 +86,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @NotNull
   @Override
-  public PerlValue getPerlValue() {
+  public PerlValue computePerlValue() {
     return CachedValuesManager.getCachedValue(this, () -> {
       return CachedValueProvider.Result.create(computeVariableType(), getContainingFile());
     });
@@ -133,7 +133,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
               PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
 
               if (lastExpression != declaration && lastExpression instanceof PerlValuableEntity) {
-                return ((PerlValuableEntity)lastExpression).getPerlValue();
+                return PerlValue.fromNonNull(lastExpression);
               }
             }
           }
@@ -180,7 +180,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
                       // fixme implement variables assignment support. Need to build kinda visitor with recursion control
                       PerlValue returnValue = null;
                       if (lastExpression instanceof PerlValuableEntity) {
-                        returnValue = ((PerlValuableEntity)lastExpression).getPerlValue();
+                        returnValue = PerlValue.fromNonNull(lastExpression);
                       }
                       if (PerlValue.isNotEmpty(returnValue)) {
                         resultRef.set(returnValue);

@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCallObject;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCallStatic;
@@ -34,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PACKAGE;
@@ -64,7 +64,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
 
   @NotNull
   @Override
-  public PerlValue getPerlValue() {
+  public PerlValue computePerlValue() {
     PerlValue subNameValue = PerlValueStatic.create(getName());
     if (subNameValue == UNKNOWN_VALUE) {
       return UNKNOWN_VALUE;
@@ -77,9 +77,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
 
     List<PerlValue> callArguments;
     if (parentElement instanceof PerlMethodContainer) {
-      callArguments = ((PerlMethodContainer)parentElement).getCallArgumentsList().stream()
-        .map(it -> it instanceof PerlValuableEntity ? ((PerlValuableEntity)it).getPerlValue() : UNKNOWN_VALUE)
-        .collect(Collectors.toList());
+      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValue::fromNonNull);
     }
     else {
       // these are sort and code variable
@@ -110,7 +108,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
           subNameValue, callArguments, isSuper);
       }
       else if (previousValue instanceof PerlValuableEntity) {
-        PerlValue previousElementValue = ((PerlValuableEntity)previousValue).getPerlValue();
+        PerlValue previousElementValue = PerlValue.fromNonNull(previousValue);
         return new PerlValueCallObject(
           previousElementValue == UNKNOWN_VALUE ? PerlPackageUtil.UNIVERSAL_VALUE : previousElementValue, subNameValue, callArguments,
           isSuper);

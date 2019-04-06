@@ -25,8 +25,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface PerlValuableEntity extends PsiElement {
   /**
-   * @return a {@link PerlValue} describing this entity
+   * @return computes a {@link PerlValue} describing this entity
+   * @deprecated do not use this method directly, use {@link PerlValue#from(PsiElement)}
    */
   @NotNull
-  PerlValue getPerlValue();
+  @Deprecated
+  PerlValue computePerlValue();
 }

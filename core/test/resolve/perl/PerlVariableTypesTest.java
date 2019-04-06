@@ -17,6 +17,7 @@
 package resolve.perl;
 
 import base.PerlLightTestCase;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlVariable;
 
 /**
@@ -95,6 +96,6 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
     PerlVariable element = getElementAtCaret(PerlVariable.class);
     assertNotNull(element);
     assertInstanceOf(element, PerlVariable.class);
-    assertEquals(type, element.getPerlValue().toString());
+    assertEquals(type, PerlValue.fromNonNull(element).toString());
   }
 }

@@ -24,11 +24,9 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_DEREFERENCE;
 
 /**
@@ -55,11 +53,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
 
   @NotNull
   @Override
-  public PerlValue getPerlValue() {
-    PsiElement lastChild = getLastChild();
-    if (!(lastChild instanceof PerlValuableEntity)) {
-      return UNKNOWN_VALUE;
-    }
-    return ((PerlValuableEntity)lastChild).getPerlValue();
+  public PerlValue computePerlValue() {
+    return PerlValue.fromNonNull(getLastChild());
   }
 }

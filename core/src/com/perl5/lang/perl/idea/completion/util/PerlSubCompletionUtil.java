@@ -132,13 +132,13 @@ public class PerlSubCompletionUtil {
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
-        PerlValue methodValue = method.getPerlValue();
-        if (!(methodValue instanceof PerlValueCall)) {
+        PerlValueCall methodValue = PerlValueCall.from(method);
+        if (methodValue == null) {
           super.visitMethod(method);
           return;
         }
 
-        PerlValue namespaceValue = ((PerlValueCall)methodValue).getNamespaceNameValue();
+        PerlValue namespaceValue = methodValue.getNamespaceNameValue();
 
         if (namespaceValue.canRepresentNamespace(packageName)) {
           PerlSubNameElement subNameElement = method.getSubNameElement();
