@@ -51,9 +51,8 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   protected final PerlVariableType myVariableType;
   @NotNull
   protected final String myVariableName;
-  @Nullable
-  protected final String myVariableClass;
-
+  @NotNull
+  protected final PerlValue myDeclaredValue;
   @Nullable
   protected final String myPackageName;
 
@@ -89,7 +88,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     if (type != null) {
       myVariableType = type;
       myVariableName = variableNameWithSigil.substring(1);
-      myVariableClass = variableClass;
+      myDeclaredValue = PerlValueStatic.create(variableClass);
       myIsLexical = isLexical;
       myIsLocal = isLocal;
       myIsInvocant = isInvocant;
@@ -100,8 +99,8 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     }
   }
 
+  @NotNull
   @Override
-  @Nullable
   public final String getNamespaceName() {
     String explicitPackageName = this.getExplicitNamespaceName();
     return explicitPackageName != null ? explicitPackageName : PerlPackageUtil.getContextNamespaceName(this);
@@ -115,25 +114,19 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Override
   public String toString() {
-    return "Implicit variable: " + getVariableType().getSigil() + getCanonicalName() + '@' + getVariableClass();
+    return "Implicit variable: " + getVariableType().getSigil() + getCanonicalName() + '@' + getDeclaredValue();
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String getDeclaredType() {
-    return getVariableClass();
+  public PerlValue getDeclaredValue() {
+    return myDeclaredValue;
   }
 
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    return PerlValueStatic.create(getVariableClass());
-  }
-
-  @Nullable
-  @Override
-  public String getLocallyDeclaredType() {
-    return getVariableClass();
+    return getDeclaredValue();
   }
 
   @Override
@@ -193,11 +186,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   @NotNull
   public String getVariableName() {
     return myVariableName;
-  }
-
-  @Nullable
-  public String getVariableClass() {
-    return myVariableClass;
   }
 
   @NotNull
@@ -290,18 +278,37 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    if (!super.equals(o)) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
 
     PerlImplicitVariableDeclaration that = (PerlImplicitVariableDeclaration)o;
 
-    if (myIsLexical != that.myIsLexical) return false;
-    if (myIsLocal != that.myIsLocal) return false;
-    if (myIsInvocant != that.myIsInvocant) return false;
-    if (myVariableType != that.myVariableType) return false;
-    if (!myVariableName.equals(that.myVariableName)) return false;
-    return myVariableClass != null ? myVariableClass.equals(that.myVariableClass) : that.myVariableClass == null;
+    if (myIsLexical != that.myIsLexical) {
+      return false;
+    }
+    if (myIsLocal != that.myIsLocal) {
+      return false;
+    }
+    if (myIsInvocant != that.myIsInvocant) {
+      return false;
+    }
+    if (myVariableType != that.myVariableType) {
+      return false;
+    }
+    if (!myVariableName.equals(that.myVariableName)) {
+      return false;
+    }
+    if (!myDeclaredValue.equals(that.myDeclaredValue)) {
+      return false;
+    }
+    return myPackageName != null ? myPackageName.equals(that.myPackageName) : that.myPackageName == null;
   }
 
   @Override
@@ -309,7 +316,8 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     int result = super.hashCode();
     result = 31 * result + (myVariableType != null ? myVariableType.hashCode() : 0);
     result = 31 * result + myVariableName.hashCode();
-    result = 31 * result + (myVariableClass != null ? myVariableClass.hashCode() : 0);
+    result = 31 * result + myDeclaredValue.hashCode();
+    result = 31 * result + (myPackageName != null ? myPackageName.hashCode() : 0);
     result = 31 * result + (myIsLexical ? 1 : 0);
     result = 31 * result + (myIsLocal ? 1 : 0);
     result = 31 * result + (myIsInvocant ? 1 : 0);

@@ -104,8 +104,10 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       // find lexically visible declaration and check type
       final PerlVariableDeclarationElement declarationWrapper = getLexicalDeclaration();
       if (declarationWrapper != null) {
-        if (declarationWrapper instanceof PerlImplicitVariableDeclaration) {
-          return PerlValueStatic.create(((PerlImplicitVariableDeclaration)declarationWrapper).getVariableClass());
+        PerlValue declaredValue = declarationWrapper.getDeclaredValue();
+        if (declarationWrapper instanceof PerlBuiltInVariable ||
+            declarationWrapper instanceof PerlImplicitVariableDeclaration && !declaredValue.isEmpty()) {
+          return declaredValue;
         }
 
         if (declarationWrapper.isInvocantDeclaration() || declarationWrapper.isSelf()) {
@@ -117,9 +119,8 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
         }
 
         // check explicit type in declaration
-        String declaredType = declarationWrapper.getDeclaredType();
-        if (declaredType != null) {
-          return PerlValueStatic.create(declaredType);
+        if (!declaredValue.isEmpty()) {
+          return declaredValue;
         }
 
         // check assignment around declaration
@@ -202,8 +203,9 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
       // checking global declarations with explicit types
       for (PerlVariableDeclarationElement declaration : getGlobalDeclarations()) {
-        if (declaration.getDeclaredType() != null) {
-          return PerlValueStatic.create(declaration.getDeclaredType());
+        PerlValue declaredValue = declaration.getDeclaredValue();
+        if (declaredValue != null) {
+          return declaredValue;
         }
       }
     }

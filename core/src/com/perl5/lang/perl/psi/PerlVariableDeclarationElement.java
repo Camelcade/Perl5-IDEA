@@ -54,14 +54,6 @@ public interface PerlVariableDeclarationElement
   }
 
   /**
-   * Returns declaration type if variable is in declaration
-   *
-   * @return type string or null
-   */
-  @Nullable
-  String getLocallyDeclaredType();
-
-  /**
    * Checks if this declaration is lexical. IMPORTANT: builds PSI
    *
    * @return checking result

@@ -55,6 +55,6 @@ public final class PerlValueUndef extends PerlValue {
 
   @Override
   public String toString() {
-    return "Type: undef";
+    return "UNDEF_VALUE";
   }
 }

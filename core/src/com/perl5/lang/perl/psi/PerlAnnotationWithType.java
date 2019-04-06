@@ -19,10 +19,15 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_MUL;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY;
+import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY_VALUE;
 
 /**
  * Created by hurricup on 14.08.2016.
@@ -33,12 +38,18 @@ public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation {
    * fixme this is raw, should be a type
    *
    * @return psi element or null
+   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue}
    */
+  @Deprecated
   @Nullable
   default PerlNamespaceElement getType() {
     return PsiTreeUtil.getChildOfType(this, PerlNamespaceElement.class);
   }
 
+  /**
+   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue}
+   */
+  @Deprecated
   @Nullable
   default String getReturnClass() {
     PerlNamespaceElement namespaceElement = getType();
@@ -55,5 +66,15 @@ public interface PerlAnnotationWithType extends PsiElement, PerlAnnotation {
     }
 
     return null;
+  }
+
+  /**
+   * @return a value described in this annotation
+   */
+  @NotNull
+  default PerlValue getValue() {
+    String returnClass = getReturnClass();
+    return returnClass == null ? UNKNOWN_VALUE :
+           returnClass.equals(PACKAGE_ANY) ? PACKAGE_ANY_VALUE : PerlValueStatic.create(returnClass);
   }
 }

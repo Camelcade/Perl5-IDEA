@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -33,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Created by hurricup on 30.05.2015.
@@ -49,9 +51,9 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
-      psi.getNamespaceName(),
-      psi.getName(),
-      psi.getLocallyDeclaredType(),
+      Objects.requireNonNull(psi.getNamespaceName()),
+      Objects.requireNonNull(psi.getName()),
+      psi.getDeclaredValue(),
       psi.getActualType(),
       psi.getLocalVariableAnnotations());
   }
@@ -73,7 +75,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     return psi instanceof PerlVariableDeclarationElement &&
            psi.isValid() &&
            ((PerlVariableDeclarationElement)psi).isGlobalDeclaration() &&
-           StringUtil.isNotEmpty(((PerlVariableDeclarationElement)psi).getName());
+           StringUtil.isNotEmpty(((PerlVariableDeclarationElement)psi).getName()) &&
+           StringUtil.isNotEmpty(((PerlVariableDeclarationElement)psi).getNamespaceName());
   }
 
   @NotNull
@@ -84,14 +87,9 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
 
   @Override
   public void serialize(@NotNull PerlVariableDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    if (stub.getDeclaredType() == null) {
-      dataStream.writeName("");
-    }
-    else {
-      dataStream.writeName(stub.getDeclaredType());
-    }
     dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getVariableName());
+    stub.getDeclaredValue().serialize(dataStream);
     dataStream.writeByte(stub.getActualType().ordinal());
 
     PerlVariableAnnotations annotations = stub.getVariableAnnotations();
@@ -107,17 +105,12 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
   @NotNull
   @Override
   public PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    String variableType = PerlStubSerializationUtil.readString(dataStream);
-    if (StringUtil.isEmpty(variableType)) {
-      variableType = null;
-    }
-
     return new PerlVariableDeclarationStub(
       parentStub,
       this,
-      PerlStubSerializationUtil.readString(dataStream),
-      PerlStubSerializationUtil.readString(dataStream),
-      variableType,
+      PerlStubSerializationUtil.readNotNullString(dataStream),
+      PerlStubSerializationUtil.readNotNullString(dataStream),
+      PerlValuesManager.deserialize(dataStream),
       PerlVariableType.values()[dataStream.readByte()],
       readAnnotations(dataStream)
     );

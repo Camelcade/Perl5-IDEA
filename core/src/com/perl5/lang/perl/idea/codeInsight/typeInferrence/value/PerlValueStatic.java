@@ -133,6 +133,6 @@ public final class PerlValueStatic extends PerlValue {
 
   @Override
   public String toString() {
-    return "Value: " + myValue;
+    return myValue;
   }
 }

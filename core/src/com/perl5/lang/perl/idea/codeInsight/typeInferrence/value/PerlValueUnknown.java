@@ -29,7 +29,6 @@ public final class PerlValueUnknown extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-
   }
 
   @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -56,6 +55,6 @@ public final class PerlValueUnknown extends PerlValue {
 
   @Override
   public String toString() {
-    return "Value: UNKNOWN";
+    return "UNKNOWN_VALUE";
   }
 }

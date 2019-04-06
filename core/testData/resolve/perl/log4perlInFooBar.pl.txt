@@ -43,26 +43,26 @@ PerlSubReference at (156,163); text in range: 'LOGEXIT' => 1 results:
 	Implicit sub: LOGEXIT()
 
 PerlVariableReference at (167,170); text in range: 'OFF' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::OFF@null
+	Implicit variable: $Log::Log4perl::Levels::OFF@UNKNOWN_VALUE
 
 PerlVariableReference at (173,178); text in range: 'FATAL' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::FATAL@null
+	Implicit variable: $Log::Log4perl::Levels::FATAL@UNKNOWN_VALUE
 
 PerlVariableReference at (181,186); text in range: 'ERROR' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::ERROR@null
+	Implicit variable: $Log::Log4perl::Levels::ERROR@UNKNOWN_VALUE
 
 PerlVariableReference at (189,193); text in range: 'WARN' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::WARN@null
+	Implicit variable: $Log::Log4perl::Levels::WARN@UNKNOWN_VALUE
 
 PerlVariableReference at (196,200); text in range: 'INFO' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::INFO@null
+	Implicit variable: $Log::Log4perl::Levels::INFO@UNKNOWN_VALUE
 
 PerlVariableReference at (203,208); text in range: 'DEBUG' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::DEBUG@null
+	Implicit variable: $Log::Log4perl::Levels::DEBUG@UNKNOWN_VALUE
 
 PerlVariableReference at (211,216); text in range: 'TRACE' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::TRACE@null
+	Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
 
 PerlVariableReference at (219,222); text in range: 'ALL' => 1 results:
-	Implicit variable: $Log::Log4perl::Levels::ALL@null
+	Implicit variable: $Log::Log4perl::Levels::ALL@UNKNOWN_VALUE
 

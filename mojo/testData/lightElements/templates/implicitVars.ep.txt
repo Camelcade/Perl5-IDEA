@@ -1,6 +1,6 @@
 Implicit variables provider: Mojolicious Perl5 Template at 0 in implicitVars.ep
 	Implicit variable: $Mojo::Template::Sandbox::297ECC43A173FF7EA391B57A85C3DBE0::self@Mojolicious::Controller
 	Implicit variable: $Mojo::Template::Sandbox::297ECC43A173FF7EA391B57A85C3DBE0::c@Mojolicious::Controller
-	Implicit variable: $Mojo::Template::Sandbox::297ECC43A173FF7EA391B57A85C3DBE0::cb@null
-	Implicit variable: $Mojo::Template::Sandbox::297ECC43A173FF7EA391B57A85C3DBE0::_O@null
+	Implicit variable: $Mojo::Template::Sandbox::297ECC43A173FF7EA391B57A85C3DBE0::cb@UNKNOWN_VALUE
+	Implicit variable: $Mojo::Template::Sandbox::297ECC43A173FF7EA391B57A85C3DBE0::_O@UNKNOWN_VALUE
 

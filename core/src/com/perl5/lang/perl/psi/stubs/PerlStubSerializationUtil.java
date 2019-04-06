@@ -23,15 +23,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hurricup on 16.07.2015.
  */
 public class PerlStubSerializationUtil {
+  @NotNull
+  public static String readNotNullString(@NotNull StubInputStream dataStream) throws IOException {
+    return Objects.requireNonNull(readString(dataStream));
+  }
+
   @Nullable
   public static String readString(@NotNull StubInputStream dataStream) throws IOException {
     return StringRef.toString(dataStream.readName());

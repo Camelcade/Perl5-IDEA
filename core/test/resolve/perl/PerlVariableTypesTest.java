@@ -29,66 +29,66 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
     return "testData/resolve/perl/variableTypes";
   }
 
-  public void testBuiltIn() {doTest("Value: UNKNOWN");}
+  public void testBuiltIn() {doTest("UNKNOWN_VALUE");}
 
   public void testDeclarationSingle() {
-    doTest("Value: Foo::Bar");
+    doTest("Foo::Bar");
   }
 
   public void testDeclarationMulti() {
-    doTest("Value: Foo::Bar");
+    doTest("Foo::Bar");
   }
 
   public void testDeclarationAssignmentNew() {
-    doTest("Object: Value: Foo::Bar->Value: new");
+    doTest("Object: Foo::Bar->new");
   }
 
   public void testVariableBeforeAssignment() {
-    doTest("Value: UNKNOWN");
+    doTest("UNKNOWN_VALUE");
   }
 
   public void testVariableAfterAssignment() {
-    doTest("Object: Value: Foo::Bar->Value: new");
+    doTest("Object: Foo::Bar->new");
   }
 
   public void testAnnotatedSingleInside() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedSingle() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedMulti() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedMultiNonFirst() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedConcurrentStatement() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedConcurrentStatementOuter() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeInside() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeMulti() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeSingle() {
-    doTest("Value: JSON::XS");
+    doTest("JSON::XS");
   }
 
   public void testAnnotatedConcurrentRealTypeWins() {
-    doTest("Value: DBI");
+    doTest("DBI");
   }
 
   public void doTest(String type) {

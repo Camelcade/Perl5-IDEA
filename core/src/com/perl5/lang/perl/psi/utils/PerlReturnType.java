@@ -25,7 +25,9 @@ import java.io.IOException;
 
 /**
  * Created by hurricup on 03.06.2015.
+ * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue}
  */
+@Deprecated
 public enum PerlReturnType {
   VALUE,        // default
   REF,        // Package::Name	NYI

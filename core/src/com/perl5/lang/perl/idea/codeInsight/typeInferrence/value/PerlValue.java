@@ -170,6 +170,10 @@ public abstract class PerlValue {
     return true;
   }
 
+  public final boolean isEmpty() {
+    return this == UNKNOWN_VALUE;
+  }
+
   /**
    * @return true iff this type can represent a {@code namespaceName}
    */
@@ -192,7 +196,7 @@ public abstract class PerlValue {
    */
   public final void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeInt(getSerializationId());
-    dataStream.writeBoolean(myBless == null);
+    dataStream.writeBoolean(myBless != null);
     if (myBless != null) {
       myBless.serialize(dataStream);
     }

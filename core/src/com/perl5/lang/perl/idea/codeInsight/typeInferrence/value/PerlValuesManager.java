@@ -58,8 +58,10 @@ public final class PerlValuesManager {
     int valueId = dataStream.readInt();
     switch (valueId) {
       case UNKNOWN_ID:
+        dataStream.readBoolean();
         return UNKNOWN_VALUE;
       case UNDEF_ID:
+        dataStream.readBoolean();
         return UNDEF_VALUE;
       case STATIC_ID:
         return new PerlValueStatic(dataStream);

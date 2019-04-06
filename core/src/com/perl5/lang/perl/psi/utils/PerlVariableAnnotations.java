@@ -18,16 +18,18 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationType;
-import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 08.08.2016.
@@ -37,24 +39,20 @@ public class PerlVariableAnnotations {
 
   private byte myFlags = 0;
 
-  private PerlReturnType myRefType = PerlReturnType.VALUE;
-  private String myType = null;
+  @NotNull
+  private PerlValue myValue = UNKNOWN_VALUE;
 
-
-  public PerlVariableAnnotations() {
-
+  private PerlVariableAnnotations() {
   }
 
-  public PerlVariableAnnotations(byte flags, @Nullable String type, PerlReturnType refType) {
+  private PerlVariableAnnotations(byte flags, @NotNull PerlValue value) {
     myFlags = flags;
-    myType = type;
-    myRefType = refType;
+    myValue = value;
   }
 
   public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeByte(myFlags);
-    dataStream.writeName(myType);
-    myRefType.serialize(dataStream);
+    myValue.serialize(dataStream);
   }
 
   public boolean isDeprecated() {
@@ -65,27 +63,19 @@ public class PerlVariableAnnotations {
     myFlags |= IS_DEPRECATED;
   }
 
-  public PerlReturnType getRefType() {
-    return myRefType;
+  @NotNull
+  public PerlValue getAnnotatedValue() {
+    return myValue;
   }
 
-  public void setRefType(PerlReturnType refType) {
-    myRefType = refType;
-  }
-
-  public String getType() {
-    return myType;
-  }
-
-  public void setType(String type) {
-    myType = type;
+  public void setValue(@NotNull PerlValue value) {
+    myValue = value;
   }
 
   public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlVariableAnnotations(
       dataStream.readByte(),
-      PerlStubSerializationUtil.readString(dataStream),
-      PerlReturnType.deserialize(dataStream)
+      PerlValuesManager.deserialize(dataStream)
     );
   }
 
@@ -101,14 +91,8 @@ public class PerlVariableAnnotations {
       if (annotation instanceof PsiPerlAnnotationDeprecated) {
         myAnnotations.setIsDeprecated();
       }
-      else if (annotation instanceof PsiPerlAnnotationType) // type
-      {
-        PerlNamespaceElement ns = ((PsiPerlAnnotationType)annotation).getType();
-        if (ns != null) {
-          myAnnotations.setType(ns.getCanonicalName());
-          myAnnotations.setRefType(PerlReturnType.REF);
-          // todo implement brackets and braces
-        }
+      else if (annotation instanceof PsiPerlAnnotationType) {
+        myAnnotations.setValue(((PsiPerlAnnotationType)annotation).getValue());
       }
     }
 

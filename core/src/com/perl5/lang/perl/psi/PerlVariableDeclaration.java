@@ -17,11 +17,14 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMember {
@@ -30,17 +33,16 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
    *
    * @return package name for current element
    */
+  @Nullable
   String getNamespaceName();
 
   String getVariableName();
 
-  /**
-   * Returns declaration type in annotation or declaration
-   *
-   * @return type string or null
-   */
-  @Nullable
-  String getDeclaredType();
+  @NotNull
+  default PerlValue getDeclaredValue() {
+    PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
+    return variableAnnotations != null ? variableAnnotations.getAnnotatedValue() : UNKNOWN_VALUE;
+  }
 
   /**
    * Guessing actual variable type from context

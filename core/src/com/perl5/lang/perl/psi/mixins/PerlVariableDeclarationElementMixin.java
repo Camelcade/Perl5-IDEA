@@ -25,6 +25,8 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -39,6 +41,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 import java.util.Objects;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -102,31 +106,25 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     return getVariable().getExplicitNamespaceName();
   }
 
-  @Nullable
+  @NotNull
   @Override
-  public String getDeclaredType() {
-    PerlVariableAnnotations variableAnnotations = getVariableAnnotations();
-    if (variableAnnotations != null) {
-      String type = variableAnnotations.getType();
-      if (type != null) {
-        return type;
-      }
+  public PerlValue getDeclaredValue() {
+    PerlValue valueFromAnnotations = PerlVariableDeclarationElement.super.getDeclaredValue();
+    if (!valueFromAnnotations.isEmpty()) {
+      return valueFromAnnotations;
     }
-
-    PerlVariableDeclarationStub stub = getStub();
-    if (stub != null) {
-      return stub.getDeclaredType();
-    }
-    else {
-      return getLocallyDeclaredType();
-    }
+    return getPsiDeclaredValue();
   }
 
-  @Nullable
-  @Override
-  public String getLocallyDeclaredType() {
+  @NotNull
+  public PerlValue getPsiDeclaredValue() {
+    PerlVariableDeclarationStub stub = getGreenStub();
+    if (stub != null) {
+      return stub.getDeclaredValue();
+    }
     PerlVariableDeclarationExpr declaration = getPerlDeclaration();
-    return declaration == null ? null : declaration.getDeclarationType();
+    return declaration == null ? UNKNOWN_VALUE :
+           PerlValueStatic.create(declaration.getDeclarationType());
   }
 
   @Nullable
@@ -135,7 +133,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   }
 
 
-  @Nullable
+  @NotNull
   @Override
   public String getNamespaceName() {
     PerlVariableDeclarationStub stub = getStub();

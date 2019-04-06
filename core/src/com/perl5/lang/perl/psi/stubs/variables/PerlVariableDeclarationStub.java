@@ -20,60 +20,71 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 30.05.2015.
  */
 public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
+  @NotNull
   private final String myPackageName;
+  @NotNull
   private final String myVariableName;
-  private final String myDeclaredType;
+  @NotNull
   private final PerlVariableType myVariableType;
+  @Nullable
   private final PerlVariableAnnotations myPerlVariableAnnotations;
+  @NotNull
+  private final PerlValue myDeclaredValue;
 
   public PerlVariableDeclarationStub(
     StubElement parent,
-    IStubElementType elementType,
-    String packageName,
-    String variableName,
-    String declaredType,
-    PerlVariableType variableType,
-    PerlVariableAnnotations variableAnnotations
+    @NotNull IStubElementType elementType,
+    @NotNull String packageName,
+    @NotNull String variableName,
+    @NotNull PerlValue declaredValue,
+    @NotNull PerlVariableType variableType,
+    @Nullable PerlVariableAnnotations variableAnnotations
   ) {
     super(parent, elementType);
     myPackageName = packageName;
     myVariableName = variableName;
-    myDeclaredType = declaredType;
+    myDeclaredValue = declaredValue;
     myVariableType = variableType;
     myPerlVariableAnnotations = variableAnnotations;
   }
 
-  @Nullable
+  @NotNull
   @Override
   public String getExplicitNamespaceName() {
     return myPackageName;
   }
 
+  @NotNull
   @Override
   public String getNamespaceName() {
     return getExplicitNamespaceName();
   }
 
+  @NotNull
   @Override
   public String getVariableName() {
     return myVariableName;
   }
 
   @Override
-  public String getDeclaredType() {
-    return myDeclaredType;
+  @NotNull
+  public PerlValue getDeclaredValue() {
+    return myDeclaredValue;
   }
 
+  @NotNull
   @Override
   public PerlVariableType getActualType() {
     return myVariableType;
