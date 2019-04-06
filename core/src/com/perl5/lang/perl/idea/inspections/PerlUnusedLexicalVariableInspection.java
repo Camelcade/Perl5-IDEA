@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 
@@ -35,7 +36,7 @@ public class PerlUnusedLexicalVariableInspection extends PerlVariableInspectionB
         PerlVariable variable = variableDeclarationWrapper.getVariable();
         holder.registerProblem(
           variable,
-          "Unused lexical variable:" + variable.getText(),
+          PerlBundle.message("perl.inspection.unused.lexical.variable", variable.getText()),
           ProblemHighlightType.LIKE_UNUSED_SYMBOL);
       }
     }
