@@ -77,6 +77,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
 
   public static final String PACKAGE_ANY = "*";
+  public static final PerlValue PACKAGE_ANY_VALUE = PerlValueStatic.create(PACKAGE_ANY);
 
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";

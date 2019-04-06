@@ -121,7 +121,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
-    return PerlValueStatic.ANY_NAMESPACE.equals(returnValue) ? PerlValueStatic.create(contextPackage) : returnValue;
+    return PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue) ? PerlValueStatic.create(contextPackage) : returnValue;
   }
 
   default boolean isDeprecated() {
