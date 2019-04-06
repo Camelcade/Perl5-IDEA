@@ -17,10 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.containers.ContainerUtil;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -155,6 +158,14 @@ public final class PerlValueOneOf extends PerlValue {
   @Override
   public String toString() {
     return "OneOf: " + myVariants;
+  }
+
+  @NotNull
+  @Override
+  protected String getPresentableValueText() {
+    return PerlBundle.message(
+      "perl.value.oneof.static.presentable",
+      StringUtil.join(ContainerUtil.map(myVariants, PerlValue::getPresentableText), ",\n"));
   }
 
   public static class Builder {

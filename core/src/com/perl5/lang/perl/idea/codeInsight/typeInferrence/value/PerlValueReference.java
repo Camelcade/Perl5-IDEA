@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -114,5 +115,11 @@ public final class PerlValueReference extends PerlValue {
   @Override
   public String toString() {
     return "Reference to: " + myReferrent;
+  }
+
+  @NotNull
+  @Override
+  public String getPresentableValueText() {
+    return PerlBundle.message("perl.value.reference.presentable", myReferrent.getPresentableText());
   }
 }

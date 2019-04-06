@@ -317,7 +317,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (method == null) {
       return recommendation;
     }
-    PerlValueCall callValue = PerlValueCall.from(method);
+    PerlValueCall callValue = PerlValueCall.from((PsiElement)method);
     if (callValue == null) {
       return recommendation;
     }

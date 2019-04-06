@@ -30,7 +30,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValu
  * We could implement something like PerlValueElementType but this thing is not supported to be extendable, so good for now
  */
 public final class PerlValuesManager {
-  public static final int VERSION = 1;
+  public static final int VERSION = 2;
 
   static final int UNKNOWN_ID = 0;
   static final int UNDEF_ID = 1;

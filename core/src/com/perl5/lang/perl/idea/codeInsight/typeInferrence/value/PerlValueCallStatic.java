@@ -24,6 +24,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.PairProcessor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -159,4 +160,10 @@ public final class PerlValueCallStatic extends PerlValueCall {
     return "Static: " + myNamespaceNameValue + "::" + mySubNameValue;
   }
 
+  @NotNull
+  @Override
+  protected String getPresentableValueText() {
+    return PerlBundle
+      .message("perl.value.call.static.presentable", myNamespaceNameValue.getPresentableText(), mySubNameValue.getPresentableText());
+  }
 }

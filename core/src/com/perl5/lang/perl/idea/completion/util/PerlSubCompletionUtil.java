@@ -132,7 +132,7 @@ public class PerlSubCompletionUtil {
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
-        PerlValueCall methodValue = PerlValueCall.from(method);
+        PerlValueCall methodValue = PerlValueCall.from((PsiElement)method);
         if (methodValue == null) {
           super.visitMethod(method);
           return;

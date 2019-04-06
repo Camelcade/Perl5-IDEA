@@ -23,6 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.PairProcessor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -142,5 +143,12 @@ public final class PerlValueCallObject extends PerlValueCall {
   @Override
   public String toString() {
     return "Object: " + myNamespaceNameValue + "->" + (myIsSuper ? "SUPER::" : "") + mySubNameValue;
+  }
+
+  @NotNull
+  @Override
+  protected String getPresentableValueText() {
+    return PerlBundle
+      .message("perl.value.call.object.presentable", myNamespaceNameValue.getPresentableText(), mySubNameValue.getPresentableText());
   }
 }

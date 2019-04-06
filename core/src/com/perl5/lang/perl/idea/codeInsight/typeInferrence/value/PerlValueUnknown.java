@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -51,6 +52,12 @@ public final class PerlValueUnknown extends PerlValue {
   @Override
   PerlValueUnknown createBlessedCopy(@NotNull PerlValue bless) {
     return this;
+  }
+
+  @NotNull
+  @Override
+  public String getPresentableValueText() {
+    return PerlBundle.message("perl.value.unknown.presentable");
   }
 
   @Override

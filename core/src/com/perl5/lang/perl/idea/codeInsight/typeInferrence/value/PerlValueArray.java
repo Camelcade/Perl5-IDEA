@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -89,5 +90,11 @@ public final class PerlValueArray extends PerlValue {
   @Override
   public String toString() {
     return "Array of: " + myElementsType;
+  }
+
+  @NotNull
+  @Override
+  public String getPresentableValueText() {
+    return PerlBundle.message("perl.value.array.presentable", myElementsType.getPresentableText());
   }
 }

@@ -26,6 +26,7 @@ import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -80,11 +81,15 @@ public abstract class PerlValue {
   abstract PerlValue createBlessedCopy(@NotNull PerlValue bless);
 
   /**
-   * @return result of {@code Scalar::Util::blessed} equivalent invocation
+   * @return result of {@code Scalar::Util::blessed} equivalent invocation, {@link UNDEF_VALUE} if not blessed
    */
   @NotNull
   public PerlValue getBless() {
     return UNDEF_VALUE;
+  }
+
+  public final boolean isBlessed() {
+    return getBless() != UNDEF_VALUE;
   }
 
   /**
@@ -212,6 +217,26 @@ public abstract class PerlValue {
     return toString();
   }
 
+  /**
+   * @return presentable text for tooltips
+   */
+  @NotNull
+  public final String getPresentableText() {
+    String presentableText = getPresentableValueText();
+    return isBlessed() ?
+           PerlBundle.message("perl.value.presentable.blessed", presentableText, getBlessedInner().getPresentableText()) :
+           presentableText;
+  }
+
+  /**
+   * @return presentable value text, without blessing information
+   * @see #getPresentableText()
+   */
+  @NotNull
+  protected String getPresentableValueText() {
+    return toString();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -253,9 +278,11 @@ public abstract class PerlValue {
   @Nullable
   @Contract("null->null")
   public static PerlValue from(@Nullable PsiElement element) {
-    if (!(element instanceof PerlValuableEntity)) {
-      return null;
-    }
+    return element instanceof PerlValuableEntity ? from((PerlValuableEntity)element) : null;
+  }
+
+  @NotNull
+  public static PerlValue from(@NotNull PerlValuableEntity element) {
     return CachedValuesManager.getCachedValue(
       element, () -> {
         //noinspection deprecation

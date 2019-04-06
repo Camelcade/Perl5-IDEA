@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -51,6 +52,12 @@ public final class PerlValueUndef extends PerlValue {
   @Override
   PerlValueUndef createBlessedCopy(@NotNull PerlValue bless) {
     return this;
+  }
+
+  @NotNull
+  @Override
+  protected String getPresentableValueText() {
+    return PerlBaseLexer.STRING_UNDEF;
   }
 
   @Override

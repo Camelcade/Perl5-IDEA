@@ -117,4 +117,10 @@ public final class PerlValueScalar extends PerlValue {
   public String toString() {
     return "Scalar: " + myValue;
   }
+
+  @NotNull
+  @Override
+  public String getPresentableValueText() {
+    return myValue.getPresentableText();
+  }
 }
