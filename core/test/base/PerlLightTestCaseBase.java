@@ -99,6 +99,7 @@ import com.intellij.usages.*;
 import com.intellij.usages.impl.UsageViewImpl;
 import com.intellij.usages.rules.UsageGroupingRule;
 import com.intellij.usages.rules.UsageGroupingRuleProvider;
+import com.intellij.util.FileContentUtil;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -119,6 +120,7 @@ import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandler;
@@ -471,7 +473,15 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public void doTestResolve() {
+    doTestResolve(false);
+  }
+
+  public void doTestResolve(boolean reparse) {
     initWithFileSmart();
+    if (reparse) {
+      PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+      FileContentUtil.reparseFiles(getProject(), Collections.emptyList(), true);
+    }
     checkSerializedReferencesWithFile();
   }
 

@@ -96,7 +96,7 @@ public class PerlResolveTest extends PerlLightTestCase {
 
   public void testClassAccessor() {doTest();}
 
-  public void testExceptionClassFields() {doTest();}
+  public void testExceptionClassFields() {doTestResolve(true);}
 
   public void testExceptionClassAlias() {doTest();}
 
