@@ -205,12 +205,18 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     }
   }
 
-
+  /**
+   * @deprecated should be detected from resolve result
+   */
   @Override
   public boolean isBuiltIn() {
     return getLexicalDeclaration() instanceof PerlBuiltInVariable;
   }
 
+  /**
+   * @deprecated deprecation decided by declaration
+   */
+  @Deprecated
   @Override
   public boolean isDeprecated() {
     PsiElement parent = getParent();
@@ -258,7 +264,10 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     return qualifiedRanges.second.subSequence(variableName).toString();
   }
 
-  // fixme this need to be improved very much
+  /**
+   * @deprecated semantic of this method is hardly understandable
+   */
+  @Deprecated
   @Override
   public PerlVariableDeclarationElement getLexicalDeclaration() {
     if (getExplicitNamespaceName() != null) {
