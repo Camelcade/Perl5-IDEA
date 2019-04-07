@@ -31,10 +31,12 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue.Builder;
+import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlReturnExpr;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
@@ -43,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
@@ -287,6 +290,21 @@ public abstract class PerlValue {
   @Contract("null->false")
   public static boolean isNotEmpty(@Nullable PerlValue type) {
     return !isEmpty(type);
+  }
+
+  @NotNull
+  public static PerlValue from(@NotNull PerlContextType contextType,
+                               @Nullable PerlAssignValueDescriptor assignValueDescriptor) {
+    if (assignValueDescriptor == null ||
+        assignValueDescriptor.getStartIndex() != 0 ||
+        contextType != PerlContextType.SCALAR) {
+      return UNKNOWN_VALUE;
+    }
+    List<PsiElement> elements = assignValueDescriptor.getElements();
+    if (elements.size() != 1 || PerlContextType.from(elements.get(0)) != contextType) {
+      return UNKNOWN_VALUE;
+    }
+    return fromNonNull(elements.get(0));
   }
 
   /**

@@ -1,0 +1,5 @@
+sub so<caret>me{
+  my( $var, $othervar) = (someothersub(), 'Foo::Bar');
+  ($othervar, $var) = qw/first second/;
+  $var;
+}

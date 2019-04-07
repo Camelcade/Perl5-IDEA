@@ -515,9 +515,9 @@ public class PerlPsiUtil implements PerlElementTypes {
    * @return false if need to stop
    */
 
-  public static boolean processElementsInRange(PsiElement element,
-                                               @NotNull TextRange range,
-                                               @NotNull final PsiElementProcessor<PsiElement> processor) {
+  public static boolean processElementsInRangeBackward(PsiElement element,
+                                                       @NotNull TextRange range,
+                                                       @NotNull final PsiElementProcessor<PsiElement> processor) {
     if (element == null) {
       return true;
     }
@@ -529,12 +529,12 @@ public class PerlPsiUtil implements PerlElementTypes {
       }
     }
     if (range.intersects(elementRange)) {
-      PsiElement run = element.getFirstChild();
+      PsiElement run = element.getLastChild();
       while (run != null) {
-        if (!processElementsInRange(run, range, processor)) {
+        if (!processElementsInRangeBackward(run, range, processor)) {
           return false;
         }
-        run = run.getNextSibling();
+        run = run.getPrevSibling();
       }
     }
     return true;

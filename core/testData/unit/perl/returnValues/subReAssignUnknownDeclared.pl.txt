@@ -1,0 +1,7 @@
+sub so<caret>me{
+  my Foo::Baz ( $var, $othervar) = (someothersub(), 'Foo::Bar');
+  ($var) = @_;
+  $var;
+}
+-------------------------------------------------------
+Foo::Baz

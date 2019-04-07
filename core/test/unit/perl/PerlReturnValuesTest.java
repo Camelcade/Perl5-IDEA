@@ -27,6 +27,26 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/returnValues";
   }
 
+  public void testSubAssignParallel() {doTest();}
+
+  public void testSubReAssign() {doTest();}
+
+  public void testSubReAssignParallel() {doTest();}
+
+  public void testSubReAssignUnknown() {doTest();}
+
+  public void testSubReAssignUnknownDeclared() {doTest();}
+
+  public void testSubReAssignUnknownAnnotated() {doTest();}
+
+  public void testSubAssignParallelFirst() {doTest();}
+
+  public void testSubAssignParallelSecond() {doTest();}
+
+  public void testSubAssignParallelLast() {doTest();}
+
+  public void testSubAssignParallelList() {doTest();}
+
   public void testUndef() {doTest();}
 
   public void testReturnUndef() {doTest();}

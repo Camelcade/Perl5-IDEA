@@ -37,7 +37,7 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
@@ -123,23 +123,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
           return declaredValue;
         }
 
-        // check assignment around declaration
-        PerlVariableDeclarationExpr declaration = PsiTreeUtil.getParentOfType(declarationWrapper, PerlVariableDeclarationExpr.class);
-        if (declaration != null) {
-          if (declaration.getParent() instanceof PsiPerlAssignExpr) {
-            PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)declaration.getParent();
-            List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
-
-            if (!assignmentElements.isEmpty()) {
-              PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-              if (lastExpression != declaration && lastExpression instanceof PerlValuableEntity) {
-                return PerlValue.fromNonNull(lastExpression);
-              }
-            }
-          }
-        }
-
         // fixme this is bad, because my $var1 && print $var1 will be valid, but it's not
         PerlLexicalScope perlLexicalScope = PsiTreeUtil.getParentOfType(declarationWrapper, PerlLexicalScope.class);
         assert perlLexicalScope != null : "Unable to find lexical scope for:" +
@@ -151,43 +134,28 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
         Ref<PerlValue> resultRef = Ref.create();
 
-        int startOffset = declarationWrapper.getTextRange().getEndOffset();
+        int startOffset = declarationWrapper.getTextRange().getStartOffset();
         int endOffset = getTextRange().getStartOffset();
 
-        if (startOffset < endOffset) {
-          PerlPsiUtil.processElementsInRange(
+        if (startOffset < endOffset) { // fixme #2016
+          PerlPsiUtil.processElementsInRangeBackward(
             perlLexicalScope,
             new TextRange(startOffset, endOffset),
             element -> {
               if (element != PerlVariableMixin.this &&
-                  element instanceof PsiPerlScalarVariable &&
-                  element.getParent() instanceof PsiPerlAssignExpr
+                  element instanceof PsiPerlScalarVariable
               ) {
                 PsiElement variableNameElement1 = ((PsiPerlScalarVariable)element).getVariableNameElement();
 
                 if (variableNameElement1 != null &&
-                    variableNameElement1.getReference() != null &&
-                    variableNameElement1.getReference().isReferenceTo(declarationWrapper)
+                    (element.getParent().equals(declarationWrapper) ||
+                     variableNameElement1.getReference() != null && variableNameElement1.getReference().isReferenceTo(declarationWrapper))
                 ) {
                   // found variable assignment
-                  PsiPerlAssignExpr assignmentExpression = (PsiPerlAssignExpr)element.getParent();
-                  List<PsiPerlExpr> assignmentElements = assignmentExpression.getExprList();
-
-                  if (!assignmentElements.isEmpty()) {
-                    PsiPerlExpr lastExpression = assignmentElements.get(assignmentElements.size() - 1);
-
-                    if (lastExpression != element && lastExpression.getTextOffset() < getTextOffset()) {
-                      // source element is on the left side
-                      // fixme implement variables assignment support. Need to build kinda visitor with recursion control
-                      PerlValue returnValue = null;
-                      if (lastExpression instanceof PerlValuableEntity) {
-                        returnValue = PerlValue.fromNonNull(lastExpression);
-                      }
-                      if (PerlValue.isNotEmpty(returnValue)) {
-                        resultRef.set(returnValue);
-                        return false;
-                      }
-                    }
+                  PerlAssignExpression assignmentExpression = PerlAssignExpression.getAssignmentExpression(element);
+                  if (assignmentExpression != null) {
+                    resultRef.set(PerlValue.from(PerlContextType.from(element), assignmentExpression.getRightPartOfAssignment(element)));
+                    return false;
                   }
                 }
               }
@@ -204,7 +172,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       // checking global declarations with explicit types
       for (PerlVariableDeclarationElement declaration : getGlobalDeclarations()) {
         PerlValue declaredValue = declaration.getDeclaredValue();
-        if (declaredValue != null) {
+        if (!declaredValue.isEmpty()) {
           return declaredValue;
         }
       }
