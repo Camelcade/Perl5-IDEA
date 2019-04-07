@@ -25,8 +25,6 @@ import java.util.List;
 
 public interface PerlSubDefinition extends PerlSub {
   /**
-   * Returns list of accepted arguments
-   *
    * @return list of accepted arguments
    */
   @NotNull

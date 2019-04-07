@@ -18,29 +18,32 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 /**
  * Created by hurricup on 25.05.2015.
  */
-public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement> {
+public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement> implements PerlSubDefinition {
   private final List<PerlSubArgument> myArguments;
 
   public PerlSubDefinitionStub(StubElement parent,
                                String packageName,
                                String subName,
-                               List<PerlSubArgument> arguments,
+                               @NotNull List<PerlSubArgument> arguments,
                                PerlSubAnnotations annotations,
                                IStubElementType elementType) {
     super(parent, packageName, subName, annotations, elementType);
     myArguments = arguments;
   }
 
+  @NotNull
   public List<PerlSubArgument> getSubArgumentsList() {
     return myArguments;
   }

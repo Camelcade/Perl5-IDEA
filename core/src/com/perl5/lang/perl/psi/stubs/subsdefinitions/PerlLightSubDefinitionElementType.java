@@ -52,7 +52,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
   protected PerlSubDefinitionStub createStubElement(StubElement parentStub,
                                                     String packageName,
                                                     String functionName,
-                                                    List<PerlSubArgument> arguments,
+                                                    @NotNull List<PerlSubArgument> arguments,
                                                     PerlSubAnnotations annotations) {
     return new PerlLightSubDefinitionStub(parentStub, packageName, functionName, arguments, annotations, this);
   }
