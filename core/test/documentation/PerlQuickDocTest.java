@@ -19,11 +19,11 @@ package documentation;
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlDocumentationTest extends PerlLightTestCase {
+public class PerlQuickDocTest extends PerlLightTestCase {
 
   @Override
   protected String getTestDataPath() {
-    return "testData/documentation/perl";
+    return "testData/documentation/perl/quickdoc";
   }
 
   public void testPodWeaverAttr() {doTest();}
@@ -51,7 +51,7 @@ public class PerlDocumentationTest extends PerlLightTestCase {
   }
 
   private void doTest() {
-    doTestDocumentationGeneration();
+    doTestQuickDoc();
   }
 
 }
