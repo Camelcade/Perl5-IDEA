@@ -24,8 +24,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
@@ -87,13 +85,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    return CachedValuesManager.getCachedValue(this, () -> {
-      return CachedValueProvider.Result.create(computeVariableType(), getContainingFile());
-    });
-  }
-
-  @NotNull
-  private PerlValue computeVariableType() {
     if (!(this instanceof PsiPerlScalarVariable)) {
       return UNKNOWN_VALUE;
     }
