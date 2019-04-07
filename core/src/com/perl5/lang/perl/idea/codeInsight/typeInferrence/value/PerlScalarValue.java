@@ -24,56 +24,39 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Objects;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
-
 /**
- * Represents a plain value - string or number
+ * Represents a scalar value
  */
-public final class PerlValueStatic extends PerlValue {
-
+public final class PerlScalarValue extends PerlValue {
   @NotNull
-  private final String myValue;
+  private final PerlValue myValue;
 
-  private PerlValueStatic(@NotNull String value) {
+  public PerlScalarValue(@NotNull PerlValue value, @Nullable PerlValue bless) {
+    super(bless);
     myValue = value;
   }
 
-  public PerlValueStatic(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlScalarValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myValue = Objects.requireNonNull(dataStream.readNameString());
+    myValue = PerlValuesManager.deserialize(dataStream);
   }
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(myValue);
+    myValue.serialize(dataStream);
   }
 
   @Override
   protected int getSerializationId() {
-    return PerlValuesManager.STATIC_ID;
-  }
-
-  @NotNull
-  public String getValue() {
-    return myValue;
+    return PerlValuesManager.SCALAR_ID;
   }
 
   @NotNull
   @Override
-  PerlValueStatic createBlessedCopy(@NotNull PerlValue bless) {
-    return this;
-  }
-
-  @NotNull
-  @Override
-  protected Set<String> getSubNames(@NotNull Project project,
-                                    @NotNull GlobalSearchScope searchScope,
-                                    @Nullable Set<PerlValue> recursion) {
-    return Collections.singleton(myValue);
+  PerlValue createBlessedCopy(@NotNull PerlValue bless) {
+    return new PerlScalarValue(this.myValue, bless);
   }
 
   @NotNull
@@ -81,17 +64,25 @@ public final class PerlValueStatic extends PerlValue {
   protected Set<String> getNamespaceNames(@NotNull Project project,
                                           @NotNull GlobalSearchScope searchScope,
                                           @Nullable Set<PerlValue> recursion) {
-    return Collections.singleton(myValue);
+    return myValue.getNamespaceNames(project, searchScope, recursion);
+  }
+
+  @NotNull
+  @Override
+  protected Set<String> getSubNames(@NotNull Project project,
+                                    @NotNull GlobalSearchScope searchScope,
+                                    @Nullable Set<PerlValue> recursion) {
+    return myValue.getSubNames(project, searchScope, recursion);
   }
 
   @Override
   public boolean canRepresentNamespace(@Nullable String namespaceName) {
-    return myValue.equals(namespaceName);
+    return myValue.canRepresentNamespace(namespaceName);
   }
 
   @Override
   public boolean canRepresentSubName(@Nullable String subName) {
-    return myValue.equals(subName);
+    return myValue.canRepresentSubName(subName);
   }
 
   @Override
@@ -106,9 +97,9 @@ public final class PerlValueStatic extends PerlValue {
       return false;
     }
 
-    PerlValueStatic aStatic = (PerlValueStatic)o;
+    PerlScalarValue scalar = (PerlScalarValue)o;
 
-    return myValue.equals(aStatic.myValue);
+    return myValue.equals(scalar.myValue);
   }
 
   @Override
@@ -118,13 +109,14 @@ public final class PerlValueStatic extends PerlValue {
     return result;
   }
 
-  @NotNull
-  public static PerlValue create(@Nullable String value) {
-    return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlValueStatic(value));
-  }
-
   @Override
   public String toString() {
-    return myValue;
+    return "Scalar: " + myValue;
+  }
+
+  @NotNull
+  @Override
+  public String getPresentableValueText() {
+    return myValue.getPresentableText();
   }
 }

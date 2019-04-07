@@ -39,8 +39,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUndef.UNDEF_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUndefValue.UNDEF_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 /**
  * Parent for all perl values
@@ -263,7 +263,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return true iff {@code type}is null or {@link PerlValueUnknown#UNKNOWN_VALUE}
+   * @return true iff {@code type}is null or {@link PerlUnknownValue#UNKNOWN_VALUE}
    */
   @Contract("null->true")
   public static boolean isEmpty(@Nullable PerlValue type) {
@@ -271,7 +271,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return true iff {@code} type is not empty and not {@link PerlValueUnknown#UNKNOWN_VALUE}
+   * @return true iff {@code} type is not empty and not {@link PerlUnknownValue#UNKNOWN_VALUE}
    */
   @Contract("null->false")
   public static boolean isNotEmpty(@Nullable PerlValue type) {
@@ -298,7 +298,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value for {@code element} or {@link PerlValueUnknown#UNKNOWN_VALUE} if element is null/not applicable
+   * @return a value for {@code element} or {@link PerlUnknownValue#UNKNOWN_VALUE} if element is null/not applicable
    */
   @NotNull
   public static PerlValue fromNonNull(@Nullable PsiElement element) {

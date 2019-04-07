@@ -19,12 +19,12 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_MUL;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY_VALUE;
@@ -75,6 +75,6 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   default PerlValue getValue() {
     String returnClass = getReturnClass();
     return returnClass == null ? UNKNOWN_VALUE :
-           returnClass.equals(PACKAGE_ANY) ? PACKAGE_ANY_VALUE : PerlValueStatic.create(returnClass);
+           returnClass.equals(PACKAGE_ANY) ? PACKAGE_ANY_VALUE : PerlStaticValue.create(returnClass);
   }
 }

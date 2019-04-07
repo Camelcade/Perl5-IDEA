@@ -21,10 +21,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallObjectValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCallObject;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCallStatic;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PACKAGE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PACKAGE;
 
@@ -65,7 +65,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    PerlValue subNameValue = PerlValueStatic.create(getName());
+    PerlValue subNameValue = PerlStaticValue.create(getName());
     if (subNameValue == UNKNOWN_VALUE) {
       return UNKNOWN_VALUE;
     }
@@ -89,7 +89,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     if (isNestedCall) {
       boolean isSuper = PerlPackageUtil.isSUPER(explicitNamespaceName);
       if (hasExplicitNamespace && !isSuper) { // ackward $var->Foo::Bar::method->
-        return new PerlValueCallStatic(PerlValueStatic.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
+        return new PerlCallStaticValue(PerlStaticValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
       }
       if (!(derefExpression instanceof PerlDerefExpression)) {
         LOG.warn("Expected deref expression, got " + derefExpression);
@@ -98,31 +98,31 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
 
       PsiElement previousValue = ((PerlDerefExpression)derefExpression).getPreviousElement(parentElement.getPrevSibling());
       if (previousValue == null) { // first in chain
-        return new PerlValueCallStatic(
-          PerlValueStatic.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, false);
+        return new PerlCallStaticValue(
+          PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, false);
       }
       else if (PerlPsiUtil.isSelfShortcut(previousValue)) {
         // fixme this need to be moved to respective values
-        return new PerlValueCallObject(
-          PerlValueStatic.create(PerlPackageUtil.getContextNamespaceName(previousValue)),
+        return new PerlCallObjectValue(
+          PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(previousValue)),
           subNameValue, callArguments, isSuper);
       }
       else if (previousValue instanceof PerlValuableEntity) {
         PerlValue previousElementValue = PerlValue.fromNonNull(previousValue);
-        return new PerlValueCallObject(
+        return new PerlCallObjectValue(
           previousElementValue == UNKNOWN_VALUE ? PerlPackageUtil.UNIVERSAL_VALUE : previousElementValue, subNameValue, callArguments,
           isSuper);
       }
     }
     else if (isObjectMethod() && hasExplicitNamespace) {
-      return new PerlValueCallObject(PerlValueStatic.create(explicitNamespaceName), subNameValue, callArguments, false);
+      return new PerlCallObjectValue(PerlStaticValue.create(explicitNamespaceName), subNameValue, callArguments, false);
     }
     else if (hasExplicitNamespace) {
-      return new PerlValueCallStatic(PerlValueStatic.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
+      return new PerlCallStaticValue(PerlStaticValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
     }
     else {
-      return new PerlValueCallStatic(
-        PerlValueStatic.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, hasExplicitNamespace);
+      return new PerlCallStaticValue(
+        PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, hasExplicitNamespace);
     }
 
     return UNKNOWN_VALUE;

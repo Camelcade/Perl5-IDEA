@@ -24,9 +24,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlNamespaceItemProcessor;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCallStatic;
 import com.perl5.lang.perl.idea.completion.util.PerlSubCompletionUtil;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
@@ -45,12 +45,12 @@ public class PerlSubCallCompletionProvider extends CompletionProvider<Completion
     PsiElement method = position.getParent();
     assert method instanceof PsiPerlMethod;
 
-    PerlValueCall perlValue = PerlValueCall.from(method);
+    PerlCallValue perlValue = PerlCallValue.from(method);
     if (perlValue == null) {
       return;
     }
 
-    boolean isStatic = perlValue instanceof PerlValueCallStatic;
+    boolean isStatic = perlValue instanceof PerlCallStaticValue;
 
     perlValue.processTargetNamespaceElements(
       position.getProject(), position.getResolveScope(), position, new PerlNamespaceItemProcessor<PsiNamedElement>() {

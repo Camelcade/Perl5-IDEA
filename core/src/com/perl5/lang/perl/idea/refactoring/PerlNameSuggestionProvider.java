@@ -33,8 +33,8 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlNamesValidator;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -317,7 +317,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (method == null) {
       return recommendation;
     }
-    PerlValueCall callValue = PerlValueCall.from((PsiElement)method);
+    PerlCallValue callValue = PerlCallValue.from((PsiElement)method);
     if (callValue == null) {
       return recommendation;
     }

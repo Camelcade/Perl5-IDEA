@@ -24,8 +24,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseAttributeWrapperStub;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -166,7 +166,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     @NotNull PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod) {
     PairFunction<String, List<PerlValue>, PerlValue> defaultComputation = newMethod.getReturnValueComputation();
     newMethod.setReturnValueComputation(
-      (context, args) -> args.isEmpty() ? defaultComputation.fun(context, args) : PerlValueStatic.create(newMethod.getNamespaceName())
+      (context, args) -> args.isEmpty() ? defaultComputation.fun(context, args) : PerlStaticValue.create(newMethod.getNamespaceName())
     );
     return newMethod;
   }
@@ -238,7 +238,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       );
 
       if (key.equals(READER_KEY) && valueClass != null) {
-        PerlValue returnValue = PerlValueStatic.create(valueClass);
+        PerlValue returnValue = PerlStaticValue.create(valueClass);
         secondaryElement.setReturnValueComputation((a, b) -> returnValue);
       }
 
@@ -313,7 +313,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
         PerlSubAnnotations.tryToFindAnnotations(identifier, getParent())
       );
       if (valueClass != null) {
-        PerlValue returnValue = PerlValueStatic.create(valueClass);
+        PerlValue returnValue = PerlStaticValue.create(valueClass);
         newElement.setReturnValueComputation((a, b) -> returnValue);
       }
       result.add(newElement);

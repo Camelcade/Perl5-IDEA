@@ -20,16 +20,14 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
+public final class PerlUndefValue extends PerlValue {
+  public static final PerlUndefValue UNDEF_VALUE = new PerlUndefValue();
 
-public final class PerlValueUndef extends PerlValue {
-  public static final PerlValueUndef UNDEF_VALUE = new PerlValueUndef();
-
-  private PerlValueUndef() {
+  private PerlUndefValue() {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+  protected void serializeData(@NotNull StubOutputStream dataStream) {
   }
 
   @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -50,7 +48,7 @@ public final class PerlValueUndef extends PerlValue {
 
   @NotNull
   @Override
-  PerlValueUndef createBlessedCopy(@NotNull PerlValue bless) {
+  PerlUndefValue createBlessedCopy(@NotNull PerlValue bless) {
     return this;
   }
 

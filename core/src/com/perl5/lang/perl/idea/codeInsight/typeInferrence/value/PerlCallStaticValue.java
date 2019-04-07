@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -24,7 +25,9 @@ import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.PairProcessor;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.mro.PerlMro;
+import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,49 +35,46 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-public final class PerlValueCallObject extends PerlValueCall {
-  private final boolean myIsSuper;
+public final class PerlCallStaticValue extends PerlCallValue {
+  private final boolean myHasExplicitNamespace;
 
-  public PerlValueCallObject(@NotNull PerlValue namespaceNameValue,
+  public PerlCallStaticValue(@NotNull PerlValue namespaceNameValue,
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
-                             boolean isSuper) {
-    this(namespaceNameValue, subNameValue, arguments, isSuper, null);
+                             boolean hasExplicitNamespace) {
+    this(namespaceNameValue, subNameValue, arguments, hasExplicitNamespace, null);
   }
 
-  public PerlValueCallObject(@NotNull PerlValue namespaceNameValue,
+  public PerlCallStaticValue(@NotNull PerlValue namespaceNameValue,
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
-                             boolean isSuper,
+                             boolean hasExplicitNamespace,
                              @Nullable PerlValue bless) {
     super(namespaceNameValue, subNameValue, arguments, bless);
-    myIsSuper = isSuper;
+    myHasExplicitNamespace = hasExplicitNamespace;
   }
 
-  public PerlValueCallObject(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlCallStaticValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myIsSuper = dataStream.readBoolean();
+    myHasExplicitNamespace = dataStream.readBoolean();
   }
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     super.serializeData(dataStream);
-    dataStream.writeBoolean(myIsSuper);
+    dataStream.writeBoolean(myHasExplicitNamespace);
   }
 
   @Override
   protected int getSerializationId() {
-    return PerlValuesManager.CALL_OBJECT_ID;
+    return PerlValuesManager.CALL_STATIC_ID;
   }
+
 
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueCallObject(myNamespaceNameValue, mySubNameValue, myArguments, myIsSuper, bless);
-  }
-
-  public boolean isSuper() {
-    return myIsSuper;
+    return new PerlCallStaticValue(myNamespaceNameValue, mySubNameValue, myArguments, myHasExplicitNamespace, bless);
   }
 
   @Override
@@ -82,37 +82,52 @@ public final class PerlValueCallObject extends PerlValueCall {
                                                 @NotNull GlobalSearchScope searchScope,
                                                 @Nullable PsiElement contextElement,
                                                 @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
-    for (String contextNamespace : myNamespaceNameValue.getNamespaceNames(project, searchScope)) {
-      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
-        if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
-          return false;
-        }
+    for (String currentNamespaceName : myNamespaceNameValue.getNamespaceNames(project, searchScope)) {
+      if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
+        return false;
       }
     }
+
+    PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.getOriginalElement());
+    String namespaceName = containingNamespace == null ? null : containingNamespace.getPackageName();
+    if (!StringUtil.isEmpty(namespaceName)) {
+      processExportDescriptors(
+        project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
+    }
+
+
     return true;
   }
-
 
   @Override
   protected boolean processCallTargets(@NotNull Project project,
                                        @NotNull GlobalSearchScope searchScope,
-                                       @Nullable PsiElement contextElement, @NotNull Set<String> namespaceNames,
+                                       @Nullable PsiElement contextElement,
+                                       @NotNull Set<String> namespaceNames,
                                        @NotNull Set<String> subNames,
                                        @NotNull PairProcessor<String, ? super PsiNamedElement> processor) {
+
     for (String contextNamespace : namespaceNames) {
-      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
-        ProcessingContext processingContext = new ProcessingContext();
-        processingContext.processBuiltIns = false;
-        if (!processItemsInNamespace(project, searchScope, subNames,
-                                     it -> processor.process(contextNamespace, it),
-                                     currentNamespaceName, processingContext)) {
-          return false;
-        }
-        if (!processingContext.processAutoload) { // marker that we've got at least one result
-          break;
-        }
+      ProcessingContext processingContext = new ProcessingContext();
+      processingContext.processBuiltIns = !myHasExplicitNamespace;
+
+      if (!processItemsInNamespace(project, searchScope, subNames,
+                                   it -> processor.process(contextNamespace, it),
+                                   contextNamespace, processingContext)) {
+        return false;
       }
     }
+
+    if (!myHasExplicitNamespace && contextElement != null) {
+      PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.getOriginalElement());
+      String namespaceName = containingNamespace == null ? null : containingNamespace.getPackageName();
+      if (!StringUtil.isEmpty(namespaceName)) {
+        processExportDescriptorsItems(
+          project, searchScope, subNames, it -> processor.process(namespaceName, it),
+          PerlImportsProvider.getAllExportDescriptors(containingNamespace));
+      }
+    }
+
     return true;
   }
 
@@ -128,28 +143,28 @@ public final class PerlValueCallObject extends PerlValueCall {
       return false;
     }
 
-    PerlValueCallObject object = (PerlValueCallObject)o;
+    PerlCallStaticValue aStatic = (PerlCallStaticValue)o;
 
-    return myIsSuper == object.myIsSuper;
+    return myHasExplicitNamespace == aStatic.myHasExplicitNamespace;
   }
 
   @Override
   protected int computeHashCode() {
     int result = super.computeHashCode();
-    result = 31 * result + (myIsSuper ? 1 : 0);
+    result = 31 * result + (myHasExplicitNamespace ? 1 : 0);
     return result;
   }
 
   @Override
   public String toString() {
-    return myNamespaceNameValue + "->" + (myIsSuper ? "SUPER::" : "") + mySubNameValue + getArgumentsAsString();
+    return myNamespaceNameValue + "::" + mySubNameValue + getArgumentsAsString();
   }
 
   @NotNull
   @Override
   protected String getPresentableValueText() {
     return PerlBundle.message(
-      "perl.value.call.object.presentable",
+      "perl.value.call.static.presentable",
       myNamespaceNameValue.getPresentableText(),
       mySubNameValue.getPresentableText(),
       getPresentableArguments());

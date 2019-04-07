@@ -32,22 +32,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 
-public final class PerlValueOneOf extends PerlValue {
+public final class PerlOneOfValue extends PerlValue {
   @NotNull
   private final Set<PerlValue> myVariants;
 
-  private PerlValueOneOf(@NotNull Set<PerlValue> variants) {
+  private PerlOneOfValue(@NotNull Set<PerlValue> variants) {
     this(variants, null);
   }
 
-  public PerlValueOneOf(@NotNull Set<PerlValue> variants, @Nullable PerlValue bless) {
+  public PerlOneOfValue(@NotNull Set<PerlValue> variants, @Nullable PerlValue bless) {
     super(bless);
     myVariants = Collections.unmodifiableSet(new HashSet<>(variants));
   }
 
-  public PerlValueOneOf(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlOneOfValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     int elementsNumber = dataStream.readInt();
     Set<PerlValue> variants = new HashSet<>();
@@ -72,8 +72,8 @@ public final class PerlValueOneOf extends PerlValue {
 
   @NotNull
   @Override
-  PerlValueOneOf createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueOneOf(this.myVariants, bless);
+  PerlOneOfValue createBlessedCopy(@NotNull PerlValue bless) {
+    return new PerlOneOfValue(this.myVariants, bless);
   }
 
   @NotNull
@@ -143,7 +143,7 @@ public final class PerlValueOneOf extends PerlValue {
       return false;
     }
 
-    PerlValueOneOf of = (PerlValueOneOf)o;
+    PerlOneOfValue of = (PerlOneOfValue)o;
 
     return myVariants.equals(of.myVariants);
   }
@@ -178,8 +178,8 @@ public final class PerlValueOneOf extends PerlValue {
         return;
       }
 
-      if (variant instanceof PerlValueOneOf) {
-        myVariants.addAll(((PerlValueOneOf)variant).myVariants);
+      if (variant instanceof PerlOneOfValue) {
+        myVariants.addAll(((PerlOneOfValue)variant).myVariants);
       }
       else {
         myVariants.add(PerlValuesManager.intern(variant));
@@ -199,7 +199,7 @@ public final class PerlValueOneOf extends PerlValue {
         return myVariants.iterator().next();
       }
       else {
-        return myBless == null ? new PerlValueOneOf(myVariants) : new PerlValueOneOf(myVariants, myBless);
+        return myBless == null ? new PerlOneOfValue(myVariants) : new PerlOneOfValue(myVariants, myBless);
       }
     }
   }

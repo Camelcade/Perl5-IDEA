@@ -22,8 +22,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUndef.UNDEF_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUndefValue.UNDEF_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 /**
  * Manages {@link PerlValue} serialization and deserialization, manages serialization ID
@@ -64,21 +64,21 @@ public final class PerlValuesManager {
         dataStream.readBoolean();
         return UNDEF_VALUE;
       case STATIC_ID:
-        return new PerlValueStatic(dataStream);
+        return new PerlStaticValue(dataStream);
       case SCALAR_ID:
-        return new PerlValueScalar(dataStream);
+        return new PerlScalarValue(dataStream);
       case REFERENCE_ID:
-        return new PerlValueReference(dataStream);
+        return new PerlReferenceValue(dataStream);
       case ARRAY_ID:
-        return new PerlValueArray(dataStream);
+        return new PerlArrayValue(dataStream);
       case HASH_ID:
-        return new PerlValueHash(dataStream);
+        return new PerlHashValue(dataStream);
       case ONE_OF_ID:
-        return new PerlValueOneOf(dataStream);
+        return new PerlOneOfValue(dataStream);
       case CALL_OBJECT_ID:
-        return new PerlValueCallObject(dataStream);
+        return new PerlCallObjectValue(dataStream);
       case CALL_STATIC_ID:
-        return new PerlValueCallStatic(dataStream);
+        return new PerlCallStaticValue(dataStream);
       default:
         throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
     }

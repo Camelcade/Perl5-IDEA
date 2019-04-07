@@ -46,7 +46,7 @@ import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 /**
  * Represents a method call value
  */
-public abstract class PerlValueCall extends PerlValue {
+public abstract class PerlCallValue extends PerlValue {
   @NotNull
   protected final PerlValue myNamespaceNameValue;
   @NotNull
@@ -54,7 +54,7 @@ public abstract class PerlValueCall extends PerlValue {
   @NotNull
   protected final List<PerlValue> myArguments;
 
-  public PerlValueCall(@NotNull PerlValue namespaceNameValue,
+  public PerlCallValue(@NotNull PerlValue namespaceNameValue,
                        @NotNull PerlValue subNameValue,
                        @NotNull List<PerlValue> arguments,
                        @Nullable PerlValue bless) {
@@ -64,7 +64,7 @@ public abstract class PerlValueCall extends PerlValue {
     myArguments = Collections.unmodifiableList(new ArrayList<>(arguments));
   }
 
-  public PerlValueCall(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlCallValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myNamespaceNameValue = PerlValuesManager.deserialize(dataStream);
     mySubNameValue = PerlValuesManager.deserialize(dataStream);
@@ -125,7 +125,7 @@ public abstract class PerlValueCall extends PerlValue {
   @NotNull
   private PerlValue getReturnValue(@NotNull Project project, @NotNull GlobalSearchScope searchScope) {
     return PerlValuesCacheService.getInstance(project).getReturnValue(this, () -> {
-      PerlValueOneOf.Builder builder = new PerlValueOneOf.Builder();
+      PerlOneOfValue.Builder builder = new PerlOneOfValue.Builder();
       processCallTargets(project, searchScope, null, (namespace, it) -> {
         if (it instanceof PerlSub) {
           builder.addVariant(((PerlSub)it).getReturnValue(namespace, myArguments));
@@ -230,7 +230,7 @@ public abstract class PerlValueCall extends PerlValue {
       return false;
     }
 
-    PerlValueCall call = (PerlValueCall)o;
+    PerlCallValue call = (PerlCallValue)o;
 
     if (!myNamespaceNameValue.equals(call.myNamespaceNameValue)) {
       return false;
@@ -326,7 +326,7 @@ public abstract class PerlValueCall extends PerlValue {
 
   @Nullable
   @Contract("null->null")
-  public static PerlValueCall from(@Nullable PsiElement element) {
-    return ObjectUtils.tryCast(PerlValue.from(element), PerlValueCall.class);
+  public static PerlCallValue from(@Nullable PsiElement element) {
+    return ObjectUtils.tryCast(PerlValue.from(element), PerlCallValue.class);
   }
 }

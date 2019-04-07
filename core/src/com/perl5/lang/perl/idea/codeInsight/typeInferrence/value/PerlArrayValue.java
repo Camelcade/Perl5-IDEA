@@ -24,20 +24,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
-public final class PerlValueArray extends PerlValue {
+public final class PerlArrayValue extends PerlValue {
   @NotNull
   private final PerlValue myElementsType;
 
-  public PerlValueArray(@NotNull PerlValue elementsType) {
-    this(elementsType, null);
-  }
-
-  public PerlValueArray(@NotNull PerlValue elementsType, @Nullable PerlValue bless) {
+  public PerlArrayValue(@NotNull PerlValue elementsType, @Nullable PerlValue bless) {
     super(bless);
     myElementsType = elementsType;
   }
 
-  public PerlValueArray(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlArrayValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myElementsType = PerlValuesManager.deserialize(dataStream);
   }
@@ -55,7 +51,7 @@ public final class PerlValueArray extends PerlValue {
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueArray(this.myElementsType, bless);
+    return new PerlArrayValue(this.myElementsType, bless);
   }
 
   @NotNull
@@ -75,7 +71,7 @@ public final class PerlValueArray extends PerlValue {
       return false;
     }
 
-    PerlValueArray array = (PerlValueArray)o;
+    PerlArrayValue array = (PerlArrayValue)o;
 
     return myElementsType.equals(array.myElementsType);
   }

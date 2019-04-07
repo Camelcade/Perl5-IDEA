@@ -51,7 +51,7 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener {
     project.getMessageBus().connect().subscribe(PsiModificationTracker.TOPIC, this);
   }
 
-  public PerlValue getReturnValue(@NotNull PerlValueCall value, @NotNull Supplier<? extends PerlValue> supplier) {
+  public PerlValue getReturnValue(@NotNull PerlCallValue value, @NotNull Supplier<? extends PerlValue> supplier) {
     myReturnValueRequest.incrementAndGet();
     return myRetrunValuesMap.computeIfAbsent(value, it -> {
       myReturnValueBuild.incrementAndGet();

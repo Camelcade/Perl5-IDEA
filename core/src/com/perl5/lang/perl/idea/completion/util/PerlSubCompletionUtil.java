@@ -24,8 +24,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -132,7 +132,7 @@ public class PerlSubCompletionUtil {
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
-        PerlValueCall methodValue = PerlValueCall.from((PsiElement)method);
+        PerlCallValue methodValue = PerlCallValue.from((PsiElement)method);
         if (methodValue == null) {
           super.visitMethod(method);
           return;

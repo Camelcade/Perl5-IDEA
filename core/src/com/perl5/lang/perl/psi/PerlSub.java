@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 
 public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
@@ -94,7 +94,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    *
    * @param contextPackage package this sub been invoked from, useful to return $self
    * @param arguments      invocation arguments
-   * @return type of return value if can be calculated, or {@link PerlValueUnknown#UNKNOWN_VALUE}
+   * @return type of return value if can be calculated, or {@link PerlUnknownValue#UNKNOWN_VALUE}
    */
   @NotNull
   default PerlValue getReturnValue(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
@@ -108,7 +108,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
   @NotNull
   default PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
     if (contextPackage != null && "new".equals(getSubName())) {
-      return PerlValueStatic.create(contextPackage);
+      return PerlStaticValue.create(contextPackage);
     }
     return UNKNOWN_VALUE;
   }
@@ -121,7 +121,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
-    return PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue) ? PerlValueStatic.create(contextPackage) : returnValue;
+    return PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue) ? PerlStaticValue.create(contextPackage) : returnValue;
   }
 
   default boolean isDeprecated() {

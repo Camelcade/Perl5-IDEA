@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueCall;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallValue;
 import com.perl5.lang.perl.psi.PerlMethodCall;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +43,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
       return ResolveResult.EMPTY_ARRAY;
     }
 
-    PerlValueCall perlValue = PerlValueCall.from(parent);
+    PerlCallValue perlValue = PerlCallValue.from(parent);
     if (perlValue == null) {
       return ResolveResult.EMPTY_ARRAY;
     }

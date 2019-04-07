@@ -25,8 +25,8 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
@@ -42,7 +42,7 @@ import javax.swing.*;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueUnknown.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 29.09.2015.
@@ -124,7 +124,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     }
     PerlVariableDeclarationExpr declaration = getPerlDeclaration();
     return declaration == null ? UNKNOWN_VALUE :
-           PerlValueStatic.create(declaration.getDeclarationType());
+           PerlStaticValue.create(declaration.getDeclarationType());
   }
 
   @Nullable

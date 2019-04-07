@@ -20,16 +20,14 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
+public final class PerlUnknownValue extends PerlValue {
+  public static final PerlUnknownValue UNKNOWN_VALUE = new PerlUnknownValue();
 
-public final class PerlValueUnknown extends PerlValue {
-  public static final PerlValueUnknown UNKNOWN_VALUE = new PerlValueUnknown();
-
-  private PerlValueUnknown() {
+  private PerlUnknownValue() {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+  protected void serializeData(@NotNull StubOutputStream dataStream) {
   }
 
   @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
@@ -50,7 +48,7 @@ public final class PerlValueUnknown extends PerlValue {
 
   @NotNull
   @Override
-  PerlValueUnknown createBlessedCopy(@NotNull PerlValue bless) {
+  PerlUnknownValue createBlessedCopy(@NotNull PerlValue bless) {
     return this;
   }
 

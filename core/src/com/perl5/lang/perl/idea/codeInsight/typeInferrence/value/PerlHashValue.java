@@ -24,20 +24,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
-public final class PerlValueHash extends PerlValue {
+public final class PerlHashValue extends PerlValue {
   @NotNull
   private final PerlValue myValuesType;
 
-  public PerlValueHash(@NotNull PerlValue valuesType) {
-    this(valuesType, null);
-  }
-
-  public PerlValueHash(@NotNull PerlValue valuesType, @Nullable PerlValue bless) {
+  public PerlHashValue(@NotNull PerlValue valuesType, @Nullable PerlValue bless) {
     super(bless);
     myValuesType = valuesType;
   }
 
-  public PerlValueHash(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlHashValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myValuesType = PerlValuesManager.deserialize(dataStream);
   }
@@ -60,7 +56,7 @@ public final class PerlValueHash extends PerlValue {
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlValueHash(this.myValuesType, bless);
+    return new PerlHashValue(this.myValuesType, bless);
   }
 
   @Override
@@ -75,7 +71,7 @@ public final class PerlValueHash extends PerlValue {
       return false;
     }
 
-    PerlValueHash hash = (PerlValueHash)o;
+    PerlHashValue hash = (PerlHashValue)o;
 
     return myValuesType.equals(hash.myValuesType);
   }

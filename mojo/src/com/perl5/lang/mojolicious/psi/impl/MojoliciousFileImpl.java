@@ -21,8 +21,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValueStatic;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
@@ -98,6 +98,6 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
   @NotNull
   @Override
   public PerlValue getSelfType() {
-    return PerlValueStatic.create(MOJO_CONTROLLER_NS); // fixme this is a hack for #1497
+    return PerlStaticValue.create(MOJO_CONTROLLER_NS); // fixme this is a hack for #1497
   }
 }
