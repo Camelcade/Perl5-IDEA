@@ -1,0 +1,11 @@
+sub somesub{
+  my $search_dir = shift;
+  my $other_dir;
+  # this body should be long to be lazy parsable
+  while (1) {
+    $other_dir = dirname($search_dir);
+    $search_dir = $other_dir;
+    $other_dir = 'Foo::Bar'
+  }
+  $search_dir;
+}

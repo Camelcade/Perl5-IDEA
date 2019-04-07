@@ -1,0 +1,9 @@
+<caret>sub somesub{
+  my $search_dir = shift;
+  while (1) {
+    $search_dir = dirname($search_dir);
+  }
+  $search_dir;
+}
+-------------------------------------------------------
+OneOf: [main::dirname(main::shift()), main::shift()]

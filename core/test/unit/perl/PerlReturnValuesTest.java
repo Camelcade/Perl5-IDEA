@@ -27,6 +27,10 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/returnValues";
   }
 
+  public void testLoopSimple() {doTest();}
+
+  public void testLoopComplex() {doTest();}
+
   public void testSubAssignParallel() {doTest();}
 
   public void testSubReAssign() {doTest();}

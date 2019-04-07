@@ -240,6 +240,9 @@ public class PerlResolveUtil {
       if (!(currentInstruction instanceof PerlAssignInstruction)) {
         return Objects.equals(finalStopElement, currentInstruction.getElement()) ? CONTINUE : NEXT;
       }
+      if (currentInstruction.num() > currentInstructionIndex) {
+        return NEXT;
+      }
       PsiElement currentElement = ((PerlAssignInstruction)currentInstruction).getLeftSide();
       if (!(currentElement instanceof PerlVariable) || ((PerlVariable)currentElement).getActualType() != actualType) {
         return NEXT;
