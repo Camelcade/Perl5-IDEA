@@ -1,0 +1,4 @@
+sub _current_route {
+  return '' unless my $route = shift->match->endpoint;
+  return @_ ? $route->name eq shift : $route->name;
+}

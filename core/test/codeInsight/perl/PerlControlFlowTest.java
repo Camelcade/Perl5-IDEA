@@ -24,6 +24,10 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testMissingVariable2() {doTest();}
+
+  public void testMissingVariable() {doTest();}
+
   public void testMyVariable() {doTest();}
 
   public void testMyVariableAssignment() {doTest();}

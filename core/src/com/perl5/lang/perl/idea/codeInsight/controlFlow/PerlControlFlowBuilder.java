@@ -569,13 +569,13 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         super.visitTrenarExpr(o);
         return;
       }
-      startNodeSmart(children[0]);
+      children[0].accept(this);
       Instruction conditionInstruction = prevInstruction;
       startConditionalNode(o, children[0], true);
-      startNodeSmart(children[1]);
+      children[1].accept(this);
       Instruction trueInstruction = prevInstruction;
       prevInstruction = conditionInstruction;
-      startNodeSmart(children[2]);
+      children[2].accept(this);
       startNodeSmart(o);
       addEdge(trueInstruction, prevInstruction);
     }
