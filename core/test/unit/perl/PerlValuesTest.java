@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package resolve.perl;
+package unit.perl;
 
 import base.PerlLightTestCase;
 
 /**
  * Created by hurricup on 02.04.2016.
  */
-public class PerlVariableTypesTest extends PerlLightTestCase {
+public class PerlValuesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/resolve/perl/variableTypes";
+    return "testData/unit/perl/perlValues";
   }
 
   public void testBuiltIn() {doTest();}
