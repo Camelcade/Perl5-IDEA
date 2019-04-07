@@ -38,9 +38,8 @@ public class PerlDeprecatedInspection extends PerlInspection {
         PsiElement container = o.getParent();
 
         if (!(container instanceof PerlSubElement)) {
-          PerlResolveUtil.processElementReferencesResolveResults(targetPair -> {
-            if (targetPair.first instanceof PerlDeprecatable &&
-                ((PerlDeprecatable)targetPair.first).isDeprecated()) {
+          PerlResolveUtil.processElementReferencesResolveResults((psiElement, reference) -> {
+            if (psiElement instanceof PerlDeprecatable && ((PerlDeprecatable)psiElement).isDeprecated()) {
               markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
               return false;
             }
@@ -59,19 +58,19 @@ public class PerlDeprecatedInspection extends PerlInspection {
             }
           }
 
-          PerlResolveUtil.processElementReferencesResolveResults(targetPair -> {
+          PerlResolveUtil.processElementReferencesResolveResults((psiElement, reference) -> {
             String message = null;
-            if (targetPair.first instanceof PerlNamespaceDefinitionElement &&
-                ((PerlNamespaceDefinitionElement)targetPair.first).isDeprecated()) {
+            if (psiElement instanceof PerlNamespaceDefinitionElement &&
+                ((PerlNamespaceDefinitionElement)psiElement).isDeprecated()) {
               message = PerlBundle.message("perl.deprecated.namespace");
             }
-            else if (targetPair.first instanceof PerlVariableDeclarationElement &&
-                     ((PerlVariableDeclarationElement)targetPair.first)
+            else if (psiElement instanceof PerlVariableDeclarationElement &&
+                     ((PerlVariableDeclarationElement)psiElement)
                        .isDeprecated()) {
               message = PerlBundle.message("perl.deprecated.variable");
             }
             if (message != null) {
-              holder.registerProblem(targetPair.second, message,
+              holder.registerProblem(reference, message,
                                      ProblemHighlightType.LIKE_DEPRECATED);
             }
             return true;

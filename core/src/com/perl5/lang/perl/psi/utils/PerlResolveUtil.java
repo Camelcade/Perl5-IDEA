@@ -106,7 +106,7 @@ public class PerlResolveUtil {
    * @return processor result
    */
   @SuppressWarnings("UnusedReturnValue")
-  public static boolean processElementReferencesResolveResults(@NotNull Processor<Pair<PsiElement, PsiReference>> processor,
+  public static boolean processElementReferencesResolveResults(@NotNull PairProcessor<PsiElement, PsiReference> processor,
                                                                PsiElement... elements) {
     if (elements == null || elements.length == 0) {
       return true;
@@ -129,7 +129,7 @@ public class PerlResolveUtil {
    * @param references references to iterate
    * @return processor result
    */
-  public static boolean processResolveElements(@NotNull Processor<Pair<PsiElement, PsiReference>> processor,
+  public static boolean processResolveElements(@NotNull PairProcessor<PsiElement, PsiReference> processor,
                                                @Nullable PsiReference... references) {
     if (references == null || references.length == 0) {
       return true;
@@ -139,14 +139,14 @@ public class PerlResolveUtil {
       if (reference instanceof PsiPolyVariantReference) {
         for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
           PsiElement targetElement = resolveResult.getElement();
-          if (targetElement != null && !processor.process(Pair.create(targetElement, reference))) {
+          if (targetElement != null && !processor.process(targetElement, reference)) {
             return false;
           }
         }
       }
       else if (reference != null) {
         PsiElement targetElement = reference.resolve();
-        if (targetElement != null && !processor.process(Pair.create(targetElement, reference))) {
+        if (targetElement != null && !processor.process(targetElement, reference)) {
           return false;
         }
       }
