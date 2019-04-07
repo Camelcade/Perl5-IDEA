@@ -91,11 +91,13 @@ public class PerlResolveUtil {
     if (variable.getExplicitNamespaceName() != null) {
       return null;
     }
-    PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
-    if (PerlResolveUtil.treeWalkUp(variable, variableProcessor)) {
-      variableProcessor.processBuiltIns();
-    }
-    return variableProcessor.getResult();
+    return CachedValuesManager.getCachedValue(variable, () -> {
+      PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
+      if (PerlResolveUtil.treeWalkUp(variable, variableProcessor)) {
+        variableProcessor.processBuiltIns();
+      }
+      return CachedValueProvider.Result.create(variableProcessor.getResult(), variable.getContainingFile());
+    });
   }
 
   /**
