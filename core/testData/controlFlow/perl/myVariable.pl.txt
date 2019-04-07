@@ -1,0 +1,5 @@
+0(1) element: null (InstructionImpl)
+1(2) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
+2(3) element: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) (InstructionImpl)
+3(4) element: PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL) (InstructionImpl)
+4() element: null (InstructionImpl)

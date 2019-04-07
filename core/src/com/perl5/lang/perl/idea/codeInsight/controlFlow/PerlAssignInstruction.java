@@ -23,30 +23,27 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PerlAssignInstruction extends InstructionImpl {
-  @NotNull
-  private final PsiElement myLeftSide;
   @NotNull
   private final PerlAssignValueDescriptor myRightSide;
   @NotNull
   private final PsiElement myOperation;
 
   public PerlAssignInstruction(@NotNull ControlFlowBuilder builder,
-                               @Nullable PsiElement element,
                                @NotNull PsiElement leftSide,
                                @NotNull PerlAssignValueDescriptor rightSide,
                                @NotNull PsiElement operationElement) {
-    super(builder, element);
-    myLeftSide = leftSide;
+    super(builder, leftSide);
     myRightSide = rightSide;
     myOperation = operationElement;
   }
 
   @NotNull
   public PsiElement getLeftSide() {
-    return myLeftSide;
+    // you can't create this instruction with nullable element
+    //noinspection ConstantConditions
+    return myElement;
   }
 
   @NotNull
@@ -67,6 +64,6 @@ public class PerlAssignInstruction extends InstructionImpl {
   @NotNull
   @Override
   public String getElementPresentation() {
-    return "assign " + myLeftSide + " " + getOperationType() + " " + myRightSide;
+    return "assign " + myElement + " " + getOperationType() + " " + myRightSide;
   }
 }

@@ -633,10 +633,11 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
         }
 
         rightSide.accept(this);
+        leftSide.accept(this);
         for (PsiElement target : PerlAssignExpression.flattenAssignmentPart(leftSide)) {
           PerlAssignValueDescriptor rightPartDescriptor =
             ObjectUtils.notNull(o.getRightPartOfAssignment(target), PerlAssignValueDescriptor.EMPTY);
-          addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, o, target, rightPartDescriptor, operator));
+          addNodeAndCheckPending(new PerlAssignInstruction(PerlControlFlowBuilder.this, target, rightPartDescriptor, operator));
         }
         rightSide = leftSide;
       }

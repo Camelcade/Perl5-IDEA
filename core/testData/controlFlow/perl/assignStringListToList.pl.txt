@@ -2,5 +2,6 @@
 1(2) element: PsiPerlStringBareImpl(Perl5: STRING_BARE) (InstructionImpl)
 2(3) element: PsiPerlStringBareImpl(Perl5: STRING_BARE) (InstructionImpl)
 3(4) element: PsiPerlStringListImpl(Perl5: STRING_LIST) (InstructionImpl)
-4(5) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: = PsiPerlStringListImpl(Perl5: STRING_LIST) (PerlAssignInstruction)
-5() element: null (InstructionImpl)
+4(5) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
+5(6) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: = PsiPerlStringListImpl(Perl5: STRING_LIST) (PerlAssignInstruction)
+6() element: null (InstructionImpl)

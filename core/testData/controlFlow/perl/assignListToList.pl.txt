@@ -1,5 +1,6 @@
 0(1) element: null (InstructionImpl)
 1(2) element: PsiPerlStringBareImpl(Perl5: STRING_BARE) (InstructionImpl)
 2(3) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
-3(4) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: = PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) (PerlAssignInstruction)
-4() element: null (InstructionImpl)
+3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
+4(5) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: = PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) (PerlAssignInstruction)
+5() element: null (InstructionImpl)

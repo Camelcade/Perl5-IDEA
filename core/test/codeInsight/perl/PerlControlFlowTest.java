@@ -24,6 +24,20 @@ public class PerlControlFlowTest extends PerlLightTestCase {
     return "testData/controlFlow/perl";
   }
 
+  public void testMyVariable() {doTest();}
+
+  public void testMyVariableAssignment() {doTest();}
+
+  public void testMyVariableAssignmentInParens() {doTest();}
+
+  public void testDerefWithCodeRef() {doTest();}
+
+  public void testDerefWithVariableFirst() {doTest();}
+
+  public void testDerefWithVariableLast() {doTest();}
+
+  public void testDerefWithVariables() {doTest();}
+
   public void testSubStringOrCall() {doTest();}
 
   public void testAssignListToList() {doTest();}
