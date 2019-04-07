@@ -97,7 +97,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   @NotNull
   private PerlValue computeReturnValueFromCode() {
-    PsiPerlBlock subBlock = getBlock();
+    PsiPerlBlock subBlock = getSubDefinitionBody();
     if (subBlock == null) {
       return UNKNOWN_VALUE;
     }
