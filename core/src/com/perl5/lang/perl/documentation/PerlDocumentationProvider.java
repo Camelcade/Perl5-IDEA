@@ -81,7 +81,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return getQuickNavigateInfo(element, originalElement.getParent());
     }
     if (originalElement instanceof PerlValuableEntity) {
-      return PerlValue.from((PerlValuableEntity)originalElement).getPresentableText();
+      return PerlValue.from((PerlValuableEntity)originalElement.getOriginalElement()).getPresentableText();
     }
     return super.getQuickNavigateInfo(element, originalElement);
   }
