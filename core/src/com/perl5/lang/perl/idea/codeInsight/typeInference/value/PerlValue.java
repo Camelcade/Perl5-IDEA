@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
+package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
@@ -30,7 +30,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlOneOfValue.Builder;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue.Builder;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlReturnExpr;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
@@ -45,8 +45,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUndefValue.UNDEF_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 /**

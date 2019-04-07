@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
+package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -34,7 +34,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 public final class PerlOneOfValue extends PerlValue {
   @NotNull

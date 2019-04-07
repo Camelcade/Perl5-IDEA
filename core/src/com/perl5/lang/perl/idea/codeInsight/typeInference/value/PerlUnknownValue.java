@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
+package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubOutputStream;
-import com.perl5.lang.perl.lexer.PerlBaseLexer;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
-public final class PerlUndefValue extends PerlValue {
-  public static final PerlUndefValue UNDEF_VALUE = new PerlUndefValue();
+public final class PerlUnknownValue extends PerlValue {
+  public static final PerlUnknownValue UNKNOWN_VALUE = new PerlUnknownValue();
 
-  private PerlUndefValue() {
+  private PerlUnknownValue() {
   }
 
   @Override
@@ -33,7 +33,7 @@ public final class PerlUndefValue extends PerlValue {
   @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
   @Override
   public boolean equals(Object o) {
-    return o == UNDEF_VALUE;
+    return o == UNKNOWN_VALUE;
   }
 
   @Override
@@ -43,23 +43,23 @@ public final class PerlUndefValue extends PerlValue {
 
   @Override
   protected int getSerializationId() {
-    return PerlValuesManager.UNDEF_ID;
+    return PerlValuesManager.UNKNOWN_ID;
   }
 
   @NotNull
   @Override
-  PerlUndefValue createBlessedCopy(@NotNull PerlValue bless) {
+  PerlUnknownValue createBlessedCopy(@NotNull PerlValue bless) {
     return this;
   }
 
   @NotNull
   @Override
-  protected String getPresentableValueText() {
-    return PerlBaseLexer.STRING_UNDEF;
+  public String getPresentableValueText() {
+    return PerlBundle.message("perl.value.unknown.presentable");
   }
 
   @Override
   public String toString() {
-    return "UNDEF_VALUE";
+    return "UNKNOWN_VALUE";
   }
 }

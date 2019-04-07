@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlCallValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.psi.PerlMethodCall;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import org.jetbrains.annotations.NotNull;

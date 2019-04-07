@@ -19,12 +19,12 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlStaticValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_MUL;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_ANY_VALUE;
@@ -38,7 +38,7 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
    * fixme this is raw, should be a type
    *
    * @return psi element or null
-   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue}
+   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue}
    */
   @Deprecated
   @Nullable
@@ -47,7 +47,7 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   }
 
   /**
-   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue}
+   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue}
    */
   @Deprecated
   @Nullable

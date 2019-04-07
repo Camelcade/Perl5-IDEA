@@ -18,8 +18,8 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationType;
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 08.08.2016.

@@ -17,14 +17,14 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMember {

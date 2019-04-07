@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StringStubIndexExtension;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 
 /**
  * Created by hurricup on 13.11.2016.

@@ -36,7 +36,7 @@ import com.intellij.ui.SpeedSearchComparator;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;

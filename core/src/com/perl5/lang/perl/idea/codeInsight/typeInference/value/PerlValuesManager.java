@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
+package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.containers.WeakInterner;
@@ -22,8 +22,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUndefValue.UNDEF_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 /**
  * Manages {@link PerlValue} serialization and deserialization, manages serialization ID
