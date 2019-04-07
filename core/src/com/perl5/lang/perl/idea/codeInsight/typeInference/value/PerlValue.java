@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.RecursionManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -56,6 +58,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
  * Parent for all perl values
  */
 public abstract class PerlValue {
+  private static final Logger LOG = Logger.getInstance(PerlValue.class);
   private static final TokenSet ONE_OF_VALUES = TokenSet.create(
     AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR, PARENTHESISED_EXPR
   );
@@ -316,6 +319,7 @@ public abstract class PerlValue {
     if (element == null) {
       return null;
     }
+    element = element.getOriginalElement();
     if (element instanceof PerlReturnExpr) {
       PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
       return expr == null ? UNDEF_VALUE : from(expr);
@@ -344,8 +348,12 @@ public abstract class PerlValue {
     return CachedValuesManager.getCachedValue(
       element, () -> {
         //noinspection deprecation
-        PerlValue perlValue = PerlValuesManager.intern(element.computePerlValue());
-        return CachedValueProvider.Result.create(perlValue, element.getContainingFile());
+        PerlValue computedValue = RecursionManager.doPreventingRecursion(element, true, element::computePerlValue);
+        if (computedValue == null) {
+          LOG.error("Recursion while computing value of " + element + " from " + PsiUtilCore.getVirtualFile(element));
+          computedValue = UNKNOWN_VALUE;
+        }
+        return CachedValueProvider.Result.create(PerlValuesManager.intern(computedValue), element.getContainingFile());
       });
   }
 
