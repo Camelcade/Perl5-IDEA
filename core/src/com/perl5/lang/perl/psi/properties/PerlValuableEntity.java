@@ -27,6 +27,8 @@ public interface PerlValuableEntity extends PsiElement {
   /**
    * @return computes a {@link PerlValue} describing this entity
    * @deprecated do not use this method directly, use {@link PerlValue#from(PsiElement)}
+   * @implSpec implementations MUST NOT cache anything. Implementation MUST NOT use resolve. This method invoked on indexing phase and
+   * indexes are not available.
    */
   @NotNull
   @Deprecated

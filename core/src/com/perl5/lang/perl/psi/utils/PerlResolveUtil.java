@@ -16,24 +16,45 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.codeInsight.controlflow.ControlFlowUtil;
+import com.intellij.codeInsight.controlflow.Instruction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.util.Pair;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.util.Processor;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
+import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
+import static com.intellij.codeInsight.controlflow.ControlFlowUtil.Operation.CONTINUE;
+import static com.intellij.codeInsight.controlflow.ControlFlowUtil.Operation.NEXT;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+
 /**
  * Created by hurricup on 17.02.2016.
  */
 public class PerlResolveUtil {
+  private static final Logger LOG = Logger.getInstance(PerlResolveUtil.class);
+
   public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor) {
     PsiElement lastParent = null;
     PsiElement run = place;
@@ -154,5 +175,86 @@ public class PerlResolveUtil {
       }
     }
     return true;
+  }
+
+  /**
+   * Attempts to infer a variable type from control flow graph and previous assignments
+   *
+   * @return an inferred value, probably unknown
+   * @see PerlControlFlowBuilder
+   * @see PerlValue
+   */
+  @NotNull
+  public static PerlValue inferVariableValue(@NotNull PerlVariable variable) {
+    PerlVariableDeclarationElement lexicalDeclaration = getLexicalDeclaration(variable);
+
+    PsiElement stopElement = lexicalDeclaration;
+    PerlLexicalScope perlLexicalScope;
+    if (lexicalDeclaration instanceof PerlImplicitVariableDeclaration) {
+      PsiElement declarationContext = lexicalDeclaration.getContext();
+      if (declarationContext == null) {
+        perlLexicalScope = ObjectUtils.tryCast(variable.getContainingFile(), PerlFile.class);
+      }
+      else {
+        stopElement = declarationContext;
+        perlLexicalScope = PsiTreeUtil.getParentOfType(declarationContext, PerlLexicalScope.class, false);
+      }
+    }
+    else {
+      // fixme we probably should check containing file context
+      perlLexicalScope = lexicalDeclaration == null
+                         ? ObjectUtils.tryCast(variable.getContainingFile(), PerlFile.class)
+                         : PsiTreeUtil.getParentOfType(lexicalDeclaration, PerlLexicalScope.class);
+    }
+    if (perlLexicalScope == null) {
+      LOG.error("Unable to find lexical scope for:" +
+                variable.getClass() +
+                " at " +
+                variable.getTextOffset() +
+                " in " +
+                PsiUtilCore.getVirtualFile(variable));
+      return UNKNOWN_VALUE;
+    }
+
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(perlLexicalScope).getInstructions();
+    int currentInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(instructions, variable);
+    if (currentInstructionIndex < 0) {
+      if (!Objects.equals(variable.getContainingFile(), perlLexicalScope.getContainingFile())) {
+        // fixme should handle getContext. One of this item in the generated file
+        return UNKNOWN_VALUE;
+      }
+      LOG.error("Unable to find an instruction for " +
+                variable.getText() + "; " +
+                variable.getTextRange() + "; " +
+                PsiUtilCore.getVirtualFile(variable));
+      return UNKNOWN_VALUE;
+    }
+    PerlOneOfValue.Builder valueBuilder = new PerlOneOfValue.Builder();
+
+    String variableName = variable.getName();
+    String namespaceName = variable.getExplicitNamespaceName();
+    PerlVariableType actualType = variable.getActualType();
+    PsiElement finalStopElement = stopElement;
+
+    ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
+      if (!(currentInstruction instanceof PerlAssignInstruction)) {
+        return Objects.equals(finalStopElement, currentInstruction.getElement()) ? CONTINUE : NEXT;
+      }
+      PsiElement currentElement = ((PerlAssignInstruction)currentInstruction).getLeftSide();
+      if (!(currentElement instanceof PerlVariable) || ((PerlVariable)currentElement).getActualType() != actualType) {
+        return NEXT;
+      }
+      if (!Objects.equals(variableName, ((PerlVariable)currentElement).getName())) {
+        return NEXT;
+      }
+      String explicitNamespaceName = ((PerlVariable)currentElement).getExplicitNamespaceName();
+      if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
+        return NEXT;
+      }
+      valueBuilder.addVariant(PerlValue.from(PerlContextType.from(variable), ((PerlAssignInstruction)currentInstruction).getRightSide()));
+      return CONTINUE;
+    });
+
+    return valueBuilder.build();
   }
 }

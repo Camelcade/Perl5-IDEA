@@ -506,40 +506,6 @@ public class PerlPsiUtil implements PerlElementTypes {
     }
   }
 
-  /**
-   * Recursively processes all elements starting element if they are in specified range
-   *
-   * @param element   startElement
-   * @param processor processor
-   * @param range     limitation range
-   * @return false if need to stop
-   */
-
-  public static boolean processElementsInRangeBackward(PsiElement element,
-                                                       @NotNull TextRange range,
-                                                       @NotNull final PsiElementProcessor<PsiElement> processor) {
-    if (element == null) {
-      return true;
-    }
-
-    TextRange elementRange = element.getNode().getTextRange();
-    if (range.contains(elementRange)) {
-      if (!processor.execute(element)) {
-        return false;
-      }
-    }
-    if (range.intersects(elementRange)) {
-      PsiElement run = element.getLastChild();
-      while (run != null) {
-        if (!processElementsInRangeBackward(run, range, processor)) {
-          return false;
-        }
-        run = run.getPrevSibling();
-      }
-    }
-    return true;
-  }
-
   @NotNull
   public static List<PerlAnnotation> collectAnnotations(@Nullable PsiElement element) {
     if (element == null) {

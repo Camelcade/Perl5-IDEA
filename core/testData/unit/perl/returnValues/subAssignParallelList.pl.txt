@@ -1,0 +1,6 @@
+sub so<caret>me{
+  my( $var, $othervar) = @_;
+  $var;
+}
+-------------------------------------------------------
+UNKNOWN_VALUE

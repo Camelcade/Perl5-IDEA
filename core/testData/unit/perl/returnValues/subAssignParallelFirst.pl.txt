@@ -1,0 +1,6 @@
+sub so<caret>me{
+  my( $var ) = (someothersub(), 'Foo::Bar');
+  $var;
+}
+-------------------------------------------------------
+main::someothersub()
