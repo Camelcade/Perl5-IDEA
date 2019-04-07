@@ -51,28 +51,42 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener {
     project.getMessageBus().connect().subscribe(PsiModificationTracker.TOPIC, this);
   }
 
-  public PerlValue getReturnValue(@NotNull PerlCallValue value, @NotNull Supplier<? extends PerlValue> supplier) {
+  public PerlValue getReturnValue(@NotNull PerlCallValue callValue, @NotNull Supplier<? extends PerlValue> supplier) {
     myReturnValueRequest.incrementAndGet();
-    return myRetrunValuesMap.computeIfAbsent(value, it -> {
-      myReturnValueBuild.incrementAndGet();
-      return supplier.get();
-    });
+    PerlValue value = myRetrunValuesMap.get(callValue);
+    if (value != null) {
+      return value;
+    }
+    myReturnValueBuild.incrementAndGet();
+    value = supplier.get();
+    myRetrunValuesMap.putIfAbsent(callValue, value);
+    return value;
   }
 
+  @SuppressWarnings("Duplicates")
   public Set<String> getSubsNames(@NotNull PerlValue value, @NotNull Supplier<? extends Set<String>> supplier) {
     mySubsRequest.incrementAndGet();
-    return mySubsNamesMap.computeIfAbsent(value, it -> {
-      mySubsBuild.incrementAndGet();
-      return supplier.get();
-    });
+    Set<String> subNames = mySubsNamesMap.get(value);
+    if (subNames != null) {
+      return subNames;
+    }
+    mySubsBuild.incrementAndGet();
+    subNames = supplier.get();
+    mySubsNamesMap.putIfAbsent(value, subNames);
+    return subNames;
   }
 
+  @SuppressWarnings("Duplicates")
   public Set<String> getNamespaceNames(@NotNull PerlValue value, @NotNull Supplier<? extends Set<String>> supplier) {
     myNamespaceRequest.incrementAndGet();
-    return myNamespacesMaps.computeIfAbsent(value, it -> {
-      myNamespaceBuild.incrementAndGet();
-      return supplier.get();
-    });
+    Set<String> namespacesNames = myNamespacesMaps.get(value);
+    if (namespacesNames != null) {
+      return namespacesNames;
+    }
+    myNamespaceBuild.incrementAndGet();
+    namespacesNames = supplier.get();
+    myNamespacesMaps.putIfAbsent(value, namespacesNames);
+    return namespacesNames;
   }
 
   @Override
