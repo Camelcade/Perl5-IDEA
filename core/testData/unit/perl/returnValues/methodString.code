@@ -1,0 +1,3 @@
+method s<caret>ome{
+  'Foo::Bar'
+}

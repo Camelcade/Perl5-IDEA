@@ -16,11 +16,15 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
+import com.intellij.codeInsight.controlflow.ControlFlowUtil;
+import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -93,7 +97,26 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   @NotNull
   private PerlValue computeReturnValueFromCode() {
-    return UNKNOWN_VALUE;
+    PsiPerlBlock subBlock = getBlock();
+    if (subBlock == null) {
+      return UNKNOWN_VALUE;
+    }
+    PerlOneOfValue.Builder valueBuilder = new PerlOneOfValue.Builder();
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(subBlock).getInstructions();
+    Instruction exitInstruction = instructions[instructions.length - 1];
+    PerlControlFlowBuilder.iteratePrev(instructions, it -> {
+      if (it == exitInstruction || it.num() == 0) {
+        return ControlFlowUtil.Operation.NEXT;
+      }
+      PsiElement element = it.getElement();
+      if (element == null) {
+        return ControlFlowUtil.Operation.NEXT;
+      }
+      valueBuilder.addVariant(PerlValue.fromNonNull(element));
+      return ControlFlowUtil.Operation.CONTINUE;
+    });
+
+    return valueBuilder.build();
   }
 
   @Override

@@ -1,0 +1,4 @@
+sub s<caret>ome{
+  return someotherthing() if $a;
+  'Foo::Bar'
+}

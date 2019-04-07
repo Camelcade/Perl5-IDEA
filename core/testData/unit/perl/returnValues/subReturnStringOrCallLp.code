@@ -1,0 +1,3 @@
+sub s<caret>ome{
+  return 'Foo::Bar' or someotherthing()
+}

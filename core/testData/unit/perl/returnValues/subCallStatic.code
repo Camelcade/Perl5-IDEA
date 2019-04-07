@@ -1,0 +1,3 @@
+sub so<caret>me{
+  Foo::Bar42::someothersub();
+}

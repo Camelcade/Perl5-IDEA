@@ -22,12 +22,18 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlOneOfValue.Builder;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlReturnExpr;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -41,11 +47,16 @@ import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUndefValue.UNDEF_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 /**
  * Parent for all perl values
  */
 public abstract class PerlValue {
+  private static final TokenSet ONE_OF_VALUES = TokenSet.create(
+    AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR, PARENTHESISED_EXPR
+  );
+
   @Nullable
   private final PerlValue myBless;
 
@@ -284,6 +295,29 @@ public abstract class PerlValue {
   @Nullable
   @Contract("null->null")
   public static PerlValue from(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
+    if (element instanceof PerlReturnExpr) {
+      PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
+      return expr == null ? UNDEF_VALUE : from(expr);
+    }
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == UNDEF_EXPR) {
+      return UNDEF_VALUE;
+    }
+    else if (elementType == TRENAR_EXPR) {
+      Builder builder = new Builder();
+      PsiElement[] children = element.getChildren();
+      for (int i = 1; i < children.length; i++) {
+        builder.addVariant(children[i]);
+      }
+      return builder.build();
+    }
+    else if (ONE_OF_VALUES.contains(elementType)) {
+      return new Builder(element.getChildren()).build();
+    }
+
     return element instanceof PerlValuableEntity ? from((PerlValuableEntity)element) : null;
   }
 
@@ -292,7 +326,7 @@ public abstract class PerlValue {
     return CachedValuesManager.getCachedValue(
       element, () -> {
         //noinspection deprecation
-        PerlValue perlValue = PerlValuesManager.intern(((PerlValuableEntity)element).computePerlValue());
+        PerlValue perlValue = PerlValuesManager.intern(element.computePerlValue());
         return CachedValueProvider.Result.create(perlValue, element.getContainingFile());
       });
   }

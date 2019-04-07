@@ -1,0 +1,3 @@
+sub som<caret>e{
+  return 'Foo::Bar'
+}

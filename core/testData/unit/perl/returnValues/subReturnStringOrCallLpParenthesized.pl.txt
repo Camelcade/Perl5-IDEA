@@ -1,0 +1,5 @@
+sub s<caret>ome{
+  return ('Foo::Bar' or someotherthing())
+}
+-------------------------------------------------------
+OneOf: [Foo::Bar, main::someotherthing()]

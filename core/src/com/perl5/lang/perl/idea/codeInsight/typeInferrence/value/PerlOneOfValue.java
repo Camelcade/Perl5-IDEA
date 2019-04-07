@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInferrence.value;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
@@ -157,21 +159,37 @@ public final class PerlOneOfValue extends PerlValue {
 
   @Override
   public String toString() {
-    return "OneOf: " + myVariants;
+    List<String> variants = ContainerUtil.map(myVariants, PerlValue::toString);
+    ContainerUtil.sort(variants);
+    return "OneOf: [" + StringUtil.join(variants, ", ") + "]";
   }
 
   @NotNull
   @Override
   protected String getPresentableValueText() {
-    return PerlBundle.message(
-      "perl.value.oneof.static.presentable",
-      StringUtil.join(ContainerUtil.map(myVariants, PerlValue::getPresentableText), ",\n"));
+    List<String> variants = ContainerUtil.map(myVariants, PerlValue::getPresentableText);
+    ContainerUtil.sort(variants);
+    return PerlBundle.message("perl.value.oneof.static.presentable", StringUtil.join(variants, ",\n"));
   }
 
-  public static class Builder {
+  public static final class Builder {
     @NotNull
     private final Set<PerlValue> myVariants = new HashSet<>();
     private PerlValue myBless;
+
+    public Builder(@NotNull PsiElement... elements) {
+      addVariants(elements);
+    }
+
+    public void addVariants(@NotNull PsiElement... elements) {
+      for (PsiElement element : elements) {
+        addVariant(element);
+      }
+    }
+
+    public void addVariant(@Nullable PsiElement element) {
+      addVariant(from(element));
+    }
 
     public void addVariant(@Nullable PerlValue variant) {
       if (variant == null || variant == UNKNOWN_VALUE) {

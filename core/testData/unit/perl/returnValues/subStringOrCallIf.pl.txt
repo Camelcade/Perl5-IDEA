@@ -1,0 +1,8 @@
+sub s<caret>ome{
+  if( $a ){
+    return someotherthing();
+  }
+  'Foo::Bar'
+}
+-------------------------------------------------------
+OneOf: [Foo::Bar, main::someotherthing()]
