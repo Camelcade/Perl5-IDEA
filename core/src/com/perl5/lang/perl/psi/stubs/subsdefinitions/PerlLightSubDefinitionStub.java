@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -36,8 +37,9 @@ public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub {
                                     String subName,
                                     @NotNull List<PerlSubArgument> arguments,
                                     PerlSubAnnotations annotations,
+                                    @NotNull PerlValue returnValueFromCode,
                                     IStubElementType elementType) {
-    super(null, packageName, subName, arguments, annotations, elementType);
+    super(null, packageName, subName, arguments, annotations, returnValueFromCode, elementType);
     myParent = parent;
   }
 

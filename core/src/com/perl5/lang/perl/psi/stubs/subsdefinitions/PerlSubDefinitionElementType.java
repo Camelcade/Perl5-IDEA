@@ -22,6 +22,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
@@ -32,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,8 +65,12 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
   @NotNull
   @Override
   public PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
-    //noinspection unchecked
-    return createStubElement(parentStub, psi.getNamespaceName(), psi.getSubName(), psi.getSubArgumentsList(), psi.getAnnotations());
+    return createStubElement(parentStub,
+                             psi.getNamespaceName(),
+                             psi.getSubName(),
+                             psi.getSubArgumentsList(),
+                             psi.getReturnValueFromCode(null, Collections.emptyList()),
+                             psi.getAnnotations());
   }
 
 
@@ -109,6 +116,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
       dataStream.writeBoolean(true);
       subAnnotations.serialize(dataStream);
     }
+    stub.getReturnValueFromCode(null, Collections.emptyList()).serialize(dataStream);
   }
 
   @NotNull
@@ -126,7 +134,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
       annotations = PerlSubAnnotations.deserialize(dataStream);
     }
 
-    return createStubElement(parentStub, packageName, functionName, arguments, annotations);
+    return createStubElement(parentStub, packageName, functionName, arguments, PerlValuesManager.deserialize(dataStream), annotations);
   }
 
   @NotNull
@@ -135,9 +143,10 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
     String packageName,
     String functionName,
     List<PerlSubArgument> arguments,
+    @NotNull PerlValue returnValueFromCode,
     PerlSubAnnotations annotations
   ) {
-    return new PerlSubDefinitionStub(parentStub, packageName, functionName, arguments, annotations, this);
+    return new PerlSubDefinitionStub(parentStub, packageName, functionName, arguments, annotations, returnValueFromCode, this);
   }
 
   @Override

@@ -21,6 +21,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -33,6 +34,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 11.11.2015.
@@ -77,6 +80,21 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return arguments;
   }
 
+  @NotNull
+  @Override
+  public PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
+    PerlValue returnValue = PerlSubDefinitionElement.super.getReturnValueFromCode(contextPackage, arguments);
+    if (!returnValue.isEmpty()) {
+      return returnValue;
+    }
+    PerlSubDefinitionStub greenStub = getGreenStub();
+    return greenStub != null ? greenStub.getReturnValueFromCode(contextPackage, arguments) : computeReturnValueFromCode();
+  }
+
+  @NotNull
+  private PerlValue computeReturnValueFromCode() {
+    return UNKNOWN_VALUE;
+  }
 
   @Override
   public ItemPresentation getPresentation() {

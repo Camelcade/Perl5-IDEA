@@ -18,12 +18,14 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -31,16 +33,27 @@ import java.util.List;
  * Created by hurricup on 25.05.2015.
  */
 public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement> implements PerlSubDefinition {
+  @NotNull
   private final List<PerlSubArgument> myArguments;
+  @NotNull
+  private final PerlValue myReturnValueFromCode;
 
   public PerlSubDefinitionStub(StubElement parent,
                                String packageName,
                                String subName,
                                @NotNull List<PerlSubArgument> arguments,
                                PerlSubAnnotations annotations,
+                               @NotNull PerlValue returnValueFromCode,
                                IStubElementType elementType) {
     super(parent, packageName, subName, annotations, elementType);
     myArguments = arguments;
+    myReturnValueFromCode = returnValueFromCode;
+  }
+
+  @NotNull
+  @Override
+  public PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
+    return myReturnValueFromCode;
   }
 
   @NotNull
