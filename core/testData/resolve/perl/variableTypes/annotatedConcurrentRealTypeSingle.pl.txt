@@ -1,0 +1,8 @@
+#@type JSON::XS
+my DBI $var;
+
+say $va<caret>r;
+-------------------------------------------------------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 34 in annotatedConcurrentRealTypeSingle.pl
+JSON::XS

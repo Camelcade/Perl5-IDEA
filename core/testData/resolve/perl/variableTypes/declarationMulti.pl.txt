@@ -1,0 +1,7 @@
+my Foo::Bar ($myvar1, $myvar);
+
+say $my<caret>var;
+-------------------------------------------------------
+$myvar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 37 in declarationMulti.pl
+Foo::Bar

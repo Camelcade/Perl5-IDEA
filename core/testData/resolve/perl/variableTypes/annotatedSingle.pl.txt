@@ -1,0 +1,8 @@
+#@type JSON::XS
+my $var;
+
+say $v<caret>ar;
+-------------------------------------------------------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 30 in annotatedSingle.pl
+JSON::XS

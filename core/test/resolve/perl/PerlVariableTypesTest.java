@@ -17,8 +17,6 @@
 package resolve.perl;
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
-import com.perl5.lang.perl.psi.PerlVariable;
 
 /**
  * Created by hurricup on 02.04.2016.
@@ -29,73 +27,69 @@ public class PerlVariableTypesTest extends PerlLightTestCase {
     return "testData/resolve/perl/variableTypes";
   }
 
-  public void testBuiltIn() {doTest("UNKNOWN_VALUE");}
+  public void testBuiltIn() {doTest();}
 
   public void testDeclarationSingle() {
-    doTest("Foo::Bar");
+    doTest();
   }
 
   public void testDeclarationMulti() {
-    doTest("Foo::Bar");
+    doTest();
   }
 
   public void testDeclarationAssignmentNew() {
-    doTest("Foo::Bar->new()");
+    doTest();
   }
 
   public void testVariableBeforeAssignment() {
-    doTest("UNKNOWN_VALUE");
+    doTest();
   }
 
   public void testVariableAfterAssignment() {
-    doTest("Foo::Bar->new()");
+    doTest();
   }
 
   public void testAnnotatedSingleInside() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedSingle() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedMulti() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedMultiNonFirst() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedConcurrentStatement() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedConcurrentStatementOuter() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedConcurrentRealTypeInside() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedConcurrentRealTypeMulti() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedConcurrentRealTypeSingle() {
-    doTest("JSON::XS");
+    doTest();
   }
 
   public void testAnnotatedConcurrentRealTypeWins() {
-    doTest("DBI");
+    doTest();
   }
 
-  public void doTest(String type) {
-    initWithFileSmart(getTestName(true));
-    PerlVariable element = getElementAtCaret(PerlVariable.class);
-    assertNotNull(element);
-    assertInstanceOf(element, PerlVariable.class);
-    assertEquals(type, PerlValue.fromNonNull(element).toString());
+  private void doTest() {
+    doTestPerlValue();
   }
 }

@@ -116,6 +116,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.*;
+import com.perl5.lang.perl.idea.codeInsight.typeInferrence.value.PerlValue;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
@@ -141,6 +142,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
+import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -1668,6 +1670,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       assertNotNull(generatedDoc);
       sb.append(generatedDoc).append("\n");
     }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doTestPerlValue() {
+    initWithFileSmart(getTestName(true));
+    PerlValuableEntity element = getElementAtCaret(PerlValuableEntity.class);
+    assertNotNull(element);
+    StringBuilder sb = new StringBuilder();
+    sb.append(getEditorTextWithCaretsAndSelections().trim())
+      .append("\n-------------------------------------------------------\n")
+      .append(element.getText()).append("\n")
+      .append(serializePsiElement(element)).append("\n")
+      .append(PerlValue.fromNonNull(element));
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
