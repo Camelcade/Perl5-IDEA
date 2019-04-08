@@ -34,7 +34,7 @@ public final class PerlArrayValue extends PerlValue {
 
   public PerlArrayValue(@NotNull List<PerlValue> elements, @Nullable PerlValue bless) {
     super(bless);
-    myElements = Collections.unmodifiableList(new ArrayList<>(elements));
+    myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(elements));
   }
 
   public PerlArrayValue(@NotNull StubInputStream dataStream) throws IOException {
