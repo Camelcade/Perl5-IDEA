@@ -35,7 +35,7 @@ public final class PerlValuesManager {
   static final int UNKNOWN_ID = 0;
   static final int UNDEF_ID = 1;
   static final int STATIC_ID = 2;
-  static final int SCALAR_ID = 3;
+
   static final int REFERENCE_ID = 4;
   static final int ARRAY_ID = 5;
   static final int HASH_ID = 6;
@@ -65,8 +65,6 @@ public final class PerlValuesManager {
         return UNDEF_VALUE;
       case STATIC_ID:
         return new PerlStaticValue(dataStream);
-      case SCALAR_ID:
-        return new PerlScalarValue(dataStream);
       case REFERENCE_ID:
         return new PerlReferenceValue(dataStream);
       case ARRAY_ID:
