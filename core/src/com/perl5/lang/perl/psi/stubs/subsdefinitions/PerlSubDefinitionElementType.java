@@ -134,7 +134,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
       annotations = PerlSubAnnotations.deserialize(dataStream);
     }
 
-    return createStubElement(parentStub, packageName, functionName, arguments, PerlValuesManager.deserialize(dataStream), annotations);
+    return createStubElement(parentStub, packageName, functionName, arguments, PerlValuesManager.readValue(dataStream), annotations);
   }
 
   @NotNull

@@ -75,7 +75,7 @@ public class PerlVariableAnnotations {
   public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlVariableAnnotations(
       dataStream.readByte(),
-      PerlValuesManager.deserialize(dataStream)
+      PerlValuesManager.readValue(dataStream)
     );
   }
 

@@ -66,12 +66,12 @@ public abstract class PerlCallValue extends PerlValue {
 
   public PerlCallValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myNamespaceNameValue = PerlValuesManager.deserialize(dataStream);
-    mySubNameValue = PerlValuesManager.deserialize(dataStream);
+    myNamespaceNameValue = PerlValuesManager.readValue(dataStream);
+    mySubNameValue = PerlValuesManager.readValue(dataStream);
     int argumentsNumber = dataStream.readInt();
     List<PerlValue> arguments = new ArrayList<>(argumentsNumber);
     for (int i = 0; i < argumentsNumber; i++) {
-      arguments.add(PerlValuesManager.deserialize(dataStream));
+      arguments.add(PerlValuesManager.readValue(dataStream));
     }
     myArguments = Collections.unmodifiableList(arguments);
   }

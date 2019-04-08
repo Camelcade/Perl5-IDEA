@@ -54,7 +54,7 @@ public final class PerlOneOfValue extends PerlValue {
     int elementsNumber = dataStream.readInt();
     Set<PerlValue> variants = new HashSet<>();
     for (int i = 0; i < elementsNumber; i++) {
-      variants.add(PerlValuesManager.deserialize(dataStream));
+      variants.add(PerlValuesManager.readValue(dataStream));
     }
     myVariants = Collections.unmodifiableSet(variants);
   }

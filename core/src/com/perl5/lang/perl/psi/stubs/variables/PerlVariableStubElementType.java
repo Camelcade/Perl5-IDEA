@@ -110,7 +110,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
       this,
       PerlStubSerializationUtil.readNotNullString(dataStream),
       PerlStubSerializationUtil.readNotNullString(dataStream),
-      PerlValuesManager.deserialize(dataStream),
+      PerlValuesManager.readValue(dataStream),
       PerlVariableType.values()[dataStream.readByte()],
       readAnnotations(dataStream)
     );

@@ -78,7 +78,7 @@ public abstract class PerlValue {
 
   protected PerlValue(@NotNull StubInputStream dataStream) throws IOException {
     if (dataStream.readBoolean()) {
-      myBless = PerlValuesManager.deserialize(dataStream);
+      myBless = PerlValuesManager.readValue(dataStream);
     }
     else {
       myBless = null;

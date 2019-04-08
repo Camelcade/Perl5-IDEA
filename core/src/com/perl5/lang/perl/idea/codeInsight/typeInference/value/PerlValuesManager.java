@@ -49,8 +49,8 @@ public final class PerlValuesManager {
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
-  public static PerlValue deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    return intern(doDeserialize(dataStream));
+  public static PerlValue readValue(@NotNull StubInputStream dataStream) throws IOException {
+    return intern(deserialize(dataStream));
   }
 
   public static PerlValue intern(PerlValue value) {
@@ -58,7 +58,7 @@ public final class PerlValuesManager {
   }
 
   @NotNull
-  private static PerlValue doDeserialize(@NotNull StubInputStream dataStream) throws IOException {
+  private static PerlValue deserialize(@NotNull StubInputStream dataStream) throws IOException {
     int valueId = dataStream.readInt();
     switch (valueId) {
       case UNKNOWN_ID:
@@ -94,7 +94,7 @@ public final class PerlValuesManager {
     }
     List<PerlValue> elements = new ArrayList<>(size);
     for (int i = 0; i < size; i++) {
-      elements.add(deserialize(dataStream));
+      elements.add(readValue(dataStream));
     }
     return Collections.unmodifiableList(elements);
   }

@@ -38,7 +38,7 @@ public final class PerlReferenceValue extends PerlValue {
 
   public PerlReferenceValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myReferrent = PerlValuesManager.deserialize(dataStream);
+    myReferrent = PerlValuesManager.readValue(dataStream);
   }
 
   @Override

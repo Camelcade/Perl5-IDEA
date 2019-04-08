@@ -125,7 +125,7 @@ public class PerlSubAnnotations {
   public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
     return new PerlSubAnnotations(
       dataStream.readByte(),
-      PerlValuesManager.deserialize(dataStream)
+      PerlValuesManager.readValue(dataStream)
     );
   }
 
