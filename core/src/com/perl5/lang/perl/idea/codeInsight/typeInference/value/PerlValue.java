@@ -219,7 +219,10 @@ public abstract class PerlValue {
    * Serializes this value data
    */
   public final void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeInt(getSerializationId());
+    dataStream.writeVarInt(getSerializationId());
+    if (this instanceof PerlSpecialValue) {
+      return;
+    }
     dataStream.writeBoolean(myBless != null);
     if (myBless != null) {
       myBless.serialize(dataStream);

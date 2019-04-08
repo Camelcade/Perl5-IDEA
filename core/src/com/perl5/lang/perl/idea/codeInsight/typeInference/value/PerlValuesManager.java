@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue.ARGUMENTS_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
@@ -34,8 +35,8 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnkno
  * We could implement something like PerlValueElementType but this thing is not supported to be extendable, so good for now
  */
 public final class PerlValuesManager {
-  public static final int VERSION = 3;
-
+  public static final int VERSION = 4;
+  // special values
   static final int UNKNOWN_ID = 0;
   static final int UNDEF_ID = 1;
   static final int ARGUMENTS_ID = 2;
@@ -61,13 +62,11 @@ public final class PerlValuesManager {
 
   @NotNull
   private static PerlValue deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    int valueId = dataStream.readInt();
+    int valueId = dataStream.readVarInt();
     switch (valueId) {
       case UNKNOWN_ID:
-        dataStream.readBoolean();
         return UNKNOWN_VALUE;
       case UNDEF_ID:
-        dataStream.readBoolean();
         return UNDEF_VALUE;
       case ARGUMENTS_ID:
         return ARGUMENTS_VALUE;
