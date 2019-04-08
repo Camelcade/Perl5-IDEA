@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PsiPerlPackageExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
@@ -36,6 +36,6 @@ public abstract class PerlPackageExpression extends PsiPerlExprImpl implements P
     String elementText = getText();
     return PerlPackageUtil.__PACKAGE__.equals(elementText)
            ? PerlPackageUtil.getContextType(this)
-           : PerlStaticValue.create(PerlPackageUtil.getCanonicalName(elementText));
+           : PerlScalarValue.create(PerlPackageUtil.getCanonicalName(elementText));
   }
 }

@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -65,7 +65,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    PerlValue subNameValue = PerlStaticValue.create(getName());
+    PerlValue subNameValue = PerlScalarValue.create(getName());
     if (subNameValue == UNKNOWN_VALUE) {
       return UNKNOWN_VALUE;
     }
@@ -89,7 +89,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
     if (isNestedCall) {
       boolean isSuper = PerlPackageUtil.isSUPER(explicitNamespaceName);
       if (hasExplicitNamespace && !isSuper) { // ackward $var->Foo::Bar::method->
-        return new PerlCallStaticValue(PerlStaticValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
+        return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
       }
       if (!(derefExpression instanceof PerlDerefExpression)) {
         LOG.warn("Expected deref expression, got " + derefExpression);
@@ -99,12 +99,12 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
       PsiElement previousValue = ((PerlDerefExpression)derefExpression).getPreviousElement(parentElement.getPrevSibling());
       if (previousValue == null) { // first in chain
         return new PerlCallStaticValue(
-          PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, false);
+          PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, false);
       }
       else if (PerlPsiUtil.isSelfShortcut(previousValue)) {
         // fixme this need to be moved to respective values
         return new PerlCallObjectValue(
-          PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(previousValue)),
+          PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(previousValue)),
           subNameValue, callArguments, isSuper);
       }
       else if (previousValue instanceof PerlValuableEntity) {
@@ -115,14 +115,14 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
       }
     }
     else if (isObjectMethod() && hasExplicitNamespace) {
-      return new PerlCallObjectValue(PerlStaticValue.create(explicitNamespaceName), subNameValue, callArguments, false);
+      return new PerlCallObjectValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, false);
     }
     else if (hasExplicitNamespace) {
-      return new PerlCallStaticValue(PerlStaticValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
+      return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, hasExplicitNamespace);
     }
     else {
       return new PerlCallStaticValue(
-        PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, hasExplicitNamespace);
+        PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(this)), subNameValue, callArguments, hasExplicitNamespace);
     }
 
     return UNKNOWN_VALUE;

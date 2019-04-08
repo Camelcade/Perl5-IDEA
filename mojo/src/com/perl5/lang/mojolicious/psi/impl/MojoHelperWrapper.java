@@ -21,7 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSelfHinter;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -100,6 +100,6 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
   @NotNull
   @Override
   public PerlValue getSelfType() {
-    return PerlStaticValue.create(MOJO_CONTROLLER_NS);
+    return PerlScalarValue.create(MOJO_CONTROLLER_NS);
   }
 }

@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,6 +75,6 @@ public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   default PerlValue getValue() {
     String returnClass = getReturnClass();
     return returnClass == null ? UNKNOWN_VALUE :
-           returnClass.equals(PACKAGE_ANY) ? PACKAGE_ANY_VALUE : PerlStaticValue.create(returnClass);
+           returnClass.equals(PACKAGE_ANY) ? PACKAGE_ANY_VALUE : PerlScalarValue.create(returnClass);
   }
 }

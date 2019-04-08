@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Contract;
@@ -77,7 +77,7 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity  {
   @NotNull
   @Override
   default PerlValue computePerlValue() {
-    return PerlStaticValue.create(ElementManipulators.getValueText(this));
+    return PerlScalarValue.create(ElementManipulators.getValueText(this));
   }
 
   @Contract("null->false")

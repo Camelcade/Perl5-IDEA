@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
@@ -108,7 +108,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
   @NotNull
   default PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
     if (contextPackage != null && "new".equals(getSubName())) {
-      return PerlStaticValue.create(contextPackage);
+      return PerlScalarValue.create(contextPackage);
     }
     return UNKNOWN_VALUE;
   }
@@ -121,7 +121,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
-    return PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue) ? PerlStaticValue.create(contextPackage) : returnValue;
+    return PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue) ? PerlScalarValue.create(contextPackage) : returnValue;
   }
 
   default boolean isDeprecated() {

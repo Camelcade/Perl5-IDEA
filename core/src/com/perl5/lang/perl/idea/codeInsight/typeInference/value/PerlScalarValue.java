@@ -33,16 +33,16 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnkno
 /**
  * Represents a plain value - string or number
  */
-public final class PerlStaticValue extends PerlValue {
+public final class PerlScalarValue extends PerlValue {
 
   @NotNull
   private final String myValue;
 
-  private PerlStaticValue(@NotNull String value) {
+  private PerlScalarValue(@NotNull String value) {
     myValue = value;
   }
 
-  public PerlStaticValue(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlScalarValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myValue = Objects.requireNonNull(dataStream.readNameString());
   }
@@ -54,7 +54,7 @@ public final class PerlStaticValue extends PerlValue {
 
   @Override
   protected int getSerializationId() {
-    return PerlValuesManager.STATIC_ID;
+    return PerlValuesManager.SCALAR_ID;
   }
 
   @NotNull
@@ -64,7 +64,7 @@ public final class PerlStaticValue extends PerlValue {
 
   @NotNull
   @Override
-  PerlStaticValue createBlessedCopy(@NotNull PerlValue bless) {
+  PerlScalarValue createBlessedCopy(@NotNull PerlValue bless) {
     return this;
   }
 
@@ -106,7 +106,7 @@ public final class PerlStaticValue extends PerlValue {
       return false;
     }
 
-    PerlStaticValue aStatic = (PerlStaticValue)o;
+    PerlScalarValue aStatic = (PerlScalarValue)o;
 
     return myValue.equals(aStatic.myValue);
   }
@@ -120,7 +120,7 @@ public final class PerlStaticValue extends PerlValue {
 
   @NotNull
   public static PerlValue create(@Nullable String value) {
-    return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlStaticValue(value));
+    return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlScalarValue(value));
   }
 
   @Override

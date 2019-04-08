@@ -26,7 +26,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
@@ -93,7 +93,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       if (selfHinter != null) {
         return selfHinter.getSelfType();
       }
-      return PerlStaticValue.create(PerlPackageUtil.getContextNamespaceName(lexicalDeclaration));
+      return PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(lexicalDeclaration));
     }
 
     PerlValue inferredValue = PerlResolveUtil.inferVariableValue(this);
@@ -237,7 +237,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return true;
     }
 
-    PerlValue namespaceValue = PerlStaticValue.create(
+    PerlValue namespaceValue = PerlScalarValue.create(
       ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this)));
 
     return namespaceValue

@@ -40,7 +40,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
@@ -77,7 +77,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final char PACKAGE_SEPARATOR_LEGACY = '\'';
 
   public static final String PACKAGE_ANY = "*";
-  public static final PerlValue PACKAGE_ANY_VALUE = PerlStaticValue.create(PACKAGE_ANY);
+  public static final PerlValue PACKAGE_ANY_VALUE = PerlScalarValue.create(PACKAGE_ANY);
 
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";
@@ -110,7 +110,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final String MAIN_PACKAGE_SHORT = PACKAGE_SEPARATOR;
 
   public static final String UNIVERSAL_PACKAGE = "UNIVERSAL";
-  public static final PerlValue UNIVERSAL_VALUE = PerlStaticValue.create(UNIVERSAL_PACKAGE);
+  public static final PerlValue UNIVERSAL_VALUE = PerlScalarValue.create(UNIVERSAL_PACKAGE);
 
   public static final String CORE_PACKAGE = "CORE";
   public static final String CORE_PACKAGE_FULL = CORE_PACKAGE + PACKAGE_SEPARATOR;
@@ -221,7 +221,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
 
   @NotNull
   public static PerlValue getContextType(@Nullable PsiElement element) {
-    return PerlStaticValue.create(getContextNamespaceName(element));
+    return PerlScalarValue.create(getContextNamespaceName(element));
   }
 
   @NotNull

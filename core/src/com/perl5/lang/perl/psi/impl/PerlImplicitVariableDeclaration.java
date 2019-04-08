@@ -24,7 +24,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlStaticValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -88,7 +88,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     if (type != null) {
       myVariableType = type;
       myVariableName = variableNameWithSigil.substring(1);
-      myDeclaredValue = PerlStaticValue.create(variableClass);
+      myDeclaredValue = PerlScalarValue.create(variableClass);
       myIsLexical = isLexical;
       myIsLocal = isLocal;
       myIsInvocant = isInvocant;
