@@ -19,25 +19,30 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
-public final class PerlUnknownValue extends PerlSpecialValue {
-  public static final PerlUnknownValue UNKNOWN_VALUE = new PerlUnknownValue();
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
 
-  private PerlUnknownValue() {
+/**
+ * Pseudo-value representing sub input arguments
+ */
+public class PerlArgumentsValue extends PerlSpecialValue {
+  public static final PerlArgumentsValue ARGUMENTS_VALUE = new PerlArgumentsValue();
+
+  private PerlArgumentsValue() {
   }
 
   @Override
   protected int getSerializationId() {
-    return PerlValuesManager.UNKNOWN_ID;
+    return ARGUMENTS_ID;
   }
 
   @NotNull
   @Override
-  public String getPresentableValueText() {
-    return PerlBundle.message("perl.value.unknown.presentable");
+  protected String getPresentableValueText() {
+    return PerlBundle.message("perl.value.sub.arguments");
   }
 
   @Override
   public String toString() {
-    return "UNKNOWN_VALUE";
+    return "SUB_ARGUMENTS";
   }
 }

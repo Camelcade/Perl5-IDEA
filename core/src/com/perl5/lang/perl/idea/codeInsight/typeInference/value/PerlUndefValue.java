@@ -16,40 +16,18 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import org.jetbrains.annotations.NotNull;
 
-public final class PerlUndefValue extends PerlValue {
+public final class PerlUndefValue extends PerlSpecialValue {
   public static final PerlUndefValue UNDEF_VALUE = new PerlUndefValue();
 
   private PerlUndefValue() {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) {
-  }
-
-  @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-  @Override
-  public boolean equals(Object o) {
-    return o == UNDEF_VALUE;
-  }
-
-  @Override
-  protected int computeHashCode() {
-    return getClass().hashCode();
-  }
-
-  @Override
   protected int getSerializationId() {
     return PerlValuesManager.UNDEF_ID;
-  }
-
-  @NotNull
-  @Override
-  PerlUndefValue createBlessedCopy(@NotNull PerlValue bless) {
-    return this;
   }
 
   @NotNull

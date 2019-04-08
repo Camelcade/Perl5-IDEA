@@ -16,28 +16,39 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.perl5.PerlBundle;
+import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public final class PerlUnknownValue extends PerlSpecialValue {
-  public static final PerlUnknownValue UNKNOWN_VALUE = new PerlUnknownValue();
+public abstract class PerlSpecialValue extends PerlValue {
 
-  private PerlUnknownValue() {
+  protected PerlSpecialValue() {
+  }
+
+  private PerlSpecialValue(@Nullable PerlValue bless) {
+  }
+
+  private PerlSpecialValue(@NotNull StubInputStream dataStream) {
   }
 
   @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.UNKNOWN_ID;
+  protected void serializeData(@NotNull StubOutputStream dataStream) {
+  }
+
+  @Override
+  public final boolean equals(Object o) {
+    return o == this;
+  }
+
+  @Override
+  protected final int computeHashCode() {
+    return getClass().hashCode();
   }
 
   @NotNull
   @Override
-  public String getPresentableValueText() {
-    return PerlBundle.message("perl.value.unknown.presentable");
-  }
-
-  @Override
-  public String toString() {
-    return "UNKNOWN_VALUE";
+  final PerlValue createBlessedCopy(@NotNull PerlValue bless) {
+    return this;
   }
 }
