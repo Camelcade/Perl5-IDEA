@@ -23,19 +23,33 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class PerlArrayValue extends PerlValue {
   @NotNull
-  private final PerlValue myElementsType;
+  private final List<PerlValue> myElements;
 
-  public PerlArrayValue(@NotNull PerlValue elementsType, @Nullable PerlValue bless) {
+  public PerlArrayValue(@NotNull List<PerlValue> elements, @Nullable PerlValue bless) {
     super(bless);
-    myElementsType = elementsType;
+    myElements = Collections.unmodifiableList(new ArrayList<>(elements));
   }
 
   public PerlArrayValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myElementsType = PerlValuesManager.deserialize(dataStream);
+    int size = dataStream.readVarInt();
+    if (size == 0) {
+      myElements = Collections.emptyList();
+    }
+    else {
+      List<PerlValue> elements = new ArrayList<>(size);
+      for (int i = 0; i < size; i++) {
+        elements.add(PerlValuesManager.deserialize(dataStream));
+      }
+      myElements = Collections.unmodifiableList(elements);
+    }
   }
 
   @Override
@@ -45,18 +59,21 @@ public final class PerlArrayValue extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myElementsType.serialize(dataStream);
+    dataStream.writeVarInt(myElements.size());
+    for (PerlValue element : myElements) {
+      element.serialize(dataStream);
+    }
   }
 
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlArrayValue(this.myElementsType, bless);
+    return new PerlArrayValue(this.myElements, bless);
   }
 
   @NotNull
-  public PerlValue getElementsType() {
-    return myElementsType;
+  public List<PerlValue> getElements() {
+    return myElements;
   }
 
   @Override
@@ -71,26 +88,27 @@ public final class PerlArrayValue extends PerlValue {
       return false;
     }
 
-    PerlArrayValue array = (PerlArrayValue)o;
+    PerlArrayValue value = (PerlArrayValue)o;
 
-    return myElementsType.equals(array.myElementsType);
+    return myElements.equals(value.myElements);
   }
 
   @Override
-  protected int computeHashCode() {
-    int result = super.computeHashCode();
-    result = 31 * result + myElementsType.hashCode();
+  public int computeHashCode() {
+    int result = super.hashCode();
+    result = 31 * result + myElements.hashCode();
     return result;
   }
 
   @Override
   public String toString() {
-    return "Array of: " + myElementsType;
+    return myElements.toString();
   }
 
   @NotNull
   @Override
   public String getPresentableValueText() {
-    return PerlBundle.message("perl.value.array.presentable", myElementsType.getPresentableText());
+    return PerlBundle.message("perl.value.array.presentable",
+                              myElements.stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }
 }
