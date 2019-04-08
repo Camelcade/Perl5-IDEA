@@ -46,6 +46,10 @@ import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.DeleteNameDescriptionLocation;
 import com.intellij.ide.util.DeleteTypeDescriptionLocation;
+import com.intellij.ide.util.gotoByName.FilteringGotoByModel;
+import com.intellij.ide.util.gotoByName.GotoClassModel2;
+import com.intellij.ide.util.gotoByName.GotoFileModel;
+import com.intellij.ide.util.gotoByName.GotoSymbolModel2;
 import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.lang.ASTNode;
@@ -55,6 +59,7 @@ import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.documentation.DocumentationProviderEx;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -74,10 +79,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
-import com.intellij.openapi.util.Disposer;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.SystemInfoRt;
-import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
@@ -103,6 +105,7 @@ import com.intellij.usages.*;
 import com.intellij.usages.impl.UsageViewImpl;
 import com.intellij.usages.rules.UsageGroupingRule;
 import com.intellij.usages.rules.UsageGroupingRuleProvider;
+import com.intellij.util.ArrayUtil;
 import com.intellij.util.FileContentUtil;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
@@ -184,6 +187,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
   private PerlInjectionMarkersService myInjectionMarkersService;
+  private static final String SEPARATOR = "-------------------------------------------------------";
+  private static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + PerlLightTestCaseBase.SEPARATOR;
+  private static final String SEPARATOR_NEW_LINE_AFTER = PerlLightTestCaseBase.SEPARATOR + "\n";
+  private static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
 
   @Override
   protected void setUp() throws Exception {
@@ -1031,19 +1038,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
                              @NotNull Set<Object> recursionSet
   ) {
     Object value = currentElement.getValue();
+    sb.append(prefix);
     ItemPresentation presentation = currentElement.getPresentation();
-    assertNotNull(presentation);
-    String locationString = presentation.getLocationString();
-    sb.append(prefix)
-      .append(presentation.getPresentableText())
-      .append(" in ")
-      .append(locationString == null ? null : locationString.replaceAll("\\\\", "/"))
-      .append("; ")
-      .append(getIconText(presentation.getIcon(true)));
-
-    if (presentation instanceof PerlItemPresentationBase) {
-      sb.append("; ").append(((PerlItemPresentationBase)presentation).getTextAttributesKey());
-    }
+    sb.append(serializePresentation(presentation));
 
     if (value instanceof PsiElement) {
       sb.append(" -> ").append(serializePsiElement((PsiElement)value));
@@ -1108,6 +1105,25 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     else {
       sb.append("(recursion)").append("\n\n");
     }
+  }
+
+  @NotNull
+  protected String serializePresentation(@Nullable ItemPresentation presentation) {
+    if (presentation == null) {
+      return "null";
+    }
+    String locationString = presentation.getLocationString();
+    StringBuilder sb = new StringBuilder();
+    sb.append(presentation.getPresentableText())
+      .append(" in ")
+      .append(locationString == null ? null : locationString.replaceAll("\\\\", "/"))
+      .append("; ")
+      .append(getIconText(presentation.getIcon(true)));
+
+    if (presentation instanceof PerlItemPresentationBase) {
+      sb.append("; ").append(((PerlItemPresentationBase)presentation).getTextAttributesKey());
+    }
+    return sb.toString();
   }
 
   protected void doTestTypeHierarchy() {
@@ -1696,9 +1712,64 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull(element);
     StringBuilder sb = new StringBuilder();
     sb.append(getEditorTextWithCaretsAndSelections().trim())
-      .append("\n-------------------------------------------------------\n")
+      .append(SEPARATOR_NEWLINES)
       .append(element.getReturnValueFromCode(null, Collections.emptyList()));
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
+
+  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model) {
+    doTestGoToByModel(model, it -> true);
+  }
+
+  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model, @NotNull String name) {
+    doTestGoToByModel(model, name::equals);
+  }
+
+  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model, @NotNull String... names) {
+    doTestGoToByModel(model, it -> ArrayUtil.contains(names, it));
+  }
+
+  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model, @NotNull Condition<String> nameFilter) {
+    doTestGoToByModel(model, false, nameFilter);
+  }
+
+  protected FilteringGotoByModel<?> getGoToClassModel() {
+    return new GotoClassModel2(getProject());
+  }
+
+  protected FilteringGotoByModel<?> getGoToSymbolModel() {
+    return new GotoSymbolModel2(getProject());
+  }
+
+  protected FilteringGotoByModel<?> getGoToFileModel() {
+    return new GotoFileModel(getProject());
+  }
+
+  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model,
+                                   boolean includeNonProjectFiles,
+                                   @NotNull Condition<String> nameFilter) {
+    List<String> acceptableNames = ContainerUtil.filter(model.getNames(includeNonProjectFiles), nameFilter);
+    ContainerUtil.sort(acceptableNames);
+    StringBuilder sb = new StringBuilder();
+    for (String acceptableName : acceptableNames) {
+      if (sb.length() > 0) {
+        sb.append(SEPARATOR_NEWLINES);
+      }
+      sb.append(acceptableName).append("\n");
+      Object[] elements = model.getElementsByName(acceptableName, includeNonProjectFiles, "");
+      for (Object element : elements) {
+        if (element instanceof NavigationItem) {
+          sb.append(serializePresentation(((NavigationItem)element).getPresentation()));
+        }
+        else {
+          sb.append(element.toString());
+        }
+        sb.append("\n");
+      }
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
 }
