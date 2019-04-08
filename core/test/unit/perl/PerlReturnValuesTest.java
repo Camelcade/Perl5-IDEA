@@ -31,25 +31,25 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
 
   public void testLoopComplex() {doTest();}
 
-  public void testSubAssignParallel() {doTest();}
+  public void testAssignParallel() {doTest();}
 
-  public void testSubReAssign() {doTest();}
+  public void testReAssign() {doTest();}
 
-  public void testSubReAssignParallel() {doTest();}
+  public void testReAssignParallel() {doTest();}
 
-  public void testSubReAssignUnknown() {doTest();}
+  public void testReAssignUnknown() {doTest();}
 
-  public void testSubReAssignUnknownDeclared() {doTest();}
+  public void testReAssignUnknownDeclared() {doTest();}
 
-  public void testSubReAssignUnknownAnnotated() {doTest();}
+  public void testReAssignUnknownAnnotated() {doTest();}
 
-  public void testSubAssignParallelFirst() {doTest();}
+  public void testAssignParallelFirst() {doTest();}
 
-  public void testSubAssignParallelSecond() {doTest();}
+  public void testAssignParallelSecond() {doTest();}
 
-  public void testSubAssignParallelLast() {doTest();}
+  public void testAssignParallelLast() {doTest();}
 
-  public void testSubAssignParallelList() {doTest();}
+  public void testAssignParallelList() {doTest();}
 
   public void testUndef() {doTest();}
 
@@ -59,47 +59,47 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
 
   public void testMethodString() {doTest();}
 
-  public void testSubReturnString() {doTest();}
+  public void testReturnString() {doTest();}
 
-  public void testSubString() {doTest();}
+  public void testString() {doTest();}
 
-  public void testSubStringTernaryCall() {doTest();}
+  public void testStringTernaryCall() {doTest();}
 
-  public void testSubStringOrCall() {doTest();}
+  public void testStringOrCall() {doTest();}
 
-  public void testSubStringOrCallLp() {doTest();}
+  public void testStringOrCallLp() {doTest();}
 
-  public void testSubStringAndCall() {doTest();}
+  public void testStringAndCall() {doTest();}
 
-  public void testSubStringAndCallLp() {doTest();}
+  public void testStringAndCallLp() {doTest();}
 
-  public void testSubReturnStringTernaryCall() {doTest();}
+  public void testReturnStringTernaryCall() {doTest();}
 
-  public void testSubReturnStringOrCall() {doTest();}
+  public void testReturnStringOrCall() {doTest();}
 
-  public void testSubReturnStringOrCallLp() {doTest();}
+  public void testReturnStringOrCallLp() {doTest();}
 
-  public void testSubReturnStringOrCallLpParenthesized() {doTest();}
+  public void testReturnStringOrCallLpParenthesized() {doTest();}
 
-  public void testSubReturnStringAndCall() {doTest();}
+  public void testReturnStringAndCall() {doTest();}
 
-  public void testSubReturnStringAndCallLp() {doTest();}
+  public void testReturnStringAndCallLp() {doTest();}
 
-  public void testSubReturnStringAndCallLpParenthesized() {doTest();}
+  public void testReturnStringAndCallLpParenthesized() {doTest();}
 
-  public void testSubStringOrCallIf() {doTest();}
+  public void testStringOrCallIf() {doTest();}
 
-  public void testSubStringOrCallIfPostfix() {doTest();}
+  public void testStringOrCallIfPostfix() {doTest();}
 
-  public void testSubCallCall() {doTest();}
+  public void testCallCall() {doTest();}
 
-  public void testSubCall() {doTest();}
+  public void testCall() {doTest();}
 
-  public void testSubReturnCall() {doTest();}
+  public void testReturnCall() {doTest();}
 
-  public void testSubCallObject() {doTest();}
+  public void testCallObject() {doTest();}
 
-  public void testSubCallStatic() {doTest();}
+  public void testCallStatic() {doTest();}
 
   private void doTest() {
     doTestReturnValue();
