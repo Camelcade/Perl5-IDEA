@@ -17,10 +17,14 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.containers.WeakInterner;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
@@ -30,7 +34,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnkno
  * We could implement something like PerlValueElementType but this thing is not supported to be extendable, so good for now
  */
 public final class PerlValuesManager {
-  public static final int VERSION = 2;
+  public static final int VERSION = 3;
 
   static final int UNKNOWN_ID = 0;
   static final int UNDEF_ID = 1;
@@ -79,6 +83,26 @@ public final class PerlValuesManager {
         return new PerlCallStaticValue(dataStream);
       default:
         throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
+    }
+  }
+
+  @NotNull
+  static List<PerlValue> readList(@NotNull StubInputStream dataStream) throws IOException {
+    int size = dataStream.readVarInt();
+    if (size == 0) {
+      return Collections.emptyList();
+    }
+    List<PerlValue> elements = new ArrayList<>(size);
+    for (int i = 0; i < size; i++) {
+      elements.add(deserialize(dataStream));
+    }
+    return Collections.unmodifiableList(elements);
+  }
+
+  static void writeList(@NotNull StubOutputStream dataStream, @NotNull List<PerlValue> elements) throws IOException {
+    dataStream.writeVarInt(elements.size());
+    for (PerlValue element : elements) {
+      element.serialize(dataStream);
     }
   }
 }

@@ -17,25 +17,22 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public final class PerlHashValue extends PerlValue {
-  @NotNull
-  private final PerlValue myValuesType;
+public final class PerlHashValue extends PerlListValue {
 
-  public PerlHashValue(@NotNull PerlValue valuesType, @Nullable PerlValue bless) {
-    super(bless);
-    myValuesType = valuesType;
+  private PerlHashValue(@NotNull List<PerlValue> elements, @Nullable PerlValue bless) {
+    super(elements, bless);
   }
 
-  public PerlHashValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlHashValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myValuesType = PerlValuesManager.deserialize(dataStream);
   }
 
   @Override
@@ -43,54 +40,27 @@ public final class PerlHashValue extends PerlValue {
     return PerlValuesManager.HASH_ID;
   }
 
-  @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myValuesType.serialize(dataStream);
-  }
-
-  @NotNull
-  public PerlValue getValuesType() {
-    return myValuesType;
-  }
-
   @NotNull
   @Override
   PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlHashValue(this.myValuesType, bless);
+    return new PerlHashValue(getElements(), bless);
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    if (!super.equals(o)) {
-      return false;
-    }
-
-    PerlHashValue hash = (PerlHashValue)o;
-
-    return myValuesType.equals(hash.myValuesType);
-  }
-
-  @Override
-  protected int computeHashCode() {
-    int result = super.computeHashCode();
-    result = 31 * result + myValuesType.hashCode();
-    return result;
-  }
 
   @Override
   public String toString() {
-    return "Hash of: " + myValuesType;
+    return "Hash: " + getElements().toString();
+  }
+
+  @Override
+  public int computeHashCode() {
+    return super.computeHashCode() * 31 + getClass().hashCode();
   }
 
   @NotNull
   @Override
   protected String getPresentableValueText() {
-    return PerlBundle.message("perl.value.hash.presentable", myValuesType.getPresentableText());
+    return PerlBundle.message("perl.value.hash.presentable",
+                              getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }
 }
