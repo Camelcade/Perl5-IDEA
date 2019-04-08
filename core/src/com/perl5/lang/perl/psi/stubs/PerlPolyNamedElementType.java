@@ -85,10 +85,10 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   @Override
   public final void serialize(@NotNull Stub stub, @NotNull StubOutputStream dataStream) throws IOException {
     List<StubElement> childrenStubs = stub.getLightNamedElementsStubs();
-    dataStream.writeInt(childrenStubs.size());
+    dataStream.writeVarInt(childrenStubs.size());
     serializeStub(stub, dataStream);
     for (StubElement childStub : childrenStubs) {
-      dataStream.writeInt(getSerializationId(childStub)); // serialization id
+      dataStream.writeVarInt(getSerializationId(childStub)); // serialization id
       //noinspection unchecked
       childStub.getStubType().serialize(childStub, dataStream);
     }
@@ -101,13 +101,13 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   @NotNull
   @Override
   public final Stub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    int size = dataStream.readInt();
+    int size = dataStream.readVarInt();
     List<StubElement> childStubs = new ArrayList<>(size);
     Stub result = deserialize(dataStream, parentStub, childStubs);
 
     for (int i = 0; i < size; i++) {
       //noinspection unchecked
-      childStubs.add((StubElement)getElementTypeById(dataStream.readInt()).deserialize(dataStream, result));
+      childStubs.add((StubElement)getElementTypeById(dataStream.readVarInt()).deserialize(dataStream, result));
     }
 
     return result;

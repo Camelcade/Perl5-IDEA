@@ -68,7 +68,7 @@ public abstract class PerlCallValue extends PerlValue {
     super(dataStream);
     myNamespaceNameValue = PerlValuesManager.readValue(dataStream);
     mySubNameValue = PerlValuesManager.readValue(dataStream);
-    int argumentsNumber = dataStream.readInt();
+    int argumentsNumber = dataStream.readVarInt();
     List<PerlValue> arguments = new ArrayList<>(argumentsNumber);
     for (int i = 0; i < argumentsNumber; i++) {
       arguments.add(PerlValuesManager.readValue(dataStream));
@@ -80,7 +80,7 @@ public abstract class PerlCallValue extends PerlValue {
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     myNamespaceNameValue.serialize(dataStream);
     mySubNameValue.serialize(dataStream);
-    dataStream.writeInt(myArguments.size());
+    dataStream.writeVarInt(myArguments.size());
     for (PerlValue argument : myArguments) {
       argument.serialize(dataStream);
     }

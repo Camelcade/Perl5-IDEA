@@ -185,20 +185,16 @@ public class PerlSubArgument {
 
   @NotNull
   public static List<PerlSubArgument> deserializeList(@NotNull StubInputStream dataStream) throws IOException {
-    int argumentsNumber = dataStream.readInt();
+    int argumentsNumber = dataStream.readVarInt();
 
-    if (argumentsNumber > 0) {
-
-      List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
-
-      for (int i = 0; i < argumentsNumber; i++) {
-        arguments.add(deserialize(dataStream));
-      }
-      return arguments;
-    }
-    else {
+    if (argumentsNumber <= 0) {
       return Collections.emptyList();
     }
+    List<PerlSubArgument> arguments = new ArrayList<>(argumentsNumber);
+    for (int i = 0; i < argumentsNumber; i++) {
+      arguments.add(deserialize(dataStream));
+    }
+    return arguments;
   }
 
   public static PerlSubArgument empty() {
@@ -210,7 +206,7 @@ public class PerlSubArgument {
   }
 
   public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException {
-    dataStream.writeInt(arguments.size());
+    dataStream.writeVarInt(arguments.size());
     for (PerlSubArgument argument : arguments) {
       argument.serialize(dataStream);
     }

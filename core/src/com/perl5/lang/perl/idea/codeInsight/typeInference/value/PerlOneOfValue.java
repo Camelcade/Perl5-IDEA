@@ -51,7 +51,7 @@ public final class PerlOneOfValue extends PerlValue {
 
   public PerlOneOfValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    int elementsNumber = dataStream.readInt();
+    int elementsNumber = dataStream.readVarInt();
     Set<PerlValue> variants = new HashSet<>();
     for (int i = 0; i < elementsNumber; i++) {
       variants.add(PerlValuesManager.readValue(dataStream));
@@ -66,7 +66,7 @@ public final class PerlOneOfValue extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeInt(myVariants.size());
+    dataStream.writeVarInt(myVariants.size());
     for (PerlValue variant : myVariants) {
       variant.serialize(dataStream);
     }

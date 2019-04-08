@@ -42,10 +42,10 @@ public class PerlStubSerializationUtil {
 
   public static void writeStringsList(@NotNull StubOutputStream dataStream, List<String> stringList) throws IOException {
     if (stringList == null) {
-      dataStream.writeInt(-1);
+      dataStream.writeVarInt(0);
     }
     else {
-      dataStream.writeInt(stringList.size());
+      dataStream.writeVarInt(stringList.size() + 1);
       for (String stringItem : stringList) {
         dataStream.writeName(stringItem);
       }
@@ -54,21 +54,21 @@ public class PerlStubSerializationUtil {
 
   @Nullable
   public static List<String> readStringsList(@NotNull StubInputStream dataStream) throws IOException {
-    int listSize = dataStream.readInt();
+    int listSize = dataStream.readVarInt();
 
-    if (listSize == -1) {
+    if (listSize == 0) {
       return null;
     }
 
     ArrayList<String> result = new ArrayList<>(listSize);
-    for (int i = 0; i < listSize; i++) {
+    for (int i = 0; i < listSize - 1; i++) {
       result.add(readString(dataStream));
     }
     return result;
   }
 
   public static void writeStringListMap(@NotNull StubOutputStream dataStream, Map<String, List<String>> stringListMap) throws IOException {
-    dataStream.writeInt(stringListMap.size());
+    dataStream.writeVarInt(stringListMap.size());
     for (String key : stringListMap.keySet()) {
       dataStream.writeName(key);
       writeStringsList(dataStream, stringListMap.get(key));
@@ -76,7 +76,7 @@ public class PerlStubSerializationUtil {
   }
 
   public static Map<String, List<String>> readStringListMap(@NotNull StubInputStream dataStream) throws IOException {
-    int mapSize = dataStream.readInt();
+    int mapSize = dataStream.readVarInt();
     Map<String, List<String>> stringListMap = new HashMap<>(mapSize);
     for (int i = 0; i < mapSize; i++) {
       stringListMap.put(readString(dataStream), readStringsList(dataStream));
