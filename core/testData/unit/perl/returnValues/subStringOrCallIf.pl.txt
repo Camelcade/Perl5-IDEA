@@ -4,5 +4,5 @@ sub s<caret>ome{
   }
   'Foo::Bar'
 }
--------------------------------------------------------
+----------
 OneOf: [Foo::Bar, main::someotherthing()]

@@ -2,5 +2,5 @@ sub s<caret>ome{
   return someotherthing() if $a;
   'Foo::Bar'
 }
--------------------------------------------------------
+----------
 OneOf: [Foo::Bar, main::someotherthing()]

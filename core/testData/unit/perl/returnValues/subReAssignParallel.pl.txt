@@ -3,5 +3,5 @@ sub so<caret>me{
   ($othervar, $var) = qw/first second/;
   $var;
 }
--------------------------------------------------------
+----------
 second

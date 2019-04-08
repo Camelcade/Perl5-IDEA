@@ -1,5 +1,5 @@
 sub so<caret>me{
   Foo::Bar42::someothersub();
 }
--------------------------------------------------------
+----------
 Foo::Bar42::someothersub()

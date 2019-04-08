@@ -3,7 +3,7 @@ my
 $var;
 
 say $v<caret>ar;
--------------------------------------------------------
+----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 30 in annotatedSingleInside.pl
 JSON::XS

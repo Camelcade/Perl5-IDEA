@@ -187,9 +187,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private PerlSharedSettings mySharedSettings;
   private PerlLocalSettings myLocalSettings;
   private PerlInjectionMarkersService myInjectionMarkersService;
-  private static final String SEPARATOR = "-------------------------------------------------------";
-  private static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + PerlLightTestCaseBase.SEPARATOR;
-  private static final String SEPARATOR_NEW_LINE_AFTER = PerlLightTestCaseBase.SEPARATOR + "\n";
+  private static final String SEPARATOR = "----------";
+  private static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
+  private static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
   private static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
 
   @Override
@@ -1164,7 +1164,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       List<String> treesNames = new ArrayList<>(subTrees.keySet());
       ContainerUtil.sort(treesNames);
       for (String treeName : treesNames) {
-        sb.append("----------------------------------------------------------------------------------\n")
+        sb.append(SEPARATOR_NEW_LINE_AFTER)
           .append("Tree: ").append(getContentDisplayName.invoke(browser, treeName, target)).append("\n");
         HierarchyTreeStructure structure = (HierarchyTreeStructure)createHierarchyTreeStructure.invoke(browser, treeName, target);
         if (structure == null) {
@@ -1671,8 +1671,8 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     for (int i = 0; i < caretsOffsets.size(); i++) {
       Integer caretOffset = caretsOffsets.get(i);
       if (caretsOffsets.size() > 1) {
-        sb.append("---------------------- ").append("Caret #").append(i).append(" at: ").append(caretOffset)
-          .append("-----------------------------\n");
+        sb.append(SEPARATOR).append("Caret #").append(i).append(" at: ").append(caretOffset)
+          .append(SEPARATOR_NEW_LINE_AFTER);
       }
       getEditor().getCaretModel().moveToOffset(caretOffset);
       PsiElement elementAtCaret = getFile().getViewProvider().findElementAt(
@@ -1697,7 +1697,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     assertNotNull(element);
     StringBuilder sb = new StringBuilder();
     sb.append(getEditorTextWithCaretsAndSelections().trim())
-      .append("\n-------------------------------------------------------\n")
+      .append(SEPARATOR_NEWLINES)
       .append(element.getText()).append("\n")
       .append(serializePsiElement(element)).append("\n")
       .append(PerlValue.fromNonNull(element));

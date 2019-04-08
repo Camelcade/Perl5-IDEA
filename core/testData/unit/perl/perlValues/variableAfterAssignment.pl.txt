@@ -3,7 +3,7 @@ my $myvar;
 $myvar = Foo::Bar::->new();
 
 say $my<caret>var;
--------------------------------------------------------
+----------
 $myvar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 47 in variableAfterAssignment.pl
 Foo::Bar->new()

@@ -4,7 +4,7 @@ my(
 $var, $var2, $var3);
 
 say $v<caret>ar;
--------------------------------------------------------
+----------
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 57 in annotatedConcurrentStatement.pl
 JSON::XS

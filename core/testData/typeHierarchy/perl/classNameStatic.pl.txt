@@ -1,14 +1,14 @@
 Provider: PerlTypeHierarchyProvider
 Target: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::OtherBar
 Browser: PerlHierarchyBrowser
-----------------------------------------------------------------------------------
+----------
 Tree: Class Foo::OtherBar
 none
-----------------------------------------------------------------------------------
+----------
 Tree: Subtypes of Foo::OtherBar
 PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::OtherBar at 56 in classNameStatic.pl
     PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::SomethingElse at 123 in classNameStatic.pl
-----------------------------------------------------------------------------------
+----------
 Tree: Supertypes of Foo::OtherBar
 PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::OtherBar at 56 in classNameStatic.pl
     PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 1 in classNameStatic.pl
