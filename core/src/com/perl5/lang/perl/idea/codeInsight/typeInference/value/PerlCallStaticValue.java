@@ -42,19 +42,11 @@ public final class PerlCallStaticValue extends PerlCallValue {
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
                              boolean hasExplicitNamespace) {
-    this(namespaceNameValue, subNameValue, arguments, hasExplicitNamespace, null);
-  }
-
-  public PerlCallStaticValue(@NotNull PerlValue namespaceNameValue,
-                             @NotNull PerlValue subNameValue,
-                             @NotNull List<PerlValue> arguments,
-                             boolean hasExplicitNamespace,
-                             @Nullable PerlValue bless) {
-    super(namespaceNameValue, subNameValue, arguments, bless);
+    super(namespaceNameValue, subNameValue, arguments);
     myHasExplicitNamespace = hasExplicitNamespace;
   }
 
-  public PerlCallStaticValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlCallStaticValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myHasExplicitNamespace = dataStream.readBoolean();
   }
@@ -68,13 +60,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
   @Override
   protected int getSerializationId() {
     return PerlValuesManager.CALL_STATIC_ID;
-  }
-
-
-  @NotNull
-  @Override
-  PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlCallStaticValue(myNamespaceNameValue, mySubNameValue, myArguments, myHasExplicitNamespace, bless);
   }
 
   @Override
@@ -94,8 +79,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
       processExportDescriptors(
         project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
     }
-
-
     return true;
   }
 
@@ -162,7 +145,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
 
   @NotNull
   @Override
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message(
       "perl.value.call.static.presentable",
       myNamespaceNameValue.getPresentableText(),

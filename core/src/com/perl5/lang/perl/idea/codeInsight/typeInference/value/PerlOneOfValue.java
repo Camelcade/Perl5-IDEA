@@ -41,15 +41,10 @@ public final class PerlOneOfValue extends PerlValue {
   private final Set<PerlValue> myVariants;
 
   private PerlOneOfValue(@NotNull Set<PerlValue> variants) {
-    this(variants, null);
+    myVariants = Collections.unmodifiableSet(variants);
   }
 
-  public PerlOneOfValue(@NotNull Set<PerlValue> variants, @Nullable PerlValue bless) {
-    super(bless);
-    myVariants = Collections.unmodifiableSet(new HashSet<>(variants));
-  }
-
-  public PerlOneOfValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlOneOfValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     int elementsNumber = dataStream.readVarInt();
     Set<PerlValue> variants = new HashSet<>();
@@ -70,12 +65,6 @@ public final class PerlOneOfValue extends PerlValue {
     for (PerlValue variant : myVariants) {
       variant.serialize(dataStream);
     }
-  }
-
-  @NotNull
-  @Override
-  PerlOneOfValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlOneOfValue(this.myVariants, bless);
   }
 
   @NotNull
@@ -166,7 +155,7 @@ public final class PerlOneOfValue extends PerlValue {
 
   @NotNull
   @Override
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     List<String> variants = ContainerUtil.map(myVariants, PerlValue::getPresentableText);
     ContainerUtil.sort(variants);
     return PerlBundle.message("perl.value.oneof.static.presentable", StringUtil.join(variants, ",\n"));
@@ -175,7 +164,6 @@ public final class PerlOneOfValue extends PerlValue {
   public static final class Builder {
     @NotNull
     private final Set<PerlValue> myVariants = new HashSet<>();
-    private PerlValue myBless;
 
     public Builder(@NotNull PsiElement... elements) {
       addVariants(elements);
@@ -200,12 +188,8 @@ public final class PerlOneOfValue extends PerlValue {
         myVariants.addAll(((PerlOneOfValue)variant).myVariants);
       }
       else {
-        myVariants.add(PerlValuesManager.intern(variant));
+        myVariants.add(variant);
       }
-    }
-
-    public void bless(@Nullable PerlValue bless) {
-      myBless = bless;
     }
 
     @NotNull
@@ -213,11 +197,11 @@ public final class PerlOneOfValue extends PerlValue {
       if (myVariants.isEmpty()) {
         return UNKNOWN_VALUE;
       }
-      else if (myVariants.size() == 1 && myBless == null) {
+      else if (myVariants.size() == 1) {
         return myVariants.iterator().next();
       }
       else {
-        return myBless == null ? new PerlOneOfValue(myVariants) : new PerlOneOfValue(myVariants, myBless);
+        return new PerlOneOfValue(myVariants);
       }
     }
   }

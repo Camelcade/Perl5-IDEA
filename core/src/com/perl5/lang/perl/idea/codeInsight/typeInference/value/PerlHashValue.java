@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,8 +26,8 @@ import java.util.stream.Collectors;
 
 public final class PerlHashValue extends PerlListValue {
 
-  private PerlHashValue(@NotNull List<PerlValue> elements, @Nullable PerlValue bless) {
-    super(elements, bless);
+  private PerlHashValue(@NotNull List<PerlValue> elements) {
+    super(elements);
   }
 
   PerlHashValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -40,26 +39,15 @@ public final class PerlHashValue extends PerlListValue {
     return PerlValuesManager.HASH_ID;
   }
 
-  @NotNull
-  @Override
-  PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlHashValue(getElements(), bless);
-  }
-
 
   @Override
   public String toString() {
     return "Hash: " + getElements().toString();
   }
 
-  @Override
-  public int computeHashCode() {
-    return super.computeHashCode() * 31 + getClass().hashCode();
-  }
-
   @NotNull
   @Override
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message("perl.value.hash.presentable",
                               getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }

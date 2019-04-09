@@ -37,7 +37,7 @@ public class PerlArgumentsValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message("perl.value.sub.arguments");
   }
 

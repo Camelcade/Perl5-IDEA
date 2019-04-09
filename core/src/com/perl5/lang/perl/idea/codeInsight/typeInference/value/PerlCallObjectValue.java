@@ -39,19 +39,11 @@ public final class PerlCallObjectValue extends PerlCallValue {
                              @NotNull PerlValue subNameValue,
                              @NotNull List<PerlValue> arguments,
                              boolean isSuper) {
-    this(namespaceNameValue, subNameValue, arguments, isSuper, null);
-  }
-
-  public PerlCallObjectValue(@NotNull PerlValue namespaceNameValue,
-                             @NotNull PerlValue subNameValue,
-                             @NotNull List<PerlValue> arguments,
-                             boolean isSuper,
-                             @Nullable PerlValue bless) {
-    super(namespaceNameValue, subNameValue, arguments, bless);
+    super(namespaceNameValue, subNameValue, arguments);
     myIsSuper = isSuper;
   }
 
-  public PerlCallObjectValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlCallObjectValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myIsSuper = dataStream.readBoolean();
   }
@@ -65,12 +57,6 @@ public final class PerlCallObjectValue extends PerlCallValue {
   @Override
   protected int getSerializationId() {
     return PerlValuesManager.CALL_OBJECT_ID;
-  }
-
-  @NotNull
-  @Override
-  PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlCallObjectValue(myNamespaceNameValue, mySubNameValue, myArguments, myIsSuper, bless);
   }
 
   public boolean isSuper() {
@@ -147,7 +133,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   @NotNull
   @Override
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message(
       "perl.value.call.object.presentable",
       myNamespaceNameValue.getPresentableText(),

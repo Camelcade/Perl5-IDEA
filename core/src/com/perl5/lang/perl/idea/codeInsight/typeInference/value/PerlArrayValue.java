@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,8 +26,8 @@ import java.util.stream.Collectors;
 
 public final class PerlArrayValue extends PerlListValue {
 
-  private PerlArrayValue(@NotNull List<PerlValue> elements, @Nullable PerlValue bless) {
-    super(elements, bless);
+  private PerlArrayValue(@NotNull List<PerlValue> elements) {
+    super(elements);
   }
 
   PerlArrayValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -40,18 +39,6 @@ public final class PerlArrayValue extends PerlListValue {
     return PerlValuesManager.ARRAY_ID;
   }
 
-  @NotNull
-  @Override
-  PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlArrayValue(getElements(), bless);
-  }
-
-  @Override
-  public int computeHashCode() {
-    return super.computeHashCode() * 31 + getClass().hashCode();
-  }
-
-
   @Override
   public String toString() {
     return "Array: " + getElements().toString();
@@ -59,7 +46,7 @@ public final class PerlArrayValue extends PerlListValue {
 
   @NotNull
   @Override
-  public String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message("perl.value.array.presentable",
                               getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }

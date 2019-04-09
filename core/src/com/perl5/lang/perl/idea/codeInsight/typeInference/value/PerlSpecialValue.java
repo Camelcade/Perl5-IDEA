@@ -33,22 +33,6 @@ public abstract class PerlSpecialValue extends PerlValue {
   }
 
   @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) {
-  }
-
-  @Override
-  public final boolean equals(Object o) {
-    return o == this;
-  }
-
-  @Override
-  protected final int computeHashCode() {
-    return getClass().hashCode();
-  }
-
-  @NotNull
-  @Override
-  final PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return this;
+  protected final void serializeData(@NotNull StubOutputStream dataStream) {
   }
 }

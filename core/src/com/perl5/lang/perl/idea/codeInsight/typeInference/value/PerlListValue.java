@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,8 +29,7 @@ public abstract class PerlListValue extends PerlValue {
   @NotNull
   private final List<PerlValue> myElements;
 
-  protected PerlListValue(@NotNull List<PerlValue> elements, @Nullable PerlValue bless) {
-    super(bless);
+  protected PerlListValue(@NotNull List<PerlValue> elements) {
     myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(elements));
   }
 

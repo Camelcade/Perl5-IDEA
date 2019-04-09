@@ -32,7 +32,7 @@ public final class PerlUnknownValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  public String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message("perl.value.unknown.presentable");
   }
 

@@ -31,7 +31,6 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue.Builder;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -63,52 +62,12 @@ public abstract class PerlValue {
     AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR, PARENTHESISED_EXPR
   );
 
-  @Nullable
-  private final PerlValue myBless;
-
   private int myHashCode = 0;
 
   protected PerlValue() {
-    this((PerlValue)null);
-  }
-
-  protected PerlValue(@Nullable PerlValue bless) {
-    myBless = bless;
   }
 
   protected PerlValue(@NotNull StubInputStream dataStream) throws IOException {
-    if (dataStream.readBoolean()) {
-      myBless = PerlValuesManager.readValue(dataStream);
-    }
-    else {
-      myBless = null;
-    }
-  }
-
-  /**
-   * @return return a blessing of this entity
-   */
-  @NotNull
-  final PerlValue getBlessedInner() {
-    return myBless != null ? myBless : UNKNOWN_VALUE;
-  }
-
-  /**
-   * Should create a copy of current entity blessed with {@code bless}
-   */
-  @NotNull
-  abstract PerlValue createBlessedCopy(@NotNull PerlValue bless);
-
-  /**
-   * @return result of {@code Scalar::Util::blessed} equivalent invocation, {@link UNDEF_VALUE} if not blessed
-   */
-  @NotNull
-  public PerlValue getBless() {
-    return UNDEF_VALUE;
-  }
-
-  public final boolean isBlessed() {
-    return getBless() != UNDEF_VALUE;
   }
 
   /**
@@ -220,13 +179,6 @@ public abstract class PerlValue {
    */
   public final void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeVarInt(getSerializationId());
-    if (this instanceof PerlSpecialValue) {
-      return;
-    }
-    dataStream.writeBoolean(myBless != null);
-    if (myBless != null) {
-      myBless.serialize(dataStream);
-    }
     serializeData(dataStream);
   }
 
@@ -243,34 +195,8 @@ public abstract class PerlValue {
    * @return presentable text for tooltips
    */
   @NotNull
-  public final String getPresentableText() {
-    String presentableText = getPresentableValueText();
-    return isBlessed() ?
-           PerlBundle.message("perl.value.presentable.blessed", presentableText, getBlessedInner().getPresentableText()) :
-           presentableText;
-  }
-
-  /**
-   * @return presentable value text, without blessing information
-   * @see #getPresentableText()
-   */
-  @NotNull
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     return toString();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    PerlValue value = (PerlValue)o;
-
-    return myBless != null ? myBless.equals(value.myBless) : value.myBless == null;
   }
 
   @Override
@@ -279,7 +205,7 @@ public abstract class PerlValue {
   }
 
   protected int computeHashCode() {
-    return getClass().hashCode() + (myBless != null ? 31 * myBless.hashCode() : 0);
+    return getClass().hashCode();
   }
 
   /**

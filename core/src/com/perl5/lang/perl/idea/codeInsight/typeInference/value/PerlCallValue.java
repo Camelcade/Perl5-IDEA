@@ -54,36 +54,26 @@ public abstract class PerlCallValue extends PerlValue {
   @NotNull
   protected final List<PerlValue> myArguments;
 
-  public PerlCallValue(@NotNull PerlValue namespaceNameValue,
-                       @NotNull PerlValue subNameValue,
-                       @NotNull List<PerlValue> arguments,
-                       @Nullable PerlValue bless) {
-    super(bless);
+  protected PerlCallValue(@NotNull PerlValue namespaceNameValue,
+                          @NotNull PerlValue subNameValue,
+                          @NotNull List<PerlValue> arguments) {
     myNamespaceNameValue = namespaceNameValue;
     mySubNameValue = subNameValue;
     myArguments = Collections.unmodifiableList(new ArrayList<>(arguments));
   }
 
-  public PerlCallValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlCallValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myNamespaceNameValue = PerlValuesManager.readValue(dataStream);
     mySubNameValue = PerlValuesManager.readValue(dataStream);
-    int argumentsNumber = dataStream.readVarInt();
-    List<PerlValue> arguments = new ArrayList<>(argumentsNumber);
-    for (int i = 0; i < argumentsNumber; i++) {
-      arguments.add(PerlValuesManager.readValue(dataStream));
-    }
-    myArguments = Collections.unmodifiableList(arguments);
+    myArguments = PerlValuesManager.readList(dataStream);
   }
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     myNamespaceNameValue.serialize(dataStream);
     mySubNameValue.serialize(dataStream);
-    dataStream.writeVarInt(myArguments.size());
-    for (PerlValue argument : myArguments) {
-      argument.serialize(dataStream);
-    }
+    PerlValuesManager.writeList(dataStream, myArguments);
   }
 
   @NotNull

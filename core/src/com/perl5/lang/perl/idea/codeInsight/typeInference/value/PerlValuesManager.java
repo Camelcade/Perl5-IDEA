@@ -35,7 +35,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnkno
  * We could implement something like PerlValueElementType but this thing is not supported to be extendable, so good for now
  */
 public final class PerlValuesManager {
-  public static final int VERSION = 4;
+  public static final int VERSION = 6;
   // special values
   static final int UNKNOWN_ID = 0;
   static final int UNDEF_ID = 1;
@@ -45,10 +45,11 @@ public final class PerlValuesManager {
   static final int ARRAY_ID = 4;
   static final int HASH_ID = 5;
   static final int REFERENCE_ID = 6;
+  static final int BLESSED_ID = 7;
   // synthetic values
-  static final int ONE_OF_ID = 7;
-  static final int CALL_STATIC_ID = 8;
-  static final int CALL_OBJECT_ID = 9;
+  static final int ONE_OF_ID = 8;
+  static final int CALL_STATIC_ID = 9;
+  static final int CALL_OBJECT_ID = 10;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -78,6 +79,8 @@ public final class PerlValuesManager {
         return new PerlHashValue(dataStream);
       case REFERENCE_ID:
         return new PerlReferenceValue(dataStream);
+      case BLESSED_ID:
+        return new PerlBlessedValue(dataStream);
       case ONE_OF_ID:
         return new PerlOneOfValue(dataStream);
       case CALL_OBJECT_ID:

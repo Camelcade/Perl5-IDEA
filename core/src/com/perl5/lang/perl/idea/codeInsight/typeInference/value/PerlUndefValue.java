@@ -32,7 +32,7 @@ public final class PerlUndefValue extends PerlSpecialValue {
 
   @NotNull
   @Override
-  protected String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBaseLexer.STRING_UNDEF;
   }
 

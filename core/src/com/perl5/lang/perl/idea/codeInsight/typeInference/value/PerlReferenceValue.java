@@ -25,20 +25,24 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Set;
 
 public final class PerlReferenceValue extends PerlValue {
   @NotNull
   private final PerlValue myReferrent;
 
-  PerlReferenceValue(@NotNull PerlValue referrent, @Nullable PerlValue bless) {
-    super(bless);
+  private final boolean myIsConstantReference;
+
+  public PerlReferenceValue(@NotNull PerlValue referrent, boolean isConstantReference) {
     myReferrent = referrent;
+    myIsConstantReference = isConstantReference;
   }
 
-  public PerlReferenceValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlReferenceValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myReferrent = PerlValuesManager.readValue(dataStream);
+    myIsConstantReference = dataStream.readBoolean();
   }
 
   @Override
@@ -49,26 +53,7 @@ public final class PerlReferenceValue extends PerlValue {
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     myReferrent.serialize(dataStream);
-  }
-
-  @NotNull
-  @Override
-  public PerlValue getBless() {
-    return myReferrent.getBlessedInner();
-  }
-
-  /**
-   * @return Returns a new reference object with blessed entity
-   */
-  @NotNull
-  public PerlReferenceValue setBlessed(@NotNull PerlValue bless) {
-    return new PerlReferenceValue(myReferrent.createBlessedCopy(bless), getBlessedInner());
-  }
-
-  @NotNull
-  @Override
-  PerlValue createBlessedCopy(@NotNull PerlValue bless) {
-    return new PerlReferenceValue(this.myReferrent, bless);
+    dataStream.writeBoolean(myIsConstantReference);
   }
 
   @NotNull
@@ -76,12 +61,13 @@ public final class PerlReferenceValue extends PerlValue {
   protected Set<String> getNamespaceNames(@NotNull Project project,
                                           @NotNull GlobalSearchScope searchScope,
                                           @Nullable Set<PerlValue> recursion) {
-    return getBless().getNamespaceNames(project, searchScope, recursion);
+    return myReferrent instanceof PerlBlessedValue ? myReferrent.getNamespaceNames(project, searchScope, recursion) :
+           Collections.emptySet();
   }
 
   @Override
   public boolean canRepresentNamespace(@Nullable String namespaceName) {
-    return getBless().canRepresentNamespace(namespaceName);
+    return myReferrent instanceof PerlBlessedValue && myReferrent.canRepresentNamespace(namespaceName);
   }
 
   @Override
@@ -115,7 +101,7 @@ public final class PerlReferenceValue extends PerlValue {
 
   @NotNull
   @Override
-  public String getPresentableValueText() {
+  public String getPresentableText() {
     return PerlBundle.message("perl.value.reference.presentable", myReferrent.getPresentableText());
   }
 }

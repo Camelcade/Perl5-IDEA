@@ -42,7 +42,7 @@ public final class PerlScalarValue extends PerlValue {
     myValue = value;
   }
 
-  public PerlScalarValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlScalarValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myValue = Objects.requireNonNull(dataStream.readNameString());
   }
@@ -60,12 +60,6 @@ public final class PerlScalarValue extends PerlValue {
   @NotNull
   public String getValue() {
     return myValue;
-  }
-
-  @NotNull
-  @Override
-  PerlScalarValue createBlessedCopy(@NotNull PerlValue bless) {
-    return this;
   }
 
   @NotNull
