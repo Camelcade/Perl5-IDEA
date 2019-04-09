@@ -1,0 +1,5 @@
+@array = (one => two => 'tree', 42);
+
+%hash = @array;
+
+%h<caret>ash;

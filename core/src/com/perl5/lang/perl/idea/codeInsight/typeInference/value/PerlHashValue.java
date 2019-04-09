@@ -51,4 +51,18 @@ public final class PerlHashValue extends PerlListValue {
     return PerlBundle.message("perl.value.hash.presentable",
                               getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }
+
+  @NotNull
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  static class Builder extends PerlListValue.Builder<Builder> {
+    private Builder() {
+    }
+
+    PerlHashValue build() {
+      return new PerlHashValue(myElements);
+    }
+  }
 }

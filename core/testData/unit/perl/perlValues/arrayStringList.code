@@ -1,0 +1,3 @@
+my @array = qw(one two tree four);
+
+@ar<caret>ray;

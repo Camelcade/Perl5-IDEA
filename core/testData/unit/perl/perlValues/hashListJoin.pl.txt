@@ -1,0 +1,11 @@
+%otherhash = (
+  this => 'is'
+);
+@array = qw/ list item /;
+my %hash = (%otherhash, one => two => 'tree', 42, @array);
+
+%h<caret>ash;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 119 in hashListJoin.pl
+Hash: [this, is, one, two, tree, 42, list, item]

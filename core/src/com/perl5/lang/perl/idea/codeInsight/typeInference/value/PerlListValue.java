@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -30,7 +32,7 @@ abstract class PerlListValue extends PerlValue {
   private final List<PerlValue> myElements;
 
   protected PerlListValue(@NotNull List<PerlValue> elements) {
-    myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(elements));
+    myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(elements);
   }
 
   protected PerlListValue(@NotNull StubInputStream dataStream) throws IOException {
@@ -71,4 +73,29 @@ abstract class PerlListValue extends PerlValue {
     result = 31 * result + myElements.hashCode();
     return result;
   }
+
+  protected static abstract class Builder<Self extends PerlListValue.Builder> {
+    protected final List<PerlValue> myElements = new ArrayList<>();
+
+    protected Builder() {
+    }
+
+    public Self addPsiElements(@NotNull List<PsiElement> psiElements) {
+      return addElements(ContainerUtil.map(psiElements, PerlValue::fromNonNull));
+    }
+
+    public Self addElements(@NotNull List<PerlValue> elements) {
+      elements.forEach(it -> {
+        if (it instanceof PerlListValue) {
+          myElements.addAll(((PerlListValue)it).myElements);
+        }
+        else {
+          myElements.add(it);
+        }
+      });
+      //noinspection unchecked
+      return (Self)this;
+    }
+  }
+
 }

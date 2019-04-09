@@ -1,0 +1,3 @@
+my %hash = qw(one two tree four);
+
+%h<caret>ash;

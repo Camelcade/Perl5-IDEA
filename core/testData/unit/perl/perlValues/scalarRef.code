@@ -1,0 +1,3 @@
+$var = 42;
+my $varref = \$var;
+$va<caret>rref;

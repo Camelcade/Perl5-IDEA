@@ -31,13 +31,13 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue.Builder;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlReturnExpr;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
@@ -45,6 +45,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,10 @@ public abstract class PerlValue {
   private static final Logger LOG = Logger.getInstance(PerlValue.class);
   private static final TokenSet ONE_OF_VALUES = TokenSet.create(
     AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR, PARENTHESISED_EXPR
+  );
+
+  private static final TokenSet LIST_VALUES = TokenSet.create(
+    STRING_LIST, COMMA_SEQUENCE_EXPR
   );
 
   private int myHashCode = 0;
@@ -225,18 +230,27 @@ public abstract class PerlValue {
   }
 
   @NotNull
-  public static PerlValue from(@NotNull PerlContextType contextType,
+  public static PerlValue from(@NotNull PsiElement target,
                                @Nullable PerlAssignValueDescriptor assignValueDescriptor) {
-    if (assignValueDescriptor == null ||
-        assignValueDescriptor.getStartIndex() != 0 ||
-        contextType != PerlContextType.SCALAR) {
+    if (assignValueDescriptor == null) {
       return UNKNOWN_VALUE;
     }
     List<PsiElement> elements = assignValueDescriptor.getElements();
-    if (elements.size() != 1 || PerlContextType.from(elements.get(0)) != contextType) {
-      return UNKNOWN_VALUE;
+    PerlContextType targetContextType = PerlContextType.from(target);
+    if (targetContextType == PerlContextType.SCALAR) {
+      if (elements.size() == 1 && PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR) {
+        return fromNonNull(elements.get(0));
+      }
     }
-    return fromNonNull(elements.get(0));
+    else if (targetContextType == PerlContextType.LIST &&
+             assignValueDescriptor.getStartIndex() == 0) {
+      IElementType elementType = PsiUtilCore.getElementType(target);
+      if (elementType == HASH_VARIABLE || elementType == HASH_CAST_EXPR) {
+        return PerlHashValue.builder().addPsiElements(elements).build();
+      }
+      return PerlArrayValue.builder().addPsiElements(elements).build();
+    }
+    return UNKNOWN_VALUE;
   }
 
   /**
@@ -258,7 +272,7 @@ public abstract class PerlValue {
       return UNDEF_VALUE;
     }
     else if (elementType == TRENAR_EXPR) {
-      Builder builder = new Builder();
+      PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
       PsiElement[] children = element.getChildren();
       for (int i = 1; i < children.length; i++) {
         builder.addVariant(children[i]);
@@ -266,7 +280,25 @@ public abstract class PerlValue {
       return builder.build();
     }
     else if (ONE_OF_VALUES.contains(elementType)) {
-      return new Builder(element.getChildren()).build();
+      return PerlOneOfValue.builder().addVariants(element.getChildren()).build();
+    }
+    else if (LIST_VALUES.contains(elementType)) {
+      return PerlArrayValue.builder().addPsiElements(PerlArrayUtil.collectListElements(element)).build();
+    }
+    else if (elementType == ANON_ARRAY) {
+      return PerlReferenceValue.create(PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+    }
+    else if (elementType == ANON_HASH) {
+      return PerlReferenceValue.create(PerlHashValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+    }
+    else if (elementType == NUMBER_CONSTANT) {
+      return PerlScalarValue.create(element.getText());
+    }
+    else if (elementType == REF_EXPR) {
+      PsiElement[] children = element.getChildren();
+      if (children.length == 1) {
+        return PerlReferenceValue.create(children[0]);
+      }
     }
 
     return element instanceof PerlValuableEntity ? from((PerlValuableEntity)element) : null;

@@ -1,0 +1,7 @@
+$var = 42;
+my $varref = \$var;
+$va<caret>rref;
+----------
+$varref
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 31 in scalarRef.pl
+Reference to: 42

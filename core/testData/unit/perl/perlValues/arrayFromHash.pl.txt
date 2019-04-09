@@ -1,0 +1,9 @@
+%hash = (one => two => 'tree', 42);
+
+my @array = %hash;
+
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 57 in arrayFromHash.pl
+Array: [one, two, tree, 42]

@@ -50,4 +50,18 @@ public final class PerlArrayValue extends PerlListValue {
     return PerlBundle.message("perl.value.array.presentable",
                               getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
   }
+
+  @NotNull
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  static class Builder extends PerlListValue.Builder<Builder> {
+    private Builder() {
+    }
+
+    PerlArrayValue build() {
+      return new PerlArrayValue(myElements);
+    }
+  }
 }

@@ -1,0 +1,5 @@
+%hash = qw/key value/;
+@list = (list => 'item');
+my @array = (one => two => 'tree', %hash, @list);
+
+@ar<caret>ray;

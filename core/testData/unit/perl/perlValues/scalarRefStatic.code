@@ -1,0 +1,2 @@
+my $varref = \'test value';
+$va<caret>rref;

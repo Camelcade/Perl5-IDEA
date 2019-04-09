@@ -1,0 +1,7 @@
+%otherhash = (
+  this => 'is'
+);
+@array = qw/ list item /;
+my %hash = (%otherhash, one => two => 'tree', 42, @array);
+
+%h<caret>ash;

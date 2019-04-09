@@ -1,0 +1,3 @@
+my @array = (one => two => 'tree');
+
+@ar<caret>ray;

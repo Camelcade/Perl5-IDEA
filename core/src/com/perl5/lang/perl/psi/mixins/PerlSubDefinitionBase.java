@@ -101,7 +101,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     if (subBlock == null) {
       return UNKNOWN_VALUE;
     }
-    PerlOneOfValue.Builder valueBuilder = new PerlOneOfValue.Builder();
+    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     Instruction[] instructions = PerlControlFlowBuilder.getFor(subBlock).getInstructions();
     Instruction exitInstruction = instructions[instructions.length - 1];
     PerlControlFlowBuilder.iteratePrev(instructions, it -> {

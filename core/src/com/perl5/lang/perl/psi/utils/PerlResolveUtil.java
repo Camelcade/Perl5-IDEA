@@ -229,7 +229,7 @@ public class PerlResolveUtil {
                 PsiUtilCore.getVirtualFile(variable));
       return UNKNOWN_VALUE;
     }
-    PerlOneOfValue.Builder valueBuilder = new PerlOneOfValue.Builder();
+    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
 
     String variableName = variable.getName();
     String namespaceName = variable.getExplicitNamespaceName();
@@ -254,7 +254,7 @@ public class PerlResolveUtil {
       if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
         return NEXT;
       }
-      valueBuilder.addVariant(PerlValue.from(PerlContextType.from(variable), ((PerlAssignInstruction)currentInstruction).getRightSide()));
+      valueBuilder.addVariant(PerlValue.from(variable, ((PerlAssignInstruction)currentInstruction).getRightSide()));
       return CONTINUE;
     });
 

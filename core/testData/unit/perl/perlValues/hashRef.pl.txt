@@ -1,0 +1,7 @@
+my $hashref = {one => two => 'tree', 42};
+
+$has<caret>href;
+----------
+$hashref
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 43 in hashRef.pl
+Reference to: Hash: [one, two, tree, 42]

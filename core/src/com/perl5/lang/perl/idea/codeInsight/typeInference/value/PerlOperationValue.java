@@ -45,7 +45,7 @@ abstract class PerlOperationValue extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myBaseValue.serializeData(dataStream);
+    myBaseValue.serialize(dataStream);
   }
 
   @Override

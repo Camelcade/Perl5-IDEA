@@ -1,0 +1,5 @@
+my @array = (one => two => 'tree');
+
+$arrayref = \@array;
+
+$arr<caret>ayref

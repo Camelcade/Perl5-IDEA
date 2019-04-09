@@ -17,9 +17,9 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +27,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 public final class PerlReferenceValue extends PerlOperationValue {
 
@@ -41,11 +43,6 @@ public final class PerlReferenceValue extends PerlOperationValue {
   @Override
   protected int getSerializationId() {
     return PerlValuesManager.REFERENCE_ID;
-  }
-
-  @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    super.serializeData(dataStream);
   }
 
   @NotNull
@@ -76,5 +73,15 @@ public final class PerlReferenceValue extends PerlOperationValue {
   @Override
   public String getPresentableText() {
     return PerlBundle.message("perl.value.reference.presentable", getBaseValue().getPresentableText());
+  }
+
+  @NotNull
+  public static PerlValue create(@Nullable PerlValue referent) {
+    return referent == null ? UNKNOWN_VALUE : new PerlReferenceValue(referent);
+  }
+
+  @NotNull
+  public static PerlValue create(@Nullable PsiElement referent) {
+    return referent == null ? UNKNOWN_VALUE : create(PerlValue.fromNonNull(referent));
   }
 }

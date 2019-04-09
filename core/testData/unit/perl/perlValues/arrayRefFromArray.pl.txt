@@ -1,0 +1,9 @@
+my @array = (one => two => 'tree');
+
+$arrayref = \@array;
+
+$arr<caret>ayref
+----------
+$arrayref
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 59 in arrayRefFromArray.pl
+Reference to: Array: [one, two, tree]

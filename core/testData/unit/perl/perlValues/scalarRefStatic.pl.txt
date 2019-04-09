@@ -1,0 +1,6 @@
+my $varref = \'test value';
+$va<caret>rref;
+----------
+$varref
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 28 in scalarRefStatic.pl
+Reference to: test value

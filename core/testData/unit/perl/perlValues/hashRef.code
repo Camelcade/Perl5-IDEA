@@ -1,0 +1,3 @@
+my $hashref = {one => two => 'tree', 42};
+
+$has<caret>href;

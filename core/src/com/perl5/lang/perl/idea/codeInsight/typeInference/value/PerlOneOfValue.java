@@ -161,27 +161,33 @@ public final class PerlOneOfValue extends PerlValue {
     return PerlBundle.message("perl.value.oneof.static.presentable", StringUtil.join(variants, ",\n"));
   }
 
+  @NotNull
+  public static Builder builder() {
+    return new Builder();
+  }
+
   public static final class Builder {
     @NotNull
     private final Set<PerlValue> myVariants = new HashSet<>();
 
-    public Builder(@NotNull PsiElement... elements) {
+    private Builder(@NotNull PsiElement... elements) {
       addVariants(elements);
     }
 
-    public void addVariants(@NotNull PsiElement... elements) {
+    public Builder addVariants(@NotNull PsiElement... elements) {
       for (PsiElement element : elements) {
         addVariant(element);
       }
+      return this;
     }
 
-    public void addVariant(@Nullable PsiElement element) {
-      addVariant(from(element));
+    public Builder addVariant(@Nullable PsiElement element) {
+      return addVariant(from(element));
     }
 
-    public void addVariant(@Nullable PerlValue variant) {
+    public Builder addVariant(@Nullable PerlValue variant) {
       if (variant == null || variant == UNKNOWN_VALUE) {
-        return;
+        return this;
       }
 
       if (variant instanceof PerlOneOfValue) {
@@ -190,6 +196,7 @@ public final class PerlOneOfValue extends PerlValue {
       else {
         myVariants.add(variant);
       }
+      return this;
     }
 
     @NotNull

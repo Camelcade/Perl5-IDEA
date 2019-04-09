@@ -115,7 +115,7 @@ public abstract class PerlCallValue extends PerlValue {
   @NotNull
   private PerlValue getReturnValue(@NotNull Project project, @NotNull GlobalSearchScope searchScope) {
     return PerlValuesCacheService.getInstance(project).getReturnValue(this, () -> {
-      PerlOneOfValue.Builder builder = new PerlOneOfValue.Builder();
+      PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
       processCallTargets(project, searchScope, null, (namespace, it) -> {
         if (it instanceof PerlSub) {
           builder.addVariant(((PerlSub)it).getReturnValue(namespace, myArguments));

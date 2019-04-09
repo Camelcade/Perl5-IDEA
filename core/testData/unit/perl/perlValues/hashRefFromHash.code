@@ -1,0 +1,5 @@
+my %hash = (one => two => 'tree', 42);
+
+$hashref = \%hash;
+
+$has<caret>href;

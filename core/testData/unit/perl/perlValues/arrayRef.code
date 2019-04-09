@@ -1,0 +1,3 @@
+my $arrayref = [one => two => 'tree'];
+
+$arr<caret>ayref

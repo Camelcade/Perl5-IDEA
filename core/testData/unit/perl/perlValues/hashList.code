@@ -1,0 +1,3 @@
+my %hash = (one => two => 'tree', 42);
+
+%h<caret>ash;
