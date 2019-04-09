@@ -18,49 +18,34 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.BLESSED_ID;
-
-public class PerlBlessedValue extends PerlValue {
+/**
+ * Represents non-mutation operation value on some base value. E.g. item, slice, keys
+ */
+abstract class PerlOperationValue extends PerlValue {
   @NotNull
-  private final PerlValue myValue;
-  @NotNull
-  private final PerlValue myBless;
+  private final PerlValue myBaseValue;
 
-  PerlBlessedValue(@NotNull PerlValue value, @NotNull PerlValue bless) {
-    myValue = value;
-    myBless = bless;
+  public PerlOperationValue(@NotNull PerlValue baseValue) {
+    myBaseValue = baseValue;
   }
 
-  PerlBlessedValue(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlOperationValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myValue = PerlValuesManager.readValue(dataStream);
-    myBless = PerlValuesManager.readValue(dataStream);
+    myBaseValue = PerlValuesManager.readValue(dataStream);
   }
 
   @NotNull
-  public PerlValue getBless() {
-    return myBless;
-  }
-
-  @NotNull
-  public PerlValue getValue() {
-    return myValue;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return BLESSED_ID;
+  protected final PerlValue getBaseValue() {
+    return myBaseValue;
   }
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myValue.serialize(dataStream);
-    myBless.serialize(dataStream);
+    myBaseValue.serializeData(dataStream);
   }
 
   @Override
@@ -72,25 +57,15 @@ public class PerlBlessedValue extends PerlValue {
       return false;
     }
 
-    PerlBlessedValue value = (PerlBlessedValue)o;
+    PerlOperationValue value = (PerlOperationValue)o;
 
-    if (!myValue.equals(value.myValue)) {
-      return false;
-    }
-    return myBless.equals(value.myBless);
+    return myBaseValue.equals(value.myBaseValue);
   }
 
   @Override
   public int computeHashCode() {
     int result = super.computeHashCode();
-    result = 31 * result + myValue.hashCode();
-    result = 31 * result + myBless.hashCode();
+    result = 31 * result + myBaseValue.hashCode();
     return result;
-  }
-
-  @NotNull
-  @Override
-  public String getPresentableText() {
-    return PerlBundle.message("perl.value.presentable.blessed", myValue, myBless);
   }
 }

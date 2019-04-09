@@ -28,20 +28,16 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
 
-public final class PerlReferenceValue extends PerlValue {
-  @NotNull
-  private final PerlValue myReferrent;
-
+public final class PerlReferenceValue extends PerlOperationValue {
   private final boolean myIsConstantReference;
 
-  public PerlReferenceValue(@NotNull PerlValue referrent, boolean isConstantReference) {
-    myReferrent = referrent;
+  private PerlReferenceValue(@NotNull PerlValue referrent, boolean isConstantReference) {
+    super(referrent);
     myIsConstantReference = isConstantReference;
   }
 
   PerlReferenceValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myReferrent = PerlValuesManager.readValue(dataStream);
     myIsConstantReference = dataStream.readBoolean();
   }
 
@@ -52,7 +48,7 @@ public final class PerlReferenceValue extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myReferrent.serialize(dataStream);
+    super.serializeData(dataStream);
     dataStream.writeBoolean(myIsConstantReference);
   }
 
@@ -61,13 +57,18 @@ public final class PerlReferenceValue extends PerlValue {
   protected Set<String> getNamespaceNames(@NotNull Project project,
                                           @NotNull GlobalSearchScope searchScope,
                                           @Nullable Set<PerlValue> recursion) {
-    return myReferrent instanceof PerlBlessedValue ? myReferrent.getNamespaceNames(project, searchScope, recursion) :
+    return getBaseValue() instanceof PerlBlessedValue ? getBaseValue().getNamespaceNames(project, searchScope, recursion) :
            Collections.emptySet();
   }
 
   @Override
   public boolean canRepresentNamespace(@Nullable String namespaceName) {
-    return myReferrent instanceof PerlBlessedValue && myReferrent.canRepresentNamespace(namespaceName);
+    return getBaseValue() instanceof PerlBlessedValue && getBaseValue().canRepresentNamespace(namespaceName);
+  }
+
+  @NotNull
+  public PerlValue getTarget() {
+    return getBaseValue();
   }
 
   @Override
@@ -82,26 +83,26 @@ public final class PerlReferenceValue extends PerlValue {
       return false;
     }
 
-    PerlReferenceValue reference = (PerlReferenceValue)o;
+    PerlReferenceValue value = (PerlReferenceValue)o;
 
-    return myReferrent.equals(reference.myReferrent);
+    return myIsConstantReference == value.myIsConstantReference;
   }
 
   @Override
-  protected int computeHashCode() {
+  public int computeHashCode() {
     int result = super.computeHashCode();
-    result = 31 * result + myReferrent.hashCode();
+    result = 31 * result + (myIsConstantReference ? 1 : 0);
     return result;
   }
 
   @Override
   public String toString() {
-    return "Reference to: " + myReferrent;
+    return "Reference to: " + getBaseValue();
   }
 
   @NotNull
   @Override
   public String getPresentableText() {
-    return PerlBundle.message("perl.value.reference.presentable", myReferrent.getPresentableText());
+    return PerlBundle.message("perl.value.reference.presentable", getBaseValue().getPresentableText());
   }
 }

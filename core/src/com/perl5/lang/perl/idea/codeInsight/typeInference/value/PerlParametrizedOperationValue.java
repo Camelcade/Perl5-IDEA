@@ -17,35 +17,28 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-abstract class PerlListValue extends PerlValue {
+abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   @NotNull
-  private final List<PerlValue> myElements;
+  private final PerlValue myParameter;
 
-  protected PerlListValue(@NotNull List<PerlValue> elements) {
-    myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(elements));
+  public PerlParametrizedOperationValue(@NotNull PerlValue baseValue,
+                                        @NotNull PerlValue parameter) {
+    super(baseValue);
+    myParameter = parameter;
   }
 
-  protected PerlListValue(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlParametrizedOperationValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myElements = PerlValuesManager.readList(dataStream);
-  }
-
-  @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    PerlValuesManager.writeList(dataStream, myElements);
+    myParameter = PerlValuesManager.readValue(dataStream);
   }
 
   @NotNull
-  public final List<PerlValue> getElements() {
-    return myElements;
+  protected final PerlValue getParameter() {
+    return myParameter;
   }
 
   @Override
@@ -60,15 +53,15 @@ abstract class PerlListValue extends PerlValue {
       return false;
     }
 
-    PerlListValue value = (PerlListValue)o;
+    PerlParametrizedOperationValue value = (PerlParametrizedOperationValue)o;
 
-    return myElements.equals(value.myElements);
+    return myParameter.equals(value.myParameter);
   }
 
   @Override
   public int computeHashCode() {
     int result = super.computeHashCode();
-    result = 31 * result + myElements.hashCode();
+    result = 31 * result + myParameter.hashCode();
     return result;
   }
 }

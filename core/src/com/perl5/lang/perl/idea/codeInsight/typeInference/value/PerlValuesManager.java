@@ -50,6 +50,12 @@ public final class PerlValuesManager {
   static final int ONE_OF_ID = 8;
   static final int CALL_STATIC_ID = 9;
   static final int CALL_OBJECT_ID = 10;
+  static final int ARRAY_ITEM_ID = 11;
+  static final int HASH_ITEM_ID = 12;
+  static final int ARRAY_SLICE_ID = 13;
+  static final int HASH_SLICE_ID = 14;
+  static final int HASH_KEYS_ID = 15;
+  static final int HSH_VALUES_ID = 16;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -87,6 +93,10 @@ public final class PerlValuesManager {
         return new PerlCallObjectValue(dataStream);
       case CALL_STATIC_ID:
         return new PerlCallStaticValue(dataStream);
+      case ARRAY_ITEM_ID:
+        return new PerlArrayItemValue(dataStream);
+      case HASH_ITEM_ID:
+        return new PerlHashItemValue(dataStream);
       default:
         throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
     }

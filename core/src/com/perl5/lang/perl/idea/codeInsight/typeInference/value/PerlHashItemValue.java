@@ -17,22 +17,38 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-abstract class PerlSpecialValue extends PerlValue {
+import java.io.IOException;
 
-  protected PerlSpecialValue() {
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_ITEM_ID;
+
+public class PerlHashItemValue extends PerlParametrizedOperationValue {
+  private PerlHashItemValue(@NotNull PerlValue baseValue,
+                            @NotNull PerlValue parameter) {
+    super(baseValue, parameter);
   }
 
-  private PerlSpecialValue(@Nullable PerlValue bless) {
-  }
-
-  private PerlSpecialValue(@NotNull StubInputStream dataStream) {
+  PerlHashItemValue(@NotNull StubInputStream dataStream) throws IOException {
+    super(dataStream);
   }
 
   @Override
-  protected final void serializeData(@NotNull StubOutputStream dataStream) {
+  protected int getSerializationId() {
+    return HASH_ITEM_ID;
+  }
+
+  public PerlValue getHash() {
+    return getBaseValue();
+  }
+
+  @NotNull
+  public PerlValue getKey() {
+    return getParameter();
+  }
+
+  @Override
+  public String toString() {
+    return "HashItem: " + getBaseValue() + "{" + getParameter() + "}";
   }
 }
