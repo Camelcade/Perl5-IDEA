@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ITEM_ID;
 
-public class PerlArrayItemValue extends PerlParametrizedOperationValue {
+public final class PerlArrayItemValue extends PerlParametrizedOperationValue {
   private PerlArrayItemValue(@NotNull PerlValue baseValue, @NotNull PerlValue index) {
     super(baseValue, index);
   }

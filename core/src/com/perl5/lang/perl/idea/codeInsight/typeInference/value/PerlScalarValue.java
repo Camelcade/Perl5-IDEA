@@ -20,6 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,6 +46,12 @@ public final class PerlScalarValue extends PerlValue {
   PerlScalarValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myValue = Objects.requireNonNull(dataStream.readNameString());
+  }
+
+  @NotNull
+  @Override
+  protected final PerlContextType getContextType() {
+    return PerlContextType.SCALAR;
   }
 
   @Override

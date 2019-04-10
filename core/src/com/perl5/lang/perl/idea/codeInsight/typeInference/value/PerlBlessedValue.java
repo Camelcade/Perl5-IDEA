@@ -19,13 +19,15 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.BLESSED_ID;
 
-public class PerlBlessedValue extends PerlValue {
+public final class PerlBlessedValue extends PerlValue {
   @NotNull
   private final PerlValue myValue;
   @NotNull
@@ -55,6 +57,12 @@ public class PerlBlessedValue extends PerlValue {
   @Override
   protected int getSerializationId() {
     return BLESSED_ID;
+  }
+
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    return myValue.getContextType();
   }
 
   @Override

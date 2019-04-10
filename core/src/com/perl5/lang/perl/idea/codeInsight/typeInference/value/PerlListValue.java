@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -43,6 +44,12 @@ abstract class PerlListValue extends PerlValue {
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     PerlValuesManager.writeList(dataStream, myElements);
+  }
+
+  @NotNull
+  @Override
+  protected final PerlContextType getContextType() {
+    return PerlContextType.LIST;
   }
 
   @NotNull
@@ -97,5 +104,4 @@ abstract class PerlListValue extends PerlValue {
       return (Self)this;
     }
   }
-
 }

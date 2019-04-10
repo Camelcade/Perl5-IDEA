@@ -17,12 +17,20 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class PerlUnknownValue extends PerlSpecialValue {
   public static final PerlUnknownValue UNKNOWN_VALUE = new PerlUnknownValue();
 
   private PerlUnknownValue() {
+  }
+
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    return null;
   }
 
   @Override

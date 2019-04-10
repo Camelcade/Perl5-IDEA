@@ -25,6 +25,7 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,6 +53,27 @@ public final class PerlOneOfValue extends PerlValue {
       variants.add(PerlValuesManager.readValue(dataStream));
     }
     myVariants = Collections.unmodifiableSet(variants);
+  }
+
+  @Nullable
+  @Override
+  protected PerlContextType getContextType() {
+    if (myVariants.isEmpty()) {
+      return null;
+    }
+    PerlContextType contextType = null;
+    boolean first = true;
+    for (PerlValue variant : myVariants) {
+      if (first) {
+        contextType = variant.getContextType();
+        first = false;
+        continue;
+      }
+      if (contextType != variant.getContextType()) {
+        return null;
+      }
+    }
+    return contextType;
   }
 
   @Override

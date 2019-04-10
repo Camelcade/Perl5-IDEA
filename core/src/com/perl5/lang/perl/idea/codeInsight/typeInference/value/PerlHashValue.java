@@ -39,7 +39,6 @@ public final class PerlHashValue extends PerlListValue {
     return PerlValuesManager.HASH_ID;
   }
 
-
   @Override
   public String toString() {
     return "Hash: " + getElements().toString();

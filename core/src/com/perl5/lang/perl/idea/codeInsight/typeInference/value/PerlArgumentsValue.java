@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
@@ -24,10 +25,16 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 /**
  * Pseudo-value representing sub input arguments
  */
-public class PerlArgumentsValue extends PerlSpecialValue {
+public final class PerlArgumentsValue extends PerlSpecialValue {
   public static final PerlArgumentsValue ARGUMENTS_VALUE = new PerlArgumentsValue();
 
   private PerlArgumentsValue() {
+  }
+
+  @NotNull
+  @Override
+  protected PerlContextType getContextType() {
+    return PerlContextType.LIST;
   }
 
   @Override

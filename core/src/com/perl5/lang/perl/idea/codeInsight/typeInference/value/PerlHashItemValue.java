@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_ITEM_ID;
 
-public class PerlHashItemValue extends PerlParametrizedOperationValue {
+public final class PerlHashItemValue extends PerlParametrizedOperationValue {
   private PerlHashItemValue(@NotNull PerlValue baseValue,
                             @NotNull PerlValue parameter) {
     super(baseValue, parameter);

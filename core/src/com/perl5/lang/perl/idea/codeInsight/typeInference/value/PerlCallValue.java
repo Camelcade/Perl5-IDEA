@@ -32,6 +32,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
@@ -74,6 +75,12 @@ public abstract class PerlCallValue extends PerlValue {
     myNamespaceNameValue.serialize(dataStream);
     mySubNameValue.serialize(dataStream);
     PerlValuesManager.writeList(dataStream, myArguments);
+  }
+
+  @NotNull
+  @Override
+  protected final PerlContextType getContextType() {
+    return PerlContextType.LIST;
   }
 
   @NotNull

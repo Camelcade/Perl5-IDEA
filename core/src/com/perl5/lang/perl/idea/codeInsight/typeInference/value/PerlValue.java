@@ -190,6 +190,12 @@ public abstract class PerlValue {
   protected abstract void serializeData(@NotNull StubOutputStream dataStream) throws IOException;
 
   /**
+   * @return a context type for this value. Or null if context can't be determined (can be any)
+   */
+  @Nullable
+  protected abstract PerlContextType getContextType();
+
+  /**
    * @return code representation, that may be used e.g. in annotation
    */
   public String toCode() {

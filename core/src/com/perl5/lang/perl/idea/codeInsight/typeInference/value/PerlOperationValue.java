@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -36,6 +37,12 @@ abstract class PerlOperationValue extends PerlValue {
   public PerlOperationValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myBaseValue = PerlValuesManager.readValue(dataStream);
+  }
+
+  @NotNull
+  @Override
+  protected final PerlContextType getContextType() {
+    return PerlContextType.SCALAR;
   }
 
   @NotNull
