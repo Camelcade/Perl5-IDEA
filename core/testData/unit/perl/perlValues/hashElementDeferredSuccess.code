@@ -1,0 +1,9 @@
+%hash = (
+  one => 'two',
+  @something,
+  three => 'four',
+);
+
+$var = $hash{three};
+
+$v<caret>ar;

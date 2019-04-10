@@ -31,6 +31,6 @@ public abstract class PerlParenthesizedExpressionMixin extends PsiPerlExprImpl i
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    return PerlValue.fromNonNull(getExpr());
+    return PerlValue.from(getExpr());
   }
 }

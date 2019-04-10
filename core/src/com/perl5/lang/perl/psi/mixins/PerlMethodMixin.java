@@ -77,7 +77,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
 
     List<PerlValue> callArguments;
     if (parentElement instanceof PerlMethodContainer) {
-      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValue::fromNonNull);
+      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValue::from);
     }
     else {
       // these are sort and code variable
@@ -108,7 +108,7 @@ public abstract class PerlMethodMixin extends PerlCompositeElementImpl implement
           subNameValue, callArguments, isSuper);
       }
       else if (previousValue instanceof PerlValuableEntity) {
-        PerlValue previousElementValue = PerlValue.fromNonNull(previousValue);
+        PerlValue previousElementValue = PerlValue.from(previousValue);
         return new PerlCallObjectValue(
           previousElementValue == UNKNOWN_VALUE ? PerlPackageUtil.UNIVERSAL_VALUE : previousElementValue, subNameValue, callArguments,
           isSuper);

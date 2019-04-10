@@ -17,18 +17,52 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
 
 public class PerlHashValue extends PerlMapValue {
+  /**
+   * Transient map for faster seek operations
+   */
+  @Nullable
+  private Map<PerlValue, PerlValue> myMap;
+
   public PerlHashValue(@NotNull List<PerlValue> elements) {
     super(elements);
   }
 
   public PerlHashValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  @NotNull
+  public Map<PerlValue, PerlValue> getMap() {
+    if (myMap == null) {
+      Map<PerlValue, PerlValue> map = new HashMap<>();
+      List<PerlValue> elements = getElements();
+      for (int i = 0, size = elements.size(); i < size; i++) {
+        map.put(elements.get(i++), elements.get(i));
+      }
+      return myMap = Collections.unmodifiableMap(map);
+    }
+    return myMap;
+  }
+
+  /**
+   * @return a value for the {@code key}
+   */
+  @NotNull
+  public PerlValue get(@NotNull PerlValue key) {
+    return ObjectUtils.notNull(getMap().get(key), UNDEF_VALUE);
   }
 
   @Override

@@ -29,12 +29,9 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlReturnExpr;
-import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -49,6 +46,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
@@ -203,6 +201,24 @@ public abstract class PerlValue {
   }
 
   /**
+   * @return a value computed by {@code converter} from the current value
+   */
+  public PerlValue convert(@NotNull Function<PerlValue, PerlValue> converter) {
+    return converter.apply(this);
+  }
+
+  /**
+   * Works the same way as {@link #convert(Function)}, but returns {@link PerlUnknownValue#UNKNOWN_VALUE} if
+   * converter returned {@code UNKNOWN_VALUE} at least once.
+   *
+   * @see PerlHashElementValue#create(com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue, com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue)
+   * @see PerlOneOfValue#convertStrict(Function)
+   */
+  public PerlValue convertStrict(@NotNull Function<PerlValue, PerlValue> converter) {
+    return convert(converter);
+  }
+
+  /**
    * @return presentable text for tooltips
    */
   @NotNull
@@ -245,7 +261,7 @@ public abstract class PerlValue {
     PerlContextType targetContextType = PerlContextType.from(target);
     if (targetContextType == PerlContextType.SCALAR) {
       if (elements.size() == 1 && PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR) {
-        return fromNonNull(elements.get(0));
+        return from(elements.get(0));
       }
     }
     else if (targetContextType == PerlContextType.LIST &&
@@ -260,19 +276,22 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value for {@code element} or null if element is null/not valuable.
+   * @return a value for {@code element} or {@link PerlUnknownValue#UNKNOWN_VALUE} if element is null/not valuable.
    */
-  @Nullable
-  @Contract("null->null")
+  @NotNull
   public static PerlValue from(@Nullable PsiElement element) {
     if (element == null) {
-      return null;
+      return UNKNOWN_VALUE;
     }
     element = element.getOriginalElement();
     if (element instanceof PerlReturnExpr) {
       PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
       return expr == null ? UNDEF_VALUE : from(expr);
     }
+    else if (element instanceof PerlValuableEntity) {
+      return from((PerlValuableEntity)element);
+    }
+
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == UNDEF_EXPR) {
       return UNDEF_VALUE;
@@ -300,14 +319,16 @@ public abstract class PerlValue {
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());
     }
-    else if (elementType == REF_EXPR) {
-      PsiElement[] children = element.getChildren();
-      if (children.length == 1) {
-        return PerlReferenceValue.create(children[0]);
-      }
+    else if (element instanceof PsiPerlRefExpr) {
+      return PerlReferenceValue.create(((PsiPerlRefExpr)element).getExpr());
+    }
+    else if (element instanceof PsiPerlHashElement) {
+      PerlValue hashValue = PerlValue.from(((PsiPerlHashElement)element).getExpr());
+      PerlValue keyValue = PerlValue.from(((PsiPerlHashElement)element).getHashIndex().getExpr());
+      return PerlHashElementValue.create(hashValue, keyValue);
     }
 
-    return element instanceof PerlValuableEntity ? from((PerlValuableEntity)element) : null;
+    return UNKNOWN_VALUE;
   }
 
   @NotNull
@@ -322,13 +343,5 @@ public abstract class PerlValue {
         }
         return CachedValueProvider.Result.create(PerlValuesManager.intern(computedValue), element.getContainingFile());
       });
-  }
-
-  /**
-   * @return a value for {@code element} or {@link PerlUnknownValue#UNKNOWN_VALUE} if element is null/not applicable
-   */
-  @NotNull
-  public static PerlValue fromNonNull(@Nullable PsiElement element) {
-    return ObjectUtils.notNull(from(element), UNKNOWN_VALUE);
   }
 }

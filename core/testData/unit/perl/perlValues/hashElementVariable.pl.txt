@@ -1,0 +1,13 @@
+%hash = (
+  one => 'two',
+  three => 'four'
+);
+
+$key = 'three';
+$var = $hash{$key};
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 85 in hashElementVariable.pl
+four

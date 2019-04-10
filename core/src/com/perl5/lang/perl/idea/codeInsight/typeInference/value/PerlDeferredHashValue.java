@@ -17,19 +17,47 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class PerlDefferredHashValue extends PerlMapValue {
-  public PerlDefferredHashValue(@NotNull List<PerlValue> elements) {
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+
+public final class PerlDeferredHashValue extends PerlMapValue {
+  public PerlDeferredHashValue(@NotNull List<PerlValue> elements) {
     super(elements);
   }
 
-  public PerlDefferredHashValue(@NotNull StubInputStream dataStream) throws IOException {
+  public PerlDeferredHashValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  /**
+   * @return attempts to find a key in the deferred map by iterating the most recently added scalar values
+   */
+  @NotNull
+  public PerlValue tryGet(@NotNull PerlValue key) {
+    if (key.isEmpty()) {
+      return UNKNOWN_VALUE;
+    }
+    List<PerlValue> elements = getElements();
+    for (int i = elements.size() - 1; i >= 0; i--) {
+      PerlValue value = elements.get(i--);
+      if (value.getContextType() != PerlContextType.SCALAR) {
+        return UNKNOWN_VALUE;
+      }
+      PerlValue keyElement = elements.get(i);
+      if (keyElement.getContextType() != PerlContextType.SCALAR) {
+        return UNKNOWN_VALUE;
+      }
+      if (key.equals(keyElement)) {
+        return value;
+      }
+    }
+    return UNKNOWN_VALUE;
   }
 
   @Override

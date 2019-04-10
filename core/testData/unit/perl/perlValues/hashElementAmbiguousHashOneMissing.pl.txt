@@ -1,0 +1,20 @@
+if( $a ){
+  %hash = (
+    one => 'two',
+    three => 'four'
+  );
+}
+else{
+  %hash = (
+    three => 'blo'
+  );
+}
+
+$var = $hash{one};
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 132 in hashElementAmbiguousHashOneMissing.pl
+OneOf[two,
+undef]

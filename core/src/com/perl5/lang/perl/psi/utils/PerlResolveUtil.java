@@ -243,18 +243,18 @@ public class PerlResolveUtil {
       if (currentInstruction.num() > currentInstructionIndex) {
         return NEXT;
       }
-      PsiElement currentElement = ((PerlAssignInstruction)currentInstruction).getLeftSide();
-      if (!(currentElement instanceof PerlVariable) || ((PerlVariable)currentElement).getActualType() != actualType) {
+      PsiElement assignee = ((PerlAssignInstruction)currentInstruction).getLeftSide();
+      if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != actualType) {
         return NEXT;
       }
-      if (!Objects.equals(variableName, ((PerlVariable)currentElement).getName())) {
+      if (!Objects.equals(variableName, ((PerlVariable)assignee).getName())) {
         return NEXT;
       }
-      String explicitNamespaceName = ((PerlVariable)currentElement).getExplicitNamespaceName();
+      String explicitNamespaceName = ((PerlVariable)assignee).getExplicitNamespaceName();
       if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
         return NEXT;
       }
-      valueBuilder.addVariant(PerlValue.from(variable, ((PerlAssignInstruction)currentInstruction).getRightSide()));
+      valueBuilder.addVariant(PerlValue.from(assignee, ((PerlAssignInstruction)currentInstruction).getRightSide()));
       return CONTINUE;
     });
 

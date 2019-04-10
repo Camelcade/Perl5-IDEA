@@ -1,0 +1,15 @@
+%hash = (
+  one => 'two',
+  three => 'four'
+);
+
+$key = $a ? 'one': 'three';
+
+$var = $hash{$key};
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 98 in hashElementAmbiguousKey.pl
+OneOf[four,
+two]

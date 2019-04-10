@@ -1,0 +1,19 @@
+if( $a ){
+  %hash = (
+    one => 'two',
+    three => 'four'
+  );
+  $key = 'one';
+}
+else{
+  %hash = (
+    one => 'bla',
+    three => 'blo',
+    four => 42
+  );
+  $key = 'four'
+}
+
+$var = $hash{$key};
+
+$v<caret>ar;

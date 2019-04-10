@@ -34,6 +34,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
@@ -143,6 +144,25 @@ public final class PerlOneOfValue extends PerlValue {
     return false;
   }
 
+  @Override
+  public PerlValue convert(@NotNull Function<PerlValue, PerlValue> converter) {
+    Builder builder = builder();
+    myVariants.forEach(it -> builder.addVariant(converter.apply(it)));
+    return builder.build();
+  }
+
+  @Override
+  public PerlValue convertStrict(@NotNull Function<PerlValue, PerlValue> converter) {
+    Builder builder = builder();
+    for (PerlValue variant : myVariants) {
+      PerlValue convertedValue = converter.apply(variant);
+      if (convertedValue.isEmpty()) {
+        return UNKNOWN_VALUE;
+      }
+      builder.addVariant(convertedValue);
+    }
+    return builder.build();
+  }
 
   @Override
   public boolean equals(Object o) {

@@ -79,7 +79,8 @@ public abstract class PerlMapValue extends PerlListValue {
       }
 
       if (map == null) {
-        return new PerlDefferredHashValue(myElements);
+        // fixme we could optimize sequential scalar keys
+        return new PerlDeferredHashValue(myElements);
       }
       List<PerlValue> mapElements = new ArrayList<>(map.size() * 2);
       ArrayList<Map.Entry<PerlValue, PerlValue>> entries = new ArrayList<>(map.entrySet());

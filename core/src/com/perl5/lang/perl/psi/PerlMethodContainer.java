@@ -38,7 +38,7 @@ public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
   @NotNull
   @Override
   default PerlValue computePerlValue() {
-    return PerlValue.fromNonNull(getMethod());
+    return PerlValue.from(getMethod());
   }
 
   @Nullable

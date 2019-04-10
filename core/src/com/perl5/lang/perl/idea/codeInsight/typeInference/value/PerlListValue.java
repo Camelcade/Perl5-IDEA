@@ -88,7 +88,7 @@ abstract class PerlListValue extends PerlValue {
     }
 
     public Self addPsiElements(@NotNull List<PsiElement> psiElements) {
-      return addElements(ContainerUtil.map(psiElements, PerlValue::fromNonNull));
+      return addElements(ContainerUtil.map(psiElements, PerlValue::from));
     }
 
     public Self addElements(@NotNull List<PerlValue> elements) {

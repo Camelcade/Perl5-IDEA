@@ -82,6 +82,6 @@ public final class PerlReferenceValue extends PerlOperationValue {
 
   @NotNull
   public static PerlValue create(@Nullable PsiElement referent) {
-    return referent == null ? UNKNOWN_VALUE : create(PerlValue.fromNonNull(referent));
+    return referent == null ? UNKNOWN_VALUE : create(PerlValue.from(referent));
   }
 }

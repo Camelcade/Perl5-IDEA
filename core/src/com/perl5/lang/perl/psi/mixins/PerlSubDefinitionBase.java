@@ -112,7 +112,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
       if (element == null) {
         return ControlFlowUtil.Operation.NEXT;
       }
-      valueBuilder.addVariant(PerlValue.fromNonNull(element));
+      valueBuilder.addVariant(PerlValue.from(element));
       return ControlFlowUtil.Operation.CONTINUE;
     });
 

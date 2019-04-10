@@ -1,0 +1,10 @@
+%hash = (
+  one => 'two',
+  three => 'four'
+);
+
+$key = $a ? 'one': 'missing';
+
+$var = $hash{$key};
+
+$v<caret>ar;

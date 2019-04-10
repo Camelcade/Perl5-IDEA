@@ -1,0 +1,8 @@
+%hash = (
+  one => 'two',
+  three => 'four'
+);
+
+$var = $hash{Foo::Bar::->get_key()};
+
+$v<caret>ar;

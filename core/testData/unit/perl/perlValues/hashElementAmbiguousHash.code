@@ -1,0 +1,16 @@
+if( $a ){
+  %hash = (
+    one => 'two',
+    three => 'four'
+  );
+}
+else{
+  %hash = (
+    one => 'bla',
+    three => 'blo'
+  );
+}
+
+$var = $hash{one};
+
+$v<caret>ar;

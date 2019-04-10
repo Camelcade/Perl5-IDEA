@@ -1700,7 +1700,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       .append(SEPARATOR_NEWLINES)
       .append(element.getText()).append("\n")
       .append(serializePsiElement(element)).append("\n")
-      .append(PerlValue.fromNonNull(element).getPresentableText());
+      .append(PerlValue.from(element).getPresentableText());
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

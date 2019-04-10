@@ -509,7 +509,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (valuableEntity == null) {
       return Collections.emptyList();
     }
-    return getVariantsFromPerlValueNamespaces(valuableEntity, PerlValue.fromNonNull(valuableEntity));
+    return getVariantsFromPerlValueNamespaces(valuableEntity, PerlValue.from(valuableEntity));
   }
 
   @NotNull

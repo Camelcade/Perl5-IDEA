@@ -54,6 +54,6 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
   @NotNull
   @Override
   public PerlValue computePerlValue() {
-    return PerlValue.fromNonNull(getLastChild());
+    return PerlValue.from(getLastChild());
   }
 }

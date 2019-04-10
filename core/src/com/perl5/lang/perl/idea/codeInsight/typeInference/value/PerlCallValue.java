@@ -321,6 +321,7 @@ public abstract class PerlCallValue extends PerlValue {
     return "(" + StringUtil.join(ContainerUtil.map(myArguments, PerlValue::toString), ", ") + ")";
   }
 
+  @SuppressWarnings("NullableProblems")
   @Nullable
   @Contract("null->null")
   public static PerlCallValue from(@Nullable PsiElement element) {

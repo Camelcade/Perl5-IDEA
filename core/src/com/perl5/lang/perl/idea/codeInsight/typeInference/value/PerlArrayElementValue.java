@@ -21,34 +21,33 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_ITEM_ID;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
 
-public final class PerlHashItemValue extends PerlParametrizedOperationValue {
-  private PerlHashItemValue(@NotNull PerlValue baseValue,
-                            @NotNull PerlValue parameter) {
-    super(baseValue, parameter);
+public final class PerlArrayElementValue extends PerlParametrizedOperationValue {
+  private PerlArrayElementValue(@NotNull PerlValue baseValue, @NotNull PerlValue index) {
+    super(baseValue, index);
   }
 
-  PerlHashItemValue(@NotNull StubInputStream dataStream) throws IOException {
+  PerlArrayElementValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
   }
 
   @Override
   protected int getSerializationId() {
-    return HASH_ITEM_ID;
+    return ARRAY_ELEMENT_ID;
   }
 
-  public PerlValue getHash() {
+  public PerlValue getArray() {
     return getBaseValue();
   }
 
   @NotNull
-  public PerlValue getKey() {
+  public PerlValue getIndex() {
     return getParameter();
   }
 
   @Override
   public String toString() {
-    return "HashItem: " + getBaseValue() + "{" + getParameter() + "}";
+    return "ArrayItem: " + getBaseValue() + "[" + getParameter() + "]";
   }
 }

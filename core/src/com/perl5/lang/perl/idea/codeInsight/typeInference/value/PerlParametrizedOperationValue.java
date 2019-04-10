@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -34,6 +35,11 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   public PerlParametrizedOperationValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
     myParameter = PerlValuesManager.readValue(dataStream);
+  }
+
+  @Override
+  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    myParameter.serialize(dataStream);
   }
 
   @NotNull

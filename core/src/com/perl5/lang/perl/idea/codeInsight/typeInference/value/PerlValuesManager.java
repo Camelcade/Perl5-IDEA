@@ -51,12 +51,15 @@ public final class PerlValuesManager {
   static final int ONE_OF_ID = id++;
   static final int CALL_STATIC_ID = id++;
   static final int CALL_OBJECT_ID = id++;
-  static final int ARRAY_ITEM_ID = id++;
-  static final int HASH_ITEM_ID = id++;
-  static final int ARRAY_SLICE_ID = id++;
-  static final int HASH_SLICE_ID = id++;
-  static final int HASH_KEYS_ID = id++;
-  static final int HSH_VALUES_ID = id++;
+  static final int ARRAY_ELEMENT_ID = id++;
+  static final int HASH_ELEMENT_VALUE = id++;
+  //static final int ARRAY_SLICE_ID = id++;
+  //static final int HASH_SLICE_ID = id++;
+  //static final int HASH_KEYS_ID = id++;
+  //static final int HSH_VALUES_ID = id++;
+  //static final int SCALAR_CAST_ID = id++;
+  //static final int HASH_CAST_ID = id++;
+  //static final int ARRAY_CAST_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
   public static final int VERSION = id;
@@ -93,7 +96,7 @@ public final class PerlValuesManager {
       return new PerlHashValue(dataStream);
     }
     else if (valueId == DEFERRED_HASH_ID) {
-      return new PerlDefferredHashValue(dataStream);
+      return new PerlDeferredHashValue(dataStream);
     }
     else if (valueId == REFERENCE_ID) {
       return new PerlReferenceValue(dataStream);
@@ -110,11 +113,11 @@ public final class PerlValuesManager {
     else if (valueId == CALL_STATIC_ID) {
       return new PerlCallStaticValue(dataStream);
     }
-    else if (valueId == ARRAY_ITEM_ID) {
-      return new PerlArrayItemValue(dataStream);
+    else if (valueId == ARRAY_ELEMENT_ID) {
+      return new PerlArrayElementValue(dataStream);
     }
-    else if (valueId == HASH_ITEM_ID) {
-      return new PerlHashItemValue(dataStream);
+    else if (valueId == HASH_ELEMENT_VALUE) {
+      return new PerlHashElementValue(dataStream);
     }
     throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
