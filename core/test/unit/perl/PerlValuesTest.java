@@ -27,6 +27,14 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testHashMerge() {doTest();}
+
+  public void testHashUnmerged() {doTest();}
+
+  public void testArrayMerge() {doTest();}
+
+  public void testArrayUnmerged() {doTest();}
+
   public void testScalarRef() {doTest();}
 
   public void testScalarRefStatic() {doTest();}

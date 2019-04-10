@@ -4,4 +4,4 @@ $arr<caret>ayref
 ----------
 $arrayref
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 40 in arrayRef.pl
-Reference to: Array: [one, two, tree]
+Ref[Array(one, two, tree)]

@@ -6,4 +6,4 @@ my @array = %hash;
 ----------
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 57 in arrayFromHash.pl
-Array: [one, two, tree, 42]
+Array(one, two, tree, 42)

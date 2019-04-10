@@ -35,27 +35,31 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnkno
  * We could implement something like PerlValueElementType but this thing is not supported to be extendable, so good for now
  */
 public final class PerlValuesManager {
-  public static final int VERSION = 2;
+  private static int id = 0;
   // special values
-  static final int UNKNOWN_ID = 0;
-  static final int UNDEF_ID = 1;
-  static final int ARGUMENTS_ID = 2;
+  static final int UNKNOWN_ID = id++;
+  static final int UNDEF_ID = id++;
+  static final int ARGUMENTS_ID = id++;
   // primitives
-  static final int SCALAR_ID = 3;
-  static final int ARRAY_ID = 4;
-  static final int HASH_ID = 5;
-  static final int REFERENCE_ID = 6;
-  static final int BLESSED_ID = 7;
+  static final int SCALAR_ID = id++;
+  static final int ARRAY_ID = id++;
+  static final int HASH_ID = id++;
+  static final int DEFERRED_HASH_ID = id++;
+  static final int REFERENCE_ID = id++;
+  static final int BLESSED_ID = id++;
   // synthetic values
-  static final int ONE_OF_ID = 8;
-  static final int CALL_STATIC_ID = 9;
-  static final int CALL_OBJECT_ID = 10;
-  static final int ARRAY_ITEM_ID = 11;
-  static final int HASH_ITEM_ID = 12;
-  static final int ARRAY_SLICE_ID = 13;
-  static final int HASH_SLICE_ID = 14;
-  static final int HASH_KEYS_ID = 15;
-  static final int HSH_VALUES_ID = 16;
+  static final int ONE_OF_ID = id++;
+  static final int CALL_STATIC_ID = id++;
+  static final int CALL_OBJECT_ID = id++;
+  static final int ARRAY_ITEM_ID = id++;
+  static final int HASH_ITEM_ID = id++;
+  static final int ARRAY_SLICE_ID = id++;
+  static final int HASH_SLICE_ID = id++;
+  static final int HASH_KEYS_ID = id++;
+  static final int HSH_VALUES_ID = id++;
+
+  // MUST stay here. Automatically changes on new element creation
+  public static final int VERSION = id;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -70,36 +74,49 @@ public final class PerlValuesManager {
   @NotNull
   private static PerlValue deserialize(@NotNull StubInputStream dataStream) throws IOException {
     int valueId = dataStream.readVarInt();
-    switch (valueId) {
-      case UNKNOWN_ID:
-        return UNKNOWN_VALUE;
-      case UNDEF_ID:
-        return UNDEF_VALUE;
-      case ARGUMENTS_ID:
-        return ARGUMENTS_VALUE;
-      case SCALAR_ID:
-        return new PerlScalarValue(dataStream);
-      case ARRAY_ID:
-        return new PerlArrayValue(dataStream);
-      case HASH_ID:
-        return new PerlHashValue(dataStream);
-      case REFERENCE_ID:
-        return new PerlReferenceValue(dataStream);
-      case BLESSED_ID:
-        return new PerlBlessedValue(dataStream);
-      case ONE_OF_ID:
-        return new PerlOneOfValue(dataStream);
-      case CALL_OBJECT_ID:
-        return new PerlCallObjectValue(dataStream);
-      case CALL_STATIC_ID:
-        return new PerlCallStaticValue(dataStream);
-      case ARRAY_ITEM_ID:
-        return new PerlArrayItemValue(dataStream);
-      case HASH_ITEM_ID:
-        return new PerlHashItemValue(dataStream);
-      default:
-        throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
+    if (valueId == UNKNOWN_ID) {
+      return UNKNOWN_VALUE;
     }
+    else if (valueId == UNDEF_ID) {
+      return UNDEF_VALUE;
+    }
+    else if (valueId == ARGUMENTS_ID) {
+      return ARGUMENTS_VALUE;
+    }
+    else if (valueId == SCALAR_ID) {
+      return new PerlScalarValue(dataStream);
+    }
+    else if (valueId == ARRAY_ID) {
+      return new PerlArrayValue(dataStream);
+    }
+    else if (valueId == HASH_ID) {
+      return new PerlHashValue(dataStream);
+    }
+    else if (valueId == DEFERRED_HASH_ID) {
+      return new PerlDefferredHashValue(dataStream);
+    }
+    else if (valueId == REFERENCE_ID) {
+      return new PerlReferenceValue(dataStream);
+    }
+    else if (valueId == BLESSED_ID) {
+      return new PerlBlessedValue(dataStream);
+    }
+    else if (valueId == ONE_OF_ID) {
+      return new PerlOneOfValue(dataStream);
+    }
+    else if (valueId == CALL_OBJECT_ID) {
+      return new PerlCallObjectValue(dataStream);
+    }
+    else if (valueId == CALL_STATIC_ID) {
+      return new PerlCallStaticValue(dataStream);
+    }
+    else if (valueId == ARRAY_ITEM_ID) {
+      return new PerlArrayItemValue(dataStream);
+    }
+    else if (valueId == HASH_ITEM_ID) {
+      return new PerlHashItemValue(dataStream);
+    }
+    throw new RuntimeException("Don't know how to deserialize a value: " + valueId);
   }
 
   @NotNull

@@ -1,0 +1,9 @@
+@list = qw/first second third/;
+@otherlist = qw/ fourth first replacement/;
+%hash = (@list, @otherlist);
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 105 in hashMerge.pl
+Hash(first => replacement,
+third => fourth)

@@ -1,0 +1,4 @@
+@list = qw/first second third/;
+@otherlist = qw/ fourth first replacement/;
+%hash = (@list, @otherlist);
+%ha<caret>sh;

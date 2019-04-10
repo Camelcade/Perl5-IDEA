@@ -1,0 +1,7 @@
+%hash = (qw/key value/, Foo::Bar::->get_values());
+@otherlist = (qw/ first second/, %hash);
+@oth<caret>erlist;
+----------
+@otherlist
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 92 in arrayUnmerged.pl
+Array(first, second, Hash(key, value, Foo::Bar->get_values()))

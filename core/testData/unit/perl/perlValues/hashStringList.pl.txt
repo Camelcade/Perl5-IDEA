@@ -4,4 +4,5 @@ my %hash = qw(one two tree four);
 ----------
 %hash
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 35 in hashStringList.pl
-Hash: [one, two, tree, four]
+Hash(one => two,
+tree => four)

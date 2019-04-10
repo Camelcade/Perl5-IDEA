@@ -103,17 +103,14 @@ public final class PerlScalarValue extends PerlValue {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    if (!super.equals(o)) {
-      return false;
-    }
 
-    PerlScalarValue aStatic = (PerlScalarValue)o;
+    PerlScalarValue value = (PerlScalarValue)o;
 
-    return myValue.equals(aStatic.myValue);
+    return myValue.equals(value.myValue);
   }
 
   @Override
-  protected int computeHashCode() {
+  public int computeHashCode() {
     int result = super.computeHashCode();
     result = 31 * result + myValue.hashCode();
     return result;

@@ -1,0 +1,3 @@
+%hash = (qw/key value/, Foo::Bar::->get_values());
+@otherlist = (qw/ first second/, %hash);
+@oth<caret>erlist;

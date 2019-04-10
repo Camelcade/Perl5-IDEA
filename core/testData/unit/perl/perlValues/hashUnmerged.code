@@ -1,0 +1,4 @@
+@list = qw/first second third/;
+@otherlist = Foo::Bar::->baz(@list);
+%hash = (@list, otherlist);
+%ha<caret>sh;

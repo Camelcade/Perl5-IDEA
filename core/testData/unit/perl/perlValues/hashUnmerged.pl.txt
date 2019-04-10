@@ -1,0 +1,8 @@
+@list = qw/first second third/;
+@otherlist = Foo::Bar::->baz(@list);
+%hash = (@list, otherlist);
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 97 in hashUnmerged.pl
+Hash(first, second, third, main::otherlist())

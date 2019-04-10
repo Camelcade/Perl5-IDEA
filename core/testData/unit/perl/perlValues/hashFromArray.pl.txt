@@ -6,4 +6,5 @@
 ----------
 %hash
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 55 in hashFromArray.pl
-Hash: [one, two, tree, 42]
+Hash(one => two,
+tree => 42)

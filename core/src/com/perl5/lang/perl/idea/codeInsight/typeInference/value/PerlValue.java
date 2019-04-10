@@ -252,7 +252,7 @@ public abstract class PerlValue {
              assignValueDescriptor.getStartIndex() == 0) {
       IElementType elementType = PsiUtilCore.getElementType(target);
       if (elementType == HASH_VARIABLE || elementType == HASH_CAST_EXPR) {
-        return PerlHashValue.builder().addPsiElements(elements).build();
+        return PerlMapValue.builder().addPsiElements(elements).build();
       }
       return PerlArrayValue.builder().addPsiElements(elements).build();
     }
@@ -295,7 +295,7 @@ public abstract class PerlValue {
       return PerlReferenceValue.create(PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
     }
     else if (elementType == ANON_HASH) {
-      return PerlReferenceValue.create(PerlHashValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
+      return PerlReferenceValue.create(PerlMapValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
     }
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());

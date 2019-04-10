@@ -93,7 +93,7 @@ abstract class PerlListValue extends PerlValue {
 
     public Self addElements(@NotNull List<PerlValue> elements) {
       elements.forEach(it -> {
-        if (it instanceof PerlListValue) {
+        if (it instanceof PerlArrayValue || it instanceof PerlHashValue) {
           myElements.addAll(((PerlListValue)it).myElements);
         }
         else {
