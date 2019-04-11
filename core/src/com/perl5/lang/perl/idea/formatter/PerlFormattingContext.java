@@ -369,7 +369,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
         perlCodeStyleSettings.ALIGN_FAT_COMMA) {
       return myOperatorsAlignmentsMap.get(parentNode);
     }
-    else if (parentNodeType == TRENAR_EXPR && mySettings.ALIGN_MULTILINE_TERNARY_OPERATION) {
+    else if (parentNodeType == TERNARY_EXPR && mySettings.ALIGN_MULTILINE_TERNARY_OPERATION) {
       return myElementsALignmentsMap.get(parentNode);
     }
     else if (childNodeType == OPERATOR_DEREFERENCE &&
@@ -472,7 +472,7 @@ public class PerlFormattingContext implements PerlFormattingTokenSets {
     else if (childNodeType == COMMENT_LINE) {
       return mySettings.WRAP_COMMENTS ? Wrap.createWrap(WRAP_AS_NEEDED, false) : Wrap.createWrap(NONE, false);
     }
-    else if (parentNodeType == TRENAR_EXPR) {
+    else if (parentNodeType == TERNARY_EXPR) {
       if (mySettings.TERNARY_OPERATION_SIGNS_ON_NEXT_LINE) {
         if (childNodeType == COLON || childNodeType == QUESTION) {
           return getWrapBySettings(parentNode, mySettings.TERNARY_OPERATION_WRAP, true);

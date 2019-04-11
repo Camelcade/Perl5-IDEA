@@ -747,7 +747,7 @@ expr ::=
     | lp_not_expr           // 2
     | comma_sequence_expr   // 3 for list
     | assign_or_flow_expr   // 4
-    | trenar_expr           // 5
+    | ternary_expr          // 5
     | flipflop_expr         // 6
     | or_expr               // 7
     | and_expr              // 8
@@ -876,7 +876,7 @@ bitwise_or_xor_expr ::= expr ({'|'|'^'} expr)+
 and_expr ::= expr ( '&&' expr)+
 or_expr ::= expr ( {'||'|'//'} expr)+
 flipflop_expr ::= expr ('..'|'...') expr
-trenar_expr ::= expr '?' scalar_expr ':' scalar_expr { rightAssociative=true }
+ternary_expr ::= expr '?' scalar_expr ':' scalar_expr { rightAssociative=true }
 
 private assign_or_flow_expr ::=
     assign_expr

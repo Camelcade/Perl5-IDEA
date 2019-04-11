@@ -8,7 +8,7 @@ Perl5
             PsiElement(Perl5: $$)('$')
             PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('os')
       PsiElement(Perl5: =)('=')
-      PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+      PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
         PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
           PsiElement(Perl5: ()('(')
           PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)

@@ -14,7 +14,7 @@
 13(14) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
 14(29) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR) (InstructionImpl)
 15(16,24) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
-16(17) element: PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR). Condition: @_:true (ConditionalInstructionImpl)
+16(17) element: PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR). Condition: @_:true (ConditionalInstructionImpl)
 17(18) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 18(19) element: PsiPerlMethodImpl(Perl5: METHOD) (InstructionImpl)
 19(20) element: PsiPerlNestedCallImpl(Perl5: NESTED_CALL) (InstructionImpl)

@@ -296,7 +296,7 @@ public abstract class PerlValue {
     if (elementType == UNDEF_EXPR) {
       return UNDEF_VALUE;
     }
-    else if (elementType == TRENAR_EXPR) {
+    else if (elementType == TERNARY_EXPR) {
       PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
       PsiElement[] children = element.getChildren();
       for (int i = 1; i < children.length; i++) {

@@ -2,7 +2,7 @@
 1(2) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)
 2(3) element: PsiPerlPrintExprImpl(Perl5: PRINT_EXPR) (InstructionImpl)
 3(4,6) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
-4(5) element: PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR). Condition: $a:true (ConditionalInstructionImpl)
+4(5) element: PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR). Condition: $a:true (ConditionalInstructionImpl)
 5(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 6(7) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
 7(8) element: PsiPerlStringSqImpl(Perl5: STRING_SQ) (InstructionImpl)

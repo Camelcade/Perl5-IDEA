@@ -135,7 +135,7 @@ HTML::Mason component
       PsiComment(HTML::Mason: HTML_MASON_TEMPLATE_BLOCK_HTML)('<tr bgcolor="')
       PsiPerlStatementImpl(Perl5: STATEMENT)
         PsiElement(HTML::Mason: <%)('<%')
-        PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+        PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
           PsiPerlMulExprImpl(Perl5: MUL_EXPR)
             PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
               PsiElement(Perl5: $$)('$')

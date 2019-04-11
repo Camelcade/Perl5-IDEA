@@ -4446,7 +4446,7 @@ Perl5
         PsiElement(Perl5: $$)('$')
         PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('abc')
       PsiElement(Perl5: =)('=')
-      PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+      PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
         PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT)
           PsiElement(Perl5: NUMBER)('1')
         PsiElement(Perl5: ?)('?')

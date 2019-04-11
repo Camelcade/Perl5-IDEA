@@ -83,7 +83,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       HEREDOC_END, HEREDOC_END_INDENTABLE,
       TRYCATCH_EXPR, TRY_EXPR, CATCH_EXPR, FINALLY_EXPR, CATCH_CONDITION, EXCEPT_EXPR, OTHERWISE_EXPR, CONTINUATION_EXPR, TRYCATCH_COMPOUND,
       COMMA_SEQUENCE_EXPR, PARENTHESISED_EXPR,
-      AND_EXPR, LP_AND_EXPR, OR_EXPR, LP_OR_XOR_EXPR, TRENAR_EXPR
+      AND_EXPR, LP_AND_EXPR, OR_EXPR, LP_OR_XOR_EXPR, TERNARY_EXPR
     ));
 
   /**
@@ -563,10 +563,10 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
-    public void visitTrenarExpr(@NotNull PsiPerlTrenarExpr o) {
+    public void visitTernaryExpr(@NotNull PsiPerlTernaryExpr o) {
       PsiElement[] children = o.getChildren();
       if (children.length != 3) {
-        super.visitTrenarExpr(o);
+        super.visitTernaryExpr(o);
         return;
       }
       children[0].accept(this);

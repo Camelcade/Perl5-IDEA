@@ -195,7 +195,7 @@ HTML::Mason component
     PsiPerlStatementImpl(Perl5: STATEMENT)
       PsiPerlReturnExprImpl(Perl5: RETURN_EXPR)
         PsiElement(Perl5: return)('return')
-        PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+        PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
           PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
             PsiElement(Perl5: ()('(')
             PsiPerlAndExprImpl(Perl5: AND_EXPR)

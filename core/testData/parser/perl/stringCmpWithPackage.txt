@@ -288,7 +288,7 @@ Perl5
                       PsiPerlBlockImpl(Perl5: BLOCK)
                         PsiElement(Perl5: {)('{')
                         PsiPerlStatementImpl(Perl5: STATEMENT)
-                          PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+                          PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
                             PsiPerlAndExprImpl(Perl5: AND_EXPR)
                               PsiPerlArrayIndexVariableImpl(Perl5: ARRAY_INDEX_VARIABLE)
                                 PsiElement(Perl5: $#)('$#')

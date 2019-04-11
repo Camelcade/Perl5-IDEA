@@ -65,7 +65,7 @@ HTML::Mason component
     PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
       PsiPerlParenthesisedExprImpl(Perl5: PARENTHESISED_EXPR)
         PsiElement(Perl5: ()('(')
-        PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+        PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
           PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
             PsiPerlMethodImpl(Perl5: METHOD)
               PerlSubNameElementImpl(Perl5: unary)('int')

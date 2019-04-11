@@ -59,7 +59,7 @@ Perl5
               PsiPerlBlockImpl(Perl5: BLOCK)
                 PsiElement(Perl5: ${)('{')
                 PsiPerlStatementImpl(Perl5: STATEMENT)
-                  PsiPerlTrenarExprImpl(Perl5: TRENAR_EXPR)
+                  PsiPerlTernaryExprImpl(Perl5: TERNARY_EXPR)
                     PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR)
                       PsiPerlMethodImpl(Perl5: METHOD)
                         PerlSubNameElementImpl(Perl5: unary)('ref')

@@ -124,10 +124,10 @@ public class PerlSpacingBuilderFactory {
       .afterInside(BLOCK, MULTI_PARAM_BLOCK_CONTAINERS).spaces(1)
       .afterInside(SUB_EXPR, SORT_EXPR).spaces(1)
 
-      .beforeInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_BEFORE_COLON)
-      .afterInside(COLON, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_COLON)
-      .beforeInside(QUESTION, TRENAR_EXPR).spaceIf(settings.SPACE_BEFORE_QUEST)
-      .afterInside(QUESTION, TRENAR_EXPR).spaceIf(settings.SPACE_AFTER_QUEST)
+      .beforeInside(COLON, TERNARY_EXPR).spaceIf(settings.SPACE_BEFORE_COLON)
+      .afterInside(COLON, TERNARY_EXPR).spaceIf(settings.SPACE_AFTER_COLON)
+      .beforeInside(QUESTION, TERNARY_EXPR).spaceIf(settings.SPACE_BEFORE_QUEST)
+      .afterInside(QUESTION, TERNARY_EXPR).spaceIf(settings.SPACE_AFTER_QUEST)
 
       .betweenInside(LEFT_PAREN, SEMICOLON, FOR_COMPOUND).spaceIf(settings.SPACE_WITHIN_IF_PARENTHESES)
       .betweenInside(SEMICOLON, RIGHT_PAREN, FOR_COMPOUND).spaceIf(settings.SPACE_WITHIN_IF_PARENTHESES)

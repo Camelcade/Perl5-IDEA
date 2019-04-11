@@ -353,8 +353,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlTagScalarImpl.class);
       case "TERM_EXPR":
         return new PerlElementTypeEx(name, PsiPerlTermExprImpl.class);
-      case "TRENAR_EXPR":
-        return new PerlElementTypeEx(name, PsiPerlTrenarExprImpl.class);
+      case "TERNARY_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlTernaryExprImpl.class);
       case "TR_MODIFIERS":
         return new PerlElementTypeEx(name, PsiPerlTrModifiersImpl.class);
       case "TR_REGEX":
