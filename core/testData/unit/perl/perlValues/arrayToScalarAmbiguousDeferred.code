@@ -1,0 +1,6 @@
+my @array = qw/one two three/;
+if( $a ){
+  @array = Foo::Bar::->get_list();
+}
+my $scalar = @array;
+$sc<caret>alar;

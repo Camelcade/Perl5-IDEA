@@ -1,0 +1,11 @@
+my @array = qw/one two three/;
+if( $a ){
+  @array = Foo::Bar::->get_list();
+}
+my $scalar = @array;
+$sc<caret>alar;
+----------
+$scalar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 99 in arrayToScalarAmbiguousDeferred.pl
+scalar OneOf[Array(Foo::Bar->get_list()),
+Array(one, two, three)]

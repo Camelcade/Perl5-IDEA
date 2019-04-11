@@ -1,0 +1,11 @@
+my @array = qw/one two three/;
+if( $a ){
+  @array = qw/1 2 3 4/;
+}
+my $scalar = @array;
+$sc<caret>alar;
+----------
+$scalar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 88 in arrayToScalarAmbiguous.pl
+OneOf[3,
+4]

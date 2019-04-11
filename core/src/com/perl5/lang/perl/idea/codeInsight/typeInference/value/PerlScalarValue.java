@@ -69,6 +69,11 @@ public final class PerlScalarValue extends PerlValue {
     return myValue;
   }
 
+  @Override
+  protected boolean computeIsDeterministic() {
+    return true;
+  }
+
   @NotNull
   @Override
   protected Set<String> getSubNames(@NotNull Project project,

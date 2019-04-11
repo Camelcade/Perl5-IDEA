@@ -1,0 +1,3 @@
+my @array = qw/one two three/;
+my $scalar = @array;
+$sc<caret>alar;

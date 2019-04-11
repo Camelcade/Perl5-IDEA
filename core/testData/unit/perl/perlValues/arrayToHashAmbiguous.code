@@ -1,0 +1,6 @@
+my @array = qw/one two three four/;
+if( $a ){
+  @array = qw/key value/;
+}
+%hash = @array;
+%ha<caret>sh;

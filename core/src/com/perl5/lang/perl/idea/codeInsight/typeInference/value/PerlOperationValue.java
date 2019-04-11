@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 /**
- * Represents non-mutation operation value on some base value. E.g. item, slice, keys
+ * Represents non-mutation operation value on some base value. E.g. item, slice, keys, scalar
  */
 abstract class PerlOperationValue extends PerlValue {
   @NotNull

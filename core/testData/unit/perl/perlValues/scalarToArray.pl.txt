@@ -1,0 +1,6 @@
+my @array = 'test';
+@ar<caret>ray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 20 in scalarToArray.pl
+Array(test)

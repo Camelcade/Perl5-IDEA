@@ -59,6 +59,11 @@ public final class PerlReferenceValue extends PerlOperationValue {
     return getBaseValue() instanceof PerlBlessedValue && getBaseValue().canRepresentNamespace(namespaceName);
   }
 
+  @Override
+  protected boolean computeIsDeterministic() {
+    return getBaseValue().isDeterministic();
+  }
+
   @NotNull
   public PerlValue getTarget() {
     return getBaseValue();

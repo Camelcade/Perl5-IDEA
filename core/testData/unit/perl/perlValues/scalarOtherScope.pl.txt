@@ -1,0 +1,11 @@
+my $var = 123;
+if( $a ){
+  my $var = 345;
+}
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 45 in scalarOtherScope.pl
+OneOf[123,
+345]

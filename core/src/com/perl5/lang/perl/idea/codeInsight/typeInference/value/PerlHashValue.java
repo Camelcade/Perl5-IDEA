@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ import java.util.Map;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
 
 public class PerlHashValue extends PerlMapValue {
+  private static final Logger LOG = Logger.getInstance(PerlHashValue.class);
   /**
    * Transient map for faster seek operations
    */
@@ -44,6 +46,21 @@ public class PerlHashValue extends PerlMapValue {
     super(dataStream);
   }
 
+  @Override
+  protected boolean computeIsDeterministic() {
+    return true;
+  }
+
+  /**
+   * @return a size of the supporting map
+   * @implNote perl version works differently, returns the number of buckets allocated in hash.
+   */
+  @NotNull
+  @Override
+  protected PerlValue computeScalarRepresentation() {
+    return PerlScalarValue.create(Integer.toString(getMap().size()));
+  }
+
   @NotNull
   public Map<PerlValue, PerlValue> getMap() {
     if (myMap == null) {
@@ -55,6 +72,12 @@ public class PerlHashValue extends PerlMapValue {
       return myMap = Collections.unmodifiableMap(map);
     }
     return myMap;
+  }
+
+  @NotNull
+  @Override
+  public List<PerlValue> getListRepresentation() {
+    return getElements();
   }
 
   /**

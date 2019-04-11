@@ -1,0 +1,6 @@
+my $var = 123;
+if( $a ){
+  my $var = 345;
+}
+
+$v<caret>ar;

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class PerlArrayValue extends PerlListValue {
+  private static final Logger LOG = Logger.getInstance(PerlArrayValue.class);
 
   private PerlArrayValue(@NotNull List<PerlValue> elements) {
     super(elements);
@@ -32,6 +34,24 @@ public final class PerlArrayValue extends PerlListValue {
 
   PerlArrayValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  @Override
+  protected boolean computeIsDeterministic() {
+    return isDeterministic(getElements());
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeScalarRepresentation() {
+    LOG.assertTrue(isDeterministic());
+    return PerlScalarValue.create(Integer.toString(getElements().size()));
+  }
+
+  @NotNull
+  @Override
+  public List<PerlValue> getListRepresentation() {
+    return getElements();
   }
 
   @Override

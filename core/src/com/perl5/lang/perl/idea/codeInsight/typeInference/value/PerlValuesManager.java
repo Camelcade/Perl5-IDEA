@@ -42,24 +42,32 @@ public final class PerlValuesManager {
   static final int ARGUMENTS_ID = id++;
   // primitives
   static final int SCALAR_ID = id++;
+  static final int SCALAR_CAST_ID = id++;
+  static final int SCALAR_CONTEXT_ID = id++;
+  static final int STRINGIFY_ID = id++;
+  static final int NUMIFY_ID = id++;
+
   static final int ARRAY_ID = id++;
+  static final int ARRAY_ELEMENT_ID = id++;
+  static final int ARRAY_SLICE_ID = id++;
+  static final int ARRAY_CAST_ID = id++;
+
   static final int HASH_ID = id++;
+  static final int HASH_ELEMENT_VALUE = id++;
   static final int DEFERRED_HASH_ID = id++;
+  static final int HASH_SLICE_ID = id++;
+  static final int HASH_KEYS_ID = id++;
+  static final int HASH_VALUES_ID = id++;
+  static final int HASH_CAST_ID = id++;
+
   static final int REFERENCE_ID = id++;
   static final int BLESSED_ID = id++;
+
   // synthetic values
-  static final int ONE_OF_ID = id++;
   static final int CALL_STATIC_ID = id++;
   static final int CALL_OBJECT_ID = id++;
-  static final int ARRAY_ELEMENT_ID = id++;
-  static final int HASH_ELEMENT_VALUE = id++;
-  //static final int ARRAY_SLICE_ID = id++;
-  //static final int HASH_SLICE_ID = id++;
-  //static final int HASH_KEYS_ID = id++;
-  //static final int HSH_VALUES_ID = id++;
-  //static final int SCALAR_CAST_ID = id++;
-  //static final int HASH_CAST_ID = id++;
-  //static final int ARRAY_CAST_ID = id++;
+  static final int ONE_OF_ID = id++;
+  static final int CONDITION_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
   public static final int VERSION = id;
@@ -88,6 +96,9 @@ public final class PerlValuesManager {
     }
     else if (valueId == SCALAR_ID) {
       return new PerlScalarValue(dataStream);
+    }
+    else if (valueId == SCALAR_CONTEXT_ID) {
+      return new PerlScalarContextValue(dataStream);
     }
     else if (valueId == ARRAY_ID) {
       return new PerlArrayValue(dataStream);

@@ -1,0 +1,16 @@
+my @array = qw/one two three four/;
+if( $a ){
+  @array = qw/key value/;
+}
+elsif($b){
+  my $val  = Foo::Bar::->get_list();
+  @array = (defkey => $val);
+}
+%hash = @array;
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 169 in arrayToHashAmbiguousDeferred.pl
+Hash(OneOf[Array(defkey, scalar Foo::Bar->get_list()),
+Array(key, value),
+Array(one, two, three, four)])

@@ -1,0 +1,10 @@
+my @array = qw/one two three four/;
+if( $a ){
+  @array = qw/key value/;
+}
+elsif($b){
+  my $val  = Foo::Bar::->get_list();
+  @array = (defkey => $val);
+}
+%hash = @array;
+%ha<caret>sh;

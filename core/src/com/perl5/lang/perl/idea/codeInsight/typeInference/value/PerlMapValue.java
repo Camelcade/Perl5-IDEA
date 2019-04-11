@@ -53,6 +53,10 @@ public abstract class PerlMapValue extends PerlListValue {
     return new Builder();
   }
 
+  /**
+   * @implNote we have two different maps: deterministic and deferred.
+   * Deterministic means that all keys and values has scalar context
+   */
   static class Builder extends PerlListValue.Builder<Builder> {
     private Builder() {
     }
@@ -67,7 +71,7 @@ public abstract class PerlMapValue extends PerlListValue {
         }
         i++;
         if (i == myElements.size()) {
-          // odd number of elements
+          // odd number of elements while still deterministic
           return UNKNOWN_VALUE;
         }
         PerlValue value = myElements.get(i);

@@ -50,6 +50,8 @@ import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DEFERRED;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DETERMINISTIC;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 /**
@@ -65,7 +67,10 @@ public abstract class PerlValue {
     STRING_LIST, COMMA_SEQUENCE_EXPR
   );
 
-  private int myHashCode = 0;
+  // transient cached values
+  private volatile int myHashCode = 0;
+  private volatile PerlValueType myValueDeterminism = null;
+  private volatile PerlValue myScalarRepresentation = null;
 
   protected PerlValue() {
   }
@@ -194,6 +199,52 @@ public abstract class PerlValue {
   protected abstract PerlContextType getContextType();
 
   /**
+   * @return the scalar representation of the value
+   */
+  @NotNull
+  public final PerlValue getScalarRepresentation() {
+    if (getContextType() == PerlContextType.SCALAR) {
+      return this;
+    }
+    if (isDeterministic()) {
+      if (myScalarRepresentation == null) {
+        myScalarRepresentation = computeScalarRepresentation();
+      }
+      return myScalarRepresentation;
+    }
+    return new PerlScalarContextValue(this);
+  }
+
+  @NotNull
+  public List<PerlValue> getListRepresentation() {
+    return Collections.singletonList(this);
+  }
+
+  @NotNull
+  protected PerlValue computeScalarRepresentation() {
+    throw new RuntimeException("This method must be implemented for determined non-scalar values");
+  }
+
+  /**
+   * @return true iff this value is deterministic and don't need to be computed
+   */
+  public final boolean isDeterministic() {
+    if (myValueDeterminism == null) {
+      myValueDeterminism = computeIsDeterministic() ? DETERMINISTIC : DEFERRED;
+    }
+    return myValueDeterminism == DETERMINISTIC;
+  }
+
+  /**
+   * Don't use this method directly, use cached version: {@link #isDeterministic()}
+   *
+   * @see #isDeterministic()
+   */
+  protected boolean computeIsDeterministic() {
+    return false;
+  }
+
+  /**
    * @return code representation, that may be used e.g. in annotation
    */
   public String toCode() {
@@ -260,8 +311,8 @@ public abstract class PerlValue {
     List<PsiElement> elements = assignValueDescriptor.getElements();
     PerlContextType targetContextType = PerlContextType.from(target);
     if (targetContextType == PerlContextType.SCALAR) {
-      if (elements.size() == 1 && PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR) {
-        return from(elements.get(0));
+      if (elements.size() == 1) {
+        return from(elements.get(0)).getScalarRepresentation();
       }
     }
     else if (targetContextType == PerlContextType.LIST &&
@@ -343,5 +394,10 @@ public abstract class PerlValue {
         }
         return CachedValueProvider.Result.create(PerlValuesManager.intern(computedValue), element.getContainingFile());
       });
+  }
+
+  enum PerlValueType {
+    DETERMINISTIC,
+    DEFERRED;
   }
 }

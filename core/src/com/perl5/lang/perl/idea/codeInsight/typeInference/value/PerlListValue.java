@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -74,6 +75,18 @@ abstract class PerlListValue extends PerlValue {
     return myElements.equals(value.myElements);
   }
 
+  /**
+   * @return true iff all {@code values} are deterministic
+   */
+  static boolean isDeterministic(@NotNull Collection<PerlValue> values) {
+    for (PerlValue value : values) {
+      if (!value.isDeterministic()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   @Override
   public int computeHashCode() {
     int result = super.computeHashCode();
@@ -92,14 +105,13 @@ abstract class PerlListValue extends PerlValue {
     }
 
     public Self addElements(@NotNull List<PerlValue> elements) {
-      elements.forEach(it -> {
-        if (it instanceof PerlArrayValue || it instanceof PerlHashValue) {
-          myElements.addAll(((PerlListValue)it).myElements);
-        }
-        else {
-          myElements.add(it);
-        }
-      });
+      elements.forEach(it -> myElements.addAll(it.getListRepresentation()));
+      //noinspection unchecked
+      return (Self)this;
+    }
+
+    public Self addElement(@NotNull PerlValue element) {
+      myElements.add(element);
       //noinspection unchecked
       return (Self)this;
     }

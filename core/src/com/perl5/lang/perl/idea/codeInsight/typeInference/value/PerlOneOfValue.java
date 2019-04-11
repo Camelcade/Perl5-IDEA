@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -39,6 +40,7 @@ import java.util.function.Function;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 public final class PerlOneOfValue extends PerlValue {
+  private static final Logger LOG = Logger.getInstance(PerlOneOfValue.class);
   @NotNull
   private final Set<PerlValue> myVariants;
 
@@ -88,6 +90,21 @@ public final class PerlOneOfValue extends PerlValue {
     for (PerlValue variant : myVariants) {
       variant.serialize(dataStream);
     }
+  }
+
+  /**
+   * could be cached
+   */
+  @Override
+  protected boolean computeIsDeterministic() {
+    return PerlListValue.isDeterministic(myVariants);
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeScalarRepresentation() {
+    LOG.assertTrue(isDeterministic());
+    return convert(PerlValue::computeScalarRepresentation);
   }
 
   @NotNull

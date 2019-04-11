@@ -1,0 +1,7 @@
+my @array = qw/one two three/;
+my $scalar = @array;
+$sc<caret>alar;
+----------
+$scalar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 52 in arrayToScalar.pl
+3
