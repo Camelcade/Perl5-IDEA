@@ -55,8 +55,8 @@ Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
 
 ----------
 TestPackage.pm
-TestPackage.pm in lib; /perl5.png
 TestPackage.pm in lib/Module; /perl5.png
+TestPackage.pm in lib; /perl5.png
 
 ----------
 lib
