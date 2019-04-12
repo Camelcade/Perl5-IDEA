@@ -26,6 +26,11 @@ public final class PerlUndefValue extends PerlSpecialValue {
   private PerlUndefValue() {
   }
 
+  @Override
+  protected boolean computeIsDeterministic() {
+    return true;
+  }
+
   @NotNull
   @Override
   protected PerlContextType getContextType() {
