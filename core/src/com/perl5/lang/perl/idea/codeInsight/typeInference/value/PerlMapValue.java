@@ -62,7 +62,7 @@ public abstract class PerlMapValue extends PerlListValue {
     }
 
     PerlValue build() {
-      Map<PerlValue, PerlValue> map = new HashMap<>();
+      Map<PerlValue, PerlValue> map = new LinkedHashMap<>();
       for (int i = 0; i < myElements.size(); i++) {
         PerlValue key = myElements.get(i);
         if (key.getContextType() != PerlContextType.SCALAR) {
