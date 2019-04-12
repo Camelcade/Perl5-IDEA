@@ -1,14 +1,11 @@
 TestPackage.pm
 TestPackage.pm in lib/Module; /perl5.png
-
 ----------
 lib
 PsiDirectory
-
 ----------
 scripts
 PsiDirectory
-
 ----------
 src
 PsiDirectory

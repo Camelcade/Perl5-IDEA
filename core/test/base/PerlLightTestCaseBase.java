@@ -1808,18 +1808,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         sb.append(SEPARATOR_NEWLINES);
       }
       sb.append(acceptableName).append("\n");
+      List<String> itemsResult = new ArrayList<>();
       for (Object element : elements) {
         if (element instanceof PsiDirectory) {
-          sb.append("PsiDirectory");
+          itemsResult.add("PsiDirectory");
         }
         else if (element instanceof NavigationItem) {
-          sb.append(serializePresentation(((NavigationItem)element).getPresentation()));
+          itemsResult.add(serializePresentation(((NavigationItem)element).getPresentation()));
         }
         else {
-          sb.append(element.toString());
+          itemsResult.add(element.toString());
         }
-        sb.append("\n");
       }
+      ContainerUtil.sort(itemsResult);
+      sb.append(StringUtil.join(itemsResult, "\n"));
     }
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());

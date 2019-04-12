@@ -1,69 +1,55 @@
 ClassAccessor
 ClassAccessor in ClassAccessor.pm; /package_gutter_icon.png; null
-
 ----------
 Library::Exception
 Library::Exception in Exceptions.pm; /exceptionClass.svg; null
-
 ----------
 Library::Exception2
 Library::Exception2 in Exceptions.pm; /exceptionClass.svg; null
-
 ----------
 LibraryException
 LibraryException in Exceptions.pm; /exceptionClass.svg; null
-
 ----------
 LibraryException3
 LibraryException3 in Exceptions.pm; /exceptionClass.svg; null
-
 ----------
 Module::TestPackage
 Module::TestPackage in TestPackage.pm; /package_gutter_icon.png; null
-
 ----------
 Mojolicious::Controller
 Mojolicious::Controller in Controller.pm; /package_gutter_icon.png; null
-
 ----------
 Mojolicious::Plugin::DefaultHelpers
 Mojolicious::Plugin::DefaultHelpers in DefaultHelpers.pm; /package_gutter_icon.png; null
-
 ----------
 Mojolicious::Plugin::TagHelpers
 Mojolicious::Plugin::TagHelpers in TagHelpers.pm; /package_gutter_icon.png; null
-
 ----------
 MyTest::Constants
 MyTest::Constants in Constants.pm; /package_gutter_icon.png; null
-
 ----------
 MyTest::Exceptions
 MyTest::Exceptions in Exceptions.pm; /package_gutter_icon.png; null
-
 ----------
 MyTest::Some::Package
 MyTest::Some::Package in Package.pm; /package_gutter_icon.png; null
-
 ----------
 MyTest::Something
 MyTest::Something in Something.pm; /package_gutter_icon.png; null
-
 ----------
 TestPackage
 TestPackage in TestPackage.pm; /package_gutter_icon.png; null
-
 ----------
 main
-MyTest::Something in MyTest; /perl5.png
-MyTest::Exceptions in MyTest; /perl5.png
-MyTest::Constants in MyTest; /perl5.png
-MyTest::ClassAccessor in MyTest; /perl5.png
-MyTest::Some::Package in MyTest/Some; /perl5.png
 Mojolicious::Controller in Mojolicious; /perl5.png
-Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
 Mojolicious::Plugin::DefaultHelpers in Mojolicious/Plugin; /perl5.png
+Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
+MyTest::ClassAccessor in MyTest; /perl5.png
+MyTest::Constants in MyTest; /perl5.png
+MyTest::Exceptions in MyTest; /perl5.png
+MyTest::Some::Package in MyTest/Some; /perl5.png
+MyTest::Something in MyTest; /perl5.png
 TestPackage.pm in lib/Module; /perl5.png
+TestPackage.pm in lib; /perl5.png
 module_test_script.pl in scripts; /perl5classic.png
 test_script.pl in scripts; /perl5classic.png
-TestPackage.pm in lib; /perl5.png
