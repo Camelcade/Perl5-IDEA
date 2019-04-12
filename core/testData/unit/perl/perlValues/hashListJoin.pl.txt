@@ -8,7 +8,7 @@ my %hash = (%otherhash, one => two => 'tree', 42, @array);
 ----------
 %hash
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 119 in hashListJoin.pl
-Hash(list => item,
+Hash(this => is,
 one => two,
-this => is,
-tree => 42)
+tree => 42,
+list => item)

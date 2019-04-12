@@ -84,7 +84,7 @@ public final class PerlValuesManager {
 
   @NotNull
   private static PerlValue deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    int valueId = dataStream.readVarInt();
+    final int valueId = dataStream.readVarInt();
     if (valueId == UNKNOWN_ID) {
       return UNKNOWN_VALUE;
     }

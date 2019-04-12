@@ -22,7 +22,10 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
@@ -88,8 +91,6 @@ public abstract class PerlMapValue extends PerlListValue {
       }
       List<PerlValue> mapElements = new ArrayList<>(map.size() * 2);
       ArrayList<Map.Entry<PerlValue, PerlValue>> entries = new ArrayList<>(map.entrySet());
-      //this probably should be in serialization only, but ok for now
-      entries.sort(Comparator.comparing(it -> it.getKey().toString()));
       entries.forEach(it -> {
         mapElements.add(it.getKey());
         mapElements.add(it.getValue());

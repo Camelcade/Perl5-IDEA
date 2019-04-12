@@ -39,6 +39,7 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
+    super.serializeData(dataStream);
     myParameter.serialize(dataStream);
   }
 
