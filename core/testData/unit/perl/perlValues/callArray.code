@@ -1,0 +1,3 @@
+@array = Foo::Bar::->new();
+
+@a<caret>rray;

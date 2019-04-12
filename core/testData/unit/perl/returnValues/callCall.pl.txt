@@ -3,4 +3,4 @@ sub so<caret>me{
   return $object->get_otherobject('other_object_name');
 }
 ----------
-Foo::Bar42::get_object(object_name)->get_otherobject(other_object_name)
+scalar Foo::Bar42::get_object(object_name)->get_otherobject(other_object_name)

@@ -1,0 +1,7 @@
+@array = new Foo::Bar::();
+
+@a<caret>rray;
+----------
+@array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 28 in callArrayFancy.pl
+Array(Foo::Bar->new())

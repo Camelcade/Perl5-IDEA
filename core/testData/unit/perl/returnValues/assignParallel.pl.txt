@@ -3,4 +3,4 @@ sub so<caret>me{
   $var;
 }
 ----------
-main::someothersub()
+scalar main::someothersub()

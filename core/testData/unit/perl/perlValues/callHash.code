@@ -1,0 +1,3 @@
+%hash = Foo::Bar::->new();
+
+%ha<caret>sh;

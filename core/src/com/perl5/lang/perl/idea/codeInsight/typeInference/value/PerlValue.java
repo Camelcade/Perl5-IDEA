@@ -203,6 +203,9 @@ public abstract class PerlValue {
    */
   @NotNull
   public final PerlValue getScalarRepresentation() {
+    if (isEmpty()) {
+      return UNKNOWN_VALUE;
+    }
     if (getContextType() == PerlContextType.SCALAR) {
       return this;
     }

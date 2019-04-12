@@ -1,0 +1,3 @@
+$scalar = Foo::Bar::->new();
+
+$sca<caret>lar;

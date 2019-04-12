@@ -1,0 +1,7 @@
+$scalar = new Foo::Bar::();
+
+$sca<caret>lar;
+----------
+$scalar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 29 in callScalarFancy.pl
+scalar Foo::Bar->new()
