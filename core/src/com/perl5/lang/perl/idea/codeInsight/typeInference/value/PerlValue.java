@@ -386,7 +386,7 @@ public abstract class PerlValue {
   }
 
   @NotNull
-  public static PerlValue from(@NotNull PerlValuableEntity element) {
+  private static PerlValue from(@NotNull PerlValuableEntity element) {
     return CachedValuesManager.getCachedValue(
       element, () -> {
         //noinspection deprecation
