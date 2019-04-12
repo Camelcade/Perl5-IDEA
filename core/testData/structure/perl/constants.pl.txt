@@ -1,4 +1,4 @@
-constants.pl in /src; /perl5classic.png -> Perl5 at 0 in constants.pl
+constants.pl in ; /perl5classic.png -> Perl5 at 0 in constants.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Bla::Bla in constants.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Bla::Bla at 0 in constants.pl

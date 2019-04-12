@@ -1,4 +1,4 @@
-exceptionClass.pl in /src; /perl5classic.png -> Perl5 at 0 in exceptionClass.pl
+exceptionClass.pl in ; /perl5classic.png -> Perl5 at 0 in exceptionClass.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Exception1 in exceptionClass.pl; /exceptionClass.svg; null -> PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 25 in exceptionClass.pl

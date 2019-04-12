@@ -1,0 +1,7 @@
+Module::TestPackage
+Module::TestPackage in TestPackage.pm; /package_gutter_icon.png; null
+
+----------
+main
+TestPackage.pm in lib/Module; /perl5.png
+module_test_script.pl in scripts; /perl5classic.png

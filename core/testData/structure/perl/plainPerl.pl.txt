@@ -1,4 +1,4 @@
-plainPerl.pl in /src; /perl5classic.png -> Perl5 at 0 in plainPerl.pl
+plainPerl.pl in ; /perl5classic.png -> Perl5 at 0 in plainPerl.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Documentation in null; /perl5language.png -> POD file at 0 in plainPerl.pl

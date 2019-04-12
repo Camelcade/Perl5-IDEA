@@ -1,4 +1,4 @@
-mooseAttrs.pl in /src; /perl5classic.png -> Perl5 at 0 in mooseAttrs.pl
+mooseAttrs.pl in ; /perl5classic.png -> Perl5 at 0 in mooseAttrs.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   MySomePackage in mooseAttrs.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MySomePackage at 16 in mooseAttrs.pl

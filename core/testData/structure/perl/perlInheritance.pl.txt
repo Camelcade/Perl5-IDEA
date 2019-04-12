@@ -1,4 +1,4 @@
-perlInheritance.pl in /src; /perl5classic.png -> Perl5 at 0 in perlInheritance.pl
+perlInheritance.pl in ; /perl5classic.png -> Perl5 at 0 in perlInheritance.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Something in perlInheritance.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Something at 0 in perlInheritance.pl

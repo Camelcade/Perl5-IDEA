@@ -1,4 +1,4 @@
-perlImports.pl in /src; /perl5classic.png -> Perl5 at 0 in perlImports.pl
+perlImports.pl in ; /perl5classic.png -> Perl5 at 0 in perlImports.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Import in perlImports.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Import at 0 in perlImports.pl

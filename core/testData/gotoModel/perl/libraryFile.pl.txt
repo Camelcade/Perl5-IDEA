@@ -1,0 +1,54 @@
+ClassAccessor.pm
+MyTest::ClassAccessor in MyTest; /perl5.png
+
+----------
+Constants.pm
+MyTest::Constants in MyTest; /perl5.png
+
+----------
+Controller.pm
+Mojolicious::Controller in Mojolicious; /perl5.png
+
+----------
+DefaultHelpers.pm
+Mojolicious::Plugin::DefaultHelpers in Mojolicious/Plugin; /perl5.png
+
+----------
+Exceptions.pm
+MyTest::Exceptions in MyTest; /perl5.png
+
+----------
+Mojolicious
+PsiDirectory
+
+----------
+MyTest
+PsiDirectory
+
+----------
+Package.pm
+MyTest::Some::Package in MyTest/Some; /perl5.png
+
+----------
+Plugin
+PsiDirectory
+
+----------
+Some
+PsiDirectory
+
+----------
+Something.pm
+MyTest::Something in MyTest; /perl5.png
+
+----------
+TagHelpers.pm
+Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
+
+----------
+src
+PsiDirectory
+
+----------
+testlib
+PsiDirectory

@@ -1,4 +1,4 @@
-classAccessor.pl in /src; /perl5classic.png -> Perl5 at 0 in classAccessor.pl
+classAccessor.pl in ; /perl5classic.png -> Perl5 at 0 in classAccessor.pl
 Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
   Foo::Bar in classAccessor.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 0 in classAccessor.pl

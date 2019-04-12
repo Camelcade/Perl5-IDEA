@@ -67,6 +67,7 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.EditorColors;
@@ -79,6 +80,9 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
+import com.intellij.openapi.roots.ContentEntry;
+import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -191,6 +195,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private static final String SEPARATOR_NEW_LINE_BEFORE = "\n" + SEPARATOR;
   private static final String SEPARATOR_NEW_LINE_AFTER = SEPARATOR + "\n";
   private static final String SEPARATOR_NEWLINES = SEPARATOR_NEW_LINE_BEFORE + "\n";
+  private final Disposable myPerlLightTestCaseDisposable = Disposer.newDisposable();
 
   @Override
   protected void setUp() throws Exception {
@@ -199,7 +204,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringMixin.class, new PerlStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
-    setUpLibrary();
+    if (shouldSetUpLibrary()) {
+      setUpLibrary();
+    }
     myCodeInsightSettings = Perl5CodeInsightSettings.getInstance().copy();
     mySharedSettings = XmlSerializerUtil.createCopy(PerlSharedSettings.getInstance(getProject()));
     myLocalSettings = XmlSerializerUtil.createCopy(PerlLocalSettings.getInstance(getProject()));
@@ -212,6 +219,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   @Override
   protected void tearDown() throws Exception {
     try {
+      Disposer.dispose(myPerlLightTestCaseDisposable);
       PerlStringCompletionCache.getInstance(getProject()).clear();
       PerlInjectionMarkersService.getInstance(getProject()).loadState(myInjectionMarkersService);
       Perl5CodeInsightSettings.getInstance().loadState(myCodeInsightSettings);
@@ -225,6 +233,16 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
+  /**
+   * Registers disposable to be disposed first on tear down of the light test case
+   */
+  protected final void addPerlTearDownListener(@NotNull Disposable disposable) {
+    Disposer.register(myPerlLightTestCaseDisposable, disposable);
+  }
+
+  /**
+   * Registers disposable to be disposed after teaar down of the fixture and nullizing the module
+   */
   protected final void addTearDownListener(@NotNull Disposable disposable) {
     Disposer.register(getTestRootDisposable(), disposable);
   }
@@ -268,6 +286,35 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
       }));
+  }
+
+  /**
+   * Adds a {@code contentRootFile} as a content entry to the current module
+   *
+   * @apiNote adding modules is not allowed in the light tests
+   */
+  protected void addContentEntry(@NotNull VirtualFile contentRootFile) {
+    ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(myModule);
+    assertNotNull(moduleRootManager);
+    ModifiableRootModel modifiableModel = moduleRootManager.getModifiableModel();
+    modifiableModel.addContentEntry(contentRootFile);
+    WriteAction.run(modifiableModel::commit);
+    addPerlTearDownListener(() -> {
+      ModifiableRootModel modifiableModel1 = moduleRootManager.getModifiableModel();
+      for (ContentEntry modelContentEntry : modifiableModel1.getContentEntries()) {
+        if (contentRootFile.equals(modelContentEntry.getFile())) {
+          modifiableModel1.removeContentEntry(modelContentEntry);
+        }
+      }
+      WriteAction.run(modifiableModel1::commit);
+    });
+  }
+
+  /**
+   * @return true iff libraries should be added in the set up test method
+   */
+  protected boolean shouldSetUpLibrary() {
+    return true;
   }
 
   protected void setUpLibrary() {
@@ -1753,13 +1800,19 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     ContainerUtil.sort(acceptableNames);
     StringBuilder sb = new StringBuilder();
     for (String acceptableName : acceptableNames) {
+      Object[] elements = model.getElementsByName(acceptableName, includeNonProjectFiles, acceptableName);
+      if (elements.length == 0) {
+        continue;
+      }
       if (sb.length() > 0) {
         sb.append(SEPARATOR_NEWLINES);
       }
       sb.append(acceptableName).append("\n");
-      Object[] elements = model.getElementsByName(acceptableName, includeNonProjectFiles, "");
       for (Object element : elements) {
-        if (element instanceof NavigationItem) {
+        if (element instanceof PsiDirectory) {
+          sb.append("PsiDirectory");
+        }
+        else if (element instanceof NavigationItem) {
           sb.append(serializePresentation(((NavigationItem)element).getPresentation()));
         }
         else {
