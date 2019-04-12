@@ -34,12 +34,6 @@ public class PerlGotoModelTest extends PerlLightTestCase {
     return "testData/gotoModel/perl";
   }
 
-  @Override
-  protected boolean shouldSetUpLibrary() {
-    return false;
-  }
-
-
   public void testProjectFile() {
     doTestProject(getGoToFileModel());
   }
@@ -91,13 +85,11 @@ public class PerlGotoModelTest extends PerlLightTestCase {
 
   private void doTestEveryWhere(@NotNull FilteringGotoByModel<?> model) {
     copyToProject();
-    setUpLibrary();
     addSecondContentEntry();
     doTest(model, true);
   }
 
   private void doTestLibrary(@NotNull FilteringGotoByModel<?> model) {
-    setUpLibrary();
     doTest(model, true);
   }
 
