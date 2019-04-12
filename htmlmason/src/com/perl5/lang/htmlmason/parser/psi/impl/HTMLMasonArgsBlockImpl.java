@@ -45,7 +45,7 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
   @NotNull
   @Override
   public List<PerlSubArgument> getArgumentsList() {
-    HTMLMasonArgsBlockStub stub = getStub();
+    HTMLMasonArgsBlockStub stub = getGreenStub();
     if (stub != null) {
       return stub.getArgumentsList();
     }

@@ -54,7 +54,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   @Nullable
   @Override
   public String getNamespaceName() {
-    PerlGlobStub stub = getStub();
+    PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.getPackageName();
     }
@@ -70,7 +70,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public String getName() {
-    PerlGlobStub stub = getStub();
+    PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.getName();
     }
@@ -158,7 +158,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public boolean isLeftSideOfAssignment() {
-    PerlGlobStub stub = getStub();
+    PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.isLeftSideOfAssignment();
     }

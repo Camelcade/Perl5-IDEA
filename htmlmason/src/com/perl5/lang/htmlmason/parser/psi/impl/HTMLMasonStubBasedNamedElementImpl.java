@@ -107,7 +107,7 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement> 
 
   @NotNull
   public List<HTMLMasonCompositeElement> getArgsBlocks() {
-    StubElement rootStub = getStub();
+    StubElement rootStub = getGreenStub();
 
     //noinspection Duplicates duplicates file implementation
     if (rootStub != null) {

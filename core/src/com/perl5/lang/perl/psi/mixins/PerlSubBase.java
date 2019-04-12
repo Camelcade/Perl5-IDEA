@@ -59,7 +59,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   @Nullable
   @Override
   public String getNamespaceName() {
-    Stub stub = getStub();
+    Stub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
     }
@@ -85,7 +85,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
 
   @Override
   public String getSubName() {
-    Stub stub = getStub();
+    Stub stub = getGreenStub();
     if (stub != null) {
       return stub.getSubName();
     }
@@ -121,7 +121,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub> extends PerlStubBase
   @Nullable
   @Override
   public PerlSubAnnotations getAnnotations() {
-    Stub stub = getStub();
+    Stub stub = getGreenStub();
     if (stub != null) {
       return stub.getAnnotations();
     }

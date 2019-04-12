@@ -41,7 +41,7 @@ public abstract class PerlDoExprMixin extends PerlStubBasedPsiElementBase<PerlRu
   @Nullable
   @Override
   public String getImportPath() {
-    PerlRuntimeImportStub stub = getStub();
+    PerlRuntimeImportStub stub = getGreenStub();
     if (stub != null) {
       return stub.getImportPath();
     }

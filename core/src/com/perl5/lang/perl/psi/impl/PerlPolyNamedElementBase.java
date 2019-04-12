@@ -51,11 +51,9 @@ public abstract class PerlPolyNamedElementBase<Stub extends PerlPolyNamedElement
   @NotNull
   @Override
   public List<PerlDelegatingLightNamedElement> calcLightElements() {
-    if (getGreenStub() != null) {
-      return calcLightElementsFromStubs(getGreenStub());
-    }
-    else if (getStub() != null) {
-      return calcLightElementsFromStubs(getStub());
+    Stub stub = getGreenStub();
+    if (stub != null) {
+      return calcLightElementsFromStubs(stub);
     }
     return calcLightElementsFromPsi();
   }

@@ -61,7 +61,7 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public String getPackageName() {
-    PerlUseStatementStub stub = getStub();
+    PerlUseStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getPackageName();
     }
@@ -87,7 +87,7 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
   @Override
   @Nullable
   public List<String> getImportParameters() {
-    PerlUseStatementStub stub = getStub();
+    PerlUseStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getImportParameters();
     }
@@ -126,7 +126,7 @@ public abstract class PerlUseStatementMixin extends PerlStubBasedPsiElementBase<
   @Nullable
   @Override
   public String getOuterPackageName() {
-    PerlUseStatementStub stub = getStub();
+    PerlUseStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getOuterPackageName();
     }

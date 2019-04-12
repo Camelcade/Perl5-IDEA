@@ -42,7 +42,7 @@ public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElemen
   @Nullable
   @Override
   protected String getNameFromStub() {
-    HTMLMasonMethodDefinitionStub stub = getStub();
+    HTMLMasonMethodDefinitionStub stub = getGreenStub();
     return stub == null ? null : stub.getName();
   }
 

@@ -75,7 +75,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
 
   @NotNull
   public List<String> getAttributesNames() {
-    PerlMooseAttributeWrapperStub stub = getStub();
+    PerlMooseAttributeWrapperStub stub = getGreenStub();
     if (stub != null) {
       return stub.getAttributesNames();
     }

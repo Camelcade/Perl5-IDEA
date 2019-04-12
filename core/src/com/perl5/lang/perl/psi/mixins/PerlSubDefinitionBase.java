@@ -70,7 +70,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   @NotNull
   @Override
   public List<PerlSubArgument> getSubArgumentsList() {
-    PerlSubDefinitionStub stub = getStub();
+    PerlSubDefinitionStub stub = getGreenStub();
     if (stub != null) {
       return new ArrayList<>(stub.getSubArgumentsList());
     }

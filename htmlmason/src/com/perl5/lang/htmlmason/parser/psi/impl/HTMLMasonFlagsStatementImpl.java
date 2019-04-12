@@ -46,7 +46,7 @@ public class HTMLMasonFlagsStatementImpl extends PerlStubBasedPsiElementBase<HTM
   @Nullable
   @Override
   public String getParentComponentPath() {
-    HTMLMasonFlagsStatementStub stub = getStub();
+    HTMLMasonFlagsStatementStub stub = getGreenStub();
 
     if (stub != null) {
       return stub.getParentComponentPath();

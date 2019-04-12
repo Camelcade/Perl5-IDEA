@@ -44,7 +44,7 @@ public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedName
   @Nullable
   @Override
   protected String getNameFromStub() {
-    HTMLMasonSubcomponentDefinitionStub stub = getStub();
+    HTMLMasonSubcomponentDefinitionStub stub = getGreenStub();
     return stub == null ? null : stub.getName();
   }
 

@@ -91,7 +91,7 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
   @Override
   @Nullable
   public String getTitleText() {
-    PodSectionStub stub = getStub();
+    PodSectionStub stub = getGreenStub();
     if (stub != null) {
       return stub.getTitleText();
     }

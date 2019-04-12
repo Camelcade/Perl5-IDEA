@@ -78,7 +78,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public String getName() {
-    PerlVariableDeclarationStub stub = getStub();
+    PerlVariableDeclarationStub stub = getGreenStub();
     if (stub != null) {
       return stub.getVariableName();
     }
@@ -136,7 +136,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   @NotNull
   @Override
   public String getNamespaceName() {
-    PerlVariableDeclarationStub stub = getStub();
+    PerlVariableDeclarationStub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
     }
@@ -149,7 +149,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public PerlVariableType getActualType() {
-    PerlVariableDeclarationStub stub = getStub();
+    PerlVariableDeclarationStub stub = getGreenStub();
     if (stub != null) {
       return stub.getActualType();
     }
@@ -171,13 +171,12 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public boolean isLexicalDeclaration() {
-    if (getStub() != null) {
+    if (getGreenStub() != null) {
       return false;
     }
     PsiElement parent = getParent();
     return parent instanceof PerlLexicalVariableDeclarationMarker ||
-           isInvocantDeclaration() || isLocalDeclaration()
-      ;
+           isInvocantDeclaration() || isLocalDeclaration();
   }
 
   @Override
@@ -213,7 +212,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   public PerlVariableAnnotations getVariableAnnotations() {
     PerlVariableAnnotations variableAnnotations;
 
-    PerlVariableDeclarationStub stub = getStub();
+    PerlVariableDeclarationStub stub = getGreenStub();
     if (stub != null) {
       variableAnnotations = stub.getVariableAnnotations();
     }

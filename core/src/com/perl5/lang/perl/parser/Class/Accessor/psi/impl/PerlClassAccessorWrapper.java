@@ -115,15 +115,10 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
   }
 
   public boolean isFollowBestPractice() {
-    PerlPolyNamedElementStub stub = getStub();
+    PerlClassAccessorWrapperStub stub = getGreenStub();
     if (stub != null) {
-      return ((PerlClassAccessorWrapperStub)stub).isFollowBestPractice();
+      return stub.isFollowBestPractice();
     }
-    PerlClassAccessorWrapperStub greenStub = getGreenStub();
-    if (greenStub != null) {
-      return greenStub.isFollowBestPractice();
-    }
-
     boolean[] result = new boolean[]{false};
 
     // fixme we need a smarter treewalkup here, scopes are not necessary here

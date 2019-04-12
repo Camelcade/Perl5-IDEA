@@ -48,7 +48,7 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
   @Nullable
   @Override
   public String getSubName() {
-    PerlMooseAugmentStatementStub stub = getStub();
+    PerlMooseAugmentStatementStub stub = getGreenStub();
     if (stub != null) {
       return stub.getSubName();
     }
