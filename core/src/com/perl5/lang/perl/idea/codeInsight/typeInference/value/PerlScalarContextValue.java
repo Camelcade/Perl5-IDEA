@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,13 @@ public class PerlScalarContextValue extends PerlOperationValue {
 
   PerlScalarContextValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull PerlValue resolvedTarget) {
+    return resolvedTarget.getScalarRepresentation();
   }
 
   @Override

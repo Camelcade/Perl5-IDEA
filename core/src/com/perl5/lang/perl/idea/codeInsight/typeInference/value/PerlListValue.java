@@ -44,8 +44,17 @@ abstract class PerlListValue extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    PerlValuesManager.writeList(dataStream, myElements);
+    PerlValuesManager.writeCollection(dataStream, myElements);
   }
+
+  @Override
+  final PerlValue computeResolve(@NotNull PsiElement contextElement) {
+    return computeResolve(contextElement, ContainerUtil.map(myElements, it -> it.resolve(contextElement)));
+  }
+
+  @NotNull
+  protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                              @NotNull List<PerlValue> resolvedElements);
 
   @NotNull
   @Override

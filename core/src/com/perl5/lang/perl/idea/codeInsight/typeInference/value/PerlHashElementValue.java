@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +38,19 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
   @Override
   protected int getSerializationId() {
     return HASH_ELEMENT_VALUE;
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement, @NotNull PerlValue resolvedHashValue,
+                                     @NotNull PerlValue resolvedKeyValue) {
+    if (resolvedHashValue instanceof PerlHashValue) {
+      return ((PerlHashValue)resolvedHashValue).get(resolvedKeyValue);
+    }
+    else if (resolvedHashValue instanceof PerlDeferredHashValue) {
+      return ((PerlDeferredHashValue)resolvedHashValue).tryGet(resolvedKeyValue);
+    }
+    return UNKNOWN_VALUE;
   }
 
   public PerlValue getHash() {

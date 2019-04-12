@@ -17,11 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.tree.IElementType;
@@ -29,14 +26,14 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlReturnExpr;
+import com.perl5.lang.perl.psi.PsiPerlExpr;
+import com.perl5.lang.perl.psi.PsiPerlHashElement;
+import com.perl5.lang.perl.psi.PsiPerlRefExpr;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,86 +76,38 @@ public abstract class PerlValue {
   }
 
   /**
-   * Processes all namespaces conforming this type with {@code processor}
-   */
-  public final boolean processNamespaces(@NotNull Project project,
-                                         @NotNull GlobalSearchScope searchScope,
-                                         @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
-    return processNamespaceNames(project, searchScope, it -> PerlPackageUtil.processNamespaces(it, project, searchScope, processor));
-  }
-
-  public final boolean processNamespaceNames(@NotNull Project project,
-                                             @NotNull GlobalSearchScope searchScope,
-                                             @NotNull Processor<String> processor) {
-    for (String namespaceName : getNamespaceNames(project, searchScope)) {
-      if (!processor.process(namespaceName)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  @NotNull
-  protected final Set<String> getNamespaceNames(@NotNull Project project,
-                                                @NotNull GlobalSearchScope searchScope) {
-    return getNamespaceNames(project, searchScope, null);
-  }
-
-  /**
    * @return set of package name from the index, conforming current type
    */
   @NotNull
-  protected Set<String> getNamespaceNames(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable Set<PerlValue> recursion) {
+  public Set<String> getNamespaceNames() {
     return Collections.emptySet();
   }
 
   /**
-   * Processes all sub names which may be represented with current value
+   * @return a current value resolved in the context of the {@code project}.
    */
-  public final boolean processSubNames(@NotNull Project project,
-                                       @NotNull GlobalSearchScope searchScope,
-                                       @NotNull Processor<String> processor) {
-    for (String subName : getSubNames(project, searchScope)) {
-      if (!processor.process(subName)) {
-        return false;
-      }
+  public final PerlValue resolve(@NotNull PsiElement contextElement) {
+    if (isEmpty() || isDeterministic()) {
+      return this;
     }
-    return true;
+    return PerlValuesCacheService.getInstance(contextElement.getProject()).getResolvedValue(this, contextElement);
   }
 
-  @NotNull
-  protected final Set<String> getSubNames(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope) {
-    return getSubNames(project, searchScope, null);
+  /**
+   * @return current value resolved in context of the {@code contextElement}
+   * @apiNote DO NOT use this method directly, use {@link #resolve(PsiElement)} (Project)}
+   * @implSpec feel free to use indexes, resolve and any heavy activity you need
+   */
+  PerlValue computeResolve(@NotNull PsiElement contextElement) {
+    throw new RuntimeException("Not implemented resolve in " + this);
   }
 
   /**
    * @return set of sub names which may be represented by the current value
    */
   @NotNull
-  protected Set<String> getSubNames(@NotNull Project project,
-                                    @NotNull GlobalSearchScope searchScope,
-                                    @Nullable Set<PerlValue> recursion) {
+  public Set<String> getSubNames() {
     return Collections.emptySet();
-  }
-
-  /**
-   * Processes all related items: subs declarations, definitions and typeglobs in the namespaces conforming this type
-   */
-  public final boolean processRelatedItems(@NotNull Project project,
-                                           @NotNull GlobalSearchScope searchScope,
-                                           @NotNull Processor<? super PsiNamedElement> processor) {
-    Set<String> subNames = getSubNames(project, searchScope);
-    for (String namespaceName : getNamespaceNames(project, searchScope)) {
-      for (String subName : subNames) {
-        if (!PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(namespaceName, subName), processor)) {
-          return false;
-        }
-      }
-    }
-    return true;
   }
 
   public final boolean isEmpty() {
@@ -401,6 +350,6 @@ public abstract class PerlValue {
 
   enum PerlValueType {
     DETERMINISTIC,
-    DEFERRED;
+    DEFERRED
   }
 }

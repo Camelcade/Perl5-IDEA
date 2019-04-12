@@ -62,12 +62,13 @@ public final class PerlCallStaticValue extends PerlCallValue {
     return PerlValuesManager.CALL_STATIC_ID;
   }
 
+  // fixme resolve namespace and subs first
   @Override
   public boolean processTargetNamespaceElements(@NotNull Project project,
                                                 @NotNull GlobalSearchScope searchScope,
-                                                @Nullable PsiElement contextElement,
+                                                @NotNull PsiElement contextElement,
                                                 @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
-    for (String currentNamespaceName : myNamespaceNameValue.getNamespaceNames(project, searchScope)) {
+    for (String currentNamespaceName : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
       if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
         return false;
       }
@@ -140,7 +141,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
 
   @Override
   public String toString() {
-    return myNamespaceNameValue + "::" + mySubNameValue + getArgumentsAsString();
+    return getNamespaceNameValue() + "::" + getSubNameValue() + getArgumentsAsString();
   }
 
   @NotNull
@@ -148,8 +149,8 @@ public final class PerlCallStaticValue extends PerlCallValue {
   public String getPresentableText() {
     return PerlBundle.message(
       "perl.value.call.static.presentable",
-      myNamespaceNameValue.getPresentableText(),
-      mySubNameValue.getPresentableText(),
+      getNamespaceNameValue().getPresentableText(),
+      getSubNameValue().getPresentableText(),
       getPresentableArguments());
   }
 }

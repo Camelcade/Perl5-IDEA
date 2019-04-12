@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
@@ -29,8 +30,8 @@ import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSub;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -42,39 +43,62 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 
 /**
  * Represents a method call value
  */
-public abstract class PerlCallValue extends PerlValue {
-  @NotNull
-  protected final PerlValue myNamespaceNameValue;
-  @NotNull
-  protected final PerlValue mySubNameValue;
+public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   @NotNull
   protected final List<PerlValue> myArguments;
 
   protected PerlCallValue(@NotNull PerlValue namespaceNameValue,
                           @NotNull PerlValue subNameValue,
                           @NotNull List<PerlValue> arguments) {
-    myNamespaceNameValue = namespaceNameValue;
-    mySubNameValue = subNameValue;
+    super(namespaceNameValue, subNameValue);
     myArguments = Collections.unmodifiableList(new ArrayList<>(arguments));
   }
 
   PerlCallValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myNamespaceNameValue = PerlValuesManager.readValue(dataStream);
-    mySubNameValue = PerlValuesManager.readValue(dataStream);
     myArguments = PerlValuesManager.readList(dataStream);
+  }
+
+  @NotNull
+  @Override
+  protected final PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                           @NotNull PerlValue resolvedBaseValue,
+                                           @NotNull PerlValue resolvedParameter) {
+    List<PerlValue> resolvedArguments = ContainerUtil.map(myArguments, it -> it.resolve(contextElement));
+    GlobalSearchScope resolveScope = contextElement.getResolveScope();
+    Set<String> namespaceNames = resolvedBaseValue.getNamespaceNames();
+    if (namespaceNames.isEmpty()) {
+      return UNKNOWN_VALUE;
+    }
+    Set<String> subNames = resolvedParameter.getSubNames();
+    if (subNames.isEmpty()) {
+      return UNKNOWN_VALUE;
+    }
+    PerlValue resolveResult = RecursionManager.doPreventingRecursion(
+      new Object[]{resolveScope, resolvedBaseValue, resolvedParameter, resolvedArguments}, true, () -> {
+        PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
+        processCallTargets(
+          contextElement.getProject(), resolveScope, contextElement, namespaceNames, subNames, (contextNamespace, callTarget) -> {
+            if (callTarget instanceof PerlSubElement) {
+              builder.addVariant(((PerlSubElement)callTarget).getReturnValue(contextNamespace, resolvedArguments).resolve(callTarget));
+            }
+            return true;
+          });
+        return builder.build();
+      });
+    return ObjectUtils.notNull(resolveResult, UNKNOWN_VALUE);
   }
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myNamespaceNameValue.serialize(dataStream);
-    mySubNameValue.serialize(dataStream);
-    PerlValuesManager.writeList(dataStream, myArguments);
+    super.serializeData(dataStream);
+    PerlValuesManager.writeCollection(dataStream, myArguments);
   }
 
   @NotNull
@@ -85,64 +109,24 @@ public abstract class PerlCallValue extends PerlValue {
 
   @NotNull
   public PerlValue getNamespaceNameValue() {
-    return myNamespaceNameValue;
+    return getBaseValue();
   }
 
   @NotNull
   public PerlValue getSubNameValue() {
-    return mySubNameValue;
-  }
-
-  @NotNull
-  @Override
-  protected Set<String> getNamespaceNames(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable Set<PerlValue> recursion) {
-    if (recursion != null && !recursion.add(this)) {
-      return Collections.emptySet();
-    }
-    return PerlValuesCacheService.getInstance(project).getNamespaceNames(this, () ->
-      getReturnValue(project, searchScope).getNamespaceNames(project, searchScope, ObjectUtils.notNull(recursion, new HashSet<>())));
-  }
-
-  @NotNull
-  @Override
-  protected Set<String> getSubNames(@NotNull Project project, @NotNull GlobalSearchScope searchScope, @Nullable Set<PerlValue> recursion) {
-    if (recursion != null && !recursion.add(this)) {
-      return Collections.emptySet();
-    }
-    return PerlValuesCacheService.getInstance(project).getSubsNames(this, () ->
-      getReturnValue(project, searchScope).getSubNames(project, searchScope, ObjectUtils.notNull(recursion, new HashSet<>()))
-    );
-  }
-
-  /**
-   * @return return values of this value targets
-   */
-  @NotNull
-  private PerlValue getReturnValue(@NotNull Project project, @NotNull GlobalSearchScope searchScope) {
-    return PerlValuesCacheService.getInstance(project).getReturnValue(this, () -> {
-      PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
-      processCallTargets(project, searchScope, null, (namespace, it) -> {
-        if (it instanceof PerlSub) {
-          builder.addVariant(((PerlSub)it).getReturnValue(namespace, myArguments));
-        }
-        return true;
-      });
-      return builder.build();
-    });
+    return getParameter();
   }
 
   /**
    * Processes all possible call targets: subs declarations, definitions and typeglobs with {@code processor}
    * @param contextElement invocation point. Context element, necessary to compute additional imports
    */
-  public final boolean processCallTargets(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable PsiElement contextElement,
+  public final boolean processCallTargets(@NotNull PsiElement contextElement,
                                           @NotNull PairProcessor<String, ? super PsiNamedElement> processor) {
-    Set<String> subNames = mySubNameValue.getSubNames(project, searchScope);
-    Set<String> namespaceNames = myNamespaceNameValue.getNamespaceNames(project, searchScope);
+    Project project = contextElement.getProject();
+    GlobalSearchScope searchScope = contextElement.getResolveScope();
+    Set<String> subNames = getSubNameValue().resolve(contextElement).getSubNames();
+    Set<String> namespaceNames = getNamespaceNameValue().resolve(contextElement).getNamespaceNames();
     return !subNames.isEmpty() && !namespaceNames.isEmpty() &&
            processCallTargets(project, searchScope, contextElement, namespaceNames, subNames, processor);
   }
@@ -153,7 +137,7 @@ public abstract class PerlCallValue extends PerlValue {
    */
   protected abstract boolean processCallTargets(@NotNull Project project,
                                                 @NotNull GlobalSearchScope searchScope,
-                                                @Nullable PsiElement contextElement,
+                                                @NotNull PsiElement contextElement,
                                                 @NotNull Set<String> namespaceNames,
                                                 @NotNull Set<String> subNames,
                                                 @NotNull PairProcessor<String, ? super PsiNamedElement> processor);
@@ -165,28 +149,24 @@ public abstract class PerlCallValue extends PerlValue {
    */
   public abstract boolean processTargetNamespaceElements(@NotNull Project project,
                                                          @NotNull GlobalSearchScope searchScope,
-                                                         @Nullable PsiElement contextElement,
+                                                         @NotNull PsiElement contextElement,
                                                          @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor);
 
-  protected static boolean processTargetNamespaceElements(@NotNull Project project,
-                                                          @NotNull GlobalSearchScope searchScope,
-                                                          @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor,
-                                                          @NotNull String currentNamespaceName) {
-    if (!PerlSubUtil.processRelatedItemsInPackage(project, searchScope, currentNamespaceName, it -> processor.processItem(it))) {
-      return false;
-    }
-
-    // exports
-    Set<PerlExportDescriptor> exportDescriptors = new HashSet<>();
-    PerlNamespaceDefinitionElement.processExportDescriptors(project, searchScope, currentNamespaceName, (__, it) -> {
-      exportDescriptors.add(it);
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
       return true;
-    });
-    if (!processExportDescriptors(project, searchScope, processor, exportDescriptors)) {
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
       return false;
     }
 
-    return true;
+    PerlCallValue value = (PerlCallValue)o;
+
+    return myArguments.equals(value.myArguments);
   }
 
   protected static boolean processExportDescriptors(@NotNull Project project,
@@ -215,34 +195,26 @@ public abstract class PerlCallValue extends PerlValue {
     return true;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
+  protected static boolean processTargetNamespaceElements(@NotNull Project project,
+                                                          @NotNull GlobalSearchScope searchScope,
+                                                          @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor,
+                                                          @NotNull String currentNamespaceName) {
+    if (!PerlSubUtil.processRelatedItemsInPackage(project, searchScope, currentNamespaceName, it -> processor.processItem(it))) {
+      return false;
+    }
+
+    // exports
+    Set<PerlExportDescriptor> exportDescriptors = new HashSet<>();
+    PerlNamespaceDefinitionElement.processExportDescriptors(project, searchScope, currentNamespaceName, (__, it) -> {
+      exportDescriptors.add(it);
       return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    if (!super.equals(o)) {
-      return false;
-    }
-
-    PerlCallValue call = (PerlCallValue)o;
-
-    if (!myNamespaceNameValue.equals(call.myNamespaceNameValue)) {
-      return false;
-    }
-    if (!mySubNameValue.equals(call.mySubNameValue)) {
-      return false;
-    }
-    return myArguments.equals(call.myArguments);
+    });
+    return processExportDescriptors(project, searchScope, processor, exportDescriptors);
   }
 
   @Override
   protected int computeHashCode() {
     int result = super.computeHashCode();
-    result = 31 * result + myNamespaceNameValue.hashCode();
-    result = 31 * result + mySubNameValue.hashCode();
     result = 31 * result + myArguments.hashCode();
     return result;
   }
@@ -285,12 +257,9 @@ public abstract class PerlCallValue extends PerlValue {
     }
 
     // AUTOLOAD
-    if (processingContext.processAutoload &&
-        !PerlPackageUtil.isUNIVERSAL(namespaceName) && !PerlPackageUtil.isCORE(namespaceName) &&
-        !PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper)) {
-      return false;
-    }
-    return true;
+    return !processingContext.processAutoload ||
+           PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
+           PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
   }
 
   protected static boolean processExportDescriptorsItems(@NotNull Project project,

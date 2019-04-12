@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
@@ -69,6 +70,13 @@ public final class PerlArrayValue extends PerlListValue {
   public String getPresentableText() {
     return PerlBundle.message("perl.value.array.presentable",
                               getElements().stream().map(PerlValue::getPresentableText).collect(Collectors.joining(", ")));
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull List<PerlValue> resolvedElements) {
+    return builder().addElements(resolvedElements).build();
   }
 
   @NotNull

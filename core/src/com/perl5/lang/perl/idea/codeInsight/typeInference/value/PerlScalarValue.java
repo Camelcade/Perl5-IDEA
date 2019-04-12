@@ -16,8 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -76,17 +74,13 @@ public final class PerlScalarValue extends PerlValue {
 
   @NotNull
   @Override
-  protected Set<String> getSubNames(@NotNull Project project,
-                                    @NotNull GlobalSearchScope searchScope,
-                                    @Nullable Set<PerlValue> recursion) {
+  public Set<String> getSubNames() {
     return Collections.singleton(myValue);
   }
 
   @NotNull
   @Override
-  protected Set<String> getNamespaceNames(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable Set<PerlValue> recursion) {
+  public Set<String> getNamespaceNames() {
     return Collections.singleton(myValue);
   }
 

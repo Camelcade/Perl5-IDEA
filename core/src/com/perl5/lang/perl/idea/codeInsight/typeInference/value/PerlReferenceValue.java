@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
@@ -47,16 +45,21 @@ public final class PerlReferenceValue extends PerlOperationValue {
 
   @NotNull
   @Override
-  protected Set<String> getNamespaceNames(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable Set<PerlValue> recursion) {
-    return getBaseValue() instanceof PerlBlessedValue ? getBaseValue().getNamespaceNames(project, searchScope, recursion) :
-           Collections.emptySet();
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull PerlValue resolvedTarget) {
+    // fixme casts dereferences should be here
+    return resolvedTarget.equals(getTarget()) ? this : new PerlReferenceValue(resolvedTarget);
+  }
+
+  @NotNull
+  @Override
+  public Set<String> getNamespaceNames() {
+    return getTarget() instanceof PerlBlessedValue ? getTarget().getNamespaceNames() : Collections.emptySet();
   }
 
   @Override
   public boolean canRepresentNamespace(@Nullable String namespaceName) {
-    return getBaseValue() instanceof PerlBlessedValue && getBaseValue().canRepresentNamespace(namespaceName);
+    return getTarget() instanceof PerlBlessedValue && getTarget().canRepresentNamespace(namespaceName);
   }
 
   @Override

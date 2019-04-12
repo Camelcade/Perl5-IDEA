@@ -317,7 +317,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (method == null) {
       return recommendation;
     }
-    PerlCallValue callValue = PerlCallValue.from((PsiElement)method);
+    PerlCallValue callValue = PerlCallValue.from(method);
     if (callValue == null) {
       return recommendation;
     }
@@ -334,15 +334,13 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
     else {
       Ref<String> recommendationRef = Ref.create(recommendation);
-      subNameValue.processSubNames(method.getProject(), method.getResolveScope(), it -> {
-        String normalizedName = join(it.replaceAll("^(_+|get_*|set_*)", ""));
+      for (String subName : subNameValue.resolve(method).getSubNames()) {
+        String normalizedName = join(subName.replaceAll("^(_+|get_*|set_*)", ""));
         if (StringUtil.isNotEmpty(normalizedName)) {
           result.add(normalizedName);
           recommendationRef.set(normalizedName);
         }
-        return true;
-      });
-
+      }
       recommendation = recommendationRef.get();
       result.addAll(getVariantsFromEntityValueNamespaces(expression));
     }
@@ -519,10 +517,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return Collections.emptyList();
     }
     Set<String> result = new LinkedHashSet<>();
-    perlValue.processNamespaceNames(valuableEntity.getProject(), valuableEntity.getResolveScope(), it -> {
-      result.addAll(getVariantsFromNamespaceName(it));
-      return true;
-    });
+    perlValue.resolve(valuableEntity).getNamespaceNames().forEach(it -> result.addAll(getVariantsFromNamespaceName(it)));
     return result;
   }
 

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +31,14 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
 
   PerlArrayElementValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull PerlValue resolvedBaseValue,
+                                     @NotNull PerlValue resolvedParameter) {
+    throw new RuntimeException("Not yet implemented");
   }
 
   @Override

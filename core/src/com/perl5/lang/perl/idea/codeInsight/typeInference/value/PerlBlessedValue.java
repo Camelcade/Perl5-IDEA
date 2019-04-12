@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -27,31 +27,31 @@ import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.BLESSED_ID;
 
-public final class PerlBlessedValue extends PerlValue {
-  @NotNull
-  private final PerlValue myValue;
-  @NotNull
-  private final PerlValue myBless;
-
+public final class PerlBlessedValue extends PerlParametrizedOperationValue {
   PerlBlessedValue(@NotNull PerlValue value, @NotNull PerlValue bless) {
-    myValue = value;
-    myBless = bless;
+    super(value, bless);
   }
 
   PerlBlessedValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    myValue = PerlValuesManager.readValue(dataStream);
-    myBless = PerlValuesManager.readValue(dataStream);
   }
 
   @NotNull
   public PerlValue getBless() {
-    return myBless;
+    return getParameter();
   }
 
   @NotNull
   public PerlValue getValue() {
-    return myValue;
+    return getBaseValue();
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull PerlValue resolvedValue,
+                                     @NotNull PerlValue resolvedBless) {
+    return new PerlBlessedValue(resolvedValue, resolvedBless);
   }
 
   @Override
@@ -62,43 +62,12 @@ public final class PerlBlessedValue extends PerlValue {
   @Nullable
   @Override
   protected PerlContextType getContextType() {
-    return myValue.getContextType();
-  }
-
-  @Override
-  protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    myValue.serialize(dataStream);
-    myBless.serialize(dataStream);
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    PerlBlessedValue value = (PerlBlessedValue)o;
-
-    if (!myValue.equals(value.myValue)) {
-      return false;
-    }
-    return myBless.equals(value.myBless);
-  }
-
-  @Override
-  public int computeHashCode() {
-    int result = super.computeHashCode();
-    result = 31 * result + myValue.hashCode();
-    result = 31 * result + myBless.hashCode();
-    return result;
+    return getValue().getContextType();
   }
 
   @NotNull
   @Override
   public String getPresentableText() {
-    return PerlBundle.message("perl.value.presentable.blessed", myValue, myBless);
+    return PerlBundle.message("perl.value.presentable.blessed", getValue(), getBless());
   }
 }

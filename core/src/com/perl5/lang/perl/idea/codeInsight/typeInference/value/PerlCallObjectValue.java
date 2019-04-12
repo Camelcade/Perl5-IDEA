@@ -66,9 +66,9 @@ public final class PerlCallObjectValue extends PerlCallValue {
   @Override
   public boolean processTargetNamespaceElements(@NotNull Project project,
                                                 @NotNull GlobalSearchScope searchScope,
-                                                @Nullable PsiElement contextElement,
+                                                @NotNull PsiElement contextElement,
                                                 @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
-    for (String contextNamespace : myNamespaceNameValue.getNamespaceNames(project, searchScope)) {
+    for (String contextNamespace : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
       for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
         if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName)) {
           return false;
@@ -128,7 +128,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   @Override
   public String toString() {
-    return myNamespaceNameValue + "->" + (myIsSuper ? "SUPER::" : "") + mySubNameValue + getArgumentsAsString();
+    return getNamespaceNameValue() + "->" + (myIsSuper ? "SUPER::" : "") + getSubNameValue() + getArgumentsAsString();
   }
 
   @NotNull
@@ -136,8 +136,8 @@ public final class PerlCallObjectValue extends PerlCallValue {
   public String getPresentableText() {
     return PerlBundle.message(
       "perl.value.call.object.presentable",
-      myNamespaceNameValue.getPresentableText(),
-      mySubNameValue.getPresentableText(),
+      getNamespaceNameValue().getPresentableText(),
+      getSubNameValue().getPresentableText(),
       getPresentableArguments());
   }
 }

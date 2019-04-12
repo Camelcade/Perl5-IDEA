@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
@@ -44,6 +45,18 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   }
 
   @NotNull
+  @Override
+  final protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                           @NotNull PerlValue resolvedBaseValue) {
+    return computeResolve(contextElement, resolvedBaseValue, myParameter.resolve(contextElement));
+  }
+
+  @NotNull
+  protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                              @NotNull PerlValue resolvedBaseValue,
+                                              @NotNull PerlValue resolvedParameter);
+
+  @NotNull
   protected final PerlValue getParameter() {
     return myParameter;
   }
@@ -66,7 +79,7 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   }
 
   @Override
-  public int computeHashCode() {
+  protected int computeHashCode() {
     int result = super.computeHashCode();
     result = 31 * result + myParameter.hashCode();
     return result;

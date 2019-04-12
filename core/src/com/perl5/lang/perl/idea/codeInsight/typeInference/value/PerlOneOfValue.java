@@ -17,13 +17,10 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -31,15 +28,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
-public final class PerlOneOfValue extends PerlValue {
+public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValue> {
   private static final Logger LOG = Logger.getInstance(PerlOneOfValue.class);
   @NotNull
   private final Set<PerlValue> myVariants;
@@ -50,12 +44,7 @@ public final class PerlOneOfValue extends PerlValue {
 
   PerlOneOfValue(@NotNull StubInputStream dataStream) throws IOException {
     super(dataStream);
-    int elementsNumber = dataStream.readVarInt();
-    Set<PerlValue> variants = new HashSet<>();
-    for (int i = 0; i < elementsNumber; i++) {
-      variants.add(PerlValuesManager.readValue(dataStream));
-    }
-    myVariants = Collections.unmodifiableSet(variants);
+    myVariants = Collections.unmodifiableSet(new HashSet<>(PerlValuesManager.readList(dataStream)));
   }
 
   @Nullable
@@ -79,6 +68,12 @@ public final class PerlOneOfValue extends PerlValue {
     return contextType;
   }
 
+  @NotNull
+  @Override
+  public Iterator<PerlValue> iterator() {
+    return myVariants.iterator();
+  }
+
   @Override
   protected int getSerializationId() {
     return PerlValuesManager.ONE_OF_ID;
@@ -86,15 +81,9 @@ public final class PerlOneOfValue extends PerlValue {
 
   @Override
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeVarInt(myVariants.size());
-    for (PerlValue variant : myVariants) {
-      variant.serialize(dataStream);
-    }
+    PerlValuesManager.writeCollection(dataStream, myVariants);
   }
 
-  /**
-   * could be cached
-   */
   @Override
   protected boolean computeIsDeterministic() {
     return PerlListValue.isDeterministic(myVariants);
@@ -109,36 +98,24 @@ public final class PerlOneOfValue extends PerlValue {
 
   @NotNull
   @Override
-  protected Set<String> getNamespaceNames(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable Set<PerlValue> recursion) {
+  public Set<String> getNamespaceNames() {
     if (myVariants.isEmpty()) {
       return Collections.emptySet();
     }
-
-    return PerlValuesCacheService.getInstance(project).getNamespaceNames(this, () -> {
-      Set<PerlValue> finalRecursion = ObjectUtils.notNull(recursion, new HashSet<>());
-      Set<String> result = new HashSet<>();
-      myVariants.forEach(it -> result.addAll(it.getNamespaceNames(project, searchScope, finalRecursion)));
-      return result;
-    });
+    Set<String> result = new HashSet<>();
+    forEach(it -> result.addAll(it.getNamespaceNames()));
+    return result;
   }
 
   @NotNull
   @Override
-  protected Set<String> getSubNames(@NotNull Project project,
-                                    @NotNull GlobalSearchScope searchScope,
-                                    @Nullable Set<PerlValue> recursion) {
+  public Set<String> getSubNames() {
     if (myVariants.isEmpty()) {
       return Collections.emptySet();
     }
-
-    return PerlValuesCacheService.getInstance(project).getSubsNames(this, () -> {
-      Set<PerlValue> finalRecursion = ObjectUtils.notNull(recursion, new HashSet<>());
-      Set<String> result = new HashSet<>();
-      myVariants.forEach(it -> result.addAll(it.getSubNames(project, searchScope, finalRecursion)));
-      return result;
-    });
+    Set<String> result = new HashSet<>();
+    forEach(it -> result.addAll(it.getSubNames()));
+    return result;
   }
 
   @Override
@@ -159,6 +136,11 @@ public final class PerlOneOfValue extends PerlValue {
       }
     }
     return false;
+  }
+
+  @Override
+  PerlValue computeResolve(@NotNull PsiElement contextElement) {
+    return convert(it -> it.resolve(contextElement));
   }
 
   @Override

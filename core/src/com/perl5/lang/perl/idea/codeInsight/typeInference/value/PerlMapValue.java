@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -41,6 +42,13 @@ public abstract class PerlMapValue extends PerlListValue {
   @Override
   public String toString() {
     return "Hash: " + getElements().toString();
+  }
+
+  @NotNull
+  @Override
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull List<PerlValue> resolvedElements) {
+    return builder().addElements(resolvedElements).build();
   }
 
   @NotNull

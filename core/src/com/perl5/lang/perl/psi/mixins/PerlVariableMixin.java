@@ -237,11 +237,8 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return true;
     }
 
-    PerlValue namespaceValue = PerlScalarValue.create(
-      ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this)));
-
-    return namespaceValue
-      .processNamespaceNames(getProject(), getResolveScope(), it -> processor.process(PerlPackageUtil.join(it, variableName)));
+    String namespaceName = ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this));
+    return processor.process(PerlPackageUtil.join(namespaceName, variableName));
   }
 
   // fixme this need to be moved to PerlResolveUtil or Resolver

@@ -49,7 +49,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     }
 
     List<PsiElement> relatedItems = new ArrayList<>();
-    perlValue.processCallTargets(element.getProject(), element.getResolveScope(), element, (__, it) -> relatedItems.add(it));
+    perlValue.processCallTargets(element, (__, it) -> relatedItems.add(it));
     return getResolveResults(relatedItems).toArray(new ResolveResult[0]);
   }
 }

@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public final class PerlValuesManager {
   static final int CONDITION_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id;
+  public static final int VERSION = id + 5;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -146,7 +147,7 @@ public final class PerlValuesManager {
     return Collections.unmodifiableList(elements);
   }
 
-  static void writeList(@NotNull StubOutputStream dataStream, @NotNull List<PerlValue> elements) throws IOException {
+  static void writeCollection(@NotNull StubOutputStream dataStream, @NotNull Collection<PerlValue> elements) throws IOException {
     dataStream.writeVarInt(elements.size());
     for (PerlValue element : elements) {
       element.serialize(dataStream);

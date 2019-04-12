@@ -19,102 +19,61 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.RecursionManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.containers.ContainerUtil;
+import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Supplier;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
 public class PerlValuesCacheService implements PsiModificationTracker.Listener {
   private static final Logger LOG = Logger.getInstance(PerlValuesCacheService.class);
-
   @NotNull
-  private final Map<PerlValue, Set<String>> myNamespacesMaps = ContainerUtil.newConcurrentMap();
-  @NotNull
-  private final Map<PerlValue, Set<String>> mySubsNamesMap = ContainerUtil.newConcurrentMap();
-  @NotNull
-  private final Map<PerlValue, PerlValue> myRetrunValuesMap = ContainerUtil.newConcurrentMap();
+  private final Map<Pair<PerlValue, GlobalSearchScope>, PerlValue> myResolveMap = ContainerUtil.createConcurrentWeakMap();
 
-  private final AtomicLong myNamespaceRequest = new AtomicLong();
-  private final AtomicLong myNamespaceBuild = new AtomicLong();
-
-  private final AtomicLong mySubsRequest = new AtomicLong();
-  private final AtomicLong mySubsBuild = new AtomicLong();
-
-  private final AtomicLong myReturnValueRequest = new AtomicLong();
-  private final AtomicLong myReturnValueBuild = new AtomicLong();
+  private final AtomicLong myResolveRequests = new AtomicLong();
+  private final AtomicLong myResolveBuilds = new AtomicLong();
 
   public PerlValuesCacheService(@NotNull Project project) {
     project.getMessageBus().connect().subscribe(PsiModificationTracker.TOPIC, this);
   }
 
-  public PerlValue getReturnValue(@NotNull PerlCallValue callValue, @NotNull Supplier<? extends PerlValue> supplier) {
-    myReturnValueRequest.incrementAndGet();
-    PerlValue value = myRetrunValuesMap.get(callValue);
-    if (value != null) {
-      return value;
+  public PerlValue getResolvedValue(@NotNull PerlValue deferredValue, @NotNull PsiElement contextElement) {
+    LOG.assertTrue(!deferredValue.isDeterministic(), "Resolving deterministic value: " + deferredValue);
+    LOG.assertTrue(!deferredValue.isEmpty(), "Attempting to resolve empty value: " + deferredValue);
+    Pair<PerlValue, GlobalSearchScope> key = Pair.create(deferredValue, contextElement.getResolveScope());
+    myResolveRequests.incrementAndGet();
+    PerlValue result = myResolveMap.get(key);
+    if (result != null) {
+      return result;
     }
-    myReturnValueBuild.incrementAndGet();
-    value = supplier.get();
-    myRetrunValuesMap.putIfAbsent(callValue, value);
-    return value;
-  }
-
-  @SuppressWarnings("Duplicates")
-  public Set<String> getSubsNames(@NotNull PerlValue value, @NotNull Supplier<? extends Set<String>> supplier) {
-    mySubsRequest.incrementAndGet();
-    Set<String> subNames = mySubsNamesMap.get(value);
-    if (subNames != null) {
-      return subNames;
+    myResolveBuilds.incrementAndGet();
+    PerlValue resolvedValue = RecursionManager.doPreventingRecursion(
+      key, true, () -> PerlValuesManager.intern(deferredValue.computeResolve(contextElement)));
+    if (resolvedValue == null) {
+      // fixme probably we could use this for recursion prevention. Actually, this may happen because of flaws of our loops/conditions handling
+      return UNKNOWN_VALUE;
     }
-    mySubsBuild.incrementAndGet();
-    subNames = supplier.get();
-    mySubsNamesMap.putIfAbsent(value, subNames);
-    return subNames;
-  }
-
-  @SuppressWarnings("Duplicates")
-  public Set<String> getNamespaceNames(@NotNull PerlValue value, @NotNull Supplier<? extends Set<String>> supplier) {
-    myNamespaceRequest.incrementAndGet();
-    Set<String> namespacesNames = myNamespacesMaps.get(value);
-    if (namespacesNames != null) {
-      return namespacesNames;
-    }
-    myNamespaceBuild.incrementAndGet();
-    namespacesNames = supplier.get();
-    myNamespacesMaps.putIfAbsent(value, namespacesNames);
-    return namespacesNames;
+    myResolveMap.putIfAbsent(key, resolvedValue);
+    return resolvedValue;
   }
 
   @Override
   public void modificationCountChanged() {
-    myRetrunValuesMap.clear();
-    myNamespacesMaps.clear();
-    mySubsNamesMap.clear();
+    myResolveMap.clear();
 
-    if (myReturnValueRequest.get() > 0) {
-      LOG.debug(String.format("Return value effectiveness: %d, %d, %d", myReturnValueRequest.get(), myReturnValueBuild.get(),
-                              (myReturnValueRequest.get() - myReturnValueBuild.get()) * 100 / myReturnValueRequest.get()));
+    if (myResolveRequests.get() > 0) {
+      LOG.debug(String.format("Value resolve effectiveness: %d, %d, %d", myResolveRequests.get(), myResolveBuilds.get(),
+                              (myResolveRequests.get() - myResolveBuilds.get()) * 100 / myResolveRequests.get()));
     }
-    myReturnValueRequest.set(0);
-    myReturnValueBuild.set(0);
-
-    if (myNamespaceRequest.get() > 0) {
-      LOG.debug(String.format("Namespaces effectiveness: %d, %d, %d", myNamespaceRequest.get(), myNamespaceBuild.get(),
-                              (myNamespaceRequest.get() - myNamespaceBuild.get()) * 100 / myNamespaceRequest.get()));
-    }
-    myNamespaceRequest.set(0);
-    myNamespaceBuild.set(0);
-
-    if (mySubsRequest.get() > 0) {
-      LOG.debug(String.format("Subs cache effectiveness: %d, %d, %d", mySubsRequest.get(), mySubsBuild.get(),
-                              (mySubsRequest.get() - mySubsBuild.get()) * 100 / mySubsRequest.get()));
-    }
-    mySubsRequest.set(0);
-    mySubsBuild.set(0);
+    myResolveRequests.set(0);
+    myResolveBuilds.set(0);
   }
 
   @NotNull

@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -39,9 +41,9 @@ abstract class PerlOperationValue extends PerlValue {
     myBaseValue = PerlValuesManager.readValue(dataStream);
   }
 
-  @NotNull
+  @Nullable
   @Override
-  protected final PerlContextType getContextType() {
+  protected PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }
 
@@ -54,6 +56,15 @@ abstract class PerlOperationValue extends PerlValue {
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     myBaseValue.serialize(dataStream);
   }
+
+  @Override
+  final PerlValue computeResolve(@NotNull PsiElement contextElement) {
+    return computeResolve(contextElement, myBaseValue.resolve(contextElement));
+  }
+
+  @NotNull
+  protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                              @NotNull PerlValue resolvedBaseValue);
 
   @Override
   public boolean equals(Object o) {
@@ -70,7 +81,7 @@ abstract class PerlOperationValue extends PerlValue {
   }
 
   @Override
-  public int computeHashCode() {
+  protected int computeHashCode() {
     int result = super.computeHashCode();
     result = 31 * result + myBaseValue.hashCode();
     return result;
