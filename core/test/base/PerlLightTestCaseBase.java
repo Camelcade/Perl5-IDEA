@@ -1796,6 +1796,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model,
                                    boolean includeNonProjectFiles,
                                    @NotNull Condition<String> nameFilter) {
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     List<String> acceptableNames = ContainerUtil.filter(model.getNames(includeNonProjectFiles), nameFilter);
     ContainerUtil.sort(acceptableNames);
     StringBuilder sb = new StringBuilder();

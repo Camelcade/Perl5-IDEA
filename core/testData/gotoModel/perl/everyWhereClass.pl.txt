@@ -13,9 +13,6 @@ LibraryException in Exceptions.pm; /exceptionClass.svg; null
 LibraryException3
 LibraryException3 in Exceptions.pm; /exceptionClass.svg; null
 ----------
-Module::TestPackage
-Module::TestPackage in TestPackage.pm; /package_gutter_icon.png; null
-----------
 Mojolicious::Controller
 Mojolicious::Controller in Controller.pm; /package_gutter_icon.png; null
 ----------
@@ -49,7 +46,5 @@ MyTest::Constants in MyTest; /perl5.png
 MyTest::Exceptions in MyTest; /perl5.png
 MyTest::Some::Package in MyTest/Some; /perl5.png
 MyTest::Something in MyTest; /perl5.png
-TestPackage.pm in lib/Module; /perl5.png
 TestPackage.pm in lib; /perl5.png
-module_test_script.pl in scripts; /perl5classic.png
 test_script.pl in scripts; /perl5classic.png

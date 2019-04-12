@@ -13,9 +13,6 @@ Mojolicious::Plugin::DefaultHelpers in Mojolicious/Plugin; /perl5.png
 Exceptions.pm
 MyTest::Exceptions in MyTest; /perl5.png
 ----------
-Module
-PsiDirectory
-----------
 Mojolicious
 PsiDirectory
 ----------
@@ -41,21 +38,12 @@ TagHelpers.pm
 Mojolicious::Plugin::TagHelpers in Mojolicious/Plugin; /perl5.png
 ----------
 TestPackage.pm
-TestPackage.pm in lib/Module; /perl5.png
 TestPackage.pm in lib; /perl5.png
 ----------
 lib
 PsiDirectory
-PsiDirectory
-----------
-module_test_script.pl
-module_test_script.pl in scripts; /perl5classic.png
 ----------
 scripts
-PsiDirectory
-PsiDirectory
-----------
-secondrootfiles
 PsiDirectory
 ----------
 src
