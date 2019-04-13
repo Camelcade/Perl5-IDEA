@@ -70,9 +70,9 @@ public final class PerlValuesManager {
   static final int CALL_OBJECT_ID = id++;
   static final int ONE_OF_ID = id++;
   static final int CONDITION_ID = id++;
-
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id + 5;
+  public static final int VERSION = id;
+  static final int DEFINED_ID = id++;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 

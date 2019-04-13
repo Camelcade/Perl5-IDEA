@@ -581,6 +581,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitDefinedExpr(@NotNull PsiPerlDefinedExpr o) {
+      o.getArgument().accept(this);
+      startNodeSmart(o);
+    }
+
+    @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
       PsiElement run = o.getFirstChild();
       PsiElement lastRun = null;

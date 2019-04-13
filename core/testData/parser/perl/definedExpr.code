@@ -1,0 +1,5 @@
+defined;
+defined $var;
+defined $var + 1;
+defined $var, 1;
+defined ($var) || 'something';

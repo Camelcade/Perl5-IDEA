@@ -131,7 +131,7 @@ BARE_HANDLE_ACCEPTORS = "truncate"|"syswrite"|"sysseek"|"sysread"|"sysopen"|"sta
 NAMED_UNARY_BARE_HANDLE_ACCEPTORS = "write"|"telldir"|"tell"|"rewinddir"|"readdir"|"getc"|"fileno"|"eof"|"closedir"|"close"|"chdir"
 LIST_OPERATORS = "warn"|"waitpid"|"vec"|"utime"|"untie"|"unshift"|"tied"|"tie"|"system"|"syscall"|"symlink"|"substr"|"sprintf"|"splice"|"socketpair"|"socket"|"shutdown"|"shmwrite"|"shmread"|"shmget"|"shmctl"|"setsockopt"|"setpriority"|"setpgrp"|"send"|"semop"|"semget"|"semctl"|"rindex"|"rename"|"recv"|"push"|"pipe"|"pack"|"msgsnd"|"msgrcv"|"msgget"|"msgctl"|"lock"|"listen"|"link"|"kill"|"join"|"index"|"getsockopt"|"getservbyport"|"getservbyname"|"getprotobynumber"|"getpriority"|"getnetbyaddr"|"gethostbyaddr"|"formline"|"exec"|"dump"|"die"|"dbmopen"|"dbmclose"|"crypt"|"connect"|"chown"|"chmod"|"bless"|"bind"|"atan2"|"accept"
 NAMED_ARGUMENTLESS = "wantarray"|"wait"|"times"|"time"|"setpwent"|"setgrent"|"getservent"|"getpwent"|"getprotoent"|"getppid"|"getnetent"|"getlogin"|"gethostent"|"getgrent"|"fork"|"endservent"|"endpwent"|"endprotoent"|"endnetent"|"endhostent"|"endgrent"|"break"
-IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"rmdir"|"reverse"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"defined"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
+IMPLICIT_USERS = "unpack"|"unlink"|"ucfirst"|"uc"|"study"|"stat"|"sqrt"|"sin"|"rmdir"|"reverse"|"ref"|"readpipe"|"readlink"|"quotemeta"|"pos"|"ord"|"oct"|"mkdir"|"lstat"|"log"|"length"|"lcfirst"|"lc"|"int"|"hex"|"glob"|"fc"|"exp"|"evalbytes"|"cos"|"chroot"|"chr"|"chop"|"chomp"|"alarm"|"abs"
 CORE_LIST = "NEXT"|"bigrat"|"version"|"Win32"|"Memoize"|"experimental"|"bignum"|"bigint"|"autodie"|"Socket"|"DB_File"|"parent"|"Encode"|"Digest"|"Fatal"|"perlfaq"|"CPAN"|"encoding"
 AMBIGOUS_PACKAGES="version"|"JSON"|"YAML"|"Test"
 
@@ -956,7 +956,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 // known identifiers
 <YYINITIAL,BLOCK_AS_VALUE,AFTER_COMMA,AFTER_IDENTIFIER,AFTER_VARIABLE,LEX_HANDLE,LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT>{
 	"split"						{yybegin(YYINITIAL); return BUILTIN_LIST;}
-	"defined" / {SPACES_OR_COMMENTS}[\*\%]	{yybegin(YYINITIAL);return BUILTIN_UNARY;}
 	{BARE_HANDLE_ACCEPTORS}				{yybegin(LEX_HANDLE);return BUILTIN_LIST;}
 	{NAMED_UNARY_BARE_HANDLE_ACCEPTORS}	{yybegin(LEX_HANDLE); return BUILTIN_UNARY;}
 	{NAMED_UNARY_OPERATORS}				{yybegin(AFTER_IDENTIFIER); return BUILTIN_UNARY;}
@@ -1027,6 +1026,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CORE_PREFIX}"next"	 { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_NEXT;}
 	{CORE_PREFIX}"last"	 { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_LAST;}
 
+	{CORE_PREFIX}"defined"	 { yybegin(YYINITIAL); return RESERVED_DEFINED;}
 	{CORE_PREFIX}"scalar"	 { yybegin(YYINITIAL); return RESERVED_SCALAR;}
 	{CORE_PREFIX}"keys"	 { yybegin(YYINITIAL); return RESERVED_KEYS;}
 	{CORE_PREFIX}"values"	 { yybegin(YYINITIAL); return RESERVED_VALUES;}

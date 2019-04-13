@@ -392,6 +392,7 @@ limitations under the License.
     implements("catch_expr|continuation_expr")="com.perl5.lang.perl.psi.PerlCatchExpr"
 
     implements("return_expr")="com.perl5.lang.perl.psi.PerlReturnExpr"
+    implements("defined_expr")="com.perl5.lang.perl.psi.PerlImplicitScalarExpr"
 
     implements("condition_expr|foreach_iterator|sub_signature|func_signature_content|method_signature_content|for_init|for_condition|for_mutator")="com.perl5.lang.perl.psi.PerlStatement"
 
@@ -722,7 +723,7 @@ scalar_expr ::= 'scalar' single_argument_expr {pin=1}
 keys_expr ::= 'keys' single_argument_expr {pin=1}
 values_expr ::= 'values' single_argument_expr {pin=1}
 each_expr ::= 'each' single_argument_expr {pin=1}
-
+defined_expr ::= 'defined' [parse_scalar_expr] {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -788,7 +789,7 @@ expr ::=
 private parse_list_expr ::= <<parseExpressionLevel 2>>
 
 // List expression elements
-private parse_scalar_expr ::= <<parseExpressionLevel 3>>
+private parse_scalar_expr ::= parenthesised_expr|<<parseExpressionLevel 3>>
 
 // Unary expression argument
 private unary_expr ::= <<parseExpressionLevel 12>>
@@ -809,6 +810,7 @@ term_expr ::=
     | keys_expr
     | values_expr
     | each_expr
+    | defined_expr
     | exit_expr
     | hash_variable
     | hash_cast_expr

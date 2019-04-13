@@ -1358,7 +1358,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         //}
       }
       catch (Exception e) {
-        e.printStackTrace();
+        LOG.error(e);
       }
     }
 
@@ -1450,7 +1450,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
     else {
       PsiElement element = instruction.getElement();
-      return element != null ? escape(element.getText()) : "";
+      if (element == null) {
+        return "";
+      }
+      String elementText = element.getText();
+      if (StringUtil.isEmpty(elementText)) {
+        return element instanceof PsiNamedElement ? ((PsiNamedElement)element).getName() : "empty text, unnamed";
+      }
+      return escape(elementText);
     }
   }
 
