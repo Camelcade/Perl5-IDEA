@@ -31,8 +31,12 @@ public class PerlScalarContextValue extends PerlOperationValue {
 
   PerlScalarContextValue(@NotNull PerlValue baseValue) {
     super(baseValue);
-    LOG.assertTrue(baseValue.getContextType() != PerlContextType.SCALAR, "Value is already a scalar: " + baseValue);
-    LOG.assertTrue(!baseValue.isDeterministic(), "Deterministic values should be resolved in place: " + baseValue);
+    if (baseValue.getContextType() == PerlContextType.SCALAR) {
+      LOG.error("Value is already a scalar: " + baseValue);
+    }
+    else if (baseValue.isDeterministic()) {
+      LOG.error("Deterministic values should be resolved in place: " + baseValue);
+    }
   }
 
   PerlScalarContextValue(@NotNull StubInputStream dataStream) throws IOException {

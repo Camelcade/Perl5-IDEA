@@ -45,8 +45,12 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener {
   }
 
   public PerlValue getResolvedValue(@NotNull PerlValue deferredValue, @NotNull PsiElement contextElement) {
-    LOG.assertTrue(!deferredValue.isDeterministic(), "Resolving deterministic value: " + deferredValue);
-    LOG.assertTrue(!deferredValue.isEmpty(), "Attempting to resolve empty value: " + deferredValue);
+    if (deferredValue.isDeterministic()) {
+      LOG.error("Resolving deterministic value: " + deferredValue);
+    }
+    else if (deferredValue.isEmpty()) {
+      LOG.error("Attempting to resolve empty value: " + deferredValue);
+    }
     Pair<PerlValue, GlobalSearchScope> key = Pair.create(deferredValue, contextElement.getResolveScope());
     myResolveRequests.incrementAndGet();
     PerlValue result = myResolveMap.get(key);
