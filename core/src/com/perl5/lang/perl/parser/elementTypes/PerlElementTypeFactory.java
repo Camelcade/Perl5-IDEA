@@ -305,6 +305,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlKeysExprImpl.class);
       case "DEFINED_EXPR":
         return new PerlElementTypeEx(name, PsiPerlDefinedExprImpl.class);
+      case "WANTARRAY_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlWantarrayExprImpl.class);
       case "VALUES_EXPR":
         return new PerlElementTypeEx(name, PsiPerlValuesExprImpl.class);
       case "EACH_EXPR":

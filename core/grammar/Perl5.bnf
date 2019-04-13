@@ -121,13 +121,16 @@ limitations under the License.
     RESERVED_VALUES='values'
 
     RESERVED_DEFINED='defined'
+    RESERVED_WANTARRAY='wantarray'
+
+    RESERVED_POP='pop'
+    RESERVED_SHIFT='shift'
+
+    RESERVED_PUSH='push'
+    RESERVED_UNSHIFT='unshift'
+
     RESERVED_SPLIT='split'
     RESERVED_JOIN='join'
-    RESERVED_WANTARRAY='wantarray'
-    RESERVED_POP='pop'
-    RESERVED_PUSH='push'
-    RESERVED_SHIFT='shift'
-    RESERVED_UNSHIFT='unshift'
 
     RESERVED_UNDEF='undef'
 
@@ -724,6 +727,7 @@ keys_expr ::= 'keys' single_argument_expr {pin=1}
 values_expr ::= 'values' single_argument_expr {pin=1}
 each_expr ::= 'each' single_argument_expr {pin=1}
 defined_expr ::= 'defined' [unary_expr] {pin=1}
+wantarray_expr ::= 'wantarray'
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -811,6 +815,7 @@ term_expr ::=
     | values_expr
     | each_expr
     | defined_expr
+    | wantarray_expr
     | exit_expr
     | hash_variable
     | hash_cast_expr
