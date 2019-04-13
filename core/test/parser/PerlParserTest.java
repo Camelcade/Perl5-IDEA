@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testSpliceExpr() {doTest();}
+
   public void testDefinedExpr() {doTest();}
 
   public void testScalarExpr() {doTest(false);}

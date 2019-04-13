@@ -1,0 +1,14 @@
+my @first;
+
+splice(@fi<caret>rst, @fir<caret>st, @fir<caret>st, @fir<caret>st , @fir<caret>st );
+splice(@fi<caret>rst, @fir<caret>st, @fir<caret>st, @fir<caret>st );
+splice(@fi<caret>rst, @fir<caret>st, @fir<caret>st);
+splice(@fi<caret>rst, @fir<caret>st);
+splice(@fi<caret>rst);
+
+
+splice @fi<caret>rst, @fir<caret>st, @fir<caret>st, @fir<caret>st , @fir<caret>st ;
+splice @fi<caret>rst, @fir<caret>st, @fir<caret>st , @fir<caret>st ;
+splice @fi<caret>rst, @fir<caret>st, @fir<caret>st ;
+splice @fi<caret>rst, @fir<caret>st ;
+splice @fi<caret>rst ;

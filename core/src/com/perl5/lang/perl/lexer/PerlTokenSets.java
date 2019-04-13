@@ -156,7 +156,12 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_EACH,
     RESERVED_DEFINED,
     RESERVED_WANTARRAY,
-    RESERVED_DELETE
+    RESERVED_DELETE,
+    RESERVED_SPLICE
+  );
+
+  TokenSet LIST_MUTATION_EXPRESSIONS = TokenSet.create(
+    DELETE_EXPR, SPLICE_EXPR
   );
 
   TokenSet MODIFIERS_KEYWORDS_TOKENSET = TokenSet.create(

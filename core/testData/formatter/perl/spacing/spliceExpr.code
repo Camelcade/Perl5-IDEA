@@ -1,0 +1,11 @@
+splice      (   @a ,   @a ,   0 ,   $x ,   $y ) ;
+splice      (   @a ,   -1 ) ;
+splice      (   @a ,   0 ,   1 ) ;
+splice      (   @a ,   0 ,   0 ,   $x ,   $y ) ;
+splice      (   @a ,   $i ,   1 ,   $y ) ;
+
+splice     @a ,   @a ,   0 ,   $x ,   $y ;
+splice     @a ,   -1 ;
+splice     @a ,   0 ,   1 ;
+splice     @a ,   0 ,   0 ,   $x ,   $y ;
+splice     @a ,   $i ,   1 ,   $y ;

@@ -27,9 +27,11 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlCallArgumentsMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
@@ -143,6 +145,12 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     }
     else if (parentExpressionType == DELETE_EXPR) {
       return Access.ReadWrite;
+    }
+    else if (parentExpressionType == SPLICE_EXPR) {
+      List<PsiElement> children = PerlArrayUtil.collectListElements(expression);
+      if (children.size() > 0 && PsiTreeUtil.isAncestor(children.get(0), originalElement, false)) {
+        return Access.ReadWrite;
+      }
     }
     else if (parentExpression instanceof PsiPerlSubCallExpr) {
       PsiPerlMethod method = ((PsiPerlSubCallExpr)parentExpression).getMethod();
