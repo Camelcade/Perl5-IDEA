@@ -14,34 +14,36 @@
  * limitations under the License.
  */
 
-package editor;
+package parser;
 
-import base.PodLightTestCase;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.testFramework.EditorTestUtil;
+import com.intellij.psi.PsiFile;
+import com.perl5.lang.pod.PodParserDefinition;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public class PodStructureViewTest extends PodLightTestCase {
+public class PODParserTestReal extends PerlParserTestBase {
+  public PODParserTestReal() {
+    super("", "pod", new PodParserDefinition());
+  }
+
   @Override
   protected String getTestDataPath() {
     return "testData/testLibSets/perldoc/pod";
   }
 
-  @Override
-  protected String getResultsTestDataPath() {
-    return "testData/structure/pod";
+  protected String getAnswersDataPath() {
+    return "testData/parser/pod/pod";
   }
 
   @Override
-  public void initWithFile(String filename, String extension) throws IOException {
-    initWithFile(filename, extension, filename + ".pod");
+  protected String loadFile(@NotNull String name) throws IOException {
+    return loadFileDefault(myFullDataPath, name);
   }
 
   @Override
-  public void initWithFileContent(String filename, String extension, String content) {
-    super.initWithFileContent(filename, extension, StringUtil.replace(
-      content, EditorTestUtil.BLOCK_SELECTION_START_TAG, "<BLOKC>"));
+  protected void checkResult(@NotNull String targetDataName, @NotNull PsiFile file) throws IOException {
+    doCheckResult(getAnswersDataPath(), file, checkAllPsiRoots(), targetDataName, skipSpaces(), includeRanges(), allTreesInSingleFile());
   }
 
   public void testPerl() {doTest();}
@@ -413,8 +415,4 @@ public class PodStructureViewTest extends PodLightTestCase {
   public void testPerlxstut() {doTest();}
 
   public void testPerlxstypemap() {doTest();}
-
-  private void doTest() {
-    doTestStructureView();
-  }
 }
