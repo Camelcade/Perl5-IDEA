@@ -1,0 +1,53 @@
+<p><a href="psi_element://pod%3A%3Aperlobj">pod::perlobj</a>: <a href="psi_element://pod%3A%3Aperlobj%2FDESCRIPTION">DESCRIPTION</a></p><h2>Destructors
+ </h2><p style="padding-bottom: 10px;">When the last reference to an object goes away, the object is
+destroyed. If you only have one reference to an object stored in a
+lexical scalar, the object is destroyed when that scalar goes out of
+scope. If you store the object in a package global, that object may not
+go out of scope until the program exits.</p>
+<p style="padding-bottom: 10px;">If you want to do something when the object is destroyed, you can
+define a <code>DESTROY</code> method in your class. This method will always be
+called by Perl at the appropriate time, unless the method is empty.</p>
+<p style="padding-bottom: 10px;">This is called just like any other method, with the object as the first
+argument. It does not receive any additional arguments. However, the
+<code>$_[0]</code> variable will be read-only in the destructor, so you cannot
+assign a value to it.</p>
+<p style="padding-bottom: 10px;">If your <code>DESTROY</code> method throws an error, this error will be ignored.
+It will not be sent to <code>STDERR</code> and it will not cause the program to
+die. However, if your destructor is running inside an <code>eval {}</code> block,
+then the error will change the value of <code>$@</code>.</p>
+<p style="padding-bottom: 10px;">Because <code>DESTROY</code> methods can be called at any time, you should
+localize any global variables you might update in your <code>DESTROY</code>. In
+particular, if you use <code>eval {}</code> you should localize <code>$@</code>, and if you
+use <code>system</code> or backticks you should localize <code>$?</code>.</p>
+<p style="padding-bottom: 10px;">If you define an <code>AUTOLOAD</code> in your class, then Perl will call your
+<code>AUTOLOAD</code> to handle the <code>DESTROY</code> method. You can prevent this by
+defining an empty <code>DESTROY</code>, like we did in the autoloading example.
+You can also check the value of <code>$AUTOLOAD</code> and return without doing
+anything when called to handle <code>DESTROY</code>.</p>
+<h3>Global Destruction</h3><p style="padding-bottom: 10px;">The order in which objects are destroyed during the global destruction
+before the program exits is unpredictable. This means that any objects
+contained by your object may already have been destroyed. You should
+check that a contained object is defined before calling a method on it:</p>
+<div style="padding-bottom: 10px;"><pre><code>  sub DESTROY {
+      my $self = shift;
+
+      $self-&gt;{handle}-&gt;close() if $self-&gt;{handle};
+  }</code></pre></div>
+<p style="padding-bottom: 10px;">You can use the <code>${^GLOBAL_PHASE}</code> variable to detect if you are
+currently in the global destruction phase:</p>
+<div style="padding-bottom: 10px;"><pre><code>  sub DESTROY {
+      my $self = shift;
+
+      return if ${^GLOBAL_PHASE} eq 'DESTRUCT';
+
+      $self-&gt;{handle}-&gt;close();
+  }</code></pre></div>
+<p style="padding-bottom: 10px;">Note that this variable was added in Perl 5.14.0. If you want to detect
+the global destruction phase on older versions of Perl, you can use the
+<code>Devel::GlobalDestruction</code> module on CPAN.</p>
+<p style="padding-bottom: 10px;">If your <code>DESTROY</code> method issues a warning during global destruction,
+the Perl interpreter will append the string &quot; during global
+destruction&quot; to the warning.</p>
+<p style="padding-bottom: 10px;">During global destruction, Perl will always garbage collect objects
+before unblessed references. See <a href="psi_element://perlhacktips%2FPERL_DESTRUCT_LEVEL">PERL_DESTRUCT_LEVEL in perlhacktips</a>
+for more information about global destruction.</p>

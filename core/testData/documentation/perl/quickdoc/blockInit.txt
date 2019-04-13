@@ -1,0 +1,98 @@
+<p><a href="psi_element://pod%3A%3Aperlmod">pod::perlmod</a>: <a href="psi_element://pod%3A%3Aperlmod%2FDESCRIPTION">DESCRIPTION</a></p><h2>BEGIN, UNITCHECK, CHECK, INIT and END
+    </h2><p style="padding-bottom: 10px;">Five specially named code blocks are executed at the beginning and at
+the end of a running Perl program.  These are the <code>BEGIN</code>,
+<code>UNITCHECK</code>, <code>CHECK</code>, <code>INIT</code>, and <code>END</code> blocks.</p>
+<p style="padding-bottom: 10px;">These code blocks can be prefixed with <code>sub</code> to give the appearance of a
+subroutine (although this is not considered good style).  One should note
+that these code blocks don't really exist as named subroutines (despite
+their appearance). The thing that gives this away is the fact that you can
+have <B>more than one</B> of these code blocks in a program, and they will get
+<B>all</B> executed at the appropriate moment.  So you can't execute any of
+these code blocks by name.</p>
+<p style="padding-bottom: 10px;">A <code>BEGIN</code> code block is executed as soon as possible, that is, the moment
+it is completely defined, even before the rest of the containing file (or
+string) is parsed.  You may have multiple <code>BEGIN</code> blocks within a file (or
+eval'ed string); they will execute in order of definition.  Because a <code>BEGIN</code>
+code block executes immediately, it can pull in definitions of subroutines
+and such from other files in time to be visible to the rest of the compile
+and run time.  Once a <code>BEGIN</code> has run, it is immediately undefined and any
+code it used is returned to Perl's memory pool.</p>
+<p style="padding-bottom: 10px;">An <code>END</code> code block is executed as late as possible, that is, after
+perl has finished running the program and just before the interpreter
+is being exited, even if it is exiting as a result of a die() function.
+(But not if it's morphing into another program via <code>exec</code>, or
+being blown out of the water by a signal--you have to trap that yourself
+(if you can).)  You may have multiple <code>END</code> blocks within a file--they
+will execute in reverse order of definition; that is: last in, first
+out (LIFO).  <code>END</code> blocks are not executed when you run perl with the
+<code>-c</code> switch, or if compilation fails.</p>
+<p style="padding-bottom: 10px;">Note that <code>END</code> code blocks are <B>not</B> executed at the end of a string
+<code>eval()</code>: if any <code>END</code> code blocks are created in a string <code>eval()</code>,
+they will be executed just as any other <code>END</code> code block of that package
+in LIFO order just before the interpreter is being exited.</p>
+<p style="padding-bottom: 10px;">Inside an <code>END</code> code block, <code>$?</code> contains the value that the program is
+going to pass to <code>exit()</code>.  You can modify <code>$?</code> to change the exit
+value of the program.  Beware of changing <code>$?</code> by accident (e.g. by
+running something via <code>system</code>).</p>
+<p style="padding-bottom: 10px;">Inside of a <code>END</code> block, the value of <code>${^GLOBAL_PHASE}</code> will be
+<code>&quot;END&quot;</code>.</p>
+<p style="padding-bottom: 10px;"><code>UNITCHECK</code>, <code>CHECK</code> and <code>INIT</code> code blocks are useful to catch the
+transition between the compilation phase and the execution phase of
+the main program.</p>
+<p style="padding-bottom: 10px;"><code>UNITCHECK</code> blocks are run just after the unit which defined them has
+been compiled.  The main program file and each module it loads are
+compilation units, as are string <code>eval</code>s, run-time code compiled using the
+<code>(?{ })</code> construct in a regex, calls to <code>do FILE</code>, <code>require FILE</code>,
+and code after the <code>-e</code> switch on the command line.</p>
+<p style="padding-bottom: 10px;"><code>BEGIN</code> and <code>UNITCHECK</code> blocks are not directly related to the phase of
+the interpreter.  They can be created and executed during any phase.</p>
+<p style="padding-bottom: 10px;"><code>CHECK</code> code blocks are run just after the <B>initial</B> Perl compile phase ends
+and before the run time begins, in LIFO order.  <code>CHECK</code> code blocks are used
+in the Perl compiler suite to save the compiled state of the program.</p>
+<p style="padding-bottom: 10px;">Inside of a <code>CHECK</code> block, the value of <code>${^GLOBAL_PHASE}</code> will be
+<code>&quot;CHECK&quot;</code>.</p>
+<p style="padding-bottom: 10px;"><code>INIT</code> blocks are run just before the Perl runtime begins execution, in
+&quot;first in, first out&quot; (FIFO) order.</p>
+<p style="padding-bottom: 10px;">Inside of an <code>INIT</code> block, the value of <code>${^GLOBAL_PHASE}</code> will be <code>&quot;INIT&quot;</code>.</p>
+<p style="padding-bottom: 10px;">The <code>CHECK</code> and <code>INIT</code> blocks in code compiled by <code>require</code>, string <code>do</code>,
+or string <code>eval</code> will not be executed if they occur after the end of the
+main compilation phase; that can be a problem in mod_perl and other persistent
+environments which use those functions to load code at runtime.</p>
+<p style="padding-bottom: 10px;">When you use the <B>-n</B> and <B>-p</B> switches to Perl, <code>BEGIN</code> and
+<code>END</code> work just as they do in <B>awk</B>, as a degenerate case.
+Both <code>BEGIN</code> and <code>CHECK</code> blocks are run when you use the <B>-c</B>
+switch for a compile-only syntax check, although your main code
+is not.</p>
+<p style="padding-bottom: 10px;">The <B>begincheck</B> program makes it all clear, eventually:</p>
+<div style="padding-bottom: 10px;"><pre><code>  #!/usr/bin/perl
+
+  # begincheck
+
+  print         &quot;10. Ordinary code runs at runtime.\n&quot;;
+
+  END { print   &quot;16.   So this is the end of the tale.\n&quot; }
+  INIT { print  &quot; 7. INIT blocks run FIFO just before runtime.\n&quot; }
+  UNITCHECK {
+    print       &quot; 4.   And therefore before any CHECK blocks.\n&quot;
+  }
+  CHECK { print &quot; 6.   So this is the sixth line.\n&quot; }
+
+  print         &quot;11.   It runs in order, of course.\n&quot;;
+
+  BEGIN { print &quot; 1. BEGIN blocks run FIFO during compilation.\n&quot; }
+  END { print   &quot;15.   Read perlmod for the rest of the story.\n&quot; }
+  CHECK { print &quot; 5. CHECK blocks run LIFO after all compilation.\n&quot; }
+  INIT { print  &quot; 8.   Run this again, using Perl's -c switch.\n&quot; }
+
+  print         &quot;12.   This is anti-obfuscated code.\n&quot;;
+
+  END { print   &quot;14. END blocks run LIFO at quitting time.\n&quot; }
+  BEGIN { print &quot; 2.   So this line comes out second.\n&quot; }
+  UNITCHECK {
+   print &quot; 3. UNITCHECK blocks run LIFO after each file is compiled.\n&quot;
+  }
+  INIT { print  &quot; 9.   You'll see the difference right away.\n&quot; }
+
+  print         &quot;13.   It only _looks_ like it should be confusing.\n&quot;;
+
+  __END__</code></pre></div>

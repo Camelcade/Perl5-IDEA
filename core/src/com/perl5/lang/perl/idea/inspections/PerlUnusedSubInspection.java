@@ -31,6 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Set;
 
+import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
+
 /**
  * Created by hurricup on 14.08.2015.
  */
@@ -41,7 +43,7 @@ public class PerlUnusedSubInspection extends PerlInspection {
     "CHECK",
     "INIT",
     "END",
-    "DESTROY"
+    SUB_DESTROY
   ));
 
   @NotNull

@@ -1,0 +1,3 @@
+AUT<caret>OLOAD{
+  say 42;
+}

@@ -1,0 +1,3 @@
+BE<caret>GIN{
+  say 42;
+}

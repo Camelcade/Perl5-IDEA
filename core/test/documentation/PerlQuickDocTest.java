@@ -32,6 +32,20 @@ public class PerlQuickDocTest extends PerlLightTestCase {
     return "testData/documentation/perl/quickdoc";
   }
 
+  public void testBlockAutoload() {doTest();}
+
+  public void testBlockDestroy() {doTest();}
+
+  public void testBlockBegin() {doTest();}
+
+  public void testBlockCheck() {doTest();}
+
+  public void testBlockEnd() {doTest();}
+
+  public void testBlockInit() {doTest();}
+
+  public void testBlockUnitcheck() {doTest();}
+
   public void testTagData() {doTest();}
 
   public void testTagEnd() {doTest();}

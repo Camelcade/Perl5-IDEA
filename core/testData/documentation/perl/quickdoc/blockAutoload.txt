@@ -1,0 +1,46 @@
+<p><a href="psi_element://pod%3A%3Aperlsub">pod::perlsub</a>: <a href="psi_element://pod%3A%3Aperlsub%2FDESCRIPTION">DESCRIPTION</a></p><h2>Autoloading
+ </h2><p style="padding-bottom: 10px;">If you call a subroutine that is undefined, you would ordinarily
+get an immediate, fatal error complaining that the subroutine doesn't
+exist.  (Likewise for subroutines being used as methods, when the
+method doesn't exist in any base class of the class's package.)
+However, if an <code>AUTOLOAD</code> subroutine is defined in the package or
+packages used to locate the original subroutine, then that
+<code>AUTOLOAD</code> subroutine is called with the arguments that would have
+been passed to the original subroutine.  The fully qualified name
+of the original subroutine magically appears in the global $AUTOLOAD
+variable of the same package as the <code>AUTOLOAD</code> routine.  The name
+is not passed as an ordinary argument because, er, well, just
+because, that's why.  (As an exception, a method call to a nonexistent
+<code>import</code> or <code>unimport</code> method is just skipped instead.  Also, if
+the AUTOLOAD subroutine is an XSUB, there are other ways to retrieve the
+subroutine name.  See <a href="psi_element://perlguts%2FAutoloading+with+XSUBs">Autoloading with XSUBs in perlguts</a> for details.)</p>
+
+<p style="padding-bottom: 10px;">Many <code>AUTOLOAD</code> routines load in a definition for the requested
+subroutine using eval(), then execute that subroutine using a special
+form of goto() that erases the stack frame of the <code>AUTOLOAD</code> routine
+without a trace.  (See the source to the standard module documented
+in <a href="psi_element://AutoLoader" style="color:red">AutoLoader</a>, for example.)  But an <code>AUTOLOAD</code> routine can
+also just emulate the routine and never define it.   For example,
+let's pretend that a function that wasn't defined should just invoke
+<code>system</code> with those arguments.  All you'd do is:</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub AUTOLOAD {
+	my $program = $AUTOLOAD;
+	$program =~ s/.*:://;
+	system($program, @_);
+    }
+    date();
+    who('am', 'i');
+    ls('-l');</code></pre></div>
+<p style="padding-bottom: 10px;">In fact, if you predeclare functions you want to call that way, you don't
+even need parentheses:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use subs qw(date who ls);
+    date;
+    who &quot;am&quot;, &quot;i&quot;;
+    ls '-l';</code></pre></div>
+<p style="padding-bottom: 10px;">A more complete example of this is the Shell module on CPAN, which
+can treat undefined subroutine calls as calls to external programs.</p>
+<p style="padding-bottom: 10px;">Mechanisms are available to help modules writers split their modules
+into autoloadable files.  See the standard AutoLoader module
+described in <a href="psi_element://AutoLoader" style="color:red">AutoLoader</a> and in <a href="psi_element://AutoSplit" style="color:red">AutoSplit</a>, the standard
+SelfLoader modules in <a href="psi_element://SelfLoader" style="color:red">SelfLoader</a>, and the document on adding C
+functions to Perl code in <a href="psi_element://perlxs">perlxs</a>.</p>

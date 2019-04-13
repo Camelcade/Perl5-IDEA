@@ -39,7 +39,6 @@ import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
 import com.perl5.lang.pod.parser.psi.*;
@@ -56,6 +55,9 @@ import java.util.List;
 import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
+import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
+import static com.perl5.lang.pod.PodSearchHelper.PERL_FUNC_FILE_NAME;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -65,22 +67,15 @@ public class PerlDocUtil implements PerlElementTypes {
   private static final String SWITCH_DOC_LINK = "perlsyn/\"Switch Statements\"";
   private static final String COMPOUND_DOC_LINK = "perlsyn/\"Compound Statements\"";
   static final String SPECIAL_LITERALS_LINK = "perldata/\"Special Literals\"";
+  private static final String BLOCK_NAMES_LINK = "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"";
+  private static final String AUTOLOAD_LINK = "perlsub/\"Autoloading\"";
+  private static final String DESTROY_LINK = "perlobj/\"Destructors\"";
 
-  private static final Map<String, String> KEYWORDS_LINKS = new THashMap<>();
   private static final Map<String, String> OPERATORS_LINKS = new THashMap<>();
   private static final Map<String, String> VARIABLES_LINKS = new THashMap<>();
+  ;
 
   static {
-    KEYWORDS_LINKS.put("BEGIN", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    KEYWORDS_LINKS.put("CHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    KEYWORDS_LINKS.put("END", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    KEYWORDS_LINKS.put("INIT", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    KEYWORDS_LINKS.put("UNITCHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-
-    KEYWORDS_LINKS.put("DESTROY", "perlobj/\"Destructors\"");
-
-    KEYWORDS_LINKS.put(PerlSubUtil.SUB_AUTOLOAD, "perlsub/\"Autoloading\"");
-
     OPERATORS_LINKS.put("~~", "perlop/\"Smartmatch Operator\"");
     OPERATORS_LINKS.put("qr", "perlop/\"qr/STRING/\"");
     OPERATORS_LINKS.put("s", "perlop/\"s/PATTERN/\"");
@@ -178,31 +173,44 @@ public class PerlDocUtil implements PerlElementTypes {
   @Nullable
   public static PsiElement getPerlFuncDoc(PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
+    CharSequence tokenChars = element.getNode().getChars();
+
+    String redirect = null;
     if (MODIFIERS_KEYWORDS_TOKENSET.contains(elementType) && element.getParent() instanceof PsiPerlStatementModifier) {
-      return resolveDocLink(MODIFIERS_DOC_LINK, element);
+      redirect = MODIFIERS_DOC_LINK;
     }
     else if (SWITCH_KEYWORDS_TOKENSET.contains(elementType)) {
-      return resolveDocLink(SWITCH_DOC_LINK, element);
+      redirect = SWITCH_DOC_LINK;
     }
     else if (COMPOUND_KEYWORDS_TOKENSET.contains(elementType)) {
-      return resolveDocLink(COMPOUND_DOC_LINK, element);
+      redirect = COMPOUND_DOC_LINK;
     }
     else if (TAGS_TOKEN_SET.contains(elementType)) {
-      return resolveDocLink(SPECIAL_LITERALS_LINK, element);
+      redirect = SPECIAL_LITERALS_LINK;
+    }
+    else if (elementType == BLOCK_NAME) {
+      if (StringUtil.equals(tokenChars, SUB_AUTOLOAD)) {
+        redirect = AUTOLOAD_LINK;
+      }
+      else if (StringUtil.equals(tokenChars, SUB_DESTROY)) {
+        redirect = DESTROY_LINK;
+      }
+      else {
+        redirect = BLOCK_NAMES_LINK;
+      }
     }
 
-    String text = element.getText();
-    String redirect = KEYWORDS_LINKS.get(text);
     if (redirect != null) {
       return resolveDocLink(redirect, element);
     }
 
+    String text = tokenChars.toString();
     if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]")) {
       text = "-X";
     }
 
     PodCompositeElement podElement =
-      searchPodElementInFile(element.getProject(), PodSearchHelper.PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
+      searchPodElementInFile(element.getProject(), PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
 
     return podElement == null ? getPerlOpDoc(element) : podElement;
   }

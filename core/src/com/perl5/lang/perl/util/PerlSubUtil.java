@@ -48,6 +48,7 @@ import java.util.*;
  */
 public class PerlSubUtil implements PerlElementTypes {
   public static final String SUB_AUTOLOAD = "AUTOLOAD";
+  public static final String SUB_DESTROY = "DESTROY";
   public static final String SUB_AUTOLOAD_WITH_PREFIX = PerlPackageUtil.PACKAGE_SEPARATOR + SUB_AUTOLOAD;
 
 
