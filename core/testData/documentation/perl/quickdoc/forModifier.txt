@@ -1,0 +1,82 @@
+<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Statement Modifiers
+    
+   </h2><p style="padding-bottom: 10px;">Any simple statement may optionally be followed by a <i>SINGLE</i> modifier,
+just before the terminating semicolon (or block ending).  The possible
+modifiers are:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if EXPR
+    unless EXPR
+    while EXPR
+    until EXPR
+    for LIST
+    foreach LIST
+    when EXPR</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>EXPR</code> following the modifier is referred to as the &quot;condition&quot;.
+Its truth or falsehood determines how the modifier will behave.</p>
+<p style="padding-bottom: 10px;"><code>if</code> executes the statement once <i>if</i> and only if the condition is
+true.  <code>unless</code> is the opposite, it executes the statement <i>unless</i>
+the condition is true (that is, if the condition is false).</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;Basset hounds got long ears&quot; if length $ear &gt;= 10;
+    go_outside() and play() unless $is_raining;</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>for(each)</code> modifier is an iterator: it executes the statement once
+for each item in the LIST (with <code>$_</code> aliased to each item in turn).</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;Hello $_!\n&quot; for qw(world Dolly nurse);</code></pre></div>
+<p style="padding-bottom: 10px;"><code>while</code> repeats the statement <i>while</i> the condition is true.
+<code>until</code> does the opposite, it repeats the statement <i>until</i> the
+condition is true (or while the condition is false):</p>
+<div style="padding-bottom: 10px;"><pre><code>    # Both of these count from 0 to 10.
+    print $i++ while $i &lt;= 10;
+    print $j++ until $j &gt;  10;</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>while</code> and <code>until</code> modifiers have the usual &quot;<code>while</code> loop&quot;
+semantics (conditional evaluated first), except when applied to a
+<code>do</code>-BLOCK (or to the Perl4 <code>do</code>-SUBROUTINE statement), in
+which case the block executes once before the conditional is
+evaluated.</p>
+<p style="padding-bottom: 10px;">This is so that you can write loops like:</p>
+<div style="padding-bottom: 10px;"><pre><code>    do {
+        $line = &lt;STDIN&gt;;
+        ...
+    } until !defined($line) || $line eq &quot;.\n&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlfunc%2Fdo">do in perlfunc</a>.  Note also that the loop control statements described
+later will <i>NOT</i> work in this construct, because modifiers don't take
+loop labels.  Sorry.  You can always put another block inside of it
+(for <code>next</code>/<code>redo</code>) or around it (for <code>last</code>) to do that sort of thing.
+  </p>
+<p style="padding-bottom: 10px;">For <code>next</code> or <code>redo</code>, just double the braces:</p>
+<div style="padding-bottom: 10px;"><pre><code>    do {{
+        next if $x == $y;
+        # do something here
+    }} until $x++ &gt; $z;</code></pre></div>
+<p style="padding-bottom: 10px;">For <code>last</code>, you have to be more elaborate and put braces around it:</p>
+<div style="padding-bottom: 10px;"><pre><code>    {
+        do {
+            last if $x == $y**2;
+            # do something here
+        } while $x++ &lt;= $z;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">If you need both <code>next</code> and <code>last</code>, you have to do both and also use a
+loop label:</p>
+<div style="padding-bottom: 10px;"><pre><code>    LOOP: {
+        do {{
+            next if $x == $y;
+            last LOOP if $x == $y**2;
+            # do something here
+        }} until $x++ &gt; $z;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;"><B>NOTE:</B> The behaviour of a <code>my</code>, <code>state</code>, or
+<code>our</code> modified with a statement modifier conditional
+or loop construct (for example, <code>my $x if ...</code>) is
+<B>undefined</B>.  The value of the <code>my</code> variable may be <code>undef</code>, any
+previously assigned value, or possibly anything else.  Don't rely on
+it.  Future versions of perl might do something different from the
+version of perl you try it out on.  Here be dragons.</p>
+<p style="padding-bottom: 10px;">The <code>when</code> modifier is an experimental feature that first appeared in Perl
+5.14.  To use it, you should include a <code>use v5.14</code> declaration.
+(Technically, it requires only the <code>switch</code> feature, but that aspect of it
+was not available before 5.14.)  Operative only from within a <code>foreach</code>
+loop or a <code>given</code> block, it executes the statement only if the smartmatch
+<code>$_ ~~ <i>EXPR</i></code> is true.  If the statement executes, it is followed by
+a <code>next</code> from inside a <code>foreach</code> and <code>break</code> from inside a <code>given</code>.</p>
+<p style="padding-bottom: 10px;">Under the current implementation, the <code>foreach</code> loop can be
+anywhere within the <code>when</code> modifier's dynamic scope, but must be
+within the <code>given</code> block's lexical scope.  This restricted may
+be relaxed in a future release.  See <a href="psi_element://pod%3A%3Aperlsyn%2FSwitch+Statements">Switch Statements</a> below.</p>

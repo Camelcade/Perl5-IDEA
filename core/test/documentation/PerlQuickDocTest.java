@@ -32,6 +32,20 @@ public class PerlQuickDocTest extends PerlLightTestCase {
     return "testData/documentation/perl/quickdoc";
   }
 
+  public void testIfModifier() {doTest();}
+
+  public void testUnlessModifier() {doTest();}
+
+  public void testWhileModifier() {doTest();}
+
+  public void testUntilModifier() {doTest();}
+
+  public void testForModifier() {doTest();}
+
+  public void testForeachModifier() {doTest();}
+
+  public void testWhenModifier() {doTest();}
+
   public void testPodWeaverAttr() {doTest();}
 
   public void testPodWeaverFunc() {doTest();}

@@ -35,6 +35,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -54,52 +55,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.MODIFIERS_TOKENSET;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocUtil implements PerlElementTypes {
-  private static final Map<String, String> myKeywordsRedirections = new THashMap<>();
-  private static final Map<String, String> myOperatorsRedirections = new THashMap<>();
-  private static final Map<String, String> myVariablesRedirections = new THashMap<>();
+  private static final String MODIFIERS_DOC_LINK = "perlsyn/\"Statement Modifiers\"";
+
+  private static final Map<String, String> KEYWORDS_LINKS = new THashMap<>();
+  private static final Map<String, String> OPERATORS_LINKS = new THashMap<>();
+  private static final Map<String, String> VARIABLES_LINKS = new THashMap<>();
 
   static {
-    myKeywordsRedirections.put("__DATA__", "perldata/\"Special Literals\"");
-    myKeywordsRedirections.put("__END__", "perldata/\"Special Literals\"");
+    KEYWORDS_LINKS.put("__DATA__", "perldata/\"Special Literals\"");
+    KEYWORDS_LINKS.put("__END__", "perldata/\"Special Literals\"");
 
-    myKeywordsRedirections.put("BEGIN", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    myKeywordsRedirections.put("CHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    myKeywordsRedirections.put("END", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    myKeywordsRedirections.put("INIT", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
-    myKeywordsRedirections.put("UNITCHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+    KEYWORDS_LINKS.put("BEGIN", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+    KEYWORDS_LINKS.put("CHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+    KEYWORDS_LINKS.put("END", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+    KEYWORDS_LINKS.put("INIT", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
+    KEYWORDS_LINKS.put("UNITCHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
 
-    myKeywordsRedirections.put("DESTROY", "perlobj/\"Destructors\"");
+    KEYWORDS_LINKS.put("DESTROY", "perlobj/\"Destructors\"");
 
-    myKeywordsRedirections.put(PerlSubUtil.SUB_AUTOLOAD, "perlsub/\"Autoloading\"");
+    KEYWORDS_LINKS.put(PerlSubUtil.SUB_AUTOLOAD, "perlsub/\"Autoloading\"");
 
-    myKeywordsRedirections.put("default", "perlsyn/\"Switch Statements\"");
-    myKeywordsRedirections.put("given", "perlsyn/\"Switch Statements\"");
-    myKeywordsRedirections.put("when", "perlsyn/\"Switch Statements\"");
+    KEYWORDS_LINKS.put("default", "perlsyn/\"Switch Statements\"");
+    KEYWORDS_LINKS.put("given", "perlsyn/\"Switch Statements\"");
+    KEYWORDS_LINKS.put("when", "perlsyn/\"Switch Statements\"");
 
-    myKeywordsRedirections.put("else", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("elsif", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("for", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("foreach", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("if", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("unless", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("until", "perlsyn/\"Compound Statements\"");
-    myKeywordsRedirections.put("while", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("else", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("elsif", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("for", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("foreach", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("if", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("unless", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("until", "perlsyn/\"Compound Statements\"");
+    KEYWORDS_LINKS.put("while", "perlsyn/\"Compound Statements\"");
 
-    myOperatorsRedirections.put("~~", "perlop/\"Smartmatch Operator\"");
-    myOperatorsRedirections.put("qr", "perlop/\"qr/STRING/\"");
-    myOperatorsRedirections.put("s", "perlop/\"s/PATTERN/\"");
-    myOperatorsRedirections.put("m", "perlop/\"m/PATTERN/\"");
-    myOperatorsRedirections.put("=>", "perlop/\"Comma Operator\"");
+    OPERATORS_LINKS.put("~~", "perlop/\"Smartmatch Operator\"");
+    OPERATORS_LINKS.put("qr", "perlop/\"qr/STRING/\"");
+    OPERATORS_LINKS.put("s", "perlop/\"s/PATTERN/\"");
+    OPERATORS_LINKS.put("m", "perlop/\"m/PATTERN/\"");
+    OPERATORS_LINKS.put("=>", "perlop/\"Comma Operator\"");
 
-    myVariablesRedirections.put("@ISA", "perlobj/\"A Class is Simply a Package\"");
-    myVariablesRedirections.put("@EXPORT", "Exporter/\"How to Export\"");
-    myVariablesRedirections.put("@EXPORT_OK", "Exporter/\"How to Export\"");
-    myVariablesRedirections.put("%EXPORT_TAGS", "Exporter/\"Specialised Import Lists\"");
-    myVariablesRedirections.put("$VERSION", "perlobj/\"VERSION\"");
+    VARIABLES_LINKS.put("@ISA", "perlobj/\"A Class is Simply a Package\"");
+    VARIABLES_LINKS.put("@EXPORT", "Exporter/\"How to Export\"");
+    VARIABLES_LINKS.put("@EXPORT_OK", "Exporter/\"How to Export\"");
+    VARIABLES_LINKS.put("%EXPORT_TAGS", "Exporter/\"Specialised Import Lists\"");
+    VARIABLES_LINKS.put("$VERSION", "perlobj/\"VERSION\"");
   }
 
   @Nullable
@@ -165,8 +170,8 @@ public class PerlDocUtil implements PerlElementTypes {
     if (actualType != null && StringUtil.isNotEmpty(variableName)) {
       String text = actualType.getSigil() + variableName;
 
-      if (myVariablesRedirections.containsKey(text)) {
-        return resolveDocLink(myVariablesRedirections.get(text), variable);
+      if (VARIABLES_LINKS.containsKey(text)) {
+        return resolveDocLink(VARIABLES_LINKS.get(text), variable);
       }
 
       if (variable.isBuiltIn()) {
@@ -185,10 +190,15 @@ public class PerlDocUtil implements PerlElementTypes {
 
   @Nullable
   public static PsiElement getPerlFuncDoc(PsiElement element) {
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (MODIFIERS_TOKENSET.contains(elementType) && element.getParent() instanceof PsiPerlStatementModifier) {
+      return resolveDocLink(MODIFIERS_DOC_LINK, element);
+    }
+
     final Project project = element.getProject();
     String text = element.getText();
 
-    String redirect = myKeywordsRedirections.get(text);
+    String redirect = KEYWORDS_LINKS.get(text);
     if (redirect != null) {
       return resolveDocLink(redirect, element);
     }
@@ -208,7 +218,7 @@ public class PerlDocUtil implements PerlElementTypes {
     final Project project = element.getProject();
     String text = element.getText();
 
-    String redirect = myOperatorsRedirections.get(text);
+    String redirect = OPERATORS_LINKS.get(text);
     if (redirect != null) {
       return resolveDocLink(redirect, element);
     }
