@@ -63,8 +63,7 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
   );
 
   private static final Set<String> LIST_MODIFYING_SUBS = ContainerUtil.set(
-    "CORE::push", "CORE::pop", "CORE::unshift", "CORE::shift",
-    "CORE::delete", "CORE::splice"
+    "CORE::push", "CORE::pop", "CORE::unshift", "CORE::shift", "CORE::splice"
   );
 
   @Override
@@ -141,6 +140,9 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     }
     else if (parentExpressionType == FOREACH_ITERATOR) {
       return Access.Write;
+    }
+    else if (parentExpressionType == DELETE_EXPR) {
+      return Access.ReadWrite;
     }
     else if (parentExpression instanceof PsiPerlSubCallExpr) {
       PsiPerlMethod method = ((PsiPerlSubCallExpr)parentExpression).getMethod();

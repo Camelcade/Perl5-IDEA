@@ -89,9 +89,6 @@ PerlSubReference at (626,630); text in range: 'push' => 1 results:
 PerlVariableReference at (632,635); text in range: 'arr' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 206 in readonly.pl
 
-PerlSubReference at (646,652); text in range: 'delete' => 1 results:
-	Implicit sub: delete()
-
 PerlVariableReference at (654,657); text in range: 'has' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 321 in readonly.pl
 

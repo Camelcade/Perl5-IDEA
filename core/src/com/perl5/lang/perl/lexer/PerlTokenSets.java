@@ -155,7 +155,8 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_VALUES,
     RESERVED_EACH,
     RESERVED_DEFINED,
-    RESERVED_WANTARRAY
+    RESERVED_WANTARRAY,
+    RESERVED_DELETE
   );
 
   TokenSet MODIFIERS_KEYWORDS_TOKENSET = TokenSet.create(

@@ -733,6 +733,7 @@ values_expr ::= 'values' single_argument_expr {pin=1}
 each_expr ::= 'each' single_argument_expr {pin=1}
 defined_expr ::= 'defined' [unary_expr] {pin=1}
 wantarray_expr ::= 'wantarray'
+delete_expr ::= 'delete' unary_expr {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -820,6 +821,7 @@ term_expr ::=
     | values_expr
     | each_expr
     | defined_expr
+    | delete_expr
     | wantarray_expr
     | exit_expr
     | hash_variable

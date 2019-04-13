@@ -301,6 +301,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlReturnExprImpl.class);
       case "SCALAR_EXPR":
         return new PerlElementTypeEx(name, PsiPerlScalarExprImpl.class);
+      case "DELETE_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlDeleteExprImpl.class);
       case "KEYS_EXPR":
         return new PerlElementTypeEx(name, PsiPerlKeysExprImpl.class);
       case "DEFINED_EXPR":
