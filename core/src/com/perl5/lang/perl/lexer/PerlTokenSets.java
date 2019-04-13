@@ -150,7 +150,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_UNDEF,
     RESERVED_RETURN,
 
-    RESERVED_SCALAR
+    RESERVED_SCALAR,
+    RESERVED_KEYS,
+    RESERVED_VALUES,
+    RESERVED_EACH
   );
 
   TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.orSet(

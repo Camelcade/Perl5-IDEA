@@ -1,0 +1,7 @@
+0(1) element: null (InstructionImpl)
+1(2) element: PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) (InstructionImpl)
+2(3) element: PsiPerlKeysExprImpl(Perl5: KEYS_EXPR) (InstructionImpl)
+3(4) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
+4(5) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
+5(6) assign PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) Perl5: = PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR) (PerlAssignInstruction)
+6() element: null (InstructionImpl)

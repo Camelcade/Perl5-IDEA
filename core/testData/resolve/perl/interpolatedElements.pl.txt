@@ -1,39 +1,39 @@
-PerlVariableReference at (45,51); text in range: 'scalar' => 1 results:
+PerlVariableReference at (59,65); text in range: 'scalar' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in interpolatedElements.pl
 
-PerlVariableReference at (70,76); text in range: 'scalar' => 1 results:
+PerlVariableReference at (84,90); text in range: 'scalar' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in interpolatedElements.pl
 
-PerlSubReference at (92,96); text in range: 'keys' => 1 results:
-	Implicit sub: keys()
+PerlSubReference at (106,113); text in range: 'somesub' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 33 in interpolatedElements.pl
 
-PerlVariableReference at (98,102); text in range: 'hash' => 1 results:
+PerlVariableReference at (115,119); text in range: 'hash' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in interpolatedElements.pl
 
-PerlVariableReference at (107,112); text in range: 'array' => 1 results:
+PerlVariableReference at (125,130); text in range: 'array' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in interpolatedElements.pl
 
-PerlVariableReference at (133,138); text in range: 'array' => 1 results:
+PerlVariableReference at (151,156); text in range: 'array' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in interpolatedElements.pl
 
-PerlVariableReference at (157,162); text in range: 'array' => 1 results:
+PerlVariableReference at (175,180); text in range: 'array' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in interpolatedElements.pl
 
-PerlVariableReference at (188,193); text in range: 'array' => 1 results:
+PerlVariableReference at (206,211); text in range: 'array' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in interpolatedElements.pl
 
-PerlSubReference at (194,198); text in range: 'keys' => 1 results:
-	Implicit sub: keys()
+PerlSubReference at (212,219); text in range: 'somesub' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 33 in interpolatedElements.pl
 
-PerlVariableReference at (200,204); text in range: 'hash' => 1 results:
+PerlVariableReference at (221,225); text in range: 'hash' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in interpolatedElements.pl
 
-PerlVariableReference at (224,229); text in range: 'array' => 1 results:
+PerlVariableReference at (246,251); text in range: 'array' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in interpolatedElements.pl
 
-PerlVariableReference at (275,279); text in range: 'hash' => 1 results:
+PerlVariableReference at (297,301); text in range: 'hash' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in interpolatedElements.pl
 
-PerlVariableReference at (305,309); text in range: 'hash' => 1 results:
+PerlVariableReference at (327,331); text in range: 'hash' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in interpolatedElements.pl
 

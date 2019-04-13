@@ -115,14 +115,19 @@ limitations under the License.
     RESERVED_GREP='grep'
     RESERVED_SORT='sort'
 
-    RESERVED_POP='pop'
-    RESERVED_PUSH='push'
     RESERVED_SCALAR='scalar';
     RESERVED_EACH='each'
-    RESERVED_SHIFT='shift'
-    RESERVED_UNSHIFT='unshift'
     RESERVED_KEYS='keys'
     RESERVED_VALUES='values'
+
+    RESERVED_DEFINED='defined'
+    RESERVED_SPLIT='split'
+    RESERVED_JOIN='join'
+    RESERVED_WANTARRAY='wantarray'
+    RESERVED_POP='pop'
+    RESERVED_PUSH='push'
+    RESERVED_SHIFT='shift'
+    RESERVED_UNSHIFT='unshift'
 
     RESERVED_UNDEF='undef'
 
@@ -714,6 +719,10 @@ goto_expr ::=  'goto' [goto_param] {pin=1}
 return_expr ::=  'return' [parse_list_expr] {pin=1}
 exit_expr ::= 'exit' [parse_scalar_expr] {pin=1}
 scalar_expr ::= 'scalar' single_argument_expr {pin=1}
+keys_expr ::= 'keys' single_argument_expr {pin=1}
+values_expr ::= 'values' single_argument_expr {pin=1}
+each_expr ::= 'each' single_argument_expr {pin=1}
+
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -797,6 +806,9 @@ term_expr ::=
     | match_regex
     | return_expr
     | scalar_expr
+    | keys_expr
+    | values_expr
+    | each_expr
     | exit_expr
     | hash_variable
     | hash_cast_expr

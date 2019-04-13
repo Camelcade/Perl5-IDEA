@@ -57,8 +57,9 @@ public final class PerlValuesManager {
   static final int HASH_ELEMENT_VALUE = id++;
   static final int DEFERRED_HASH_ID = id++;
   static final int HASH_SLICE_ID = id++;
-  static final int HASH_KEYS_ID = id++;
-  static final int HASH_VALUES_ID = id++;
+  static final int KEYS_ID = id++;
+  static final int VALUES_ID = id++;
+  static final int EACH_ID = id++;
   static final int HASH_CAST_ID = id++;
 
   static final int REFERENCE_ID = id++;
