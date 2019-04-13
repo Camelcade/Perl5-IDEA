@@ -1,0 +1,6 @@
+<caret>sub somesub{
+  my %args = @_;
+  return %args;
+}
+----------
+Hash: [SUB_ARGUMENTS]

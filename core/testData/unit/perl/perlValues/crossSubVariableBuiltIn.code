@@ -1,0 +1,13 @@
+sub firstsub{
+  $_ = 1;
+}
+
+sub firstsub{
+  $_ = 2;
+}
+
+sub firstsub{
+  $_ = 3;
+  $<caret>_;
+}
+

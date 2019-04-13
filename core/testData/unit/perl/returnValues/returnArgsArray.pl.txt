@@ -1,0 +1,6 @@
+<caret>sub somesub{
+  my @args = @_;
+  return @args;
+}
+----------
+Array: [SUB_ARGUMENTS]

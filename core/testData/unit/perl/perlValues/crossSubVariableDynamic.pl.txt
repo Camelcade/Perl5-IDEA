@@ -1,0 +1,16 @@
+sub firstsub{
+  $variable = Foo::Bar::->something($variable);
+}
+
+sub secondsub{
+  $variable = Foo::Bar::->something($variable);
+}
+
+sub thirdsub{
+  $variable = Foo::Bar::->something($variable);
+  $va<caret>riable;
+}
+----------
+$variable
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 195 in crossSubVariableDynamic.pl
+scalar Foo::Bar->something(Value unknown)

@@ -1,0 +1,16 @@
+sub firstsub{
+  $_ = 1;
+}
+
+sub firstsub{
+  $_ = 2;
+}
+
+sub firstsub{
+  $_ = 3;
+  $<caret>_;
+}
+----------
+$_
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 80 in crossSubVariableBuiltIn.pl
+3

@@ -263,8 +263,14 @@ public abstract class PerlValue {
     List<PsiElement> elements = assignValueDescriptor.getElements();
     PerlContextType targetContextType = PerlContextType.from(target);
     if (targetContextType == PerlContextType.SCALAR) {
+      // fixme otherwise we should createa list/extract subelement
       if (elements.size() == 1) {
-        return from(elements.get(0)).getScalarRepresentation();
+        if ((PerlContextType.from(elements.get(0)) == PerlContextType.SCALAR || assignValueDescriptor.getStartIndex() == -1)) {
+          return from(elements.get(0)).getScalarRepresentation();
+        }
+      }
+      else if (elements.size() > 1) {
+        LOG.error("Can't be: " + target + "; " + assignValueDescriptor);
       }
     }
     else if (targetContextType == PerlContextType.LIST &&

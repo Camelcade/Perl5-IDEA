@@ -31,12 +31,10 @@ import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.psi.PerlCompositeElement;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
@@ -238,6 +236,12 @@ public class PerlResolveUtil {
 
     ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
       if (!(currentInstruction instanceof PerlAssignInstruction)) {
+        if (currentInstruction.getElement() instanceof PerlSubDefinitionElement && variable.isBuiltIn()) {
+          if ("_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
+            valueBuilder.addVariant(PerlArgumentsValue.ARGUMENTS_VALUE);
+          }
+          return CONTINUE;
+        }
         return Objects.equals(finalStopElement, currentInstruction.getElement()) ? CONTINUE : NEXT;
       }
       if (currentInstruction.num() > currentInstructionIndex) {

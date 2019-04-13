@@ -1,0 +1,5 @@
+my $v<caret>ar = @array;
+Index: -1
+Elements number: 1
+Text: @array
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 10 in assignListToScalar.pl

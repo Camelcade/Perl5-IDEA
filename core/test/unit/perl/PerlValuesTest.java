@@ -27,6 +27,14 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testCrossSubVariable() {doTest();}
+
+  public void testCrossSubVariableDynamic() {doTest();}
+
+  public void testCrossSubVariableDynamicClosure() {doTest();}
+
+  public void testCrossSubVariableBuiltIn() {doTest();}
+
   public void testScalarExpr() {doTest();}
 
   public void testScalarExprTransparent() {doTest();}

@@ -28,6 +28,17 @@ import java.util.List;
 
 public class PerlAssignExprRightPart extends PerlLightTestCase {
 
+  @Override
+  protected String getTestDataPath() {
+    return "testData/unit/perl/assign/rightPart";
+  }
+
+  public void testAssignListToScalar() {doTest();}
+
+  public void testAssignListToScalarMulti() {doTest();}
+
+  public void testAssignListToScalarInList() {doTest();}
+
   public void testAssignHeredoc() {doTest();}
 
   public void testAssignHeredocMid() {doTest();}
@@ -83,11 +94,6 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
   }
 
   public void testAssignScalarThirdShift() {doTest();}
-
-  @Override
-  protected String getTestDataPath() {
-    return "testData/unit/perl/assign/rightPart";
-  }
 
   public void testAssignStringList() {
     doTestRightPart(PerlVariable.class);
