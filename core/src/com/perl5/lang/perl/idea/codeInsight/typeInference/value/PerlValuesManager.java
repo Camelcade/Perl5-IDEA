@@ -52,6 +52,7 @@ public final class PerlValuesManager {
   static final int ARRAY_ELEMENT_ID = id++;
   static final int ARRAY_SLICE_ID = id++;
   static final int ARRAY_CAST_ID = id++;
+  static final int SPLICE_ID = id++;
 
   static final int HASH_ID = id++;
   static final int HASH_ELEMENT_VALUE = id++;
