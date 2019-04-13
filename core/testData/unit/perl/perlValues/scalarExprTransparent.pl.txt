@@ -1,0 +1,11 @@
+@array = (this => is => key => scalar 'scalar_text', 42, 69);
+
+%hash = @array;
+
+$var = $hash{key};
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 100 in scalarExprTransparent.pl
+scalar_text

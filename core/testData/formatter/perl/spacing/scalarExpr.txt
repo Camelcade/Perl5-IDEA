@@ -1,0 +1,3 @@
+scalar @array;
+scalar(@array);
+scalar(@array) + 1;

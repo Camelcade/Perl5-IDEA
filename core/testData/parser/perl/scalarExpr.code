@@ -1,0 +1,6 @@
+scalar (@array);
+scalar ;
+scalar @array;
+scalar (@array) + 1;
+scalar ;
+scalar @array + 1;

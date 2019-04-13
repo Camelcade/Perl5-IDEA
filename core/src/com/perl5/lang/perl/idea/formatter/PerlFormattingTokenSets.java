@@ -263,23 +263,6 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
   TokenSet LABEL_KEYWORDS = TokenSet.orSet(PerlTokenSets.LOOP_CONTROL_KEYWORDS, TokenSet.create(RESERVED_GOTO));
 
-  TokenSet CUSTOM_EXPR_KEYWORDS = TokenSet.create(
-    RESERVED_GREP,
-    RESERVED_MAP,
-    RESERVED_SORT,
-
-    RESERVED_SAY,
-    RESERVED_PRINT,
-    RESERVED_PRINTF,
-
-    RESERVED_USE,
-    RESERVED_NO,
-    RESERVED_REQUIRE,
-
-    RESERVED_UNDEF,
-    RESERVED_RETURN
-  );
-
   TokenSet VARIABLE_LEFT_BRACES = TokenSet.create(
     LEFT_BRACE_SCALAR,
     LEFT_BRACE_ARRAY,

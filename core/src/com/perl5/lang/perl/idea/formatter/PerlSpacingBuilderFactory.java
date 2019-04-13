@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.PerlIndentProcessor.MULTI_PARAM_BLOCK_CONTAINERS;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.CUSTOM_EXPR_KEYWORDS;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 
 public class PerlSpacingBuilderFactory {

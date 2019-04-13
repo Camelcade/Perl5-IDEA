@@ -27,6 +27,10 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testScalarExpr() {doTest();}
+
+  public void testScalarExprTransparent() {doTest();}
+
   public void testCallScalar() {doTest();}
 
   public void testCallArray() {doTest();}

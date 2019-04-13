@@ -299,6 +299,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlReplacementRegexImpl.class);
       case "RETURN_EXPR":
         return new PerlElementTypeEx(name, PsiPerlReturnExprImpl.class);
+      case "SCALAR_EXPR":
+        return new PerlElementTypeEx(name, PsiPerlScalarExprImpl.class);
       case "EXIT_EXPR":
         return new PerlElementTypeEx(name, PsiPerlExitExprImpl.class);
       case "ARRAY_ELEMENT":

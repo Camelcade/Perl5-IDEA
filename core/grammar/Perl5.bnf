@@ -713,6 +713,7 @@ goto_expr ::=  'goto' [goto_param] {pin=1}
 
 return_expr ::=  'return' [parse_list_expr] {pin=1}
 exit_expr ::= 'exit' [parse_scalar_expr] {pin=1}
+scalar_expr ::= 'scalar' single_argument_expr {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -771,7 +772,7 @@ expr ::=
     | op_5_expr             // 17
     | pow_expr              // 18
     | op_3_expr             // 19
-    | deref_expr            // 20
+    | deref_expr            // 20 for a single argument
     | term_expr             // 21
 
 // above list operators
@@ -783,6 +784,8 @@ private parse_scalar_expr ::= <<parseExpressionLevel 3>>
 // Unary expression argument
 private unary_expr ::= <<parseExpressionLevel 12>>
 
+private single_argument_expr ::= <<parseExpressionLevel 19>>
+
 // ordered for best performance of perltidy
 term_expr ::=
     scalar_or_element
@@ -793,6 +796,7 @@ term_expr ::=
     | array_or_slice
     | match_regex
     | return_expr
+    | scalar_expr
     | exit_expr
     | hash_variable
     | hash_cast_expr

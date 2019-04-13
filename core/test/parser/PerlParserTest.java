@@ -41,6 +41,8 @@ public class PerlParserTest extends PerlParserTestBase {
     }
   }
 
+  public void testScalarExpr() {doTest(false);}
+
   public void testUndefInDeclaration() {doTest();}
 
   public void testMatchRegexWithBlock() {doTest();}

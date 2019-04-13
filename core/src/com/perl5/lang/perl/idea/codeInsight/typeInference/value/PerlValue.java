@@ -299,6 +299,10 @@ public abstract class PerlValue {
     if (elementType == UNDEF_EXPR) {
       return UNDEF_VALUE;
     }
+    else if (elementType == SCALAR_EXPR) {
+      PsiElement[] children = element.getChildren();
+      return children.length == 0 ? UNKNOWN_VALUE : from(children[0]).getScalarRepresentation();
+    }
     else if (elementType == TERNARY_EXPR) {
       PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
       PsiElement[] children = element.getChildren();
