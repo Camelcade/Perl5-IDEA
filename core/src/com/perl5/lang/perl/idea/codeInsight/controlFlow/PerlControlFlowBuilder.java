@@ -306,6 +306,17 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
+      startTransparentNode(o, "collecting pendings");
+      Instruction shortCut = prevInstruction;
+      startNodeSmart(o);
+      o.acceptChildren(this);
+      startTransparentNode(o, "collecting pendings");
+      addPendingEdge(o.getContainingFile(), prevInstruction);
+      prevInstruction = shortCut;
+    }
+
+    @Override
     public void visitCatchExpr(@NotNull PsiPerlCatchExpr o) {
       PsiPerlCatchCondition catchCondition = o.getCatchCondition();
 

@@ -1,16 +1,17 @@
 0(1) element: null (InstructionImpl)
-1(2) element: PsiPerlUseStatementImpl(USE_STATEMENT) (InstructionImpl)
-2(3) element: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) (InstructionImpl)
-3(4) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
-4(5,19) iterate PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR) using null (PerlIterateInstruction)
-5(6) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: (@tables):true (PerlIteratorConditionInstruction)
-6(7) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
-7(8) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR) (InstructionImpl)
-8(9,12,15) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR) (InstructionImpl)
-9(10) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR). Condition: null:true (ConditionalInstructionImpl)
-10(11) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
-11(12,15) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR) (InstructionImpl)
-12(13) element: PsiElement(Perl5: or). Condition: try {
+1(2,20) element: PsiPerlUseStatementImpl(USE_STATEMENT) (InstructionImpl)
+2(3) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::_filter_tables (InstructionImpl)
+3(4) element: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) (InstructionImpl)
+4(5) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
+5(6,20) iterate PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR) using null (PerlIterateInstruction)
+6(7) element: PsiPerlConditionExprImpl(Perl5: CONDITION_EXPR). Condition: (@tables):true (PerlIteratorConditionInstruction)
+7(8) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
+8(9) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR) (InstructionImpl)
+9(10,13,16) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR) (InstructionImpl)
+10(11) element: PsiPerlCatchExprImpl(Perl5: CATCH_EXPR). Condition: null:true (ConditionalInstructionImpl)
+11(12) element: PsiPerlNumberConstantImpl(Perl5: NUMBER_CONSTANT) (InstructionImpl)
+12(13,16) element: PsiPerlSubExprImpl(Perl5: SUB_EXPR) (InstructionImpl)
+13(14) element: PsiElement(Perl5: or). Condition: try {
             1;
         }
         catch {
@@ -21,11 +22,10 @@
         catch {
             0;
         }  (PartialConditionalInstructionImpl)
-13(14) element: PsiPerlLabelExprImpl(Perl5: LABEL_EXPR) (InstructionImpl)
-14(4) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR) (PerlNoResultInstruction)
-15(16) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
-16(17) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
-17(18) element: PsiPerlMethodImpl(Perl5: METHOD) (InstructionImpl)
-18(4) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) (InstructionImpl)
-19(20) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::_filter_tables (InstructionImpl)
+14(15) element: PsiPerlLabelExprImpl(Perl5: LABEL_EXPR) (InstructionImpl)
+15(5) element: PsiPerlNextExprImpl(Perl5: NEXT_EXPR) (PerlNoResultInstruction)
+16(17) element: PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) (InstructionImpl)
+17(18) element: PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) (InstructionImpl)
+18(19) element: PsiPerlMethodImpl(Perl5: METHOD) (InstructionImpl)
+19(5) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) (InstructionImpl)
 20() element: null (InstructionImpl)

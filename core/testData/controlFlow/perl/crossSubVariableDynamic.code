@@ -1,0 +1,14 @@
+'first';
+sub firstsub{
+  $variable = Foo::Bar::->something($variable);
+}
+'second';
+sub secondsub{
+  $variable = Foo::Bar::->something($variable);
+}
+'third';
+sub thirdsub{
+  $variable = Foo::Bar::->something($variable);
+  $va<caret>riable;
+}
+
