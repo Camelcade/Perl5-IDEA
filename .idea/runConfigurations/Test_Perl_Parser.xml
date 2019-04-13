@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Perl Parser" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests" singleton="true">
+  <configuration default="false" name="Test Perl Parser" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests (Unit)" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -15,6 +15,7 @@
       </option>
       <option name="vmOptions" value="" />
     </ExternalSystemSettings>
-    <method />
+    <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+    <method v="2" />
   </configuration>
 </component>
