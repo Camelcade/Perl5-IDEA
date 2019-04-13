@@ -684,7 +684,7 @@ private sub_prototype ::= SUB_PROTOTYPE_TOKEN*
 
 /************************************* Sub signatures *****************************************************************/
 sub_signature ::= sub_signature_element (',' sub_signature_element) *
-private sub_signature_element ::= signature_left_side ['=' [scalar_expr]]
+private sub_signature_element ::= signature_left_side ['=' [parse_scalar_expr]]
 private signature_left_side ::= variable_declaration_element | sub_signature_element_ignore
 sub_signature_element_ignore ::= '$$' | '$@' | '$%'
 
@@ -702,8 +702,8 @@ next_expr ::=  'next' [lnr_param] {pin=1}
 redo_expr ::=  'redo' [lnr_param] {pin=1}
 goto_expr ::=  'goto' [goto_param] {pin=1}
 
-return_expr ::=  'return' [list_expr] {pin=1}
-exit_expr ::= 'exit' [scalar_expr] {pin=1}
+return_expr ::=  'return' [parse_list_expr] {pin=1}
+exit_expr ::= 'exit' [parse_scalar_expr] {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -734,7 +734,7 @@ private use_version_parameters ::= perl_version;
 undef_expr ::=  'undef' (undef_params | '(' undef_params ')') ? {pin=1}
 private undef_params ::= deref_expr | variable
 
-require_expr ::=  'require' (any_package| perl_version | scalar_expr)  {pin=1}// multiline string is possible too
+require_expr ::=  'require' (any_package| perl_version | parse_scalar_expr)  {pin=1}// multiline string is possible too
 
 private any_package ::= 'package::name' | '__PACKAGE__'
 
@@ -766,10 +766,10 @@ expr ::=
     | term_expr             // 21
 
 // above list operators
-private list_expr ::= <<parseExpressionLevel 2>>
+private parse_list_expr ::= <<parseExpressionLevel 2>>
 
 // List expression elements
-private scalar_expr ::= <<parseExpressionLevel 3>>
+private parse_scalar_expr ::= <<parseExpressionLevel 3>>
 
 // Unary expression argument
 private unary_expr ::= <<parseExpressionLevel 12>>
@@ -830,10 +830,10 @@ private grep_map_arguments ::=
 
 private grep_map_arguments_ ::=
     parse_block [comma] grep_map_sort_tail
-    | scalar_expr comma grep_map_sort_tail
+    | parse_scalar_expr comma grep_map_sort_tail
     | expr
 
-private grep_map_sort_tail ::= list_expr
+private grep_map_sort_tail ::= parse_list_expr
 
 sort_expr ::=  'sort' sort_arguments {pin=1}
 private sort_arguments ::=
@@ -876,7 +876,7 @@ bitwise_or_xor_expr ::= expr ({'|'|'^'} expr)+
 and_expr ::= expr ( '&&' expr)+
 or_expr ::= expr ( {'||'|'//'} expr)+
 flipflop_expr ::= expr ('..'|'...') expr
-ternary_expr ::= expr '?' scalar_expr ':' scalar_expr { rightAssociative=true }
+ternary_expr ::= expr '?' parse_scalar_expr ':' parse_scalar_expr { rightAssociative=true }
 
 private assign_or_flow_expr ::=
     assign_expr
@@ -970,7 +970,7 @@ variable_declaration_global ::=  'our' [any_package] variable_declaration_variat
 
 private local_variable_declaration_variation ::= local_parenthesised_declaration | local_variable_declaration_argument
 private local_parenthesised_declaration ::= '(' local_variable_declaration_argument (comma + local_variable_declaration_argument ) * comma * ')' {pin=1}
-private local_variable_declaration_argument ::= strict_variable_declaration_argument | scalar_expr
+private local_variable_declaration_argument ::= strict_variable_declaration_argument | parse_scalar_expr
 
 private variable_declaration_variation ::= variable_parenthesised_declaration | variable_declaration_argument
 private variable_parenthesised_declaration ::= '(' variable_parenthesised_declaration_contents ')' {pin=1}
@@ -1098,8 +1098,8 @@ private meta leftward_call ::= {<<method <<x1>>>>|code_primitive} default_parent
 //// fixme this should depend on prototype
 private parse_call_arguments ::=
     <<parseHashSmart>>
-    | sub_expr_simple [[comma] list_expr]
-    | list_expr
+    | sub_expr_simple [[comma] parse_list_expr]
+    | parse_list_expr
 
 private normal_method ::= <<method method_tokens>>
 // the rest are fallback

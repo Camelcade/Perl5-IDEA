@@ -82,7 +82,7 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension implement
   public static boolean parseSwitchCondition(PerlBuilder b, int l) {
     PerlBuilder.Marker m = b.mark();
     boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
-    r = r && PerlParserImpl.scalar_expr(b, l);
+    r = r && PerlParserImpl.parse_scalar_expr(b, l);
     r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
 
     if (r) {
@@ -149,7 +149,7 @@ public class PerlSwitchParserExtensionImpl extends PerlParserExtension implement
 
   public static boolean parseCaseConditionParenthesised(PerlBuilder b, int l) {
     boolean r = PerlParserUtil.consumeToken(b, LEFT_PAREN);
-    r = r && PerlParserImpl.scalar_expr(b, l);
+    r = r && PerlParserImpl.parse_scalar_expr(b, l);
     r = r && PerlParserUtil.consumeToken(b, RIGHT_PAREN);
     return r;
   }

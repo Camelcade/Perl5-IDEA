@@ -109,7 +109,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
     PerlParserUtil.consumeToken(b, RESERVED_HAS);
 
     PerlBuilder.Marker wrapperMarker = b.mark();
-    if (PerlParserImpl.list_expr(b, l + 1)) {
+    if (PerlParserImpl.parse_list_expr(b, l + 1)) {
       wrapperMarker.done(MOOSE_ATTRIBUTE_WRAPPER);
       m.done(MOOSE_HAS_EXPR);
       return true;

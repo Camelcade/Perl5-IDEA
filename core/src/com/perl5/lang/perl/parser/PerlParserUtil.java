@@ -503,6 +503,6 @@ public class PerlParserUtil extends GeneratedParserUtilBase implements PerlEleme
     PsiBuilder.Marker rollbackMarker = b.mark();
     boolean r = PerlParserImpl.anon_hash(b, l) && b.getTokenType() == COMMA;
     rollbackMarker.rollbackTo();
-    return r && PerlParserImpl.list_expr(b, l);
+    return r && PerlParserImpl.parse_list_expr(b, l);
   }
 }
