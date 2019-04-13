@@ -1,0 +1,34 @@
+
+s/a
+    s   # this is a test
+    d[          # this is a test
+    f
+    a](?#somecomment)asdf
+    s
+    df/as
+    dfa{
+    sdf(
+    asdf[       # this is a test
+    {{{{
+    }}(?#somecomment)
+    [[[[
+    ]]
+
+    /x;
+
+s/a
+    s   # this is a test
+    d[          # this is a test
+    f
+    a](?#somecomment)
+    s
+    df/as
+    dfa{
+    sdf(
+    asdf[       # this is a test
+    {{{{
+    }}(?#somecomment)
+    [[[[
+    ]]
+
+    /;

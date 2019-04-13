@@ -1,0 +1,11 @@
+
+#@type *
+#@type ArrayRef[*]
+#@type HashRef[*]
+#@type HashRef[ArrayRef[*]]
+#@type ArrayRef[HashRef[*]]
+#@type UNIVERSAL
+#@type ArrayRef[UNIVERSAL]
+#@type HashRef[UNIVERSAL]
+#@type ArrayRef[HashRef[UNIVERSAL]]
+#@type HashRef[ArrayRef[UNIVERSAL]]

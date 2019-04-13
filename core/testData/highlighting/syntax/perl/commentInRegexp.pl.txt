@@ -1,0 +1,74 @@
+s
+    PERL_KEYWORD => DEFAULT_KEYWORD
+/
+    PERL_REGEX_QUOTE => DEFAULT_BRACKETS
+a
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+s
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+# this is a test
+    PERL_COMMENT => DEFAULT_LINE_COMMENT
+d[          # this is a test
+    f
+    a]
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+(?#somecomment)
+    PERL_COMMENT => DEFAULT_LINE_COMMENT
+asdf
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+s
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+df
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+/
+    PERL_REGEX_QUOTE => DEFAULT_BRACKETS
+as
+    dfa{
+    sdf(
+    asdf[       # this is a test
+    {{{{
+    }}(?#somecomment)
+    [[[[
+    ]]
+
+    
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+/
+    PERL_REGEX_QUOTE => DEFAULT_BRACKETS
+x
+    PERL_KEYWORD => DEFAULT_KEYWORD
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON
+s
+    PERL_KEYWORD => DEFAULT_KEYWORD
+/
+    PERL_REGEX_QUOTE => DEFAULT_BRACKETS
+a
+    s   # this is a test
+    d[          # this is a test
+    f
+    a]
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+(?#somecomment)
+    PERL_COMMENT => DEFAULT_LINE_COMMENT
+
+    s
+    df
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+/
+    PERL_REGEX_QUOTE => DEFAULT_BRACKETS
+as
+    dfa{
+    sdf(
+    asdf[       # this is a test
+    {{{{
+    }}(?#somecomment)
+    [[[[
+    ]]
+
+    
+    PERL_REGEX_TOKEN => DEFAULT_STRING
+/
+    PERL_REGEX_QUOTE => DEFAULT_BRACKETS
+;
+    PERL_SEMICOLON => DEFAULT_SEMICOLON

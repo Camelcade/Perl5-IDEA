@@ -1,0 +1,9 @@
+say
+    PERL_KEYWORD => DEFAULT_KEYWORD
+EOM
+    PERL_SQ_STRING => DEFAULT_STRING
+
+this is a text
+
+some
+    PERL_DQ_STRING => DEFAULT_STRING

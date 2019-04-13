@@ -58,6 +58,7 @@ import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.documentation.DocumentationProviderEx;
 import com.intellij.lang.injection.InjectedLanguageManager;
+import com.intellij.lexer.Lexer;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.Disposable;
@@ -73,11 +74,14 @@ import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.roots.ContentEntry;
@@ -96,6 +100,7 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
@@ -109,10 +114,7 @@ import com.intellij.usages.*;
 import com.intellij.usages.impl.UsageViewImpl;
 import com.intellij.usages.rules.UsageGroupingRule;
 import com.intellij.usages.rules.UsageGroupingRuleProvider;
-import com.intellij.util.ArrayUtil;
-import com.intellij.util.FileContentUtil;
-import com.intellij.util.Function;
-import com.intellij.util.ObjectUtils;
+import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import com.intellij.util.xmlb.XmlSerializerUtil;
@@ -1826,6 +1828,53 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doTestHighlighter(boolean checkErrors) {
+    if (checkErrors) {
+      initWithFileSmartWithoutErrors();
+    }
+    else {
+      initWithFileSmart();
+    }
+    SyntaxHighlighter syntaxHighlighter = SyntaxHighlighterFactory.getSyntaxHighlighter(
+      getFile().getFileType(), getProject(), getFile().getVirtualFile());
+    assertNotNull(syntaxHighlighter);
+    Lexer highlightingLexer = syntaxHighlighter.getHighlightingLexer();
+    assertNotNull(highlightingLexer);
+
+    String fileText = getFile().getText();
+    highlightingLexer.start(fileText);
+    IElementType tokenType;
+    StringBuilder sb = new StringBuilder();
+    while ((tokenType = highlightingLexer.getTokenType()) != null) {
+      TextAttributesKey[] highlights = syntaxHighlighter.getTokenHighlights(tokenType);
+      if (highlights.length > 0) {
+        if (sb.length() > 0) {
+          sb.append("\n");
+        }
+        sb.append(fileText, highlightingLexer.getTokenStart(), highlightingLexer.getTokenEnd())
+          .append("\n");
+        List<String> attrNames = new SmartList<>();
+        for (TextAttributesKey attributesKey : highlights) {
+          attrNames.add("    " + serializeTextAttributeKey(attributesKey));
+        }
+        sb.append(StringUtil.join(attrNames, "\n"));
+      }
+      highlightingLexer.advance();
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  @NotNull
+  private String serializeTextAttributeKey(@Nullable TextAttributesKey key) {
+    if (key == null) {
+      return "";
+    }
+    String keyName = key.getExternalName();
+    TextAttributesKey fallbackKey = key.getFallbackAttributeKey();
+    assertNotSame(fallbackKey, key);
+    return fallbackKey == null ? keyName : (keyName + " => " + serializeTextAttributeKey(fallbackKey));
   }
 
 }

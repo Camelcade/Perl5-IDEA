@@ -1,0 +1,37 @@
+# https://metacpan.org/pod/Exception::Class::TryCatch
+
+say 'hi';
+
+use Exception::Class::TryCatch;
+
+# simple usage of catch()
+
+eval { Exception::Class::Base->throw('error') };
+catch my $err and warn $err->error;
+
+# catching only certain types or else rethrowing
+
+eval { Exception::Class::Base::SubClass->throw('error') };
+catch( my $err, ['Exception::Class::Base', 'Other::Exception'] )
+    and warn $err->error;
+
+# catching and handling different types of errors
+
+eval { Exception::Class::Base->throw('error') };
+if ( catch my $err ) {
+    $err->isa('this') and do { handle_this($err) };
+    $err->isa('that') and do { handle_that($err) };
+}
+
+# use "try eval" to push exceptions onto a stack to catch later
+
+try eval {
+    Exception::Class::Base->throw('error')
+};
+do {
+    # cleanup that might use "try/catch" again
+};
+catch my $err; # catches a matching "try"
+
+
+say 'buy';

@@ -1,0 +1,7 @@
+sub name($sig) {}                      # with signature
+sub name :lvalue ($sig) {}            # with signature, attributes
+sub name :prototype($) ($sig) {}  # with signature, prototype
+sub foo :prototype($) { $_[0] }
+sub foo :prototype($$) ($left, $right) {
+    return $left + $right;
+}

@@ -1,0 +1,18 @@
+
+my sub mysub1;
+my sub mysub2();
+state sub statesub1;
+state sub statesub2();
+our sub oursub1;
+our sub oursub2();
+
+
+my sub mysub1{}
+my sub mysub2(){}
+state sub statesub1{}
+state sub statesub2(){}
+our sub oursub1{}
+our sub oursub2(){}
+
+
+

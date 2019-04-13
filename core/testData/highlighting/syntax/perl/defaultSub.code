@@ -1,0 +1,2 @@
+# default as function
+default($file);

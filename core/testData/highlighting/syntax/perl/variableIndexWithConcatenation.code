@@ -1,0 +1,4 @@
+"\$${list_name}[$self->op->private]";
+"\$${list_name}{$self->op->private}";
+"\$${list_name}{" . $self->op->private . '}';
+"\$${list_name}[" . $self->op->private . ']';

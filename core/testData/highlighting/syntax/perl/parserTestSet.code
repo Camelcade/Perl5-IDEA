@@ -1,0 +1,459 @@
+package Foo;
+package Foo::Bar;
+package main;
+
+my @array;
+my $array_ref;
+
+@array[123];
+@array[1,2,3];
+@array[@array];
+
+$array_ref->[1];
+@$array_ref;
+@$array_ref[123];
+@$array_ref[1,2,3];
+@$array_ref{'abc','cde'};
+$$array_ref[123];
+$$array_ref;
+$$array_ref[1,2,3];
+
+[map {$add->[$_-$replaceIDX] || ( )} ($replaceIDX..$lim-1)];
+
+@{[map { $add->[$_-$replaceIDX] || ( ) } ($replaceIDX..$lim-1)]};
+$var || ();
+
+
+my @args;
+% { $args[3] || {} };
+$ { $args[3] || {} };
+* { $args[3] || {} };
+@ { $args[3] || {} };
+
+my %attrs = (
+    % { $args[3] || {} },
+    % { $args[4] || {} },
+);
+
+my $lpBuffer .= pack("L@".16, 0);
+
+2*$a;
+2*$i;
+
+my ($flags, $self);
+$flags .= qw(d l u a aa)[$charset >> 7];
+#substr $name, 0, 0, = $our ? 'o' : 'm'; # our/my
+my $dir = 0 if !defined $self->[2*$i];
+$dir = 1 if !defined $self->[2*$i+1];
+Socket->${\"IPPROTO_\U$proto"}();
+
+#$self->get_errors();
+@{$self->get_errors()};
+
+
+return $logger->$func;
+
+$hash{'logf'} = $log_format{ $_[2] or 'default' };
+
+[@{$images}[0..5]];
+
+
+ERRORS: foreach my $error (@{$self->get_errors()})
+{
+    foreach my $class (@error_types)
+    {
+        if (UNIVERSAL::isa($error, $class))
+        {
+            push @$result, $error;
+            next ERRORS;
+        }
+    }
+}
+
+
+
+$a->eval->[0]->{test}->eval()->[$a+$b]->{$a.$b}->eval()->SUPER::eval()->$a();
+$b->();
+
+sub abc
+{
+    ...;
+}
+
+
+@_[1,2,3];      # array slice
+@-{'a','b','c'}; # hash slice
+
+
+
+# tailing comma
+
+$x123;
+$var x1223;
+
+x123 => 123;
+$a->x123 => 123;
+package x123;
+use strict;
+use x123;
+require x123();
+
+
+unless (exists $opts{x1} and exists $opts{y1}) { $self->{ERRSTR}='missing begining coord'; return undef; }
+
+$string =~
+    s{\\([Nnever\\fartz0b]|x([0-9a-fA-F]{2}))}
+        {(length($1)>1)?pack("H2",$2):$UNESCAPES{$1}}gex;
+
+if (my %kv = ($pv =~ m{\b
+    (\w+)		# key
+    \s*=		# assign
+    ( '\s*[^']*?\s*'	# quoted value
+    | \S+[^=]*?\s*\n	# unquoted running till end of line
+    | \S+		# unquoted value
+    | \s*\n		# empty
+    )
+    (?:,?\s+|\s*\n)?	# separator \(5.8.x reports did not have a ','
+    }gx)) {}		# between every kv pair
+
+
+#DBM::Deep
+my %is_legal_filter = map {
+    $_ => ~~1
+} qw(
+    store_key store_value
+    fetch_key fetch_value
+    );
+set_in_declare(~~@{$temp_name||[]});
+
+
+*{$callpkg."::".$1} = \$$1;
+
+~~1;
+$a ~~ $b;
+$a ~~ ~$b;
+
+!!!$a;
+
+require Foo;
+require join( '/', split /::/, $server ) . '.pm';
+
+$@->method;
+
+$self->{grammar}{tree}{'TOP'} & 'TOP' or
+    die "No starting rule for Pegex::Parser::parse";
+
+
+if ( my $comment = $self->msg_comment($msgid) ) {
+    my @lines = split '\n', $comment;
+    print LEXICON map {"# $_\n"} @lines;
+}
+
+$var[time];
+$var[HTML::Template::LOOP::PARAM_SET];
+$self->{param_map}{$name}[HTML::Template::LOOP::PARAM_SET];
+
+undef($self->{param_map}{$name}[HTML::Template::LOOP::PARAM_SET]);
+
+${"blah"};
+$${"blah"};
+%${"blah"};
+@${"blah"};
+&${"blah"};
+*${"blah"};
+
+my $self = bless {%${"$class\::Defaults"}}, $class;
+
+for(1..10)
+{
+    say;
+}
+
+given ( $self->{buffer} ) {
+    when ( $_ =~ /^Subroutine [\w:]+ not found[.]/sxm ) {
+        return 0;
+    }
+    when ( $_ =~ /^Line \d+ not breakable[.]/sxm ) {
+        return 0;
+    }
+    when ( $_ =~ /^\d+ levels deep in subroutine calls!/sxm ) {
+        return 0;
+    }
+    when ( $_ =~ /\S/sxm ) {
+
+        # say 'Non-whitespace charter found';
+        return 0;
+    }
+    default {
+        return 1;
+    }
+    print "something" when 100;
+}
+
+$a cmp'test';
+$a eq'test';
+$a ne'test';
+$a lt'test';
+$a gt'test';
+$a le'test';
+$a ge'test';
+qw'test';
+q'test';
+qq'test';
+qx'test';
+
+# Log::Agent::File::Native  print magic doesn't work here
+
+# Pod::Main Config::Perl::V
+if ($$self{MAGIC_EMDASH}) {
+    s{          (\s) \\-\\- (\s)                } { $1 . '\*\(--' . $2 }egx;
+    s{ (\b[a-zA-Z]+) \\-\\- (\s|\Z|[a-zA-Z]+\b) } { $1 . '\*\(--' . $2 }egx;
+}
+s{          (\s) \\-\\- (\s)                } { $1 . '\*\(--' . $2 }egx;
+
+$name =~ /^(\^..|\{)/;
+
+# Devel::Peek
+$num |=  (1<<index($D_flags, $_)) for split //, $on;
+
+# B::Deparse
+if (!$raw and $name =~ /^(\^..|\{)/ ) {
+    $name = "{$name}";       # ${^WARNING_BITS}, etc and ${
+};;;;;
+
+# guess a file :)
+package Encode::KR::2022_KR;;;;;;
+
+# ExtUtils::Constant::Base what the heck is this?
+my $r = ref $b eq 'ARRAY' ? ($b->[0] || $->[1]) : $b;
+
+# Net::NNTP
+{
+    last;;;;
+}
+
+# thinks it's a glob parameter  Time/Local.pm
+time * $_[123];;;;
+time & $_[123];;;;
+time % $_[123];;;;
+
+say $var1;
+
+my @array;
+for our $var  (@array)
+{
+}
+
+
+sub abc($$$@);
+sub abc($$$@){}
+
+sub abc;
+sub abc{}
+
+$a =.123;
+
+$a->[123].123;
+$a->{something}.123;
+($a).123;
+$a.123;
+
+my $v123;
+my $v123_234;
+$v123."something";
+
+v5.10;
+
+
+package main;
+
+&method => 123;
+--something => 145;
+-something => 123;
+$self->method => something;
+$var => something;
+
+--blah => -blah => blah => 1;
+-package => 123;
+package => 123;
+
+$hash{-package} =4;
+$a->{-package} = 5;
+
+print $$ if 123;
+
+sub import {
+    my $callpack = caller;
+    my $pack = shift;
+    my @imports = @_;
+    foreach my $sym (@imports) {
+        *{"${callpack}::$sym"} = \&{"${callpack}::$sym"};
+    }
+};
+
+my %Units = ( map(($_,             1), qw(s second seconds sec secs)),
+    map(($_,            60), qw(m minute minutes min mins)),
+    map(($_,         60*60), qw(h hr hour hours)),
+    map(($_,      60*60*24), qw(d day days)),
+    map(($_,    60*60*24*7), qw(w week weeks)),
+    map(($_,   60*60*24*30), qw(M month months)),
+    map(($_,  60*60*24*365), qw(y year years)) );
+
+my %hash;
+
+$hash{something};
+$hash{something}->{something};
+$hash{'something'};
+$hash{'something'}->{'something'};
+$hash{"something"};
+$hash{"something"}->{"something"};
+
+*{something};
+*something{SCALAR};
+
+my $full_path;
+
+no warnings qw(once);
+local *alias = *$full_path;
+use warnings qw(once);
+
+# Copy innocent bystanders back.  Note that we lose
+# formats; it seems that Perl versions up to 5.10.0
+# have a bug which causes copying formats to end up in
+# the scalar slot.  Thanks to Ben Morrow for spotting this.
+
+my %oldglob;
+
+foreach my $slot (qw( SCALAR ARRAY HASH IO ) ) {
+    next unless defined *$oldglob{$slot};
+    *alias = *$oldglob{$slot};
+}
+my $sub_ref;
+
+if ($sub_ref) {
+    *$full_path = $sub_ref;
+}
+
+for(;;){
+    print "Here";
+}
+while(){
+    print "Here";
+}
+
+sub eval{}
+sub if{}
+sub while{}
+
+&eval;
+&while;
+&if;
+*eval;
+
+my $abcd = {
+    --test => &while
+};
+
+use Opcode 1.01, qw(..);
+
+my $panic;
+
+my $_wow;
+my ${some};
+my $^A;
+$_;
+$$_;
+my $abc;
+$ $$abc;
+
+
+SOMELABEL: {
+    last SOMELABEL;
+}
+
+$abc ? $cde : blah();
+
+split /2134/, @array;
+m/2342342/x;
+s/234234/$$/e;
+
+Foo::Bar;
+
+Foo::bar;
+
+Foo::bar baz;
+
+Foo::Bar->method();
+
+bar Foo::baz;
+
+bar Foo(123);
+
+Foo->bar;
+my $self;
+
+my $abc = {
+    some => 1
+};
+
+my @array;
+
+grep {defined} @array;
+
+print if defined $abc;
+
+$abc->{cde} = 2;
+
+$self->SUPER::method();
+
+Foo::Bar->something;
+
+$abc = __PACKAGE__;
+$abc = 1 and 2;
+
+my @list = <IF>;
+my @list = <Foo::method>;
+
+use if (1 > 2);
+use open;
+
+package Foo;
+
+sub bar{
+}
+
+package main;
+
+sub somesub
+{
+}
+
+package Foo::Bar;
+
+sub somesub
+{
+
+}
+
+
+
+package Foo::Bar;
+
+package main;
+
+sub Foo::Bar::somesub{};
+
+${Foo::Bar::somesub()};
+@{Foo::Bar::somesub()};
+$#{Foo::Bar::somesub()};
+%{Foo::Bar::somesub()};
+*{Foo::Bar::somesub()};
+&{Foo::Bar::somesub()};
+
+Foo::Bar::somesub;
+::somesub;
+Foo::Bar::somesub();
+::somesub();
+somesub;
+somesub();
+

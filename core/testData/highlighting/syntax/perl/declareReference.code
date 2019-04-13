@@ -1,0 +1,32 @@
+my \$var1 = \$a;
+my \@var1 = \@a;
+my \%var1 = \%a;
+my (\$var2) = \$a;
+my (\@var2) = \@a;
+my (\%var2) = \%a;
+my (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);
+
+our \$var1 = \$a;
+our \@var1 = \@a;
+our \%var1 = \%a;
+our (\$var2) = \$a;
+our (\@var2) = \@a;
+our (\%var2) = \%a;
+our (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);
+
+state \$var1 = \$a;
+state \@var1 = \@a;
+state \%var1 = \%a;
+state (\$var2) = \$a;
+state (\@var2) = \@a;
+state (\%var2) = \%a;
+state (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);
+
+local \$var1 = \$a;
+local \@var1 = \@a;
+local \%var1 = \%a;
+local (\$var2) = \$a;
+local (\@var2) = \@a;
+local (\%var2) = \%a;
+local (\$var3, \@var4, \%var5) = (\$a, \@b, \%c);
+

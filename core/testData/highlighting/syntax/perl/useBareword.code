@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+use Mojo::Base -base -otherbase;
+use Mojo::Base -strict  -otherbase;
+use Mojo::Base base  -otherbase;
+use Mojo::Base strict  -otherbase;
+use Mojo::Base v5.10 -base  -otherbase;
+use Mojo::Base v5.10 -strict  -otherbase;
+use Mojo::Base v5.10 base  -otherbase;
+use Mojo::Base v5.10 strict  -otherbase;
+use Mojo::Base v5.10;
+

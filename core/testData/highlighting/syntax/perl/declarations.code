@@ -1,0 +1,12 @@
+sub       subname                            (              $a                            ,       $b                            ,       $c              )       :   method              {}
+method       subname                            (              $a                            ,       $b                            ,       $c              )    :   method                 {}
+func       subname                            (              $a                            ,       $b                            ,       $c              )      :   method               {}
+sub       subname                            (              $ $ $   )       :   method              {}
+sub       subname                            (              $ $ $   )       :   method              ;
+sub       subname                                   :   method              {}
+sub       subname                                   :   method              ;
+method       subname                                :   method                 {}
+func       subname                                  :   method               {}
+sub       subname                            (              $a                            ,       $b                            ,       $c              )       {}
+method       subname                            (              $a                            ,       $b                            ,       $c              )    {}
+func       subname                            (              $a                            ,       $b                            ,       $c              )      {}

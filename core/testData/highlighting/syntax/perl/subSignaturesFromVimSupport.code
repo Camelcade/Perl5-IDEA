@@ -1,0 +1,13 @@
+sub asas::asdsad::adsa :prototype() :lvalue :method ($d) { # adasdsad
+    return;
+}
+
+sub asdsad :prototype() :lvalue
+    :method($d) {
+    # adasdsad
+    my $s = sub :prototype($$) ($a, $v) {
+        return;
+    };
+
+    return;
+}

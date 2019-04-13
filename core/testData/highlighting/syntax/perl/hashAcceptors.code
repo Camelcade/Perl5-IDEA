@@ -1,0 +1,9 @@
+keys % hash;
+values % hash;
+each % hash;
+constant % hash;
+constant * glob;
+constant & hash;
+constant( % hash);
+constant( * glob);
+constant(& hash);

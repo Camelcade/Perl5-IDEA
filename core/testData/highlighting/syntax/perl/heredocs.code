@@ -1,0 +1,50 @@
+my $query = <<'SQL';
+
+SQL
+
+$query = <<`SQL`;
+
+SQL
+
+$query = <<"SQL";
+
+SQL
+
+$query = <<SQL;
+
+SQL
+
+our $AUTOLOADED_ROUTINES=<<'END_OF_AUTOLOAD';
+
+END_OF_AUTOLOAD
+
+my $text = <<'=end';
+
+=pod
+
+some pod document
+
+=end
+
+print <<'!END!';
+Test from perl lib
+!END!
+
+print <<TEST;
+message
+TEST
+
+print <<'TEST WITH SPACE !';
+message
+TEST WITH SPACE !
+
+print <<`TEST WITH SPACE !`;
+message
+TEST WITH SPACE !
+
+print <<"TEST WITH SPACE !";
+message
+TEST WITH SPACE !
+
+
+say 'end';

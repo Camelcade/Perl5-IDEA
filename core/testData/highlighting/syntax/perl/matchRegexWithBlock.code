@@ -1,0 +1,27 @@
+return qr{(?{Regexp::Debugger::_report_event($regex_ID, $event_ID, pos()); \$^R })(?=)};
+return qr{(?>(?{local \$Regexp::Debugger::prevpos=pos})$construct(?{
+            if (defined \$Regexp::Debugger::prevpos && \$Regexp::Debugger::prevpos < pos){
+                Regexp::Debugger::_report_event($regex_ID, $event_ID, \$Regexp::Debugger::prevpos);
+                Regexp::Debugger::_report_event($regex_ID, $event_ID+1, pos());
+            }\$^R })|(?{
+                Regexp::Debugger::_report_event($regex_ID, $event_ID, pos());
+            \$^R
+            })(?!))};
+return qr{(??{Regexp::Debugger::_report_event($regex_ID, $event_ID, pos()); \$^R })(?=)};
+return qr{(?>(??{local \$Regexp::Debugger::prevpos=pos})$construct(??{
+            if (defined \$Regexp::Debugger::prevpos && \$Regexp::Debugger::prevpos < pos){
+                Regexp::Debugger::_report_event($regex_ID, $event_ID, \$Regexp::Debugger::prevpos);
+                Regexp::Debugger::_report_event($regex_ID, $event_ID+1, pos());
+            }\$^R })|(??{
+                Regexp::Debugger::_report_event($regex_ID, $event_ID, pos());
+            \$^R
+            })(?!))};
+/(?{say 123})/;
+/(?{say 123})/x;
+/(?{say 123})/xx;
+s/(?{say 123})//;
+s/(?{say 123})//x;
+s/(?{say 123})//xx;
+qr/(?{say 123})/;
+qr/(?{say 123})/x;
+qr/(?{say 123})/xx;

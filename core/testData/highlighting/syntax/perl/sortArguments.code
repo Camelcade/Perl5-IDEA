@@ -1,0 +1,3 @@
+sort somesub @list;
+sort {$a <=> $b} @list;
+sort $a @list;

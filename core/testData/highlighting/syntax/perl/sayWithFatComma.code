@@ -1,0 +1,3 @@
+say asdf => 123;
+print asdf => 123;
+printf asdf => 123;

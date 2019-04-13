@@ -1,0 +1,24 @@
+print(somesub(     1, 2, 3   ));
+print(somesub(        ));
+print(somesub(     1    ));
+
+print(OF somesub(     1, 2, 3   ));
+print(OF somesub(        ));
+print(OF somesub(     1    ));
+
+printf(somesub(     1, 2, 3   ));
+printf(somesub(        ));
+printf(somesub(     1    ));
+
+printf(OF somesub(     1, 2, 3   ));
+printf(OF somesub(        ));
+printf(OF somesub(     1    ));
+
+
+say(somesub(     1, 2, 3   ));
+say(somesub(        ));
+say(somesub(     1    ));
+
+say(OF somesub(     1, 2, 3   ));
+say(OF somesub(        ));
+say(OF somesub(     1    ));

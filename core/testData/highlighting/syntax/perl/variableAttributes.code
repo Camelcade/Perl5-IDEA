@@ -1,0 +1,41 @@
+my $somevar: method;
+my $someothervar: attr: otherattr: otherattr(withparams);
+my Foo::Bar $somevar: method;
+my Foo::Bar $someothervar: attr: otherattr: otherattr(withparams);
+my ($somevar, $andanogher): method;
+my ($someothervar, $othervar): attr: otherattr: otherattr(withparams);
+my Foo::Bar ($somevar, $anothervar): method;
+my Foo::Bar ($someothervar, $othervar): attr: otherattr: otherattr(withparams);
+foreach my Foo::Bar $someothervar: attr: otherattr: otherattr(withparams) (@list){}
+my $disabled or dosomething();
+my Foo::Bar $disabled or dosomething();
+my ($disabled, $enabled) or dosomething();
+my Foo::Bar ($disabled, $enabled) or dosomething();
+
+state $somevar: method;
+state $someothervar: attr: otherattr: otherattr(withparams);
+state Foo::Bar $somevar: method;
+state Foo::Bar $someothervar: attr: otherattr: otherattr(withparams);
+state ($somevar, $andanogher): method;
+state ($someothervar, $othervar): attr: otherattr: otherattr(withparams);
+state Foo::Bar ($somevar, $anothervar): method;
+state Foo::Bar ($someothervar, $othervar): attr: otherattr: otherattr(withparams);
+foreach state Foo::Bar $someothervar: attr: otherattr: otherattr(withparams) (@list){}
+state $disabled or dosomething();
+state Foo::Bar $disabled or dosomething();
+state ($disabled, $enabled) or dosomething();
+state Foo::Bar ($disabled, $enabled) or dosomething();
+
+our $somevar: method;
+our $someothervar: attr: otherattr: otherattr(withparams);
+our Foo::Bar $somevar: method;
+our Foo::Bar $someothervar: attr: otherattr: otherattr(withparams);
+our ($somevar, $andanogher): method;
+our ($someothervar, $othervar): attr: otherattr: otherattr(withparams);
+our Foo::Bar ($somevar, $anothervar): method;
+our Foo::Bar ($someothervar, $othervar): attr: otherattr: otherattr(withparams);
+foreach our Foo::Bar $someothervar: attr: otherattr: otherattr(withparams) (@list){}
+our $disabled or dosomething();
+our Foo::Bar $disabled or dosomething();
+our ($disabled, $enabled) or dosomething();
+our Foo::Bar ($disabled, $enabled) or dosomething();

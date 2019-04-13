@@ -1,0 +1,38 @@
+goto &Foo::Bar::something(1,2,3);
+goto Foo::Bar::something(1,2,3);
+goto &something(1,2,3);
+goto something(1,2,3);
+goto $something;
+goto something;
+goto &$something;
+goto &$something(123);
+
+next &Foo::Bar::something(1,2,3);
+next Foo::Bar::something(1,2,3);
+next &something(1,2,3);
+next something(1,2,3);
+next $something;
+next something;
+next &$something;
+next &$something(123);
+
+last &Foo::Bar::something(1,2,3);
+last Foo::Bar::something(1,2,3);
+last &something(1,2,3);
+last something(1,2,3);
+last $something;
+last something;
+last &$something;
+last &$something(123);
+
+redo &Foo::Bar::something(1,2,3);
+redo Foo::Bar::something(1,2,3);
+redo &something(1,2,3);
+redo something(1,2,3);
+redo $something;
+redo something;
+redo &$something;
+redo &$something(123);
+
+&something(1,2,3);
+something(1,2,3);

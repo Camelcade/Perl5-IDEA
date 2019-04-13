@@ -1,0 +1,16 @@
+my $var1=$hash->{key}lt'1'?'str1':'str2';
+my $var1=$hash->{key}gt'1'?'str1':'str2';
+my $var1=$hash->{key}le'1'?'str1':'str2';
+my $var1=$hash->{key}ge'1'?'str1':'str2';
+my $var1=$hash->{key}eq'1'?'str1':'str2';
+my $var1=$hash->{key}ne'1'?'str1':'str2';
+my $var1=$hash->{key}cmp'1'?'str1':'str2';
+y'1'str1';
+tr'1'str1';
+s'1'str1';
+qw'1';
+qx'1';
+qq'1';
+q'1';
+qr'1';
+m'1';

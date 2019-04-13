@@ -1,0 +1,4 @@
+	    if (defined $val && defined *ENTRY{HASH} && $key !~ /::/) {
+		$result->{$pack}{HASHES}{$key}++;
+		$gotone++;
+	    }

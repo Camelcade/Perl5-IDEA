@@ -1,0 +1,35 @@
+
+# return precedence
+return ($a and $b);
+return $a and $b;
+return $a, $b;
+return ();
+
+# unary expressions precedance
+keys(%hash and $a);
+keys %hash and $a;
+keys %hash << $a;
+keys %hash, $a;
+keys ();
+
+# argumentless precedance
+time and $a;
+time << $a;
+time $a;
+time($a);
+time, $a;
+time();
+
+# regular list expression
+somesub $a + $b;
+somesub $a and $b;
+somesub ($a and $b);
+somesub $a, $b and $a;
+somesub($a, $b and $a);
+somesub();
+
+# nested calls
+$a->somesub($a,$b)->$b($a,$b)->($a,$b)->$a;
+
+# code var call
+&somecode($a,$b);

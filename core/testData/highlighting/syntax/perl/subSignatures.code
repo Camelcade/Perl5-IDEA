@@ -1,0 +1,44 @@
+sub foo ($left, $right) {
+    return $left + $right;
+}
+
+sub foo ($first, $, $third) {
+    return "first=$first, third=$third";
+}
+
+sub foo ($left, $right = 0) {
+    return $left + $right;
+}
+
+sub foo ($first_name, $surname, $nickname = $first_name) {
+    print "$first_name $surname is known as \"$nickname\"";
+}
+
+sub foo ($thing, $=) {
+    print $thing;
+}
+
+sub foo ($filter, @inputs) {
+    print $filter->($_) foreach @inputs;
+}
+
+sub foo ($thing, @) {
+    print $thing;
+}
+
+sub foo ($filter, %inputs) {
+    print $filter->($_, $inputs{$_}) foreach sort keys %inputs;
+}
+
+sub foo ($thing, %) {
+    print $thing;
+}
+
+sub foo () {
+    return 123;
+}
+
+sub foo ($left, $right) : prototype($$) {
+    return $left + $right;
+}
+

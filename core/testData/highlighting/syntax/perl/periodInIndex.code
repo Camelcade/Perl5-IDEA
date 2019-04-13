@@ -1,0 +1,28 @@
+# smth strange in regexp
+my $IPv4address		= qr<
+    # IPv4address
+    ${decoctet}[.]${decoctet}[.]${decoctet}[.]${decoctet}
+    >xo;
+$prop->{'syslog_logopt'} = ($opt =~ /^( (?: (?:cons|ndelay|nowait|pid|nofatal) (?:$|[,|]) )* )/x) ? $1 : 'pid';
+
+$prop->{'syslog_logopt'} = ($opt =~ /^( (?: (?:cons|ndelay|nowait|pid|nofatal) (?:$|[,|]) )* )/x) ? $1 : 'pid';
+
+"$var{.}";
+"$var[.]";
+"${var}{.}";
+"${var}[.]";
+
+/$var{.}/;
+/$var[.]/;
+/${var}{.}/;
+/${var}[.]/;
+
+"$var{,}";
+"$var[,]";
+"${var}{,}";
+"${var}[,]";
+
+/$var{,}/;
+/$var[,]/;
+/${var}{,}/;
+/${var}[,]/;

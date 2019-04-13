@@ -1,0 +1,451 @@
+my $query;
+# empty bodies
+$query = <<~'SQL';
+SQL
+
+$query = <<~`SQL`;
+SQL
+
+$query = <<~"SQL";
+SQL
+
+$query = <<~ 'SQL';
+SQL
+
+$query = <<~ `SQL`;
+SQL
+
+$query = <<~ "SQL";
+SQL
+
+$query = <<~SQL;
+SQL
+
+$query = <<~\SQL;
+SQL
+
+# only enter
+$query = <<~'SQL';
+
+SQL
+
+$query = <<~`SQL`;
+
+SQL
+
+$query = <<~"SQL";
+
+SQL
+
+$query = <<~ 'SQL';
+
+SQL
+
+$query = <<~ `SQL`;
+
+SQL
+
+$query = <<~ "SQL";
+
+SQL
+
+$query = <<~SQL;
+
+SQL
+
+$query = <<~\SQL;
+
+SQL
+
+# one liners, no interpolation
+$query = <<~'SQL';
+    one line
+SQL
+
+$query = <<~`SQL`;
+    one line
+SQL
+
+$query = <<~"SQL";
+    one line
+SQL
+
+$query = <<~ 'SQL';
+    one line
+SQL
+
+$query = <<~ `SQL`;
+    one line
+SQL
+
+$query = <<~ "SQL";
+    one line
+SQL
+
+$query = <<~SQL;
+    one line
+SQL
+
+$query = <<~\SQL;
+    one line
+SQL
+
+# one liners, with interpolation
+$query = <<~'SQL';
+    one $query line
+SQL
+
+$query = <<~`SQL`;
+    one $query line
+SQL
+
+$query = <<~"SQL";
+    one $query line
+SQL
+
+$query = <<~ 'SQL';
+    one $query line
+SQL
+
+$query = <<~ `SQL`;
+    one $query line
+SQL
+
+$query = <<~ "SQL";
+    one $query line
+SQL
+
+$query = <<~SQL;
+    one $query line
+SQL
+
+$query = <<~\SQL;
+    one $query line
+SQL
+
+# multi-liners, no interpolation
+$query = <<~'SQL';
+    one line
+        second line
+SQL
+
+$query = <<~`SQL`;
+    one line
+        second line
+SQL
+
+$query = <<~"SQL";
+    one line
+        second line
+SQL
+
+$query = <<~ 'SQL';
+    one line
+        second line
+SQL
+
+$query = <<~ `SQL`;
+    one line
+        second line
+SQL
+
+$query = <<~ "SQL";
+    one line
+        second line
+SQL
+
+$query = <<~SQL;
+    one line
+        second line
+SQL
+
+$query = <<~\SQL;
+    one line
+        second line
+SQL
+
+# multi-liners, with interpolation
+$query = <<~'SQL';
+    one $query line
+        second line
+SQL
+
+$query = <<~`SQL`;
+    one $query line
+        second line
+SQL
+
+$query = <<~"SQL";
+    one $query line
+        second line
+SQL
+
+$query = <<~ 'SQL';
+    one $query line
+        second line
+SQL
+
+$query = <<~ `SQL`;
+    one $query line
+        second line
+SQL
+
+$query = <<~ "SQL";
+    one $query line
+        second line
+SQL
+
+$query = <<~SQL;
+    one $query line
+        second line
+SQL
+
+$query = <<~\SQL;
+    one $query line
+        second line
+SQL
+
+# INDENTED
+{
+    # empty bodies
+    $query = <<~'SQL';
+    SQL
+
+    $query = <<~`SQL`;
+    SQL
+
+    $query = <<~"SQL";
+    SQL
+
+    $query = <<~ 'SQL';
+    SQL
+
+    $query = <<~ `SQL`;
+    SQL
+
+    $query = <<~ "SQL";
+    SQL
+
+    $query = <<~SQL;
+    SQL
+
+    $query = <<~\SQL;
+    SQL
+
+    # only enter
+    $query = <<~'SQL';
+
+    SQL
+
+    $query = <<~`SQL`;
+
+    SQL
+
+    $query = <<~"SQL";
+
+    SQL
+
+    $query = <<~ 'SQL';
+
+    SQL
+
+    $query = <<~ `SQL`;
+
+    SQL
+
+    $query = <<~ "SQL";
+
+    SQL
+
+    $query = <<~SQL;
+
+    SQL
+
+    $query = <<~\SQL;
+
+    SQL
+
+    # one liners, no interpolation
+    $query = <<~'SQL';
+        one line
+    SQL
+
+    $query = <<~`SQL`;
+        one line
+    SQL
+
+    $query = <<~"SQL";
+        one line
+    SQL
+
+    $query = <<~ 'SQL';
+        one line
+    SQL
+
+    $query = <<~ `SQL`;
+        one line
+    SQL
+
+    $query = <<~ "SQL";
+        one line
+    SQL
+
+    $query = <<~SQL;
+        one line
+    SQL
+
+    $query = <<~\SQL;
+        one line
+    SQL
+
+    # one liners, with interpolation
+    $query = <<~'SQL';
+        one $query line
+    SQL
+
+    $query = <<~`SQL`;
+        one $query line
+    SQL
+
+    $query = <<~"SQL";
+        one $query line
+    SQL
+
+    $query = <<~ 'SQL';
+        one $query line
+    SQL
+
+    $query = <<~ `SQL`;
+        one $query line
+    SQL
+
+    $query = <<~ "SQL";
+        one $query line
+    SQL
+
+    $query = <<~SQL;
+        one $query line
+    SQL
+
+    $query = <<~\SQL;
+        one $query line
+    SQL
+
+    # multi-liners, no interpolation
+    $query = <<~'SQL';
+        one line
+        second line
+    SQL
+
+    $query = <<~`SQL`;
+        one line
+        second line
+    SQL
+
+    $query = <<~"SQL";
+        one line
+        second line
+    SQL
+
+    $query = <<~ 'SQL';
+        one line
+        second line
+    SQL
+
+    $query = <<~ `SQL`;
+        one line
+        second line
+    SQL
+
+    $query = <<~ "SQL";
+        one line
+        second line
+    SQL
+
+    $query = <<~SQL;
+        one line
+        second line
+    SQL
+
+    $query = <<~\SQL;
+        one line
+        second line
+    SQL
+
+    # multi-liners, with interpolation
+    $query = <<~'SQL';
+        one $query line
+        second line
+    SQL
+
+    $query = <<~`SQL`;
+        one $query line
+            second line
+    SQL
+
+    $query = <<~"SQL";
+        one $query line
+            second line
+    SQL
+
+    $query = <<~ 'SQL';
+        one $query line
+        second line
+    SQL
+
+    $query = <<~ `SQL`;
+        one $query line
+            second line
+    SQL
+
+    $query = <<~ "SQL";
+        one $query line
+            second line
+    SQL
+
+    $query = <<~SQL;
+        one $query line
+            second line
+    SQL
+
+    $query = <<~\SQL;
+        one $query line
+        second line
+    SQL
+}
+
+# misc
+our $AUTOLOADED_ROUTINES=<<~'END_OF_AUTOLOAD';
+
+END_OF_AUTOLOAD
+
+my $text = <<~'=end';
+
+=pod
+
+some pod document
+
+=end
+
+print <<~'!END!';
+Test from perl lib
+!END!
+
+print <<~TEST;
+message
+TEST
+
+print <<~'TEST WITH SPACE !';
+message
+TEST WITH SPACE !
+
+print <<~`TEST WITH SPACE !`;
+message
+TEST WITH SPACE !
+
+print <<~"TEST WITH SPACE !";
+message
+TEST WITH SPACE !
+
+say 'end';
+

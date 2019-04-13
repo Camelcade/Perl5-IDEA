@@ -1,0 +1,11 @@
+
+#@returns *
+#@returns ArrayRef[*]
+#@returns HashRef[*]
+#@returns HashRef[ArrayRef[*]]
+#@returns ArrayRef[HashRef[*]]
+#@returns UNIVERSAL
+#@returns ArrayRef[UNIVERSAL]
+#@returns HashRef[UNIVERSAL]
+#@returns ArrayRef[HashRef[UNIVERSAL]]
+#@returns HashRef[ArrayRef[UNIVERSAL]]

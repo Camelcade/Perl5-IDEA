@@ -1,0 +1,32 @@
+# https://metacpan.org/pod/Dancer::Exception
+
+say 'hi';
+
+try {
+    do_stuff()
+}
+catch {
+    # an exception was thrown
+    my ($exception) = @_;
+    if ($exception->does('DataProblem')) {
+        # handle the data problem
+        my $message = $exception->message();
+    }
+    else {
+        $exception->rethrow
+    }
+};
+
+say 'hi';
+
+my $var = try {};
+
+
+{
+    say 1;
+    try {
+        say 'bla';
+    }
+}
+
+

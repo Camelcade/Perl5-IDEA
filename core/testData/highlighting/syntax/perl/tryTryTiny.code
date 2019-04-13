@@ -1,0 +1,68 @@
+# https://metacpan.org/pod/Try::Tiny
+
+say 'hi';
+
+# handle errors with a catch handler
+try {
+    die "foo";
+}
+catch {
+    warn "caught error: $_"; # not $@
+};
+
+# just silence errors
+try {
+    die "foo";
+};
+
+my $x = try {die "foo"}
+catch {"bar"};
+my $x = try {die "foo"} || "bar";
+my $x = (try {die "foo"}) // "bar";
+
+my $x = eval {die "foo"} || "bar";
+
+my $x;
+try {die 'foo'}
+finally {$x = 'bar'};
+try {die 'foo'}
+catch {warn "Got a die: $_"}
+finally {$x = 'bar'};
+
+try {
+    die_sometimes();
+}
+catch {
+    # ...code run in case of error
+}
+finally {
+    if (@_) {
+        print "The try block died with: @_\n";
+    }
+    else {
+        print "The try block ran without error.\n";
+    }
+};
+
+try {
+    require Foo;
+}
+catch {
+    when (/^Can't locate .*?\.pm in \@INC/) {} # ignore
+    default {die $_}
+};
+
+
+try # comment
+{
+    require Foo;
+} # comment
+catch # comment
+{
+    when (/^Can't locate .*?\.pm in \@INC/) {} # ignore
+    default {die $_}
+} # comment
+;
+
+say 'buy agagin';
+

@@ -1,0 +1,2 @@
+say 'hi'__END__
+say 'hi';

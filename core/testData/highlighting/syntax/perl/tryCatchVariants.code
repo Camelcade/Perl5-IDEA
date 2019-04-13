@@ -1,0 +1,72 @@
+# https://metacpan.org/pod/Try::Catch
+# https://metacpan.org/pod/Try::Tiny
+catch();
+$obj->catch();
+finally();
+$obj->finally();
+
+try {};
+
+try {}
+finally {};
+
+try {}
+catch {}
+finally {};
+
+try {}
+catch {}
+catch {}
+finally {};
+
+try {}
+finally {}
+catch {};
+
+# https://metacpan.org/pod/Exception::Class::TryCatch
+catch my $err and warn $err->error;
+
+# https://metacpan.org/pod/TryCatch
+try {}
+catch($err) {}
+catch(TypeFoo $e) {}
+catch (Dict[code => Int, message => Str] $err) {}
+catch (Some::Class $e where {$_->code > 100} ) {}
+catch (HTTPError $e where {$_->code >= 400 && $_->code <= 499} ) {
+    return "4XX error";
+}
+catch (HTTPError $e) {
+    return "other http code";
+};
+
+# https://metacpan.org/pod/Error
+throw Error::Simple("A simple error");
+try {
+    do_some_stuff();
+    die "error!" if $condition;
+    throw Error::Simple "Oops!" if $other_condition;
+}
+catch Error::IO with {
+    my $E = shift;
+    print STDERR "File ", $E->{'-file'}, " had a problem\n";
+}
+except {
+    my $E               = shift;
+    my $general_handler = sub {send_message $E->{-description}};
+    return {
+        UserException1 => $general_handler,
+        UserException2 => $general_handler
+    };
+}
+otherwise {
+    print STDERR "Well I don't know what to say\n";
+}
+finally {
+    close_the_garage_door_already(); # Should be reliable
+};                                   # Don't forget the trailing ; or you might be surprised
+
+# https://metacpan.org/source/BIGPRESH/Dancer-1.3202/lib/Dancer/Exception.pm
+try{}
+continuation{}
+catch{}
+finally{};

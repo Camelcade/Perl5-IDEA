@@ -1,0 +1,38 @@
+# https://metacpan.org/pod/TryCatch
+
+say 'hi';
+
+use TryCatch;
+
+sub foo {
+    my ($self) = @_;
+
+    try {
+        die Some::Class->new(code => 404 ) if $self->not_found;
+        return "return value from foo";
+    }
+    catch  {
+    }
+}
+
+try {
+    die Some::Class->new(code => 404 ) if $self->not_found;
+    return "return value from foo";
+}
+catch  {
+}
+
+try  #comment
+{
+    die Some::Class->new(code => 404 ) if $self->not_found;
+    return "return value from foo";
+} # comment
+catch # comment
+
+{
+
+} # comment
+
+
+say 'buy agagin';
+

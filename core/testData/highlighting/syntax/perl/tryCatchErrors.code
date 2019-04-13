@@ -1,0 +1,4 @@
+my $mc = try { Class::MOP::class_of($class) } or return undef;
+try { $err->isa('Email::Sender::Failure') } and ! (my @tmp = $err->recipients);
+try { local $SIG{__WARN__} = sub {}; $self->{sth}->finish } if ( $self->{sth} and ! try { ! $self->{sth}->FETCH('Active') } );
+

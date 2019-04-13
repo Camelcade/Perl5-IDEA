@@ -1,0 +1,11 @@
+package Parent::Package;
+
+#@method
+#@returns Parent::Package
+sub somemethod{}
+
+#@returns *
+#@method
+sub othermethod{}
+
+sub thirdmethod{}
