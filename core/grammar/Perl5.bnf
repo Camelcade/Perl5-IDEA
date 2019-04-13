@@ -115,6 +115,15 @@ limitations under the License.
     RESERVED_GREP='grep'
     RESERVED_SORT='sort'
 
+    RESERVED_POP='pop'
+    RESERVED_PUSH='push'
+    RESERVED_SCALAR='scalar';
+    RESERVED_EACH='each'
+    RESERVED_SHIFT='shift'
+    RESERVED_UNSHIFT='unshift'
+    RESERVED_KEYS='keys'
+    RESERVED_VALUES='values'
+
     RESERVED_UNDEF='undef'
 
     RESERVED_QW='qw'
