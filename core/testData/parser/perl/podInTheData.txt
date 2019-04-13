@@ -11,5 +11,6 @@ Perl5
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlPackageExprImpl(Perl5: PACKAGE_EXPR)
       PerlNamespaceElementImpl(Perl5: __PACKAGE__)('__PACKAGE__')
-  PsiComment(Perl5: COMMENT_BLOCK)('__DATA__\n\n')
+  PsiElement(Perl5: __DATA__)('__DATA__')
+  PsiComment(Perl5: COMMENT_BLOCK)('\n\n')
   PsiElement(Perl5: POD)('=pod\n\nsome doc\n\n=cut\n\nother')

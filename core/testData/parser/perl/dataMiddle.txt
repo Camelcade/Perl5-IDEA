@@ -6,4 +6,5 @@ Perl5
         PsiElement(Perl5: QUOTE_SINGLE_OPEN)(''')
         PerlStringContentElementImpl(Perl5: STRING_CONTENT)('hi')
         PsiElement(Perl5: QUOTE_SINGLE_CLOSE)(''')
-  PsiComment(Perl5: COMMENT_BLOCK)('__DATA__\nsay 'hi';')
+  PsiElement(Perl5: __DATA__)('__DATA__')
+  PsiComment(Perl5: COMMENT_BLOCK)('\nsay 'hi';')

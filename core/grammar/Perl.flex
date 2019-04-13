@@ -657,8 +657,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 ^{POD_START} 				{yybegin(POD_STATE);}
 {NEW_LINE}   				{return getNewLineToken();}
 {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
-{END_BLOCK}				{yybegin(END_BLOCK);pushback();return TAG_END;}
-{DATA_BLOCK}				{yybegin(END_BLOCK);pushback();return TAG_DATA;}
+{END_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;}
+{DATA_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-8);return TAG_DATA;}
 {LINE_COMMENT_ANNOTATION}	{return COMMENT_ANNOTATION;}
 {LINE_COMMENT}				{return COMMENT_LINE;}
 
