@@ -22,6 +22,12 @@ import org.jetbrains.annotations.NotNull;
 public class PerlQuickDocTest extends PerlLightTestCase {
 
   @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    withPerlDoc();
+  }
+
+  @Override
   protected String getTestDataPath() {
     return "testData/documentation/perl/quickdoc";
   }

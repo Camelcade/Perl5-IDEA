@@ -1730,14 +1730,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         sb.append(SEPARATOR).append("Caret #").append(i).append(" at: ").append(caretOffset)
           .append(SEPARATOR_NEW_LINE_AFTER);
       }
-      getEditor().getCaretModel().moveToOffset(caretOffset);
-      PsiElement elementAtCaret = getFile().getViewProvider().findElementAt(
-        getEditor().getCaretModel().getOffset(), getDocumentationElementLanguage());
+      Editor editor = getEditor();
+      PsiFile file = getFile();
+      editor.getCaretModel().moveToOffset(caretOffset);
+      PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
       assertNotNull(elementAtCaret);
       DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(elementAtCaret);
       assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
-      PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(getEditor(), getFile(), elementAtCaret);
-      assertNotNull(targetElement);
+      PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
       String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
       assertNotNull(generatedDoc);
       sb.append(generatedDoc).append("\n");
