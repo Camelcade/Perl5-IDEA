@@ -129,8 +129,11 @@ limitations under the License.
     RESERVED_PUSH='push'
     RESERVED_UNSHIFT='unshift'
 
+    RESERVED_REF='ref'
     RESERVED_SPLIT='split'
     RESERVED_JOIN='join'
+    RESERVED_LENGTH='length'
+    RESERVED_EXISTS='exists'
 
     RESERVED_UNDEF='undef'
 
