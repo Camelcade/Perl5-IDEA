@@ -1,0 +1,5 @@
+say _<caret>_LINE__;
+
+__DATA__
+
+Comment

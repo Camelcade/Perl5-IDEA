@@ -64,15 +64,13 @@ public class PerlDocUtil implements PerlElementTypes {
   private static final String MODIFIERS_DOC_LINK = "perlsyn/\"Statement Modifiers\"";
   private static final String SWITCH_DOC_LINK = "perlsyn/\"Switch Statements\"";
   private static final String COMPOUND_DOC_LINK = "perlsyn/\"Compound Statements\"";
+  static final String SPECIAL_LITERALS_LINK = "perldata/\"Special Literals\"";
 
   private static final Map<String, String> KEYWORDS_LINKS = new THashMap<>();
   private static final Map<String, String> OPERATORS_LINKS = new THashMap<>();
   private static final Map<String, String> VARIABLES_LINKS = new THashMap<>();
 
   static {
-    KEYWORDS_LINKS.put("__DATA__", "perldata/\"Special Literals\"");
-    KEYWORDS_LINKS.put("__END__", "perldata/\"Special Literals\"");
-
     KEYWORDS_LINKS.put("BEGIN", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
     KEYWORDS_LINKS.put("CHECK", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
     KEYWORDS_LINKS.put("END", "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"");
@@ -189,10 +187,11 @@ public class PerlDocUtil implements PerlElementTypes {
     else if (COMPOUND_KEYWORDS_TOKENSET.contains(elementType)) {
       return resolveDocLink(COMPOUND_DOC_LINK, element);
     }
+    else if (TAGS_TOKEN_SET.contains(elementType)) {
+      return resolveDocLink(SPECIAL_LITERALS_LINK, element);
+    }
 
-    final Project project = element.getProject();
     String text = element.getText();
-
     String redirect = KEYWORDS_LINKS.get(text);
     if (redirect != null) {
       return resolveDocLink(redirect, element);
@@ -203,7 +202,7 @@ public class PerlDocUtil implements PerlElementTypes {
     }
 
     PodCompositeElement podElement =
-      searchPodElementInFile(project, PodSearchHelper.PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
+      searchPodElementInFile(element.getProject(), PodSearchHelper.PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
 
     return podElement == null ? getPerlOpDoc(element) : podElement;
   }

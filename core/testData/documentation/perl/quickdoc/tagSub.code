@@ -1,0 +1,5 @@
+say _<caret>_SUB__;
+
+__DATA__
+
+Comment

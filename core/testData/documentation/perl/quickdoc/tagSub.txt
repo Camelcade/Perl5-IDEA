@@ -1,0 +1,32 @@
+<p><a href="psi_element://pod%3A%3Aperldata">pod::perldata</a>: <a href="psi_element://pod%3A%3Aperldata%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperldata%2FScalar+value+constructors">Scalar value constructors</a></p><h3>Special Literals
+    
+   </h3><p style="padding-bottom: 10px;">The special literals __FILE__, __LINE__, and __PACKAGE__
+represent the current filename, line number, and package name at that
+point in your program.  __SUB__ gives a reference to the current
+subroutine.  They may be used only as separate tokens; they
+will not be interpolated into strings.  If there is no current package
+(due to an empty <code>package;</code> directive), __PACKAGE__ is the undefined
+value.  (But the empty <code>package;</code> is no longer supported, as of version
+5.10.)  Outside of a subroutine, __SUB__ is the undefined value.  __SUB__
+is only available in 5.16 or higher, and only with a <code>use v5.16</code> or
+<code>use feature &quot;current_sub&quot;</code> declaration.
+   
+  </p>
+<p style="padding-bottom: 10px;">The two control characters ^D and ^Z, and the tokens __END__ and __DATA__
+may be used to indicate the logical end of the script before the actual
+end of file.  Any following text is ignored.</p>
+<p style="padding-bottom: 10px;">Text after __DATA__ may be read via the filehandle <code>PACKNAME::DATA</code>,
+where <code>PACKNAME</code> is the package that was current when the __DATA__
+token was encountered.  The filehandle is left open pointing to the
+line after __DATA__.  The program should <code>close DATA</code> when it is done
+reading from it.  (Leaving it open leaks filehandles if the module is
+reloaded for any reason, so it's a safer practice to close it.)  For
+compatibility with older scripts written before __DATA__ was
+introduced, __END__ behaves like __DATA__ in the top level script (but
+not in files loaded with <code>require</code> or <code>do</code>) and leaves the remaining
+contents of the file accessible via <code>main::DATA</code>.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://SelfLoader" style="color:red">SelfLoader</a> for more description of __DATA__, and
+an example of its use.  Note that you cannot read from the DATA
+filehandle in a BEGIN block: the BEGIN block is executed as soon
+as it is seen (during compilation), at which point the corresponding
+__DATA__ (or __END__) token has not yet been seen.</p>

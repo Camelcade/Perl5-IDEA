@@ -43,12 +43,13 @@ import org.jetbrains.annotations.Nullable;
 import static com.intellij.codeInsight.TargetElementUtil.ELEMENT_NAME_ACCEPTED;
 import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
-  private static final TokenSet myForceAsOp = TokenSet.orSet(
+  private static final TokenSet FORCE_AS_OPERATORS_TOKENSET = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
     TokenSet.create(
       RESERVED_Q,
@@ -66,13 +67,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       RESERVED_QR
     )
   );
-  private static final TokenSet myForceAsFunc = TokenSet.create(
-    BLOCK_NAME,
-    TAG,
-    TAG_END,
-    TAG_DATA,
-    OPERATOR_FILETEST
-  );
+  private static final TokenSet FORCE_AS_FUNC_TOKENSET = TokenSet.orSet(TAGS_TOKEN_SET, TokenSet.create(BLOCK_NAME, OPERATOR_FILETEST));
 
   @Nullable
   @Override
@@ -222,8 +217,8 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   protected static boolean isFunc(PsiElement element) {
     IElementType elementType = element.getNode().getElementType();
-    return myForceAsFunc.contains(elementType) ||
-           !myForceAsOp.contains(elementType) && (
+    return FORCE_AS_FUNC_TOKENSET.contains(elementType) ||
+           !FORCE_AS_OPERATORS_TOKENSET.contains(elementType) && (
              PerlTokenSets.DEFAULT_KEYWORDS_TOKENSET.contains(elementType) ||
              element instanceof PerlSubNameElement && ((PerlSubNameElement)element).isBuiltIn()
            );
@@ -231,8 +226,8 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   protected static boolean isOp(PsiElement element) {
     IElementType elementType = element.getNode().getElementType();
-    return myForceAsOp.contains(elementType) ||
-           !myForceAsFunc.contains(elementType) && (
+    return FORCE_AS_OPERATORS_TOKENSET.contains(elementType) ||
+           !FORCE_AS_FUNC_TOKENSET.contains(elementType) && (
              PerlTokenSets.OPERATORS_TOKENSET.contains(elementType)
            );
   }

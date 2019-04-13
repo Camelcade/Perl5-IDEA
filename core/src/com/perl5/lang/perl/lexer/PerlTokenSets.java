@@ -168,6 +168,10 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_WHILE
   );
 
+  TokenSet TAGS_TOKEN_SET = TokenSet.create(
+    TAG_DATA, TAG_END, TAG, TAG_PACKAGE
+  );
+
   TokenSet COMPOUND_KEYWORDS_TOKENSET = TokenSet.orSet(
     MODIFIERS_KEYWORDS_TOKENSET,
     TokenSet.create(
