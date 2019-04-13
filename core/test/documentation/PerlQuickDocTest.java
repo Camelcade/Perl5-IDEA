@@ -32,6 +32,106 @@ public class PerlQuickDocTest extends PerlLightTestCase {
     return "testData/documentation/perl/quickdoc";
   }
 
+  public void testContinue() {doTest();}
+
+  public void testDefined() {doTest();}
+
+  public void testDelete() {doTest();}
+
+  public void testDo() {doTest();}
+
+  public void testEach() {doTest();}
+
+  public void testEval() {doTest();}
+
+  public void testExists() {doTest();}
+
+  public void testExit() {doTest();}
+
+  public void testFormat() {doTest();}
+
+  public void testGoto() {doTest();}
+
+  public void testGrep() {doTest();}
+
+  public void testJoin() {doTest();}
+
+  public void testKeys() {doTest();}
+
+  public void testLast() {doTest();}
+
+  public void testLength() {doTest();}
+
+  public void testLocal() {doTest();}
+
+  public void testM() {doTest();}
+
+  public void testMap() {doTest();}
+
+  public void testMy() {doTest();}
+
+  public void testNext() {doTest();}
+
+  public void testNo() {doTest();}
+
+  public void testOur() {doTest();}
+
+  public void testPackage() {doTest();}
+
+  public void testPop() {doTest();}
+
+  public void testPrint() {doTest();}
+
+  public void testPrintf() {doTest();}
+
+  public void testPush() {doTest();}
+
+  public void testQ() {doTest();}
+
+  public void testQq() {doTest();}
+
+  public void testQr() {doTest();}
+
+  public void testQw() {doTest();}
+
+  public void testQx() {doTest();}
+
+  public void testRedo() {doTest();}
+
+  public void testRef() {doTest();}
+
+  public void testRequire() {doTest();}
+
+  public void testReturn() {doTest();}
+
+  public void testS() {doTest();}
+
+  public void testSay() {doTest();}
+
+  public void testScalar() {doTest();}
+
+  public void testShift() {doTest();}
+
+  public void testSort() {doTest();}
+
+  public void testSplit() {doTest();}
+
+  public void testState() {doTest();}
+
+  public void testTr() {doTest();}
+
+  public void testUndef() {doTest();}
+
+  public void testUnshift() {doTest();}
+
+  public void testUse() {doTest();}
+
+  public void testValues() {doTest();}
+
+  public void testWantarray() {doTest();}
+
+  public void testY() {doTest();}
+
   public void testBlockAutoload() {doTest();}
 
   public void testBlockDestroy() {doTest();}

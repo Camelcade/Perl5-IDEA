@@ -1,0 +1,95 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">our VARLIST
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">our TYPE VARLIST</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">our VARLIST : ATTRS</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">our TYPE VARLIST : ATTRS</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> makes a lexical alias to a package (i.e. global)
+variable of the same name in the current package for use within the
+current lexical scope.</p>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> has the same scoping rules as
+<a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST">C<state></a>, meaning that it is
+only valid within a lexical scope.  Unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST">C<state></a>, which both declare new (lexical) variables,
+<a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> only creates an alias to an existing variable: a
+package variable of the same name.</p>
+<p style="padding-bottom: 10px;">This means that when <code>use strict 'vars'</code> is in effect, <a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> lets you use a package variable without qualifying it with the
+package name, but only within the lexical scope of the
+<a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> declaration.  This applies immediately--even
+within the same statement.</p>
+<div style="padding-bottom: 10px;"><pre><code>    package Foo;
+    use strict;
+
+    $Foo::foo = 23;
+
+    {
+        our $foo;   # alias to $Foo::foo
+        print $foo; # prints 23
+    }
+
+    print $Foo::foo; # prints 23
+
+    print $foo; # ERROR: requires explicit package name</code></pre></div>
+<p style="padding-bottom: 10px;">This works even if the package variable has not been used before, as
+package variables spring into existence when first used.</p>
+<div style="padding-bottom: 10px;"><pre><code>    package Foo;
+    use strict;
+
+    our $foo = 23;   # just like $Foo::foo = 23
+
+    print $Foo::foo; # prints 23</code></pre></div>
+<p style="padding-bottom: 10px;">Because the variable becomes legal immediately under <code>use strict 'vars'</code>, so
+long as there is no variable with that name is already in scope, you can then
+reference the package variable again even within the same statement.</p>
+<div style="padding-bottom: 10px;"><pre><code>    package Foo;
+    use strict;
+
+    my  $foo = $foo; # error, undeclared $foo on right-hand side
+    our $foo = $foo; # no errors</code></pre></div>
+<p style="padding-bottom: 10px;">If more than one variable is listed, the list must be placed
+in parentheses.</p>
+<div style="padding-bottom: 10px;"><pre><code>    our($bar, $baz);</code></pre></div>
+<p style="padding-bottom: 10px;">An <a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> declaration declares an alias for a package
+variable that will be visible
+across its entire lexical scope, even across package boundaries.  The
+package in which the variable is entered is determined at the point
+of the declaration, not at the point of use.  This means the following
+behavior holds:</p>
+<div style="padding-bottom: 10px;"><pre><code>    package Foo;
+    our $bar;      # declares $Foo::bar for rest of lexical scope
+    $bar = 20;
+
+    package Bar;
+    print $bar;    # prints 20, as it refers to $Foo::bar</code></pre></div>
+<p style="padding-bottom: 10px;">Multiple <a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> declarations with the same name in the
+same lexical
+scope are allowed if they are in different packages.  If they happen
+to be in the same package, Perl will emit warnings if you have asked
+for them, just like multiple <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a> declarations.  Unlike
+a second <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a> declaration, which will bind the name to a
+fresh variable, a second <a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> declaration in the same
+package, in the same scope, is merely redundant.</p>
+<div style="padding-bottom: 10px;"><pre><code>    use warnings;
+    package Foo;
+    our $bar;      # declares $Foo::bar for rest of lexical scope
+    $bar = 20;
+
+    package Bar;
+    our $bar = 30; # declares $Bar::bar for rest of lexical scope
+    print $bar;    # prints 30
+
+    our $bar;      # emits warning but has no other effect
+    print $bar;    # still prints 30</code></pre></div>
+<p style="padding-bottom: 10px;">An <a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> declaration may also have a list of attributes
+associated with it.</p>
+<p style="padding-bottom: 10px;">The exact semantics and interface of TYPE and ATTRS are still
+evolving.  TYPE is currently bound to the use of the <a href="psi_element://fields" style="color:red">fields</a> pragma,
+and attributes are handled using the <a href="psi_element://attributes" style="color:red">attributes</a> pragma, or, starting
+from Perl 5.8.0, also via the <a href="psi_element://Attribute%3A%3AHandlers" style="color:red">Attribute::Handlers</a> module.  See
+<a href="psi_element://perlsub%2FPrivate+Variables+via+my%28%29">Private Variables via my() in perlsub</a> for details.</p>
+<p style="padding-bottom: 10px;">Note that with a parenthesised list, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> can be used
+as a dummy placeholder, for example to skip assignment of initial
+values:</p>
+<div style="padding-bottom: 10px;"><pre><code>    our ( undef, $min, $hour ) = localtime;</code></pre></div>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Four+VARLIST">C<our></a> differs from <a href="psi_element://vars" style="color:red">C<use vars></a>, which allows
+use of an unqualified name <i>only</i> within the affected package, but
+across scopes.</p></dd></dl>

@@ -1,0 +1,8 @@
+{
+  say 'hi';
+  42;
+}
+con<caret>tinue{
+  say 'hi';
+  42;
+}

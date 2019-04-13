@@ -1,0 +1,172 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sort SUBNAME LIST
+   </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">sort BLOCK LIST</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">sort LIST</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">In list context, this sorts the LIST and returns the sorted list value.
+In scalar context, the behaviour of <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a> is
+undefined.</p>
+<p style="padding-bottom: 10px;">If SUBNAME or BLOCK is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a>s in
+standard string comparison
+order.  If SUBNAME is specified, it gives the name of a subroutine
+that returns an integer less than, equal to, or greater than <code>0</code>,
+depending on how the elements of the list are to be ordered.  (The
+<code>&lt;=&gt;</code> and <code>cmp</code> operators are extremely useful in such routines.)
+SUBNAME may be a scalar variable name (unsubscripted), in which case
+the value provides the name of (or a reference to) the actual
+subroutine to use.  In place of a SUBNAME, you can provide a BLOCK as
+an anonymous, in-line sort subroutine.</p>
+<p style="padding-bottom: 10px;">If the subroutine's prototype is <code>($$)</code>, the elements to be compared are
+passed by reference in <a href="psi_element://perlvar%2F%40_">C<@_></a>, as for a normal subroutine.
+This is slower than unprototyped subroutines, where the elements to be
+compared are passed into the subroutine as the package global variables
+<code>$a</code> and <code>$b</code> (see example below).  Note that in the latter case, it
+is usually highly counter-productive to declare <code>$a</code> and <code>$b</code> as
+lexicals.</p>
+<p style="padding-bottom: 10px;">If the subroutine is an XSUB, the elements to be compared are pushed on
+to the stack, the way arguments are usually passed to XSUBs.  <code>$a</code> and
+<code>$b</code> are not set.</p>
+<p style="padding-bottom: 10px;">The values to be compared are always passed by reference and should not
+be modified.</p>
+<p style="padding-bottom: 10px;">You also cannot exit out of the sort block or subroutine using any of the
+loop control operators described in <a href="psi_element://perlsyn">perlsyn</a> or with
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>.</p>
+<p style="padding-bottom: 10px;">When <a href="psi_element://locale" style="color:red">C<use locale></a> (but not <code>use locale ':not_characters'</code>)
+is in effect, <code>sort LIST</code> sorts LIST according to the
+current collation locale.  See <a href="psi_element://perllocale">perllocale</a>.</p>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a> returns aliases into the original list,
+much as a for loop's index variable aliases the list elements.  That is,
+modifying an element of a list returned by <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a>
+(for example, in a <code>foreach</code>, <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a>)
+actually modifies the element in the original list.  This is usually
+something to be avoided when writing clear code.</p>
+<p style="padding-bottom: 10px;">Perl 5.6 and earlier used a quicksort algorithm to implement sort.
+That algorithm was not stable and <i>could</i> go quadratic.  (A <i>stable</i> sort
+preserves the input order of elements that compare equal.  Although
+quicksort's run time is O(NlogN) when averaged over all arrays of
+length N, the time can be O(N**2), <i>quadratic</i> behavior, for some
+inputs.)  In 5.7, the quicksort implementation was replaced with
+a stable mergesort algorithm whose worst-case behavior is O(NlogN).
+But benchmarks indicated that for some inputs, on some platforms,
+the original quicksort was faster.  5.8 has a <a href="psi_element://sort" style="color:red">sort</a> pragma for
+limited control of the sort.  Its rather blunt control of the
+underlying algorithm may not persist into future Perls, but the
+ability to characterize the input or output in implementation
+independent ways quite probably will.</p>
+<p style="padding-bottom: 10px;">Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # sort lexically
+    my @articles = sort @files;
+
+    # same thing, but with explicit sort routine
+    my @articles = sort {$a cmp $b} @files;
+
+    # now case-insensitively
+    my @articles = sort {fc($a) cmp fc($b)} @files;
+
+    # same thing in reversed order
+    my @articles = sort {$b cmp $a} @files;
+
+    # sort numerically ascending
+    my @articles = sort {$a &lt;=&gt; $b} @files;
+
+    # sort numerically descending
+    my @articles = sort {$b &lt;=&gt; $a} @files;
+
+    # this sorts the %age hash by value instead of key
+    # using an in-line function
+    my @eldest = sort { $age{$b} &lt;=&gt; $age{$a} } keys %age;
+
+    # sort using explicit subroutine name
+    sub byage {
+        $age{$a} &lt;=&gt; $age{$b};  # presuming numeric
+    }
+    my @sortedclass = sort byage @class;
+
+    sub backwards { $b cmp $a }
+    my @harry  = qw(dog cat x Cain Abel);
+    my @george = qw(gone chased yz Punished Axed);
+    print sort @harry;
+        # prints AbelCaincatdogx
+    print sort backwards @harry;
+        # prints xdogcatCainAbel
+    print sort @george, 'to', @harry;
+        # prints AbelAxedCainPunishedcatchaseddoggonetoxyz
+
+    # inefficiently sort by descending numeric compare using
+    # the first integer after the first = sign, or the
+    # whole record case-insensitively otherwise
+
+    my @new = sort {
+        ($b =~ /=(\d+)/)[0] &lt;=&gt; ($a =~ /=(\d+)/)[0]
+                            ||
+                    fc($a)  cmp  fc($b)
+    } @old;
+
+    # same thing, but much more efficiently;
+    # we'll build auxiliary indices instead
+    # for speed
+    my (@nums, @caps);
+    for (@old) {
+        push @nums, ( /=(\d+)/ ? $1 : undef );
+        push @caps, fc($_);
+    }
+
+    my @new = @old[ sort {
+                           $nums[$b] &lt;=&gt; $nums[$a]
+                                    ||
+                           $caps[$a] cmp $caps[$b]
+                         } 0..$#old
+                  ];
+
+    # same thing, but without any temps
+    my @new = map { $_-&gt;[0] }
+           sort { $b-&gt;[1] &lt;=&gt; $a-&gt;[1]
+                           ||
+                  $a-&gt;[2] cmp $b-&gt;[2]
+           } map { [$_, /=(\d+)/, fc($_)] } @old;
+
+    # using a prototype allows you to use any comparison subroutine
+    # as a sort subroutine (including other package's subroutines)
+    package Other;
+    sub backwards ($$) { $_[1] cmp $_[0]; }  # $a and $b are
+                                             # not set here
+    package main;
+    my @new = sort Other::backwards @old;
+
+    # guarantee stability, regardless of algorithm
+    use sort 'stable';
+    my @new = sort { substr($a, 3, 5) cmp substr($b, 3, 5) } @old;
+
+    # force use of mergesort (not portable outside Perl 5.8)
+    use sort '_mergesort';  # note discouraging _
+    my @new = sort { substr($a, 3, 5) cmp substr($b, 3, 5) } @old;</code></pre></div>
+<p style="padding-bottom: 10px;">Warning: syntactical care is required when sorting the list returned from
+a function.  If you want to sort the list returned by the function call
+<code>find_records(@key)</code>, you can use:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @contact = sort { $a cmp $b } find_records @key;
+    my @contact = sort +find_records(@key);
+    my @contact = sort &amp;find_records(@key);
+    my @contact = sort(find_records(@key));</code></pre></div>
+<p style="padding-bottom: 10px;">If instead you want to sort the array <code>@key</code> with the comparison routine
+<code>find_records()</code> then you can use:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @contact = sort { find_records() } @key;
+    my @contact = sort find_records(@key);
+    my @contact = sort(find_records @key);
+    my @contact = sort(find_records (@key));</code></pre></div>
+<p style="padding-bottom: 10px;">You <i>must not</i> declare <code>$a</code>
+and <code>$b</code> as lexicals.  They are package globals.  That means
+that if you're in the <code>main</code> package and type</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @articles = sort {$b &lt;=&gt; $a} @files;</code></pre></div>
+<p style="padding-bottom: 10px;">then <code>$a</code> and <code>$b</code> are <code>$main::a</code> and <code>$main::b</code> (or <code>$::a</code> and <code>$::b</code>),
+but if you're in the <code>FooPack</code> package, it's the same as typing</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @articles = sort {$FooPack::b &lt;=&gt; $FooPack::a} @files;</code></pre></div>
+<p style="padding-bottom: 10px;">The comparison function is required to behave.  If it returns
+inconsistent results (sometimes saying <code>$x[1]</code> is less than <code>$x[2]</code> and
+sometimes saying the opposite, for example) the results are not
+well-defined.</p>
+<p style="padding-bottom: 10px;">Because <code>&lt;=&gt;</code> returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> when either operand
+is <code>NaN</code> (not-a-number), be careful when sorting with a
+comparison function like <code>$a &lt;=&gt; $b</code> any lists that might contain a
+<code>NaN</code>.  The following example takes advantage that <code>NaN != NaN</code> to
+eliminate any <code>NaN</code>s from the input list.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @result = sort { $a &lt;=&gt; $b } grep { $_ == $_ } @input;</code></pre></div></dd></dl>

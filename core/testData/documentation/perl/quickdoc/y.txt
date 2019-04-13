@@ -1,0 +1,117 @@
+<p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlop%2FQuote-Like+Operators">Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>tr/<i>SEARCHLIST</i>/<i>REPLACEMENTLIST</i>/cdsr</code>
+     </dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>y/<i>SEARCHLIST</i>/<i>REPLACEMENTLIST</i>/cdsr</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Transliterates all occurrences of the characters found in the search list
+with the corresponding character in the replacement list.  It returns
+the number of characters replaced or deleted.  If no string is
+specified via the <code>=~</code> or <code>!~</code> operator, the <code>$_</code> string is transliterated.</p>
+<p style="padding-bottom: 10px;">If the <code>/r</code> (non-destructive) option is present, a new copy of the string
+is made and its characters transliterated, and this copy is returned no
+matter whether it was modified or not: the original string is always
+left unchanged.  The new copy is always a plain string, even if the input
+string is an object or a tied variable.</p>
+<p style="padding-bottom: 10px;">Unless the <code>/r</code> option is used, the string specified with <code>=~</code> must be a
+scalar variable, an array element, a hash element, or an assignment to one
+of those; in other words, an lvalue.</p>
+<p style="padding-bottom: 10px;">A character range may be specified with a hyphen, so <code>tr/A-J/0-9/</code>
+does the same replacement as <code>tr/ACEGIBDFHJ/0246813579/</code>.
+For <B>sed</B> devotees, <code>y</code> is provided as a synonym for <code>tr</code>.  If the
+<i>SEARCHLIST</i> is delimited by bracketing quotes, the <i>REPLACEMENTLIST</i> has
+its own pair of quotes, which may or may not be bracketing quotes;
+for example, <code>tr[aeiouy][yuoiea]</code> or <code>tr(+\-*/)/ABCD/</code>.</p>
+<p style="padding-bottom: 10px;">Characters may be literals or any of the escape sequences accepted in
+double-quoted strings.  But there is no interpolation, so <code>&quot;$&quot;</code> and
+<code>&quot;@&quot;</code> are treated as literals.  A hyphen at the beginning or end, or
+preceded by a backslash is considered a literal.  Escape sequence
+details are in <a href="psi_element://pod%3A%3Aperlop%2FQuote+and+Quote-like+Operators">the table near the beginning of this section</a>.</p>
+<p style="padding-bottom: 10px;">Note that <code>tr</code> does <B>not</B> do regular expression character classes such as
+<code>\d</code> or <code>\pL</code>.  The <code>tr</code> operator is not equivalent to the <code><a href="psi_element://tr%281%29" style="color:red">tr(1)</a></code>
+utility.  If you want to map strings between lower/upper cases, see
+<a href="psi_element://perlfunc%2Flc">lc in perlfunc</a> and <a href="psi_element://perlfunc%2Fuc">uc in perlfunc</a>, and in general consider using the <code>s</code>
+operator if you need regular expressions.  The <code>\U</code>, <code>\u</code>, <code>\L</code>, and
+<code>\l</code> string-interpolation escapes on the right side of a substitution
+operator will perform correct case-mappings, but <code>tr[a-z][A-Z]</code> will not
+(except sometimes on legacy 7-bit data).</p>
+<p style="padding-bottom: 10px;">Most ranges are unportable between character sets, but certain ones
+signal Perl to do special handling to make them portable.  There are two
+classes of portable ranges.  The first are any subsets of the ranges
+<code>A-Z</code>, <code>a-z</code>, and <code>0-9</code>, when expressed as literal characters.</p>
+<div style="padding-bottom: 10px;"><pre><code>  tr/h-k/H-K/</code></pre></div>
+<p style="padding-bottom: 10px;">capitalizes the letters <code>&quot;h&quot;</code>, <code>&quot;i&quot;</code>, <code>&quot;j&quot;</code>, and <code>&quot;k&quot;</code> and nothing
+else, no matter what the platform's character set is.  In contrast, all
+of</p>
+<div style="padding-bottom: 10px;"><pre><code>  tr/\x68-\x6B/\x48-\x4B/
+  tr/h-\x6B/H-\x4B/
+  tr/\x68-k/\x48-K/</code></pre></div>
+<p style="padding-bottom: 10px;">do the same capitalizations as the previous example when run on ASCII
+platforms, but something completely different on EBCDIC ones.</p>
+<p style="padding-bottom: 10px;">The second class of portable ranges is invoked when one or both of the
+range's end points are expressed as <code>\N{...}</code></p>
+<div style="padding-bottom: 10px;"><pre><code> $string =~ tr/\N{U+20}-\N{U+7E}//d;</code></pre></div>
+<p style="padding-bottom: 10px;">removes from <code>$string</code> all the platform's characters which are
+equivalent to any of Unicode U+0020, U+0021, ... U+007D, U+007E.  This
+is a portable range, and has the same effect on every platform it is
+run on.  It turns out that in this example, these are the ASCII
+printable characters.  So after this is run, <code>$string</code> has only
+controls and characters which have no ASCII equivalents.</p>
+<p style="padding-bottom: 10px;">But, even for portable ranges, it is not generally obvious what is
+included without having to look things up.  A sound principle is to use
+only ranges that begin from and end at either ASCII alphabetics of equal
+case (<code>b-e</code>, <code>b-E</code>), or digits (<code>1-4</code>).  Anything else is unclear
+(and unportable unless <code>\N{...}</code> is used).  If in doubt, spell out the
+character sets in full.</p>
+<p style="padding-bottom: 10px;">Options:</p>
+<div style="padding-bottom: 10px;"><pre><code>    c	Complement the SEARCHLIST.
+    d	Delete found but unreplaced characters.
+    s	Squash duplicate replaced characters.
+    r	Return the modified string and leave the original string
+	untouched.</code></pre></div>
+<p style="padding-bottom: 10px;">If the <code>/c</code> modifier is specified, the <i>SEARCHLIST</i> character set
+is complemented.  If the <code>/d</code> modifier is specified, any characters
+specified by <i>SEARCHLIST</i> not found in <i>REPLACEMENTLIST</i> are deleted.
+(Note that this is slightly more flexible than the behavior of some
+<B>tr</B> programs, which delete anything they find in the <i>SEARCHLIST</i>,
+period.)  If the <code>/s</code> modifier is specified, sequences of characters
+that were transliterated to the same character are squashed down
+to a single instance of the character.</p>
+<p style="padding-bottom: 10px;">If the <code>/d</code> modifier is used, the <i>REPLACEMENTLIST</i> is always interpreted
+exactly as specified.  Otherwise, if the <i>REPLACEMENTLIST</i> is shorter
+than the <i>SEARCHLIST</i>, the final character is replicated till it is long
+enough.  If the <i>REPLACEMENTLIST</i> is empty, the <i>SEARCHLIST</i> is replicated.
+This latter is useful for counting characters in a class or for
+squashing character sequences in a class.</p>
+<p style="padding-bottom: 10px;">Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $ARGV[1] =~ tr/A-Z/a-z/;	# canonicalize to lower case ASCII
+
+    $cnt = tr/*/*/;		# count the stars in $_
+
+    $cnt = $sky =~ tr/*/*/;	# count the stars in $sky
+
+    $cnt = tr/0-9//;		# count the digits in $_
+
+    tr/a-zA-Z//s;		# bookkeeper -&gt; bokeper
+
+    ($HOST = $host) =~ tr/a-z/A-Z/;
+     $HOST = $host  =~ tr/a-z/A-Z/r;   # same thing
+
+    $HOST = $host =~ tr/a-z/A-Z/r    # chained with s///r
+                  =~ s/:/ -p/r;
+
+    tr/a-zA-Z/ /cs;		# change non-alphas to single space
+
+    @stripped = map tr/a-zA-Z/ /csr, @original;
+				# /r with map
+
+    tr [\200-\377]
+       [\000-\177];		# wickedly delete 8th bit</code></pre></div>
+<p style="padding-bottom: 10px;">If multiple transliterations are given for a character, only the
+first one is used:</p>
+<div style="padding-bottom: 10px;"><pre><code>    tr/AAA/XYZ/</code></pre></div>
+<p style="padding-bottom: 10px;">will transliterate any A to X.</p>
+<p style="padding-bottom: 10px;">Because the transliteration table is built at compile time, neither
+the <i>SEARCHLIST</i> nor the <i>REPLACEMENTLIST</i> are subjected to double quote
+interpolation.  That means that if you want to use variables, you
+must use an <code>eval()</code>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    eval &quot;tr/$oldlist/$newlist/&quot;;
+    die $@ if $@;
+
+    eval &quot;tr/$oldlist/$newlist/, 1&quot; or die $@;</code></pre></div></dd></dl>

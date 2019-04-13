@@ -1,0 +1,52 @@
+<p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlop%2FRegexp+Quote-Like+Operators">Regexp Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>m/<i>PATTERN</i>/msixpodualngc</code>
+ 
+   
+       </dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>/<i>PATTERN</i>/msixpodualngc</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Searches a string for a pattern match, and in scalar context returns
+true if it succeeds, false if it fails.  If no string is specified
+via the <code>=~</code> or <code>!~</code> operator, the <code>$_</code> string is searched.  (The
+string specified with <code>=~</code> need not be an lvalue--it may be the
+result of an expression evaluation, but remember the <code>=~</code> binds
+rather tightly.)  See also <a href="psi_element://perlre">perlre</a>.</p>
+<p style="padding-bottom: 10px;">Options are as described in <code>qr//</code> above; in addition, the following match
+process modifiers are available:</p>
+<div style="padding-bottom: 10px;"><pre><code> g  Match globally, i.e., find all occurrences.
+ c  Do not reset search position on a failed match when /g is
+    in effect.</code></pre></div>
+<p style="padding-bottom: 10px;">If <code>&quot;/&quot;</code> is the delimiter then the initial <code>m</code> is optional.  With the <code>m</code>
+you can use any pair of non-whitespace (ASCII) characters
+as delimiters.  This is particularly useful for matching path names
+that contain <code>&quot;/&quot;</code>, to avoid LTS (leaning toothpick syndrome).  If <code>&quot;?&quot;</code> is
+the delimiter, then a match-only-once rule applies,
+described in <code>m?<i>PATTERN</i>?</code> below.  If <code>&quot;'&quot;</code> (single quote) is the delimiter,
+no interpolation is performed on the <i>PATTERN</i>.
+When using a delimiter character valid in an identifier, whitespace is required
+after the <code>m</code>.</p>
+<p style="padding-bottom: 10px;"><i>PATTERN</i> may contain variables, which will be interpolated
+every time the pattern search is evaluated, except
+for when the delimiter is a single quote.  (Note that <code>$(</code>, <code>$)</code>, and
+<code>$|</code> are not interpolated because they look like end-of-string tests.)
+Perl will not recompile the pattern unless an interpolated
+variable that it contains changes.  You can force Perl to skip the
+test and never recompile by adding a <code>/o</code> (which stands for &quot;once&quot;)
+after the trailing delimiter.
+Once upon a time, Perl would recompile regular expressions
+unnecessarily, and this modifier was useful to tell it not to do so, in the
+interests of speed.  But now, the only reasons to use <code>/o</code> are one of:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">1</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The variables are thousands of characters long and you know that they
+don't change, and you need to wring out the last little bit of speed by
+having Perl skip testing for that.  (There is a maintenance penalty for
+doing this, as mentioning <code>/o</code> constitutes a promise that you won't
+change the variables in the pattern.  If you do change them, Perl won't
+even notice.)</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">2</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">you want the pattern to use the initial values of the variables
+regardless of whether they change or not.  (But there are saner ways
+of accomplishing this than using <code>/o</code>.)</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">3</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">If the pattern contains embedded code, such as</p>
+<div style="padding-bottom: 10px;"><pre><code>    use re 'eval';
+    $code = 'foo(?{ $x })';
+    /$code/</code></pre></div>
+<p style="padding-bottom: 10px;">then perl will recompile each time, even though the pattern string hasn't
+changed, to ensure that the current value of <code>$x</code> is seen each time.
+Use <code>/o</code> if you want to avoid this.</p></dd></dl>
+<p style="padding-bottom: 10px;">The bottom line is that using <code>/o</code> is almost never a good idea.</p></dd></dl>

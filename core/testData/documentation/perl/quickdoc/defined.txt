@@ -1,0 +1,54 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">defined EXPR
+  </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">defined</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns a Boolean value telling whether EXPR has a value other than the
+undefined value <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.  If EXPR is not present,
+<a href="psi_element://perlvar%2F%24_">C<$_></a> is checked.</p>
+<p style="padding-bottom: 10px;">Many operations return <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> to indicate failure, end
+of file, system error, uninitialized variable, and other exceptional
+conditions.  This function allows you to distinguish
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> from other values.  (A simple Boolean test will
+not distinguish among <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>, zero, the empty string,
+and <code>&quot;0&quot;</code>, which are all equally false.)  Note that since
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> is a valid scalar, its presence doesn't
+<i>necessarily</i> indicate an exceptional condition: <a href="psi_element://pod%3A%3Aperlfunc%2Fpop+ARRAY">C<pop></a>
+returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> when its argument is an empty array,
+<i>or</i> when the element to return happens to be <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.</p>
+<p style="padding-bottom: 10px;">You may also use <code>defined(&amp;func)</code> to check whether subroutine <code>func</code>
+has ever been defined.  The return value is unaffected by any forward
+declarations of <code>func</code>.  A subroutine that is not defined
+may still be callable: its package may have an <code>AUTOLOAD</code> method that
+makes it spring into existence the first time that it is called; see
+<a href="psi_element://perlsub">perlsub</a>.</p>
+<p style="padding-bottom: 10px;">Use of <a href="psi_element://pod%3A%3Aperlfunc%2Fdefined+EXPR">C<defined></a> on aggregates (hashes and arrays) is
+deprecated.  It
+used to report whether memory for that aggregate had ever been
+allocated.  This behavior may disappear in future versions of Perl.
+You should instead use a simple test for size:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (@an_array) { print &quot;has array elements\n&quot; }
+    if (%a_hash)   { print &quot;has hash members\n&quot;   }</code></pre></div>
+<p style="padding-bottom: 10px;">When used on a hash element, it tells you whether the value is defined,
+not whether the key exists in the hash.  Use <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a>
+for the latter purpose.</p>
+<p style="padding-bottom: 10px;">Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print if defined $switch{D};
+    print &quot;$val\n&quot; while defined($val = pop(@ary));
+    die &quot;Can't readlink $sym: $!&quot;
+        unless defined($value = readlink $sym);
+    sub foo { defined &amp;$bar ? $bar-&gt;(@_) : die &quot;No bar&quot;; }
+    $debugging = 0 unless defined $debugging;</code></pre></div>
+<p style="padding-bottom: 10px;">Note:  Many folks tend to overuse <a href="psi_element://pod%3A%3Aperlfunc%2Fdefined+EXPR">C<defined></a> and are
+then surprised to discover that the number <code>0</code> and <code>&quot;&quot;</code> (the
+zero-length string) are, in fact, defined values.  For example, if you
+say</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;ab&quot; =~ /a(.*)b/;</code></pre></div>
+<p style="padding-bottom: 10px;">The pattern match succeeds and <code>$1</code> is defined, although it
+matched &quot;nothing&quot;.  It didn't really fail to match anything.  Rather, it
+matched something that happened to be zero characters long.  This is all
+very above-board and honest.  When a function returns an undefined value,
+it's an admission that it couldn't give you an honest answer.  So you
+should use <a href="psi_element://pod%3A%3Aperlfunc%2Fdefined+EXPR">C<defined></a> only when questioning the
+integrity of what you're trying to do.  At other times, a simple
+comparison to <code>0</code> or <code>&quot;&quot;</code> is what you want.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fref+EXPR">C<ref></a>.</p></dd></dl>

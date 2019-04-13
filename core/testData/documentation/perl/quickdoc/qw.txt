@@ -1,0 +1,241 @@
+<p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a></p><h2>Quote and Quote-like Operators
+      
+          
+ </h2><p style="padding-bottom: 10px;">While we usually think of quotes as literal values, in Perl they
+function as operators, providing various kinds of interpolating and
+pattern matching capabilities.  Perl provides customary quote characters
+for these behaviors, but also provides a way for you to choose your
+quote character for any of them.  In the following table, a <code>{}</code> represents
+any pair of delimiters you choose.</p>
+<div style="padding-bottom: 10px;"><pre><code>    Customary  Generic        Meaning	     Interpolates
+	''	 q{}	      Literal		  no
+	&quot;&quot;	qq{}	      Literal		  yes
+	``	qx{}	      Command		  yes*
+		qw{}	     Word list		  no
+	//	 m{}	   Pattern match	  yes*
+		qr{}	      Pattern		  yes*
+		 s{}{}	    Substitution	  yes*
+		tr{}{}	  Transliteration	  no (but see below)
+		 y{}{}	  Transliteration	  no (but see below)
+        &lt;&lt;EOF                 here-doc            yes*
+
+	* unless the delimiter is ''.</code></pre></div>
+<p style="padding-bottom: 10px;">Non-bracketing delimiters use the same character fore and aft, but the four
+sorts of ASCII brackets (round, angle, square, curly) all nest, which means
+that</p>
+<div style="padding-bottom: 10px;"><pre><code>    q{foo{bar}baz}</code></pre></div>
+<p style="padding-bottom: 10px;">is the same as</p>
+<div style="padding-bottom: 10px;"><pre><code>    'foo{bar}baz'</code></pre></div>
+<p style="padding-bottom: 10px;">Note, however, that this does not always work for quoting Perl code:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $s = q{ if($x eq &quot;}&quot;) ... }; # WRONG</code></pre></div>
+<p style="padding-bottom: 10px;">is a syntax error.  The <code><a href="psi_element://Text%3A%3ABalanced" style="color:red">Text::Balanced</a></code> module (standard as of v5.8,
+and from CPAN before then) is able to do this properly.</p>
+<p style="padding-bottom: 10px;">There can be whitespace between the operator and the quoting
+characters, except when <code>#</code> is being used as the quoting character.
+<code>q#foo#</code> is parsed as the string <code>foo</code>, while <span style="white-space: nowrap;"><code>q #foo#</code></span> is the
+operator <code>q</code> followed by a comment.  Its argument will be taken
+from the next line.  This allows you to write:</p>
+<div style="padding-bottom: 10px;"><pre><code>    s {foo}  # Replace foo
+      {bar}  # with bar.</code></pre></div>
+<p style="padding-bottom: 10px;">The following escape sequences are available in constructs that interpolate,
+and in transliterations:
+           </p>
+<div style="padding-bottom: 10px;"><pre><code>    Sequence     Note  Description
+    \t                  tab               (HT, TAB)
+    \n                  newline           (NL)
+    \r                  return            (CR)
+    \f                  form feed         (FF)
+    \b                  backspace         (BS)
+    \a                  alarm (bell)      (BEL)
+    \e                  escape            (ESC)
+    \x{263A}     [1,8]  hex char          (example: SMILEY)
+    \x1b         [2,8]  restricted range hex char (example: ESC)
+    \N{name}     [3]    named Unicode character or character sequence
+    \N{U+263D}   [4,8]  Unicode character (example: FIRST QUARTER MOON)
+    \c[          [5]    control char      (example: chr(27))
+    \o{23072}    [6,8]  octal char        (example: SMILEY)
+    \033         [7,8]  restricted range octal char  (example: ESC)</code></pre></div>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">[1]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the hexadecimal number between
+the braces.  See <a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+<p style="padding-bottom: 10px;">Only hexadecimal digits are valid between the braces.  If an invalid
+character is encountered, a warning will be issued and the invalid
+character and all subsequent characters (valid or invalid) within the
+braces will be discarded.</p>
+<p style="padding-bottom: 10px;">If there are no valid digits between the braces, the generated character is
+the NULL character (<code>\x{00}</code>).  However, an explicit empty brace (<code>\x{}</code>)
+will not cause a warning (currently).</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[2]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the hexadecimal number in the range
+0x00 to 0xFF.  See <a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+<p style="padding-bottom: 10px;">Only hexadecimal digits are valid following <code>\x</code>.  When <code>\x</code> is followed
+by fewer than two valid digits, any valid digits will be zero-padded.  This
+means that <code>\x7</code> will be interpreted as <code>\x07</code>, and a lone <code>&quot;\x&quot;</code> will be
+interpreted as <code>\x00</code>.  Except at the end of a string, having fewer than
+two valid digits will result in a warning.  Note that although the warning
+says the illegal character is ignored, it is only ignored as part of the
+escape and will still be used as the subsequent character in the string.
+For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>  Original    Result    Warns?
+  &quot;\x7&quot;       &quot;\x07&quot;    no
+  &quot;\x&quot;        &quot;\x00&quot;    no
+  &quot;\x7q&quot;      &quot;\x07q&quot;   yes
+  &quot;\xq&quot;       &quot;\x00q&quot;   yes</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[3]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the Unicode character or character sequence given by <i>name</i>.
+See <a href="psi_element://charnames" style="color:red">charnames</a>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[4]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;"><span style="white-space: nowrap;"><code>\N{U+<i>hexadecimal number</i>}</code></span> means the Unicode character whose Unicode code
+point is <i>hexadecimal number</i>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[5]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The character following <code>\c</code> is mapped to some other character as shown in the
+table:</p>
+<div style="padding-bottom: 10px;"><pre><code> Sequence   Value
+   \c@      chr(0)
+   \cA      chr(1)
+   \ca      chr(1)
+   \cB      chr(2)
+   \cb      chr(2)
+   ...
+   \cZ      chr(26)
+   \cz      chr(26)
+   \c[      chr(27)
+                     # See below for chr(28)
+   \c]      chr(29)
+   \c^      chr(30)
+   \c_      chr(31)
+   \c?      chr(127) # (on ASCII platforms; see below for link to
+                     #  EBCDIC discussion)</code></pre></div>
+<p style="padding-bottom: 10px;">In other words, it's the character whose code point has had 64 xor'd with
+its uppercase.  <code>\c?</code> is DELETE on ASCII platforms because
+<span style="white-space: nowrap;"><code>ord(&quot;?&quot;) ^ 64</code></span> is 127, and
+<code>\c@</code> is NULL because the ord of <code>&quot;@&quot;</code> is 64, so xor'ing 64 itself produces 0.</p>
+<p style="padding-bottom: 10px;">Also, <code>\c\<i>X</i></code> yields <span style="white-space: nowrap;"><code>chr(28) . &quot;<i>X</i>&quot;</code></span> for any <i>X</i>, but cannot come at the
+end of a string, because the backslash would be parsed as escaping the end
+quote.</p>
+<p style="padding-bottom: 10px;">On ASCII platforms, the resulting characters from the list above are the
+complete set of ASCII controls.  This isn't the case on EBCDIC platforms; see
+<a href="psi_element://perlebcdic%2FOPERATOR+DIFFERENCES">OPERATOR DIFFERENCES in perlebcdic</a> for a full discussion of the
+differences between these for ASCII versus EBCDIC platforms.</p>
+<p style="padding-bottom: 10px;">Use of any other character following the <code>&quot;c&quot;</code> besides those listed above is
+discouraged, and as of Perl v5.20, the only characters actually allowed
+are the printable ASCII ones, minus the left brace <code>&quot;{&quot;</code>.  What happens
+for any of the allowed other characters is that the value is derived by
+xor'ing with the seventh bit, which is 64, and a warning raised if
+enabled.  Using the non-allowed characters generates a fatal error.</p>
+<p style="padding-bottom: 10px;">To get platform independent controls, you can use <code>\N{...}</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[6]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the octal number between the braces.
+See <a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+<p style="padding-bottom: 10px;">If a character that isn't an octal digit is encountered, a warning is raised,
+and the value is based on the octal digits before it, discarding it and all
+following characters up to the closing brace.  It is a fatal error if there are
+no octal digits at all.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[7]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result is the character specified by the three-digit octal number in the
+range 000 to 777 (but best to not use above 077, see next paragraph).  See
+<a href="psi_element://pod%3A%3Aperlop%2F%5B8%5D">[8]</a> below for details on which character.</p>
+<p style="padding-bottom: 10px;">Some contexts allow 2 or even 1 digit, but any usage without exactly
+three digits, the first being a zero, may give unintended results.  (For
+example, in a regular expression it may be confused with a backreference;
+see <a href="psi_element://perlrebackslash%2FOctal+escapes">Octal escapes in perlrebackslash</a>.)  Starting in Perl 5.14, you may
+use <code>\o{}</code> instead, which avoids all these problems.  Otherwise, it is best to
+use this construct only for ordinals <code>\077</code> and below, remembering to pad to
+the left with zeros to make three digits.  For larger ordinals, either use
+<code>\o{}</code>, or convert to something else, such as to hex and use <code>\N{U+}</code>
+(which is portable between platforms with different character sets) or
+<code>\x{}</code> instead.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">[8]</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Several constructs above specify a character by a number.  That number
+gives the character's position in the character set encoding (indexed from 0).
+This is called synonymously its ordinal, code position, or code point.  Perl
+works on platforms that have a native encoding currently of either ASCII/Latin1
+or EBCDIC, each of which allow specification of 256 characters.  In general, if
+the number is 255 (0xFF, 0377) or below, Perl interprets this in the platform's
+native encoding.  If the number is 256 (0x100, 0400) or above, Perl interprets
+it as a Unicode code point and the result is the corresponding Unicode
+character.  For example <code>\x{50}</code> and <code>\o{120}</code> both are the number 80 in
+decimal, which is less than 256, so the number is interpreted in the native
+character set encoding.  In ASCII the character in the 80th position (indexed
+from 0) is the letter <code>&quot;P&quot;</code>, and in EBCDIC it is the ampersand symbol <code>&quot;&amp;&quot;</code>.
+<code>\x{100}</code> and <code>\o{400}</code> are both 256 in decimal, so the number is interpreted
+as a Unicode code point no matter what the native encoding is.  The name of the
+character in the 256th position (indexed by 0) in Unicode is
+<code>LATIN CAPITAL LETTER A WITH MACRON</code>.</p>
+<p style="padding-bottom: 10px;">There are a couple of exceptions to the above rule.  <span style="white-space: nowrap;"><code>\N{U+<i>hex number</i>}</code></span> is
+always interpreted as a Unicode code point, so that <code>\N{U+0050}</code> is <code>&quot;P&quot;</code> even
+on EBCDIC platforms.  And if <code><span style="white-space: nowrap;"><a href="psi_element://encoding" style="color:red">use encoding</a></span></code> is in effect, the
+number is considered to be in that encoding, and is translated from that into
+the platform's native encoding if there is a corresponding native character;
+otherwise to Unicode.</p></dd></dl>
+<p style="padding-bottom: 10px;"><B>NOTE</B>: Unlike C and other languages, Perl has no <code>\v</code> escape sequence for
+the vertical tab (VT, which is 11 in both ASCII and EBCDIC), but you may
+use <code>\N{VT}</code>, <code>\ck</code>, <code>\N{U+0b}</code>, or <code>\x0b</code>.  (<code>\v</code>
+does have meaning in regular expression patterns in Perl, see <a href="psi_element://perlre">perlre</a>.)</p>
+<p style="padding-bottom: 10px;">The following escape sequences are available in constructs that interpolate,
+but not in transliterations.
+      </p>
+<div style="padding-bottom: 10px;"><pre><code>    \l		lowercase next character only
+    \u		titlecase (not uppercase!) next character only
+    \L		lowercase all characters till \E or end of string
+    \U		uppercase all characters till \E or end of string
+    \F		foldcase all characters till \E or end of string
+    \Q          quote (disable) pattern metacharacters till \E or
+                end of string
+    \E		end either case modification or quoted section
+		(whichever was last seen)</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlfunc%2Fquotemeta">quotemeta in perlfunc</a> for the exact definition of characters that
+are quoted by <code>\Q</code>.</p>
+<p style="padding-bottom: 10px;"><code>\L</code>, <code>\U</code>, <code>\F</code>, and <code>\Q</code> can stack, in which case you need one
+<code>\E</code> for each.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code> say&quot;This \Qquoting \ubusiness \Uhere isn't quite\E done yet,\E is it?&quot;;
+ This quoting\ Business\ HERE\ ISN\'T\ QUITE\ done\ yet\, is it?</code></pre></div>
+<p style="padding-bottom: 10px;">If a <span style="white-space: nowrap;"><code>use locale</code></span> form that includes <code>LC_CTYPE</code> is in effect (see
+<a href="psi_element://perllocale">perllocale</a>), the case map used by <code>\l</code>, <code>\L</code>, <code>\u</code>, and <code>\U</code> is
+taken from the current locale.  If Unicode (for example, <code>\N{}</code> or code
+points of 0x100 or beyond) is being used, the case map used by <code>\l</code>,
+<code>\L</code>, <code>\u</code>, and <code>\U</code> is as defined by Unicode.  That means that
+case-mapping a single character can sometimes produce a sequence of
+several characters.
+Under <span style="white-space: nowrap;"><code>use locale</code></span>, <code>\F</code> produces the same results as <code>\L</code>
+for all locales but a UTF-8 one, where it instead uses the Unicode
+definition.</p>
+<p style="padding-bottom: 10px;">All systems use the virtual <code>&quot;\n&quot;</code> to represent a line terminator,
+called a &quot;newline&quot;.  There is no such thing as an unvarying, physical
+newline character.  It is only an illusion that the operating system,
+device drivers, C libraries, and Perl all conspire to preserve.  Not all
+systems read <code>&quot;\r&quot;</code> as ASCII CR and <code>&quot;\n&quot;</code> as ASCII LF.  For example,
+on the ancient Macs (pre-MacOS X) of yesteryear, these used to be reversed,
+and on systems without a line terminator,
+printing <code>&quot;\n&quot;</code> might emit no actual data.  In general, use <code>&quot;\n&quot;</code> when
+you mean a &quot;newline&quot; for your system, but use the literal ASCII when you
+need an exact character.  For example, most networking protocols expect
+and prefer a CR+LF (<code>&quot;\015\012&quot;</code> or <code>&quot;\cM\cJ&quot;</code>) for line terminators,
+and although they often accept just <code>&quot;\012&quot;</code>, they seldom tolerate just
+<code>&quot;\015&quot;</code>.  If you get in the habit of using <code>&quot;\n&quot;</code> for networking,
+you may be burned some day.
+   
+  </p>
+<p style="padding-bottom: 10px;">For constructs that do interpolate, variables beginning with &quot;<code>$</code>&quot;
+or &quot;<code>@</code>&quot; are interpolated.  Subscripted variables such as <code>$a[3]</code> or
+<code>$href-&gt;{key}[0]</code> are also interpolated, as are array and hash slices.
+But method calls such as <code>$obj-&gt;meth</code> are not.</p>
+<p style="padding-bottom: 10px;">Interpolating an array or slice interpolates the elements in order,
+separated by the value of <code>$&quot;</code>, so is equivalent to interpolating
+<span style="white-space: nowrap;"><code>join $&quot;, @array</code></span>.  &quot;Punctuation&quot; arrays such as <code>@*</code> are usually
+interpolated only if the name is enclosed in braces <code>@{*}</code>, but the
+arrays <code>@_</code>, <code>@+</code>, and <code>@-</code> are interpolated even without braces.</p>
+<p style="padding-bottom: 10px;">For double-quoted strings, the quoting from <code>\Q</code> is applied after
+interpolation and escapes are processed.</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;abc\Qfoo\tbar$s\Exyz&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">is equivalent to</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;abc&quot; . quotemeta(&quot;foo\tbar$s&quot;) . &quot;xyz&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">For the pattern of regex operators (<code>qr//</code>, <code>m//</code> and <code>s///</code>),
+the quoting from <code>\Q</code> is applied after interpolation is processed,
+but before escapes are processed.  This allows the pattern to match
+literally (except for <code>$</code> and <code>@</code>).  For example, the following matches:</p>
+<div style="padding-bottom: 10px;"><pre><code>    '\s\t' =~ /\Q\s\t/</code></pre></div>
+<p style="padding-bottom: 10px;">Because <code>$</code> or <code>@</code> trigger interpolation, you'll need to use something
+like <code>/\Quser\E\@\Qhost/</code> to match them literally.</p>
+<p style="padding-bottom: 10px;">Patterns are subject to an additional level of interpretation as a
+regular expression.  This is done as a second pass, after variables are
+interpolated, so that regular expressions may be incorporated into the
+pattern from the variables.  If this is not what you want, use <code>\Q</code> to
+interpolate a variable literally.</p>
+<p style="padding-bottom: 10px;">Apart from the behavior described above, Perl does not expand
+multiple levels of interpolation.  In particular, contrary to the
+expectations of shell programmers, back-quotes do <i>NOT</i> interpolate
+within double quotes, nor do single quotes impede evaluation of
+variables when used within double quotes.</p>
