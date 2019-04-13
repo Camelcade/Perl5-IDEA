@@ -55,13 +55,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.perl5.lang.perl.lexer.PerlTokenSets.MODIFIERS_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocUtil implements PerlElementTypes {
   private static final String MODIFIERS_DOC_LINK = "perlsyn/\"Statement Modifiers\"";
+  private static final String SWITCH_DOC_LINK = "perlsyn/\"Switch Statements\"";
+  private static final String COMPOUND_DOC_LINK = "perlsyn/\"Compound Statements\"";
 
   private static final Map<String, String> KEYWORDS_LINKS = new THashMap<>();
   private static final Map<String, String> OPERATORS_LINKS = new THashMap<>();
@@ -80,19 +82,6 @@ public class PerlDocUtil implements PerlElementTypes {
     KEYWORDS_LINKS.put("DESTROY", "perlobj/\"Destructors\"");
 
     KEYWORDS_LINKS.put(PerlSubUtil.SUB_AUTOLOAD, "perlsub/\"Autoloading\"");
-
-    KEYWORDS_LINKS.put("default", "perlsyn/\"Switch Statements\"");
-    KEYWORDS_LINKS.put("given", "perlsyn/\"Switch Statements\"");
-    KEYWORDS_LINKS.put("when", "perlsyn/\"Switch Statements\"");
-
-    KEYWORDS_LINKS.put("else", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("elsif", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("for", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("foreach", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("if", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("unless", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("until", "perlsyn/\"Compound Statements\"");
-    KEYWORDS_LINKS.put("while", "perlsyn/\"Compound Statements\"");
 
     OPERATORS_LINKS.put("~~", "perlop/\"Smartmatch Operator\"");
     OPERATORS_LINKS.put("qr", "perlop/\"qr/STRING/\"");
@@ -191,8 +180,14 @@ public class PerlDocUtil implements PerlElementTypes {
   @Nullable
   public static PsiElement getPerlFuncDoc(PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
-    if (MODIFIERS_TOKENSET.contains(elementType) && element.getParent() instanceof PsiPerlStatementModifier) {
+    if (MODIFIERS_KEYWORDS_TOKENSET.contains(elementType) && element.getParent() instanceof PsiPerlStatementModifier) {
       return resolveDocLink(MODIFIERS_DOC_LINK, element);
+    }
+    else if (SWITCH_KEYWORDS_TOKENSET.contains(elementType)) {
+      return resolveDocLink(SWITCH_DOC_LINK, element);
+    }
+    else if (COMPOUND_KEYWORDS_TOKENSET.contains(elementType)) {
+      return resolveDocLink(COMPOUND_DOC_LINK, element);
     }
 
     final Project project = element.getProject();

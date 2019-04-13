@@ -1,0 +1,85 @@
+<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Compound Statements
+    
+         </h2><p style="padding-bottom: 10px;">In Perl, a sequence of statements that defines a scope is called a block.
+Sometimes a block is delimited by the file containing it (in the case
+of a required file, or the program as a whole), and sometimes a block
+is delimited by the extent of a string (in the case of an eval).</p>
+<p style="padding-bottom: 10px;">But generally, a block is delimited by curly brackets, also known as braces.
+We will call this syntactic construct a BLOCK.</p>
+<p style="padding-bottom: 10px;">The following compound statements may be used to control flow:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (EXPR) BLOCK
+    if (EXPR) BLOCK else BLOCK
+    if (EXPR) BLOCK elsif (EXPR) BLOCK ...
+    if (EXPR) BLOCK elsif (EXPR) BLOCK ... else BLOCK
+
+    unless (EXPR) BLOCK
+    unless (EXPR) BLOCK else BLOCK
+    unless (EXPR) BLOCK elsif (EXPR) BLOCK ...
+    unless (EXPR) BLOCK elsif (EXPR) BLOCK ... else BLOCK
+
+    given (EXPR) BLOCK
+
+    LABEL while (EXPR) BLOCK
+    LABEL while (EXPR) BLOCK continue BLOCK
+
+    LABEL until (EXPR) BLOCK
+    LABEL until (EXPR) BLOCK continue BLOCK
+
+    LABEL for (EXPR; EXPR; EXPR) BLOCK
+    LABEL for VAR (LIST) BLOCK
+    LABEL for VAR (LIST) BLOCK continue BLOCK
+
+    LABEL foreach (EXPR; EXPR; EXPR) BLOCK
+    LABEL foreach VAR (LIST) BLOCK
+    LABEL foreach VAR (LIST) BLOCK continue BLOCK
+
+    LABEL BLOCK
+    LABEL BLOCK continue BLOCK
+
+    PHASE BLOCK</code></pre></div>
+<p style="padding-bottom: 10px;">The experimental <code>given</code> statement is <i>not automatically enabled</i>; see
+<a href="psi_element://pod%3A%3Aperlsyn%2FSwitch+Statements">Switch Statements</a> below for how to do so, and the attendant caveats.</p>
+<p style="padding-bottom: 10px;">Unlike in C and Pascal, in Perl these are all defined in terms of BLOCKs,
+not statements.  This means that the curly brackets are <i>required</i>--no
+dangling statements allowed.  If you want to write conditionals without
+curly brackets, there are several other ways to do it.  The following
+all do the same thing:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (!open(FOO)) { die &quot;Can't open $FOO: $!&quot; }
+    die &quot;Can't open $FOO: $!&quot; unless open(FOO);
+    open(FOO)  || die &quot;Can't open $FOO: $!&quot;;
+    open(FOO) ? () : die &quot;Can't open $FOO: $!&quot;;
+        # a bit exotic, that last one</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>if</code> statement is straightforward.  Because BLOCKs are always
+bounded by curly brackets, there is never any ambiguity about which
+<code>if</code> an <code>else</code> goes with.  If you use <code>unless</code> in place of <code>if</code>,
+the sense of the test is reversed.  Like <code>if</code>, <code>unless</code> can be followed
+by <code>else</code>.  <code>unless</code> can even be followed by one or more <code>elsif</code>
+statements, though you may want to think twice before using that particular
+language construct, as everyone reading your code will have to think at least
+twice before they can understand what's going on.</p>
+<p style="padding-bottom: 10px;">The <code>while</code> statement executes the block as long as the expression is
+<a href="psi_element://pod%3A%3Aperlsyn%2FTruth+and+Falsehood">true</a>.
+The <code>until</code> statement executes the block as long as the expression is
+false.
+The LABEL is optional, and if present, consists of an identifier followed
+by a colon.  The LABEL identifies the loop for the loop control
+statements <code>next</code>, <code>last</code>, and <code>redo</code>.
+If the LABEL is omitted, the loop control statement
+refers to the innermost enclosing loop.  This may include dynamically
+looking back your call-stack at run time to find the LABEL.  Such
+desperate behavior triggers a warning if you use the <code>use warnings</code>
+pragma or the <B>-w</B> flag.</p>
+<p style="padding-bottom: 10px;">If there is a <code>continue</code> BLOCK, it is always executed just before the
+conditional is about to be evaluated again.  Thus it can be used to
+increment a loop variable, even when the loop has been continued via
+the <code>next</code> statement.</p>
+<p style="padding-bottom: 10px;">When a block is preceding by a compilation phase keyword such as <code>BEGIN</code>,
+<code>END</code>, <code>INIT</code>, <code>CHECK</code>, or <code>UNITCHECK</code>, then the block will run only
+during the corresponding phase of execution.  See <a href="psi_element://perlmod">perlmod</a> for more details.</p>
+<p style="padding-bottom: 10px;">Extension modules can also hook into the Perl parser to define new
+kinds of compound statements.  These are introduced by a keyword which
+the extension recognizes, and the syntax following the keyword is
+defined entirely by the extension.  If you are an implementor, see
+<a href="psi_element://perlapi%2FPL_keyword_plugin">PL_keyword_plugin in perlapi</a> for the mechanism.  If you are using such
+a module, see the module's documentation for details of the syntax that
+it defines.</p>

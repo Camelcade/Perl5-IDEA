@@ -32,6 +32,32 @@ public class PerlQuickDocTest extends PerlLightTestCase {
     return "testData/documentation/perl/quickdoc";
   }
 
+  public void testGivenCompound() {doTest();}
+
+  public void testWhenCompound() {doTest();}
+
+  public void testDefaultCompound() {doTest();}
+
+  public void testElseCompound() {doTest();}
+
+  public void testElsifCompound() {doTest();}
+
+  public void testForeachIdexedCompound() {doTest();}
+
+  public void testForeachIterateCompound() {doTest();}
+
+  public void testForIdexedCompound() {doTest();}
+
+  public void testForIterateCompound() {doTest();}
+
+  public void testIfCompound() {doTest();}
+
+  public void testUnlessCompound() {doTest();}
+
+  public void testUntilCompound() {doTest();}
+
+  public void testWhileCompound() {doTest();}
+
   public void testIfModifier() {doTest();}
 
   public void testUnlessModifier() {doTest();}

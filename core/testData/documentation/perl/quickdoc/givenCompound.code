@@ -1,0 +1,6 @@
+ g<caret>iven ($var) {
+        when (/^abc/) { $abc = 1 }
+        when (/^def/) { $def = 1 }
+        when (/^xyz/) { $xyz = 1 }
+        default       { $nothing = 1 }
+    }

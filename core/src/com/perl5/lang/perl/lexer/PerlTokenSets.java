@@ -158,7 +158,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_WANTARRAY
   );
 
-  TokenSet MODIFIERS_TOKENSET = TokenSet.create(
+  TokenSet MODIFIERS_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_IF,
     RESERVED_UNTIL,
     RESERVED_UNLESS,
@@ -168,18 +168,30 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_WHILE
   );
 
+  TokenSet COMPOUND_KEYWORDS_TOKENSET = TokenSet.orSet(
+    MODIFIERS_KEYWORDS_TOKENSET,
+    TokenSet.create(
+      RESERVED_ELSIF,
+      RESERVED_ELSE,
+      RESERVED_GIVEN
+    )
+  );
+
+  TokenSet SWITCH_KEYWORDS_TOKENSET = TokenSet.create(
+    RESERVED_GIVEN, RESERVED_WHEN, RESERVED_DEFAULT
+  );
+
   TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.orSet(
     ALL_QUOTE_OPENERS,
     CUSTOM_EXPR_KEYWORDS,
-    MODIFIERS_TOKENSET,
+    COMPOUND_KEYWORDS_TOKENSET,
+    MODIFIERS_KEYWORDS_TOKENSET,
+    SWITCH_KEYWORDS_TOKENSET,
     TokenSet.create(
       RESERVED_MY,
       RESERVED_OUR,
       RESERVED_STATE,
       RESERVED_LOCAL,
-      RESERVED_ELSIF,
-      RESERVED_ELSE,
-      RESERVED_GIVEN,
       RESERVED_DEFAULT,
       RESERVED_CONTINUE,
       RESERVED_FORMAT,

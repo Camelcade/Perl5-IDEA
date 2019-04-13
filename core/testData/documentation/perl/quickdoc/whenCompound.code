@@ -1,0 +1,6 @@
+ given ($var) {
+        wh<caret>en (/^abc/) { $abc = 1 }
+        when (/^def/) { $def = 1 }
+        when (/^xyz/) { $xyz = 1 }
+        default       { $nothing = 1 }
+    }

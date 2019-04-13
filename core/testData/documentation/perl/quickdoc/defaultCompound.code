@@ -1,0 +1,6 @@
+ given ($var) {
+        when (/^abc/) { $abc = 1 }
+        when (/^def/) { $def = 1 }
+        when (/^xyz/) { $xyz = 1 }
+        def<caret>ault       { $nothing = 1 }
+    }

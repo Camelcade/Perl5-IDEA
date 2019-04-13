@@ -1,0 +1,69 @@
+<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Switch Statements</h2><p style="padding-bottom: 10px;">    </p>
+<p style="padding-bottom: 10px;">Starting from Perl 5.10.1 (well, 5.10.0, but it didn't work
+right), you can say</p>
+<div style="padding-bottom: 10px;"><pre><code>    use feature &quot;switch&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">to enable an experimental switch feature.  This is loosely based on an
+old version of a Perl 6 proposal, but it no longer resembles the Perl 6
+construct.   You also get the switch feature whenever you declare that your
+code prefers to run under a version of Perl that is 5.10 or later.  For
+example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.14;</code></pre></div>
+<p style="padding-bottom: 10px;">Under the &quot;switch&quot; feature, Perl gains the experimental keywords
+<code>given</code>, <code>when</code>, <code>default</code>, <code>continue</code>, and <code>break</code>.
+Starting from Perl 5.16, one can prefix the switch
+keywords with <code>CORE::</code> to access the feature without a <code>use feature</code>
+statement.  The keywords <code>given</code> and
+<code>when</code> are analogous to <code>switch</code> and
+<code>case</code> in other languages, so the code in the previous section could be
+rewritten as</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.10.1;
+    for ($var) {
+        when (/^abc/) { $abc = 1 }
+        when (/^def/) { $def = 1 }
+        when (/^xyz/) { $xyz = 1 }
+        default       { $nothing = 1 }
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>foreach</code> is the non-experimental way to set a topicalizer.
+If you wish to use the highly experimental <code>given</code>, that could be
+written like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.10.1;
+    given ($var) {
+        when (/^abc/) { $abc = 1 }
+        when (/^def/) { $def = 1 }
+        when (/^xyz/) { $xyz = 1 }
+        default       { $nothing = 1 }
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">As of 5.14, that can also be written this way:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.14;
+    for ($var) {
+        $abc = 1 when /^abc/;
+        $def = 1 when /^def/;
+        $xyz = 1 when /^xyz/;
+        default { $nothing = 1 }
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Or if you don't care to play it safe, like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.14;
+    given ($var) {
+        $abc = 1 when /^abc/;
+        $def = 1 when /^def/;
+        $xyz = 1 when /^xyz/;
+        default { $nothing = 1 }
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">The arguments to <code>given</code> and <code>when</code> are in scalar context,
+and <code>given</code> assigns the <code>$_</code> variable its topic value.</p>
+<p style="padding-bottom: 10px;">Exactly what the <i>EXPR</i> argument to <code>when</code> does is hard to describe
+precisely, but in general, it tries to guess what you want done.  Sometimes
+it is interpreted as <code>$_ ~~ <i>EXPR</i></code>, and sometimes it is not.  It
+also behaves differently when lexically enclosed by a <code>given</code> block than
+it does when dynamically enclosed by a <code>foreach</code> loop.  The rules are far
+too difficult to understand to be described here.  See <a href="psi_element://pod%3A%3Aperlsyn%2FExperimental+Details+on+given+and+when">Experimental Details on given and when</a> later on.</p>
+<p style="padding-bottom: 10px;">Due to an unfortunate bug in how <code>given</code> was implemented between Perl 5.10
+and 5.16, under those implementations the version of <code>$_</code> governed by
+<code>given</code> is merely a lexically scoped copy of the original, not a
+dynamically scoped alias to the original, as it would be if it were a
+<code>foreach</code> or under both the original and the current Perl 6 language
+specification.  This bug was fixed in Perl 5.18 (and lexicalized <code>$_</code> itself
+was removed in Perl 5.24).</p>
+<p style="padding-bottom: 10px;">If your code still needs to run on older versions,
+stick to <code>foreach</code> for your topicalizer and
+you will be less unhappy.</p>
