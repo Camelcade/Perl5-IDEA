@@ -119,6 +119,7 @@ limitations under the License.
     RESERVED_EACH='each'
     RESERVED_KEYS='keys'
     RESERVED_VALUES='values'
+    RESERVED_DELETE='delete'
 
     RESERVED_DEFINED='defined'
     RESERVED_WANTARRAY='wantarray'

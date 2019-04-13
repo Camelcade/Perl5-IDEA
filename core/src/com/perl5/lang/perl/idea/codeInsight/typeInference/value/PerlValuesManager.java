@@ -61,6 +61,7 @@ public final class PerlValuesManager {
   static final int VALUES_ID = id++;
   static final int EACH_ID = id++;
   static final int HASH_CAST_ID = id++;
+  static final int DELETE_ID = id++;
 
   static final int REFERENCE_ID = id++;
   static final int BLESSED_ID = id++;
