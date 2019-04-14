@@ -26,7 +26,6 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -80,7 +79,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myPackageName = packageName;
     mySubDefinitionBody = elementSub.getBlock();
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(
-      () -> PerlPolyNamedNestedCallElementBase.computeSubAnnotations(delegate, nameIdentifier));
+      () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(
       () -> PerlSubDefinitionElement.getPerlSubArgumentsFromBody(mySubDefinitionBody));
     myReturnValueFromCodeProfider = AtomicNotNullLazyValue.createValue(

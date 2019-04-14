@@ -83,7 +83,7 @@ public class PerlClassAccessorWrapper extends PerlPolyNamedNestedCallElementBase
         continue;
       }
       String baseName = ElementManipulators.getValueText(listElement);
-      PerlSubAnnotations subAnnotations = computeSubAnnotations(this, listElement);
+      PerlSubAnnotations subAnnotations = PerlSubAnnotations.computeForLightElement(this, listElement);
       for (Function<String, String> computation : getNamesComputations()) {
         result.add(new PerlClassAccessorMethod(
           this,

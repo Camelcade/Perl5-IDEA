@@ -17,17 +17,11 @@
 package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNestedCall;
+import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base class for
@@ -47,27 +41,5 @@ public abstract class PerlPolyNamedNestedCallElementBase<Stub extends PerlPolyNa
   @NotNull
   public PsiPerlMethod getMethod() {
     return findNotNullChildByClass(PsiPerlMethod.class);
-  }
-
-  @Nullable
-  public static PerlSubAnnotations computeSubAnnotations(@NotNull PsiElement nestedCallElement, @NotNull PsiElement nameIdentifier) {
-    List<PsiElement> baseElements = new ArrayList<>();
-    PsiPerlStatement containingStatement = PsiTreeUtil.getParentOfType(nestedCallElement, PsiPerlStatement.class);
-    if (containingStatement != null) {
-      baseElements.add(containingStatement);
-    }
-    baseElements.add(nestedCallElement);
-
-    if (nameIdentifier instanceof PerlStringContentElement) {
-      PerlStringList perlStringList = PsiTreeUtil.getParentOfType(nameIdentifier, PerlStringList.class);
-      if (perlStringList != null) {
-        baseElements.add(perlStringList);
-      }
-    }
-    else {
-      baseElements.add(nameIdentifier);
-    }
-
-    return PerlSubAnnotations.tryToFindAnnotations(baseElements);
   }
 }

@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.*;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -179,5 +181,27 @@ public class PerlSubAnnotations {
     }
 
     return result;
+  }
+
+  @Nullable
+  public static PerlSubAnnotations computeForLightElement(@NotNull PsiElement delegate, @NotNull PsiElement nameIdentifier) {
+    List<PsiElement> baseElements = new ArrayList<>();
+    PsiPerlStatement containingStatement = PsiTreeUtil.getParentOfType(delegate, PsiPerlStatement.class);
+    if (containingStatement != null) {
+      baseElements.add(containingStatement);
+    }
+    baseElements.add(delegate);
+
+    if (nameIdentifier instanceof PerlStringContentElement) {
+      PerlStringList perlStringList = PsiTreeUtil.getParentOfType(nameIdentifier, PerlStringList.class);
+      if (perlStringList != null) {
+        baseElements.add(perlStringList);
+      }
+    }
+    else {
+      baseElements.add(nameIdentifier);
+    }
+
+    return tryToFindAnnotations(baseElements);
   }
 }
