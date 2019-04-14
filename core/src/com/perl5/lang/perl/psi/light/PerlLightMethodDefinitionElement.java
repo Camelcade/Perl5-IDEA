@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
@@ -31,6 +32,17 @@ import javax.swing.*;
 import java.util.List;
 
 public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElement> extends PerlLightSubDefinitionElement<Delegate> {
+
+  public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
+                                          @NotNull String name,
+                                          @NotNull IStubElementType elementType,
+                                          @NotNull PsiElement nameIdentifier,
+                                          @Nullable String packageName,
+                                          @NotNull PerlSubExpr elementSub) {
+    super(delegate, name, elementType, nameIdentifier, packageName, elementSub);
+  }
+
+  @Deprecated
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
                                           @NotNull String subName,
                                           @NotNull IStubElementType elementType,
@@ -41,6 +53,7 @@ public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElem
     super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
   }
 
+  @Deprecated
   public PerlLightMethodDefinitionElement(@NotNull Delegate delegate,
                                           @NotNull String subName,
                                           @NotNull IStubElementType elementType,

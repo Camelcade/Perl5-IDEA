@@ -19,37 +19,22 @@ package com.perl5.lang.mojolicious.psi.impl;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.mojolicious.MojoIcons;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
+import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.List;
 
 public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<MojoHelperWrapper> {
-
   public MojoHelperDefinition(@NotNull MojoHelperWrapper wrapper,
-                              @NotNull String subName,
+                              @NotNull String name,
                               @NotNull IStubElementType elementType,
                               @NotNull PsiElement nameIdentifier,
                               @Nullable String packageName,
-                              @NotNull List<PerlSubArgument> subArguments,
-                              @Nullable PerlSubAnnotations annotations) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
-  }
-
-  public MojoHelperDefinition(@NotNull MojoHelperWrapper wrapper,
-                              @NotNull String subName,
-                              @NotNull IStubElementType elementType,
-                              @NotNull PsiElement nameIdentifier,
-                              @Nullable String packageName,
-                              @NotNull List<PerlSubArgument> subArguments,
-                              @Nullable PerlSubAnnotations annotations, @Nullable PsiPerlBlock subDefinitionBody) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, subDefinitionBody);
+                              @NotNull PerlSubExpr elementSub) {
+    super(wrapper, name, elementType, nameIdentifier, packageName, elementSub);
   }
 
   public MojoHelperDefinition(@NotNull MojoHelperWrapper wrapper,

@@ -50,7 +50,7 @@ public abstract class PerlPolyNamedNestedCallElementBase<Stub extends PerlPolyNa
   }
 
   @Nullable
-  protected PerlSubAnnotations computeSubAnnotations(@NotNull PsiElement nestedCallElement, @NotNull PsiElement nameIdentifier) {
+  public static PerlSubAnnotations computeSubAnnotations(@NotNull PsiElement nestedCallElement, @NotNull PsiElement nameIdentifier) {
     List<PsiElement> baseElements = new ArrayList<>();
     PsiPerlStatement containingStatement = PsiTreeUtil.getParentOfType(nestedCallElement, PsiPerlStatement.class);
     if (containingStatement != null) {

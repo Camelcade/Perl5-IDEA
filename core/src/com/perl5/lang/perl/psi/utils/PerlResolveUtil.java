@@ -286,4 +286,28 @@ public class PerlResolveUtil {
 
     return valueBuilder.build();
   }
+
+  /**
+   * @return a perl value for the psi element, computed from the control flow graph
+   * @apiNote should be used for subs and subs expressions
+   */
+  @NotNull
+  public static PerlValue computeReturnValueFromControlFlow(PsiElement subElement) {
+    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(subElement).getInstructions();
+    Instruction exitInstruction = instructions[instructions.length - 1];
+    PerlControlFlowBuilder.iteratePrev(instructions, it -> {
+      if (it == exitInstruction || it.num() == 0) {
+        return NEXT;
+      }
+      PsiElement element = it.getElement();
+      if (element == null) {
+        return NEXT;
+      }
+      valueBuilder.addVariant(PerlValue.from(element));
+      return CONTINUE;
+    });
+
+    return valueBuilder.build();
+  }
 }

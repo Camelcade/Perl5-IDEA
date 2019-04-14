@@ -1,0 +1,8 @@
+$var = Mojolicious::Controller::->myhelper(
+  42,
+  foo => 'bingo',
+  some => 'thing',
+  key => 'foo'
+);
+
+$v<caret>ar;

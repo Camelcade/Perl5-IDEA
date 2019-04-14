@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public final class PerlUnknownValue extends PerlSpecialValue {
   public static final PerlUnknownValue UNKNOWN_VALUE = new PerlUnknownValue();
+  public static final AtomicNotNullLazyValue<PerlValue> UNKNOWN_PROVIDER = AtomicNotNullLazyValue.createValue(() -> UNKNOWN_VALUE);
 
   private PerlUnknownValue() {
   }

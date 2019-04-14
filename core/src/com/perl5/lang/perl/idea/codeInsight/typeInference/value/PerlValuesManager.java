@@ -76,7 +76,7 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id++;
+  public static final int VERSION = id;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 

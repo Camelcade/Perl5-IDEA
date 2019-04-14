@@ -1,0 +1,16 @@
+$var = Mojolicious::Controller::->myhelper(
+  42,
+  foo => 'bingo',
+  some => 'thing',
+  key => 'foo'
+);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 106 in helperValue.pl
+scalar Mojolicious::Controller->myhelper(42, foo, bingo, some, thing, key, foo)
+----------
+Resolved
+----------
+bingo

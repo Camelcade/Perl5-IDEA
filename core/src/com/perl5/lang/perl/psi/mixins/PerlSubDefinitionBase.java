@@ -16,15 +16,11 @@
 
 package com.perl5.lang.perl.psi.mixins;
 
-import com.intellij.codeInsight.controlflow.ControlFlowUtil;
-import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -32,6 +28,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -90,27 +87,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
       return returnValue;
     }
     PerlSubDefinitionStub greenStub = getGreenStub();
-    return greenStub != null ? greenStub.getReturnValueFromCode() : computeReturnValueFromCode();
-  }
-
-  @NotNull
-  private PerlValue computeReturnValueFromCode() {
-    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
-    Instruction[] instructions = PerlControlFlowBuilder.getFor(this).getInstructions();
-    Instruction exitInstruction = instructions[instructions.length - 1];
-    PerlControlFlowBuilder.iteratePrev(instructions, it -> {
-      if (it == exitInstruction || it.num() == 0) {
-        return ControlFlowUtil.Operation.NEXT;
-      }
-      PsiElement element = it.getElement();
-      if (element == null) {
-        return ControlFlowUtil.Operation.NEXT;
-      }
-      valueBuilder.addVariant(PerlValue.from(element));
-      return ControlFlowUtil.Operation.CONTINUE;
-    });
-
-    return valueBuilder.build();
+    return greenStub != null ?
+           greenStub.getReturnValueFromCode() : PerlResolveUtil.computeReturnValueFromControlFlow(this);
   }
 
   @Override

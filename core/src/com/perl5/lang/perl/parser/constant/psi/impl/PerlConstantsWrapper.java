@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser.constant.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
@@ -75,8 +76,8 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
           PerlPackageUtil.getContextNamespaceName(this),
           Collections.emptyList(),
           PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent()),
-          PerlValue.from(valElement)
-        ));
+          AtomicNotNullLazyValue.createValue(() -> PerlValue.from(valElement)
+          )));
       }
 
       return multipleDefinition;

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser.constant.psi.light;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
@@ -39,8 +40,8 @@ public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionEl
                                             @Nullable String packageName,
                                             @NotNull List<PerlSubArgument> subArguments,
                                             @Nullable PerlSubAnnotations annotations,
-                                            @NotNull PerlValue returnValueFromCode) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCode);
+                                            @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider) {
+    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider);
   }
 
   public PerlLightConstantDefinitionElement(@NotNull PerlConstantsWrapper delegate, @NotNull PerlSubDefinitionStub stub) {

@@ -24,9 +24,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSelfHinter;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubExpr;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedNestedCallElementBase;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
@@ -74,7 +72,6 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
     }
 
     PsiElement bodyElement = listElements.get(1);
-    // fixme we could handle reference here
     if (!(bodyElement instanceof PerlSubExpr)) {
       return Collections.emptyList();
     }
@@ -84,17 +81,8 @@ public class MojoHelperWrapper extends PerlPolyNamedNestedCallElementBase<PerlPo
       return Collections.emptyList();
     }
 
-    PsiPerlBlock subDefinitionBody = ((PerlSubExpr)bodyElement).getBlock();
     return Collections.singletonList(new MojoHelperDefinition(
-      this,
-      subName,
-      LIGHT_METHOD_DEFINITION,
-      identifierElement,
-      MOJO_CONTROLLER_NS,
-      PerlSubDefinitionElement.getPerlSubArgumentsFromBody(subDefinitionBody),
-      computeSubAnnotations(this, identifierElement),
-      subDefinitionBody
-    ));
+      this, subName, LIGHT_METHOD_DEFINITION, identifierElement, MOJO_CONTROLLER_NS, (PerlSubExpr)bodyElement));
   }
 
   @NotNull
