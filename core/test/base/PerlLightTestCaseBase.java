@@ -1752,11 +1752,14 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     PerlValuableEntity element = getElementAtCaret(PerlValuableEntity.class);
     assertNotNull(element);
     StringBuilder sb = new StringBuilder();
+    PerlValue elementValue = PerlValue.from(element);
     sb.append(getEditorTextWithCaretsAndSelections().trim())
       .append(SEPARATOR_NEWLINES)
       .append(element.getText()).append("\n")
       .append(serializePsiElement(element)).append("\n")
-      .append(PerlValue.from(element).getPresentableText());
+      .append(elementValue.getPresentableText());
+
+    sb.append(SEPARATOR_NEWLINES).append("Resolved").append(SEPARATOR_NEWLINES).append(elementValue.resolve(element).getPresentableText());
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
@@ -1769,7 +1772,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     StringBuilder sb = new StringBuilder();
     sb.append(getEditorTextWithCaretsAndSelections().trim())
       .append(SEPARATOR_NEWLINES)
-      .append(element.getReturnValueFromCode(null, Collections.emptyList()));
+      .append(element.getReturnValue());
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }

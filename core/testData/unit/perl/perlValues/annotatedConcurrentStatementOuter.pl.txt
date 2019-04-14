@@ -9,3 +9,7 @@ say $v<caret>ar2;
 $var2
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 57 in annotatedConcurrentStatementOuter.pl
 JSON::XS
+----------
+Resolved
+----------
+JSON::XS

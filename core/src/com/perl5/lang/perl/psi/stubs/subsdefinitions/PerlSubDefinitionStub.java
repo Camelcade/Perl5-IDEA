@@ -25,7 +25,6 @@ import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement>
 
   @NotNull
   @Override
-  public PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
+  public PerlValue getReturnValueFromCode() {
     return myReturnValueFromCode;
   }
 

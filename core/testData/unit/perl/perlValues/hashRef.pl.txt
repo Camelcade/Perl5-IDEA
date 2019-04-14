@@ -6,3 +6,8 @@ $hashref
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 43 in hashRef.pl
 Ref[Hash(one => two,
 tree => 42)]
+----------
+Resolved
+----------
+Ref[Hash(one => two,
+tree => 42)]

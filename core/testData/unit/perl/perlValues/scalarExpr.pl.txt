@@ -9,3 +9,7 @@ $v<caret>ar;
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 109 in scalarExpr.pl
 scalar Foo::Bar->something(1)
+----------
+Resolved
+----------
+Value unknown

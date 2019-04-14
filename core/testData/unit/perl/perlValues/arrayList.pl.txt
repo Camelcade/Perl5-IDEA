@@ -5,3 +5,7 @@ my @array = (one => two => 'tree');
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 37 in arrayList.pl
 Array(one, two, tree)
+----------
+Resolved
+----------
+Array(one, two, tree)

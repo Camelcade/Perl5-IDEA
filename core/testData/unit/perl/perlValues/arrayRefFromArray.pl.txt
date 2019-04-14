@@ -7,3 +7,7 @@ $arr<caret>ayref
 $arrayref
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 59 in arrayRefFromArray.pl
 Ref[Array(one, two, tree)]
+----------
+Resolved
+----------
+Ref[Array(one, two, tree)]

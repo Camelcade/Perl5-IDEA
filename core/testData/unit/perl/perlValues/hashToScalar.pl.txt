@@ -5,3 +5,7 @@ $sc<caret>alar;
 $scalar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 55 in hashToScalar.pl
 2
+----------
+Resolved
+----------
+2

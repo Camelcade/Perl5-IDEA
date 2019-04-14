@@ -9,3 +9,8 @@ if( $a ){
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 90 in arrayToHashAmbiguous.pl
 Hash(OneOf[Array(key, value),
 Array(one, two, three, four)])
+----------
+Resolved
+----------
+Hash(OneOf[Array(key, value),
+Array(one, two, three, four)])

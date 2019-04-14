@@ -14,3 +14,7 @@ sub thirdsub{
 $variable
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 195 in crossSubVariableDynamic.pl
 scalar Foo::Bar->something(Value unknown)
+----------
+Resolved
+----------
+Value unknown

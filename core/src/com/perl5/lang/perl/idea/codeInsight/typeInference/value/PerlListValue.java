@@ -24,10 +24,7 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 abstract class PerlListValue extends PerlValue {
   @NotNull
@@ -48,8 +45,9 @@ abstract class PerlListValue extends PerlValue {
   }
 
   @Override
-  final PerlValue computeResolve(@NotNull PsiElement contextElement) {
-    return computeResolve(contextElement, ContainerUtil.map(myElements, it -> it.resolve(contextElement)));
+  final PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                 @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return computeResolve(contextElement, ContainerUtil.map(myElements, it -> it.resolve(contextElement, substitutions)));
   }
 
   @NotNull

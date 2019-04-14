@@ -1,0 +1,21 @@
+sub extractor{
+  my %hash = @_;
+  return $hash{$hash{key}};
+}
+
+my $value = main::->extractor(
+  42,
+  first => 'second',
+  third => 'forth',
+  key => 'main'
+);
+
+$va<caret>lue;
+----------
+$value
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 161 in subExtractorDirectObject.pl
+scalar main->extractor(42, first, second, third, forth, key, main)
+----------
+Resolved
+----------
+42

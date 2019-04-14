@@ -34,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,7 +68,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
                              psi.getNamespaceName(),
                              psi.getSubName(),
                              psi.getSubArgumentsList(),
-                             psi.getReturnValueFromCode(null, Collections.emptyList()),
+                             psi.getReturnValueFromCode(),
                              psi.getAnnotations());
   }
 
@@ -116,7 +115,7 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
       dataStream.writeBoolean(true);
       subAnnotations.serialize(dataStream);
     }
-    stub.getReturnValueFromCode(null, Collections.emptyList()).serialize(dataStream);
+    stub.getReturnValueFromCode().serialize(dataStream);
   }
 
   @NotNull

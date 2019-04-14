@@ -16,16 +16,14 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 
@@ -97,31 +95,33 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    * @return type of return value if can be calculated, or {@link PerlUnknownValue#UNKNOWN_VALUE}
    */
   @NotNull
-  default PerlValue getReturnValue(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
-    PerlValue valueFromCode = getReturnValueFromCode(contextPackage, arguments);
+  default PerlValue getReturnValue() {
+    PerlValue valueFromCode = getReturnValueFromCode();
     if (!valueFromCode.isEmpty()) {
       return valueFromCode;
     }
-    return getReturnValueFromAnnotations(contextPackage);
+    return getReturnValueFromAnnotations();
   }
 
   @NotNull
-  default PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
-    if (contextPackage != null && "new".equals(getSubName())) {
-      return PerlScalarValue.create(contextPackage);
-    }
+  default PerlValue getReturnValueFromCode() {
     return UNKNOWN_VALUE;
   }
 
   @NotNull
-  default PerlValue getReturnValueFromAnnotations(@Nullable String contextPackage) {
+  default PerlValue getReturnValueFromAnnotations() {
     PerlSubAnnotations subAnnotations = getAnnotations();
     if (subAnnotations == null) {
       return UNKNOWN_VALUE;
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
-    return PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue) ? PerlScalarValue.create(contextPackage) : returnValue;
+    if (PerlPackageUtil.PACKAGE_ANY_VALUE.equals(returnValue)) {
+      return PerlValues.RETURN_FIRST_ARGUMENT_VALUE;
+    }
+    else {
+      return returnValue;
+    }
   }
 
   default boolean isDeprecated() {

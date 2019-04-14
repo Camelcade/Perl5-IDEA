@@ -22,6 +22,7 @@ import com.intellij.psi.stubs.StubOutputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Map;
 
 abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   @NotNull
@@ -47,14 +48,16 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   @NotNull
   @Override
   final protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                           @NotNull PerlValue resolvedBaseValue) {
-    return computeResolve(contextElement, resolvedBaseValue, myParameter.resolve(contextElement));
+                                           @NotNull PerlValue resolvedBaseValue,
+                                           @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return computeResolve(contextElement, resolvedBaseValue, myParameter.resolve(contextElement, substitutions), substitutions);
   }
 
   @NotNull
   protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
                                               @NotNull PerlValue resolvedBaseValue,
-                                              @NotNull PerlValue resolvedParameter);
+                                              @NotNull PerlValue resolvedParameter,
+                                              @NotNull Map<PerlValue, PerlValue> substitutions);
 
   @NotNull
   protected final PerlValue getParameter() {

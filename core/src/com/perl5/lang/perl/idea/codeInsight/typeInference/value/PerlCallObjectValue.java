@@ -22,7 +22,8 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.PairProcessor;
+import com.intellij.util.Processor;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public final class PerlCallObjectValue extends PerlCallValue {
@@ -52,6 +54,15 @@ public final class PerlCallObjectValue extends PerlCallValue {
   protected void serializeData(@NotNull StubOutputStream dataStream) throws IOException {
     super.serializeData(dataStream);
     dataStream.writeBoolean(myIsSuper);
+  }
+
+  @NotNull
+  @Override
+  protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
+                                                     @NotNull PsiElement contextElement,
+                                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return ContainerUtil.prepend(super.computeResolvedArguments(resolvedNamespaceValue, contextElement, substitutions),
+                                 resolvedNamespaceValue);
   }
 
   @Override
@@ -84,14 +95,12 @@ public final class PerlCallObjectValue extends PerlCallValue {
                                        @NotNull GlobalSearchScope searchScope,
                                        @Nullable PsiElement contextElement, @NotNull Set<String> namespaceNames,
                                        @NotNull Set<String> subNames,
-                                       @NotNull PairProcessor<String, ? super PsiNamedElement> processor) {
+                                       @NotNull Processor<? super PsiNamedElement> processor) {
     for (String contextNamespace : namespaceNames) {
       for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, contextNamespace, myIsSuper)) {
         ProcessingContext processingContext = new ProcessingContext();
         processingContext.processBuiltIns = false;
-        if (!processItemsInNamespace(project, searchScope, subNames,
-                                     it -> processor.process(contextNamespace, it),
-                                     currentNamespaceName, processingContext)) {
+        if (!processItemsInNamespace(project, searchScope, subNames, processor, currentNamespaceName, processingContext)) {
           return false;
         }
         if (!processingContext.processAutoload) { // marker that we've got at least one result

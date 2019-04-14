@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
@@ -46,7 +47,8 @@ public final class PerlReferenceValue extends PerlOperationValue {
   @NotNull
   @Override
   protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull PerlValue resolvedTarget) {
+                                     @NotNull PerlValue resolvedTarget,
+                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
     // fixme casts dereferences should be here
     return resolvedTarget.equals(getTarget()) ? this : new PerlReferenceValue(resolvedTarget);
   }

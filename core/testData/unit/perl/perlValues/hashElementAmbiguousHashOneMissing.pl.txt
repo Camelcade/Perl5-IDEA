@@ -18,3 +18,8 @@ $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 132 in hashElementAmbiguousHashOneMissing.pl
 OneOf[two,
 undef]
+----------
+Resolved
+----------
+OneOf[two,
+undef]

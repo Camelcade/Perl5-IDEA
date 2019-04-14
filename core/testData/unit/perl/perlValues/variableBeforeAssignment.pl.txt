@@ -7,3 +7,7 @@ $myvar = Foo::Bar->new();
 $myvar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 16 in variableBeforeAssignment.pl
 Value unknown
+----------
+Resolved
+----------
+Value unknown

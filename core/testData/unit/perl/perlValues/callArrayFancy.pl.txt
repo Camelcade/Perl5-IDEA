@@ -5,3 +5,7 @@
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 28 in callArrayFancy.pl
 Array(Foo::Bar->new())
+----------
+Resolved
+----------
+Array(Value unknown)

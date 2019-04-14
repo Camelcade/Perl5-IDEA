@@ -5,3 +5,7 @@ $sca<caret>lar;
 $scalar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 30 in callScalar.pl
 scalar Foo::Bar->new()
+----------
+Resolved
+----------
+Value unknown

@@ -20,7 +20,6 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.util.PairFunction;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
@@ -37,6 +36,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+
 public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
   @Nullable
@@ -45,10 +46,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   private final PerlSubAnnotations myAnnotations;
   @NotNull
   private List<PerlSubArgument> mySubArguments;
-  @NotNull // fixme should we make a static TrioFunction to save memory? or even inherit?
-  private PairFunction<String, List<PerlValue>, PerlValue> myReturnValueComputation = (context, arguments) ->
-    PerlSubDefinitionElement.super.getReturnValue(context, arguments);
-
+  @NotNull
+  private PerlValue myReturnValue = UNKNOWN_VALUE;
   // fixme should we actualize this on fly, like identifier?
   @Nullable
   private PsiPerlBlock mySubDefinitionBody;
@@ -181,17 +180,12 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @NotNull
   @Override
-  public PerlValue getReturnValue(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
-    return myReturnValueComputation.fun(contextPackage, arguments);
+  public PerlValue getReturnValueFromCode() {
+    return myReturnValue.isEmpty() ? PerlSubDefinitionElement.super.getReturnValueFromCode() : myReturnValue;
   }
 
-  @NotNull
-  public PairFunction<String, List<PerlValue>, PerlValue> getReturnValueComputation() {
-    return myReturnValueComputation;
-  }
-
-  public void setReturnValueComputation(@NotNull PairFunction<String, List<PerlValue>, PerlValue> returnValueComputation) {
-    myReturnValueComputation = returnValueComputation;
+  public void setReturnValue(@NotNull PerlValue returnValue) {
+    myReturnValue = returnValue;
   }
 
   @Nullable

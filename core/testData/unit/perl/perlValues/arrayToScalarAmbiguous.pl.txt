@@ -9,3 +9,8 @@ $scalar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 88 in arrayToScalarAmbiguous.pl
 OneOf[3,
 4]
+----------
+Resolved
+----------
+OneOf[3,
+4]

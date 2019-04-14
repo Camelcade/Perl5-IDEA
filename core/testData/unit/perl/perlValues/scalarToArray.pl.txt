@@ -4,3 +4,7 @@ my @array = 'test';
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 20 in scalarToArray.pl
 Array(test)
+----------
+Resolved
+----------
+Array(test)

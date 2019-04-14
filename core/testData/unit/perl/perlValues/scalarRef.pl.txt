@@ -5,3 +5,7 @@ $va<caret>rref;
 $varref
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 31 in scalarRef.pl
 Ref[42]
+----------
+Resolved
+----------
+Ref[42]

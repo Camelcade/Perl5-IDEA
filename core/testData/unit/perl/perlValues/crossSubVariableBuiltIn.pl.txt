@@ -14,3 +14,7 @@ sub firstsub{
 $_
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 80 in crossSubVariableBuiltIn.pl
 3
+----------
+Resolved
+----------
+3

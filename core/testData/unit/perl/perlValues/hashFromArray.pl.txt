@@ -8,3 +8,8 @@
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 55 in hashFromArray.pl
 Hash(one => two,
 tree => 42)
+----------
+Resolved
+----------
+Hash(one => two,
+tree => 42)

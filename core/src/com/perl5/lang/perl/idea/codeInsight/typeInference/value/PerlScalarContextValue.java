@@ -23,6 +23,7 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_CONTEXT_ID;
 
@@ -46,7 +47,8 @@ public class PerlScalarContextValue extends PerlOperationValue {
   @NotNull
   @Override
   protected PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                     @NotNull PerlValue resolvedTarget) {
+                                     @NotNull PerlValue resolvedTarget,
+                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
     return resolvedTarget.getScalarRepresentation();
   }
 

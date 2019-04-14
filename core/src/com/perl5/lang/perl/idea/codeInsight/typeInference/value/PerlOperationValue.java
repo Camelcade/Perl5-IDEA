@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Represents non-mutation operation value on some base value. E.g. item, slice, keys, scalar
@@ -58,13 +59,15 @@ abstract class PerlOperationValue extends PerlValue {
   }
 
   @Override
-  final PerlValue computeResolve(@NotNull PsiElement contextElement) {
-    return computeResolve(contextElement, myBaseValue.resolve(contextElement));
+  final PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                 @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return computeResolve(contextElement, myBaseValue.resolve(contextElement, substitutions), substitutions);
   }
 
   @NotNull
   protected abstract PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                              @NotNull PerlValue resolvedBaseValue);
+                                              @NotNull PerlValue resolvedBaseValue,
+                                              @NotNull Map<PerlValue, PerlValue> substitutions);
 
   @Override
   public boolean equals(Object o) {

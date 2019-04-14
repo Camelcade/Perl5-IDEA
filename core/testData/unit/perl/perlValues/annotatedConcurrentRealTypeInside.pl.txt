@@ -7,3 +7,7 @@ say $va<caret>r2;
 $var2
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 43 in annotatedConcurrentRealTypeInside.pl
 JSON::XS
+----------
+Resolved
+----------
+JSON::XS

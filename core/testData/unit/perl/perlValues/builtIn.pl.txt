@@ -3,3 +3,7 @@ $BASE<caret>TIME
 $BASETIME
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 0 in builtIn.pl
 Value unknown
+----------
+Resolved
+----------
+Value unknown

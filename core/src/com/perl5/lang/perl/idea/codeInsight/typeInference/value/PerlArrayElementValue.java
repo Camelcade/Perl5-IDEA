@@ -21,7 +21,9 @@ import com.intellij.psi.stubs.StubInputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Map;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
 
 public final class PerlArrayElementValue extends PerlParametrizedOperationValue {
@@ -37,8 +39,9 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   @Override
   protected PerlValue computeResolve(@NotNull PsiElement contextElement,
                                      @NotNull PerlValue resolvedBaseValue,
-                                     @NotNull PerlValue resolvedParameter) {
-    throw new RuntimeException("Not yet implemented");
+                                     @NotNull PerlValue resolvedParameter,
+                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return this;
   }
 
   @Override
@@ -58,5 +61,13 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   @Override
   public String toString() {
     return "ArrayItem: " + getBaseValue() + "[" + getParameter() + "]";
+  }
+
+  @NotNull
+  public static PerlValue create(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
+    if (arrayValue.isEmpty() || indexValue.isEmpty()) {
+      return UNKNOWN_VALUE;
+    }
+    return new PerlArrayElementValue(arrayValue, indexValue);
   }
 }

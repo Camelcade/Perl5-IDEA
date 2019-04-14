@@ -10,3 +10,7 @@ $v<caret>ar;
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 86 in hashElementDeferredKey.pl
 undef
+----------
+Resolved
+----------
+undef

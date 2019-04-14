@@ -24,3 +24,10 @@ OneOf[42,
 bla,
 two,
 undef]
+----------
+Resolved
+----------
+OneOf[42,
+bla,
+two,
+undef]

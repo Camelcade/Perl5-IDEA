@@ -5,3 +5,7 @@ say $my<caret>var;
 $myvar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 38 in declarationAssignmentNew.pl
 scalar Foo::Bar->new()
+----------
+Resolved
+----------
+Value unknown

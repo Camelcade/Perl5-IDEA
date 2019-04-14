@@ -5,3 +5,7 @@
 @otherlist
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 82 in arrayMerge.pl
 Array(first, second, key, value)
+----------
+Resolved
+----------
+Array(first, second, key, value)

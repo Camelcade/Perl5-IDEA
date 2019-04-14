@@ -22,7 +22,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.util.PairFunction;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
@@ -164,10 +163,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
   @NotNull
   private PerlLightMethodDefinitionElement setMojoReturnsComputation(
     @NotNull PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod) {
-    PairFunction<String, List<PerlValue>, PerlValue> defaultComputation = newMethod.getReturnValueComputation();
-    newMethod.setReturnValueComputation(
-      (context, args) -> args.isEmpty() ? defaultComputation.fun(context, args) : PerlScalarValue.create(newMethod.getNamespaceName())
-    );
+    newMethod.setReturnValue(PerlScalarValue.create(newMethod.getNamespaceName()));
     return newMethod;
   }
 
@@ -238,8 +234,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       );
 
       if (key.equals(READER_KEY) && valueClass != null) {
-        PerlValue returnValue = PerlScalarValue.create(valueClass);
-        secondaryElement.setReturnValueComputation((a, b) -> returnValue);
+        secondaryElement.setReturnValue(PerlScalarValue.create(valueClass));
       }
 
       secondaryResult.add(
@@ -314,7 +309,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       );
       if (valueClass != null) {
         PerlValue returnValue = PerlScalarValue.create(valueClass);
-        newElement.setReturnValueComputation((a, b) -> returnValue);
+        newElement.setReturnValue(returnValue);
       }
       result.add(newElement);
       result.addAll(secondaryResult);

@@ -21,6 +21,7 @@ import com.intellij.psi.stubs.StubInputStream;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_ELEMENT_VALUE;
@@ -42,8 +43,10 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
 
   @NotNull
   @Override
-  protected PerlValue computeResolve(@NotNull PsiElement contextElement, @NotNull PerlValue resolvedHashValue,
-                                     @NotNull PerlValue resolvedKeyValue) {
+  protected PerlValue computeResolve(@NotNull PsiElement contextElement,
+                                     @NotNull PerlValue resolvedHashValue,
+                                     @NotNull PerlValue resolvedKeyValue,
+                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
     if (resolvedHashValue instanceof PerlHashValue) {
       return ((PerlHashValue)resolvedHashValue).get(resolvedKeyValue);
     }

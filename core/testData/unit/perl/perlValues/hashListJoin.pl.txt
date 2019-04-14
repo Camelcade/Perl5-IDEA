@@ -12,3 +12,10 @@ Hash(this => is,
 one => two,
 tree => 42,
 list => item)
+----------
+Resolved
+----------
+Hash(this => is,
+one => two,
+tree => 42,
+list => item)

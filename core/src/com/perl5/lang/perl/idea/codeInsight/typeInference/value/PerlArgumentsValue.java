@@ -21,6 +21,9 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
 
 /**
@@ -33,8 +36,9 @@ public final class PerlArgumentsValue extends PerlSpecialValue {
   }
 
   @Override
-  PerlValue computeResolve(@NotNull PsiElement contextElement) {
-    return this;
+  PerlValue computeResolve(@NotNull PsiElement contextElement,
+                           @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return UNKNOWN_VALUE;
   }
 
   @NotNull

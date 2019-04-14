@@ -7,3 +7,8 @@
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 105 in hashMerge.pl
 Hash(first => replacement,
 third => fourth)
+----------
+Resolved
+----------
+Hash(first => replacement,
+third => fourth)

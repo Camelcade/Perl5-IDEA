@@ -9,3 +9,8 @@ $scalar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 99 in arrayToScalarAmbiguousDeferred.pl
 scalar OneOf[Array(Foo::Bar->get_list()),
 Array(one, two, three)]
+----------
+Resolved
+----------
+scalar OneOf[Array(Value unknown),
+Array(one, two, three)]

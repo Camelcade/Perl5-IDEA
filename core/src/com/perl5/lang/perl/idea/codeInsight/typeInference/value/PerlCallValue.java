@@ -25,7 +25,6 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
@@ -43,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue.ARGUMENTS_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 
@@ -68,31 +68,47 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   @NotNull
   @Override
   protected final PerlValue computeResolve(@NotNull PsiElement contextElement,
-                                           @NotNull PerlValue resolvedBaseValue,
-                                           @NotNull PerlValue resolvedParameter) {
-    List<PerlValue> resolvedArguments = ContainerUtil.map(myArguments, it -> it.resolve(contextElement));
+                                           @NotNull PerlValue resolvedNamespaceValue,
+                                           @NotNull PerlValue resolvedSubNameValue,
+                                           @NotNull Map<PerlValue, PerlValue> substitutions) {
     GlobalSearchScope resolveScope = contextElement.getResolveScope();
-    Set<String> namespaceNames = resolvedBaseValue.getNamespaceNames();
+    Set<String> namespaceNames = resolvedNamespaceValue.getNamespaceNames();
     if (namespaceNames.isEmpty()) {
       return UNKNOWN_VALUE;
     }
-    Set<String> subNames = resolvedParameter.getSubNames();
+    Set<String> subNames = resolvedSubNameValue.getSubNames();
     if (subNames.isEmpty()) {
       return UNKNOWN_VALUE;
     }
+
+    List<PerlValue> resolvedArguments = computeResolvedArguments(resolvedNamespaceValue, contextElement, substitutions);
+    PerlArrayValue argumentsValue =
+      resolvedArguments.isEmpty() ? PerlArrayValue.EMPTY_ARRAY : PerlArrayValue.builder().addElements(resolvedArguments).build();
+    Map<PerlValue, PerlValue> innerSubstitutions = Collections.singletonMap(ARGUMENTS_VALUE, argumentsValue);
+
     PerlValue resolveResult = RecursionManager.doPreventingRecursion(
-      new Object[]{resolveScope, resolvedBaseValue, resolvedParameter, resolvedArguments}, true, () -> {
+      new Object[]{resolveScope, resolvedNamespaceValue, resolvedSubNameValue, innerSubstitutions}, true, () -> {
         PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
         processCallTargets(
-          contextElement.getProject(), resolveScope, contextElement, namespaceNames, subNames, (contextNamespace, callTarget) -> {
-            if (callTarget instanceof PerlSubElement) {
-              builder.addVariant(((PerlSubElement)callTarget).getReturnValue(contextNamespace, resolvedArguments).resolve(callTarget));
+          contextElement.getProject(), resolveScope, contextElement, namespaceNames, subNames, it -> {
+            if (it instanceof PerlSubElement) {
+              builder.addVariant(((PerlSubElement)it).getReturnValue().resolve(it, innerSubstitutions));
             }
             return true;
           });
         return builder.build();
       });
     return ObjectUtils.notNull(resolveResult, UNKNOWN_VALUE);
+  }
+
+  /**
+   * @return a list of arguments that passed to the call, resolved in the context of {@code contextElement}
+   */
+  @NotNull
+  protected List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
+                                                     @NotNull PsiElement contextElement,
+                                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return ContainerUtil.map(myArguments, it -> it.resolve(contextElement, substitutions));
   }
 
   @Override
@@ -122,7 +138,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
    * @param contextElement invocation point. Context element, necessary to compute additional imports
    */
   public final boolean processCallTargets(@NotNull PsiElement contextElement,
-                                          @NotNull PairProcessor<String, ? super PsiNamedElement> processor) {
+                                          @NotNull Processor<? super PsiNamedElement> processor) {
     Project project = contextElement.getProject();
     GlobalSearchScope searchScope = contextElement.getResolveScope();
     Set<String> subNames = getSubNameValue().resolve(contextElement).getSubNames();
@@ -140,7 +156,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                 @NotNull PsiElement contextElement,
                                                 @NotNull Set<String> namespaceNames,
                                                 @NotNull Set<String> subNames,
-                                                @NotNull PairProcessor<String, ? super PsiNamedElement> processor);
+                                                @NotNull Processor<? super PsiNamedElement> processor);
 
   /**
    * Processes all elements in all namespaces targeted by current call qualifying namespace. E.g. for {@code Foo::Bar->foo} processes

@@ -76,7 +76,7 @@ public final class PerlValuesManager {
   static final int WANTARRAY_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id;
+  public static final int VERSION = id++;
 
   private static final WeakInterner<PerlValue> INTERNER = new WeakInterner<>();
 
@@ -84,8 +84,9 @@ public final class PerlValuesManager {
     return intern(deserialize(dataStream));
   }
 
-  public static PerlValue intern(PerlValue value) {
-    return INTERNER.intern(value);
+  public static <T extends PerlValue> T intern(T value) {
+    //noinspection unchecked
+    return (T)INTERNER.intern(value);
   }
 
   @NotNull

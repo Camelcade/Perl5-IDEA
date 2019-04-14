@@ -139,8 +139,9 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
   }
 
   @Override
-  PerlValue computeResolve(@NotNull PsiElement contextElement) {
-    return convert(it -> it.resolve(contextElement));
+  PerlValue computeResolve(@NotNull PsiElement contextElement,
+                           @NotNull Map<PerlValue, PerlValue> substitutions) {
+    return convert(it -> it.resolve(contextElement, substitutions));
   }
 
   @Override

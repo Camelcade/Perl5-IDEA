@@ -7,3 +7,7 @@ say $va<caret>r;
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 43 in annotatedConcurrentRealTypeWins.pl
 DBI
+----------
+Resolved
+----------
+DBI

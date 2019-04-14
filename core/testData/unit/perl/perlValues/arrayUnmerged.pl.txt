@@ -5,3 +5,7 @@
 @otherlist
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 92 in arrayUnmerged.pl
 Array(first, second, Hash(key, value, Foo::Bar->get_values()))
+----------
+Resolved
+----------
+Array(first, second, Hash(key, value, Value unknown))

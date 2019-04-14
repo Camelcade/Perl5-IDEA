@@ -39,10 +39,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
@@ -86,11 +83,21 @@ public abstract class PerlValue {
   /**
    * @return a current value resolved in the context of the {@code project}.
    */
-  public final PerlValue resolve(@NotNull PsiElement contextElement) {
+  @NotNull
+  public final PerlValue resolve(@NotNull PsiElement contextElement, @NotNull Map<PerlValue, PerlValue> substitutions) {
     if (isEmpty() || isDeterministic()) {
       return this;
     }
-    return PerlValuesCacheService.getInstance(contextElement.getProject()).getResolvedValue(this, contextElement);
+    PerlValue substitution = substitutions.get(this);
+    if (substitution != null) {
+      return substitution;
+    }
+    return PerlValuesCacheService.getInstance(contextElement.getProject()).getResolvedValue(this, contextElement, substitutions);
+  }
+
+  @NotNull
+  public final PerlValue resolve(@NotNull PsiElement contextElement) {
+    return resolve(contextElement, Collections.emptyMap());
   }
 
   /**
@@ -98,7 +105,8 @@ public abstract class PerlValue {
    * @apiNote DO NOT use this method directly, use {@link #resolve(PsiElement)} (Project)}
    * @implSpec feel free to use indexes, resolve and any heavy activity you need
    */
-  PerlValue computeResolve(@NotNull PsiElement contextElement) {
+  PerlValue computeResolve(@NotNull PsiElement contextElement,
+                           @NotNull Map<PerlValue, PerlValue> substitutions) {
     throw new RuntimeException("Not implemented resolve in " + this);
   }
 

@@ -1,0 +1,12 @@
+sub extractor{
+  my %hash = @_;
+  return $hash{$hash{key}};
+}
+
+my $value = extractor(
+  first => 'second',
+  third => 'forth',
+  key => 'first'
+);
+
+$va<caret>lue;

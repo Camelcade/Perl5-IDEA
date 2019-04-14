@@ -1,0 +1,9 @@
+
+my $value = extractor(
+  first => 'second',
+  third => 'forth',
+  second => 'bingo',
+  key => 'first'
+);
+
+$va<caret>lue;

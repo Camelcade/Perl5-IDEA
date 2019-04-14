@@ -14,3 +14,9 @@ PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 169 in arrayToHashAmbiguousDefe
 Hash(OneOf[Array(defkey, scalar Foo::Bar->get_list()),
 Array(key, value),
 Array(one, two, three, four)])
+----------
+Resolved
+----------
+Hash(OneOf[Array(defkey, Value unknown),
+Array(key, value),
+Array(one, two, three, four)])

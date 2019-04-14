@@ -17,6 +17,7 @@
 package unit.perl;
 
 import base.PerlLightTestCase;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 
 /**
  * Created by hurricup on 02.04.2016.
@@ -25,6 +26,18 @@ public class PerlValuesTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/unit/perl/perlValues";
+  }
+
+  public void testSubExtractorDirect() {doTest();}
+
+  public void testSubExtractorDirectObject() {doTest();}
+
+  public void testSubExtractorIndirect() {doTest();}
+
+  public void testSubExtractorIndirectOtherFile() {
+    myFixture.copyFileToProject("extractorFunctions.pl");
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    doTest();
   }
 
   public void testCrossSubVariable() {doTest();}

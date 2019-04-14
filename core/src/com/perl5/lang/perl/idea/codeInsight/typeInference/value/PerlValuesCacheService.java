@@ -20,11 +20,11 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.RecursionManager;
+import com.intellij.openapi.util.Trinity;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiModificationTracker;
 import com.intellij.util.containers.ContainerUtil;
-import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -35,7 +35,8 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnkno
 public class PerlValuesCacheService implements PsiModificationTracker.Listener {
   private static final Logger LOG = Logger.getInstance(PerlValuesCacheService.class);
   @NotNull
-  private final Map<Pair<PerlValue, GlobalSearchScope>, PerlValue> myResolveMap = ContainerUtil.createConcurrentWeakMap();
+  private final Map<Trinity<PerlValue, GlobalSearchScope, Map<PerlValue, PerlValue>>, PerlValue> myResolveMap =
+    ContainerUtil.createConcurrentWeakMap();
 
   private final AtomicLong myResolveRequests = new AtomicLong();
   private final AtomicLong myResolveBuilds = new AtomicLong();
@@ -44,14 +45,17 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener {
     project.getMessageBus().connect().subscribe(PsiModificationTracker.TOPIC, this);
   }
 
-  public PerlValue getResolvedValue(@NotNull PerlValue deferredValue, @NotNull PsiElement contextElement) {
+  public PerlValue getResolvedValue(@NotNull PerlValue deferredValue,
+                                    @NotNull PsiElement contextElement,
+                                    @NotNull Map<PerlValue, PerlValue> substitutions) {
     if (deferredValue.isDeterministic()) {
       LOG.error("Resolving deterministic value: " + deferredValue);
     }
     else if (deferredValue.isEmpty()) {
       LOG.error("Attempting to resolve empty value: " + deferredValue);
     }
-    Pair<PerlValue, GlobalSearchScope> key = Pair.create(deferredValue, contextElement.getResolveScope());
+    Trinity<PerlValue, GlobalSearchScope, Map<PerlValue, PerlValue>> key =
+      Trinity.create(deferredValue, contextElement.getResolveScope(), substitutions);
     myResolveRequests.incrementAndGet();
     PerlValue result = myResolveMap.get(key);
     if (result != null) {
@@ -59,7 +63,7 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener {
     }
     myResolveBuilds.incrementAndGet();
     PerlValue resolvedValue = RecursionManager.doPreventingRecursion(
-      key, true, () -> PerlValuesManager.intern(deferredValue.computeResolve(contextElement)));
+      key, true, () -> PerlValuesManager.intern(deferredValue.computeResolve(contextElement, substitutions)));
     if (resolvedValue == null) {
       // fixme probably we could use this for recursion prevention. Actually, this may happen because of flaws of our loops/conditions handling
       return UNKNOWN_VALUE;

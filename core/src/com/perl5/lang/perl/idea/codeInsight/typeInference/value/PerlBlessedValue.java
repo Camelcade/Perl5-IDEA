@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.BLESSED_ID;
 
@@ -50,7 +51,8 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
   @Override
   protected PerlValue computeResolve(@NotNull PsiElement contextElement,
                                      @NotNull PerlValue resolvedValue,
-                                     @NotNull PerlValue resolvedBless) {
+                                     @NotNull PerlValue resolvedBless,
+                                     @NotNull Map<PerlValue, PerlValue> substitutions) {
     return new PerlBlessedValue(resolvedValue, resolvedBless);
   }
 

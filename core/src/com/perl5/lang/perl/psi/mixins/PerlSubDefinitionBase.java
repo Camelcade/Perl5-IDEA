@@ -86,13 +86,13 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   @NotNull
   @Override
-  public PerlValue getReturnValueFromCode(@Nullable String contextPackage, @NotNull List<PerlValue> arguments) {
-    PerlValue returnValue = PerlSubDefinitionElement.super.getReturnValueFromCode(contextPackage, arguments);
+  public PerlValue getReturnValueFromCode() {
+    PerlValue returnValue = PerlSubDefinitionElement.super.getReturnValueFromCode();
     if (!returnValue.isEmpty()) {
       return returnValue;
     }
     PerlSubDefinitionStub greenStub = getGreenStub();
-    return greenStub != null ? greenStub.getReturnValueFromCode(contextPackage, arguments) : computeReturnValueFromCode();
+    return greenStub != null ? greenStub.getReturnValueFromCode() : computeReturnValueFromCode();
   }
 
   @NotNull

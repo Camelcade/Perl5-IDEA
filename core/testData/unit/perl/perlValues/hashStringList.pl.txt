@@ -6,3 +6,8 @@ my %hash = qw(one two tree four);
 PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 35 in hashStringList.pl
 Hash(one => two,
 tree => four)
+----------
+Resolved
+----------
+Hash(one => two,
+tree => four)

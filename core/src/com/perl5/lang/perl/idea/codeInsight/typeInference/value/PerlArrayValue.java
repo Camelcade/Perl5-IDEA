@@ -23,11 +23,13 @@ import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public final class PerlArrayValue extends PerlListValue {
   private static final Logger LOG = Logger.getInstance(PerlArrayValue.class);
+  public static final PerlArrayValue EMPTY_ARRAY = PerlValuesManager.intern(new PerlArrayValue(Collections.emptyList()));
 
   private PerlArrayValue(@NotNull List<PerlValue> elements) {
     super(elements);
@@ -89,7 +91,7 @@ public final class PerlArrayValue extends PerlListValue {
     }
 
     PerlArrayValue build() {
-      return new PerlArrayValue(myElements);
+      return myElements.isEmpty() ? EMPTY_ARRAY : new PerlArrayValue(myElements);
     }
   }
 }

@@ -1,0 +1,16 @@
+my $value = extractor(
+  first => 'second',
+  third => 'forth',
+  second => 'bingo',
+  key => 'first'
+);
+
+$va<caret>lue;
+----------
+$value
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 107 in subExtractorIndirectOtherFile.pl
+scalar main::extractor(first, second, third, forth, second, bingo, key, first)
+----------
+Resolved
+----------
+bingo

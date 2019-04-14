@@ -11,3 +11,7 @@ $v<caret>ar;
 $var
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 85 in hashElementVariable.pl
 four
+----------
+Resolved
+----------
+four

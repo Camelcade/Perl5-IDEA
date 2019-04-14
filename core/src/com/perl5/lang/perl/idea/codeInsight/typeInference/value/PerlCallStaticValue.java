@@ -23,7 +23,7 @@ import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.util.PairProcessor;
+import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -89,15 +89,13 @@ public final class PerlCallStaticValue extends PerlCallValue {
                                        @Nullable PsiElement contextElement,
                                        @NotNull Set<String> namespaceNames,
                                        @NotNull Set<String> subNames,
-                                       @NotNull PairProcessor<String, ? super PsiNamedElement> processor) {
+                                       @NotNull Processor<? super PsiNamedElement> processor) {
 
     for (String contextNamespace : namespaceNames) {
       ProcessingContext processingContext = new ProcessingContext();
       processingContext.processBuiltIns = !myHasExplicitNamespace;
 
-      if (!processItemsInNamespace(project, searchScope, subNames,
-                                   it -> processor.process(contextNamespace, it),
-                                   contextNamespace, processingContext)) {
+      if (!processItemsInNamespace(project, searchScope, subNames, processor, contextNamespace, processingContext)) {
         return false;
       }
     }
@@ -107,8 +105,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
       String namespaceName = containingNamespace == null ? null : containingNamespace.getPackageName();
       if (!StringUtil.isEmpty(namespaceName)) {
         processExportDescriptorsItems(
-          project, searchScope, subNames, it -> processor.process(namespaceName, it),
-          PerlImportsProvider.getAllExportDescriptors(containingNamespace));
+          project, searchScope, subNames, processor::process, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
       }
     }
 

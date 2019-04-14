@@ -7,3 +7,7 @@ my @array = (one => two => 'tree', %hash, @list);
 @array
 PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 100 in arrayListJoin.pl
 Array(one, two, tree, key, value, list, item)
+----------
+Resolved
+----------
+Array(one, two, tree, key, value, list, item)
