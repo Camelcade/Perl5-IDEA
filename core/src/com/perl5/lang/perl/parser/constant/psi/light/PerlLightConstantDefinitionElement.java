@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.constant.psi.light;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.parser.constant.psi.impl.PerlConstantsWrapper;
 import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -31,14 +32,15 @@ import javax.swing.*;
 import java.util.List;
 
 public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement<PerlConstantsWrapper> {
-  public PerlLightConstantDefinitionElement(@NotNull PerlConstantsWrapper delegate,
+  public PerlLightConstantDefinitionElement(@NotNull PerlConstantsWrapper wrapper,
                                             @NotNull String subName,
                                             @NotNull IStubElementType elementType,
                                             @NotNull PsiElement nameIdentifier,
                                             @Nullable String packageName,
                                             @NotNull List<PerlSubArgument> subArguments,
-                                            @Nullable PerlSubAnnotations annotations) {
-    super(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
+                                            @Nullable PerlSubAnnotations annotations,
+                                            @NotNull PerlValue returnValueFromCode) {
+    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCode);
   }
 
   public PerlLightConstantDefinitionElement(@NotNull PerlConstantsWrapper delegate, @NotNull PerlSubDefinitionStub stub) {

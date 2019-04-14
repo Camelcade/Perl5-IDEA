@@ -1,0 +1,13 @@
+use Foo::Bar;
+
+$var = MYCONST->blabla(OTHER);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 47 in constantMultiImport.pl
+scalar main::MYCONST()->blabla(main::OTHER())
+----------
+Resolved
+----------
+69

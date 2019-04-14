@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElementBase;
@@ -73,7 +74,8 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
           keyElement,
           PerlPackageUtil.getContextNamespaceName(this),
           Collections.emptyList(),
-          PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent())
+          PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent()),
+          PerlValue.from(valElement)
         ));
       }
 

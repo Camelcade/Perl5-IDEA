@@ -1,0 +1,5 @@
+use Foo::Bar;
+
+$var = MYCONST->blabla(OTHER);
+
+$v<caret>ar;

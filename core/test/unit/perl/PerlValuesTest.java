@@ -28,6 +28,15 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testConstantSingle() {doTest();}
+
+  public void testConstantMulti() {doTest();}
+
+  public void testConstantMultiImport() {
+    myFixture.copyFileToProject("constantMultiImportFile.pl");
+    doTest();
+  }
+
   public void testShadowedValue() {doTest();}
 
   public void testShadowedValues() {doTest();}

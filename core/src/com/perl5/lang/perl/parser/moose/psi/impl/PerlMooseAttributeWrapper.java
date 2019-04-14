@@ -163,7 +163,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
   @NotNull
   private PerlLightMethodDefinitionElement setMojoReturnsComputation(
     @NotNull PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod) {
-    newMethod.setReturnValue(PerlScalarValue.create(newMethod.getNamespaceName()));
+    newMethod.setReturnValueFromCode(PerlScalarValue.create(newMethod.getNamespaceName()));
     return newMethod;
   }
 
@@ -234,7 +234,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       );
 
       if (key.equals(READER_KEY) && valueClass != null) {
-        secondaryElement.setReturnValue(PerlScalarValue.create(valueClass));
+        secondaryElement.setReturnValueFromCode(PerlScalarValue.create(valueClass));
       }
 
       secondaryResult.add(
@@ -309,7 +309,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       );
       if (valueClass != null) {
         PerlValue returnValue = PerlScalarValue.create(valueClass);
-        newElement.setReturnValue(returnValue);
+        newElement.setReturnValueFromCode(returnValue);
       }
       result.add(newElement);
       result.addAll(secondaryResult);

@@ -47,7 +47,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   private List<PerlSubArgument> mySubArguments;
   @NotNull
-  private PerlValue myReturnValue = UNKNOWN_VALUE;
+  private PerlValue myReturnValueFromCode;
   // fixme should we actualize this on fly, like identifier?
   @Nullable
   private PsiPerlBlock mySubDefinitionBody;
@@ -58,11 +58,23 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull PsiElement nameIdentifier,
                                        @Nullable String packageName,
                                        @NotNull List<PerlSubArgument> subArguments,
-                                       @Nullable PerlSubAnnotations annotations) {
+                                       @Nullable PerlSubAnnotations annotations,
+                                       @NotNull PerlValue returnValueFromCode) {
     super(delegate, subName, elementType, nameIdentifier);
     myPackageName = packageName;
     mySubArguments = subArguments;
     myAnnotations = annotations;
+    myReturnValueFromCode = returnValueFromCode;
+  }
+
+  public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
+                                       @NotNull String subName,
+                                       @NotNull IStubElementType elementType,
+                                       @NotNull PsiElement nameIdentifier,
+                                       @Nullable String packageName,
+                                       @NotNull List<PerlSubArgument> subArguments,
+                                       @Nullable PerlSubAnnotations annotations) {
+    this(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations, UNKNOWN_VALUE);
   }
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
@@ -82,6 +94,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myPackageName = stub.getNamespaceName();
     mySubArguments = stub.getSubArgumentsList();
     myAnnotations = stub.getAnnotations();
+    myReturnValueFromCode = stub.getReturnValueFromCode();
   }
 
   protected void setSubArguments(@NotNull List<PerlSubArgument> subArguments) {
@@ -181,11 +194,11 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   @Override
   public PerlValue getReturnValueFromCode() {
-    return myReturnValue.isEmpty() ? PerlSubDefinitionElement.super.getReturnValueFromCode() : myReturnValue;
+    return myReturnValueFromCode;
   }
 
-  public void setReturnValue(@NotNull PerlValue returnValue) {
-    myReturnValue = returnValue;
+  public void setReturnValueFromCode(@NotNull PerlValue returnValueFromCode) {
+    myReturnValueFromCode = returnValueFromCode;
   }
 
   @Nullable

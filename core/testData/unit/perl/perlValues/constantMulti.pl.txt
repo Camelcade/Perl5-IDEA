@@ -1,0 +1,22 @@
+package Foo::Bar;
+sub blabla{
+  69;
+}
+
+package main;
+use constant {
+    MYCONST => 'Foo::Bar',
+    OHTER => 42
+};
+
+$var = MYCONST->blabla(OTHER);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 147 in constantMulti.pl
+scalar main::MYCONST()->blabla(main::OTHER())
+----------
+Resolved
+----------
+69

@@ -1,0 +1,14 @@
+package Foo::Bar;
+sub blabla{
+  69;
+}
+
+package main;
+use constant {
+    MYCONST => 'Foo::Bar',
+    OHTER => 42
+};
+
+$var = MYCONST->blabla(OTHER);
+
+$v<caret>ar;
