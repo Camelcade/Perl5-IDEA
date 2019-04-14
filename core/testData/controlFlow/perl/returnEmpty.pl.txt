@@ -1,3 +1,4 @@
 0(1) element: null (InstructionImpl)
-1(2) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR) (InstructionImpl)
-2() element: null (InstructionImpl)
+1(2) element: Perl5 (InstructionImpl)
+2(3) element: PsiPerlReturnExprImpl(Perl5: RETURN_EXPR) (InstructionImpl)
+3() element: null (InstructionImpl)

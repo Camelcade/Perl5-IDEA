@@ -39,8 +39,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
-
 /**
  * Created by hurricup on 11.11.2015.
  */
@@ -97,12 +95,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   @NotNull
   private PerlValue computeReturnValueFromCode() {
-    PsiPerlBlock subBlock = getSubDefinitionBody();
-    if (subBlock == null) {
-      return UNKNOWN_VALUE;
-    }
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
-    Instruction[] instructions = PerlControlFlowBuilder.getFor(subBlock).getInstructions();
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(this).getInstructions();
     Instruction exitInstruction = instructions[instructions.length - 1];
     PerlControlFlowBuilder.iteratePrev(instructions, it -> {
       if (it == exitInstruction || it.num() == 0) {

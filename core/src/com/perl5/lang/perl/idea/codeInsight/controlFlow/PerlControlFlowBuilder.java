@@ -63,6 +63,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     WHILE_STATEMENT_MODIFIER
   );
 
+  private static final TokenSet INLINE_SUB_OWNERS = TokenSet.create(EVAL_EXPR);
+
   private static final TokenSet NO_RESULT_INSTRUCTIONS = TokenSet.create(
     EXIT_EXPR, GOTO_EXPR, NEXT_EXPR, LAST_EXPR, REDO_EXPR
   );
@@ -108,6 +110,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   public ControlFlow build(PsiElement element) {
     addEntryPointNode(element);
 
+    startNodeSmart(element);
     element.acceptChildren(new PerlControlFlowVisitor(element));
 
     // create end pseudo node and close all pending edges
@@ -275,6 +278,27 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     return instruction;
   }
 
+  /**
+   * @return a scope for which control flow need to be built for the resolve purposes or null if there is none
+   * @implSpec returns non-inlined sub expression, sub definition or file
+   */
+  @Nullable
+  public static PsiElement getControlFlowScope(@NotNull PsiElement element) {
+    PsiElement elementContext = element.getContext();
+    if (elementContext == null) {
+      return null;
+    }
+    if (elementContext instanceof PerlFile || elementContext instanceof PerlSubDefinition ||
+        elementContext instanceof PerlSubExpr && !(elementContext.getParent() instanceof PerlEvalExpr)) {
+      return elementContext;
+    }
+    PerlDieScope result = PsiTreeUtil.getParentOfType(elementContext, PerlFile.class, PerlSubDefinitionElement.class, PerlSubExpr.class);
+    if (result instanceof PerlSubExpr && result.getParent() instanceof PsiPerlEvalExpr) {
+      return getControlFlowScope(result);
+    }
+    return result;
+  }
+
   // fixme given & friends
   // fixme revert do transparency?
   private class PerlControlFlowVisitor extends PerlRecursiveVisitor {
@@ -306,14 +330,18 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     }
 
     @Override
+    public void visitSubExpr(@NotNull PsiPerlSubExpr o) {
+      if (INLINE_SUB_OWNERS.contains(PsiUtilCore.getElementType(o.getParent()))) {
+        o.acceptChildren(this);
+      }
+      else {
+        startNodeSmart(o);
+      }
+    }
+
+    @Override
     public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
-      startTransparentNode(o, "collecting pendings");
-      Instruction shortCut = prevInstruction;
       startNodeSmart(o);
-      o.acceptChildren(this);
-      startTransparentNode(o, "collecting pendings");
-      addPendingEdge(o.getContainingFile(), prevInstruction);
-      prevInstruction = shortCut;
     }
 
     @Override

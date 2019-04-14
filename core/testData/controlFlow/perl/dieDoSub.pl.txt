@@ -1,4 +1,4 @@
-0(1,3) element: null (InstructionImpl)
-1(2) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo (InstructionImpl)
-2(3) element: PsiPerlSubCallExprImpl(Perl5: SUB_CALL_EXPR) (PerlNoResultInstruction)
+0(1) element: null (InstructionImpl)
+1(2) element: Perl5 (InstructionImpl)
+2(3) element: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo (InstructionImpl)
 3() element: null (InstructionImpl)
