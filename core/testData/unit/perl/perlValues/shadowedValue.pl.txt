@@ -1,0 +1,17 @@
+if($a){
+  $var = 1;
+}
+else{
+  my $var = 2;
+  $var = 3;
+}
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 58 in shadowedValue.pl
+1
+----------
+Resolved
+----------
+1

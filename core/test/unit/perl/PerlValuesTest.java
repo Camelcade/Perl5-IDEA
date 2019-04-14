@@ -28,6 +28,10 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testShadowedValue() {doTest();}
+
+  public void testShadowedValues() {doTest();}
+
   public void testSubExtractorDirect() {doTest();}
 
   public void testSubExtractorDirectObject() {doTest();}

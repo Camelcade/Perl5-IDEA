@@ -24,15 +24,14 @@ import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -188,62 +187,78 @@ public class PerlResolveUtil {
     PerlVariableDeclarationElement lexicalDeclaration = getLexicalDeclaration(variable);
 
     PsiElement stopElement = lexicalDeclaration;
-    PerlLexicalScope perlLexicalScope;
     if (lexicalDeclaration instanceof PerlImplicitVariableDeclaration) {
-      PsiElement declarationContext = lexicalDeclaration.getContext();
-      if (declarationContext == null) {
-        perlLexicalScope = ObjectUtils.tryCast(variable.getContainingFile(), PerlFile.class);
-      }
-      else {
-        stopElement = declarationContext;
-        perlLexicalScope = PsiTreeUtil.getParentOfType(declarationContext, PerlLexicalScope.class, false);
-      }
+      stopElement = lexicalDeclaration.getContext();
     }
-    else {
-      // fixme we probably should check containing file context
-      perlLexicalScope = lexicalDeclaration == null
-                         ? ObjectUtils.tryCast(variable.getContainingFile(), PerlFile.class)
-                         : PsiTreeUtil.getParentOfType(lexicalDeclaration, PerlLexicalScope.class);
-    }
-    if (perlLexicalScope == null) {
-      LOG.error("Unable to find lexical scope for:" +
-                variable.getClass() +
-                " at " +
-                variable.getTextOffset() +
-                " in " +
-                PsiUtilCore.getVirtualFile(variable));
-      return UNKNOWN_VALUE;
-    }
-
-    Instruction[] instructions = PerlControlFlowBuilder.getFor(perlLexicalScope).getInstructions();
-    int currentInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(instructions, variable);
-    if (currentInstructionIndex < 0) {
-      if (!Objects.equals(variable.getContainingFile(), perlLexicalScope.getContainingFile())) {
-        // fixme should handle getContext. One of this item in the generated file
-        return UNKNOWN_VALUE;
-      }
-      LOG.error("Unable to find an instruction for " +
-                variable.getText() + "; " +
-                variable.getTextRange() + "; " +
-                PsiUtilCore.getVirtualFile(variable));
-      return UNKNOWN_VALUE;
-    }
-    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
 
     String variableName = variable.getName();
     String namespaceName = variable.getExplicitNamespaceName();
     PerlVariableType actualType = variable.getActualType();
     PsiElement finalStopElement = stopElement;
 
+    return getValueFromControlFlow(variable, namespaceName, variableName, actualType, lexicalDeclaration, finalStopElement);
+  }
+
+  /**
+   * Building a control flow for the {@code element} and attempts to find a value of variable
+   *
+   * @param element            to build control flow for
+   * @param namespaceName      namespace name of the variable if any
+   * @param variableName       name of the variable
+   * @param actualType         actual type of the variable
+   * @param lexicalDeclaration variable declaration element
+   * @param stopElement        stop element, lexical declaration or it's context for the light elements
+   * @return a value of found variable or {@link PerlUnknownValue#UNKNOWN_VALUE}
+   * @see PerlControlFlowBuilder#getControlFlowScope(com.intellij.psi.PsiElement)
+   */
+  @NotNull
+  private static PerlValue getValueFromControlFlow(@NotNull PsiElement element,
+                                                   @Nullable String namespaceName,
+                                                   @NotNull String variableName,
+                                                   @NotNull PerlVariableType actualType,
+                                                   @Nullable PerlVariableDeclarationElement lexicalDeclaration,
+                                                   @Nullable PsiElement stopElement) {
+    PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(element);
+    if (controlFlowScope == null) {
+      LOG.error("Unable to find control flow scope for:" +
+                element.getClass() +
+                " at " +
+                element.getTextOffset() +
+                " in " +
+                PsiUtilCore.getVirtualFile(element));
+      return UNKNOWN_VALUE;
+    }
+    Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope).getInstructions();
+    int currentInstructionIndex = ControlFlowUtil.findInstructionNumberByElement(
+      instructions, element instanceof PerlFile ? element.getContext() : element);
+    if (currentInstructionIndex < 0) {
+      LOG.error("Unable to find an instruction for " +
+                element.getClass() + "; " +
+                element.getText() + "; " +
+                element.getTextRange() + "; " +
+                PsiUtilCore.getVirtualFile(element));
+      return UNKNOWN_VALUE;
+    }
+    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
       if (!(currentInstruction instanceof PerlAssignInstruction)) {
-        if (currentInstruction.getElement() instanceof PerlSubDefinitionElement && lexicalDeclaration instanceof PerlBuiltInVariable) {
-          if ("_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
-            valueBuilder.addVariant(PerlArgumentsValue.ARGUMENTS_VALUE);
-          }
+        PsiElement instructionElement = currentInstruction.getElement();
+        if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
+            lexicalDeclaration instanceof PerlBuiltInVariable && "_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
+          valueBuilder.addVariant(PerlArgumentsValue.ARGUMENTS_VALUE);
           return CONTINUE;
         }
-        return Objects.equals(finalStopElement, currentInstruction.getElement()) ? CONTINUE : NEXT;
+        if (Objects.equals(stopElement, instructionElement)) {
+          return CONTINUE;
+        }
+        if (currentInstruction.num() == 1 && instructionElement != null) {
+          PsiElement contextElement = instructionElement.getContext();
+          if (contextElement != null) {
+            valueBuilder.addVariant(
+              getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
+          }
+        }
+        return NEXT;
       }
       if (currentInstruction.num() > currentInstructionIndex) {
         return NEXT;
@@ -259,7 +274,13 @@ public class PerlResolveUtil {
       if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
         return NEXT;
       }
-      valueBuilder.addVariant(PerlValue.from(assignee, ((PerlAssignInstruction)currentInstruction).getRightSide()));
+      PerlVariableDeclarationElement assigneeDeclaration = getLexicalDeclaration((PerlVariable)assignee);
+      if (lexicalDeclaration == null && assigneeDeclaration == null && !(assignee.getParent() instanceof PerlVariableDeclarationElement) ||
+          lexicalDeclaration != null &&
+          (Objects.equals(lexicalDeclaration, assigneeDeclaration) || Objects.equals(lexicalDeclaration, assignee.getParent()))
+      ) {
+        valueBuilder.addVariant(PerlValue.from(assignee, ((PerlAssignInstruction)currentInstruction).getRightSide()));
+      }
       return CONTINUE;
     });
 
