@@ -1,0 +1,10 @@
+$var = Foo::Bar::->constant_sub;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 33 in attributeConstantSub.pl
+scalar Foo::Bar->constant_sub()
+----------
+Resolved
+----------
+sub_result

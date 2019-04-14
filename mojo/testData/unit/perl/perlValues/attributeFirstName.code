@@ -1,0 +1,2 @@
+$var = Foo::Bar::->first_name;
+$v<caret>ar;

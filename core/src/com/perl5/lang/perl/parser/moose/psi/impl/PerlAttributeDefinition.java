@@ -26,7 +26,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Function;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
-import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
@@ -51,17 +50,6 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
                                  @NotNull List<PerlSubArgument> subArguments,
                                  @Nullable PerlSubAnnotations annotations) {
     super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations);
-  }
-
-  public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,
-                                 @NotNull String subName,
-                                 @NotNull IStubElementType elementType,
-                                 @NotNull PsiElement nameIdentifier,
-                                 @Nullable String packageName,
-                                 @NotNull List<PerlSubArgument> subArguments,
-                                 @Nullable PerlSubAnnotations annotations,
-                                 @Nullable PsiPerlBlock subDefinitionBody) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, subDefinitionBody);
   }
 
   public PerlAttributeDefinition(@NotNull PerlMooseAttributeWrapper wrapper,

@@ -24,6 +24,21 @@ public class MojoPerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testAttributeConstantSub() {doTestMojoAttr();}
+
+  public void testAttributeConstantValue() {doTestMojoAttr();}
+
+  public void testAttributeFirstName() {doTestMojoAttr();}
+
+  public void testAttributeSecondSub() {doTestMojoAttr();}
+
+  public void testAttributeUnnamed() {doTestMojoAttr();}
+
+  private void doTestMojoAttr() {
+    myFixture.copyFileToProject("attributeDeclarations.pl");
+    doTest();
+  }
+
   public void testHelperValue() {
     myFixture.copyFileToProject("helperValueDeclaration.pl");
     doTest();

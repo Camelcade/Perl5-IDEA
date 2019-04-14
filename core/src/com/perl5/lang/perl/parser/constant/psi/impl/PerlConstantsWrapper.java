@@ -75,7 +75,7 @@ public class PerlConstantsWrapper extends PerlPolyNamedElementBase<PerlPolyNamed
           PerlPackageUtil.getContextNamespaceName(this),
           Collections.emptyList(),
           PerlSubAnnotations.tryToFindAnnotations(keyElement, getParent()),
-          PerlValue.fromLazy(valElement)
+          PerlValue.lazy(valElement)
         ));
       }
 

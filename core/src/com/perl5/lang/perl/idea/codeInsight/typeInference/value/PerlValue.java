@@ -293,10 +293,18 @@ public abstract class PerlValue {
   }
 
   /**
+   * @return {@code value} wrapped with atomic producer
+   */
+  @NotNull
+  public static AtomicNotNullLazyValue<PerlValue> lazy(@NotNull PerlValue value) {
+    return value.isEmpty() ? UNKNOWN_VALUE_PROVIDER : AtomicNotNullLazyValue.createValue(() -> value);
+  }
+
+  /**
    * @return lazy-computable value for the {@code element}
    */
   @NotNull
-  public static AtomicNotNullLazyValue<PerlValue> fromLazy(@Nullable PsiElement element) {
+  public static AtomicNotNullLazyValue<PerlValue> lazy(@Nullable PsiElement element) {
     if (element == null) {
       return UNKNOWN_VALUE_PROVIDER;
     }

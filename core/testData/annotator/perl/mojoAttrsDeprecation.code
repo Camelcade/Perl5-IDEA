@@ -24,7 +24,7 @@ has ['name17',
 has ['name18',
         #@deprecated
         '<warning descr="This sub is deprecated">name28</warning>',
-        'name38'] => sub {...};
+        'name38'];
 
 __PACKAGE__-><warning descr="This sub is deprecated">name</warning>;
 __PACKAGE__->name1;

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -113,6 +114,12 @@ public final class PerlScalarValue extends PerlValue {
     int result = super.computeHashCode();
     result = 31 * result + myValue.hashCode();
     return result;
+  }
+
+
+  @NotNull
+  public static AtomicNotNullLazyValue<PerlValue> createLazy(@Nullable String value) {
+    return PerlValue.lazy(create(value));
   }
 
   @NotNull

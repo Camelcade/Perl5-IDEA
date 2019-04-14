@@ -1,0 +1,10 @@
+$var = Foo::Bar::->second_sub;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 31 in attributeSecondSub.pl
+scalar Foo::Bar->second_sub()
+----------
+Resolved
+----------
+multi_sub_result

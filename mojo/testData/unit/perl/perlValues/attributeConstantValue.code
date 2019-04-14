@@ -1,0 +1,2 @@
+$var = Foo::Bar::->constant_value;
+$v<caret>ar;

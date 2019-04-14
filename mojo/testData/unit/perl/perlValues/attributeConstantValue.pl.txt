@@ -1,0 +1,10 @@
+$var = Foo::Bar::->constant_value;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 35 in attributeConstantValue.pl
+scalar Foo::Bar->constant_value()
+----------
+Resolved
+----------
+bingo

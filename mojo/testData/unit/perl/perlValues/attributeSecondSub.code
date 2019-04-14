@@ -1,0 +1,2 @@
+$var = Foo::Bar::->second_sub;
+$v<caret>ar;

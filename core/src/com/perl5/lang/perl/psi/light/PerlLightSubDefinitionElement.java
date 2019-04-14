@@ -47,7 +47,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   private AtomicNotNullLazyValue<List<PerlSubArgument>> mySubArgumentsProvider;
   @NotNull
-  private AtomicNotNullLazyValue<PerlValue> myReturnValueFromCodeProfider;
+  private AtomicNotNullLazyValue<PerlValue> myReturnValueFromCodeProvider;
   // fixme should we actualize this on fly, like identifier?
   @Nullable
   private PsiPerlBlock mySubDefinitionBody;
@@ -59,13 +59,13 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @Nullable String packageName,
                                        @Nullable PerlSubAnnotations annotations,
                                        @NotNull List<PerlSubArgument> subArguments,
-                                       @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProfider,
+                                       @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider,
                                        @Nullable PsiPerlBlock subDefinitionBody) {
     super(delegate, name, elementType, nameIdentifier);
     myPackageName = packageName;
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(() -> annotations);
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(() -> subArguments);
-    myReturnValueFromCodeProfider = returnValueFromCodeProfider;
+    myReturnValueFromCodeProvider = returnValueFromCodeProvider;
     mySubDefinitionBody = subDefinitionBody;
   }
 
@@ -82,7 +82,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
       () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(
       () -> PerlSubDefinitionElement.getPerlSubArgumentsFromBody(mySubDefinitionBody));
-    myReturnValueFromCodeProfider = AtomicNotNullLazyValue.createValue(
+    myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(
       () -> PerlResolveUtil.computeReturnValueFromControlFlow(elementSub)
     );
   }
@@ -110,24 +110,12 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     this(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations, UNKNOWN_VALUE_PROVIDER);
   }
 
-  @Deprecated
-  public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
-                                       @NotNull String subName,
-                                       @NotNull IStubElementType elementType,
-                                       @NotNull PsiElement nameIdentifier,
-                                       @Nullable String packageName,
-                                       @NotNull List<PerlSubArgument> subArguments,
-                                       @Nullable PerlSubAnnotations annotations,
-                                       @Nullable PsiPerlBlock subDefinitionBody) {
-    this(delegate, subName, elementType, nameIdentifier, packageName, annotations, subArguments, UNKNOWN_VALUE_PROVIDER, subDefinitionBody);
-  }
-
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate, @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub.getSubName(), stub.getStubType());
     myPackageName = stub.getNamespaceName();
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(stub::getSubArgumentsList);
     myAnnotationsProvider = AtomicNullableLazyValue.createValue(stub::getAnnotations);
-    myReturnValueFromCodeProfider = AtomicNotNullLazyValue.createValue(stub::getReturnValueFromCode);
+    myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(stub::getReturnValueFromCode);
   }
 
   @Deprecated
@@ -230,11 +218,11 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   @NotNull
   @Override
   public PerlValue getReturnValueFromCode() {
-    return myReturnValueFromCodeProfider.getValue();
+    return myReturnValueFromCodeProvider.getValue();
   }
 
   public void setReturnValueFromCode(@NotNull PerlValue returnValueFromCode) {
-    myReturnValueFromCodeProfider = AtomicNotNullLazyValue.createValue(() -> returnValueFromCode);
+    myReturnValueFromCodeProvider = PerlValue.lazy(returnValueFromCode);
   }
 
   @Nullable

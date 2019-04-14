@@ -1,0 +1,10 @@
+$var = Foo::Bar::->unnamed;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 28 in attributeUnnamed.pl
+scalar Foo::Bar->unnamed()
+----------
+Resolved
+----------
+Foo::Bar

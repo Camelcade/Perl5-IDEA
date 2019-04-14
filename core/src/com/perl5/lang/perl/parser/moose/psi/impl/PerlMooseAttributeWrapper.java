@@ -17,11 +17,13 @@
 package com.perl5.lang.perl.parser.moose.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
@@ -35,6 +37,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -92,7 +95,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
       .map(childStub -> {
         IStubElementType stubType = childStub.getStubType();
         if (stubType == LIGHT_METHOD_DEFINITION) {
-          return setMojoReturnsComputation(new PerlLightMethodDefinitionElement<>(this, (PerlSubDefinitionStub)childStub));
+          return new PerlLightMethodDefinitionElement<>(this, (PerlSubDefinitionStub)childStub);
         }
         else if (stubType == LIGHT_ATTRIBUTE_DEFINITION) {
           return new PerlAttributeDefinition(this, (PerlSubDefinitionStub)childStub);
@@ -139,32 +142,30 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
   @NotNull
   private List<PerlDelegatingLightNamedElement> createMojoAttributes(@NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
     List<PsiElement> arguments = lists.second.subList(1, lists.second.size());
-    PerlSubExpr bodyExpr = arguments.size() == 1 && arguments.get(0) instanceof PerlSubExpr ? (PerlSubExpr)arguments.get(0) : null;
+    PsiElement argument = arguments.isEmpty() ? null : arguments.get(0);
+    PerlSubExpr subExpr = ObjectUtils.tryCast(argument, PerlSubExpr.class);
 
     List<PerlDelegatingLightNamedElement> result = new ArrayList<>();
-    String packageName = PerlPackageUtil.getContextNamespaceName(this);
+    String namespaceName = PerlPackageUtil.getContextNamespaceName(this);
     for (PsiElement identifier : lists.first) {
+      AtomicNotNullLazyValue<PerlValue> valueProvider =
+        subExpr != null ? PerlValue.lazy(PerlResolveUtil.computeReturnValueFromControlFlow(subExpr)) :
+        argument != null ? PerlValue.lazy(argument) : PerlScalarValue.createLazy(namespaceName);
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,
         ElementManipulators.getValueText(identifier),
         LIGHT_METHOD_DEFINITION,
         identifier,
-        packageName,
-        Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
+        namespaceName,
         PerlSubAnnotations.tryToFindAnnotations(identifier, getParent()),
-        bodyExpr == null ? null : bodyExpr.getBlock()
+        Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar("new_value")),
+        valueProvider,
+        subExpr == null ? null : subExpr.getBlock()
       );
-      result.add(setMojoReturnsComputation(newMethod));
+      result.add(newMethod);
     }
 
     return result;
-  }
-
-  @NotNull
-  private PerlLightMethodDefinitionElement setMojoReturnsComputation(
-    @NotNull PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod) {
-    newMethod.setReturnValueFromCode(PerlScalarValue.create(newMethod.getNamespaceName()));
-    return newMethod;
   }
 
   @NotNull
