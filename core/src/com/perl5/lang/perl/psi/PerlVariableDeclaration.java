@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMember {

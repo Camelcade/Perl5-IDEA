@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
 
 public final class PerlArrayElementValue extends PerlParametrizedOperationValue {

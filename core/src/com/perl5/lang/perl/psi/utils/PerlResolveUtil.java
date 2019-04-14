@@ -29,10 +29,9 @@ import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
@@ -45,7 +44,7 @@ import java.util.Objects;
 
 import static com.intellij.codeInsight.controlflow.ControlFlowUtil.Operation.CONTINUE;
 import static com.intellij.codeInsight.controlflow.ControlFlowUtil.Operation.NEXT;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 17.02.2016.
@@ -208,7 +207,7 @@ public class PerlResolveUtil {
    * @param actualType         actual type of the variable
    * @param lexicalDeclaration variable declaration element
    * @param stopElement        stop element, lexical declaration or it's context for the light elements
-   * @return a value of found variable or {@link PerlUnknownValue#UNKNOWN_VALUE}
+   * @return a value of found variable or {@link PerlValues#UNKNOWN_VALUE}
    * @see PerlControlFlowBuilder#getControlFlowScope(com.intellij.psi.PsiElement)
    */
   @NotNull
@@ -245,7 +244,7 @@ public class PerlResolveUtil {
         PsiElement instructionElement = currentInstruction.getElement();
         if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
             lexicalDeclaration instanceof PerlBuiltInVariable && "_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
-          valueBuilder.addVariant(PerlArgumentsValue.ARGUMENTS_VALUE);
+          valueBuilder.addVariant(PerlValues.ARGUMENTS_VALUE);
           return CONTINUE;
         }
         if (Objects.equals(stopElement, instructionElement)) {

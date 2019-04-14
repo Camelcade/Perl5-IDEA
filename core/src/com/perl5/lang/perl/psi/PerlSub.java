@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
@@ -25,7 +24,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 
 public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
@@ -92,7 +91,7 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    *
    * @param contextPackage package this sub been invoked from, useful to return $self
    * @param arguments      invocation arguments
-   * @return type of return value if can be calculated, or {@link PerlUnknownValue#UNKNOWN_VALUE}
+   * @return type of return value if can be calculated, or {@link PerlValues#UNKNOWN_VALUE}
    */
   @NotNull
   default PerlValue getReturnValue() {

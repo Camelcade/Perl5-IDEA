@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
@@ -42,10 +43,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DEFERRED;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue.PerlValueType.DETERMINISTIC;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.*;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 /**
@@ -219,7 +219,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * Works the same way as {@link #convert(Function)}, but returns {@link PerlUnknownValue#UNKNOWN_VALUE} if
+   * Works the same way as {@link #convert(Function)}, but returns {@link PerlValues#UNKNOWN_VALUE} if
    * converter returned {@code UNKNOWN_VALUE} at least once.
    *
    * @see PerlHashElementValue#create(com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue, com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue)
@@ -247,7 +247,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return true iff {@code type}is null or {@link PerlUnknownValue#UNKNOWN_VALUE}
+   * @return true iff {@code type}is null or {@link PerlValues#UNKNOWN_VALUE}
    */
   @Contract("null->true")
   public static boolean isEmpty(@Nullable PerlValue type) {
@@ -255,7 +255,7 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return true iff {@code} type is not empty and not {@link PerlUnknownValue#UNKNOWN_VALUE}
+   * @return true iff {@code} type is not empty and not {@link PerlValues#UNKNOWN_VALUE}
    */
   @Contract("null->false")
   public static boolean isNotEmpty(@Nullable PerlValue type) {
@@ -293,11 +293,26 @@ public abstract class PerlValue {
   }
 
   /**
-   * @return a value for {@code element} or {@link PerlUnknownValue#UNKNOWN_VALUE} if element is null/not valuable.
+   * @return lazy-computable value for the {@code element}
+   */
+  @NotNull
+  public static AtomicNotNullLazyValue<PerlValue> fromLazy(@Nullable PsiElement element) {
+    if (element == null) {
+      return UNKNOWN_VALUE_PROVIDER;
+    }
+    return AtomicNotNullLazyValue.createValue(() -> from(element));
+  }
+
+  /**
+   * @return a value for {@code element} or {@link PerlValues#UNKNOWN_VALUE} if element is null/not valuable.
    */
   @NotNull
   public static PerlValue from(@Nullable PsiElement element) {
     if (element == null) {
+      return UNKNOWN_VALUE;
+    }
+    if (!element.isValid()) {
+      LOG.error("Attempt to compute value from invalid element");
       return UNKNOWN_VALUE;
     }
     element = element.getOriginalElement();

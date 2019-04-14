@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_PROVIDER;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
 
 public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
@@ -108,7 +108,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @Nullable String packageName,
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @Nullable PerlSubAnnotations annotations) {
-    this(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations, UNKNOWN_PROVIDER);
+    this(delegate, subName, elementType, nameIdentifier, packageName, subArguments, annotations, UNKNOWN_VALUE_PROVIDER);
   }
 
   @Deprecated
@@ -120,7 +120,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @Nullable PerlSubAnnotations annotations,
                                        @Nullable PsiPerlBlock subDefinitionBody) {
-    this(delegate, subName, elementType, nameIdentifier, packageName, annotations, subArguments, UNKNOWN_PROVIDER, subDefinitionBody);
+    this(delegate, subName, elementType, nameIdentifier, packageName, annotations, subArguments, UNKNOWN_VALUE_PROVIDER, subDefinitionBody);
   }
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate, @NotNull PerlSubDefinitionStub stub) {

@@ -23,14 +23,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
 
 /**
  * Pseudo-value representing sub input arguments
  */
-public final class PerlArgumentsValue extends PerlSpecialValue {
-  public static final PerlArgumentsValue ARGUMENTS_VALUE = new PerlArgumentsValue();
+final class PerlArgumentsValue extends PerlSpecialValue {
+  static final PerlArgumentsValue INSTANCE = new PerlArgumentsValue();
 
   private PerlArgumentsValue() {
   }

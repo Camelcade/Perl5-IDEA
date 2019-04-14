@@ -20,8 +20,8 @@ import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-public final class PerlUndefValue extends PerlSpecialValue {
-  public static final PerlUndefValue UNDEF_VALUE = new PerlUndefValue();
+final class PerlUndefValue extends PerlSpecialValue {
+  static final PerlUndefValue INSTANCE = new PerlUndefValue();
 
   private PerlUndefValue() {
   }

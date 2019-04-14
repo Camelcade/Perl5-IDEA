@@ -27,9 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue.ARGUMENTS_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue.UNDEF_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.*;
 
 /**
  * Manages {@link PerlValue} serialization and deserialization, manages serialization ID

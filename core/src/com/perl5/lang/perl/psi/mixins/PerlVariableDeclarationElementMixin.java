@@ -42,7 +42,7 @@ import javax.swing.*;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 /**
  * Created by hurricup on 29.09.2015.

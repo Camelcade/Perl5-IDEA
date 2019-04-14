@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlValuesCacheService implements PsiModificationTracker.Listener {
   private static final Logger LOG = Logger.getInstance(PerlValuesCacheService.class);

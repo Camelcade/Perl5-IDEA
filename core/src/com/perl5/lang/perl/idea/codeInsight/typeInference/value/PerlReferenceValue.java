@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlReferenceValue extends PerlOperationValue {
 

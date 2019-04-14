@@ -16,9 +16,28 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue.ARGUMENTS_VALUE;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 
 public interface PerlValues {
+  /**
+   * Represents plain {@code undef}
+   */
+  PerlUndefValue UNDEF_VALUE = PerlUndefValue.INSTANCE;
+
+  /**
+   * Represents arguments value that will be passed to the sub on resolve
+   */
+  PerlArgumentsValue ARGUMENTS_VALUE = PerlArgumentsValue.INSTANCE;
+
+  /**
+   * Represents unknown value - means we can't compute it. like get hash element from scalar.
+   */
+  PerlUnknownValue UNKNOWN_VALUE = PerlUnknownValue.INSTANCE;
+  AtomicNotNullLazyValue<PerlValue> UNKNOWN_VALUE_PROVIDER = AtomicNotNullLazyValue.createValue(() -> UNKNOWN_VALUE);
+
+  /**
+   * Handy predefined value, that return first argument
+   */
   PerlValue RETURN_FIRST_ARGUMENT_VALUE = PerlValuesManager.intern(PerlArrayElementValue.create(
     ARGUMENTS_VALUE, PerlScalarValue.create("0")
   ));
