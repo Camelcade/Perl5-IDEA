@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
+import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +30,11 @@ public final class PerlArgumentsValue extends PerlSpecialValue {
   public static final PerlArgumentsValue ARGUMENTS_VALUE = new PerlArgumentsValue();
 
   private PerlArgumentsValue() {
+  }
+
+  @Override
+  PerlValue computeResolve(@NotNull PsiElement contextElement) {
+    return this;
   }
 
   @NotNull
