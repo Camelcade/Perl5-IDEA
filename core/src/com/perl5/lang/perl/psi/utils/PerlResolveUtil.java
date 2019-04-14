@@ -35,6 +35,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsVal
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
@@ -236,7 +237,7 @@ public class PerlResolveUtil {
 
     ControlFlowUtil.iteratePrev(currentInstructionIndex, instructions, currentInstruction -> {
       if (!(currentInstruction instanceof PerlAssignInstruction)) {
-        if (currentInstruction.getElement() instanceof PerlSubDefinitionElement && variable.isBuiltIn()) {
+        if (currentInstruction.getElement() instanceof PerlSubDefinitionElement && lexicalDeclaration instanceof PerlBuiltInVariable) {
           if ("_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
             valueBuilder.addVariant(PerlArgumentsValue.ARGUMENTS_VALUE);
           }
