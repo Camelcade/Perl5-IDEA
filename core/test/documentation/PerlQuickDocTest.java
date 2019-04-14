@@ -32,6 +32,8 @@ public class PerlQuickDocTest extends PerlLightTestCase {
     return "testData/documentation/perl/quickdoc";
   }
 
+  public void testBless() {doTest();}
+
   public void testSplice() {doTest();}
 
   public void testSubDefinition() {doTest();}

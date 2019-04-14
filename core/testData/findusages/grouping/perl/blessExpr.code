@@ -1,0 +1,2 @@
+my $ref;
+my $blessed_ref = bless $r<caret>ef, $ref;

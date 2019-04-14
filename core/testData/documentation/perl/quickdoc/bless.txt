@@ -1,0 +1,15 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">bless REF,CLASSNAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">bless REF</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">This function tells the thingy referenced by REF that it is now an object
+in the CLASSNAME package.  If CLASSNAME is omitted, the current package
+is used.  Because a <a href="psi_element://pod%3A%3Aperlfunc%2Fbless+REF%2CCLASSNAME">C<bless></a> is often the last
+thing in a constructor, it returns the reference for convenience.
+Always use the two-argument version if a derived class might inherit the
+method doing the blessing.  See <a href="psi_element://perlobj">perlobj</a> for more about the blessing
+(and blessings) of objects.</p>
+<p style="padding-bottom: 10px;">Consider always blessing objects in CLASSNAMEs that are mixed case.
+Namespaces with all lowercase names are considered reserved for
+Perl pragmas.  Builtin types have all uppercase names.  To prevent
+confusion, you may wish to avoid such package names as well.  Make sure
+that CLASSNAME is a true value.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlmod%2FPerl+Modules">Perl Modules in perlmod</a>.</p></dd></dl>

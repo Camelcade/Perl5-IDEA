@@ -124,6 +124,7 @@ limitations under the License.
 
     RESERVED_DEFINED='defined'
     RESERVED_WANTARRAY='wantarray'
+    RESERvED_BLESS='bless'
 
     RESERVED_POP='pop'
     RESERVED_SHIFT='shift'
@@ -735,6 +736,7 @@ defined_expr ::= 'defined' [unary_expr] {pin=1}
 wantarray_expr ::= 'wantarray'
 delete_expr ::= 'delete' unary_expr {pin=1}
 splice_expr ::= 'splice' parse_list_expr {pin=1}
+bless_expr ::= 'bless' parse_list_expr {pin=1}
 
 private lnr_param ::= label_expr | expr // fixme scalar_expr ?
 private goto_param ::= label_expr | code_primitive  !'(' | expr
@@ -824,6 +826,7 @@ term_expr ::=
     | defined_expr
     | delete_expr
     | splice_expr
+    | bless_expr
     | wantarray_expr
     | exit_expr
     | hash_variable

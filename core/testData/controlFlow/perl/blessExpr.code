@@ -1,0 +1,1 @@
+$var = bless { some => 42}, $class_name;

@@ -146,7 +146,7 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     else if (parentExpressionType == DELETE_EXPR) {
       return Access.ReadWrite;
     }
-    else if (parentExpressionType == SPLICE_EXPR) {
+    else if (parentExpressionType == SPLICE_EXPR || parentExpressionType == BLESS_EXPR) {
       List<PsiElement> children = PerlArrayUtil.collectListElements(expression);
       if (children.size() > 0 && PsiTreeUtil.isAncestor(children.get(0), originalElement, false)) {
         return Access.ReadWrite;
