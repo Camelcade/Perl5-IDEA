@@ -4,15 +4,15 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
   Something in perlInheritance.pl; /package_gutter_icon.png; null -> PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Something at 0 in perlInheritance.pl
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    LIBRARY_CONST4 in Constants.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in Constants.pm
+    LIBRARY_CONST4 in MyTest::Constants; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in Constants.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_IMPORTED
 
-    LIBRARY_CONST3 in Constants.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Constants.pm
+    LIBRARY_CONST3 in MyTest::Constants; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Constants.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_IMPORTED
 
-    LIBRARY_CONST2 in Constants.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 81 in Constants.pm
+    LIBRARY_CONST2 in MyTest::Constants; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 81 in Constants.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_IMPORTED
 
-    LIBRARY_CONST1 in Constants.pm; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in Constants.pm
+    LIBRARY_CONST1 in MyTest::Constants; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in Constants.pm
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_IMPORTED
 

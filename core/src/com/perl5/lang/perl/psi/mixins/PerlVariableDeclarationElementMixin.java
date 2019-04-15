@@ -27,7 +27,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
@@ -196,7 +196,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public ItemPresentation getPresentation() {
-    return new PerlItemPresentationSimple(this, getName());
+    return new PerlItemPresentationSimpleDynamicLocation(this, getName());
   }
 
 
