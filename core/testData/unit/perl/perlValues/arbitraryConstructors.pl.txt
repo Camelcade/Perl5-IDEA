@@ -1,0 +1,14 @@
+$obj = $a ? 'Something::Really::Wierd': 'Something::Else::Wierd'
+$var = $obj->new(one => 42);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 96 in arbitraryConstructors.pl
+scalar OneOf[Something::Else::Wierd,
+Something::Really::Wierd]->new(one, 42)
+----------
+Resolved
+----------
+OneOf[Something::Else::Wierd,
+Something::Really::Wierd]

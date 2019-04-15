@@ -8,4 +8,4 @@ Hash(Foo::Bar->new())
 ----------
 Resolved
 ----------
-Hash(Value unknown)
+Value unknown

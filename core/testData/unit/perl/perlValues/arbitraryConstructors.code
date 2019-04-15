@@ -1,0 +1,5 @@
+
+$obj = $a ? 'Something::Really::Wierd': 'Something::Else::Wierd'
+$var = $obj->new(one => 42);
+
+$v<caret>ar;

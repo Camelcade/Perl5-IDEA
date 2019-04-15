@@ -8,4 +8,4 @@ scalar Foo::Bar->new()
 ----------
 Resolved
 ----------
-Value unknown
+Foo::Bar

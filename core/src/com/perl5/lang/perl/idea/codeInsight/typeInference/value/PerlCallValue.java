@@ -71,13 +71,16 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                            @NotNull PerlValue resolvedNamespaceValue,
                                            @NotNull PerlValue resolvedSubNameValue,
                                            @NotNull Map<PerlValue, PerlValue> substitutions) {
-    GlobalSearchScope resolveScope = contextElement.getResolveScope();
-    Set<String> namespaceNames = resolvedNamespaceValue.getNamespaceNames();
-    if (namespaceNames.isEmpty()) {
-      return UNKNOWN_VALUE;
-    }
     Set<String> subNames = resolvedSubNameValue.getSubNames();
     if (subNames.isEmpty()) {
+      return UNKNOWN_VALUE;
+    }
+    if (subNames.size() == 1 && "new".equals(subNames.iterator().next())) {
+      return resolvedNamespaceValue;
+    }
+
+    Set<String> namespaceNames = resolvedNamespaceValue.getNamespaceNames();
+    if (namespaceNames.isEmpty()) {
       return UNKNOWN_VALUE;
     }
 
@@ -86,9 +89,10 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
       resolvedArguments.isEmpty() ? PerlArrayValue.EMPTY_ARRAY : PerlArrayValue.builder().addElements(resolvedArguments).build();
     Map<PerlValue, PerlValue> innerSubstitutions = Collections.singletonMap(ARGUMENTS_VALUE, argumentsValue);
 
-    PerlValue resolveResult = RecursionManager.doPreventingRecursion(
+    GlobalSearchScope resolveScope = contextElement.getResolveScope();
+    PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
+    RecursionManager.doPreventingRecursion(
       new Object[]{resolveScope, resolvedNamespaceValue, resolvedSubNameValue, innerSubstitutions}, true, () -> {
-        PerlOneOfValue.Builder builder = PerlOneOfValue.builder();
         processCallTargets(
           contextElement.getProject(), resolveScope, contextElement, namespaceNames, subNames, it -> {
             if (it instanceof PerlSubElement) {
@@ -96,9 +100,9 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
             }
             return true;
           });
-        return builder.build();
+        return null;
       });
-    return ObjectUtils.notNull(resolveResult, UNKNOWN_VALUE);
+    return builder.build();
   }
 
   /**

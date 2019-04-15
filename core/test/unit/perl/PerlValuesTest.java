@@ -28,6 +28,15 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testArbitraryConstructor() {doTest();}
+
+  public void testArbitraryConstructorStatic() {
+    // fixme this behaviour is questionable, see commit message
+    doTest();
+  }
+
+  public void testArbitraryConstructors() {doTest();}
+
   public void testConstantSingle() {doTest();}
 
   public void testConstantMulti() {doTest();}

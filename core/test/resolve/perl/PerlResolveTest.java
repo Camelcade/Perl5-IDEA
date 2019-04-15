@@ -83,7 +83,7 @@ public class PerlResolveTest extends PerlLightTestCase {
   public void testSignaturesVariables() {doTest();}
 
   public void testFancyMethodCall() {
-    //doTest();
+    doTest();
   }
 
   public void testMooseAttrs() {doTest();}

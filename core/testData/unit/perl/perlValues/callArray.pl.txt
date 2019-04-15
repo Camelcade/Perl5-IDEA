@@ -8,4 +8,4 @@ Array(Foo::Bar->new())
 ----------
 Resolved
 ----------
-Array(Value unknown)
+Array(Foo::Bar)

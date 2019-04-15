@@ -1,0 +1,3 @@
+$var = Something::Really::Wierd::new(one => 42);
+
+$v<caret>ar;

@@ -1,0 +1,11 @@
+$var = Something::Really::Wierd::->new(one => 42);
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 52 in arbitraryConstructor.pl
+scalar Something::Really::Wierd->new(one, 42)
+----------
+Resolved
+----------
+Something::Really::Wierd
