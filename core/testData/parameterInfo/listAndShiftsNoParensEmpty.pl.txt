@@ -1,0 +1,14 @@
+<caret>Foo::Bar::list_and_shifts ;
+No element
+----------
+F<caret>oo::Bar::list_and_shifts ;
+No element
+----------
+Foo::Bar::l<caret>ist_and_shifts ;
+No element
+----------
+Foo::Bar::list_and_shifts <caret>;
+No element
+----------
+Foo::Bar::list_and_shifts ;<caret>
+No element

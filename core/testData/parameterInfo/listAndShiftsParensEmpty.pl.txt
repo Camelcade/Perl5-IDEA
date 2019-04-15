@@ -1,0 +1,14 @@
+<caret>Foo::Bar::list_and_shifts()
+No element
+----------
+Foo<caret>::Bar::list_and_shifts()
+No element
+----------
+Foo::Bar::li<caret>st_and_shifts()
+No element
+----------
+Foo::Bar::list_and_shifts(<caret>)
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts()<caret>
+<$var>, undef, $othervar

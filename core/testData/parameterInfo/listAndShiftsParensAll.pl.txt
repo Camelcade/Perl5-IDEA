@@ -1,0 +1,41 @@
+Foo:<caret>:Bar::list_and_shifts( one => two => 42)
+No element
+----------
+Foo::Bar::li<caret>st_and_shifts( one => two => 42)
+No element
+----------
+Foo::Bar::list_and_shifts(<caret> one => two => 42)
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts( <caret>one => two => 42)
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts( o<caret>ne => two => 42)
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts( one <caret>=> two => 42)
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts( one =<caret>> two => 42)
+$var, <undef>, $othervar
+----------
+Foo::Bar::list_and_shifts( one => <caret>two => 42)
+$var, <undef>, $othervar
+----------
+Foo::Bar::list_and_shifts( one => t<caret>wo => 42)
+$var, <undef>, $othervar
+----------
+Foo::Bar::list_and_shifts( one => two <caret>=> 42)
+$var, <undef>, $othervar
+----------
+Foo::Bar::list_and_shifts( one => two =<caret>> 42)
+$var, undef, <$othervar>
+----------
+Foo::Bar::list_and_shifts( one => two => <caret>42)
+$var, undef, <$othervar>
+----------
+Foo::Bar::list_and_shifts( one => two => 42<caret>)
+$var, undef, <$othervar>
+----------
+Foo::Bar::list_and_shifts( one => two => 42)<caret>
+$var, undef, <$othervar>

@@ -26,6 +26,7 @@ import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
+import com.intellij.codeInsight.hint.ShowParameterInfoHandler;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
@@ -58,6 +59,7 @@ import com.intellij.lang.LanguageStructureViewBuilder;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.documentation.DocumentationProviderEx;
 import com.intellij.lang.injection.InjectedLanguageManager;
+import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lexer.Lexer;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
@@ -102,12 +104,14 @@ import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
 import com.intellij.testFramework.MapDataContext;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.testFramework.utils.parameterInfo.MockCreateParameterInfoContext;
 import com.intellij.ui.components.breadcrumbs.Crumb;
 import com.intellij.usageView.*;
 import com.intellij.usages.*;
@@ -124,6 +128,7 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import com.perl5.lang.perl.idea.codeInsight.PerlParameterInfo;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.*;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
@@ -1887,4 +1892,60 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return fallbackKey == null ? keyName : (keyName + " => " + serializeTextAttributeKey(fallbackKey));
   }
 
+  /**
+   * Logic taken from {@link ShowParameterInfoHandler#invoke(com.intellij.openapi.project.Project, com.intellij.openapi.editor.Editor, com.intellij.psi.PsiFile, int, com.intellij.psi.PsiElement, boolean, boolean)}
+   */
+  protected void doTestParameterInfo() {
+    initWithFileSmartWithoutErrors();
+    addVirtualFileFilter();
+    List<Integer> offsets = getAndRemoveCarets();
+    Editor editor = getEditor();
+    PsiFile file = getFile();
+    int fileLength = file.getTextLength();
+    CaretModel caretModel = editor.getCaretModel();
+    StringBuilder sb = new StringBuilder();
+    for (Integer offset : offsets) {
+      if (sb.length() > 0) {
+        sb.append(SEPARATOR_NEWLINES);
+      }
+      caretModel.moveToOffset(offset);
+      sb.append(getEditorTextWithCaretsAndSelections()).append("\n");
+      final int offsetForLangDetection = offset > 0 && offset == fileLength ? offset - 1 : offset;
+      final Language language = PsiUtilCore.getLanguageAtOffset(file, offsetForLangDetection);
+      ParameterInfoHandler[] handlers =
+        ShowParameterInfoHandler.getHandlers(getProject(), language, file.getViewProvider().getBaseLanguage());
+      assertNotNull(handlers);
+      if (handlers.length == 0) {
+        sb.append("No handlers");
+        continue;
+      }
+
+
+      for (ParameterInfoHandler handler : handlers) {
+        MockCreateParameterInfoContext context = new MockCreateParameterInfoContext(editor, file);
+        Object element = handler.findElementForParameterInfo(context);
+        if (element == null) {
+          sb.append("No element");
+          continue;
+        }
+        Object[] itemsToShow = context.getItemsToShow();
+        assertNotNull(itemsToShow);
+        List<String> hintElements = new ArrayList<>();
+        for (Object itemToShow : itemsToShow) {
+          if (itemToShow instanceof PerlParameterInfo) {
+            String itemString = itemToShow.toString();
+            if (((PerlParameterInfo)itemToShow).isSelected()) {
+              itemString = "<" + itemString + ">";
+            }
+            hintElements.add(itemString);
+          }
+          else {
+            hintElements.add(itemToShow.toString());
+          }
+        }
+        sb.append(StringUtil.join(hintElements, ", "));
+      }
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
 }
