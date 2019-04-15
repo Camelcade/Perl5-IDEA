@@ -24,7 +24,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -199,7 +199,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   @Override
   public ItemPresentation getPresentation() {
-    return new PerlItemPresentationSimple(this, getSubName());
+    return new PerlItemPresentationSimpleDynamicLocation(this, getSubName());
   }
 
   @Override
