@@ -20,6 +20,7 @@ import com.intellij.codeInsight.controlflow.ControlFlowUtil;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.CachedValueProvider;
@@ -45,6 +46,7 @@ import java.util.Objects;
 import static com.intellij.codeInsight.controlflow.ControlFlowUtil.Operation.CONTINUE;
 import static com.intellij.codeInsight.controlflow.ControlFlowUtil.Operation.NEXT;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
 
 /**
  * Created by hurricup on 17.02.2016.
@@ -284,6 +286,23 @@ public class PerlResolveUtil {
     });
 
     return valueBuilder.build();
+  }
+
+  /**
+   * @see #computeReturnValueFromControlFlow(PsiElement)
+   */
+  @NotNull
+  public static AtomicNotNullLazyValue<PerlValue> computeReturnValueFromControlFlowLazy(@Nullable PsiElement subElement) {
+    if (subElement == null) {
+      return UNKNOWN_VALUE_PROVIDER;
+    }
+    return AtomicNotNullLazyValue.createValue(() -> {
+      if (!subElement.isValid()) {
+        LOG.error("Computing value for invalid element");
+        return UNKNOWN_VALUE;
+      }
+      return computeReturnValueFromControlFlow(subElement);
+    });
   }
 
   /**

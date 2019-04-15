@@ -149,7 +149,7 @@ public class PerlMooseAttributeWrapper extends PerlPolyNamedElementBase<PerlMoos
     String namespaceName = PerlPackageUtil.getContextNamespaceName(this);
     for (PsiElement identifier : lists.first) {
       AtomicNotNullLazyValue<PerlValue> valueProvider =
-        subExpr != null ? PerlValue.lazy(PerlResolveUtil.computeReturnValueFromControlFlow(subExpr)) :
+        subExpr != null ? PerlResolveUtil.computeReturnValueFromControlFlowLazy(subExpr) :
         argument != null ? PerlValue.lazy(argument) : PerlScalarValue.createLazy(namespaceName);
       PerlLightMethodDefinitionElement<PerlMooseAttributeWrapper> newMethod = new PerlLightMethodDefinitionElement<>(
         this,

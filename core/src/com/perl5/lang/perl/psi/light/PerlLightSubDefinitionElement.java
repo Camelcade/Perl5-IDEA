@@ -82,9 +82,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
       () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(
       () -> PerlSubDefinitionElement.getPerlSubArgumentsFromBody(mySubDefinitionBody));
-    myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(
-      () -> PerlResolveUtil.computeReturnValueFromControlFlow(elementSub)
-    );
+    myReturnValueFromCodeProvider = PerlResolveUtil.computeReturnValueFromControlFlowLazy(elementSub);
   }
 
   @Deprecated
