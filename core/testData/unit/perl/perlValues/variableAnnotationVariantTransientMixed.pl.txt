@@ -1,0 +1,28 @@
+package Foo::Baz;
+
+
+sub something{
+  'bingo';
+}
+
+package main;
+
+#@type Foo::Baz
+my $var = some_unknown_sub;
+
+my Bla::Bla $othervar = $var;
+
+$othervar->something;
+
+$otherv<caret>ar;
+----------
+$othervar
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 163 in variableAnnotationVariantTransientMixed.pl
+OneOf[Bla::Bla,
+Foo::Baz,
+scalar main::some_unknown_sub()]
+----------
+Resolved
+----------
+OneOf[Bla::Bla,
+Foo::Baz]

@@ -1,0 +1,15 @@
+package Foo::Baz;
+
+
+sub something{
+  'bingo';
+}
+
+package main;
+
+#@type Foo::Baz
+my $var = some_unknown_sub;
+
+$var->something;
+
+$v<caret>ar;

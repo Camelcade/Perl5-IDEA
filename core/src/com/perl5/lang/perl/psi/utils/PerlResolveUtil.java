@@ -285,6 +285,10 @@ public class PerlResolveUtil {
       return CONTINUE;
     });
 
+    if (lexicalDeclaration != null) {
+      valueBuilder.addVariant(lexicalDeclaration.getDeclaredValue());
+    }
+
     return valueBuilder.build();
   }
 

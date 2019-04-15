@@ -1,0 +1,24 @@
+package Foo::Baz;
+
+
+sub something{
+  'bingo';
+}
+
+package main;
+
+#@type Foo::Baz
+my $var = some_unknown_sub;
+
+$var->something;
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 127 in variableAnnotationVariant.pl
+OneOf[Foo::Baz,
+scalar main::some_unknown_sub()]
+----------
+Resolved
+----------
+Foo::Baz

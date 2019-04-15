@@ -28,6 +28,17 @@ public class PerlValuesTest extends PerlLightTestCase {
     return "testData/unit/perl/perlValues";
   }
 
+  public void testVariableAnnotationVariant() {
+    // fixme this behviour is questionable, see commit message
+    doTest();
+  }
+
+  public void testVariableDeclarationVariant() {doTest();}
+
+  public void testVariableAnnotationVariantTransient() {doTest();}
+
+  public void testVariableAnnotationVariantTransientMixed() {doTest();}
+
   public void testArbitraryConstructor() {doTest();}
 
   public void testArbitraryConstructorStatic() {

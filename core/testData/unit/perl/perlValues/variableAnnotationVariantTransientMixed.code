@@ -1,0 +1,17 @@
+package Foo::Baz;
+
+
+sub something{
+  'bingo';
+}
+
+package main;
+
+#@type Foo::Baz
+my $var = some_unknown_sub;
+
+my Bla::Bla $othervar = $var;
+
+$othervar->something;
+
+$otherv<caret>ar;
