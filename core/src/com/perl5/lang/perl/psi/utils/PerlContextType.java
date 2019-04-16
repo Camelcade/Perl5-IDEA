@@ -39,9 +39,9 @@ public enum PerlContextType {
   private static final Logger LOG = Logger.getInstance(PerlContextType.class);
 
   private static final TokenSet LIST_CONTEXT_ELEMENTS = TokenSet.create(
-    ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR, COMMA_SEQUENCE_EXPR, STRING_LIST, PARENTHESISED_EXPR
+    ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR, COMMA_SEQUENCE_EXPR, STRING_LIST, PARENTHESISED_EXPR, ARRAY_SLICE,
+    HASH_SLICE
   );
-
 
   public static boolean isVoid(@Nullable PsiElement element) {
     return from(element) == VOID;
