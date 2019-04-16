@@ -1,0 +1,2 @@
+Foo::Bar::MULTICONST1(<caret>)
+No element

@@ -158,6 +158,7 @@ import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.pod.PodLanguage;
@@ -800,14 +801,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     sb.append(element);
     if (element instanceof PerlSubDefinitionElement) {
       String argumentsList = ((PerlSubDefinitionElement)element).getSubArgumentsList().stream()
-        .map(argument -> {
-          if (argument.isOptional()) {
-            return "[" + argument.toStringLong() + "]";
-          }
-          else {
-            return argument.toStringLong();
-          }
-        })
+        .map(this::serializeSubArgument)
         .collect(Collectors.joining(", "));
       if (StringUtil.isNotEmpty(argumentsList)) {
         sb.append("(").append(argumentsList).append(")");
@@ -825,6 +819,15 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       sb.append("; navigated to: ").append(serializePsiElement(navigationElement));
     }
     return sb.toString();
+  }
+
+  protected String serializeSubArgument(@NotNull PerlSubArgument argument) {
+    if (argument.isOptional()) {
+      return "[" + argument.toStringLong() + "]";
+    }
+    else {
+      return argument.toStringLong();
+    }
   }
 
   protected void doTestLightElements() {
@@ -1897,6 +1900,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
    */
   protected void doTestParameterInfo() {
     initWithFileSmartWithoutErrors();
+    doTestParameterInfoWithoutInit();
+  }
+
+  protected void doTestParameterInfoWithoutInit() {
     addVirtualFileFilter();
     List<Integer> offsets = getAndRemoveCarets();
     Editor editor = getEditor();
@@ -1933,7 +1940,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         List<String> hintElements = new ArrayList<>();
         for (Object itemToShow : itemsToShow) {
           if (itemToShow instanceof PerlParameterInfo) {
-            String itemString = itemToShow.toString();
+            String itemString = serializeSubArgument(((PerlParameterInfo)itemToShow).getArgument());
             if (((PerlParameterInfo)itemToShow).isSelected()) {
               itemString = "<" + itemString + ">";
             }

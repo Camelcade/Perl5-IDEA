@@ -1,0 +1,1 @@
+Mojolicious::Controller::->mysuperhelper(<caret>);

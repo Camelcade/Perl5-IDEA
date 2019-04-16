@@ -1,0 +1,3 @@
+func myfunction($func_arg, $func_another){
+}
+myfunction(<caret>)

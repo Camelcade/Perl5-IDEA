@@ -1,0 +1,2 @@
+opendir(<caret>);
+<$handle>, $name

@@ -1,0 +1,2 @@
+close(<caret>);
+<$file_handle>

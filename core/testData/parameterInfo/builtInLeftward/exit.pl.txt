@@ -1,0 +1,2 @@
+exit(<caret>);
+No element

@@ -1,0 +1,3 @@
+sub sub_signature_with_slurpy_hash($first, %){
+}
+sub_signature_with_slurpy_hash(<caret>)

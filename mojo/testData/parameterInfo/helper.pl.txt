@@ -1,0 +1,2 @@
+Mojolicious::Controller::->mysuperhelper(<caret>);
+<$second>, %kwargs

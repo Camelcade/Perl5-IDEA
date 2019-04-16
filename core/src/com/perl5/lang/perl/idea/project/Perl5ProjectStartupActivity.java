@@ -16,12 +16,14 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.ide.startup.ServiceNotReadyException;
 import com.intellij.notification.*;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.startup.StartupManager;
-import com.intellij.openapi.vfs.VirtualFileListener;
 import com.intellij.util.FileContentUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
@@ -32,32 +34,17 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class Perl5ProjectComponent implements ProjectComponent {
-  private Project myProject;
-  private VirtualFileListener myChangeListener;
+public class Perl5ProjectStartupActivity implements StartupActivity {
+  private static final Logger LOG = Logger.getInstance(Perl5ProjectStartupActivity.class);
 
-  public Perl5ProjectComponent(Project project) {
-    myProject = project;
-  }
-
-
-  public void initComponent() {
-    // TODO: insert component initialization logic here
-  }
-
-  public void disposeComponent() {
-    // TODO: insert component disposal logic here
-  }
-
-  @NotNull
-  public String getComponentName() {
-    return "PerlProjectComponent";
-  }
-
-  public void projectOpened() {
+  @Override
+  public void runActivity(@NotNull Project project) {
+    if (project.isDefault()) {
+      return;
+    }
     PerlApplicationSettings settings = PerlApplicationSettings.getInstance();
     if (settings.shouldShowAnnounce()) {
-      StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
+      StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> {
         settings.setAnnounceShown();
         NotificationGroup group =
           new NotificationGroup(PerlBundle.message("plugin.update.baloon.group"), NotificationDisplayType.STICKY_BALLOON, true);
@@ -77,14 +64,21 @@ public class Perl5ProjectComponent implements ProjectComponent {
         Notifications.Bus.notify(notification);
       });
     }
-
-    StartupManager.getInstance(myProject).runWhenProjectIsInitialized(() -> {
-      PerlNamesCache.getInstance(myProject).forceCacheUpdate();
-      ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles);
-    });
+    PerlRemoteFileSystem.getInstance().dropFiles();
+    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
   }
 
-  public void projectClosed() {
-    PerlRemoteFileSystem.getInstance().dropFiles();
+  private static void initNamesWithRestart(@NotNull Project project) {
+    if (project.isDisposed()) {
+      return;
+    }
+    try {
+      PerlNamesCache.getInstance(project).forceCacheUpdate();
+      ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles);
+    }
+    catch (ServiceNotReadyException e) {
+      LOG.warn(e);
+      DumbService.getInstance(project).smartInvokeLater(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
+    }
   }
 }

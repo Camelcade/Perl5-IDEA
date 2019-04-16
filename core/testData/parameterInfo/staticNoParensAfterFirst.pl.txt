@@ -1,0 +1,8 @@
+Foo::Bar::list_and_shifts <caret>one =>;
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts one<caret> =>;
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts one =><caret>;
+$var, <undef>, $othervar

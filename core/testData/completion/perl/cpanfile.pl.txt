@@ -9,7 +9,7 @@ Lookups: configure_requires; Text: configure_requires; Tail: (@args); Type: Modu
 Lookups: endgrent; Text: endgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: feature; Text: feature; Tail: ($identifier, $description, $code); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: getgrent; Text: getgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: grep; Text: grep; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: grep; Text: grep; Tail: ($expr_or_block, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: read; Text: read; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: readdir; Text: readdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: readline; Text: readline; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -17,12 +17,13 @@ Lookups: readlink; Text: readlink; Tail: null; Type: CORE; Icon: /subroutine_gut
 Lookups: readpipe; Text: readpipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: recommends; Text: recommends; Tail: null; Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: recv; Text: recv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: redo; Text: redo; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ref; Text: ref; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: redo; Text: redo; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: ref; Text: ref; Tail: ([$reference]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rename; Text: rename; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: require; Text: require; Tail: ([$filename]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: requires; Text: requires; Tail: null; Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: reset; Text: reset; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: return; Text: return; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: return; Text: return; Tail: ([$scalar_or_list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: reverse; Text: reverse; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rewinddir; Text: rewinddir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: setgrent; Text: setgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

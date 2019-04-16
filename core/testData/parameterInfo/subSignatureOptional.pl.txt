@@ -1,0 +1,4 @@
+sub sub_signature_optional($first, $ = 1){
+}
+sub_signature_optional(<caret>)
+<$first>, [undef]

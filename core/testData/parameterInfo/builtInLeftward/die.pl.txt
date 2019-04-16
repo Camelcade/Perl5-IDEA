@@ -1,0 +1,2 @@
+die(<caret>);
+<@messages_or_exception>

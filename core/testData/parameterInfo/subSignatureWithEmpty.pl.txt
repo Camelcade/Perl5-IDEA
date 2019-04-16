@@ -1,0 +1,5 @@
+sub sub_signature_with_empty($first, $, $second = 1){
+}
+
+sub_signature_with_empty(<caret>)
+<$first>, undef, [$second]

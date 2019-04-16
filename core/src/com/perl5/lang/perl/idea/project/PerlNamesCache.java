@@ -24,9 +24,10 @@ import com.intellij.openapi.startup.StartupManager;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -36,22 +37,23 @@ public class PerlNamesCache implements ProjectComponent {
   private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
   private final Thread myUpdaterThread = new Thread(myUpdaterRunner);
   private final Project myProject;
-  private Set<String> myKnownSubs = new THashSet<>();
-  private Set<String> myKnownPackages = new THashSet<>();
+  private Set<String> myKnownSubs = Collections.emptySet();
+  private Set<String> myKnownPackages = Collections.emptySet();
   private final Runnable myCacheUpdaterWorker = new Runnable() {
     @Override
     public void run() {
       DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
-        Set<String> newSet = new THashSet<>();
-        newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-        newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-        newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-        myKnownSubs = newSet;
+        Set<String> subsSet = new HashSet<>();
+        subsSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+        subsSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+        subsSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
 
-        newSet = new THashSet<>();
-        newSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
-        newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-        myKnownPackages = newSet;
+        Set<String> namespacesSet = new HashSet<>();
+        namespacesSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
+        namespacesSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+
+        myKnownSubs = Collections.unmodifiableSet(subsSet);
+        myKnownPackages = Collections.unmodifiableSet(namespacesSet);
       });
     }
   };

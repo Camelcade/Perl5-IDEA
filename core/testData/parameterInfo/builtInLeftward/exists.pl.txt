@@ -1,0 +1,2 @@
+exists(<caret>);
+<$hash_element>

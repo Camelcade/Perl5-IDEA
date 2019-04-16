@@ -19,18 +19,13 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import gnu.trove.THashSet;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -42,18 +37,6 @@ import java.util.Set;
  * Misc helper methods
  */
 public class PerlUtil implements PerlElementTypes {
-  private static final TokenSet LIST_CONTEXT_ELEMENTS = TokenSet.create(
-    ARRAY_SLICE,
-    ARRAY_CAST_EXPR,
-    HASH_SLICE,
-    ARRAY_VARIABLE,
-    HASH_VARIABLE,
-    HASH_CAST_EXPR,
-    GREP_EXPR,
-    MAP_EXPR,
-    SORT_EXPR
-  );
-
   @Nullable
   public static VirtualFile getFileClassRoot(PsiFile psiFile) {
     return getFileClassRoot(psiFile.getProject(), psiFile.getVirtualFile());
@@ -117,15 +100,5 @@ public class PerlUtil implements PerlElementTypes {
       });
 
     return result;
-  }
-
-  /**
-   * Returns context type for psi element
-   *
-   * @return like scalar for scalars, strings and so on, lists for arrays, hashes, can be null if we not sure
-   */
-  @NotNull
-  public static PerlContextType getElementContextType(PsiElement element) {
-    return LIST_CONTEXT_ELEMENTS.contains(PsiUtilCore.getElementType(element)) ? PerlContextType.LIST : PerlContextType.SCALAR;
   }
 }
