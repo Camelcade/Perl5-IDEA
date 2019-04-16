@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.ide.startup.ServiceNotReadyException;
 import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
@@ -36,7 +34,6 @@ import java.util.Set;
  * Created by hurricup on 04.09.2015.
  */
 public class PerlNamesCache implements ProjectComponent {
-  private static final Logger LOG = Logger.getInstance(PerlNamesCache.class);
   private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
   private final Thread myUpdaterThread = new Thread(myUpdaterRunner);
   private final Project myProject;
@@ -45,25 +42,19 @@ public class PerlNamesCache implements ProjectComponent {
   private final Runnable myCacheUpdaterWorker = new Runnable() {
     @Override
     public void run() {
-      try {
-        DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
-          Set<String> newSet = new HashSet<>();
-          newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-          newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-          newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
+      DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
+        Set<String> subsSet = new HashSet<>();
+        subsSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+        subsSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+        subsSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
 
-          newSet = new HashSet<>();
-          newSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
-          newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+        Set<String> namespacesSet = new HashSet<>();
+        namespacesSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
+        namespacesSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
 
-          myKnownSubs = Collections.unmodifiableSet(newSet);
-          myKnownPackages = Collections.unmodifiableSet(newSet);
-        });
-      }
-      catch (ServiceNotReadyException e) {
-        LOG.warn(e);
-        DumbService.getInstance(myProject).smartInvokeLater(myCacheUpdaterWorker);
-      }
+        myKnownSubs = Collections.unmodifiableSet(subsSet);
+        myKnownPackages = Collections.unmodifiableSet(namespacesSet);
+      });
     }
   };
   //	long notifyCounter = 0;

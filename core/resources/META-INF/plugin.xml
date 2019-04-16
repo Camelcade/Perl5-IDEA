@@ -205,6 +205,7 @@
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>
+    <postStartupActivity implementation="com.perl5.lang.perl.idea.project.Perl5ProjectComponent"/>
 
     <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
@@ -732,9 +733,6 @@
     <!-- Add your project components here -->
     <component>
       <implementation-class>com.perl5.lang.perl.idea.project.PerlNamesCache</implementation-class>
-    </component>
-    <component>
-      <implementation-class>com.perl5.lang.perl.idea.project.Perl5ProjectComponent</implementation-class>
     </component>
     <component>
       <implementation-class>com.perl5.lang.perl.xsubs.PerlXSubsProjectComponent</implementation-class>
