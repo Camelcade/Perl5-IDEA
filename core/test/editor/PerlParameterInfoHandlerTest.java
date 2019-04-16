@@ -24,13 +24,17 @@ public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
     return "testData/parameterInfo";
   }
 
-  public void testListAndShiftsNoParensAll() {doTest();}
+  public void testStaticNoParensAll() {doTest();}
 
-  public void testListAndShiftsNoParensEmpty() {doTest();}
+  public void testStaticNoParensEmpty() {doTest();}
 
-  public void testListAndShiftsParensAll() {doTest();}
+  public void testStaticParensAll() {doTest();}
 
-  public void testListAndShiftsParensEmpty() {doTest();}
+  public void testStaticParensEmpty() {doTest();}
+
+  public void testObjectParensAll() {doTest();}
+
+  public void testObjectParensEmpty() {doTest();}
 
   private void doTest() {
     myFixture.copyFileToProject("subDefinitions.pl");
