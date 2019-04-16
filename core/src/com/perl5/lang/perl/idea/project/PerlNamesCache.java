@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.ide.startup.ServiceNotReadyException;
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
@@ -24,35 +26,44 @@ import com.intellij.openapi.startup.StartupManager;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by hurricup on 04.09.2015.
  */
 public class PerlNamesCache implements ProjectComponent {
+  private static final Logger LOG = Logger.getInstance(PerlNamesCache.class);
   private final NamesCacheUpdater myUpdaterRunner = new NamesCacheUpdater();
   private final Thread myUpdaterThread = new Thread(myUpdaterRunner);
   private final Project myProject;
-  private Set<String> myKnownSubs = new THashSet<>();
-  private Set<String> myKnownPackages = new THashSet<>();
+  private Set<String> myKnownSubs = Collections.emptySet();
+  private Set<String> myKnownPackages = Collections.emptySet();
   private final Runnable myCacheUpdaterWorker = new Runnable() {
     @Override
     public void run() {
-      DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
-        Set<String> newSet = new THashSet<>();
-        newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
-        newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
-        newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
-        myKnownSubs = newSet;
+      try {
+        DumbService.getInstance(myProject).runReadActionInSmartMode(() -> {
+          Set<String> newSet = new HashSet<>();
+          newSet.addAll(PerlSubUtil.getDeclaredSubsNames(myProject));
+          newSet.addAll(PerlSubUtil.getDefinedSubsNames(myProject));
+          newSet.addAll(PerlGlobUtil.getDefinedGlobsNames(myProject));
 
-        newSet = new THashSet<>();
-        newSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
-        newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
-        myKnownPackages = newSet;
-      });
+          newSet = new HashSet<>();
+          newSet.addAll(PerlPackageUtil.CORE_PACKAGES_ALL);
+          newSet.addAll(PerlPackageUtil.getDefinedPackageNames(myProject));
+
+          myKnownSubs = Collections.unmodifiableSet(newSet);
+          myKnownPackages = Collections.unmodifiableSet(newSet);
+        });
+      }
+      catch (ServiceNotReadyException e) {
+        LOG.warn(e);
+        DumbService.getInstance(myProject).smartInvokeLater(myCacheUpdaterWorker);
+      }
     }
   };
   //	long notifyCounter = 0;
