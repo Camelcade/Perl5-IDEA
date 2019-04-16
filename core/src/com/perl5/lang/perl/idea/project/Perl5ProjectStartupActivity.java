@@ -34,8 +34,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 29.05.2015.
  */
-public class Perl5ProjectComponent implements StartupActivity {
-  private static final Logger LOG = Logger.getInstance(Perl5ProjectComponent.class);
+public class Perl5ProjectStartupActivity implements StartupActivity {
+  private static final Logger LOG = Logger.getInstance(Perl5ProjectStartupActivity.class);
 
   @Override
   public void runActivity(@NotNull Project project) {
@@ -65,7 +65,7 @@ public class Perl5ProjectComponent implements StartupActivity {
       });
     }
     PerlRemoteFileSystem.getInstance().dropFiles();
-    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> Perl5ProjectComponent.initNamesWithRestart(project));
+    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
   }
 
   private static void initNamesWithRestart(@NotNull Project project) {
@@ -78,7 +78,7 @@ public class Perl5ProjectComponent implements StartupActivity {
     }
     catch (ServiceNotReadyException e) {
       LOG.warn(e);
-      DumbService.getInstance(project).smartInvokeLater(() -> Perl5ProjectComponent.initNamesWithRestart(project));
+      DumbService.getInstance(project).smartInvokeLater(() -> Perl5ProjectStartupActivity.initNamesWithRestart(project));
     }
   }
 }
