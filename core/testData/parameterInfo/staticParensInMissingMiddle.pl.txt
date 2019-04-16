@@ -1,0 +1,14 @@
+Foo::Bar::list_and_shifts(<caret>one => => 42);
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts(one<caret> => => 42);
+<$var>, undef, $othervar
+----------
+Foo::Bar::list_and_shifts(one =><caret> => 42);
+$var, <undef>, $othervar
+----------
+Foo::Bar::list_and_shifts(one => => <caret>42);
+$var, undef, <$othervar>
+----------
+Foo::Bar::list_and_shifts(one => => 42<caret>);
+$var, undef, <$othervar>

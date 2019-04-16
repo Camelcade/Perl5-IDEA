@@ -34,7 +34,19 @@ public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
 
   public void testObjectParensAll() {doTest();}
 
+  public void testObjectParensAfterFirst() {doTest();}
+
+  public void testStaticParensAfterFirst() {doTest();}
+
+  public void testStaticNoParensAfterFirst() {doTest();}
+
   public void testObjectParensEmpty() {doTest();}
+
+  public void testObjectParensInMissingMiddle() {doTest();}
+
+  public void testStaticParensInMissingMiddle() {doTest();}
+
+  public void testStaticNoParensInMissingMiddle() {doTest();}
 
   private void doTest() {
     myFixture.copyFileToProject("subDefinitions.pl");
