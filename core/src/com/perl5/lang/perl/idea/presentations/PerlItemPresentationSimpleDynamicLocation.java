@@ -22,7 +22,6 @@ import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.util.PerlUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
@@ -39,38 +38,32 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
     PsiFile containingFile = getElement().getContainingFile();
     String locationString = null;
 
-    if (containingFile != null) {
-      locationString = containingFile.getName();
-      VirtualFile virtualFile = containingFile.getVirtualFile();
+    if (containingFile == null) {
+      return locationString;
+    }
 
-      if (virtualFile != null) {
-        VirtualFile innermostSourceRoot = PerlUtil.getFileClassRoot(containingFile.getProject(), virtualFile);
+    locationString = containingFile.getName();
+    VirtualFile virtualFile = containingFile.getVirtualFile();
 
-        if (innermostSourceRoot != null) {
-          if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-            String relativePath = VfsUtil.getRelativePath(virtualFile, innermostSourceRoot);
-            locationString = PerlPackageUtil.getPackageNameByPath(relativePath);
-          }
-          else if (virtualFile.getFileType() == PerlFileTypeScript.INSTANCE) {
-            VirtualFile sourceRoot = ProjectRootManagerEx.getInstanceEx(containingFile.getProject()).getFileIndex().getContentRootForFile(virtualFile);
-            if (sourceRoot != null) {
-              locationString = VfsUtil.getRelativePath(virtualFile, sourceRoot);
-            }
-            else {
-              locationString = VfsUtil.getRelativePath(virtualFile, innermostSourceRoot);
-            }
-          }
-        }
-        else {
-          // trying to get project's root directory
-          VirtualFile sourceRoot = ProjectRootManagerEx.getInstanceEx(containingFile.getProject()).getFileIndex().getContentRootForFile(virtualFile);
-          if (sourceRoot != null) {
-            locationString = VfsUtil.getRelativePath(virtualFile, sourceRoot);
-          }
-        }
+    if (virtualFile == null) {
+      return locationString;
+    }
+
+    if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
+      VirtualFile innerMostClassRoot = PerlUtil.getFileClassRoot(containingFile.getProject(), virtualFile);
+
+      if (innerMostClassRoot != null) {
+        String relativePath = VfsUtil.getRelativePath(virtualFile, innerMostClassRoot);
+        return PerlPackageUtil.getPackageNameByPath(relativePath);
       }
     }
 
-    return locationString;
+    // trying to get project's root directory
+    VirtualFile innerMostSourceRoot = ProjectRootManagerEx.getInstanceEx(containingFile.getProject()).getFileIndex().getContentRootForFile(virtualFile);
+    if (innerMostSourceRoot != null) {
+      return VfsUtil.getRelativePath(virtualFile, innerMostSourceRoot);
+    } else {
+      return virtualFile.getPath();
+    }
   }
 }
