@@ -1,2 +1,2 @@
 shift(<caret>);
-No element
+<[@array]>

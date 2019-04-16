@@ -11,7 +11,7 @@ PerlVariableReference at (119,122); text in range: 'app' => 1 results:
 PerlSubReference at (124,130); text in range: 'helper' => 0 results:
 
 PerlSubReference at (187,192); text in range: 'shift' => 1 results:
-	Implicit sub: shift()
+	Implicit sub: shift([@array])([@array])
 
 PerlVariableReference at (207,211); text in range: 'self' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 179 in mojoHelperNamespace.pl

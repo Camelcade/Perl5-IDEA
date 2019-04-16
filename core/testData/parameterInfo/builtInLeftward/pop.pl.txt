@@ -1,2 +1,2 @@
 pop(<caret>);
-No element
+<[@array]>

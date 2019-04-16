@@ -1,5 +1,5 @@
 PerlSubReference at (127,132); text in range: 'shift' => 1 results:
-	Implicit sub: shift()
+	Implicit sub: shift([@array])([@array])
 
 PerlVariableReference at (140,144); text in range: 'self' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 119 in properSelfType.pl

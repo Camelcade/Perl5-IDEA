@@ -1,5 +1,5 @@
 PerlSubReference at (63,68); text in range: 'shift' => 1 results:
-	Implicit sub: shift()
+	Implicit sub: shift([@array])([@array])
 
 PerlSubReference at (70,79); text in range: 'something' => 1 results:
 	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 28 in viaShift.pl

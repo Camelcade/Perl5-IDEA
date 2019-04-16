@@ -1,2 +1,2 @@
 close(<caret>);
-<$fh>
+<$file_handle>

@@ -491,7 +491,7 @@ Lookups: atoi; Text: atoi; Tail: null; Type: POSIX; Icon: /subroutine_gutter_ico
 Lookups: atol; Text: atol; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: bind; Text: bind; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: binmode; Text: binmode; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: bless; Text: bless; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: bless; Text: bless; Tail: ($reference [, $namespace_name]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: break; Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: bsearch; Text: bsearch; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: caller; Text: caller; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -510,7 +510,7 @@ Lookups: chr; Text: chr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.p
 Lookups: chroot; Text: chroot; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: clearerr; Text: clearerr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: clock; Text: clock; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: close; Text: close; Tail: ($fh); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: close; Text: close; Tail: ($file_handle); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: closedir; Text: closedir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: connect; Text: connect; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: continue; Text: continue; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -524,16 +524,16 @@ Lookups: cuserid; Text: cuserid; Tail: null; Type: POSIX; Icon: /subroutine_gutt
 Lookups: dbmclose; Text: dbmclose; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: dbmopen; Text: dbmopen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: default; Text: default; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: defined; Text: defined; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: delete; Text: delete; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: die; Text: die; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: defined; Text: defined; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: delete; Text: delete; Tail: (@hash_element_or_slice); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: die; Text: die; Tail: (@messages_or_exception); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: difftime; Text: difftime; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: div; Text: div; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: do; Text: do; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: dump; Text: dump; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: dup2; Text: dup2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: dup; Text: dup; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: each; Text: each; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: each; Text: each; Tail: (@hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: endgrent; Text: endgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: endhostent; Text: endhostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: endnetent; Text: endnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -542,6 +542,7 @@ Lookups: endpwent; Text: endpwent; Tail: null; Type: CORE; Icon: /subroutine_gut
 Lookups: endservent; Text: endservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: eof; Text: eof; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: errno; Text: errno; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: eval; Text: eval; Tail: ([$expr_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: evalbytes; Text: evalbytes; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: exec; Text: exec; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: execl; Text: execl; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -550,8 +551,8 @@ Lookups: execlp; Text: execlp; Tail: null; Type: POSIX; Icon: /subroutine_gutter
 Lookups: execv; Text: execv; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: execve; Text: execve; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: execvp; Text: execvp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: exists; Text: exists; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: exit; Text: exit; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: exists; Text: exists; Tail: ($hash_element); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: exit; Text: exit; Tail: ([$exit_code]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: exp; Text: exp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: fabs; Text: fabs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: fc; Text: fc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -625,8 +626,8 @@ Lookups: getsockopt; Text: getsockopt; Tail: null; Type: CORE; Icon: /subroutine
 Lookups: getuid; Text: getuid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: glob; Text: glob; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: gmtime; Text: gmtime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: goto; Text: goto; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: grep; Text: grep; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: goto; Text: goto; Tail: ($coderef_or_label); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: grep; Text: grep; Tail: ($expr_or_block, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: hex; Text: hex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: import; Text: import; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: index; Text: index; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -644,16 +645,16 @@ Lookups: ispunct; Text: ispunct; Tail: null; Type: POSIX; Icon: /subroutine_gutt
 Lookups: isspace; Text: isspace; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: isupper; Text: isupper; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: isxdigit; Text: isxdigit; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: join; Text: join; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: keys; Text: keys; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: join; Text: join; Tail: ($separator, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: keys; Text: keys; Tail: (%hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: kill; Text: kill; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: labs; Text: labs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: last; Text: last; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: last; Text: last; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: lc; Text: lc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: lcfirst; Text: lcfirst; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: ldexp; Text: ldexp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: ldiv; Text: ldiv; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: length; Text: length; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: length; Text: length; Tail: ([$string]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: link; Text: link; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: listen; Text: listen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: local; Text: local; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -686,7 +687,7 @@ Lookups: msgget; Text: msgget; Tail: null; Type: CORE; Icon: /subroutine_gutter_
 Lookups: msgrcv; Text: msgrcv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: msgsnd; Text: msgsnd; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: my; Text: my; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: next; Text: next; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: next; Text: next; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: oct; Text: oct; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: offsetof; Text: offsetof; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: open; Text: open; Tail: ($handle [, $mode, $name_or_ref, @args]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -698,13 +699,13 @@ Lookups: pathconf; Text: pathconf; Tail: null; Type: POSIX; Icon: /subroutine_gu
 Lookups: pause; Text: pause; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: perror; Text: perror; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: pipe; Text: pipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: pop; Text: pop; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: pop; Text: pop; Tail: ([@array]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: pos; Text: pos; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: pow; Text: pow; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: print; Text: print; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: printf; Text: printf; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: print; Text: print; Tail: ([$file_handle, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: printf; Text: printf; Tail: ([$file_handle, $format, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: prototype; Text: prototype; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: push; Text: push; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: push; Text: push; Tail: (@array, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: putc; Text: putc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: putchar; Text: putchar; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: puts; Text: puts; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -719,19 +720,20 @@ Lookups: readlink; Text: readlink; Tail: null; Type: CORE; Icon: /subroutine_gut
 Lookups: readpipe; Text: readpipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: realloc; Text: realloc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: recv; Text: recv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: redo; Text: redo; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: ref; Text: ref; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: redo; Text: redo; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: ref; Text: ref; Tail: ([$reference]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: remove; Text: remove; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rename; Text: rename; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: require; Text: require; Tail: ([$filename]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: reset; Text: reset; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: return; Text: return; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: return; Text: return; Tail: ([$scalar_or_list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: reverse; Text: reverse; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rewind; Text: rewind; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rewinddir; Text: rewinddir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rindex; Text: rindex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: rmdir; Text: rmdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: say; Text: say; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: scalar; Text: scalar; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: say; Text: say; Tail: ([$file_handle, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: scalar; Text: scalar; Tail: (@list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: scanf; Text: scanf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: seek; Text: seek; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: seekdir; Text: seekdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -757,7 +759,7 @@ Lookups: setsid; Text: setsid; Tail: null; Type: POSIX; Icon: /subroutine_gutter
 Lookups: setsockopt; Text: setsockopt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: setuid; Text: setuid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: setvbuf; Text: setvbuf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: shift; Text: shift; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: shift; Text: shift; Tail: ([@array]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: shmctl; Text: shmctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: shmget; Text: shmget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: shmread; Text: shmread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -775,10 +777,10 @@ Lookups: sinh; Text: sinh; Tail: null; Type: POSIX; Icon: /subroutine_gutter_ico
 Lookups: sleep; Text: sleep; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: socket; Text: socket; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: socketpair; Text: socketpair; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sort; Text: sort; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: sort; Text: sort; Tail: (@list [, $subname_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: splice; Text: splice; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: split; Text: split; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: sprintf; Text: sprintf; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: sprintf; Text: sprintf; Tail: ($format, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: sqrt; Text: sqrt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: srand; Text: srand; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: sscanf; Text: sscanf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -851,11 +853,11 @@ Lookups: undef; Text: undef; Tail: null; Type: CORE; Icon: /subroutine_gutter_ic
 Lookups: ungetc; Text: ungetc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: unlink; Text: unlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: unpack; Text: unpack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: unshift; Text: unshift; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: unshift; Text: unshift; Tail: (@array, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: untie; Text: untie; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: use; Text: use; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: utime; Text: utime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: values; Text: values; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: values; Text: values; Tail: (%hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: vec; Text: vec; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: vfprintf; Text: vfprintf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: vprintf; Text: vprintf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
@@ -863,7 +865,7 @@ Lookups: vsprintf; Text: vsprintf; Tail: null; Type: POSIX; Icon: /subroutine_gu
 Lookups: wait; Text: wait; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: waitpid; Text: waitpid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: wantarray; Text: wantarray; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
-Lookups: warn; Text: warn; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: warn; Text: warn; Tail: (@messages); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: wcstombs; Text: wcstombs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: wctomb; Text: wctomb; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: write; Text: write; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

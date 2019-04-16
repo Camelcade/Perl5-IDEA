@@ -63,7 +63,14 @@
     <sub name="atan2"/>
     <sub name="bind"/>
     <sub name="binmode"/>
-    <sub name="bless"/>
+    <sub name="bless">
+      <arguments>
+        <argument name="reference" type="$"/>
+        <optional>
+          <argument name="namespace_name" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="break"/>
     <sub name="caller"/>
     <sub name="caller"/>
@@ -76,7 +83,7 @@
     <sub name="chroot"/>
     <sub name="close">
       <arguments>
-        <argument name="fh" type="$"/>
+        <argument name="file_handle" type="$"/>
       </arguments>
     </sub>
     <sub name="closedir"/>
@@ -89,15 +96,30 @@
     <sub name="dbmopen"/>
     <sub name="dbmopen"/>
     <sub name="default"/>
-    <sub name="defined"/>
-    <sub name="delete"/>
-    <sub name="die"/>
-    <sub name="die"/>
-    <sub name="do"/>
+    <sub name="defined">
+      <arguments>
+        <optional>
+          <argument name="expr" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="delete">
+      <arguments>
+        <argument name="hash_element_or_slice" type="@"/>
+      </arguments>
+    </sub>
+    <sub name="die">
+      <arguments>
+        <argument name="messages_or_exception" type="@"/>
+      </arguments>
+    </sub>
     <sub name="do"/>
     <sub name="dump"/>
-    <sub name="each"/>
-    <sub name="each"/>
+    <sub name="each">
+      <arguments>
+        <argument name="hash_or_array" type="@"/>
+      </arguments>
+    </sub>
     <sub name="endgrent"/>
     <sub name="endhostent"/>
     <sub name="endnetent"/>
@@ -106,9 +128,26 @@
     <sub name="endservent"/>
     <sub name="eof"/>
     <sub name="evalbytes"/>
+    <sub name="eval">
+      <arguments>
+        <optional>
+          <argument name="expr_or_block" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="exec"/>
-    <sub name="exists"/>
-    <sub name="exit"/>
+    <sub name="exists">
+      <arguments>
+        <argument name="hash_element" type="$"/>
+      </arguments>
+    </sub>
+    <sub name="exit">
+      <arguments>
+        <optional>
+          <argument name="exit_code" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="exp"/>
     <sub name="fc"/>
     <sub name="fc"/>
@@ -146,8 +185,17 @@
     <sub name="getsockopt"/>
     <sub name="glob"/>
     <sub name="gmtime"/>
-    <sub name="goto"/>
-    <sub name="grep"/>
+    <sub name="goto">
+      <arguments>
+        <argument name="coderef_or_label" type="$"/>
+      </arguments>
+    </sub>
+    <sub name="grep">
+      <arguments>
+        <argument name="expr_or_block" type="$"/>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
     <sub name="hex"/>
     <sub name="hex"/>
     <sub name="import"/>
@@ -155,14 +203,34 @@
     <sub name="index"/>
     <sub name="int"/>
     <sub name="ioctl"/>
-    <sub name="join"/>
-    <sub name="keys"/>
-    <sub name="keys"/>
+    <sub name="join">
+      <arguments>
+        <argument name="separator" type="$"/>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
+    <sub name="keys">
+      <arguments>
+        <argument name="hash_or_array" type="%"/>
+      </arguments>
+    </sub>
     <sub name="kill"/>
-    <sub name="last"/>
+    <sub name="last">
+      <arguments>
+        <optional>
+          <argument name="label_or_expr" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="lc"/>
     <sub name="lcfirst"/>
-    <sub name="length"/>
+    <sub name="length">
+      <arguments>
+        <optional>
+          <argument name="string" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="link"/>
     <sub name="listen"/>
     <sub name="local"/>
@@ -177,7 +245,13 @@
     <sub name="msgrcv"/>
     <sub name="msgsnd"/>
     <sub name="my"/>
-    <sub name="next"/>
+    <sub name="next">
+      <arguments>
+        <optional>
+          <argument name="label_or_expr" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="oct">
       <arguments>
         <optional>
@@ -213,12 +287,38 @@
     <sub name="package"/>
     <sub name="package"/>
     <sub name="pipe"/>
-    <sub name="pop"/>
+    <sub name="pop">
+      <arguments>
+        <optional>
+          <argument name="array" type="@"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="pos"/>
-    <sub name="print"/>
-    <sub name="printf"/>
+    <sub name="print">
+      <arguments>
+        <optional>
+          <argument name="file_handle" type="$"/>
+          <argument name="list" type="@"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="printf">
+      <arguments>
+        <optional>
+          <argument name="file_handle" type="$"/>
+          <argument name="format" type="$"/>
+          <argument name="list" type="@"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="prototype"/>
-    <sub name="push"/>
+    <sub name="push">
+      <arguments>
+        <argument name="array" type="@"/>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
     <sub name="quotemeta"/>
     <sub name="rand"/>
     <sub name="read"/>
@@ -228,18 +328,57 @@
     <sub name="readlink"/>
     <sub name="readpipe"/>
     <sub name="recv"/>
-    <sub name="redo"/>
-    <sub name="ref"/>
+    <sub name="require">
+      <arguments>
+        <optional>
+          <argument name="filename" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="redo">
+      <arguments>
+        <optional>
+          <argument name="label_or_expr" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="ref">
+      <arguments>
+        <optional>
+          <argument name="reference" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="rename"/>
     <sub name="reset"/>
-    <sub name="return"/>
-    <sub name="reverse"/>
-    <sub name="reverse"/>
+    <sub name="return">
+      <arguments>
+        <optional>
+          <argument name="scalar_or_list" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="reverse">
+      <optional>
+        <argument name="list" type="@"/>
+      </optional>
+    </sub>
     <sub name="rewinddir"/>
     <sub name="rindex"/>
     <sub name="rmdir"/>
-    <sub name="say"/>
-    <sub name="scalar"/>
+    <sub name="say">
+      <arguments>
+        <optional>
+          <argument name="file_handle" type="$"/>
+          <argument name="list" type="@"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="scalar">
+      <arguments>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
     <sub name="seek"/>
     <sub name="seekdir"/>
     <sub name="select"/>
@@ -256,7 +395,13 @@
     <sub name="setpwent"/>
     <sub name="setservent"/>
     <sub name="setsockopt"/>
-    <sub name="shift"/>
+    <sub name="shift">
+      <arguments>
+        <optional>
+          <argument name="array" type="@"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="shmctl"/>
     <sub name="shmget"/>
     <sub name="shmread"/>
@@ -266,10 +411,35 @@
     <sub name="sleep"/>
     <sub name="socket"/>
     <sub name="socketpair"/>
-    <sub name="sort"/>
-    <sub name="splice"/>
-    <sub name="split"/>
-    <sub name="sprintf"/>
+    <sub name="sort">
+      <arguments>
+        <optional>
+          <argument name="subname_or_block" type="$"/>
+        </optional>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
+    <sub name="splice">
+      <argument name="array" type="@"/>
+      <optional>
+        <argument name="offset" type="$"/>
+        <argument name="length" type="$"/>
+        <argument name="list" type="@"/>
+      </optional>
+    </sub>
+    <sub name="split">
+      <optional>
+        <argument name="pattern" type="$"/>
+        <argument name="string" type="$"/>
+        <argument name="limit" type="$"/>
+      </optional>
+    </sub>
+    <sub name="sprintf">
+      <arguments>
+        <argument name="format" type="$"/>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
     <sub name="sqrt"/>
     <sub name="srand"/>
     <sub name="stat"/>
@@ -279,11 +449,8 @@
     <sub name="substr"/>
     <sub name="symlink"/>
     <sub name="syscall"/>
-    <sub name="syscall"/>
     <sub name="sysopen"/>
     <sub name="sysread"/>
-    <sub name="sysread"/>
-    <sub name="sysseek"/>
     <sub name="sysseek"/>
     <sub name="system"/>
     <sub name="syswrite"/>
@@ -294,26 +461,40 @@
     <sub name="tied"/>
     <sub name="time"/>
     <sub name="times"/>
-    <sub name="times"/>
     <sub name="truncate"/>
     <sub name="uc"/>
     <sub name="ucfirst"/>
     <sub name="umask"/>
-    <sub name="undef"/>
+    <sub name="undef">
+      <optional>
+        <argument name="expr" type="$"/>
+      </optional>
+    </sub>
     <sub name="unlink"/>
     <sub name="unpack"/>
-    <sub name="unpack"/>
-    <sub name="unshift"/>
+    <sub name="unshift">
+      <arguments>
+        <argument name="array" type="@"/>
+        <argument name="list" type="@"/>
+      </arguments>
+    </sub>
     <sub name="untie"/>
     <sub name="use"/>
     <sub name="utime"/>
-    <sub name="values"/>
-    <sub name="values"/>
+    <sub name="values">
+      <arguments>
+        <argument name="hash_or_array" type="%"/>
+      </arguments>
+    </sub>
     <sub name="vec"/>
     <sub name="wait"/>
     <sub name="waitpid"/>
     <sub name="wantarray"/>
-    <sub name="warn"/>
+    <sub name="warn">
+      <arguments>
+        <argument name="messages" type="@"/>
+      </arguments>
+    </sub>
     <sub name="write"/>
     <sub name="x"/>
   </package>

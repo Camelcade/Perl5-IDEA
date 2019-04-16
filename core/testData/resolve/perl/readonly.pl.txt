@@ -84,7 +84,7 @@ PerlVariableReference at (617,620); text in range: 'sca' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 103 in readonly.pl
 
 PerlSubReference at (626,630); text in range: 'push' => 1 results:
-	Implicit sub: push()
+	Implicit sub: push(@array, @list)(@array, @list)
 
 PerlVariableReference at (632,635); text in range: 'arr' => 1 results:
 	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 206 in readonly.pl

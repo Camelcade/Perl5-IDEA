@@ -35,27 +35,13 @@ public class PerlParameterInfoHandlerBuiltInTest extends PerlLightTestCase {
 
   public void testOrd() {doTest();}
 
-  public void testContinue() {doTest();}
-
-  public void testWhen() {doTest();}
-
-  public void testDefault() {doTest();}
-
-  public void testFormat() {doTest();}
-
-  public void testSub() {doTest();}
-
-  public void testPackage() {doTest();}
-
-  public void testUse() {doTest();}
-
-  public void testNo() {doTest();}
-
   public void testRequire() {doTest();}
 
   public void testPrint() {doTest();}
 
   public void testPrintf() {doTest();}
+
+  public void testSprintf() {doTest();}
 
   public void testSay() {doTest();}
 
@@ -103,16 +89,6 @@ public class PerlParameterInfoHandlerBuiltInTest extends PerlLightTestCase {
 
   public void testUndef() {doTest();}
 
-  public void testMy() {doTest();}
-
-  public void testOur() {doTest();}
-
-  public void testState() {doTest();}
-
-  public void testLocal() {doTest();}
-
-  public void testDo() {doTest();}
-
   public void testEval() {doTest();}
 
   public void testGoto() {doTest();}
@@ -126,6 +102,12 @@ public class PerlParameterInfoHandlerBuiltInTest extends PerlLightTestCase {
   public void testReturn() {doTest();}
 
   public void testExit() {doTest();}
+
+  public void testReverse() {doTest();}
+
+  public void testWarn() {doTest();}
+
+  public void testDie() {doTest();}
 
   @NotNull
   protected String getCodeFromName(@NotNull String name) {

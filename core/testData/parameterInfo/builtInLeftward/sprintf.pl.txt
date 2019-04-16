@@ -1,0 +1,2 @@
+sprintf(<caret>);
+<$format>, @list

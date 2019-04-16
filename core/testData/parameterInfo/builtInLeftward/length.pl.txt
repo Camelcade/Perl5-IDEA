@@ -1,2 +1,2 @@
 length(<caret>);
-No element
+<[$string]>

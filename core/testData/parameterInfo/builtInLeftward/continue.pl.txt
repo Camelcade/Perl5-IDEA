@@ -1,2 +1,0 @@
-continue(<caret>);
-No element

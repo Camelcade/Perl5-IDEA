@@ -1,2 +1,2 @@
 join(<caret>);
-No element
+<$separator>, @list
