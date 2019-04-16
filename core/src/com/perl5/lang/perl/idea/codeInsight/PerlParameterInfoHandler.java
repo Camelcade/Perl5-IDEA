@@ -34,7 +34,6 @@ import com.perl5.lang.perl.psi.impl.PsiPerlCommaSequenceExprImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlParenthesisedExprImpl;
 import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +44,6 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
   @Nullable
   @Override
   public PsiPerlCallArgumentsImpl findElementForParameterInfo(@NotNull CreateParameterInfoContext context) {
-    //		System.err.println("Find for create");
     PsiPerlCallArgumentsImpl callArguments = findCallArguments(context);
 
     if (callArguments != null) {
@@ -126,7 +124,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 
       if (element.getNode().getTextRange().getEndOffset() >= offset) {
         if (element instanceof PerlCompositeElementImpl) {
-          PerlContextType valueContextType = PerlUtil.getElementContextType(element);
+          PerlContextType valueContextType = PerlContextType.from(element);
 
           if (valueContextType == PerlContextType.SCALAR) {
             if (currentIndex < parameterInfos.length) {
