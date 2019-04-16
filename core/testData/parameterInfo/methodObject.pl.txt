@@ -1,0 +1,2 @@
+Foo::Bar::->mymethod(<caret>)
+<$method_arg>, $method_another

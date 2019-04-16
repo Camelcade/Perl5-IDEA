@@ -1,0 +1,5 @@
+package Foo::Bar;
+func myfunction($func_arg, $func_another){
+}
+
+Foo::Bar::->myfunction(<caret>)

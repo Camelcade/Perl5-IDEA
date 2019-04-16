@@ -1,0 +1,4 @@
+sub sub_signature_with_hash($first, %somehash){
+}
+
+sub_signature_with_hash(<caret>)

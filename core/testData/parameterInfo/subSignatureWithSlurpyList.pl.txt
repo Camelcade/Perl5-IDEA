@@ -1,0 +1,4 @@
+sub sub_signature_with_slurpy_list($first, @){
+}
+sub_signature_with_slurpy_list(<caret>)
+<$first>, undef

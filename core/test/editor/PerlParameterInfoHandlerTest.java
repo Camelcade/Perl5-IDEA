@@ -17,12 +17,47 @@
 package editor;
 
 import base.PerlLightTestCase;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 
 public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/parameterInfo";
   }
+
+  public void testSubSignatureOptional() {doTest();}
+
+  public void testSubSignatureSimple() {doTest();}
+
+  public void testSubSignatureWithEmpty() {doTest();}
+
+  public void testSubSignatureWithHash() {doTest();}
+
+  public void testSubSignatureWithList() {doTest();}
+
+  public void testSubSignatureWithSlurpyHash() {doTest();}
+
+  public void testSubSignatureWithSlurpyList() {doTest();}
+
+  public void testFuncStatic() {doTest();}
+
+  public void testFuncObject() {doTest();}
+
+  public void testMethodStatic() {doTest();}
+
+  public void testMethodObject() {doTest();}
+
+  public void testMethodWithInvocantStatic() {doTest();}
+
+  public void testMethodWithInvocantObject() {doTest();}
+
+  public void testConstObject() {doTest();}
+
+  public void testConstObjectMulti() {doTest();}
+
+  public void testConstStatic() {doTest();}
+
+  public void testConstStaticMulti() {doTest();}
 
   public void testStaticNoParensAll() {doTest();}
 
@@ -49,7 +84,8 @@ public class PerlParameterInfoHandlerTest extends PerlLightTestCase {
   public void testStaticNoParensInMissingMiddle() {doTest();}
 
   private void doTest() {
-    myFixture.copyFileToProject("subDefinitions.pl");
+    myFixture.copyFileToProject("definitions.pl");
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     doTestParameterInfo();
   }
 }
