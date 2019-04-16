@@ -1,0 +1,2 @@
+wantarray(<caret>);
+No element

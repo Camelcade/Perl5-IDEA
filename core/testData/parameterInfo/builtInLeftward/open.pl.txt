@@ -1,0 +1,2 @@
+open(<caret>);
+<$handle>, [$mode], [$name_or_ref], [@args]

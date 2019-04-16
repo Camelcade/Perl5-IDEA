@@ -1,0 +1,2 @@
+pop(<caret>);
+No element

@@ -1900,6 +1900,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
    */
   protected void doTestParameterInfo() {
     initWithFileSmartWithoutErrors();
+    doTestParameterInfoWithoutInit();
+  }
+
+  protected void doTestParameterInfoWithoutInit() {
     addVirtualFileFilter();
     List<Integer> offsets = getAndRemoveCarets();
     Editor editor = getEditor();
