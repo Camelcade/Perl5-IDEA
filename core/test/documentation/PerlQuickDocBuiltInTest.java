@@ -434,6 +434,8 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
 
   public void testUse() {doTest();}
 
+  public void testNo() {doTest();}
+
   public void testUtime() {doTest();}
 
   public void testValues() {doTest();}
