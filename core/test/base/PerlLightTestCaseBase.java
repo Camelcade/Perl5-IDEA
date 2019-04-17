@@ -1763,6 +1763,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doTestQuickDocWithoutInit();
   }
 
+  /**
+   * @return a builtin keyword for from the test name. E.g: {@code testScalar} => {@code scalar}, {@code testFiletestx} => {@code -x}
+   */
+  @NotNull
+  protected String getBuiltInFromTestName() {
+    String name = getTestName(true);
+    return isFileTestTest() ? "-" + name.substring(name.length() - 1) : name;
+  }
+
+  protected boolean isFileTestTest() {
+    return getTestName(true).startsWith("filetest");
+  }
+
+
   protected void doTestQuickDocWithoutInit() {
     List<Integer> caretsOffsets = getAndRemoveCarets();
     StringBuilder sb = new StringBuilder();

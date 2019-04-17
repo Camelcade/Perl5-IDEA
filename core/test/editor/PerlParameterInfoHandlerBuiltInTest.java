@@ -450,9 +450,8 @@ public class PerlParameterInfoHandlerBuiltInTest extends PerlLightTestCase {
     return name + "(<caret>);";
   }
 
-  private void doTest() {
-    String name = getTestName(true);
-    initWithTextSmartWithoutErrors(getCodeFromName(name));
+  protected void doTest() {
+    initWithTextSmartWithoutErrors(getCodeFromName(getBuiltInFromTestName()));
     doTestParameterInfoWithoutInit();
   }
 }

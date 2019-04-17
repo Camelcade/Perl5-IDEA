@@ -518,10 +518,4 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
     initWithTextSmart(getBuiltInFromTestName() + " ");
     doTestQuickDocWithoutInit();
   }
-
-  @NotNull
-  private String getBuiltInFromTestName() {
-    String name = getTestName(true);
-    return name.startsWith("filetest") ? "-" + name.substring(name.length() - 1) : name;
-  }
 }
