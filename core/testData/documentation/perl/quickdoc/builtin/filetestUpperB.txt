@@ -1,0 +1,138 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">-X FILEHANDLE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">-X EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">-X DIRHANDLE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">-X</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">A file test, where X is one of the letters listed below.  This unary
+operator takes one argument, either a filename, a filehandle, or a dirhandle,
+and tests the associated file to see if something is true about it.  If the
+argument is omitted, tests <a href="psi_element://perlvar%2F%24_">C<$_></a>, except for <code>-t</code>, which
+tests STDIN.  Unless otherwise documented, it returns <code>1</code> for true and
+<code>''</code> for false.  If the file doesn't exist or can't be examined, it
+returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> and sets <a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno).
+Despite the funny names, precedence is the same as any other named unary
+operator.  The operator may be any of:</p>
+<div style="padding-bottom: 10px;"><pre><code>    -r  File is readable by effective uid/gid.
+    -w  File is writable by effective uid/gid.
+    -x  File is executable by effective uid/gid.
+    -o  File is owned by effective uid.
+
+    -R  File is readable by real uid/gid.
+    -W  File is writable by real uid/gid.
+    -X  File is executable by real uid/gid.
+    -O  File is owned by real uid.
+
+    -e  File exists.
+    -z  File has zero size (is empty).
+    -s  File has nonzero size (returns size in bytes).
+
+    -f  File is a plain file.
+    -d  File is a directory.
+    -l  File is a symbolic link (false if symlinks aren't
+        supported by the file system).
+    -p  File is a named pipe (FIFO), or Filehandle is a pipe.
+    -S  File is a socket.
+    -b  File is a block special file.
+    -c  File is a character special file.
+    -t  Filehandle is opened to a tty.
+
+    -u  File has setuid bit set.
+    -g  File has setgid bit set.
+    -k  File has sticky bit set.
+
+    -T  File is an ASCII or UTF-8 text file (heuristic guess).
+    -B  File is a &quot;binary&quot; file (opposite of -T).
+
+    -M  Script start time minus file modification time, in days.
+    -A  Same for access time.
+    -C  Same for inode change time (Unix, may differ for other
+	platforms)</code></pre></div>
+<p style="padding-bottom: 10px;">Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {
+        chomp;
+        next unless -f $_;  # ignore specials
+        #...
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Note that <code>-s/a/b/</code> does not do a negated substitution.  Saying
+<code>-exp($foo)</code> still works as expected, however: only single letters
+following a minus are interpreted as file tests.</p>
+<p style="padding-bottom: 10px;">These operators are exempt from the &quot;looks like a function rule&quot; described
+above.  That is, an opening parenthesis after the operator does not affect
+how much of the following code constitutes the argument.  Put the opening
+parentheses before the operator to separate it from code that follows (this
+applies only to operators with higher precedence than unary operators, of
+course):</p>
+<div style="padding-bottom: 10px;"><pre><code>    -s($file) + 1024   # probably wrong; same as -s($file + 1024)
+    (-s $file) + 1024  # correct</code></pre></div>
+<p style="padding-bottom: 10px;">The interpretation of the file permission operators <code>-r</code>, <code>-R</code>,
+<code>-w</code>, <code>-W</code>, <code>-x</code>, and <code>-X</code> is by default based solely on the mode
+of the file and the uids and gids of the user.  There may be other
+reasons you can't actually read, write, or execute the file: for
+example network filesystem access controls, ACLs (access control lists),
+read-only filesystems, and unrecognized executable formats.  Note
+that the use of these six specific operators to verify if some operation
+is possible is usually a mistake, because it may be open to race
+conditions.</p>
+<p style="padding-bottom: 10px;">Also note that, for the superuser on the local filesystems, the <code>-r</code>,
+<code>-R</code>, <code>-w</code>, and <code>-W</code> tests always return 1, and <code>-x</code> and <code>-X</code> return 1
+if any execute bit is set in the mode.  Scripts run by the superuser
+may thus need to do a <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> to determine the
+actual mode of the file, or temporarily set their effective uid to
+something else.</p>
+<p style="padding-bottom: 10px;">If you are using ACLs, there is a pragma called <a href="psi_element://filetest" style="color:red">C<filetest></a>
+that may produce more accurate results than the bare
+<a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> mode bits.
+When under <code>use filetest 'access'</code>, the above-mentioned filetests
+test whether the permission can(not) be granted using the <a href="psi_element://access%282%29" style="color:red">access(2)</a>
+family of system calls.  Also note that the <code>-x</code> and <code>-X</code> tests may
+under this pragma return true even if there are no execute permission
+bits set (nor any extra execute permission ACLs).  This strangeness is
+due to the underlying system calls' definitions.  Note also that, due to
+the implementation of <code>use filetest 'access'</code>, the <code>_</code> special
+filehandle won't cache the results of the file tests when this pragma is
+in effect.  Read the documentation for the <a href="psi_element://filetest" style="color:red">C<filetest></a>
+pragma for more information.</p>
+<p style="padding-bottom: 10px;">The <code>-T</code> and <code>-B</code> tests work as follows.  The first block or so of
+the file is examined to see if it is valid UTF-8 that includes non-ASCII
+characters.  If so, it's a <code>-T</code> file.  Otherwise, that same portion of
+the file is examined for odd characters such as strange control codes or
+characters with the high bit set.  If more than a third of the
+characters are strange, it's a <code>-B</code> file; otherwise it's a <code>-T</code> file.
+Also, any file containing a zero byte in the examined portion is
+considered a binary file.  (If executed within the scope of a <a href="psi_element://perllocale">S<use locale></a> which includes <code>LC_CTYPE</code>, odd characters are
+anything that isn't a printable nor space in the current locale.)  If
+<code>-T</code> or <code>-B</code> is used on a filehandle, the current IO buffer is
+examined
+rather than the first block.  Both <code>-T</code> and <code>-B</code> return true on an empty
+file, or a file at EOF when testing a filehandle.  Because you have to
+read a file to do the <code>-T</code> test, on most occasions you want to use a <code>-f</code>
+against the file first, as in <code>next unless -f $file &amp;&amp; -T $file</code>.</p>
+<p style="padding-bottom: 10px;">If any of the file tests (or either the <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a> operator) is given the special filehandle
+consisting of a solitary underline, then the stat structure of the
+previous file test (or <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> operator) is used,
+saving a system call.  (This doesn't work with <code>-t</code>, and you need to
+remember that <a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a> and <code>-l</code> leave values in
+the stat structure for the symbolic link, not the real file.)  (Also, if
+the stat buffer was filled by an <a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a> call,
+<code>-T</code> and <code>-B</code> will reset it with the results of <code>stat _</code>).
+Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;Can do.\n&quot; if -r $a || -w _ || -x _;
+
+    stat($filename);
+    print &quot;Readable\n&quot; if -r _;
+    print &quot;Writable\n&quot; if -w _;
+    print &quot;Executable\n&quot; if -x _;
+    print &quot;Setuid\n&quot; if -u _;
+    print &quot;Setgid\n&quot; if -g _;
+    print &quot;Sticky\n&quot; if -k _;
+    print &quot;Text\n&quot; if -T _;
+    print &quot;Binary\n&quot; if -B _;</code></pre></div>
+<p style="padding-bottom: 10px;">As of Perl 5.10.0, as a form of purely syntactic sugar, you can stack file
+test operators, in a way that <code>-f -w -x $file</code> is equivalent to
+<code>-x $file &amp;&amp; -w _ &amp;&amp; -f _</code>.  (This is only fancy syntax: if you use
+the return value of <code>-f $file</code> as an argument to another filetest
+operator, no special magic will happen.)</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2F-X">-X in perlport</a>.</p>
+<p style="padding-bottom: 10px;">To avoid confusing would-be users of your code with mysterious
+syntax errors, put something like this at the top of your script:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use 5.010;  # so filetest ops can stack</code></pre></div></dd></dl>

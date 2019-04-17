@@ -452,6 +452,60 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
 
   public void testX() {doTest();}
 
+  public void testFiletestLowerr() {doTest();}
+
+  public void testFiletestLowerw() {doTest();}
+
+  public void testFiletestLowerx() {doTest();}
+
+  public void testFiletestLowero() {doTest();}
+
+  public void testFiletestLowere() {doTest();}
+
+  public void testFiletestLowerz() {doTest();}
+
+  public void testFiletestLowers() {doTest();}
+
+  public void testFiletestLowerf() {doTest();}
+
+  public void testFiletestLowerd() {doTest();}
+
+  public void testFiletestLowerl() {doTest();}
+
+  public void testFiletestLowerp() {doTest();}
+
+  public void testFiletestLowerb() {doTest();}
+
+  public void testFiletestLowerc() {doTest();}
+
+  public void testFiletestLowert() {doTest();}
+
+  public void testFiletestLoweru() {doTest();}
+
+  public void testFiletestLowerg() {doTest();}
+
+  public void testFiletestLowerk() {doTest();}
+
+  public void testFiletestUpperR() {doTest();}
+
+  public void testFiletestUpperW() {doTest();}
+
+  public void testFiletestUpperX() {doTest();}
+
+  public void testFiletestUpperO() {doTest();}
+
+  public void testFiletestUpperS() {doTest();}
+
+  public void testFiletestUpperT() {doTest();}
+
+  public void testFiletestUpperB() {doTest();}
+
+  public void testFiletestUpperM() {doTest();}
+
+  public void testFiletestUpperA() {doTest();}
+
+  public void testFiletestUpperC() {doTest();}
+
   @NotNull
   @Override
   protected String getResultsFileExtension() {
@@ -459,7 +513,13 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
   }
 
   private void doTest() {
-    initWithTextSmart(getTestName(true));
+    initWithTextSmart(getBuiltInFromTestName() + " ");
     doTestQuickDocWithoutInit();
+  }
+
+  @NotNull
+  private String getBuiltInFromTestName() {
+    String name = getTestName(true);
+    return name.startsWith("filetest") ? "-" + name.substring(name.length() - 1) : name;
   }
 }
