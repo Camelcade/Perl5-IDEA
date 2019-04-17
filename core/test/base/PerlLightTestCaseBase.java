@@ -84,6 +84,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
+import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
 import com.intellij.openapi.roots.ContentEntry;
@@ -138,6 +139,7 @@ import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator;
 import com.perl5.lang.perl.idea.manipulators.PerlStringManipulator;
+import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -266,6 +268,34 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         PerlRunUtil.refreshSdkDirs(sdk, getProject());
       });
   }
+
+  /**
+   * Unmarks a {@code libDir} as perl source root of any type
+   */
+  protected void removePerlSourceRoot(@NotNull VirtualFile libDir) {
+    assertTrue(libDir.isValid() && libDir.isDirectory());
+    PerlModuleExtension
+      modifiableModel1 = (PerlModuleExtension)PerlModuleExtension.getInstance(myFixture.getModule()).getModifiableModel(true);
+    modifiableModel1.removeRoot(libDir);
+    modifiableModel1.commit();
+  }
+
+  /**
+   * Marks a {@code libDir} as perl library directory
+   *
+   * @param removeAutomatically if true, this source root going to be unmarked automatically in the perl test tearDown
+   */
+  protected void markAsLibRoot(@NotNull VirtualFile libDir, boolean removeAutomatically) {
+    assertTrue(libDir.isValid() && libDir.isDirectory());
+    PerlModuleExtension
+      modifiableModel = (PerlModuleExtension)PerlModuleExtension.getInstance(myFixture.getModule()).getModifiableModel(true);
+    modifiableModel.setRoot(libDir, PerlLibrarySourceRootType.INSTANCE);
+    modifiableModel.commit();
+    if (removeAutomatically) {
+      addPerlTearDownListener(() -> removePerlSourceRoot(libDir));
+    }
+  }
+
 
   protected void enableLiveTemplatesTesting() {
     TemplateManagerImpl.setTemplateTesting(getProject(), getTestRootDisposable());

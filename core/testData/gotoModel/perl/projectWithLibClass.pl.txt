@@ -1,0 +1,6 @@
+TestPackage
+TestPackage in TestPackage.pm; /package_gutter_icon.png; null
+----------
+main
+TestPackage in lib; /perl5.png
+test_script.pl in scripts; /perl5classic.png

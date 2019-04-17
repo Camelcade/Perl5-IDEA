@@ -46,6 +46,18 @@ public class PerlGotoModelTest extends PerlLightTestCase {
     doTestProject(getGoToSymbolModel());
   }
 
+  public void testProjectWithLibFile() {
+    doTestProjectWithLib(getGoToFileModel());
+  }
+
+  public void testProjectWithLibClass() {
+    doTestProjectWithLib(getGoToClassModel());
+  }
+
+  public void testProjectWithLibSymbol() {
+    doTestProjectWithLib(getGoToSymbolModel());
+  }
+
   public void testLibraryFile() {
     doTestLibrary(getGoToFileModel());
   }
@@ -95,6 +107,14 @@ public class PerlGotoModelTest extends PerlLightTestCase {
 
   private void doTestProject(@NotNull FilteringGotoByModel<?> model) {
     copyToProject();
+    doTest(model, false);
+  }
+
+  private void doTestProjectWithLib(@NotNull FilteringGotoByModel<?> model) {
+    copyToProject();
+    VirtualFile libDir = myFixture.findFileInTempDir("lib");
+    assertNotNull(libDir);
+    markAsLibRoot(libDir, true);
     doTest(model, false);
   }
 

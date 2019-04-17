@@ -1,0 +1,29 @@
+$TestPackage::SCALAR
+SCALAR in TestPackage; /scalar_gutter_icon.png; null
+----------
+$main::SCALAR
+SCALAR in scripts/test_script.pl; /scalar_gutter_icon.png; null
+----------
+%TestPackage::HASH
+HASH in TestPackage; /hash_gutter_icon.png; null
+----------
+%main::HASH
+HASH in scripts/test_script.pl; /hash_gutter_icon.png; null
+----------
+@TestPackage::ARRAY
+ARRAY in TestPackage; /array_gutter_icon.png; null
+----------
+@main::ARRAY
+ARRAY in scripts/test_script.pl; /array_gutter_icon.png; null
+----------
+TestPackage::TEST_CONSTANT
+TEST_CONSTANT in TestPackage; /constant_gutter_icon.png; null
+----------
+TestPackage::test_attribute
+test_attribute in TestPackage; /method_gutter_icon.png; null
+----------
+main::TEST_CONSTANT
+TEST_CONSTANT in scripts/test_script.pl; /constant_gutter_icon.png; null
+----------
+main::test_attribute
+test_attribute in scripts/test_script.pl; /method_gutter_icon.png; null
