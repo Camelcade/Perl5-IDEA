@@ -1,0 +1,28 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">dump LABEL
+  </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">dump EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">dump</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">This function causes an immediate core dump.  See also the <B>-u</B>
+command-line switch in <a href="psi_element://perlrun">perlrun</a>, which does the same thing.
+Primarily this is so that you can use the <B>undump</B> program (not
+supplied) to turn your core dump into an executable binary after
+having initialized all your variables at the beginning of the
+program.  When the new binary is executed it will begin by executing
+a <code>goto LABEL</code> (with all the restrictions that <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>
+suffers).
+Think of it as a goto with an intervening core dump and reincarnation.
+If <code>LABEL</code> is omitted, restarts the program from the top.  The
+<code>dump EXPR</code> form, available starting in Perl 5.18.0, allows a name to be
+computed at run time, being otherwise identical to <code>dump LABEL</code>.</p>
+<p style="padding-bottom: 10px;"><B>WARNING</B>: Any files opened at the time of the dump will <i>not</i>
+be open any more when the program is reincarnated, with possible
+resulting confusion by Perl.</p>
+<p style="padding-bottom: 10px;">This function is now largely obsolete, mostly because it's very hard to
+convert a core file into an executable.  That's why you should now invoke
+it as <code>CORE::dump()</code> if you don't want to be warned against a possible
+typo.</p>
+<p style="padding-bottom: 10px;">Unlike most named operators, this has the same precedence as assignment.
+It is also exempt from the looks-like-a-function rule, so
+<code>dump (&quot;foo&quot;).&quot;bar&quot;</code> will cause &quot;bar&quot; to be part of the argument to
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdump+LABEL">C<dump></a>.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fdump">dump in perlport</a>.</p></dd></dl>

@@ -1,0 +1,2 @@
+binmode(<caret>);
+<$file_handle>, [$layer]

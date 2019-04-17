@@ -1,0 +1,119 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">split /PATTERN/,EXPR,LIMIT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">split /PATTERN/,EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">split /PATTERN/</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">split</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Splits the string EXPR into a list of strings and returns the
+list in list context, or the size of the list in scalar context.</p>
+<p style="padding-bottom: 10px;">If only PATTERN is given, EXPR defaults to <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">Anything in EXPR that matches PATTERN is taken to be a separator
+that separates the EXPR into substrings (called &quot;<i>fields</i>&quot;) that
+do <B>not</B> include the separator.  Note that a separator may be
+longer than one character or even have no characters at all (the
+empty string, which is a zero-width match).</p>
+<p style="padding-bottom: 10px;">The PATTERN need not be constant; an expression may be used
+to specify a pattern that varies at runtime.</p>
+<p style="padding-bottom: 10px;">If PATTERN matches the empty string, the EXPR is split at the match
+position (between characters).  As an example, the following:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(/b/, 'abc')), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">uses the <code>b</code> in <code>'abc'</code> as a separator to produce the output <code>a:c</code>.
+However, this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(//, 'abc')), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">uses empty string matches as separators to produce the output
+<code>a:b:c</code>; thus, the empty string may be used to split EXPR into a
+list of its component characters.</p>
+<p style="padding-bottom: 10px;">As a special case for <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red">C<split></a>,
+the empty pattern given in
+<a href="psi_element://perlop%2Fm%2FPATTERN%2Fmsixpodualngc">match operator</a> syntax (<code>//</code>)
+specifically matches the empty string, which is contrary to its usual
+interpretation as the last successful match.</p>
+<p style="padding-bottom: 10px;">If PATTERN is <code>/^/</code>, then it is treated as if it used the
+<a href="psi_element://perlreref%2FOPERATORS">multiline modifier</a> (<code>/^/m</code>), since it
+isn't much use otherwise.</p>
+<p style="padding-bottom: 10px;">As another special case,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red">C<split></a> emulates the default
+behavior of the
+command line tool <B>awk</B> when the PATTERN is either omitted or a
+string composed of a single space character (such as <span style="white-space: nowrap;"><code>' '</code></span> or
+<span style="white-space: nowrap;"><code>&quot;\x20&quot;</code></span>, but not e.g. <span style="white-space: nowrap;"><code>/ /</code></span>).  In this case, any leading
+whitespace in EXPR is removed before splitting occurs, and the PATTERN is
+instead treated as if it were <code>/\s+/</code>; in particular, this means that
+<i>any</i> contiguous whitespace (not just a single space character) is used as
+a separator.  However, this special treatment can be avoided by specifying
+the pattern <span style="white-space: nowrap;"><code>/ /</code></span> instead of the string <span style="white-space: nowrap;"><code>&quot; &quot;</code></span>, thereby allowing
+only a single space character to be a separator.  In earlier Perls this
+special case was restricted to the use of a plain <span style="white-space: nowrap;"><code>&quot; &quot;</code></span> as the
+pattern argument to split; in Perl 5.18.0 and later this special case is
+triggered by any expression which evaluates to the simple string <span style="white-space: nowrap;"><code>&quot; &quot;</code></span>.</p>
+<p style="padding-bottom: 10px;">If omitted, PATTERN defaults to a single space, <span style="white-space: nowrap;"><code>&quot; &quot;</code></span>, triggering
+the previously described <i>awk</i> emulation.</p>
+<p style="padding-bottom: 10px;">If LIMIT is specified and positive, it represents the maximum number
+of fields into which the EXPR may be split; in other words, LIMIT is
+one greater than the maximum number of times EXPR may be split.  Thus,
+the LIMIT value <code>1</code> means that EXPR may be split a maximum of zero
+times, producing a maximum of one field (namely, the entire value of
+EXPR).  For instance:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(//, 'abc', 1)), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <code>abc</code>, and this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(//, 'abc', 2)), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <code>a:bc</code>, and each of these:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(//, 'abc', 3)), &quot;\n&quot;;
+    print join(':', split(//, 'abc', 4)), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <code>a:b:c</code>.</p>
+<p style="padding-bottom: 10px;">If LIMIT is negative, it is treated as if it were instead arbitrarily
+large; as many fields as possible are produced.</p>
+<p style="padding-bottom: 10px;">If LIMIT is omitted (or, equivalently, zero), then it is usually
+treated as if it were instead negative but with the exception that
+trailing empty fields are stripped (empty leading fields are always
+preserved); if all fields are empty, then all fields are considered to
+be trailing (and are thus stripped in this case).  Thus, the following:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(/,/, 'a,b,c,,,')), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <code>a:b:c</code>, but the following:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(/,/, 'a,b,c,,,', -1)), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <code>a:b:c:::</code>.</p>
+<p style="padding-bottom: 10px;">In time-critical applications, it is worthwhile to avoid splitting
+into more fields than necessary.  Thus, when assigning to a list,
+if LIMIT is omitted (or zero), then LIMIT is treated as though it
+were one larger than the number of variables in the list; for the
+following, LIMIT is implicitly 3:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my ($login, $passwd) = split(/:/);</code></pre></div>
+<p style="padding-bottom: 10px;">Note that splitting an EXPR that evaluates to the empty string always
+produces zero fields, regardless of the LIMIT specified.</p>
+<p style="padding-bottom: 10px;">An empty leading field is produced when there is a positive-width
+match at the beginning of EXPR.  For instance:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(/ /, ' abc')), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <code>:abc</code>.  However, a zero-width match at the
+beginning of EXPR never produces an empty field, so that:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(//, ' abc'));</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <span style="white-space: nowrap;"><code>:a:b:c</code></span> (rather than <span style="white-space: nowrap;"><code>: :a:b:c</code></span>).</p>
+<p style="padding-bottom: 10px;">An empty trailing field, on the other hand, is produced when there is a
+match at the end of EXPR, regardless of the length of the match
+(of course, unless a non-zero LIMIT is given explicitly, such fields are
+removed, as in the last example).  Thus:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(':', split(//, ' abc', -1)), &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produces the output <span style="white-space: nowrap;"><code>:a:b:c:</code></span>.</p>
+<p style="padding-bottom: 10px;">If the PATTERN contains
+<a href="psi_element://perlretut%2FGrouping+things+and+hierarchical+matching">capturing groups</a>,
+then for each separator, an additional field is produced for each substring
+captured by a group (in the order in which the groups are specified,
+as per <a href="psi_element://perlretut%2FBackreferences">backreferences</a>); if any group does not
+match, then it captures the <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> value instead of a
+substring.  Also,
+note that any such additional field is produced whenever there is a
+separator (that is, whenever a split occurs), and such an additional field
+does <B>not</B> count towards the LIMIT.  Consider the following expressions
+evaluated in list context (each returned list is provided in the associated
+comment):</p>
+<div style="padding-bottom: 10px;"><pre><code>    split(/-|,/, &quot;1-10,20&quot;, 3)
+    # ('1', '10', '20')
+
+    split(/(-|,)/, &quot;1-10,20&quot;, 3)
+    # ('1', '-', '10', ',', '20')
+
+    split(/-|(,)/, &quot;1-10,20&quot;, 3)
+    # ('1', undef, '10', ',', '20')
+
+    split(/(-)|,/, &quot;1-10,20&quot;, 3)
+    # ('1', '-', '10', undef, '20')
+
+    split(/(-)|(,)/, &quot;1-10,20&quot;, 3)
+    # ('1', '-', undef, '10', undef, ',', '20')</code></pre></div></dd></dl>

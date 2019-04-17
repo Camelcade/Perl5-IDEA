@@ -1,0 +1,34 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">chomp VARIABLE
+    </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">chomp( LIST )</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">chomp</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">This safer version of <a href="psi_element://pod%3A%3Aperlfunc%2Fchop+VARIABLE">C<chop></a> removes any trailing
+string that corresponds to the current value of
+<a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> (also known as <code>$INPUT_RECORD_SEPARATOR</code>
+in the <a href="psi_element://English" style="color:red">C<English></a> module).  It returns the total
+number of characters removed from all its arguments.  It's often used to
+remove the newline from the end of an input record when you're worried
+that the final record may be missing its newline.  When in paragraph
+mode (<code>$/ = ''</code>), it removes all trailing newlines from the string.
+When in slurp mode (<code>$/ = undef</code>) or fixed-length record mode
+(<a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> is a reference to an integer or the like;
+see <a href="psi_element://perlvar">perlvar</a>), <a href="psi_element://pod%3A%3Aperlfunc%2Fchomp+VARIABLE">C<chomp></a> won't remove anything.
+If VARIABLE is omitted, it chomps <a href="psi_element://perlvar%2F%24_">C<$_></a>.  Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {
+        chomp;  # avoid \n on last field
+        my @array = split(/:/);
+        # ...
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">If VARIABLE is a hash, it chomps the hash's values, but not its keys,
+resetting the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> iterator in the process.</p>
+<p style="padding-bottom: 10px;">You can actually chomp anything that's an lvalue, including an assignment:</p>
+<div style="padding-bottom: 10px;"><pre><code>    chomp(my $cwd = `pwd`);
+    chomp(my $answer = &lt;STDIN&gt;);</code></pre></div>
+<p style="padding-bottom: 10px;">If you chomp a list, each element is chomped, and the total number of
+characters removed is returned.</p>
+<p style="padding-bottom: 10px;">Note that parentheses are necessary when you're chomping anything
+that is not a simple variable.  This is because <code>chomp $cwd = `pwd`;</code>
+is interpreted as <code>(chomp $cwd) = `pwd`;</code>, rather than as
+<code>chomp( $cwd = `pwd` )</code> which you might expect.  Similarly,
+<code>chomp $a, $b</code> is interpreted as <code>chomp($a), $b</code> rather than
+as <code>chomp($a, $b)</code>.</p></dd></dl>

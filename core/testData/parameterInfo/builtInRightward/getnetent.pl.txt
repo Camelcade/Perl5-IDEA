@@ -1,0 +1,2 @@
+getnetent <caret> 
+No element

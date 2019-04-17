@@ -1,0 +1,11 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">setsockopt SOCKET,LEVEL,OPTNAME,OPTVAL</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Sets the socket option requested.  Returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> on
+error.  Use integer constants provided by the <a href="psi_element://Socket" style="color:red">C<Socket></a> module
+for
+LEVEL and OPNAME.  Values for LEVEL can also be obtained from
+getprotobyname.  OPTVAL might either be a packed string or an integer.
+An integer OPTVAL is shorthand for pack(&quot;i&quot;, OPTVAL).</p>
+<p style="padding-bottom: 10px;">An example disabling Nagle's algorithm on a socket:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Socket qw(IPPROTO_TCP TCP_NODELAY);
+    setsockopt($socket, IPPROTO_TCP, TCP_NODELAY, 1);</code></pre></div>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsetsockopt">setsockopt in perlport</a>.</p></dd></dl>

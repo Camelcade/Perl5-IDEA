@@ -1,0 +1,6 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">tied VARIABLE</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns a reference to the object underlying VARIABLE (the same value
+that was originally returned by the
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST">C<tie></a> call that bound the variable
+to a package.)  Returns the undefined value if VARIABLE isn't tied to a
+package.</p></dd></dl>

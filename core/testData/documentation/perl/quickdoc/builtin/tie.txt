@@ -1,0 +1,82 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">tie VARIABLE,CLASSNAME,LIST</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">This function binds a variable to a package class that will provide the
+implementation for the variable.  VARIABLE is the name of the variable
+to be enchanted.  CLASSNAME is the name of a class implementing objects
+of correct type.  Any additional arguments are passed to the
+appropriate constructor
+method of the class (meaning <code>TIESCALAR</code>, <code>TIEHANDLE</code>, <code>TIEARRAY</code>,
+or <code>TIEHASH</code>).  Typically these are arguments such as might be passed
+to the <a href="psi_element://dbm_open%283%29" style="color:red">dbm_open(3)</a> function of C.  The object returned by the
+constructor is also returned by the
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST">C<tie></a> function, which would be useful
+if you want to access other methods in CLASSNAME.</p>
+<p style="padding-bottom: 10px;">Note that functions such as <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH">C<keys></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a> may return huge lists when used on large
+objects, like DBM files.  You may prefer to use the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> function to iterate over such.  Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # print out history file offsets
+    use NDBM_File;
+    tie(my %HIST, 'NDBM_File', '/usr/lib/news/history', 1, 0);
+    while (my ($key,$val) = each %HIST) {
+        print $key, ' = ', unpack('L', $val), &quot;\n&quot;;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">A class implementing a hash should have the following methods:</p>
+<div style="padding-bottom: 10px;"><pre><code>    TIEHASH classname, LIST
+    FETCH this, key
+    STORE this, key, value
+    DELETE this, key
+    CLEAR this
+    EXISTS this, key
+    FIRSTKEY this
+    NEXTKEY this, lastkey
+    SCALAR this
+    DESTROY this
+    UNTIE this</code></pre></div>
+<p style="padding-bottom: 10px;">A class implementing an ordinary array should have the following methods:</p>
+<div style="padding-bottom: 10px;"><pre><code>    TIEARRAY classname, LIST
+    FETCH this, key
+    STORE this, key, value
+    FETCHSIZE this
+    STORESIZE this, count
+    CLEAR this
+    PUSH this, LIST
+    POP this
+    SHIFT this
+    UNSHIFT this, LIST
+    SPLICE this, offset, length, LIST
+    EXTEND this, count
+    DELETE this, key
+    EXISTS this, key
+    DESTROY this
+    UNTIE this</code></pre></div>
+<p style="padding-bottom: 10px;">A class implementing a filehandle should have the following methods:</p>
+<div style="padding-bottom: 10px;"><pre><code>    TIEHANDLE classname, LIST
+    READ this, scalar, length, offset
+    READLINE this
+    GETC this
+    WRITE this, scalar, length, offset
+    PRINT this, LIST
+    PRINTF this, format, LIST
+    BINMODE this
+    EOF this
+    FILENO this
+    SEEK this, position, whence
+    TELL this
+    OPEN this, mode, LIST
+    CLOSE this
+    DESTROY this
+    UNTIE this</code></pre></div>
+<p style="padding-bottom: 10px;">A class implementing a scalar should have the following methods:</p>
+<div style="padding-bottom: 10px;"><pre><code>    TIESCALAR classname, LIST
+    FETCH this,
+    STORE this, value
+    DESTROY this
+    UNTIE this</code></pre></div>
+<p style="padding-bottom: 10px;">Not all methods indicated above need be implemented.  See <a href="psi_element://perltie">perltie</a>,
+<a href="psi_element://Tie%3A%3AHash" style="color:red">Tie::Hash</a>, <a href="psi_element://Tie%3A%3AArray" style="color:red">Tie::Array</a>, <a href="psi_element://Tie%3A%3AScalar" style="color:red">Tie::Scalar</a>, and <a href="psi_element://Tie%3A%3AHandle" style="color:red">Tie::Handle</a>.</p>
+<p style="padding-bottom: 10px;">Unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK">C<dbmopen></a>, the
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST">C<tie></a> function will not
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> a
+module for you; you need to do that explicitly yourself.  See <a href="psi_element://DB_File" style="color:red">DB_File</a>
+or the <a href="psi_element://Config" style="color:red">Config</a> module for interesting
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST">C<tie></a> implementations.</p>
+<p style="padding-bottom: 10px;">For further details see <a href="psi_element://perltie">perltie</a>, <a href="psi_element://pod%3A%3Aperlfunc%2Ftied+VARIABLE">C<tied></a>.</p></dd></dl>

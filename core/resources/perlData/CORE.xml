@@ -17,33 +17,195 @@
 
 <xml>
   <package name="CORE">
-    <sub name="-A"/>
-    <sub name="-B"/>
-    <sub name="-C"/>
-    <sub name="-M"/>
-    <sub name="-O"/>
-    <sub name="-R"/>
-    <sub name="-S"/>
-    <sub name="-T"/>
-    <sub name="-W"/>
-    <sub name="-X"/>
-    <sub name="-b"/>
-    <sub name="-c"/>
-    <sub name="-d"/>
-    <sub name="-e"/>
-    <sub name="-f"/>
-    <sub name="-g"/>
-    <sub name="-k"/>
-    <sub name="-l"/>
-    <sub name="-o"/>
-    <sub name="-p"/>
-    <sub name="-r"/>
-    <sub name="-s"/>
-    <sub name="-t"/>
-    <sub name="-u"/>
-    <sub name="-w"/>
-    <sub name="-x"/>
-    <sub name="-z"/>
+    <sub name="-A">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-B">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-C">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-M">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-O">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-R">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-S">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-T">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-W">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-X">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-b">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-c">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-d">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-e">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-f">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-g">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-k">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-l">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-o">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-p">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-r">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-s">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-t">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-u">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-w">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-x">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="-z">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="AUTOLOAD"/>
     <sub name="BEGIN"/>
     <sub name="CHECK"/>
@@ -62,7 +224,14 @@
     <sub name="alarm"/>
     <sub name="atan2"/>
     <sub name="bind"/>
-    <sub name="binmode"/>
+    <sub name="binmode">
+      <arguments>
+        <argument name="file_handle" type="$"/>
+        <optional>
+          <argument name="layer" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
     <sub name="bless">
       <arguments>
         <argument name="reference" type="$"/>
@@ -72,13 +241,35 @@
       </arguments>
     </sub>
     <sub name="break"/>
-    <sub name="caller"/>
-    <sub name="caller"/>
-    <sub name="chdir"/>
-    <sub name="chmod"/>
+    <sub name="caller">
+      <arguments>
+        <optional>
+          <argument name="frame_offset" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="chdir">
+      <arguments>
+        <optional>
+          <argument name="name_or_handle" type="$"/>
+        </optional>
+      </arguments>
+    </sub>
+    <sub name="chmod">
+      <arguments>
+        <argument name="oct_permissions" type="$"/>
+        <argument name="file_names" type="@"/>
+      </arguments>
+    </sub>
     <sub name="chomp"/>
     <sub name="chop"/>
-    <sub name="chown"/>
+    <sub name="chown">
+      <arguments>
+        <argument name="uid" type="$"/>
+        <argument name="guid" type="$"/>
+        <argument name="file_names" type="@"/>
+      </arguments>
+    </sub>
     <sub name="chr"/>
     <sub name="chroot"/>
     <sub name="close">
@@ -87,13 +278,21 @@
       </arguments>
     </sub>
     <sub name="closedir"/>
-    <sub name="connect"/>
+    <sub name="connect">
+      <arguments>
+        <argument name="socket" type="$"/>
+        <argument name="name" type="$"/>
+      </arguments>
+    </sub>
     <sub name="continue"/>
     <sub name="cos"/>
-    <sub name="crypt"/>
+    <sub name="crypt">
+      <arguments>
+        <argument name="text" type="$"/>
+        <argument name="salt" type="$"/>
+      </arguments>
+    </sub>
     <sub name="dbmclose"/>
-    <sub name="dbmclose"/>
-    <sub name="dbmopen"/>
     <sub name="dbmopen"/>
     <sub name="default"/>
     <sub name="defined">
@@ -150,7 +349,6 @@
     </sub>
     <sub name="exp"/>
     <sub name="fc"/>
-    <sub name="fc"/>
     <sub name="fcntl"/>
     <sub name="fileno"/>
     <sub name="flock"/>
@@ -197,8 +395,6 @@
       </arguments>
     </sub>
     <sub name="hex"/>
-    <sub name="hex"/>
-    <sub name="import"/>
     <sub name="import"/>
     <sub name="index"/>
     <sub name="int"/>
@@ -283,8 +479,6 @@
       </arguments>
     </sub>
     <sub name="pack"/>
-    <sub name="pack"/>
-    <sub name="package"/>
     <sub name="package"/>
     <sub name="pipe"/>
     <sub name="pop">
@@ -321,7 +515,6 @@
     </sub>
     <sub name="quotemeta"/>
     <sub name="rand"/>
-    <sub name="read"/>
     <sub name="read"/>
     <sub name="readdir"/>
     <sub name="readline"/>
@@ -453,7 +646,6 @@
     <sub name="sysread"/>
     <sub name="sysseek"/>
     <sub name="system"/>
-    <sub name="syswrite"/>
     <sub name="syswrite"/>
     <sub name="tell"/>
     <sub name="telldir"/>

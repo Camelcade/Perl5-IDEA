@@ -1,0 +1,22 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">scalar EXPR
+ </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Forces EXPR to be interpreted in scalar context and returns the value
+of EXPR.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @counts = ( scalar @a, scalar @b, scalar @c );</code></pre></div>
+<p style="padding-bottom: 10px;">There is no equivalent operator to force an expression to
+be interpolated in list context because in practice, this is never
+needed.  If you really wanted to do so, however, you could use
+the construction <code>@{[ (some expression) ]}</code>, but usually a simple
+<code>(some expression)</code> suffices.</p>
+<p style="padding-bottom: 10px;">Because <a href="psi_element://pod%3A%3Aperlfunc%2Fscalar+EXPR">C<scalar></a> is a unary operator, if you
+accidentally use a
+parenthesized list for the EXPR, this behaves as a scalar comma expression,
+evaluating all but the last element in void context and returning the final
+element evaluated in scalar context.  This is seldom what you want.</p>
+<p style="padding-bottom: 10px;">The following single statement:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print uc(scalar(foo(), $bar)), $baz;</code></pre></div>
+<p style="padding-bottom: 10px;">is the moral equivalent of these two:</p>
+<div style="padding-bottom: 10px;"><pre><code>    foo();
+    print(uc($bar), $baz);</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlop">perlop</a> for more details on unary operators and the comma operator,
+and <a href="psi_element://perldata">perldata</a> for details on evaluating a hash in scalar contex.</p></dd></dl>

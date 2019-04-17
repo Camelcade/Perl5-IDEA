@@ -1,0 +1,156 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">eval EXPR
+     
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">eval BLOCK</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">eval</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">In the first form, often referred to as a &quot;string eval&quot;, the return
+value of EXPR is parsed and executed as if it
+were a little Perl program.  The value of the expression (which is itself
+determined within scalar context) is first parsed, and if there were no
+errors, executed as a block within the lexical context of the current Perl
+program.  This means, that in particular, any outer lexical variables are
+visible to it, and any package variable settings or subroutine and format
+definitions remain afterwards.</p>
+<p style="padding-bottom: 10px;">Note that the value is parsed every time the <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>
+executes.  If EXPR is omitted, evaluates <a href="psi_element://perlvar%2F%24_">C<$_></a>.  This form
+is typically used to delay parsing and subsequent execution of the text
+of EXPR until run time.</p>
+<p style="padding-bottom: 10px;">If the
+<a href="psi_element://feature%2FThe+%27unicode_eval%27+and+%27evalbytes%27+features" style="color:red">C<"unicode_eval"> feature</a>
+is enabled (which is the default under a
+<code>use 5.16</code> or higher declaration), EXPR or <a href="psi_element://perlvar%2F%24_">C<$_></a> is
+treated as a string of characters, so <a href="psi_element://utf8" style="color:red">C<use utf8></a> declarations
+have no effect, and source filters are forbidden.  In the absence of the
+<a href="psi_element://feature%2FThe+%27unicode_eval%27+and+%27evalbytes%27+features" style="color:red">C<"unicode_eval"> feature</a>,
+will sometimes be treated as characters and sometimes as bytes,
+depending on the internal encoding, and source filters activated within
+the <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> exhibit the erratic, but historical, behaviour
+of affecting some outer file scope that is still compiling.  See also
+the <a href="psi_element://pod%3A%3Aperlfunc%2Fevalbytes+EXPR">C<evalbytes></a> operator, which always treats its
+input as a byte stream and works properly with source filters, and the
+<a href="psi_element://feature" style="color:red">feature</a> pragma.</p>
+<p style="padding-bottom: 10px;">Problems can arise if the string expands a scalar containing a floating
+point number.  That scalar can expand to letters, such as <code>&quot;NaN&quot;</code> or
+<code>&quot;Infinity&quot;</code>; or, within the scope of a <a href="psi_element://locale" style="color:red">C<use locale></a>, the
+decimal point character may be something other than a dot (such as a
+comma).  None of these are likely to parse as you are likely expecting.</p>
+<p style="padding-bottom: 10px;">In the second form, the code within the BLOCK is parsed only once--at the
+same time the code surrounding the <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> itself was
+parsed--and executed
+within the context of the current Perl program.  This form is typically
+used to trap exceptions more efficiently than the first (see below), while
+also providing the benefit of checking the code within BLOCK at compile
+time.</p>
+<p style="padding-bottom: 10px;">The final semicolon, if any, may be omitted from the value of EXPR or within
+the BLOCK.</p>
+<p style="padding-bottom: 10px;">In both forms, the value returned is the value of the last expression
+evaluated inside the mini-program; a return statement may be also used, just
+as with subroutines.  The expression providing the return value is evaluated
+in void, scalar, or list context, depending on the context of the
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> itself.  See <a href="psi_element://pod%3A%3Aperlfunc%2Fwantarray">C<wantarray></a> for more
+on how the evaluation context can be determined.</p>
+<p style="padding-bottom: 10px;">If there is a syntax error or runtime error, or a <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>
+statement is executed, <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> returns
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> in scalar context or an empty list in list
+context, and <a href="psi_element://perlvar%2F%24%40">C<$@></a> is set to the error message.  (Prior to
+5.16, a bug caused <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> to be returned in list
+context for syntax errors, but not for runtime errors.) If there was no
+error, <a href="psi_element://perlvar%2F%24%40">C<$@></a> is set to the empty string.  A control flow
+operator like <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a> can
+bypass the setting of <a href="psi_element://perlvar%2F%24%40">C<$@></a>.  Beware that using
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> neither silences Perl from printing warnings to
+STDERR, nor does it stuff the text of warning messages into
+<a href="psi_element://perlvar%2F%24%40">C<$@></a>.  To do either of those, you have to use the
+<a href="psi_element://perlvar%2F%25SIG">C<$SIG{__WARN__}></a> facility, or turn off warnings inside
+the BLOCK or EXPR using <span style="white-space: nowrap;"><code>no warnings 'all'</code></span>.  See
+<a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST">C<warn></a>, <a href="psi_element://perlvar">perlvar</a>, and <a href="psi_element://warnings" style="color:red">warnings</a>.</p>
+<p style="padding-bottom: 10px;">Note that, because <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> traps otherwise-fatal errors,
+it is useful for determining whether a particular feature (such as
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsocket+SOCKET%2CDOMAIN%2CTYPE%2CPROTOCOL">C<socket></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsymlink+OLDFILE%2CNEWFILE">C<symlink></a>) is implemented.  It is also
+Perl's exception-trapping mechanism, where the <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>
+operator is used to raise exceptions.</p>
+<p style="padding-bottom: 10px;">If you want to trap errors when loading an XS module, some problems with
+the binary interface (such as Perl version skew) may be fatal even with
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> unless <code>$ENV{PERL_DL_NONLAZY}</code> is set.  See
+<a href="psi_element://perlrun">perlrun</a>.</p>
+<p style="padding-bottom: 10px;">If the code to be executed doesn't vary, you may use the eval-BLOCK
+form to trap run-time errors without incurring the penalty of
+recompiling each time.  The error, if any, is still returned in
+<a href="psi_element://perlvar%2F%24%40">C<$@></a>.
+Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # make divide-by-zero nonfatal
+    eval { $answer = $a / $b; }; warn $@ if $@;
+
+    # same thing, but less efficient
+    eval '$answer = $a / $b'; warn $@ if $@;
+
+    # a compile-time error
+    eval { $answer = }; # WRONG
+
+    # a run-time error
+    eval '$answer =';   # sets $@</code></pre></div>
+<p style="padding-bottom: 10px;">Using the <code>eval {}</code> form as an exception trap in libraries does have some
+issues.  Due to the current arguably broken state of <code>__DIE__</code> hooks, you
+may wish not to trigger any <code>__DIE__</code> hooks that user code may have installed.
+You can use the <code>local $SIG{__DIE__}</code> construct for this purpose,
+as this example shows:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # a private exception trap for divide-by-zero
+    eval { local $SIG{'__DIE__'}; $answer = $a / $b; };
+    warn $@ if $@;</code></pre></div>
+<p style="padding-bottom: 10px;">This is especially significant, given that <code>__DIE__</code> hooks can call
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> again, which has the effect of changing their error
+messages:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # __DIE__ hooks may modify error messages
+    {
+       local $SIG{'__DIE__'} =
+              sub { (my $x = $_[0]) =~ s/foo/bar/g; die $x };
+       eval { die &quot;foo lives here&quot; };
+       print $@ if $@;                # prints &quot;bar lives here&quot;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Because this promotes action at a distance, this counterintuitive behavior
+may be fixed in a future release.</p>
+<p style="padding-bottom: 10px;">With an <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>, you should be especially careful to
+remember what's being looked at when:</p>
+<div style="padding-bottom: 10px;"><pre><code>    eval $x;        # CASE 1
+    eval &quot;$x&quot;;      # CASE 2
+
+    eval '$x';      # CASE 3
+    eval { $x };    # CASE 4
+
+    eval &quot;\$$x++&quot;;  # CASE 5
+    $$x++;          # CASE 6</code></pre></div>
+<p style="padding-bottom: 10px;">Cases 1 and 2 above behave identically: they run the code contained in
+the variable $x.  (Although case 2 has misleading double quotes making
+the reader wonder what else might be happening (nothing is).)  Cases 3
+and 4 likewise behave in the same way: they run the code <code>'$x'</code>, which
+does nothing but return the value of $x.  (Case 4 is preferred for
+purely visual reasons, but it also has the advantage of compiling at
+compile-time instead of at run-time.)  Case 5 is a place where
+normally you <i>would</i> like to use double quotes, except that in this
+particular situation, you can just use symbolic references instead, as
+in case 6.</p>
+<p style="padding-bottom: 10px;">Before Perl 5.14, the assignment to <a href="psi_element://perlvar%2F%24%40">C<$@></a> occurred before
+restoration
+of localized variables, which means that for your code to run on older
+versions, a temporary is required if you want to mask some but not all
+errors:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # alter $@ on nefarious repugnancy only
+    {
+       my $e;
+       {
+         local $@; # protect existing $@
+         eval { test_repugnancy() };
+         # $@ =~ /nefarious/ and die $@; # Perl 5.14 and higher only
+         $@ =~ /nefarious/ and $e = $@;
+       }
+       die $e if defined $e
+    }</code></pre></div>
+<p style="padding-bottom: 10px;"><code>eval BLOCK</code> does <i>not</i> count as a loop, so the loop control statements
+<a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a>, or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL">C<redo></a> cannot be used to leave or restart the block.</p>
+<p style="padding-bottom: 10px;">An <code>eval ''</code> executed within a subroutine defined
+in the <code>DB</code> package doesn't see the usual
+surrounding lexical scope, but rather the scope of the first non-DB piece
+of code that called it.  You don't normally need to worry about this unless
+you are writing a Perl debugger.</p></dd></dl>

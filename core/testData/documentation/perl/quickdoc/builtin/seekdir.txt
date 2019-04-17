@@ -1,0 +1,6 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">seekdir DIRHANDLE,POS</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Sets the current position for the <a href="psi_element://pod%3A%3Aperlfunc%2Freaddir+DIRHANDLE">C<readdir></a>
+routine on DIRHANDLE.  POS must be a value returned by
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftelldir+DIRHANDLE">C<telldir></a>.  <a href="psi_element://pod%3A%3Aperlfunc%2Fseekdir+DIRHANDLE%2CPOS">C<seekdir></a>
+also has the same caveats about possible directory compaction as the
+corresponding system library routine.</p></dd></dl>

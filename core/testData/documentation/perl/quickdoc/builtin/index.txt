@@ -1,0 +1,12 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">index STR,SUBSTR,POSITION
+  </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">index STR,SUBSTR</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">The index function searches for one string within another, but without
+the wildcard-like behavior of a full regular-expression pattern match.
+It returns the position of the first occurrence of SUBSTR in STR at
+or after POSITION.  If POSITION is omitted, starts searching from the
+beginning of the string.  POSITION before the beginning of the string
+or after its end is treated as if it were the beginning or the end,
+respectively.  POSITION and the return value are based at zero.
+If the substring is not found, <a href="psi_element://pod%3A%3Aperlfunc%2Findex+STR%2CSUBSTR%2CPOSITION">C<index></a>
+returns -1.</p></dd></dl>

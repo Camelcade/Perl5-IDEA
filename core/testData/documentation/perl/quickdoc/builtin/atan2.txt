@@ -1,0 +1,10 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">atan2 Y,X
+   </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns the arctangent of Y/X in the range -PI to PI.</p>
+<p style="padding-bottom: 10px;">For the tangent operation, you may use the
+<a href="psi_element://Math%3A%3ATrig%2FB%3Ctan%3E" style="color:red">C<Math::Trig::tan></a> function, or use the familiar
+relation:</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub tan { sin($_[0]) / cos($_[0])  }</code></pre></div>
+<p style="padding-bottom: 10px;">The return value for <code>atan2(0,0)</code> is implementation-defined; consult
+your <a href="psi_element://atan2%283%29" style="color:red">atan2(3)</a> manpage for more information.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fatan2">atan2 in perlport</a>.</p></dd></dl>

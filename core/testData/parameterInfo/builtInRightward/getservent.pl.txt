@@ -1,0 +1,2 @@
+getservent <caret> 
+No element

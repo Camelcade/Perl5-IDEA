@@ -1,0 +1,2 @@
+readline(<caret>);
+No element

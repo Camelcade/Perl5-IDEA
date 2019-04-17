@@ -1,0 +1,12 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FNon-function+Keywords+by+Cross-reference">Non-function Keywords by Cross-reference</a>: <a href="psi_element://pod%3A%3Aperlfunc%2Fperlop">perlop</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">and</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">cmp</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">eq</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">ge</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">gt</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">le</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">lt</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">ne</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">not</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">or</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">x</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">xor</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">These operators are documented in <a href="psi_element://perlop">perlop</a>.</p></dd></dl>

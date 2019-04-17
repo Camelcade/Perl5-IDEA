@@ -1,0 +1,2 @@
+substr(<caret>);
+No element

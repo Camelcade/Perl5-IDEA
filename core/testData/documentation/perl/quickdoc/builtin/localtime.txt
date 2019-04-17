@@ -1,0 +1,55 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">localtime EXPR
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">localtime</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Converts a time as returned by the time function to a 9-element list
+with the time analyzed for the local time zone.  Typically used as
+follows:</p>
+<div style="padding-bottom: 10px;"><pre><code>    #     0    1    2     3     4    5     6     7     8
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+                                                localtime(time);</code></pre></div>
+<p style="padding-bottom: 10px;">All list elements are numeric and come straight out of the C `struct
+tm'.  <code>$sec</code>, <code>$min</code>, and <code>$hour</code> are the seconds, minutes, and hours
+of the specified time.</p>
+<p style="padding-bottom: 10px;"><code>$mday</code> is the day of the month and <code>$mon</code> the month in
+the range <code>0..11</code>, with 0 indicating January and 11 indicating December.
+This makes it easy to get a month name from a list:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @abbr = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
+    print &quot;$abbr[$mon] $mday&quot;;
+    # $mon=9, $mday=18 gives &quot;Oct 18&quot;</code></pre></div>
+<p style="padding-bottom: 10px;"><code>$year</code> contains the number of years since 1900.  To get a 4-digit
+year write:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $year += 1900;</code></pre></div>
+<p style="padding-bottom: 10px;">To get the last two digits of the year (e.g., &quot;01&quot; in 2001) do:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $year = sprintf(&quot;%02d&quot;, $year % 100);</code></pre></div>
+<p style="padding-bottom: 10px;"><code>$wday</code> is the day of the week, with 0 indicating Sunday and 3 indicating
+Wednesday.  <code>$yday</code> is the day of the year, in the range <code>0..364</code>
+(or <code>0..365</code> in leap years.)</p>
+<p style="padding-bottom: 10px;"><code>$isdst</code> is true if the specified time occurs during Daylight Saving
+Time, false otherwise.</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a> uses the current
+time (as returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime">C<time></a>).</p>
+<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a> returns the
+<a href="psi_element://ctime%283%29" style="color:red">ctime(3)</a> value:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $now_string = localtime;  # e.g., &quot;Thu Oct 13 04:54:34 1994&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">The format of this scalar value is <B>not</B> locale-dependent but built
+into Perl.  For GMT instead of local time use the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR">C<gmtime></a> builtin.  See also the
+<a href="psi_element://Time%3A%3ALocal" style="color:red">C<Time::Local></a> module (for converting seconds, minutes,
+hours, and such back to the integer value returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime">C<time></a>),
+and the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2FC%3Cstrftime%3E" style="color:red">C<strftime></a> and
+<a href="psi_element://POSIX%2FC%3Cmktime%3E" style="color:red">C<mktime></a> functions.</p>
+<p style="padding-bottom: 10px;">To get somewhat similar but locale-dependent date strings, set up your
+locale environment variables appropriately (please see <a href="psi_element://perllocale">perllocale</a>) and
+try for example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use POSIX qw(strftime);
+    my $now_string = strftime &quot;%a %b %e %H:%M:%S %Y&quot;, localtime;
+    # or for GMT formatted appropriately for your locale:
+    my $now_string = strftime &quot;%a %b %e %H:%M:%S %Y&quot;, gmtime;</code></pre></div>
+<p style="padding-bottom: 10px;">Note that <code>%a</code> and <code>%b</code>, the short forms of the day of the week
+and the month of the year, may not necessarily be three characters wide.</p>
+<p style="padding-bottom: 10px;">The <a href="psi_element://Time%3A%3Agmtime" style="color:red">Time::gmtime</a> and <a href="psi_element://Time%3A%3Alocaltime" style="color:red">Time::localtime</a> modules provide a convenient,
+by-name access mechanism to the <a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR">C<gmtime></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a> functions, respectively.</p>
+<p style="padding-bottom: 10px;">For a comprehensive date and time representation look at the
+<a href="psi_element://DateTime" style="color:red">DateTime</a> module on CPAN.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Flocaltime">localtime in perlport</a>.</p></dd></dl>

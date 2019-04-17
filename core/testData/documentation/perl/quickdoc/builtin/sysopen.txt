@@ -1,0 +1,56 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sysopen FILEHANDLE,FILENAME,MODE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">sysopen FILEHANDLE,FILENAME,MODE,PERMS</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Opens the file whose filename is given by FILENAME, and associates it with
+FILEHANDLE.  If FILEHANDLE is an expression, its value is used as the real
+filehandle wanted; an undefined scalar will be suitably autovivified.  This
+function calls the underlying operating system's <a href="psi_element://open%282%29" style="color:red">open(2)</a> function with the
+parameters FILENAME, MODE, and PERMS.</p>
+<p style="padding-bottom: 10px;">Returns true on success and <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> otherwise.</p>
+<p style="padding-bottom: 10px;">The possible values and flag bits of the MODE parameter are
+system-dependent; they are available via the standard module
+<a href="psi_element://Fcntl" style="color:red">C<Fcntl></a>.  See the documentation of your operating system's
+<a href="psi_element://open%282%29" style="color:red">open(2)</a> syscall to see
+which values and flag bits are available.  You may combine several flags
+using the <code>|</code>-operator.</p>
+<p style="padding-bottom: 10px;">Some of the most common values are <code>O_RDONLY</code> for opening the file in
+read-only mode, <code>O_WRONLY</code> for opening the file in write-only mode,
+and <code>O_RDWR</code> for opening the file in read-write mode.
+  </p>
+<p style="padding-bottom: 10px;">For historical reasons, some values work on almost every system
+supported by Perl: 0 means read-only, 1 means write-only, and 2
+means read/write.  We know that these values do <i>not</i> work under
+OS/390 and on the Macintosh; you probably don't want to
+use them in new code.</p>
+<p style="padding-bottom: 10px;">If the file named by FILENAME does not exist and the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> call creates
+it (typically because MODE includes the <code>O_CREAT</code> flag), then the value of
+PERMS specifies the permissions of the newly created file.  If you omit
+the PERMS argument to <a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a>,
+Perl uses the octal value <code>0666</code>.
+These permission values need to be in octal, and are modified by your
+process's current <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a>.</p>
+<p style="padding-bottom: 10px;">In many systems the <code>O_EXCL</code> flag is available for opening files in
+exclusive mode.  This is <B>not</B> locking: exclusiveness means here that
+if the file already exists,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> fails.  <code>O_EXCL</code> may
+not work
+on network filesystems, and has no effect unless the <code>O_CREAT</code> flag
+is set as well.  Setting <code>O_CREAT|O_EXCL</code> prevents the file from
+being opened if it is a symbolic link.  It does not protect against
+symbolic links in the file's path.</p>
+<p style="padding-bottom: 10px;">Sometimes you may want to truncate an already-existing file.  This
+can be done using the <code>O_TRUNC</code> flag.  The behavior of
+<code>O_TRUNC</code> with <code>O_RDONLY</code> is undefined.</p>
+<p style="padding-bottom: 10px;">You should seldom if ever use <code>0644</code> as argument to
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a>, because
+that takes away the user's option to have a more permissive umask.
+Better to omit it.  See <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> for more on this.</p>
+<p style="padding-bottom: 10px;">Note that under Perls older than 5.8.0,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> depends on the
+<a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> C library function.  On many Unix systems, <a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> is known
+to fail when file descriptors exceed a certain value, typically 255.  If
+you need more file descriptors than that, consider using the
+<a href="psi_element://POSIX%2FC%3Copen%3E" style="color:red">C<POSIX::open></a> function.  For Perls 5.8.0 and later,
+PerlIO is (most often) the default.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlopentut">perlopentut</a> for a kinder, gentler explanation of opening files.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsysopen">sysopen in perlport</a>.</p></dd></dl>

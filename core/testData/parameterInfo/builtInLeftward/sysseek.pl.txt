@@ -1,0 +1,2 @@
+sysseek(<caret>);
+No element

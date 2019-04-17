@@ -1,0 +1,24 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">mkdir FILENAME,MASK
+  </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">mkdir FILENAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">mkdir</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Creates the directory specified by FILENAME, with permissions
+specified by MASK (as modified by <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a>).  If it
+succeeds it returns true; otherwise it returns false and sets
+<a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno).
+MASK defaults to 0777 if omitted, and FILENAME defaults
+to <a href="psi_element://perlvar%2F%24_">C<$_></a> if omitted.</p>
+<p style="padding-bottom: 10px;">In general, it is better to create directories with a permissive MASK
+and let the user modify that with their <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> than it
+is to supply
+a restrictive MASK and give the user no way to be more permissive.
+The exceptions to this rule are when the file or directory should be
+kept private (mail files, for instance).  The documentation for
+<a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> discusses the choice of MASK in more detail.</p>
+<p style="padding-bottom: 10px;">Note that according to the POSIX 1003.1-1996 the FILENAME may have any
+number of trailing slashes.  Some operating and filesystems do not get
+this right, so Perl automatically removes all trailing slashes to keep
+everyone happy.</p>
+<p style="padding-bottom: 10px;">To recursively create a directory structure, look at
+the <a href="psi_element://File%3A%3APath%2Fmake_path%28+%24dir1%2C+%24dir2%2C+....+%29" style="color:red">C<make_path></a> function
+of the <a href="psi_element://File%3A%3APath" style="color:red">File::Path</a> module.</p></dd></dl>

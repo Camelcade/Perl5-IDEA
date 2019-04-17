@@ -1,0 +1,15 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">pipe READHANDLE,WRITEHANDLE</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Opens a pair of connected pipes like the corresponding system call.
+Note that if you set up a loop of piped processes, deadlock can occur
+unless you are very careful.  In addition, note that Perl's pipes use
+IO buffering, so you may need to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a>
+to flush your WRITEHANDLE after each command, depending on the
+application.</p>
+<p style="padding-bottom: 10px;">Returns true on success.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://IPC%3A%3AOpen2" style="color:red">IPC::Open2</a>, <a href="psi_element://IPC%3A%3AOpen3" style="color:red">IPC::Open3</a>, and
+<a href="psi_element://perlipc%2FBidirectional+Communication+with+Another+Process">Bidirectional Communication with Another Process in perlipc</a>
+for examples of such things.</p>
+<p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, that flag is set
+on all newly opened file descriptors whose
+<a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE">C<fileno></a>s are <i>higher</i> than the current value of
+<a href="psi_element://perlvar%2F%24%5EF">C<$^F></a> (by default 2 for <code>STDERR</code>).  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p></dd></dl>

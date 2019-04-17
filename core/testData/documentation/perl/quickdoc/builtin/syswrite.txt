@@ -1,0 +1,29 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">syswrite FILEHANDLE,SCALAR,LENGTH,OFFSET</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">syswrite FILEHANDLE,SCALAR,LENGTH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">syswrite FILEHANDLE,SCALAR</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Attempts to write LENGTH bytes of data from variable SCALAR to the
+specified FILEHANDLE, using <a href="psi_element://write%282%29" style="color:red">write(2)</a>.  If LENGTH is
+not specified, writes whole SCALAR.  It bypasses buffered IO, so
+mixing this with reads (other than <code>sysread)</code>),
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST">C<print></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwrite+FILEHANDLE">C<write></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> may cause
+confusion because the perlio and stdio layers usually buffer data.
+Returns the number of bytes actually written, or <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>
+if there was an error (in this case the errno variable
+<a href="psi_element://perlvar%2F%24%21">C<$!></a> is also set).  If the LENGTH is greater than the
+data available in the SCALAR after the OFFSET, only as much data as is
+available will be written.</p>
+<p style="padding-bottom: 10px;">An OFFSET may be specified to write the data from some part of the
+string other than the beginning.  A negative OFFSET specifies writing
+that many characters counting backwards from the end of the string.
+If SCALAR is of length zero, you can only use an OFFSET of 0.</p>
+<p style="padding-bottom: 10px;"><B>WARNING</B>: If the filehandle is marked <code>:utf8</code>, Unicode characters
+encoded in UTF-8 are written instead of bytes, and the LENGTH, OFFSET, and
+return value of <a href="psi_element://pod%3A%3Aperlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<syswrite></a>
+are in (UTF8-encoded Unicode) characters.
+The <code>:encoding(...)</code> layer implicitly introduces the <code>:utf8</code> layer.
+Alternately, if the handle is not marked with an encoding but you
+attempt to write characters with code points over 255, raises an exception.
+See <a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>, and the <a href="psi_element://open" style="color:red">open</a> pragma.</p></dd></dl>

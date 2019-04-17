@@ -1,0 +1,54 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">study SCALAR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">study</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;"><B>Note that since Perl version 5.16 this function has been a no-op, but
+this might change in a future release.</B></p>
+<p style="padding-bottom: 10px;">May take extra time to study SCALAR (<a href="psi_element://perlvar%2F%24_">C<$_></a> if unspecified)
+in anticipation
+of doing many pattern matches on the string before it is next modified.
+This may or may not save time, depending on the nature and number of
+patterns you are searching and the distribution of character
+frequencies in the string to be searched; you probably want to compare
+run times with and without it to see which is faster.  Those loops
+that scan for many short constant strings (including the constant
+parts of more complex patterns) will benefit most.</p>
+<p style="padding-bottom: 10px;">(The way <a href="psi_element://pod%3A%3Aperlfunc%2Fstudy+SCALAR">C<study></a> used to work is this: a linked list
+of every
+character in the string to be searched is made, so we know, for
+example, where all the <code>'k'</code> characters are.  From each search string,
+the rarest character is selected, based on some static frequency tables
+constructed from some C programs and English text.  Only those places
+that contain this &quot;rarest&quot; character are examined.)</p>
+<p style="padding-bottom: 10px;">For example, here is a loop that inserts index producing entries
+before any line containing a certain pattern:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {
+        study;
+        print &quot;.IX foo\n&quot;    if /\bfoo\b/;
+        print &quot;.IX bar\n&quot;    if /\bbar\b/;
+        print &quot;.IX blurfl\n&quot; if /\bblurfl\b/;
+        # ...
+        print;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">In searching for <code>/\bfoo\b/</code>, only locations in <a href="psi_element://perlvar%2F%24_">C<$_></a>
+that contain <code>f</code>
+will be looked at, because <code>f</code> is rarer than <code>o</code>.  In general, this is
+a big win except in pathological cases.  The only question is whether
+it saves you more time than it took to build the linked list in the
+first place.</p>
+<p style="padding-bottom: 10px;">Note that if you have to look for strings that you don't know till
+runtime, you can build an entire loop as a string and <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> that to avoid recompiling all your patterns all the time.
+Together with undefining <a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> to input entire
+files as one record, this can be quite
+fast, often faster than specialized programs like <a href="psi_element://fgrep%281%29" style="color:red">fgrep(1)</a>.  The following
+scans a list of files (<code>@files</code>) for a list of words (<code>@words</code>), and prints
+out the names of those files that contain a match:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $search = 'local $/; while (&lt;&gt;) { study;';
+    foreach my $word (@words) {
+        $search .= &quot;++\$seen{\$ARGV} if /\\b$word\\b/;\n&quot;;
+    }
+    $search .= &quot;}&quot;;
+    @ARGV = @files;
+    my %seen;
+    eval $search;        # this screams
+    foreach my $file (sort keys(%seen)) {
+        print $file, &quot;\n&quot;;
+    }</code></pre></div></dd></dl>

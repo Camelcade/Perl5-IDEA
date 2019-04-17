@@ -1,0 +1,2 @@
+lstat(<caret>);
+No element

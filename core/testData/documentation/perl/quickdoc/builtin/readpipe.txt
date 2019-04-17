@@ -1,0 +1,12 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">readpipe EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">readpipe</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">EXPR is executed as a system command.
+The collected standard output of the command is returned.
+In scalar context, it comes back as a single (potentially
+multi-line) string.  In list context, returns a list of lines
+(however you've defined lines with <a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> (or
+<code>$INPUT_RECORD_SEPARATOR</code> in <a href="psi_element://English" style="color:red">English</a>)).
+This is the internal function implementing the <code>qx/EXPR/</code>
+operator, but you can use it directly.  The <code>qx/EXPR/</code>
+operator is discussed in more detail in <a href="psi_element://perlop%2FI%2FO+Operators">I/O Operators in perlop</a>.
+If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p></dd></dl>

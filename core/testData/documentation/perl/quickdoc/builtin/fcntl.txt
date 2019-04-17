@@ -1,0 +1,31 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">fcntl FILEHANDLE,FUNCTION,SCALAR</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Implements the <a href="psi_element://fcntl%282%29" style="color:red">fcntl(2)</a> function.  You'll probably have to say</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Fcntl;</code></pre></div>
+<p style="padding-bottom: 10px;">first to get the correct constant definitions.  Argument processing and
+value returned work just like <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a> below.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Fcntl;
+    my $flags = fcntl($filehandle, F_GETFL, 0)
+        or die &quot;Can't fcntl F_GETFL: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">You don't have to check for <a href="psi_element://pod%3A%3Aperlfunc%2Fdefined+EXPR">C<defined></a> on the return
+from <a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<fcntl></a>.  Like
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a>, it maps a <code>0</code> return
+from the system call into <code>&quot;0 but true&quot;</code> in Perl.  This string is true
+in boolean context and <code>0</code> in numeric context.  It is also exempt from
+the normal
+<a href="psi_element://perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s">C<Argument "..." isn't numeric></a>
+<a href="psi_element://warnings" style="color:red">warnings</a> on improper numeric conversions.</p>
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<fcntl></a> raises an
+exception if used on a machine that doesn't implement <a href="psi_element://fcntl%282%29" style="color:red">fcntl(2)</a>.  See
+the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module or your <a href="psi_element://fcntl%282%29" style="color:red">fcntl(2)</a> manpage to learn what functions
+are available on your system.</p>
+<p style="padding-bottom: 10px;">Here's an example of setting a filehandle named <code>$REMOTE</code> to be
+non-blocking at the system level.  You'll have to negotiate
+<a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a> on your own, though.</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Fcntl qw(F_GETFL F_SETFL O_NONBLOCK);
+
+    my $flags = fcntl($REMOTE, F_GETFL, 0)
+        or die &quot;Can't get flags for the socket: $!\n&quot;;
+
+    fcntl($REMOTE, F_SETFL, $flags | O_NONBLOCK)
+        or die &quot;Can't set flags for the socket: $!\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Ffcntl">fcntl in perlport</a>.</p></dd></dl>

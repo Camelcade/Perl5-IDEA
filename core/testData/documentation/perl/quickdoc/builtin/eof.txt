@@ -1,0 +1,44 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">eof FILEHANDLE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">eof ()</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">eof</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns 1 if the next read on FILEHANDLE will return end of file <i>or</i> if
+FILEHANDLE is not open.  FILEHANDLE may be an expression whose value
+gives the real filehandle.  (Note that this function actually
+reads a character and then <code>ungetc</code>s it, so isn't useful in an
+interactive context.)  Do not read from a terminal file (or call
+<code>eof(FILEHANDLE)</code> on it) after end-of-file is reached.  File types such
+as terminals may lose the end-of-file condition if you do.</p>
+<p style="padding-bottom: 10px;">An <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> without an argument uses the last file
+read.  Using <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof()></a> with empty parentheses is
+different.  It refers to the pseudo file formed from the files listed on
+the command line and accessed via the <code>&lt;&gt;</code> operator.  Since
+<code>&lt;&gt;</code> isn't explicitly opened, as a normal filehandle is, an
+<a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof()></a> before <code>&lt;&gt;</code> has been used will cause
+<a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a> to be examined to determine if input is
+available.   Similarly, an <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof()></a> after <code>&lt;&gt;</code>
+has returned end-of-file will assume you are processing another
+<a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a> list, and if you haven't set
+<a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a>, will read input from <code>STDIN</code>; see
+<a href="psi_element://perlop%2FI%2FO+Operators">I/O Operators in perlop</a>.</p>
+<p style="padding-bottom: 10px;">In a <code>while (&lt;&gt;)</code> loop, <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> or <code>eof(ARGV)</code>
+can be used to detect the end of each file, whereas
+<a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof()></a> will detect the end of the very last file
+only.  Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # reset line numbering on each input file
+    while (&lt;&gt;) {
+        next if /^\s*#/;  # skip comments
+        print &quot;$.\t$_&quot;;
+    } continue {
+        close ARGV if eof;  # Not eof()!
+    }
+
+    # insert dashes just before last line of last file
+    while (&lt;&gt;) {
+        if (eof()) {  # check for end of last file
+            print &quot;--------------\n&quot;;
+        }
+        print;
+        last if eof();     # needed if we're reading from a terminal
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Practical hint: you almost never need to use <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a>
+in Perl, because the input operators typically return <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> when they run out of data or encounter an error.</p></dd></dl>

@@ -1,0 +1,2 @@
+getprotoent <caret> 
+No element

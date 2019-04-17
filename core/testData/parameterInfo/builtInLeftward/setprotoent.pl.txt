@@ -1,0 +1,2 @@
+setprotoent(<caret>);
+No element

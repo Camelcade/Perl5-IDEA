@@ -1,0 +1,66 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">substr EXPR,OFFSET,LENGTH,REPLACEMENT
+    </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">substr EXPR,OFFSET,LENGTH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">substr EXPR,OFFSET</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Extracts a substring out of EXPR and returns it.  First character is at
+offset zero.  If OFFSET is negative, starts
+that far back from the end of the string.  If LENGTH is omitted, returns
+everything through the end of the string.  If LENGTH is negative, leaves that
+many characters off the end of the string.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $s = &quot;The black cat climbed the green tree&quot;;
+    my $color  = substr $s, 4, 5;      # black
+    my $middle = substr $s, 4, -11;    # black cat climbed the
+    my $end    = substr $s, 14;        # climbed the green tree
+    my $tail   = substr $s, -4;        # tree
+    my $z      = substr $s, -4, 2;     # tr</code></pre></div>
+<p style="padding-bottom: 10px;">You can use the <a href="psi_element://pod%3A%3Aperlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT">C<substr></a>
+function as an lvalue, in which case EXPR
+must itself be an lvalue.  If you assign something shorter than LENGTH,
+the string will shrink, and if you assign something longer than LENGTH,
+the string will grow to accommodate it.  To keep the string the same
+length, you may need to pad or chop your value using
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a>.</p>
+<p style="padding-bottom: 10px;">If OFFSET and LENGTH specify a substring that is partly outside the
+string, only the part within the string is returned.  If the substring
+is beyond either end of the string,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT">C<substr></a> returns the undefined
+value and produces a warning.  When used as an lvalue, specifying a
+substring that is entirely outside the string raises an exception.
+Here's an example showing the behavior for boundary cases:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $name = 'fred';
+    substr($name, 4) = 'dy';         # $name is now 'freddy'
+    my $null = substr $name, 6, 2;   # returns &quot;&quot; (no warning)
+    my $oops = substr $name, 7;      # returns undef, with warning
+    substr($name, 7) = 'gap';        # raises an exception</code></pre></div>
+<p style="padding-bottom: 10px;">An alternative to using
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT">C<substr></a> as an lvalue is to
+specify the
+replacement string as the 4th argument.  This allows you to replace
+parts of the EXPR and return what was there before in one operation,
+just as you can with
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST">C<splice></a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $s = &quot;The black cat climbed the green tree&quot;;
+    my $z = substr $s, 14, 7, &quot;jumped from&quot;;    # climbed
+    # $s is now &quot;The black cat jumped from the green tree&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">Note that the lvalue returned by the three-argument version of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT">C<substr></a> acts as
+a 'magic bullet'; each time it is assigned to, it remembers which part
+of the original string is being modified; for example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $x = '1234';
+    for (substr($x,1,2)) {
+        $_ = 'a';   print $x,&quot;\n&quot;;    # prints 1a4
+        $_ = 'xyz'; print $x,&quot;\n&quot;;    # prints 1xyz4
+        $x = '56789';
+        $_ = 'pq';  print $x,&quot;\n&quot;;    # prints 5pq9
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">With negative offsets, it remembers its position from the end of the string
+when the target string is modified:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $x = '1234';
+    for (substr($x, -3, 2)) {
+        $_ = 'a';   print $x,&quot;\n&quot;;    # prints 1a4, as above
+        $x = 'abcdefg';
+        print $_,&quot;\n&quot;;                # prints f
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Prior to Perl version 5.10, the result of using an lvalue multiple times was
+unspecified.  Prior to 5.16, the result with negative offsets was
+unspecified.</p></dd></dl>

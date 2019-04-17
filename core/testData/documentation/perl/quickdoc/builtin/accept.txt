@@ -1,0 +1,7 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">accept NEWSOCKET,GENERICSOCKET</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Accepts an incoming socket connect, just as <a href="psi_element://accept%282%29" style="color:red">accept(2)</a>
+does.  Returns the packed address if it succeeded, false otherwise.
+See the example in <a href="psi_element://perlipc%2FSockets%3A+Client%2FServer+Communication">Sockets: Client/Server Communication in perlipc</a>.</p>
+<p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, the flag will
+be set for the newly opened file descriptor, as determined by the
+value of <a href="psi_element://perlvar%2F%24%5EF">C<$^F></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p></dd></dl>

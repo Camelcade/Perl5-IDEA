@@ -1,0 +1,34 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">syscall NUMBER, LIST
+ </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Calls the system call specified as the first element of the list,
+passing the remaining elements as arguments to the system call.  If
+unimplemented, raises an exception.  The arguments are interpreted
+as follows: if a given argument is numeric, the argument is passed as
+an int.  If not, the pointer to the string value is passed.  You are
+responsible to make sure a string is pre-extended long enough to
+receive any result that might be written into a string.  You can't use a
+string literal (or other read-only string) as an argument to
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST">C<syscall></a> because Perl has to assume that any
+string pointer might be written through.  If your
+integer arguments are not literals and have never been interpreted in a
+numeric context, you may need to add <code>0</code> to them to force them to look
+like numbers.  This emulates the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<syswrite></a> function (or
+vice versa):</p>
+<div style="padding-bottom: 10px;"><pre><code>    require 'syscall.ph';        # may need to run h2ph
+    my $s = &quot;hi there\n&quot;;
+    syscall(SYS_write(), fileno(STDOUT), $s, length $s);</code></pre></div>
+<p style="padding-bottom: 10px;">Note that Perl supports passing of up to only 14 arguments to your syscall,
+which in practice should (usually) suffice.</p>
+<p style="padding-bottom: 10px;">Syscall returns whatever value returned by the system call it calls.
+If the system call fails, <a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST">C<syscall></a> returns
+<code>-1</code> and sets <a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno).
+Note that some system calls <i>can</i> legitimately return <code>-1</code>.  The proper
+way to handle such calls is to assign <code>$! = 0</code> before the call, then
+check the value of <a href="psi_element://perlvar%2F%24%21">C<$!></a> if
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST">C<syscall></a> returns <code>-1</code>.</p>
+<p style="padding-bottom: 10px;">There's a problem with <code>syscall(SYS_pipe())</code>: it returns the file
+number of the read end of the pipe it creates, but there is no way
+to retrieve the file number of the other end.  You can avoid this
+problem by using <a href="psi_element://pod%3A%3Aperlfunc%2Fpipe+READHANDLE%2CWRITEHANDLE">C<pipe></a> instead.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsyscall">syscall in perlport</a>.</p></dd></dl>

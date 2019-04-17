@@ -1,0 +1,23 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">reverse LIST
+  </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">In list context, returns a list value consisting of the elements
+of LIST in the opposite order.  In scalar context, concatenates the
+elements of LIST and returns a string value with all characters
+in the opposite order.</p>
+<div style="padding-bottom: 10px;"><pre><code>    print join(&quot;, &quot;, reverse &quot;world&quot;, &quot;Hello&quot;); # Hello, world
+
+    print scalar reverse &quot;dlrow ,&quot;, &quot;olleH&quot;;    # Hello, world</code></pre></div>
+<p style="padding-bottom: 10px;">Used without arguments in scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Freverse+LIST">C<reverse></a>
+reverses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $_ = &quot;dlrow ,olleH&quot;;
+    print reverse;                         # No output, list context
+    print scalar reverse;                  # Hello, world</code></pre></div>
+<p style="padding-bottom: 10px;">Note that reversing an array to itself (as in <code>@a = reverse @a</code>) will
+preserve non-existent elements whenever possible; i.e., for non-magical
+arrays or for tied arrays with <code>EXISTS</code> and <code>DELETE</code> methods.</p>
+<p style="padding-bottom: 10px;">This operator is also handy for inverting a hash, although there are some
+caveats.  If a value is duplicated in the original hash, only one of those
+can be represented as a key in the inverted hash.  Also, this has to
+unwind one hash and build a whole new one, which may take some time
+on a large hash, such as from a DBM file.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my %by_name = reverse %by_address;  # Invert the hash</code></pre></div></dd></dl>

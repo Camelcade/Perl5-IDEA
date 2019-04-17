@@ -1,0 +1,2 @@
+chmod(<caret>);
+<$oct_permissions>, @file_names

@@ -1,0 +1,31 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">getc FILEHANDLE
+   </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">getc</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns the next character from the input file attached to FILEHANDLE,
+or the undefined value at end of file or if there was an error (in
+the latter case <a href="psi_element://perlvar%2F%24%21">C<$!></a> is set).  If FILEHANDLE is omitted,
+reads from
+STDIN.  This is not particularly efficient.  However, it cannot be
+used by itself to fetch single characters without waiting for the user
+to hit enter.  For that, try something more like:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if ($BSD_STYLE) {
+        system &quot;stty cbreak &lt;/dev/tty &gt;/dev/tty 2&gt;&amp;1&quot;;
+    }
+    else {
+        system &quot;stty&quot;, '-icanon', 'eol', &quot;\001&quot;;
+    }
+
+    my $key = getc(STDIN);
+
+    if ($BSD_STYLE) {
+        system &quot;stty -cbreak &lt;/dev/tty &gt;/dev/tty 2&gt;&amp;1&quot;;
+    }
+    else {
+        system 'stty', 'icanon', 'eol', '^@'; # ASCII NUL
+    }
+    print &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Determination of whether <code>$BSD_STYLE</code> should be set is left as an
+exercise to the reader.</p>
+<p style="padding-bottom: 10px;">The <a href="psi_element://POSIX%2FC%3Cgetattr%3E" style="color:red">C<POSIX::getattr></a> function can do this more
+portably on systems purporting POSIX compliance.  See also the
+<a href="psi_element://Term%3A%3AReadKey" style="color:red">C<Term::ReadKey></a> module on CPAN.</p></dd></dl>

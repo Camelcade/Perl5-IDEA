@@ -1,0 +1,24 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">grep BLOCK LIST</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">grep EXPR,LIST</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">This is similar in spirit to, but not the same as, <a href="psi_element://grep%281%29" style="color:red">grep(1)</a> and its
+relatives.  In particular, it is not limited to using regular expressions.</p>
+<p style="padding-bottom: 10px;">Evaluates the BLOCK or EXPR for each element of LIST (locally setting
+<a href="psi_element://perlvar%2F%24_">C<$_></a> to each element) and returns the list value
+consisting of those
+elements for which the expression evaluated to true.  In scalar
+context, returns the number of times the expression was true.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @foo = grep(!/^#/, @bar);    # weed out comments</code></pre></div>
+<p style="padding-bottom: 10px;">or equivalently,</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @foo = grep {!/^#/} @bar;    # weed out comments</code></pre></div>
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://perlvar%2F%24_">C<$_></a> is an alias to the list value, so it can
+be used to
+modify the elements of the LIST.  While this is useful and supported,
+it can cause bizarre results if the elements of LIST are not variables.
+Similarly, grep returns aliases into the original list, much as a for
+loop's index variable aliases the list elements.  That is, modifying an
+element of a list returned by grep (for example, in a <code>foreach</code>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a> or another <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a>)
+actually modifies the element in the original list.
+This is usually something to be avoided when writing clear code.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a> for a list composed of the results of
+the BLOCK or EXPR.</p></dd></dl>

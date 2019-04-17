@@ -1,0 +1,32 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sysseek FILEHANDLE,POSITION,WHENCE
+ </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Sets FILEHANDLE's system position in bytes using <a href="psi_element://lseek%282%29" style="color:red">lseek(2)</a>.  FILEHANDLE may
+be an expression whose value gives the name of the filehandle.  The values
+for WHENCE are <code>0</code> to set the new position to POSITION; <code>1</code> to set the it
+to the current position plus POSITION; and <code>2</code> to set it to EOF plus
+POSITION, typically negative.</p>
+<p style="padding-bottom: 10px;">Note the <i>in bytes</i>: even if the filehandle has been set to operate
+on characters (for example by using the <code>:encoding(utf8)</code> I/O layer),
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a> will return byte offsets, not character
+offsets (because implementing that would render
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a> unacceptably slow).</p>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a> bypasses normal
+buffered IO, so mixing it with reads other than
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a> (for example
+<a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<read></a>),
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST">C<print></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwrite+FILEHANDLE">C<write></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> may cause
+confusion.</p>
+<p style="padding-bottom: 10px;">For WHENCE, you may also use the constants <code>SEEK_SET</code>, <code>SEEK_CUR</code>,
+and <code>SEEK_END</code> (start of the file, current position, end of the file)
+from the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module.  Use of the constants is also more portable
+than relying on 0, 1, and 2.  For example to define a &quot;systell&quot; function:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Fcntl 'SEEK_CUR';
+    sub systell { sysseek($_[0], 0, SEEK_CUR) }</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the new position, or the undefined value on failure.  A position
+of zero is returned as the string <code>&quot;0 but true&quot;</code>; thus
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a> returns
+true on success and false on failure, yet you can still easily determine
+the new position.</p></dd></dl>

@@ -1,0 +1,2 @@
+gethostent(<caret>);
+No element

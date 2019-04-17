@@ -1,0 +1,29 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">write FILEHANDLE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">write EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">write</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Writes a formatted record (possibly multi-line) to the specified FILEHANDLE,
+using the format associated with that file.  By default the format for
+a file is the one having the same name as the filehandle, but the
+format for the current output channel (see the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fselect+FILEHANDLE">C<select></a> function) may be set explicitly by
+assigning the name of the format to the <a href="psi_element://perlvar%2F%24%7E">C<$~></a> variable.</p>
+<p style="padding-bottom: 10px;">Top of form processing is handled automatically:  if there is insufficient
+room on the current page for the formatted record, the page is advanced by
+writing a form feed and a special top-of-page
+format is used to format the new
+page header before the record is written.  By default, the top-of-page
+format is the name of the filehandle with <code>_TOP</code> appended, or <code>top</code>
+in the current package if the former does not exist.  This would be a
+problem with autovivified filehandles, but it may be dynamically set to the
+format of your choice by assigning the name to the <a href="psi_element://perlvar%2F%24%5E">C<$^></a>
+variable while that filehandle is selected.  The number of lines
+remaining on the current page is in variable <a href="psi_element://perlvar%2F%24-">C<$-></a>, which
+can be set to <code>0</code> to force a new page.</p>
+<p style="padding-bottom: 10px;">If FILEHANDLE is unspecified, output goes to the current default output
+channel, which starts out as STDOUT but may be changed by the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fselect+FILEHANDLE">C<select></a> operator.  If the FILEHANDLE is an EXPR,
+then the expression
+is evaluated and the resulting string is used to look up the name of
+the FILEHANDLE at run time.  For more on formats, see <a href="psi_element://perlform">perlform</a>.</p>
+<p style="padding-bottom: 10px;">Note that write is <i>not</i> the opposite of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<read></a>.  Unfortunately.</p></dd></dl>

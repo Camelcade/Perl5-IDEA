@@ -1,0 +1,2 @@
+glob(<caret>);
+No element

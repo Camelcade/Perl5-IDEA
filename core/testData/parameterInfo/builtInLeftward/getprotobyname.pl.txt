@@ -1,0 +1,2 @@
+getprotobyname(<caret>);
+No element

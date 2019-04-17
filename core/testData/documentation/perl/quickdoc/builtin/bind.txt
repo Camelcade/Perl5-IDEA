@@ -1,0 +1,5 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">bind SOCKET,NAME</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Binds a network address to a socket, just as <a href="psi_element://bind%282%29" style="color:red">bind(2)</a>
+does.  Returns true if it succeeded, false otherwise.  NAME should be a
+packed address of the appropriate type for the socket.  See the examples in
+<a href="psi_element://perlipc%2FSockets%3A+Client%2FServer+Communication">Sockets: Client/Server Communication in perlipc</a>.</p></dd></dl>

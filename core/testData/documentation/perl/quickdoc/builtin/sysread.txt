@@ -1,0 +1,32 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sysread FILEHANDLE,SCALAR,LENGTH,OFFSET</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">sysread FILEHANDLE,SCALAR,LENGTH</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Attempts to read LENGTH bytes of data into variable SCALAR from the
+specified FILEHANDLE, using <a href="psi_element://read%282%29" style="color:red">read(2)</a>.  It bypasses
+buffered IO, so mixing this with other kinds of reads,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST">C<print></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwrite+FILEHANDLE">C<write></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> can cause
+confusion because the
+perlio or stdio layers usually buffer data.  Returns the number of
+bytes actually read, <code>0</code> at end of file, or undef if there was an
+error (in the latter case <a href="psi_element://perlvar%2F%24%21">C<$!></a> is also set).  SCALAR will
+be grown or
+shrunk so that the last byte actually read is the last byte of the
+scalar after the read.</p>
+<p style="padding-bottom: 10px;">An OFFSET may be specified to place the read data at some place in the
+string other than the beginning.  A negative OFFSET specifies
+placement at that many characters counting backwards from the end of
+the string.  A positive OFFSET greater than the length of SCALAR
+results in the string being padded to the required size with <code>&quot;\0&quot;</code>
+bytes before the result of the read is appended.</p>
+<p style="padding-bottom: 10px;">There is no syseof() function, which is ok, since
+<a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> doesn't work well on device files (like ttys)
+anyway.  Use <a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a> and
+check for a return value for 0 to decide whether you're done.</p>
+<p style="padding-bottom: 10px;">Note that if the filehandle has been marked as <code>:utf8</code>, Unicode
+characters are read instead of bytes (the LENGTH, OFFSET, and the
+return value of <a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a>
+are in Unicode characters).  The <code>:encoding(...)</code> layer implicitly
+introduces the <code>:utf8</code> layer.  See
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>, and the <a href="psi_element://open" style="color:red">open</a> pragma.</p></dd></dl>

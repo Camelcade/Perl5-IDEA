@@ -1730,6 +1730,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void doTestQuickDoc() {
     initWithFileSmartWithoutErrors();
+    doTestQuickDocWithoutInit();
+  }
+
+  protected void doTestQuickDocWithoutInit() {
     List<Integer> caretsOffsets = getAndRemoveCarets();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < caretsOffsets.size(); i++) {

@@ -1,0 +1,44 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">seek FILEHANDLE,POSITION,WHENCE
+  </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Sets FILEHANDLE's position, just like the <a href="psi_element://fseek%283%29" style="color:red">fseek(3)</a> call of C <code>stdio</code>.
+FILEHANDLE may be an expression whose value gives the name of the
+filehandle.  The values for WHENCE are <code>0</code> to set the new position
+<i>in bytes</i> to POSITION; <code>1</code> to set it to the current position plus
+POSITION; and <code>2</code> to set it to EOF plus POSITION, typically
+negative.  For WHENCE you may use the constants <code>SEEK_SET</code>,
+<code>SEEK_CUR</code>, and <code>SEEK_END</code> (start of the file, current position, end
+of the file) from the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module.  Returns <code>1</code> on success, false
+otherwise.</p>
+<p style="padding-bottom: 10px;">Note the <i>in bytes</i>: even if the filehandle has been set to
+operate on characters (for example by using the <code>:encoding(utf8)</code> open
+layer), <a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a> will return byte offsets, not
+character offsets (because implementing that would render
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a> rather slow).</p>
+<p style="padding-bottom: 10px;">If you want to position the file for
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<syswrite></a>, don't use
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>, because buffering makes its
+effect on the file's read-write position unpredictable and non-portable.
+Use <a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a> instead.</p>
+<p style="padding-bottom: 10px;">Due to the rules and rigors of ANSI C, on some systems you have to do a
+seek whenever you switch between reading and writing.  Amongst other
+things, this may have the effect of calling stdio's <a href="psi_element://clearerr%283%29" style="color:red">clearerr(3)</a>.
+A WHENCE of <code>1</code> (<code>SEEK_CUR</code>) is useful for not moving the file position:</p>
+<div style="padding-bottom: 10px;"><pre><code>    seek($fh, 0, 1);</code></pre></div>
+<p style="padding-bottom: 10px;">This is also useful for applications emulating <code>tail -f</code>.  Once you hit
+EOF on your read and then sleep for a while, you (probably) have to stick in a
+dummy <a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> to reset things.  The
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> doesn't change the position,
+but it <i>does</i> clear the end-of-file condition on the handle, so that the
+next <code>readline FILE</code> makes Perl try again to read something.  (We hope.)</p>
+<p style="padding-bottom: 10px;">If that doesn't work (some I/O implementations are particularly
+cantankerous), you might need something like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    for (;;) {
+        for ($curpos = tell($fh); $_ = readline($fh);
+             $curpos = tell($fh)) {
+            # search for some stuff and put it into files
+        }
+        sleep($for_a_while);
+        seek($fh, $curpos, 0);
+    }</code></pre></div></dd></dl>

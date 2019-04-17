@@ -1,0 +1,2 @@
+cos(<caret>);
+No element

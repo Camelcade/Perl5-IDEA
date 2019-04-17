@@ -1,0 +1,43 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">readline EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">readline
+  </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Reads from the filehandle whose typeglob is contained in EXPR (or from
+<code>*ARGV</code> if EXPR is not provided).  In scalar context, each call reads and
+returns the next line until end-of-file is reached, whereupon the
+subsequent call returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.  In list context, reads
+until end-of-file is reached and returns a list of lines.  Note that the
+notion of &quot;line&quot; used here is whatever you may have defined with
+<a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> (or <code>$INPUT_RECORD_SEPARATOR</code> in
+<a href="psi_element://English" style="color:red">English</a>).  See <a href="psi_element://perlvar%2F%24%2F">$/ in perlvar</a>.</p>
+<p style="padding-bottom: 10px;">When <a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> is set to <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>,
+when <a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> is in scalar context (i.e., file
+slurp mode), and when an empty file is read, it returns <code>''</code> the first
+time, followed by <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> subsequently.</p>
+<p style="padding-bottom: 10px;">This is the internal function implementing the <code>&lt;EXPR&gt;</code>
+operator, but you can use it directly.  The <code>&lt;EXPR&gt;</code>
+operator is discussed in more detail in <a href="psi_element://perlop%2FI%2FO+Operators">I/O Operators in perlop</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $line = &lt;STDIN&gt;;
+    my $line = readline(STDIN);    # same thing</code></pre></div>
+<p style="padding-bottom: 10px;">If <a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> encounters an operating system error,
+<a href="psi_element://perlvar%2F%24%21">C<$!></a> will be set with the corresponding error message.
+It can be helpful to check <a href="psi_element://perlvar%2F%24%21">C<$!></a> when you are reading from
+filehandles you don't trust, such as a tty or a socket.  The following
+example uses the operator form of <a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> and dies
+if the result is not defined.</p>
+<div style="padding-bottom: 10px;"><pre><code>    while ( ! eof($fh) ) {
+        defined( $_ = readline $fh ) or die &quot;readline failed: $!&quot;;
+        ...
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Note that you have can't handle <a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> errors
+that way with the <code>ARGV</code> filehandle.  In that case, you have to open
+each element of <a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a> yourself since
+<a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> handles <code>ARGV</code> differently.</p>
+<div style="padding-bottom: 10px;"><pre><code>    foreach my $arg (@ARGV) {
+        open(my $fh, $arg) or warn &quot;Can't open $arg: $!&quot;;
+
+        while ( ! eof($fh) ) {
+            defined( $_ = readline $fh )
+                or die &quot;readline failed for $arg: $!&quot;;
+            ...
+        }
+    }</code></pre></div></dd></dl>

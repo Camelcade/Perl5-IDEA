@@ -1,0 +1,71 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">caller EXPR
+   </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">caller</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns the context of the current pure perl subroutine call.  In scalar
+context, returns the caller's package name if there <i>is</i> a caller (that is, if
+we're in a subroutine or <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a>) and the undefined value otherwise.
+caller never returns XS subs and they are skipped.  The next pure perl
+sub will appear instead of the XS sub in caller's return values.  In
+list context, caller returns</p>
+<div style="padding-bottom: 10px;"><pre><code>       # 0         1          2
+    my ($package, $filename, $line) = caller;</code></pre></div>
+<p style="padding-bottom: 10px;">With EXPR, it returns some extra information that the debugger uses to
+print a stack trace.  The value of EXPR indicates how many call frames
+to go back before the current one.</p>
+<div style="padding-bottom: 10px;"><pre><code>    #  0         1          2      3            4
+ my ($package, $filename, $line, $subroutine, $hasargs,
+
+    #  5          6          7            8       9         10
+    $wantarray, $evaltext, $is_require, $hints, $bitmask, $hinthash)
+  = caller($i);</code></pre></div>
+<p style="padding-bottom: 10px;">Here, $subroutine is the function that the caller called (rather than the
+function containing the caller).  Note that $subroutine may be <code>(eval)</code> if
+the frame is not a subroutine call, but an <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>.  In
+such a case additional elements $evaltext and <code>$is_require</code> are set:
+<code>$is_require</code> is true if the frame is created by a
+<a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a>
+statement, $evaltext contains the text of the <code>eval EXPR</code> statement.
+In particular, for an <code>eval BLOCK</code> statement, $subroutine is <code>(eval)</code>,
+but $evaltext is undefined.  (Note also that each
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> statement creates a
+<a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> frame inside an <code>eval EXPR</code> frame.)
+$subroutine may also be <code>(unknown)</code> if this particular subroutine
+happens to have been deleted from the symbol table.  <code>$hasargs</code> is true
+if a new instance of <a href="psi_element://perlvar%2F%40_">C<@_></a> was set up for the frame.
+<code>$hints</code> and <code>$bitmask</code> contain pragmatic hints that the caller was
+compiled with.  <code>$hints</code> corresponds to <a href="psi_element://perlvar%2F%24%5EH">C<$^H></a>, and
+<code>$bitmask</code> corresponds to
+<a href="psi_element://perlvar%2F%24%7B%5EWARNING_BITS%7D">C<${^WARNING_BITS}></a>.  The <code>$hints</code> and
+<code>$bitmask</code> values are subject to change between versions of Perl, and
+are not meant for external use.</p>
+<p style="padding-bottom: 10px;"><code>$hinthash</code> is a reference to a hash containing the value of
+<a href="psi_element://perlvar%2F%25%5EH">C<%^H></a> when the caller was compiled, or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> if <a href="psi_element://perlvar%2F%25%5EH">C<%^H></a> was empty.  Do not
+modify the values of this hash, as they are the actual values stored in
+the optree.</p>
+<p style="padding-bottom: 10px;">Furthermore, when called from within the DB package in
+list context, and with an argument, caller returns more
+detailed information: it sets the list variable <code>@DB::args</code> to be the
+arguments with which the subroutine was invoked.</p>
+<p style="padding-bottom: 10px;">Be aware that the optimizer might have optimized call frames away before
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcaller+EXPR">C<caller></a> had a chance to get the information.  That
+means that <code>caller(N)</code> might not return information about the call
+frame you expect it to, for <code>N &gt; 1</code>.  In particular, <code>@DB::args</code>
+might have information from the previous time <a href="psi_element://pod%3A%3Aperlfunc%2Fcaller+EXPR">C<caller></a>
+was called.</p>
+<p style="padding-bottom: 10px;">Be aware that setting <code>@DB::args</code> is <i>best effort</i>, intended for
+debugging or generating backtraces, and should not be relied upon.  In
+particular, as <a href="psi_element://perlvar%2F%40_">C<@_></a> contains aliases to the caller's
+arguments, Perl does not take a copy of <a href="psi_element://perlvar%2F%40_">C<@_></a>, so
+<code>@DB::args</code> will contain modifications the subroutine makes to
+<a href="psi_element://perlvar%2F%40_">C<@_></a> or its contents, not the original values at call
+time.  <code>@DB::args</code>, like <a href="psi_element://perlvar%2F%40_">C<@_></a>, does not hold explicit
+references to its elements, so under certain cases its elements may have
+become freed and reallocated for other variables or temporary values.
+Finally, a side effect of the current implementation is that the effects
+of <code>shift @_</code> can <i>normally</i> be undone (but not <code>pop @_</code> or other
+splicing, <i>and</i> not if a reference to <a href="psi_element://perlvar%2F%40_">C<@_></a> has been
+taken, <i>and</i> subject to the caveat about reallocated elements), so
+<code>@DB::args</code> is actually a hybrid of the current state and initial state
+of <a href="psi_element://perlvar%2F%40_">C<@_></a>.  Buyer beware.</p></dd></dl>

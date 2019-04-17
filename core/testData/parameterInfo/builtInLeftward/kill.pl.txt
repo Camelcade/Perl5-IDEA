@@ -1,0 +1,2 @@
+kill(<caret>);
+No element

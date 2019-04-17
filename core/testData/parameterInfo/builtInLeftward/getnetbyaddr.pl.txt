@@ -1,0 +1,2 @@
+getnetbyaddr(<caret>);
+No element

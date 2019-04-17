@@ -1,0 +1,2 @@
+readlink(<caret>);
+No element

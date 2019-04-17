@@ -1,0 +1,13 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">wait</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Behaves like <a href="psi_element://wait%282%29" style="color:red">wait(2)</a> on your system: it waits for a child
+process to terminate and returns the pid of the deceased process, or
+<code>-1</code> if there are no child processes.  The status is returned in
+<a href="psi_element://perlvar%2F%24%3F">C<$?></a> and
+<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D">C<${^CHILD_ERROR_NATIVE}></a>.
+Note that a return value of <code>-1</code> could mean that child processes are
+being automatically reaped, as described in <a href="psi_element://perlipc">perlipc</a>.</p>
+<p style="padding-bottom: 10px;">If you use <a href="psi_element://pod%3A%3Aperlfunc%2Fwait">C<wait></a> in your handler for
+<a href="psi_element://perlvar%2F%25SIG">C<$SIG{CHLD}></a>, it may accidentally wait for the child
+created by <a href="psi_element://pod%3A%3Aperlfunc%2FqxE%3Csol%3ESTRINGE%3Csol%3E" style="color:red">C<qx></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a>.
+See <a href="psi_element://perlipc">perlipc</a> for details.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fwait">wait in perlport</a>.</p></dd></dl>

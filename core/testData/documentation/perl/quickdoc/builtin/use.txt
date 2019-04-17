@@ -1,0 +1,116 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">use Module VERSION LIST
+  </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">use Module VERSION</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">use Module LIST</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">use Module</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">use VERSION</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Imports some semantics into the current package from the named module,
+generally by aliasing certain subroutine or variable names into your
+package.  It is exactly equivalent to</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { require Module; Module-&gt;import( LIST ); }</code></pre></div>
+<p style="padding-bottom: 10px;">except that Module <i>must</i> be a bareword.
+The importation can be made conditional by using the <a href="psi_element://if" style="color:red">if</a> module.</p>
+<p style="padding-bottom: 10px;">In the peculiar <code>use VERSION</code> form, VERSION may be either a positive
+decimal fraction such as 5.006, which will be compared to
+<a href="psi_element://perlvar%2F%24%5D">C<$]></a>, or a v-string of the form v5.6.1, which will be
+compared to <a href="psi_element://perlvar%2F%24%5EV">C<$^V></a> (aka $PERL_VERSION).  An
+exception is raised if VERSION is greater than the version of the
+current Perl interpreter; Perl will not attempt to parse the rest of the
+file.  Compare with <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a>, which can do a
+similar check at run time.
+Symmetrically, <code>no VERSION</code> allows you to specify that you want a version
+of Perl older than the specified one.</p>
+<p style="padding-bottom: 10px;">Specifying VERSION as a literal of the form v5.6.1 should generally be
+avoided, because it leads to misleading error messages under earlier
+versions of Perl (that is, prior to 5.6.0) that do not support this
+syntax.  The equivalent numeric version should be used instead.</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.6.1;     # compile time version check
+    use 5.6.1;      # ditto
+    use 5.006_001;  # ditto; preferred for backwards compatibility</code></pre></div>
+<p style="padding-bottom: 10px;">This is often useful if you need to check the current Perl version before
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a>ing library modules that won't work
+with older versions of Perl.
+(We try not to do this more than we have to.)</p>
+<p style="padding-bottom: 10px;"><code>use VERSION</code> also lexically enables all features available in the requested
+version as defined by the <a href="psi_element://feature" style="color:red">feature</a> pragma, disabling any features
+not in the requested version's feature bundle.  See <a href="psi_element://feature" style="color:red">feature</a>.
+Similarly, if the specified Perl version is greater than or equal to
+5.12.0, strictures are enabled lexically as
+with <a href="psi_element://strict" style="color:red">C<use strict></a>.  Any explicit use of
+<code>use strict</code> or <code>no strict</code> overrides <code>use VERSION</code>, even if it comes
+before it.  Later use of <code>use VERSION</code>
+will override all behavior of a previous
+<code>use VERSION</code>, possibly removing the <code>strict</code> and <code>feature</code> added by
+<code>use VERSION</code>.  <code>use VERSION</code> does not
+load the <i>feature.pm</i> or <i>strict.pm</i>
+files.</p>
+<p style="padding-bottom: 10px;">The <code>BEGIN</code> forces the <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> to happen at compile time.  The
+<a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> makes sure the module is loaded into
+memory if it hasn't been yet.  The <a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> is not a
+builtin; it's just an ordinary static method
+call into the <code>Module</code> package to tell the module to import the list of
+features back into the current package.  The module can implement its
+<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> method any way it likes, though most modules
+just choose to derive their <a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> method via
+inheritance from the <code>Exporter</code> class that is defined in the
+<a href="psi_element://Exporter" style="color:red">C<Exporter></a> module.  See <a href="psi_element://Exporter" style="color:red">Exporter</a>.  If no
+<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> method can be found, then the call is skipped,
+even if there is an AUTOLOAD method.</p>
+<p style="padding-bottom: 10px;">If you do not want to call the package's <a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a>
+method (for instance,
+to stop your namespace from being altered), explicitly supply the empty list:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Module ();</code></pre></div>
+<p style="padding-bottom: 10px;">That is exactly equivalent to</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { require Module }</code></pre></div>
+<p style="padding-bottom: 10px;">If the VERSION argument is present between Module and LIST, then the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> will call the <code>VERSION</code> method in
+class Module with the given version as an argument:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Module 12.34;</code></pre></div>
+<p style="padding-bottom: 10px;">is equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { require Module; Module-&gt;VERSION(12.34) }</code></pre></div>
+<p style="padding-bottom: 10px;">The <a href="psi_element://UNIVERSAL%2FC%3CVERSION+%28+%5B+REQUIRE+%5D+%29%3E" style="color:red">default C<VERSION> method</a>,
+inherited from the <a href="psi_element://UNIVERSAL" style="color:red">C<UNIVERSAL></a> class, croaks if the given
+version is larger than the value of the variable <code>$Module::VERSION</code>.</p>
+<p style="padding-bottom: 10px;">Again, there is a distinction between omitting LIST (<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> called with no arguments) and an explicit empty LIST <code>()</code>
+(<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> not called).  Note that there is no comma
+after VERSION!</p>
+<p style="padding-bottom: 10px;">Because this is a wide-open interface, pragmas (compiler directives)
+are also implemented this way.  Some of the currently implemented
+pragmas are:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use constant;
+    use diagnostics;
+    use integer;
+    use sigtrap  qw(SEGV BUS);
+    use strict   qw(subs vars refs);
+    use subs     qw(afunc blurfl);
+    use warnings qw(all);
+    use sort     qw(stable _quicksort _mergesort);</code></pre></div>
+<p style="padding-bottom: 10px;">Some of these pseudo-modules import semantics into the current
+block scope (like <a href="psi_element://strict" style="color:red">C<strict></a> or <a href="psi_element://integer" style="color:red">C<integer></a>, unlike
+ordinary modules, which import symbols into the current package (which
+are effective through the end of the file).</p>
+<p style="padding-bottom: 10px;">Because <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> takes effect at compile time,
+it doesn't respect the ordinary flow control of the code being compiled.
+In particular, putting a <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> inside the
+false branch of a conditional doesn't prevent it
+from being processed.  If a module or pragma only needs to be loaded
+conditionally, this can be done using the <a href="psi_element://if" style="color:red">if</a> pragma:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use if $] &lt; 5.008, &quot;utf8&quot;;
+    use if WANT_WARNINGS, warnings =&gt; qw(all);</code></pre></div>
+<p style="padding-bottom: 10px;">There's a corresponding <a href="psi_element://pod%3A%3Aperlfunc%2Fno+MODULE+VERSION+LIST">C<no></a> declaration
+that unimports meanings imported by <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a>,
+i.e., it calls <code>Module-&gt;unimport(LIST)</code> instead of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a>.  It behaves just as <a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a>
+does with VERSION, an omitted or empty LIST,
+or no unimport method being found.</p>
+<div style="padding-bottom: 10px;"><pre><code>    no integer;
+    no strict 'refs';
+    no warnings;</code></pre></div>
+<p style="padding-bottom: 10px;">Care should be taken when using the <code>no VERSION</code> form of <a href="psi_element://pod%3A%3Aperlfunc%2Fno+MODULE+VERSION+LIST">C<no></a>.  It is
+<i>only</i> meant to be used to assert that the running Perl is of a earlier
+version than its argument and <i>not</i> to undo the feature-enabling side effects
+of <code>use VERSION</code>.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlmodlib">perlmodlib</a> for a list of standard modules and pragmas.  See <a href="psi_element://perlrun">perlrun</a>
+for the <code>-M</code> and <code>-m</code> command-line options to Perl that give
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> functionality from the command-line.</p></dd></dl>

@@ -1,0 +1,47 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">kill SIGNAL, LIST</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">kill SIGNAL
+ </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Sends a signal to a list of processes.  Returns the number of arguments
+that were successfully used to signal (which is not necessarily the same
+as the number of processes actually killed, e.g. where a process group is
+killed).</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $cnt = kill 'HUP', $child1, $child2;
+    kill 'KILL', @goners;</code></pre></div>
+<p style="padding-bottom: 10px;">SIGNAL may be either a signal name (a string) or a signal number.  A signal
+name may start with a <code>SIG</code> prefix, thus <code>FOO</code> and <code>SIGFOO</code> refer to the
+same signal.  The string form of SIGNAL is recommended for portability because
+the same signal may have different numbers in different operating systems.</p>
+<p style="padding-bottom: 10px;">A list of signal names supported by the current platform can be found in
+<code>$Config{sig_name}</code>, which is provided by the <a href="psi_element://Config" style="color:red">C<Config></a>
+module.  See <a href="psi_element://Config" style="color:red">Config</a> for more details.</p>
+<p style="padding-bottom: 10px;">A negative signal name is the same as a negative signal number, killing process
+groups instead of processes.  For example, <code>kill '-KILL', $pgrp</code> and
+<code>kill -9, $pgrp</code> will send <code>SIGKILL</code> to
+the entire process group specified.  That
+means you usually want to use positive not negative signals.</p>
+<p style="padding-bottom: 10px;">If SIGNAL is either the number 0 or the string <code>ZERO</code> (or <code>SIGZERO</code>),
+no signal is sent to the process, but <a href="psi_element://pod%3A%3Aperlfunc%2Fkill+SIGNAL%2C+LIST">C<kill></a>
+checks whether it's <i>possible</i> to send a signal to it
+(that means, to be brief, that the process is owned by the same user, or we are
+the super-user).  This is useful to check that a child process is still
+alive (even if only as a zombie) and hasn't changed its UID.  See
+<a href="psi_element://perlport">perlport</a> for notes on the portability of this construct.</p>
+<p style="padding-bottom: 10px;">The behavior of kill when a <i>PROCESS</i> number is zero or negative depends on
+the operating system.  For example, on POSIX-conforming systems, zero will
+signal the current process group, -1 will signal all processes, and any
+other negative PROCESS number will act as a negative signal number and
+kill the entire process group specified.</p>
+<p style="padding-bottom: 10px;">If both the SIGNAL and the PROCESS are negative, the results are undefined.
+A warning may be produced in a future version.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlipc%2FSignals">Signals in perlipc</a> for more details.</p>
+<p style="padding-bottom: 10px;">On some platforms such as Windows where the <a href="psi_element://fork%282%29" style="color:red">fork(2)</a> system call is not
+available, Perl can be built to emulate <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> at the
+interpreter level.
+This emulation has limitations related to kill that have to be considered,
+for code running on Windows and in code intended to be portable.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlfork">perlfork</a> for more details.</p>
+<p style="padding-bottom: 10px;">If there is no <i>LIST</i> of processes, no signal is sent, and the return
+value is 0.  This form is sometimes used, however, because it causes
+tainting checks to be run.  But see
+<a href="psi_element://perlsec%2FLaundering+and+Detecting+Tainted+Data">Laundering and Detecting Tainted Data in perlsec</a>.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fkill">kill in perlport</a>.</p></dd></dl>

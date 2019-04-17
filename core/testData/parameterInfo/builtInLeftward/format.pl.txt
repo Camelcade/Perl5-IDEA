@@ -1,0 +1,2 @@
+format(<caret>);
+No element

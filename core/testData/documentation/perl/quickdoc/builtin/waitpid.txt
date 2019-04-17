@@ -1,0 +1,31 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">waitpid PID,FLAGS</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Waits for a particular child process to terminate and returns the pid of
+the deceased process, or <code>-1</code> if there is no such child process.  A
+non-blocking wait (with <a href="psi_element://POSIX%2FC%3CWNOHANG%3E" style="color:red">WNOHANG</a> in FLAGS) can return 0 if
+there are child processes matching PID but none have terminated yet.
+The status is returned in <a href="psi_element://perlvar%2F%24%3F">C<$?></a> and
+<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D">C<${^CHILD_ERROR_NATIVE}></a>.</p>
+<p style="padding-bottom: 10px;">A PID of <code>0</code> indicates to wait for any child process whose process group ID is
+equal to that of the current process.  A PID of less than <code>-1</code> indicates to
+wait for any child process whose process group ID is equal to -PID.  A PID of
+<code>-1</code> indicates to wait for any child process.</p>
+<p style="padding-bottom: 10px;">If you say</p>
+<div style="padding-bottom: 10px;"><pre><code>    use POSIX &quot;:sys_wait_h&quot;;
+
+    my $kid;
+    do {
+        $kid = waitpid(-1, WNOHANG);
+    } while $kid &gt; 0;</code></pre></div>
+<p style="padding-bottom: 10px;">or</p>
+<div style="padding-bottom: 10px;"><pre><code>    1 while waitpid(-1, WNOHANG) &gt; 0;</code></pre></div>
+<p style="padding-bottom: 10px;">then you can do a non-blocking wait for all pending zombie processes (see
+<a href="psi_element://POSIX%2FWAIT" style="color:red">WAIT in POSIX</a>).
+Non-blocking wait is available on machines supporting either the
+<a href="psi_element://waitpid%282%29" style="color:red">waitpid(2)</a> or <a href="psi_element://wait4%282%29" style="color:red">wait4(2)</a> syscalls.  However, waiting for a particular
+pid with FLAGS of <code>0</code> is implemented everywhere.  (Perl emulates the
+system call by remembering the status values of processes that have
+exited but have not been harvested by the Perl script yet.)</p>
+<p style="padding-bottom: 10px;">Note that on some systems, a return value of <code>-1</code> could mean that child
+processes are being automatically reaped.  See <a href="psi_element://perlipc">perlipc</a> for details,
+and for other examples.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fwaitpid">waitpid in perlport</a>.</p></dd></dl>

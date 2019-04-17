@@ -1,0 +1,273 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sprintf FORMAT, LIST</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns a string formatted by the usual
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a> conventions of the C
+library function <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a>.  See below for
+more details and see <a href="psi_element://sprintf%283%29" style="color:red">sprintf(3)</a> or <a href="psi_element://printf%283%29" style="color:red">printf(3)</a> on your system for an
+explanation of the general principles.</p>
+<p style="padding-bottom: 10px;">For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>        # Format number with up to 8 leading zeroes
+        my $result = sprintf(&quot;%08d&quot;, $number);
+
+        # Round number to 3 digits after decimal point
+        my $rounded = sprintf(&quot;%.3f&quot;, $number);</code></pre></div>
+<p style="padding-bottom: 10px;">Perl does its own <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> formatting: it
+emulates the C
+function <a href="psi_element://sprintf%283%29" style="color:red">sprintf(3)</a>, but doesn't use it except for floating-point
+numbers, and even then only standard modifiers are allowed.
+Non-standard extensions in your local <a href="psi_element://sprintf%283%29" style="color:red">sprintf(3)</a> are
+therefore unavailable from Perl.</p>
+<p style="padding-bottom: 10px;">Unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> does not do what you probably mean
+when you pass it an array as your first argument.
+The array is given scalar context,
+and instead of using the 0th element of the array as the format, Perl will
+use the count of elements in the array as the format, which is almost never
+useful.</p>
+<p style="padding-bottom: 10px;">Perl's <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> permits the following
+universally-known conversions:</p>
+<div style="padding-bottom: 10px;"><pre><code>   %%    a percent sign
+   %c    a character with the given number
+   %s    a string
+   %d    a signed integer, in decimal
+   %u    an unsigned integer, in decimal
+   %o    an unsigned integer, in octal
+   %x    an unsigned integer, in hexadecimal
+   %e    a floating-point number, in scientific notation
+   %f    a floating-point number, in fixed decimal notation
+   %g    a floating-point number, in %e or %f notation</code></pre></div>
+<p style="padding-bottom: 10px;">In addition, Perl permits the following widely-supported conversions:</p>
+<div style="padding-bottom: 10px;"><pre><code>   %X    like %x, but using upper-case letters
+   %E    like %e, but using an upper-case &quot;E&quot;
+   %G    like %g, but with an upper-case &quot;E&quot; (if applicable)
+   %b    an unsigned integer, in binary
+   %B    like %b, but using an upper-case &quot;B&quot; with the # flag
+   %p    a pointer (outputs the Perl value's address in hexadecimal)
+   %n    special: *stores* the number of characters output so far
+         into the next argument in the parameter list
+   %a    hexadecimal floating point
+   %A    like %a, but using upper-case letters</code></pre></div>
+<p style="padding-bottom: 10px;">Finally, for backward (and we do mean &quot;backward&quot;) compatibility, Perl
+permits these unnecessary but widely-supported conversions:</p>
+<div style="padding-bottom: 10px;"><pre><code>   %i    a synonym for %d
+   %D    a synonym for %ld
+   %U    a synonym for %lu
+   %O    a synonym for %lo
+   %F    a synonym for %f</code></pre></div>
+<p style="padding-bottom: 10px;">Note that the number of exponent digits in the scientific notation produced
+by <code>%e</code>, <code>%E</code>, <code>%g</code> and <code>%G</code> for numbers with the modulus of the
+exponent less than 100 is system-dependent: it may be three or less
+(zero-padded as necessary).  In other words, 1.23 times ten to the
+99th may be either &quot;1.23e99&quot; or &quot;1.23e099&quot;.  Similarly for <code>%a</code> and <code>%A</code>:
+the exponent or the hexadecimal digits may float: especially the
+&quot;long doubles&quot; Perl configuration option may cause surprises.</p>
+<p style="padding-bottom: 10px;">Between the <code>%</code> and the format letter, you may specify several
+additional attributes controlling the interpretation of the format.
+In order, these are:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">format parameter index</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">An explicit format parameter index, such as <code>2$</code>.  By default sprintf
+will format the next unused argument in the list, but this allows you
+to take the arguments out of order:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '%2$d %1$d', 12, 34;      # prints &quot;34 12&quot;
+  printf '%3$d %d %1$d', 1, 2, 3;  # prints &quot;3 1 1&quot;</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">flags</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">one or more of:</p>
+<div style="padding-bottom: 10px;"><pre><code>   space   prefix non-negative number with a space
+   +       prefix non-negative number with a plus sign
+   -       left-justify within the field
+   0       use zeros, not spaces, to right-justify
+   #       ensure the leading &quot;0&quot; for any octal,
+           prefix non-zero hexadecimal with &quot;0x&quot; or &quot;0X&quot;,
+           prefix non-zero binary with &quot;0b&quot; or &quot;0B&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;% d&gt;',  12;   # prints &quot;&lt; 12&gt;&quot;
+  printf '&lt;% d&gt;',   0;   # prints &quot;&lt; 0&gt;&quot;
+  printf '&lt;% d&gt;', -12;   # prints &quot;&lt;-12&gt;&quot;
+  printf '&lt;%+d&gt;',  12;   # prints &quot;&lt;+12&gt;&quot;
+  printf '&lt;%+d&gt;',   0;   # prints &quot;&lt;+0&gt;&quot;
+  printf '&lt;%+d&gt;', -12;   # prints &quot;&lt;-12&gt;&quot;
+  printf '&lt;%6s&gt;',  12;   # prints &quot;&lt;    12&gt;&quot;
+  printf '&lt;%-6s&gt;', 12;   # prints &quot;&lt;12    &gt;&quot;
+  printf '&lt;%06s&gt;', 12;   # prints &quot;&lt;000012&gt;&quot;
+  printf '&lt;%#o&gt;',  12;   # prints &quot;&lt;014&gt;&quot;
+  printf '&lt;%#x&gt;',  12;   # prints &quot;&lt;0xc&gt;&quot;
+  printf '&lt;%#X&gt;',  12;   # prints &quot;&lt;0XC&gt;&quot;
+  printf '&lt;%#b&gt;',  12;   # prints &quot;&lt;0b1100&gt;&quot;
+  printf '&lt;%#B&gt;',  12;   # prints &quot;&lt;0B1100&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">When a space and a plus sign are given as the flags at once,
+the space is ignored.</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%+ d&gt;', 12;   # prints &quot;&lt;+12&gt;&quot;
+  printf '&lt;% +d&gt;', 12;   # prints &quot;&lt;+12&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">When the # flag and a precision are given in the %o conversion,
+the precision is incremented if it's necessary for the leading &quot;0&quot;.</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%#.5o&gt;', 012;      # prints &quot;&lt;00012&gt;&quot;
+  printf '&lt;%#.5o&gt;', 012345;   # prints &quot;&lt;012345&gt;&quot;
+  printf '&lt;%#.0o&gt;', 0;        # prints &quot;&lt;0&gt;&quot;</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">vector flag</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This flag tells Perl to interpret the supplied string as a vector of
+integers, one for each character in the string.  Perl applies the format to
+each integer in turn, then joins the resulting strings with a separator (a
+dot <code>.</code> by default).  This can be useful for displaying ordinal values of
+characters in arbitrary strings:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf &quot;%vd&quot;, &quot;AB\x{100}&quot;;           # prints &quot;65.66.256&quot;
+  printf &quot;version is v%vd\n&quot;, $^V;     # Perl's version</code></pre></div>
+<p style="padding-bottom: 10px;">Put an asterisk <code>*</code> before the <code>v</code> to override the string to
+use to separate the numbers:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf &quot;address is %*vX\n&quot;, &quot;:&quot;, $addr;   # IPv6 address
+  printf &quot;bits are %0*v8b\n&quot;, &quot; &quot;, $bits;   # random bitstring</code></pre></div>
+<p style="padding-bottom: 10px;">You can also explicitly specify the argument number to use for
+the join string using something like <code>*2$v</code>; for example:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '%*4$vX %*4$vX %*4$vX',       # 3 IPv6 addresses
+          @addr[1..3], &quot;:&quot;;</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">(minimum) width</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Arguments are usually formatted to be only as wide as required to
+display the given value.  You can override the width by putting
+a number here, or get the width from the next argument (with <code>*</code>)
+or from a specified argument (e.g., with <code>*2$</code>):</p>
+<div style="padding-bottom: 10px;"><pre><code> printf &quot;&lt;%s&gt;&quot;, &quot;a&quot;;       # prints &quot;&lt;a&gt;&quot;
+ printf &quot;&lt;%6s&gt;&quot;, &quot;a&quot;;      # prints &quot;&lt;     a&gt;&quot;
+ printf &quot;&lt;%*s&gt;&quot;, 6, &quot;a&quot;;   # prints &quot;&lt;     a&gt;&quot;
+ printf '&lt;%*2$s&gt;', &quot;a&quot;, 6; # prints &quot;&lt;     a&gt;&quot;
+ printf &quot;&lt;%2s&gt;&quot;, &quot;long&quot;;   # prints &quot;&lt;long&gt;&quot; (does not truncate)</code></pre></div>
+<p style="padding-bottom: 10px;">If a field width obtained through <code>*</code> is negative, it has the same
+effect as the <code>-</code> flag: left-justification.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">precision, or maximum width</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">You can specify a precision (for numeric conversions) or a maximum
+width (for string conversions) by specifying a <code>.</code> followed by a number.
+For floating-point formats except <code>g</code> and <code>G</code>, this specifies
+how many places right of the decimal point to show (the default being 6).
+For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>  # these examples are subject to system-specific variation
+  printf '&lt;%f&gt;', 1;    # prints &quot;&lt;1.000000&gt;&quot;
+  printf '&lt;%.1f&gt;', 1;  # prints &quot;&lt;1.0&gt;&quot;
+  printf '&lt;%.0f&gt;', 1;  # prints &quot;&lt;1&gt;&quot;
+  printf '&lt;%e&gt;', 10;   # prints &quot;&lt;1.000000e+01&gt;&quot;
+  printf '&lt;%.1e&gt;', 10; # prints &quot;&lt;1.0e+01&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">For &quot;g&quot; and &quot;G&quot;, this specifies the maximum number of digits to show,
+including those prior to the decimal point and those after it; for
+example:</p>
+<div style="padding-bottom: 10px;"><pre><code>  # These examples are subject to system-specific variation.
+  printf '&lt;%g&gt;', 1;        # prints &quot;&lt;1&gt;&quot;
+  printf '&lt;%.10g&gt;', 1;     # prints &quot;&lt;1&gt;&quot;
+  printf '&lt;%g&gt;', 100;      # prints &quot;&lt;100&gt;&quot;
+  printf '&lt;%.1g&gt;', 100;    # prints &quot;&lt;1e+02&gt;&quot;
+  printf '&lt;%.2g&gt;', 100.01; # prints &quot;&lt;1e+02&gt;&quot;
+  printf '&lt;%.5g&gt;', 100.01; # prints &quot;&lt;100.01&gt;&quot;
+  printf '&lt;%.4g&gt;', 100.01; # prints &quot;&lt;100&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">For integer conversions, specifying a precision implies that the
+output of the number itself should be zero-padded to this width,
+where the 0 flag is ignored:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%.6d&gt;', 1;      # prints &quot;&lt;000001&gt;&quot;
+  printf '&lt;%+.6d&gt;', 1;     # prints &quot;&lt;+000001&gt;&quot;
+  printf '&lt;%-10.6d&gt;', 1;   # prints &quot;&lt;000001    &gt;&quot;
+  printf '&lt;%10.6d&gt;', 1;    # prints &quot;&lt;    000001&gt;&quot;
+  printf '&lt;%010.6d&gt;', 1;   # prints &quot;&lt;    000001&gt;&quot;
+  printf '&lt;%+10.6d&gt;', 1;   # prints &quot;&lt;   +000001&gt;&quot;
+
+  printf '&lt;%.6x&gt;', 1;      # prints &quot;&lt;000001&gt;&quot;
+  printf '&lt;%#.6x&gt;', 1;     # prints &quot;&lt;0x000001&gt;&quot;
+  printf '&lt;%-10.6x&gt;', 1;   # prints &quot;&lt;000001    &gt;&quot;
+  printf '&lt;%10.6x&gt;', 1;    # prints &quot;&lt;    000001&gt;&quot;
+  printf '&lt;%010.6x&gt;', 1;   # prints &quot;&lt;    000001&gt;&quot;
+  printf '&lt;%#10.6x&gt;', 1;   # prints &quot;&lt;  0x000001&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">For string conversions, specifying a precision truncates the string
+to fit the specified width:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%.5s&gt;', &quot;truncated&quot;;   # prints &quot;&lt;trunc&gt;&quot;
+  printf '&lt;%10.5s&gt;', &quot;truncated&quot;; # prints &quot;&lt;     trunc&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">You can also get the precision from the next argument using <code>.*</code>, or from a
+specified argument (e.g., with <code>.*2$</code>):</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%.6x&gt;', 1;       # prints &quot;&lt;000001&gt;&quot;
+  printf '&lt;%.*x&gt;', 6, 1;    # prints &quot;&lt;000001&gt;&quot;
+
+  printf '&lt;%.*2$x&gt;', 1, 6;  # prints &quot;&lt;000001&gt;&quot;
+
+  printf '&lt;%6.*2$x&gt;', 1, 4; # prints &quot;&lt;  0001&gt;&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">If a precision obtained through <code>*</code> is negative, it counts
+as having no precision at all.</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%.*s&gt;',  7, &quot;string&quot;;   # prints &quot;&lt;string&gt;&quot;
+  printf '&lt;%.*s&gt;',  3, &quot;string&quot;;   # prints &quot;&lt;str&gt;&quot;
+  printf '&lt;%.*s&gt;',  0, &quot;string&quot;;   # prints &quot;&lt;&gt;&quot;
+  printf '&lt;%.*s&gt;', -1, &quot;string&quot;;   # prints &quot;&lt;string&gt;&quot;
+
+  printf '&lt;%.*d&gt;',  1, 0;   # prints &quot;&lt;0&gt;&quot;
+  printf '&lt;%.*d&gt;',  0, 0;   # prints &quot;&lt;&gt;&quot;
+  printf '&lt;%.*d&gt;', -1, 0;   # prints &quot;&lt;0&gt;&quot;</code></pre></div></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">size</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">For numeric conversions, you can specify the size to interpret the
+number as using <code>l</code>, <code>h</code>, <code>V</code>, <code>q</code>, <code>L</code>, or <code>ll</code>.  For integer
+conversions (<code>d u o x X b i D U O</code>), numbers are usually assumed to be
+whatever the default integer size is on your platform (usually 32 or 64
+bits), but you can override this to use instead one of the standard C types,
+as supported by the compiler used to build Perl:</p>
+<div style="padding-bottom: 10px;"><pre><code>   hh          interpret integer as C type &quot;char&quot; or &quot;unsigned
+               char&quot; on Perl 5.14 or later
+   h           interpret integer as C type &quot;short&quot; or
+               &quot;unsigned short&quot;
+   j           interpret integer as C type &quot;intmax_t&quot; on Perl
+               5.14 or later, and only with a C99 compiler
+               (unportable)
+   l           interpret integer as C type &quot;long&quot; or
+               &quot;unsigned long&quot;
+   q, L, or ll interpret integer as C type &quot;long long&quot;,
+               &quot;unsigned long long&quot;, or &quot;quad&quot; (typically
+               64-bit integers)
+   t           interpret integer as C type &quot;ptrdiff_t&quot; on Perl
+               5.14 or later
+   z           interpret integer as C type &quot;size_t&quot; on Perl 5.14
+               or later</code></pre></div>
+<p style="padding-bottom: 10px;">As of 5.14, none of these raises an exception if they are not supported on
+your platform.  However, if warnings are enabled, a warning of the
+<a href="psi_element://warnings" style="color:red">C<printf></a> warning class is issued on an unsupported
+conversion flag.  Should you instead prefer an exception, do this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use warnings FATAL =&gt; &quot;printf&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">If you would like to know about a version dependency before you
+start running the program, put something like this at its top:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use 5.014;  # for hh/j/t/z/ printf modifiers</code></pre></div>
+<p style="padding-bottom: 10px;">You can find out whether your Perl supports quads via <a href="psi_element://Config" style="color:red">Config</a>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Config;
+    if ($Config{use64bitint} eq &quot;define&quot;
+        || $Config{longsize} &gt;= 8) {
+        print &quot;Nice quads!\n&quot;;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">For floating-point conversions (<code>e f g E F G</code>), numbers are usually assumed
+to be the default floating-point size on your platform (double or long double),
+but you can force &quot;long double&quot; with <code>q</code>, <code>L</code>, or <code>ll</code> if your
+platform supports them.  You can find out whether your Perl supports long
+doubles via <a href="psi_element://Config" style="color:red">Config</a>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Config;
+    print &quot;long doubles\n&quot; if $Config{d_longdbl} eq &quot;define&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">You can find out whether Perl considers &quot;long double&quot; to be the default
+floating-point size to use on your platform via <a href="psi_element://Config" style="color:red">Config</a>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Config;
+    if ($Config{uselongdouble} eq &quot;define&quot;) {
+        print &quot;long doubles by default\n&quot;;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">It can also be that long doubles and doubles are the same thing:</p>
+<div style="padding-bottom: 10px;"><pre><code>        use Config;
+        ($Config{doublesize} == $Config{longdblsize}) &amp;&amp;
+                print &quot;doubles are long doubles\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">The size specifier <code>V</code> has no effect for Perl code, but is supported for
+compatibility with XS code.  It means &quot;use the standard size for a Perl
+integer or floating-point number&quot;, which is the default.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">order of arguments</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Normally, <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> takes the next unused
+argument as the value to
+format for each format specification.  If the format specification
+uses <code>*</code> to require additional arguments, these are consumed from
+the argument list in the order they appear in the format
+specification <i>before</i> the value to format.  Where an argument is
+specified by an explicit index, this does not affect the normal
+order for the arguments, even when the explicitly specified index
+would have been the next argument.</p>
+<p style="padding-bottom: 10px;">So:</p>
+<div style="padding-bottom: 10px;"><pre><code>    printf &quot;&lt;%*.*s&gt;&quot;, $a, $b, $c;</code></pre></div>
+<p style="padding-bottom: 10px;">uses <code>$a</code> for the width, <code>$b</code> for the precision, and <code>$c</code>
+as the value to format; while:</p>
+<div style="padding-bottom: 10px;"><pre><code>  printf '&lt;%*1$.*s&gt;', $a, $b;</code></pre></div>
+<p style="padding-bottom: 10px;">would use <code>$a</code> for the width and precision, and <code>$b</code> as the
+value to format.</p>
+<p style="padding-bottom: 10px;">Here are some more examples; be aware that when using an explicit
+index, the <code>$</code> may need escaping:</p>
+<div style="padding-bottom: 10px;"><pre><code> printf &quot;%2\$d %d\n&quot;,      12, 34;     # will print &quot;34 12\n&quot;
+ printf &quot;%2\$d %d %d\n&quot;,   12, 34;     # will print &quot;34 12 34\n&quot;
+ printf &quot;%3\$d %d %d\n&quot;,   12, 34, 56; # will print &quot;56 12 34\n&quot;
+ printf &quot;%2\$*3\$d %d\n&quot;,  12, 34,  3; # will print &quot; 34 12\n&quot;
+ printf &quot;%*1\$.*f\n&quot;,       4,  5, 10; # will print &quot;5.0000\n&quot;</code></pre></div></dd></dl>
+<p style="padding-bottom: 10px;">If <a href="psi_element://locale" style="color:red">C<use locale></a> (including <code>use locale ':not_characters'</code>)
+is in effect and <a href="psi_element://POSIX%2FC%3Csetlocale%3E" style="color:red">C<POSIX::setlocale></a> has been
+called,
+the character used for the decimal separator in formatted floating-point
+numbers is affected by the <code>LC_NUMERIC</code> locale.  See <a href="psi_element://perllocale">perllocale</a>
+and <a href="psi_element://POSIX" style="color:red">POSIX</a>.</p></dd></dl>

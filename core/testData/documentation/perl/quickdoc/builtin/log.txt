@@ -1,0 +1,13 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">log EXPR
+    </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">log</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns the natural logarithm (base <i>e</i>) of EXPR.  If EXPR is omitted,
+returns the log of <a href="psi_element://perlvar%2F%24_">C<$_></a>.  To get the
+log of another base, use basic algebra:
+The base-N log of a number is equal to the natural log of that number
+divided by the natural log of N.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub log10 {
+        my $n = shift;
+        return log($n)/log(10);
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fexp+EXPR">C<exp></a> for the inverse operation.</p></dd></dl>

@@ -1,0 +1,2 @@
+chomp(<caret>);
+No element

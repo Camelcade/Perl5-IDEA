@@ -1,0 +1,10 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">setpgrp PID,PGRP
+ </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Sets the current process group for the specified PID, <code>0</code> for the current
+process.  Raises an exception when used on a machine that doesn't
+implement POSIX <a href="psi_element://setpgid%282%29" style="color:red">setpgid(2)</a> or BSD <a href="psi_element://setpgrp%282%29" style="color:red">setpgrp(2)</a>.  If the arguments
+are omitted, it defaults to <code>0,0</code>.  Note that the BSD 4.2 version of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsetpgrp+PID%2CPGRP">C<setpgrp></a> does not accept any arguments, so only
+<code>setpgrp(0,0)</code> is portable.  See also
+<a href="psi_element://POSIX%2FC%3Csetsid%3E" style="color:red">C<POSIX::setsid()></a>.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsetpgrp">setpgrp in perlport</a>.</p></dd></dl>

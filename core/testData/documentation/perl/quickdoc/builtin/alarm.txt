@@ -1,0 +1,46 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">alarm SECONDS</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">alarm</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Arranges to have a SIGALRM delivered to this process after the
+specified number of wallclock seconds has elapsed.  If SECONDS is not
+specified, the value stored in <a href="psi_element://perlvar%2F%24_">C<$_></a> is used.  (On some
+machines, unfortunately, the elapsed time may be up to one second less
+or more than you specified because of how seconds are counted, and
+process scheduling may delay the delivery of the signal even further.)</p>
+<p style="padding-bottom: 10px;">Only one timer may be counting at once.  Each call disables the
+previous timer, and an argument of <code>0</code> may be supplied to cancel the
+previous timer without starting a new one.  The returned value is the
+amount of time remaining on the previous timer.</p>
+<p style="padding-bottom: 10px;">For delays of finer granularity than one second, the <a href="psi_element://Time%3A%3AHiRes" style="color:red">Time::HiRes</a> module
+(from CPAN, and starting from Perl 5.8 part of the standard
+distribution) provides
+<a href="psi_element://Time%3A%3AHiRes%2Fualarm+%28+%24useconds+%5B%2C+%24interval_useconds+%5D+%29" style="color:red">C<ualarm></a>.
+You may also use Perl's four-argument version of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fselect+RBITS%2CWBITS%2CEBITS%2CTIMEOUT">C<select></a> leaving the first three
+arguments undefined, or you might be able to use the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST">C<syscall></a> interface to access <a href="psi_element://setitimer%282%29" style="color:red">setitimer(2)</a>
+if your system supports it.  See <a href="psi_element://perlfaq8">perlfaq8</a> for details.</p>
+<p style="padding-bottom: 10px;">It is usually a mistake to intermix <a href="psi_element://pod%3A%3Aperlfunc%2Falarm+SECONDS">C<alarm></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsleep+EXPR">C<sleep></a> calls, because <a href="psi_element://pod%3A%3Aperlfunc%2Fsleep+EXPR">C<sleep></a> may be
+internally implemented on your system with <a href="psi_element://pod%3A%3Aperlfunc%2Falarm+SECONDS">C<alarm></a>.</p>
+<p style="padding-bottom: 10px;">If you want to use <a href="psi_element://pod%3A%3Aperlfunc%2Falarm+SECONDS">C<alarm></a> to time out a system call
+you need to use an <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> pair.  You
+can't rely on the alarm causing the system call to fail with
+<a href="psi_element://perlvar%2F%24%21">C<$!></a> set to <code>EINTR</code> because Perl sets up signal handlers
+to restart system calls on some systems.  Using
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> always works, modulo the
+caveats given in <a href="psi_element://perlipc%2FSignals">Signals in perlipc</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    eval {
+        local $SIG{ALRM} = sub { die &quot;alarm\n&quot; }; # NB: \n required
+        alarm $timeout;
+        my $nread = sysread $socket, $buffer, $size;
+        alarm 0;
+    };
+    if ($@) {
+        die unless $@ eq &quot;alarm\n&quot;;   # propagate unexpected errors
+        # timed out
+    }
+    else {
+        # didn't
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">For more information see <a href="psi_element://perlipc">perlipc</a>.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Falarm">alarm in perlport</a>.</p></dd></dl>

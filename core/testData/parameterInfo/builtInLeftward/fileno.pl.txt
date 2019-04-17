@@ -1,0 +1,2 @@
+fileno(<caret>);
+No element

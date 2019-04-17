@@ -1,0 +1,23 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">undef EXPR
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">undef</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Undefines the value of EXPR, which must be an lvalue.  Use only on a
+scalar value, an array (using <code>@</code>), a hash (using <code>%</code>), a subroutine
+(using <code>&amp;</code>), or a typeglob (using <code>*</code>).  Saying <code>undef $hash{$key}</code>
+will probably not do what you expect on most predefined variables or
+DBM list values, so don't do that; see <a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR">C<delete></a>.
+Always returns the undefined value.
+You can omit the EXPR, in which case nothing is
+undefined, but you still get an undefined value that you could, for
+instance, return from a subroutine, assign to a variable, or pass as a
+parameter.  Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    undef $foo;
+    undef $bar{'blurfl'};      # Compare to: delete $bar{'blurfl'};
+    undef @ary;
+    undef %hash;
+    undef &amp;mysub;
+    undef *xyz;       # destroys $xyz, @xyz, %xyz, &amp;xyz, etc.
+    return (wantarray ? (undef, $errmsg) : undef) if $they_blew_it;
+    select undef, undef, undef, 0.25;
+    my ($x, $y, undef, $z) = foo();    # Ignore third value returned</code></pre></div>
+<p style="padding-bottom: 10px;">Note that this is a unary operator, not a list operator.</p></dd></dl>

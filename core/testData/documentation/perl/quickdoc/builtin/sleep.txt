@@ -1,0 +1,28 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sleep EXPR
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">sleep</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Causes the script to sleep for (integer) EXPR seconds, or forever if no
+argument is given.  Returns the integer number of seconds actually slept.</p>
+<p style="padding-bottom: 10px;">May be interrupted if the process receives a signal such as <code>SIGALRM</code>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    eval {
+        local $SIG{ALRM} = sub { die &quot;Alarm!\n&quot; };
+        sleep;
+    };
+    die $@ unless $@ eq &quot;Alarm!\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">You probably cannot mix <a href="psi_element://pod%3A%3Aperlfunc%2Falarm+SECONDS">C<alarm></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsleep+EXPR">C<sleep></a> calls, because <a href="psi_element://pod%3A%3Aperlfunc%2Fsleep+EXPR">C<sleep></a> is often
+implemented using <a href="psi_element://pod%3A%3Aperlfunc%2Falarm+SECONDS">C<alarm></a>.</p>
+<p style="padding-bottom: 10px;">On some older systems, it may sleep up to a full second less than what
+you requested, depending on how it counts seconds.  Most modern systems
+always sleep the full amount.  They may appear to sleep longer than that,
+however, because your process might not be scheduled right away in a
+busy multitasking system.</p>
+<p style="padding-bottom: 10px;">For delays of finer granularity than one second, the <a href="psi_element://Time%3A%3AHiRes" style="color:red">Time::HiRes</a>
+module (from CPAN, and starting from Perl 5.8 part of the standard
+distribution) provides <a href="psi_element://Time%3A%3AHiRes%2Fusleep+%28+%24useconds+%29" style="color:red">C<usleep></a>.
+You may also use Perl's four-argument
+version of <a href="psi_element://pod%3A%3Aperlfunc%2Fselect+RBITS%2CWBITS%2CEBITS%2CTIMEOUT">C<select></a> leaving the
+first three arguments undefined, or you might be able to use the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST">C<syscall></a> interface to access <a href="psi_element://setitimer%282%29" style="color:red">setitimer(2)</a>
+if your system supports it.  See <a href="psi_element://perlfaq8">perlfaq8</a> for details.</p>
+<p style="padding-bottom: 10px;">See also the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2FC%3Cpause%3E" style="color:red">C<pause></a> function.</p></dd></dl>

@@ -1,0 +1,2 @@
+setnetent <caret> 
+No element

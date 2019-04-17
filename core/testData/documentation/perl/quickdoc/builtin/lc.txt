@@ -1,0 +1,30 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">lc EXPR
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">lc</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns a lowercased version of EXPR.  This is the internal function
+implementing the <code>\L</code> escape in double-quoted strings.</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">What gets returned depends on several factors:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">If <code>use bytes</code> is in effect:</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The results follow ASCII rules.  Only the characters <code>A-Z</code> change,
+to <code>a-z</code> respectively.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">Otherwise, if <code>use locale</code> for <code>LC_CTYPE</code> is in effect:</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Respects current <code>LC_CTYPE</code> locale for code points &lt; 256; and uses Unicode
+rules for the remaining code points (this last can only happen if
+the UTF8 flag is also set).  See <a href="psi_element://perllocale">perllocale</a>.</p>
+<p style="padding-bottom: 10px;">Starting in v5.20, Perl uses full Unicode rules if the locale is
+UTF-8.  Otherwise, there is a deficiency in this scheme, which is that
+case changes that cross the 255/256
+boundary are not well-defined.  For example, the lower case of LATIN CAPITAL
+LETTER SHARP S (U+1E9E) in Unicode rules is U+00DF (on ASCII
+platforms).   But under <code>use locale</code> (prior to v5.20 or not a UTF-8
+locale), the lower case of U+1E9E is
+itself, because 0xDF may not be LATIN SMALL LETTER SHARP S in the
+current locale, and Perl has no way of knowing if that character even
+exists in the locale, much less what code point it is.  Perl returns
+a result that is above 255 (almost always the input character unchanged),
+for all instances (and there aren't many) where the 255/256 boundary
+would otherwise be crossed; and starting in v5.22, it raises a
+<a href="psi_element://perldiag%2FCan%27t+do+%25s%28%22%25s%22%29+on+non-UTF-8+locale%3B+resolved+to+%22%25s%22.">locale</a> warning.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">Otherwise, If EXPR has the UTF8 flag set:</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Unicode rules are used for the case change.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">Otherwise, if <code>use feature 'unicode_strings'</code> or <code>use locale ':not_characters'</code> is in effect:</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Unicode rules are used for the case change.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">Otherwise:</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">ASCII rules are used for the case change.  The lowercase of any character
+outside the ASCII range is the character itself.</p></dd></dl></dd></dl>

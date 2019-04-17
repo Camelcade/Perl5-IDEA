@@ -1,0 +1,2 @@
+gethostbyname <caret> 
+No element

@@ -1,0 +1,311 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">open FILEHANDLE,EXPR
+   </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">open FILEHANDLE,MODE,EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">open FILEHANDLE,MODE,EXPR,LIST</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">open FILEHANDLE,MODE,REFERENCE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">open FILEHANDLE</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Opens the file whose filename is given by EXPR, and associates it with
+FILEHANDLE.</p>
+<p style="padding-bottom: 10px;">Simple examples to open a file for reading:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;&lt;&quot;, &quot;input.txt&quot;)
+	or die &quot;Can't open &lt; input.txt: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">and for writing:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;&gt;&quot;, &quot;output.txt&quot;)
+	or die &quot;Can't open &gt; output.txt: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">(The following is a comprehensive reference to
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>: for a gentler introduction you may
+consider <a href="psi_element://perlopentut">perlopentut</a>.)</p>
+<p style="padding-bottom: 10px;">If FILEHANDLE is an undefined scalar variable (or array or hash element), a
+new filehandle is autovivified, meaning that the variable is assigned a
+reference to a newly allocated anonymous filehandle.  Otherwise if
+FILEHANDLE is an expression, its value is the real filehandle.  (This is
+considered a symbolic reference, so <code>use strict &quot;refs&quot;</code> should <i>not</i> be
+in effect.)</p>
+<p style="padding-bottom: 10px;">If three (or more) arguments are specified, the open mode (including
+optional encoding) in the second argument are distinct from the filename in
+the third.  If MODE is <code>&lt;</code> or nothing, the file is opened for input.
+If MODE is <code>&gt;</code>, the file is opened for output, with existing files
+first being truncated (&quot;clobbered&quot;) and nonexisting files newly created.
+If MODE is <code>&gt;&gt;</code>, the file is opened for appending, again being
+created if necessary.</p>
+<p style="padding-bottom: 10px;">You can put a <code>+</code> in front of the <code>&gt;</code> or <code>&lt;</code> to
+indicate that you want both read and write access to the file; thus
+<code>+&lt;</code> is almost always preferred for read/write updates--the
+<code>+&gt;</code> mode would clobber the file first.  You can't usually use
+either read-write mode for updating textfiles, since they have
+variable-length records.  See the <B>-i</B> switch in <a href="psi_element://perlrun">perlrun</a> for a
+better approach.  The file is created with permissions of <code>0666</code>
+modified by the process's <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> value.</p>
+<p style="padding-bottom: 10px;">These various prefixes correspond to the <a href="psi_element://fopen%283%29" style="color:red">fopen(3)</a> modes of <code>r</code>,
+<code>r+</code>, <code>w</code>, <code>w+</code>, <code>a</code>, and <code>a+</code>.</p>
+<p style="padding-bottom: 10px;">In the one- and two-argument forms of the call, the mode and filename
+should be concatenated (in that order), preferably separated by white
+space.  You can--but shouldn't--omit the mode in these forms when that mode
+is <code>&lt;</code>.  It is safe to use the two-argument form of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> if the filename argument is a known literal.</p>
+<p style="padding-bottom: 10px;">For three or more arguments if MODE is <code>|-</code>, the filename is
+interpreted as a command to which output is to be piped, and if MODE
+is <code>-|</code>, the filename is interpreted as a command that pipes
+output to us.  In the two-argument (and one-argument) form, one should
+replace dash (<code>-</code>) with the command.
+See <a href="psi_element://perlipc%2FUsing+open%28%29+for+IPC">Using open() for IPC in perlipc</a> for more examples of this.
+(You are not allowed to <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> to a command
+that pipes both in <i>and</i> out, but see <a href="psi_element://IPC%3A%3AOpen2" style="color:red">IPC::Open2</a>, <a href="psi_element://IPC%3A%3AOpen3" style="color:red">IPC::Open3</a>, and
+<a href="psi_element://perlipc%2FBidirectional+Communication+with+Another+Process">Bidirectional Communication with Another Process in perlipc</a> for
+alternatives.)</p>
+<p style="padding-bottom: 10px;">In the form of pipe opens taking three or more arguments, if LIST is specified
+(extra arguments after the command name) then LIST becomes arguments
+to the command invoked if the platform supports it.  The meaning of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> with more than three arguments for
+non-pipe modes is not yet defined, but experimental &quot;layers&quot; may give
+extra LIST arguments meaning.</p>
+<p style="padding-bottom: 10px;">In the two-argument (and one-argument) form, opening <code>&lt;-</code>
+or <code>-</code> opens STDIN and opening <code>&gt;-</code> opens STDOUT.</p>
+<p style="padding-bottom: 10px;">You may (and usually should) use the three-argument form of open to specify
+I/O layers (sometimes referred to as &quot;disciplines&quot;) to apply to the handle
+that affect how the input and output are processed (see <a href="psi_element://open" style="color:red">open</a> and
+<a href="psi_element://PerlIO" style="color:red">PerlIO</a> for more details).  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>  open(my $fh, &quot;&lt;:encoding(UTF-8)&quot;, $filename)
+    || die &quot;Can't open UTF-8 encoded $filename: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">opens the UTF8-encoded file containing Unicode characters;
+see <a href="psi_element://perluniintro">perluniintro</a>.  Note that if layers are specified in the
+three-argument form, then default layers stored in ${^OPEN} (see <a href="psi_element://perlvar">perlvar</a>;
+usually set by the <a href="psi_element://open" style="color:red">open</a> pragma or the switch <code>-CioD</code>) are ignored.
+Those layers will also be ignored if you specifying a colon with no name
+following it.  In that case the default layer for the operating system
+(:raw on Unix, :crlf on Windows) is used.</p>
+<p style="padding-bottom: 10px;">Open returns nonzero on success, the undefined value otherwise.  If
+the <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> involved a pipe, the return value
+happens to be the pid of the subprocess.</p>
+<p style="padding-bottom: 10px;">On some systems (in general, DOS- and Windows-based systems)
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> is necessary when you're not
+working with a text file.  For the sake of portability it is a good idea
+always to use it when appropriate, and never to use it when it isn't
+appropriate.  Also, people can set their I/O to be by default
+UTF8-encoded Unicode, not bytes.</p>
+<p style="padding-bottom: 10px;">When opening a file, it's seldom a good idea to continue
+if the request failed, so <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> is frequently
+used with <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>.  Even if <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> won't do
+what you want (say, in a CGI script,
+where you want to format a suitable error message (but there are
+modules that can help with that problem)) always check
+the return value from opening a file.</p>
+<p style="padding-bottom: 10px;">The filehandle will be closed when its reference count reaches zero.
+If it is a lexically scoped variable declared with <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a>,
+that usually
+means the end of the enclosing scope.  However, this automatic close
+does not check for errors, so it is better to explicitly close
+filehandles, especially those used for writing:</p>
+<div style="padding-bottom: 10px;"><pre><code>    close($handle)
+       || warn &quot;close failed: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">An older style is to use a bareword as the filehandle, as</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(FH, &quot;&lt;&quot;, &quot;input.txt&quot;)
+       or die &quot;Can't open &lt; input.txt: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Then you can use <code>FH</code> as the filehandle, in <code>close FH</code> and <code>&lt;FH&gt;</code> and so on.  Note that it's a global variable, so this form is
+not recommended in new code.</p>
+<p style="padding-bottom: 10px;">As a shortcut a one-argument call takes the filename from the global
+scalar variable of the same name as the filehandle:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $ARTICLE = 100;
+    open(ARTICLE) or die &quot;Can't find article $ARTICLE: $!\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Here <code>$ARTICLE</code> must be a global (package) scalar variable - not one
+declared with <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST">C<state></a>.</p>
+<p style="padding-bottom: 10px;">As a special case the three-argument form with a read/write mode and the third
+argument being <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $tmp, &quot;+&gt;&quot;, undef) or die ...</code></pre></div>
+<p style="padding-bottom: 10px;">opens a filehandle to an anonymous temporary file.  Also using <code>+&lt;</code>
+works for symmetry, but you really should consider writing something
+to the temporary file first.  You will need to
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> to do the reading.</p>
+<p style="padding-bottom: 10px;">Perl is built using PerlIO by default.  Unless you've
+changed this (such as building Perl with <code>Configure -Uuseperlio</code>), you can
+open filehandles directly to Perl scalars via:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;&gt;&quot;, \$variable) || ..</code></pre></div>
+<p style="padding-bottom: 10px;">To (re)open <code>STDOUT</code> or <code>STDERR</code> as an in-memory file, close it first:</p>
+<div style="padding-bottom: 10px;"><pre><code>    close STDOUT;
+    open(STDOUT, &quot;&gt;&quot;, \$variable)
+	or die &quot;Can't open STDOUT: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perliol">perliol</a> for detailed info on PerlIO.</p>
+<p style="padding-bottom: 10px;">General examples:</p>
+<div style="padding-bottom: 10px;"><pre><code> open(my $log, &quot;&gt;&gt;&quot;, &quot;/usr/spool/news/twitlog&quot;);
+ # if the open fails, output is discarded
+
+ open(my $dbase, &quot;+&lt;&quot;, &quot;dbase.mine&quot;)      # open for update
+     or die &quot;Can't open 'dbase.mine' for update: $!&quot;;
+
+ open(my $dbase, &quot;+&lt;dbase.mine&quot;)          # ditto
+     or die &quot;Can't open 'dbase.mine' for update: $!&quot;;
+
+ open(my $article_fh, &quot;-|&quot;, &quot;caesar &lt;$article&quot;)  # decrypt
+                                                 # article
+     or die &quot;Can't start caesar: $!&quot;;
+
+ open(my $article_fh, &quot;caesar &lt;$article |&quot;)      # ditto
+     or die &quot;Can't start caesar: $!&quot;;
+
+ open(my $out_fh, &quot;|-&quot;, &quot;sort &gt;Tmp$$&quot;)    # $$ is our process id
+     or die &quot;Can't start sort: $!&quot;;
+
+ # in-memory files
+ open(my $memory, &quot;&gt;&quot;, \$var)
+     or die &quot;Can't open memory file: $!&quot;;
+ print $memory &quot;foo!\n&quot;;              # output will appear in $var</code></pre></div>
+<p style="padding-bottom: 10px;">You may also, in the Bourne shell tradition, specify an EXPR beginning
+with <code>&gt;&amp;</code>, in which case the rest of the string is interpreted
+as the name of a filehandle (or file descriptor, if numeric) to be
+duped (as in <a href="psi_element://dup%282%29" style="color:red">dup(2)</a>) and opened.  You may use <code>&amp;</code> after <code>&gt;</code>,
+<code>&gt;&gt;</code>, <code>&lt;</code>, <code>+&gt;</code>, <code>+&gt;&gt;</code>, and <code>+&lt;</code>.
+The mode you specify should match the mode of the original filehandle.
+(Duping a filehandle does not take into account any existing contents
+of IO buffers.)  If you use the three-argument
+form, then you can pass either a
+number, the name of a filehandle, or the normal &quot;reference to a glob&quot;.</p>
+<p style="padding-bottom: 10px;">Here is a script that saves, redirects, and restores <code>STDOUT</code> and
+<code>STDERR</code> using various methods:</p>
+<div style="padding-bottom: 10px;"><pre><code>    #!/usr/bin/perl
+    open(my $oldout, &quot;&gt;&amp;STDOUT&quot;)     or die &quot;Can't dup STDOUT: $!&quot;;
+    open(OLDERR,     &quot;&gt;&amp;&quot;, \*STDERR) or die &quot;Can't dup STDERR: $!&quot;;
+
+    open(STDOUT, '&gt;', &quot;foo.out&quot;) or die &quot;Can't redirect STDOUT: $!&quot;;
+    open(STDERR, &quot;&gt;&amp;STDOUT&quot;)     or die &quot;Can't dup STDOUT: $!&quot;;
+
+    select STDERR; $| = 1;  # make unbuffered
+    select STDOUT; $| = 1;  # make unbuffered
+
+    print STDOUT &quot;stdout 1\n&quot;;  # this works for
+    print STDERR &quot;stderr 1\n&quot;;  # subprocesses too
+
+    open(STDOUT, &quot;&gt;&amp;&quot;, $oldout) or die &quot;Can't dup \$oldout: $!&quot;;
+    open(STDERR, &quot;&gt;&amp;OLDERR&quot;)    or die &quot;Can't dup OLDERR: $!&quot;;
+
+    print STDOUT &quot;stdout 2\n&quot;;
+    print STDERR &quot;stderr 2\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">If you specify <code>'&lt;&amp;=X'</code>, where <code>X</code> is a file descriptor number
+or a filehandle, then Perl will do an equivalent of C's <a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> of
+that file descriptor (and not call <a href="psi_element://dup%282%29" style="color:red">dup(2)</a>); this is more
+parsimonious of file descriptors.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # open for input, reusing the fileno of $fd
+    open(my $fh, &quot;&lt;&amp;=&quot;, $fd)</code></pre></div>
+<p style="padding-bottom: 10px;">or</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;&lt;&amp;=$fd&quot;)</code></pre></div>
+<p style="padding-bottom: 10px;">or</p>
+<div style="padding-bottom: 10px;"><pre><code>    # open for append, using the fileno of $oldfh
+    open(my $fh, &quot;&gt;&gt;&amp;=&quot;, $oldfh)</code></pre></div>
+<p style="padding-bottom: 10px;">Being parsimonious on filehandles is also useful (besides being
+parsimonious) for example when something is dependent on file
+descriptors, like for example locking using
+<a href="psi_element://pod%3A%3Aperlfunc%2Fflock+FILEHANDLE%2COPERATION">C<flock></a>.  If you do just
+<code>open(my $A, &quot;&gt;&gt;&amp;&quot;, $B)</code>, the filehandle <code>$A</code> will not have the
+same file descriptor as <code>$B</code>, and therefore <code>flock($A)</code> will not
+<code>flock($B)</code> nor vice versa.  But with <code>open(my $A, &quot;&gt;&gt;&amp;=&quot;, $B)</code>,
+the filehandles will share the same underlying system file descriptor.</p>
+<p style="padding-bottom: 10px;">Note that under Perls older than 5.8.0, Perl uses the standard C library's'
+<a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> to implement the <code>=</code> functionality.  On many Unix systems,
+<a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> fails when file descriptors exceed a certain value, typically 255.
+For Perls 5.8.0 and later, PerlIO is (most often) the default.</p>
+<p style="padding-bottom: 10px;">You can see whether your Perl was built with PerlIO by running
+<code>perl -V:useperlio</code>.  If it says <code>'define'</code>, you have PerlIO;
+otherwise you don't.</p>
+<p style="padding-bottom: 10px;">If you open a pipe on the command <code>-</code> (that is, specify either <code>|-</code> or <code>-|</code>
+with the one- or two-argument forms of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>), an implicit <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> is done,
+so <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> returns twice: in the parent process
+it returns the pid
+of the child process, and in the child process it returns (a defined) <code>0</code>.
+Use <code>defined($pid)</code> or <code>//</code> to determine whether the open was successful.</p>
+<p style="padding-bottom: 10px;">For example, use either</p>
+<div style="padding-bottom: 10px;"><pre><code>   my $child_pid = open(my $from_kid, &quot;-|&quot;) // die &quot;Can't fork: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">or</p>
+<div style="padding-bottom: 10px;"><pre><code>   my $child_pid = open(my $to_kid,   &quot;|-&quot;) // die &quot;Can't fork: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">followed by</p>
+<div style="padding-bottom: 10px;"><pre><code>    if ($child_pid) {
+	# am the parent:
+	# either write $to_kid or else read $from_kid
+	...
+       waitpid $child_pid, 0;
+    } else {
+	# am the child; use STDIN/STDOUT normally
+	...
+	exit;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">The filehandle behaves normally for the parent, but I/O to that
+filehandle is piped from/to the STDOUT/STDIN of the child process.
+In the child process, the filehandle isn't opened--I/O happens from/to
+the new STDOUT/STDIN.  Typically this is used like the normal
+piped open when you want to exercise more control over just how the
+pipe command gets executed, such as when running setuid and
+you don't want to have to scan shell commands for metacharacters.</p>
+<p style="padding-bottom: 10px;">The following blocks are more or less equivalent:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;|tr '[a-z]' '[A-Z]'&quot;);
+    open(my $fh, &quot;|-&quot;, &quot;tr '[a-z]' '[A-Z]'&quot;);
+    open(my $fh, &quot;|-&quot;) || exec 'tr', '[a-z]', '[A-Z]';
+    open(my $fh, &quot;|-&quot;, &quot;tr&quot;, '[a-z]', '[A-Z]');
+
+    open(my $fh, &quot;cat -n '$file'|&quot;);
+    open(my $fh, &quot;-|&quot;, &quot;cat -n '$file'&quot;);
+    open(my $fh, &quot;-|&quot;) || exec &quot;cat&quot;, &quot;-n&quot;, $file;
+    open(my $fh, &quot;-|&quot;, &quot;cat&quot;, &quot;-n&quot;, $file);</code></pre></div>
+<p style="padding-bottom: 10px;">The last two examples in each block show the pipe as &quot;list form&quot;, which is
+not yet supported on all platforms.  A good rule of thumb is that if
+your platform has a real <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> (in other words, if your platform is
+Unix, including Linux and MacOS X), you can use the list form.  You would
+want to use the list form of the pipe so you can pass literal arguments
+to the command without risk of the shell interpreting any shell metacharacters
+in them.  However, this also bars you from opening pipes to commands
+that intentionally contain shell metacharacters, such as:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;|cat -n | expand -4 | lpr&quot;)
+	|| die &quot;Can't open pipeline to lpr: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlipc%2FSafe+Pipe+Opens">Safe Pipe Opens in perlipc</a> for more examples of this.</p>
+<p style="padding-bottom: 10px;">Perl will attempt to flush all files opened for
+output before any operation that may do a fork, but this may not be
+supported on some platforms (see <a href="psi_element://perlport">perlport</a>).  To be safe, you may need
+to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a> (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>)
+or call the <code>autoflush</code> method of <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red">C<IO::Handle></a>
+on any open handles.</p>
+<p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, the flag will
+be set for the newly opened file descriptor as determined by the value
+of <a href="psi_element://perlvar%2F%24%5EF">C<$^F></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p>
+<p style="padding-bottom: 10px;">Closing any piped filehandle causes the parent process to wait for the
+child to finish, then returns the status value in <a href="psi_element://perlvar%2F%24%3F">C<$?></a> and
+<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D">C<${^CHILD_ERROR_NATIVE}></a>.</p>
+<p style="padding-bottom: 10px;">The filename passed to the one- and two-argument forms of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> will
+have leading and trailing whitespace deleted and normal
+redirection characters honored.  This property, known as &quot;magic open&quot;,
+can often be used to good effect.  A user could specify a filename of
+<i>&quot;rsh cat file |&quot;</i>, or you could change certain filenames as needed:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $filename =~ s/(.*\.gz)\s*$/gzip -dc &lt; $1|/;
+    open(my $fh, $filename) or die &quot;Can't open $filename: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Use the three-argument form to open a file with arbitrary weird characters in it,</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $fh, &quot;&lt;&quot;, $file)
+	|| die &quot;Can't open $file: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">otherwise it's necessary to protect any leading and trailing whitespace:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $file =~ s#^(\s)#./$1#;
+    open(my $fh, &quot;&lt; $file\0&quot;)
+	|| die &quot;Can't open $file: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">(this may not work on some bizarre filesystems).  One should
+conscientiously choose between the <i>magic</i> and <i>three-argument</i> form
+of <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $in, $ARGV[0]) || die &quot;Can't open $ARGV[0]: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">will allow the user to specify an argument of the form <code>&quot;rsh cat file |&quot;</code>,
+but will not work on a filename that happens to have a trailing space, while</p>
+<div style="padding-bottom: 10px;"><pre><code>    open(my $in, &quot;&lt;&quot;, $ARGV[0])
+	|| die &quot;Can't open $ARGV[0]: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">will have exactly the opposite restrictions. (However, some shells
+support the syntax <code>perl your_program.pl &lt;( rsh cat file )</code>, which
+produces a filename that can be opened normally.)</p>
+<p style="padding-bottom: 10px;">If you want a &quot;real&quot; C <a href="psi_element://open%282%29" style="color:red">open(2)</a>, then you should use the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> function, which involves
+no such magic (but uses different filemodes than Perl
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>, which corresponds to C <a href="psi_element://fopen%283%29" style="color:red">fopen(3)</a>).
+This is another way to protect your filenames from interpretation.  For
+example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use IO::Handle;
+    sysopen(my $fh, $path, O_RDWR|O_CREAT|O_EXCL)
+        or die &quot;Can't open $path: $!&quot;;
+    $fh-&gt;autoflush(1);
+    print $fh &quot;stuff $$\n&quot;;
+    seek($fh, 0, 0);
+    print &quot;File contains: &quot;, readline($fh);</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> for some details about
+mixing reading and writing.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fopen">open in perlport</a>.</p></dd></dl>

@@ -1,0 +1,102 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">endservent</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">These routines are the same as their counterparts in the
+system C library.  In list context, the return values from the
+various get routines are as follows:</p>
+<div style="padding-bottom: 10px;"><pre><code> #    0        1          2           3         4
+ my ( $name,   $passwd,   $gid,       $members  ) = getgr*
+ my ( $name,   $aliases,  $addrtype,  $net      ) = getnet*
+ my ( $name,   $aliases,  $port,      $proto    ) = getserv*
+ my ( $name,   $aliases,  $proto                ) = getproto*
+ my ( $name,   $aliases,  $addrtype,  $length,  @addrs ) = gethost*
+ my ( $name,   $passwd,   $uid,       $gid,     $quota,
+    $comment,  $gcos,     $dir,       $shell,   $expire ) = getpw*
+ #    5        6          7           8         9</code></pre></div>
+<p style="padding-bottom: 10px;">(If the entry doesn't exist, the return value is a single meaningless true
+value.)</p>
+<p style="padding-bottom: 10px;">The exact meaning of the $gcos field varies but it usually contains
+the real name of the user (as opposed to the login name) and other
+information pertaining to the user.  Beware, however, that in many
+system users are able to change this information and therefore it
+cannot be trusted and therefore the $gcos is tainted (see
+<a href="psi_element://perlsec">perlsec</a>).  The $passwd and $shell, user's encrypted password and
+login shell, are also tainted, for the same reason.</p>
+<p style="padding-bottom: 10px;">In scalar context, you get the name, unless the function was a
+lookup by name, in which case you get the other thing, whatever it is.
+(If the entry doesn't exist you get the undefined value.)  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $uid   = getpwnam($name);
+    my $name  = getpwuid($num);
+    my $name  = getpwent();
+    my $gid   = getgrnam($name);
+    my $name  = getgrgid($num);
+    my $name  = getgrent();
+    # etc.</code></pre></div>
+<p style="padding-bottom: 10px;">In <i>getpw*()</i> the fields $quota, $comment, and $expire are special
+in that they are unsupported on many systems.  If the
+$quota is unsupported, it is an empty scalar.  If it is supported, it
+usually encodes the disk quota.  If the $comment field is unsupported,
+it is an empty scalar.  If it is supported it usually encodes some
+administrative comment about the user.  In some systems the $quota
+field may be $change or $age, fields that have to do with password
+aging.  In some systems the $comment field may be $class.  The $expire
+field, if present, encodes the expiration period of the account or the
+password.  For the availability and the exact meaning of these fields
+in your system, please consult <a href="psi_element://getpwnam%283%29" style="color:red">getpwnam(3)</a> and your system's
+<i>pwd.h</i> file.  You can also find out from within Perl what your
+$quota and $comment fields mean and whether you have the $expire field
+by using the <a href="psi_element://Config" style="color:red">C<Config></a> module and the values <code>d_pwquota</code>, <code>d_pwage</code>,
+<code>d_pwchange</code>, <code>d_pwcomment</code>, and <code>d_pwexpire</code>.  Shadow password
+files are supported only if your vendor has implemented them in the
+intuitive fashion that calling the regular C library routines gets the
+shadow versions if you're running under privilege or if there exists
+the <a href="psi_element://shadow%283%29" style="color:red">shadow(3)</a> functions as found in System V (this includes Solaris
+and Linux).  Those systems that implement a proprietary shadow password
+facility are unlikely to be supported.</p>
+<p style="padding-bottom: 10px;">The $members value returned by <i>getgr*()</i> is a space-separated list of
+the login names of the members of the group.</p>
+<p style="padding-bottom: 10px;">For the <i>gethost*()</i> functions, if the <code>h_errno</code> variable is supported in
+C, it will be returned to you via <a href="psi_element://perlvar%2F%24%3F">C<$?></a> if the function
+call fails.  The
+<code>@addrs</code> value returned by a successful call is a list of raw
+addresses returned by the corresponding library call.  In the
+Internet domain, each address is four bytes long; you can unpack it
+by saying something like:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my ($w,$x,$y,$z) = unpack('W4',$addr[0]);</code></pre></div>
+<p style="padding-bottom: 10px;">The Socket library makes this slightly easier:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Socket;
+    my $iaddr = inet_aton(&quot;127.1&quot;); # or whatever address
+    my $name  = gethostbyaddr($iaddr, AF_INET);
+
+    # or going the other way
+    my $straddr = inet_ntoa($iaddr);</code></pre></div>
+<p style="padding-bottom: 10px;">In the opposite way, to resolve a hostname to the IP address
+you can write this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Socket;
+    my $packed_ip = gethostbyname(&quot;www.perl.org&quot;);
+    my $ip_address;
+    if (defined $packed_ip) {
+        $ip_address = inet_ntoa($packed_ip);
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Make sure <a href="psi_element://pod%3A%3Aperlfunc%2Fgethostbyname+NAME">C<gethostbyname></a> is called in SCALAR
+context and that its return value is checked for definedness.</p>
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fgetprotobynumber+NUMBER">C<getprotobynumber></a> function, even
+though it only takes one argument, has the precedence of a list
+operator, so beware:</p>
+<div style="padding-bottom: 10px;"><pre><code>    getprotobynumber $number eq 'icmp'   # WRONG
+    getprotobynumber($number eq 'icmp')  # actually means this
+    getprotobynumber($number) eq 'icmp'  # better this way</code></pre></div>
+<p style="padding-bottom: 10px;">If you get tired of remembering which element of the return list
+contains which return value, by-name interfaces are provided in standard
+modules: <a href="psi_element://File%3A%3Astat" style="color:red">C<File::stat></a>, <a href="psi_element://Net%3A%3Ahostent" style="color:red">C<Net::hostent></a>,
+<a href="psi_element://Net%3A%3Anetent" style="color:red">C<Net::netent></a>, <a href="psi_element://Net%3A%3Aprotoent" style="color:red">C<Net::protoent></a>,
+<a href="psi_element://Net%3A%3Aservent" style="color:red">C<Net::servent></a>, <a href="psi_element://Time%3A%3Agmtime" style="color:red">C<Time::gmtime></a>,
+<a href="psi_element://Time%3A%3Alocaltime" style="color:red">C<Time::localtime></a>, and
+<a href="psi_element://User%3A%3Agrent" style="color:red">C<User::grent></a>.  These override the normal built-ins,
+supplying versions that return objects with the appropriate names for
+each field.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>   use File::stat;
+   use User::pwent;
+   my $is_his = (stat($filename)-&gt;uid == pwent($whoever)-&gt;uid);</code></pre></div>
+<p style="padding-bottom: 10px;">Even though it looks as though they're the same method calls (uid),
+they aren't, because a <code>File::stat</code> object is different from
+a <code>User::pwent</code> object.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fgetpwnam">getpwnam in perlport</a> to <a href="psi_element://perlport%2Fendservent">endservent in perlport</a>.</p></dd></dl>

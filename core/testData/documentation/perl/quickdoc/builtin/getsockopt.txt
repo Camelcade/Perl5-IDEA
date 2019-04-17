@@ -1,0 +1,29 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">getsockopt SOCKET,LEVEL,OPTNAME</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Queries the option named OPTNAME associated with SOCKET at a given LEVEL.
+Options may exist at multiple protocol levels depending on the socket
+type, but at least the uppermost socket level SOL_SOCKET (defined in the
+<a href="psi_element://Socket" style="color:red">C<Socket></a> module) will exist.  To query options at another
+level the protocol number of the appropriate protocol controlling the
+option should be supplied.  For example, to indicate that an option is
+to be interpreted by the TCP protocol, LEVEL should be set to the
+protocol number of TCP, which you can get using
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgetprotobyname+NAME">C<getprotobyname></a>.</p>
+<p style="padding-bottom: 10px;">The function returns a packed string representing the requested socket
+option, or <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> on error, with the reason for the
+error placed in <a href="psi_element://perlvar%2F%24%21">C<$!></a>.  Just what is in the packed string
+depends on LEVEL and OPTNAME; consult <a href="psi_element://getsockopt%282%29" style="color:red">getsockopt(2)</a> for details.  A
+common case is that the option is an integer, in which case the result
+is a packed integer, which you can decode using
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a> with the <code>i</code> (or <code>I</code>) format.</p>
+<p style="padding-bottom: 10px;">Here's an example to test whether Nagle's algorithm is enabled on a socket:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Socket qw(:all);
+
+    defined(my $tcp = getprotobyname(&quot;tcp&quot;))
+        or die &quot;Could not determine the protocol number for tcp&quot;;
+    # my $tcp = IPPROTO_TCP; # Alternative
+    my $packed = getsockopt($socket, $tcp, TCP_NODELAY)
+        or die &quot;getsockopt TCP_NODELAY: $!&quot;;
+    my $nodelay = unpack(&quot;I&quot;, $packed);
+    print &quot;Nagle's algorithm is turned &quot;,
+           $nodelay ? &quot;off\n&quot; : &quot;on\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fgetsockopt">getsockopt in perlport</a>.</p></dd></dl>

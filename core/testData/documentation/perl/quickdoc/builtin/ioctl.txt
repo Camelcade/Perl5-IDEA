@@ -1,0 +1,33 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">ioctl FILEHANDLE,FUNCTION,SCALAR</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Implements the <a href="psi_element://ioctl%282%29" style="color:red">ioctl(2)</a> function.  You'll probably first have to say</p>
+<div style="padding-bottom: 10px;"><pre><code>    require &quot;sys/ioctl.ph&quot;;  # probably in
+                             # $Config{archlib}/sys/ioctl.ph</code></pre></div>
+<p style="padding-bottom: 10px;">to get the correct function definitions.  If <i>sys/ioctl.ph</i> doesn't
+exist or doesn't have the correct definitions you'll have to roll your
+own, based on your C header files such as <i>&lt;sys/ioctl.h&gt;</i>.
+(There is a Perl script called <B>h2ph</B> that comes with the Perl kit that
+may help you in this, but it's nontrivial.)  SCALAR will be read and/or
+written depending on the FUNCTION; a C pointer to the string value of SCALAR
+will be passed as the third argument of the actual
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a> call.  (If SCALAR
+has no string value but does have a numeric value, that value will be
+passed rather than a pointer to the string value.  To guarantee this to be
+true, add a <code>0</code> to the scalar before using it.)  The
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>
+functions may be needed to manipulate the values of structures used by
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a>.</p>
+<p style="padding-bottom: 10px;">The return value of <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a> (and
+<a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<fcntl></a>) is as follows:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if OS returns:      then Perl returns:
+        -1               undefined value
+         0              string &quot;0 but true&quot;
+    anything else           that number</code></pre></div>
+<p style="padding-bottom: 10px;">Thus Perl returns true on success and false on failure, yet you can
+still easily determine the actual value returned by the operating
+system:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $retval = ioctl(...) || -1;
+    printf &quot;System returned %d\n&quot;, $retval;</code></pre></div>
+<p style="padding-bottom: 10px;">The special string <code>&quot;0 but true&quot;</code> is exempt from
+<a href="psi_element://perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s">C<Argument "..." isn't numeric></a>
+<a href="psi_element://warnings" style="color:red">warnings</a> on improper numeric conversions.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fioctl">ioctl in perlport</a>.</p></dd></dl>

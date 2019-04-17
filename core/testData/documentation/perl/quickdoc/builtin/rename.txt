@@ -1,0 +1,13 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">rename OLDNAME,NEWNAME
+   </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Changes the name of a file; an existing file NEWNAME will be
+clobbered.  Returns true for success, false otherwise.</p>
+<p style="padding-bottom: 10px;">Behavior of this function varies wildly depending on your system
+implementation.  For example, it will usually not work across file system
+boundaries, even though the system <i>mv</i> command sometimes compensates
+for this.  Other restrictions include whether it works on directories,
+open files, or pre-existing files.  Check <a href="psi_element://perlport">perlport</a> and either the
+<a href="psi_element://rename%282%29" style="color:red">rename(2)</a> manpage or equivalent system documentation for details.</p>
+<p style="padding-bottom: 10px;">For a platform independent <a href="psi_element://File%3A%3ACopy%2Fmove" style="color:red">C<move></a> function look at
+the <a href="psi_element://File%3A%3ACopy" style="color:red">File::Copy</a> module.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Frename">rename in perlport</a>.</p></dd></dl>

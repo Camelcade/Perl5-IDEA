@@ -1,0 +1,89 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">binmode FILEHANDLE, LAYER
+    </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">binmode FILEHANDLE</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Arranges for FILEHANDLE to be read or written in &quot;binary&quot; or &quot;text&quot;
+mode on systems where the run-time libraries distinguish between
+binary and text files.  If FILEHANDLE is an expression, the value is
+taken as the name of the filehandle.  Returns true on success,
+otherwise it returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> and sets
+<a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno).</p>
+<p style="padding-bottom: 10px;">On some systems (in general, DOS- and Windows-based systems)
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> is necessary when you're not
+working with a text file.  For the sake of portability it is a good idea
+always to use it when appropriate, and never to use it when it isn't
+appropriate.  Also, people can set their I/O to be by default
+UTF8-encoded Unicode, not bytes.</p>
+<p style="padding-bottom: 10px;">In other words: regardless of platform, use
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> on binary data, like images,
+for example.</p>
+<p style="padding-bottom: 10px;">If LAYER is present it is a single string, but may contain multiple
+directives.  The directives alter the behaviour of the filehandle.
+When LAYER is present, using binmode on a text file makes sense.</p>
+<p style="padding-bottom: 10px;">If LAYER is omitted or specified as <code>:raw</code> the filehandle is made
+suitable for passing binary data.  This includes turning off possible CRLF
+translation and marking it as bytes (as opposed to Unicode characters).
+Note that, despite what may be implied in <i>&quot;Programming Perl&quot;</i> (the
+Camel, 3rd edition) or elsewhere, <code>:raw</code> is <i>not</i> simply the inverse of <code>:crlf</code>.
+Other layers that would affect the binary nature of the stream are
+<i>also</i> disabled.  See <a href="psi_element://PerlIO" style="color:red">PerlIO</a>, <a href="psi_element://perlrun">perlrun</a>, and the discussion about the
+PERLIO environment variable.</p>
+<p style="padding-bottom: 10px;">The <code>:bytes</code>, <code>:crlf</code>, <code>:utf8</code>, and any other directives of the
+form <code>:...</code>, are called I/O <i>layers</i>.  The <a href="psi_element://open" style="color:red">open</a> pragma can be used to
+establish default I/O layers.</p>
+<p style="padding-bottom: 10px;"><i>The LAYER parameter of the <a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a>
+function is described as &quot;DISCIPLINE&quot; in &quot;Programming Perl, 3rd
+Edition&quot;.  However, since the publishing of this book, by many known as
+&quot;Camel III&quot;, the consensus of the naming of this functionality has moved
+from &quot;discipline&quot; to &quot;layer&quot;.  All documentation of this version of Perl
+therefore refers to &quot;layers&quot; rather than to &quot;disciplines&quot;.  Now back to
+the regularly scheduled documentation...</i></p>
+<p style="padding-bottom: 10px;">To mark FILEHANDLE as UTF-8, use <code>:utf8</code> or <code>:encoding(UTF-8)</code>.
+<code>:utf8</code> just marks the data as UTF-8 without further checking,
+while <code>:encoding(UTF-8)</code> checks the data for actually being valid
+UTF-8.  More details can be found in <a href="psi_element://PerlIO%3A%3Aencoding" style="color:red">PerlIO::encoding</a>.</p>
+<p style="padding-bottom: 10px;">In general, <a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> should be called
+after <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> but before any I/O is done on the
+filehandle.  Calling <a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> normally
+flushes any pending buffered output data (and perhaps pending input
+data) on the handle.  An exception to this is the <code>:encoding</code> layer
+that changes the default character encoding of the handle.
+The <code>:encoding</code> layer sometimes needs to be called in
+mid-stream, and it doesn't flush the stream.  <code>:encoding</code>
+also implicitly pushes on top of itself the <code>:utf8</code> layer because
+internally Perl operates on UTF8-encoded Unicode characters.</p>
+<p style="padding-bottom: 10px;">The operating system, device drivers, C libraries, and Perl run-time
+system all conspire to let the programmer treat a single
+character (<code>\n</code>) as the line terminator, irrespective of external
+representation.  On many operating systems, the native text file
+representation matches the internal representation, but on some
+platforms the external representation of <code>\n</code> is made up of more than
+one character.</p>
+<p style="padding-bottom: 10px;">All variants of Unix, Mac OS (old and new), and Stream_LF files on VMS use
+a single character to end each line in the external representation of text
+(even though that single character is CARRIAGE RETURN on old, pre-Darwin
+flavors of Mac OS, and is LINE FEED on Unix and most VMS files).  In other
+systems like OS/2, DOS, and the various flavors of MS-Windows, your program
+sees a <code>\n</code> as a simple <code>\cJ</code>, but what's stored in text files are the
+two characters <code>\cM\cJ</code>.  That means that if you don't use
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> on these systems, <code>\cM\cJ</code>
+sequences on disk will be converted to <code>\n</code> on input, and any <code>\n</code> in
+your program will be converted back to <code>\cM\cJ</code> on output.  This is
+what you want for text files, but it can be disastrous for binary files.</p>
+<p style="padding-bottom: 10px;">Another consequence of using <a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a>
+(on some systems) is that special end-of-file markers will be seen as
+part of the data stream.  For systems from the Microsoft family this
+means that, if your binary data contain <code>\cZ</code>, the I/O subsystem will
+regard it as the end of the file, unless you use
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a>.</p>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> is important not only for
+<a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST">C<print></a>
+operations, but also when using
+<a href="psi_element://pod%3A%3Aperlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<read></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<syswrite></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a> (see <a href="psi_element://perlport">perlport</a> for more details).  See the
+<a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red">C<$E<sol>></a> and <a href="psi_element://perlvar%2F%24%5C">C<$\></a> variables in
+<a href="psi_element://perlvar">perlvar</a> for how to manually set your input and output
+line-termination sequences.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fbinmode">binmode in perlport</a>.</p></dd></dl>

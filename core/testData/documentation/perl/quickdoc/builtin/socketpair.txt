@@ -1,0 +1,19 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">socketpair SOCKET1,SOCKET2,DOMAIN,TYPE,PROTOCOL</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Creates an unnamed pair of sockets in the specified domain, of the
+specified type.  DOMAIN, TYPE, and PROTOCOL are specified the same as
+for the syscall of the same name.  If unimplemented, raises an exception.
+Returns true if successful.</p>
+<p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, the flag will
+be set for the newly opened file descriptors, as determined by the value
+of <a href="psi_element://perlvar%2F%24%5EF">C<$^F></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p>
+<p style="padding-bottom: 10px;">Some systems define <a href="psi_element://pod%3A%3Aperlfunc%2Fpipe+READHANDLE%2CWRITEHANDLE">C<pipe></a> in terms of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsocketpair+SOCKET1%2CSOCKET2%2CDOMAIN%2CTYPE%2CPROTOCOL">C<socketpair></a>, in
+which a call to <code>pipe($rdr, $wtr)</code> is essentially:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Socket;
+    socketpair(my $rdr, my $wtr, AF_UNIX, SOCK_STREAM, PF_UNSPEC);
+    shutdown($rdr, 1);        # no more writing for reader
+    shutdown($wtr, 0);        # no more reading for writer</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlipc">perlipc</a> for an example of socketpair use.  Perl 5.8 and later will
+emulate socketpair using IP sockets to localhost if your system implements
+sockets but not socketpair.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsocketpair">socketpair in perlport</a>.</p></dd></dl>

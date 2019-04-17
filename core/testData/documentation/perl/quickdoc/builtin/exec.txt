@@ -1,0 +1,66 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">exec LIST
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">exec PROGRAM LIST</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> function executes a system command <i>and never
+returns</i>; use <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a> instead of <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a>
+if you want it to return.  It fails and
+returns false only if the command does not exist <i>and</i> it is executed
+directly instead of via your system's command shell (see below).</p>
+<p style="padding-bottom: 10px;">Since it's a common mistake to use <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> instead of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a>, Perl warns you if <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> is
+called in void context and if there is a following statement that isn't
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST">C<warn></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR">C<exit></a> (if
+<a href="psi_element://warnings" style="color:red">warnings</a> are enabled--but you always do that, right?).  If you
+<i>really</i> want to follow an <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> with some other
+statement, you can use one of these styles to avoid the warning:</p>
+<div style="padding-bottom: 10px;"><pre><code>    exec ('foo')   or print STDERR &quot;couldn't exec foo: $!&quot;;
+    { exec ('foo') }; print STDERR &quot;couldn't exec foo: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">If there is more than one argument in LIST, this calls <a href="psi_element://execvp%283%29" style="color:red">execvp(3)</a> with the
+arguments in LIST.  If there is only one element in LIST, the argument is
+checked for shell metacharacters, and if there are any, the entire
+argument is passed to the system's command shell for parsing (this is
+<code>/bin/sh -c</code> on Unix platforms, but varies on other platforms).  If
+there are no shell metacharacters in the argument, it is split into words
+and passed directly to <code>execvp</code>, which is more efficient.  Examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    exec '/bin/echo', 'Your arguments are: ', @ARGV;
+    exec &quot;sort $outfile | uniq&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">If you don't really want to execute the first argument, but want to lie
+to the program you are executing about its own name, you can specify
+the program you actually want to run as an &quot;indirect object&quot; (without a
+comma) in front of the LIST, as in <code>exec PROGRAM LIST</code>.  (This always
+forces interpretation of the LIST as a multivalued list, even if there
+is only a single scalar in the list.)  Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $shell = '/bin/csh';
+    exec $shell '-sh';    # pretend it's a login shell</code></pre></div>
+<p style="padding-bottom: 10px;">or, more directly,</p>
+<div style="padding-bottom: 10px;"><pre><code>    exec {'/bin/csh'} '-sh';  # pretend it's a login shell</code></pre></div>
+<p style="padding-bottom: 10px;">When the arguments get executed via the system shell, results are
+subject to its quirks and capabilities.  See <a href="psi_element://perlop%2F%60STRING%60">`STRING` in perlop</a>
+for details.</p>
+<p style="padding-bottom: 10px;">Using an indirect object with <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a> is also more secure.  This usage (which also
+works fine with <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a>) forces
+interpretation of the arguments as a multivalued list, even if the
+list had just one argument.  That way you're safe from the shell
+expanding wildcards or splitting up words with whitespace in them.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @args = ( &quot;echo surprise&quot; );
+
+    exec @args;               # subject to shell escapes
+                                # if @args == 1
+    exec { $args[0] } @args;  # safe even with one-arg list</code></pre></div>
+<p style="padding-bottom: 10px;">The first version, the one without the indirect object, ran the <i>echo</i>
+program, passing it <code>&quot;surprise&quot;</code> an argument.  The second version didn't;
+it tried to run a program named <i>&quot;echo surprise&quot;</i>, didn't find it, and set
+<a href="psi_element://perlvar%2F%24%3F">C<$?></a> to a non-zero value indicating failure.</p>
+<p style="padding-bottom: 10px;">On Windows, only the <code>exec PROGRAM LIST</code> indirect object syntax will
+reliably avoid using the shell; <code>exec LIST</code>, even with more than one
+element, will fall back to the shell if the first spawn fails.</p>
+<p style="padding-bottom: 10px;">Perl attempts to flush all files opened for output before the exec,
+but this may not be supported on some platforms (see <a href="psi_element://perlport">perlport</a>).
+To be safe, you may need to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a>
+(<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>) or call the <code>autoflush</code> method of
+<a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red">C<IO::Handle></a> on any open handles to avoid lost
+output.</p>
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> will not call your <code>END</code> blocks, nor
+will it invoke <code>DESTROY</code> methods on your objects.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fexec">exec in perlport</a>.</p></dd></dl>

@@ -1,0 +1,2 @@
+gmtime(<caret>);
+No element

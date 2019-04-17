@@ -1,0 +1,2 @@
+closedir(<caret>);
+No element

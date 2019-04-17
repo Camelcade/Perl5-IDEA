@@ -1,0 +1,36 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">continue BLOCK</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">continue</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">When followed by a BLOCK, <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> is actually a
+flow control statement rather than a function.  If there is a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> BLOCK attached to a BLOCK (typically in a
+<code>while</code> or <code>foreach</code>), it is always executed just before the
+conditional is about to be evaluated again, just like the third part of
+a <code>for</code> loop in C.  Thus it can be used to increment a loop variable,
+even when the loop has been continued via the <a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a>
+statement (which is similar to the C <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a>
+statement).</p>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a>, or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL">C<redo></a> may appear within a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> block; <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL">C<redo></a> behave as if they had been executed within the
+main block.  So will <a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a>, but since it will execute a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> block, it may be more entertaining.</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (EXPR) {
+        ### redo always comes here
+        do_something;
+    } continue {
+        ### next always comes here
+        do_something_else;
+        # then back the top to re-check EXPR
+    }
+    ### last always comes here</code></pre></div>
+<p style="padding-bottom: 10px;">Omitting the <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> section is equivalent to
+using an empty one, logically enough, so <a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a> goes
+directly back to check the condition at the top of the loop.</p>
+<p style="padding-bottom: 10px;">When there is no BLOCK, <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> is a function
+that falls through the current <code>when</code> or <code>default</code> block instead of
+iterating a dynamically enclosing <code>foreach</code> or exiting a lexically
+enclosing <code>given</code>.  In Perl 5.14 and earlier, this form of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> was only available when the
+<a href="psi_element://feature%2FThe+%27switch%27+feature" style="color:red">C<"switch"> feature</a> was enabled.  See
+<a href="psi_element://feature" style="color:red">feature</a> and <a href="psi_element://perlsyn%2FSwitch+Statements">Switch Statements in perlsyn</a> for more information.</p></dd></dl>

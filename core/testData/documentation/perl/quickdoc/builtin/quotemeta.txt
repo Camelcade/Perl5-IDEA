@@ -1,0 +1,79 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">quotemeta EXPR
+ </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">quotemeta</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns the value of EXPR with all the ASCII non-&quot;word&quot;
+characters backslashed.  (That is, all ASCII characters not matching
+<code>/[A-Za-z_0-9]/</code> will be preceded by a backslash in the
+returned string, regardless of any locale settings.)
+This is the internal function implementing
+the <code>\Q</code> escape in double-quoted strings.
+(See below for the behavior on non-ASCII code points.)</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">quotemeta (and <code>\Q</code> ... <code>\E</code>) are useful when interpolating strings into
+regular expressions, because by default an interpolated variable will be
+considered a mini-regular expression.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $sentence = 'The quick brown fox jumped over the lazy dog';
+    my $substring = 'quick.*?fox';
+    $sentence =~ s{$substring}{big bad wolf};</code></pre></div>
+<p style="padding-bottom: 10px;">Will cause <code>$sentence</code> to become <code>'The big bad wolf jumped over...'</code>.</p>
+<p style="padding-bottom: 10px;">On the other hand:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $sentence = 'The quick brown fox jumped over the lazy dog';
+    my $substring = 'quick.*?fox';
+    $sentence =~ s{\Q$substring\E}{big bad wolf};</code></pre></div>
+<p style="padding-bottom: 10px;">Or:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $sentence = 'The quick brown fox jumped over the lazy dog';
+    my $substring = 'quick.*?fox';
+    my $quoted_substring = quotemeta($substring);
+    $sentence =~ s{$quoted_substring}{big bad wolf};</code></pre></div>
+<p style="padding-bottom: 10px;">Will both leave the sentence as is.
+Normally, when accepting literal string input from the user,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fquotemeta+EXPR">C<quotemeta></a> or <code>\Q</code> must be used.</p>
+<p style="padding-bottom: 10px;">In Perl v5.14, all non-ASCII characters are quoted in non-UTF-8-encoded
+strings, but not quoted in UTF-8 strings.</p>
+<p style="padding-bottom: 10px;">Starting in Perl v5.16, Perl adopted a Unicode-defined strategy for
+quoting non-ASCII characters; the quoting of ASCII characters is
+unchanged.</p>
+<p style="padding-bottom: 10px;">Also unchanged is the quoting of non-UTF-8 strings when outside the
+scope of a
+<a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red">C<use feature 'unicode_strings'></a>,
+which is to quote all
+characters in the upper Latin1 range.  This provides complete backwards
+compatibility for old programs which do not use Unicode.  (Note that
+<code>unicode_strings</code> is automatically enabled within the scope of a
+<span style="white-space: nowrap;"><code>use v5.12</code></span> or greater.)</p>
+<p style="padding-bottom: 10px;">Within the scope of <a href="psi_element://locale" style="color:red">C<use locale></a>, all non-ASCII Latin1 code
+points
+are quoted whether the string is encoded as UTF-8 or not.  As mentioned
+above, locale does not affect the quoting of ASCII-range characters.
+This protects against those locales where characters such as <code>&quot;|&quot;</code> are
+considered to be word characters.</p>
+<p style="padding-bottom: 10px;">Otherwise, Perl quotes non-ASCII characters using an adaptation from
+Unicode (see <a href="http://www.unicode.org/reports/tr31/">http://www.unicode.org/reports/tr31/</a>).
+The only code points that are quoted are those that have any of the
+Unicode properties:  Pattern_Syntax, Pattern_White_Space, White_Space,
+Default_Ignorable_Code_Point, or General_Category=Control.</p>
+<p style="padding-bottom: 10px;">Of these properties, the two important ones are Pattern_Syntax and
+Pattern_White_Space.  They have been set up by Unicode for exactly this
+purpose of deciding which characters in a regular expression pattern
+should be quoted.  No character that can be in an identifier has these
+properties.</p>
+<p style="padding-bottom: 10px;">Perl promises, that if we ever add regular expression pattern
+metacharacters to the dozen already defined
+(<code>\ &verbar; ( ) [ { ^ $ * + ? .</code>), that we will only use ones that have the
+Pattern_Syntax property.  Perl also promises, that if we ever add
+characters that are considered to be white space in regular expressions
+(currently mostly affected by <code>/x</code>), they will all have the
+Pattern_White_Space property.</p>
+<p style="padding-bottom: 10px;">Unicode promises that the set of code points that have these two
+properties will never change, so something that is not quoted in v5.16
+will never need to be quoted in any future Perl release.  (Not all the
+code points that match Pattern_Syntax have actually had characters
+assigned to them; so there is room to grow, but they are quoted
+whether assigned or not.  Perl, of course, would never use an
+unassigned code point as an actual metacharacter.)</p>
+<p style="padding-bottom: 10px;">Quoting characters that have the other 3 properties is done to enhance
+the readability of the regular expression and not because they actually
+need to be quoted for regular expression purposes (characters with the
+White_Space property are likely to be indistinguishable on the page or
+screen from those with the Pattern_White_Space property; and the other
+two properties contain non-printing characters).</p></dd></dl>

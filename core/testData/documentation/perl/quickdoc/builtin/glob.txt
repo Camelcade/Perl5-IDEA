@@ -1,0 +1,35 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">glob EXPR
+   </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">glob</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">In list context, returns a (possibly empty) list of filename expansions on
+the value of EXPR such as the standard Unix shell <i>/bin/csh</i> would do.  In
+scalar context, glob iterates through such filename expansions, returning
+undef when the list is exhausted.  This is the internal function
+implementing the <code>&lt;*.c&gt;</code> operator, but you can use it directly.  If
+EXPR is omitted, <a href="psi_element://perlvar%2F%24_">C<$_></a> is used.  The <code>&lt;*.c&gt;</code> operator
+is discussed in more detail in <a href="psi_element://perlop%2FI%2FO+Operators">I/O Operators in perlop</a>.</p>
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fglob+EXPR">C<glob></a> splits its arguments on whitespace and
+treats
+each segment as separate pattern.  As such, <code>glob(&quot;*.c *.h&quot;)</code>
+matches all files with a <i>.c</i> or <i>.h</i> extension.  The expression
+<code>glob(&quot;.* *&quot;)</code> matches all files in the current working directory.
+If you want to glob filenames that might contain whitespace, you'll
+have to use extra quotes around the spacey filename to protect it.
+For example, to glob filenames that have an <code>e</code> followed by a space
+followed by an <code>f</code>, use one of:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @spacies = &lt;&quot;*e f*&quot;&gt;;
+    my @spacies = glob '&quot;*e f*&quot;';
+    my @spacies = glob q(&quot;*e f*&quot;);</code></pre></div>
+<p style="padding-bottom: 10px;">If you had to get a variable through, you could do this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @spacies = glob &quot;'*${var}e f*'&quot;;
+    my @spacies = glob qq(&quot;*${var}e f*&quot;);</code></pre></div>
+<p style="padding-bottom: 10px;">If non-empty braces are the only wildcard characters used in the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fglob+EXPR">C<glob></a>, no filenames are matched, but potentially many
+strings are returned.  For example, this produces nine strings, one for
+each pairing of fruits and colors:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @many = glob &quot;{apple,tomato,cherry}={green,yellow,red}&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">This operator is implemented using the standard <code>File::Glob</code> extension.
+See <a href="psi_element://File%3A%3AGlob" style="color:red">File::Glob</a> for details, including
+<a href="psi_element://File%3A%3AGlob%2FC%3Cbsd_glob%3E" style="color:red">C<bsd_glob></a>, which does not treat whitespace
+as a pattern separator.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fglob">glob in perlport</a>.</p></dd></dl>

@@ -1,0 +1,2 @@
+srand(<caret>);
+No element

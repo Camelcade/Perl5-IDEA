@@ -1,0 +1,2 @@
+getc <caret> 
+No element

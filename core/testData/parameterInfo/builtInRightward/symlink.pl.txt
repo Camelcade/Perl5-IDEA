@@ -1,0 +1,2 @@
+symlink <caret> 
+No element

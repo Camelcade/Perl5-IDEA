@@ -1,0 +1,2 @@
+crypt(<caret>);
+<$text>, $salt

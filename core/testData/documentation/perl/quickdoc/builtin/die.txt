@@ -1,0 +1,95 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">die LIST
+     </dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> raises an exception.  Inside an
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> the error message is stuffed into
+<a href="psi_element://perlvar%2F%24%40">C<$@></a> and the <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> is terminated with the
+undefined value.  If the exception is outside of all enclosing
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>s, then the uncaught exception prints LIST to
+<code>STDERR</code> and exits with a non-zero value.  If you need to exit the
+process with a specific exit code, see <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR">C<exit></a>.</p>
+<p style="padding-bottom: 10px;">Equivalent examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    die &quot;Can't cd to spool: $!\n&quot; unless chdir '/usr/spool/news';
+    chdir '/usr/spool/news' or die &quot;Can't cd to spool: $!\n&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">If the last element of LIST does not end in a newline, the current
+script line number and input line number (if any) are also printed,
+and a newline is supplied.  Note that the &quot;input line number&quot; (also
+known as &quot;chunk&quot;) is subject to whatever notion of &quot;line&quot; happens to
+be currently in effect, and is also available as the special variable
+<a href="psi_element://perlvar%2F%24.">C<$.></a>.  See <a href="psi_element://perlvar%2F%24%2F">$/ in perlvar</a> and <a href="psi_element://perlvar%2F%24.">$. in perlvar</a>.</p>
+<p style="padding-bottom: 10px;">Hint: sometimes appending <code>&quot;, stopped&quot;</code> to your message will cause it
+to make better sense when the string <code>&quot;at foo line 123&quot;</code> is appended.
+Suppose you are running script &quot;canasta&quot;.</p>
+<div style="padding-bottom: 10px;"><pre><code>    die &quot;/etc/games is no good&quot;;
+    die &quot;/etc/games is no good, stopped&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">produce, respectively</p>
+<div style="padding-bottom: 10px;"><pre><code>    /etc/games is no good at canasta line 123.
+    /etc/games is no good, stopped at canasta line 123.</code></pre></div>
+<p style="padding-bottom: 10px;">If the output is empty and <a href="psi_element://perlvar%2F%24%40">C<$@></a> already contains a value
+(typically from a previous eval) that value is reused after appending
+<code>&quot;\t...propagated&quot;</code>.  This is useful for propagating exceptions:</p>
+<div style="padding-bottom: 10px;"><pre><code>    eval { ... };
+    die unless $@ =~ /Expected exception/;</code></pre></div>
+<p style="padding-bottom: 10px;">If the output is empty and <a href="psi_element://perlvar%2F%24%40">C<$@></a> contains an object
+reference that has a <code>PROPAGATE</code> method, that method will be called
+with additional file and line number parameters.  The return value
+replaces the value in <a href="psi_element://perlvar%2F%24%40">C<$@></a>;  i.e., as if
+<code>$@ = eval { $@-&gt;PROPAGATE(__FILE__, __LINE__) };</code> were called.</p>
+<p style="padding-bottom: 10px;">If <a href="psi_element://perlvar%2F%24%40">C<$@></a> is empty, then the string <code>&quot;Died&quot;</code> is used.</p>
+<p style="padding-bottom: 10px;">If an uncaught exception results in interpreter exit, the exit code is
+determined from the values of <a href="psi_element://perlvar%2F%24%21">C<$!></a> and
+<a href="psi_element://perlvar%2F%24%3F">C<$?></a> with this pseudocode:</p>
+<div style="padding-bottom: 10px;"><pre><code>    exit $! if $!;              # errno
+    exit $? &gt;&gt; 8 if $? &gt;&gt; 8;    # child exit status
+    exit 255;                   # last resort</code></pre></div>
+<p style="padding-bottom: 10px;">As with <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR">C<exit></a>, <a href="psi_element://perlvar%2F%24%3F">C<$?></a> is set prior to
+unwinding the call stack; any <code>DESTROY</code> or <code>END</code> handlers can then
+alter this value, and thus Perl's exit code.</p>
+<p style="padding-bottom: 10px;">The intent is to squeeze as much possible information about the likely cause
+into the limited space of the system exit code.  However, as
+<a href="psi_element://perlvar%2F%24%21">C<$!></a> is the value of C's <code>errno</code>, which can be set by
+any system call, this means that the value of the exit code used by
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> can be non-predictable, so should not be relied
+upon, other than to be non-zero.</p>
+<p style="padding-bottom: 10px;">You can also call <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> with a reference argument, and if
+this is trapped within an <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>, <a href="psi_element://perlvar%2F%24%40">C<$@></a>
+contains that reference.  This permits more elaborate exception handling
+using objects that maintain arbitrary state about the exception.  Such a
+scheme is sometimes preferable to matching particular string values of
+<a href="psi_element://perlvar%2F%24%40">C<$@></a> with regular expressions.  Because
+<a href="psi_element://perlvar%2F%24%40">C<$@></a> is a global variable and <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> may
+be used within object implementations, be careful that analyzing the
+error object doesn't replace the reference in the global variable.  It's
+easiest to make a local copy of the reference before any manipulations.
+Here's an example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Scalar::Util &quot;blessed&quot;;
+
+    eval { ... ; die Some::Module::Exception-&gt;new( FOO =&gt; &quot;bar&quot; ) };
+    if (my $ev_err = $@) {
+        if (blessed($ev_err)
+            &amp;&amp; $ev_err-&gt;isa(&quot;Some::Module::Exception&quot;)) {
+            # handle Some::Module::Exception
+        }
+        else {
+            # handle all other possible exceptions
+        }
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Because Perl stringifies uncaught exception messages before display,
+you'll probably want to overload stringification operations on
+exception objects.  See <a href="psi_element://overload" style="color:red">overload</a> for details about that.</p>
+<p style="padding-bottom: 10px;">You can arrange for a callback to be run just before the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> does its deed, by setting the
+<a href="psi_element://perlvar%2F%25SIG">C<$SIG{__DIE__}></a> hook.  The associated handler is called
+with the error text and can change the error message, if it sees fit, by
+calling <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> again.  See <a href="psi_element://perlvar%2F%25SIG">%SIG in perlvar</a> for details on
+setting <a href="psi_element://perlvar%2F%25SIG">C<%SIG></a> entries, and <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> for some
+examples.  Although this feature was to be run only right before your
+program was to exit, this is not currently so: the
+<a href="psi_element://perlvar%2F%25SIG">C<$SIG{__DIE__}></a> hook is currently called even inside
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>ed blocks/strings!  If one wants the hook to do
+nothing in such situations, put</p>
+<div style="padding-bottom: 10px;"><pre><code>    die @_ if $^S;</code></pre></div>
+<p style="padding-bottom: 10px;">as the first line of the handler (see <a href="psi_element://perlvar%2F%24%5ES">$^S in perlvar</a>).  Because
+this promotes strange action at a distance, this counterintuitive
+behavior may be fixed in a future release.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR">C<exit></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST">C<warn></a>, and the <a href="psi_element://Carp" style="color:red">Carp</a>
+module.</p></dd></dl>

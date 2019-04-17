@@ -1,0 +1,25 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">readdir DIRHANDLE</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns the next directory entry for a directory opened by
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopendir+DIRHANDLE%2CEXPR">C<opendir></a>.
+If used in list context, returns all the rest of the entries in the
+directory.  If there are no more entries, returns the undefined value in
+scalar context and the empty list in list context.</p>
+<p style="padding-bottom: 10px;">If you're planning to filetest the return values out of a
+<a href="psi_element://pod%3A%3Aperlfunc%2Freaddir+DIRHANDLE">C<readdir></a>, you'd better prepend the directory in
+question.  Otherwise, because we didn't <a href="psi_element://pod%3A%3Aperlfunc%2Fchdir+EXPR">C<chdir></a> there,
+it would have been testing the wrong file.</p>
+<div style="padding-bottom: 10px;"><pre><code>    opendir(my $dh, $some_dir) || die &quot;Can't opendir $some_dir: $!&quot;;
+    my @dots = grep { /^\./ &amp;&amp; -f &quot;$some_dir/$_&quot; } readdir($dh);
+    closedir $dh;</code></pre></div>
+<p style="padding-bottom: 10px;">As of Perl 5.12 you can use a bare <a href="psi_element://pod%3A%3Aperlfunc%2Freaddir+DIRHANDLE">C<readdir></a> in a
+<code>while</code> loop, which will set <a href="psi_element://perlvar%2F%24_">C<$_></a> on every iteration.</p>
+<div style="padding-bottom: 10px;"><pre><code>    opendir(my $dh, $some_dir) || die &quot;Can't open $some_dir: $!&quot;;
+    while (readdir $dh) {
+        print &quot;$some_dir/$_\n&quot;;
+    }
+    closedir $dh;</code></pre></div>
+<p style="padding-bottom: 10px;">To avoid confusing would-be users of your code who are running earlier
+versions of Perl with mysterious failures, put this sort of thing at the
+top of your file to signal that your code will work <i>only</i> on Perls of a
+recent vintage:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use 5.012; # so readdir assigns to $_ in a lone while test</code></pre></div></dd></dl>

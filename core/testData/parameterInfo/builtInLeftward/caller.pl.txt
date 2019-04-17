@@ -1,0 +1,2 @@
+caller(<caret>);
+<[$frame_offset]>

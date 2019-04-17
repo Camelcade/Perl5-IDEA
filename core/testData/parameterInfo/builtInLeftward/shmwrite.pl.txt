@@ -1,0 +1,2 @@
+shmwrite(<caret>);
+No element

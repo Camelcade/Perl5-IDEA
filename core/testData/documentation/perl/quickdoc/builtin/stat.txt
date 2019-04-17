@@ -1,0 +1,118 @@
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">stat FILEHANDLE
+  </dt>
+<dt style="padding-bottom:4px;font-weight:bold;">stat EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">stat DIRHANDLE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">stat</dt><dd style="padding-top:6px;">
+<p style="padding-bottom: 10px;">Returns a 13-element list giving the status info for a file, either
+the file opened via FILEHANDLE or DIRHANDLE, or named by EXPR.  If EXPR is
+omitted, it stats <a href="psi_element://perlvar%2F%24_">C<$_></a> (not <code>_</code>!).  Returns the empty
+list if <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> fails.  Typically
+used as follows:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
+        $atime,$mtime,$ctime,$blksize,$blocks)
+           = stat($filename);</code></pre></div>
+<p style="padding-bottom: 10px;">Not all fields are supported on all filesystem types.  Here are the
+meanings of the fields:</p>
+<div style="padding-bottom: 10px;"><pre><code>  0 dev      device number of filesystem
+  1 ino      inode number
+  2 mode     file mode  (type and permissions)
+  3 nlink    number of (hard) links to the file
+  4 uid      numeric user ID of file's owner
+  5 gid      numeric group ID of file's owner
+  6 rdev     the device identifier (special files only)
+  7 size     total size of file, in bytes
+  8 atime    last access time in seconds since the epoch
+  9 mtime    last modify time in seconds since the epoch
+ 10 ctime    inode change time in seconds since the epoch (*)
+ 11 blksize  preferred I/O size in bytes for interacting with the
+             file (may vary from file to file)
+ 12 blocks   actual number of system-specific blocks allocated
+             on disk (often, but not always, 512 bytes each)</code></pre></div>
+<p style="padding-bottom: 10px;">(The epoch was at 00:00 January 1, 1970 GMT.)</p>
+<p style="padding-bottom: 10px;">(*) Not all fields are supported on all filesystem types.  Notably, the
+ctime field is non-portable.  In particular, you cannot expect it to be a
+&quot;creation time&quot;; see <a href="psi_element://perlport%2FFiles+and+Filesystems">Files and Filesystems in perlport</a> for details.</p>
+<p style="padding-bottom: 10px;">If <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> is passed the special filehandle
+consisting of an underline, no stat is done, but the current contents of
+the stat structure from the last <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a>, or filetest are returned.  Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (-x $file &amp;&amp; (($d) = stat(_)) &amp;&amp; $d &lt; 0) {
+        print &quot;$file is executable NFS file\n&quot;;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">(This works on machines only for which the device number is negative
+under NFS.)</p>
+<p style="padding-bottom: 10px;">Because the mode contains both the file type and its permissions, you
+should mask off the file type portion and (s)printf using a <code>&quot;%o&quot;</code>
+if you want to see the real permissions.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $mode = (stat($filename))[2];
+    printf &quot;Permissions are %04o\n&quot;, $mode &amp; 07777;</code></pre></div>
+<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> returns a boolean value
+indicating success
+or failure, and, if successful, sets the information associated with
+the special filehandle <code>_</code>.</p>
+<p style="padding-bottom: 10px;">The <a href="psi_element://File%3A%3Astat" style="color:red">File::stat</a> module provides a convenient, by-name access mechanism:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use File::stat;
+    my $sb = stat($filename);
+    printf &quot;File is %s, size is %s, perm %04o, mtime %s\n&quot;,
+           $filename, $sb-&gt;size, $sb-&gt;mode &amp; 07777,
+           scalar localtime $sb-&gt;mtime;</code></pre></div>
+<p style="padding-bottom: 10px;">You can import symbolic mode constants (<code>S_IF*</code>) and functions
+(<code>S_IS*</code>) from the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Fcntl ':mode';
+
+    my $mode = (stat($filename))[2];
+
+    my $user_rwx      = ($mode &amp; S_IRWXU) &gt;&gt; 6;
+    my $group_read    = ($mode &amp; S_IRGRP) &gt;&gt; 3;
+    my $other_execute =  $mode &amp; S_IXOTH;
+
+    printf &quot;Permissions are %04o\n&quot;, S_IMODE($mode), &quot;\n&quot;;
+
+    my $is_setuid     =  $mode &amp; S_ISUID;
+    my $is_directory  =  S_ISDIR($mode);</code></pre></div>
+<p style="padding-bottom: 10px;">You could write the last two using the <code>-u</code> and <code>-d</code> operators.
+Commonly available <code>S_IF*</code> constants are:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # Permissions: read, write, execute, for user, group, others.
+
+    S_IRWXU S_IRUSR S_IWUSR S_IXUSR
+    S_IRWXG S_IRGRP S_IWGRP S_IXGRP
+    S_IRWXO S_IROTH S_IWOTH S_IXOTH
+
+    # Setuid/Setgid/Stickiness/SaveText.
+    # Note that the exact meaning of these is system-dependent.
+
+    S_ISUID S_ISGID S_ISVTX S_ISTXT
+
+    # File types.  Not all are necessarily available on
+    # your system.
+
+    S_IFREG S_IFDIR S_IFLNK S_IFBLK S_IFCHR
+    S_IFIFO S_IFSOCK S_IFWHT S_ENFMT
+
+    # The following are compatibility aliases for S_IRUSR,
+    # S_IWUSR, and S_IXUSR.
+
+    S_IREAD S_IWRITE S_IEXEC</code></pre></div>
+<p style="padding-bottom: 10px;">and the <code>S_IF*</code> functions are</p>
+<div style="padding-bottom: 10px;"><pre><code>    S_IMODE($mode)    the part of $mode containing the permission
+                      bits and the setuid/setgid/sticky bits
+
+    S_IFMT($mode)     the part of $mode containing the file type
+                      which can be bit-anded with (for example)
+                      S_IFREG or with the following functions
+
+    # The operators -f, -d, -l, -b, -c, -p, and -S.
+
+    S_ISREG($mode) S_ISDIR($mode) S_ISLNK($mode)
+    S_ISBLK($mode) S_ISCHR($mode) S_ISFIFO($mode) S_ISSOCK($mode)
+
+    # No direct -X operator counterpart, but for the first one
+    # the -g operator is often equivalent.  The ENFMT stands for
+    # record flocking enforcement, a platform-dependent feature.
+
+    S_ISENFMT($mode) S_ISWHT($mode)</code></pre></div>
+<p style="padding-bottom: 10px;">See your native <a href="psi_element://chmod%282%29" style="color:red">chmod(2)</a> and <a href="psi_element://stat%282%29" style="color:red">stat(2)</a> documentation for more details
+about the <code>S_*</code> constants.  To get status info for a symbolic link
+instead of the target file behind the link, use the
+<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a> function.</p>
+<p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fstat">stat in perlport</a>.</p></dd></dl>
