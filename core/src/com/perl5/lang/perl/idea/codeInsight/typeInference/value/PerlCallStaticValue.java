@@ -75,7 +75,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
     }
 
     PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.getOriginalElement());
-    String namespaceName = containingNamespace == null ? null : containingNamespace.getPackageName();
+    String namespaceName = containingNamespace == null ? null : containingNamespace.getNamespaceName();
     if (!StringUtil.isEmpty(namespaceName)) {
       processExportDescriptors(
         project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
@@ -102,7 +102,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
 
     if (!myHasExplicitNamespace && contextElement != null) {
       PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.getOriginalElement());
-      String namespaceName = containingNamespace == null ? null : containingNamespace.getPackageName();
+      String namespaceName = containingNamespace == null ? null : containingNamespace.getNamespaceName();
       if (!StringUtil.isEmpty(namespaceName)) {
         processExportDescriptorsItems(
           project, searchScope, subNames, processor::process, PerlImportsProvider.getAllExportDescriptors(containingNamespace));

@@ -100,7 +100,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
       packageName = packagesToProcess.pullFirst();
       NAMESPACE:
       for (PerlNamespaceDefinitionElement childNamespace : PerlPackageUtil.getChildNamespaces(project, packageName)) {
-        String childNamespaceName = childNamespace.getPackageName();
+        String childNamespaceName = childNamespace.getNamespaceName();
         if (recursionSet.add(childNamespaceName)) {
           for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitionsInPackage(project, childNamespaceName)) {
             if (subName.equals(subDefinition.getSubName()) && subDefinition.getDirectSuperMethod() == this) {

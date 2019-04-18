@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlBuiltInVariable extends PerlImplicitVariableDeclaration {
   public PerlBuiltInVariable(@NotNull PsiManager manager,
                              @NotNull String variableName) {
-    super(manager, variableName, PerlPackageUtil.MAIN_PACKAGE, null, false, false, false, null);
+    super(manager, variableName, PerlPackageUtil.MAIN_NAMESPACE_NAME, null, false, false, false, null);
   }
 
   @Override

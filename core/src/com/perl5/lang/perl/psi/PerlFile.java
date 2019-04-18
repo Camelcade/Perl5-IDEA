@@ -54,7 +54,7 @@ public interface PerlFile
    */
   @Nullable
   default PerlNamespaceDefinitionElement getNamespaceDefinitionElement() {
-    String packageName = getPackageName();
+    String packageName = getNamespaceName();
     if (StringUtil.isEmpty(packageName)) {
       return null;
     }

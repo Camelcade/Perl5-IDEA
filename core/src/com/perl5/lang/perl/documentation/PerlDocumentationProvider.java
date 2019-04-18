@@ -120,7 +120,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
         PsiElement result = null;
 
         // search by link
-        if (StringUtil.isNotEmpty(packageName) && !StringUtil.equals(PerlPackageUtil.MAIN_PACKAGE, packageName)) {
+        if (StringUtil.isNotEmpty(packageName) && !StringUtil.equals(PerlPackageUtil.MAIN_NAMESPACE_NAME, packageName)) {
           result = PerlDocUtil.resolveDocLink(packageName + "/" + ((PerlSubNameElement)contextElement).getName(), contextElement);
         }
 
@@ -163,7 +163,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
       String packageName = ((PerlNamespaceElement)contextElement).getCanonicalName();
 
-      if (StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE, packageName)) {
+      if (StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE, packageName)) {
         return PerlDocUtil.resolveDocLink("perlobj/Inheritance", contextElement);
       }
       else if (StringUtil.isNotEmpty(packageName)) {

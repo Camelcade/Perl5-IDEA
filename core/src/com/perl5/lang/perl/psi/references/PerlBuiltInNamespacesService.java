@@ -36,10 +36,10 @@ public class PerlBuiltInNamespacesService {
 
   public PerlBuiltInNamespacesService(@NotNull Project project) {
     PsiManager psiManager = PsiManager.getInstance(project);
-    myNamespacesMap.put(MAIN_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, MAIN_PACKAGE));
-    myNamespacesMap.put(CORE_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_PACKAGE));
-    myNamespacesMap.put(CORE_GLOBAL_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_GLOBAL_PACKAGE));
-    myNamespacesMap.put(UNIVERSAL_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, UNIVERSAL_PACKAGE));
+    myNamespacesMap.put(MAIN_NAMESPACE_NAME, new PerlBuiltInNamespaceDefinition(psiManager, MAIN_NAMESPACE_NAME));
+    myNamespacesMap.put(CORE_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_NAMESPACE));
+    myNamespacesMap.put(CORE_GLOBAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_GLOBAL_NAMESPACE));
+    myNamespacesMap.put(NAMESPACE_PACKAGE, new PerlBuiltInNamespaceDefinition(psiManager, NAMESPACE_PACKAGE));
   }
 
   @Nullable

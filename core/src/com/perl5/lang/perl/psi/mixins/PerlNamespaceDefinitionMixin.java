@@ -76,7 +76,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   @Nullable
   @Override
   public String getName() {
-    return getPackageName();
+    return getNamespaceName();
   }
 
   @Nullable
@@ -99,16 +99,16 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     PerlNamespaceDefinitionStub stub = getGreenStub();
     if (stub != null) {
-      return stub.getPackageName();
+      return stub.getNamespaceName();
     }
 
-    return getPackageNameHeavy();
+    return computeNamespaceName();
   }
 
-  protected String getPackageNameHeavy() {
+  protected String computeNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     if (namespaceElement != null) {
       return namespaceElement.getCanonicalName();
@@ -147,7 +147,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   }
 
   protected ParentNamespacesNamesCollector getCollector() {
-    return new ParentNamespacesNamesCollector(new ArrayList<>(), getPackageName());
+    return new ParentNamespacesNamesCollector(new ArrayList<>(), getNamespaceName());
   }
 
   @Nullable
@@ -264,7 +264,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
   @Override
   public String toString() {
-    return super.toString() + "@" + getPackageName();
+    return super.toString() + "@" + getNamespaceName();
   }
 
   public static class MroSearcher implements Processor<PsiElement> {

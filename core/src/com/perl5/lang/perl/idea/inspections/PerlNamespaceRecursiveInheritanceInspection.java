@@ -44,9 +44,9 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
           return;
         }
 
-        String packageName = o.getPackageName();
+        String packageName = o.getNamespaceName();
 
-        if (PerlPackageUtil.MAIN_PACKAGE.equals(packageName)) {
+        if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 
@@ -60,9 +60,9 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
 
   private static boolean hasRecursiveInheritance(@NotNull PerlNamespaceDefinitionElement definition,
                                                  @NotNull Set<String> passedWay) {
-    passedWay.add(definition.getPackageName());
+    passedWay.add(definition.getNamespaceName());
     for (PerlNamespaceDefinitionElement element : definition.getParentNamespaceDefinitions()) {
-      if (passedWay.contains(element.getPackageName())) {
+      if (passedWay.contains(element.getNamespaceName())) {
         return true;
       }
       if (hasRecursiveInheritance(element, new THashSet<>(passedWay))) {

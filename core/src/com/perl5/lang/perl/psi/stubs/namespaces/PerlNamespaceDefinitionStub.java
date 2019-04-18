@@ -50,8 +50,8 @@ public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitio
 
   @NotNull
   @Override
-  public String getPackageName() {
-    return myData.getPackageName();
+  public String getNamespaceName() {
+    return myData.getNamespaceName();
   }
 
   @NotNull

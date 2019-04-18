@@ -88,7 +88,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
 
       for (PerlNamespaceDefinitionElement namespaceDefinition : PsiTreeUtil
         .findChildrenOfType(file, PerlNamespaceDefinitionElement.class)) {
-        if (originalPackageName.equals(namespaceDefinition.getPackageName())) {
+        if (originalPackageName.equals(namespaceDefinition.getNamespaceName())) {
           if (refactoring[0] == null) {
             refactoring[0] = RefactoringFactory.getInstance(file.getProject()).createRename(namespaceDefinition, newPackageName);
           }

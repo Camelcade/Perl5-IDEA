@@ -55,7 +55,7 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
   private final Map<String, List<String>> myExportTags;
 
   public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement delegate, @NotNull PerlNamespaceDefinitionStub stub) {
-    super(delegate, stub.getPackageName(), stub.getStubType());
+    super(delegate, stub.getNamespaceName(), stub.getStubType());
     myMroType = stub.getMroType();
     myParentNamespacesNames = stub.getParentNamespacesNames();
     myAnnotations = stub.getAnnotations();
@@ -85,7 +85,7 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
 
   @NotNull
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     return getName();
   }
 
@@ -171,6 +171,6 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
 
   @Override
   public String toString() {
-    return super.toString() + "@" + getPackageName();
+    return super.toString() + "@" + getNamespaceName();
   }
 }

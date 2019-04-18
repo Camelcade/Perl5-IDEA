@@ -125,8 +125,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
 
   @NotNull
   @Override
-  public String getPackageName() {
-    return PerlPackageUtil.MAIN_PACKAGE;
+  public String getNamespaceName() {
+    return PerlPackageUtil.MAIN_NAMESPACE_NAME;
   }
 
   @NotNull

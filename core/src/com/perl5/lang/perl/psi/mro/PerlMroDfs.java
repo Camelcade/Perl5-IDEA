@@ -47,7 +47,7 @@ public class PerlMroDfs extends PerlMro {
                            @NotNull List<String> result) {
     ProgressManager.checkCanceled();
     for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
-      String packageName = namespaceDefinition.getPackageName();
+      String packageName = namespaceDefinition.getNamespaceName();
       if (!recursionMap.contains(packageName)) {
         recursionMap.add(packageName);
         result.add(packageName);

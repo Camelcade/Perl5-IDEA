@@ -48,7 +48,7 @@ public class PerlMroC3 extends PerlMro {
     ProgressManager.checkCanceled();
     Collection<PerlNamespaceDefinitionElement> nextIterationDefinitions = new ArrayList<>();
     for (PerlNamespaceDefinitionElement namespaceDefinition : namespaceDefinitions) {
-      String packageName = namespaceDefinition.getPackageName();
+      String packageName = namespaceDefinition.getNamespaceName();
       if (!recursionMap.contains(packageName)) {
         recursionMap.add(packageName);
         result.add(packageName);

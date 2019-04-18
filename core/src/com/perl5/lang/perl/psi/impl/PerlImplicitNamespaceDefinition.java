@@ -35,13 +35,13 @@ import java.util.Map;
 
 public class PerlImplicitNamespaceDefinition extends PerlImplicitElement implements PerlNamespaceDefinitionWithIdentifier {
   @NotNull
-  private final String myPackageName;
+  private final String myNamespaceName;
 
   public PerlImplicitNamespaceDefinition(@NotNull PsiManager manager,
-                                         @NotNull String packageName,
+                                         @NotNull String namespaceName,
                                          @Nullable PsiElement parent) {
     super(manager, parent);
-    myPackageName = PerlPackageUtil.getCanonicalPackageName(packageName);
+    myNamespaceName = PerlPackageUtil.getCanonicalPackageName(namespaceName);
   }
 
   @Override
@@ -57,13 +57,13 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
 
   @Override
   public String getName() {
-    return getPackageName();
+    return getNamespaceName();
   }
 
   @NotNull
   @Override
-  public String getPackageName() {
-    return myPackageName;
+  public String getNamespaceName() {
+    return myNamespaceName;
   }
 
   @Nullable
@@ -110,13 +110,13 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
 
     PerlImplicitNamespaceDefinition that = (PerlImplicitNamespaceDefinition)o;
 
-    return getPackageName() != null ? getPackageName().equals(that.getPackageName()) : that.getPackageName() == null;
+    return getNamespaceName() != null ? getNamespaceName().equals(that.getNamespaceName()) : that.getNamespaceName() == null;
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + (getPackageName() != null ? getPackageName().hashCode() : 0);
+    result = 31 * result + (getNamespaceName() != null ? getNamespaceName().hashCode() : 0);
     return result;
   }
 

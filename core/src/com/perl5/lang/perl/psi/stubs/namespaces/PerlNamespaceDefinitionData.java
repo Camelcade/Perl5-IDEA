@@ -35,7 +35,7 @@ import java.util.Objects;
  */
 public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
   @NotNull
-  private final String myPackageName;
+  private final String myNamespaceName;
   @NotNull
   private final PerlMroType myMroType;
   @NotNull
@@ -50,7 +50,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
   private final PerlNamespaceAnnotations myPerlNamespaceAnnotations;
 
   public PerlNamespaceDefinitionData(@NotNull PerlNamespaceDefinition namespaceDefinition) {
-    this(Objects.requireNonNull(namespaceDefinition.getPackageName()), namespaceDefinition);
+    this(Objects.requireNonNull(namespaceDefinition.getNamespaceName()), namespaceDefinition);
   }
 
   public PerlNamespaceDefinitionData(@NotNull String namespaceName, @NotNull PerlNamespaceDefinition namespaceDefinition) {
@@ -64,14 +64,14 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     );
   }
 
-  private PerlNamespaceDefinitionData(@NotNull String packageName,
+  private PerlNamespaceDefinitionData(@NotNull String namespaceName,
                                       @NotNull PerlMroType mroType,
                                       @NotNull List<String> parentNamespaces,
                                       @NotNull List<String> EXPORT,
                                       @NotNull List<String> EXPORT_OK,
                                       @NotNull Map<String, List<String>> EXPORT_TAGS,
                                       @Nullable PerlNamespaceAnnotations perlNamespaceAnnotations) {
-    myPackageName = packageName;
+    myNamespaceName = namespaceName;
     myMroType = mroType;
     myParentNamespaces = parentNamespaces;
     myEXPORT = EXPORT;
@@ -94,8 +94,8 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
 
   @NotNull
   @Override
-  public String getPackageName() {
-    return myPackageName;
+  public String getNamespaceName() {
+    return myNamespaceName;
   }
 
   @NotNull
@@ -123,7 +123,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
   }
 
   public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(getPackageName());
+    dataStream.writeName(getNamespaceName());
     dataStream.writeName(getMroType().toString());
     PerlStubSerializationUtil.writeStringsList(dataStream, getParentNamespacesNames());
     PerlStubSerializationUtil.writeStringsList(dataStream, getEXPORT());

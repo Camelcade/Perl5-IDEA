@@ -47,6 +47,6 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
 
   @Override
   public String toString() {
-    return getPackageName();
+    return getNamespaceName();
   }
 }

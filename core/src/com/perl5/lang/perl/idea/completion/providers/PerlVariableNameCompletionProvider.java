@@ -178,7 +178,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       return;
     }
 
-    String packageName = namespaceContainer.getPackageName();
+    String packageName = namespaceContainer.getNamespaceName();
 
     if (StringUtil.isEmpty(packageName)) // incomplete package definition
     {

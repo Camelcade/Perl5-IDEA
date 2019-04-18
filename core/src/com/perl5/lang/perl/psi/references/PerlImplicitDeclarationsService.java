@@ -39,7 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_PACKAGE;
+import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_NAMESPACE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 /**
@@ -141,11 +141,11 @@ public class PerlImplicitDeclarationsService {
       return;
     }
     PerlImplicitSubDefinition subDefinition;
-    if (PerlPackageUtil.CORE_PACKAGE.equals(namespaceName)) {
+    if (PerlPackageUtil.CORE_NAMESPACE.equals(namespaceName)) {
       subDefinition = new PerlBuiltInSubDefinition(
         myPsiManager,
         subName,
-        PerlPackageUtil.CORE_PACKAGE,
+        PerlPackageUtil.CORE_NAMESPACE,
         readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
         null
       );
@@ -209,7 +209,7 @@ public class PerlImplicitDeclarationsService {
 
   @Nullable
   public PerlSubDefinitionElement getCoreSub(@Nullable String subName) {
-    return getSub(CORE_PACKAGE, subName);
+    return getSub(CORE_NAMESPACE, subName);
   }
 
   @Nullable

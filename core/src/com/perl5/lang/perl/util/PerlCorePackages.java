@@ -440,12 +440,12 @@ public interface PerlCorePackages {
     "Unicode::Collate",
     "Unicode::Normalize",
     "Unicode::UCD",
-    PerlPackageUtil.UNIVERSAL_PACKAGE,
+    PerlPackageUtil.NAMESPACE_PACKAGE,
     "User::grent",
     "User::pwent",
     "XSLoader",
-    PerlPackageUtil.MAIN_PACKAGE,
-    PerlPackageUtil.CORE_PACKAGE
+    PerlPackageUtil.MAIN_NAMESPACE_NAME,
+    PerlPackageUtil.CORE_NAMESPACE
   ));
 
   Set<String> CORE_PACKAGES_PRAGMAS = new THashSet<>(Arrays.asList(

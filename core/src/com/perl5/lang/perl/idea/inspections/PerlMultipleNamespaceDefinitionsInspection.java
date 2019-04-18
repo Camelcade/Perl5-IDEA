@@ -37,10 +37,10 @@ public class PerlMultipleNamespaceDefinitionsInspection extends PerlInspection {
       @Override
       public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
         Project project = o.getProject();
-        String packageName = o.getPackageName();
+        String packageName = o.getNamespaceName();
         if (packageName != null &&
-            !PerlPackageUtil.MAIN_PACKAGE.equals(packageName) &&
-            PerlPackageUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getPackageName()).size() > 1 &&
+            !PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName) &&
+            PerlPackageUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getNamespaceName()).size() > 1 &&
             o.getNameIdentifier() != null
           ) {
           registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");

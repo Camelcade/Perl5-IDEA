@@ -37,7 +37,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
    * @return canonical package name
    */
   @Nullable
-  String getPackageName();
+  String getNamespaceName();
 
   /**
    * Get mro type for current package

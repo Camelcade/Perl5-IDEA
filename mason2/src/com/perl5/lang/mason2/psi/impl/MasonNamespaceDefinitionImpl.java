@@ -73,7 +73,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
 
   @Nullable
   @Override
-  public String getPackageName() {
+  public String getNamespaceName() {
     String absoluteComponentPath = getAbsoluteComponentPath();
     if (absoluteComponentPath != null) {
       return Mason2Util.getClassnameFromPath(absoluteComponentPath);
@@ -82,9 +82,9 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   }
 
   @Override
-  protected String getPackageNameHeavy() {
+  protected String computeNamespaceName() {
     String packageName = Mason2Util.getVirtualFileClassName(getProject(), MasonCoreUtil.getContainingVirtualFile(getContainingFile()));
-    return packageName == null ? PerlPackageUtil.MAIN_PACKAGE : packageName;
+    return packageName == null ? PerlPackageUtil.MAIN_NAMESPACE_NAME : packageName;
   }
 
   @Override

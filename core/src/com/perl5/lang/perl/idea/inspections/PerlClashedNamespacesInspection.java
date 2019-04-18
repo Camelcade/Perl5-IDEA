@@ -41,8 +41,8 @@ public class PerlClashedNamespacesInspection extends PerlInspection {
         }
 
 
-        String packageName = o.getPackageName();
-        if (PerlPackageUtil.MAIN_PACKAGE.equals(packageName)) {
+        String packageName = o.getNamespaceName();
+        if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 

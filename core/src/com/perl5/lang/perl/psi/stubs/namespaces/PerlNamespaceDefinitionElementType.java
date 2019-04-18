@@ -73,7 +73,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
 
   @Override
   public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink) {
-    String name = stub.getPackageName();
+    String name = stub.getNamespaceName();
     assert name != null;
     sink.occurrence(getDirectKey(), name);
 
@@ -108,6 +108,6 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     PsiElement psi = node.getPsi();
     return psi instanceof PerlNamespaceDefinitionElement &&
            psi.isValid() &&
-           StringUtil.isNotEmpty(((PerlNamespaceDefinitionElement)psi).getPackageName());
+           StringUtil.isNotEmpty(((PerlNamespaceDefinitionElement)psi).getNamespaceName());
   }
 }

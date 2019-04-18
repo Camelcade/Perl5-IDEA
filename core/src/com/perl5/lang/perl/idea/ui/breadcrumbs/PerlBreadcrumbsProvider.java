@@ -42,7 +42,7 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
     return element instanceof PerlFile ||
            element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).getSubName() != null ||
            element instanceof PerlSubExpr && (!(element.getParent() instanceof PerlSubOwner)) ||
-           element instanceof PerlNamespaceDefinitionElement && ((PerlNamespaceDefinitionElement)element).getPackageName() != null;
+           element instanceof PerlNamespaceDefinitionElement && ((PerlNamespaceDefinitionElement)element).getNamespaceName() != null;
   }
 
   @Nullable
@@ -109,7 +109,7 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
       return ((PerlSubDefinition)element).getSubName() + "()";
     }
     else if (element instanceof PerlNamespaceDefinitionElement) {
-      return ((PerlNamespaceDefinition)element).getPackageName();
+      return ((PerlNamespaceDefinition)element).getNamespaceName();
     }
     else if (element instanceof PerlSubExpr) {
       return "sub()";

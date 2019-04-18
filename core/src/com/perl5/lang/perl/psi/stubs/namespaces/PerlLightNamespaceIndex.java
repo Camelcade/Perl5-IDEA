@@ -52,7 +52,7 @@ public class PerlLightNamespaceIndex extends PerlStubIndexBase<PerlPolyNamedElem
       ProgressManager.checkCanceled();
       for (PerlDelegatingLightNamedElement lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement instanceof PerlNamespaceDefinitionElement &&
-            packageName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getPackageName())) {
+            packageName.equals(((PerlNamespaceDefinitionElement)lightNamedElement).getNamespaceName())) {
           if (!processor.process((PerlNamespaceDefinitionElement)lightNamedElement)) {
             return false;
           }

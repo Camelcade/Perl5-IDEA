@@ -325,7 +325,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     if (psiElement instanceof PerlNamespaceDefinitionWithIdentifier) {
       List<StructureViewTreeElement> inheritedResult = new ArrayList<>();
 
-      String packageName = ((PerlNamespaceDefinitionElement)psiElement).getPackageName();
+      String packageName = ((PerlNamespaceDefinitionElement)psiElement).getNamespaceName();
 
       if (packageName != null) {
         for (PsiElement element : PerlMro.getVariants(psiElement, packageName, true)) {

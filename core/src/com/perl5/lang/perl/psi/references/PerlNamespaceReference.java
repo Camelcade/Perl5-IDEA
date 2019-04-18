@@ -55,7 +55,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     String packageName = getPackageName();
     if (packageName.isEmpty()) {
-      packageName = PerlPackageUtil.MAIN_PACKAGE;
+      packageName = PerlPackageUtil.MAIN_NAMESPACE_NAME;
     }
 
     Project project = myElement.getProject();

@@ -39,7 +39,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
   Project getProject() throws PsiInvalidElementAccessException;
 
   default boolean processExportDescriptors(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
-    String namespaceName = getPackageName();
+    String namespaceName = getNamespaceName();
     if (StringUtil.isEmpty(namespaceName)) {
       return true;
     }
@@ -79,7 +79,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
 
   @NotNull
   default List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
-    return PerlPackageUtil.getChildNamespaces(getProject(), getPackageName());
+    return PerlPackageUtil.getChildNamespaces(getProject(), getNamespaceName());
   }
 
   default void getLinearISA(@NotNull Set<String> recursionMap, @NotNull List<String> result) {

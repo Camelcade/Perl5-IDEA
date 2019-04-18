@@ -42,7 +42,7 @@ import java.util.List;
  */
 public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile {
   @NotNull
-  private final String myNamespace;
+  private final String myNamespaceName;
   private List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider) {
@@ -58,7 +58,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
       catch (NoSuchAlgorithmException ignore) {
       }
     }
-    myNamespace = ObjectUtils.notNull(namespaceName, MOJO_SANDBOX_NS_PREFIX);
+    myNamespaceName = ObjectUtils.notNull(namespaceName, MOJO_SANDBOX_NS_PREFIX);
   }
 
   @Override
@@ -78,8 +78,8 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
 
   @NotNull
   @Override
-  public String getPackageName() {
-    return myNamespace;
+  public String getNamespaceName() {
+    return myNamespaceName;
   }
 
   @NotNull

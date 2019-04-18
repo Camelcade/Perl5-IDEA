@@ -57,8 +57,8 @@ public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNames
 
   @NotNull
   @Override
-  public String getPackageName() {
-    return myData.getPackageName();
+  public String getNamespaceName() {
+    return myData.getNamespaceName();
   }
 
   @NotNull

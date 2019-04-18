@@ -93,7 +93,7 @@ public class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
 
   @Override
   public void indexStub(@NotNull PerlFileStub stub, @NotNull IndexSink sink) {
-    sink.occurrence(PerlNamespaceIndex.KEY, stub.getPackageName());
+    sink.occurrence(PerlNamespaceIndex.KEY, stub.getNamespaceName());
   }
 
   @Override

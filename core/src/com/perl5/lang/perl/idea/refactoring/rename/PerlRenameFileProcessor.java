@@ -73,7 +73,7 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
 
               for (PerlNamespaceDefinitionElement namespaceDefinition : PsiTreeUtil
                 .findChildrenOfType(psiFile, PerlNamespaceDefinitionElement.class)) {
-                if (currentPackageName.equals(namespaceDefinition.getPackageName())) {
+                if (currentPackageName.equals(namespaceDefinition.getNamespaceName())) {
                   if (refactoring[0] == null) {
                     refactoring[0] = RefactoringFactory.getInstance(psiFile.getProject()).createRename(namespaceDefinition, newPackageName);
                   }

@@ -54,7 +54,7 @@ public class PerlPackageCompletionUtil {
   @NotNull
   public static LookupElementBuilder getNamespaceLookupElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
     return getPackageLookupElement(
-      namespaceDefinition, ObjectUtils.notNull(namespaceDefinition.getPackageName(), "unnamed"), namespaceDefinition.getIcon(0));
+      namespaceDefinition, ObjectUtils.notNull(namespaceDefinition.getNamespaceName(), "unnamed"), namespaceDefinition.getIcon(0));
   }
 
   /**
@@ -107,7 +107,7 @@ public class PerlPackageCompletionUtil {
     result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(null, __PACKAGE__, PACKAGE_GUTTER_ICON));
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace -> {
-        String name = namespace.getPackageName();
+        String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {
@@ -125,14 +125,14 @@ public class PerlPackageCompletionUtil {
     GlobalSearchScope resolveScope = element.getResolveScope();
 
     PerlBuiltInNamespacesService.getInstance(project).processNamespaces(namespace -> {
-      addExpandablePackageElement(namespace, namespace.getPackageName(), result, prefix);
+      addExpandablePackageElement(namespace, namespace.getNamespaceName(), result, prefix);
       return true;
     });
 
     for (String packageName : PerlPackageUtil.getDefinedPackageNames(project)) {
       PerlPackageUtil.processNamespaces(packageName, project, resolveScope, namespace ->
       {
-        String name = namespace.getPackageName();
+        String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);
           if (firstChar == '_' || Character.isLetterOrDigit(firstChar)) {

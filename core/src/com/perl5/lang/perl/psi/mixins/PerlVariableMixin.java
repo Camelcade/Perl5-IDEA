@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_PACKAGE;
+import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_NAME;
 
 /**
  * Created by hurricup on 24.05.2015.
@@ -67,7 +67,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
       return null;
     }
     else if (qualifiedRanges.first == TextRange.EMPTY_RANGE) {
-      return MAIN_PACKAGE;
+      return MAIN_NAMESPACE_NAME;
     }
     return PerlPackageUtil.getCanonicalPackageName(qualifiedRanges.first.subSequence(variableName).toString());
   }

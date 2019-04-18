@@ -58,7 +58,7 @@ public class MasonNamespaceElementType extends PerlNamespaceDefinitionElementTyp
 
   @Override
   public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink) {
-    String name = stub.getPackageName();
+    String name = stub.getNamespaceName();
     assert name != null;
     sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name);
 

@@ -56,9 +56,9 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
       PerlPackageCompletionUtil.fillWithAllPackageNamesWithAutocompletion(parameters.getPosition(), result);
     }
     else {
-      if (!StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE_FULL, newPrefixMathcer)) {
+      if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {
         LookupElementBuilder newElement =
-          PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(null, PerlPackageUtil.SUPER_PACKAGE_FULL, null);
+          PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null);
         newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
         result.addElement(newElement);
       }
