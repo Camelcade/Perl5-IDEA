@@ -191,7 +191,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
       PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
         if (!typedStringsSet.contains(s)) {
-          resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(s, null));
+          resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(null, s, null));
         }
         return true;
       });

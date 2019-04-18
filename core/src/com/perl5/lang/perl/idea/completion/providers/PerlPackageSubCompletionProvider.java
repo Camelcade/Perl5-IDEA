@@ -58,7 +58,7 @@ public class PerlPackageSubCompletionProvider extends CompletionProvider<Complet
     else {
       if (!StringUtil.equals(PerlPackageUtil.SUPER_PACKAGE_FULL, newPrefixMathcer)) {
         LookupElementBuilder newElement =
-          PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(method.getProject(), PerlPackageUtil.SUPER_PACKAGE_FULL, null);
+          PerlPackageCompletionUtil.getPackageLookupElementWithAutocomplete(null, PerlPackageUtil.SUPER_PACKAGE_FULL, null);
         newElement.putUserData(PerlCompletionWeighter.WEIGHT, -1);
         result.addElement(newElement);
       }

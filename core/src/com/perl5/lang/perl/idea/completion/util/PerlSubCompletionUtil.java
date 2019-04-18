@@ -58,6 +58,7 @@ public class PerlSubCompletionUtil {
   public static LookupElementBuilder getSubDefinitionLookupElement(String subName, PerlSubDefinitionElement subDefinition) {
     LookupElementBuilder newElement = LookupElementBuilder
       .create(subName)
+      .withPsiElement(subDefinition)
       .withIcon(subDefinition.getIcon(0))
       .withStrikeoutness(subDefinition.isDeprecated())
       .withTypeText(subDefinition.getNamespaceName(), true);
@@ -97,6 +98,7 @@ public class PerlSubCompletionUtil {
                                                                     @Nullable PerlExportDescriptor exportDescriptor) {
     return LookupElementBuilder
       .create(subDeclaration.getSubName())
+      .withPsiElement(subDeclaration)
       .withIcon(subDeclaration.getIcon(0))
       .withStrikeoutness(subDeclaration.isDeprecated())
       .withInsertHandler(SUB_SELECTION_HANDLER)
@@ -115,6 +117,7 @@ public class PerlSubCompletionUtil {
     String lookupString = exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName();
     return LookupElementBuilder
       .create(lookupString == null ? "" : lookupString)
+      .withPsiElement(globVariable)
       .withIcon(globVariable.getIcon(0))
       .withInsertHandler(SUB_SELECTION_HANDLER)
       .withTypeText(globVariable.getNamespaceName(), true)
