@@ -83,6 +83,7 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
     myExportTags = exportTags;
   }
 
+  @NotNull
   @Override
   public String getPackageName() {
     return getName();

@@ -123,6 +123,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     myElementsResolveScope = null;
   }
 
+  @NotNull
   @Override
   public String getPackageName() {
     return PerlPackageUtil.MAIN_PACKAGE;

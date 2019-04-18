@@ -19,6 +19,7 @@ package com.perl5.lang.mojolicious.psi.impl;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.filetypes.MojoliciousFileType;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
@@ -40,24 +41,24 @@ import java.util.List;
  * Created by hurricup on 21.07.2015.
  */
 public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile {
-  private String myNamespace;
+  @NotNull
+  private final String myNamespace;
   private List<PerlVariableDeclarationElement> myImplicitVariables;
 
   public MojoliciousFileImpl(@NotNull FileViewProvider viewProvider) {
     super(viewProvider, MojoliciousLanguage.INSTANCE);
     VirtualFile virtualFile = getVirtualFile();
     String canonicalPath = virtualFile == null ? null : virtualFile.getCanonicalPath();
+    String namespaceName = null;
     if (canonicalPath != null) {
       try {
-        myNamespace = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.PACKAGE_SEPARATOR +
-                      new HexBinaryAdapter().marshal(MessageDigest.getInstance("MD5").digest(canonicalPath.getBytes()));
+        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.PACKAGE_SEPARATOR +
+                        new HexBinaryAdapter().marshal(MessageDigest.getInstance("MD5").digest(canonicalPath.getBytes()));
       }
       catch (NoSuchAlgorithmException ignore) {
       }
     }
-    if (myNamespace == null) {
-      myNamespace = MOJO_SANDBOX_NS_PREFIX;
-    }
+    myNamespace = ObjectUtils.notNull(namespaceName, MOJO_SANDBOX_NS_PREFIX);
   }
 
   @Override
@@ -75,6 +76,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     return null;
   }
 
+  @NotNull
   @Override
   public String getPackageName() {
     return myNamespace;

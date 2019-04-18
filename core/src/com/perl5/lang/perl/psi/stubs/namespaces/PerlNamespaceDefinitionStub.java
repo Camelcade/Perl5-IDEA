@@ -48,6 +48,7 @@ public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitio
     return myData;
   }
 
+  @NotNull
   @Override
   public String getPackageName() {
     return myData.getPackageName();
