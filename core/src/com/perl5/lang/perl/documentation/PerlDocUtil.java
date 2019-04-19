@@ -150,6 +150,9 @@ public class PerlDocUtil implements PerlElementTypes {
     String variableName = variable.getName();
 
     if (actualType != null && StringUtil.isNotEmpty(variableName)) {
+      if (variableName.startsWith("^") && variableName.length() > 2) {
+        variableName = "{" + variableName + "}";
+      }
       String text = actualType.getSigil() + variableName;
 
       if (VARIABLES_LINKS.containsKey(text)) {
