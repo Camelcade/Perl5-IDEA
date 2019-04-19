@@ -763,6 +763,9 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
    */
   @NotNull
   public static Pair<TextRange, TextRange> getQualifiedRanges(@NotNull CharSequence text) {
+    if (text.length() == 1) {
+      return Pair.create(null, TextRange.create(0, 1));
+    }
 
     int lastSeparatorOffset = StringUtil.lastIndexOfAny(text, ":'");
 
