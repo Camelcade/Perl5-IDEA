@@ -1794,6 +1794,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(elementAtCaret);
       assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
       PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
+      assertNotNull(targetElement);
       String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
       assertNotNull(generatedDoc);
       sb.append(generatedDoc).append("\n");

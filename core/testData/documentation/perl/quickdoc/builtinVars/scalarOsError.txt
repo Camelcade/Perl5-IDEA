@@ -1,0 +1,29 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$OS_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$ERRNO</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$!
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When referenced, <code>$!</code> retrieves the current value
+of the C <code>errno</code> integer variable.
+If <code>$!</code> is assigned a numerical value, that value is stored in <code>errno</code>.
+When referenced as a string, <code>$!</code> yields the system error string
+corresponding to <code>errno</code>.</p>
+<p style="padding-bottom: 10px;">Many system or library calls set <code>errno</code> if they fail,
+to indicate the cause of failure.  They usually do <B>not</B>
+set <code>errno</code> to zero if they succeed.  This means <code>errno</code>,
+hence <code>$!</code>, is meaningful only <i>immediately</i> after a <B>failure</B>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (open my $fh, &quot;&lt;&quot;, $filename) {
+		# Here $! is meaningless.
+		...
+    }
+    else {
+		# ONLY here is $! meaningful.
+		...
+		# Already here $! might be meaningless.
+    }
+    # Since here we might have either success or failure,
+    # $! is meaningless.</code></pre></div>
+<p style="padding-bottom: 10px;">Here, <i>meaningless</i> means that <code>$!</code> may be unrelated to the outcome
+of the <code>open()</code> operator.  Assignment to <code>$!</code> is similarly ephemeral.
+It can be used immediately before invoking the <code>die()</code> operator,
+to set the exit value, or to inspect the system error string
+corresponding to error <i>n</i>, or to restore <code>$!</code> to a meaningful state.</p>
+<p style="padding-bottom: 10px;">Mnemonic: What just went bang?</p></dd></dl>

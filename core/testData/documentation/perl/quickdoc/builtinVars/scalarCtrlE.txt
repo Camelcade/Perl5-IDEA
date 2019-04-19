@@ -1,0 +1,21 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$EXTENDED_OS_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^E
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Error information specific to the current operating system.  At the
+moment, this differs from <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a></code> under only VMS, OS/2, and Win32 (and
+for MacPerl).  On all other platforms, <code>$^E</code> is always just the same
+as <code>$!</code>.</p>
+<p style="padding-bottom: 10px;">Under VMS, <code>$^E</code> provides the VMS status value from the last system
+error.  This is more specific information about the last system error
+than that provided by <code>$!</code>.  This is particularly important when <code>$!</code>
+is set to <B>EVMSERR</B>.</p>
+<p style="padding-bottom: 10px;">Under OS/2, <code>$^E</code> is set to the error code of the last call to OS/2
+API either via CRT, or directly from perl.</p>
+<p style="padding-bottom: 10px;">Under Win32, <code>$^E</code> always returns the last error information reported
+by the Win32 call <code>GetLastError()</code> which describes the last error
+from within the Win32 API.  Most Win32-specific code will report errors
+via <code>$^E</code>.  ANSI C and Unix-like calls set <code>errno</code> and so most
+portable Perl code will report errors via <code>$!</code>.</p>
+<p style="padding-bottom: 10px;">Caveats mentioned in the description of <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a></code> generally apply to
+<code>$^E</code>, also.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.003.</p>
+<p style="padding-bottom: 10px;">Mnemonic: Extra error explanation.</p></dd></dl>

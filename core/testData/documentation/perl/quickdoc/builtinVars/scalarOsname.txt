@@ -1,0 +1,13 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$OSNAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^O
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The name of the operating system under which this copy of Perl was
+built, as determined during the configuration process.  For examples
+see <a href="psi_element://perlport%2FPLATFORMS">PLATFORMS in perlport</a>.</p>
+<p style="padding-bottom: 10px;">The value is identical to <code>$Config{'osname'}</code>.  See also <a href="psi_element://Config" style="color:red">Config</a>
+and the <B>-V</B> command-line switch documented in <a href="psi_element://perlrun">perlrun</a>.</p>
+<p style="padding-bottom: 10px;">In Windows platforms, <code>$^O</code> is not very helpful: since it is always
+<code>MSWin32</code>, it doesn't tell the difference between
+95/98/ME/NT/2000/XP/CE/.NET.  Use <code>Win32::GetOSName()</code> or
+Win32::GetOSVersion() (see <a href="psi_element://Win32" style="color:red">Win32</a> and <a href="psi_element://perlport">perlport</a>) to distinguish
+between the variants.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.003.</p></dd></dl>

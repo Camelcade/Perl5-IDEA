@@ -1,0 +1,12 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$^M</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">By default, running out of memory is an untrappable, fatal error.
+However, if suitably built, Perl can use the contents of <code>$^M</code>
+as an emergency memory pool after <code>die()</code>ing.  Suppose that your Perl
+were compiled with <code>-DPERL_EMERGENCY_SBRK</code> and used Perl's malloc.
+Then</p>
+<div style="padding-bottom: 10px;"><pre><code>    $^M = 'a' x (1 &lt;&lt; 16);</code></pre></div>
+<p style="padding-bottom: 10px;">would allocate a 64K buffer for use in an emergency.  See the
+<i>INSTALL</i> file in the Perl distribution for information on how to
+add custom C compilation flags when compiling perl.  To discourage casual
+use of this advanced feature, there is no <a href="psi_element://English" style="color:red">English</a> long name for
+this variable.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.004.</p></dd></dl>

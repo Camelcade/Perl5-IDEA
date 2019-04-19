@@ -1,0 +1,6 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FDeprecated+and+removed+variables">Deprecated and removed variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$*</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;"><code>$*</code> was a variable that you could use to enable multiline matching.
+After a deprecation cycle, its magic was removed in Perl v5.10.0.
+Using it now triggers a warning: <code>$* is no longer supported</code>.
+You should use the <code>/s</code> and <code>/m</code> regexp modifiers instead.</p>
+<p style="padding-bottom: 10px;">Deprecated in Perl 5.</p>
+<p style="padding-bottom: 10px;">Removed in Perl v5.10.0.</p></dd></dl>

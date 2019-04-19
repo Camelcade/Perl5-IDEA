@@ -1,0 +1,11 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$EVAL_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$@
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The Perl error from the last <code>eval</code> operator, i.e. the last exception that
+was caught.  For <code>eval BLOCK</code>, this is either a runtime error message or the
+string or reference <code>die</code> was called with.  The <code>eval STRING</code> form also
+catches syntax errors and other compile time exceptions.</p>
+<p style="padding-bottom: 10px;">If no error occurs, <code>eval</code> sets <code>$@</code> to the empty string.</p>
+<p style="padding-bottom: 10px;">Warning messages are not collected in this variable.  You can, however,
+set up a routine to process warnings by setting <code>$SIG{__WARN__}</code> as
+described in <a href="psi_element://pod%3A%3Aperlvar%2F%25SIG">%SIG</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: Where was the error &quot;at&quot;?</p></dd></dl>

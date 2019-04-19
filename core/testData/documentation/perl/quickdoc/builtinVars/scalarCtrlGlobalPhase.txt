@@ -1,0 +1,68 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+the+interpreter+state">Variables related to the interpreter state</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^GLOBAL_PHASE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current phase of the perl interpreter.</p>
+<p style="padding-bottom: 10px;">Possible values are:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">CONSTRUCT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The <code>PerlInterpreter*</code> is being constructed via <code>perl_construct</code>.  This
+value is mostly there for completeness and for use via the
+underlying C variable <code>PL_phase</code>.  It's not really possible for Perl
+code to be executed unless construction of the interpreter is
+finished.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">START</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is the global compile-time.  That includes, basically, every
+<code>BEGIN</code> block executed directly or indirectly from during the
+compile-time of the top-level program.</p>
+<p style="padding-bottom: 10px;">This phase is not called &quot;BEGIN&quot; to avoid confusion with
+<code>BEGIN</code>-blocks, as those are executed during compile-time of any
+compilation unit, not just the top-level program.  A new, localised
+compile-time entered at run-time, for example by constructs as
+<code>eval &quot;use SomeModule&quot;</code> are not global interpreter phases, and
+therefore aren't reflected by <code>${^GLOBAL_PHASE}</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">CHECK</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Execution of any <code>CHECK</code> blocks.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">INIT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Similar to &quot;CHECK&quot;, but for <code>INIT</code>-blocks, not <code>CHECK</code> blocks.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">RUN</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The main run-time, i.e. the execution of <code>PL_main_root</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">END</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Execution of any <code>END</code> blocks.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">DESTRUCT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Global destruction.</p></dd></dl>
+<p style="padding-bottom: 10px;">Also note that there's no value for UNITCHECK-blocks.  That's because
+those are run for each compilation unit individually, and therefore is
+not a global interpreter phase.</p>
+<p style="padding-bottom: 10px;">Not every program has to go through each of the possible phases, but
+transition from one phase to another can only happen in the order
+described in the above list.</p>
+<p style="padding-bottom: 10px;">An example of all of the phases Perl code can see:</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { print &quot;compile-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    INIT  { print &quot;init-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    CHECK { print &quot;check-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    {
+        package Print::Phase;
+
+        sub new {
+            my ($class, $time) = @_;
+            return bless \$time, $class;
+        }
+
+        sub DESTROY {
+            my $self = shift;
+            print &quot;$$self: ${^GLOBAL_PHASE}\n&quot;;
+        }
+    }
+
+    print &quot;run-time: ${^GLOBAL_PHASE}\n&quot;;
+
+    my $runtime = Print::Phase-&gt;new(
+        &quot;lexical variables are garbage collected before END&quot;
+    );
+
+    END   { print &quot;end-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    our $destruct = Print::Phase-&gt;new(
+        &quot;package variables are garbage collected after END&quot;
+    );</code></pre></div>
+<p style="padding-bottom: 10px;">This will print out</p>
+<div style="padding-bottom: 10px;"><pre><code>    compile-time: START
+    check-time: CHECK
+    init-time: INIT
+    run-time: RUN
+    lexical variables are garbage collected before END: RUN
+    end-time: END
+    package variables are garbage collected after END: DESTRUCT</code></pre></div>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.14.0.</p></dd></dl>

@@ -1,0 +1,23 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$EFFECTIVE_GROUP_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$EGID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$)
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The effective gid of this process.  If you are on a machine that
+supports membership in multiple groups simultaneously, gives a space
+separated list of groups you are in.  The first number is the one
+returned by <code>getegid()</code>, and the subsequent ones by <code>getgroups()</code>,
+one of which may be the same as the first number.</p>
+<p style="padding-bottom: 10px;">Similarly, a value assigned to <code>$)</code> must also be a space-separated
+list of numbers.  The first number sets the effective gid, and
+the rest (if any) are passed to <code>setgroups()</code>.  To get the effect of an
+empty list for <code>setgroups()</code>, just repeat the new effective gid; that is,
+to force an effective gid of 5 and an effectively empty <code>setgroups()</code>
+list, say <code>$) = &quot;5 5&quot;</code>.</p>
+<p style="padding-bottom: 10px;">You can change both the effective gid and the real gid at the same
+time by using <code>POSIX::setgid()</code> (use only a single numeric argument).
+Changes to <code>$)</code> require a check to <code>$!</code> to detect any possible errors
+after an attempted change.</p>
+<p style="padding-bottom: 10px;"><code>$&lt;</code>, <code>$&gt;</code>, <code>$(</code> and <code>$)</code> can be set only on
+machines that support the corresponding <i>set[re][ug]id()</i> routine.  <code>$(</code>
+and <code>$)</code> can be swapped only on machines supporting <code>setregid()</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: parentheses are used to <i>group</i> things.  The effective gid
+is the group that's <i>right</i> for you, if you're running setgid.</p></dd></dl>

@@ -1,0 +1,78 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">%SIG</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The hash <code>%SIG</code> contains signal handlers for signals.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub handler {   # 1st argument is signal name
+	my($sig) = @_;
+	print &quot;Caught a SIG$sig--shutting down\n&quot;;
+	close(LOG);
+	exit(0);
+	}
+
+    $SIG{'INT'}  = \&amp;handler;
+    $SIG{'QUIT'} = \&amp;handler;
+    ...
+    $SIG{'INT'}  = 'DEFAULT';   # restore default action
+    $SIG{'QUIT'} = 'IGNORE';    # ignore SIGQUIT</code></pre></div>
+<p style="padding-bottom: 10px;">Using a value of <code>'IGNORE'</code> usually has the effect of ignoring the
+signal, except for the <code>CHLD</code> signal.  See <a href="psi_element://perlipc">perlipc</a> for more about
+this special case.</p>
+<p style="padding-bottom: 10px;">Here are some other examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $SIG{&quot;PIPE&quot;} = &quot;Plumber&quot;;   # assumes main::Plumber (not
+				# recommended)
+    $SIG{&quot;PIPE&quot;} = \&amp;Plumber;   # just fine; assume current
+				# Plumber
+    $SIG{&quot;PIPE&quot;} = *Plumber;    # somewhat esoteric
+    $SIG{&quot;PIPE&quot;} = Plumber();   # oops, what did Plumber()
+				# return??</code></pre></div>
+<p style="padding-bottom: 10px;">Be sure not to use a bareword as the name of a signal handler,
+lest you inadvertently call it.</p>
+<p style="padding-bottom: 10px;">If your system has the <code>sigaction()</code> function then signal handlers
+are installed using it.  This means you get reliable signal handling.</p>
+<p style="padding-bottom: 10px;">The default delivery policy of signals changed in Perl v5.8.0 from
+immediate (also known as &quot;unsafe&quot;) to deferred, also known as &quot;safe
+signals&quot;.  See <a href="psi_element://perlipc">perlipc</a> for more information.</p>
+<p style="padding-bottom: 10px;">Certain internal hooks can be also set using the <code>%SIG</code> hash.  The
+routine indicated by <code>$SIG{__WARN__}</code> is called when a warning
+message is about to be printed.  The warning message is passed as the
+first argument.  The presence of a <code>__WARN__</code> hook causes the
+ordinary printing of warnings to <code>STDERR</code> to be suppressed.  You can
+use this to save warnings in a variable, or turn warnings into fatal
+errors, like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $SIG{__WARN__} = sub { die $_[0] };
+    eval $proggie;</code></pre></div>
+<p style="padding-bottom: 10px;">As the <code>'IGNORE'</code> hook is not supported by <code>__WARN__</code>, you can
+disable warnings using the empty subroutine:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $SIG{__WARN__} = sub {};</code></pre></div>
+<p style="padding-bottom: 10px;">The routine indicated by <code>$SIG{__DIE__}</code> is called when a fatal
+exception is about to be thrown.  The error message is passed as the
+first argument.  When a <code>__DIE__</code> hook routine returns, the exception
+processing continues as it would have in the absence of the hook,
+unless the hook routine itself exits via a <code>goto &amp;sub</code>, a loop exit,
+or a <code>die()</code>.  The <code>__DIE__</code> handler is explicitly disabled during
+the call, so that you can die from a <code>__DIE__</code> handler.  Similarly
+for <code>__WARN__</code>.</p>
+<p style="padding-bottom: 10px;">The <code>$SIG{__DIE__}</code> hook is called even inside an <code>eval()</code>. It was
+never intended to happen this way, but an implementation glitch made
+this possible. This used to be deprecated, as it allowed strange action
+at a distance like rewriting a pending exception in <code>$@</code>. Plans to
+rectify this have been scrapped, as users found that rewriting a 
+pending exception is actually a useful feature, and not a bug.</p>
+<p style="padding-bottom: 10px;"><code>__DIE__</code>/<code>__WARN__</code> handlers are very special in one respect: they
+may be called to report (probable) errors found by the parser.  In such
+a case the parser may be in inconsistent state, so any attempt to
+evaluate Perl code from such a handler will probably result in a
+segfault.  This means that warnings or errors that result from parsing
+Perl should be used with extreme caution, like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    require Carp if defined $^S;
+    Carp::confess(&quot;Something wrong&quot;) if defined &amp;Carp::confess;
+    die &quot;Something wrong, but could not load Carp to give &quot;
+      . &quot;backtrace...\n\t&quot;
+      . &quot;To see backtrace try starting Perl with -MCarp switch&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Here the first line will load <code>Carp</code> <i>unless</i> it is the parser who
+called the handler.  The second line will print backtrace and die if
+<code>Carp</code> was available.  The third line will be executed only if <code>Carp</code> was
+not available.</p>
+<p style="padding-bottom: 10px;">Having to even think about the <code>$^S</code> variable in your exception
+handlers is simply wrong.  <code>$SIG{__DIE__}</code> as currently implemented
+invites grievous and difficult to track down errors.  Avoid it
+and use an <code>END{}</code> or CORE::GLOBAL::die override instead.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlfunc%2Fdie">die in perlfunc</a>, <a href="psi_element://perlfunc%2Fwarn">warn in perlfunc</a>, <a href="psi_element://perlfunc%2Feval">eval in perlfunc</a>, and
+<a href="psi_element://warnings" style="color:red">warnings</a> for additional information.</p></dd></dl>

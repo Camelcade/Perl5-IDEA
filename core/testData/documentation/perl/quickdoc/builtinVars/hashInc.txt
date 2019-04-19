@@ -1,0 +1,11 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">%INC</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The hash <code>%INC</code> contains entries for each filename included via the
+<code>do</code>, <code>require</code>, or <code>use</code> operators.  The key is the filename
+you specified (with module names converted to pathnames), and the
+value is the location of the file found.  The <code>require</code>
+operator uses this hash to determine whether a particular file has
+already been included.</p>
+<p style="padding-bottom: 10px;">If the file was loaded via a hook (e.g. a subroutine reference, see
+<a href="psi_element://perlfunc%2Frequire">require in perlfunc</a> for a description of these hooks), this hook is
+by default inserted into <code>%INC</code> in place of a filename.  Note, however,
+that the hook may have set the <code>%INC</code> entry by itself to provide some more
+specific info.</p></dd></dl>

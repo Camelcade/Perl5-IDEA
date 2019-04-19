@@ -1,0 +1,20 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FDeprecated+and+removed+variables">Deprecated and removed variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$[</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This variable stores the index of the first element in an array, and
+of the first character in a substring.  The default is 0, but you could
+theoretically set it to 1 to make Perl behave more like <B>awk</B> (or Fortran)
+when subscripting and when evaluating the index() and substr() functions.</p>
+<p style="padding-bottom: 10px;">As of release 5 of Perl, assignment to <code>$[</code> is treated as a compiler
+directive, and cannot influence the behavior of any other file.
+(That's why you can only assign compile-time constants to it.)
+Its use is highly discouraged.</p>
+<p style="padding-bottom: 10px;">Prior to Perl v5.10.0, assignment to <code>$[</code> could be seen from outer lexical
+scopes in the same file, unlike other compile-time directives (such as
+<a href="psi_element://strict" style="color:red">strict</a>).  Using local() on it would bind its value strictly to a lexical
+block.  Now it is always lexically scoped.</p>
+<p style="padding-bottom: 10px;">As of Perl v5.16.0, it is implemented by the <a href="psi_element://arybase" style="color:red">arybase</a> module.  See
+<a href="psi_element://arybase" style="color:red">arybase</a> for more details on its behaviour.</p>
+<p style="padding-bottom: 10px;">Under <code>use v5.16</code>, or <code>no feature &quot;array_base&quot;</code>, <code>$[</code> no longer has any
+effect, and always contains 0.  Assigning 0 to it is permitted, but any
+other value will produce an error.</p>
+<p style="padding-bottom: 10px;">Mnemonic: [ begins subscripts.</p>
+<p style="padding-bottom: 10px;">Deprecated in Perl v5.12.0.</p>
+<p style="padding-bottom: 10px;">Assigning a non-zero value be fatal in Perl v5.30.0.</p></dd></dl>

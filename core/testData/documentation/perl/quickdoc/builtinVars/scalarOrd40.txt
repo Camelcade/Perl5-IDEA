@@ -1,0 +1,19 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$REAL_GROUP_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$GID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$(
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The real gid of this process.  If you are on a machine that supports
+membership in multiple groups simultaneously, gives a space separated
+list of groups you are in.  The first number is the one returned by
+<code>getgid()</code>, and the subsequent ones by <code>getgroups()</code>, one of which may be
+the same as the first number.</p>
+<p style="padding-bottom: 10px;">However, a value assigned to <code>$(</code> must be a single number used to
+set the real gid.  So the value given by <code>$(</code> should <i>not</i> be assigned
+back to <code>$(</code> without being forced numeric, such as by adding zero.  Note
+that this is different to the effective gid (<code>$)</code>) which does take a
+list.</p>
+<p style="padding-bottom: 10px;">You can change both the real gid and the effective gid at the same
+time by using <code>POSIX::setgid()</code>.  Changes
+to <code>$(</code> require a check to <code>$!</code>
+to detect any possible errors after an attempted change.</p>
+<p style="padding-bottom: 10px;">Mnemonic: parentheses are used to <i>group</i> things.  The real gid is the
+group you <i>left</i>, if you're running setgid.</p></dd></dl>

@@ -1,0 +1,8 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^CHILD_ERROR_NATIVE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The native status returned by the last pipe close, backtick (<code>``</code>)
+command, successful call to <code>wait()</code> or <code>waitpid()</code>, or from the
+<code>system()</code> operator.  On POSIX-like systems this value can be decoded
+with the WIFEXITED, WEXITSTATUS, WIFSIGNALED, WTERMSIG, WIFSTOPPED,
+WSTOPSIG and WIFCONTINUED functions provided by the <a href="psi_element://POSIX" style="color:red">POSIX</a> module.</p>
+<p style="padding-bottom: 10px;">Under VMS this reflects the actual VMS exit status; i.e. it is the
+same as <code>$?</code> when the pragma <code>use vmsish 'status'</code> is in effect.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p></dd></dl>

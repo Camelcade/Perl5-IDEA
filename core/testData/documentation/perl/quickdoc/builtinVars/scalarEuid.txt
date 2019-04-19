@@ -1,0 +1,12 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$EFFECTIVE_USER_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$EUID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$&gt;
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The effective uid of this process.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $&lt; = $&gt;;            # set real to effective uid
+    ($&lt;,$&gt;) = ($&gt;,$&lt;);  # swap real and effective uids</code></pre></div>
+<p style="padding-bottom: 10px;">You can change both the effective uid and the real uid at the same
+time by using <code>POSIX::setuid()</code>.  Changes to <code>$&gt;</code> require a check
+to <code>$!</code> to detect any possible errors after an attempted change.</p>
+<p style="padding-bottom: 10px;"><code>$&lt;</code> and <code>$&gt;</code> can be swapped only on machines
+supporting <code>setreuid()</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: it's the uid you went <i>to</i>, if you're running setuid.</p></dd></dl>

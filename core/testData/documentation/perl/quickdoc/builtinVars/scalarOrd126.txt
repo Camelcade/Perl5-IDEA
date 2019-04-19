@@ -1,0 +1,8 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+filehandles">Variables related to filehandles</a>: <a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+formats">Variables related to formats</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;format_name(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_NAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$~
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The name of the current report format for the currently selected
+output channel.  The default format name is the same as the filehandle
+name.  For example, the default format name for the <code>STDOUT</code>
+filehandle is just <code>STDOUT</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: brother to <code>$^</code>.</p></dd></dl>

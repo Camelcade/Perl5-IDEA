@@ -1,0 +1,8 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+filehandles">Variables related to filehandles</a>: <a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+formats">Variables related to formats</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$ACCUMULATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^A
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the <code>write()</code> accumulator for <code>format()</code> lines.
+A format contains <code>formline()</code> calls that put their result into
+<code>$^A</code>.  After calling its format, <code>write()</code> prints out the contents
+of <code>$^A</code> and empties.  So you never really see the contents of <code>$^A</code>
+unless you call <code>formline()</code> yourself and then look at it.  See
+<a href="psi_element://perlform">perlform</a> and <a href="psi_element://perlfunc%2Fformline+PICTURE%2CLIST">formline PICTURE,LIST in perlfunc</a>.</p></dd></dl>

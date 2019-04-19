@@ -1,0 +1,23 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$CHILD_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$?
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The status returned by the last pipe close, backtick (<code>``</code>) command,
+successful call to <code>wait()</code> or <code>waitpid()</code>, or from the <code>system()</code>
+operator.  This is just the 16-bit status word returned by the
+traditional Unix <code>wait()</code> system call (or else is made up to look
+like it).  Thus, the exit value of the subprocess is really (<code>$? &gt;&gt;
+8</code>), and <code>$? &amp; 127</code> gives which signal, if any, the process died
+from, and <code>$? &amp; 128</code> reports whether there was a core dump.</p>
+<p style="padding-bottom: 10px;">Additionally, if the <code>h_errno</code> variable is supported in C, its value
+is returned via <code>$?</code> if any <code>gethost*()</code> function fails.</p>
+<p style="padding-bottom: 10px;">If you have installed a signal handler for <code>SIGCHLD</code>, the
+value of <code>$?</code> will usually be wrong outside that handler.</p>
+<p style="padding-bottom: 10px;">Inside an <code>END</code> subroutine <code>$?</code> contains the value that is going to be
+given to <code>exit()</code>.  You can modify <code>$?</code> in an <code>END</code> subroutine to
+change the exit status of your program.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    END {
+	$? = 1 if $? == 255;  # die would make it 255
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Under VMS, the pragma <code>use vmsish 'status'</code> makes <code>$?</code> reflect the
+actual VMS exit status, instead of the default emulation of POSIX
+status; see <a href="psi_element://perlvms%2F%24%3F">$? in perlvms</a> for details.</p>
+<p style="padding-bottom: 10px;">Mnemonic: similar to <B>sh</B> and <B>ksh</B>.</p></dd></dl>

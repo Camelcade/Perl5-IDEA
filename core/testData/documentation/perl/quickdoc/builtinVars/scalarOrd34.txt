@@ -1,0 +1,9 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$LIST_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$&quot;
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When an array or an array slice is interpolated into a double-quoted
+string or a similar context such as <code>/.../</code>, its elements are
+separated by this value.  Default is a space.  For example, this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;The array is: @array\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">is equivalent to this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;The array is: &quot; . join($&quot;, @array) . &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Mnemonic: works in double-quoted context.</p></dd></dl>

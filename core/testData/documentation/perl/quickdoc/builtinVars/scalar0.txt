@@ -1,0 +1,36 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$PROGRAM_NAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$0
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Contains the name of the program being executed.</p>
+<p style="padding-bottom: 10px;">On some (but not all) operating systems assigning to <code>$0</code> modifies
+the argument area that the <code>ps</code> program sees.  On some platforms you
+may have to use special <code>ps</code> options or a different <code>ps</code> to see the
+changes.  Modifying the <code>$0</code> is more useful as a way of indicating the
+current program state than it is for hiding the program you're
+running.</p>
+<p style="padding-bottom: 10px;">Note that there are platform-specific limitations on the maximum
+length of <code>$0</code>.  In the most extreme case it may be limited to the
+space occupied by the original <code>$0</code>.</p>
+<p style="padding-bottom: 10px;">In some platforms there may be arbitrary amount of padding, for
+example space characters, after the modified name as shown by <code>ps</code>.
+In some platforms this padding may extend all the way to the original
+length of the argument area, no matter what you do (this is the case
+for example with Linux 2.2).</p>
+<p style="padding-bottom: 10px;">Note for BSD users: setting <code>$0</code> does not completely remove &quot;perl&quot;
+from the ps(1) output.  For example, setting <code>$0</code> to <code>&quot;foobar&quot;</code> may
+result in <code>&quot;perl: foobar (perl)&quot;</code> (whether both the <code>&quot;perl: &quot;</code> prefix
+and the &quot; (perl)&quot; suffix are shown depends on your exact BSD variant
+and version).  This is an operating system feature, Perl cannot help it.</p>
+<p style="padding-bottom: 10px;">In multithreaded scripts Perl coordinates the threads so that any
+thread may modify its copy of the <code>$0</code> and the change becomes visible
+to ps(1) (assuming the operating system plays along).  Note that
+the view of <code>$0</code> the other threads have will not change since they
+have their own copies of it.</p>
+<p style="padding-bottom: 10px;">If the program has been given to perl via the switches <code>-e</code> or <code>-E</code>,
+<code>$0</code> will contain the string <code>&quot;-e&quot;</code>.</p>
+<p style="padding-bottom: 10px;">On Linux as of perl v5.14.0 the legacy process name will be set with
+<code>prctl(2)</code>, in addition to altering the POSIX name via <code>argv[0]</code> as
+perl has done since version 4.000.  Now system utilities that read the
+legacy process name such as ps, top and killall will recognize the
+name you set when assigning to <code>$0</code>.  The string you supply will be
+cut off at 16 bytes, this is a limitation imposed by Linux.</p>
+<p style="padding-bottom: 10px;">Mnemonic: same as <B>sh</B> and <B>ksh</B>.</p></dd></dl>

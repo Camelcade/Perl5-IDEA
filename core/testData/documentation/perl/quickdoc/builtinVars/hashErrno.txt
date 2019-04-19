@@ -1,0 +1,14 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">%OS_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%ERRNO</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%!
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Each element of <code>%!</code> has a true value only if <code>$!</code> is set to that
+value.  For example, <code>$!{ENOENT}</code> is true if and only if the current
+value of <code>$!</code> is <code>ENOENT</code>; that is, if the most recent error was &quot;No
+such file or directory&quot; (or its moral equivalent: not all operating
+systems give that exact error, and certainly not all languages).  The
+specific true value is not guaranteed, but in the past has generally
+been the numeric value of <code>$!</code>.  To check if a particular key is
+meaningful on your system, use <code>exists $!{the_key}</code>; for a list of legal
+keys, use <code>keys %!</code>.  See <a href="psi_element://Errno" style="color:red">Errno</a> for more information, and also see
+<a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.005.</p></dd></dl>

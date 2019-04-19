@@ -1,0 +1,5 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+regular+expressions">Variables related to regular expressions</a>: <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$LAST_REGEXP_CODE_RESULT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^R
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result of evaluation of the last successful <code>(?{ code })</code>
+regular expression assertion (see <a href="psi_element://perlre">perlre</a>).  May be written to.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.005.</p></dd></dl>

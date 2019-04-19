@@ -1,0 +1,5 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^WARNING_BITS}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current set of warning checks enabled by the <code>use warnings</code> pragma.
+It has the same scoping as the <code>$^H</code> and <code>%^H</code> variables.  The exact
+values are considered internal to the <a href="psi_element://warnings" style="color:red">warnings</a> pragma and may change
+between versions of Perl.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.6.0.</p></dd></dl>

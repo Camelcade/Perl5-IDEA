@@ -1,0 +1,17 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$SUBSCRIPT_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$SUBSEP</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$;
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The subscript separator for multidimensional array emulation.  If you
+refer to a hash element as</p>
+<div style="padding-bottom: 10px;"><pre><code>    $foo{$x,$y,$z}</code></pre></div>
+<p style="padding-bottom: 10px;">it really means</p>
+<div style="padding-bottom: 10px;"><pre><code>    $foo{join($;, $x, $y, $z)}</code></pre></div>
+<p style="padding-bottom: 10px;">But don't put</p>
+<div style="padding-bottom: 10px;"><pre><code>    @foo{$x,$y,$z}	# a slice--note the @</code></pre></div>
+<p style="padding-bottom: 10px;">which means</p>
+<div style="padding-bottom: 10px;"><pre><code>    ($foo{$x},$foo{$y},$foo{$z})</code></pre></div>
+<p style="padding-bottom: 10px;">Default is &quot;\034&quot;, the same as SUBSEP in <B>awk</B>.  If your keys contain
+binary data there might not be any safe value for <code>$;</code>.</p>
+<p style="padding-bottom: 10px;">Consider using &quot;real&quot; multidimensional arrays as described
+in <a href="psi_element://perllol">perllol</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: comma (the syntactic subscript separator) is a semi-semicolon.</p></dd></dl>

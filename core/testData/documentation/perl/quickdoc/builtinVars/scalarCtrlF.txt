@@ -1,0 +1,11 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$SYSTEM_FD_MAX</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^F
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The maximum system file descriptor, ordinarily 2.  System file
+descriptors are passed to <code>exec()</code>ed processes, while higher file
+descriptors are not.  Also, during an
+<code>open()</code>, system file descriptors are
+preserved even if the <code>open()</code> fails (ordinary file descriptors are
+closed before the <code>open()</code> is attempted).  The close-on-exec
+status of a file descriptor will be decided according to the value of
+<code>$^F</code> when the corresponding file, pipe, or socket was opened, not the
+time of the <code>exec()</code>.</p></dd></dl>

@@ -1,0 +1,14 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$EXCEPTIONS_BEING_CAUGHT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^S
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Current state of the interpreter.</p>
+<div style="padding-bottom: 10px;"><pre><code>	$^S         State
+	---------   -------------------------------------
+	undef       Parsing module, eval, or main program
+	true (1)    Executing an eval
+	false (0)   Otherwise</code></pre></div>
+<p style="padding-bottom: 10px;">The first state may happen in <code>$SIG{__DIE__}</code> and <code>$SIG{__WARN__}</code>
+handlers.</p>
+<p style="padding-bottom: 10px;">The English name $EXCEPTIONS_BEING_CAUGHT is slightly misleading, because
+the <code>undef</code> value does not indicate whether exceptions are being caught,
+since compilation of the main program does not catch exceptions.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.004.</p></dd></dl>

@@ -1,0 +1,5 @@
+<p><a href="psi_element://pod%3A%3Aperlvar">pod::perlvar</a>: <a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$INPLACE_EDIT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^I
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the inplace-edit extension.  Use <code>undef</code> to disable
+inplace editing.</p>
+<p style="padding-bottom: 10px;">Mnemonic: value of <B>-i</B> switch.</p></dd></dl>
