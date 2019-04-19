@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.text.CharSequenceSubSequence;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,7 +74,7 @@ public class PodDocumentPattern {
 
   @NotNull
   public PodDocumentPattern withItemPattern(String itemPattern) {
-    myItemPattern = StringUtil.isEmpty(itemPattern) ? null : itemPattern;
+    myItemPattern = StringUtil.nullize(itemPattern);
     return this;
   }
 
@@ -104,7 +105,7 @@ public class PodDocumentPattern {
 
   @NotNull
   public PodDocumentPattern withHeadingPattern(String pattern) {
-    myHeadingPattern = StringUtil.isEmpty(pattern) ? null : pattern;
+    myHeadingPattern = StringUtil.nullize(pattern);
     return this;
   }
 
@@ -133,7 +134,7 @@ public class PodDocumentPattern {
       return true;
     }
     if (exactMatch) {
-      return StringUtil.isEmptyOrSpaces(text.substring(pattern.length()));
+      return StringUtil.isEmptyOrSpaces(new CharSequenceSubSequence(text, pattern.length(), text.length()));
     }
     // this mimics word boundary
     boolean isNextCharIdentifier = Character.isUnicodeIdentifierPart(text.charAt(pattern.length()));
