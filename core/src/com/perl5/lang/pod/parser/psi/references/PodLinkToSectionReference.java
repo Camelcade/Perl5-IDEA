@@ -65,14 +65,14 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
 
       if (!targetFiles.isEmpty()) {
         List<ResolveResult> results = new ArrayList<>();
-        PodDocumentPattern searchPattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection()).withExactMatch();
+        PodDocumentPattern searchPattern = PodDocumentPattern.exactAnythingPattern(descriptor.getSection());
         for (PsiFile file : targetFiles) {
           PodCompositeElement podCompositeElement = PerlDocUtil.searchPodElement(file, searchPattern);
           if (podCompositeElement != null) {
             results.add(new PsiElementResolveResult(podCompositeElement));
           }
         }
-        return results.toArray(new ResolveResult[results.size()]);
+        return results.toArray(ResolveResult.EMPTY_ARRAY);
       }
     }
 

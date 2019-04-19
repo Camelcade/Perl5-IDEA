@@ -73,7 +73,6 @@ public class PerlDocUtil implements PerlElementTypes {
 
   private static final Map<String, String> OPERATORS_LINKS = new THashMap<>();
   private static final Map<String, String> VARIABLES_LINKS = new THashMap<>();
-  ;
 
   static {
     OPERATORS_LINKS.put("~~", "perlop/\"Smartmatch Operator\"");
@@ -109,12 +108,6 @@ public class PerlDocUtil implements PerlElementTypes {
         {
           PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection());
           return searchPodElement(targetFile, pattern);
-          //					PsiElement targetElement = searchPodElement(targetFile, pattern);
-          //					if (targetElement == null)
-          //					{
-          //						System.err.println("Unable to resolve: " + descriptor.getSection());
-          //					}
-          //					return targetElement;
         }
       }
     }
@@ -160,10 +153,10 @@ public class PerlDocUtil implements PerlElementTypes {
       }
 
       if (variable.isBuiltIn()) {
-        PodDocumentPattern pattern = PodDocumentPattern.itemPattern(text);
+        PodDocumentPattern pattern = PodDocumentPattern.itemPattern(text).withExactMatch();
 
         if (text.matches("\\$[123456789]")) {
-          pattern.setItemPattern("$<digits>");
+          pattern.withItemPattern("$<digits>");
         }
 
         return searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, pattern);
@@ -233,13 +226,13 @@ public class PerlDocUtil implements PerlElementTypes {
     if (element instanceof PerlHeredocOpener ||
         element instanceof PerlHeredocTerminatorElement ||
         element instanceof PerlHeredocElementImpl) {
-      pattern.setIndexKey("heredoc");    // searches with X<>
+      pattern.withIndexPattern("heredoc");    // searches with X<>
     }
     else if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]")) {
-      pattern.setIndexKey("-X");
+      pattern.withIndexPattern("-X");
     }
     else if ("?".equals(text) || ":".equals(text)) {
-      pattern.setIndexKey("?:");
+      pattern.withIndexPattern("?:");
     }
 
     return searchPodElementInFile(project, PodSearchHelper.PERL_OP_FILE_NAME, pattern);
