@@ -14,8 +14,8 @@ Starting from Perl 5.16, one can prefix the switch
 keywords with <code>CORE::</code> to access the feature without a <code>use feature</code>
 statement.  The keywords <code>given</code> and
 <code>when</code> are analogous to <code>switch</code> and
-<code>case</code> in other languages, so the code in the previous section could be
-rewritten as</p>
+<code>case</code> in other languages -- though <code>continue</code> is not -- so the code
+in the previous section could be rewritten as</p>
 <div style="padding-bottom: 10px;"><pre><code>    use v5.10.1;
     for ($var) {
         when (/^abc/) { $abc = 1 }

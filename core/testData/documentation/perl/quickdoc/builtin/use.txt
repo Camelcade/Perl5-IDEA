@@ -10,23 +10,22 @@ package.  It is exactly equivalent to</p>
 <div style="padding-bottom: 10px;"><pre><code>    BEGIN { require Module; Module-&gt;import( LIST ); }</code></pre></div>
 <p style="padding-bottom: 10px;">except that Module <i>must</i> be a bareword.
 The importation can be made conditional by using the <a href="psi_element://if" style="color:red">if</a> module.</p>
-<p style="padding-bottom: 10px;">In the peculiar <code>use VERSION</code> form, VERSION may be either a positive
-decimal fraction such as 5.006, which will be compared to
-<a href="psi_element://perlvar%2F%24%5D">C<$]></a>, or a v-string of the form v5.6.1, which will be
-compared to <a href="psi_element://perlvar%2F%24%5EV">C<$^V></a> (aka $PERL_VERSION).  An
-exception is raised if VERSION is greater than the version of the
-current Perl interpreter; Perl will not attempt to parse the rest of the
-file.  Compare with <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a>, which can do a
-similar check at run time.
-Symmetrically, <code>no VERSION</code> allows you to specify that you want a version
-of Perl older than the specified one.</p>
-<p style="padding-bottom: 10px;">Specifying VERSION as a literal of the form v5.6.1 should generally be
-avoided, because it leads to misleading error messages under earlier
-versions of Perl (that is, prior to 5.6.0) that do not support this
-syntax.  The equivalent numeric version should be used instead.</p>
-<div style="padding-bottom: 10px;"><pre><code>    use v5.6.1;     # compile time version check
-    use 5.6.1;      # ditto
-    use 5.006_001;  # ditto; preferred for backwards compatibility</code></pre></div>
+<p style="padding-bottom: 10px;">In the <code>use VERSION</code> form, VERSION may be either a v-string such as
+v5.24.1, which will be compared to <a href="psi_element://perlvar%2F%24%5EV">C<$^V></a> (aka
+$PERL_VERSION), or a numeric argument of the form 5.024001, which will
+be compared to <a href="psi_element://perlvar%2F%24%5D">C<$]></a>.  An exception is raised if VERSION
+is greater than the version of the current Perl interpreter; Perl will
+not attempt to parse the rest of the file.  Compare with
+<a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a>, which can do a similar check at run
+time.  Symmetrically, <code>no VERSION</code> allows you to specify that you
+want a version of Perl older than the specified one.</p>
+<p style="padding-bottom: 10px;">Specifying VERSION as a numeric argument of the form 5.024001 should
+generally be avoided as older less readable syntax compared to
+v5.24.1. Before perl 5.8.0 released in 2002 the more verbose numeric
+form was the only supported syntax, which is why you might see it in</p>
+<div style="padding-bottom: 10px;"><pre><code>    use v5.24.1;    # compile time version check
+    use 5.24.1;     # ditto
+    use 5.024_001;  # ditto; older syntax compatible with perl 5.6</code></pre></div>
 <p style="padding-bottom: 10px;">This is often useful if you need to check the current Perl version before
 <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a>ing library modules that won't work
 with older versions of Perl.
@@ -72,6 +71,14 @@ class Module with the given version as an argument:</p>
 <p style="padding-bottom: 10px;">The <a href="psi_element://UNIVERSAL%2FC%3CVERSION+%28+%5B+REQUIRE+%5D+%29%3E" style="color:red">default C<VERSION> method</a>,
 inherited from the <a href="psi_element://UNIVERSAL" style="color:red">C<UNIVERSAL></a> class, croaks if the given
 version is larger than the value of the variable <code>$Module::VERSION</code>.</p>
+<p style="padding-bottom: 10px;">The VERSION argument cannot be an arbitrary expression.  It only counts
+as a VERSION argument if it is a version number literal, starting with
+either a digit or <code>v</code> followed by a digit.  Anything that doesn't
+look like a version literal will be parsed as the start of the LIST.
+Nevertheless, many attempts to use an arbitrary expression as a VERSION
+argument will appear to work, because <a href="psi_element://Exporter" style="color:red">Exporter</a>'s <code>import</code> method
+handles numeric arguments specially, performing version checks rather
+than treating them as things to export.</p>
 <p style="padding-bottom: 10px;">Again, there is a distinction between omitting LIST (<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> called with no arguments) and an explicit empty LIST <code>()</code>
 (<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> not called).  Note that there is no comma
 after VERSION!</p>
@@ -85,7 +92,7 @@ pragmas are:</p>
     use strict   qw(subs vars refs);
     use subs     qw(afunc blurfl);
     use warnings qw(all);
-    use sort     qw(stable _quicksort _mergesort);</code></pre></div>
+    use sort     qw(stable);</code></pre></div>
 <p style="padding-bottom: 10px;">Some of these pseudo-modules import semantics into the current
 block scope (like <a href="psi_element://strict" style="color:red">C<strict></a> or <a href="psi_element://integer" style="color:red">C<integer></a>, unlike
 ordinary modules, which import symbols into the current package (which

@@ -7295,7 +7295,7 @@ POD file
             PsiElement(Perl5 POD: POD_NUMBER)('.')
             PsiElement(Perl5 POD: POD_NEWLINE)('\n')
           PsiPodVerbatimParagraphImpl(Perl5 POD: POD_VERBATIM_PARAGRAPH)
-            PsiElement(Perl5 POD: POD_CODE)('    static char * words[] = {"alpha", "beta", "gamma", "delta", NULL};\n\n    static void\n    call_PrintList()\n    {\n        dSP;\n\n        call_argv("PrintList", G_DISCARD, words);\n    }\n')
+            PsiElement(Perl5 POD: POD_CODE)('    static char * words[] = {"alpha", "beta", "gamma", "delta", NULL};\n\n    static void\n    call_PrintList()\n    {\n        call_argv("PrintList", G_DISCARD, words);\n    }\n')
           PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('Note')
             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('that')

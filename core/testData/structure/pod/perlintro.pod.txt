@@ -64,5 +64,5 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlintro.pod
 
     Using Perl modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21014 in perlintro.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22063 in perlintro.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22066 in perlintro.pod
 

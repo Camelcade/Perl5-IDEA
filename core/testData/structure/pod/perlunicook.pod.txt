@@ -10,115 +10,115 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlunicook.pod
 
     ℞ 0: Standard preamble in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 374 in perlunicook.pod
 
-    ℞ 1: Generic Unicode-savvy filter in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1201 in perlunicook.pod
+    ℞ 1: Generic Unicode-savvy filter in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1209 in perlunicook.pod
 
-    ℞ 2: Fine-tuning Unicode warnings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1501 in perlunicook.pod
+    ℞ 2: Fine-tuning Unicode warnings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1509 in perlunicook.pod
 
-    ℞ 3: Declare source in utf8 for identifiers and literals in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1858 in perlunicook.pod
+    ℞ 3: Declare source in utf8 for identifiers and literals in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1866 in perlunicook.pod
 
-    ℞ 4: Characters and their numbers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2507 in perlunicook.pod
+    ℞ 4: Characters and their numbers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2515 in perlunicook.pod
 
-    ℞ 5: Unicode literals by character number in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2961 in perlunicook.pod
+    ℞ 5: Unicode literals by character number in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2969 in perlunicook.pod
 
-    ℞ 6: Get character name by number in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3310 in perlunicook.pod
+    ℞ 6: Get character name by number in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3318 in perlunicook.pod
 
-    ℞ 7: Get character number by name in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3412 in perlunicook.pod
+    ℞ 7: Get character number by name in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3420 in perlunicook.pod
 
-    ℞ 8: Unicode named characters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3538 in perlunicook.pod
+    ℞ 8: Unicode named characters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3546 in perlunicook.pod
 
-    ℞ 9: Unicode named sequences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4685 in perlunicook.pod
+    ℞ 9: Unicode named sequences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4693 in perlunicook.pod
 
-    ℞ 10: Custom named characters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4981 in perlunicook.pod
+    ℞ 10: Custom named characters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4989 in perlunicook.pod
 
-    ℞ 11: Names of CJK codepoints in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5340 in perlunicook.pod
+    ℞ 11: Names of CJK codepoints in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5348 in perlunicook.pod
 
-    ℞ 12: Explicit encode/decode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6446 in perlunicook.pod
+    ℞ 12: Explicit encode/decode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6454 in perlunicook.pod
 
-    ℞ 13: Decode program arguments as utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6902 in perlunicook.pod
+    ℞ 13: Decode program arguments as utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6910 in perlunicook.pod
 
-    ℞ 14: Decode program arguments as locale encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7085 in perlunicook.pod
+    ℞ 14: Decode program arguments as locale encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7092 in perlunicook.pod
 
-    ℞ 15: Declare STD{IN,OUT,ERR} to be utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7322 in perlunicook.pod
+    ℞ 15: Declare STD{IN,OUT,ERR} to be utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7329 in perlunicook.pod
 
-    ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7645 in perlunicook.pod
+    ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7674 in perlunicook.pod
 
-    ℞ 17: Make file I/O default to utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7996 in perlunicook.pod
+    ℞ 17: Make file I/O default to utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8025 in perlunicook.pod
 
-    ℞ 18: Make all I/O and args default to utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8184 in perlunicook.pod
+    ℞ 18: Make all I/O and args default to utf8 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8224 in perlunicook.pod
 
-    ℞ 19: Open file with specific encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8408 in perlunicook.pod
+    ℞ 19: Open file with specific encoding in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8458 in perlunicook.pod
 
-    ℞ 20: Unicode casing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9126 in perlunicook.pod
+    ℞ 20: Unicode casing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9176 in perlunicook.pod
 
-    ℞ 21: Unicode case-insensitive comparisons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9395 in perlunicook.pod
+    ℞ 21: Unicode case-insensitive comparisons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9445 in perlunicook.pod
 
-    ℞ 22: Match Unicode linebreak sequence in regex in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9850 in perlunicook.pod
+    ℞ 22: Match Unicode linebreak sequence in regex in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9900 in perlunicook.pod
 
-    ℞ 23: Get character category in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10140 in perlunicook.pod
+    ℞ 23: Get character category in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10190 in perlunicook.pod
 
-    ℞ 24: Disabling Unicode-awareness in builtin charclasses in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10309 in perlunicook.pod
+    ℞ 24: Disabling Unicode-awareness in builtin charclasses in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10359 in perlunicook.pod
 
-    ℞ 25: Match Unicode properties in regex with \p, \P in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10761 in perlunicook.pod
+    ℞ 25: Match Unicode properties in regex with \p, \P in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10811 in perlunicook.pod
 
-    ℞ 26: Custom character properties in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11210 in perlunicook.pod
+    ℞ 26: Custom character properties in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11268 in perlunicook.pod
 
-    ℞ 27: Unicode normalization in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11610 in perlunicook.pod
+    ℞ 27: Unicode normalization in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11668 in perlunicook.pod
 
-    ℞ 28: Convert non-ASCII Unicode numerics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12121 in perlunicook.pod
+    ℞ 28: Convert non-ASCII Unicode numerics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12179 in perlunicook.pod
 
-    ℞ 29: Match Unicode grapheme cluster in regex in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12713 in perlunicook.pod
+    ℞ 29: Match Unicode grapheme cluster in regex in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12771 in perlunicook.pod
 
-    ℞ 30: Extract by grapheme instead of by codepoint (regex) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13016 in perlunicook.pod
+    ℞ 30: Extract by grapheme instead of by codepoint (regex) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13074 in perlunicook.pod
 
-    ℞ 31: Extract by grapheme instead of by codepoint (substr) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13166 in perlunicook.pod
+    ℞ 31: Extract by grapheme instead of by codepoint (substr) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13224 in perlunicook.pod
 
-    ℞ 32: Reverse string by grapheme in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13366 in perlunicook.pod
+    ℞ 32: Reverse string by grapheme in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13424 in perlunicook.pod
 
-    ℞ 33: String length in graphemes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13806 in perlunicook.pod
+    ℞ 33: String length in graphemes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13864 in perlunicook.pod
 
-    ℞ 34: Unicode column-width for printing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14159 in perlunicook.pod
+    ℞ 34: Unicode column-width for printing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14217 in perlunicook.pod
 
-    ℞ 35: Unicode collation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14823 in perlunicook.pod
+    ℞ 35: Unicode collation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14881 in perlunicook.pod
 
-    ℞ 36: Case- and accent-insensitive Unicode sort in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15177 in perlunicook.pod
+    ℞ 36: Case- and accent-insensitive Unicode sort in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15235 in perlunicook.pod
 
-    ℞ 37: Unicode locale collation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15450 in perlunicook.pod
+    ℞ 37: Unicode locale collation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15508 in perlunicook.pod
 
-    ℞ 38: Making cmp work on text instead of codepoints in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15797 in perlunicook.pod
+    ℞ 38: Making cmp work on text instead of codepoints in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15855 in perlunicook.pod
 
-    ℞ 39: Case- and accent-insensitive comparisons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16253 in perlunicook.pod
+    ℞ 39: Case- and accent-insensitive comparisons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16311 in perlunicook.pod
 
-    ℞ 40: Case- and accent-insensitive locale comparisons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16590 in perlunicook.pod
+    ℞ 40: Case- and accent-insensitive locale comparisons in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16648 in perlunicook.pod
 
-    ℞ 41: Unicode linebreaking in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16863 in perlunicook.pod
+    ℞ 41: Unicode linebreaking in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16921 in perlunicook.pod
 
-    ℞ 42: Unicode text in DBM hashes, the tedious way in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17163 in perlunicook.pod
+    ℞ 42: Unicode text in DBM hashes, the tedious way in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17221 in perlunicook.pod
 
-    ℞ 43: Unicode text in DBM hashes, the easy way in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17939 in perlunicook.pod
+    ℞ 43: Unicode text in DBM hashes, the easy way in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17997 in perlunicook.pod
 
-    ℞ 44: PROGRAM: Demo of Unicode collation and printing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18539 in perlunicook.pod
+    ℞ 44: PROGRAM: Demo of Unicode collation and printing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18597 in perlunicook.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22138 in perlunicook.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22204 in perlunicook.pod
 
-    §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23588 in perlunicook.pod
+    §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23654 in perlunicook.pod
 
-    UAX #44: Unicode Character Database in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23743 in perlunicook.pod
+    UAX #44: Unicode Character Database in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23809 in perlunicook.pod
 
-    UTS #18: Unicode Regular Expressions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23786 in perlunicook.pod
+    UTS #18: Unicode Regular Expressions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23852 in perlunicook.pod
 
-    UAX #15: Unicode Normalization Forms in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23830 in perlunicook.pod
+    UAX #15: Unicode Normalization Forms in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23896 in perlunicook.pod
 
-    UTS #10: Unicode Collation Algorithm in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23874 in perlunicook.pod
+    UTS #10: Unicode Collation Algorithm in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23940 in perlunicook.pod
 
-    UAX #29: Unicode Text Segmentation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23918 in perlunicook.pod
+    UAX #29: Unicode Text Segmentation in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23984 in perlunicook.pod
 
-    UAX #14: Unicode Line Breaking Algorithm in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23960 in perlunicook.pod
+    UAX #14: Unicode Line Breaking Algorithm in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24026 in perlunicook.pod
 
-    UAX #11: East Asian Width in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24008 in perlunicook.pod
+    UAX #11: East Asian Width in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24074 in perlunicook.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24048 in perlunicook.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24114 in perlunicook.pod
 
-  COPYRIGHT AND LICENCE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24201 in perlunicook.pod
+  COPYRIGHT AND LICENCE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24267 in perlunicook.pod
 
-  REVISION HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24880 in perlunicook.pod
+  REVISION HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24946 in perlunicook.pod
 

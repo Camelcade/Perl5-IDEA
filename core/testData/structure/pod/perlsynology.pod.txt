@@ -4,60 +4,64 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsynology.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 301 in perlsynology.pod
 
-    Setting up the build environment in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1630 in perlsynology.pod
+    Setting up the build environment in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1656 in perlsynology.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1886 in perlsynology.pod
+      DSM 5 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 1697 in perlsynology.pod
 
-        Using your favourite browser open the DSM management page and start the Package ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1895 in perlsynology.pod
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1926 in perlsynology.pod
 
-        If you want to smoke test Perl, install Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1993 in perlsynology.pod
+          Using your favourite browser open the DSM management page and start the Package ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1935 in perlsynology.pod
 
-        In Settings, add the following Package Sources:    http://www.cphub.net
-  http:/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2052 in perlsynology.pod
+          If you want to smoke test Perl, install Perl. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2033 in perlsynology.pod
 
-        Still in Settings, in Channel Update, select Beta Channel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2164 in perlsynology.pod
+          In Settings, add the following Package Sources:    http://www.cphub.net
+  http:/... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2092 in perlsynology.pod
 
-        Press Refresh. In the left panel the item "Community" will appear. Click it. Sel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2233 in perlsynology.pod
+          Still in Settings, in Channel Update, select Beta Channel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2204 in perlsynology.pod
 
-        Likewise, install "iPKGui Beta".  The application window should now show an icon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2370 in perlsynology.pod
+          Press Refresh. In the left panel the item "Community" will appear. Click it. Sel... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2273 in perlsynology.pod
 
-        Start iPKGui. Install the packages make, gcc and coreutils.  If you want to smok... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2473 in perlsynology.pod
+          Likewise, install "iPKGui Beta".  The application window should now show an icon... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2410 in perlsynology.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3121 in perlsynology.pod
+          Start iPKGui. Install the packages make, gcc and coreutils.  If you want to smok... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2513 in perlsynology.pod
 
-        On the DSM management page start the Control Panel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3130 in perlsynology.pod
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3161 in perlsynology.pod
 
-        Click Terminal, and enable SSH service. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3192 in perlsynology.pod
+          On the DSM management page start the Control Panel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3170 in perlsynology.pod
 
-        Close Terminal and the Control Panel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3242 in perlsynology.pod
+          Click Terminal, and enable SSH service. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3232 in perlsynology.pod
 
-        Open a shell on the Synology using ssh and become root. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3290 in perlsynology.pod
+          Close Terminal and the Control Panel. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3282 in perlsynology.pod
 
-        Execute the following commands:    cd /lib
+          Open a shell on the Synology using ssh and become root. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3330 in perlsynology.pod
+
+          Execute the following commands:    cd /lib
   ln -s libm.so.6 libm.so
-  ln -s lib... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perlsynology.pod
+  ln -s lib... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3396 in perlsynology.pod
 
-    Compiling Perl 5 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3761 in perlsynology.pod
+      DSM 6 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3801 in perlsynology.pod
 
-    Known problems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4620 in perlsynology.pod
+    Compiling Perl 5 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4549 in perlsynology.pod
 
-      Configure in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4643 in perlsynology.pod
+    Known problems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5408 in perlsynology.pod
 
-      Build in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4684 in perlsynology.pod
+      Configure in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5431 in perlsynology.pod
 
-        Error message "No error definitions found". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4707 in perlsynology.pod
+      Build in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5472 in perlsynology.pod
 
-      Failing tests in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5037 in perlsynology.pod
+        Error message "No error definitions found". in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5495 in perlsynology.pod
 
-        ext/DynaLoader/t/DynaLoader.t in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5068 in perlsynology.pod
+      Failing tests in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5825 in perlsynology.pod
 
-    Smoke testing Perl 5 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5344 in perlsynology.pod
+        ext/DynaLoader/t/DynaLoader.t in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5856 in perlsynology.pod
 
-      Local patches in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5882 in perlsynology.pod
+    Smoke testing Perl 5 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6132 in perlsynology.pod
 
-    Adding libraries in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6441 in perlsynology.pod
+      Local patches in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6670 in perlsynology.pod
 
-  REVISION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6996 in perlsynology.pod
+    Adding libraries in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7229 in perlsynology.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7053 in perlsynology.pod
+  REVISION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7784 in perlsynology.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7860 in perlsynology.pod
 

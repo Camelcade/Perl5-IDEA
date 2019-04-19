@@ -14,9 +14,10 @@ and is otherwise identical to <code>last LABEL</code>.  The
         last LINE if /^$/;  # exit when done with header
         #...
     }</code></pre></div>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> cannot be used to exit a block that returns a
-value such as <code>eval {}</code>, <code>sub {}</code>, or <code>do {}</code>, and should not be used
-to exit a <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> cannot return a value from a block that typically
+returns a value, such as <code>eval {}</code>, <code>sub {}</code>, or <code>do {}</code>. It will perform
+its flow control behavior, which precludes any return value. It should not be
+used to exit a <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a>
 operation.</p>
 <p style="padding-bottom: 10px;">Note that a block by itself is semantically identical to a loop
 that executes once.  Thus <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> can be used to effect

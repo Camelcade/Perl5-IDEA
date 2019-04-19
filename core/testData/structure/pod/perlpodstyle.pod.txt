@@ -42,7 +42,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpodstyle.pod
 
   SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11136 in perlpodstyle.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11515 in perlpodstyle.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11516 in perlpodstyle.pod
 
-  COPYRIGHT AND LICENSE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11709 in perlpodstyle.pod
+  COPYRIGHT AND LICENSE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11710 in perlpodstyle.pod
 

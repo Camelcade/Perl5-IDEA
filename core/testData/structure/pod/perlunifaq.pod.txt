@@ -36,23 +36,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlunifaq.pod
 
     What are decode_utf8 and encode_utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8242 in perlunifaq.pod
 
-    What is a "wide character"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8379 in perlunifaq.pod
+    What is a "wide character"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8551 in perlunifaq.pod
 
-  INTERNALS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8938 in perlunifaq.pod
+  INTERNALS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9110 in perlunifaq.pod
 
-    What is "the UTF8 flag"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8956 in perlunifaq.pod
+    What is "the UTF8 flag"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9128 in perlunifaq.pod
 
-    What about the use bytes pragma? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9853 in perlunifaq.pod
+    What about the use bytes pragma? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10025 in perlunifaq.pod
 
-    What about the use encoding pragma? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10277 in perlunifaq.pod
+    What about the use encoding pragma? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10449 in perlunifaq.pod
 
-    What is the difference between :encoding and :utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10853 in perlunifaq.pod
+    What is the difference between :encoding and :utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11025 in perlunifaq.pod
 
-    What's the difference between UTF-8 and utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11792 in perlunifaq.pod
+    What's the difference between UTF-8 and utf8? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11964 in perlunifaq.pod
 
-    I lost track; what encoding is the internal format really? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12730 in perlunifaq.pod
+    I lost track; what encoding is the internal format really? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12928 in perlunifaq.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13340 in perlunifaq.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13538 in perlunifaq.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13388 in perlunifaq.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13586 in perlunifaq.pod
 

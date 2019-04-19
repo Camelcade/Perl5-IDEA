@@ -9,12 +9,13 @@ negative.  For WHENCE you may use the constants <code>SEEK_SET</code>,
 <code>SEEK_CUR</code>, and <code>SEEK_END</code> (start of the file, current position, end
 of the file) from the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module.  Returns <code>1</code> on success, false
 otherwise.</p>
-<p style="padding-bottom: 10px;">Note the <i>in bytes</i>: even if the filehandle has been set to
-operate on characters (for example by using the <code>:encoding(utf8)</code> open
-layer), <a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a> will return byte offsets, not
-character offsets (because implementing that would render
-<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> and
-<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a> rather slow).</p>
+<p style="padding-bottom: 10px;">Note the emphasis on bytes: even if the filehandle has been set to operate
+on characters (for example using the <code>:encoding(UTF-8)</code> I/O layer), the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a>, and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a>
+family of functions use byte offsets, not character offsets,
+because seeking to a character offset would be very slow in a UTF-8 file.</p>
 <p style="padding-bottom: 10px;">If you want to position the file for
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a> or
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<syswrite></a>, don't use

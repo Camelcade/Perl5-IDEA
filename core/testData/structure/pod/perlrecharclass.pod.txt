@@ -6,121 +6,123 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlrecharclass.po
 
     The dot in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 893 in perlrecharclass.pod
 
-    Backslash sequences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1786 in perlrecharclass.pod
+    Backslash sequences in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1860 in perlrecharclass.pod
 
-      \N in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3172 in perlrecharclass.pod
+      \N in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3246 in perlrecharclass.pod
 
-      Digits in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3987 in perlrecharclass.pod
+      Digits in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4061 in perlrecharclass.pod
 
-      Word characters in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6740 in perlrecharclass.pod
+      Word characters in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6814 in perlrecharclass.pod
 
-        If the /a modifier is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7221 in perlrecharclass.pod
+        If the /a modifier is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7295 in perlrecharclass.pod
 
-        otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7314 in perlrecharclass.pod
+        otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7388 in perlrecharclass.pod
 
-          For code points above 255 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7342 in perlrecharclass.pod
+          For code points above 255 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7416 in perlrecharclass.pod
 
-          For code points below 256 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7722 in perlrecharclass.pod
+          For code points below 256 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7796 in perlrecharclass.pod
 
-            if locale rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7766 in perlrecharclass.pod
+            if locale rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7840 in perlrecharclass.pod
 
-            if Unicode rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7920 in perlrecharclass.pod
+            if, instead, Unicode rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7994 in perlrecharclass.pod
 
-            otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8011 in perlrecharclass.pod
+            otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8095 in perlrecharclass.pod
 
-      Whitespace in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8686 in perlrecharclass.pod
+      Whitespace in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8770 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 8764 in perlrecharclass.pod
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 8848 in perlrecharclass.pod
 
-          If the /a modifier is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8771 in perlrecharclass.pod
+          If the /a modifier is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8855 in perlrecharclass.pod
 
-          otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9091 in perlrecharclass.pod
+          otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9175 in perlrecharclass.pod
 
-            For code points above 255 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9119 in perlrecharclass.pod
+            For code points above 255 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9203 in perlrecharclass.pod
 
-            For code points below 256 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9250 in perlrecharclass.pod
+            For code points below 256 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9334 in perlrecharclass.pod
 
-              if locale rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9294 in perlrecharclass.pod
+              if locale rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9378 in perlrecharclass.pod
 
-              if Unicode rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9398 in perlrecharclass.pod
+              if, instead, Unicode rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9482 in perlrecharclass.pod
 
-              otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9523 in perlrecharclass.pod
+              otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9617 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12843 in perlrecharclass.pod
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 12937 in perlrecharclass.pod
 
-          [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12852 in perlrecharclass.pod
+          [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12946 in perlrecharclass.pod
 
-          [2] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12985 in perlrecharclass.pod
+          [2] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13079 in perlrecharclass.pod
 
-      Unicode Properties in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13145 in perlrecharclass.pod
+      Unicode Properties in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13239 in perlrecharclass.pod
 
-        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 16234 in perlrecharclass.pod
+        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 16328 in perlrecharclass.pod
 
-    Bracketed Character Classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17506 in perlrecharclass.pod
+    Bracketed Character Classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17600 in perlrecharclass.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18715 in perlrecharclass.pod
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 18809 in perlrecharclass.pod
 
-        When the class is to match caselessly under /i matching rules, and a character t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18722 in perlrecharclass.pod
+        When the class is to match caselessly under /i matching rules, and a character t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18816 in perlrecharclass.pod
 
-        Some names known to \N{...} refer to a sequence of multiple characters, instead ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19933 in perlrecharclass.pod
+        Some names known to \N{...} refer to a sequence of multiple characters, instead ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20027 in perlrecharclass.pod
 
-      Special Characters Inside a Bracketed Character Class in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20841 in perlrecharclass.pod
+      Special Characters Inside a Bracketed Character Class in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20993 in perlrecharclass.pod
 
-      Character Ranges in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 23352 in perlrecharclass.pod
+      Bracketed Character Classes and the /xx pattern modifier in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 23828 in perlrecharclass.pod
 
-      Negation in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 27972 in perlrecharclass.pod
+      Character Ranges in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 24636 in perlrecharclass.pod
 
-      Backslash Sequences in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29601 in perlrecharclass.pod
+      Negation in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29257 in perlrecharclass.pod
 
-      POSIX Character Classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 30689 in perlrecharclass.pod
+      Backslash Sequences in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 30886 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 34616 in perlrecharclass.pod
+      POSIX Character Classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 31974 in perlrecharclass.pod
 
-          [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34625 in perlrecharclass.pod
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 35901 in perlrecharclass.pod
 
-          [2] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34686 in perlrecharclass.pod
+          [1] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35910 in perlrecharclass.pod
 
-          [3] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35063 in perlrecharclass.pod
+          [2] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35971 in perlrecharclass.pod
 
-          [4] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35212 in perlrecharclass.pod
+          [3] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36348 in perlrecharclass.pod
 
-          [5] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35357 in perlrecharclass.pod
+          [4] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36497 in perlrecharclass.pod
 
-          [6] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36359 in perlrecharclass.pod
+          [5] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36642 in perlrecharclass.pod
 
-        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 37278 in perlrecharclass.pod
+          [6] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37644 in perlrecharclass.pod
 
-          If the /a modifier, is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37285 in perlrecharclass.pod
+        =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 38564 in perlrecharclass.pod
 
-          otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37419 in perlrecharclass.pod
+          If the /a modifier, is in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38571 in perlrecharclass.pod
 
-            For code points above 255 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37447 in perlrecharclass.pod
+          otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38705 in perlrecharclass.pod
 
-            For code points below 256 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37549 in perlrecharclass.pod
+            For code points above 255 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38733 in perlrecharclass.pod
 
-              if locale rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37593 in perlrecharclass.pod
+            For code points below 256 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38835 in perlrecharclass.pod
 
-                word in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37699 in perlrecharclass.pod
+              if locale rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38879 in perlrecharclass.pod
 
-                ascii in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37803 in perlrecharclass.pod
+                word in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38985 in perlrecharclass.pod
 
-                blank in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37943 in perlrecharclass.pod
+                ascii in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39089 in perlrecharclass.pod
 
-              if Unicode rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38092 in perlrecharclass.pod
+                blank in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39229 in perlrecharclass.pod
 
-              otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38199 in perlrecharclass.pod
+              if, instead, Unicode rules are in effect ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39378 in perlrecharclass.pod
 
-        Negation of POSIX character classes in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 38732 in perlrecharclass.pod
+              otherwise ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39495 in perlrecharclass.pod
 
-        [= =] and [. .] in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 39503 in perlrecharclass.pod
+        Negation of POSIX character classes in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 40028 in perlrecharclass.pod
 
-        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 39695 in perlrecharclass.pod
+        [= =] and [. .] in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 40799 in perlrecharclass.pod
 
-      Extended Bracketed Character Classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 40525 in perlrecharclass.pod
+        Examples in null; /perl5language.png, null] -> PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 40991 in perlrecharclass.pod
 
-        1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45001 in perlrecharclass.pod
+      Extended Bracketed Character Classes in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 41821 in perlrecharclass.pod
 
-        2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45421 in perlrecharclass.pod
+        1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46110 in perlrecharclass.pod
 
-        3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45655 in perlrecharclass.pod
+        2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46530 in perlrecharclass.pod
+
+        3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46764 in perlrecharclass.pod
 

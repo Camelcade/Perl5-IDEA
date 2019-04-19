@@ -186,15 +186,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq4.pod
 
     How do I determine whether a scalar is a number/whole/integer/float? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84759 in perlfaq4.pod
 
-    How do I keep persistent data across program calls? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86891 in perlfaq4.pod
+    How do I keep persistent data across program calls? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86802 in perlfaq4.pod
 
-    How do I print out or copy a recursive data structure? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87455 in perlfaq4.pod
+    How do I print out or copy a recursive data structure? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87366 in perlfaq4.pod
 
-    How do I define methods for every class/object? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88095 in perlfaq4.pod
+    How do I define methods for every class/object? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88006 in perlfaq4.pod
 
-    How do I verify a credit card checksum? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88543 in perlfaq4.pod
+    How do I verify a credit card checksum? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88454 in perlfaq4.pod
 
-    How do I pack arrays of doubles or floats for XS code? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88642 in perlfaq4.pod
+    How do I pack arrays of doubles or floats for XS code? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88553 in perlfaq4.pod
 
-  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88976 in perlfaq4.pod
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88887 in perlfaq4.pod
 

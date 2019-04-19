@@ -3,21 +3,22 @@
 <dt style="padding-bottom:4px;font-weight:bold;">require</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Demands a version of Perl specified by VERSION, or demands some semantics
 specified by EXPR or by <a href="psi_element://perlvar%2F%24_">C<$_></a> if EXPR is not supplied.</p>
-<p style="padding-bottom: 10px;">VERSION may be either a numeric argument such as 5.006, which will be
-compared to <a href="psi_element://perlvar%2F%24%5D">C<$]></a>, or a literal of the form v5.6.1, which
-will be compared to <a href="psi_element://perlvar%2F%24%5EV">C<$^V></a> (or <code>$PERL_VERSION</code> in
-<a href="psi_element://English" style="color:red">English</a>).  An exception is raised if VERSION is greater than the
-version of the current Perl interpreter.  Compare with
+<p style="padding-bottom: 10px;">VERSION may be either a literal such as v5.24.1, which will be
+compared to <a href="psi_element://perlvar%2F%24%5EV">C<$^V></a> (or <code>$PERL_VERSION</code> in <a href="psi_element://English" style="color:red">English</a>),
+or a numeric argument of the form 5.024001, which will be compared to
+<a href="psi_element://perlvar%2F%24%5D">C<$]></a>. An exception is raised if VERSION is greater than
+the version of the current Perl interpreter.  Compare with
 <a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a>, which can do a similar check at
 compile time.</p>
-<p style="padding-bottom: 10px;">Specifying VERSION as a literal of the form v5.6.1 should generally be
-avoided, because it leads to misleading error messages under earlier
-versions of Perl that do not support this syntax.  The equivalent numeric
-version should be used instead.</p>
-<div style="padding-bottom: 10px;"><pre><code>    require v5.6.1;     # run time version check
-    require 5.6.1;      # ditto
-    require 5.006_001;  # ditto; preferred for backwards
-                          compatibility</code></pre></div>
+<p style="padding-bottom: 10px;">Specifying VERSION as a numeric argument of the form 5.024001 should
+generally be avoided as older less readable syntax compared to
+v5.24.1. Before perl 5.8.0 (released in 2002), the more verbose numeric
+form was the only supported syntax, which is why you might see it in
+older code.</p>
+<div style="padding-bottom: 10px;"><pre><code>    require v5.24.1;    # run time version check
+    require 5.24.1;     # ditto
+    require 5.024_001;  # ditto; older syntax compatible
+                          with perl 5.6</code></pre></div>
 <p style="padding-bottom: 10px;">Otherwise, <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> demands that a library file be
 included if it hasn't already been included.  The file is included via
 the do-FILE mechanism, which is essentially just a variety of
@@ -79,11 +80,13 @@ statements.</p>
 <p style="padding-bottom: 10px;">If EXPR is a bareword, <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> assumes a <i>.pm</i>
 extension and replaces <code>::</code> with <code>/</code> in the filename for you,
 to make it easy to load standard modules.  This form of loading of
-modules does not risk altering your namespace.</p>
+modules does not risk altering your namespace, however it will autovivify
+the stash for the required module.</p>
 <p style="padding-bottom: 10px;">In other words, if you try this:</p>
 <div style="padding-bottom: 10px;"><pre><code>        require Foo::Bar;     # a splendid bareword</code></pre></div>
 <p style="padding-bottom: 10px;">The require function will actually look for the <i>Foo/Bar.pm</i> file in the
-directories specified in the <a href="psi_element://perlvar%2F%40INC">C<@INC></a> array.</p>
+directories specified in the <a href="psi_element://perlvar%2F%40INC">C<@INC></a> array, and it will
+autovivify the <code>Foo::Bar::</code> stash at compile time.</p>
 <p style="padding-bottom: 10px;">But if you try this:</p>
 <div style="padding-bottom: 10px;"><pre><code>        my $class = 'Foo::Bar';
         require $class;       # $class is not a bareword
@@ -93,12 +96,17 @@ directories specified in the <a href="psi_element://perlvar%2F%40INC">C<@INC></a
 <a href="psi_element://perlvar%2F%40INC">C<@INC></a>  array and
 will complain about not finding <i>Foo::Bar</i> there.  In this case you can do:</p>
 <div style="padding-bottom: 10px;"><pre><code>        eval &quot;require $class&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">or you could do</p>
+<div style="padding-bottom: 10px;"><pre><code>        require &quot;Foo/Bar.pm&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Neither of these forms will autovivify any stashes at compile time and
+only have run time effects.</p>
 <p style="padding-bottom: 10px;">Now that you understand how <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> looks for
 files with a bareword argument, there is a little extra functionality
 going on behind the scenes.  Before <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a> looks
 for a <i>.pm</i> extension, it will first look for a similar filename with a
 <i>.pmc</i> extension.  If this file is found, it will be loaded in place of
-any file ending in a <i>.pm</i> extension.</p>
+any file ending in a <i>.pm</i> extension. This applies to both the explicit
+<code>require &quot;Foo/Bar.pm&quot;;</code> form and the <code>require Foo::Bar;</code> form.</p>
 <p style="padding-bottom: 10px;">You can also insert hooks into the import facility by putting Perl code
 directly into the <a href="psi_element://perlvar%2F%40INC">C<@INC></a> array.  There are three forms
 of hooks: subroutine references, array references, and blessed objects.</p>
@@ -118,9 +126,10 @@ finally at end of file returning 0.  If there is a filehandle, then the
 subroutine will be called to act as a simple source filter, with the
 line as read in <a href="psi_element://perlvar%2F%24_">C<$_></a>.
 Again, return 1 for each valid line, and 0 after all lines have been
-returned.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">4</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Optional state for the subroutine.  The state is passed in as <code>$_[1]</code>.  A
-reference to the subroutine itself is passed in as <code>$_[0]</code>.</p></dd></dl>
+returned.
+For historical reasons the subroutine will receive a meaningless argument
+(in fact always the numeric value zero) as <code>$_[0]</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">4</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Optional state for the subroutine.  The state is passed in as <code>$_[1]</code>.</p></dd></dl>
 <p style="padding-bottom: 10px;">If an empty list, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>, or nothing that matches the
 first 3 values above is returned, then <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION">C<require></a>
 looks at the remaining elements of <a href="psi_element://perlvar%2F%40INC">C<@INC></a>.

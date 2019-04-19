@@ -9,39 +9,39 @@ Documentation in null; /perl5language.png -> POD file at 0 in perljp.pod
     About (jcode.pl|Jcode.pm|JPerl) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2690 in perljp.pod
 
       入出力  以下の例はいづれもShift_JISの入力をEUC-JPに変換して出力します。    # jcode.pl
-  require "jcode.pl";... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3347 in perljp.pod
+  require "jcode.pl";... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perljp.pod
 
-      Jperl 互換スクリプト  いわゆる"shebang"を変更するだけで、Jperl用のscriptのほとんどは変更なしに利用可能だと思われます。     #!... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3783 in perljp.pod
+      Jperl 互換スクリプト  いわゆる"shebang"を変更するだけで、Jperl用のscriptのほとんどは変更なしに利用可能だと思われます。     #!... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3792 in perljp.pod
 
-    さらに詳しく in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3971 in perljp.pod
+    さらに詳しく in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3980 in perljp.pod
 
-    Perl全般に関する URL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4232 in perljp.pod
+    Perl全般に関する URL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4241 in perljp.pod
 
-      http://www.perl.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4264 in perljp.pod
+      http://www.perl.com/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4273 in perljp.pod
 
-      http://www.cpan.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4334 in perljp.pod
+      http://www.cpan.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4343 in perljp.pod
 
-      http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4408 in perljp.pod
+      http://lists.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4417 in perljp.pod
 
-    Perlの修得に役立つ URL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4464 in perljp.pod
+    Perlの修得に役立つ URL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4473 in perljp.pod
 
-      http://www.oreilly.com.tw/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4497 in perljp.pod
+      http://www.oreilly.com.tw/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4506 in perljp.pod
 
-      http://www.oreilly.com.cn/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4563 in perljp.pod
+      http://www.oreilly.com.cn/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4572 in perljp.pod
 
-      http://www.oreilly.co.jp/catalog/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4629 in perljp.pod
+      http://www.oreilly.co.jp/catalog/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4638 in perljp.pod
 
-    Perl ユーザーグループ in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4702 in perljp.pod
+    Perl ユーザーグループ in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4711 in perljp.pod
 
-      http://www.pm.org/groups/asia.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4733 in perljp.pod
+      http://www.pm.org/groups/asia.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4742 in perljp.pod
 
-    Unicode関連のURL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4785 in perljp.pod
+    Unicode関連のURL in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4794 in perljp.pod
 
-      http://www.unicode.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4816 in perljp.pod
+      http://www.unicode.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4825 in perljp.pod
 
-      http://www.cl.cam.ac.uk/%7Emgk25/unicode.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4884 in perljp.pod
+      http://www.cl.cam.ac.uk/%7Emgk25/unicode.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4893 in perljp.pod
 
-      http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4978 in perljp.pod
+      http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4987 in perljp.pod
 
-  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5121 in perljp.pod
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5130 in perljp.pod
 

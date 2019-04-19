@@ -28,7 +28,8 @@ its own internal iterator, accessed by <a href="psi_element://pod%3A%3Aperlfunc%
 <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH">C<keys></a>, and <a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a>.  The iterator is
 implicitly reset when <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> has reached the end as just
 described; it can be explicitly reset by calling <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH">C<keys></a>
-or <a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a> on the hash or array.  If you add or delete
+or <a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a> on the hash or array, or by referencing
+the hash (but not array) in list context.  If you add or delete
 a hash's elements while iterating over it, the effect on the iterator is
 unspecified; for example, entries may be skipped or duplicated--so don't
 do that.  Exception: It is always safe to delete the item most recently
@@ -39,6 +40,20 @@ returned by <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a>, s
     }</code></pre></div>
 <p style="padding-bottom: 10px;">Tied hashes may have a different ordering behaviour to perl's hash
 implementation.</p>
+<p style="padding-bottom: 10px;">The iterator used by <code>each</code> is attached to the hash or array, and is
+shared between all iteration operations applied to the same hash or array.
+Thus all uses of <code>each</code> on a single hash or array advance the same
+iterator location.  All uses of <code>each</code> are also subject to having the
+iterator reset by any use of <code>keys</code> or <code>values</code> on the same hash or
+array, or by the hash (but not array) being referenced in list context.
+This makes <code>each</code>-based loops quite fragile: it is easy to arrive at
+such a loop with the iterator already part way through the object, or to
+accidentally clobber the iterator state during execution of the loop body.
+It's easy enough to explicitly reset the iterator before starting a loop,
+but there is no way to insulate the iterator state used by a loop from
+the iterator state used by anything else that might execute during the
+loop body.  To avoid these problems, use a <code>foreach</code> loop rather than
+<code>while</code>-<code>each</code>.</p>
 <p style="padding-bottom: 10px;">This prints out your environment like the <a href="psi_element://printenv%281%29" style="color:red">printenv(1)</a> program,
 but in a different order:</p>
 <div style="padding-bottom: 10px;"><pre><code>    while (my ($key,$value) = each %ENV) {
@@ -48,7 +63,11 @@ but in a different order:</p>
 <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> to take a scalar expression. This experiment has
 been deemed unsuccessful, and was removed as of Perl 5.24.</p>
 <p style="padding-bottom: 10px;">As of Perl 5.18 you can use a bare <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> in a <code>while</code>
-loop, which will set <a href="psi_element://perlvar%2F%24_">C<$_></a> on every iteration.</p>
+loop, which will set <a href="psi_element://perlvar%2F%24_">C<$_></a> on every iteration.
+If either an <code>each</code> expression or an explicit assignment of an <code>each</code>
+expression to a scalar is used as a <code>while</code>/<code>for</code> condition, then
+the condition actually tests for definedness of the expression's value,
+not for its regular truth value.</p>
 <div style="padding-bottom: 10px;"><pre><code>    while (each %ENV) {
 	print &quot;$_=$ENV{$_}\n&quot;;
     }</code></pre></div>

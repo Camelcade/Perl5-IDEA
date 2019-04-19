@@ -99,4 +99,13 @@ each field.  For example:</p>
 <p style="padding-bottom: 10px;">Even though it looks as though they're the same method calls (uid),
 they aren't, because a <code>File::stat</code> object is different from
 a <code>User::pwent</code> object.</p>
+<p style="padding-bottom: 10px;">Many of these functions are not safe in a multi-threaded environment
+where more than one thread can be using them.  In particular, functions
+like <code>getpwent()</code> iterate per-process and not per-thread, so if two
+threads are simultaneously iterating, neither will get all the records.</p>
+<p style="padding-bottom: 10px;">Some systems have thread-safe versions of some of the functions, such as
+<code>getpwnam_r()</code> instead of <code>getpwnam()</code>.  There, Perl automatically and
+invisibly substitutes the thread-safe version, without notice.  This
+means that code that safely runs on some systems can fail on others that
+lack the thread-safe versions.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fgetpwnam">getpwnam in perlport</a> to <a href="psi_element://perlport%2Fendservent">endservent in perlport</a>.</p></dd></dl>

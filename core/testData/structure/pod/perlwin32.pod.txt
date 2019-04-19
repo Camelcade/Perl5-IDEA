@@ -6,99 +6,99 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlwin32.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 312 in perlwin32.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 1966 in perlwin32.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 2017 in perlwin32.pod
 
-      http://mingw.org in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1975 in perlwin32.pod
+      http://mingw.org in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2026 in perlwin32.pod
 
-      http://mingw-w64.org in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2061 in perlwin32.pod
+      http://mingw-w64.org in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2112 in perlwin32.pod
 
-    Setting Up Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3787 in perlwin32.pod
+    Setting Up Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3865 in perlwin32.pod
 
-      Make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3831 in perlwin32.pod
+      Make in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3909 in perlwin32.pod
 
-      Command Shell in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4690 in perlwin32.pod
+      Command Shell in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4768 in perlwin32.pod
 
-      Microsoft Visual C++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5077 in perlwin32.pod
+      Microsoft Visual C++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5155 in perlwin32.pod
 
-      Microsoft Visual C++ 2008-2013 Express Edition in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6118 in perlwin32.pod
+      Microsoft Visual C++ 2008-2017 Express/Community Edition in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6196 in perlwin32.pod
 
-      Microsoft Visual C++ 2005 Express Edition in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7048 in perlwin32.pod
+      Microsoft Visual C++ 2005 Express Edition in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7138 in perlwin32.pod
 
-      Microsoft Visual C++ Toolkit 2003 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9339 in perlwin32.pod
+      Microsoft Visual C++ Toolkit 2003 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9425 in perlwin32.pod
 
-        cvtres.exe is required by link.exe when using a .res file.  It is actually insta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11603 in perlwin32.pod
+        cvtres.exe is required by link.exe when using a .res file.  It is actually insta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11689 in perlwin32.pod
 
-        lib.exe is normally used to build libraries, but link.exe with the /lib option a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11859 in perlwin32.pod
+        lib.exe is normally used to build libraries, but link.exe with the /lib option a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11945 in perlwin32.pod
 
-        setargv.obj is required to build perlglob.exe (and perl.exe if the USE_SETARGV o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12390 in perlwin32.pod
+        setargv.obj is required to build perlglob.exe (and perl.exe if the USE_SETARGV o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12476 in perlwin32.pod
 
-      Microsoft Platform SDK 64-bit Compiler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13190 in perlwin32.pod
+      Microsoft Platform SDK 64-bit Compiler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13276 in perlwin32.pod
 
-      MinGW release 3 with gcc in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13451 in perlwin32.pod
+      GCC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13537 in perlwin32.pod
 
-      Intel C++ Compiler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13690 in perlwin32.pod
+      Intel C++ Compiler in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14079 in perlwin32.pod
 
-    Building in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14446 in perlwin32.pod
+    Building in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14835 in perlwin32.pod
 
-      Make sure you are in the "win32" subdirectory under the perl toplevel. This dire... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14472 in perlwin32.pod
+      Make sure you are in the "win32" subdirectory under the perl toplevel. This dire... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14861 in perlwin32.pod
 
-      Edit the makefile.mk (or Makefile, if you're using nmake) and change the values ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14816 in perlwin32.pod
+      Edit the makefile.mk (or Makefile, if you're using nmake) and change the values ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15205 in perlwin32.pod
 
-      Type "dmake" (or "nmake" if you are using that make).  This should build everyth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16484 in perlwin32.pod
+      Type "dmake" (or "nmake" if you are using that make).  This should build everyth... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16873 in perlwin32.pod
 
-    Testing Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17544 in perlwin32.pod
+    Testing Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17933 in perlwin32.pod
 
-    Installation of Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19201 in perlwin32.pod
+    Installation of Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19582 in perlwin32.pod
 
-    Usage Hints for Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20041 in perlwin32.pod
+    Usage Hints for Perl on Windows in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20422 in perlwin32.pod
 
-      Environment Variables in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20090 in perlwin32.pod
+      Environment Variables in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20471 in perlwin32.pod
 
-      File Globbing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21866 in perlwin32.pod
+      File Globbing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22247 in perlwin32.pod
 
-      Using perl from the command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22211 in perlwin32.pod
+      Using perl from the command line in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22592 in perlwin32.pod
 
-      Building Extensions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25996 in perlwin32.pod
+      Building Extensions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26377 in perlwin32.pod
 
-      Command-line Wildcard Expansion in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28368 in perlwin32.pod
+      Command-line Wildcard Expansion in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28749 in perlwin32.pod
 
-      Notes on 64-bit Windows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30590 in perlwin32.pod
+      Notes on 64-bit Windows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30971 in perlwin32.pod
 
-        A 64-bit native application will run much more efficiently on Itanium hardware. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31496 in perlwin32.pod
+        A 64-bit native application will run much more efficiently on Itanium hardware. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31877 in perlwin32.pod
 
-        There is no 2GB limit on process size. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31586 in perlwin32.pod
+        There is no 2GB limit on process size. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31967 in perlwin32.pod
 
-        Perl automatically provides large file support when built under 64-bit Windows. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31635 in perlwin32.pod
+        Perl automatically provides large file support when built under 64-bit Windows. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32016 in perlwin32.pod
 
-        Embedding Perl inside a 64-bit application. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31725 in perlwin32.pod
+        Embedding Perl inside a 64-bit application. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32106 in perlwin32.pod
 
-    Running Perl Scripts in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31793 in perlwin32.pod
+    Running Perl Scripts in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32174 in perlwin32.pod
 
-      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32195 in perlwin32.pod
+      1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32576 in perlwin32.pod
 
-      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32496 in perlwin32.pod
+      2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32877 in perlwin32.pod
 
-      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33417 in perlwin32.pod
+      3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33798 in perlwin32.pod
 
-    Miscellaneous Things in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34594 in perlwin32.pod
+    Miscellaneous Things in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34975 in perlwin32.pod
 
-  BUGS AND CAVEATS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35732 in perlwin32.pod
+  BUGS AND CAVEATS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36113 in perlwin32.pod
 
-  ACKNOWLEDGEMENTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38185 in perlwin32.pod
+  ACKNOWLEDGEMENTS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38566 in perlwin32.pod
 
-  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38323 in perlwin32.pod
+  AUTHORS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38704 in perlwin32.pod
 
-    Gary Ng <71564.1743@CompuServe.COM> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38348 in perlwin32.pod
+    Gary Ng <71564.1743@CompuServe.COM> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38729 in perlwin32.pod
 
-    Gurusamy Sarathy <gsar@activestate.com> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38399 in perlwin32.pod
+    Gurusamy Sarathy <gsar@activestate.com> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38780 in perlwin32.pod
 
-    Nick Ing-Simmons <nick@ing-simmons.net> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38454 in perlwin32.pod
+    Nick Ing-Simmons <nick@ing-simmons.net> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38835 in perlwin32.pod
 
-    Jan Dubois <jand@activestate.com> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38509 in perlwin32.pod
+    Jan Dubois <jand@activestate.com> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38890 in perlwin32.pod
 
-    Steve Hay <steve.m.hay@googlemail.com> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38558 in perlwin32.pod
+    Steve Hay <steve.m.hay@googlemail.com> in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38939 in perlwin32.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38663 in perlwin32.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39044 in perlwin32.pod
 
-  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38689 in perlwin32.pod
+  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39070 in perlwin32.pod
 

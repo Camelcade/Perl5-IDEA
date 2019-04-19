@@ -120,45 +120,45 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlcall.pod
 
     Using call_argv in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34852 in perlcall.pod
 
-    Using call_method in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35425 in perlcall.pod
+    Using call_method in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35411 in perlcall.pod
 
-      A reference to the object for a virtual method or the name of the class for a st... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36456 in perlcall.pod
+      A reference to the object for a virtual method or the name of the class for a st... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36442 in perlcall.pod
 
-      The name of the method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36558 in perlcall.pod
+      The name of the method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36544 in perlcall.pod
 
-      Any other parameters specific to the method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36591 in perlcall.pod
+      Any other parameters specific to the method in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36577 in perlcall.pod
 
-    Using GIMME_V in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37636 in perlcall.pod
+    Using GIMME_V in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37622 in perlcall.pod
 
-    Using Perl to Dispose of Temporaries in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38215 in perlcall.pod
+    Using Perl to Dispose of Temporaries in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38201 in perlcall.pod
 
-      Specifying the G_DISCARD flag with call_* in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38480 in perlcall.pod
+      Specifying the G_DISCARD flag with call_* in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38466 in perlcall.pod
 
-      Explicitly using the ENTER/SAVETMPS--FREETMPS/LEAVE pairing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38535 in perlcall.pod
+      Explicitly using the ENTER/SAVETMPS--FREETMPS/LEAVE pairing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38521 in perlcall.pod
 
-    Strategies for Storing Callback Context Information in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42559 in perlcall.pod
+    Strategies for Storing Callback Context Information in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42545 in perlcall.pod
 
-      1. Ignore the problem - Allow only 1 callback in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51458 in perlcall.pod
+      1. Ignore the problem - Allow only 1 callback in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51444 in perlcall.pod
 
-      2. Create a sequence of callbacks - hard wired limit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51618 in perlcall.pod
+      2. Create a sequence of callbacks - hard wired limit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51604 in perlcall.pod
 
-      3. Use a parameter to map to the Perl callback in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51894 in perlcall.pod
+      3. Use a parameter to map to the Perl callback in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51880 in perlcall.pod
 
-    Alternate Stack Manipulation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52027 in perlcall.pod
+    Alternate Stack Manipulation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52013 in perlcall.pod
 
-      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53464 in perlcall.pod
+      1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53450 in perlcall.pod
 
-      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53686 in perlcall.pod
+      2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53672 in perlcall.pod
 
-      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53839 in perlcall.pod
+      3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53825 in perlcall.pod
 
-    Creating and Calling an Anonymous Subroutine in C in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54066 in perlcall.pod
+    Creating and Calling an Anonymous Subroutine in C in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54052 in perlcall.pod
 
-  LIGHTWEIGHT CALLBACKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54767 in perlcall.pod
+  LIGHTWEIGHT CALLBACKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54753 in perlcall.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56416 in perlcall.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56402 in perlcall.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56471 in perlcall.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56457 in perlcall.pod
 
-  DATE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56677 in perlcall.pod
+  DATE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56663 in perlcall.pod
 

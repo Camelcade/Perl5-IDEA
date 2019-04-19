@@ -3,4 +3,6 @@
 <p style="padding-bottom: 10px;">Sets the current priority for a process, a process group, or a user.
 (See <a href="psi_element://setpriority%282%29" style="color:red">setpriority(2)</a>.)  Raises an exception when used on a machine
 that doesn't implement <a href="psi_element://setpriority%282%29" style="color:red">setpriority(2)</a>.</p>
+<p style="padding-bottom: 10px;"><code>WHICH</code> can be any of <code>PRIO_PROCESS</code>, <code>PRIO_PGRP</code> or <code>PRIO_USER</code>
+imported from <a href="psi_element://POSIX%2FRESOURCE+CONSTANTS" style="color:red">RESOURCE CONSTANTS in POSIX</a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsetpriority">setpriority in perlport</a>.</p></dd></dl>

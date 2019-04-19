@@ -4,8 +4,16 @@
 Sometimes a block is delimited by the file containing it (in the case
 of a required file, or the program as a whole), and sometimes a block
 is delimited by the extent of a string (in the case of an eval).</p>
-<p style="padding-bottom: 10px;">But generally, a block is delimited by curly brackets, also known as braces.
-We will call this syntactic construct a BLOCK.</p>
+<p style="padding-bottom: 10px;">But generally, a block is delimited by curly brackets, also known as
+braces.  We will call this syntactic construct a BLOCK.  Because enclosing
+braces are also the syntax for hash reference constructor expressions
+(see <a href="psi_element://perlref">perlref</a>), you may occasionally need to disambiguate by placing a
+<code>;</code> immediately after an opening brace so that Perl realises the brace
+is the start of a block.  You will more frequently need to disambiguate
+the other way, by placing a <code>+</code> immediately before an opening brace to
+force it to be interpreted as a hash reference constructor expression.
+It is considered good style to use these disambiguating mechanisms
+liberally, not only when Perl would otherwise guess incorrectly.</p>
 <p style="padding-bottom: 10px;">The following compound statements may be used to control flow:</p>
 <div style="padding-bottom: 10px;"><pre><code>    if (EXPR) BLOCK
     if (EXPR) BLOCK else BLOCK
@@ -58,7 +66,7 @@ statements, though you may want to think twice before using that particular
 language construct, as everyone reading your code will have to think at least
 twice before they can understand what's going on.</p>
 <p style="padding-bottom: 10px;">The <code>while</code> statement executes the block as long as the expression is
-<a href="psi_element://pod%3A%3Aperlsyn%2FTruth+and+Falsehood">true</a>.
+true.
 The <code>until</code> statement executes the block as long as the expression is
 false.
 The LABEL is optional, and if present, consists of an identifier followed
@@ -69,6 +77,15 @@ refers to the innermost enclosing loop.  This may include dynamically
 looking back your call-stack at run time to find the LABEL.  Such
 desperate behavior triggers a warning if you use the <code>use warnings</code>
 pragma or the <B>-w</B> flag.</p>
+<p style="padding-bottom: 10px;">If the condition expression of a <code>while</code> statement is based
+on any of a group of iterative expression types then it gets
+some magic treatment.  The affected iterative expression types
+are <a href="psi_element://perlfunc%2Freadline+EXPR">C<readline></a>, the <a href="psi_element://perlop%2FI%2FO+Operators">C<< <FILEHANDLE> >></a> input operator, <a href="psi_element://perlfunc%2Freaddir+DIRHANDLE">C<readdir></a>, <a href="psi_element://perlfunc%2Fglob+EXPR">C<glob></a>, the <a href="psi_element://perlop%2FI%2FO+Operators">C<< <PATTERN> >></a> globbing operator, and <a href="psi_element://perlfunc%2Feach+HASH">C<each></a>.  If the condition expression is one of these expression types, then
+the value yielded by the iterative operator will be implicitly assigned
+to <code>$_</code>.  If the condition expression is one of these expression types
+or an explicit assignment of one of them to a scalar, then the condition
+actually tests for definedness of the expression's value, not for its
+regular truth value.</p>
 <p style="padding-bottom: 10px;">If there is a <code>continue</code> BLOCK, it is always executed just before the
 conditional is about to be evaluated again.  Thus it can be used to
 increment a loop variable, even when the loop has been continued via

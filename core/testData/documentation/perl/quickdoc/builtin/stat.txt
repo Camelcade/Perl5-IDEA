@@ -41,6 +41,14 @@ the stat structure from the last <a href="psi_element://pod%3A%3Aperlfunc%2Fstat
     }</code></pre></div>
 <p style="padding-bottom: 10px;">(This works on machines only for which the device number is negative
 under NFS.)</p>
+<p style="padding-bottom: 10px;">On some platforms inode numbers are of a type larger than perl knows how
+to handle as integer numerical values.  If necessary, an inode number will
+be returned as a decimal string in order to preserve the entire value.
+If used in a numeric context, this will be converted to a floating-point
+numerical value, with rounding, a fate that is best avoided.  Therefore,
+you should prefer to compare inode numbers using <code>eq</code> rather than <code>==</code>.
+<code>eq</code> will work fine on inode numbers that are represented numerically,
+as well as those represented as strings.</p>
 <p style="padding-bottom: 10px;">Because the mode contains both the file type and its permissions, you
 should mask off the file type portion and (s)printf using a <code>&quot;%o&quot;</code>
 if you want to see the real permissions.</p>

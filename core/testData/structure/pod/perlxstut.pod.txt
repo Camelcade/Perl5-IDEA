@@ -84,39 +84,39 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlxstut.pod
 
     EXAMPLE 6 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40204 in perlxstut.pod
 
-    New Things in this Example in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42130 in perlxstut.pod
+    New Things in this Example in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42138 in perlxstut.pod
 
-      This function does not use a typemap.  Instead, we declare it as accepting one S... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42244 in perlxstut.pod
+      This function does not use a typemap.  Instead, we declare it as accepting one S... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42252 in perlxstut.pod
 
-      When dealing with references, it is important to handle them with caution. The I... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42580 in perlxstut.pod
+      When dealing with references, it is important to handle them with caution. The I... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42588 in perlxstut.pod
 
-      We manipulate several arrays in this XSUB.  Note that an array is represented in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43338 in perlxstut.pod
+      We manipulate several arrays in this XSUB.  Note that an array is represented in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43346 in perlxstut.pod
 
-      We are performing only one hash operation in this function, which is storing a n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44408 in perlxstut.pod
+      We are performing only one hash operation in this function, which is storing a n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44416 in perlxstut.pod
 
-      To create a reference, we use the newRV function.  Note that you can cast an AV*... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44737 in perlxstut.pod
+      To create a reference, we use the newRV_inc function.  Note that you can cast an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44745 in perlxstut.pod
 
-      At this point, xsubpp is doing very little work - the differences between Mytest... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45145 in perlxstut.pod
+      At this point, xsubpp is doing very little work - the differences between Mytest... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45157 in perlxstut.pod
 
-    EXAMPLE 7 (Coming Soon) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45272 in perlxstut.pod
+    EXAMPLE 7 (Coming Soon) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45284 in perlxstut.pod
 
-    EXAMPLE 8 (Coming Soon) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45364 in perlxstut.pod
+    EXAMPLE 8 (Coming Soon) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45376 in perlxstut.pod
 
-    EXAMPLE 9 Passing open files to XSes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45408 in perlxstut.pod
+    EXAMPLE 9 Passing open files to XSes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45420 in perlxstut.pod
 
-    Troubleshooting these Examples in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48697 in perlxstut.pod
+    Troubleshooting these Examples in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48709 in perlxstut.pod
 
-      In versions of 5.002 prior to the gamma version, the test script in Example 1 wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48886 in perlxstut.pod
+      In versions of 5.002 prior to the gamma version, the test script in Example 1 wi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48898 in perlxstut.pod
 
-      In versions of 5.002 prior to version 5.002b1h, the test.pl file was not automat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49070 in perlxstut.pod
+      In versions of 5.002 prior to version 5.002b1h, the test.pl file was not automat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49082 in perlxstut.pod
 
-      In versions 5.000 and 5.001, instead of using the above line, you will need to u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49351 in perlxstut.pod
+      In versions 5.000 and 5.001, instead of using the above line, you will need to u... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49363 in perlxstut.pod
 
-      This document assumes that the executable named "perl" is Perl version 5. Some s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49500 in perlxstut.pod
+      This document assumes that the executable named "perl" is Perl version 5. Some s... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49512 in perlxstut.pod
 
-  See also in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49650 in perlxstut.pod
+  See also in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49662 in perlxstut.pod
 
-  Author in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49762 in perlxstut.pod
+  Author in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49774 in perlxstut.pod
 
-    Last Changed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50051 in perlxstut.pod
+    Last Changed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50063 in perlxstut.pod
 

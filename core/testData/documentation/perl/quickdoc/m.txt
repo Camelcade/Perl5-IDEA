@@ -19,7 +19,7 @@ as delimiters.  This is particularly useful for matching path names
 that contain <code>&quot;/&quot;</code>, to avoid LTS (leaning toothpick syndrome).  If <code>&quot;?&quot;</code> is
 the delimiter, then a match-only-once rule applies,
 described in <code>m?<i>PATTERN</i>?</code> below.  If <code>&quot;'&quot;</code> (single quote) is the delimiter,
-no interpolation is performed on the <i>PATTERN</i>.
+no variable interpolation is performed on the <i>PATTERN</i>.
 When using a delimiter character valid in an identifier, whitespace is required
 after the <code>m</code>.</p>
 <p style="padding-bottom: 10px;"><i>PATTERN</i> may contain variables, which will be interpolated

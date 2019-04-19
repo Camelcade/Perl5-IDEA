@@ -12,7 +12,11 @@ it would have been testing the wrong file.</p>
     my @dots = grep { /^\./ &amp;&amp; -f &quot;$some_dir/$_&quot; } readdir($dh);
     closedir $dh;</code></pre></div>
 <p style="padding-bottom: 10px;">As of Perl 5.12 you can use a bare <a href="psi_element://pod%3A%3Aperlfunc%2Freaddir+DIRHANDLE">C<readdir></a> in a
-<code>while</code> loop, which will set <a href="psi_element://perlvar%2F%24_">C<$_></a> on every iteration.</p>
+<code>while</code> loop, which will set <a href="psi_element://perlvar%2F%24_">C<$_></a> on every iteration.
+If either a <code>readdir</code> expression or an explicit assignment of a
+<code>readdir</code> expression to a scalar is used as a <code>while</code>/<code>for</code> condition,
+then the condition actually tests for definedness of the expression's
+value, not for its regular truth value.</p>
 <div style="padding-bottom: 10px;"><pre><code>    opendir(my $dh, $some_dir) || die &quot;Can't open $some_dir: $!&quot;;
     while (readdir $dh) {
         print &quot;$some_dir/$_\n&quot;;

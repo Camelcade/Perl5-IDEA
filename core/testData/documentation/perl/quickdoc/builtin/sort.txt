@@ -1,5 +1,4 @@
-<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sort SUBNAME LIST
-   </dt>
+<p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sort SUBNAME LIST</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">sort BLOCK LIST</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">sort LIST</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">In list context, this sorts the LIST and returns the sorted list value.
@@ -19,9 +18,7 @@ an anonymous, in-line sort subroutine.</p>
 passed by reference in <a href="psi_element://perlvar%2F%40_">C<@_></a>, as for a normal subroutine.
 This is slower than unprototyped subroutines, where the elements to be
 compared are passed into the subroutine as the package global variables
-<code>$a</code> and <code>$b</code> (see example below).  Note that in the latter case, it
-is usually highly counter-productive to declare <code>$a</code> and <code>$b</code> as
-lexicals.</p>
+<code>$a</code> and <code>$b</code> (see example below).</p>
 <p style="padding-bottom: 10px;">If the subroutine is an XSUB, the elements to be compared are pushed on
 to the stack, the way arguments are usually passed to XSUBs.  <code>$a</code> and
 <code>$b</code> are not set.</p>
@@ -40,19 +37,9 @@ modifying an element of a list returned by <a href="psi_element://pod%3A%3Aperlf
 <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a>)
 actually modifies the element in the original list.  This is usually
 something to be avoided when writing clear code.</p>
-<p style="padding-bottom: 10px;">Perl 5.6 and earlier used a quicksort algorithm to implement sort.
-That algorithm was not stable and <i>could</i> go quadratic.  (A <i>stable</i> sort
-preserves the input order of elements that compare equal.  Although
-quicksort's run time is O(NlogN) when averaged over all arrays of
-length N, the time can be O(N**2), <i>quadratic</i> behavior, for some
-inputs.)  In 5.7, the quicksort implementation was replaced with
-a stable mergesort algorithm whose worst-case behavior is O(NlogN).
-But benchmarks indicated that for some inputs, on some platforms,
-the original quicksort was faster.  5.8 has a <a href="psi_element://sort" style="color:red">sort</a> pragma for
-limited control of the sort.  Its rather blunt control of the
-underlying algorithm may not persist into future Perls, but the
-ability to characterize the input or output in implementation
-independent ways quite probably will.</p>
+<p style="padding-bottom: 10px;">Historically Perl has varied in whether sorting is stable by default.
+If stability matters, it can be controlled explicitly by using the
+<a href="psi_element://sort" style="color:red">sort</a> pragma.</p>
 <p style="padding-bottom: 10px;">Examples:</p>
 <div style="padding-bottom: 10px;"><pre><code>    # sort lexically
     my @articles = sort @files;
@@ -133,12 +120,8 @@ independent ways quite probably will.</p>
     package main;
     my @new = sort Other::backwards @old;
 
-    # guarantee stability, regardless of algorithm
+    # guarantee stability
     use sort 'stable';
-    my @new = sort { substr($a, 3, 5) cmp substr($b, 3, 5) } @old;
-
-    # force use of mergesort (not portable outside Perl 5.8)
-    use sort '_mergesort';  # note discouraging _
     my @new = sort { substr($a, 3, 5) cmp substr($b, 3, 5) } @old;</code></pre></div>
 <p style="padding-bottom: 10px;">Warning: syntactical care is required when sorting the list returned from
 a function.  If you want to sort the list returned by the function call
@@ -153,13 +136,56 @@ a function.  If you want to sort the list returned by the function call
     my @contact = sort find_records(@key);
     my @contact = sort(find_records @key);
     my @contact = sort(find_records (@key));</code></pre></div>
-<p style="padding-bottom: 10px;">You <i>must not</i> declare <code>$a</code>
-and <code>$b</code> as lexicals.  They are package globals.  That means
-that if you're in the <code>main</code> package and type</p>
-<div style="padding-bottom: 10px;"><pre><code>    my @articles = sort {$b &lt;=&gt; $a} @files;</code></pre></div>
-<p style="padding-bottom: 10px;">then <code>$a</code> and <code>$b</code> are <code>$main::a</code> and <code>$main::b</code> (or <code>$::a</code> and <code>$::b</code>),
-but if you're in the <code>FooPack</code> package, it's the same as typing</p>
-<div style="padding-bottom: 10px;"><pre><code>    my @articles = sort {$FooPack::b &lt;=&gt; $FooPack::a} @files;</code></pre></div>
+<p style="padding-bottom: 10px;"><code>$a</code> and <code>$b</code> are set as package globals in the package the sort() is
+called from.  That means <code>$main::a</code> and <code>$main::b</code> (or <code>$::a</code> and
+<code>$::b</code>) in the <code>main</code> package, <code>$FooPack::a</code> and <code>$FooPack::b</code> in the
+<code>FooPack</code> package, etc.  If the sort block is in scope of a <code>my</code> or
+<code>state</code> declaration of <code>$a</code> and/or <code>$b</code>, you <i>must</i> spell out the full
+name of the variables in the sort block :</p>
+<div style="padding-bottom: 10px;"><pre><code>   package main;
+   my $a = &quot;C&quot;; # DANGER, Will Robinson, DANGER !!!
+
+   print sort { $a cmp $b }               qw(A C E G B D F H);
+                                          # WRONG
+   sub badlexi { $a cmp $b }
+   print sort badlexi                     qw(A C E G B D F H);
+                                          # WRONG
+   # the above prints BACFEDGH or some other incorrect ordering
+
+   print sort { $::a cmp $::b }           qw(A C E G B D F H);
+                                          # OK
+   print sort { our $a cmp our $b }       qw(A C E G B D F H);
+                                          # also OK
+   print sort { our ($a, $b); $a cmp $b } qw(A C E G B D F H);
+                                          # also OK
+   sub lexi { our $a cmp our $b }
+   print sort lexi                        qw(A C E G B D F H);
+                                          # also OK
+   # the above print ABCDEFGH</code></pre></div>
+<p style="padding-bottom: 10px;">With proper care you may mix package and my (or state) <code>$a</code> and/or <code>$b</code>:</p>
+<div style="padding-bottom: 10px;"><pre><code>   my $a = {
+      tiny   =&gt; -2,
+      small  =&gt; -1,
+      normal =&gt; 0,
+      big    =&gt; 1,
+      huge   =&gt; 2
+   };
+
+   say sort { $a-&gt;{our $a} &lt;=&gt; $a-&gt;{our $b} }
+       qw{ huge normal tiny small big};
+
+   # prints tinysmallnormalbighuge</code></pre></div>
+<p style="padding-bottom: 10px;"><code>$a</code> and <code>$b</code> are implicitly local to the sort() execution and regain their
+former values upon completing the sort.</p>
+<p style="padding-bottom: 10px;">Sort subroutines written using <code>$a</code> and <code>$b</code> are bound to their calling
+package. It is possible, but of limited interest, to define them in a
+different package, since the subroutine must still refer to the calling
+package's <code>$a</code> and <code>$b</code> :</p>
+<div style="padding-bottom: 10px;"><pre><code>   package Foo;
+   sub lexi { $Bar::a cmp $Bar::b }
+   package Bar;
+   ... sort Foo::lexi ...</code></pre></div>
+<p style="padding-bottom: 10px;">Use the prototyped versions (see above) for a more generic alternative.</p>
 <p style="padding-bottom: 10px;">The comparison function is required to behave.  If it returns
 inconsistent results (sometimes saying <code>$x[1]</code> is less than <code>$x[2]</code> and
 sometimes saying the opposite, for example) the results are not

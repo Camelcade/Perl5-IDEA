@@ -8,44 +8,44 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreftut.pod
 
   The Solution in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2302 in perlreftut.pod
 
-  Syntax in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3757 in perlreftut.pod
+  Syntax in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3793 in perlreftut.pod
 
-    Making References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3864 in perlreftut.pod
+    Making References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3900 in perlreftut.pod
 
-      Make Rule 1 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3890 in perlreftut.pod
+      Make Rule 1 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3926 in perlreftut.pod
 
-      Make Rule 2 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4826 in perlreftut.pod
+      Make Rule 2 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4862 in perlreftut.pod
 
-    Using References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5635 in perlreftut.pod
+    Using References in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5671 in perlreftut.pod
 
-      Use Rule 1 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5868 in perlreftut.pod
+      Use Rule 1 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5904 in perlreftut.pod
 
-      Use Rule 2 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7674 in perlreftut.pod
+      Use Rule 2 in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7710 in perlreftut.pod
 
-    An Example in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8922 in perlreftut.pod
+    An Example in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8958 in perlreftut.pod
 
-    Arrow Rule in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9865 in perlreftut.pod
+    Arrow Rule in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9901 in perlreftut.pod
 
-  Solution in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10398 in perlreftut.pod
+  Solution in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10434 in perlreftut.pod
 
-  The Rest in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14991 in perlreftut.pod
+  The Rest in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15027 in perlreftut.pod
 
-    You can make references to anything, including scalars, functions, and other ref... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15318 in perlreftut.pod
+    You can make references to anything, including scalars, functions, and other ref... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15354 in perlreftut.pod
 
-    In Use Rule 1|/Use Rule 1, you can omit the curly brackets whenever the thing in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15417 in perlreftut.pod
+    In Use Rule 1|/Use Rule 1, you can omit the curly brackets whenever the thing in... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15453 in perlreftut.pod
 
     This doesn't copy the underlying array:          $aref2 = $aref1;
- You get two r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15772 in perlreftut.pod
+ You get two r... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15808 in perlreftut.pod
 
-    To see if a variable contains a reference, use the ref|perlfunc/ref EXPR functio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16328 in perlreftut.pod
+    To see if a variable contains a reference, use the ref|perlfunc/ref EXPR functio... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16364 in perlreftut.pod
 
-    If you try to use a reference like a string, you get strings like  	ARRAY(0x80f5... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16592 in perlreftut.pod
+    If you try to use a reference like a string, you get strings like  	ARRAY(0x80f5... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16628 in perlreftut.pod
 
-    You can use a string as if it were a reference.  If you use the string "foo" as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17053 in perlreftut.pod
+    You can use a string as if it were a reference.  If you use the string "foo" as ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17089 in perlreftut.pod
 
-  Summary in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17716 in perlreftut.pod
+  Summary in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17752 in perlreftut.pod
 
-  Credits in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18033 in perlreftut.pod
+  Credits in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18069 in perlreftut.pod
 
-    Distribution Conditions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18302 in perlreftut.pod
+    Distribution Conditions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18341 in perlreftut.pod
 

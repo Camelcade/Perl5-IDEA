@@ -6,11 +6,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreref.pod
 
     OPERATORS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 245 in perlreref.pod
 
-    SYNTAX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2274 in perlreref.pod
+    SYNTAX in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2275 in perlreref.pod
 
-    ESCAPE SEQUENCES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3410 in perlreref.pod
+    ESCAPE SEQUENCES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3411 in perlreref.pod
 
-    CHARACTER CLASSES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4344 in perlreref.pod
+    CHARACTER CLASSES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4345 in perlreref.pod
 
     ANCHORS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7828 in perlreref.pod
 
@@ -18,45 +18,45 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlreref.pod
 
     EXTENDED CONSTRUCTS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9293 in perlreref.pod
 
-    VARIABLES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11215 in perlreref.pod
+    VARIABLES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11540 in perlreref.pod
 
-    FUNCTIONS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12568 in perlreref.pod
+    FUNCTIONS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12893 in perlreref.pod
 
-    TERMINOLOGY in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13183 in perlreref.pod
+    TERMINOLOGY in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13509 in perlreref.pod
 
-      Titlecase in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13203 in perlreref.pod
+      Titlecase in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13529 in perlreref.pod
 
-      Foldcase in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13354 in perlreref.pod
+      Foldcase in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13680 in perlreref.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13539 in perlreref.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13865 in perlreref.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13672 in perlreref.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13998 in perlreref.pod
 
-    perlretut for a tutorial on regular expressions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13698 in perlreref.pod
+    perlretut for a tutorial on regular expressions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14024 in perlreref.pod
 
-    perlrequick for a rapid tutorial. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13760 in perlreref.pod
+    perlrequick for a rapid tutorial. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14086 in perlreref.pod
 
-    perlre for more details. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13807 in perlreref.pod
+    perlre for more details. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14133 in perlreref.pod
 
-    perlvar for details on the variables. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13845 in perlreref.pod
+    perlvar for details on the variables. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14171 in perlreref.pod
 
-    perlop for details on the operators. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13896 in perlreref.pod
+    perlop for details on the operators. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14222 in perlreref.pod
 
-    perlfunc for details on the functions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13946 in perlreref.pod
+    perlfunc for details on the functions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14272 in perlreref.pod
 
-    perlfaq6 for FAQs on regular expressions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13998 in perlreref.pod
+    perlfaq6 for FAQs on regular expressions. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14324 in perlreref.pod
 
-    perlrebackslash for a reference on backslash sequences. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14053 in perlreref.pod
+    perlrebackslash for a reference on backslash sequences. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14379 in perlreref.pod
 
-    perlrecharclass for a reference on character classes. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14122 in perlreref.pod
+    perlrecharclass for a reference on character classes. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14448 in perlreref.pod
 
-    The re module to alter behaviour and aid debugging. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14189 in perlreref.pod
+    The re module to alter behaviour and aid debugging. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14515 in perlreref.pod
 
-    perldebug/"Debugging Regular Expressions" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14254 in perlreref.pod
+    perldebug/"Debugging Regular Expressions" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14580 in perlreref.pod
 
-    perluniintro, perlunicode, charnames and perllocale for details on regexes and i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14309 in perlreref.pod
+    perluniintro, perlunicode, charnames and perllocale for details on regexes and i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14635 in perlreref.pod
 
-    Mastering Regular Expressions by Jeffrey Friedl (http://oreilly.com/catalog/9780... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14432 in perlreref.pod
+    Mastering Regular Expressions by Jeffrey Friedl (http://oreilly.com/catalog/9780... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14758 in perlreref.pod
 
-  THANKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14600 in perlreref.pod
+  THANKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14926 in perlreref.pod
 

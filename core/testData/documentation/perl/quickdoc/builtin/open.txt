@@ -71,7 +71,7 @@ that affect how the input and output are processed (see <a href="psi_element://o
 see <a href="psi_element://perluniintro">perluniintro</a>.  Note that if layers are specified in the
 three-argument form, then default layers stored in ${^OPEN} (see <a href="psi_element://perlvar">perlvar</a>;
 usually set by the <a href="psi_element://open" style="color:red">open</a> pragma or the switch <code>-CioD</code>) are ignored.
-Those layers will also be ignored if you specifying a colon with no name
+Those layers will also be ignored if you specify a colon with no name
 following it.  In that case the default layer for the operating system
 (:raw on Unix, :crlf on Windows) is used.</p>
 <p style="padding-bottom: 10px;">Open returns nonzero on success, the undefined value otherwise.  If
@@ -112,9 +112,9 @@ declared with <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a> o
 <p style="padding-bottom: 10px;">As a special case the three-argument form with a read/write mode and the third
 argument being <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>:</p>
 <div style="padding-bottom: 10px;"><pre><code>    open(my $tmp, &quot;+&gt;&quot;, undef) or die ...</code></pre></div>
-<p style="padding-bottom: 10px;">opens a filehandle to an anonymous temporary file.  Also using <code>+&lt;</code>
-works for symmetry, but you really should consider writing something
-to the temporary file first.  You will need to
+<p style="padding-bottom: 10px;">opens a filehandle to a newly created empty anonymous temporary file.
+(This happens under any mode, which makes <code>+&gt;</code> the only useful and
+sensible mode to use.)  You will need to
 <a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a> to do the reading.</p>
 <p style="padding-bottom: 10px;">Perl is built using PerlIO by default.  Unless you've
 changed this (such as building Perl with <code>Configure -Uuseperlio</code>), you can
@@ -124,6 +124,11 @@ open filehandles directly to Perl scalars via:</p>
 <div style="padding-bottom: 10px;"><pre><code>    close STDOUT;
     open(STDOUT, &quot;&gt;&quot;, \$variable)
 	or die &quot;Can't open STDOUT: $!&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">The scalars for in-memory files are treated as octet strings: unless
+the file is being opened with truncation the scalar may not contain
+any code points over 0xFF.</p>
+<p style="padding-bottom: 10px;">Opening in-memory files <i>can</i> fail for a variety of reasons.  As with
+any other <code>open</code>, check the return value for success.</p>
 <p style="padding-bottom: 10px;">See <a href="psi_element://perliol">perliol</a> for detailed info on PerlIO.</p>
 <p style="padding-bottom: 10px;">General examples:</p>
 <div style="padding-bottom: 10px;"><pre><code> open(my $log, &quot;&gt;&gt;&quot;, &quot;/usr/spool/news/twitlog&quot;);

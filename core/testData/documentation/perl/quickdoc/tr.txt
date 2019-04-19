@@ -30,13 +30,18 @@ that</p>
 <div style="padding-bottom: 10px;"><pre><code>    $s = q{ if($x eq &quot;}&quot;) ... }; # WRONG</code></pre></div>
 <p style="padding-bottom: 10px;">is a syntax error.  The <code><a href="psi_element://Text%3A%3ABalanced" style="color:red">Text::Balanced</a></code> module (standard as of v5.8,
 and from CPAN before then) is able to do this properly.</p>
-<p style="padding-bottom: 10px;">There can be whitespace between the operator and the quoting
+<p style="padding-bottom: 10px;">There can (and in some cases, must) be whitespace between the operator
+and the quoting
 characters, except when <code>#</code> is being used as the quoting character.
 <code>q#foo#</code> is parsed as the string <code>foo</code>, while <span style="white-space: nowrap;"><code>q #foo#</code></span> is the
 operator <code>q</code> followed by a comment.  Its argument will be taken
 from the next line.  This allows you to write:</p>
 <div style="padding-bottom: 10px;"><pre><code>    s {foo}  # Replace foo
       {bar}  # with bar.</code></pre></div>
+<p style="padding-bottom: 10px;">The cases where whitespace must be used are when the quoting character
+is a word character (meaning it matches <code>/\w/</code>):</p>
+<div style="padding-bottom: 10px;"><pre><code>    q XfooX # Works: means the string 'foo'
+    qXfooX  # WRONG!</code></pre></div>
 <p style="padding-bottom: 10px;">The following escape sequences are available in constructs that interpolate,
 and in transliterations:
            </p>
@@ -154,12 +159,9 @@ from 0) is the letter <code>&quot;P&quot;</code>, and in EBCDIC it is the ampers
 as a Unicode code point no matter what the native encoding is.  The name of the
 character in the 256th position (indexed by 0) in Unicode is
 <code>LATIN CAPITAL LETTER A WITH MACRON</code>.</p>
-<p style="padding-bottom: 10px;">There are a couple of exceptions to the above rule.  <span style="white-space: nowrap;"><code>\N{U+<i>hex number</i>}</code></span> is
+<p style="padding-bottom: 10px;">An exception to the above rule is that <span style="white-space: nowrap;"><code>\N{U+<i>hex number</i>}</code></span> is
 always interpreted as a Unicode code point, so that <code>\N{U+0050}</code> is <code>&quot;P&quot;</code> even
-on EBCDIC platforms.  And if <code><span style="white-space: nowrap;"><a href="psi_element://encoding" style="color:red">use encoding</a></span></code> is in effect, the
-number is considered to be in that encoding, and is translated from that into
-the platform's native encoding if there is a corresponding native character;
-otherwise to Unicode.</p></dd></dl>
+on EBCDIC platforms.</p></dd></dl>
 <p style="padding-bottom: 10px;"><B>NOTE</B>: Unlike C and other languages, Perl has no <code>\v</code> escape sequence for
 the vertical tab (VT, which is 11 in both ASCII and EBCDIC), but you may
 use <code>\N{VT}</code>, <code>\ck</code>, <code>\N{U+0b}</code>, or <code>\x0b</code>.  (<code>\v</code>

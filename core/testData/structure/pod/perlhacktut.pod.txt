@@ -10,11 +10,11 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlhacktut.pod
 
     Writing the patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 939 in perlhacktut.pod
 
-    Testing the patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3666 in perlhacktut.pod
+    Testing the patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3659 in perlhacktut.pod
 
-    Documenting the patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5224 in perlhacktut.pod
+    Documenting the patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5217 in perlhacktut.pod
 
-    Submit in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5960 in perlhacktut.pod
+    Submit in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5953 in perlhacktut.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6033 in perlhacktut.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6026 in perlhacktut.pod
 

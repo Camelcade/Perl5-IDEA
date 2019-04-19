@@ -26,35 +26,33 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq1.pod
 
       No one is actively supporting Perl 4. Ten years ago it was a dead camel carcass ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3556 in perlfaq1.pod
 
-      The current leading implementation of Perl 6, Rakudo, released a "useful, usable... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3754 in perlfaq1.pod
+      There are really two tracks of perl development: a maintenance version and an ex... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3754 in perlfaq1.pod
 
-      There are really two tracks of perl development: a maintenance version and an ex... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3979 in perlfaq1.pod
+    What are Perl 4, Perl 5, or Perl 6? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4189 in perlfaq1.pod
 
-    What are Perl 4, Perl 5, or Perl 6? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4414 in perlfaq1.pod
+    What is Perl 6? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5118 in perlfaq1.pod
 
-    What is Perl 6? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5343 in perlfaq1.pod
+    How stable is Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6087 in perlfaq1.pod
 
-    How stable is Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6412 in perlfaq1.pod
+    How often are new versions of Perl released? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6459 in perlfaq1.pod
 
-    How often are new versions of Perl released? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6784 in perlfaq1.pod
+    Is Perl difficult to learn? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7322 in perlfaq1.pod
 
-    Is Perl difficult to learn? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7647 in perlfaq1.pod
+    How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8763 in perlfaq1.pod
 
-    How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9088 in perlfaq1.pod
+    Can I do [task] in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9605 in perlfaq1.pod
 
-    Can I do [task] in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9930 in perlfaq1.pod
+    When shouldn't I program in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10830 in perlfaq1.pod
 
-    When shouldn't I program in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11155 in perlfaq1.pod
+    What's the difference between "perl" and "Perl"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11288 in perlfaq1.pod
 
-    What's the difference between "perl" and "Perl"? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11613 in perlfaq1.pod
+    What is a JAPH? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11617 in perlfaq1.pod
 
-    What is a JAPH? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11942 in perlfaq1.pod
+    How can I convince others to use Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12286 in perlfaq1.pod
 
-    How can I convince others to use Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12611 in perlfaq1.pod
+      * http://www.perl.org/about.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13755 in perlfaq1.pod
 
-      * http://www.perl.org/about.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14080 in perlfaq1.pod
+      * http://perltraining.com.au/whyperl.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13798 in perlfaq1.pod
 
-      * http://perltraining.com.au/whyperl.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14123 in perlfaq1.pod
-
-  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14182 in perlfaq1.pod
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13857 in perlfaq1.pod
 

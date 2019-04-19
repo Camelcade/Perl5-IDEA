@@ -32,4 +32,10 @@ each pairing of fruits and colors:</p>
 See <a href="psi_element://File%3A%3AGlob" style="color:red">File::Glob</a> for details, including
 <a href="psi_element://File%3A%3AGlob%2FC%3Cbsd_glob%3E" style="color:red">C<bsd_glob></a>, which does not treat whitespace
 as a pattern separator.</p>
+<p style="padding-bottom: 10px;">If a <code>glob</code> expression is used as the condition of a <code>while</code> or <code>for</code>
+loop, then it will be implicitly assigned to <code>$_</code>.  If either a <code>glob</code>
+expression or an explicit assignment of a <code>glob</code> expression to a scalar
+is used as a <code>while</code>/<code>for</code> condition, then the condition actually
+tests for definedness of the expression's value, not for its regular
+truth value.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fglob">glob in perlport</a>.</p></dd></dl>

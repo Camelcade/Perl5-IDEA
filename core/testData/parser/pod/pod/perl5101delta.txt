@@ -1117,6 +1117,7 @@ POD file
                       PsiElement(Perl5 POD: POD_L)('L')
                       PsiElement(Perl5 POD: POD_ANGLE_LEFT)('<')
                       PsiFormattingSectionContentImpl(Perl5 POD: FORMATTING_SECTION_CONTENT)
+                        PsiElement(Perl5 POD: POD_DIV)('/')
                         PsiElement(Perl5 POD: POD_QUOTE_DOUBLE)('"')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('Modules')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('and')

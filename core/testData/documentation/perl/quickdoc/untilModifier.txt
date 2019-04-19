@@ -21,6 +21,8 @@ the condition is true (that is, if the condition is false).</p>
 for each item in the LIST (with <code>$_</code> aliased to each item in turn).</p>
 <div style="padding-bottom: 10px;"><pre><code>    print &quot;Hello $_!\n&quot; for qw(world Dolly nurse);</code></pre></div>
 <p style="padding-bottom: 10px;"><code>while</code> repeats the statement <i>while</i> the condition is true.
+Postfix <code>while</code> has the same magic treatment of some kinds of condition
+that prefix <code>while</code> has.
 <code>until</code> does the opposite, it repeats the statement <i>until</i> the
 condition is true (or while the condition is false):</p>
 <div style="padding-bottom: 10px;"><pre><code>    # Both of these count from 0 to 10.
@@ -78,5 +80,5 @@ loop or a <code>given</code> block, it executes the statement only if the smartm
 a <code>next</code> from inside a <code>foreach</code> and <code>break</code> from inside a <code>given</code>.</p>
 <p style="padding-bottom: 10px;">Under the current implementation, the <code>foreach</code> loop can be
 anywhere within the <code>when</code> modifier's dynamic scope, but must be
-within the <code>given</code> block's lexical scope.  This restricted may
+within the <code>given</code> block's lexical scope.  This restriction may
 be relaxed in a future release.  See <a href="psi_element://pod%3A%3Aperlsyn%2FSwitch+Statements">Switch Statements</a> below.</p>

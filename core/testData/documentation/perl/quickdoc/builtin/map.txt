@@ -1,12 +1,11 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">map BLOCK LIST</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">map EXPR,LIST</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Evaluates the BLOCK or EXPR for each element of LIST (locally setting
-<a href="psi_element://perlvar%2F%24_">C<$_></a> to each element) and returns the list value composed
-of the
-results of each such evaluation.  In scalar context, returns the
-total number of elements so generated.  Evaluates BLOCK or EXPR in
-list context, so each element of LIST may produce zero, one, or
-more elements in the returned value.</p>
+<a href="psi_element://perlvar%2F%24_">C<$_></a> to each element) and composes a list of the results of
+each such evaluation.  Each element of LIST may produce zero, one, or more
+elements in the generated list, so the number of elements in the generated
+list may differ from that in LIST.  In scalar context, returns the total
+number of elements so generated.  In list context, returns the generated list.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my @chars = map(chr, @numbers);</code></pre></div>
 <p style="padding-bottom: 10px;">translates a list of numbers to the corresponding characters.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my @squares = map { $_ * $_ } @numbers;</code></pre></div>
@@ -30,8 +29,8 @@ become key/value pairs.  See <a href="psi_element://perldata">perldata</a> for m
 be used to modify the elements of the LIST.  While this is useful and
 supported, it can cause bizarre results if the elements of LIST are not
 variables.  Using a regular <code>foreach</code> loop for this purpose would be
-clearer in most cases.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a> for an
-array composed of those items of the original list for which the BLOCK
+clearer in most cases.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a> for a
+list composed of those items of the original list for which the BLOCK
 or EXPR evaluates to true.</p>
 <p style="padding-bottom: 10px;"><code>{</code> starts both hash references and blocks, so <code>map { ...</code> could be either
 the start of map BLOCK LIST or map EXPR, LIST.  Because Perl doesn't look

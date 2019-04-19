@@ -1,8 +1,9 @@
 <p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlop%2FRegexp+Quote-Like+Operators">Regexp Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>s/<i>PATTERN</i>/<i>REPLACEMENT</i>/msixpodualngcer</code>
-   
+    
           </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Searches a string for a pattern, and if found, replaces that pattern
 with the replacement text and returns the number of substitutions
-made.  Otherwise it returns false (specifically, the empty string).</p>
+made.  Otherwise it returns false (a value that is both an empty string (<code>&quot;&quot;</code>)
+and numeric zero (<code>0</code>) as described in <a href="psi_element://pod%3A%3Aperlop%2FRelational+Operators">Relational Operators</a>).</p>
 <p style="padding-bottom: 10px;">If the <code>/r</code> (non-destructive) option is used then it runs the
 substitution on a copy of the string and instead of returning the
 number of substitutions, it returns the copy whether or not a
@@ -14,7 +15,7 @@ variable is searched and modified.  Unless the <code>/r</code> option is used,
 the string specified must be a scalar variable, an array element, a
 hash element, or an assignment to one of those; that is, some sort of
 scalar lvalue.</p>
-<p style="padding-bottom: 10px;">If the delimiter chosen is a single quote, no interpolation is
+<p style="padding-bottom: 10px;">If the delimiter chosen is a single quote, no variable interpolation is
 done on either the <i>PATTERN</i> or the <i>REPLACEMENT</i>.  Otherwise, if the
 <i>PATTERN</i> contains a <code>$</code> that looks like a variable rather than an
 end-of-string test, the variable will be interpolated into the pattern

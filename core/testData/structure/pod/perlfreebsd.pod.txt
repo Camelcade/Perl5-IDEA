@@ -6,7 +6,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfreebsd.pod
 
     FreeBSD core dumps from readdir_r with ithreads in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 400 in perlfreebsd.pod
 
-    $^X doesn't always contain a full path in FreeBSD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 853 in perlfreebsd.pod
+    $^X doesn't always contain a full path in FreeBSD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 856 in perlfreebsd.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1411 in perlfreebsd.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1423 in perlfreebsd.pod
 

@@ -8,37 +8,37 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlnumber.pod
 
   Storing numbers in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 857 in perlnumber.pod
 
-  Numeric operators and numeric conversions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3541 in perlnumber.pod
+  Numeric operators and numeric conversions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3542 in perlnumber.pod
 
-    If the source number can be represented in the target form, that representation ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4265 in perlnumber.pod
+    If the source number can be represented in the target form, that representation ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4266 in perlnumber.pod
 
-    If the source number is outside of the limits representable in the target form, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4364 in perlnumber.pod
+    If the source number is outside of the limits representable in the target form, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4365 in perlnumber.pod
 
-    If the source number is between two numbers representable in the target form, a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4527 in perlnumber.pod
+    If the source number is between two numbers representable in the target form, a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4528 in perlnumber.pod
 
-    In native floating point --> native integer conversions the magnitude of the res... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4691 in perlnumber.pod
+    In native floating point --> native integer conversions the magnitude of the res... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4692 in perlnumber.pod
 
-    If the decimal string --> native integer conversion cannot be done without loss ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4871 in perlnumber.pod
+    If the decimal string --> native integer conversion cannot be done without loss ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4872 in perlnumber.pod
 
-  Flavors of Perl numeric operations in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5448 in perlnumber.pod
+  Flavors of Perl numeric operations in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5449 in perlnumber.pod
 
-    Arithmetic operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6065 in perlnumber.pod
+    Arithmetic operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6066 in perlnumber.pod
 
-    ++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6683 in perlnumber.pod
+    ++ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6684 in perlnumber.pod
 
-    Arithmetic operators during use integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6865 in perlnumber.pod
+    Arithmetic operators during use integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6866 in perlnumber.pod
 
-    Other mathematical operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7171 in perlnumber.pod
+    Other mathematical operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7172 in perlnumber.pod
 
-    Bitwise operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7293 in perlnumber.pod
+    Bitwise operators in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7294 in perlnumber.pod
 
-    Bitwise operators during use integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7380 in perlnumber.pod
+    Bitwise operators during use integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7381 in perlnumber.pod
 
-    Operators which expect an integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7551 in perlnumber.pod
+    Operators which expect an integer in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7552 in perlnumber.pod
 
-    Operators which expect a string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7719 in perlnumber.pod
+    Operators which expect a string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7720 in perlnumber.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8132 in perlnumber.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8133 in perlnumber.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8312 in perlnumber.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8313 in perlnumber.pod
 

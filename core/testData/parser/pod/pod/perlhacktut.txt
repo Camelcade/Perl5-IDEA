@@ -648,7 +648,7 @@ POD file
             PsiElement(Perl5 POD: POD_COLON)(':')
             PsiElement(Perl5 POD: POD_NEWLINE)('\n')
           PsiPodVerbatimParagraphImpl(Perl5 POD: POD_VERBATIM_PARAGRAPH)
-            PsiElement(Perl5 POD: POD_CODE)('    items = SP - MARK;\n    MARK++;\n    sv_setpvn(cat, "", 0);\n +  patcopy = pat;\n    while (pat < patend) {\n')
+            PsiElement(Perl5 POD: POD_CODE)('    items = SP - MARK;\n    MARK++;\n    SvPVCLEAR(cat);\n +  patcopy = pat;\n    while (pat < patend) {\n')
           PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('Now')
             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('if')

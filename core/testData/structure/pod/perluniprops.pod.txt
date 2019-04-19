@@ -1,132 +1,136 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perluniprops.pod
 
-  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 277 in perluniprops.pod
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 272 in perluniprops.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 366 in perluniprops.pod
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 362 in perluniprops.pod
 
-  Properties accessible through \p{} and \P{} in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2221 in perluniprops.pod
+  Properties accessible through \p{} and \P{} in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2217 in perluniprops.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3936 in perluniprops.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4049 in perluniprops.pod
 
-      Single form (\p{name}) tighter rules: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3954 in perluniprops.pod
+      Single form (\p{name}) tighter rules: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4067 in perluniprops.pod
 
-        * white space adjacent to a non-word character in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4078 in perluniprops.pod
+        * white space adjacent to a non-word character in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4191 in perluniprops.pod
 
-        * underscores separating digits in numbers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4132 in perluniprops.pod
+        * underscores separating digits in numbers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4245 in perluniprops.pod
 
-      Compound form (\p{name=value} or \p{name:value}) tighter rules: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4328 in perluniprops.pod
+      Compound form (\p{name=value} or \p{name:value}) tighter rules: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4441 in perluniprops.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4839 in perluniprops.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4952 in perluniprops.pod
 
-      Stabilized in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4857 in perluniprops.pod
+      Stabilized in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4970 in perluniprops.pod
 
-      Deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5163 in perluniprops.pod
+      Deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5276 in perluniprops.pod
 
-      Obsolete in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6182 in perluniprops.pod
+      Obsolete in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6295 in perluniprops.pod
 
-      Discouraged in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6396 in perluniprops.pod
+      Discouraged in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6509 in perluniprops.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 10827 in perluniprops.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 11402 in perluniprops.pod
 
-      * is a wild-card in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10836 in perluniprops.pod
+      * is a wild-card in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11411 in perluniprops.pod
 
-      (\d+) in the info column gives the number of Unicode code points matched by this... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10866 in perluniprops.pod
+      (\d+) in the info column gives the number of Unicode code points matched by this property. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11441 in perluniprops.pod
 
-      D means this is deprecated. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10970 in perluniprops.pod
+      D means this is deprecated. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11542 in perluniprops.pod
 
-      O means this is obsolete. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11011 in perluniprops.pod
+      O means this is obsolete. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11580 in perluniprops.pod
 
-      S means this is stabilized. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11050 in perluniprops.pod
+      S means this is stabilized. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11616 in perluniprops.pod
 
-      T means tighter (stricter) name matching applies. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11091 in perluniprops.pod
+      T means tighter (stricter) name matching applies. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11654 in perluniprops.pod
 
-      X means use of this form is discouraged, and may not be stable. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11154 in perluniprops.pod
+      X means use of this form is discouraged, and may not be stable. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11714 in perluniprops.pod
 
-    Legal \p{} and \P{} constructs that match no characters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 248472 in perluniprops.pod
+    Legal \p{} and \P{} constructs that match no characters in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 379055 in perluniprops.pod
 
-      \p{Canonical_Combining_Class=Attached_Below_Left} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 248849 in perluniprops.pod
+      \p{Canonical_Combining_Class=Attached_Below_Left} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 379432 in perluniprops.pod
 
-      \p{Canonical_Combining_Class=CCC133} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 248906 in perluniprops.pod
+      \p{Canonical_Combining_Class=CCC133} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 379489 in perluniprops.pod
 
-      \p{Grapheme_Cluster_Break=Prepend} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 248950 in perluniprops.pod
+  Properties accessible through Unicode::UCD in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 379542 in perluniprops.pod
 
-  Properties accessible through Unicode::UCD in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 249001 in perluniprops.pod
+  Properties accessible through other means in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 403340 in perluniprops.pod
 
-  Properties accessible through other means in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 263449 in perluniprops.pod
+  Unicode character properties that are NOT accepted by Perl in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 404133 in perluniprops.pod
 
-  Unicode character properties that are NOT accepted by Perl in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 264242 in perluniprops.pod
+    Expands_On_NFC (XO_NFC) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404710 in perluniprops.pod
 
-    Expands_On_NFC (XO_NFC) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264819 in perluniprops.pod
+    Expands_On_NFD (XO_NFD) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404744 in perluniprops.pod
 
-    Expands_On_NFD (XO_NFD) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264853 in perluniprops.pod
+    Expands_On_NFKC (XO_NFKC) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404778 in perluniprops.pod
 
-    Expands_On_NFKC (XO_NFKC) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264887 in perluniprops.pod
+    Expands_On_NFKD (XO_NFKD) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404814 in perluniprops.pod
 
-    Expands_On_NFKD (XO_NFKD) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264923 in perluniprops.pod
+    Grapheme_Link (Gr_Link) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405177 in perluniprops.pod
 
-    Grapheme_Link (Gr_Link) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265286 in perluniprops.pod
+    Jamo_Short_Name (JSN) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405291 in perluniprops.pod
 
-    Jamo_Short_Name (JSN) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265400 in perluniprops.pod
+    Other_Alphabetic (OAlpha) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405323 in perluniprops.pod
 
-    Other_Alphabetic (OAlpha) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265432 in perluniprops.pod
+    Other_Default_Ignorable_Code_Point (ODI) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405359 in perluniprops.pod
 
-    Other_Default_Ignorable_Code_Point (ODI) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265468 in perluniprops.pod
+    Other_Grapheme_Extend (OGr_Ext) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405410 in perluniprops.pod
 
-    Other_Grapheme_Extend (OGr_Ext) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265519 in perluniprops.pod
+    Other_ID_Continue (OIDC) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405452 in perluniprops.pod
 
-    Other_ID_Continue (OIDC) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265561 in perluniprops.pod
+    Other_ID_Start (OIDS) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405487 in perluniprops.pod
 
-    Other_ID_Start (OIDS) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265596 in perluniprops.pod
+    Other_Lowercase (OLower) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405519 in perluniprops.pod
 
-    Other_Lowercase (OLower) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265628 in perluniprops.pod
+    Other_Math (OMath) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405554 in perluniprops.pod
 
-    Other_Math (OMath) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265663 in perluniprops.pod
+    Other_Uppercase (OUpper) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405583 in perluniprops.pod
 
-    Other_Uppercase (OUpper) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265692 in perluniprops.pod
+    Script=Katakana_Or_Hiragana (sc=Hrkt) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405720 in perluniprops.pod
 
-    Script=Katakana_Or_Hiragana (sc=Hrkt) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 265829 in perluniprops.pod
+    Script_Extensions=Katakana_Or_Hiragana (scx=Hrkt) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405956 in perluniprops.pod
 
-    Script_Extensions=Katakana_Or_Hiragana (scx=Hrkt) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 266065 in perluniprops.pod
+  Other information in the Unicode data base in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 406696 in perluniprops.pod
 
-  Other information in the Unicode data base in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 266805 in perluniprops.pod
+    auxiliary/GraphemeBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407768 in perluniprops.pod
 
-    auxiliary\GraphemeBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267877 in perluniprops.pod
+    auxiliary/LineBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407812 in perluniprops.pod
 
-    auxiliary\LineBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267921 in perluniprops.pod
+    auxiliary/SentenceBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407852 in perluniprops.pod
 
-    auxiliary\SentenceBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267961 in perluniprops.pod
+    auxiliary/WordBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407896 in perluniprops.pod
 
-    auxiliary\WordBreakTest.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268005 in perluniprops.pod
+    BidiCharacterTest.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407973 in perluniprops.pod
 
-    BidiCharacterTest.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268082 in perluniprops.pod
+    BidiTest.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408006 in perluniprops.pod
 
-    BidiTest.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268115 in perluniprops.pod
+    NormTest.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408030 in perluniprops.pod
 
-    NormTest.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268139 in perluniprops.pod
+    CJKRadicals.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408074 in perluniprops.pod
 
-    CJKRadicals.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268183 in perluniprops.pod
+    EmojiSources.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408169 in perluniprops.pod
 
-    EmojiSources.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268278 in perluniprops.pod
+    extracted/DName.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408276 in perluniprops.pod
 
-    Index.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268385 in perluniprops.pod
+    Index.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408379 in perluniprops.pod
 
-    NamedSqProv.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268450 in perluniprops.pod
+    NamedSqProv.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408444 in perluniprops.pod
 
-    NamesList.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268654 in perluniprops.pod
+    NamesList.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408648 in perluniprops.pod
 
-    NamesList.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268737 in perluniprops.pod
+    NamesList.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408731 in perluniprops.pod
 
-    NormalizationCorrections.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268794 in perluniprops.pod
+    NormalizationCorrections.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408788 in perluniprops.pod
 
-    ReadMe.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268914 in perluniprops.pod
+    NushuSources.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408908 in perluniprops.pod
 
-    StandardizedVariants.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 268953 in perluniprops.pod
+    ReadMe.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408986 in perluniprops.pod
 
-    StandardizedVariants.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269095 in perluniprops.pod
+    StandardizedVariants.html in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409025 in perluniprops.pod
 
-    USourceData.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269345 in perluniprops.pod
+    StandardizedVariants.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409211 in perluniprops.pod
 
-    USourceGlyphs.pdf in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 269477 in perluniprops.pod
+    TangutSources.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409461 in perluniprops.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 269564 in perluniprops.pod
+    USourceData.txt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409656 in perluniprops.pod
+
+    USourceGlyphs.pdf in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409788 in perluniprops.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 409875 in perluniprops.pod
 

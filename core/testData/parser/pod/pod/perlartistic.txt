@@ -1423,7 +1423,7 @@ POD file
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('IMPLIED')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('WARRANTIES')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('OF')
-                    PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('MERCHANTIBILITY')
+                    PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('MERCHANTABILITY')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('AND')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('FITNESS')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('FOR')

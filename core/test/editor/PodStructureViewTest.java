@@ -46,6 +46,30 @@ public class PodStructureViewTest extends PodLightTestCase {
 
   public void testPerl() {doTest();}
 
+  public void testPerl56delta() {doTest();}
+
+  public void testPerl58delta() {doTest();}
+
+  public void testPerl561delta() {doTest();}
+
+  public void testPerl581delta() {doTest();}
+
+  public void testPerl582delta() {doTest();}
+
+  public void testPerl583delta() {doTest();}
+
+  public void testPerl584delta() {doTest();}
+
+  public void testPerl585delta() {doTest();}
+
+  public void testPerl586delta() {doTest();}
+
+  public void testPerl587delta() {doTest();}
+
+  public void testPerl588delta() {doTest();}
+
+  public void testPerl589delta() {doTest();}
+
   public void testPerl5004delta() {doTest();}
 
   public void testPerl5005delta() {doTest();}
@@ -106,31 +130,27 @@ public class PodStructureViewTest extends PodLightTestCase {
 
   public void testPerl5222delta() {doTest();}
 
+  public void testPerl5223delta() {doTest();}
+
+  public void testPerl5224delta() {doTest();}
+
   public void testPerl5240delta() {doTest();}
 
-  public void testPerl561delta() {doTest();}
+  public void testPerl5241delta() {doTest();}
 
-  public void testPerl56delta() {doTest();}
+  public void testPerl5242delta() {doTest();}
 
-  public void testPerl581delta() {doTest();}
+  public void testPerl5243delta() {doTest();}
 
-  public void testPerl582delta() {doTest();}
+  public void testPerl5244delta() {doTest();}
 
-  public void testPerl583delta() {doTest();}
+  public void testPerl5260delta() {doTest();}
 
-  public void testPerl584delta() {doTest();}
+  public void testPerl5261delta() {doTest();}
 
-  public void testPerl585delta() {doTest();}
+  public void testPerl5262delta() {doTest();}
 
-  public void testPerl586delta() {doTest();}
-
-  public void testPerl587delta() {doTest();}
-
-  public void testPerl588delta() {doTest();}
-
-  public void testPerl589delta() {doTest();}
-
-  public void testPerl58delta() {doTest();}
+  public void testPerl5280delta() {doTest();}
 
   public void testPerlaix() {doTest();}
 
@@ -177,6 +197,8 @@ public class PodStructureViewTest extends PodLightTestCase {
   public void testPerldebug() {doTest();}
 
   public void testPerldelta() {doTest();}
+
+  public void testPerldeprecation() {doTest();}
 
   public void testPerldiag() {doTest();}
 

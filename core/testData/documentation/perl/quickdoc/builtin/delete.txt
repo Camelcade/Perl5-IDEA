@@ -4,10 +4,13 @@
 so that <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> on that element no longer returns
 true.  Setting a hash element to the undefined value does not remove its
 key, but deleting it does; see <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a>.</p>
-<p style="padding-bottom: 10px;">In list context, returns the value or values deleted, or the last such
-element in scalar context.  The return list's length always matches that of
+<p style="padding-bottom: 10px;">In list context, usually returns the value or values deleted, or the last such
+element in scalar context.  The return list's length corresponds to that of
 the argument list: deleting non-existent elements returns the undefined value
-in their corresponding positions.</p>
+in their corresponding positions. When a
+<a href="psi_element://perldata%2FKeyE%3Csol%3EValue+Hash+Slices" style="color:red">keyE<sol>value hash slice</a> is passed to
+<code>delete</code>, the return value is a list of key/value pairs (two elements for each
+item deleted from the hash).</p>
 <p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR">C<delete></a> may also be used on arrays and array slices,
 but its behavior is less straightforward.  Although
 <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> will return false for deleted entries,

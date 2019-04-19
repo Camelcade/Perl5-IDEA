@@ -44,9 +44,6 @@ This happens anywhere the arrow operator is used, including even here:</p>
 <div style="padding-bottom: 10px;"><pre><code>    undef $ref;
     if (exists $ref-&gt;{&quot;Some key&quot;})    { }
     print $ref;  # prints HASH(0x80d3d5c)</code></pre></div>
-<p style="padding-bottom: 10px;">This surprising autovivification in what does not at first--or even
-second--glance appear to be an lvalue context may be fixed in a future
-release.</p>
 <p style="padding-bottom: 10px;">Use of a subroutine call, rather than a subroutine name, as an argument
 to <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> is an error.</p>
 <div style="padding-bottom: 10px;"><pre><code>    exists &amp;sub;    # OK

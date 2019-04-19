@@ -3,7 +3,9 @@
 <dt style="padding-bottom:4px;font-weight:bold;">pos</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the offset of where the last <code>m//g</code> search left off for the
 variable in question (<a href="psi_element://perlvar%2F%24_">C<$_></a> is used when the variable is not
-specified).  Note that 0 is a valid match offset.
+specified).  This offset is in characters unless the
+(no-longer-recommended) <a href="psi_element://bytes" style="color:red">C<use bytes></a> pragma is in effect, in
+which case the offset is in bytes.  Note that 0 is a valid match offset.
 <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> indicates
 that the search position is reset (usually due to match failure, but
 can also be because no match has yet been run on the scalar).</p>

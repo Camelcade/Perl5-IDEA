@@ -25,29 +25,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlsec.pod
 
     Cleaning Up Your Path in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11215 in perlsec.pod
 
-    Security Bugs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16371 in perlsec.pod
+    Shebang Race Condition in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16371 in perlsec.pod
 
-    Protecting Your Programs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18514 in perlsec.pod
+    Protecting Your Programs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19617 in perlsec.pod
 
-    Unicode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20433 in perlsec.pod
+    Unicode in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21536 in perlsec.pod
 
-    Algorithmic Complexity Attacks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20709 in perlsec.pod
+    Algorithmic Complexity Attacks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21812 in perlsec.pod
 
-      Hash Algorithm - Hash algorithms like the one used in Perl are well known to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20997 in perlsec.pod
+      Hash Algorithm - Hash algorithms like the one used in Perl are well known to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22100 in perlsec.pod
 
-        Hash Seed Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21849 in perlsec.pod
+        Hash Seed Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22952 in perlsec.pod
 
-        Hash Traversal Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22252 in perlsec.pod
+        Hash Traversal Randomization in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23355 in perlsec.pod
 
-        Bucket Order Perturbance in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22784 in perlsec.pod
+        Bucket Order Perturbance in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23887 in perlsec.pod
 
-        New Default Hash Function in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23125 in perlsec.pod
+        New Default Hash Function in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24228 in perlsec.pod
 
-        Alternative Hash Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23266 in perlsec.pod
+        Alternative Hash Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24369 in perlsec.pod
 
-      Regular expressions - Perl's regular expression engine is so called NFA (Non-det... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24849 in perlsec.pod
+      Regular expressions - Perl's regular expression engine is so called NFA (Non-det... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25952 in perlsec.pod
 
-      Sorting - the quicksort algorithm used in Perls before 5.8.0 to implement the so... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25380 in perlsec.pod
+      Sorting - the quicksort algorithm used in Perls before 5.8.0 to implement the so... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26483 in perlsec.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25824 in perlsec.pod
+    Using Sudo in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26968 in perlsec.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28129 in perlsec.pod
 

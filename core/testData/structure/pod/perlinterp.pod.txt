@@ -10,27 +10,27 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlinterp.pod
 
     Startup in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 662 in perlinterp.pod
 
-    Parsing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2804 in perlinterp.pod
+    Parsing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2778 in perlinterp.pod
 
-    Optimization in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4212 in perlinterp.pod
+    Optimization in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4186 in perlinterp.pod
 
-    Running in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4916 in perlinterp.pod
+    Running in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4890 in perlinterp.pod
 
-    Exception handing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6831 in perlinterp.pod
+    Exception handing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6805 in perlinterp.pod
 
-    INTERNAL VARIABLE TYPES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12104 in perlinterp.pod
+    INTERNAL VARIABLE TYPES in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12078 in perlinterp.pod
 
-  OP TREES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16699 in perlinterp.pod
+  OP TREES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16673 in perlinterp.pod
 
-  STACKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24424 in perlinterp.pod
+  STACKS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 27390 in perlinterp.pod
 
-    Argument stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24699 in perlinterp.pod
+    Argument stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27665 in perlinterp.pod
 
-    Mark stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26096 in perlinterp.pod
+    Mark stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29062 in perlinterp.pod
 
-    Save stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28595 in perlinterp.pod
+    Save stack in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31561 in perlinterp.pod
 
-  MILLIONS OF MACROS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28923 in perlinterp.pod
+  MILLIONS OF MACROS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 31889 in perlinterp.pod
 
-  FURTHER READING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30548 in perlinterp.pod
+  FURTHER READING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33514 in perlinterp.pod
 

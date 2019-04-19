@@ -12,7 +12,7 @@ See <a href="psi_element://perlsub%2FPersistent+Private+Variables">Persistent Pr
 parentheses.  With a parenthesised list, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> can be
 used as a
 dummy placeholder.  However, since initialization of state variables in
-list context is currently not possible this would serve no purpose.</p>
+such lists is currently not possible this would serve no purpose.</p>
 <p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST">C<state></a> is available only if the
 <a href="psi_element://feature%2FThe+%27state%27+feature" style="color:red">C<"state"> feature</a> is enabled or if it is
 prefixed with <code>CORE::</code>.  The

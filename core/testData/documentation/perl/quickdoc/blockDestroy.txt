@@ -11,14 +11,20 @@ called by Perl at the appropriate time, unless the method is empty.</p>
 argument. It does not receive any additional arguments. However, the
 <code>$_[0]</code> variable will be read-only in the destructor, so you cannot
 assign a value to it.</p>
-<p style="padding-bottom: 10px;">If your <code>DESTROY</code> method throws an error, this error will be ignored.
-It will not be sent to <code>STDERR</code> and it will not cause the program to
-die. However, if your destructor is running inside an <code>eval {}</code> block,
-then the error will change the value of <code>$@</code>.</p>
-<p style="padding-bottom: 10px;">Because <code>DESTROY</code> methods can be called at any time, you should
-localize any global variables you might update in your <code>DESTROY</code>. In
-particular, if you use <code>eval {}</code> you should localize <code>$@</code>, and if you
-use <code>system</code> or backticks you should localize <code>$?</code>.</p>
+<p style="padding-bottom: 10px;">If your <code>DESTROY</code> method throws an exception, this will not cause
+any control transfer beyond exiting the method.  The exception will be
+reported to <code>STDERR</code> as a warning, marked &quot;(in cleanup)&quot;, and Perl will
+continue with whatever it was doing before.</p>
+<p style="padding-bottom: 10px;">Because <code>DESTROY</code> methods can be called at any time, you should localize
+any global status variables that might be set by anything you do in
+your <code>DESTROY</code> method.  If you are in doubt about a particular status
+variable, it doesn't hurt to localize it.  There are five global status
+variables, and the safest way is to localize all five of them:</p>
+<div style="padding-bottom: 10px;"><pre><code>  sub DESTROY {
+      local($., $@, $!, $^E, $?);
+      my $self = shift;
+      ...;
+  }</code></pre></div>
 <p style="padding-bottom: 10px;">If you define an <code>AUTOLOAD</code> in your class, then Perl will call your
 <code>AUTOLOAD</code> to handle the <code>DESTROY</code> method. You can prevent this by
 defining an empty <code>DESTROY</code>, like we did in the autoloading example.

@@ -64,37 +64,37 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlootut.pod
 
         Moose provides a layer of declarative "sugar" for defining classes. That sugar i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17486 in perlootut.pod
 
-        Moose lets you define roles the same way you define classes:    package HasOnOfS... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18092 in perlootut.pod
+        Moose lets you define roles the same way you define classes:    package HasOnOff... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18092 in perlootut.pod
 
-        In the example above, you can see that we passed isa => 'Bool' to has() when cre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18426 in perlootut.pod
+        In the example above, you can see that we passed isa => 'Bool' to has() when cre... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18427 in perlootut.pod
 
-        Perl's built-in introspection features are fairly minimal. Moose builds on top o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18716 in perlootut.pod
+        Perl's built-in introspection features are fairly minimal. Moose builds on top o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18717 in perlootut.pod
 
-        Moose describes itself using its own introspection API. Besides being a cool tri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19043 in perlootut.pod
+        Moose describes itself using its own introspection API. Besides being a cool tri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19044 in perlootut.pod
 
-        There is a rich ecosystem of Moose extensions on CPAN under the MooseX|http://se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19230 in perlootut.pod
+        There is a rich ecosystem of Moose extensions on CPAN under the MooseX|http://se... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19231 in perlootut.pod
 
-        Moose is a very powerful tool, and we can't cover all of its features here. We e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19503 in perlootut.pod
+        Moose is a very powerful tool, and we can't cover all of its features here. We e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19504 in perlootut.pod
 
-      Moo in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20831 in perlootut.pod
+      Moo in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20832 in perlootut.pod
 
-    Class::Accessor in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22019 in perlootut.pod
+    Class::Accessor in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22020 in perlootut.pod
 
-    Class::Tiny in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23174 in perlootut.pod
+    Class::Tiny in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23175 in perlootut.pod
 
-    Role::Tiny in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23848 in perlootut.pod
+    Role::Tiny in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23849 in perlootut.pod
 
-    OO System Summary in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24452 in perlootut.pod
+    OO System Summary in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24453 in perlootut.pod
 
-      Moose is the maximal option. It has a lot of features, a big ecosystem, and a th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24536 in perlootut.pod
+      Moose is the maximal option. It has a lot of features, a big ecosystem, and a th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24537 in perlootut.pod
 
-      Class::Accessor does a lot less than Moose, and is a nice alternative if you fin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24788 in perlootut.pod
+      Class::Accessor does a lot less than Moose, and is a nice alternative if you fin... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24789 in perlootut.pod
 
-      Class::Tiny is the absolute minimal option. It has no dependencies, and almost n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25095 in perlootut.pod
+      Class::Tiny is the absolute minimal option. It has no dependencies, and almost n... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25096 in perlootut.pod
 
-      Use Role::Tiny with Class::Accessor or Class::Tiny if you find yourself consider... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25356 in perlootut.pod
+      Use Role::Tiny with Class::Accessor or Class::Tiny if you find yourself consider... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25357 in perlootut.pod
 
-    Other OO Systems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25570 in perlootut.pod
+    Other OO Systems in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25571 in perlootut.pod
 
-  CONCLUSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 26004 in perlootut.pod
+  CONCLUSION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 26005 in perlootut.pod
 

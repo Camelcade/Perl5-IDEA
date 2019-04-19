@@ -4,101 +4,101 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlapio.pod
 
   SYNOPSIS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58 in perlapio.pod
 
-  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2514 in perlapio.pod
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2521 in perlapio.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3087 in perlapio.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 3092 in perlapio.pod
 
-      1. USE_STDIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3096 in perlapio.pod
+      1. USE_STDIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3101 in perlapio.pod
 
-      2. USE_PERLIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3349 in perlapio.pod
+      2. USE_PERLIO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3354 in perlapio.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4421 in perlapio.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 4426 in perlapio.pod
 
-      PerlIO_stdin(), PerlIO_stdout(), PerlIO_stderr() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4430 in perlapio.pod
+      PerlIO_stdin(), PerlIO_stdout(), PerlIO_stderr() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4435 in perlapio.pod
 
-      PerlIO_open(path, mode), PerlIO_fdopen(fd,mode) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4790 in perlapio.pod
+      PerlIO_open(path, mode), PerlIO_fdopen(fd,mode) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4795 in perlapio.pod
 
-      PerlIO_reopen(path,mode,f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5184 in perlapio.pod
+      PerlIO_reopen(path,mode,f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5189 in perlapio.pod
 
-      PerlIO_printf(f,fmt,...), PerlIO_vprintf(f,fmt,a) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5521 in perlapio.pod
+      PerlIO_printf(f,fmt,...), PerlIO_vprintf(f,fmt,a) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5522 in perlapio.pod
 
-      PerlIO_stdoutf(fmt,...) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5629 in perlapio.pod
+      PerlIO_stdoutf(fmt,...) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5630 in perlapio.pod
 
-      PerlIO_read(f,buf,count), PerlIO_write(f,buf,count) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5800 in perlapio.pod
+      PerlIO_read(f,buf,count), PerlIO_write(f,buf,count) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5801 in perlapio.pod
 
-      PerlIO_close(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6445 in perlapio.pod
+      PerlIO_close(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6446 in perlapio.pod
 
-      PerlIO_puts(f,s), PerlIO_putc(f,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6567 in perlapio.pod
+      PerlIO_puts(f,s), PerlIO_putc(f,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6568 in perlapio.pod
 
-      PerlIO_ungetc(f,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6717 in perlapio.pod
+      PerlIO_ungetc(f,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6718 in perlapio.pod
 
-      PerlIO_getc(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7208 in perlapio.pod
+      PerlIO_getc(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7209 in perlapio.pod
 
-      PerlIO_eof(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7378 in perlapio.pod
+      PerlIO_eof(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7379 in perlapio.pod
 
-      PerlIO_error(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7651 in perlapio.pod
+      PerlIO_error(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7652 in perlapio.pod
 
-      PerlIO_fileno(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7794 in perlapio.pod
+      PerlIO_fileno(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7795 in perlapio.pod
 
-      PerlIO_clearerr(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7993 in perlapio.pod
+      PerlIO_clearerr(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7994 in perlapio.pod
 
-      PerlIO_flush(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8145 in perlapio.pod
+      PerlIO_flush(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8146 in perlapio.pod
 
-      PerlIO_seek(f,offset,whence) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8760 in perlapio.pod
+      PerlIO_seek(f,offset,whence) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8761 in perlapio.pod
 
-      PerlIO_tell(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9230 in perlapio.pod
+      PerlIO_tell(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9231 in perlapio.pod
 
-      PerlIO_getpos(f,p), PerlIO_setpos(f,p) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9636 in perlapio.pod
+      PerlIO_getpos(f,p), PerlIO_setpos(f,p) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9637 in perlapio.pod
 
-      PerlIO_rewind(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10062 in perlapio.pod
+      PerlIO_rewind(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10063 in perlapio.pod
 
-      PerlIO_tmpfile() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10216 in perlapio.pod
+      PerlIO_tmpfile() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10217 in perlapio.pod
 
-      PerlIO_setlinebuf(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10805 in perlapio.pod
+      PerlIO_setlinebuf(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10806 in perlapio.pod
 
-    Co-existence with stdio in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11158 in perlapio.pod
+    Co-existence with stdio in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11159 in perlapio.pod
 
-      PerlIO_importFILE(f,mode) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11892 in perlapio.pod
+      PerlIO_importFILE(f,mode) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11893 in perlapio.pod
 
-      PerlIO_exportFILE(f,mode) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12513 in perlapio.pod
+      PerlIO_exportFILE(f,mode) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12514 in perlapio.pod
 
-      PerlIO_releaseFILE(p,f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13351 in perlapio.pod
+      PerlIO_releaseFILE(p,f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13352 in perlapio.pod
 
-      PerlIO_findFILE(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13680 in perlapio.pod
+      PerlIO_findFILE(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13681 in perlapio.pod
 
-    "Fast gets" Functions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13962 in perlapio.pod
+    "Fast gets" Functions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13963 in perlapio.pod
 
-      PerlIO_fast_gets(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14652 in perlapio.pod
+      PerlIO_fast_gets(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14653 in perlapio.pod
 
-      PerlIO_has_cntptr(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14999 in perlapio.pod
+      PerlIO_has_cntptr(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15000 in perlapio.pod
 
-      PerlIO_get_cnt(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15188 in perlapio.pod
+      PerlIO_get_cnt(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15189 in perlapio.pod
 
-      PerlIO_get_ptr(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15318 in perlapio.pod
+      PerlIO_get_ptr(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15319 in perlapio.pod
 
-      PerlIO_set_ptrcnt(f,p,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15578 in perlapio.pod
+      PerlIO_set_ptrcnt(f,p,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15579 in perlapio.pod
 
-      PerlIO_canset_cnt(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15923 in perlapio.pod
+      PerlIO_canset_cnt(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15924 in perlapio.pod
 
-      PerlIO_set_cnt(f,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16064 in perlapio.pod
+      PerlIO_set_cnt(f,c) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16065 in perlapio.pod
 
-      PerlIO_has_base(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16444 in perlapio.pod
+      PerlIO_has_base(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16445 in perlapio.pod
 
-      PerlIO_get_base(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16646 in perlapio.pod
+      PerlIO_get_base(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16647 in perlapio.pod
 
-      PerlIO_get_bufsiz(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16795 in perlapio.pod
+      PerlIO_get_bufsiz(f) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16796 in perlapio.pod
 
-    Other Functions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17105 in perlapio.pod
+    Other Functions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17106 in perlapio.pod
 
-      PerlIO_apply_layers(f,mode,layers) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17138 in perlapio.pod
+      PerlIO_apply_layers(f,mode,layers) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17139 in perlapio.pod
 
-      PerlIO_binmode(f,ptype,imode,layers) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17432 in perlapio.pod
+      PerlIO_binmode(f,ptype,imode,layers) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17433 in perlapio.pod
 
-        '<' read in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17580 in perlapio.pod
+        '<' read in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17581 in perlapio.pod
 
-        '>' write in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17600 in perlapio.pod
+        '>' write in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17601 in perlapio.pod
 
-        '+' read/write in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17621 in perlapio.pod
+        '+' read/write in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17622 in perlapio.pod
 
-      PerlIO_debug(fmt,...) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18360 in perlapio.pod
+      PerlIO_debug(fmt,...) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18361 in perlapio.pod
 

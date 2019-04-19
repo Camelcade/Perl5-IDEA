@@ -238,7 +238,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmodstyle.pod
 
     http://pause.perl.org/ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22356 in perlmodstyle.pod
 
-    Any good book on software engineering in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22466 in perlmodstyle.pod
+    Any good book on software engineering in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22469 in perlmodstyle.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22518 in perlmodstyle.pod
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22521 in perlmodstyle.pod
 

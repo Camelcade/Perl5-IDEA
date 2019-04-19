@@ -6,7 +6,7 @@ If EXPR is omitted, merely returns the current umask.</p>
 bits, or three octal digits: <code>0750</code> (the leading 0 indicates octal
 and isn't one of the digits).  The <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> value is such
 a number representing disabled permissions bits.  The permission (or
-&quot;mode&quot;) values you pass <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMASK">C<mkdir></a> or
+&quot;mode&quot;) values you pass <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMODE">C<mkdir></a> or
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> are modified by your
 umask, so even if you tell
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> to create a file with
@@ -18,7 +18,7 @@ read, write, or execute), then passing
 file with mode <code>0640</code> (because <code>0666 &amp;~ 027</code> is <code>0640</code>).</p>
 <p style="padding-bottom: 10px;">Here's some advice: supply a creation mode of <code>0666</code> for regular
 files (in <a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a>) and one of
-<code>0777</code> for directories (in <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMASK">C<mkdir></a>) and
+<code>0777</code> for directories (in <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMODE">C<mkdir></a>) and
 executable files.  This gives users the freedom of
 choice: if they want protected files, they might choose process umasks
 of <code>022</code>, <code>027</code>, or even the particularly antisocial mask of <code>077</code>.

@@ -56,30 +56,30 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlstyle.pod
 
       You may find it helpful to use letter case to indicate the scope or nature of a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5378 in perlstyle.pod
 
-      If you have a really hairy regular expression, use the /x modifier and put in so... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5896 in perlstyle.pod
+      If you have a really hairy regular expression, use the /x  or /xx modifiers and ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5896 in perlstyle.pod
 
-      Use the new and and or operators to avoid having to parenthesize list operators ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6126 in perlstyle.pod
+      Use the new and and or operators to avoid having to parenthesize list operators ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6138 in perlstyle.pod
 
-      Use here documents instead of repeated print() statements. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6420 in perlstyle.pod
+      Use here documents instead of repeated print() statements. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6432 in perlstyle.pod
 
-      Line up corresponding things vertically, especially if it'd be too long to fit o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6492 in perlstyle.pod
+      Line up corresponding things vertically, especially if it'd be too long to fit o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6504 in perlstyle.pod
 
-      Always check the return codes of system calls.  Good error messages should go to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6911 in perlstyle.pod
+      Always check the return codes of system calls.  Good error messages should go to... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6923 in perlstyle.pod
 
       Line up your transliterations when it makes sense:      tr [abc]
-       [xyz]; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7291 in perlstyle.pod
+       [xyz]; in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7303 in perlstyle.pod
 
-      Think about reusability.  Why waste brainpower on a one-shot when you might want... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7380 in perlstyle.pod
+      Think about reusability.  Why waste brainpower on a one-shot when you might want... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7392 in perlstyle.pod
 
-      Try to document your code and use Pod formatting in a consistent way. Here are c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7784 in perlstyle.pod
+      Try to document your code and use Pod formatting in a consistent way. Here are c... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7796 in perlstyle.pod
 
-        use C<> for function, variable and module names (and more generally anything tha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7913 in perlstyle.pod
+        use C<> for function, variable and module names (and more generally anything tha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7925 in perlstyle.pod
 
-        use B<> for commands names like cat or grep. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8198 in perlstyle.pod
+        use B<> for commands names like cat or grep. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8210 in perlstyle.pod
 
-        use F<> or C<> for file names. F<> should be the only Pod code for file names, b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8270 in perlstyle.pod
+        use F<> or C<> for file names. F<> should be the only Pod code for file names, b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8282 in perlstyle.pod
 
-      Be consistent. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8568 in perlstyle.pod
+      Be consistent. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8580 in perlstyle.pod
 
-      Be nice. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8593 in perlstyle.pod
+      Be nice. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8605 in perlstyle.pod
 

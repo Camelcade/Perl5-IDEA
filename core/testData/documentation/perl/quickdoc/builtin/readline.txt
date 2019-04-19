@@ -40,4 +40,10 @@ each element of <a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a> yourself 
                 or die &quot;readline failed for $arg: $!&quot;;
             ...
         }
-    }</code></pre></div></dd></dl>
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Like the <code>&lt;EXPR&gt;</code> operator, if a <code>readline</code> expression is
+used as the condition of a <code>while</code> or <code>for</code> loop, then it will be
+implicitly assigned to <code>$_</code>.  If either a <code>readline</code> expression or
+an explicit assignment of a <code>readline</code> expression to a scalar is used
+as a <code>while</code>/<code>for</code> condition, then the condition actually tests for
+definedness of the expression's value, not for its regular truth value.</p></dd></dl>

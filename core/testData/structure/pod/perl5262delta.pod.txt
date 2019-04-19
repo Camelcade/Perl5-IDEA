@@ -1,0 +1,76 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl5262delta.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perl5262delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5262delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5262delta.pod
+
+  Security in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5262delta.pod
+
+    [CVE-2018-6797] heap-buffer-overflow (WRITE of size 1) in S_regatom (regcomp.c) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 346 in perl5262delta.pod
+
+    [CVE-2018-6798] Heap-buffer-overflow in Perl__byte_dump_string (utf8.c) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 615 in perl5262delta.pod
+
+    [CVE-2018-6913] heap-buffer-overflow in S_pack_rec in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 903 in perl5262delta.pod
+
+    Assertion failure in Perl__core_swash_init (utf8.c) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1111 in perl5262delta.pod
+
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1492 in perl5262delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1685 in perl5262delta.pod
+
+    Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1714 in perl5262delta.pod
+
+      Module::CoreList has been upgraded from version 5.20170922_26 to 5.20180414_26. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1760 in perl5262delta.pod
+
+      PerlIO::via has been upgraded from version 0.16 to 0.17. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1853 in perl5262delta.pod
+
+      Term::ReadLine has been upgraded from version 1.16 to 1.17. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1923 in perl5262delta.pod
+
+      Unicode::UCD has been upgraded from version 0.68 to 0.69. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1996 in perl5262delta.pod
+
+  Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2074 in perl5262delta.pod
+
+    Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2096 in perl5262delta.pod
+
+      perluniprops in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2138 in perl5262delta.pod
+
+        This has been updated to note that \p{Word} now includes code points matching th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2171 in perl5262delta.pod
+
+  Platform Support in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2515 in perl5262delta.pod
+
+    Platform-Specific Notes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2540 in perl5262delta.pod
+
+      Windows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2581 in perl5262delta.pod
+
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2949 in perl5262delta.pod
+
+    The readpipe() built-in function now checks at compile time that it has only one... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2985 in perl5262delta.pod
+
+    Fixed a use after free bug in pp_list introduced in Perl 5.27.1. [perl #131954]|... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3260 in perl5262delta.pod
+
+    Parsing a sub definition could cause a use after free if the sub keyword was fol... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3410 in perl5262delta.pod
+
+    The tokenizer now correctly adjusts a parse pointer when skipping whitespace in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3633 in perl5262delta.pod
+
+    Accesses to ${^LAST_FH} no longer assert after using any of a variety of I/O ope... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3828 in perl5262delta.pod
+
+    sort now performs correct reference counting when aliasing $a and $b, thus avoid... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4016 in perl5262delta.pod
+
+    Some convoluted kinds of regexp no longer cause an arithmetic overflow when comp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4298 in perl5262delta.pod
+
+    Fixed a duplicate symbol failure with -flto -mieee-fp builds.  pp.c defined _LIB... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4466 in perl5262delta.pod
+
+    A NULL pointer dereference in the S_regmatch() function has been fixed. [perl #1... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4679 in perl5262delta.pod
+
+    Failures while compiling code within other constructs, such as with string inter... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4836 in perl5262delta.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5300 in perl5262delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6630 in perl5262delta.pod
+
+  Give Thanks in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7376 in perl5262delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7619 in perl5262delta.pod
+

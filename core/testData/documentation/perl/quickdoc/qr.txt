@@ -1,12 +1,12 @@
 <p><a href="psi_element://pod%3A%3Aperlop">pod::perlop</a>: <a href="psi_element://pod%3A%3Aperlop%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlop%2FRegexp+Quote-Like+Operators">Regexp Quote-Like Operators</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>qr/<i>STRING</i>/msixpodualn</code>
       </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This operator quotes (and possibly compiles) its <i>STRING</i> as a regular
 expression.  <i>STRING</i> is interpolated the same way as <i>PATTERN</i>
-in <code>m/<i>PATTERN</i>/</code>.  If <code>&quot;'&quot;</code> is used as the delimiter, no interpolation
-is done.  Returns a Perl value which may be used instead of the
+in <code>m/<i>PATTERN</i>/</code>.  If <code>&quot;'&quot;</code> is used as the delimiter, no variable
+interpolation is done.  Returns a Perl value which may be used instead of the
 corresponding <code>/<i>STRING</i>/msixpodualn</code> expression.  The returned value is a
 normalized version of the original pattern.  It magically differs from
 a string containing the same characters: <code>ref(qr/x/)</code> returns &quot;Regexp&quot;;
-however, dereferencing it is not well defined (you currently get the 
+however, dereferencing it is not well defined (you currently get the
 normalized version of the original pattern, but this may change).</p>
 
 <p style="padding-bottom: 10px;">For example,</p>
@@ -44,15 +44,18 @@ we did not use <code>qr()</code> operator.)</p>
 <div style="padding-bottom: 10px;"><pre><code>    m	Treat string as multiple lines.
     s	Treat string as single line. (Make . match a newline)
     i	Do case-insensitive pattern matching.
-    x	Use extended regular expressions.
+    x   Use extended regular expressions; specifying two
+        x's means \t and the SPACE character are ignored within
+        square-bracketed character classes
     p	When matching preserve a copy of the matched string so
         that ${^PREMATCH}, ${^MATCH}, ${^POSTMATCH} will be
         defined (ignored starting in v5.20) as these are always
-        defined starting in that relese
+        defined starting in that release
     o	Compile pattern only once.
-    a   ASCII-restrict: Use ASCII for \d, \s, \w; specifying two
-        a's further restricts things to that that no ASCII
-        character will match a non-ASCII one under /i.
+    a   ASCII-restrict: Use ASCII for \d, \s, \w and [[:posix:]]
+        character classes; specifying two a's adds the further
+        restriction that no ASCII character will match a
+        non-ASCII one under /i.
     l   Use the current run-time locale's rules.
     u   Use Unicode rules.
     d   Use Unicode or native charset, as in 5.12 and earlier.
@@ -61,7 +64,7 @@ we did not use <code>qr()</code> operator.)</p>
 of <code>&quot;msixpluadn&quot;</code> will be propagated appropriately.  The effect that the
 <code>/o</code> modifier has is not propagated, being restricted to those patterns
 explicitly using it.</p>
-<p style="padding-bottom: 10px;">The last four modifiers listed above, added in Perl 5.14,
+<p style="padding-bottom: 10px;">The <code>/a</code>, <code>/d</code>, <code>/l</code>, and <code>/u</code> modifiers (added in Perl 5.14)
 control the character set rules, but <code>/a</code> is the only one you are likely
 to want to specify explicitly; the other three are selected
 automatically by various pragmas.</p>

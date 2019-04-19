@@ -29,7 +29,12 @@ assignment.</p>
 <p style="padding-bottom: 10px;">Use of <code>goto LABEL</code> or <code>goto EXPR</code> to jump into a construct is
 deprecated and will issue a warning.  Even then, it may not be used to
 go into any construct that requires initialization, such as a
-subroutine or a <code>foreach</code> loop.  It also can't be used to go into a
+subroutine, a <code>foreach</code> loop, or a <code>given</code>
+block.  In general, it may not be used to jump into the parameter
+of a binary or list operator, but it may be used to jump into the
+<i>first</i> parameter of a binary operator.  (The <code>=</code>
+assignment operator's &quot;first&quot; operand is its right-hand
+operand.)  It also can't be used to go into a
 construct that is optimized away.</p>
 <p style="padding-bottom: 10px;">The <code>goto &amp;NAME</code> form is quite different from the other forms of
 <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>.  In fact, it isn't a goto in the normal sense at

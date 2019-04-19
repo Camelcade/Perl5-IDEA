@@ -26,89 +26,89 @@ Documentation in null; /perl5language.png -> POD file at 0 in perldebguts.pod
 
       When execution of the program reaches a subroutine call, a call to &DB::sub(args... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3356 in perldebguts.pod
 
-      When execution of the program uses goto to enter a non-XS subroutine and the 0x8... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3776 in perldebguts.pod
+      When execution of the program uses goto to enter a non-XS subroutine and the 0x8... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4114 in perldebguts.pod
 
-    Writing Your Own Debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4394 in perldebguts.pod
+    Writing Your Own Debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5174 in perldebguts.pod
 
-      Environment Variables in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4428 in perldebguts.pod
+      Environment Variables in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5208 in perldebguts.pod
 
-      Debugger Internal Variables in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5866 in perldebguts.pod
+      Debugger Internal Variables in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6646 in perldebguts.pod
 
-        @DB::dbline is an alias for @{"::_<current_file"}, which holds the lines of the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6050 in perldebguts.pod
+        @DB::dbline is an alias for @{"::_<current_file"}, which holds the lines of the ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6830 in perldebguts.pod
 
-        %DB::dbline is an alias for %{"::_<current_file"}, which contains breakpoints an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6401 in perldebguts.pod
+        %DB::dbline is an alias for %{"::_<current_file"}, which contains breakpoints an... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7181 in perldebguts.pod
 
-      Debugger Customization Functions in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6878 in perldebguts.pod
+      Debugger Customization Functions in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7658 in perldebguts.pod
 
-        See perldebug/"Configurable Options" for a description of options parsed by DB::... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6984 in perldebguts.pod
+        See perldebug/"Configurable Options" for a description of options parsed by DB::... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7764 in perldebguts.pod
 
-        DB::dump_trace(skip[,count]) skips the specified number of frames and returns a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7103 in perldebguts.pod
+        DB::dump_trace(skip[,count]) skips the specified number of frames and returns a ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7883 in perldebguts.pod
 
-        DB::print_trace(FH, skip[, count[, short]]) prints formatted info about caller f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7492 in perldebguts.pod
+        DB::print_trace(FH, skip[, count[, short]]) prints formatted info about caller f... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8272 in perldebguts.pod
 
-  Frame Listing Output Examples in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7879 in perldebguts.pod
+  Frame Listing Output Examples in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8659 in perldebguts.pod
 
-    1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9092 in perldebguts.pod
+    1 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9872 in perldebguts.pod
 
-    2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9437 in perldebguts.pod
+    2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10217 in perldebguts.pod
 
-    3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9924 in perldebguts.pod
+    3 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10704 in perldebguts.pod
 
-    4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10777 in perldebguts.pod
+    4 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11557 in perldebguts.pod
 
-    5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12008 in perldebguts.pod
+    5 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12788 in perldebguts.pod
 
-    6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13064 in perldebguts.pod
+    6 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13844 in perldebguts.pod
 
-  Debugging Regular Expressions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14408 in perldebguts.pod
+  Debugging Regular Expressions in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15188 in perldebguts.pod
 
-    Compile-time Output in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14753 in perldebguts.pod
+    Compile-time Output in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15533 in perldebguts.pod
 
-      anchored STRING at POS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16813 in perldebguts.pod
+      anchored STRING at POS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17593 in perldebguts.pod
 
-      floating STRING at POS1..POS2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16855 in perldebguts.pod
+      floating STRING at POS1..POS2 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17635 in perldebguts.pod
 
-      matching floating/anchored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16916 in perldebguts.pod
+      matching floating/anchored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17696 in perldebguts.pod
 
-      minlen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16986 in perldebguts.pod
+      minlen in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17766 in perldebguts.pod
 
-      stclass TYPE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17037 in perldebguts.pod
+      stclass TYPE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17817 in perldebguts.pod
 
-      noscan in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17093 in perldebguts.pod
+      noscan in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17873 in perldebguts.pod
 
-      isall in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17148 in perldebguts.pod
+      isall in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17928 in perldebguts.pod
 
-      GPOS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17308 in perldebguts.pod
+      GPOS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18088 in perldebguts.pod
 
-      plus in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17359 in perldebguts.pod
+      plus in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18139 in perldebguts.pod
 
-      implicit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17439 in perldebguts.pod
+      implicit in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18219 in perldebguts.pod
 
-      with eval in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17497 in perldebguts.pod
+      with eval in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18277 in perldebguts.pod
 
-      anchored(TYPE) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17603 in perldebguts.pod
+      anchored(TYPE) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18383 in perldebguts.pod
 
-    Types of Nodes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18296 in perldebguts.pod
+    Types of Nodes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19076 in perldebguts.pod
 
-    Run-time Output in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30612 in perldebguts.pod
+    Run-time Output in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32020 in perldebguts.pod
 
-  Debugging Perl Memory Usage in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 32364 in perldebguts.pod
+  Debugging Perl Memory Usage in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33772 in perldebguts.pod
 
-    Using $ENV{PERL_DEBUG_MSTATS} in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34418 in perldebguts.pod
+    Using $ENV{PERL_DEBUG_MSTATS} in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35826 in perldebguts.pod
 
-      buckets SMALLEST(APPROX)..GREATEST(APPROX) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35753 in perldebguts.pod
+      buckets SMALLEST(APPROX)..GREATEST(APPROX) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37161 in perldebguts.pod
 
-      Free/Used in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36612 in perldebguts.pod
+      Free/Used in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38020 in perldebguts.pod
 
-      Total sbrk(): SBRKed/SBRKs:CONTINUOUS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37327 in perldebguts.pod
+      Total sbrk(): SBRKed/SBRKs:CONTINUOUS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38735 in perldebguts.pod
 
-      pad: 0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37744 in perldebguts.pod
+      pad: 0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39152 in perldebguts.pod
 
-      heads: 2192 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37825 in perldebguts.pod
+      heads: 2192 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39233 in perldebguts.pod
 
-      chain: 0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38018 in perldebguts.pod
+      chain: 0 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39426 in perldebguts.pod
 
-      tail: 6144 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38266 in perldebguts.pod
+      tail: 6144 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39674 in perldebguts.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38452 in perldebguts.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39860 in perldebguts.pod
 

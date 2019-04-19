@@ -15,22 +15,24 @@ of those; in other words, an lvalue.</p>
 <p style="padding-bottom: 10px;">A character range may be specified with a hyphen, so <code>tr/A-J/0-9/</code>
 does the same replacement as <code>tr/ACEGIBDFHJ/0246813579/</code>.
 For <B>sed</B> devotees, <code>y</code> is provided as a synonym for <code>tr</code>.  If the
-<i>SEARCHLIST</i> is delimited by bracketing quotes, the <i>REPLACEMENTLIST</i> has
-its own pair of quotes, which may or may not be bracketing quotes;
-for example, <code>tr[aeiouy][yuoiea]</code> or <code>tr(+\-*/)/ABCD/</code>.</p>
+<i>SEARCHLIST</i> is delimited by bracketing quotes, the <i>REPLACEMENTLIST</i>
+must have its own pair of quotes, which may or may not be bracketing
+quotes; for example, <code>tr[aeiouy][yuoiea]</code> or <code>tr(+\-*/)/ABCD/</code>.</p>
 <p style="padding-bottom: 10px;">Characters may be literals or any of the escape sequences accepted in
-double-quoted strings.  But there is no interpolation, so <code>&quot;$&quot;</code> and
-<code>&quot;@&quot;</code> are treated as literals.  A hyphen at the beginning or end, or
+double-quoted strings.  But there is no variable interpolation, so <code>&quot;$&quot;</code>
+and <code>&quot;@&quot;</code> are treated as literals.  A hyphen at the beginning or end, or
 preceded by a backslash is considered a literal.  Escape sequence
 details are in <a href="psi_element://pod%3A%3Aperlop%2FQuote+and+Quote-like+Operators">the table near the beginning of this section</a>.</p>
 <p style="padding-bottom: 10px;">Note that <code>tr</code> does <B>not</B> do regular expression character classes such as
 <code>\d</code> or <code>\pL</code>.  The <code>tr</code> operator is not equivalent to the <code><a href="psi_element://tr%281%29" style="color:red">tr(1)</a></code>
-utility.  If you want to map strings between lower/upper cases, see
-<a href="psi_element://perlfunc%2Flc">lc in perlfunc</a> and <a href="psi_element://perlfunc%2Fuc">uc in perlfunc</a>, and in general consider using the <code>s</code>
-operator if you need regular expressions.  The <code>\U</code>, <code>\u</code>, <code>\L</code>, and
-<code>\l</code> string-interpolation escapes on the right side of a substitution
-operator will perform correct case-mappings, but <code>tr[a-z][A-Z]</code> will not
-(except sometimes on legacy 7-bit data).</p>
+utility.  <code>tr[a-z][A-Z]</code> will uppercase the 26 letters &quot;a&quot; through &quot;z&quot;,
+but for case changing not confined to ASCII, use
+<a href="psi_element://perlfunc%2Flc">C<lc></a>, <a href="psi_element://perlfunc%2Fuc">C<uc></a>,
+<a href="psi_element://perlfunc%2Flcfirst">C<lcfirst></a>, <a href="psi_element://perlfunc%2Fucfirst">C<ucfirst></a>
+(all documented in <a href="psi_element://perlfunc">perlfunc</a>), or the
+<a href="psi_element://pod%3A%3Aperlop%2FsE%3Csol%3EPATTERNE%3Csol%3EREPLACEMENTE%3Csol%3Emsixpodualngcer" style="color:red">substitution operator C<sE<sol>I<PATTERN>E<sol>I<REPLACEMENT>E<sol>></a>
+(with <code>\U</code>, <code>\u</code>, <code>\L</code>, and <code>\l</code> string-interpolation escapes in the
+<i>REPLACEMENT</i> portion).</p>
 <p style="padding-bottom: 10px;">Most ranges are unportable between character sets, but certain ones
 signal Perl to do special handling to make them portable.  There are two
 classes of portable ranges.  The first are any subsets of the ranges
@@ -56,7 +58,7 @@ controls and characters which have no ASCII equivalents.</p>
 <p style="padding-bottom: 10px;">But, even for portable ranges, it is not generally obvious what is
 included without having to look things up.  A sound principle is to use
 only ranges that begin from and end at either ASCII alphabetics of equal
-case (<code>b-e</code>, <code>b-E</code>), or digits (<code>1-4</code>).  Anything else is unclear
+case (<code>b-e</code>, <code>B-E</code>), or digits (<code>1-4</code>).  Anything else is unclear
 (and unportable unless <code>\N{...}</code> is used).  If in doubt, spell out the
 character sets in full.</p>
 <p style="padding-bottom: 10px;">Options:</p>
@@ -66,20 +68,30 @@ character sets in full.</p>
     r	Return the modified string and leave the original string
 	untouched.</code></pre></div>
 <p style="padding-bottom: 10px;">If the <code>/c</code> modifier is specified, the <i>SEARCHLIST</i> character set
-is complemented.  If the <code>/d</code> modifier is specified, any characters
+is complemented. So for example these two are equivalent (the exact
+maximum number will depend on your platform):</p>
+<div style="padding-bottom: 10px;"><pre><code>    tr/\x00-\xfd/ABCD/c
+    tr/\xfe-\x{7fffffff}/ABCD/</code></pre></div>
+<p style="padding-bottom: 10px;">If the <code>/d</code> modifier is specified, any characters
 specified by <i>SEARCHLIST</i> not found in <i>REPLACEMENTLIST</i> are deleted.
 (Note that this is slightly more flexible than the behavior of some
 <B>tr</B> programs, which delete anything they find in the <i>SEARCHLIST</i>,
-period.)  If the <code>/s</code> modifier is specified, sequences of characters
-that were transliterated to the same character are squashed down
-to a single instance of the character.</p>
+period.)</p>
+<p style="padding-bottom: 10px;">If the <code>/s</code> modifier is specified, runs of the same character in the
+result, where each those characters were substituted by the
+transliteration, are squashed down to a single instance of the character.</p>
 <p style="padding-bottom: 10px;">If the <code>/d</code> modifier is used, the <i>REPLACEMENTLIST</i> is always interpreted
 exactly as specified.  Otherwise, if the <i>REPLACEMENTLIST</i> is shorter
 than the <i>SEARCHLIST</i>, the final character is replicated till it is long
 enough.  If the <i>REPLACEMENTLIST</i> is empty, the <i>SEARCHLIST</i> is replicated.
 This latter is useful for counting characters in a class or for
-squashing character sequences in a class.</p>
-<p style="padding-bottom: 10px;">Examples:</p>
+squashing character sequences in a class. For example, each of these pairs
+are equivalent:</p>
+<div style="padding-bottom: 10px;"><pre><code>    tr/abcd//            tr/abcd/abcd/
+    tr/abcd/AB/          tr/abcd/ABBB/
+    tr/abcd//d           s/[abcd]//g
+    tr/abcd/AB/d         (tr/ab/AB/ + s/[cd]//g)  - but run together</code></pre></div>
+<p style="padding-bottom: 10px;">Some examples:</p>
 <div style="padding-bottom: 10px;"><pre><code>    $ARGV[1] =~ tr/A-Z/a-z/;	# canonicalize to lower case ASCII
 
     $cnt = tr/*/*/;		# count the stars in $_

@@ -25,6 +25,16 @@ compatibility with older scripts written before __DATA__ was
 introduced, __END__ behaves like __DATA__ in the top level script (but
 not in files loaded with <code>require</code> or <code>do</code>) and leaves the remaining
 contents of the file accessible via <code>main::DATA</code>.</p>
+<p style="padding-bottom: 10px;">The <code>DATA</code> file handle by default has whatever PerlIO layers were
+in place when Perl read the file to parse the source.  Normally that
+means that the file is being read bytewise, as if it were encoded in
+Latin-1, but there are two major ways for it to be otherwise.  Firstly,
+if the <code>__END__</code>/<code>__DATA__</code> token is in the scope of a <code>use utf8</code>
+pragma then the <code>DATA</code> handle will be in UTF-8 mode.  And secondly,
+if the source is being read from perl's standard input then the <code>DATA</code>
+file handle is actually aliased to the <code>STDIN</code> file handle, and may
+be in UTF-8 mode because of the <code>PERL_UNICODE</code> environment variable or
+perl's command-line switches.</p>
 <p style="padding-bottom: 10px;">See <a href="psi_element://SelfLoader" style="color:red">SelfLoader</a> for more description of __DATA__, and
 an example of its use.  Note that you cannot read from the DATA
 filehandle in a BEGIN block: the BEGIN block is executed as soon

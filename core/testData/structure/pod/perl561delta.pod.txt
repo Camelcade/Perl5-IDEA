@@ -192,693 +192,693 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl561delta.pod
 
     Improved Perl version numbering system in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22368 in perl561delta.pod
 
-    New syntax for declaring subroutine attributes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23750 in perl561delta.pod
+    New syntax for declaring subroutine attributes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23751 in perl561delta.pod
 
-    File and directory handles can be autovivified in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24485 in perl561delta.pod
+    File and directory handles can be autovivified in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24486 in perl561delta.pod
 
-    open() with more than two arguments in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25374 in perl561delta.pod
+    open() with more than two arguments in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25375 in perl561delta.pod
 
-    64-bit support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25699 in perl561delta.pod
+    64-bit support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25700 in perl561delta.pod
 
-      constants (decimal, hexadecimal, octal, binary) in the code in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25927 in perl561delta.pod
+      constants (decimal, hexadecimal, octal, binary) in the code in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25928 in perl561delta.pod
 
-      arguments to oct() and hex() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25998 in perl561delta.pod
+      arguments to oct() and hex() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25999 in perl561delta.pod
 
-      arguments to print(), printf() and sprintf() (flag prefixes ll, L, q) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26037 in perl561delta.pod
+      arguments to print(), printf() and sprintf() (flag prefixes ll, L, q) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26038 in perl561delta.pod
 
-      printed as such in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26117 in perl561delta.pod
+      printed as such in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26118 in perl561delta.pod
 
-      pack() and unpack() "q" and "Q" formats in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26143 in perl561delta.pod
+      pack() and unpack() "q" and "Q" formats in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26144 in perl561delta.pod
 
-      in basic arithmetics: + - * / % (NOTE: operating close to the limits of the inte... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26193 in perl561delta.pod
+      in basic arithmetics: + - * / % (NOTE: operating close to the limits of the inte... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26194 in perl561delta.pod
 
-      in bit arithmetics: & | ^ ~ << >> (NOTE: these used to be forced  to be 32 bits ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26326 in perl561delta.pod
+      in bit arithmetics: & | ^ ~ << >> (NOTE: these used to be forced  to be 32 bits ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26327 in perl561delta.pod
 
-      vec() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26464 in perl561delta.pod
+      vec() in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26465 in perl561delta.pod
 
-    Large file support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28573 in perl561delta.pod
+    Large file support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28574 in perl561delta.pod
 
-    Long doubles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30089 in perl561delta.pod
+    Long doubles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30090 in perl561delta.pod
 
-    "more bits" in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30349 in perl561delta.pod
+    "more bits" in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30350 in perl561delta.pod
 
-    Enhanced support for sort() subroutines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30468 in perl561delta.pod
+    Enhanced support for sort() subroutines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30469 in perl561delta.pod
 
-    sort $coderef @foo allowed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30886 in perl561delta.pod
+    sort $coderef @foo allowed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30887 in perl561delta.pod
 
-    File globbing implemented internally in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31042 in perl561delta.pod
+    File globbing implemented internally in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31043 in perl561delta.pod
 
-    Support for CHECK blocks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31362 in perl561delta.pod
+    Support for CHECK blocks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31363 in perl561delta.pod
 
-    POSIX character class syntax [: :] supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31703 in perl561delta.pod
+    POSIX character class syntax [: :] supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31704 in perl561delta.pod
 
-    Better pseudo-random number generator in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31846 in perl561delta.pod
+    Better pseudo-random number generator in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31847 in perl561delta.pod
 
-    Improved qw// operator in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32164 in perl561delta.pod
+    Improved qw// operator in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32165 in perl561delta.pod
 
-    Better worst-case behavior of hashes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32559 in perl561delta.pod
+    Better worst-case behavior of hashes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32560 in perl561delta.pod
 
-    pack() format 'Z' supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32827 in perl561delta.pod
+    pack() format 'Z' supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32828 in perl561delta.pod
 
-    pack() format modifier '!' supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32974 in perl561delta.pod
+    pack() format modifier '!' supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32975 in perl561delta.pod
 
-    pack() and unpack() support counted strings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33146 in perl561delta.pod
+    pack() and unpack() support counted strings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33147 in perl561delta.pod
 
-    Comments in pack() templates in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33322 in perl561delta.pod
+    Comments in pack() templates in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33323 in perl561delta.pod
 
-    Weak references in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33489 in perl561delta.pod
+    Weak references in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33490 in perl561delta.pod
 
-    Binary numbers supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34449 in perl561delta.pod
+    Binary numbers supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34450 in perl561delta.pod
 
-    Lvalue subroutines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34640 in perl561delta.pod
+    Lvalue subroutines in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34641 in perl561delta.pod
 
-    Some arrows may be omitted in calls through references in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34828 in perl561delta.pod
+    Some arrows may be omitted in calls through references in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34829 in perl561delta.pod
 
-    Boolean assignment operators are legal lvalues in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35239 in perl561delta.pod
+    Boolean assignment operators are legal lvalues in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35240 in perl561delta.pod
 
-    exists() is supported on subroutine names in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35350 in perl561delta.pod
+    exists() is supported on subroutine names in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35351 in perl561delta.pod
 
-    exists() and delete() are supported on array elements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35573 in perl561delta.pod
+    exists() and delete() are supported on array elements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35574 in perl561delta.pod
 
-    Pseudo-hashes work better in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36527 in perl561delta.pod
+    Pseudo-hashes work better in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36528 in perl561delta.pod
 
-    Automatic flushing of output buffers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37525 in perl561delta.pod
+    Automatic flushing of output buffers in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37526 in perl561delta.pod
 
-    Better diagnostics on meaningless filehandle operations in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37944 in perl561delta.pod
+    Better diagnostics on meaningless filehandle operations in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37945 in perl561delta.pod
 
-    Where possible, buffered data discarded from duped input filehandle in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38240 in perl561delta.pod
+    Where possible, buffered data discarded from duped input filehandle in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38241 in perl561delta.pod
 
-    eof() has the same old magic as <> in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38689 in perl561delta.pod
+    eof() has the same old magic as <> in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38690 in perl561delta.pod
 
-    binmode() can be used to set :crlf and :raw modes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38912 in perl561delta.pod
+    binmode() can be used to set :crlf and :raw modes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38913 in perl561delta.pod
 
-    -T filetest recognizes UTF-8 encoded files as "text" in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39206 in perl561delta.pod
+    -T filetest recognizes UTF-8 encoded files as "text" in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39207 in perl561delta.pod
 
-    system(), backticks and pipe open now reflect exec() failure in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39378 in perl561delta.pod
+    system(), backticks and pipe open now reflect exec() failure in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39379 in perl561delta.pod
 
-    Improved diagnostics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39889 in perl561delta.pod
+    Improved diagnostics in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39890 in perl561delta.pod
 
-    Diagnostics follow STDERR in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41068 in perl561delta.pod
+    Diagnostics follow STDERR in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41069 in perl561delta.pod
 
-    More consistent close-on-exec behavior in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41258 in perl561delta.pod
+    More consistent close-on-exec behavior in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41259 in perl561delta.pod
 
-    syswrite() ease-of-use in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41717 in perl561delta.pod
+    syswrite() ease-of-use in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41718 in perl561delta.pod
 
-    Better syntax checks on parenthesized unary operators in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41807 in perl561delta.pod
+    Better syntax checks on parenthesized unary operators in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41808 in perl561delta.pod
 
-    Bit operators support full native integer width in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42510 in perl561delta.pod
+    Bit operators support full native integer width in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42511 in perl561delta.pod
 
-    Improved security features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43005 in perl561delta.pod
+    Improved security features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43006 in perl561delta.pod
 
-    More functional bareword prototype (*) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43560 in perl561delta.pod
+    More functional bareword prototype (*) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43561 in perl561delta.pod
 
-    require and do may be overridden in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43944 in perl561delta.pod
+    require and do may be overridden in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43945 in perl561delta.pod
 
-    $^X variables may now have names longer than one character in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44337 in perl561delta.pod
+    $^X variables may now have names longer than one character in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44338 in perl561delta.pod
 
-    New variable $^C reflects -c switch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45504 in perl561delta.pod
+    New variable $^C reflects -c switch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45505 in perl561delta.pod
 
-    New variable $^V contains Perl version as a string in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45861 in perl561delta.pod
+    New variable $^V contains Perl version as a string in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45862 in perl561delta.pod
 
-    Optional Y2K warnings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46171 in perl561delta.pod
+    Optional Y2K warnings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46172 in perl561delta.pod
 
-    Arrays now always interpolate into double-quoted strings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46446 in perl561delta.pod
+    Arrays now always interpolate into double-quoted strings in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46447 in perl561delta.pod
 
-    @- and @+ provide starting/ending offsets of regex submatches in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47737 in perl561delta.pod
+    @- and @+ provide starting/ending offsets of regex submatches in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47738 in perl561delta.pod
 
-  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47946 in perl561delta.pod
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47947 in perl561delta.pod
 
-    Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47975 in perl561delta.pod
+    Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47976 in perl561delta.pod
 
-      attributes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48000 in perl561delta.pod
+      attributes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48001 in perl561delta.pod
 
-      B in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48158 in perl561delta.pod
+      B in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48159 in perl561delta.pod
 
-      Benchmark in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48564 in perl561delta.pod
+      Benchmark in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48565 in perl561delta.pod
 
-      ByteLoader in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50130 in perl561delta.pod
+      ByteLoader in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50131 in perl561delta.pod
 
-      constant in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50244 in perl561delta.pod
+      constant in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50245 in perl561delta.pod
 
-      charnames in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50766 in perl561delta.pod
+      charnames in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50767 in perl561delta.pod
 
-      Data::Dumper in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50851 in perl561delta.pod
+      Data::Dumper in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50852 in perl561delta.pod
 
-      DB in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51134 in perl561delta.pod
+      DB in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51135 in perl561delta.pod
 
-      DB_File in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51235 in perl561delta.pod
+      DB_File in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51236 in perl561delta.pod
 
-      Devel::DProf in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51341 in perl561delta.pod
+      Devel::DProf in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51342 in perl561delta.pod
 
-      Devel::Peek in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51457 in perl561delta.pod
+      Devel::Peek in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51458 in perl561delta.pod
 
-      Dumpvalue in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51627 in perl561delta.pod
+      Dumpvalue in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51628 in perl561delta.pod
 
-      DynaLoader in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51702 in perl561delta.pod
+      DynaLoader in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51703 in perl561delta.pod
 
-      English in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52082 in perl561delta.pod
+      English in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52083 in perl561delta.pod
 
-      Env in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52192 in perl561delta.pod
+      Env in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52193 in perl561delta.pod
 
-      Fcntl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52283 in perl561delta.pod
+      Fcntl in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52284 in perl561delta.pod
 
-      File::Compare in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52861 in perl561delta.pod
+      File::Compare in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52862 in perl561delta.pod
 
-      File::Find in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52990 in perl561delta.pod
+      File::Find in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52991 in perl561delta.pod
 
-      File::Glob in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53592 in perl561delta.pod
+      File::Glob in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53593 in perl561delta.pod
 
-      File::Spec in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53772 in perl561delta.pod
+      File::Spec in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53773 in perl561delta.pod
 
-      File::Spec::Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54235 in perl561delta.pod
+      File::Spec::Functions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54236 in perl561delta.pod
 
-      Getopt::Long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54495 in perl561delta.pod
+      Getopt::Long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54496 in perl561delta.pod
 
-      IO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55837 in perl561delta.pod
+      IO in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55838 in perl561delta.pod
 
-      JPL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56537 in perl561delta.pod
+      JPL in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56538 in perl561delta.pod
 
-      lib in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56633 in perl561delta.pod
+      lib in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56634 in perl561delta.pod
 
-      Math::BigInt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56739 in perl561delta.pod
+      Math::BigInt in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56740 in perl561delta.pod
 
-      Math::Complex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56860 in perl561delta.pod
+      Math::Complex in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56861 in perl561delta.pod
 
-      Math::Trig in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57873 in perl561delta.pod
+      Math::Trig in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57874 in perl561delta.pod
 
-      Pod::Parser, Pod::InputObjects in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58030 in perl561delta.pod
+      Pod::Parser, Pod::InputObjects in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58031 in perl561delta.pod
 
-      Pod::Checker, podchecker in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59069 in perl561delta.pod
+      Pod::Checker, podchecker in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59070 in perl561delta.pod
 
-      Pod::ParseUtils, Pod::Find in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59344 in perl561delta.pod
+      Pod::ParseUtils, Pod::Find in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59345 in perl561delta.pod
 
-      Pod::Select, podselect in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59859 in perl561delta.pod
+      Pod::Select, podselect in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59860 in perl561delta.pod
 
-      Pod::Usage, pod2usage in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60183 in perl561delta.pod
+      Pod::Usage, pod2usage in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60184 in perl561delta.pod
 
-      Pod::Text and Pod::Man in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60844 in perl561delta.pod
+      Pod::Text and Pod::Man in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60845 in perl561delta.pod
 
-      SDBM_File in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61603 in perl561delta.pod
+      SDBM_File in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61604 in perl561delta.pod
 
-      Sys::Syslog in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61986 in perl561delta.pod
+      Sys::Syslog in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61987 in perl561delta.pod
 
-      Sys::Hostname in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62114 in perl561delta.pod
+      Sys::Hostname in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62115 in perl561delta.pod
 
-      Term::ANSIColor in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62229 in perl561delta.pod
+      Term::ANSIColor in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62230 in perl561delta.pod
 
-      Time::Local in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62455 in perl561delta.pod
+      Time::Local in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62456 in perl561delta.pod
 
-      Win32 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62682 in perl561delta.pod
+      Win32 in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62683 in perl561delta.pod
 
-      XSLoader in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63494 in perl561delta.pod
+      XSLoader in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63495 in perl561delta.pod
 
-      DBM Filters in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63591 in perl561delta.pod
+      DBM Filters in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63592 in perl561delta.pod
 
-    Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64074 in perl561delta.pod
+    Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64075 in perl561delta.pod
 
-  Utility Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65056 in perl561delta.pod
+  Utility Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65057 in perl561delta.pod
 
-    dprofpp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65080 in perl561delta.pod
+    dprofpp in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65081 in perl561delta.pod
 
-    find2perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65189 in perl561delta.pod
+    find2perl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65190 in perl561delta.pod
 
-    h2xs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65388 in perl561delta.pod
+    h2xs in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65389 in perl561delta.pod
 
-    perlcc in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65585 in perl561delta.pod
+    perlcc in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65586 in perl561delta.pod
 
-    perldoc in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65800 in perl561delta.pod
+    perldoc in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65801 in perl561delta.pod
 
-    The Perl Debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66019 in perl561delta.pod
+    The Perl Debugger in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66020 in perl561delta.pod
 
-  Improved Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66679 in perl561delta.pod
+  Improved Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66680 in perl561delta.pod
 
-    perlapi.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66838 in perl561delta.pod
+    perlapi.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66839 in perl561delta.pod
 
-    perlboot.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66906 in perl561delta.pod
+    perlboot.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66907 in perl561delta.pod
 
-    perlcompile.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66977 in perl561delta.pod
+    perlcompile.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66978 in perl561delta.pod
 
-    perldbmfilter.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67051 in perl561delta.pod
+    perldbmfilter.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67052 in perl561delta.pod
 
-    perldebug.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67128 in perl561delta.pod
+    perldebug.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67129 in perl561delta.pod
 
-    perldebguts.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67360 in perl561delta.pod
+    perldebguts.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67361 in perl561delta.pod
 
-    perlfork.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67665 in perl561delta.pod
+    perlfork.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67666 in perl561delta.pod
 
-    perlfilter.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67762 in perl561delta.pod
+    perlfilter.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67763 in perl561delta.pod
 
-    perlhack.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67833 in perl561delta.pod
+    perlhack.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67834 in perl561delta.pod
 
-    perlintern.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67904 in perl561delta.pod
+    perlintern.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67905 in perl561delta.pod
 
-    perllexwarn.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68008 in perl561delta.pod
+    perllexwarn.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68009 in perl561delta.pod
 
-    perlnumber.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68114 in perl561delta.pod
+    perlnumber.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68115 in perl561delta.pod
 
-    perlopentut.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68205 in perl561delta.pod
+    perlopentut.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68206 in perl561delta.pod
 
-    perlreftut.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68269 in perl561delta.pod
+    perlreftut.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68270 in perl561delta.pod
 
-    perltootc.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68349 in perl561delta.pod
+    perltootc.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68350 in perl561delta.pod
 
-    perltodo.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68425 in perl561delta.pod
+    perltodo.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68426 in perl561delta.pod
 
-    perlunicode.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68530 in perl561delta.pod
+    perlunicode.pod in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68531 in perl561delta.pod
 
-  Performance enhancements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68614 in perl561delta.pod
+  Performance enhancements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68615 in perl561delta.pod
 
-    Simple sort() using { $a <=> $b } and the like are optimized in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 68647 in perl561delta.pod
+    Simple sort() using { $a <=> $b } and the like are optimized in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 68648 in perl561delta.pod
 
-    Optimized assignments to lexical variables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 68818 in perl561delta.pod
+    Optimized assignments to lexical variables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 68819 in perl561delta.pod
 
-    Faster subroutine calls in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69035 in perl561delta.pod
+    Faster subroutine calls in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69036 in perl561delta.pod
 
-    delete(), each(), values() and hash iteration are faster in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69175 in perl561delta.pod
+    delete(), each(), values() and hash iteration are faster in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69176 in perl561delta.pod
 
-  Installation and Configuration Improvements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69488 in perl561delta.pod
+  Installation and Configuration Improvements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69489 in perl561delta.pod
 
-    -Dusethreads means something different in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69540 in perl561delta.pod
+    -Dusethreads means something different in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69541 in perl561delta.pod
 
-    New Configure flags in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70243 in perl561delta.pod
+    New Configure flags in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70244 in perl561delta.pod
 
-    Threadedness and 64-bitness now more daring in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70698 in perl561delta.pod
+    Threadedness and 64-bitness now more daring in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70699 in perl561delta.pod
 
-    Long Doubles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71276 in perl561delta.pod
+    Long Doubles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71278 in perl561delta.pod
 
-    -Dusemorebits in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71474 in perl561delta.pod
+    -Dusemorebits in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71476 in perl561delta.pod
 
-    -Duselargefiles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71601 in perl561delta.pod
+    -Duselargefiles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71604 in perl561delta.pod
 
-    installusrbinperl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71865 in perl561delta.pod
+    installusrbinperl in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71869 in perl561delta.pod
 
-    SOCKS support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72159 in perl561delta.pod
+    SOCKS support in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72163 in perl561delta.pod
 
-    -A flag in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72363 in perl561delta.pod
+    -A flag in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72367 in perl561delta.pod
 
-    Enhanced Installation Directories in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72662 in perl561delta.pod
+    Enhanced Installation Directories in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72666 in perl561delta.pod
 
-    gcc automatically tried if 'cc' does not seem to be working in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73519 in perl561delta.pod
+    gcc automatically tried if 'cc' does not seem to be working in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73523 in perl561delta.pod
 
-  Platform specific changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73856 in perl561delta.pod
+  Platform specific changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73860 in perl561delta.pod
 
-    Supported platforms in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73890 in perl561delta.pod
+    Supported platforms in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73894 in perl561delta.pod
 
-      The Mach CThreads (NEXTSTEP, OPENSTEP) are now supported by the Thread extension... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73927 in perl561delta.pod
+      The Mach CThreads (NEXTSTEP, OPENSTEP) are now supported by the Thread extension... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73931 in perl561delta.pod
 
-      GNU/Hurd is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74019 in perl561delta.pod
+      GNU/Hurd is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74023 in perl561delta.pod
 
-      Rhapsody/Darwin is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74056 in perl561delta.pod
+      Rhapsody/Darwin is now supported. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74060 in perl561delta.pod
 
-      EPOC is now supported (on Psion 5). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74100 in perl561delta.pod
+      EPOC is now supported (on Psion 5). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74104 in perl561delta.pod
 
-      The cygwin port (formerly cygwin32) has been greatly improved. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74146 in perl561delta.pod
+      The cygwin port (formerly cygwin32) has been greatly improved. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74150 in perl561delta.pod
 
-    DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74226 in perl561delta.pod
+    DOS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74230 in perl561delta.pod
 
-      Perl now works with djgpp 2.02 (and 2.03 alpha). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74247 in perl561delta.pod
+      Perl now works with djgpp 2.02 (and 2.03 alpha). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74251 in perl561delta.pod
 
-      Environment variable names are not converted to uppercase any more. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74306 in perl561delta.pod
+      Environment variable names are not converted to uppercase any more. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74310 in perl561delta.pod
 
-      Incorrect exit codes from backticks have been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74384 in perl561delta.pod
+      Incorrect exit codes from backticks have been fixed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74388 in perl561delta.pod
 
-      This port continues to use its own builtin globbing (not File::Glob). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74447 in perl561delta.pod
+      This port continues to use its own builtin globbing (not File::Glob). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74451 in perl561delta.pod
 
-    OS390 (OpenEdition MVS) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74534 in perl561delta.pod
+    OS390 (OpenEdition MVS) in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74538 in perl561delta.pod
 
-    VMS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74924 in perl561delta.pod
+    VMS in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74928 in perl561delta.pod
 
-    Win32 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75883 in perl561delta.pod
+    Win32 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75887 in perl561delta.pod
 
-  Significant bug fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77815 in perl561delta.pod
+  Significant bug fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77819 in perl561delta.pod
 
-    <HANDLE> on empty files in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77845 in perl561delta.pod
+    <HANDLE> on empty files in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77849 in perl561delta.pod
 
-    eval '...' improvements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78345 in perl561delta.pod
+    eval '...' improvements in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78349 in perl561delta.pod
 
-    All compilation errors are true errors in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79079 in perl561delta.pod
+    All compilation errors are true errors in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79083 in perl561delta.pod
 
-    Implicitly closed filehandles are safer in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79781 in perl561delta.pod
+    Implicitly closed filehandles are safer in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79785 in perl561delta.pod
 
-    Behavior of list slices is more consistent in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80017 in perl561delta.pod
+    Behavior of list slices is more consistent in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80021 in perl561delta.pod
 
-    (\$) prototype and $foo{a} in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80778 in perl561delta.pod
+    (\$) prototype and $foo{a} in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80782 in perl561delta.pod
 
-    goto &sub and AUTOLOAD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80908 in perl561delta.pod
+    goto &sub and AUTOLOAD in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80912 in perl561delta.pod
 
-    -bareword allowed under use integer in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81025 in perl561delta.pod
+    -bareword allowed under use integer in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81029 in perl561delta.pod
 
-    Failures in DESTROY() in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81214 in perl561delta.pod
+    Failures in DESTROY() in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81218 in perl561delta.pod
 
-    Locale bugs fixed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81505 in perl561delta.pod
+    Locale bugs fixed in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81509 in perl561delta.pod
 
-    Memory leaks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81908 in perl561delta.pod
+    Memory leaks in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81912 in perl561delta.pod
 
-    Spurious subroutine stubs after failed subroutine calls in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82267 in perl561delta.pod
+    Spurious subroutine stubs after failed subroutine calls in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82271 in perl561delta.pod
 
-    Taint failures under -U in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82534 in perl561delta.pod
+    Taint failures under -U in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82538 in perl561delta.pod
 
-    END blocks and the -c switch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82677 in perl561delta.pod
+    END blocks and the -c switch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82681 in perl561delta.pod
 
-    Potential to leak DATA filehandles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 83041 in perl561delta.pod
+    Potential to leak DATA filehandles in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 83045 in perl561delta.pod
 
-  New or Changed Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83338 in perl561delta.pod
+  New or Changed Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83342 in perl561delta.pod
 
-    "%s" variable %s masks earlier declaration in same %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83382 in perl561delta.pod
+    "%s" variable %s masks earlier declaration in same %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83386 in perl561delta.pod
 
-    "my sub" not yet implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83768 in perl561delta.pod
+    "my sub" not yet implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83772 in perl561delta.pod
 
-    "our" variable %s redeclared in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83884 in perl561delta.pod
+    "our" variable %s redeclared in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83888 in perl561delta.pod
 
-    '!' allowed only after types %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84022 in perl561delta.pod
+    '!' allowed only after types %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84026 in perl561delta.pod
 
-    / cannot take a count in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84156 in perl561delta.pod
+    / cannot take a count in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84160 in perl561delta.pod
 
-    / must be followed by a, A or Z in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84336 in perl561delta.pod
+    / must be followed by a, A or Z in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84340 in perl561delta.pod
 
-    / must be followed by a*, A* or Z* in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84571 in perl561delta.pod
+    / must be followed by a*, A* or Z* in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84575 in perl561delta.pod
 
-    / must follow a numeric type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84779 in perl561delta.pod
+    / must follow a numeric type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84783 in perl561delta.pod
 
-    /%s/: Unrecognized escape \\%c passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84950 in perl561delta.pod
+    /%s/: Unrecognized escape \\%c passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84954 in perl561delta.pod
 
-    /%s/: Unrecognized escape \\%c in character class passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85226 in perl561delta.pod
+    /%s/: Unrecognized escape \\%c in character class passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85230 in perl561delta.pod
 
-    /%s/ should probably be written as "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85452 in perl561delta.pod
+    /%s/ should probably be written as "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85456 in perl561delta.pod
 
-    %s() called too early to check prototype in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85746 in perl561delta.pod
+    %s() called too early to check prototype in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85750 in perl561delta.pod
 
-    %s argument is not a HASH or ARRAY element in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86311 in perl561delta.pod
+    %s argument is not a HASH or ARRAY element in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86315 in perl561delta.pod
 
-    %s argument is not a HASH or ARRAY element or slice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86473 in perl561delta.pod
+    %s argument is not a HASH or ARRAY element or slice in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86477 in perl561delta.pod
 
-    %s argument is not a subroutine name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86753 in perl561delta.pod
+    %s argument is not a subroutine name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86757 in perl561delta.pod
 
-    %s package attribute may clash with future reserved word: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86944 in perl561delta.pod
+    %s package attribute may clash with future reserved word: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86948 in perl561delta.pod
 
-    (in cleanup) %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87264 in perl561delta.pod
+    (in cleanup) %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87268 in perl561delta.pod
 
-    <> should be quotes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87759 in perl561delta.pod
+    <> should be quotes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87763 in perl561delta.pod
 
-    Attempt to join self in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87871 in perl561delta.pod
+    Attempt to join self in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87875 in perl561delta.pod
 
-    Bad evalled substitution pattern in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88075 in perl561delta.pod
+    Bad evalled substitution pattern in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88079 in perl561delta.pod
 
-    Bad realloc() ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88292 in perl561delta.pod
+    Bad realloc() ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88296 in perl561delta.pod
 
-    Bareword found in conditional in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88512 in perl561delta.pod
+    Bareword found in conditional in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88516 in perl561delta.pod
 
-    Binary number > 0b11111111111111111111111111111111 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88968 in perl561delta.pod
+    Binary number > 0b11111111111111111111111111111111 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88972 in perl561delta.pod
 
-    Bit vector size > 32 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89216 in perl561delta.pod
+    Bit vector size > 32 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89220 in perl561delta.pod
 
-    Buffer overflow in prime_env_iter: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89326 in perl561delta.pod
+    Buffer overflow in prime_env_iter: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89330 in perl561delta.pod
 
-    Can't check filesystem of script "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89572 in perl561delta.pod
+    Can't check filesystem of script "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89576 in perl561delta.pod
 
-    Can't declare class for non-scalar %s in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89695 in perl561delta.pod
+    Can't declare class for non-scalar %s in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89699 in perl561delta.pod
 
-    Can't declare %s in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89934 in perl561delta.pod
+    Can't declare %s in "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89938 in perl561delta.pod
 
-    Can't ignore signal CHLD, forcing to default in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90101 in perl561delta.pod
+    Can't ignore signal CHLD, forcing to default in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90105 in perl561delta.pod
 
-    Can't modify non-lvalue subroutine call in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90547 in perl561delta.pod
+    Can't modify non-lvalue subroutine call in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90551 in perl561delta.pod
 
-    Can't read CRTL environ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90711 in perl561delta.pod
+    Can't read CRTL environ in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90715 in perl561delta.pod
 
-    Can't remove %s: %s, skipping file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91035 in perl561delta.pod
+    Can't remove %s: %s, skipping file in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91039 in perl561delta.pod
 
-    Can't return %s from lvalue subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91259 in perl561delta.pod
+    Can't return %s from lvalue subroutine in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91263 in perl561delta.pod
 
-    Can't weaken a nonreference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91458 in perl561delta.pod
+    Can't weaken a nonreference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91462 in perl561delta.pod
 
-    Character class [:%s:] unknown in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91592 in perl561delta.pod
+    Character class [:%s:] unknown in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91596 in perl561delta.pod
 
-    Character class syntax [%s] belongs inside character classes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91708 in perl561delta.pod
+    Character class syntax [%s] belongs inside character classes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91712 in perl561delta.pod
 
-    Constant is not %s reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92054 in perl561delta.pod
+    Constant is not %s reference in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92058 in perl561delta.pod
 
-    constant(%s): %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92426 in perl561delta.pod
+    constant(%s): %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92430 in perl561delta.pod
 
-    CORE::%s is not a keyword in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92741 in perl561delta.pod
+    CORE::%s is not a keyword in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92745 in perl561delta.pod
 
-    defined(@array) is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92831 in perl561delta.pod
+    defined(@array) is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92835 in perl561delta.pod
 
-    defined(%hash) is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93065 in perl561delta.pod
+    defined(%hash) is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93069 in perl561delta.pod
 
-    Did not produce a valid header in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93296 in perl561delta.pod
+    Did not produce a valid header in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93300 in perl561delta.pod
 
-    (Did you mean "local" instead of "our"?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93353 in perl561delta.pod
+    (Did you mean "local" instead of "our"?) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93357 in perl561delta.pod
 
-    Document contains no data in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93558 in perl561delta.pod
+    Document contains no data in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93562 in perl561delta.pod
 
-    entering effective %s failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93610 in perl561delta.pod
+    entering effective %s failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93614 in perl561delta.pod
 
-    false [] range "%s" in regexp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93745 in perl561delta.pod
+    false [] range "%s" in regexp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93749 in perl561delta.pod
 
-    Filehandle %s opened only for output in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94028 in perl561delta.pod
+    Filehandle %s opened only for output in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94032 in perl561delta.pod
 
-    flock() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94350 in perl561delta.pod
+    flock() on closed filehandle %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94354 in perl561delta.pod
 
-    Global symbol "%s" requires explicit package name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94611 in perl561delta.pod
+    Global symbol "%s" requires explicit package name in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94615 in perl561delta.pod
 
-    Hexadecimal number > 0xffffffff non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94903 in perl561delta.pod
+    Hexadecimal number > 0xffffffff non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94907 in perl561delta.pod
 
-    Ill-formed CRTL environ value "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95137 in perl561delta.pod
+    Ill-formed CRTL environ value "%s" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95141 in perl561delta.pod
 
-    Ill-formed message in prime_env_iter: |%s| in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95389 in perl561delta.pod
+    Ill-formed message in prime_env_iter: |%s| in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95393 in perl561delta.pod
 
-    Illegal binary digit %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95663 in perl561delta.pod
+    Illegal binary digit %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95667 in perl561delta.pod
 
-    Illegal binary digit %s ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95754 in perl561delta.pod
+    Illegal binary digit %s ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95758 in perl561delta.pod
 
-    Illegal number of bits in vec in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95948 in perl561delta.pod
+    Illegal number of bits in vec in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95952 in perl561delta.pod
 
-    Integer overflow in %s number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96116 in perl561delta.pod
+    Integer overflow in %s number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96120 in perl561delta.pod
 
-    Invalid %s attribute: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96713 in perl561delta.pod
+    Invalid %s attribute: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96717 in perl561delta.pod
 
-    Invalid %s attributes: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96877 in perl561delta.pod
+    Invalid %s attributes: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96881 in perl561delta.pod
 
-    invalid [] range "%s" in regexp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97044 in perl561delta.pod
+    invalid [] range "%s" in regexp in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97048 in perl561delta.pod
 
-    Invalid separator character %s in attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97133 in perl561delta.pod
+    Invalid separator character %s in attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97137 in perl561delta.pod
 
-    Invalid separator character %s in subroutine attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97415 in perl561delta.pod
+    Invalid separator character %s in subroutine attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97419 in perl561delta.pod
 
-    leaving effective %s failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97698 in perl561delta.pod
+    leaving effective %s failed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97702 in perl561delta.pod
 
-    Lvalue subs returning %s not implemented yet in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97832 in perl561delta.pod
+    Lvalue subs returning %s not implemented yet in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97836 in perl561delta.pod
 
-    Method %s not permitted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98056 in perl561delta.pod
+    Method %s not permitted in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98060 in perl561delta.pod
 
-    Missing %sbrace%s on \N{} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98106 in perl561delta.pod
+    Missing %sbrace%s on \N{} in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98110 in perl561delta.pod
 
-    Missing command in piped open in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98230 in perl561delta.pod
+    Missing command in piped open in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98234 in perl561delta.pod
 
-    Missing name in "my sub" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98395 in perl561delta.pod
+    Missing name in "my sub" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98399 in perl561delta.pod
 
-    No %s specified for -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98546 in perl561delta.pod
+    No %s specified for -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98550 in perl561delta.pod
 
-    No package name allowed for variable %s in "our" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98675 in perl561delta.pod
+    No package name allowed for variable %s in "our" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98679 in perl561delta.pod
 
-    No space allowed after -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98917 in perl561delta.pod
+    No space allowed after -%c in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98921 in perl561delta.pod
 
-    no UTC offset information; assuming local time is UTC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99076 in perl561delta.pod
+    no UTC offset information; assuming local time is UTC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99080 in perl561delta.pod
 
-    Octal number > 037777777777 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99437 in perl561delta.pod
+    Octal number > 037777777777 non-portable in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99441 in perl561delta.pod
 
-    panic: del_backref in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99710 in perl561delta.pod
+    panic: del_backref in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99714 in perl561delta.pod
 
-    panic: kid popen errno read in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99818 in perl561delta.pod
+    panic: kid popen errno read in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99822 in perl561delta.pod
 
-    panic: magic_killbackrefs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99925 in perl561delta.pod
+    panic: magic_killbackrefs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99929 in perl561delta.pod
 
-    Parentheses missing around "%s" list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100056 in perl561delta.pod
+    Parentheses missing around "%s" list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100060 in perl561delta.pod
 
-    Possible unintended interpolation of %s in string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100274 in perl561delta.pod
+    Possible unintended interpolation of %s in string in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100278 in perl561delta.pod
 
-    Possible Y2K bug: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100834 in perl561delta.pod
+    Possible Y2K bug: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100838 in perl561delta.pod
 
-    pragma "attrs" is deprecated, use "sub NAME : ATTRS" instead in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100974 in perl561delta.pod
+    pragma "attrs" is deprecated, use "sub NAME : ATTRS" instead in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100978 in perl561delta.pod
 
-    Premature end of script headers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101376 in perl561delta.pod
+    Premature end of script headers in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101380 in perl561delta.pod
 
-    Repeat count in pack overflows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101434 in perl561delta.pod
+    Repeat count in pack overflows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101438 in perl561delta.pod
 
-    Repeat count in unpack overflows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101582 in perl561delta.pod
+    Repeat count in unpack overflows in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101586 in perl561delta.pod
 
-    realloc() of freed memory ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101734 in perl561delta.pod
+    realloc() of freed memory ignored in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101738 in perl561delta.pod
 
-    Reference is already weak in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101859 in perl561delta.pod
+    Reference is already weak in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101863 in perl561delta.pod
 
-    setpgrp can't take arguments in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101989 in perl561delta.pod
+    setpgrp can't take arguments in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101993 in perl561delta.pod
 
-    Strange *+?{} on zero-length expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102171 in perl561delta.pod
+    Strange *+?{} on zero-length expression in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102175 in perl561delta.pod
 
-    switching effective %s is not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102549 in perl561delta.pod
+    switching effective %s is not implemented in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102553 in perl561delta.pod
 
-    This Perl can't reset CRTL environ elements (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102697 in perl561delta.pod
+    This Perl can't reset CRTL environ elements (%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102701 in perl561delta.pod
 
-    This Perl can't set CRTL environ elements (%s=%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102753 in perl561delta.pod
+    This Perl can't set CRTL environ elements (%s=%s) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102757 in perl561delta.pod
 
-    Too late to run %s block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103208 in perl561delta.pod
+    Too late to run %s block in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103212 in perl561delta.pod
 
-    Unknown open() mode '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103537 in perl561delta.pod
+    Unknown open() mode '%s' in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103541 in perl561delta.pod
 
-    Unknown process %x sent message to prime_env_iter: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103736 in perl561delta.pod
+    Unknown process %x sent message to prime_env_iter: %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103740 in perl561delta.pod
 
-    Unrecognized escape \\%c passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104063 in perl561delta.pod
+    Unrecognized escape \\%c passed through in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104067 in perl561delta.pod
 
-    Unterminated attribute parameter in attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104237 in perl561delta.pod
+    Unterminated attribute parameter in attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104241 in perl561delta.pod
 
-    Unterminated attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104568 in perl561delta.pod
+    Unterminated attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104572 in perl561delta.pod
 
-    Unterminated attribute parameter in subroutine attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104845 in perl561delta.pod
+    Unterminated attribute parameter in subroutine attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104849 in perl561delta.pod
 
-    Unterminated subroutine attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105177 in perl561delta.pod
+    Unterminated subroutine attribute list in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105181 in perl561delta.pod
 
-    Value of CLI symbol "%s" too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105455 in perl561delta.pod
+    Value of CLI symbol "%s" too long in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105459 in perl561delta.pod
 
-    Version number must be a constant number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105722 in perl561delta.pod
+    Version number must be a constant number in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105726 in perl561delta.pod
 
-  New tests in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 105934 in perl561delta.pod
+  New tests in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 105938 in perl561delta.pod
 
-    lib/attrs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105961 in perl561delta.pod
+    lib/attrs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105965 in perl561delta.pod
 
-    lib/env in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106045 in perl561delta.pod
+    lib/env in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106049 in perl561delta.pod
 
-    lib/env-array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106135 in perl561delta.pod
+    lib/env-array in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106139 in perl561delta.pod
 
-    lib/io_const in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106231 in perl561delta.pod
+    lib/io_const in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106235 in perl561delta.pod
 
-    lib/io_dir in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106281 in perl561delta.pod
+    lib/io_dir in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106285 in perl561delta.pod
 
-    lib/io_multihomed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106370 in perl561delta.pod
+    lib/io_multihomed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106374 in perl561delta.pod
 
-    lib/io_poll in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106433 in perl561delta.pod
+    lib/io_poll in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106437 in perl561delta.pod
 
-    lib/io_unix in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106464 in perl561delta.pod
+    lib/io_unix in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106468 in perl561delta.pod
 
-    op/attrs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106498 in perl561delta.pod
+    op/attrs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106502 in perl561delta.pod
 
-    op/filetest in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106580 in perl561delta.pod
+    op/filetest in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106584 in perl561delta.pod
 
-    op/lex_assign in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106621 in perl561delta.pod
+    op/lex_assign in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106625 in perl561delta.pod
 
-    op/exists_sub in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106713 in perl561delta.pod
+    op/exists_sub in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106717 in perl561delta.pod
 
-  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 106776 in perl561delta.pod
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 106780 in perl561delta.pod
 
-    Perl Source Incompatibilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 106805 in perl561delta.pod
+    Perl Source Incompatibilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 106809 in perl561delta.pod
 
-      CHECK is a new keyword in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107182 in perl561delta.pod
+      CHECK is a new keyword in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107186 in perl561delta.pod
 
-      Treatment of list slices of undef has changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107327 in perl561delta.pod
+      Treatment of list slices of undef has changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107331 in perl561delta.pod
 
-      Format of $English::PERL_VERSION is different in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107552 in perl561delta.pod
+      Format of $English::PERL_VERSION is different in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107556 in perl561delta.pod
 
-      Literals of the form 1.2.3 parse differently in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107888 in perl561delta.pod
+      Literals of the form 1.2.3 parse differently in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107892 in perl561delta.pod
 
-      Possibly changed pseudo-random number generator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108335 in perl561delta.pod
+      Possibly changed pseudo-random number generator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108339 in perl561delta.pod
 
-      Hashing function for hash keys has changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108676 in perl561delta.pod
+      Hashing function for hash keys has changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108680 in perl561delta.pod
 
-      undef fails on read only values in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109134 in perl561delta.pod
+      undef fails on read only values in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109138 in perl561delta.pod
 
-      Close-on-exec bit may be set on pipe and socket handles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109327 in perl561delta.pod
+      Close-on-exec bit may be set on pipe and socket handles in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109331 in perl561delta.pod
 
-      Writing "$$1" to mean "${$}1" is unsupported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109557 in perl561delta.pod
+      Writing "$$1" to mean "${$}1" is unsupported in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109561 in perl561delta.pod
 
-      delete(), each(), values() and \(%h) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109810 in perl561delta.pod
+      delete(), each(), values() and \(%h) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109814 in perl561delta.pod
 
-      vec(EXPR,OFFSET,BITS) enforces powers-of-two BITS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110375 in perl561delta.pod
+      vec(EXPR,OFFSET,BITS) enforces powers-of-two BITS in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110379 in perl561delta.pod
 
-      Text of some diagnostic output has changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110524 in perl561delta.pod
+      Text of some diagnostic output has changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110528 in perl561delta.pod
 
-      %@ has been removed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110794 in perl561delta.pod
+      %@ has been removed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110798 in perl561delta.pod
 
-      Parenthesized not() behaves like a list operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111021 in perl561delta.pod
+      Parenthesized not() behaves like a list operator in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111025 in perl561delta.pod
 
-      Semantics of bareword prototype (*) have changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111676 in perl561delta.pod
+      Semantics of bareword prototype (*) have changed in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111680 in perl561delta.pod
 
-      Semantics of bit operators may have changed on 64-bit platforms in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112186 in perl561delta.pod
+      Semantics of bit operators may have changed on 64-bit platforms in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112190 in perl561delta.pod
 
-      More builtins taint their results in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112929 in perl561delta.pod
+      More builtins taint their results in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112933 in perl561delta.pod
 
-    C Source Incompatibilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 113255 in perl561delta.pod
+    C Source Incompatibilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 113259 in perl561delta.pod
 
-      PERL_POLLUTE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113299 in perl561delta.pod
+      PERL_POLLUTE in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113303 in perl561delta.pod
 
-      PERL_IMPLICIT_CONTEXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113734 in perl561delta.pod
+      PERL_IMPLICIT_CONTEXT in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113738 in perl561delta.pod
 
-      PERL_POLLUTE_MALLOC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114941 in perl561delta.pod
+      PERL_POLLUTE_MALLOC in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114945 in perl561delta.pod
 
-    Compatible C Source API Changes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 115963 in perl561delta.pod
+    Compatible C Source API Changes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 115967 in perl561delta.pod
 
-      PATCHLEVEL is now PERL_VERSION in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116012 in perl561delta.pod
+      PATCHLEVEL is now PERL_VERSION in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116016 in perl561delta.pod
 
-    Binary Incompatibilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 116708 in perl561delta.pod
+    Binary Incompatibilities in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 116712 in perl561delta.pod
 
-  Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 117609 in perl561delta.pod
+  Known Problems in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 117613 in perl561delta.pod
 
-    Localizing a tied hash element may leak memory in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 117632 in perl561delta.pod
+    Localizing a tied hash element may leak memory in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 117636 in perl561delta.pod
 
-    Known test failures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 117880 in perl561delta.pod
+    Known test failures in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 117884 in perl561delta.pod
 
-      64-bit builds  Subtest #15 of lib/b.t may fail under 64-bit builds on platforms ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117915 in perl561delta.pod
+      64-bit builds  Subtest #15 of lib/b.t may fail under 64-bit builds on platforms ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117919 in perl561delta.pod
 
-      Failure of Thread tests  The subtests 19 and 20 of lib/thr5005.t test are known ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118441 in perl561delta.pod
+      Failure of Thread tests  The subtests 19 and 20 of lib/thr5005.t test are known ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118445 in perl561delta.pod
 
-      NEXTSTEP 3.3 POSIX test failure  In NEXTSTEP 3.3p2 the implementation of the str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118766 in perl561delta.pod
+      NEXTSTEP 3.3 POSIX test failure  In NEXTSTEP 3.3p2 the implementation of the str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118770 in perl561delta.pod
 
-      Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc  If compi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119079 in perl561delta.pod
+      Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc  If compi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119083 in perl561delta.pod
 
-    EBCDIC platforms not fully supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119328 in perl561delta.pod
+    EBCDIC platforms not fully supported in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119332 in perl561delta.pod
 
-    UNICOS/mk CC failures during Configure run in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119701 in perl561delta.pod
+    UNICOS/mk CC failures during Configure run in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119705 in perl561delta.pod
 
-    Arrow operator and arrays in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 120309 in perl561delta.pod
+    Arrow operator and arrays in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 120313 in perl561delta.pod
 
-    Experimental features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 120641 in perl561delta.pod
+    Experimental features in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 120645 in perl561delta.pod
 
-      Threads in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120928 in perl561delta.pod
+      Threads in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120932 in perl561delta.pod
 
-      Unicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120943 in perl561delta.pod
+      Unicode in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120947 in perl561delta.pod
 
-      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120958 in perl561delta.pod
+      64-bit support in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120962 in perl561delta.pod
 
-      Lvalue subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120980 in perl561delta.pod
+      Lvalue subroutines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120984 in perl561delta.pod
 
-      Weak references in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121006 in perl561delta.pod
+      Weak references in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121010 in perl561delta.pod
 
-      The pseudo-hash data type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121029 in perl561delta.pod
+      The pseudo-hash data type in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121033 in perl561delta.pod
 
-      The Compiler suite in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121062 in perl561delta.pod
+      The Compiler suite in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121066 in perl561delta.pod
 
-      Internal implementation of file globbing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121088 in perl561delta.pod
+      Internal implementation of file globbing in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121092 in perl561delta.pod
 
-      The DB module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121136 in perl561delta.pod
+      The DB module in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121140 in perl561delta.pod
 
-      The regular expression code constructs: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121157 in perl561delta.pod
+      The regular expression code constructs: in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121161 in perl561delta.pod
 
-  Obsolete Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 121248 in perl561delta.pod
+  Obsolete Diagnostics in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 121252 in perl561delta.pod
 
-    Character class syntax [: :] is reserved for future extensions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121286 in perl561delta.pod
+    Character class syntax [: :] is reserved for future extensions in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121290 in perl561delta.pod
 
-    Ill-formed logical name |%s| in prime_env_iter in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121661 in perl561delta.pod
+    Ill-formed logical name |%s| in prime_env_iter in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121665 in perl561delta.pod
 
-    In string, @%s now must be written as \@%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122162 in perl561delta.pod
+    In string, @%s now must be written as \@%s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122166 in perl561delta.pod
 
-    Probable precedence problem on %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122544 in perl561delta.pod
+    Probable precedence problem on %s in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122548 in perl561delta.pod
 
-    regexp too big in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122794 in perl561delta.pod
+    regexp too big in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122798 in perl561delta.pod
 
-    Use of "$$<digit>" to mean "${$}<digit>" is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123148 in perl561delta.pod
+    Use of "$$<digit>" to mean "${$}<digit>" is deprecated in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123152 in perl561delta.pod
 
-  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 123776 in perl561delta.pod
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 123780 in perl561delta.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124302 in perl561delta.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124306 in perl561delta.pod
 
-  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124528 in perl561delta.pod
+  HISTORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124532 in perl561delta.pod
 

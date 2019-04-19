@@ -8,5 +8,6 @@ DIRHANDLE may be an expression whose value can be used as an indirect
 dirhandle, usually the real dirhandle name.  If DIRHANDLE is an undefined
 scalar variable (or array or hash element), the variable is assigned a
 reference to a new anonymous dirhandle; that is, it's autovivified.
-DIRHANDLEs have their own namespace separate from FILEHANDLEs.</p>
+Dirhandles are the same objects as filehandles; an I/O object can only
+be open as one of these handle types at once.</p>
 <p style="padding-bottom: 10px;">See the example at <a href="psi_element://pod%3A%3Aperlfunc%2Freaddir+DIRHANDLE">C<readdir></a>.</p></dd></dl>

@@ -1,17 +1,17 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">warn LIST
   </dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">Prints the value of LIST to STDERR.  If the last element of LIST does
-not end in a newline, it appends the same file/line number text as
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> does.</p>
-<p style="padding-bottom: 10px;">If the output is empty and <a href="psi_element://perlvar%2F%24%40">C<$@></a> already contains a value
-(typically from a previous eval) that value is used after appending
-<code>&quot;\t...caught&quot;</code> to <a href="psi_element://perlvar%2F%24%40">C<$@></a>.  This is useful for staying
-almost, but not entirely similar to <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>.</p>
-<p style="padding-bottom: 10px;">If <a href="psi_element://perlvar%2F%24%40">C<$@></a> is empty, then the string
-<code>&quot;Warning: Something's wrong&quot;</code> is used.</p>
-<p style="padding-bottom: 10px;">No message is printed if there is a <a href="psi_element://perlvar%2F%25SIG">C<$SIG{__WARN__}></a>
-handler
-installed.  It is the handler's responsibility to deal with the message
+<p style="padding-bottom: 10px;">Emits a warning, usually by printing it to <code>STDERR</code>.  <code>warn</code> interprets
+its operand LIST in the same way as <code>die</code>, but is slightly different
+in what it defaults to when LIST is empty or makes an empty string.
+If it is empty and <a href="psi_element://perlvar%2F%24%40">C<$@></a> already contains an exception
+value then that value is used after appending <code>&quot;\t...caught&quot;</code>.  If it
+is empty and <code>$@</code> is also empty then the string <code>&quot;Warning: Something's
+wrong&quot;</code> is used.</p>
+<p style="padding-bottom: 10px;">By default, the exception derived from the operand LIST is stringified
+and printed to <code>STDERR</code>.  This behaviour can be altered by installing
+a <a href="psi_element://perlvar%2F%25SIG">C<$SIG{__WARN__}></a> handler.  If there is such a
+handler then no message is automatically printed; it is the handler's
+responsibility to deal with the exception
 as it sees fit (like, for instance, converting it into a
 <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>).  Most
 handlers must therefore arrange to actually display the

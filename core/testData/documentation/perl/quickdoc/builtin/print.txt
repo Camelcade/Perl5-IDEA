@@ -30,6 +30,6 @@ unsubscripted scalar variable to retrieve it, you will have to use a block
 returning the filehandle value instead, in which case the LIST may not be
 omitted:</p>
 <div style="padding-bottom: 10px;"><pre><code>    print { $files[$i] } &quot;stuff\n&quot;;
-    print { $OK ? STDOUT : STDERR } &quot;stuff\n&quot;;</code></pre></div>
+    print { $OK ? *STDOUT : *STDERR } &quot;stuff\n&quot;;</code></pre></div>
 <p style="padding-bottom: 10px;">Printing to a closed pipe or socket will generate a SIGPIPE signal.  See
 <a href="psi_element://perlipc">perlipc</a> for more on signal handling.</p></dd></dl>

@@ -331,7 +331,7 @@ POD file
                             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('if')
                             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('you')
                             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('enabled')
-                            PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('psuedo')
+                            PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('pseudo')
                             PsiElement(Perl5 POD: POD_SYMBOL)('-')
                             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('fork')
                             PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('in')

@@ -14,15 +14,15 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlmod.pod
 
     Packages in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
 
-    Symbol Tables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4942 in perlmod.pod
+    Symbol Tables in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
 
-    BEGIN, UNITCHECK, CHECK, INIT and END in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10529 in perlmod.pod
+    BEGIN, UNITCHECK, CHECK, INIT and END in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
 
-    Perl Classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15934 in perlmod.pod
+    Perl Classes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17235 in perlmod.pod
 
-    Perl Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16338 in perlmod.pod
+    Perl Modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17639 in perlmod.pod
 
-    Making your module threadsafe in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22008 in perlmod.pod
+    Making your module threadsafe in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24446 in perlmod.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25747 in perlmod.pod
 

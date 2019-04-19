@@ -27,10 +27,12 @@ If an element off the end of the string is written to, Perl will first
 extend the string with sufficiently many zero bytes.   It is an error
 to try to write off the beginning of the string (i.e., negative OFFSET).</p>
 <p style="padding-bottom: 10px;">If the string happens to be encoded as UTF-8 internally (and thus has
-the UTF8 flag set), this is ignored by <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS">C<vec></a>,
-and it operates on the
-internal byte string, not the conceptual character string, even if you
-only have characters with values less than 256.</p>
+the UTF8 flag set), <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS">C<vec></a> tries to convert it
+to use a one-byte-per-character internal representation. However, if the
+string contains characters with values of 256 or higher, that conversion
+will fail, and a deprecation message will be raised.  In that situation,
+<code>vec</code> will operate on the underlying buffer regardless, in its internal
+UTF-8 representation.  In Perl 5.32, this will be a fatal error.</p>
 <p style="padding-bottom: 10px;">Strings created with <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS">C<vec></a> can also be
 manipulated with the logical
 operators <code>|</code>, <code>&amp;</code>, <code>^</code>, and <code>~</code>.  These operators will assume a bit

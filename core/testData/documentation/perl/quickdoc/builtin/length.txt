@@ -10,5 +10,5 @@ many elements these have.  For that, use <code>scalar @array</code> and <code>sc
 <p style="padding-bottom: 10px;">Like all Perl character operations, <a href="psi_element://pod%3A%3Aperlfunc%2Flength+EXPR">C<length></a> normally
 deals in logical
 characters, not physical bytes.  For how many bytes a string encoded as
-UTF-8 would take up, use <code>length(Encode::encode_utf8(EXPR))</code> (you'll have
-to <code>use Encode</code> first).  See <a href="psi_element://Encode" style="color:red">Encode</a> and <a href="psi_element://perlunicode">perlunicode</a>.</p></dd></dl>
+UTF-8 would take up, use <code>length(Encode::encode('UTF-8', EXPR))</code>
+(you'll have to <code>use Encode</code> first).  See <a href="psi_element://Encode" style="color:red">Encode</a> and <a href="psi_element://perlunicode">perlunicode</a>.</p></dd></dl>

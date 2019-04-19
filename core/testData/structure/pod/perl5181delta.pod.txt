@@ -24,43 +24,43 @@ Documentation in null; /perl5language.png -> POD file at 0 in perl5181delta.pod
 
       AIX in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 926 in perl5181delta.pod
 
-      MidnightBSD in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1017 in perl5181delta.pod
+      MidnightBSD in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1019 in perl5181delta.pod
 
-  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1146 in perl5181delta.pod
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1148 in perl5181delta.pod
 
-    Starting in v5.18.0, a construct like /[#](?{})/x would have its # incorrectly i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1182 in perl5181delta.pod
+    Starting in v5.18.0, a construct like /[#](?{})/x would have its # incorrectly i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1184 in perl5181delta.pod
 
-    A number of memory leaks related to the new, experimental regexp bracketed chara... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1373 in perl5181delta.pod
+    A number of memory leaks related to the new, experimental regexp bracketed chara... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1375 in perl5181delta.pod
 
-    The OP allocation code now returns correctly aligned memory in all cases for str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1501 in perl5181delta.pod
+    The OP allocation code now returns correctly aligned memory in all cases for str... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1503 in perl5181delta.pod
 
-    The debugger's man command been fixed. It was broken in the v5.18.0 release. The... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1841 in perl5181delta.pod
+    The debugger's man command been fixed. It was broken in the v5.18.0 release. The... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1843 in perl5181delta.pod
 
-    @_ is now correctly visible in the debugger, fixing a regression introduced in v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2018 in perl5181delta.pod
+    @_ is now correctly visible in the debugger, fixing a regression introduced in v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2020 in perl5181delta.pod
 
-    Fixed a small number of regexp constructions that could either fail to match or ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2143 in perl5181delta.pod
+    Fixed a small number of regexp constructions that could either fail to match or ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2145 in perl5181delta.pod
 
-    Perl v5.16 inadvertently introduced a bug whereby calls to XSUBs that were not v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2347 in perl5181delta.pod
+    Perl v5.16 inadvertently introduced a bug whereby calls to XSUBs that were not v... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2349 in perl5181delta.pod
 
-    Perl v5.18 inadvertently introduced a bug whereby dual-vars (i.e. variables with... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2595 in perl5181delta.pod
+    Perl v5.18 inadvertently introduced a bug whereby dual-vars (i.e. variables with... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2597 in perl5181delta.pod
 
-    Perl v5.18 inadvertently introduced a bug whereby interpolating mixed up- and do... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2849 in perl5181delta.pod
+    Perl v5.18 inadvertently introduced a bug whereby interpolating mixed up- and do... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2851 in perl5181delta.pod
 
-    Lexical constants (my sub a() { 42 }) no longer crash when inlined. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3225 in perl5181delta.pod
+    Lexical constants (my sub a() { 42 }) no longer crash when inlined. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3227 in perl5181delta.pod
 
-    Parameter prototypes attached to lexical subroutines are now respected when comp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3306 in perl5181delta.pod
+    Parameter prototypes attached to lexical subroutines are now respected when comp... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3308 in perl5181delta.pod
 
-    Syntax errors in lexical subroutines in combination with calls to the same subro... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3524 in perl5181delta.pod
+    Syntax errors in lexical subroutines in combination with calls to the same subro... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3526 in perl5181delta.pod
 
-    The dtrace sub-entry probe now works with lexical subs, instead of crashing [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3662 in perl5181delta.pod
+    The dtrace sub-entry probe now works with lexical subs, instead of crashing [per... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3664 in perl5181delta.pod
 
-    Undefining an inlinable lexical subroutine (my sub foo() { 42 } undef &foo) woul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3764 in perl5181delta.pod
+    Undefining an inlinable lexical subroutine (my sub foo() { 42 } undef &foo) woul... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3766 in perl5181delta.pod
 
-    Deep recursion warnings no longer crash lexical subroutines. [RT #118521] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3905 in perl5181delta.pod
+    Deep recursion warnings no longer crash lexical subroutines. [RT #118521] in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3907 in perl5181delta.pod
 
-  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3996 in perl5181delta.pod
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3998 in perl5181delta.pod
 
-  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5138 in perl5181delta.pod
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5140 in perl5181delta.pod
 
-  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6333 in perl5181delta.pod
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6335 in perl5181delta.pod
 

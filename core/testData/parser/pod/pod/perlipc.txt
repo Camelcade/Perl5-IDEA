@@ -675,7 +675,7 @@ POD file
         PsiElement(Perl5 POD: POD_COLON)(':')
         PsiElement(Perl5 POD: POD_NEWLINE)('\n')
       PsiPodVerbatimParagraphImpl(Perl5 POD: POD_VERBATIM_PARAGRAPH)
-        PsiElement(Perl5 POD: POD_CODE)('    # block scope for local\n    {\n        local $SIG{HUP} = "IGNORE";\n        kill HUP => -$$;\n        # snazzy writing of: kill("HUP", -$$)\n    }\n')
+        PsiElement(Perl5 POD: POD_CODE)('    # block scope for local\n    {\n        local $SIG{HUP} = "IGNORE";\n        kill HUP => -getpgrp();\n        # snazzy writing of: kill("HUP", -getpgrp())\n    }\n')
       PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('Another')
         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('interesting')

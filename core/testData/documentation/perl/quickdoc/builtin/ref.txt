@@ -1,47 +1,37 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">ref EXPR
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">ref</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">Returns a non-empty string if EXPR is a reference, the empty
-string otherwise.  If EXPR is not specified, <a href="psi_element://perlvar%2F%24_">C<$_></a> will be
-used.  The value returned depends on the type of thing the reference is
-a reference to.</p>
-<p style="padding-bottom: 10px;">Builtin types include:</p>
-<div style="padding-bottom: 10px;"><pre><code>    SCALAR
-    ARRAY
-    HASH
-    CODE
-    REF
-    GLOB
-    LVALUE
-    FORMAT
-    IO
-    VSTRING
-    Regexp</code></pre></div>
-<p style="padding-bottom: 10px;">You can think of <a href="psi_element://pod%3A%3Aperlfunc%2Fref+EXPR">C<ref></a> as a <code>typeof</code> operator.</p>
-<div style="padding-bottom: 10px;"><pre><code>    if (ref($r) eq &quot;HASH&quot;) {
-        print &quot;r is a reference to a hash.\n&quot;;
-    }
-    unless (ref($r)) {
-        print &quot;r is not a reference at all.\n&quot;;
-    }</code></pre></div>
-<p style="padding-bottom: 10px;">The return value <code>LVALUE</code> indicates a reference to an lvalue that is not
-a variable.  You get this from taking the reference of function calls like
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR">C<pos></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsubstr+EXPR%2COFFSET%2CLENGTH%2CREPLACEMENT">C<substr></a>.  <code>VSTRING</code> is
-returned if the reference points to a
-<a href="psi_element://perldata%2FVersion+Strings">version string</a>.</p>
-<p style="padding-bottom: 10px;">The result <code>Regexp</code> indicates that the argument is a regular expression
-resulting from <a href="psi_element://pod%3A%3Aperlfunc%2FqrE%3Csol%3ESTRINGE%3Csol%3E" style="color:red">C<qrE<sol>E<sol>></a>.</p>
-<p style="padding-bottom: 10px;">If the referenced object has been blessed into a package, then that package
-name is returned instead.  But don't use that, as it's now considered
-&quot;bad practice&quot;.  For one reason, an object could be using a class called
-<code>Regexp</code> or <code>IO</code>, or even <code>HASH</code>.  Also, <a href="psi_element://pod%3A%3Aperlfunc%2Fref+EXPR">C<ref></a> doesn't
-take into account subclasses, like
-<a href="psi_element://UNIVERSAL%2FC%3C%3C+%24obj-%3Eisa%28+TYPE+%29+%3E%3E" style="color:red">C<isa></a> does.</p>
-<p style="padding-bottom: 10px;">Instead, use <a href="psi_element://Scalar%3A%3AUtil%2Fblessed" style="color:red">C<blessed></a> (in the <a href="psi_element://Scalar%3A%3AUtil" style="color:red">Scalar::Util</a>
-module) for boolean checks, <a href="psi_element://UNIVERSAL%2FC%3C%3C+%24obj-%3Eisa%28+TYPE+%29+%3E%3E" style="color:red">C<isa></a>
-for specific class checks and <a href="psi_element://Scalar%3A%3AUtil%2Freftype" style="color:red">C<reftype></a> (also
-from <a href="psi_element://Scalar%3A%3AUtil" style="color:red">Scalar::Util</a>) for type checks.  (See <a href="psi_element://perlobj">perlobj</a> for details and
-a <a href="psi_element://Scalar%3A%3AUtil%2Fblessed" style="color:red">C<blessed></a>/<a href="psi_element://UNIVERSAL%2FC%3C%3C+%24obj-%3Eisa%28+TYPE+%29+%3E%3E" style="color:red">C<isa></a>
-example.)</p>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://perlref">perlref</a>.</p></dd></dl>
+<p style="padding-bottom: 10px;">Examines the value of EXPR, expecting it to be a reference, and returns
+a string giving information about the reference and the type of referent.
+If EXPR is not specified, <a href="psi_element://perlvar%2F%24_">C<$_></a> will be used.</p>
+<p style="padding-bottom: 10px;">If the operand is not a reference, then the empty string will be returned.
+An empty string will only be returned in this situation.  <code>ref</code> is often
+useful to just test whether a value is a reference, which can be done
+by comparing the result to the empty string.  It is a common mistake
+to use the result of <code>ref</code> directly as a truth value: this goes wrong
+because <code>0</code> (which is false) can be returned for a reference.</p>
+<p style="padding-bottom: 10px;">If the operand is a reference to a blessed object, then the name of
+the class into which the referent is blessed will be returned.  <code>ref</code>
+doesn't care what the physical type of the referent is; blessing takes
+precedence over such concerns.  Beware that exact comparison of <code>ref</code>
+results against a class name doesn't perform a class membership test:
+a class's members also include objects blessed into subclasses, for
+which <code>ref</code> will return the name of the subclass.  Also beware that
+class names can clash with the built-in type names (described below).</p>
+<p style="padding-bottom: 10px;">If the operand is a reference to an unblessed object, then the return
+value indicates the type of object.  If the unblessed referent is not
+a scalar, then the return value will be one of the strings <code>ARRAY</code>,
+<code>HASH</code>, <code>CODE</code>, <code>FORMAT</code>, or <code>IO</code>, indicating only which kind of
+object it is.  If the unblessed referent is a scalar, then the return
+value will be one of the strings <code>SCALAR</code>, <code>VSTRING</code>, <code>REF</code>, <code>GLOB</code>,
+<code>LVALUE</code>, or <code>REGEXP</code>, depending on the kind of value the scalar
+currently has.  Beware that these built-in type names can also be used as
+class names, so <code>ref</code> returning one of these names doesn't unambiguously
+indicate that the referent is of the kind to which the name refers.</p>
+<p style="padding-bottom: 10px;">The ambiguity between built-in type names and class names significantly
+limits the utility of <code>ref</code>.  For unambiguous information, use
+<a href="psi_element://Scalar%3A%3AUtil%2Fblessed" style="color:red">C<Scalar::Util::blessed()></a> for information about
+blessing, and <a href="psi_element://Scalar%3A%3AUtil%2Freftype" style="color:red">C<Scalar::Util::reftype()></a> for
+information about physical types.  Use <a href="psi_element://UNIVERSAL%2FC%3C%3C+%24obj-%3Eisa%28+TYPE+%29+%3E%3E" style="color:red">the C<isa> method</a> for class membership tests, though one must be
+sure of blessedness before attempting a method call.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://perlref">perlref</a> and <a href="psi_element://perlobj">perlobj</a>.</p></dd></dl>

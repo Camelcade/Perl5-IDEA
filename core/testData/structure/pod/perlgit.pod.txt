@@ -32,31 +32,31 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlgit.pod
 
       Which commit removed the last file to match this regex? in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14498 in perlgit.pod
 
-    Topic branches and rewriting history in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16887 in perlgit.pod
+    Topic branches and rewriting history in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17263 in perlgit.pod
 
-    Grafts in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20061 in perlgit.pod
+    Grafts in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20437 in perlgit.pod
 
-  WRITE ACCESS TO THE GIT REPOSITORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20640 in perlgit.pod
+  WRITE ACCESS TO THE GIT REPOSITORY in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21016 in perlgit.pod
 
-    Accepting a patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21815 in perlgit.pod
+    Accepting a patch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22191 in perlgit.pod
 
-    Committing to blead in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24047 in perlgit.pod
+    Committing to blead in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24423 in perlgit.pod
 
-      Make sure you have a good commit message. See perlhack/Commit message for detail... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24315 in perlgit.pod
+      Make sure you have a good commit message. See perlhack/Commit message for detail... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24691 in perlgit.pod
 
-      Run the test suite. You might not think that one typo fix would break a test fil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24411 in perlgit.pod
+      Run the test suite. You might not think that one typo fix would break a test fil... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24787 in perlgit.pod
 
-      If you don't run the full test suite, at least make test_porting. This will run ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24963 in perlgit.pod
+      If you don't run the full test suite, at least make test_porting. This will run ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25339 in perlgit.pod
 
-      If you make any changes that affect miniperl or core routines that have differen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25134 in perlgit.pod
+      If you make any changes that affect miniperl or core routines that have differen... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25510 in perlgit.pod
 
-    On merging and rebasing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25428 in perlgit.pod
+    On merging and rebasing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25804 in perlgit.pod
 
-    Committing to maintenance versions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28454 in perlgit.pod
+    Committing to maintenance versions in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28830 in perlgit.pod
 
-    Merging from a branch via GitHub in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29261 in perlgit.pod
+    Merging from a branch via GitHub in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29637 in perlgit.pod
 
-    Using a smoke-me branch to test changes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29949 in perlgit.pod
+    Using a smoke-me branch to test changes in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30325 in perlgit.pod
 
-    A note on camel and dromedary in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32295 in perlgit.pod
+    A note on camel and dromedary in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32848 in perlgit.pod
 

@@ -1,0 +1,88 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perldeprecation.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldeprecation.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 55 in perldeprecation.pod
+
+    Perl 5.32 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 460 in perldeprecation.pod
+
+      Constants from lexical variables potentially modified elsewhere in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 478 in perldeprecation.pod
+
+      Use of strings with code points over 0xFF as arguments to vec in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 1753 in perldeprecation.pod
+
+      Use of code points over 0xFF in string bitwise operators in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2017 in perldeprecation.pod
+
+      hostname() doesn't accept any arguments in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2750 in perldeprecation.pod
+
+      Unescaped left braces in regular expressions in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3247 in perldeprecation.pod
+
+    Perl 5.30 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4484 in perldeprecation.pod
+
+      $* is no longer supported in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4502 in perldeprecation.pod
+
+      $# is no longer supported in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5063 in perldeprecation.pod
+
+      Assigning non-zero to $[ will be fatal in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5501 in perldeprecation.pod
+
+      File::Glob::glob() will disappear in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5811 in perldeprecation.pod
+
+      Unescaped left braces in regular expressions (for 5.30) in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6327 in perldeprecation.pod
+
+      Unqualified dump() in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6452 in perldeprecation.pod
+
+      Using my() in false conditional. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6650 in perldeprecation.pod
+
+      Reading/writing bytes from/to :utf8 handles. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7608 in perldeprecation.pod
+
+      Use of unassigned code point or non-standalone grapheme for a delimiter. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8745 in perldeprecation.pod
+
+      In XS code, use of various macros dealing with UTF-8. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 10234 in perldeprecation.pod
+
+    Perl 5.28 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11557 in perldeprecation.pod
+
+      Attributes :locked and :unique in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11575 in perldeprecation.pod
+
+      Bare here-document terminators in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12055 in perldeprecation.pod
+
+      Setting $/ to a reference to a non-positive integer in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12544 in perldeprecation.pod
+
+      Limit on the value of Unicode code points. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13299 in perldeprecation.pod
+
+      Use of comma-less variable list in formats. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14294 in perldeprecation.pod
+
+      Use of \N{} in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14535 in perldeprecation.pod
+
+      Using the same symbol to open a filehandle and a dirhandle in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14796 in perldeprecation.pod
+
+      ${^ENCODING} is no longer supported. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15214 in perldeprecation.pod
+
+      B::OP::terse in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15588 in perldeprecation.pod
+
+      Use of inherited AUTOLOAD for non-method %s::%s() is no longer allowed in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15767 in perldeprecation.pod
+
+      Use of code points over 0xFF in string bitwise operators in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16708 in perldeprecation.pod
+
+      In XS code, use of to_utf8_case() in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17022 in perldeprecation.pod
+
+    Perl 5.26 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17369 in perldeprecation.pod
+
+      --libpods in Pod::Html in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17387 in perldeprecation.pod
+
+      The utilities c2ph and pstruct in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17644 in perldeprecation.pod
+
+      Trapping $SIG {__DIE__} other than during program exit. in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17834 in perldeprecation.pod
+
+      Malformed UTF-8 string in "%s" in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18469 in perldeprecation.pod
+
+    Perl 5.24 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19000 in perldeprecation.pod
+
+      Use of *glob{FILEHANDLE} in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19018 in perldeprecation.pod
+
+      Calling POSIX::%s() is deprecated in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19277 in perldeprecation.pod
+
+    Perl 5.16 in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19723 in perldeprecation.pod
+
+      Use of %s on a handle without * is deprecated in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19741 in perldeprecation.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20351 in perldeprecation.pod
+

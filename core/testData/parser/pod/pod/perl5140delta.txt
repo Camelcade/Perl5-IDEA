@@ -21985,7 +21985,7 @@ POD file
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('only')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('occurs')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('if')
-                        PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('a')
+                        PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('an')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('internal')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('consistency')
                         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('check')

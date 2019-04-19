@@ -22,7 +22,7 @@ POD file
     PsiHead1SectionContentImpl(Perl5 POD: HEAD_1_SECTION_CONTENT)
       PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
         PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('version')
-        PsiElement(Perl5 POD: POD_NUMBER)('5.021010')
+        PsiElement(Perl5 POD: POD_NUMBER)('5.021011')
         PsiElement(Perl5 POD: POD_NEWLINE)('\n')
   PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION)
     PsiElement(Perl5 POD: POD_HEAD1)('=head1')

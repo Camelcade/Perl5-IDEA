@@ -137,9 +137,8 @@ For example:</p>
   printf '&lt;%.0f&gt;', 1;  # prints &quot;&lt;1&gt;&quot;
   printf '&lt;%e&gt;', 10;   # prints &quot;&lt;1.000000e+01&gt;&quot;
   printf '&lt;%.1e&gt;', 10; # prints &quot;&lt;1.0e+01&gt;&quot;</code></pre></div>
-<p style="padding-bottom: 10px;">For &quot;g&quot; and &quot;G&quot;, this specifies the maximum number of digits to show,
-including those prior to the decimal point and those after it; for
-example:</p>
+<p style="padding-bottom: 10px;">For &quot;g&quot; and &quot;G&quot;, this specifies the maximum number of significant digits to
+show; for example:</p>
 <div style="padding-bottom: 10px;"><pre><code>  # These examples are subject to system-specific variation.
   printf '&lt;%g&gt;', 1;        # prints &quot;&lt;1&gt;&quot;
   printf '&lt;%.10g&gt;', 1;     # prints &quot;&lt;1&gt;&quot;
@@ -147,7 +146,10 @@ example:</p>
   printf '&lt;%.1g&gt;', 100;    # prints &quot;&lt;1e+02&gt;&quot;
   printf '&lt;%.2g&gt;', 100.01; # prints &quot;&lt;1e+02&gt;&quot;
   printf '&lt;%.5g&gt;', 100.01; # prints &quot;&lt;100.01&gt;&quot;
-  printf '&lt;%.4g&gt;', 100.01; # prints &quot;&lt;100&gt;&quot;</code></pre></div>
+  printf '&lt;%.4g&gt;', 100.01; # prints &quot;&lt;100&gt;&quot;
+  printf '&lt;%.1g&gt;', 0.0111; # prints &quot;&lt;0.01&gt;&quot;
+  printf '&lt;%.2g&gt;', 0.0111; # prints &quot;&lt;0.011&gt;&quot;
+  printf '&lt;%.3g&gt;', 0.0111; # prints &quot;&lt;0.0111&gt;&quot;</code></pre></div>
 <p style="padding-bottom: 10px;">For integer conversions, specifying a precision implies that the
 output of the number itself should be zero-padded to this width,
 where the 0 flag is ignored:</p>
@@ -197,8 +199,8 @@ as supported by the compiler used to build Perl:</p>
    h           interpret integer as C type &quot;short&quot; or
                &quot;unsigned short&quot;
    j           interpret integer as C type &quot;intmax_t&quot; on Perl
-               5.14 or later, and only with a C99 compiler
-               (unportable)
+               5.14 or later; and only with a C99 compiler
+               prior to Perl 5.30 (unportable)
    l           interpret integer as C type &quot;long&quot; or
                &quot;unsigned long&quot;
    q, L, or ll interpret integer as C type &quot;long long&quot;,

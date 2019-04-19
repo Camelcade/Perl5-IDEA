@@ -20,7 +20,8 @@ traversal order are subject to change in any release of Perl.  Tied hashes
 may behave differently to Perl's hashes with respect to changes in order on
 insertion and deletion of items.</p>
 <p style="padding-bottom: 10px;">As a side effect, calling <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH">C<keys></a> resets the internal
-iterator of the HASH or ARRAY (see <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a>).  In
+iterator of the HASH or ARRAY (see <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a>) before
+yielding the keys.  In
 particular, calling <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH">C<keys></a> in void context resets the
 iterator with no other overhead.</p>
 <p style="padding-bottom: 10px;">Here is yet another way to print your environment:</p>

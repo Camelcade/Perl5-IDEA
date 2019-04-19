@@ -22,273 +22,277 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlhack.pod
 
     The porters appreciate the time you spent helping to make Perl better. Thank you... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2499 in perlhack.pod
 
-    The next time you wish to make a patch, you need to start from the latest perl i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2601 in perlhack.pod
+    All contributors are credited (by name and email address) in the AUTHORS file, w... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2601 in perlhack.pod
 
-  BUG REPORTING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2922 in perlhack.pod
+    The next time you wish to make a patch, you need to start from the latest perl i... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2953 in perlhack.pod
 
-  PERL 5 PORTERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3623 in perlhack.pod
+  BUG REPORTING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3274 in perlhack.pod
 
-    perl-changes mailing list in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4043 in perlhack.pod
+  PERL 5 PORTERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3975 in perlhack.pod
 
-    #p5p on IRC in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4323 in perlhack.pod
+    perl-changes mailing list in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4395 in perlhack.pod
 
-  GETTING THE PERL SOURCE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4496 in perlhack.pod
+    #p5p on IRC in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4675 in perlhack.pod
 
-    Read access via Git in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4842 in perlhack.pod
+  GETTING THE PERL SOURCE in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4848 in perlhack.pod
 
-    Read access via the web in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5283 in perlhack.pod
+    Read access via Git in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5194 in perlhack.pod
 
-    Read access via rsync in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5632 in perlhack.pod
+    Read access via the web in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5635 in perlhack.pod
 
-    Write access via git in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6267 in perlhack.pod
+    Read access via rsync in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5984 in perlhack.pod
 
-  PATCHING PERL in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6376 in perlhack.pod
+    Write access via git in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6619 in perlhack.pod
 
-    Submitting patches in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6621 in perlhack.pod
+  PATCHING PERL in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6728 in perlhack.pod
 
-    Getting your patch accepted in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8119 in perlhack.pod
+    Submitting patches in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6973 in perlhack.pod
 
-      Patch style in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8278 in perlhack.pod
+    Getting your patch accepted in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8603 in perlhack.pod
 
-      Commit message in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 9359 in perlhack.pod
+      Patch style in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8762 in perlhack.pod
 
-        Your commit message should describe why the change you are making is important. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10278 in perlhack.pod
+      Commit message in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 9843 in perlhack.pod
 
-        Your commit message should describe what part of the Perl core you're changing a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10680 in perlhack.pod
+        Your commit message should describe why the change you are making is important. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10762 in perlhack.pod
 
-        While it's not necessary for documentation changes, new tests or trivial patches... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10812 in perlhack.pod
+        Your commit message should describe what part of the Perl core you're changing a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11164 in perlhack.pod
 
-      Comments, Comments, Comments in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11584 in perlhack.pod
+        While it's not necessary for documentation changes, new tests or trivial patches... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11296 in perlhack.pod
 
-      Style in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12085 in perlhack.pod
+      Comments, Comments, Comments in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12068 in perlhack.pod
 
-        8-wide tabs (no exceptions!) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12261 in perlhack.pod
+      Style in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12569 in perlhack.pod
 
-        4-wide indents for code, 2-wide indents for nested CPP #defines in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12300 in perlhack.pod
+        4-wide indents for code, 2-wide indents for nested CPP #defines, with 8-wide tab... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12745 in perlhack.pod
 
-        Try hard not to exceed 79-columns in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12374 in perlhack.pod
+        Use spaces for indentation, not tab characters.  The codebase is a mixture of ta... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12845 in perlhack.pod
 
-        ANSI C prototypes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12418 in perlhack.pod
+        Try hard not to exceed 79-columns in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13087 in perlhack.pod
 
-        Uncuddled elses and "K&R" style for indenting control constructs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12446 in perlhack.pod
+        ANSI C prototypes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13131 in perlhack.pod
 
-        No C++ style (//) comments in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12521 in perlhack.pod
+        Uncuddled elses and "K&R" style for indenting control constructs in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13159 in perlhack.pod
 
-        Mark places that need to be revisited with XXX (and revisit often!) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12558 in perlhack.pod
+        No C++ style (//) comments in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13234 in perlhack.pod
 
-        Opening brace lines up with "if" when conditional spans multiple lines; should b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12636 in perlhack.pod
+        Mark places that need to be revisited with XXX (and revisit often!) in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13271 in perlhack.pod
 
-        In function definitions, name starts in column 0 (return value-type is on previo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12753 in perlhack.pod
+        Opening brace lines up with "if" when conditional spans multiple lines; should b... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13349 in perlhack.pod
 
-        Single space after keywords that are followed by parens, no space between functi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12852 in perlhack.pod
+        In function definitions, name starts in column 0 (return value-type is on previo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13466 in perlhack.pod
 
-        Avoid assignments in conditionals, but if they're unavoidable, use extra paren, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12970 in perlhack.pod
+        Single space after keywords that are followed by parens, no space between functi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13565 in perlhack.pod
 
-        "return foo;" rather than "return(foo);" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13089 in perlhack.pod
+        Avoid assignments in conditionals, but if they're unavoidable, use extra paren, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13683 in perlhack.pod
 
-        "if (!foo) ..." rather than "if (foo == FALSE) ..." etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13140 in perlhack.pod
+        "return foo;" rather than "return(foo);" in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13802 in perlhack.pod
 
-        Do not declare variables using "register".  It may be counterproductive with mod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13207 in perlhack.pod
+        "if (!foo) ..." rather than "if (foo == FALSE) ..." etc. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13853 in perlhack.pod
 
-        In-line functions that are in headers that are accessible to XS code need to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13389 in perlhack.pod
+        Do not declare variables using "register".  It may be counterproductive with mod... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13920 in perlhack.pod
 
-      Test suite in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13814 in perlhack.pod
+        In-line functions that are in headers that are accessible to XS code need to be ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14102 in perlhack.pod
 
-        Know what you're testing.  Read the docs, and the source. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14254 in perlhack.pod
+      Test suite in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14527 in perlhack.pod
 
-        Tend to fail, not succeed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14322 in perlhack.pod
+        Know what you're testing.  Read the docs, and the source. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14967 in perlhack.pod
 
-        Interpret results strictly. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14359 in perlhack.pod
+        Tend to fail, not succeed. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15035 in perlhack.pod
 
-        Use unrelated features (this will flush out bizarre interactions). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14397 in perlhack.pod
+        Interpret results strictly. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15072 in perlhack.pod
 
-        Use non-standard idioms (otherwise you are not testing TIMTOWTDI). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14474 in perlhack.pod
+        Use unrelated features (this will flush out bizarre interactions). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15110 in perlhack.pod
 
-        Avoid using hardcoded test numbers whenever possible (the EXPECTED/GOT found in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14551 in perlhack.pod
+        Use non-standard idioms (otherwise you are not testing TIMTOWTDI). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15187 in perlhack.pod
 
-        Give meaningful error messages when a test fails. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14714 in perlhack.pod
+        Avoid using hardcoded test numbers whenever possible (the EXPECTED/GOT found in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15264 in perlhack.pod
 
-        Avoid using qx// and system() unless you are testing for them.  If you do use th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14774 in perlhack.pod
+        Give meaningful error messages when a test fails. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15427 in perlhack.pod
 
-        Unlink any temporary files you create. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14915 in perlhack.pod
+        Avoid using qx// and system() unless you are testing for them.  If you do use th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15487 in perlhack.pod
 
-        Promote unforeseen warnings to errors with $SIG{__WARN__}. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14964 in perlhack.pod
+        Unlink any temporary files you create. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15628 in perlhack.pod
 
-        Be sure to use the libraries and modules shipped with the version being tested, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15033 in perlhack.pod
+        Promote unforeseen warnings to errors with $SIG{__WARN__}. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15677 in perlhack.pod
 
-        Add comments to the code explaining what you are testing for. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15162 in perlhack.pod
+        Be sure to use the libraries and modules shipped with the version being tested, ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15746 in perlhack.pod
 
-        Make updating the '1..42' string unnecessary.  Or make sure that you update it. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15234 in perlhack.pod
+        Add comments to the code explaining what you are testing for. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15875 in perlhack.pod
 
-        Test _all_ behaviors of a given operator, library, or function.  Test all option... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15324 in perlhack.pod
+        Make updating the '1..42' string unnecessary.  Or make sure that you update it. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15947 in perlhack.pod
 
-    Patching a core module in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15599 in perlhack.pod
+        Test _all_ behaviors of a given operator, library, or function.  Test all option... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16037 in perlhack.pod
 
-    Updating perldelta in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16543 in perlhack.pod
+    Patching a core module in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16312 in perlhack.pod
 
-      Adding, deprecating, or removing core features in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16804 in perlhack.pod
+    Updating perldelta in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17256 in perlhack.pod
 
-      Adding, deprecating, removing, or upgrading core or dual-life modules in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16861 in perlhack.pod
+      Adding, deprecating, or removing core features in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17517 in perlhack.pod
 
-      Adding new core tests in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16941 in perlhack.pod
+      Adding, deprecating, removing, or upgrading core or dual-life modules in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17574 in perlhack.pod
 
-      Fixing security issues and user-visible bugs in the core in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16973 in perlhack.pod
+      Adding new core tests in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17654 in perlhack.pod
 
-      Changes that might break existing code, either on the perl or C level in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17040 in perlhack.pod
+      Fixing security issues and user-visible bugs in the core in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17686 in perlhack.pod
 
-      Significant performance improvements in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17120 in perlhack.pod
+      Changes that might break existing code, either on the perl or C level in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17753 in perlhack.pod
 
-      Adding, removing, or significantly changing documentation in the pod/ directory in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17167 in perlhack.pod
+      Significant performance improvements in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17833 in perlhack.pod
 
-      Important platform-specific changes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17260 in perlhack.pod
+      Adding, removing, or significantly changing documentation in the pod/ directory in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17880 in perlhack.pod
 
-    What makes for a good patch? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17547 in perlhack.pod
+      Important platform-specific changes in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17973 in perlhack.pod
 
-      Does the concept match the general goals of Perl? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17793 in perlhack.pod
+    What makes for a good patch? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18260 in perlhack.pod
 
-        1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17904 in perlhack.pod
+      Does the concept match the general goals of Perl? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18506 in perlhack.pod
 
-        2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17949 in perlhack.pod
+        1. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18617 in perlhack.pod
 
-        3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18010 in perlhack.pod
+        2. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18662 in perlhack.pod
 
-        4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18076 in perlhack.pod
+        3. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18723 in perlhack.pod
 
-        5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18152 in perlhack.pod
+        4. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18789 in perlhack.pod
 
-      Where is the implementation? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18232 in perlhack.pod
+        5. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18865 in perlhack.pod
 
-      Backwards compatibility in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18582 in perlhack.pod
+      Where is the implementation? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18945 in perlhack.pod
 
-      Could it be a module instead? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19112 in perlhack.pod
+      Backwards compatibility in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19295 in perlhack.pod
 
-      Is the feature generic enough? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19663 in perlhack.pod
+      Could it be a module instead? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19825 in perlhack.pod
 
-      Does it potentially introduce new bugs? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19947 in perlhack.pod
+      Is the feature generic enough? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20376 in perlhack.pod
 
-      How big is it? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20095 in perlhack.pod
+      Does it potentially introduce new bugs? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20660 in perlhack.pod
 
-      Does it preclude other desirable features? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20260 in perlhack.pod
+      How big is it? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20808 in perlhack.pod
 
-      Is the implementation robust? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20589 in perlhack.pod
+      Does it preclude other desirable features? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20973 in perlhack.pod
 
-      Is the implementation generic enough to be portable? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20861 in perlhack.pod
+      Is the implementation robust? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21302 in perlhack.pod
 
-      Is the implementation tested? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21068 in perlhack.pod
+      Is the implementation generic enough to be portable? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21574 in perlhack.pod
 
-      Is there enough documentation? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21593 in perlhack.pod
+      Is the implementation tested? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21781 in perlhack.pod
 
-      Is there another way to do it? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 21859 in perlhack.pod
+      Is there enough documentation? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22306 in perlhack.pod
 
-      Does it create too much work? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22135 in perlhack.pod
+      Is there another way to do it? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22572 in perlhack.pod
 
-      Patches speak louder than words in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22282 in perlhack.pod
+      Does it create too much work? in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22848 in perlhack.pod
 
-  TESTING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22694 in perlhack.pod
+      Patches speak louder than words in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 22995 in perlhack.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 23447 in perlhack.pod
+  TESTING in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23407 in perlhack.pod
 
-      Since we don't know if require works, or even subroutines, use ad hoc tests for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23456 in perlhack.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 24160 in perlhack.pod
 
-      Now that basic require() and subroutines are tested, you can use the t/test.pl l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23840 in perlhack.pod
+      Since we don't know if require works, or even subroutines, use ad hoc tests for ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24169 in perlhack.pod
 
-      Now that the core of Perl is tested, Test::More can and should be used.  You can... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24103 in perlhack.pod
+      Now that basic require() and subroutines are tested, you can use the t/test.pl l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24553 in perlhack.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 26430 in perlhack.pod
+      Now that the core of Perl is tested, Test::More can and should be used.  You can... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24816 in perlhack.pod
 
-      These select Unicode rules.  That means that in double-quotish strings, the stri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26439 in perlhack.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 27143 in perlhack.pod
 
-      If you use the form \N{character name}, the charnames module gets automatically ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26823 in perlhack.pod
+      These select Unicode rules.  That means that in double-quotish strings, the stri... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27152 in perlhack.pod
 
-    Special make test targets in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27163 in perlhack.pod
+      If you use the form \N{character name}, the charnames module gets automatically ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27536 in perlhack.pod
 
-      This runs some basic sanity tests on the source tree and helps catch basic error... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27490 in perlhack.pod
+    Special make test targets in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27876 in perlhack.pod
 
-      Run miniperl on t/base, t/comp, t/cmd, t/run, t/io, t/op, t/uni and t/mro tests. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27622 in perlhack.pod
+      This runs some basic sanity tests on the source tree and helps catch basic error... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28203 in perlhack.pod
 
-      (Only in Linux) Run all the tests using the memory leak + naughty memory access ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27749 in perlhack.pod
+      Run miniperl on t/base, t/comp, t/cmd, t/run, t/io, t/op, t/uni and t/mro tests. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28335 in perlhack.pod
 
-      Run the test suite with the t/harness controlling program, instead of t/TEST.  t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27936 in perlhack.pod
+      (Only in Linux) Run all the tests using the memory leak + naughty memory access ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28462 in perlhack.pod
 
-      Sets PERL_SKIP_TTY_TEST to true before running normal test. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28721 in perlhack.pod
+      Run the test suite with the t/harness controlling program, instead of t/TEST.  t... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28649 in perlhack.pod
 
-    Parallel tests in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28820 in perlhack.pod
+      Sets PERL_SKIP_TTY_TEST to true before running normal test. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29434 in perlhack.pod
 
-    Running tests by hand in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29653 in perlhack.pod
+    Parallel tests in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29533 in perlhack.pod
 
-    Using t/harness for testing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29957 in perlhack.pod
+    Running tests by hand in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30366 in perlhack.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 30450 in perlhack.pod
+    Using t/harness for testing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30670 in perlhack.pod
 
-        Run the tests under verbose mode so you can see what tests were run, and debug o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30459 in perlhack.pod
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 31163 in perlhack.pod
 
-        Run the torture tests as well as the normal set. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30559 in perlhack.pod
+        Run the tests under verbose mode so you can see what tests were run, and debug o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31172 in perlhack.pod
 
-        Filter the file list so that all the test files run match PATTERN. Note that thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30627 in perlhack.pod
+        Run the torture tests as well as the normal set. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31272 in perlhack.pod
 
-        Filter the file list so that all the test files run match /(LIST|OF|PATTERNS)/. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30848 in perlhack.pod
+        Filter the file list so that all the test files run match PATTERN. Note that thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31340 in perlhack.pod
 
-      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 31312 in perlhack.pod
+        Filter the file list so that all the test files run match /(LIST|OF|PATTERNS)/. ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31561 in perlhack.pod
 
-        indicates that we're running this test as part of the perl core test suite.  Thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31321 in perlhack.pod
+      =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 32025 in perlhack.pod
 
-        is set to 2 if it isn't set already (see perlhacktips/PERL_DESTRUCT_LEVEL). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31478 in perlhack.pod
+        indicates that we're running this test as part of the perl core test suite.  Thi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32034 in perlhack.pod
 
-        (used only by t/TEST) if set, overrides the path to the perl executable that sho... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31589 in perlhack.pod
+        is set to 2 if it isn't set already (see perlhacktips/PERL_DESTRUCT_LEVEL). in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32191 in perlhack.pod
 
-        if set, tells to skip the tests that need a terminal.  It's actually set automat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31747 in perlhack.pod
+        (used only by t/TEST) if set, overrides the path to the perl executable that sho... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32302 in perlhack.pod
 
-      Other environment variables that may influence tests in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 31953 in perlhack.pod
+        if set, tells to skip the tests that need a terminal.  It's actually set automat... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32460 in perlhack.pod
 
-        Setting this variable runs all the Net::Ping modules tests, otherwise some tests... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32023 in perlhack.pod
+      Other environment variables that may influence tests in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 32666 in perlhack.pod
 
-        Setting this variable skips the vrexx.t tests for OS2::REXX. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32204 in perlhack.pod
+        Setting this variable runs all the Net::Ping modules tests, otherwise some tests... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32736 in perlhack.pod
 
-        This sets a variable in op/numconvert.t. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32293 in perlhack.pod
+        Setting this variable skips the vrexx.t tests for OS2::REXX. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32917 in perlhack.pod
 
-        Setting this variable includes the tests in t/bigmem/.  This should be set to th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32366 in perlhack.pod
+        This sets a variable in op/numconvert.t. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33006 in perlhack.pod
 
-    Performance testing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32762 in perlhack.pod
+        Setting this variable includes the tests in t/bigmem/.  This should be set to th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33079 in perlhack.pod
 
-  MORE READING FOR GUTS HACKERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 33861 in perlhack.pod
+    Performance testing in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33475 in perlhack.pod
 
-    An overview of the Perl source tree.  This will help you find the files you're l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33977 in perlhack.pod
+    Building perl at older commits in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34574 in perlhack.pod
 
-    An overview of the Perl interpreter source code and some details on how Perl doe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34093 in perlhack.pod
+  MORE READING FOR GUTS HACKERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36838 in perlhack.pod
 
-    This document walks through the creation of a small patch to Perl's C code.  If ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34213 in perlhack.pod
+    An overview of the Perl source tree.  This will help you find the files you're l... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36954 in perlhack.pod
 
-    More details on hacking the Perl core.  This document focuses on lower level det... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34414 in perlhack.pod
+    An overview of the Perl interpreter source code and some details on how Perl doe... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37070 in perlhack.pod
 
-    This is of paramount importance, since it's the documentation of what goes where... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34667 in perlhack.pod
+    This document walks through the creation of a small patch to Perl's C code.  If ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37190 in perlhack.pod
 
-    A working knowledge of XSUB programming is incredibly useful for core hacking; X... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35137 in perlhack.pod
+    More details on hacking the Perl core.  This document focuses on lower level det... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37391 in perlhack.pod
 
-    The documentation for the Perl API explains what some of the internal functions ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35471 in perlhack.pod
+    This is of paramount importance, since it's the documentation of what goes where... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37644 in perlhack.pod
 
-    This is a collection of words of wisdom for a Perl porter; some of it is only us... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35623 in perlhack.pod
+    A working knowledge of XSUB programming is incredibly useful for core hacking; X... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38114 in perlhack.pod
 
-  CPAN TESTERS AND PERL SMOKERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35842 in perlhack.pod
+    The documentation for the Perl API explains what some of the internal functions ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38448 in perlhack.pod
 
-  WHAT NEXT? in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36558 in perlhack.pod
+    This is a collection of words of wisdom for a Perl porter; some of it is only us... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38600 in perlhack.pod
 
-    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 36732 in perlhack.pod
+  CPAN TESTERS AND PERL SMOKERS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38819 in perlhack.pod
 
-      Subscribe to perl5-porters, follow the patches and try and understand them; don'... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36741 in perlhack.pod
+  WHAT NEXT? in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39544 in perlhack.pod
 
-      Do read the README associated with your operating system, e.g. README.aix on the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36942 in perlhack.pod
+    =over in null; /perl5language.png, null] -> PsiOverSectionImpl(Perl5 POD: OVER_SECTION) at 39718 in perlhack.pod
 
-      Find an area of Perl that seems interesting to you, and see if you can work out ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37157 in perlhack.pod
+      Subscribe to perl5-porters, follow the patches and try and understand them; don'... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39727 in perlhack.pod
 
-    "The Road goes ever on and on, down from the door where it began." in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37514 in perlhack.pod
+      Do read the README associated with your operating system, e.g. README.aix on the... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39928 in perlhack.pod
 
-    Metaphoric Quotations in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37733 in perlhack.pod
+      Find an area of Perl that seems interesting to you, and see if you can work out ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40143 in perlhack.pod
 
-      The Hobbit, by J.R.R. Tolkien.  The hardcover, 70th-anniversary edition of 2007 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38427 in perlhack.pod
+    "The Road goes ever on and on, down from the door where it began." in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40500 in perlhack.pod
 
-      The Lord of the Rings, by J.R.R. Tolkien.  The hardcover, 50th-anniversary editi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38626 in perlhack.pod
+    Metaphoric Quotations in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40719 in perlhack.pod
 
-      The Lays of Beleriand, by J.R.R. Tolkien and published posthumously by his son a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38836 in perlhack.pod
+      The Hobbit, by J.R.R. Tolkien.  The hardcover, 70th-anniversary edition of 2007 ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41413 in perlhack.pod
 
-  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40080 in perlhack.pod
+      The Lord of the Rings, by J.R.R. Tolkien.  The hardcover, 50th-anniversary editi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41612 in perlhack.pod
+
+      The Lays of Beleriand, by J.R.R. Tolkien and published posthumously by his son a... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41822 in perlhack.pod
+
+  AUTHOR in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43066 in perlhack.pod
 

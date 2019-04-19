@@ -51,8 +51,8 @@ and build a new Perl.</p>
     sub lock {
         my ($fh) = @_;
         flock($fh, LOCK_EX) or die &quot;Cannot lock mailbox - $!\n&quot;;
-
-        # and, in case someone appended while we were waiting...
+        # and, in case we're running on a very old UNIX
+        # variant without the modern O_APPEND semantics...
         seek($fh, 0, SEEK_END) or die &quot;Cannot seek - $!\n&quot;;
     }
 

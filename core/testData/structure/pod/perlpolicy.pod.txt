@@ -16,7 +16,7 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
   MAINTENANCE AND SUPPORT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2415 in perlpolicy.pod
 
-    We "officially" support the two most recent stable release series.  5.20.x and e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3279 in perlpolicy.pod
+    We "officially" support the two most recent stable release series.  5.22.x and e... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3279 in perlpolicy.pod
 
     To the best of our ability, we will attempt to fix critical issues in the two mo... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3538 in perlpolicy.pod
 
@@ -76,23 +76,23 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
     Getting changes into a maint branch in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13882 in perlpolicy.pod
 
-  CONTRIBUTED MODULES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15175 in perlpolicy.pod
+  CONTRIBUTED MODULES in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15653 in perlpolicy.pod
 
-    A Social Contract about Artistic Control in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15204 in perlpolicy.pod
+    A Social Contract about Artistic Control in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15682 in perlpolicy.pod
 
-      The version of the module in the Perl core should still be considered the work o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17235 in perlpolicy.pod
+      The version of the module in the Perl core should still be considered the work o... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17713 in perlpolicy.pod
 
-      Patches may be applied by the pumpkin holder without the explicit cooperation of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17485 in perlpolicy.pod
+      Patches may be applied by the pumpkin holder without the explicit cooperation of... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17963 in perlpolicy.pod
 
-      The version of the module distributed with Perl should, whenever possible, be th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18064 in perlpolicy.pod
+      The version of the module distributed with Perl should, whenever possible, be th... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18542 in perlpolicy.pod
 
-  DOCUMENTATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21179 in perlpolicy.pod
+  DOCUMENTATION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21657 in perlpolicy.pod
 
-  STANDARDS OF CONDUCT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23035 in perlpolicy.pod
+  STANDARDS OF CONDUCT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23513 in perlpolicy.pod
 
-    Always be civil. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23295 in perlpolicy.pod
+    Always be civil. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23822 in perlpolicy.pod
 
-    Heed the moderators. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23322 in perlpolicy.pod
+    Heed the moderators. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23849 in perlpolicy.pod
 
-  CREDITS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24521 in perlpolicy.pod
+  CREDITS in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25968 in perlpolicy.pod
 

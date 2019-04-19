@@ -74,27 +74,27 @@ Documentation in null; /perl5language.png -> POD file at 0 in perlfaq5.pod
 
     How can I tell whether there's a character waiting on a filehandle? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44298 in perlfaq5.pod
 
-    How do I do a tail -f in perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46250 in perlfaq5.pod
+    How do I do a tail -f in perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46252 in perlfaq5.pod
 
-    How do I dup() a filehandle in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47130 in perlfaq5.pod
+    How do I dup() a filehandle in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47132 in perlfaq5.pod
 
-    How do I close a file descriptor by number? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47747 in perlfaq5.pod
+    How do I close a file descriptor by number? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47749 in perlfaq5.pod
 
-    Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48606 in perlfaq5.pod
+    Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48610 in perlfaq5.pod
 
-    Why doesn't glob("*.*") get all the files? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49456 in perlfaq5.pod
+    Why doesn't glob("*.*") get all the files? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49460 in perlfaq5.pod
 
-    Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49817 in perlfaq5.pod
+    Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49821 in perlfaq5.pod
 
-    How do I select a random line from a file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50592 in perlfaq5.pod
+    How do I select a random line from a file? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50596 in perlfaq5.pod
 
-    Why do I get weird spaces when I print an array of lines? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51406 in perlfaq5.pod
+    Why do I get weird spaces when I print an array of lines? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51410 in perlfaq5.pod
 
-    How do I traverse a directory tree? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52806 in perlfaq5.pod
+    How do I traverse a directory tree? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52810 in perlfaq5.pod
 
-    How do I delete a directory tree? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54081 in perlfaq5.pod
+    How do I delete a directory tree? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54085 in perlfaq5.pod
 
-    How do I copy an entire directory? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54654 in perlfaq5.pod
+    How do I copy an entire directory? in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54658 in perlfaq5.pod
 
-  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54937 in perlfaq5.pod
+  AUTHOR AND COPYRIGHT in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54941 in perlfaq5.pod
 

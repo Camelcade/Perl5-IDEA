@@ -1,0 +1,100 @@
+Documentation in null; /perl5language.png -> POD file at 0 in perl5241delta.pod
+
+  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perl5241delta.pod
+
+  NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5241delta.pod
+
+  DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5241delta.pod
+
+  Security in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5241delta.pod
+
+    -Di switch is now required for PerlIO debugging output in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 346 in perl5241delta.pod
+
+    Core modules and tools no longer search "." for optional modules in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1196 in perl5241delta.pod
+
+  Incompatible Changes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2482 in perl5241delta.pod
+
+  Modules and Pragmata in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2718 in perl5241delta.pod
+
+    Updated Modules and Pragmata in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2747 in perl5241delta.pod
+
+      Archive::Tar has been upgraded from version 2.04 to 2.04_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2793 in perl5241delta.pod
+
+      bignum has been upgraded from version 0.42 to 0.42_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2867 in perl5241delta.pod
+
+      CPAN has been upgraded from version 2.11 to 2.11_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2935 in perl5241delta.pod
+
+      Digest has been upgraded from version 1.17 to 1.17_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3001 in perl5241delta.pod
+
+      Digest::SHA has been upgraded from version 5.95 to 5.95_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3069 in perl5241delta.pod
+
+      Encode has been upgraded from version 2.80 to 2.80_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3142 in perl5241delta.pod
+
+      ExtUtils::MakeMaker has been upgraded from version 7.10_01 to 7.10_02. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3210 in perl5241delta.pod
+
+      File::Fetch has been upgraded from version 0.48 to 0.48_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3294 in perl5241delta.pod
+
+      File::Spec has been upgraded from version 3.63 to 3.63_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3367 in perl5241delta.pod
+
+      HTTP::Tiny has been upgraded from version 0.056 to 0.056_001. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3439 in perl5241delta.pod
+
+      IO has been upgraded from version 1.36 to 1.36_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3514 in perl5241delta.pod
+
+      The IO-Compress modules have been upgraded from version 2.069 to 2.069_001. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3578 in perl5241delta.pod
+
+      IPC::Cmd has been upgraded from version 0.92 to 0.92_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3664 in perl5241delta.pod
+
+      JSON::PP has been upgraded from version 2.27300 to 2.27300_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3734 in perl5241delta.pod
+
+      Locale::Maketext has been upgraded from version 1.26 to 1.26_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3810 in perl5241delta.pod
+
+      Locale::Maketext::Simple has been upgraded from version 0.21 to 0.21_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3888 in perl5241delta.pod
+
+      Memoize has been upgraded from version 1.03 to 1.03_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3974 in perl5241delta.pod
+
+      Module::CoreList has been upgraded from version 5.20160506 to 5.20170114_24. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4043 in perl5241delta.pod
+
+      Net::Ping has been upgraded from version 2.43 to 2.43_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4133 in perl5241delta.pod
+
+      Parse::CPAN::Meta has been upgraded from version 1.4417 to 1.4417_001. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4204 in perl5241delta.pod
+
+      Pod::Html has been upgraded from version 1.22 to 1.2201. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4288 in perl5241delta.pod
+
+      Pod::Perldoc has been upgraded from version 3.25_02 to 3.25_03. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4358 in perl5241delta.pod
+
+      Storable has been upgraded from version 2.56 to 2.56_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4435 in perl5241delta.pod
+
+      Sys::Syslog has been upgraded from version 0.33 to 0.33_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4505 in perl5241delta.pod
+
+      Test has been upgraded from version 1.28 to 1.28_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4578 in perl5241delta.pod
+
+      Test::Harness has been upgraded from version 3.36 to 3.36_01. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4644 in perl5241delta.pod
+
+      XSLoader has been upgraded from version 0.21 to 0.22, fixing a security hole in ... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4719 in perl5241delta.pod
+
+  Documentation in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4958 in perl5241delta.pod
+
+    Changes to Existing Documentation in null; /perl5language.png, null] -> PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4980 in perl5241delta.pod
+
+      perlapio in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5022 in perl5241delta.pod
+
+        The documentation of PERLIO_DEBUG has been updated. in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5051 in perl5241delta.pod
+
+      perlrun in null; /perl5language.png, null] -> PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5123 in perl5241delta.pod
+
+        The new -Di switch has been documented, and the documentation of PERLIO_DEBUG ha... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5151 in perl5241delta.pod
+
+  Testing in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5270 in perl5241delta.pod
+
+    A new test script, t/run/switchDx.t, has been added to test that the new -Di swi... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5295 in perl5241delta.pod
+
+  Selected Bug Fixes in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5424 in perl5241delta.pod
+
+    The change to hashbang redirection introduced in Perl 5.24.0, whereby perl would... in null; /perl5language.png, null] -> PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5460 in perl5241delta.pod
+
+  Acknowledgements in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5745 in perl5241delta.pod
+
+  Reporting Bugs in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7137 in perl5241delta.pod
+
+  SEE ALSO in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7953 in perl5241delta.pod
+

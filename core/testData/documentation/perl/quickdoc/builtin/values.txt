@@ -20,9 +20,11 @@ traversal order are subject to change in any release of Perl.  Tied hashes
 may behave differently to Perl's hashes with respect to changes in order on
 insertion and deletion of items.</p>
 <p style="padding-bottom: 10px;">As a side effect, calling <a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a> resets the HASH or
-ARRAY's internal iterator, see <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a>.  (In particular,
+ARRAY's internal iterator (see <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a>) before yielding the
+values.  In particular,
 calling <a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a> in void context resets the iterator
-with no other overhead.  Apart from resetting the iterator,
+with no other overhead.</p>
+<p style="padding-bottom: 10px;">Apart from resetting the iterator,
 <code>values @array</code> in list context is the same as plain <code>@array</code>.
 (We recommend that you use void context <code>keys @array</code> for this, but
 reasoned that taking <code>values @array</code> out would require more

@@ -253,7 +253,7 @@ POD file
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('A')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('rarely')
                     PsiElement(Perl5 POD: POD_SYMBOL)('-')
-                    PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('encounted')
+                    PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('encountered')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('configuration')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('bug')
                     PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER)('in')
