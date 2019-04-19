@@ -20,6 +20,8 @@ import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -83,4 +85,28 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
    * @return true if it's declaration
    */
   boolean isDeclaration();
+
+  /**
+   * @return original or braced name if it's non-single char control variable
+   */
+  @NotNull
+  static String braceName(@NotNull String variableName) {
+    if (variableName.startsWith("^") && variableName.length() > 2 && variableName.charAt(1) != '{') {
+      return "{" + variableName + "}";
+    }
+    return variableName;
+  }
+
+  /**
+   * Semantic of this method is unclear
+   */
+  @Nullable
+  static String adjustName(@Nullable String originalName, boolean forceShortMain) {
+    if (originalName == null || !forceShortMain || !originalName.startsWith(PerlPackageUtil.MAIN_NAMESPACE_FULL)) {
+      return originalName;
+    }
+    else {
+      return originalName.substring(4);
+    }
+  }
 }

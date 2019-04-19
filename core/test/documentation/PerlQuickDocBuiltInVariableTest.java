@@ -134,6 +134,10 @@ public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
 
   public void testScalar0() {doTest("$0");}
 
+  public void testScalar1() {doTest("$1");}
+
+  public void testScalar10() {doTest("$10");}
+
   public void testScalarArg() {doTest("$ARG");}
 
   public void testScalarPid() {doTest("$PID");}

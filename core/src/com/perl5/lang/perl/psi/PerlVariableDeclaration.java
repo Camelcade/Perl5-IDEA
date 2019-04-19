@@ -21,11 +21,11 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_SEPARATOR;
 
 public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMember {
   /**
@@ -81,6 +81,6 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
     if (StringUtil.isEmpty(packageName)) {
       return variableName;
     }
-    return packageName + PACKAGE_SEPARATOR + variableName;
+    return PerlPackageUtil.join(packageName, variableName);
   }
 }

@@ -23,10 +23,11 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
+import com.perl5.lang.perl.idea.ui.PerlIconProvider;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -40,65 +41,59 @@ import java.util.Set;
  * Created by hurricup on 25.07.2015.
  */
 public class PerlVariableCompletionUtil {
+
   @NotNull
-  private static String braceName(@NotNull String name) {
-    return name; // StringUtil.startsWithChar(name, '^') ? "{" + name + "}": name; fixme this should be smarter
+  public static LookupElementBuilder createVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+    return LookupElementBuilder.create(PerlVariable.braceName(name)).withIcon(PerlIconProvider.getIcon(variableType));
   }
 
   @NotNull
-  public static LookupElementBuilder getScalarLookupElement(@NotNull String name) {
-    return LookupElementBuilder
-      .create(braceName(name))
-      .withIcon(PerlIcons.SCALAR_GUTTER_ICON);
+  public static LookupElementBuilder createArrayElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+    return createVariableLookupElement(name, variableType)
+      .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER).withTailText("[]");
   }
 
   @NotNull
-  public static LookupElementBuilder getGlobLookupElement(@NotNull String name) {
-    return LookupElementBuilder
-      .create(braceName(name))
-      .withIcon(PerlIcons.GLOB_GUTTER_ICON);
+  public static LookupElementBuilder createHashElementLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
+    return createVariableLookupElement(name, variableType)
+      .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
   @NotNull
-  public static LookupElementBuilder getArrayLookupElement(@NotNull String name) {
-    return LookupElementBuilder
-      .create(braceName(name))
-      .withIcon(PerlIcons.ARRAY_GUTTER_ICON);
+  private static String computeVariableName(@NotNull PerlVariableDeclarationElement element, boolean forceShortMain) {
+    if (element.isGlobalDeclaration() && !(element instanceof PerlBuiltInVariable)) {
+      return StringUtil.notNullize(PerlVariable.adjustName(element.getCanonicalName(), forceShortMain));
+    }
+    else {
+      return PerlVariable.braceName(element.getVariableName());
+    }
   }
 
   @NotNull
-  public static LookupElementBuilder getHashLookupElement(@NotNull String name) {
-    return LookupElementBuilder
-      .create(braceName(name))
-      .withIcon(PerlIcons.HASH_GUTTER_ICON);
+  public static LookupElementBuilder createVariableLookupElement(@NotNull PerlVariableDeclarationElement element, boolean forceShortMain) {
+    return LookupElementBuilder.create(element, computeVariableName(element, forceShortMain))
+      .withIcon(PerlIconProvider.getIcon(element));
   }
 
   @NotNull
-  public static LookupElementBuilder getArrayElementLookupElement(@NotNull String name) {
-    return getArrayLookupElement(name)
-      .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-      .withTailText("[]");
+  public static LookupElementBuilder createVariableLookupElement(@NotNull PerlGlobVariable typeGlob) {
+    return LookupElementBuilder.create(typeGlob, StringUtil.notNullize(typeGlob.getCanonicalName()))
+      .withIcon(PerlIconProvider.getIcon(typeGlob));
+  }
+
+
+  @NotNull
+  public static LookupElementBuilder createHashElementLookupElement(@NotNull PerlVariableDeclarationElement element,
+                                                                    boolean forceShortMain) {
+    return createVariableLookupElement(element, forceShortMain)
+      .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER).withTailText("{}");
   }
 
   @NotNull
-  public static LookupElementBuilder getArraySliceLookupElement(@NotNull String name) {
-    return getArrayLookupElement(name)
-      .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
-      .withTailText("[]");
-  }
-
-  @NotNull
-  public static LookupElementBuilder getHashElementLookupElement(@NotNull String name) {
-    return getHashLookupElement(name)
-      .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER)
-      .withTailText("{}");
-  }
-
-  @NotNull
-  public static LookupElementBuilder getHashSliceLookupElement(@NotNull String name) {
-    return getHashLookupElement(name)
-      .withInsertHandler(PerlInsertHandlers.HASH_ELEMENT_INSERT_HANDLER) // slice here
-      .withTailText("{}");
+  public static LookupElementBuilder createArrayElementLookupElement(@NotNull PerlVariableDeclarationElement element,
+                                                                     boolean forceShortMain) {
+    return createVariableLookupElement(element, forceShortMain)
+      .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER).withTailText("[]");
   }
 
   public static void fillWithUnresolvedVars(@NotNull PerlVariableNameElement variableNameElement,
@@ -143,114 +138,94 @@ public class PerlVariableCompletionUtil {
     PsiElement perlVariable = variableNameElement.getParent();
     PerlBuiltInVariablesService perlBuiltInVariablesService = PerlBuiltInVariablesService.getInstance(variableNameElement.getProject());
 
+    PsiScopeProcessor variableProcessor = (element, __) -> {
+      resultSet.addElement(createVariableLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
+      return true;
+    };
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      perlBuiltInVariablesService.processScalars((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getScalarLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+      perlBuiltInVariablesService.processScalars(variableProcessor);
+
+      perlBuiltInVariablesService.processArrays((element, __) -> {
+        resultSet
+          .addElement(
+            createArrayElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true).withPsiElement(element));
         return true;
       });
 
-      perlBuiltInVariablesService.processArrays((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getArrayElementLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-        return true;
-      });
-
-      perlBuiltInVariablesService.processHashes((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getHashElementLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+      perlBuiltInVariablesService.processHashes((element, __) -> {
+        resultSet
+          .addElement(
+            createHashElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true).withPsiElement(element));
         return true;
       });
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
       perlBuiltInVariablesService.processArrays((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getArrayLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-        //noinspection ConstantConditions
-        resultSet.addElement(getArraySliceLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        resultSet.addElement(createVariableLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
+        resultSet.addElement(createArrayElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
         return true;
       });
       perlBuiltInVariablesService.processHashes((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getHashSliceLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
+        resultSet.addElement(createHashElementLookupElement((PerlVariableDeclarationElement)element, false).withBoldness(true));
         return true;
       });
     }
     else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-      perlBuiltInVariablesService.processArrays((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getArrayLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-        return true;
-      });
+      perlBuiltInVariablesService.processArrays(variableProcessor);
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
-      perlBuiltInVariablesService.processHashes((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getHashLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-        return true;
-      });
+      perlBuiltInVariablesService.processHashes(variableProcessor);
     }
     else if (perlVariable instanceof PsiPerlGlobVariable) {
-      perlBuiltInVariablesService.processGlobs((element, state) -> {
-        //noinspection ConstantConditions
-        resultSet.addElement(getGlobLookupElement(((PerlVariableDeclarationElement)element).getName()).withBoldness(true));
-        return true;
-      });
+      perlBuiltInVariablesService.processGlobs(variableProcessor);
     }
   }
 
-  public static void fillWithLExicalVariables(@NotNull PsiElement variableNameElement,
+  public static void fillWithLexicalVariables(@NotNull PsiElement variableNameElement,
                                               @NotNull final CompletionResultSet resultSet) {
     final PsiElement perlVariable = variableNameElement.getParent();
 
     PsiScopeProcessor processor = (element, state) -> {
       if (element instanceof PerlVariableDeclarationElement) {
         PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
-
         PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
         if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
           return true;
         }
 
         if (perlVariable instanceof PsiPerlScalarVariable) {
-          String variableName = variable.getName();
-          if (variableName != null) {
+          if (variable.getName() != null) {
             if (variable.getActualType() == PerlVariableType.SCALAR) {
-              resultSet.addElement(setLexical(getScalarLookupElement(variableName)));
+              resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
             }
             else if (variable.getActualType() == PerlVariableType.ARRAY) {
-              resultSet.addElement(setLexical(getArrayElementLookupElement(variableName)));
+              resultSet.addElement(setLexical(createArrayElementLookupElement(variable, false)));
             }
             else if (variable.getActualType() == PerlVariableType.HASH) {
-              resultSet.addElement(setLexical(getHashElementLookupElement(variableName)));
+              resultSet.addElement(setLexical(createHashElementLookupElement(variable, false)));
             }
           }
         }
         else if (perlVariable instanceof PsiPerlArrayVariable) {
-          String variableName = variable.getName();
-          if (variableName != null) {
+          if (variable.getName() != null) {
             if (variable.getActualType() == PerlVariableType.ARRAY) {
-              resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
-              resultSet.addElement(setLexical(getArraySliceLookupElement(variableName)));
+              resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
+              resultSet.addElement(setLexical(createArrayElementLookupElement(variable, false)));
             }
             else if (variable.getActualType() == PerlVariableType.HASH) {
-              resultSet.addElement(setLexical(getHashSliceLookupElement(variableName)));
+              resultSet.addElement(setLexical(createHashElementLookupElement(variable, false)));
             }
           }
         }
         else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-          String variableName = variable.getName();
-          if (variableName != null) {
-            if (variable.getActualType() == PerlVariableType.ARRAY) {
-              resultSet.addElement(setLexical(getArrayLookupElement(variableName)));
-            }
+          if (variable.getName() != null && variable.getActualType() == PerlVariableType.ARRAY) {
+            resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
           }
         }
         else if (perlVariable instanceof PsiPerlHashVariable) {
-          String variableName = variable.getName();
-          if (variableName != null) {
+          if (variable.getName() != null) {
             if (variable.getActualType() == PerlVariableType.HASH) {
-              resultSet.addElement(setLexical(getHashLookupElement(variableName)));
+              resultSet.addElement(setLexical(createVariableLookupElement(variable, false)));
             }
           }
         }

@@ -143,20 +143,19 @@ public class PerlDocUtil implements PerlElementTypes {
     String variableName = variable.getName();
 
     if (actualType != null && StringUtil.isNotEmpty(variableName)) {
-      if (variableName.startsWith("^") && variableName.length() > 2) {
-        variableName = "{" + variableName + "}";
-      }
-      String text = actualType.getSigil() + variableName;
+      String text = actualType.getSigil() + PerlVariable.braceName(variableName);
 
       if (VARIABLES_LINKS.containsKey(text)) {
         return resolveDocLink(VARIABLES_LINKS.get(text), variable);
       }
 
       if (variable.isBuiltIn()) {
-        PodDocumentPattern pattern = PodDocumentPattern.itemPattern(text).withExactMatch();
-
-        if (text.matches("\\$[123456789]")) {
-          pattern.withItemPattern("$<digits>");
+        PodDocumentPattern pattern;
+        if (text.matches("\\$[1-9]\\d*")) {
+          pattern = PodDocumentPattern.indexPattern("$1");
+        }
+        else {
+          pattern = PodDocumentPattern.itemPattern(text).withExactMatch();
         }
 
         return searchPodElementInFile(project, PodSearchHelper.PERL_VAR_FILE_NAME, pattern);

@@ -25,11 +25,11 @@ Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tai
 Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: SIG; Text: SIG; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: ^CAPTURE; Text: ^CAPTURE; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: ^CAPTURE; Text: ^CAPTURE; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: ^CAPTURE; Text: ^CAPTURE; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: ^CAPTURE_ALL; Text: ^CAPTURE_ALL; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: ^H; Text: ^H; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: _; Text: _; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: _; Text: _; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: somevar; Text: somevar; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: {^CAPTURE_ALL}; Text: {^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null

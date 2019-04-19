@@ -22,6 +22,7 @@ import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -79,6 +80,14 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return PerlValue.from((PerlValuableEntity)originalElement.getOriginalElement()).getPresentableText();
     }
     return super.getQuickNavigateInfo(element, originalElement);
+  }
+
+  @Override
+  public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+    if (object instanceof PerlVariable) {
+      return PerlDocUtil.getPerlVarDoc((PerlVariable)object);
+    }
+    return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }
 
   @Nullable

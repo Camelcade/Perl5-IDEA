@@ -31,11 +31,10 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
 import org.jetbrains.annotations.NotNull;
-
-import static com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor.adjustName;
 
 /**
  * Created by hurricup on 29.01.2016.
@@ -60,7 +59,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       PerlVariableCompletionUtil.fillWithUnresolvedVars((PerlVariableNameElement)variableNameElement, resultSet);
     }
     else if (!isFullQualified) {
-      PerlVariableCompletionUtil.fillWithLExicalVariables(variableNameElement, resultSet);
+      PerlVariableCompletionUtil.fillWithLexicalVariables(variableNameElement, resultSet);
     }
 
     // built ins
@@ -89,49 +88,29 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
 
     final CompletionResultSet finalResultSet = resultSet;
 
-    Processor<PerlVariableDeclarationElement> scalarDefaultProcessor = wrapper ->
-    {
-      String fullQualifiedName = wrapper.getCanonicalName();
-      if (fullQualifiedName != null) {
-        finalResultSet.addElement(PerlVariableCompletionUtil.getScalarLookupElement(adjustName(fullQualifiedName, forceShortMain)));
-      }
+    Processor<PerlVariableDeclarationElement> scalarDefaultProcessor = wrapper -> {
+      finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(wrapper, forceShortMain));
       return true;
     };
 
-    Processor<PerlVariableDeclarationElement> arrayDefaultProcessor = wrapper ->
-    {
-      String fullQualifiedName = wrapper.getCanonicalName();
-      if (fullQualifiedName != null) {
-        finalResultSet.addElement(PerlVariableCompletionUtil.getArrayLookupElement(adjustName(fullQualifiedName, forceShortMain)));
-      }
+    Processor<PerlVariableDeclarationElement> arrayDefaultProcessor = wrapper -> {
+      finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(wrapper, forceShortMain));
       return true;
     };
 
-    Processor<PerlVariableDeclarationElement> hashDefaultProcessor = wrapper ->
-    {
-      String fullQualifiedName = wrapper.getCanonicalName();
-      if (fullQualifiedName != null) {
-        finalResultSet.addElement(PerlVariableCompletionUtil.getHashLookupElement(adjustName(fullQualifiedName, forceShortMain)));
-      }
+    Processor<PerlVariableDeclarationElement> hashDefaultProcessor = wrapper -> {
+      finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(wrapper, forceShortMain));
       return true;
     };
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
       PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, scalarDefaultProcessor);
-      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, wrapper ->
-      {
-        String fullQualifiedName = wrapper.getCanonicalName();
-        if (fullQualifiedName != null) {
-          finalResultSet.addElement(PerlVariableCompletionUtil.getArrayElementLookupElement(adjustName(fullQualifiedName, forceShortMain)));
-        }
+      PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, wrapper -> {
+        finalResultSet.addElement(PerlVariableCompletionUtil.createArrayElementLookupElement(wrapper, forceShortMain));
         return true;
       });
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper ->
-      {
-        String fullQualifiedName = wrapper.getCanonicalName();
-        if (fullQualifiedName != null) {
-          finalResultSet.addElement(PerlVariableCompletionUtil.getHashElementLookupElement(adjustName(fullQualifiedName, forceShortMain)));
-        }
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper -> {
+        finalResultSet.addElement(PerlVariableCompletionUtil.createHashElementLookupElement(wrapper, forceShortMain));
         return true;
       });
     }
@@ -141,23 +120,15 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, hashDefaultProcessor);
 
       // globs
-      PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob ->
-      {
-        String adjustedName = adjustName(typeglob.getCanonicalName(), forceShortMain);
-        if (adjustedName != null) {
-          finalResultSet.addElement(PerlVariableCompletionUtil.getGlobLookupElement(adjustedName));
-        }
+      PerlGlobUtil.processDefinedGlobsNames(project, resolveScope, typeglob -> {
+        finalResultSet.addElement(PerlVariableCompletionUtil.createVariableLookupElement(typeglob));
         return true;
       });
     }
     else if (perlVariable instanceof PsiPerlArrayVariable) {
       PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, arrayDefaultProcessor);
-      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper ->
-      {
-        String fullQualifiedName = wrapper.getCanonicalName();
-        if (fullQualifiedName != null) {
-          finalResultSet.addElement(PerlVariableCompletionUtil.getHashSliceLookupElement(adjustName(fullQualifiedName, forceShortMain)));
-        }
+      PerlHashUtil.processDefinedGlobalHashes(project, resolveScope, wrapper -> {
+        finalResultSet.addElement(PerlVariableCompletionUtil.createHashElementLookupElement(wrapper, forceShortMain));
         return true;
       });
     }
@@ -192,13 +163,13 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       processor = (namespaceName, entity) -> {
         LookupElementBuilder lookupElement = null;
         if (entity.isScalar()) {
-          lookupElement = PerlVariableCompletionUtil.getScalarLookupElement(entity.getImportedName());
+          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entity.getImportedName(), PerlVariableType.SCALAR);
         }
         else if (entity.isArray()) {
-          lookupElement = PerlVariableCompletionUtil.getArrayElementLookupElement(entity.getImportedName());
+          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entity.getImportedName(), PerlVariableType.ARRAY);
         }
         else if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.getHashElementLookupElement(entity.getImportedName());
+          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entity.getImportedName(), PerlVariableType.HASH);
         }
 
         if (lookupElement != null) {
@@ -211,10 +182,10 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       processor = (namespaceName, entity) -> {
         LookupElementBuilder lookupElement = null;
         if (entity.isArray()) {
-          lookupElement = PerlVariableCompletionUtil.getArrayLookupElement(entity.getImportedName());
+          lookupElement = PerlVariableCompletionUtil.createArrayElementLookupElement(entity.getImportedName(), PerlVariableType.ARRAY);
         }
         else if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.getHashSliceLookupElement(entity.getImportedName());
+          lookupElement = PerlVariableCompletionUtil.createHashElementLookupElement(entity.getImportedName(), PerlVariableType.HASH);
         }
 
         if (lookupElement != null) {
@@ -227,7 +198,7 @@ public class PerlVariableNameCompletionProvider extends CompletionProvider<Compl
       processor = (namespaceName, entity) -> {
         LookupElementBuilder lookupElement = null;
         if (entity.isHash()) {
-          lookupElement = PerlVariableCompletionUtil.getHashLookupElement(entity.getImportedName());
+          lookupElement = PerlVariableCompletionUtil.createVariableLookupElement(entity.getImportedName(), PerlVariableType.HASH);
         }
 
         if (lookupElement != null) {
