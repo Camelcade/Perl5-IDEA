@@ -91,7 +91,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     IElementType elementType = contextElement.getNode().getElementType();
 
     if (contextElement instanceof PerlVariable) {
-      return PerlDocUtil.getPerlVarDoc((PerlVariable)contextElement); // fixme try to search doc in package or declaration
+      return PerlDocUtil.getPerlVarDoc((PerlVariable)contextElement);
     }
     else if (elementType == REGEX_MODIFIER) {
       return PerlDocUtil.getRegexModifierDoc(contextElement);
