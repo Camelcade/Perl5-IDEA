@@ -26,15 +26,12 @@ import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
  */
 public interface PerlBuiltInScalars {
   HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
-    "^]",
-    "^[",
     "OLD_PERL_VERSION",
     "^WIN32_SLOPPY_STAT",
     "^MATCH",
     "^PREMATCH",
     "^POSTMATCH",
     "LAST_SUBMATCH_RESULT",
-    "OUTPUT_AUTOFLUSH",
     "^LAST_FH",
     "^UTF8CACHE",
     "^GLOBAL_PHASE",
@@ -45,12 +42,10 @@ public interface PerlBuiltInScalars {
     DOUBLE_QUOTE,
     "^S",
     "LIST_SEPARATOR",
-    "#",
     "^T",
     "MATCH",
     "$",
     "^TAINT",
-    "MULTILINE_MATCHING",
     "%",
     "^UNICODE",
     "NR",
@@ -67,7 +62,6 @@ public interface PerlBuiltInScalars {
     "^WARNING_BITS",
     "OS_ERROR",
     "*",
-    "^WIDE_SYSTEM_CALLS",
     "OSNAME",
     "+",
     "^X",
@@ -153,7 +147,6 @@ public interface PerlBuiltInScalars {
     "^P",
     "INPUT_RECORD_SEPARATOR",
     "^R",
-    "LAST_MATCH_END",
     "^RE_DEBUG_FLAGS",
     "LAST_PAREN_MATCH"
   ));

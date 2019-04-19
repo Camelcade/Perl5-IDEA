@@ -23,12 +23,10 @@ Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: []; Type: null; Icon: /arra
 Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: OVERLOAD; Text: OVERLOAD; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: SIG; Text: SIG; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: ^CAPTURE; Text: ^CAPTURE; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: ^CAPTURE; Text: ^CAPTURE; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null

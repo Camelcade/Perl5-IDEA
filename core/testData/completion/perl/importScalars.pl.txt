@@ -1,7 +1,6 @@
 Lookups: !; Text: !; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: !; Text: !; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: "; Text: "; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: #; Text: #; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: $; Text: $; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: %; Text: %; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: &; Text: &; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
@@ -85,9 +84,7 @@ Lookups: INPLACE_EDIT; Text: INPLACE_EDIT; Tail: null; Type: null; Icon: /scalar
 Lookups: INPUT_LINE_NUMBER; Text: INPUT_LINE_NUMBER; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: INPUT_RECORD_SEPARATOR; Text: INPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
-Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: LAST_REGEXP_CODE_RESULT; Text: LAST_REGEXP_CODE_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
@@ -102,7 +99,6 @@ Lookups: Log::Log4perl::Levels::OFF; Text: Log::Log4perl::Levels::OFF; Tail: nul
 Lookups: Log::Log4perl::Levels::TRACE; Text: Log::Log4perl::Levels::TRACE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: Log::Log4perl::Levels::WARN; Text: Log::Log4perl::Levels::WARN; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MATCH; Text: MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: MULTILINE_MATCHING; Text: MULTILINE_MATCHING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: Mojolicious::Controller::AUTOLOAD; Text: Mojolicious::Controller::AUTOLOAD; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
@@ -114,11 +110,9 @@ Lookups: ORS; Text: ORS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; 
 Lookups: OSNAME; Text: OSNAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
-Lookups: OUTPUT_AUTOFLUSH; Text: OUTPUT_AUTOFLUSH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: OUTPUT_AUTO_FLUSH; Text: OUTPUT_AUTO_FLUSH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: OUTPUT_FIELD_SEPARATOR; Text: OUTPUT_FIELD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: OUTPUT_RECORD_SEPARATOR; Text: OUTPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: OVERLOAD; Text: OVERLOAD; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
 Lookups: PERLDB; Text: PERLDB; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: PERL_VERSION; Text: PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: PID; Text: PID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
@@ -175,11 +169,8 @@ Lookups: ^UTF8LOCALE; Text: ^UTF8LOCALE; Tail: null; Type: null; Icon: /scalar_g
 Lookups: ^V; Text: ^V; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: ^W; Text: ^W; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: ^WARNING_BITS; Text: ^WARNING_BITS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: ^WIDE_SYSTEM_CALLS; Text: ^WIDE_SYSTEM_CALLS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: ^WIN32_SLOPPY_STAT; Text: ^WIN32_SLOPPY_STAT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: ^X; Text: ^X; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: ^[; Text: ^[; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-Lookups: ^]; Text: ^]; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: _; Text: _; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
 Lookups: _; Text: _; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 Lookups: `; Text: `; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
