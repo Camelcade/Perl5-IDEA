@@ -251,17 +251,18 @@ private pod_format ::=
  	| pod_format_index
  	| pod_format_null
 
-pod_format_italic ::= 'I' parse_formatting_section_content {pin=1}
-pod_format_bold ::= 'B' parse_formatting_section_content {pin=1}
-pod_format_code ::= 'C' parse_formatting_section_content {pin=1}
-pod_format_escape ::= 'E' parse_formatting_section_content {pin=1}
-pod_format_file ::= 'F' parse_formatting_section_content {pin=1}
-pod_format_nbsp ::= 'S' parse_formatting_section_content {pin=1}
-pod_format_index ::= 'X' parse_formatting_section_content {pin=1}
-pod_format_null ::= 'Z' parse_formatting_section_content {pin=1}
-pod_format_link ::= 'L' parse_formatting_section_content {pin=1}
+pod_format_italic ::= 'I' parse_default_section_content {pin=1}
+pod_format_bold ::= 'B' parse_default_section_content {pin=1}
+pod_format_code ::= 'C' parse_default_section_content {pin=1}
+pod_format_escape ::= 'E' parse_default_section_content {pin=1}
+pod_format_file ::= 'F' parse_default_section_content {pin=1}
+pod_format_nbsp ::= 'S' parse_default_section_content {pin=1}
+pod_format_index ::= 'X' parse_default_section_content {pin=1}
+pod_format_null ::= 'Z' parse_default_section_content {pin=1}
+pod_format_link ::= 'L' parse_default_section_content {pin=1}
 
-private parse_formatting_section_content ::= '<' formatting_section_content ? <<consumeOrReport 'POD_ANGLE_RIGHT, "Unclosed angles"'>> {pin=1}
-formatting_section_content ::=  formatting_section_content_items
-private formatting_section_content_items ::= {&formatting_section_allowed_tokens pod_term}+
+private parse_default_section_content ::= <<parse_section_content default_formatting_section_item>>
+private meta parse_section_content ::= '<' <<formatting_section_content <<x1>>>> ? <<consumeOrReport 'POD_ANGLE_RIGHT, "Unclosed angles"'>> {pin=1}
+meta formatting_section_content ::=  <<x1>> +
+private default_formatting_section_item ::= &formatting_section_allowed_tokens pod_term
 private formatting_section_allowed_tokens ::= !('NL'|'>')
