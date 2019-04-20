@@ -73,68 +73,68 @@ limitations under the License.
 //  psiImplUtilClass="com.perl5.lang.pod.psi.impl.PodPsiImplUtil"
 
     tokens=[
-        POD_NEWLINE
+        POD_NEWLINE='NL'
 
-        POD_POD
+        POD_POD='=pod'
 
-        POD_HEAD1
-        POD_HEAD2
-        POD_HEAD3
-        POD_HEAD4
+        POD_HEAD1='=head1'
+        POD_HEAD2='=head2'
+        POD_HEAD3='=head3'
+        POD_HEAD4='=head4'
 
-        POD_OVER
-        POD_ITEM
-        POD_BACK
+        POD_OVER='=over'
+        POD_ITEM='=item'
+        POD_BACK='=back'
 
-		POD_UNKNOWN
+	POD_UNKNOWN='=unknown'
 
-        POD_BEGIN
-        POD_FORMATTED_BLOCK
-        POD_END
-        POD_FORMAT_NAME="POD_FORMAT_NAME"
-        POD_FOR
+        POD_BEGIN='=begin'
+        POD_FORMATTED_BLOCK='formatted_block'
+        POD_END='=end'
+        POD_FORMAT_NAME="format_name"
+        POD_FOR='=for'
 
-        POD_ENCODING
-        POD_ENCODING_NAME="POD_ENCODING_NAME"
+        POD_ENCODING='=encoding'
+        POD_ENCODING_NAME="encoding_name"
 
-        POD_CUT
+        POD_CUT='=cut'
 
-        POD_CODE
+        POD_CODE='code'
 
-        POD_ANGLE_LEFT
-        POD_ANGLE_RIGHT
-        POD_PAREN_LEFT
-        POD_PAREN_RIGHT
-        POD_BRACKET_LEFT
-        POD_BRACKET_RIGHT
-        POD_BRACE_LEFT
-        POD_BRACE_RIGHT
+        POD_ANGLE_LEFT='<'
+        POD_ANGLE_RIGHT='>'
+        POD_PAREN_LEFT='('
+        POD_PAREN_RIGHT=')'
+        POD_BRACKET_LEFT='['
+        POD_BRACKET_RIGHT=']'
+        POD_BRACE_LEFT='{'
+        POD_BRACE_RIGHT='}'
 
-        POD_QUOTE_DOUBLE
-        POD_QUOTE_SINGLE
-        POD_QUOTE_TICK
+        POD_QUOTE_DOUBLE='"'
+        POD_QUOTE_SINGLE="'"
+        POD_QUOTE_TICK='`'
 
-        POD_I	// italic
-        POD_B	// bold
-        POD_C	// code
-        POD_L	// hyperlink
-        POD_E	// escape
-        POD_F	// filename
-        POD_S	// nbsp
-        POD_X	// index
-        POD_Z	// null
+        POD_I='I'	// italic
+        POD_B='B'	// bold
+        POD_C='C'	// code
+        POD_L='L'	// hyperlink
+        POD_E='E'	// escape
+        POD_F='F'	// filename
+        POD_S='S'	// nbsp
+        POD_X='X'	// index
+        POD_Z='Z'	// null
 
-        POD_IDENTIFIER
-        POD_PACKAGE
-        POD_NUMBER
-        POD_INDENT_LEVEL="POD_INDENT_LEVEL"
-        POD_SYMBOL
+        POD_IDENTIFIER='identifier'
+        POD_PACKAGE='package'
+        POD_NUMBER='number'
+        POD_INDENT_LEVEL="indent_level"
+        POD_SYMBOL='symbol'
 
-        POD_DIV
-        POD_BACKREF
-        POD_ASTERISK
-        POD_PIPE
-        POD_COLON
+        POD_DIV='/'
+        POD_BACKREF='\'
+        POD_ASTERISK='*'
+        POD_PIPE='|'
+        POD_COLON=':'
     ]
 
 }
