@@ -186,7 +186,7 @@ public class PodRenderUtil implements PodElementTypes {
     }
 
     builder.append(">");
-    builder.append(text == null ? link : text);
+    builder.append(StringUtil.notNullize(text, link));
     builder.append("</a>");
 
     return builder.toString();

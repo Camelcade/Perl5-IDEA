@@ -111,14 +111,13 @@ public class PodFormatterLMixin extends PodSectionMixin implements PodFormatterL
 
     references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(this)));
 
-    return references.toArray(new PsiReference[references.size()]);
+    return references.toArray(PsiReference.EMPTY_ARRAY);
   }
 
   @Nullable
   @Override
   public PodLinkDescriptor getLinkDescriptor() {
-    return CachedValuesManager.getCachedValue(this, () ->
-    {
+    return CachedValuesManager.getCachedValue(this, () -> {
       PsiElement contentBlock = getContentBlock();
       PodLinkDescriptor result = null;
       if (contentBlock != null) {

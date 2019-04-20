@@ -19,6 +19,7 @@ package com.perl5.lang.pod.parser.psi;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Matcher;
@@ -85,7 +86,7 @@ public class PodLinkDescriptor {
   }
 
   public String getTitle() {
-    return myTitle == null ? getInferredTitle() : myTitle;
+    return myTitle != null ? myTitle : getInferredTitle();
   }
 
   private void setTitle(Matcher m) {
@@ -97,9 +98,9 @@ public class PodLinkDescriptor {
     }
   }
 
-  public void setTitle(String myTitle, int startOffset) {
-    this.myTitle = StringUtil.isEmpty(myTitle) ? null : myTitle;
-    if (this.myTitle != null) {
+  public void setTitle(@Nullable String title, int startOffset) {
+    myTitle = StringUtil.nullize(title);
+    if (myTitle != null) {
       myTitleOffset = startOffset;
     }
   }
@@ -172,7 +173,7 @@ public class PodLinkDescriptor {
   }
 
   @Nullable
-  public static PodLinkDescriptor getDescriptor(String link) {
+  public static PodLinkDescriptor getDescriptor(@NotNull String link) {
     link = link.replace('\n', ' ');
     PodLinkDescriptor descriptor = new PodLinkDescriptor(link);
     Matcher m;
