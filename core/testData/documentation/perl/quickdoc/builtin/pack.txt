@@ -179,7 +179,7 @@ at the end.  Similarly during unpacking, &quot;extra&quot; bits are ignored.</p>
 On unpacking, bits are converted to a string of <code>0</code>s and <code>1</code>s.</p></li>
 <li><p style="padding-bottom: 10px;">The <code>h</code> and <code>H</code> formats pack a string that many nybbles (4-bit groups,
 representable as hexadecimal digits, <code>&quot;0&quot;..&quot;9&quot;</code> <code>&quot;a&quot;..&quot;f&quot;</code>) long.</p>
-<p style="padding-bottom: 10px;">For each such format, <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a> generates 4 bits of result.
+<p style="padding-bottom: 10px;">For each such format, <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> generates 4 bits of result.
 With non-alphabetical characters, the result is based on the 4 least-significant
 bits of the input character, i.e., on <code>ord($char)%16</code>.  In particular,
 characters <code>&quot;0&quot;</code> and <code>&quot;1&quot;</code> generate nybbles 0 and 1, as do bytes
@@ -188,7 +188,7 @@ is compatible with the usual hexadecimal digits, so that <code>&quot;a&quot;</co
 <code>&quot;A&quot;</code> both generate the nybble <code>0xA==10</code>.  Use only these specific hex
 characters with this format.</p>
 <p style="padding-bottom: 10px;">Starting from the beginning of the template to
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>, each pair
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>, each pair
 of characters is converted to 1 character of output.  With format <code>h</code>, the
 first character of the pair determines the least-significant nybble of the
 output character; with format <code>H</code>, it determines the most-significant
@@ -198,16 +198,16 @@ a null character at the end.  Similarly, &quot;extra&quot; nybbles are ignored d
 unpacking.</p>
 <p style="padding-bottom: 10px;">If the input string is longer than needed, extra characters are ignored.</p>
 <p style="padding-bottom: 10px;">A <code>*</code> for the repeat count uses all characters of the input field.  For
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>, nybbles are converted to a string of
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>, nybbles are converted to a string of
 hexadecimal digits.</p></li>
 <li><p style="padding-bottom: 10px;">The <code>p</code> format packs a pointer to a null-terminated string.  You are
 responsible for ensuring that the string is not a temporary value, as that
 could potentially get deallocated before you got around to using the packed
 result.  The <code>P</code> format packs a pointer to a structure of the size indicated
 by the length.  A null pointer is created if the corresponding value for
-<code>p</code> or <code>P</code> is <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>; similarly with
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>, where a null pointer unpacks into
-<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.</p>
+<code>p</code> or <code>P</code> is <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>; similarly with
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>, where a null pointer unpacks into
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>.</p>
 <p style="padding-bottom: 10px;">If your system has a strange pointer size--meaning a pointer is neither as
 big as an int nor as big as a long--it may not be possible to pack or
 unpack pointers in big- or little-endian byte order.  Attempting to do
@@ -217,17 +217,17 @@ items where the packed structure contains a packed item count followed by
 the packed items themselves.  This is useful when the structure you're
 unpacking has encoded the sizes or repeat counts for some of its fields
 within the structure itself as separate fields.</p>
-<p style="padding-bottom: 10px;">For <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>, you write
+<p style="padding-bottom: 10px;">For <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>, you write
 <i>length-item</i><code>/</code><i>sequence-item</i>, and the
 <i>length-item</i> describes how the length value is packed.  Formats likely
 to be of most use are integer-packing ones like <code>n</code> for Java strings,
 <code>w</code> for ASN.1 or SNMP, and <code>N</code> for Sun XDR.</p>
-<p style="padding-bottom: 10px;">For <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>, <i>sequence-item</i> may have a repeat
+<p style="padding-bottom: 10px;">For <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>, <i>sequence-item</i> may have a repeat
 count, in which case
 the minimum of that and the number of available items is used as the argument
 for <i>length-item</i>.  If it has no repeat count or uses a '*', the number
 of available items is used.</p>
-<p style="padding-bottom: 10px;">For <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>, an internal stack of integer
+<p style="padding-bottom: 10px;">For <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>, an internal stack of integer
 arguments unpacked so far is
 used.  You write <code>/</code><i>sequence-item</i> and the repeat count is obtained by
 popping off the last element from the stack.  The <i>sequence-item</i> must not
@@ -245,7 +245,7 @@ length.  For example:</p>
  pack(&quot;n/a* w/a&quot;,&quot;hello,&quot;,&quot;world&quot;)     &quot;\000\006hello,\005world&quot;
  pack(&quot;a/W2&quot;, ord(&quot;a&quot;) .. ord(&quot;z&quot;))    &quot;2ab&quot;</code></pre></div>
 <p style="padding-bottom: 10px;">The <i>length-item</i> is not returned explicitly from
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>.</p>
 <p style="padding-bottom: 10px;">Supplying a count to the <i>length-item</i> format letter is only useful with
 <code>A</code>, <code>a</code>, or <code>Z</code>.  Packing with a <i>length-item</i> of <code>a</code> or <code>Z</code> may
 introduce <code>&quot;\000&quot;</code> characters, which Perl does not regard as legal in
@@ -272,7 +272,7 @@ the command line:</p>
     intsize='4';
     longsize='4';
     longlongsize='8';</code></pre></div>
-<p style="padding-bottom: 10px;">or programmatically via the <a href="psi_element://Config" style="color:red">C<Config></a> module:</p>
+<p style="padding-bottom: 10px;">or programmatically via the <a href="psi_element://Config" style="color:red"><code>Config</code></a> module:</p>
 <div style="padding-bottom: 10px;"><pre><code>       use Config;
        print $Config{shortsize},    &quot;\n&quot;;
        print $Config{intsize},      &quot;\n&quot;;
@@ -323,7 +323,7 @@ especially if the long doubles are involved.  You can see the
 <code>longdblsize</code>): the &quot;kind&quot; values are enums, unlike <code>byteorder</code>.</p>
 <p style="padding-bottom: 10px;">Portability-wise the best option is probably to keep to the IEEE 754
 64-bit doubles, and of agreed-upon endianness.  Another possibility
-is the <code>&quot;%a&quot;</code>) format of <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a>.</p></li>
+is the <code>&quot;%a&quot;</code>) format of <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a>.</p></li>
 <li><p style="padding-bottom: 10px;">Starting with Perl 5.10.0, integer and floating-point formats, along with
 the <code>p</code> and <code>P</code> formats and <code>()</code> groups, may all be followed by the
 <code>&gt;</code> or <code>&lt;</code> endianness modifiers to respectively enforce big-
@@ -386,24 +386,24 @@ is what you want:</p>
       perl -C0 -ne 'printf &quot;%v02X\n&quot;, $_ for unpack(&quot;U0A*&quot;, $_)'
     C3.8E.C2.B1.C3.8F.C2.89</code></pre></div>
 <p style="padding-bottom: 10px;">Those examples also illustrate that you should not try to use
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a> as a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a> as a
 substitute for the <a href="psi_element://Encode" style="color:red">Encode</a> module.</p></li>
 <li><p style="padding-bottom: 10px;">You must yourself do any alignment or padding by inserting, for example,
 enough <code>&quot;x&quot;</code>es while packing.  There is no way for
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>
 to know where characters are going to or coming from, so they
 handle their output and input as flat sequences of characters.</p></li>
 <li><p style="padding-bottom: 10px;">A <code>()</code> group is a sub-TEMPLATE enclosed in parentheses.  A group may
 take a repeat count either as postfix, or for
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>, also via the <code>/</code>
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>, also via the <code>/</code>
 template character.  Within each repetition of a group, positioning with
 <code>@</code> starts over at 0.  Therefore, the result of</p>
 <div style="padding-bottom: 10px;"><pre><code>    pack(&quot;@1A((@2A)@3A)&quot;, qw[X Y Z])</code></pre></div>
 <p style="padding-bottom: 10px;">is the string <code>&quot;\0X\0\0YZ&quot;</code>.</p></li>
 <li><p style="padding-bottom: 10px;"><code>x</code> and <code>X</code> accept the <code>!</code> modifier to act as alignment commands: they
 jump forward or back to the closest position aligned at a multiple of <code>count</code>
-characters.  For example, to <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a> a C structure like</p>
+characters.  For example, to <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a> a C structure like</p>
 <div style="padding-bottom: 10px;"><pre><code>    struct {
 	char   c;    /* one signed, 8-bit character */
 	double d;
@@ -424,8 +424,8 @@ repeat counts must follow immediately.  Breaking complex templates into
 individual line-by-line components, suitably annotated, can do as much to
 improve legibility and maintainability of pack/unpack formats as <code>/x</code> can
 for complicated pattern matches.</p></li>
-<li><p style="padding-bottom: 10px;">If TEMPLATE requires more arguments than <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>
-is given, <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>
+<li><p style="padding-bottom: 10px;">If TEMPLATE requires more arguments than <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>
+is given, <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>
 assumes additional <code>&quot;&quot;</code> arguments.  If TEMPLATE requires fewer arguments
 than given, extra arguments are ignored.</p></li>
 <li><p style="padding-bottom: 10px;">Attempting to pack the special floating point values <code>Inf</code> and <code>NaN</code>
@@ -501,4 +501,4 @@ isn't any sensible mapping for these special values into integers.</p></li></ul>
     $foo = pack('(sl)&lt;', -42, 4711);
     # exactly the same</code></pre></div>
 <p style="padding-bottom: 10px;">The same template may generally also be used in
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>.</p></dd></dl>
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>.</p></dd></dl>

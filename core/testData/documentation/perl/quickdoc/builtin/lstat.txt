@@ -2,11 +2,11 @@
 <dt style="padding-bottom:4px;font-weight:bold;">lstat EXPR</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">lstat DIRHANDLE</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">lstat</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">Does the same thing as the <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> function
+<p style="padding-bottom: 10px;">Does the same thing as the <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a> function
 (including setting the special <code>_</code> filehandle) but stats a symbolic
 link instead of the file the symbolic link points to.  If symbolic links
-are unimplemented on your system, a normal <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a>
+are unimplemented on your system, a normal <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a>
 is done.  For much more detailed information, please see the
-documentation for <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a>.</p>
-<p style="padding-bottom: 10px;">If EXPR is omitted, stats <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+documentation for <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a>.</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, stats <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Flstat">lstat in perlport</a>.</p></dd></dl>

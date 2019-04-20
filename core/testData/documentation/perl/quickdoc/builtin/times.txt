@@ -2,6 +2,6 @@
 <p style="padding-bottom: 10px;">Returns a four-element list giving the user and system times in
 seconds for this process and any exited children of this process.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my ($user,$system,$cuser,$csystem) = times;</code></pre></div>
-<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Ftimes">C<times></a> returns <code>$user</code>.</p>
+<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Ftimes"><code>times</code></a> returns <code>$user</code>.</p>
 <p style="padding-bottom: 10px;">Children's times are only included for terminated children.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Ftimes">times in perlport</a>.</p></dd></dl>

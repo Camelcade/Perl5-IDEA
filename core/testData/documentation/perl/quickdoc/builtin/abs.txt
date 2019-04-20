@@ -2,4 +2,4 @@
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">abs</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the absolute value of its argument.
-If VALUE is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p></dd></dl>
+If VALUE is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p></dd></dl>

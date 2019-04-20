@@ -92,7 +92,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     else if (object instanceof PerlBuiltInSubDefinition) {
       String subName = StringUtil.notNullize(((PerlBuiltInSubDefinition)object).getName());
       if ("default".equals(subName)) {
-        return PerlDocUtil.resolveDocLink(SWITCH_DOC_LINK, (PsiElement)object);
+        return PerlDocUtil.resolveDescriptor(SWITCH_DOC_LINK, (PsiElement)object);
       }
       else {
         return PerlDocUtil.getPerlFuncDocFromText((PsiElement)object, subName);
@@ -117,10 +117,10 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return PerlDocUtil.getRegexModifierDoc(contextElement);
     }
     else if (elementType == REGEX_TOKEN) {
-      return PerlDocUtil.resolveDocLink("perlretut", contextElement);
+      return PerlDocUtil.resolveDoc("perlretut", null, contextElement);
     }
     else if (elementType == VERSION_ELEMENT) {
-      return PerlDocUtil.resolveDocLink("perldata/\"Version Strings\"", contextElement);
+      return PerlDocUtil.resolveDoc("perldata", "Version Strings", contextElement);
     }
     else if (isFunc(contextElement)) {
       return PerlDocUtil.getPerlFuncDoc(contextElement);
@@ -141,7 +141,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
         // search by link
         if (StringUtil.isNotEmpty(packageName) && !StringUtil.equals(PerlPackageUtil.MAIN_NAMESPACE_NAME, packageName)) {
-          result = PerlDocUtil.resolveDocLink(packageName + "/" + ((PerlSubNameElement)contextElement).getName(), contextElement);
+          result = PerlDocUtil.resolveDoc(packageName, ((PerlSubNameElement)contextElement).getName(), contextElement);
         }
 
         // not found or main::
@@ -184,10 +184,10 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       String packageName = ((PerlNamespaceElement)contextElement).getCanonicalName();
 
       if (StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE, packageName)) {
-        return PerlDocUtil.resolveDocLink("perlobj/Inheritance", contextElement);
+        return PerlDocUtil.resolveDoc("perlobj", "Inheritance", contextElement);
       }
       else if (StringUtil.isNotEmpty(packageName)) {
-        return PerlDocUtil.resolveDocLink(packageName, contextElement);
+        return PerlDocUtil.resolveDoc(packageName, null, contextElement);
       }
     }
 

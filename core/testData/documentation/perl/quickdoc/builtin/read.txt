@@ -4,7 +4,7 @@
 <p style="padding-bottom: 10px;">Attempts to read LENGTH <i>characters</i> of data into variable SCALAR
 from the specified FILEHANDLE.  Returns the number of characters
 actually read, <code>0</code> at end of file, or undef if there was an error (in
-the latter case <a href="psi_element://perlvar%2F%24%21">C<$!></a> is also set).  SCALAR will be grown
+the latter case <a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> is also set).  SCALAR will be grown
 or shrunk
 so that the last character actually read is the last character of the
 scalar after the read.</p>
@@ -21,7 +21,7 @@ bytes before the result of the read is appended.</p>
 either (8-bit) bytes or characters are read.  By default, all
 filehandles operate on bytes, but for example if the filehandle has
 been opened with the <code>:utf8</code> I/O layer (see
-<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>, and the <a href="psi_element://open" style="color:red">open</a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a>, and the <a href="psi_element://open" style="color:red">open</a>
 pragma), the I/O will operate on UTF8-encoded Unicode
 characters, not bytes.  Similarly for the <code>:encoding</code> layer:
 in that case pretty much any characters can be read.</p></dd></dl>

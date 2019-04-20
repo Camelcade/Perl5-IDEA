@@ -38,6 +38,7 @@ limitations under the License.
   mixin("item_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItemMixin"
   mixin("begin_section|for_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionFormattedMixin"
 
+  mixin("link_section")="com.perl5.lang.pod.parser.psi.mixin.PodCompositeElementMixin"
   mixin(".+_section")="com.perl5.lang.pod.parser.psi.mixin.PodTitledSectionMixin"
 
   mixin("item_section_title")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItemTitleMixin"
@@ -233,12 +234,11 @@ cut_section ::= '=cut' [parse_section_title] 'NL'* {pin=1}
 unknown_section ::= '=unknown' [parse_section_title] 'NL'*  {pin=1}
 
 
-private pod_term ::=
-	pod_format
-	| '/' | '\' | '*' | '|' | ':'
-	| '"' | "'" | '`'
-	| '(' | ')' | '[' | ']' | '{' | '}' | '<' | '>'
-	| 'identifier' | 'number' | 'symbol'
+private pod_term ::= pod_format | pod_token
+private pod_token ::= '/' | '\' | '*' | '|' | ':'
+                      | '"' | "'" | '`'
+                      | '(' | ')' | '[' | ']' | '{' | '}' | '<' | '>'
+                      | 'identifier' | 'number' | 'symbol'
 
 private pod_format ::=
  	pod_format_italic
@@ -259,10 +259,34 @@ pod_format_file ::= 'F' parse_default_section_content {pin=1}
 pod_format_nbsp ::= 'S' parse_default_section_content {pin=1}
 pod_format_index ::= 'X' parse_default_section_content {pin=1}
 pod_format_null ::= 'Z' parse_default_section_content {pin=1}
-pod_format_link ::= 'L' parse_default_section_content {pin=1}
+pod_format_link ::= 'L' <<parse_section_content link_formatting_section>> {pin=1}
 
 private parse_default_section_content ::= <<parse_section_content default_formatting_section_item>>
 private meta parse_section_content ::= '<' <<formatting_section_content <<x1>>>> ? <<consumeOrReport 'POD_ANGLE_RIGHT, "Unclosed angles"'>> {pin=1}
 meta formatting_section_content ::=  <<x1>> +
 private default_formatting_section_item ::= &formatting_section_allowed_tokens pod_term
 private formatting_section_allowed_tokens ::= !('NL'|'>')
+
+private link_formatting_section ::=
+  [link_text '|'] {
+    link_url |
+    link_name [parse_link_section] |
+    parse_link_section |
+    parse_quoted_section |
+    parse_unquoted_section
+  } & '>'
+//          | default_formatting_section_item // falling back to default
+
+link_text ::= {&link_text_negation pod_term}+ &'|'
+private link_text_negation ::= !('>'|'NL'|'/'|'|'|'L')
+
+link_name ::= {&link_name_negation pod_token}+ &('/'|'>')
+private link_name_negation ::=  !('"'|'>'|'NL'|'/')
+
+private parse_link_section ::= '/' {parse_quoted_section | parse_unquoted_section} {pin=1}
+private parse_unquoted_section ::= <<link_section section_negation>>
+private parse_quoted_section ::= '"' <<link_section quoted_section_negation>> '"' &'>'
+meta link_section ::= {&<<x1>> pod_term}+
+private section_negation ::= !('>'|'NL'|'L')
+private quoted_section_negation ::= !('"' '>'|'>'|'NL'|'L')
+link_url ::= 'identifier' ':' '/' '/' {!('>'|'NL') pod_token}+ &'>'

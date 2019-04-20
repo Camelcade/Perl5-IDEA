@@ -1,7 +1,7 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">evalbytes EXPR</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">evalbytes</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">This function is similar to a <a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">string eval</a>, except it
-always parses its argument (or <a href="psi_element://perlvar%2F%24_">C<$_></a> if EXPR is omitted)
+always parses its argument (or <a href="psi_element://perlvar%2F%24_"><code>$_</code></a> if EXPR is omitted)
 as a string of independent bytes.</p>
 <p style="padding-bottom: 10px;">If called when <span style="white-space: nowrap;"><code>use utf8</code></span> is in effect, the string will be assumed
 to be encoded in UTF-8, and <code>evalbytes</code> will make a temporary copy to
@@ -10,7 +10,7 @@ work from, downgraded to non-UTF-8.  If this is not possible
 will fail with the error stored in <code>$@</code>.</p>
 <p style="padding-bottom: 10px;">Bytes that correspond to ASCII-range code points will have their normal
 meanings for operators in the string.  The treatment of the other bytes
-depends on if the <a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red">C<'unicode_strings"> feature</a> is in effect.</p>
+depends on if the <a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red"><code>'unicode_strings&quot;</code> feature</a> is in effect.</p>
 <p style="padding-bottom: 10px;">Of course, variables that are UTF-8 and are referred to in the string
 retain that:</p>
 <div style="padding-bottom: 10px;"><pre><code> my $a = &quot;\x{100}&quot;;
@@ -20,9 +20,9 @@ retain that:</p>
 <p style="padding-bottom: 10px;">and <code>$@</code> is empty.</p>
 <p style="padding-bottom: 10px;">Source filters activated within the evaluated code apply to the code
 itself.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fevalbytes+EXPR">C<evalbytes></a> is available starting in Perl v5.16.  To
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fevalbytes+EXPR"><code>evalbytes</code></a> is available starting in Perl v5.16.  To
 access it, you must say <code>CORE::evalbytes</code>, but you can omit the
 <code>CORE::</code> if the
-<a href="psi_element://feature%2FThe+%27unicode_eval%27+and+%27evalbytes%27+features" style="color:red">C<"evalbytes"> feature</a>
+<a href="psi_element://feature%2FThe+%27unicode_eval%27+and+%27evalbytes%27+features" style="color:red"><code>&quot;evalbytes&quot;</code> feature</a>
 is enabled.  This is enabled automatically with a <code>use v5.16</code> (or
 higher) declaration in the current scope.</p></dd></dl>

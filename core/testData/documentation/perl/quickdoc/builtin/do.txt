@@ -6,6 +6,6 @@ sequence of commands indicated by BLOCK.  When modified by the <code>while</code
 condition.  (On other statements the loop modifiers test the conditional
 first.)</p>
 <p style="padding-bottom: 10px;"><code>do BLOCK</code> does <i>not</i> count as a loop, so the loop control statements
-<a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a>, or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL">C<redo></a> cannot be used to leave or restart the block.
+<a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL"><code>next</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a>, or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL"><code>redo</code></a> cannot be used to leave or restart the block.
 See <a href="psi_element://perlsyn">perlsyn</a> for alternative strategies.</p></dd></dl>

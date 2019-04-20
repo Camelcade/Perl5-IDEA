@@ -1,6 +1,6 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">reset EXPR</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">reset</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">Generally used in a <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> block at the end of a
+<p style="padding-bottom: 10px;">Generally used in a <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK"><code>continue</code></a> block at the end of a
 loop to clear variables and reset <code>m?pattern?</code> searches so that they
 work again.  The
 expression is interpreted as a list of single characters (hyphens
@@ -13,8 +13,8 @@ Only resets variables or searches in the current package.  Always returns
     reset 'a-z';    # reset lower case variables
     reset;          # just reset m?one-time? searches</code></pre></div>
 <p style="padding-bottom: 10px;">Resetting <code>&quot;A-Z&quot;</code> is not recommended because you'll wipe out your
-<a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a> and <a href="psi_element://perlvar%2F%40INC">C<@INC></a> arrays and your
-<a href="psi_element://perlvar%2F%25ENV">C<%ENV></a> hash.
+<a href="psi_element://perlvar%2F%40ARGV"><code>@ARGV</code></a> and <a href="psi_element://perlvar%2F%40INC"><code>@INC</code></a> arrays and your
+<a href="psi_element://perlvar%2F%25ENV"><code>%ENV</code></a> hash.
 Resets only package variables; lexical variables are unaffected, but
 they clean themselves up on scope exit anyway, so you'll probably want
-to use them instead.  See <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a>.</p></dd></dl>
+to use them instead.  See <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST"><code>my</code></a>.</p></dd></dl>

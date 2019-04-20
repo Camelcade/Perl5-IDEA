@@ -144,7 +144,7 @@ public class PodRenderUtil implements PodElementTypes {
   }
 
   public static String getHTMLLink(@NotNull PodLinkDescriptor descriptor, boolean isError) {
-    return getHTMLLink(descriptor.getCanonicalUrl(), !descriptor.isUrl(), descriptor.getTitle(), isError);
+    return getHTMLLink(descriptor.getLink(), !descriptor.isUrl(), descriptor.getHtmlText(), isError);
   }
 
   public static String getHTMLPsiLink(@NotNull PodLinkTarget target) {

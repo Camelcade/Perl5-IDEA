@@ -2,6 +2,6 @@
 <dt style="padding-bottom:4px;font-weight:bold;">readlink</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the value of a symbolic link, if symbolic links are
 implemented.  If not, raises an exception.  If there is a system
-error, returns the undefined value and sets <a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno).
-If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+error, returns the undefined value and sets <a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> (errno).
+If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Freadlink">readlink in perlport</a>.</p></dd></dl>

@@ -28,6 +28,7 @@ import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +66,7 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
   public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
     if (context instanceof PodCompositeElement || context instanceof PerlFile) {
       try {
-        return PerlDocUtil.resolveDocLink(URLDecoder.decode(link, "UTF-8"), context);
+        return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.createFromUrl(URLDecoder.decode(link, "UTF-8")), context);
       }
       catch (Exception e) {
         throw new RuntimeException(e);

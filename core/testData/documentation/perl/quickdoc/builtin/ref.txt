@@ -3,7 +3,7 @@
 <dt style="padding-bottom:4px;font-weight:bold;">ref</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Examines the value of EXPR, expecting it to be a reference, and returns
 a string giving information about the reference and the type of referent.
-If EXPR is not specified, <a href="psi_element://perlvar%2F%24_">C<$_></a> will be used.</p>
+If EXPR is not specified, <a href="psi_element://perlvar%2F%24_"><code>$_</code></a> will be used.</p>
 <p style="padding-bottom: 10px;">If the operand is not a reference, then the empty string will be returned.
 An empty string will only be returned in this situation.  <code>ref</code> is often
 useful to just test whether a value is a reference, which can be done
@@ -30,8 +30,8 @@ class names, so <code>ref</code> returning one of these names doesn't unambiguou
 indicate that the referent is of the kind to which the name refers.</p>
 <p style="padding-bottom: 10px;">The ambiguity between built-in type names and class names significantly
 limits the utility of <code>ref</code>.  For unambiguous information, use
-<a href="psi_element://Scalar%3A%3AUtil%2Fblessed" style="color:red">C<Scalar::Util::blessed()></a> for information about
-blessing, and <a href="psi_element://Scalar%3A%3AUtil%2Freftype" style="color:red">C<Scalar::Util::reftype()></a> for
-information about physical types.  Use <a href="psi_element://UNIVERSAL%2FC%3C%3C+%24obj-%3Eisa%28+TYPE+%29+%3E%3E" style="color:red">the C<isa> method</a> for class membership tests, though one must be
+<a href="psi_element://Scalar%3A%3AUtil%2Fblessed" style="color:red"><code>Scalar::Util::blessed()</code></a> for information about
+blessing, and <a href="psi_element://Scalar%3A%3AUtil%2Freftype" style="color:red"><code>Scalar::Util::reftype()</code></a> for
+information about physical types.  Use <a href="psi_element://UNIVERSAL%2FC%3C%3C+%24obj-%3Eisa%28+TYPE+%29+%3E%3E" style="color:red">the <code>isa</code> method</a> for class membership tests, though one must be
 sure of blessedness before attempting a method call.</p>
 <p style="padding-bottom: 10px;">See also <a href="psi_element://perlref">perlref</a> and <a href="psi_element://perlobj">perlobj</a>.</p></dd></dl>

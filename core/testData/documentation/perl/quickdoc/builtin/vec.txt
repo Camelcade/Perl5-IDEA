@@ -9,16 +9,16 @@ that).</p>
 <p style="padding-bottom: 10px;">If BITS is 8, &quot;elements&quot; coincide with bytes of the input string.</p>
 <p style="padding-bottom: 10px;">If BITS is 16 or more, bytes of the input string are grouped into chunks
 of size BITS/8, and each group is converted to a number as with
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a> with
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a> with
 big-endian formats <code>n</code>/<code>N</code> (and analogously for BITS==64).  See
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a> for details.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> for details.</p>
 <p style="padding-bottom: 10px;">If bits is 4 or less, the string is broken into bytes, then the bits
 of each byte are broken into 8/BITS groups.  Bits of a byte are
 numbered in a little-endian-ish way, as in <code>0x01</code>, <code>0x02</code>,
 <code>0x04</code>, <code>0x08</code>, <code>0x10</code>, <code>0x20</code>, <code>0x40</code>, <code>0x80</code>.  For example,
 breaking the single input byte <code>chr(0x36)</code> into two groups gives a list
 <code>(0x6, 0x3)</code>; breaking it into 4 groups gives <code>(0x2, 0x1, 0x3, 0x0)</code>.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS">C<vec></a> may also be assigned to, in which case
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS"><code>vec</code></a> may also be assigned to, in which case
 parentheses are needed
 to give the expression the correct precedence as in</p>
 <div style="padding-bottom: 10px;"><pre><code>    vec($image, $max_x * $x + $y, 8) = 3;</code></pre></div>
@@ -27,13 +27,13 @@ If an element off the end of the string is written to, Perl will first
 extend the string with sufficiently many zero bytes.   It is an error
 to try to write off the beginning of the string (i.e., negative OFFSET).</p>
 <p style="padding-bottom: 10px;">If the string happens to be encoded as UTF-8 internally (and thus has
-the UTF8 flag set), <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS">C<vec></a> tries to convert it
+the UTF8 flag set), <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS"><code>vec</code></a> tries to convert it
 to use a one-byte-per-character internal representation. However, if the
 string contains characters with values of 256 or higher, that conversion
 will fail, and a deprecation message will be raised.  In that situation,
 <code>vec</code> will operate on the underlying buffer regardless, in its internal
 UTF-8 representation.  In Perl 5.32, this will be a fatal error.</p>
-<p style="padding-bottom: 10px;">Strings created with <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS">C<vec></a> can also be
+<p style="padding-bottom: 10px;">Strings created with <a href="psi_element://pod%3A%3Aperlfunc%2Fvec+EXPR%2COFFSET%2CBITS"><code>vec</code></a> can also be
 manipulated with the logical
 operators <code>|</code>, <code>&amp;</code>, <code>^</code>, and <code>~</code>.  These operators will assume a bit
 vector operation is desired when both operands are strings.

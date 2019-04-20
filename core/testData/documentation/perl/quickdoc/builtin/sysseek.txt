@@ -7,19 +7,19 @@ to the current position plus POSITION; and <code>2</code> to set it to EOF plus
 POSITION, typically negative.</p>
 <p style="padding-bottom: 10px;">Note the emphasis on bytes: even if the filehandle has been set to operate
 on characters (for example using the <code>:encoding(UTF-8)</code> I/O layer), the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a>, and
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE"><code>seek</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE"><code>tell</code></a>, and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE"><code>sysseek</code></a>
 family of functions use byte offsets, not character offsets,
 because seeking to a character offset would be very slow in a UTF-8 file.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a> bypasses normal
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE"><code>sysseek</code></a> bypasses normal
 buffered IO, so mixing it with reads other than
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<sysread></a> (for example
-<a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR">C<readline></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET">C<read></a>),
-<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST">C<print></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwrite+FILEHANDLE">C<write></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<seek></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE">C<tell></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE">C<eof></a> may cause
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET"><code>sysread</code></a> (for example
+<a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR"><code>readline</code></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET"><code>read</code></a>),
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST"><code>print</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fwrite+FILEHANDLE"><code>write</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fseek+FILEHANDLE%2CPOSITION%2CWHENCE"><code>seek</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE"><code>tell</code></a>, or <a href="psi_element://pod%3A%3Aperlfunc%2Feof+FILEHANDLE"><code>eof</code></a> may cause
 confusion.</p>
 <p style="padding-bottom: 10px;">For WHENCE, you may also use the constants <code>SEEK_SET</code>, <code>SEEK_CUR</code>,
 and <code>SEEK_END</code> (start of the file, current position, end of the file)
@@ -29,6 +29,6 @@ than relying on 0, 1, and 2.  For example to define a &quot;systell&quot; functi
     sub systell { sysseek($_[0], 0, SEEK_CUR) }</code></pre></div>
 <p style="padding-bottom: 10px;">Returns the new position, or the undefined value on failure.  A position
 of zero is returned as the string <code>&quot;0 but true&quot;</code>; thus
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE">C<sysseek></a> returns
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysseek+FILEHANDLE%2CPOSITION%2CWHENCE"><code>sysseek</code></a> returns
 true on success and false on failure, yet you can still easily determine
 the new position.</p></dd></dl>

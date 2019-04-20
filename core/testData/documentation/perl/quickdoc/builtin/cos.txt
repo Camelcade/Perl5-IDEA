@@ -2,7 +2,7 @@
    </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">cos</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the cosine of EXPR (expressed in radians).  If EXPR is omitted,
-takes the cosine of <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+takes the cosine of <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">For the inverse cosine operation, you may use the
-<a href="psi_element://Math%3A%3ATrig" style="color:red">C<Math::Trig::acos></a> function, or use this relation:</p>
+<a href="psi_element://Math%3A%3ATrig" style="color:red"><code>Math::Trig::acos</code></a> function, or use this relation:</p>
 <div style="padding-bottom: 10px;"><pre><code>    sub acos { atan2( sqrt(1 - $_[0] * $_[0]), $_[0] ) }</code></pre></div></dd></dl>

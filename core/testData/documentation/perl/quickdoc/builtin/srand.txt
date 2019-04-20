@@ -1,39 +1,39 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">srand EXPR
   </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">srand</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">Sets and returns the random number seed for the <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a>
+<p style="padding-bottom: 10px;">Sets and returns the random number seed for the <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a>
 operator.</p>
-<p style="padding-bottom: 10px;">The point of the function is to &quot;seed&quot; the <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a>
-function so that <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a> can produce a different sequence
+<p style="padding-bottom: 10px;">The point of the function is to &quot;seed&quot; the <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a>
+function so that <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a> can produce a different sequence
 each time you run your program.  When called with a parameter,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> uses that for the seed; otherwise it
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> uses that for the seed; otherwise it
 (semi-)randomly chooses a seed.  In either case, starting with Perl 5.14,
 it returns the seed.  To signal that your code will work <i>only</i> on Perls
 of a recent vintage:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use 5.014;	# so srand returns the seed</code></pre></div>
-<p style="padding-bottom: 10px;">If <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> is not called explicitly, it is called
+<p style="padding-bottom: 10px;">If <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> is not called explicitly, it is called
 implicitly without a parameter at the first use of the
-<a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a> operator.  However, there are a few situations
-where programs are likely to want to call <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a>.  One
+<a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a> operator.  However, there are a few situations
+where programs are likely to want to call <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a>.  One
 is for generating predictable results, generally for testing or
 debugging.  There, you use <code>srand($seed)</code>, with the same <code>$seed</code> each
-time.  Another case is that you may want to call <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a>
-after a <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> to avoid child processes sharing the same seed
+time.  Another case is that you may want to call <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a>
+after a <a href="psi_element://pod%3A%3Aperlfunc%2Ffork"><code>fork</code></a> to avoid child processes sharing the same seed
 value as the parent (and consequently each other).</p>
 <p style="padding-bottom: 10px;">Do <B>not</B> call <code>srand()</code> (i.e., without an argument) more than once per
 process.  The internal state of the random number generator should
 contain more entropy than can be provided by any seed, so calling
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> again actually <i>loses</i> randomness.</p>
-<p style="padding-bottom: 10px;">Most implementations of <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> take an integer and will
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> again actually <i>loses</i> randomness.</p>
+<p style="padding-bottom: 10px;">Most implementations of <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> take an integer and will
 silently
 truncate decimal numbers.  This means <code>srand(42)</code> will usually
 produce the same results as <code>srand(42.1)</code>.  To be safe, always pass
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> an integer.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> an integer.</p>
 <p style="padding-bottom: 10px;">A typical use of the returned seed is for a test program which has too many
 combinations to test comprehensively in the time available to it each run.  It
 can test a random subset each time, and should there be a failure, log the seed
 used for that run so that it can later be used to reproduce the same results.</p>
-<p style="padding-bottom: 10px;"><B><a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a> is not cryptographically secure.  You should not rely
+<p style="padding-bottom: 10px;"><B><a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a> is not cryptographically secure.  You should not rely
 on it in security-sensitive situations.</B>  As of this writing, a
 number of third-party CPAN modules offer random number generators
 intended by their authors to be cryptographically secure,

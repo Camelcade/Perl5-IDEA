@@ -2,7 +2,7 @@
 <p style="padding-bottom: 10px;">Opens a pair of connected pipes like the corresponding system call.
 Note that if you set up a loop of piped processes, deadlock can occur
 unless you are very careful.  In addition, note that Perl's pipes use
-IO buffering, so you may need to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a>
+IO buffering, so you may need to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a>
 to flush your WRITEHANDLE after each command, depending on the
 application.</p>
 <p style="padding-bottom: 10px;">Returns true on success.</p>
@@ -11,5 +11,5 @@ application.</p>
 for examples of such things.</p>
 <p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, that flag is set
 on all newly opened file descriptors whose
-<a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE">C<fileno></a>s are <i>higher</i> than the current value of
-<a href="psi_element://perlvar%2F%24%5EF">C<$^F></a> (by default 2 for <code>STDERR</code>).  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p></dd></dl>
+<a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE"><code>fileno</code></a>s are <i>higher</i> than the current value of
+<a href="psi_element://perlvar%2F%24%5EF"><code>$^F</code></a> (by default 2 for <code>STDERR</code>).  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p></dd></dl>

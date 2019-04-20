@@ -5,6 +5,6 @@ a PID of <code>0</code> to get the current process group for the
 current process.  Will raise an exception if used on a machine that
 doesn't implement <a href="psi_element://getpgrp%282%29" style="color:red">getpgrp(2)</a>.  If PID is omitted, returns the process
 group of the current process.  Note that the POSIX version of
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgetpgrp+PID">C<getpgrp></a> does not accept a PID argument, so only
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgetpgrp+PID"><code>getpgrp</code></a> does not accept a PID argument, so only
 <code>PID==0</code> is truly portable.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fgetpgrp">getpgrp in perlport</a>.</p></dd></dl>

@@ -4,10 +4,10 @@
 <p style="padding-bottom: 10px;">first to get the correct constant definitions.  If CMD is IPC_STAT or
 GETALL, then ARG must be a variable that will hold the returned
 semid_ds structure or semaphore value array.  Returns like
-<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a>:
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a>:
 the undefined value for error, &quot;<code>0 but true</code>&quot; for zero, or the actual
 return value otherwise.  The ARG must consist of a vector of native
 short integers, which may be created with <code>pack(&quot;s!&quot;,(0)x$nsem)</code>.
 See also <a href="psi_element://perlipc%2FSysV+IPC">SysV IPC in perlipc</a> and the documentation for
-<a href="psi_element://IPC%3A%3ASysV" style="color:red">C<IPC::SysV></a> and <a href="psi_element://IPC%3A%3ASemaphore" style="color:red">C<IPC::Semaphore></a>.</p>
+<a href="psi_element://IPC%3A%3ASysV" style="color:red"><code>IPC::SysV</code></a> and <a href="psi_element://IPC%3A%3ASemaphore" style="color:red"><code>IPC::Semaphore</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsemctl">semctl in perlport</a>.</p></dd></dl>

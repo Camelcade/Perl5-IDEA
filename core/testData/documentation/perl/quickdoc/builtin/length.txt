@@ -2,12 +2,12 @@
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">length</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the length in <i>characters</i> of the value of EXPR.  If EXPR is
-omitted, returns the length of <a href="psi_element://perlvar%2F%24_">C<$_></a>.  If EXPR is
-undefined, returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.</p>
+omitted, returns the length of <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.  If EXPR is
+undefined, returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>.</p>
 <p style="padding-bottom: 10px;">This function cannot be used on an entire array or hash to find out how
 many elements these have.  For that, use <code>scalar @array</code> and <code>scalar keys
 %hash</code>, respectively.</p>
-<p style="padding-bottom: 10px;">Like all Perl character operations, <a href="psi_element://pod%3A%3Aperlfunc%2Flength+EXPR">C<length></a> normally
+<p style="padding-bottom: 10px;">Like all Perl character operations, <a href="psi_element://pod%3A%3Aperlfunc%2Flength+EXPR"><code>length</code></a> normally
 deals in logical
 characters, not physical bytes.  For how many bytes a string encoded as
 UTF-8 would take up, use <code>length(Encode::encode('UTF-8', EXPR))</code>

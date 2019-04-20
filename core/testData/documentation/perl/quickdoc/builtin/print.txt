@@ -8,18 +8,18 @@ to the filehandle, thus introducing one level of indirection.  (NOTE: If
 FILEHANDLE is a variable and the next token is a term, it may be
 misinterpreted as an operator unless you interpose a <code>+</code> or put
 parentheses around the arguments.)  If FILEHANDLE is omitted, prints to the
-last selected (see <a href="psi_element://pod%3A%3Aperlfunc%2Fselect+FILEHANDLE">C<select></a>) output handle.  If
-LIST is omitted, prints <a href="psi_element://perlvar%2F%24_">C<$_></a> to the currently selected
+last selected (see <a href="psi_element://pod%3A%3Aperlfunc%2Fselect+FILEHANDLE"><code>select</code></a>) output handle.  If
+LIST is omitted, prints <a href="psi_element://perlvar%2F%24_"><code>$_</code></a> to the currently selected
 output handle.  To use FILEHANDLE alone to print the content of
-<a href="psi_element://perlvar%2F%24_">C<$_></a> to it, you must use a bareword filehandle like
+<a href="psi_element://perlvar%2F%24_"><code>$_</code></a> to it, you must use a bareword filehandle like
 <code>FH</code>, not an indirect one like <code>$fh</code>.  To set the default output handle
 to something other than STDOUT, use the select operation.</p>
-<p style="padding-bottom: 10px;">The current value of <a href="psi_element://perlvar%2F%24%2C">C<$,></a> (if any) is printed between
-each LIST item.  The current value of <a href="psi_element://perlvar%2F%24%5C">C<$\></a> (if any) is
+<p style="padding-bottom: 10px;">The current value of <a href="psi_element://perlvar%2F%24%2C"><code>$,</code></a> (if any) is printed between
+each LIST item.  The current value of <a href="psi_element://perlvar%2F%24%5C"><code>$\</code></a> (if any) is
 printed after the entire LIST has been printed.  Because print takes a
 LIST, anything in the LIST is evaluated in list context, including any
 subroutines whose return lists you pass to
-<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST">C<print></a>.  Be careful not to follow the print
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprint+FILEHANDLE+LIST"><code>print</code></a>.  Be careful not to follow the print
 keyword with a left
 parenthesis unless you want the corresponding right parenthesis to
 terminate the arguments to the print; put parentheses around all arguments

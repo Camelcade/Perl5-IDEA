@@ -50,7 +50,7 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
     if (descriptor != null && !descriptor.isUrl() && descriptor.getSection() != null) {
       List<PsiFile> targetFiles = new ArrayList<>();
 
-      if (descriptor.getFileId() != null) {
+      if (descriptor.getName() != null && !descriptor.isSameFile()) {
         for (PsiReference reference : podLink.getReferences()) {
           if (reference instanceof PodLinkToFileReference) {
             for (ResolveResult resolveResult : ((PodLinkToFileReference)reference).multiResolve(false)) {

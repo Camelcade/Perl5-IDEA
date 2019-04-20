@@ -1,28 +1,28 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">dbmopen HASH,DBNAME,MASK
     </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">[This function has been largely superseded by the
-<a href="psi_element://pod%3A%3Aperlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST">C<tie></a> function.]</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftie+VARIABLE%2CCLASSNAME%2CLIST"><code>tie</code></a> function.]</p>
 <p style="padding-bottom: 10px;">This binds a <a href="psi_element://dbm%283%29" style="color:red">dbm(3)</a>, <a href="psi_element://ndbm%283%29" style="color:red">ndbm(3)</a>, <a href="psi_element://sdbm%283%29" style="color:red">sdbm(3)</a>, <a href="psi_element://gdbm%283%29" style="color:red">gdbm(3)</a>, or Berkeley
 DB file to a hash.  HASH is the name of the hash.  (Unlike normal
-<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>, the first argument is <i>not</i> a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a>, the first argument is <i>not</i> a
 filehandle, even though it looks like one).  DBNAME is the name of the
 database (without the <i>.dir</i> or <i>.pag</i> extension if any).  If the
 database does not exist, it is created with protection specified by MASK
-(as modified by the <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a>).  To prevent creation of
+(as modified by the <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR"><code>umask</code></a>).  To prevent creation of
 the database if it doesn't exist, you may specify a MODE of 0, and the
 function will return a false value if it can't find an existing
 database.  If your system supports only the older DBM functions, you may
-make only one <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK">C<dbmopen></a> call in your
+make only one <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK"><code>dbmopen</code></a> call in your
 program.  In older versions of Perl, if your system had neither DBM nor
-ndbm, calling <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK">C<dbmopen></a> produced a fatal
+ndbm, calling <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK"><code>dbmopen</code></a> produced a fatal
 error; it now falls back to <a href="psi_element://sdbm%283%29" style="color:red">sdbm(3)</a>.</p>
 <p style="padding-bottom: 10px;">If you don't have write access to the DBM file, you can only read hash
 variables, not set them.  If you want to test whether you can write,
 either use file tests or try setting a dummy hash entry inside an
-<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> to trap the error.</p>
-<p style="padding-bottom: 10px;">Note that functions such as <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH">C<keys></a> and
-<a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH">C<values></a> may return huge lists when used on large DBM
-files.  You may prefer to use the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> function to
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR"><code>eval</code></a> to trap the error.</p>
+<p style="padding-bottom: 10px;">Note that functions such as <a href="psi_element://pod%3A%3Aperlfunc%2Fkeys+HASH"><code>keys</code></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fvalues+HASH"><code>values</code></a> may return huge lists when used on large DBM
+files.  You may prefer to use the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH"><code>each</code></a> function to
 iterate over large DBM files.  Example:</p>
 <div style="padding-bottom: 10px;"><pre><code>    # print out history file offsets
     dbmopen(%HIST,'/usr/lib/news/history',0666);
@@ -34,7 +34,7 @@ iterate over large DBM files.  Example:</p>
 cons of the various dbm approaches, as well as <a href="psi_element://DB_File" style="color:red">DB_File</a> for a particularly
 rich implementation.</p>
 <p style="padding-bottom: 10px;">You can control which DBM library you use by loading that library
-before you call <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK">C<dbmopen></a>:</p>
+before you call <a href="psi_element://pod%3A%3Aperlfunc%2Fdbmopen+HASH%2CDBNAME%2CMASK"><code>dbmopen</code></a>:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use DB_File;
     dbmopen(%NS_Hist, &quot;$ENV{HOME}/.netscape/history.db&quot;)
         or die &quot;Can't open netscape history file: $!&quot;;</code></pre></div>

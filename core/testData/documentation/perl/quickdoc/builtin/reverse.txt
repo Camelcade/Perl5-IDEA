@@ -7,8 +7,8 @@ in the opposite order.</p>
 <div style="padding-bottom: 10px;"><pre><code>    print join(&quot;, &quot;, reverse &quot;world&quot;, &quot;Hello&quot;); # Hello, world
 
     print scalar reverse &quot;dlrow ,&quot;, &quot;olleH&quot;;    # Hello, world</code></pre></div>
-<p style="padding-bottom: 10px;">Used without arguments in scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Freverse+LIST">C<reverse></a>
-reverses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">Used without arguments in scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Freverse+LIST"><code>reverse</code></a>
+reverses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <div style="padding-bottom: 10px;"><pre><code>    $_ = &quot;dlrow ,olleH&quot;;
     print reverse;                         # No output, list context
     print scalar reverse;                  # Hello, world</code></pre></div>

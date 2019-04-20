@@ -4,7 +4,7 @@
 in the CLASSNAME package.  If CLASSNAME is an empty string, it is
 interpreted as referring to the <code>main</code> package.
 If CLASSNAME is omitted, the current package
-is used.  Because a <a href="psi_element://pod%3A%3Aperlfunc%2Fbless+REF%2CCLASSNAME">C<bless></a> is often the last
+is used.  Because a <a href="psi_element://pod%3A%3Aperlfunc%2Fbless+REF%2CCLASSNAME"><code>bless</code></a> is often the last
 thing in a constructor, it returns the reference for convenience.
 Always use the two-argument version if a derived class might inherit the
 method doing the blessing.  See <a href="psi_element://perlobj">perlobj</a> for more about the blessing
@@ -14,5 +14,5 @@ Namespaces with all lowercase names are considered reserved for
 Perl pragmas.  Builtin types have all uppercase names.  To prevent
 confusion, you may wish to avoid such package names as well.
 It is advised to avoid the class name <code>0</code>, because much code erroneously
-uses the result of <a href="psi_element://pod%3A%3Aperlfunc%2Fref+EXPR">C<ref></a> as a truth value.</p>
+uses the result of <a href="psi_element://pod%3A%3Aperlfunc%2Fref+EXPR"><code>ref</code></a> as a truth value.</p>
 <p style="padding-bottom: 10px;">See <a href="psi_element://perlmod%2FPerl+Modules">Perl Modules in perlmod</a>.</p></dd></dl>

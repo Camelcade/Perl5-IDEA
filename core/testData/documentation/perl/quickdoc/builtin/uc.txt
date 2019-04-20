@@ -4,7 +4,7 @@
 <p style="padding-bottom: 10px;">Returns an uppercased version of EXPR.  This is the internal function
 implementing the <code>\U</code> escape in double-quoted strings.
 It does not attempt to do titlecase mapping on initial letters.  See
-<a href="psi_element://pod%3A%3Aperlfunc%2Fucfirst+EXPR">C<ucfirst></a> for that.</p>
-<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fucfirst+EXPR"><code>ucfirst</code></a> for that.</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">This function behaves the same way under various pragmas, such as in a locale,
-as <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR">C<lc></a> does.</p></dd></dl>
+as <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR"><code>lc</code></a> does.</p></dd></dl>

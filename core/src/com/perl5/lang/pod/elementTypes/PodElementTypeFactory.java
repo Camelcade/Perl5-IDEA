@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 26.03.2016.
  */
 public class PodElementTypeFactory {
+  private static final Logger LOG = Logger.getInstance(PodElementTypeFactory.class);
   public static IElementType getTokenType(String debugName) {
     if (debugName.equals("identifier")) {
       return new PodTokenTypeEx(debugName) {
@@ -383,6 +385,43 @@ public class PodElementTypeFactory {
         }
       };
     }
-    throw new RuntimeException("Missing element: " + name);
+    if (name.equals("LINK_TEXT")) {
+      return new PodElementType(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiLinkTextImpl(node);
+        }
+      };
+    }
+    if (name.equals("LINK_NAME")) {
+      return new PodElementType(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiLinkNameImpl(node);
+        }
+      };
+    }
+    if (name.equals("LINK_SECTION")) {
+      return new PodElementType(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiLinkSectionImpl(node);
+        }
+      };
+    }
+    if (name.equals("LINK_URL")) {
+      return new PodElementType(name) {
+        @NotNull
+        @Override
+        public PsiElement getPsiElement(@NotNull ASTNode node) {
+          return new PsiLinkUrlImpl(node);
+        }
+      };
+    }
+    LOG.error("Missing element: " + name);
+    throw new RuntimeException();
   }
 }

@@ -43,7 +43,7 @@ password.  For the availability and the exact meaning of these fields
 in your system, please consult <a href="psi_element://getpwnam%283%29" style="color:red">getpwnam(3)</a> and your system's
 <i>pwd.h</i> file.  You can also find out from within Perl what your
 $quota and $comment fields mean and whether you have the $expire field
-by using the <a href="psi_element://Config" style="color:red">C<Config></a> module and the values <code>d_pwquota</code>, <code>d_pwage</code>,
+by using the <a href="psi_element://Config" style="color:red"><code>Config</code></a> module and the values <code>d_pwquota</code>, <code>d_pwage</code>,
 <code>d_pwchange</code>, <code>d_pwcomment</code>, and <code>d_pwexpire</code>.  Shadow password
 files are supported only if your vendor has implemented them in the
 intuitive fashion that calling the regular C library routines gets the
@@ -54,7 +54,7 @@ facility are unlikely to be supported.</p>
 <p style="padding-bottom: 10px;">The $members value returned by <i>getgr*()</i> is a space-separated list of
 the login names of the members of the group.</p>
 <p style="padding-bottom: 10px;">For the <i>gethost*()</i> functions, if the <code>h_errno</code> variable is supported in
-C, it will be returned to you via <a href="psi_element://perlvar%2F%24%3F">C<$?></a> if the function
+C, it will be returned to you via <a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a> if the function
 call fails.  The
 <code>@addrs</code> value returned by a successful call is a list of raw
 addresses returned by the corresponding library call.  In the
@@ -76,9 +76,9 @@ you can write this:</p>
     if (defined $packed_ip) {
         $ip_address = inet_ntoa($packed_ip);
     }</code></pre></div>
-<p style="padding-bottom: 10px;">Make sure <a href="psi_element://pod%3A%3Aperlfunc%2Fgethostbyname+NAME">C<gethostbyname></a> is called in SCALAR
+<p style="padding-bottom: 10px;">Make sure <a href="psi_element://pod%3A%3Aperlfunc%2Fgethostbyname+NAME"><code>gethostbyname</code></a> is called in SCALAR
 context and that its return value is checked for definedness.</p>
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fgetprotobynumber+NUMBER">C<getprotobynumber></a> function, even
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fgetprotobynumber+NUMBER"><code>getprotobynumber</code></a> function, even
 though it only takes one argument, has the precedence of a list
 operator, so beware:</p>
 <div style="padding-bottom: 10px;"><pre><code>    getprotobynumber $number eq 'icmp'   # WRONG
@@ -86,11 +86,11 @@ operator, so beware:</p>
     getprotobynumber($number) eq 'icmp'  # better this way</code></pre></div>
 <p style="padding-bottom: 10px;">If you get tired of remembering which element of the return list
 contains which return value, by-name interfaces are provided in standard
-modules: <a href="psi_element://File%3A%3Astat" style="color:red">C<File::stat></a>, <a href="psi_element://Net%3A%3Ahostent" style="color:red">C<Net::hostent></a>,
-<a href="psi_element://Net%3A%3Anetent" style="color:red">C<Net::netent></a>, <a href="psi_element://Net%3A%3Aprotoent" style="color:red">C<Net::protoent></a>,
-<a href="psi_element://Net%3A%3Aservent" style="color:red">C<Net::servent></a>, <a href="psi_element://Time%3A%3Agmtime" style="color:red">C<Time::gmtime></a>,
-<a href="psi_element://Time%3A%3Alocaltime" style="color:red">C<Time::localtime></a>, and
-<a href="psi_element://User%3A%3Agrent" style="color:red">C<User::grent></a>.  These override the normal built-ins,
+modules: <a href="psi_element://File%3A%3Astat" style="color:red"><code>File::stat</code></a>, <a href="psi_element://Net%3A%3Ahostent" style="color:red"><code>Net::hostent</code></a>,
+<a href="psi_element://Net%3A%3Anetent" style="color:red"><code>Net::netent</code></a>, <a href="psi_element://Net%3A%3Aprotoent" style="color:red"><code>Net::protoent</code></a>,
+<a href="psi_element://Net%3A%3Aservent" style="color:red"><code>Net::servent</code></a>, <a href="psi_element://Time%3A%3Agmtime" style="color:red"><code>Time::gmtime</code></a>,
+<a href="psi_element://Time%3A%3Alocaltime" style="color:red"><code>Time::localtime</code></a>, and
+<a href="psi_element://User%3A%3Agrent" style="color:red"><code>User::grent</code></a>.  These override the normal built-ins,
 supplying versions that return objects with the appropriate names for
 each field.  For example:</p>
 <div style="padding-bottom: 10px;"><pre><code>   use File::stat;

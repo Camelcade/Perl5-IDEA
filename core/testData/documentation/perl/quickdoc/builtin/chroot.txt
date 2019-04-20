@@ -6,8 +6,8 @@ named directory the new root directory for all further pathnames that
 begin with a <code>/</code> by your process and all its children.  (It doesn't
 change your current working directory, which is unaffected.)  For security
 reasons, this call is restricted to the superuser.  If FILENAME is
-omitted, does a <a href="psi_element://pod%3A%3Aperlfunc%2Fchroot+FILENAME">C<chroot></a> to <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+omitted, does a <a href="psi_element://pod%3A%3Aperlfunc%2Fchroot+FILENAME"><code>chroot</code></a> to <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;"><B>NOTE:</B>  It is good security practice to do <code>chdir(&quot;/&quot;)</code>
-(<a href="psi_element://pod%3A%3Aperlfunc%2Fchdir+EXPR">C<chdir></a> to the root directory) immediately after a
-<a href="psi_element://pod%3A%3Aperlfunc%2Fchroot+FILENAME">C<chroot></a>.</p>
+(<a href="psi_element://pod%3A%3Aperlfunc%2Fchdir+EXPR"><code>chdir</code></a> to the root directory) immediately after a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fchroot+FILENAME"><code>chroot</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fchroot">chroot in perlport</a>.</p></dd></dl>

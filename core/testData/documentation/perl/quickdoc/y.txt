@@ -27,10 +27,10 @@ details are in <a href="psi_element://pod%3A%3Aperlop%2FQuote+and+Quote-like+Ope
 <code>\d</code> or <code>\pL</code>.  The <code>tr</code> operator is not equivalent to the <code><a href="psi_element://tr%281%29" style="color:red">tr(1)</a></code>
 utility.  <code>tr[a-z][A-Z]</code> will uppercase the 26 letters &quot;a&quot; through &quot;z&quot;,
 but for case changing not confined to ASCII, use
-<a href="psi_element://perlfunc%2Flc">C<lc></a>, <a href="psi_element://perlfunc%2Fuc">C<uc></a>,
-<a href="psi_element://perlfunc%2Flcfirst">C<lcfirst></a>, <a href="psi_element://perlfunc%2Fucfirst">C<ucfirst></a>
+<a href="psi_element://perlfunc%2Flc"><code>lc</code></a>, <a href="psi_element://perlfunc%2Fuc"><code>uc</code></a>,
+<a href="psi_element://perlfunc%2Flcfirst"><code>lcfirst</code></a>, <a href="psi_element://perlfunc%2Fucfirst"><code>ucfirst</code></a>
 (all documented in <a href="psi_element://perlfunc">perlfunc</a>), or the
-<a href="psi_element://pod%3A%3Aperlop%2FsE%3Csol%3EPATTERNE%3Csol%3EREPLACEMENTE%3Csol%3Emsixpodualngcer" style="color:red">substitution operator C<sE<sol>I<PATTERN>E<sol>I<REPLACEMENT>E<sol>></a>
+<a href="psi_element://pod%3A%3Aperlop%2FsE%3Csol%3EPATTERNE%3Csol%3EREPLACEMENTE%3Csol%3Emsixpodualngcer" style="color:red">substitution operator <code>s/<i>PATTERN</i>/<i>REPLACEMENT</i>/</code></a>
 (with <code>\U</code>, <code>\u</code>, <code>\L</code>, and <code>\l</code> string-interpolation escapes in the
 <i>REPLACEMENT</i> portion).</p>
 <p style="padding-bottom: 10px;">Most ranges are unportable between character sets, but certain ones

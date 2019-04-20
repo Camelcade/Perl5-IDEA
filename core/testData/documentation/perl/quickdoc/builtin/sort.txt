@@ -2,9 +2,9 @@
 <dt style="padding-bottom:4px;font-weight:bold;">sort BLOCK LIST</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">sort LIST</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">In list context, this sorts the LIST and returns the sorted list value.
-In scalar context, the behaviour of <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a> is
+In scalar context, the behaviour of <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST"><code>sort</code></a> is
 undefined.</p>
-<p style="padding-bottom: 10px;">If SUBNAME or BLOCK is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a>s in
+<p style="padding-bottom: 10px;">If SUBNAME or BLOCK is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST"><code>sort</code></a>s in
 standard string comparison
 order.  If SUBNAME is specified, it gives the name of a subroutine
 that returns an integer less than, equal to, or greater than <code>0</code>,
@@ -15,7 +15,7 @@ the value provides the name of (or a reference to) the actual
 subroutine to use.  In place of a SUBNAME, you can provide a BLOCK as
 an anonymous, in-line sort subroutine.</p>
 <p style="padding-bottom: 10px;">If the subroutine's prototype is <code>($$)</code>, the elements to be compared are
-passed by reference in <a href="psi_element://perlvar%2F%40_">C<@_></a>, as for a normal subroutine.
+passed by reference in <a href="psi_element://perlvar%2F%40_"><code>@_</code></a>, as for a normal subroutine.
 This is slower than unprototyped subroutines, where the elements to be
 compared are passed into the subroutine as the package global variables
 <code>$a</code> and <code>$b</code> (see example below).</p>
@@ -26,15 +26,15 @@ to the stack, the way arguments are usually passed to XSUBs.  <code>$a</code> an
 be modified.</p>
 <p style="padding-bottom: 10px;">You also cannot exit out of the sort block or subroutine using any of the
 loop control operators described in <a href="psi_element://perlsyn">perlsyn</a> or with
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>.</p>
-<p style="padding-bottom: 10px;">When <a href="psi_element://locale" style="color:red">C<use locale></a> (but not <code>use locale ':not_characters'</code>)
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a>.</p>
+<p style="padding-bottom: 10px;">When <a href="psi_element://locale" style="color:red"><code>use locale</code></a> (but not <code>use locale ':not_characters'</code>)
 is in effect, <code>sort LIST</code> sorts LIST according to the
 current collation locale.  See <a href="psi_element://perllocale">perllocale</a>.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a> returns aliases into the original list,
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST"><code>sort</code></a> returns aliases into the original list,
 much as a for loop's index variable aliases the list elements.  That is,
-modifying an element of a list returned by <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a>
-(for example, in a <code>foreach</code>, <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a>)
+modifying an element of a list returned by <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST"><code>sort</code></a>
+(for example, in a <code>foreach</code>, <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST"><code>map</code></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST"><code>grep</code></a>)
 actually modifies the element in the original list.  This is usually
 something to be avoided when writing clear code.</p>
 <p style="padding-bottom: 10px;">Historically Perl has varied in whether sorting is stable by default.
@@ -190,7 +190,7 @@ package's <code>$a</code> and <code>$b</code> :</p>
 inconsistent results (sometimes saying <code>$x[1]</code> is less than <code>$x[2]</code> and
 sometimes saying the opposite, for example) the results are not
 well-defined.</p>
-<p style="padding-bottom: 10px;">Because <code>&lt;=&gt;</code> returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> when either operand
+<p style="padding-bottom: 10px;">Because <code>&lt;=&gt;</code> returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> when either operand
 is <code>NaN</code> (not-a-number), be careful when sorting with a
 comparison function like <code>$a &lt;=&gt; $b</code> any lists that might contain a
 <code>NaN</code>.  The following example takes advantage that <code>NaN != NaN</code> to

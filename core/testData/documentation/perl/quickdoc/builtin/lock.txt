@@ -3,7 +3,7 @@
 object contained in <i>THING</i> until the lock goes out of scope.</p>
 <p style="padding-bottom: 10px;">The value returned is the scalar itself, if the argument is a scalar, or a
 reference, if the argument is a hash, array or subroutine.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flock+THING">C<lock></a> is a &quot;weak keyword&quot;; this means that if you've
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flock+THING"><code>lock</code></a> is a &quot;weak keyword&quot;; this means that if you've
 defined a function
 by this name (before any calls to it), that function will be called
 instead.  If you are not under <code>use threads::shared</code> this does nothing.

@@ -32,7 +32,6 @@ public abstract class PodSectionMixin extends PodCompositeElementMixin implement
     super(node);
   }
 
-
   @Override
   public PsiElement getContentBlock() {
     return findChildByClass(PodSectionContent.class);

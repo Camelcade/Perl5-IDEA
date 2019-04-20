@@ -10,7 +10,7 @@ the user running the program:</p>
     my $atime = my $mtime = time;
     utime $atime, $mtime, @ARGV;</code></pre></div>
 <p style="padding-bottom: 10px;">Since Perl 5.8.0, if the first two elements of the list are
-<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>,
 the <a href="psi_element://utime%282%29" style="color:red">utime(2)</a> syscall from your C library is called with a null second
 argument.  On most systems, this will set the file's access and
 modification times to the current time (i.e., equivalent to the example
@@ -25,9 +25,9 @@ the local machine.  If there is a time synchronization problem, the
 NFS server and local machine will have different times.  The Unix
 <a href="psi_element://touch%281%29" style="color:red">touch(1)</a> command will in fact normally use this form instead of the
 one shown in the first example.</p>
-<p style="padding-bottom: 10px;">Passing only one of the first two elements as <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> is
+<p style="padding-bottom: 10px;">Passing only one of the first two elements as <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> is
 equivalent to passing a 0 and will not have the effect described when
-both are <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.  This also triggers an
+both are <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>.  This also triggers an
 uninitialized warning.</p>
 <p style="padding-bottom: 10px;">On systems that support <a href="psi_element://futimes%282%29" style="color:red">futimes(2)</a>, you may pass filehandles among the
 files.  On systems that don't support <a href="psi_element://futimes%282%29" style="color:red">futimes(2)</a>, passing filehandles raises

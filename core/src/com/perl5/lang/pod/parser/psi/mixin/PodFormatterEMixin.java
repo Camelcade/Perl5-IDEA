@@ -310,26 +310,29 @@ public class PodFormatterEMixin extends PodSectionMixin implements PodFormatterE
     PsiElement content = getContentBlock();
 
     if (content != null) {
-      String myText = content.getText();
+      String text = content.getText();
 
       Matcher m;
 
-      if (myText == null) {
-        myText = PerlLexer.STRING_UNDEF;
+      if (text == null) {
+        text = PerlLexer.STRING_UNDEF;
       }
-      else if ((m = OCTAL_NUMBER_PATTERN.matcher(myText)).matches()) {
-        myText = "&#" + Integer.parseInt(m.group(1), 8) + ";";
+      else if (text.equals("sol")) {
+        text = "/";
       }
-      else if ((m = HEX_NUMBER_PATTERN.matcher(myText)).matches()) {
-        myText = "&#" + Integer.parseInt(m.group(1), 16) + ";";
+      else if ((m = OCTAL_NUMBER_PATTERN.matcher(text)).matches()) {
+        text = "&#" + Integer.parseInt(m.group(1), 8) + ";";
       }
-      else if (NUMBER_PATTERN.matcher(myText).matches()) {
-        myText = "&#" + myText + ";";
+      else if ((m = HEX_NUMBER_PATTERN.matcher(text)).matches()) {
+        text = "&#" + Integer.parseInt(m.group(1), 16) + ";";
+      }
+      else if (NUMBER_PATTERN.matcher(text).matches()) {
+        text = "&#" + text + ";";
       }
       else {
-        myText = "&" + myText + ';';
+        text = "&" + text + ';';
       }
-      builder.append(myText);
+      builder.append(text);
     }
   }
 

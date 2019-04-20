@@ -2,8 +2,8 @@
  </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">This implements the C library function of the same name, which on most
 systems returns the current login from <i>/etc/utmp</i>, if any.  If it
-returns the empty string, use <a href="psi_element://pod%3A%3Aperlfunc%2Fgetpwuid+UID">C<getpwuid></a>.</p>
+returns the empty string, use <a href="psi_element://pod%3A%3Aperlfunc%2Fgetpwuid+UID"><code>getpwuid</code></a>.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $login = getlogin || getpwuid($&lt;) || &quot;Kilroy&quot;;</code></pre></div>
-<p style="padding-bottom: 10px;">Do not consider <a href="psi_element://pod%3A%3Aperlfunc%2Fgetlogin">C<getlogin></a> for authentication: it is not
-as secure as <a href="psi_element://pod%3A%3Aperlfunc%2Fgetpwuid+UID">C<getpwuid></a>.</p>
+<p style="padding-bottom: 10px;">Do not consider <a href="psi_element://pod%3A%3Aperlfunc%2Fgetlogin"><code>getlogin</code></a> for authentication: it is not
+as secure as <a href="psi_element://pod%3A%3Aperlfunc%2Fgetpwuid+UID"><code>getpwuid</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fgetlogin">getlogin in perlport</a>.</p></dd></dl>

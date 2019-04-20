@@ -3,6 +3,6 @@
  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the debugging flags.  May be read or set.  Like its
 <a href="psi_element://perlrun%2FB%3C-D%3EI%3Cletters%3E" style="color:red">command-line equivalent</a>, you can use numeric
 or symbolic values, e.g. <code>$^D = 10</code> or <code>$^D = &quot;st&quot;</code>.  See
-<a href="psi_element://perlrun%2FB%3C-D%3EI%3Cnumber%3E" style="color:red">B<-D>I<number> in perlrun</a>.  The contents of this variable also affects the
+<a href="psi_element://perlrun%2FB%3C-D%3EI%3Cnumber%3E" style="color:red"><B>-D</B><i>number</i> in perlrun</a>.  The contents of this variable also affects the
 debugger operation.  See <a href="psi_element://perldebguts%2FDebugger+Internals">Debugger Internals in perldebguts</a>.</p>
 <p style="padding-bottom: 10px;">Mnemonic: value of <B>-D</B> switch.</p></dd></dl>

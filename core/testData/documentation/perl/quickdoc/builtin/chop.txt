@@ -4,12 +4,12 @@
 <p style="padding-bottom: 10px;">Chops off the last character of a string and returns the character
 chopped.  It is much more efficient than <code>s/.$//s</code> because it neither
 scans nor copies the string.  If VARIABLE is omitted, chops
-<a href="psi_element://perlvar%2F%24_">C<$_></a>.
+<a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.
 If VARIABLE is a hash, it chops the hash's values, but not its keys,
-resetting the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH">C<each></a> iterator in the process.</p>
+resetting the <a href="psi_element://pod%3A%3Aperlfunc%2Feach+HASH"><code>each</code></a> iterator in the process.</p>
 <p style="padding-bottom: 10px;">You can actually chop anything that's an lvalue, including an assignment.</p>
 <p style="padding-bottom: 10px;">If you chop a list, each element is chopped.  Only the value of the
-last <a href="psi_element://pod%3A%3Aperlfunc%2Fchop+VARIABLE">C<chop></a> is returned.</p>
-<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fchop+VARIABLE">C<chop></a> returns the last character.  To
+last <a href="psi_element://pod%3A%3Aperlfunc%2Fchop+VARIABLE"><code>chop</code></a> is returned.</p>
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fchop+VARIABLE"><code>chop</code></a> returns the last character.  To
 return all but the last character, use <code>substr($string, 0, -1)</code>.</p>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fchomp+VARIABLE">C<chomp></a>.</p></dd></dl>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fchomp+VARIABLE"><code>chomp</code></a>.</p></dd></dl>

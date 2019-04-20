@@ -7,9 +7,9 @@ corresponding value is undefined.</p>
     print &quot;Defined\n&quot;   if defined $hash{$key};
     print &quot;True\n&quot;      if $hash{$key};</code></pre></div>
 <p style="padding-bottom: 10px;">exists may also be called on array elements, but its behavior is much less
-obvious and is strongly tied to the use of <a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR">C<delete></a> on
+obvious and is strongly tied to the use of <a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR"><code>delete</code></a> on
 arrays.</p>
-<p style="padding-bottom: 10px;"><B>WARNING:</B> Calling <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> on array values is
+<p style="padding-bottom: 10px;"><B>WARNING:</B> Calling <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR"><code>exists</code></a> on array values is
 strongly discouraged.  The
 notion of deleting or checking the existence of Perl array elements is not
 conceptually coherent, and can lead to surprising behavior.</p>
@@ -45,6 +45,6 @@ This happens anywhere the arrow operator is used, including even here:</p>
     if (exists $ref-&gt;{&quot;Some key&quot;})    { }
     print $ref;  # prints HASH(0x80d3d5c)</code></pre></div>
 <p style="padding-bottom: 10px;">Use of a subroutine call, rather than a subroutine name, as an argument
-to <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> is an error.</p>
+to <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR"><code>exists</code></a> is an error.</p>
 <div style="padding-bottom: 10px;"><pre><code>    exists &amp;sub;    # OK
     exists &amp;sub();  # Error</code></pre></div></dd></dl>

@@ -2,7 +2,7 @@
   </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Does a <a href="psi_element://fork%282%29" style="color:red">fork(2)</a> system call to create a new process running the
 same program at the same point.  It returns the child pid to the
-parent process, <code>0</code> to the child process, or <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> if
+parent process, <code>0</code> to the child process, or <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> if
 the fork is
 unsuccessful.  File descriptors (and sometimes locks on those descriptors)
 are shared, while everything else is copied.  On most systems supporting
@@ -12,12 +12,12 @@ dominant paradigm for multitasking over the last few decades.</p>
 <p style="padding-bottom: 10px;">Perl attempts to flush all files opened for output before forking the
 child process, but this may not be supported on some platforms (see
 <a href="psi_element://perlport">perlport</a>).  To be safe, you may need to set
-<a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a> (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>) or
-call the <code>autoflush</code> method of <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red">C<IO::Handle></a> on
+<a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a> (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>) or
+call the <code>autoflush</code> method of <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red"><code>IO::Handle</code></a> on
 any open handles to avoid duplicate output.</p>
-<p style="padding-bottom: 10px;">If you <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> without ever waiting on your children, you will
+<p style="padding-bottom: 10px;">If you <a href="psi_element://pod%3A%3Aperlfunc%2Ffork"><code>fork</code></a> without ever waiting on your children, you will
 accumulate zombies.  On some systems, you can avoid this by setting
-<a href="psi_element://perlvar%2F%25SIG">C<$SIG{CHLD}></a> to <code>&quot;IGNORE&quot;</code>.  See also <a href="psi_element://perlipc">perlipc</a> for
+<a href="psi_element://perlvar%2F%25SIG"><code>$SIG{CHLD}</code></a> to <code>&quot;IGNORE&quot;</code>.  See also <a href="psi_element://perlipc">perlipc</a> for
 more examples of forking and reaping moribund children.</p>
 <p style="padding-bottom: 10px;">Note that if your forked child inherits system file descriptors like
 STDIN and STDOUT that are actually connected by a pipe or socket, even
@@ -25,7 +25,7 @@ if you exit, then the remote server (such as, say, a CGI script or a
 backgrounded job launched from a remote shell) won't think you're done.
 You should reopen those to <i>/dev/null</i> if it's any issue.</p>
 <p style="padding-bottom: 10px;">On some platforms such as Windows, where the <a href="psi_element://fork%282%29" style="color:red">fork(2)</a> system call is
-not available, Perl can be built to emulate <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> in the Perl
+not available, Perl can be built to emulate <a href="psi_element://pod%3A%3Aperlfunc%2Ffork"><code>fork</code></a> in the Perl
 interpreter.  The emulation is designed, at the level of the Perl
 program, to be as compatible as possible with the &quot;Unix&quot; <a href="psi_element://fork%282%29" style="color:red">fork(2)</a>.
 However it has limitations that have to be considered in code intended

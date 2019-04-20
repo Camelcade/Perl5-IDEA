@@ -18,6 +18,11 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.pod.psi.PsiLinkName;
+import com.perl5.lang.pod.psi.PsiLinkSection;
+import com.perl5.lang.pod.psi.PsiLinkText;
+import com.perl5.lang.pod.psi.PsiLinkUrl;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -29,4 +34,24 @@ public interface PodFormatterL extends PsiElement, PodFormatter, PodSection {
 
   @Nullable
   PsiFile getTargetFile();
+
+  @Nullable
+  default PsiLinkText getLinkTextElement() {
+    return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkText.class);
+  }
+
+  @Nullable
+  default PsiLinkName getLinkNameElement() {
+    return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkName.class);
+  }
+
+  @Nullable
+  default PsiLinkSection getLinkSectionElement() {
+    return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkSection.class);
+  }
+
+  @Nullable
+  default PsiLinkUrl getLinkUrlElement() {
+    return PsiTreeUtil.getChildOfType(getContentBlock(), PsiLinkUrl.class);
+  }
 }

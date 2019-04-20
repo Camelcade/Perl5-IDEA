@@ -3,8 +3,8 @@
 <div style="padding-bottom: 10px;"><pre><code>    use IPC::SysV;</code></pre></div>
 <p style="padding-bottom: 10px;">first to get the correct constant definitions.  If CMD is <code>IPC_STAT</code>,
 then ARG must be a variable that will hold the returned <code>shmid_ds</code>
-structure.  Returns like ioctl: <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> for error; &quot;<code>0</code>
+structure.  Returns like ioctl: <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> for error; &quot;<code>0</code>
 but true&quot; for zero; and the actual return value otherwise.
 See also <a href="psi_element://perlipc%2FSysV+IPC">SysV IPC in perlipc</a> and the documentation for
-<a href="psi_element://IPC%3A%3ASysV" style="color:red">C<IPC::SysV></a>.</p>
+<a href="psi_element://IPC%3A%3ASysV" style="color:red"><code>IPC::SysV</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fshmctl">shmctl in perlport</a>.</p></dd></dl>

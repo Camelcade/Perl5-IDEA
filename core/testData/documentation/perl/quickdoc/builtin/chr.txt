@@ -7,8 +7,8 @@ chr(0x263a) is a Unicode smiley face.</p>
 <p style="padding-bottom: 10px;">Negative values give the Unicode replacement character (chr(0xfffd)),
 except under the <a href="psi_element://bytes" style="color:red">bytes</a> pragma, where the low eight bits of the value
 (truncated to an integer) are used.</p>
-<p style="padding-bottom: 10px;">If NUMBER is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
-<p style="padding-bottom: 10px;">For the reverse, use <a href="psi_element://pod%3A%3Aperlfunc%2Ford+EXPR">C<ord></a>.</p>
+<p style="padding-bottom: 10px;">If NUMBER is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
+<p style="padding-bottom: 10px;">For the reverse, use <a href="psi_element://pod%3A%3Aperlfunc%2Ford+EXPR"><code>ord</code></a>.</p>
 <p style="padding-bottom: 10px;">Note that characters from 128 to 255 (inclusive) are by default
 internally not encoded as UTF-8 for backward compatibility reasons.</p>
 <p style="padding-bottom: 10px;">See <a href="psi_element://perlunicode">perlunicode</a> for more about Unicode.</p></dd></dl>

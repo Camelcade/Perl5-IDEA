@@ -1,14 +1,14 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">wantarray
  </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns true if the context of the currently executing subroutine or
-<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a> is looking for a list value.  Returns false if the
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR"><code>eval</code></a> is looking for a list value.  Returns false if the
 context is
 looking for a scalar.  Returns the undefined value if the context is
 looking for no value (void context).</p>
 <div style="padding-bottom: 10px;"><pre><code>    return unless defined wantarray; # don't bother doing more
     my @a = complex_calculation();
     return wantarray ? @a : &quot;@a&quot;;</code></pre></div>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fwantarray">C<wantarray></a>'s result is unspecified in the top level of a file,
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fwantarray"><code>wantarray</code></a>'s result is unspecified in the top level of a file,
 in a <code>BEGIN</code>, <code>UNITCHECK</code>, <code>CHECK</code>, <code>INIT</code> or <code>END</code> block, or
 in a <code>DESTROY</code> method.</p>
 <p style="padding-bottom: 10px;">This function should have been named wantlist() instead.</p></dd></dl>

@@ -2,23 +2,23 @@
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">pos</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the offset of where the last <code>m//g</code> search left off for the
-variable in question (<a href="psi_element://perlvar%2F%24_">C<$_></a> is used when the variable is not
+variable in question (<a href="psi_element://perlvar%2F%24_"><code>$_</code></a> is used when the variable is not
 specified).  This offset is in characters unless the
-(no-longer-recommended) <a href="psi_element://bytes" style="color:red">C<use bytes></a> pragma is in effect, in
+(no-longer-recommended) <a href="psi_element://bytes" style="color:red"><code>use bytes</code></a> pragma is in effect, in
 which case the offset is in bytes.  Note that 0 is a valid match offset.
-<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> indicates
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> indicates
 that the search position is reset (usually due to match failure, but
 can also be because no match has yet been run on the scalar).</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR">C<pos></a> directly accesses the location used by the regexp
-engine to store the offset, so assigning to <a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR">C<pos></a> will
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR"><code>pos</code></a> directly accesses the location used by the regexp
+engine to store the offset, so assigning to <a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR"><code>pos</code></a> will
 change that offset, and so will also influence the <code>\G</code> zero-width
 assertion in regular expressions.  Both of these effects take place for
 the next match, so you can't affect the position with
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR">C<pos></a> during the current match, such as in
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR"><code>pos</code></a> during the current match, such as in
 <code>(?{pos() = 5})</code> or <code>s//pos() = 5/e</code>.</p>
-<p style="padding-bottom: 10px;">Setting <a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR">C<pos></a> also resets the <i>matched with
+<p style="padding-bottom: 10px;">Setting <a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR"><code>pos</code></a> also resets the <i>matched with
 zero-length</i> flag, described
 under <a href="psi_element://perlre%2FRepeated+Patterns+Matching+a+Zero-length+Substring">Repeated Patterns Matching a Zero-length Substring in perlre</a>.</p>
 <p style="padding-bottom: 10px;">Because a failed <code>m//gc</code> match doesn't reset the offset, the return
-from <a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR">C<pos></a> won't change either in this case.  See
+from <a href="psi_element://pod%3A%3Aperlfunc%2Fpos+SCALAR"><code>pos</code></a> won't change either in this case.  See
 <a href="psi_element://perlre">perlre</a> and <a href="psi_element://perlop">perlop</a>.</p></dd></dl>

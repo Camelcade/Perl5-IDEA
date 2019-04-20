@@ -4,7 +4,7 @@
 <p style="padding-bottom: 10px;">Creates a digest string exactly like the <a href="psi_element://crypt%283%29" style="color:red">crypt(3)</a> function in the C
 library (assuming that you actually have a version there that has not
 been extirpated as a potential munition).</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> is a one-way hash function.  The
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> is a one-way hash function.  The
 PLAINTEXT and SALT are turned
 into a short string, called a digest, which is returned.  The same
 PLAINTEXT and SALT will always return the same string, but there is no
@@ -18,14 +18,14 @@ primarily used to check if two pieces of text are the same without
 having to transmit or store the text itself.  An example is checking
 if a correct password is given.  The digest of the password is stored,
 not the password itself.  The user types in a password that is
-<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a>'d with the same salt as the stored
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a>'d with the same salt as the stored
 digest.  If the two digests match, the password is correct.</p>
 <p style="padding-bottom: 10px;">When verifying an existing digest string you should use the digest as
 the salt (like <code>crypt($plain, $digest) eq $digest</code>).  The SALT used
 to create the digest is visible as part of the digest.  This ensures
-<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> will hash the new string with the same
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> will hash the new string with the same
 salt as the digest.  This allows your code to work with the standard
-<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> and with more exotic implementations.
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> and with more exotic implementations.
 In other words, assume nothing about the returned string itself nor
 about how many bytes of SALT may matter.</p>
 <p style="padding-bottom: 10px;">Traditionally the result is a string of 13 bytes: two first bytes of
@@ -39,7 +39,7 @@ characters come from the set <code>[./0-9A-Za-z]</code> (like <code>join '', ('.
 '/', 0..9, 'A'..'Z', 'a'..'z')[rand 64, rand 64]</code>).  This set of
 characters is just a recommendation; the characters allowed in
 the salt depend solely on your system's crypt library, and Perl can't
-restrict what salts <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> accepts.</p>
+restrict what salts <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> accepts.</p>
 <p style="padding-bottom: 10px;">Here's an example that makes sure that whoever runs this program knows
 their password:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $pwd = (getpwuid($&lt;))[1];
@@ -57,15 +57,15 @@ their password:</p>
     }</code></pre></div>
 <p style="padding-bottom: 10px;">Of course, typing in your own password to whoever asks you
 for it is unwise.</p>
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> function is unsuitable for hashing
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> function is unsuitable for hashing
 large quantities of data, not least of all because you can't get the
 information back.  Look at the <a href="psi_element://Digest" style="color:red">Digest</a> module for more robust
 algorithms.</p>
-<p style="padding-bottom: 10px;">If using <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> on a Unicode string (which
+<p style="padding-bottom: 10px;">If using <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> on a Unicode string (which
 <i>potentially</i> has characters with codepoints above 255), Perl tries to
 make sense of the situation by trying to downgrade (a copy of) the
 string back to an eight-bit byte string before calling
-<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> (on that copy).  If that works, good.
-If not, <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT">C<crypt></a> dies with
-<a href="psi_element://perldiag%2FWide+character+in+%25s">C<Wide character in crypt></a>.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> (on that copy).  If that works, good.
+If not, <a href="psi_element://pod%3A%3Aperlfunc%2Fcrypt+PLAINTEXT%2CSALT"><code>crypt</code></a> dies with
+<a href="psi_element://perldiag%2FWide+character+in+%25s"><code>Wide character in crypt</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fcrypt">crypt in perlport</a>.</p></dd></dl>

@@ -3,9 +3,9 @@
 <div style="padding-bottom: 10px;"><pre><code>    use IPC::SysV;</code></pre></div>
 <p style="padding-bottom: 10px;">first to get the correct constant definitions.  If CMD is <code>IPC_STAT</code>,
 then ARG must be a variable that will hold the returned <code>msqid_ds</code>
-structure.  Returns like <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a>:
+structure.  Returns like <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a>:
 the undefined value for error, <code>&quot;0 but true&quot;</code> for zero, or the actual
 return value otherwise.  See also <a href="psi_element://perlipc%2FSysV+IPC">SysV IPC in perlipc</a> and the
-documentation for <a href="psi_element://IPC%3A%3ASysV" style="color:red">C<IPC::SysV></a> and
-<a href="psi_element://IPC%3A%3ASemaphore" style="color:red">C<IPC::Semaphore></a>.</p>
+documentation for <a href="psi_element://IPC%3A%3ASysV" style="color:red"><code>IPC::SysV</code></a> and
+<a href="psi_element://IPC%3A%3ASemaphore" style="color:red"><code>IPC::Semaphore</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fmsgctl">msgctl in perlport</a>.</p></dd></dl>

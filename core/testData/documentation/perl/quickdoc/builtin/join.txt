@@ -2,6 +2,6 @@
 <p style="padding-bottom: 10px;">Joins the separate strings of LIST into a single string with fields
 separated by the value of EXPR, and returns that new string.  Example:</p>
 <div style="padding-bottom: 10px;"><pre><code>   my $rec = join(':', $login,$passwd,$uid,$gid,$gcos,$home,$shell);</code></pre></div>
-<p style="padding-bottom: 10px;">Beware that unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red">C<split></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fjoin+EXPR%2CLIST">C<join></a> doesn't take a pattern as its first argument.
-Compare <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red">C<split></a>.</p></dd></dl>
+<p style="padding-bottom: 10px;">Beware that unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red"><code>split</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fjoin+EXPR%2CLIST"><code>join</code></a> doesn't take a pattern as its first argument.
+Compare <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red"><code>split</code></a>.</p></dd></dl>

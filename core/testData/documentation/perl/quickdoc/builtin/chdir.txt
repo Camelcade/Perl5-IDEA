@@ -6,9 +6,9 @@
 changes to the directory specified by <code>$ENV{HOME}</code>, if set; if not,
 changes to the directory specified by <code>$ENV{LOGDIR}</code>.  (Under VMS, the
 variable <code>$ENV{'SYS$LOGIN'}</code> is also checked, and used if it is set.)  If
-neither is set, <a href="psi_element://pod%3A%3Aperlfunc%2Fchdir+EXPR">C<chdir></a> does nothing and fails.  It
+neither is set, <a href="psi_element://pod%3A%3Aperlfunc%2Fchdir+EXPR"><code>chdir</code></a> does nothing and fails.  It
 returns true on success, false otherwise.  See the example under
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>.</p>
 <p style="padding-bottom: 10px;">On systems that support <a href="psi_element://fchdir%282%29" style="color:red">fchdir(2)</a>, you may pass a filehandle or
 directory handle as the argument.  On systems that don't support <a href="psi_element://fchdir%282%29" style="color:red">fchdir(2)</a>,
 passing handles raises an exception.</p></dd></dl>

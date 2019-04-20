@@ -129,9 +129,9 @@ public class PodFileUtil {
   }
 
   public static void processPodFilesByDescriptor(Project project, PodLinkDescriptor descriptor, Processor<PsiFile> processor) {
-    if (descriptor.getFileId() != null) {
+    if (descriptor.getName() != null) {
       // seek file
-      String fileId = descriptor.getFileId();
+      String fileId = descriptor.getName();
 
       if (fileId.contains(PerlPackageUtil.PACKAGE_SEPARATOR) || !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
       {

@@ -2,7 +2,7 @@
     </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">log</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the natural logarithm (base <i>e</i>) of EXPR.  If EXPR is omitted,
-returns the log of <a href="psi_element://perlvar%2F%24_">C<$_></a>.  To get the
+returns the log of <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.  To get the
 log of another base, use basic algebra:
 The base-N log of a number is equal to the natural log of that number
 divided by the natural log of N.  For example:</p>
@@ -10,4 +10,4 @@ divided by the natural log of N.  For example:</p>
         my $n = shift;
         return log($n)/log(10);
     }</code></pre></div>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fexp+EXPR">C<exp></a> for the inverse operation.</p></dd></dl>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fexp+EXPR"><code>exp</code></a> for the inverse operation.</p></dd></dl>

@@ -6,9 +6,9 @@ than the value of EXPR.  (EXPR should be positive.)  If EXPR is
 omitted, the value <code>1</code> is used.  Currently EXPR with the value <code>0</code> is
 also special-cased as <code>1</code> (this was undocumented before Perl 5.8.0
 and is subject to change in future versions of Perl).  Automatically calls
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> unless <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a> has already been
-called.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR">C<srand></a>.</p>
-<p style="padding-bottom: 10px;">Apply <a href="psi_element://pod%3A%3Aperlfunc%2Fint+EXPR">C<int></a> to the value returned by <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> unless <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a> has already been
+called.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Fsrand+EXPR"><code>srand</code></a>.</p>
+<p style="padding-bottom: 10px;">Apply <a href="psi_element://pod%3A%3Aperlfunc%2Fint+EXPR"><code>int</code></a> to the value returned by <a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a>
 if you want random integers instead of random fractional numbers.  For
 example,</p>
 <div style="padding-bottom: 10px;"><pre><code>    int(rand(10))</code></pre></div>
@@ -16,7 +16,7 @@ example,</p>
 <p style="padding-bottom: 10px;">(Note: If your rand function consistently returns numbers that are too
 large or too small, then your version of Perl was probably compiled
 with the wrong number of RANDBITS.)</p>
-<p style="padding-bottom: 10px;"><B><a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR">C<rand></a> is not cryptographically secure.  You should not rely
+<p style="padding-bottom: 10px;"><B><a href="psi_element://pod%3A%3Aperlfunc%2Frand+EXPR"><code>rand</code></a> is not cryptographically secure.  You should not rely
 on it in security-sensitive situations.</B>  As of this writing, a
 number of third-party CPAN modules offer random number generators
 intended by their authors to be cryptographically secure,

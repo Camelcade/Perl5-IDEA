@@ -4,20 +4,20 @@
 <dt style="padding-bottom:4px;font-weight:bold;">goto &amp;NAME</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">The <code>goto LABEL</code> form finds the statement labeled with LABEL and
 resumes execution there.  It can't be used to get out of a block or
-subroutine given to <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST">C<sort></a>.  It can be used to go
+subroutine given to <a href="psi_element://pod%3A%3Aperlfunc%2Fsort+SUBNAME+LIST"><code>sort</code></a>.  It can be used to go
 almost anywhere else within the dynamic scope, including out of
 subroutines, but it's usually better to use some other construct such as
-<a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>.  The author of Perl has
-never felt the need to use this form of <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a> (in Perl,
+<a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>.  The author of Perl has
+never felt the need to use this form of <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a> (in Perl,
 that is; C is another matter).  (The difference is that C does not offer
 named loops combined with loop control.  Perl does, and this replaces
-most structured uses of <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a> in other languages.)</p>
+most structured uses of <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a> in other languages.)</p>
 <p style="padding-bottom: 10px;">The <code>goto EXPR</code> form expects to evaluate <code>EXPR</code> to a code reference or
 a label name.  If it evaluates to a code reference, it will be handled
 like <code>goto &amp;NAME</code>, below.  This is especially useful for implementing
 tail recursion via <code>goto __SUB__</code>.</p>
 <p style="padding-bottom: 10px;">If the expression evaluates to a label name, its scope will be resolved
-dynamically.  This allows for computed <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>s per
+dynamically.  This allows for computed <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a>s per
 FORTRAN, but isn't necessarily recommended if you're optimizing for
 maintainability:</p>
 <div style="padding-bottom: 10px;"><pre><code>    goto (&quot;FOO&quot;, &quot;BAR&quot;, &quot;GLARCH&quot;)[$i];</code></pre></div>
@@ -37,16 +37,16 @@ assignment operator's &quot;first&quot; operand is its right-hand
 operand.)  It also can't be used to go into a
 construct that is optimized away.</p>
 <p style="padding-bottom: 10px;">The <code>goto &amp;NAME</code> form is quite different from the other forms of
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>.  In fact, it isn't a goto in the normal sense at
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a>.  In fact, it isn't a goto in the normal sense at
 all, and doesn't have the stigma associated with other gotos.  Instead,
 it exits the current subroutine (losing any changes set by
-<a href="psi_element://pod%3A%3Aperlfunc%2Flocal+EXPR">C<local></a>) and immediately calls in its place the named
-subroutine using the current value of <a href="psi_element://perlvar%2F%40_">C<@_></a>.  This is used
+<a href="psi_element://pod%3A%3Aperlfunc%2Flocal+EXPR"><code>local</code></a>) and immediately calls in its place the named
+subroutine using the current value of <a href="psi_element://perlvar%2F%40_"><code>@_</code></a>.  This is used
 by <code>AUTOLOAD</code> subroutines that wish to load another subroutine and then
 pretend that the other subroutine had been called in the first place
-(except that any modifications to <a href="psi_element://perlvar%2F%40_">C<@_></a> in the current
+(except that any modifications to <a href="psi_element://perlvar%2F%40_"><code>@_</code></a> in the current
 subroutine are propagated to the other subroutine.) After the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>, not even <a href="psi_element://pod%3A%3Aperlfunc%2Fcaller+EXPR">C<caller></a> will be able
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a>, not even <a href="psi_element://pod%3A%3Aperlfunc%2Fcaller+EXPR"><code>caller</code></a> will be able
 to tell that this routine was called first.</p>
 <p style="padding-bottom: 10px;">NAME needn't be the name of a subroutine; it can be a scalar variable
 containing a code reference or a block that evaluates to a code

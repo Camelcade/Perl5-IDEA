@@ -4,7 +4,7 @@
 list must be the numeric mode, which should probably be an octal
 number, and which definitely should <i>not</i> be a string of octal digits:
 <code>0644</code> is okay, but <code>&quot;0644&quot;</code> is not.  Returns the number of files
-successfully changed.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR">C<oct></a> if all you have is a
+successfully changed.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR"><code>oct</code></a> if all you have is a
 string.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $cnt = chmod 0755, &quot;foo&quot;, &quot;bar&quot;;
     chmod 0755, @executables;
@@ -20,7 +20,7 @@ recognized; barewords are considered filenames.</p>
     my $perm = (stat $fh)[2] &amp; 07777;
     chmod($perm | 0600, $fh);</code></pre></div>
 <p style="padding-bottom: 10px;">You can also import the symbolic <code>S_I*</code> constants from the
-<a href="psi_element://Fcntl" style="color:red">C<Fcntl></a> module:</p>
+<a href="psi_element://Fcntl" style="color:red"><code>Fcntl</code></a> module:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Fcntl qw( :mode );
     chmod S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH, @executables;
     # Identical to the chmod 0755 of the example above.</code></pre></div>

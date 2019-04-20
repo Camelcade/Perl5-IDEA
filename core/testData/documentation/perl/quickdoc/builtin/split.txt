@@ -6,7 +6,7 @@
 list in list context, or the size of the list in scalar context.
 (Prior to Perl 5.11, it also overwrote <code>@_</code> with the list in
 void and scalar context. If you target old perls, beware.)</p>
-<p style="padding-bottom: 10px;">If only PATTERN is given, EXPR defaults to <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">If only PATTERN is given, EXPR defaults to <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">Anything in EXPR that matches PATTERN is taken to be a separator
 that separates the EXPR into substrings (called &quot;<i>fields</i>&quot;) that
 do <B>not</B> include the separator.  Note that a separator may be
@@ -23,7 +23,7 @@ However, this:</p>
 <p style="padding-bottom: 10px;">uses empty string matches as separators to produce the output
 <code>a:b:c</code>; thus, the empty string may be used to split EXPR into a
 list of its component characters.</p>
-<p style="padding-bottom: 10px;">As a special case for <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red">C<split></a>,
+<p style="padding-bottom: 10px;">As a special case for <a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red"><code>split</code></a>,
 the empty pattern given in
 <a href="psi_element://perlop%2Fm%2FPATTERN%2Fmsixpodualngc">match operator</a> syntax (<code>//</code>)
 specifically matches the empty string, which is contrary to its usual
@@ -31,11 +31,11 @@ interpretation as the last successful match.</p>
 <p style="padding-bottom: 10px;">If PATTERN is <code>/^/</code>, then it is treated as if it used the
 <a href="psi_element://perlreref%2FOPERATORS">multiline modifier</a> (<code>/^/m</code>), since it
 isn't much use otherwise.</p>
-<p style="padding-bottom: 10px;"><code>&sol;m</code> and any of the other pattern modifiers valid for <code>qr</code>
-(summarized in <a href="psi_element://perlop%2FqrE%3Csol%3ESTRINGE%3Csol%3Emsixpodualn" style="color:red">qrE<sol>STRINGE<sol>msixpodualn in perlop</a>) may be
+<p style="padding-bottom: 10px;"><code>/m</code> and any of the other pattern modifiers valid for <code>qr</code>
+(summarized in <a href="psi_element://perlop%2FqrE%3Csol%3ESTRINGE%3Csol%3Emsixpodualn" style="color:red">qr/STRING/msixpodualn in perlop</a>) may be
 specified explicitly.</p>
 <p style="padding-bottom: 10px;">As another special case,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red">C<split></a> emulates the default
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsplit+E%3Csol%3EPATTERNE%3Csol%3E%2CEXPR%2CLIMIT" style="color:red"><code>split</code></a> emulates the default
 behavior of the
 command line tool <B>awk</B> when the PATTERN is either omitted or a
 string composed of a single space character (such as <span style="white-space: nowrap;"><code>' '</code></span> or
@@ -50,8 +50,8 @@ special case was restricted to the use of a plain <span style="white-space: nowr
 pattern argument to split; in Perl 5.18.0 and later this special case is
 triggered by any expression which evaluates to the simple string <span style="white-space: nowrap;"><code>&quot; &quot;</code></span>.</p>
 <p style="padding-bottom: 10px;">As of Perl 5.28, this special-cased whitespace splitting works as expected in
-the scope of <a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red">S<C<"use feature 'unicode_strings">></a>. In previous versions, and outside the scope of
-that feature, it exhibits <a href="psi_element://perlunicode%2FThe+%22Unicode+Bug%22">The "Unicode Bug" in perlunicode</a>: characters that are
+the scope of <a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red"><span style="white-space: nowrap;"><code>&quot;use feature 'unicode_strings&quot;</code></span></a>. In previous versions, and outside the scope of
+that feature, it exhibits <a href="psi_element://perlunicode%2FThe+%22Unicode+Bug%22">The &quot;Unicode Bug&quot; in perlunicode</a>: characters that are
 whitespace according to Unicode rules but not according to ASCII rules can be
 treated as part of fields rather than as field separators, depending on the
 string's internal encoding.</p>
@@ -107,7 +107,7 @@ removed, as in the last example).  Thus:</p>
 then for each separator, an additional field is produced for each substring
 captured by a group (in the order in which the groups are specified,
 as per <a href="psi_element://perlretut%2FBackreferences">backreferences</a>); if any group does not
-match, then it captures the <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> value instead of a
+match, then it captures the <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> value instead of a
 substring.  Also,
 note that any such additional field is produced whenever there is a
 separator (that is, whenever a split occurs), and such an additional field

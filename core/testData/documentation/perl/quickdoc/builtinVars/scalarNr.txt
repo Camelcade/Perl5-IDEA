@@ -15,7 +15,7 @@ the filehandle's line count</i>.  Instead, it will localize perl's notion
 of which filehandle <code>$.</code> is currently aliased to.</p>
 <p style="padding-bottom: 10px;"><code>$.</code> is reset when the filehandle is closed, but <B>not</B> when an open
 filehandle is reopened without an intervening <code>close()</code>.  For more
-details, see <a href="psi_element://perlop%2FIE%3Csol%3EO+Operators" style="color:red">IE<sol>O Operators in perlop</a>.  Because <code>&lt;&gt;</code> never does
+details, see <a href="psi_element://perlop%2FIE%3Csol%3EO+Operators" style="color:red">I/O Operators in perlop</a>.  Because <code>&lt;&gt;</code> never does
 an explicit close, line numbers increase across <code>ARGV</code> files (but see
 examples in <a href="psi_element://perlfunc%2Feof">eof in perlfunc</a>).</p>
 <p style="padding-bottom: 10px;">You can also use <code>HANDLE-&gt;input_line_number(EXPR)</code> to access the

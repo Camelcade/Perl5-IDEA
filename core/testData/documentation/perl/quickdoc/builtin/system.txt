@@ -1,7 +1,7 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">system LIST
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">system PROGRAM LIST</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">Does exactly the same thing as <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a>, except that a fork is
+<p style="padding-bottom: 10px;">Does exactly the same thing as <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a>, except that a fork is
 done first and the parent process waits for the child process to
 exit.  Note that argument processing varies depending on the
 number of arguments.  If there is more than one argument in LIST,
@@ -19,33 +19,33 @@ element, will fall back to the shell if the first spawn fails.</p>
 <p style="padding-bottom: 10px;">Perl will attempt to flush all files opened for
 output before any operation that may do a fork, but this may not be
 supported on some platforms (see <a href="psi_element://perlport">perlport</a>).  To be safe, you may need
-to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a> (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>)
-or call the <code>autoflush</code> method of <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red">C<IO::Handle></a>
+to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a> (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>)
+or call the <code>autoflush</code> method of <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red"><code>IO::Handle</code></a>
 on any open handles.</p>
 <p style="padding-bottom: 10px;">The return value is the exit status of the program as returned by the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fwait">C<wait></a> call.  To get the actual exit value, shift right by
-eight (see below).  See also <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a>.  This is <i>not</i> what
+<a href="psi_element://pod%3A%3Aperlfunc%2Fwait"><code>wait</code></a> call.  To get the actual exit value, shift right by
+eight (see below).  See also <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a>.  This is <i>not</i> what
 you want to use to capture the output from a command; for that you
 should use merely backticks or
-<a href="psi_element://pod%3A%3Aperlfunc%2FqxE%3Csol%3ESTRINGE%3Csol%3E" style="color:red">C<qxE<sol>E<sol>></a>, as described in
+<a href="psi_element://pod%3A%3Aperlfunc%2FqxE%3Csol%3ESTRINGE%3Csol%3E" style="color:red"><code>qx//</code></a>, as described in
 <a href="psi_element://perlop%2F%60STRING%60">`STRING` in perlop</a>.  Return value of -1 indicates a failure to start
 the program or an error of the <a href="psi_element://wait%282%29" style="color:red">wait(2)</a> system call (inspect
-<a href="psi_element://perlvar%2F%24%21">C<$!></a> for the reason).</p>
-<p style="padding-bottom: 10px;">If you'd like to make <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a> (and many other bits of
+<a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> for the reason).</p>
+<p style="padding-bottom: 10px;">If you'd like to make <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a> (and many other bits of
 Perl) die on error, have a look at the <a href="psi_element://autodie" style="color:red">autodie</a> pragma.</p>
-<p style="padding-bottom: 10px;">Like <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a> allows you to lie
+<p style="padding-bottom: 10px;">Like <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a> allows you to lie
 to a program about its name if you use the <code>system PROGRAM LIST</code>
-syntax.  Again, see <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a>.</p>
+syntax.  Again, see <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a>.</p>
 <p style="padding-bottom: 10px;">Since <code>SIGINT</code> and <code>SIGQUIT</code> are ignored during the execution of
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a>, if you expect your program to terminate on
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>, if you expect your program to terminate on
 receipt of these signals you will need to arrange to do so yourself
 based on the return value.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my @args = (&quot;command&quot;, &quot;arg1&quot;, &quot;arg2&quot;);
     system(@args) == 0
         or die &quot;system @args failed: $?&quot;;</code></pre></div>
-<p style="padding-bottom: 10px;">If you'd like to manually inspect <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a>'s failure,
+<p style="padding-bottom: 10px;">If you'd like to manually inspect <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>'s failure,
 you can check all possible failure modes by inspecting
-<a href="psi_element://perlvar%2F%24%3F">C<$?></a> like this:</p>
+<a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a> like this:</p>
 <div style="padding-bottom: 10px;"><pre><code>    if ($? == -1) {
         print &quot;failed to execute: $!\n&quot;;
     }
@@ -57,12 +57,12 @@ you can check all possible failure modes by inspecting
         printf &quot;child exited with value %d\n&quot;, $? &gt;&gt; 8;
     }</code></pre></div>
 <p style="padding-bottom: 10px;">Alternatively, you may inspect the value of
-<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D">C<${^CHILD_ERROR_NATIVE}></a> with the
-<a href="psi_element://POSIX%2FC%3CWIFEXITED%3E" style="color:red">C<W*()></a> calls from the <a href="psi_element://POSIX" style="color:red">POSIX</a> module.</p>
-<p style="padding-bottom: 10px;">When <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a>'s arguments are executed indirectly by
+<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D"><code>${^CHILD_ERROR_NATIVE}</code></a> with the
+<a href="psi_element://POSIX%2FC%3CWIFEXITED%3E" style="color:red"><code>W*()</code></a> calls from the <a href="psi_element://POSIX" style="color:red">POSIX</a> module.</p>
+<p style="padding-bottom: 10px;">When <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>'s arguments are executed indirectly by
 the shell, results and return codes are subject to its quirks.
-See <a href="psi_element://perlop%2F%60STRING%60">`STRING` in perlop</a> and <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST">C<exec></a> for details.</p>
-<p style="padding-bottom: 10px;">Since <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST">C<system></a> does a <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> and
-<a href="psi_element://pod%3A%3Aperlfunc%2Fwait">C<wait></a> it may affect a <code>SIGCHLD</code> handler.  See <a href="psi_element://perlipc">perlipc</a> for
+See <a href="psi_element://perlop%2F%60STRING%60">`STRING` in perlop</a> and <a href="psi_element://pod%3A%3Aperlfunc%2Fexec+LIST"><code>exec</code></a> for details.</p>
+<p style="padding-bottom: 10px;">Since <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a> does a <a href="psi_element://pod%3A%3Aperlfunc%2Ffork"><code>fork</code></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fwait"><code>wait</code></a> it may affect a <code>SIGCHLD</code> handler.  See <a href="psi_element://perlipc">perlipc</a> for
 details.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsystem">system in perlport</a>.</p></dd></dl>

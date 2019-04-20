@@ -2,25 +2,25 @@
 <p style="padding-bottom: 10px;">Implements the <a href="psi_element://fcntl%282%29" style="color:red">fcntl(2)</a> function.  You'll probably have to say</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Fcntl;</code></pre></div>
 <p style="padding-bottom: 10px;">first to get the correct constant definitions.  Argument processing and
-value returned work just like <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a> below.  For example:</p>
+value returned work just like <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a> below.  For example:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Fcntl;
     my $flags = fcntl($filehandle, F_GETFL, 0)
         or die &quot;Can't fcntl F_GETFL: $!&quot;;</code></pre></div>
-<p style="padding-bottom: 10px;">You don't have to check for <a href="psi_element://pod%3A%3Aperlfunc%2Fdefined+EXPR">C<defined></a> on the return
-from <a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<fcntl></a>.  Like
-<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a>, it maps a <code>0</code> return
+<p style="padding-bottom: 10px;">You don't have to check for <a href="psi_element://pod%3A%3Aperlfunc%2Fdefined+EXPR"><code>defined</code></a> on the return
+from <a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>fcntl</code></a>.  Like
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a>, it maps a <code>0</code> return
 from the system call into <code>&quot;0 but true&quot;</code> in Perl.  This string is true
 in boolean context and <code>0</code> in numeric context.  It is also exempt from
 the normal
-<a href="psi_element://perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s">C<Argument "..." isn't numeric></a>
+<a href="psi_element://perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s"><code>Argument &quot;...&quot; isn't numeric</code></a>
 <a href="psi_element://warnings" style="color:red">warnings</a> on improper numeric conversions.</p>
-<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<fcntl></a> raises an
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>fcntl</code></a> raises an
 exception if used on a machine that doesn't implement <a href="psi_element://fcntl%282%29" style="color:red">fcntl(2)</a>.  See
 the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module or your <a href="psi_element://fcntl%282%29" style="color:red">fcntl(2)</a> manpage to learn what functions
 are available on your system.</p>
 <p style="padding-bottom: 10px;">Here's an example of setting a filehandle named <code>$REMOTE</code> to be
 non-blocking at the system level.  You'll have to negotiate
-<a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red">C<$E<verbar>></a> on your own, though.</p>
+<a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a> on your own, though.</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Fcntl qw(F_GETFL F_SETFL O_NONBLOCK);
 
     my $flags = fcntl($REMOTE, F_GETFL, 0)

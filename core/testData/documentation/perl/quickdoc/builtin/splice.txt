@@ -5,7 +5,7 @@
 <p style="padding-bottom: 10px;">Removes the elements designated by OFFSET and LENGTH from an array, and
 replaces them with the elements of LIST, if any.  In list context,
 returns the elements removed from the array.  In scalar context,
-returns the last element removed, or <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> if no
+returns the last element removed, or <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> if no
 elements are
 removed.  The array grows or shrinks as necessary.
 If OFFSET is negative then it starts that far from the end of the array.
@@ -21,7 +21,7 @@ and splices at the end of the array.</p>
     shift(@a)           splice(@a,0,1)
     unshift(@a,$x,$y)   splice(@a,0,0,$x,$y)
     $a[$i] = $y         splice(@a,$i,1,$y)</code></pre></div>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST">C<splice></a> can be used, for example,
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST"><code>splice</code></a> can be used, for example,
 to implement n-ary queue processing:</p>
 <div style="padding-bottom: 10px;"><pre><code>    sub nary_print {
       my $n = shift;
@@ -36,6 +36,6 @@ to implement n-ary queue processing:</p>
     #   d -- e -- f
     #   g -- h</code></pre></div>
 <p style="padding-bottom: 10px;">Starting with Perl 5.14, an experimental feature allowed
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST">C<splice></a> to take a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST"><code>splice</code></a> to take a
 scalar expression. This experiment has been deemed unsuccessful, and was
 removed as of Perl 5.24.</p></dd></dl>

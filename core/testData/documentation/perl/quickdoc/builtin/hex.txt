@@ -2,17 +2,17 @@
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">hex</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Interprets EXPR as a hex string and returns the corresponding numeric value.
-If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <div style="padding-bottom: 10px;"><pre><code>    print hex '0xAf'; # prints '175'
     print hex 'aF';   # same
     $valid_input =~ /\A(?:0?[xX])?(?:_?[0-9a-fA-F])*\z/</code></pre></div>
 <p style="padding-bottom: 10px;">A hex string consists of hex digits and an optional <code>0x</code> or <code>x</code> prefix.
 Each hex digit may be preceded by a single underscore, which will be ignored.
 Any other character triggers a warning and causes the rest of the string
-to be ignored (even leading whitespace, unlike <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR">C<oct></a>).
+to be ignored (even leading whitespace, unlike <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR"><code>oct</code></a>).
 Only integers can be represented, and integer overflow triggers a warning.</p>
 <p style="padding-bottom: 10px;">To convert strings that might start with any of <code>0</code>, <code>0x</code>, or <code>0b</code>,
-see <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR">C<oct></a>.  To present something as hex, look into
-<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a>, and
-<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>.</p></dd></dl>
+see <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR"><code>oct</code></a>.  To present something as hex, look into
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a>, and
+<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>.</p></dd></dl>

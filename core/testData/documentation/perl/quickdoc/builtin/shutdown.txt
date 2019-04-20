@@ -9,6 +9,6 @@ side you're done writing but not done reading, or vice versa.
 It's also a more insistent form of close because it also
 disables the file descriptor in any forked copies in other
 processes.</p>
-<p style="padding-bottom: 10px;">Returns <code>1</code> for success; on error, returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> if
+<p style="padding-bottom: 10px;">Returns <code>1</code> for success; on error, returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> if
 the first argument is not a valid filehandle, or returns <code>0</code> and sets
-<a href="psi_element://perlvar%2F%24%21">C<$!></a> for any other failure.</p></dd></dl>
+<a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> for any other failure.</p></dd></dl>

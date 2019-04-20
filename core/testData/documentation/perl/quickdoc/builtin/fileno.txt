@@ -4,10 +4,10 @@
 or undefined if the
 filehandle is not open.  If there is no real file descriptor at the OS
 level, as can happen with filehandles connected to memory objects via
-<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> with a reference for the third
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a> with a reference for the third
 argument, -1 is returned.</p>
 <p style="padding-bottom: 10px;">This is mainly useful for constructing bitmaps for
-<a href="psi_element://pod%3A%3Aperlfunc%2Fselect+RBITS%2CWBITS%2CEBITS%2CTIMEOUT">C<select></a> and low-level POSIX
+<a href="psi_element://pod%3A%3Aperlfunc%2Fselect+RBITS%2CWBITS%2CEBITS%2CTIMEOUT"><code>select</code></a> and low-level POSIX
 tty-handling operations.
 If FILEHANDLE is an expression, the value is taken as an indirect
 filehandle, generally its name.</p>
@@ -22,9 +22,9 @@ same underlying descriptor:</p>
         print &quot;At least one of \$this and \$that does &quot; .
             &quot;not have a real file descriptor\n&quot;;
     }</code></pre></div>
-<p style="padding-bottom: 10px;">The behavior of <a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE">C<fileno></a> on a directory handle
+<p style="padding-bottom: 10px;">The behavior of <a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE"><code>fileno</code></a> on a directory handle
 depends on the operating system.  On a system with <a href="psi_element://dirfd%283%29" style="color:red">dirfd(3)</a> or
-similar, <a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE">C<fileno></a> on a directory
+similar, <a href="psi_element://pod%3A%3Aperlfunc%2Ffileno+FILEHANDLE"><code>fileno</code></a> on a directory
 handle returns the underlying file descriptor associated with the
 handle; on systems with no such support, it returns the undefined value,
-and sets <a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno).</p></dd></dl>
+and sets <a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> (errno).</p></dd></dl>

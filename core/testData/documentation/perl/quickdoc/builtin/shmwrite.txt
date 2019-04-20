@@ -5,8 +5,8 @@ detaching from it.  When reading, VAR must be a variable that will
 hold the data read.  When writing, if STRING is too long, only SIZE
 bytes are used; if STRING is too short, nulls are written to fill out
 SIZE bytes.  Return true if successful, false on error.
-<a href="psi_element://pod%3A%3Aperlfunc%2Fshmread+ID%2CVAR%2CPOS%2CSIZE">C<shmread></a> taints the variable.  See also
+<a href="psi_element://pod%3A%3Aperlfunc%2Fshmread+ID%2CVAR%2CPOS%2CSIZE"><code>shmread</code></a> taints the variable.  See also
 <a href="psi_element://perlipc%2FSysV+IPC">SysV IPC in perlipc</a> and the documentation for
-<a href="psi_element://IPC%3A%3ASysV" style="color:red">C<IPC::SysV></a> and the <a href="psi_element://IPC%3A%3AShareable" style="color:red">C<IPC::Shareable></a>
+<a href="psi_element://IPC%3A%3ASysV" style="color:red"><code>IPC::SysV</code></a> and the <a href="psi_element://IPC%3A%3AShareable" style="color:red"><code>IPC::Shareable</code></a>
 module from CPAN.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fshmread">shmread in perlport</a> and <a href="psi_element://perlport%2Fshmwrite">shmwrite in perlport</a>.</p></dd></dl>

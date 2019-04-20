@@ -1,7 +1,7 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">import LIST</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">There is no builtin <a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> function.  It is just an
+<p style="padding-bottom: 10px;">There is no builtin <a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST"><code>import</code></a> function.  It is just an
 ordinary method (subroutine) defined (or inherited) by modules that wish
 to export names to another module.  The
-<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a> function calls the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST">C<import></a> method for the package used.  See also
-<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST">C<use></a>, <a href="psi_element://perlmod">perlmod</a>, and <a href="psi_element://Exporter" style="color:red">Exporter</a>.</p></dd></dl>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST"><code>use</code></a> function calls the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fimport+LIST"><code>import</code></a> method for the package used.  See also
+<a href="psi_element://pod%3A%3Aperlfunc%2Fuse+Module+VERSION+LIST"><code>use</code></a>, <a href="psi_element://perlmod">perlmod</a>, and <a href="psi_element://Exporter" style="color:red">Exporter</a>.</p></dd></dl>

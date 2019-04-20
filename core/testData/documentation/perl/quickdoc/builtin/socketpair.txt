@@ -5,9 +5,9 @@ for the syscall of the same name.  If unimplemented, raises an exception.
 Returns true if successful.</p>
 <p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, the flag will
 be set for the newly opened file descriptors, as determined by the value
-of <a href="psi_element://perlvar%2F%24%5EF">C<$^F></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p>
-<p style="padding-bottom: 10px;">Some systems define <a href="psi_element://pod%3A%3Aperlfunc%2Fpipe+READHANDLE%2CWRITEHANDLE">C<pipe></a> in terms of
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsocketpair+SOCKET1%2CSOCKET2%2CDOMAIN%2CTYPE%2CPROTOCOL">C<socketpair></a>, in
+of <a href="psi_element://perlvar%2F%24%5EF"><code>$^F</code></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p>
+<p style="padding-bottom: 10px;">Some systems define <a href="psi_element://pod%3A%3Aperlfunc%2Fpipe+READHANDLE%2CWRITEHANDLE"><code>pipe</code></a> in terms of
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsocketpair+SOCKET1%2CSOCKET2%2CDOMAIN%2CTYPE%2CPROTOCOL"><code>socketpair</code></a>, in
 which a call to <code>pipe($rdr, $wtr)</code> is essentially:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Socket;
     socketpair(my $rdr, my $wtr, AF_UNIX, SOCK_STREAM, PF_UNSPEC);

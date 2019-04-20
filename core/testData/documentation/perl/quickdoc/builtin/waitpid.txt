@@ -3,8 +3,8 @@
 the deceased process, or <code>-1</code> if there is no such child process.  A
 non-blocking wait (with <a href="psi_element://POSIX%2FC%3CWNOHANG%3E" style="color:red">WNOHANG</a> in FLAGS) can return 0 if
 there are child processes matching PID but none have terminated yet.
-The status is returned in <a href="psi_element://perlvar%2F%24%3F">C<$?></a> and
-<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D">C<${^CHILD_ERROR_NATIVE}></a>.</p>
+The status is returned in <a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a> and
+<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D"><code>${^CHILD_ERROR_NATIVE}</code></a>.</p>
 <p style="padding-bottom: 10px;">A PID of <code>0</code> indicates to wait for any child process whose process group ID is
 equal to that of the current process.  A PID of less than <code>-1</code> indicates to
 wait for any child process whose process group ID is equal to -PID.  A PID of

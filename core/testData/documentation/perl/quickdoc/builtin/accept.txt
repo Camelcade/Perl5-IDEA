@@ -4,4 +4,4 @@ does.  Returns the packed address if it succeeded, false otherwise.
 See the example in <a href="psi_element://perlipc%2FSockets%3A+Client%2FServer+Communication">Sockets: Client/Server Communication in perlipc</a>.</p>
 <p style="padding-bottom: 10px;">On systems that support a close-on-exec flag on files, the flag will
 be set for the newly opened file descriptor, as determined by the
-value of <a href="psi_element://perlvar%2F%24%5EF">C<$^F></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p></dd></dl>
+value of <a href="psi_element://perlvar%2F%24%5EF"><code>$^F</code></a>.  See <a href="psi_element://perlvar%2F%24%5EF">$^F in perlvar</a>.</p></dd></dl>

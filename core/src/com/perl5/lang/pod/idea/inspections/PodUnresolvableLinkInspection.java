@@ -47,8 +47,8 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool {
               String fileName = "UNKNONW";
               PodLinkDescriptor descriptor = o.getLinkDescriptor();
 
-              if (descriptor != null && descriptor.getFileId() != null) {
-                fileName = descriptor.getFileId();
+              if (descriptor != null && descriptor.getName() != null) {
+                fileName = descriptor.getName();
               }
 
               error = "Can't find POD or PM file by: " + fileName;

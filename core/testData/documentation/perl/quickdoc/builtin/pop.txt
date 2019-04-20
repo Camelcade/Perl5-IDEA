@@ -5,10 +5,10 @@
 one element.</p>
 <p style="padding-bottom: 10px;">Returns the undefined value if the array is empty, although this may
 also happen at other times.  If ARRAY is omitted, pops the
-<a href="psi_element://perlvar%2F%40ARGV">C<@ARGV></a> array in the main program, but the
-<a href="psi_element://perlvar%2F%40_">C<@_></a> array in subroutines, just like
-<a href="psi_element://pod%3A%3Aperlfunc%2Fshift+ARRAY">C<shift></a>.</p>
+<a href="psi_element://perlvar%2F%40ARGV"><code>@ARGV</code></a> array in the main program, but the
+<a href="psi_element://perlvar%2F%40_"><code>@_</code></a> array in subroutines, just like
+<a href="psi_element://pod%3A%3Aperlfunc%2Fshift+ARRAY"><code>shift</code></a>.</p>
 <p style="padding-bottom: 10px;">Starting with Perl 5.14, an experimental feature allowed
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpop+ARRAY">C<pop></a> to take a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpop+ARRAY"><code>pop</code></a> to take a
 scalar expression. This experiment has been deemed unsuccessful, and was
 removed as of Perl 5.24.</p></dd></dl>

@@ -4,23 +4,23 @@
 <p style="padding-bottom: 10px;">Evaluates EXPR and exits immediately with that value.    Example:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $ans = &lt;STDIN&gt;;
     exit 0 if $ans =~ /^[Xx]/;</code></pre></div>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>.  If EXPR is omitted, exits with <code>0</code>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>.  If EXPR is omitted, exits with <code>0</code>
 status.  The only
 universally recognized values for EXPR are <code>0</code> for success and <code>1</code>
 for error; other values are subject to interpretation depending on the
 environment in which the Perl program is running.  For example, exiting
 69 (EX_UNAVAILABLE) from a <i>sendmail</i> incoming-mail filter will cause
 the mailer to return the item undelivered, but that's not true everywhere.</p>
-<p style="padding-bottom: 10px;">Don't use <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR">C<exit></a> to abort a subroutine if there's any
+<p style="padding-bottom: 10px;">Don't use <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR"><code>exit</code></a> to abort a subroutine if there's any
 chance that someone might want to trap whatever error happened.  Use
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> instead, which can be trapped by an
-<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR">C<eval></a>.</p>
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR">C<exit></a> function does not always exit immediately.  It
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a> instead, which can be trapped by an
+<a href="psi_element://pod%3A%3Aperlfunc%2Feval+EXPR"><code>eval</code></a>.</p>
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Fexit+EXPR"><code>exit</code></a> function does not always exit immediately.  It
 calls any defined <code>END</code> routines first, but these <code>END</code> routines may
 not themselves abort the exit.  Likewise any object destructors that
 need to be called are called before the real exit.  <code>END</code> routines and
-destructors can change the exit status by modifying <a href="psi_element://perlvar%2F%24%3F">C<$?></a>.
+destructors can change the exit status by modifying <a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a>.
 If this is a problem, you can call
-<a href="psi_element://POSIX%2FC%3C_exit%3E" style="color:red">C<POSIX::_exit($status)></a> to avoid <code>END</code> and destructor
+<a href="psi_element://POSIX%2FC%3C_exit%3E" style="color:red"><code>POSIX::_exit($status)</code></a> to avoid <code>END</code> and destructor
 processing.  See <a href="psi_element://perlmod">perlmod</a> for details.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fexit">exit in perlport</a>.</p></dd></dl>

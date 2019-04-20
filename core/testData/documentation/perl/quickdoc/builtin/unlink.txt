@@ -3,22 +3,22 @@
 <dt style="padding-bottom:4px;font-weight:bold;">unlink</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Deletes a list of files.  On success, it returns the number of files
 it successfully deleted.  On failure, it returns false and sets
-<a href="psi_element://perlvar%2F%24%21">C<$!></a> (errno):</p>
+<a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> (errno):</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $unlinked = unlink 'a', 'b', 'c';
     unlink @goners;
     unlink glob &quot;*.bak&quot;;</code></pre></div>
-<p style="padding-bottom: 10px;">On error, <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST">C<unlink></a> will not tell you which files it
+<p style="padding-bottom: 10px;">On error, <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST"><code>unlink</code></a> will not tell you which files it
 could not remove.
 If you want to know which files you could not remove, try them one
 at a time:</p>
 <div style="padding-bottom: 10px;"><pre><code>     foreach my $file ( @goners ) {
          unlink $file or warn &quot;Could not unlink $file: $!&quot;;
      }</code></pre></div>
-<p style="padding-bottom: 10px;">Note: <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST">C<unlink></a> will not attempt to delete directories
+<p style="padding-bottom: 10px;">Note: <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST"><code>unlink</code></a> will not attempt to delete directories
 unless you are
 superuser and the <B>-U</B> flag is supplied to Perl.  Even if these
 conditions are met, be warned that unlinking a directory can inflict
-damage on your filesystem.  Finally, using <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST">C<unlink></a> on
+damage on your filesystem.  Finally, using <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST"><code>unlink</code></a> on
 directories is not supported on many operating systems.  Use
-<a href="psi_element://pod%3A%3Aperlfunc%2Frmdir+FILENAME">C<rmdir></a> instead.</p>
-<p style="padding-bottom: 10px;">If LIST is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST">C<unlink></a> uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p></dd></dl>
+<a href="psi_element://pod%3A%3Aperlfunc%2Frmdir+FILENAME"><code>rmdir</code></a> instead.</p>
+<p style="padding-bottom: 10px;">If LIST is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Funlink+LIST"><code>unlink</code></a> uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p></dd></dl>

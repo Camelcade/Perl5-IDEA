@@ -10,7 +10,7 @@ See <a href="psi_element://perlipc%2FUDP%3A+Message+Passing">UDP: Message Passin
 <p style="padding-bottom: 10px;">Note the <i>characters</i>: depending on the status of the socket, either
 (8-bit) bytes or characters are received.  By default all sockets
 operate on bytes, but for example if the socket has been changed using
-<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER">C<binmode></a> to operate with the
+<a href="psi_element://pod%3A%3Aperlfunc%2Fbinmode+FILEHANDLE%2C+LAYER"><code>binmode</code></a> to operate with the
 <code>:encoding(UTF-8)</code> I/O layer (see the <a href="psi_element://open" style="color:red">open</a> pragma), the I/O will
 operate on UTF8-encoded Unicode
 characters, not bytes.  Similarly for the <code>:encoding</code> layer: in that

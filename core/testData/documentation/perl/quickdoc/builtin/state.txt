@@ -2,20 +2,20 @@
 <dt style="padding-bottom:4px;font-weight:bold;">state TYPE VARLIST</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">state VARLIST : ATTRS</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">state TYPE VARLIST : ATTRS</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST">C<state></a> declares a lexically scoped variable, just
-like <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST">C<my></a>.
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST"><code>state</code></a> declares a lexically scoped variable, just
+like <a href="psi_element://pod%3A%3Aperlfunc%2Fmy+VARLIST"><code>my</code></a>.
 However, those variables will never be reinitialized, contrary to
 lexical variables that are reinitialized each time their enclosing block
 is entered.
 See <a href="psi_element://perlsub%2FPersistent+Private+Variables">Persistent Private Variables in perlsub</a> for details.</p>
 <p style="padding-bottom: 10px;">If more than one variable is listed, the list must be placed in
-parentheses.  With a parenthesised list, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> can be
+parentheses.  With a parenthesised list, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> can be
 used as a
 dummy placeholder.  However, since initialization of state variables in
 such lists is currently not possible this would serve no purpose.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST">C<state></a> is available only if the
-<a href="psi_element://feature%2FThe+%27state%27+feature" style="color:red">C<"state"> feature</a> is enabled or if it is
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fstate+VARLIST"><code>state</code></a> is available only if the
+<a href="psi_element://feature%2FThe+%27state%27+feature" style="color:red"><code>&quot;state&quot;</code> feature</a> is enabled or if it is
 prefixed with <code>CORE::</code>.  The
-<a href="psi_element://feature%2FThe+%27state%27+feature" style="color:red">C<"state"> feature</a> is enabled
+<a href="psi_element://feature%2FThe+%27state%27+feature" style="color:red"><code>&quot;state&quot;</code> feature</a> is enabled
 automatically with a <code>use v5.10</code> (or higher) declaration in the current
 scope.</p></dd></dl>

@@ -8,5 +8,5 @@ or after POSITION.  If POSITION is omitted, starts searching from the
 beginning of the string.  POSITION before the beginning of the string
 or after its end is treated as if it were the beginning or the end,
 respectively.  POSITION and the return value are based at zero.
-If the substring is not found, <a href="psi_element://pod%3A%3Aperlfunc%2Findex+STR%2CSUBSTR%2CPOSITION">C<index></a>
+If the substring is not found, <a href="psi_element://pod%3A%3Aperlfunc%2Findex+STR%2CSUBSTR%2CPOSITION"><code>index</code></a>
 returns -1.</p></dd></dl>

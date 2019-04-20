@@ -5,8 +5,8 @@
 <dt style="padding-bottom:4px;font-weight:bold;">stat</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns a 13-element list giving the status info for a file, either
 the file opened via FILEHANDLE or DIRHANDLE, or named by EXPR.  If EXPR is
-omitted, it stats <a href="psi_element://perlvar%2F%24_">C<$_></a> (not <code>_</code>!).  Returns the empty
-list if <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> fails.  Typically
+omitted, it stats <a href="psi_element://perlvar%2F%24_"><code>$_</code></a> (not <code>_</code>!).  Returns the empty
+list if <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a> fails.  Typically
 used as follows:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
         $atime,$mtime,$ctime,$blksize,$blocks)
@@ -32,10 +32,10 @@ meanings of the fields:</p>
 <p style="padding-bottom: 10px;">(*) Not all fields are supported on all filesystem types.  Notably, the
 ctime field is non-portable.  In particular, you cannot expect it to be a
 &quot;creation time&quot;; see <a href="psi_element://perlport%2FFiles+and+Filesystems">Files and Filesystems in perlport</a> for details.</p>
-<p style="padding-bottom: 10px;">If <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> is passed the special filehandle
+<p style="padding-bottom: 10px;">If <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a> is passed the special filehandle
 consisting of an underline, no stat is done, but the current contents of
-the stat structure from the last <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a>, or filetest are returned.  Example:</p>
+the stat structure from the last <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE"><code>lstat</code></a>, or filetest are returned.  Example:</p>
 <div style="padding-bottom: 10px;"><pre><code>    if (-x $file &amp;&amp; (($d) = stat(_)) &amp;&amp; $d &lt; 0) {
         print &quot;$file is executable NFS file\n&quot;;
     }</code></pre></div>
@@ -54,7 +54,7 @@ should mask off the file type portion and (s)printf using a <code>&quot;%o&quot;
 if you want to see the real permissions.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $mode = (stat($filename))[2];
     printf &quot;Permissions are %04o\n&quot;, $mode &amp; 07777;</code></pre></div>
-<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE">C<stat></a> returns a boolean value
+<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Fstat+FILEHANDLE"><code>stat</code></a> returns a boolean value
 indicating success
 or failure, and, if successful, sets the information associated with
 the special filehandle <code>_</code>.</p>
@@ -122,5 +122,5 @@ Commonly available <code>S_IF*</code> constants are:</p>
 <p style="padding-bottom: 10px;">See your native <a href="psi_element://chmod%282%29" style="color:red">chmod(2)</a> and <a href="psi_element://stat%282%29" style="color:red">stat(2)</a> documentation for more details
 about the <code>S_*</code> constants.  To get status info for a symbolic link
 instead of the target file behind the link, use the
-<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE">C<lstat></a> function.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Flstat+FILEHANDLE"><code>lstat</code></a> function.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fstat">stat in perlport</a>.</p></dd></dl>

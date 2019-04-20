@@ -3,7 +3,7 @@
 <dt style="padding-bottom:4px;font-weight:bold;">ord</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the numeric value of the first character of EXPR.
 If EXPR is an empty string, returns 0.  If EXPR is omitted, uses
-<a href="psi_element://perlvar%2F%24_">C<$_></a>.
+<a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.
 (Note <i>character</i>, not byte.)</p>
-<p style="padding-bottom: 10px;">For the reverse, see <a href="psi_element://pod%3A%3Aperlfunc%2Fchr+NUMBER">C<chr></a>.
+<p style="padding-bottom: 10px;">For the reverse, see <a href="psi_element://pod%3A%3Aperlfunc%2Fchr+NUMBER"><code>chr</code></a>.
 See <a href="psi_element://perlunicode">perlunicode</a> for more about Unicode.</p></dd></dl>

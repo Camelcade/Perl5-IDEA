@@ -17,20 +17,20 @@ regardless of case.</p>
 <div style="padding-bottom: 10px;"><pre><code>    fc($this) eq fc($that)</code></pre></div>
 <p style="padding-bottom: 10px;">And get the correct results.</p>
 <p style="padding-bottom: 10px;">Perl only implements the full form of casefolding, but you can access
-the simple folds using <a href="psi_element://Unicode%3A%3AUCD%2FB%3Ccasefold%28%29%3E" style="color:red">B<casefold()> in Unicode::UCD</a> and
-<a href="psi_element://Unicode%3A%3AUCD%2FB%3Cprop_invmap%28%29%3E" style="color:red">B<prop_invmap()> in Unicode::UCD</a>.
+the simple folds using <a href="psi_element://Unicode%3A%3AUCD%2FB%3Ccasefold%28%29%3E" style="color:red"><B>casefold()</B> in Unicode::UCD</a> and
+<a href="psi_element://Unicode%3A%3AUCD%2FB%3Cprop_invmap%28%29%3E" style="color:red"><B>prop_invmap()</B> in Unicode::UCD</a>.
 For further information on casefolding, refer to
 the Unicode Standard, specifically sections 3.13 <code>Default Case Operations</code>,
 4.2 <code>Case-Normative</code>, and 5.18 <code>Case Mappings</code>,
 available at <a href="http://www.unicode.org/versions/latest/">http://www.unicode.org/versions/latest/</a>, as well as the
 Case Charts available at <a href="http://www.unicode.org/charts/case/">http://www.unicode.org/charts/case/</a>.</p>
-<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">This function behaves the same way under various pragmas, such as within
-<a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red">S<C<"use feature 'unicode_strings">></a>,
-as <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR">C<lc></a> does, with the single exception of
-<a href="psi_element://pod%3A%3Aperlfunc%2Ffc+EXPR">C<fc></a> of <i>LATIN CAPITAL LETTER SHARP S</i> (U+1E9E) within the
-scope of <a href="psi_element://locale" style="color:red">S<C<use locale>></a>.  The foldcase of this character
-would normally be <code>&quot;ss&quot;</code>, but as explained in the <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR">C<lc></a>
+<a href="psi_element://feature%2FThe+%27unicode_strings%27+feature" style="color:red"><span style="white-space: nowrap;"><code>&quot;use feature 'unicode_strings&quot;</code></span></a>,
+as <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR"><code>lc</code></a> does, with the single exception of
+<a href="psi_element://pod%3A%3Aperlfunc%2Ffc+EXPR"><code>fc</code></a> of <i>LATIN CAPITAL LETTER SHARP S</i> (U+1E9E) within the
+scope of <a href="psi_element://locale" style="color:red"><span style="white-space: nowrap;"><code>use locale</code></span></a>.  The foldcase of this character
+would normally be <code>&quot;ss&quot;</code>, but as explained in the <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR"><code>lc</code></a>
 section, case
 changes that cross the 255/256 boundary are problematic under locales,
 and are hence prohibited.  Therefore, this function under locale returns
@@ -40,9 +40,9 @@ of them together should be equivalent to a single U+1E9E when foldcased.</p>
 <p style="padding-bottom: 10px;">While the Unicode Standard defines two additional forms of casefolding,
 one for Turkic languages and one that never maps one character into multiple
 characters, these are not provided by the Perl core.  However, the CPAN module
-<a href="psi_element://Unicode%3A%3ACasing" style="color:red">C<Unicode::Casing></a> may be used to provide an implementation.</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Ffc+EXPR">C<fc></a> is available only if the
-<a href="psi_element://feature%2FThe+%27fc%27+feature" style="color:red">C<"fc"> feature</a> is enabled or if it is
+<a href="psi_element://Unicode%3A%3ACasing" style="color:red"><code>Unicode::Casing</code></a> may be used to provide an implementation.</p>
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Ffc+EXPR"><code>fc</code></a> is available only if the
+<a href="psi_element://feature%2FThe+%27fc%27+feature" style="color:red"><code>&quot;fc&quot;</code> feature</a> is enabled or if it is
 prefixed with <code>CORE::</code>.  The
-<a href="psi_element://feature%2FThe+%27fc%27+feature" style="color:red">C<"fc"> feature</a> is enabled automatically
+<a href="psi_element://feature%2FThe+%27fc%27+feature" style="color:red"><code>&quot;fc&quot;</code> feature</a> is enabled automatically
 with a <code>use v5.16</code> (or higher) declaration in the current scope.</p></dd></dl>

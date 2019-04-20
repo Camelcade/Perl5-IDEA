@@ -9,15 +9,15 @@ own, based on your C header files such as <i>&lt;sys/ioctl.h&gt;</i>.
 may help you in this, but it's nontrivial.)  SCALAR will be read and/or
 written depending on the FUNCTION; a C pointer to the string value of SCALAR
 will be passed as the third argument of the actual
-<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a> call.  (If SCALAR
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a> call.  (If SCALAR
 has no string value but does have a numeric value, that value will be
 passed rather than a pointer to the string value.  To guarantee this to be
 true, add a <code>0</code> to the scalar before using it.)  The
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST">C<pack></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR">C<unpack></a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>
 functions may be needed to manipulate the values of structures used by
-<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a>.</p>
-<p style="padding-bottom: 10px;">The return value of <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<ioctl></a> (and
-<a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR">C<fcntl></a>) is as follows:</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a>.</p>
+<p style="padding-bottom: 10px;">The return value of <a href="psi_element://pod%3A%3Aperlfunc%2Fioctl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>ioctl</code></a> (and
+<a href="psi_element://pod%3A%3Aperlfunc%2Ffcntl+FILEHANDLE%2CFUNCTION%2CSCALAR"><code>fcntl</code></a>) is as follows:</p>
 <div style="padding-bottom: 10px;"><pre><code>    if OS returns:      then Perl returns:
         -1               undefined value
          0              string &quot;0 but true&quot;
@@ -28,6 +28,6 @@ system:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $retval = ioctl(...) || -1;
     printf &quot;System returned %d\n&quot;, $retval;</code></pre></div>
 <p style="padding-bottom: 10px;">The special string <code>&quot;0 but true&quot;</code> is exempt from
-<a href="psi_element://perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s">C<Argument "..." isn't numeric></a>
+<a href="psi_element://perldiag%2FArgument+%22%25s%22+isn%27t+numeric%25s"><code>Argument &quot;...&quot; isn't numeric</code></a>
 <a href="psi_element://warnings" style="color:red">warnings</a> on improper numeric conversions.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fioctl">ioctl in perlport</a>.</p></dd></dl>

@@ -2,7 +2,7 @@
 <dt style="padding-bottom:4px;font-weight:bold;">truncate EXPR,LENGTH</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Truncates the file opened on FILEHANDLE, or named by EXPR, to the
 specified length.  Raises an exception if truncate isn't implemented
-on your system.  Returns true if successful, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a> on
+on your system.  Returns true if successful, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> on
 error.</p>
 <p style="padding-bottom: 10px;">The behavior is undefined if LENGTH is greater than the length of the
 file.</p>

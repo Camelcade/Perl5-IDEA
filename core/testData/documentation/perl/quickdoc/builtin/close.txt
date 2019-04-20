@@ -6,22 +6,22 @@ operations succeed and if no error was reported by any PerlIO
 layer.  Closes the currently selected filehandle if the argument is
 omitted.</p>
 <p style="padding-bottom: 10px;">You don't have to close FILEHANDLE if you are immediately going to do
-another <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> on it, because
-<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> closes it for you.  (See
-<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a>.) However, an explicit
-<a href="psi_element://pod%3A%3Aperlfunc%2Fclose+FILEHANDLE">C<close></a> on an input file resets the line counter
-(<a href="psi_element://perlvar%2F%24.">C<$.></a>), while the implicit close done by
-<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR">C<open></a> does not.</p>
-<p style="padding-bottom: 10px;">If the filehandle came from a piped open, <a href="psi_element://pod%3A%3Aperlfunc%2Fclose+FILEHANDLE">C<close></a>
+another <a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a> on it, because
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a> closes it for you.  (See
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a>.) However, an explicit
+<a href="psi_element://pod%3A%3Aperlfunc%2Fclose+FILEHANDLE"><code>close</code></a> on an input file resets the line counter
+(<a href="psi_element://perlvar%2F%24."><code>$.</code></a>), while the implicit close done by
+<a href="psi_element://pod%3A%3Aperlfunc%2Fopen+FILEHANDLE%2CEXPR"><code>open</code></a> does not.</p>
+<p style="padding-bottom: 10px;">If the filehandle came from a piped open, <a href="psi_element://pod%3A%3Aperlfunc%2Fclose+FILEHANDLE"><code>close</code></a>
 returns false if one of the other syscalls involved fails or if its
 program exits with non-zero status.  If the only problem was that the
-program exited non-zero, <a href="psi_element://perlvar%2F%24%21">C<$!></a> will be set to <code>0</code>.
+program exited non-zero, <a href="psi_element://perlvar%2F%24%21"><code>$!</code></a> will be set to <code>0</code>.
 Closing a pipe also waits for the process executing on the pipe to
 exit--in case you wish to look at the output of the pipe afterwards--and
 implicitly puts the exit status value of that command into
-<a href="psi_element://perlvar%2F%24%3F">C<$?></a> and
-<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D">C<${^CHILD_ERROR_NATIVE}></a>.</p>
-<p style="padding-bottom: 10px;">If there are multiple threads running, <a href="psi_element://pod%3A%3Aperlfunc%2Fclose+FILEHANDLE">C<close></a> on
+<a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a> and
+<a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D"><code>${^CHILD_ERROR_NATIVE}</code></a>.</p>
+<p style="padding-bottom: 10px;">If there are multiple threads running, <a href="psi_element://pod%3A%3Aperlfunc%2Fclose+FILEHANDLE"><code>close</code></a> on
 a filehandle from a piped open returns true without waiting for the
 child process to terminate, if the filehandle is still open in another
 thread.</p>

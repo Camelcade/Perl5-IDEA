@@ -37,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 07.04.2016.
  */
 public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> {
-  public PodLinkToFileReference(PodFormatterL element, TextRange range) {
+  public PodLinkToFileReference(@NotNull PodFormatterL element, @NotNull TextRange range) {
     super(element, range);
   }
 
@@ -47,7 +47,7 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
     PodFormatterL podLink = getElement();
     PodLinkDescriptor descriptor = podLink.getLinkDescriptor();
 
-    if (descriptor != null && !descriptor.isUrl() && descriptor.getFileId() != null) {
+    if (descriptor != null && !descriptor.isUrl() && descriptor.getName() != null) {
       PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(podLink.getProject(), descriptor);
       if (targetFile != null) {
         return new ResolveResult[]{new PsiElementResolveResult(targetFile)};
@@ -61,7 +61,7 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     PodLinkDescriptor descriptor = myElement.getLinkDescriptor();
     if (descriptor != null) {
-      String currentName = descriptor.getFileId();
+      String currentName = descriptor.getName();
 
       if (StringUtil.isNotEmpty(currentName) && newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) ||
           newElementName.endsWith("." + PodFileType.EXTENSION)) {

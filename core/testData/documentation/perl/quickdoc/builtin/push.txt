@@ -7,8 +7,8 @@ effect as</p>
         $ARRAY[++$#ARRAY] = $value;
     }</code></pre></div>
 <p style="padding-bottom: 10px;">but is more efficient.  Returns the number of elements in the array following
-the completed <a href="psi_element://pod%3A%3Aperlfunc%2Fpush+ARRAY%2CLIST">C<push></a>.</p>
+the completed <a href="psi_element://pod%3A%3Aperlfunc%2Fpush+ARRAY%2CLIST"><code>push</code></a>.</p>
 <p style="padding-bottom: 10px;">Starting with Perl 5.14, an experimental feature allowed
-<a href="psi_element://pod%3A%3Aperlfunc%2Fpush+ARRAY%2CLIST">C<push></a> to take a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fpush+ARRAY%2CLIST"><code>push</code></a> to take a
 scalar expression. This experiment has been deemed unsuccessful, and was
 removed as of Perl 5.24.</p></dd></dl>

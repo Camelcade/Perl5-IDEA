@@ -1,0 +1,1 @@
+L<< Removal of the current directory (C<".">) from C<@INC> >>

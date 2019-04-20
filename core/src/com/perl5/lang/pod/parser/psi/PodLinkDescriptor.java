@@ -17,13 +17,15 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiFile;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
+import com.perl5.lang.pod.psi.PsiLinkName;
+import com.perl5.lang.pod.psi.PsiLinkSection;
+import com.perl5.lang.pod.psi.PsiLinkText;
+import com.perl5.lang.pod.psi.PsiLinkUrl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by hurricup on 27.03.2016.
@@ -31,177 +33,163 @@ import java.util.regex.Pattern;
  */
 public class PodLinkDescriptor {
   private static final Logger LOG = Logger.getInstance(PodLinkDescriptor.class);
-  private static final Pattern FILE_IDENTIFIER_PATTERN = Pattern.compile("([^\\s/\"'`]+)");
-  private static final Pattern IDENTIFIER_PATTERN = Pattern.compile("\"(.*?)\"|(.*?)");
-  private static final Pattern EXPLICIT_TITLE_PATTERN = Pattern.compile("(?:(?:" + IDENTIFIER_PATTERN + ")\\s*\\|\\s*)?");
-  private static final Pattern URL_PATTERN = Pattern.compile(
-    EXPLICIT_TITLE_PATTERN +
-    "(\\w+:[^:\\s]\\S*)"
-  );
-  private static final Pattern NAMED_ELEMENT_PATTERN = Pattern.compile(
-    EXPLICIT_TITLE_PATTERN +    // title
-    "(?:(?<!/)" + FILE_IDENTIFIER_PATTERN + "(?=$|/))?" +        // file
-    "(?:/?(?:" + IDENTIFIER_PATTERN + "))?"    // section
-  );
 
-  private final String myOriginal;
-  private String myFileId;
-  private String myEnforcedFileId;
-  private String mySection;
-  private String myTitle;
-  private int myTitleOffset;
-  private int myFileIdOffset;
-  private int mySectionOffset;
-  private boolean myIsUrl;
+  @Nullable
+  private final String myName;
+  @Nullable
+  private final String mySection;
+  @Nullable
+  private final String myText;
+  @Nullable
+  private final String myHtmlText;
 
-  private PodLinkDescriptor(String link) {
-    myOriginal = link;
+  private final boolean myIsUrl;
+
+  private final boolean myIsSameFile;
+
+  private PodLinkDescriptor(@Nullable String name,
+                            @Nullable String section,
+                            @Nullable String text,
+                            @Nullable String htmlText,
+                            boolean isUrl,
+                            boolean isSameFile) {
+    myText = text == null ? null : StringUtil.replace(text, "\n", " ");
+    myHtmlText = htmlText;
+    myName = name;
+    mySection = section == null ? null : StringUtil.replace(section, "\n", " ");
+    myIsUrl = isUrl;
+    myIsSameFile = isSameFile;
   }
 
   @Override
   public String toString() {
-    return super.toString() + myOriginal;
+    return super.toString() + getLink();
   }
 
-  public String getFileId() {
-    return myFileId;
+  @Nullable
+  public String getName() {
+    return myName;
   }
 
-  public void setFileId(String fileId, int startOffset) {
-    myFileId = StringUtil.isEmpty(fileId) ? null : fileId;
-    if (myFileId != null) {
-      myFileIdOffset = startOffset;
-    }
-  }
-
+  @Nullable
   public String getSection() {
     return mySection;
   }
 
-  public void setSection(String mySection, int startOffset) {
-    this.mySection = StringUtil.isEmpty(mySection) ? null : mySection;
-    if (this.mySection != null) {
-      mySectionOffset = startOffset;
-    }
+  @NotNull
+  public String getText() {
+    return myText != null ? myText : buildTitle(myName, mySection, myIsSameFile);
   }
 
-  public String getTitle() {
-    return myTitle != null ? myTitle : getInferredTitle();
-  }
-
-  private void setTitle(Matcher m) {
-    if (m.group(1) != null) {
-      setTitle(m.group(1), m.start(1));
-    }
-    else if (m.group(2) != null) {
-      setTitle(m.group(2), m.start(2));
-    }
-  }
-
-  public void setTitle(@Nullable String title, int startOffset) {
-    myTitle = StringUtil.nullize(title);
-    if (myTitle != null) {
-      myTitleOffset = startOffset;
-    }
-  }
-
-  protected String getInferredTitle() {
-    if (getFileId() != null) {
-      if (getSection() != null) {
-        return getSection() + " in " + getFileId();
-      }
-      else {
-        return getFileId();
-      }
-    }
-    else if (getSection() != null) {
-      return getSection();
-    }
-    return "INCORRECTLY PARSED LINK, REPORT TO DEVS";
+  @NotNull
+  public String getHtmlText() {
+    return myHtmlText != null ? myHtmlText : getText();
   }
 
   public boolean isUrl() {
     return myIsUrl;
   }
 
-  public void setUrl(boolean url) {
-    myIsUrl = url;
+  public boolean isSameFile() {
+    return myIsSameFile;
   }
 
-  public String getCanonicalUrl() {
-    if (isUrl()) {
-      return getFileId();
-    }
-
-    StringBuilder url = new StringBuilder("");
-    if (getFileId() != null) {
-      url.append(getFileId());
-    }
-    else if (getEnforcedFileId() != null) {
-      url.append(getEnforcedFileId());
-    }
-
-    if (getSection() != null) {
-      url.append("/");
-      url.append(getSection());
-    }
-
-    return url.toString();
+  @NotNull
+  public String getLink() {
+    return buildLink(myName, mySection);
   }
 
-  public String getEnforcedFileId() {
-    return myEnforcedFileId;
+  @NotNull
+  public static PodLinkDescriptor create(@NotNull String file, @Nullable String section) {
+    return new PodLinkDescriptor(file, section, null, null, false, false);
   }
 
-  public void setEnforcedFileId(String myEnforcedFileId) {
-    this.myEnforcedFileId = myEnforcedFileId;
+  @NotNull
+  private static String buildLink(@Nullable String file, @Nullable String section) {
+    if (file == null) {
+      return section == null ? "" : "/" + section;
+    }
+    return file + buildLink(null, section);
+  }
+
+  @NotNull
+  private static String buildTitle(@Nullable String file, @Nullable String section, boolean isSameFile) {
+    if (file == null) {
+      return StringUtil.notNullize(section);
+    }
+    return section == null ? file : isSameFile ? section : (section + " in " + file);
   }
 
   @Nullable
-  public TextRange getTitleTextRangeInLink() {
-    return myTitle == null ? null : new TextRange(myTitleOffset, myTitleOffset + myTitle.length());
-  }
-
-  @Nullable
-  public TextRange getFileIdTextRangeInLink() {
-    return myFileId == null ? null : new TextRange(myFileIdOffset, myFileIdOffset + myFileId.length());
-  }
-
-  @Nullable
-  public TextRange getSectionTextRangeInLink() {
-    return mySection == null ? null : new TextRange(mySectionOffset, mySectionOffset + mySection.length());
-  }
-
-  @Nullable
-  public static PodLinkDescriptor getDescriptor(@NotNull String link) {
-    link = link.replace('\n', ' ');
-    PodLinkDescriptor descriptor = new PodLinkDescriptor(link);
-    Matcher m;
-    if ((m = URL_PATTERN.matcher(link)).matches()) {
-      descriptor.setTitle(m);
-
-      descriptor.setFileId(m.group(3), m.start(3));
-      descriptor.setUrl(true);
-
-      return descriptor;
+  public static PodLinkDescriptor create(@NotNull PodFormatterL formatterL) {
+    PsiLinkText textElement = formatterL.getLinkTextElement();
+    PsiLinkName nameElement = formatterL.getLinkNameElement();
+    PsiLinkSection sectionElement = formatterL.getLinkSectionElement();
+    PsiLinkUrl linkUrlElement = formatterL.getLinkUrlElement();
+    if (nameElement == null && sectionElement == null && linkUrlElement == null) {
+      return null;
     }
-    else if ((m = NAMED_ELEMENT_PATTERN.matcher(link)).matches()) {
-      descriptor.setTitle(m);
 
-      if (m.group(3) != null) {
-        descriptor.setFileId(m.group(3), m.start(3));
+    String linkTextText = null;
+    String linkTextHtml = null;
+    String linkName = null;
+    String linkSection = null;
+    boolean isUrl = false;
+    boolean isSameFile = false;
+    if (textElement != null) {
+      linkTextHtml = PodRenderUtil.renderPsiElementAsHTML(textElement);
+      linkTextText = PodRenderUtil.renderPsiElementAsText(textElement);
+    }
+
+    if (linkUrlElement != null) {
+      isUrl = true;
+      linkName = linkUrlElement.getText();
+      if (linkTextText == null) {
+        linkTextText = linkTextHtml = linkName;
       }
-
-      if (m.group(4) != null) {
-        descriptor.setSection(m.group(4), m.start(4));
-      }
-      else if (m.group(5) != null) {
-        descriptor.setSection(m.group(5), m.start(5));
-      }
-
-      return descriptor;
     }
-    LOG.warn("Unable to parse: " + link);
-    return null;
+    else if (sectionElement != null) {
+      linkSection = sectionElement.getText();
+      if (linkTextText == null) {
+        linkTextHtml = PodRenderUtil.renderPsiElementAsHTML(sectionElement);
+        linkTextText = PodRenderUtil.renderPsiElementAsText(sectionElement);
+        if (nameElement != null) {
+          linkName = nameElement.getText();
+          linkTextHtml = buildTitle(linkName, linkTextHtml, false);
+          linkTextText = buildTitle(linkName, linkTextText, false);
+        }
+      }
+    }
+
+    if (linkName == null) {
+      if (nameElement != null) {
+        linkName = nameElement.getText();
+      }
+      else {
+        PsiFile containingFile = formatterL.getContainingFile();
+        if (containingFile instanceof PodLinkTarget) {
+          linkName = ((PodLinkTarget)containingFile).getPodLink();
+          isSameFile = true;
+        }
+      }
+    }
+
+    return new PodLinkDescriptor(linkName, linkSection, linkTextText, linkTextHtml, isUrl, isSameFile);
+  }
+
+  @NotNull
+  public static PodLinkDescriptor createFromUrl(@NotNull String link) {
+    int fileIdEndOffset = link.indexOf('/');
+    if (fileIdEndOffset == -1) {
+      return create(link, null);
+    }
+
+    String file = link.substring(0, fileIdEndOffset);
+    int sectionStartOffset = fileIdEndOffset + 1;
+    String section = null;
+    if (sectionStartOffset < link.length()) {
+      section = link.substring(sectionStartOffset);
+    }
+    return create(file, section);
   }
 }

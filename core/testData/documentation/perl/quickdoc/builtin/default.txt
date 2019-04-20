@@ -56,7 +56,8 @@ precisely, but in general, it tries to guess what you want done.  Sometimes
 it is interpreted as <code>$_ ~~ <i>EXPR</i></code>, and sometimes it is not.  It
 also behaves differently when lexically enclosed by a <code>given</code> block than
 it does when dynamically enclosed by a <code>foreach</code> loop.  The rules are far
-too difficult to understand to be described here.  See <a href="psi_element://pod%3A%3Aperlsyn%2FExperimental+Details+on+given+and+when">Experimental Details on given and when</a> later on.</p>
+too difficult to understand to be described here.  See <a href="psi_element://pod%3A%3Aperlsyn%2FExperimental+Details+on+given+and+when">Experimental Details
+on given and when</a> later on.</p>
 <p style="padding-bottom: 10px;">Due to an unfortunate bug in how <code>given</code> was implemented between Perl 5.10
 and 5.16, under those implementations the version of <code>$_</code> governed by
 <code>given</code> is merely a lexically scoped copy of the original, not a

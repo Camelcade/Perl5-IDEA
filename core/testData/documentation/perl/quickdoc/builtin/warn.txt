@@ -3,26 +3,26 @@
 <p style="padding-bottom: 10px;">Emits a warning, usually by printing it to <code>STDERR</code>.  <code>warn</code> interprets
 its operand LIST in the same way as <code>die</code>, but is slightly different
 in what it defaults to when LIST is empty or makes an empty string.
-If it is empty and <a href="psi_element://perlvar%2F%24%40">C<$@></a> already contains an exception
+If it is empty and <a href="psi_element://perlvar%2F%24%40"><code>$@</code></a> already contains an exception
 value then that value is used after appending <code>&quot;\t...caught&quot;</code>.  If it
 is empty and <code>$@</code> is also empty then the string <code>&quot;Warning: Something's
 wrong&quot;</code> is used.</p>
 <p style="padding-bottom: 10px;">By default, the exception derived from the operand LIST is stringified
 and printed to <code>STDERR</code>.  This behaviour can be altered by installing
-a <a href="psi_element://perlvar%2F%25SIG">C<$SIG{__WARN__}></a> handler.  If there is such a
+a <a href="psi_element://perlvar%2F%25SIG"><code>$SIG{__WARN__}</code></a> handler.  If there is such a
 handler then no message is automatically printed; it is the handler's
 responsibility to deal with the exception
 as it sees fit (like, for instance, converting it into a
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a>).  Most
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a>).  Most
 handlers must therefore arrange to actually display the
 warnings that they are not prepared to deal with, by calling
-<a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST">C<warn></a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fwarn+LIST"><code>warn</code></a>
 again in the handler.  Note that this is quite safe and will not
 produce an endless loop, since <code>__WARN__</code> hooks are not called from
 inside one.</p>
 <p style="padding-bottom: 10px;">You will find this behavior is slightly different from that of
-<a href="psi_element://perlvar%2F%25SIG">C<$SIG{__DIE__}></a> handlers (which don't suppress the
-error text, but can instead call <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST">C<die></a> again to change
+<a href="psi_element://perlvar%2F%25SIG"><code>$SIG{__DIE__}</code></a> handlers (which don't suppress the
+error text, but can instead call <a href="psi_element://pod%3A%3Aperlfunc%2Fdie+LIST"><code>die</code></a> again to change
 it).</p>
 <p style="padding-bottom: 10px;">Using a <code>__WARN__</code> handler provides a powerful way to silence all
 warnings (even the so-called mandatory ones).  An example:</p>
@@ -36,7 +36,7 @@ warnings (even the so-called mandatory ones).  An example:</p>
 
     # run-time warnings enabled after here
     warn &quot;\$foo is alive and $foo!&quot;;     # does show up</code></pre></div>
-<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar">perlvar</a> for details on setting <a href="psi_element://perlvar%2F%25SIG">C<%SIG></a> entries
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlvar">perlvar</a> for details on setting <a href="psi_element://perlvar%2F%25SIG"><code>%SIG</code></a> entries
 and for more
 examples.  See the <a href="psi_element://Carp" style="color:red">Carp</a> module for other kinds of warnings using its
 <code>carp</code> and <code>cluck</code> functions.</p></dd></dl>

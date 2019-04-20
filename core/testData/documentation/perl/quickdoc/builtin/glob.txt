@@ -6,9 +6,9 @@ the value of EXPR such as the standard Unix shell <i>/bin/csh</i> would do.  In
 scalar context, glob iterates through such filename expansions, returning
 undef when the list is exhausted.  This is the internal function
 implementing the <code>&lt;*.c&gt;</code> operator, but you can use it directly.  If
-EXPR is omitted, <a href="psi_element://perlvar%2F%24_">C<$_></a> is used.  The <code>&lt;*.c&gt;</code> operator
+EXPR is omitted, <a href="psi_element://perlvar%2F%24_"><code>$_</code></a> is used.  The <code>&lt;*.c&gt;</code> operator
 is discussed in more detail in <a href="psi_element://perlop%2FI%2FO+Operators">I/O Operators in perlop</a>.</p>
-<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fglob+EXPR">C<glob></a> splits its arguments on whitespace and
+<p style="padding-bottom: 10px;">Note that <a href="psi_element://pod%3A%3Aperlfunc%2Fglob+EXPR"><code>glob</code></a> splits its arguments on whitespace and
 treats
 each segment as separate pattern.  As such, <code>glob(&quot;*.c *.h&quot;)</code>
 matches all files with a <i>.c</i> or <i>.h</i> extension.  The expression
@@ -24,13 +24,13 @@ followed by an <code>f</code>, use one of:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my @spacies = glob &quot;'*${var}e f*'&quot;;
     my @spacies = glob qq(&quot;*${var}e f*&quot;);</code></pre></div>
 <p style="padding-bottom: 10px;">If non-empty braces are the only wildcard characters used in the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fglob+EXPR">C<glob></a>, no filenames are matched, but potentially many
+<a href="psi_element://pod%3A%3Aperlfunc%2Fglob+EXPR"><code>glob</code></a>, no filenames are matched, but potentially many
 strings are returned.  For example, this produces nine strings, one for
 each pairing of fruits and colors:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my @many = glob &quot;{apple,tomato,cherry}={green,yellow,red}&quot;;</code></pre></div>
 <p style="padding-bottom: 10px;">This operator is implemented using the standard <code>File::Glob</code> extension.
 See <a href="psi_element://File%3A%3AGlob" style="color:red">File::Glob</a> for details, including
-<a href="psi_element://File%3A%3AGlob%2FC%3Cbsd_glob%3E" style="color:red">C<bsd_glob></a>, which does not treat whitespace
+<a href="psi_element://File%3A%3AGlob%2FC%3Cbsd_glob%3E" style="color:red"><code>bsd_glob</code></a>, which does not treat whitespace
 as a pattern separator.</p>
 <p style="padding-bottom: 10px;">If a <code>glob</code> expression is used as the condition of a <code>while</code> or <code>for</code>
 loop, then it will be implicitly assigned to <code>$_</code>.  If either a <code>glob</code>

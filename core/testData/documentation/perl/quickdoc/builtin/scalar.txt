@@ -8,7 +8,7 @@ be interpolated in list context because in practice, this is never
 needed.  If you really wanted to do so, however, you could use
 the construction <code>@{[ (some expression) ]}</code>, but usually a simple
 <code>(some expression)</code> suffices.</p>
-<p style="padding-bottom: 10px;">Because <a href="psi_element://pod%3A%3Aperlfunc%2Fscalar+EXPR">C<scalar></a> is a unary operator, if you
+<p style="padding-bottom: 10px;">Because <a href="psi_element://pod%3A%3Aperlfunc%2Fscalar+EXPR"><code>scalar</code></a> is a unary operator, if you
 accidentally use a
 parenthesized list for the EXPR, this behaves as a scalar comma expression,
 evaluating all but the last element in void context and returning the final

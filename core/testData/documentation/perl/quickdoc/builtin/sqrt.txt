@@ -2,7 +2,7 @@
   </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">sqrt</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Return the positive square root of EXPR.  If EXPR is omitted, uses
-<a href="psi_element://perlvar%2F%24_">C<$_></a>.  Works only for non-negative operands unless you've
-loaded the <a href="psi_element://Math%3A%3AComplex" style="color:red">C<Math::Complex></a> module.</p>
+<a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.  Works only for non-negative operands unless you've
+loaded the <a href="psi_element://Math%3A%3AComplex" style="color:red"><code>Math::Complex</code></a> module.</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Math::Complex;
     print sqrt(-4);    # prints 2i</code></pre></div></dd></dl>

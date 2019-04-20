@@ -8,7 +8,7 @@ Primarily this is so that you can use the <B>undump</B> program (not
 supplied) to turn your core dump into an executable binary after
 having initialized all your variables at the beginning of the
 program.  When the new binary is executed it will begin by executing
-a <code>goto LABEL</code> (with all the restrictions that <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL">C<goto></a>
+a <code>goto LABEL</code> (with all the restrictions that <a href="psi_element://pod%3A%3Aperlfunc%2Fgoto+LABEL"><code>goto</code></a>
 suffers).
 Think of it as a goto with an intervening core dump and reincarnation.
 If <code>LABEL</code> is omitted, restarts the program from the top.  The
@@ -24,5 +24,5 @@ typo.</p>
 <p style="padding-bottom: 10px;">Unlike most named operators, this has the same precedence as assignment.
 It is also exempt from the looks-like-a-function rule, so
 <code>dump (&quot;foo&quot;).&quot;bar&quot;</code> will cause &quot;bar&quot; to be part of the argument to
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdump+LABEL">C<dump></a>.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdump+LABEL"><code>dump</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fdump">dump in perlport</a>.</p></dd></dl>

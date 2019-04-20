@@ -8,16 +8,16 @@ binary string.  Leading whitespace is ignored in all three cases.)
 The following will handle decimal, binary, octal, and hex in standard
 Perl notation:</p>
 <div style="padding-bottom: 10px;"><pre><code>    $val = oct($val) if $val =~ /^0/;</code></pre></div>
-<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.   To go the other way
-(produce a number in octal), use <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a>:</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.   To go the other way
+(produce a number in octal), use <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a>:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $dec_perms = (stat(&quot;filename&quot;))[2] &amp; 07777;
     my $oct_perm_str = sprintf &quot;%o&quot;, $perms;</code></pre></div>
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR">C<oct></a> function is commonly used when a string such as
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR"><code>oct</code></a> function is commonly used when a string such as
 <code>644</code> needs
 to be converted into a file mode, for example.  Although Perl
 automatically converts strings into numbers as needed, this automatic
 conversion assumes base 10.</p>
 <p style="padding-bottom: 10px;">Leading white space is ignored without warning, as too are any trailing
-non-digits, such as a decimal point (<a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR">C<oct></a> only handles
+non-digits, such as a decimal point (<a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR"><code>oct</code></a> only handles
 non-negative integers, not negative integers or floating point).</p></dd></dl>

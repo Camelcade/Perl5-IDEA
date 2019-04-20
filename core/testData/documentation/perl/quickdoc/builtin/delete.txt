@@ -1,38 +1,39 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">delete EXPR</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Given an expression that specifies an element or slice of a hash,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR">C<delete></a> deletes the specified elements from that hash
-so that <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> on that element no longer returns
+<a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR"><code>delete</code></a> deletes the specified elements from that hash
+so that <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR"><code>exists</code></a> on that element no longer returns
 true.  Setting a hash element to the undefined value does not remove its
-key, but deleting it does; see <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a>.</p>
+key, but deleting it does; see <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR"><code>exists</code></a>.</p>
 <p style="padding-bottom: 10px;">In list context, usually returns the value or values deleted, or the last such
 element in scalar context.  The return list's length corresponds to that of
 the argument list: deleting non-existent elements returns the undefined value
 in their corresponding positions. When a
-<a href="psi_element://perldata%2FKeyE%3Csol%3EValue+Hash+Slices" style="color:red">keyE<sol>value hash slice</a> is passed to
+<a href="psi_element://perldata%2FKeyE%3Csol%3EValue+Hash+Slices" style="color:red">key/value hash slice</a> is passed to
 <code>delete</code>, the return value is a list of key/value pairs (two elements for each
 item deleted from the hash).</p>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR">C<delete></a> may also be used on arrays and array slices,
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR"><code>delete</code></a> may also be used on arrays and array slices,
 but its behavior is less straightforward.  Although
-<a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a> will return false for deleted entries,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR"><code>exists</code></a> will return false for deleted entries,
 deleting array elements never changes indices of existing values; use
-<a href="psi_element://pod%3A%3Aperlfunc%2Fshift+ARRAY">C<shift></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST">C<splice></a> for that.  However, if any deleted elements
+<a href="psi_element://pod%3A%3Aperlfunc%2Fshift+ARRAY"><code>shift</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fsplice+ARRAY%2COFFSET%2CLENGTH%2CLIST"><code>splice</code></a> for that.  However, if any deleted elements
 fall at the end of an array, the array's size shrinks to the position of
-the highest element that still tests true for <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR">C<exists></a>,
+the highest element that still tests true for <a href="psi_element://pod%3A%3Aperlfunc%2Fexists+EXPR"><code>exists</code></a>,
 or to 0 if none do.  In other words, an array won't have trailing
 nonexistent elements after a delete.</p>
-<p style="padding-bottom: 10px;"><B>WARNING:</B> Calling <a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR">C<delete></a> on array values is
+<p style="padding-bottom: 10px;"><B>WARNING:</B> Calling <a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR"><code>delete</code></a> on array values is
 strongly discouraged.  The
 notion of deleting or checking the existence of Perl array elements is not
 conceptually coherent, and can lead to surprising behavior.</p>
-<p style="padding-bottom: 10px;">Deleting from <a href="psi_element://perlvar%2F%25ENV">C<%ENV></a> modifies the environment.
+<p style="padding-bottom: 10px;">Deleting from <a href="psi_element://perlvar%2F%25ENV"><code>%ENV</code></a> modifies the environment.
 Deleting from a hash tied to a DBM file deletes the entry from the DBM
-file.  Deleting from a <a href="psi_element://pod%3A%3Aperlfunc%2Ftied+VARIABLE">C<tied></a> hash or array may not
+file.  Deleting from a <a href="psi_element://pod%3A%3Aperlfunc%2Ftied+VARIABLE"><code>tied</code></a> hash or array may not
 necessarily return anything; it depends on the implementation of the
-<a href="psi_element://pod%3A%3Aperlfunc%2Ftied+VARIABLE">C<tied></a> package's DELETE method, which may do whatever
+<a href="psi_element://pod%3A%3Aperlfunc%2Ftied+VARIABLE"><code>tied</code></a> package's DELETE method, which may do whatever
 it pleases.</p>
 <p style="padding-bottom: 10px;">The <code>delete local EXPR</code> construct localizes the deletion to the current
 block at run time.  Until the block exits, elements locally deleted
-temporarily no longer exist.  See <a href="psi_element://perlsub%2FLocalized+deletion+of+elements+of+composite+types">Localized deletion of elements of composite types in perlsub</a>.</p>
+temporarily no longer exist.  See <a href="psi_element://perlsub%2FLocalized+deletion+of+elements+of+composite+types">Localized deletion of elements
+of composite types in perlsub</a>.</p>
 <div style="padding-bottom: 10px;"><pre><code>    my %hash = (foo =&gt; 11, bar =&gt; 22, baz =&gt; 33);
     my $scalar = delete $hash{foo};         # $scalar is 11
     $scalar = delete @hash{qw(foo bar)}; # $scalar is 22

@@ -10,5 +10,5 @@ following code waits on semaphore $semnum of semaphore id $semid:</p>
     die &quot;Semaphore trouble: $!\n&quot; unless semop($semid, $semop);</code></pre></div>
 <p style="padding-bottom: 10px;">To signal the semaphore, replace <code>-1</code> with <code>1</code>.  See also
 <a href="psi_element://perlipc%2FSysV+IPC">SysV IPC in perlipc</a> and the documentation for
-<a href="psi_element://IPC%3A%3ASysV" style="color:red">C<IPC::SysV></a> and <a href="psi_element://IPC%3A%3ASemaphore" style="color:red">C<IPC::Semaphore></a>.</p>
+<a href="psi_element://IPC%3A%3ASysV" style="color:red"><code>IPC::SysV</code></a> and <a href="psi_element://IPC%3A%3ASemaphore" style="color:red"><code>IPC::Semaphore</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsemop">semop in perlport</a>.</p></dd></dl>

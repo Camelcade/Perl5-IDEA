@@ -4,21 +4,21 @@
 If EXPR is omitted, merely returns the current umask.</p>
 <p style="padding-bottom: 10px;">The Unix permission <code>rwxr-x---</code> is represented as three sets of three
 bits, or three octal digits: <code>0750</code> (the leading 0 indicates octal
-and isn't one of the digits).  The <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> value is such
+and isn't one of the digits).  The <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR"><code>umask</code></a> value is such
 a number representing disabled permissions bits.  The permission (or
-&quot;mode&quot;) values you pass <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMODE">C<mkdir></a> or
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> are modified by your
+&quot;mode&quot;) values you pass <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMODE"><code>mkdir</code></a> or
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE"><code>sysopen</code></a> are modified by your
 umask, so even if you tell
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> to create a file with
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE"><code>sysopen</code></a> to create a file with
 permissions <code>0777</code>, if your umask is <code>0022</code>, then the file will
 actually be created with permissions <code>0755</code>.  If your
-<a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR">C<umask></a> were <code>0027</code> (group can't write; others can't
+<a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR"><code>umask</code></a> were <code>0027</code> (group can't write; others can't
 read, write, or execute), then passing
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a> <code>0666</code> would create a
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE"><code>sysopen</code></a> <code>0666</code> would create a
 file with mode <code>0640</code> (because <code>0666 &amp;~ 027</code> is <code>0640</code>).</p>
 <p style="padding-bottom: 10px;">Here's some advice: supply a creation mode of <code>0666</code> for regular
-files (in <a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE">C<sysopen></a>) and one of
-<code>0777</code> for directories (in <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMODE">C<mkdir></a>) and
+files (in <a href="psi_element://pod%3A%3Aperlfunc%2Fsysopen+FILEHANDLE%2CFILENAME%2CMODE"><code>sysopen</code></a>) and one of
+<code>0777</code> for directories (in <a href="psi_element://pod%3A%3Aperlfunc%2Fmkdir+FILENAME%2CMODE"><code>mkdir</code></a>) and
 executable files.  This gives users the freedom of
 choice: if they want protected files, they might choose process umasks
 of <code>022</code>, <code>027</code>, or even the particularly antisocial mask of <code>077</code>.
@@ -30,8 +30,8 @@ so on.</p>
 restrict access for <i>yourself</i> (i.e., <code>(EXPR &amp; 0700) &gt; 0</code>),
 raises an exception.  If <a href="psi_element://umask%282%29" style="color:red">umask(2)</a> is not implemented and you are
 not trying to restrict access for yourself, returns
-<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR">C<undef></a>.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>.</p>
 <p style="padding-bottom: 10px;">Remember that a umask is a number, usually given in octal; it is <i>not</i> a
-string of octal digits.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR">C<oct></a>, if all you have
+string of octal digits.  See also <a href="psi_element://pod%3A%3Aperlfunc%2Foct+EXPR"><code>oct</code></a>, if all you have
 is a string.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fumask">umask in perlport</a>.</p></dd></dl>

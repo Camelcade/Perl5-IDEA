@@ -1,7 +1,7 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">sprintf FORMAT, LIST</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns a string formatted by the usual
-<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a> conventions of the C
-library function <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a>.  See below for
+<a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a> conventions of the C
+library function <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a>.  See below for
 more details and see <a href="psi_element://sprintf%283%29" style="color:red">sprintf(3)</a> or <a href="psi_element://printf%283%29" style="color:red">printf(3)</a> on your system for an
 explanation of the general principles.</p>
 <p style="padding-bottom: 10px;">For example:</p>
@@ -10,20 +10,20 @@ explanation of the general principles.</p>
 
         # Round number to 3 digits after decimal point
         my $rounded = sprintf(&quot;%.3f&quot;, $number);</code></pre></div>
-<p style="padding-bottom: 10px;">Perl does its own <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> formatting: it
+<p style="padding-bottom: 10px;">Perl does its own <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a> formatting: it
 emulates the C
 function <a href="psi_element://sprintf%283%29" style="color:red">sprintf(3)</a>, but doesn't use it except for floating-point
 numbers, and even then only standard modifiers are allowed.
 Non-standard extensions in your local <a href="psi_element://sprintf%283%29" style="color:red">sprintf(3)</a> are
 therefore unavailable from Perl.</p>
-<p style="padding-bottom: 10px;">Unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST">C<printf></a>,
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> does not do what you probably mean
+<p style="padding-bottom: 10px;">Unlike <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a>,
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a> does not do what you probably mean
 when you pass it an array as your first argument.
 The array is given scalar context,
 and instead of using the 0th element of the array as the format, Perl will
 use the count of elements in the array as the format, which is almost never
 useful.</p>
-<p style="padding-bottom: 10px;">Perl's <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> permits the following
+<p style="padding-bottom: 10px;">Perl's <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a> permits the following
 universally-known conversions:</p>
 <div style="padding-bottom: 10px;"><pre><code>   %%    a percent sign
    %c    a character with the given number
@@ -212,7 +212,7 @@ as supported by the compiler used to build Perl:</p>
                or later</code></pre></div>
 <p style="padding-bottom: 10px;">As of 5.14, none of these raises an exception if they are not supported on
 your platform.  However, if warnings are enabled, a warning of the
-<a href="psi_element://warnings" style="color:red">C<printf></a> warning class is issued on an unsupported
+<a href="psi_element://warnings" style="color:red"><code>printf</code></a> warning class is issued on an unsupported
 conversion flag.  Should you instead prefer an exception, do this:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use warnings FATAL =&gt; &quot;printf&quot;;</code></pre></div>
 <p style="padding-bottom: 10px;">If you would like to know about a version dependency before you
@@ -244,7 +244,7 @@ floating-point size to use on your platform via <a href="psi_element://Config" s
 <p style="padding-bottom: 10px;">The size specifier <code>V</code> has no effect for Perl code, but is supported for
 compatibility with XS code.  It means &quot;use the standard size for a Perl
 integer or floating-point number&quot;, which is the default.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">order of arguments</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Normally, <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">C<sprintf></a> takes the next unused
+<dt style="padding-bottom:4px;font-weight:bold;">order of arguments</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Normally, <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a> takes the next unused
 argument as the value to
 format for each format specification.  If the format specification
 uses <code>*</code> to require additional arguments, these are consumed from
@@ -267,8 +267,8 @@ index, the <code>$</code> may need escaping:</p>
  printf &quot;%3\$d %d %d\n&quot;,   12, 34, 56; # will print &quot;56 12 34\n&quot;
  printf &quot;%2\$*3\$d %d\n&quot;,  12, 34,  3; # will print &quot; 34 12\n&quot;
  printf &quot;%*1\$.*f\n&quot;,       4,  5, 10; # will print &quot;5.0000\n&quot;</code></pre></div></dd></dl>
-<p style="padding-bottom: 10px;">If <a href="psi_element://locale" style="color:red">C<use locale></a> (including <code>use locale ':not_characters'</code>)
-is in effect and <a href="psi_element://POSIX%2FC%3Csetlocale%3E" style="color:red">C<POSIX::setlocale></a> has been
+<p style="padding-bottom: 10px;">If <a href="psi_element://locale" style="color:red"><code>use locale</code></a> (including <code>use locale ':not_characters'</code>)
+is in effect and <a href="psi_element://POSIX%2FC%3Csetlocale%3E" style="color:red"><code>POSIX::setlocale</code></a> has been
 called,
 the character used for the decimal separator in formatted floating-point
 numbers is affected by the <code>LC_NUMERIC</code> locale.  See <a href="psi_element://perllocale">perllocale</a>

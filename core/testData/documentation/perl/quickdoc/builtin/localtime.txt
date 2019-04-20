@@ -26,18 +26,18 @@ Wednesday.  <code>$yday</code> is the day of the year, in the range <code>0..364
 (or <code>0..365</code> in leap years.)</p>
 <p style="padding-bottom: 10px;"><code>$isdst</code> is true if the specified time occurs during Daylight Saving
 Time, false otherwise.</p>
-<p style="padding-bottom: 10px;">If EXPR is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a> uses the current
-time (as returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime">C<time></a>).</p>
-<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a> returns the
+<p style="padding-bottom: 10px;">If EXPR is omitted, <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR"><code>localtime</code></a> uses the current
+time (as returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime"><code>time</code></a>).</p>
+<p style="padding-bottom: 10px;">In scalar context, <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR"><code>localtime</code></a> returns the
 <a href="psi_element://ctime%283%29" style="color:red">ctime(3)</a> value:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my $now_string = localtime;  # e.g., &quot;Thu Oct 13 04:54:34 1994&quot;</code></pre></div>
 <p style="padding-bottom: 10px;">The format of this scalar value is <B>not</B> locale-dependent but built
 into Perl.  For GMT instead of local time use the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR">C<gmtime></a> builtin.  See also the
-<a href="psi_element://Time%3A%3ALocal" style="color:red">C<Time::Local></a> module (for converting seconds, minutes,
-hours, and such back to the integer value returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime">C<time></a>),
-and the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2FC%3Cstrftime%3E" style="color:red">C<strftime></a> and
-<a href="psi_element://POSIX%2FC%3Cmktime%3E" style="color:red">C<mktime></a> functions.</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR"><code>gmtime</code></a> builtin.  See also the
+<a href="psi_element://Time%3A%3ALocal" style="color:red"><code>Time::Local</code></a> module (for converting seconds, minutes,
+hours, and such back to the integer value returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime"><code>time</code></a>),
+and the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2FC%3Cstrftime%3E" style="color:red"><code>strftime</code></a> and
+<a href="psi_element://POSIX%2FC%3Cmktime%3E" style="color:red"><code>mktime</code></a> functions.</p>
 <p style="padding-bottom: 10px;">To get somewhat similar but locale-dependent date strings, set up your
 locale environment variables appropriately (please see <a href="psi_element://perllocale">perllocale</a>) and
 try for example:</p>
@@ -48,8 +48,8 @@ try for example:</p>
 <p style="padding-bottom: 10px;">Note that <code>%a</code> and <code>%b</code>, the short forms of the day of the week
 and the month of the year, may not necessarily be three characters wide.</p>
 <p style="padding-bottom: 10px;">The <a href="psi_element://Time%3A%3Agmtime" style="color:red">Time::gmtime</a> and <a href="psi_element://Time%3A%3Alocaltime" style="color:red">Time::localtime</a> modules provide a convenient,
-by-name access mechanism to the <a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR">C<gmtime></a> and
-<a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a> functions, respectively.</p>
+by-name access mechanism to the <a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR"><code>gmtime</code></a> and
+<a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR"><code>localtime</code></a> functions, respectively.</p>
 <p style="padding-bottom: 10px;">For a comprehensive date and time representation look at the
 <a href="psi_element://DateTime" style="color:red">DateTime</a> module on CPAN.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Flocaltime">localtime in perlport</a>.</p></dd></dl>

@@ -12,7 +12,7 @@ name may start with a <code>SIG</code> prefix, thus <code>FOO</code> and <code>S
 same signal.  The string form of SIGNAL is recommended for portability because
 the same signal may have different numbers in different operating systems.</p>
 <p style="padding-bottom: 10px;">A list of signal names supported by the current platform can be found in
-<code>$Config{sig_name}</code>, which is provided by the <a href="psi_element://Config" style="color:red">C<Config></a>
+<code>$Config{sig_name}</code>, which is provided by the <a href="psi_element://Config" style="color:red"><code>Config</code></a>
 module.  See <a href="psi_element://Config" style="color:red">Config</a> for more details.</p>
 <p style="padding-bottom: 10px;">A negative signal name is the same as a negative signal number, killing process
 groups instead of processes.  For example, <code>kill '-KILL', $pgrp</code> and
@@ -20,7 +20,7 @@ groups instead of processes.  For example, <code>kill '-KILL', $pgrp</code> and
 the entire process group specified.  That
 means you usually want to use positive not negative signals.</p>
 <p style="padding-bottom: 10px;">If SIGNAL is either the number 0 or the string <code>ZERO</code> (or <code>SIGZERO</code>),
-no signal is sent to the process, but <a href="psi_element://pod%3A%3Aperlfunc%2Fkill+SIGNAL%2C+LIST">C<kill></a>
+no signal is sent to the process, but <a href="psi_element://pod%3A%3Aperlfunc%2Fkill+SIGNAL%2C+LIST"><code>kill</code></a>
 checks whether it's <i>possible</i> to send a signal to it
 (that means, to be brief, that the process is owned by the same user, or we are
 the super-user).  This is useful to check that a child process is still
@@ -35,7 +35,7 @@ kill the entire process group specified.</p>
 A warning may be produced in a future version.</p>
 <p style="padding-bottom: 10px;">See <a href="psi_element://perlipc%2FSignals">Signals in perlipc</a> for more details.</p>
 <p style="padding-bottom: 10px;">On some platforms such as Windows where the <a href="psi_element://fork%282%29" style="color:red">fork(2)</a> system call is not
-available, Perl can be built to emulate <a href="psi_element://pod%3A%3Aperlfunc%2Ffork">C<fork></a> at the
+available, Perl can be built to emulate <a href="psi_element://pod%3A%3Aperlfunc%2Ffork"><code>fork</code></a> at the
 interpreter level.
 This emulation has limitations related to kill that have to be considered,
 for code running on Windows and in code intended to be portable.</p>

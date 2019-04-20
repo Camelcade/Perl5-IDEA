@@ -38,7 +38,6 @@ import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.PodSearchHelper;
@@ -46,12 +45,12 @@ import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,35 +63,39 @@ import static com.perl5.lang.pod.PodSearchHelper.PERL_FUNC_FILE_NAME;
  * Created by hurricup on 26.03.2016.
  */
 public class PerlDocUtil implements PerlElementTypes {
-  private static final String MODIFIERS_DOC_LINK = "perlsyn/\"Statement Modifiers\"";
-  static final String SWITCH_DOC_LINK = "perlsyn/\"Switch Statements\"";
-  private static final String COMPOUND_DOC_LINK = "perlsyn/\"Compound Statements\"";
-  static final String SPECIAL_LITERALS_LINK = "perldata/\"Special Literals\"";
-  private static final String BLOCK_NAMES_LINK = "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"";
-  private static final String AUTOLOAD_LINK = "perlsub/\"Autoloading\"";
-  private static final String DESTROY_LINK = "perlobj/\"Destructors\"";
+  static final PodLinkDescriptor SWITCH_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Switch Statements");
+  static final PodLinkDescriptor SPECIAL_LITERALS_LINK = PodLinkDescriptor.create("perldata", "Special Literals");
+  private static final PodLinkDescriptor MODIFIERS_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Statement Modifiers");
+  private static final PodLinkDescriptor COMPOUND_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Compound Statements");
+  private static final PodLinkDescriptor BLOCK_NAMES_LINK = PodLinkDescriptor.create("perlmod", "BEGIN, UNITCHECK, CHECK, INIT and END");
+  private static final PodLinkDescriptor AUTOLOAD_LINK = PodLinkDescriptor.create("perlsub", "Autoloading");
+  private static final PodLinkDescriptor DESTROY_LINK = PodLinkDescriptor.create("perlobj", "Destructors");
 
-  private static final Map<String, String> OPERATORS_LINKS = new THashMap<>();
-  private static final Map<String, String> VARIABLES_LINKS = new THashMap<>();
+  private static final Map<String, PodLinkDescriptor> OPERATORS_LINKS = new HashMap<>();
+  private static final Map<String, PodLinkDescriptor> VARIABLES_LINKS = new HashMap<>();
 
   static {
-    OPERATORS_LINKS.put("~~", "perlop/\"Smartmatch Operator\"");
-    OPERATORS_LINKS.put("qr", "perlop/\"qr/STRING/\"");
-    OPERATORS_LINKS.put("s", "perlop/\"s/PATTERN/\"");
-    OPERATORS_LINKS.put("m", "perlop/\"m/PATTERN/\"");
-    OPERATORS_LINKS.put("=>", "perlop/\"Comma Operator\"");
+    OPERATORS_LINKS.put("~~", PodLinkDescriptor.create("perlop", "Smartmatch Operator"));
+    OPERATORS_LINKS.put("qr", PodLinkDescriptor.create("perlop", "qr/STRING/"));
+    OPERATORS_LINKS.put("s", PodLinkDescriptor.create("perlop", "s/PATTERN/"));
+    OPERATORS_LINKS.put("m", PodLinkDescriptor.create("perlop", "m/PATTERN/"));
+    OPERATORS_LINKS.put("=>", PodLinkDescriptor.create("perlop", "Comma Operator"));
 
-    VARIABLES_LINKS.put("@ISA", "perlobj/\"A Class is Simply a Package\"");
-    VARIABLES_LINKS.put("@EXPORT", "Exporter/\"How to Export\"");
-    VARIABLES_LINKS.put("@EXPORT_OK", "Exporter/\"How to Export\"");
-    VARIABLES_LINKS.put("%EXPORT_TAGS", "Exporter/\"Specialised Import Lists\"");
-    VARIABLES_LINKS.put("$VERSION", "perlobj/\"VERSION\"");
+    VARIABLES_LINKS.put("@ISA", PodLinkDescriptor.create("perlobj", "A Class is Simply a Package"));
+    VARIABLES_LINKS.put("@EXPORT", PodLinkDescriptor.create("Exporter", "How to Export"));
+    VARIABLES_LINKS.put("@EXPORT_OK", PodLinkDescriptor.create("Exporter", "How to Export"));
+    VARIABLES_LINKS.put("%EXPORT_TAGS", PodLinkDescriptor.create("Exporter", "Specialised Import Lists"));
+    VARIABLES_LINKS.put("$VERSION", PodLinkDescriptor.create("perlobj", "VERSION"));
   }
 
   @Nullable
-  public static PsiElement resolveDocLink(String link, PsiElement origin) {
+  public static PsiElement resolveDoc(@NotNull String file, @Nullable String section, @NotNull PsiElement origin) {
+    return resolveDescriptor(PodLinkDescriptor.create(file, section), origin);
+  }
+
+  @Nullable
+  public static PsiElement resolveDescriptor(@Nullable PodLinkDescriptor descriptor, @NotNull PsiElement origin) {
     final Project project = origin.getProject();
-    PodLinkDescriptor descriptor = PodLinkDescriptor.getDescriptor(link);
 
     if (descriptor != null) {
       PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(project, descriptor);
@@ -133,7 +136,7 @@ public class PerlDocUtil implements PerlElementTypes {
       }
     }
 
-    return resolveDocLink("perlre/\"" + anchor + PerlPsiUtil.DOUBLE_QUOTE, element);
+    return resolveDescriptor(PodLinkDescriptor.create("perlre", anchor), element);
   }
 
   @Nullable
@@ -147,7 +150,7 @@ public class PerlDocUtil implements PerlElementTypes {
       String text = actualType.getSigil() + PerlVariable.braceName(variableName);
 
       if (VARIABLES_LINKS.containsKey(text)) {
-        return resolveDocLink(VARIABLES_LINKS.get(text), variable);
+        return resolveDescriptor(VARIABLES_LINKS.get(text), variable);
       }
 
       if (variable.isBuiltIn()) {
@@ -171,7 +174,7 @@ public class PerlDocUtil implements PerlElementTypes {
     IElementType elementType = PsiUtilCore.getElementType(element);
     CharSequence tokenChars = element.getNode().getChars();
 
-    String redirect = null;
+    PodLinkDescriptor redirect = null;
     if (MODIFIERS_KEYWORDS_TOKENSET.contains(elementType) && element.getParent() instanceof PsiPerlStatementModifier) {
       redirect = MODIFIERS_DOC_LINK;
     }
@@ -197,7 +200,7 @@ public class PerlDocUtil implements PerlElementTypes {
     }
 
     return redirect != null ?
-           resolveDocLink(redirect, element) :
+           resolveDescriptor(redirect, element) :
            ObjectUtils.coalesce(getPerlFuncDocFromText(element, tokenChars.toString()), getPerlOpDoc(element));
   }
 
@@ -214,9 +217,9 @@ public class PerlDocUtil implements PerlElementTypes {
     final Project project = element.getProject();
     String text = element.getText();
 
-    String redirect = OPERATORS_LINKS.get(text);
+    PodLinkDescriptor redirect = OPERATORS_LINKS.get(text);
     if (redirect != null) {
-      return resolveDocLink(redirect, element);
+      return resolveDescriptor(redirect, element);
     }
 
     // fixme use map?

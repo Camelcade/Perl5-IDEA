@@ -80,7 +80,7 @@ pragma or the <B>-w</B> flag.</p>
 <p style="padding-bottom: 10px;">If the condition expression of a <code>while</code> statement is based
 on any of a group of iterative expression types then it gets
 some magic treatment.  The affected iterative expression types
-are <a href="psi_element://perlfunc%2Freadline+EXPR">C<readline></a>, the <a href="psi_element://perlop%2FI%2FO+Operators">C<< <FILEHANDLE> >></a> input operator, <a href="psi_element://perlfunc%2Freaddir+DIRHANDLE">C<readdir></a>, <a href="psi_element://perlfunc%2Fglob+EXPR">C<glob></a>, the <a href="psi_element://perlop%2FI%2FO+Operators">C<< <PATTERN> >></a> globbing operator, and <a href="psi_element://perlfunc%2Feach+HASH">C<each></a>.  If the condition expression is one of these expression types, then
+are <a href="psi_element://perlfunc%2Freadline+EXPR"><code>readline</code></a>, the <a href="psi_element://perlop%2FI%2FO+Operators"><code>&lt;FILEHANDLE&gt;</code></a> input operator, <a href="psi_element://perlfunc%2Freaddir+DIRHANDLE"><code>readdir</code></a>, <a href="psi_element://perlfunc%2Fglob+EXPR"><code>glob</code></a>, the <a href="psi_element://perlop%2FI%2FO+Operators"><code>&lt;PATTERN&gt;</code></a> globbing operator, and <a href="psi_element://perlfunc%2Feach+HASH"><code>each</code></a>.  If the condition expression is one of these expression types, then
 the value yielded by the iterative operator will be implicitly assigned
 to <code>$_</code>.  If the condition expression is one of these expression types
 or an explicit assignment of one of them to a scalar, then the condition

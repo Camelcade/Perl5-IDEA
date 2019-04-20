@@ -4,6 +4,6 @@
 <p style="padding-bottom: 10px;">Returns the value of EXPR with the first character lowercased.  This
 is the internal function implementing the <code>\l</code> escape in
 double-quoted strings.</p>
-<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_">C<$_></a>.</p>
+<p style="padding-bottom: 10px;">If EXPR is omitted, uses <a href="psi_element://perlvar%2F%24_"><code>$_</code></a>.</p>
 <p style="padding-bottom: 10px;">This function behaves the same way under various pragmas, such as in a locale,
-as <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR">C<lc></a> does.</p></dd></dl>
+as <a href="psi_element://pod%3A%3Aperlfunc%2Flc+EXPR"><code>lc</code></a> does.</p></dd></dl>

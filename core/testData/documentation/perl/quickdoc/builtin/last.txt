@@ -2,30 +2,30 @@
  </dt>
 <dt style="padding-bottom:4px;font-weight:bold;">last EXPR</dt>
 <dt style="padding-bottom:4px;font-weight:bold;">last</dt><dd style="padding-top:6px;">
-<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> command is like the <code>break</code> statement in C
+<p style="padding-bottom: 10px;">The <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a> command is like the <code>break</code> statement in C
 (as used in
 loops); it immediately exits the loop in question.  If the LABEL is
 omitted, the command refers to the innermost enclosing
 loop.  The <code>last EXPR</code> form, available starting in Perl
 5.18.0, allows a label name to be computed at run time,
 and is otherwise identical to <code>last LABEL</code>.  The
-<a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> block, if any, is not executed:</p>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK"><code>continue</code></a> block, if any, is not executed:</p>
 <div style="padding-bottom: 10px;"><pre><code>    LINE: while (&lt;STDIN&gt;) {
         last LINE if /^$/;  # exit when done with header
         #...
     }</code></pre></div>
-<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> cannot return a value from a block that typically
+<p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a> cannot return a value from a block that typically
 returns a value, such as <code>eval {}</code>, <code>sub {}</code>, or <code>do {}</code>. It will perform
 its flow control behavior, which precludes any return value. It should not be
-used to exit a <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST">C<grep></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST">C<map></a>
+used to exit a <a href="psi_element://pod%3A%3Aperlfunc%2Fgrep+BLOCK+LIST"><code>grep</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fmap+BLOCK+LIST"><code>map</code></a>
 operation.</p>
 <p style="padding-bottom: 10px;">Note that a block by itself is semantically identical to a loop
-that executes once.  Thus <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a> can be used to effect
+that executes once.  Thus <a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a> can be used to effect
 an early exit out of such a block.</p>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK">C<continue></a> for an illustration of how
-<a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL">C<next></a>, and
-<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL">C<redo></a> work.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlfunc%2Fcontinue+BLOCK"><code>continue</code></a> for an illustration of how
+<a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a>, <a href="psi_element://pod%3A%3Aperlfunc%2Fnext+LABEL"><code>next</code></a>, and
+<a href="psi_element://pod%3A%3Aperlfunc%2Fredo+LABEL"><code>redo</code></a> work.</p>
 <p style="padding-bottom: 10px;">Unlike most named operators, this has the same precedence as assignment.
 It is also exempt from the looks-like-a-function rule, so
 <code>last (&quot;foo&quot;).&quot;bar&quot;</code> will cause &quot;bar&quot; to be part of the argument to
-<a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL">C<last></a>.</p></dd></dl>
+<a href="psi_element://pod%3A%3Aperlfunc%2Flast+LABEL"><code>last</code></a>.</p></dd></dl>

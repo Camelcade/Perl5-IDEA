@@ -51,4 +51,21 @@ public class PODParserTest extends PerlParserTestBase {
     doTest(false);
   }
 
+  public void testLinks() {doTest();}
+
+  public void testLinksWithCodeInside() {doTest();}
+
+  public void testLinksWithFalseQuote() {doTest();}
+
+  public void testLinksMan() {doTest();}
+
+  public void testLinksCode() {doTest();}
+
+  public void testLinksEscaped() {doTest();}
+
+  public void testLinksUrl() {doTest();}
+
+  public void testLinksComplex1() {doTest();}
+
+  public void testLinksComplex2() {doTest();}
 }

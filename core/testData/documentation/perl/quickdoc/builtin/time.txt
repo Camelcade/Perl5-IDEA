@@ -2,14 +2,14 @@
  </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the number of non-leap seconds since whatever time the system
 considers to be the epoch, suitable for feeding to
-<a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR">C<gmtime></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR">C<localtime></a>.  On most
+<a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR"><code>gmtime</code></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Flocaltime+EXPR"><code>localtime</code></a>.  On most
 systems the epoch is 00:00:00 UTC, January 1, 1970;
 a prominent exception being Mac OS Classic which uses 00:00:00, January 1,
 1904 in the current local time zone for its epoch.</p>
 <p style="padding-bottom: 10px;">For measuring time in better granularity than one second, use the
 <a href="psi_element://Time%3A%3AHiRes" style="color:red">Time::HiRes</a> module from Perl 5.8 onwards (or from CPAN before then), or,
 if you have <a href="psi_element://gettimeofday%282%29" style="color:red">gettimeofday(2)</a>, you may be able to use the
-<a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST">C<syscall></a> interface of Perl.  See <a href="psi_element://perlfaq8">perlfaq8</a>
+<a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST"><code>syscall</code></a> interface of Perl.  See <a href="psi_element://perlfaq8">perlfaq8</a>
 for details.</p>
 <p style="padding-bottom: 10px;">For date and time processing look at the many related modules on CPAN.
 For a comprehensive date and time representation look at the
