@@ -21,43 +21,19 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 26.03.2016.
  */
 public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
-  public static boolean parseTermParam(PsiBuilder b, int l) {
-    if (consumeToken(b, POD_ANGLE_LEFT)) {
-      PsiBuilder.Marker m = null;
-      while (true) {
-        IElementType tokenType = b.getTokenType();
-        if (tokenType == POD_ANGLE_RIGHT) {
-          if (m != null) {
-            m.done(FORMATTING_SECTION_CONTENT);
-          }
-          b.advanceLexer();
-          break;
-        }
-        else if (tokenType == POD_NEWLINE || tokenType == null) {
-          if (m == null) {
-            m = b.mark();
-          }
-          m.error("Unclosed angles");
-          break;
-        }
-
-        if (m == null) {
-          m = b.mark();
-        }
-        if (!PodParser.pod_term(b, l)) {
-          m.error("Can't parse");
-          break;
-        }
-      }
-
+  public static boolean consumeOrReport(PsiBuilder b, int l, @NotNull IElementType targetElement, @NotNull String message) {
+    if (b.getTokenType() == targetElement) {
+      b.advanceLexer();
       return true;
     }
-    return false;
+    b.mark().error(message);
+    return true;
   }
 
   public static boolean checkAndConvert(PsiBuilder b, int l, IElementType sourceType, IElementType targetType) {
