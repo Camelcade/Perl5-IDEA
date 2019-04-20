@@ -19,9 +19,7 @@ package documentation;
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
-
-  static final String ANSWERS_PATH = "testData/documentation/perl/quickdoc/builtin";
+public class PerlQuickDocBuiltInCompletionTest extends PerlLightTestCase {
 
   @Override
   protected void setUp() throws Exception {
@@ -31,7 +29,7 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
 
   @Override
   protected String getTestDataPath() {
-    return ANSWERS_PATH;
+    return PerlQuickDocBuiltInTest.ANSWERS_PATH;
   }
 
   public void testAbs() {doTest();}
@@ -517,7 +515,7 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
   }
 
   private void doTest() {
-    initWithTextSmart(getBuiltInFromTestName() + " ");
-    doTestQuickDocWithoutInit();
+    initWithTextSmart("");
+    doTestCompletionQuickDoc(getBuiltInFromTestName());
   }
 }

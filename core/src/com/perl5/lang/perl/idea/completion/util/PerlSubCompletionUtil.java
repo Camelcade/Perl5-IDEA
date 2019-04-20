@@ -55,10 +55,11 @@ public class PerlSubCompletionUtil {
       subDefinition);
   }
 
-  public static LookupElementBuilder getSubDefinitionLookupElement(String subName, PerlSubDefinitionElement subDefinition) {
+  @NotNull
+  public static LookupElementBuilder getSubDefinitionLookupElement(@NotNull String subName,
+                                                                   @NotNull PerlSubDefinitionElement subDefinition) {
     LookupElementBuilder newElement = LookupElementBuilder
-      .create(subName)
-      .withPsiElement(subDefinition)
+      .create(subDefinition, subName)
       .withIcon(subDefinition.getIcon(0))
       .withStrikeoutness(subDefinition.isDeprecated())
       .withTypeText(subDefinition.getNamespaceName(), true);
@@ -97,8 +98,7 @@ public class PerlSubCompletionUtil {
   public static LookupElementBuilder getSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration,
                                                                     @Nullable PerlExportDescriptor exportDescriptor) {
     return LookupElementBuilder
-      .create(subDeclaration.getSubName())
-      .withPsiElement(subDeclaration)
+      .create(subDeclaration, subDeclaration.getSubName())
       .withIcon(subDeclaration.getIcon(0))
       .withStrikeoutness(subDeclaration.isDeprecated())
       .withInsertHandler(SUB_SELECTION_HANDLER)
@@ -111,20 +111,22 @@ public class PerlSubCompletionUtil {
     return getGlobLookupElement(globVariable, null);
   }
 
+  /**
+   * Probably duplicate of {@link PerlVariableCompletionUtil#createVariableLookupElement(com.perl5.lang.perl.psi.PerlGlobVariable)}
+   */
   @NotNull
   public static LookupElementBuilder getGlobLookupElement(@NotNull PerlGlobVariable globVariable,
                                                           @Nullable PerlExportDescriptor exportDescriptor) {
     String lookupString = exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName();
     return LookupElementBuilder
-      .create(lookupString == null ? "" : lookupString)
-      .withPsiElement(globVariable)
+      .create(globVariable, lookupString == null ? "" : lookupString)
       .withIcon(globVariable.getIcon(0))
       .withInsertHandler(SUB_SELECTION_HANDLER)
       .withTypeText(globVariable.getNamespaceName(), true)
       ;
   }
 
-  public static void fillWithUnresolvedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {
+  public static void fillWithUnresolvedSubs(@NotNull PerlSubElement subDefinition, @NotNull CompletionResultSet resultSet) {
     final String packageName = subDefinition.getNamespaceName();
     if (packageName == null) {
       return;
@@ -135,7 +137,7 @@ public class PerlSubCompletionUtil {
     containingFile.accept(new PerlRecursiveVisitor() {
       @Override
       public void visitMethod(@NotNull PsiPerlMethod method) {
-        PerlCallValue methodValue = PerlCallValue.from((PsiElement)method);
+        PerlCallValue methodValue = PerlCallValue.from(method);
         if (methodValue == null) {
           super.visitMethod(method);
           return;
@@ -174,7 +176,7 @@ public class PerlSubCompletionUtil {
     });
   }
 
-  public static void fillWithNotOverridedSubs(final PerlSubElement subDefinition, final CompletionResultSet resultSet) {
+  public static void fillWithNotOverridedSubs(@NotNull PerlSubElement subDefinition, @NotNull CompletionResultSet resultSet) {
     PerlPackageUtil.processNotOverridedMethods(
       PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinitionElement.class),
       subDefinitionBase ->

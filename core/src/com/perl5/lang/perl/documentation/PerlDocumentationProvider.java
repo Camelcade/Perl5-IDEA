@@ -32,6 +32,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
 import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2;
@@ -43,6 +44,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.intellij.codeInsight.TargetElementUtil.ELEMENT_NAME_ACCEPTED;
 import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
+import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
 
@@ -86,6 +88,15 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
     if (object instanceof PerlVariable) {
       return PerlDocUtil.getPerlVarDoc((PerlVariable)object);
+    }
+    else if (object instanceof PerlBuiltInSubDefinition) {
+      String subName = StringUtil.notNullize(((PerlBuiltInSubDefinition)object).getName());
+      if ("default".equals(subName)) {
+        return PerlDocUtil.resolveDocLink(SWITCH_DOC_LINK, (PsiElement)object);
+      }
+      else {
+        return PerlDocUtil.getPerlFuncDocFromText((PsiElement)object, subName);
+      }
     }
     return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }

@@ -30,6 +30,7 @@ import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
@@ -64,7 +65,7 @@ import static com.perl5.lang.pod.PodSearchHelper.PERL_FUNC_FILE_NAME;
  */
 public class PerlDocUtil implements PerlElementTypes {
   private static final String MODIFIERS_DOC_LINK = "perlsyn/\"Statement Modifiers\"";
-  private static final String SWITCH_DOC_LINK = "perlsyn/\"Switch Statements\"";
+  static final String SWITCH_DOC_LINK = "perlsyn/\"Switch Statements\"";
   private static final String COMPOUND_DOC_LINK = "perlsyn/\"Compound Statements\"";
   static final String SPECIAL_LITERALS_LINK = "perldata/\"Special Literals\"";
   private static final String BLOCK_NAMES_LINK = "perlmod/\"BEGIN, UNITCHECK, CHECK, INIT and END\"";
@@ -195,19 +196,17 @@ public class PerlDocUtil implements PerlElementTypes {
       }
     }
 
-    if (redirect != null) {
-      return resolveDocLink(redirect, element);
-    }
+    return redirect != null ?
+           resolveDocLink(redirect, element) :
+           ObjectUtils.coalesce(getPerlFuncDocFromText(element, tokenChars.toString()), getPerlOpDoc(element));
+  }
 
-    String text = tokenChars.toString();
+  static PsiElement getPerlFuncDocFromText(@NotNull PsiElement element, @NotNull String text) {
     if (text.matches("-[rwxoRWXOeszfdlpSbctugkTBMAC]")) {
       text = "-X";
     }
 
-    PodCompositeElement podElement =
-      searchPodElementInFile(element.getProject(), PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
-
-    return podElement == null ? getPerlOpDoc(element) : podElement;
+    return searchPodElementInFile(element.getProject(), PERL_FUNC_FILE_NAME, PodDocumentPattern.itemPattern(text));
   }
 
   @Nullable
