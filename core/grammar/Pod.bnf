@@ -91,11 +91,11 @@ limitations under the License.
         POD_BEGIN='=begin'
         POD_FORMATTED_BLOCK='formatted_block'
         POD_END='=end'
-        POD_FORMAT_NAME="format_name"
+        POD_FORMAT_NAME='format_name'
         POD_FOR='=for'
 
         POD_ENCODING='=encoding'
-        POD_ENCODING_NAME="encoding_name"
+        POD_ENCODING_NAME='encoding_name'
 
         POD_CUT='=cut'
 
@@ -127,7 +127,7 @@ limitations under the License.
         POD_IDENTIFIER='identifier'
         POD_PACKAGE='package'
         POD_NUMBER='number'
-        POD_INDENT_LEVEL="indent_level"
+        POD_INDENT_LEVEL='indent_level'
         POD_SYMBOL='symbol'
 
         POD_DIV='/'

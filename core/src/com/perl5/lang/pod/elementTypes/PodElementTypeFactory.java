@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PodElementTypeFactory {
   public static IElementType getTokenType(String debugName) {
-    if (debugName.equals("POD_IDENTIFIER")) {
+    if (debugName.equals("identifier")) {
       return new PodTokenTypeEx(debugName) {
         @NotNull
         @Override

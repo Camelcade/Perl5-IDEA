@@ -159,7 +159,7 @@ Usage: "somesub"; (254,261); reading; PerlSubNameElementImpl(Perl5: subname) at 
     PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Bar::Baz::othersub at 223 in sub.pl
 
 
-Usage: "somesub"; (323,330); reading; PodIdentifierImpl(Perl5 POD: POD_IDENTIFIER) at 323 in sub.pl
+Usage: "somesub"; (323,330); reading; PodIdentifierImpl(Perl5 POD: identifier) at 323 in sub.pl
  - Rule: NonCodeUsageGroupingRule
     CodeUsageGroup: Code usages; null
 
