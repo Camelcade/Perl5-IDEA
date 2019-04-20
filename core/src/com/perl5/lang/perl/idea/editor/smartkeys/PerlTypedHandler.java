@@ -238,7 +238,8 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     }
     IElementType elementType = PsiUtilCore.getElementType(element);
 
-    if (typedChar == '>' && elementType == OPERATOR_MINUS ||
+    if (typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
+        typedChar == '>' && elementType == OPERATOR_MINUS ||
         typedChar == ':' && elementType == COLON ||
         typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) ||
                              element.getParent() instanceof PerlStringBareMixin &&

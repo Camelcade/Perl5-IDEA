@@ -63,6 +63,22 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
     doTestNegative("use Mojolicious<caret>", ":");
   }
 
+  public void testScalarCtrl() {doTest("$<caret>", "^");}
+
+  public void testArrayCtrl() {doTest("@<caret>", "^");}
+
+  public void testHashCtrl() {doTest("%<caret>", "^");}
+
+  public void testScalarIndexCtrl() {doTest("$#<caret>", "^");}
+
+  public void testScalarCtrlBraces() {doTest("${<caret>}", "^");}
+
+  public void testArrayCtrlBraces() {doTest("@{<caret>}", "^");}
+
+  public void testHashCtrlBraces() {doTest("%{<caret>}", "^");}
+
+  public void testScalarIndexCtrlBraces() {doTest("$#{<caret>}", "^");}
+
   public void testUse() {doTest("use<caret>", " ");}
 
   public void testNo() {doTest("no<caret>", " ");}
