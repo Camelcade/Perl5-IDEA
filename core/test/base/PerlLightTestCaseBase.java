@@ -1776,6 +1776,42 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     return getTestName(true).startsWith("filetest");
   }
 
+  protected void doTestCompletionQuickDoc(@NotNull String elementPattern) {
+    myFixture.complete(CompletionType.BASIC, 1);
+    LookupElement[] elements = myFixture.getLookupElements();
+    assertNotNull("No lookup elements", elements);
+    LookupElement targetElement = getMostRelevantLookupElement(elementPattern, elements);
+    assertNotNull("Unable to find lookup " + elementPattern, targetElement);
+    Object elementObject = targetElement.getObject();
+    assertInstanceOf(elementObject, PsiElement.class);
+    PsiElement elementAtCaret = getFile().findElementAt(getEditor().getCaretModel().getOffset());
+    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement((PsiElement)elementObject);
+    assertNotNull("Unable to find documentation provider for " + elementObject, documentationProvider);
+    PsiElement documentationElement =
+      documentationProvider.getDocumentationElementForLookupItem(PsiManager.getInstance(getProject()), elementObject, elementAtCaret);
+    assertNotNull("No documentation element found for " + elementObject, documentationElement);
+    String generatedDoc = documentationProvider.generateDoc(documentationElement, elementAtCaret);
+    assertNotNull("No document generated for " + documentationElement, generatedDoc);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), generatedDoc);
+  }
+
+  @Nullable
+  private LookupElement getMostRelevantLookupElement(@NotNull String pattern, @NotNull LookupElement[] lookupElements) {
+    LookupElement mostRelevantElement = null;
+    int extraSymbols = -1;
+
+    for (LookupElement lookupElement : lookupElements) {
+      String lookupString = lookupElement.getLookupString();
+      if (lookupString.equals(pattern)) {
+        return lookupElement;
+      }
+      else if (lookupString.contains(pattern) && (extraSymbols < 0 || extraSymbols > lookupString.length() - pattern.length())) {
+        mostRelevantElement = lookupElement;
+        extraSymbols = lookupString.length() - pattern.length();
+      }
+    }
+    return mostRelevantElement;
+  }
 
   protected void doTestQuickDocWithoutInit() {
     List<Integer> caretsOffsets = getAndRemoveCarets();

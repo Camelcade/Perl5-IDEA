@@ -19,9 +19,9 @@ package documentation;
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
+import static documentation.PerlQuickDocBuiltInVariableTest.ANSWERS_PATH;
 
-  static final String ANSWERS_PATH = "testData/documentation/perl/quickdoc/builtinVars";
+public class PerlQuickDocBuiltInVariableCompletionTest extends PerlLightTestCase {
 
   @Override
   protected void setUp() throws Exception {
@@ -324,7 +324,6 @@ public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
 
   public void testHashErrno() {doTest("%ERRNO");}
 
-
   @NotNull
   @Override
   protected String getResultsFileExtension() {
@@ -332,7 +331,8 @@ public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
   }
 
   private void doTest(@NotNull String text) {
-    initWithTextSmart(text + " ");
-    doTestQuickDocWithoutInit();
+    initWithTextSmart("\n" + text.charAt(0));
+    getEditor().getCaretModel().moveToOffset(2);
+    doTestCompletionQuickDoc(text.substring(1));
   }
 }
