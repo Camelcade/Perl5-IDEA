@@ -101,40 +101,40 @@ limitations under the License.
 
         POD_CODE
 
-		POD_ANGLE_LEFT
-		POD_ANGLE_RIGHT
-		POD_PAREN_LEFT
-		POD_PAREN_RIGHT
-		POD_BRACKET_LEFT
-		POD_BRACKET_RIGHT
-		POD_BRACE_LEFT
-		POD_BRACE_RIGHT
+        POD_ANGLE_LEFT
+        POD_ANGLE_RIGHT
+        POD_PAREN_LEFT
+        POD_PAREN_RIGHT
+        POD_BRACKET_LEFT
+        POD_BRACKET_RIGHT
+        POD_BRACE_LEFT
+        POD_BRACE_RIGHT
 
-		POD_QUOTE_DOUBLE
-		POD_QUOTE_SINGLE
-		POD_QUOTE_TICK
+        POD_QUOTE_DOUBLE
+        POD_QUOTE_SINGLE
+        POD_QUOTE_TICK
 
-		POD_I	// italic
-		POD_B	// bold
-		POD_C	// code
-		POD_L	// hyperlink
-		POD_E	// escape
-		POD_F	// filename
-		POD_S	// nbsp
-		POD_X	// index
-		POD_Z	// null
+        POD_I	// italic
+        POD_B	// bold
+        POD_C	// code
+        POD_L	// hyperlink
+        POD_E	// escape
+        POD_F	// filename
+        POD_S	// nbsp
+        POD_X	// index
+        POD_Z	// null
 
-		POD_IDENTIFIER
-		POD_PACKAGE
-		POD_NUMBER
-		POD_INDENT_LEVEL="POD_INDENT_LEVEL"
-		POD_SYMBOL
+        POD_IDENTIFIER
+        POD_PACKAGE
+        POD_NUMBER
+        POD_INDENT_LEVEL="POD_INDENT_LEVEL"
+        POD_SYMBOL
 
-		POD_DIV
-		POD_BACKREF
-		POD_ASTERISK
-		POD_PIPE
-		POD_COLON
+        POD_DIV
+        POD_BACKREF
+        POD_ASTERISK
+        POD_PIPE
+        POD_COLON
     ]
 
 }
@@ -278,6 +278,5 @@ pod_format_nbsp ::= POD_S <<parseTermParam>> {pin=1}
 pod_format_index ::= POD_X <<parseTermParam>> {pin=1}
 pod_format_null ::= POD_Z <<parseTermParam>> {pin=1}
 pod_format_link ::= POD_L <<parseTermParam>> {pin=1}
-
 
 formatting_section_content ::= pod_term*
