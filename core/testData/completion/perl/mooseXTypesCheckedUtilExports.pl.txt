@@ -185,6 +185,7 @@ Lookups: msgrcv; Text: msgrcv; Tail: null; Type: CORE; Icon: /subroutine_gutter_
 Lookups: msgsnd; Text: msgsnd; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: my; Text: my; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: next; Text: next; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+Lookups: no; Text: no; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: oct; Text: oct; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: open; Text: open; Tail: ($handle [, $mode, $name_or_ref, @args]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 Lookups: opendir; Text: opendir; Tail: ($handle, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null

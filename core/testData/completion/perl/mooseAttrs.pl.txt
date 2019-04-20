@@ -26,6 +26,8 @@ Lookups: test3; Text: test3; Tail: null; Type: MySomePackage; Icon: /method_gutt
 Lookups: test40; Text: test40; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: test42; Text: test42; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: test45; Text: test45; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: test45; Text: test45; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+Lookups: test46; Text: test46; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: test46; Text: test46; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: test47; Text: test47; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
 Lookups: test48; Text: test48; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
