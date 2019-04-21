@@ -34,7 +34,6 @@ import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
 import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.PodSectionItem;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
@@ -150,7 +149,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         public void visitTargetableSection(PodTitledSection o) {
           String title = o.getTitleText();
           if (StringUtil.isNotEmpty(title)) {
-            if (!(o instanceof PodSectionItem) || o.getListLevel() < PodDocumentPattern.DEFAULT_MAX_LIST_LEVEL) {
+            if (!(o instanceof PodSectionItem)) {
               result.addElement(LookupElementBuilder.create(title).withIcon(PerlIcons.POD_FILE));
             }
           }

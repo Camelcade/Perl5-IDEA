@@ -28,8 +28,6 @@ import org.jetbrains.annotations.Nullable;
  * Pattern for searching through the pod documentation
  */
 public class PodDocumentPattern {
-  public static final int DEFAULT_MAX_LIST_LEVEL = 2;
-  private int myListLevel = DEFAULT_MAX_LIST_LEVEL;    // this is default value
   private String myItemPattern;    // pattern to search items
   private String myHeadingPattern; // pattern to search headers
   private String myIndexKey;    // index key to search. If both defined - first wins
@@ -44,11 +42,9 @@ public class PodDocumentPattern {
 
   protected boolean acceptsItem(@NotNull PsiElement element) {
     if (getItemPattern() != null && element instanceof PodSectionItem) {
-      if (((PodSectionItem)element).getListLevel() < getListLevel()) {
-        String title = ((PodTitledSection)element).getTitleText();
-        if (StringUtil.isNotEmpty(title)) {
-          return matches(title, getItemPattern(), myExactMatch);
-        }
+      String title = ((PodTitledSection)element).getTitleText();
+      if (StringUtil.isNotEmpty(title)) {
+        return matches(title, getItemPattern(), myExactMatch);
       }
     }
     return false;
@@ -56,11 +52,9 @@ public class PodDocumentPattern {
 
   protected boolean acceptsHeading(@NotNull PsiElement element) {
     if (getHeadingPattern() != null && element instanceof PodTitledSection && ((PodTitledSection)element).isHeading()) {
-      if (((PodTitledSection)element).getListLevel() < getListLevel()) {
-        String title = ((PodTitledSection)element).getTitleText();
-        if (StringUtil.isNotEmpty(title)) {
-          return matches(title, getHeadingPattern(), myExactMatch);
-        }
+      String title = ((PodTitledSection)element).getTitleText();
+      if (StringUtil.isNotEmpty(title)) {
+        return matches(title, getHeadingPattern(), myExactMatch);
       }
     }
     return false;
@@ -78,21 +72,9 @@ public class PodDocumentPattern {
     return this;
   }
 
-  public int getListLevel() {
-    return myListLevel;
-  }
-
-  @NotNull
-  public PodDocumentPattern withListLevel(int listLevel) {
-    myListLevel = listLevel;
-    return this;
-  }
-
   protected boolean acceptsIndex(@NotNull PsiElement element) {
     if (getIndexKey() != null && element instanceof PodFormatterX) {
-      if (((PodFormatterX)element).getListLevel() < getListLevel()) {
-        return getIndexKey().equals(((PodFormatterX)element).getTitleText());
-      }
+      return getIndexKey().equals(((PodFormatterX)element).getTitleText());
     }
     return false;
   }
