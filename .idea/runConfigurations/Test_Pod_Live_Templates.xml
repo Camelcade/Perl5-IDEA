@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test POD Parser All" type="GradleRunConfiguration" factoryName="Gradle" folderName="Pod Tests">
+  <configuration default="false" name="Test Pod Live Templates" type="GradleRunConfiguration" factoryName="Gradle" folderName="Pod Tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=parser/PODParserTest*" />
+      <option name="scriptParameters" value="-Pruntest=editor/liveTemplates/PodLiveTemplatesTest" />
       <option name="taskDescriptions">
         <list />
       </option>

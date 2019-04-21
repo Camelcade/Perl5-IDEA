@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test POD Live Templates" type="GradleRunConfiguration" factoryName="Gradle" folderName="Pod Tests" singleton="true">
+  <configuration default="false" name="Test Pod Annotator" type="GradleRunConfiguration" factoryName="Gradle" folderName="Pod Tests" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-Pruntest=editor/liveTemplates/PodLiveTemplatesTest" />
+      <option name="scriptParameters" value="-Pruntest=annotator/PodAnnotatorTest" />
       <option name="taskDescriptions">
         <list />
       </option>
@@ -15,6 +15,7 @@
       </option>
       <option name="vmOptions" value="" />
     </ExternalSystemSettings>
-    <method />
+    <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+    <method v="2" />
   </configuration>
 </component>
