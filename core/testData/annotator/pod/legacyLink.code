@@ -1,0 +1,43 @@
+L<name>
+
+L<Net::Ping>
+
+L<name/"sec">
+
+L<name/sec>
+
+L<perlsyn/"For Loops">
+
+L</"sec">
+
+L</sec>
+
+L</"Object Methods">
+
+L<perlvar/$.>
+
+L<perlvar/"$.">
+
+L<perlsyn/For Loops>
+
+L<perlsyn/"For Loops">
+
+L<text|name>
+
+L<Perl Error Messages|perldiag>
+
+L<text|name/"sec"> or L<text|name/sec>
+
+L<postfix "if"|perlsyn/"Statement Modifiers">
+
+L<text|/"sec">
+
+L<text|/sec>
+
+L<text|"<warning descr="Section \"sec\" should have a slash before it">sec</warning>">
+
+L<the various attributes|/"Member Data">
+
+L<<warning descr="Section \"something\" should have a slash before it">C<something></warning>>
+
+L<"<warning descr="Section \"something\" should have a slash before it">something</warning>">

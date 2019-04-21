@@ -1,0 +1,9 @@
+text
+
+=over
+
+=item proper one
+
+=back
+
+<error descr="List item outside over block">=item</error> incorrect item

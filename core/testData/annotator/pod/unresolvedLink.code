@@ -1,0 +1,74 @@
+This is a text
+
+=head1 first header
+
+test
+
+=head2 second header
+
+test
+
+=head3 third header
+
+test
+
+=head4 fourth header
+
+test
+
+=over
+
+=item some item
+X<itemlink>
+
+=back
+
+Here is the text with links
+L<"first header">
+L</"first header">
+L<First text|"first header">
+L<First text|/"first header">
+L</first header>
+L<First text|/first header>
+
+L<"second header">
+L</"second header">
+L<second text|"second header">
+L<second text|/"second header">
+L</second header>
+L<First text|/second header>
+
+L<"third header">
+L</"third header">
+L<third text|"third header">
+L<third text|/"third header">
+L</third header>
+L<First text|/third header>
+
+L<"fourth header">
+L</"fourth header">
+L<fourth text|"fourth header">
+L<fourth text|/"fourth header">
+L</fourth header>
+L<First text|/fourth header>
+
+L<"some item">
+L</"some item">
+L<item text|"some item">
+L<Item text|/"some item">
+L</some item>
+L<First text|/some item>
+
+L<"itemlink">
+L</"itemlink">
+L<item text|"itemlink">
+L<Item text|/"itemlink">
+L</itemlink>
+L<First text|/itemlink>
+
+L<"<warning descr="Can't find POD section: item1link">item1link</warning>">
+L</"<warning descr="Can't find POD section: item2link">item2link</warning>">
+L<item text|"<warning descr="Can't find POD section: item3link">item3link</warning>">
+L<Item text|/"<warning descr="Can't find POD section: ite4mlink">ite4mlink</warning>">
+L</<warning descr="Can't find POD section: item5link">item5link</warning>>
+L<First text|/<warning descr="Can't find POD section: item6link">item6link</warning>>
