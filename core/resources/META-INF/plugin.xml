@@ -28,6 +28,8 @@
   <depends optional="true" config-file="java-deps.xml">com.intellij.modules.java</depends>
   <depends optional="true" config-file="coverage-deps.xml">com.intellij.modules.coverage</depends>
 
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="plugin-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
+
   <extensionPoints>
     <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
       <with attribute="implementationClass"
@@ -153,7 +155,6 @@
     <internalFileTemplate name="Perl5 package"/>
     <internalFileTemplate name="Perl5 script"/>
     <internalFileTemplate name="Perl5 test"/>
-    <internalFileTemplate name="Perl5 pod"/>
 
     <jps.plugin/>
 
@@ -447,74 +448,6 @@
                         implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
     <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
 
-
-
-    <!--POD settings -->
-    <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>
-    <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
-    <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
-    <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="Perl5 POD"
-                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
-
-    <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
-    <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
-    <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
-    <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
-
-    <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>
-    <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
-    <lang.foldingBuilder language="Perl5 POD"
-                         implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
-    <lang.psiStructureViewFactory language="Perl5 POD"
-                                  implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
-    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
-
-    <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider"
-                           order="first"/>
-
-    <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$CommandPosition"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverBulleted"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
-    <defaultLiveTemplatesProvider
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
-
-    <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
-                             implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
-
-    <localInspection language="Perl5 POD"
-                     shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
-                     enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"/>
-    <localInspection language="Perl5 POD"
-                     shortName="PodOverlessItem" displayName="Item outside over" groupName="Perl5 POD"
-                     enabledByDefault="true" level="ERROR"
-                     implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"/>
-    <localInspection language="Perl5 POD"
-                     shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
-                     enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
-
-    <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
-    <lang.refactoringSupport language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
-    <lang.namesValidator language="Perl5 POD"
-                         implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
-
-    <lang.findUsagesProvider language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
-    <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
-    <referencesSearch
-        implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
-    <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
-    <completion.contributor language="Perl5 POD"
-                            implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
-    <!--POD settings end -->
-
     <!--TryCatch settings -->
     <defaultLiveTemplatesProvider
         implementation="com.perl5.lang.perl.parser.trycatch.idea.liveTemplates.TryCatchLiveTemplatesProvider"/>
@@ -544,10 +477,7 @@
     <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
     <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
 
-    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
-
     <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
-    <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
 
     <localInspection language="Perl5"
                      shortName="MooseAttributeAccessors" displayName="Moose attributes accessors consistency" groupName="Perl5"
