@@ -1,11 +1,11 @@
 PerlSubReference at (0,6); text in range: 'LABEL8' => 0 results:
 
-PerlNamespaceReference at (15,16); text in range: 'i' => 0 results:
+PerlVariableReference at (24,25); text in range: 'i' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in nextToFor.pl
 
-PerlVariableReference at (23,24); text in range: 'i' => 0 results:
+PerlVariableReference at (33,34); text in range: 'i' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in nextToFor.pl
 
-PerlVariableReference at (32,33); text in range: 'i' => 0 results:
-
-PerlLabelReference at (48,54); text in range: 'LABEL8' => 1 results:
+PerlLabelReference at (49,55); text in range: 'LABEL8' => 1 results:
 	PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in nextToFor.pl
 

@@ -55,7 +55,7 @@ say Ref();
 say CodeRef();
 say RegexpRef();
 say GlobRef();
-say FileHandle();
+#say FileHandle(); # this one is lexed as a package now
 say ArrayRef();
 say HashRef();
 say ScalarRef();

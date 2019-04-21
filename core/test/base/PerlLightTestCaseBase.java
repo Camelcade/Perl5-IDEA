@@ -575,7 +575,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public void doTestResolve(boolean reparse) {
-    initWithFileSmart();
+    initWithFileSmartWithoutErrors();
+    doTestResolveWithoutInit(reparse);
+  }
+
+  public void doTestResolveWithoutInit(boolean reparse) {
     if (reparse) {
       PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
       FileContentUtil.reparseFiles(getProject(), Collections.emptyList(), true);
