@@ -68,7 +68,7 @@ class Module with the given version as an argument:</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Module 12.34;</code></pre></div>
 <p style="padding-bottom: 10px;">is equivalent to:</p>
 <div style="padding-bottom: 10px;"><pre><code>    BEGIN { require Module; Module-&gt;VERSION(12.34) }</code></pre></div>
-<p style="padding-bottom: 10px;">The <a href="psi_element://UNIVERSAL%2FC%3CVERSION+%28+%5B+REQUIRE+%5D+%29%3E" style="color:red">default <code>VERSION</code> method</a>,
+<p style="padding-bottom: 10px;">The <a href="psi_element://UNIVERSAL%2FVERSION+%28+%5B+REQUIRE+%5D+%29" style="color:red">default <code>VERSION</code> method</a>,
 inherited from the <a href="psi_element://UNIVERSAL" style="color:red"><code>UNIVERSAL</code></a> class, croaks if the given
 version is larger than the value of the variable <code>$Module::VERSION</code>.</p>
 <p style="padding-bottom: 10px;">The VERSION argument cannot be an arbitrary expression.  It only counts

@@ -36,8 +36,8 @@ into Perl.  For GMT instead of local time use the
 <a href="psi_element://pod%3A%3Aperlfunc%2Fgmtime+EXPR"><code>gmtime</code></a> builtin.  See also the
 <a href="psi_element://Time%3A%3ALocal" style="color:red"><code>Time::Local</code></a> module (for converting seconds, minutes,
 hours, and such back to the integer value returned by <a href="psi_element://pod%3A%3Aperlfunc%2Ftime"><code>time</code></a>),
-and the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2FC%3Cstrftime%3E" style="color:red"><code>strftime</code></a> and
-<a href="psi_element://POSIX%2FC%3Cmktime%3E" style="color:red"><code>mktime</code></a> functions.</p>
+and the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2Fstrftime" style="color:red"><code>strftime</code></a> and
+<a href="psi_element://POSIX%2Fmktime" style="color:red"><code>mktime</code></a> functions.</p>
 <p style="padding-bottom: 10px;">To get somewhat similar but locale-dependent date strings, set up your
 locale environment variables appropriately (please see <a href="psi_element://perllocale">perllocale</a>) and
 try for example:</p>

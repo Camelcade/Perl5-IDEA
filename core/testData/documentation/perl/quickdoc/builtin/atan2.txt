@@ -2,7 +2,7 @@
    </dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Returns the arctangent of Y/X in the range -PI to PI.</p>
 <p style="padding-bottom: 10px;">For the tangent operation, you may use the
-<a href="psi_element://Math%3A%3ATrig%2FB%3Ctan%3E" style="color:red"><code>Math::Trig::tan</code></a> function, or use the familiar
+<a href="psi_element://Math%3A%3ATrig%2Ftan" style="color:red"><code>Math::Trig::tan</code></a> function, or use the familiar
 relation:</p>
 <div style="padding-bottom: 10px;"><pre><code>    sub tan { sin($_[0]) / cos($_[0])  }</code></pre></div>
 <p style="padding-bottom: 10px;">The return value for <code>atan2(0,0)</code> is implementation-defined; consult

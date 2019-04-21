@@ -8,6 +8,6 @@ Note that a return value of <code>-1</code> could mean that child processes are
 being automatically reaped, as described in <a href="psi_element://perlipc">perlipc</a>.</p>
 <p style="padding-bottom: 10px;">If you use <a href="psi_element://pod%3A%3Aperlfunc%2Fwait"><code>wait</code></a> in your handler for
 <a href="psi_element://perlvar%2F%25SIG"><code>$SIG{CHLD}</code></a>, it may accidentally wait for the child
-created by <a href="psi_element://pod%3A%3Aperlfunc%2FqxE%3Csol%3ESTRINGE%3Csol%3E" style="color:red"><code>qx</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>.
+created by <a href="psi_element://pod%3A%3Aperlfunc%2Fqx%2FSTRING%2F"><code>qx</code></a> or <a href="psi_element://pod%3A%3Aperlfunc%2Fsystem+LIST"><code>system</code></a>.
 See <a href="psi_element://perlipc">perlipc</a> for details.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fwait">wait in perlport</a>.</p></dd></dl>

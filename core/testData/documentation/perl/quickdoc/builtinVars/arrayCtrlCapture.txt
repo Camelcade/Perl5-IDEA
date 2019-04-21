@@ -8,7 +8,7 @@ is equivalent to $2, etc.</p>
         print join &quot;-&quot;, @{^CAPTURE};
     }</code></pre></div>
 <p style="padding-bottom: 10px;">should output &quot;f-o-a-l&quot;.</p>
-<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlvar%2F%24I%3Cdigits%3E" style="color:red">$<i>digits</i></a>, <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE%7D">%{^CAPTURE}</a> and <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE_ALL%7D">%{^CAPTURE_ALL}</a>.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlvar%2F%24digits">$<i>digits</i></a>, <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE%7D">%{^CAPTURE}</a> and <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE_ALL%7D">%{^CAPTURE_ALL}</a>.</p>
 <p style="padding-bottom: 10px;">Note that unlike most other regex magic variables there is no single
 letter equivalent to <code>@{^CAPTURE}</code>.</p>
 <p style="padding-bottom: 10px;">This variable was added in 5.25.7</p></dd></dl>

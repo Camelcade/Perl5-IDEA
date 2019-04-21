@@ -10,7 +10,7 @@ argument of the list will be interpreted as the
 <code>printf(@_)</code> will use <code>$_[0]</code> as the format.  See
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST">sprintf</a> for an explanation of the format
 argument.  If <code>use locale</code> (including <code>use locale ':not_characters'</code>)
-is in effect and <a href="psi_element://POSIX%2FC%3Csetlocale%3E" style="color:red"><code>POSIX::setlocale</code></a> has been
+is in effect and <a href="psi_element://POSIX%2Fsetlocale" style="color:red"><code>POSIX::setlocale</code></a> has been
 called, the character used for the decimal separator in formatted
 floating-point numbers is affected by the <code>LC_NUMERIC</code> locale setting.
 See <a href="psi_element://perllocale">perllocale</a> and <a href="psi_element://POSIX" style="color:red">POSIX</a>.</p>

@@ -57,7 +57,7 @@ reliably avoid using the shell; <code>exec LIST</code>, even with more than one
 element, will fall back to the shell if the first spawn fails.</p>
 <p style="padding-bottom: 10px;">Perl attempts to flush all files opened for output before the exec,
 but this may not be supported on some platforms (see <a href="psi_element://perlport">perlport</a>).
-To be safe, you may need to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a>
+To be safe, you may need to set <a href="psi_element://perlvar%2F%24%7C"><code>$&verbar;</code></a>
 (<code>$AUTOFLUSH</code> in <a href="psi_element://English" style="color:red">English</a>) or call the <code>autoflush</code> method of
 <a href="psi_element://IO%3A%3AHandle%2FMETHODS" style="color:red"><code>IO::Handle</code></a> on any open handles to avoid lost
 output.</p>

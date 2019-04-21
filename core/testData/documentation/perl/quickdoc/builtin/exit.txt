@@ -21,6 +21,6 @@ not themselves abort the exit.  Likewise any object destructors that
 need to be called are called before the real exit.  <code>END</code> routines and
 destructors can change the exit status by modifying <a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a>.
 If this is a problem, you can call
-<a href="psi_element://POSIX%2FC%3C_exit%3E" style="color:red"><code>POSIX::_exit($status)</code></a> to avoid <code>END</code> and destructor
+<a href="psi_element://POSIX%2F_exit" style="color:red"><code>POSIX::_exit($status)</code></a> to avoid <code>END</code> and destructor
 processing.  See <a href="psi_element://perlmod">perlmod</a> for details.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fexit">exit in perlport</a>.</p></dd></dl>

@@ -2,7 +2,7 @@
 <p style="padding-bottom: 10px;">Opens a pair of connected pipes like the corresponding system call.
 Note that if you set up a loop of piped processes, deadlock can occur
 unless you are very careful.  In addition, note that Perl's pipes use
-IO buffering, so you may need to set <a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a>
+IO buffering, so you may need to set <a href="psi_element://perlvar%2F%24%7C"><code>$&verbar;</code></a>
 to flush your WRITEHANDLE after each command, depending on the
 application.</p>
 <p style="padding-bottom: 10px;">Returns true on success.</p>

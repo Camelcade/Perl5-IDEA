@@ -50,7 +50,7 @@ Better to omit it.  See <a href="psi_element://pod%3A%3Aperlfunc%2Fumask+EXPR"><
 <a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> C library function.  On many Unix systems, <a href="psi_element://fdopen%283%29" style="color:red">fdopen(3)</a> is known
 to fail when file descriptors exceed a certain value, typically 255.  If
 you need more file descriptors than that, consider using the
-<a href="psi_element://POSIX%2FC%3Copen%3E" style="color:red"><code>POSIX::open</code></a> function.  For Perls 5.8.0 and later,
+<a href="psi_element://POSIX%2Fopen" style="color:red"><code>POSIX::open</code></a> function.  For Perls 5.8.0 and later,
 PerlIO is (most often) the default.</p>
 <p style="padding-bottom: 10px;">See <a href="psi_element://perlopentut">perlopentut</a> for a kinder, gentler explanation of opening files.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsysopen">sysopen in perlport</a>.</p></dd></dl>

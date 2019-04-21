@@ -20,7 +20,7 @@ the <a href="psi_element://Fcntl" style="color:red">Fcntl</a> module or your <a 
 are available on your system.</p>
 <p style="padding-bottom: 10px;">Here's an example of setting a filehandle named <code>$REMOTE</code> to be
 non-blocking at the system level.  You'll have to negotiate
-<a href="psi_element://perlvar%2F%24E%3Cverbar%3E" style="color:red"><code>$&verbar;</code></a> on your own, though.</p>
+<a href="psi_element://perlvar%2F%24%7C"><code>$&verbar;</code></a> on your own, though.</p>
 <div style="padding-bottom: 10px;"><pre><code>    use Fcntl qw(F_GETFL F_SETFL O_NONBLOCK);
 
     my $flags = fcntl($REMOTE, F_GETFL, 0)

@@ -7,9 +7,9 @@ returns the next line until end-of-file is reached, whereupon the
 subsequent call returns <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>.  In list context, reads
 until end-of-file is reached and returns a list of lines.  Note that the
 notion of &quot;line&quot; used here is whatever you may have defined with
-<a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red"><code>$/</code></a> (or <code>$INPUT_RECORD_SEPARATOR</code> in
+<a href="psi_element://perlvar%2F%24%2F"><code>$/</code></a> (or <code>$INPUT_RECORD_SEPARATOR</code> in
 <a href="psi_element://English" style="color:red">English</a>).  See <a href="psi_element://perlvar%2F%24%2F">$/ in perlvar</a>.</p>
-<p style="padding-bottom: 10px;">When <a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red"><code>$/</code></a> is set to <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>,
+<p style="padding-bottom: 10px;">When <a href="psi_element://perlvar%2F%24%2F"><code>$/</code></a> is set to <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>,
 when <a href="psi_element://pod%3A%3Aperlfunc%2Freadline+EXPR"><code>readline</code></a> is in scalar context (i.e., file
 slurp mode), and when an empty file is read, it returns <code>''</code> the first
 time, followed by <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a> subsequently.</p>

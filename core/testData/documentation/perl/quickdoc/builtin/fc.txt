@@ -17,8 +17,8 @@ regardless of case.</p>
 <div style="padding-bottom: 10px;"><pre><code>    fc($this) eq fc($that)</code></pre></div>
 <p style="padding-bottom: 10px;">And get the correct results.</p>
 <p style="padding-bottom: 10px;">Perl only implements the full form of casefolding, but you can access
-the simple folds using <a href="psi_element://Unicode%3A%3AUCD%2FB%3Ccasefold%28%29%3E" style="color:red"><B>casefold()</B> in Unicode::UCD</a> and
-<a href="psi_element://Unicode%3A%3AUCD%2FB%3Cprop_invmap%28%29%3E" style="color:red"><B>prop_invmap()</B> in Unicode::UCD</a>.
+the simple folds using <a href="psi_element://Unicode%3A%3AUCD%2Fcasefold%28%29" style="color:red"><B>casefold()</B> in Unicode::UCD</a> and
+<a href="psi_element://Unicode%3A%3AUCD%2Fprop_invmap%28%29" style="color:red"><B>prop_invmap()</B> in Unicode::UCD</a>.
 For further information on casefolding, refer to
 the Unicode Standard, specifically sections 3.13 <code>Default Case Operations</code>,
 4.2 <code>Case-Normative</code>, and 5.18 <code>Case Mappings</code>,

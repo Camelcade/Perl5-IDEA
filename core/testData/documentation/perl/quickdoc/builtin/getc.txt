@@ -26,6 +26,6 @@ to hit enter.  For that, try something more like:</p>
     print &quot;\n&quot;;</code></pre></div>
 <p style="padding-bottom: 10px;">Determination of whether <code>$BSD_STYLE</code> should be set is left as an
 exercise to the reader.</p>
-<p style="padding-bottom: 10px;">The <a href="psi_element://POSIX%2FC%3Cgetattr%3E" style="color:red"><code>POSIX::getattr</code></a> function can do this more
+<p style="padding-bottom: 10px;">The <a href="psi_element://POSIX%2Fgetattr" style="color:red"><code>POSIX::getattr</code></a> function can do this more
 portably on systems purporting POSIX compliance.  See also the
 <a href="psi_element://Term%3A%3AReadKey" style="color:red"><code>Term::ReadKey</code></a> module on CPAN.</p></dd></dl>

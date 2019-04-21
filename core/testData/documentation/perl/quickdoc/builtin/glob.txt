@@ -30,7 +30,7 @@ each pairing of fruits and colors:</p>
 <div style="padding-bottom: 10px;"><pre><code>    my @many = glob &quot;{apple,tomato,cherry}={green,yellow,red}&quot;;</code></pre></div>
 <p style="padding-bottom: 10px;">This operator is implemented using the standard <code>File::Glob</code> extension.
 See <a href="psi_element://File%3A%3AGlob" style="color:red">File::Glob</a> for details, including
-<a href="psi_element://File%3A%3AGlob%2FC%3Cbsd_glob%3E" style="color:red"><code>bsd_glob</code></a>, which does not treat whitespace
+<a href="psi_element://File%3A%3AGlob%2Fbsd_glob" style="color:red"><code>bsd_glob</code></a>, which does not treat whitespace
 as a pattern separator.</p>
 <p style="padding-bottom: 10px;">If a <code>glob</code> expression is used as the condition of a <code>while</code> or <code>for</code>
 loop, then it will be implicitly assigned to <code>$_</code>.  If either a <code>glob</code>

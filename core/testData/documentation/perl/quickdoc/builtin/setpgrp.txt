@@ -6,5 +6,5 @@ implement POSIX <a href="psi_element://setpgid%282%29" style="color:red">setpgid
 are omitted, it defaults to <code>0,0</code>.  Note that the BSD 4.2 version of
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsetpgrp+PID%2CPGRP"><code>setpgrp</code></a> does not accept any arguments, so only
 <code>setpgrp(0,0)</code> is portable.  See also
-<a href="psi_element://POSIX%2FC%3Csetsid%3E" style="color:red"><code>POSIX::setsid()</code></a>.</p>
+<a href="psi_element://POSIX%2Fsetsid" style="color:red"><code>POSIX::setsid()</code></a>.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fsetpgrp">setpgrp in perlport</a>.</p></dd></dl>

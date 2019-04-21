@@ -10,5 +10,5 @@ numbers can sometimes produce counterintuitive results.  For example,
 because it's really more like -268.99999999999994315658 instead.  Usually,
 the <a href="psi_element://pod%3A%3Aperlfunc%2Fsprintf+FORMAT%2C+LIST"><code>sprintf</code></a>,
 <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a>, or the
-<a href="psi_element://POSIX%2FC%3Cfloor%3E" style="color:red"><code>POSIX::floor</code></a> and <a href="psi_element://POSIX%2FC%3Cceil%3E" style="color:red"><code>POSIX::ceil</code></a>
+<a href="psi_element://POSIX%2Ffloor" style="color:red"><code>POSIX::floor</code></a> and <a href="psi_element://POSIX%2Fceil" style="color:red"><code>POSIX::ceil</code></a>
 functions will serve you better than will <a href="psi_element://pod%3A%3Aperlfunc%2Fint+EXPR"><code>int</code></a>.</p></dd></dl>

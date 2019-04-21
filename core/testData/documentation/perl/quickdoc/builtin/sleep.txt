@@ -25,4 +25,4 @@ version of <a href="psi_element://pod%3A%3Aperlfunc%2Fselect+RBITS%2CWBITS%2CEBI
 first three arguments undefined, or you might be able to use the
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsyscall+NUMBER%2C+LIST"><code>syscall</code></a> interface to access <a href="psi_element://setitimer%282%29" style="color:red">setitimer(2)</a>
 if your system supports it.  See <a href="psi_element://perlfaq8">perlfaq8</a> for details.</p>
-<p style="padding-bottom: 10px;">See also the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2FC%3Cpause%3E" style="color:red"><code>pause</code></a> function.</p></dd></dl>
+<p style="padding-bottom: 10px;">See also the <a href="psi_element://POSIX" style="color:red">POSIX</a> module's <a href="psi_element://POSIX%2Fpause" style="color:red"><code>pause</code></a> function.</p></dd></dl>

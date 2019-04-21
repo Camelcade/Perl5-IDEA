@@ -1,7 +1,7 @@
 <p><a href="psi_element://pod%3A%3Aperlfunc">pod::perlfunc</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlfunc%2FAlphabetical+Listing+of+Perl+Functions">Alphabetical Listing of Perl Functions</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">waitpid PID,FLAGS</dt><dd style="padding-top:6px;">
 <p style="padding-bottom: 10px;">Waits for a particular child process to terminate and returns the pid of
 the deceased process, or <code>-1</code> if there is no such child process.  A
-non-blocking wait (with <a href="psi_element://POSIX%2FC%3CWNOHANG%3E" style="color:red">WNOHANG</a> in FLAGS) can return 0 if
+non-blocking wait (with <a href="psi_element://POSIX%2FWNOHANG" style="color:red">WNOHANG</a> in FLAGS) can return 0 if
 there are child processes matching PID but none have terminated yet.
 The status is returned in <a href="psi_element://perlvar%2F%24%3F"><code>$?</code></a> and
 <a href="psi_element://perlvar%2F%24%7B%5ECHILD_ERROR_NATIVE%7D"><code>${^CHILD_ERROR_NATIVE}</code></a>.</p>

@@ -268,7 +268,7 @@ index, the <code>$</code> may need escaping:</p>
  printf &quot;%2\$*3\$d %d\n&quot;,  12, 34,  3; # will print &quot; 34 12\n&quot;
  printf &quot;%*1\$.*f\n&quot;,       4,  5, 10; # will print &quot;5.0000\n&quot;</code></pre></div></dd></dl>
 <p style="padding-bottom: 10px;">If <a href="psi_element://locale" style="color:red"><code>use locale</code></a> (including <code>use locale ':not_characters'</code>)
-is in effect and <a href="psi_element://POSIX%2FC%3Csetlocale%3E" style="color:red"><code>POSIX::setlocale</code></a> has been
+is in effect and <a href="psi_element://POSIX%2Fsetlocale" style="color:red"><code>POSIX::setlocale</code></a> has been
 called,
 the character used for the decimal separator in formatted floating-point
 numbers is affected by the <code>LC_NUMERIC</code> locale.  See <a href="psi_element://perllocale">perllocale</a>

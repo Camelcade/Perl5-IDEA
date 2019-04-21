@@ -83,7 +83,7 @@ operations, but also when using
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsysread+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET"><code>sysread</code></a>,
 <a href="psi_element://pod%3A%3Aperlfunc%2Fsyswrite+FILEHANDLE%2CSCALAR%2CLENGTH%2COFFSET"><code>syswrite</code></a> and
 <a href="psi_element://pod%3A%3Aperlfunc%2Ftell+FILEHANDLE"><code>tell</code></a> (see <a href="psi_element://perlport">perlport</a> for more details).  See the
-<a href="psi_element://perlvar%2F%24E%3Csol%3E" style="color:red"><code>$/</code></a> and <a href="psi_element://perlvar%2F%24%5C"><code>$\</code></a> variables in
+<a href="psi_element://perlvar%2F%24%2F"><code>$/</code></a> and <a href="psi_element://perlvar%2F%24%5C"><code>$\</code></a> variables in
 <a href="psi_element://perlvar">perlvar</a> for how to manually set your input and output
 line-termination sequences.</p>
 <p style="padding-bottom: 10px;">Portability issues: <a href="psi_element://perlport%2Fbinmode">binmode in perlport</a>.</p></dd></dl>

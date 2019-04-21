@@ -8,7 +8,7 @@ key, but deleting it does; see <a href="psi_element://pod%3A%3Aperlfunc%2Fexists
 element in scalar context.  The return list's length corresponds to that of
 the argument list: deleting non-existent elements returns the undefined value
 in their corresponding positions. When a
-<a href="psi_element://perldata%2FKeyE%3Csol%3EValue+Hash+Slices" style="color:red">key/value hash slice</a> is passed to
+<a href="psi_element://perldata%2FKey%2FValue+Hash+Slices">key/value hash slice</a> is passed to
 <code>delete</code>, the return value is a list of key/value pairs (two elements for each
 item deleted from the hash).</p>
 <p style="padding-bottom: 10px;"><a href="psi_element://pod%3A%3Aperlfunc%2Fdelete+EXPR"><code>delete</code></a> may also be used on arrays and array slices,
