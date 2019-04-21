@@ -540,6 +540,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void addVirtualFileFilter() {
+    if (!restrictFilesParsing()) {
+      return;
+    }
     VirtualFile openedVirtualFile = getFile().getVirtualFile();
     ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(file -> {
       if (!(file.getFileType() instanceof PerlPluginBaseFileType)) {
@@ -589,6 +592,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   public void checkSerializedReferencesWithFile() {
     checkSerializedReferencesWithFile("");
+  }
+
+  protected boolean restrictFilesParsing() {
+    return true;
   }
 
   public void checkSerializedReferencesWithFile(@NotNull String appendix) {

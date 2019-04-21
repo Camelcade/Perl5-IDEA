@@ -1,0 +1,6 @@
+PodLinkToFileReference at (6,13); text in range: 'perlvar' => 1 results:
+	POD file at 0 in perlvar.pod
+
+PodLinkToSectionReference at (14,18); text in range: '$ARG' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3037 in perlvar.pod
+

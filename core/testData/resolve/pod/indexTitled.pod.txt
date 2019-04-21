@@ -1,0 +1,6 @@
+PodLinkToFileReference at (17,24); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+PodLinkToSectionReference at (25,26); text in range: 'Z' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14850 in perlpod.pod
+

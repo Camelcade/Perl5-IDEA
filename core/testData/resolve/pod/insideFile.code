@@ -1,0 +1,98 @@
+Text
+
+=head1 First header
+
+Text
+
+=over
+
+=item This C<some> item
+X<someindex>
+
+=over
+
+=item Ohter item
+X<other index>
+
+=back
+
+=back
+
+=head2 Second C<header>
+
+Text
+
+=head3 I<Third header>
+
+Text
+
+=head4 B<Fourth> header
+
+Text
+
+Links:
+
+L</First header>
+L</This C<some> item>
+L</someindex>
+L</Ohter item>
+L</other index>
+L</Second C<header>>
+L</I<Third header>>
+L</B<Fourth> header>
+
+L</"First header">
+L</"This C<some> item">
+L</"someindex">
+L</"Ohter item">
+L</"other index">
+L</"Second C<header>">
+L</"I<Third header>">
+L</"B<Fourth> header">
+
+L<Title|/First header>
+L<Title|/This C<some> item>
+L<Title|/someindex>
+L<Title|/Ohter item>
+L<Title|/other index>
+L<Title|/Second C<header>>
+L<Title|/I<Third header>>
+L<Title|/B<Fourth> header>
+
+L<Title|/"First header">
+L<Title|/"This C<some> item">
+L<Title|/"someindex">
+L<Title|/"Ohter item">
+L<Title|/"other index">
+L<Title|/"Second C<header>">
+L<Title|/"I<Third header>">
+L<Title|/"B<Fourth> header">
+
+L<Title|/"C<First header>">
+L<Title|/"C<This C<some> item>">
+L<Title|/"C<someindex>">
+L<Title|/"C<Ohter item>">
+L<Title|/"C<other index>">
+L<Title|/"C<Second C<header>>">
+L<Title|/"C<I<Third header>>">
+L<Title|/"C<B<Fourth> header>">
+
+L<Title|First header>
+L<Title|This C<some> item>
+L<Title|someindex>
+L<Title|Ohter item>
+L<Title|other index>
+L<Title|Second C<header>>
+L<Title|I<Third header>>
+L<Title|B<Fourth> header>
+
+L<Title|"First header">
+L<Title|"This C<some> item">
+L<Title|"someindex">
+L<Title|"Ohter item">
+L<Title|"other index">
+L<Title|"Second C<header>">
+L<Title|"I<Third header>">
+L<Title|"B<Fourth> header">
+
+

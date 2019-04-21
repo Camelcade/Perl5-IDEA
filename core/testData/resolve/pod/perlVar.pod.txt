@@ -1,0 +1,3 @@
+PodLinkToFileReference at (2,9); text in range: 'perlvar' => 1 results:
+	POD file at 0 in perlvar.pod
+

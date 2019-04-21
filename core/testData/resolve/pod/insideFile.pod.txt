@@ -1,0 +1,172 @@
+PodSubReference at (13,18); text in range: 'First' => 0 results:
+
+PodSubReference at (46,50); text in range: 'This' => 0 results:
+
+PodSubReference at (91,96); text in range: 'Ohter' => 0 results:
+
+PodSubReference at (139,145); text in range: 'Second' => 0 results:
+
+PodLinkToSectionReference at (235,247); text in range: 'First header' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6 in insideFile.pod
+
+PodLinkToSectionReference at (252,269); text in range: 'This C<some> item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToSectionReference at (274,283); text in range: 'someindex' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in insideFile.pod
+
+PodLinkToSectionReference at (288,298); text in range: 'Ohter item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85 in insideFile.pod
+
+PodLinkToSectionReference at (303,314); text in range: 'other index' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in insideFile.pod
+
+PodLinkToSectionReference at (319,335); text in range: 'Second C<header>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (340,355); text in range: 'I<Third header>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (360,376); text in range: 'B<Fourth> header' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+
+PodLinkToSectionReference at (383,395); text in range: 'First header' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6 in insideFile.pod
+
+PodLinkToSectionReference at (402,419); text in range: 'This C<some> item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToSectionReference at (426,435); text in range: 'someindex' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in insideFile.pod
+
+PodLinkToSectionReference at (442,452); text in range: 'Ohter item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85 in insideFile.pod
+
+PodLinkToSectionReference at (459,470); text in range: 'other index' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in insideFile.pod
+
+PodLinkToSectionReference at (477,493); text in range: 'Second C<header>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (500,515); text in range: 'I<Third header>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (522,538); text in range: 'B<Fourth> header' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+
+PodLinkToSectionReference at (551,563); text in range: 'First header' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6 in insideFile.pod
+
+PodLinkToSectionReference at (574,591); text in range: 'This C<some> item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToSectionReference at (602,611); text in range: 'someindex' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in insideFile.pod
+
+PodLinkToSectionReference at (622,632); text in range: 'Ohter item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85 in insideFile.pod
+
+PodLinkToSectionReference at (643,654); text in range: 'other index' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in insideFile.pod
+
+PodLinkToSectionReference at (665,681); text in range: 'Second C<header>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (692,707); text in range: 'I<Third header>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (718,734); text in range: 'B<Fourth> header' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+
+PodLinkToSectionReference at (747,759); text in range: 'First header' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6 in insideFile.pod
+
+PodLinkToSectionReference at (772,789); text in range: 'This C<some> item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToSectionReference at (802,811); text in range: 'someindex' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in insideFile.pod
+
+PodLinkToSectionReference at (824,834); text in range: 'Ohter item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85 in insideFile.pod
+
+PodLinkToSectionReference at (847,858); text in range: 'other index' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in insideFile.pod
+
+PodLinkToSectionReference at (871,887); text in range: 'Second C<header>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (900,915); text in range: 'I<Third header>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (928,944); text in range: 'B<Fourth> header' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+
+PodLinkToSectionReference at (958,973); text in range: 'C<First header>' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6 in insideFile.pod
+
+PodLinkToSectionReference at (986,1006); text in range: 'C<This C<some> item>' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToSectionReference at (1019,1031); text in range: 'C<someindex>' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in insideFile.pod
+
+PodLinkToSectionReference at (1044,1057); text in range: 'C<Ohter item>' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85 in insideFile.pod
+
+PodLinkToSectionReference at (1070,1084); text in range: 'C<other index>' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in insideFile.pod
+
+PodLinkToSectionReference at (1097,1116); text in range: 'C<Second C<header>>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (1129,1147); text in range: 'C<I<Third header>>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (1160,1179); text in range: 'C<B<Fourth> header>' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+
+PodLinkToFileReference at (1191,1203); text in range: 'First header' => 0 results:
+
+PodLinkToSectionReference at (1213,1230); text in range: 'This C<some> item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToFileReference at (1240,1249); text in range: 'someindex' => 0 results:
+
+PodLinkToFileReference at (1259,1269); text in range: 'Ohter item' => 0 results:
+
+PodLinkToFileReference at (1279,1290); text in range: 'other index' => 0 results:
+
+PodLinkToSectionReference at (1300,1316); text in range: 'Second C<header>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (1326,1341); text in range: 'I<Third header>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (1351,1367); text in range: 'B<Fourth> header' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+
+PodLinkToSectionReference at (1379,1391); text in range: 'First header' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6 in insideFile.pod
+
+PodLinkToSectionReference at (1403,1420); text in range: 'This C<some> item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40 in insideFile.pod
+
+PodLinkToSectionReference at (1432,1441); text in range: 'someindex' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in insideFile.pod
+
+PodLinkToSectionReference at (1453,1463); text in range: 'Ohter item' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85 in insideFile.pod
+
+PodLinkToSectionReference at (1475,1486); text in range: 'other index' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in insideFile.pod
+
+PodLinkToSectionReference at (1498,1514); text in range: 'Second C<header>' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 132 in insideFile.pod
+
+PodLinkToSectionReference at (1526,1541); text in range: 'I<Third header>' => 1 results:
+	PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 163 in insideFile.pod
+
+PodLinkToSectionReference at (1553,1569); text in range: 'B<Fourth> header' => 1 results:
+	PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 193 in insideFile.pod
+

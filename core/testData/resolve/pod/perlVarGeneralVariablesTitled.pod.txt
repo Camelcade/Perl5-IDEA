@@ -1,0 +1,6 @@
+PodLinkToFileReference at (7,14); text in range: 'perlvar' => 1 results:
+	POD file at 0 in perlvar.pod
+
+PodLinkToSectionReference at (15,32); text in range: 'General Variables' => 1 results:
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3002 in perlvar.pod
+
