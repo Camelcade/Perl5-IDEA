@@ -60,7 +60,7 @@ public abstract class PerlLightTestCase extends PerlLightTestCaseBase {
     }
   }
 
-  protected void withPerlDoc() {addTestLibrary("perldoc");}
+  protected void withPerlPod() {addTestLibrary("perldoc");}
 
   protected void withCpanfile() {addTestLibrary("cpanfile");}
 
