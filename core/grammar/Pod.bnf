@@ -55,6 +55,7 @@ limitations under the License.
   implements("head1_section|head2_section|head3_section|head4_section|item_section")="com.perl5.lang.pod.parser.psi.PodTitledSection"
 
   mixin("pod_format_nbsp")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterSMixin"
+  implements("pod_format_index")="com.perl5.lang.pod.parser.psi.PodFormatterX"
   mixin("pod_format_index")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterXMixin"
   mixin("pod_format_null")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterZMixin"
 

@@ -41,6 +41,7 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
     super(node);
   }
 
+  @Nullable
   @Override
   public PsiElement getTitleBlock() {
     return findChildByClass(PodSectionTitle.class);

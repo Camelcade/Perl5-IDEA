@@ -16,9 +16,28 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.PerlBundle;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
 public interface PodFormatterX extends PodStubBasedSection, PodFormatter {
+  /**
+   * @return a real target of this index. Outer item, heading or file.
+   */
+  @Nullable
+  default PsiElement getIndexTarget() {
+    PsiElement container = PsiTreeUtil.getParentOfType(this, PodTitledSection.class);
+    return container == null ? getContainingFile() : container;
+  }
 
+  @NotNull
+  @Override
+  default String getTypeText() {
+    return PerlBundle.message("pod.type.index");
+  }
 }

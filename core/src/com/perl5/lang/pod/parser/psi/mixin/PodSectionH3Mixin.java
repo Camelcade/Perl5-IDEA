@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionH3;
 import org.jetbrains.annotations.NotNull;
@@ -51,5 +52,11 @@ public class PodSectionH3Mixin extends PodTitledSectionMixin implements PodSecti
   @Override
   public String getUsageViewTypeLocation() {
     return "3rd Level Header";
+  }
+
+  @NotNull
+  @Override
+  public String getTypeText() {
+    return PerlBundle.message("pod.type.heading3");
   }
 }

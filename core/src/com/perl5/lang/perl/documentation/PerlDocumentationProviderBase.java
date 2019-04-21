@@ -22,12 +22,14 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.PodFormatterX;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +44,10 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
 public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider {
   @Nullable
   @Override
-  public String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
+  public String generateDoc(@Nullable PsiElement element, @Nullable PsiElement originalElement) {
+    if (element == null) {
+      return null;
+    }
     String result = null;
     if (element instanceof PodFile) {
       result = PerlDocUtil.renderPodFile((PodFileImpl)element);
@@ -51,11 +56,7 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
       }
     }
     else if (element instanceof PodFormatterX) {
-      PsiElement container = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
-      if (container != null) {
-        return generateDoc(container, originalElement);
-      }
-      return generateDoc(element.getContainingFile(), originalElement);
+      return generateDoc(((PodFormatterX)element).getIndexTarget(), originalElement);
     }
     else if (element instanceof PodCompositeElement) {
       result = PerlDocUtil.renderElement((PodCompositeElement)element);

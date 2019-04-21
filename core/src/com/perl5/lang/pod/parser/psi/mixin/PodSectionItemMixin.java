@@ -19,6 +19,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionItem;
@@ -82,5 +83,11 @@ public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSec
   @Override
   public String getUsageViewTypeLocation() {
     return "List Item";
+  }
+
+  @NotNull
+  @Override
+  public String getTypeText() {
+    return PerlBundle.message("pod.type.list.item");
   }
 }

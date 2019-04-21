@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,5 +34,11 @@ public abstract class PodUnknownSectionMixIn extends PodTitledSectionMixin {
     builder.append(PARAGRAPH_PREFIX);
     super.renderElementTitleAsHTML(builder, context);
     builder.append(PARAGRAPH_SUFFIX);
+  }
+
+  @NotNull
+  @Override
+  public String getTypeText() {
+    return PerlBundle.message("pod.type.unknown");
   }
 }

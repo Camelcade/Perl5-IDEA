@@ -20,6 +20,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.pom.PomTarget;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -33,5 +34,12 @@ public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructur
   @Nullable
   String getTitleText();
 
+  @Nullable
   PsiElement getTitleBlock();
+
+  /**
+   * @return human readable type for this section. Used in completion
+   */
+  @NotNull
+  String getTypeText();
 }

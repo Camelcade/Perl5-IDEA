@@ -29,7 +29,7 @@ import static com.intellij.patterns.PlatformPatterns.psiElement;
  */
 public interface PodElementPatterns extends PodElementTypes {
   PsiElementPattern.Capture<PsiElement> LINK_IDENTIFIER =
-    psiElement().withParent(psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));
+    psiElement().withSuperParent(2, psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));
 
   PsiElementPattern.Capture<PsiElement> TITLE_IDENTIFIER =
     psiElement().withParent(psiElement(SECTION_TITLE));

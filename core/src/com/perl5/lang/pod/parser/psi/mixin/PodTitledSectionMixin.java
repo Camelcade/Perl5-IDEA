@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
@@ -37,6 +38,7 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
     super(node);
   }
 
+  @Nullable
   @Override
   public PsiElement getTitleBlock() {
     return findChildByClass(PodSectionTitle.class);
@@ -148,5 +150,11 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   @Override
   public String getUsageViewShortNameLocation() {
     return getName();
+  }
+
+  @NotNull
+  @Override
+  public String getTypeText() {
+    return PerlBundle.message("pod.type.unknown");
   }
 }
