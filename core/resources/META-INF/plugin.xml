@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
+<idea-plugin url="https://github.com/Camelcade/Perl5-IDEA">
   <id>com.perl5</id>
   <name>Perl</name>
   <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
