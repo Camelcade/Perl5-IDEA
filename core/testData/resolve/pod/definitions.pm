@@ -1,0 +1,34 @@
+=pod
+
+Text
+
+=head1 First header
+
+Text
+
+=over
+
+=item This C<some> item
+X<someindex>
+
+=over
+
+=item Ohter item
+X<other index>
+
+=back
+
+=back
+
+=head2 Second C<header>
+
+Text
+
+=head3 I<Third header>
+
+Text
+
+=head4 B<Fourth> header
+
+Text
+

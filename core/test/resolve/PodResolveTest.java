@@ -84,12 +84,21 @@ public class PodResolveTest extends PodLightTestCase {
     doTest();
   }
 
-  public void testNearFile() {
-    VirtualFile targetFile = myFixture.copyFileToProject("definitions.pod", "lib/definitions.pod");
+  public void testExternalPod() {
+    doTestExternalFile("definitions.pod");
+  }
+
+  public void testExternalPm() {
+    doTestExternalFile("definitions.pm");
+  }
+
+  private void doTestExternalFile(@NotNull String fileToCopy) {
+    initWithFileSmartWithoutErrors("toExternalFile");
+    VirtualFile targetFile = myFixture.copyFileToProject(fileToCopy, "lib/" + fileToCopy);
     assertNotNull(targetFile);
     markAsLibRoot(targetFile.getParent(), true);
 
-    doTest();
+    doTestResolveWithoutInit(false);
   }
 
   public void testIndexTitled() {
