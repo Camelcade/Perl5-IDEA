@@ -149,10 +149,10 @@ public class PodLinkDescriptor {
       }
     }
     else if (sectionElement != null) {
-      linkSection = sectionElement.getText();
+      linkSection = PodRenderUtil.renderPsiElementAsText(sectionElement);
       if (linkTextText == null) {
         linkTextHtml = PodRenderUtil.renderPsiElementAsHTML(sectionElement);
-        linkTextText = PodRenderUtil.renderPsiElementAsText(sectionElement);
+        linkTextText = linkSection;
         if (nameElement != null) {
           linkName = nameElement.getText();
           linkTextHtml = buildTitle(linkName, linkTextHtml, false);
