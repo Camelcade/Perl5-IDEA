@@ -66,7 +66,7 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
   public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
     if (context instanceof PodCompositeElement || context instanceof PerlFile) {
       try {
-        return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.createFromUrl(URLDecoder.decode(link, "UTF-8")), context);
+        return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.createFromUrl(URLDecoder.decode(link, "UTF-8")), context, false);
       }
       catch (Exception e) {
         throw new RuntimeException(e);

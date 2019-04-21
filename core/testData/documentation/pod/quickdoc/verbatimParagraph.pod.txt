@@ -1,0 +1,10 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a></p><h2>Verbatim Paragraph
+ </h2><p style="padding-bottom: 10px;">Verbatim paragraphs are usually used for presenting a codeblock or
+other text which does not require any special parsing or formatting,
+and which shouldn't be wrapped.</p>
+<p style="padding-bottom: 10px;">A verbatim paragraph is distinguished by having its first character
+be a space or a tab.  (And commonly, all its lines begin with spaces
+and/or tabs.)  It should be reproduced exactly, with tabs assumed to
+be on 8-column boundaries.  There are no special formatting codes,
+so you can't italicize or anything like that.  A \ means \, and
+nothing else.</p>

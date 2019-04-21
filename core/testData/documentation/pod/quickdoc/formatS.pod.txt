@@ -1,0 +1,3 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>S&lt;text&gt;</code> -- text contains non-breaking spaces
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This means that the words in <i>text</i> should not be broken
+across lines.  Example: <span style="white-space: nowrap;"><code>S&lt;$x ? $y : $z&gt;</code></span>.</p></dd></dl>

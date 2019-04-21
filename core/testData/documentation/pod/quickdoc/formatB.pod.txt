@@ -1,0 +1,5 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>B&lt;text&gt;</code> -- bold text
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Used for switches (&quot;<code>perl's B&lt;-n&gt; switch</code>&quot;), programs
+(&quot;<code>some systems provide a B&lt;chfn&gt; for that</code>&quot;),
+emphasis (&quot;<code>be B&lt;careful!&gt;</code>&quot;), and so on
+(&quot;<code>and that feature is known as B&lt;autovivification&gt;</code>&quot;).</p></dd></dl>

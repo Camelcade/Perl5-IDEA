@@ -1,0 +1,4 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>X&lt;topic name&gt;</code> -- an index entry
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is ignored by most formatters, but some may use it for building
+indexes.  It always renders as empty-string.
+Example: <code>X&lt;absolutizing relative URLs&gt;</code></p></dd></dl>

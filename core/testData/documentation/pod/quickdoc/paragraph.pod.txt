@@ -1,0 +1,10 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a></p><h2>Ordinary Paragraph</h2><p style="padding-bottom: 10px;">Most paragraphs in your documentation will be ordinary blocks
+of text, like this one.  You can simply type in your text without
+any markup whatsoever, and with just a blank line before and
+after.  When it gets formatted, it will undergo minimal formatting, 
+like being rewrapped, probably put into a proportionally spaced
+font, and maybe even justified.</p>
+<p style="padding-bottom: 10px;">You can use formatting codes in ordinary paragraphs, for <B>bold</B>,
+<i>italic</i>, <code>code-style</code>, <a href="psi_element://perlfaq">hyperlinks</a>, and more.  Such
+codes are explained in the &quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot;
+section, below.</p>

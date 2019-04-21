@@ -48,22 +48,22 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
       if (tagElement != null) {
         String tagText = tagElement.getText();
         if (StringUtil.isNotEmpty(tagText)) {
-          return PerlDocUtil.resolveDoc("perlpod", tagText + "<", contextElement);
+          return PerlDocUtil.resolveDoc("perlpod", tagText, contextElement, true);
         }
       }
     }
     else if (contextElement instanceof PodSectionParagraph) {
-      return PerlDocUtil.resolveDoc("perlpod", "Ordinary Paragraph", contextElement);
+      return PerlDocUtil.resolveDoc("perlpod", "Ordinary Paragraph", contextElement, true);
     }
     else if (contextElement instanceof PodSectionVerbatimParagraph) {
-      return PerlDocUtil.resolveDoc("perlpod", "Verbatim Paragraph", contextElement);
+      return PerlDocUtil.resolveDoc("perlpod", "Verbatim Paragraph", contextElement, true);
     }
     else if (contextElement instanceof PodSection) {
       PsiElement tagElement = contextElement.getFirstChild();
       if (tagElement != null && tagElement.getNode().getElementType() != POD_UNKNOWN) {
         String tagText = tagElement.getText();
         if (StringUtil.isNotEmpty(tagText)) {
-          return PerlDocUtil.resolveDoc("perlpod", tagText, contextElement);
+          return PerlDocUtil.resolveDoc("perlpod", tagText, contextElement, true);
         }
       }
     }

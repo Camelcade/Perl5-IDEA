@@ -1,0 +1,4 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>C&lt;code&gt;</code> -- code text
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Renders code in a typewriter font, or gives some other indication that
+this represents program text (&quot;<code>C&lt;gmtime($^T)&gt;</code>&quot;) or some other
+form of computerese (&quot;<code>C&lt;drwxr-xr-x&gt;</code>&quot;).</p></dd></dl>

@@ -1,0 +1,13 @@
+Some quick dock
+
+=over
+
+text
+
+=item some item S<caret><italic>
+
+othertext
+
+=back
+
+Other text

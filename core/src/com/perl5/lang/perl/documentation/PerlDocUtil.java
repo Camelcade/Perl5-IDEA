@@ -89,12 +89,12 @@ public class PerlDocUtil implements PerlElementTypes {
   }
 
   @Nullable
-  public static PsiElement resolveDoc(@NotNull String file, @Nullable String section, @NotNull PsiElement origin) {
-    return resolveDescriptor(PodLinkDescriptor.create(file, section), origin);
+  public static PsiElement resolveDoc(@NotNull String file, @Nullable String section, @NotNull PsiElement origin, boolean exactMatch) {
+    return resolveDescriptor(PodLinkDescriptor.create(file, section), origin, exactMatch);
   }
 
   @Nullable
-  public static PsiElement resolveDescriptor(@Nullable PodLinkDescriptor descriptor, @NotNull PsiElement origin) {
+  public static PsiElement resolveDescriptor(@Nullable PodLinkDescriptor descriptor, @NotNull PsiElement origin, boolean exactMatch) {
     final Project project = origin.getProject();
 
     if (descriptor != null) {
@@ -108,9 +108,12 @@ public class PerlDocUtil implements PerlElementTypes {
         if (descriptor.getSection() == null) {
           return targetFile;
         }
-        else    // seek section
-        {
-          PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection());
+        else {    // seek section
+          PodDocumentPattern pattern = PodDocumentPattern.headingAndItemPattern(descriptor.getSection())
+            .withIndexPattern(descriptor.getSection());
+          if (exactMatch) {
+            pattern.withExactMatch();
+          }
           return searchPodElement(targetFile, pattern);
         }
       }
@@ -136,7 +139,7 @@ public class PerlDocUtil implements PerlElementTypes {
       }
     }
 
-    return resolveDescriptor(PodLinkDescriptor.create("perlre", anchor), element);
+    return resolveDescriptor(PodLinkDescriptor.create("perlre", anchor), element, false);
   }
 
   @Nullable
@@ -150,7 +153,7 @@ public class PerlDocUtil implements PerlElementTypes {
       String text = actualType.getSigil() + PerlVariable.braceName(variableName);
 
       if (VARIABLES_LINKS.containsKey(text)) {
-        return resolveDescriptor(VARIABLES_LINKS.get(text), variable);
+        return resolveDescriptor(VARIABLES_LINKS.get(text), variable, false);
       }
 
       if (variable.isBuiltIn()) {
@@ -200,7 +203,7 @@ public class PerlDocUtil implements PerlElementTypes {
     }
 
     return redirect != null ?
-           resolveDescriptor(redirect, element) :
+           resolveDescriptor(redirect, element, false) :
            ObjectUtils.coalesce(getPerlFuncDocFromText(element, tokenChars.toString()), getPerlOpDoc(element));
   }
 
@@ -219,7 +222,7 @@ public class PerlDocUtil implements PerlElementTypes {
 
     PodLinkDescriptor redirect = OPERATORS_LINKS.get(text);
     if (redirect != null) {
-      return resolveDescriptor(redirect, element);
+      return resolveDescriptor(redirect, element, false);
     }
 
     // fixme use map?

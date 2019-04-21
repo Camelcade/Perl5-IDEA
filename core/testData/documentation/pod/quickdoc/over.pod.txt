@@ -1,0 +1,31 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FCommand+Paragraph">Command Paragraph</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>=over <i>indentlevel</i></code>
+     </dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>=item <i>stuff...</i></code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>=back</code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Item, over, and back require a little more explanation:  &quot;=over&quot; starts
+a region specifically for the generation of a list using &quot;=item&quot;
+commands, or for indenting (groups of) normal paragraphs.  At the end
+of your list, use &quot;=back&quot; to end it.  The <i>indentlevel</i> option to
+&quot;=over&quot; indicates how far over to indent, generally in ems (where
+one em is the width of an &quot;M&quot; in the document's base font) or roughly
+comparable units; if there is no <i>indentlevel</i> option, it defaults
+to four.  (And some formatters may just ignore whatever <i>indentlevel</i>
+you provide.)  In the <i>stuff</i> in <code>=item <i>stuff...</i></code>, you may
+use formatting codes, as seen here:</p>
+<div style="padding-bottom: 10px;"><pre><code>  =item Using C&lt;$|&gt; to Control Buffering</code></pre></div>
+<p style="padding-bottom: 10px;">Such commands are explained in the
+&quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p>
+<p style="padding-bottom: 10px;">Note also that there are some basic rules to using &quot;=over&quot; ...
+&quot;=back&quot; regions:</p>
+<ul><li><p style="padding-bottom: 10px;">Don't use &quot;=item&quot;s outside of an &quot;=over&quot; ... &quot;=back&quot; region.</p></li>
+<li><p style="padding-bottom: 10px;">The first thing after the &quot;=over&quot; command should be an &quot;=item&quot;, unless
+there aren't going to be any items at all in this &quot;=over&quot; ... &quot;=back&quot;
+region.</p></li>
+<li><p style="padding-bottom: 10px;">Don't put &quot;=head<i>n</i>&quot; commands inside an &quot;=over&quot; ... &quot;=back&quot; region.</p></li>
+<li><p style="padding-bottom: 10px;">And perhaps most importantly, keep the items consistent: either use
+&quot;=item *&quot; for all of them, to produce bullets; or use &quot;=item 1.&quot;,
+&quot;=item 2.&quot;, etc., to produce numbered lists; or use &quot;=item foo&quot;,
+&quot;=item bar&quot;, etc.--namely, things that look nothing like bullets or
+numbers.</p>
+<p style="padding-bottom: 10px;">If you start with bullets or numbers, stick with them, as
+formatters use the first &quot;=item&quot; type to decide how to format the
+list.</p></li></ul></dd></dl>
