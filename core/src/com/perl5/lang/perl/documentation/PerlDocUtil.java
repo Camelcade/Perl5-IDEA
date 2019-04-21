@@ -267,17 +267,8 @@ public class PerlDocUtil implements PerlElementTypes {
 
     PsiTreeUtil.processElements(psiFile, element -> {
       if (pattern.accepts(element)) {
-        if (element instanceof PodFormatterX) {
-          PsiElement container = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
-          if (container != null) {
-            result.add((PodCompositeElement)container);
-            return false;
-          }
-        }
-        else {
-          result.add((PodCompositeElement)element);
-          return false;
-        }
+        result.add((PodCompositeElement)element);
+        return false;
       }
       return true;
     });

@@ -22,13 +22,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodFile;
-import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,6 +49,13 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
       if (StringUtil.isEmpty(result)) {
         result = "Empty documenation section...";
       }
+    }
+    else if (element instanceof PodFormatterX) {
+      PsiElement container = PsiTreeUtil.getParentOfType(element, PodTitledSection.class);
+      if (container != null) {
+        return generateDoc(container, originalElement);
+      }
+      return generateDoc(element.getContainingFile(), originalElement);
     }
     else if (element instanceof PodCompositeElement) {
       result = PerlDocUtil.renderElement((PodCompositeElement)element);
