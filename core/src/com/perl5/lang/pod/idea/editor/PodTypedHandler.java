@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.idea.editor;
 
-import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
@@ -29,15 +28,18 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.psi.PsiLinkText;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 14.04.2016.
  */
-public class PodTypedHandler extends TypedHandlerDelegate implements PodElementTypes {
+public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElementTypes {
   private static final String POD_COMMANDS = "IBCLEFSXZ";
   private static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.create(
     POD_I,
@@ -127,7 +129,6 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
           }
         }
         else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType)) {
-          //noinspection ConstantConditions
           extendAngles(element.getParent());
           caretModel.moveToOffset(offset + 2);
           return Result.STOP;
@@ -149,7 +150,6 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
         }
 
         if (elementType == POD_ANGLE_RIGHT) {
-          //noinspection ConstantConditions
           caretModel.moveToOffset(offset + extendAngles(element.getParent()) + extraOffset);
           return Result.STOP;
         }
@@ -158,9 +158,18 @@ public class PodTypedHandler extends TypedHandlerDelegate implements PodElementT
     return super.beforeCharTyped(c, project, editor, file, fileType);
   }
 
-  @NotNull
   @Override
-  public Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-    return super.charTyped(c, project, editor, file);
+  protected boolean shouldShowPopup(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiElement element) {
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    CharSequence elementChars = element.getNode().getChars();
+    PsiElement elementParent = element.getParent();
+    IElementType parentType = PsiUtilCore.getElementType(elementParent);
+
+    return typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
+           typedChar == '|' && parentType == LINK_NAME ||
+           typedChar == '/' && (parentType == LINK_NAME ||
+                                elementType == POD_ANGLE_LEFT && parentType == POD_FORMAT_LINK ||
+                                elementType == POD_PIPE && element.getPrevSibling() instanceof PsiLinkText)
+      ;
   }
 }

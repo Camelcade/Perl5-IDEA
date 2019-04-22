@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.editor.smartkeys;
 import com.intellij.codeInsight.AutoPopupController;
 import com.intellij.codeInsight.CodeInsightSettings;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -54,7 +53,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 /**
  * Created by hurricup on 25.07.2015.
  */
-public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElementTypes {
+public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlElementTypes {
   // these chars are automatically closed by IDEA and we can't control this
   private static final String HANDLED_BY_BRACE_MATCHER = "{([";
 
@@ -225,31 +224,18 @@ public class PerlTypedHandler extends TypedHandlerDelegate implements PerlElemen
     return Result.CONTINUE;
   }
 
-  @NotNull
-  @Override
-  public Result checkAutoPopup(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-    int currentOffset = editor.getCaretModel().getOffset();
-    if (currentOffset > 0) {
-      currentOffset--;
-    }
-    PsiElement element = file.findElementAt(currentOffset);
-    if (element == null) {
-      return super.checkAutoPopup(typedChar, project, editor, file);
-    }
+  protected boolean shouldShowPopup(char typedChar,
+                                    @NotNull Project project,
+                                    @NotNull Editor editor,
+                                    @NotNull PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
-
-    if (typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
-        typedChar == '>' && elementType == OPERATOR_MINUS ||
-        typedChar == ':' && elementType == COLON ||
-        typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) ||
-                             element.getParent() instanceof PerlStringBareMixin &&
-                             element.getParent().getParent() instanceof PsiPerlStringList) ||
-        typedChar == '{' && SIGILS.contains(elementType) ||
-        StringUtil.containsChar("$@%#", typedChar)) {
-      AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
-      return Result.STOP;
-    }
-
-    return super.checkAutoPopup(typedChar, project, editor, file);
+    return typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
+           typedChar == '>' && elementType == OPERATOR_MINUS ||
+           typedChar == ':' && elementType == COLON ||
+           typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) ||
+                                element.getParent() instanceof PerlStringBareMixin &&
+                                element.getParent().getParent() instanceof PsiPerlStringList) ||
+           typedChar == '{' && SIGILS.contains(elementType) ||
+           StringUtil.containsChar("$@%#", typedChar);
   }
 }
