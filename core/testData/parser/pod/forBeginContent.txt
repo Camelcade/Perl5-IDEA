@@ -32,9 +32,9 @@ POD file
       PsiPodFormatCodeImpl(Perl5 POD: POD_FORMAT_CODE)
         PsiElement(Perl5 POD: C)('C')
         PsiElement(Perl5 POD: <)('<')
-        PsiErrorElement:Unclosed angles
+        PsiErrorElement:Malformed formatter
           <empty list>
-    PsiElement(Perl5 POD: NL)('\n')
+        PsiElement(Perl5 POD: NL)('\n')
   PsiForSectionImpl(Perl5 POD: FOR_SECTION)
     PsiElement(Perl5 POD: =begin)('=begin')
     PsiPodSectionFormatImpl(Perl5 POD: POD_SECTION_FORMAT)
@@ -54,9 +54,9 @@ POD file
     PsiPodFormatCodeImpl(Perl5 POD: POD_FORMAT_CODE)
       PsiElement(Perl5 POD: C)('C')
       PsiElement(Perl5 POD: <)('<')
-      PsiErrorElement:Unclosed angles
+      PsiErrorElement:Malformed formatter
         <empty list>
-    PsiElement(Perl5 POD: NL)('\n')
+      PsiElement(Perl5 POD: NL)('\n')
   PsiForSectionImpl(Perl5 POD: FOR_SECTION)
     PsiElement(Perl5 POD: =end)('=end')
     PsiPodSectionFormatImpl(Perl5 POD: POD_SECTION_FORMAT)
@@ -84,9 +84,9 @@ POD file
     PsiPodFormatCodeImpl(Perl5 POD: POD_FORMAT_CODE)
       PsiElement(Perl5 POD: C)('C')
       PsiElement(Perl5 POD: <)('<')
-      PsiErrorElement:Unclosed angles
+      PsiErrorElement:Malformed formatter
         <empty list>
-    PsiElement(Perl5 POD: NL)('\n')
+      PsiElement(Perl5 POD: NL)('\n')
   PsiForSectionImpl(Perl5 POD: FOR_SECTION)
     PsiElement(Perl5 POD: =end)('=end')
     PsiPodSectionFormatImpl(Perl5 POD: POD_SECTION_FORMAT)

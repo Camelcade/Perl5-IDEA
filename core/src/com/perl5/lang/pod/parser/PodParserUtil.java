@@ -27,12 +27,17 @@ import org.jetbrains.annotations.NotNull;
  * Created by hurricup on 26.03.2016.
  */
 public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
-  public static boolean consumeOrReport(PsiBuilder b, int l, @NotNull IElementType targetElement, @NotNull String message) {
+  public static boolean completeOrReport(PsiBuilder b, int l, @NotNull IElementType targetElement, @NotNull String message) {
     if (b.getTokenType() == targetElement) {
       b.advanceLexer();
       return true;
     }
-    b.mark().error(message);
+    PsiBuilder.Marker marker = b.mark();
+    while (!b.eof() && b.getTokenType() != targetElement && b.getTokenType() != POD_NEWLINE) {
+      b.advanceLexer();
+    }
+    marker.error(message);
+    b.advanceLexer();
     return true;
   }
 

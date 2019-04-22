@@ -263,19 +263,22 @@ pod_format_null ::= 'Z' parse_default_section_content {pin=1}
 pod_format_link ::= 'L' <<parse_section_content link_formatting_section>> {pin=1}
 
 private parse_default_section_content ::= <<parse_section_content default_formatting_section_item>>
-private meta parse_section_content ::= '<' <<formatting_section_content <<x1>>>> ? <<consumeOrReport 'POD_ANGLE_RIGHT, "Unclosed angles"'>> {pin=1}
-meta formatting_section_content ::=  <<x1>> +
-private default_formatting_section_item ::= &formatting_section_allowed_tokens pod_term
+private meta parse_section_content ::= '<' <<formatting_section_content <<x1>>>> ? <<completeOrReport 'POD_ANGLE_RIGHT, "Malformed formatter"'>> {pin=1}
+meta formatting_section_content ::=  <<x1>>
+private default_formatting_section_item ::= {&formatting_section_allowed_tokens pod_term}+
 private formatting_section_allowed_tokens ::= !('NL'|'>')
 
-private link_formatting_section ::=
-  [link_text '|'] {
-    link_url |
-    link_name [parse_link_section] |
-    parse_link_section |
-    parse_quoted_section |
-    parse_unquoted_section
-  } & '>'
+private link_formatting_section ::= link_with_title | link_after_title
+private link_with_title ::= link_text '|'  link_after_title {pin=2}
+
+private link_after_title ::= {
+     link_url |
+     link_name [parse_link_section] |
+     parse_link_section |
+     parse_quoted_section |
+     parse_unquoted_section
+   } & '>'
+
 //          | default_formatting_section_item // falling back to default
 
 link_text ::= {&link_text_negation pod_term}+ &'|'
