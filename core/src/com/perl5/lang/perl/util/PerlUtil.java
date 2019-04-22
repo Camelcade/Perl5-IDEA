@@ -22,10 +22,13 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.util.processors.PerlInternalIndexKeysProcessor;
 import gnu.trove.THashSet;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -37,9 +40,10 @@ import java.util.Set;
  * Misc helper methods
  */
 public class PerlUtil implements PerlElementTypes {
+  @Contract("null->null")
   @Nullable
-  public static VirtualFile getFileClassRoot(PsiFile psiFile) {
-    return getFileClassRoot(psiFile.getProject(), psiFile.getVirtualFile());
+  public static VirtualFile getFileClassRoot(@Nullable PsiFile psiFile) {
+    return psiFile == null ? null : getFileClassRoot(psiFile.getProject(), PsiUtilCore.getVirtualFile(psiFile));
   }
 
   /**
@@ -49,8 +53,12 @@ public class PerlUtil implements PerlElementTypes {
    * @param file    containing file
    * @return innermost root
    */
+  @Contract("_,null->null")
   @Nullable
-  public static VirtualFile getFileClassRoot(Project project, VirtualFile file) {
+  public static VirtualFile getFileClassRoot(@NotNull Project project, @Nullable VirtualFile file) {
+    if (file == null) {
+      return null;
+    }
     VirtualFile result = null;
     for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
       if (VfsUtil.isAncestor(classRoot, file, false) && (result == null || VfsUtil.isAncestor(result, classRoot, true))) {
@@ -69,7 +77,7 @@ public class PerlUtil implements PerlElementTypes {
    * @return innermost root
    */
   @Nullable
-  public static VirtualFile getFileClassRoot(Project project, String filePath) {
+  public static VirtualFile getFileClassRoot(@NotNull Project project, @NotNull String filePath) {
     File file = new File(filePath);
     VirtualFile result = null;
 
@@ -84,7 +92,7 @@ public class PerlUtil implements PerlElementTypes {
   }
 
   @Deprecated // make reverse index and use it
-  public static Collection<String> getIndexKeysWithoutInternals(StubIndexKey<String, ?> key, Project project) {
+  public static Collection<String> getIndexKeysWithoutInternals(@NotNull StubIndexKey<String, ?> key, @NotNull Project project) {
     final Set<String> result = new THashSet<>();
 
     // safe for getElements
