@@ -16,21 +16,23 @@
 
 package com.perl5.lang.pod.lexer;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.containers.IntStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by hurricup on 22.03.2016.
  */
 @SuppressWarnings("ALL")
 public class PodLexer extends PodLexerGenerated {
-  private final List<Integer> myOpenedAngles = new LinkedList<Integer>();
+  private static final Logger LOG = Logger.getInstance(PodLexer.class);
+  private final IntStack myOpenedAngles = new IntStack();
 
   public PodLexer(Reader in) {
     super(in);
@@ -61,7 +63,7 @@ public class PodLexer extends PodLexerGenerated {
 
   @Override
   public int yystate() {
-    return preparsedTokensList.isEmpty() && myOpenedAngles.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
+    return preparsedTokensList.isEmpty() && myOpenedAngles.empty() ? super.yystate() : LEX_PREPARSED_ITEMS;
   }
 
   @Override
@@ -171,72 +173,50 @@ public class PodLexer extends PodLexerGenerated {
     return POD_CUT;
   }
 
-  @Override
-  protected IElementType parseFormatter(IElementType tokenType) {
-    yypushback(1);
-    checkOpenAngle();
-    return tokenType;
+  /**
+   * Invoked on opening angle and angles / space after formatter key
+   * Pushes angles length to the stack of angles to watch for the closing one
+   */
+  protected void pushAngle() {
+    myOpenedAngles.push(yylength());
   }
 
   /**
-   * Pre-parses opening angles
+   * Invoked on spaces following spaced angle.
    */
-  protected void checkOpenAngle() {
-    int bufferEnd = getBufferEnd();
-    int tokenStart = getTokenEnd();
-    int run = tokenStart;
-    CharSequence buffer = getBuffer();
-
-    while (run < bufferEnd && buffer.charAt(run) == '<') {
-      run++;
-    }
-
-    if (run > tokenStart) // got something
-    {
-      if (run == bufferEnd || run == tokenStart + 1 || Character.isWhitespace(buffer.charAt(run))) {
-        pushPreparsedToken(tokenStart, run, POD_ANGLE_LEFT);
-        myOpenedAngles.add(run - tokenStart);
-      }
-      else {
-        pushPreparsedToken(tokenStart, tokenStart + 1, POD_ANGLE_LEFT);
-        myOpenedAngles.add(1);
-      }
+  protected void checkPendingSpacedAngles() {
+    if (!myOpenedAngles.empty() && myOpenedAngles.peek() > 1) {
+      yybegin(CLOSING_SPACED_ANGLE);
     }
   }
 
   /**
-   * Pre-parses closing angles
+   * Invoked on close angle of any size.
+   *
+   * @return if it's matching close angle - returns angle. Symbol otherwise
    */
-  protected IElementType parseCloseAngle() {
-    if (myOpenedAngles.isEmpty()) {
-      return POD_SYMBOL;
+  protected IElementType popAngle() {
+    int tokenLength = yylength();
+    if (myOpenedAngles.empty()) {
+      // not counting
+      return processAsSingleSymbol(tokenLength);
     }
-
-    int bufferEnd = getBufferEnd();
-    int tokenStart = getTokenStart();
-    int run = tokenStart;
-    CharSequence buffer = getBuffer();
-
-    int lastIndex = myOpenedAngles.size() - 1;
-    int anglesNumber = myOpenedAngles.get(lastIndex);
-
-    if (anglesNumber == 1) {
-      myOpenedAngles.remove(lastIndex);
-      return POD_ANGLE_RIGHT;
+    int openerLength = myOpenedAngles.peek();
+    if (openerLength > tokenLength) {
+      // unbalanced closing angle, seems we can handle this
+      return processAsSingleSymbol(tokenLength);
     }
+    myOpenedAngles.pop();
+    if (openerLength < tokenLength) {
+      yypushback(tokenLength - openerLength);
+    }
+    return POD_ANGLE_RIGHT;
+  }
 
-    int endOffset = tokenStart + anglesNumber;
-
-    if (tokenStart > 0 && Character.isWhitespace(buffer.charAt(tokenStart - 1))) {
-      while (run < bufferEnd && run < endOffset && buffer.charAt(run) == '>') {
-        run++;
-      }
-
-      if (run == endOffset) {
-        setTokenEnd(run);
-        myOpenedAngles.remove(lastIndex);
-        return POD_ANGLE_RIGHT;
-      }
+  @NotNull
+  private IElementType processAsSingleSymbol(int tokenLength) {
+    if (tokenLength > 1) {
+      yypushback(tokenLength - 1);
     }
     return POD_SYMBOL;
   }

@@ -31,6 +31,16 @@ public class PODParserTest extends PerlParserTestBase {
     return "testData/parser/pod";
   }
 
+  public void testCloseMultiAngleWIthNewLine() {doTest();}
+
+  public void testCodeWithAnglesAndArrow() {doTest();}
+
+  public void testFormatterWithHeredoc() {doTest();}
+
+  public void testLinksWithUnbalancedOpeners() {doTest();}
+
+  public void testLinksWithUnbalancedCloseAngles() {doTest();}
+
   public void testIncompleteLink() {doTest(false);}
 
   public void testPodWeaverTags() {doTest();}

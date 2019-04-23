@@ -36,12 +36,14 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 	protected abstract IElementType parseFallback();
 	protected abstract IElementType parseExample();
 	protected abstract IElementType parseCutToken();
-	protected abstract IElementType parseFormatter(IElementType tokenType);
-	protected abstract IElementType parseCloseAngle();
+	protected abstract void pushAngle();
+	protected abstract IElementType popAngle();
+	protected abstract void checkPendingSpacedAngles();
 %}
 
-NEW_LINE = \r?\n
+NEW_LINE = \R
 WHITE_SPACE     = [ \t\f]
+COMPLEX_ANGLE_PREFIX = ({WHITE_SPACE}+\R?|\R)
 HARD_NEW_LINE = {NEW_LINE}({WHITE_SPACE}*{NEW_LINE})+
 NONSPACE = [^ \t\f\r\n]
 EXAMPLE = {WHITE_SPACE}+{NONSPACE}+
@@ -59,7 +61,20 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 
 %state LEX_PREPARSED_ITEMS
 %state LEX_COMMAND_READY, LEX_COMMAND_WAITING
+%state OPENING_ANGLE
+%state CLOSING_SPACED_ANGLE
 %%
+
+<OPENING_ANGLE>{
+  "<""<"+ / [\s]  {pushAngle();yybegin(YYINITIAL);return POD_ANGLE_LEFT;}
+  // this rule should supersed << in C<<manpage()>> case
+  "<" / "<"[^<]   {pushAngle();yybegin(YYINITIAL);return POD_ANGLE_LEFT;}
+  "<"             {pushAngle();yybegin(YYINITIAL);return POD_ANGLE_LEFT;}
+}
+
+<CLOSING_SPACED_ANGLE>{
+  ">" +        {yybegin(YYINITIAL);return popAngle();}
+}
 
 <LEX_COMMAND_WAITING>{
 	"=pod"			{yybegin(YYINITIAL);return POD_POD;}
@@ -85,13 +100,15 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 	{NEW_LINE} {yybegin(LEX_COMMAND_WAITING); return TokenType.WHITE_SPACE;}
 }
 
-<YYINITIAL>
-{
+<YYINITIAL>{
 	{HARD_NEW_LINE} {yypushback(yylength()-1);yybegin(LEX_COMMAND_READY);return POD_NEWLINE;}
 }
 {NEW_LINE} {return TokenType.WHITE_SPACE;}
 {WHITE_SPACE}+ {return TokenType.WHITE_SPACE;}
-">" {return parseCloseAngle();}
+{COMPLEX_ANGLE_PREFIX} / ">" {checkPendingSpacedAngles();return TokenType.WHITE_SPACE;}
+
+">" {return popAngle();}
+"<" {return POD_SYMBOL;}
 "(" {return POD_PAREN_LEFT;}
 ")" {return POD_PAREN_RIGHT;}
 "{" {return POD_BRACE_LEFT;}
@@ -106,15 +123,15 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 "\"" {return POD_QUOTE_DOUBLE;}
 "'" {return POD_QUOTE_SINGLE;}
 "`" {return POD_QUOTE_TICK;}
-"I<" {return parseFormatter(POD_I);}
-"B<" {return parseFormatter(POD_B);}
-"C<" {return parseFormatter(POD_C);}
-"L<" {return parseFormatter(POD_L);}
-"E<" {return parseFormatter(POD_E);}
-"F<" {return parseFormatter(POD_F);}
-"S<" {return parseFormatter(POD_S);}
-"X<" {return parseFormatter(POD_X);}
-"Z<" {return parseFormatter(POD_Z);}
+"I" / "<" {yybegin(OPENING_ANGLE);return POD_I;}
+"B" / "<" {yybegin(OPENING_ANGLE);return POD_B;}
+"C" / "<" {yybegin(OPENING_ANGLE);return POD_C;}
+"L" / "<" {yybegin(OPENING_ANGLE);return POD_L;}
+"E" / "<" {yybegin(OPENING_ANGLE);return POD_E;}
+"F" / "<" {yybegin(OPENING_ANGLE);return POD_F;}
+"S" / "<" {yybegin(OPENING_ANGLE);return POD_S;}
+"X" / "<" {yybegin(OPENING_ANGLE);return POD_X;}
+"Z" / "<" {yybegin(OPENING_ANGLE);return POD_Z;}
 
 {NUMBER} 	{return POD_NUMBER;}
 
