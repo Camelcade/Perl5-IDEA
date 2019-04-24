@@ -60,6 +60,8 @@ NUMBER_SMALL = {NUMBER_FLOAT}{NUMBER_EXP}?
 NUMBER_HEX = "0"[xX][0-9a-fA-F_]+
 NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
+IDENTIFIER = [\w_]+
+IDENTIFIER_SUFFIX = [IBCLEFSXZ] "<"
 
 HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 
@@ -138,5 +140,7 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 "Z" / "<" {yybegin(OPENING_ANGLE);return POD_Z;}
 
 {NUMBER} 	{return POD_NUMBER;}
+{IDENTIFIER} / {IDENTIFIER_SUFFIX}   {return POD_IDENTIFIER;}
+{IDENTIFIER}    {return POD_IDENTIFIER;}
 
 [^] {return parseFallback();}
