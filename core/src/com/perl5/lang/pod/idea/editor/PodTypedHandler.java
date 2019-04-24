@@ -32,7 +32,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
-import com.perl5.lang.pod.parser.psi.PodFile;
 import com.perl5.lang.pod.psi.PsiLinkText;
 import org.jetbrains.annotations.NotNull;
 
@@ -114,45 +113,37 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
                                 @NotNull Editor editor,
                                 @NotNull PsiFile file,
                                 @NotNull FileType fileType) {
-    if (file instanceof PodFile) {
-      if (c == '<') {
-        CaretModel caretModel = editor.getCaretModel();
-        int offset = caretModel.getOffset() - 1;
-        PsiElement element = file.findElementAt(offset);
-        IElementType elementType = element == null ? null : element.getNode().getElementType();
-        String text = element == null ? null : element.getText();
+    CaretModel caretModel = editor.getCaretModel();
+    final int offset = caretModel.getOffset();
+    final int prevCharOffset = offset - 1;
+    if (c == '<') {
+      if (offset > 0) {
+        PsiElement element = file.findElementAt(prevCharOffset);
+        IElementType elementType = PsiUtilCore.getElementType(element);
+        CharSequence documentChars = editor.getDocument().getCharsSequence();
 
-        if (elementType == POD_IDENTIFIER && text != null) {
-
-          if (text.length() == 1 && StringUtil.containsChar(POD_COMMANDS, text.charAt(0))) {
+        if (elementType == POD_IDENTIFIER && StringUtil.containsChar(POD_COMMANDS, documentChars.charAt(prevCharOffset))) {
             EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
-          }
         }
         else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType)) {
           extendAngles(element.getParent());
-          caretModel.moveToOffset(offset + 2);
+          caretModel.moveToOffset(offset + 1);
           return Result.STOP;
         }
       }
-      else if (c == '>')    // '>'
-      {
-        CaretModel caretModel = editor.getCaretModel();
-        int offset = caretModel.getOffset();
-        PsiElement element = file.findElementAt(offset);
-        IElementType elementType = element == null ? null : element.getNode().getElementType();
-        int extraOffset = 0;
+    }
+    else if (c == '>') {    // '>'
+      PsiElement element = file.findElementAt(offset);
+      IElementType elementType = PsiUtilCore.getElementType(element);
 
-        if (elementType != POD_ANGLE_RIGHT) {
-          offset--;
-          element = file.findElementAt(offset);
-          elementType = element == null ? null : element.getNode().getElementType();
-          extraOffset++;
-        }
+      if (elementType != POD_ANGLE_RIGHT) {
+        element = file.findElementAt(prevCharOffset);
+        elementType = PsiUtilCore.getElementType(element);
+      }
 
-        if (elementType == POD_ANGLE_RIGHT) {
-          caretModel.moveToOffset(offset + extendAngles(element.getParent()) + extraOffset);
-          return Result.STOP;
-        }
+      if (elementType == POD_ANGLE_RIGHT) {
+        caretModel.moveToOffset(offset + extendAngles(element.getParent()));
+        return Result.STOP;
       }
     }
     return super.beforeCharTyped(c, project, editor, file, fileType);
