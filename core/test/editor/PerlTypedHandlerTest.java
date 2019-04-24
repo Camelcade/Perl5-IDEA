@@ -18,7 +18,7 @@ package editor;
 
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 
-public class PerlTypedHandlerTest extends PerlTypingTestCase {
+public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
 
   @Override
   protected String getTestDataPath() {

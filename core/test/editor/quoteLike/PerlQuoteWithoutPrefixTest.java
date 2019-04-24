@@ -16,9 +16,9 @@
 
 package editor.quoteLike;
 
-import editor.PerlTypingTestCase;
+import editor.PerlSmartKeysTestCase;
 
-public class PerlQuoteWithoutPrefixTest extends PerlTypingTestCase {
+public class PerlQuoteWithoutPrefixTest extends PerlSmartKeysTestCase {
   public void testHeredocReplace() {doTest("<<caret>>", "<", "<<<caret>");}
 
   public void testHeredocNotReplace() {doTest("qq<<caret>>", "<", "qq<<<caret>>");}

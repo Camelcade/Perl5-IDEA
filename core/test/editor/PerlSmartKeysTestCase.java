@@ -19,7 +19,7 @@ package editor;
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class PerlTypingTestCase extends PerlLightTestCase {
+public abstract class PerlSmartKeysTestCase extends PerlLightTestCase {
   protected void doTest(@NotNull String initialText, @NotNull String toType, @NotNull String expected) {
     doTestTypingWithoutFiles(initialText, toType, expected);
   }

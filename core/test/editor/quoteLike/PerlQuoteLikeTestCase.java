@@ -16,9 +16,9 @@
 
 package editor.quoteLike;
 
-import editor.PerlTypingTestCase;
+import editor.PerlSmartKeysTestCase;
 
-public abstract class PerlQuoteLikeTestCase extends PerlTypingTestCase {
+public abstract class PerlQuoteLikeTestCase extends PerlSmartKeysTestCase {
   protected String OP;
 
   @Override
