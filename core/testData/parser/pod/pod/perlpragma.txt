@@ -625,7 +625,7 @@ POD file
         PodIdentifierImpl(Perl5 POD: identifier)('and')
         PodIdentifierImpl(Perl5 POD: identifier)('a')
         PsiElement(Perl5 POD: ")('"')
-        PsiElement(Perl5 POD: /)('/')
+        PsiElement(Perl5 POD: symbol)('/')
         PsiElement(Perl5 POD: ")('"')
         PodIdentifierImpl(Perl5 POD: identifier)('character')
         PsiElement(Perl5 POD: number)('.')

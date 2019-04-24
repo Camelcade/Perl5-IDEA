@@ -19,6 +19,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.perl.lexer.PerlProtoLexer;
+import org.jetbrains.annotations.NotNull;
 
 %%
 
@@ -34,11 +35,14 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 
 %{
 	protected abstract IElementType parseFallback();
-	protected abstract IElementType parseExample();
-	protected abstract IElementType parseCutToken();
-	protected abstract void pushAngle();
-	protected abstract IElementType popAngle();
-	protected abstract void checkPendingSpacedAngles();
+        protected abstract IElementType parseExample();
+        protected abstract IElementType parseCutToken();
+        protected abstract void pushAngle();
+        @NotNull
+        protected abstract IElementType popAngle();
+        protected abstract void checkPendingSpacedAngles();
+        @NotNull
+        protected abstract IElementType lexOptional(@NotNull IElementType type);
 %}
 
 NEW_LINE = \R
@@ -115,10 +119,10 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 "}" {return POD_BRACE_RIGHT;}
 "[" {return POD_BRACKET_LEFT;}
 "]" {return POD_BRACKET_RIGHT;}
-"/" {return POD_DIV;}
+"/" {return lexOptional(POD_DIV);}
 "\\" {return POD_BACKREF;}
 "*" {return POD_ASTERISK;}
-"|" {return POD_PIPE;}
+"|" {return lexOptional(POD_PIPE);}
 ":" {return POD_COLON;}
 "\"" {return POD_QUOTE_DOUBLE;}
 "'" {return POD_QUOTE_SINGLE;}

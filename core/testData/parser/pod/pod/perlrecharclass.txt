@@ -1020,7 +1020,7 @@ POD file
                   PsiElement(Perl5 POD: >)('>')
                 PsiElement(Perl5 POD: symbol)(',')
                 PodIdentifierImpl(Perl5 POD: identifier)('and')
-                PsiElement(Perl5 POD: /)('/')
+                PsiElement(Perl5 POD: symbol)('/')
                 PodIdentifierImpl(Perl5 POD: identifier)('or')
                 PodIdentifierImpl(Perl5 POD: identifier)('might')
                 PodIdentifierImpl(Perl5 POD: identifier)('match')

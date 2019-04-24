@@ -538,7 +538,7 @@ POD file
             PodIdentifierImpl(Perl5 POD: identifier)('of')
             PodIdentifierImpl(Perl5 POD: identifier)('existing')
             PodIdentifierImpl(Perl5 POD: identifier)('keys')
-            PsiElement(Perl5 POD: /)('/')
+            PsiElement(Perl5 POD: symbol)('/')
             PodIdentifierImpl(Perl5 POD: identifier)('values')
             PsiElement(Perl5 POD: number)('.')
             PsiElement(Perl5 POD: NL)('\n')

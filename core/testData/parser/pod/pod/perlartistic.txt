@@ -38,7 +38,7 @@ POD file
         PodIdentifierImpl(Perl5 POD: identifier)('redistribute')
         PodIdentifierImpl(Perl5 POD: identifier)('it')
         PodIdentifierImpl(Perl5 POD: identifier)('and')
-        PsiElement(Perl5 POD: /)('/')
+        PsiElement(Perl5 POD: symbol)('/')
         PodIdentifierImpl(Perl5 POD: identifier)('or')
         PodIdentifierImpl(Perl5 POD: identifier)('modify')
         PodIdentifierImpl(Perl5 POD: identifier)('it')

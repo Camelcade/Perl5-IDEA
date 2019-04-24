@@ -618,7 +618,7 @@ POD file
                 PsiItemSectionContentImpl(Perl5 POD: ITEM_SECTION_CONTENT)
                   PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
                     PodIdentifierImpl(Perl5 POD: identifier)('Unix')
-                    PsiElement(Perl5 POD: /)('/')
+                    PsiElement(Perl5 POD: symbol)('/')
                     PodIdentifierImpl(Perl5 POD: identifier)('Linux')
                     PodIdentifierImpl(Perl5 POD: identifier)('上的')
                     PodIdentifierImpl(Perl5 POD: identifier)('UTF')

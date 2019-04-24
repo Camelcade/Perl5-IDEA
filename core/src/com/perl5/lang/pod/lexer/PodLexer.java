@@ -220,4 +220,11 @@ public class PodLexer extends PodLexerGenerated {
     }
     return POD_SYMBOL;
   }
+
+  /**
+   * Lexes curent token as target element if we are  inside formatter and as SYMBOL otherwise.
+   */
+  protected IElementType lexOptional(@NotNull IElementType type) {
+    return myOpenedAngles.empty() ? POD_SYMBOL : type;
+  }
 }

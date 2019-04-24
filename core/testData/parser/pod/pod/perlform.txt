@@ -730,7 +730,7 @@ POD file
             PsiElement(Perl5 POD: symbol)(',')
             PodIdentifierImpl(Perl5 POD: identifier)('or')
             PsiElement(Perl5 POD: ")('"')
-            PsiElement(Perl5 POD: |)('|')
+            PsiElement(Perl5 POD: symbol)('|')
             PsiElement(Perl5 POD: ")('"')
             PodIdentifierImpl(Perl5 POD: identifier)('characters')
             PodIdentifierImpl(Perl5 POD: identifier)('to')

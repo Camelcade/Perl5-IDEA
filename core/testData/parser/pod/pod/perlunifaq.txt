@@ -2401,7 +2401,7 @@ POD file
             PsiElement(Perl5 POD: ()('(')
             PodIdentifierImpl(Perl5 POD: identifier)('by')
             PodIdentifierImpl(Perl5 POD: identifier)('decoding')
-            PsiElement(Perl5 POD: /)('/')
+            PsiElement(Perl5 POD: symbol)('/')
             PodIdentifierImpl(Perl5 POD: identifier)('encoding')
             PsiElement(Perl5 POD: ))(')')
             PsiElement(Perl5 POD: symbol)(',')

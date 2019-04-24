@@ -863,7 +863,7 @@ POD file
                         PsiElement(Perl5 POD: symbol)('-')
                         PodIdentifierImpl(Perl5 POD: identifier)('style')
                         PodIdentifierImpl(Perl5 POD: identifier)('news')
-                        PsiElement(Perl5 POD: /)('/')
+                        PsiElement(Perl5 POD: symbol)('/')
                         PodIdentifierImpl(Perl5 POD: identifier)('blog')
                         PodIdentifierImpl(Perl5 POD: identifier)('website')
                         PodIdentifierImpl(Perl5 POD: identifier)('covering')

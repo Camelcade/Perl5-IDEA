@@ -25,7 +25,7 @@ POD file
     PsiElement(Perl5 POD: ()('(')
     PodIdentifierImpl(Perl5 POD: identifier)('see')
     PodIdentifierImpl(Perl5 POD: identifier)('pod')
-    PsiElement(Perl5 POD: /)('/')
+    PsiElement(Perl5 POD: symbol)('/')
     PodIdentifierImpl(Perl5 POD: identifier)('perlpod')
     PsiElement(Perl5 POD: number)('.')
     PodIdentifierImpl(Perl5 POD: identifier)('pod')
