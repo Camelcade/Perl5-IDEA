@@ -14,7 +14,7 @@ e with an acute (/-shaped) accent.</p></li>
 <li><p style="padding-bottom: 10px;"><code>E&lt;number&gt;</code></p>
 <p style="padding-bottom: 10px;">The ASCII/Latin-1/Unicode character with that number.  A
 leading &quot;0x&quot; means that <i>number</i> is hex, as in
-<code>E&lt;0x201EE&lt;gt</code>&gt;.  A leading &quot;0&quot; means that <i>number</i> is octal,
+<code>E&lt;0x201E&gt;</code>.  A leading &quot;0&quot; means that <i>number</i> is octal,
 as in <code>E&lt;075&gt;</code>.  Otherwise <i>number</i> is interpreted as being
 in decimal, as in <code>E&lt;181&gt;</code>.</p>
 <p style="padding-bottom: 10px;">Note that older Pod formatters might not recognize octal or
