@@ -16,13 +16,7 @@
 
 package base;
 
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by hurricup on 04.03.2016.
@@ -32,41 +26,6 @@ public abstract class PerlLightTestCase extends PerlLightTestCaseBase {
   public String getFileExtension() {
     return PerlFileTypeScript.EXTENSION_PL;
   }
-
-  protected void withTestMore() {
-    addTestLibrary("test_more");
-  }
-
-  public void initWithPerlTidy() {
-    initWithPerlTidy("perlTidy");
-  }
-
-  protected void initWithCpanFile() {
-    try {
-      initWithFile("cpanfile", "");
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  public void initWithPerlTidy(@NotNull String targetName) {
-    try {
-      initWithFileContent(targetName, getFileExtension(),
-                          FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim());
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  protected void withPerlPod() {addTestLibrary("perldoc");}
-
-  protected void withCpanfile() {addTestLibrary("cpanfile");}
-
-  protected void withLog4perl() { addTestLibrary("log4perl"); }
-
-  protected void withFileSpec() { addTestLibrary("fileSpec"); }
 
   protected void addCustomPackage() {
     myFixture.copyFileToProject("MyCustomPackage.pm");

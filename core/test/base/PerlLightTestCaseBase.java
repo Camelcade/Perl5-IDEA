@@ -2051,4 +2051,40 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
+
+  protected void withTestMore() {
+    addTestLibrary("test_more");
+  }
+
+  public void initWithPerlTidy() {
+    initWithPerlTidy("perlTidy");
+  }
+
+  protected void initWithCpanFile() {
+    try {
+      initWithFile("cpanfile", "");
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void initWithPerlTidy(@NotNull String targetName) {
+    try {
+      initWithFileContent(targetName, getFileExtension(),
+                          FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim());
+    }
+    catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  protected void withPerlPod() {addTestLibrary("perldoc");}
+
+  protected void withCpanfile() {addTestLibrary("cpanfile");}
+
+  protected void withLog4perl() { addTestLibrary("log4perl"); }
+
+  protected void withFileSpec() { addTestLibrary("fileSpec"); }
+
 }

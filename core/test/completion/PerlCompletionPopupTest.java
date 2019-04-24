@@ -16,26 +16,15 @@
 
 package completion;
 
-import base.PerlLightTestCase;
-import com.intellij.codeInsight.lookup.LookupEx;
-import com.intellij.codeInsight.lookup.LookupManager;
-import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
+import base.PerlCompletionPopupTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
-import org.jetbrains.annotations.NotNull;
 
-public class PerlCompletionPopupTest extends PerlLightTestCase {
-  protected CompletionAutoPopupTester myTester;
+public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Override
   protected String getTestDataPath() {
     return "testData/completionPopup/perl";
-  }
-
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    myTester = new CompletionAutoPopupTester(myFixture);
   }
 
   @Override
@@ -145,44 +134,4 @@ public class PerlCompletionPopupTest extends PerlLightTestCase {
 
   public void testSpaceBug() {doTestNegative("qw//<caret>", ";");}
 
-  @Override
-  protected boolean runInDispatchThread() {
-    return false;
-  }
-
-  @Override
-  protected void invokeTestRunnable(@NotNull Runnable runnable) {
-    myTester.runWithAutoPopupEnabled(runnable);
-  }
-
-  private void doTest(@NotNull String initial, @NotNull String toType) {
-    initWithTextSmart(initial);
-    doCheckAutopopupResult(toType, true);
-  }
-
-  private void doTest(@NotNull String toType) {
-    initWithFileSmart();
-    doCheckAutopopupResult(toType, true);
-  }
-
-  private void doTestNegative(@NotNull String initial, @NotNull String toType) {
-    initWithTextSmart(initial);
-    doCheckAutopopupResult(toType, false);
-  }
-
-  private void doTestNegative(@NotNull String toType) {
-    initWithFileSmart();
-    doCheckAutopopupResult(toType, false);
-  }
-
-  private void doCheckAutopopupResult(@NotNull String type, boolean result) {
-    myTester.typeWithPauses(type);
-    LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
-    if (result) {
-      assertNotNull(activeLookup);
-    }
-    else {
-      assertNull(activeLookup);
-    }
-  }
 }
