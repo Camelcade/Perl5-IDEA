@@ -34,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 %type IElementType
 
 %{
-	protected abstract IElementType parseFallback();
         protected abstract IElementType parseExample();
         protected abstract IElementType parseCutToken();
         protected abstract void pushAngle();
@@ -143,4 +142,4 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 {IDENTIFIER} / {IDENTIFIER_SUFFIX}   {return POD_IDENTIFIER;}
 {IDENTIFIER}    {return POD_IDENTIFIER;}
 
-[^] {return parseFallback();}
+[^] {return POD_SYMBOL;}

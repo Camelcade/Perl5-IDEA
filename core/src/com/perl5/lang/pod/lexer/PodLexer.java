@@ -17,7 +17,6 @@
 package com.perl5.lang.pod.lexer;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.IntStack;
@@ -84,41 +83,6 @@ public class PodLexer extends PodLexerGenerated {
     }
 
     return result;
-  }
-
-  protected IElementType parseFallback() {
-    int tokenStart = getTokenStart();
-    int bufferEnd = getBufferEnd();
-    CharSequence buffer = getBuffer();
-
-    if (tokenStart < bufferEnd) {
-      char currentChar = buffer.charAt(tokenStart);
-      if (isIdentifierCharacter(currentChar)) {
-        int tokenEnd = getTokenEnd();
-
-        while (tokenEnd < bufferEnd && isIdentifierCharacter(buffer.charAt(tokenEnd)) && !isPodTag(buffer, tokenEnd, bufferEnd)) {
-          tokenEnd++;
-        }
-
-        setTokenEnd(tokenEnd);
-        return POD_IDENTIFIER;
-      }
-      else {
-        return POD_SYMBOL;
-      }
-    }
-    throw new RuntimeException("Can't be");
-  }
-
-  protected boolean isIdentifierCharacter(char myChar) {
-    return myChar == '_' || Character.isLetterOrDigit(myChar);
-  }
-
-  protected boolean isPodTag(CharSequence buffer, int offset, int bufferEnd) {
-    if (offset + 1 < bufferEnd) {
-      return StringUtil.containsChar("IBCLEFSXZ", buffer.charAt(offset)) && buffer.charAt(offset + 1) == '<';
-    }
-    return false;
   }
 
   protected IElementType parseExample() {
