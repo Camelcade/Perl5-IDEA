@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.project.PerlNamesCache;
 /**
  * Created by hurricup on 04.03.2016.
  */
-public class PodEmbeddedCompletionTest extends PerlLightTestCase {
+public class PodCompletionEmbeddedTest extends PerlLightTestCase {
 
   @Override
   protected void setUp() throws Exception {
