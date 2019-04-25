@@ -16,32 +16,18 @@
 
 <idea-plugin>
   <extensions defaultExtensionNs="com.intellij">
-    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
-    <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
-
-    <internalFileTemplate name="Perl5 pod"/>
-    <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>
-    <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
-    <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
-    <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
-    <lang.syntaxHighlighterFactory language="Perl5 POD"
-                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
-
+    <!-- tested/untestable -->
     <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
-    <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
-    <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
-
-    <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>
+    <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider" order="first"/>
+    <lang.psiStructureViewFactory language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
     <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
-    <lang.foldingBuilder language="Perl5 POD"
-                         implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
-    <lang.psiStructureViewFactory language="Perl5 POD"
-                                  implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
-    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
-
-    <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider"
-                           order="first"/>
+    <fileTypeFactory implementation="com.perl5.lang.pod.filetypes.PodFileTypesFactory"/>
+    <internalFileTemplate name="Perl5 pod"/>
+    <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
+    <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
+    <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
+    <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>
 
     <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
     <liveTemplateContext
@@ -53,6 +39,26 @@
     <defaultLiveTemplatesProvider
         implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
 
+    <!-- not tested -->
+    <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
+    <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
+
+    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
+
+    <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>
+    <lang.syntaxHighlighterFactory language="Perl5 POD"
+                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
+
+    <lang.foldingBuilder language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
+    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
+    <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
+    <lang.refactoringSupport language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
+    <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
+    <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
+    <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
+    <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
+    <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
+    <completion.contributor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
                              implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
 
@@ -69,20 +75,6 @@
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
 
-    <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
-    <lang.refactoringSupport language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
-    <lang.namesValidator language="Perl5 POD"
-                         implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
-
-    <lang.findUsagesProvider language="Perl5 POD"
-                             implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
-    <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
-    <referencesSearch
-        implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
-    <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
-    <completion.contributor language="Perl5 POD"
-                            implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
   </extensions>
 
 </idea-plugin>
