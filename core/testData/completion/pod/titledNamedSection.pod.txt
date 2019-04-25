@@ -1,0 +1,269 @@
+Lookups: $!; Text: $!; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $"; Text: $"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $#; Text: $#; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $$; Text: $$; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $%; Text: $%; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $& is the same as substr($var, $-[0], $+[0] - $-[0]); Text: $& is the same as substr($var, $-[0], $+[0] - $-[0]); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $&; Text: $&; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $' is the same as substr($var, $+[0]); Text: $' is the same as substr($var, $+[0]); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $'; Text: $'; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $'; Text: ${^POSTMATCH}; Tail: ($'); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $(; Text: $(; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $); Text: $); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $*; Text: $*; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $+; Text: $+; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $,; Text: $,; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $-; Text: $-; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $.; Text: $.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $/; Text: $/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $0; Text: $0; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $1 is the same as substr($var, $-[1], $+[1] - $-[1]); Text: $1 is the same as substr($var, $-[1], $+[1] - $-[1]); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $1; Text: $<digits> ($1, $2, ...); Tail: ($1); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $2 is the same as substr($var, $-[2], $+[2] - $-[2]); Text: $2 is the same as substr($var, $-[2], $+[2] - $-[2]); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $2; Text: $<digits> ($1, $2, ...); Tail: ($2); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $3 is the same as substr($var, $-[3], $+[3] - $-[3]); Text: $3 is the same as substr($var, $-[3], $+[3] - $-[3]); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $3; Text: $<digits> ($1, $2, ...); Tail: ($3); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $:; Text: $:; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $;; Text: $;; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $<; Text: $<; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $<digits> ($1, $2, ...); Text: $<digits> ($1, $2, ...); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $=; Text: $=; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $>; Text: $>; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $?; Text: $?; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $@; Text: $@; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $ACCUMULATOR; Text: $ACCUMULATOR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $ACCUMULATOR; Text: $^A; Tail: ($ACCUMULATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ARG; Text: $ARG; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $ARG; Text: $_; Tail: ($ARG); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ARGV; Text: $ARGV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $BASETIME; Text: $BASETIME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $BASETIME; Text: $^T; Tail: ($BASETIME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $CHILD_ERROR; Text: $?; Tail: ($CHILD_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $CHILD_ERROR; Text: $CHILD_ERROR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $COMPILING; Text: $COMPILING; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $COMPILING; Text: $^C; Tail: ($COMPILING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $DEBUGGING; Text: $DEBUGGING; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $DEBUGGING; Text: $^D; Tail: ($DEBUGGING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EFFECTIVE_GROUP_ID; Text: $); Tail: ($EFFECTIVE_GROUP_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EFFECTIVE_GROUP_ID; Text: $EFFECTIVE_GROUP_ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EFFECTIVE_USER_ID; Text: $>; Tail: ($EFFECTIVE_USER_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EFFECTIVE_USER_ID; Text: $EFFECTIVE_USER_ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EGID; Text: $); Tail: ($EGID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EGID; Text: $EGID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $ERRNO; Text: $!; Tail: ($ERRNO); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ERRNO; Text: $ERRNO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EUID; Text: $>; Tail: ($EUID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EUID; Text: $EUID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EVAL_ERROR; Text: $@; Tail: ($EVAL_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EVAL_ERROR; Text: $EVAL_ERROR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXCEPTIONS_BEING_CAUGHT; Text: $EXCEPTIONS_BEING_CAUGHT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXCEPTIONS_BEING_CAUGHT; Text: $^S; Tail: ($EXCEPTIONS_BEING_CAUGHT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXECUTABLE_NAME; Text: $EXECUTABLE_NAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXECUTABLE_NAME; Text: $^X; Tail: ($EXECUTABLE_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXTENDED_OS_ERROR; Text: $EXTENDED_OS_ERROR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $EXTENDED_OS_ERROR; Text: $^E; Tail: ($EXTENDED_OS_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_FORMFEED; Text: $FORMAT_FORMFEED; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_FORMFEED; Text: $^L; Tail: ($FORMAT_FORMFEED); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINES_LEFT; Text: $-; Tail: ($FORMAT_LINES_LEFT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINES_LEFT; Text: $FORMAT_LINES_LEFT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINES_PER_PAGE; Text: $=; Tail: ($FORMAT_LINES_PER_PAGE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINES_PER_PAGE; Text: $FORMAT_LINES_PER_PAGE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_LINE_BREAK_CHARACTERS; Text: $FORMAT_LINE_BREAK_CHARACTERS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_NAME; Text: $FORMAT_NAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_NAME; Text: $~; Tail: ($FORMAT_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_PAGE_NUMBER; Text: $%; Tail: ($FORMAT_PAGE_NUMBER); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_PAGE_NUMBER; Text: $FORMAT_PAGE_NUMBER; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_TOP_NAME; Text: $FORMAT_TOP_NAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $FORMAT_TOP_NAME; Text: $^; Tail: ($FORMAT_TOP_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $GID; Text: $(; Tail: ($GID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $GID; Text: $GID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $I<digits>; Text: $<digits> ($1, $2, ...); Tail: ($I<digits>); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPLACE_EDIT; Text: $INPLACE_EDIT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPLACE_EDIT; Text: $^I; Tail: ($INPLACE_EDIT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_LINE_NUMBER; Text: $.; Tail: ($INPUT_LINE_NUMBER); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_LINE_NUMBER; Text: $INPUT_LINE_NUMBER; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_RECORD_SEPARATOR; Text: $/; Tail: ($INPUT_RECORD_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $INPUT_RECORD_SEPARATOR; Text: $INPUT_RECORD_SEPARATOR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_PAREN_MATCH; Text: $+; Tail: ($LAST_PAREN_MATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_PAREN_MATCH; Text: $LAST_PAREN_MATCH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_REGEXP_CODE_RESULT; Text: $LAST_REGEXP_CODE_RESULT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_REGEXP_CODE_RESULT; Text: $^R; Tail: ($LAST_REGEXP_CODE_RESULT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_SUBMATCH_RESULT; Text: $LAST_SUBMATCH_RESULT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $LAST_SUBMATCH_RESULT; Text: $^N; Tail: ($LAST_SUBMATCH_RESULT); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LIST_SEPARATOR; Text: $"; Tail: ($LIST_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $LIST_SEPARATOR; Text: $LIST_SEPARATOR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $MATCH; Text: $&; Tail: ($MATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $MATCH; Text: $MATCH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $NR; Text: $.; Tail: ($NR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $NR; Text: $NR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OFS; Text: $,; Tail: ($OFS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OFS; Text: $OFS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OLD_PERL_VERSION; Text: $OLD_PERL_VERSION; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OLD_PERL_VERSION; Text: $]; Tail: ($OLD_PERL_VERSION); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $ORS; Text: $ORS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $ORS; Text: $\; Tail: ($ORS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OSNAME; Text: $OSNAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OSNAME; Text: $^O; Tail: ($OSNAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OS_ERROR; Text: $!; Tail: ($OS_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OS_ERROR; Text: $OS_ERROR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_AUTOFLUSH; Text: $OUTPUT_AUTOFLUSH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_AUTOFLUSH; Text: $|; Tail: ($OUTPUT_AUTOFLUSH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_FIELD_SEPARATOR; Text: $,; Tail: ($OUTPUT_FIELD_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_FIELD_SEPARATOR; Text: $OUTPUT_FIELD_SEPARATOR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_RECORD_SEPARATOR; Text: $OUTPUT_RECORD_SEPARATOR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $OUTPUT_RECORD_SEPARATOR; Text: $\; Tail: ($OUTPUT_RECORD_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PERLDB; Text: $PERLDB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $PERLDB; Text: $^P; Tail: ($PERLDB); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PERL_VERSION; Text: $PERL_VERSION; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $PERL_VERSION; Text: $^V; Tail: ($PERL_VERSION); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PID; Text: $$; Tail: ($PID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PID; Text: $PID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH; Text: $'; Tail: ($POSTMATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH; Text: $POSTMATCH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $POSTMATCH; Text: ${^POSTMATCH}; Tail: ($POSTMATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PREMATCH; Text: $PREMATCH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $PREMATCH; Text: $`; Tail: ($PREMATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PROCESS_ID; Text: $$; Tail: ($PROCESS_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PROCESS_ID; Text: $PROCESS_ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $PROGRAM_NAME; Text: $0; Tail: ($PROGRAM_NAME); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $PROGRAM_NAME; Text: $PROGRAM_NAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $REAL_GROUP_ID; Text: $(; Tail: ($REAL_GROUP_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $REAL_GROUP_ID; Text: $REAL_GROUP_ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $REAL_USER_ID; Text: $<; Tail: ($REAL_USER_ID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $REAL_USER_ID; Text: $REAL_USER_ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $RS; Text: $/; Tail: ($RS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $RS; Text: $RS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $SUBSCRIPT_SEPARATOR; Text: $SUBSCRIPT_SEPARATOR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $SUBSEP; Text: $;; Tail: ($SUBSEP); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $SUBSEP; Text: $SUBSEP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $SYSTEM_FD_MAX; Text: $SYSTEM_FD_MAX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $SYSTEM_FD_MAX; Text: $^F; Tail: ($SYSTEM_FD_MAX); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $UID; Text: $<; Tail: ($UID); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $UID; Text: $UID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $WARNING; Text: $WARNING; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $WARNING; Text: $^W; Tail: ($WARNING); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $[; Text: $[; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $\; Text: $\; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $]; Text: $]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^; Text: $^; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^A; Text: $^A; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^C; Text: $^C; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^CHILD_ERROR_NATIVE; Text: ${^CHILD_ERROR_NATIVE}; Tail: ($^CHILD_ERROR_NATIVE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $^D; Text: $^D; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^E; Text: $^E; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^F; Text: $^F; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^H; Text: $^H; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^I; Text: $^I; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^L; Text: $^L; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^M; Text: $^M; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^N; Text: $^N; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^O; Text: $^O; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^P; Text: $^P; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^R; Text: $^R; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^S; Text: $^S; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^T; Text: $^T; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^V; Text: $^V; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^W; Text: $^W; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $^X; Text: $^X; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $_; Text: $_; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $` is the same as substr($var, 0, $-[0]); Text: $` is the same as substr($var, 0, $-[0]); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $`; Text: $`; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $`; Text: ${^PREMATCH}; Tail: ($`); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $a; Text: $a; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $a; Text: $b; Tail: ($a); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $b; Text: $b; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^CHILD_ERROR_NATIVE}; Text: ${^CHILD_ERROR_NATIVE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^ENCODING}; Text: ${^ENCODING}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^GLOBAL_PHASE}; Text: ${^GLOBAL_PHASE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^LAST_FH}; Text: ${^LAST_FH}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^MATCH}; Text: ${^MATCH}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^OPEN}; Text: ${^OPEN}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^POSTMATCH}; Text: $'; Tail: (${^POSTMATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^POSTMATCH}; Text: ${^POSTMATCH}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^PREMATCH}; Text: $`; Tail: (${^PREMATCH}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^PREMATCH}; Text: ${^PREMATCH}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^RE_DEBUG_FLAGS}; Text: ${^RE_DEBUG_FLAGS}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^RE_TRIE_MAXBUF}; Text: ${^RE_TRIE_MAXBUF}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^SAFE_LOCALES}; Text: ${^SAFE_LOCALES}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^TAINT}; Text: ${^TAINT}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^UNICODE}; Text: ${^UNICODE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^UTF8CACHE}; Text: ${^UTF8CACHE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^UTF8LOCALE}; Text: ${^UTF8LOCALE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^WARNING_BITS}; Text: ${^WARNING_BITS}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^WIN32_SLOPPY_STAT}; Text: ${^WIN32_SLOPPY_STAT}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $|; Text: $|; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: $~; Text: $~; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %!; Text: %!; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %+; Text: %+; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %-; Text: %-; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %ENV; Text: %ENV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %ERRNO; Text: %!; Tail: (%ERRNO); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %ERRNO; Text: %ERRNO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %INC; Text: %INC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %LAST_PAREN_MATCH; Text: %+; Tail: (%LAST_PAREN_MATCH); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %LAST_PAREN_MATCH; Text: %LAST_PAREN_MATCH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %OS_ERROR; Text: %!; Tail: (%OS_ERROR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %OS_ERROR; Text: %OS_ERROR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %SIG; Text: %SIG; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %^H; Text: %^H; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %{^CAPTURE_ALL}; Text: %{^CAPTURE_ALL}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: %{^CAPTURE}; Text: %+; Tail: (%{^CAPTURE}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: %{^CAPTURE}; Text: %{^CAPTURE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @+; Text: @+; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @-; Text: $'; Tail: (@-); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: @-; Text: @-; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @ARG; Text: @ARG; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @ARG; Text: @_; Tail: (@ARG); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: @ARGV; Text: @ARGV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @F; Text: @F; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @INC; Text: @INC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @ISA; Text: @ISA; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @LAST_MATCH_END; Text: @+; Tail: (@LAST_MATCH_END); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: @LAST_MATCH_END; Text: @LAST_MATCH_END; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @LAST_MATCH_START; Text: @-; Tail: (@LAST_MATCH_START); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: @LAST_MATCH_START; Text: @LAST_MATCH_START; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @^CAPTURE; Text: @{^CAPTURE}; Tail: (@^CAPTURE); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: @_; Text: @_; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: @{^CAPTURE}; Text: @{^CAPTURE}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ARGV; Text: ARGV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ARGVOUT; Text: ARGVOUT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: CHECK; Text: CHECK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: CONSTRUCT; Text: CONSTRUCT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESTRUCT; Text: DESTRUCT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Deprecated and removed variables; Text: Deprecated and removed variables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: END; Text: END; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Error Variables; Text: Error Variables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: FORMAT_LINE_BREAK_CHARACTERS; Text: $:; Tail: (FORMAT_LINE_BREAK_CHARACTERS); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: General Variables; Text: General Variables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->autoflush( EXPR ); Text: HANDLE->autoflush( EXPR ); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->format_lines_left(EXPR); Text: HANDLE->format_lines_left(EXPR); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->format_lines_per_page(EXPR); Text: HANDLE->format_lines_per_page(EXPR); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->format_name(EXPR); Text: HANDLE->format_name(EXPR); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->format_page_number(EXPR); Text: HANDLE->format_page_number(EXPR); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->format_top_name(EXPR); Text: HANDLE->format_top_name(EXPR); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: HANDLE->input_line_number( EXPR ); Text: HANDLE->input_line_number( EXPR ); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: INIT; Text: INIT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::Handle->format_formfeed(EXPR); Text: IO::Handle->format_formfeed(EXPR); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::Handle->format_line_break_characters EXPR; Text: IO::Handle->format_line_break_characters EXPR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::Handle->input_record_separator( EXPR ); Text: IO::Handle->input_record_separator( EXPR ); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::Handle->output_field_separator( EXPR ); Text: IO::Handle->output_field_separator( EXPR ); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: IO::Handle->output_record_separator( EXPR ); Text: IO::Handle->output_record_separator( EXPR ); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Performance issues; Text: Performance issues; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: RUN; Text: RUN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: SPECIAL VARIABLES; Text: SPECIAL VARIABLES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: START; Text: START; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: SUBSCRIPT_SEPARATOR; Text: $;; Tail: (SUBSCRIPT_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: The Syntax of Variable Names; Text: The Syntax of Variable Names; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Variables related to filehandles; Text: Variables related to filehandles; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Variables related to formats; Text: Variables related to formats; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Variables related to regular expressions; Text: Variables related to regular expressions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Variables related to the interpreter state; Text: Variables related to the interpreter state; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: autoflush; Text: $|; Tail: (autoflush); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: error; Text: Error Variables; Tail: (error); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: exception; Text: Error Variables; Tail: (exception); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: flush; Text: $|; Tail: (flush); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: line number; Text: $.; Tail: (line number); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: sitecustomize.pl; Text: ${^WIN32_SLOPPY_STAT}; Tail: (sitecustomize.pl); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: sitecustomize; Text: ${^WIN32_SLOPPY_STAT}; Tail: (sitecustomize); Type: Index; Icon: /perl5language.png; Type Icon: null

@@ -38,6 +38,7 @@
         implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
     <defaultLiveTemplatesProvider
         implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
+    <completion.contributor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
 
     <!-- not tested -->
     <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
@@ -58,7 +59,6 @@
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
     <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
-    <completion.contributor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
                              implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
 

@@ -1,0 +1,6 @@
+Lookups: First header; Text: First header; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Forth header; Text: Forth header; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Regular item; Text: Regular item; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Second header; Text: Second header; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Third header; Text: Third header; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: bullet_index; Text: Regular item; Tail: (bullet_index); Type: Index; Icon: /perl5language.png; Type Icon: null
