@@ -16,21 +16,12 @@
 
 package smartKeys;
 
-import com.perl5.lang.pod.filetypes.PodFileType;
-import editor.PerlSmartKeysTestCase;
+import org.jetbrains.annotations.NotNull;
 
-public class PodSmartKeysTest extends PerlSmartKeysTestCase {
+public class PodSmartKeysSFormatterTest extends PodSmartKeysFormattersTestCase {
+  @NotNull
   @Override
-  protected String getTestDataPath() {
-    return "testData/smartKeys/pod";
-  }
-
-  public void testOpenAngleStart() {doTestWithBS("", "<", "<");}
-
-  public void testCloseAngleStart() {doTestWithBS("", ">", ">");}
-
-  @Override
-  public String getFileExtension() {
-    return PodFileType.EXTENSION;
+  protected String formatter() {
+    return "S";
   }
 }
