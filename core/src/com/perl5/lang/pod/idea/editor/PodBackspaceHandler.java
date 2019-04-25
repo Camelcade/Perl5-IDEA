@@ -44,7 +44,7 @@ public class PodBackspaceHandler extends BackspaceHandlerDelegate implements Pod
       IElementType elementType = element == null ? null : element.getNode().getElementType();
 
       if (elementType == POD_ANGLE_RIGHT) {
-        @SuppressWarnings("ConstantConditions") PsiElement formatterBlock = element.getParent();
+        PsiElement formatterBlock = element.getParent();
         if (formatterBlock != null) {
 
           PsiElement openAngles = formatterBlock.getFirstChild();
@@ -59,7 +59,7 @@ public class PodBackspaceHandler extends BackspaceHandlerDelegate implements Pod
         }
       }
       else if (elementType == POD_ANGLE_LEFT) {
-        @SuppressWarnings("ConstantConditions") PsiElement formatterBlock = element.getParent();
+        PsiElement formatterBlock = element.getParent();
         if (formatterBlock != null) {
 
           PsiElement closeAngles = formatterBlock.getLastChild();
