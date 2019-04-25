@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor.quoteLike;
+package smartKeys.quoteLike;
 
 /**
  * Test for double-section quote-like operators: s/tr/y

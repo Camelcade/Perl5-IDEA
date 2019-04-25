@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package editor.quoteLike;
+package smartKeys.quoteLike;
 
 /**
  * Test for single-section operators: q/qw/qq/qx/m/qr

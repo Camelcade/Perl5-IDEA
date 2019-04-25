@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package editor;
+package smartKeys;
 
 import com.perl5.lang.pod.filetypes.PodFileType;
+import editor.PerlSmartKeysTestCase;
 import org.jetbrains.annotations.NotNull;
 
 // fixme probably we should run for all modifiers, just in case

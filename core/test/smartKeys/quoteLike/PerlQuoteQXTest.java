@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package editor.quoteLike;
+package smartKeys.quoteLike;
 
-public class PerlQuoteSTest extends PerlQuoteLikeDoubleTestCase {
+public class PerlQuoteQXTest extends PerlQuoteLikeSingleTestCase {
   @Override
   protected String getOperator() {
-    return "s";
+    return "qx";
   }
 }

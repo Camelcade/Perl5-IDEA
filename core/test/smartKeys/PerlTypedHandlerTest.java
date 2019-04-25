@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2018 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package editor;
+package smartKeys;
 
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import editor.PerlSmartKeysTestCase;
 
 public class PerlTypedHandlerTest extends PerlSmartKeysTestCase {
 
