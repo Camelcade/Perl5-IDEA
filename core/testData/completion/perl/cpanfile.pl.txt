@@ -1,32 +1,64 @@
 Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: author_requires; Text: author_requires; Tail: (@args); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::author_requires($self, @args) at 3237 in Environment.pm
 Lookups: break; Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: break()
 Lookups: build_requires; Text: build_requires; Tail: (@args); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::build_requires($self, @args) at 3027 in Environment.pm
 Lookups: configure_requires; Text: configure_requires; Tail: (@args); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::configure_requires($self, @args) at 2913 in Environment.pm
 Lookups: endgrent; Text: endgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endgrent()
 Lookups: feature; Text: feature; Tail: ($identifier, $description, $code); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::feature($self, $identifier, $description, $code) at 1360 in Environment.pm
 Lookups: getgrent; Text: getgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getgrent()
 Lookups: grep; Text: grep; Tail: ($expr_or_block, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: grep($expr_or_block, @list)($expr_or_block, @list)
 Lookups: read; Text: read; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: read()
 Lookups: readdir; Text: readdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readdir()
 Lookups: readline; Text: readline; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readline()
 Lookups: readlink; Text: readlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readlink()
 Lookups: readpipe; Text: readpipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readpipe()
 Lookups: recommends; Text: recommends; Tail: null; Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::recommends($self) at 2321 in Environment.pm
 Lookups: recv; Text: recv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: recv()
 Lookups: redo; Text: redo; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: redo([$label_or_expr])([$label_or_expr])
 Lookups: ref; Text: ref; Tail: ([$reference]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ref([$reference])([$reference])
 Lookups: rename; Text: rename; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rename()
 Lookups: require; Text: require; Tail: ([$filename]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: require([$filename])([$filename])
 Lookups: requires; Text: requires; Tail: null; Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::requires($self) at 2242 in Environment.pm
 Lookups: reset; Text: reset; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: reset()
 Lookups: return; Text: return; Tail: ([$scalar_or_list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: return([$scalar_or_list])([$scalar_or_list])
 Lookups: reverse; Text: reverse; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: reverse()
 Lookups: rewinddir; Text: rewinddir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rewinddir()
 Lookups: setgrent; Text: setgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setgrent()
 Lookups: shmread; Text: shmread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shmread()
 Lookups: sysread; Text: sysread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sysread()
 Lookups: test_requires; Text: test_requires; Tail: (@args); Type: Module::CPANfile::Environment; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Module::CPANfile::Environment::test_requires($self, @args) at 3133 in Environment.pm

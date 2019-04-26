@@ -1,5 +1,10 @@
 Lookups: LIBRARY_CONST1; Text: LIBRARY_CONST1; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in Constants.pm
 Lookups: LIBRARY_CONST2; Text: LIBRARY_CONST2; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 81 in Constants.pm
 Lookups: LIBRARY_CONST3; Text: LIBRARY_CONST3; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Constants.pm
 Lookups: LIBRARY_CONST4; Text: LIBRARY_CONST4; Tail: null; Type: MyTest::Constants; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Constants::LIBRARY_CONST4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in Constants.pm
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String

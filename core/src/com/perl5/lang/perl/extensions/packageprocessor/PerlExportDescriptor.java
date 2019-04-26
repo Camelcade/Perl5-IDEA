@@ -118,7 +118,7 @@ public class PerlExportDescriptor {
 
   @NotNull
   public LookupElementBuilder getLookupElement() {
-    return LookupElementBuilder.create(getImportedName())
+    return LookupElementBuilder.create(this, getImportedName())
       .withIcon(getIcon())
       .withTypeText(getRealPackage(), true);
   }

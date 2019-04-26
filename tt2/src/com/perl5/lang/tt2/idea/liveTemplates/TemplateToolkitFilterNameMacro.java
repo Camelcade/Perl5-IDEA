@@ -40,7 +40,7 @@ public class TemplateToolkitFilterNameMacro extends Macro implements TemplateToo
     for (String filterName : FILTER_NAMES) {
       list.add(LookupElementBuilder.create(filterName));
     }
-    LOOKUP_ELEMENTS = list.toArray(new LookupElement[list.size()]);
+    LOOKUP_ELEMENTS = list.toArray(LookupElement.EMPTY_ARRAY);
   }
 
   @Override

@@ -1,5 +1,10 @@
 Lookups: MULTICONST2; Text: MULTICONST2; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 189 in exportArrayEmpty.pl
 Lookups: multiconst; Text: multiconst; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::multiconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 168 in exportArrayEmpty.pl
 Lookups: singleconst; Text: singleconst; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::singleconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 129 in exportArrayEmpty.pl
 Lookups: something; Text: something; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 73 in exportArrayEmpty.pl
 Lookups: somethingelse; Text: somethingelse; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::somethingelse at 92 in exportArrayEmpty.pl

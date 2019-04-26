@@ -1,3 +1,6 @@
 Lookups: aliasfor4; Text: aliasfor4; Tail: ($testfield); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor4($testfield); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 313 in exceptionClassAliasStatic.pl
 Lookups: aliasfor5; Text: aliasfor5; Tail: ($test1, $test2); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor5($test1, $test2); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 460 in exceptionClassAliasStatic.pl
 Lookups: aliasfor6; Text: aliasfor6; Tail: ($somefield); Type: Foo::Bar; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightSubDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::aliasfor6($somefield); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 608 in exceptionClassAliasStatic.pl

@@ -59,7 +59,7 @@ public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<
         String blockName = ((TemplateToolkitNamedBlock)element1).getName();
         if (StringUtil.isNotEmpty(blockName)) {
           result.addElement(
-            LookupElementBuilder.create(blockName)
+            LookupElementBuilder.create(element1, blockName)
               .withTypeText("BLOCK", true)
               .withIcon(element1.getIcon(0))
           );

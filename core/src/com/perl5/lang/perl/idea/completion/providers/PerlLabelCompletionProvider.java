@@ -43,7 +43,7 @@ public class PerlLabelCompletionProvider extends CompletionProvider<CompletionPa
       PerlPsiUtil.processGotoLabelDeclarations(element, perlLabelDeclaration ->
       {
         if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName())) {
-          result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
+          result.addElement(LookupElementBuilder.create(perlLabelDeclaration, perlLabelDeclaration.getName()));
         }
         return true;
       });
@@ -52,7 +52,7 @@ public class PerlLabelCompletionProvider extends CompletionProvider<CompletionPa
       PerlPsiUtil.processNextRedoLastLabelDeclarations(element, perlLabelDeclaration ->
       {
         if (perlLabelDeclaration != null && StringUtil.isNotEmpty(perlLabelDeclaration.getName())) {
-          result.addElement(LookupElementBuilder.create(perlLabelDeclaration.getName()));
+          result.addElement(LookupElementBuilder.create(perlLabelDeclaration, perlLabelDeclaration.getName()));
         }
         return true;
       });

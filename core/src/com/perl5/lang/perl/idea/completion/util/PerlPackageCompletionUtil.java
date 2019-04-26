@@ -31,6 +31,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.PerlCompletionWeighter;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
+import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
@@ -65,7 +66,7 @@ public class PerlPackageCompletionUtil {
                                                              @NotNull String packageName,
                                                              @Nullable Icon icon) {
     LookupElementBuilder result = LookupElementBuilder
-      .create(packageName).withPsiElement(namespaceDefinition);
+      .create(ObjectUtils.notNull(namespaceDefinition, packageName), packageName).withPsiElement(namespaceDefinition);
 
     if (PerlPackageUtil.isBuiltIn(packageName)) {
       result = result.withBoldness(true);
@@ -87,7 +88,7 @@ public class PerlPackageCompletionUtil {
   /**
    * @return package lookup element with automatic re-opening autocompeltion
    */
-  public static LookupElementBuilder getPackageLookupElementWithAutocomplete(PerlNamespaceDefinitionElement namespaceDefinitionElement,
+  public static LookupElementBuilder getPackageLookupElementWithAutocomplete(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement,
                                                                              @NotNull String packageName,
                                                                              @Nullable Icon icon) {
     return getPackageLookupElement(namespaceDefinitionElement, packageName, icon)
@@ -177,7 +178,7 @@ public class PerlPackageCompletionUtil {
       String version = entry.getKey();
       if (StringUtil.startsWith(version, "5")) {
         result.addElement(
-          LookupElementBuilder.create("v" + version)
+          LookupElementBuilder.create(new PerlVersion("v" + version), "v" + version)
             .withTypeText(StringUtil.join(entry.getValue(), " "))
         );
       }
@@ -189,11 +190,11 @@ public class PerlPackageCompletionUtil {
 
     VirtualFile virtualFile = file.getViewProvider().getVirtualFile();
     if (virtualFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      result.addElement(LookupElementBuilder.create(virtualFile.getNameWithoutExtension()));
+      result.addElement(LookupElementBuilder.create(virtualFile, virtualFile.getNameWithoutExtension()));
       if (file instanceof PerlFileImpl) {
         String packageName = ((PerlFileImpl)file).getFilePackageName();
         if (packageName != null) {
-          result.addElement(LookupElementBuilder.create(packageName));
+          result.addElement(LookupElementBuilder.create(file, packageName));
         }
       }
     }

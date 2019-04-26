@@ -1,62 +1,124 @@
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: test10; Text: test10; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test10($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 299 in mooseAttrs.pl
 Lookups: test11; Text: test11; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test11; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 328 in mooseAttrs.pl
 Lookups: test12; Text: test12; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test12($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 377 in mooseAttrs.pl
 Lookups: test13; Text: test13; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test13; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 426 in mooseAttrs.pl
 Lookups: test14; Text: test14; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test14($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 476 in mooseAttrs.pl
 Lookups: test15; Text: test15; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test15; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 531 in mooseAttrs.pl
 Lookups: test16; Text: test16; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test16; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 538 in mooseAttrs.pl
 Lookups: test17; Text: test17; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test17($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 595 in mooseAttrs.pl
 Lookups: test18; Text: test18; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test18($self, [My::Foo::Bar $new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 602 in mooseAttrs.pl
 Lookups: test1; Text: test1; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in mooseAttrs.pl
 Lookups: test20; Text: test20; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test20($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 689 in mooseAttrs.pl
 Lookups: test21; Text: test21; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test21($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 703 in mooseAttrs.pl
 Lookups: test22; Text: test22; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test22; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 735 in mooseAttrs.pl
 Lookups: test23; Text: test23; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test23; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 749 in mooseAttrs.pl
 Lookups: test26; Text: test26; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test26; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 827 in mooseAttrs.pl
 Lookups: test28; Text: test28; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test28; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 873 in mooseAttrs.pl
 Lookups: test2; Text: test2; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test2($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 109 in mooseAttrs.pl
 Lookups: test32; Text: test32; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test32; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 968 in mooseAttrs.pl
 Lookups: test34; Text: test34; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test34; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1007 in mooseAttrs.pl
 Lookups: test35; Text: test35; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test35($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1023 in mooseAttrs.pl
 Lookups: test36; Text: test36; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test36($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1037 in mooseAttrs.pl
 Lookups: test37; Text: test37; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test37; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1054 in mooseAttrs.pl
 Lookups: test38; Text: test38; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test38; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1069 in mooseAttrs.pl
 Lookups: test3; Text: test3; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 136 in mooseAttrs.pl
 Lookups: test40; Text: test40; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test40; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1114 in mooseAttrs.pl
 Lookups: test42; Text: test42; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test42; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1161 in mooseAttrs.pl
 Lookups: test45; Text: test45; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test45($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1225 in mooseAttrs.pl
 Lookups: test45; Text: test45; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test45($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1339 in mooseAttrs.pl
 Lookups: test46; Text: test46; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test46($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1253 in mooseAttrs.pl
 Lookups: test46; Text: test46; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test46($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1367 in mooseAttrs.pl
 Lookups: test47; Text: test47; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test47($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1312 in mooseAttrs.pl
 Lookups: test48; Text: test48; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test48($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1423 in mooseAttrs.pl
 Lookups: test49; Text: test49; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test49; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1461 in mooseAttrs.pl
 Lookups: test4; Text: test4; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test4; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 145 in mooseAttrs.pl
 Lookups: test50; Text: test50; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test50; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1468 in mooseAttrs.pl
 Lookups: test51; Text: test51; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test51; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1475 in mooseAttrs.pl
 Lookups: test52; Text: test52; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test52; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1482 in mooseAttrs.pl
 Lookups: test53; Text: test53; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test53($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1497 in mooseAttrs.pl
 Lookups: test54; Text: test54; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test54; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1535 in mooseAttrs.pl
 Lookups: test55; Text: test55; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test55; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1549 in mooseAttrs.pl
 Lookups: test57; Text: test57; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test57; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1597 in mooseAttrs.pl
 Lookups: test59; Text: test59; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test59; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1628 in mooseAttrs.pl
 Lookups: test5; Text: test5; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 192 in mooseAttrs.pl
 Lookups: test60; Text: test60; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test60; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1643 in mooseAttrs.pl
 Lookups: test61; Text: test61; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test61; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1656 in mooseAttrs.pl
 Lookups: test63; Text: test63; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test63; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1699 in mooseAttrs.pl
 Lookups: test64; Text: test64; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test64($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1727 in mooseAttrs.pl
 Lookups: test64; Text: test64; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test64; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1714 in mooseAttrs.pl
 Lookups: test65; Text: test65; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test65; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1765 in mooseAttrs.pl
 Lookups: test66; Text: test66; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test66; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1774 in mooseAttrs.pl
 Lookups: test68; Text: test68; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test68; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1792 in mooseAttrs.pl
 Lookups: test69; Text: test69; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test69; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 1802 in mooseAttrs.pl
 Lookups: test6; Text: test6; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 198 in mooseAttrs.pl
 Lookups: test72; Text: test72; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test72($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1882 in mooseAttrs.pl
 Lookups: test73; Text: test73; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test73($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1889 in mooseAttrs.pl
 Lookups: test74; Text: test74; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test74; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1917 in mooseAttrs.pl
 Lookups: test75; Text: test75; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test75; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1941 in mooseAttrs.pl
 Lookups: test76; Text: test76; Tail: null; Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::test76; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1948 in mooseAttrs.pl
 Lookups: test7; Text: test7; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test7($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 228 in mooseAttrs.pl
 Lookups: test8; Text: test8; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test8($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 238 in mooseAttrs.pl
 Lookups: test9; Text: test9; Tail: ([$new_value]); Type: MySomePackage; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test9($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 293 in mooseAttrs.pl

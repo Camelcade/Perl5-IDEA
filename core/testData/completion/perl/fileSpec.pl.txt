@@ -1,17 +1,34 @@
 Lookups: abs2rel; Text: abs2rel; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: canonpath; Text: canonpath; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: case_tolerant; Text: case_tolerant; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: catdir; Text: catdir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: catfile; Text: catfile; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: catpath; Text: catpath; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: curdir; Text: curdir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: devnull; Text: devnull; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: file_name_is_absolute; Text: file_name_is_absolute; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: no_upwards; Text: no_upwards; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: path; Text: path; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: rel2abs; Text: rel2abs; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: rootdir; Text: rootdir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: splitdir; Text: splitdir; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: splitpath; Text: splitpath; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: tmpdir; Text: tmpdir; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String
 Lookups: updir; Text: updir; Tail: null; Type: default; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    String

@@ -23,10 +23,11 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.inserthandlers.PerlAnnotationInsertHandler;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+
+import static com.perl5.lang.perl.lexer.PerlAnnotations.TOKENS_MAP;
 
 /**
  * Created by hurricup on 03.06.2015.
@@ -35,9 +36,9 @@ public class PerlAnnotationCompletionProvider extends CompletionProvider<Complet
   public static final HashSet<LookupElementBuilder> ANNOTATIONS_LOOKUP_ELEMENTS = new HashSet<>();
 
   static {
-    for (String annotation : PerlAnnotations.TOKENS_MAP.keySet()) {
+    for (String annotation : TOKENS_MAP.keySet()) {
       ANNOTATIONS_LOOKUP_ELEMENTS.add(LookupElementBuilder
-                                        .create(annotation)
+                                        .create(TOKENS_MAP.get(annotation), annotation)
                                         .withInsertHandler(PerlAnnotationInsertHandler.INSTANCE)
                                         .withIcon(PerlIcons.ANNOTATION_GUTTER_ICON)
       );

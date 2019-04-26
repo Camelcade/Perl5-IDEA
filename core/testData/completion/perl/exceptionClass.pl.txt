@@ -1,45 +1,90 @@
 Lookups: BEGIN; Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: BEGIN()
 Lookups: CHECK; Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: CHECK()
 Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: ClassAccessor->; Text: ClassAccessor->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 Lookups: ClassAccessor::; Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 Lookups: DESTROY; Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: DESTROY()
 Lookups: END; Text: END; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: END()
 Lookups: Exception1->; Text: Exception1->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 29 in exceptionClass.pl
 Lookups: Exception1::; Text: Exception1::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 29 in exceptionClass.pl
 Lookups: Exception2->; Text: Exception2->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 47 in exceptionClass.pl
 Lookups: Exception2::; Text: Exception2::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception2; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 47 in exceptionClass.pl
 Lookups: Exception3->; Text: Exception3->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 65 in exceptionClass.pl
 Lookups: Exception3::; Text: Exception3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception3; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 65 in exceptionClass.pl
 Lookups: Exception4->; Text: Exception4->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception4; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 84 in exceptionClass.pl
 Lookups: Exception4::; Text: Exception4::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception4; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 84 in exceptionClass.pl
 Lookups: Exception5->; Text: Exception5->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 104 in exceptionClass.pl
 Lookups: Exception5::; Text: Exception5::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Exception5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 104 in exceptionClass.pl
 Lookups: Library::Exception->; Text: Library::Exception->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Lookups: Library::Exception2->; Text: Library::Exception2->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Lookups: Library::Exception2::; Text: Library::Exception2::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Lookups: Library::Exception::; Text: Library::Exception::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Lookups: LibraryException->; Text: LibraryException->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Lookups: LibraryException3->; Text: LibraryException3->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Lookups: LibraryException3::; Text: LibraryException3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Lookups: LibraryException::; Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Lookups: Mojolicious::Controller->; Text: Mojolicious::Controller->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 Lookups: Mojolicious::Controller::; Text: Mojolicious::Controller::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers->; Text: Mojolicious::Plugin::DefaultHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::DefaultHelpers at 0 in DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers::; Text: Mojolicious::Plugin::DefaultHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::DefaultHelpers at 0 in DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::TagHelpers->; Text: Mojolicious::Plugin::TagHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::TagHelpers at 0 in TagHelpers.pm
 Lookups: Mojolicious::Plugin::TagHelpers::; Text: Mojolicious::Plugin::TagHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::TagHelpers at 0 in TagHelpers.pm
 Lookups: MyTest::Constants->; Text: MyTest::Constants->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 Lookups: MyTest::Constants::; Text: MyTest::Constants::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 Lookups: MyTest::Exceptions->; Text: MyTest::Exceptions->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Exceptions at 0 in Exceptions.pm
 Lookups: MyTest::Exceptions::; Text: MyTest::Exceptions::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Exceptions at 0 in Exceptions.pm
 Lookups: MyTest::Some::Package->; Text: MyTest::Some::Package->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
 Lookups: MyTest::Some::Package::; Text: MyTest::Some::Package::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
 Lookups: MyTest::Something->; Text: MyTest::Something->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
 Lookups: MyTest::Something::; Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
 Lookups: UNITCHECK; Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: UNITCHECK()
 Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: UNIVERSAL
 Lookups: UNIVERSAL::; Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: UNIVERSAL

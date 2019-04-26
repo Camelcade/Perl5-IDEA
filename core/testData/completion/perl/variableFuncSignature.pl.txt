@@ -1,21 +1,42 @@
 Lookups: ARGV; Text: ARGV; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARGV
 Lookups: ARGV; Text: ARGV; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ARGV
 Lookups: EFFECTIVE_GROUP_ID; Text: EFFECTIVE_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EFFECTIVE_GROUP_ID
 Lookups: EFFECTIVE_USER_ID; Text: EFFECTIVE_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EFFECTIVE_USER_ID
 Lookups: ENV; Text: ENV; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
 Lookups: EVAL_ERROR; Text: EVAL_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EVAL_ERROR
 Lookups: Log::Log4perl::Levels::ALL; Text: Log::Log4perl::Levels::ALL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::ALL@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::DEBUG; Text: Log::Log4perl::Levels::DEBUG; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::DEBUG@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::ERROR; Text: Log::Log4perl::Levels::ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::ERROR@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::FATAL; Text: Log::Log4perl::Levels::FATAL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::FATAL@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::INFO; Text: Log::Log4perl::Levels::INFO; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::INFO@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::OFF; Text: Log::Log4perl::Levels::OFF; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::OFF@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::TRACE; Text: Log::Log4perl::Levels::TRACE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::WARN; Text: Log::Log4perl::Levels::WARN; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::WARN@UNKNOWN_VALUE
 Lookups: OLD_PERL_VERSION; Text: OLD_PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OLD_PERL_VERSION
 Lookups: PERL_VERSION; Text: PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PERL_VERSION
 Lookups: ^V; Text: ^V; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^V
 Lookups: varfunc1; Text: varfunc1; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 15 in variableFuncSignature.pl
 Lookups: varfunc2; Text: varfunc2; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 26 in variableFuncSignature.pl
 Lookups: varfunc3; Text: varfunc3; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 37 in variableFuncSignature.pl
 Lookups: {^CHILD_ERROR_NATIVE}; Text: {^CHILD_ERROR_NATIVE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^CHILD_ERROR_NATIVE

@@ -52,7 +52,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
       String name = ((HTMLMasonSubcomponentDefitnition)element).getName();
       if (name != null) {
         resultSet.addElement(LookupElementBuilder
-                               .create(name)
+                               .create(element, name)
                                .withIcon(element.getIcon(0))
                                .withTailText(HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element))
         );
@@ -65,7 +65,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
       String name = element.getName();
       if (name != null) {
         resultSet.addElement(LookupElementBuilder
-                               .create(name)
+                               .create(element, name)
                                .withIcon(element.getIcon(0))
                                .withTailText(HTMLMasonUtil.getArgumentsListAsString(element))
         );
@@ -114,7 +114,7 @@ public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
         String relPath = VfsUtil.getRelativePath(virtualFile, myRoot);
         if (StringUtil.isNotEmpty(relPath)) {
           LookupElementBuilder newElement = LookupElementBuilder
-            .create(myPrefix + relPath)
+            .create(virtualFile, myPrefix + relPath)
             .withIcon(HTMLMasonFileType.INSTANCE.getIcon());
 
           PsiFile file = myManager.findFile(virtualFile);

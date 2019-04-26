@@ -119,7 +119,7 @@ public class PerlSubCompletionUtil {
                                                           @Nullable PerlExportDescriptor exportDescriptor) {
     String lookupString = exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName();
     return LookupElementBuilder
-      .create(globVariable, lookupString == null ? "" : lookupString)
+      .create(globVariable, StringUtil.notNullize(lookupString))
       .withIcon(globVariable.getIcon(0))
       .withInsertHandler(SUB_SELECTION_HANDLER)
       .withTypeText(globVariable.getNamespaceName(), true)
@@ -181,7 +181,7 @@ public class PerlSubCompletionUtil {
       PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinitionElement.class),
       subDefinitionBase ->
       {
-        resultSet.addElement(LookupElementBuilder.create(subDefinitionBase.getSubName()));
+        resultSet.addElement(LookupElementBuilder.create(subDefinitionBase, subDefinitionBase.getSubName()));
         return true;
       }
     );

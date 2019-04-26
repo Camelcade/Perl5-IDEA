@@ -1,22 +1,44 @@
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: get_lib_fbp_ro1; Text: get_lib_fbp_ro1; Tail: null; Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_ro1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 641 in ClassAccessor.pm
 Lookups: get_lib_fbp_ro2; Text: get_lib_fbp_ro2; Tail: null; Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_ro2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 676 in ClassAccessor.pm
 Lookups: get_lib_fbp_ro3; Text: get_lib_fbp_ro3; Tail: null; Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_ro3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 853 in ClassAccessor.pm
 Lookups: get_lib_fbp_rw1; Text: get_lib_fbp_rw1; Tail: null; Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_rw1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 559 in ClassAccessor.pm
 Lookups: get_lib_fbp_rw2; Text: get_lib_fbp_rw2; Tail: null; Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_rw2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 591 in ClassAccessor.pm
 Lookups: get_lib_fbp_rw3; Text: get_lib_fbp_rw3; Tail: null; Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::get_lib_fbp_rw3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 806 in ClassAccessor.pm
 Lookups: lib_simple_other_ro; Text: lib_simple_other_ro; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_other_ro($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 230 in ClassAccessor.pm
 Lookups: lib_simple_other_rw; Text: lib_simple_other_rw; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_other_rw($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 157 in ClassAccessor.pm
 Lookups: lib_simple_other_wo; Text: lib_simple_other_wo; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_other_wo($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 303 in ClassAccessor.pm
 Lookups: lib_simple_ro1; Text: lib_simple_ro1; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_ro1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 215 in ClassAccessor.pm
 Lookups: lib_simple_rw1; Text: lib_simple_rw1; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_rw1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 142 in ClassAccessor.pm
 Lookups: lib_simple_third_ro; Text: lib_simple_third_ro; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_third_ro($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 412 in ClassAccessor.pm
 Lookups: lib_simple_third_rw; Text: lib_simple_third_rw; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_third_rw($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 356 in ClassAccessor.pm
 Lookups: lib_simple_third_wo; Text: lib_simple_third_wo; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_third_wo($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 468 in ClassAccessor.pm
 Lookups: lib_simple_wo1; Text: lib_simple_wo1; Tail: ([$new_value]); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::lib_simple_wo1($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 288 in ClassAccessor.pm
 Lookups: set_lib_fbp_rw1; Text: set_lib_fbp_rw1; Tail: ($new_value); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_rw1($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 559 in ClassAccessor.pm
 Lookups: set_lib_fbp_rw2; Text: set_lib_fbp_rw2; Tail: ($new_value); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_rw2($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 591 in ClassAccessor.pm
 Lookups: set_lib_fbp_rw3; Text: set_lib_fbp_rw3; Tail: ($new_value); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_rw3($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 806 in ClassAccessor.pm
 Lookups: set_lib_fbp_wo1; Text: set_lib_fbp_wo1; Tail: ($new_value); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_wo1($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 726 in ClassAccessor.pm
 Lookups: set_lib_fbp_wo2; Text: set_lib_fbp_wo2; Tail: ($new_value); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_wo2($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 761 in ClassAccessor.pm
 Lookups: set_lib_fbp_wo3; Text: set_lib_fbp_wo3; Tail: ($new_value); Type: ClassAccessor; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@ClassAccessor::set_lib_fbp_wo3($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 900 in ClassAccessor.pm

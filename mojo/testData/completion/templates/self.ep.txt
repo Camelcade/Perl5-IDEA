@@ -1,49 +1,98 @@
 Lookups: AUTOLOAD; Text: AUTOLOAD; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::AUTOLOAD($self) at 526 in Controller.pm
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: accepts; Text: accepts; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::accepts; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 632 in DefaultHelpers.pm
 Lookups: app; Text: app; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::app($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 241 in Controller.pm
 Lookups: b; Text: b; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::b($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 702 in DefaultHelpers.pm
 Lookups: button_to; Text: button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::button_to; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 731 in TagHelpers.pm
 Lookups: c; Text: c; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::c($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 771 in DefaultHelpers.pm
 Lookups: check_box; Text: check_box; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::check_box; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 787 in TagHelpers.pm
 Lookups: config; Text: config; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::config; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 840 in DefaultHelpers.pm
 Lookups: content; Text: content; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::content; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 900 in DefaultHelpers.pm
 Lookups: content_for; Text: content_for; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::content_for; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 960 in DefaultHelpers.pm
 Lookups: content_with; Text: content_with; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::content_with; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1020 in DefaultHelpers.pm
 Lookups: continue; Text: continue; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::continue($self) at 972 in Controller.pm
 Lookups: cookie; Text: cookie; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::cookie($self, $name) at 1026 in Controller.pm
 Lookups: csrf_button_to; Text: csrf_button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::csrf_button_to; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 856 in TagHelpers.pm
 Lookups: datetime_field; Text: datetime_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::datetime_field; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 424 in TagHelpers.pm
 Lookups: dumper; Text: dumper; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::dumper($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1203 in DefaultHelpers.pm
 Lookups: every_param; Text: every_param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::every_param($self, $name) at 1560 in Controller.pm
 Lookups: every_signed_cookie; Text: every_signed_cookie; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::every_signed_cookie($self, $name) at 2004 in Controller.pm
 Lookups: file_field; Text: file_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::file_field; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 917 in TagHelpers.pm
 Lookups: finish; Text: finish; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::finish($self) at 2697 in Controller.pm
 Lookups: flash; Text: flash; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::flash($self) at 3134 in Controller.pm
 Lookups: helpers; Text: helpers; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::helpers($self) at 3483 in Controller.pm
 Lookups: image; Text: image; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::image; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 981 in TagHelpers.pm
 Lookups: include; Text: include; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::include; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1255 in DefaultHelpers.pm
 Lookups: input_tag; Text: input_tag; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::input_tag; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1061 in TagHelpers.pm
 Lookups: match; Text: match; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::match($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 255 in Controller.pm
 Lookups: on; Text: on; Tail: ($name, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::on($self, $name, $cb) at 3546 in Controller.pm
 Lookups: param; Text: param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::param($self, $name) at 3778 in Controller.pm
 Lookups: password_field; Text: password_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::password_field; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1115 in TagHelpers.pm
 Lookups: radio_button; Text: radio_button; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::radio_button; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1187 in TagHelpers.pm
 Lookups: redirect_to; Text: redirect_to; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::redirect_to($self) at 3965 in Controller.pm
 Lookups: render; Text: render; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::render($self) at 4164 in Controller.pm
 Lookups: render_later; Text: render_later; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::render_later($self) at 5041 in Controller.pm
 Lookups: render_maybe; Text: render_maybe; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::render_maybe($self) at 5098 in Controller.pm
 Lookups: render_to_string; Text: render_to_string; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::render_to_string($self) at 5157 in Controller.pm
 Lookups: rendered; Text: rendered; Tail: ($status); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::rendered($self, $status) at 5221 in Controller.pm
 Lookups: reply.exception; Text: reply.exception; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::reply.exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1391 in DefaultHelpers.pm
 Lookups: reply.not_found; Text: reply.not_found; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::reply.not_found; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1467 in DefaultHelpers.pm
 Lookups: respond_to; Text: respond_to; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::respond_to($self) at 6248 in Controller.pm
 Lookups: send; Text: send; Tail: ($msg, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::send($self, $msg, $cb) at 6847 in Controller.pm
 Lookups: session; Text: session; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::session($self) at 7164 in Controller.pm
 Lookups: signed_cookie; Text: signed_cookie; Tail: ($name, $value, $options); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::signed_cookie($self, $name, $value, $options) at 7582 in Controller.pm
 Lookups: tx; Text: tx; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::tx($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 245 in Controller.pm
 Lookups: ua; Text: ua; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
+    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::ua; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1544 in DefaultHelpers.pm
 Lookups: url_for; Text: url_for; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::url_for($self) at 7949 in Controller.pm
 Lookups: validation; Text: validation; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::validation($self) at 8985 in Controller.pm
 Lookups: write; Text: write; Tail: ($chunk, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::write($self, $chunk, $cb) at 9562 in Controller.pm
 Lookups: write_chunk; Text: write_chunk; Tail: ($chunk, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::write_chunk($self, $chunk, $cb) at 9715 in Controller.pm

@@ -70,7 +70,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
                 String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
                 if (StringUtil.isNotEmpty(relativePath)) {
                   finalResultSet.addElement(LookupElementBuilder
-                                              .create(relativePath)
+                                              .create(virtualFile, relativePath)
                                               .withIcon(fileType.getIcon())
                   );
                 }
@@ -91,7 +91,7 @@ public class MasonComponentsCompletionProvider extends CompletionProvider<Comple
               String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
               if (StringUtil.isNotEmpty(relativePath)) {
                 finalResultSet.addElement(LookupElementBuilder
-                                            .create("/" + relativePath)
+                                            .create(virtualFile, "/" + relativePath)
                                             .withIcon(fileType.getIcon())
                 );
               }

@@ -529,6 +529,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         else if (lookupObject instanceof VirtualFile) {
           sb.append("\n    VirtualFile: ").append(((VirtualFile)lookupObject).getName());
         }
+        else if (lookupObject instanceof PerlExportDescriptor) {
+          sb.append("\n    Export: ").append(lookupObject);
+        }
+        else if (lookupObject instanceof IElementType) {
+          sb.append("\n    Export: ").append(lookupObject);
+        }
         else if (lookupObject instanceof String) {
           sb.append("\n    String");
         }

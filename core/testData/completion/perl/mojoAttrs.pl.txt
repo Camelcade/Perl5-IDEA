@@ -1,21 +1,42 @@
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: name11; Text: name11; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name11($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 85 in mojoAttrs.pl
 Lookups: name12; Text: name12; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name12($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 121 in mojoAttrs.pl
 Lookups: name13; Text: name13; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name13($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 162 in mojoAttrs.pl
 Lookups: name14; Text: name14; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name14($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 206 in mojoAttrs.pl
 Lookups: name17; Text: name17; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name17($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 301 in mojoAttrs.pl
 Lookups: name18; Text: name18; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name18($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 346 in mojoAttrs.pl
 Lookups: name1; Text: name1; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
 Lookups: name21; Text: name21; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name21($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 95 in mojoAttrs.pl
 Lookups: name22; Text: name22; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name22($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 132 in mojoAttrs.pl
 Lookups: name27; Text: name27; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name27($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 311 in mojoAttrs.pl
 Lookups: name28; Text: name28; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name28($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 356 in mojoAttrs.pl
 Lookups: name2; Text: name2; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 44 in mojoAttrs.pl
 Lookups: name37; Text: name37; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name37($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 321 in mojoAttrs.pl
 Lookups: name38; Text: name38; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name38($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 366 in mojoAttrs.pl
 Lookups: name3; Text: name3; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 53 in mojoAttrs.pl
 Lookups: name4; Text: name4; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 65 in mojoAttrs.pl
 Lookups: name51; Text: name51; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name51($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 255 in mojoAttrs.pl
 Lookups: name5; Text: name5; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 71 in mojoAttrs.pl
 Lookups: name6; Text: name6; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name6($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 276 in mojoAttrs.pl
 Lookups: name; Text: name; Tail: ([$new_value]); Type: Foo::Bar; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 22 in mojoAttrs.pl

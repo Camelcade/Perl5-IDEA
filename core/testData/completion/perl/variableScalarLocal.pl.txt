@@ -1,182 +1,364 @@
 Lookups: !; Text: !; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $!
 Lookups: !; Text: !; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %!
 Lookups: "; Text: "; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $"
 Lookups: $; Text: $; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $$
 Lookups: %; Text: %; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $%
 Lookups: &; Text: &; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $&
 Lookups: '; Text: '; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $'
 Lookups: (; Text: (; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $(
 Lookups: ); Text: ); Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $)
 Lookups: *; Text: *; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $*
 Lookups: +; Text: +; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @+
 Lookups: +; Text: +; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $+
 Lookups: +; Text: +; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %+
 Lookups: ,; Text: ,; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $,
 Lookups: -; Text: -; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @-
 Lookups: -; Text: -; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $-
 Lookups: -; Text: -; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %-
 Lookups: .; Text: .; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $.
 Lookups: /; Text: /; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $/
 Lookups: 0; Text: 0; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $0
 Lookups: 10; Text: 10; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $10
 Lookups: 11; Text: 11; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $11
 Lookups: 12; Text: 12; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $12
 Lookups: 13; Text: 13; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $13
 Lookups: 14; Text: 14; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $14
 Lookups: 15; Text: 15; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $15
 Lookups: 16; Text: 16; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $16
 Lookups: 17; Text: 17; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $17
 Lookups: 18; Text: 18; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $18
 Lookups: 19; Text: 19; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $19
 Lookups: 1; Text: 1; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $1
 Lookups: 20; Text: 20; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $20
 Lookups: 2; Text: 2; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $2
 Lookups: 3; Text: 3; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $3
 Lookups: 4; Text: 4; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $4
 Lookups: 5; Text: 5; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $5
 Lookups: 6; Text: 6; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $6
 Lookups: 7; Text: 7; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $7
 Lookups: 8; Text: 8; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $8
 Lookups: 9; Text: 9; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $9
 Lookups: :; Text: :; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $:
 Lookups: ;; Text: ;; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $;
 Lookups: <; Text: <; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $<
 Lookups: =; Text: =; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $=
 Lookups: >; Text: >; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $>
 Lookups: ?; Text: ?; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $?
 Lookups: @; Text: @; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $@
 Lookups: ACCUMULATOR; Text: ACCUMULATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ACCUMULATOR
 Lookups: ARG; Text: ARG; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARG
 Lookups: ARG; Text: ARG; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ARG
 Lookups: ARGV; Text: ARGV; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARGV
 Lookups: ARGV; Text: ARGV; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ARGV
 Lookups: BASETIME; Text: BASETIME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $BASETIME
 Lookups: CHILD_ERROR; Text: CHILD_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $CHILD_ERROR
 Lookups: COMPILING; Text: COMPILING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $COMPILING
 Lookups: DEBUGGING; Text: DEBUGGING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $DEBUGGING
 Lookups: EFFECTIVE_GROUP_ID; Text: EFFECTIVE_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EFFECTIVE_GROUP_ID
 Lookups: EFFECTIVE_USER_ID; Text: EFFECTIVE_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EFFECTIVE_USER_ID
 Lookups: EGID; Text: EGID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EGID
 Lookups: ENV; Text: ENV; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
 Lookups: ERRNO; Text: ERRNO; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ERRNO
 Lookups: ERRNO; Text: ERRNO; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ERRNO
 Lookups: EUID; Text: EUID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EUID
 Lookups: EVAL_ERROR; Text: EVAL_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EVAL_ERROR
 Lookups: EXCEPTIONS_BEING_CAUGHT; Text: EXCEPTIONS_BEING_CAUGHT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EXCEPTIONS_BEING_CAUGHT
 Lookups: EXECUTABLE_NAME; Text: EXECUTABLE_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EXECUTABLE_NAME
 Lookups: EXTENDED_OS_ERROR; Text: EXTENDED_OS_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $EXTENDED_OS_ERROR
 Lookups: F; Text: F; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @F
 Lookups: FORMAT_FORMFEED; Text: FORMAT_FORMFEED; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_FORMFEED
 Lookups: FORMAT_LINES_LEFT; Text: FORMAT_LINES_LEFT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_LINES_LEFT
 Lookups: FORMAT_LINES_PER_PAGE; Text: FORMAT_LINES_PER_PAGE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_LINES_PER_PAGE
 Lookups: FORMAT_LINE_BREAK_CHARACTERS; Text: FORMAT_LINE_BREAK_CHARACTERS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_LINE_BREAK_CHARACTERS
 Lookups: FORMAT_NAME; Text: FORMAT_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_NAME
 Lookups: FORMAT_PAGE_NUMBER; Text: FORMAT_PAGE_NUMBER; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_PAGE_NUMBER
 Lookups: FORMAT_TOP_NAME; Text: FORMAT_TOP_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $FORMAT_TOP_NAME
 Lookups: GID; Text: GID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $GID
 Lookups: INC; Text: INC; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @INC
 Lookups: INC; Text: INC; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %INC
 Lookups: INPLACE_EDIT; Text: INPLACE_EDIT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $INPLACE_EDIT
 Lookups: INPUT_LINE_NUMBER; Text: INPUT_LINE_NUMBER; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $INPUT_LINE_NUMBER
 Lookups: INPUT_RECORD_SEPARATOR; Text: INPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $INPUT_RECORD_SEPARATOR
 Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_END
 Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_START
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LAST_PAREN_MATCH
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %LAST_PAREN_MATCH
 Lookups: LAST_REGEXP_CODE_RESULT; Text: LAST_REGEXP_CODE_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LAST_REGEXP_CODE_RESULT
 Lookups: LAST_SUBMATCH_RESULT; Text: LAST_SUBMATCH_RESULT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LAST_SUBMATCH_RESULT
 Lookups: LIST_SEPARATOR; Text: LIST_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $LIST_SEPARATOR
 Lookups: Log::Log4perl::Levels::ALL; Text: Log::Log4perl::Levels::ALL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::ALL@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::DEBUG; Text: Log::Log4perl::Levels::DEBUG; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::DEBUG@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::ERROR; Text: Log::Log4perl::Levels::ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::ERROR@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::FATAL; Text: Log::Log4perl::Levels::FATAL; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::FATAL@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::INFO; Text: Log::Log4perl::Levels::INFO; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::INFO@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::OFF; Text: Log::Log4perl::Levels::OFF; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::OFF@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::TRACE; Text: Log::Log4perl::Levels::TRACE; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::TRACE@UNKNOWN_VALUE
 Lookups: Log::Log4perl::Levels::WARN; Text: Log::Log4perl::Levels::WARN; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit variable: $Log::Log4perl::Levels::WARN@UNKNOWN_VALUE
 Lookups: MATCH; Text: MATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $MATCH
 Lookups: Mojolicious::Controller::AUTOLOAD; Text: Mojolicious::Controller::AUTOLOAD; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 593 in Controller.pm
 Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Lookups: NR; Text: NR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $NR
 Lookups: OFMT; Text: OFMT; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OFMT
 Lookups: OFS; Text: OFS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OFS
 Lookups: OLD_PERL_VERSION; Text: OLD_PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OLD_PERL_VERSION
 Lookups: ORS; Text: ORS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $ORS
 Lookups: OSNAME; Text: OSNAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OSNAME
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OS_ERROR
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %OS_ERROR
 Lookups: OUTPUT_AUTO_FLUSH; Text: OUTPUT_AUTO_FLUSH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OUTPUT_AUTO_FLUSH
 Lookups: OUTPUT_FIELD_SEPARATOR; Text: OUTPUT_FIELD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OUTPUT_FIELD_SEPARATOR
 Lookups: OUTPUT_RECORD_SEPARATOR; Text: OUTPUT_RECORD_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $OUTPUT_RECORD_SEPARATOR
 Lookups: PERLDB; Text: PERLDB; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PERLDB
 Lookups: PERL_VERSION; Text: PERL_VERSION; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PERL_VERSION
 Lookups: PID; Text: PID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PID
 Lookups: POSTMATCH; Text: POSTMATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $POSTMATCH
 Lookups: PREMATCH; Text: PREMATCH; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PREMATCH
 Lookups: PROCESS_ID; Text: PROCESS_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PROCESS_ID
 Lookups: PROGRAM_NAME; Text: PROGRAM_NAME; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $PROGRAM_NAME
 Lookups: REAL_GROUP_ID; Text: REAL_GROUP_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $REAL_GROUP_ID
 Lookups: REAL_USER_ID; Text: REAL_USER_ID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $REAL_USER_ID
 Lookups: RS; Text: RS; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $RS
 Lookups: SIG; Text: SIG; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %SIG
 Lookups: SUBSCRIPT_SEPARATOR; Text: SUBSCRIPT_SEPARATOR; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $SUBSCRIPT_SEPARATOR
 Lookups: SUBSEP; Text: SUBSEP; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $SUBSEP
 Lookups: SYSTEM_FD_MAX; Text: SYSTEM_FD_MAX; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $SYSTEM_FD_MAX
 Lookups: UID; Text: UID; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $UID
 Lookups: WARNING; Text: WARNING; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $WARNING
 Lookups: [; Text: [; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $[
 Lookups: \; Text: \; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $\
 Lookups: ]; Text: ]; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $]
 Lookups: ^; Text: ^; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^
 Lookups: ^A; Text: ^A; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^A
 Lookups: ^C; Text: ^C; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^C
 Lookups: ^D; Text: ^D; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^D
 Lookups: ^E; Text: ^E; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^E
 Lookups: ^F; Text: ^F; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^F
 Lookups: ^H; Text: ^H; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^H
 Lookups: ^H; Text: ^H; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^H
 Lookups: ^I; Text: ^I; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^I
 Lookups: ^L; Text: ^L; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^L
 Lookups: ^M; Text: ^M; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^M
 Lookups: ^N; Text: ^N; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^N
 Lookups: ^O; Text: ^O; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^O
 Lookups: ^P; Text: ^P; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^P
 Lookups: ^R; Text: ^R; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^R
 Lookups: ^S; Text: ^S; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^S
 Lookups: ^T; Text: ^T; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^T
 Lookups: ^V; Text: ^V; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^V
 Lookups: ^W; Text: ^W; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^W
 Lookups: ^X; Text: ^X; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^X
 Lookups: _; Text: _; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @_
 Lookups: _; Text: _; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $_
 Lookups: `; Text: `; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $`
 Lookups: a; Text: a; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $a
 Lookups: b; Text: b; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $b
 Lookups: groupedarray; Text: groupedarray; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 24 in variableScalarLocal.pl
 Lookups: groupedhash; Text: groupedhash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 39 in variableScalarLocal.pl
 Lookups: groupedscalar; Text: groupedscalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 8 in variableScalarLocal.pl
 Lookups: somearray; Text: somearray; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 60 in variableScalarLocal.pl
 Lookups: somehash; Text: somehash; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 78 in variableScalarLocal.pl
 Lookups: somescalar; Text: somescalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 95 in variableScalarLocal.pl
 Lookups: {^CAPTURE_ALL}; Text: {^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE_ALL
 Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @^CAPTURE
 Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE
 Lookups: {^CHILD_ERROR_NATIVE}; Text: {^CHILD_ERROR_NATIVE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^CHILD_ERROR_NATIVE
 Lookups: {^ENCODING}; Text: {^ENCODING}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^ENCODING
 Lookups: {^GLOBAL_PHASE}; Text: {^GLOBAL_PHASE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^GLOBAL_PHASE
 Lookups: {^LAST_FH}; Text: {^LAST_FH}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^LAST_FH
 Lookups: {^MATCH}; Text: {^MATCH}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^MATCH
 Lookups: {^OPEN}; Text: {^OPEN}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^OPEN
 Lookups: {^POSTMATCH}; Text: {^POSTMATCH}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^POSTMATCH
 Lookups: {^PREMATCH}; Text: {^PREMATCH}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^PREMATCH
 Lookups: {^RE_DEBUG_FLAGS}; Text: {^RE_DEBUG_FLAGS}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^RE_DEBUG_FLAGS
 Lookups: {^RE_TRIE_MAXBUF}; Text: {^RE_TRIE_MAXBUF}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^RE_TRIE_MAXBUF
 Lookups: {^TAINT}; Text: {^TAINT}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^TAINT
 Lookups: {^UNICODE}; Text: {^UNICODE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^UNICODE
 Lookups: {^UTF8CACHE}; Text: {^UTF8CACHE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^UTF8CACHE
 Lookups: {^UTF8LOCALE}; Text: {^UTF8LOCALE}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^UTF8LOCALE
 Lookups: {^WARNING_BITS}; Text: {^WARNING_BITS}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^WARNING_BITS
 Lookups: {^WIN32_SLOPPY_STAT}; Text: {^WIN32_SLOPPY_STAT}; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $^WIN32_SLOPPY_STAT
 Lookups: |; Text: |; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $|
 Lookups: ~; Text: ~; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: $~

@@ -1,39 +1,78 @@
 Lookups: Any; Text: Any; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Any()
 Lookups: ArrayRef; Text: ArrayRef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ArrayRef()
 Lookups: Bool; Text: Bool; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Bool()
 Lookups: ClassName; Text: ClassName; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ClassName()
 Lookups: CodeRef; Text: CodeRef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: CodeRef()
 Lookups: ConsumerOf; Text: ConsumerOf; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ConsumerOf()
 Lookups: CycleTuple; Text: CycleTuple; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: CycleTuple()
 Lookups: Defined; Text: Defined; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Defined()
 Lookups: Dict; Text: Dict; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Dict()
 Lookups: Enum; Text: Enum; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Enum()
 Lookups: FileHandle; Text: FileHandle; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: FileHandle()
 Lookups: GlobRef; Text: GlobRef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: GlobRef()
 Lookups: HasMethods; Text: HasMethods; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: HasMethods()
 Lookups: HashRef; Text: HashRef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: HashRef()
 Lookups: InstanceOf; Text: InstanceOf; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: InstanceOf()
 Lookups: Int; Text: Int; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Int()
 Lookups: Item; Text: Item; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Item()
 Lookups: Join; Text: Join; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Join()
 Lookups: LaxNum; Text: LaxNum; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: LaxNum()
 Lookups: Map; Text: Map; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Map()
 Lookups: Maybe; Text: Maybe; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Maybe()
 Lookups: MkOpt; Text: MkOpt; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: MkOpt()
 Lookups: Num; Text: Num; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Num()
 Lookups: Object; Text: Object; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Object()
 Lookups: OptList; Text: OptList; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: OptList()
 Lookups: Optional; Text: Optional; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Optional()
 Lookups: Overload; Text: Overload; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Overload()
 Lookups: Ref; Text: Ref; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Ref()
 Lookups: RegexpRef; Text: RegexpRef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: RegexpRef()
 Lookups: RoleName; Text: RoleName; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: RoleName()
 Lookups: ScalarRef; Text: ScalarRef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ScalarRef()
 Lookups: Split; Text: Split; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Split()
 Lookups: Str; Text: Str; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Str()
 Lookups: StrMatch; Text: StrMatch; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: StrMatch()
 Lookups: StrictNum; Text: StrictNum; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: StrictNum()
 Lookups: Tied; Text: Tied; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Tied()
 Lookups: Tuple; Text: Tuple; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Tuple()
 Lookups: Undef; Text: Undef; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Undef()
 Lookups: Value; Text: Value; Tail: null; Type: Types::Standard; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Value()

@@ -1,2 +1,4 @@
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: somehting; Text: somehting; Tail: null; Type: Foo::Bar; Icon: /glob_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlGlobVariableImpl(*) at 19 in typeGlobAsMethod.pl

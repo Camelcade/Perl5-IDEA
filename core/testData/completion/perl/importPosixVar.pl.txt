@@ -1,13 +1,26 @@
 Lookups: !; Text: !; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %!
 Lookups: +; Text: +; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %+
 Lookups: -; Text: -; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %-
 Lookups: ENV; Text: ENV; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
 Lookups: ERRNO; Text: ERRNO; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ERRNO
 Lookups: INC; Text: INC; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %INC
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %LAST_PAREN_MATCH
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %OS_ERROR
 Lookups: SIG; Text: SIG; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %SIG
 Lookups: SIGRT; Text: SIGRT; Tail: null; Type: POSIX; Icon: /hash_gutter_icon.png; Type Icon: null
+    String
 Lookups: ^H; Text: ^H; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^H
 Lookups: {^CAPTURE_ALL}; Text: {^CAPTURE_ALL}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE_ALL
 Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE

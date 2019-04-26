@@ -1,5 +1,10 @@
 Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: Readonly; Text: Readonly; Tail: null; Type: Readonly; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: Readonly()

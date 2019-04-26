@@ -1,873 +1,1782 @@
 Lookups: -A; Text: -A; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -A([$name_or_handle])([$name_or_handle])
 Lookups: -B; Text: -B; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -B([$name_or_handle])([$name_or_handle])
 Lookups: -C; Text: -C; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -C([$name_or_handle])([$name_or_handle])
 Lookups: -M; Text: -M; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -M([$name_or_handle])([$name_or_handle])
 Lookups: -O; Text: -O; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -O([$name_or_handle])([$name_or_handle])
 Lookups: -R; Text: -R; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -R([$name_or_handle])([$name_or_handle])
 Lookups: -S; Text: -S; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -S([$name_or_handle])([$name_or_handle])
 Lookups: -T; Text: -T; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -T([$name_or_handle])([$name_or_handle])
 Lookups: -W; Text: -W; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -W([$name_or_handle])([$name_or_handle])
 Lookups: -X; Text: -X; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -X([$name_or_handle])([$name_or_handle])
 Lookups: -b; Text: -b; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -b([$name_or_handle])([$name_or_handle])
 Lookups: -c; Text: -c; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -c([$name_or_handle])([$name_or_handle])
 Lookups: -d; Text: -d; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -d([$name_or_handle])([$name_or_handle])
 Lookups: -e; Text: -e; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -e([$name_or_handle])([$name_or_handle])
 Lookups: -f; Text: -f; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -f([$name_or_handle])([$name_or_handle])
 Lookups: -g; Text: -g; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -g([$name_or_handle])([$name_or_handle])
 Lookups: -k; Text: -k; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -k([$name_or_handle])([$name_or_handle])
 Lookups: -l; Text: -l; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -l([$name_or_handle])([$name_or_handle])
 Lookups: -o; Text: -o; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -o([$name_or_handle])([$name_or_handle])
 Lookups: -p; Text: -p; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -p([$name_or_handle])([$name_or_handle])
 Lookups: -r; Text: -r; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -r([$name_or_handle])([$name_or_handle])
 Lookups: -s; Text: -s; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -s([$name_or_handle])([$name_or_handle])
 Lookups: -t; Text: -t; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -t([$name_or_handle])([$name_or_handle])
 Lookups: -u; Text: -u; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -u([$name_or_handle])([$name_or_handle])
 Lookups: -w; Text: -w; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -w([$name_or_handle])([$name_or_handle])
 Lookups: -x; Text: -x; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -x([$name_or_handle])([$name_or_handle])
 Lookups: -z; Text: -z; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: -z([$name_or_handle])([$name_or_handle])
 Lookups: ARG_MAX; Text: ARG_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ARG_MAX => &POSIX::ARG_MAX
 Lookups: AUTOLOAD; Text: AUTOLOAD; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: AUTOLOAD()
 Lookups: B0; Text: B0; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B0 => &POSIX::B0
 Lookups: B110; Text: B110; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B110 => &POSIX::B110
 Lookups: B1200; Text: B1200; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B1200 => &POSIX::B1200
 Lookups: B134; Text: B134; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B134 => &POSIX::B134
 Lookups: B150; Text: B150; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B150 => &POSIX::B150
 Lookups: B1800; Text: B1800; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B1800 => &POSIX::B1800
 Lookups: B19200; Text: B19200; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B19200 => &POSIX::B19200
 Lookups: B200; Text: B200; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B200 => &POSIX::B200
 Lookups: B2400; Text: B2400; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B2400 => &POSIX::B2400
 Lookups: B300; Text: B300; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B300 => &POSIX::B300
 Lookups: B38400; Text: B38400; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B38400 => &POSIX::B38400
 Lookups: B4800; Text: B4800; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B4800 => &POSIX::B4800
 Lookups: B50; Text: B50; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B50 => &POSIX::B50
 Lookups: B600; Text: B600; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B600 => &POSIX::B600
 Lookups: B75; Text: B75; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B75 => &POSIX::B75
 Lookups: B9600; Text: B9600; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &B9600 => &POSIX::B9600
 Lookups: BEGIN; Text: BEGIN; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: BEGIN()
 Lookups: BRKINT; Text: BRKINT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &BRKINT => &POSIX::BRKINT
 Lookups: BUFSIZ; Text: BUFSIZ; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &BUFSIZ => &POSIX::BUFSIZ
 Lookups: CHAR_BIT; Text: CHAR_BIT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CHAR_BIT => &POSIX::CHAR_BIT
 Lookups: CHAR_MAX; Text: CHAR_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CHAR_MAX => &POSIX::CHAR_MAX
 Lookups: CHAR_MIN; Text: CHAR_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CHAR_MIN => &POSIX::CHAR_MIN
 Lookups: CHECK; Text: CHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: CHECK()
 Lookups: CHILD_MAX; Text: CHILD_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CHILD_MAX => &POSIX::CHILD_MAX
 Lookups: CLK_TCK; Text: CLK_TCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CLK_TCK => &POSIX::CLK_TCK
 Lookups: CLOCAL; Text: CLOCAL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CLOCAL => &POSIX::CLOCAL
 Lookups: CLOCKS_PER_SEC; Text: CLOCKS_PER_SEC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CLOCKS_PER_SEC => &POSIX::CLOCKS_PER_SEC
 Lookups: CORE->; Text: CORE->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::; Text: CORE::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE
 Lookups: CORE::GLOBAL->; Text: CORE::GLOBAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: CORE::GLOBAL::; Text: CORE::GLOBAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: CORE::GLOBAL
 Lookups: CREAD; Text: CREAD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CREAD => &POSIX::CREAD
 Lookups: CS5; Text: CS5; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CS5 => &POSIX::CS5
 Lookups: CS6; Text: CS6; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CS6 => &POSIX::CS6
 Lookups: CS7; Text: CS7; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CS7 => &POSIX::CS7
 Lookups: CS8; Text: CS8; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CS8 => &POSIX::CS8
 Lookups: CSIZE; Text: CSIZE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CSIZE => &POSIX::CSIZE
 Lookups: CSTOPB; Text: CSTOPB; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &CSTOPB => &POSIX::CSTOPB
 Lookups: ClassAccessor->; Text: ClassAccessor->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 Lookups: ClassAccessor::; Text: ClassAccessor::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@ClassAccessor at 16 in ClassAccessor.pm
 Lookups: DBL_DIG; Text: DBL_DIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_DIG => &POSIX::DBL_DIG
 Lookups: DBL_EPSILON; Text: DBL_EPSILON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_EPSILON => &POSIX::DBL_EPSILON
 Lookups: DBL_MANT_DIG; Text: DBL_MANT_DIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MANT_DIG => &POSIX::DBL_MANT_DIG
 Lookups: DBL_MAX; Text: DBL_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MAX => &POSIX::DBL_MAX
 Lookups: DBL_MAX_10_EXP; Text: DBL_MAX_10_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MAX_10_EXP => &POSIX::DBL_MAX_10_EXP
 Lookups: DBL_MAX_EXP; Text: DBL_MAX_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MAX_EXP => &POSIX::DBL_MAX_EXP
 Lookups: DBL_MIN; Text: DBL_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MIN => &POSIX::DBL_MIN
 Lookups: DBL_MIN_10_EXP; Text: DBL_MIN_10_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MIN_10_EXP => &POSIX::DBL_MIN_10_EXP
 Lookups: DBL_MIN_EXP; Text: DBL_MIN_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &DBL_MIN_EXP => &POSIX::DBL_MIN_EXP
 Lookups: DESTROY; Text: DESTROY; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: DESTROY()
 Lookups: E2BIG; Text: E2BIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &E2BIG => &POSIX::E2BIG
 Lookups: EACCES; Text: EACCES; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EACCES => &POSIX::EACCES
 Lookups: EADDRINUSE; Text: EADDRINUSE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EADDRINUSE => &POSIX::EADDRINUSE
 Lookups: EADDRNOTAVAIL; Text: EADDRNOTAVAIL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EADDRNOTAVAIL => &POSIX::EADDRNOTAVAIL
 Lookups: EAFNOSUPPORT; Text: EAFNOSUPPORT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EAFNOSUPPORT => &POSIX::EAFNOSUPPORT
 Lookups: EAGAIN; Text: EAGAIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EAGAIN => &POSIX::EAGAIN
 Lookups: EALREADY; Text: EALREADY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EALREADY => &POSIX::EALREADY
 Lookups: EBADF; Text: EBADF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EBADF => &POSIX::EBADF
 Lookups: EBADMSG; Text: EBADMSG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EBADMSG => &POSIX::EBADMSG
 Lookups: EBUSY; Text: EBUSY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EBUSY => &POSIX::EBUSY
 Lookups: ECANCELED; Text: ECANCELED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECANCELED => &POSIX::ECANCELED
 Lookups: ECHILD; Text: ECHILD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECHILD => &POSIX::ECHILD
 Lookups: ECHO; Text: ECHO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECHO => &POSIX::ECHO
 Lookups: ECHOE; Text: ECHOE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECHOE => &POSIX::ECHOE
 Lookups: ECHOK; Text: ECHOK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECHOK => &POSIX::ECHOK
 Lookups: ECHONL; Text: ECHONL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECHONL => &POSIX::ECHONL
 Lookups: ECONNABORTED; Text: ECONNABORTED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECONNABORTED => &POSIX::ECONNABORTED
 Lookups: ECONNREFUSED; Text: ECONNREFUSED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECONNREFUSED => &POSIX::ECONNREFUSED
 Lookups: ECONNRESET; Text: ECONNRESET; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ECONNRESET => &POSIX::ECONNRESET
 Lookups: EDEADLK; Text: EDEADLK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EDEADLK => &POSIX::EDEADLK
 Lookups: EDESTADDRREQ; Text: EDESTADDRREQ; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EDESTADDRREQ => &POSIX::EDESTADDRREQ
 Lookups: EDOM; Text: EDOM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EDOM => &POSIX::EDOM
 Lookups: EDQUOT; Text: EDQUOT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EDQUOT => &POSIX::EDQUOT
 Lookups: EEXIST; Text: EEXIST; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EEXIST => &POSIX::EEXIST
 Lookups: EFAULT; Text: EFAULT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EFAULT => &POSIX::EFAULT
 Lookups: EFBIG; Text: EFBIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EFBIG => &POSIX::EFBIG
 Lookups: EHOSTDOWN; Text: EHOSTDOWN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EHOSTDOWN => &POSIX::EHOSTDOWN
 Lookups: EHOSTUNREACH; Text: EHOSTUNREACH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EHOSTUNREACH => &POSIX::EHOSTUNREACH
 Lookups: EIDRM; Text: EIDRM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EIDRM => &POSIX::EIDRM
 Lookups: EILSEQ; Text: EILSEQ; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EILSEQ => &POSIX::EILSEQ
 Lookups: EINPROGRESS; Text: EINPROGRESS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EINPROGRESS => &POSIX::EINPROGRESS
 Lookups: EINTR; Text: EINTR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EINTR => &POSIX::EINTR
 Lookups: EINVAL; Text: EINVAL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EINVAL => &POSIX::EINVAL
 Lookups: EIO; Text: EIO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EIO => &POSIX::EIO
 Lookups: EISCONN; Text: EISCONN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EISCONN => &POSIX::EISCONN
 Lookups: EISDIR; Text: EISDIR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EISDIR => &POSIX::EISDIR
 Lookups: ELOOP; Text: ELOOP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ELOOP => &POSIX::ELOOP
 Lookups: EMFILE; Text: EMFILE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EMFILE => &POSIX::EMFILE
 Lookups: EMLINK; Text: EMLINK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EMLINK => &POSIX::EMLINK
 Lookups: EMSGSIZE; Text: EMSGSIZE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EMSGSIZE => &POSIX::EMSGSIZE
 Lookups: ENAMETOOLONG; Text: ENAMETOOLONG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENAMETOOLONG => &POSIX::ENAMETOOLONG
 Lookups: END; Text: END; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: END()
 Lookups: ENETDOWN; Text: ENETDOWN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENETDOWN => &POSIX::ENETDOWN
 Lookups: ENETRESET; Text: ENETRESET; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENETRESET => &POSIX::ENETRESET
 Lookups: ENETUNREACH; Text: ENETUNREACH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENETUNREACH => &POSIX::ENETUNREACH
 Lookups: ENFILE; Text: ENFILE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENFILE => &POSIX::ENFILE
 Lookups: ENOBUFS; Text: ENOBUFS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOBUFS => &POSIX::ENOBUFS
 Lookups: ENODATA; Text: ENODATA; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENODATA => &POSIX::ENODATA
 Lookups: ENODEV; Text: ENODEV; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENODEV => &POSIX::ENODEV
 Lookups: ENOENT; Text: ENOENT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOENT => &POSIX::ENOENT
 Lookups: ENOEXEC; Text: ENOEXEC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOEXEC => &POSIX::ENOEXEC
 Lookups: ENOLCK; Text: ENOLCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOLCK => &POSIX::ENOLCK
 Lookups: ENOLINK; Text: ENOLINK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOLINK => &POSIX::ENOLINK
 Lookups: ENOMEM; Text: ENOMEM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOMEM => &POSIX::ENOMEM
 Lookups: ENOMSG; Text: ENOMSG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOMSG => &POSIX::ENOMSG
 Lookups: ENOPROTOOPT; Text: ENOPROTOOPT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOPROTOOPT => &POSIX::ENOPROTOOPT
 Lookups: ENOSPC; Text: ENOSPC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOSPC => &POSIX::ENOSPC
 Lookups: ENOSR; Text: ENOSR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOSR => &POSIX::ENOSR
 Lookups: ENOSTR; Text: ENOSTR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOSTR => &POSIX::ENOSTR
 Lookups: ENOSYS; Text: ENOSYS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOSYS => &POSIX::ENOSYS
 Lookups: ENOTBLK; Text: ENOTBLK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTBLK => &POSIX::ENOTBLK
 Lookups: ENOTCONN; Text: ENOTCONN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTCONN => &POSIX::ENOTCONN
 Lookups: ENOTDIR; Text: ENOTDIR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTDIR => &POSIX::ENOTDIR
 Lookups: ENOTEMPTY; Text: ENOTEMPTY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTEMPTY => &POSIX::ENOTEMPTY
 Lookups: ENOTRECOVERABLE; Text: ENOTRECOVERABLE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTRECOVERABLE => &POSIX::ENOTRECOVERABLE
 Lookups: ENOTSOCK; Text: ENOTSOCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTSOCK => &POSIX::ENOTSOCK
 Lookups: ENOTSUP; Text: ENOTSUP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTSUP => &POSIX::ENOTSUP
 Lookups: ENOTTY; Text: ENOTTY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENOTTY => &POSIX::ENOTTY
 Lookups: ENXIO; Text: ENXIO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ENXIO => &POSIX::ENXIO
 Lookups: EOF; Text: EOF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EOF => &POSIX::EOF
 Lookups: EOPNOTSUPP; Text: EOPNOTSUPP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EOPNOTSUPP => &POSIX::EOPNOTSUPP
 Lookups: EOTHER; Text: EOTHER; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EOTHER => &POSIX::EOTHER
 Lookups: EOVERFLOW; Text: EOVERFLOW; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EOVERFLOW => &POSIX::EOVERFLOW
 Lookups: EOWNERDEAD; Text: EOWNERDEAD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EOWNERDEAD => &POSIX::EOWNERDEAD
 Lookups: EPERM; Text: EPERM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPERM => &POSIX::EPERM
 Lookups: EPFNOSUPPORT; Text: EPFNOSUPPORT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPFNOSUPPORT => &POSIX::EPFNOSUPPORT
 Lookups: EPIPE; Text: EPIPE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPIPE => &POSIX::EPIPE
 Lookups: EPROCLIM; Text: EPROCLIM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPROCLIM => &POSIX::EPROCLIM
 Lookups: EPROTO; Text: EPROTO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPROTO => &POSIX::EPROTO
 Lookups: EPROTONOSUPPORT; Text: EPROTONOSUPPORT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPROTONOSUPPORT => &POSIX::EPROTONOSUPPORT
 Lookups: EPROTOTYPE; Text: EPROTOTYPE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EPROTOTYPE => &POSIX::EPROTOTYPE
 Lookups: ERANGE; Text: ERANGE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ERANGE => &POSIX::ERANGE
 Lookups: EREMOTE; Text: EREMOTE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EREMOTE => &POSIX::EREMOTE
 Lookups: ERESTART; Text: ERESTART; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ERESTART => &POSIX::ERESTART
 Lookups: EROFS; Text: EROFS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EROFS => &POSIX::EROFS
 Lookups: ESHUTDOWN; Text: ESHUTDOWN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ESHUTDOWN => &POSIX::ESHUTDOWN
 Lookups: ESOCKTNOSUPPORT; Text: ESOCKTNOSUPPORT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ESOCKTNOSUPPORT => &POSIX::ESOCKTNOSUPPORT
 Lookups: ESPIPE; Text: ESPIPE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ESPIPE => &POSIX::ESPIPE
 Lookups: ESRCH; Text: ESRCH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ESRCH => &POSIX::ESRCH
 Lookups: ESTALE; Text: ESTALE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ESTALE => &POSIX::ESTALE
 Lookups: ETIME; Text: ETIME; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ETIME => &POSIX::ETIME
 Lookups: ETIMEDOUT; Text: ETIMEDOUT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ETIMEDOUT => &POSIX::ETIMEDOUT
 Lookups: ETOOMANYREFS; Text: ETOOMANYREFS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ETOOMANYREFS => &POSIX::ETOOMANYREFS
 Lookups: ETXTBSY; Text: ETXTBSY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ETXTBSY => &POSIX::ETXTBSY
 Lookups: EUSERS; Text: EUSERS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EUSERS => &POSIX::EUSERS
 Lookups: EWOULDBLOCK; Text: EWOULDBLOCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EWOULDBLOCK => &POSIX::EWOULDBLOCK
 Lookups: EXDEV; Text: EXDEV; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EXDEV => &POSIX::EXDEV
 Lookups: EXIT_FAILURE; Text: EXIT_FAILURE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EXIT_FAILURE => &POSIX::EXIT_FAILURE
 Lookups: EXIT_SUCCESS; Text: EXIT_SUCCESS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &EXIT_SUCCESS => &POSIX::EXIT_SUCCESS
 Lookups: FD_CLOEXEC; Text: FD_CLOEXEC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FD_CLOEXEC => &POSIX::FD_CLOEXEC
 Lookups: FILENAME_MAX; Text: FILENAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FILENAME_MAX => &POSIX::FILENAME_MAX
 Lookups: FLT_DIG; Text: FLT_DIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_DIG => &POSIX::FLT_DIG
 Lookups: FLT_EPSILON; Text: FLT_EPSILON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_EPSILON => &POSIX::FLT_EPSILON
 Lookups: FLT_MANT_DIG; Text: FLT_MANT_DIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MANT_DIG => &POSIX::FLT_MANT_DIG
 Lookups: FLT_MAX; Text: FLT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MAX => &POSIX::FLT_MAX
 Lookups: FLT_MAX_10_EXP; Text: FLT_MAX_10_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MAX_10_EXP => &POSIX::FLT_MAX_10_EXP
 Lookups: FLT_MAX_EXP; Text: FLT_MAX_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MAX_EXP => &POSIX::FLT_MAX_EXP
 Lookups: FLT_MIN; Text: FLT_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MIN => &POSIX::FLT_MIN
 Lookups: FLT_MIN_10_EXP; Text: FLT_MIN_10_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MIN_10_EXP => &POSIX::FLT_MIN_10_EXP
 Lookups: FLT_MIN_EXP; Text: FLT_MIN_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_MIN_EXP => &POSIX::FLT_MIN_EXP
 Lookups: FLT_RADIX; Text: FLT_RADIX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_RADIX => &POSIX::FLT_RADIX
 Lookups: FLT_ROUNDS; Text: FLT_ROUNDS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FLT_ROUNDS => &POSIX::FLT_ROUNDS
 Lookups: FP_ILOGB0; Text: FP_ILOGB0; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_ILOGB0 => &POSIX::FP_ILOGB0
 Lookups: FP_ILOGBNAN; Text: FP_ILOGBNAN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_ILOGBNAN => &POSIX::FP_ILOGBNAN
 Lookups: FP_INFINITE; Text: FP_INFINITE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_INFINITE => &POSIX::FP_INFINITE
 Lookups: FP_NAN; Text: FP_NAN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_NAN => &POSIX::FP_NAN
 Lookups: FP_NORMAL; Text: FP_NORMAL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_NORMAL => &POSIX::FP_NORMAL
 Lookups: FP_SUBNORMAL; Text: FP_SUBNORMAL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_SUBNORMAL => &POSIX::FP_SUBNORMAL
 Lookups: FP_ZERO; Text: FP_ZERO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &FP_ZERO => &POSIX::FP_ZERO
 Lookups: F_DUPFD; Text: F_DUPFD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_DUPFD => &POSIX::F_DUPFD
 Lookups: F_GETFD; Text: F_GETFD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_GETFD => &POSIX::F_GETFD
 Lookups: F_GETFL; Text: F_GETFL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_GETFL => &POSIX::F_GETFL
 Lookups: F_GETLK; Text: F_GETLK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_GETLK => &POSIX::F_GETLK
 Lookups: F_OK; Text: F_OK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_OK => &POSIX::F_OK
 Lookups: F_RDLCK; Text: F_RDLCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_RDLCK => &POSIX::F_RDLCK
 Lookups: F_SETFD; Text: F_SETFD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_SETFD => &POSIX::F_SETFD
 Lookups: F_SETFL; Text: F_SETFL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_SETFL => &POSIX::F_SETFL
 Lookups: F_SETLK; Text: F_SETLK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_SETLK => &POSIX::F_SETLK
 Lookups: F_SETLKW; Text: F_SETLKW; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_SETLKW => &POSIX::F_SETLKW
 Lookups: F_UNLCK; Text: F_UNLCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_UNLCK => &POSIX::F_UNLCK
 Lookups: F_WRLCK; Text: F_WRLCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &F_WRLCK => &POSIX::F_WRLCK
 Lookups: HUGE_VAL; Text: HUGE_VAL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &HUGE_VAL => &POSIX::HUGE_VAL
 Lookups: HUPCL; Text: HUPCL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &HUPCL => &POSIX::HUPCL
 Lookups: ICANON; Text: ICANON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ICANON => &POSIX::ICANON
 Lookups: ICRNL; Text: ICRNL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ICRNL => &POSIX::ICRNL
 Lookups: IEXTEN; Text: IEXTEN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &IEXTEN => &POSIX::IEXTEN
 Lookups: IGNBRK; Text: IGNBRK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &IGNBRK => &POSIX::IGNBRK
 Lookups: IGNCR; Text: IGNCR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &IGNCR => &POSIX::IGNCR
 Lookups: IGNPAR; Text: IGNPAR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &IGNPAR => &POSIX::IGNPAR
 Lookups: INFINITY; Text: INFINITY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &INFINITY => &POSIX::INFINITY
 Lookups: INIT; Text: INIT; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: INIT()
 Lookups: INLCR; Text: INLCR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &INLCR => &POSIX::INLCR
 Lookups: INPCK; Text: INPCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &INPCK => &POSIX::INPCK
 Lookups: INT_MAX; Text: INT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &INT_MAX => &POSIX::INT_MAX
 Lookups: INT_MIN; Text: INT_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &INT_MIN => &POSIX::INT_MIN
 Lookups: ISIG; Text: ISIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ISIG => &POSIX::ISIG
 Lookups: ISTRIP; Text: ISTRIP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ISTRIP => &POSIX::ISTRIP
 Lookups: IXOFF; Text: IXOFF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &IXOFF => &POSIX::IXOFF
 Lookups: IXON; Text: IXON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &IXON => &POSIX::IXON
 Lookups: LC_ALL; Text: LC_ALL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_ALL => &POSIX::LC_ALL
 Lookups: LC_COLLATE; Text: LC_COLLATE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_COLLATE => &POSIX::LC_COLLATE
 Lookups: LC_CTYPE; Text: LC_CTYPE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_CTYPE => &POSIX::LC_CTYPE
 Lookups: LC_MESSAGES; Text: LC_MESSAGES; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_MESSAGES => &POSIX::LC_MESSAGES
 Lookups: LC_MONETARY; Text: LC_MONETARY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_MONETARY => &POSIX::LC_MONETARY
 Lookups: LC_NUMERIC; Text: LC_NUMERIC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_NUMERIC => &POSIX::LC_NUMERIC
 Lookups: LC_TIME; Text: LC_TIME; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LC_TIME => &POSIX::LC_TIME
 Lookups: LDBL_DIG; Text: LDBL_DIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_DIG => &POSIX::LDBL_DIG
 Lookups: LDBL_EPSILON; Text: LDBL_EPSILON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_EPSILON => &POSIX::LDBL_EPSILON
 Lookups: LDBL_MANT_DIG; Text: LDBL_MANT_DIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MANT_DIG => &POSIX::LDBL_MANT_DIG
 Lookups: LDBL_MAX; Text: LDBL_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MAX => &POSIX::LDBL_MAX
 Lookups: LDBL_MAX_10_EXP; Text: LDBL_MAX_10_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MAX_10_EXP => &POSIX::LDBL_MAX_10_EXP
 Lookups: LDBL_MAX_EXP; Text: LDBL_MAX_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MAX_EXP => &POSIX::LDBL_MAX_EXP
 Lookups: LDBL_MIN; Text: LDBL_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MIN => &POSIX::LDBL_MIN
 Lookups: LDBL_MIN_10_EXP; Text: LDBL_MIN_10_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MIN_10_EXP => &POSIX::LDBL_MIN_10_EXP
 Lookups: LDBL_MIN_EXP; Text: LDBL_MIN_EXP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LDBL_MIN_EXP => &POSIX::LDBL_MIN_EXP
 Lookups: LINK_MAX; Text: LINK_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LINK_MAX => &POSIX::LINK_MAX
 Lookups: LONG_MAX; Text: LONG_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LONG_MAX => &POSIX::LONG_MAX
 Lookups: LONG_MIN; Text: LONG_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LONG_MIN => &POSIX::LONG_MIN
 Lookups: L_ctermid; Text: L_ctermid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &L_ctermid => &POSIX::L_ctermid
 Lookups: L_cuserid; Text: L_cuserid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &L_cuserid => &POSIX::L_cuserid
 Lookups: L_tmpname; Text: L_tmpname; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &L_tmpname => &POSIX::L_tmpname
 Lookups: Library::Exception->; Text: Library::Exception->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Lookups: Library::Exception2->; Text: Library::Exception2->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Lookups: Library::Exception2::; Text: Library::Exception2::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Lookups: Library::Exception::; Text: Library::Exception::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Lookups: LibraryException->; Text: LibraryException->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Lookups: LibraryException3->; Text: LibraryException3->; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Lookups: LibraryException3::; Text: LibraryException3::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Lookups: LibraryException::; Text: LibraryException::; Tail: ...; Type: null; Icon: /exceptionClass.svg; Type Icon: null
+    PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Lookups: MAX_CANON; Text: MAX_CANON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &MAX_CANON => &POSIX::MAX_CANON
 Lookups: MAX_INPUT; Text: MAX_INPUT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &MAX_INPUT => &POSIX::MAX_INPUT
 Lookups: MB_CUR_MAX; Text: MB_CUR_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &MB_CUR_MAX => &POSIX::MB_CUR_MAX
 Lookups: MB_LEN_MAX; Text: MB_LEN_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &MB_LEN_MAX => &POSIX::MB_LEN_MAX
 Lookups: M_1_PI; Text: M_1_PI; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_1_PI => &POSIX::M_1_PI
 Lookups: M_2_PI; Text: M_2_PI; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_2_PI => &POSIX::M_2_PI
 Lookups: M_2_SQRTPI; Text: M_2_SQRTPI; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_2_SQRTPI => &POSIX::M_2_SQRTPI
 Lookups: M_E; Text: M_E; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_E => &POSIX::M_E
 Lookups: M_LN10; Text: M_LN10; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_LN10 => &POSIX::M_LN10
 Lookups: M_LN2; Text: M_LN2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_LN2 => &POSIX::M_LN2
 Lookups: M_LOG10E; Text: M_LOG10E; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_LOG10E => &POSIX::M_LOG10E
 Lookups: M_LOG2E; Text: M_LOG2E; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_LOG2E => &POSIX::M_LOG2E
 Lookups: M_PI; Text: M_PI; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_PI => &POSIX::M_PI
 Lookups: M_PI_2; Text: M_PI_2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_PI_2 => &POSIX::M_PI_2
 Lookups: M_PI_4; Text: M_PI_4; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_PI_4 => &POSIX::M_PI_4
 Lookups: M_SQRT1_2; Text: M_SQRT1_2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_SQRT1_2 => &POSIX::M_SQRT1_2
 Lookups: M_SQRT2; Text: M_SQRT2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &M_SQRT2 => &POSIX::M_SQRT2
 Lookups: Mojolicious::Controller->; Text: Mojolicious::Controller->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 Lookups: Mojolicious::Controller::; Text: Mojolicious::Controller::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers->; Text: Mojolicious::Plugin::DefaultHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::DefaultHelpers at 0 in DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers::; Text: Mojolicious::Plugin::DefaultHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::DefaultHelpers at 0 in DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::TagHelpers->; Text: Mojolicious::Plugin::TagHelpers->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::TagHelpers at 0 in TagHelpers.pm
 Lookups: Mojolicious::Plugin::TagHelpers::; Text: Mojolicious::Plugin::TagHelpers::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Plugin::TagHelpers at 0 in TagHelpers.pm
 Lookups: MyTest::Constants->; Text: MyTest::Constants->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 Lookups: MyTest::Constants::; Text: MyTest::Constants::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Constants at 0 in Constants.pm
 Lookups: MyTest::Exceptions->; Text: MyTest::Exceptions->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Exceptions at 0 in Exceptions.pm
 Lookups: MyTest::Exceptions::; Text: MyTest::Exceptions::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Exceptions at 0 in Exceptions.pm
 Lookups: MyTest::Some::Package->; Text: MyTest::Some::Package->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
 Lookups: MyTest::Some::Package::; Text: MyTest::Some::Package::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Some::Package at 0 in Package.pm
 Lookups: MyTest::Something->; Text: MyTest::Something->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
 Lookups: MyTest::Something::; Text: MyTest::Something::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@MyTest::Something at 0 in Something.pm
 Lookups: NAME_MAX; Text: NAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NAME_MAX => &POSIX::NAME_MAX
 Lookups: NAN; Text: NAN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NAN => &POSIX::NAN
 Lookups: NCCS; Text: NCCS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NCCS => &POSIX::NCCS
 Lookups: NDEBUG; Text: NDEBUG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NDEBUG => &POSIX::NDEBUG
 Lookups: NGROUPS_MAX; Text: NGROUPS_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NGROUPS_MAX => &POSIX::NGROUPS_MAX
 Lookups: NOFLSH; Text: NOFLSH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NOFLSH => &POSIX::NOFLSH
 Lookups: NULL; Text: NULL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &NULL => &POSIX::NULL
 Lookups: OPEN_MAX; Text: OPEN_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &OPEN_MAX => &POSIX::OPEN_MAX
 Lookups: OPOST; Text: OPOST; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &OPOST => &POSIX::OPOST
 Lookups: O_ACCMODE; Text: O_ACCMODE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_ACCMODE => &POSIX::O_ACCMODE
 Lookups: O_APPEND; Text: O_APPEND; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_APPEND => &POSIX::O_APPEND
 Lookups: O_CREAT; Text: O_CREAT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_CREAT => &POSIX::O_CREAT
 Lookups: O_EXCL; Text: O_EXCL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_EXCL => &POSIX::O_EXCL
 Lookups: O_NOCTTY; Text: O_NOCTTY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_NOCTTY => &POSIX::O_NOCTTY
 Lookups: O_NONBLOCK; Text: O_NONBLOCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_NONBLOCK => &POSIX::O_NONBLOCK
 Lookups: O_RDONLY; Text: O_RDONLY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_RDONLY => &POSIX::O_RDONLY
 Lookups: O_RDWR; Text: O_RDWR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_RDWR => &POSIX::O_RDWR
 Lookups: O_TRUNC; Text: O_TRUNC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_TRUNC => &POSIX::O_TRUNC
 Lookups: O_WRONLY; Text: O_WRONLY; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &O_WRONLY => &POSIX::O_WRONLY
 Lookups: PARENB; Text: PARENB; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &PARENB => &POSIX::PARENB
 Lookups: PARMRK; Text: PARMRK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &PARMRK => &POSIX::PARMRK
 Lookups: PARODD; Text: PARODD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &PARODD => &POSIX::PARODD
 Lookups: PATH_MAX; Text: PATH_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &PATH_MAX => &POSIX::PATH_MAX
 Lookups: PIPE_BUF; Text: PIPE_BUF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &PIPE_BUF => &POSIX::PIPE_BUF
 Lookups: RAND_MAX; Text: RAND_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &RAND_MAX => &POSIX::RAND_MAX
 Lookups: R_OK; Text: R_OK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &R_OK => &POSIX::R_OK
 Lookups: SA_NOCLDSTOP; Text: SA_NOCLDSTOP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_NOCLDSTOP => &POSIX::SA_NOCLDSTOP
 Lookups: SA_NOCLDWAIT; Text: SA_NOCLDWAIT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_NOCLDWAIT => &POSIX::SA_NOCLDWAIT
 Lookups: SA_NODEFER; Text: SA_NODEFER; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_NODEFER => &POSIX::SA_NODEFER
 Lookups: SA_ONSTACK; Text: SA_ONSTACK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_ONSTACK => &POSIX::SA_ONSTACK
 Lookups: SA_RESETHAND; Text: SA_RESETHAND; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_RESETHAND => &POSIX::SA_RESETHAND
 Lookups: SA_RESTART; Text: SA_RESTART; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_RESTART => &POSIX::SA_RESTART
 Lookups: SA_SIGINFO; Text: SA_SIGINFO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SA_SIGINFO => &POSIX::SA_SIGINFO
 Lookups: SCHAR_MAX; Text: SCHAR_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SCHAR_MAX => &POSIX::SCHAR_MAX
 Lookups: SCHAR_MIN; Text: SCHAR_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SCHAR_MIN => &POSIX::SCHAR_MIN
 Lookups: SEEK_CUR; Text: SEEK_CUR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SEEK_CUR => &POSIX::SEEK_CUR
 Lookups: SEEK_END; Text: SEEK_END; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SEEK_END => &POSIX::SEEK_END
 Lookups: SEEK_SET; Text: SEEK_SET; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SEEK_SET => &POSIX::SEEK_SET
 Lookups: SHRT_MAX; Text: SHRT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SHRT_MAX => &POSIX::SHRT_MAX
 Lookups: SHRT_MIN; Text: SHRT_MIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SHRT_MIN => &POSIX::SHRT_MIN
 Lookups: SIGABRT; Text: SIGABRT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGABRT => &POSIX::SIGABRT
 Lookups: SIGALRM; Text: SIGALRM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGALRM => &POSIX::SIGALRM
 Lookups: SIGBUS; Text: SIGBUS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGBUS => &POSIX::SIGBUS
 Lookups: SIGCHLD; Text: SIGCHLD; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGCHLD => &POSIX::SIGCHLD
 Lookups: SIGCONT; Text: SIGCONT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGCONT => &POSIX::SIGCONT
 Lookups: SIGFPE; Text: SIGFPE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGFPE => &POSIX::SIGFPE
 Lookups: SIGHUP; Text: SIGHUP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGHUP => &POSIX::SIGHUP
 Lookups: SIGILL; Text: SIGILL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGILL => &POSIX::SIGILL
 Lookups: SIGINT; Text: SIGINT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGINT => &POSIX::SIGINT
 Lookups: SIGKILL; Text: SIGKILL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGKILL => &POSIX::SIGKILL
 Lookups: SIGPIPE; Text: SIGPIPE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGPIPE => &POSIX::SIGPIPE
 Lookups: SIGPOLL; Text: SIGPOLL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGPOLL => &POSIX::SIGPOLL
 Lookups: SIGPROF; Text: SIGPROF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGPROF => &POSIX::SIGPROF
 Lookups: SIGQUIT; Text: SIGQUIT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGQUIT => &POSIX::SIGQUIT
 Lookups: SIGRTMAX; Text: SIGRTMAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGRTMAX => &POSIX::SIGRTMAX
 Lookups: SIGRTMIN; Text: SIGRTMIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGRTMIN => &POSIX::SIGRTMIN
 Lookups: SIGSEGV; Text: SIGSEGV; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGSEGV => &POSIX::SIGSEGV
 Lookups: SIGSTOP; Text: SIGSTOP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGSTOP => &POSIX::SIGSTOP
 Lookups: SIGSYS; Text: SIGSYS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGSYS => &POSIX::SIGSYS
 Lookups: SIGTERM; Text: SIGTERM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGTERM => &POSIX::SIGTERM
 Lookups: SIGTRAP; Text: SIGTRAP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGTRAP => &POSIX::SIGTRAP
 Lookups: SIGTSTP; Text: SIGTSTP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGTSTP => &POSIX::SIGTSTP
 Lookups: SIGTTIN; Text: SIGTTIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGTTIN => &POSIX::SIGTTIN
 Lookups: SIGTTOU; Text: SIGTTOU; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGTTOU => &POSIX::SIGTTOU
 Lookups: SIGURG; Text: SIGURG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGURG => &POSIX::SIGURG
 Lookups: SIGUSR1; Text: SIGUSR1; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGUSR1 => &POSIX::SIGUSR1
 Lookups: SIGUSR2; Text: SIGUSR2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGUSR2 => &POSIX::SIGUSR2
 Lookups: SIGVTALRM; Text: SIGVTALRM; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGVTALRM => &POSIX::SIGVTALRM
 Lookups: SIGXCPU; Text: SIGXCPU; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGXCPU => &POSIX::SIGXCPU
 Lookups: SIGXFSZ; Text: SIGXFSZ; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIGXFSZ => &POSIX::SIGXFSZ
 Lookups: SIG_BLOCK; Text: SIG_BLOCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIG_BLOCK => &POSIX::SIG_BLOCK
 Lookups: SIG_DFL; Text: SIG_DFL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIG_DFL => &POSIX::SIG_DFL
 Lookups: SIG_ERR; Text: SIG_ERR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIG_ERR => &POSIX::SIG_ERR
 Lookups: SIG_IGN; Text: SIG_IGN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIG_IGN => &POSIX::SIG_IGN
 Lookups: SIG_SETMASK; Text: SIG_SETMASK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIG_SETMASK => &POSIX::SIG_SETMASK
 Lookups: SIG_UNBLOCK; Text: SIG_UNBLOCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SIG_UNBLOCK => &POSIX::SIG_UNBLOCK
 Lookups: SSIZE_MAX; Text: SSIZE_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &SSIZE_MAX => &POSIX::SSIZE_MAX
 Lookups: STDERR_FILENO; Text: STDERR_FILENO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &STDERR_FILENO => &POSIX::STDERR_FILENO
 Lookups: STDIN_FILENO; Text: STDIN_FILENO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &STDIN_FILENO => &POSIX::STDIN_FILENO
 Lookups: STDOUT_FILENO; Text: STDOUT_FILENO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &STDOUT_FILENO => &POSIX::STDOUT_FILENO
 Lookups: STREAM_MAX; Text: STREAM_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &STREAM_MAX => &POSIX::STREAM_MAX
 Lookups: S_IRGRP; Text: S_IRGRP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IRGRP => &POSIX::S_IRGRP
 Lookups: S_IROTH; Text: S_IROTH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IROTH => &POSIX::S_IROTH
 Lookups: S_IRUSR; Text: S_IRUSR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IRUSR => &POSIX::S_IRUSR
 Lookups: S_IRWXG; Text: S_IRWXG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IRWXG => &POSIX::S_IRWXG
 Lookups: S_IRWXO; Text: S_IRWXO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IRWXO => &POSIX::S_IRWXO
 Lookups: S_IRWXU; Text: S_IRWXU; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IRWXU => &POSIX::S_IRWXU
 Lookups: S_ISBLK; Text: S_ISBLK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISBLK => &POSIX::S_ISBLK
 Lookups: S_ISCHR; Text: S_ISCHR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISCHR => &POSIX::S_ISCHR
 Lookups: S_ISDIR; Text: S_ISDIR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISDIR => &POSIX::S_ISDIR
 Lookups: S_ISFIFO; Text: S_ISFIFO; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISFIFO => &POSIX::S_ISFIFO
 Lookups: S_ISGID; Text: S_ISGID; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISGID => &POSIX::S_ISGID
 Lookups: S_ISREG; Text: S_ISREG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISREG => &POSIX::S_ISREG
 Lookups: S_ISUID; Text: S_ISUID; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_ISUID => &POSIX::S_ISUID
 Lookups: S_IWGRP; Text: S_IWGRP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IWGRP => &POSIX::S_IWGRP
 Lookups: S_IWOTH; Text: S_IWOTH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IWOTH => &POSIX::S_IWOTH
 Lookups: S_IWUSR; Text: S_IWUSR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IWUSR => &POSIX::S_IWUSR
 Lookups: S_IXGRP; Text: S_IXGRP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IXGRP => &POSIX::S_IXGRP
 Lookups: S_IXOTH; Text: S_IXOTH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IXOTH => &POSIX::S_IXOTH
 Lookups: S_IXUSR; Text: S_IXUSR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &S_IXUSR => &POSIX::S_IXUSR
 Lookups: TCIFLUSH; Text: TCIFLUSH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCIFLUSH => &POSIX::TCIFLUSH
 Lookups: TCIOFF; Text: TCIOFF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCIOFF => &POSIX::TCIOFF
 Lookups: TCIOFLUSH; Text: TCIOFLUSH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCIOFLUSH => &POSIX::TCIOFLUSH
 Lookups: TCION; Text: TCION; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCION => &POSIX::TCION
 Lookups: TCOFLUSH; Text: TCOFLUSH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCOFLUSH => &POSIX::TCOFLUSH
 Lookups: TCOOFF; Text: TCOOFF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCOOFF => &POSIX::TCOOFF
 Lookups: TCOON; Text: TCOON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCOON => &POSIX::TCOON
 Lookups: TCSADRAIN; Text: TCSADRAIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCSADRAIN => &POSIX::TCSADRAIN
 Lookups: TCSAFLUSH; Text: TCSAFLUSH; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCSAFLUSH => &POSIX::TCSAFLUSH
 Lookups: TCSANOW; Text: TCSANOW; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TCSANOW => &POSIX::TCSANOW
 Lookups: TMP_MAX; Text: TMP_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TMP_MAX => &POSIX::TMP_MAX
 Lookups: TOSTOP; Text: TOSTOP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TOSTOP => &POSIX::TOSTOP
 Lookups: TZNAME_MAX; Text: TZNAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &TZNAME_MAX => &POSIX::TZNAME_MAX
 Lookups: UCHAR_MAX; Text: UCHAR_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &UCHAR_MAX => &POSIX::UCHAR_MAX
 Lookups: UINT_MAX; Text: UINT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &UINT_MAX => &POSIX::UINT_MAX
 Lookups: ULONG_MAX; Text: ULONG_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ULONG_MAX => &POSIX::ULONG_MAX
 Lookups: UNITCHECK; Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: UNITCHECK()
 Lookups: UNIVERSAL->; Text: UNIVERSAL->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: UNIVERSAL
 Lookups: UNIVERSAL::; Text: UNIVERSAL::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: UNIVERSAL
 Lookups: USHRT_MAX; Text: USHRT_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &USHRT_MAX => &POSIX::USHRT_MAX
 Lookups: VEOF; Text: VEOF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VEOF => &POSIX::VEOF
 Lookups: VEOL; Text: VEOL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VEOL => &POSIX::VEOL
 Lookups: VERASE; Text: VERASE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VERASE => &POSIX::VERASE
 Lookups: VINTR; Text: VINTR; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VINTR => &POSIX::VINTR
 Lookups: VKILL; Text: VKILL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VKILL => &POSIX::VKILL
 Lookups: VMIN; Text: VMIN; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VMIN => &POSIX::VMIN
 Lookups: VQUIT; Text: VQUIT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VQUIT => &POSIX::VQUIT
 Lookups: VSTART; Text: VSTART; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VSTART => &POSIX::VSTART
 Lookups: VSTOP; Text: VSTOP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VSTOP => &POSIX::VSTOP
 Lookups: VSUSP; Text: VSUSP; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VSUSP => &POSIX::VSUSP
 Lookups: VTIME; Text: VTIME; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &VTIME => &POSIX::VTIME
 Lookups: WEXITSTATUS; Text: WEXITSTATUS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WEXITSTATUS => &POSIX::WEXITSTATUS
 Lookups: WIFEXITED; Text: WIFEXITED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WIFEXITED => &POSIX::WIFEXITED
 Lookups: WIFSIGNALED; Text: WIFSIGNALED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WIFSIGNALED => &POSIX::WIFSIGNALED
 Lookups: WIFSTOPPED; Text: WIFSTOPPED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WIFSTOPPED => &POSIX::WIFSTOPPED
 Lookups: WNOHANG; Text: WNOHANG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WNOHANG => &POSIX::WNOHANG
 Lookups: WSTOPSIG; Text: WSTOPSIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WSTOPSIG => &POSIX::WSTOPSIG
 Lookups: WTERMSIG; Text: WTERMSIG; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WTERMSIG => &POSIX::WTERMSIG
 Lookups: WUNTRACED; Text: WUNTRACED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &WUNTRACED => &POSIX::WUNTRACED
 Lookups: W_OK; Text: W_OK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &W_OK => &POSIX::W_OK
 Lookups: X_OK; Text: X_OK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &X_OK => &POSIX::X_OK
 Lookups: _PC_CHOWN_RESTRICTED; Text: _PC_CHOWN_RESTRICTED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_CHOWN_RESTRICTED => &POSIX::_PC_CHOWN_RESTRICTED
 Lookups: _PC_LINK_MAX; Text: _PC_LINK_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_LINK_MAX => &POSIX::_PC_LINK_MAX
 Lookups: _PC_MAX_CANON; Text: _PC_MAX_CANON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_MAX_CANON => &POSIX::_PC_MAX_CANON
 Lookups: _PC_MAX_INPUT; Text: _PC_MAX_INPUT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_MAX_INPUT => &POSIX::_PC_MAX_INPUT
 Lookups: _PC_NAME_MAX; Text: _PC_NAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_NAME_MAX => &POSIX::_PC_NAME_MAX
 Lookups: _PC_NO_TRUNC; Text: _PC_NO_TRUNC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_NO_TRUNC => &POSIX::_PC_NO_TRUNC
 Lookups: _PC_PATH_MAX; Text: _PC_PATH_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_PATH_MAX => &POSIX::_PC_PATH_MAX
 Lookups: _PC_PIPE_BUF; Text: _PC_PIPE_BUF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_PIPE_BUF => &POSIX::_PC_PIPE_BUF
 Lookups: _PC_VDISABLE; Text: _PC_VDISABLE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_PC_VDISABLE => &POSIX::_PC_VDISABLE
 Lookups: _POSIX_ARG_MAX; Text: _POSIX_ARG_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_ARG_MAX => &POSIX::_POSIX_ARG_MAX
 Lookups: _POSIX_CHILD_MAX; Text: _POSIX_CHILD_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_CHILD_MAX => &POSIX::_POSIX_CHILD_MAX
 Lookups: _POSIX_CHOWN_RESTRICTED; Text: _POSIX_CHOWN_RESTRICTED; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_CHOWN_RESTRICTED => &POSIX::_POSIX_CHOWN_RESTRICTED
 Lookups: _POSIX_JOB_CONTROL; Text: _POSIX_JOB_CONTROL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_JOB_CONTROL => &POSIX::_POSIX_JOB_CONTROL
 Lookups: _POSIX_LINK_MAX; Text: _POSIX_LINK_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_LINK_MAX => &POSIX::_POSIX_LINK_MAX
 Lookups: _POSIX_MAX_CANON; Text: _POSIX_MAX_CANON; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_MAX_CANON => &POSIX::_POSIX_MAX_CANON
 Lookups: _POSIX_MAX_INPUT; Text: _POSIX_MAX_INPUT; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_MAX_INPUT => &POSIX::_POSIX_MAX_INPUT
 Lookups: _POSIX_NAME_MAX; Text: _POSIX_NAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_NAME_MAX => &POSIX::_POSIX_NAME_MAX
 Lookups: _POSIX_NGROUPS_MAX; Text: _POSIX_NGROUPS_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_NGROUPS_MAX => &POSIX::_POSIX_NGROUPS_MAX
 Lookups: _POSIX_NO_TRUNC; Text: _POSIX_NO_TRUNC; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_NO_TRUNC => &POSIX::_POSIX_NO_TRUNC
 Lookups: _POSIX_OPEN_MAX; Text: _POSIX_OPEN_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_OPEN_MAX => &POSIX::_POSIX_OPEN_MAX
 Lookups: _POSIX_PATH_MAX; Text: _POSIX_PATH_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_PATH_MAX => &POSIX::_POSIX_PATH_MAX
 Lookups: _POSIX_PIPE_BUF; Text: _POSIX_PIPE_BUF; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_PIPE_BUF => &POSIX::_POSIX_PIPE_BUF
 Lookups: _POSIX_SAVED_IDS; Text: _POSIX_SAVED_IDS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_SAVED_IDS => &POSIX::_POSIX_SAVED_IDS
 Lookups: _POSIX_SSIZE_MAX; Text: _POSIX_SSIZE_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_SSIZE_MAX => &POSIX::_POSIX_SSIZE_MAX
 Lookups: _POSIX_STREAM_MAX; Text: _POSIX_STREAM_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_STREAM_MAX => &POSIX::_POSIX_STREAM_MAX
 Lookups: _POSIX_TZNAME_MAX; Text: _POSIX_TZNAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_TZNAME_MAX => &POSIX::_POSIX_TZNAME_MAX
 Lookups: _POSIX_VDISABLE; Text: _POSIX_VDISABLE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_VDISABLE => &POSIX::_POSIX_VDISABLE
 Lookups: _POSIX_VERSION; Text: _POSIX_VERSION; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_POSIX_VERSION => &POSIX::_POSIX_VERSION
 Lookups: _SC_ARG_MAX; Text: _SC_ARG_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_ARG_MAX => &POSIX::_SC_ARG_MAX
 Lookups: _SC_CHILD_MAX; Text: _SC_CHILD_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_CHILD_MAX => &POSIX::_SC_CHILD_MAX
 Lookups: _SC_CLK_TCK; Text: _SC_CLK_TCK; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_CLK_TCK => &POSIX::_SC_CLK_TCK
 Lookups: _SC_JOB_CONTROL; Text: _SC_JOB_CONTROL; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_JOB_CONTROL => &POSIX::_SC_JOB_CONTROL
 Lookups: _SC_NGROUPS_MAX; Text: _SC_NGROUPS_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_NGROUPS_MAX => &POSIX::_SC_NGROUPS_MAX
 Lookups: _SC_OPEN_MAX; Text: _SC_OPEN_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_OPEN_MAX => &POSIX::_SC_OPEN_MAX
 Lookups: _SC_PAGESIZE; Text: _SC_PAGESIZE; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_PAGESIZE => &POSIX::_SC_PAGESIZE
 Lookups: _SC_SAVED_IDS; Text: _SC_SAVED_IDS; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_SAVED_IDS => &POSIX::_SC_SAVED_IDS
 Lookups: _SC_STREAM_MAX; Text: _SC_STREAM_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_STREAM_MAX => &POSIX::_SC_STREAM_MAX
 Lookups: _SC_TZNAME_MAX; Text: _SC_TZNAME_MAX; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_TZNAME_MAX => &POSIX::_SC_TZNAME_MAX
 Lookups: _SC_VERSION; Text: _SC_VERSION; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_SC_VERSION => &POSIX::_SC_VERSION
 Lookups: __DATA__; Text: __DATA__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: __DATA__()
 Lookups: __END__; Text: __END__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: __END__()
 Lookups: __FILE__; Text: __FILE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: __FILE__()
 Lookups: __LINE__; Text: __LINE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: __LINE__()
 Lookups: __PACKAGE__; Text: __PACKAGE__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: __PACKAGE__()
 Lookups: __SUB__; Text: __SUB__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: __SUB__()
 Lookups: _exit; Text: _exit; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &_exit => &POSIX::_exit
 Lookups: abort; Text: abort; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &abort => &POSIX::abort
 Lookups: abs; Text: abs; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: abs()
 Lookups: accept; Text: accept; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: accept()
 Lookups: access; Text: access; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &access => &POSIX::access
 Lookups: acos; Text: acos; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &acos => &POSIX::acos
 Lookups: alarm; Text: alarm; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: alarm()
 Lookups: asctime; Text: asctime; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &asctime => &POSIX::asctime
 Lookups: asin; Text: asin; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &asin => &POSIX::asin
 Lookups: assert; Text: assert; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &assert => &POSIX::assert
 Lookups: atan2; Text: atan2; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: atan2()
 Lookups: atan; Text: atan; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &atan => &POSIX::atan
 Lookups: atexit; Text: atexit; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &atexit => &POSIX::atexit
 Lookups: atof; Text: atof; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &atof => &POSIX::atof
 Lookups: atoi; Text: atoi; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &atoi => &POSIX::atoi
 Lookups: atol; Text: atol; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &atol => &POSIX::atol
 Lookups: bind; Text: bind; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: bind()
 Lookups: binmode; Text: binmode; Tail: ($file_handle [, $layer]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: binmode($file_handle [, $layer])($file_handle, [$layer])
 Lookups: bless; Text: bless; Tail: ($reference [, $namespace_name]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: bless($reference [, $namespace_name])($reference, [$namespace_name])
 Lookups: break; Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: break()
 Lookups: bsearch; Text: bsearch; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &bsearch => &POSIX::bsearch
 Lookups: caller; Text: caller; Tail: ([$frame_offset]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: caller([$frame_offset])([$frame_offset])
 Lookups: calloc; Text: calloc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &calloc => &POSIX::calloc
 Lookups: ceil; Text: ceil; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ceil => &POSIX::ceil
 Lookups: cfgetispeed; Text: cfgetispeed; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &cfgetispeed => &POSIX::cfgetispeed
 Lookups: cfgetospeed; Text: cfgetospeed; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &cfgetospeed => &POSIX::cfgetospeed
 Lookups: cfsetispeed; Text: cfsetispeed; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &cfsetispeed => &POSIX::cfsetispeed
 Lookups: cfsetospeed; Text: cfsetospeed; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &cfsetospeed => &POSIX::cfsetospeed
 Lookups: chdir; Text: chdir; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chdir([$name_or_handle])([$name_or_handle])
 Lookups: chmod; Text: chmod; Tail: ($oct_permissions, @file_names); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chmod($oct_permissions, @file_names)($oct_permissions, @file_names)
 Lookups: chomp; Text: chomp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chomp()
 Lookups: chop; Text: chop; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chop()
 Lookups: chown; Text: chown; Tail: ($uid, $guid, @file_names); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chown($uid, $guid, @file_names)($uid, $guid, @file_names)
 Lookups: chr; Text: chr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chr()
 Lookups: chroot; Text: chroot; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: chroot()
 Lookups: clearerr; Text: clearerr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &clearerr => &POSIX::clearerr
 Lookups: clock; Text: clock; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &clock => &POSIX::clock
 Lookups: close; Text: close; Tail: ($file_handle); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: close($file_handle)($file_handle)
 Lookups: closedir; Text: closedir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: closedir()
 Lookups: connect; Text: connect; Tail: ($socket, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: connect($socket, $name)($socket, $name)
 Lookups: continue; Text: continue; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: continue()
 Lookups: cos; Text: cos; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: cos()
 Lookups: cosh; Text: cosh; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &cosh => &POSIX::cosh
 Lookups: creat; Text: creat; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &creat => &POSIX::creat
 Lookups: crypt; Text: crypt; Tail: ($text, $salt); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: crypt($text, $salt)($text, $salt)
 Lookups: ctermid; Text: ctermid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ctermid => &POSIX::ctermid
 Lookups: ctime; Text: ctime; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ctime => &POSIX::ctime
 Lookups: cuserid; Text: cuserid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &cuserid => &POSIX::cuserid
 Lookups: dbmclose; Text: dbmclose; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: dbmclose()
 Lookups: dbmopen; Text: dbmopen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: dbmopen()
 Lookups: default; Text: default; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: default()
 Lookups: defined; Text: defined; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: defined([$expr])([$expr])
 Lookups: delete; Text: delete; Tail: (@hash_element_or_slice); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: delete(@hash_element_or_slice)(@hash_element_or_slice)
 Lookups: die; Text: die; Tail: (@messages_or_exception); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: die(@messages_or_exception)(@messages_or_exception)
 Lookups: difftime; Text: difftime; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &difftime => &POSIX::difftime
 Lookups: div; Text: div; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &div => &POSIX::div
 Lookups: do; Text: do; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: do()
 Lookups: dump; Text: dump; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: dump()
 Lookups: dup2; Text: dup2; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &dup2 => &POSIX::dup2
 Lookups: dup; Text: dup; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &dup => &POSIX::dup
 Lookups: each; Text: each; Tail: (@hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: each(@hash_or_array)(@hash_or_array)
 Lookups: endgrent; Text: endgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endgrent()
 Lookups: endhostent; Text: endhostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endhostent()
 Lookups: endnetent; Text: endnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endnetent()
 Lookups: endprotoent; Text: endprotoent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endprotoent()
 Lookups: endpwent; Text: endpwent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endpwent()
 Lookups: endservent; Text: endservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: endservent()
 Lookups: eof; Text: eof; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: eof()
 Lookups: errno; Text: errno; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &errno => &POSIX::errno
 Lookups: eval; Text: eval; Tail: ([$expr_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: eval([$expr_or_block])([$expr_or_block])
 Lookups: evalbytes; Text: evalbytes; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: evalbytes()
 Lookups: exec; Text: exec; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: exec()
 Lookups: execl; Text: execl; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &execl => &POSIX::execl
 Lookups: execle; Text: execle; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &execle => &POSIX::execle
 Lookups: execlp; Text: execlp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &execlp => &POSIX::execlp
 Lookups: execv; Text: execv; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &execv => &POSIX::execv
 Lookups: execve; Text: execve; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &execve => &POSIX::execve
 Lookups: execvp; Text: execvp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &execvp => &POSIX::execvp
 Lookups: exists; Text: exists; Tail: ($hash_element); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: exists($hash_element)($hash_element)
 Lookups: exit; Text: exit; Tail: ([$exit_code]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: exit([$exit_code])([$exit_code])
 Lookups: exp; Text: exp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: exp()
 Lookups: fabs; Text: fabs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fabs => &POSIX::fabs
 Lookups: fc; Text: fc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: fc()
 Lookups: fclose; Text: fclose; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fclose => &POSIX::fclose
 Lookups: fcntl; Text: fcntl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: fcntl()
 Lookups: fdopen; Text: fdopen; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fdopen => &POSIX::fdopen
 Lookups: feof; Text: feof; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &feof => &POSIX::feof
 Lookups: ferror; Text: ferror; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ferror => &POSIX::ferror
 Lookups: fflush; Text: fflush; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fflush => &POSIX::fflush
 Lookups: fgetc; Text: fgetc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fgetc => &POSIX::fgetc
 Lookups: fgetpos; Text: fgetpos; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fgetpos => &POSIX::fgetpos
 Lookups: fgets; Text: fgets; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fgets => &POSIX::fgets
 Lookups: fileno; Text: fileno; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: fileno()
 Lookups: flock; Text: flock; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: flock()
 Lookups: floor; Text: floor; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &floor => &POSIX::floor
 Lookups: fmod; Text: fmod; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fmod => &POSIX::fmod
 Lookups: fopen; Text: fopen; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fopen => &POSIX::fopen
 Lookups: fork; Text: fork; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: fork()
 Lookups: format; Text: format; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: format()
 Lookups: formline; Text: formline; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: formline()
 Lookups: fpathconf; Text: fpathconf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fpathconf => &POSIX::fpathconf
 Lookups: fprintf; Text: fprintf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fprintf => &POSIX::fprintf
 Lookups: fputc; Text: fputc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fputc => &POSIX::fputc
 Lookups: fputs; Text: fputs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fputs => &POSIX::fputs
 Lookups: fread; Text: fread; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fread => &POSIX::fread
 Lookups: free; Text: free; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &free => &POSIX::free
 Lookups: freopen; Text: freopen; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &freopen => &POSIX::freopen
 Lookups: frexp; Text: frexp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &frexp => &POSIX::frexp
 Lookups: fscanf; Text: fscanf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fscanf => &POSIX::fscanf
 Lookups: fseek; Text: fseek; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fseek => &POSIX::fseek
 Lookups: fsetpos; Text: fsetpos; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fsetpos => &POSIX::fsetpos
 Lookups: fstat; Text: fstat; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fstat => &POSIX::fstat
 Lookups: fsync; Text: fsync; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fsync => &POSIX::fsync
 Lookups: ftell; Text: ftell; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ftell => &POSIX::ftell
 Lookups: fwrite; Text: fwrite; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &fwrite => &POSIX::fwrite
 Lookups: getc; Text: getc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getc()
 Lookups: getchar; Text: getchar; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getchar => &POSIX::getchar
 Lookups: getcwd; Text: getcwd; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getcwd => &POSIX::getcwd
 Lookups: getegid; Text: getegid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getegid => &POSIX::getegid
 Lookups: getenv; Text: getenv; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getenv => &POSIX::getenv
 Lookups: geteuid; Text: geteuid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &geteuid => &POSIX::geteuid
 Lookups: getgid; Text: getgid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getgid => &POSIX::getgid
 Lookups: getgrent; Text: getgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getgrent()
 Lookups: getgrgid; Text: getgrgid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getgrgid()
 Lookups: getgrnam; Text: getgrnam; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getgrnam()
 Lookups: getgroups; Text: getgroups; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getgroups => &POSIX::getgroups
 Lookups: gethostbyaddr; Text: gethostbyaddr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: gethostbyaddr()
 Lookups: gethostbyname; Text: gethostbyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: gethostbyname()
 Lookups: gethostent; Text: gethostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: gethostent()
 Lookups: getlogin; Text: getlogin; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getlogin()
 Lookups: getnetbyaddr; Text: getnetbyaddr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getnetbyaddr()
 Lookups: getnetbyname; Text: getnetbyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getnetbyname()
 Lookups: getnetent; Text: getnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getnetent()
 Lookups: getpeername; Text: getpeername; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getpeername()
 Lookups: getpgrp; Text: getpgrp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getpgrp()
 Lookups: getpid; Text: getpid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getpid => &POSIX::getpid
 Lookups: getppid; Text: getppid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getppid()
 Lookups: getpriority; Text: getpriority; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getpriority()
 Lookups: getprotobyname; Text: getprotobyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getprotobyname()
 Lookups: getprotobynumber; Text: getprotobynumber; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getprotobynumber()
 Lookups: getprotoent; Text: getprotoent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getprotoent()
 Lookups: getpwent; Text: getpwent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getpwent()
 Lookups: getpwnam; Text: getpwnam; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getpwnam()
 Lookups: getpwuid; Text: getpwuid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getpwuid()
 Lookups: gets; Text: gets; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &gets => &POSIX::gets
 Lookups: getservbyname; Text: getservbyname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getservbyname()
 Lookups: getservbyport; Text: getservbyport; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getservbyport()
 Lookups: getservent; Text: getservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getservent()
 Lookups: getsockname; Text: getsockname; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getsockname()
 Lookups: getsockopt; Text: getsockopt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: getsockopt()
 Lookups: getuid; Text: getuid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &getuid => &POSIX::getuid
 Lookups: glob; Text: glob; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: glob()
 Lookups: gmtime; Text: gmtime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: gmtime()
 Lookups: goto; Text: goto; Tail: ($coderef_or_label); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: goto($coderef_or_label)($coderef_or_label)
 Lookups: grep; Text: grep; Tail: ($expr_or_block, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: grep($expr_or_block, @list)($expr_or_block, @list)
 Lookups: hex; Text: hex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: hex()
 Lookups: import; Text: import; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: import()
 Lookups: index; Text: index; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: index()
 Lookups: int; Text: int; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: int()
 Lookups: ioctl; Text: ioctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ioctl()
 Lookups: isalnum; Text: isalnum; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isalnum => &POSIX::isalnum
 Lookups: isalpha; Text: isalpha; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isalpha => &POSIX::isalpha
 Lookups: isatty; Text: isatty; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isatty => &POSIX::isatty
 Lookups: iscntrl; Text: iscntrl; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &iscntrl => &POSIX::iscntrl
 Lookups: isdigit; Text: isdigit; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isdigit => &POSIX::isdigit
 Lookups: isgraph; Text: isgraph; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isgraph => &POSIX::isgraph
 Lookups: islower; Text: islower; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &islower => &POSIX::islower
 Lookups: isprint; Text: isprint; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isprint => &POSIX::isprint
 Lookups: ispunct; Text: ispunct; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ispunct => &POSIX::ispunct
 Lookups: isspace; Text: isspace; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isspace => &POSIX::isspace
 Lookups: isupper; Text: isupper; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isupper => &POSIX::isupper
 Lookups: isxdigit; Text: isxdigit; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &isxdigit => &POSIX::isxdigit
 Lookups: join; Text: join; Tail: ($separator, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: join($separator, @list)($separator, @list)
 Lookups: keys; Text: keys; Tail: (%hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: keys(%hash_or_array)(%hash_or_array)
 Lookups: kill; Text: kill; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: kill()
 Lookups: labs; Text: labs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &labs => &POSIX::labs
 Lookups: last; Text: last; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: last([$label_or_expr])([$label_or_expr])
 Lookups: lc; Text: lc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: lc()
 Lookups: lcfirst; Text: lcfirst; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: lcfirst()
 Lookups: ldexp; Text: ldexp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ldexp => &POSIX::ldexp
 Lookups: ldiv; Text: ldiv; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ldiv => &POSIX::ldiv
 Lookups: length; Text: length; Tail: ([$string]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: length([$string])([$string])
 Lookups: link; Text: link; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: link()
 Lookups: listen; Text: listen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: listen()
 Lookups: local; Text: local; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: local()
 Lookups: localeconv; Text: localeconv; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &localeconv => &POSIX::localeconv
 Lookups: localtime; Text: localtime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: localtime()
 Lookups: lock; Text: lock; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: lock()
 Lookups: log10; Text: log10; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &log10 => &POSIX::log10
 Lookups: log; Text: log; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: log()
 Lookups: longjmp; Text: longjmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &longjmp => &POSIX::longjmp
 Lookups: lseek; Text: lseek; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &lseek => &POSIX::lseek
 Lookups: lstat; Text: lstat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: lstat()
 Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: main
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in ClassAccessor.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Constants.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Controller.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in DefaultHelpers.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Exceptions.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Package.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Something.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in TagHelpers.pm
+Lookups: main->; Text: main->; Tail: ...; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in importPosix.pl
 Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit namespace: main
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in ClassAccessor.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Constants.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Controller.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in DefaultHelpers.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Exceptions.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Package.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in Something.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in TagHelpers.pm
+Lookups: main::; Text: main::; Tail: ...; Type: null; Icon: /perl5classic.png, null]; Type Icon: null
+    PsiElement: Perl5 at 0 in importPosix.pl
 Lookups: malloc; Text: malloc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &malloc => &POSIX::malloc
 Lookups: map; Text: map; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: map()
 Lookups: mblen; Text: mblen; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &mblen => &POSIX::mblen
 Lookups: mbstowcs; Text: mbstowcs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &mbstowcs => &POSIX::mbstowcs
 Lookups: mbtowc; Text: mbtowc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &mbtowc => &POSIX::mbtowc
 Lookups: memchr; Text: memchr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &memchr => &POSIX::memchr
 Lookups: memcmp; Text: memcmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &memcmp => &POSIX::memcmp
 Lookups: memcpy; Text: memcpy; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &memcpy => &POSIX::memcpy
 Lookups: memmove; Text: memmove; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &memmove => &POSIX::memmove
 Lookups: memset; Text: memset; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &memset => &POSIX::memset
 Lookups: mkdir; Text: mkdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: mkdir()
 Lookups: mkfifo; Text: mkfifo; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &mkfifo => &POSIX::mkfifo
 Lookups: mktime; Text: mktime; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &mktime => &POSIX::mktime
 Lookups: modf; Text: modf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &modf => &POSIX::modf
 Lookups: msgctl; Text: msgctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: msgctl()
 Lookups: msgget; Text: msgget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: msgget()
 Lookups: msgrcv; Text: msgrcv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: msgrcv()
 Lookups: msgsnd; Text: msgsnd; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: msgsnd()
 Lookups: my; Text: my; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: my()
 Lookups: next; Text: next; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: next([$label_or_expr])([$label_or_expr])
 Lookups: no; Text: no; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: no()
 Lookups: oct; Text: oct; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: oct([$expr])([$expr])
 Lookups: offsetof; Text: offsetof; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &offsetof => &POSIX::offsetof
 Lookups: open; Text: open; Tail: ($handle [, $mode, $name_or_ref, @args]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: open($handle [, $mode, $name_or_ref, @args])($handle, [$mode], [$name_or_ref], [@args])
 Lookups: opendir; Text: opendir; Tail: ($handle, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: opendir($handle, $name)($handle, $name)
 Lookups: ord; Text: ord; Tail: ([$expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ord([$expr])([$expr])
 Lookups: pack; Text: pack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: pack()
 Lookups: package; Text: package; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: package()
 Lookups: pathconf; Text: pathconf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &pathconf => &POSIX::pathconf
 Lookups: pause; Text: pause; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &pause => &POSIX::pause
 Lookups: perror; Text: perror; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &perror => &POSIX::perror
 Lookups: pipe; Text: pipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: pipe()
 Lookups: pop; Text: pop; Tail: ([@array]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: pop([@array])([@array])
 Lookups: pos; Text: pos; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: pos()
 Lookups: pow; Text: pow; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &pow => &POSIX::pow
 Lookups: print; Text: print; Tail: ([$file_handle, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: print([$file_handle, @list])([$file_handle], [@list])
 Lookups: printf; Text: printf; Tail: ([$file_handle, $format, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: printf([$file_handle, $format, @list])([$file_handle], [$format], [@list])
 Lookups: prototype; Text: prototype; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: prototype()
 Lookups: push; Text: push; Tail: (@array, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: push(@array, @list)(@array, @list)
 Lookups: putc; Text: putc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &putc => &POSIX::putc
 Lookups: putchar; Text: putchar; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &putchar => &POSIX::putchar
 Lookups: puts; Text: puts; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &puts => &POSIX::puts
 Lookups: qsort; Text: qsort; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &qsort => &POSIX::qsort
 Lookups: quotemeta; Text: quotemeta; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: quotemeta()
 Lookups: raise; Text: raise; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &raise => &POSIX::raise
 Lookups: rand; Text: rand; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rand()
 Lookups: read; Text: read; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: read()
 Lookups: readdir; Text: readdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readdir()
 Lookups: readline; Text: readline; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readline()
 Lookups: readlink; Text: readlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readlink()
 Lookups: readpipe; Text: readpipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: readpipe()
 Lookups: realloc; Text: realloc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &realloc => &POSIX::realloc
 Lookups: recv; Text: recv; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: recv()
 Lookups: redo; Text: redo; Tail: ([$label_or_expr]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: redo([$label_or_expr])([$label_or_expr])
 Lookups: ref; Text: ref; Tail: ([$reference]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ref([$reference])([$reference])
 Lookups: remove; Text: remove; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &remove => &POSIX::remove
 Lookups: rename; Text: rename; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rename()
 Lookups: require; Text: require; Tail: ([$filename]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: require([$filename])([$filename])
 Lookups: reset; Text: reset; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: reset()
 Lookups: return; Text: return; Tail: ([$scalar_or_list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: return([$scalar_or_list])([$scalar_or_list])
 Lookups: reverse; Text: reverse; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: reverse()
 Lookups: rewind; Text: rewind; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &rewind => &POSIX::rewind
 Lookups: rewinddir; Text: rewinddir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rewinddir()
 Lookups: rindex; Text: rindex; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rindex()
 Lookups: rmdir; Text: rmdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: rmdir()
 Lookups: say; Text: say; Tail: ([$file_handle, @list]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: say([$file_handle, @list])([$file_handle], [@list])
 Lookups: scalar; Text: scalar; Tail: (@list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: scalar(@list)(@list)
 Lookups: scanf; Text: scanf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &scanf => &POSIX::scanf
 Lookups: seek; Text: seek; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: seek()
 Lookups: seekdir; Text: seekdir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: seekdir()
 Lookups: select; Text: select; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: select()
 Lookups: semctl; Text: semctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: semctl()
 Lookups: semget; Text: semget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: semget()
 Lookups: semop; Text: semop; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: semop()
 Lookups: send; Text: send; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: send()
 Lookups: setbuf; Text: setbuf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setbuf => &POSIX::setbuf
 Lookups: setgid; Text: setgid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setgid => &POSIX::setgid
 Lookups: setgrent; Text: setgrent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setgrent()
 Lookups: sethostent; Text: sethostent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sethostent()
 Lookups: setjmp; Text: setjmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setjmp => &POSIX::setjmp
 Lookups: setlocale; Text: setlocale; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setlocale => &POSIX::setlocale
 Lookups: setnetent; Text: setnetent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setnetent()
 Lookups: setpgid; Text: setpgid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setpgid => &POSIX::setpgid
 Lookups: setpgrp; Text: setpgrp; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setpgrp()
 Lookups: setpriority; Text: setpriority; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setpriority()
 Lookups: setprotoent; Text: setprotoent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setprotoent()
 Lookups: setpwent; Text: setpwent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setpwent()
 Lookups: setservent; Text: setservent; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setservent()
 Lookups: setsid; Text: setsid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setsid => &POSIX::setsid
 Lookups: setsockopt; Text: setsockopt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: setsockopt()
 Lookups: setuid; Text: setuid; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setuid => &POSIX::setuid
 Lookups: setvbuf; Text: setvbuf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &setvbuf => &POSIX::setvbuf
 Lookups: shift; Text: shift; Tail: ([@array]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shift([@array])([@array])
 Lookups: shmctl; Text: shmctl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shmctl()
 Lookups: shmget; Text: shmget; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shmget()
 Lookups: shmread; Text: shmread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shmread()
 Lookups: shmwrite; Text: shmwrite; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shmwrite()
 Lookups: shutdown; Text: shutdown; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: shutdown()
 Lookups: sigaction; Text: sigaction; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sigaction => &POSIX::sigaction
 Lookups: siglongjmp; Text: siglongjmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &siglongjmp => &POSIX::siglongjmp
 Lookups: signal; Text: signal; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &signal => &POSIX::signal
 Lookups: sigpending; Text: sigpending; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sigpending => &POSIX::sigpending
 Lookups: sigprocmask; Text: sigprocmask; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sigprocmask => &POSIX::sigprocmask
 Lookups: sigsetjmp; Text: sigsetjmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sigsetjmp => &POSIX::sigsetjmp
 Lookups: sigsuspend; Text: sigsuspend; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sigsuspend => &POSIX::sigsuspend
 Lookups: sin; Text: sin; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sin()
 Lookups: sinh; Text: sinh; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sinh => &POSIX::sinh
 Lookups: sleep; Text: sleep; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sleep()
 Lookups: socket; Text: socket; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: socket()
 Lookups: socketpair; Text: socketpair; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: socketpair()
 Lookups: sort; Text: sort; Tail: (@list [, $subname_or_block]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sort(@list [, $subname_or_block])(@list, [$subname_or_block])
 Lookups: splice; Text: splice; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: splice()
 Lookups: split; Text: split; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: split()
 Lookups: sprintf; Text: sprintf; Tail: ($format, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sprintf($format, @list)($format, @list)
 Lookups: sqrt; Text: sqrt; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sqrt()
 Lookups: srand; Text: srand; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: srand()
 Lookups: sscanf; Text: sscanf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sscanf => &POSIX::sscanf
 Lookups: stat; Text: stat; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: stat()
 Lookups: state; Text: state; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: state()
 Lookups: stderr; Text: stderr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &stderr => &POSIX::stderr
 Lookups: stdin; Text: stdin; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &stdin => &POSIX::stdin
 Lookups: stdout; Text: stdout; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &stdout => &POSIX::stdout
 Lookups: strcat; Text: strcat; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strcat => &POSIX::strcat
 Lookups: strchr; Text: strchr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strchr => &POSIX::strchr
 Lookups: strcmp; Text: strcmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strcmp => &POSIX::strcmp
 Lookups: strcoll; Text: strcoll; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strcoll => &POSIX::strcoll
 Lookups: strcpy; Text: strcpy; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strcpy => &POSIX::strcpy
 Lookups: strcspn; Text: strcspn; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strcspn => &POSIX::strcspn
 Lookups: strerror; Text: strerror; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strerror => &POSIX::strerror
 Lookups: strftime; Text: strftime; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strftime => &POSIX::strftime
 Lookups: strlen; Text: strlen; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strlen => &POSIX::strlen
 Lookups: strncat; Text: strncat; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strncat => &POSIX::strncat
 Lookups: strncmp; Text: strncmp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strncmp => &POSIX::strncmp
 Lookups: strncpy; Text: strncpy; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strncpy => &POSIX::strncpy
 Lookups: strpbrk; Text: strpbrk; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strpbrk => &POSIX::strpbrk
 Lookups: strrchr; Text: strrchr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strrchr => &POSIX::strrchr
 Lookups: strspn; Text: strspn; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strspn => &POSIX::strspn
 Lookups: strstr; Text: strstr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strstr => &POSIX::strstr
 Lookups: strtod; Text: strtod; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strtod => &POSIX::strtod
 Lookups: strtok; Text: strtok; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strtok => &POSIX::strtok
 Lookups: strtol; Text: strtol; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strtol => &POSIX::strtol
 Lookups: strtoul; Text: strtoul; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strtoul => &POSIX::strtoul
 Lookups: strxfrm; Text: strxfrm; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &strxfrm => &POSIX::strxfrm
 Lookups: study; Text: study; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: study()
 Lookups: sub; Text: sub; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sub()
 Lookups: substr; Text: substr; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: substr()
 Lookups: symlink; Text: symlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: symlink()
 Lookups: syscall; Text: syscall; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: syscall()
 Lookups: sysconf; Text: sysconf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &sysconf => &POSIX::sysconf
 Lookups: sysopen; Text: sysopen; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sysopen()
 Lookups: sysread; Text: sysread; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sysread()
 Lookups: sysseek; Text: sysseek; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: sysseek()
 Lookups: system; Text: system; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: system()
 Lookups: syswrite; Text: syswrite; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: syswrite()
 Lookups: tan; Text: tan; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tan => &POSIX::tan
 Lookups: tanh; Text: tanh; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tanh => &POSIX::tanh
 Lookups: tcdrain; Text: tcdrain; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcdrain => &POSIX::tcdrain
 Lookups: tcflow; Text: tcflow; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcflow => &POSIX::tcflow
 Lookups: tcflush; Text: tcflush; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcflush => &POSIX::tcflush
 Lookups: tcgetattr; Text: tcgetattr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcgetattr => &POSIX::tcgetattr
 Lookups: tcgetpgrp; Text: tcgetpgrp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcgetpgrp => &POSIX::tcgetpgrp
 Lookups: tcsendbreak; Text: tcsendbreak; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcsendbreak => &POSIX::tcsendbreak
 Lookups: tcsetattr; Text: tcsetattr; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcsetattr => &POSIX::tcsetattr
 Lookups: tcsetpgrp; Text: tcsetpgrp; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tcsetpgrp => &POSIX::tcsetpgrp
 Lookups: tell; Text: tell; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: tell()
 Lookups: telldir; Text: telldir; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: telldir()
 Lookups: tie; Text: tie; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: tie()
 Lookups: tied; Text: tied; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: tied()
 Lookups: time; Text: time; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: time()
 Lookups: times; Text: times; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: times()
 Lookups: tmpfile; Text: tmpfile; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tmpfile => &POSIX::tmpfile
 Lookups: tmpnam; Text: tmpnam; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tmpnam => &POSIX::tmpnam
 Lookups: tolower; Text: tolower; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tolower => &POSIX::tolower
 Lookups: toupper; Text: toupper; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &toupper => &POSIX::toupper
 Lookups: truncate; Text: truncate; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: truncate()
 Lookups: ttyname; Text: ttyname; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ttyname => &POSIX::ttyname
 Lookups: tzname; Text: tzname; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tzname => &POSIX::tzname
 Lookups: tzset; Text: tzset; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &tzset => &POSIX::tzset
 Lookups: uc; Text: uc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: uc()
 Lookups: ucfirst; Text: ucfirst; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ucfirst()
 Lookups: umask; Text: umask; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: umask()
 Lookups: uname; Text: uname; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &uname => &POSIX::uname
 Lookups: undef; Text: undef; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: undef()
 Lookups: ungetc; Text: ungetc; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &ungetc => &POSIX::ungetc
 Lookups: unlink; Text: unlink; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: unlink()
 Lookups: unpack; Text: unpack; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: unpack()
 Lookups: unshift; Text: unshift; Tail: (@array, @list); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: unshift(@array, @list)(@array, @list)
 Lookups: untie; Text: untie; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: untie()
 Lookups: use; Text: use; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: use()
 Lookups: utime; Text: utime; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: utime()
 Lookups: values; Text: values; Tail: (%hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: values(%hash_or_array)(%hash_or_array)
 Lookups: vec; Text: vec; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: vec()
 Lookups: vfprintf; Text: vfprintf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &vfprintf => &POSIX::vfprintf
 Lookups: vprintf; Text: vprintf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &vprintf => &POSIX::vprintf
 Lookups: vsprintf; Text: vsprintf; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &vsprintf => &POSIX::vsprintf
 Lookups: wait; Text: wait; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: wait()
 Lookups: waitpid; Text: waitpid; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: waitpid()
 Lookups: wantarray; Text: wantarray; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: wantarray()
 Lookups: warn; Text: warn; Tail: (@messages); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: warn(@messages)(@messages)
 Lookups: wcstombs; Text: wcstombs; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &wcstombs => &POSIX::wcstombs
 Lookups: wctomb; Text: wctomb; Tail: null; Type: POSIX; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &wctomb => &POSIX::wctomb
 Lookups: write; Text: write; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: write()
 Lookups: x; Text: x; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: x()

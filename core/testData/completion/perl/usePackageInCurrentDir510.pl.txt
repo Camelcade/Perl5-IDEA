@@ -1,1 +1,2 @@
 Lookups: MyCustomPackage; Text: MyCustomPackage; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 4 in usePackageInCurrentDir.pl

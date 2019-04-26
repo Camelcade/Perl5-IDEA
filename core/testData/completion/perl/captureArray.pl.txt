@@ -1,34 +1,68 @@
 Lookups: !; Text: !; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %!
 Lookups: +; Text: +; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @+
 Lookups: +; Text: +; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @+
 Lookups: +; Text: +; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %+
 Lookups: -; Text: -; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @-
 Lookups: -; Text: -; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @-
 Lookups: -; Text: -; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %-
 Lookups: ARG; Text: ARG; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARG
 Lookups: ARG; Text: ARG; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARG
 Lookups: ARGV; Text: ARGV; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARGV
 Lookups: ARGV; Text: ARGV; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @ARGV
 Lookups: ENV; Text: ENV; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ENV
 Lookups: ERRNO; Text: ERRNO; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %ERRNO
 Lookups: F; Text: F; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @F
 Lookups: F; Text: F; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @F
 Lookups: INC; Text: INC; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @INC
 Lookups: INC; Text: INC; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @INC
 Lookups: INC; Text: INC; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %INC
 Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_END
 Lookups: LAST_MATCH_END; Text: LAST_MATCH_END; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_END
 Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_START
 Lookups: LAST_MATCH_START; Text: LAST_MATCH_START; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @LAST_MATCH_START
 Lookups: LAST_PAREN_MATCH; Text: LAST_PAREN_MATCH; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %LAST_PAREN_MATCH
 Lookups: MyTest::Some::Package::EXPORT; Text: MyTest::Some::Package::EXPORT; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 36 in Package.pm
 Lookups: MyTest::Some::Package::EXPORT_OK; Text: MyTest::Some::Package::EXPORT_OK; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 94 in Package.pm
 Lookups: OS_ERROR; Text: OS_ERROR; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %OS_ERROR
 Lookups: SIG; Text: SIG; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %SIG
 Lookups: ^H; Text: ^H; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^H
 Lookups: _; Text: _; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @_
 Lookups: _; Text: _; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @_
 Lookups: {^CAPTURE_ALL}; Text: {^CAPTURE_ALL}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE_ALL
 Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: []; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @^CAPTURE
 Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: @^CAPTURE
 Lookups: {^CAPTURE}; Text: {^CAPTURE}; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+    PsiElement: Built-in: %^CAPTURE

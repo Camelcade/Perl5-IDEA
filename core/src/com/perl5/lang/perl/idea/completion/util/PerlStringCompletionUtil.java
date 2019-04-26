@@ -61,15 +61,11 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     "Regexp"
   };
 
-  protected static void addElement(String text, CompletionResultSet result) {
-    result.addElement(LookupElementBuilder.create(text));
-  }
-
   public static void fillWithHashIndexes(final @NotNull PsiElement element, @NotNull final CompletionResultSet result) {
     Set<String> hashIndexesCache = PerlStringCompletionCache.getInstance(element.getProject()).getHashIndexesCache();
 
     for (String text : hashIndexesCache) {
-      addElement(text, result);
+      result.addElement(LookupElementBuilder.create(text));
     }
 
     PsiFile file = element.getContainingFile();
@@ -112,7 +108,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
           String text = stringContentElement.getText();
           if (StringUtil.isNotEmpty(text) && !hashIndexesCache.contains(text) && IDENTIFIER_PATTERN.matcher(text).matches()) {
             hashIndexesCache.add(text);
-            addElement(text, result);
+            result.addElement(LookupElementBuilder.create(stringContentElement, text));
           }
         }
       });
@@ -131,7 +127,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         @Override
         public void visitSubDeclarationElement(@NotNull PerlSubDeclarationElement o) {
           if (contextPackageName.equals(o.getNamespaceName())) {
-            result.addElement(LookupElementBuilder.create(o.getSubName()));
+            result.addElement(LookupElementBuilder.create(o, o.getSubName()));
           }
           super.visitSubDeclarationElement(o);
         }
@@ -139,7 +135,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
         @Override
         public void visitPerlSubDefinitionElement(@NotNull PerlSubDefinitionElement o) {
           if (contextPackageName.equals(o.getNamespaceName())) {
-            result.addElement(LookupElementBuilder.create(o.getSubName()));
+            result.addElement(LookupElementBuilder.create(o, o.getSubName()));
           }
           super.visitPerlSubDefinitionElement(o);
         }
@@ -269,7 +265,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
               !heredocOpenersCache.contains(openerName) &&
               injectionService.getLanguageByMarker(openerName) == null) {
             heredocOpenersCache.add(openerName);
-            resultSet.addElement(LookupElementBuilder.create(openerName));
+            resultSet.addElement(LookupElementBuilder.create(o, openerName));
           }
           super.visitHeredocOpener(o);
         }

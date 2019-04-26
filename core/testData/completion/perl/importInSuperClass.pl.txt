@@ -1,2 +1,4 @@
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: something; Text: something; Tail: null; Type: Bar::Baz; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Bar::Baz::something at 58 in importInSuperClass.pl

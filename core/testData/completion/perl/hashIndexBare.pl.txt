@@ -1,1 +1,2 @@
 Lookups: testindex; Text: testindex; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PerlStringContentElementImpl(Perl5: STRING_CONTENT) at 4 in test.pl

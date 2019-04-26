@@ -1,8 +1,16 @@
 Lookups: abstract; Text: abstract; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@abstract
 Lookups: deprecated; Text: deprecated; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@deprecated
 Lookups: inject; Text: inject; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@inject
 Lookups: method; Text: method; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@method
 Lookups: noinspection; Text: noinspection; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@noinspection
 Lookups: override; Text: override; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@override
 Lookups: returns; Text: returns; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@returns
 Lookups: type; Text: type; Tail: null; Type: null; Icon: /annotation_gutter_icon.png; Type Icon: null
+    Export: Perl5: #@type

@@ -1,6 +1,12 @@
 Lookups: ALONECONST1; Text: ALONECONST1; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::ALONECONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 32 in constantsWithPackage.pl
 Lookups: ALONECONST2; Text: ALONECONST2; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::ALONECONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 65 in constantsWithPackage.pl
 Lookups: ALONECONST3; Text: ALONECONST3; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::ALONECONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 100 in constantsWithPackage.pl
 Lookups: MULTI_CONST1; Text: MULTI_CONST1; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::MULTI_CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 141 in constantsWithPackage.pl
 Lookups: MULTI_CONST2; Text: MULTI_CONST2; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::MULTI_CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 166 in constantsWithPackage.pl
 Lookups: MULTI_CONST3; Text: MULTI_CONST3; Tail: null; Type: Foo::Bla; Icon: /constant_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::MULTI_CONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 192 in constantsWithPackage.pl

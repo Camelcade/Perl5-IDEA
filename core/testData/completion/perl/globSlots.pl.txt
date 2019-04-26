@@ -1,11 +1,22 @@
 Lookups: ARRAY; Text: ARRAY; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: CODE; Text: CODE; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: FORMAT; Text: FORMAT; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: GLOB; Text: GLOB; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: HASH; Text: HASH; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: IO; Text: IO; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: LVALUE; Text: LVALUE; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: REF; Text: REF; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: Regexp; Text: Regexp; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: SCALAR; Text: SCALAR; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: VSTRING; Text: VSTRING; Tail: null; Type: null; Icon: null; Type Icon: null
+    String

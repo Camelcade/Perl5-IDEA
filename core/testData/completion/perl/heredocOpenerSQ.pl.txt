@@ -1,9 +1,18 @@
 Lookups: DTD; Text: DTD; Tail: null; Type: inject with DTD; Icon: /dtd.svg; Type Icon: null
+    String
 Lookups: HTML; Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
+    String
 Lookups: JAVA; Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
+    String
 Lookups: JSON; Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
+    String
 Lookups: MANIFEST; Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
+    String
 Lookups: MYSUPERMARKER; Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerSQ.pl
 Lookups: PERL5; Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5.png; Type Icon: null
+    String
 Lookups: XHTML; Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
+    String
 Lookups: XML; Text: XML; Tail: null; Type: inject with XML; Icon: /xml.svg; Type Icon: null
+    String

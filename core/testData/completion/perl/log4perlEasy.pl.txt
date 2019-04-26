@@ -1,15 +1,30 @@
 Lookups: ALWAYS; Text: ALWAYS; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ALWAYS()
 Lookups: DEBUG; Text: DEBUG; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: DEBUG()
 Lookups: ERROR; Text: ERROR; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: ERROR()
 Lookups: FATAL; Text: FATAL; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: FATAL()
 Lookups: INFO; Text: INFO; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: INFO()
 Lookups: LOGCARP; Text: LOGCARP; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LOGCARP => &Log::Log4perl::Logger::logcarp
 Lookups: LOGCLUCK; Text: LOGCLUCK; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LOGCLUCK => &Log::Log4perl::Logger::logcluck
 Lookups: LOGCONFESS; Text: LOGCONFESS; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LOGCONFESS => &Log::Log4perl::Logger::logconfess
 Lookups: LOGCROAK; Text: LOGCROAK; Tail: null; Type: Log::Log4perl::Logger; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LOGCROAK => &Log::Log4perl::Logger::logcroak
 Lookups: LOGDIE; Text: LOGDIE; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &LOGDIE => &Log::Log4perl::LOGDIE
 Lookups: LOGEXIT; Text: LOGEXIT; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: LOGEXIT()
 Lookups: LOGWARN; Text: LOGWARN; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: LOGWARN()
 Lookups: TRACE; Text: TRACE; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: TRACE()
 Lookups: WARN; Text: WARN; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: Implicit sub: WARN()
 Lookups: get_logger; Text: get_logger; Tail: null; Type: Log::Log4perl; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    Export: &get_logger => &Log::Log4perl::get_logger

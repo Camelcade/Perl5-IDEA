@@ -1,3 +1,6 @@
 Lookups: SUPER::; Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+    String
 Lookups: method1; Text: method1; Tail: null; Type: My::Test; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method1 at 28 in packageVarTypeAnnotation.pl
 Lookups: method2; Text: method2; Tail: null; Type: My::Test; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@My::Test::method2 at 52 in packageVarTypeAnnotation.pl

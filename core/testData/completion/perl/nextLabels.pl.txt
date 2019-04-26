@@ -1,3 +1,6 @@
 Lookups: LABEL1; Text: LABEL1; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 0 in nextLabels.pl
 Lookups: LABEL2; Text: LABEL2; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 74 in nextLabels.pl
 Lookups: LABEL3; Text: LABEL3; Tail: null; Type: null; Icon: null; Type Icon: null
+    PsiElement: PsiPerlLabelDeclarationImpl(Perl5: LABEL_DECLARATION) at 178 in nextLabels.pl
