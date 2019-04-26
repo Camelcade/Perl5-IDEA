@@ -1,12 +1,24 @@
 Lookups: API; Text: API; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: ATTRIBUTES; Text: ATTRIBUTES; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: CONTRIBUTORS; Text: CONTRIBUTORS; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: COPYRIGHT AND LICENSE; Text: COPYRIGHT AND LICENSE; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: FUNCTIONS; Text: FUNCTIONS; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: INSTALLATION; Text: INSTALLATION; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: METHODS; Text: METHODS; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: NAME; Text: NAME; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
 Lookups: VERSION; Text: VERSION; Tail: null; Type: null; Icon: null; Type Icon: null
+    String

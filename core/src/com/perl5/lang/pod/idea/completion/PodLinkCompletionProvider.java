@@ -39,12 +39,12 @@ import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.psi.PsiFormattingSectionContent;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
-import gnu.trove.THashSet;
 import org.apache.commons.lang.math.NumberUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -75,8 +75,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
   }
 
   protected static void addFilesCompletions(@NotNull PodFormatterL link, @NotNull final CompletionResultSet result) {
-    final Set<String> foundPods = new THashSet<>();
-
+    final Set<String> foundPods = new HashSet<>();
     PerlPackageUtil.processIncFilesForPsiElement(link, (file, classRoot) -> {
       String className = PodFileUtil.getPackageNameFromVirtualFile(file, classRoot);
       if (StringUtil.isNotEmpty(className)) {
@@ -86,7 +85,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           className = className.substring(5);
         }
         if (!foundPods.contains(className)) {
-          result.addElement(LookupElementBuilder.create(className).withIcon(PerlIcons.POD_FILE).withBoldness(isBuiltIn));
+          result.addElement(LookupElementBuilder.create(file, className).withIcon(PerlIcons.POD_FILE).withBoldness(isBuiltIn));
           foundPods.add(className);
         }
       }

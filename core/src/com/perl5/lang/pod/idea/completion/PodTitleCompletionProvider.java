@@ -110,7 +110,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
     });
 
     possibleTargets.forEach(it -> result.addElement(LookupElementBuilder
-                                                      .create(StringUtil.notNullize(it.getPresentableName()))
+                                                      .create(it, StringUtil.notNullize(it.getPresentableName()))
                                                       .withIcon(it.getIcon(0))
     ));
   }
