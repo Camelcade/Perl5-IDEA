@@ -16,11 +16,9 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
-import com.perl5.lang.perl.parser.PerlLazyQWListContentParser;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,11 +33,5 @@ public class PerlLazyQWStringElementType extends PerlLazyBlockElementType {
   @Override
   protected Lexer getInnerLexer(@NotNull Project project) {
     return PerlSubLexerAdapter.forStringQW(project);
-  }
-
-  @NotNull
-  @Override
-  protected PsiParser getParser() {
-    return PerlLazyQWListContentParser.INSTANCE;
   }
 }

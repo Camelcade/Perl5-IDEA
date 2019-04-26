@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyReplacementRegexpElementType extends PerlLazyRegexpElementType {
+public class PerlLazyReplacementRegexpElementType extends PerlLazyBlockElementType {
   public PerlLazyReplacementRegexpElementType(@NotNull @NonNls String debugName) {
     super(debugName);
   }

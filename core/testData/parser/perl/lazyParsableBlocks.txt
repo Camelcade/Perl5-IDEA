@@ -393,7 +393,7 @@ Perl5
             PsiElement(Perl5: regex)('leazy')
             PsiElement(Perl5: regex)('parsable')
         PsiElement(Perl5: re/)('/')
-        PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+        PerlCompositeElementImpl(LP_CODE_BLOCK)
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiPerlStatementImpl(Perl5: STATEMENT)
               PsiPerlPrintExprImpl(Perl5: PRINT_EXPR)
@@ -475,7 +475,7 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('somesub')
-    PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+    PerlCompositeElementImpl(LP_CODE_BLOCK)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')
         PsiPerlStatementImpl(Perl5: STATEMENT)

@@ -30,7 +30,7 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('Foo::Bar')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationDeprecatedImpl(Perl5: ANNOTATION_DEPRECATED)
       PsiElement(Perl5: #@deprecated)('#@deprecated')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar
@@ -38,10 +38,10 @@ Perl5
     PerlNamespaceElementImpl(Perl5: package::name)('Foo::Bar')
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
-  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationDeprecatedImpl(Perl5: ANNOTATION_DEPRECATED)
       PsiElement(Perl5: #@deprecated)('#@deprecated')
-  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationDeprecatedImpl(Perl5: ANNOTATION_DEPRECATED)
       PsiElement(Perl5: #@deprecated)('#@deprecated')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar
@@ -50,7 +50,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
   PsiComment(Perl5: COMMENT_LINE)('# some comments')
-  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationDeprecatedImpl(Perl5: ANNOTATION_DEPRECATED)
       PsiElement(Perl5: #@deprecated)('#@deprecated')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar
@@ -59,7 +59,7 @@ Perl5
     PsiElement(Perl5: ;)(';')
     PsiPerlNamespaceContentImpl(Perl5: NAMESPACE_CONTENT)
       PsiElement(Perl5: POD)('=pod\n\nSome pod\n\n=cut')
-  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationDeprecatedImpl(Perl5: ANNOTATION_DEPRECATED)
       PsiElement(Perl5: #@deprecated)('#@deprecated')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar
@@ -76,7 +76,7 @@ Perl5
       PerlHeredocElementImpl(HEREDOC_QQ)
         PerlStringContentElementImpl(Perl5: STRING_CONTENT_QQ)('\n')
       PsiComment(Perl5: HEREDOC_END)('EOM')
-  PerlAnnotationContainerImpl(PERL_ANNOTATION)
+  PerlAnnotationContainerImpl(COMMENT_ANNOTATION)
     PsiPerlAnnotationDeprecatedImpl(Perl5: ANNOTATION_DEPRECATED)
       PsiElement(Perl5: #@deprecated)('#@deprecated')
   PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar

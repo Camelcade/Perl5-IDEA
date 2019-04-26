@@ -45,7 +45,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     SUBLEXINGS_MAP.put(LP_STRING_QW, PerlLexer.STRING_LIST);
     SUBLEXINGS_MAP.put(LP_STRING_Q, PerlLexer.STRING_Q);
     SUBLEXINGS_MAP.put(LP_STRING_QQ, PerlLexer.STRING_QQ);
-    SUBLEXINGS_MAP.put(LP_STRING_XQ, PerlLexer.STRING_QX);
+    SUBLEXINGS_MAP.put(LP_STRING_QX, PerlLexer.STRING_QX);
 
     SUBLEXINGS_MAP.put(LP_REGEX, PerlLexer.MATCH_REGEX);
     SUBLEXINGS_MAP.put(LP_REGEX_X, PerlLexer.MATCH_REGEX_X);

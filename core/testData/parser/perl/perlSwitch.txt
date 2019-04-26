@@ -451,7 +451,7 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::classify_digit
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('classify_digit')
-    PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+    PerlCompositeElementImpl(LP_CODE_BLOCK)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')
         PerlSwitchCompoundStatementImpl(Perl5: SWITCH_COMPOUND)

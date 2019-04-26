@@ -2639,7 +2639,7 @@ Perl5
       PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::import
         PsiElement(Perl5: sub)('sub')
         PerlSubNameElementImpl(Perl5: subname)('import')
-        PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+        PerlCompositeElementImpl(LP_CODE_BLOCK)
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')
             PsiPerlStatementImpl(Perl5: STATEMENT)

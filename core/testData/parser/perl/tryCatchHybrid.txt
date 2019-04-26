@@ -468,7 +468,7 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('parent_sub')
-    PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+    PerlCompositeElementImpl(LP_CODE_BLOCK)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')
         PsiPerlStatementImpl(Perl5: STATEMENT)
@@ -556,7 +556,7 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::parent_sub_with_catch
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('parent_sub_with_catch')
-    PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+    PerlCompositeElementImpl(LP_CODE_BLOCK)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')
         PsiPerlStatementImpl(Perl5: STATEMENT)

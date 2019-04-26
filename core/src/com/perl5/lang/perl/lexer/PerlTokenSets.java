@@ -306,7 +306,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   TokenSet LAZY_PARSABLE_STRINGS = TokenSet.create(
     LP_STRING_Q,
     LP_STRING_QQ,
-    LP_STRING_XQ
+    LP_STRING_QX
 
   );
 

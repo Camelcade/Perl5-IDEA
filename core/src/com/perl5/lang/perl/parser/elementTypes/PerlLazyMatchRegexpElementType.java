@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 23.10.2016.
  */
-public class PerlLazyMatchRegexpElementType extends PerlLazyRegexpElementType {
+public class PerlLazyMatchRegexpElementType extends PerlLazyBlockElementType {
   public PerlLazyMatchRegexpElementType(@NotNull @NonNls String debugName) {
     super(debugName);
   }

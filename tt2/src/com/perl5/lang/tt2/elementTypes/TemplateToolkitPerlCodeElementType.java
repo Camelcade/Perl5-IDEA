@@ -27,6 +27,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitPerlBlockElementImpl;
 import org.jetbrains.annotations.NonNls;
@@ -52,7 +53,7 @@ public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementTyp
     );
     PsiParser parser = PerlParserImpl.INSTANCE;
 
-    return parser.parse(this, builder).getFirstChildNode();
+    return parser.parse(PerlStubElementTypes.FILE, builder).getFirstChildNode();
   }
 
   @NotNull

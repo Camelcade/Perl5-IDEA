@@ -15,7 +15,7 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::foo
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('foo')
-    PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK_WITH_TRYCATCH)
+    PerlCompositeElementImpl(LP_CODE_BLOCK_WITH_TRYCATCH)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')
         PsiPerlStatementImpl(Perl5: STATEMENT)

@@ -22,7 +22,7 @@ import com.perl5.lang.perl.lexer.adapters.PerlSubLexerAdapter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlLazySuperExtendedMatchRegexpElementType extends PerlLazyRegexpElementType {
+public class PerlLazySuperExtendedMatchRegexpElementType extends PerlLazyBlockElementType {
   public PerlLazySuperExtendedMatchRegexpElementType(@NotNull @NonNls String debugName) {
     super(debugName);
   }

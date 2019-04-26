@@ -142,7 +142,7 @@ Perl5
               PsiElement(Perl5: regex)(')([\[\{]?)')
             PsiElement(Perl5: r})('}')
             PsiElement(Perl5: re{)('<')
-            PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+            PerlCompositeElementImpl(LP_CODE_BLOCK)
               PsiPerlBlockImpl(Perl5: BLOCK)
                 PsiPerlIfCompoundImpl(Perl5: IF_COMPOUND)
                   PsiElement(Perl5: if)('if')
@@ -315,7 +315,7 @@ Perl5
   PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::blah
     PsiElement(Perl5: sub)('sub')
     PerlSubNameElementImpl(Perl5: subname)('blah')
-    PerlCompositeElementImpl(LAZY_PARSABLE_BLOCK)
+    PerlCompositeElementImpl(LP_CODE_BLOCK)
       PsiPerlBlockImpl(Perl5: BLOCK)
         PsiElement(Perl5: {)('{')
         PsiPerlStatementImpl(Perl5: STATEMENT)

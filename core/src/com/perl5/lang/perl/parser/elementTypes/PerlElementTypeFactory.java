@@ -57,23 +57,32 @@ public class PerlElementTypeFactory {
       case "vars":
       case __PACKAGE__:
         return new PerlTokenTypeEx(name, PerlNamespaceElementImpl.class);
-      case "LAZY_PARSABLE_BLOCK":
-        return new PerlLazyCodeBlockElementType(name);
-      case "LAZY_PARSABLE_BLOCK_WITH_TRYCATCH":
-        return new PerlLazyCodeBlockElementTypeWithTryCatch(name);
       case "HEREDOC_END":
       case "HEREDOC_END_INDENTABLE":
         return new PerlTokenTypeEx(name, PerlHeredocTerminatorElementImpl.class);
       case "VERSION_ELEMENT":
         return new PerlTokenTypeEx(name, PerlVersionElementImpl.class);
+    }
+    return new PerlTokenType(name);
+  }
+
+  @NotNull
+  public static IElementType getElementType(@NotNull String name) {
+    switch (name) {
+      case "PARSABLE_STRING_USE_VARS":
+        return new PerlLazyUseVarsElementType(name);
+      case "COMMENT_ANNOTATION":
+        return new PerlLazyAnnotationElementType(name);
       case "HEREDOC_QQ":
         return new PerlLazyQQStringElementType(name, PerlHeredocElementImpl.class);
       case "HEREDOC_QX":
         return new PerlLazyQXStringElementType(name, PerlHeredocElementImpl.class);
       case "HEREDOC":
         return new PerlLazyQStringElementType(name, PerlHeredocElementImpl.class);
-      case "PARSABLE_STRING_USE_VARS":
-        return new PerlLazyUseVarsElementType(name);
+      case "LP_CODE_BLOCK":
+        return new PerlLazyCodeBlockElementType(name);
+      case "LP_CODE_BLOCK_WITH_TRYCATCH":
+        return new PerlLazyCodeBlockElementTypeWithTryCatch(name);
       case "LP_REGEX":
         return new PerlLazyMatchRegexpElementType(name);
       case "LP_REGEX_X":
@@ -84,21 +93,12 @@ public class PerlElementTypeFactory {
         return new PerlLazyReplacementRegexpElementType(name);
       case "LP_STRING_Q":
         return new PerlLazyQStringElementType(name);
-      case "LP_STRING_QQ":
-        return new PerlLazyQQStringElementType(name);
       case "LP_STRING_QX":
         return new PerlLazyQXStringElementType(name);
       case "LP_STRING_QW":
         return new PerlLazyQWStringElementType(name);
-      case "COMMENT_ANNOTATION":
-        return new PerlLazyAnnotationElementType("PERL_ANNOTATION");
-    }
-    return new PerlTokenType(name);
-  }
-
-  @NotNull
-  public static IElementType getElementType(@NotNull String name) {
-    switch (name) {
+      case "LP_STRING_QQ":
+        return new PerlLazyQQStringElementType(name);
       case "SUB_DEFINITION":
         return PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION":

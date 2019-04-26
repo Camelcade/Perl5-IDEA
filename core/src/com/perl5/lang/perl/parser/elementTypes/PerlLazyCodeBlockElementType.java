@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.lexer.adapters.PerlSublexingLexerAdapter;
-import com.perl5.lang.perl.parser.PerlLazyBlockParser;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,11 +33,5 @@ public class PerlLazyCodeBlockElementType extends PerlLazyBlockElementType {
   @Override
   protected PerlSublexingLexerAdapter getInnerLexer(@NotNull Project project) {
     return new PerlSublexingLexerAdapter(project, false, false);
-  }
-
-  @NotNull
-  @Override
-  protected PsiParser getParser() {
-    return PerlLazyBlockParser.INSTANCE;
   }
 }

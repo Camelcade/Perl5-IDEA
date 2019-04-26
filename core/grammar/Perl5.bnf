@@ -35,7 +35,6 @@ limitations under the License.
 
   tokens=[
     COMMENT_LINE='COMMENT_LINE'
-    COMMENT_ANNOTATION='COMMENT_ANNOTATION'
     COMMENT_BLOCK='COMMENT_BLOCK'
     POD='POD'
 
@@ -72,9 +71,6 @@ limitations under the License.
     HASH_NAME='HASH_NAME'
     GLOB_NAME='GLOB_NAME'
 
-    HEREDOC='HEREDOC'
-    HEREDOC_QQ='HEREDOC_QQ'
-    HEREDOC_QX='HEREDOC_QX'
     HEREDOC_END='HEREDOC_END'
     HEREDOC_END_INDENTABLE='HEREDOC_END_INDENTABLE'
 
@@ -305,24 +301,10 @@ limitations under the License.
 	REGEX_CHAR_CLASS="\w"
 */
 
-	LP_STRING_Q="LP_STRING_Q"
-	LP_STRING_QQ="LP_STRING_QQ"
-	LP_STRING_XQ="LP_STRING_QX"
-	LP_STRING_QW="LP_STRING_QW"
-
-	LP_REGEX="LP_REGEX"
-	LP_REGEX_X="LP_REGEX_X"
-	LP_REGEX_XX="LP_REGEX_XX"
-	LP_REGEX_REPLACEMENT="LP_REGEX_REPLACEMENT"
-
-	LP_CODE_BLOCK="LAZY_PARSABLE_BLOCK"
-	LP_CODE_BLOCK_WITH_TRYCATCH="LAZY_PARSABLE_BLOCK_WITH_TRYCATCH"
-
     STRING_CONTENT='STRING_CONTENT'
     STRING_CONTENT_QQ='STRING_CONTENT_QQ'
     STRING_CONTENT_XQ='STRING_CONTENT_XQ'
 
-    PARSABLE_STRING_USE_VARS = 'PARSABLE_STRING_USE_VARS'
 
     TAG='TAG'
     TAG_END='__END__'
@@ -584,7 +566,7 @@ private namespace_definition_name ::= 'package' any_package [perl_version] {pin=
 namespace_content ::= real_namespace_content
 private real_namespace_content ::= {!'package' file_item} *  {extends=normal_block recoverWhile=recover_statement} //
 
-private parse_block ::= LP_CODE_BLOCK | LP_CODE_BLOCK_WITH_TRYCATCH | normal_block
+private parse_block ::= <<consumeTokens 'LP_CODE_BLOCK'>> | <<consumeTokens 'LP_CODE_BLOCK_WITH_TRYCATCH'>> | normal_block
 private normal_block ::= <<block braced_block_content>> // !-> pin disabled for dereference of anon hash; probably this slows us down
 // used in com.perl5.lang.perl.parser.PerlLazyBlockParser
 private braceless_block ::= <<block file_items>>
@@ -964,12 +946,12 @@ replacement_regex ::=
     [perl_regex_modifiers]
     {pin=1}
 
-private regex_match ::= 'r{' [LP_REGEX|LP_REGEX_X|LP_REGEX_XX|perl_regex]
+private regex_match ::= 'r{' [<<consumeTokens 'LP_REGEX'>>|<<consumeTokens 'LP_REGEX_X'>>|<<consumeTokens 'LP_REGEX_XX'>>|perl_regex]
 private regex_replace ::= regex_replace_regex | regex_replace_code
 
-private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [LP_REGEX_REPLACEMENT|perl_regex]
+private regex_replace_regex ::= {'r/' | 'r}' 'r{' } [<<consumeTokens 'LP_REGEX_REPLACEMENT'>>|perl_regex]
 private regex_replace_code ::= {'re/' | 'r}' 're{' } [regex_code]
-private regex_code ::= LP_CODE_BLOCK | <<block file_item*>>
+private regex_code ::= <<consumeTokens 'LP_CODE_BLOCK'>> | <<block file_item*>>
 
 perl_regex_modifiers ::= '/m' +
 perl_regex ::= perl_regex_item *
@@ -1174,11 +1156,11 @@ number_constant ::= NUMBER | NUMBER_VERSION | NUMBER_SIMPLE
 private string ::= string_bare | string_sq | string_dq | string_xq | heredoc_opener
 
 string_dq ::= [ 'qq'] quoted_qq_string
-private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [LP_STRING_QQ | qq_string_content ] QUOTE_DOUBLE_CLOSE {pin=1}
+private quoted_qq_string ::= QUOTE_DOUBLE_OPEN [<<consumeTokens 'LP_STRING_QQ'>> | qq_string_content ] QUOTE_DOUBLE_CLOSE {pin=1}
 private qq_string_content ::= (STRING_CONTENT_QQ | interpolated_constructs)+
 
 string_xq ::= [ 'qx'] quoted_xq_string
-private quoted_xq_string ::= QUOTE_TICK_OPEN [LP_STRING_XQ | xq_string_content] QUOTE_TICK_CLOSE {pin=1}
+private quoted_xq_string ::= QUOTE_TICK_OPEN [<<consumeTokens 'LP_STRING_QX'>> | xq_string_content] QUOTE_TICK_CLOSE {pin=1}
 private xq_string_content ::= (STRING_CONTENT_XQ | interpolated_constructs)+
 
 private interpolated_constructs ::= deref_expr
@@ -1189,11 +1171,11 @@ string_sq ::= [ 'q'] quoted_sq_string
 string_list ::=  'qw' qw_string {pin=1}
 private qw_string ::= QUOTE_SINGLE_OPEN [parse_qw_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private parse_qw_string_content ::= <<isUseVars>> <<mapUseVars qw_string_content>>+|qw_string_content
-private qw_string_content ::= LP_STRING_QW|string_bare+
+private qw_string_content ::= <<consumeTokens 'LP_STRING_QW'>>|string_bare+
 private quoted_sq_string ::= QUOTE_SINGLE_OPEN [smart_sq_string_content] QUOTE_SINGLE_CLOSE {pin=1}
 private smart_sq_string_content ::= <<isUseVars>> <<mapUseVars sq_string_content_element>>+ | sq_string_content
 private sq_string_content ::= sq_string_content_element +
-private sq_string_content_element ::= LP_STRING_Q |STRING_CONTENT
+private sq_string_content_element ::= <<consumeTokens 'LP_STRING_Q'>> |STRING_CONTENT
 
 heredoc_opener ::= 'heredoc<<' ( '\\' string_bare | string ){pin=1}
 
@@ -1254,7 +1236,24 @@ hashref_type ::= 'HashRef' '[' annotation_type_param ']' {pin=1}
 annotation_type ::=  '#@type' annotation_type_param {pin=1}
 annotation_inject ::=  '#@inject' string_bare {pin=1}
 annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
-
-
-
 /******************************************* End of annotations *******************************************************/
+
+/******************************************* Lazy parsable elements *******************************************************/
+lp_string_qq ::= qq_string_content {extraRoot=true}
+lp_string_q ::= sq_string_content {extraRoot=true}
+lp_string_qx ::= xq_string_content{extraRoot=true}
+lp_string_qw ::= qw_string_content{extraRoot=true}
+
+lp_regex ::= perl_regex {extraRoot=true}
+lp_regex_x ::= perl_regex {extraRoot=true}
+lp_regex_xx ::= perl_regex {extraRoot=true}
+lp_regex_replacement ::= perl_regex {extraRoot=true}
+
+lp_code_block ::= normal_block | braceless_block {extraRoot=true}
+lp_code_block_with_trycatch ::= normal_block | braceless_block {extraRoot=true}
+parsable_string_use_vars ::= use_vars_declarations {extraRoot=true}
+comment_annotation ::= annotation {extraRoot=true}
+heredoc ::= sq_string_content {extraRoot=true}
+heredoc_qq ::= qq_string_content {extraRoot=true}
+heredoc_qx ::= xq_string_content{extraRoot=true}
+/******************************************* End of Lazy parsable elements *******************************************************/
