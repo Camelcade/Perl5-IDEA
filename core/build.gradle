@@ -30,15 +30,15 @@ sourceSets {
   }
 }
 
-idea{
+idea {
   module {
     generatedSourceDirs += genRoot
   }
 }
 
-intellij{
+intellij {
   type 'IC'
-  intellij.plugins = [ "PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage']
+  intellij.plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage']
 }
 
 apply plugin: 'org.jetbrains.grammarkit'
@@ -85,7 +85,7 @@ compileJava {
   dependsOn generatePodLexer
 }
 
-prepareSandbox{
+prepareSandbox {
   inputs.dir('scripts')
   outputs.dir("$it.destinationDir/$intellij.pluginName/perl/")
 }

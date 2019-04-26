@@ -15,22 +15,22 @@
  */
 
 buildscript {
-    repositories {
-        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
-    }
+  repositories {
+    maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+  }
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.4.7"
-    id 'jacoco'
-    id 'com.github.kt3k.coveralls' version '2.8.2'
-    id 'org.jetbrains.grammarkit' version '2018.3.1'
+  id "org.jetbrains.intellij" version "0.4.7"
+  id 'jacoco'
+  id 'com.github.kt3k.coveralls' version '2.8.2'
+  id 'org.jetbrains.grammarkit' version '2018.3.1'
 }
 
 
-allprojects{
-    apply plugin: 'jacoco'
-  jacoco{
+allprojects {
+  apply plugin: 'jacoco'
+  jacoco {
     toolVersion = "0.8.3"
   }
 
@@ -40,52 +40,52 @@ allprojects{
   }
 
   apply plugin: 'java'
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaTargetVersion
-    tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+  sourceCompatibility = javaVersion
+  targetCompatibility = javaTargetVersion
+  tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
-    apply plugin: 'org.jetbrains.intellij'
-    version = "${pluginVersion}${platformBranch}${pluginBuild}"
+  apply plugin: 'org.jetbrains.intellij'
+  version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
-  intellij{
-        version "${platformVersion}${platformBranch}${platformBuild}"
-        updateSinceUntilBuild = true
+  intellij {
+    version "${platformVersion}${platformBranch}${platformBuild}"
+    updateSinceUntilBuild = true
 
-        if (project.hasProperty('idea_sandbox')) {
-            sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
-        }
+    if (project.hasProperty('idea_sandbox')) {
+      sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
     }
+  }
 
-    test{
-        outputs.upToDateWhen {false}
-        if(project.hasProperty("overwrite")){
-            systemProperty "idea.tests.overwrite.data", "true"
-        }
-        useJUnit {
-          if (project.hasProperty("runtest")) {
-            include '**/' + project.property('runtest') + '.class'
-          }
-
-          if (project.hasProperty("perf")) {
-            includeCategories 'categories.Performance'
-          } else {
-            excludeCategories 'categories.Performance'
-          }
-
-        }
-        testLogging {
-            exceptionFormat = 'full'
-            showStandardStreams = true
-        }
-        jacoco {
-            enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
-        }
+  test {
+    outputs.upToDateWhen { false }
+    if (project.hasProperty("overwrite")) {
+      systemProperty "idea.tests.overwrite.data", "true"
     }
+    useJUnit {
+      if (project.hasProperty("runtest")) {
+        include '**/' + project.property('runtest') + '.class'
+      }
 
-    publishPlugin{
-        username=project.findProperty('jbRepoUser') ?: ''
-        password=project.findProperty('jbRepoPass') ?: ''
+      if (project.hasProperty("perf")) {
+        includeCategories 'categories.Performance'
+      }
+      else {
+        excludeCategories 'categories.Performance'
+      }
     }
+    testLogging {
+      exceptionFormat = 'full'
+      showStandardStreams = true
+    }
+    jacoco {
+      enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
+    }
+  }
+
+  publishPlugin {
+    username = project.findProperty('jbRepoUser') ?: ''
+    password = project.findProperty('jbRepoPass') ?: ''
+  }
 }
 
 
@@ -96,8 +96,8 @@ subprojects {
     changeNotes(file(changesFile).text)
   }
 
-  jacocoTestReport{
-    reports{
+  jacocoTestReport {
+    reports {
       xml.enabled = true
       html.enabled = true
       csv.enabled = false
@@ -105,24 +105,24 @@ subprojects {
   }
 
   afterEvaluate {
-    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll{file -> file.name == "src"}
+    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
   }
 }
 
 apply plugin: 'idea'
 idea {
-    project {
-        jdkName = javaVersion
-        languageLevel = javaVersion
-    }
+  project {
+    jdkName = javaVersion
+    languageLevel = javaVersion
+  }
 }
 
 task jacocoMerge(type: JacocoMerge) {
-    dependsOn(subprojects.jacocoTestReport.dependsOn)
-    mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
-    destinationFile = file("${buildDir}/jacoco/test.exec")
-    executionData = files(subprojects.jacocoTestReport.executionData)
-      .filter { f -> f.exists() }
+  dependsOn(subprojects.jacocoTestReport.dependsOn)
+  mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
+  destinationFile = file("${buildDir}/jacoco/test.exec")
+  executionData = files(subprojects.jacocoTestReport.executionData)
+    .filter { f -> f.exists() }
 }
 
 task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
@@ -141,7 +141,7 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
   }
 }
 
-tasks.coveralls{
+tasks.coveralls {
   group = 'Coverage reports'
   description = 'Uploads the aggregated coverage report to Coveralls'
 
@@ -149,39 +149,39 @@ tasks.coveralls{
 }
 
 intellij {
-    type 'IU'
-    downloadSources Boolean.valueOf(downloadIdeaSource)
-    if (project.hasProperty('idea_path')) {
-        alternativeIdePath = project.idea_path
-    }
-    plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'Docker', 'remote-run', // would be nice to have transient plugins
-               project(':perl5.core'),
-               project(':perl5.transport.docker'),
-               project(':perl5.transport.wsl'),
-               project(':perl5.lang.tt2'),
-               project(':perl5.lang.mojo'),
-               project(':perl5.lang.embedded'),
-               project(':perl5.lang.mason.framework'),
-               project(':perl5.lang.mason.htmlmason'),
-               project(':perl5.lang.mason.mason2'),
-    ]
+  type 'IU'
+  downloadSources Boolean.valueOf(downloadIdeaSource)
+  if (project.hasProperty('idea_path')) {
+    alternativeIdePath = project.idea_path
+  }
+  plugins = ["PsiViewer:$psiViewerVersion", 'IntelliLang', 'coverage', 'Docker', 'remote-run', // would be nice to have transient plugins
+             project(':perl5.core'),
+             project(':perl5.transport.docker'),
+             project(':perl5.transport.wsl'),
+             project(':perl5.lang.tt2'),
+             project(':perl5.lang.mojo'),
+             project(':perl5.lang.embedded'),
+             project(':perl5.lang.mason.framework'),
+             project(':perl5.lang.mason.htmlmason'),
+             project(':perl5.lang.mason.mason2'),
+  ]
 }
 
-runIde{
-    if( project.hasProperty("nocancel")){
-        systemProperty("idea.ProcessCanceledException", "disabled")
-    }
-    if( project.hasProperty("traverseUI")){
-        args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
-    }
-    jvmArgs("-Xmx2048m")
+runIde {
+  if (project.hasProperty("nocancel")) {
+    systemProperty("idea.ProcessCanceledException", "disabled")
+  }
+  if (project.hasProperty("traverseUI")) {
+    args("traverseUI", "$project.rootDir.canonicalPath/resources/search/searchableOptions.xml")
+  }
+  jvmArgs("-Xmx2048m")
 }
 sourceSets {
-    test {
-        resources.srcDirs file('testData')
-    }
+  test {
+    resources.srcDirs file('testData')
+  }
 }
 
-task publishAllPlugins{
-    subprojects.each {dependsOn("${it.name}:publishPlugin")}
+task publishAllPlugins {
+  subprojects.each { dependsOn("${it.name}:publishPlugin") }
 }
