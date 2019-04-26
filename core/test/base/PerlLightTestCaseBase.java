@@ -522,6 +522,20 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
           .append(getIconText(presentation.getTypeIcon()))
         ;
 
+        Object lookupObject = lookupElement.getObject();
+        if (lookupObject instanceof PsiElement) {
+          sb.append("\n    PsiElement: ").append(serializePsiElement((PsiElement)lookupObject));
+        }
+        else if (lookupObject instanceof VirtualFile) {
+          sb.append("\n    VirtualFile: ").append(((VirtualFile)lookupObject).getName());
+        }
+        else if (lookupObject instanceof String) {
+          sb.append("\n    String");
+        }
+        else {
+          sb.append("\n    ").append(lookupObject.getClass().getSimpleName());
+        }
+
         result.add(sb.toString());
       }
     }
