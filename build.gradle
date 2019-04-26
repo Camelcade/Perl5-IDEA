@@ -22,18 +22,24 @@ buildscript {
 
 plugins {
     id "org.jetbrains.intellij" version "0.4.7"
-    id "jacoco"
+    id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.8.2'
     id 'org.jetbrains.grammarkit' version '2018.3.1'
 }
 
-repositories {
-    mavenCentral()
-}
-
 
 allprojects{
-    apply plugin: 'java'
+    apply plugin: 'jacoco'
+  jacoco{
+    toolVersion = "0.8.3"
+  }
+
+  repositories {
+    mavenCentral()
+    maven { url "http://mvnrepository.com/artifact" }
+  }
+
+  apply plugin: 'java'
     sourceCompatibility = javaVersion
     targetCompatibility = javaTargetVersion
     tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
@@ -41,7 +47,7 @@ allprojects{
     apply plugin: 'org.jetbrains.intellij'
     version = "${pluginVersion}${platformBranch}${pluginBuild}"
 
-    intellij{
+  intellij{
         version "${platformVersion}${platformBranch}${platformBuild}"
         updateSinceUntilBuild = true
 
@@ -56,19 +62,23 @@ allprojects{
             systemProperty "idea.tests.overwrite.data", "true"
         }
         useJUnit {
-            if (project.hasProperty("runtest")) {
-                include '**/' + project.property('runtest') + '.class'
-            } else {
-                if (project.hasProperty("perf")) {
-                    includeCategories 'categories.Performance'
-                } else {
-                    excludeCategories 'categories.Performance'
-                }
-            }
+          if (project.hasProperty("runtest")) {
+            include '**/' + project.property('runtest') + '.class'
+          }
+
+          if (project.hasProperty("perf")) {
+            includeCategories 'categories.Performance'
+          } else {
+            excludeCategories 'categories.Performance'
+          }
+
         }
         testLogging {
             exceptionFormat = 'full'
             showStandardStreams = true
+        }
+        jacoco {
+            enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
         }
     }
 
@@ -78,6 +88,7 @@ allprojects{
     }
 }
 
+
 subprojects {
   patchPluginXml {
     inputs.files(descriptionFile, changesFile)
@@ -85,24 +96,17 @@ subprojects {
     changeNotes(file(changesFile).text)
   }
 
-/*
-  apply plugin: 'jacoco'
-  test {
-    jacocoTestReport {
-      additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
-      sourceDirectories = files(sourceSets.main.allSource.srcDirs)
-      classDirectories = files(sourceSets.main.output)
-      reports {
-        xml.enabled true
-        html.enabled true
-        csv.enabled false
-      }
-    }
-    jacoco {
-      enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
+  jacocoTestReport{
+    reports{
+      xml.enabled = true
+      html.enabled = true
+      csv.enabled = false
     }
   }
-*/
+
+  afterEvaluate {
+    coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll{file -> file.name == "src"}
+  }
 }
 
 apply plugin: 'idea'
@@ -113,27 +117,36 @@ idea {
     }
 }
 
-/*
-task jacocoRootReport(type: JacocoReport) {
-    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
-    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
-    classDirectories =  files(subprojects.sourceSets.main.output)
+task jacocoMerge(type: JacocoMerge) {
+    dependsOn(subprojects.jacocoTestReport.dependsOn)
+    mustRunAfter(subprojects.jacocoTestReport.mustRunAfter)
+    destinationFile = file("${buildDir}/jacoco/test.exec")
     executionData = files(subprojects.jacocoTestReport.executionData)
-    reports {
-        xml.enabled = true
-        html.enabled = true
-        csv.enabled = false
-    }
-    onlyIf{
-        true
-    }
-    doFirst {
-        executionData = files(executionData.findAll {
-            it.exists()
-        })
-    }
+      .filter { f -> f.exists() }
 }
-*/
+
+task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
+  description = 'Generates an aggregate report from all subprojects'
+  dependsOn jacocoMerge
+
+  additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+  sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+  classDirectories = files(subprojects.sourceSets.main.output)
+  executionData jacocoMerge.destinationFile
+
+  reports {
+    html.enabled = true // human readable
+    xml.enabled = true // required by coveralls
+    csv.enabled = false
+  }
+}
+
+tasks.coveralls{
+  group = 'Coverage reports'
+  description = 'Uploads the aggregated coverage report to Coveralls'
+
+  dependsOn jacocoRootReport
+}
 
 intellij {
     type 'IU'
