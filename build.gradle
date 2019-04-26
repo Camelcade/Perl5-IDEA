@@ -22,23 +22,18 @@ buildscript {
 
 plugins {
   id "org.jetbrains.intellij" version "0.4.8"
-/*
   id 'jacoco'
   id 'com.github.kt3k.coveralls' version '2.8.2'
-*/
   id 'org.jetbrains.grammarkit' version '2019.1'
 }
 
 
-allprojects {
-/*
-  apply plugin: 'jacoco'
-  repositories {
-    mavenCentral()
-    maven { url "http://mvnrepository.com/artifact" }
-  }
-*/
+repositories {
+  mavenCentral()
+}
 
+allprojects {
+  apply plugin: 'jacoco'
   apply plugin: 'java'
   sourceCompatibility = javaVersion
   targetCompatibility = javaTargetVersion
@@ -77,11 +72,9 @@ allprojects {
       exceptionFormat = 'full'
       showStandardStreams = true
     }
-/*
     jacoco {
       enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
     }
-*/
   }
 
   publishPlugin {
@@ -98,7 +91,6 @@ subprojects {
     changeNotes(file(changesFile).text)
   }
 
-/*
   jacocoTestReport {
     reports {
       xml.enabled = true
@@ -110,7 +102,6 @@ subprojects {
   afterEvaluate {
     coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
   }
-*/
 }
 
 apply plugin: 'idea'
@@ -120,7 +111,6 @@ idea {
     languageLevel = javaVersion
   }
 }
-/*
 
 task jacocoMerge(type: JacocoMerge) {
   dependsOn(subprojects.jacocoTestReport.dependsOn)
@@ -152,7 +142,6 @@ tasks.coveralls {
 
   dependsOn jacocoRootReport
 }
-*/
 
 intellij {
   type 'IU'
