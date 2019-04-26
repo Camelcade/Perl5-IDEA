@@ -27,12 +27,12 @@ plugins {
   id 'org.jetbrains.grammarkit' version '2019.1'
 }
 
-
-repositories {
-  mavenCentral()
-}
-
 allprojects {
+  repositories {
+    mavenCentral()
+    maven { url "http://mvnrepository.com/artifact" }
+  }
+
   apply plugin: 'jacoco'
   apply plugin: 'java'
   sourceCompatibility = javaVersion
