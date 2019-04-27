@@ -1,0 +1,11 @@
+Test text
+
+<open>=over
+
+=item *
+
+something
+
+=ba<close>ck
+
+something

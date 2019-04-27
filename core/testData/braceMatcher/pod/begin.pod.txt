@@ -1,0 +1,9 @@
+Test text
+
+=b<open>egin html
+
+something
+
+<close>=end html
+
+something

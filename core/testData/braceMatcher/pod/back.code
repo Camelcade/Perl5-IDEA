@@ -1,0 +1,11 @@
+Test text
+
+=over
+
+=item *
+
+something
+
+=ba<caret>ck
+
+something

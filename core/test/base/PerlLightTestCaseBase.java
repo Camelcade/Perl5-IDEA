@@ -24,6 +24,7 @@ import com.intellij.codeInsight.controlflow.ControlFlow;
 import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
+import com.intellij.codeInsight.highlighting.BraceMatchingUtil;
 import com.intellij.codeInsight.highlighting.HighlightManager;
 import com.intellij.codeInsight.highlighting.actions.HighlightUsagesAction;
 import com.intellij.codeInsight.hint.ShowParameterInfoHandler;
@@ -918,6 +919,37 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     });
 
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
+
+  protected void doTestBraceMatcher() {
+    initWithFileSmart();
+
+    Editor editor = getEditor();
+    int currentOffset = editor.getCaretModel().getOffset();
+    int forwardOffset = -1;
+    try {
+      forwardOffset = BraceMatchingUtil.getMatchedBraceOffset(editor, true, getFile());
+    }
+    catch (AssertionError ignore) {
+    }
+
+    int backwardOffset = -1;
+    try {
+      backwardOffset = BraceMatchingUtil.getMatchedBraceOffset(editor, false, getFile());
+    }
+    catch (AssertionError ignore) {
+    }
+    List<Pair<Integer, String>> markers = new ArrayList<>(3);
+    if (forwardOffset > 0) {
+      markers.add(Pair.create(currentOffset, "<open>"));
+      markers.add(Pair.create(forwardOffset, "<close>"));
+    }
+    if (backwardOffset > 0) {
+      markers.add(Pair.create(backwardOffset, "<open>"));
+      markers.add(Pair.create(currentOffset, "<close>"));
+    }
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(markers));
   }
 
   protected void doTestUsagesHighlighting() {
