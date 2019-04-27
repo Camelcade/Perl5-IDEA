@@ -3,8 +3,23 @@ jdk:
   - oraclejdk8
 git:
   submodules: false
-
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $TRAVIS_BUILD_DIR/build
+    - $TRAVIS_BUILD_DIR/core/build
+    - $TRAVIS_BUILD_DIR/docker/build
+    - $TRAVIS_BUILD_DIR/embedded/build
+    - $TRAVIS_BUILD_DIR/htmlmason/build
+    - $TRAVIS_BUILD_DIR/mason-core/build
+    - $TRAVIS_BUILD_DIR/mason2/build
+    - $TRAVIS_BUILD_DIR/mojo/build
+    - $TRAVIS_BUILD_DIR/tt2/build
+    - $TRAVIS_BUILD_DIR/wsl/build
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
-
 after_success:
   - ./gradlew coveralls
