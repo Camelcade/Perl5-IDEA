@@ -31,6 +31,7 @@ repositories {
   mavenCentral()
 }
 
+def isCI = System.getenv("CI")
 def agentFiles = files('lib/org.jacoco.agent-0.8.1.jar')
 
 allprojects {
@@ -78,7 +79,7 @@ allprojects {
       showStandardStreams = true
     }
     jacoco {
-      enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
+      enabled = isCI || project.hasProperty("with_coverage")
     }
     testLogging {
       events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
