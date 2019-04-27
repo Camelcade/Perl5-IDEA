@@ -1,0 +1,190 @@
+Lookups: *; Text: 7.; Tail: (*); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9736 in perlref.pod
+Lookups: *foo{THING}; Text: 7.; Tail: (*foo{THING}); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9736 in perlref.pod
+Lookups: 1.; Text: 1.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12705 in perlref.pod
+Lookups: 1.; Text: 1.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2721 in perlref.pod
+Lookups: 2.; Text: 2.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13574 in perlref.pod
+Lookups: 2.; Text: 2.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: 3.; Text: 3.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15026 in perlref.pod
+Lookups: 3.; Text: 3.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: 4.; Text: 4.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16474 in perlref.pod
+Lookups: 4.; Text: 4.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: 5.; Text: 5.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8492 in perlref.pod
+Lookups: 6.; Text: 6.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9494 in perlref.pod
+Lookups: 7.; Text: 7.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9736 in perlref.pod
+Lookups: Assigning to References; Text: Assigning to References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30783 in perlref.pod
+Lookups: Circular References; Text: Circular References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18915 in perlref.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: Declaring a Reference to a Variable; Text: Declaring a Reference to a Variable; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 34239 in perlref.pod
+Lookups: Function Templates; Text: Function Templates; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: Making References; Text: Making References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2604 in perlref.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlref.pod
+Lookups: NOTE; Text: NOTE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 132 in perlref.pod
+Lookups: Not-so-symbolic references; Text: Not-so-symbolic references; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22520 in perlref.pod
+Lookups: Postfix Dereference Syntax; Text: Postfix Dereference Syntax; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28646 in perlref.pod
+Lookups: Postfix Reference Slicing; Text: Postfix Reference Slicing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30074 in perlref.pod
+Lookups: Pseudo-hashes: Using an array as a hash; Text: Pseudo-hashes: Using an array as a hash; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24065 in perlref.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 34924 in perlref.pod
+Lookups: Symbolic references; Text: Symbolic references; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20741 in perlref.pod
+Lookups: Using References; Text: Using References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
+Lookups: WARNING: Don't use references as hash keys; Text: WARNING: Don't use references as hash keys; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28041 in perlref.pod
+Lookups: [; Text: 2.; Tail: ([); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: []; Text: 2.; Tail: ([]); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: \; Text: 1.; Tail: (\); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2721 in perlref.pod
+Lookups: array reference; Text: 2.; Tail: (array reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: array, anonymous; Text: 2.; Tail: (array, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: arrayref; Text: 2.; Tail: (arrayref); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: autovivification; Text: 6.; Tail: (autovivification); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9494 in perlref.pod
+Lookups: backslash; Text: 1.; Tail: (backslash); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2721 in perlref.pod
+Lookups: brace; Text: 3.; Tail: (brace); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: bracket, curly; Text: 3.; Tail: (bracket, curly); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: bracket, square; Text: 2.; Tail: (bracket, square); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: circular reference; Text: Circular References; Tail: (circular reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18915 in perlref.pod
+Lookups: closure; Text: 4.; Tail: (closure); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: closure; Text: Function Templates; Tail: (closure); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: constructor; Text: 5.; Tail: (constructor); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8492 in perlref.pod
+Lookups: curly bracket; Text: 3.; Tail: (curly bracket); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: data structure; Text: NAME; Tail: (data structure); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlref.pod
+Lookups: dereference; Text: Using References; Tail: (dereference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
+Lookups: dereferencing; Text: Using References; Tail: (dereferencing); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
+Lookups: hard reference; Text: DESCRIPTION; Tail: (hard reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: hash reference; Text: 3.; Tail: (hash reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: hash, anonymous; Text: 3.; Tail: (hash, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: hashref; Text: 3.; Tail: (hashref); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: lexical scope; Text: 4.; Tail: (lexical scope); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: lexical scope; Text: Function Templates; Tail: (lexical scope); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: lexical; Text: 4.; Tail: (lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: lexical; Text: Function Templates; Tail: (lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: new; Text: 5.; Tail: (new); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8492 in perlref.pod
+Lookups: pointer; Text: NAME; Tail: (pointer); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlref.pod
+Lookups: pseudo hash; Text: Pseudo-hashes: Using an array as a hash; Tail: (pseudo hash); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24065 in perlref.pod
+Lookups: pseudo-hash; Text: Pseudo-hashes: Using an array as a hash; Tail: (pseudo-hash); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24065 in perlref.pod
+Lookups: pseudohash; Text: Pseudo-hashes: Using an array as a hash; Tail: (pseudohash); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24065 in perlref.pod
+Lookups: reference, array; Text: 2.; Tail: (reference, array); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: reference, circular; Text: Circular References; Tail: (reference, circular); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18915 in perlref.pod
+Lookups: reference, creation; Text: Making References; Tail: (reference, creation); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2604 in perlref.pod
+Lookups: reference, hard; Text: DESCRIPTION; Tail: (reference, hard); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: reference, hash; Text: 3.; Tail: (reference, hash); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: reference, numeric context; Text: Using References; Tail: (reference, numeric context); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
+Lookups: reference, soft; Text: DESCRIPTION; Tail: (reference, soft); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: reference, soft; Text: Symbolic references; Tail: (reference, soft); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20741 in perlref.pod
+Lookups: reference, string context; Text: Using References; Tail: (reference, string context); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
+Lookups: reference, string context; Text: WARNING: Don't use references as hash keys; Tail: (reference, string context); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28041 in perlref.pod
+Lookups: reference, subroutine; Text: 4.; Tail: (reference, subroutine); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: reference, symbolic; Text: DESCRIPTION; Tail: (reference, symbolic); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: reference, symbolic; Text: Symbolic references; Tail: (reference, symbolic); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20741 in perlref.pod
+Lookups: reference, use as hash key; Text: WARNING: Don't use references as hash keys; Tail: (reference, use as hash key); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28041 in perlref.pod
+Lookups: reference, use; Text: Using References; Tail: (reference, use); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
+Lookups: reference; Text: NAME; Tail: (reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlref.pod
+Lookups: referencing; Text: Making References; Tail: (referencing); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2604 in perlref.pod
+Lookups: scope, lexical; Text: 4.; Tail: (scope, lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: scope, lexical; Text: Function Templates; Tail: (scope, lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: soft reference; Text: DESCRIPTION; Tail: (soft reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: soft reference; Text: Symbolic references; Tail: (soft reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20741 in perlref.pod
+Lookups: square bracket; Text: 2.; Tail: (square bracket); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
+Lookups: struct; Text: NAME; Tail: (struct); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlref.pod
+Lookups: structure; Text: NAME; Tail: (structure); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlref.pod
+Lookups: sub, local; Text: Function Templates; Tail: (sub, local); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: sub, nested; Text: Function Templates; Tail: (sub, nested); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: subroutine, anonymous; Text: 4.; Tail: (subroutine, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: subroutine, local; Text: Function Templates; Tail: (subroutine, local); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: subroutine, nested; Text: Function Templates; Tail: (subroutine, nested); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24241 in perlref.pod
+Lookups: subroutine, reference; Text: 4.; Tail: (subroutine, reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
+Lookups: symbolic reference; Text: DESCRIPTION; Tail: (symbolic reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 298 in perlref.pod
+Lookups: symbolic reference; Text: Symbolic references; Tail: (symbolic reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20741 in perlref.pod
+Lookups: {; Text: 3.; Tail: ({); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
+Lookups: {}; Text: 3.; Tail: ({}); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod

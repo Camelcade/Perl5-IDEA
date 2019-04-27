@@ -1,0 +1,28 @@
+Lookups: AUTHOR and COPYRIGHT; Text: AUTHOR and COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9285 in perlopentut.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95 in perlopentut.pod
+Lookups: HANDLE; Text: HANDLE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1588 in perlopentut.pod
+Lookups: Low-level File Opens via sysopen; Text: Low-level File Opens via sysopen; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9178 in perlopentut.pod
+Lookups: MODE; Text: MODE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1701 in perlopentut.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlopentut.pod
+Lookups: OK; Text: OK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1499 in perlopentut.pod
+Lookups: Opening Binary Files; Text: Opening Binary Files; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6680 in perlopentut.pod
+Lookups: Opening Pipes; Text: Opening Pipes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9138 in perlopentut.pod
+Lookups: Opening Text Files for Reading; Text: Opening Text Files for Reading; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2162 in perlopentut.pod
+Lookups: Opening Text Files for Writing; Text: Opening Text Files for Writing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4780 in perlopentut.pod
+Lookups: Opening Text Files; Text: Opening Text Files; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2135 in perlopentut.pod
+Lookups: PATHNAME; Text: PATHNAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1783 in perlopentut.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9250 in perlopentut.pod

@@ -1,0 +1,1788 @@
+Lookups:  The "version" key has a reference to an AV as its value; Text:  The "version" key has a reference to an AV as its value; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95469 in perlapi.pod
+Lookups:  The SV is an HV or a reference to an HV; Text:  The SV is an HV or a reference to an HV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95377 in perlapi.pod
+Lookups:  The hash contains a "version" key; Text:  The hash contains a "version" key; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95426 in perlapi.pod
+Lookups: "Gimme" Values; Text: "Gimme" Values; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95607 in perlapi.pod
+Lookups: API; Text: DESCRIPTION; Tail: (API); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 283 in perlapi.pod
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 474594 in perlapi.pod
+Lookups: Array Manipulation Functions; Text: Array Manipulation Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2963 in perlapi.pod
+Lookups: AvFILL; Text: AvFILL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5908 in perlapi.pod
+Lookups: BOM_UTF8; Text: BOM_UTF8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 388793 in perlapi.pod
+Lookups: BhkDISABLE; Text: BhkDISABLE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46246 in perlapi.pod
+Lookups: BhkENABLE; Text: BhkENABLE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46585 in perlapi.pod
+Lookups: BhkENTRY_set; Text: BhkENTRY_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46992 in perlapi.pod
+Lookups: CLASS; Text: CLASS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62521 in perlapi.pod
+Lookups: COP Hint Hashes; Text: COP Hint Hashes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47832 in perlapi.pod
+Lookups: COP Hint Reading; Text: COP Hint Reading; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 55263 in perlapi.pod
+Lookups: CV Manipulation Functions; Text: CV Manipulation Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 59548 in perlapi.pod
+Lookups: Callback Functions; Text: Callback Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11042 in perlapi.pod
+Lookups: Character case changing; Text: Character case changing; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14403 in perlapi.pod
+Lookups: Character classification; Text: Character classification; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 27514 in perlapi.pod
+Lookups: Cloning an interpreter; Text: Cloning an interpreter; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 44591 in perlapi.pod
+Lookups: Compile-time scope hooks; Text: Compile-time scope hooks; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 46204 in perlapi.pod
+Lookups: Copy; Text: Copy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 184875 in perlapi.pod
+Lookups: CopyD; Text: CopyD; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185212 in perlapi.pod
+Lookups: Custom Operators; Text: Custom Operators; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 57164 in perlapi.pod
+Lookups: CvPADLIST; Text: CvPADLIST; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 271477 in perlapi.pod
+Lookups: CvSTASH; Text: CvSTASH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60633 in perlapi.pod
+Lookups: DECLARATION_FOR_LC_NUMERIC_MANIPULATION; Text: DECLARATION_FOR_LC_NUMERIC_MANIPULATION; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165174 in perlapi.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 283 in perlapi.pod
+Lookups: DO_UTF8; Text: DO_UTF8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 391955 in perlapi.pod
+Lookups: Debugging Utilities; Text: Debugging Utilities; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65809 in perlapi.pod
+Lookups: Display and Dump functions; Text: Display and Dump functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66825 in perlapi.pod
+Lookups: ENTER; Text: ENTER; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12769 in perlapi.pod
+Lookups: ENTER_with_name(name); Text: ENTER_with_name(name); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12904 in perlapi.pod
+Lookups: EXTEND; Text: EXTEND; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288128 in perlapi.pod
+Lookups: Embedding Functions; Text: Embedding Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 70588 in perlapi.pod
+Lookups: Exception Handling (simple) Macros; Text: Exception Handling (simple) Macros; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 90266 in perlapi.pod
+Lookups: FREETMPS; Text: FREETMPS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13680 in perlapi.pod
+Lookups: Functions in file pp_sort.c; Text: Functions in file pp_sort.c; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 91054 in perlapi.pod
+Lookups: Functions in file scope.c; Text: Functions in file scope.c; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 91383 in perlapi.pod
+Lookups: Functions in file vutil.c; Text: Functions in file vutil.c; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 91792 in perlapi.pod
+Lookups: GIMME; Text: GIMME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96069 in perlapi.pod
+Lookups: GIMME_V; Text: GIMME_V; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96310 in perlapi.pod
+Lookups: GV Functions; Text: GV Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 102100 in perlapi.pod
+Lookups: G_ARRAY; Text: G_ARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95639 in perlapi.pod
+Lookups: G_DISCARD; Text: G_DISCARD; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95782 in perlapi.pod
+Lookups: G_EVAL; Text: G_EVAL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95936 in perlapi.pod
+Lookups: G_NOARGS; Text: G_NOARGS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96569 in perlapi.pod
+Lookups: G_SCALAR; Text: G_SCALAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96708 in perlapi.pod
+Lookups: G_VOID; Text: G_VOID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96856 in perlapi.pod
+Lookups: GetVars; Text: GetVars; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462540 in perlapi.pod
+Lookups: Global Variables; Text: Global Variables; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 96991 in perlapi.pod
+Lookups: GvAV; Text: GvAV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102417 in perlapi.pod
+Lookups: GvCV; Text: GvCV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102850 in perlapi.pod
+Lookups: GvHV; Text: GvHV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107675 in perlapi.pod
+Lookups: GvSV; Text: GvSV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111353 in perlapi.pod
+Lookups: Gv_AMupdate; Text: Gv_AMupdate; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462566 in perlapi.pod
+Lookups: HEf_SVKEY; Text: HEf_SVKEY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114069 in perlapi.pod
+Lookups: Handy Values; Text: Handy Values; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 111851 in perlapi.pod
+Lookups: Hash Manipulation Functions; Text: Hash Manipulation Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 112509 in perlapi.pod
+Lookups: HeHASH; Text: HeHASH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114342 in perlapi.pod
+Lookups: HeKEY; Text: HeKEY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114473 in perlapi.pod
+Lookups: HeKLEN; Text: HeKLEN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114820 in perlapi.pod
+Lookups: HePV; Text: HePV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115133 in perlapi.pod
+Lookups: HeSVKEY; Text: HeSVKEY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116026 in perlapi.pod
+Lookups: HeSVKEY_force; Text: HeSVKEY_force; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116199 in perlapi.pod
+Lookups: HeSVKEY_set; Text: HeSVKEY_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116427 in perlapi.pod
+Lookups: HeUTF8; Text: HeUTF8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116674 in perlapi.pod
+Lookups: HeVAL; Text: HeVAL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117085 in perlapi.pod
+Lookups: Hook manipulation; Text: Hook manipulation; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 131754 in perlapi.pod
+Lookups: HvENAME; Text: HvENAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120518 in perlapi.pod
+Lookups: HvENAMELEN; Text: HvENAMELEN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120978 in perlapi.pod
+Lookups: HvENAMEUTF8; Text: HvENAMEUTF8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121125 in perlapi.pod
+Lookups: HvNAME; Text: HvNAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127025 in perlapi.pod
+Lookups: HvNAMELEN; Text: HvNAMELEN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127220 in perlapi.pod
+Lookups: HvNAMEUTF8; Text: HvNAMEUTF8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127354 in perlapi.pod
+Lookups: I18N::Langinfo, items CRNCYSTR and THOUSEP; Text: I18N::Langinfo, items CRNCYSTR and THOUSEP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 176598 in perlapi.pod
+Lookups: LEAVE; Text: LEAVE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13843 in perlapi.pod
+Lookups: LEAVE_with_name(name); Text: LEAVE_with_name(name); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13978 in perlapi.pod
+Lookups: LINKLIST; Text: LINKLIST; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253196 in perlapi.pod
+Lookups: Lexer interface; Text: Lexer interface; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 134408 in perlapi.pod
+Lookups: Locale-related functions and macros; Text: Locale-related functions and macros; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 165121 in perlapi.pod
+Lookups: MARK; Text: MARK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288377 in perlapi.pod
+Lookups: MRO Functions; Text: MRO Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 208973 in perlapi.pod
+Lookups: MULTICALL; Text: MULTICALL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 210917 in perlapi.pod
+Lookups: Magical Functions; Text: Magical Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 179010 in perlapi.pod
+Lookups: Memory Management; Text: Memory Management; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 184840 in perlapi.pod
+Lookups: Miscellaneous Functions; Text: Miscellaneous Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 192087 in perlapi.pod
+Lookups: Move; Text: Move; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185418 in perlapi.pod
+Lookups: MoveD; Text: MoveD; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185750 in perlapi.pod
+Lookups: Multicall Functions; Text: Multicall Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 210717 in perlapi.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 207 in perlapi.pod
+Lookups: Newx; Text: Newx; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 185956 in perlapi.pod
+Lookups: Newxc; Text: Newxc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 186513 in perlapi.pod
+Lookups: Newxz; Text: Newxz; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 186781 in perlapi.pod
+Lookups: Nullav; Text: Nullav; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111881 in perlapi.pod
+Lookups: Nullch; Text: Nullch; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111998 in perlapi.pod
+Lookups: Nullcv; Text: Nullcv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112136 in perlapi.pod
+Lookups: Nullhv; Text: Nullhv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112253 in perlapi.pod
+Lookups: Nullsv; Text: Nullsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112370 in perlapi.pod
+Lookups: Numeric functions; Text: Numeric functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 211424 in perlapi.pod
+Lookups: OP_CLASS; Text: OP_CLASS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 259083 in perlapi.pod
+Lookups: OP_DESC; Text: OP_DESC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260530 in perlapi.pod
+Lookups: OP_NAME; Text: OP_NAME; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262899 in perlapi.pod
+Lookups: OP_TYPE_IS; Text: OP_TYPE_IS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267363 in perlapi.pod
+Lookups: OP_TYPE_IS_OR_WAS; Text: OP_TYPE_IS_OR_WAS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 267703 in perlapi.pod
+Lookups: ORIGMARK; Text: ORIGMARK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290936 in perlapi.pod
+Lookups: Obsolete backwards compatibility functions; Text: Obsolete backwards compatibility functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 219512 in perlapi.pod
+Lookups: OpHAS_SIBLING; Text: OpHAS_SIBLING; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260827 in perlapi.pod
+Lookups: OpLASTSIB_set; Text: OpLASTSIB_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260962 in perlapi.pod
+Lookups: OpMAYBESIB_set; Text: OpMAYBESIB_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262337 in perlapi.pod
+Lookups: OpMORESIB_set; Text: OpMORESIB_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 262618 in perlapi.pod
+Lookups: OpSIBLING; Text: OpSIBLING; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264654 in perlapi.pod
+Lookups: Optree Manipulation Functions; Text: Optree Manipulation Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 243301 in perlapi.pod
+Lookups: Optree construction; Text: Optree construction; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 228776 in perlapi.pod
+Lookups: Pack and Unpack; Text: Pack and Unpack; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 270264 in perlapi.pod
+Lookups: Pad Data Structures; Text: Pad Data Structures; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 271440 in perlapi.pod
+Lookups: PadARRAY; Text: PadARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 276647 in perlapi.pod
+Lookups: PadMAX; Text: PadMAX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 278759 in perlapi.pod
+Lookups: PadlistARRAY; Text: PadlistARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 277103 in perlapi.pod
+Lookups: PadlistMAX; Text: PadlistMAX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 277435 in perlapi.pod
+Lookups: PadlistNAMES; Text: PadlistNAMES; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 277785 in perlapi.pod
+Lookups: PadlistNAMESARRAY; Text: PadlistNAMESARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 278025 in perlapi.pod
+Lookups: PadlistNAMESMAX; Text: PadlistNAMESMAX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 278264 in perlapi.pod
+Lookups: PadlistREFCNT; Text: PadlistREFCNT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 278500 in perlapi.pod
+Lookups: PadnameLEN; Text: PadnameLEN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 278961 in perlapi.pod
+Lookups: PadnamePV; Text: PadnamePV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 280157 in perlapi.pod
+Lookups: PadnameREFCNT; Text: PadnameREFCNT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 280418 in perlapi.pod
+Lookups: PadnameREFCNT_dec; Text: PadnameREFCNT_dec; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 280648 in perlapi.pod
+Lookups: PadnameSV; Text: PadnameSV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 280895 in perlapi.pod
+Lookups: PadnameUTF8; Text: PadnameUTF8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 281110 in perlapi.pod
+Lookups: PadnamelistARRAY; Text: PadnamelistARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 279168 in perlapi.pod
+Lookups: PadnamelistMAX; Text: PadnamelistMAX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 279404 in perlapi.pod
+Lookups: PadnamelistREFCNT; Text: PadnamelistREFCNT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 279637 in perlapi.pod
+Lookups: PadnamelistREFCNT_dec; Text: PadnamelistREFCNT_dec; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 279889 in perlapi.pod
+Lookups: Per-Interpreter Variables; Text: Per-Interpreter Variables; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 282784 in perlapi.pod
+Lookups: Perl API; Text: DESCRIPTION; Tail: (Perl API); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 283 in perlapi.pod
+Lookups: PerlIO_clearerr; Text: PerlIO_clearerr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462600 in perlapi.pod
+Lookups: PerlIO_close; Text: PerlIO_close; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462642 in perlapi.pod
+Lookups: PerlIO_context_layers; Text: PerlIO_context_layers; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462678 in perlapi.pod
+Lookups: PerlIO_eof; Text: PerlIO_eof; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462732 in perlapi.pod
+Lookups: PerlIO_error; Text: PerlIO_error; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462764 in perlapi.pod
+Lookups: PerlIO_fileno; Text: PerlIO_fileno; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462800 in perlapi.pod
+Lookups: PerlIO_fill; Text: PerlIO_fill; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462838 in perlapi.pod
+Lookups: PerlIO_flush; Text: PerlIO_flush; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462872 in perlapi.pod
+Lookups: PerlIO_get_base; Text: PerlIO_get_base; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462908 in perlapi.pod
+Lookups: PerlIO_get_bufsiz; Text: PerlIO_get_bufsiz; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462950 in perlapi.pod
+Lookups: PerlIO_get_cnt; Text: PerlIO_get_cnt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 462996 in perlapi.pod
+Lookups: PerlIO_get_ptr; Text: PerlIO_get_ptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463036 in perlapi.pod
+Lookups: PerlIO_read; Text: PerlIO_read; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463076 in perlapi.pod
+Lookups: PerlIO_seek; Text: PerlIO_seek; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463110 in perlapi.pod
+Lookups: PerlIO_set_cnt; Text: PerlIO_set_cnt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463144 in perlapi.pod
+Lookups: PerlIO_set_ptrcnt; Text: PerlIO_set_ptrcnt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463184 in perlapi.pod
+Lookups: PerlIO_setlinebuf; Text: PerlIO_setlinebuf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463230 in perlapi.pod
+Lookups: PerlIO_stderr; Text: PerlIO_stderr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463276 in perlapi.pod
+Lookups: PerlIO_stdin; Text: PerlIO_stdin; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463314 in perlapi.pod
+Lookups: PerlIO_stdout; Text: PerlIO_stdout; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463350 in perlapi.pod
+Lookups: PerlIO_tell; Text: PerlIO_tell; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463388 in perlapi.pod
+Lookups: PerlIO_unread; Text: PerlIO_unread; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463422 in perlapi.pod
+Lookups: PerlIO_write; Text: PerlIO_write; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463460 in perlapi.pod
+Lookups: Perl_langinfo; Text: Perl_langinfo; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165682 in perlapi.pod
+Lookups: Perl_setlocale; Text: Perl_setlocale; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170256 in perlapi.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 475125 in perlapi.pod
+Lookups: UTF8_IS_NONCHAR; Text: UTF8_IS_NONCHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 437586 in perlapi.pod
+Lookups: UTF8_IS_SUPER; Text: UTF8_IS_SUPER; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 438046 in perlapi.pod
+Lookups: UTF8_IS_SURROGATE; Text: UTF8_IS_SURROGATE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 438979 in perlapi.pod
+Lookups: UVCHR_IS_INVARIANT; Text: UVCHR_IS_INVARIANT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 444170 in perlapi.pod
+Lookups: UVCHR_SKIP; Text: UVCHR_SKIP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 444574 in perlapi.pod
+Lookups: Undocumented functions; Text: Undocumented functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 461665 in perlapi.pod
+Lookups: Variables created by xsubpp and xsubpp internal functions; Text: Variables created by xsubpp and xsubpp internal functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 452492 in perlapi.pod
+Lookups: Warning and Dieing; Text: Warning and Dieing; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 453531 in perlapi.pod
+Lookups: XS_APIVERSION_BOOTCHECK; Text: XS_APIVERSION_BOOTCHECK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 452725 in perlapi.pod
+Lookups: XS_VERSION; Text: XS_VERSION; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 453000 in perlapi.pod
+Lookups: XS_VERSION_BOOTCHECK; Text: XS_VERSION_BOOTCHECK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 453209 in perlapi.pod
+Lookups: _variant_byte_number; Text: _variant_byte_number; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463496 in perlapi.pod
+Lookups: alloccopstash; Text: alloccopstash; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243348 in perlapi.pod
+Lookups: amagic_call; Text: amagic_call; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463548 in perlapi.pod
+Lookups: amagic_deref_call; Text: amagic_deref_call; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463582 in perlapi.pod
+Lookups: any_dup; Text: any_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463628 in perlapi.pod
+Lookups: api; Text: DESCRIPTION; Tail: (api); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 283 in perlapi.pod
+Lookups: atfork_lock; Text: atfork_lock; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463654 in perlapi.pod
+Lookups: atfork_unlock; Text: atfork_unlock; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463688 in perlapi.pod
+Lookups: av_arylen_p; Text: av_arylen_p; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463726 in perlapi.pod
+Lookups: av_clear; Text: av_clear; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3009 in perlapi.pod
+Lookups: av_create_and_push; Text: av_create_and_push; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3591 in perlapi.pod
+Lookups: av_create_and_unshift_one; Text: av_create_and_unshift_one; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3978 in perlapi.pod
+Lookups: av_delete; Text: av_delete; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4403 in perlapi.pod
+Lookups: av_exists; Text: av_exists; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4859 in perlapi.pod
+Lookups: av_extend; Text: av_extend; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5153 in perlapi.pod
+Lookups: av_fetch; Text: av_fetch; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5340 in perlapi.pod
+Lookups: av_fill; Text: av_fill; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6058 in perlapi.pod
+Lookups: av_iter_p; Text: av_iter_p; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463760 in perlapi.pod
+Lookups: av_len; Text: av_len; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6554 in perlapi.pod
+Lookups: av_make; Text: av_make; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6883 in perlapi.pod
+Lookups: av_pop; Text: av_pop; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7241 in perlapi.pod
+Lookups: av_push; Text: av_push; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7553 in perlapi.pod
+Lookups: av_shift; Text: av_shift; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7838 in perlapi.pod
+Lookups: av_store; Text: av_store; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8160 in perlapi.pod
+Lookups: av_tindex; Text: av_tindex; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8946 in perlapi.pod
+Lookups: av_top_index; Text: av_top_index; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9061 in perlapi.pod
+Lookups: av_undef; Text: av_undef; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9396 in perlapi.pod
+Lookups: av_unshift; Text: av_unshift; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9765 in perlapi.pod
+Lookups: ax; Text: ax; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62260 in perlapi.pod
+Lookups: block_end; Text: block_end; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243655 in perlapi.pod
+Lookups: block_gimme; Text: block_gimme; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463790 in perlapi.pod
+Lookups: block_start; Text: block_start; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 243926 in perlapi.pod
+Lookups: blockhook_register; Text: blockhook_register; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47378 in perlapi.pod
+Lookups: boolSV; Text: boolSV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 357847 in perlapi.pod
+Lookups: bytes_cmp_utf8; Text: bytes_cmp_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 389203 in perlapi.pod
+Lookups: bytes_from_utf8; Text: bytes_from_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 389844 in perlapi.pod
+Lookups: bytes_to_utf8; Text: bytes_to_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 391099 in perlapi.pod
+Lookups: call_argv; Text: call_argv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11078 in perlapi.pod
+Lookups: call_atexit; Text: call_atexit; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463824 in perlapi.pod
+Lookups: call_list; Text: call_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463858 in perlapi.pod
+Lookups: call_method; Text: call_method; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11493 in perlapi.pod
+Lookups: call_pv; Text: call_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11778 in perlapi.pod
+Lookups: call_sv; Text: call_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12006 in perlapi.pod
+Lookups: caller_cx; Text: caller_cx; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59723 in perlapi.pod
+Lookups: calloc; Text: calloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463888 in perlapi.pod
+Lookups: cast_i32; Text: cast_i32; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463912 in perlapi.pod
+Lookups: cast_iv; Text: cast_iv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463940 in perlapi.pod
+Lookups: cast_ulong; Text: cast_ulong; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463966 in perlapi.pod
+Lookups: cast_uv; Text: cast_uv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 463998 in perlapi.pod
+Lookups: ckWARN2; Text: ckWARN2; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 453870 in perlapi.pod
+Lookups: ckWARN2_d; Text: ckWARN2_d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 455401 in perlapi.pod
+Lookups: ckWARN3; Text: ckWARN3; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 454291 in perlapi.pod
+Lookups: ckWARN3_d; Text: ckWARN3_d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 455650 in perlapi.pod
+Lookups: ckWARN4; Text: ckWARN4; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 454726 in perlapi.pod
+Lookups: ckWARN4_d; Text: ckWARN4_d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 455913 in perlapi.pod
+Lookups: ckWARN; Text: ckWARN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 453567 in perlapi.pod
+Lookups: ckWARN_d; Text: ckWARN_d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 455168 in perlapi.pod
+Lookups: ck_entersub_args_list; Text: ck_entersub_args_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244235 in perlapi.pod
+Lookups: ck_entersub_args_proto; Text: ck_entersub_args_proto; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 244755 in perlapi.pod
+Lookups: ck_entersub_args_proto_or_list; Text: ck_entersub_args_proto_or_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 246185 in perlapi.pod
+Lookups: ck_warner; Text: ck_warner; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464024 in perlapi.pod
+Lookups: ck_warner_d; Text: ck_warner_d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464054 in perlapi.pod
+Lookups: ckwarn; Text: ckwarn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464088 in perlapi.pod
+Lookups: ckwarn_d; Text: ckwarn_d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464112 in perlapi.pod
+Lookups: clear_defarray; Text: clear_defarray; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464140 in perlapi.pod
+Lookups: clone_params_del; Text: clone_params_del; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464180 in perlapi.pod
+Lookups: clone_params_new; Text: clone_params_new; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464224 in perlapi.pod
+Lookups: cop_fetch_label; Text: cop_fetch_label; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112948 in perlapi.pod
+Lookups: cop_hints_2hv; Text: cop_hints_2hv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55297 in perlapi.pod
+Lookups: cop_hints_fetch_pv; Text: cop_hints_fetch_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55570 in perlapi.pod
+Lookups: cop_hints_fetch_pvn; Text: cop_hints_fetch_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55872 in perlapi.pod
+Lookups: cop_hints_fetch_pvs; Text: cop_hints_fetch_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56573 in perlapi.pod
+Lookups: cop_hints_fetch_sv; Text: cop_hints_fetch_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56893 in perlapi.pod
+Lookups: cop_store_label; Text: cop_store_label; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113297 in perlapi.pod
+Lookups: cophh_2hv; Text: cophh_2hv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47865 in perlapi.pod
+Lookups: cophh_copy; Text: cophh_copy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48230 in perlapi.pod
+Lookups: cophh_delete_pv; Text: cophh_delete_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48480 in perlapi.pod
+Lookups: cophh_delete_pvn; Text: cophh_delete_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48855 in perlapi.pod
+Lookups: cophh_delete_pvs; Text: cophh_delete_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49782 in perlapi.pod
+Lookups: cophh_delete_sv; Text: cophh_delete_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50175 in perlapi.pod
+Lookups: cophh_fetch_pv; Text: cophh_fetch_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50514 in perlapi.pod
+Lookups: cophh_fetch_pvn; Text: cophh_fetch_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50880 in perlapi.pod
+Lookups: cophh_fetch_pvs; Text: cophh_fetch_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51653 in perlapi.pod
+Lookups: cophh_fetch_sv; Text: cophh_fetch_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52019 in perlapi.pod
+Lookups: cophh_free; Text: cophh_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52350 in perlapi.pod
+Lookups: cophh_new_empty; Text: cophh_new_empty; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52612 in perlapi.pod
+Lookups: cophh_store_pv; Text: cophh_store_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52867 in perlapi.pod
+Lookups: cophh_store_pvn; Text: cophh_store_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53247 in perlapi.pod
+Lookups: cophh_store_pvs; Text: cophh_store_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54512 in perlapi.pod
+Lookups: cophh_store_sv; Text: cophh_store_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54910 in perlapi.pod
+Lookups: croak; Text: croak; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 456184 in perlapi.pod
+Lookups: croak_memory_wrap; Text: croak_memory_wrap; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464268 in perlapi.pod
+Lookups: croak_no_modify; Text: croak_no_modify; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 457179 in perlapi.pod
+Lookups: croak_nocontext; Text: croak_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464314 in perlapi.pod
+Lookups: croak_sv; Text: croak_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 457472 in perlapi.pod
+Lookups: croak_xs_usage; Text: croak_xs_usage; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 358046 in perlapi.pod
+Lookups: csighandler; Text: csighandler; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464356 in perlapi.pod
+Lookups: custom_op_desc; Text: custom_op_desc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 219720 in perlapi.pod
+Lookups: custom_op_name; Text: custom_op_name; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220015 in perlapi.pod
+Lookups: custom_op_register; Text: custom_op_register; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57198 in perlapi.pod
+Lookups: custom_op_xop; Text: custom_op_xop; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57566 in perlapi.pod
+Lookups: cv_clone; Text: cv_clone; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70625 in perlapi.pod
+Lookups: cv_const_sv; Text: cv_const_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 247685 in perlapi.pod
+Lookups: cv_get_call_checker; Text: cv_get_call_checker; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 248020 in perlapi.pod
+Lookups: cv_get_call_checker_flags; Text: cv_get_call_checker_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 248444 in perlapi.pod
+Lookups: cv_name; Text: cv_name; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71026 in perlapi.pod
+Lookups: cv_set_call_checker; Text: cv_set_call_checker; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 251043 in perlapi.pod
+Lookups: cv_set_call_checker_flags; Text: cv_set_call_checker_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 251495 in perlapi.pod
+Lookups: cv_undef; Text: cv_undef; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71761 in perlapi.pod
+Lookups: cx_dump; Text: cx_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464390 in perlapi.pod
+Lookups: cx_dup; Text: cx_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464416 in perlapi.pod
+Lookups: cxinc; Text: cxinc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464440 in perlapi.pod
+Lookups: dAX; Text: dAX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62730 in perlapi.pod
+Lookups: dAXMARK; Text: dAXMARK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62894 in perlapi.pod
+Lookups: dITEMS; Text: dITEMS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63104 in perlapi.pod
+Lookups: dMARK; Text: dMARK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 287656 in perlapi.pod
+Lookups: dMULTICALL; Text: dMULTICALL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 210754 in perlapi.pod
+Lookups: dORIGMARK; Text: dORIGMARK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 287817 in perlapi.pod
+Lookups: dSP; Text: dSP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 287961 in perlapi.pod
+Lookups: dUNDERBAR; Text: dUNDERBAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63280 in perlapi.pod
+Lookups: dXCPT; Text: dXCPT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90318 in perlapi.pod
+Lookups: dXSARGS; Text: dXSARGS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63568 in perlapi.pod
+Lookups: dXSI32; Text: dXSI32; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63842 in perlapi.pod
+Lookups: deb; Text: deb; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464462 in perlapi.pod
+Lookups: deb_nocontext; Text: deb_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464480 in perlapi.pod
+Lookups: debop; Text: debop; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464518 in perlapi.pod
+Lookups: debprofdump; Text: debprofdump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464540 in perlapi.pod
+Lookups: debstack; Text: debstack; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464574 in perlapi.pod
+Lookups: debstackptrs; Text: debstackptrs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464602 in perlapi.pod
+Lookups: delimcpy; Text: delimcpy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464638 in perlapi.pod
+Lookups: despatch_signals; Text: despatch_signals; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464666 in perlapi.pod
+Lookups: die; Text: die; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 458219 in perlapi.pod
+Lookups: die_nocontext; Text: die_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464710 in perlapi.pod
+Lookups: die_sv; Text: die_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 458468 in perlapi.pod
+Lookups: dirp_dup; Text: dirp_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464748 in perlapi.pod
+Lookups: do_aspawn; Text: do_aspawn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464776 in perlapi.pod
+Lookups: do_binmode; Text: do_binmode; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464806 in perlapi.pod
+Lookups: do_close; Text: do_close; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464838 in perlapi.pod
+Lookups: do_gv_dump; Text: do_gv_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464866 in perlapi.pod
+Lookups: do_gvgv_dump; Text: do_gvgv_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464898 in perlapi.pod
+Lookups: do_hv_dump; Text: do_hv_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464934 in perlapi.pod
+Lookups: do_join; Text: do_join; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464966 in perlapi.pod
+Lookups: do_magic_dump; Text: do_magic_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 464992 in perlapi.pod
+Lookups: do_op_dump; Text: do_op_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465030 in perlapi.pod
+Lookups: do_open9; Text: do_open9; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465088 in perlapi.pod
+Lookups: do_open; Text: do_open; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465062 in perlapi.pod
+Lookups: do_openn; Text: do_openn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465116 in perlapi.pod
+Lookups: do_pmop_dump; Text: do_pmop_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465144 in perlapi.pod
+Lookups: do_spawn; Text: do_spawn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465180 in perlapi.pod
+Lookups: do_spawn_nowait; Text: do_spawn_nowait; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465208 in perlapi.pod
+Lookups: do_sprintf; Text: do_sprintf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465250 in perlapi.pod
+Lookups: do_sv_dump; Text: do_sv_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465282 in perlapi.pod
+Lookups: doing_taint; Text: doing_taint; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465314 in perlapi.pod
+Lookups: doref; Text: doref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465348 in perlapi.pod
+Lookups: dounwind; Text: dounwind; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465370 in perlapi.pod
+Lookups: dowantarray; Text: dowantarray; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465398 in perlapi.pod
+Lookups: dump_all; Text: dump_all; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65846 in perlapi.pod
+Lookups: dump_c_backtrace; Text: dump_c_backtrace; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192128 in perlapi.pod
+Lookups: dump_eval; Text: dump_eval; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465432 in perlapi.pod
+Lookups: dump_form; Text: dump_form; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465462 in perlapi.pod
+Lookups: dump_indent; Text: dump_indent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465492 in perlapi.pod
+Lookups: dump_mstats; Text: dump_mstats; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465526 in perlapi.pod
+Lookups: dump_packsubs; Text: dump_packsubs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66089 in perlapi.pod
+Lookups: dump_sub; Text: dump_sub; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465560 in perlapi.pod
+Lookups: dump_vindent; Text: dump_vindent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465588 in perlapi.pod
+Lookups: eval_pv; Text: eval_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13137 in perlapi.pod
+Lookups: eval_sv; Text: eval_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13385 in perlapi.pod
+Lookups: fbm_compile; Text: fbm_compile; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192393 in perlapi.pod
+Lookups: fbm_instr; Text: fbm_instr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 192609 in perlapi.pod
+Lookups: filter_add; Text: filter_add; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465624 in perlapi.pod
+Lookups: filter_del; Text: filter_del; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465656 in perlapi.pod
+Lookups: filter_read; Text: filter_read; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465688 in perlapi.pod
+Lookups: find_runcv; Text: find_runcv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60999 in perlapi.pod
+Lookups: find_rundefsv; Text: find_rundefsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72120 in perlapi.pod
+Lookups: find_rundefsvoffset; Text: find_rundefsvoffset; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72251 in perlapi.pod
+Lookups: flag; Text: flag; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 433302 in perlapi.pod
+Lookups: flag; Text: flag; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 450168 in perlapi.pod
+Lookups: foldEQ; Text: foldEQ; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193053 in perlapi.pod
+Lookups: foldEQ_latin1; Text: foldEQ_latin1; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465722 in perlapi.pod
+Lookups: foldEQ_locale; Text: foldEQ_locale; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193447 in perlapi.pod
+Lookups: foldEQ_utf8; Text: foldEQ_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 392292 in perlapi.pod
+Lookups: form; Text: form; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 193742 in perlapi.pod
+Lookups: form_nocontext; Text: form_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465760 in perlapi.pod
+Lookups: fp_dup; Text: fp_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465800 in perlapi.pod
+Lookups: fprintf_nocontext; Text: fprintf_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465824 in perlapi.pod
+Lookups: free_global_struct; Text: free_global_struct; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465870 in perlapi.pod
+Lookups: free_tmps; Text: free_tmps; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465918 in perlapi.pod
+Lookups: get_av; Text: get_av; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10071 in perlapi.pod
+Lookups: get_c_backtrace_dump; Text: get_c_backtrace_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 194388 in perlapi.pod
+Lookups: get_context; Text: get_context; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465948 in perlapi.pod
+Lookups: get_cv; Text: get_cv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61443 in perlapi.pod
+Lookups: get_cvn_flags; Text: get_cvn_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61673 in perlapi.pod
+Lookups: get_hv; Text: get_hv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113669 in perlapi.pod
+Lookups: get_mstats; Text: get_mstats; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 465982 in perlapi.pod
+Lookups: get_op_descs; Text: get_op_descs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466014 in perlapi.pod
+Lookups: get_op_names; Text: get_op_names; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466050 in perlapi.pod
+Lookups: get_ppaddr; Text: get_ppaddr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466086 in perlapi.pod
+Lookups: get_sv; Text: get_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 358604 in perlapi.pod
+Lookups: get_vtbl; Text: get_vtbl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466118 in perlapi.pod
+Lookups: getcwd_sv; Text: getcwd_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 194256 in perlapi.pod
+Lookups: gp_dup; Text: gp_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466146 in perlapi.pod
+Lookups: gp_free; Text: gp_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466170 in perlapi.pod
+Lookups: gp_ref; Text: gp_ref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466196 in perlapi.pod
+Lookups: grok_bin; Text: grok_bin; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 211459 in perlapi.pod
+Lookups: grok_hex; Text: grok_hex; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 212691 in perlapi.pod
+Lookups: grok_infnan; Text: grok_infnan; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 213919 in perlapi.pod
+Lookups: grok_number; Text: grok_number; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 214532 in perlapi.pod
+Lookups: grok_number_flags; Text: grok_number_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 214740 in perlapi.pod
+Lookups: grok_numeric_radix; Text: grok_numeric_radix; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216200 in perlapi.pod
+Lookups: grok_oct; Text: grok_oct; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216424 in perlapi.pod
+Lookups: gv_AVadd; Text: gv_AVadd; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466220 in perlapi.pod
+Lookups: gv_HVadd; Text: gv_HVadd; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466248 in perlapi.pod
+Lookups: gv_IOadd; Text: gv_IOadd; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466276 in perlapi.pod
+Lookups: gv_SVadd; Text: gv_SVadd; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466304 in perlapi.pod
+Lookups: gv_add_by_type; Text: gv_add_by_type; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466332 in perlapi.pod
+Lookups: gv_autoload4; Text: gv_autoload4; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466372 in perlapi.pod
+Lookups: gv_autoload_pv; Text: gv_autoload_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466408 in perlapi.pod
+Lookups: gv_autoload_pvn; Text: gv_autoload_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466448 in perlapi.pod
+Lookups: gv_autoload_sv; Text: gv_autoload_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466490 in perlapi.pod
+Lookups: gv_check; Text: gv_check; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466530 in perlapi.pod
+Lookups: gv_const_sv; Text: gv_const_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102517 in perlapi.pod
+Lookups: gv_dump; Text: gv_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466558 in perlapi.pod
+Lookups: gv_efullname3; Text: gv_efullname3; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466620 in perlapi.pod
+Lookups: gv_efullname4; Text: gv_efullname4; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466658 in perlapi.pod
+Lookups: gv_efullname; Text: gv_efullname; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466584 in perlapi.pod
+Lookups: gv_fetchfile; Text: gv_fetchfile; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466696 in perlapi.pod
+Lookups: gv_fetchfile_flags; Text: gv_fetchfile_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466732 in perlapi.pod
+Lookups: gv_fetchmeth; Text: gv_fetchmeth; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102950 in perlapi.pod
+Lookups: gv_fetchmeth_autoload; Text: gv_fetchmeth_autoload; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104484 in perlapi.pod
+Lookups: gv_fetchmeth_pv; Text: gv_fetchmeth_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104785 in perlapi.pod
+Lookups: gv_fetchmeth_pv_autoload; Text: gv_fetchmeth_pv_autoload; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106737 in perlapi.pod
+Lookups: gv_fetchmeth_pvn; Text: gv_fetchmeth_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105055 in perlapi.pod
+Lookups: gv_fetchmeth_pvn_autoload; Text: gv_fetchmeth_pvn_autoload; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106120 in perlapi.pod
+Lookups: gv_fetchmeth_sv; Text: gv_fetchmeth_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107078 in perlapi.pod
+Lookups: gv_fetchmeth_sv_autoload; Text: gv_fetchmeth_sv_autoload; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107354 in perlapi.pod
+Lookups: gv_fetchmethod; Text: gv_fetchmethod; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220304 in perlapi.pod
+Lookups: gv_fetchmethod_autoload; Text: gv_fetchmethod_autoload; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103162 in perlapi.pod
+Lookups: gv_fetchpv; Text: gv_fetchpv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466780 in perlapi.pod
+Lookups: gv_fetchpvn_flags; Text: gv_fetchpvn_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466812 in perlapi.pod
+Lookups: gv_fetchsv; Text: gv_fetchsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466858 in perlapi.pod
+Lookups: gv_fullname3; Text: gv_fullname3; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466924 in perlapi.pod
+Lookups: gv_fullname4; Text: gv_fullname4; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466960 in perlapi.pod
+Lookups: gv_fullname; Text: gv_fullname; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466890 in perlapi.pod
+Lookups: gv_handler; Text: gv_handler; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 466996 in perlapi.pod
+Lookups: gv_init; Text: gv_init; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107775 in perlapi.pod
+Lookups: gv_init_pv; Text: gv_init_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108117 in perlapi.pod
+Lookups: gv_init_pvn; Text: gv_init_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108385 in perlapi.pod
+Lookups: gv_init_sv; Text: gv_init_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109522 in perlapi.pod
+Lookups: gv_name_set; Text: gv_name_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467028 in perlapi.pod
+Lookups: gv_stashpv; Text: gv_stashpv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 109799 in perlapi.pod
+Lookups: gv_stashpvn; Text: gv_stashpvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110048 in perlapi.pod
+Lookups: gv_stashpvs; Text: gv_stashpvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110877 in perlapi.pod
+Lookups: gv_stashsv; Text: gv_stashsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111082 in perlapi.pod
+Lookups: he_dup; Text: he_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467062 in perlapi.pod
+Lookups: hek_dup; Text: hek_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467086 in perlapi.pod
+Lookups: hv_assert; Text: hv_assert; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117286 in perlapi.pod
+Lookups: hv_bucket_ratio; Text: hv_bucket_ratio; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117431 in perlapi.pod
+Lookups: hv_clear; Text: hv_clear; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118059 in perlapi.pod
+Lookups: hv_clear_placeholders; Text: hv_clear_placeholders; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 118339 in perlapi.pod
+Lookups: hv_common; Text: hv_common; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467112 in perlapi.pod
+Lookups: hv_common_key_len; Text: hv_common_key_len; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467142 in perlapi.pod
+Lookups: hv_copy_hints_hv; Text: hv_copy_hints_hv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119020 in perlapi.pod
+Lookups: hv_delayfree_ent; Text: hv_delayfree_ent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467188 in perlapi.pod
+Lookups: hv_delete; Text: hv_delete; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119472 in perlapi.pod
+Lookups: hv_delete_ent; Text: hv_delete_ent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120015 in perlapi.pod
+Lookups: hv_eiter_p; Text: hv_eiter_p; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467232 in perlapi.pod
+Lookups: hv_eiter_set; Text: hv_eiter_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467264 in perlapi.pod
+Lookups: hv_exists; Text: hv_exists; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121289 in perlapi.pod
+Lookups: hv_exists_ent; Text: hv_exists_ent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121605 in perlapi.pod
+Lookups: hv_fetch; Text: hv_fetch; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121878 in perlapi.pod
+Lookups: hv_fetch_ent; Text: hv_fetch_ent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122886 in perlapi.pod
+Lookups: hv_fetchs; Text: hv_fetchs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122672 in perlapi.pod
+Lookups: hv_fill; Text: hv_fill; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123630 in perlapi.pod
+Lookups: hv_free_ent; Text: hv_free_ent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467300 in perlapi.pod
+Lookups: hv_iterinit; Text: hv_iterinit; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124059 in perlapi.pod
+Lookups: hv_iterkey; Text: hv_iterkey; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124588 in perlapi.pod
+Lookups: hv_iterkeysv; Text: hv_iterkeysv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124786 in perlapi.pod
+Lookups: hv_iternext; Text: hv_iternext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125052 in perlapi.pod
+Lookups: hv_iternext_flags; Text: hv_iternext_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125909 in perlapi.pod
+Lookups: hv_iternextsv; Text: hv_iternextsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125705 in perlapi.pod
+Lookups: hv_iterval; Text: hv_iterval; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126686 in perlapi.pod
+Lookups: hv_ksplit; Text: hv_ksplit; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467334 in perlapi.pod
+Lookups: hv_magic; Text: hv_magic; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126878 in perlapi.pod
+Lookups: hv_name_set; Text: hv_name_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467364 in perlapi.pod
+Lookups: hv_placeholders_get; Text: hv_placeholders_get; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467398 in perlapi.pod
+Lookups: hv_placeholders_set; Text: hv_placeholders_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467448 in perlapi.pod
+Lookups: hv_rand_set; Text: hv_rand_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467498 in perlapi.pod
+Lookups: hv_riter_p; Text: hv_riter_p; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467532 in perlapi.pod
+Lookups: hv_riter_set; Text: hv_riter_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467564 in perlapi.pod
+Lookups: hv_scalar; Text: hv_scalar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127505 in perlapi.pod
+Lookups: hv_store; Text: hv_store; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127891 in perlapi.pod
+Lookups: hv_store_ent; Text: hv_store_ent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129630 in perlapi.pod
+Lookups: hv_stores; Text: hv_stores; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129400 in perlapi.pod
+Lookups: hv_undef; Text: hv_undef; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131257 in perlapi.pod
+Lookups: ibcmp; Text: ibcmp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 195481 in perlapi.pod
+Lookups: ibcmp_locale; Text: ibcmp_locale; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 195631 in perlapi.pod
+Lookups: ibcmp_utf8; Text: ibcmp_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467600 in perlapi.pod
+Lookups: init_global_struct; Text: init_global_struct; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467632 in perlapi.pod
+Lookups: init_stacks; Text: init_stacks; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467680 in perlapi.pod
+Lookups: init_tm; Text: init_tm; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467714 in perlapi.pod
+Lookups: instr; Text: instr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467740 in perlapi.pod
+Lookups: intro_my; Text: intro_my; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72817 in perlapi.pod
+Lookups: isALPHA; Text: isALPHA; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33863 in perlapi.pod
+Lookups: isALPHANUMERIC; Text: isALPHANUMERIC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34293 in perlapi.pod
+Lookups: isASCII; Text: isASCII; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34819 in perlapi.pod
+Lookups: isBLANK; Text: isBLANK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35979 in perlapi.pod
+Lookups: isC9_STRICT_UTF8_CHAR; Text: isC9_STRICT_UTF8_CHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 397479 in perlapi.pod
+Lookups: isCNTRL; Text: isCNTRL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36610 in perlapi.pod
+Lookups: isDIGIT; Text: isDIGIT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37113 in perlapi.pod
+Lookups: isGRAPH; Text: isGRAPH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37567 in perlapi.pod
+Lookups: isIDCONT; Text: isIDCONT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37993 in perlapi.pod
+Lookups: isIDFIRST; Text: isIDFIRST; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38630 in perlapi.pod
+Lookups: isLOWER; Text: isLOWER; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39258 in perlapi.pod
+Lookups: isOCTAL; Text: isOCTAL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39686 in perlapi.pod
+Lookups: isPRINT; Text: isPRINT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39951 in perlapi.pod
+Lookups: isPSXSPC; Text: isPSXSPC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40379 in perlapi.pod
+Lookups: isPUNCT; Text: isPUNCT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41227 in perlapi.pod
+Lookups: isSPACE; Text: isSPACE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41812 in perlapi.pod
+Lookups: isSTRICT_UTF8_CHAR; Text: isSTRICT_UTF8_CHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 399110 in perlapi.pod
+Lookups: isUPPER; Text: isUPPER; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42681 in perlapi.pod
+Lookups: isUTF8_CHAR; Text: isUTF8_CHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 413711 in perlapi.pod
+Lookups: isUTF8_CHAR_flags; Text: isUTF8_CHAR_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 415322 in perlapi.pod
+Lookups: isWORDCHAR; Text: isWORDCHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43110 in perlapi.pod
+Lookups: isXDIGIT; Text: isXDIGIT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44085 in perlapi.pod
+Lookups: is_ascii_string; Text: is_ascii_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 394529 in perlapi.pod
+Lookups: is_c9strict_utf8_string; Text: is_c9strict_utf8_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 394963 in perlapi.pod
+Lookups: is_c9strict_utf8_string_loc; Text: is_c9strict_utf8_string_loc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 396387 in perlapi.pod
+Lookups: is_c9strict_utf8_string_loclen; Text: is_c9strict_utf8_string_loclen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 396872 in perlapi.pod
+Lookups: is_invariant_string; Text: is_invariant_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 398759 in perlapi.pod
+Lookups: is_lvalue_sub; Text: is_lvalue_sub; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467762 in perlapi.pod
+Lookups: is_safe_syscall; Text: is_safe_syscall; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 195824 in perlapi.pod
+Lookups: is_strict_utf8_string; Text: is_strict_utf8_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 400470 in perlapi.pod
+Lookups: is_strict_utf8_string_loc; Text: is_strict_utf8_string_loc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 401783 in perlapi.pod
+Lookups: is_strict_utf8_string_loclen; Text: is_strict_utf8_string_loclen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 402254 in perlapi.pod
+Lookups: is_utf8_char; Text: is_utf8_char; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 220466 in perlapi.pod
+Lookups: is_utf8_char_buf; Text: is_utf8_char_buf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221149 in perlapi.pod
+Lookups: is_utf8_fixed_width_buf_flags; Text: is_utf8_fixed_width_buf_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 402845 in perlapi.pod
+Lookups: is_utf8_fixed_width_buf_loc_flags; Text: is_utf8_fixed_width_buf_loc_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404207 in perlapi.pod
+Lookups: is_utf8_fixed_width_buf_loclen_flags; Text: is_utf8_fixed_width_buf_loclen_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 403823 in perlapi.pod
+Lookups: is_utf8_invariant_string; Text: is_utf8_invariant_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404785 in perlapi.pod
+Lookups: is_utf8_invariant_string_loc; Text: is_utf8_invariant_string_loc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 406128 in perlapi.pod
+Lookups: is_utf8_string; Text: is_utf8_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 406606 in perlapi.pod
+Lookups: is_utf8_string_flags; Text: is_utf8_string_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407707 in perlapi.pod
+Lookups: is_utf8_string_loc; Text: is_utf8_string_loc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409322 in perlapi.pod
+Lookups: is_utf8_string_loc_flags; Text: is_utf8_string_loc_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 410867 in perlapi.pod
+Lookups: is_utf8_string_loclen; Text: is_utf8_string_loclen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409750 in perlapi.pod
+Lookups: is_utf8_string_loclen_flags; Text: is_utf8_string_loclen_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 410237 in perlapi.pod
+Lookups: is_utf8_valid_partial_char; Text: is_utf8_valid_partial_char; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 411375 in perlapi.pod
+Lookups: is_utf8_valid_partial_char_flags; Text: is_utf8_valid_partial_char_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 412672 in perlapi.pod
+Lookups: isinfnan; Text: isinfnan; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217512 in perlapi.pod
+Lookups: items; Text: items; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64024 in perlapi.pod
+Lookups: ix; Text: ix; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64228 in perlapi.pod
+Lookups: leave_scope; Text: leave_scope; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467800 in perlapi.pod
+Lookups: lex_bufutf8; Text: lex_bufutf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 134519 in perlapi.pod
+Lookups: lex_discard_to; Text: lex_discard_to; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 135712 in perlapi.pod
+Lookups: lex_grow_linestr; Text: lex_grow_linestr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 136715 in perlapi.pod
+Lookups: lex_next_chunk; Text: lex_next_chunk; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 137438 in perlapi.pod
+Lookups: lex_peek_unichar; Text: lex_peek_unichar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 138480 in perlapi.pod
+Lookups: lex_read_space; Text: lex_read_space; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 139321 in perlapi.pod
+Lookups: lex_read_to; Text: lex_read_to; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140094 in perlapi.pod
+Lookups: lex_read_unichar; Text: lex_read_unichar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140689 in perlapi.pod
+Lookups: lex_start; Text: lex_start; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 141617 in perlapi.pod
+Lookups: lex_stuff_pv; Text: lex_stuff_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 142841 in perlapi.pod
+Lookups: lex_stuff_pvn; Text: lex_stuff_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 143980 in perlapi.pod
+Lookups: lex_stuff_pvs; Text: lex_stuff_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 145115 in perlapi.pod
+Lookups: lex_stuff_sv; Text: lex_stuff_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 145411 in perlapi.pod
+Lookups: lex_unstuff; Text: lex_unstuff; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146380 in perlapi.pod
+Lookups: load_module; Text: load_module; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73064 in perlapi.pod
+Lookups: load_module_nocontext; Text: load_module_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467834 in perlapi.pod
+Lookups: looks_like_number; Text: looks_like_number; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 299564 in perlapi.pod
+Lookups: mPUSHi; Text: mPUSHi; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288486 in perlapi.pod
+Lookups: mPUSHn; Text: mPUSHn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288721 in perlapi.pod
+Lookups: mPUSHp; Text: mPUSHp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 288954 in perlapi.pod
+Lookups: mPUSHs; Text: mPUSHs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 289250 in perlapi.pod
+Lookups: mPUSHu; Text: mPUSHu; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 289489 in perlapi.pod
+Lookups: mXPUSHi; Text: mXPUSHi; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 289734 in perlapi.pod
+Lookups: mXPUSHn; Text: mXPUSHn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 289961 in perlapi.pod
+Lookups: mXPUSHp; Text: mXPUSHp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290186 in perlapi.pod
+Lookups: mXPUSHs; Text: mXPUSHs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290468 in perlapi.pod
+Lookups: mXPUSHu; Text: mXPUSHu; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290700 in perlapi.pod
+Lookups: magic_dump; Text: magic_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467888 in perlapi.pod
+Lookups: malloc; Text: malloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467920 in perlapi.pod
+Lookups: markstack_grow; Text: markstack_grow; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467944 in perlapi.pod
+Lookups: memEQ; Text: memEQ; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 196253 in perlapi.pod
+Lookups: memNE; Text: memNE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 196560 in perlapi.pod
+Lookups: mess; Text: mess; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 196871 in perlapi.pod
+Lookups: mess_nocontext; Text: mess_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 467984 in perlapi.pod
+Lookups: mess_sv; Text: mess_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 197368 in perlapi.pod
+Lookups: mfree; Text: mfree; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468024 in perlapi.pod
+Lookups: mg_clear; Text: mg_clear; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179045 in perlapi.pod
+Lookups: mg_copy; Text: mg_copy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179200 in perlapi.pod
+Lookups: mg_dup; Text: mg_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468046 in perlapi.pod
+Lookups: mg_find; Text: mg_find; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179391 in perlapi.pod
+Lookups: mg_findext; Text: mg_findext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179567 in perlapi.pod
+Lookups: mg_free; Text: mg_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179808 in perlapi.pod
+Lookups: mg_free_type; Text: mg_free_type; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 180243 in perlapi.pod
+Lookups: mg_freeext; Text: mg_freeext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 179951 in perlapi.pod
+Lookups: mg_get; Text: mg_get; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 180420 in perlapi.pod
+Lookups: mg_length; Text: mg_length; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 180611 in perlapi.pod
+Lookups: mg_magical; Text: mg_magical; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 181149 in perlapi.pod
+Lookups: mg_set; Text: mg_set; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 181301 in perlapi.pod
+Lookups: mg_size; Text: mg_size; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468070 in perlapi.pod
+Lookups: mini_mktime; Text: mini_mktime; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468096 in perlapi.pod
+Lookups: moreswitches; Text: moreswitches; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468130 in perlapi.pod
+Lookups: mro_get_from_name; Text: mro_get_from_name; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468166 in perlapi.pod
+Lookups: mro_get_linear_isa; Text: mro_get_linear_isa; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209081 in perlapi.pod
+Lookups: mro_get_private_data; Text: mro_get_private_data; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468212 in perlapi.pod
+Lookups: mro_method_changed_in; Text: mro_method_changed_in; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 209617 in perlapi.pod
+Lookups: mro_register; Text: mro_register; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 210523 in perlapi.pod
+Lookups: mro_set_mro; Text: mro_set_mro; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468264 in perlapi.pod
+Lookups: mro_set_private_data; Text: mro_set_private_data; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468298 in perlapi.pod
+Lookups: my_atof2; Text: my_atof2; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468376 in perlapi.pod
+Lookups: my_atof; Text: my_atof; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468350 in perlapi.pod
+Lookups: my_chsize; Text: my_chsize; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468404 in perlapi.pod
+Lookups: my_cxt_index; Text: my_cxt_index; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468434 in perlapi.pod
+Lookups: my_cxt_init; Text: my_cxt_init; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468470 in perlapi.pod
+Lookups: my_dirfd; Text: my_dirfd; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468504 in perlapi.pod
+Lookups: my_exit; Text: my_exit; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468532 in perlapi.pod
+Lookups: my_failure_exit; Text: my_failure_exit; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468558 in perlapi.pod
+Lookups: my_fflush_all; Text: my_fflush_all; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468600 in perlapi.pod
+Lookups: my_fork; Text: my_fork; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468638 in perlapi.pod
+Lookups: my_lstat; Text: my_lstat; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468664 in perlapi.pod
+Lookups: my_pclose; Text: my_pclose; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468692 in perlapi.pod
+Lookups: my_popen; Text: my_popen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468722 in perlapi.pod
+Lookups: my_popen_list; Text: my_popen_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468750 in perlapi.pod
+Lookups: my_setenv; Text: my_setenv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468788 in perlapi.pod
+Lookups: my_snprintf; Text: my_snprintf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198442 in perlapi.pod
+Lookups: my_socketpair; Text: my_socketpair; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468818 in perlapi.pod
+Lookups: my_stat; Text: my_stat; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468856 in perlapi.pod
+Lookups: my_strftime; Text: my_strftime; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468882 in perlapi.pod
+Lookups: my_strlcat; Text: my_strlcat; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 198952 in perlapi.pod
+Lookups: my_strlcpy; Text: my_strlcpy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200009 in perlapi.pod
+Lookups: my_strnlen; Text: my_strnlen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200555 in perlapi.pod
+Lookups: my_vsnprintf; Text: my_vsnprintf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 200983 in perlapi.pod
+Lookups: newANONATTRSUB; Text: newANONATTRSUB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468916 in perlapi.pod
+Lookups: newANONHASH; Text: newANONHASH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468956 in perlapi.pod
+Lookups: newANONLIST; Text: newANONLIST; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 468990 in perlapi.pod
+Lookups: newANONSUB; Text: newANONSUB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469024 in perlapi.pod
+Lookups: newASSIGNOP; Text: newASSIGNOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228813 in perlapi.pod
+Lookups: newATTRSUB; Text: newATTRSUB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469056 in perlapi.pod
+Lookups: newAV; Text: newAV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10581 in perlapi.pod
+Lookups: newAVREF; Text: newAVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469088 in perlapi.pod
+Lookups: newBINOP; Text: newBINOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 229884 in perlapi.pod
+Lookups: newCONDOP; Text: newCONDOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 230494 in perlapi.pod
+Lookups: newCONSTSUB; Text: newCONSTSUB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253579 in perlapi.pod
+Lookups: newCONSTSUB_flags; Text: newCONSTSUB_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 253891 in perlapi.pod
+Lookups: newCVREF; Text: newCVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469116 in perlapi.pod
+Lookups: newDEFSVOP; Text: newDEFSVOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 231122 in perlapi.pod
+Lookups: newFORM; Text: newFORM; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469144 in perlapi.pod
+Lookups: newFOROP; Text: newFOROP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 231254 in perlapi.pod
+Lookups: newGIVENOP; Text: newGIVENOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232232 in perlapi.pod
+Lookups: newGVOP; Text: newGVOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 232734 in perlapi.pod
+Lookups: newGVREF; Text: newGVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469170 in perlapi.pod
+Lookups: newGVgen; Text: newGVgen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469198 in perlapi.pod
+Lookups: newGVgen_flags; Text: newGVgen_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469226 in perlapi.pod
+Lookups: newHV; Text: newHV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 131624 in perlapi.pod
+Lookups: newHVREF; Text: newHVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469266 in perlapi.pod
+Lookups: newHVhv; Text: newHVhv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469294 in perlapi.pod
+Lookups: newIO; Text: newIO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469320 in perlapi.pod
+Lookups: newLISTOP; Text: newLISTOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 233133 in perlapi.pod
+Lookups: newLOGOP; Text: newLOGOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 233955 in perlapi.pod
+Lookups: newLOOPEX; Text: newLOOPEX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234578 in perlapi.pod
+Lookups: newLOOPOP; Text: newLOOPOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 234928 in perlapi.pod
+Lookups: newMETHOP; Text: newMETHOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 235666 in perlapi.pod
+Lookups: newMETHOP_named; Text: newMETHOP_named; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 236281 in perlapi.pod
+Lookups: newMYSUB; Text: newMYSUB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469342 in perlapi.pod
+Lookups: newNULLLIST; Text: newNULLLIST; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 236768 in perlapi.pod
+Lookups: newOP; Text: newOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 236950 in perlapi.pod
+Lookups: newPADNAMELIST; Text: newPADNAMELIST; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74711 in perlapi.pod
+Lookups: newPADNAMEouter; Text: newPADNAMEouter; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75001 in perlapi.pod
+Lookups: newPADNAMEpvn; Text: newPADNAMEpvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75462 in perlapi.pod
+Lookups: newPADOP; Text: newPADOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 237264 in perlapi.pod
+Lookups: newPMOP; Text: newPMOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 237729 in perlapi.pod
+Lookups: newPROG; Text: newPROG; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469370 in perlapi.pod
+Lookups: newPVOP; Text: newPVOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238023 in perlapi.pod
+Lookups: newRANGE; Text: newRANGE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238526 in perlapi.pod
+Lookups: newRV; Text: newRV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469396 in perlapi.pod
+Lookups: newRV_inc; Text: newRV_inc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 359003 in perlapi.pod
+Lookups: newRV_noinc; Text: newRV_noinc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 299903 in perlapi.pod
+Lookups: newSLICEOP; Text: newSLICEOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 239099 in perlapi.pod
+Lookups: newSTATEOP; Text: newSTATEOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 239672 in perlapi.pod
+Lookups: newSUB; Text: newSUB; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469418 in perlapi.pod
+Lookups: newSV; Text: newSV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 300104 in perlapi.pod
+Lookups: newSVOP; Text: newSVOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240456 in perlapi.pod
+Lookups: newSVREF; Text: newSVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469442 in perlapi.pod
+Lookups: newSV_type; Text: newSV_type; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 306232 in perlapi.pod
+Lookups: newSVhek; Text: newSVhek; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 300821 in perlapi.pod
+Lookups: newSViv; Text: newSViv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 301095 in perlapi.pod
+Lookups: newSVnv; Text: newSVnv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 301274 in perlapi.pod
+Lookups: newSVpadname; Text: newSVpadname; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 359181 in perlapi.pod
+Lookups: newSVpv; Text: newSVpv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 301464 in perlapi.pod
+Lookups: newSVpv_share; Text: newSVpv_share; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305192 in perlapi.pod
+Lookups: newSVpvf; Text: newSVpvf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 302418 in perlapi.pod
+Lookups: newSVpvf_nocontext; Text: newSVpvf_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469470 in perlapi.pod
+Lookups: newSVpvn; Text: newSVpvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 302604 in perlapi.pod
+Lookups: newSVpvn_flags; Text: newSVpvn_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 303117 in perlapi.pod
+Lookups: newSVpvn_share; Text: newSVpvn_share; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 304087 in perlapi.pod
+Lookups: newSVpvn_utf8; Text: newSVpvn_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 359409 in perlapi.pod
+Lookups: newSVpvs; Text: newSVpvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 304801 in perlapi.pod
+Lookups: newSVpvs_flags; Text: newSVpvs_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 304979 in perlapi.pod
+Lookups: newSVpvs_share; Text: newSVpvs_share; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305403 in perlapi.pod
+Lookups: newSVrv; Text: newSVrv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 305634 in perlapi.pod
+Lookups: newSVsv; Text: newSVsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 306058 in perlapi.pod
+Lookups: newSVuv; Text: newSVuv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 306424 in perlapi.pod
+Lookups: newUNOP; Text: newUNOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 240805 in perlapi.pod
+Lookups: newUNOP_AUX; Text: newUNOP_AUX; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241369 in perlapi.pod
+Lookups: newWHENOP; Text: newWHENOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 241624 in perlapi.pod
+Lookups: newWHILEOP; Text: newWHILEOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 242125 in perlapi.pod
+Lookups: newXS; Text: newXS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 257829 in perlapi.pod
+Lookups: newXSproto; Text: newXSproto; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 452573 in perlapi.pod
+Lookups: new_stackinfo; Text: new_stackinfo; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469518 in perlapi.pod
+Lookups: new_version; Text: new_version; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91836 in perlapi.pod
+Lookups: ninstr; Text: ninstr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 201462 in perlapi.pod
+Lookups: nothreadhook; Text: nothreadhook; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75831 in perlapi.pod
+Lookups: op_append_elem; Text: op_append_elem; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 258038 in perlapi.pod
+Lookups: op_append_list; Text: op_append_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 258562 in perlapi.pod
+Lookups: op_class; Text: op_class; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66260 in perlapi.pod
+Lookups: op_contextualize; Text: op_contextualize; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 259676 in perlapi.pod
+Lookups: op_convert_list; Text: op_convert_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260018 in perlapi.pod
+Lookups: op_dump; Text: op_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66483 in perlapi.pod
+Lookups: op_free; Text: op_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 260667 in perlapi.pod
+Lookups: op_linklist; Text: op_linklist; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261298 in perlapi.pod
+Lookups: op_lvalue; Text: op_lvalue; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 261489 in perlapi.pod
+Lookups: op_null; Text: op_null; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 263115 in perlapi.pod
+Lookups: op_parent; Text: op_parent; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 263283 in perlapi.pod
+Lookups: op_prepend_elem; Text: op_prepend_elem; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 263521 in perlapi.pod
+Lookups: op_refcnt_lock; Text: op_refcnt_lock; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469556 in perlapi.pod
+Lookups: op_refcnt_unlock; Text: op_refcnt_unlock; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469596 in perlapi.pod
+Lookups: op_scope; Text: op_scope; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264049 in perlapi.pod
+Lookups: op_sibling_splice; Text: op_sibling_splice; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 264804 in perlapi.pod
+Lookups: pack_cat; Text: pack_cat; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221359 in perlapi.pod
+Lookups: packlist; Text: packlist; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 270297 in perlapi.pod
+Lookups: pad_add_anon; Text: pad_add_anon; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76000 in perlapi.pod
+Lookups: pad_add_name_pv; Text: pad_add_name_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76654 in perlapi.pod
+Lookups: pad_add_name_pvn; Text: pad_add_name_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76946 in perlapi.pod
+Lookups: pad_add_name_pvs; Text: pad_add_name_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 276325 in perlapi.pod
+Lookups: pad_add_name_sv; Text: pad_add_name_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77944 in perlapi.pod
+Lookups: pad_alloc; Text: pad_alloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78241 in perlapi.pod
+Lookups: pad_compname_type; Text: pad_compname_type; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221746 in perlapi.pod
+Lookups: pad_findmy_pv; Text: pad_findmy_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79383 in perlapi.pod
+Lookups: pad_findmy_pvn; Text: pad_findmy_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79611 in perlapi.pod
+Lookups: pad_findmy_pvs; Text: pad_findmy_pvs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 276848 in perlapi.pod
+Lookups: pad_findmy_sv; Text: pad_findmy_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80221 in perlapi.pod
+Lookups: pad_new; Text: pad_new; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 281358 in perlapi.pod
+Lookups: pad_setsv; Text: pad_setsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81127 in perlapi.pod
+Lookups: pad_sv; Text: pad_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81379 in perlapi.pod
+Lookups: pad_tidy; Text: pad_tidy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81604 in perlapi.pod
+Lookups: padnamelist_fetch; Text: padnamelist_fetch; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80454 in perlapi.pod
+Lookups: padnamelist_store; Text: padnamelist_store; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80752 in perlapi.pod
+Lookups: parse_arithexpr; Text: parse_arithexpr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 146892 in perlapi.pod
+Lookups: parse_barestmt; Text: parse_barestmt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148184 in perlapi.pod
+Lookups: parse_block; Text: parse_block; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 149630 in perlapi.pod
+Lookups: parse_fullexpr; Text: parse_fullexpr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 150960 in perlapi.pod
+Lookups: parse_fullstmt; Text: parse_fullstmt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 152344 in perlapi.pod
+Lookups: parse_label; Text: parse_label; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153641 in perlapi.pod
+Lookups: parse_listexpr; Text: parse_listexpr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154576 in perlapi.pod
+Lookups: parse_stmtseq; Text: parse_stmtseq; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 155858 in perlapi.pod
+Lookups: parse_termexpr; Text: parse_termexpr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 157333 in perlapi.pod
+Lookups: parser_dup; Text: parser_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469640 in perlapi.pod
+Lookups: perl_alloc; Text: perl_alloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82152 in perlapi.pod
+Lookups: perl_alloc_using; Text: perl_alloc_using; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469672 in perlapi.pod
+Lookups: perl_clone; Text: perl_clone; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44631 in perlapi.pod
+Lookups: perl_clone_using; Text: perl_clone_using; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469716 in perlapi.pod
+Lookups: perl_construct; Text: perl_construct; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82305 in perlapi.pod
+Lookups: perl_destruct; Text: perl_destruct; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82484 in perlapi.pod
+Lookups: perl_free; Text: perl_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84099 in perlapi.pod
+Lookups: perl_parse; Text: perl_parse; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84256 in perlapi.pod
+Lookups: perl_run; Text: perl_run; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87490 in perlapi.pod
+Lookups: pmop_dump; Text: pmop_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469760 in perlapi.pod
+Lookups: pop_scope; Text: pop_scope; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469790 in perlapi.pod
+Lookups: pregcomp; Text: pregcomp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469820 in perlapi.pod
+Lookups: pregexec; Text: pregexec; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469848 in perlapi.pod
+Lookups: pregfree2; Text: pregfree2; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469904 in perlapi.pod
+Lookups: pregfree; Text: pregfree; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469876 in perlapi.pod
+Lookups: printf_nocontext; Text: printf_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469934 in perlapi.pod
+Lookups: ptr_table_fetch; Text: ptr_table_fetch; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 469978 in perlapi.pod
+Lookups: ptr_table_free; Text: ptr_table_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470020 in perlapi.pod
+Lookups: ptr_table_new; Text: ptr_table_new; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470060 in perlapi.pod
+Lookups: ptr_table_split; Text: ptr_table_split; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470098 in perlapi.pod
+Lookups: ptr_table_store; Text: ptr_table_store; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470140 in perlapi.pod
+Lookups: push_scope; Text: push_scope; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470182 in perlapi.pod
+Lookups: re_compile; Text: re_compile; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470214 in perlapi.pod
+Lookups: re_dup_guts; Text: re_dup_guts; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470246 in perlapi.pod
+Lookups: re_intuit_start; Text: re_intuit_start; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470280 in perlapi.pod
+Lookups: re_intuit_string; Text: re_intuit_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470322 in perlapi.pod
+Lookups: realloc; Text: realloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470366 in perlapi.pod
+Lookups: reentrant_free; Text: reentrant_free; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470392 in perlapi.pod
+Lookups: reentrant_init; Text: reentrant_init; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470432 in perlapi.pod
+Lookups: reentrant_retry; Text: reentrant_retry; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470472 in perlapi.pod
+Lookups: reentrant_size; Text: reentrant_size; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470514 in perlapi.pod
+Lookups: ref; Text: ref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470554 in perlapi.pod
+Lookups: reg_named_buff_all; Text: reg_named_buff_all; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470572 in perlapi.pod
+Lookups: reg_named_buff_exists; Text: reg_named_buff_exists; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470620 in perlapi.pod
+Lookups: reg_named_buff_fetch; Text: reg_named_buff_fetch; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470674 in perlapi.pod
+Lookups: reg_named_buff_firstkey; Text: reg_named_buff_firstkey; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470726 in perlapi.pod
+Lookups: reg_named_buff_nextkey; Text: reg_named_buff_nextkey; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470784 in perlapi.pod
+Lookups: reg_named_buff_scalar; Text: reg_named_buff_scalar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470840 in perlapi.pod
+Lookups: regdump; Text: regdump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470894 in perlapi.pod
+Lookups: regdupe_internal; Text: regdupe_internal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470920 in perlapi.pod
+Lookups: regexec_flags; Text: regexec_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 470964 in perlapi.pod
+Lookups: regfree_internal; Text: regfree_internal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471002 in perlapi.pod
+Lookups: reginitcolors; Text: reginitcolors; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471046 in perlapi.pod
+Lookups: regnext; Text: regnext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471084 in perlapi.pod
+Lookups: repeatcpy; Text: repeatcpy; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471110 in perlapi.pod
+Lookups: rsignal; Text: rsignal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471140 in perlapi.pod
+Lookups: rsignal_state; Text: rsignal_state; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471166 in perlapi.pod
+Lookups: runops_debug; Text: runops_debug; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471204 in perlapi.pod
+Lookups: runops_standard; Text: runops_standard; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471240 in perlapi.pod
+Lookups: rvpv_dup; Text: rvpv_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471282 in perlapi.pod
+Lookups: safesyscalloc; Text: safesyscalloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471310 in perlapi.pod
+Lookups: safesysfree; Text: safesysfree; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471348 in perlapi.pod
+Lookups: safesysmalloc; Text: safesysmalloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471382 in perlapi.pod
+Lookups: safesysrealloc; Text: safesysrealloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471420 in perlapi.pod
+Lookups: save_I16; Text: save_I16; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471460 in perlapi.pod
+Lookups: save_I32; Text: save_I32; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471488 in perlapi.pod
+Lookups: save_I8; Text: save_I8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471516 in perlapi.pod
+Lookups: save_adelete; Text: save_adelete; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471542 in perlapi.pod
+Lookups: save_aelem; Text: save_aelem; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471578 in perlapi.pod
+Lookups: save_aelem_flags; Text: save_aelem_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471610 in perlapi.pod
+Lookups: save_alloc; Text: save_alloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471654 in perlapi.pod
+Lookups: save_aptr; Text: save_aptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471686 in perlapi.pod
+Lookups: save_ary; Text: save_ary; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471716 in perlapi.pod
+Lookups: save_bool; Text: save_bool; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471744 in perlapi.pod
+Lookups: save_clearsv; Text: save_clearsv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471774 in perlapi.pod
+Lookups: save_delete; Text: save_delete; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471810 in perlapi.pod
+Lookups: save_destructor; Text: save_destructor; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471844 in perlapi.pod
+Lookups: save_destructor_x; Text: save_destructor_x; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471886 in perlapi.pod
+Lookups: save_freeop; Text: save_freeop; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471932 in perlapi.pod
+Lookups: save_freepv; Text: save_freepv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 471966 in perlapi.pod
+Lookups: save_freesv; Text: save_freesv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472000 in perlapi.pod
+Lookups: save_generic_pvref; Text: save_generic_pvref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472034 in perlapi.pod
+Lookups: save_generic_svref; Text: save_generic_svref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472082 in perlapi.pod
+Lookups: save_hash; Text: save_hash; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472130 in perlapi.pod
+Lookups: save_hdelete; Text: save_hdelete; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472160 in perlapi.pod
+Lookups: save_helem; Text: save_helem; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472196 in perlapi.pod
+Lookups: save_helem_flags; Text: save_helem_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472228 in perlapi.pod
+Lookups: save_hints; Text: save_hints; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472272 in perlapi.pod
+Lookups: save_hptr; Text: save_hptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472304 in perlapi.pod
+Lookups: save_int; Text: save_int; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472334 in perlapi.pod
+Lookups: save_item; Text: save_item; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472362 in perlapi.pod
+Lookups: save_iv; Text: save_iv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472392 in perlapi.pod
+Lookups: save_list; Text: save_list; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472418 in perlapi.pod
+Lookups: save_long; Text: save_long; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472448 in perlapi.pod
+Lookups: save_mortalizesv; Text: save_mortalizesv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472478 in perlapi.pod
+Lookups: save_nogv; Text: save_nogv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472522 in perlapi.pod
+Lookups: save_op; Text: save_op; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472552 in perlapi.pod
+Lookups: save_padsv_and_mortalize; Text: save_padsv_and_mortalize; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472578 in perlapi.pod
+Lookups: save_pptr; Text: save_pptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472638 in perlapi.pod
+Lookups: save_pushi32ptr; Text: save_pushi32ptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472668 in perlapi.pod
+Lookups: save_pushptr; Text: save_pushptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472710 in perlapi.pod
+Lookups: save_pushptrptr; Text: save_pushptrptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472746 in perlapi.pod
+Lookups: save_re_context; Text: save_re_context; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472788 in perlapi.pod
+Lookups: save_scalar; Text: save_scalar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472830 in perlapi.pod
+Lookups: save_set_svflags; Text: save_set_svflags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472864 in perlapi.pod
+Lookups: save_shared_pvref; Text: save_shared_pvref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472908 in perlapi.pod
+Lookups: save_sptr; Text: save_sptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472954 in perlapi.pod
+Lookups: save_svref; Text: save_svref; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 472984 in perlapi.pod
+Lookups: save_vptr; Text: save_vptr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473016 in perlapi.pod
+Lookups: savestack_grow; Text: savestack_grow; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473046 in perlapi.pod
+Lookups: savestack_grow_cnt; Text: savestack_grow_cnt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473086 in perlapi.pod
+Lookups: scan_num; Text: scan_num; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473134 in perlapi.pod
+Lookups: scan_vstring; Text: scan_vstring; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473162 in perlapi.pod
+Lookups: seed; Text: seed; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473198 in perlapi.pod
+Lookups: set_context; Text: set_context; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473218 in perlapi.pod
+Lookups: share_hek; Text: share_hek; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473252 in perlapi.pod
+Lookups: si_dup; Text: si_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473282 in perlapi.pod
+Lookups: ss_dup; Text: ss_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473306 in perlapi.pod
+Lookups: stack_grow; Text: stack_grow; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473330 in perlapi.pod
+Lookups: start_subparse; Text: start_subparse; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473362 in perlapi.pod
+Lookups: str_to_version; Text: str_to_version; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473402 in perlapi.pod
+Lookups: sv_2iv; Text: sv_2iv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473442 in perlapi.pod
+Lookups: sv_2pv; Text: sv_2pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473466 in perlapi.pod
+Lookups: sv_2uv; Text: sv_2uv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473490 in perlapi.pod
+Lookups: sv_catpvf_mg_nocontext; Text: sv_catpvf_mg_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473514 in perlapi.pod
+Lookups: sv_catpvf_nocontext; Text: sv_catpvf_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473570 in perlapi.pod
+Lookups: sv_dup; Text: sv_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473620 in perlapi.pod
+Lookups: sv_dup_inc; Text: sv_dup_inc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473644 in perlapi.pod
+Lookups: sv_peek; Text: sv_peek; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473676 in perlapi.pod
+Lookups: sv_pvn_nomg; Text: sv_pvn_nomg; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473702 in perlapi.pod
+Lookups: sv_setpvf_mg_nocontext; Text: sv_setpvf_mg_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473736 in perlapi.pod
+Lookups: sv_setpvf_nocontext; Text: sv_setpvf_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473792 in perlapi.pod
+Lookups: sys_init3; Text: sys_init3; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473870 in perlapi.pod
+Lookups: sys_init; Text: sys_init; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473842 in perlapi.pod
+Lookups: sys_intern_clear; Text: sys_intern_clear; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473900 in perlapi.pod
+Lookups: sys_intern_dup; Text: sys_intern_dup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473944 in perlapi.pod
+Lookups: sys_intern_init; Text: sys_intern_init; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 473984 in perlapi.pod
+Lookups: sys_term; Text: sys_term; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474026 in perlapi.pod
+Lookups: taint_env; Text: taint_env; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474054 in perlapi.pod
+Lookups: taint_proper; Text: taint_proper; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474084 in perlapi.pod
+Lookups: text; Text: text; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 450027 in perlapi.pod
+Lookups: unlnk; Text: unlnk; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474120 in perlapi.pod
+Lookups: unsharepvn; Text: unsharepvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474142 in perlapi.pod
+Lookups: utf8_length; Text: utf8_length; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 439441 in perlapi.pod
+Lookups: utf8_to_bytes; Text: utf8_to_bytes; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 439891 in perlapi.pod
+Lookups: utf8_to_uvchr; Text: utf8_to_uvchr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 440610 in perlapi.pod
+Lookups: utf8_to_uvchr_buf; Text: utf8_to_uvchr_buf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 441813 in perlapi.pod
+Lookups: utf8_to_uvuni_buf; Text: utf8_to_uvuni_buf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 442750 in perlapi.pod
+Lookups: uvchr_to_utf8; Text: uvchr_to_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 444861 in perlapi.pod
+Lookups: uvchr_to_utf8_flags; Text: uvchr_to_utf8_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 445613 in perlapi.pod
+Lookups: uvchr_to_utf8_flags_msgs; Text: uvchr_to_utf8_flags_msgs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 449101 in perlapi.pod
+Lookups: uvoffuni_to_utf8_flags; Text: uvoffuni_to_utf8_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 450842 in perlapi.pod
+Lookups: uvuni_to_utf8; Text: uvuni_to_utf8; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474174 in perlapi.pod
+Lookups: uvuni_to_utf8_flags; Text: uvuni_to_utf8_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 451414 in perlapi.pod
+Lookups: valid_utf8_to_uvchr; Text: valid_utf8_to_uvchr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 452077 in perlapi.pod
+Lookups: vcroak; Text: vcroak; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 458719 in perlapi.pod
+Lookups: vdeb; Text: vdeb; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474212 in perlapi.pod
+Lookups: vform; Text: vform; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474232 in perlapi.pod
+Lookups: vload_module; Text: vload_module; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474254 in perlapi.pod
+Lookups: vnewSVpvf; Text: vnewSVpvf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474290 in perlapi.pod
+Lookups: vwarn; Text: vwarn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 459758 in perlapi.pod
+Lookups: vwarner; Text: vwarner; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474320 in perlapi.pod
+Lookups: warn; Text: warn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 460408 in perlapi.pod
+Lookups: warn_categories; Text: warn_categories; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 450081 in perlapi.pod
+Lookups: warn_nocontext; Text: warn_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474346 in perlapi.pod
+Lookups: warn_sv; Text: warn_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 461013 in perlapi.pod
+Lookups: warner; Text: warner; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474386 in perlapi.pod
+Lookups: warner_nocontext; Text: warner_nocontext; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474410 in perlapi.pod
+Lookups: whichsig; Text: whichsig; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474454 in perlapi.pod
+Lookups: whichsig_pv; Text: whichsig_pv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474482 in perlapi.pod
+Lookups: whichsig_pvn; Text: whichsig_pvn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474516 in perlapi.pod
+Lookups: whichsig_sv; Text: whichsig_sv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474552 in perlapi.pod

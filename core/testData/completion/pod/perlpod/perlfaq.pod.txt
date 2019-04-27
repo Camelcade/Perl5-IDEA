@@ -1,0 +1,58 @@
+Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22316 in perlfaq.pod
+Lookups: CREDITS; Text: CREDITS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22050 in perlfaq.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 96 in perlfaq.pod
+Lookups: How to contribute to the perlfaq; Text: How to contribute to the perlfaq; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 714 in perlfaq.pod
+Lookups: How to use the perlfaq; Text: How to use the perlfaq; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 497 in perlfaq.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq.pod
+Lookups: TABLE OF CONTENTS; Text: TABLE OF CONTENTS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1212 in perlfaq.pod
+Lookups: THE QUESTIONS; Text: THE QUESTIONS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1627 in perlfaq.pod
+Lookups: VERSION; Text: VERSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlfaq.pod
+Lookups: What if my question isn't answered in the FAQ?; Text: What if my question isn't answered in the FAQ?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1122 in perlfaq.pod
+Lookups: Where to find the perlfaq; Text: Where to find the perlfaq; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 310 in perlfaq.pod
+Lookups: perlfaq1 - General Questions About Perl; Text: perlfaq1 - General Questions About Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1247 in perlfaq.pod
+Lookups: perlfaq1: General Questions About Perl; Text: perlfaq1: General Questions About Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1649 in perlfaq.pod
+Lookups: perlfaq2 - Obtaining and Learning about Perl; Text: perlfaq2 - Obtaining and Learning about Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1294 in perlfaq.pod
+Lookups: perlfaq2: Obtaining and Learning about Perl; Text: perlfaq2: Obtaining and Learning about Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2430 in perlfaq.pod
+Lookups: perlfaq3 - Programming Tools; Text: perlfaq3 - Programming Tools; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1346 in perlfaq.pod
+Lookups: perlfaq3: Programming Tools; Text: perlfaq3: Programming Tools; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3514 in perlfaq.pod
+Lookups: perlfaq4 - Data Manipulation; Text: perlfaq4 - Data Manipulation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1382 in perlfaq.pod
+Lookups: perlfaq4: Data Manipulation; Text: perlfaq4: Data Manipulation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5291 in perlfaq.pod
+Lookups: perlfaq5 - Files and Formats; Text: perlfaq5 - Files and Formats; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1418 in perlfaq.pod
+Lookups: perlfaq5: Files and Formats; Text: perlfaq5: Files and Formats; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10276 in perlfaq.pod
+Lookups: perlfaq6 - Regular Expressions; Text: perlfaq6 - Regular Expressions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1454 in perlfaq.pod
+Lookups: perlfaq6: Regular Expressions; Text: perlfaq6: Regular Expressions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13101 in perlfaq.pod
+Lookups: perlfaq7 - General Perl Language Issues; Text: perlfaq7 - General Perl Language Issues; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1492 in perlfaq.pod
+Lookups: perlfaq7: General Perl Language Issues; Text: perlfaq7: General Perl Language Issues; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15277 in perlfaq.pod
+Lookups: perlfaq8 - System Interaction; Text: perlfaq8 - System Interaction; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1539 in perlfaq.pod
+Lookups: perlfaq8: System Interaction; Text: perlfaq8: System Interaction; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17346 in perlfaq.pod
+Lookups: perlfaq9 - Web, Email and Networking; Text: perlfaq9 - Web, Email and Networking; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1576 in perlfaq.pod
+Lookups: perlfaq9: Web, Email and Networking; Text: perlfaq9: Web, Email and Networking; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20836 in perlfaq.pod

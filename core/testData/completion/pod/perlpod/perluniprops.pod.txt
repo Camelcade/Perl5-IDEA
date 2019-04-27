@@ -1,0 +1,128 @@
+Lookups:  is a wild-card; Text:  is a wild-card; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11411 in perluniprops.pod
+Lookups:  underscores separating digits in numbers; Text:  underscores separating digits in numbers; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4245 in perluniprops.pod
+Lookups:  white space adjacent to a non-word character; Text:  white space adjacent to a non-word character; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4191 in perluniprops.pod
+Lookups: (\d+) in the info column gives the number of Unicode code points matched by this property.; Text: (\d+) in the info column gives the number of Unicode code points matched by this property.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11441 in perluniprops.pod
+Lookups: BidiCharacterTest.txt; Text: BidiCharacterTest.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407973 in perluniprops.pod
+Lookups: BidiTest.txt; Text: BidiTest.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408006 in perluniprops.pod
+Lookups: CJKRadicals.txt; Text: CJKRadicals.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408074 in perluniprops.pod
+Lookups: Compound form (\p{name=value} or \p{name:value}) tighter rules:; Text: Compound form (\p{name=value} or \p{name:value}) tighter rules:; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4441 in perluniprops.pod
+Lookups: D means this is deprecated.; Text: D means this is deprecated.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11542 in perluniprops.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 362 in perluniprops.pod
+Lookups: Deprecated; Text: Deprecated; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5276 in perluniprops.pod
+Lookups: Discouraged; Text: Discouraged; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6509 in perluniprops.pod
+Lookups: EmojiSources.txt; Text: EmojiSources.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408169 in perluniprops.pod
+Lookups: Expands_On_NFC (XO_NFC); Text: Expands_On_NFC (XO_NFC); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404710 in perluniprops.pod
+Lookups: Expands_On_NFD (XO_NFD); Text: Expands_On_NFD (XO_NFD); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404744 in perluniprops.pod
+Lookups: Expands_On_NFKC (XO_NFKC); Text: Expands_On_NFKC (XO_NFKC); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404778 in perluniprops.pod
+Lookups: Expands_On_NFKD (XO_NFKD); Text: Expands_On_NFKD (XO_NFKD); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 404814 in perluniprops.pod
+Lookups: Grapheme_Link (Gr_Link); Text: Grapheme_Link (Gr_Link); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405177 in perluniprops.pod
+Lookups: Index.txt; Text: Index.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408379 in perluniprops.pod
+Lookups: Jamo_Short_Name (JSN); Text: Jamo_Short_Name (JSN); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405291 in perluniprops.pod
+Lookups: Legal \p{} and \P{} constructs that match no characters; Text: Legal \p{} and \P{} constructs that match no characters; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 379055 in perluniprops.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 272 in perluniprops.pod
+Lookups: NamedSqProv.txt; Text: NamedSqProv.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408444 in perluniprops.pod
+Lookups: NamesList.html; Text: NamesList.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408648 in perluniprops.pod
+Lookups: NamesList.txt; Text: NamesList.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408731 in perluniprops.pod
+Lookups: NormTest.txt; Text: NormTest.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408030 in perluniprops.pod
+Lookups: NormalizationCorrections.txt; Text: NormalizationCorrections.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408788 in perluniprops.pod
+Lookups: NushuSources.txt; Text: NushuSources.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408908 in perluniprops.pod
+Lookups: O means this is obsolete.; Text: O means this is obsolete.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11580 in perluniprops.pod
+Lookups: Obsolete; Text: Obsolete; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6295 in perluniprops.pod
+Lookups: Other information in the Unicode data base; Text: Other information in the Unicode data base; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 406696 in perluniprops.pod
+Lookups: Other_Alphabetic (OAlpha); Text: Other_Alphabetic (OAlpha); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405323 in perluniprops.pod
+Lookups: Other_Default_Ignorable_Code_Point (ODI); Text: Other_Default_Ignorable_Code_Point (ODI); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405359 in perluniprops.pod
+Lookups: Other_Grapheme_Extend (OGr_Ext); Text: Other_Grapheme_Extend (OGr_Ext); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405410 in perluniprops.pod
+Lookups: Other_ID_Continue (OIDC); Text: Other_ID_Continue (OIDC); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405452 in perluniprops.pod
+Lookups: Other_ID_Start (OIDS); Text: Other_ID_Start (OIDS); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405487 in perluniprops.pod
+Lookups: Other_Lowercase (OLower); Text: Other_Lowercase (OLower); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405519 in perluniprops.pod
+Lookups: Other_Math (OMath); Text: Other_Math (OMath); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405554 in perluniprops.pod
+Lookups: Other_Uppercase (OUpper); Text: Other_Uppercase (OUpper); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405583 in perluniprops.pod
+Lookups: Properties accessible through Unicode::UCD; Text: Properties accessible through Unicode::UCD; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 379542 in perluniprops.pod
+Lookups: Properties accessible through \p{} and \P{}; Text: Properties accessible through \p{} and \P{}; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2217 in perluniprops.pod
+Lookups: Properties accessible through other means; Text: Properties accessible through other means; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 403340 in perluniprops.pod
+Lookups: ReadMe.txt; Text: ReadMe.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408986 in perluniprops.pod
+Lookups: S means this is stabilized.; Text: S means this is stabilized.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11616 in perluniprops.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 409875 in perluniprops.pod
+Lookups: Script=Katakana_Or_Hiragana (sc=Hrkt); Text: Script=Katakana_Or_Hiragana (sc=Hrkt); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405720 in perluniprops.pod
+Lookups: Script_Extensions=Katakana_Or_Hiragana (scx=Hrkt); Text: Script_Extensions=Katakana_Or_Hiragana (scx=Hrkt); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 405956 in perluniprops.pod
+Lookups: Single form (\p{name}) tighter rules:; Text: Single form (\p{name}) tighter rules:; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4067 in perluniprops.pod
+Lookups: Stabilized; Text: Stabilized; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4970 in perluniprops.pod
+Lookups: StandardizedVariants.html; Text: StandardizedVariants.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409025 in perluniprops.pod
+Lookups: StandardizedVariants.txt; Text: StandardizedVariants.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409211 in perluniprops.pod
+Lookups: T means tighter (stricter) name matching applies.; Text: T means tighter (stricter) name matching applies.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11654 in perluniprops.pod
+Lookups: TangutSources.txt; Text: TangutSources.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409461 in perluniprops.pod
+Lookups: USourceData.txt; Text: USourceData.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409656 in perluniprops.pod
+Lookups: USourceGlyphs.pdf; Text: USourceGlyphs.pdf; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 409788 in perluniprops.pod
+Lookups: Unicode character properties that are NOT accepted by Perl; Text: Unicode character properties that are NOT accepted by Perl; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 404133 in perluniprops.pod
+Lookups: X means use of this form is discouraged, and may not be stable.; Text: X means use of this form is discouraged, and may not be stable.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11714 in perluniprops.pod
+Lookups: \p{Canonical_Combining_Class=Attached_Below_Left}; Text: \p{Canonical_Combining_Class=Attached_Below_Left}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 379432 in perluniprops.pod
+Lookups: \p{Canonical_Combining_Class=CCC133}; Text: \p{Canonical_Combining_Class=CCC133}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 379489 in perluniprops.pod
+Lookups: auxiliary/GraphemeBreakTest.html; Text: auxiliary/GraphemeBreakTest.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407768 in perluniprops.pod
+Lookups: auxiliary/LineBreakTest.html; Text: auxiliary/LineBreakTest.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407812 in perluniprops.pod
+Lookups: auxiliary/SentenceBreakTest.html; Text: auxiliary/SentenceBreakTest.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407852 in perluniprops.pod
+Lookups: auxiliary/WordBreakTest.html; Text: auxiliary/WordBreakTest.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407896 in perluniprops.pod
+Lookups: extracted/DName.txt; Text: extracted/DName.txt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408276 in perluniprops.pod

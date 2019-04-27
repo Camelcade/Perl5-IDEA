@@ -1,0 +1,76 @@
+Lookups: 10th October 13; Text: 10th October 13; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5572 in perlamiga.pod
+Lookups: 20th November 2013; Text: 20th November 2013; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5375 in perlamiga.pod
+Lookups: 27th November 2013; Text: 27th November 2013; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5047 in perlamiga.pod
+Lookups: Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion.; Text: Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4881 in perlamiga.pod
+Lookups: Add handling of NIL: to afstat(); Text: Add handling of NIL: to afstat(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4651 in perlamiga.pod
+Lookups: Added Amiga::Exec module with support for Wait() and AmigaOS signal numbers.; Text: Added Amiga::Exec module with support for Wait() and AmigaOS signal numbers.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5481 in perlamiga.pod
+Lookups: Amiga Specific Modules; Text: Amiga Specific Modules; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3780 in perlamiga.pod
+Lookups: Amiga::ARexx; Text: Amiga::ARexx; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3811 in perlamiga.pod
+Lookups: Amiga::Exec; Text: Amiga::Exec; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3998 in perlamiga.pod
+Lookups: AmigaOS 4.1 update 6 with all updates applied as of 9th October 2013; Text: AmigaOS 4.1 update 6 with all updates applied as of 9th October 2013; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1014 in perlamiga.pod
+Lookups: AmigaOS SDK; Text: AmigaOS SDK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1176 in perlamiga.pod
+Lookups: August 2015; Text: August 2015; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4595 in perlamiga.pod
+Lookups: BUILDING; Text: BUILDING; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4116 in perlamiga.pod
+Lookups: CHANGES; Text: CHANGES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4570 in perlamiga.pod
+Lookups: Configured to use SDK:Local/C/perl to start standard scripts; Text: Configured to use SDK:Local/C/perl to start standard scripts; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5413 in perlamiga.pod
+Lookups: Create new installation system based on installperl links and Amiga protection bits now set correctly.; Text: Create new installation system based on installperl links and Amiga protection bits now set correctly.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5085 in perlamiga.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 921 in perlamiga.pod
+Lookups: File::Spec should now recognise an Amiga style absolute path as well as an Unix style one. Relative paths must always be Unix style.; Text: File::Spec should now recognise an Amiga style absolute path as well as an Unix style one. Relative paths must always be Unix style.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5228 in perlamiga.pod
+Lookups: Fix exec, and exit in "forked" subprocesses.; Text: Fix exec, and exit in "forked" subprocesses.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4756 in perlamiga.pod
+Lookups: Fix inheritance of environment variables by subprocesses.; Text: Fix inheritance of environment variables by subprocesses.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4691 in perlamiga.pod
+Lookups: Fix issue where kill was using the wrong kind of process ID; Text: Fix issue where kill was using the wrong kind of process ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4973 in perlamiga.pod
+Lookups: Fix issue with newlib's unlink, which could cause infinite loops.; Text: Fix issue with newlib's unlink, which could cause infinite loops.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4808 in perlamiga.pod
+Lookups: INSTALLATION; Text: INSTALLATION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3124 in perlamiga.pod
+Lookups: If you find any other limitations or bugs then let me know.; Text: If you find any other limitations or bugs then let me know.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2956 in perlamiga.pod
+Lookups: Incorrect or unexpected command line unescaping; Text: Incorrect or unexpected command line unescaping; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2561 in perlamiga.pod
+Lookups: Limitations of Perl under AmigaOS 4.1; Text: Limitations of Perl under AmigaOS 4.1; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2265 in perlamiga.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlamiga.pod
+Lookups: NOTE; Text: NOTE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 227 in perlamiga.pod
+Lookups: Nested Piped programs can crash when run from older abc-shells; Text: Nested Piped programs can crash when run from older abc-shells; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2320 in perlamiga.pod
+Lookups: Pod now defaults to text.; Text: Pod now defaults to text.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5195 in perlamiga.pod
+Lookups: Port to Perl 5.22; Text: Port to Perl 5.22; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4626 in perlamiga.pod
+Lookups: Prerequisites for running Perl 5.22.1 under AmigaOS 4.1; Text: Prerequisites for running Perl 5.22.1 under AmigaOS 4.1; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 941 in perlamiga.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5639 in perlamiga.pod
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 514 in perlamiga.pod
+Lookups: Starting Perl programs under AmigaOS 4.1; Text: Starting Perl programs under AmigaOS 4.1; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1593 in perlamiga.pod
+Lookups: Starting subprocesses via open has limitations; Text: Starting subprocesses via open has limitations; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2751 in perlamiga.pod
+Lookups: abc-shell; Text: abc-shell; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1365 in perlamiga.pod
+Lookups: newlib.library version 53.28 or greater; Text: newlib.library version 53.28 or greater; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1126 in perlamiga.pod

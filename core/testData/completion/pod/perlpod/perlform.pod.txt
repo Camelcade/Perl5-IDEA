@@ -1,0 +1,108 @@
+Lookups: #; Text: DESCRIPTION; Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: #; Text: Numeric Fields; Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3948 in perlform.pod
+Lookups: ...; Text: DESCRIPTION; Tail: (...); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: .; Text: DESCRIPTION; Tail: (.); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: 0; Text: DESCRIPTION; Tail: (0); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: 1.; Text: 1.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1559 in perlform.pod
+Lookups: 2.; Text: 2.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1629 in perlform.pod
+Lookups: 3.; Text: 3.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1696 in perlform.pod
+Lookups: <; Text: DESCRIPTION; Tail: (<); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: >; Text: DESCRIPTION; Tail: (>); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: @*; Text: DESCRIPTION; Tail: (@*); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: @*; Text: The Field @* for Variable-Width Multi-Line Text; Tail: (@*); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4631 in perlform.pod
+Lookups: @; Text: DESCRIPTION; Tail: (@); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: Accessing Formatting Internals; Text: Accessing Formatting Internals; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14785 in perlform.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: Footers; Text: Footers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14015 in perlform.pod
+Lookups: Format Variables; Text: Format Variables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10815 in perlform.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlform.pod
+Lookups: NOTES; Text: NOTES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12522 in perlform.pod
+Lookups: Numeric Fields; Text: Numeric Fields; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3948 in perlform.pod
+Lookups: Repeating Format Lines; Text: Repeating Format Lines; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8013 in perlform.pod
+Lookups: Specifying Values; Text: Specifying Values; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5524 in perlform.pod
+Lookups: Suppressing Lines Where All Fields Are Void; Text: Suppressing Lines Where All Fields Are Void; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7726 in perlform.pod
+Lookups: Text Fields; Text: Text Fields; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3168 in perlform.pod
+Lookups: The Field @* for Variable-Width Multi-Line Text; Text: The Field @* for Variable-Width Multi-Line Text; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4631 in perlform.pod
+Lookups: The Field ^* for Variable-Width One-line-at-a-time Text; Text: The Field ^* for Variable-Width One-line-at-a-time Text; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4902 in perlform.pod
+Lookups: Top of Form Processing; Text: Top of Form Processing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8567 in perlform.pod
+Lookups: Using Fill Mode; Text: Using Fill Mode; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6586 in perlform.pod
+Lookups: WARNINGS; Text: WARNINGS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15462 in perlform.pod
+Lookups: ^*; Text: DESCRIPTION; Tail: (^*); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: ^*; Text: The Field ^* for Variable-Width One-line-at-a-time Text; Tail: (^*); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4902 in perlform.pod
+Lookups: ^; Text: DESCRIPTION; Tail: (^); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: chart; Text: NAME; Tail: (chart); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlform.pod
+Lookups: footer; Text: Footers; Tail: (footer); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14015 in perlform.pod
+Lookups: format variables; Text: Format Variables; Tail: (format variables); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10815 in perlform.pod
+Lookups: format, fill mode; Text: Using Fill Mode; Tail: (format, fill mode); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6586 in perlform.pod
+Lookups: format, footer; Text: Footers; Tail: (format, footer); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14015 in perlform.pod
+Lookups: format, internals; Text: Accessing Formatting Internals; Tail: (format, internals); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14785 in perlform.pod
+Lookups: format, numeric field; Text: Numeric Fields; Tail: (format, numeric field); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3948 in perlform.pod
+Lookups: format, picture line; Text: DESCRIPTION; Tail: (format, picture line); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: format, repeating lines; Text: Repeating Format Lines; Tail: (format, repeating lines); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8013 in perlform.pod
+Lookups: format, specifying values; Text: Specifying Values; Tail: (format, specifying values); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5524 in perlform.pod
+Lookups: format, suppressing lines; Text: Suppressing Lines Where All Fields Are Void; Tail: (format, suppressing lines); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7726 in perlform.pod
+Lookups: format, text field; Text: Text Fields; Tail: (format, text field); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3168 in perlform.pod
+Lookups: format, top of form; Text: Top of Form Processing; Tail: (format, top of form); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8567 in perlform.pod
+Lookups: format, variables; Text: Format Variables; Tail: (format, variables); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10815 in perlform.pod
+Lookups: format; Text: NAME; Tail: (format); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlform.pod
+Lookups: header; Text: Top of Form Processing; Tail: (header); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8567 in perlform.pod
+Lookups: nroff; Text: DESCRIPTION; Tail: (nroff); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: report; Text: NAME; Tail: (report); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlform.pod
+Lookups: top; Text: Top of Form Processing; Tail: (top); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8567 in perlform.pod
+Lookups: |; Text: DESCRIPTION; Tail: (|); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: ~; Text: DESCRIPTION; Tail: (~); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
+Lookups: ~~; Text: DESCRIPTION; Tail: (~~); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod

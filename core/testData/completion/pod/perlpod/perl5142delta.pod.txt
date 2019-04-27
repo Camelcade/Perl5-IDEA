@@ -1,0 +1,46 @@
+Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4906 in perl5142delta.pod
+Lookups: Bug Fixes; Text: Bug Fixes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2838 in perl5142delta.pod
+Lookups: Building on OS X 10.7 Lion and Xcode 4 works again; Text: Building on OS X 10.7 Lion and Xcode 4 works again; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2688 in perl5142delta.pod
+Lookups: Core Enhancements; Text: Core Enhancements; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5142delta.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5142delta.pod
+Lookups: Deprecations; Text: Deprecations; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1294 in perl5142delta.pod
+Lookups: Discontinued Platforms; Text: Discontinued Platforms; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2464 in perl5142delta.pod
+Lookups: Encode decode_xs n-byte heap-overflow (CVE-2011-2939); Text: Encode decode_xs n-byte heap-overflow (CVE-2011-2939); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 947 in perl5142delta.pod
+Lookups: File::Glob::bsd_glob() memory error with GLOB_ALTDIRFUNC (CVE-2011-2728).; Text: File::Glob::bsd_glob() memory error with GLOB_ALTDIRFUNC (CVE-2011-2728).; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 398 in perl5142delta.pod
+Lookups: HP-UX PA-RISC/64 now supports gcc-4.x; Text: HP-UX PA-RISC/64 now supports gcc-4.x; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2542 in perl5142delta.pod
+Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1150 in perl5142delta.pod
+Lookups: Known Problems; Text: Known Problems; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4319 in perl5142delta.pod
+Lookups: Modules and Pragmata; Text: Modules and Pragmata; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1362 in perl5142delta.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5142delta.pod
+Lookups: New Modules and Pragmata; Text: New Modules and Pragmata; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1391 in perl5142delta.pod
+Lookups: New Platforms; Text: New Platforms; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2436 in perl5142delta.pod
+Lookups: Platform Support; Text: Platform Support; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2411 in perl5142delta.pod
+Lookups: Platform-Specific Notes; Text: Platform-Specific Notes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2501 in perl5142delta.pod
+Lookups: Removed Modules and Pragmata; Text: Removed Modules and Pragmata; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2368 in perl5142delta.pod
+Lookups: Reporting Bugs; Text: Reporting Bugs; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5442 in perl5142delta.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6630 in perl5142delta.pod
+Lookups: Security; Text: Security; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 381 in perl5142delta.pod
+Lookups: Updated Modules and Pragmata; Text: Updated Modules and Pragmata; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1430 in perl5142delta.pod

@@ -1,0 +1,84 @@
+Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14544 in perlfaq9.pod
+Lookups: CGI.pm; Text: Which web framework should I use?; Tail: (CGI.pm); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+Lookups: CGI; Text: Which web framework should I use?; Tail: (CGI); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+Lookups: Catalyst; Text: Catalyst; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1247 in perlfaq9.pod
+Lookups: Catalyst; Text: Which web framework should I use?; Tail: (Catalyst); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 85 in perlfaq9.pod
+Lookups: Dancer; Text: Dancer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1483 in perlfaq9.pod
+Lookups: Dancer; Text: Which web framework should I use?; Tail: (Dancer); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+Lookups: Email::Sender::Transport::SMTP::TLS; Text: Email::Sender::Transport::SMTP::TLS; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11804 in perlfaq9.pod
+Lookups: Email::Sender::Transport::SMTP; Text: Email::Sender::Transport::SMTP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11639 in perlfaq9.pod
+Lookups: Email::Sender::Transport::Sendmail; Text: Email::Sender::Transport::Sendmail; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11435 in perlfaq9.pod
+Lookups: How can I do RPC in Perl?; Text: How can I do RPC in Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14441 in perlfaq9.pod
+Lookups: How do I automate an HTML form submission?; Text: How do I automate an HTML form submission?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4320 in perlfaq9.pod
+Lookups: How do I check a valid mail address?; Text: How do I check a valid mail address?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8316 in perlfaq9.pod
+Lookups: How do I decode a MIME/BASE64 string?; Text: How do I decode a MIME/BASE64 string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9665 in perlfaq9.pod
+Lookups: How do I decode or create those %-encodings on the web?; Text: How do I decode or create those %-encodings on the web?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5211 in perlfaq9.pod
+Lookups: How do I extract URLs?; Text: How do I extract URLs?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3166 in perlfaq9.pod
+Lookups: How do I fetch an HTML file?; Text: How do I fetch an HTML file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3633 in perlfaq9.pod
+Lookups: How do I fetch/put an (S)FTP file?; Text: How do I fetch/put an (S)FTP file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14305 in perlfaq9.pod
+Lookups: How do I find out my hostname, domainname, or IP address?; Text: How do I find out my hostname, domainname, or IP address?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13111 in perlfaq9.pod
+Lookups: How do I find the user's mail address?; Text: How do I find the user's mail address?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10028 in perlfaq9.pod
+Lookups: How do I make sure users can't enter values into a form that causes my CGI script to do bad things?; Text: How do I make sure users can't enter values into a form that causes my CGI script to do bad things?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6680 in perlfaq9.pod
+Lookups: How do I parse a mail header?; Text: How do I parse a mail header?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7629 in perlfaq9.pod
+Lookups: How do I put a password on my web pages?; Text: How do I put a password on my web pages?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6382 in perlfaq9.pod
+Lookups: How do I read email?; Text: How do I read email?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12537 in perlfaq9.pod
+Lookups: How do I redirect to another page?; Text: How do I redirect to another page?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5999 in perlfaq9.pod
+Lookups: How do I remove HTML from a string?; Text: How do I remove HTML from a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2970 in perlfaq9.pod
+Lookups: How do I send email?; Text: How do I send email?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10628 in perlfaq9.pod
+Lookups: How do I use MIME to make an attachment to a mail message?; Text: How do I use MIME to make an attachment to a mail message?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12190 in perlfaq9.pod
+Lookups: Mojolicious; Text: Mojolicious; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1687 in perlfaq9.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq9.pod
+Lookups: RFC 2396; Text: How do I decode or create those %-encodings on the web?; Tail: (RFC 2396); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5211 in perlfaq9.pod
+Lookups: Should I use a web framework?; Text: Should I use a web framework?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 229 in perlfaq9.pod
+Lookups: URI::Escape; Text: How do I decode or create those %-encodings on the web?; Tail: (URI::Escape); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5211 in perlfaq9.pod
+Lookups: URI; Text: How do I decode or create those %-encodings on the web?; Tail: (URI); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5211 in perlfaq9.pod
+Lookups: VERSION; Text: VERSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51 in perlfaq9.pod
+Lookups: Web::Simple; Text: Web::Simple; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1796 in perlfaq9.pod
+Lookups: What is Plack and PSGI?; Text: What is Plack and PSGI?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2280 in perlfaq9.pod
+Lookups: Which web framework should I use?; Text: Which web framework should I use?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+Lookups: framework; Text: Which web framework should I use?; Tail: (framework); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
+Lookups: hostname, domainname, IP address, host, domain, hostfqdn, inet_ntoa,
+gethostbyname, Socket, Net::Domain, Sys::Hostname; Text: How do I find out my hostname, domainname, or IP address?; Tail: (hostname, domainname, IP address, host, domain, hostfqdn, inet_ntoa,
+gethostbyname, Socket, Net::Domain, Sys::Hostname); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13111 in perlfaq9.pod

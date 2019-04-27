@@ -1,0 +1,36 @@
+Lookups: A Social Contract about Artistic Control; Text: A Social Contract about Artistic Control; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15682 in perlpolicy.pod
+Lookups: BACKWARD COMPATIBILITY AND DEPRECATION; Text: BACKWARD COMPATIBILITY AND DEPRECATION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4707 in perlpolicy.pod
+Lookups: CONTRIBUTED MODULES; Text: CONTRIBUTED MODULES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15653 in perlpolicy.pod
+Lookups: CREDITS; Text: CREDITS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25968 in perlpolicy.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 112 in perlpolicy.pod
+Lookups: DOCUMENTATION; Text: DOCUMENTATION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21657 in perlpolicy.pod
+Lookups: GOVERNANCE; Text: GOVERNANCE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 283 in perlpolicy.pod
+Lookups: Getting changes into a maint branch; Text: Getting changes into a maint branch; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13882 in perlpolicy.pod
+Lookups: MAINTENANCE AND SUPPORT; Text: MAINTENANCE AND SUPPORT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2415 in perlpolicy.pod
+Lookups: MAINTENANCE BRANCHES; Text: MAINTENANCE BRANCHES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10618 in perlpolicy.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlpolicy.pod
+Lookups: Perl 5 Porters; Text: Perl 5 Porters; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 302 in perlpolicy.pod
+Lookups: STANDARDS OF CONDUCT; Text: STANDARDS OF CONDUCT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23513 in perlpolicy.pod
+Lookups: Terminology; Text: Terminology; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7966 in perlpolicy.pod
+Lookups: deprecated; Text: deprecated; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9051 in perlpolicy.pod
+Lookups: discouraged; Text: discouraged; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10010 in perlpolicy.pod
+Lookups: experimental; Text: experimental; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8177 in perlpolicy.pod
+Lookups: removed; Text: removed; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10332 in perlpolicy.pod

@@ -1,0 +1,52 @@
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10601 in perlnewmod.pod
+Lookups: Check again; Text: Check again; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4705 in perlnewmod.pod
+Lookups: Check it's new; Text: Check it's new; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3641 in perlnewmod.pod
+Lookups: Choose a name; Text: Choose a name; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4332 in perlnewmod.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlnewmod.pod
+Lookups: Discuss the need; Text: Discuss the need; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3888 in perlnewmod.pod
+Lookups: Fix bugs!; Text: Fix bugs!; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10406 in perlnewmod.pod
+Lookups: Get a CPAN user ID; Text: Get a CPAN user ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9317 in perlnewmod.pod
+Lookups: Look around; Text: Look around; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3190 in perlnewmod.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlnewmod.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10701 in perlnewmod.pod
+Lookups: Start with module-starter or h2xs; Text: Start with module-starter or h2xs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5030 in perlnewmod.pod
+Lookups: Step-by-step: Distributing your module; Text: Step-by-step: Distributing your module; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9261 in perlnewmod.pod
+Lookups: Step-by-step: Making the module; Text: Step-by-step: Making the module; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4981 in perlnewmod.pod
+Lookups: Step-by-step: Preparing the ground; Text: Step-by-step: Preparing the ground; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3041 in perlnewmod.pod
+Lookups: Upload the tarball; Text: Upload the tarball; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10096 in perlnewmod.pod
+Lookups: Use Carp|Carp; Text: Use Carp|Carp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6292 in perlnewmod.pod
+Lookups: Use Exporter|Exporter - wisely!; Text: Use Exporter|Exporter - wisely!; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7071 in perlnewmod.pod
+Lookups: Use plain old documentation|perlpod; Text: Use plain old documentation|perlpod; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7733 in perlnewmod.pod
+Lookups: Use strict|strict and warnings|warnings; Text: Use strict|strict and warnings|warnings; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6022 in perlnewmod.pod
+Lookups: Warning; Text: Warning; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1100 in perlnewmod.pod
+Lookups: What should I make into a module?; Text: What should I make into a module?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1573 in perlnewmod.pod
+Lookups: Write Changes; Text: Write Changes; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9152 in perlnewmod.pod
+Lookups: Write tests; Text: Write tests; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8289 in perlnewmod.pod
+Lookups: Write the README; Text: Write the README; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8822 in perlnewmod.pod
+Lookups: perl Makefile.PL; make test; make distcheck; make dist; Text: perl Makefile.PL; make test; make distcheck; make dist; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9543 in perlnewmod.pod

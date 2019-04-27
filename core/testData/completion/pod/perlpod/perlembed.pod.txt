@@ -1,0 +1,50 @@
+Lookups: $0 assignments; Text: $0 assignments; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26793 in perlembed.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36762 in perlembed.pod
+Lookups: Adding a Perl interpreter to your C program; Text: Adding a Perl interpreter to your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4658 in perlembed.pod
+Lookups: COPYRIGHT; Text: COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37406 in perlembed.pod
+Lookups: Calling a Perl subroutine from your C program; Text: Calling a Perl subroutine from your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7108 in perlembed.pod
+Lookups: Compiling your C program; Text: Compiling your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1143 in perlembed.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlembed.pod
+Lookups: Evaluating a Perl statement from your C program; Text: Evaluating a Perl statement from your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9068 in perlembed.pod
+Lookups: Execution of END blocks; Text: Execution of END blocks; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26405 in perlembed.pod
+Lookups: Fiddling with the Perl stack from your C program; Text: Fiddling with the Perl stack from your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17644 in perlembed.pod
+Lookups: Hiding Perl_; Text: Hiding Perl_; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35866 in perlembed.pod
+Lookups: MORAL; Text: MORAL; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36584 in perlembed.pod
+Lookups: Maintaining a persistent interpreter; Text: Maintaining a persistent interpreter; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20670 in perlembed.pod
+Lookups: Maintaining multiple interpreter instances; Text: Maintaining multiple interpreter instances; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27496 in perlembed.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlembed.pod
+Lookups: PREAMBLE; Text: PREAMBLE; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82 in perlembed.pod
+Lookups: Performing Perl pattern matches and substitutions from your C program; Text: Performing Perl pattern matches and substitutions from your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11544 in perlembed.pod
+Lookups: ROADMAP; Text: ROADMAP; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 548 in perlembed.pod
+Lookups: Use C from C?; Text: Use C from C?; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 456 in perlembed.pod
+Lookups: Use C from Perl?; Text: Use C from Perl?; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125 in perlembed.pod
+Lookups: Use Perl from C?; Text: Use Perl from C?; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 502 in perlembed.pod
+Lookups: Use Perl from Perl?; Text: Use Perl from Perl?; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 333 in perlembed.pod
+Lookups: Use a Unix program from Perl?; Text: Use a Unix program from Perl?; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 221 in perlembed.pod
+Lookups: Using Perl modules, which themselves use C libraries, from your C program; Text: Using Perl modules, which themselves use C libraries, from your C program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31758 in perlembed.pod
+Lookups: Using embedded Perl with POSIX locales; Text: Using embedded Perl with POSIX locales; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34493 in perlembed.pod

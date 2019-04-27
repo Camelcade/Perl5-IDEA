@@ -1,0 +1,96 @@
+Lookups: $?; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: ($?); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: %::; Text: Symbol Tables; Tail: (%::); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: %main::; Text: Symbol Tables; Tail: (%main::); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: '; Text: Packages; Tail: ('); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: ::; Text: Packages; Tail: (::); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: @ISA; Text: Perl Classes; Tail: (@ISA); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17235 in perlmod.pod
+Lookups: BEGIN, UNITCHECK, CHECK, INIT and END; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: BEGIN; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: (BEGIN); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: CHECK; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: (CHECK); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: CLONE; Text: Making your module threadsafe; Tail: (CLONE); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: CLONE_SKIP; Text: Making your module threadsafe; Tail: (CLONE_SKIP); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66 in perlmod.pod
+Lookups: END; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: (END); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: INIT; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: (INIT); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: Is this the document you were after?; Text: Is this the document you were after?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86 in perlmod.pod
+Lookups: Making your module threadsafe; Text: Making your module threadsafe; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlmod.pod
+Lookups: Packages; Text: Packages; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: Perl Classes; Text: Perl Classes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17235 in perlmod.pod
+Lookups: Perl Modules; Text: Perl Modules; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17639 in perlmod.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25747 in perlmod.pod
+Lookups: Symbol Tables; Text: Symbol Tables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: This doc; Text: This doc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 228 in perlmod.pod
+Lookups: UNITCHECK; Text: BEGIN, UNITCHECK, CHECK, INIT and END; Tail: (UNITCHECK); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11830 in perlmod.pod
+Lookups: alias; Text: Symbol Tables; Tail: (alias); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: class; Text: Perl Classes; Tail: (class); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17235 in perlmod.pod
+Lookups: constant; Text: Symbol Tables; Tail: (constant); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: glob; Text: Symbol Tables; Tail: (glob); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: global variable; Text: Packages; Tail: (global variable); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: global; Text: Packages; Tail: (global); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: ithread; Text: Making your module threadsafe; Tail: (ithread); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: module, thread safe; Text: Making your module threadsafe; Tail: (module, thread safe); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: module, threadsafe; Text: Making your module threadsafe; Tail: (module, threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: module; Text: Perl Modules; Tail: (module); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17639 in perlmod.pod
+Lookups: namespace; Text: Packages; Tail: (namespace); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: package; Text: Packages; Tail: (package); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: perlmodstyle; Text: perlmodstyle; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 355 in perlmod.pod
+Lookups: perlnewmod; Text: perlnewmod; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 300 in perlmod.pod
+Lookups: scalar, constant; Text: Symbol Tables; Tail: (scalar, constant); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: stash; Text: Symbol Tables; Tail: (stash); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: symbol table; Text: Symbol Tables; Tail: (symbol table); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: thread safe; Text: Making your module threadsafe; Tail: (thread safe); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: thread; Text: Making your module threadsafe; Tail: (thread); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: threads; Text: Making your module threadsafe; Tail: (threads); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: threadsafe; Text: Making your module threadsafe; Tail: (threadsafe); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23309 in perlmod.pod
+Lookups: typeglob; Text: Symbol Tables; Tail: (typeglob); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6243 in perlmod.pod
+Lookups: variable, global; Text: Packages; Tail: (variable, global); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod
+Lookups: variable, punctuation; Text: Packages; Tail: (variable, punctuation); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 426 in perlmod.pod

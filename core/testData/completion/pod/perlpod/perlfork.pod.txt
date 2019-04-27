@@ -1,0 +1,54 @@
+Lookups: $$ or $PROCESS_ID; Text: $$ or $PROCESS_ID; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2127 in perlfork.pod
+Lookups: %ENV; Text: %ENV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2411 in perlfork.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13057 in perlfork.pod
+Lookups: BEGIN blocks; Text: BEGIN blocks; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7081 in perlfork.pod
+Lookups: BUGS; Text: BUGS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12226 in perlfork.pod
+Lookups: Behavior of other Perl features in forked pseudo-processes; Text: Behavior of other Perl features in forked pseudo-processes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1982 in perlfork.pod
+Lookups: CAVEATS AND LIMITATIONS; Text: CAVEATS AND LIMITATIONS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7040 in perlfork.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1216 in perlfork.pod
+Lookups: Forking pipe open() not yet implemented; Text: Forking pipe open() not yet implemented; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9156 in perlfork.pod
+Lookups: Global state maintained by XSUBs; Text: Global state maintained by XSUBs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10703 in perlfork.pod
+Lookups: Interpreter embedded in larger application; Text: Interpreter embedded in larger application; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11183 in perlfork.pod
+Lookups: Killing the parent process; Text: Killing the parent process; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6233 in perlfork.pod
+Lookups: Lifetime of the parent process and pseudo-processes; Text: Lifetime of the parent process and pseudo-processes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6442 in perlfork.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfork.pod
+Lookups: Open directory handles; Text: Open directory handles; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8520 in perlfork.pod
+Lookups: Open filehandles; Text: Open filehandles; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7726 in perlfork.pod
+Lookups: Open handles to files, directories and network sockets; Text: Open handles to files, directories and network sockets; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5538 in perlfork.pod
+Lookups: PORTABILITY CAVEATS; Text: PORTABILITY CAVEATS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12028 in perlfork.pod
+Lookups: Resource limits; Text: Resource limits; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5763 in perlfork.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13301 in perlfork.pod
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49 in perlfork.pod
+Lookups: Thread-safety of extensions; Text: Thread-safety of extensions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11667 in perlfork.pod
+Lookups: chdir() and all other builtins that accept filenames; Text: chdir() and all other builtins that accept filenames; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2648 in perlfork.pod
+Lookups: exec(); Text: exec(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4537 in perlfork.pod
+Lookups: exit(); Text: exit(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5225 in perlfork.pod
+Lookups: kill(); Text: kill(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3296 in perlfork.pod
+Lookups: wait() and waitpid(); Text: wait() and waitpid(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3096 in perlfork.pod

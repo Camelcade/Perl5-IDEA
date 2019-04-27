@@ -1,0 +1,54 @@
+Lookups: 5.10.1; Text: 5.10.1; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1586 in perldtrace.pod
+Lookups: 5.14.0; Text: 5.14.0; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1691 in perldtrace.pod
+Lookups: 5.16.0; Text: 5.16.0; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1806 in perldtrace.pod
+Lookups: 5.18.0; Text: 5.18.0; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1858 in perldtrace.pod
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7902 in perldtrace.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 797 in perldtrace.pod
+Lookups: DTrace Dynamic Tracing Guide; Text: DTrace Dynamic Tracing Guide; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7517 in perldtrace.pod
+Lookups: DTrace: Dynamic Tracing in Oracle Solaris, Mac OS X and FreeBSD; Text: DTrace: Dynamic Tracing in Oracle Solaris, Mac OS X and FreeBSD; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7594 in perldtrace.pod
+Lookups: Devel::DTrace::Provider; Text: Devel::DTrace::Provider; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7778 in perldtrace.pod
+Lookups: EXAMPLES; Text: EXAMPLES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4346 in perldtrace.pod
+Lookups: Function calls during interpreter cleanup; Text: Function calls during interpreter cleanup; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6065 in perldtrace.pod
+Lookups: HISTORY; Text: HISTORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1561 in perldtrace.pod
+Lookups: Most frequently called functions; Text: Most frequently called functions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4372 in perldtrace.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldtrace.pod
+Lookups: PROBES; Text: PROBES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1952 in perldtrace.pod
+Lookups: Perl functions that execute the most opcodes; Text: Perl functions that execute the most opcodes; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7047 in perldtrace.pod
+Lookups: REFERENCES; Text: REFERENCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7489 in perldtrace.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7752 in perldtrace.pod
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 53 in perldtrace.pod
+Lookups: System calls at compile time; Text: System calls at compile time; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6573 in perldtrace.pod
+Lookups: Trace function calls; Text: Trace function calls; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5222 in perldtrace.pod
+Lookups: loaded-file(FILENAME); Text: loaded-file(FILENAME); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3932 in perldtrace.pod
+Lookups: loading-file(FILENAME); Text: loading-file(FILENAME); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3562 in perldtrace.pod
+Lookups: op-entry(OPNAME); Text: op-entry(OPNAME); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3203 in perldtrace.pod
+Lookups: phase-change(NEWPHASE, OLDPHASE); Text: phase-change(NEWPHASE, OLDPHASE); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2806 in perldtrace.pod
+Lookups: sub-entry(SUBNAME, FILE, LINE, PACKAGE); Text: sub-entry(SUBNAME, FILE, LINE, PACKAGE); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1976 in perldtrace.pod
+Lookups: sub-return(SUBNAME, FILE, LINE, PACKAGE); Text: sub-return(SUBNAME, FILE, LINE, PACKAGE); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2392 in perldtrace.pod

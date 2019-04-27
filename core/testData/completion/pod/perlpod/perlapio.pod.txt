@@ -1,0 +1,98 @@
+Lookups: "Fast gets" Functions; Text: "Fast gets" Functions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13963 in perlapio.pod
+Lookups: '+' read/write; Text: '+' read/write; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17622 in perlapio.pod
+Lookups: '<' read; Text: '<' read; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17581 in perlapio.pod
+Lookups: '>' write; Text: '>' write; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17601 in perlapio.pod
+Lookups: 1. USE_STDIO; Text: 1. USE_STDIO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3101 in perlapio.pod
+Lookups: 2. USE_PERLIO; Text: 2. USE_PERLIO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3354 in perlapio.pod
+Lookups: Co-existence with stdio; Text: Co-existence with stdio; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11159 in perlapio.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2521 in perlapio.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlapio.pod
+Lookups: Other Functions; Text: Other Functions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17106 in perlapio.pod
+Lookups: PerlIO_apply_layers(f,mode,layers); Text: PerlIO_apply_layers(f,mode,layers); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17139 in perlapio.pod
+Lookups: PerlIO_binmode(f,ptype,imode,layers); Text: PerlIO_binmode(f,ptype,imode,layers); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17433 in perlapio.pod
+Lookups: PerlIO_canset_cnt(f); Text: PerlIO_canset_cnt(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15924 in perlapio.pod
+Lookups: PerlIO_clearerr(f); Text: PerlIO_clearerr(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7994 in perlapio.pod
+Lookups: PerlIO_close(f); Text: PerlIO_close(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6446 in perlapio.pod
+Lookups: PerlIO_debug(fmt,...); Text: PerlIO_debug(fmt,...); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18361 in perlapio.pod
+Lookups: PerlIO_eof(f); Text: PerlIO_eof(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7379 in perlapio.pod
+Lookups: PerlIO_error(f); Text: PerlIO_error(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7652 in perlapio.pod
+Lookups: PerlIO_exportFILE(f,mode); Text: PerlIO_exportFILE(f,mode); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12514 in perlapio.pod
+Lookups: PerlIO_fast_gets(f); Text: PerlIO_fast_gets(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14653 in perlapio.pod
+Lookups: PerlIO_fileno(f); Text: PerlIO_fileno(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7795 in perlapio.pod
+Lookups: PerlIO_findFILE(f); Text: PerlIO_findFILE(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13681 in perlapio.pod
+Lookups: PerlIO_flush(f); Text: PerlIO_flush(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8146 in perlapio.pod
+Lookups: PerlIO_get_base(f); Text: PerlIO_get_base(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16647 in perlapio.pod
+Lookups: PerlIO_get_bufsiz(f); Text: PerlIO_get_bufsiz(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16796 in perlapio.pod
+Lookups: PerlIO_get_cnt(f); Text: PerlIO_get_cnt(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15189 in perlapio.pod
+Lookups: PerlIO_get_ptr(f); Text: PerlIO_get_ptr(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15319 in perlapio.pod
+Lookups: PerlIO_getc(f); Text: PerlIO_getc(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7209 in perlapio.pod
+Lookups: PerlIO_getpos(f,p), PerlIO_setpos(f,p); Text: PerlIO_getpos(f,p), PerlIO_setpos(f,p); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9637 in perlapio.pod
+Lookups: PerlIO_has_base(f); Text: PerlIO_has_base(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16445 in perlapio.pod
+Lookups: PerlIO_has_cntptr(f); Text: PerlIO_has_cntptr(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15000 in perlapio.pod
+Lookups: PerlIO_importFILE(f,mode); Text: PerlIO_importFILE(f,mode); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11893 in perlapio.pod
+Lookups: PerlIO_open(path, mode), PerlIO_fdopen(fd,mode); Text: PerlIO_open(path, mode), PerlIO_fdopen(fd,mode); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4795 in perlapio.pod
+Lookups: PerlIO_printf(f,fmt,...), PerlIO_vprintf(f,fmt,a); Text: PerlIO_printf(f,fmt,...), PerlIO_vprintf(f,fmt,a); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5522 in perlapio.pod
+Lookups: PerlIO_puts(f,s), PerlIO_putc(f,c); Text: PerlIO_puts(f,s), PerlIO_putc(f,c); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6568 in perlapio.pod
+Lookups: PerlIO_read(f,buf,count), PerlIO_write(f,buf,count); Text: PerlIO_read(f,buf,count), PerlIO_write(f,buf,count); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5801 in perlapio.pod
+Lookups: PerlIO_releaseFILE(p,f); Text: PerlIO_releaseFILE(p,f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13352 in perlapio.pod
+Lookups: PerlIO_reopen(path,mode,f); Text: PerlIO_reopen(path,mode,f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5189 in perlapio.pod
+Lookups: PerlIO_rewind(f); Text: PerlIO_rewind(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10063 in perlapio.pod
+Lookups: PerlIO_seek(f,offset,whence); Text: PerlIO_seek(f,offset,whence); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8761 in perlapio.pod
+Lookups: PerlIO_set_cnt(f,c); Text: PerlIO_set_cnt(f,c); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16065 in perlapio.pod
+Lookups: PerlIO_set_ptrcnt(f,p,c); Text: PerlIO_set_ptrcnt(f,p,c); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15579 in perlapio.pod
+Lookups: PerlIO_setlinebuf(f); Text: PerlIO_setlinebuf(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10806 in perlapio.pod
+Lookups: PerlIO_stdin(), PerlIO_stdout(), PerlIO_stderr(); Text: PerlIO_stdin(), PerlIO_stdout(), PerlIO_stderr(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4435 in perlapio.pod
+Lookups: PerlIO_stdoutf(fmt,...); Text: PerlIO_stdoutf(fmt,...); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5630 in perlapio.pod
+Lookups: PerlIO_tell(f); Text: PerlIO_tell(f); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9231 in perlapio.pod
+Lookups: PerlIO_tmpfile(); Text: PerlIO_tmpfile(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10217 in perlapio.pod
+Lookups: PerlIO_ungetc(f,c); Text: PerlIO_ungetc(f,c); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6718 in perlapio.pod
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58 in perlapio.pod

@@ -1,0 +1,272 @@
+Lookups: A; Text: A; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106868 in perlguts.pod
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 141855 in perlguts.pod
+Lookups: AV* save_ary(GV *gv); Text: AV* save_ary(GV *gv); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65857 in perlguts.pod
+Lookups: AVs, HVs and undefined values; Text: AVs, HVs and undefined values; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23783 in perlguts.pod
+Lookups: Allocation; Text: Allocation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 76065 in perlguts.pod
+Lookups: Assigning Magic; Text: Assigning Magic; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43450 in perlguts.pod
+Lookups: Autoloading with XSUBs; Text: Autoloading with XSUBs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69253 in perlguts.pod
+Lookups: Background and PERL_IMPLICIT_CONTEXT; Text: Background and PERL_IMPLICIT_CONTEXT; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 92636 in perlguts.pod
+Lookups: Backwards compatibility; Text: Backwards compatibility; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 112087 in perlguts.pod
+Lookups: Blessed References and Class Objects; Text: Blessed References and Class Objects; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26958 in perlguts.pod
+Lookups: Calling Perl Routines from within C Programs; Text: Calling Perl Routines from within C Programs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70186 in perlguts.pod
+Lookups: Code tree; Text: Code tree; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78671 in perlguts.pod
+Lookups: Compile pass 1: check routines; Text: Compile pass 1: check routines; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 83995 in perlguts.pod
+Lookups: Compile pass 1a: constant folding; Text: Compile pass 1a: constant folding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 85155 in perlguts.pod
+Lookups: Compile pass 2: context propagation; Text: Compile pass 2: context propagation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 85587 in perlguts.pod
+Lookups: Compile pass 3: peephole optimization; Text: Compile pass 3: peephole optimization; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86299 in perlguts.pod
+Lookups: Compile-time scope hooks; Text: Compile-time scope hooks; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88458 in perlguts.pod
+Lookups: Compiled code; Text: Compiled code; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78649 in perlguts.pod
+Lookups: Copy on Write; Text: Copy on Write; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41671 in perlguts.pod
+Lookups: Creating New Variables; Text: Creating New Variables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29438 in perlguts.pod
+Lookups: Custom Operators; Text: Custom Operators; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124332 in perlguts.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlguts.pod
+Lookups: Datatypes; Text: Datatypes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 346 in perlguts.pod
+Lookups: Double-Typed SVs; Text: Double-Typed SVs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39481 in perlguts.pod
+Lookups: Dynamic Scope and the Context Stack; Text: Dynamic Scope and the Context Stack; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 128014 in perlguts.pod
+Lookups: E; Text: E; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108251 in perlguts.pod
+Lookups: Examining internal data structures with the dump functions; Text: Examining internal data structures with the dump functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 91235 in perlguts.pod
+Lookups: Examining the tree; Text: Examining the tree; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79549 in perlguts.pod
+Lookups: Exception Handling; Text: Exception Handling; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 110377 in perlguts.pod
+Lookups: Finding Magic; Text: Finding Magic; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 56863 in perlguts.pod
+Lookups: Formatted Printing of IVs, UVs, and NVs; Text: Formatted Printing of IVs, UVs, and NVs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 108681 in perlguts.pod
+Lookups: Formatted Printing of Size_t and SSize_t; Text: Formatted Printing of Size_t and SSize_t; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 109521 in perlguts.pod
+Lookups: Future Plans and PERL_IMPLICIT_SYS; Text: Future Plans and PERL_IMPLICIT_SYS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 104453 in perlguts.pod
+Lookups: GV_ADDMULTI; Text: GV_ADDMULTI; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30044 in perlguts.pod
+Lookups: GV_ADDWARN; Text: GV_ADDWARN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30183 in perlguts.pod
+Lookups: HV* save_hash(GV *gv); Text: HV* save_hash(GV *gv); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65888 in perlguts.pod
+Lookups: Hash API Extensions; Text: Hash API Extensions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22064 in perlguts.pod
+Lookups: How can I recognise a UTF-8 string?; Text: How can I recognise a UTF-8 string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 114658 in perlguts.pod
+Lookups: How do I compare strings?; Text: How do I compare strings?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 122595 in perlguts.pod
+Lookups: How do I convert a string to UTF-8?; Text: How do I convert a string to UTF-8?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 121690 in perlguts.pod
+Lookups: How do I use all this in extensions?; Text: How do I use all this in extensions?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 99599 in perlguts.pod
+Lookups: How does Perl store UTF-8 strings?; Text: How does Perl store UTF-8 strings?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 118491 in perlguts.pod
+Lookups: How does UTF-8 represent Unicode characters?; Text: How does UTF-8 represent Unicode characters?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 115551 in perlguts.pod
+Lookups: How multiple interpreters and concurrency are supported; Text: How multiple interpreters and concurrency are supported; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 92572 in perlguts.pod
+Lookups: Internal Functions; Text: Internal Functions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 105570 in perlguts.pod
+Lookups: Introduction to the context stack; Text: Introduction to the context stack; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 128159 in perlguts.pod
+Lookups: Is there anything else I need to know?; Text: Is there anything else I need to know?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 123217 in perlguts.pod
+Lookups: Localizing changes; Text: Localizing changes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 61977 in perlguts.pod
+Lookups: M; Text: M; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107845 in perlguts.pod
+Lookups: Magic Variables; Text: Magic Variables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42764 in perlguts.pod
+Lookups: Magic Virtual Tables; Text: Magic Virtual Tables; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46287 in perlguts.pod
+Lookups: Memory Allocation; Text: Memory Allocation; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 76039 in perlguts.pod
+Lookups: Moving; Text: Moving; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77679 in perlguts.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlguts.pod
+Lookups: OA_BASEOP; Text: OA_BASEOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127192 in perlguts.pod
+Lookups: OA_BINOP; Text: OA_BINOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127224 in perlguts.pod
+Lookups: OA_COP; Text: OA_COP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127504 in perlguts.pod
+Lookups: OA_LISTOP; Text: OA_LISTOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127256 in perlguts.pod
+Lookups: OA_LOGOP; Text: OA_LOGOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127240 in perlguts.pod
+Lookups: OA_LOOP; Text: OA_LOOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127489 in perlguts.pod
+Lookups: OA_PADOP; Text: OA_PADOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127303 in perlguts.pod
+Lookups: OA_PMOP; Text: OA_PMOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127273 in perlguts.pod
+Lookups: OA_PVOP_OR_SVOP; Text: OA_PVOP_OR_SVOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127319 in perlguts.pod
+Lookups: OA_SVOP; Text: OA_SVOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127288 in perlguts.pod
+Lookups: OA_UNOP; Text: OA_UNOP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127209 in perlguts.pod
+Lookups: Offsets; Text: Offsets; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11773 in perlguts.pod
+Lookups: PerlIO; Text: PerlIO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78105 in perlguts.pod
+Lookups: Pluggable runops; Text: Pluggable runops; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87833 in perlguts.pod
+Lookups: Pointer-To-Integer and Integer-To-Pointer; Text: Pointer-To-Integer and Integer-To-Pointer; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 109984 in perlguts.pod
+Lookups: Popping contexts; Text: Popping contexts; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 136131 in perlguts.pod
+Lookups: Pushing contexts; Text: Pushing contexts; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 131197 in perlguts.pod
+Lookups: Putting a C value on Perl stack; Text: Putting a C value on Perl stack; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71514 in perlguts.pod
+Lookups: Read-Only Values; Text: Read-Only Values; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40935 in perlguts.pod
+Lookups: Reallocation; Text: Reallocation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77315 in perlguts.pod
+Lookups: Redoing contexts; Text: Redoing contexts; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 141392 in perlguts.pod
+Lookups: Reference Counts and Mortality; Text: Reference Counts and Mortality; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30419 in perlguts.pod
+Lookups: References; Text: References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25778 in perlguts.pod
+Lookups: SAVECLEARSV(SV *sv); Text: SAVECLEARSV(SV *sv); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64633 in perlguts.pod
+Lookups: SAVEDELETE(HV *hv, char *key, I32 length); Text: SAVEDELETE(HV *hv, char *key, I32 length); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64762 in perlguts.pod
+Lookups: SAVEDESTRUCTOR(DESTRUCTORFUNC_NOCONTEXT_t f, void *p); Text: SAVEDESTRUCTOR(DESTRUCTORFUNC_NOCONTEXT_t f, void *p); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65091 in perlguts.pod
+Lookups: SAVEDESTRUCTOR_X(DESTRUCTORFUNC_t f, void *p); Text: SAVEDESTRUCTOR_X(DESTRUCTORFUNC_t f, void *p); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65243 in perlguts.pod
+Lookups: SAVEFREEOP(OP *op); Text: SAVEFREEOP(OP *op); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64425 in perlguts.pod
+Lookups: SAVEFREEPV(p); Text: SAVEFREEPV(p); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64513 in perlguts.pod
+Lookups: SAVEFREESV(SV *sv); Text: SAVEFREESV(SV *sv); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63687 in perlguts.pod
+Lookups: SAVEI32(I32 i); Text: SAVEI32(I32 i); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63254 in perlguts.pod
+Lookups: SAVEINT(int i); Text: SAVEINT(int i); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63206 in perlguts.pod
+Lookups: SAVEIV(IV i); Text: SAVEIV(IV i); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63231 in perlguts.pod
+Lookups: SAVELONG(long i); Text: SAVELONG(long i); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63279 in perlguts.pod
+Lookups: SAVEMORTALIZESV(SV *sv); Text: SAVEMORTALIZESV(SV *sv); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64134 in perlguts.pod
+Lookups: SAVEPPTR(p); Text: SAVEPPTR(p); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63444 in perlguts.pod
+Lookups: SAVESPTR(s); Text: SAVESPTR(s); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63422 in perlguts.pod
+Lookups: SAVESTACK_POS(); Text: SAVESTACK_POS(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65413 in perlguts.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 142311 in perlguts.pod
+Lookups: SV* save_scalar(GV *gv); Text: SV* save_scalar(GV *gv); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65784 in perlguts.pod
+Lookups: SV* save_svref(SV **sptr); Text: SV* save_svref(SV **sptr); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66402 in perlguts.pod
+Lookups: Scratchpads and recursion; Text: Scratchpads and recursion; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75018 in perlguts.pod
+Lookups: Scratchpads; Text: Scratchpads; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73758 in perlguts.pod
+Lookups: Should I do anything special if I call perl from multiple threads?; Text: Should I do anything special if I call perl from multiple threads?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 103479 in perlguts.pod
+Lookups: So what happened to dTHR?; Text: So what happened to dTHR?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 99267 in perlguts.pod
+Lookups: Source Documentation; Text: Source Documentation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 111403 in perlguts.pod
+Lookups: Stashes and Globs; Text: Stashes and Globs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37430 in perlguts.pod
+Lookups: Subroutines; Text: Subroutines; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66838 in perlguts.pod
+Lookups: Understanding the Magic of Tied Hashes and Arrays; Text: Understanding the Magic of Tied Hashes and Arrays; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57787 in perlguts.pod
+Lookups: Unicode Support; Text: Unicode Support; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 112855 in perlguts.pod
+Lookups: Variables; Text: Variables; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 328 in perlguts.pod
+Lookups: What is Unicode, anyway?; Text: What is Unicode, anyway?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 113059 in perlguts.pod
+Lookups: What is an "IV"?; Text: What is an "IV"?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 568 in perlguts.pod
+Lookups: What's Really Stored in an SV?; Text: What's Really Stored in an SV?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14708 in perlguts.pod
+Lookups: Working with AVs; Text: Working with AVs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16043 in perlguts.pod
+Lookups: Working with HVs; Text: Working with HVs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18537 in perlguts.pod
+Lookups: Working with SVs; Text: Working with SVs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1061 in perlguts.pod
+Lookups: X; Text: X; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108203 in perlguts.pod
+Lookups: XSUBs and the Argument Stack; Text: XSUBs and the Argument Stack; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66858 in perlguts.pod
+Lookups: b; Text: b; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108327 in perlguts.pod
+Lookups: d; Text: d; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107067 in perlguts.pod
+Lookups: f; Text: f; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107655 in perlguts.pod
+Lookups: m; Text: m; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108161 in perlguts.pod
+Lookups: n; Text: n; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107402 in perlguts.pod
+Lookups: o; Text: o; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107958 in perlguts.pod
+Lookups: others; Text: others; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108453 in perlguts.pod
+Lookups: p; Text: p; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 106980 in perlguts.pod
+Lookups: r; Text: r; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107585 in perlguts.pod
+Lookups: s; Text: s; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107267 in perlguts.pod
+Lookups: void bhk_eval(pTHX_ OP *const o); Text: void bhk_eval(pTHX_ OP *const o); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89974 in perlguts.pod
+Lookups: void bhk_post_end(pTHX_ OP **o); Text: void bhk_post_end(pTHX_ OP **o); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89698 in perlguts.pod
+Lookups: void bhk_pre_end(pTHX_ OP **o); Text: void bhk_pre_end(pTHX_ OP **o); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89456 in perlguts.pod
+Lookups: void bhk_start(pTHX_ int full); Text: void bhk_start(pTHX_ int full); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88962 in perlguts.pod
+Lookups: void save_aptr(AV **aptr); Text: void save_aptr(AV **aptr); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66497 in perlguts.pod
+Lookups: void save_hptr(HV **hptr); Text: void save_hptr(HV **hptr); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66533 in perlguts.pod
+Lookups: void save_item(SV *item); Text: void save_item(SV *item); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65980 in perlguts.pod
+Lookups: void save_list(SV **sarg, I32 maxsarg); Text: void save_list(SV **sarg, I32 maxsarg); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66242 in perlguts.pod
+Lookups: x; Text: x; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 108100 in perlguts.pod
+Lookups: xop_class; Text: xop_class; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127046 in perlguts.pod
+Lookups: xop_desc; Text: xop_desc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126982 in perlguts.pod
+Lookups: xop_name; Text: xop_name; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126751 in perlguts.pod
+Lookups: xop_peep; Text: xop_peep; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 127574 in perlguts.pod

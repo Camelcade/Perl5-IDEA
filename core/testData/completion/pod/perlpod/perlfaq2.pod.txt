@@ -1,0 +1,52 @@
+Lookups:  http://jobs.perl.org/; Text:  http://jobs.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5371 in perlfaq2.pod
+Lookups:  http://learn.perl.org/; Text:  http://learn.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3985 in perlfaq2.pod
+Lookups:  http://learn.perl.org/; Text:  http://learn.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5336 in perlfaq2.pod
+Lookups:  http://lists.perl.org/; Text:  http://lists.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5405 in perlfaq2.pod
+Lookups:  http://perldoc.perl.org/; Text:  http://perldoc.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3948 in perlfaq2.pod
+Lookups:  http://www.perl.org/; Text:  http://www.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3915 in perlfaq2.pod
+Lookups:  http://www.perl.org/; Text:  http://www.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5303 in perlfaq2.pod
+Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8933 in perlfaq2.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 93 in perlfaq2.pod
+Lookups: How can I get a binary version of Perl?; Text: How can I get a binary version of Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1286 in perlfaq2.pod
+Lookups: I copied the Perl binary from one machine to another, but scripts don't work.; Text: I copied the Perl binary from one machine to another, but scripts don't work.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1822 in perlfaq2.pod
+Lookups: I don't have a C compiler. How can I build my own Perl interpreter?; Text: I don't have a C compiler. How can I build my own Perl interpreter?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1380 in perlfaq2.pod
+Lookups: I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linking/... failed. How do I make it work?; Text: I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linking/... failed. How do I make it work?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2678 in perlfaq2.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq2.pod
+Lookups: Perl Books; Text: Perl Books; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6328 in perlfaq2.pod
+Lookups: VERSION; Text: VERSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 59 in perlfaq2.pod
+Lookups: What is perl.com? Perl Mongers? pm.org? perl.org? cpan.org?; Text: What is perl.com? Perl Mongers? pm.org? perl.org? cpan.org?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4542 in perlfaq2.pod
+Lookups: What machines support Perl? Where do I get it?; Text: What machines support Perl? Where do I get it?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 241 in perlfaq2.pod
+Lookups: What mailing lists are there for Perl?; Text: What mailing lists are there for Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7184 in perlfaq2.pod
+Lookups: What modules and extensions are available for Perl? What is CPAN?; Text: What modules and extensions are available for Perl? What is CPAN?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3018 in perlfaq2.pod
+Lookups: Where can I buy a commercial version of Perl?; Text: Where can I buy a commercial version of Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7325 in perlfaq2.pod
+Lookups: Where can I get information on Perl?; Text: Where can I get information on Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3861 in perlfaq2.pod
+Lookups: Where can I post questions?; Text: Where can I post questions?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5973 in perlfaq2.pod
+Lookups: Where do I send bug reports?; Text: Where do I send bug reports?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7742 in perlfaq2.pod
+Lookups: Which Perl blogs should I read?; Text: Which Perl blogs should I read?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6760 in perlfaq2.pod
+Lookups: Which magazines have Perl content?; Text: Which magazines have Perl content?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6425 in perlfaq2.pod

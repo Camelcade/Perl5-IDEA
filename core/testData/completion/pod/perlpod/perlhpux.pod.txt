@@ -1,0 +1,58 @@
+Lookups: 64-bit Perl on HP-UX; Text: 64-bit Perl on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23256 in perlhpux.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30346 in perlhpux.pod
+Lookups: Building Dynamic Extensions on HP-UX; Text: Building Dynamic Extensions on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12065 in perlhpux.pod
+Lookups: Compiling Perl 5 on HP-UX; Text: Compiling Perl 5 on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3547 in perlhpux.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 258 in perlhpux.pod
+Lookups: GDBM and Threads on HP-UX; Text: GDBM and Threads on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25602 in perlhpux.pod
+Lookups: HP-UX Kernel Parameters (maxdsiz) for Compiling Perl; Text: HP-UX Kernel Parameters (maxdsiz) for Compiling Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26339 in perlhpux.pod
+Lookups: HP-UX versions; Text: HP-UX versions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11350 in perlhpux.pod
+Lookups: Itanium Processor Family (IPF) and HP-UX; Text: Itanium Processor Family (IPF) and HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10108 in perlhpux.pod
+Lookups: Itanium, Itanium 2 & Madison 6; Text: Itanium, Itanium 2 & Madison 6; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10742 in perlhpux.pod
+Lookups: Miscellaneous; Text: Miscellaneous; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29960 in perlhpux.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlhpux.pod
+Lookups: NFS filesystems and utime(2) on HP-UX; Text: NFS filesystems and utime(2) on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26119 in perlhpux.pod
+Lookups: Oracle on HP-UX; Text: Oracle on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24930 in perlhpux.pod
+Lookups: Other prebuilt perl binaries; Text: Other prebuilt perl binaries; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3292 in perlhpux.pod
+Lookups: PA-RISC 1.0; Text: PA-RISC 1.0; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7199 in perlhpux.pod
+Lookups: PA-RISC 1.1; Text: PA-RISC 1.1; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7455 in perlhpux.pod
+Lookups: PA-RISC 2.0; Text: PA-RISC 2.0; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8294 in perlhpux.pod
+Lookups: PA-RISC; Text: PA-RISC; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4169 in perlhpux.pod
+Lookups: Portability Between PA-RISC Versions; Text: Portability Between PA-RISC Versions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6623 in perlhpux.pod
+Lookups: Redeclaration of "sendpath" with a different storage class specifier; Text: Redeclaration of "sendpath" with a different storage class specifier; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28987 in perlhpux.pod
+Lookups: The GNU C Compiler; Text: The GNU C Compiler; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17392 in perlhpux.pod
+Lookups: The HP ANSI C Compiler; Text: The HP ANSI C Compiler; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16603 in perlhpux.pod
+Lookups: Threaded Perl on HP-UX; Text: Threaded Perl on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20776 in perlhpux.pod
+Lookups: Using Large Files with Perl on HP-UX; Text: Using Large Files with Perl on HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19058 in perlhpux.pod
+Lookups: Using perl as shipped with HP-UX; Text: Using perl as shipped with HP-UX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 441 in perlhpux.pod
+Lookups: Using perl from HP's porting centre; Text: Using perl from HP's porting centre; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2477 in perlhpux.pod
+Lookups: error: pasting ")" and "l" does not give a valid preprocessing token; Text: error: pasting ")" and "l" does not give a valid preprocessing token; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28107 in perlhpux.pod
+Lookups: nss_delete core dump from op/pwent or op/grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 27110 in perlhpux.pod

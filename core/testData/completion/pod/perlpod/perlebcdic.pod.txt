@@ -1,0 +1,138 @@
+Lookups: ASCII; Text: ASCII; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2877 in perlebcdic.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83585 in perlebcdic.pod
+Lookups: BUGS; Text: BUGS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 81543 in perlebcdic.pod
+Lookups: C RTL; Text: C RTL; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58310 in perlebcdic.pod
+Lookups: COMMON CHARACTER CODE SETS; Text: COMMON CHARACTER CODE SETS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2842 in perlebcdic.pod
+Lookups: CONVERSIONS; Text: CONVERSIONS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54997 in perlebcdic.pod
+Lookups: Caesarean ciphers; Text: Caesarean ciphers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78564 in perlebcdic.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95 in perlebcdic.pod
+Lookups: EBCDIC code sets recognized by Perl; Text: EBCDIC code sets recognized by Perl; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6834 in perlebcdic.pod
+Lookups: EBCDIC; Text: EBCDIC; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5339 in perlebcdic.pod
+Lookups: FUNCTION DIFFERENCES; Text: FUNCTION DIFFERENCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62287 in perlebcdic.pod
+Lookups: HISTORY; Text: HISTORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 83505 in perlebcdic.pod
+Lookups: Hashing order and checksums; Text: Hashing order and checksums; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79460 in perlebcdic.pod
+Lookups: I18N AND L10N; Text: I18N AND L10N; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79681 in perlebcdic.pod
+Lookups: IDENTIFYING CHARACTER CODE SETS; Text: IDENTIFYING CHARACTER CODE SETS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52955 in perlebcdic.pod
+Lookups: IFS access; Text: IFS access; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80428 in perlebcdic.pod
+Lookups: ISO 8859; Text: ISO 8859; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4150 in perlebcdic.pod
+Lookups: Ignore ASCII vs. EBCDIC sort differences.; Text: Ignore ASCII vs. EBCDIC sort differences.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71672 in perlebcdic.pod
+Lookups: Latin 1 (ISO 8859-1); Text: Latin 1 (ISO 8859-1); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4594 in perlebcdic.pod
+Lookups: MONO CASE then sort data (for non-digits, non-underscore); Text: MONO CASE then sort data (for non-digits, non-underscore); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72651 in perlebcdic.pod
+Lookups: MULTI-OCTET CHARACTER SETS; Text: MULTI-OCTET CHARACTER SETS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79905 in perlebcdic.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlebcdic.pod
+Lookups: OPERATOR DIFFERENCES; Text: OPERATOR DIFFERENCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58411 in perlebcdic.pod
+Lookups: OS ISSUES; Text: OS ISSUES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 80106 in perlebcdic.pod
+Lookups: OS/390, z/OS; Text: OS/390, z/OS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80459 in perlebcdic.pod
+Lookups: OS/400; Text: OS/400; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80207 in perlebcdic.pod
+Lookups: PASE; Text: PASE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80231 in perlebcdic.pod
+Lookups: POSIX-BC; Text: POSIX-BC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7535 in perlebcdic.pod
+Lookups: POSIX-BC?; Text: POSIX-BC?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81519 in perlebcdic.pod
+Lookups: Perform sorting on one type of platform only.; Text: Perform sorting on one type of platform only.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 73814 in perlebcdic.pod
+Lookups: Quoted-Printable encoding and decoding; Text: Quoted-Printable encoding and decoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 76967 in perlebcdic.pod
+Lookups: REFERENCES; Text: REFERENCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 82523 in perlebcdic.pod
+Lookups: REGULAR EXPRESSION DIFFERENCES; Text: REGULAR EXPRESSION DIFFERENCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65009 in perlebcdic.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 82452 in perlebcdic.pod
+Lookups: SINGLE OCTET TABLES; Text: SINGLE OCTET TABLES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15274 in perlebcdic.pod
+Lookups: SOCKETS; Text: SOCKETS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69752 in perlebcdic.pod
+Lookups: SORTING; Text: SORTING; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 70050 in perlebcdic.pod
+Lookups: TRANSFORMATION FORMATS; Text: TRANSFORMATION FORMATS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 73964 in perlebcdic.pod
+Lookups: Table in hex, sorted in 1047 order; Text: Table in hex, sorted in 1047 order; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36276 in perlebcdic.pod
+Lookups: The 13 variant characters; Text: The 13 variant characters; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6239 in perlebcdic.pod
+Lookups: URL decoding and encoding; Text: URL decoding and encoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74237 in perlebcdic.pod
+Lookups: Unicode and UTF; Text: Unicode and UTF; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10013 in perlebcdic.pod
+Lookups: Unicode code points versus EBCDIC code points; Text: Unicode code points versus EBCDIC code points; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7767 in perlebcdic.pod
+Lookups: Use a sort helper function; Text: Use a sort helper function; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71814 in perlebcdic.pod
+Lookups: Using Encode; Text: Using Encode; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13486 in perlebcdic.pod
+Lookups: chcp; Text: chcp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80601 in perlebcdic.pod
+Lookups: chr(); Text: chr(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62325 in perlebcdic.pod
+Lookups: dataset access; Text: dataset access; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80724 in perlebcdic.pod
+Lookups: iconv; Text: iconv; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57689 in perlebcdic.pod
+Lookups: iconv; Text: iconv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80913 in perlebcdic.pod
+Lookups: locales; Text: locales; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81052 in perlebcdic.pod
+Lookups: ord(); Text: ord(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62510 in perlebcdic.pod
+Lookups: pack(); Text: pack(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62643 in perlebcdic.pod
+Lookups: print(); Text: print(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63322 in perlebcdic.pod
+Lookups: printf(); Text: printf(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63979 in perlebcdic.pod
+Lookups: recipe 0; Text: recipe 0; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16307 in perlebcdic.pod
+Lookups: recipe 1; Text: recipe 1; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16580 in perlebcdic.pod
+Lookups: recipe 2; Text: recipe 2; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17502 in perlebcdic.pod
+Lookups: recipe 3; Text: recipe 3; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17747 in perlebcdic.pod
+Lookups: recipe 4; Text: recipe 4; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35212 in perlebcdic.pod
+Lookups: recipe 5; Text: recipe 5; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35608 in perlebcdic.pod
+Lookups: recipe 6; Text: recipe 6; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35998 in perlebcdic.pod
+Lookups: sigaction; Text: sigaction; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80536 in perlebcdic.pod
+Lookups: sort(); Text: sort(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64218 in perlebcdic.pod
+Lookups: sprintf(); Text: sprintf(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64379 in perlebcdic.pod
+Lookups: tr///; Text: tr///; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55221 in perlebcdic.pod
+Lookups: unpack(); Text: unpack(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64533 in perlebcdic.pod
+Lookups: utf8::unicode_to_native() and utf8::native_to_unicode(); Text: utf8::unicode_to_native() and utf8::native_to_unicode(); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55017 in perlebcdic.pod
+Lookups: uu encoding and decoding; Text: uu encoding and decoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 75407 in perlebcdic.pod

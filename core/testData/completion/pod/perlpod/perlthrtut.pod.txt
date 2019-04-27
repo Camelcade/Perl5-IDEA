@@ -1,0 +1,94 @@
+Lookups: A Complete Example; Text: A Complete Example; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 32231 in perlthrtut.pod
+Lookups: A Note about the Examples; Text: A Note about the Examples; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8351 in perlthrtut.pod
+Lookups: A Thread Pitfall: Deadlocks; Text: A Thread Pitfall: Deadlocks; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21420 in perlthrtut.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45845 in perlthrtut.pod
+Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45506 in perlthrtut.pod
+Lookups: Advanced Semaphores; Text: Advanced Semaphores; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26010 in perlthrtut.pod
+Lookups: Are These Threads The Same?; Text: Are These Threads The Same?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31221 in perlthrtut.pod
+Lookups: Basic Thread Support; Text: Basic Thread Support; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7162 in perlthrtut.pod
+Lookups: Basic semaphores; Text: Basic semaphores; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24755 in perlthrtut.pod
+Lookups: Bibliography; Text: Bibliography; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43556 in perlthrtut.pod
+Lookups: Boss/Worker; Text: Boss/Worker; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1940 in perlthrtut.pod
+Lookups: Conclusion; Text: Conclusion; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42862 in perlthrtut.pod
+Lookups: Controlling access: lock(); Text: Controlling access: lock(); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18483 in perlthrtut.pod
+Lookups: Copyrights; Text: Copyrights; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 46182 in perlthrtut.pod
+Lookups: Creating Threads; Text: Creating Threads; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8762 in perlthrtut.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 71 in perlthrtut.pod
+Lookups: Different implementations of threads; Text: Different implementations of threads; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35820 in perlthrtut.pod
+Lookups: General Thread Utility Routines; Text: General Thread Utility Routines; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30216 in perlthrtut.pod
+Lookups: Giving up control; Text: Giving up control; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28948 in perlthrtut.pod
+Lookups: Ignoring A Thread; Text: Ignoring A Thread; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11507 in perlthrtut.pod
+Lookups: Introductory Texts; Text: Introductory Texts; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43638 in perlthrtut.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlthrtut.pod
+Lookups: OS-Related References; Text: OS-Related References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44451 in perlthrtut.pod
+Lookups: Other References; Text: Other References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44847 in perlthrtut.pod
+Lookups: Performance considerations; Text: Performance considerations; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39275 in perlthrtut.pod
+Lookups: Pipeline; Text: Pipeline; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3180 in perlthrtut.pod
+Lookups: Process and Thread Termination; Text: Process and Thread Termination; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12725 in perlthrtut.pod
+Lookups: Process-scope Changes; Text: Process-scope Changes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40161 in perlthrtut.pod
+Lookups: Queues: Passing Data Around; Text: Queues: Passing Data Around; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23319 in perlthrtut.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43067 in perlthrtut.pod
+Lookups: Semaphores: Synchronizing Data Access; Text: Semaphores: Synchronizing Data Access; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24383 in perlthrtut.pod
+Lookups: Shared And Unshared Data; Text: Shared And Unshared Data; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13852 in perlthrtut.pod
+Lookups: Synchronization and control; Text: Synchronization and control; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17951 in perlthrtut.pod
+Lookups: Thread Basics; Text: Thread Basics; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6824 in perlthrtut.pod
+Lookups: Thread IDs; Text: Thread IDs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30737 in perlthrtut.pod
+Lookups: Thread Pitfalls: Races; Text: Thread Pitfalls: Races; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16115 in perlthrtut.pod
+Lookups: Thread-Safe Modules; Text: Thread-Safe Modules; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5446 in perlthrtut.pod
+Lookups: Thread-Safety of System Libraries; Text: Thread-Safety of System Libraries; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 41653 in perlthrtut.pod
+Lookups: Threaded Program Models; Text: Threaded Program Models; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1650 in perlthrtut.pod
+Lookups: Threads And Data; Text: Threads And Data; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13627 in perlthrtut.pod
+Lookups: Waiting For A Thread To Exit; Text: Waiting For A Thread To Exit; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10317 in perlthrtut.pod
+Lookups: Waiting for a Condition; Text: Waiting for a Condition; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28576 in perlthrtut.pod
+Lookups: What Is A Thread Anyway?; Text: What Is A Thread Anyway?; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1227 in perlthrtut.pod
+Lookups: What Thread Am I In?; Text: What Thread Am I In?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30490 in perlthrtut.pod
+Lookups: What Threads Are Running?; Text: What Threads Are Running?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31518 in perlthrtut.pod
+Lookups: What kind of threads are Perl threads?; Text: What kind of threads are Perl threads?; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4221 in perlthrtut.pod
+Lookups: Work Crew; Text: Work Crew; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2608 in perlthrtut.pod

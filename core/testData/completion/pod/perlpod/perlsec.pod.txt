@@ -1,0 +1,40 @@
+Lookups: Algorithmic Complexity Attacks; Text: Algorithmic Complexity Attacks; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21812 in perlsec.pod
+Lookups: Alternative Hash Functions; Text: Alternative Hash Functions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24369 in perlsec.pod
+Lookups: Bucket Order Perturbance; Text: Bucket Order Perturbance; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23887 in perlsec.pod
+Lookups: Cleaning Up Your Path; Text: Cleaning Up Your Path; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11215 in perlsec.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38 in perlsec.pod
+Lookups: Hash Seed Randomization; Text: Hash Seed Randomization; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22952 in perlsec.pod
+Lookups: Hash Traversal Randomization; Text: Hash Traversal Randomization; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23355 in perlsec.pod
+Lookups: Laundering and Detecting Tainted Data; Text: Laundering and Detecting Tainted Data; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6625 in perlsec.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlsec.pod
+Lookups: New Default Hash Function; Text: New Default Hash Function; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24228 in perlsec.pod
+Lookups: Protecting Your Programs; Text: Protecting Your Programs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19617 in perlsec.pod
+Lookups: SECURITY MECHANISMS AND CONCERNS; Text: SECURITY MECHANISMS AND CONCERNS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1742 in perlsec.pod
+Lookups: SECURITY VULNERABILITY CONTACT INFORMATION; Text: SECURITY VULNERABILITY CONTACT INFORMATION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 533 in perlsec.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28129 in perlsec.pod
+Lookups: Shebang Race Condition; Text: Shebang Race Condition; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16371 in perlsec.pod
+Lookups: Switches On the "#!" Line; Text: Switches On the "#!" Line; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9688 in perlsec.pod
+Lookups: Taint mode and @INC; Text: Taint mode and @INC; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10266 in perlsec.pod
+Lookups: Taint mode; Text: Taint mode; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1783 in perlsec.pod
+Lookups: Unicode; Text: Unicode; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21536 in perlsec.pod
+Lookups: Using Sudo; Text: Using Sudo; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26968 in perlsec.pod

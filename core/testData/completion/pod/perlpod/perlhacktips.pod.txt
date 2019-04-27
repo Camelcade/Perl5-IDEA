@@ -1,0 +1,126 @@
+Lookups:  'enter'; Text:  'enter'; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26311 in perlhacktips.pod
+Lookups:  -Accflags=-faddress-sanitizer; Text:  -Accflags=-faddress-sanitizer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40036 in perlhacktips.pod
+Lookups:  -Alddlflags=-shared\ -faddress-sanitizer; Text:  -Alddlflags=-shared\ -faddress-sanitizer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40223 in perlhacktips.pod
+Lookups:  -Aldflags=-faddress-sanitizer; Text:  -Aldflags=-faddress-sanitizer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40135 in perlhacktips.pod
+Lookups:  -Dcc=clang; Text:  -Dcc=clang; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39922 in perlhacktips.pod
+Lookups:  -a; Text:  -a; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43028 in perlhacktips.pod
+Lookups:  -b; Text:  -b; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43097 in perlhacktips.pod
+Lookups:  -e routine; Text:  -e routine; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43160 in perlhacktips.pod
+Lookups:  -f routine; Text:  -f routine; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43245 in perlhacktips.pod
+Lookups:  -s; Text:  -s; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43333 in perlhacktips.pod
+Lookups:  -z; Text:  -z; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43476 in perlhacktips.pod
+Lookups:  break function_name; Text:  break function_name; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25793 in perlhacktips.pod
+Lookups:  break source.c:xxx; Text:  break source.c:xxx; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25822 in perlhacktips.pod
+Lookups:  continue; Text:  continue; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26184 in perlhacktips.pod
+Lookups:  finish; Text:  finish; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26234 in perlhacktips.pod
+Lookups:  next; Text:  next; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26090 in perlhacktips.pod
+Lookups:  print; Text:  print; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26935 in perlhacktips.pod
+Lookups:  ptype; Text:  ptype; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26451 in perlhacktips.pod
+Lookups:  run [args]; Text:  run [args]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25730 in perlhacktips.pod
+Lookups:  step; Text:  step; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26031 in perlhacktips.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 55351 in perlhacktips.pod
+Lookups: AddressSanitizer; Text: AddressSanitizer; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39234 in perlhacktips.pod
+Lookups: C backtrace; Text: C backtrace; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50611 in perlhacktips.pod
+Lookups: COMMON PROBLEMS; Text: COMMON PROBLEMS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 456 in perlhacktips.pod
+Lookups: Coverity; Text: Coverity; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32904 in perlhacktips.pod
+Lookups: DDD over gdb; Text: DDD over gdb; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49605 in perlhacktips.pod
+Lookups: DEBUGGING; Text: DEBUGGING; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 23271 in perlhacktips.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 193 in perlhacktips.pod
+Lookups: Dumping Perl Data Structures; Text: Dumping Perl Data Structures; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27897 in perlhacktips.pod
+Lookups: GCC gcov Profiling; Text: GCC gcov Profiling; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43658 in perlhacktips.pod
+Lookups: Gprof Profiling; Text: Gprof Profiling; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42146 in perlhacktips.pod
+Lookups: HP-UX cadvise (Code Advisor); Text: HP-UX cadvise (Code Advisor); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33249 in perlhacktips.pod
+Lookups: Linux; Text: Linux; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51805 in perlhacktips.pod
+Lookups: MEMORY DEBUGGERS; Text: MEMORY DEBUGGERS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36531 in perlhacktips.pod
+Lookups: MISCELLANEOUS TRICKS; Text: MISCELLANEOUS TRICKS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 45487 in perlhacktips.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 130 in perlhacktips.pod
+Lookups: OS X; Text: OS X; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 52035 in perlhacktips.pod
+Lookups: PERL_DESTRUCT_LEVEL; Text: PERL_DESTRUCT_LEVEL; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45516 in perlhacktips.pod
+Lookups: PERL_MEM_LOG; Text: PERL_MEM_LOG; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48382 in perlhacktips.pod
+Lookups: PROFILING; Text: PROFILING; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 40608 in perlhacktips.pod
+Lookups: Perl environment problems; Text: Perl environment problems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 672 in perlhacktips.pod
+Lookups: Poison; Text: Poison; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53314 in perlhacktips.pod
+Lookups: Poking at Perl; Text: Poking at Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23706 in perlhacktips.pod
+Lookups: Portability problems; Text: Portability problems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3680 in perlhacktips.pod
+Lookups: Problematic System Interfaces; Text: Problematic System Interfaces; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21222 in perlhacktips.pod
+Lookups: Read-only optrees; Text: Read-only optrees; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53486 in perlhacktips.pod
+Lookups: SOURCE CODE STATIC ANALYSIS; Text: SOURCE CODE STATIC ANALYSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 31980 in perlhacktips.pod
+Lookups: Security problems; Text: Security problems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21575 in perlhacktips.pod
+Lookups: The .i Targets; Text: The .i Targets; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55182 in perlhacktips.pod
+Lookups: Using a source-level debugger; Text: Using a source-level debugger; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25014 in perlhacktips.pod
+Lookups: Using gdb to look at specific parts of a program; Text: Using gdb to look at specific parts of a program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30903 in perlhacktips.pod
+Lookups: Using gdb to look at what the parser/lexer are doing; Text: Using gdb to look at what the parser/lexer are doing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31533 in perlhacktips.pod
+Lookups: Warnings of other C compilers; Text: Warnings of other C compilers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36201 in perlhacktips.pod
+Lookups: When is a bool not a bool?; Text: When is a bool not a bool?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54188 in perlhacktips.pod
+Lookups: cpd (cut-and-paste detector); Text: cpd (cut-and-paste detector); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33637 in perlhacktips.pod
+Lookups: dump_c_backtrace; Text: dump_c_backtrace; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53283 in perlhacktips.pod
+Lookups: free_c_backtrace; Text: free_c_backtrace; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53231 in perlhacktips.pod
+Lookups: gcc warnings; Text: gcc warnings; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34496 in perlhacktips.pod
+Lookups: gdb macro support; Text: gdb macro support; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27536 in perlhacktips.pod
+Lookups: get_c_backtrace; Text: get_c_backtrace; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53208 in perlhacktips.pod
+Lookups: get_c_backtrace_dump; Text: get_c_backtrace_dump; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53255 in perlhacktips.pod
+Lookups: lint; Text: lint; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32542 in perlhacktips.pod
+Lookups: valgrind; Text: valgrind; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37857 in perlhacktips.pod

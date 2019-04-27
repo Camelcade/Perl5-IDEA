@@ -1,0 +1,82 @@
+Lookups: A Simple Client; Text: A Simple Client; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50416 in perlipc.pod
+Lookups: A Webget Client; Text: A Webget Client; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52883 in perlipc.pod
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69503 in perlipc.pod
+Lookups: Avoiding Pipe Deadlocks; Text: Avoiding Pipe Deadlocks; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29478 in perlipc.pod
+Lookups: BUGS; Text: BUGS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69070 in perlipc.pod
+Lookups: Background Processes; Text: Background Processes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20410 in perlipc.pod
+Lookups: Bidirectional Communication with Another Process; Text: Bidirectional Communication with Another Process; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30647 in perlipc.pod
+Lookups: Bidirectional Communication with Yourself; Text: Bidirectional Communication with Yourself; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33274 in perlipc.pod
+Lookups: Complete Dissociation of Child from Parent; Text: Complete Dissociation of Child from Parent; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20718 in perlipc.pod
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124 in perlipc.pod
+Lookups: Deferred Signals (Safe Signals); Text: Deferred Signals (Safe Signals); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8099 in perlipc.pod
+Lookups: Filehandles; Text: Filehandles; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19997 in perlipc.pod
+Lookups: Handling the SIGHUP Signal in Daemons; Text: Handling the SIGHUP Signal in Daemons; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6526 in perlipc.pod
+Lookups: Interactive Client with IO::Socket; Text: Interactive Client with IO::Socket; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55680 in perlipc.pod
+Lookups: Internet Line Terminators; Text: Internet Line Terminators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37274 in perlipc.pod
+Lookups: Internet TCP Clients and Servers; Text: Internet TCP Clients and Servers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37889 in perlipc.pod
+Lookups: Interrupting IO; Text: Interrupting IO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11254 in perlipc.pod
+Lookups: Listen; Text: Listen; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59750 in perlipc.pod
+Lookups: LocalPort; Text: LocalPort; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59226 in perlipc.pod
+Lookups: Long-running opcodes; Text: Long-running opcodes; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10097 in perlipc.pod
+Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlipc.pod
+Lookups: NOTES; Text: NOTES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68505 in perlipc.pod
+Lookups: Named Pipes; Text: Named Pipes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14955 in perlipc.pod
+Lookups: PeerAddr; Text: PeerAddr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51519 in perlipc.pod
+Lookups: PeerPort; Text: PeerPort; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51958 in perlipc.pod
+Lookups: Proto; Text: Proto; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 51155 in perlipc.pod
+Lookups: Proto; Text: Proto; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59127 in perlipc.pod
+Lookups: Restartable system calls; Text: Restartable system calls; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13244 in perlipc.pod
+Lookups: Reuse; Text: Reuse; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60041 in perlipc.pod
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69634 in perlipc.pod
+Lookups: Safe Pipe Opens; Text: Safe Pipe Opens; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22106 in perlipc.pod
+Lookups: Signals as "faults"; Text: Signals as "faults"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13866 in perlipc.pod
+Lookups: Signals triggered by operating system state; Text: Signals triggered by operating system state; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14160 in perlipc.pod
+Lookups: Signals; Text: Signals; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 345 in perlipc.pod
+Lookups: Sockets: Client/Server Communication; Text: Sockets: Client/Server Communication; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35619 in perlipc.pod
+Lookups: SysV IPC; Text: SysV IPC; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65179 in perlipc.pod
+Lookups: TCP Clients with IO::Socket; Text: TCP Clients with IO::Socket; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49964 in perlipc.pod
+Lookups: TCP Servers with IO::Socket; Text: TCP Servers with IO::Socket; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58740 in perlipc.pod
+Lookups: UDP: Message Passing; Text: UDP: Message Passing; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62343 in perlipc.pod
+Lookups: Unix-Domain TCP Clients and Servers; Text: Unix-Domain TCP Clients and Servers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45927 in perlipc.pod
+Lookups: Using open() for IPC; Text: Using open() for IPC; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16978 in perlipc.pod
