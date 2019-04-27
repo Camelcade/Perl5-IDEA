@@ -6,31 +6,11 @@ git:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-  - rm -fr build/idea-sandbox/system/log
-  - rm -fr core/build/idea-sandbox/system/log
-  - rm -fr docker/build/idea-sandbox/system/log
-  - rm -fr embedded/build/idea-sandbox/system/log
-  - rm -fr htmlmason/build/idea-sandbox/system/log
-  - rm -fr mason-core/build/idea-sandbox/system/log
-  - rm -fr mason2/build/idea-sandbox/system/log
-  - rm -fr mojo/build/idea-sandbox/system/log
-  - rm -fr tt2/build/idea-sandbox/system/log
-  - rm -fr wsl/build/idea-sandbox/system/log
 cache:
   timeout: 600
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - build
-    - core/build
-    - docker/build
-    - embedded/build
-    - htmlmason/build
-    - mason-core/build
-    - mason2/build
-    - mojo/build
-    - tt2/build
-    - wsl/build
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 after_success:
   - ./gradlew coveralls
