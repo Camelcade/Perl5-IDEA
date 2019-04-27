@@ -24,7 +24,7 @@ env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 # More info: https://github.com/travis-ci/travis-ci/issues/8667
 install: true
 script:
-  - ./gradlew test --warning-mode=all
+  - ./gradlew test
 after_success:
   - ./gradlew coveralls
 

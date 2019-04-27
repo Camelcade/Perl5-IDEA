@@ -80,6 +80,10 @@ allprojects {
     jacoco {
       enabled = System.getenv("WITH_COVERAGE") || project.hasProperty("with_coverage")
     }
+    testLogging {
+      events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+      exceptionFormat "full"
+    }
   }
 
   publishPlugin {
