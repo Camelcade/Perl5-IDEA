@@ -103,14 +103,6 @@ subprojects {
     changeNotes(file(changesFile).text)
   }
 
-  jacocoTestReport {
-    reports {
-      xml.enabled = true
-      html.enabled = true
-      csv.enabled = false
-    }
-  }
-
   afterEvaluate {
     coveralls.sourceDirs += it.sourceSets.main.java.srcDirs.findAll { file -> file.name == "src" }
   }
