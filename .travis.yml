@@ -3,16 +3,27 @@ jdk:
   - oraclejdk8
 git:
   submodules: false
+os:
+  - linux
+
+# Cache settings
+cache:
+  timeout: 600
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  timeout: 600
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
-after_success:
-  - ./gradlew coveralls
+
+# Override default install process on TravisCI
+# Avoid default `gradlew assemble` execution. Be explicit about it on the `script` section.
+# More info: https://github.com/travis-ci/travis-ci/issues/8667
+install: true
 script:
   - ./gradlew test
+after_success:
+  - ./gradlew coveralls
+
