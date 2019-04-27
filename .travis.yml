@@ -6,20 +6,30 @@ git:
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+  - rm -fr build/idea-sandbox/system/log
+  - rm -fr core/build/idea-sandbox/system/log
+  - rm -fr docker/build/idea-sandbox/system/log
+  - rm -fr embedded/build/idea-sandbox/system/log
+  - rm -fr htmlmason/build/idea-sandbox/system/log
+  - rm -fr mason-core/build/idea-sandbox/system/log
+  - rm -fr mason2/build/idea-sandbox/system/log
+  - rm -fr mojo/build/idea-sandbox/system/log
+  - rm -fr tt2/build/idea-sandbox/system/log
+  - rm -fr wsl/build/idea-sandbox/system/log
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - $TRAVIS_BUILD_DIR/build
-    - $TRAVIS_BUILD_DIR/core/build
-    - $TRAVIS_BUILD_DIR/docker/build
-    - $TRAVIS_BUILD_DIR/embedded/build
-    - $TRAVIS_BUILD_DIR/htmlmason/build
-    - $TRAVIS_BUILD_DIR/mason-core/build
-    - $TRAVIS_BUILD_DIR/mason2/build
-    - $TRAVIS_BUILD_DIR/mojo/build
-    - $TRAVIS_BUILD_DIR/tt2/build
-    - $TRAVIS_BUILD_DIR/wsl/build
+    - build
+    - core/build
+    - docker/build
+    - embedded/build
+    - htmlmason/build
+    - mason-core/build
+    - mason2/build
+    - mojo/build
+    - tt2/build
+    - wsl/build
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 after_success:
   - ./gradlew coveralls
