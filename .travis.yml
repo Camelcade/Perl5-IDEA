@@ -17,6 +17,7 @@ before_cache:
   - rm -fr tt2/build/idea-sandbox/system/log
   - rm -fr wsl/build/idea-sandbox/system/log
 cache:
+  timeout: 600
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
