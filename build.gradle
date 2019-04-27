@@ -81,9 +81,11 @@ allprojects {
     jacoco {
       enabled = isCI || project.hasProperty("with_coverage")
     }
-    testLogging {
-      events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-      exceptionFormat "full"
+    if( isCI ){
+      testLogging {
+        events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        exceptionFormat "full"
+      }
     }
   }
 
