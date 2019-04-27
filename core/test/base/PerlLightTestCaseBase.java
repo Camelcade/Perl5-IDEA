@@ -471,12 +471,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doTestCompletion("", null);
   }
 
-  public final void doTestCompletion(BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
+  public final void doTestCompletion(@Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     doTestCompletion("", predicate);
   }
 
   public final void doTestCompletion(@NotNull String answerSuffix,
-                                     BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
+                                     @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     initWithFileSmart();
     doTestCompletionCheck(answerSuffix, predicate);
   }
