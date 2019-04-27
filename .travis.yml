@@ -3,8 +3,9 @@ jdk:
   - oraclejdk8
 git:
   submodules: false
-os:
-  - linux
+#os:
+#  - linux
+#  - osx
 
 # Cache settings
 cache:
