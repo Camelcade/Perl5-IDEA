@@ -27,13 +27,18 @@ plugins {
   id 'org.jetbrains.grammarkit' version '2019.1'
 }
 
+repositories {
+  mavenCentral()
+}
+
+def agentFiles = files('lib/org.jacoco.agent-0.8.1.jar')
+
 allprojects {
-  repositories {
-    mavenCentral()
-    maven { url "http://mvnrepository.com/artifact" }
+  apply plugin: 'jacoco'
+  dependencies{
+    it.jacocoAgent agentFiles
   }
 
-  apply plugin: 'jacoco'
   apply plugin: 'java'
   sourceCompatibility = javaVersion
   targetCompatibility = javaTargetVersion
@@ -134,6 +139,10 @@ task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
     xml.enabled = true // required by coveralls
     csv.enabled = false
   }
+}
+
+coveralls{
+  jacocoReportPath = "$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
 }
 
 tasks.coveralls {
