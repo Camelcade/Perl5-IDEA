@@ -10,12 +10,12 @@ git:
 # Cache settings
 cache:
   timeout: 600
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-directories:
-  - $HOME/.gradle/caches/
-  - $HOME/.gradle/wrapper/
 
 env: ORG_GRADLE_PROJECT_downloadIdeaSources=false
 
