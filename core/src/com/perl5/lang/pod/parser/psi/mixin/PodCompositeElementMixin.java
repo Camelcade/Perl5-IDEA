@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,23 +129,5 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
   @Override
   public int getHeadingLevel() {
     return 0;
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewTypeLocation() {
-    return "NYI Type location string for " + this;
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewLongNameLocation() {
-    return "NYI Long name location string for " + this;
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewShortNameLocation() {
-    return "NYI Short name location string for " + this;
   }
 }

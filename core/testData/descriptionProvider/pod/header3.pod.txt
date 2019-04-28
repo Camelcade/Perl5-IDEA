@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: Some header
+UsageViewLongNameLocation: Some header
+UsageViewTypeLocation: 3d Heading
+UsageViewNodeTextLocation: Some header
+NonCodeSearchDescriptionLocation: Some header
+DeleteNameDescriptionLocation: Some header
+DeleteTypeDescriptionLocation: 3d Heading
+DeleteTypeDescriptionLocation: 3d Headings

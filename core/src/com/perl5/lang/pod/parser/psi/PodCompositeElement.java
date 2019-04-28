@@ -19,7 +19,6 @@ package com.perl5.lang.pod.parser.psi;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -49,31 +48,4 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
    * @return heading level
    */
   int getHeadingLevel();
-
-  /**
-   * Returns text for UsageViewTypeLocation.INSTANCE
-   *
-   * @return
-   */
-  @Deprecated
-  @Nullable
-  String getUsageViewTypeLocation();
-
-  /**
-   * Returns text for UsageViewLongNameLocation.INSTANCE
-   *
-   * @return
-   */
-  @Deprecated
-  @Nullable
-  String getUsageViewLongNameLocation();
-
-  /**
-   * Returns text for UsageViewShortNameLocation.INSTANCE
-   *
-   * @return
-   */
-  @Deprecated
-  @Nullable
-  String getUsageViewShortNameLocation();
 }

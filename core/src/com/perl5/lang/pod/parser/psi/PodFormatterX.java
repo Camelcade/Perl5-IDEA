@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.PerlBundle;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -33,11 +31,5 @@ public interface PodFormatterX extends PodStubBasedSection, PodFormatter {
   default PsiElement getIndexTarget() {
     PsiElement container = PsiTreeUtil.getParentOfType(this, PodTitledSection.class);
     return container == null ? getContainingFile() : container;
-  }
-
-  @NotNull
-  @Override
-  default String getTypeText() {
-    return PerlBundle.message("pod.type.index");
   }
 }

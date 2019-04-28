@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,10 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionItem;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -77,17 +75,5 @@ public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSec
         builder.append("</dd>");
       }
     }
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewTypeLocation() {
-    return "List Item";
-  }
-
-  @NotNull
-  @Override
-  public String getTypeText() {
-    return PerlBundle.message("pod.type.list.item");
   }
 }

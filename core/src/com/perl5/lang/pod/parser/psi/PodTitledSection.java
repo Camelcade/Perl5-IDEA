@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.pom.PomTarget;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -36,10 +35,4 @@ public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructur
 
   @Nullable
   PsiElement getTitleBlock();
-
-  /**
-   * @return human readable type for this section. Used in completion
-   */
-  @NotNull
-  String getTypeText();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
@@ -138,23 +137,5 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   public String getName() {
     PsiElement nameIdentifier = getNameIdentifier();
     return nameIdentifier == null ? null : nameIdentifier.getText();
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewLongNameLocation() {
-    return getTitleText();
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewShortNameLocation() {
-    return getName();
-  }
-
-  @NotNull
-  @Override
-  public String getTypeText() {
-    return PerlBundle.message("pod.type.unknown");
   }
 }

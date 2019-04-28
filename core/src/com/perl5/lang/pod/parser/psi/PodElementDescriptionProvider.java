@@ -17,36 +17,75 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.ElementDescriptionLocation;
-import com.intellij.psi.ElementDescriptionProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.usageView.UsageViewLongNameLocation;
-import com.intellij.usageView.UsageViewShortNameLocation;
-import com.intellij.usageView.UsageViewTypeLocation;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.PerlElementDescriptionProviderBase;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PodElementDescriptionProvider implements ElementDescriptionProvider {
+import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
+
+public class PodElementDescriptionProvider extends PerlElementDescriptionProviderBase {
   private static final Logger LOG = Logger.getInstance(PodElementDescriptionProvider.class);
+
+  public PodElementDescriptionProvider() {
+    super(PodLanguage.INSTANCE);
+  }
+
+  @Override
+  protected boolean isMyElement(@NotNull PsiElement element) {
+    return super.isMyElement(element) && element instanceof PodCompositeElement;
+  }
+
   @Nullable
   @Override
-  public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
-    if (!element.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
-      return null;
+  protected String getShortName(@NotNull PsiElement element) {
+    return getLongName(element);
+  }
+
+  @Nullable
+  @Override
+  protected String getTypeName(@NotNull PsiElement element) {
+    if (element instanceof PodFile) {
+      return "POD file";
     }
-    if (element instanceof PodCompositeElement) {
-      if (location == UsageViewShortNameLocation.INSTANCE) {
-        return ((PodCompositeElement)element).getUsageViewShortNameLocation();
-      }
-      else if (location == UsageViewLongNameLocation.INSTANCE) {
-        return ((PodCompositeElement)element).getUsageViewLongNameLocation();
-      }
-      else if (location == UsageViewTypeLocation.INSTANCE) {
-        return ((PodCompositeElement)element).getUsageViewTypeLocation();
-      }
+    IElementType elementType = PsiUtilCore.getElementType(element);
+    if (elementType == POD_FORMAT_INDEX) {
+      return PerlBundle.message("pod.type.index");
     }
-    LOG.warn("Unresolved " + element + " in " + location);
-    return null;
+    else if (elementType == HEAD_1_SECTION) {
+      return PerlBundle.message("pod.type.heading1");
+    }
+    else if (elementType == HEAD_2_SECTION) {
+      return PerlBundle.message("pod.type.heading2");
+    }
+    else if (elementType == HEAD_3_SECTION) {
+      return PerlBundle.message("pod.type.heading3");
+    }
+    else if (elementType == HEAD_4_SECTION) {
+      return PerlBundle.message("pod.type.heading4");
+    }
+    else if (elementType == ITEM_SECTION) {
+      return PerlBundle.message("pod.type.list.item");
+    }
+    else if (elementType == UNKNOWN_SECTION) {
+      return PerlBundle.message("pod.type.unknown");
+    }
+
+    LOG.warn("Unhandled type for " + element);
+    return "Unhandled type for " + element;
+  }
+
+  @Nullable
+  @Override
+  protected String getLongName(@NotNull PsiElement element) {
+    if (element instanceof PodTitledSection) {
+      return ((PodTitledSection)element).getTitleText();
+    }
+    LOG.warn("Unhandled long name for " + element);
+    return "Unhandled long name for " + element;
   }
 }

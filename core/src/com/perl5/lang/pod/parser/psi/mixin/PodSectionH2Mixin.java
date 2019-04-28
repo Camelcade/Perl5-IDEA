@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,9 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionH2;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hurricup on 26.03.2016.
@@ -46,17 +44,5 @@ public class PodSectionH2Mixin extends PodTitledSectionMixin implements PodSecti
   @Override
   public int getHeadingLevel() {
     return 2;
-  }
-
-  @Nullable
-  @Override
-  public String getUsageViewTypeLocation() {
-    return "2nd Level Header";
-  }
-
-  @NotNull
-  @Override
-  public String getTypeText() {
-    return PerlBundle.message("pod.type.heading2");
   }
 }
