@@ -147,7 +147,7 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
     protected void addDescriptorFor(PsiElement element) {
       PsiElement firstChild = element.getFirstChild();
       if (firstChild != null) {
-        addDescriptorFor(element, firstChild.getTextRange().getLength(), 1, 2);
+        addDescriptorFor(element, firstChild.getTextRange().getLength(), 1, 1);
       }
     }
 

@@ -19,6 +19,7 @@ package editor;
 import base.PerlLightTestCase;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
+import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,6 +34,8 @@ public class PerlFoldingTestCase extends PerlLightTestCase {
   public void testPerl() {
     doTest(PerlFileTypeScript.INSTANCE);
   }
+
+  public void testPod() {doTest(PodFileType.INSTANCE);}
 
   private void doTest(@NotNull LanguageFileType fileType) {
     testFoldingRegions(getTestName(true), fileType);
