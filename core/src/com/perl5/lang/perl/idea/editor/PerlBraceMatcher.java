@@ -51,12 +51,6 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
     new BracePair(LEFT_BRACE_HASH, RIGHT_BRACE_HASH, true),
     new BracePair(LEFT_BRACE_CODE, RIGHT_BRACE_CODE, true),
     new BracePair(LEFT_BRACE_GLOB, RIGHT_BRACE_GLOB, true),
-/*
-                        new BracePair(REGEX_LEFT_BRACE, REGEX_RIGHT_BRACE, true),
-			new BracePair(REGEX_LEFT_BRACKET, REGEX_RIGHT_BRACKET, true),
-			new BracePair(REGEX_LEFT_PAREN, REGEX_RIGHT_PAREN, true),
-			new BracePair(REGEX_POSIX_LEFT_BRACKET, REGEX_POSIX_RIGHT_BRACKET, true),
-*/
   };
 
   @NotNull
@@ -76,33 +70,30 @@ public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
     if (element == null || element instanceof PsiFile) {
       return openingBraceOffset;
     }
-
     PsiElement codeBlock = element.getParent();
 
-    if (codeBlock != null && codeBlock instanceof PsiPerlBlock) {
-      PsiElement blockContainer = codeBlock.getParent();
+    if (!(codeBlock instanceof PsiPerlBlock)) {
+      return openingBraceOffset;
+    }
+    PsiElement blockContainer = codeBlock.getParent();
 
-      if (blockContainer != null) {
-        if (blockContainer instanceof PerlSubDefinitionElement
-            || blockContainer instanceof PsiPerlForCompound
-          ) {
-          return blockContainer.getTextOffset();
-        }
-        else if (blockContainer instanceof PsiPerlConditionalBlock
-                 || blockContainer instanceof PsiPerlIfCompoundImpl) {
-          PsiElement keyword = blockContainer.getPrevSibling();
-
-          while (keyword != null && (keyword instanceof PsiWhiteSpace || keyword instanceof PsiComment)) {
-            keyword = keyword.getPrevSibling();
-          }
-
-          if (keyword != null) {
-            return keyword.getTextOffset();
-          }
-        }
-      }
+    if (blockContainer == null) {
+      return openingBraceOffset;
+    }
+    if (blockContainer instanceof PerlSubDefinitionElement || blockContainer instanceof PsiPerlForCompound) {
+      return blockContainer.getTextOffset();
     }
 
-    return openingBraceOffset;
+    if (!(blockContainer instanceof PsiPerlConditionalBlock) && !(blockContainer instanceof PsiPerlIfCompoundImpl)) {
+      return openingBraceOffset;
+    }
+
+    PsiElement keyword = blockContainer.getPrevSibling();
+
+    while ((keyword instanceof PsiWhiteSpace || keyword instanceof PsiComment)) {
+      keyword = keyword.getPrevSibling();
+    }
+
+    return keyword != null ? keyword.getTextOffset() : openingBraceOffset;
   }
 }
