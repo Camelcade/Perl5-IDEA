@@ -63,7 +63,7 @@
     <lang.psiStructureViewFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
     <lang.braceMatcher language="Mojolicious Perl"
-                       implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoliciousBraceMatcher"/>
+                       implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoBraceMatcher"/>
     <lang.foldingBuilder language="Mojolicious Perl"
                          implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
     <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>

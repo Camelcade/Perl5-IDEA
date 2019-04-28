@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by hurricup on 22.12.2015.
  */
-public class MojoliciousBraceMatcher implements PairedBraceMatcher, MojoliciousElementTypes {
+public class MojoBraceMatcher implements PairedBraceMatcher, MojoliciousElementTypes {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_CLOSER, false),
     new BracePair(MOJO_BLOCK_OPENER, MOJO_BLOCK_NOSPACE_CLOSER, false),
