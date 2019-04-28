@@ -1,0 +1,129 @@
+Some paragraph here
+
+=pod
+
+=head1 First level #1
+
+{
+}
+
+[
+]
+
+<
+>
+
+(
+)
+
+C<$a E<lt>=E<gt> $b>
+C<< $a <=> $b >>
+C<<< $a <=> $b >>>
+C<<<<  $a <=> $b     >>>>
+C<$a E<lt>=E<gt> $b>
+C<< $a E<lt>=E<gt> $b >>
+C<<< open(X, ">>thing.dat") || die $! >>>
+C<< $foo->bar(); >>
+C<open(X, "E<gt>E<gt>thing.dat") || die $!>
+C<$foo-E<gt>bar();>
+That's what I<you> think!
+What's C<dump()> for?
+X<C<chmod> and C<unlink()> Under Different Operating Systems>
+That's what I<< you >> think!
+C<<< open(X, ">>thing.dat") || die $! >>>
+B<< $foo->bar(); >>
+C<thing>
+C<< thing >>
+C<<           thing     >>
+C<<<   thing >>>
+C<<<<
+thing
+		   >>>>
+B<example: C<$a E<lt>=E<gt> $b>>
+B<example: C<< $a <=> $b >>>
+B<example: C<< $a E<lt>=E<gt> $b >>>
+B<<< example: C<< $a E<lt>=E<gt> $b >> >>>
+
+I<italic>
+
+B<bold>
+
+C<code>
+
+L<link>
+L<http://www.perl.org/>
+L</Object Attributes>
+L<crontab(5)/"DESCRIPTION">
+L<Perl.org|http://www.perl.org/>
+L<perlport/Newlines>
+L<Perlport's section on NL's|perlport/Newlines>
+Say? Yes, say!
+E<escaped>
+F<filename>
+
+S<nospace>
+
+X<index>
+
+Z<null>
+
+I<>
+
+B<>
+
+C<>
+
+L<>
+
+E<>
+
+F<>
+
+S<>
+
+X<>
+
+Z<>
+
+
+=head2 Second level #1
+
+=head3 Third level #1
+
+=head4 Fourth level #1
+
+=head4 Fourth level #2
+
+=head3 Third level #2
+
+=head2 Second level #2
+
+=head1 First level #2
+
+=over
+
+=item something
+
+=back
+
+=begin Foo::Bar
+
+formatted as block
+
+=end Foo::Bar
+
+=begin :Foo::Bar
+
+formatted as tokens
+
+=end :Foo::Bar
+
+=for Foo::Bar formatted as block
+
+=for :Foo::Bar formatted as tokens
+
+=encoding utf-8
+
+=somethingelese
+
+=cut

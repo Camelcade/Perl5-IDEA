@@ -1,0 +1,35 @@
+
+=head1 METHODS
+
+=method somemethod
+
+Method description
+
+=head1 ATTRIBUTES
+
+=attr someattr
+
+Attribute description
+
+=head1 FUNCTIONS
+
+=func somefunc
+
+Function dscription
+
+=head1 OVERVIEW
+
+Some overview text
+
+=method othermethod
+
+Other method description
+
+=func otherfunc
+
+Other func description
+
+=attr otherattr
+
+Other attr description
+

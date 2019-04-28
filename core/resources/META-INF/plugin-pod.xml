@@ -55,15 +55,15 @@
                      shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
+    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
+
+    <lang.syntaxHighlighterFactory language="Perl5 POD"
+                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
     <!-- not tested -->
     <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
     <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
 
-    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
-
-    <lang.syntaxHighlighterFactory language="Perl5 POD"
-                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
     <lang.refactoringSupport language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
