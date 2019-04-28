@@ -55,8 +55,6 @@
                      shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
-    <additionalTextAttributes scheme="Default" file="colorSchemes/pod_default.xml"/>
-
     <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 

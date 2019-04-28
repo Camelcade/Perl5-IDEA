@@ -18,13 +18,14 @@ package com.perl5.lang.pod.idea.highlighter;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
+import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
+import com.perl5.lang.pod.lexer.PodTokenSets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,23 +33,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
+import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
 
 /**
  * Created by hurricup on 21.04.2015.
  */
-public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodElementTypes {
+public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
   public static final TextAttributesKey POD_TAG_KEY = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
-  public static final TextAttributesKey POD_CODE_KEY = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
+  public static final TextAttributesKey POD_FORMATTER_TAG_KEY =
+    createTextAttributesKey("POD_FORMATTER_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
+  public static final TextAttributesKey
+    POD_FORMATTER_MARKUP_KEY = createTextAttributesKey("POD_FORMATTER_ANGLE", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
+  public static final TextAttributesKey POD_VERBATIM_KEY = createTextAttributesKey("POD_CODE", HighlighterColors.TEXT);
+  public static final TextAttributesKey POD_TEXT_KEY =
+    createTextAttributesKey("POD_TEXT_KEY", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
-  public static final Map<IElementType, TextAttributesKey> ATTRIBUTES_MAP = new HashMap<>();
-  private static final TokenSet POD_TOKENS = TokenSet.create(
-    POD_POD, POD_HEAD1, POD_HEAD2, POD_HEAD3, POD_HEAD4, POD_OVER, POD_ITEM, POD_BACK, POD_BEGIN, POD_END, POD_FOR, POD_ENCODING, POD_CUT,
-    POD_UNKNOWN
-  );
+  private static final Map<IElementType, TextAttributesKey> ATTRIBUTES_MAP = new HashMap<>();
 
   static {
-    safeMap(ATTRIBUTES_MAP, POD_POD, PodSyntaxHighlighter.POD_TAG_KEY);
-    safeMap(ATTRIBUTES_MAP, PodElementTypes.POD_CODE, PodSyntaxHighlighter.POD_CODE_KEY);
+    safeMap(ATTRIBUTES_MAP, POD_CODE, POD_VERBATIM_KEY);
+    safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_TAGS_TOKENSET, POD_TAG_KEY);
+    safeMap(ATTRIBUTES_MAP, TokenSet.create(POD_ANGLE_LEFT, POD_ANGLE_RIGHT, POD_PIPE), POD_FORMATTER_MARKUP_KEY);
+    safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_FORMATTERS_TOKENSET, POD_FORMATTER_TAG_KEY);
   }
 
   @Nullable
@@ -67,13 +73,11 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
   @NotNull
   @Override
   public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-    return getTokenAttributes(tokenType);
+    return getPodHighlights(tokenType);
   }
 
-  public static TextAttributesKey[] getTokenAttributes(IElementType tokenType) {
-    if (POD_TOKENS.contains(tokenType)) {
-      return pack(ATTRIBUTES_MAP.get(POD_POD));
-    }
-    return pack(ATTRIBUTES_MAP.get(tokenType));
+  @NotNull
+  public static TextAttributesKey[] getPodHighlights(IElementType tokenType) {
+    return pack(POD_TEXT_KEY, ATTRIBUTES_MAP.get(tokenType));
   }
 }

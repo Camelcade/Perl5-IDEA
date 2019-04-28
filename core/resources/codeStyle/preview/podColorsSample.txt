@@ -1,0 +1,18 @@
+=head1 NAME
+
+DTL::Fast - Perl implementation of C<Django> templating language.
+
+=head1 SYNOPSIS
+
+Complie and render template from code:
+
+    use DTL::Fast;
+    my $tpl = DTL::Fast::Template->new('Hello, {{ username }}!');
+    print $tpl->render({ username => 'Alex'});
+
+Or create a file: F<template.txt> in F</home/alex/templates> with contents:
+
+=head1 VERSION
+
+See L<Perlpod|perlpod/SYNOPSIS>.
+

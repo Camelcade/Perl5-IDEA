@@ -197,7 +197,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
     // fixme unify this somehow
     if (tokenType.getLanguage() == PodLanguage.INSTANCE) {
-      return PodSyntaxHighlighter.getTokenAttributes(tokenType);
+      return PodSyntaxHighlighter.getPodHighlights(tokenType);
     }
 
     return pack(COLORS_MAP.get(tokenType));
