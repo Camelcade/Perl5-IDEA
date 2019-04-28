@@ -22,9 +22,6 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 23.02.2016.
- */
 public class PerlFoldingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
