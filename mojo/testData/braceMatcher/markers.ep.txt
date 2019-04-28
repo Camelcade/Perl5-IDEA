@@ -1,0 +1,30 @@
+template
+
+<open0><%</open0> say 42; <close0>%></close0>
+
+template
+
+<open1><%</open1> say 42; <close1>=%></close1>
+
+template
+
+<open2><%=</open2> 42 <close2>%></close2>
+
+template
+
+<open3><%==</open3> 42 <close3>%></close3>
+
+template
+
+<open4><%=</open4> 42 <close4>=%></close4>
+
+template
+
+<open5><%==</open5> 42 <close5>=%></close5>
+
+<open6><%</open6> my $block = <open7>begin</open7> <close6>%></close6>
+
+something
+
+<open8><%</open8> <close7>end</close7> <close8>%></close8>
+

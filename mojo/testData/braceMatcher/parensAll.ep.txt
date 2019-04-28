@@ -1,0 +1,28 @@
+<open0><%</open0>
+
+$a = <open1>(</open1>$a + $b<close1>)</close1>;
+
+$a = <open2>[</open2>$a, $b<close2>]</close2>;
+$a-><open3>[</open3>$b<close3>]</close3>;
+$a<open4>[</open4>$b<close4>]</close4>;
+@a<open5>[</open5>$a, $b<close5>]</close5>;
+
+$a = <open6>{</open6> $a => $b<close6>}</close6>;
+$a<open7>{</open7>$b<close7>}</close7>;
+@a<open8>{</open8>$a,$b<close8>}</close8>;
+
+@<open9>{</open9>$a<close9>}</close9>;
+$<open10>{</open10>$a<close10>}</close10>;
+%<open11>{</open11>$a<close11>}</close11>;
+&<open12>{</open12>$a<close12>}</close12>;
+*<open13>{</open13>$a<close13>}</close13>;
+$a-><open14>{</open14>$b<close14>}</close14>;
+
+
+$<open15>{</open15>a<close15>}</close15>;
+@<open16>{</open16>a<close16>}</close16>;
+%<open17>{</open17>a<close17>}</close17>;
+&<open18>{</open18>a<close18>}</close18>;
+*<open19>{</open19>a<close19>}</close19>;
+
+<close0>%></close0>

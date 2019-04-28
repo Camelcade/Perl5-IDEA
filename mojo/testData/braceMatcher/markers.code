@@ -1,0 +1,30 @@
+template
+
+<% say 42; %>
+
+template
+
+<% say 42; =%>
+
+template
+
+<%= 42 %>
+
+template
+
+<%== 42 %>
+
+template
+
+<%= 42 =%>
+
+template
+
+<%== 42 =%>
+
+<% my $block = begin %>
+
+something
+
+<% end %>
+
