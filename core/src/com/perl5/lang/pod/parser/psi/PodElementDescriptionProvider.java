@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.ElementDescriptionLocation;
 import com.intellij.psi.ElementDescriptionProvider;
 import com.intellij.psi.PsiElement;
@@ -26,27 +27,26 @@ import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
 public class PodElementDescriptionProvider implements ElementDescriptionProvider {
+  private static final Logger LOG = Logger.getInstance(PodElementDescriptionProvider.class);
   @Nullable
   @Override
   public String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
-    if (element.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
-      if (element instanceof PodCompositeElement) {
-        if (location == UsageViewShortNameLocation.INSTANCE) {
-          return ((PodCompositeElement)element).getUsageViewShortNameLocation();
-        }
-        else if (location == UsageViewLongNameLocation.INSTANCE) {
-          return ((PodCompositeElement)element).getUsageViewLongNameLocation();
-        }
-        else if (location == UsageViewTypeLocation.INSTANCE) {
-          return ((PodCompositeElement)element).getUsageViewTypeLocation();
-        }
-      }
-      System.err.println("Unresolved " + element + " in " + location);
+    if (!element.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
+      return null;
     }
+    if (element instanceof PodCompositeElement) {
+      if (location == UsageViewShortNameLocation.INSTANCE) {
+        return ((PodCompositeElement)element).getUsageViewShortNameLocation();
+      }
+      else if (location == UsageViewLongNameLocation.INSTANCE) {
+        return ((PodCompositeElement)element).getUsageViewLongNameLocation();
+      }
+      else if (location == UsageViewTypeLocation.INSTANCE) {
+        return ((PodCompositeElement)element).getUsageViewTypeLocation();
+      }
+    }
+    LOG.warn("Unresolved " + element + " in " + location);
     return null;
   }
 }
