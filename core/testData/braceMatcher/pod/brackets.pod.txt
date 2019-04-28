@@ -1,0 +1,1 @@
+test <open0>[</open0> something <close0>]</close0> else

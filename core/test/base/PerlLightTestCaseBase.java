@@ -78,10 +78,14 @@ import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.highlighter.EditorHighlighter;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.editor.markup.RangeHighlighter;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
@@ -106,6 +110,7 @@ import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
@@ -166,6 +171,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.pod.PodLanguage;
 import gnu.trove.THashSet;
+import gnu.trove.TIntHashSet;
 import junit.framework.AssertionFailedError;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
 import org.jetbrains.annotations.NotNull;
@@ -925,30 +931,33 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     initWithFileSmart();
 
     Editor editor = getEditor();
-    int currentOffset = editor.getCaretModel().getOffset();
-    int forwardOffset = -1;
-    try {
-      forwardOffset = BraceMatchingUtil.getMatchedBraceOffset(editor, true, getFile());
-    }
-    catch (AssertionError ignore) {
-    }
+    EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
+    CharSequence charsSequence = editor.getDocument().getCharsSequence();
+    HighlighterIterator highlighterIterator = highlighter.createIterator(0);
+    int counter = 0;
+    TIntHashSet matchedRights = new TIntHashSet();
+    List<Pair<Integer, String>> markers = new ArrayList<>();
 
-    int backwardOffset = -1;
-    try {
-      backwardOffset = BraceMatchingUtil.getMatchedBraceOffset(editor, false, getFile());
+    while (!highlighterIterator.atEnd()) {
+      FileType fileType = PsiUtilBase.getPsiFileAtOffset(getFile(), highlighterIterator.getStart()).getFileType();
+      if (BraceMatchingUtil.isLBraceToken(highlighterIterator, charsSequence, fileType)) {
+        markers.add(Pair.create(highlighterIterator.getStart(), "<open" + counter + ">"));
+        markers.add(Pair.create(highlighterIterator.getEnd(), "</open" + counter + ">"));
+        HighlighterIterator matchIterator = highlighter.createIterator(highlighterIterator.getStart());
+        if (BraceMatchingUtil.matchBrace(charsSequence, fileType, matchIterator, true, true)) {
+          markers.add(Pair.create(matchIterator.getStart(), "<close" + counter + ">"));
+          markers.add(Pair.create(matchIterator.getEnd(), "</close" + counter + ">"));
+          matchedRights.add(matchIterator.getStart());
+        }
+        counter++;
+      }
+      else if (!matchedRights.contains(highlighterIterator.getStart()) &&
+               BraceMatchingUtil.isRBraceToken(highlighterIterator, charsSequence, fileType)) {
+        markers.add(Pair.create(highlighterIterator.getStart(), "<close" + counter + ">"));
+        markers.add(Pair.create(highlighterIterator.getEnd(), "</close" + counter + ">"));
+      }
+      highlighterIterator.advance();
     }
-    catch (AssertionError ignore) {
-    }
-    List<Pair<Integer, String>> markers = new ArrayList<>(3);
-    if (forwardOffset > 0) {
-      markers.add(Pair.create(currentOffset, "<open>"));
-      markers.add(Pair.create(forwardOffset, "<close>"));
-    }
-    if (backwardOffset > 0) {
-      markers.add(Pair.create(backwardOffset, "<open>"));
-      markers.add(Pair.create(currentOffset, "<close>"));
-    }
-
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(markers));
   }
 

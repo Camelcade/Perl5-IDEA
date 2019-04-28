@@ -25,33 +25,17 @@ public class PodBraceMatcherTest extends PodLightTestCase {
     return "testData/braceMatcher/pod";
   }
 
-  public void testAngleClose() {doTest();}
+  public void testAngles() {doTest();}
 
-  public void testAngleCloseFormatter() {doTest();}
+  public void testBeginEnd() {doTest();}
 
-  public void testAngleOpen() {doTest();}
+  public void testBraces() {doTest();}
 
-  public void testAngleOpenFormatter() {doTest();}
+  public void testBrackets() {doTest();}
 
-  public void testBack() {doTest();}
+  public void testOverBack() {doTest();}
 
-  public void testBegin() {doTest();}
-
-  public void testBraceClose() {doTest();}
-
-  public void testBraceOpen() {doTest();}
-
-  public void testBracketClose() {doTest();}
-
-  public void testBracketOpen() {doTest();}
-
-  public void testEnd() {doTest();}
-
-  public void testOver() {doTest();}
-
-  public void testParenClose() {doTest();}
-
-  public void testParenOpen() {doTest();}
+  public void testParens() {doTest();}
 
   private void doTest() {
     doTestBraceMatcher();

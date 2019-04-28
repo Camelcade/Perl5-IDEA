@@ -1,9 +1,0 @@
-Test text
-
-<open>=begin html
-
-something
-
-=e<close>nd html
-
-something

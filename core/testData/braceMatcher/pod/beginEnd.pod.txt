@@ -1,0 +1,9 @@
+Test text
+
+<open0>=begin</open0> html
+
+something
+
+<close0>=end</close0> html
+
+something

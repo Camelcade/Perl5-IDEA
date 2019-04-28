@@ -1,0 +1,3 @@
+test <asdfasdf|asdfasdf> bla
+
+test L<open0><</open0>asdfasdf|asdfasdf<close0>></close0> bla

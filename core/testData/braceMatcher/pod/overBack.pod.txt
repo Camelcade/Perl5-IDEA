@@ -1,0 +1,11 @@
+Test text
+
+<open0>=over</open0>
+
+=item *
+
+something
+
+<close0>=back</close0>
+
+something

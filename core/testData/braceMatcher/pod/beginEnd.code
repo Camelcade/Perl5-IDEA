@@ -1,11 +1,9 @@
 Test text
 
-=ov<open>er
-
-=item *
+=begin html
 
 something
 
-<close>=back
+=end html
 
 something
