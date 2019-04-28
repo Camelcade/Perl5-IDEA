@@ -944,7 +944,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         markers.add(Pair.create(highlighterIterator.getStart(), "<open" + counter + ">"));
         markers.add(Pair.create(highlighterIterator.getEnd(), "</open" + counter + ">"));
         HighlighterIterator matchIterator = highlighter.createIterator(highlighterIterator.getStart());
-        if (BraceMatchingUtil.matchBrace(charsSequence, fileType, matchIterator, true, true)) {
+        if (BraceMatchingUtil.matchBrace(charsSequence, fileType, matchIterator, true)) {
           markers.add(Pair.create(matchIterator.getStart(), "<close" + counter + ">"));
           markers.add(Pair.create(matchIterator.getEnd(), "</close" + counter + ">"));
           matchedRights.add(matchIterator.getStart());
