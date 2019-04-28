@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -147,12 +147,9 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
     protected void addDescriptorFor(PsiElement element) {
       PsiElement firstChild = element.getFirstChild();
       if (firstChild != null) {
-        addDescriptorFor(element, firstChild.getTextRange().getLength(), 1, 1);
+        int endMargin = StringUtil.endsWith(element.getNode().getChars(), "\n") ? 1 : 0;
+        PerlFoldingBuilderBase.addDescriptorFor(myDescriptors, myDocument, element, firstChild.getTextLength(), endMargin, 1);
       }
-    }
-
-    protected void addDescriptorFor(PsiElement element, int startMargin, int endMargin, int minLines) {
-      PerlFoldingBuilderBase.addDescriptorFor(myDescriptors, myDocument, element, startMargin, endMargin, minLines);
     }
   }
 }

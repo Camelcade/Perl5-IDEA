@@ -1,0 +1,11 @@
+use strict;
+
+<fold text='= POD block ='>=head1<fold text=' SOME HEADER'> SOME HEADER
+
+Text
+
+=cut</fold></fold>
+
+sub something<fold text='{code block}'>{
+
+}</fold>
