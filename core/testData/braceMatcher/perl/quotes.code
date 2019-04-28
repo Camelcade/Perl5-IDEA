@@ -1,0 +1,14 @@
+"quoted text";
+`quoted text`;
+'quoted text';
+
+q/quoted text/;
+qq/quoted text/;
+qx/quoted text/;
+qw/quoted text/;
+
+q{quoted text};
+qq{quoted text};
+qx{quoted text};
+qw{quoted text};
+

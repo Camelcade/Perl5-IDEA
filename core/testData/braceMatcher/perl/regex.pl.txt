@@ -1,0 +1,33 @@
+<open0>/</open0>something<close0>/</close0>;
+m<open1>#</open1>otherthing<close1>#</close1>;
+qr<open2>{</open2>something<close2>}</close2>;
+
+<open3>/</open3>something<close3>/</close3>x;
+m<open4>#</open4>otherthing<close4>#</close4>x;
+qr<open5>{</open5>something<close5>}</close5>x;
+
+<open6>/</open6>something<close6>/</close6>xx;
+m<open7>#</open7>otherthing<close7>#</close7>xx;
+qr<open8>{</open8>something<close8>}</close8>xx;
+
+s<open9>/</open9>something/for otherthing<close9>/</close9>;
+s<open10>{</open10>something<close10>}</close10><open11>{</open11>for otherthing<close11>}</close11>;
+
+s<open12>/</open12>something/some otherthing<close12>/</close12>e;
+s<open13>{</open13>something<close13>}</close13><open14>{</open14>some otherthing<close14>}</close14>e;
+
+s<open15>/</open15>something/for otherthing<close15>/</close15>x;
+s<open16>{</open16>something<close16>}</close16><open17>{</open17>for otherthing<close17>}</close17>x;
+
+s<open18>/</open18>something/some otherthing<close18>/</close18>xe;
+s<open19>{</open19>something<close19>}</close19><open20>{</open20>some otherthing<close20>}</close20>xe;
+
+tr<open21>/</open21>asdf/asdf<close21>/</close21>;
+y<open22>/</open22>asdf/asdf<close22>/</close22>;
+
+tr<open23>{</open23>asdf<close23>}</close23><open24>{</open24>asdf<close24>}</close24>;
+y<open25>{</open25>asdf<close25>}</close25><open26>{</open26>asdf<close26>}</close26>;
+
+
+
+

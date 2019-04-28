@@ -1,0 +1,33 @@
+/something/;
+m#otherthing#;
+qr{something};
+
+/something/x;
+m#otherthing#x;
+qr{something}x;
+
+/something/xx;
+m#otherthing#xx;
+qr{something}xx;
+
+s/something/for otherthing/;
+s{something}{for otherthing};
+
+s/something/some otherthing/e;
+s{something}{some otherthing}e;
+
+s/something/for otherthing/x;
+s{something}{for otherthing}x;
+
+s/something/some otherthing/xe;
+s{something}{some otherthing}xe;
+
+tr/asdf/asdf/;
+y/asdf/asdf/;
+
+tr{asdf}{asdf};
+y{asdf}{asdf};
+
+
+
+

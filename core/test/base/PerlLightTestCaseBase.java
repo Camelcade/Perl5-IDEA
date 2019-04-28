@@ -928,7 +928,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   protected void doTestBraceMatcher() {
-    initWithFileSmart();
+    initWithFileSmartWithoutErrors();
 
     Editor editor = getEditor();
     EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();

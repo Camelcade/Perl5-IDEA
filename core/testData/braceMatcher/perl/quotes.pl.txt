@@ -1,0 +1,14 @@
+<open0>"</open0>quoted text<close0>"</close0>;
+<open1>`</open1>quoted text<close1>`</close1>;
+<open2>'</open2>quoted text<close2>'</close2>;
+
+q<open3>/</open3>quoted text<close3>/</close3>;
+qq<open4>/</open4>quoted text<close4>/</close4>;
+qx<open5>/</open5>quoted text<close5>/</close5>;
+qw<open6>/</open6>quoted text<close6>/</close6>;
+
+q<open7>{</open7>quoted text<close7>}</close7>;
+qq<open8>{</open8>quoted text<close8>}</close8>;
+qx<open9>{</open9>quoted text<close9>}</close9>;
+qw<open10>{</open10>quoted text<close10>}</close10>;
+
