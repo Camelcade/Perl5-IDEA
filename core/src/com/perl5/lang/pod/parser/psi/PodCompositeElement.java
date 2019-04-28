@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,16 +41,12 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
 
 
   /**
-   * Heading elements should return true
-   *
-   * @return
+   * @return true iff element is a heading
    */
   boolean isHeading();
 
   /**
-   * returns heading level
-   *
-   * @return
+   * @return heading level
    */
   int getHeadingLevel();
 
@@ -59,6 +55,7 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
    *
    * @return
    */
+  @Deprecated
   @Nullable
   String getUsageViewTypeLocation();
 
@@ -67,6 +64,7 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
    *
    * @return
    */
+  @Deprecated
   @Nullable
   String getUsageViewLongNameLocation();
 
@@ -75,6 +73,7 @@ public interface PodCompositeElement extends PsiElement, PodRenderableElement, I
    *
    * @return
    */
+  @Deprecated
   @Nullable
   String getUsageViewShortNameLocation();
 }
