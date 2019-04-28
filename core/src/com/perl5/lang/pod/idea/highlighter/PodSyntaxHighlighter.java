@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
@@ -36,18 +37,17 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  * Created by hurricup on 21.04.2015.
  */
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodElementTypes {
-  public static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
   public static final TextAttributesKey POD_TAG = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
   public static final TextAttributesKey POD_CODE = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
-  public static final HashMap<IElementType, TextAttributesKey[]> ATTRIBUTES_MAP = new HashMap<>();
+  public static final Map<IElementType, TextAttributesKey> ATTRIBUTES_MAP = new HashMap<>();
   private static final TokenSet POD_TOKENS = TokenSet.create(
     POD_POD, POD_HEAD1, POD_HEAD2, POD_HEAD3, POD_HEAD4, POD_OVER, POD_ITEM, POD_BACK, POD_BEGIN, POD_END, POD_FOR, POD_ENCODING, POD_CUT,
     POD_UNKNOWN
   );
 
   static {
-    ATTRIBUTES_MAP.put(POD_POD, new TextAttributesKey[]{PodSyntaxHighlighter.POD_TAG});
-    ATTRIBUTES_MAP.put(PodElementTypes.POD_CODE, new TextAttributesKey[]{PodSyntaxHighlighter.POD_CODE});
+    safeMap(ATTRIBUTES_MAP, POD_POD, PodSyntaxHighlighter.POD_TAG);
+    safeMap(ATTRIBUTES_MAP, PodElementTypes.POD_CODE, PodSyntaxHighlighter.POD_CODE);
   }
 
   @Nullable
@@ -71,12 +71,8 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
 
   public static TextAttributesKey[] getTokenAttributes(IElementType tokenType) {
     if (POD_TOKENS.contains(tokenType)) {
-      return ATTRIBUTES_MAP.get(POD_POD);
+      return pack(ATTRIBUTES_MAP.get(POD_POD));
     }
-    else if (ATTRIBUTES_MAP.containsKey(tokenType)) {
-      return ATTRIBUTES_MAP.get(tokenType);
-    }
-
-    return EMPTY_KEYS;
+    return pack(ATTRIBUTES_MAP.get(tokenType));
   }
 }
