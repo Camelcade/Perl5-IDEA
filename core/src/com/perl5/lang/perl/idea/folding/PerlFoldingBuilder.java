@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,14 +44,10 @@ import java.util.List;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.parser.constant.psi.elementTypes.PerlConstantsWrapperElementType.CONSTANT_WRAPPER;
 
-/**
- * Created by hurricup on 20.05.2015.
- */
 public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlElementTypes, DumbAware {
   public static final String PH_CODE_BLOCK = "{code block}";
 
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;
-
 
   @NotNull
   @Override
@@ -68,7 +64,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     descriptors.addAll(getCommentsDescriptors(collector.getComments(), document));
     descriptors.addAll(getImportDescriptors(collector.getImports()));
 
-    return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+    return descriptors.toArray(FoldingDescriptor.EMPTY);
   }
 
   protected FoldingRegionsCollector getCollector(Document document) {
@@ -76,11 +72,10 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   }
 
   /**
-   * Searching for sequential comments (starting from newline or subblock beginning) and making folding descriptors for such blocks of size > 1
+   * Searching for sequential comments (starting from newline or sub-block beginning) and making folding descriptors for such blocks of size > 1
    *
    * @param comments list of collected comments
    * @param document document to search in
-   * @return list of FoldingDescriptros
    */
   private List<FoldingDescriptor> getCommentsDescriptors(@NotNull List<PsiComment> comments, @NotNull Document document) {
     List<FoldingDescriptor> descriptors = new ArrayList<>();
@@ -110,14 +105,14 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           continue;
         }
 
-        boolean isCollapsable = false;
+        boolean isCollapsible = false;
         PsiElement lastComment = comment;
 
 
         if (commentElementType == COMMENT_BLOCK ||
-            commentElementType == getTemplateBlockElementType() // template blocks are always collapsable
+            commentElementType == getTemplateBlockElementType() // template blocks are always collapsible
           ) {
-          isCollapsable = true;
+          isCollapsible = true;
         }
         else {
           // checking if this is a first element of block or starts from newline
@@ -125,13 +120,13 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
             lastComment = lastComment.getPrevSibling();
 
             if (lastComment == null || lastComment instanceof PsiComment) {
-              isCollapsable = true;
+              isCollapsible = true;
               break;
             }
             else if (lastComment instanceof PsiWhiteSpace) {
               // whitespace with newline
               if (StringUtil.containsLineBreak(lastComment.getNode().getChars())) {
-                isCollapsable = true;
+                isCollapsible = true;
                 break;
               }
             }
@@ -142,7 +137,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           }
         }
 
-        if (isCollapsable) {
+        if (isCollapsible) {
           // looking for an end
           int startOffset = comment.getTextOffset();
           if (comment.getText().startsWith("\n") &&
@@ -191,10 +186,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   }
 
   /**
-   * Searching for sequential uses and requires, ignoring stament modifieers, comments, pods and whitespaces and making folding descriptors for such blocks of size > 1
+   * Searching for sequential uses and requires, ignoring statement modifiers, comments, pods and whitespaces and making folding descriptors for such blocks of size > 1
    *
    * @param imports list of collected imports
-   * @return list of FoldingDescriptros
    */
   private List<FoldingDescriptor> getImportDescriptors(@NotNull List<PerlNamespaceElementContainer> imports) {
     List<FoldingDescriptor> descriptors;
@@ -292,16 +286,13 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   @Override
   public boolean isCollapsedByDefault(@NotNull ASTNode node) {
     IElementType elementType = node.getElementType();
-    if (elementType == POD)    // documentation comments
-    {
+    if (elementType == POD) {
       return CodeFoldingSettings.getInstance().COLLAPSE_DOC_COMMENTS;
     }
-    else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR)    // imports
-    {
+    else if (elementType == USE_STATEMENT || elementType == REQUIRE_EXPR) {
       return CodeFoldingSettings.getInstance().COLLAPSE_IMPORTS;
     }
-    else if (elementType == BLOCK)    // method bodies
-    {
+    else if (elementType == BLOCK) {
       return CodeFoldingSettings.getInstance().COLLAPSE_METHODS;
     }
     else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK) {
@@ -339,9 +330,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
   }
 
   /**
-   * Returns list of tokens in PSIComment that should not be included in folding regions
-   *
-   * @return tokenset
+   * @return list of tokens in PSIComment that should not be included in folding regions
    */
   @NotNull
   protected TokenSet getCommentExcludedTokens() {

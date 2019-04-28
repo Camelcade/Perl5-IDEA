@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-/**
- * Created by hurricup on 03.04.2016.
- */
 public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
   /**
    * Checks if {@code element}'s range adjusted by {@code endMargin} and {@code startMargin} covers more than {@code minLines}. If it does,
@@ -39,8 +36,7 @@ public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
                                          @NotNull PsiElement element,
                                          int startMargin,
                                          int endMargin,
-                                         int minLines
-  ) {
+                                         int minLines) {
     if (element.getParent() instanceof PerlNamespaceDefinitionWithIdentifier) {
       return;
     }
