@@ -34,9 +34,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by hurricup on 03.04.2016.
- */
 public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElementTypes, DumbAware {
   @NotNull
   @Override
@@ -50,7 +47,7 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
     root.accept(collector);
     List<FoldingDescriptor> descriptors = collector.getDescriptors();
 
-    return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
+    return descriptors.toArray(FoldingDescriptor.EMPTY);
   }
 
   @Override
@@ -62,16 +59,14 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
   @Override
   public String getPlaceholderText(@NotNull ASTNode node) {
     PsiElement psi = node.getPsi();
-    if (psi instanceof PodTitledSection) {
-      String titleText = ((PodTitledSection)psi).getTitleText();
-      if (StringUtil.isNotEmpty(titleText)) {
-        if (titleText.length() > 80) {
-          titleText = titleText.substring(0, 80) + "...";
-        }
-        return " " + titleText;
-      }
+    if (!(psi instanceof PodTitledSection)) {
+      return null;
     }
-    return null;
+    String titleText = ((PodTitledSection)psi).getTitleText();
+    if (StringUtil.isEmpty(titleText)) {
+      return null;
+    }
+    return " " + StringUtil.shortenTextWithEllipsis(titleText, 80, 0);
   }
 
 
