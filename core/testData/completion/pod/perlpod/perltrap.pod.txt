@@ -1,16 +1,16 @@
-Lookups: Awk Traps; Text: Awk Traps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Awk Traps; Text: Awk Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 376 in perltrap.pod
-Lookups: C/C++ Traps; Text: C/C++ Traps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: C/C++ Traps; Text: C/C++ Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3345 in perltrap.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51 in perltrap.pod
-Lookups: JavaScript Traps; Text: JavaScript Traps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: JavaScript Traps; Text: JavaScript Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4638 in perltrap.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perltrap.pod
-Lookups: Perl Traps; Text: Perl Traps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl Traps; Text: Perl Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8620 in perltrap.pod
-Lookups: Sed Traps; Text: Sed Traps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Sed Traps; Text: Sed Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7049 in perltrap.pod
-Lookups: Shell Traps; Text: Shell Traps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Shell Traps; Text: Shell Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7496 in perltrap.pod

@@ -1,36 +1,36 @@
-Lookups: /bin/sh; Text: /bin/sh; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: /bin/sh; Text: /bin/sh; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 823 in perlqnx.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6615 in perlqnx.pod
-Lookups: Calling Configure; Text: Calling Configure; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Calling Configure; Text: Calling Configure; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5943 in perlqnx.pod
-Lookups: Cross-compilation; Text: Cross-compilation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Cross-compilation; Text: Cross-compilation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4186 in perlqnx.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 224 in perlqnx.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlqnx.pod
-Lookups: Outstanding Issues with Perl on QNX4; Text: Outstanding Issues with Perl on QNX4; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Outstanding Issues with Perl on QNX4; Text: Outstanding Issues with Perl on QNX4; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1827 in perlqnx.pod
-Lookups: Outstanding issues with perl under QNX6; Text: Outstanding issues with perl under QNX6; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Outstanding issues with perl under QNX6; Text: Outstanding issues with perl under QNX6; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3791 in perlqnx.pod
-Lookups: Preparing the target system; Text: Preparing the target system; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Preparing the target system; Text: Preparing the target system; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5528 in perlqnx.pod
-Lookups: QNX auxiliary files; Text: QNX auxiliary files; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: QNX auxiliary files; Text: QNX auxiliary files; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3190 in perlqnx.pod
-Lookups: Required Software for Compiling Perl on QNX4; Text: Required Software for Compiling Perl on QNX4; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Required Software for Compiling Perl on QNX4; Text: Required Software for Compiling Perl on QNX4; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 638 in perlqnx.pod
-Lookups: Setting up a cross-compilation environment; Text: Setting up a cross-compilation environment; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Setting up a cross-compilation environment; Text: Setting up a cross-compilation environment; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4404 in perlqnx.pod
-Lookups: ar; Text: ar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ar; Text: ar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1029 in perlqnx.pod
-Lookups: cpp; Text: cpp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: cpp; Text: cpp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1387 in perlqnx.pod
-Lookups: make; Text: make; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: make; Text: make; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1672 in perlqnx.pod
-Lookups: nm; Text: nm; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: nm; Text: nm; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1237 in perlqnx.pod
-Lookups: qnx/ar; Text: qnx/ar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: qnx/ar; Text: qnx/ar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3266 in perlqnx.pod
-Lookups: qnx/cpp; Text: qnx/cpp; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: qnx/cpp; Text: qnx/cpp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3547 in perlqnx.pod

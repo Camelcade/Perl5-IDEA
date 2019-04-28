@@ -1,42 +1,42 @@
-Lookups: A note on camel and dromedary; Text: A note on camel and dromedary; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: A note on camel and dromedary; Text: A note on camel and dromedary; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32848 in perlgit.pod
-Lookups: A note on derived files; Text: A note on derived files; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: A note on derived files; Text: A note on derived files; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12289 in perlgit.pod
-Lookups: Accepting a patch; Text: Accepting a patch; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Accepting a patch; Text: Accepting a patch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22191 in perlgit.pod
-Lookups: Bisecting; Text: Bisecting; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Bisecting; Text: Bisecting; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13563 in perlgit.pod
-Lookups: CLONING THE REPOSITORY; Text: CLONING THE REPOSITORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: CLONING THE REPOSITORY; Text: CLONING THE REPOSITORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 496 in perlgit.pod
-Lookups: Cleaning a working directory; Text: Cleaning a working directory; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Cleaning a working directory; Text: Cleaning a working directory; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12893 in perlgit.pod
-Lookups: Committing to blead; Text: Committing to blead; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Committing to blead; Text: Committing to blead; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24423 in perlgit.pod
-Lookups: Committing to maintenance versions; Text: Committing to maintenance versions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Committing to maintenance versions; Text: Committing to maintenance versions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28830 in perlgit.pod
-Lookups: Committing your changes; Text: Committing your changes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Committing your changes; Text: Committing your changes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9588 in perlgit.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 203 in perlgit.pod
-Lookups: Finding out your status; Text: Finding out your status; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Finding out your status; Text: Finding out your status; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2750 in perlgit.pod
-Lookups: Grafts; Text: Grafts; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Grafts; Text: Grafts; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20437 in perlgit.pod
-Lookups: Merging from a branch via GitHub; Text: Merging from a branch via GitHub; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Merging from a branch via GitHub; Text: Merging from a branch via GitHub; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29637 in perlgit.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124 in perlgit.pod
-Lookups: On merging and rebasing; Text: On merging and rebasing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: On merging and rebasing; Text: On merging and rebasing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25804 in perlgit.pod
-Lookups: Patch workflow; Text: Patch workflow; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Patch workflow; Text: Patch workflow; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4270 in perlgit.pod
-Lookups: Sending patch emails; Text: Sending patch emails; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Sending patch emails; Text: Sending patch emails; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11086 in perlgit.pod
-Lookups: Topic branches and rewriting history; Text: Topic branches and rewriting history; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Topic branches and rewriting history; Text: Topic branches and rewriting history; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17263 in perlgit.pod
-Lookups: Using a smoke-me branch to test changes; Text: Using a smoke-me branch to test changes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Using a smoke-me branch to test changes; Text: Using a smoke-me branch to test changes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30325 in perlgit.pod
-Lookups: WORKING WITH THE REPOSITORY; Text: WORKING WITH THE REPOSITORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: WORKING WITH THE REPOSITORY; Text: WORKING WITH THE REPOSITORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 945 in perlgit.pod
-Lookups: WRITE ACCESS TO THE GIT REPOSITORY; Text: WRITE ACCESS TO THE GIT REPOSITORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: WRITE ACCESS TO THE GIT REPOSITORY; Text: WRITE ACCESS TO THE GIT REPOSITORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21016 in perlgit.pod

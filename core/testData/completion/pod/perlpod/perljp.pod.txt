@@ -1,38 +1,38 @@
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5130 in perljp.pod
-Lookups: About (jcode.pl|Jcode.pm|JPerl); Text: About (jcode.pl|Jcode.pm|JPerl); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: About (jcode.pl|Jcode.pm|JPerl); Text: About (jcode.pl|Jcode.pm|JPerl); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2690 in perljp.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perljp.pod
-Lookups: Perl ユーザーグループ; Text: Perl ユーザーグループ; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl ユーザーグループ; Text: Perl ユーザーグループ; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4711 in perljp.pod
-Lookups: Perlの修得に役立つ URL; Text: Perlの修得に役立つ URL; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perlの修得に役立つ URL; Text: Perlの修得に役立つ URL; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4473 in perljp.pod
-Lookups: Perl全般に関する URL; Text: Perl全般に関する URL; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl全般に関する URL; Text: Perl全般に関する URL; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4241 in perljp.pod
-Lookups: Unicode関連のURL; Text: Unicode関連のURL; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unicode関連のURL; Text: Unicode関連のURL; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4794 in perljp.pod
-Lookups: http://lists.perl.org/; Text: http://lists.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://lists.perl.org/; Text: http://lists.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4417 in perljp.pod
-Lookups: http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Text: http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Text: http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4987 in perljp.pod
-Lookups: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Text: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Text: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4893 in perljp.pod
-Lookups: http://www.cpan.org/; Text: http://www.cpan.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.cpan.org/; Text: http://www.cpan.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4343 in perljp.pod
-Lookups: http://www.oreilly.co.jp/catalog/; Text: http://www.oreilly.co.jp/catalog/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.oreilly.co.jp/catalog/; Text: http://www.oreilly.co.jp/catalog/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4638 in perljp.pod
-Lookups: http://www.oreilly.com.cn/; Text: http://www.oreilly.com.cn/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.oreilly.com.cn/; Text: http://www.oreilly.com.cn/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4572 in perljp.pod
-Lookups: http://www.oreilly.com.tw/; Text: http://www.oreilly.com.tw/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.oreilly.com.tw/; Text: http://www.oreilly.com.tw/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4506 in perljp.pod
-Lookups: http://www.perl.com/; Text: http://www.perl.com/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.perl.com/; Text: http://www.perl.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4273 in perljp.pod
-Lookups: http://www.pm.org/groups/asia.html; Text: http://www.pm.org/groups/asia.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.pm.org/groups/asia.html; Text: http://www.pm.org/groups/asia.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4742 in perljp.pod
-Lookups: http://www.unicode.org/; Text: http://www.unicode.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.unicode.org/; Text: http://www.unicode.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4825 in perljp.pod
-Lookups: さらに詳しく; Text: さらに詳しく; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: さらに詳しく; Text: さらに詳しく; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3980 in perljp.pod
-Lookups: 説明; Text: 説明; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: 説明; Text: 説明; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52 in perljp.pod

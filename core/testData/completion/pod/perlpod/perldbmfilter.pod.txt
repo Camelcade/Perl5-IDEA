@@ -1,24 +1,24 @@
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4951 in perldbmfilter.pod
-Lookups: An Example: the NULL termination problem.; Text: An Example: the NULL termination problem.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: An Example: the NULL termination problem.; Text: An Example: the NULL termination problem.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1711 in perldbmfilter.pod
-Lookups: Another Example: Key is a C int.; Text: Another Example: Key is a C int.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Another Example: Key is a C int.; Text: Another Example: Key is a C int.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3711 in perldbmfilter.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 330 in perldbmfilter.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldbmfilter.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4862 in perldbmfilter.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47 in perldbmfilter.pod
-Lookups: The Filter; Text: The Filter; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The Filter; Text: The Filter; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1485 in perldbmfilter.pod
-Lookups: filter_fetch_key; Text: filter_fetch_key; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: filter_fetch_key; Text: filter_fetch_key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1000 in perldbmfilter.pod
-Lookups: filter_fetch_value; Text: filter_fetch_value; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: filter_fetch_value; Text: filter_fetch_value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1143 in perldbmfilter.pod
-Lookups: filter_store_key; Text: filter_store_key; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: filter_store_key; Text: filter_store_key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 712 in perldbmfilter.pod
-Lookups: filter_store_value; Text: filter_store_value; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: filter_store_value; Text: filter_store_value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 854 in perldbmfilter.pod

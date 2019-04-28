@@ -1,42 +1,42 @@
-Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5300 in perl5262delta.pod
-Lookups: Assertion failure in Perl__core_swash_init (utf8.c); Text: Assertion failure in Perl__core_swash_init (utf8.c); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Assertion failure in Perl__core_swash_init (utf8.c); Text: Assertion failure in Perl__core_swash_init (utf8.c); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1111 in perl5262delta.pod
-Lookups: Changes to Existing Documentation; Text: Changes to Existing Documentation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Changes to Existing Documentation; Text: Changes to Existing Documentation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2096 in perl5262delta.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5262delta.pod
-Lookups: Documentation; Text: Documentation; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Documentation; Text: Documentation; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2074 in perl5262delta.pod
-Lookups: Give Thanks; Text: Give Thanks; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Give Thanks; Text: Give Thanks; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7376 in perl5262delta.pod
-Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1492 in perl5262delta.pod
-Lookups: Modules and Pragmata; Text: Modules and Pragmata; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Modules and Pragmata; Text: Modules and Pragmata; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1685 in perl5262delta.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5262delta.pod
-Lookups: Platform Support; Text: Platform Support; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Platform Support; Text: Platform Support; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2515 in perl5262delta.pod
-Lookups: Platform-Specific Notes; Text: Platform-Specific Notes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Platform-Specific Notes; Text: Platform-Specific Notes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2540 in perl5262delta.pod
-Lookups: Reporting Bugs; Text: Reporting Bugs; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Reporting Bugs; Text: Reporting Bugs; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6630 in perl5262delta.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7619 in perl5262delta.pod
-Lookups: Security; Text: Security; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Security; Text: Security; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 329 in perl5262delta.pod
-Lookups: Selected Bug Fixes; Text: Selected Bug Fixes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Selected Bug Fixes; Text: Selected Bug Fixes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2949 in perl5262delta.pod
-Lookups: Updated Modules and Pragmata; Text: Updated Modules and Pragmata; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Updated Modules and Pragmata; Text: Updated Modules and Pragmata; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1714 in perl5262delta.pod
-Lookups: Windows; Text: Windows; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Windows; Text: Windows; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2581 in perl5262delta.pod
-Lookups: [CVE-2018-6797] heap-buffer-overflow (WRITE of size 1) in S_regatom (regcomp.c); Text: [CVE-2018-6797] heap-buffer-overflow (WRITE of size 1) in S_regatom (regcomp.c); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: [CVE-2018-6797] heap-buffer-overflow (WRITE of size 1) in S_regatom (regcomp.c); Text: [CVE-2018-6797] heap-buffer-overflow (WRITE of size 1) in S_regatom (regcomp.c); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 346 in perl5262delta.pod
-Lookups: [CVE-2018-6798] Heap-buffer-overflow in Perl__byte_dump_string (utf8.c); Text: [CVE-2018-6798] Heap-buffer-overflow in Perl__byte_dump_string (utf8.c); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: [CVE-2018-6798] Heap-buffer-overflow in Perl__byte_dump_string (utf8.c); Text: [CVE-2018-6798] Heap-buffer-overflow in Perl__byte_dump_string (utf8.c); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 615 in perl5262delta.pod
-Lookups: [CVE-2018-6913] heap-buffer-overflow in S_pack_rec; Text: [CVE-2018-6913] heap-buffer-overflow in S_pack_rec; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: [CVE-2018-6913] heap-buffer-overflow in S_pack_rec; Text: [CVE-2018-6913] heap-buffer-overflow in S_pack_rec; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 903 in perl5262delta.pod
-Lookups: perluniprops; Text: perluniprops; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: perluniprops; Text: perluniprops; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2138 in perl5262delta.pod

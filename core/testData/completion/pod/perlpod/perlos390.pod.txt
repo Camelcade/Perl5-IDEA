@@ -1,36 +1,36 @@
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13957 in perlos390.pod
-Lookups: Build Anomalies with Perl on OS/390; Text: Build Anomalies with Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Build Anomalies with Perl on OS/390; Text: Build Anomalies with Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7287 in perlos390.pod
-Lookups: Build, Test, Install Perl on OS/390; Text: Build, Test, Install Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Build, Test, Install Perl on OS/390; Text: Build, Test, Install Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6899 in perlos390.pod
-Lookups: Configure Perl on OS/390; Text: Configure Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Configure Perl on OS/390; Text: Configure Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4232 in perlos390.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 624 in perlos390.pod
-Lookups: Floating Point Anomalies with Perl on OS/390; Text: Floating Point Anomalies with Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Floating Point Anomalies with Perl on OS/390; Text: Floating Point Anomalies with Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11717 in perlos390.pod
-Lookups: HISTORY; Text: HISTORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15219 in perlos390.pod
-Lookups: Installation Anomalies with Perl on OS/390; Text: Installation Anomalies with Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installation Anomalies with Perl on OS/390; Text: Installation Anomalies with Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10501 in perlos390.pod
-Lookups: Mailing list for Perl on OS/390; Text: Mailing list for Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Mailing list for Perl on OS/390; Text: Mailing list for Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14763 in perlos390.pod
-Lookups: Modules and Extensions for Perl on OS/390; Text: Modules and Extensions for Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Modules and Extensions for Perl on OS/390; Text: Modules and Extensions for Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12821 in perlos390.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 273 in perlos390.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 14283 in perlos390.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 348 in perlos390.pod
-Lookups: Setup and utilities for Perl on OS/390; Text: Setup and utilities for Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Setup and utilities for Perl on OS/390; Text: Setup and utilities for Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1809 in perlos390.pod
-Lookups: Testing Anomalies with Perl on OS/390; Text: Testing Anomalies with Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Testing Anomalies with Perl on OS/390; Text: Testing Anomalies with Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8345 in perlos390.pod
-Lookups: Tools; Text: Tools; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Tools; Text: Tools; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 917 in perlos390.pod
-Lookups: Unpacking Perl distribution on OS/390; Text: Unpacking Perl distribution on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unpacking Perl distribution on OS/390; Text: Unpacking Perl distribution on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1133 in perlos390.pod
-Lookups: Usage Hints for Perl on OS/390; Text: Usage Hints for Perl on OS/390; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Usage Hints for Perl on OS/390; Text: Usage Hints for Perl on OS/390; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10734 in perlos390.pod

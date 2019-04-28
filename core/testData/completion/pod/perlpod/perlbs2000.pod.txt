@@ -1,34 +1,34 @@
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7370 in perlbs2000.pod
-Lookups: Compiling Perl on BS2000; Text: Compiling Perl on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Compiling Perl on BS2000; Text: Compiling Perl on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2089 in perlbs2000.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 608 in perlbs2000.pod
-Lookups: Floating point anomalies on BS2000; Text: Floating point anomalies on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Floating point anomalies on BS2000; Text: Floating point anomalies on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5295 in perlbs2000.pod
-Lookups: HISTORY; Text: HISTORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7881 in perlbs2000.pod
-Lookups: Installing Perl on BS2000; Text: Installing Perl on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installing Perl on BS2000; Text: Installing Perl on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4009 in perlbs2000.pod
-Lookups: Mailing list; Text: Mailing list; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Mailing list; Text: Mailing list; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7444 in perlbs2000.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 273 in perlbs2000.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7401 in perlbs2000.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 488 in perlbs2000.pod
-Lookups: Testing Perl on BS2000; Text: Testing Perl on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Testing Perl on BS2000; Text: Testing Perl on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3244 in perlbs2000.pod
-Lookups: Unpacking Perl Distribution on BS2000; Text: Unpacking Perl Distribution on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unpacking Perl Distribution on BS2000; Text: Unpacking Perl Distribution on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1335 in perlbs2000.pod
-Lookups: Using Perl in "native" BS2000; Text: Using Perl in "native" BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Using Perl in "native" BS2000; Text: Using Perl in "native" BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4425 in perlbs2000.pod
-Lookups: Using Perl in the Posix-Shell of BS2000; Text: Using Perl in the Posix-Shell of BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Using Perl in the Posix-Shell of BS2000; Text: Using Perl in the Posix-Shell of BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4146 in perlbs2000.pod
-Lookups: Using PerlIO and different encodings on ASCII and EBCDIC partitions; Text: Using PerlIO and different encodings on ASCII and EBCDIC partitions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Using PerlIO and different encodings on ASCII and EBCDIC partitions; Text: Using PerlIO and different encodings on ASCII and EBCDIC partitions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5968 in perlbs2000.pod
-Lookups: bison on BS2000; Text: bison on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: bison on BS2000; Text: bison on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1024 in perlbs2000.pod
-Lookups: gzip on BS2000; Text: gzip on BS2000; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: gzip on BS2000; Text: gzip on BS2000; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 899 in perlbs2000.pod

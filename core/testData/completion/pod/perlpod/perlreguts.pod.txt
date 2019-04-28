@@ -1,98 +1,98 @@
-Lookups:  Beginning/End of line positions; Text:  Beginning/End of line positions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Beginning/End of line positions; Text:  Beginning/End of line positions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26914 in perlreguts.pod
-Lookups:  anchored fixed strings; Text:  anchored fixed strings; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  anchored fixed strings; Text:  anchored fixed strings; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26780 in perlreguts.pod
-Lookups:  floating fixed strings; Text:  floating fixed strings; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  floating fixed strings; Text:  floating fixed strings; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26812 in perlreguts.pod
-Lookups:  minimum and maximum length requirements; Text:  minimum and maximum length requirements; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  minimum and maximum length requirements; Text:  minimum and maximum length requirements; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26844 in perlreguts.pod
-Lookups:  start class; Text:  start class; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  start class; Text:  start class; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26893 in perlreguts.pod
-Lookups: 1. Parsing for size; Text: 1. Parsing for size; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 1. Parsing for size; Text: 1. Parsing for size; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10370 in perlreguts.pod
-Lookups: 2. Parsing for construction; Text: 2. Parsing for construction; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 2. Parsing for construction; Text: 2. Parsing for construction; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10397 in perlreguts.pod
-Lookups: 3. Peep-hole optimisation and analysis; Text: 3. Peep-hole optimisation and analysis; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 3. Peep-hole optimisation and analysis; Text: 3. Peep-hole optimisation and analysis; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10432 in perlreguts.pod
-Lookups: 4. Start position and no-match optimisations; Text: 4. Start position and no-match optimisations; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 4. Start position and no-match optimisations; Text: 4. Start position and no-match optimisations; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10514 in perlreguts.pod
-Lookups: 5. Program execution; Text: 5. Program execution; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 5. Program execution; Text: 5. Program execution; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10566 in perlreguts.pod
-Lookups: A quick note on terms; Text: A quick note on terms; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: A quick note on terms; Text: A quick note on terms; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1159 in perlreguts.pod
-Lookups: A. Compilation; Text: A. Compilation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: A. Compilation; Text: A. Compilation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10339 in perlreguts.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37985 in perlreguts.pod
-Lookups: B. Execution; Text: B. Execution; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: B. Execution; Text: B. Execution; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10485 in perlreguts.pod
-Lookups: Base Structures; Text: Base Structures; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Base Structures; Text: Base Structures; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33225 in perlreguts.pod
-Lookups: Compilation; Text: Compilation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Compilation; Text: Compilation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10998 in perlreguts.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 78 in perlreguts.pod
-Lookups: Debug Output; Text: Debug Output; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Debug Output; Text: Debug Output; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18541 in perlreguts.pod
-Lookups: Execution; Text: Execution; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Execution; Text: Execution; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28032 in perlreguts.pod
-Lookups: High Level; Text: High Level; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: High Level; Text: High Level; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2556 in perlreguts.pod
-Lookups: LICENCE; Text: LICENCE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: LICENCE; Text: LICENCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38195 in perlreguts.pod
-Lookups: MISCELLANEOUS; Text: MISCELLANEOUS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: MISCELLANEOUS; Text: MISCELLANEOUS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 31294 in perlreguts.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlreguts.pod
-Lookups: OVERVIEW; Text: OVERVIEW; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: OVERVIEW; Text: OVERVIEW; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1142 in perlreguts.pod
-Lookups: Parse Call Graph and a Grammar; Text: Parse Call Graph and a Grammar; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Parse Call Graph and a Grammar; Text: Parse Call Graph and a Grammar; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14448 in perlreguts.pod
-Lookups: Parsing complications; Text: Parsing complications; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Parsing complications; Text: Parsing complications; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15715 in perlreguts.pod
-Lookups: Parsing for construction; Text: Parsing for construction; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Parsing for construction; Text: Parsing for construction; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12431 in perlreguts.pod
-Lookups: Parsing for size; Text: Parsing for size; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Parsing for size; Text: Parsing for size; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11937 in perlreguts.pod
-Lookups: Peep-hole Optimisation and Analysis; Text: Peep-hole Optimisation and Analysis; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Peep-hole Optimisation and Analysis; Text: Peep-hole Optimisation and Analysis; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 25601 in perlreguts.pod
-Lookups: Perl's pprivate structure; Text: Perl's pprivate structure; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl's pprivate structure; Text: Perl's pprivate structure; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 35404 in perlreguts.pod
-Lookups: Process Overview; Text: Process Overview; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Process Overview; Text: Process Overview; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10207 in perlreguts.pod
-Lookups: Program execution; Text: Program execution; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Program execution; Text: Program execution; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 30338 in perlreguts.pod
-Lookups: REFERENCES; Text: REFERENCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: REFERENCES; Text: REFERENCES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 38232 in perlreguts.pod
-Lookups: Regops; Text: Regops; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Regops; Text: Regops; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5849 in perlreguts.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37928 in perlreguts.pod
-Lookups: Start position and no-match optimisations; Text: Start position and no-match optimisations; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Start position and no-match optimisations; Text: Start position and no-match optimisations; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 29245 in perlreguts.pod
-Lookups: Structure of a Regexp Program; Text: Structure of a Regexp Program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Structure of a Regexp Program; Text: Structure of a Regexp Program; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2518 in perlreguts.pod
-Lookups: Unicode and Localisation Support; Text: Unicode and Localisation Support; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unicode and Localisation Support; Text: Unicode and Localisation Support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31316 in perlreguts.pod
-Lookups: What is a regular expression engine?; Text: What is a regular expression engine?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What is a regular expression engine?; Text: What is a regular expression engine?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1786 in perlreguts.pod
-Lookups: What regop is next?; Text: What regop is next?; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: What regop is next?; Text: What regop is next?; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8984 in perlreguts.pod
-Lookups: data; Text: data; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: data; Text: data; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37222 in perlreguts.pod
-Lookups: offsets; Text: offsets; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: offsets; Text: offsets; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36533 in perlreguts.pod
-Lookups: program; Text: program; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: program; Text: program; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37803 in perlreguts.pod
-Lookups: regnode_1; Text: regnode_1; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: regnode_1; Text: regnode_1; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6503 in perlreguts.pod
-Lookups: regnode_2; Text: regnode_2; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: regnode_2; Text: regnode_2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6523 in perlreguts.pod
-Lookups: regnode_charclass; Text: regnode_charclass; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: regnode_charclass; Text: regnode_charclass; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7155 in perlreguts.pod
-Lookups: regnode_charclass_posixl; Text: regnode_charclass_posixl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: regnode_charclass_posixl; Text: regnode_charclass_posixl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7692 in perlreguts.pod
-Lookups: regnode_string; Text: regnode_string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: regnode_string; Text: regnode_string; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6785 in perlreguts.pod
-Lookups: regstclass; Text: regstclass; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: regstclass; Text: regstclass; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36698 in perlreguts.pod

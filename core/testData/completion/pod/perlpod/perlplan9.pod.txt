@@ -1,24 +1,24 @@
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4946 in perlplan9.pod
-Lookups: BUGS; Text: BUGS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: BUGS; Text: BUGS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4759 in perlplan9.pod
-Lookups: COMPILING AND INSTALLING PERL ON PLAN 9; Text: COMPILING AND INSTALLING PERL ON PLAN 9; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: COMPILING AND INSTALLING PERL ON PLAN 9; Text: COMPILING AND INSTALLING PERL ON PLAN 9; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2992 in perlplan9.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 243 in perlplan9.pod
-Lookups: Installing Perl Documentation on Plan 9; Text: Installing Perl Documentation on Plan 9; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installing Perl Documentation on Plan 9; Text: Installing Perl Documentation on Plan 9; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4296 in perlplan9.pod
-Lookups: Invoking Perl; Text: Invoking Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Invoking Perl; Text: Invoking Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 618 in perlplan9.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlplan9.pod
-Lookups: Perl5 Functions not currently supported in Plan 9 Perl; Text: Perl5 Functions not currently supported in Plan 9 Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl5 Functions not currently supported in Plan 9 Perl; Text: Perl5 Functions not currently supported in Plan 9 Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1807 in perlplan9.pod
-Lookups: Revision date; Text: Revision date; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Revision date; Text: Revision date; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4863 in perlplan9.pod
-Lookups: Signals in Plan 9 Perl; Text: Signals in Plan 9 Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Signals in Plan 9 Perl; Text: Signals in Plan 9 Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2542 in perlplan9.pod
-Lookups: What's in Plan 9 Perl; Text: What's in Plan 9 Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What's in Plan 9 Perl; Text: What's in Plan 9 Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1405 in perlplan9.pod
-Lookups: What's not in Plan 9 Perl; Text: What's not in Plan 9 Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What's not in Plan 9 Perl; Text: What's not in Plan 9 Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1656 in perlplan9.pod

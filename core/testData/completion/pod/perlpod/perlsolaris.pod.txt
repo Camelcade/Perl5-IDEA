@@ -1,96 +1,96 @@
-Lookups: #error "No DATAMODEL_NATIVE specified"; Text: #error "No DATAMODEL_NATIVE specified"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: #error "No DATAMODEL_NATIVE specified"; Text: #error "No DATAMODEL_NATIVE specified"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19977 in perlsolaris.pod
-Lookups: 64-bit perl on Solaris.; Text: 64-bit perl on Solaris.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: 64-bit perl on Solaris.; Text: 64-bit perl on Solaris.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13106 in perlsolaris.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29543 in perlsolaris.pod
-Lookups: Avoid /usr/ucb/cc.; Text: Avoid /usr/ucb/cc.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Avoid /usr/ucb/cc.; Text: Avoid /usr/ucb/cc.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6895 in perlsolaris.pod
-Lookups: Avoid libucb.; Text: Avoid libucb.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Avoid libucb.; Text: Avoid libucb.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11195 in perlsolaris.pod
-Lookups: BSD::Resource on Solaris; Text: BSD::Resource on Solaris; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: BSD::Resource on Solaris; Text: BSD::Resource on Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23895 in perlsolaris.pod
-Lookups: Building an LP64 perl; Text: Building an LP64 perl; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Building an LP64 perl; Text: Building an LP64 perl; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16788 in perlsolaris.pod
-Lookups: CROSS-COMPILATION; Text: CROSS-COMPILATION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: CROSS-COMPILATION; Text: CROSS-COMPILATION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21044 in perlsolaris.pod
-Lookups: Compiler and Related Tools on Solaris.; Text: Compiler and Related Tools on Solaris.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Compiler and Related Tools on Solaris.; Text: Compiler and Related Tools on Solaris.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5548 in perlsolaris.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 244 in perlsolaris.pod
-Lookups: Dynamic Loading Problems With GNU as and GNU ld; Text: Dynamic Loading Problems With GNU as and GNU ld; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Dynamic Loading Problems With GNU as and GNU ld; Text: Dynamic Loading Problems With GNU as and GNU ld; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19298 in perlsolaris.pod
-Lookups: Environment for Compiling perl on Solaris; Text: Environment for Compiling perl on Solaris; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Environment for Compiling perl on Solaris; Text: Environment for Compiling perl on Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11596 in perlsolaris.pod
-Lookups: File Extraction Problems on Solaris.; Text: File Extraction Problems on Solaris.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: File Extraction Problems on Solaris.; Text: File Extraction Problems on Solaris.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4933 in perlsolaris.pod
-Lookups: GCC; Text: GCC; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: GCC; Text: GCC; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7279 in perlsolaris.pod
-Lookups: GNU as and GNU ld; Text: GNU as and GNU ld; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: GNU as and GNU ld; Text: GNU as and GNU ld; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8632 in perlsolaris.pod
-Lookups: General 32-bit vs. 64-bit issues.; Text: General 32-bit vs. 64-bit issues.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: General 32-bit vs. 64-bit issues.; Text: General 32-bit vs. 64-bit issues.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13377 in perlsolaris.pod
-Lookups: Include /usr/ccs/bin/ in your PATH.; Text: Include /usr/ccs/bin/ in your PATH.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Include /usr/ccs/bin/ in your PATH.; Text: Include /usr/ccs/bin/ in your PATH.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5768 in perlsolaris.pod
-Lookups: LD_LIBRARY_PATH; Text: LD_LIBRARY_PATH; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: LD_LIBRARY_PATH; Text: LD_LIBRARY_PATH; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12043 in perlsolaris.pod
-Lookups: Large File Support; Text: Large File Support; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Large File Support; Text: Large File Support; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14600 in perlsolaris.pod
-Lookups: Limits on Numbers of Open Files on Solaris.; Text: Limits on Numbers of Open Files on Solaris.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Limits on Numbers of Open Files on Solaris.; Text: Limits on Numbers of Open Files on Solaris.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22011 in perlsolaris.pod
-Lookups: Long Doubles.; Text: Long Doubles.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Long Doubles.; Text: Long Doubles.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18188 in perlsolaris.pod
-Lookups: MAKE PROBLEMS.; Text: MAKE PROBLEMS.; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: MAKE PROBLEMS.; Text: MAKE PROBLEMS.; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 19266 in perlsolaris.pod
-Lookups: MAKE TEST; Text: MAKE TEST; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: MAKE TEST; Text: MAKE TEST; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20647 in perlsolaris.pod
-Lookups: Malloc Issues with perl on Solaris.; Text: Malloc Issues with perl on Solaris.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Malloc Issues with perl on Solaris.; Text: Malloc Issues with perl on Solaris.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18520 in perlsolaris.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 182 in perlsolaris.pod
-Lookups: Net::SSLeay on Solaris; Text: Net::SSLeay on Solaris; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Net::SSLeay on Solaris; Text: Net::SSLeay on Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24145 in perlsolaris.pod
-Lookups: PATH; Text: PATH; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: PATH; Text: PATH; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11646 in perlsolaris.pod
-Lookups: PREBUILT BINARIES OF PERL FOR SOLARIS.; Text: PREBUILT BINARIES OF PERL FOR SOLARIS.; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: PREBUILT BINARIES OF PERL FOR SOLARIS.; Text: PREBUILT BINARIES OF PERL FOR SOLARIS.; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21539 in perlsolaris.pod
-Lookups: Precompiled Binaries; Text: Precompiled Binaries; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Precompiled Binaries; Text: Precompiled Binaries; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4628 in perlsolaris.pod
-Lookups: Proc::ProcessTable on Solaris; Text: Proc::ProcessTable on Solaris; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Proc::ProcessTable on Solaris; Text: Proc::ProcessTable on Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22952 in perlsolaris.pod
-Lookups: RESOURCES; Text: RESOURCES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: RESOURCES; Text: RESOURCES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4308 in perlsolaris.pod
-Lookups: RUN CONFIGURE.; Text: RUN CONFIGURE.; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: RUN CONFIGURE.; Text: RUN CONFIGURE.; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12928 in perlsolaris.pod
-Lookups: RUNTIME ISSUES FOR PERL ON SOLARIS.; Text: RUNTIME ISSUES FOR PERL ON SOLARIS.; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: RUNTIME ISSUES FOR PERL ON SOLARIS.; Text: RUNTIME ISSUES FOR PERL ON SOLARIS.; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 21967 in perlsolaris.pod
-Lookups: SETTING UP; Text: SETTING UP; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SETTING UP; Text: SETTING UP; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4914 in perlsolaris.pod
-Lookups: SOLARIS-SPECIFIC MODULES.; Text: SOLARIS-SPECIFIC MODULES.; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SOLARIS-SPECIFIC MODULES.; Text: SOLARIS-SPECIFIC MODULES.; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22691 in perlsolaris.pod
-Lookups: SOLARIS-SPECIFIC PROBLEMS WITH MODULES.; Text: SOLARIS-SPECIFIC PROBLEMS WITH MODULES.; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SOLARIS-SPECIFIC PROBLEMS WITH MODULES.; Text: SOLARIS-SPECIFIC PROBLEMS WITH MODULES.; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22904 in perlsolaris.pod
-Lookups: Solaris Documentation; Text: Solaris Documentation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Solaris Documentation; Text: Solaris Documentation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4802 in perlsolaris.pod
-Lookups: Solaris FAQ; Text: Solaris FAQ; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Solaris FAQ; Text: Solaris FAQ; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4429 in perlsolaris.pod
-Lookups: Solaris Version Numbers.; Text: Solaris Version Numbers.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Solaris Version Numbers.; Text: Solaris Version Numbers.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3537 in perlsolaris.pod
-Lookups: Sun and GNU make; Text: Sun and GNU make; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Sun and GNU make; Text: Sun and GNU make; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 10443 in perlsolaris.pod
-Lookups: Sun's C Compiler; Text: Sun's C Compiler; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Sun's C Compiler; Text: Sun's C Compiler; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7127 in perlsolaris.pod
-Lookups: SunOS 4.x; Text: SunOS 4.x; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SunOS 4.x; Text: SunOS 4.x; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24999 in perlsolaris.pod
-Lookups: Threads in perl on Solaris.; Text: Threads in perl on Solaris.; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Threads in perl on Solaris.; Text: Threads in perl on Solaris.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18338 in perlsolaris.pod
-Lookups: dlopen: stub interception failed; Text: dlopen: stub interception failed; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: dlopen: stub interception failed; Text: dlopen: stub interception failed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19717 in perlsolaris.pod
-Lookups: ld.so.1: ./perl: fatal: relocation error:; Text: ld.so.1: ./perl: fatal: relocation error:; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ld.so.1: ./perl: fatal: relocation error:; Text: ld.so.1: ./perl: fatal: relocation error:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19511 in perlsolaris.pod
-Lookups: nss_delete core dump from op/pwent or op/grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: nss_delete core dump from op/pwent or op/grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20922 in perlsolaris.pod
-Lookups: op/stat.t test 4 in Solaris; Text: op/stat.t test 4 in Solaris; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: op/stat.t test 4 in Solaris; Text: op/stat.t test 4 in Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20665 in perlsolaris.pod
-Lookups: sh: ar: not found; Text: sh: ar: not found; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: sh: ar: not found; Text: sh: ar: not found; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20330 in perlsolaris.pod

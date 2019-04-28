@@ -1,106 +1,106 @@
-Lookups: Anatomy of a typemap; Text: Anatomy of a typemap; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Anatomy of a typemap; Text: Anatomy of a typemap; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1288 in perlxstypemap.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58 in perlxstypemap.pod
-Lookups: Full Listing of Core Typemaps; Text: Full Listing of Core Typemaps; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Full Listing of Core Typemaps; Text: Full Listing of Core Typemaps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9351 in perlxstypemap.pod
-Lookups: Implicit array; Text: Implicit array; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Implicit array; Text: Implicit array; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18198 in perlxstypemap.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlxstypemap.pod
-Lookups: Sharing typemaps Between CPAN Distributions; Text: Sharing typemaps Between CPAN Distributions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Sharing typemaps Between CPAN Distributions; Text: Sharing typemaps Between CPAN Distributions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6772 in perlxstypemap.pod
-Lookups: T_ARRAY; Text: T_ARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_ARRAY; Text: T_ARRAY; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21647 in perlxstypemap.pod
-Lookups: T_AVREF; Text: T_AVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_AVREF; Text: T_AVREF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10231 in perlxstypemap.pod
-Lookups: T_AVREF_REFCOUNT_FIXED; Text: T_AVREF_REFCOUNT_FIXED; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_AVREF_REFCOUNT_FIXED; Text: T_AVREF_REFCOUNT_FIXED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10468 in perlxstypemap.pod
-Lookups: T_BOOL; Text: T_BOOL; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_BOOL; Text: T_BOOL; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13006 in perlxstypemap.pod
-Lookups: T_CALLBACK; Text: T_CALLBACK; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_CALLBACK; Text: T_CALLBACK; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21620 in perlxstypemap.pod
-Lookups: T_CHAR; Text: T_CHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_CHAR; Text: T_CHAR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14055 in perlxstypemap.pod
-Lookups: T_CVREF; Text: T_CVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_CVREF; Text: T_CVREF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11225 in perlxstypemap.pod
-Lookups: T_CVREF_REFCOUNT_FIXED; Text: T_CVREF_REFCOUNT_FIXED; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_CVREF_REFCOUNT_FIXED; Text: T_CVREF_REFCOUNT_FIXED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11491 in perlxstypemap.pod
-Lookups: T_DATAUNIT; Text: T_DATAUNIT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_DATAUNIT; Text: T_DATAUNIT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21593 in perlxstypemap.pod
-Lookups: T_DOUBLE; Text: T_DOUBLE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_DOUBLE; Text: T_DOUBLE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14398 in perlxstypemap.pod
-Lookups: T_ENUM; Text: T_ENUM; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_ENUM; Text: T_ENUM; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12846 in perlxstypemap.pod
-Lookups: T_FLOAT; Text: T_FLOAT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_FLOAT; Text: T_FLOAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14130 in perlxstypemap.pod
-Lookups: T_HVREF; Text: T_HVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_HVREF; Text: T_HVREF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10729 in perlxstypemap.pod
-Lookups: T_HVREF_REFCOUNT_FIXED; Text: T_HVREF_REFCOUNT_FIXED; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_HVREF_REFCOUNT_FIXED; Text: T_HVREF_REFCOUNT_FIXED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10965 in perlxstypemap.pod
-Lookups: T_IN; Text: T_IN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_IN; Text: T_IN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23746 in perlxstypemap.pod
-Lookups: T_INOUT; Text: T_INOUT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_INOUT; Text: T_INOUT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23211 in perlxstypemap.pod
-Lookups: T_INT; Text: T_INT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_INT; Text: T_INT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12562 in perlxstypemap.pod
-Lookups: T_IV; Text: T_IV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_IV; Text: T_IV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12423 in perlxstypemap.pod
-Lookups: T_LONG; Text: T_LONG; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_LONG; Text: T_LONG; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13673 in perlxstypemap.pod
-Lookups: T_NV; Text: T_NV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_NV; Text: T_NV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14236 in perlxstypemap.pod
-Lookups: T_OPAQUE; Text: T_OPAQUE; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_OPAQUE; Text: T_OPAQUE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17489 in perlxstypemap.pod
-Lookups: T_OPAQUEPTR; Text: T_OPAQUEPTR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_OPAQUEPTR; Text: T_OPAQUEPTR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16620 in perlxstypemap.pod
-Lookups: T_OUT; Text: T_OUT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_OUT; Text: T_OUT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23873 in perlxstypemap.pod
-Lookups: T_PACKED; Text: T_PACKED; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PACKED; Text: T_PACKED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18820 in perlxstypemap.pod
-Lookups: T_PACKEDARRAY; Text: T_PACKEDARRAY; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PACKEDARRAY; Text: T_PACKEDARRAY; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20263 in perlxstypemap.pod
-Lookups: T_PTR; Text: T_PTR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PTR; Text: T_PTR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14555 in perlxstypemap.pod
-Lookups: T_PTRDESC; Text: T_PTRDESC; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PTRDESC; Text: T_PTRDESC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16058 in perlxstypemap.pod
-Lookups: T_PTROBJ; Text: T_PTROBJ; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PTROBJ; Text: T_PTROBJ; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14982 in perlxstypemap.pod
-Lookups: T_PTRREF; Text: T_PTRREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PTRREF; Text: T_PTRREF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14641 in perlxstypemap.pod
-Lookups: T_PV; Text: T_PV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_PV; Text: T_PV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14523 in perlxstypemap.pod
-Lookups: T_REFOBJ; Text: T_REFOBJ; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_REFOBJ; Text: T_REFOBJ; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16414 in perlxstypemap.pod
-Lookups: T_REFREF; Text: T_REFREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_REFREF; Text: T_REFREF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16084 in perlxstypemap.pod
-Lookups: T_REF_IV_PTR; Text: T_REF_IV_PTR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_REF_IV_PTR; Text: T_REF_IV_PTR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15553 in perlxstypemap.pod
-Lookups: T_REF_IV_REF; Text: T_REF_IV_REF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_REF_IV_REF; Text: T_REF_IV_REF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15524 in perlxstypemap.pod
-Lookups: T_SHORT; Text: T_SHORT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_SHORT; Text: T_SHORT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13282 in perlxstypemap.pod
-Lookups: T_STDIO; Text: T_STDIO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_STDIO; Text: T_STDIO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23111 in perlxstypemap.pod
-Lookups: T_SV; Text: T_SV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_SV; Text: T_SV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9627 in perlxstypemap.pod
-Lookups: T_SVREF; Text: T_SVREF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_SVREF; Text: T_SVREF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9816 in perlxstypemap.pod
-Lookups: T_SVREF_FIXED; Text: T_SVREF_FIXED; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_SVREF_FIXED; Text: T_SVREF_FIXED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10017 in perlxstypemap.pod
-Lookups: T_SYSRET; Text: T_SYSRET; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_SYSRET; Text: T_SYSRET; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11782 in perlxstypemap.pod
-Lookups: T_UV; Text: T_UV; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_UV; Text: T_UV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12389 in perlxstypemap.pod
-Lookups: T_U_CHAR; Text: T_U_CHAR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_U_CHAR; Text: T_U_CHAR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14095 in perlxstypemap.pod
-Lookups: T_U_INT; Text: T_U_INT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_U_INT; Text: T_U_INT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13099 in perlxstypemap.pod
-Lookups: T_U_LONG; Text: T_U_LONG; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_U_LONG; Text: T_U_LONG; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13820 in perlxstypemap.pod
-Lookups: T_U_SHORT; Text: T_U_SHORT; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: T_U_SHORT; Text: T_U_SHORT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13433 in perlxstypemap.pod
-Lookups: The Role of the typemap File in Your Distribution; Text: The Role of the typemap File in Your Distribution; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The Role of the typemap File in Your Distribution; Text: The Role of the typemap File in Your Distribution; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5383 in perlxstypemap.pod
-Lookups: Writing typemap Entries; Text: Writing typemap Entries; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Writing typemap Entries; Text: Writing typemap Entries; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7701 in perlxstypemap.pod

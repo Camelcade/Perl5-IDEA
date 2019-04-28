@@ -1,132 +1,132 @@
-Lookups:  -Dmksymlinks; Text:  -Dmksymlinks; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Dmksymlinks; Text:  -Dmksymlinks; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6345 in perlcygwin.pod
-Lookups:  -Duselargefiles; Text:  -Duselargefiles; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Duselargefiles; Text:  -Duselargefiles; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6185 in perlcygwin.pod
-Lookups:  -Duselongdouble; Text:  -Duselongdouble; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Duselongdouble; Text:  -Duselongdouble; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5788 in perlcygwin.pod
-Lookups:  -Dusemultiplicity; Text:  -Dusemultiplicity; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Dusemultiplicity; Text:  -Dusemultiplicity; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5440 in perlcygwin.pod
-Lookups:  -Dusemymalloc; Text:  -Dusemymalloc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Dusemymalloc; Text:  -Dusemymalloc; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5059 in perlcygwin.pod
-Lookups:  -Uuse64bitint; Text:  -Uuse64bitint; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Uuse64bitint; Text:  -Uuse64bitint; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5658 in perlcygwin.pod
-Lookups:  -Uusedl; Text:  -Uusedl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Uusedl; Text:  -Uusedl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4976 in perlcygwin.pod
-Lookups:  -Uuseithreads; Text:  -Uuseithreads; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Uuseithreads; Text:  -Uuseithreads; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6101 in perlcygwin.pod
-Lookups:  -Uuseperlio; Text:  -Uuseperlio; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -Uuseperlio; Text:  -Uuseperlio; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5290 in perlcygwin.pod
-Lookups:  -lcrypt; Text:  -lcrypt; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -lcrypt; Text:  -lcrypt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3443 in perlcygwin.pod
-Lookups:  -ldb (use DB_File); Text:  -ldb (use DB_File); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -ldb (use DB_File); Text:  -ldb (use DB_File); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3897 in perlcygwin.pod
-Lookups:  -lgdbm_compat (use GDBM_File); Text:  -lgdbm_compat (use GDBM_File); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -lgdbm_compat (use GDBM_File); Text:  -lgdbm_compat (use GDBM_File); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3766 in perlcygwin.pod
-Lookups:  -lutil; Text:  -lutil; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  -lutil; Text:  -lutil; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4503 in perlcygwin.pod
-Lookups:  .exe; Text:  .exe; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  .exe; Text:  .exe; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12731 in perlcygwin.pod
-Lookups:  Compiler/Preprocessor defines; Text:  Compiler/Preprocessor defines; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Compiler/Preprocessor defines; Text:  Compiler/Preprocessor defines; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7129 in perlcygwin.pod
-Lookups:  Cygwin vs. Windows errors; Text:  Cygwin vs. Windows errors; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Cygwin vs. Windows errors; Text:  Cygwin vs. Windows errors; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13653 in perlcygwin.pod
-Lookups:  Cygwin vs. Windows process ids; Text:  Cygwin vs. Windows process ids; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Cygwin vs. Windows process ids; Text:  Cygwin vs. Windows process ids; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13242 in perlcygwin.pod
-Lookups:  Miscellaneous; Text:  Miscellaneous; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Miscellaneous; Text:  Miscellaneous; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15152 in perlcygwin.pod
-Lookups:  PATH; Text:  PATH; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  PATH; Text:  PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1731 in perlcygwin.pod
-Lookups:  Pathnames; Text:  Pathnames; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Pathnames; Text:  Pathnames; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10771 in perlcygwin.pod
-Lookups:  PerlIO; Text:  PerlIO; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  PerlIO; Text:  PerlIO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12172 in perlcygwin.pod
-Lookups:  Text/Binary; Text:  Text/Binary; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Text/Binary; Text:  Text/Binary; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11398 in perlcygwin.pod
-Lookups:  Win9x and d_eofnblk; Text:  Win9x and d_eofnblk; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Win9x and d_eofnblk; Text:  Win9x and d_eofnblk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6649 in perlcygwin.pod
-Lookups:  chown(); Text:  chown(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  chown(); Text:  chown(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14975 in perlcygwin.pod
-Lookups:  cygserver (use IPC::SysV); Text:  cygserver (use IPC::SysV); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  cygserver (use IPC::SysV); Text:  cygserver (use IPC::SysV); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4040 in perlcygwin.pod
-Lookups:  nroff; Text:  nroff; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  nroff; Text:  nroff; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1933 in perlcygwin.pod
-Lookups:  rebase errors on fork or system; Text:  rebase errors on fork or system; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  rebase errors on fork or system; Text:  rebase errors on fork or system; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13828 in perlcygwin.pod
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 26774 in perlcygwin.pod
-Lookups: BUGS ON CYGWIN; Text: BUGS ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: BUGS ON CYGWIN; Text: BUGS ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 26488 in perlcygwin.pod
-Lookups: Build, Configure, Make, Install; Text: Build, Configure, Make, Install; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Build, Configure, Make, Install; Text: Build, Configure, Make, Install; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19909 in perlcygwin.pod
-Lookups: CONFIGURE PERL ON CYGWIN; Text: CONFIGURE PERL ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: CONFIGURE PERL ON CYGWIN; Text: CONFIGURE PERL ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2086 in perlcygwin.pod
-Lookups: Compiled Module Source; Text: Compiled Module Source; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Compiled Module Source; Text: Compiled Module Source; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22119 in perlcygwin.pod
-Lookups: Compiled Perl Source; Text: Compiled Perl Source; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Compiled Perl Source; Text: Compiled Perl Source; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21358 in perlcygwin.pod
-Lookups: Configure-time Options for Perl on Cygwin; Text: Configure-time Options for Perl on Cygwin; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Configure-time Options for Perl on Cygwin; Text: Configure-time Options for Perl on Cygwin; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4626 in perlcygwin.pod
-Lookups: Cwd::cwd; Text: Cwd::cwd; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cwd::cwd; Text: Cwd::cwd; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15741 in perlcygwin.pod
-Lookups: Cygwin = GNU+Cygnus+Windows (Don't leave UNIX without it); Text: Cygwin = GNU+Cygnus+Windows (Don't leave UNIX without it); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin = GNU+Cygnus+Windows (Don't leave UNIX without it); Text: Cygwin = GNU+Cygnus+Windows (Don't leave UNIX without it); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 686 in perlcygwin.pod
-Lookups: Cygwin Configuration; Text: Cygwin Configuration; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin Configuration; Text: Cygwin Configuration; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1166 in perlcygwin.pod
-Lookups: Cygwin::is_binmount; Text: Cygwin::is_binmount; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::is_binmount; Text: Cygwin::is_binmount; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17603 in perlcygwin.pod
-Lookups: Cygwin::mount_flags; Text: Cygwin::mount_flags; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::mount_flags; Text: Cygwin::mount_flags; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16943 in perlcygwin.pod
-Lookups: Cygwin::mount_table(); Text: Cygwin::mount_table(); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::mount_table(); Text: Cygwin::mount_table(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16501 in perlcygwin.pod
-Lookups: Cygwin::pid_to_winpid; Text: Cygwin::pid_to_winpid; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::pid_to_winpid; Text: Cygwin::pid_to_winpid; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15800 in perlcygwin.pod
-Lookups: Cygwin::posix_to_win_path; Text: Cygwin::posix_to_win_path; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::posix_to_win_path; Text: Cygwin::posix_to_win_path; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16264 in perlcygwin.pod
-Lookups: Cygwin::sync_winenv; Text: Cygwin::sync_winenv; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::sync_winenv; Text: Cygwin::sync_winenv; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17733 in perlcygwin.pod
-Lookups: Cygwin::win_to_posix_path; Text: Cygwin::win_to_posix_path; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::win_to_posix_path; Text: Cygwin::win_to_posix_path; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16026 in perlcygwin.pod
-Lookups: Cygwin::winpid_to_pid; Text: Cygwin::winpid_to_pid; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Cygwin::winpid_to_pid; Text: Cygwin::winpid_to_pid; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15926 in perlcygwin.pod
-Lookups: Documentation; Text: Documentation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Documentation; Text: Documentation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19008 in perlcygwin.pod
-Lookups: File Permissions on Cygwin; Text: File Permissions on Cygwin; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: File Permissions on Cygwin; Text: File Permissions on Cygwin; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8175 in perlcygwin.pod
-Lookups: HISTORY; Text: HISTORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 27158 in perlcygwin.pod
-Lookups: INSTALL PERL ON CYGWIN; Text: INSTALL PERL ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: INSTALL PERL ON CYGWIN; Text: INSTALL PERL ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18244 in perlcygwin.pod
-Lookups: MAKE ON CYGWIN; Text: MAKE ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: MAKE ON CYGWIN; Text: MAKE ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7507 in perlcygwin.pod
-Lookups: MANIFEST ON CYGWIN; Text: MANIFEST ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: MANIFEST ON CYGWIN; Text: MANIFEST ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18721 in perlcygwin.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 181 in perlcygwin.pod
-Lookups: NDBM_File and ODBM_File do not work on FAT filesystems; Text: NDBM_File and ODBM_File do not work on FAT filesystems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: NDBM_File and ODBM_File do not work on FAT filesystems; Text: NDBM_File and ODBM_File do not work on FAT filesystems; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9301 in perlcygwin.pod
-Lookups: Optional Libraries for Perl on Cygwin; Text: Optional Libraries for Perl on Cygwin; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Optional Libraries for Perl on Cygwin; Text: Optional Libraries for Perl on Cygwin; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3104 in perlcygwin.pod
-Lookups: PREREQUISITES FOR COMPILING PERL ON CYGWIN; Text: PREREQUISITES FOR COMPILING PERL ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: PREREQUISITES FOR COMPILING PERL ON CYGWIN; Text: PREREQUISITES FOR COMPILING PERL ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 635 in perlcygwin.pod
-Lookups: Perl Module Tests; Text: Perl Module Tests; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl Module Tests; Text: Perl Module Tests; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25451 in perlcygwin.pod
-Lookups: Perl Modules/Scripts; Text: Perl Modules/Scripts; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl Modules/Scripts; Text: Perl Modules/Scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23319 in perlcygwin.pod
-Lookups: Prebuilt methods:; Text: Prebuilt methods:; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Prebuilt methods:; Text: Prebuilt methods:; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15706 in perlcygwin.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 224 in perlcygwin.pod
-Lookups: Script Portability on Cygwin; Text: Script Portability on Cygwin; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Script Portability on Cygwin; Text: Script Portability on Cygwin; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10429 in perlcygwin.pod
-Lookups: Specific features of the Cygwin port; Text: Specific features of the Cygwin port; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Specific features of the Cygwin port; Text: Specific features of the Cygwin port; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10384 in perlcygwin.pod
-Lookups: Stripping Perl Binaries on Cygwin; Text: Stripping Perl Binaries on Cygwin; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Stripping Perl Binaries on Cygwin; Text: Stripping Perl Binaries on Cygwin; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2510 in perlcygwin.pod
-Lookups: Suspicious Warnings on Cygwin; Text: Suspicious Warnings on Cygwin; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Suspicious Warnings on Cygwin; Text: Suspicious Warnings on Cygwin; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6536 in perlcygwin.pod
-Lookups: TEST ON CYGWIN; Text: TEST ON CYGWIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: TEST ON CYGWIN; Text: TEST ON CYGWIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7588 in perlcygwin.pod
-Lookups: Tests; Text: Tests; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Tests; Text: Tests; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20658 in perlcygwin.pod
-Lookups: fork() failures in io_* tests; Text: fork() failures in io_* tests; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: fork() failures in io_* tests; Text: fork() failures in io_* tests; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10139 in perlcygwin.pod

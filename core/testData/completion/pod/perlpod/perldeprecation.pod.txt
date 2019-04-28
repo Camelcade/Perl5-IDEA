@@ -1,86 +1,86 @@
-Lookups: $# is no longer supported; Text: $# is no longer supported; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: $# is no longer supported; Text: $# is no longer supported; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5063 in perldeprecation.pod
-Lookups: $* is no longer supported; Text: $* is no longer supported; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: $* is no longer supported; Text: $* is no longer supported; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4502 in perldeprecation.pod
-Lookups: ${^ENCODING} is no longer supported.; Text: ${^ENCODING} is no longer supported.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: ${^ENCODING} is no longer supported.; Text: ${^ENCODING} is no longer supported.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15214 in perldeprecation.pod
-Lookups: --libpods in Pod::Html; Text: --libpods in Pod::Html; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: --libpods in Pod::Html; Text: --libpods in Pod::Html; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17387 in perldeprecation.pod
-Lookups: Assigning non-zero to $[ will be fatal; Text: Assigning non-zero to $[ will be fatal; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Assigning non-zero to $[ will be fatal; Text: Assigning non-zero to $[ will be fatal; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5501 in perldeprecation.pod
-Lookups: Attributes :locked and :unique; Text: Attributes :locked and :unique; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Attributes :locked and :unique; Text: Attributes :locked and :unique; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11575 in perldeprecation.pod
-Lookups: B::OP::terse; Text: B::OP::terse; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: B::OP::terse; Text: B::OP::terse; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15588 in perldeprecation.pod
-Lookups: Bare here-document terminators; Text: Bare here-document terminators; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Bare here-document terminators; Text: Bare here-document terminators; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12055 in perldeprecation.pod
-Lookups: Calling POSIX::%s() is deprecated; Text: Calling POSIX::%s() is deprecated; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Calling POSIX::%s() is deprecated; Text: Calling POSIX::%s() is deprecated; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19277 in perldeprecation.pod
-Lookups: Constants from lexical variables potentially modified elsewhere; Text: Constants from lexical variables potentially modified elsewhere; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Constants from lexical variables potentially modified elsewhere; Text: Constants from lexical variables potentially modified elsewhere; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 478 in perldeprecation.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 55 in perldeprecation.pod
-Lookups: File::Glob::glob() will disappear; Text: File::Glob::glob() will disappear; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: File::Glob::glob() will disappear; Text: File::Glob::glob() will disappear; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5811 in perldeprecation.pod
-Lookups: In XS code, use of to_utf8_case(); Text: In XS code, use of to_utf8_case(); Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: In XS code, use of to_utf8_case(); Text: In XS code, use of to_utf8_case(); Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17022 in perldeprecation.pod
-Lookups: In XS code, use of various macros dealing with UTF-8.; Text: In XS code, use of various macros dealing with UTF-8.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: In XS code, use of various macros dealing with UTF-8.; Text: In XS code, use of various macros dealing with UTF-8.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 10234 in perldeprecation.pod
-Lookups: Limit on the value of Unicode code points.; Text: Limit on the value of Unicode code points.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Limit on the value of Unicode code points.; Text: Limit on the value of Unicode code points.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13299 in perldeprecation.pod
-Lookups: Malformed UTF-8 string in "%s"; Text: Malformed UTF-8 string in "%s"; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Malformed UTF-8 string in "%s"; Text: Malformed UTF-8 string in "%s"; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18469 in perldeprecation.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perldeprecation.pod
-Lookups: Perl 5.16; Text: Perl 5.16; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5.16; Text: Perl 5.16; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19723 in perldeprecation.pod
-Lookups: Perl 5.24; Text: Perl 5.24; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5.24; Text: Perl 5.24; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19000 in perldeprecation.pod
-Lookups: Perl 5.26; Text: Perl 5.26; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5.26; Text: Perl 5.26; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17369 in perldeprecation.pod
-Lookups: Perl 5.28; Text: Perl 5.28; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5.28; Text: Perl 5.28; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11557 in perldeprecation.pod
-Lookups: Perl 5.30; Text: Perl 5.30; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5.30; Text: Perl 5.30; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4484 in perldeprecation.pod
-Lookups: Perl 5.32; Text: Perl 5.32; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5.32; Text: Perl 5.32; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 460 in perldeprecation.pod
-Lookups: Reading/writing bytes from/to :utf8 handles.; Text: Reading/writing bytes from/to :utf8 handles.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Reading/writing bytes from/to :utf8 handles.; Text: Reading/writing bytes from/to :utf8 handles.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7608 in perldeprecation.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20351 in perldeprecation.pod
-Lookups: Setting $/ to a reference to a non-positive integer; Text: Setting $/ to a reference to a non-positive integer; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Setting $/ to a reference to a non-positive integer; Text: Setting $/ to a reference to a non-positive integer; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12544 in perldeprecation.pod
-Lookups: The utilities c2ph and pstruct; Text: The utilities c2ph and pstruct; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: The utilities c2ph and pstruct; Text: The utilities c2ph and pstruct; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17644 in perldeprecation.pod
-Lookups: Trapping $SIG {__DIE__} other than during program exit.; Text: Trapping $SIG {__DIE__} other than during program exit.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Trapping $SIG {__DIE__} other than during program exit.; Text: Trapping $SIG {__DIE__} other than during program exit.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17834 in perldeprecation.pod
-Lookups: Unescaped left braces in regular expressions (for 5.30); Text: Unescaped left braces in regular expressions (for 5.30); Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Unescaped left braces in regular expressions (for 5.30); Text: Unescaped left braces in regular expressions (for 5.30); Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6327 in perldeprecation.pod
-Lookups: Unescaped left braces in regular expressions; Text: Unescaped left braces in regular expressions; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Unescaped left braces in regular expressions; Text: Unescaped left braces in regular expressions; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3247 in perldeprecation.pod
-Lookups: Unqualified dump(); Text: Unqualified dump(); Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Unqualified dump(); Text: Unqualified dump(); Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6452 in perldeprecation.pod
-Lookups: Use of %s on a handle without * is deprecated; Text: Use of %s on a handle without * is deprecated; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of %s on a handle without * is deprecated; Text: Use of %s on a handle without * is deprecated; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19741 in perldeprecation.pod
-Lookups: Use of *glob{FILEHANDLE}; Text: Use of *glob{FILEHANDLE}; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of *glob{FILEHANDLE}; Text: Use of *glob{FILEHANDLE}; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 19018 in perldeprecation.pod
-Lookups: Use of \N{}; Text: Use of \N{}; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of \N{}; Text: Use of \N{}; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14535 in perldeprecation.pod
-Lookups: Use of code points over 0xFF in string bitwise operators; Text: Use of code points over 0xFF in string bitwise operators; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of code points over 0xFF in string bitwise operators; Text: Use of code points over 0xFF in string bitwise operators; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16708 in perldeprecation.pod
-Lookups: Use of code points over 0xFF in string bitwise operators; Text: Use of code points over 0xFF in string bitwise operators; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of code points over 0xFF in string bitwise operators; Text: Use of code points over 0xFF in string bitwise operators; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2017 in perldeprecation.pod
-Lookups: Use of comma-less variable list in formats.; Text: Use of comma-less variable list in formats.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of comma-less variable list in formats.; Text: Use of comma-less variable list in formats.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14294 in perldeprecation.pod
-Lookups: Use of inherited AUTOLOAD for non-method %s::%s() is no longer allowed; Text: Use of inherited AUTOLOAD for non-method %s::%s() is no longer allowed; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of inherited AUTOLOAD for non-method %s::%s() is no longer allowed; Text: Use of inherited AUTOLOAD for non-method %s::%s() is no longer allowed; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15767 in perldeprecation.pod
-Lookups: Use of strings with code points over 0xFF as arguments to vec; Text: Use of strings with code points over 0xFF as arguments to vec; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of strings with code points over 0xFF as arguments to vec; Text: Use of strings with code points over 0xFF as arguments to vec; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 1753 in perldeprecation.pod
-Lookups: Use of unassigned code point or non-standalone grapheme for a delimiter.; Text: Use of unassigned code point or non-standalone grapheme for a delimiter.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of unassigned code point or non-standalone grapheme for a delimiter.; Text: Use of unassigned code point or non-standalone grapheme for a delimiter.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8745 in perldeprecation.pod
-Lookups: Using my() in false conditional.; Text: Using my() in false conditional.; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Using my() in false conditional.; Text: Using my() in false conditional.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6650 in perldeprecation.pod
-Lookups: Using the same symbol to open a filehandle and a dirhandle; Text: Using the same symbol to open a filehandle and a dirhandle; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Using the same symbol to open a filehandle and a dirhandle; Text: Using the same symbol to open a filehandle and a dirhandle; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14796 in perldeprecation.pod
-Lookups: hostname() doesn't accept any arguments; Text: hostname() doesn't accept any arguments; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: hostname() doesn't accept any arguments; Text: hostname() doesn't accept any arguments; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2750 in perldeprecation.pod

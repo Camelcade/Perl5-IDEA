@@ -1,40 +1,40 @@
-Lookups:  http://perltraining.com.au/whyperl.html; Text:  http://perltraining.com.au/whyperl.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://perltraining.com.au/whyperl.html; Text:  http://perltraining.com.au/whyperl.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13798 in perlfaq1.pod
-Lookups:  http://www.perl.org/about.html; Text:  http://www.perl.org/about.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.perl.org/about.html; Text:  http://www.perl.org/about.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13755 in perlfaq1.pod
-Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13857 in perlfaq1.pod
-Lookups: Can I do [task] in Perl?; Text: Can I do [task] in Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Can I do [task] in Perl?; Text: Can I do [task] in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9605 in perlfaq1.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88 in perlfaq1.pod
-Lookups: How can I convince others to use Perl?; Text: How can I convince others to use Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I convince others to use Perl?; Text: How can I convince others to use Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12286 in perlfaq1.pod
-Lookups: How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl?; Text: How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl?; Text: How does Perl compare with other languages like Java, Python, REXX, Scheme, or Tcl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8763 in perlfaq1.pod
-Lookups: How often are new versions of Perl released?; Text: How often are new versions of Perl released?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How often are new versions of Perl released?; Text: How often are new versions of Perl released?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6459 in perlfaq1.pod
-Lookups: How stable is Perl?; Text: How stable is Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How stable is Perl?; Text: How stable is Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6087 in perlfaq1.pod
-Lookups: Is Perl difficult to learn?; Text: Is Perl difficult to learn?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Is Perl difficult to learn?; Text: Is Perl difficult to learn?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7322 in perlfaq1.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq1.pod
-Lookups: VERSION; Text: VERSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54 in perlfaq1.pod
-Lookups: What are Perl 4, Perl 5, or Perl 6?; Text: What are Perl 4, Perl 5, or Perl 6?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What are Perl 4, Perl 5, or Perl 6?; Text: What are Perl 4, Perl 5, or Perl 6?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4189 in perlfaq1.pod
-Lookups: What is Perl 6?; Text: What is Perl 6?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What is Perl 6?; Text: What is Perl 6?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5118 in perlfaq1.pod
-Lookups: What is Perl?; Text: What is Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What is Perl?; Text: What is Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 188 in perlfaq1.pod
-Lookups: What is a JAPH?; Text: What is a JAPH?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What is a JAPH?; Text: What is a JAPH?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11617 in perlfaq1.pod
-Lookups: What's the difference between "perl" and "Perl"?; Text: What's the difference between "perl" and "Perl"?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What's the difference between "perl" and "Perl"?; Text: What's the difference between "perl" and "Perl"?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11288 in perlfaq1.pod
-Lookups: When shouldn't I program in Perl?; Text: When shouldn't I program in Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: When shouldn't I program in Perl?; Text: When shouldn't I program in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10830 in perlfaq1.pod
-Lookups: Which version of Perl should I use?; Text: Which version of Perl should I use?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Which version of Perl should I use?; Text: Which version of Perl should I use?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2270 in perlfaq1.pod
-Lookups: Who supports Perl? Who develops it? Why is it free?; Text: Who supports Perl? Who develops it? Why is it free?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Who supports Perl? Who develops it? Why is it free?; Text: Who supports Perl? Who develops it? Why is it free?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 912 in perlfaq1.pod

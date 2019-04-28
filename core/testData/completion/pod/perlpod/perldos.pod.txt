@@ -1,34 +1,34 @@
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10325 in perldos.pod
-Lookups: BUILDING AND INSTALLING MODULES ON DOS; Text: BUILDING AND INSTALLING MODULES ON DOS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: BUILDING AND INSTALLING MODULES ON DOS; Text: BUILDING AND INSTALLING MODULES ON DOS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6357 in perldos.pod
-Lookups: Building Non-XS Modules on DOS; Text: Building Non-XS Modules on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Building Non-XS Modules on DOS; Text: Building Non-XS Modules on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8582 in perldos.pod
-Lookups: Building Perl on DOS; Text: Building Perl on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Building Perl on DOS; Text: Building Perl on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2521 in perldos.pod
-Lookups: Building Prerequisites for Perl on DOS; Text: Building Prerequisites for Perl on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Building Prerequisites for Perl on DOS; Text: Building Prerequisites for Perl on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6404 in perldos.pod
-Lookups: Building XS Modules on DOS; Text: Building XS Modules on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Building XS Modules on DOS; Text: Building XS Modules on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8994 in perldos.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 376 in perldos.pod
-Lookups: DJGPP; Text: DJGPP; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: DJGPP; Text: DJGPP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1034 in perldos.pod
-Lookups: Installation of Perl on DOS; Text: Installation of Perl on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installation of Perl on DOS; Text: Installation of Perl on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6039 in perldos.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perldos.pod
-Lookups: Prerequisites for Compiling Perl on DOS; Text: Prerequisites for Compiling Perl on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Prerequisites for Compiling Perl on DOS; Text: Prerequisites for Compiling Perl on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 977 in perldos.pod
-Lookups: Pthreads; Text: Pthreads; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Pthreads; Text: Pthreads; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2060 in perldos.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10489 in perldos.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 228 in perldos.pod
-Lookups: Shortcomings of Perl under DOS; Text: Shortcomings of Perl under DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Shortcomings of Perl under DOS; Text: Shortcomings of Perl under DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2148 in perldos.pod
-Lookups: Testing Perl on DOS; Text: Testing Perl on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Testing Perl on DOS; Text: Testing Perl on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5743 in perldos.pod
-Lookups: Unpacking CPAN Modules on DOS; Text: Unpacking CPAN Modules on DOS; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unpacking CPAN Modules on DOS; Text: Unpacking CPAN Modules on DOS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7304 in perldos.pod

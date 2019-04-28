@@ -1,186 +1,186 @@
-Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88887 in perlfaq4.pod
 Lookups: Algorithm::Loops; Text: How do I permute N elements of a list?; Tail: (Algorithm::Loops); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
 Lookups: Array::Iterator::Circular; Text: How do I handle circular lists?; Tail: (Array::Iterator::Circular); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55888 in perlfaq4.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77 in perlfaq4.pod
-Lookups: Data: Arrays; Text: Data: Arrays; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Data: Arrays; Text: Data: Arrays; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42602 in perlfaq4.pod
-Lookups: Data: Dates; Text: Data: Dates; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Data: Dates; Text: Data: Dates; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13270 in perlfaq4.pod
-Lookups: Data: Hashes (Associative Arrays); Text: Data: Hashes (Associative Arrays); Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Data: Hashes (Associative Arrays); Text: Data: Hashes (Associative Arrays); Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67159 in perlfaq4.pod
-Lookups: Data: Misc; Text: Data: Misc; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Data: Misc; Text: Data: Misc; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 84196 in perlfaq4.pod
-Lookups: Data: Numbers; Text: Data: Numbers; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Data: Numbers; Text: Data: Numbers; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 236 in perlfaq4.pod
-Lookups: Data: Strings; Text: Data: Strings; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Data: Strings; Text: Data: Strings; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20351 in perlfaq4.pod
 Lookups: Date::Calc; Text: How do I find yesterday's date?; Tail: (Date::Calc); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17344 in perlfaq4.pod
 Lookups: DateTime; Text: How do I find yesterday's date?; Tail: (DateTime); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17344 in perlfaq4.pod
-Lookups: Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant?; Text: Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant?; Text: Does Perl have a Year 2000 or 2038 problem? Is Perl Y2K compliant?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19467 in perlfaq4.pod
-Lookups: Does Perl have a round() function? What about ceil() and floor()? Trig functions?; Text: Does Perl have a round() function? What about ceil() and floor()? Trig functions?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Does Perl have a round() function? What about ceil() and floor()? Trig functions?; Text: Does Perl have a round() function? What about ceil() and floor()? Trig functions?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3230 in perlfaq4.pod
 Lookups: Fischer-Krause; Text: How do I permute N elements of a list?; Tail: (Fischer-Krause); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
-Lookups: How can I access or change N characters of a string?; Text: How can I access or change N characters of a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I access or change N characters of a string?; Text: How can I access or change N characters of a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25712 in perlfaq4.pod
-Lookups: How can I always keep my hash sorted?; Text: How can I always keep my hash sorted?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I always keep my hash sorted?; Text: How can I always keep my hash sorted?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74491 in perlfaq4.pod
-Lookups: How can I check if a key exists in a multilevel hash?; Text: How can I check if a key exists in a multilevel hash?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I check if a key exists in a multilevel hash?; Text: How can I check if a key exists in a multilevel hash?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 82182 in perlfaq4.pod
-Lookups: How can I compare two dates and find the difference?; Text: How can I compare two dates and find the difference?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I compare two dates and find the difference?; Text: How can I compare two dates and find the difference?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15034 in perlfaq4.pod
-Lookups: How can I count the number of occurrences of a substring within a string?; Text: How can I count the number of occurrences of a substring within a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I count the number of occurrences of a substring within a string?; Text: How can I count the number of occurrences of a substring within a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27243 in perlfaq4.pod
-Lookups: How can I expand variables in text strings?; Text: How can I expand variables in text strings?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I expand variables in text strings?; Text: How can I expand variables in text strings?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36734 in perlfaq4.pod
-Lookups: How can I find the Julian Day?; Text: How can I find the Julian Day?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I find the Julian Day?; Text: How can I find the Julian Day?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16246 in perlfaq4.pod
-Lookups: How can I get the unique keys from two hashes?; Text: How can I get the unique keys from two hashes?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I get the unique keys from two hashes?; Text: How can I get the unique keys from two hashes?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77911 in perlfaq4.pod
-Lookups: How can I know how many entries are in a hash?; Text: How can I know how many entries are in a hash?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I know how many entries are in a hash?; Text: How can I know how many entries are in a hash?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71822 in perlfaq4.pod
-Lookups: How can I make my hash remember the order I put elements into it?; Text: How can I make my hash remember the order I put elements into it?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I make my hash remember the order I put elements into it?; Text: How can I make my hash remember the order I put elements into it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78795 in perlfaq4.pod
-Lookups: How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays?; Text: How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays?; Text: How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80347 in perlfaq4.pod
-Lookups: How can I output Roman numerals?; Text: How can I output Roman numerals?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I output Roman numerals?; Text: How can I output Roman numerals?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10674 in perlfaq4.pod
-Lookups: How can I prevent addition of unwanted keys into a hash?; Text: How can I prevent addition of unwanted keys into a hash?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I prevent addition of unwanted keys into a hash?; Text: How can I prevent addition of unwanted keys into a hash?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 83950 in perlfaq4.pod
-Lookups: How can I remove duplicate elements from a list or array?; Text: How can I remove duplicate elements from a list or array?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I remove duplicate elements from a list or array?; Text: How can I remove duplicate elements from a list or array?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46765 in perlfaq4.pod
-Lookups: How can I split a [character]-delimited string except when inside [character]?; Text: How can I split a [character]-delimited string except when inside [character]?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I split a [character]-delimited string except when inside [character]?; Text: How can I split a [character]-delimited string except when inside [character]?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29654 in perlfaq4.pod
-Lookups: How can I store a multidimensional array in a DBM file?; Text: How can I store a multidimensional array in a DBM file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I store a multidimensional array in a DBM file?; Text: How can I store a multidimensional array in a DBM file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 78507 in perlfaq4.pod
-Lookups: How can I take a string and turn it into epoch seconds?; Text: How can I take a string and turn it into epoch seconds?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I take a string and turn it into epoch seconds?; Text: How can I take a string and turn it into epoch seconds?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15914 in perlfaq4.pod
-Lookups: How can I tell whether a certain element is contained in a list or array?; Text: How can I tell whether a certain element is contained in a list or array?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I tell whether a certain element is contained in a list or array?; Text: How can I tell whether a certain element is contained in a list or array?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48555 in perlfaq4.pod
-Lookups: How can I use a reference as a hash key?; Text: How can I use a reference as a hash key?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I use a reference as a hash key?; Text: How can I use a reference as a hash key?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80906 in perlfaq4.pod
-Lookups: How do I capitalize all the words on one line?; Text: How do I capitalize all the words on one line?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I capitalize all the words on one line?; Text: How do I capitalize all the words on one line?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28274 in perlfaq4.pod
-Lookups: How do I change the Nth occurrence of something?; Text: How do I change the Nth occurrence of something?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I change the Nth occurrence of something?; Text: How do I change the Nth occurrence of something?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26268 in perlfaq4.pod
-Lookups: How do I compute the difference of two arrays? How do I compute the intersection of two arrays?; Text: How do I compute the difference of two arrays? How do I compute the intersection of two arrays?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I compute the difference of two arrays? How do I compute the intersection of two arrays?; Text: How do I compute the difference of two arrays? How do I compute the intersection of two arrays?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51440 in perlfaq4.pod
-Lookups: How do I convert between numeric representations/bases/radixes?; Text: How do I convert between numeric representations/bases/radixes?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert between numeric representations/bases/radixes?; Text: How do I convert between numeric representations/bases/radixes?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4893 in perlfaq4.pod
-Lookups: How do I convert from binary to decimal; Text: How do I convert from binary to decimal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert from binary to decimal; Text: How do I convert from binary to decimal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7190 in perlfaq4.pod
-Lookups: How do I convert from decimal to binary; Text: How do I convert from decimal to binary; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert from decimal to binary; Text: How do I convert from decimal to binary; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7883 in perlfaq4.pod
-Lookups: How do I convert from decimal to hexadecimal; Text: How do I convert from decimal to hexadecimal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert from decimal to hexadecimal; Text: How do I convert from decimal to hexadecimal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5938 in perlfaq4.pod
-Lookups: How do I convert from decimal to octal; Text: How do I convert from decimal to octal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert from decimal to octal; Text: How do I convert from decimal to octal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6928 in perlfaq4.pod
-Lookups: How do I convert from octal to decimal; Text: How do I convert from octal to decimal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert from octal to decimal; Text: How do I convert from octal to decimal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6527 in perlfaq4.pod
-Lookups: How do I convert hexadecimal into decimal; Text: How do I convert hexadecimal into decimal; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I convert hexadecimal into decimal; Text: How do I convert hexadecimal into decimal; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5516 in perlfaq4.pod
-Lookups: How do I define methods for every class/object?; Text: How do I define methods for every class/object?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I define methods for every class/object?; Text: How do I define methods for every class/object?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88006 in perlfaq4.pod
-Lookups: How do I determine whether a scalar is a number/whole/integer/float?; Text: How do I determine whether a scalar is a number/whole/integer/float?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I determine whether a scalar is a number/whole/integer/float?; Text: How do I determine whether a scalar is a number/whole/integer/float?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84759 in perlfaq4.pod
-Lookups: How do I expand function calls in a string?; Text: How do I expand function calls in a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I expand function calls in a string?; Text: How do I expand function calls in a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22255 in perlfaq4.pod
-Lookups: How do I expand tabs in a string?; Text: How do I expand tabs in a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I expand tabs in a string?; Text: How do I expand tabs in a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24817 in perlfaq4.pod
-Lookups: How do I extract selected columns from a string?; Text: How do I extract selected columns from a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I extract selected columns from a string?; Text: How do I extract selected columns from a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35118 in perlfaq4.pod
-Lookups: How do I find matching/nesting anything?; Text: How do I find matching/nesting anything?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I find matching/nesting anything?; Text: How do I find matching/nesting anything?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23885 in perlfaq4.pod
-Lookups: How do I find the current century or millennium?; Text: How do I find the current century or millennium?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I find the current century or millennium?; Text: How do I find the current century or millennium?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14391 in perlfaq4.pod
-Lookups: How do I find the day or week of the year?; Text: How do I find the day or week of the year?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I find the day or week of the year?; Text: How do I find the day or week of the year?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13290 in perlfaq4.pod
-Lookups: How do I find the first array element for which a condition is true?; Text: How do I find the first array element for which a condition is true?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I find the first array element for which a condition is true?; Text: How do I find the first array element for which a condition is true?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53927 in perlfaq4.pod
-Lookups: How do I find the soundex value of a string?; Text: How do I find the soundex value of a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I find the soundex value of a string?; Text: How do I find the soundex value of a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36462 in perlfaq4.pod
-Lookups: How do I find yesterday's date?; Text: How do I find yesterday's date?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I find yesterday's date?; Text: How do I find yesterday's date?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17344 in perlfaq4.pod
-Lookups: How do I get a random number between X and Y?; Text: How do I get a random number between X and Y?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I get a random number between X and Y?; Text: How do I get a random number between X and Y?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12194 in perlfaq4.pod
-Lookups: How do I handle binary data correctly?; Text: How do I handle binary data correctly?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I handle binary data correctly?; Text: How do I handle binary data correctly?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 84215 in perlfaq4.pod
-Lookups: How do I handle circular lists?; Text: How do I handle circular lists?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I handle circular lists?; Text: How do I handle circular lists?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55888 in perlfaq4.pod
-Lookups: How do I handle linked lists?; Text: How do I handle linked lists?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I handle linked lists?; Text: How do I handle linked lists?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55048 in perlfaq4.pod
-Lookups: How do I keep persistent data across program calls?; Text: How do I keep persistent data across program calls?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I keep persistent data across program calls?; Text: How do I keep persistent data across program calls?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 86802 in perlfaq4.pod
-Lookups: How do I look up a hash element by value?; Text: How do I look up a hash element by value?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I look up a hash element by value?; Text: How do I look up a hash element by value?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 71188 in perlfaq4.pod
-Lookups: How do I manipulate arrays of bits?; Text: How do I manipulate arrays of bits?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I manipulate arrays of bits?; Text: How do I manipulate arrays of bits?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 63301 in perlfaq4.pod
-Lookups: How do I merge two hashes?; Text: How do I merge two hashes?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I merge two hashes?; Text: How do I merge two hashes?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69124 in perlfaq4.pod
-Lookups: How do I multiply matrices?; Text: How do I multiply matrices?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I multiply matrices?; Text: How do I multiply matrices?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9422 in perlfaq4.pod
-Lookups: How do I pack arrays of doubles or floats for XS code?; Text: How do I pack arrays of doubles or floats for XS code?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I pack arrays of doubles or floats for XS code?; Text: How do I pack arrays of doubles or floats for XS code?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88553 in perlfaq4.pod
-Lookups: How do I pad a string with blanks or pad a number with zeroes?; Text: How do I pad a string with blanks or pad a number with zeroes?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I pad a string with blanks or pad a number with zeroes?; Text: How do I pad a string with blanks or pad a number with zeroes?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33073 in perlfaq4.pod
-Lookups: How do I perform an operation on a series of integers?; Text: How do I perform an operation on a series of integers?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I perform an operation on a series of integers?; Text: How do I perform an operation on a series of integers?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9588 in perlfaq4.pod
-Lookups: How do I permute N elements of a list?; Text: How do I permute N elements of a list?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I permute N elements of a list?; Text: How do I permute N elements of a list?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
-Lookups: How do I print out or copy a recursive data structure?; Text: How do I print out or copy a recursive data structure?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I print out or copy a recursive data structure?; Text: How do I print out or copy a recursive data structure?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87366 in perlfaq4.pod
-Lookups: How do I process an entire hash?; Text: How do I process an entire hash?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I process an entire hash?; Text: How do I process an entire hash?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 67201 in perlfaq4.pod
-Lookups: How do I process/modify each element of an array?; Text: How do I process/modify each element of an array?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I process/modify each element of an array?; Text: How do I process/modify each element of an array?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58270 in perlfaq4.pod
-Lookups: How do I reformat a paragraph?; Text: How do I reformat a paragraph?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I reformat a paragraph?; Text: How do I reformat a paragraph?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25117 in perlfaq4.pod
-Lookups: How do I remove consecutive pairs of characters?; Text: How do I remove consecutive pairs of characters?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I remove consecutive pairs of characters?; Text: How do I remove consecutive pairs of characters?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21142 in perlfaq4.pod
-Lookups: How do I reset an each() operation part-way through?; Text: How do I reset an each() operation part-way through?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I reset an each() operation part-way through?; Text: How do I reset an each() operation part-way through?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77495 in perlfaq4.pod
-Lookups: How do I reverse a string?; Text: How do I reverse a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I reverse a string?; Text: How do I reverse a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24670 in perlfaq4.pod
-Lookups: How do I select a random element from an array?; Text: How do I select a random element from an array?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I select a random element from an array?; Text: How do I select a random element from an array?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59327 in perlfaq4.pod
-Lookups: How do I shuffle an array randomly?; Text: How do I shuffle an array randomly?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I shuffle an array randomly?; Text: How do I shuffle an array randomly?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 56873 in perlfaq4.pod
-Lookups: How do I sort a hash (optionally by value instead of key)?; Text: How do I sort a hash (optionally by value instead of key)?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I sort a hash (optionally by value instead of key)?; Text: How do I sort a hash (optionally by value instead of key)?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 72969 in perlfaq4.pod
-Lookups: How do I sort an array by (anything)?; Text: How do I sort an array by (anything)?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I sort an array by (anything)?; Text: How do I sort an array by (anything)?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 61674 in perlfaq4.pod
-Lookups: How do I strip blank space from the beginning/end of a string?; Text: How do I strip blank space from the beginning/end of a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I strip blank space from the beginning/end of a string?; Text: How do I strip blank space from the beginning/end of a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31213 in perlfaq4.pod
-Lookups: How do I test whether two arrays or hashes are equal?; Text: How do I test whether two arrays or hashes are equal?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I test whether two arrays or hashes are equal?; Text: How do I test whether two arrays or hashes are equal?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52078 in perlfaq4.pod
-Lookups: How do I unescape a string?; Text: How do I unescape a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I unescape a string?; Text: How do I unescape a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20865 in perlfaq4.pod
-Lookups: How do I validate input?; Text: How do I validate input?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I validate input?; Text: How do I validate input?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20373 in perlfaq4.pod
-Lookups: How do I verify a credit card checksum?; Text: How do I verify a credit card checksum?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I verify a credit card checksum?; Text: How do I verify a credit card checksum?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 88454 in perlfaq4.pod
 Lookups: Knuth; Text: How do I permute N elements of a list?; Tail: (Knuth); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
 Lookups: List::Permutor; Text: How do I permute N elements of a list?; Tail: (List::Permutor); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq4.pod
 Lookups: Text::Autoformat; Text: How do I capitalize all the words on one line?; Tail: (Text::Autoformat); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28274 in perlfaq4.pod
 Lookups: The Art of Computer Programming; Text: How do I permute N elements of a list?; Tail: (The Art of Computer Programming); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 59556 in perlfaq4.pod
-Lookups: There (probably) should be a semicolon at the end of the opening token; Text: There (probably) should be a semicolon at the end of the opening token; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: There (probably) should be a semicolon at the end of the opening token; Text: There (probably) should be a semicolon at the end of the opening token; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40189 in perlfaq4.pod
-Lookups: There must be no space after the << part.; Text: There must be no space after the << part.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: There must be no space after the << part.; Text: There must be no space after the << part.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40132 in perlfaq4.pod
-Lookups: There needs to be at least a line separator after the end token.; Text: There needs to be at least a line separator after the end token.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: There needs to be at least a line separator after the end token.; Text: There needs to be at least a line separator after the end token.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40329 in perlfaq4.pod
 Lookups: Tie::Cycle; Text: How do I handle circular lists?; Tail: (Tie::Cycle); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55888 in perlfaq4.pod
@@ -188,37 +188,37 @@ Lookups: Time::Local; Text: How do I find yesterday's date?; Tail: (Time::Local)
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17344 in perlfaq4.pod
 Lookups: Today_and_Now; Text: How do I find yesterday's date?; Tail: (Today_and_Now); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17344 in perlfaq4.pod
-Lookups: VERSION; Text: VERSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq4.pod
-Lookups: What happens if I add or remove keys from a hash while iterating over it?; Text: What happens if I add or remove keys from a hash while iterating over it?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What happens if I add or remove keys from a hash while iterating over it?; Text: What happens if I add or remove keys from a hash while iterating over it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 70759 in perlfaq4.pod
-Lookups: What is the difference between $array[1] and @array[1]?; Text: What is the difference between $array[1] and @array[1]?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What is the difference between $array[1] and @array[1]?; Text: What is the difference between $array[1] and @array[1]?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45303 in perlfaq4.pod
-Lookups: What is the difference between a list and an array?; Text: What is the difference between a list and an array?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What is the difference between a list and an array?; Text: What is the difference between a list and an array?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42623 in perlfaq4.pod
-Lookups: What's the difference between "delete" and "undef" with hashes?; Text: What's the difference between "delete" and "undef" with hashes?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What's the difference between "delete" and "undef" with hashes?; Text: What's the difference between "delete" and "undef" with hashes?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 74931 in perlfaq4.pod
-Lookups: What's wrong with always quoting "$vars"?; Text: What's wrong with always quoting "$vars"?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What's wrong with always quoting "$vars"?; Text: What's wrong with always quoting "$vars"?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38746 in perlfaq4.pod
-Lookups: Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I should be getting (eg, 19.95)?; Text: Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I should be getting (eg, 19.95)?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I should be getting (eg, 19.95)?; Text: Why am I getting long decimals (eg, 19.9499999999999) instead of the numbers I should be getting (eg, 19.95)?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 258 in perlfaq4.pod
-Lookups: Why aren't my random numbers random?; Text: Why aren't my random numbers random?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why aren't my random numbers random?; Text: Why aren't my random numbers random?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10779 in perlfaq4.pod
-Lookups: Why does defined() return true on empty arrays and hashes?; Text: Why does defined() return true on empty arrays and hashes?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why does defined() return true on empty arrays and hashes?; Text: Why does defined() return true on empty arrays and hashes?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 66887 in perlfaq4.pod
-Lookups: Why does passing a subroutine an undefined element in a hash create it?; Text: Why does passing a subroutine an undefined element in a hash create it?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why does passing a subroutine an undefined element in a hash create it?; Text: Why does passing a subroutine an undefined element in a hash create it?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 79088 in perlfaq4.pod
-Lookups: Why doesn't & work the way I want it to?; Text: Why doesn't & work the way I want it to?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why doesn't & work the way I want it to?; Text: Why doesn't & work the way I want it to?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8322 in perlfaq4.pod
-Lookups: Why don't my <<HERE documents work?; Text: Why don't my <<HERE documents work?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why don't my <<HERE documents work?; Text: Why don't my <<HERE documents work?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40001 in perlfaq4.pod
-Lookups: Why don't my tied hashes make the defined/exists distinction?; Text: Why don't my tied hashes make the defined/exists distinction?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why don't my tied hashes make the defined/exists distinction?; Text: Why don't my tied hashes make the defined/exists distinction?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77130 in perlfaq4.pod
-Lookups: Why is int() broken?; Text: Why is int() broken?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why is int() broken?; Text: Why is int() broken?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1175 in perlfaq4.pod
-Lookups: Why isn't my octal data interpreted correctly?; Text: Why isn't my octal data interpreted correctly?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why isn't my octal data interpreted correctly?; Text: Why isn't my octal data interpreted correctly?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1722 in perlfaq4.pod
-Lookups: You can't (easily) have any space in front of the tag.; Text: You can't (easily) have any space in front of the tag.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: You can't (easily) have any space in front of the tag.; Text: You can't (easily) have any space in front of the tag.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40267 in perlfaq4.pod
 Lookups: array; Text: How do I handle circular lists?; Tail: (array); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55888 in perlfaq4.pod

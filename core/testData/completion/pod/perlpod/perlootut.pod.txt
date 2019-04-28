@@ -1,74 +1,74 @@
-Lookups:  A miniature type system; Text:  A miniature type system; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  A miniature type system; Text:  A miniature type system; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18427 in perlootut.pod
-Lookups:  Class::Accessor; Text:  Class::Accessor; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Class::Accessor; Text:  Class::Accessor; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24789 in perlootut.pod
-Lookups:  Class::Tiny; Text:  Class::Tiny; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Class::Tiny; Text:  Class::Tiny; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25096 in perlootut.pod
-Lookups:  Declarative sugar; Text:  Declarative sugar; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Declarative sugar; Text:  Declarative sugar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17486 in perlootut.pod
-Lookups:  Full introspection and manipulation; Text:  Full introspection and manipulation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Full introspection and manipulation; Text:  Full introspection and manipulation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18717 in perlootut.pod
-Lookups:  Many more features; Text:  Many more features; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Many more features; Text:  Many more features; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19504 in perlootut.pod
-Lookups:  Moose; Text:  Moose; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Moose; Text:  Moose; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24537 in perlootut.pod
-Lookups:  Rich ecosystem; Text:  Rich ecosystem; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Rich ecosystem; Text:  Rich ecosystem; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19231 in perlootut.pod
-Lookups:  Role::Tiny; Text:  Role::Tiny; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Role::Tiny; Text:  Role::Tiny; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25357 in perlootut.pod
-Lookups:  Roles built-in; Text:  Roles built-in; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Roles built-in; Text:  Roles built-in; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18092 in perlootut.pod
-Lookups:  Self-hosted and extensible; Text:  Self-hosted and extensible; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Self-hosted and extensible; Text:  Self-hosted and extensible; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19044 in perlootut.pod
-Lookups: Attributes; Text: Attributes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Attributes; Text: Attributes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6596 in perlootut.pod
-Lookups: Blessing; Text: Blessing; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Blessing; Text: Blessing; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4321 in perlootut.pod
-Lookups: CONCLUSION; Text: CONCLUSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: CONCLUSION; Text: CONCLUSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 26005 in perlootut.pod
-Lookups: Class::Accessor; Text: Class::Accessor; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Class::Accessor; Text: Class::Accessor; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22020 in perlootut.pod
-Lookups: Class::Tiny; Text: Class::Tiny; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Class::Tiny; Text: Class::Tiny; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23175 in perlootut.pod
-Lookups: Class; Text: Class; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Class; Text: Class; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3254 in perlootut.pod
-Lookups: Composition; Text: Composition; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Composition; Text: Composition; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13189 in perlootut.pod
-Lookups: Constructor; Text: Constructor; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Constructor; Text: Constructor; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5134 in perlootut.pod
-Lookups: DATE; Text: DATE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DATE; Text: DATE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 197 in perlootut.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 525 in perlootut.pod
-Lookups: Encapsulation; Text: Encapsulation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Encapsulation; Text: Encapsulation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12084 in perlootut.pod
-Lookups: Inheritance; Text: Inheritance; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Inheritance; Text: Inheritance; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8561 in perlootut.pod
-Lookups: Methods; Text: Methods; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Methods; Text: Methods; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5411 in perlootut.pod
-Lookups: Moo; Text: Moo; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Moo; Text: Moo; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20832 in perlootut.pod
-Lookups: Moose; Text: Moose; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Moose; Text: Moose; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16663 in perlootut.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 126 in perlootut.pod
-Lookups: OBJECT-ORIENTED FUNDAMENTALS; Text: OBJECT-ORIENTED FUNDAMENTALS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: OBJECT-ORIENTED FUNDAMENTALS; Text: OBJECT-ORIENTED FUNDAMENTALS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1541 in perlootut.pod
-Lookups: OO System Summary; Text: OO System Summary; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: OO System Summary; Text: OO System Summary; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24453 in perlootut.pod
-Lookups: Object; Text: Object; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Object; Text: Object; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2258 in perlootut.pod
-Lookups: Other OO Systems; Text: Other OO Systems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Other OO Systems; Text: Other OO Systems; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25571 in perlootut.pod
-Lookups: Overriding methods and method resolution; Text: Overriding methods and method resolution; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Overriding methods and method resolution; Text: Overriding methods and method resolution; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 9890 in perlootut.pod
-Lookups: PERL OO SYSTEMS; Text: PERL OO SYSTEMS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: PERL OO SYSTEMS; Text: PERL OO SYSTEMS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16119 in perlootut.pod
-Lookups: Polymorphism; Text: Polymorphism; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Polymorphism; Text: Polymorphism; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7906 in perlootut.pod
-Lookups: Role::Tiny; Text: Role::Tiny; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Role::Tiny; Text: Role::Tiny; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23849 in perlootut.pod
-Lookups: Roles; Text: Roles; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Roles; Text: Roles; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13668 in perlootut.pod
-Lookups: When to Use OO; Text: When to Use OO; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: When to Use OO; Text: When to Use OO; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14850 in perlootut.pod

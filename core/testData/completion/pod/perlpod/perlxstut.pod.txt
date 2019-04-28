@@ -1,76 +1,76 @@
-Lookups: Anatomy of .xs file; Text: Anatomy of .xs file; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Anatomy of .xs file; Text: Anatomy of .xs file; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25183 in perlxstut.pod
-Lookups: Author; Text: Author; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Author; Text: Author; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49774 in perlxstut.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 53 in perlxstut.pod
-Lookups: Documenting your Extension; Text: Documenting your Extension; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Documenting your Extension; Text: Documenting your Extension; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34596 in perlxstut.pod
-Lookups: Dynamic Loading versus Static Loading; Text: Dynamic Loading versus Static Loading; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Dynamic Loading versus Static Loading; Text: Dynamic Loading versus Static Loading; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2403 in perlxstut.pod
-Lookups: EXAMPLE 1; Text: EXAMPLE 1; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 1; Text: EXAMPLE 1; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3958 in perlxstut.pod
-Lookups: EXAMPLE 2; Text: EXAMPLE 2; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 2; Text: EXAMPLE 2; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7638 in perlxstut.pod
-Lookups: EXAMPLE 3; Text: EXAMPLE 3; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 3; Text: EXAMPLE 3; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13468 in perlxstut.pod
-Lookups: EXAMPLE 4; Text: EXAMPLE 4; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 4; Text: EXAMPLE 4; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18651 in perlxstut.pod
-Lookups: EXAMPLE 5; Text: EXAMPLE 5; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 5; Text: EXAMPLE 5; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35962 in perlxstut.pod
-Lookups: EXAMPLE 6; Text: EXAMPLE 6; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 6; Text: EXAMPLE 6; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40204 in perlxstut.pod
-Lookups: EXAMPLE 7 (Coming Soon); Text: EXAMPLE 7 (Coming Soon); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 7 (Coming Soon); Text: EXAMPLE 7 (Coming Soon); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45284 in perlxstut.pod
-Lookups: EXAMPLE 8 (Coming Soon); Text: EXAMPLE 8 (Coming Soon); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 8 (Coming Soon); Text: EXAMPLE 8 (Coming Soon); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45376 in perlxstut.pod
-Lookups: EXAMPLE 9 Passing open files to XSes; Text: EXAMPLE 9 Passing open files to XSes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLE 9 Passing open files to XSes; Text: EXAMPLE 9 Passing open files to XSes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45420 in perlxstut.pod
-Lookups: Extending your Extension; Text: Extending your Extension; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Extending your Extension; Text: Extending your Extension; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34078 in perlxstut.pod
-Lookups: Getting the fat out of XSUBs; Text: Getting the fat out of XSUBs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Getting the fat out of XSUBs; Text: Getting the fat out of XSUBs; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26681 in perlxstut.pod
-Lookups: Input and Output Parameters; Text: Input and Output Parameters; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Input and Output Parameters; Text: Input and Output Parameters; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15322 in perlxstut.pod
-Lookups: Installing your Extension; Text: Installing your Extension; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installing your Extension; Text: Installing your Extension; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35199 in perlxstut.pod
-Lookups: Last Changed; Text: Last Changed; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Last Changed; Text: Last Changed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50063 in perlxstut.pod
-Lookups: More about XSUB arguments; Text: More about XSUB arguments; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: More about XSUB arguments; Text: More about XSUB arguments; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29064 in perlxstut.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlxstut.pod
-Lookups: New Things in this Example; Text: New Things in this Example; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: New Things in this Example; Text: New Things in this Example; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37528 in perlxstut.pod
-Lookups: New Things in this Example; Text: New Things in this Example; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: New Things in this Example; Text: New Things in this Example; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42138 in perlxstut.pod
-Lookups: SPECIAL NOTES; Text: SPECIAL NOTES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SPECIAL NOTES; Text: SPECIAL NOTES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 711 in perlxstut.pod
-Lookups: See also; Text: See also; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: See also; Text: See also; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49662 in perlxstut.pod
-Lookups: TUTORIAL; Text: TUTORIAL; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: TUTORIAL; Text: TUTORIAL; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3909 in perlxstut.pod
-Lookups: The Argument Stack; Text: The Argument Stack; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The Argument Stack; Text: The Argument Stack; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31795 in perlxstut.pod
-Lookups: The TYPEMAP file; Text: The TYPEMAP file; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The TYPEMAP file; Text: The TYPEMAP file; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16191 in perlxstut.pod
-Lookups: The XSUBPP Program; Text: The XSUBPP Program; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The XSUBPP Program; Text: The XSUBPP Program; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15967 in perlxstut.pod
-Lookups: Threads and PERL_NO_GET_CONTEXT; Text: Threads and PERL_NO_GET_CONTEXT; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Threads and PERL_NO_GET_CONTEXT; Text: Threads and PERL_NO_GET_CONTEXT; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3521 in perlxstut.pod
-Lookups: Troubleshooting these Examples; Text: Troubleshooting these Examples; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Troubleshooting these Examples; Text: Troubleshooting these Examples; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48709 in perlxstut.pod
-Lookups: Version caveat; Text: Version caveat; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Version caveat; Text: Version caveat; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1032 in perlxstut.pod
-Lookups: Warning about Output Arguments; Text: Warning about Output Arguments; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Warning about Output Arguments; Text: Warning about Output Arguments; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18225 in perlxstut.pod
-Lookups: What has gone on?; Text: What has gone on?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What has gone on?; Text: What has gone on?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9453 in perlxstut.pod
-Lookups: What has happened here?; Text: What has happened here?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What has happened here?; Text: What has happened here?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23227 in perlxstut.pod
-Lookups: What's new here?; Text: What's new here?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: What's new here?; Text: What's new here?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14750 in perlxstut.pod
-Lookups: Writing good test scripts; Text: Writing good test scripts; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Writing good test scripts; Text: Writing good test scripts; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12853 in perlxstut.pod
-Lookups: make; Text: make; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: make; Text: make; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 733 in perlxstut.pod

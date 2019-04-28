@@ -1,32 +1,32 @@
-Lookups: ++; Text: ++; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: ++; Text: ++; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6684 in perlnumber.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8133 in perlnumber.pod
-Lookups: Arithmetic operators during use integer; Text: Arithmetic operators during use integer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Arithmetic operators during use integer; Text: Arithmetic operators during use integer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6866 in perlnumber.pod
-Lookups: Arithmetic operators; Text: Arithmetic operators; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Arithmetic operators; Text: Arithmetic operators; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6066 in perlnumber.pod
-Lookups: Bitwise operators during use integer; Text: Bitwise operators during use integer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Bitwise operators during use integer; Text: Bitwise operators during use integer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7381 in perlnumber.pod
-Lookups: Bitwise operators; Text: Bitwise operators; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Bitwise operators; Text: Bitwise operators; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7294 in perlnumber.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 412 in perlnumber.pod
-Lookups: Flavors of Perl numeric operations; Text: Flavors of Perl numeric operations; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Flavors of Perl numeric operations; Text: Flavors of Perl numeric operations; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5449 in perlnumber.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlnumber.pod
-Lookups: Numeric operators and numeric conversions; Text: Numeric operators and numeric conversions; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Numeric operators and numeric conversions; Text: Numeric operators and numeric conversions; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3542 in perlnumber.pod
-Lookups: Operators which expect a string; Text: Operators which expect a string; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Operators which expect a string; Text: Operators which expect a string; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7720 in perlnumber.pod
-Lookups: Operators which expect an integer; Text: Operators which expect an integer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Operators which expect an integer; Text: Operators which expect an integer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7552 in perlnumber.pod
-Lookups: Other mathematical operators; Text: Other mathematical operators; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Other mathematical operators; Text: Other mathematical operators; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7172 in perlnumber.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8313 in perlnumber.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 79 in perlnumber.pod
-Lookups: Storing numbers; Text: Storing numbers; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Storing numbers; Text: Storing numbers; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 857 in perlnumber.pod

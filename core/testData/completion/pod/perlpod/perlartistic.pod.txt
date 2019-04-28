@@ -1,62 +1,62 @@
-Lookups: "Copyright Holder"; Text: "Copyright Holder"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "Copyright Holder"; Text: "Copyright Holder"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1539 in perlartistic.pod
-Lookups: "Freely Available"; Text: "Freely Available"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "Freely Available"; Text: "Freely Available"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2012 in perlartistic.pod
-Lookups: "Package"; Text: "Package"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "Package"; Text: "Package"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1192 in perlartistic.pod
-Lookups: "Reasonable copying fee"; Text: "Reasonable copying fee"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "Reasonable copying fee"; Text: "Reasonable copying fee"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1719 in perlartistic.pod
-Lookups: "Standard Version"; Text: "Standard Version"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "Standard Version"; Text: "Standard Version"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1363 in perlartistic.pod
-Lookups: "You"; Text: "You"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "You"; Text: "You"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1634 in perlartistic.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2284 in perlartistic.pod
-Lookups: 10.; Text: 10.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 10.; Text: 10.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6784 in perlartistic.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2512 in perlartistic.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2733 in perlartistic.pod
-Lookups: 4.; Text: 4.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 4.; Text: 4.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3760 in perlartistic.pod
-Lookups: 5.; Text: 5.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 5.; Text: 5.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4481 in perlartistic.pod
-Lookups: 6.; Text: 6.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 6.; Text: 6.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5140 in perlartistic.pod
-Lookups: 7.; Text: 7.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 7.; Text: 7.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5843 in perlartistic.pod
-Lookups: 8.; Text: 8.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 8.; Text: 8.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6284 in perlartistic.pod
-Lookups: 9.; Text: 9.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 9.; Text: 9.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6622 in perlartistic.pod
-Lookups: Conditions; Text: Conditions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Conditions; Text: Conditions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2258 in perlartistic.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 200 in perlartistic.pod
-Lookups: Definitions; Text: Definitions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Definitions; Text: Definitions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1165 in perlartistic.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1 in perlartistic.pod
-Lookups: Preamble; Text: Preamble; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Preamble; Text: Preamble; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 774 in perlartistic.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56 in perlartistic.pod
-Lookups: The "Artistic License"; Text: The "Artistic License"; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: The "Artistic License"; Text: The "Artistic License"; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 743 in perlartistic.pod
-Lookups: a); Text: a); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: a); Text: a); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2979 in perlartistic.pod
-Lookups: a); Text: a); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: a); Text: a); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3913 in perlartistic.pod
-Lookups: b); Text: b); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: b); Text: b); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3331 in perlartistic.pod
-Lookups: b); Text: b); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: b); Text: b); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4092 in perlartistic.pod
-Lookups: c); Text: c); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: c); Text: c); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3413 in perlartistic.pod
-Lookups: c); Text: c); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: c); Text: c); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4203 in perlartistic.pod
-Lookups: d); Text: d); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: d); Text: d); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3678 in perlartistic.pod
-Lookups: d); Text: d); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: d); Text: d); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4399 in perlartistic.pod

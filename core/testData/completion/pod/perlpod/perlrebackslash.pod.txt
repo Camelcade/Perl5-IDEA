@@ -1,92 +1,92 @@
-Lookups: Absolute referencing; Text: Absolute referencing; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Absolute referencing; Text: Absolute referencing; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17038 in perlrebackslash.pod
-Lookups: All the sequences and escapes; Text: All the sequences and escapes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: All the sequences and escapes; Text: All the sequences and escapes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2319 in perlrebackslash.pod
-Lookups: Assertions; Text: Assertions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Assertions; Text: Assertions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19630 in perlrebackslash.pod
-Lookups: Character Escapes; Text: Character Escapes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Character Escapes; Text: Character Escapes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4820 in perlrebackslash.pod
-Lookups: Character classes; Text: Character classes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Character classes; Text: Character classes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15027 in perlrebackslash.pod
-Lookups: Control characters; Text: Control characters; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Control characters; Text: Control characters; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6032 in perlrebackslash.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 88 in perlrebackslash.pod
-Lookups: Disambiguation rules between old-style octal escapes and backreferences; Text: Disambiguation rules between old-style octal escapes and backreferences; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Disambiguation rules between old-style octal escapes and backreferences; Text: Disambiguation rules between old-style octal escapes and backreferences; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 10783 in perlrebackslash.pod
-Lookups: Example; Text: Example; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Example; Text: Example; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 5951 in perlrebackslash.pod
-Lookups: Example; Text: Example; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Example; Text: Example; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 6836 in perlrebackslash.pod
-Lookups: Example; Text: Example; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Example; Text: Example; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 8463 in perlrebackslash.pod
-Lookups: Examples (assuming an ASCII platform); Text: Examples (assuming an ASCII platform); Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples (assuming an ASCII platform); Text: Examples (assuming an ASCII platform); Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 10320 in perlrebackslash.pod
-Lookups: Examples (assuming an ASCII platform); Text: Examples (assuming an ASCII platform); Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples (assuming an ASCII platform); Text: Examples (assuming an ASCII platform); Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 12768 in perlrebackslash.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 14713 in perlrebackslash.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 18034 in perlrebackslash.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 18624 in perlrebackslash.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 19355 in perlrebackslash.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 27929 in perlrebackslash.pod
-Lookups: Examples; Text: Examples; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Examples; Text: Examples; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 31417 in perlrebackslash.pod
-Lookups: Fixed characters; Text: Fixed characters; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Fixed characters; Text: Fixed characters; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4846 in perlrebackslash.pod
-Lookups: Hexadecimal escapes; Text: Hexadecimal escapes; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Hexadecimal escapes; Text: Hexadecimal escapes; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12228 in perlrebackslash.pod
-Lookups: Misc; Text: Misc; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Misc; Text: Misc; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28692 in perlrebackslash.pod
-Lookups: Modifiers; Text: Modifiers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Modifiers; Text: Modifiers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13305 in perlrebackslash.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlrebackslash.pod
-Lookups: Named or numbered characters and character sequences; Text: Named or numbered characters and character sequences; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Named or numbered characters and character sequences; Text: Named or numbered characters and character sequences; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6925 in perlrebackslash.pod
-Lookups: Named referencing; Text: Named referencing; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Named referencing; Text: Named referencing; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18946 in perlrebackslash.pod
-Lookups: Octal escapes; Text: Octal escapes; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Octal escapes; Text: Octal escapes; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8686 in perlrebackslash.pod
-Lookups: Referencing; Text: Referencing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Referencing; Text: Referencing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16725 in perlrebackslash.pod
-Lookups: Relative referencing; Text: Relative referencing; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Relative referencing; Text: Relative referencing; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 18231 in perlrebackslash.pod
-Lookups: The backslash; Text: The backslash; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The backslash; Text: The backslash; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 616 in perlrebackslash.pod
-Lookups: Unicode classes; Text: Unicode classes; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Unicode classes; Text: Unicode classes; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 16235 in perlrebackslash.pod
-Lookups: [1]; Text: [1]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [1]; Text: [1]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2004 in perlrebackslash.pod
-Lookups: [1]; Text: [1]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [1]; Text: [1]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5580 in perlrebackslash.pod
-Lookups: [2]; Text: [2]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [2]; Text: [2]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5788 in perlrebackslash.pod
-Lookups: \A; Text: \A; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \A; Text: \A; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19823 in perlrebackslash.pod
-Lookups: \G; Text: \G; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \G; Text: \G; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20961 in perlrebackslash.pod
-Lookups: \K; Text: \K; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \K; Text: \K; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28815 in perlrebackslash.pod
-Lookups: \N; Text: \N; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \N; Text: \N; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29115 in perlrebackslash.pod
-Lookups: \R; Text: \R; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \R; Text: \R; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29532 in perlrebackslash.pod
-Lookups: \X; Text: \X; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \X; Text: \X; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30739 in perlrebackslash.pod
-Lookups: \b{gcb} or \b{g}; Text: \b{gcb} or \b{g}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \b{gcb} or \b{g}; Text: \b{gcb} or \b{g}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23346 in perlrebackslash.pod
-Lookups: \b{lb}; Text: \b{lb}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \b{lb}; Text: \b{lb}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23699 in perlrebackslash.pod
-Lookups: \b{sb}; Text: \b{sb}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \b{sb}; Text: \b{sb}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24147 in perlrebackslash.pod
-Lookups: \b{wb}; Text: \b{wb}; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \b{wb}; Text: \b{wb}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25139 in perlrebackslash.pod
-Lookups: \b{}, \b, \B{}, \B; Text: \b{}, \b, \B{}, \B; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \b{}, \b, \B{}, \B; Text: \b{}, \b, \B{}, \B; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21456 in perlrebackslash.pod
-Lookups: \z, \Z; Text: \z, \Z; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \z, \Z; Text: \z, \Z; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20192 in perlrebackslash.pod

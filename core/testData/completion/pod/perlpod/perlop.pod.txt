@@ -4,7 +4,7 @@ Lookups: !=; Text: Equality Operators; Tail: (!=); Type: Index; Icon: /perl5lang
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21842 in perlop.pod
 Lookups: !~; Text: Binding Operators; Tail: (!~); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12706 in perlop.pod
-Lookups: "", ``, qq//, qx//, <file*glob>, <<"EOF"; Text: "", ``, qq//, qx//, <file*glob>, <<"EOF"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "", ``, qq//, qx//, <file*glob>, <<"EOF"; Text: "", ``, qq//, qx//, <file*glob>, <<"EOF"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112103 in perlop.pod
 Lookups: ""; Text: Quote and Quote-like Operators; Tail: (""); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -14,7 +14,7 @@ Lookups: "; Text: Quote and Quote-like Operators; Tail: ("); Type: Index; Icon: 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: "; Text: qq/STRING/; Tail: ("); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88218 in perlop.pod
-Lookups: "STRING"; Text: "STRING"; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: "STRING"; Text: "STRING"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88276 in perlop.pod
 Lookups: %; Text: Multiplicative Operators; Tail: (%); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14182 in perlop.pod
@@ -34,7 +34,7 @@ Lookups: &; Text: C Operators Missing From Perl; Tail: (&); Type: Index; Icon: /
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53322 in perlop.pod
 Lookups: &=; Text: Assignment Operators; Tail: (&=); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46932 in perlop.pod
-Lookups: '', q//, tr''', y''', the replacement of s'''; Text: '', q//, tr''', y''', the replacement of s'''; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: '', q//, tr''', y''', the replacement of s'''; Text: '', q//, tr''', y''', the replacement of s'''; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111399 in perlop.pod
 Lookups: ''; Text: Quote and Quote-like Operators; Tail: (''); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -44,9 +44,9 @@ Lookups: '; Text: Quote and Quote-like Operators; Tail: ('); Type: Index; Icon: 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: '; Text: q/STRING/; Tail: ('); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87834 in perlop.pod
-Lookups: 'STRING'; Text: 'STRING'; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 'STRING'; Text: 'STRING'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87890 in perlop.pod
-Lookups: (TYPE); Text: (TYPE); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: (TYPE); Text: (TYPE); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53692 in perlop.pod
 Lookups: (TYPE); Text: C Operators Missing From Perl; Tail: ((TYPE)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53322 in perlop.pod
@@ -100,7 +100,7 @@ Lookups: /; Text: Multiplicative Operators; Tail: (/); Type: Index; Icon: /perl5
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14182 in perlop.pod
 Lookups: /=; Text: Assignment Operators; Tail: (/=); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46932 in perlop.pod
-Lookups: /PATTERN/msixpodualngc; Text: /PATTERN/msixpodualngc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: /PATTERN/msixpodualngc; Text: /PATTERN/msixpodualngc; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71466 in perlop.pod
 Lookups: /c; Text: m/PATTERN/msixpodualngc; Tail: (/c); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71301 in perlop.pod
@@ -156,17 +156,17 @@ Lookups: /x; Text: qr/STRING/msixpodualn; Tail: (/x); Type: Index; Icon: /perl5l
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67636 in perlop.pod
 Lookups: /x; Text: s/PATTERN/REPLACEMENT/msixpodualngcer; Tail: (/x); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82269 in perlop.pod
-Lookups: 1. Empty hashes or arrays match.; Text: 1. Empty hashes or arrays match.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 1. Empty hashes or arrays match.; Text: 1. Empty hashes or arrays match.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28906 in perlop.pod
-Lookups: 2. That is, each element smartmatches the element of the same index in the other array.[3]; Text: 2. That is, each element smartmatches the element of the same index in the other array.[3]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 2. That is, each element smartmatches the element of the same index in the other array.[3]; Text: 2. That is, each element smartmatches the element of the same index in the other array.[3]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28946 in perlop.pod
-Lookups: 3. If a circular reference is found, fall back to referential equality.; Text: 3. If a circular reference is found, fall back to referential equality.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 3. If a circular reference is found, fall back to referential equality.; Text: 3. If a circular reference is found, fall back to referential equality.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29044 in perlop.pod
-Lookups: 4. Either an actual number, or a string that looks like one.; Text: 4. Either an actual number, or a string that looks like one.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 4. Either an actual number, or a string that looks like one.; Text: 4. Either an actual number, or a string that looks like one.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29123 in perlop.pod
 Lookups: <; Text: Relational Operators; Tail: (<); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20461 in perlop.pod
-Lookups: <<'EOF'; Text: <<'EOF'; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: <<'EOF'; Text: <<'EOF'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111053 in perlop.pod
 Lookups: <<; Text: <<EOF; Tail: (<<); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100650 in perlop.pod
@@ -178,7 +178,7 @@ Lookups: <<=; Text: Assignment Operators; Tail: (<<=); Type: Index; Icon: /perl5
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46932 in perlop.pod
 Lookups: <<>>; Text: I/O Operators; Tail: (<<>>); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
-Lookups: <<EOF; Text: <<EOF; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: <<EOF; Text: <<EOF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 100650 in perlop.pod
 Lookups: <=; Text: Relational Operators; Tail: (<=); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20461 in perlop.pod
@@ -206,125 +206,125 @@ Lookups: ?; Text: m?PATTERN?msixpodualngc; Tail: (?); Type: Index; Icon: /perl5l
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81212 in perlop.pod
 Lookups: @ARGV; Text: I/O Operators; Tail: (@ARGV); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
-Lookups: Additive Operators; Text: Additive Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Additive Operators; Text: Additive Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16760 in perlop.pod
-Lookups: Assignment Operators; Text: Assignment Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Assignment Operators; Text: Assignment Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46932 in perlop.pod
-Lookups: Auto-increment and Auto-decrement; Text: Auto-increment and Auto-decrement; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Auto-increment and Auto-decrement; Text: Auto-increment and Auto-decrement; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7599 in perlop.pod
-Lookups: Backticks; Text: Backticks; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Backticks; Text: Backticks; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102704 in perlop.pod
-Lookups: Bigger Numbers; Text: Bigger Numbers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Bigger Numbers; Text: Bigger Numbers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 137357 in perlop.pod
-Lookups: Binding Operators; Text: Binding Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Binding Operators; Text: Binding Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12706 in perlop.pod
-Lookups: Bitwise And; Text: Bitwise And; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Bitwise And; Text: Bitwise And; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34838 in perlop.pod
-Lookups: Bitwise Or and Exclusive Or; Text: Bitwise Or and Exclusive Or; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Bitwise Or and Exclusive Or; Text: Bitwise Or and Exclusive Or; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35591 in perlop.pod
-Lookups: Bitwise String Operators; Text: Bitwise String Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Bitwise String Operators; Text: Bitwise String Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 131659 in perlop.pod
-Lookups: C Operators Missing From Perl; Text: C Operators Missing From Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: C Operators Missing From Perl; Text: C Operators Missing From Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53322 in perlop.pod
-Lookups: C-style Logical And; Text: C-style Logical And; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: C-style Logical And; Text: C-style Logical And; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36485 in perlop.pod
-Lookups: C-style Logical Or; Text: C-style Logical Or; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: C-style Logical Or; Text: C-style Logical Or; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36785 in perlop.pod
-Lookups: Comma Operator; Text: Comma Operator; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Comma Operator; Text: Comma Operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48842 in perlop.pod
-Lookups: Conditional Operator; Text: Conditional Operator; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Conditional Operator; Text: Conditional Operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45776 in perlop.pod
-Lookups: Constant Folding; Text: Constant Folding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Constant Folding; Text: Constant Folding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 130689 in perlop.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65 in perlop.pod
-Lookups: Double Quotes; Text: Double Quotes; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Double Quotes; Text: Double Quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101676 in perlop.pod
-Lookups: Equality Operators; Text: Equality Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Equality Operators; Text: Equality Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21842 in perlop.pod
-Lookups: Exponentiation; Text: Exponentiation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Exponentiation; Text: Exponentiation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9281 in perlop.pod
-Lookups: Finding the end; Text: Finding the end; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Finding the end; Text: Finding the end; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 107361 in perlop.pod
-Lookups: Floating-point Arithmetic; Text: Floating-point Arithmetic; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Floating-point Arithmetic; Text: Floating-point Arithmetic; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 135574 in perlop.pod
-Lookups: Gory details of parsing quoted constructs; Text: Gory details of parsing quoted constructs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Gory details of parsing quoted constructs; Text: Gory details of parsing quoted constructs; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 105957 in perlop.pod
-Lookups: I/O Operators; Text: I/O Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: I/O Operators; Text: I/O Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
-Lookups: Indented Here-docs; Text: Indented Here-docs; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Indented Here-docs; Text: Indented Here-docs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103066 in perlop.pod
-Lookups: Integer Arithmetic; Text: Integer Arithmetic; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Integer Arithmetic; Text: Integer Arithmetic; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 134398 in perlop.pod
-Lookups: Interpolation; Text: Interpolation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Interpolation; Text: Interpolation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110889 in perlop.pod
-Lookups: List Operators (Rightward); Text: List Operators (Rightward); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: List Operators (Rightward); Text: List Operators (Rightward); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50569 in perlop.pod
-Lookups: Logical And; Text: Logical And; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Logical And; Text: Logical And; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51683 in perlop.pod
-Lookups: Logical Defined-Or; Text: Logical Defined-Or; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Logical Defined-Or; Text: Logical Defined-Or; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37066 in perlop.pod
-Lookups: Logical Not; Text: Logical Not; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Logical Not; Text: Logical Not; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51487 in perlop.pod
-Lookups: Logical or and Exclusive Or; Text: Logical or and Exclusive Or; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Logical or and Exclusive Or; Text: Logical or and Exclusive Or; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51990 in perlop.pod
-Lookups: Matching in list context; Text: Matching in list context; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Matching in list context; Text: Matching in list context; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75277 in perlop.pod
-Lookups: Multiplicative Operators; Text: Multiplicative Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Multiplicative Operators; Text: Multiplicative Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14182 in perlop.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlop.pod
-Lookups: Named Unary Operators; Text: Named Unary Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Named Unary Operators; Text: Named Unary Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19043 in perlop.pod
-Lookups: No-ops; Text: No-ops; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: No-ops; Text: No-ops; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 131430 in perlop.pod
-Lookups: Operator Precedence and Associativity; Text: Operator Precedence and Associativity; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Operator Precedence and Associativity; Text: Operator Precedence and Associativity; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 894 in perlop.pod
-Lookups: Optimization of regular expressions; Text: Optimization of regular expressions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Optimization of regular expressions; Text: Optimization of regular expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119458 in perlop.pod
-Lookups: Quote and Quote-like Operators; Text: Quote and Quote-like Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Quote and Quote-like Operators; Text: Quote and Quote-like Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
-Lookups: Quote-Like Operators; Text: Quote-Like Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Quote-Like Operators; Text: Quote-Like Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 87772 in perlop.pod
-Lookups: RE in m?RE?, /RE/, m/RE/, s/RE/foo/,; Text: RE in m?RE?, /RE/, m/RE/, s/RE/foo/,; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: RE in m?RE?, /RE/, m/RE/, s/RE/foo/,; Text: RE in m?RE?, /RE/, m/RE/, s/RE/foo/,; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114643 in perlop.pod
-Lookups: Range Operators; Text: Range Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Range Operators; Text: Range Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39253 in perlop.pod
-Lookups: Regexp Quote-Like Operators; Text: Regexp Quote-Like Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Regexp Quote-Like Operators; Text: Regexp Quote-Like Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 67481 in perlop.pod
-Lookups: Relational Operators; Text: Relational Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Relational Operators; Text: Relational Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20461 in perlop.pod
-Lookups: Shift Operators; Text: Shift Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Shift Operators; Text: Shift Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17040 in perlop.pod
-Lookups: Single Quotes; Text: Single Quotes; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Single Quotes; Text: Single Quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101946 in perlop.pod
-Lookups: Smartmatch Operator; Text: Smartmatch Operator; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Smartmatch Operator; Text: Smartmatch Operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23993 in perlop.pod
-Lookups: Smartmatching of Objects; Text: Smartmatching of Objects; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Smartmatching of Objects; Text: Smartmatching of Objects; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 33059 in perlop.pod
-Lookups: Symbolic Unary Operators; Text: Symbolic Unary Operators; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Symbolic Unary Operators; Text: Symbolic Unary Operators; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9782 in perlop.pod
-Lookups: Terms and List Operators (Leftward); Text: Terms and List Operators (Leftward); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Terms and List Operators (Leftward); Text: Terms and List Operators (Leftward); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4206 in perlop.pod
-Lookups: The Arrow Operator; Text: The Arrow Operator; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The Arrow Operator; Text: The Arrow Operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6649 in perlop.pod
-Lookups: The empty pattern //; Text: The empty pattern //; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: The empty pattern //; Text: The empty pattern //; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74312 in perlop.pod
-Lookups: [1]; Text: [1]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [1]; Text: [1]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 56841 in perlop.pod
-Lookups: [2]; Text: [2]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [2]; Text: [2]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57412 in perlop.pod
-Lookups: [3]; Text: [3]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [3]; Text: [3]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58245 in perlop.pod
-Lookups: [4]; Text: [4]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [4]; Text: [4]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58351 in perlop.pod
-Lookups: [5]; Text: [5]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [5]; Text: [5]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58476 in perlop.pod
-Lookups: [6]; Text: [6]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [6]; Text: [6]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60157 in perlop.pod
-Lookups: [7]; Text: [7]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [7]; Text: [7]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60556 in perlop.pod
-Lookups: [8]; Text: [8]; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: [8]; Text: [8]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61447 in perlop.pod
 Lookups: \0; Text: Quote and Quote-like Operators; Tail: (\0); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -334,7 +334,7 @@ Lookups: \E; Text: Quote and Quote-like Operators; Tail: (\E); Type: Index; Icon
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: \F; Text: Quote and Quote-like Operators; Tail: (\F); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
-Lookups: \G assertion; Text: \G assertion; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: \G assertion; Text: \G assertion; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77190 in perlop.pod
 Lookups: \L; Text: Quote and Quote-like Operators; Tail: (\L); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -386,7 +386,7 @@ Lookups: `; Text: Quote and Quote-like Operators; Tail: (`); Type: Index; Icon: 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: `; Text: qx/STRING/; Tail: (`); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88496 in perlop.pod
-Lookups: `STRING`; Text: `STRING`; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: `STRING`; Text: `STRING`; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88549 in perlop.pod
 Lookups: ``; Text: I/O Operators; Tail: (``); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
@@ -504,15 +504,15 @@ Lookups: logical and; Text: C-style Logical And; Tail: (logical and); Type: Inde
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36485 in perlop.pod
 Lookups: lt; Text: Relational Operators; Tail: (lt); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20461 in perlop.pod
-Lookups: m'', the pattern of s'''; Text: m'', the pattern of s'''; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: m'', the pattern of s'''; Text: m'', the pattern of s'''; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111209 in perlop.pod
-Lookups: m/PATTERN/msixpodualngc; Text: m/PATTERN/msixpodualngc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: m/PATTERN/msixpodualngc; Text: m/PATTERN/msixpodualngc; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71301 in perlop.pod
 Lookups: m; Text: Quote and Quote-like Operators; Tail: (m); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: m; Text: m/PATTERN/msixpodualngc; Tail: (m); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71301 in perlop.pod
-Lookups: m?PATTERN?msixpodualngc; Text: m?PATTERN?msixpodualngc; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: m?PATTERN?msixpodualngc; Text: m?PATTERN?msixpodualngc; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81212 in perlop.pod
 Lookups: mod; Text: Multiplicative Operators; Tail: (mod); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14182 in perlop.pod
@@ -614,25 +614,25 @@ Lookups: operator; Text: NAME; Tail: (operator); Type: Index; Icon: /perl5langua
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlop.pod
 Lookups: or; Text: Logical or and Exclusive Or; Tail: (or); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51990 in perlop.pod
-Lookups: parsing regular expressions; Text: parsing regular expressions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: parsing regular expressions; Text: parsing regular expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117450 in perlop.pod
 Lookups: power; Text: Exponentiation; Tail: (power); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9281 in perlop.pod
 Lookups: precedence; Text: Operator Precedence and Associativity; Tail: (precedence); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 894 in perlop.pod
-Lookups: q/STRING/; Text: q/STRING/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: q/STRING/; Text: q/STRING/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87834 in perlop.pod
 Lookups: q; Text: Quote and Quote-like Operators; Tail: (q); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: q; Text: q/STRING/; Tail: (q); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87834 in perlop.pod
-Lookups: qq/STRING/; Text: qq/STRING/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: qq/STRING/; Text: qq/STRING/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88218 in perlop.pod
 Lookups: qq; Text: Quote and Quote-like Operators; Tail: (qq); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: qq; Text: qq/STRING/; Tail: (qq); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88218 in perlop.pod
-Lookups: qr/STRING/msixpodualn; Text: qr/STRING/msixpodualn; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: qr/STRING/msixpodualn; Text: qr/STRING/msixpodualn; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67636 in perlop.pod
 Lookups: qr; Text: Quote and Quote-like Operators; Tail: (qr); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -648,13 +648,13 @@ Lookups: quote, single; Text: q/STRING/; Tail: (quote, single); Type: Index; Ico
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87834 in perlop.pod
 Lookups: quote, words; Text: qw/STRING/; Tail: (quote, words); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93095 in perlop.pod
-Lookups: qw/STRING/; Text: qw/STRING/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: qw/STRING/; Text: qw/STRING/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93095 in perlop.pod
 Lookups: qw; Text: Quote and Quote-like Operators; Tail: (qw); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
 Lookups: qw; Text: qw/STRING/; Tail: (qw); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 93095 in perlop.pod
-Lookups: qx/STRING/; Text: qx/STRING/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: qx/STRING/; Text: qx/STRING/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88496 in perlop.pod
 Lookups: qx; Text: I/O Operators; Tail: (qx); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 119870 in perlop.pod
@@ -692,7 +692,7 @@ Lookups: replace; Text: s/PATTERN/REPLACEMENT/msixpodualngcer; Tail: (replace); 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82269 in perlop.pod
 Lookups: right shift; Text: Shift Operators; Tail: (right shift); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17040 in perlop.pod
-Lookups: s/PATTERN/REPLACEMENT/msixpodualngcer; Text: s/PATTERN/REPLACEMENT/msixpodualngcer; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: s/PATTERN/REPLACEMENT/msixpodualngcer; Text: s/PATTERN/REPLACEMENT/msixpodualngcer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82269 in perlop.pod
 Lookups: s; Text: Quote and Quote-like Operators; Tail: (s); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -728,11 +728,11 @@ Lookups: term; Text: Terms and List Operators (Leftward); Tail: (term); Type: In
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4206 in perlop.pod
 Lookups: ternary; Text: Conditional Operator; Tail: (ternary); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45776 in perlop.pod
-Lookups: the replacement of s///; Text: the replacement of s///; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: the replacement of s///; Text: the replacement of s///; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114176 in perlop.pod
-Lookups: tr///, y///; Text: tr///, y///; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: tr///, y///; Text: tr///, y///; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111702 in perlop.pod
-Lookups: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Text: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Text: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94024 in perlop.pod
 Lookups: tr; Text: Quote and Quote-like Operators; Tail: (tr); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53737 in perlop.pod
@@ -742,9 +742,9 @@ Lookups: transliterate; Text: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: (transli
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94024 in perlop.pod
 Lookups: typecasting; Text: C Operators Missing From Perl; Tail: (typecasting); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53322 in perlop.pod
-Lookups: unary &; Text: unary &; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: unary &; Text: unary &; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53474 in perlop.pod
-Lookups: unary *; Text: unary *; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: unary *; Text: unary *; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53566 in perlop.pod
 Lookups: unary operator; Text: Symbolic Unary Operators; Tail: (unary operator); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9782 in perlop.pod
@@ -756,7 +756,7 @@ Lookups: x=; Text: Assignment Operators; Tail: (x=); Type: Index; Icon: /perl5la
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46932 in perlop.pod
 Lookups: xor; Text: Logical or and Exclusive Or; Tail: (xor); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51990 in perlop.pod
-Lookups: y/SEARCHLIST/REPLACEMENTLIST/cdsr; Text: y/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: y/SEARCHLIST/REPLACEMENTLIST/cdsr; Text: y/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94121 in perlop.pod
 Lookups: y; Text: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: (y); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 94024 in perlop.pod

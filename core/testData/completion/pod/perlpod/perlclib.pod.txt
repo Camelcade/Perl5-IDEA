@@ -1,30 +1,30 @@
-Lookups: Character Class Tests; Text: Character Class Tests; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Character Class Tests; Text: Character Class Tests; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5162 in perlclib.pod
-Lookups: Conventions; Text: Conventions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Conventions; Text: Conventions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 637 in perlclib.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 80 in perlclib.pod
-Lookups: File Input and Output; Text: File Input and Output; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: File Input and Output; Text: File Input and Output; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1676 in perlclib.pod
-Lookups: File Operations; Text: File Operations; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: File Operations; Text: File Operations; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 876 in perlclib.pod
-Lookups: File Positioning; Text: File Positioning; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: File Positioning; Text: File Positioning; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2390 in perlclib.pod
-Lookups: Memory Management and String Handling; Text: Memory Management and String Handling; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Memory Management and String Handling; Text: Memory Management and String Handling; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2825 in perlclib.pod
-Lookups: Miscellaneous functions; Text: Miscellaneous functions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Miscellaneous functions; Text: Miscellaneous functions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9340 in perlclib.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlclib.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 9564 in perlclib.pod
-Lookups: n; Text: n; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: n; Text: n; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 743 in perlclib.pod
-Lookups: p; Text: p; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: p; Text: p; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 716 in perlclib.pod
-Lookups: s; Text: s; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: s; Text: s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 769 in perlclib.pod
-Lookups: stdlib.h functions; Text: stdlib.h functions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: stdlib.h functions; Text: stdlib.h functions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7681 in perlclib.pod
-Lookups: t; Text: t; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: t; Text: t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 692 in perlclib.pod

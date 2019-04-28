@@ -1,20 +1,20 @@
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 66 in perlhist.pod
-Lookups: INTRODUCTION; Text: INTRODUCTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: INTRODUCTION; Text: INTRODUCTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 147 in perlhist.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlhist.pod
-Lookups: PUMPKIN?; Text: PUMPKIN?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: PUMPKIN?; Text: PUMPKIN?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1517 in perlhist.pod
-Lookups: SELECTED PATCH SIZES; Text: SELECTED PATCH SIZES; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: SELECTED PATCH SIZES; Text: SELECTED PATCH SIZES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47496 in perlhist.pod
-Lookups: SELECTED RELEASE SIZES; Text: SELECTED RELEASE SIZES; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: SELECTED RELEASE SIZES; Text: SELECTED RELEASE SIZES; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23496 in perlhist.pod
-Lookups: THE KEEPERS OF THE PUMPKIN; Text: THE KEEPERS OF THE PUMPKIN; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: THE KEEPERS OF THE PUMPKIN; Text: THE KEEPERS OF THE PUMPKIN; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 757 in perlhist.pod
-Lookups: THE KEEPERS OF THE RECORDS; Text: THE KEEPERS OF THE RECORDS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: THE KEEPERS OF THE RECORDS; Text: THE KEEPERS OF THE RECORDS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52421 in perlhist.pod
-Lookups: THE RECORDS; Text: THE RECORDS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: THE RECORDS; Text: THE RECORDS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2416 in perlhist.pod
-Lookups: The patch-free era; Text: The patch-free era; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: The patch-free era; Text: The patch-free era; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 50879 in perlhist.pod

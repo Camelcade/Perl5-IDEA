@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,13 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.ElementDescriptionUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.usageView.UsageViewTypeLocation;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
@@ -112,7 +114,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (title != null) {
             result.addElement(LookupElementBuilder.create(o, title)
                                 .withIcon(PerlIcons.POD_FILE)
-                                .withTypeText(o.getTypeText()));
+                                .withTypeText(ElementDescriptionUtil.getElementDescription(o, UsageViewTypeLocation.INSTANCE)));
           }
           super.visitTargetableSection(o);
         }
@@ -164,7 +166,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
             LookupElementBuilder.create(indexTarget, lookupText)
               .withPresentableText(presentableText)
               .withTailText(tailText)
-              .withTypeText(o.getTypeText())
+              .withTypeText(ElementDescriptionUtil.getElementDescription(o, UsageViewTypeLocation.INSTANCE))
               .withIcon(PerlIcons.POD_FILE)
           );
         }

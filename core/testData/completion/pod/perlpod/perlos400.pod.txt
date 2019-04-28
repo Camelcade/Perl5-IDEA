@@ -1,16 +1,16 @@
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4647 in perlos400.pod
-Lookups: Compiling Perl for OS/400 PASE; Text: Compiling Perl for OS/400 PASE; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Compiling Perl for OS/400 PASE; Text: Compiling Perl for OS/400 PASE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 915 in perlos400.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 376 in perlos400.pod
-Lookups: Installing Perl in OS/400 PASE; Text: Installing Perl in OS/400 PASE; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installing Perl in OS/400 PASE; Text: Installing Perl in OS/400 PASE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2046 in perlos400.pod
-Lookups: Known Problems; Text: Known Problems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Known Problems; Text: Known Problems; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3157 in perlos400.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlos400.pod
-Lookups: Perl on ILE; Text: Perl on ILE; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl on ILE; Text: Perl on ILE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4077 in perlos400.pod
-Lookups: Using Perl in OS/400 PASE; Text: Using Perl in OS/400 PASE; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Using Perl in OS/400 PASE; Text: Using Perl in OS/400 PASE; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2682 in perlos400.pod

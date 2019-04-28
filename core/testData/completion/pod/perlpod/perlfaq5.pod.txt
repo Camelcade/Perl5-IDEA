@@ -1,106 +1,106 @@
 Lookups: -i; Text: How can I use Perl's -i option from within a program?; Tail: (-i); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11649 in perlfaq5.pod
-Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 54941 in perlfaq5.pod
-Lookups: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Text: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Text: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34486 in perlfaq5.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 77 in perlfaq5.pod
 Lookups: File::Copy; Text: How can I copy a file?; Tail: (File::Copy); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12551 in perlfaq5.pod
 Lookups: File::Tail; Text: How do I do a tail -f in perl?; Tail: (File::Tail); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46252 in perlfaq5.pod
-Lookups: How can I copy a file?; Text: How can I copy a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I copy a file?; Text: How can I copy a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12551 in perlfaq5.pod
-Lookups: How can I lock a file?; Text: How can I lock a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I lock a file?; Text: How can I lock a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30575 in perlfaq5.pod
-Lookups: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Text: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Text: How can I make a filehandle local to a subroutine? How do I pass filehandles between subroutines? How do I make an array of filehandles?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16224 in perlfaq5.pod
-Lookups: How can I manipulate fixed-record-length files?; Text: How can I manipulate fixed-record-length files?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I manipulate fixed-record-length files?; Text: How can I manipulate fixed-record-length files?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14999 in perlfaq5.pod
-Lookups: How can I open a file with a leading ">" or trailing blanks?; Text: How can I open a file with a leading ">" or trailing blanks?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I open a file with a leading ">" or trailing blanks?; Text: How can I open a file with a leading ">" or trailing blanks?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29331 in perlfaq5.pod
-Lookups: How can I open a filehandle to a string?; Text: How can I open a filehandle to a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I open a filehandle to a string?; Text: How can I open a filehandle to a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23274 in perlfaq5.pod
-Lookups: How can I output my numbers with commas added?; Text: How can I output my numbers with commas added?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I output my numbers with commas added?; Text: How can I output my numbers with commas added?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24010 in perlfaq5.pod
-Lookups: How can I read a single character from a file? From the keyboard?; Text: How can I read a single character from a file? From the keyboard?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I read a single character from a file? From the keyboard?; Text: How can I read a single character from a file? From the keyboard?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42419 in perlfaq5.pod
-Lookups: How can I read in a file by paragraphs?; Text: How can I read in a file by paragraphs?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I read in a file by paragraphs?; Text: How can I read in a file by paragraphs?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 41965 in perlfaq5.pod
-Lookups: How can I read in an entire file all at once?; Text: How can I read in an entire file all at once?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I read in an entire file all at once?; Text: How can I read in an entire file all at once?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39551 in perlfaq5.pod
-Lookups: How can I reliably rename a file?; Text: How can I reliably rename a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I reliably rename a file?; Text: How can I reliably rename a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30039 in perlfaq5.pod
-Lookups: How can I set up a footer format to be used with write()?; Text: How can I set up a footer format to be used with write()?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I set up a footer format to be used with write()?; Text: How can I set up a footer format to be used with write()?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21477 in perlfaq5.pod
-Lookups: How can I tell whether there's a character waiting on a filehandle?; Text: How can I tell whether there's a character waiting on a filehandle?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I tell whether there's a character waiting on a filehandle?; Text: How can I tell whether there's a character waiting on a filehandle?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44298 in perlfaq5.pod
-Lookups: How can I translate tildes (~) in a filename?; Text: How can I translate tildes (~) in a filename?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I translate tildes (~) in a filename?; Text: How can I translate tildes (~) in a filename?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25205 in perlfaq5.pod
-Lookups: How can I use Perl's -i option from within a program?; Text: How can I use Perl's -i option from within a program?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I use Perl's -i option from within a program?; Text: How can I use Perl's -i option from within a program?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11649 in perlfaq5.pod
-Lookups: How can I use a filehandle indirectly?; Text: How can I use a filehandle indirectly?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I use a filehandle indirectly?; Text: How can I use a filehandle indirectly?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17679 in perlfaq5.pod
-Lookups: How can I write() into a string?; Text: How can I write() into a string?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I write() into a string?; Text: How can I write() into a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21677 in perlfaq5.pod
-Lookups: How come when I open a file read-write it wipes it out?; Text: How come when I open a file read-write it wipes it out?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How come when I open a file read-write it wipes it out?; Text: How come when I open a file read-write it wipes it out?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25947 in perlfaq5.pod
-Lookups: How do I change, delete, or insert a line in a file, or append to the beginning of a file?; Text: How do I change, delete, or insert a line in a file, or append to the beginning of a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I change, delete, or insert a line in a file, or append to the beginning of a file?; Text: How do I change, delete, or insert a line in a file, or append to the beginning of a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2967 in perlfaq5.pod
-Lookups: How do I close a file descriptor by number?; Text: How do I close a file descriptor by number?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I close a file descriptor by number?; Text: How do I close a file descriptor by number?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47749 in perlfaq5.pod
-Lookups: How do I copy an entire directory?; Text: How do I copy an entire directory?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I copy an entire directory?; Text: How do I copy an entire directory?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54658 in perlfaq5.pod
-Lookups: How do I count the number of lines in a file?; Text: How do I count the number of lines in a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I count the number of lines in a file?; Text: How do I count the number of lines in a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8261 in perlfaq5.pod
-Lookups: How do I delete a directory tree?; Text: How do I delete a directory tree?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I delete a directory tree?; Text: How do I delete a directory tree?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 54085 in perlfaq5.pod
-Lookups: How do I delete the last N lines from a file?; Text: How do I delete the last N lines from a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I delete the last N lines from a file?; Text: How do I delete the last N lines from a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9988 in perlfaq5.pod
-Lookups: How do I do a tail -f in perl?; Text: How do I do a tail -f in perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I do a tail -f in perl?; Text: How do I do a tail -f in perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46252 in perlfaq5.pod
-Lookups: How do I dup() a filehandle in Perl?; Text: How do I dup() a filehandle in Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I dup() a filehandle in Perl?; Text: How do I dup() a filehandle in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47132 in perlfaq5.pod
-Lookups: How do I flush/unbuffer an output filehandle? Why must I do this?; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I flush/unbuffer an output filehandle? Why must I do this?; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 191 in perlfaq5.pod
-Lookups: How do I get a file's timestamp in perl?; Text: How do I get a file's timestamp in perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I get a file's timestamp in perl?; Text: How do I get a file's timestamp in perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36976 in perlfaq5.pod
-Lookups: How do I make a temporary file name?; Text: How do I make a temporary file name?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I make a temporary file name?; Text: How do I make a temporary file name?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13135 in perlfaq5.pod
-Lookups: How do I print to more than one file at once?; Text: How do I print to more than one file at once?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I print to more than one file at once?; Text: How do I print to more than one file at once?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39198 in perlfaq5.pod
-Lookups: How do I randomly update a binary file?; Text: How do I randomly update a binary file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I randomly update a binary file?; Text: How do I randomly update a binary file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36168 in perlfaq5.pod
-Lookups: How do I select a random line from a file?; Text: How do I select a random line from a file?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I select a random line from a file?; Text: How do I select a random line from a file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50596 in perlfaq5.pod
-Lookups: How do I set a file's timestamp in perl?; Text: How do I set a file's timestamp in perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I set a file's timestamp in perl?; Text: How do I set a file's timestamp in perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38259 in perlfaq5.pod
-Lookups: How do I traverse a directory tree?; Text: How do I traverse a directory tree?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I traverse a directory tree?; Text: How do I traverse a directory tree?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52810 in perlfaq5.pod
-Lookups: I still don't get locking. I just want to increment the number in the file. How can I do this?; Text: I still don't get locking. I just want to increment the number in the file. How can I do this?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: I still don't get locking. I just want to increment the number in the file. How can I do this?; Text: I still don't get locking. I just want to increment the number in the file. How can I do this?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33343 in perlfaq5.pod
 Lookups: IO::Handle; Text: How do I do a tail -f in perl?; Tail: (IO::Handle); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46252 in perlfaq5.pod
 Lookups: IO::String; Text: How can I open a filehandle to a string?; Tail: (IO::String); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23274 in perlfaq5.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlfaq5.pod
 Lookups: POSIX; Text: How do I close a file descriptor by number?; Tail: (POSIX); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47749 in perlfaq5.pod
-Lookups: VERSION; Text: VERSION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq5.pod
-Lookups: Why can't I just open(FH, ">file.lock")?; Text: Why can't I just open(FH, ">file.lock")?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why can't I just open(FH, ">file.lock")?; Text: Why can't I just open(FH, ">file.lock")?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32527 in perlfaq5.pod
-Lookups: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Text: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Text: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48610 in perlfaq5.pod
-Lookups: Why do I get weird spaces when I print an array of lines?; Text: Why do I get weird spaces when I print an array of lines?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why do I get weird spaces when I print an array of lines?; Text: Why do I get weird spaces when I print an array of lines?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51410 in perlfaq5.pod
-Lookups: Why do I sometimes get an "Argument list too long" when I use <*>?; Text: Why do I sometimes get an "Argument list too long" when I use <*>?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why do I sometimes get an "Argument list too long" when I use <*>?; Text: Why do I sometimes get an "Argument list too long" when I use <*>?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28651 in perlfaq5.pod
-Lookups: Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl?; Text: Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl?; Text: Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49821 in perlfaq5.pod
-Lookups: Why doesn't glob("*.*") get all the files?; Text: Why doesn't glob("*.*") get all the files?; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Why doesn't glob("*.*") get all the files?; Text: Why doesn't glob("*.*") get all the files?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49460 in perlfaq5.pod
 Lookups: append; Text: All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?; Tail: (append); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34486 in perlfaq5.pod

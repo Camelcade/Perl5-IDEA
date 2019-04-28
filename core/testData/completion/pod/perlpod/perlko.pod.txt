@@ -1,104 +1,104 @@
-Lookups:  Encode::KR; Text:  Encode::KR; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Encode::KR; Text:  Encode::KR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5186 in perlko.pod
-Lookups:  Encode; Text:  Encode; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Encode; Text:  Encode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5167 in perlko.pod
-Lookups:  Jarkko Hietaniemi <jhi@iki.fi>; Text:  Jarkko Hietaniemi <jhi@iki.fi>; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Jarkko Hietaniemi <jhi@iki.fi>; Text:  Jarkko Hietaniemi <jhi@iki.fi>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6811 in perlko.pod
-Lookups:  cp949; Text:  cp949; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  cp949; Text:  cp949; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3504 in perlko.pod
-Lookups:  encoding; Text:  encoding; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  encoding; Text:  encoding; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5209 in perlko.pod
-Lookups:  euc-kr; Text:  euc-kr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  euc-kr; Text:  euc-kr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3407 in perlko.pod
-Lookups:  http://advent.perl.kr; Text:  http://advent.perl.kr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://advent.perl.kr; Text:  http://advent.perl.kr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6512 in perlko.pod
-Lookups:  http://blogs.perl.org/; Text:  http://blogs.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://blogs.perl.org/; Text:  http://blogs.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6010 in perlko.pod
-Lookups:  http://cafe.naver.com/perlstudy.cafe; Text:  http://cafe.naver.com/perlstudy.cafe; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://cafe.naver.com/perlstudy.cafe; Text:  http://cafe.naver.com/perlstudy.cafe; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6399 in perlko.pod
-Lookups:  http://doc.perl.kr/; Text:  http://doc.perl.kr/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://doc.perl.kr/; Text:  http://doc.perl.kr/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6349 in perlko.pod
-Lookups:  http://gypark.pe.kr/wiki/Perl; Text:  http://gypark.pe.kr/wiki/Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://gypark.pe.kr/wiki/Perl; Text:  http://gypark.pe.kr/wiki/Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6584 in perlko.pod
-Lookups:  http://lists.perl.org/; Text:  http://lists.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://lists.perl.org/; Text:  http://lists.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5961 in perlko.pod
-Lookups:  http://metacpan.org; Text:  http://metacpan.org; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://metacpan.org; Text:  http://metacpan.org; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5920 in perlko.pod
-Lookups:  http://perl.kr/; Text:  http://perl.kr/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://perl.kr/; Text:  http://perl.kr/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6301 in perlko.pod
-Lookups:  http://seoul.pm.org; Text:  http://seoul.pm.org; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://seoul.pm.org; Text:  http://seoul.pm.org; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6669 in perlko.pod
-Lookups:  http://std.dkuug.dk/JTC1/SC2/WG2; Text:  http://std.dkuug.dk/JTC1/SC2/WG2; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://std.dkuug.dk/JTC1/SC2/WG2; Text:  http://std.dkuug.dk/JTC1/SC2/WG2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5277 in perlko.pod
-Lookups:  http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Text:  http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Text:  http://wiki.kldp.org/Translations/html/UTF8-Unicode-KLDP/UTF8-Unicode-KLDP.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5519 in perlko.pod
-Lookups:  http://www.cl.cam.ac.uk/~mgk25/unicode.html; Text:  http://www.cl.cam.ac.uk/~mgk25/unicode.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.cl.cam.ac.uk/~mgk25/unicode.html; Text:  http://www.cl.cam.ac.uk/~mgk25/unicode.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5426 in perlko.pod
-Lookups:  http://www.cpan.org/; Text:  http://www.cpan.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.cpan.org/; Text:  http://www.cpan.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5823 in perlko.pod
-Lookups:  http://www.perl.com/; Text:  http://www.perl.com/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.perl.com/; Text:  http://www.perl.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5768 in perlko.pod
-Lookups:  http://www.perl.or.kr/; Text:  http://www.perl.or.kr/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.perl.or.kr/; Text:  http://www.perl.or.kr/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6461 in perlko.pod
-Lookups:  http://www.perl.org/; Text:  http://www.perl.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.perl.org/; Text:  http://www.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5721 in perlko.pod
-Lookups:  http://www.perladvent.org/; Text:  http://www.perladvent.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.perladvent.org/; Text:  http://www.perladvent.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6182 in perlko.pod
-Lookups:  http://www.perlmonks.org/; Text:  http://www.perlmonks.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.perlmonks.org/; Text:  http://www.perlmonks.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6058 in perlko.pod
-Lookups:  http://www.pm.org/groups/asia.html; Text:  http://www.pm.org/groups/asia.html; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.pm.org/groups/asia.html; Text:  http://www.pm.org/groups/asia.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6115 in perlko.pod
-Lookups:  http://www.unicode.org/; Text:  http://www.unicode.org/; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  http://www.unicode.org/; Text:  http://www.unicode.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5230 in perlko.pod
-Lookups:  iso-2022-kr; Text:  iso-2022-kr; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  iso-2022-kr; Text:  iso-2022-kr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3830 in perlko.pod
-Lookups:  johab; Text:  johab; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  johab; Text:  johab; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3699 in perlko.pod
-Lookups:  ksc5601-raw; Text:  ksc5601-raw; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  ksc5601-raw; Text:  ksc5601-raw; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3986 in perlko.pod
-Lookups:  perlunicode; Text:  perlunicode; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  perlunicode; Text:  perlunicode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5143 in perlko.pod
-Lookups:  perluniintro; Text:  perluniintro; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  perluniintro; Text:  perluniintro; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5118 in perlko.pod
-Lookups:  김도형 <keedi@cpan.org>; Text:  김도형 <keedi@cpan.org>; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  김도형 <keedi@cpan.org>; Text:  김도형 <keedi@cpan.org>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6900 in perlko.pod
-Lookups:  소스 코드 상단에 use utf8; 프라그마 사용; Text:  소스 코드 상단에 use utf8; 프라그마 사용; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  소스 코드 상단에 use utf8; 프라그마 사용; Text:  소스 코드 상단에 use utf8; 프라그마 사용; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4927 in perlko.pod
-Lookups:  소스 코드, 터미널, 운영체제, 데이터 인코딩을 분리해서 이해; Text:  소스 코드, 터미널, 운영체제, 데이터 인코딩을 분리해서 이해; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  소스 코드, 터미널, 운영체제, 데이터 인코딩을 분리해서 이해; Text:  소스 코드, 터미널, 운영체제, 데이터 인코딩을 분리해서 이해; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4967 in perlko.pod
-Lookups:  소스 코드는 항상 UTF-8 인코딩으로 저장; Text:  소스 코드는 항상 UTF-8 인코딩으로 저장; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  소스 코드는 항상 UTF-8 인코딩으로 저장; Text:  소스 코드는 항상 UTF-8 인코딩으로 저장; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4893 in perlko.pod
-Lookups:  신정식 <jshin@mailaps.org>; Text:  신정식 <jshin@mailaps.org>; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  신정식 <jshin@mailaps.org>; Text:  신정식 <jshin@mailaps.org>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6859 in perlko.pod
-Lookups:  입출력 파일 핸들에 명시적인 인코딩을 사용; Text:  입출력 파일 핸들에 명시적인 인코딩을 사용; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  입출력 파일 핸들에 명시적인 인코딩을 사용; Text:  입출력 파일 핸들에 명시적인 인코딩을 사용; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5011 in perlko.pod
-Lookups:  중복(double) 인코딩을 주의; Text:  중복(double) 인코딩을 주의; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups:  중복(double) 인코딩을 주의; Text:  중복(double) 인코딩을 주의; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5044 in perlko.pod
-Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6788 in perlko.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 163 in perlko.pod
-Lookups: Encode 모듈; Text: Encode 모듈; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Encode 모듈; Text: Encode 모듈; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3327 in perlko.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 127 in perlko.pod
-Lookups: Perl 관련 자료; Text: Perl 관련 자료; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 관련 자료; Text: Perl 관련 자료; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5664 in perlko.pod
-Lookups: Perl에 관하여; Text: Perl에 관하여; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl에 관하여; Text: Perl에 관하여; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 692 in perlko.pod
-Lookups: 라이센스; Text: 라이센스; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: 라이센스; Text: 라이센스; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6733 in perlko.pod
-Lookups: 모범 사례; Text: 모범 사례; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: 모범 사례; Text: 모범 사례; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4749 in perlko.pod
-Lookups: 변환 예제; Text: 변환 예제; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: 변환 예제; Text: 변환 예제; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4247 in perlko.pod
-Lookups: 설치; Text: 설치; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: 설치; Text: 설치; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1197 in perlko.pod
-Lookups: 실행에 어려움을 겪는다면; Text: 실행에 어려움을 겪는다면; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: 실행에 어려움을 겪는다면; Text: 실행에 어려움을 겪는다면; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1738 in perlko.pod
-Lookups: 유니코드 및 한국어 인코딩 관련 자료; Text: 유니코드 및 한국어 인코딩 관련 자료; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: 유니코드 및 한국어 인코딩 관련 자료; Text: 유니코드 및 한국어 인코딩 관련 자료; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5080 in perlko.pod
-Lookups: 인코딩; Text: 인코딩; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: 인코딩; Text: 인코딩; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2540 in perlko.pod
-Lookups: 지원 인코딩; Text: 지원 인코딩; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: 지원 인코딩; Text: 지원 인코딩; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3345 in perlko.pod

@@ -1,82 +1,82 @@
-Lookups: A note on freshness; Text: A note on freshness; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: A note on freshness; Text: A note on freshness; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7437 in perlbook.pod
-Lookups: Automating System Administration with Perl; Text: Automating System Administration with Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Automating System Administration with Perl; Text: Automating System Administration with Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4258 in perlbook.pod
-Lookups: Beginning Perl; Text: Beginning Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Beginning Perl; Text: Beginning Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2767 in perlbook.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 57 in perlbook.pod
-Lookups: Data Munging with Perl; Text: Data Munging with Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Data Munging with Perl; Text: Data Munging with Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6165 in perlbook.pod
-Lookups: Effective Perl Programming; Text: Effective Perl Programming; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Effective Perl Programming; Text: Effective Perl Programming; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3672 in perlbook.pod
-Lookups: Extending and Embedding Perl; Text: Extending and Embedding Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Extending and Embedding Perl; Text: Extending and Embedding Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6477 in perlbook.pod
-Lookups: Free (as in beer) books; Text: Free (as in beer) books; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Free (as in beer) books; Text: Free (as in beer) books; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6797 in perlbook.pod
-Lookups: Get your book listed; Text: Get your book listed; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Get your book listed; Text: Get your book listed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8198 in perlbook.pod
-Lookups: Higher-Order Perl; Text: Higher-Order Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Higher-Order Perl; Text: Higher-Order Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5231 in perlbook.pod
-Lookups: Intermediate Perl (the "Alpaca Book"); Text: Intermediate Perl (the "Alpaca Book"); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Intermediate Perl (the "Alpaca Book"); Text: Intermediate Perl (the "Alpaca Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1815 in perlbook.pod
-Lookups: Intermediate Perl (the "Alpaca Book"); Text: Intermediate Perl (the "Alpaca Book"); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Intermediate Perl (the "Alpaca Book"); Text: Intermediate Perl (the "Alpaca Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3255 in perlbook.pod
-Lookups: Learning Perl  (the "Llama Book"); Text: Learning Perl  (the "Llama Book"); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Learning Perl  (the "Llama Book"); Text: Learning Perl  (the "Llama Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1413 in perlbook.pod
-Lookups: Learning Perl (the "Llama Book"); Text: Learning Perl (the "Llama Book"); Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Learning Perl (the "Llama Book"); Text: Learning Perl (the "Llama Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3047 in perlbook.pod
-Lookups: Mastering Perl/Tk; Text: Mastering Perl/Tk; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Mastering Perl/Tk; Text: Mastering Perl/Tk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6291 in perlbook.pod
-Lookups: Mastering Perl; Text: Mastering Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Mastering Perl; Text: Mastering Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3512 in perlbook.pod
-Lookups: Mastering Regular Expressions; Text: Mastering Regular Expressions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Mastering Regular Expressions; Text: Mastering Regular Expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5402 in perlbook.pod
-Lookups: More Programming Pearls; Text: More Programming Pearls; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: More Programming Pearls; Text: More Programming Pearls; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7344 in perlbook.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlbook.pod
-Lookups: Network Programming with Perl; Text: Network Programming with Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Network Programming with Perl; Text: Network Programming with Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5592 in perlbook.pod
-Lookups: Object Oriented Perl; Text: Object Oriented Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Object Oriented Perl; Text: Object Oriented Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5988 in perlbook.pod
-Lookups: Other interesting, non-Perl books; Text: Other interesting, non-Perl books; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Other interesting, non-Perl books; Text: Other interesting, non-Perl books; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6996 in perlbook.pod
-Lookups: Perl 5 Pocket Reference; Text: Perl 5 Pocket Reference; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl 5 Pocket Reference; Text: Perl 5 Pocket Reference; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2180 in perlbook.pod
-Lookups: Perl Best Practices; Text: Perl Best Practices; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl Best Practices; Text: Perl Best Practices; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5060 in perlbook.pod
-Lookups: Perl Debugger Pocket Reference; Text: Perl Debugger Pocket Reference; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl Debugger Pocket Reference; Text: Perl Debugger Pocket Reference; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2356 in perlbook.pod
-Lookups: Perl Template Toolkit; Text: Perl Template Toolkit; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl Template Toolkit; Text: Perl Template Toolkit; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5788 in perlbook.pod
-Lookups: Pro Perl Debugging; Text: Pro Perl Debugging; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Pro Perl Debugging; Text: Pro Perl Debugging; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6636 in perlbook.pod
-Lookups: Programming Pearls; Text: Programming Pearls; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Programming Pearls; Text: Programming Pearls; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7248 in perlbook.pod
-Lookups: Programming Perl (the "Camel Book"):; Text: Programming Perl (the "Camel Book"):; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Programming Perl (the "Camel Book"):; Text: Programming Perl (the "Camel Book"):; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 664 in perlbook.pod
-Lookups: Programming the Perl DBI; Text: Programming the Perl DBI; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Programming the Perl DBI; Text: Programming the Perl DBI; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4872 in perlbook.pod
-Lookups: Real World SQL Server Administration with Perl; Text: Real World SQL Server Administration with Perl; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Real World SQL Server Administration with Perl; Text: Real World SQL Server Administration with Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4460 in perlbook.pod
-Lookups: References; Text: References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: References; Text: References; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2079 in perlbook.pod
-Lookups: Regular Expression Pocket Reference; Text: Regular Expression Pocket Reference; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Regular Expression Pocket Reference; Text: Regular Expression Pocket Reference; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2542 in perlbook.pod
-Lookups: Regular Expressions Cookbook; Text: Regular Expressions Cookbook; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Regular Expressions Cookbook; Text: Regular Expressions Cookbook; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4662 in perlbook.pod
-Lookups: Special Topics; Text: Special Topics; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Special Topics; Text: Special Topics; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4630 in perlbook.pod
-Lookups: Task-Oriented; Text: Task-Oriented; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Task-Oriented; Text: Task-Oriented; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3849 in perlbook.pod
-Lookups: The Perl Cookbook (the "Ram Book"):; Text: The Perl Cookbook (the "Ram Book"):; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: The Perl Cookbook (the "Ram Book"):; Text: The Perl Cookbook (the "Ram Book"):; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1009 in perlbook.pod
-Lookups: The Perl Cookbook; Text: The Perl Cookbook; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: The Perl Cookbook; Text: The Perl Cookbook; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4027 in perlbook.pod
-Lookups: The most popular books; Text: The most popular books; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The most popular books; Text: The most popular books; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 533 in perlbook.pod
-Lookups: Tutorials; Text: Tutorials; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Tutorials; Text: Tutorials; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2740 in perlbook.pod
-Lookups: Writing Perl Modules for CPAN; Text: Writing Perl Modules for CPAN; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Writing Perl Modules for CPAN; Text: Writing Perl Modules for CPAN; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3880 in perlbook.pod

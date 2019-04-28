@@ -1,28 +1,28 @@
-Lookups: 64-bit PPC support; Text: 64-bit PPC support; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: 64-bit PPC support; Text: 64-bit PPC support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4881 in perlmacosx.pod
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11712 in perlmacosx.pod
-Lookups: Cocoa; Text: Cocoa; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Cocoa; Text: Cocoa; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9872 in perlmacosx.pod
-Lookups: DATE; Text: DATE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DATE; Text: DATE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12021 in perlmacosx.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 476 in perlmacosx.pod
-Lookups: Installation Prefix; Text: Installation Prefix; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Installation Prefix; Text: Installation Prefix; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1735 in perlmacosx.pod
-Lookups: Known problems; Text: Known problems; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Known problems; Text: Known problems; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8447 in perlmacosx.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlmacosx.pod
-Lookups: SDK support; Text: SDK support; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: SDK support; Text: SDK support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2356 in perlmacosx.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 225 in perlmacosx.pod
-Lookups: Starting From Scratch; Text: Starting From Scratch; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Starting From Scratch; Text: Starting From Scratch; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10337 in perlmacosx.pod
-Lookups: Universal Binary support; Text: Universal Binary support; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Universal Binary support; Text: Universal Binary support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3479 in perlmacosx.pod
-Lookups: Updating Apple's Perl; Text: Updating Apple's Perl; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Updating Apple's Perl; Text: Updating Apple's Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7515 in perlmacosx.pod
-Lookups: libperl and Prebinding; Text: libperl and Prebinding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: libperl and Prebinding; Text: libperl and Prebinding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6573 in perlmacosx.pod

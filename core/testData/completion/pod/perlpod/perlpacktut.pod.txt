@@ -1,62 +1,62 @@
-Lookups: Alignment, Take 2; Text: Alignment, Take 2; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Alignment, Take 2; Text: Alignment, Take 2; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43991 in perlpacktut.pod
-Lookups: Alignment, Take 3; Text: Alignment, Take 3; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Alignment, Take 3; Text: Alignment, Take 3; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44963 in perlpacktut.pod
-Lookups: Another Portable Binary Encoding; Text: Another Portable Binary Encoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Another Portable Binary Encoding; Text: Another Portable Binary Encoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27856 in perlpacktut.pod
-Lookups: Authors; Text: Authors; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Authors; Text: Authors; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51235 in perlpacktut.pod
-Lookups: Bit Strings; Text: Bit Strings; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Bit Strings; Text: Bit Strings; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20986 in perlpacktut.pod
-Lookups: Byte-order modifiers; Text: Byte-order modifiers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Byte-order modifiers; Text: Byte-order modifiers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18744 in perlpacktut.pod
-Lookups: Counting Repetitions; Text: Counting Repetitions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Counting Repetitions; Text: Counting Repetitions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34825 in perlpacktut.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 62 in perlpacktut.pod
-Lookups: Dealing with Endian-ness; Text: Dealing with Endian-ness; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Dealing with Endian-ness; Text: Dealing with Endian-ness; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42980 in perlpacktut.pod
-Lookups: Doing Sums; Text: Doing Sums; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Doing Sums; Text: Doing Sums; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24307 in perlpacktut.pod
-Lookups: Dynamic Templates; Text: Dynamic Templates; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Dynamic Templates; Text: Dynamic Templates; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33259 in perlpacktut.pod
-Lookups: Exotic Templates; Text: Exotic Templates; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Exotic Templates; Text: Exotic Templates; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20960 in perlpacktut.pod
-Lookups: Floating point Numbers; Text: Floating point Numbers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Floating point Numbers; Text: Floating point Numbers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19961 in perlpacktut.pod
-Lookups: Funnies Section; Text: Funnies Section; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Funnies Section; Text: Funnies Section; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50920 in perlpacktut.pod
-Lookups: How to Eat an Egg on a Net; Text: How to Eat an Egg on a Net; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: How to Eat an Egg on a Net; Text: How to Eat an Egg on a Net; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17588 in perlpacktut.pod
-Lookups: Integers; Text: Integers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Integers; Text: Integers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11902 in perlpacktut.pod
-Lookups: Intel HEX; Text: Intel HEX; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Intel HEX; Text: Intel HEX; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35501 in perlpacktut.pod
-Lookups: Lengths and Widths; Text: Lengths and Widths; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Lengths and Widths; Text: Lengths and Widths; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 30138 in perlpacktut.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlpacktut.pod
-Lookups: Pack Recipes; Text: Pack Recipes; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Pack Recipes; Text: Pack Recipes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 49960 in perlpacktut.pod
-Lookups: Packing Numbers; Text: Packing Numbers; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Packing Numbers; Text: Packing Numbers; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 11616 in perlpacktut.pod
-Lookups: Packing Text; Text: Packing Text; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Packing Text; Text: Packing Text; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3992 in perlpacktut.pod
-Lookups: Packing and Unpacking C Structures; Text: Packing and Unpacking C Structures; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Packing and Unpacking C Structures; Text: Packing and Unpacking C Structures; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37664 in perlpacktut.pod
-Lookups: Pointers for How to Use Them; Text: Pointers for How to Use Them; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Pointers for How to Use Them; Text: Pointers for How to Use Them; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45395 in perlpacktut.pod
-Lookups: String Lengths; Text: String Lengths; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: String Lengths; Text: String Lengths; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30165 in perlpacktut.pod
-Lookups: Template Grouping; Text: Template Grouping; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Template Grouping; Text: Template Grouping; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28607 in perlpacktut.pod
-Lookups: The Alignment Pit; Text: The Alignment Pit; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The Alignment Pit; Text: The Alignment Pit; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38341 in perlpacktut.pod
-Lookups: The Basic Principle; Text: The Basic Principle; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: The Basic Principle; Text: The Basic Principle; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 482 in perlpacktut.pod
-Lookups: Unicode; Text: Unicode; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unicode; Text: Unicode; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25505 in perlpacktut.pod
-Lookups: Unpacking a Stack Frame; Text: Unpacking a Stack Frame; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Unpacking a Stack Frame; Text: Unpacking a Stack Frame; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15200 in perlpacktut.pod
-Lookups: Uuencoding; Text: Uuencoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Uuencoding; Text: Uuencoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23277 in perlpacktut.pod

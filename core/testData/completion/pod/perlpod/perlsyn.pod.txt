@@ -10,73 +10,73 @@ Lookups: ... statement; Text: The Ellipsis Statement; Tail: (... statement); Typ
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28657 in perlsyn.pod
 Lookups: ...; Text: The Ellipsis Statement; Tail: (...); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28657 in perlsyn.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36246 in perlsyn.pod
-Lookups: 10.; Text: 10.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 10.; Text: 10.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38400 in perlsyn.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36315 in perlsyn.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36530 in perlsyn.pod
-Lookups: 4.; Text: 4.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 4.; Text: 4.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36765 in perlsyn.pod
-Lookups: 5.; Text: 5.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 5.; Text: 5.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37079 in perlsyn.pod
-Lookups: 6.; Text: 6.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 6.; Text: 6.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37243 in perlsyn.pod
-Lookups: 7.; Text: 7.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 7.; Text: 7.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37422 in perlsyn.pod
-Lookups: 8.; Text: 8.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 8.; Text: 8.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37636 in perlsyn.pod
-Lookups: 9.; Text: 9.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: 9.; Text: 9.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38135 in perlsyn.pod
 Lookups: ;; Text: Simple Statements; Tail: (;); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4542 in perlsyn.pod
-Lookups: Basic BLOCKs; Text: Basic BLOCKs; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Basic BLOCKs; Text: Basic BLOCKs; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22560 in perlsyn.pod
-Lookups: Breaking out; Text: Breaking out; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Breaking out; Text: Breaking out; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 40708 in perlsyn.pod
-Lookups: Comments; Text: Comments; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Comments; Text: Comments; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4357 in perlsyn.pod
-Lookups: Compound Statements; Text: Compound Statements; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Compound Statements; Text: Compound Statements; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9107 in perlsyn.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 46 in perlsyn.pod
-Lookups: Declarations; Text: Declarations; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Declarations; Text: Declarations; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1281 in perlsyn.pod
-Lookups: Differences from Perl 6; Text: Differences from Perl 6; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Differences from Perl 6; Text: Differences from Perl 6; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 43030 in perlsyn.pod
-Lookups: Experimental Details on given and when; Text: Experimental Details on given and when; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Experimental Details on given and when; Text: Experimental Details on given and when; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34102 in perlsyn.pod
-Lookups: Fall-through; Text: Fall-through; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Fall-through; Text: Fall-through; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 40867 in perlsyn.pod
-Lookups: For Loops; Text: For Loops; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: For Loops; Text: For Loops; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17391 in perlsyn.pod
-Lookups: Foreach Loops; Text: Foreach Loops; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Foreach Loops; Text: Foreach Loops; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18763 in perlsyn.pod
-Lookups: Goto; Text: Goto; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Goto; Text: Goto; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26766 in perlsyn.pod
-Lookups: Loop Control; Text: Loop Control; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Loop Control; Text: Loop Control; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14735 in perlsyn.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlsyn.pod
 Lookups: POD; Text: PODs: Embedded Documentation; Tail: (POD); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30908 in perlsyn.pod
-Lookups: PODs: Embedded Documentation; Text: PODs: Embedded Documentation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: PODs: Embedded Documentation; Text: PODs: Embedded Documentation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30908 in perlsyn.pod
-Lookups: Plain Old Comments (Not!); Text: Plain Old Comments (Not!); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Plain Old Comments (Not!); Text: Plain Old Comments (Not!); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32446 in perlsyn.pod
-Lookups: Return value; Text: Return value; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Return value; Text: Return value; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 41199 in perlsyn.pod
-Lookups: Simple Statements; Text: Simple Statements; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Simple Statements; Text: Simple Statements; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4542 in perlsyn.pod
-Lookups: Statement Modifiers; Text: Statement Modifiers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Statement Modifiers; Text: Statement Modifiers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5205 in perlsyn.pod
-Lookups: Switch Statements; Text: Switch Statements; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Switch Statements; Text: Switch Statements; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23701 in perlsyn.pod
-Lookups: Switching in a loop; Text: Switching in a loop; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Switching in a loop; Text: Switching in a loop; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 42222 in perlsyn.pod
-Lookups: The Ellipsis Statement; Text: The Ellipsis Statement; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: The Ellipsis Statement; Text: The Ellipsis Statement; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28657 in perlsyn.pod
 Lookups: alias; Text: Foreach Loops; Tail: (alias); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18763 in perlsyn.pod

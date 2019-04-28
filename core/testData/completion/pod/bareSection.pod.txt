@@ -1,12 +1,12 @@
-Lookups: First header; Text: First header; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: First header; Text: First header; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in bareSection.pod
-Lookups: Forth header; Text: Forth header; Tail: null; Type: Heading 4; Icon: /perl5language.png; Type Icon: null
+Lookups: Forth header; Text: Forth header; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 64 in bareSection.pod
-Lookups: Regular item; Text: Regular item; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: Regular item; Text: Regular item; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92 in bareSection.pod
-Lookups: Second header; Text: Second header; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Second header; Text: Second header; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 21 in bareSection.pod
-Lookups: Third header; Text: Third header; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Third header; Text: Third header; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 43 in bareSection.pod
 Lookups: bullet_index; Text: Regular item; Tail: (bullet_index); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 92 in bareSection.pod

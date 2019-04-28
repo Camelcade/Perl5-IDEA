@@ -1,120 +1,120 @@
-Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24114 in perlunicook.pod
-Lookups: COPYRIGHT AND LICENCE; Text: COPYRIGHT AND LICENCE; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: COPYRIGHT AND LICENCE; Text: COPYRIGHT AND LICENCE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24267 in perlunicook.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 94 in perlunicook.pod
-Lookups: EXAMPLES; Text: EXAMPLES; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: EXAMPLES; Text: EXAMPLES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 357 in perlunicook.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17 in perlunicook.pod
-Lookups: REVISION HISTORY; Text: REVISION HISTORY; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: REVISION HISTORY; Text: REVISION HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 24946 in perlunicook.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 22204 in perlunicook.pod
-Lookups: UAX #11: East Asian Width; Text: UAX #11: East Asian Width; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UAX #11: East Asian Width; Text: UAX #11: East Asian Width; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24074 in perlunicook.pod
-Lookups: UAX #14: Unicode Line Breaking Algorithm; Text: UAX #14: Unicode Line Breaking Algorithm; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UAX #14: Unicode Line Breaking Algorithm; Text: UAX #14: Unicode Line Breaking Algorithm; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24026 in perlunicook.pod
-Lookups: UAX #15: Unicode Normalization Forms; Text: UAX #15: Unicode Normalization Forms; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UAX #15: Unicode Normalization Forms; Text: UAX #15: Unicode Normalization Forms; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23896 in perlunicook.pod
-Lookups: UAX #29: Unicode Text Segmentation; Text: UAX #29: Unicode Text Segmentation; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UAX #29: Unicode Text Segmentation; Text: UAX #29: Unicode Text Segmentation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23984 in perlunicook.pod
-Lookups: UAX #44: Unicode Character Database; Text: UAX #44: Unicode Character Database; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UAX #44: Unicode Character Database; Text: UAX #44: Unicode Character Database; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23809 in perlunicook.pod
-Lookups: UTS #10: Unicode Collation Algorithm; Text: UTS #10: Unicode Collation Algorithm; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UTS #10: Unicode Collation Algorithm; Text: UTS #10: Unicode Collation Algorithm; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23940 in perlunicook.pod
-Lookups: UTS #18: Unicode Regular Expressions; Text: UTS #18: Unicode Regular Expressions; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: UTS #18: Unicode Regular Expressions; Text: UTS #18: Unicode Regular Expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23852 in perlunicook.pod
-Lookups: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170.; Text: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170.; Tail: null; Type: List item; Icon: /perl5language.png; Type Icon: null
+Lookups: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170.; Text: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23654 in perlunicook.pod
-Lookups: ℞ 0: Standard preamble; Text: ℞ 0: Standard preamble; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 0: Standard preamble; Text: ℞ 0: Standard preamble; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 374 in perlunicook.pod
-Lookups: ℞ 10: Custom named characters; Text: ℞ 10: Custom named characters; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 10: Custom named characters; Text: ℞ 10: Custom named characters; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4989 in perlunicook.pod
-Lookups: ℞ 11: Names of CJK codepoints; Text: ℞ 11: Names of CJK codepoints; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 11: Names of CJK codepoints; Text: ℞ 11: Names of CJK codepoints; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5348 in perlunicook.pod
-Lookups: ℞ 12: Explicit encode/decode; Text: ℞ 12: Explicit encode/decode; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 12: Explicit encode/decode; Text: ℞ 12: Explicit encode/decode; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6454 in perlunicook.pod
-Lookups: ℞ 13: Decode program arguments as utf8; Text: ℞ 13: Decode program arguments as utf8; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 13: Decode program arguments as utf8; Text: ℞ 13: Decode program arguments as utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6910 in perlunicook.pod
-Lookups: ℞ 14: Decode program arguments as locale encoding; Text: ℞ 14: Decode program arguments as locale encoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 14: Decode program arguments as locale encoding; Text: ℞ 14: Decode program arguments as locale encoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7092 in perlunicook.pod
-Lookups: ℞ 15: Declare STD{IN,OUT,ERR} to be utf8; Text: ℞ 15: Declare STD{IN,OUT,ERR} to be utf8; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 15: Declare STD{IN,OUT,ERR} to be utf8; Text: ℞ 15: Declare STD{IN,OUT,ERR} to be utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7329 in perlunicook.pod
-Lookups: ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding; Text: ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding; Text: ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7674 in perlunicook.pod
-Lookups: ℞ 17: Make file I/O default to utf8; Text: ℞ 17: Make file I/O default to utf8; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 17: Make file I/O default to utf8; Text: ℞ 17: Make file I/O default to utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8025 in perlunicook.pod
-Lookups: ℞ 18: Make all I/O and args default to utf8; Text: ℞ 18: Make all I/O and args default to utf8; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 18: Make all I/O and args default to utf8; Text: ℞ 18: Make all I/O and args default to utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8224 in perlunicook.pod
-Lookups: ℞ 19: Open file with specific encoding; Text: ℞ 19: Open file with specific encoding; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 19: Open file with specific encoding; Text: ℞ 19: Open file with specific encoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8458 in perlunicook.pod
-Lookups: ℞ 1: Generic Unicode-savvy filter; Text: ℞ 1: Generic Unicode-savvy filter; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 1: Generic Unicode-savvy filter; Text: ℞ 1: Generic Unicode-savvy filter; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1209 in perlunicook.pod
-Lookups: ℞ 20: Unicode casing; Text: ℞ 20: Unicode casing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 20: Unicode casing; Text: ℞ 20: Unicode casing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9176 in perlunicook.pod
-Lookups: ℞ 21: Unicode case-insensitive comparisons; Text: ℞ 21: Unicode case-insensitive comparisons; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 21: Unicode case-insensitive comparisons; Text: ℞ 21: Unicode case-insensitive comparisons; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9445 in perlunicook.pod
-Lookups: ℞ 22: Match Unicode linebreak sequence in regex; Text: ℞ 22: Match Unicode linebreak sequence in regex; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 22: Match Unicode linebreak sequence in regex; Text: ℞ 22: Match Unicode linebreak sequence in regex; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9900 in perlunicook.pod
-Lookups: ℞ 23: Get character category; Text: ℞ 23: Get character category; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 23: Get character category; Text: ℞ 23: Get character category; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10190 in perlunicook.pod
-Lookups: ℞ 24: Disabling Unicode-awareness in builtin charclasses; Text: ℞ 24: Disabling Unicode-awareness in builtin charclasses; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 24: Disabling Unicode-awareness in builtin charclasses; Text: ℞ 24: Disabling Unicode-awareness in builtin charclasses; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10359 in perlunicook.pod
-Lookups: ℞ 25: Match Unicode properties in regex with \p, \P; Text: ℞ 25: Match Unicode properties in regex with \p, \P; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 25: Match Unicode properties in regex with \p, \P; Text: ℞ 25: Match Unicode properties in regex with \p, \P; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10811 in perlunicook.pod
-Lookups: ℞ 26: Custom character properties; Text: ℞ 26: Custom character properties; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 26: Custom character properties; Text: ℞ 26: Custom character properties; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11268 in perlunicook.pod
-Lookups: ℞ 27: Unicode normalization; Text: ℞ 27: Unicode normalization; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 27: Unicode normalization; Text: ℞ 27: Unicode normalization; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11668 in perlunicook.pod
-Lookups: ℞ 28: Convert non-ASCII Unicode numerics; Text: ℞ 28: Convert non-ASCII Unicode numerics; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 28: Convert non-ASCII Unicode numerics; Text: ℞ 28: Convert non-ASCII Unicode numerics; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12179 in perlunicook.pod
-Lookups: ℞ 29: Match Unicode grapheme cluster in regex; Text: ℞ 29: Match Unicode grapheme cluster in regex; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 29: Match Unicode grapheme cluster in regex; Text: ℞ 29: Match Unicode grapheme cluster in regex; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12771 in perlunicook.pod
-Lookups: ℞ 2: Fine-tuning Unicode warnings; Text: ℞ 2: Fine-tuning Unicode warnings; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 2: Fine-tuning Unicode warnings; Text: ℞ 2: Fine-tuning Unicode warnings; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1509 in perlunicook.pod
-Lookups: ℞ 30: Extract by grapheme instead of by codepoint (regex); Text: ℞ 30: Extract by grapheme instead of by codepoint (regex); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 30: Extract by grapheme instead of by codepoint (regex); Text: ℞ 30: Extract by grapheme instead of by codepoint (regex); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13074 in perlunicook.pod
-Lookups: ℞ 31: Extract by grapheme instead of by codepoint (substr); Text: ℞ 31: Extract by grapheme instead of by codepoint (substr); Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 31: Extract by grapheme instead of by codepoint (substr); Text: ℞ 31: Extract by grapheme instead of by codepoint (substr); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13224 in perlunicook.pod
-Lookups: ℞ 32: Reverse string by grapheme; Text: ℞ 32: Reverse string by grapheme; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 32: Reverse string by grapheme; Text: ℞ 32: Reverse string by grapheme; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13424 in perlunicook.pod
-Lookups: ℞ 33: String length in graphemes; Text: ℞ 33: String length in graphemes; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 33: String length in graphemes; Text: ℞ 33: String length in graphemes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13864 in perlunicook.pod
-Lookups: ℞ 34: Unicode column-width for printing; Text: ℞ 34: Unicode column-width for printing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 34: Unicode column-width for printing; Text: ℞ 34: Unicode column-width for printing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14217 in perlunicook.pod
-Lookups: ℞ 35: Unicode collation; Text: ℞ 35: Unicode collation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 35: Unicode collation; Text: ℞ 35: Unicode collation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14881 in perlunicook.pod
-Lookups: ℞ 36: Case- and accent-insensitive Unicode sort; Text: ℞ 36: Case- and accent-insensitive Unicode sort; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 36: Case- and accent-insensitive Unicode sort; Text: ℞ 36: Case- and accent-insensitive Unicode sort; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15235 in perlunicook.pod
-Lookups: ℞ 37: Unicode locale collation; Text: ℞ 37: Unicode locale collation; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 37: Unicode locale collation; Text: ℞ 37: Unicode locale collation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15508 in perlunicook.pod
-Lookups: ℞ 38: Making cmp work on text instead of codepoints; Text: ℞ 38: Making cmp work on text instead of codepoints; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 38: Making cmp work on text instead of codepoints; Text: ℞ 38: Making cmp work on text instead of codepoints; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15855 in perlunicook.pod
-Lookups: ℞ 39: Case- and accent-insensitive comparisons; Text: ℞ 39: Case- and accent-insensitive comparisons; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 39: Case- and accent-insensitive comparisons; Text: ℞ 39: Case- and accent-insensitive comparisons; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16311 in perlunicook.pod
-Lookups: ℞ 3: Declare source in utf8 for identifiers and literals; Text: ℞ 3: Declare source in utf8 for identifiers and literals; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 3: Declare source in utf8 for identifiers and literals; Text: ℞ 3: Declare source in utf8 for identifiers and literals; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1866 in perlunicook.pod
-Lookups: ℞ 40: Case- and accent-insensitive locale comparisons; Text: ℞ 40: Case- and accent-insensitive locale comparisons; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 40: Case- and accent-insensitive locale comparisons; Text: ℞ 40: Case- and accent-insensitive locale comparisons; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16648 in perlunicook.pod
-Lookups: ℞ 41: Unicode linebreaking; Text: ℞ 41: Unicode linebreaking; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 41: Unicode linebreaking; Text: ℞ 41: Unicode linebreaking; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16921 in perlunicook.pod
-Lookups: ℞ 42: Unicode text in DBM hashes, the tedious way; Text: ℞ 42: Unicode text in DBM hashes, the tedious way; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 42: Unicode text in DBM hashes, the tedious way; Text: ℞ 42: Unicode text in DBM hashes, the tedious way; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17221 in perlunicook.pod
-Lookups: ℞ 43: Unicode text in DBM hashes, the easy way; Text: ℞ 43: Unicode text in DBM hashes, the easy way; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 43: Unicode text in DBM hashes, the easy way; Text: ℞ 43: Unicode text in DBM hashes, the easy way; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17997 in perlunicook.pod
-Lookups: ℞ 44: PROGRAM: Demo of Unicode collation and printing; Text: ℞ 44: PROGRAM: Demo of Unicode collation and printing; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 44: PROGRAM: Demo of Unicode collation and printing; Text: ℞ 44: PROGRAM: Demo of Unicode collation and printing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18597 in perlunicook.pod
-Lookups: ℞ 4: Characters and their numbers; Text: ℞ 4: Characters and their numbers; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 4: Characters and their numbers; Text: ℞ 4: Characters and their numbers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2515 in perlunicook.pod
-Lookups: ℞ 5: Unicode literals by character number; Text: ℞ 5: Unicode literals by character number; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 5: Unicode literals by character number; Text: ℞ 5: Unicode literals by character number; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2969 in perlunicook.pod
-Lookups: ℞ 6: Get character name by number; Text: ℞ 6: Get character name by number; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 6: Get character name by number; Text: ℞ 6: Get character name by number; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3318 in perlunicook.pod
-Lookups: ℞ 7: Get character number by name; Text: ℞ 7: Get character number by name; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 7: Get character number by name; Text: ℞ 7: Get character number by name; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3420 in perlunicook.pod
-Lookups: ℞ 8: Unicode named characters; Text: ℞ 8: Unicode named characters; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 8: Unicode named characters; Text: ℞ 8: Unicode named characters; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3546 in perlunicook.pod
-Lookups: ℞ 9: Unicode named sequences; Text: ℞ 9: Unicode named sequences; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 9: Unicode named sequences; Text: ℞ 9: Unicode named sequences; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4693 in perlunicook.pod

@@ -1,36 +1,36 @@
-Lookups: An Example; Text: An Example; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: An Example; Text: An Example; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8958 in perlreftut.pod
-Lookups: Arrow Rule; Text: Arrow Rule; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Arrow Rule; Text: Arrow Rule; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9901 in perlreftut.pod
-Lookups: Credits; Text: Credits; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Credits; Text: Credits; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 18069 in perlreftut.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 71 in perlreftut.pod
-Lookups: Distribution Conditions; Text: Distribution Conditions; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Distribution Conditions; Text: Distribution Conditions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18341 in perlreftut.pod
-Lookups: Make Rule 1; Text: Make Rule 1; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Make Rule 1; Text: Make Rule 1; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3926 in perlreftut.pod
-Lookups: Make Rule 2; Text: Make Rule 2; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Make Rule 2; Text: Make Rule 2; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4862 in perlreftut.pod
-Lookups: Making References; Text: Making References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Making References; Text: Making References; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3900 in perlreftut.pod
-Lookups: NAME; Text: NAME; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlreftut.pod
-Lookups: Solution; Text: Solution; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Solution; Text: Solution; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 10434 in perlreftut.pod
-Lookups: Summary; Text: Summary; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Summary; Text: Summary; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17752 in perlreftut.pod
-Lookups: Syntax; Text: Syntax; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Syntax; Text: Syntax; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3793 in perlreftut.pod
-Lookups: The Rest; Text: The Rest; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: The Rest; Text: The Rest; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15027 in perlreftut.pod
-Lookups: The Solution; Text: The Solution; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: The Solution; Text: The Solution; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2302 in perlreftut.pod
-Lookups: Use Rule 1; Text: Use Rule 1; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use Rule 1; Text: Use Rule 1; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5904 in perlreftut.pod
-Lookups: Use Rule 2; Text: Use Rule 2; Tail: null; Type: Heading 3; Icon: /perl5language.png; Type Icon: null
+Lookups: Use Rule 2; Text: Use Rule 2; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7710 in perlreftut.pod
-Lookups: Using References; Text: Using References; Tail: null; Type: Heading 2; Icon: /perl5language.png; Type Icon: null
+Lookups: Using References; Text: Using References; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5671 in perlreftut.pod
-Lookups: Who Needs Complicated Data Structures?; Text: Who Needs Complicated Data Structures?; Tail: null; Type: Heading 1; Icon: /perl5language.png; Type Icon: null
+Lookups: Who Needs Complicated Data Structures?; Text: Who Needs Complicated Data Structures?; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 767 in perlreftut.pod
