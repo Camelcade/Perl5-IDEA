@@ -1,3 +1,5 @@
+package Foo;
+
 print sprintf "here we go";
 
 print OF "something";
