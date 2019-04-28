@@ -34,8 +34,8 @@ import java.util.Map;
 
 public class PodColorSettingsPage implements ColorSettingsPage {
   private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-    new AttributesDescriptor("Tags", PodSyntaxHighlighter.POD_TAG),
-    new AttributesDescriptor("Perl code", PodSyntaxHighlighter.POD_CODE),
+    new AttributesDescriptor("Tags", PodSyntaxHighlighter.POD_TAG_KEY),
+    new AttributesDescriptor("Perl code", PodSyntaxHighlighter.POD_CODE_KEY),
   };
 
   @Nullable

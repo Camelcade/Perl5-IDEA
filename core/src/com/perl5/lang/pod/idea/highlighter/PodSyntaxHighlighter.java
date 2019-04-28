@@ -37,8 +37,9 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  * Created by hurricup on 21.04.2015.
  */
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodElementTypes {
-  public static final TextAttributesKey POD_TAG = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
-  public static final TextAttributesKey POD_CODE = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
+  public static final TextAttributesKey POD_TAG_KEY = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
+  public static final TextAttributesKey POD_CODE_KEY = createTextAttributesKey("POD_CODE", DefaultLanguageHighlighterColors.DOC_COMMENT);
+
   public static final Map<IElementType, TextAttributesKey> ATTRIBUTES_MAP = new HashMap<>();
   private static final TokenSet POD_TOKENS = TokenSet.create(
     POD_POD, POD_HEAD1, POD_HEAD2, POD_HEAD3, POD_HEAD4, POD_OVER, POD_ITEM, POD_BACK, POD_BEGIN, POD_END, POD_FOR, POD_ENCODING, POD_CUT,
@@ -46,8 +47,8 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase implements PodEl
   );
 
   static {
-    safeMap(ATTRIBUTES_MAP, POD_POD, PodSyntaxHighlighter.POD_TAG);
-    safeMap(ATTRIBUTES_MAP, PodElementTypes.POD_CODE, PodSyntaxHighlighter.POD_CODE);
+    safeMap(ATTRIBUTES_MAP, POD_POD, PodSyntaxHighlighter.POD_TAG_KEY);
+    safeMap(ATTRIBUTES_MAP, PodElementTypes.POD_CODE, PodSyntaxHighlighter.POD_CODE_KEY);
   }
 
   @Nullable
