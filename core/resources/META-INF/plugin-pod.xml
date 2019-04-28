@@ -39,6 +39,7 @@
     <defaultLiveTemplatesProvider
         implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
     <completion.contributor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
+    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
 
     <!-- not tested -->
     <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
@@ -51,7 +52,6 @@
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
     <lang.foldingBuilder language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
-    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
     <lang.refactoringSupport language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
