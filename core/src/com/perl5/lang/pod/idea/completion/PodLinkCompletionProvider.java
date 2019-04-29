@@ -21,13 +21,12 @@ import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.ElementDescriptionUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.usageView.UsageViewTypeLocation;
+import com.intellij.usageView.UsageViewUtil;
 import com.intellij.util.ProcessingContext;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
@@ -114,7 +113,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (title != null) {
             result.addElement(LookupElementBuilder.create(o, title)
                                 .withIcon(PerlIcons.POD_FILE)
-                                .withTypeText(ElementDescriptionUtil.getElementDescription(o, UsageViewTypeLocation.INSTANCE)));
+                                .withTypeText(UsageViewUtil.getType(o)));
           }
           super.visitTargetableSection(o);
         }
@@ -166,7 +165,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
             LookupElementBuilder.create(indexTarget, lookupText)
               .withPresentableText(presentableText)
               .withTailText(tailText)
-              .withTypeText(ElementDescriptionUtil.getElementDescription(o, UsageViewTypeLocation.INSTANCE))
+              .withTypeText(UsageViewUtil.getType(o))
               .withIcon(PerlIcons.POD_FILE)
           );
         }

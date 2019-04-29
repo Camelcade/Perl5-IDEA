@@ -16,12 +16,10 @@
 
 package com.perl5.lang.perl.idea;
 
-import com.intellij.psi.ElementDescriptionUtil;
 import com.intellij.psi.PsiDirectoryContainer;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
-import com.intellij.usageView.UsageViewShortNameLocation;
-import com.intellij.usageView.UsageViewTypeLocation;
+import com.intellij.usageView.UsageViewUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod;
@@ -106,17 +104,13 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
       }
     }
     else if (element instanceof PerlVariableNameElement) {
-      return getElementDescription(element.getParent(), UsageViewTypeLocation.INSTANCE);
+      return UsageViewUtil.getType(element.getParent());
     }
     return null;
   }
 
   @Nullable
   protected String getLongName(@NotNull PsiElement element) {
-    return MessageFormat.format(
-      "{0} ''{1}''",
-      ElementDescriptionUtil.getElementDescription(element, UsageViewTypeLocation.INSTANCE),
-      ElementDescriptionUtil.getElementDescription(element, UsageViewShortNameLocation.INSTANCE)
-    );
+    return MessageFormat.format("{0} ''{1}''", UsageViewUtil.getType(element), UsageViewUtil.getShortName(element));
   }
 }
