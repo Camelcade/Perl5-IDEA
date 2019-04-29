@@ -63,7 +63,6 @@
     <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
     <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
 
-    <lang.refactoringSupport language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodRefactoringSupportProvider"/>
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
