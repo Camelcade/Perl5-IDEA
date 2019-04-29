@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,10 +60,10 @@ public class PodSectionFormattedMixin extends PodSectionMixin implements PodSect
   public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
     String formatterName = getFormatterName();
     if (FORMAT_HTML.equals(formatterName)) {
-      boolean isSafe = context.isSafe();
-      context.setSafe(true);
+      boolean isSafe = context.isHtmlSafe();
+      context.setHtmlSafe(true);
       super.renderElementContentAsHTML(builder, context);
-      context.setSafe(isSafe);
+      context.setHtmlSafe(isSafe);
     }
   }
 }

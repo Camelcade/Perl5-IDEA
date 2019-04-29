@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,28 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodRenderingContext {
-  private boolean myIsSafe;
+  private boolean myIsHtmlSafe;
 
   public PodRenderingContext() {
     this(false);
   }
 
-  public PodRenderingContext(boolean myIsSafe) {
-    this.myIsSafe = myIsSafe;
+  public PodRenderingContext(boolean isHtmlSafe) {
+    myIsHtmlSafe = isHtmlSafe;
   }
 
-  public boolean isSafe() {
-    return myIsSafe;
+  /**
+   * @return true iff content suppoosed to be HTML text. In html formatter. And should be rendered without escaping
+   */
+  public boolean isHtmlSafe() {
+    return myIsHtmlSafe;
   }
 
-  public void setSafe(boolean safe) {
-    myIsSafe = safe;
+  /**
+   * @see #isHtmlSafe()
+   */
+  public void setHtmlSafe(boolean safe) {
+    myIsHtmlSafe = safe;
   }
 }
