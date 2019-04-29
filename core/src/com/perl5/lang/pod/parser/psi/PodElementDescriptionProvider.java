@@ -83,7 +83,7 @@ public class PodElementDescriptionProvider extends PerlElementDescriptionProvide
   @Override
   protected String getLongName(@NotNull PsiElement element) {
     if (element instanceof PodTitledSection) {
-      return ((PodTitledSection)element).getTitleText();
+      return ((PodTitledSection)element).getTitleTextWithFormatting();
     }
     LOG.warn("Unhandled long name for " + element);
     return "Unhandled long name for " + element;

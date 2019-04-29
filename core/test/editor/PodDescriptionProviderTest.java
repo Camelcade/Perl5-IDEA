@@ -27,6 +27,11 @@ public class PodDescriptionProviderTest extends PodLightTestCase {
 
   public void testHeader1() {doTest("=head1 Some <caret>C<header>");}
 
+  public void testHeaderWithIndex() {
+    doTest("=head1 Header <caret>C<with index>\n" +
+           "X<someindex>");
+  }
+
   public void testHeader2() {doTest("=head2 Some <caret>C<header>");}
 
   public void testHeader3() {doTest("=head3 Some <caret>C<header>");}

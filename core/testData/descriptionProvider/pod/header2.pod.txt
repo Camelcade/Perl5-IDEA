@@ -1,8 +1,8 @@
-UsageViewShortNameLocation: Some header
-UsageViewLongNameLocation: Some header
+UsageViewShortNameLocation: Some C<header>
+UsageViewLongNameLocation: Some C<header>
 UsageViewTypeLocation: 2nd Heading
-UsageViewNodeTextLocation: Some header
-NonCodeSearchDescriptionLocation: Some header
-DeleteNameDescriptionLocation: Some header
+UsageViewNodeTextLocation: Some C<header>
+NonCodeSearchDescriptionLocation: Some C<header>
+DeleteNameDescriptionLocation: Some C<header>
 DeleteTypeDescriptionLocation: 2nd Heading
 DeleteTypeDescriptionLocation: 2nd Headings

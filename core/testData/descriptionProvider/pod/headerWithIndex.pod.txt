@@ -1,0 +1,8 @@
+UsageViewShortNameLocation: Header C<with index>
+UsageViewLongNameLocation: Header C<with index>
+UsageViewTypeLocation: 1st Heading
+UsageViewNodeTextLocation: Header C<with index>
+NonCodeSearchDescriptionLocation: Header C<with index>
+DeleteNameDescriptionLocation: Header C<with index>
+DeleteTypeDescriptionLocation: 1st Heading
+DeleteTypeDescriptionLocation: 1st Headings

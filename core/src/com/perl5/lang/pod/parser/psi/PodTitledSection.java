@@ -20,6 +20,8 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.pom.PomTarget;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
+import com.perl5.lang.pod.psi.PsiPodFormatIndex;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -32,6 +34,34 @@ public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructur
    */
   @Nullable
   String getTitleText();
+
+  /**
+   * @return a text of the section title with all formatting codes but indexes, or null if there is no title section
+   */
+  @Nullable
+  default String getTitleTextWithFormatting() {
+    PsiElement titleElement = getTitleElement();
+    if (titleElement == null) {
+      return null;
+    }
+    StringBuilder sb = new StringBuilder();
+    titleElement.accept(new PodRecursiveVisitor() {
+      @Override
+      public void visitElement(@NotNull PsiElement element) {
+        if (element.getChildren().length > 0) {
+          super.visitElement(element);
+        }
+        else {
+          sb.append(element.getNode().getChars());
+        }
+      }
+
+      @Override
+      public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
+      }
+    });
+    return sb.toString().trim();
+  }
 
   /**
    * @return an element containing title of this section, probably with formatting codes
