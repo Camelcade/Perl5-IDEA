@@ -52,7 +52,7 @@ public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodF
 
   @Nullable
   @Override
-  public PsiElement getTitleBlock() {
+  public PsiElement getTitleElement() {
     return getContentBlock();
   }
 
@@ -75,7 +75,7 @@ public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodF
   @Nullable
   @Override
   public PsiElement getNameIdentifier() {
-    return getTitleBlock();
+    return getTitleElement();
   }
 
   @Override

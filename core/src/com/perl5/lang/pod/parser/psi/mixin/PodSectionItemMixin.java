@@ -34,7 +34,7 @@ public class PodSectionItemMixin extends PodTitledSectionMixin implements PodSec
 
   @Override
   public boolean isBulleted() {
-    PsiElement titleBlock = getTitleBlock();
+    PsiElement titleBlock = getTitleElement();
 
     if (titleBlock != null) {
       PsiElement firstTitleToken = titleBlock.getFirstChild();

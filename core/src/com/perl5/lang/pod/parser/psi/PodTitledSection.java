@@ -33,6 +33,9 @@ public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructur
   @Nullable
   String getTitleText();
 
+  /**
+   * @return an element containing title of this section, probably with formatting codes
+   */
   @Nullable
-  PsiElement getTitleBlock();
+  PsiElement getTitleElement();
 }

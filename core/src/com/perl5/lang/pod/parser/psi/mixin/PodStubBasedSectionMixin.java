@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
 
   @Nullable
   @Override
-  public PsiElement getTitleBlock() {
+  public PsiElement getTitleElement() {
     return findChildByClass(PodSectionTitle.class);
   }
 
@@ -64,7 +64,7 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
   }
 
   public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getTitleBlock();
+    PsiElement content = getTitleElement();
     PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
   }
 
@@ -80,7 +80,7 @@ public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<P
   }
 
   public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getTitleBlock();
+    PsiElement content = getTitleElement();
     PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
   }
 

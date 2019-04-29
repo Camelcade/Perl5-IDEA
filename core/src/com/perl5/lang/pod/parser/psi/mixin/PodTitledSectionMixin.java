@@ -39,7 +39,7 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
 
   @Nullable
   @Override
-  public PsiElement getTitleBlock() {
+  public PsiElement getTitleElement() {
     return findChildByClass(PodSectionTitle.class);
   }
 
@@ -50,7 +50,7 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   }
 
   public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getTitleBlock();
+    PsiElement content = getTitleElement();
     PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
   }
 
@@ -62,13 +62,13 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   }
 
   public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getTitleBlock();
+    PsiElement content = getTitleElement();
     PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
   }
 
   @Override
   public boolean isIndexed() {
-    PsiElement titleBlock = getTitleBlock();
+    PsiElement titleBlock = getTitleElement();
     if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed()) {
       return true;
     }
@@ -79,7 +79,7 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   @Nullable
   @Override
   public String getTitleText() {
-    PsiElement titleElement = getTitleBlock();
+    PsiElement titleElement = getTitleElement();
 
     if (titleElement == null) {
       return null;
@@ -112,7 +112,7 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   @Nullable
   @Override
   public PsiElement getNameIdentifier() {
-    return getTitleBlock();
+    return getTitleElement();
   }
 
   @Override
