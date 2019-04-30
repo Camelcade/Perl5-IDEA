@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package findUsages.perl;
+package findUsages;
 
 import base.PerlLightTestCase;
 
-public class PerlUsagesGroupingTest extends PerlLightTestCase {
+public class PerlFindUsagesGroupingTest extends PerlLightTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/findusages/grouping/perl/";
+    return "testData/findusages/perl/grouping";
   }
 
   public void testBlessExpr() {doTest();}
