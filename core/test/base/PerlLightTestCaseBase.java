@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -717,7 +717,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   private String checkAndSerializeFindUsages(@NotNull PsiElement targetElement) {
     StringBuilder sb = new StringBuilder();
     sb.append("Target: ").append(serializePsiElement(targetElement)).append("\n");
-    Collection<UsageInfo> usages = myFixture.findUsages(targetElement);
+    List<UsageInfo> usages = new ArrayList<>(myFixture.findUsages(targetElement));
+    usages.sort(Comparator.comparing(it -> {
+      PsiElement element = it.getElement();
+      return element == null ? null : it.getElement().getContainingFile().getName();
+    }));
     sb.append("Total usages: ").append(usages.size()).append("\n");
     for (UsageInfo usage : usages) {
       sb.append("\t").append(serializePsiElement(usage.getElement()));
