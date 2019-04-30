@@ -58,13 +58,13 @@
     <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
+    <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
 
     <!-- not tested -->
     <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
     <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
 
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
-    <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
     <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>

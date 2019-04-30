@@ -1,0 +1,8 @@
+Target: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 25 in index.pod
+Total usages: 2
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 40 in index.pod, via: PodLinkToSectionReference at (43,50); text in range: 'indexed' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 25 in index.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 52 in index.pod, via: PodLinkToSectionReference at (62,69); text in range: 'indexed' => 1 results:
+	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 25 in index.pod
+

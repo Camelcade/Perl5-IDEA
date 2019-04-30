@@ -1,0 +1,8 @@
+Target: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7 in item.pod
+Total usages: 2
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 50 in item.pod, via: PodLinkToSectionReference at (53,67); text in range: 'Test with code' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7 in item.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 69 in item.pod, via: PodLinkToSectionReference at (79,93); text in range: 'Test with code' => 1 results:
+	PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7 in item.pod
+

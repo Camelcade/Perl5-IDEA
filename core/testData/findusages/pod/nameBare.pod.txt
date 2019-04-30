@@ -1,0 +1,38 @@
+Target: POD file at 0 in perlpod.pod
+Total usages: 12
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 42 in Test.pm, via: PodLinkToFileReference at (44,51); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 66 in Test.pm, via: PodLinkToFileReference at (68,75); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 96 in Test.pm, via: PodLinkToFileReference at (98,105); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 124 in Test.pm, via: PodLinkToFileReference at (133,140); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 155 in Test.pm, via: PodLinkToFileReference at (164,171); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 192 in Test.pm, via: PodLinkToFileReference at (201,208); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 21 in nameBare.pod, via: PodLinkToFileReference at (23,30); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 33 in nameBare.pod, via: PodLinkToFileReference at (42,49); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 74 in nameBare.pod, via: PodLinkToFileReference at (76,83); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 92 in nameBare.pod, via: PodLinkToFileReference at (101,108); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 138 in nameBare.pod, via: PodLinkToFileReference at (140,147); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 180 in nameBare.pod, via: PodLinkToFileReference at (188,195); text in range: 'perlpod' => 1 results:
+	POD file at 0 in perlpod.pod
+

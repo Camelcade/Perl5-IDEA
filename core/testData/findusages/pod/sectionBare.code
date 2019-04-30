@@ -1,0 +1,11 @@
+=head1 First header
+
+L<per<caret>lpod>
+
+=head2 Second header
+
+L</First header>
+
+=head2 Second header
+
+L<Title|/First h<caret>eader>

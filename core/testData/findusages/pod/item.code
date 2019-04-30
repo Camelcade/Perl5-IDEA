@@ -1,0 +1,9 @@
+=over
+
+=item Test with C<code>
+X<indexed>
+
+=back
+
+L</Test wi<caret>th code>
+L<Titled|/Test with code>

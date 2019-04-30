@@ -1,0 +1,8 @@
+Target: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in head1.pod
+Total usages: 2
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 37 in head1.pod, via: PodLinkToSectionReference at (40,54); text in range: 'Test with code' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in head1.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 56 in head1.pod, via: PodLinkToSectionReference at (66,80); text in range: 'Test with code' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in head1.pod
+
