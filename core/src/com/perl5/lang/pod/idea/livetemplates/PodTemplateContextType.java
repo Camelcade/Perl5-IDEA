@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 04.04.2016.
- */
 public abstract class PodTemplateContextType extends TemplateContextType implements PodElementTypes {
 
   public PodTemplateContextType(@NotNull @NonNls String id, @NotNull String presentableName) {
@@ -52,21 +49,21 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
   public boolean isInContext(@NotNull PsiFile file, int offset) {
     PsiFile podFile = file.getViewProvider().getPsi(PodLanguage.INSTANCE);
 
-    if (podFile != null) {
-      PsiElement element = podFile.findElementAt(offset);
-
-      if (element == null) {
-        element = podFile.findElementAt(offset - 1);
-      }
-
-      if (element == null) {
-        return false;
-      }
-
-      return isInContext(element);
+    if (podFile == null) {
+      return false;
     }
 
-    return false;
+    PsiElement element = podFile.findElementAt(offset);
+
+    if (element == null) {
+      element = podFile.findElementAt(offset - 1);
+    }
+
+    if (element == null) {
+      return false;
+    }
+
+    return isInContext(element);
   }
 
   protected abstract boolean isInContext(PsiElement element);
