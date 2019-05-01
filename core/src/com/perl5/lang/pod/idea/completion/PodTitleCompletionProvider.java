@@ -24,6 +24,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.psi.PerlSubElement;
@@ -33,7 +34,6 @@ import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.references.PodSubReference;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
-import com.perl5.lang.pod.psi.PsiHead1Section;
 import com.perl5.lang.pod.psi.PsiSectionTitle;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,12 +67,16 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
                                 @NotNull CompletionResultSet result) {
     PsiElement element = parameters.getPosition();
 
+    PsiElement elementParent = element.getParent();
     if (PsiUtilCore.getElementType(element) != POD_IDENTIFIER ||
         element.getPrevSibling() != null ||
-        !(element.getParent() instanceof PsiSectionTitle)) {
+        !(elementParent instanceof PsiSectionTitle)) {
       return;
     }
-    if (element.getParent().getParent() instanceof PsiHead1Section) {
+
+    IElementType grandparentElementType = PsiUtilCore.getElementType(elementParent.getParent());
+
+    if (grandparentElementType == HEAD_1_SECTION) {
       DEFAULT_POD_SECTIONS.forEach(it -> result.addElement(LookupElementBuilder.create(it)));
     }
 
