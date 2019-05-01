@@ -8,7 +8,7 @@ Caret offset: 20
 
 =over 
 
-=item <selection>*<caret></selection> 
+=item <selection>title<caret></selection> 
 
 
 

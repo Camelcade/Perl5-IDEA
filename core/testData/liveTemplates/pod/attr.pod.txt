@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=attr <selection>title<caret></selection>
+=attr <selection>name<caret></selection>
 
 
 
@@ -25,7 +25,7 @@ Caret offset: 20
 
 =over 
 
-=attr <selection>title<caret></selection>
+=attr <selection>name<caret></selection>
 
 
 

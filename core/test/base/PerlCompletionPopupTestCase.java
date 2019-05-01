@@ -18,6 +18,8 @@ package base;
 
 import com.intellij.codeInsight.lookup.LookupEx;
 import com.intellij.codeInsight.lookup.LookupManager;
+import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,12 +33,12 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
   }
 
   @Override
-  protected boolean runInDispatchThread() {
+  protected final boolean runInDispatchThread() {
     return false;
   }
 
   @Override
-  protected void invokeTestRunnable(@NotNull Runnable runnable) {
+  protected final void invokeTestRunnable(@NotNull Runnable runnable) {
     myTester.runWithAutoPopupEnabled(runnable);
   }
 
@@ -70,5 +72,13 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
     else {
       assertNull(activeLookup);
     }
+  }
+
+  protected void doLiveTemplateVariablePopupTest(@NotNull String text) {
+    initWithTextSmartWithoutErrors(text);
+    ApplicationManager.getApplication().invokeAndWait(() -> myFixture.testAction(new ExpandLiveTemplateByTabAction()));
+    myTester.joinAutopopup();
+    myTester.joinCompletion();
+    assertNotNull(LookupManager.getActiveLookup(getEditor()));
   }
 }

@@ -2,9 +2,9 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=end
+=end <selection>html<caret></selection>
 
-<caret>
+
 
 
 =head1 
@@ -25,9 +25,9 @@ Caret offset: 20
 
 =over 
 
-=end
+=end <selection>html<caret></selection>
 
-<caret>
+
 
 
 =back

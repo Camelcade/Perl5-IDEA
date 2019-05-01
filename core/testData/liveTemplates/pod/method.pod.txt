@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=method <selection>title<caret></selection>
+=method <selection>name<caret></selection>
 
 
 
@@ -25,7 +25,7 @@ Caret offset: 20
 
 =over 
 
-=method <selection>title<caret></selection>
+=method <selection>name<caret></selection>
 
 
 

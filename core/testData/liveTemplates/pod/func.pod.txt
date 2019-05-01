@@ -2,7 +2,7 @@
 Caret offset: 1
 --------------------------------------------------------------------------------
 
-=func <selection>title<caret></selection>
+=func <selection>name<caret></selection>
 
 
 
@@ -25,7 +25,7 @@ Caret offset: 20
 
 =over 
 
-=func <selection>title<caret></selection>
+=func <selection>name<caret></selection>
 
 
 
