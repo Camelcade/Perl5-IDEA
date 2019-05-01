@@ -17,6 +17,7 @@
 package com.perl5.lang.pod.parser.psi;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,9 +30,8 @@ public class PodSyntaxElements {
   public static final String FORMAT_TEX = "tex";
   public static final String FORMAT_TEXT = "text";
   public static final String FORMAT_HTML = "html";
-  public static final List<String> KNOWN_FORMATTERS = Arrays.asList(
-    FORMAT_HTML, FORMAT_MAN, FORMAT_LATEX, FORMAT_ROFF, FORMAT_TEX, FORMAT_TEXT
-  );
+  public static final List<String> KNOWN_FORMATTERS = Collections.unmodifiableList(
+    Arrays.asList(FORMAT_HTML, FORMAT_MAN, FORMAT_LATEX, FORMAT_ROFF, FORMAT_TEX, FORMAT_TEXT));
 
   private PodSyntaxElements() {
   }
