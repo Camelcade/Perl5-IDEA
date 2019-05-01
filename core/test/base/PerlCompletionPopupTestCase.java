@@ -44,27 +44,27 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
 
   protected void doTest(@NotNull String initial, @NotNull String toType) {
     initWithTextSmart(initial);
-    doCheckAutopopupResult(toType, true);
+    doCompletionOnTypingTest(toType, true);
   }
 
   protected void doTest(@NotNull String toType) {
     initWithFileSmart();
-    doCheckAutopopupResult(toType, true);
+    doCompletionOnTypingTest(toType, true);
   }
 
   protected void doTestNegative(@NotNull String initial, @NotNull String toType) {
     initWithTextSmart(initial);
-    doCheckAutopopupResult(toType, false);
+    doCompletionOnTypingTest(toType, false);
   }
 
   protected void doTestNegative(@NotNull String toType) {
     initWithFileSmart();
-    doCheckAutopopupResult(toType, false);
+    doCompletionOnTypingTest(toType, false);
   }
 
-  protected void doCheckAutopopupResult(@NotNull String type, boolean result) {
+  protected void doCompletionOnTypingTest(@NotNull String textToType, boolean result) {
     addVirtualFileFilter();
-    myTester.typeWithPauses(type);
+    myTester.typeWithPauses(textToType);
     LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
     if (result) {
       assertNotNull(activeLookup);
@@ -74,6 +74,9 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
     }
   }
 
+  /**
+   * fixme Probably this should be smarter and iterate through variables. But we need only one for now
+   */
   protected void doLiveTemplateVariablePopupTest(@NotNull String text) {
     initWithTextSmartWithoutErrors(text);
     ApplicationManager.getApplication().invokeAndWait(() -> myFixture.testAction(new ExpandLiveTemplateByTabAction()));
