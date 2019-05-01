@@ -1842,11 +1842,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       StringUtil.join(ContainerUtil.map(names, it -> Objects.equals(it, selectedItem) ? "> " + it : it), "\n"));
   }
 
-  @NotNull
-  protected Language getDocumentationElementLanguage() {
-    return PerlLanguage.INSTANCE;
-  }
-
   protected void doTestQuickDoc() {
     initWithFileSmartWithoutErrors();
     doTestQuickDocWithoutInit();
