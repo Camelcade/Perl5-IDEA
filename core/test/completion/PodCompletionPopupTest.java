@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package completion;
 import base.PerlCompletionPopupTestCase;
 import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
 import com.perl5.lang.pod.filetypes.PodFileType;
+import org.jetbrains.annotations.NotNull;
 
 public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   protected CompletionAutoPopupTester myTester;
@@ -39,6 +40,20 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
     withPerlPod();
   }
 
+  public void testSpaceHeader1() {doTest("=head1<caret>", " ");}
+
+  public void testSpaceHeader2() {doTest("=head2<caret>", " ");}
+
+  public void testSpaceFunc() {doTest("=func<caret>", " ");}
+
+  public void testSpaceMethod() {doTest("=method<caret>", " ");}
+
+  public void testSpaceAttr() {doTest("=attr<caret>", " ");}
+
+  public void testSpaceHeader3() {doTest("=head3<caret>", " ");}
+
+  public void testSpaceHeader4() {doTest("=head4<caret>", " ");}
+
   public void testLinkOpenAngle() {doTest("L<caret>", "<");}
 
   public void testLinkBareSection() {doTest("=head1 section name\n\n" + "L<<caret>>", "/");}
@@ -48,4 +63,15 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   public void testLinkTitledSection() {doTest("=head1 section name\n\n" + "L<Test name|<caret>>", "/");}
 
   public void testLinkTitledNamedSection() {doTest("L<Test name|perldoc<caret>>", "/");}
+
+  @Override
+  protected boolean restrictFilesParsing() {
+    return false;
+  }
+
+  @Override
+  protected void doTest(@NotNull String initial, @NotNull String toType) {
+    myFixture.copyFileToProject("test.pm");
+    super.doTest(initial, toType);
+  }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -86,10 +87,25 @@ public class PodFileUtil {
     }
 
     String packageName = getPackageName(baseFile);
+    Project project = baseFile.getProject();
     if (StringUtil.isNotEmpty(packageName)) {
-      return PerlPackageUtil.getPackagePsiFileByPackageName(baseFile.getProject(), packageName);
+      PsiFile packageFileByName = PerlPackageUtil.getPackagePsiFileByPackageName(project, packageName);
+      if (packageFileByName != null) {
+        return packageFileByName;
+      }
     }
-    return null;
+
+    VirtualFile baseVirtualFile = PsiUtilCore.getVirtualFile(baseFile);
+    if (baseVirtualFile == null) {
+      return null;
+    }
+    VirtualFile containingDirectory = baseVirtualFile.getParent();
+    if (containingDirectory == null) {
+      return null;
+    }
+    String neighborPackageFileName = baseVirtualFile.getNameWithoutExtension() + "." + PerlFileTypePackage.EXTENSION;
+    VirtualFile neighborPackageFile = containingDirectory.findChild(neighborPackageFileName);
+    return neighborPackageFile == null ? null : PsiManager.getInstance(project).findFile(neighborPackageFile);
   }
 
   @Nullable

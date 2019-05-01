@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.psi.PsiLinkText;
 import org.jetbrains.annotations.NotNull;
@@ -156,7 +157,8 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
     PsiElement elementParent = element.getParent();
     IElementType parentType = PsiUtilCore.getElementType(elementParent);
 
-    return typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
+    return typedChar == ' ' && PodTokenSets.POD_TAGS_TOKENSET.contains(elementType) ||
+           typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
            typedChar == '|' && parentType == LINK_NAME ||
            typedChar == '/' && (parentType == LINK_NAME ||
                                 elementType == POD_ANGLE_LEFT && parentType == POD_FORMAT_LINK ||
