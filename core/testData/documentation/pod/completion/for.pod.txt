@@ -1,0 +1,63 @@
+<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FCommand+Paragraph">Command Paragraph</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>=begin <i>formatname</i></code>
+     </dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>=end <i>formatname</i></code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>=for <i>formatname</i> <i>text...</i></code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">For, begin, and end will let you have regions of text/code/data that
+are not generally interpreted as normal Pod text, but are passed
+directly to particular formatters, or are otherwise special.  A
+formatter that can use that format will use the region, otherwise it
+will be completely ignored.</p>
+<p style="padding-bottom: 10px;">A command &quot;=begin <i>formatname</i>&quot;, some paragraphs, and a
+command &quot;=end <i>formatname</i>&quot;, mean that the text/data in between
+is meant for formatters that understand the special format
+called <i>formatname</i>.  For example,</p>
+<div style="padding-bottom: 10px;"><pre><code>  =begin html
+
+  &lt;hr&gt; &lt;img src=&quot;thang.png&quot;&gt;
+  &lt;p&gt; This is a raw HTML paragraph &lt;/p&gt;
+
+  =end html</code></pre></div>
+<p style="padding-bottom: 10px;">The command &quot;=for <i>formatname</i> <i>text...</i>&quot;
+specifies that the remainder of just this paragraph (starting
+right after <i>formatname</i>) is in that special format.  </p>
+<div style="padding-bottom: 10px;"><pre><code>  =for html &lt;hr&gt; &lt;img src=&quot;thang.png&quot;&gt;
+  &lt;p&gt; This is a raw HTML paragraph &lt;/p&gt;</code></pre></div>
+<p style="padding-bottom: 10px;">This means the same thing as the above &quot;=begin html&quot; ... &quot;=end html&quot;
+region.</p>
+<p style="padding-bottom: 10px;">That is, with &quot;=for&quot;, you can have only one paragraph's worth
+of text (i.e., the text in &quot;=foo targetname text...&quot;), but with
+&quot;=begin targetname&quot; ... &quot;=end targetname&quot;, you can have any amount
+of stuff in between.  (Note that there still must be a blank line
+after the &quot;=begin&quot; command and a blank line before the &quot;=end&quot;
+command.)</p>
+<p style="padding-bottom: 10px;">Here are some examples of how to use these:</p>
+<div style="padding-bottom: 10px;"><pre><code>  =begin html
+
+  &lt;br&gt;Figure 1.&lt;br&gt;&lt;IMG SRC=&quot;figure1.png&quot;&gt;&lt;br&gt;
+
+  =end html
+
+  =begin text
+
+    ---------------
+    |  foo        |
+    |        bar  |
+    ---------------
+
+  ^^^^ Figure 1. ^^^^
+
+  =end text</code></pre></div>
+<p style="padding-bottom: 10px;">Some format names that formatters currently are known to accept
+include &quot;roff&quot;, &quot;man&quot;, &quot;latex&quot;, &quot;tex&quot;, &quot;text&quot;, and &quot;html&quot;.  (Some
+formatters will treat some of these as synonyms.)</p>
+<p style="padding-bottom: 10px;">A format name of &quot;comment&quot; is common for just making notes (presumably
+to yourself) that won't appear in any formatted version of the Pod
+document:</p>
+<div style="padding-bottom: 10px;"><pre><code>  =for comment
+  Make sure that all the available options are documented!</code></pre></div>
+<p style="padding-bottom: 10px;">Some <i>formatnames</i> will require a leading colon (as in
+<code>&quot;=for :formatname&quot;</code>, or
+<code>&quot;=begin :formatname&quot; ... &quot;=end :formatname&quot;</code>),
+to signal that the text is not raw data, but instead <i>is</i> Pod text
+(i.e., possibly containing formatting codes) that's just not for
+normal formatting (e.g., may not be a normal-use paragraph, but might
+be for formatting as a footnote).</p></dd></dl>

@@ -1872,10 +1872,11 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     LookupElement targetElement = getMostRelevantLookupElement(elementPattern, elements);
     assertNotNull("Unable to find lookup " + elementPattern, targetElement);
     Object elementObject = targetElement.getObject();
-    assertInstanceOf(elementObject, PsiElement.class);
-    PsiElement elementAtCaret = getFile().findElementAt(getEditor().getCaretModel().getOffset());
-    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement((PsiElement)elementObject);
-    assertNotNull("Unable to find documentation provider for " + elementObject, documentationProvider);
+    int offset = getEditor().getCaretModel().getOffset();
+    PsiElement elementAtCaret = getFile().findElementAt(offset);
+    PsiElement providerSource = ObjectUtils.notNull(elementAtCaret, getFile());
+    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(providerSource);
+    assertNotNull("Unable to find documentation provider for " + providerSource, documentationProvider);
     PsiElement documentationElement =
       documentationProvider.getDocumentationElementForLookupItem(PsiManager.getInstance(getProject()), elementObject, elementAtCaret);
     assertNotNull("No documentation element found for " + elementObject, documentationElement);

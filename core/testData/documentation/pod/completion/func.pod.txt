@@ -1,0 +1,4 @@
+<div class='definition'><pre>=func $TEXT$
+
+$END$
+</pre></div><div class='content'>=head2</div>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 
 package com.perl5.lang.pod.idea.documentation;
 
+import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.documentation.PerlDocumentationProviderBase;
 import com.perl5.lang.pod.PodLanguage;
@@ -31,10 +33,18 @@ import com.perl5.lang.pod.parser.psi.PodSectionVerbatimParagraph;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 03.04.2016.
- */
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
+
+  @Override
+  public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+    if (object instanceof LiveTemplateLookupElementImpl) {
+      String lookupString = ((LiveTemplateLookupElementImpl)object).getLookupString();
+      if (lookupString.startsWith("=")) {
+        return PerlDocUtil.resolveDoc("perlpod", lookupString, element, true);
+      }
+    }
+    return super.getDocumentationElementForLookupItem(psiManager, object, element);
+  }
 
   @Nullable
   @Override
