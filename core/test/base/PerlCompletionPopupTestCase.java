@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
   }
 
   protected void doCheckAutopopupResult(@NotNull String type, boolean result) {
+    addVirtualFileFilter();
     myTester.typeWithPauses(type);
     LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
     if (result) {
