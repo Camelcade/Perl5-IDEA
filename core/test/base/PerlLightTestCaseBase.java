@@ -305,7 +305,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
-  protected void showLiveTemplatesInTests() {
+  protected void showLiveTemplatesInCompletion() {
     LiveTemplateCompletionContributor.setShowTemplatesInTests(true, getTestRootDisposable());
   }
 

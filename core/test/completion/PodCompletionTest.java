@@ -30,7 +30,7 @@ public class PodCompletionTest extends PodLightTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     withPerlPod();
-    showLiveTemplatesInTests();
+    showLiveTemplatesInCompletion();
   }
 
   @Override
