@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,20 @@ import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
 
 
 public final class PodTokenSets {
-  public static final TokenSet POD_TAGS_TOKENSET = TokenSet.create(
-    POD_POD, POD_HEAD1, POD_HEAD2, POD_HEAD3, POD_HEAD4, POD_OVER, POD_ITEM, POD_BACK, POD_BEGIN, POD_END, POD_FOR, POD_ENCODING, POD_CUT,
-    POD_UNKNOWN
+  public static final TokenSet POD_NAMED_SECTION_OPENERS_TOKENSET = TokenSet.create(
+    POD_HEAD1, POD_HEAD2, POD_HEAD3, POD_HEAD4, POD_UNKNOWN
+  );
+
+  public static final TokenSet POD_PARAMETRIZED_SECTION_OPENERS_TOKENSET = TokenSet.create(
+    POD_BEGIN, POD_END, POD_FOR, POD_ENCODING, POD_OVER
+  );
+
+  public static final TokenSet POD_TAGS_TOKENSET = TokenSet.orSet(
+    POD_NAMED_SECTION_OPENERS_TOKENSET,
+    POD_PARAMETRIZED_SECTION_OPENERS_TOKENSET,
+    TokenSet.create(
+      POD_POD, POD_ITEM, POD_BACK, POD_CUT
+    )
   );
 
   public static final TokenSet POD_FORMATTERS_TOKENSET = TokenSet.create(
