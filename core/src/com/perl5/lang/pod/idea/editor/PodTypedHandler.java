@@ -16,19 +16,24 @@
 
 package com.perl5.lang.pod.idea.editor;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
 import com.perl5.lang.perl.psi.utils.PerlEditorUtils;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -36,6 +41,7 @@ import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.psi.PsiLinkText;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.pod.lexer.PodTokenSets.FORMAT_ACCEPTING_COMMANDS;
 
@@ -154,13 +160,17 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
   }
 
   @Override
-  protected boolean shouldShowPopup(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiElement element) {
+  protected boolean shouldShowPopup(char typedChar, @NotNull Project project, @NotNull Editor editor, @Nullable PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
-    CharSequence elementChars = element.getNode().getChars();
-    PsiElement elementParent = element.getParent();
+    ASTNode elementNode = ObjectUtils.doIfNotNull(element, PsiElement::getNode);
+    CharSequence elementChars = ObjectUtils.doIfNotNull(elementNode, ASTNode::getChars);
+    PsiElement elementParent = ObjectUtils.doIfNotNull(element, PsiElement::getParent);
     IElementType parentType = PsiUtilCore.getElementType(elementParent);
 
-    return typedChar == ':' && PerlEditorUtils.isPreviousToken(editor, element.getNode().getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
+    return typedChar == '=' && isCommandPosition(editor, elementType, elementChars) ||
+           typedChar == ':' &&
+           elementNode != null &&
+           PerlEditorUtils.isPreviousToken(editor, elementNode.getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
            typedChar == ' ' && PodTokenSets.POD_TAGS_TOKENSET.contains(elementType) ||
            typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
            typedChar == '|' && parentType == LINK_NAME ||
@@ -168,5 +178,35 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
                                 elementType == POD_ANGLE_LEFT && parentType == POD_FORMAT_LINK ||
                                 elementType == POD_PIPE && element.getPrevSibling() instanceof PsiLinkText)
       ;
+  }
+
+  /**
+   * @param elementType  type of element before caret
+   * @param elementChars chars of element before caret
+   * @return true iff editor is at command position: beginning of the line after 2+ new lines or at beginning of the file
+   */
+  private static boolean isCommandPosition(@NotNull Editor editor,
+                                           @Nullable IElementType elementType,
+                                           @Nullable CharSequence elementChars) {
+    int offset = editor.getCaretModel().getOffset();
+    if (offset == 0 || elementChars == null || elementType == null) {
+      return true;
+    }
+    if (elementType != TokenType.WHITE_SPACE || elementChars.length() != 1 || elementChars.charAt(0) != '\n') {
+      return false;
+    }
+    HighlighterIterator iterator = ((EditorEx)editor).getHighlighter().createIterator(offset - 1);
+    while (!iterator.atEnd()) {
+      IElementType tokenType = iterator.getTokenType();
+      if (tokenType == POD_NEWLINE) {
+        return true;
+      }
+      if (tokenType != TokenType.WHITE_SPACE) {
+        return false;
+      }
+      iterator.retreat();
+    }
+
+    return true;
   }
 }

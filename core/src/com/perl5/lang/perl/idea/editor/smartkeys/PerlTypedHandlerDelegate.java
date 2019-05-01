@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlTypedHandlerDelegate extends TypedHandlerDelegate {
   @NotNull
@@ -33,7 +34,7 @@ public abstract class PerlTypedHandlerDelegate extends TypedHandlerDelegate {
       currentOffset--;
     }
     PsiElement element = file.findElementAt(currentOffset);
-    if (element != null && shouldShowPopup(charTyped, project, editor, element)) {
+    if (shouldShowPopup(charTyped, project, editor, element)) {
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
       return Result.STOP;
     }
@@ -41,8 +42,12 @@ public abstract class PerlTypedHandlerDelegate extends TypedHandlerDelegate {
     return super.checkAutoPopup(charTyped, project, editor, file);
   }
 
+  /**
+   * @param element if null, we are in empty file
+   * @return true iff we should show completion popup for the provided contes
+   */
   protected abstract boolean shouldShowPopup(char typedChar,
                                              @NotNull Project project,
                                              @NotNull Editor editor,
-                                             @NotNull PsiElement element);
+                                             @Nullable PsiElement element);
 }

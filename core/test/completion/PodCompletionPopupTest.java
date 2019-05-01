@@ -78,6 +78,18 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   public void testLinkTitledNamedSection() {doTest("L<Test name|perldoc<caret>>", "/");}
 
+  public void testCommandFileStart() {
+    doTest("", "=");
+  }
+
+  public void testCommandFileSecondLine() {doTest("\n<caret>", "=");}
+
+  public void testCommandFileThirdLine() {doTest("\n\n<caret>", "=");}
+
+  public void testCommandAfterCommand() {doTest("=head1 test\n\n<caret>", "=");}
+
+  public void testCommandAfterCommandWrong() {doTestNegative("=head1 test\n<caret>", "=");}
+
   @Override
   protected boolean restrictFilesParsing() {
     return false;
@@ -87,5 +99,11 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   protected void doTest(@NotNull String initial, @NotNull String toType) {
     myFixture.copyFileToProject("test.pm");
     super.doTest(initial, toType);
+  }
+
+  @Override
+  protected void doTestNegative(@NotNull String initial, @NotNull String toType) {
+    myFixture.copyFileToProject("test.pm");
+    super.doTestNegative(initial, toType);
   }
 }

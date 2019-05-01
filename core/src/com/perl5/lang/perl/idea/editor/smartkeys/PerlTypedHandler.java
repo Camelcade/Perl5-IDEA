@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
@@ -227,14 +228,15 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
   protected boolean shouldShowPopup(char typedChar,
                                     @NotNull Project project,
                                     @NotNull Editor editor,
-                                    @NotNull PsiElement element) {
+                                    @Nullable PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
+    PsiElement elementParent = ObjectUtils.doIfNotNull(element, PsiElement::getParent);
     return typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
            typedChar == '>' && elementType == OPERATOR_MINUS ||
            typedChar == ':' && elementType == COLON ||
            typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) ||
-                                element.getParent() instanceof PerlStringBareMixin &&
-                                element.getParent().getParent() instanceof PsiPerlStringList) ||
+                                elementParent instanceof PerlStringBareMixin &&
+                                elementParent.getParent() instanceof PsiPerlStringList) ||
            typedChar == '{' && SIGILS.contains(elementType) ||
            StringUtil.containsChar("$@%#", typedChar);
   }

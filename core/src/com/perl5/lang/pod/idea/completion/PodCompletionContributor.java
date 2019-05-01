@@ -21,6 +21,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -70,6 +71,9 @@ public class PodCompletionContributor extends CompletionContributor implements P
         result.addElement(LookupElementBuilder.create(it).withLookupStrings(Collections.singletonList(it.toLowerCase())));
       });
       return;
+    }
+    else if (positionType == POD_UNKNOWN && ApplicationManager.getApplication().isUnitTestMode()) {
+      result.addElement(LookupElementBuilder.create("=test_command"));
     }
     super.fillCompletionVariants(parameters, result);
   }
