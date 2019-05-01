@@ -30,12 +30,17 @@ public class PodCompletionTest extends PodLightTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     withPerlPod();
+    showLiveTemplatesInTests();
   }
 
   @Override
   protected boolean restrictFilesParsing() {
     return false;
   }
+
+  public void testCommands() {doTest();}
+
+  public void testItem() {doTest();}
 
   public void testBareName() {doTest();}
 

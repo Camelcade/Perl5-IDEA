@@ -31,6 +31,8 @@ import com.intellij.codeInsight.hint.ShowParameterInfoHandler;
 import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
+import com.intellij.codeInsight.template.impl.LiveTemplateCompletionContributor;
+import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
@@ -303,6 +305,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     }
   }
 
+  protected void showLiveTemplatesInTests() {
+    LiveTemplateCompletionContributor.setShowTemplatesInTests(true, getTestRootDisposable());
+  }
 
   protected void enableLiveTemplatesTesting() {
     TemplateManagerImpl.setTemplateTesting(getProject(), getTestRootDisposable());
@@ -549,6 +554,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
         }
         else if (lookupObject instanceof String) {
           sb.append("\n    String");
+        }
+        else if (lookupElement instanceof LiveTemplateLookupElementImpl) {
+          sb.append("\n    Live template: ").append(((LiveTemplateLookupElementImpl)lookupElement).getTemplate());
         }
         else {
           sb.append("\n    ").append(lookupObject.getClass().getSimpleName());

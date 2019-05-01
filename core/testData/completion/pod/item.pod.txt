@@ -1,0 +1,32 @@
+Lookups: =attr; Text: =attr; Tail: null; Type: =head2; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=attr
+Lookups: =back; Text: =back; Tail: null; Type: =back; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=back
+Lookups: =begin; Text: =begin; Tail: null; Type: =begin ... =end; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=begin
+Lookups: =cut; Text: =cut; Tail: null; Type: =cut; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=cut
+Lookups: =encoding; Text: =encoding; Tail: null; Type: =encoding; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=encoding
+Lookups: =end; Text: =end; Tail: null; Type: =end; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=end
+Lookups: =for; Text: =for; Tail: null; Type: =for; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=for
+Lookups: =func; Text: =func; Tail: null; Type: =head2; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=func
+Lookups: =head1; Text: =head1; Tail: null; Type: =head1; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=head1
+Lookups: =head2; Text: =head2; Tail: null; Type: =head2; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=head2
+Lookups: =head3; Text: =head3; Tail: null; Type: =head3; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=head3
+Lookups: =head4; Text: =head4; Tail: null; Type: =head4; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=head4
+Lookups: =item; Text: =item; Tail: null; Type: =item; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=item
+Lookups: =method; Text: =method; Tail: null; Type: =head2; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=method
+Lookups: =over; Text: =over; Tail: null; Type: =over ... =back; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=over
+Lookups: =pod; Text: =pod; Tail: null; Type: =pod; Icon: null; Type Icon: null
+    Live template: Perl5: POD/=pod

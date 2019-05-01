@@ -17,13 +17,10 @@
 package completion;
 
 import base.PerlCompletionPopupTestCase;
-import com.intellij.testFramework.fixtures.CompletionAutoPopupTester;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import org.jetbrains.annotations.NotNull;
 
 public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
-  protected CompletionAutoPopupTester myTester;
-
   @Override
   protected String getTestDataPath() {
     return "testData/completionPopup/pod";
@@ -38,6 +35,7 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     withPerlPod();
+    showLiveTemplatesInTests();
   }
 
   public void testSpaceHeader1() {doTest("=head1<caret>", " ");}
