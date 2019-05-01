@@ -26,7 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.pod.parser.PodElementPatterns;
-import com.perl5.lang.pod.parser.psi.PodFormatterNames;
+import com.perl5.lang.pod.parser.psi.PodSyntaxElements;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.Charset;
@@ -56,7 +56,7 @@ public class PodCompletionContributor extends CompletionContributor implements P
     IElementType positionType = PsiUtilCore.getElementType(position);
     if (positionType == POD_FORMAT_NAME) {
       IElementType prevSiblingType = PsiUtilCore.getElementType(position.getPrevSibling());
-      PodFormatterNames.KNOWN_FORMATTERS.forEach(it -> {
+      PodSyntaxElements.KNOWN_FORMATTERS.forEach(it -> {
         result.addElement(LookupElementBuilder.create(it));
         if (prevSiblingType != POD_COLON) {
           result.addElement(LookupElementBuilder.create(":" + it));
