@@ -54,6 +54,8 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   public void testSpaceHeader4() {doTest("=head4<caret>", " ");}
 
+  public void testSpaceEncoding() {doTest("=encoding<caret>", " ");}
+
   public void testForSpace() {doTest("=for<caret>", " ");}
 
   public void testBeginSpace() {doTest("=begin<caret>", " ");}

@@ -17,6 +17,7 @@
 package completion;
 
 import base.PodLightTestCase;
+import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PodCompletionTest extends PodLightTestCase {
@@ -48,6 +49,8 @@ public class PodCompletionTest extends PodLightTestCase {
 
   public void testTitledSection() {doTest();}
 
+  public void testEncoding() {doTest("=encoding <caret>", "utf-8");}
+
   public void testForSpace() {doTest("=for <caret>");}
 
   public void testBeginSpace() {doTest("=begin <caret>");}
@@ -65,6 +68,17 @@ public class PodCompletionTest extends PodLightTestCase {
   }
 
   private void doTest(@NotNull String text) {
-    doTestCompletion(text);
+    doTestCompletionFromText(text);
+  }
+
+  private void doTest(@NotNull String text, @NotNull String... expected) {
+    doTestCompletionFromText(text, (element, presentation) -> {
+      for (String string : expected) {
+        if (StringUtil.equalsIgnoreCase(string, presentation.getItemText())) {
+          return true;
+        }
+      }
+      return false;
+    });
   }
 }

@@ -21,12 +21,16 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.pod.parser.PodElementPatterns;
 import com.perl5.lang.pod.parser.psi.PodFormatterNames;
 import org.jetbrains.annotations.NotNull;
+
+import java.nio.charset.Charset;
+import java.util.Collections;
 
 /**
  * Created by hurricup on 16.04.2016.
@@ -60,7 +64,13 @@ public class PodCompletionContributor extends CompletionContributor implements P
       });
       return;
     }
-
+    else if (positionType == POD_ENCODING_NAME) {
+      Charset.availableCharsets().keySet().forEach(it -> {
+        ProgressManager.checkCanceled();
+        result.addElement(LookupElementBuilder.create(it).withLookupStrings(Collections.singletonList(it.toLowerCase())));
+      });
+      return;
+    }
     super.fillCompletionVariants(parameters, result);
   }
 }

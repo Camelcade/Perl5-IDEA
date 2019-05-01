@@ -478,11 +478,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doTestCompletion("", null);
   }
 
-  public final void doTestCompletion(@NotNull String text) {
-    initWithTextSmartWithoutErrors(text);
-    doTestCompletionCheck();
-  }
-
   public final void doTestCompletion(@Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     doTestCompletion("", predicate);
   }
@@ -494,8 +489,13 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public final void doTestCompletionFromText(@NotNull String content) {
-    initWithTextSmart(content);
-    doTestCompletionCheck();
+    doTestCompletionFromText(content, null);
+  }
+
+  public final void doTestCompletionFromText(@NotNull String content,
+                                             @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
+    initWithTextSmartWithoutErrors(content);
+    doTestCompletionCheck("", predicate);
   }
 
   protected void doTestCompletionCheck() {
