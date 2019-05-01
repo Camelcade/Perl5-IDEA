@@ -30,11 +30,14 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
+import com.perl5.lang.perl.psi.utils.PerlEditorUtils;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.psi.PsiLinkText;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.pod.lexer.PodTokenSets.FORMAT_ACCEPTING_COMMANDS;
 
 /**
  * Created by hurricup on 14.04.2016.
@@ -157,7 +160,8 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
     PsiElement elementParent = element.getParent();
     IElementType parentType = PsiUtilCore.getElementType(elementParent);
 
-    return typedChar == ' ' && PodTokenSets.POD_TAGS_TOKENSET.contains(elementType) ||
+    return typedChar == ':' && PerlEditorUtils.isPreviousToken(editor, element.getNode().getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
+           typedChar == ' ' && PodTokenSets.POD_TAGS_TOKENSET.contains(elementType) ||
            typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
            typedChar == '|' && parentType == LINK_NAME ||
            typedChar == '/' && (parentType == LINK_NAME ||

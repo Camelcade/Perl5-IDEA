@@ -54,6 +54,18 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   public void testSpaceHeader4() {doTest("=head4<caret>", " ");}
 
+  public void testForSpace() {doTest("=for<caret>", " ");}
+
+  public void testBeginSpace() {doTest("=begin<caret>", " ");}
+
+  public void testEndSpace() {doTest("=end<caret>", " ");}
+
+  public void testForColon() {doTest("=for <caret>", ":");}
+
+  public void testBeginColon() {doTest("=begin <caret>", ":");}
+
+  public void testEndColon() {doTest("=end <caret>", ":");}
+
   public void testLinkOpenAngle() {doTest("L<caret>", "<");}
 
   public void testLinkBareSection() {doTest("=head1 section name\n\n" + "L<<caret>>", "/");}

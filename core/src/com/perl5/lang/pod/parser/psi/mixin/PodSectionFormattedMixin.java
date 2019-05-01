@@ -24,6 +24,8 @@ import com.perl5.lang.pod.psi.PsiPodSectionFormat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.pod.parser.psi.PodFormatterNames.FORMAT_HTML;
+
 /**
  * Created by hurricup on 26.03.2016.
  */

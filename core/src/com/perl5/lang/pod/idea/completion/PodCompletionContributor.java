@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,16 @@
 package com.perl5.lang.pod.idea.completion;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.pod.parser.PodElementPatterns;
+import com.perl5.lang.pod.parser.psi.PodFormatterNames;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by hurricup on 16.04.2016.
@@ -36,5 +44,23 @@ public class PodCompletionContributor extends CompletionContributor implements P
       TITLE_IDENTIFIER,
       new PodTitleCompletionProvider()
     );
+  }
+
+  @Override
+  public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result) {
+    PsiElement position = parameters.getPosition();
+    IElementType positionType = PsiUtilCore.getElementType(position);
+    if (positionType == POD_FORMAT_NAME) {
+      IElementType prevSiblingType = PsiUtilCore.getElementType(position.getPrevSibling());
+      PodFormatterNames.KNOWN_FORMATTERS.forEach(it -> {
+        result.addElement(LookupElementBuilder.create(it));
+        if (prevSiblingType != POD_COLON) {
+          result.addElement(LookupElementBuilder.create(":" + it));
+        }
+      });
+      return;
+    }
+
+    super.fillCompletionVariants(parameters, result);
   }
 }

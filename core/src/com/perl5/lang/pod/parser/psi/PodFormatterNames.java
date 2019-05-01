@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,23 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by hurricup on 26.03.2016.
  */
-public interface PodFormatterNames {
-  String FORMAT_ROFF = "roff";
-  String FORMAT_MAN = "man";
-  String FORMAT_LATEX = "latex";
-  String FORMAT_TEX = "tex";
-  String FORMAT_TEXT = "text";
-  String FORMAT_HTML = "html";
+public class PodFormatterNames {
+  public static final String FORMAT_ROFF = "roff";
+  public static final String FORMAT_MAN = "man";
+  public static final String FORMAT_LATEX = "latex";
+  public static final String FORMAT_TEX = "tex";
+  public static final String FORMAT_TEXT = "text";
+  public static final String FORMAT_HTML = "html";
+  public static final List<String> KNOWN_FORMATTERS = Arrays.asList(
+    FORMAT_HTML, FORMAT_MAN, FORMAT_LATEX, FORMAT_ROFF, FORMAT_TEX, FORMAT_TEXT
+  );
+
+  private PodFormatterNames() {
+  }
 }

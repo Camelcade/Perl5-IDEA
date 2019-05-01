@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package completion;
 
 import base.PodLightTestCase;
+import org.jetbrains.annotations.NotNull;
 
 public class PodCompletionTest extends PodLightTestCase {
   @Override
@@ -47,7 +48,23 @@ public class PodCompletionTest extends PodLightTestCase {
 
   public void testTitledSection() {doTest();}
 
+  public void testForSpace() {doTest("=for <caret>");}
+
+  public void testBeginSpace() {doTest("=begin <caret>");}
+
+  public void testEndSpace() {doTest("=end <caret>");}
+
+  public void testForColon() {doTest("=for :<caret>");}
+
+  public void testBeginColon() {doTest("=begin :<caret>");}
+
+  public void testEndColon() {doTest("=end :<caret>");}
+
   private void doTest() {
     doTestCompletion();
+  }
+
+  private void doTest(@NotNull String text) {
+    doTestCompletion(text);
   }
 }

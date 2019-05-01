@@ -1,0 +1,24 @@
+Lookups: :html; Text: :html; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: :latex; Text: :latex; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: :man; Text: :man; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: :roff; Text: :roff; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: :tex; Text: :tex; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: :text; Text: :text; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: html; Text: html; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: latex; Text: latex; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: man; Text: man; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: roff; Text: roff; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: tex; Text: tex; Tail: null; Type: null; Icon: null; Type Icon: null
+    String
+Lookups: text; Text: text; Tail: null; Type: null; Icon: null; Type Icon: null
+    String

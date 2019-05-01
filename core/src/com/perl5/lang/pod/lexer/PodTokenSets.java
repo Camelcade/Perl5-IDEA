@@ -26,9 +26,13 @@ public final class PodTokenSets {
     POD_HEAD1, POD_HEAD2, POD_HEAD3, POD_HEAD4, POD_UNKNOWN
   );
 
-  public static final TokenSet POD_PARAMETRIZED_SECTION_OPENERS_TOKENSET = TokenSet.create(
-    POD_BEGIN, POD_END, POD_FOR, POD_ENCODING, POD_OVER
+  public static final TokenSet FORMAT_ACCEPTING_COMMANDS = TokenSet.create(
+    POD_BEGIN, POD_END, POD_FOR
   );
+
+  public static final TokenSet POD_PARAMETRIZED_SECTION_OPENERS_TOKENSET = TokenSet.orSet(
+    FORMAT_ACCEPTING_COMMANDS, TokenSet.create(POD_ENCODING, POD_OVER));
+
 
   public static final TokenSet POD_TAGS_TOKENSET = TokenSet.orSet(
     POD_NAMED_SECTION_OPENERS_TOKENSET,
