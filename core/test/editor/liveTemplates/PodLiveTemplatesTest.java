@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,29 +29,35 @@ public class PodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
     return "testData/liveTemplates/pod";
   }
 
-  public void testH1() {doTest("h1");}
+  public void testH1() {doTest("=head1");}
 
-  public void testH2() {doTest("h2");}
+  public void testH2() {doTest("=head2");}
 
-  public void testAttr() {doTest("at");}
+  public void testAttr() {doTest("=attr");}
 
-  public void testMethod() {doTest("me");}
+  public void testMethod() {doTest("=method");}
 
-  public void testFunc() {doTest("fu");}
+  public void testFunc() {doTest("=func");}
 
-  public void testH3() {doTest("h3");}
+  public void testH3() {doTest("=head3");}
 
-  public void testH4() {doTest("h4");}
+  public void testH4() {doTest("=head4");}
 
-  public void testOverBack() {doTest("ov");}
+  public void testOverBack() {doTest("=over");}
 
-  public void testBeginEnd() {doTest("be");}
+  public void testBeginEnd() {doTest("=begin");}
 
-  public void testFor() {doTest("fo");}
+  public void testFor() {doTest("=for");}
 
-  public void testEncoding() {doTest("en");}
+  public void testEncoding() {doTest("=encoding");}
 
-  public void testItem() {doTest("it");}
+  public void testItem() {doTest("=item");}
 
-  public void testItemBulleted() {doTest("itb");}
+  public void testPod() {doTest("=pod");}
+
+  public void testCut() {doTest("=cut");}
+
+  public void testEnd() {doTest("=end");}
+
+  public void testBack() {doTest("=back");}
 }
