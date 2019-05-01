@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 
 package com.perl5.lang.perl.idea.completion.util;
 
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.AutoPopupController;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.InsertHandler;
+import com.intellij.codeInsight.lookup.Lookup;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -50,7 +52,11 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
  * Created by hurricup on 25.07.2015.
  */
 public class PerlPackageCompletionUtil {
-  public static final InsertHandler<LookupElement> COMPLETION_REOPENER = new CompletionOpener();
+  public static final InsertHandler<LookupElement> COMPLETION_REOPENER = (context, item) -> {
+    if (context.getCompletionChar() != Lookup.AUTO_INSERT_SELECT_CHAR) {
+      AutoPopupController.getInstance(context.getProject()).scheduleAutoPopup(context.getEditor());
+    }
+  };
 
   @NotNull
   public static LookupElementBuilder getNamespaceLookupElement(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
@@ -196,22 +202,6 @@ public class PerlPackageCompletionUtil {
         if (packageName != null) {
           result.addElement(LookupElementBuilder.create(file, packageName));
         }
-      }
-    }
-  }
-
-  /**
-   * Parent pragma additional insert
-   */
-  static class CompletionOpener implements InsertHandler<LookupElement> {
-    @Override
-    public void handleInsert(@NotNull final InsertionContext context, @NotNull final LookupElement item) {
-      // fixme this is bad check for auto-inserting, i belive
-      if (context.getCompletionChar() != '\u0000') {
-        context.setLaterRunnable(() -> {
-          Editor editor = context.getEditor();
-          new CodeCompletionHandlerBase(CompletionType.BASIC).invokeCompletion(context.getProject(), editor, 1);
-        });
       }
     }
   }
