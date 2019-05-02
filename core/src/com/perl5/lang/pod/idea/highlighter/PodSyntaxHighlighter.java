@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
 
   static {
     safeMap(ATTRIBUTES_MAP, POD_CODE, POD_VERBATIM_KEY);
-    safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_TAGS_TOKENSET, POD_TAG_KEY);
+    safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_COMMANDS_TOKENSET, POD_TAG_KEY);
     safeMap(ATTRIBUTES_MAP, TokenSet.create(POD_ANGLE_LEFT, POD_ANGLE_RIGHT, POD_PIPE), POD_FORMATTER_MARKUP_KEY);
     safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_FORMATTERS_TOKENSET, POD_FORMATTER_TAG_KEY);
   }

@@ -34,7 +34,7 @@ public final class PodTokenSets {
     FORMAT_ACCEPTING_COMMANDS, TokenSet.create(POD_ENCODING, POD_OVER));
 
 
-  public static final TokenSet POD_TAGS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.orSet(
     POD_NAMED_SECTION_OPENERS_TOKENSET,
     POD_PARAMETRIZED_SECTION_OPENERS_TOKENSET,
     TokenSet.create(

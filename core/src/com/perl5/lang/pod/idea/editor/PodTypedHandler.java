@@ -171,7 +171,7 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
            typedChar == ':' &&
            elementNode != null &&
            PerlEditorUtils.isPreviousToken(editor, elementNode.getStartOffset(), FORMAT_ACCEPTING_COMMANDS) ||
-           typedChar == ' ' && PodTokenSets.POD_TAGS_TOKENSET.contains(elementType) ||
+           typedChar == ' ' && PodTokenSets.POD_COMMANDS_TOKENSET.contains(elementType) ||
            typedChar == '<' && elementType == POD_IDENTIFIER && StringUtil.equals("L", elementChars) ||
            typedChar == '|' && parentType == LINK_NAME ||
            typedChar == '/' && (parentType == LINK_NAME ||
