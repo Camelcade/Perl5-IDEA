@@ -1,0 +1,9 @@
+package test;
+use strict;
+use warnings FATAL => 'all';
+
+=<caret>
+
+sub somesub();
+
+1;

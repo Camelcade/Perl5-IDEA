@@ -23,7 +23,9 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -108,8 +110,9 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
         }
 
         PsiElement prevElement = viewProvider.findElementAt(startOffset - 1, PodLanguage.INSTANCE);
+        IElementType prevElementType = PsiUtilCore.getElementType(prevElement);
 
-        if (prevElement != null && prevElement.getNode().getElementType() == PodElementTypes.POD_NEWLINE) {
+        if (prevElementType == PodElementTypes.POD_NEWLINE || prevElementType == POD_OUTER) {
           return true;
         }
 
