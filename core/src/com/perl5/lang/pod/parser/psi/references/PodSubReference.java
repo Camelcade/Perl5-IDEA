@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,9 +37,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by hurricup on 05.04.2016.
- */
 public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
   public PodSubReference(PodIdentifierImpl element) {
     super(element, new TextRange(0, element.getTextLength()), true);
@@ -50,47 +47,43 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
     return (PsiElement)myElement.replaceWithText(newElementName);
   }
 
-  @Override
-  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-    return super.bindToElement(element);
-  }
-
   @NotNull
   @Override
   protected ResolveResult[] resolveInner(boolean incompleteCode) {
     PsiElement element = getElement();
     final Project project = element.getProject();
     String subName = element.getText();
-    if (StringUtil.isNotEmpty(subName)) {
-      final PsiFile containingFile = element.getContainingFile();
-      // this is a bit lame. we could try to detect from perl context. But unsure
-      String packageName = PodFileUtil.getPackageName(containingFile);
+    if (!StringUtil.isNotEmpty(subName)) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
+    final PsiFile containingFile = element.getContainingFile();
+    // this is a bit lame. we could try to detect from perl context. But unsure
+    String packageName = PodFileUtil.getPackageName(containingFile);
 
-      List<ResolveResult> results = new ArrayList<>();
+    List<ResolveResult> results = new ArrayList<>();
 
-      if (StringUtil.isNotEmpty(packageName)) {
-        String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
-        for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
-          results.add(new PsiElementResolveResult(target));
-        }
-        for (PerlSubDeclarationElement target : PerlSubUtil.getSubDeclarations(project, canonicalName)) {
-          results.add(new PsiElementResolveResult(target));
-        }
+    if (StringUtil.isNotEmpty(packageName)) {
+      String canonicalName = packageName + PerlPackageUtil.PACKAGE_SEPARATOR + subName;
+      for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
+        results.add(new PsiElementResolveResult(target));
       }
-
-      if (results.isEmpty()) {
-        PerlPsiUtil.processSubElements(containingFile.getViewProvider().getStubBindingRoot(), it -> {
-          String subBaseName = it.getName();
-          if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
-            results.add(new PsiElementResolveResult(it));
-          }
-          return true;
-        });
+      for (PerlSubDeclarationElement target : PerlSubUtil.getSubDeclarations(project, canonicalName)) {
+        results.add(new PsiElementResolveResult(target));
       }
+    }
 
+    if (!results.isEmpty()) {
       return results.toArray(ResolveResult.EMPTY_ARRAY);
     }
 
-    return ResolveResult.EMPTY_ARRAY;
+    PerlPsiUtil.processSubElements(containingFile.getViewProvider().getStubBindingRoot(), it -> {
+      String subBaseName = it.getName();
+      if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
+        results.add(new PsiElementResolveResult(it));
+      }
+      return true;
+    });
+
+    return results.toArray(ResolveResult.EMPTY_ARRAY);
   }
 }
