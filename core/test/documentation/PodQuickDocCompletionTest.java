@@ -84,6 +84,11 @@ public class PodQuickDocCompletionTest extends PodLightTestCase {
     doTestCompletionQuickDoc("write_chunk");
   }
 
+  public void testPerlVarIndex() {
+    initWithTextSmart("L<perlvar/<caret>>");
+    doTestCompletionQuickDoc("line number");
+  }
+
   @NotNull
   @Override
   protected String getBuiltInFromTestName() {
