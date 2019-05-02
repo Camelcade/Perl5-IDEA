@@ -43,9 +43,6 @@ import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
   private static final TokenSet FORCE_AS_OPERATORS_TOKENSET = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
