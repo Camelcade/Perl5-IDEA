@@ -1,0 +1,508 @@
+<ul style="margin-left: 0px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FSYNOPSIS">SYNOPSIS</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FDESCRIPTION">DESCRIPTION</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FATTRIBUTES">ATTRIBUTES</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fapp">app</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fmatch">match</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Ftx">tx</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FMETHODS">METHODS</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fcontinue">continue</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fcookie">cookie</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fevery_cookie">every_cookie</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fevery_param">every_param</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fevery_signed_cookie">every_signed_cookie</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Ffinish">finish</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fflash">flash</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fhelpers">helpers</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fon">on</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fparam">param</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fredirect_to">redirect_to</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Frender">render</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Frender_later">render_later</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Frender_maybe">render_maybe</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Frender_to_string">render_to_string</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Frendered">rendered</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Freq">req</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fres">res</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Frespond_to">respond_to</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fsend">send</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fsession">session</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fsigned_cookie">signed_cookie</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fstash">stash</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Furl_for">url_for</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fvalidation">validation</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fwrite">write</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2Fwrite_chunk">write_chunk</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FAUTOLOAD">AUTOLOAD</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://Mojolicious%3A%3AController%2FSEE+ALSO">SEE ALSO</a></li></ul>
+<h1>NAME</h1><p style="padding-bottom: 10px;">Mojolicious::Controller - Controller base class</p>
+<h1>SYNOPSIS</h1><div style="padding-bottom: 10px;"><pre><code>  # Controller
+  package MyApp::Controller::Foo;
+  use Mojo::Base 'Mojolicious::Controller';
+
+  # Action
+  sub bar {
+    my $self = shift;
+    my $name = $self-&gt;param('name');
+    $self-&gt;res-&gt;headers-&gt;cache_control('max-age=1, no-cache');
+    $self-&gt;render(json =&gt; {hello =&gt; $name});
+  }</code></pre></div>
+<h1>DESCRIPTION</h1><p style="padding-bottom: 10px;"><a href="psi_element://Mojolicious%3A%3AController">Mojolicious::Controller</a> is the base class for your <a href="psi_element://Mojolicious" style="color:red">Mojolicious</a>
+controllers. It is also the default controller class unless you set
+<a href="psi_element://Mojolicious%2Fcontroller_class" style="color:red">controller_class in Mojolicious</a>.</p>
+<h1>ATTRIBUTES</h1><p style="padding-bottom: 10px;"><a href="psi_element://Mojolicious%3A%3AController">Mojolicious::Controller</a> inherits all attributes from <a href="psi_element://Mojo%3A%3ABase" style="color:red">Mojo::Base</a> and
+implements the following new ones.</p>
+<h2>app</h2><div style="padding-bottom: 10px;"><pre><code>  my $app = $c-&gt;app;
+  $c      = $c-&gt;app(Mojolicious-&gt;new);</code></pre></div>
+<p style="padding-bottom: 10px;">A reference back to the application that dispatched to this controller, usually
+a <a href="psi_element://Mojolicious" style="color:red">Mojolicious</a> object.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Use application logger
+  $c-&gt;app-&gt;log-&gt;debug('Hello Mojo');
+
+  # Generate path
+  my $path = $c-&gt;app-&gt;home-&gt;child('templates', 'foo', 'bar.html.ep');</code></pre></div>
+<h2>match</h2><div style="padding-bottom: 10px;"><pre><code>  my $m = $c-&gt;match;
+  $c    = $c-&gt;match(Mojolicious::Routes::Match-&gt;new);</code></pre></div>
+<p style="padding-bottom: 10px;">Router results for the current request, defaults to a
+<a href="psi_element://Mojolicious%3A%3ARoutes%3A%3AMatch" style="color:red">Mojolicious::Routes::Match</a> object.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Introspect
+  my $name   = $c-&gt;match-&gt;endpoint-&gt;name;
+  my $foo    = $c-&gt;match-&gt;endpoint-&gt;pattern-&gt;defaults-&gt;{foo};
+  my $action = $c-&gt;match-&gt;stack-&gt;[-1]{action};</code></pre></div>
+<h2>tx</h2><div style="padding-bottom: 10px;"><pre><code>  my $tx = $c-&gt;tx;
+  $c     = $c-&gt;tx(Mojo::Transaction::HTTP-&gt;new);</code></pre></div>
+<p style="padding-bottom: 10px;">The transaction that is currently being processed, usually a
+<a href="psi_element://Mojo%3A%3ATransaction%3A%3AHTTP" style="color:red">Mojo::Transaction::HTTP</a> or <a href="psi_element://Mojo%3A%3ATransaction%3A%3AWebSocket" style="color:red">Mojo::Transaction::WebSocket</a> object. Note that
+this reference is usually weakened, so the object needs to be referenced
+elsewhere as well when you're performing non-blocking operations and the
+underlying connection might get closed early.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Check peer information
+  my $address = $c-&gt;tx-&gt;remote_address;
+  my $port    = $c-&gt;tx-&gt;remote_port;
+
+  # Increase size limit for WebSocket messages to 16MB
+  $c-&gt;tx-&gt;max_websocket_size(16777216) if $c-&gt;tx-&gt;is_websocket;
+
+  # Perform non-blocking operation without knowing the connection status
+  my $tx = $c-&gt;tx;
+  Mojo::IOLoop-&gt;timer(2 =&gt; sub {
+    $c-&gt;app-&gt;log-&gt;debug($tx-&gt;is_finished ? 'Finished' : 'In progress');
+  });</code></pre></div>
+<h1>METHODS</h1><p style="padding-bottom: 10px;"><a href="psi_element://Mojolicious%3A%3AController">Mojolicious::Controller</a> inherits all methods from <a href="psi_element://Mojo%3A%3ABase" style="color:red">Mojo::Base</a> and
+implements the following new ones.</p>
+<h2>continue</h2><div style="padding-bottom: 10px;"><pre><code>  $c-&gt;continue;</code></pre></div>
+<p style="padding-bottom: 10px;">Continue dispatch chain from an intermediate destination with
+<a href="psi_element://Mojolicious%3A%3ARoutes%2Fcontinue" style="color:red">continue in Mojolicious::Routes</a>.</p>
+<h2>cookie</h2><div style="padding-bottom: 10px;"><pre><code>  my $value = $c-&gt;cookie('foo');
+  $c        = $c-&gt;cookie(foo =&gt; 'bar');
+  $c        = $c-&gt;cookie(foo =&gt; 'bar', {path =&gt; '/'});</code></pre></div>
+<p style="padding-bottom: 10px;">Access request cookie values and create new response cookies. If there are
+multiple values sharing the same name, and you want to access more than just
+the last one, you can use <a href="psi_element://Mojolicious%3A%3AController%2Fevery_cookie">every_cookie</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Create response cookie with domain and expiration date
+  $c-&gt;cookie(user =&gt; 'sri', {domain =&gt; 'example.com', expires =&gt; time + 60});
+
+  # Create secure response cookie
+  $c-&gt;cookie(secret =&gt; 'I &lt;3 Mojolicious', {secure =&gt; 1, httponly =&gt; 1});</code></pre></div>
+<h2>every_cookie</h2><div style="padding-bottom: 10px;"><pre><code>  my $values = $c-&gt;every_cookie('foo');</code></pre></div>
+<p style="padding-bottom: 10px;">Similar to <a href="psi_element://Mojolicious%3A%3AController%2Fcookie">cookie</a>, but returns all request cookie values sharing the same
+name as an array reference.</p>
+<div style="padding-bottom: 10px;"><pre><code>  $ Get first cookie value
+  my $first = $c-&gt;every_cookie('foo')-&gt;[0];</code></pre></div>
+<h2>every_param</h2><div style="padding-bottom: 10px;"><pre><code>  my $values = $c-&gt;every_param('foo');</code></pre></div>
+<p style="padding-bottom: 10px;">Similar to <a href="psi_element://Mojolicious%3A%3AController%2Fparam">param</a>, but returns all values sharing the same name as an
+array reference.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Get first value
+  my $first = $c-&gt;every_param('foo')-&gt;[0];</code></pre></div>
+<h2>every_signed_cookie</h2><div style="padding-bottom: 10px;"><pre><code>  my $values = $c-&gt;every_signed_cookie('foo');</code></pre></div>
+<p style="padding-bottom: 10px;">Similar to <a href="psi_element://Mojolicious%3A%3AController%2Fsigned_cookie">signed_cookie</a>, but returns all signed request cookie values
+sharing the same name as an array reference.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Get first signed cookie value
+  my $first = $c-&gt;every_signed_cookie('foo')-&gt;[0];</code></pre></div>
+<h2>finish</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;finish;
+  $c = $c-&gt;finish(1000);
+  $c = $c-&gt;finish(1003 =&gt; 'Cannot accept data!');
+  $c = $c-&gt;finish('Bye!');</code></pre></div>
+<p style="padding-bottom: 10px;">Close WebSocket connection or long poll stream gracefully. This method will
+automatically respond to WebSocket handshake requests with a <code>101</code> response
+status, to establish the WebSocket connection.</p>
+<h2>flash</h2><div style="padding-bottom: 10px;"><pre><code>  my $foo = $c-&gt;flash('foo');
+  $c      = $c-&gt;flash({foo =&gt; 'bar'});
+  $c      = $c-&gt;flash(foo =&gt; 'bar');</code></pre></div>
+<p style="padding-bottom: 10px;">Data storage persistent only for the next request, stored in the <a href="psi_element://Mojolicious%3A%3AController%2Fsession">session</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Show message after redirect
+  $c-&gt;flash(message =&gt; 'User created successfully!');
+  $c-&gt;redirect_to('show_user', id =&gt; 23);</code></pre></div>
+<h2>helpers</h2><div style="padding-bottom: 10px;"><pre><code>  my $helpers = $c-&gt;helpers;</code></pre></div>
+<p style="padding-bottom: 10px;">Return a proxy object containing the current controller object and on which
+helpers provided by <a href="psi_element://Mojolicious%3A%3AController%2Fapp">app</a> can be called. This includes all helpers from
+<a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers">Mojolicious::Plugin::DefaultHelpers</a> and <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ATagHelpers">Mojolicious::Plugin::TagHelpers</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Make sure to use the &quot;title&quot; helper and not the controller method
+  $c-&gt;helpers-&gt;title('Welcome!');
+
+  # Use a nested helper instead of the &quot;reply&quot; controller method
+  $c-&gt;helpers-&gt;reply-&gt;not_found;</code></pre></div>
+<h2>on</h2><div style="padding-bottom: 10px;"><pre><code>  my $cb = $c-&gt;on(finish =&gt; sub {...});</code></pre></div>
+<p style="padding-bottom: 10px;">Subscribe to events of <a href="psi_element://Mojolicious%3A%3AController%2Ftx">tx</a>, which is usually a <a href="psi_element://Mojo%3A%3ATransaction%3A%3AHTTP" style="color:red">Mojo::Transaction::HTTP</a>
+or <a href="psi_element://Mojo%3A%3ATransaction%3A%3AWebSocket" style="color:red">Mojo::Transaction::WebSocket</a> object. This method will automatically
+respond to WebSocket handshake requests with a <code>101</code> response status, to
+establish the WebSocket connection.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Do something after the transaction has been finished
+  $c-&gt;on(finish =&gt; sub {
+    my $c = shift;
+    $c-&gt;app-&gt;log-&gt;debug('All data has been sent');
+  });
+
+  # Receive WebSocket message
+  $c-&gt;on(message =&gt; sub {
+    my ($c, $msg) = @_;
+    $c-&gt;app-&gt;log-&gt;debug(&quot;Message: $msg&quot;);
+  });
+
+  # Receive JSON object via WebSocket message
+  $c-&gt;on(json =&gt; sub {
+    my ($c, $hash) = @_;
+    $c-&gt;app-&gt;log-&gt;debug(&quot;Test: $hash-&gt;{test}&quot;);
+  });
+
+  # Receive WebSocket &quot;Binary&quot; message
+  $c-&gt;on(binary =&gt; sub {
+    my ($c, $bytes) = @_;
+    my $len = length $bytes;
+    $c-&gt;app-&gt;log-&gt;debug(&quot;Received $len bytes&quot;);
+  });</code></pre></div>
+<h2>param</h2><div style="padding-bottom: 10px;"><pre><code>  my $value = $c-&gt;param('foo');
+  $c        = $c-&gt;param(foo =&gt; 'ba;r');
+  $c        = $c-&gt;param(foo =&gt; 'ba;r', 'baz');
+  $c        = $c-&gt;param(foo =&gt; ['ba;r', 'baz']);</code></pre></div>
+<p style="padding-bottom: 10px;">Access route placeholder values that are not reserved stash values, file
+uploads as well as <code>GET</code> and <code>POST</code> parameters extracted from the query
+string and <code>application/x-www-form-urlencoded</code> or <code>multipart/form-data</code>
+message body, in that order. If there are multiple values sharing the same
+name, and you want to access more than just the last one, you can use
+<a href="psi_element://Mojolicious%3A%3AController%2Fevery_param">every_param</a>. Parts of the request body need to be loaded into memory to
+parse <code>POST</code> parameters, so you have to make sure it is not excessively large.
+There's a 16MB limit for requests by default.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Get first value
+  my $first = $c-&gt;every_param('foo')-&gt;[0];</code></pre></div>
+<p style="padding-bottom: 10px;">For more control you can also access request information directly.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Only GET parameters
+  my $foo = $c-&gt;req-&gt;query_params-&gt;param('foo');
+
+  # Only POST parameters
+  my $foo = $c-&gt;req-&gt;body_params-&gt;param('foo');
+
+  # Only GET and POST parameters
+  my $foo = $c-&gt;req-&gt;param('foo');
+
+  # Only file uploads
+  my $foo = $c-&gt;req-&gt;upload('foo');</code></pre></div>
+<h2>redirect_to</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;redirect_to('named', foo =&gt; 'bar');
+  $c = $c-&gt;redirect_to('named', {foo =&gt; 'bar'});
+  $c = $c-&gt;redirect_to('/index.html');
+  $c = $c-&gt;redirect_to('http://example.com/index.html');</code></pre></div>
+<p style="padding-bottom: 10px;">Prepare a <code>302</code> (if the status code is not already <code>3xx</code>) redirect response
+with <code>Location</code> header, takes the same arguments as <a href="psi_element://Mojolicious%3A%3AController%2Furl_for">url_for</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Moved Permanently
+  $c-&gt;res-&gt;code(301);
+  $c-&gt;redirect_to('some_route');
+
+  # Temporary Redirect
+  $c-&gt;res-&gt;code(307);
+  $c-&gt;redirect_to('some_route');</code></pre></div>
+<h2>render</h2><div style="padding-bottom: 10px;"><pre><code>  my $bool = $c-&gt;render;
+  my $bool = $c-&gt;render(foo =&gt; 'bar', baz =&gt; 23);
+  my $bool = $c-&gt;render(template =&gt; 'foo/index');
+  my $bool = $c-&gt;render(template =&gt; 'index', format =&gt; 'html');
+  my $bool = $c-&gt;render(data =&gt; $bytes);
+  my $bool = $c-&gt;render(text =&gt; 'Hello!');
+  my $bool = $c-&gt;render(json =&gt; {foo =&gt; 'bar'});
+  my $bool = $c-&gt;render(handler =&gt; 'something');
+  my $bool = $c-&gt;render('foo/index');</code></pre></div>
+<p style="padding-bottom: 10px;">Render content with <a href="psi_element://Mojolicious%2Frenderer" style="color:red">renderer in Mojolicious</a> and emit hooks
+<a href="psi_element://Mojolicious%2Fbefore_render" style="color:red">before_render in Mojolicious</a> as well as <a href="psi_element://Mojolicious%2Fafter_render" style="color:red">after_render in Mojolicious</a>, or
+call <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers%2Freply-%3Enot_found">reply-&gt;not_found in Mojolicious::Plugin::DefaultHelpers</a> if no
+response could be generated, all additional key/value pairs get merged into the
+<a href="psi_element://Mojolicious%3A%3AController%2Fstash">stash</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Render characters
+  $c-&gt;render(text =&gt; 'I ♥ Mojolicious!');
+
+  # Render characters (alternative)
+  $c-&gt;stash(text =&gt; 'I ♥ Mojolicious!')-&gt;render;
+
+  # Render binary data
+  use Mojo::JSON 'encode_json';
+  $c-&gt;render(data =&gt; encode_json({test =&gt; 'I ♥ Mojolicious!'}));
+
+  # Render JSON
+  $c-&gt;render(json =&gt; {test =&gt; 'I ♥ Mojolicious!'});
+
+  # Render inline template
+  $c-&gt;render(inline =&gt; '&lt;%= 1 + 1 %&gt;');
+
+  # Render template &quot;foo/bar.html.ep&quot;
+  $c-&gt;render(template =&gt; 'foo/bar', format =&gt; 'html', handler =&gt; 'ep');
+
+  # Render template &quot;test.*.*&quot; with arbitrary values &quot;foo&quot; and &quot;bar&quot;
+  $c-&gt;render(template =&gt; 'test', foo =&gt; 'test', bar =&gt; 23);
+
+  # Render template &quot;test.xml.*&quot;
+  $c-&gt;render(template =&gt; 'test', format =&gt; 'xml');
+
+  # Render template &quot;test.xml.*&quot; (alternative)
+  $c-&gt;render('test', format =&gt; 'xml');</code></pre></div>
+<h2>render_later</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;render_later;</code></pre></div>
+<p style="padding-bottom: 10px;">Disable automatic rendering to delay response generation, only necessary if
+automatic rendering would result in a response.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Delayed rendering
+  $c-&gt;render_later;
+  Mojo::IOLoop-&gt;timer(2 =&gt; sub {
+    $c-&gt;render(text =&gt; 'Delayed by 2 seconds!');
+  });</code></pre></div>
+<h2>render_maybe</h2><div style="padding-bottom: 10px;"><pre><code>  my $bool = $c-&gt;render_maybe;
+  my $bool = $c-&gt;render_maybe(foo =&gt; 'bar', baz =&gt; 23);
+  my $bool = $c-&gt;render_maybe('foo/index', format =&gt; 'html');</code></pre></div>
+<p style="padding-bottom: 10px;">Try to render content, but do not call
+<a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers%2Freply-%3Enot_found">reply-&gt;not_found in Mojolicious::Plugin::DefaultHelpers</a> if no response
+could be generated, takes the same arguments as <a href="psi_element://Mojolicious%3A%3AController%2Frender">render</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Render template &quot;index_local&quot; only if it exists
+  $c-&gt;render_maybe('index_local') or $c-&gt;render('index');</code></pre></div>
+<h2>render_to_string</h2><div style="padding-bottom: 10px;"><pre><code>  my $output = $c-&gt;render_to_string('foo/index', format =&gt; 'pdf');</code></pre></div>
+<p style="padding-bottom: 10px;">Try to render content and return it wrapped in a <a href="psi_element://Mojo%3A%3AByteStream" style="color:red">Mojo::ByteStream</a> object or
+return <code>undef</code>, all arguments get localized automatically and are only
+available during this render operation, takes the same arguments as
+<a href="psi_element://Mojolicious%3A%3AController%2Frender">render</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Render inline template
+  my $two = $c-&gt;render_to_string(inline =&gt; '&lt;%= 1 + 1 %&gt;');</code></pre></div>
+<h2>rendered</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;rendered;
+  $c = $c-&gt;rendered(302);</code></pre></div>
+<p style="padding-bottom: 10px;">Finalize response and emit hook <a href="psi_element://Mojolicious%2Fafter_dispatch" style="color:red">after_dispatch in Mojolicious</a>, defaults to
+using a <code>200</code> response code.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Custom response
+  $c-&gt;res-&gt;headers-&gt;content_type('text/plain');
+  $c-&gt;res-&gt;body('Hello World!');
+  $c-&gt;rendered(200);</code></pre></div>
+<h2>req</h2><div style="padding-bottom: 10px;"><pre><code>  my $req = $c-&gt;req;</code></pre></div>
+<p style="padding-bottom: 10px;">Get <a href="psi_element://Mojo%3A%3AMessage%3A%3ARequest" style="color:red">Mojo::Message::Request</a> object from <a href="psi_element://Mojolicious%3A%3AController%2Ftx">tx</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Longer version
+  my $req = $c-&gt;tx-&gt;req;
+
+  # Extract request information
+  my $method = $c-&gt;req-&gt;method;
+  my $url    = $c-&gt;req-&gt;url-&gt;to_abs;
+  my $info   = $c-&gt;req-&gt;url-&gt;to_abs-&gt;userinfo;
+  my $host   = $c-&gt;req-&gt;url-&gt;to_abs-&gt;host;
+  my $agent  = $c-&gt;req-&gt;headers-&gt;user_agent;
+  my $custom = $c-&gt;req-&gt;headers-&gt;header('Custom-Header');
+  my $bytes  = $c-&gt;req-&gt;body;
+  my $str    = $c-&gt;req-&gt;text;
+  my $hash   = $c-&gt;req-&gt;params-&gt;to_hash;
+  my $all    = $c-&gt;req-&gt;uploads;
+  my $value  = $c-&gt;req-&gt;json;
+  my $foo    = $c-&gt;req-&gt;json('/23/foo');
+  my $dom    = $c-&gt;req-&gt;dom;
+  my $bar    = $c-&gt;req-&gt;dom('div.bar')-&gt;first-&gt;text;</code></pre></div>
+<h2>res</h2><div style="padding-bottom: 10px;"><pre><code>  my $res = $c-&gt;res;</code></pre></div>
+<p style="padding-bottom: 10px;">Get <a href="psi_element://Mojo%3A%3AMessage%3A%3AResponse" style="color:red">Mojo::Message::Response</a> object from <a href="psi_element://Mojolicious%3A%3AController%2Ftx">tx</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Longer version
+  my $res = $c-&gt;tx-&gt;res;
+
+  # Force file download by setting a response header
+  $c-&gt;res-&gt;headers-&gt;content_disposition('attachment; filename=foo.png;');
+
+  # Use a custom response header
+  $c-&gt;res-&gt;headers-&gt;header('Custom-Header' =&gt; 'whatever');
+
+  # Make sure response is cached correctly
+  $c-&gt;res-&gt;headers-&gt;cache_control('public, max-age=300');
+  $c-&gt;res-&gt;headers-&gt;append(Vary =&gt; 'Accept-Encoding');</code></pre></div>
+<h2>respond_to</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;respond_to(
+    json =&gt; {json =&gt; {message =&gt; 'Welcome!'}},
+    html =&gt; {template =&gt; 'welcome'},
+    any  =&gt; sub {...}
+  );</code></pre></div>
+<p style="padding-bottom: 10px;">Automatically select best possible representation for resource from <code>Accept</code>
+request header, <code>format</code> stash value or <code>format</code> <code>GET</code>/<code>POST</code> parameter,
+defaults to <a href="psi_element://Mojolicious%3A%3ARenderer%2Fdefault_format" style="color:red">default_format in Mojolicious::Renderer</a> or rendering an empty
+<code>204</code> response. Each representation can be handled with a callback or a hash
+reference containing arguments to be passed to <a href="psi_element://Mojolicious%3A%3AController%2Frender">render</a>. Since browsers
+often don't really know what they actually want, unspecific <code>Accept</code> request
+headers with more than one MIME type will be ignored, unless the
+<code>X-Requested-With</code> header is set to the value <code>XMLHttpRequest</code>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Everything else than &quot;json&quot; and &quot;xml&quot; gets a 204 response
+  $c-&gt;respond_to(
+    json =&gt; sub { $c-&gt;render(json =&gt; {just =&gt; 'works'}) },
+    xml  =&gt; {text =&gt; '&lt;just&gt;works&lt;/just&gt;'},
+    any  =&gt; {data =&gt; '', status =&gt; 204}
+  );</code></pre></div>
+<p style="padding-bottom: 10px;">For more advanced negotiation logic you can also use the helper
+<a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers%2Faccepts">accepts in Mojolicious::Plugin::DefaultHelpers</a>.</p>
+<h2>send</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;send({binary =&gt; $bytes});
+  $c = $c-&gt;send({text   =&gt; $bytes});
+  $c = $c-&gt;send({json   =&gt; {test =&gt; [1, 2, 3]}});
+  $c = $c-&gt;send([$fin, $rsv1, $rsv2, $rsv3, $op, $payload]);
+  $c = $c-&gt;send($chars);
+  $c = $c-&gt;send($chars =&gt; sub {...});</code></pre></div>
+<p style="padding-bottom: 10px;">Send message or frame non-blocking via WebSocket, the optional drain callback
+will be executed once all data has been written. This method will automatically
+respond to WebSocket handshake requests with a <code>101</code> response status, to
+establish the WebSocket connection.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Send &quot;Text&quot; message
+  $c-&gt;send('I ♥ Mojolicious!');
+
+  # Send JSON object as &quot;Text&quot; message
+  $c-&gt;send({json =&gt; {test =&gt; 'I ♥ Mojolicious!'}});
+
+  # Send JSON object as &quot;Binary&quot; message
+  use Mojo::JSON 'encode_json';
+  $c-&gt;send({binary =&gt; encode_json({test =&gt; 'I ♥ Mojolicious!'})});
+
+  # Send &quot;Ping&quot; frame
+  use Mojo::WebSocket 'WS_PING';
+  $c-&gt;send([1, 0, 0, 0, WS_PING, 'Hello World!']);
+
+  # Make sure the first message has been written before continuing
+  $c-&gt;send('First message!' =&gt; sub {
+    my $c = shift;
+    $c-&gt;send('Second message!');
+  });</code></pre></div>
+<p style="padding-bottom: 10px;">For mostly idle WebSockets you might also want to increase the inactivity
+timeout with <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers%2Finactivity_timeout">inactivity_timeout in Mojolicious::Plugin::DefaultHelpers</a>, which
+usually defaults to <code>15</code> seconds.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Increase inactivity timeout for connection to 300 seconds
+  $c-&gt;inactivity_timeout(300);</code></pre></div>
+<h2>session</h2><div style="padding-bottom: 10px;"><pre><code>  my $session = $c-&gt;session;
+  my $foo     = $c-&gt;session('foo');
+  $c          = $c-&gt;session({foo =&gt; 'bar'});
+  $c          = $c-&gt;session(foo =&gt; 'bar');</code></pre></div>
+<p style="padding-bottom: 10px;">Persistent data storage for the next few requests, all session data gets
+serialized with <a href="psi_element://Mojo%3A%3AJSON" style="color:red">Mojo::JSON</a> and stored Base64 encoded in HMAC-SHA1 signed
+cookies, to prevent tampering. Note that cookies usually have a <code>4096</code> byte
+(4KB) limit, depending on browser.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Manipulate session
+  $c-&gt;session-&gt;{foo} = 'bar';
+  my $foo = $c-&gt;session-&gt;{foo};
+  delete $c-&gt;session-&gt;{foo};
+
+  # Expiration date in seconds from now (persists between requests)
+  $c-&gt;session(expiration =&gt; 604800);
+
+  # Expiration date as absolute epoch time (only valid for one request)
+  $c-&gt;session(expires =&gt; time + 604800);
+
+  # Delete whole session by setting an expiration date in the past
+  $c-&gt;session(expires =&gt; 1);</code></pre></div>
+<h2>signed_cookie</h2><div style="padding-bottom: 10px;"><pre><code>  my $value = $c-&gt;signed_cookie('foo');
+  $c        = $c-&gt;signed_cookie(foo =&gt; 'bar');
+  $c        = $c-&gt;signed_cookie(foo =&gt; 'bar', {path =&gt; '/'});</code></pre></div>
+<p style="padding-bottom: 10px;">Access signed request cookie values and create new signed response cookies. If
+there are multiple values sharing the same name, and you want to access more
+than just the last one, you can use <a href="psi_element://Mojolicious%3A%3AController%2Fevery_signed_cookie">every_signed_cookie</a>. Cookies are
+cryptographically signed with HMAC-SHA1, to prevent tampering, and the ones
+failing signature verification will be automatically discarded.</p>
+<h2>stash</h2><div style="padding-bottom: 10px;"><pre><code>  my $hash = $c-&gt;stash;
+  my $foo  = $c-&gt;stash('foo');
+  $c       = $c-&gt;stash({foo =&gt; 'bar', baz =&gt; 23});
+  $c       = $c-&gt;stash(foo =&gt; 'bar', baz =&gt; 23);</code></pre></div>
+<p style="padding-bottom: 10px;">Non-persistent data storage and exchange for the current request, application
+wide default values can be set with <a href="psi_element://Mojolicious%2Fdefaults" style="color:red">defaults in Mojolicious</a>. Some stash
+values have a special meaning and are reserved, the full list is currently
+<code>action</code>, <code>app</code>, <code>cb</code>, <code>controller</code>, <code>data</code>, <code>extends</code>, <code>format</code>,
+<code>handler</code>, <code>inline</code>, <code>json</code>, <code>layout</code>, <code>namespace</code>, <code>path</code>, <code>status</code>,
+<code>template</code>, <code>text</code> and <code>variant</code>. Note that all stash values with a
+<code>mojo.*</code> prefix are reserved for internal use.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Remove value
+  my $foo = delete $c-&gt;stash-&gt;{foo};
+
+  # Assign multiple values at once
+  $c-&gt;stash(foo =&gt; 'test', bar =&gt; 23);</code></pre></div>
+<h2>url_for</h2><div style="padding-bottom: 10px;"><pre><code>  my $url = $c-&gt;url_for;
+  my $url = $c-&gt;url_for(name =&gt; 'sebastian');
+  my $url = $c-&gt;url_for({name =&gt; 'sebastian'});
+  my $url = $c-&gt;url_for('test', name =&gt; 'sebastian');
+  my $url = $c-&gt;url_for('test', {name =&gt; 'sebastian'});
+  my $url = $c-&gt;url_for('/index.html');
+  my $url = $c-&gt;url_for('//example.com/index.html');
+  my $url = $c-&gt;url_for('http://example.com/index.html');
+  my $url = $c-&gt;url_for('mailto:sri@example.com');
+  my $url = $c-&gt;url_for('#whatever');</code></pre></div>
+<p style="padding-bottom: 10px;">Generate a portable <a href="psi_element://Mojo%3A%3AURL" style="color:red">Mojo::URL</a> object with base for a path, URL or route.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # &quot;http://127.0.0.1:3000/index.html&quot; if application was started with Morbo
+  $c-&gt;url_for('/index.html')-&gt;to_abs;
+
+  # &quot;https://127.0.0.1:443/index.html&quot; if application was started with Morbo
+  $c-&gt;url_for('/index.html')-&gt;to_abs-&gt;scheme('https')-&gt;port(443);
+
+  # &quot;/index.html?foo=bar&quot; if application is deployed under &quot;/&quot;
+  $c-&gt;url_for('/index.html')-&gt;query(foo =&gt; 'bar');
+
+  # &quot;/myapp/index.html?foo=bar&quot; if application is deployed under &quot;/myapp&quot;
+  $c-&gt;url_for('/index.html')-&gt;query(foo =&gt; 'bar');</code></pre></div>
+<p style="padding-bottom: 10px;">You can also use the helper <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers%2Furl_with">url_with in Mojolicious::Plugin::DefaultHelpers</a>
+to inherit query parameters from the current request.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # &quot;/list?q=mojo&amp;page=2&quot; if current request was for &quot;/list?q=mojo&amp;page=1&quot;
+  $c-&gt;url_with-&gt;query([page =&gt; 2]);</code></pre></div>
+<h2>validation</h2><div style="padding-bottom: 10px;"><pre><code>  my $validation = $c-&gt;validation;</code></pre></div>
+<p style="padding-bottom: 10px;">Get <a href="psi_element://Mojolicious%3A%3AValidator%3A%3AValidation" style="color:red">Mojolicious::Validator::Validation</a> object for current request to
+validate file uploads as well as <code>GET</code> and <code>POST</code> parameters extracted from
+the query string and <code>application/x-www-form-urlencoded</code> or
+<code>multipart/form-data</code> message body. Parts of the request body need to be loaded
+into memory to parse <code>POST</code> parameters, so you have to make sure it is not
+excessively large. There's a 16MB limit for requests by default.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Validate GET/POST parameter
+  my $validation = $c-&gt;validation;
+  $validation-&gt;required('title', 'trim')-&gt;size(3, 50);
+  my $title = $validation-&gt;param('title');
+
+  # Validate file upload
+  my $validation = $c-&gt;validation;
+  $validation-&gt;required('tarball')-&gt;upload-&gt;size(1, 1048576);
+  my $tarball = $validation-&gt;param('tarball');</code></pre></div>
+<h2>write</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;write;
+  $c = $c-&gt;write('');
+  $c = $c-&gt;write($bytes);
+  $c = $c-&gt;write($bytes =&gt; sub {...});</code></pre></div>
+<p style="padding-bottom: 10px;">Write dynamic content non-blocking, the optional drain callback will be executed
+once all data has been written. Calling this method without a chunk of data
+will finalize the response headers and allow for dynamic content to be written
+later.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Keep connection alive (with Content-Length header)
+  $c-&gt;res-&gt;headers-&gt;content_length(6);
+  $c-&gt;write('Hel' =&gt; sub {
+    my $c = shift;
+    $c-&gt;write('lo!');
+  });
+
+  # Close connection when finished (without Content-Length header)
+  $c-&gt;write('Hel' =&gt; sub {
+    my $c = shift;
+    $c-&gt;write('lo!' =&gt; sub {
+      my $c = shift;
+      $c-&gt;finish;
+    });
+  });</code></pre></div>
+<p style="padding-bottom: 10px;">You can call <a href="psi_element://Mojolicious%3A%3AController%2Ffinish">finish</a> or write an empty chunk of data at any time to end
+the stream.</p>
+<div style="padding-bottom: 10px;"><pre><code>  HTTP/1.1 200 OK
+  Date: Sat, 13 Sep 2014 16:48:29 GMT
+  Content-Length: 6
+  Server: Mojolicious (Perl)
+
+  Hello!
+
+  HTTP/1.1 200 OK
+  Connection: close
+  Date: Sat, 13 Sep 2014 16:48:29 GMT
+  Server: Mojolicious (Perl)
+
+  Hello!</code></pre></div>
+<p style="padding-bottom: 10px;">For Comet (long polling) you might also want to increase the inactivity timeout
+with <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers%2Finactivity_timeout">inactivity_timeout in Mojolicious::Plugin::DefaultHelpers</a>, which usually
+defaults to <code>15</code> seconds.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Increase inactivity timeout for connection to 300 seconds
+  $c-&gt;inactivity_timeout(300);</code></pre></div>
+<h2>write_chunk</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;write_chunk;
+  $c = $c-&gt;write_chunk('');
+  $c = $c-&gt;write_chunk($bytes);
+  $c = $c-&gt;write_chunk($bytes =&gt; sub {...});</code></pre></div>
+<p style="padding-bottom: 10px;">Write dynamic content non-blocking with chunked transfer encoding, the optional
+drain callback will be executed once all data has been written. Calling this
+method without a chunk of data will finalize the response headers and allow for
+dynamic content to be written later.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Make sure previous chunk has been written before continuing
+  $c-&gt;write_chunk('H' =&gt; sub {
+    my $c = shift;
+    $c-&gt;write_chunk('ell' =&gt; sub {
+      my $c = shift;
+      $c-&gt;finish('o!');
+    });
+  });</code></pre></div>
+<p style="padding-bottom: 10px;">You can call <a href="psi_element://Mojolicious%3A%3AController%2Ffinish">finish</a> or write an empty chunk of data at any time to end
+the stream.</p>
+<div style="padding-bottom: 10px;"><pre><code>  HTTP/1.1 200 OK
+  Date: Sat, 13 Sep 2014 16:48:29 GMT
+  Transfer-Encoding: chunked
+  Server: Mojolicious (Perl)
+
+  1
+  H
+  3
+  ell
+  2
+  o!
+  0</code></pre></div>
+<h1>AUTOLOAD</h1><p style="padding-bottom: 10px;">In addition to the <a href="psi_element://Mojolicious%3A%3AController%2FATTRIBUTES">ATTRIBUTES</a> and <a href="psi_element://Mojolicious%3A%3AController%2FMETHODS">METHODS</a> above you can also call
+helpers provided by <a href="psi_element://Mojolicious%3A%3AController%2Fapp">app</a> on <a href="psi_element://Mojolicious%3A%3AController">Mojolicious::Controller</a> objects. This
+includes all helpers from <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers">Mojolicious::Plugin::DefaultHelpers</a> and
+<a href="psi_element://Mojolicious%3A%3APlugin%3A%3ATagHelpers">Mojolicious::Plugin::TagHelpers</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Call helpers
+  $c-&gt;layout('green');
+  $c-&gt;title('Welcome!');
+
+  # Longer version
+  $c-&gt;helpers-&gt;layout('green');</code></pre></div>
+<h1>SEE ALSO</h1><p style="padding-bottom: 10px;"><a href="psi_element://Mojolicious" style="color:red">Mojolicious</a>, <a href="psi_element://Mojolicious%3A%3AGuides" style="color:red">Mojolicious::Guides</a>, <a href="http://mojolicious.org">http://mojolicious.org</a>.</p>
