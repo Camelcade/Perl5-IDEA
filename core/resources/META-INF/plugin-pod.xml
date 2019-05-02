@@ -39,7 +39,7 @@
     <defaultLiveTemplatesProvider
         implementation="com.perl5.lang.pod.idea.livetemplates.PodDefaultLiveTemplatesProvider"/>
     <liveTemplatePreprocessor id="pod.newlines"
-                              implementation="com.perl5.lang.pod.idea.livetemplates.PodLIveTemplatesNewLinesPreprocessor"/>
+                              implementation="com.perl5.lang.pod.idea.livetemplates.PodLiveTemplatesNewLinesPreprocessor"/>
     <completion.contributor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
     <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
     <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>

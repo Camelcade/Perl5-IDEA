@@ -26,7 +26,7 @@ import com.perl5.lang.pod.PodLanguage;
 /**
  * Handles merging of the newlines in template and editor
  */
-public class PodLIveTemplatesNewLinesPreprocessor implements TemplatePreprocessor {
+public class PodLiveTemplatesNewLinesPreprocessor implements TemplatePreprocessor {
   @Override
   public void preprocessTemplate(Editor editor, PsiFile file, final int caretOffset, String textToInsert, String templateText) {
     if (!PsiUtilCore.getLanguageAtOffset(file, caretOffset).isKindOf(PodLanguage.INSTANCE)) {
