@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,14 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.codeInsight.TargetElementEvaluatorEx;
 import com.intellij.codeInsight.TargetElementEvaluatorEx2;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlPolyNamedElement;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Created by hurricup on 04.11.2016.
  */
-public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
+public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 implements TargetElementEvaluatorEx {
   @Nullable
   @Override
   public PsiElement adjustReferenceOrReferencedElement(@NotNull PsiFile file,
@@ -77,5 +79,10 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 {
   @Override // fixme WTF?
   public PsiElement getElementByReference(@NotNull PsiReference ref, int flags) {
     return null;
+  }
+
+  @Override
+  public boolean isIdentifierPart(PsiFile file, CharSequence text, int offset) {
+    return file.findElementAt(offset) instanceof PerlVariableNameElement;
   }
 }
