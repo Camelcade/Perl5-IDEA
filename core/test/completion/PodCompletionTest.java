@@ -38,6 +38,18 @@ public class PodCompletionTest extends PodLightTestCase {
     return false;
   }
 
+  public void testHeading2() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("=head2 <caret>");
+  }
+
+  public void testHeading2WithoutDocumented() {
+    myFixture.copyFileToProject("test.pm");
+    doTest("=head2 somesub()\n" +
+           "\n" +
+           "=head2 <caret>");
+  }
+
   public void testCommands() {doTest();}
 
   public void testItem() {doTest();}

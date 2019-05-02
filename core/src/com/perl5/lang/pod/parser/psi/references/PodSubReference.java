@@ -76,7 +76,12 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
       return results.toArray(ResolveResult.EMPTY_ARRAY);
     }
 
-    PerlPsiUtil.processSubElements(containingFile.getViewProvider().getStubBindingRoot(), it -> {
+    PsiFile targetPerlFile = PodFileUtil.getTargetPerlFile(containingFile);
+    if (targetPerlFile == null) {
+      return ResolveResult.EMPTY_ARRAY;
+    }
+
+    PerlPsiUtil.processSubElements(targetPerlFile, it -> {
       String subBaseName = it.getName();
       if (subBaseName != null && StringUtil.equals(subBaseName, subName)) {
         results.add(new PsiElementResolveResult(it));

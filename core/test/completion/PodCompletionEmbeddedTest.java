@@ -42,6 +42,8 @@ public class PodCompletionEmbeddedTest extends PerlLightTestCase {
 
   public void testHeader2() {doTest();}
 
+  public void testHeader2ExcludeDocumented() {doTest();}
+
   public void testHeader3() {doTest();}
 
   public void testHeader4() {doTest();}
