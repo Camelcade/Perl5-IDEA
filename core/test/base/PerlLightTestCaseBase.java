@@ -219,6 +219,7 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    LiveTemplateCompletionContributor.setShowTemplatesInTests(true, getTestRootDisposable());
     VfsRootAccess.allowRootAccess(getTestRootDisposable(), "/");
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringMixin.class, new PerlStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
@@ -303,10 +304,6 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     if (removeAutomatically) {
       addPerlTearDownListener(() -> removePerlSourceRoot(libDir));
     }
-  }
-
-  protected void showLiveTemplatesInCompletion() {
-    LiveTemplateCompletionContributor.setShowTemplatesInTests(true, getTestRootDisposable());
   }
 
   protected void enableLiveTemplatesTesting() {

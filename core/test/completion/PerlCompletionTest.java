@@ -39,7 +39,6 @@ public class PerlCompletionTest extends PerlLightTestCase {
   }
 
   public void testPodLiveTemplates() {
-    showLiveTemplatesInCompletion();
     doTest();
   }
 

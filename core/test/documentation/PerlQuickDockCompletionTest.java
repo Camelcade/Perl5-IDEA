@@ -21,12 +21,6 @@ import base.PerlLightTestCase;
 public class PerlQuickDockCompletionTest extends PerlLightTestCase {
 
   @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    showLiveTemplatesInCompletion();
-  }
-
-  @Override
   protected String getTestDataPath() {
     return "testData/documentation/perl/completion";
   }

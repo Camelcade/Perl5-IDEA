@@ -35,7 +35,6 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     withPerlPod();
-    showLiveTemplatesInCompletion();
   }
 
   public void testSpaceHeader1() {doTest("=head1<caret>", " ");}
