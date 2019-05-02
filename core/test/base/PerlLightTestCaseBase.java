@@ -1915,10 +1915,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
       editor.getCaretModel().moveToOffset(caretOffset);
       PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
       assertNotNull(elementAtCaret);
-      DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(elementAtCaret);
-      assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
       PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
       assertNotNull(targetElement);
+      DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
+      assertInstanceOf(documentationProvider, DocumentationProviderEx.class);
       String generatedDoc = documentationProvider.generateDoc(targetElement, elementAtCaret);
       assertNotNull(generatedDoc);
       sb.append(generatedDoc).append("\n");
