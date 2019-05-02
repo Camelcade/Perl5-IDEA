@@ -1,0 +1,11 @@
+use strict;
+
+=header1 Test
+
+=over<caret>
+
+=cut
+
+sub somesub{
+  say 'hi';
+}

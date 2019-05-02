@@ -1,0 +1,11 @@
+use strict;
+
+=head1 Top header
+
+=head1<caret>
+
+=cut
+
+sub somesub{
+  say 'hi';
+}

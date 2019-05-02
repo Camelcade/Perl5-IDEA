@@ -752,6 +752,10 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     doLiveTemplateBulkTest("liveTemplatesTest", textToType);
   }
 
+  protected void doLiveTemplateTest() {
+    doLiveTemplateBulkTest(getTestName(true), "");
+  }
+
   protected void doLiveTemplateBulkTest(@NotNull String fileName, @NotNull String textToType) {
     enableLiveTemplatesTesting();
     initWithFileSmart(fileName);
@@ -766,7 +770,9 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     for (Integer offset : caretsOffsets) {
       WriteCommandAction.runWriteCommandAction(getProject(), () -> {
         caretModel.moveToOffset(offset);
-        EditorModificationUtil.insertStringAtCaret(editor, textToType);
+        if (StringUtil.isNotEmpty(textToType)) {
+          EditorModificationUtil.insertStringAtCaret(editor, textToType);
+        }
         String textBeforeAction = document.getText();
         myFixture.testAction(new ExpandLiveTemplateByTabAction());
         if (!StringUtil.equals(document.getText(), textBeforeAction)) {

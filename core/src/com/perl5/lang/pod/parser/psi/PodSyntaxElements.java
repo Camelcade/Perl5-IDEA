@@ -33,6 +33,8 @@ public class PodSyntaxElements {
   public static final List<String> KNOWN_FORMATTERS = Collections.unmodifiableList(
     Arrays.asList(FORMAT_HTML, FORMAT_MAN, FORMAT_LATEX, FORMAT_ROFF, FORMAT_TEX, FORMAT_TEXT));
 
+  public static final String CUT_COMMAND = "=cut";
+
   private PodSyntaxElements() {
   }
 }

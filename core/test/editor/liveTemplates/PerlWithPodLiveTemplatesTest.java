@@ -16,20 +16,19 @@
 
 package editor.liveTemplates;
 
-import base.PerlLightTestCase;
-import org.jetbrains.annotations.NotNull;
-
-public abstract class PerlLiveTemplatesTestCase extends PerlLightTestCase {
+public class PerlWithPodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Override
   protected String getTestDataPath() {
-    return "testData/liveTemplates/perl";
+    return "testData/liveTemplates/perl/pod";
   }
 
-  protected void doTest(@NotNull String textToType) {
-    doLiveTemplateBulkTest(textToType);
-  }
+  public void testHeaderTop() {doTest();}
 
-  protected void doTest() {
-    doLiveTemplateTest();
-  }
+  public void testHeaderTopTrimming() {doTest();}
+
+  public void testHeaderNested() {doTest();}
+
+  public void testOverTop() {doTest();}
+
+  public void testOverNested() {doTest();}
 }
