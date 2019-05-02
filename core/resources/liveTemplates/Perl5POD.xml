@@ -64,9 +64,10 @@
             <option name="POD_COMMAND" value="true"/>
         </context>
     </template>
-    <template name="=over" value="=over $LEVEL$&#10;&#10;$SELECTION$$END$&#10;&#10;=back&#10;" description="=over ... =back"
-              toReformat="true" toShortenFQNames="true">
+    <template name="=over" value="=over $LEVEL$&#10;&#10;=item $TITLE$&#10;&#10;$SELECTION$$END$&#10;&#10;=back&#10;"
+              description="=over ... =back" toReformat="true" toShortenFQNames="true">
         <variable name="LEVEL" expression="&quot;1&quot;" defaultValue="" alwaysStopAt="true"/>
+        <variable name="TITLE" expression="complete()" defaultValue="&quot;title&quot;" alwaysStopAt="true"/>
         <context>
             <option name="POD_COMMAND" value="true"/>
         </context>
