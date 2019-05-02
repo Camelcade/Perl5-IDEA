@@ -22,3 +22,13 @@ Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: null; Icon: null; Type Icon
     String
 Lookups: VERSION; Text: VERSION; Tail: null; Type: null; Icon: null; Type Icon: null
     String
+Lookups: mojo_attr([$new_value]); Text: mojo_attr([$new_value]); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::mojo_attr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 84 in header1.pl
+Lookups: moose_attr([$new_value]); Text: moose_attr([$new_value]); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@main::moose_attr($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in header1.pl
+Lookups: somefunc(); Text: somefunc(); Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@main::somefunc at 61 in header1.pl
+Lookups: somemethod(); Text: somemethod(); Tail: null; Type: null; Icon: /method_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@main::somemethod at 38 in header1.pl
+Lookups: somesub(); Text: somesub(); Tail: null; Type: null; Icon: /subroutine_gutter_icon.png; Type Icon: null
+    PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@main::somesub at 21 in header1.pl
