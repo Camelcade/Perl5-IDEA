@@ -48,6 +48,9 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
     if (object instanceof PodFile) {
       return (PodFile)object;
     }
+    if (object instanceof PsiFile) {
+      return ((PsiFile)object).getViewProvider().getPsi(PodLanguage.INSTANCE);
+    }
     if (object instanceof PodTitledSection) {
       return (PodTitledSection)object;
     }

@@ -75,6 +75,16 @@ public class PodQuickDocCompletionTest extends PodLightTestCase {
     doTestCompletionQuickDoc("=back");
   }
 
+  public void testMojoliciousController() {
+    initWithTextSmart("L<<caret>>");
+    doTestCompletionQuickDoc("Mojolicious::Controller");
+  }
+
+  public void testMojoliciousControllerSection() {
+    initWithTextSmart("L<Mojolicious::Controller/<caret>>");
+    doTestCompletionQuickDoc("write_chunk");
+  }
+
   @NotNull
   @Override
   protected String getBuiltInFromTestName() {

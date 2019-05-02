@@ -1,0 +1,30 @@
+<p><a href="psi_element://Mojolicious%3A%3AController">Mojolicious::Controller</a>: <a href="psi_element://Mojolicious%3A%3AController%2FMETHODS">METHODS</a></p><h2>write_chunk</h2><div style="padding-bottom: 10px;"><pre><code>  $c = $c-&gt;write_chunk;
+  $c = $c-&gt;write_chunk('');
+  $c = $c-&gt;write_chunk($bytes);
+  $c = $c-&gt;write_chunk($bytes =&gt; sub {...});</code></pre></div>
+<p style="padding-bottom: 10px;">Write dynamic content non-blocking with chunked transfer encoding, the optional
+drain callback will be executed once all data has been written. Calling this
+method without a chunk of data will finalize the response headers and allow for
+dynamic content to be written later.</p>
+<div style="padding-bottom: 10px;"><pre><code>  # Make sure previous chunk has been written before continuing
+  $c-&gt;write_chunk('H' =&gt; sub {
+    my $c = shift;
+    $c-&gt;write_chunk('ell' =&gt; sub {
+      my $c = shift;
+      $c-&gt;finish('o!');
+    });
+  });</code></pre></div>
+<p style="padding-bottom: 10px;">You can call <a href="psi_element://Mojolicious%3A%3AController%2Ffinish">finish</a> or write an empty chunk of data at any time to end
+the stream.</p>
+<div style="padding-bottom: 10px;"><pre><code>  HTTP/1.1 200 OK
+  Date: Sat, 13 Sep 2014 16:48:29 GMT
+  Transfer-Encoding: chunked
+  Server: Mojolicious (Perl)
+
+  1
+  H
+  3
+  ell
+  2
+  o!
+  0</code></pre></div>
