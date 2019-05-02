@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,6 @@ package completion;
 import base.PerlLightTestCase;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 
-/**
- * Created by hurricup on 04.03.2016.
- */
 public class PodCompletionEmbeddedTest extends PerlLightTestCase {
 
   @Override
@@ -45,7 +42,13 @@ public class PodCompletionEmbeddedTest extends PerlLightTestCase {
 
   public void testHeader2() {doTest();}
 
+  public void testHeader3() {doTest();}
+
+  public void testHeader4() {doTest();}
+
   public void testMethod() {doTest();}
+
+  public void testItem() {doTest();}
 
   private void doTest() {doTestCompletion();}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.pod.parser;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodSectionH1;
+import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -32,8 +32,5 @@ public interface PodElementPatterns extends PodElementTypes {
     psiElement().withSuperParent(2, psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));
 
   PsiElementPattern.Capture<PsiElement> TITLE_IDENTIFIER =
-    psiElement().withParent(psiElement(SECTION_TITLE));
-
-  PsiElementPattern.Capture<PsiElement> HEADER1_ELEMENT =
-    TITLE_IDENTIFIER.withSuperParent(2, psiElement(PodSectionH1.class));
+    psiElement().withParent(psiElement(PodSectionTitle.class));
 }

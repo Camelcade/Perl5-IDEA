@@ -31,22 +31,16 @@ import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.pod.parser.PodElementPatterns;
 import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
+import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.references.PodSubReference;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
-import com.perl5.lang.pod.psi.PsiSectionTitle;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-/**
- * Created by hurricup on 24.04.2016.
- */
 public class PodTitleCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementPatterns {
-  public static final List<String> DEFAULT_POD_SECTIONS = Arrays.asList(
+  public static final List<String> DEFAULT_POD_SECTIONS = Collections.unmodifiableList(Arrays.asList(
     "VERSION",
     "SYNOPSIS",
     "API",
@@ -59,7 +53,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
     "METHODS",
     "ATTRIBUTES",
     "FUNCTIONS"
-  );
+  ));
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
@@ -70,7 +64,7 @@ public class PodTitleCompletionProvider extends CompletionProvider<CompletionPar
     PsiElement elementParent = element.getParent();
     if (PsiUtilCore.getElementType(element) != POD_IDENTIFIER ||
         element.getPrevSibling() != null ||
-        !(elementParent instanceof PsiSectionTitle)) {
+        !(elementParent instanceof PodSectionTitle)) {
       return;
     }
 
