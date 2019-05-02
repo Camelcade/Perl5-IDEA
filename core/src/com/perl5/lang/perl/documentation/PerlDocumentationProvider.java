@@ -21,9 +21,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
@@ -31,17 +31,14 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
-import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
-import com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
+import com.perl5.lang.pod.idea.documentation.PodDocumentationProvider;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.intellij.codeInsight.TargetElementUtil.ELEMENT_NAME_ACCEPTED;
-import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
 import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
@@ -70,6 +67,26 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   );
   private static final TokenSet FORCE_AS_FUNC_TOKENSET = TokenSet.orSet(TAGS_TOKEN_SET, TokenSet.create(BLOCK_NAME, OPERATOR_FILETEST));
 
+  @Override
+  public String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
+    if (element instanceof PerlSubElement) {
+      return generateDoc((PerlSubElement)element);
+    }
+    else if (element instanceof PerlFileImpl) {
+      return generateDoc((PerlFileImpl)element);
+    }
+    else if (element instanceof PerlNamespaceDefinitionElement) {
+      return generateDoc((PerlNamespaceDefinitionElement)element);
+    }
+    else if (element instanceof PerlVariable) {
+      PsiElement docElement = PerlDocUtil.getPerlVarDoc((PerlVariable)element);
+      if (docElement != null) {
+        return PodDocumentationProvider.doGenerateDoc(docElement);
+      }
+    }
+    return super.generateDoc(element, originalElement);
+  }
+
   @Nullable
   @Override
   public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
@@ -77,7 +94,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return getQuickNavigateInfo(element, originalElement.getParent());
     }
     if (originalElement instanceof PerlValuableEntity) {
-      return PerlValue.from((PerlValuableEntity)originalElement.getOriginalElement()).getPresentableText();
+      return PerlValue.from(originalElement.getOriginalElement()).getPresentableText();
     }
     return super.getQuickNavigateInfo(element, originalElement);
   }
@@ -108,10 +125,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
     IElementType elementType = contextElement.getNode().getElementType();
 
-    if (contextElement instanceof PerlVariable) {
-      return PerlDocUtil.getPerlVarDoc((PerlVariable)contextElement);
-    }
-    else if (elementType == REGEX_MODIFIER) {
+    if (elementType == REGEX_MODIFIER) {
       return PerlDocUtil.getRegexModifierDoc(contextElement);
     }
     else if (elementType == REGEX_TOKEN) {
@@ -126,91 +140,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     else if (isOp(contextElement)) {
       return PerlDocUtil.getPerlOpDoc(contextElement);
     }
-    else if (contextElement instanceof PerlSubNameElement) {
-      PsiElement targetElement = findInlinePodElement(editor);
-      if (targetElement != null) {
-        return targetElement;
-      }
-
-      String packageName = ((PerlSubNameElement)contextElement).getPackageName();
-      String subName = ((PerlSubNameElement)contextElement).getName();
-      if (StringUtil.isNotEmpty(subName)) {
-        PsiElement result = null;
-
-        // search by link
-        if (StringUtil.isNotEmpty(packageName) && !StringUtil.equals(PerlPackageUtil.MAIN_NAMESPACE_NAME, packageName)) {
-          result = PerlDocUtil.resolveDoc(packageName, ((PerlSubNameElement)contextElement).getName(), contextElement, false);
-        }
-
-        // not found or main::
-        if (result == null) {
-          PsiElement target = null;
-
-          if (contextElement.getParent() instanceof PerlSubElement) {
-            target = contextElement.getParent();
-          }
-          else {
-            PsiReference reference = contextElement.getReference();
-            if (reference != null) {
-              target = reference.resolve();
-            }
-          }
-
-          if (target != null) {
-            PsiFile targetFile = target.getContainingFile();
-            if (targetFile != null) {
-              PsiFile podFile = targetFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
-              if (podFile != null) {
-                result = PerlDocUtil.searchPodElement(targetFile, PodDocumentPattern.headingAndItemPattern(subName));
-              }
-            }
-          }
-        }
-
-        if (result != null) {
-          return result;
-        }
-      }
-    }
-    else if (contextElement instanceof PerlNamespaceElement) {
-      PsiElement targetElement = findInlinePodElement(editor);
-      if (targetElement != null) {
-        return targetElement;
-      }
-
-
-      String packageName = ((PerlNamespaceElement)contextElement).getCanonicalName();
-
-      if (StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE, packageName)) {
-        return PerlDocUtil.resolveDoc("perlobj", "Inheritance", contextElement, false);
-      }
-      else if (StringUtil.isNotEmpty(packageName)) {
-        return PerlDocUtil.resolveDoc(packageName, null, contextElement, false);
-      }
-    }
-
-    if (PerlTargetElementEvaluatorEx2.getLightNameIdentifierOwner(contextElement) != null) {
-      PsiElement targetElement = findInlinePodElement(editor);
-      if (targetElement != null) {
-        return targetElement;
-      }
-    }
-
     return super.getCustomDocumentationElement(editor, file, contextElement);
-  }
-
-
-  @Nullable
-  protected PsiElement findInlinePodElement(@NotNull Editor editor) {
-    PsiElement targetElement = findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
-    if (targetElement instanceof PerlPodAwareElement) {
-      targetElement = ((PerlPodAwareElement)targetElement).getPodAnchor();
-    }
-    PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
-    if (podBlock != null) {
-      return podBlock;
-    }
-    return null;
   }
 
   protected static boolean isFunc(PsiElement element) {
@@ -228,5 +158,63 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
            !FORCE_AS_FUNC_TOKENSET.contains(elementType) && (
              PerlTokenSets.OPERATORS_TOKENSET.contains(elementType)
            );
+  }
+
+  /**
+   * Generates documentation for sub declaration or definition
+   */
+  @Nullable
+  private String generateDoc(@NotNull PerlSubElement perlSub) {
+    String namespaceName = perlSub.getNamespaceName();
+    String subName = perlSub.getSubName();
+    if (StringUtil.isNotEmpty(namespaceName) && StringUtil.isNotEmpty(subName)) {
+      PsiElement docElement = PerlDocUtil.resolveDoc(namespaceName, subName, perlSub, false);
+      if (docElement != null) {
+        return PodDocumentationProvider.doGenerateDoc(docElement);
+      }
+    }
+    PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(perlSub);
+    return podBlock == null ? null : PerlDocUtil.renderPodElement(podBlock);
+  }
+
+  /**
+   * Generates documentation for namespace definition
+   */
+  @Nullable
+  private String generateDoc(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
+    String namespaceName = namespaceDefinition.getNamespaceName();
+    if (StringUtil.isNotEmpty(namespaceName)) {
+      PsiElement docElement = PerlDocUtil.resolveDoc(namespaceName, null, namespaceDefinition, false);
+      if (docElement != null) {
+        return PodDocumentationProvider.doGenerateDoc(docElement);
+      }
+    }
+    PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(namespaceDefinition);
+    return podBlock == null ? null : PerlDocUtil.renderPodElement(podBlock);
+  }
+
+  /**
+   * Generates documentation for a file
+   */
+  @Nullable
+  private String generateDoc(@NotNull PerlFileImpl perlFile) {
+    PsiFile nestedPodFile = perlFile.getViewProvider().getPsi(PodLanguage.INSTANCE);
+
+    if (nestedPodFile != null) {
+      PsiElement firstChild = nestedPodFile.getFirstChild();
+      if (firstChild != null && (firstChild.getNextSibling() != null || PsiUtilCore.getElementType(firstChild) != POD_OUTER)) {
+        return PerlDocUtil.renderPodFile((PodFileImpl)nestedPodFile);
+      }
+    }
+
+    String filePackageName = perlFile.getFilePackageName();
+    if (StringUtil.isNotEmpty(filePackageName)) {
+      PsiElement docElement = PerlDocUtil.resolveDoc(filePackageName, null, perlFile, true);
+      if (docElement != null) {
+        return PodDocumentationProvider.doGenerateDoc(docElement);
+      }
+    }
+
+    return null;
   }
 }

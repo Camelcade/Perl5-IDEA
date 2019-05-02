@@ -73,11 +73,7 @@ public class PodQuickDocTest extends PodLightTestCase {
 
   public void testOver() {doTest();}
 
-  public void testParagraph() {doTest();}
-
   public void testPod() {doTest();}
-
-  public void testVerbatimParagraph() {doTest();}
 
   public void testReferenceFile() {doTest();}
 

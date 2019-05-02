@@ -1,1 +1,1 @@
-<h1>ATTRIBUTES</h1><h2>someattr</h2><p style="padding-bottom: 10px;">Attribute description</p>
+<p><a href="psi_element://%2FATTRIBUTES">ATTRIBUTES</a></p><h2>someattr</h2><p style="padding-bottom: 10px;">Attribute description</p>

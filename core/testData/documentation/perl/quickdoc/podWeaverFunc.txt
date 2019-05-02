@@ -1,1 +1,1 @@
-<h1>FUNCTIONS</h1><h2>somefunc</h2><p style="padding-bottom: 10px;">Function dscription</p>
+<p><a href="psi_element://%2FFUNCTIONS">FUNCTIONS</a></p><h2>somefunc</h2><p style="padding-bottom: 10px;">Function dscription</p>

@@ -1,37 +1,11 @@
 ----------Caret #0 at: 9----------
-<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FCommand+Paragraph">Command Paragraph</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>=head1 <i>Heading Text</i></code>
-   
-   </dt>
-<dt style="padding-bottom:4px;font-weight:bold;"><code>=head2 <i>Heading Text</i></code></dt>
-<dt style="padding-bottom:4px;font-weight:bold;"><code>=head3 <i>Heading Text</i></code></dt>
-<dt style="padding-bottom:4px;font-weight:bold;"><code>=head4 <i>Heading Text</i></code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Head1 through head4 produce headings, head1 being the highest
-level.  The text in the rest of this paragraph is the content of the
-heading.  For example:</p>
-<div style="padding-bottom: 10px;"><pre><code>  =head2 Object Attributes</code></pre></div>
-<p style="padding-bottom: 10px;">The text &quot;Object Attributes&quot; comprises the heading there.
-The text in these heading commands can use formatting codes, as seen here:</p>
-<div style="padding-bottom: 10px;"><pre><code>  =head2 Possible Values for C&lt;$/&gt;</code></pre></div>
-<p style="padding-bottom: 10px;">Such commands are explained in the
-&quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p></dd></dl>
+<h1>sub1</h1><p style="padding-bottom: 10px;">sub 1 desc</p>
 ----------Caret #1 at: 36----------
 <h1>sub1</h1><p style="padding-bottom: 10px;">sub 1 desc</p>
 ----------Caret #2 at: 47----------
 <h1>sub2</h1><p style="padding-bottom: 10px;">sub 2 desc</p>
 ----------Caret #3 at: 63----------
-<p><a href="psi_element://pod%3A%3Aperlpod">pod::perlpod</a>: <a href="psi_element://pod%3A%3Aperlpod%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperlpod%2FCommand+Paragraph">Command Paragraph</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;"><code>=head1 <i>Heading Text</i></code>
-   
-   </dt>
-<dt style="padding-bottom:4px;font-weight:bold;"><code>=head2 <i>Heading Text</i></code></dt>
-<dt style="padding-bottom:4px;font-weight:bold;"><code>=head3 <i>Heading Text</i></code></dt>
-<dt style="padding-bottom:4px;font-weight:bold;"><code>=head4 <i>Heading Text</i></code></dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Head1 through head4 produce headings, head1 being the highest
-level.  The text in the rest of this paragraph is the content of the
-heading.  For example:</p>
-<div style="padding-bottom: 10px;"><pre><code>  =head2 Object Attributes</code></pre></div>
-<p style="padding-bottom: 10px;">The text &quot;Object Attributes&quot; comprises the heading there.
-The text in these heading commands can use formatting codes, as seen here:</p>
-<div style="padding-bottom: 10px;"><pre><code>  =head2 Possible Values for C&lt;$/&gt;</code></pre></div>
-<p style="padding-bottom: 10px;">Such commands are explained in the
-&quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p></dd></dl>
+<h1>sub2</h1><p style="padding-bottom: 10px;">sub 2 desc</p>
 ----------Caret #4 at: 91----------
 <h1>sub2</h1><p style="padding-bottom: 10px;">sub 2 desc</p>
 ----------Caret #5 at: 100----------

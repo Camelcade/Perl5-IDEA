@@ -17,25 +17,35 @@
 package com.perl5.lang.pod.idea.documentation;
 
 import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.documentation.PerlDocumentationProviderBase;
+import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodFormatter;
-import com.perl5.lang.pod.parser.psi.PodSection;
-import com.perl5.lang.pod.parser.psi.PodSectionParagraph;
-import com.perl5.lang.pod.parser.psi.PodSectionVerbatimParagraph;
+import com.perl5.lang.pod.lexer.PodTokenSets;
+import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
+import java.net.URLDecoder;
 
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
+  private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
+
+  @Nullable
+  @Override
+  public String generateDoc(@Nullable PsiElement element, @Nullable PsiElement originalElement) {
+    return doGenerateDoc(element);
+  }
 
   @Override
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
@@ -44,6 +54,9 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
       if (lookupString.startsWith("=")) {
         return PerlDocUtil.resolveDoc("perlpod", lookupString, element, true);
       }
+    }
+    else if (object instanceof PodSection) {
+      return (PodSection)object;
     }
     return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }
@@ -54,37 +67,49 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     if (contextElement == null || contextElement.getLanguage() != PodLanguage.INSTANCE) {
       return null;
     }
+    IElementType elementType = PsiUtilCore.getElementType(contextElement);
 
-    if (contextElement instanceof PodFormatter) {
-      PsiElement tagElement = contextElement.getFirstChild();
-      if (tagElement != null) {
-        String tagText = tagElement.getText();
-        if (StringUtil.isNotEmpty(tagText)) {
-          return PerlDocUtil.resolveDoc("perlpod", tagText, contextElement, true);
-        }
-      }
+    if (elementType == POD_ANGLE_LEFT) {
+      return getCustomDocumentationElement(editor, file, contextElement.getPrevSibling());
     }
-    else if (contextElement instanceof PodSectionParagraph) {
-      return PerlDocUtil.resolveDoc("perlpod", "Ordinary Paragraph", contextElement, true);
+    else if (PodTokenSets.POD_FORMATTERS_TOKENSET.contains(elementType)) {
+      return PerlDocUtil.resolveDoc("perlpod", contextElement.getText(), contextElement, true);
     }
-    else if (contextElement instanceof PodSectionVerbatimParagraph) {
-      return PerlDocUtil.resolveDoc("perlpod", "Verbatim Paragraph", contextElement, true);
-    }
-    else if (contextElement instanceof PodSection) {
-      PsiElement tagElement = contextElement.getFirstChild();
-      if (tagElement != null && tagElement.getNode().getElementType() != POD_UNKNOWN) {
-        String tagText = tagElement.getText();
-        if (StringUtil.isNotEmpty(tagText)) {
-          return PerlDocUtil.resolveDoc("perlpod", tagText, contextElement, true);
-        }
-      }
-    }
-
-    PsiElement targetElement = findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED);
-    if (targetElement != null) {
-      return targetElement;
+    else if (PodTokenSets.POD_COMMANDS_TOKENSET.contains(elementType)) {
+      return PerlDocUtil.resolveDoc("perlpod", contextElement.getText(), contextElement, true);
     }
 
     return super.getCustomDocumentationElement(editor, file, contextElement);
+  }
+
+  @Nullable
+  @Override
+  public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+    if (context instanceof PodCompositeElement || context instanceof PerlFile) {
+      try {
+        return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.createFromUrl(URLDecoder.decode(link, "UTF-8")), context, false);
+      }
+      catch (Exception e) {
+        LOG.error(e);
+      }
+    }
+    return super.getDocumentationElementForLink(psiManager, link, context);
+  }
+
+  @Nullable
+  public static String doGenerateDoc(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
+    if (element instanceof PodFile) {
+      return StringUtil.nullize(PerlDocUtil.renderPodFile((PodFileImpl)element));
+    }
+    else if (element instanceof PodFormatterX) {
+      return doGenerateDoc(((PodFormatterX)element).getIndexTarget());
+    }
+    else if (element instanceof PodCompositeElement) {
+      return PerlDocUtil.renderElement((PodCompositeElement)element);
+    }
+    return null;
   }
 }

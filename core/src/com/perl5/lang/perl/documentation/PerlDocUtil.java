@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ public class PerlDocUtil implements PerlElementTypes {
       PsiFile targetFile = PodFileUtil.getPodOrPackagePsiByDescriptor(project, descriptor);
 
       if (targetFile == null) {
-        targetFile = origin.getContainingFile();
+        targetFile = origin.getContainingFile().getViewProvider().getPsi(PodLanguage.INSTANCE);
       }
 
       if (targetFile != null) {
