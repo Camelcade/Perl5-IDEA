@@ -1,19 +1,19 @@
 Lookups: Mojolicious::Controller; Text: Mojolicious::Controller; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: Controller.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers; Text: Mojolicious::Plugin::DefaultHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::TagHelpers; Text: Mojolicious::Plugin::TagHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: TagHelpers.pm
 Lookups: MyTest::ClassAccessor; Text: MyTest::ClassAccessor; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: ClassAccessor.pm
 Lookups: MyTest::Constants; Text: MyTest::Constants; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: Constants.pm
 Lookups: MyTest::Exceptions; Text: MyTest::Exceptions; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: Exceptions.pm
 Lookups: MyTest::Some::Package; Text: MyTest::Some::Package; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: Package.pm
 Lookups: MyTest::Something; Text: MyTest::Something; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    PsiElement: PerlNamespaceElementImpl(Perl5: package::name) at 8 in packageRequire.pl
+    VirtualFile: Something.pm
 Lookups: v5.10; Text: v5.10; Tail: null; Type: array_base say state switch; Icon: null; Type Icon: null
     PerlVersion
 Lookups: v5.11; Text: v5.11; Tail: null; Type: array_base say state switch unicode_strings; Icon: null; Type Icon: null

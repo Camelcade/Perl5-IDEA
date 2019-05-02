@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -185,9 +185,9 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
 
     if (packageProcessor instanceof PerlPackageParentsProvider &&
         ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions()) {
-      PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, s -> {
-        if (!typedStringsSet.contains(s)) {
-          resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(null, s, null));
+      PerlPackageUtil.processPackageFilesForPsiElement(stringContentElement, (packageName, file) -> {
+        if (!typedStringsSet.contains(packageName)) {
+          resultSet.addElement(PerlPackageCompletionUtil.getPackageLookupElement(file, packageName, null));
         }
         return true;
       });

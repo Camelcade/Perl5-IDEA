@@ -68,11 +68,10 @@ public class PerlPackageCompletionUtil {
    * @return package lookup element by package name
    */
   @NotNull
-  public static LookupElementBuilder getPackageLookupElement(@Nullable PsiElement namespaceDefinition,
+  public static LookupElementBuilder getPackageLookupElement(@Nullable Object lookupObject,
                                                              @NotNull String packageName,
                                                              @Nullable Icon icon) {
-    LookupElementBuilder result = LookupElementBuilder
-      .create(ObjectUtils.notNull(namespaceDefinition, packageName), packageName).withPsiElement(namespaceDefinition);
+    LookupElementBuilder result = LookupElementBuilder.create(ObjectUtils.notNull(lookupObject, packageName), packageName);
 
     if (PerlPackageUtil.isBuiltIn(packageName)) {
       result = result.withBoldness(true);
@@ -173,8 +172,8 @@ public class PerlPackageCompletionUtil {
 
 
   public static void fillWithAllPackageFiles(@NotNull PsiElement element, @NotNull final CompletionResultSet result) {
-    PerlPackageUtil.processPackageFilesForPsiElement(element, s -> {
-      result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(element, s, null));
+    PerlPackageUtil.processPackageFilesForPsiElement(element, (packageName, file) -> {
+      result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(file, packageName, null));
       return true;
     });
   }

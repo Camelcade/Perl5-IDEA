@@ -1,16 +1,16 @@
 Lookups: -norequire; Text: -norequire; Tail: null; Type: suppresses attempt to require a package file; Icon: /option.png; Type Icon: null
     String
 Lookups: Mojolicious::Controller; Text: Mojolicious::Controller; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: Controller.pm
 Lookups: Mojolicious::Plugin::DefaultHelpers; Text: Mojolicious::Plugin::DefaultHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: DefaultHelpers.pm
 Lookups: Mojolicious::Plugin::TagHelpers; Text: Mojolicious::Plugin::TagHelpers; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: TagHelpers.pm
 Lookups: MyTest::ClassAccessor; Text: MyTest::ClassAccessor; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: ClassAccessor.pm
 Lookups: MyTest::Exceptions; Text: MyTest::Exceptions; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: Exceptions.pm
 Lookups: MyTest::Some::Package; Text: MyTest::Some::Package; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: Package.pm
 Lookups: MyTest::Something; Text: MyTest::Something; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
-    String
+    VirtualFile: Something.pm

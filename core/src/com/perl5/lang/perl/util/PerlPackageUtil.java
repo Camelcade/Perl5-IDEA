@@ -36,6 +36,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.PairProcessor;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlLibProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
@@ -517,13 +518,13 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
     }
   }
 
-  public static void processPackageFilesForPsiElement(@NotNull PsiElement element, @NotNull Processor<String> processor) {
+  public static void processPackageFilesForPsiElement(@NotNull PsiElement element, @NotNull PairProcessor<String, VirtualFile> processor) {
     processIncFilesForPsiElement(
       element,
       (file, classRoot) -> {
         String relativePath = VfsUtil.getRelativePath(file, classRoot);
         String packageName = getPackageNameByPath(relativePath);
-        return processor.process(packageName);
+        return processor.process(packageName, file);
       },
       PerlFileTypePackage.INSTANCE)
     ;

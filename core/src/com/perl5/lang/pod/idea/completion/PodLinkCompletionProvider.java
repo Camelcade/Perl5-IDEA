@@ -93,11 +93,11 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       return true;
     }, PodFileType.INSTANCE);
 
-    PerlPackageUtil.processPackageFilesForPsiElement(link, s -> {
-      if (StringUtil.isNotEmpty(s)) {
-        if (!foundPods.contains(s)) {
-          result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(null, s, null));
-          foundPods.add(s);
+    PerlPackageUtil.processPackageFilesForPsiElement(link, (packageName, file) -> {
+      if (StringUtil.isNotEmpty(packageName)) {
+        if (!foundPods.contains(packageName)) {
+          result.addElement(PerlPackageCompletionUtil.getPackageLookupElement(file, packageName, null));
+          foundPods.add(packageName);
         }
       }
       return true;
