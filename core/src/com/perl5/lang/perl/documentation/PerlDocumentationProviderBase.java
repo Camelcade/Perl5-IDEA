@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.documentation;
 
+import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -116,6 +118,26 @@ public abstract class PerlDocumentationProviderBase extends AbstractDocumentatio
       return getCustomDocumentationElement(editor, file, contextElement.getParent());
     }
 
+    return null;
+  }
+
+  /**
+   * This is a copy of {@link TargetElementUtil#findTargetElement(com.intellij.openapi.editor.Editor, int)} without obsolete EDT assertion
+   * fixme remove after assertion removal
+   */
+  @Nullable
+  protected static PsiElement findTargetElement(Editor editor, int flags) {
+
+    int offset = editor.getCaretModel().getOffset();
+    final PsiElement result = TargetElementUtil.getInstance().findTargetElement(editor, flags, offset);
+    if (result != null) {
+      return result;
+    }
+
+    int expectedCaretOffset = editor instanceof EditorEx ? ((EditorEx)editor).getExpectedCaretOffset() : offset;
+    if (expectedCaretOffset != offset) {
+      return TargetElementUtil.getInstance().findTargetElement(editor, flags, expectedCaretOffset);
+    }
     return null;
   }
 }

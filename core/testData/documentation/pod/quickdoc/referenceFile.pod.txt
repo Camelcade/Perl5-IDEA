@@ -1,0 +1,1508 @@
+<ul style="margin-left: 0px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FThe+Syntax+of+Variable+Names">The Syntax of Variable Names</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FGeneral+Variables">General Variables</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+regular+expressions">Variables related to regular expressions</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+filehandles">Variables related to filehandles</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+formats">Variables related to formats</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FError+Variables">Error Variables</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FVariables+related+to+the+interpreter+state">Variables related to the interpreter state</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://pod%3A%3Aperlvar%2FDeprecated+and+removed+variables">Deprecated and removed variables</a></li></ul></ul><h1>NAME</h1><p style="padding-bottom: 10px;">perlvar - Perl predefined variables</p>
+<h1>DESCRIPTION</h1><h2>The Syntax of Variable Names</h2><p style="padding-bottom: 10px;">Variable names in Perl can have several formats.  Usually, they
+must begin with a letter or underscore, in which case they can be
+arbitrarily long (up to an internal limit of 251 characters) and
+may contain letters, digits, underscores, or the special sequence
+<code>::</code> or <code>'</code>.  In this case, the part before the last <code>::</code> or
+<code>'</code> is taken to be a <i>package qualifier</i>; see <a href="psi_element://perlmod">perlmod</a>.
+A Unicode letter that is not ASCII is not considered to be a letter
+unless <span style="white-space: nowrap;"><code>&quot;use utf8&quot;</code></span> is in effect, and somewhat more complicated
+rules apply; see <a href="psi_element://perldata%2FIdentifier+parsing">Identifier parsing in perldata</a> for details.</p>
+<p style="padding-bottom: 10px;">Perl variable names may also be a sequence of digits, a single
+punctuation character, or the two-character sequence: <code>^</code> (caret or
+CIRCUMFLEX ACCENT) followed by any one of the characters <code>[][A-Z^_?\]</code>.
+These names are all reserved for
+special uses by Perl; for example, the all-digits names are used
+to hold data captured by backreferences after a regular expression
+match.</p>
+<p style="padding-bottom: 10px;">Since Perl v5.6.0, Perl variable names may also be alphanumeric strings
+preceded by a caret.  These must all be written in the form <code>${^Foo}</code>;
+the braces are not optional.  <code>${^Foo}</code> denotes the scalar variable
+whose name is considered to be a control-<code>F</code> followed by two <code>o</code>'s.
+These variables are
+reserved for future special uses by Perl, except for the ones that
+begin with <code>^_</code> (caret-underscore).  No
+name that begins with <code>^_</code> will acquire a special
+meaning in any future version of Perl; such names may therefore be
+used safely in programs.  <code>$^_</code> itself, however, <i>is</i> reserved.</p>
+<p style="padding-bottom: 10px;">Perl identifiers that begin with digits or
+punctuation characters are exempt from the effects of the <code>package</code>
+declaration and are always forced to be in package <code>main</code>; they are
+also exempt from <code>strict 'vars'</code> errors.  A few other names are also
+exempt in these ways:</p>
+<div style="padding-bottom: 10px;"><pre><code>    ENV      STDIN
+    INC      STDOUT
+    ARGV     STDERR
+    ARGVOUT
+    SIG</code></pre></div>
+<p style="padding-bottom: 10px;">In particular, the special <code>${^_XYZ}</code> variables are always taken
+to be in package <code>main</code>, regardless of any <code>package</code> declarations
+presently in scope.</p>
+<h1>SPECIAL VARIABLES</h1><p style="padding-bottom: 10px;">The following names have special meaning to Perl.  Most punctuation
+names have reasonable mnemonics, or analogs in the shells.
+Nevertheless, if you wish to use long variable names, you need only say:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use English;</code></pre></div>
+<p style="padding-bottom: 10px;">at the top of your program.  This aliases all the short names to the long
+names in the current package.  Some even have medium names, generally
+borrowed from <B>awk</B>.  For more info, please see <a href="psi_element://English" style="color:red">English</a>.</p>
+<p style="padding-bottom: 10px;">Before you continue, note the sort order for variables.  In general, we
+first list the variables in case-insensitive, almost-lexigraphical
+order (ignoring the <code>{</code> or <code>^</code> preceding words, as in <code>${^UNICODE}</code>
+or <code>$^T</code>), although <code>$_</code> and <code>@_</code> move up to the top of the pile.
+For variables with the same identifier, we list it in order of scalar,
+array, hash, and bareword.</p>
+<h2>General Variables</h2><dl><dt style="padding-bottom:4px;font-weight:bold;">$ARG</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$_
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The default input and pattern-searching space.  The following pairs are
+equivalent:</p>
+<div style="padding-bottom: 10px;"><pre><code>    while (&lt;&gt;) {...}    # equivalent only in while!
+    while (defined($_ = &lt;&gt;)) {...}
+
+    /^Subject:/
+    $_ =~ /^Subject:/
+
+    tr/a-z/A-Z/
+    $_ =~ tr/a-z/A-Z/
+
+    chomp
+    chomp($_)</code></pre></div>
+<p style="padding-bottom: 10px;">Here are the places where Perl will assume <code>$_</code> even if you don't use it:</p>
+<ul><li><p style="padding-bottom: 10px;">The following functions use <code>$_</code> as a default argument:</p>
+<p style="padding-bottom: 10px;">abs, alarm, chomp, chop, chr, chroot,
+cos, defined, eval, evalbytes, exp, fc, glob, hex, int, lc,
+lcfirst, length, log, lstat, mkdir, oct, ord, pos, print, printf,
+quotemeta, readlink, readpipe, ref, require, reverse (in scalar context only),
+rmdir, say, sin, split (for its second
+argument), sqrt, stat, study, uc, ucfirst,
+unlink, unpack.</p></li>
+<li><p style="padding-bottom: 10px;">All file tests (<code>-f</code>, <code>-d</code>) except for <code>-t</code>, which defaults to STDIN.
+See <a href="psi_element://perlfunc%2F-X">-X in perlfunc</a></p></li>
+<li><p style="padding-bottom: 10px;">The pattern matching operations <code>m//</code>, <code>s///</code> and <code>tr///</code> (aka <code>y///</code>)
+when used without an <code>=~</code> operator.</p></li>
+<li><p style="padding-bottom: 10px;">The default iterator variable in a <code>foreach</code> loop if no other
+variable is supplied.</p></li>
+<li><p style="padding-bottom: 10px;">The implicit iterator variable in the <code>grep()</code> and <code>map()</code> functions.</p></li>
+<li><p style="padding-bottom: 10px;">The implicit variable of <code>given()</code>.</p></li>
+<li><p style="padding-bottom: 10px;">The default place to put the next value or input record
+when a <code>&lt;FH&gt;</code>, <code>readline</code>, <code>readdir</code> or <code>each</code>
+operation's result is tested by itself as the sole criterion of a <code>while</code>
+test.  Outside a <code>while</code> test, this will not happen.</p></li></ul>
+<p style="padding-bottom: 10px;"><code>$_</code> is a global variable.</p>
+<p style="padding-bottom: 10px;">However, between perl v5.10.0 and v5.24.0, it could be used lexically by
+writing <code>my $_</code>.  Making <code>$_</code> refer to the global <code>$_</code> in the same scope
+was then possible with <code>our $_</code>.  This experimental feature was removed and is
+now a fatal error, but you may encounter it in older code.</p>
+<p style="padding-bottom: 10px;">Mnemonic: underline is understood in certain operations.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@ARG</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">@_
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Within a subroutine the array <code>@_</code> contains the parameters passed to
+that subroutine.  Inside a subroutine, <code>@_</code> is the default array for
+the array operators <code>pop</code> and <code>shift</code>.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlsub">perlsub</a>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$LIST_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$&quot;
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When an array or an array slice is interpolated into a double-quoted
+string or a similar context such as <code>/.../</code>, its elements are
+separated by this value.  Default is a space.  For example, this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;The array is: @array\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">is equivalent to this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    print &quot;The array is: &quot; . join($&quot;, @array) . &quot;\n&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Mnemonic: works in double-quoted context.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$PROCESS_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$PID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$$
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The process number of the Perl running this script.  Though you <i>can</i> set
+this variable, doing so is generally discouraged, although it can be
+invaluable for some testing purposes.  It will be reset automatically
+across <code>fork()</code> calls.</p>
+<p style="padding-bottom: 10px;">Note for Linux and Debian GNU/kFreeBSD users: Before Perl v5.16.0 perl
+would emulate POSIX semantics on Linux systems using LinuxThreads, a
+partial implementation of POSIX Threads that has since been superseded
+by the Native POSIX Thread Library (NPTL).</p>
+<p style="padding-bottom: 10px;">LinuxThreads is now obsolete on Linux, and caching <code>getpid()</code>
+like this made embedding perl unnecessarily complex (since you'd have
+to manually update the value of $$), so now <code>$$</code> and <code>getppid()</code>
+will always return the same values as the underlying C library.</p>
+<p style="padding-bottom: 10px;">Debian GNU/kFreeBSD systems also used LinuxThreads up until and
+including the 6.0 release, but after that moved to FreeBSD thread
+semantics, which are POSIX-like.</p>
+<p style="padding-bottom: 10px;">To see if your system is affected by this discrepancy check if
+<code>getconf GNU_LIBPTHREAD_VERSION | grep -q NPTL</code> returns a false
+value.  NTPL threads preserve the POSIX semantics.</p>
+<p style="padding-bottom: 10px;">Mnemonic: same as shells.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$PROGRAM_NAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$0
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Contains the name of the program being executed.</p>
+<p style="padding-bottom: 10px;">On some (but not all) operating systems assigning to <code>$0</code> modifies
+the argument area that the <code>ps</code> program sees.  On some platforms you
+may have to use special <code>ps</code> options or a different <code>ps</code> to see the
+changes.  Modifying the <code>$0</code> is more useful as a way of indicating the
+current program state than it is for hiding the program you're
+running.</p>
+<p style="padding-bottom: 10px;">Note that there are platform-specific limitations on the maximum
+length of <code>$0</code>.  In the most extreme case it may be limited to the
+space occupied by the original <code>$0</code>.</p>
+<p style="padding-bottom: 10px;">In some platforms there may be arbitrary amount of padding, for
+example space characters, after the modified name as shown by <code>ps</code>.
+In some platforms this padding may extend all the way to the original
+length of the argument area, no matter what you do (this is the case
+for example with Linux 2.2).</p>
+<p style="padding-bottom: 10px;">Note for BSD users: setting <code>$0</code> does not completely remove &quot;perl&quot;
+from the ps(1) output.  For example, setting <code>$0</code> to <code>&quot;foobar&quot;</code> may
+result in <code>&quot;perl: foobar (perl)&quot;</code> (whether both the <code>&quot;perl: &quot;</code> prefix
+and the &quot; (perl)&quot; suffix are shown depends on your exact BSD variant
+and version).  This is an operating system feature, Perl cannot help it.</p>
+<p style="padding-bottom: 10px;">In multithreaded scripts Perl coordinates the threads so that any
+thread may modify its copy of the <code>$0</code> and the change becomes visible
+to ps(1) (assuming the operating system plays along).  Note that
+the view of <code>$0</code> the other threads have will not change since they
+have their own copies of it.</p>
+<p style="padding-bottom: 10px;">If the program has been given to perl via the switches <code>-e</code> or <code>-E</code>,
+<code>$0</code> will contain the string <code>&quot;-e&quot;</code>.</p>
+<p style="padding-bottom: 10px;">On Linux as of perl v5.14.0 the legacy process name will be set with
+<code>prctl(2)</code>, in addition to altering the POSIX name via <code>argv[0]</code> as
+perl has done since version 4.000.  Now system utilities that read the
+legacy process name such as ps, top and killall will recognize the
+name you set when assigning to <code>$0</code>.  The string you supply will be
+cut off at 16 bytes, this is a limitation imposed by Linux.</p>
+<p style="padding-bottom: 10px;">Mnemonic: same as <B>sh</B> and <B>ksh</B>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$REAL_GROUP_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$GID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$(
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The real gid of this process.  If you are on a machine that supports
+membership in multiple groups simultaneously, gives a space separated
+list of groups you are in.  The first number is the one returned by
+<code>getgid()</code>, and the subsequent ones by <code>getgroups()</code>, one of which may be
+the same as the first number.</p>
+<p style="padding-bottom: 10px;">However, a value assigned to <code>$(</code> must be a single number used to
+set the real gid.  So the value given by <code>$(</code> should <i>not</i> be assigned
+back to <code>$(</code> without being forced numeric, such as by adding zero.  Note
+that this is different to the effective gid (<code>$)</code>) which does take a
+list.</p>
+<p style="padding-bottom: 10px;">You can change both the real gid and the effective gid at the same
+time by using <code>POSIX::setgid()</code>.  Changes
+to <code>$(</code> require a check to <code>$!</code>
+to detect any possible errors after an attempted change.</p>
+<p style="padding-bottom: 10px;">Mnemonic: parentheses are used to <i>group</i> things.  The real gid is the
+group you <i>left</i>, if you're running setgid.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$EFFECTIVE_GROUP_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$EGID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$)
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The effective gid of this process.  If you are on a machine that
+supports membership in multiple groups simultaneously, gives a space
+separated list of groups you are in.  The first number is the one
+returned by <code>getegid()</code>, and the subsequent ones by <code>getgroups()</code>,
+one of which may be the same as the first number.</p>
+<p style="padding-bottom: 10px;">Similarly, a value assigned to <code>$)</code> must also be a space-separated
+list of numbers.  The first number sets the effective gid, and
+the rest (if any) are passed to <code>setgroups()</code>.  To get the effect of an
+empty list for <code>setgroups()</code>, just repeat the new effective gid; that is,
+to force an effective gid of 5 and an effectively empty <code>setgroups()</code>
+list, say <code>$) = &quot;5 5&quot;</code>.</p>
+<p style="padding-bottom: 10px;">You can change both the effective gid and the real gid at the same
+time by using <code>POSIX::setgid()</code> (use only a single numeric argument).
+Changes to <code>$)</code> require a check to <code>$!</code> to detect any possible errors
+after an attempted change.</p>
+<p style="padding-bottom: 10px;"><code>$&lt;</code>, <code>$&gt;</code>, <code>$(</code> and <code>$)</code> can be set only on
+machines that support the corresponding <i>set[re][ug]id()</i> routine.  <code>$(</code>
+and <code>$)</code> can be swapped only on machines supporting <code>setregid()</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: parentheses are used to <i>group</i> things.  The effective gid
+is the group that's <i>right</i> for you, if you're running setgid.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$REAL_USER_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$UID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$&lt;
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The real uid of this process.  You can change both the real uid and the
+effective uid at the same time by using <code>POSIX::setuid()</code>.  Since
+changes to <code>$&lt;</code> require a system call, check <code>$!</code> after a change
+attempt to detect any possible errors.</p>
+<p style="padding-bottom: 10px;">Mnemonic: it's the uid you came <i>from</i>, if you're running setuid.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$EFFECTIVE_USER_ID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$EUID</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$&gt;
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The effective uid of this process.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $&lt; = $&gt;;            # set real to effective uid
+    ($&lt;,$&gt;) = ($&gt;,$&lt;);  # swap real and effective uids</code></pre></div>
+<p style="padding-bottom: 10px;">You can change both the effective uid and the real uid at the same
+time by using <code>POSIX::setuid()</code>.  Changes to <code>$&gt;</code> require a check
+to <code>$!</code> to detect any possible errors after an attempted change.</p>
+<p style="padding-bottom: 10px;"><code>$&lt;</code> and <code>$&gt;</code> can be swapped only on machines
+supporting <code>setreuid()</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: it's the uid you went <i>to</i>, if you're running setuid.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$SUBSCRIPT_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$SUBSEP</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$;
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The subscript separator for multidimensional array emulation.  If you
+refer to a hash element as</p>
+<div style="padding-bottom: 10px;"><pre><code>    $foo{$x,$y,$z}</code></pre></div>
+<p style="padding-bottom: 10px;">it really means</p>
+<div style="padding-bottom: 10px;"><pre><code>    $foo{join($;, $x, $y, $z)}</code></pre></div>
+<p style="padding-bottom: 10px;">But don't put</p>
+<div style="padding-bottom: 10px;"><pre><code>    @foo{$x,$y,$z}	# a slice--note the @</code></pre></div>
+<p style="padding-bottom: 10px;">which means</p>
+<div style="padding-bottom: 10px;"><pre><code>    ($foo{$x},$foo{$y},$foo{$z})</code></pre></div>
+<p style="padding-bottom: 10px;">Default is &quot;\034&quot;, the same as SUBSEP in <B>awk</B>.  If your keys contain
+binary data there might not be any safe value for <code>$;</code>.</p>
+<p style="padding-bottom: 10px;">Consider using &quot;real&quot; multidimensional arrays as described
+in <a href="psi_element://perllol">perllol</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: comma (the syntactic subscript separator) is a semi-semicolon.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$a</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$b
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Special package variables when using <code>sort()</code>, see <a href="psi_element://perlfunc%2Fsort">sort in perlfunc</a>.
+Because of this specialness <code>$a</code> and <code>$b</code> don't need to be declared
+(using <code>use vars</code>, or <code>our()</code>) even when using the <code>strict 'vars'</code>
+pragma.  Don't lexicalize them with <code>my $a</code> or <code>my $b</code> if you want to
+be able to use them in the <code>sort()</code> comparison block or function.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%ENV</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The hash <code>%ENV</code> contains your current environment.  Setting a
+value in <code>ENV</code> changes the environment for any child processes
+you subsequently <code>fork()</code> off.</p>
+<p style="padding-bottom: 10px;">As of v5.18.0, both keys and values stored in <code>%ENV</code> are stringified.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $foo = 1;
+    $ENV{'bar'} = \$foo;
+    if( ref $ENV{'bar'} ) {
+        say &quot;Pre 5.18.0 Behaviour&quot;;
+    } else {
+        say &quot;Post 5.18.0 Behaviour&quot;;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Previously, only child processes received stringified values:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $foo = 1;
+    $ENV{'bar'} = \$foo;
+
+    # Always printed 'non ref'
+    system($^X, '-e',
+           q/print ( ref $ENV{'bar'}  ? 'ref' : 'non ref' ) /);</code></pre></div>
+<p style="padding-bottom: 10px;">This happens because you can't really share arbitrary data structures with
+foreign processes.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$OLD_PERL_VERSION</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$]
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The revision, version, and subversion of the Perl interpreter, represented
+as a decimal of the form 5.XXXYYY, where XXX is the version / 1e3 and YYY
+is the subversion / 1e6.  For example, Perl v5.10.1 would be &quot;5.010001&quot;.</p>
+<p style="padding-bottom: 10px;">This variable can be used to determine whether the Perl interpreter
+executing a script is in the right range of versions:</p>
+<div style="padding-bottom: 10px;"><pre><code>    warn &quot;No PerlIO!\n&quot; if $] lt '5.008';</code></pre></div>
+<p style="padding-bottom: 10px;">When comparing <code>$]</code>, string comparison operators are <B>highly
+recommended</B>.  The inherent limitations of binary floating point
+representation can sometimes lead to incorrect comparisons for some
+numbers on some architectures.</p>
+<p style="padding-bottom: 10px;">See also the documentation of <code>use VERSION</code> and <code>require VERSION</code>
+for a convenient way to fail if the running Perl interpreter is too old.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2F%24%5EV">$^V</a> for a representation of the Perl version as a <a href="psi_element://version" style="color:red">version</a>
+object, which allows more flexible string comparisons.</p>
+<p style="padding-bottom: 10px;">The main advantage of <code>$]</code> over <code>$^V</code> is that it works the same on any
+version of Perl.  The disadvantages are that it can't easily be compared
+to versions in other formats (e.g. literal v-strings, &quot;v1.2.3&quot; or
+version objects) and numeric comparisons can occasionally fail; it's good
+for string literal version checks and bad for comparing to a variable
+that hasn't been sanity-checked.</p>
+<p style="padding-bottom: 10px;">The <code>$OLD_PERL_VERSION</code> form was added in Perl v5.20.0 for historical
+reasons but its use is discouraged. (If your reason to use <code>$]</code> is to
+run code on old perls then referring to it as <code>$OLD_PERL_VERSION</code> would
+be self-defeating.)</p>
+<p style="padding-bottom: 10px;">Mnemonic: Is this version of perl in the right bracket?</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$SYSTEM_FD_MAX</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^F
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The maximum system file descriptor, ordinarily 2.  System file
+descriptors are passed to <code>exec()</code>ed processes, while higher file
+descriptors are not.  Also, during an
+<code>open()</code>, system file descriptors are
+preserved even if the <code>open()</code> fails (ordinary file descriptors are
+closed before the <code>open()</code> is attempted).  The close-on-exec
+status of a file descriptor will be decided according to the value of
+<code>$^F</code> when the corresponding file, pipe, or socket was opened, not the
+time of the <code>exec()</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@F</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The array <code>@F</code> contains the fields of each line read in when autosplit
+mode is turned on.  See <a href="psi_element://perlrun">perlrun</a> for the <B>-a</B> switch.  This array
+is package-specific, and must be declared or given a full package name
+if not in package main when running under <code>strict 'vars'</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@INC</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The array <code>@INC</code> contains the list of places that the <code>do EXPR</code>,
+<code>require</code>, or <code>use</code> constructs look for their library files.  It
+initially consists of the arguments to any <B>-I</B> command-line
+switches, followed by the default Perl library, probably
+<i>/usr/local/lib/perl</i>, followed by &quot;.&quot;, to represent the current
+directory.  (&quot;.&quot; will not be appended if taint checks are enabled,
+either by <code>-T</code> or by <code>-t</code>, or if configured not to do so by the
+<code>-Ddefault_inc_excludes_dot</code> compile time option.)  If you need to
+modify this at runtime, you should use the <code>use lib</code> pragma to get
+the machine-dependent library properly loaded also:</p>
+<div style="padding-bottom: 10px;"><pre><code>    use lib '/mypath/libdir/';
+    use SomeMod;</code></pre></div>
+<p style="padding-bottom: 10px;">You can also insert hooks into the file inclusion system by putting Perl
+code directly into <code>@INC</code>.  Those hooks may be subroutine references,
+array references or blessed objects.  See <a href="psi_element://perlfunc%2Frequire">require in perlfunc</a> for details.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%INC</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The hash <code>%INC</code> contains entries for each filename included via the
+<code>do</code>, <code>require</code>, or <code>use</code> operators.  The key is the filename
+you specified (with module names converted to pathnames), and the
+value is the location of the file found.  The <code>require</code>
+operator uses this hash to determine whether a particular file has
+already been included.</p>
+<p style="padding-bottom: 10px;">If the file was loaded via a hook (e.g. a subroutine reference, see
+<a href="psi_element://perlfunc%2Frequire">require in perlfunc</a> for a description of these hooks), this hook is
+by default inserted into <code>%INC</code> in place of a filename.  Note, however,
+that the hook may have set the <code>%INC</code> entry by itself to provide some more
+specific info.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$INPLACE_EDIT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^I
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the inplace-edit extension.  Use <code>undef</code> to disable
+inplace editing.</p>
+<p style="padding-bottom: 10px;">Mnemonic: value of <B>-i</B> switch.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@ISA</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Each package contains a special array called <code>@ISA</code> which contains a list
+of that class's parent classes, if any. This array is simply a list of
+scalars, each of which is a string that corresponds to a package name. The
+array is examined when Perl does method resolution, which is covered in
+<a href="psi_element://perlobj">perlobj</a>.</p>
+<p style="padding-bottom: 10px;">To load packages while adding them to <code>@ISA</code>, see the <a href="psi_element://parent" style="color:red">parent</a> pragma. The
+discouraged <a href="psi_element://base" style="color:red">base</a> pragma does this as well, but should not be used except
+when compatibility with the discouraged <a href="psi_element://fields" style="color:red">fields</a> pragma is required.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$^M</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">By default, running out of memory is an untrappable, fatal error.
+However, if suitably built, Perl can use the contents of <code>$^M</code>
+as an emergency memory pool after <code>die()</code>ing.  Suppose that your Perl
+were compiled with <code>-DPERL_EMERGENCY_SBRK</code> and used Perl's malloc.
+Then</p>
+<div style="padding-bottom: 10px;"><pre><code>    $^M = 'a' x (1 &lt;&lt; 16);</code></pre></div>
+<p style="padding-bottom: 10px;">would allocate a 64K buffer for use in an emergency.  See the
+<i>INSTALL</i> file in the Perl distribution for information on how to
+add custom C compilation flags when compiling perl.  To discourage casual
+use of this advanced feature, there is no <a href="psi_element://English" style="color:red">English</a> long name for
+this variable.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.004.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$OSNAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^O
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The name of the operating system under which this copy of Perl was
+built, as determined during the configuration process.  For examples
+see <a href="psi_element://perlport%2FPLATFORMS">PLATFORMS in perlport</a>.</p>
+<p style="padding-bottom: 10px;">The value is identical to <code>$Config{'osname'}</code>.  See also <a href="psi_element://Config" style="color:red">Config</a>
+and the <B>-V</B> command-line switch documented in <a href="psi_element://perlrun">perlrun</a>.</p>
+<p style="padding-bottom: 10px;">In Windows platforms, <code>$^O</code> is not very helpful: since it is always
+<code>MSWin32</code>, it doesn't tell the difference between
+95/98/ME/NT/2000/XP/CE/.NET.  Use <code>Win32::GetOSName()</code> or
+Win32::GetOSVersion() (see <a href="psi_element://Win32" style="color:red">Win32</a> and <a href="psi_element://perlport">perlport</a>) to distinguish
+between the variants.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.003.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%SIG</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The hash <code>%SIG</code> contains signal handlers for signals.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub handler {   # 1st argument is signal name
+	my($sig) = @_;
+	print &quot;Caught a SIG$sig--shutting down\n&quot;;
+	close(LOG);
+	exit(0);
+	}
+
+    $SIG{'INT'}  = \&amp;handler;
+    $SIG{'QUIT'} = \&amp;handler;
+    ...
+    $SIG{'INT'}  = 'DEFAULT';   # restore default action
+    $SIG{'QUIT'} = 'IGNORE';    # ignore SIGQUIT</code></pre></div>
+<p style="padding-bottom: 10px;">Using a value of <code>'IGNORE'</code> usually has the effect of ignoring the
+signal, except for the <code>CHLD</code> signal.  See <a href="psi_element://perlipc">perlipc</a> for more about
+this special case.</p>
+<p style="padding-bottom: 10px;">Here are some other examples:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $SIG{&quot;PIPE&quot;} = &quot;Plumber&quot;;   # assumes main::Plumber (not
+				# recommended)
+    $SIG{&quot;PIPE&quot;} = \&amp;Plumber;   # just fine; assume current
+				# Plumber
+    $SIG{&quot;PIPE&quot;} = *Plumber;    # somewhat esoteric
+    $SIG{&quot;PIPE&quot;} = Plumber();   # oops, what did Plumber()
+				# return??</code></pre></div>
+<p style="padding-bottom: 10px;">Be sure not to use a bareword as the name of a signal handler,
+lest you inadvertently call it.</p>
+<p style="padding-bottom: 10px;">If your system has the <code>sigaction()</code> function then signal handlers
+are installed using it.  This means you get reliable signal handling.</p>
+<p style="padding-bottom: 10px;">The default delivery policy of signals changed in Perl v5.8.0 from
+immediate (also known as &quot;unsafe&quot;) to deferred, also known as &quot;safe
+signals&quot;.  See <a href="psi_element://perlipc">perlipc</a> for more information.</p>
+<p style="padding-bottom: 10px;">Certain internal hooks can be also set using the <code>%SIG</code> hash.  The
+routine indicated by <code>$SIG{__WARN__}</code> is called when a warning
+message is about to be printed.  The warning message is passed as the
+first argument.  The presence of a <code>__WARN__</code> hook causes the
+ordinary printing of warnings to <code>STDERR</code> to be suppressed.  You can
+use this to save warnings in a variable, or turn warnings into fatal
+errors, like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $SIG{__WARN__} = sub { die $_[0] };
+    eval $proggie;</code></pre></div>
+<p style="padding-bottom: 10px;">As the <code>'IGNORE'</code> hook is not supported by <code>__WARN__</code>, you can
+disable warnings using the empty subroutine:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $SIG{__WARN__} = sub {};</code></pre></div>
+<p style="padding-bottom: 10px;">The routine indicated by <code>$SIG{__DIE__}</code> is called when a fatal
+exception is about to be thrown.  The error message is passed as the
+first argument.  When a <code>__DIE__</code> hook routine returns, the exception
+processing continues as it would have in the absence of the hook,
+unless the hook routine itself exits via a <code>goto &amp;sub</code>, a loop exit,
+or a <code>die()</code>.  The <code>__DIE__</code> handler is explicitly disabled during
+the call, so that you can die from a <code>__DIE__</code> handler.  Similarly
+for <code>__WARN__</code>.</p>
+<p style="padding-bottom: 10px;">The <code>$SIG{__DIE__}</code> hook is called even inside an <code>eval()</code>. It was
+never intended to happen this way, but an implementation glitch made
+this possible. This used to be deprecated, as it allowed strange action
+at a distance like rewriting a pending exception in <code>$@</code>. Plans to
+rectify this have been scrapped, as users found that rewriting a 
+pending exception is actually a useful feature, and not a bug.</p>
+<p style="padding-bottom: 10px;"><code>__DIE__</code>/<code>__WARN__</code> handlers are very special in one respect: they
+may be called to report (probable) errors found by the parser.  In such
+a case the parser may be in inconsistent state, so any attempt to
+evaluate Perl code from such a handler will probably result in a
+segfault.  This means that warnings or errors that result from parsing
+Perl should be used with extreme caution, like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    require Carp if defined $^S;
+    Carp::confess(&quot;Something wrong&quot;) if defined &amp;Carp::confess;
+    die &quot;Something wrong, but could not load Carp to give &quot;
+      . &quot;backtrace...\n\t&quot;
+      . &quot;To see backtrace try starting Perl with -MCarp switch&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">Here the first line will load <code>Carp</code> <i>unless</i> it is the parser who
+called the handler.  The second line will print backtrace and die if
+<code>Carp</code> was available.  The third line will be executed only if <code>Carp</code> was
+not available.</p>
+<p style="padding-bottom: 10px;">Having to even think about the <code>$^S</code> variable in your exception
+handlers is simply wrong.  <code>$SIG{__DIE__}</code> as currently implemented
+invites grievous and difficult to track down errors.  Avoid it
+and use an <code>END{}</code> or CORE::GLOBAL::die override instead.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perlfunc%2Fdie">die in perlfunc</a>, <a href="psi_element://perlfunc%2Fwarn">warn in perlfunc</a>, <a href="psi_element://perlfunc%2Feval">eval in perlfunc</a>, and
+<a href="psi_element://warnings" style="color:red">warnings</a> for additional information.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$BASETIME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^T
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The time at which the program began running, in seconds since the
+epoch (beginning of 1970).  The values returned by the <B>-M</B>, <B>-A</B>,
+and <B>-C</B> filetests are based on this value.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$PERL_VERSION</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^V
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The revision, version, and subversion of the Perl interpreter,
+represented as a <a href="psi_element://version" style="color:red">version</a> object.</p>
+<p style="padding-bottom: 10px;">This variable first appeared in perl v5.6.0; earlier versions of perl
+will see an undefined value.  Before perl v5.10.0 <code>$^V</code> was represented
+as a v-string rather than a <a href="psi_element://version" style="color:red">version</a> object.</p>
+<p style="padding-bottom: 10px;"><code>$^V</code> can be used to determine whether the Perl interpreter executing
+a script is in the right range of versions.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    warn &quot;Hashes not randomized!\n&quot; if !$^V or $^V lt v5.8.1</code></pre></div>
+<p style="padding-bottom: 10px;">While version objects overload stringification, to portably convert
+<code>$^V</code> into its string representation, use <code>sprintf()</code>'s <code>&quot;%vd&quot;</code>
+conversion, which works for both v-strings or version objects:</p>
+<div style="padding-bottom: 10px;"><pre><code>    printf &quot;version is v%vd\n&quot;, $^V;  # Perl's version</code></pre></div>
+<p style="padding-bottom: 10px;">See the documentation of <code>use VERSION</code> and <code>require VERSION</code>
+for a convenient way to fail if the running Perl interpreter is too old.</p>
+<p style="padding-bottom: 10px;">See also <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%5D">$]</a></code> for a decimal representation of the Perl version.</p>
+<p style="padding-bottom: 10px;">The main advantage of <code>$^V</code> over <code>$]</code> is that, for Perl v5.10.0 or
+later, it overloads operators, allowing easy comparison against other
+version representations (e.g. decimal, literal v-string, &quot;v1.2.3&quot;, or
+objects).  The disadvantage is that prior to v5.10.0, it was only a
+literal v-string, which can't be easily printed or compared, whereas
+the behavior of <code>$]</code> is unchanged on all versions of Perl.</p>
+<p style="padding-bottom: 10px;">Mnemonic: use ^V for a version object.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^WIN32_SLOPPY_STAT}
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">If this variable is set to a true value, then <code>stat()</code> on Windows will
+not try to open the file.  This means that the link count cannot be
+determined and file attributes may be out of date if additional
+hardlinks to the file exist.  On the other hand, not opening the file
+is considerably faster, especially for files on network drives.</p>
+<p style="padding-bottom: 10px;">This variable could be set in the <i>sitecustomize.pl</i> file to
+configure the local Perl installation to use &quot;sloppy&quot; <code>stat()</code> by
+default.  See the documentation for <B>-f</B> in
+<a href="psi_element://perlrun%2FCommand+Switches">perlrun</a> for more information about site
+customization.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$EXECUTABLE_NAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^X
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The name used to execute the current copy of Perl, from C's
+<code>argv[0]</code> or (where supported) <i>/proc/self/exe</i>.</p>
+<p style="padding-bottom: 10px;">Depending on the host operating system, the value of <code>$^X</code> may be
+a relative or absolute pathname of the perl program file, or may
+be the string used to invoke perl but not the pathname of the
+perl program file.  Also, most operating systems permit invoking
+programs that are not in the PATH environment variable, so there
+is no guarantee that the value of <code>$^X</code> is in PATH.  For VMS, the
+value may or may not include a version number.</p>
+<p style="padding-bottom: 10px;">You usually can use the value of <code>$^X</code> to re-invoke an independent
+copy of the same perl that is currently running, e.g.,</p>
+<div style="padding-bottom: 10px;"><pre><code>    @first_run = `$^X -le &quot;print int rand 100 for 1..100&quot;`;</code></pre></div>
+<p style="padding-bottom: 10px;">But recall that not all operating systems support forking or
+capturing of the output of commands, so this complex statement
+may not be portable.</p>
+<p style="padding-bottom: 10px;">It is not safe to use the value of <code>$^X</code> as a path name of a file,
+as some operating systems that have a mandatory suffix on
+executable files do not require use of the suffix when invoking
+a command.  To convert the value of <code>$^X</code> to a path name, use the
+following statements:</p>
+<div style="padding-bottom: 10px;"><pre><code>    # Build up a set of file names (not command names).
+    use Config;
+    my $this_perl = $^X;
+    if ($^O ne 'VMS') {
+	$this_perl .= $Config{_exe}
+	  unless $this_perl =~ m/$Config{_exe}$/i;
+	}</code></pre></div>
+<p style="padding-bottom: 10px;">Because many operating systems permit anyone with read access to
+the Perl program file to make a copy of it, patch the copy, and
+then execute the copy, the security-conscious Perl programmer
+should take care to invoke the installed copy of perl, not the
+copy referenced by <code>$^X</code>.  The following statements accomplish
+this goal, and produce a pathname that can be invoked as a
+command or referenced as a file.</p>
+<div style="padding-bottom: 10px;"><pre><code>    use Config;
+    my $secure_perl_path = $Config{perlpath};
+    if ($^O ne 'VMS') {
+	$secure_perl_path .= $Config{_exe}
+	    unless $secure_perl_path =~ m/$Config{_exe}$/i;
+	}</code></pre></div></dd></dl>
+<h2>Variables related to regular expressions</h2><p style="padding-bottom: 10px;">Most of the special variables related to regular expressions are side
+effects.  Perl sets these variables when it has a successful match, so
+you should check the match result before using them.  For instance:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if( /P(A)TT(ER)N/ ) {
+	print &quot;I found $1 and $2\n&quot;;
+	}</code></pre></div>
+<p style="padding-bottom: 10px;">These variables are read-only and dynamically-scoped, unless we note
+otherwise.</p>
+<p style="padding-bottom: 10px;">The dynamic nature of the regular expression variables means that
+their value is limited to the block that they are in, as demonstrated
+by this bit of code:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $outer = 'Wallace and Grommit';
+    my $inner = 'Mutt and Jeff';
+
+    my $pattern = qr/(\S+) and (\S+)/;
+
+    sub show_n { print &quot;\$1 is $1; \$2 is $2\n&quot; }
+
+    {
+    OUTER:
+	show_n() if $outer =~ m/$pattern/;
+
+	INNER: {
+	    show_n() if $inner =~ m/$pattern/;
+	    }
+
+	show_n();
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">The output shows that while in the <code>OUTER</code> block, the values of <code>$1</code>
+and <code>$2</code> are from the match against <code>$outer</code>.  Inside the <code>INNER</code>
+block, the values of <code>$1</code> and <code>$2</code> are from the match against
+<code>$inner</code>, but only until the end of the block (i.e. the dynamic
+scope).  After the <code>INNER</code> block completes, the values of <code>$1</code> and
+<code>$2</code> return to the values for the match against <code>$outer</code> even though
+we have not made another match:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $1 is Wallace; $2 is Grommit
+    $1 is Mutt; $2 is Jeff
+    $1 is Wallace; $2 is Grommit</code></pre></div>
+<h3>Performance issues</h3><p style="padding-bottom: 10px;">Traditionally in Perl, any use of any of the three variables  <code>$`</code>, <code>$&amp;</code>
+or <code>$'</code> (or their <code>use English</code> equivalents) anywhere in the code, caused
+all subsequent successful pattern matches to make a copy of the matched
+string, in case the code might subsequently access one of those variables.
+This imposed a considerable performance penalty across the whole program,
+so generally the use of these variables has been discouraged.</p>
+<p style="padding-bottom: 10px;">In Perl 5.6.0 the <code>@-</code> and <code>@+</code> dynamic arrays were introduced that
+supply the indices of successful matches. So you could for example do
+this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $str =~ /pattern/;
+
+    print $`, $&amp;, $'; # bad: performance hit
+
+    print             # good: no performance hit
+	substr($str, 0,     $-[0]),
+	substr($str, $-[0], $+[0]-$-[0]),
+	substr($str, $+[0]);</code></pre></div>
+<p style="padding-bottom: 10px;">In Perl 5.10.0 the <code>/p</code> match operator flag and the <code>${^PREMATCH}</code>,
+<code>${^MATCH}</code>, and <code>${^POSTMATCH}</code> variables were introduced, that allowed
+you to suffer the penalties only on patterns marked with <code>/p</code>.</p>
+<p style="padding-bottom: 10px;">In Perl 5.18.0 onwards, perl started noting the presence of each of the
+three variables separately, and only copied that part of the string
+required; so in</p>
+<div style="padding-bottom: 10px;"><pre><code>    $`; $&amp;; &quot;abcdefgh&quot; =~ /d/</code></pre></div>
+<p style="padding-bottom: 10px;">perl would only copy the &quot;abcd&quot; part of the string. That could make a big
+difference in something like</p>
+<div style="padding-bottom: 10px;"><pre><code>    $str = 'x' x 1_000_000;
+    $&amp;; # whoops
+    $str =~ /x/g # one char copied a million times, not a million chars</code></pre></div>
+<p style="padding-bottom: 10px;">In Perl 5.20.0 a new copy-on-write system was enabled by default, which
+finally fixes all performance issues with these three variables, and makes
+them safe to use anywhere.</p>
+<p style="padding-bottom: 10px;">The <code>Devel::NYTProf</code> and <code>Devel::FindAmpersand</code> modules can help you
+find uses of these problematic match variables in your code.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">$&lt;<i>digits</i>&gt; ($1, $2, ...)
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Contains the subpattern from the corresponding set of capturing
+parentheses from the last successful pattern match, not counting patterns
+matched in nested blocks that have been exited already.</p>
+<p style="padding-bottom: 10px;">Note there is a distinction between a capture buffer which matches
+the empty string a capture buffer which is optional. Eg, <code>(x?)</code> and
+<code>(x)?</code> The latter may be undef, the former not.</p>
+<p style="padding-bottom: 10px;">These variables are read-only and dynamically-scoped.</p>
+<p style="padding-bottom: 10px;">Mnemonic: like \digits.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@{^CAPTURE}
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">An array which exposes the contents of the capture buffers, if any, of
+the last successful pattern match, not counting patterns matched
+in nested blocks that have been exited already.</p>
+<p style="padding-bottom: 10px;">Note that the 0 index of @{^CAPTURE} is equivalent to $1, the 1 index
+is equivalent to $2, etc.</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (&quot;foal&quot;=~/(.)(.)(.)(.)/) {
+        print join &quot;-&quot;, @{^CAPTURE};
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">should output &quot;f-o-a-l&quot;.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://pod%3A%3Aperlvar%2F%24digits">$<i>digits</i></a>, <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE%7D">%{^CAPTURE}</a> and <a href="psi_element://pod%3A%3Aperlvar%2F%25%7B%5ECAPTURE_ALL%7D">%{^CAPTURE_ALL}</a>.</p>
+<p style="padding-bottom: 10px;">Note that unlike most other regex magic variables there is no single
+letter equivalent to <code>@{^CAPTURE}</code>.</p>
+<p style="padding-bottom: 10px;">This variable was added in 5.25.7</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$MATCH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$&amp;
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The string matched by the last successful pattern match (not counting
+any matches hidden within a BLOCK or <code>eval()</code> enclosed by the current
+BLOCK).</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
+of using this variable (even once) in your code.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
+<p style="padding-bottom: 10px;">Mnemonic: like <code>&amp;</code> in some editors.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^MATCH}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is similar to <code>$&amp;</code> (<code>$MATCH</code>) except that it does not incur the
+performance penalty associated with that variable.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above.</p>
+<p style="padding-bottom: 10px;">In Perl v5.18 and earlier, it is only guaranteed
+to return a defined value when the pattern was compiled or executed with
+the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does nothing, so
+<code>${^MATCH}</code> does the same thing as <code>$MATCH</code>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$PREMATCH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$`
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The string preceding whatever was matched by the last successful
+pattern match, not counting any matches hidden within a BLOCK or <code>eval</code>
+enclosed by the current BLOCK.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
+of using this variable (even once) in your code.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
+<p style="padding-bottom: 10px;">Mnemonic: <code>`</code> often precedes a quoted string.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^PREMATCH}
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is similar to <code>$`</code> ($PREMATCH) except that it does not incur the
+performance penalty associated with that variable.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above.</p>
+<p style="padding-bottom: 10px;">In Perl v5.18 and earlier, it is only guaranteed
+to return a defined value when the pattern was compiled or executed with
+the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does nothing, so
+<code>${^PREMATCH}</code> does the same thing as <code>$PREMATCH</code>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$POSTMATCH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$'
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The string following whatever was matched by the last successful
+pattern match (not counting any matches hidden within a BLOCK or <code>eval()</code>
+enclosed by the current BLOCK).  Example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $_ = 'abcdefghi';
+    /def/;
+    print &quot;$`:$&amp;:$'\n&quot;;  	# prints abc:def:ghi</code></pre></div>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above for the serious performance implications
+of using this variable (even once) in your code.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
+<p style="padding-bottom: 10px;">Mnemonic: <code>'</code> often follows a quoted string.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^POSTMATCH}
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is similar to <code>$'</code> (<code>$POSTMATCH</code>) except that it does not incur the
+performance penalty associated with that variable.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://pod%3A%3Aperlvar%2FPerformance+issues">Performance issues</a> above.</p>
+<p style="padding-bottom: 10px;">In Perl v5.18 and earlier, it is only guaranteed
+to return a defined value when the pattern was compiled or executed with
+the <code>/p</code> modifier.  In Perl v5.20, the <code>/p</code> modifier does nothing, so
+<code>${^POSTMATCH}</code> does the same thing as <code>$POSTMATCH</code>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$LAST_PAREN_MATCH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$+
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The text matched by the last bracket of the last successful search pattern.
+This is useful if you don't know which one of a set of alternative patterns
+matched.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    /Version: (.*)|Revision: (.*)/ &amp;&amp; ($rev = $+);</code></pre></div>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p>
+<p style="padding-bottom: 10px;">Mnemonic: be positive and forward looking.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$LAST_SUBMATCH_RESULT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^N
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The text matched by the used group most-recently closed (i.e. the group
+with the rightmost closing parenthesis) of the last successful search
+pattern.</p>
+<p style="padding-bottom: 10px;">This is primarily used inside <code>(?{...})</code> blocks for examining text
+recently matched.  For example, to effectively capture text to a variable
+(in addition to <code>$1</code>, <code>$2</code>, etc.), replace <code>(...)</code> with</p>
+<div style="padding-bottom: 10px;"><pre><code>    (?:(...)(?{ $var = $^N }))</code></pre></div>
+<p style="padding-bottom: 10px;">By setting and then using <code>$var</code> in this way relieves you from having to
+worry about exactly which numbered set of parentheses they are.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.8.0.</p>
+<p style="padding-bottom: 10px;">Mnemonic: the (possibly) Nested parenthesis that most recently closed.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@LAST_MATCH_END</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">@+
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This array holds the offsets of the ends of the last successful
+submatches in the currently active dynamic scope.  <code>$+[0]</code> is
+the offset into the string of the end of the entire match.  This
+is the same value as what the <code>pos</code> function returns when called
+on the variable that was matched against.  The <i>n</i>th element
+of this array holds the offset of the <i>n</i>th submatch, so
+<code>$+[1]</code> is the offset past where <code>$1</code> ends, <code>$+[2]</code> the offset
+past where <code>$2</code> ends, and so on.  You can use <code>$#+</code> to determine
+how many subgroups were in the last successful match.  See the
+examples given for the <code>@-</code> variable.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.6.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%{^CAPTURE}</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%LAST_PAREN_MATCH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%+
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Similar to <code>@+</code>, the <code>%+</code> hash allows access to the named capture
+buffers, should they exist, in the last successful match in the
+currently active dynamic scope.</p>
+<p style="padding-bottom: 10px;">For example, <code>$+{foo}</code> is equivalent to <code>$1</code> after the following match:</p>
+<div style="padding-bottom: 10px;"><pre><code>    'foo' =~ /(?&lt;foo&gt;foo)/;</code></pre></div>
+<p style="padding-bottom: 10px;">The keys of the <code>%+</code> hash list only the names of buffers that have
+captured (and that are thus associated to defined values).</p>
+<p style="padding-bottom: 10px;">If multiple distinct capture groups have the same name, then
+<code>$+{NAME}</code> will refer to the leftmost defined group in the match.</p>
+<p style="padding-bottom: 10px;">The underlying behaviour of <code>%+</code> is provided by the
+<a href="psi_element://Tie%3A%3AHash%3A%3ANamedCapture" style="color:red">Tie::Hash::NamedCapture</a> module.</p>
+<p style="padding-bottom: 10px;"><B>Note:</B> <code>%-</code> and <code>%+</code> are tied views into a common internal hash
+associated with the last successful regular expression.  Therefore mixing
+iterative access to them via <code>each</code> may have unpredictable results.
+Likewise, if the last successful match changes, then the results may be
+surprising.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0. The <code>%{^CAPTURE}</code> alias was
+added in 5.25.7.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@LAST_MATCH_START</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">@-
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;"><code>$-[0]</code> is the offset of the start of the last successful match.
+<code>$-[</code><i>n</i><code>]</code> is the offset of the start of the substring matched by
+<i>n</i>-th subpattern, or undef if the subpattern did not match.</p>
+<p style="padding-bottom: 10px;">Thus, after a match against <code>$_</code>, <code>$&amp;</code> coincides with <code>substr $_, $-[0],
+$+[0] - $-[0]</code>.  Similarly, $<i>n</i> coincides with <code>substr $_, $-[n],
+$+[n] - $-[n]</code> if <code>$-[n]</code> is defined, and $+ coincides with
+<code>substr $_, $-[$#-], $+[$#-] - $-[$#-]</code>.  One can use <code>$#-</code> to find the
+last matched subgroup in the last successful match.  Contrast with
+<code>$#+</code>, the number of subgroups in the regular expression.  Compare
+with <code>@+</code>.</p>
+<p style="padding-bottom: 10px;">This array holds the offsets of the beginnings of the last
+successful submatches in the currently active dynamic scope.
+<code>$-[0]</code> is the offset into the string of the beginning of the
+entire match.  The <i>n</i>th element of this array holds the offset
+of the <i>n</i>th submatch, so <code>$-[1]</code> is the offset where <code>$1</code>
+begins, <code>$-[2]</code> the offset where <code>$2</code> begins, and so on.</p>
+<p style="padding-bottom: 10px;">After a match against some variable <code>$var</code>:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;"><code>$`</code> is the same as <code>substr($var, 0, $-[0])</code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>$&amp;</code> is the same as <code>substr($var, $-[0], $+[0] - $-[0])</code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>$'</code> is the same as <code>substr($var, $+[0])</code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>$1</code> is the same as <code>substr($var, $-[1], $+[1] - $-[1])</code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>$2</code> is the same as <code>substr($var, $-[2], $+[2] - $-[2])</code></dt>
+<dt style="padding-bottom:4px;font-weight:bold;"><code>$3</code> is the same as <code>substr($var, $-[3], $+[3] - $-[3])</code></dt></dl>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.6.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%{^CAPTURE_ALL}</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%-</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Similar to <code>%+</code>, this variable allows access to the named capture groups
+in the last successful match in the currently active dynamic scope.  To
+each capture group name found in the regular expression, it associates a
+reference to an array containing the list of values captured by all
+buffers with that name (should there be several of them), in the order
+where they appear.</p>
+<p style="padding-bottom: 10px;">Here's an example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if ('1234' =~ /(?&lt;A&gt;1)(?&lt;B&gt;2)(?&lt;A&gt;3)(?&lt;B&gt;4)/) {
+        foreach my $bufname (sort keys %-) {
+            my $ary = $-{$bufname};
+            foreach my $idx (0..$#$ary) {
+                print &quot;\$-{$bufname}[$idx] : &quot;,
+                      (defined($ary-&gt;[$idx])
+                          ? &quot;'$ary-&gt;[$idx]'&quot;
+                          : &quot;undef&quot;),
+                      &quot;\n&quot;;
+            }
+        }
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">would print out:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $-{A}[0] : '1'
+    $-{A}[1] : '3'
+    $-{B}[0] : '2'
+    $-{B}[1] : '4'</code></pre></div>
+<p style="padding-bottom: 10px;">The keys of the <code>%-</code> hash correspond to all buffer names found in
+the regular expression.</p>
+<p style="padding-bottom: 10px;">The behaviour of <code>%-</code> is implemented via the
+<a href="psi_element://Tie%3A%3AHash%3A%3ANamedCapture" style="color:red">Tie::Hash::NamedCapture</a> module.</p>
+<p style="padding-bottom: 10px;"><B>Note:</B> <code>%-</code> and <code>%+</code> are tied views into a common internal hash
+associated with the last successful regular expression.  Therefore mixing
+iterative access to them via <code>each</code> may have unpredictable results.
+Likewise, if the last successful match changes, then the results may be
+surprising.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0. The <code>%{^CAPTURE_ALL}</code> alias was
+added in 5.25.7.</p>
+<p style="padding-bottom: 10px;">This variable is read-only and dynamically-scoped.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$LAST_REGEXP_CODE_RESULT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^R
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The result of evaluation of the last successful <code>(?{ code })</code>
+regular expression assertion (see <a href="psi_element://perlre">perlre</a>).  May be written to.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.005.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^RE_DEBUG_FLAGS}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the regex debugging flags.  Set to 0 for no debug output
+even when the <code>re 'debug'</code> module is loaded.  See <a href="psi_element://re" style="color:red">re</a> for details.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^RE_TRIE_MAXBUF}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Controls how certain regex optimisations are applied and how much memory they
+utilize.  This value by default is 65536 which corresponds to a 512kB
+temporary cache.  Set this to a higher value to trade
+memory for speed when matching large alternations.  Set
+it to a lower value if you want the optimisations to
+be as conservative of memory as possible but still occur, and set it to a
+negative value to prevent the optimisation and conserve the most memory.
+Under normal situations this variable should be of no interest to you.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p></dd></dl>
+<h2>Variables related to filehandles</h2><p style="padding-bottom: 10px;">Variables that depend on the currently selected filehandle may be set
+by calling an appropriate object method on the <code>IO::Handle</code> object,
+although this is less efficient than using the regular built-in
+variables.  (Summary lines below for this contain the word HANDLE.)
+First you must say</p>
+<div style="padding-bottom: 10px;"><pre><code>    use IO::Handle;</code></pre></div>
+<p style="padding-bottom: 10px;">after which you may use either</p>
+<div style="padding-bottom: 10px;"><pre><code>    method HANDLE EXPR</code></pre></div>
+<p style="padding-bottom: 10px;">or more safely,</p>
+<div style="padding-bottom: 10px;"><pre><code>    HANDLE-&gt;method(EXPR)</code></pre></div>
+<p style="padding-bottom: 10px;">Each method returns the old value of the <code>IO::Handle</code> attribute.  The
+methods each take an optional EXPR, which, if supplied, specifies the
+new value for the <code>IO::Handle</code> attribute in question.  If not
+supplied, most methods do nothing to the current value--except for
+<code>autoflush()</code>, which will assume a 1 for you, just to be different.</p>
+<p style="padding-bottom: 10px;">Because loading in the <code>IO::Handle</code> class is an expensive operation,
+you should learn how to use the regular built-in variables.</p>
+<p style="padding-bottom: 10px;">A few of these variables are considered &quot;read-only&quot;.  This means that
+if you try to assign to this variable, either directly or indirectly
+through a reference, you'll raise a run-time exception.</p>
+<p style="padding-bottom: 10px;">You should be very careful when modifying the default values of most
+special variables described in this document.  In most cases you want
+to localize these variables before changing them, since if you don't,
+the change may affect other modules which rely on the default values
+of the special variables that you have changed.  This is one of the
+correct ways to read the whole file at once:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open my $fh, &quot;&lt;&quot;, &quot;foo&quot; or die $!;
+    local $/; # enable localized slurp mode
+    my $content = &lt;$fh&gt;;
+    close $fh;</code></pre></div>
+<p style="padding-bottom: 10px;">But the following code is quite bad:</p>
+<div style="padding-bottom: 10px;"><pre><code>    open my $fh, &quot;&lt;&quot;, &quot;foo&quot; or die $!;
+    undef $/; # enable slurp mode
+    my $content = &lt;$fh&gt;;
+    close $fh;</code></pre></div>
+<p style="padding-bottom: 10px;">since some other module, may want to read data from some file in the
+default &quot;line mode&quot;, so if the code we have just presented has been
+executed, the global value of <code>$/</code> is now changed for any other code
+running inside the same Perl interpreter.</p>
+<p style="padding-bottom: 10px;">Usually when a variable is localized you want to make sure that this
+change affects the shortest scope possible.  So unless you are already
+inside some short <code>{}</code> block, you should create one yourself.  For
+example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $content = '';
+    open my $fh, &quot;&lt;&quot;, &quot;foo&quot; or die $!;
+    {
+	local $/;
+	$content = &lt;$fh&gt;;
+    }
+    close $fh;</code></pre></div>
+<p style="padding-bottom: 10px;">Here is an example of how your own code can go broken:</p>
+<div style="padding-bottom: 10px;"><pre><code>    for ( 1..3 ){
+	$\ = &quot;\r\n&quot;;
+	nasty_break();
+	print &quot;$_&quot;;
+    }
+
+    sub nasty_break {
+	$\ = &quot;\f&quot;;
+	# do something with $_
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">You probably expect this code to print the equivalent of</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;1\r\n2\r\n3\r\n&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">but instead you get:</p>
+<div style="padding-bottom: 10px;"><pre><code>    &quot;1\f2\f3\f&quot;</code></pre></div>
+<p style="padding-bottom: 10px;">Why? Because <code>nasty_break()</code> modifies <code>$\</code> without localizing it
+first.  The value you set in  <code>nasty_break()</code> is still there when you
+return.  The fix is to add <code>local()</code> so the value doesn't leak out of
+<code>nasty_break()</code>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $\ = &quot;\f&quot;;</code></pre></div>
+<p style="padding-bottom: 10px;">It's easy to notice the problem in such a short example, but in more
+complicated code you are looking for trouble if you don't localize
+changes to the special variables.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">$ARGV</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Contains the name of the current file when reading from <code>&lt;&gt;</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">@ARGV</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The array <code>@ARGV</code> contains the command-line arguments intended for
+the script.  <code>$#ARGV</code> is generally the number of arguments minus
+one, because <code>$ARGV[0]</code> is the first argument, <i>not</i> the program's
+command name itself.  See <a href="psi_element://pod%3A%3Aperlvar%2F%240">$0</a> for the command name.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">ARGV</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The special filehandle that iterates over command-line filenames in
+<code>@ARGV</code>.  Usually written as the null filehandle in the angle operator
+<code>&lt;&gt;</code>.  Note that currently <code>ARGV</code> only has its magical effect
+within the <code>&lt;&gt;</code> operator; elsewhere it is just a plain filehandle
+corresponding to the last file opened by <code>&lt;&gt;</code>.  In particular,
+passing <code>\*ARGV</code> as a parameter to a function that expects a filehandle
+may not cause your function to automatically read the contents of all the
+files in <code>@ARGV</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">ARGVOUT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The special filehandle that points to the currently open output file
+when doing edit-in-place processing with <B>-i</B>.  Useful when you have
+to do a lot of inserting and don't want to keep modifying <code>$_</code>.  See
+<a href="psi_element://perlrun">perlrun</a> for the <B>-i</B> switch.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">IO::Handle-&gt;output_field_separator( EXPR )</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$OUTPUT_FIELD_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$OFS</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$,
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The output field separator for the print operator.  If defined, this
+value is printed between each of print's arguments.  Default is <code>undef</code>.</p>
+<p style="padding-bottom: 10px;">You cannot call <code>output_field_separator()</code> on a handle, only as a
+static method.  See <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: what is printed when there is a &quot;,&quot; in your print statement.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;input_line_number( EXPR )</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$INPUT_LINE_NUMBER</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$NR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$.
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Current line number for the last filehandle accessed.</p>
+<p style="padding-bottom: 10px;">Each filehandle in Perl counts the number of lines that have been read
+from it.  (Depending on the value of <code>$/</code>, Perl's idea of what
+constitutes a line may not match yours.)  When a line is read from a
+filehandle (via <code>readline()</code> or <code>&lt;&gt;</code>), or when <code>tell()</code> or
+<code>seek()</code> is called on it, <code>$.</code> becomes an alias to the line counter
+for that filehandle.</p>
+<p style="padding-bottom: 10px;">You can adjust the counter by assigning to <code>$.</code>, but this will not
+actually move the seek pointer.  <i>Localizing <code>$.</code> will not localize
+the filehandle's line count</i>.  Instead, it will localize perl's notion
+of which filehandle <code>$.</code> is currently aliased to.</p>
+<p style="padding-bottom: 10px;"><code>$.</code> is reset when the filehandle is closed, but <B>not</B> when an open
+filehandle is reopened without an intervening <code>close()</code>.  For more
+details, see <a href="psi_element://perlop%2FI%2FO+Operators">I/O Operators in perlop</a>.  Because <code>&lt;&gt;</code> never does
+an explicit close, line numbers increase across <code>ARGV</code> files (but see
+examples in <a href="psi_element://perlfunc%2Feof">eof in perlfunc</a>).</p>
+<p style="padding-bottom: 10px;">You can also use <code>HANDLE-&gt;input_line_number(EXPR)</code> to access the
+line counter for a given filehandle without having to worry about
+which handle you last accessed.</p>
+<p style="padding-bottom: 10px;">Mnemonic: many programs use &quot;.&quot; to mean the current line number.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">IO::Handle-&gt;input_record_separator( EXPR )</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$INPUT_RECORD_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$RS</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$/
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The input record separator, newline by default.  This influences Perl's
+idea of what a &quot;line&quot; is.  Works like <B>awk</B>'s RS variable, including
+treating empty lines as a terminator if set to the null string (an
+empty line cannot contain any spaces or tabs).  You may set it to a
+multi-character string to match a multi-character terminator, or to
+<code>undef</code> to read through the end of file.  Setting it to <code>&quot;\n\n&quot;</code>
+means something slightly different than setting to <code>&quot;&quot;</code>, if the file
+contains consecutive empty lines.  Setting to <code>&quot;&quot;</code> will treat two or
+more consecutive empty lines as a single empty line.  Setting to
+<code>&quot;\n\n&quot;</code> will blindly assume that the next input character belongs to
+the next paragraph, even if it's a newline.</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $/;           # enable &quot;slurp&quot; mode
+    local $_ = &lt;FH&gt;;    # whole file now here
+    s/\n[ \t]+/ /g;</code></pre></div>
+<p style="padding-bottom: 10px;">Remember: the value of <code>$/</code> is a string, not a regex.  <B>awk</B> has to
+be better for something. :-)</p>
+<p style="padding-bottom: 10px;">Setting <code>$/</code> to a reference to an integer, scalar containing an
+integer, or scalar that's convertible to an integer will attempt to
+read records instead of lines, with the maximum record size being the
+referenced integer number of characters.  So this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    local $/ = \32768; # or \&quot;32768&quot;, or \$var_containing_32768
+    open my $fh, &quot;&lt;&quot;, $myfile or die $!;
+    local $_ = &lt;$fh&gt;;</code></pre></div>
+<p style="padding-bottom: 10px;">will read a record of no more than 32768 characters from $fh.  If you're
+not reading from a record-oriented file (or your OS doesn't have
+record-oriented files), then you'll likely get a full chunk of data
+with every read.  If a record is larger than the record size you've
+set, you'll get the record back in pieces.  Trying to set the record
+size to zero or less is deprecated and will cause $/ to have the value
+of &quot;undef&quot;, which will cause reading in the (rest of the) whole file.</p>
+<p style="padding-bottom: 10px;">As of 5.19.9 setting <code>$/</code> to any other form of reference will throw a
+fatal exception. This is in preparation for supporting new ways to set
+<code>$/</code> in the future.</p>
+<p style="padding-bottom: 10px;">On VMS only, record reads bypass PerlIO layers and any associated
+buffering, so you must not mix record and non-record reads on the
+same filehandle.  Record mode mixes with line mode only when the
+same buffering layer is in use for both modes.</p>
+<p style="padding-bottom: 10px;">You cannot call <code>input_record_separator()</code> on a handle, only as a
+static method.  See <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://perlport%2FNewlines">Newlines in perlport</a>.  Also see <a href="psi_element://pod%3A%3Aperlvar%2F%24.">$.</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: / delimits line boundaries when quoting poetry.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">IO::Handle-&gt;output_record_separator( EXPR )</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$OUTPUT_RECORD_SEPARATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$ORS</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$\
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The output record separator for the print operator.  If defined, this
+value is printed after the last of print's arguments.  Default is <code>undef</code>.</p>
+<p style="padding-bottom: 10px;">You cannot call <code>output_record_separator()</code> on a handle, only as a
+static method.  See <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: you set <code>$\</code> instead of adding &quot;\n&quot; at the end of the print.
+Also, it's just like <code>$/</code>, but it's what you get &quot;back&quot; from Perl.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;autoflush( EXPR )</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$OUTPUT_AUTOFLUSH</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$|
+   </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">If set to nonzero, forces a flush right away and after every write or
+print on the currently selected output channel.  Default is 0
+(regardless of whether the channel is really buffered by the system or
+not; <code>$|</code> tells you only whether you've asked Perl explicitly to
+flush after each write).  STDOUT will typically be line buffered if
+output is to the terminal and block buffered otherwise.  Setting this
+variable is useful primarily when you are outputting to a pipe or
+socket, such as when you are running a Perl program under <B>rsh</B> and
+want to see the output as it's happening.  This has no effect on input
+buffering.  See <a href="psi_element://perlfunc%2Fgetc">getc in perlfunc</a> for that.  See <a href="psi_element://perlfunc%2Fselect">select in perlfunc</a> on
+how to select the output channel.  See also <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: when you want your pipes to be piping hot.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^LAST_FH}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This read-only variable contains a reference to the last-read filehandle.
+This is set by <code>&lt;HANDLE&gt;</code>, <code>readline</code>, <code>tell</code>, <code>eof</code> and <code>seek</code>.
+This is the same handle that <code>$.</code> and <code>tell</code> and <code>eof</code> without arguments
+use.  It is also the handle used when Perl appends &quot;, &lt;STDIN&gt; line 1&quot; to
+an error or warning message.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.18.0.</p></dd></dl>
+<h3>Variables related to formats</h3><p style="padding-bottom: 10px;">The special variables for formats are a subset of those for
+filehandles.  See <a href="psi_element://perlform">perlform</a> for more information about Perl's
+formats.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">$ACCUMULATOR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^A
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the <code>write()</code> accumulator for <code>format()</code> lines.
+A format contains <code>formline()</code> calls that put their result into
+<code>$^A</code>.  After calling its format, <code>write()</code> prints out the contents
+of <code>$^A</code> and empties.  So you never really see the contents of <code>$^A</code>
+unless you call <code>formline()</code> yourself and then look at it.  See
+<a href="psi_element://perlform">perlform</a> and <a href="psi_element://perlfunc%2Fformline+PICTURE%2CLIST">formline PICTURE,LIST in perlfunc</a>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">IO::Handle-&gt;format_formfeed(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_FORMFEED</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^L
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">What formats output as a form feed.  The default is <code>\f</code>.</p>
+<p style="padding-bottom: 10px;">You cannot call <code>format_formfeed()</code> on a handle, only as a static
+method.  See <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;format_page_number(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_PAGE_NUMBER</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$%
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current page number of the currently selected output channel.</p>
+<p style="padding-bottom: 10px;">Mnemonic: <code>%</code> is page number in <B>nroff</B>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;format_lines_left(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_LINES_LEFT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$-
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The number of lines left on the page of the currently selected output
+channel.</p>
+<p style="padding-bottom: 10px;">Mnemonic: lines_on_page - lines_printed.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">IO::Handle-&gt;format_line_break_characters EXPR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_LINE_BREAK_CHARACTERS</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$:
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current set of characters after which a string may be broken to
+fill continuation fields (starting with <code>^</code>) in a format.  The default is
+<span style="white-space: nowrap;">&quot; \n-&quot;</span>, to break on a space, newline, or a hyphen.</p>
+<p style="padding-bottom: 10px;">You cannot call <code>format_line_break_characters()</code> on a handle, only as
+a static method.  See <a href="psi_element://IO%3A%3AHandle" style="color:red">IO::Handle</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: a &quot;colon&quot; in poetry is a part of a line.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;format_lines_per_page(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_LINES_PER_PAGE</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$=
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current page length (printable lines) of the currently selected
+output channel.  The default is 60.</p>
+<p style="padding-bottom: 10px;">Mnemonic: = has horizontal lines.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;format_top_name(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_TOP_NAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The name of the current top-of-page format for the currently selected
+output channel.  The default is the name of the filehandle with <code>_TOP</code>
+appended.  For example, the default format top name for the <code>STDOUT</code>
+filehandle is <code>STDOUT_TOP</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: points to top of page.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">HANDLE-&gt;format_name(EXPR)</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$FORMAT_NAME</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$~
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The name of the current report format for the currently selected
+output channel.  The default format name is the same as the filehandle
+name.  For example, the default format name for the <code>STDOUT</code>
+filehandle is just <code>STDOUT</code>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: brother to <code>$^</code>.</p></dd></dl>
+<h2>Error Variables
+ </h2><p style="padding-bottom: 10px;">The variables <code>$@</code>, <code>$!</code>, <code>$^E</code>, and <code>$?</code> contain information
+about different types of error conditions that may appear during
+execution of a Perl program.  The variables are shown ordered by
+the &quot;distance&quot; between the subsystem which reported the error and
+the Perl process.  They correspond to errors detected by the Perl
+interpreter, C library, operating system, or an external program,
+respectively.</p>
+<p style="padding-bottom: 10px;">To illustrate the differences between these variables, consider the
+following Perl expression, which uses a single-quoted string.  After
+execution of this statement, perl may have set all four special error
+variables:</p>
+<div style="padding-bottom: 10px;"><pre><code>    eval q{
+	open my $pipe, &quot;/cdrom/install |&quot; or die $!;
+	my @res = &lt;$pipe&gt;;
+	close $pipe or die &quot;bad pipe: $?, $!&quot;;
+    };</code></pre></div>
+<p style="padding-bottom: 10px;">When perl executes the <code>eval()</code> expression, it translates the
+<code>open()</code>, <code>&lt;PIPE&gt;</code>, and <code>close</code> calls in the C run-time library
+and thence to the operating system kernel.  perl sets <code>$!</code> to
+the C library's <code>errno</code> if one of these calls fails.</p>
+<p style="padding-bottom: 10px;"><code>$@</code> is set if the string to be <code>eval</code>-ed did not compile (this may
+happen if <code>open</code> or <code>close</code> were imported with bad prototypes), or
+if Perl code executed during evaluation <code>die()</code>d.  In these cases the
+value of <code>$@</code> is the compile error, or the argument to <code>die</code> (which
+will interpolate <code>$!</code> and <code>$?</code>).  (See also <a href="psi_element://Fatal" style="color:red">Fatal</a>, though.)</p>
+<p style="padding-bottom: 10px;">Under a few operating systems, <code>$^E</code> may contain a more verbose error
+indicator, such as in this case, &quot;CDROM tray not closed.&quot;  Systems that
+do not support extended error messages leave <code>$^E</code> the same as <code>$!</code>.</p>
+<p style="padding-bottom: 10px;">Finally, <code>$?</code> may be set to a non-0 value if the external program
+<i>/cdrom/install</i> fails.  The upper eight bits reflect specific error
+conditions encountered by the program (the program's <code>exit()</code> value).
+The lower eight bits reflect mode of failure, like signal death and
+core dump information.  See <a href="psi_element://wait%282%29" style="color:red">wait(2)</a> for details.  In contrast to
+<code>$!</code> and <code>$^E</code>, which are set only if an error condition is detected,
+the variable <code>$?</code> is set on each <code>wait</code> or pipe <code>close</code>,
+overwriting the old value.  This is more like <code>$@</code>, which on every
+<code>eval()</code> is always set on failure and cleared on success.</p>
+<p style="padding-bottom: 10px;">For more details, see the individual descriptions at <code>$@</code>, <code>$!</code>,
+<code>$^E</code>, and <code>$?</code>.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">${^CHILD_ERROR_NATIVE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The native status returned by the last pipe close, backtick (<code>``</code>)
+command, successful call to <code>wait()</code> or <code>waitpid()</code>, or from the
+<code>system()</code> operator.  On POSIX-like systems this value can be decoded
+with the WIFEXITED, WEXITSTATUS, WIFSIGNALED, WTERMSIG, WIFSTOPPED,
+WSTOPSIG and WIFCONTINUED functions provided by the <a href="psi_element://POSIX" style="color:red">POSIX</a> module.</p>
+<p style="padding-bottom: 10px;">Under VMS this reflects the actual VMS exit status; i.e. it is the
+same as <code>$?</code> when the pragma <code>use vmsish 'status'</code> is in effect.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.10.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$EXTENDED_OS_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^E
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Error information specific to the current operating system.  At the
+moment, this differs from <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a></code> under only VMS, OS/2, and Win32 (and
+for MacPerl).  On all other platforms, <code>$^E</code> is always just the same
+as <code>$!</code>.</p>
+<p style="padding-bottom: 10px;">Under VMS, <code>$^E</code> provides the VMS status value from the last system
+error.  This is more specific information about the last system error
+than that provided by <code>$!</code>.  This is particularly important when <code>$!</code>
+is set to <B>EVMSERR</B>.</p>
+<p style="padding-bottom: 10px;">Under OS/2, <code>$^E</code> is set to the error code of the last call to OS/2
+API either via CRT, or directly from perl.</p>
+<p style="padding-bottom: 10px;">Under Win32, <code>$^E</code> always returns the last error information reported
+by the Win32 call <code>GetLastError()</code> which describes the last error
+from within the Win32 API.  Most Win32-specific code will report errors
+via <code>$^E</code>.  ANSI C and Unix-like calls set <code>errno</code> and so most
+portable Perl code will report errors via <code>$!</code>.</p>
+<p style="padding-bottom: 10px;">Caveats mentioned in the description of <code><a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a></code> generally apply to
+<code>$^E</code>, also.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.003.</p>
+<p style="padding-bottom: 10px;">Mnemonic: Extra error explanation.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$EXCEPTIONS_BEING_CAUGHT</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^S
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Current state of the interpreter.</p>
+<div style="padding-bottom: 10px;"><pre><code>	$^S         State
+	---------   -------------------------------------
+	undef       Parsing module, eval, or main program
+	true (1)    Executing an eval
+	false (0)   Otherwise</code></pre></div>
+<p style="padding-bottom: 10px;">The first state may happen in <code>$SIG{__DIE__}</code> and <code>$SIG{__WARN__}</code>
+handlers.</p>
+<p style="padding-bottom: 10px;">The English name $EXCEPTIONS_BEING_CAUGHT is slightly misleading, because
+the <code>undef</code> value does not indicate whether exceptions are being caught,
+since compilation of the main program does not catch exceptions.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.004.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$WARNING</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^W
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the warning switch, initially true if <B>-w</B> was
+used, false otherwise, but directly modifiable.</p>
+<p style="padding-bottom: 10px;">See also <a href="psi_element://warnings" style="color:red">warnings</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: related to the <B>-w</B> switch.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^WARNING_BITS}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current set of warning checks enabled by the <code>use warnings</code> pragma.
+It has the same scoping as the <code>$^H</code> and <code>%^H</code> variables.  The exact
+values are considered internal to the <a href="psi_element://warnings" style="color:red">warnings</a> pragma and may change
+between versions of Perl.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.6.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$OS_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$ERRNO</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$!
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When referenced, <code>$!</code> retrieves the current value
+of the C <code>errno</code> integer variable.
+If <code>$!</code> is assigned a numerical value, that value is stored in <code>errno</code>.
+When referenced as a string, <code>$!</code> yields the system error string
+corresponding to <code>errno</code>.</p>
+<p style="padding-bottom: 10px;">Many system or library calls set <code>errno</code> if they fail,
+to indicate the cause of failure.  They usually do <B>not</B>
+set <code>errno</code> to zero if they succeed.  This means <code>errno</code>,
+hence <code>$!</code>, is meaningful only <i>immediately</i> after a <B>failure</B>:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (open my $fh, &quot;&lt;&quot;, $filename) {
+		# Here $! is meaningless.
+		...
+    }
+    else {
+		# ONLY here is $! meaningful.
+		...
+		# Already here $! might be meaningless.
+    }
+    # Since here we might have either success or failure,
+    # $! is meaningless.</code></pre></div>
+<p style="padding-bottom: 10px;">Here, <i>meaningless</i> means that <code>$!</code> may be unrelated to the outcome
+of the <code>open()</code> operator.  Assignment to <code>$!</code> is similarly ephemeral.
+It can be used immediately before invoking the <code>die()</code> operator,
+to set the exit value, or to inspect the system error string
+corresponding to error <i>n</i>, or to restore <code>$!</code> to a meaningful state.</p>
+<p style="padding-bottom: 10px;">Mnemonic: What just went bang?</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%OS_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%ERRNO</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">%!
+  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Each element of <code>%!</code> has a true value only if <code>$!</code> is set to that
+value.  For example, <code>$!{ENOENT}</code> is true if and only if the current
+value of <code>$!</code> is <code>ENOENT</code>; that is, if the most recent error was &quot;No
+such file or directory&quot; (or its moral equivalent: not all operating
+systems give that exact error, and certainly not all languages).  The
+specific true value is not guaranteed, but in the past has generally
+been the numeric value of <code>$!</code>.  To check if a particular key is
+meaningful on your system, use <code>exists $!{the_key}</code>; for a list of legal
+keys, use <code>keys %!</code>.  See <a href="psi_element://Errno" style="color:red">Errno</a> for more information, and also see
+<a href="psi_element://pod%3A%3Aperlvar%2F%24%21">$!</a>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.005.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$CHILD_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$?
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The status returned by the last pipe close, backtick (<code>``</code>) command,
+successful call to <code>wait()</code> or <code>waitpid()</code>, or from the <code>system()</code>
+operator.  This is just the 16-bit status word returned by the
+traditional Unix <code>wait()</code> system call (or else is made up to look
+like it).  Thus, the exit value of the subprocess is really (<code>$? &gt;&gt;
+8</code>), and <code>$? &amp; 127</code> gives which signal, if any, the process died
+from, and <code>$? &amp; 128</code> reports whether there was a core dump.</p>
+<p style="padding-bottom: 10px;">Additionally, if the <code>h_errno</code> variable is supported in C, its value
+is returned via <code>$?</code> if any <code>gethost*()</code> function fails.</p>
+<p style="padding-bottom: 10px;">If you have installed a signal handler for <code>SIGCHLD</code>, the
+value of <code>$?</code> will usually be wrong outside that handler.</p>
+<p style="padding-bottom: 10px;">Inside an <code>END</code> subroutine <code>$?</code> contains the value that is going to be
+given to <code>exit()</code>.  You can modify <code>$?</code> in an <code>END</code> subroutine to
+change the exit status of your program.  For example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    END {
+	$? = 1 if $? == 255;  # die would make it 255
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Under VMS, the pragma <code>use vmsish 'status'</code> makes <code>$?</code> reflect the
+actual VMS exit status, instead of the default emulation of POSIX
+status; see <a href="psi_element://perlvms%2F%24%3F">$? in perlvms</a> for details.</p>
+<p style="padding-bottom: 10px;">Mnemonic: similar to <B>sh</B> and <B>ksh</B>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$EVAL_ERROR</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$@
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The Perl error from the last <code>eval</code> operator, i.e. the last exception that
+was caught.  For <code>eval BLOCK</code>, this is either a runtime error message or the
+string or reference <code>die</code> was called with.  The <code>eval STRING</code> form also
+catches syntax errors and other compile time exceptions.</p>
+<p style="padding-bottom: 10px;">If no error occurs, <code>eval</code> sets <code>$@</code> to the empty string.</p>
+<p style="padding-bottom: 10px;">Warning messages are not collected in this variable.  You can, however,
+set up a routine to process warnings by setting <code>$SIG{__WARN__}</code> as
+described in <a href="psi_element://pod%3A%3Aperlvar%2F%25SIG">%SIG</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: Where was the error &quot;at&quot;?</p></dd></dl>
+<h2>Variables related to the interpreter state</h2><p style="padding-bottom: 10px;">These variables provide information about the current interpreter state.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">$COMPILING</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^C
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the flag associated with the <B>-c</B> switch.
+Mainly of use with <B>-MO=...</B> to allow code to alter its behavior
+when being compiled, such as for example to <code>AUTOLOAD</code> at compile
+time rather than normal, deferred loading.  Setting
+<code>$^C = 1</code> is similar to calling <code>B::minus_c</code>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.6.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$DEBUGGING</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^D
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value of the debugging flags.  May be read or set.  Like its
+<a href="psi_element://perlrun%2F-Dletters">command-line equivalent</a>, you can use numeric
+or symbolic values, e.g. <code>$^D = 10</code> or <code>$^D = &quot;st&quot;</code>.  See
+<a href="psi_element://perlrun%2F-Dnumber"><B>-D</B><i>number</i> in perlrun</a>.  The contents of this variable also affects the
+debugger operation.  See <a href="psi_element://perldebguts%2FDebugger+Internals">Debugger Internals in perldebguts</a>.</p>
+<p style="padding-bottom: 10px;">Mnemonic: value of <B>-D</B> switch.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^ENCODING}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This variable is no longer supported.</p>
+<p style="padding-bottom: 10px;">It used to hold the <i>object reference</i> to the <code>Encode</code> object that was
+used to convert the source code to Unicode.</p>
+<p style="padding-bottom: 10px;">Its purpose was to allow your non-ASCII Perl
+scripts not to have to be written in UTF-8; this was
+useful before editors that worked on UTF-8 encoded text were common, but
+that was long ago.  It caused problems, such as affecting the operation
+of other modules that weren't expecting it, causing general mayhem.</p>
+<p style="padding-bottom: 10px;">If you need something like this functionality, it is recommended that use
+you a simple source filter, such as <a href="psi_element://Filter%3A%3AEncoding" style="color:red">Filter::Encoding</a>.</p>
+<p style="padding-bottom: 10px;">If you are coming here because code of yours is being adversely affected
+by someone's use of this variable, you can usually work around it by
+doing this:</p>
+<div style="padding-bottom: 10px;"><pre><code> local ${^ENCODING};</code></pre></div>
+<p style="padding-bottom: 10px;">near the beginning of the functions that are getting broken.  This
+undefines the variable during the scope of execution of the including
+function.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.8.2 and removed in 5.26.0.
+Setting it to anything other than <code>undef</code> was made fatal in Perl 5.28.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^GLOBAL_PHASE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current phase of the perl interpreter.</p>
+<p style="padding-bottom: 10px;">Possible values are:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">CONSTRUCT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The <code>PerlInterpreter*</code> is being constructed via <code>perl_construct</code>.  This
+value is mostly there for completeness and for use via the
+underlying C variable <code>PL_phase</code>.  It's not really possible for Perl
+code to be executed unless construction of the interpreter is
+finished.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">START</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This is the global compile-time.  That includes, basically, every
+<code>BEGIN</code> block executed directly or indirectly from during the
+compile-time of the top-level program.</p>
+<p style="padding-bottom: 10px;">This phase is not called &quot;BEGIN&quot; to avoid confusion with
+<code>BEGIN</code>-blocks, as those are executed during compile-time of any
+compilation unit, not just the top-level program.  A new, localised
+compile-time entered at run-time, for example by constructs as
+<code>eval &quot;use SomeModule&quot;</code> are not global interpreter phases, and
+therefore aren't reflected by <code>${^GLOBAL_PHASE}</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">CHECK</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Execution of any <code>CHECK</code> blocks.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">INIT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Similar to &quot;CHECK&quot;, but for <code>INIT</code>-blocks, not <code>CHECK</code> blocks.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">RUN</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The main run-time, i.e. the execution of <code>PL_main_root</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">END</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Execution of any <code>END</code> blocks.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">DESTRUCT</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Global destruction.</p></dd></dl>
+<p style="padding-bottom: 10px;">Also note that there's no value for UNITCHECK-blocks.  That's because
+those are run for each compilation unit individually, and therefore is
+not a global interpreter phase.</p>
+<p style="padding-bottom: 10px;">Not every program has to go through each of the possible phases, but
+transition from one phase to another can only happen in the order
+described in the above list.</p>
+<p style="padding-bottom: 10px;">An example of all of the phases Perl code can see:</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { print &quot;compile-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    INIT  { print &quot;init-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    CHECK { print &quot;check-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    {
+        package Print::Phase;
+
+        sub new {
+            my ($class, $time) = @_;
+            return bless \$time, $class;
+        }
+
+        sub DESTROY {
+            my $self = shift;
+            print &quot;$$self: ${^GLOBAL_PHASE}\n&quot;;
+        }
+    }
+
+    print &quot;run-time: ${^GLOBAL_PHASE}\n&quot;;
+
+    my $runtime = Print::Phase-&gt;new(
+        &quot;lexical variables are garbage collected before END&quot;
+    );
+
+    END   { print &quot;end-time: ${^GLOBAL_PHASE}\n&quot; }
+
+    our $destruct = Print::Phase-&gt;new(
+        &quot;package variables are garbage collected after END&quot;
+    );</code></pre></div>
+<p style="padding-bottom: 10px;">This will print out</p>
+<div style="padding-bottom: 10px;"><pre><code>    compile-time: START
+    check-time: CHECK
+    init-time: INIT
+    run-time: RUN
+    lexical variables are garbage collected before END: RUN
+    end-time: END
+    package variables are garbage collected after END: DESTRUCT</code></pre></div>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.14.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$^H</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">WARNING: This variable is strictly for
+internal use only.  Its availability,
+behavior, and contents are subject to change without notice.</p>
+<p style="padding-bottom: 10px;">This variable contains compile-time hints for the Perl interpreter.  At the
+end of compilation of a BLOCK the value of this variable is restored to the
+value when the interpreter started to compile the BLOCK.</p>
+<p style="padding-bottom: 10px;">When perl begins to parse any block construct that provides a lexical scope
+(e.g., eval body, required file, subroutine body, loop body, or conditional
+block), the existing value of <code>$^H</code> is saved, but its value is left unchanged.
+When the compilation of the block is completed, it regains the saved value.
+Between the points where its value is saved and restored, code that
+executes within BEGIN blocks is free to change the value of <code>$^H</code>.</p>
+<p style="padding-bottom: 10px;">This behavior provides the semantic of lexical scoping, and is used in,
+for instance, the <code>use strict</code> pragma.</p>
+<p style="padding-bottom: 10px;">The contents should be an integer; different bits of it are used for
+different pragmatic flags.  Here's an example:</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub add_100 { $^H |= 0x100 }
+
+    sub foo {
+	BEGIN { add_100() }
+	bar-&gt;baz($boon);
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Consider what happens during execution of the BEGIN block.  At this point
+the BEGIN block has already been compiled, but the body of <code>foo()</code> is still
+being compiled.  The new value of <code>$^H</code>
+will therefore be visible only while
+the body of <code>foo()</code> is being compiled.</p>
+<p style="padding-bottom: 10px;">Substitution of <code>BEGIN { add_100() }</code> block with:</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { require strict; strict-&gt;import('vars') }</code></pre></div>
+<p style="padding-bottom: 10px;">demonstrates how <code>use strict 'vars'</code> is implemented.  Here's a conditional
+version of the same lexical pragma:</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN {
+	require strict; strict-&gt;import('vars') if $condition
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">This variable was added in Perl 5.003.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">%^H</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The <code>%^H</code> hash provides the same scoping semantic as <code>$^H</code>.  This makes
+it useful for implementation of lexically scoped pragmas.  See
+<a href="psi_element://perlpragma">perlpragma</a>.   All the entries are stringified when accessed at
+runtime, so only simple values can be accommodated.  This means no
+pointers to objects, for example.</p>
+<p style="padding-bottom: 10px;">When putting items into <code>%^H</code>, in order to avoid conflicting with other
+users of the hash there is a convention regarding which keys to use.
+A module should use only keys that begin with the module's name (the
+name of its main package) and a &quot;/&quot; character.  For example, a module
+<code>Foo::Bar</code> should use keys such as <code>Foo::Bar/baz</code>.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.6.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^OPEN}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">An internal variable used by PerlIO.  A string in two parts, separated
+by a <code>\0</code> byte, the first part describes the input layers, the second
+part describes the output layers.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.8.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$PERLDB</dt>
+<dt style="padding-bottom:4px;font-weight:bold;">$^P
+ </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The internal variable for debugging support.  The meanings of the
+various bits are subject to change, but currently indicate:</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">0x01</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Debug subroutine enter/exit.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x02</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Line-by-line debugging.  Causes <code>DB::DB()</code> subroutine to be called for
+each statement executed.  Also causes saving source code lines (like
+0x400).</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x04</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Switch off optimizations.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x08</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Preserve more data for future interactive inspections.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x10</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Keep info about source lines on which a subroutine is defined.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x20</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Start with single-step on.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x40</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Use subroutine address instead of name when reporting.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x80</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Report <code>goto &amp;subroutine</code> as well.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x100</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Provide informative &quot;file&quot; names for evals based on the place they were compiled.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x200</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Provide informative names to anonymous subroutines based on the place they
+were compiled.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x400</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Save source code lines into <code>@{&quot;_&lt;$filename&quot;}</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x800</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When saving source, include evals that generate no subroutines.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">0x1000</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When saving source, include source that did not compile.</p></dd></dl>
+<p style="padding-bottom: 10px;">Some bits may be relevant at compile-time only, some at
+run-time only.  This is a new mechanism and the details may change.
+See also <a href="psi_element://perldebguts">perldebguts</a>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^TAINT}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Reflects if taint mode is on or off.  1 for on (the program was run with
+<B>-T</B>), 0 for off, -1 when only taint warnings are enabled (i.e. with
+<B>-t</B> or <B>-TU</B>).</p>
+<p style="padding-bottom: 10px;">This variable is read-only.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.8.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^SAFE_LOCALES}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Reflects if safe locale operations are available to this perl (when the
+value is 1) or not (the value is 0).  This variable is always 1 if the
+perl has been compiled without threads.  It is also 1 if this perl is
+using thread-safe locale operations.  Note that an individual thread may
+choose to use the global locale (generally unsafe) by calling
+<a href="psi_element://perlapi%2Fswitch_to_global_locale">switch_to_global_locale in perlapi</a>.  This variable currently is still
+set to 1 in such threads.</p>
+<p style="padding-bottom: 10px;">This variable is read-only.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.28.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^UNICODE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Reflects certain Unicode settings of Perl.  See <a href="psi_element://perlrun">perlrun</a>
+documentation for the <code>-C</code> switch for more information about
+the possible values.</p>
+<p style="padding-bottom: 10px;">This variable is set during Perl startup and is thereafter read-only.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.8.2.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^UTF8CACHE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This variable controls the state of the internal UTF-8 offset caching code.
+1 for on (the default), 0 for off, -1 to debug the caching code by checking
+all its results against linear scans, and panicking on any discrepancy.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.8.9.  It is subject to change or
+removal without notice, but is currently used to avoid recalculating the
+boundaries of multi-byte UTF-8-encoded characters.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">${^UTF8LOCALE}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This variable indicates whether a UTF-8 locale was detected by perl at
+startup.  This information is used by perl when it's in
+adjust-utf8ness-to-locale mode (as when run with the <code>-CL</code> command-line
+switch); see <a href="psi_element://perlrun">perlrun</a> for more info on this.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.8.8.</p></dd></dl>
+<h2>Deprecated and removed variables</h2><p style="padding-bottom: 10px;">Deprecating a variable announces the intent of the perl maintainers to
+eventually remove the variable from the language.  It may still be
+available despite its status.  Using a deprecated variable triggers
+a warning.</p>
+<p style="padding-bottom: 10px;">Once a variable is removed, its use triggers an error telling you
+the variable is unsupported.</p>
+<p style="padding-bottom: 10px;">See <a href="psi_element://perldiag">perldiag</a> for details about error messages.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">$#</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;"><code>$#</code> was a variable that could be used to format printed numbers.
+After a deprecation cycle, its magic was removed in Perl v5.10.0 and
+using it now triggers a warning: <code>$# is no longer supported</code>.</p>
+<p style="padding-bottom: 10px;">This is not the sigil you use in front of an array name to get the
+last index, like <code>$#array</code>.  That's still how you get the last index
+of an array in Perl.  The two have nothing to do with each other.</p>
+<p style="padding-bottom: 10px;">Deprecated in Perl 5.</p>
+<p style="padding-bottom: 10px;">Removed in Perl v5.10.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$*</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;"><code>$*</code> was a variable that you could use to enable multiline matching.
+After a deprecation cycle, its magic was removed in Perl v5.10.0.
+Using it now triggers a warning: <code>$* is no longer supported</code>.
+You should use the <code>/s</code> and <code>/m</code> regexp modifiers instead.</p>
+<p style="padding-bottom: 10px;">Deprecated in Perl 5.</p>
+<p style="padding-bottom: 10px;">Removed in Perl v5.10.0.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">$[</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This variable stores the index of the first element in an array, and
+of the first character in a substring.  The default is 0, but you could
+theoretically set it to 1 to make Perl behave more like <B>awk</B> (or Fortran)
+when subscripting and when evaluating the index() and substr() functions.</p>
+<p style="padding-bottom: 10px;">As of release 5 of Perl, assignment to <code>$[</code> is treated as a compiler
+directive, and cannot influence the behavior of any other file.
+(That's why you can only assign compile-time constants to it.)
+Its use is highly discouraged.</p>
+<p style="padding-bottom: 10px;">Prior to Perl v5.10.0, assignment to <code>$[</code> could be seen from outer lexical
+scopes in the same file, unlike other compile-time directives (such as
+<a href="psi_element://strict" style="color:red">strict</a>).  Using local() on it would bind its value strictly to a lexical
+block.  Now it is always lexically scoped.</p>
+<p style="padding-bottom: 10px;">As of Perl v5.16.0, it is implemented by the <a href="psi_element://arybase" style="color:red">arybase</a> module.  See
+<a href="psi_element://arybase" style="color:red">arybase</a> for more details on its behaviour.</p>
+<p style="padding-bottom: 10px;">Under <code>use v5.16</code>, or <code>no feature &quot;array_base&quot;</code>, <code>$[</code> no longer has any
+effect, and always contains 0.  Assigning 0 to it is permitted, but any
+other value will produce an error.</p>
+<p style="padding-bottom: 10px;">Mnemonic: [ begins subscripts.</p>
+<p style="padding-bottom: 10px;">Deprecated in Perl v5.12.0.</p>
+<p style="padding-bottom: 10px;">Assigning a non-zero value be fatal in Perl v5.30.0.</p></dd></dl>

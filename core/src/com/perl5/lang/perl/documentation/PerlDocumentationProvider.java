@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,7 @@
 
 package com.perl5.lang.perl.documentation;
 
-import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -211,26 +209,6 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     PsiElement podBlock = PerlDocUtil.findPrependingPodBlock(targetElement);
     if (podBlock != null) {
       return podBlock;
-    }
-    return null;
-  }
-
-  /**
-   * This is a copy of {@link TargetElementUtil#findTargetElement(com.intellij.openapi.editor.Editor, int)} without obsolete EDT assertion
-   * fixme remove after assertion removal
-   */
-  @Nullable
-  private static PsiElement findTargetElement(Editor editor, int flags) {
-
-    int offset = editor.getCaretModel().getOffset();
-    final PsiElement result = TargetElementUtil.getInstance().findTargetElement(editor, flags, offset);
-    if (result != null) {
-      return result;
-    }
-
-    int expectedCaretOffset = editor instanceof EditorEx ? ((EditorEx)editor).getExpectedCaretOffset() : offset;
-    if (expectedCaretOffset != offset) {
-      return TargetElementUtil.getInstance().findTargetElement(editor, flags, expectedCaretOffset);
     }
     return null;
   }

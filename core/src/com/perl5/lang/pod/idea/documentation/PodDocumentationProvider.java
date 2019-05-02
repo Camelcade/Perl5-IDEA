@@ -33,6 +33,8 @@ import com.perl5.lang.pod.parser.psi.PodSectionVerbatimParagraph;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.intellij.codeInsight.TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
+
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
 
   @Override
@@ -76,6 +78,11 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
           return PerlDocUtil.resolveDoc("perlpod", tagText, contextElement, true);
         }
       }
+    }
+
+    PsiElement targetElement = findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED);
+    if (targetElement != null) {
+      return targetElement;
     }
 
     return super.getCustomDocumentationElement(editor, file, contextElement);
