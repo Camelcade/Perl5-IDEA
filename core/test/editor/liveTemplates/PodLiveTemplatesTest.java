@@ -16,14 +16,10 @@
 
 package editor.liveTemplates;
 
-import com.perl5.lang.pod.filetypes.PodFileType;
+import base.PodLightTestCase;
+import org.jetbrains.annotations.NotNull;
 
-public class PodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
-  @Override
-  public String getFileExtension() {
-    return PodFileType.EXTENSION;
-  }
-
+public class PodLiveTemplatesTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/liveTemplates/pod";
@@ -60,4 +56,8 @@ public class PodLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   public void testEnd() {doTest("=end");}
 
   public void testBack() {doTest("=back");}
+
+  protected void doTest(@NotNull String textToType) {
+    doLiveTemplateBulkTest(textToType);
+  }
 }

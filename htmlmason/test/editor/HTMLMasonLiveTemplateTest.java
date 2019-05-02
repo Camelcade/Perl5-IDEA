@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,6 +80,6 @@ public class HTMLMasonLiveTemplateTest extends HTMLMasonLightTestCase {
   public void testWhile() {doTest("wh");}
 
   protected void doTest(@NotNull String textToType) {
-    doLiveTemplateTest(textToType);
+    doLiveTemplateBulkTest(textToType);
   }
 }
