@@ -65,6 +65,16 @@ public class PodQuickDocCompletionTest extends PodLightTestCase {
 
   public void testFor() {doTest();}
 
+  public void testPerlpod() {
+    initWithTextSmart("L<<caret>>");
+    doTestCompletionQuickDoc("perlpod");
+  }
+
+  public void testPerlpodBack() {
+    initWithTextSmart("L<perlpod/<caret>>");
+    doTestCompletionQuickDoc("=back");
+  }
+
   @NotNull
   @Override
   protected String getBuiltInFromTestName() {

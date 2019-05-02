@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.documentation;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -26,10 +27,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodFile;
-import com.perl5.lang.pod.parser.psi.PodFormatterX;
-import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,6 +40,20 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
  * Created by hurricup on 03.04.2016.
  */
 public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider {
+  @Override
+  public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+    if (object instanceof VirtualFile) {
+      return getDocumentationElementForLookupItem(psiManager, psiManager.findFile((VirtualFile)object), element);
+    }
+    if (object instanceof PodFile) {
+      return (PodFile)object;
+    }
+    if (object instanceof PodTitledSection) {
+      return (PodTitledSection)object;
+    }
+    return super.getDocumentationElementForLookupItem(psiManager, object, element);
+  }
+
   @Nullable
   @Override
   public String generateDoc(@Nullable PsiElement element, @Nullable PsiElement originalElement) {
