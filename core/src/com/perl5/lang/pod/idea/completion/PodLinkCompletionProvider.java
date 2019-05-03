@@ -101,6 +101,14 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     });
   }
 
+  /**
+   * @return section title with escaped {@code < > | /} chars
+   */
+  @NotNull
+  public static String escapeTitle(@NotNull String title) {
+    return StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
+  }
+
   protected static void addSectionsCompletions(@NotNull final CompletionResultSet result, PsiFile targetFile) {
     if (targetFile != null) {
       targetFile.accept(new PodRecursiveVisitor() {
@@ -108,8 +116,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         public void visitTargetableSection(PodTitledSection o) {
           String title = cleanItemText(o.getTitleText());
           if (title != null) {
-            String escapedTitle = StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
-            result.addElement(LookupElementBuilder.create(o, escapedTitle)
+            result.addElement(LookupElementBuilder.create(o, escapeTitle(title))
                                 .withLookupString(title)
                                 .withPresentableText(title)
                                 .withIcon(PerlIcons.POD_FILE)
@@ -163,9 +170,8 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           else {
             tailText = "(" + lookupText + ")";
           }
-          String escapedLookupText = StringUtil.replace(lookupText, TO_ESCAPE, ESCAPE_TO);
           result.addElement(
-            LookupElementBuilder.create(o, escapedLookupText)
+            LookupElementBuilder.create(o, escapeTitle(lookupText))
               .withLookupString(lookupText)
               .withPresentableText(presentableText)
               .withTailText(tailText)

@@ -24,12 +24,12 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.usageView.UsageInfo;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Test opens completion, collects lookups, choosing lookups with psi element object. Then, for each lookup:<ul>
@@ -88,6 +88,11 @@ public class PodCompletionComplexTest extends PodLightTestCase {
       PsiElement targetPsiElement = (PsiElement)targetLookup.getObject();
       PsiElement referenceElement = TargetElementUtil.findTargetElement(getEditor(), TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED);
       assertEquals("While processing: " + lookupKey + "; " + targetLookup + "; " + targetPsiElement, targetPsiElement, referenceElement);
+      Collection<UsageInfo> targetUsages =
+        ((CodeInsightTestFixtureImpl)myFixture).findUsages(targetPsiElement, GlobalSearchScope.fileScope(getFile()));
+      if (targetUsages.size() != 1) {
+        fail("While processing: " + lookupKey + "; " + targetLookup + "; " + targetPsiElement);
+      }
     }
   }
 }

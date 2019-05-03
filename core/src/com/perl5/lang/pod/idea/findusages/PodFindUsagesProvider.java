@@ -23,14 +23,11 @@ import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 03.04.2016.
- */
 public class PodFindUsagesProvider extends PerlFindUsagesProviderBase {
   @Nullable
   @Override
   public WordsScanner getWordsScanner() {
-    return new PodWordsScanner();
+    return null;
   }
 
   @Override

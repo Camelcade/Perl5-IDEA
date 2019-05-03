@@ -63,6 +63,8 @@ public class PodFindUsagesTest extends PodLightTestCase {
 
   public void testIndex() {doTest();}
 
+  public void testIndexWithAngles() {doTest();}
+
   private void doTest() {
     doTestFindUsages();
   }

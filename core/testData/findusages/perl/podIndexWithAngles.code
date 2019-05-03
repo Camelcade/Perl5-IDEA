@@ -1,0 +1,10 @@
+=head1 MySuperPod
+X<< BZ<><> >>
+
+L<< /BZ<<caret>><> >>
+L</BE<lt>E<gt>>
+L<< /"BZ<><>" >>
+L</"BE<lt>E<gt>">
+
+=cut
+

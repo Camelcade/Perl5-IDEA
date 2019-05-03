@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
+import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,5 +48,9 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
       }
     }
     queryParameters.getOptimizer().searchWord(longestWord, queryParameters.getEffectiveSearchScope(), true, element);
+    String escapedTitle = PodLinkCompletionProvider.escapeTitle(textTitle);
+    if (!StringUtil.equals(escapedTitle, textTitle)) {
+      queryParameters.getOptimizer().searchWord(escapedTitle, queryParameters.getEffectiveSearchScope(), true, element);
+    }
   }
 }
