@@ -28,9 +28,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodFormatterXMixin extends PodStubBasedSectionMixin implements PodFormatterX {
   public PodFormatterXMixin(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
