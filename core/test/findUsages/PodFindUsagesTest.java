@@ -45,6 +45,10 @@ public class PodFindUsagesTest extends PodLightTestCase {
 
   public void testHead1SameFormatting() {doTest();}
 
+  public void testHead1DifferentFormatting() {doTest();}
+
+  public void testHead1SectionEscaping() {doTest();}
+
   public void testHead1SameFormattingIndexed() {doTest();}
 
   public void testHead2() {doTest();}

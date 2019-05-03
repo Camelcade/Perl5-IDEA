@@ -25,9 +25,6 @@ import com.intellij.util.Processor;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
 public class PodReferencesSearch extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
   public PodReferencesSearch() {
     super(true);
@@ -40,12 +37,15 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
       return;
     }
     final String textTitle = ((PodTitledSection)element).getTitleText();
-    if (StringUtil.isNotEmpty(textTitle)) {
-      queryParameters.getOptimizer().searchWord(textTitle, queryParameters.getEffectiveSearchScope(), true, element);
+    if (!StringUtil.isNotEmpty(textTitle)) {
+      return;
     }
-    String textWithoutIndexes = ((PodTitledSection)element).getTitleTextWithoutIndexes();
-    if (textWithoutIndexes != null && !StringUtil.equals(textWithoutIndexes, textTitle)) {
-      queryParameters.getOptimizer().searchWord(textWithoutIndexes, queryParameters.getEffectiveSearchScope(), true, element);
+    String longestWord = "";
+    for (String chunk : textTitle.split("\\s+")) {
+      if (chunk.length() > longestWord.length()) {
+        longestWord = chunk;
+      }
     }
+    queryParameters.getOptimizer().searchWord(longestWord, queryParameters.getEffectiveSearchScope(), true, element);
   }
 }
