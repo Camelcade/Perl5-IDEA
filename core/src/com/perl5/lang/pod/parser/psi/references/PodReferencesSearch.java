@@ -36,15 +36,16 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
   @Override
   public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     final PsiElement element = queryParameters.getElementToSearch();
-    if (element instanceof PodTitledSection) {
-      final String textTitle = ((PodTitledSection)element).getTitleText();
-      if (StringUtil.isNotEmpty(textTitle)) {
-        queryParameters.getOptimizer().searchWord(textTitle, queryParameters.getEffectiveSearchScope(), true, element);
-      }
-      String textWithoutIndexes = ((PodTitledSection)element).getTitleTextWithoutIndexes();
-      if (textWithoutIndexes != null && !StringUtil.equals(textWithoutIndexes, textTitle)) {
-        queryParameters.getOptimizer().searchWord(textWithoutIndexes, queryParameters.getEffectiveSearchScope(), true, element);
-      }
+    if (!(element instanceof PodTitledSection)) {
+      return;
+    }
+    final String textTitle = ((PodTitledSection)element).getTitleText();
+    if (StringUtil.isNotEmpty(textTitle)) {
+      queryParameters.getOptimizer().searchWord(textTitle, queryParameters.getEffectiveSearchScope(), true, element);
+    }
+    String textWithoutIndexes = ((PodTitledSection)element).getTitleTextWithoutIndexes();
+    if (textWithoutIndexes != null && !StringUtil.equals(textWithoutIndexes, textTitle)) {
+      queryParameters.getOptimizer().searchWord(textWithoutIndexes, queryParameters.getEffectiveSearchScope(), true, element);
     }
   }
 }
