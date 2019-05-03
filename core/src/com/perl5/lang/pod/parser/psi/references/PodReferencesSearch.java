@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,10 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
       final String textTitle = ((PodTitledSection)element).getTitleText();
       if (StringUtil.isNotEmpty(textTitle)) {
         queryParameters.getOptimizer().searchWord(textTitle, queryParameters.getEffectiveSearchScope(), true, element);
+      }
+      String textWithoutIndexes = ((PodTitledSection)element).getTitleTextWithoutIndexes();
+      if (textWithoutIndexes != null && !StringUtil.equals(textWithoutIndexes, textTitle)) {
+        queryParameters.getOptimizer().searchWord(textWithoutIndexes, queryParameters.getEffectiveSearchScope(), true, element);
       }
     }
   }

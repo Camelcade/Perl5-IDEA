@@ -1,0 +1,8 @@
+Target: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in head1SameFormatting.pod
+Total usages: 2
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 26 in head1SameFormatting.pod, via: PodLinkToSectionReference at (29,46); text in range: 'Test with C<code>' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in head1SameFormatting.pod
+
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 48 in head1SameFormatting.pod, via: PodLinkToSectionReference at (58,75); text in range: 'Test with C<code>' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in head1SameFormatting.pod
+
