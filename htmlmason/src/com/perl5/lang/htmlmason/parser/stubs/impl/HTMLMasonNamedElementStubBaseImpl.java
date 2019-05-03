@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,6 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonNamedElementStubBase;
 
-/**
- * Created by hurricup on 19.03.2016.
- */
 public abstract class HTMLMasonNamedElementStubBaseImpl<T extends StubBasedPsiElement> extends StubBase<T>
   implements HTMLMasonNamedElementStubBase {
   private final String myName;

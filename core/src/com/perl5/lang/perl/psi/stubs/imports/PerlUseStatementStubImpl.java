@@ -23,9 +23,6 @@ import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
 import java.util.List;
 
-/**
- * Created by hurricup on 20.08.2015.
- */
 public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> implements PerlUseStatementStub {
   private final String myPackageName;
   private final String myOuterPackageName;

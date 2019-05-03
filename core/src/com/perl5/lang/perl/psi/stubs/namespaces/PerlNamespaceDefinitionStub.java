@@ -29,9 +29,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by hurricup on 28.05.2015.
- */
 public class PerlNamespaceDefinitionStub extends StubBase<PerlNamespaceDefinitionElement> implements PerlNamespaceDefinition {
   @NotNull
   private final PerlNamespaceDefinitionData myData;

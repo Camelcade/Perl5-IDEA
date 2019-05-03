@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,6 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlSubStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 
-/**
- * Created by hurricup on 05.06.2015.
- */
 public class PerlSubDeclarationStub extends PerlSubStub<PerlSubDeclarationElement> {
   public PerlSubDeclarationStub(StubElement parent,
                                 String packageName,
