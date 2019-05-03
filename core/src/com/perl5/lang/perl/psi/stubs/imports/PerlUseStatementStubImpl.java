@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,5 +53,14 @@ public class PerlUseStatementStubImpl extends StubBase<PerlUseStatement> impleme
   @Override
   public List<String> getImportParameters() {
     return myImportOptions;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tPackage name: " + myPackageName + "\n" +
+           "\tOuter package name: " + myOuterPackageName + "\n" +
+           "\tImport options: " + myImportOptions
+      ;
   }
 }

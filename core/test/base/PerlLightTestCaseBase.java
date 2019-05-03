@@ -109,7 +109,9 @@ import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
+import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilBase;
@@ -580,12 +582,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
     if (!restrictFilesParsing()) {
       return;
     }
-    VirtualFile openedVirtualFile = getFile().getVirtualFile();
+    VirtualFile openedVirtualFile = ObjectUtils.doIfNotNull(getFile(), PsiFile::getVirtualFile);
     ((PsiManagerEx)myFixture.getPsiManager()).setAssertOnFileLoadingFilter(file -> {
       if (!(file.getFileType() instanceof PerlPluginBaseFileType)) {
         return false;
       }
-      return !openedVirtualFile.equals(file);
+      return !Objects.equals(openedVirtualFile, file);
     }, getTestRootDisposable());
   }
 
@@ -602,7 +604,12 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
   }
 
   public String getTestResultsFilePath(@NotNull String appendix) {
-    return getResultsTestDataPath() + "/" + getTestName(true) + appendix + "." + getResultsFileExtension();
+    return getResultsTestDataPath() + "/" + computeAnswerFileName(appendix);
+  }
+
+  @NotNull
+  protected String computeAnswerFileName(@NotNull String appendix) {
+    return getTestName(true) + appendix + "." + getResultsFileExtension();
   }
 
   @NotNull
@@ -2164,4 +2171,29 @@ public abstract class PerlLightTestCaseBase extends LightCodeInsightFixtureTestC
 
   protected void withFileSpec() { addTestLibrary("fileSpec"); }
 
+  protected void doTestStubs() {
+    String testName = getTestName(true);
+    String fileName = StringUtil.replace(testName, "_", ".");
+    VirtualFile virtualFile = myFixture.copyFileToProject(fileName);
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
+    addVirtualFileFilter();
+    PsiFile psiFile = PsiManager.getInstance(getProject()).findFile(virtualFile);
+    assertNotNull(psiFile);
+    FileViewProvider fileViewProvider = psiFile.getViewProvider();
+    assertNotNull(fileViewProvider);
+
+    StringBuilder sb = new StringBuilder();
+    for (PsiFile file : fileViewProvider.getAllFiles()) {
+      assertInstanceOf(file, PsiFileImpl.class);
+      StubElement stub = ((PsiFileImpl)file).getStub();
+      if (sb.length() > 0) {
+        sb.append(SEPARATOR_NEWLINES);
+      }
+      sb.append(file.getLanguage()).append("\n");
+      if (stub != null) {
+        sb.append(DebugUtil.stubTreeToString(stub));
+      }
+    }
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+  }
 }
