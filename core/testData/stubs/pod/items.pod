@@ -1,0 +1,25 @@
+Something
+
+=over
+
+=item Item with text
+
+some text
+
+=item Other item with text
+
+=over
+
+=item *
+
+Bulleted item txt
+
+=item *
+X<bulleted item index>
+
+Bulleted item text
+
+=back
+
+=back
+

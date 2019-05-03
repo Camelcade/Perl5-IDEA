@@ -1,0 +1,4 @@
+Language: Perl5 POD
+PsiFileStubImpl
+  PodElementType.POD_FORMAT_INDEX:PodSectionStubImpl
+	Conent: bulleted item index

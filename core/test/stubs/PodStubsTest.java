@@ -14,14 +14,33 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.pod.elementTypes;
+package stubs;
 
-import com.intellij.psi.tree.IStubFileElementType;
-import com.perl5.lang.pod.PodLanguage;
-import org.jetbrains.annotations.NonNls;
+import base.PerlLightTestCase;
+import com.intellij.openapi.util.text.StringUtil;
+import org.jetbrains.annotations.NotNull;
 
-public class PodFileElementType extends IStubFileElementType {
-  public PodFileElementType(@NonNls String debugName) {
-    super(debugName, PodLanguage.INSTANCE);
+public class PodStubsTest extends PerlLightTestCase {
+  @Override
+  protected String getTestDataPath() {
+    return "testData/stubs/pod";
+  }
+
+  public void testItems_pod() {
+    doTest();
+  }
+
+  public void testSections_pod() {
+    doTest();
+  }
+
+  @NotNull
+  @Override
+  protected String computeAnswerFileName(@NotNull String appendix) {
+    return StringUtil.replace(super.computeAnswerFileName(appendix), "_", ".");
+  }
+
+  private void doTest() {
+    doTestStubs();
   }
 }

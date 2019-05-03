@@ -32,4 +32,9 @@ public class PodSectionStubImpl extends StubBase<PodTitledSection> implements Po
   public String getTitleText() {
     return myContent;
   }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n\tConent: " + myContent;
+  }
 }

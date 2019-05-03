@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IndexSink;
 import com.perl5.lang.pod.parser.psi.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
-import com.perl5.lang.pod.parser.psi.stubs.PodStubIndex;
 import com.perl5.lang.pod.psi.impl.PsiPodFormatIndexImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +46,14 @@ public class PodFormatterXElementType extends PodStubBasedSectionElementType<Pod
 
   @Override
   public void indexStub(@NotNull PodSectionStub stub, @NotNull IndexSink sink) {
-    sink.occurrence(PodStubIndex.KEY, stub.getTitleText());
+  }
+
+  @Override
+  public boolean shouldCreateStub(ASTNode node) {
+    if (!super.shouldCreateStub(node)) {
+      return false;
+    }
+    PsiElement psiElement = getPsiElement(node);
+    return psiElement instanceof PodFormatterX && ((PodFormatterX)psiElement).isMeaningful();
   }
 }

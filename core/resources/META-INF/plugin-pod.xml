@@ -65,9 +65,7 @@
     <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
 
-    <!-- not tested -->
-    <!--<stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>-->
-    <!--<stubIndex implementation="com.perl5.lang.pod.parser.psi.stubs.PodStubIndex"/>-->
+    <stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>
 
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>

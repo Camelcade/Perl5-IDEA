@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@
 package com.perl5.lang.pod.elementTypes;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStubImpl;
 import org.jetbrains.annotations.NonNls;
@@ -29,9 +32,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSection> extends IStubElementType<PodSectionStub, T>
   implements PsiElementProvider {
   public PodStubBasedSectionElementType(@NotNull @NonNls String debugName) {
@@ -68,9 +68,8 @@ public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSecti
 
   @Override
   public boolean shouldCreateStub(ASTNode node) {
-    return false;
-    //		PsiElement psi = node.getPsi();
-    //		return (psi instanceof PodStubBasedSection) && StringUtil.isNotEmpty(((PodStubBasedSection) psi).getTitleText());
+    PsiElement psi = node.getPsi();
+    return (psi instanceof PodTitledSection) && StringUtil.isNotEmpty(((PodTitledSection)psi).getTitleText());
   }
 
   @Override

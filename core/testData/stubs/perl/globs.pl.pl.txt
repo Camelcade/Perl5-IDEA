@@ -49,3 +49,4 @@ PerlFileStub
 
 ----------
 Language: Perl5 POD
+PsiFileStubImpl

@@ -1,0 +1,8 @@
+Language: Perl5 POD
+PsiFileStubImpl
+  PodElementType.POD_FORMAT_INDEX:PodSectionStubImpl
+	Conent: third header index
+  PodElementType.POD_FORMAT_INDEX:PodSectionStubImpl
+	Conent: fourth header index
+  PodElementType.POD_FORMAT_INDEX:PodSectionStubImpl
+	Conent: paragraph index
