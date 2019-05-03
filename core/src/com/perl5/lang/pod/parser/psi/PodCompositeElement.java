@@ -17,35 +17,73 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
+import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+import javax.swing.*;
+
 public interface PodCompositeElement extends PsiElement, PodRenderableElement, ItemPresentation, PerlReferenceOwner {
   /**
-   * Returns if element contains direct child X<>
-   *
-   * @return true if is
+   * @return true iff element contains direct child X<>
    */
-  boolean isIndexed();
+  default boolean isIndexed() {
+    return PsiTreeUtil.getChildOfType(this, PodFormatterX.class) != null;
+  }
 
   /**
-   * Calculating list level for current element
-   *
-   * @return list level zero-based
+   * @return zero-based list level for current item
    */
-  int getListLevel();
-
+  default int getListLevel() {
+    PsiElement parent = getParent();
+    return parent instanceof PodCompositeElement ? ((PodCompositeElement)parent).getListLevel() : 0;
+  }
 
   /**
    * @return true iff element is a heading
    */
-  boolean isHeading();
+  default boolean isHeading() {
+    return false;
+  }
 
   /**
    * @return heading level
    */
-  int getHeadingLevel();
+  default int getHeadingLevel() {
+    return 0;
+  }
+
+  @Nullable
+  @Override
+  default String getPresentableText() {
+    return null;
+  }
+
+  @Nullable
+  @Override
+  default String getLocationString() {
+    PsiFile file = getContainingFile();
+    if (file != null) {
+      ItemPresentation presentation = file.getPresentation();
+      if (presentation != null) {
+        String filePresentableText = presentation.getPresentableText();
+        if (StringUtil.isNotEmpty(filePresentableText)) {
+          return filePresentableText;
+        }
+      }
+    }
+    return null;
+  }
+
+  @Nullable
+  @Override
+  default Icon getIcon(boolean unused) {
+    PsiFile file = getContainingFile();
+    return file == null ? null : file.getIcon(0);
+  }
+
 }

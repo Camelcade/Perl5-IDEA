@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,8 @@ import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.PsiWhiteSpace;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
+import com.perl5.lang.pod.parser.psi.mixin.PodSectionH1;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
 public class PodElementFactory {
   public static String getHeaderText(Project project, String text) {
     PodFileImpl file = createFile(project, "=head1 " + text + "\n\n");

@@ -46,6 +46,12 @@ public class PerlStubsTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testNestedPodItems_pl() {doTest();}
+
+  public void testNestedPodItemsLong_pl() {doTest();}
+
+  public void testNestedPodSections_pl() {doTest();}
+
   @NotNull
   @Override
   protected String computeAnswerFileName(@NotNull String appendix) {

@@ -64,12 +64,11 @@
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
     <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
-
     <stubElementTypeHolder class="com.perl5.lang.pod.lexer.PodElementTypes"/>
+    <targetElementEvaluator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.codeInsight.PodTargetElementEvaluator"/>
 
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
-    <pom.declarationSearcher implementation="com.perl5.lang.pod.parser.psi.references.PodPomDeclarationSearcher"/>
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
                              implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
 

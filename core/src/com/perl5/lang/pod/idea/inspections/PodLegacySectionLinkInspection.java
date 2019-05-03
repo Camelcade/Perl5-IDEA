@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.pod.parser.psi.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import com.perl5.lang.pod.psi.PsiLinkSection;
+import com.perl5.lang.pod.psi.PsiPodFormatLink;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,23 +35,23 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_DIV;
 import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_QUOTE_DOUBLE;
 
-/**
- * Created by hurricup on 10.04.2016.
- */
 public class PodLegacySectionLinkInspection extends LocalInspectionTool {
   @NotNull
   @Override
   public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
     return new PodVisitor() {
+
       @Override
-      public void visitPodFormatterL(@NotNull PodFormatterL o) {
-        PsiLinkSection sectionelement = o.getLinkSectionElement();
-        if (o.getLinkNameElement() == null && isSectionLegacy(sectionelement)) {
+      public void visitPodFormatLink(@NotNull PsiPodFormatLink o) {
+        assert o instanceof PodFormatterL;
+        PodFormatterL link = (PodFormatterL)o;
+        PsiLinkSection sectionelement = link.getLinkSectionElement();
+        if (link.getLinkNameElement() == null && isSectionLegacy(sectionelement)) {
           holder.registerProblem(sectionelement,
                                  "Section \"" + PodRenderUtil.renderPsiElementAsText(sectionelement) + "\" should have a slash before it",
                                  ProblemHighlightType.LIKE_DEPRECATED);
         }
-        super.visitPodFormatterL(o);
+        super.visitPodFormatLink(o);
       }
 
       @Contract("null -> false")

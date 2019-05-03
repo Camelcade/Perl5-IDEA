@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToFileReference;
 import com.perl5.lang.pod.parser.psi.references.PodLinkToSectionReference;
 import com.perl5.lang.pod.psi.PsiPodFormatLink;
@@ -39,13 +40,15 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool {
     return new PodVisitor() {
       @Override
       public void visitPodFormatLink(@NotNull PsiPodFormatLink o) {
-        for (PsiReference reference : o.getReferences()) {
+        assert o instanceof PodFormatterL;
+        PodFormatterL link = (PodFormatterL)o;
+        for (PsiReference reference : link.getReferences()) {
           if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length == 0) {
             String error;
 
             if (reference instanceof PodLinkToFileReference) {
               String fileName = "UNKNONW";
-              PodLinkDescriptor descriptor = o.getLinkDescriptor();
+              PodLinkDescriptor descriptor = link.getLinkDescriptor();
 
               if (descriptor != null && descriptor.getName() != null) {
                 fileName = descriptor.getName();
@@ -55,7 +58,7 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool {
             }
             else if (reference instanceof PodLinkToSectionReference) {
               String fileName = "UNKNONW";
-              PodLinkDescriptor descriptor = o.getLinkDescriptor();
+              PodLinkDescriptor descriptor = link.getLinkDescriptor();
 
               if (descriptor != null && descriptor.getSection() != null) {
                 fileName = descriptor.getSection();

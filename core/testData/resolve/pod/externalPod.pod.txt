@@ -14,7 +14,7 @@ PodLinkToFileReference at (63,74); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (75,84); text in range: 'someindex' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in definitions.pod
 
 PodLinkToFileReference at (88,99); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -26,7 +26,7 @@ PodLinkToFileReference at (114,125); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (126,137); text in range: 'other index' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 102 in definitions.pod
 
 PodLinkToFileReference at (141,152); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -62,7 +62,7 @@ PodLinkToFileReference at (302,313); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (315,324); text in range: 'someindex' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in definitions.pod
 
 PodLinkToFileReference at (329,340); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -74,7 +74,7 @@ PodLinkToFileReference at (357,368); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (370,381); text in range: 'other index' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 102 in definitions.pod
 
 PodLinkToFileReference at (386,397); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -110,7 +110,7 @@ PodLinkToFileReference at (567,578); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (579,588); text in range: 'someindex' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in definitions.pod
 
 PodLinkToFileReference at (598,609); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -122,7 +122,7 @@ PodLinkToFileReference at (630,641); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (642,653); text in range: 'other index' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 102 in definitions.pod
 
 PodLinkToFileReference at (663,674); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -158,7 +158,7 @@ PodLinkToFileReference at (854,865); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (867,876); text in range: 'someindex' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in definitions.pod
 
 PodLinkToFileReference at (887,898); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -170,7 +170,7 @@ PodLinkToFileReference at (921,932); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (934,945); text in range: 'other index' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 102 in definitions.pod
 
 PodLinkToFileReference at (956,967); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -206,7 +206,7 @@ PodLinkToFileReference at (1159,1170); text in range: 'definitions' => 1 results
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (1172,1184); text in range: 'C<someindex>' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 64 in definitions.pod
 
 PodLinkToFileReference at (1195,1206); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod
@@ -218,7 +218,7 @@ PodLinkToFileReference at (1232,1243); text in range: 'definitions' => 1 results
 	POD file at 0 in definitions.pod
 
 PodLinkToSectionReference at (1245,1259); text in range: 'C<other index>' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 102 in definitions.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 102 in definitions.pod
 
 PodLinkToFileReference at (1270,1281); text in range: 'definitions' => 1 results:
 	POD file at 0 in definitions.pod

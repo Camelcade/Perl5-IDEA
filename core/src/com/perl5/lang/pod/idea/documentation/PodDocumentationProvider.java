@@ -31,8 +31,12 @@ import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
-import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.PodSection;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

@@ -11,7 +11,7 @@ Lookups: Basics; Text: Basics; Tail: null; Type: List Item; Icon: /perl5language
 Lookups: CamelBones; Text: CamelBones; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17628 in perlfaq3.pod
 Lookups: CamelBones; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (CamelBones); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15829 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15829 in perlfaq3.pod
 Lookups: Can I write useful Perl programs on the command line?; Text: Can I write useful Perl programs on the command line?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31825 in perlfaq3.pod
 Lookups: ConTEXT; Text: ConTEXT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -33,13 +33,13 @@ Lookups: Functions; Text: Functions; Tail: null; Type: List Item; Icon: /perl5la
 Lookups: GNU Emacs; Text: GNU Emacs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12904 in perlfaq3.pod
 Lookups: GUI; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (GUI); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15782 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15782 in perlfaq3.pod
 Lookups: Gtk and Gtk2; Text: Gtk and Gtk2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16731 in perlfaq3.pod
 Lookups: Gtk2; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (Gtk2); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15821 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15821 in perlfaq3.pod
 Lookups: Gtk; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (Gtk); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15814 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15814 in perlfaq3.pod
 Lookups: How can I compile my Perl program into byte code or C?; Text: How can I compile my Perl program into byte code or C?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29146 in perlfaq3.pod
 Lookups: How can I free an array or hash so my program shrinks?; Text: How can I free an array or hash so my program shrinks?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -113,7 +113,7 @@ Lookups: Pass by reference; Text: Pass by reference; Tail: null; Type: List Item
 Lookups: PerlBuilder; Text: PerlBuilder; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11289 in perlfaq3.pod
 Lookups: Qt; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (Qt); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15843 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15843 in perlfaq3.pod
 Lookups: Qt; Text: Qt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18101 in perlfaq3.pod
 Lookups: Regexes; Text: Regexes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -123,7 +123,7 @@ Lookups: SlickEdit; Text: SlickEdit; Tail: null; Type: List Item; Icon: /perl5la
 Lookups: Tie large variables to disk; Text: Tie large variables to disk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23264 in perlfaq3.pod
 Lookups: Tk; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (Tk); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15789 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15789 in perlfaq3.pod
 Lookups: Tk; Text: Tk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16022 in perlfaq3.pod
 Lookups: Use map and grep selectively; Text: Use map and grep selectively; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -157,11 +157,11 @@ Lookups: Why don't Perl one-liners work on my DOSE<sol>MacE<sol>VMS system?, Why
 Lookups: Win32::GUI; Text: Win32::GUI; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17268 in perlfaq3.pod
 Lookups: Wx; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (Wx); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15795 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15795 in perlfaq3.pod
 Lookups: Wx; Text: Wx; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16359 in perlfaq3.pod
 Lookups: WxWidgets; Text: How can I write a GUI (X, Tk, Gtk, etc.) in Perl?; Tail: (WxWidgets); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15801 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15801 in perlfaq3.pod
 Lookups: XEmacs; Text: XEmacs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13028 in perlfaq3.pod
 Lookups: Zeus; Text: Zeus; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -169,7 +169,7 @@ Lookups: Zeus; Text: Zeus; Tail: null; Type: List Item; Icon: /perl5language.png
 Lookups: bash; Text: bash; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13963 in perlfaq3.pod
 Lookups: emacs; Text: Where can I get perl-mode or cperl-mode for emacs?; Tail: (emacs); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14874 in perlfaq3.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14874 in perlfaq3.pod
 Lookups: perl; Text: perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1839 in perlfaq3.pod
 Lookups: perlcall - Perl calling conventions from C; Text: perlcall - Perl calling conventions from C; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

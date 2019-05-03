@@ -1,7 +1,5 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlgit.pod
 
-  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perlgit.pod
-
   NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 124 in perlgit.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 203 in perlgit.pod

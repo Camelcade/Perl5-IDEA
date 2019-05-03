@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,13 @@ package com.perl5.lang.pod.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
+import com.perl5.lang.pod.parser.psi.mixin.*;
+import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import com.perl5.lang.pod.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -117,7 +122,12 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("HEAD_1_SECTION")) {
-      return new PodElementType(name) {
+      return new PodStubBasedTitledSectionElementType<PodSectionH1>(name) {
+        @Override
+        public PodSectionH1 createPsi(@NotNull PodSectionStub stub) {
+          return new PsiHead1SectionImpl(stub, this);
+        }
+
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
@@ -137,7 +147,12 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("HEAD_2_SECTION")) {
-      return new PodElementType(name) {
+      return new PodStubBasedTitledSectionElementType<PodSectionH2>(name) {
+        @Override
+        public PodSectionH2 createPsi(@NotNull PodSectionStub stub) {
+          return new PsiHead2SectionImpl(stub, this);
+        }
+
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
@@ -157,7 +172,12 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("HEAD_3_SECTION")) {
-      return new PodElementType(name) {
+      return new PodStubBasedTitledSectionElementType<PodSectionH3>(name) {
+        @Override
+        public PodSectionH3 createPsi(@NotNull PodSectionStub stub) {
+          return new PsiHead3SectionImpl(stub, this);
+        }
+
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
@@ -177,7 +197,12 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("HEAD_4_SECTION")) {
-      return new PodElementType(name) {
+      return new PodStubBasedTitledSectionElementType<PodSectionH4>(name) {
+        @Override
+        public PodSectionH4 createPsi(@NotNull PodSectionStub stub) {
+          return new PsiHead4SectionImpl(stub, this);
+        }
+
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
@@ -197,13 +222,7 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("ITEM_SECTION")) {
-      return new PodElementType(name) {
-        @NotNull
-        @Override
-        public PsiElement getPsiElement(@NotNull ASTNode node) {
-          return new PsiItemSectionImpl(node);
-        }
-      };
+      return new PodSectionItemElementType(name);
     }
 
     if (name.equals("ITEM_SECTION_CONTENT")) {
@@ -337,7 +356,18 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("POD_PARAGRAPH")) {
-      return new PodElementType(name) {
+      return new PodStubBasedSectionElementType<PodSectionParagraph>(name) {
+        @Override
+        public PodSectionParagraph createPsi(@NotNull PodSectionStub stub) {
+          return new PsiPodParagraphImpl(stub, this);
+        }
+
+        @NotNull
+        @Override
+        public PodSectionStub createStub(@NotNull PodSectionParagraph psi, StubElement parentStub) {
+          return new PodSectionStub(parentStub, this, PodLinkCompletionProvider.trimItemText(PodRenderUtil.renderPsiElementAsText(psi)));
+        }
+
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {
@@ -377,7 +407,12 @@ public class PodElementTypeFactory {
     }
 
     if (name.equals("UNKNOWN_SECTION")) {
-      return new PodElementType(name) {
+      return new PodStubBasedTitledSectionElementType<PsiUnknownSectionImpl>(name) {
+        @Override
+        public PsiUnknownSectionImpl createPsi(@NotNull PodSectionStub stub) {
+          return new PsiUnknownSectionImpl(stub, this);
+        }
+
         @NotNull
         @Override
         public PsiElement getPsiElement(@NotNull ASTNode node) {

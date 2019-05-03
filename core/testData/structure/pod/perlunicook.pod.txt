@@ -1,7 +1,5 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlunicook.pod
 
-  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 1 in perlunicook.pod
-
   NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 17 in perlunicook.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 94 in perlunicook.pod

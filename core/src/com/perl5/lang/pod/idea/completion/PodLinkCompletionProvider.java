@@ -34,7 +34,12 @@ import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.PodFile;
+import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
+import com.perl5.lang.pod.parser.psi.PodRenderableElement;
+import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.apache.commons.lang.math.NumberUtils;
@@ -135,19 +140,20 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (NumberUtils.isNumber(trimmed)) {
             return null;
           }
-          return StringUtil.nullize(StringUtil.shortenTextWithEllipsis(trimmed, 140, 0));
+          return trimItemText(trimmed);
         }
 
         @Override
         public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
-          if (!o.isMeaningful()) {
+          assert o instanceof PodFormatterX;
+          if (!((PodFormatterX)o).isMeaningful()) {
             return;
           }
-          String lookupText = o.getTitleText();
+          String lookupText = ((PodFormatterX)o).getTitleText();
           if (StringUtil.isEmpty(lookupText)) {
             return;
           }
-          PsiElement indexTarget = o.getIndexTarget();
+          PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();
           String presentableText;
           if (indexTarget instanceof PodFile) {
             presentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
@@ -181,5 +187,9 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         }
       });
     }
+  }
+
+  public static String trimItemText(String trimmed) {
+    return StringUtil.nullize(StringUtil.shortenTextWithEllipsis(trimmed, 140, 0));
   }
 }

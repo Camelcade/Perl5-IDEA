@@ -1,4 +1,4 @@
-Target: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 3179 in perlpod.pod
+Target: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3179 in perlpod.pod
 Total usages: 8
 	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 66 in Test.pm, via: PodLinkToFileReference at (68,75); text in range: 'perlpod' => 1 results:
 	POD file at 0 in perlpod.pod

@@ -19,72 +19,23 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledSection {
+public class PodTitledSectionMixin extends PodStubBasedTitledSection implements PodTitledSection {
   public PodTitledSectionMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  @Nullable
-  @Override
-  public PsiElement getTitleElement() {
-    return findChildByClass(PodSectionTitle.class);
-  }
-
-  @Override
-  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
-    renderElementTitleAsHTML(builder, new PodRenderingContext());
-    super.renderElementAsHTML(builder, context);
-  }
-
-  public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getTitleElement();
-    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
-  }
-
-  @Override
-  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
-
-    renderElementTitleAsText(builder, new PodRenderingContext());
-    super.renderElementAsText(builder, context);
-  }
-
-  public void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getTitleElement();
-    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
-  }
-
-  @Override
-  public boolean isIndexed() {
-    PsiElement titleBlock = getTitleElement();
-    if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed()) {
-      return true;
-    }
-
-    return false;
-  }
-
-  @Nullable
-  @Override
-  public String getTitleText() {
-    PsiElement titleElement = getTitleElement();
-
-    if (titleElement == null) {
-      return null;
-    }
-
-    StringBuilder builder = new StringBuilder();
-    renderElementTitleAsText(builder, new PodRenderingContext());
-    return builder.toString().trim();
+  public PodTitledSectionMixin(@NotNull PodSectionStub stub,
+                               @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
   }
 
   @Nullable
@@ -92,7 +43,6 @@ public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledS
   public String getPresentableText() {
     return getTitleText();
   }
-
 
   @Nullable
   @Override

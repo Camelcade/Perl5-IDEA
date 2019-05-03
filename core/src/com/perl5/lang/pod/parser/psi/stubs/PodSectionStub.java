@@ -16,14 +16,25 @@
 
 package com.perl5.lang.pod.parser.psi.stubs;
 
+import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedSection;
 
-public interface PodSectionStub extends StubElement<PodTitledSection> {
-  /**
-   * returns string from stub
-   *
-   * @return content
-   */
-  String getTitleText();
+public class PodSectionStub extends StubBase<PodStubBasedSection> implements StubElement<PodStubBasedSection> {
+  private String myContent;
+
+  public PodSectionStub(StubElement parent, IStubElementType elementType, String myContent) {
+    super(parent, elementType);
+    this.myContent = myContent;
+  }
+
+  public String getContent() {
+    return myContent;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n\tContent: " + myContent;
+  }
 }

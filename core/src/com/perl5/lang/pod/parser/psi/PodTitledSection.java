@@ -17,20 +17,44 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.navigation.NavigationItem;
-import com.intellij.pom.PomTarget;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget,
+public interface PodTitledSection extends PodSection,
+                                          PodLinkTarget,
+                                          PodStructureElement,
+                                          PsiNameIdentifierOwner,
                                           NavigationItem {
   /**
    * @return text representation of section
    */
   @Nullable
-  String getTitleText();
+  default String getTitleText() {
+    PsiElement titleElement = getTitleElement();
+
+    if (titleElement == null) {
+      return null;
+    }
+
+    StringBuilder builder = new StringBuilder();
+    renderElementTitleAsText(builder, new PodRenderingContext());
+    return builder.toString().trim();
+  }
+
+  default void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getTitleElement();
+    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+  }
+
+  default void renderElementTitleAsText(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getTitleElement();
+    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+  }
 
   /**
    * @return a text of the section title with all formatting codes but indexes, or null if there is no title section
@@ -64,5 +88,25 @@ public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructur
    * @return an element containing title of this section, probably with formatting codes
    */
   @Nullable
-  PsiElement getTitleElement();
+  default PsiElement getTitleElement() {
+    return PsiTreeUtil.getChildOfType(this, PodSectionTitle.class);
+  }
+
+  @Override
+  default void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    renderElementTitleAsHTML(builder, new PodRenderingContext());
+    PodSection.super.renderElementAsHTML(builder, context);
+  }
+
+  @Override
+  default void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
+    renderElementTitleAsText(builder, new PodRenderingContext());
+    PodSection.super.renderElementAsText(builder, context);
+  }
+
+  @Override
+  default boolean isIndexed() {
+    PsiElement titleBlock = getTitleElement();
+    return titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed();
+  }
 }

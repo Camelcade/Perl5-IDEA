@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,11 @@ import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
-import com.perl5.lang.pod.parser.psi.*;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
+import com.perl5.lang.pod.parser.psi.PodDocumentPattern;
+import com.perl5.lang.pod.parser.psi.PodElementFactory;
+import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,37 @@
 package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
-public interface PodSection extends PodCompositeElement {
-  boolean hasContent();
+public interface PodSection extends PodCompositeElement, PodRenderableElement {
+  default boolean hasContent() {
+    return getContentBlock() != null;
+  }
 
   @Nullable
-  PsiElement getContentBlock();
+  default PsiElement getContentBlock() {
+    return PsiTreeUtil.getChildOfType(this, PodSectionContent.class);
+  }
+
+  default void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getContentBlock();
+    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
+  }
+
+  default void renderElementContentAsText(StringBuilder builder, PodRenderingContext context) {
+    PsiElement content = getContentBlock();
+    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
+  }
+
+  @Override
+  default void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    renderElementContentAsHTML(builder, new PodRenderingContext());
+  }
+
+  @Override
+  default void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
+    renderElementContentAsText(builder, new PodRenderingContext());
+  }
 }

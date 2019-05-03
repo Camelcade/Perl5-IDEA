@@ -24,4 +24,9 @@ public class PodFileElementType extends IStubFileElementType {
   public PodFileElementType(@NonNls String debugName) {
     super(debugName, PodLanguage.INSTANCE);
   }
+
+  @Override
+  public int getStubVersion() {
+    return super.getStubVersion() + 2;
+  }
 }

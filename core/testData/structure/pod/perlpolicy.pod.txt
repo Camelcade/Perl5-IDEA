@@ -1,7 +1,5 @@
 Documentation in null; /perl5language.png -> POD file at 0 in perlpolicy.pod
 
-  =encoding in null; /perl5language.png, null] -> PsiEncodingSectionImpl(Perl5 POD: ENCODING_SECTION) at 0 in perlpolicy.pod
-
   NAME in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlpolicy.pod
 
   DESCRIPTION in null; /perl5language.png, null] -> PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 112 in perlpolicy.pod

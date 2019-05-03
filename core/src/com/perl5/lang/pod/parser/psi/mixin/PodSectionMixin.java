@@ -17,26 +17,13 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSection;
-import com.perl5.lang.pod.parser.psi.PodSectionContent;
-import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PodSectionMixin extends PodCompositeElementMixin implements PodSection {
   public PodSectionMixin(@NotNull ASTNode node) {
     super(node);
-  }
-
-  @Override
-  public PsiElement getContentBlock() {
-    return findChildByClass(PodSectionContent.class);
-  }
-
-  @Override
-  public boolean hasContent() {
-    return getContentBlock() != null;
   }
 
   @Override
@@ -47,15 +34,5 @@ public abstract class PodSectionMixin extends PodCompositeElementMixin implement
   @Override
   public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
     renderElementContentAsText(builder, new PodRenderingContext());
-  }
-
-  public void renderElementContentAsHTML(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getContentBlock();
-    PodRenderUtil.renderPsiRangeAsHTML(content, content, builder, context);
-  }
-
-  public void renderElementContentAsText(StringBuilder builder, PodRenderingContext context) {
-    PsiElement content = getContentBlock();
-    PodRenderUtil.renderPsiRangeAsText(content, content, builder, context);
   }
 }

@@ -555,9 +555,9 @@ Lookups: init_named_cv; Text: init_named_cv; Tail: null; Type: List Item; Icon: 
 Lookups: init_uniprops; Text: init_uniprops; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59791 in perlintern.pod
 Lookups: internal Perl functions; Text: DESCRIPTION; Tail: (internal Perl functions); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 304 in perlintern.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 304 in perlintern.pod
 Lookups: interpreter functions; Text: DESCRIPTION; Tail: (interpreter functions); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 331 in perlintern.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 331 in perlintern.pod
 Lookups: invert; Text: invert; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59829 in perlintern.pod
 Lookups: invlist_array; Text: invlist_array; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

@@ -19,22 +19,10 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
-import com.perl5.lang.pod.parser.psi.PodFormatterX;
-import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodCompositeElementMixin extends ASTWrapperPsiElement implements PodCompositeElement {
   public PodCompositeElementMixin(@NotNull ASTNode node) {
     super(node);
@@ -53,67 +41,7 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
   }
 
   @Override
-  public void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
-    PodRenderUtil.renderPsiRangeAsHTML(getFirstChild(), null, builder, context);
-  }
-
-  @Override
-  public void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
-    PodRenderUtil.renderPsiRangeAsText(getFirstChild(), null, builder, context);
-  }
-
-  @Override
-  public boolean isIndexed() {
-    return findChildByClass(PodFormatterX.class) != null;
-  }
-
-  @Override
-  public int getListLevel() {
-    PsiElement parent = getParent();
-    return parent instanceof PodCompositeElement ? ((PodCompositeElement)parent).getListLevel() : 0;
-  }
-
-  @Override
-  public boolean isHeading() {
-    return false;
-  }
-
-  @Override
   public ItemPresentation getPresentation() {
     return this;
-  }
-
-  @Nullable
-  @Override
-  public String getPresentableText() {
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public String getLocationString() {
-    PsiFile file = getContainingFile();
-    if (file != null) {
-      ItemPresentation presentation = file.getPresentation();
-      if (presentation != null) {
-        String filePresentableText = presentation.getPresentableText();
-        if (StringUtil.isNotEmpty(filePresentableText)) {
-          return filePresentableText;
-        }
-      }
-    }
-    return null;
-  }
-
-  @Nullable
-  @Override
-  public Icon getIcon(boolean unused) {
-    PsiFile file = getContainingFile();
-    return file == null ? null : file.getIcon(0);
-  }
-
-  @Override
-  public int getHeadingLevel() {
-    return 0;
   }
 }

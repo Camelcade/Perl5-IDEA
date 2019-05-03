@@ -1,8 +1,8 @@
-UsageViewShortNameLocation: Some C<item>
-UsageViewLongNameLocation: Some C<item>
-UsageViewTypeLocation: List Item
-UsageViewNodeTextLocation: Some C<item>
-NonCodeSearchDescriptionLocation: Some C<item>
-DeleteNameDescriptionLocation: Some C<item>
-DeleteTypeDescriptionLocation: List Item
-DeleteTypeDescriptionLocation: List Items
+UsageViewShortNameLocation: index
+UsageViewLongNameLocation: index
+UsageViewTypeLocation: Index
+UsageViewNodeTextLocation: index
+NonCodeSearchDescriptionLocation: index
+DeleteNameDescriptionLocation: index
+DeleteTypeDescriptionLocation: Index
+DeleteTypeDescriptionLocation: Indices

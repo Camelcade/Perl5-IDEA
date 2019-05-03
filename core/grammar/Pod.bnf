@@ -1,18 +1,18 @@
 /*
-Copyright 2015 Alexandr Evstigneev
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+ * Copyright 2015-2019 Alexandr Evstigneev
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 {
   psiVisitorName="PodVisitorGenerated"
   elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypesGenerated"
@@ -23,41 +23,37 @@ limitations under the License.
   parserClass="com.perl5.lang.pod.parser.PodParser"
   extends="com.perl5.lang.pod.parser.psi.mixin.PodCompositeElementMixin"
 
-  stubClass("pod_format_index")="com.perl5.lang.pod.parser.psi.stubs.PodSectionStub"
+  stubClass("pod_format_index|head1_section|head2_section|head3_section|head4_section|item_section|pod_paragraph|unknown_section")="com.perl5.lang.pod.parser.psi.stubs.PodSectionStub"
 
-  mixin("head1_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH1Mixin"
-  mixin("head2_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH2Mixin"
-  mixin("head3_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH3Mixin"
-  mixin("head4_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH4Mixin"
-  mixin("pod_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionParagraphMixin"
+  mixin("head1_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH1"
+  mixin("head2_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH2"
+  mixin("head3_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH3"
+  mixin("head4_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionH4"
+  mixin("pod_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionParagraph"
   mixin("pod_verbatim_paragraph")="com.perl5.lang.pod.parser.psi.mixin.PodSectionVerbatimParagraphMixin"
   mixin("unknown_section")="com.perl5.lang.pod.parser.psi.mixin.PodUnknownSectionMixIn"
 
   mixin("over_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionOverMixin"
   mixin("over_section_content")="com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContentMixin"
-  mixin("item_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItemMixin"
+  mixin("item_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItem"
   mixin("begin_section|for_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionFormattedMixin"
 
   mixin("link_section")="com.perl5.lang.pod.parser.psi.mixin.PodCompositeElementMixin"
-  mixin(".+_section")="com.perl5.lang.pod.parser.psi.mixin.PodTitledSectionMixin"
+  mixin(".+_section")="com.perl5.lang.pod.parser.psi.mixin.PodSectionMixin"
 
   mixin("item_section_title")="com.perl5.lang.pod.parser.psi.mixin.PodSectionItemTitleMixin"
 
-  mixin("pod_format_bold")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterBMixin"
-  mixin("pod_format_code")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterCMixin"
-  mixin("pod_format_escape")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterEMixin"
-  mixin("pod_format_file")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterFMixin"
-  mixin("pod_format_italic")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterIMixin"
+  mixin("pod_format_bold")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterB"
+  mixin("pod_format_code")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterC"
+  mixin("pod_format_escape")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterE"
+  mixin("pod_format_file")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterF"
+  mixin("pod_format_italic")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterI"
 
-  implements("pod_format_link")="com.perl5.lang.pod.parser.psi.PodFormatterL"
-  mixin("pod_format_link")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterLMixin"
+  mixin("pod_format_link")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterL"
 
-  implements("head1_section|head2_section|head3_section|head4_section|item_section")="com.perl5.lang.pod.parser.psi.PodTitledSection"
-
-  mixin("pod_format_nbsp")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterSMixin"
-  implements("pod_format_index")="com.perl5.lang.pod.parser.psi.PodFormatterX"
-  mixin("pod_format_index")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterXMixin"
-  mixin("pod_format_null")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterZMixin"
+  mixin("pod_format_nbsp")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterS"
+  mixin("pod_format_index")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterX"
+  mixin("pod_format_null")="com.perl5.lang.pod.parser.psi.mixin.PodFormatterZ"
 
   implements(".+section_content")="com.perl5.lang.pod.parser.psi.PodSectionContent"
   implements("section_title")="com.perl5.lang.pod.parser.psi.PodSectionTitle"

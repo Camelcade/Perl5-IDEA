@@ -18,14 +18,13 @@ package com.perl5.lang.pod.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IndexSink;
-import com.perl5.lang.pod.parser.psi.PodFormatterX;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.psi.impl.PsiPodFormatIndexImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class PodFormatterXElementType extends PodStubBasedSectionElementType<PodFormatterX> {
+public class PodFormatterXElementType extends PodStubBasedTitledSectionElementType<PodFormatterX> {
   public PodFormatterXElementType(@NotNull @NonNls String debugName) {
     super(debugName);
   }
@@ -42,15 +41,7 @@ public class PodFormatterXElementType extends PodStubBasedSectionElementType<Pod
   }
 
   @Override
-  public void indexStub(@NotNull PodSectionStub stub, @NotNull IndexSink sink) {
-  }
-
-  @Override
-  public boolean shouldCreateStub(ASTNode node) {
-    if (!super.shouldCreateStub(node)) {
-      return false;
-    }
-    PsiElement psiElement = getPsiElement(node);
-    return psiElement instanceof PodFormatterX && ((PodFormatterX)psiElement).isMeaningful();
+  protected boolean shouldCreateStub(@NotNull PodFormatterX psi) {
+    return super.shouldCreateStub(psi) && psi.isMeaningful();
   }
 }

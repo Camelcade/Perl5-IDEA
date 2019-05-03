@@ -30,6 +30,10 @@ public class PodStubsTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testItemsLong_pod() {
+    doTest();
+  }
+
   public void testSections_pod() {
     doTest();
   }

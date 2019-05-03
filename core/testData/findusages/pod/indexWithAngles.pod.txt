@@ -1,14 +1,14 @@
-Target: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
+Target: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
 Total usages: 4
 	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 33 in indexWithAngles.pod, via: PodLinkToSectionReference at (38,44); text in range: 'BZ<><>' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
 
 	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 64 in indexWithAngles.pod, via: PodLinkToSectionReference at (70,76); text in range: 'BZ<><>' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
 
 	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 48 in indexWithAngles.pod, via: PodLinkToSectionReference at (51,62); text in range: 'BE<lt>E<gt>' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
 
 	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 81 in indexWithAngles.pod, via: PodLinkToSectionReference at (85,96); text in range: 'BE<lt>E<gt>' => 1 results:
-	PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
+	PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18 in indexWithAngles.pod
 

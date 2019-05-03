@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class PodVisitor extends PsiPodVisitorGenerated {
 
   @Override
   public void visitItemSection(@NotNull PsiItemSection o) {
-    visitTargetableSection(o);
+    visitTargetableSection((PodTitledSection)o);
   }
 
   public void visitTargetableSection(PodTitledSection o) {
@@ -42,21 +42,21 @@ public class PodVisitor extends PsiPodVisitorGenerated {
 
   @Override
   public void visitHead1Section(@NotNull PsiHead1Section o) {
-    visitTargetableSection(o);
+    visitTargetableSection((PodTitledSection)o);
   }
 
   @Override
   public void visitHead2Section(@NotNull PsiHead2Section o) {
-    visitTargetableSection(o);
+    visitTargetableSection((PodTitledSection)o);
   }
 
   @Override
   public void visitHead3Section(@NotNull PsiHead3Section o) {
-    visitTargetableSection(o);
+    visitTargetableSection((PodTitledSection)o);
   }
 
   @Override
   public void visitHead4Section(@NotNull PsiHead4Section o) {
-    visitTargetableSection(o);
+    visitTargetableSection((PodTitledSection)o);
   }
 }

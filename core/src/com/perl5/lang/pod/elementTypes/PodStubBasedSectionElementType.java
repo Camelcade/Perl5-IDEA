@@ -17,31 +17,22 @@
 package com.perl5.lang.pod.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.parser.psi.PodStubBasedSection;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
-import com.perl5.lang.pod.parser.psi.stubs.PodSectionStubImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSection> extends IStubElementType<PodSectionStub, T>
+public abstract class PodStubBasedSectionElementType<Psi extends PodStubBasedSection> extends IStubElementType<PodSectionStub, Psi>
   implements PsiElementProvider {
   public PodStubBasedSectionElementType(@NotNull @NonNls String debugName) {
     super(debugName, PodLanguage.INSTANCE);
-  }
-
-  @NotNull
-  @Override
-  public PodSectionStub createStub(@NotNull T psi, StubElement parentStub) {
-    return new PodSectionStubImpl(parentStub, this, psi.getTitleText());
   }
 
   @NotNull
@@ -52,28 +43,32 @@ public abstract class PodStubBasedSectionElementType<T extends PodStubBasedSecti
 
   @Override
   public void serialize(@NotNull PodSectionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getTitleText());
+    dataStream.writeName(stub.getContent());
   }
 
   @NotNull
   @Override
   public PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PodSectionStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
+    return new PodSectionStub(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
   @Override
   public void indexStub(@NotNull PodSectionStub stub, @NotNull IndexSink sink) {
-
   }
 
   @Override
-  public boolean shouldCreateStub(ASTNode node) {
+  public final boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return (psi instanceof PodTitledSection) && StringUtil.isNotEmpty(((PodTitledSection)psi).getTitleText());
+    //noinspection unchecked
+    return psi != null && shouldCreateStub((Psi)psi);
+  }
+
+  protected boolean shouldCreateStub(@NotNull Psi psi) {
+    return psi.isIndexed();
   }
 
   @Override
   public String toString() {
-    return "PodElementType." + super.toString();
+    return "Perl5 POD: " + super.toString();
   }
 }

@@ -23,6 +23,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlElementDescriptionProviderBase;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedTitledSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +38,7 @@ public class PodElementDescriptionProvider extends PerlElementDescriptionProvide
 
   @Override
   protected boolean isMyElement(@NotNull PsiElement element) {
-    return super.isMyElement(element) && element instanceof PodCompositeElement;
+    return super.isMyElement(element) && element instanceof PodStubBasedTitledSection;
   }
 
   @Nullable

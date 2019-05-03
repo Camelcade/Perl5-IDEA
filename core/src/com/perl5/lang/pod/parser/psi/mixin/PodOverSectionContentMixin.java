@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,39 +19,24 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.PodSectionItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodOverSectionContentMixin extends PodCompositeElementMixin implements PodOverSectionContent {
-  private Boolean myIsBulleted;
-
   public PodOverSectionContentMixin(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public boolean isBulleted() {
-    if (myIsBulleted == null) {
-      PodSectionItem firstItem = getFirstItem();
-      myIsBulleted = firstItem != null && firstItem.isBulleted();
-    }
-    return myIsBulleted;
+    PodSectionItem firstItem = getFirstItem();
+    return firstItem != null && firstItem.isBulleted();
   }
 
   @Nullable
   @Override
   public PodSectionItem getFirstItem() {
     return findChildByClass(PodSectionItem.class);
-  }
-
-  @Override
-  public void subtreeChanged() {
-    super.subtreeChanged();
-    myIsBulleted = null;
   }
 
   @Override

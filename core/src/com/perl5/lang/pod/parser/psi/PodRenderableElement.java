@@ -16,19 +16,24 @@
 
 package com.perl5.lang.pod.parser.psi;
 
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
-public interface PodRenderableElement {
+public interface PodRenderableElement extends PsiElement {
   /**
    * Appends HTML representation of the section to the {@code builder}
    */
-  void renderElementAsHTML(StringBuilder builder, PodRenderingContext context);
-
+  default void renderElementAsHTML(StringBuilder builder, PodRenderingContext context) {
+    PodRenderUtil.renderPsiRangeAsHTML(getFirstChild(), null, builder, context);
+  }
 
   /**
    * Appends text representation of the section to the {@code builder}
    */
-  void renderElementAsText(StringBuilder builder, PodRenderingContext context);
+  default void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
+    PodRenderUtil.renderPsiRangeAsText(getFirstChild(), null, builder, context);
+  }
 
   /**
    * @return html representation of element contents

@@ -6700,7 +6700,7 @@ POD file
           PsiElement(Perl5 POD: C)('C')
           PsiElement(Perl5 POD: <)('<<')
           PsiFormattingSectionContentImpl(Perl5 POD: FORMATTING_SECTION_CONTENT)
-            PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX)
+            PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX)
               PsiElement(Perl5 POD: X)('X')
               PsiElement(Perl5 POD: <)('<')
               PsiFormattingSectionContentImpl(Perl5 POD: FORMATTING_SECTION_CONTENT)

@@ -17,7 +17,9 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
+import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.pod.parser.psi.util.PodRenderUtil.PARAGRAPH_PREFIX;
@@ -26,6 +28,11 @@ import static com.perl5.lang.pod.parser.psi.util.PodRenderUtil.PARAGRAPH_SUFFIX;
 public abstract class PodUnknownSectionMixIn extends PodTitledSectionMixin {
   public PodUnknownSectionMixIn(@NotNull ASTNode node) {
     super(node);
+  }
+
+  public PodUnknownSectionMixIn(@NotNull PodSectionStub stub,
+                                @NotNull IStubElementType nodeType) {
+    super(stub, nodeType);
   }
 
   @Override

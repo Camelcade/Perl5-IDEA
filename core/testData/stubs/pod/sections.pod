@@ -20,6 +20,11 @@ X<fourth header index>
 Indexed paragraph text
 X<paragraph index>
 
+Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text
+Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text
+Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text Indexed long paragraph text
+X<long paragraph index>
+
 =attr someattr
 
 Simple text

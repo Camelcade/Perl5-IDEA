@@ -1197,7 +1197,7 @@ POD file
                 PsiElement(Perl5 POD: number)('.')
                 PsiElement(Perl5 POD: NL)('\n')
               PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
-                PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX)
+                PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX)
                   PsiElement(Perl5 POD: X)('X')
                   PsiElement(Perl5 POD: <)('<')
                   PsiFormattingSectionContentImpl(Perl5 POD: FORMATTING_SECTION_CONTENT)

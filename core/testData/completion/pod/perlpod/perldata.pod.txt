@@ -1,13 +1,13 @@
 Lookups: !; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (!); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13836 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13836 in perldata.pod
 Lookups: $"; Text: Array Interpolation; Tail: ($"); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30187 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30187 in perldata.pod
 Lookups: $#; Text: The length of an array is a scalar value.  You may find the length of array @days by evaluating $#days, as in csh.  However, this isn't t...; Tail: ($#); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 16962 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16962 in perldata.pod
 Lookups: *; Text: Typeglobs and Filehandles; Tail: (*); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 46195 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46195 in perldata.pod
 Lookups: 0; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (0); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13860 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13860 in perldata.pod
 Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7973 in perldata.pod
 Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -27,11 +27,11 @@ Lookups: Barewords; Text: Barewords; Tail: null; Type: 3d Heading; Icon: /perl5l
 Lookups: Context; Text: Context; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10180 in perldata.pod
 Lookups: DATA; Text: Special Literals; Tail: (DATA); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26649 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26649 in perldata.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 41 in perldata.pod
 Lookups: END; Text: Special Literals; Tail: (END); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26642 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26642 in perldata.pod
 Lookups: Identifier parsing; Text: Identifier parsing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4904 in perldata.pod
 Lookups: Index/Value Array Slices, IndexE<sol>Value Array Slices; Text: Index/Value Array Slices; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
@@ -65,142 +65,142 @@ Lookups: Variable names; Text: Variable names; Tail: null; Type: 2nd Heading; Ic
 Lookups: Version Strings; Text: Version Strings; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 25167 in perldata.pod
 Lookups: ^D; Text: Special Literals; Tail: (^D); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26672 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26672 in perldata.pod
 Lookups: ^Z; Text: Special Literals; Tail: (^Z); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26678 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26678 in perldata.pod
 Lookups: __DATA__; Text: Special Literals; Tail: (__DATA__); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26630 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26630 in perldata.pod
 Lookups: __END__; Text: Special Literals; Tail: (__END__); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26619 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26619 in perldata.pod
 Lookups: __FILE__; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (__FILE__); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27336 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27336 in perldata.pod
 Lookups: __LINE__; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (__LINE__); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27348 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27348 in perldata.pod
 Lookups: __PACKAGE__; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (__PACKAGE__); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27360 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27360 in perldata.pod
 Lookups: __SUB__; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (__SUB__); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27375 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27375 in perldata.pod
 Lookups: array, interpolation; Text: Array Interpolation; Tail: (array, interpolation); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30139 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30139 in perldata.pod
 Lookups: array, length; Text: If you evaluate an array in scalar context, it returns the length of the array.  (Note that this is not true of lists, which return the l...; Tail: (array, length); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 17620 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17620 in perldata.pod
 Lookups: array, length; Text: The length of an array is a scalar value.  You may find the length of array @days by evaluating $#days, as in csh.  However, this isn't t...; Tail: (array, length); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 16968 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 16968 in perldata.pod
 Lookups: array, slice; Text: Slices; Tail: (array, slice); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 42096 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42096 in perldata.pod
 Lookups: array; Text: Entire arrays (and slices of arrays and hashes) are denoted by '@', which works much as the word "these" or "those" does in English, in t...; Tail: (array); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2633 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2633 in perldata.pod
 Lookups: bareword; Text: Barewords; Tail: (bareword); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 29259 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 29259 in perldata.pod
 Lookups: bool; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (bool); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13876 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13876 in perldata.pod
 Lookups: boolean; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (boolean); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13865 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13865 in perldata.pod
 Lookups: bucket; Text: If a tied hash is evaluated in scalar context, the SCALAR method is called (with a fallback to FIRSTKEY).; Tail: (bucket); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18857 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18857 in perldata.pod
 Lookups: case; Text: Because variable references always start with '$', '@', or '%', the "reserved" words aren't in fact reserved with respect to variable nam...; Tail: (case); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4363 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4363 in perldata.pod
 Lookups: context; Text: Context; Tail: (context); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10195 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10195 in perldata.pod
 Lookups: data type; Text: Variable names; Tail: (data type); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 118 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 118 in perldata.pod
 Lookups: data; Text: Special Literals; Tail: (data); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26664 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26664 in perldata.pod
 Lookups: defined; Text: There are actually two varieties of null strings (sometimes referred to as "empty" strings), a defined one and an undefined one.  The def...; Tail: (defined); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15244 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15244 in perldata.pod
 Lookups: end; Text: Special Literals; Tail: (end); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26657 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26657 in perldata.pod
 Lookups: false; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (false); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13827 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13827 in perldata.pod
 Lookups: falsehood; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (falsehood); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13806 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13806 in perldata.pod
 Lookups: file; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (file); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27394 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27394 in perldata.pod
 Lookups: filehandle; Text: Typeglobs and Filehandles; Tail: (filehandle); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 46181 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46181 in perldata.pod
 Lookups: hash, bucket; Text: If a tied hash is evaluated in scalar context, the SCALAR method is called (with a fallback to FIRSTKEY).; Tail: (hash, bucket); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18841 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18841 in perldata.pod
 Lookups: hash, scalar context; Text: If a tied hash is evaluated in scalar context, the SCALAR method is called (with a fallback to FIRSTKEY).; Tail: (hash, scalar context); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18817 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18817 in perldata.pod
 Lookups: hash, slice; Text: Slices; Tail: (hash, slice); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 42112 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42112 in perldata.pod
 Lookups: hash; Text: Entire hashes are denoted by '%':; Tail: (hash); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2834 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2834 in perldata.pod
 Lookups: identifier, case sensitivity; Text: Because variable references always start with '$', '@', or '%', the "reserved" words aren't in fact reserved with respect to variable nam...; Tail: (identifier, case sensitivity); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4331 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4331 in perldata.pod
 Lookups: identifier; Text: Values are usually referred to by name, or through a named reference. The first character of the name tells you to what sort of data stru...; Tail: (identifier); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 1488 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1488 in perldata.pod
 Lookups: identifiers; Text: Identifier parsing; Tail: (identifiers); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4930 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4930 in perldata.pod
 Lookups: interpolation, array; Text: Array Interpolation; Tail: (interpolation, array); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30163 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30163 in perldata.pod
 Lookups: interpolation; Text: As in some shells, you can enclose the variable name in braces to disambiguate it from following alphanumerics (and underscores). You mus...; Tail: (interpolation); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 22787 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 22787 in perldata.pod
 Lookups: interpolation; Text: You can also embed newlines directly in your strings, i.e., they can end on a different line than they begin.  This is nice, but if you f...; Tail: (interpolation); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 21973 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 21973 in perldata.pod
 Lookups: line; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (line); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27386 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27386 in perldata.pod
 Lookups: list context; Text: Context; Tail: (list context); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10224 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10224 in perldata.pod
 Lookups: list; Text: List value constructors; Tail: (list); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 31290 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 31290 in perldata.pod
 Lookups: namespace; Text: Every variable type has its own namespace, as do several non-variable identifiers.  This means that you can, without fear of conflict, us...; Tail: (namespace); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 3647 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3647 in perldata.pod
 Lookups: negation; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (negation); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13848 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13848 in perldata.pod
 Lookups: not; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (not); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13841 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13841 in perldata.pod
 Lookups: null; Text: There are actually two varieties of null strings (sometimes referred to as "empty" strings), a defined one and an undefined one.  The def...; Tail: (null); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15277 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15277 in perldata.pod
 Lookups: number, literal; Text: You are allowed to use underscores (underbars) in numeric literals between digits for legibility (but not multiple underscores in a row: ...; Tail: (number, literal); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 19961 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19961 in perldata.pod
 Lookups: number; Text: Scalar values; Tail: (number); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12668 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12668 in perldata.pod
 Lookups: package; Text: The special literals __FILE__, __LINE__, and __PACKAGE__ represent the current filename, line number, and package name at that point in y...; Tail: (package); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 27402 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 27402 in perldata.pod
 Lookups: reference; Text: Scalar values; Tail: (reference); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12688 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12688 in perldata.pod
 Lookups: scalar context; Text: Context; Tail: (scalar context); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10206 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10206 in perldata.pod
 Lookups: scalar, constant; Text: Scalar value constructors; Tail: (scalar, constant); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 19109 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19109 in perldata.pod
 Lookups: scalar, literal; Text: Scalar value constructors; Tail: (scalar, literal); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 19090 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19090 in perldata.pod
 Lookups: scalar; Text: Scalar values are always named with '$', even when referring to a scalar that is part of an array or a hash.  The '$' symbol works semant...; Tail: (scalar); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2249 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2249 in perldata.pod
 Lookups: scalar; Text: Scalar values; Tail: (scalar); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12658 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12658 in perldata.pod
 Lookups: slice; Text: Slices; Tail: (slice); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 42087 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 42087 in perldata.pod
 Lookups: special literal; Text: Special Literals; Tail: (special literal); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26600 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26600 in perldata.pod
 Lookups: string, literal; Text: String literals are usually delimited by either single or double quotes.  They work much like quotes in the standard Unix shells: double-...; Tail: (string, literal); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 20439 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20439 in perldata.pod
 Lookups: string, null; Text: There are actually two varieties of null strings (sometimes referred to as "empty" strings), a defined one and an undefined one.  The def...; Tail: (string, null); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15285 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15285 in perldata.pod
 Lookups: string; Text: Scalar values; Tail: (string); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12678 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12678 in perldata.pod
 Lookups: true; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (true); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13819 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13819 in perldata.pod
 Lookups: truth; Text: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its string equivalent...; Tail: (truth); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13797 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 13797 in perldata.pod
 Lookups: type; Text: Variable names; Tail: (type); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 131 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 131 in perldata.pod
 Lookups: typeglob; Text: Typeglobs and Filehandles; Tail: (typeglob); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 46169 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 46169 in perldata.pod
 Lookups: undef; Text: There are actually two varieties of null strings (sometimes referred to as "empty" strings), a defined one and an undefined one.  The def...; Tail: (undef); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15268 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15268 in perldata.pod
 Lookups: undefined; Text: There are actually two varieties of null strings (sometimes referred to as "empty" strings), a defined one and an undefined one.  The def...; Tail: (undefined); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15255 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15255 in perldata.pod
 Lookups: v-string; Text: Version Strings; Tail: (v-string); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 25219 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25219 in perldata.pod
 Lookups: variable name; Text: Variable names; Tail: (variable name); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 101 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 101 in perldata.pod
 Lookups: variable, built-in; Text: Perl also has its own built-in variables whose names don't follow these rules.  They have strange names so they don't accidentally collid...; Tail: (variable, built-in); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2005 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2005 in perldata.pod
 Lookups: variable, name; Text: Variable names; Tail: (variable, name); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 83 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 83 in perldata.pod
 Lookups: version string; Text: Version Strings; Tail: (version string); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 25190 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25190 in perldata.pod
 Lookups: vstring; Text: Version Strings; Tail: (vstring); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 25208 in perldata.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25208 in perldata.pod

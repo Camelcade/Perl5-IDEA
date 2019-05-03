@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,15 +27,12 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.parser.psi.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 07.04.2016.
- */
 public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> {
   public PodLinkToFileReference(@NotNull PodFormatterL element, @NotNull TextRange range) {
     super(element, range);

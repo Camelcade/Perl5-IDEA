@@ -1,13 +1,13 @@
 Lookups: #; Text: Numeric Fields; Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 3970 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3970 in perlform.pod
 Lookups: #; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (#); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2167 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2167 in perlform.pod
 Lookups: ...; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (...); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2182 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2182 in perlform.pod
 Lookups: .; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (.); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2177 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2177 in perlform.pod
 Lookups: 0; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (0); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2172 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2172 in perlform.pod
 Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1559 in perlform.pod
 Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -15,19 +15,19 @@ Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Ty
 Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1696 in perlform.pod
 Lookups: @*; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (@*); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2189 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2189 in perlform.pod
 Lookups: @*; Text: The Field @* for Variable-Width Multi-Line Text; Tail: (@*); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4686 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4686 in perlform.pod
 Lookups: @; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (@); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2130 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2130 in perlform.pod
 Lookups: Accessing Formatting Internals; Text: Accessing Formatting Internals; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14785 in perlform.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlform.pod
 Lookups: E<gt>, >; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (>); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2158 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2158 in perlform.pod
 Lookups: E<lt>, <; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (<); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2140 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2140 in perlform.pod
 Lookups: Footers; Text: Footers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14015 in perlform.pod
 Lookups: Format Variables; Text: Format Variables; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -57,52 +57,52 @@ Lookups: Using Fill Mode; Text: Using Fill Mode; Tail: null; Type: 2nd Heading; 
 Lookups: WARNINGS; Text: WARNINGS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 15462 in perlform.pod
 Lookups: ^*; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (^*); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2195 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2195 in perlform.pod
 Lookups: ^*; Text: The Field ^* for Variable-Width One-line-at-a-time Text; Tail: (^*); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4965 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4965 in perlform.pod
 Lookups: ^; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (^); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2135 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2135 in perlform.pod
 Lookups: chart; Text: NAME; Tail: (chart); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 32 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 32 in perlform.pod
 Lookups: footer; Text: Footers; Tail: (footer); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14048 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14048 in perlform.pod
 Lookups: format variables; Text: Format Variables; Tail: (format variables); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10839 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10839 in perlform.pod
 Lookups: format, fill mode; Text: Using Fill Mode; Tail: (format, fill mode); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 6609 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6609 in perlform.pod
 Lookups: format, footer; Text: Footers; Tail: (format, footer); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14030 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14030 in perlform.pod
 Lookups: format, internals; Text: Accessing Formatting Internals; Tail: (format, internals); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14823 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14823 in perlform.pod
 Lookups: format, numeric field; Text: Numeric Fields; Tail: (format, numeric field); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 3975 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3975 in perlform.pod
 Lookups: format, picture line; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (format, picture line); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2106 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2106 in perlform.pod
 Lookups: format, repeating lines; Text: Repeating Format Lines; Tail: (format, repeating lines); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8043 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8043 in perlform.pod
 Lookups: format, specifying values; Text: Specifying Values; Tail: (format, specifying values); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 5549 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5549 in perlform.pod
 Lookups: format, suppressing lines; Text: Suppressing Lines Where All Fields Are Void; Tail: (format, suppressing lines); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 7777 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7777 in perlform.pod
 Lookups: format, text field; Text: Text Fields; Tail: (format, text field); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 3187 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3187 in perlform.pod
 Lookups: format, top of form; Text: Top of Form Processing; Tail: (format, top of form); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8597 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8597 in perlform.pod
 Lookups: format, variables; Text: Format Variables; Tail: (format, variables); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10859 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 10859 in perlform.pod
 Lookups: format; Text: NAME; Tail: (format); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perlform.pod
 Lookups: header; Text: Top of Form Processing; Tail: (header); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8627 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8627 in perlform.pod
 Lookups: nroff; Text: Perl has a mechanism to help you generate simple reports and charts.  To facilitate this, Perl helps you code up your output page close t...; Tail: (nroff); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 622 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 622 in perlform.pod
 Lookups: report; Text: NAME; Tail: (report); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 22 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 22 in perlform.pod
 Lookups: top; Text: Top of Form Processing; Tail: (top); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8620 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8620 in perlform.pod
 Lookups: |, E<verbar>; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (|); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2149 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2149 in perlform.pod
 Lookups: ~; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (~); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2201 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2201 in perlform.pod
 Lookups: ~~; Text: Picture lines contain output field definitions, intermingled with literal text. These lines do not undergo any kind of variable interpola...; Tail: (~~); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2206 in perlform.pod
+    PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2206 in perlform.pod
