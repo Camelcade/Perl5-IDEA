@@ -41,7 +41,7 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
       return;
     }
     String longestWord = "";
-    for (String chunk : textTitle.split("\\s+")) {
+    for (String chunk : textTitle.split("[^\\w_]+")) {
       if (chunk.length() > longestWord.length()) {
         longestWord = chunk;
       }

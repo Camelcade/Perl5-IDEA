@@ -1,0 +1,5 @@
+Target: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in spacelessWithEscapes.pod
+Total usages: 1
+	PsiPodFormatLinkImpl(Perl5 POD: POD_FORMAT_LINK) at 40 in spacelessWithEscapes.pod, via: PodLinkToSectionReference at (43,78); text in range: 'HANDLE-E<gt>format_lines_left(EXPR)' => 1 results:
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in spacelessWithEscapes.pod
+

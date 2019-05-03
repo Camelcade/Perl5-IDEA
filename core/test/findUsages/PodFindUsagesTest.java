@@ -37,6 +37,8 @@ public class PodFindUsagesTest extends PodLightTestCase {
 
   public void testSectionWithName() {doTest();}
 
+  public void testSpacelessWithEscapes() {doTest();}
+
   public void testSectionBare() {doTest();}
 
   public void testSectionBareWithFormatting() {doTest();}

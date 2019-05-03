@@ -1,0 +1,3 @@
+=head1 HANDLE->format_lines_left(EXPR)
+
+L</HANDLE-E<gt>f<caret>ormat_lines_left(EXPR)>
