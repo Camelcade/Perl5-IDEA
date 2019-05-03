@@ -42,6 +42,10 @@ public class PerlStubsTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testGlobs_pl() {
+    doTest();
+  }
+
   @NotNull
   @Override
   protected String computeAnswerFileName(@NotNull String appendix) {

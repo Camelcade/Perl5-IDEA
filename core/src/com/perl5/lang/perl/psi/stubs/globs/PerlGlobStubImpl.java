@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,6 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
-/**
- * Created by hurricup on 25.05.2015.
- */
 public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub {
   private final String packageName;
   private final String variableName;
@@ -49,5 +46,14 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
   @Override
   public boolean isLeftSideOfAssignment() {
     return isLeftSideOfAssignment;
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tNamespace name: " + packageName + "\n" +
+           "\tVariable name: " + variableName + "\n" +
+           "\tIs left side: " + isLeftSideOfAssignment + "\n"
+      ;
   }
 }
