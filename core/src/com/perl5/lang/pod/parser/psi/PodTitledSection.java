@@ -39,7 +39,7 @@ public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructur
    * @return a text of the section title with all formatting codes but indexes, or null if there is no title section
    */
   @Nullable
-  default String getTitleTextWithFormatting() {
+  default String getTitleTextWithoutIndexes() {
     PsiElement titleElement = getTitleElement();
     if (titleElement == null) {
       return null;
