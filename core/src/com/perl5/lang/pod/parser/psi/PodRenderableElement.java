@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,8 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
+import org.jetbrains.annotations.NotNull;
+
 public interface PodRenderableElement {
   /**
    * Appends HTML representation of the section to the {@code builder}
@@ -30,4 +29,25 @@ public interface PodRenderableElement {
    * Appends text representation of the section to the {@code builder}
    */
   void renderElementAsText(StringBuilder builder, PodRenderingContext context);
+
+  /**
+   * @return html representation of element contents
+   */
+  @NotNull
+  default String getAsHTML() {
+    StringBuilder builder = new StringBuilder();
+    renderElementAsHTML(builder, new PodRenderingContext());
+    return builder.toString();
+  }
+
+  /**
+   * @return text representation of element contents
+   */
+  @NotNull
+  default String getAsText() {
+    StringBuilder builder = new StringBuilder();
+    renderElementAsText(builder, new PodRenderingContext());
+    return builder.toString();
+  }
+
 }

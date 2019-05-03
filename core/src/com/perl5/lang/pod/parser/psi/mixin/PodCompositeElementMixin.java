@@ -40,20 +40,6 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
     super(node);
   }
 
-  // fixme this is debugging method
-  public String getAsHTML() {
-    StringBuilder builder = new StringBuilder();
-    renderElementAsHTML(builder, new PodRenderingContext());
-    return builder.toString();
-  }
-
-  // fixme this is debugging method
-  public String getAsText() {
-    StringBuilder builder = new StringBuilder();
-    renderElementAsText(builder, new PodRenderingContext());
-    return builder.toString();
-  }
-
   @NotNull
   @Override
   public final PsiReference[] getReferences() {

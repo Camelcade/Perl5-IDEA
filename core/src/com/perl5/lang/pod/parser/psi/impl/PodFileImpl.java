@@ -35,13 +35,9 @@ import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 
-/**
- * Created by hurricup on 21.04.2015.
- */
 public class PodFileImpl extends PsiFileBase implements PodFile {
   public PodFileImpl(@NotNull FileViewProvider viewProvider) {
     super(viewProvider, PodLanguage.INSTANCE);
@@ -62,20 +58,6 @@ public class PodFileImpl extends PsiFileBase implements PodFile {
   public Icon getIcon(int flags) {
     PsiFile baseFile = getViewProvider().getStubBindingRoot();
     return baseFile == this ? super.getIcon(flags) : baseFile.getIcon(flags);
-  }
-
-  @TestOnly
-  public String getAsHTML() {
-    StringBuilder builder = new StringBuilder();
-    renderElementAsHTML(builder, new PodRenderingContext());
-    return builder.toString();
-  }
-
-  @TestOnly
-  public String getAsText() {
-    StringBuilder builder = new StringBuilder();
-    renderElementAsText(builder, new PodRenderingContext());
-    return builder.toString();
   }
 
   @Override
