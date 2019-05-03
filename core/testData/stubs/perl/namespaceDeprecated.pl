@@ -1,0 +1,2 @@
+#@deprecated
+package Foo::Bar;

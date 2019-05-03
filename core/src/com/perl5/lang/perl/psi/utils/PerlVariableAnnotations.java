@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +31,6 @@ import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
-/**
- * Created by hurricup on 08.08.2016.
- */
 public class PerlVariableAnnotations {
   private static final byte IS_DEPRECATED = 0x01;
 
@@ -97,5 +94,10 @@ public class PerlVariableAnnotations {
     }
 
     return myAnnotations;
+  }
+
+  @Override
+  public String toString() {
+    return isDeprecated() ? "deprecated" : "none";
   }
 }

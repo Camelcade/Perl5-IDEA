@@ -34,6 +34,14 @@ public class PerlStubsTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testNamespaceDeprecated_pl() {
+    doTest();
+  }
+
+  public void testVariables_pl() {
+    doTest();
+  }
+
   @NotNull
   @Override
   protected String computeAnswerFileName(@NotNull String appendix) {

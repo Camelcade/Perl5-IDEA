@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,6 @@ import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 30.05.2015.
- */
 public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
   @NotNull
   private final String myPackageName;
@@ -107,5 +104,16 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
       return PerlVariablesStubIndex.KEY_HASH;
     }
     throw new RuntimeException("Don't have key for " + myVariableType);
+  }
+
+  @Override
+  public String toString() {
+    return super.toString() + "\n" +
+           "\tNamespace name: " + myPackageName + "\n" +
+           "\tVariable name: " + myVariableName + "\n" +
+           "\tVariable type: " + myVariableType + "\n" +
+           "\tDeclared value: " + myDeclaredValue + "\n" +
+           "\tAnnotations: " + myPerlVariableAnnotations
+      ;
   }
 }
