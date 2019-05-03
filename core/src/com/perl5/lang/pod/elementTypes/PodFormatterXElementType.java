@@ -25,9 +25,6 @@ import com.perl5.lang.pod.psi.impl.PsiPodFormatIndexImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodFormatterXElementType extends PodStubBasedSectionElementType<PodFormatterX> {
   public PodFormatterXElementType(@NotNull @NonNls String debugName) {
     super(debugName);

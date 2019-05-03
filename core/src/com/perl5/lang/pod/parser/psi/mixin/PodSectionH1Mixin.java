@@ -21,9 +21,6 @@ import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionH1;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodSectionH1Mixin extends PodTitledSectionMixin implements PodSectionH1 {
   public PodSectionH1Mixin(@NotNull ASTNode node) {
     super(node);

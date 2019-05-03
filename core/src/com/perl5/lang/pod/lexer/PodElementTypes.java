@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,6 @@ package com.perl5.lang.pod.lexer;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.elementTypes.PodTokenType;
 
-/**
- * Created by hurricup on 30.03.2016.
- */
 public interface PodElementTypes extends PodElementTypesGenerated {
   IElementType POD_OUTER = new PodTokenType("POD_OUTER");
 }

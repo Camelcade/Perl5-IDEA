@@ -24,9 +24,6 @@ import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public interface PodTitledSection extends PodSection, PodLinkTarget, PodStructureElement, PsiNameIdentifierOwner, PomTarget,
                                           NavigationItem {
   /**

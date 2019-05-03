@@ -29,9 +29,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public abstract class PodStubBasedSectionMixin extends StubBasedPsiElementBase<PodSectionStub> implements PodStubBasedSection {
   public PodStubBasedSectionMixin(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);

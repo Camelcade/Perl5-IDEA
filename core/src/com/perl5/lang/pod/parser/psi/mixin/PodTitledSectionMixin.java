@@ -29,9 +29,6 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by hurricup on 26.03.2016.
- */
 public class PodTitledSectionMixin extends PodSectionMixin implements PodTitledSection {
   public PodTitledSectionMixin(@NotNull ASTNode node) {
     super(node);
