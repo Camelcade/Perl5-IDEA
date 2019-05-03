@@ -7,23 +7,23 @@ Lookups: CLEAR this; Text: CLEAR this; Tail: null; Type: List Item; Icon: /perl5
 Lookups: CLEAR this; Text: CLEAR this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22537 in perltie.pod
 Lookups: CLEAR; Text: CLEAR this; Tail: (CLEAR); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13146 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13163 in perltie.pod
 Lookups: CLEAR; Text: CLEAR this; Tail: (CLEAR); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22537 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 22554 in perltie.pod
 Lookups: CLOBBER; Text: CLOBBER; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17678 in perltie.pod
 Lookups: CLOSE this; Text: CLOSE this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31239 in perltie.pod
 Lookups: CLOSE; Text: CLOSE this; Tail: (CLOSE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31239 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 31256 in perltie.pod
 Lookups: DELETE this, key; Text: DELETE this, key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12864 in perltie.pod
 Lookups: DELETE this, key; Text: DELETE this, key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21614 in perltie.pod
 Lookups: DELETE; Text: DELETE this, key; Tail: (DELETE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12864 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12887 in perltie.pod
 Lookups: DELETE; Text: DELETE this, key; Tail: (DELETE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21614 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 21637 in perltie.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 172 in perltie.pod
 Lookups: DESTROY this; Text: DESTROY this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -35,29 +35,29 @@ Lookups: DESTROY this; Text: DESTROY this; Tail: null; Type: List Item; Icon: /p
 Lookups: DESTROY this; Text: DESTROY this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6113 in perltie.pod
 Lookups: DESTROY; Text: DESTROY this; Tail: (DESTROY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15309 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15328 in perltie.pod
 Lookups: DESTROY; Text: DESTROY this; Tail: (DESTROY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26130 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26149 in perltie.pod
 Lookups: DESTROY; Text: DESTROY this; Tail: (DESTROY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31592 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 31611 in perltie.pod
 Lookups: DESTROY; Text: DESTROY this; Tail: (DESTROY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6113 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 6132 in perltie.pod
 Lookups: EOF this; Text: EOF this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30777 in perltie.pod
 Lookups: EOF; Text: EOF this; Tail: (EOF); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30777 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30792 in perltie.pod
 Lookups: EXISTS this, key; Text: EXISTS this, key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12436 in perltie.pod
 Lookups: EXISTS this, key; Text: EXISTS this, key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23120 in perltie.pod
 Lookups: EXISTS; Text: EXISTS this, key; Tail: (EXISTS); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12436 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12459 in perltie.pod
 Lookups: EXISTS; Text: EXISTS this, key; Tail: (EXISTS); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23120 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23143 in perltie.pod
 Lookups: EXTEND this, count; Text: EXTEND this, count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12003 in perltie.pod
 Lookups: EXTEND; Text: EXTEND this, count; Tail: (EXTEND); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12003 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12028 in perltie.pod
 Lookups: FETCH this, index; Text: FETCH this, index; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9134 in perltie.pod
 Lookups: FETCH this, key; Text: FETCH this, key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -65,23 +65,23 @@ Lookups: FETCH this, key; Text: FETCH this, key; Tail: null; Type: List Item; Ic
 Lookups: FETCH this; Text: FETCH this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3796 in perltie.pod
 Lookups: FETCH; Text: FETCH this, index; Tail: (FETCH); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9134 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 9158 in perltie.pod
 Lookups: FETCH; Text: FETCH this, key; Tail: (FETCH); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19428 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 19450 in perltie.pod
 Lookups: FETCH; Text: FETCH this; Tail: (FETCH); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3796 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 3813 in perltie.pod
 Lookups: FETCHSIZE this; Text: FETCHSIZE this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10945 in perltie.pod
 Lookups: FETCHSIZE; Text: FETCHSIZE this; Tail: (FETCHSIZE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10945 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10966 in perltie.pod
 Lookups: FIRSTKEY this; Text: FIRSTKEY this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23438 in perltie.pod
 Lookups: FIRSTKEY; Text: FIRSTKEY this; Tail: (FIRSTKEY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23438 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23458 in perltie.pod
 Lookups: GETC this; Text: GETC this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30627 in perltie.pod
 Lookups: GETC; Text: GETC this; Tail: (GETC); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30627 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30643 in perltie.pod
 Lookups: HOME; Text: HOME; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17638 in perltie.pod
 Lookups: LIST; Text: LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -91,45 +91,45 @@ Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.p
 Lookups: NEXTKEY this, lastkey; Text: NEXTKEY this, lastkey; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23917 in perltie.pod
 Lookups: NEXTKEY; Text: NEXTKEY this, lastkey; Tail: (NEXTKEY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23917 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23945 in perltie.pod
 Lookups: POP this; Text: POP this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13655 in perltie.pod
 Lookups: POP; Text: POP this; Tail: (POP); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13655 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13670 in perltie.pod
 Lookups: PRINT this, LIST; Text: PRINT this, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28764 in perltie.pod
 Lookups: PRINT; Text: PRINT this, LIST; Tail: (PRINT); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28764 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 28787 in perltie.pod
 Lookups: PRINTF this, LIST; Text: PRINTF this, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29210 in perltie.pod
 Lookups: PRINTF; Text: PRINTF this, LIST; Tail: (PRINTF); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29210 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 29234 in perltie.pod
 Lookups: PUSH this, LIST; Text: PUSH this, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13360 in perltie.pod
 Lookups: PUSH; Text: PUSH this, LIST; Tail: (PUSH); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13360 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13383 in perltie.pod
 Lookups: READ this, LIST; Text: READ this, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29547 in perltie.pod
 Lookups: READ; Text: READ this, LIST; Tail: (READ); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29547 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 29569 in perltie.pod
 Lookups: READLINE this; Text: READLINE this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29907 in perltie.pod
 Lookups: READLINE; Text: READLINE this; Tail: (READLINE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29907 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 29927 in perltie.pod
 Lookups: SCALAR this; Text: SCALAR this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24653 in perltie.pod
 Lookups: SCALAR; Text: SCALAR this; Tail: (SCALAR); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24653 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 24671 in perltie.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36754 in perltie.pod
 Lookups: SHIFT this; Text: SHIFT this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13822 in perltie.pod
 Lookups: SHIFT; Text: SHIFT this; Tail: (SHIFT); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13822 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13839 in perltie.pod
 Lookups: SPLICE this, offset, length, LIST; Text: SPLICE this, offset, length, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14463 in perltie.pod
 Lookups: SPLICE; Text: SPLICE this, offset, length, LIST; Tail: (SPLICE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14463 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14503 in perltie.pod
 Lookups: STORE this, index, value; Text: STORE this, index, value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10101 in perltie.pod
 Lookups: STORE this, key, value; Text: STORE this, key, value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -137,33 +137,33 @@ Lookups: STORE this, key, value; Text: STORE this, key, value; Tail: null; Type:
 Lookups: STORE this, value; Text: STORE this, value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4736 in perltie.pod
 Lookups: STORE; Text: STORE this, index, value; Tail: (STORE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10101 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10132 in perltie.pod
 Lookups: STORE; Text: STORE this, key, value; Tail: (STORE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20331 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 20360 in perltie.pod
 Lookups: STORE; Text: STORE this, value; Tail: (STORE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4736 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4760 in perltie.pod
 Lookups: STORESIZE this, count; Text: STORESIZE this, count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11204 in perltie.pod
 Lookups: STORESIZE; Text: STORESIZE this, count; Tail: (STORESIZE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11204 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 11232 in perltie.pod
 Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 80 in perltie.pod
 Lookups: TIEARRAY classname, LIST; Text: TIEARRAY classname, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8104 in perltie.pod
 Lookups: TIEARRAY; Text: TIEARRAY classname, LIST; Tail: (TIEARRAY); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8104 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8135 in perltie.pod
 Lookups: TIEHANDLE classname, LIST; Text: TIEHANDLE classname, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28223 in perltie.pod
 Lookups: TIEHANDLE; Text: TIEHANDLE classname, LIST; Tail: (TIEHANDLE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28223 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 28255 in perltie.pod
 Lookups: TIEHASH classname, LIST; Text: TIEHASH classname, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18291 in perltie.pod
 Lookups: TIEHASH; Text: TIEHASH classname, LIST; Tail: (TIEHASH); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18291 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18321 in perltie.pod
 Lookups: TIESCALAR classname, LIST; Text: TIESCALAR classname, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2903 in perltie.pod
 Lookups: TIESCALAR; Text: TIESCALAR classname, LIST; Tail: (TIESCALAR); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2903 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 2935 in perltie.pod
 Lookups: The untie Gotcha; Text: The untie Gotcha; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32162 in perltie.pod
 Lookups: Tying Arrays; Text: Tying Arrays; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -177,7 +177,7 @@ Lookups: Tying Scalars; Text: Tying Scalars; Tail: null; Type: 2nd Heading; Icon
 Lookups: UNSHIFT this, LIST; Text: UNSHIFT this, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14033 in perltie.pod
 Lookups: UNSHIFT; Text: UNSHIFT this, LIST; Tail: (UNSHIFT); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14033 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14059 in perltie.pod
 Lookups: UNTIE this; Text: UNTIE this; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32017 in perltie.pod
 Lookups: UNTIE this; Text: UNTIE this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -189,30 +189,30 @@ Lookups: UNTIE this; Text: UNTIE this; Tail: null; Type: List Item; Icon: /perl5
 Lookups: UNTIE this; Text: UNTIE this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5868 in perltie.pod
 Lookups: UNTIE; Text: UNTIE this; Tail: (UNTIE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32017 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15224 in perltie.pod
 Lookups: UNTIE; Text: UNTIE this; Tail: (UNTIE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15207 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26047 in perltie.pod
 Lookups: UNTIE; Text: UNTIE this; Tail: (UNTIE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26030 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 31407 in perltie.pod
 Lookups: UNTIE; Text: UNTIE this; Tail: (UNTIE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31390 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 32035 in perltie.pod
 Lookups: UNTIE; Text: UNTIE this; Tail: (UNTIE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5868 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 5885 in perltie.pod
 Lookups: USER; Text: USER; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17586 in perltie.pod
 Lookups: WRITE this, LIST; Text: WRITE this, LIST; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28507 in perltie.pod
 Lookups: WRITE; Text: WRITE this, LIST; Tail: (WRITE); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28507 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 28530 in perltie.pod
 Lookups: array, tying; Text: Tying Arrays; Tail: (array, tying); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6857 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 6877 in perltie.pod
 Lookups: filehandle, tying; Text: Tying FileHandles; Tail: (filehandle, tying); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26846 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26871 in perltie.pod
 Lookups: hash, tying; Text: Tying Hashes; Tail: (hash, tying); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15573 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15593 in perltie.pod
 Lookups: scalar, tying; Text: Tying Scalars; Tail: (scalar, tying); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1974 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 1995 in perltie.pod
 Lookups: tie; Text: NAME; Tail: (tie); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12 in perltie.pod
 Lookups: untie; Text: The untie Gotcha; Tail: (untie); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32162 in perltie.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 32189 in perltie.pod

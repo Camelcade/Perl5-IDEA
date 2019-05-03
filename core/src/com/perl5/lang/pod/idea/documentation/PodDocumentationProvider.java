@@ -107,8 +107,8 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     else if (element instanceof PodFormatterX) {
       return doGenerateDoc(((PodFormatterX)element).getIndexTarget());
     }
-    else if (element instanceof PodCompositeElement) {
-      return PerlDocUtil.renderElement((PodCompositeElement)element);
+    else if (element instanceof PodSection) {
+      return PerlDocUtil.renderElement((PodSection)element);
     }
     return null;
   }

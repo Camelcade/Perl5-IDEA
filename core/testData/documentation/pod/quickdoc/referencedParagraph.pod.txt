@@ -1,0 +1,11 @@
+<p><a href="psi_element://pod%3A%3Aperldata">pod::perldata</a>: <a href="psi_element://pod%3A%3Aperldata%2FDESCRIPTION">DESCRIPTION</a>: <a href="psi_element://pod%3A%3Aperldata%2FScalar+value+constructors">Scalar value constructors</a></p><p style="padding-bottom: 10px;">You can also embed newlines directly in your strings, i.e., they can end
+on a different line than they begin.  This is nice, but if you forget
+your trailing quote, the error will not be reported until Perl finds
+another line containing the quote character, which may be much further
+on in the script.  Variable substitution inside strings is limited to
+scalar variables, arrays, and array or hash slices.  (In other words,
+names beginning with $ or @, followed by an optional bracketed
+expression as a subscript.)  The following code segment prints out &quot;The
+price is $100.&quot;</p>
+<div style="padding-bottom: 10px;"><pre><code>    $Price = '$100';	# not interpolated
+    print &quot;The price is $Price.\n&quot;;	# interpolated</code></pre></div>

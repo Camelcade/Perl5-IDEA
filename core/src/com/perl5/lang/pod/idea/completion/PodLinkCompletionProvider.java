@@ -20,6 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -33,10 +34,7 @@ import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
-import com.perl5.lang.pod.parser.psi.PodFile;
-import com.perl5.lang.pod.parser.psi.PodFormatterL;
-import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.psi.PsiFormattingSectionContent;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
@@ -48,10 +46,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by hurricup on 16.04.2016.
- */
 public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes {
+  private static final Logger LOG = Logger.getInstance(PodLinkCompletionProvider.class);
+
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
@@ -128,11 +125,14 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (NumberUtils.isNumber(trimmed)) {
             return null;
           }
-          return StringUtil.nullize(trimmed);
+          return StringUtil.nullize(StringUtil.shortenTextWithEllipsis(trimmed, 140, 0));
         }
 
         @Override
         public void visitPodFormatIndex(@NotNull PsiPodFormatIndex o) {
+          if (!o.isMeaningful()) {
+            return;
+          }
           PsiFormattingSectionContent formattingSectionContent = o.getFormattingSectionContent();
           if (formattingSectionContent == null) {
             return;
@@ -149,7 +149,11 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           else if (indexTarget instanceof PodTitledSection) {
             presentableText = cleanItemText(((PodTitledSection)indexTarget).getTitleText());
           }
+          else if (indexTarget instanceof PodRenderableElement) {
+            presentableText = cleanItemText(((PodRenderableElement)indexTarget).getAsText());
+          }
           else {
+            LOG.warn("Unhandled index target: " + indexTarget);
             return;
           }
           String tailText;
@@ -162,7 +166,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           }
 
           result.addElement(
-            LookupElementBuilder.create(indexTarget, lookupText)
+            LookupElementBuilder.create(o, lookupText)
               .withPresentableText(presentableText)
               .withTailText(tailText)
               .withTypeText(UsageViewUtil.getType(o))

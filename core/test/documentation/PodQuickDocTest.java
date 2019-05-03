@@ -79,6 +79,8 @@ public class PodQuickDocTest extends PodLightTestCase {
 
   public void testReferenceSection() {doTest();}
 
+  public void testReferencedParagraph() {doTest();}
+
   private void doTest() {
     doTestQuickDoc();
   }

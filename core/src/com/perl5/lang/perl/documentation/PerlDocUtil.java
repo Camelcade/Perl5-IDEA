@@ -358,15 +358,12 @@ public class PerlDocUtil implements PerlElementTypes {
     return resultRef.get();
   }
 
-
+  @Contract("null->null")
   @Nullable
-  public static String renderElement(@Nullable PodCompositeElement element) {
-    if (!(element instanceof PodTitledSection)) {
+  public static String renderElement(@Nullable PodSection podSection) {
+    if (podSection == null) {
       return null;
     }
-
-    PodTitledSection podSection = (PodTitledSection)element;
-
     boolean hasContent = podSection.hasContent();
     PsiElement run = podSection;
     PsiElement lastSection = podSection;

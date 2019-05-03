@@ -26,7 +26,7 @@ Lookups: UTS #10: Unicode Collation Algorithm; Text: UTS #10: Unicode Collation 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23940 in perlunicook.pod
 Lookups: UTS #18: Unicode Regular Expressions; Text: UTS #18: Unicode Regular Expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23852 in perlunicook.pod
-Lookups: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170.; Text: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on page 170.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on...; Text: §3.13 Default Case Algorithms, page 113; §4.2  Case, pages 120–122; Case Mappings, page 166–172, especially Caseless Matching starting on...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23654 in perlunicook.pod
 Lookups: ℞ 0: Standard preamble; Text: ℞ 0: Standard preamble; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 374 in perlunicook.pod

@@ -89,6 +89,11 @@ public class PodQuickDocCompletionTest extends PodLightTestCase {
     doTestCompletionQuickDoc("line number");
   }
 
+  public void testIndexedParagraph() {
+    initWithTextSmart("L<perldata/<caret>>");
+    doTestCompletionQuickDoc("interpolation");
+  }
+
   @NotNull
   @Override
   protected String getBuiltInFromTestName() {

@@ -77,6 +77,6 @@ Lookups: Why do Perl operators have different precedence than C operators?; Text
 Lookups: Why doesn't "my($foo) = <$fh>;" work right?; Text: Why doesn't "my($foo) = <$fh>;" work right?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20180 in perlfaq7.pod
 Lookups: class, creation; Text: How do I create a class?; Tail: (class, creation); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7689 in perlfaq7.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 7721 in perlfaq7.pod
 Lookups: package; Text: How do I create a class?; Tail: (package); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7689 in perlfaq7.pod
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 7740 in perlfaq7.pod
