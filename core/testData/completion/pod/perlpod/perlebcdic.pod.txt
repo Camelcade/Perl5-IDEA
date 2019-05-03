@@ -46,10 +46,10 @@ Lookups: OPERATOR DIFFERENCES; Text: OPERATOR DIFFERENCES; Tail: null; Type: 1st
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58411 in perlebcdic.pod
 Lookups: OS ISSUES; Text: OS ISSUES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 80106 in perlebcdic.pod
-Lookups: OS/390, z/OS; Text: OS/390, z/OS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80459 in perlebcdic.pod
-Lookups: OS/400; Text: OS/400; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: OS/400, OSE<sol>400; Text: OS/400; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80207 in perlebcdic.pod
+Lookups: OSE<sol>390, zE<sol>OS, OS/390, z/OS; Text: OS/390, z/OS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80459 in perlebcdic.pod
 Lookups: PASE; Text: PASE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80231 in perlebcdic.pod
 Lookups: POSIX-BC; Text: POSIX-BC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -128,7 +128,7 @@ Lookups: sort(); Text: sort(); Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64218 in perlebcdic.pod
 Lookups: sprintf(); Text: sprintf(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64379 in perlebcdic.pod
-Lookups: tr///; Text: tr///; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: tr///, trE<sol>E<sol>E<sol>; Text: tr///; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55221 in perlebcdic.pod
 Lookups: unpack(); Text: unpack(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64533 in perlebcdic.pod

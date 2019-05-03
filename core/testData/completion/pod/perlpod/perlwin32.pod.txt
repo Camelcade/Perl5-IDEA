@@ -20,9 +20,9 @@ Lookups: File Globbing; Text: File Globbing; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22247 in perlwin32.pod
 Lookups: GCC; Text: GCC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13537 in perlwin32.pod
-Lookups: Gary Ng <71564.1743@CompuServe.COM>; Text: Gary Ng <71564.1743@CompuServe.COM>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Gary Ng E<lt>71564.1743@CompuServe.COME<gt>, Gary Ng <71564.1743@CompuServe.COM>; Text: Gary Ng <71564.1743@CompuServe.COM>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38729 in perlwin32.pod
-Lookups: Gurusamy Sarathy <gsar@activestate.com>; Text: Gurusamy Sarathy <gsar@activestate.com>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Gurusamy Sarathy E<lt>gsar@activestate.comE<gt>, Gurusamy Sarathy <gsar@activestate.com>; Text: Gurusamy Sarathy <gsar@activestate.com>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38780 in perlwin32.pod
 Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39070 in perlwin32.pod
@@ -30,7 +30,7 @@ Lookups: Installation of Perl on Windows; Text: Installation of Perl on Windows;
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19582 in perlwin32.pod
 Lookups: Intel C++ Compiler; Text: Intel C++ Compiler; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14079 in perlwin32.pod
-Lookups: Jan Dubois <jand@activestate.com>; Text: Jan Dubois <jand@activestate.com>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Jan Dubois <jand@activestate.com>, Jan Dubois E<lt>jand@activestate.comE<gt>; Text: Jan Dubois <jand@activestate.com>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38890 in perlwin32.pod
 Lookups: Make; Text: Make; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3909 in perlwin32.pod
@@ -38,7 +38,7 @@ Lookups: Microsoft Platform SDK 64-bit Compiler; Text: Microsoft Platform SDK 64
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13276 in perlwin32.pod
 Lookups: Microsoft Visual C++ 2005 Express Edition; Text: Microsoft Visual C++ 2005 Express Edition; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7138 in perlwin32.pod
-Lookups: Microsoft Visual C++ 2008-2017 Express/Community Edition; Text: Microsoft Visual C++ 2008-2017 Express/Community Edition; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Microsoft Visual C++ 2008-2017 ExpressE<sol>Community Edition, Microsoft Visual C++ 2008-2017 Express/Community Edition; Text: Microsoft Visual C++ 2008-2017 Express/Community Edition; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6196 in perlwin32.pod
 Lookups: Microsoft Visual C++ Toolkit 2003; Text: Microsoft Visual C++ Toolkit 2003; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9425 in perlwin32.pod
@@ -48,7 +48,7 @@ Lookups: Miscellaneous Things; Text: Miscellaneous Things; Tail: null; Type: 2nd
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34975 in perlwin32.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlwin32.pod
-Lookups: Nick Ing-Simmons <nick@ing-simmons.net>; Text: Nick Ing-Simmons <nick@ing-simmons.net>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Nick Ing-Simmons <nick@ing-simmons.net>, Nick Ing-Simmons E<lt>nick@ing-simmons.netE<gt>; Text: Nick Ing-Simmons <nick@ing-simmons.net>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38835 in perlwin32.pod
 Lookups: Notes on 64-bit Windows; Text: Notes on 64-bit Windows; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 30971 in perlwin32.pod
@@ -60,7 +60,7 @@ Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: 1st Heading; Icon: /perl5la
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 223 in perlwin32.pod
 Lookups: Setting Up Perl on Windows; Text: Setting Up Perl on Windows; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3865 in perlwin32.pod
-Lookups: Steve Hay <steve.m.hay@googlemail.com>; Text: Steve Hay <steve.m.hay@googlemail.com>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Steve Hay <steve.m.hay@googlemail.com>, Steve Hay E<lt>steve.m.hay@googlemail.comE<gt>; Text: Steve Hay <steve.m.hay@googlemail.com>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38939 in perlwin32.pod
 Lookups: Testing Perl on Windows; Text: Testing Perl on Windows; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17933 in perlwin32.pod
@@ -68,7 +68,7 @@ Lookups: Usage Hints for Perl on Windows; Text: Usage Hints for Perl on Windows;
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20422 in perlwin32.pod
 Lookups: Using perl from the command line; Text: Using perl from the command line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22592 in perlwin32.pod
-Lookups: http://mingw-w64.org; Text: http://mingw-w64.org; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://mingw-w64.org, http:E<sol>E<sol>mingw-w64.org; Text: http://mingw-w64.org; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2112 in perlwin32.pod
-Lookups: http://mingw.org; Text: http://mingw.org; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://mingw.org, http:E<sol>E<sol>mingw.org; Text: http://mingw.org; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2026 in perlwin32.pod

@@ -36,18 +36,18 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
-import com.perl5.lang.pod.psi.PsiFormattingSectionContent;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.apache.commons.lang.math.NumberUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodLinkCompletionProvider.class);
+  private static final List<String> TO_ESCAPE = Collections.unmodifiableList(Arrays.asList("<", ">", "/", "|"));
+  private static final List<String> ESCAPE_TO = Collections.unmodifiableList(Arrays.asList("E<lt>", "E<gt>", "E<sol>", "E<verbar>"));
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
@@ -108,7 +108,10 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         public void visitTargetableSection(PodTitledSection o) {
           String title = cleanItemText(o.getTitleText());
           if (title != null) {
-            result.addElement(LookupElementBuilder.create(o, title)
+            String escapedTitle = StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
+            result.addElement(LookupElementBuilder.create(o, escapedTitle)
+                                .withLookupString(title)
+                                .withPresentableText(title)
                                 .withIcon(PerlIcons.POD_FILE)
                                 .withTypeText(UsageViewUtil.getType(o)));
           }
@@ -133,11 +136,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (!o.isMeaningful()) {
             return;
           }
-          PsiFormattingSectionContent formattingSectionContent = o.getFormattingSectionContent();
-          if (formattingSectionContent == null) {
-            return;
-          }
-          String lookupText = formattingSectionContent.getText();
+          String lookupText = o.getTitleText();
           if (StringUtil.isEmpty(lookupText)) {
             return;
           }
@@ -164,9 +163,10 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           else {
             tailText = "(" + lookupText + ")";
           }
-
+          String escapedLookupText = StringUtil.replace(lookupText, TO_ESCAPE, ESCAPE_TO);
           result.addElement(
-            LookupElementBuilder.create(o, lookupText)
+            LookupElementBuilder.create(o, escapedLookupText)
+              .withLookupString(lookupText)
               .withPresentableText(presentableText)
               .withTailText(tailText)
               .withTypeText(UsageViewUtil.getType(o))

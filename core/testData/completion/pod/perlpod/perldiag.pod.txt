@@ -1,6 +1,6 @@
 Lookups: !=~ should be !~; Text: !=~ should be !~; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216105 in perldiag.pod
-Lookups: "%s" is more clearly written simply as "%s" in regex; marked by <-- HERE in m/%s/; Text: "%s" is more clearly written simply as "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: "%s" is more clearly written simply as "%s" in regex; marked by <-- HERE in m/%s/, "%s" is more clearly written simply as "%s" in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: "%s" is more clearly written simply as "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 122160 in perldiag.pod
 Lookups: "%s" may clash with future reserved word; Text: "%s" may clash with future reserved word; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 139938 in perldiag.pod
@@ -66,7 +66,7 @@ Lookups: %s had compilation errors.; Text: %s had compilation errors.; Tail: nul
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96910 in perldiag.pod
 Lookups: %s has too many errors; Text: %s has too many errors; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97235 in perldiag.pod
-Lookups: %s matches null string many times in regex; marked by <-- HERE in m/%s/; Text: %s matches null string many times in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: %s matches null string many times in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, %s matches null string many times in regex; marked by <-- HERE in m/%s/; Text: %s matches null string many times in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 139223 in perldiag.pod
 Lookups: %s must not be a named sequence in transliteration operator; Text: %s must not be a named sequence in transliteration operator; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148737 in perldiag.pod
@@ -110,7 +110,7 @@ Lookups: '%' may not be used in pack; Text: '%' may not be used in pack; Tail: n
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 140138 in perldiag.pod
 Lookups: '%c' allowed only after types %s in %s; Text: '%c' allowed only after types %s in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2544 in perldiag.pod
-Lookups: '%s' is an unknown bound type in regex; marked by <-- HERE in m/%s/; Text: '%s' is an unknown bound type in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: '%s' is an unknown bound type in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, '%s' is an unknown bound type in regex; marked by <-- HERE in m/%s/; Text: '%s' is an unknown bound type in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120910 in perldiag.pod
 Lookups: '%s' is not a code reference; Text: '%s' is not a code reference; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123458 in perldiag.pod
@@ -120,33 +120,33 @@ Lookups: '%s' resolved to '\o{%s}%d'; Text: '%s' resolved to '\o{%s}%d'; Tail: n
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204583 in perldiag.pod
 Lookups: '%s' trapped by operation mask; Text: '%s' trapped by operation mask; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 238263 in perldiag.pod
-Lookups: '(*%s' requires a terminating ':' in regex; marked by <-- HERE in m/%s/; Text: '(*%s' requires a terminating ':' in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: '(*%s' requires a terminating ':' in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, '(*%s' requires a terminating ':' in regex; marked by <-- HERE in m/%s/; Text: '(*%s' requires a terminating ':' in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 204375 in perldiag.pod
 Lookups: '.' outside of string in pack; Text: '.' outside of string in pack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173359 in perldiag.pod
-Lookups: '/' does not take a repeat count; Text: '/' does not take a repeat count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: '/' does not take a repeat count, 'E<sol>' does not take a repeat count; Text: '/' does not take a repeat count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78498 in perldiag.pod
-Lookups: '/' must follow a numeric type in unpack; Text: '/' must follow a numeric type in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: '/' must follow a numeric type in unpack, 'E<sol>' must follow a numeric type in unpack; Text: '/' must follow a numeric type in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 148536 in perldiag.pod
 Lookups: '@' outside of string in unpack; Text: '@' outside of string in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173529 in perldiag.pod
 Lookups: '@' outside of string with malformed UTF-8 in unpack; Text: '@' outside of string with malformed UTF-8 in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 173686 in perldiag.pod
+Lookups: 'E<verbar>' and 'E<gt>' may not both be specified on command line, '|' and '>' may not both be specified on command line; Text: '|' and '>' may not both be specified on command line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6745 in perldiag.pod
+Lookups: 'E<verbar>' and 'E<lt>' may not both be specified on command line, '|' and '<' may not both be specified on command line; Text: '|' and '<' may not both be specified on command line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6476 in perldiag.pod
 Lookups: 'P' must have an explicit size in unpack; Text: 'P' must have an explicit size in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 186715 in perldiag.pod
 Lookups: 'X' outside of string; Text: 'X' outside of string; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 289415 in perldiag.pod
 Lookups: 'x' outside of string in unpack; Text: 'x' outside of string in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 289588 in perldiag.pod
-Lookups: '|' and '<' may not both be specified on command line; Text: '|' and '<' may not both be specified on command line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6476 in perldiag.pod
-Lookups: '|' and '>' may not both be specified on command line; Text: '|' and '>' may not both be specified on command line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6745 in perldiag.pod
 Lookups: ()-group starts with a count; Text: ()-group starts with a count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96735 in perldiag.pod
-Lookups: (?(DEFINE)....) does not allow branches in regex; marked by <-- HERE in m/%s/; Text: (?(DEFINE)....) does not allow branches in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?(DEFINE)....) does not allow branches in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, (?(DEFINE)....) does not allow branches in regex; marked by <-- HERE in m/%s/; Text: (?(DEFINE)....) does not allow branches in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 74923 in perldiag.pod
-Lookups: (?[...]) not valid in locale in regex; marked by <-- HERE in m/%s/; Text: (?[...]) not valid in locale in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?[...]) not valid in locale in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, (?[...]) not valid in locale in regex; marked by <-- HERE in m/%s/; Text: (?[...]) not valid in locale in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 164579 in perldiag.pod
 Lookups: (Did you mean "local" instead of "our"?); Text: (Did you mean "local" instead of "our"?); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77758 in perldiag.pod
@@ -170,16 +170,12 @@ Lookups: -i used with no filenames on the command line, reading from STDIN; Text
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 123794 in perldiag.pod
 Lookups: -p destination: %s; Text: -p destination: %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 181956 in perldiag.pod
-Lookups: /%s/ should probably be written as "%s"; Text: /%s/ should probably be written as "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216304 in perldiag.pod
 Lookups: 500 Server error; Text: 500 Server error; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 212707 in perldiag.pod
 Lookups: :const is experimental; Text: :const is experimental; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71835 in perldiag.pod
 Lookups: :const is not permitted on named subroutines; Text: :const is not permitted on named subroutines; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72135 in perldiag.pod
-Lookups: <> at require-statement should be quotes; Text: <> at require-statement should be quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11628 in perldiag.pod
 Lookups: A signature parameter must start with '$', '@' or '%'; Text: A signature parameter must start with '$', '@' or '%'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9243 in perldiag.pod
 Lookups: A slurpy parameter may not have a default value; Text: A slurpy parameter may not have a default value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -226,7 +222,7 @@ Lookups: Assigning non-zero to $[ is no longer possible; Text: Assigning non-zer
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10477 in perldiag.pod
 Lookups: Assignment to both a list and a scalar; Text: Assignment to both a list and a scalar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10682 in perldiag.pod
-Lookups: Assuming NOT a POSIX class since %s in regex; marked by <-- HERE in m/%s/; Text: Assuming NOT a POSIX class since %s in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Assuming NOT a POSIX class since %s in regex; marked by <-- HERE in m/%s/, Assuming NOT a POSIX class since %s in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Assuming NOT a POSIX class since %s in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10916 in perldiag.pod
 Lookups: Attempt to access disallowed key '%s' in a restricted hash; Text: Attempt to access disallowed key '%s' in a restricted hash; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11761 in perldiag.pod
@@ -306,15 +302,15 @@ Lookups: Bareword in require maps to empty filename; Text: Bareword in require m
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19645 in perldiag.pod
 Lookups: Bareword in require must not start with a double-colon: "%s"; Text: Bareword in require must not start with a double-colon: "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19985 in perldiag.pod
-Lookups: Binary number > 0b11111111111111111111111111111111 non-portable; Text: Binary number > 0b11111111111111111111111111111111 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Binary number E<gt> 0b11111111111111111111111111111111 non-portable, Binary number > 0b11111111111111111111111111111111 non-portable; Text: Binary number > 0b11111111111111111111111111111111 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21600 in perldiag.pod
-Lookups: Bit vector size > 32 non-portable; Text: Bit vector size > 32 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Bit vector size > 32 non-portable, Bit vector size E<gt> 32 non-portable; Text: Bit vector size > 32 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22188 in perldiag.pod
 Lookups: Bizarre SvTYPE [%d]; Text: Bizarre SvTYPE [%d]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22402 in perldiag.pod
 Lookups: Bizarre copy of %s; Text: Bizarre copy of %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22298 in perldiag.pod
-Lookups: Both or neither range ends should be Unicode in regex; marked by <-- HERE in m/%s/; Text: Both or neither range ends should be Unicode in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Both or neither range ends should be Unicode in regex; marked by <-- HERE in m/%s/, Both or neither range ends should be Unicode in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Both or neither range ends should be Unicode in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22535 in perldiag.pod
 Lookups: Buffer overflow in prime_env_iter: %s; Text: Buffer overflow in prime_env_iter: %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23362 in perldiag.pod
@@ -398,7 +394,7 @@ Lookups: Can't find %s on PATH, '.' not in PATH; Text: Can't find %s on PATH, '.
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35428 in perldiag.pod
 Lookups: Can't find %s on PATH; Text: Can't find %s on PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35309 in perldiag.pod
-Lookups: Can't find Unicode property definition "%s" in regex; marked by <-- HERE in m/%s/; Text: Can't find Unicode property definition "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Can't find Unicode property definition "%s" in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Can't find Unicode property definition "%s" in regex; marked by <-- HERE in m/%s/; Text: Can't find Unicode property definition "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36384 in perldiag.pod
 Lookups: Can't find Unicode property definition "%s"; Text: Can't find Unicode property definition "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36333 in perldiag.pod
@@ -440,7 +436,7 @@ Lookups: Can't locate %s; Text: Can't locate %s; Tail: null; Type: List Item; Ic
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42874 in perldiag.pod
 Lookups: Can't locate PerlIO%s; Text: Can't locate PerlIO%s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44558 in perldiag.pod
-Lookups: Can't locate auto/%s.al in @INC; Text: Can't locate auto/%s.al in @INC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Can't locate auto/%s.al in @INC, Can't locate autoE<sol>%s.al in @INC; Text: Can't locate auto/%s.al in @INC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43353 in perldiag.pod
 Lookups: Can't locate loadable object for module %s in @INC; Text: Can't locate loadable object for module %s in @INC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43638 in perldiag.pod
@@ -550,7 +546,7 @@ Lookups: Can't use anonymous symbol table for method lookup; Text: Can't use ano
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 54722 in perldiag.pod
 Lookups: Can't use bareword ("%s") as %s ref while "strict refs" in use; Text: Can't use bareword ("%s") as %s ref while "strict refs" in use; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55171 in perldiag.pod
-Lookups: Can't use both '<' and '>' after type '%c' in %s; Text: Can't use both '<' and '>' after type '%c' in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Can't use both 'E<lt>' and 'E<gt>' after type '%c' in %s, Can't use both '<' and '>' after type '%c' in %s; Text: Can't use both '<' and '>' after type '%c' in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55594 in perldiag.pod
 Lookups: Can't use global %s in "%s"; Text: Can't use global %s in "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57012 in perldiag.pod
@@ -596,7 +592,7 @@ Lookups: Cannot yet reorder sv_catpvfn() arguments from va_list; Text: Cannot ye
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27229 in perldiag.pod
 Lookups: Character following "\c" must be printable ASCII; Text: Character following "\c" must be printable ASCII; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60125 in perldiag.pod
-Lookups: Character following \%c must be '{' or a single-character Unicode property name in regex; marked by <-- HERE in m/%s/; Text: Character following \%c must be '{' or a single-character Unicode property name in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Character following \%c must be '{' or a single-character Unicode property name in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Character following \%c must be '{' or a single-character Unicode property name in regex; marked by <-- HERE in m/%s/; Text: Character following \%c must be '{' or a single-character Unicode property name in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 60436 in perldiag.pod
 Lookups: Character in '%c' format wrapped in unpack; Text: Character in '%c' format wrapped in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61635 in perldiag.pod
@@ -614,7 +610,7 @@ Lookups: Cloning substitution context is unimplemented; Text: Cloning substituti
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64238 in perldiag.pod
 Lookups: Closure prototype called; Text: Closure prototype called; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64637 in perldiag.pod
-Lookups: Code missing after '/'; Text: Code missing after '/'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Code missing after 'E<sol>', Code missing after '/'; Text: Code missing after '/'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65288 in perldiag.pod
 Lookups: Code point 0x%X is not Unicode, and not portable; Text: Code point 0x%X is not Unicode, and not portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65451 in perldiag.pod
@@ -642,9 +638,9 @@ Lookups: Copy method did not return a reference; Text: Copy method did not retur
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72400 in perldiag.pod
 Lookups: Corrupt malloc ptr 0x%x at 0x%x; Text: Corrupt malloc ptr 0x%x at 0x%x; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73462 in perldiag.pod
-Lookups: Corrupted regexp opcode %d > %d; Text: Corrupted regexp opcode %d > %d; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Corrupted regexp opcode %d E<gt> %d, Corrupted regexp opcode %d > %d; Text: Corrupted regexp opcode %d > %d; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72982 in perldiag.pod
-Lookups: Count after length/code in unpack; Text: Count after length/code in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Count after length/code in unpack, Count after lengthE<sol>code in unpack; Text: Count after length/code in unpack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73571 in perldiag.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 50 in perldiag.pod
@@ -674,21 +670,25 @@ Lookups: Duplicate free() ignored; Text: Duplicate free() ignored; Tail: null; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80437 in perldiag.pod
 Lookups: Duplicate modifier '%c' after '%c' in %s; Text: Duplicate modifier '%c' after '%c' in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80557 in perldiag.pod
-Lookups: EVAL without pos change exceeded limit in regex; marked by <-- HERE in m/%s/; Text: EVAL without pos change exceeded limit in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: E<lt>E<gt> at require-statement should be quotes, <> at require-statement should be quotes; Text: <> at require-statement should be quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11628 in perldiag.pod
+Lookups: E<sol>%sE<sol> should probably be written as "%s", /%s/ should probably be written as "%s"; Text: /%s/ should probably be written as "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 216304 in perldiag.pod
+Lookups: EVAL without pos change exceeded limit in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, EVAL without pos change exceeded limit in regex; marked by <-- HERE in m/%s/; Text: EVAL without pos change exceeded limit in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83285 in perldiag.pod
-Lookups: Empty \%c in regex; marked by <-- HERE in m/%s/; Text: Empty \%c in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Empty \%c in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Empty \%c in regex; marked by <-- HERE in m/%s/; Text: Empty \%c in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80997 in perldiag.pod
-Lookups: Empty \%c{} in regex; marked by <-- HERE in m/%s/; Text: Empty \%c{} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Empty \%c{} in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Empty \%c{} in regex; marked by <-- HERE in m/%s/; Text: Empty \%c{} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81055 in perldiag.pod
 Lookups: Error converting file specification %s; Text: Error converting file specification %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81936 in perldiag.pod
 Lookups: Eval-group in insecure regular expression; Text: Eval-group in insecure regular expression; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82301 in perldiag.pod
-Lookups: Eval-group not allowed at runtime, use re 'eval' in regex m/%s/; Text: Eval-group not allowed at runtime, use re 'eval' in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Eval-group not allowed at runtime, use re 'eval' in regex mE<sol>%sE<sol>, Eval-group not allowed at runtime, use re 'eval' in regex m/%s/; Text: Eval-group not allowed at runtime, use re 'eval' in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82541 in perldiag.pod
-Lookups: Eval-group not allowed, use re 'eval' in regex m/%s/; Text: Eval-group not allowed, use re 'eval' in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Eval-group not allowed, use re 'eval' in regex mE<sol>%sE<sol>, Eval-group not allowed, use re 'eval' in regex m/%s/; Text: Eval-group not allowed, use re 'eval' in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83039 in perldiag.pod
-Lookups: Excessively long <> operator; Text: Excessively long <> operator; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Excessively long E<lt>E<gt> operator, Excessively long <> operator; Text: Excessively long <> operator; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83596 in perldiag.pod
 Lookups: Exiting eval via %s; Text: Exiting eval via %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84565 in perldiag.pod
@@ -700,13 +700,13 @@ Lookups: Exiting subroutine via %s; Text: Exiting subroutine via %s; Tail: null;
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85060 in perldiag.pod
 Lookups: Exiting substitution via %s; Text: Exiting substitution via %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85205 in perldiag.pod
-Lookups: Expecting '(?flags:(?[...' in regex; marked by <-- HERE in m/%s/; Text: Expecting '(?flags:(?[...' in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Expecting '(?flags:(?[...' in regex; marked by <-- HERE in m/%s/, Expecting '(?flags:(?[...' in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Expecting '(?flags:(?[...' in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86200 in perldiag.pod
-Lookups: Expecting close bracket in regex; marked by <-- HERE in m/%s/; Text: Expecting close bracket in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Expecting close bracket in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Expecting close bracket in regex; marked by <-- HERE in m/%s/; Text: Expecting close bracket in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85364 in perldiag.pod
-Lookups: Expecting close paren for nested extended charclass in regex; marked by <-- HERE in m/%s/; Text: Expecting close paren for nested extended charclass in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Expecting close paren for nested extended charclass in regex; marked by <-- HERE in m/%s/, Expecting close paren for nested extended charclass in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Expecting close paren for nested extended charclass in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85603 in perldiag.pod
-Lookups: Expecting close paren for wrapper for nested extended charclass in regex; marked by <-- HERE in m/%s/; Text: Expecting close paren for wrapper for nested extended charclass in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Expecting close paren for wrapper for nested extended charclass in regex; marked by <-- HERE in m/%s/, Expecting close paren for wrapper for nested extended charclass in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Expecting close paren for wrapper for nested extended charclass in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85895 in perldiag.pod
 Lookups: Experimental %s on scalar is now forbidden; Text: Experimental %s on scalar is now forbidden; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87038 in perldiag.pod
@@ -720,7 +720,7 @@ Lookups: FETCHSIZE returned a negative value; Text: FETCHSIZE returned a negativ
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89381 in perldiag.pod
 Lookups: Failed to close in-place work file %s: %s; Text: Failed to close in-place work file %s: %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88314 in perldiag.pod
-Lookups: False [] range "%s" in regex; marked by <-- HERE in m/%s/; Text: False [] range "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: False [] range "%s" in regex; marked by <-- HERE in m/%s/, False [] range "%s" in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: False [] range "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88461 in perldiag.pod
 Lookups: Fatal VMS error (status=%d) at %s, line %d; Text: Fatal VMS error (status=%d) at %s, line %d; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88937 in perldiag.pod
@@ -752,7 +752,7 @@ Lookups: Got an error from DosAllocMem; Text: Got an error from DosAllocMem; Tai
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95944 in perldiag.pod
 Lookups: Goto undefined subroutine%s; Text: Goto undefined subroutine%s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96246 in perldiag.pod
-Lookups: Group name must start with a non-digit word character in regex; marked by  <-- HERE in m/%s/; Text: Group name must start with a non-digit word character in regex; marked by  <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Group name must start with a non-digit word character in regex; marked by  <-- HERE in m/%s/, Group name must start with a non-digit word character in regex; marked by  E<lt>-- HERE in mE<sol>%sE<sol>; Text: Group name must start with a non-digit word character in regex; marked by  <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96436 in perldiag.pod
 Lookups: Had to create %s unexpectedly; Text: Had to create %s unexpectedly; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 97000 in perldiag.pod
@@ -768,7 +768,7 @@ Lookups: Hexadecimal float: precision loss; Text: Hexadecimal float: precision l
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98200 in perldiag.pod
 Lookups: Hexadecimal float: unsupported long double format; Text: Hexadecimal float: unsupported long double format; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98492 in perldiag.pod
-Lookups: Hexadecimal number > 0xffffffff non-portable; Text: Hexadecimal number > 0xffffffff non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Hexadecimal number > 0xffffffff non-portable, Hexadecimal number E<gt> 0xffffffff non-portable; Text: Hexadecimal number > 0xffffffff non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98710 in perldiag.pod
 Lookups: IO layers (like '%s') unavailable; Text: IO layers (like '%s') unavailable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120527 in perldiag.pod
@@ -776,11 +776,11 @@ Lookups: IO::Socket::atmark not implemented on this architecture; Text: IO::Sock
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120722 in perldiag.pod
 Lookups: Identifier too long; Text: Identifier too long; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 98944 in perldiag.pod
-Lookups: Ignoring zero length \N{} in character class in regex; marked by <-- HERE in m/%s/; Text: Ignoring zero length \N{} in character class in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Ignoring zero length \N{} in character class in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Ignoring zero length \N{} in character class in regex; marked by <-- HERE in m/%s/; Text: Ignoring zero length \N{} in character class in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99245 in perldiag.pod
 Lookups: Ill-formed CRTL environ value "%s"; Text: Ill-formed CRTL environ value "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104060 in perldiag.pod
-Lookups: Ill-formed message in prime_env_iter: |%s|; Text: Ill-formed message in prime_env_iter: |%s|; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Ill-formed message in prime_env_iter: E<verbar>%sE<verbar>, Ill-formed message in prime_env_iter: |%s|; Text: Ill-formed message in prime_env_iter: |%s|; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104312 in perldiag.pod
 Lookups: Illegal binary digit %s ignored; Text: Illegal binary digit %s ignored; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99699 in perldiag.pod
@@ -812,7 +812,7 @@ Lookups: Illegal octal digit '%c'; Text: Illegal octal digit '%c'; Tail: null; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102538 in perldiag.pod
 Lookups: Illegal operator following parameter in a subroutine signature; Text: Illegal operator following parameter in a subroutine signature; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 102781 in perldiag.pod
-Lookups: Illegal pattern in regex; marked by <-- HERE in m/%s/; Text: Illegal pattern in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Illegal pattern in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Illegal pattern in regex; marked by <-- HERE in m/%s/; Text: Illegal pattern in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103165 in perldiag.pod
 Lookups: Illegal suidscript; Text: Illegal suidscript; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103420 in perldiag.pod
@@ -820,13 +820,13 @@ Lookups: Illegal switch in PERL5OPT: -%c; Text: Illegal switch in PERL5OPT: -%c;
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103502 in perldiag.pod
 Lookups: Illegal user-defined property name; Text: Illegal user-defined property name; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103645 in perldiag.pod
-Lookups: In '(*...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/; Text: In '(*...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: In '(*...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/, In '(*...)', the '(' and '*' must be adjacent in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: In '(*...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113299 in perldiag.pod
-Lookups: In '(*VERB...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/; Text: In '(*VERB...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: In '(*VERB...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/, In '(*VERB...)', the '(' and '*' must be adjacent in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: In '(*VERB...)', the '(' and '*' must be adjacent in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119932 in perldiag.pod
-Lookups: In '(?...)', the '(' and '?' must be adjacent in regex; marked by <-- HERE in m/%s/; Text: In '(?...)', the '(' and '?' must be adjacent in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: In '(?...)', the '(' and '?' must be adjacent in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, In '(?...)', the '(' and '?' must be adjacent in regex; marked by <-- HERE in m/%s/; Text: In '(?...)', the '(' and '?' must be adjacent in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112985 in perldiag.pod
-Lookups: Incomplete expression within '(?[ ])' in regex; marked by <-- HERE in m/%s/; Text: Incomplete expression within '(?[ ])' in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Incomplete expression within '(?[ ])' in regex; marked by <-- HERE in m/%s/, Incomplete expression within '(?[ ])' in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Incomplete expression within '(?[ ])' in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105081 in perldiag.pod
 Lookups: Inconsistent hierarchy during C3 merge of class '%s': merging failed on  parent '%s'; Text: Inconsistent hierarchy during C3 merge of class '%s': merging failed on  parent '%s'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105452 in perldiag.pod
@@ -856,29 +856,29 @@ Lookups: Integer overflow in version %d; Text: Integer overflow in version %d; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110997 in perldiag.pod
 Lookups: Integer overflow in version; Text: Integer overflow in version; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 110962 in perldiag.pod
-Lookups: Internal disaster in regex; marked by <-- HERE in m/%s/; Text: Internal disaster in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Internal disaster in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Internal disaster in regex; marked by <-- HERE in m/%s/; Text: Internal disaster in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111378 in perldiag.pod
 Lookups: Internal inconsistency in tracking vforks; Text: Internal inconsistency in tracking vforks; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111598 in perldiag.pod
-Lookups: Internal urp in regex; marked by <-- HERE in m/%s/; Text: Internal urp in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Internal urp in regex; marked by <-- HERE in m/%s/, Internal urp in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Internal urp in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112489 in perldiag.pod
 Lookups: Invalid %s attribute: %s; Text: Invalid %s attribute: %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113624 in perldiag.pod
 Lookups: Invalid %s attributes: %s; Text: Invalid %s attributes: %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113792 in perldiag.pod
-Lookups: Invalid [] range "%s" in regex; marked by <-- HERE in m/%s/; Text: Invalid [] range "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Invalid [] range "%s" in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Invalid [] range "%s" in regex; marked by <-- HERE in m/%s/; Text: Invalid [] range "%s" in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117192 in perldiag.pod
 Lookups: Invalid \0 character in %s for %s: %s\0%s; Text: Invalid \0 character in %s for %s: %s\0%s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114253 in perldiag.pod
-Lookups: Invalid character in \N{...}; marked by <-- HERE in \N{%s}; Text: Invalid character in \N{...}; marked by <-- HERE in \N{%s}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Invalid character in \N{...}; marked by E<lt>-- HERE in \N{%s}, Invalid character in \N{...}; marked by <-- HERE in \N{%s}; Text: Invalid character in \N{...}; marked by <-- HERE in \N{%s}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114476 in perldiag.pod
-Lookups: Invalid character in charnames alias definition; marked by <-- HERE in '%s; Text: Invalid character in charnames alias definition; marked by <-- HERE in '%s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Invalid character in charnames alias definition; marked by <-- HERE in '%s, Invalid character in charnames alias definition; marked by E<lt>-- HERE in '%s; Text: Invalid character in charnames alias definition; marked by <-- HERE in '%s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 113963 in perldiag.pod
 Lookups: Invalid conversion in %s: "%s"; Text: Invalid conversion in %s: "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114665 in perldiag.pod
-Lookups: Invalid escape in the specified encoding in regex; marked by <-- HERE in m/%s/; Text: Invalid escape in the specified encoding in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Invalid escape in the specified encoding in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Invalid escape in the specified encoding in regex; marked by <-- HERE in m/%s/; Text: Invalid escape in the specified encoding in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 114795 in perldiag.pod
-Lookups: Invalid hexadecimal number in \N{U+...} in regex; marked by <-- HERE in m/%s/; Text: Invalid hexadecimal number in \N{U+...} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Invalid hexadecimal number in \N{U+...} in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Invalid hexadecimal number in \N{U+...} in regex; marked by <-- HERE in m/%s/; Text: Invalid hexadecimal number in \N{U+...} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115330 in perldiag.pod
 Lookups: Invalid hexadecimal number in \N{U+...}; Text: Invalid hexadecimal number in \N{U+...}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115283 in perldiag.pod
@@ -890,7 +890,7 @@ Lookups: Invalid negative number (%s) in chr; Text: Invalid negative number (%s)
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116224 in perldiag.pod
 Lookups: Invalid number '%s' for -C option.; Text: Invalid number '%s' for -C option.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116426 in perldiag.pod
-Lookups: Invalid quantifier in {,} in regex; marked by <-- HERE in m/%s/; Text: Invalid quantifier in {,} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Invalid quantifier in {,} in regex; marked by <-- HERE in m/%s/, Invalid quantifier in {,} in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: Invalid quantifier in {,} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116830 in perldiag.pod
 Lookups: Invalid range "%s" in transliteration operator; Text: Invalid range "%s" in transliteration operator; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117602 in perldiag.pod
@@ -906,7 +906,7 @@ Lookups: Invalid version format (%s); Text: Invalid version format (%s); Tail: n
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119046 in perldiag.pod
 Lookups: Invalid version object; Text: Invalid version object; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 119718 in perldiag.pod
-Lookups: Junk on end of regexp in regex m/%s/; Text: Junk on end of regexp in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Junk on end of regexp in regex m/%s/, Junk on end of regexp in regex mE<sol>%sE<sol>; Text: Junk on end of regexp in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124331 in perldiag.pod
 Lookups: Label not found for "last %s"; Text: Label not found for "last %s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124423 in perldiag.pod
@@ -916,9 +916,9 @@ Lookups: Label not found for "redo %s"; Text: Label not found for "redo %s"; Tai
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 124815 in perldiag.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 291246 in perldiag.pod
-Lookups: Verb pattern '%s' has a mandatory argument in regex; marked by <-- HERE in m/%s/; Text: Verb pattern '%s' has a mandatory argument in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Verb pattern '%s' has a mandatory argument in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Verb pattern '%s' has a mandatory argument in regex; marked by <-- HERE in m/%s/; Text: Verb pattern '%s' has a mandatory argument in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 283973 in perldiag.pod
-Lookups: Verb pattern '%s' may not have an argument in regex; marked by <-- HERE in m/%s/; Text: Verb pattern '%s' may not have an argument in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Verb pattern '%s' may not have an argument in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Verb pattern '%s' may not have an argument in regex; marked by <-- HERE in m/%s/; Text: Verb pattern '%s' may not have an argument in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 284185 in perldiag.pod
 Lookups: Version control conflict marker; Text: Version control conflict marker; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 284405 in perldiag.pod
@@ -948,21 +948,21 @@ Lookups: You need to quote "%s"; Text: You need to quote "%s"; Tail: null; Type:
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290241 in perldiag.pod
 Lookups: Your random numbers are not that random; Text: Your random numbers are not that random; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290573 in perldiag.pod
-Lookups: Zero length \N{} in regex; marked by <-- HERE in m/%s/; Text: Zero length \N{} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Zero length \N{} in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>, Zero length \N{} in regex; marked by <-- HERE in m/%s/; Text: Zero length \N{} in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 290779 in perldiag.pod
 Lookups: \%d better written as $%d; Text: \%d better written as $%d; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21252 in perldiag.pod
-Lookups: \C no longer supported in regex; marked by <-- HERE in m/%s/; Text: \C no longer supported in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: \C no longer supported in regex; marked by <-- HERE in m/%s/, \C no longer supported in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: \C no longer supported in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64846 in perldiag.pod
-Lookups: \N in a character class must be a named character: \N{...} in regex;  marked by <-- HERE in m/%s/; Text: \N in a character class must be a named character: \N{...} in regex;  marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: \N in a character class must be a named character: \N{...} in regex;  marked by <-- HERE in m/%s/, \N in a character class must be a named character: \N{...} in regex;  marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: \N in a character class must be a named character: \N{...} in regex;  marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 152883 in perldiag.pod
-Lookups: \N{NAME} must be resolved by the lexer in regex; marked by <-- HERE in m/%s/; Text: \N{NAME} must be resolved by the lexer in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: \N{NAME} must be resolved by the lexer in regex; marked by <-- HERE in m/%s/, \N{NAME} must be resolved by the lexer in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: \N{NAME} must be resolved by the lexer in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 154135 in perldiag.pod
-Lookups: \N{} in inverted character class or as a range end-point is restricted to one character in regex; marked by <-- HERE in m/%s/; Text: \N{} in inverted character class or as a range end-point is restricted to one character in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: \N{} in inverted character class or as a range end-point is restricted to one character in regex; marked by <-- HERE in m/%s/, \N{} in inverted character class or as a range end-point is restricted to one character in regex; marked by E<lt>-- HERE in mE<sol>%sE<sol>; Text: \N{} in inverted character class or as a range end-point is restricted to one character in regex; marked by <-- HERE in m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 153237 in perldiag.pod
 Lookups: accept() on closed socket %s; Text: accept() on closed socket %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1766 in perldiag.pod
-Lookups: alpha->numify() is lossy; Text: alpha->numify() is lossy; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: alpha-E<gt>numify() is lossy, alpha->numify() is lossy; Text: alpha->numify() is lossy; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2709 in perldiag.pod
 Lookups: assertion botched: %s; Text: assertion botched: %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9702 in perldiag.pod
@@ -972,9 +972,9 @@ Lookups: bind() on closed socket %s; Text: bind() on closed socket %s; Tail: nul
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21848 in perldiag.pod
 Lookups: binmode() on closed filehandle %s; Text: binmode() on closed filehandle %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22025 in perldiag.pod
-Lookups: charnames alias definitions may not contain a sequence of multiple spaces; marked by <-- HERE in %s; Text: charnames alias definitions may not contain a sequence of multiple spaces; marked by <-- HERE in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: charnames alias definitions may not contain a sequence of multiple spaces; marked by E<lt>-- HERE in %s, charnames alias definitions may not contain a sequence of multiple spaces; marked by <-- HERE in %s; Text: charnames alias definitions may not contain a sequence of multiple spaces; marked by <-- HERE in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62951 in perldiag.pod
-Lookups: charnames alias definitions may not contain trailing white-space; marked by <-- HERE in %s; Text: charnames alias definitions may not contain trailing white-space; marked by <-- HERE in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: charnames alias definitions may not contain trailing white-space; marked by <-- HERE in %s, charnames alias definitions may not contain trailing white-space; marked by E<lt>-- HERE in %s; Text: charnames alias definitions may not contain trailing white-space; marked by <-- HERE in %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63369 in perldiag.pod
 Lookups: chdir() on unopened filehandle %s; Text: chdir() on unopened filehandle %s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 63765 in perldiag.pod
@@ -990,7 +990,7 @@ Lookups: corrupted regexp program; Text: corrupted regexp program; Tail: null; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 73337 in perldiag.pod
 Lookups: delete argument is not a HASH or ARRAY element or slice; Text: delete argument is not a HASH or ARRAY element or slice; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 75462 in perldiag.pod
-Lookups: do "%s" failed, '.' is no longer in @INC; did you mean do "./%s"?; Text: do "%s" failed, '.' is no longer in @INC; did you mean do "./%s"?; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: do "%s" failed, '.' is no longer in @INC; did you mean do ".E<sol>%s"?, do "%s" failed, '.' is no longer in @INC; did you mean do "./%s"?; Text: do "%s" failed, '.' is no longer in @INC; did you mean do "./%s"?; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78633 in perldiag.pod
 Lookups: do_study: out of memory; Text: do_study: out of memory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 79299 in perldiag.pod
@@ -1034,7 +1034,7 @@ Lookups: gmtime(%f) too small; Text: gmtime(%f) too small; Tail: null; Type: Lis
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95774 in perldiag.pod
 Lookups: goto must have label; Text: goto must have label; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 96105 in perldiag.pod
-Lookups: internal %<num>p might conflict with future printf extensions; Text: internal %<num>p might conflict with future printf extensions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: internal %E<lt>numE<gt>p might conflict with future printf extensions, internal %<num>p might conflict with future printf extensions; Text: internal %<num>p might conflict with future printf extensions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112055 in perldiag.pod
 Lookups: invalid option -D%c, use -D'' to see choices; Text: invalid option -D%c, use -D'' to see choices; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116602 in perldiag.pod

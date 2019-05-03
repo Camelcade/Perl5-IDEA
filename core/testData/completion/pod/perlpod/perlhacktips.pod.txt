@@ -100,7 +100,7 @@ Lookups: Using a source-level debugger; Text: Using a source-level debugger; Tai
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25014 in perlhacktips.pod
 Lookups: Using gdb to look at specific parts of a program; Text: Using gdb to look at specific parts of a program; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30903 in perlhacktips.pod
-Lookups: Using gdb to look at what the parser/lexer are doing; Text: Using gdb to look at what the parser/lexer are doing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Using gdb to look at what the parserE<sol>lexer are doing, Using gdb to look at what the parser/lexer are doing; Text: Using gdb to look at what the parser/lexer are doing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31533 in perlhacktips.pod
 Lookups: Warnings of other C compilers; Text: Warnings of other C compilers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36201 in perlhacktips.pod

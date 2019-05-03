@@ -42,29 +42,17 @@ Lookups: -T filetest recognizes UTF-8 encoded files as "text"; Text: -T filetest
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22653 in perl56delta.pod
 Lookups: -bareword allowed under use integer; Text: -bareword allowed under use integer; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64135 in perl56delta.pod
-Lookups: / cannot take a count; Text: / cannot take a count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67266 in perl56delta.pod
-Lookups: / must be followed by a*, A* or Z*; Text: / must be followed by a*, A* or Z*; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67681 in perl56delta.pod
-Lookups: / must be followed by a, A or Z; Text: / must be followed by a, A or Z; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: / must be followed by a, A or Z, E<sol> must be followed by a, A or Z; Text: / must be followed by a, A or Z; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67446 in perl56delta.pod
-Lookups: / must follow a numeric type; Text: / must follow a numeric type; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67889 in perl56delta.pod
-Lookups: /%s/ should probably be written as "%s"; Text: /%s/ should probably be written as "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68562 in perl56delta.pod
-Lookups: /%s/: Unrecognized escape \\%c in character class passed through; Text: /%s/: Unrecognized escape \\%c in character class passed through; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: /%s/: Unrecognized escape \\%c in character class passed through, E<sol>%sE<sol>: Unrecognized escape \\%c in character class passed through; Text: /%s/: Unrecognized escape \\%c in character class passed through; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68336 in perl56delta.pod
-Lookups: /%s/: Unrecognized escape \\%c passed through; Text: /%s/: Unrecognized escape \\%c passed through; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68060 in perl56delta.pod
 Lookups: 64-bit support; Text: 64-bit support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9146 in perl56delta.pod
 Lookups: 64-bit support; Text: 64-bit support; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103445 in perl56delta.pod
-Lookups: <> should be quotes; Text: <> should be quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70869 in perl56delta.pod
-Lookups: <HANDLE> on empty files; Text: <HANDLE> on empty files; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: <HANDLE> on empty files, E<lt>HANDLEE<gt> on empty files; Text: <HANDLE> on empty files; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 60955 in perl56delta.pod
-Lookups: @- and @+ provide starting/ending offsets of regex matches; Text: @- and @+ provide starting/ending offsets of regex matches; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: @- and @+ provide starting/ending offsets of regex matches, @- and @+ provide startingE<sol>ending offsets of regex matches; Text: @- and @+ provide starting/ending offsets of regex matches; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31184 in perl56delta.pod
 Lookups: All compilation errors are true errors; Text: All compilation errors are true errors; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 62189 in perl56delta.pod
@@ -98,13 +86,13 @@ Lookups: Better worst-case behavior of hashes; Text: Better worst-case behavior 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16006 in perl56delta.pod
 Lookups: Binary Incompatibilities; Text: Binary Incompatibilities; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 99819 in perl56delta.pod
-Lookups: Binary number > 0b11111111111111111111111111111111 non-portable; Text: Binary number > 0b11111111111111111111111111111111 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Binary number E<gt> 0b11111111111111111111111111111111 non-portable, Binary number > 0b11111111111111111111111111111111 non-portable; Text: Binary number > 0b11111111111111111111111111111111 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72078 in perl56delta.pod
 Lookups: Binary numbers supported; Text: Binary numbers supported; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17896 in perl56delta.pod
 Lookups: Bit operators support full native integer width; Text: Bit operators support full native integer width; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25957 in perl56delta.pod
-Lookups: Bit vector size > 32 non-portable; Text: Bit vector size > 32 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Bit vector size > 32 non-portable, Bit vector size E<gt> 32 non-portable; Text: Bit vector size > 32 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72326 in perl56delta.pod
 Lookups: Boolean assignment operators are legal lvalues; Text: Boolean assignment operators are legal lvalues; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18686 in perl56delta.pod
@@ -178,6 +166,18 @@ Lookups: Dumpvalue; Text: Dumpvalue; Tail: null; Type: List Item; Icon: /perl5la
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35071 in perl56delta.pod
 Lookups: DynaLoader; Text: DynaLoader; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35146 in perl56delta.pod
+Lookups: E<lt>E<gt> should be quotes, <> should be quotes; Text: <> should be quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70869 in perl56delta.pod
+Lookups: E<sol> cannot take a count, / cannot take a count; Text: / cannot take a count; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67266 in perl56delta.pod
+Lookups: E<sol> must be followed by a*, A* or Z*, / must be followed by a*, A* or Z*; Text: / must be followed by a*, A* or Z*; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67681 in perl56delta.pod
+Lookups: E<sol> must follow a numeric type, / must follow a numeric type; Text: / must follow a numeric type; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67889 in perl56delta.pod
+Lookups: E<sol>%sE<sol> should probably be written as "%s", /%s/ should probably be written as "%s"; Text: /%s/ should probably be written as "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68562 in perl56delta.pod
+Lookups: E<sol>%sE<sol>: Unrecognized escape \\%c passed through, /%s/: Unrecognized escape \\%c passed through; Text: /%s/: Unrecognized escape \\%c passed through; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68060 in perl56delta.pod
 Lookups: EBCDIC platforms not supported; Text: EBCDIC platforms not supported; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 100994 in perl56delta.pod
 Lookups: END blocks and the -c switch; Text: END blocks and the -c switch; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -224,15 +224,15 @@ Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5lang
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 107020 in perl56delta.pod
 Lookups: Hashing function for hash keys has changed; Text: Hashing function for hash keys has changed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91786 in perl56delta.pod
-Lookups: Hexadecimal number > 0xffffffff non-portable; Text: Hexadecimal number > 0xffffffff non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Hexadecimal number > 0xffffffff non-portable, Hexadecimal number E<gt> 0xffffffff non-portable; Text: Hexadecimal number > 0xffffffff non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78013 in perl56delta.pod
 Lookups: IO; Text: IO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39281 in perl56delta.pod
 Lookups: Ill-formed CRTL environ value "%s"; Text: Ill-formed CRTL environ value "%s"; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78247 in perl56delta.pod
-Lookups: Ill-formed logical name |%s| in prime_env_iter; Text: Ill-formed logical name |%s| in prime_env_iter; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Ill-formed logical name |%s| in prime_env_iter, Ill-formed logical name E<verbar>%sE<verbar> in prime_env_iter; Text: Ill-formed logical name |%s| in prime_env_iter; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104148 in perl56delta.pod
-Lookups: Ill-formed message in prime_env_iter: |%s|; Text: Ill-formed message in prime_env_iter: |%s|; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Ill-formed message in prime_env_iter: E<verbar>%sE<verbar>, Ill-formed message in prime_env_iter: |%s|; Text: Ill-formed message in prime_env_iter: |%s|; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78499 in perl56delta.pod
 Lookups: Illegal binary digit %s ignored; Text: Illegal binary digit %s ignored; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78864 in perl56delta.pod
@@ -248,11 +248,11 @@ Lookups: Improved Perl version numbering system; Text: Improved Perl version num
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5814 in perl56delta.pod
 Lookups: Improved diagnostics; Text: Improved diagnostics; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23336 in perl56delta.pod
-Lookups: Improved qw// operator; Text: Improved qw// operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Improved qw// operator, Improved qwE<sol>E<sol> operator; Text: Improved qw// operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15611 in perl56delta.pod
 Lookups: Improved security features; Text: Improved security features; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 26452 in perl56delta.pod
-Lookups: In 64-bit HP-UX the lib/io_multihomed test may hang; Text: In 64-bit HP-UX the lib/io_multihomed test may hang; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: In 64-bit HP-UX the libE<sol>io_multihomed test may hang, In 64-bit HP-UX the lib/io_multihomed test may hang; Text: In 64-bit HP-UX the lib/io_multihomed test may hang; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 101265 in perl56delta.pod
 Lookups: In string, @%s now must be written as \@%s; Text: In string, @%s now must be written as \@%s; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 104649 in perl56delta.pod
@@ -348,7 +348,7 @@ Lookups: OS390 (OpenEdition MVS); Text: OS390 (OpenEdition MVS); Tail: null; Typ
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57644 in perl56delta.pod
 Lookups: Obsolete Diagnostics; Text: Obsolete Diagnostics; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 103735 in perl56delta.pod
-Lookups: Octal number > 037777777777 non-portable; Text: Octal number > 037777777777 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Octal number > 037777777777 non-portable, Octal number E<gt> 037777777777 non-portable; Text: Octal number > 037777777777 non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82547 in perl56delta.pod
 Lookups: Optimized assignments to lexical variables; Text: Optimized assignments to lexical variables; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52262 in perl56delta.pod
@@ -422,7 +422,7 @@ Lookups: Semantics of bit operators may have changed on 64-bit platforms; Text: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95296 in perl56delta.pod
 Lookups: Significant bug fixes; Text: Significant bug fixes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60925 in perl56delta.pod
-Lookups: Simple sort() using { $a <=> $b } and the like are optimized; Text: Simple sort() using { $a <=> $b } and the like are optimized; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Simple sort() using { $a <=> $b } and the like are optimized, Simple sort() using { $a E<lt>=E<gt> $b } and the like are optimized; Text: Simple sort() using { $a <=> $b } and the like are optimized; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52091 in perl56delta.pod
 Lookups: Some arrows may be omitted in calls through references; Text: Some arrows may be omitted in calls through references; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18275 in perl56delta.pod
@@ -474,9 +474,9 @@ Lookups: Too late to run %s block; Text: Too late to run %s block; Tail: null; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 86318 in perl56delta.pod
 Lookups: Treatment of list slices of undef has changed; Text: Treatment of list slices of undef has changed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 90437 in perl56delta.pod
-Lookups: Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc; Text: Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc, Tru64 (aka Digital UNIX, aka DEC OSFE<sol>1) libE<sol>sdbm test failure with gcc; Text: Tru64 (aka Digital UNIX, aka DEC OSF/1) lib/sdbm test failure with gcc; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 101948 in perl56delta.pod
-Lookups: UNICOS/mk CC failures during Configure run; Text: UNICOS/mk CC failures during Configure run; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: UNICOSE<sol>mk CC failures during Configure run, UNICOS/mk CC failures during Configure run; Text: UNICOS/mk CC failures during Configure run; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 102188 in perl56delta.pod
 Lookups: Unicode and UTF-8 support; Text: Unicode and UTF-8 support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2645 in perl56delta.pod
@@ -496,7 +496,7 @@ Lookups: Unterminated attribute parameter in subroutine attribute list; Text: Un
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87955 in perl56delta.pod
 Lookups: Unterminated subroutine attribute list; Text: Unterminated subroutine attribute list; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 88287 in perl56delta.pod
-Lookups: Use of "$$<digit>" to mean "${$}<digit>" is deprecated; Text: Use of "$$<digit>" to mean "${$}<digit>" is deprecated; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of "$$<digit>" to mean "${$}<digit>" is deprecated, Use of "$$E<lt>digitE<gt>" to mean "${$}E<lt>digitE<gt>" is deprecated; Text: Use of "$$<digit>" to mean "${$}<digit>" is deprecated; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 105635 in perl56delta.pod
 Lookups: Utility Changes; Text: Utility Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 48500 in perl56delta.pod
@@ -542,7 +542,7 @@ Lookups: dprofpp; Text: dprofpp; Tail: null; Type: 2nd Heading; Icon: /perl5lang
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48524 in perl56delta.pod
 Lookups: entering effective %s failed; Text: entering effective %s failed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76720 in perl56delta.pod
-Lookups: eof() has the same old magic as <>; Text: eof() has the same old magic as <>; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: eof() has the same old magic as E<lt>E<gt>, eof() has the same old magic as <>; Text: eof() has the same old magic as <>; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22136 in perl56delta.pod
 Lookups: eval '...' improvements; Text: eval '...' improvements; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 61455 in perl56delta.pod
@@ -566,33 +566,33 @@ Lookups: invalid [] range "%s" in regexp; Text: invalid [] range "%s" in regexp;
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80154 in perl56delta.pod
 Lookups: leaving effective %s failed; Text: leaving effective %s failed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 80808 in perl56delta.pod
-Lookups: lib/attrs; Text: lib/attrs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: lib/attrs, libE<sol>attrs; Text: lib/attrs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89071 in perl56delta.pod
-Lookups: lib/env-array; Text: lib/env-array; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: lib/env-array, libE<sol>env-array; Text: lib/env-array; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89245 in perl56delta.pod
-Lookups: lib/env; Text: lib/env; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89155 in perl56delta.pod
-Lookups: lib/io_const; Text: lib/io_const; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: lib/io_const, libE<sol>io_const; Text: lib/io_const; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89341 in perl56delta.pod
-Lookups: lib/io_dir; Text: lib/io_dir; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: lib/io_dir, libE<sol>io_dir; Text: lib/io_dir; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89391 in perl56delta.pod
-Lookups: lib/io_multihomed; Text: lib/io_multihomed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89480 in perl56delta.pod
-Lookups: lib/io_poll; Text: lib/io_poll; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89543 in perl56delta.pod
-Lookups: lib/io_unix; Text: lib/io_unix; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89574 in perl56delta.pod
 Lookups: lib; Text: lib; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40077 in perl56delta.pod
+Lookups: libE<sol>env, lib/env; Text: lib/env; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89155 in perl56delta.pod
+Lookups: libE<sol>io_multihomed, lib/io_multihomed; Text: lib/io_multihomed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89480 in perl56delta.pod
+Lookups: libE<sol>io_poll, lib/io_poll; Text: lib/io_poll; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89543 in perl56delta.pod
+Lookups: libE<sol>io_unix, lib/io_unix; Text: lib/io_unix; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89574 in perl56delta.pod
 Lookups: no UTC offset information; assuming local time is UTC; Text: no UTC offset information; assuming local time is UTC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82186 in perl56delta.pod
-Lookups: op/attrs; Text: op/attrs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89608 in perl56delta.pod
-Lookups: op/exists_sub; Text: op/exists_sub; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89823 in perl56delta.pod
-Lookups: op/filetest; Text: op/filetest; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: op/filetest, opE<sol>filetest; Text: op/filetest; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89690 in perl56delta.pod
-Lookups: op/lex_assign; Text: op/lex_assign; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: opE<sol>attrs, op/attrs; Text: op/attrs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89608 in perl56delta.pod
+Lookups: opE<sol>exists_sub, op/exists_sub; Text: op/exists_sub; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89823 in perl56delta.pod
+Lookups: opE<sol>lex_assign, op/lex_assign; Text: op/lex_assign; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 89731 in perl56delta.pod
 Lookups: open() with more than two arguments; Text: open() with more than two arguments; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8821 in perl56delta.pod

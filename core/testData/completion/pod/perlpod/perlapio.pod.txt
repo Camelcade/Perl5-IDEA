@@ -1,11 +1,11 @@
 Lookups: "Fast gets" Functions; Text: "Fast gets" Functions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13963 in perlapio.pod
-Lookups: '+' read/write; Text: '+' read/write; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: '+' read/write, '+' readE<sol>write; Text: '+' read/write; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17622 in perlapio.pod
-Lookups: '<' read; Text: '<' read; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17581 in perlapio.pod
-Lookups: '>' write; Text: '>' write; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: '>' write, 'E<gt>' write; Text: '>' write; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17601 in perlapio.pod
+Lookups: 'E<lt>' read, '<' read; Text: '<' read; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17581 in perlapio.pod
 Lookups: 1. USE_STDIO; Text: 1. USE_STDIO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3101 in perlapio.pod
 Lookups: 2. USE_PERLIO; Text: 2. USE_PERLIO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

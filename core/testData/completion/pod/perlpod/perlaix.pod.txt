@@ -1,4 +1,4 @@
-Lookups: 64-bit Perl < 5L; Text: 64-bit Perl < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: 64-bit Perl E<lt> 5L, 64-bit Perl < 5L; Text: 64-bit Perl < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19698 in perlaix.pod
 Lookups: 64-bit Perl; Text: 64-bit Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6191 in perlaix.pod
@@ -6,7 +6,7 @@ Lookups: AIX 4.2 and extensions using C++ with statics; Text: AIX 4.2 and extens
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19877 in perlaix.pod
 Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20381 in perlaix.pod
-Lookups: Building Dynamic Extensions on AIX < 5L; Text: Building Dynamic Extensions on AIX < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Building Dynamic Extensions on AIX E<lt> 5L, Building Dynamic Extensions on AIX < 5L; Text: Building Dynamic Extensions on AIX < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12676 in perlaix.pod
 Lookups: Building Dynamic Extensions on AIX; Text: Building Dynamic Extensions on AIX; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4699 in perlaix.pod
@@ -28,13 +28,13 @@ Lookups: OS level; Text: OS level; Tail: null; Type: 2nd Heading; Icon: /perl5la
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11839 in perlaix.pod
 Lookups: Perl 5 was successfully compiled and tested on:; Text: Perl 5 was successfully compiled and tested on:; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3105 in perlaix.pod
-Lookups: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (32-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (32-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (32-bit), Recommended Options AIX 5.1E<sol>5.2E<sol>5.3E<sol>6.1 and 7.1 (32-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (32-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8169 in perlaix.pod
-Lookups: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (64-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (64-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (64-bit), Recommended Options AIX 5.1E<sol>5.2E<sol>5.3E<sol>6.1 and 7.1 (64-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (64-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8923 in perlaix.pod
-Lookups: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/32-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/32-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Recommended Options AIX 5.1E<sol>5.2E<sol>5.3E<sol>6.1 and 7.1 (threadedE<sol>32-bit), Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/32-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/32-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7671 in perlaix.pod
-Lookups: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/64-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/64-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Recommended Options AIX 5.1E<sol>5.2E<sol>5.3E<sol>6.1 and 7.1 (threadedE<sol>64-bit), Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/64-bit); Text: Recommended Options AIX 5.1/5.2/5.3/6.1 and 7.1 (threaded/64-bit); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8545 in perlaix.pod
 Lookups: Supported Compilers; Text: Supported Compilers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 829 in perlaix.pod
@@ -42,13 +42,13 @@ Lookups: The IBM ANSI C Compiler; Text: The IBM ANSI C Compiler; Tail: null; Typ
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13720 in perlaix.pod
 Lookups: The usenm option; Text: The usenm option; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17625 in perlaix.pod
-Lookups: Threaded Perl < 5L; Text: Threaded Perl < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Threaded Perl < 5L, Threaded Perl E<lt> 5L; Text: Threaded Perl < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18941 in perlaix.pod
 Lookups: Threaded Perl; Text: Threaded Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5547 in perlaix.pod
 Lookups: Using GNU's gcc for building Perl; Text: Using GNU's gcc for building Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18577 in perlaix.pod
-Lookups: Using Large Files with Perl < 5L; Text: Using Large Files with Perl < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Using Large Files with Perl E<lt> 5L, Using Large Files with Perl < 5L; Text: Using Large Files with Perl < 5L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18869 in perlaix.pod
 Lookups: Using Large Files with Perl; Text: Using Large Files with Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5484 in perlaix.pod

@@ -26,7 +26,7 @@ Lookups: How do I automate an HTML form submission?; Text: How do I automate an 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4320 in perlfaq9.pod
 Lookups: How do I check a valid mail address?; Text: How do I check a valid mail address?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8316 in perlfaq9.pod
-Lookups: How do I decode a MIME/BASE64 string?; Text: How do I decode a MIME/BASE64 string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I decode a MIME/BASE64 string?, How do I decode a MIMEE<sol>BASE64 string?; Text: How do I decode a MIME/BASE64 string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 9665 in perlfaq9.pod
 Lookups: How do I decode or create those %-encodings on the web?; Text: How do I decode or create those %-encodings on the web?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5211 in perlfaq9.pod
@@ -34,7 +34,7 @@ Lookups: How do I extract URLs?; Text: How do I extract URLs?; Tail: null; Type:
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3166 in perlfaq9.pod
 Lookups: How do I fetch an HTML file?; Text: How do I fetch an HTML file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3633 in perlfaq9.pod
-Lookups: How do I fetch/put an (S)FTP file?; Text: How do I fetch/put an (S)FTP file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I fetchE<sol>put an (S)FTP file?, How do I fetch/put an (S)FTP file?; Text: How do I fetch/put an (S)FTP file?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14305 in perlfaq9.pod
 Lookups: How do I find out my hostname, domainname, or IP address?; Text: How do I find out my hostname, domainname, or IP address?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13111 in perlfaq9.pod
@@ -78,7 +78,5 @@ Lookups: Which web framework should I use?; Text: Which web framework should I u
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 694 in perlfaq9.pod
 Lookups: framework; Text: Which web framework should I use?; Tail: (framework); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 735 in perlfaq9.pod
-Lookups: hostname, domainname, IP address, host, domain, hostfqdn, inet_ntoa,
-gethostbyname, Socket, Net::Domain, Sys::Hostname; Text: How do I find out my hostname, domainname, or IP address?; Tail: (hostname, domainname, IP address, host, domain, hostfqdn, inet_ntoa,
-gethostbyname, Socket, Net::Domain, Sys::Hostname); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hostname, domainname, IP address, host, domain, hostfqdn, inet_ntoa, gethostbyname, Socket, Net::Domain, Sys::Hostname; Text: How do I find out my hostname, domainname, or IP address?; Tail: (hostname, domainname, IP address, host, domain, hostfqdn, inet_ntoa, gethostbyname, Socket, Net::Domain, Sys::Hostname); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 13176 in perlfaq9.pod

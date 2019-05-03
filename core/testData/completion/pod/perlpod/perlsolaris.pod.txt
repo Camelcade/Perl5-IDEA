@@ -4,7 +4,7 @@ Lookups: 64-bit perl on Solaris.; Text: 64-bit perl on Solaris.; Tail: null; Typ
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13106 in perlsolaris.pod
 Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29543 in perlsolaris.pod
-Lookups: Avoid /usr/ucb/cc.; Text: Avoid /usr/ucb/cc.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Avoid /usr/ucb/cc., Avoid E<sol>usrE<sol>ucbE<sol>cc.; Text: Avoid /usr/ucb/cc.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 6895 in perlsolaris.pod
 Lookups: Avoid libucb.; Text: Avoid libucb.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 11195 in perlsolaris.pod
@@ -30,7 +30,7 @@ Lookups: GNU as and GNU ld; Text: GNU as and GNU ld; Tail: null; Type: 3d Headin
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 8632 in perlsolaris.pod
 Lookups: General 32-bit vs. 64-bit issues.; Text: General 32-bit vs. 64-bit issues.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 13377 in perlsolaris.pod
-Lookups: Include /usr/ccs/bin/ in your PATH.; Text: Include /usr/ccs/bin/ in your PATH.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Include /usr/ccs/bin/ in your PATH., Include E<sol>usrE<sol>ccsE<sol>binE<sol> in your PATH.; Text: Include /usr/ccs/bin/ in your PATH.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 5768 in perlsolaris.pod
 Lookups: LD_LIBRARY_PATH; Text: LD_LIBRARY_PATH; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12043 in perlsolaris.pod
@@ -86,11 +86,11 @@ Lookups: Threads in perl on Solaris.; Text: Threads in perl on Solaris.; Tail: n
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18338 in perlsolaris.pod
 Lookups: dlopen: stub interception failed; Text: dlopen: stub interception failed; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19717 in perlsolaris.pod
-Lookups: ld.so.1: ./perl: fatal: relocation error:; Text: ld.so.1: ./perl: fatal: relocation error:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: ld.so.1: ./perl: fatal: relocation error:, ld.so.1: .E<sol>perl: fatal: relocation error:; Text: ld.so.1: ./perl: fatal: relocation error:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19511 in perlsolaris.pod
-Lookups: nss_delete core dump from op/pwent or op/grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: nss_delete core dump from op/pwent or op/grent, nss_delete core dump from opE<sol>pwent or opE<sol>grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20922 in perlsolaris.pod
-Lookups: op/stat.t test 4 in Solaris; Text: op/stat.t test 4 in Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: op/stat.t test 4 in Solaris, opE<sol>stat.t test 4 in Solaris; Text: op/stat.t test 4 in Solaris; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20665 in perlsolaris.pod
 Lookups: sh: ar: not found; Text: sh: ar: not found; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20330 in perlsolaris.pod

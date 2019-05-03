@@ -1,12 +1,4 @@
-Lookups: /i - RXf_PMf_FOLD; Text: /i - RXf_PMf_FOLD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5384 in perlreapi.pod
-Lookups: /m - RXf_PMf_MULTILINE; Text: /m - RXf_PMf_MULTILINE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5168 in perlreapi.pod
-Lookups: /p - RXf_PMf_KEEPCOPY; Text: /p - RXf_PMf_KEEPCOPY; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5573 in perlreapi.pod
-Lookups: /s - RXf_PMf_SINGLELINE; Text: /s - RXf_PMf_SINGLELINE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5350 in perlreapi.pod
-Lookups: /x - RXf_PMf_EXTENDED; Text: /x - RXf_PMf_EXTENDED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: /x - RXf_PMf_EXTENDED, E<sol>x - RXf_PMf_EXTENDED; Text: /x - RXf_PMf_EXTENDED; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5412 in perlreapi.pod
 Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29889 in perlreapi.pod
@@ -16,6 +8,14 @@ Lookups: Character set; Text: Character set; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5626 in perlreapi.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 67 in perlreapi.pod
+Lookups: E<sol>i - RXf_PMf_FOLD, /i - RXf_PMf_FOLD; Text: /i - RXf_PMf_FOLD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5384 in perlreapi.pod
+Lookups: E<sol>m - RXf_PMf_MULTILINE, /m - RXf_PMf_MULTILINE; Text: /m - RXf_PMf_MULTILINE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5168 in perlreapi.pod
+Lookups: E<sol>p - RXf_PMf_KEEPCOPY, /p - RXf_PMf_KEEPCOPY; Text: /p - RXf_PMf_KEEPCOPY; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5573 in perlreapi.pod
+Lookups: E<sol>s - RXf_PMf_SINGLELINE, /s - RXf_PMf_SINGLELINE; Text: /s - RXf_PMf_SINGLELINE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5350 in perlreapi.pod
 Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 29838 in perlreapi.pod
 Lookups: LICENSE; Text: LICENSE; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null

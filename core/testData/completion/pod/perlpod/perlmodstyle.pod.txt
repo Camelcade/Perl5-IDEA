@@ -82,7 +82,7 @@ Lookups: What's in a name?; Text: What's in a name?; Tail: null; Type: 2nd Headi
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5062 in perlmodstyle.pod
 Lookups: Write simple routines to do simple things.; Text: Write simple routines to do simple things.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8216 in perlmodstyle.pod
-Lookups: http://pause.perl.org/; Text: http://pause.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://pause.perl.org/, http:E<sol>E<sol>pause.perl.orgE<sol>; Text: http://pause.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22356 in perlmodstyle.pod
 Lookups: make install; Text: make install; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15539 in perlmodstyle.pod

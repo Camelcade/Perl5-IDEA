@@ -152,7 +152,7 @@ Lookups: Where can I learn about linking C with Perl?; Text: Where can I learn a
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35212 in perlfaq3.pod
 Lookups: Where can I learn about object-oriented Perl programming?; Text: Where can I learn about object-oriented Perl programming?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34870 in perlfaq3.pod
-Lookups: Why don't Perl one-liners work on my DOS/Mac/VMS system?; Text: Why don't Perl one-liners work on my DOS/Mac/VMS system?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Why don't Perl one-liners work on my DOSE<sol>MacE<sol>VMS system?, Why don't Perl one-liners work on my DOS/Mac/VMS system?; Text: Why don't Perl one-liners work on my DOS/Mac/VMS system?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32656 in perlfaq3.pod
 Lookups: Win32::GUI; Text: Win32::GUI; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17268 in perlfaq3.pod
@@ -184,7 +184,7 @@ Lookups: perlembed - how to embed perl in your C program; Text: perlembed - how 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2093 in perlfaq3.pod
 Lookups: perlfunc - Perl builtin functions; Text: perlfunc - Perl builtin functions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 813 in perlfaq3.pod
-Lookups: perlfunc - Perl builtin functions>; Text: perlfunc - Perl builtin functions>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: perlfunc - Perl builtin functions>, perlfunc - Perl builtin functionsE<gt>; Text: perlfunc - Perl builtin functions>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1574 in perlfaq3.pod
 Lookups: perlguts - Introduction to the Perl API; Text: perlguts - Introduction to the Perl API; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2043 in perlfaq3.pod

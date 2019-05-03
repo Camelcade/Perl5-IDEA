@@ -1,6 +1,6 @@
 Lookups: Awk Traps; Text: Awk Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 376 in perltrap.pod
-Lookups: C/C++ Traps; Text: C/C++ Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: CE<sol>C++ Traps, C/C++ Traps; Text: C/C++ Traps; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3345 in perltrap.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51 in perltrap.pod

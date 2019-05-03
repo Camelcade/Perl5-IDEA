@@ -14,7 +14,7 @@ Lookups: Conditional and looping constructs; Text: Conditional and looping const
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11024 in perlintro.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 69 in perlintro.pod
-Lookups: Files and I/O; Text: Files and I/O; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Files and IE<sol>O, Files and I/O; Text: Files and I/O; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14682 in perlintro.pod
 Lookups: Hashes; Text: Hashes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8045 in perlintro.pod

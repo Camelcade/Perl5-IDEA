@@ -66,7 +66,7 @@ Lookups: Signals triggered by operating system state; Text: Signals triggered by
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14160 in perlipc.pod
 Lookups: Signals; Text: Signals; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 345 in perlipc.pod
-Lookups: Sockets: Client/Server Communication; Text: Sockets: Client/Server Communication; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Sockets: ClientE<sol>Server Communication, Sockets: Client/Server Communication; Text: Sockets: Client/Server Communication; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 35619 in perlipc.pod
 Lookups: SysV IPC; Text: SysV IPC; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 65179 in perlipc.pod

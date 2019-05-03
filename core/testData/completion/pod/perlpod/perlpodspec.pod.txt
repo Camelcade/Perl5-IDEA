@@ -24,19 +24,19 @@ Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5langua
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68439 in perlpodspec.pod
 Lookups: About =over...=back Regions; Text: About =over...=back Regions; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52991 in perlpodspec.pod
-Lookups: About Data Paragraphs and "=begin/=end" Regions; Text: About Data Paragraphs and "=begin/=end" Regions; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: About Data Paragraphs and "=beginE<sol>=end" Regions, About Data Paragraphs and "=begin/=end" Regions; Text: About Data Paragraphs and "=begin/=end" Regions; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 60098 in perlpodspec.pod
-Lookups: About L<...> Codes; Text: About L<...> Codes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: About LE<lt>...E<gt> Codes, About L<...> Codes; Text: About L<...> Codes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43522 in perlpodspec.pod
-Lookups: B<text> -- bold text; Text: B<text> -- bold text; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: BE<lt>textE<gt> -- bold text, B<text> -- bold text; Text: B<text> -- bold text; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16012 in perlpodspec.pod
-Lookups: C<code> -- code text; Text: C<code> -- code text; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: CE<lt>codeE<gt> -- code text, C<code> -- code text; Text: C<code> -- code text; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16111 in perlpodspec.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 100 in perlpodspec.pod
-Lookups: E<escape> -- a character escape; Text: E<escape> -- a character escape; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: E<escape> -- a character escape, EE<lt>escapeE<gt> -- a character escape; Text: E<escape> -- a character escape; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17429 in perlpodspec.pod
-Lookups: F<filename> -- style for filenames; Text: F<filename> -- style for filenames; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: F<filename> -- style for filenames, FE<lt>filenameE<gt> -- style for filenames; Text: F<filename> -- style for filenames; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16210 in perlpodspec.pod
 Lookups: Fifth:; Text: Fifth:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45021 in perlpodspec.pod
@@ -44,9 +44,9 @@ Lookups: First:; Text: First:; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43885 in perlpodspec.pod
 Lookups: Fourth:; Text: Fourth:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44579 in perlpodspec.pod
-Lookups: I<text> -- italic text; Text: I<text> -- italic text; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: IE<lt>textE<gt> -- italic text, I<text> -- italic text; Text: I<text> -- italic text; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15911 in perlpodspec.pod
-Lookups: L<name> -- a hyperlink; Text: L<name> -- a hyperlink; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: LE<lt>nameE<gt> -- a hyperlink, L<name> -- a hyperlink; Text: L<name> -- a hyperlink; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16951 in perlpodspec.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perlpodspec.pod
@@ -58,7 +58,7 @@ Lookups: Pod Definitions; Text: Pod Definitions; Tail: null; Type: 1st Heading; 
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1318 in perlpodspec.pod
 Lookups: Pod Formatting Codes; Text: Pod Formatting Codes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13843 in perlpodspec.pod
-Lookups: S<text> -- text contains non-breaking spaces; Text: S<text> -- text contains non-breaking spaces; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: SE<lt>textE<gt> -- text contains non-breaking spaces, S<text> -- text contains non-breaking spaces; Text: S<text> -- text contains non-breaking spaces; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17579 in perlpodspec.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68352 in perlpodspec.pod
@@ -68,7 +68,7 @@ Lookups: Sixth:; Text: Sixth:; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45274 in perlpodspec.pod
 Lookups: Third:; Text: Third:; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44378 in perlpodspec.pod
-Lookups: X<topic name> -- an index entry; Text: X<topic name> -- an index entry; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: X<topic name> -- an index entry, XE<lt>topic nameE<gt> -- an index entry; Text: X<topic name> -- an index entry; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16323 in perlpodspec.pod
-Lookups: Z<> -- a null (zero-effect) formatting code; Text: Z<> -- a null (zero-effect) formatting code; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Z<> -- a null (zero-effect) formatting code, ZE<lt>E<gt> -- a null (zero-effect) formatting code; Text: Z<> -- a null (zero-effect) formatting code; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16642 in perlpodspec.pod

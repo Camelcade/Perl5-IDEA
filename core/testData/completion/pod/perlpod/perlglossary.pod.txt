@@ -1,5 +1,7 @@
 Lookups: % (modulus) operator; Text: An integer divisor when you’re interested in the remainder instead of the quotient.; Tail: (% (modulus) operator); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 78548 in perlglossary.pod
+Lookups: >> (right shift) bit operator, E<gt>E<gt> (right shift) bit operator; Text: A bit shift that divides a number by some power of 2.; Tail: (>> (right shift) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 101773 in perlglossary.pod
 Lookups: A; Text: A; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 566 in perlglossary.pod
 Lookups: ARGV; Text: ARGV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -22,9 +24,7 @@ Lookups: BSD (Berkeley Standard Distribution); Text: A psychoactive drug, popula
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15153 in perlglossary.pod
 Lookups: BSD; Text: BSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15140 in perlglossary.pod
-Lookups: Berkeley Standard Distribution
-(BSD); Text: A psychoactive drug, popular in the ’80s, probably developed at UC Berkeley or thereabouts. Similar in many ways to the prescription-only...; Tail: (Berkeley Standard Distribution
-(BSD)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Berkeley Standard Distribution (BSD); Text: A psychoactive drug, popular in the ’80s, probably developed at UC Berkeley or thereabouts. Similar in many ways to the prescription-only...; Tail: (Berkeley Standard Distribution (BSD)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15192 in perlglossary.pod
 Lookups: Boolean context, about; Text: A special kind of scalar context used in conditionals to decide whether the scalar value returned by an expression is true or false. Does...; Tail: (Boolean context, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14596 in perlglossary.pod
@@ -44,9 +44,7 @@ Lookups: C; Text: C; Tail: null; Type: List Item; Icon: /perl5language.png; Type
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17158 in perlglossary.pod
 Lookups: CODE; Text: CODE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 22563 in perlglossary.pod
-Lookups: CPAN (Comprehensive Perl Archive Network),
-minicpan and; Text: A CPAN mirror that includes just the latest versions for each distribution, probably created with CPAN::Mini. See Camel chapter 19, “CPAN”.; Tail: (CPAN (Comprehensive Perl Archive Network),
-minicpan and); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: CPAN (Comprehensive Perl Archive Network), minicpan and; Text: A CPAN mirror that includes just the latest versions for each distribution, probably created with CPAN::Mini. See Camel chapter 19, “CPAN”.; Tail: (CPAN (Comprehensive Perl Archive Network), minicpan and); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 77518 in perlglossary.pod
 Lookups: CPAN::Mini module; Text: A CPAN mirror that includes just the latest versions for each distribution, probably created with CPAN::Mini. See Camel chapter 19, “CPAN”.; Tail: (CPAN::Mini module); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 77680 in perlglossary.pod
@@ -54,9 +52,7 @@ Lookups: CPAN; Text: CPAN; Tail: null; Type: List Item; Icon: /perl5language.png
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29634 in perlglossary.pod
 Lookups: E; Text: E; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38880 in perlglossary.pod
-Lookups: E<gt>E<gt> (right shift) bit operator; Text: A bit shift that divides a number by some power of 2.; Tail: (E<gt>E<gt> (right shift) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 101773 in perlglossary.pod
-Lookups: E<lt>E<lt> (left shift) bit operator; Text: A bit shift that multiplies the number by some power of 2.; Tail: (E<lt>E<lt> (left shift) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: E<lt>E<lt> (left shift) bit operator, << (left shift) bit operator; Text: A bit shift that multiplies the number by some power of 2.; Tail: (<< (left shift) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 66985 in perlglossary.pod
 Lookups: G; Text: G; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50623 in perlglossary.pod
@@ -64,11 +60,9 @@ Lookups: GV (glob value); Text: An internal “glob value” typedef, holding a 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 53861 in perlglossary.pod
 Lookups: GV; Text: GV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53826 in perlglossary.pod
-Lookups: I/O (Input/Output), standard; Text: A standard C library for doing buffered input and output to the operating system. (The “standard” of standard I/O is at most marginally r...; Tail: (I/O (Input/Output), standard); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: IE<sol>O (InputE<sol>Output), standard, I/O (Input/Output), standard; Text: A standard C library for doing buffered input and output to the operating system. (The “standard” of standard I/O is at most marginally r...; Tail: (I/O (Input/Output), standard); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 112373 in perlglossary.pod
-Lookups: Input/Output (I/O),
-standard; Text: A standard C library for doing buffered input and output to the operating system. (The “standard” of standard I/O is at most marginally r...; Tail: (Input/Output (I/O),
-standard); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: InputE<sol>Output (IE<sol>O), standard, Input/Output (I/O), standard; Text: A standard C library for doing buffered input and output to the operating system. (The “standard” of standard I/O is at most marginally r...; Tail: (Input/Output (I/O), standard); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 112404 in perlglossary.pod
 Lookups: L; Text: L; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 65911 in perlglossary.pod
@@ -98,13 +92,9 @@ Lookups: Reference Value (RV); Text: A recreational vehicle, not to be confused 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 103146 in perlglossary.pod
 Lookups: S; Text: S; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 103535 in perlglossary.pod
-Lookups: STDERR
-filehandle, about; Text: The default output stream for nasty remarks that don’t belong in standard output. Represented within a Perl program by the output>  fileh...; Tail: (STDERR
-filehandle, about); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: STDERR filehandle, about; Text: The default output stream for nasty remarks that don’t belong in standard output. Represented within a Perl program by the output>  fileh...; Tail: (STDERR filehandle, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 111883 in perlglossary.pod
-Lookups: STDERR filehandle, warning messages
-and; Text: A message printed to the STDERR stream to the effect that something might be wrong but isn’t worth blowing up over. See warn in Camel cha...; Tail: (STDERR filehandle, warning messages
-and); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: STDERR filehandle, warning messages and; Text: A message printed to the STDERR stream to the effect that something might be wrong but isn’t worth blowing up over. See warn in Camel cha...; Tail: (STDERR filehandle, warning messages and); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 132275 in perlglossary.pod
 Lookups: STDERR; Text: STDERR; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 115590 in perlglossary.pod
@@ -140,15 +130,11 @@ Lookups: TMTOWTDI acronym; Text: There’s More Than One Way To Do It, the Perl 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 125132 in perlglossary.pod
 Lookups: TMTOWTDI; Text: TMTOWTDI; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125066 in perlglossary.pod
-Lookups: Transmission Control
-Protocol (TCP); Text: Short for Transmission Control Protocol. A protocol wrapped around the Internet Protocol to make an unreliable packet transmission mechan...; Tail: (Transmission Control
-Protocol (TCP)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: Transmission Control Protocol (TCP); Text: Short for Transmission Control Protocol. A protocol wrapped around the Internet Protocol to make an unreliable packet transmission mechan...; Tail: (Transmission Control Protocol (TCP)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 123108 in perlglossary.pod
 Lookups: U; Text: U; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 128513 in perlglossary.pod
-Lookups: UDP (User
-Datagram Protocol); Text: User Datagram Protocol, the typical way to send datagrams over the Internet.; Tail: (UDP (User
-Datagram Protocol)); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: UDP (User Datagram Protocol); Text: User Datagram Protocol, the typical way to send datagrams over the Internet.; Tail: (UDP (User Datagram Protocol)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 128602 in perlglossary.pod
 Lookups: UDP; Text: UDP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 128532 in perlglossary.pod
@@ -234,20 +220,14 @@ Lookups: arrays, multidimensional; Text: An array with multiple subscripts for f
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 79414 in perlglossary.pod
 Lookups: assertion; Text: assertion; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5471 in perlglossary.pod
-Lookups: assertions
-(in regexes), zero–width; Text: A subpattern assertion matching the null string between characters.; Tail: (assertions
-(in regexes), zero–width); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 135170 in perlglossary.pod
-Lookups: assertions (in regexes),
-lookahead; Text: An assertion that peeks at the string to the right of the current match location.; Tail: (assertions (in regexes),
-lookahead); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 72084 in perlglossary.pod
-Lookups: assertions (in regexes),
-lookbehind; Text: An assertion that peeks at the string to the left of the current match location.; Tail: (assertions (in regexes),
-lookbehind); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 72244 in perlglossary.pod
 Lookups: assertions (in regexes), defined; Text: A component of a regular expression that must be true for the pattern to match but does not necessarily match any characters itself. Ofte...; Tail: (assertions (in regexes), defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 5490 in perlglossary.pod
+Lookups: assertions (in regexes), lookahead; Text: An assertion that peeks at the string to the right of the current match location.; Tail: (assertions (in regexes), lookahead); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 72084 in perlglossary.pod
+Lookups: assertions (in regexes), lookbehind; Text: An assertion that peeks at the string to the left of the current match location.; Tail: (assertions (in regexes), lookbehind); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 72244 in perlglossary.pod
+Lookups: assertions (in regexes), zero–width; Text: A subpattern assertion matching the null string between characters.; Tail: (assertions (in regexes), zero–width); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 135170 in perlglossary.pod
 Lookups: assignment operator; Text: assignment operator; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5885 in perlglossary.pod
 Lookups: assignment; Text: assignment; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -320,13 +300,9 @@ Lookups: bits, defined; Text: An integer in the range from 0 to 1, inclusive. Th
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 12407 in perlglossary.pod
 Lookups: bits, permission; Text: Bits that the owner of a file sets or unsets to allow or disallow access to other people. These flag bits are part of the mode word retur...; Tail: (bits, permission); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 89403 in perlglossary.pod
-Lookups: bit–shift
-operators, left shift; Text: A bit shift that multiplies the number by some power of 2.; Tail: (bit–shift
-operators, left shift); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: bit–shift operators, left shift; Text: A bit shift that multiplies the number by some power of 2.; Tail: (bit–shift operators, left shift); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 66951 in perlglossary.pod
-Lookups: bit–shift
-operators, right shift; Text: A bit shift that divides a number by some power of 2.; Tail: (bit–shift
-operators, right shift); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: bit–shift operators, right shift; Text: A bit shift that divides a number by some power of 2.; Tail: (bit–shift operators, right shift); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 101738 in perlglossary.pod
 Lookups: bless; Text: bless; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13039 in perlglossary.pod
@@ -418,9 +394,7 @@ Lookups: characters, newline; Text: A single character that represents the end o
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 80627 in perlglossary.pod
 Lookups: characters, null; Text: A character with the numeric value of zero. It’s used by C to terminate strings, but Perl allows strings to contain a null.; Tail: (characters, null); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 81508 in perlglossary.pod
-Lookups: characters, regex
-metacharacters; Text: A character that is not supposed to be treated normally. Which characters are to be treated specially as metacharacters varies greatly fr...; Tail: (characters, regex
-metacharacters); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: characters, regex metacharacters; Text: A character that is not supposed to be treated normally. Which characters are to be treated specially as metacharacters varies greatly fr...; Tail: (characters, regex metacharacters); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 76309 in perlglossary.pod
 Lookups: characters, separators; Text: A character or string that keeps two surrounding strings from being confused with each other. The split function works on separators. Not...; Tail: (characters, separators); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 106359 in perlglossary.pod
@@ -440,10 +414,6 @@ Lookups: class method; Text: class method; Tail: null; Type: List Item; Icon: /p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21621 in perlglossary.pod
 Lookups: class; Text: class; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21361 in perlglossary.pod
-Lookups: classes,
-subclasses; Text: A class that defines some of its methods in terms of a more generic class, called a base class. Note that classes aren’t classified exclu...; Tail: (classes,
-subclasses); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 35077 in perlglossary.pod
 Lookups: classes, base; Text: A generic object type; that is, a class from which other, more specific classes are derived genetically by inheritance. Also called a “su...; Tail: (classes, base); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 11288 in perlglossary.pod
 Lookups: classes, character; Text: A square-bracketed list of characters used in a regular expression to indicate that any character of the set may occur at a given point. ...; Tail: (classes, character); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -452,6 +422,8 @@ Lookups: classes, defined; Text: A user-defined type, implemented in Perl via a 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 21376 in perlglossary.pod
 Lookups: classes, derived; Text: A class that defines some of its methods in terms of a more generic class, called a base class. Note that classes aren’t classified exclu...; Tail: (classes, derived); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 35045 in perlglossary.pod
+Lookups: classes, subclasses; Text: A class that defines some of its methods in terms of a more generic class, called a base class. Note that classes aren’t classified exclu...; Tail: (classes, subclasses); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 35077 in perlglossary.pod
 Lookups: classes, superclasses; Text: A generic object type; that is, a class from which other, more specific classes are derived genetically by inheritance. Also called a “su...; Tail: (classes, superclasses); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 11459 in perlglossary.pod
 Lookups: client; Text: client; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -624,14 +596,12 @@ Lookups: elements, about; Text: A basic building block. When you’re talking ab
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 39012 in perlglossary.pod
 Lookups: elements, slices of; Text: A selection of any number of elements from a list, array, or hash.; Tail: (elements, slices of); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 110636 in perlglossary.pod
-Lookups: environment
-variables; Text: A mechanism by which some high-level agent such as a user can pass its preferences down to its future offspring (child processes, grandch...; Tail: (environment
-variables); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 40166 in perlglossary.pod
 Lookups: environment variable; Text: environment variable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40077 in perlglossary.pod
 Lookups: environment variables; Text: A mechanism by which some high-level agent such as a user can pass its preferences down to its future offspring (child processes, grandch...; Tail: (environment variables); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 40117 in perlglossary.pod
+Lookups: environment variables; Text: A mechanism by which some high-level agent such as a user can pass its preferences down to its future offspring (child processes, grandch...; Tail: (environment variables); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 40166 in perlglossary.pod
 Lookups: environment; Text: environment; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39925 in perlglossary.pod
 Lookups: exec; Text: exec; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -680,10 +650,6 @@ Lookups: filehandles, about; Text: An identifier (not necessarily related to the
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 45234 in perlglossary.pod
 Lookups: filehandles, indirect; Text: An expression that evaluates to something that can be used as a filehandle: a string (filehandle name), a typeglob, a typeglob reference,...; Tail: (filehandles, indirect); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 59247 in perlglossary.pod
-Lookups: files,
-text; Text: A string or file containing primarily printable characters.; Tail: (files,
-text); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 124109 in perlglossary.pod
 Lookups: files, defined; Text: A named collection of data, usually stored on disk in a directory in a filesystem. Roughly like a document, if you’re into office metapho...; Tail: (files, defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 44534 in perlglossary.pod
 Lookups: files, executable; Text: A file that is specially marked to tell the operating system that it’s okay to run this file as a program. Usually shortened to “executab...; Tail: (files, executable); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -692,6 +658,8 @@ Lookups: files, header; Text: A file containing certain required definitions tha
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 55655 in perlglossary.pod
 Lookups: files, regular; Text: A file that’s not a directory, a device, a named pipe or socket, or a symbolic link. Perl uses the –f file test operator to identify regu...; Tail: (files, regular); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 100473 in perlglossary.pod
+Lookups: files, text; Text: A string or file containing primarily printable characters.; Tail: (files, text); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 124109 in perlglossary.pod
 Lookups: files, truncating; Text: Emptying a file of existing contents, either automatically when opening a file for writing or explicitly via the truncate function.; Tail: (files, truncating); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 127437 in perlglossary.pod
 Lookups: filesystem; Text: filesystem; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -714,12 +682,10 @@ Lookups: formats, defined; Text: A specification of how many spaces and digits a
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 49135 in perlglossary.pod
 Lookups: function; Text: function; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50148 in perlglossary.pod
-Lookups: functions,
-pseudofunctions; Text: A construct that sometimes looks like a function but really isn’t. Usually reserved for lvalue modifiers like my, for context modifiers l...; Tail: (functions,
-pseudofunctions); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 95783 in perlglossary.pod
 Lookups: functions, lvaluable; Text: Able to serve as an lvalue.; Tail: (functions, lvaluable); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 73231 in perlglossary.pod
+Lookups: functions, pseudofunctions; Text: A construct that sometimes looks like a function but really isn’t. Usually reserved for lvalue modifiers like my, for context modifiers l...; Tail: (functions, pseudofunctions); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 95783 in perlglossary.pod
 Lookups: garbage collection, defined; Text: A misnamed feature—it should be called, “expecting your mother to pick up after you”. Strictly speaking, Perl doesn’t do this, but it rel...; Tail: (garbage collection, defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 50687 in perlglossary.pod
 Lookups: garbage collection; Text: garbage collection; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -806,9 +772,7 @@ Lookups: iterator; Text: iterator; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64954 in perlglossary.pod
 Lookups: iterators; Text: A special programming gizmo that keeps track of where you are in something that you’re trying to iterate over. The foreach loop in Perl c...; Tail: (iterators); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 64980 in perlglossary.pod
-Lookups: key/value
-pairs, about; Text: An unordered association of key/value pairs, stored such that you can easily use a string key to look up its associated data value. This ...; Tail: (key/value
-pairs, about); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: key/value pairs, about, keyE<sol>value pairs, about; Text: An unordered association of key/value pairs, stored such that you can easily use a string key to look up its associated data value. This ...; Tail: (key/value pairs, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 55089 in perlglossary.pod
 Lookups: key; Text: key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65751 in perlglossary.pod
@@ -822,7 +786,7 @@ Lookups: labels, defined; Text: A name you give to a statement so that you can t
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 65945 in perlglossary.pod
 Lookups: labels, loop; Text: A kind of key or name attached to a loop (or roller coaster) so that loop control statements can talk about which loop they want to control.; Tail: (labels, loop); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 72756 in perlglossary.pod
-Lookups: left shift (E<lt>E<lt>) bit operator; Text: A bit shift that multiplies the number by some power of 2.; Tail: (left shift (E<lt>E<lt>) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: left shift (E<lt>E<lt>) bit operator, left shift (<<) bit operator; Text: A bit shift that multiplies the number by some power of 2.; Tail: (left shift (<<) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 66912 in perlglossary.pod
 Lookups: left shift; Text: left shift; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66874 in perlglossary.pod
@@ -830,9 +794,7 @@ Lookups: lexical variable; Text: lexical variable; Tail: null; Type: List Item; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67762 in perlglossary.pod
 Lookups: lexical variables, about; Text: A variable subject to lexical scoping, declared by my. Often just called a “lexical”. (The our declaration declares a lexically scoped na...; Tail: (lexical variables, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 67800 in perlglossary.pod
-Lookups: lexical variables, typed
-lexicals; Text: A lexical variable  lexical>that is declared with a class type: my Pony $bill.; Tail: (lexical variables, typed
-lexicals); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lexical variables, typed lexicals; Text: A lexical variable  lexical>that is declared with a class type: my Pony $bill.; Tail: (lexical variables, typed lexicals); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 127895 in perlglossary.pod
 Lookups: line; Text: line; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68459 in perlglossary.pod
@@ -926,9 +888,7 @@ Lookups: modifier; Text: modifier; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78088 in perlglossary.pod
 Lookups: modifiers, lvalue; Text: An adjectival pseudofunction that warps the meaning of an lvalue in some declarative fashion. Currently there are three lvalue modifiers:...; Tail: (modifiers, lvalue); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 73708 in perlglossary.pod
-Lookups: modifiers, regular
-expression; Text: An option on a pattern or substitution, such as /i to render the pattern case- insensitive.; Tail: (modifiers, regular
-expression); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: modifiers, regular expression; Text: An option on a pattern or substitution, such as /i to render the pattern case- insensitive.; Tail: (modifiers, regular expression); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 100307 in perlglossary.pod
 Lookups: modifiers, statement; Text: A conditional or loop that you put after the statement instead of before, if you know what we mean.; Tail: (modifiers, statement); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 113906 in perlglossary.pod
@@ -1120,9 +1080,7 @@ Lookups: reference; Text: reference; Tail: null; Type: List Item; Icon: /perl5la
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99159 in perlglossary.pod
 Lookups: references, backreferences; Text: A substring captured by a subpattern within unadorned parentheses in a regex. Backslashed decimal numbers (\1, \2, etc.) later in the sam...; Tail: (references, backreferences); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 9942 in perlglossary.pod
-Lookups: references, call by reference
-mechanism; Text: An argument-passing mechanism in which the formal arguments refer directly to the actual arguments, and the subroutine can change the act...; Tail: (references, call by reference
-mechanism); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: references, call by reference mechanism; Text: An argument-passing mechanism in which the formal arguments refer directly to the actual arguments, and the subroutine can change the act...; Tail: (references, call by reference mechanism); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 17964 in perlglossary.pod
 Lookups: references, dereference; Text: A fancy computer science term meaning “to follow a reference to what it points to”. The “de” part of it refers to the fact that you’re ta...; Tail: (references, dereference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 34792 in perlglossary.pod
@@ -1140,9 +1098,7 @@ Lookups: regular expression modifiers; Text: An option on a pattern or substitut
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 100276 in perlglossary.pod
 Lookups: regular expression; Text: regular expression; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 99583 in perlglossary.pod
-Lookups: regular expressions, assertions
-in; Text: A component of a regular expression that must be true for the pattern to match but does not necessarily match any characters itself. Ofte...; Tail: (regular expressions, assertions
-in); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: regular expressions, assertions in; Text: A component of a regular expression that must be true for the pattern to match but does not necessarily match any characters itself. Ofte...; Tail: (regular expressions, assertions in); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 5525 in perlglossary.pod
 Lookups: regular expressions, defined; Text: A single entity with various interpretations, like an elephant. To a computer scientist, it’s a grammar for a little language in which so...; Tail: (regular expressions, defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 99618 in perlglossary.pod
@@ -1158,7 +1114,7 @@ Lookups: relational operators; Text: An operator that says whether a particular 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 100723 in perlglossary.pod
 Lookups: reserved words; Text: A word with a specific, built-in meaning to a compiler, such as if or delete. In many languages (not Perl), it’s illegal to use reserved ...; Tail: (reserved words); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 100953 in perlglossary.pod
-Lookups: right shift (E<gt>E<gt>) bit operator; Text: A bit shift that divides a number by some power of 2.; Tail: (right shift (E<gt>E<gt>) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: right shift (E<gt>E<gt>) bit operator, right shift (>>) bit operator; Text: A bit shift that divides a number by some power of 2.; Tail: (right shift (>>) bit operator); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 101698 in perlglossary.pod
 Lookups: right shift; Text: right shift; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 101664 in perlglossary.pod
@@ -1180,7 +1136,7 @@ Lookups: rvalue (term); Text: A value that you might find on the right side of a
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 103420 in perlglossary.pod
 Lookups: rvalue; Text: rvalue; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 103390 in perlglossary.pod
-Lookups: s/// (substitution) operator, about; Text: Changing parts of a string via the s/// operator. (We avoid use of this term to mean variable interpolation.); Tail: (s/// (substitution) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: sE<sol>E<sol>E<sol> (substitution) operator, about, s/// (substitution) operator, about; Text: Changing parts of a string via the s/// operator. (We avoid use of this term to mean variable interpolation.); Tail: (s/// (substitution) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 117442 in perlglossary.pod
 Lookups: sandbox, defined; Text: A walled off area that’s not supposed to affect beyond its walls. You let kids play in the sandbox instead of running in the road. See Ca...; Tail: (sandbox, defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 103571 in perlglossary.pod
@@ -1306,9 +1262,7 @@ Lookups: source filter; Text: source filter; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111250 in perlglossary.pod
 Lookups: source filters; Text: A special kind of module that does preprocessing on your script just before it gets to the tokener.; Tail: (source filters); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 111281 in perlglossary.pod
-Lookups: split function,
-separators and; Text: A character or string that keeps two surrounding strings from being confused with each other. The split function works on separators. Not...; Tail: (split function,
-separators and); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: split function, separators and; Text: A character or string that keeps two surrounding strings from being confused with each other. The split function works on separators. Not...; Tail: (split function, separators and); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 106513 in perlglossary.pod
 Lookups: stack; Text: stack; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111416 in perlglossary.pod
@@ -1316,9 +1270,9 @@ Lookups: stacks, defined; Text: A device you can put things on the top of, and l
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 111431 in perlglossary.pod
 Lookups: standard (term); Text: Included in the official Perl distribution, as in a standard module, a standard tool, or a standard Perl manpage.; Tail: (standard (term)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 111606 in perlglossary.pod
-Lookups: standard I/O; Text: A standard C library for doing buffered input and output to the operating system. (The “standard” of standard I/O is at most marginally r...; Tail: (standard I/O); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: standard I/O, standard IE<sol>O; Text: A standard C library for doing buffered input and output to the operating system. (The “standard” of standard I/O is at most marginally r...; Tail: (standard I/O); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 112358 in perlglossary.pod
-Lookups: standard I/O; Text: standard I/O; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: standard I/O, standard IE<sol>O; Text: standard I/O; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 112336 in perlglossary.pod
 Lookups: standard error; Text: standard error; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 111733 in perlglossary.pod
@@ -1376,28 +1330,20 @@ Lookups: stringification; Text: The process of producing a string representation
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 116487 in perlglossary.pod
 Lookups: stringification; Text: stringification; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 116452 in perlglossary.pod
-Lookups: strings,
-separators; Text: A character or string that keeps two surrounding strings from being confused with each other. The split function works on separators. Not...; Tail: (strings,
-separators); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 106384 in perlglossary.pod
-Lookups: strings,
-terminators in; Text: A character or string that marks the end of another string. The $/ variable contains the string that terminates a readline operation, whi...; Tail: (strings,
-terminators in); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 123625 in perlglossary.pod
-Lookups: strings,
-transliteration of; Text: To turn one string representation into another by mapping each character of the source string to its corresponding character in the resul...; Tail: (strings,
-transliteration of); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 126464 in perlglossary.pod
 Lookups: strings, defined; Text: A sequence of characters such as “He said !@#*&%@#*?!”. A string does not have to be entirely printable.; Tail: (strings, defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 116122 in perlglossary.pod
 Lookups: strings, null; Text: A string containing no characters, not to be confused with a string containing a null character, which has a positive length and is true.; Tail: (strings, null); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 81797 in perlglossary.pod
-Lookups: strings, substitution
-in; Text: Changing parts of a string via the s/// operator. (We avoid use of this term to mean variable interpolation.); Tail: (strings, substitution
-in); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: strings, separators; Text: A character or string that keeps two surrounding strings from being confused with each other. The split function works on separators. Not...; Tail: (strings, separators); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 106384 in perlglossary.pod
+Lookups: strings, substitution in; Text: Changing parts of a string via the s/// operator. (We avoid use of this term to mean variable interpolation.); Tail: (strings, substitution in); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 117415 in perlglossary.pod
+Lookups: strings, terminators in; Text: A character or string that marks the end of another string. The $/ variable contains the string that terminates a readline operation, whi...; Tail: (strings, terminators in); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 123625 in perlglossary.pod
 Lookups: strings, text; Text: A string or file containing primarily printable characters.; Tail: (strings, text); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 124093 in perlglossary.pod
+Lookups: strings, transliteration of; Text: To turn one string representation into another by mapping each character of the source string to its corresponding character in the resul...; Tail: (strings, transliteration of); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 126464 in perlglossary.pod
 Lookups: strings, v–strings; Text: A “version” or “vector” string specified with a v followed by a series of decimal integers in dot notation, for instance, v1.20.300.4000....; Tail: (strings, v–strings); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 131924 in perlglossary.pod
 Lookups: struct keyword; Text: C keyword introducing a structure definition or name.; Tail: (struct keyword); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -1432,7 +1378,7 @@ Lookups: subscript; Text: subscript; Tail: null; Type: List Item; Icon: /perl5la
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117229 in perlglossary.pod
 Lookups: subscripts; Text: A value that indicates the position of a particular array element in an array.; Tail: (subscripts); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 117257 in perlglossary.pod
-Lookups: substitution (s///) operator, about; Text: Changing parts of a string via the s/// operator. (We avoid use of this term to mean variable interpolation.); Tail: (substitution (s///) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: substitution (sE<sol>E<sol>E<sol>) operator, about, substitution (s///) operator, about; Text: Changing parts of a string via the s/// operator. (We avoid use of this term to mean variable interpolation.); Tail: (substitution (s///) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 117377 in perlglossary.pod
 Lookups: substitution; Text: substitution; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 117348 in perlglossary.pod
@@ -1566,11 +1512,11 @@ Lookups: topic; Text: topic; Tail: null; Type: List Item; Icon: /perl5language.p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126181 in perlglossary.pod
 Lookups: topics (term); Text: The thing you’re working on. Structures like while(<>), for, foreach, and given set the topic for you by assigning to $_, the default (to...; Tail: (topics (term)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 126211 in perlglossary.pod
-Lookups: tr/// (transliteration) operator, about; Text: To turn one string representation into another by mapping each character of the source string to its corresponding character in the resul...; Tail: (tr/// (transliteration) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: trE<sol>E<sol>E<sol> (transliteration) operator, about, tr/// (transliteration) operator, about; Text: To turn one string representation into another by mapping each character of the source string to its corresponding character in the resul...; Tail: (tr/// (transliteration) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 126422 in perlglossary.pod
 Lookups: transliterate; Text: transliterate; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126389 in perlglossary.pod
-Lookups: transliteration (tr///) operator, about; Text: To turn one string representation into another by mapping each character of the source string to its corresponding character in the resul...; Tail: (transliteration (tr///) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: transliteration (trE<sol>E<sol>E<sol>) operator, about, transliteration (tr///) operator, about; Text: To turn one string representation into another by mapping each character of the source string to its corresponding character in the resul...; Tail: (transliteration (tr///) operator, about); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 126494 in perlglossary.pod
 Lookups: trigger; Text: trigger; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 126880 in perlglossary.pod
@@ -1660,14 +1606,12 @@ Lookups: variable interpolation; Text: variable interpolation; Tail: null; Type:
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130970 in perlglossary.pod
 Lookups: variable; Text: variable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 130821 in perlglossary.pod
-Lookups: variables,
-instance; Text: An attribute of an object; data stored with the particular object rather than with the class as a whole.; Tail: (variables,
-instance); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 61714 in perlglossary.pod
 Lookups: variables, defined; Text: A named storage location that can hold any of various kinds of value, as your program sees fit.; Tail: (variables, defined); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 130853 in perlglossary.pod
 Lookups: variables, environment; Text: A mechanism by which some high-level agent such as a user can pass its preferences down to its future offspring (child processes, grandch...; Tail: (variables, environment); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 40141 in perlglossary.pod
+Lookups: variables, instance; Text: An attribute of an object; data stored with the particular object rather than with the class as a whole.; Tail: (variables, instance); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 61714 in perlglossary.pod
 Lookups: variables, lexical; Text: A variable subject to lexical scoping, declared by my. Often just called a “lexical”. (The our declaration declares a lexically scoped na...; Tail: (variables, lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 67827 in perlglossary.pod
 Lookups: variables, scalar; Text: A variable prefixed with $ that holds a single value.; Tail: (variables, scalar); Type: Index; Icon: /perl5language.png; Type Icon: null

@@ -16,7 +16,7 @@ Lookups: Encode decode_xs n-byte heap-overflow (CVE-2011-2939); Text: Encode dec
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 947 in perl5142delta.pod
 Lookups: File::Glob::bsd_glob() memory error with GLOB_ALTDIRFUNC (CVE-2011-2728).; Text: File::Glob::bsd_glob() memory error with GLOB_ALTDIRFUNC (CVE-2011-2728).; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 398 in perl5142delta.pod
-Lookups: HP-UX PA-RISC/64 now supports gcc-4.x; Text: HP-UX PA-RISC/64 now supports gcc-4.x; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: HP-UX PA-RISC/64 now supports gcc-4.x, HP-UX PA-RISCE<sol>64 now supports gcc-4.x; Text: HP-UX PA-RISC/64 now supports gcc-4.x; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2542 in perl5142delta.pod
 Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1150 in perl5142delta.pod

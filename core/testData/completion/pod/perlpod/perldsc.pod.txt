@@ -8,7 +8,7 @@ Lookups:  hashes of hashes; Text:  hashes of hashes; Tail: null; Type: List Item
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perldsc.pod
 Lookups:  more elaborate constructs; Text:  more elaborate constructs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1705 in perldsc.pod
-Lookups: ->; Text: Speaking of things like @{$AoA[$i]}, the following are actually the same thing:; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: -E<gt>, ->; Text: Speaking of things like @{$AoA[$i]}, the following are actually the same thing:; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 9454 in perldsc.pod
 Lookups: ARRAYS OF ARRAYS; Text: ARRAYS OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 12307 in perldsc.pod

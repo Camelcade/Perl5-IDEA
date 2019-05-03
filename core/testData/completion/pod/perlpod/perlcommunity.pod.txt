@@ -26,19 +26,19 @@ Lookups: Where to Find the Community; Text: Where to Find the Community; Tail: n
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 598 in perlcommunity.pod
 Lookups: Workshops; Text: Workshops; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4552 in perlcommunity.pod
-Lookups: http://blogs.perl.org/; Text: http://blogs.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2576 in perlcommunity.pod
-Lookups: http://perl.com/; Text: http://perl.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://perl.com/, http:E<sol>E<sol>perl.comE<sol>; Text: http://perl.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2393 in perlcommunity.pod
-Lookups: http://perlsphere.net/; Text: http://perlsphere.net/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2733 in perlcommunity.pod
-Lookups: http://perlweekly.com/; Text: http://perlweekly.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://perlweekly.com/, http:E<sol>E<sol>perlweekly.comE<sol>; Text: http://perlweekly.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2836 in perlcommunity.pod
-Lookups: http://prepan.org/; Text: http://prepan.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://prepan.org/, http:E<sol>E<sol>prepan.orgE<sol>; Text: http://prepan.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3851 in perlcommunity.pod
-Lookups: http://stackoverflow.com/; Text: http://stackoverflow.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://stackoverflow.com/, http:E<sol>E<sol>stackoverflow.comE<sol>; Text: http://stackoverflow.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3599 in perlcommunity.pod
-Lookups: http://use.perl.org/; Text: http://use.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2982 in perlcommunity.pod
-Lookups: http://www.perlmonks.org/; Text: http://www.perlmonks.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http://www.perlmonks.org/, http:E<sol>E<sol>www.perlmonks.orgE<sol>; Text: http://www.perlmonks.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3340 in perlcommunity.pod
+Lookups: http:E<sol>E<sol>blogs.perl.orgE<sol>, http://blogs.perl.org/; Text: http://blogs.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2576 in perlcommunity.pod
+Lookups: http:E<sol>E<sol>perlsphere.netE<sol>, http://perlsphere.net/; Text: http://perlsphere.net/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2733 in perlcommunity.pod
+Lookups: http:E<sol>E<sol>use.perl.orgE<sol>, http://use.perl.org/; Text: http://use.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2982 in perlcommunity.pod

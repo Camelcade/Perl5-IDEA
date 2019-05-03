@@ -12,21 +12,21 @@ Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5la
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2704 in perltw.pod
 Lookups: Unicode 相關網址; Text: Unicode 相關網址; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2384 in perltw.pod
-Lookups: http://lists.perl.org/; Text: http://lists.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>lists.perl.orgE<sol>, http://lists.perl.org/; Text: http://lists.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2055 in perltw.pod
-Lookups: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Text: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>www.cl.cam.ac.ukE<sol>%7Emgk25E<sol>unicode.html, http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Text: http://www.cl.cam.ac.uk/%7Emgk25/unicode.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2479 in perltw.pod
-Lookups: http://www.cpan.org/; Text: http://www.cpan.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>www.cpan.orgE<sol>, http://www.cpan.org/; Text: http://www.cpan.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1975 in perltw.pod
-Lookups: http://www.oreilly.com.tw/product_perl.php?id=index_perl; Text: http://www.oreilly.com.tw/product_perl.php?id=index_perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>www.oreilly.com.twE<sol>product_perl.php?id=index_perl, http://www.oreilly.com.tw/product_perl.php?id=index_perl; Text: http://www.oreilly.com.tw/product_perl.php?id=index_perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2137 in perltw.pod
-Lookups: http://www.perl.com/; Text: http://www.perl.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>www.perl.comE<sol>, http://www.perl.com/; Text: http://www.perl.com/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1923 in perltw.pod
-Lookups: http://www.pm.org/groups/taiwan.html; Text: http://www.pm.org/groups/taiwan.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>www.pm.orgE<sol>groupsE<sol>taiwan.html, http://www.pm.org/groups/taiwan.html; Text: http://www.pm.org/groups/taiwan.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2258 in perltw.pod
-Lookups: http://www.unicode.org/; Text: http://www.unicode.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: http:E<sol>E<sol>www.unicode.orgE<sol>, http://www.unicode.org/; Text: http://www.unicode.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2414 in perltw.pod
-Lookups: irc://irc.freenode.org/#perl.tw; Text: irc://irc.freenode.org/#perl.tw; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: irc://irc.freenode.org/#perl.tw, irc:E<sol>E<sol>irc.freenode.orgE<sol>#perl.tw; Text: irc://irc.freenode.org/#perl.tw; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2320 in perltw.pod
 Lookups: 中文化資訊; Text: 中文化資訊; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2577 in perltw.pod

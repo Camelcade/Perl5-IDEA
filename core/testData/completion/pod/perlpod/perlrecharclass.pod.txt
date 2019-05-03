@@ -2,7 +2,7 @@ Lookups: Backslash Sequences; Text: Backslash Sequences; Tail: null; Type: 3d He
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 30886 in perlrecharclass.pod
 Lookups: Backslash sequences; Text: Backslash sequences; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1860 in perlrecharclass.pod
-Lookups: Bracketed Character Classes and the /xx pattern modifier; Text: Bracketed Character Classes and the /xx pattern modifier; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Bracketed Character Classes and the E<sol>xx pattern modifier, Bracketed Character Classes and the /xx pattern modifier; Text: Bracketed Character Classes and the /xx pattern modifier; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 23828 in perlrecharclass.pod
 Lookups: Bracketed Character Classes; Text: Bracketed Character Classes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17600 in perlrecharclass.pod
@@ -30,12 +30,12 @@ Lookups: For code points below 256 ...; Text: For code points below 256 ...; Tai
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7796 in perlrecharclass.pod
 Lookups: For code points below 256 ...; Text: For code points below 256 ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9334 in perlrecharclass.pod
-Lookups: If the /a modifier is in effect ...; Text: If the /a modifier is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7295 in perlrecharclass.pod
-Lookups: If the /a modifier is in effect ...; Text: If the /a modifier is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8855 in perlrecharclass.pod
-Lookups: If the /a modifier, is in effect ...; Text: If the /a modifier, is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: If the /a modifier, is in effect ..., If the E<sol>a modifier, is in effect ...; Text: If the /a modifier, is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38571 in perlrecharclass.pod
+Lookups: If the E<sol>a modifier is in effect ..., If the /a modifier is in effect ...; Text: If the /a modifier is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7295 in perlrecharclass.pod
+Lookups: If the E<sol>a modifier is in effect ..., If the /a modifier is in effect ...; Text: If the /a modifier is in effect ...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8855 in perlrecharclass.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlrecharclass.pod
 Lookups: Negation of POSIX character classes; Text: Negation of POSIX character classes; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null

@@ -4,7 +4,7 @@ Lookups: 20th November 2013; Text: 20th November 2013; Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5375 in perlamiga.pod
 Lookups: 27th November 2013; Text: 27th November 2013; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5047 in perlamiga.pod
-Lookups: Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion.; Text: Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion., Add flock() emulation using IDOS-E<gt>LockRecord thanks to Tony Cook for the suggestion.; Text: Add flock() emulation using IDOS->LockRecord thanks to Tony Cook for the suggestion.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4881 in perlamiga.pod
 Lookups: Add handling of NIL: to afstat(); Text: Add handling of NIL: to afstat(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4651 in perlamiga.pod
@@ -26,7 +26,7 @@ Lookups: BUILDING; Text: BUILDING; Tail: null; Type: 1st Heading; Icon: /perl5la
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4116 in perlamiga.pod
 Lookups: CHANGES; Text: CHANGES; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 4570 in perlamiga.pod
-Lookups: Configured to use SDK:Local/C/perl to start standard scripts; Text: Configured to use SDK:Local/C/perl to start standard scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Configured to use SDK:LocalE<sol>CE<sol>perl to start standard scripts, Configured to use SDK:Local/C/perl to start standard scripts; Text: Configured to use SDK:Local/C/perl to start standard scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5413 in perlamiga.pod
 Lookups: Create new installation system based on installperl links and Amiga protection bits now set correctly.; Text: Create new installation system based on installperl links and Amiga protection bits now set correctly.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5085 in perlamiga.pod

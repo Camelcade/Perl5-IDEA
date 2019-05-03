@@ -12,7 +12,7 @@ Lookups: Definitions; Text: Definitions; Tail: null; Type: 2nd Heading; Icon: /p
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1257 in perlunitut.pod
 Lookups: Encoding; Text: Encoding; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 3636 in perlunitut.pod
-Lookups: I/O flow (the actual 5 minute tutorial); Text: I/O flow (the actual 5 minute tutorial); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: IE<sol>O flow (the actual 5 minute tutorial), I/O flow (the actual 5 minute tutorial); Text: I/O flow (the actual 5 minute tutorial); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4751 in perlunitut.pod
 Lookups: Internal format; Text: Internal format; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 4245 in perlunitut.pod

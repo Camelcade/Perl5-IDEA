@@ -130,11 +130,9 @@ Lookups: (1) (2) ...; Text: (1) (2) ...; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83894 in perlre.pod
 Lookups: (; Text: Metacharacters; Tail: ((); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10814 in perlre.pod
-Lookups: (<NAME>) ('NAME'); Text: (<NAME>) ('NAME'); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84018 in perlre.pod
 Lookups: (?!); Text: (*negative_lookahead:pattern); Tail: ((?!)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 67810 in perlre.pod
-Lookups: (?!S), (?<!S); Text: (?!S), (?<!S); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?!S), (?E<lt>!S), (?!S), (?<!S); Text: (?!S), (?<!S); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121295 in perlre.pod
 Lookups: (?!pattern); Text: (?!pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67724 in perlre.pod
@@ -152,9 +150,9 @@ Lookups: (?(); Text: (?(condition)yes-pattern|no-pattern); Tail: ((?()); Type: I
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 82997 in perlre.pod
 Lookups: (?(condition)yes-pattern); Text: (?(condition)yes-pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83006 in perlre.pod
-Lookups: (?(condition)yes-pattern|no-pattern); Text: (?(condition)yes-pattern|no-pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?(condition)yes-patternE<verbar>no-pattern), (?(condition)yes-pattern|no-pattern); Text: (?(condition)yes-pattern|no-pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121626 in perlre.pod
-Lookups: (?(condition)yes-pattern|no-pattern); Text: (?(condition)yes-pattern|no-pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?(condition)yes-patternE<verbar>no-pattern), (?(condition)yes-pattern|no-pattern); Text: (?(condition)yes-pattern|no-pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82951 in perlre.pod
 Lookups: (?); Text: (?^alupimnsx); Tail: ((?)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 59908 in perlre.pod
@@ -174,29 +172,19 @@ Lookups: (?:); Text: (?:pattern); Tail: ((?:)); Type: Index; Icon: /perl5languag
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 62935 in perlre.pod
 Lookups: (?:pattern); Text: (?:pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 62914 in perlre.pod
-Lookups: (?<!); Text: (*negative_lookbehind:pattern); Tail: ((?<!)); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 69856 in perlre.pod
-Lookups: (?<!pattern); Text: (?<!pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?<!pattern), (?E<lt>!pattern); Text: (?<!pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69768 in perlre.pod
-Lookups: (?<=); Text: (*positive_lookbehind:pattern); Tail: ((?<=)); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 68638 in perlre.pod
-Lookups: (?<=pattern); Text: (?<=pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68537 in perlre.pod
-Lookups: (?<NAME>); Text: (?'NAME'pattern); Tail: ((?<NAME>)); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 70307 in perlre.pod
-Lookups: (?<NAME>pattern); Text: (?<NAME>pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70250 in perlre.pod
 Lookups: (?=); Text: (*positive_lookahead:pattern); Tail: ((?=)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 67373 in perlre.pod
-Lookups: (?=...) (?!...) (?<=...) (?<!...); Text: (?=...) (?!...) (?<=...) (?<!...); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?=...) (?!...) (?E<lt>=...) (?E<lt>!...), (?=...) (?!...) (?<=...) (?<!...); Text: (?=...) (?!...) (?<=...) (?<!...); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84166 in perlre.pod
-Lookups: (?=S), (?<=S); Text: (?=S), (?<=S); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?=S), (?E<lt>=S), (?=S), (?<=S); Text: (?=S), (?<=S); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121082 in perlre.pod
 Lookups: (?=pattern); Text: (?=pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67287 in perlre.pod
-Lookups: (?>S); Text: (?>S); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121012 in perlre.pod
-Lookups: (?>pattern); Text: (?>pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?>pattern), (?E<gt>pattern); Text: (*atomic:pattern); Tail: ((?>pattern)); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 87247 in perlre.pod
+Lookups: (?>pattern), (?E<gt>pattern); Text: (?>pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 87190 in perlre.pod
 Lookups: (??{ EXPR }), (?PARNO); Text: (??{ EXPR }), (?PARNO); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121450 in perlre.pod
@@ -204,18 +192,32 @@ Lookups: (??{ code }); Text: (??{ code }); Tail: null; Type: List Item; Icon: /p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76732 in perlre.pod
 Lookups: (??{}); Text: (??{ code }); Tail: ((??{})); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 76754 in perlre.pod
-Lookups: (?E<gt>pattern); Text: (*atomic:pattern); Tail: ((?E<gt>pattern)); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 87247 in perlre.pod
-Lookups: (?P<NAME>pattern); Text: (?P<NAME>pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: (?E<gt>S), (?>S); Text: (?>S); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 121012 in perlre.pod
+Lookups: (?E<lt>!), (?<!); Text: (*negative_lookbehind:pattern); Tail: ((?<!)); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 69856 in perlre.pod
+Lookups: (?E<lt>=), (?<=); Text: (*positive_lookbehind:pattern); Tail: ((?<=)); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 68638 in perlre.pod
+Lookups: (?E<lt>=pattern), (?<=pattern); Text: (?<=pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 68537 in perlre.pod
+Lookups: (?E<lt>NAMEE<gt>), (?<NAME>); Text: (?'NAME'pattern); Tail: ((?<NAME>)); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 70307 in perlre.pod
+Lookups: (?E<lt>NAMEE<gt>pattern), (?<NAME>pattern); Text: (?<NAME>pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70250 in perlre.pod
+Lookups: (?E<verbar>), (?|); Text: (?|pattern); Tail: ((?|)); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 65149 in perlre.pod
+Lookups: (?E<verbar>pattern), (?|pattern); Text: (?|pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65128 in perlre.pod
+Lookups: (?P<NAME>pattern), (?PE<lt>NAMEE<gt>pattern); Text: (?P<NAME>pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125564 in perlre.pod
 Lookups: (?P=NAME); Text: (?P=NAME); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125674 in perlre.pod
-Lookups: (?P>NAME); Text: (?P>NAME); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125770 in perlre.pod
 Lookups: (?PARNO) (?-PARNO) (?+PARNO) (?R) (?0); Text: (?PARNO) (?-PARNO) (?+PARNO) (?R) (?0); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 78849 in perlre.pod
 Lookups: (?PARNO); Text: (?PARNO) (?-PARNO) (?+PARNO) (?R) (?0); Tail: ((?PARNO)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 78918 in perlre.pod
+Lookups: (?PE<gt>NAME), (?P>NAME); Text: (?P>NAME); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 125770 in perlre.pod
 Lookups: (?R); Text: (?PARNO) (?-PARNO) (?+PARNO) (?R) (?0); Tail: ((?R)); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 78938 in perlre.pod
 Lookups: (?[ ]); Text: (?[ ]); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -238,12 +240,10 @@ Lookups: (?{ code }); Text: (?{ code }); Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 72393 in perlre.pod
 Lookups: (?{}); Text: (?{ code }); Tail: ((?{})); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 72414 in perlre.pod
-Lookups: (?|); Text: (?|pattern); Tail: ((?|)); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 65149 in perlre.pod
-Lookups: (?|pattern); Text: (?|pattern); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 65128 in perlre.pod
 Lookups: (DEFINE); Text: (DEFINE); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85245 in perlre.pod
+Lookups: (E<lt>NAMEE<gt>) ('NAME'), (<NAME>) ('NAME'); Text: (<NAME>) ('NAME'); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84018 in perlre.pod
 Lookups: (R&NAME); Text: (R&NAME); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 84905 in perlre.pod
 Lookups: (R); Text: (R); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -266,54 +266,32 @@ Lookups: .; Text: Metacharacters; Tail: (.); Type: Index; Icon: /perl5language.p
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10799 in perlre.pod
 Lookups: .; Text: To simplify multi-line substitutions, the "." character never matches a newline unless you use the /s|/s modifier, which in effect tells ...; Tail: (.); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14970 in perlre.pod
-Lookups: /a (and /aa); Text: /a (and /aa); Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: /a (and /aa), E<sol>a (and E<sol>aa); Text: /a (and /aa); Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 32102 in perlre.pod
-Lookups: /a; Text: This modifier may be specified to be the default by use re '/a' or use re '/aa'.  If you do so, you may actually have occasion to use the...; Tail: (/a); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /a, E<sol>a; Text: This modifier may be specified to be the default by use re '/a' or use re '/aa'.  If you do so, you may actually have occasion to use the...; Tail: (/a); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 35106 in perlre.pod
-Lookups: /a; Text: a, d, l, and u; Tail: (/a); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /a, E<sol>a; Text: a, d, l, and u; Tail: (/a); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18257 in perlre.pod
-Lookups: /aa; Text: This modifier may be specified to be the default by use re '/a' or use re '/aa'.  If you do so, you may actually have occasion to use the...; Tail: (/aa); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /aa, E<sol>aa; Text: This modifier may be specified to be the default by use re '/a' or use re '/aa'.  If you do so, you may actually have occasion to use the...; Tail: (/aa); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 35112 in perlre.pod
-Lookups: /d; Text: /d; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: /d, E<sol>d; Text: /d; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 30370 in perlre.pod
-Lookups: /d; Text: a, d, l, and u; Tail: (/d); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /d, E<sol>d; Text: a, d, l, and u; Tail: (/d); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18263 in perlre.pod
-Lookups: /i; Text: i; Tail: (/i); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 16143 in perlre.pod
-Lookups: /l; Text: /l; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 26606 in perlre.pod
-Lookups: /l; Text: This modifier may be specified to be the default by use locale, but see /Which character set modifier is in effect?.; Tail: (/l); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 28247 in perlre.pod
-Lookups: /l; Text: a, d, l, and u; Tail: (/l); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18269 in perlre.pod
-Lookups: /m; Text: A word boundary (\b) is a spot between two characters that has a \w on one side of it and a \W on the other side of it (in either order),...; Tail: (/m); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /m, E<sol>m; Text: A word boundary (\b) is a spot between two characters that has a \w on one side of it and a \W on the other side of it (in either order),...; Tail: (/m); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 46992 in perlre.pod
-Lookups: /m; Text: By default, the "^" character is guaranteed to match only the beginning of the string, the "$" character only the end (or before the newl...; Tail: (/m); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /m, E<sol>m; Text: By default, the "^" character is guaranteed to match only the beginning of the string, the "$" character only the end (or before the newl...; Tail: (/m); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14749 in perlre.pod
-Lookups: /m; Text: m; Tail: (/m); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /m, E<sol>m; Text: m; Tail: (/m); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15370 in perlre.pod
-Lookups: /n; Text: n; Tail: (/n); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18444 in perlre.pod
-Lookups: /p; Text: As another workaround for this problem, Perl 5.10.0 introduced ${^PREMATCH}, ${^MATCH} and ${^POSTMATCH}, which are equivalent to $`, $& ...; Tail: (/p); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /p, E<sol>p; Text: As another workaround for this problem, Perl 5.10.0 introduced ${^PREMATCH}, ${^MATCH} and ${^POSTMATCH}, which are equivalent to $`, $& ...; Tail: (/p); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 56863 in perlre.pod
-Lookups: /p; Text: p; Tail: (/p); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /p, E<sol>p; Text: p; Tail: (/p); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 17843 in perlre.pod
-Lookups: /s; Text: To simplify multi-line substitutions, the "." character never matches a newline unless you use the /s|/s modifier, which in effect tells ...; Tail: (/s); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /s, E<sol>s; Text: To simplify multi-line substitutions, the "." character never matches a newline unless you use the /s|/s modifier, which in effect tells ...; Tail: (/s); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14975 in perlre.pod
-Lookups: /s; Text: s; Tail: (/s); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: /s, E<sol>s; Text: s; Tail: (/s); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 15701 in perlre.pod
-Lookups: /u; Text: /u; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 28254 in perlre.pod
-Lookups: /u; Text: This modifier may be specified to be the default by use feature 'unicode_strings, use locale ':not_characters', or use 5.012|perlfunc/use...; Tail: (/u); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30363 in perlre.pod
-Lookups: /u; Text: a, d, l, and u; Tail: (/u); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18275 in perlre.pod
-Lookups: /x and  /xx; Text: /x and  /xx; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 20418 in perlre.pod
-Lookups: /x; Text: Note that anything inside a \Q...\E stays unaffected by /x.  And note that /x doesn't affect space interpretation within a single multi-c...; Tail: (/x); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23422 in perlre.pod
-Lookups: /x; Text: x and xx; Tail: (/x); Type: Index; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 17712 in perlre.pod
 Lookups: ?; Text: By default, a quantified subpattern is "greedy", that is, it will match as many times as possible (given a particular starting location) ...; Tail: (?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 39477 in perlre.pod
 Lookups: ?; Text: Quantifiers are used when a particular portion of a pattern needs to match a certain number (or numbers) of times.  If there isn't a quan...; Tail: (?); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -344,6 +322,28 @@ Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /p
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 89 in perlre.pod
 Lookups: Details on some modifiers; Text: Details on some modifiers; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 20298 in perlre.pod
+Lookups: E<sol>i, /i; Text: i; Tail: (/i); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 16143 in perlre.pod
+Lookups: E<sol>l, /l; Text: /l; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 26606 in perlre.pod
+Lookups: E<sol>l, /l; Text: This modifier may be specified to be the default by use locale, but see /Which character set modifier is in effect?.; Tail: (/l); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 28247 in perlre.pod
+Lookups: E<sol>l, /l; Text: a, d, l, and u; Tail: (/l); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18269 in perlre.pod
+Lookups: E<sol>n, /n; Text: n; Tail: (/n); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18444 in perlre.pod
+Lookups: E<sol>u, /u; Text: /u; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 28254 in perlre.pod
+Lookups: E<sol>u, /u; Text: This modifier may be specified to be the default by use feature 'unicode_strings, use locale ':not_characters', or use 5.012|perlfunc/use...; Tail: (/u); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 30363 in perlre.pod
+Lookups: E<sol>u, /u; Text: a, d, l, and u; Tail: (/u); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 18275 in perlre.pod
+Lookups: E<sol>x and  E<sol>xx, /x and  /xx; Text: /x and  /xx; Tail: null; Type: 4th Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead4SectionImpl(Perl5 POD: HEAD_4_SECTION) at 20418 in perlre.pod
+Lookups: E<sol>x, /x; Text: Note that anything inside a \Q...\E stays unaffected by /x.  And note that /x doesn't affect space interpretation within a single multi-c...; Tail: (/x); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23422 in perlre.pod
+Lookups: E<sol>x, /x; Text: x and xx; Tail: (/x); Type: Index; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 17712 in perlre.pod
 Lookups: Embedded Code Execution Frequency; Text: Embedded Code Execution Frequency; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 124008 in perlre.pod
 Lookups: Escape sequences; Text: Escape sequences; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
@@ -366,7 +366,7 @@ Lookups: Other Modifiers; Text: Other Modifiers; Tail: null; Type: List Item; Ic
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19145 in perlre.pod
 Lookups: Overview; Text: Overview; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15000 in perlre.pod
-Lookups: PCRE/Python Support; Text: PCRE/Python Support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: PCREE<sol>Python Support, PCRE/Python Support; Text: PCRE/Python Support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 125328 in perlre.pod
 Lookups: Quantifiers; Text: Quantifiers; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 37546 in perlre.pod
@@ -394,7 +394,7 @@ Lookups: S{min,max}; Text: S{min,max}; Tail: null; Type: List Item; Icon: /perl5
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120659 in perlre.pod
 Lookups: S{min,max}?; Text: S{min,max}?; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120732 in perlre.pod
-Lookups: S|T; Text: S|T; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: S|T, SE<verbar>T; Text: S|T; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120379 in perlre.pod
 Lookups: The Basics; Text: The Basics; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 936 in perlre.pod
@@ -462,9 +462,9 @@ Lookups: \k'NAME'; Text: \k'NAME'; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71846 in perlre.pod
 Lookups: \k; Text: In addition, Perl defines the following:; Tail: (\k); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 42596 in perlre.pod
-Lookups: \k<NAME>; Text: \k<NAME>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: \kE<lt>NAMEE<gt>, \k<NAME>; Text: \k<NAME>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 71823 in perlre.pod
-Lookups: \k<name>; Text: The grouping construct ( ... ) creates capture groups (also referred to as capture buffers). To refer to the current contents of a group ...; Tail: (\k<name>); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \kE<lt>nameE<gt>, \k<name>; Text: The grouping construct ( ... ) creates capture groups (also referred to as capture buffers). To refer to the current contents of a group ...; Tail: (\k<name>); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 49191 in perlre.pod
 Lookups: \z; Text: A word boundary (\b) is a spot between two characters that has a \w on one side of it and a \W on the other side of it (in either order),...; Tail: (\z); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 46986 in perlre.pod
@@ -474,7 +474,7 @@ Lookups: ^; Text: By default, the "^" character is guaranteed to match only the 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 14739 in perlre.pod
 Lookups: ^; Text: Metacharacters; Tail: (^); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10794 in perlre.pod
-Lookups: a lookahead/lookbehind/evaluate zero-width assertion;; Text: a lookahead/lookbehind/evaluate zero-width assertion;; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: a lookahead/lookbehind/evaluate zero-width assertion;, a lookaheadE<sol>lookbehindE<sol>evaluate zero-width assertion;; Text: a lookahead/lookbehind/evaluate zero-width assertion;; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83338 in perlre.pod
 Lookups: a name in angle brackets or single quotes; Text: a name in angle brackets or single quotes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 83399 in perlre.pod
@@ -662,5 +662,5 @@ Lookups: {n}; Text: Quantifiers are used when a particular portion of a pattern 
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 37853 in perlre.pod
 Lookups: {n}?; Text: By default, a quantified subpattern is "greedy", that is, it will match as many times as possible (given a particular starting location) ...; Tail: ({n}?); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 39500 in perlre.pod
-Lookups: |; Text: Metacharacters; Tail: (|); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: |, E<verbar>; Text: Metacharacters; Tail: (|); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 10809 in perlre.pod

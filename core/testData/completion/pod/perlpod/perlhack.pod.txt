@@ -38,7 +38,7 @@ Lookups:  PERL_TEST_NUMCONVERTS; Text:  PERL_TEST_NUMCONVERTS; Tail: null; Type:
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33006 in perlhack.pod
 Lookups:  PERL_TEST_Net_Ping; Text:  PERL_TEST_Net_Ping; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32736 in perlhack.pod
-Lookups:  Porting/pumpkin.pod; Text:  Porting/pumpkin.pod; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  PortingE<sol>pumpkin.pod,  Porting/pumpkin.pod; Text:  Porting/pumpkin.pod; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38600 in perlhack.pod
 Lookups:  Send your change to perlbug; Text:  Send your change to perlbug; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1689 in perlhack.pod
@@ -66,9 +66,9 @@ Lookups:  perlsource; Text:  perlsource; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36954 in perlhack.pod
 Lookups:  perlxstut and perlxs; Text:  perlxstut and perlxs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38114 in perlhack.pod
-Lookups:  t/base, t/comp and t/opbasic; Text:  t/base, t/comp and t/opbasic; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  t/base, t/comp and t/opbasic,  tE<sol>base, tE<sol>comp and tE<sol>opbasic; Text:  t/base, t/comp and t/opbasic; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24169 in perlhack.pod
-Lookups:  t/cmd, t/run, t/io and t/op; Text:  t/cmd, t/run, t/io and t/op; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  tE<sol>cmd, tE<sol>run, tE<sol>io and tE<sol>op,  t/cmd, t/run, t/io and t/op; Text:  t/cmd, t/run, t/io and t/op; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24553 in perlhack.pod
 Lookups:  test-notty test_notty; Text:  test-notty test_notty; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29434 in perlhack.pod
@@ -180,7 +180,7 @@ Lookups: Test suite; Text: Test suite; Tail: null; Type: 3d Heading; Icon: /perl
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14527 in perlhack.pod
 Lookups: Updating perldelta; Text: Updating perldelta; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17256 in perlhack.pod
-Lookups: Using t/harness for testing; Text: Using t/harness for testing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Using tE<sol>harness for testing, Using t/harness for testing; Text: Using t/harness for testing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30670 in perlhack.pod
 Lookups: WHAT NEXT?; Text: WHAT NEXT?; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 39544 in perlhack.pod

@@ -20,7 +20,7 @@ Lookups: Documentation; Text: Documentation; Tail: null; Type: 1st Heading; Icon
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2246 in perl5143delta.pod
 Lookups: FreeBSD; Text: FreeBSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2817 in perl5143delta.pod
-Lookups: GNU/Hurd; Text: GNU/Hurd; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: GNUE<sol>Hurd, GNU/Hurd; Text: GNU/Hurd; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3457 in perl5143delta.pod
 Lookups: HP-UX; Text: HP-UX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3004 in perl5143delta.pod

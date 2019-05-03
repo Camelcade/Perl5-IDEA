@@ -42,13 +42,13 @@ Lookups: Generic Improvements; Text: Generic Improvements; Tail: null; Type: 2nd
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 56093 in perl58delta.pod
 Lookups: HISTORY; Text: HISTORY; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 115097 in perl58delta.pod
-Lookups: HP-UX lib/posix Subtest 9 Fails When LP64-Configured; Text: HP-UX lib/posix Subtest 9 Fails When LP64-Configured; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: HP-UX libE<sol>posix Subtest 9 Fails When LP64-Configured, HP-UX lib/posix Subtest 9 Fails When LP64-Configured; Text: HP-UX lib/posix Subtest 9 Fails When LP64-Configured; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 103653 in perl58delta.pod
 Lookups: Highlights In 5.8.0; Text: Highlights In 5.8.0; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 659 in perl58delta.pod
 Lookups: IEEE-format Floating Point Default on OpenVMS Alpha; Text: IEEE-format Floating Point Default on OpenVMS Alpha; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3480 in perl58delta.pod
-Lookups: IRIX fails ext/List/Util/t/shuffle.t or Digest::MD5; Text: IRIX fails ext/List/Util/t/shuffle.t or Digest::MD5; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: IRIX fails ext/List/Util/t/shuffle.t or Digest::MD5, IRIX fails extE<sol>ListE<sol>UtilE<sol>tE<sol>shuffle.t or Digest::MD5; Text: IRIX fails ext/List/Util/t/shuffle.t or Digest::MD5; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 103140 in perl58delta.pod
 Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 932 in perl58delta.pod
@@ -56,9 +56,9 @@ Lookups: Installation and Configuration Improvements; Text: Installation and Con
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56041 in perl58delta.pod
 Lookups: Known Problems; Text: Known Problems; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 91120 in perl58delta.pod
-Lookups: Linux With Sfio Fails op/misc Test 48; Text: Linux With Sfio Fails op/misc Test 48; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Linux With Sfio Fails opE<sol>misc Test 48, Linux With Sfio Fails op/misc Test 48; Text: Linux With Sfio Fails op/misc Test 48; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 104148 in perl58delta.pod
-Lookups: Linux with glibc 2.2.5 fails t/op/int subtest #6 with -Duse64bitint; Text: Linux with glibc 2.2.5 fails t/op/int subtest #6 with -Duse64bitint; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Linux with glibc 2.2.5 fails t/op/int subtest #6 with -Duse64bitint, Linux with glibc 2.2.5 fails tE<sol>opE<sol>int subtest #6 with -Duse64bitint; Text: Linux with glibc 2.2.5 fails t/op/int subtest #6 with -Duse64bitint; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 103945 in perl58delta.pod
 Lookups: Localising Tied Arrays and Hashes Is Broken; Text: Localising Tied Arrays and Hashes Is Broken; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 91334 in perl58delta.pod
@@ -88,7 +88,7 @@ Lookups: New Unicode Semantics (no more use utf8, almost); Text: New Unicode Sem
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3827 in perl58delta.pod
 Lookups: New or Changed Diagnostics; Text: New or Changed Diagnostics; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 81961 in perl58delta.pod
-Lookups: OS/2 Test Failures; Text: OS/2 Test Failures; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: OSE<sol>2 Test Failures, OS/2 Test Failures; Text: OS/2 Test Failures; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 106206 in perl58delta.pod
 Lookups: PDL failing some tests; Text: PDL failing some tests; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 93158 in perl58delta.pod
@@ -134,11 +134,11 @@ Lookups: Term::ReadKey not working on Win32; Text: Term::ReadKey not working on 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 108985 in perl58delta.pod
 Lookups: The Compiler Suite Is Still Very Experimental; Text: The Compiler Suite Is Still Very Experimental; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 91143 in perl58delta.pod
-Lookups: Tied/Magical Array/Hash Elements Do Not Autovivify; Text: Tied/Magical Array/Hash Elements Do Not Autovivify; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: TiedE<sol>Magical ArrayE<sol>Hash Elements Do Not Autovivify, Tied/Magical Array/Hash Elements Do Not Autovivify; Text: Tied/Magical Array/Hash Elements Do Not Autovivify; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 96740 in perl58delta.pod
 Lookups: Timing problems; Text: Timing problems; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 96371 in perl58delta.pod
-Lookups: UNICOS/mk; Text: UNICOS/mk; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: UNICOS/mk, UNICOSE<sol>mk; Text: UNICOS/mk; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 109062 in perl58delta.pod
 Lookups: UTS; Text: UTS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 110300 in perl58delta.pod
@@ -148,7 +148,7 @@ Lookups: Unicode Overhaul; Text: Unicode Overhaul; Tail: null; Type: 2nd Heading
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11681 in perl58delta.pod
 Lookups: Unicode Support on EBCDIC Still Spotty; Text: Unicode Support on EBCDIC Still Spotty; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 112782 in perl58delta.pod
-Lookups: Unicode in package/class and subroutine names does not work; Text: Unicode in package/class and subroutine names does not work; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Unicode in packageE<sol>class and subroutine names does not work, Unicode in package/class and subroutine names does not work; Text: Unicode in package/class and subroutine names does not work; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 97150 in perl58delta.pod
 Lookups: Updated And Improved Modules and Pragmata; Text: Updated And Improved Modules and Pragmata; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39102 in perl58delta.pod
@@ -162,21 +162,21 @@ Lookups: Win32; Text: Win32; Tail: null; Type: 2nd Heading; Icon: /perl5language
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 110861 in perl58delta.pod
 Lookups: XML::Parser not working; Text: XML::Parser not working; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 110974 in perl58delta.pod
-Lookups: ext/threads/t/libc; Text: ext/threads/t/libc; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: extE<sol>threadsE<sol>tE<sol>libc, ext/threads/t/libc; Text: ext/threads/t/libc; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 94401 in perl58delta.pod
 Lookups: glob() now returns filenames in alphabetical order; Text: glob() now returns filenames in alphabetical order; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6547 in perl58delta.pod
 Lookups: ithreads; Text: ithreads; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16135 in perl58delta.pod
-Lookups: lib/ftmp-security tests warn 'system possibly insecure'; Text: lib/ftmp-security tests warn 'system possibly insecure'; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: lib/ftmp-security tests warn 'system possibly insecure', libE<sol>ftmp-security tests warn 'system possibly insecure'; Text: lib/ftmp-security tests warn 'system possibly insecure'; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 92952 in perl58delta.pod
-Lookups: libwww-perl (LWP) fails base/date #51; Text: libwww-perl (LWP) fails base/date #51; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: libwww-perl (LWP) fails base/date #51, libwww-perl (LWP) fails baseE<sol>date #51; Text: libwww-perl (LWP) fails base/date #51; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 93080 in perl58delta.pod
 Lookups: mod_perl 1.26 Doesn't Build With Threaded Perl; Text: mod_perl 1.26 Doesn't Build With Threaded Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 92867 in perl58delta.pod
-Lookups: op/sprintf tests 91, 129, and 130; Text: op/sprintf tests 91, 129, and 130; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: opE<sol>sprintf tests 91, 129, and 130, op/sprintf tests 91, 129, and 130; Text: op/sprintf tests 91, 129, and 130; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 106767 in perl58delta.pod
-Lookups: pack/unpack D/F recycled; Text: pack/unpack D/F recycled; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: packE<sol>unpack DE<sol>F recycled, pack/unpack D/F recycled; Text: pack/unpack D/F recycled; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6261 in perl58delta.pod
-Lookups: z/OS (OS/390); Text: z/OS (OS/390); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: zE<sol>OS (OSE<sol>390), z/OS (OS/390); Text: z/OS (OS/390); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 111038 in perl58delta.pod

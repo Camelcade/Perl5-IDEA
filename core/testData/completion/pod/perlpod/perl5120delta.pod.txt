@@ -1,7 +1,5 @@
 Lookups: $, flexibility; Text: $, flexibility; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7633 in perl5120delta.pod
-Lookups: // in when clauses; Text: // in when clauses; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7696 in perl5120delta.pod
 Lookups: 32-bit limit on substr arguments removed; Text: 32-bit limit on substr arguments removed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8305 in perl5120delta.pod
 Lookups: @INC reorganization; Text: @INC reorganization; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -98,10 +96,12 @@ Lookups: Discontinued Platforms; Text: Discontinued Platforms; Tail: null; Type:
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 76267 in perl5120delta.pod
 Lookups: Documentation; Text: Documentation; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 41226 in perl5120delta.pod
-Lookups: Domain/OS; Text: Domain/OS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: DomainE<sol>OS, Domain/OS; Text: Domain/OS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 76305 in perl5120delta.pod
 Lookups: DragonFly BSD; Text: DragonFly BSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77310 in perl5120delta.pod
+Lookups: E<sol>E<sol> in when clauses, // in when clauses; Text: // in when clauses; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7696 in perl5120delta.pod
 Lookups: Enabling warnings from your shell environment; Text: Enabling warnings from your shell environment; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7763 in perl5120delta.pod
 Lookups: Encode; Text: Encode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -356,7 +356,7 @@ Lookups: Time::Local; Text: Time::Local; Tail: null; Type: List Item; Icon: /per
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39425 in perl5120delta.pod
 Lookups: Time::Piece; Text: Time::Piece; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39489 in perl5120delta.pod
-Lookups: UNIVERSAL->import(); Text: UNIVERSAL->import(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: UNIVERSAL->import(), UNIVERSAL-E<gt>import(); Text: UNIVERSAL->import(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20012 in perl5120delta.pod
 Lookups: Unicode improvements; Text: Unicode improvements; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2309 in perl5120delta.pod

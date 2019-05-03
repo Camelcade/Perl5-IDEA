@@ -70,9 +70,9 @@ Lookups: Test::Harness::Straps; Text: Test::Harness::Straps; Tail: null; Type: L
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6126 in perlexperiment.pod
 Lookups: The "const" attribute; Text: The "const" attribute; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1847 in perlexperiment.pod
-Lookups: The <:pop> IO pseudolayer; Text: The <:pop> IO pseudolayer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: The E<lt>:popE<gt> IO pseudolayer, The <:pop> IO pseudolayer; Text: The <:pop> IO pseudolayer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4968 in perlexperiment.pod
-Lookups: The <:win32> IO pseudolayer; Text: The <:win32> IO pseudolayer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: The E<lt>:win32E<gt> IO pseudolayer, The <:win32> IO pseudolayer; Text: The <:win32> IO pseudolayer; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2290 in perlexperiment.pod
 Lookups: The \N regex character class; Text: The \N regex character class; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4172 in perlexperiment.pod

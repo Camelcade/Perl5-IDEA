@@ -202,7 +202,7 @@ Lookups: Modifications; Text: Modifications; Tail: null; Type: 2nd Heading; Icon
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64038 in perlos2.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 178 in perlos2.pod
-Lookups: OS/2 .INF file; Text: OS/2 .INF file; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: OS/2 .INF file, OSE<sol>2 .INF file; Text: OS/2 .INF file; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23234 in perlos2.pod
 Lookups: OS2::BootDrive(); Text: OS2::BootDrive(); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57998 in perlos2.pod
@@ -266,7 +266,7 @@ Lookups: Priorities; Text: Priorities; Tail: null; Type: 2nd Heading; Icon: /per
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81384 in perlos2.pod
 Lookups: Problems with tr or sed; Text: Problems with tr or sed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51001 in perlos2.pod
-Lookups: Process terminated by SIGTERM/SIGINT; Text: Process terminated by SIGTERM/SIGINT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Process terminated by SIGTERME<sol>SIGINT, Process terminated by SIGTERM/SIGINT; Text: Process terminated by SIGTERM/SIGINT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 31928 in perlos2.pod
 Lookups: RSX; Text: RSX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6796 in perlos2.pod
@@ -280,17 +280,17 @@ Lookups: SaveWinError(expr); Text: SaveWinError(expr); Tail: null; Type: List It
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 69044 in perlos2.pod
 Lookups: Segfault in make; Text: Segfault in make; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51297 in perlos2.pod
-Lookups: Some / became \ in pdksh.; Text: Some / became \ in pdksh.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Some / became \ in pdksh., Some E<sol> became \ in pdksh.; Text: Some / became \ in pdksh.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 50810 in perlos2.pod
 Lookups: Some problem (forget which ;-); Text: Some problem (forget which ;-); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51080 in perlos2.pod
 Lookups: Source for Perl documentation; Text: Source for Perl documentation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21533 in perlos2.pod
-Lookups: Specific (mis)features of OS/2 port; Text: Specific (mis)features of OS/2 port; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Specific (mis)features of OSE<sol>2 port, Specific (mis)features of OS/2 port; Text: Specific (mis)features of OS/2 port; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 51489 in perlos2.pod
-Lookups: Starting OS/2 (and DOS) programs under Perl; Text: Starting OS/2 (and DOS) programs under Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Starting OSE<sol>2 (and DOS) programs under Perl, Starting OS/2 (and DOS) programs under Perl; Text: Starting OS/2 (and DOS) programs under Perl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10145 in perlos2.pod
-Lookups: Starting Perl programs under OS/2 (and DOS and...); Text: Starting Perl programs under OS/2 (and DOS and...); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Starting Perl programs under OSE<sol>2 (and DOS and...), Starting Perl programs under OS/2 (and DOS and...); Text: Starting Perl programs under OS/2 (and DOS and...); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8508 in perlos2.pod
 Lookups: TMP or TEMP; Text: TMP or TEMP; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80694 in perlos2.pod
@@ -308,7 +308,7 @@ Lookups: Threads; Text: Threads; Tail: null; Type: 2nd Heading; Icon: /perl5lang
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 91361 in perlos2.pod
 Lookups: Tools to compile Perl modules; Text: Tools to compile Perl modules; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 21060 in perlos2.pod
-Lookups: Treating errors reported by OS/2 API; Text: Treating errors reported by OS/2 API; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Treating errors reported by OS/2 API, Treating errors reported by OSE<sol>2 API; Text: Treating errors reported by OS/2 API; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 66801 in perlos2.pod
 Lookups: USE_PERL_FLOCK; Text: USE_PERL_FLOCK; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 80484 in perlos2.pod
@@ -334,12 +334,12 @@ Lookups: flock; Text: flock; Tail: null; Type: List Item; Icon: /perl5language.p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64705 in perlos2.pod
 Lookups: mkdir, rmdir; Text: mkdir, rmdir; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 64571 in perlos2.pod
-Lookups: op/fs.t; Text: op/fs.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32772 in perlos2.pod
-Lookups: op/sprintf test failure; Text: op/sprintf test failure; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51382 in perlos2.pod
-Lookups: op/stat.t; Text: op/stat.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: op/stat.t, opE<sol>stat.t; Text: op/stat.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33076 in perlos2.pod
+Lookups: opE<sol>fs.t, op/fs.t; Text: op/fs.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32772 in perlos2.pod
+Lookups: opE<sol>sprintf test failure, op/sprintf test failure; Text: op/sprintf test failure; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51382 in perlos2.pod
 Lookups: os2.c; Text: os2.c; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 91819 in perlos2.pod
 Lookups: pdksh; Text: pdksh; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

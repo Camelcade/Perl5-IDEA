@@ -18,7 +18,7 @@ Lookups: Basic semaphores; Text: Basic semaphores; Tail: null; Type: 2nd Heading
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 24755 in perlthrtut.pod
 Lookups: Bibliography; Text: Bibliography; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43556 in perlthrtut.pod
-Lookups: Boss/Worker; Text: Boss/Worker; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: BossE<sol>Worker, Boss/Worker; Text: Boss/Worker; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1940 in perlthrtut.pod
 Lookups: Conclusion; Text: Conclusion; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 42862 in perlthrtut.pod

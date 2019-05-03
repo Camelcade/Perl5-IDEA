@@ -62,7 +62,7 @@ Lookups: Speed; Text: Speed; Tail: null; Type: 2nd Heading; Icon: /perl5language
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 81717 in perlunicode.pod
 Lookups: The "Unicode Bug"; Text: The "Unicode Bug"; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 69583 in perlunicode.pod
-Lookups: UTF-16|/Unicode Encodings scripts autodetected; Text: UTF-16|/Unicode Encodings scripts autodetected; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: UTF-16|/Unicode Encodings scripts autodetected, UTF-16E<verbar>E<sol>Unicode Encodings scripts autodetected; Text: UTF-16|/Unicode Encodings scripts autodetected; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3224 in perlunicode.pod
 Lookups: Unicode Character Properties; Text: Unicode Character Properties; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15083 in perlunicode.pod
@@ -86,17 +86,17 @@ Lookups: You must convert your non-ASCII, non-UTF-8 Perl scripts to be UTF-8.; T
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2457 in perlunicode.pod
 Lookups: [10] Perl has \X and \b{gcb} but we don't have a "Grapheme Cluster Mode".; Text: [10] Perl has \X and \b{gcb} but we don't have a "Grapheme Cluster Mode".; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48025 in perlunicode.pod
-Lookups: [11] see UAX#29 "Unicode Text Segmentation"|http://www.unicode.org/reports/tr29,; Text: [11] see UAX#29 "Unicode Text Segmentation"|http://www.unicode.org/reports/tr29,; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: [11] see UAX#29 "Unicode Text Segmentation"|http://www.unicode.org/reports/tr29,, [11] see UAX#29 "Unicode Text Segmentation"E<verbar>http:E<sol>E<sol>www.unicode.orgE<sol>reportsE<sol>tr29,; Text: [11] see UAX#29 "Unicode Text Segmentation"|http://www.unicode.org/reports/tr29,; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48112 in perlunicode.pod
-Lookups: [12] Perl has Unicode::Collate, but it isn't integrated with regular expressions.  See UTS#10 "Unicode Collation Algorithms"|http://www.u...; Text: [12] Perl has Unicode::Collate, but it isn't integrated with regular expressions.  See UTS#10 "Unicode Collation Algorithms"|http://www.u...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: [12] Perl has Unicode::Collate, but it isn't integrated with regular expressions.  See UTS#10 "Unicode Collation Algorithms"E<verbar>http:E<sol>E<sol>www.u..., [12] Perl has Unicode::Collate, but it isn't integrated with regular expressions.  See UTS#10 "Unicode Collation Algorithms"|http://www.u...; Text: [12] Perl has Unicode::Collate, but it isn't integrated with regular expressions.  See UTS#10 "Unicode Collation Algorithms"|http://www.u...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48949 in perlunicode.pod
-Lookups: [13] Perl has (?<=x) and (?=x), but lookaheads or lookbehinds should see outside of the target substring; Text: [13] Perl has (?<=x) and (?=x), but lookaheads or lookbehinds should see outside of the target substring; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: [13] Perl has (?E<lt>=x) and (?=x), but lookaheads or lookbehinds should see outside of the target substring, [13] Perl has (?<=x) and (?=x), but lookaheads or lookbehinds should see outside of the target substring; Text: [13] Perl has (?<=x) and (?=x), but lookaheads or lookbehinds should see outside of the target substring; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49124 in perlunicode.pod
 Lookups: [1] \N{U+...} and \x{...}; Text: [1] \N{U+...} and \x{...}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44173 in perlunicode.pod
 Lookups: [2] \p{...} \P{...}.  This requirement is for a minimal list of properties.  Perl supports these and all other Unicode character properti...; Text: [2] \p{...} \P{...}.  This requirement is for a minimal list of properties.  Perl supports these and all other Unicode character properti...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44212 in perlunicode.pod
-Lookups: [3] Perl has \d \D \s \S \w \W \X [:prop:] [:^prop:], plus all the properties specified by http://www.unicode.org/reports/tr18/#Compatibi...; Text: [3] Perl has \d \D \s \S \w \W \X [:prop:] [:^prop:], plus all the properties specified by http://www.unicode.org/reports/tr18/#Compatibi...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: [3] Perl has \d \D \s \S \w \W \X [:prop:] [:^prop:], plus all the properties specified by http://www.unicode.org/reports/tr18/#Compatibi..., [3] Perl has \d \D \s \S \w \W \X [:prop:] [:^prop:], plus all the properties specified by http:E<sol>E<sol>www.unicode.orgE<sol>reportsE<sol>tr18E<sol>#Compatibi...; Text: [3] Perl has \d \D \s \S \w \W \X [:prop:] [:^prop:], plus all the properties specified by http://www.unicode.org/reports/tr18/#Compatibi...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44427 in perlunicode.pod
 Lookups: [4]; Text: [4]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44675 in perlunicode.pod
@@ -106,9 +106,9 @@ Lookups: [6]; Text: [6]; Tail: null; Type: List Item; Icon: /perl5language.png; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45723 in perlunicode.pod
 Lookups: [7]; Text: [7]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46084 in perlunicode.pod
-Lookups: [8] UTF-8/UTF-EBDDIC used in Perl allows not only U+10000 to U+10FFFF but also beyond U+10FFFF; Text: [8] UTF-8/UTF-EBDDIC used in Perl allows not only U+10000 to U+10FFFF but also beyond U+10FFFF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: [8] UTF-8/UTF-EBDDIC used in Perl allows not only U+10000 to U+10FFFF but also beyond U+10FFFF, [8] UTF-8E<sol>UTF-EBDDIC used in Perl allows not only U+10000 to U+10FFFF but also beyond U+10FFFF; Text: [8] UTF-8/UTF-EBDDIC used in Perl allows not only U+10000 to U+10FFFF but also beyond U+10FFFF; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47075 in perlunicode.pod
-Lookups: [9] Unicode has rewritten this portion of UTS#18 to say that getting canonical equivalence (see UAX#15 "Unicode Normalization Forms"|http...; Text: [9] Unicode has rewritten this portion of UTS#18 to say that getting canonical equivalence (see UAX#15 "Unicode Normalization Forms"|http...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: [9] Unicode has rewritten this portion of UTS#18 to say that getting canonical equivalence (see UAX#15 "Unicode Normalization Forms"|http..., [9] Unicode has rewritten this portion of UTS#18 to say that getting canonical equivalence (see UAX#15 "Unicode Normalization Forms"E<verbar>http...; Text: [9] Unicode has rewritten this portion of UTS#18 to say that getting canonical equivalence (see UAX#15 "Unicode Normalization Forms"|http...; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47680 in perlunicode.pod
 Lookups: \p{ASCII}; Text: \p{ASCII}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32446 in perlunicode.pod
@@ -152,5 +152,5 @@ Lookups: \p{Word}; Text: \p{Word}; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37658 in perlunicode.pod
 Lookups: \p{XPosix...}; Text: \p{XPosix...}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37756 in perlunicode.pod
-Lookups: use utf8 still needed to enable UTF-8|/Unicode Encodings in scripts; Text: use utf8 still needed to enable UTF-8|/Unicode Encodings in scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: use utf8 still needed to enable UTF-8E<verbar>E<sol>Unicode Encodings in scripts, use utf8 still needed to enable UTF-8|/Unicode Encodings in scripts; Text: use utf8 still needed to enable UTF-8|/Unicode Encodings in scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2662 in perlunicode.pod

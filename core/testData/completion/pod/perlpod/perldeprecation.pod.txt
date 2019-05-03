@@ -44,11 +44,11 @@ Lookups: Perl 5.30; Text: Perl 5.30; Tail: null; Type: 2nd Heading; Icon: /perl5
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4484 in perldeprecation.pod
 Lookups: Perl 5.32; Text: Perl 5.32; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 460 in perldeprecation.pod
-Lookups: Reading/writing bytes from/to :utf8 handles.; Text: Reading/writing bytes from/to :utf8 handles.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ReadingE<sol>writing bytes fromE<sol>to :utf8 handles., Reading/writing bytes from/to :utf8 handles.; Text: Reading/writing bytes from/to :utf8 handles.; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 7608 in perldeprecation.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20351 in perldeprecation.pod
-Lookups: Setting $/ to a reference to a non-positive integer; Text: Setting $/ to a reference to a non-positive integer; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Setting $/ to a reference to a non-positive integer, Setting $E<sol> to a reference to a non-positive integer; Text: Setting $/ to a reference to a non-positive integer; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 12544 in perldeprecation.pod
 Lookups: The utilities c2ph and pstruct; Text: The utilities c2ph and pstruct; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 17644 in perldeprecation.pod

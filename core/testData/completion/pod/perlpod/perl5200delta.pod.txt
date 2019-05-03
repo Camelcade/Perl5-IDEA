@@ -34,7 +34,7 @@ Lookups: Cygwin; Text: Cygwin; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58676 in perl5200delta.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 75 in perl5200delta.pod
-Lookups: DG/UX; Text: DG/UX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: DGE<sol>UX, DG/UX; Text: DG/UX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 58336 in perl5200delta.pod
 Lookups: Data::Dumper's output may change; Text: Data::Dumper's output may change; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10837 in perl5200delta.pod
@@ -58,7 +58,7 @@ Lookups: FreeMiNT; Text: FreeMiNT; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 57090 in perl5200delta.pod
 Lookups: Functions PerlIO_vsprintf and PerlIO_sprintf have been removed; Text: Functions PerlIO_vsprintf and PerlIO_sprintf have been removed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13954 in perl5200delta.pod
-Lookups: GNU/Hurd; Text: GNU/Hurd; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: GNUE<sol>Hurd, GNU/Hurd; Text: GNU/Hurd; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 59143 in perl5200delta.pod
 Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7309 in perl5200delta.pod
@@ -124,7 +124,7 @@ Lookups: Platform-Specific Notes; Text: Platform-Specific Notes; Tail: null; Typ
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 58635 in perl5200delta.pod
 Lookups: Quote-like escape changes; Text: Quote-like escape changes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7511 in perl5200delta.pod
-Lookups: References to non-integers and non-positive integers in $/; Text: References to non-integers and non-positive integers in $/; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: References to non-integers and non-positive integers in $E<sol>, References to non-integers and non-positive integers in $/; Text: References to non-integers and non-positive integers in $/; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15172 in perl5200delta.pod
 Lookups: Regular Expressions; Text: Regular Expressions; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77473 in perl5200delta.pod
@@ -142,7 +142,7 @@ Lookups: Tainting happens under more circumstances; now conforms to documentatio
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7785 in perl5200delta.pod
 Lookups: Testing; Text: Testing; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 56045 in perl5200delta.pod
-Lookups: The /\C/ character class; Text: The /\C/ character class; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: The /\C/ character class, The E<sol>\CE<sol> character class; Text: The /\C/ character class; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14140 in perl5200delta.pod
 Lookups: Unicode 6.3 now supported; Text: Unicode 6.3 now supported; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3688 in perl5200delta.pod

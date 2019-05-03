@@ -68,12 +68,12 @@ Lookups: The EXPORT_XSUB_SYMBOLS: Keyword; Text: The EXPORT_XSUB_SYMBOLS: Keywor
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 55001 in perlxs.pod
 Lookups: The FALLBACK: Keyword; Text: The FALLBACK: Keyword; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48983 in perlxs.pod
-Lookups: The IN/OUTLIST/IN_OUTLIST/OUT/IN_OUT Keywords; Text: The IN/OUTLIST/IN_OUTLIST/OUT/IN_OUT Keywords; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31057 in perlxs.pod
 Lookups: The INCLUDE: Keyword; Text: The INCLUDE: Keyword; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 52141 in perlxs.pod
 Lookups: The INCLUDE_COMMAND: Keyword; Text: The INCLUDE_COMMAND: Keyword; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 53115 in perlxs.pod
+Lookups: The INE<sol>OUTLISTE<sol>IN_OUTLISTE<sol>OUTE<sol>IN_OUT Keywords, The IN/OUTLIST/IN_OUTLIST/OUT/IN_OUT Keywords; Text: The IN/OUTLIST/IN_OUTLIST/OUT/IN_OUT Keywords; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31057 in perlxs.pod
 Lookups: The INIT: Keyword; Text: The INIT: Keyword; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20097 in perlxs.pod
 Lookups: The INPUT: Keyword; Text: The INPUT: Keyword; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -126,7 +126,7 @@ Lookups: Variable-length Parameter Lists; Text: Variable-length Parameter Lists;
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34721 in perlxs.pod
 Lookups: XS VERSION; Text: XS VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 84064 in perlxs.pod
-Lookups: aMY_CXT/pMY_CXT; Text: aMY_CXT/pMY_CXT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: aMY_CXT/pMY_CXT, aMY_CXTE<sol>pMY_CXT; Text: aMY_CXT/pMY_CXT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70475 in perlxs.pod
 Lookups: dMY_CXT; Text: dMY_CXT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 70130 in perlxs.pod

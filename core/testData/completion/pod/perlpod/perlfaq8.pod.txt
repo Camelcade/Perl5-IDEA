@@ -20,7 +20,7 @@ Lookups: How can I capture STDERR from an external command?; Text: How can I cap
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22823 in perlfaq8.pod
 Lookups: How can I convert my shell script to perl?; Text: How can I convert my shell script to perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31862 in perlfaq8.pod
-Lookups: How can I do an atexit() or setjmp()/longjmp()? (Exception handling); Text: How can I do an atexit() or setjmp()/longjmp()? (Exception handling); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I do an atexit() or setjmp()/longjmp()? (Exception handling), How can I do an atexit() or setjmp()E<sol>longjmp()? (Exception handling); Text: How can I do an atexit() or setjmp()/longjmp()? (Exception handling); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17940 in perlfaq8.pod
 Lookups: How can I measure time under a second?; Text: How can I measure time under a second?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17463 in perlfaq8.pod
@@ -34,7 +34,7 @@ Lookups: How come exec() doesn't return?; Text: How come exec() doesn't return?;
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 810 in perlfaq8.pod
 Lookups: How do I add a directory to my include path (@INC) at runtime?; Text: How do I add a directory to my include path (@INC) at runtime?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47755 in perlfaq8.pod
-Lookups: How do I add the directory my program lives in to the module/library search path?; Text: How do I add the directory my program lives in to the module/library search path?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I add the directory my program lives in to the module/library search path?, How do I add the directory my program lives in to the moduleE<sol>library search path?; Text: How do I add the directory my program lives in to the module/library search path?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46282 in perlfaq8.pod
 Lookups: How do I ask the user for a password?; Text: How do I ask the user for a password?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7281 in perlfaq8.pod
@@ -48,7 +48,7 @@ Lookups: How do I close a process's filehandle without waiting for it to complet
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34828 in perlfaq8.pod
 Lookups: How do I decode encrypted password files?; Text: How do I decode encrypted password files?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11710 in perlfaq8.pod
-Lookups: How do I do fancy stuff with the keyboard/screen/mouse?; Text: How do I do fancy stuff with the keyboard/screen/mouse?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I do fancy stuff with the keyboardE<sol>screenE<sol>mouse?, How do I do fancy stuff with the keyboard/screen/mouse?; Text: How do I do fancy stuff with the keyboard/screen/mouse?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1201 in perlfaq8.pod
 Lookups: How do I find out if I'm running interactively or not?; Text: How do I find out if I'm running interactively or not?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35901 in perlfaq8.pod
@@ -60,7 +60,7 @@ Lookups: How do I get the screen size?; Text: How do I get the screen size?; Tai
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6469 in perlfaq8.pod
 Lookups: How do I install a module from CPAN?; Text: How do I install a module from CPAN?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 42416 in perlfaq8.pod
-Lookups: How do I keep my own module/library directory?; Text: How do I keep my own module/library directory?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I keep my own moduleE<sol>library directory?, How do I keep my own module/library directory?; Text: How do I keep my own module/library directory?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 44509 in perlfaq8.pod
 Lookups: How do I make a system() exit on control-C?; Text: How do I make a system() exit on control-C?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39225 in perlfaq8.pod
@@ -84,7 +84,7 @@ Lookups: How do I tell the difference between errors from the shell and perl?; T
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 39953 in perlfaq8.pod
 Lookups: How do I timeout a slow event?; Text: How do I timeout a slow event?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 37297 in perlfaq8.pod
-Lookups: How do I trap control characters/signals?; Text: How do I trap control characters/signals?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I trap control characters/signals?, How do I trap control charactersE<sol>signals?; Text: How do I trap control characters/signals?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14722 in perlfaq8.pod
 Lookups: How do I use an SQL database?; Text: How do I use an SQL database?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 38644 in perlfaq8.pod

@@ -26,7 +26,7 @@ Lookups:  -lutil; Text:  -lutil; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4503 in perlcygwin.pod
 Lookups:  .exe; Text:  .exe; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12731 in perlcygwin.pod
-Lookups:  Compiler/Preprocessor defines; Text:  Compiler/Preprocessor defines; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  Compiler/Preprocessor defines,  CompilerE<sol>Preprocessor defines; Text:  Compiler/Preprocessor defines; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7129 in perlcygwin.pod
 Lookups:  Cygwin vs. Windows errors; Text:  Cygwin vs. Windows errors; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13653 in perlcygwin.pod
@@ -40,7 +40,7 @@ Lookups:  Pathnames; Text:  Pathnames; Tail: null; Type: List Item; Icon: /perl5
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10771 in perlcygwin.pod
 Lookups:  PerlIO; Text:  PerlIO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12172 in perlcygwin.pod
-Lookups:  Text/Binary; Text:  Text/Binary; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  TextE<sol>Binary,  Text/Binary; Text:  Text/Binary; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11398 in perlcygwin.pod
 Lookups:  Win9x and d_eofnblk; Text:  Win9x and d_eofnblk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6649 in perlcygwin.pod
@@ -110,7 +110,7 @@ Lookups: PREREQUISITES FOR COMPILING PERL ON CYGWIN; Text: PREREQUISITES FOR COM
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 635 in perlcygwin.pod
 Lookups: Perl Module Tests; Text: Perl Module Tests; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25451 in perlcygwin.pod
-Lookups: Perl Modules/Scripts; Text: Perl Modules/Scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Perl ModulesE<sol>Scripts, Perl Modules/Scripts; Text: Perl Modules/Scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23319 in perlcygwin.pod
 Lookups: Prebuilt methods:; Text: Prebuilt methods:; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15706 in perlcygwin.pod

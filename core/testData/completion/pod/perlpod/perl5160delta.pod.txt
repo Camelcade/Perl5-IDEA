@@ -4,7 +4,7 @@ Lookups: $$ can be assigned to; Text: $$ can be assigned to; Tail: null; Type: 3
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14357 in perl5160delta.pod
 Lookups: $$ no longer caches PID; Text: $$ no longer caches PID; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 27924 in perl5160delta.pod
-Lookups: $<, $>, $( and $) are no longer cached; Text: $<, $>, $( and $) are no longer cached; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: $E<lt>, $E<gt>, $( and $) are no longer cached, $<, $>, $( and $) are no longer cached; Text: $<, $>, $( and $) are no longer cached; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28917 in perl5160delta.pod
 Lookups: $^X converted to an absolute path on FreeBSD, OS X and Solaris; Text: $^X converted to an absolute path on FreeBSD, OS X and Solaris; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 14713 in perl5160delta.pod
@@ -70,7 +70,7 @@ Lookups: Diagnostics; Text: Diagnostics; Tail: null; Type: 1st Heading; Icon: /p
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 58211 in perl5160delta.pod
 Lookups: Documentation; Text: Documentation; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 52254 in perl5160delta.pod
-Lookups: Don't read the Unicode data base files in lib/unicore; Text: Don't read the Unicode data base files in lib/unicore; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Don't read the Unicode data base files in libE<sol>unicore, Don't read the Unicode data base files in lib/unicore; Text: Don't read the Unicode data base files in lib/unicore; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20044 in perl5160delta.pod
 Lookups: Features inside the debugger; Text: Features inside the debugger; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 15162 in perl5160delta.pod
@@ -84,7 +84,7 @@ Lookups: Formats; Text: Formats; Tail: null; Type: 2nd Heading; Icon: /perl5lang
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 91524 in perl5160delta.pod
 Lookups: Future Deprecations; Text: Future Deprecations; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20868 in perl5160delta.pod
-Lookups: GNU/Hurd; Text: GNU/Hurd; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: GNUE<sol>Hurd, GNU/Hurd; Text: GNU/Hurd; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 70039 in perl5160delta.pod
 Lookups: HP-UX; Text: HP-UX; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 68973 in perl5160delta.pod
@@ -296,7 +296,7 @@ Lookups: perlre; Text: perlre; Tail: null; Type: 3d Heading; Icon: /perl5languag
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 56197 in perl5160delta.pod
 Lookups: perlrun; Text: perlrun; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 56366 in perl5160delta.pod
-Lookups: perlsec/Laundering and Detecting Tainted Data; Text: perlsec/Laundering and Detecting Tainted Data; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: perlsecE<sol>Laundering and Detecting Tainted Data, perlsec/Laundering and Detecting Tainted Data; Text: perlsec/Laundering and Detecting Tainted Data; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 55251 in perl5160delta.pod
 Lookups: perlsub; Text: perlsub; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 56619 in perl5160delta.pod

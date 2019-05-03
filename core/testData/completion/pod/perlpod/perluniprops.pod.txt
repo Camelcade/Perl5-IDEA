@@ -116,13 +116,13 @@ Lookups: \p{Canonical_Combining_Class=Attached_Below_Left}; Text: \p{Canonical_C
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 379432 in perluniprops.pod
 Lookups: \p{Canonical_Combining_Class=CCC133}; Text: \p{Canonical_Combining_Class=CCC133}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 379489 in perluniprops.pod
-Lookups: auxiliary/GraphemeBreakTest.html; Text: auxiliary/GraphemeBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407768 in perluniprops.pod
-Lookups: auxiliary/LineBreakTest.html; Text: auxiliary/LineBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: auxiliary/LineBreakTest.html, auxiliaryE<sol>LineBreakTest.html; Text: auxiliary/LineBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407812 in perluniprops.pod
-Lookups: auxiliary/SentenceBreakTest.html; Text: auxiliary/SentenceBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: auxiliaryE<sol>GraphemeBreakTest.html, auxiliary/GraphemeBreakTest.html; Text: auxiliary/GraphemeBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407768 in perluniprops.pod
+Lookups: auxiliaryE<sol>SentenceBreakTest.html, auxiliary/SentenceBreakTest.html; Text: auxiliary/SentenceBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407852 in perluniprops.pod
-Lookups: auxiliary/WordBreakTest.html; Text: auxiliary/WordBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: auxiliaryE<sol>WordBreakTest.html, auxiliary/WordBreakTest.html; Text: auxiliary/WordBreakTest.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 407896 in perluniprops.pod
-Lookups: extracted/DName.txt; Text: extracted/DName.txt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: extractedE<sol>DName.txt, extracted/DName.txt; Text: extracted/DName.txt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 408276 in perluniprops.pod

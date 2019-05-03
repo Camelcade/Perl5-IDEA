@@ -48,7 +48,7 @@ Lookups: Borland's compilers support; Text: Borland's compilers support; Tail: n
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41568 in perl5100delta.pod
 Lookups: Byte-order modifiers for pack() and unpack(); Text: Byte-order modifiers for pack() and unpack(); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 13784 in perl5100delta.pod
-Lookups: Byte/character count feature in unpack(); Text: Byte/character count feature in unpack(); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Byte/character count feature in unpack(), ByteE<sol>character count feature in unpack(); Text: Byte/character count feature in unpack(); Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19357 in perl5100delta.pod
 Lookups: C++ compatibility; Text: C++ compatibility; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 42211 in perl5100delta.pod
@@ -146,9 +146,9 @@ Lookups: Newline in left-justified string; Text: Newline in left-justified strin
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 48755 in perl5100delta.pod
 Lookups: OS groups; Text: OS groups; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14522 in perl5100delta.pod
-Lookups: Opening dirhandle/filehandle %s also as a file/directory; Text: Opening dirhandle/filehandle %s also as a file/directory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Opening dirhandleE<sol>filehandle %s also as a fileE<sol>directory, Opening dirhandle/filehandle %s also as a file/directory; Text: Opening dirhandle/filehandle %s also as a file/directory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49521 in perl5100delta.pod
-Lookups: Optional pre-match and post-match captures with the /p flag; Text: Optional pre-match and post-match captures with the /p flag; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Optional pre-match and post-match captures with the E<sol>p flag, Optional pre-match and post-match captures with the /p flag; Text: Optional pre-match and post-match captures with the /p flag; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7039 in perl5100delta.pod
 Lookups: Overloading and UTF-8; Text: Overloading and UTF-8; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45831 in perl5100delta.pod
@@ -332,7 +332,7 @@ Lookups: ptardiff; Text: ptardiff; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32289 in perl5100delta.pod
 Lookups: readdir() may return a "short filename" on Windows; Text: readdir() may return a "short filename" on Windows; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10659 in perl5100delta.pod
-Lookups: readdir()/closedir()/etc. attempted on invalid dirhandle; Text: readdir()/closedir()/etc. attempted on invalid dirhandle; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: readdir()E<sol>closedir()E<sol>etc. attempted on invalid dirhandle, readdir()/closedir()/etc. attempted on invalid dirhandle; Text: readdir()/closedir()/etc. attempted on invalid dirhandle; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49348 in perl5100delta.pod
 Lookups: readpipe() is now overridable; Text: readpipe() is now overridable; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11834 in perl5100delta.pod
@@ -360,7 +360,7 @@ Lookups: threads improvements; Text: threads improvements; Tail: null; Type: Lis
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44423 in perl5100delta.pod
 Lookups: undef and signal handlers; Text: undef and signal handlers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 22295 in perl5100delta.pod
-Lookups: v-string in use/require is non-portable; Text: v-string in use/require is non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: v-string in useE<sol>require is non-portable, v-string in use/require is non-portable; Text: v-string in use/require is non-portable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49808 in perl5100delta.pod
 Lookups: version; Text: version; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26481 in perl5100delta.pod

@@ -30,7 +30,7 @@ Lookups: Doing bitwise operations on strings containing code points above 0xFF i
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11390 in perl5240delta.pod
 Lookups: EBCDIC cmp() and sort() fixed for UTF-EBCDIC strings; Text: EBCDIC cmp() and sort() fixed for UTF-EBCDIC strings; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33075 in perl5240delta.pod
-Lookups: EBCDIC tr/// and y/// fixed for \N{}, and use utf8 ranges; Text: EBCDIC tr/// and y/// fixed for \N{}, and use utf8 ranges; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: EBCDIC tr/// and y/// fixed for \N{}, and use utf8 ranges, EBCDIC trE<sol>E<sol>E<sol> and yE<sol>E<sol>E<sol> fixed for \N{}, and use utf8 ranges; Text: EBCDIC tr/// and y/// fixed for \N{}, and use utf8 ranges; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33318 in perl5240delta.pod
 Lookups: EBCDIC; Text: EBCDIC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 32267 in perl5240delta.pod
@@ -46,7 +46,7 @@ Lookups: IRIX; Text: IRIX; Tail: null; Type: List Item; Icon: /perl5language.png
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 33985 in perl5240delta.pod
 Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 5728 in perl5240delta.pod
-Lookups: Integer shift (<< and  >>) now more explicitly defined; Text: Integer shift (<< and  >>) now more explicitly defined; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Integer shift (<< and  >>) now more explicitly defined, Integer shift (E<lt>E<lt> and  E<gt>E<gt>) now more explicitly defined; Text: Integer shift (<< and  >>) now more explicitly defined; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2031 in perl5240delta.pod
 Lookups: Internal Changes; Text: Internal Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 41609 in perl5240delta.pod
@@ -98,7 +98,7 @@ Lookups: Solaris; Text: Solaris; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35782 in perl5240delta.pod
 Lookups: Testing; Text: Testing; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 31654 in perl5240delta.pod
-Lookups: The /\C/ character class has been removed.; Text: The /\C/ character class has been removed.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: The E<sol>\CE<sol> character class has been removed., The /\C/ character class has been removed.; Text: The /\C/ character class has been removed.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8321 in perl5240delta.pod
 Lookups: The autoderef feature has been removed; Text: The autoderef feature has been removed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5757 in perl5240delta.pod
@@ -158,11 +158,11 @@ Lookups: ppc64el; Text: ppc64el; Tail: null; Type: List Item; Icon: /perl5langua
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 41442 in perl5240delta.pod
 Lookups: printf and sprintf now allow reordered precision arguments; Text: printf and sprintf now allow reordered precision arguments; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3219 in perl5240delta.pod
-Lookups: qr/(?[ ])/ now works in UTF-8 locales; Text: qr/(?[ ])/ now works in UTF-8 locales; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: qr/(?[ ])/ now works in UTF-8 locales, qrE<sol>(?[ ])E<sol> now works in UTF-8 locales; Text: qr/(?[ ])/ now works in UTF-8 locales; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1581 in perl5240delta.pod
-Lookups: qr/\N{}/ now disallowed under use re "strict"; Text: qr/\N{}/ now disallowed under use re "strict"; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: qr/\N{}/ now disallowed under use re "strict", qrE<sol>\N{}E<sol> now disallowed under use re "strict"; Text: qr/\N{}/ now disallowed under use re "strict"; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7653 in perl5240delta.pod
-Lookups: qr/\b{wb}/ is now tailored to Perl expectations; Text: qr/\b{wb}/ is now tailored to Perl expectations; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: qrE<sol>\b{wb}E<sol> is now tailored to Perl expectations, qr/\b{wb}/ is now tailored to Perl expectations; Text: qr/\b{wb}/ is now tailored to Perl expectations; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6571 in perl5240delta.pod
 Lookups: sysread(), syswrite(), recv() and send() are deprecated on :utf8 handles; Text: sysread(), syswrite(), recv() and send() are deprecated on :utf8 handles; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11802 in perl5240delta.pod

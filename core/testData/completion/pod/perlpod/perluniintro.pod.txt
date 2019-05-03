@@ -36,7 +36,7 @@ Lookups: Special Cases; Text: Special Cases; Tail: null; Type: 2nd Heading; Icon
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23473 in perluniintro.pod
 Lookups: UNICODE IN OLDER PERLS; Text: UNICODE IN OLDER PERLS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 37247 in perluniintro.pod
-Lookups: Unicode I/O; Text: Unicode I/O; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Unicode IE<sol>O, Unicode I/O; Text: Unicode I/O; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 17049 in perluniintro.pod
 Lookups: Unicode and EBCDIC; Text: Unicode and EBCDIC; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12300 in perluniintro.pod

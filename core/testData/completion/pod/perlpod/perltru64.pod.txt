@@ -22,7 +22,7 @@ Lookups: Using Large Files with Perl on Tru64; Text: Using Large Files with Perl
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2419 in perltru64.pod
 Lookups: Warnings about floating-point overflow when compiling Perl on Tru64; Text: Warnings about floating-point overflow when compiling Perl on Tru64; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5589 in perltru64.pod
-Lookups: ext/ODBM_File/odbm Test Failing With Static Builds; Text: ext/ODBM_File/odbm Test Failing With Static Builds; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: extE<sol>ODBM_FileE<sol>odbm Test Failing With Static Builds, ext/ODBM_File/odbm Test Failing With Static Builds; Text: ext/ODBM_File/odbm Test Failing With Static Builds; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6936 in perltru64.pod
 Lookups: read_cur_obj_info: bad file magic number; Text: read_cur_obj_info: bad file magic number; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 7809 in perltru64.pod

@@ -1,4 +1,4 @@
-Lookups: /bin/sh; Text: /bin/sh; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: /bin/sh, E<sol>binE<sol>sh; Text: /bin/sh; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 823 in perlqnx.pod
 Lookups: AUTHOR; Text: AUTHOR; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6615 in perlqnx.pod
@@ -30,7 +30,7 @@ Lookups: make; Text: make; Tail: null; Type: List Item; Icon: /perl5language.png
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1672 in perlqnx.pod
 Lookups: nm; Text: nm; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1237 in perlqnx.pod
-Lookups: qnx/ar; Text: qnx/ar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: qnx/ar, qnxE<sol>ar; Text: qnx/ar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3266 in perlqnx.pod
-Lookups: qnx/cpp; Text: qnx/cpp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: qnx/cpp, qnxE<sol>cpp; Text: qnx/cpp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3547 in perlqnx.pod

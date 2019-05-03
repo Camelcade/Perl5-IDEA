@@ -6,9 +6,9 @@ Lookups:  Rainer Keuchel's celib-sources; Text:  Rainer Keuchel's celib-sources;
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7804 in perlce.pod
 Lookups:  Rainer Keuchel's console-sources; Text:  Rainer Keuchel's console-sources; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7844 in perlce.pod
-Lookups:  edit file ./win32/ce-helpers/compile.bat; Text:  edit file ./win32/ce-helpers/compile.bat; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  edit file ./win32/ce-helpers/compile.bat,  edit file .E<sol>win32E<sol>ce-helpersE<sol>compile.bat; Text:  edit file ./win32/ce-helpers/compile.bat; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8431 in perlce.pod
-Lookups:  go to ./win32 subdirectory; Text:  go to ./win32 subdirectory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  go to .E<sol>win32 subdirectory,  go to ./win32 subdirectory; Text:  go to ./win32 subdirectory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8392 in perlce.pod
 Lookups:  run    compile.bat dist; Text:  run    compile.bat dist; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8512 in perlce.pod
@@ -62,9 +62,9 @@ Lookups: PERL5LIB; Text: PERL5LIB; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11508 in perlce.pod
 Lookups: REGISTRY; Text: REGISTRY; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11932 in perlce.pod
-Lookups: ROWS/COLS; Text: ROWS/COLS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: ROWSE<sol>COLS, ROWS/COLS; Text: ROWS/COLS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11720 in perlce.pod
-Lookups: Rainer Keuchel <coyxc@rainer-keuchel.de>; Text: Rainer Keuchel <coyxc@rainer-keuchel.de>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Rainer Keuchel <coyxc@rainer-keuchel.de>, Rainer Keuchel E<lt>coyxc@rainer-keuchel.deE<gt>; Text: Rainer Keuchel <coyxc@rainer-keuchel.de>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14238 in perlce.pod
 Lookups: TMP; Text: TMP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11598 in perlce.pod

@@ -24,7 +24,7 @@ Lookups: Modules and Pragmata; Text: Modules and Pragmata; Tail: null; Type: 1st
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2291 in perl5222delta.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5222delta.pod
-Lookups: OS X/Darwin; Text: OS X/Darwin; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: OS XE<sol>Darwin, OS X/Darwin; Text: OS X/Darwin; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4161 in perl5222delta.pod
 Lookups: Platform Support; Text: Platform Support; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 3945 in perl5222delta.pod

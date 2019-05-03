@@ -10,7 +10,7 @@ Lookups: %s: Eval-group not allowed, use re 'eval'; Text: %s: Eval-group not all
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27343 in perl5005delta.pod
 Lookups: 4th argument to substr; Text: 4th argument to substr; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16709 in perl5005delta.pod
-Lookups: <> now reads in records; Text: <> now reads in records; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: <> now reads in records, E<lt>E<gt> now reads in records; Text: <> now reads in records; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 18018 in perl5005delta.pod
 Lookups: About the new versioning system; Text: About the new versioning system; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 152 in perl5005delta.pod
@@ -166,7 +166,7 @@ Lookups: New lock keyword; Text: New lock keyword; Tail: null; Type: 2nd Heading
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 15707 in perl5005delta.pod
 Lookups: New operator for precompiled regular expressions; Text: New operator for precompiled regular expressions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9444 in perl5005delta.pod
-Lookups: New qr// operator; Text: New qr// operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: New qrE<sol>E<sol> operator, New qr// operator; Text: New qr// operator; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16045 in perl5005delta.pod
 Lookups: New regular expression constructs; Text: New regular expression constructs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9269 in perl5005delta.pod

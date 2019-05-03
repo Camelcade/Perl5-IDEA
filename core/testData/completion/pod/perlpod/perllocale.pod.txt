@@ -24,7 +24,7 @@ Lookups: Category LC_NUMERIC: Numeric Formatting; Text: Category LC_NUMERIC: Num
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 43315 in perllocale.pod
 Lookups: Category LC_NUMERIC: Numeric formatting; Text: Category LC_NUMERIC: Numeric formatting; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3052 in perllocale.pod
-Lookups: Category LC_TIME: Date/Time formatting; Text: Category LC_TIME: Date/Time formatting; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Category LC_TIME: DateE<sol>Time formatting, Category LC_TIME: Date/Time formatting; Text: Category LC_TIME: Date/Time formatting; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3368 in perllocale.pod
 Lookups: Category LC_TIME: Respresentation of time; Text: Category LC_TIME: Respresentation of time; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 45114 in perllocale.pod

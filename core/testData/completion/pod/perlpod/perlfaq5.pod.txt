@@ -18,7 +18,7 @@ Lookups: How can I make a filehandle local to a subroutine? How do I pass fileha
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16224 in perlfaq5.pod
 Lookups: How can I manipulate fixed-record-length files?; Text: How can I manipulate fixed-record-length files?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 14999 in perlfaq5.pod
-Lookups: How can I open a file with a leading ">" or trailing blanks?; Text: How can I open a file with a leading ">" or trailing blanks?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How can I open a file with a leading ">" or trailing blanks?, How can I open a file with a leading "E<gt>" or trailing blanks?; Text: How can I open a file with a leading ">" or trailing blanks?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 29331 in perlfaq5.pod
 Lookups: How can I open a filehandle to a string?; Text: How can I open a filehandle to a string?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 23274 in perlfaq5.pod
@@ -62,7 +62,7 @@ Lookups: How do I do a tail -f in perl?; Text: How do I do a tail -f in perl?; T
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 46252 in perlfaq5.pod
 Lookups: How do I dup() a filehandle in Perl?; Text: How do I dup() a filehandle in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 47132 in perlfaq5.pod
-Lookups: How do I flush/unbuffer an output filehandle? Why must I do this?; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: How do I flushE<sol>unbuffer an output filehandle? Why must I do this?, How do I flush/unbuffer an output filehandle? Why must I do this?; Text: How do I flush/unbuffer an output filehandle? Why must I do this?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 191 in perlfaq5.pod
 Lookups: How do I get a file's timestamp in perl?; Text: How do I get a file's timestamp in perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 36976 in perlfaq5.pod
@@ -90,13 +90,13 @@ Lookups: POSIX; Text: How do I close a file descriptor by number?; Tail: (POSIX)
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 47834 in perlfaq5.pod
 Lookups: VERSION; Text: VERSION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 43 in perlfaq5.pod
-Lookups: Why can't I just open(FH, ">file.lock")?; Text: Why can't I just open(FH, ">file.lock")?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Why can't I just open(FH, "E<gt>file.lock")?, Why can't I just open(FH, ">file.lock")?; Text: Why can't I just open(FH, ">file.lock")?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32527 in perlfaq5.pod
 Lookups: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Text: Why can't I use "C:\temp\foo" in DOS paths? Why doesn't `C:\temp\foo.exe` work?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 48610 in perlfaq5.pod
 Lookups: Why do I get weird spaces when I print an array of lines?; Text: Why do I get weird spaces when I print an array of lines?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 51410 in perlfaq5.pod
-Lookups: Why do I sometimes get an "Argument list too long" when I use <*>?; Text: Why do I sometimes get an "Argument list too long" when I use <*>?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Why do I sometimes get an "Argument list too long" when I use <*>?, Why do I sometimes get an "Argument list too long" when I use E<lt>*E<gt>?; Text: Why do I sometimes get an "Argument list too long" when I use <*>?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28651 in perlfaq5.pod
 Lookups: Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl?; Text: Why does Perl let me delete read-only files? Why does -i clobber protected files? Isn't this a bug in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 49821 in perlfaq5.pod

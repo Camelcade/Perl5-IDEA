@@ -30,5 +30,5 @@ Lookups: Setting up the build environment; Text: Setting up the build environmen
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1656 in perlsynology.pod
 Lookups: Smoke testing Perl 5; Text: Smoke testing Perl 5; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6132 in perlsynology.pod
-Lookups: ext/DynaLoader/t/DynaLoader.t; Text: ext/DynaLoader/t/DynaLoader.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: ext/DynaLoader/t/DynaLoader.t, extE<sol>DynaLoaderE<sol>tE<sol>DynaLoader.t; Text: ext/DynaLoader/t/DynaLoader.t; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5856 in perlsynology.pod

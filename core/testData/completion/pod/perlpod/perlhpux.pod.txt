@@ -54,5 +54,5 @@ Lookups: Using perl from HP's porting centre; Text: Using perl from HP's porting
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2477 in perlhpux.pod
 Lookups: error: pasting ")" and "l" does not give a valid preprocessing token; Text: error: pasting ")" and "l" does not give a valid preprocessing token; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28107 in perlhpux.pod
-Lookups: nss_delete core dump from op/pwent or op/grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: nss_delete core dump from op/pwent or op/grent, nss_delete core dump from opE<sol>pwent or opE<sol>grent; Text: nss_delete core dump from op/pwent or op/grent; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 27110 in perlhpux.pod

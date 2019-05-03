@@ -10,7 +10,7 @@ Lookups: $^M; Text: $^M; Tail: null; Type: List Item; Icon: /perl5language.png; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11996 in perl5004delta.pod
 Lookups: $_ as Default; Text: $_ as Default; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18536 in perl5004delta.pod
-Lookups: $coderef->(PARAMS); Text: $coderef->(PARAMS); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: $coderef->(PARAMS), $coderef-E<gt>(PARAMS); Text: $coderef->(PARAMS); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10729 in perl5004delta.pod
 Lookups: %s argument is not a HASH element or slice; Text: %s argument is not a HASH element or slice; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 40688 in perl5004delta.pod
@@ -78,9 +78,9 @@ Lookups: Extended API for manipulating hashes; Text: Extended API for manipulati
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38451 in perl5004delta.pod
 Lookups: Fcntl; Text: Fcntl; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33102 in perl5004delta.pod
-Lookups: Fixed localization of $<digit>, $&, etc.; Text: Fixed localization of $<digit>, $&, etc.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Fixed localization of $E<lt>digitE<gt>, $&, etc., Fixed localization of $<digit>, $&, etc.; Text: Fixed localization of $<digit>, $&, etc.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6135 in perl5004delta.pod
-Lookups: Fixed parsing of $$<digit>, &$<digit>, etc.; Text: Fixed parsing of $$<digit>, &$<digit>, etc.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Fixed parsing of $$E<lt>digitE<gt>, &$E<lt>digitE<gt>, etc., Fixed parsing of $$<digit>, &$<digit>, etc.; Text: Fixed parsing of $$<digit>, &$<digit>, etc.; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5528 in perl5004delta.pod
 Lookups: GETC this; Text: GETC this; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 23327 in perl5004delta.pod
@@ -94,7 +94,7 @@ Lookups: IO; Text: IO; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; 
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 34002 in perl5004delta.pod
 Lookups: Identifier too long; Text: Identifier too long; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 43903 in perl5004delta.pod
-Lookups: Ill-formed logical name |%s| in prime_env_iter; Text: Ill-formed logical name |%s| in prime_env_iter; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Ill-formed logical name |%s| in prime_env_iter, Ill-formed logical name E<verbar>%sE<verbar> in prime_env_iter; Text: Ill-formed logical name |%s| in prime_env_iter; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53650 in perl5004delta.pod
 Lookups: Illegal character %s (carriage return); Text: Illegal character %s (carriage return); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44194 in perl5004delta.pod
@@ -156,7 +156,7 @@ Lookups: New and changed syntax; Text: New and changed syntax; Tail: null; Type:
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 10689 in perl5004delta.pod
 Lookups: New builtin methods; Text: New builtin methods; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 20287 in perl5004delta.pod
-Lookups: No glob() or <*>; Text: No glob() or <*>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: No glob() or E<lt>*E<gt>, No glob() or <*>; Text: No glob() or <*>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8374 in perl5004delta.pod
 Lookups: No resetting of $. on implicit close; Text: No resetting of $. on implicit close; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6449 in perl5004delta.pod
@@ -224,7 +224,7 @@ Lookups: Unrecognized character %s; Text: Unrecognized character %s; Tail: null;
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 49921 in perl5004delta.pod
 Lookups: Unsupported function fork; Text: Unsupported function fork; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50157 in perl5004delta.pod
-Lookups: Use of "$$<digit>" to mean "${$}<digit>" is deprecated; Text: Use of "$$<digit>" to mean "${$}<digit>" is deprecated; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of "$$<digit>" to mean "${$}<digit>" is deprecated, Use of "$$E<lt>digitE<gt>" to mean "${$}E<lt>digitE<gt>" is deprecated; Text: Use of "$$<digit>" to mean "${$}<digit>" is deprecated; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 50458 in perl5004delta.pod
 Lookups: Utility Changes; Text: Utility Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 36160 in perl5004delta.pod
@@ -260,9 +260,9 @@ Lookups: isa(CLASS); Text: isa(CLASS); Tail: null; Type: List Item; Icon: /perl5
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20436 in perl5004delta.pod
 Lookups: keys as an lvalue; Text: keys as an lvalue; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13995 in perl5004delta.pod
-Lookups: m//gc does not reset search position on failure; Text: m//gc does not reset search position on failure; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: mE<sol>E<sol>gc does not reset search position on failure, m//gc does not reset search position on failure; Text: m//gc does not reset search position on failure; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18681 in perl5004delta.pod
-Lookups: m//x ignores whitespace before ?*+{}; Text: m//x ignores whitespace before ?*+{}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: mE<sol>E<sol>x ignores whitespace before ?*+{}, m//x ignores whitespace before ?*+{}; Text: m//x ignores whitespace before ?*+{}; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19242 in perl5004delta.pod
 Lookups: my() in Control Structures; Text: my() in Control Structures; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14707 in perl5004delta.pod
@@ -306,13 +306,13 @@ Lookups: use Module VERSION LIST; Text: use Module VERSION LIST; Tail: null; Typ
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17027 in perl5004delta.pod
 Lookups: use VERSION; Text: use VERSION; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16392 in perl5004delta.pod
-Lookups: use autouse MODULE => qw(sub1 sub2 sub3); Text: use autouse MODULE => qw(sub1 sub2 sub3); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: use autouse MODULE =E<gt> qw(sub1 sub2 sub3), use autouse MODULE => qw(sub1 sub2 sub3); Text: use autouse MODULE => qw(sub1 sub2 sub3); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 27918 in perl5004delta.pod
 Lookups: use blib 'dir'; Text: use blib 'dir'; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28164 in perl5004delta.pod
 Lookups: use blib; Text: use blib; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28148 in perl5004delta.pod
-Lookups: use constant NAME => VALUE; Text: use constant NAME => VALUE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: use constant NAME =E<gt> VALUE, use constant NAME => VALUE; Text: use constant NAME => VALUE; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28477 in perl5004delta.pod
 Lookups: use locale; Text: use locale; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28618 in perl5004delta.pod

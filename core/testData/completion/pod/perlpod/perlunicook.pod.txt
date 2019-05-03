@@ -34,7 +34,7 @@ Lookups: ℞ 10: Custom named characters; Text: ℞ 10: Custom named characters;
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4989 in perlunicook.pod
 Lookups: ℞ 11: Names of CJK codepoints; Text: ℞ 11: Names of CJK codepoints; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5348 in perlunicook.pod
-Lookups: ℞ 12: Explicit encode/decode; Text: ℞ 12: Explicit encode/decode; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 12: Explicit encodeE<sol>decode, ℞ 12: Explicit encode/decode; Text: ℞ 12: Explicit encode/decode; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6454 in perlunicook.pod
 Lookups: ℞ 13: Decode program arguments as utf8; Text: ℞ 13: Decode program arguments as utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6910 in perlunicook.pod
@@ -44,9 +44,9 @@ Lookups: ℞ 15: Declare STD{IN,OUT,ERR} to be utf8; Text: ℞ 15: Declare STD{I
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7329 in perlunicook.pod
 Lookups: ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding; Text: ℞ 16: Declare STD{IN,OUT,ERR} to be in locale encoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7674 in perlunicook.pod
-Lookups: ℞ 17: Make file I/O default to utf8; Text: ℞ 17: Make file I/O default to utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 17: Make file I/O default to utf8, ℞ 17: Make file IE<sol>O default to utf8; Text: ℞ 17: Make file I/O default to utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8025 in perlunicook.pod
-Lookups: ℞ 18: Make all I/O and args default to utf8; Text: ℞ 18: Make all I/O and args default to utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: ℞ 18: Make all IE<sol>O and args default to utf8, ℞ 18: Make all I/O and args default to utf8; Text: ℞ 18: Make all I/O and args default to utf8; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8224 in perlunicook.pod
 Lookups: ℞ 19: Open file with specific encoding; Text: ℞ 19: Open file with specific encoding; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 8458 in perlunicook.pod

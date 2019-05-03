@@ -12,7 +12,7 @@ Lookups: AIX; Text: AIX; Tail: null; Type: List Item; Icon: /perl5language.png; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81952 in perlport.pod
 Lookups: AT&T 3b1; Text: AT&T 3b1; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82408 in perlport.pod
-Lookups: AUTHORS / CONTRIBUTORS; Text: AUTHORS / CONTRIBUTORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: AUTHORS / CONTRIBUTORS, AUTHORS E<sol> CONTRIBUTORS; Text: AUTHORS / CONTRIBUTORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 86695 in perlport.pod
 Lookups: Acorn RISC OS; Text: Acorn RISC OS; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 57060 in perlport.pod
@@ -22,9 +22,9 @@ Lookups: Alphabetical Listing of Perl Functions; Text: Alphabetical Listing of P
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 64448 in perlport.pod
 Lookups: Android; Text: Android; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81963 in perlport.pod
-Lookups: Apollo Domain/OS; Text: Apollo Domain/OS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Apollo DomainE<sol>OS, Apollo Domain/OS; Text: Apollo Domain/OS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82858 in perlport.pod
-Lookups: Apple Mac OS 8/9; Text: Apple Mac OS 8/9; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Apple Mac OS 8E<sol>9, Apple Mac OS 8/9; Text: Apple Mac OS 8/9; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82882 in perlport.pod
 Lookups: Atari MiNT; Text: Atari MiNT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 82840 in perlport.pod
@@ -40,7 +40,7 @@ Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /p
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 47 in perlport.pod
 Lookups: DOS and Derivatives; Text: DOS and Derivatives; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40533 in perlport.pod
-Lookups: Debian GNU/kFreeBSD; Text: Debian GNU/kFreeBSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Debian GNUE<sol>kFreeBSD, Debian GNU/kFreeBSD; Text: Debian GNU/kFreeBSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81580 in perlport.pod
 Lookups: Dragonfly BSD; Text: Dragonfly BSD; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81665 in perlport.pod
@@ -112,7 +112,7 @@ Lookups: Standard Modules; Text: Standard Modules; Tail: null; Type: 2nd Heading
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 28458 in perlport.pod
 Lookups: Stratus OpenVOS (17.0 or later); Text: Stratus OpenVOS (17.0 or later); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81756 in perlport.pod
-Lookups: Stratus VOS / OpenVOS; Text: Stratus VOS / OpenVOS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Stratus VOS E<sol> OpenVOS, Stratus VOS / OpenVOS; Text: Stratus VOS / OpenVOS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 81923 in perlport.pod
 Lookups: Style; Text: Style; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 35830 in perlport.pod

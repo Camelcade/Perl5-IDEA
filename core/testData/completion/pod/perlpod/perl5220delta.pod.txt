@@ -74,7 +74,7 @@ Lookups: Modules and Pragmata; Text: Modules and Pragmata; Tail: null; Type: 1st
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 25045 in perl5220delta.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 16 in perl5220delta.pod
-Lookups: NeXTSTEP/OPENSTEP; Text: NeXTSTEP/OPENSTEP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: NeXTSTEPE<sol>OPENSTEP, NeXTSTEP/OPENSTEP; Text: NeXTSTEP/OPENSTEP; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77756 in perl5220delta.pod
 Lookups: New :const subroutine attribute; Text: New :const subroutine attribute; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5085 in perl5220delta.pod
@@ -144,7 +144,7 @@ Lookups: Unicode 7.0 (with correction) is now supported; Text: Unicode 7.0 (with
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3067 in perl5220delta.pod
 Lookups: Updated Modules and Pragmata; Text: Updated Modules and Pragmata; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25074 in perl5220delta.pod
-Lookups: Use of multiple /x regexp modifiers; Text: Use of multiple /x regexp modifiers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Use of multiple /x regexp modifiers, Use of multiple E<sol>x regexp modifiers; Text: Use of multiple /x regexp modifiers; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 19059 in perl5220delta.pod
 Lookups: Use of non-graphic characters in single-character variable names; Text: Use of non-graphic characters in single-character variable names; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 16643 in perl5220delta.pod
@@ -228,14 +228,14 @@ Lookups: perlxs; Text: perlxs; Tail: null; Type: 3d Heading; Icon: /perl5languag
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 49006 in perl5220delta.pod
 Lookups: prototype with no arguments; Text: prototype with no arguments; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4925 in perl5220delta.pod
-Lookups: qr/\b{gcb}/; Text: qr/\b{gcb}/; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: qr/\b{gcb}/, qrE<sol>\b{gcb}E<sol>; Text: qr/\b{gcb}/; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 1253 in perl5220delta.pod
-Lookups: qr/\b{sb}/; Text: qr/\b{sb}/; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2033 in perl5220delta.pod
-Lookups: qr/\b{wb}/; Text: qr/\b{wb}/; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: qr/\b{wb}/, qrE<sol>\b{wb}E<sol>; Text: qr/\b{wb}/; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 1675 in perl5220delta.pod
-Lookups: qr/foo/x now ignores all Unicode pattern white space; Text: qr/foo/x now ignores all Unicode pattern white space; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: qr/foo/x now ignores all Unicode pattern white space, qrE<sol>fooE<sol>x now ignores all Unicode pattern white space; Text: qr/foo/x now ignores all Unicode pattern white space; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11587 in perl5220delta.pod
+Lookups: qrE<sol>\b{sb}E<sol>, qr/\b{sb}/; Text: qr/\b{sb}/; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 2033 in perl5220delta.pod
 Lookups: use UNIVERSAL '...' is now a fatal error; Text: use UNIVERSAL '...' is now a fatal error; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 11080 in perl5220delta.pod
 Lookups: use encoding is now lexical; Text: use encoding is now lexical; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -244,5 +244,5 @@ Lookups: use locale can restrict which locale categories are affected; Text: use
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3381 in perl5220delta.pod
 Lookups: use re 'strict'; Text: use re 'strict'; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2552 in perl5220delta.pod
-Lookups: z/OS running EBCDIC Code Page 1047; Text: z/OS running EBCDIC Code Page 1047; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: zE<sol>OS running EBCDIC Code Page 1047, z/OS running EBCDIC Code Page 1047; Text: z/OS running EBCDIC Code Page 1047; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 77031 in perl5220delta.pod

@@ -6,7 +6,7 @@ Lookups: (Reminder) The $* variable is deprecated (really); Text: (Reminder) The
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 10569 in perl581delta.pod
 Lookups: (Win32) The -C Switch Has Been Repurposed; Text: (Win32) The -C Switch Has Been Repurposed; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4756 in perl581delta.pod
-Lookups: (Win32) The /d Switch Of cmd.exe; Text: (Win32) The /d Switch Of cmd.exe; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: (Win32) The /d Switch Of cmd.exe, (Win32) The E<sol>d Switch Of cmd.exe; Text: (Win32) The /d Switch Of cmd.exe; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 5357 in perl581delta.pod
 Lookups: B::Bytecode; Text: B::Bytecode; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11988 in perl581delta.pod
@@ -60,7 +60,7 @@ Lookups: HP-UX: HP cc warnings about sendfile and sendpath; Text: HP-UX: HP cc w
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 32789 in perl581delta.pod
 Lookups: Hash Randomisation; Text: Hash Randomisation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1081 in perl581delta.pod
-Lookups: IRIX: t/uni/tr_7jis.t falsely failing; Text: IRIX: t/uni/tr_7jis.t falsely failing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: IRIX: t/uni/tr_7jis.t falsely failing, IRIX: tE<sol>uniE<sol>tr_7jis.t falsely failing; Text: IRIX: t/uni/tr_7jis.t falsely failing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 33506 in perl581delta.pod
 Lookups: Incompatible Changes; Text: Incompatible Changes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 1052 in perl581delta.pod
@@ -136,7 +136,7 @@ Lookups: Scalar::Util; Text: Scalar::Util; Tail: null; Type: List Item; Icon: /p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14350 in perl581delta.pod
 Lookups: Selected Bug Fixes; Text: Selected Bug Fixes; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 20433 in perl581delta.pod
-Lookups: Single-number v-strings are no longer v-strings before "=>"; Text: Single-number v-strings are no longer v-strings before "=>"; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Single-number v-strings are no longer v-strings before "=E<gt>", Single-number v-strings are no longer v-strings before "=>"; Text: Single-number v-strings are no longer v-strings before "=>"; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3988 in perl581delta.pod
 Lookups: Storable; Text: Storable; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 14440 in perl581delta.pod

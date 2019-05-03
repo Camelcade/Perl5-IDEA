@@ -34,9 +34,9 @@ Lookups: END; Text: Special Literals; Tail: (END); Type: Index; Icon: /perl5lang
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 26642 in perldata.pod
 Lookups: Identifier parsing; Text: Identifier parsing; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4904 in perldata.pod
-Lookups: Index/Value Array Slices; Text: Index/Value Array Slices; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: Index/Value Array Slices, IndexE<sol>Value Array Slices; Text: Index/Value Array Slices; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 45678 in perldata.pod
-Lookups: Key/Value Hash Slices; Text: Key/Value Hash Slices; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
+Lookups: KeyE<sol>Value Hash Slices, Key/Value Hash Slices; Text: Key/Value Hash Slices; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 45052 in perldata.pod
 Lookups: List value constructors; Text: List value constructors; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 31259 in perldata.pod

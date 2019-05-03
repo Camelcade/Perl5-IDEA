@@ -1,4 +1,4 @@
-Lookups: ->; Text: Method Invocation; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: -E<gt>, ->; Text: Method Invocation; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 7675 in perlobj.pod
 Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1047 in perlobj.pod

@@ -1,4 +1,4 @@
-Lookups:  Beginning/End of line positions; Text:  Beginning/End of line positions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups:  BeginningE<sol>End of line positions,  Beginning/End of line positions; Text:  Beginning/End of line positions; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26914 in perlreguts.pod
 Lookups:  anchored fixed strings; Text:  anchored fixed strings; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 26780 in perlreguts.pod

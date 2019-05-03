@@ -26,7 +26,7 @@ Lookups: Learning Perl  (the "Llama Book"); Text: Learning Perl  (the "Llama Boo
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1413 in perlbook.pod
 Lookups: Learning Perl (the "Llama Book"); Text: Learning Perl (the "Llama Book"); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3047 in perlbook.pod
-Lookups: Mastering Perl/Tk; Text: Mastering Perl/Tk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Mastering Perl/Tk, Mastering PerlE<sol>Tk; Text: Mastering Perl/Tk; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6291 in perlbook.pod
 Lookups: Mastering Perl; Text: Mastering Perl; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3512 in perlbook.pod

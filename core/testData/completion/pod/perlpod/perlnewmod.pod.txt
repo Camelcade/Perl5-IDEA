@@ -30,13 +30,13 @@ Lookups: Step-by-step: Preparing the ground; Text: Step-by-step: Preparing the g
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 3041 in perlnewmod.pod
 Lookups: Upload the tarball; Text: Upload the tarball; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10096 in perlnewmod.pod
-Lookups: Use Carp|Carp; Text: Use Carp|Carp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Use Carp|Carp, Use CarpE<verbar>Carp; Text: Use Carp|Carp; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6292 in perlnewmod.pod
-Lookups: Use Exporter|Exporter - wisely!; Text: Use Exporter|Exporter - wisely!; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Use Exporter|Exporter - wisely!, Use ExporterE<verbar>Exporter - wisely!; Text: Use Exporter|Exporter - wisely!; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7071 in perlnewmod.pod
-Lookups: Use plain old documentation|perlpod; Text: Use plain old documentation|perlpod; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Use plain old documentationE<verbar>perlpod, Use plain old documentation|perlpod; Text: Use plain old documentation|perlpod; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7733 in perlnewmod.pod
-Lookups: Use strict|strict and warnings|warnings; Text: Use strict|strict and warnings|warnings; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Use strict|strict and warnings|warnings, Use strictE<verbar>strict and warningsE<verbar>warnings; Text: Use strict|strict and warnings|warnings; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6022 in perlnewmod.pod
 Lookups: Warning; Text: Warning; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 1100 in perlnewmod.pod

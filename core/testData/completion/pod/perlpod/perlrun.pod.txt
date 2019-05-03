@@ -2,17 +2,17 @@ Lookups: #! and quoting on non-Unix systems; Text: #! and quoting on non-Unix sy
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 4510 in perlrun.pod
 Lookups: #!; Text: #! and quoting on non-Unix systems; Tail: (#!); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 4564 in perlrun.pod
-Lookups: $/; Text: -0[octal/hexadecimal]; Tail: ($/); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $/, $E<sol>; Text: -0[octal/hexadecimal]; Tail: ($/); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8339 in perlrun.pod
-Lookups: $/; Text: -l[octnum]; Tail: ($/); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: $/, $E<sol>; Text: -l[octnum]; Tail: ($/); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23588 in perlrun.pod
 Lookups: $\; Text: -l[octnum]; Tail: ($\); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 23594 in perlrun.pod
 Lookups: -0; Text: -0[octal/hexadecimal]; Tail: (-0); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 8333 in perlrun.pod
-Lookups: -0[octal/hexadecimal]; Text: -0[octal/hexadecimal]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: -0[octal/hexadecimal], -0[octalE<sol>hexadecimal]; Text: -0[octal/hexadecimal]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8299 in perlrun.pod
-Lookups: -C [number/list]; Text: -C [number/list]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: -C [number/list], -C [numberE<sol>list]; Text: -C [number/list]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9852 in perlrun.pod
 Lookups: -C; Text: -C [number/list]; Tail: (-C); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 9881 in perlrun.pod
@@ -160,7 +160,7 @@ Lookups: MS-DOS; Text: MS-DOS; Tail: null; Type: List Item; Icon: /perl5language
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4782 in perlrun.pod
 Lookups: NAME; Text: NAME; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 0 in perlrun.pod
-Lookups: OS/2; Text: OS/2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: OSE<sol>2, OS/2; Text: OS/2; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4639 in perlrun.pod
 Lookups: PATH; Text: PATH; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36998 in perlrun.pod
@@ -222,7 +222,7 @@ Lookups: SYS$LOGIN; Text: SYS$LOGIN (specific to the VMS port); Tail: (SYS$LOGIN
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 52802 in perlrun.pod
 Lookups: VMS; Text: VMS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5370 in perlrun.pod
-Lookups: Win95/NT; Text: Win95/NT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+Lookups: Win95E<sol>NT, Win95/NT; Text: Win95/NT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4952 in perlrun.pod
 Lookups: autosplit; Text: -a; Tail: (autosplit); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(PodElementType.POD_FORMAT_INDEX) at 9443 in perlrun.pod
