@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.search.PsiElementProcessor;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.stubs.Stub;
@@ -62,9 +63,6 @@ import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
 
-/**
- * Created by hurricup on 09.08.2015.
- */
 public class PerlPsiUtil implements PerlElementTypes {
   private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.create(
     WHITE_SPACE, NEW_LINE_INDENT,
@@ -968,6 +966,22 @@ public class PerlPsiUtil implements PerlElementTypes {
     return openQuoteChar == 0 ? SINGLE_QUOTE + StringUtil.escapeChar(content, SINGLE_QUOTE_CHAR) + SINGLE_QUOTE :
            openQuoteChar == SINGLE_QUOTE_CHAR ? SINGLE_QUOTE + content + SINGLE_QUOTE :
            PerlPsiUtil.QUOTE_Q + openQuoteChar + content + PerlString.getQuoteCloseChar(openQuoteChar);
+  }
+
+  /**
+   * Tries to get stub from passed {@code element} if available
+   */
+  @Contract("null->null")
+  @Nullable
+  public static StubElement<?> getStubFromElement(@Nullable PsiElement element) {
+    StubElement<?> stubElement = null;
+    if (element instanceof PsiFileImpl) {
+      stubElement = ((PsiFileImpl)element).getStub();
+    }
+    else if (element instanceof StubBasedPsiElement) {
+      stubElement = ((StubBasedPsiElement)element).getStub();
+    }
+    return stubElement;
   }
 
   static public abstract class HeredocProcessor implements Processor<PsiElement> {
