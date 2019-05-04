@@ -88,7 +88,7 @@ Lookups: brace; Text: Compound Statements; Tail: (brace); Type: Index; Icon: /pe
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9201 in perlsyn.pod
 Lookups: bracket, curly; Text: Compound Statements; Tail: (bracket, curly); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9166 in perlsyn.pod
-Lookups: case; Text: case; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: case; Text: Switch Statements; Tail: (case); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23737 in perlsyn.pod
 Lookups: comment; Text: Comments; Tail: (comment); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4373 in perlsyn.pod
@@ -102,7 +102,7 @@ Lookups: curly bracket; Text: Compound Statements; Tail: (curly bracket); Type: 
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9184 in perlsyn.pod
 Lookups: declaration; Text: Declarations; Tail: (declaration); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1301 in perlsyn.pod
-Lookups: default; Text: default; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: default; Text: Switch Statements; Tail: (default); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23762 in perlsyn.pod
 Lookups: documentation; Text: PODs: Embedded Documentation; Tail: (documentation); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 30951 in perlsyn.pod
@@ -138,7 +138,7 @@ Lookups: foreach; Text: Statement Modifiers; Tail: (foreach); Type: Index; Icon:
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5308 in perlsyn.pod
 Lookups: given; Text: Compound Statements; Tail: (given); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9236 in perlsyn.pod
-Lookups: given; Text: given; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: given; Text: Switch Statements; Tail: (given); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23745 in perlsyn.pod
 Lookups: goto; Text: Goto; Tail: (goto); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 26778 in perlsyn.pod
@@ -190,7 +190,7 @@ Lookups: statement; Text: Simple Statements; Tail: (statement); Type: Index; Ico
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4567 in perlsyn.pod
 Lookups: subroutine, declaration; Text: Declaring a subroutine allows a subroutine name to be used as if it were a list operator from that point forward in the program.  You can...; Tail: (subroutine, declaration); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2985 in perlsyn.pod
-Lookups: switch; Text: switch; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: switch; Text: Switch Statements; Tail: (switch); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23727 in perlsyn.pod
 Lookups: syntax; Text: NAME; Tail: (syntax); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perlsyn.pod
@@ -218,7 +218,7 @@ Lookups: whatever operator; Text: The Ellipsis Statement; Tail: (whatever operat
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28860 in perlsyn.pod
 Lookups: when; Text: Statement Modifiers; Tail: (when); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5300 in perlsyn.pod
-Lookups: when; Text: when; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: when; Text: Switch Statements; Tail: (when); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 23754 in perlsyn.pod
 Lookups: while; Text: Compound Statements; Tail: (while); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9245 in perlsyn.pod

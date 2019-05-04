@@ -128,14 +128,6 @@ Lookups: /s, E<sol>s; Text: s/PATTERN/REPLACEMENT/msixpodualngcer; Tail: (/s); T
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 82415 in perlop.pod
 Lookups: /s, E<sol>s; Text: tr/SEARCHLIST/REPLACEMENTLIST/cdsr; Tail: (/s); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 94114 in perlop.pod
-Lookups: 1. Empty hashes or arrays match.; Text: 1. Empty hashes or arrays match.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28906 in perlop.pod
-Lookups: 2. That is, each element smartmatches the element of the same index in the other array.[3]; Text: 2. That is, each element smartmatches the element of the same index in the other array.[3]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 28946 in perlop.pod
-Lookups: 3. If a circular reference is found, fall back to referential equality.; Text: 3. If a circular reference is found, fall back to referential equality.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29044 in perlop.pod
-Lookups: 4. Either an actual number, or a string that looks like one.; Text: 4. Either an actual number, or a string that looks like one.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 29123 in perlop.pod
 Lookups: <<, E<lt>E<lt>; Text: <<EOF; Tail: (<<); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 100712 in perlop.pod
 Lookups: <<, E<lt>E<lt>; Text: Quote and Quote-like Operators; Tail: (<<); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -468,11 +460,11 @@ Lookups: filehandle; Text: I/O Operators; Tail: (filehandle); Type: Index; Icon:
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 119939 in perlop.pod
 Lookups: filetest; Text: Regarding precedence, the filetest operators, like -f, -M, etc. are treated like named unary operators, but they don't follow this functi...; Tail: (filetest); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20373 in perlop.pod
-Lookups: float; Text: float; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: float; Text: Floating-point Arithmetic; Tail: (float); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 135644 in perlop.pod
-Lookups: floating point; Text: floating point; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: floating point; Text: Floating-point Arithmetic; Tail: (floating point); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 135626 in perlop.pod
-Lookups: floating-point; Text: floating-point; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: floating-point; Text: Floating-point Arithmetic; Tail: (floating-point); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 135608 in perlop.pod
 Lookups: folding; Text: Constant Folding; Tail: (folding); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 130733 in perlop.pod
@@ -670,7 +662,7 @@ Lookups: qx; Text: qx/STRING/; Tail: (qx); Type: Index; Icon: /perl5language.png
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 88519 in perlop.pod
 Lookups: range; Text: Range Operators; Tail: (range); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 39295 in perlop.pod
-Lookups: real; Text: real; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: real; Text: Floating-point Arithmetic; Tail: (real); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 135653 in perlop.pod
 Lookups: reference; Text: Unary "\" creates references.  If its operand is a single sigilled thing, it creates a reference to that object.  If its operand is a par...; Tail: (reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12679 in perlop.pod

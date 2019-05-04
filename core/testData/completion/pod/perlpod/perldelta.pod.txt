@@ -1,11 +1,3 @@
-Lookups:  "Use of state $_ is experimental" in perldiag; Text:  "Use of state $_ is experimental" in perldiag; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35121 in perldelta.pod
-Lookups:  C89 requirement; Text:  C89 requirement; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44860 in perldelta.pod
-Lookups:  New probes; Text:  New probes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46234 in perldelta.pod
-Lookups:  perldiagE<sol>Variable length lookbehind not implemented in regex mE<sol>%sE<sol>,  perldiag/Variable length lookbehind not implemented in regex m/%s/; Text:  perldiag/Variable length lookbehind not implemented in regex m/%s/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 34752 in perldelta.pod
 Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 68572 in perldelta.pod
 Lookups: Assignment to $[ will be fatal in Perl 5.30; Text: Assignment to $[ will be fatal in Perl 5.30; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

@@ -34,13 +34,15 @@ import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFile;
-import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
-import com.perl5.lang.pod.parser.psi.PodRenderableElement;
+import com.perl5.lang.pod.parser.psi.PodStubsAwareRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
+import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
+import com.perl5.lang.pod.psi.PsiItemSection;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.apache.commons.lang.math.NumberUtils;
 import org.jetbrains.annotations.Contract;
@@ -116,7 +118,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 
   protected static void addSectionsCompletions(@NotNull final CompletionResultSet result, PsiFile targetFile) {
     if (targetFile != null) {
-      targetFile.accept(new PodRecursiveVisitor() {
+      targetFile.accept(new PodStubsAwareRecursiveVisitor() {
         @Override
         public void visitTargetableSection(PodTitledSection o) {
           String title = cleanItemText(o.getTitleText());
@@ -128,6 +130,16 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
                                 .withTypeText(UsageViewUtil.getType(o)));
           }
           super.visitTargetableSection(o);
+        }
+
+        @Override
+        public void visitItemSection(@NotNull PsiItemSection o) {
+          if (((PodSectionItem)o).isTargetable()) {
+            super.visitItemSection(o);
+          }
+          else {
+            visitElement(o);
+          }
         }
 
         @Contract("null->null")
@@ -158,11 +170,8 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           if (indexTarget instanceof PodFile) {
             presentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
           }
-          else if (indexTarget instanceof PodTitledSection) {
-            presentableText = cleanItemText(((PodTitledSection)indexTarget).getTitleText());
-          }
-          else if (indexTarget instanceof PodRenderableElement) {
-            presentableText = cleanItemText(((PodRenderableElement)indexTarget).getAsText());
+          else if (indexTarget instanceof PodCompositeElement) {
+            presentableText = cleanItemText(((PodCompositeElement)indexTarget).getPresentableText());
           }
           else {
             LOG.warn("Unhandled index target: " + indexTarget);

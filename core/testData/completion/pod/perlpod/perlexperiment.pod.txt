@@ -4,8 +4,6 @@ Lookups: -Dusemultiplicity -Duseithreads; Text: -Dusemultiplicity -Duseithreads;
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4001 in perlexperiment.pod
 Lookups: 5.005-style threading; Text: 5.005-style threading; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5653 in perlexperiment.pod
-Lookups: 64-bit support; Text: 64-bit support; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3642 in perlexperiment.pod
 Lookups: AUTHORS; Text: AUTHORS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 6950 in perlexperiment.pod
 Lookups: Accepted features; Text: Accepted features; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,6 @@ public class PodCompletionSectionsTest extends PodLightTestCase {
   protected void setUp() throws Exception {
     super.setUp();
     withPerlPod();
-  }
-
-  @Override
-  protected boolean restrictFilesParsing() {
-    return false;
   }
 
   public void testPerl() {doTest();}

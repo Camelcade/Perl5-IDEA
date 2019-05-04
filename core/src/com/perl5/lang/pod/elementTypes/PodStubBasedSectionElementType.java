@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public abstract class PodStubBasedSectionElementType<Psi extends PodStubBasedSection> extends IStubElementType<PodSectionStub, Psi>
   implements PsiElementProvider {
@@ -49,7 +50,7 @@ public abstract class PodStubBasedSectionElementType<Psi extends PodStubBasedSec
   @NotNull
   @Override
   public PodSectionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PodSectionStub(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
+    return new PodSectionStub(parentStub, this, Objects.requireNonNull(PerlStubSerializationUtil.readString(dataStream)));
   }
 
   @Override

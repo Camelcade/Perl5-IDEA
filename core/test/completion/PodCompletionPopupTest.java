@@ -90,11 +90,6 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   public void testCommandAfterCommandWrong() {doTestNegative("=head1 test\n<caret>", "=");}
 
   @Override
-  protected boolean restrictFilesParsing() {
-    return false;
-  }
-
-  @Override
   protected void doTest(@NotNull String initial, @NotNull String toType) {
     myFixture.copyFileToProject("test.pm");
     super.doTest(initial, toType);

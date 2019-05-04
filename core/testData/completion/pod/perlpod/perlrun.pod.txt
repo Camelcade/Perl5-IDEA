@@ -114,12 +114,6 @@ Lookups: -x; Text: -x; Tail: null; Type: List Item; Icon: /perl5language.png; Ty
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35673 in perlrun.pod
 Lookups: -xdirectory; Text: -xdirectory; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 35692 in perlrun.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 929 in perlrun.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1012 in perlrun.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1204 in perlrun.pod
 Lookups: :bytes; Text: :bytes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 39739 in perlrun.pod
 Lookups: :crlf; Text: :crlf; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

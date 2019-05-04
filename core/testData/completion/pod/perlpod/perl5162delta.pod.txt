@@ -1,7 +1,3 @@
-Lookups:  configuration should no longer be confused by ls colorization; Text:  configuration should no longer be confused by ls colorization; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 732 in perl5162delta.pod
-Lookups:  fix /\h/ equivalence with /[\h]/,  fix E<sol>\hE<sol> equivalence with E<sol>[\h]E<sol>; Text:  fix /\h/ equivalence with /[\h]/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1111 in perl5162delta.pod
 Lookups: AIX; Text: AIX; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 876 in perl5162delta.pod
 Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null

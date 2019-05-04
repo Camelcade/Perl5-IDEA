@@ -1,25 +1,3 @@
-Lookups:  "." no longer in @INC; Text:  "." no longer in @INC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 273 in perl5260delta.pod
-Lookups:  A new deprecation warning issued by do.; Text:  A new deprecation warning issued by do.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8392 in perl5260delta.pod
-Lookups:  Configure -Udefault_inc_excludes_dot; Text:  Configure -Udefault_inc_excludes_dot; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7205 in perl5260delta.pod
-Lookups:  In regular expression patterns, a literal left brace "{" should be escaped; Text:  In regular expression patterns, a literal left brace "{" should be escaped; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 822 in perl5260delta.pod
-Lookups:  Installing and using CPAN modules; Text:  Installing and using CPAN modules; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10225 in perl5260delta.pod
-Lookups:  Module Authors; Text:  Module Authors; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11441 in perl5260delta.pod
-Lookups:  New Faster Hash Function on 64 bit builds; Text:  New Faster Hash Function on 64 bit builds; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20386 in perl5260delta.pod
-Lookups:  PERL_USE_UNSAFE_INC; Text:  PERL_USE_UNSAFE_INC; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7668 in perl5260delta.pod
-Lookups:  Script authors; Text:  Script authors; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9073 in perl5260delta.pod
-Lookups:  do may now warn; Text:  do may now warn; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 671 in perl5260delta.pod
-Lookups:  readline is faster; Text:  readline is faster; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 20569 in perl5260delta.pod
 Lookups: @{^CAPTURE}, %{^CAPTURE}, and %{^CAPTURE_ALL}; Text: @{^CAPTURE}, %{^CAPTURE}, and %{^CAPTURE_ALL}; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 2534 in perl5260delta.pod
 Lookups: Acknowledgements; Text: Acknowledgements; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null

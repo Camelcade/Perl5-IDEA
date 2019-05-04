@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
-import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.psi.impl.PsiItemSectionImpl;
@@ -45,22 +44,13 @@ public class PodSectionItemElementType extends PodStubBasedTitledSectionElementT
   @NotNull
   @Override
   public PodSectionStub createStub(@NotNull PodSectionItem psi, StubElement parentStub) {
-    char prefix;
-    if (psi.isBulleted()) {
-      prefix = 1;
-    }
-    else if (psi.isNumbered()) {
-      prefix = 2;
-    }
-    else {
-      prefix = 0;
-    }
-    return new PodSectionStub(parentStub, this, "" + prefix + PodLinkCompletionProvider.trimItemText(psi.getPresentableText()));
+    char prefix = psi.isTargetable() ? '+' : '-';
+    return new PodSectionStub(parentStub, this, "" + prefix + psi.getPresentableText());
   }
 
   @Override
   protected boolean shouldCreateStub(@NotNull PodSectionItem item) {
     return item.isIndexed() && StringUtil.isNotEmpty(item.getPresentableText()) ||
-           !item.isBulleted() && !item.isNumbered() && super.shouldCreateStub(item);
+           item.isTargetable() && super.shouldCreateStub(item);
   }
 }

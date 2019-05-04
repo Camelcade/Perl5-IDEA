@@ -1,9 +1,3 @@
-Lookups:  The "version" key has a reference to an AV as its value; Text:  The "version" key has a reference to an AV as its value; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95469 in perlapi.pod
-Lookups:  The SV is an HV or a reference to an HV; Text:  The SV is an HV or a reference to an HV; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95377 in perlapi.pod
-Lookups:  The hash contains a "version" key; Text:  The hash contains a "version" key; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 95426 in perlapi.pod
 Lookups: "Gimme" Values; Text: "Gimme" Values; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 95607 in perlapi.pod
 Lookups: API; Text: DESCRIPTION; Tail: (API); Type: Index; Icon: /perl5language.png; Type Icon: null
@@ -226,6 +220,10 @@ Lookups: Optree Manipulation Functions; Text: Optree Manipulation Functions; Tai
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 243301 in perlapi.pod
 Lookups: Optree construction; Text: Optree construction; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 228776 in perlapi.pod
+Lookups: PERL_SYS_INIT3; Text: PERL_SYS_INIT3; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 203015 in perlapi.pod
+Lookups: PERL_SYS_INIT; Text: PERL_SYS_INIT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 202724 in perlapi.pod
 Lookups: Pack and Unpack; Text: Pack and Unpack; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 270264 in perlapi.pod
 Lookups: Pad Data Structures; Text: Pad Data Structures; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
@@ -320,6 +318,8 @@ Lookups: Perl_langinfo; Text: Perl_langinfo; Tail: null; Type: List Item; Icon: 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 165682 in perlapi.pod
 Lookups: Perl_setlocale; Text: Perl_setlocale; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 170256 in perlapi.pod
+Lookups: Perl_signbit; Text: Perl_signbit; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
+    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 217850 in perlapi.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 475125 in perlapi.pod
 Lookups: UVCHR_IS_INVARIANT; Text: UVCHR_IS_INVARIANT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1722,12 +1722,6 @@ Lookups: unlnk; Text: unlnk; Tail: null; Type: List Item; Icon: /perl5language.p
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474120 in perlapi.pod
 Lookups: unsharepvn; Text: unsharepvn; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 474142 in perlapi.pod
-Lookups: utf8_to_bytes; Text: utf8_to_bytes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 439891 in perlapi.pod
-Lookups: utf8_to_uvchr; Text: utf8_to_uvchr; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 440610 in perlapi.pod
-Lookups: utf8_to_uvchr_buf; Text: utf8_to_uvchr_buf; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 441813 in perlapi.pod
 Lookups: utf8_to_uvuni_buf; Text: utf8_to_uvuni_buf; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 442750 in perlapi.pod
 Lookups: uvchr_to_utf8; Text: uvchr_to_utf8; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

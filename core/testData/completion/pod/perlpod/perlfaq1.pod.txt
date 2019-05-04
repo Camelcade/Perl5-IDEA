@@ -1,7 +1,3 @@
-Lookups:  http://perltraining.com.au/whyperl.html,  http:E<sol>E<sol>perltraining.com.auE<sol>whyperl.html; Text:  http://perltraining.com.au/whyperl.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13798 in perlfaq1.pod
-Lookups:  http:E<sol>E<sol>www.perl.orgE<sol>about.html,  http://www.perl.org/about.html; Text:  http://www.perl.org/about.html; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13755 in perlfaq1.pod
 Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 13857 in perlfaq1.pod
 Lookups: Can I do [task] in Perl?; Text: Can I do [task] in Perl?; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

@@ -1,29 +1,7 @@
-Lookups: *; Text: 7.; Tail: (*); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: *; Text: A reference can be created by using a special syntax, lovingly known as the *foo{THING} syntax.  *foo{THING} returns a reference to the T...; Tail: (*); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9760 in perlref.pod
-Lookups: *foo{THING}; Text: 7.; Tail: (*foo{THING}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: *foo{THING}; Text: A reference can be created by using a special syntax, lovingly known as the *foo{THING} syntax.  *foo{THING} returns a reference to the T...; Tail: (*foo{THING}); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9745 in perlref.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 12705 in perlref.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 2721 in perlref.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13574 in perlref.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3634 in perlref.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 15026 in perlref.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4670 in perlref.pod
-Lookups: 4.; Text: 4.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 16474 in perlref.pod
-Lookups: 4.; Text: 4.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 6352 in perlref.pod
-Lookups: 5.; Text: 5.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8492 in perlref.pod
-Lookups: 6.; Text: 6.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9494 in perlref.pod
-Lookups: 7.; Text: 7.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9736 in perlref.pod
 Lookups: Assigning to References; Text: Assigning to References; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 30783 in perlref.pod
 Lookups: Circular References; Text: Circular References; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
@@ -56,37 +34,50 @@ Lookups: Using References; Text: Using References; Tail: null; Type: 2nd Heading
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 12455 in perlref.pod
 Lookups: WARNING: Don't use references as hash keys; Text: WARNING: Don't use references as hash keys; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 28041 in perlref.pod
-Lookups: [; Text: 2.; Tail: ([); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: [; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: ([); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3663 in perlref.pod
-Lookups: []; Text: 2.; Tail: ([]); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: []; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: ([]); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3668 in perlref.pod
-Lookups: \; Text: 1.; Tail: (\); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: \; Text: By using the backslash operator on a variable, subroutine, or value. (This works much like the & (address-of) operator in C.) This typica...; Tail: (\); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2730 in perlref.pod
-Lookups: array reference; Text: 2.; Tail: (array reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array reference; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: (array reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3723 in perlref.pod
-Lookups: array, anonymous; Text: 2.; Tail: (array, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: array, anonymous; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: (array, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3643 in perlref.pod
-Lookups: arrayref; Text: 2.; Tail: (arrayref); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: arrayref; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: (arrayref); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3711 in perlref.pod
-Lookups: autovivification; Text: 6.; Tail: (autovivification); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: autovivification; Text: References of the appropriate type can spring into existence if you dereference them in a context that assumes they exist.  Because we ha...; Tail: (autovivification); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9503 in perlref.pod
-Lookups: backslash; Text: 1.; Tail: (backslash); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: backslash; Text: By using the backslash operator on a variable, subroutine, or value. (This works much like the & (address-of) operator in C.) This typica...; Tail: (backslash); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2735 in perlref.pod
-Lookups: brace; Text: 3.; Tail: (brace); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: brace; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (brace); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4744 in perlref.pod
-Lookups: bracket, curly; Text: 3.; Tail: (bracket, curly); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: bracket, curly; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (bracket, curly); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4726 in perlref.pod
-Lookups: bracket, square; Text: 2.; Tail: (bracket, square); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: bracket, square; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: (bracket, square); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3692 in perlref.pod
 Lookups: circular reference; Text: Circular References; Tail: (circular reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18942 in perlref.pod
-Lookups: closure; Text: 4.; Tail: (closure); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: closure; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (closure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6454 in perlref.pod
 Lookups: closure; Text: Function Templates; Tail: (closure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24285 in perlref.pod
-Lookups: constructor; Text: 5.; Tail: (constructor); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: constructor; Text: References are often returned by special subroutines called constructors.  Perl objects are just references to a special type of object t...; Tail: (constructor); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8501 in perlref.pod
-Lookups: curly bracket; Text: 3.; Tail: (curly bracket); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: curly bracket; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (curly bracket); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4709 in perlref.pod
 Lookups: data structure; Text: NAME; Tail: (data structure); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 36 in perlref.pod
@@ -96,21 +87,29 @@ Lookups: dereferencing; Text: Using References; Tail: (dereferencing); Type: Ind
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12497 in perlref.pod
 Lookups: hard reference; Text: In contrast, hard references are more like hard links in a Unix file system: They are used to access an underlying object without concern...; Tail: (hard reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2240 in perlref.pod
-Lookups: hash reference; Text: 3.; Tail: (hash reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash reference; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (hash reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4764 in perlref.pod
-Lookups: hash, anonymous; Text: 3.; Tail: (hash, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hash, anonymous; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (hash, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4679 in perlref.pod
-Lookups: hashref; Text: 3.; Tail: (hashref); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: hashref; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (hashref); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4753 in perlref.pod
-Lookups: lexical scope; Text: 4.; Tail: (lexical scope); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lexical scope; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (lexical scope); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6476 in perlref.pod
 Lookups: lexical scope; Text: Function Templates; Tail: (lexical scope); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24307 in perlref.pod
-Lookups: lexical; Text: 4.; Tail: (lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: lexical; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6465 in perlref.pod
 Lookups: lexical; Text: Function Templates; Tail: (lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24296 in perlref.pod
-Lookups: new; Text: 5.; Tail: (new); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: new; Text: References are often returned by special subroutines called constructors.  Perl objects are just references to a special type of object t...; Tail: (new); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 8516 in perlref.pod
 Lookups: pointer; Text: NAME; Tail: (pointer); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 25 in perlref.pod
@@ -120,7 +119,8 @@ Lookups: pseudo-hash; Text: Pseudo-hashes: Using an array as a hash; Tail: (pseu
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24112 in perlref.pod
 Lookups: pseudohash; Text: Pseudo-hashes: Using an array as a hash; Tail: (pseudohash); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24142 in perlref.pod
-Lookups: reference, array; Text: 2.; Tail: (reference, array); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: reference, array; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: (reference, array); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3742 in perlref.pod
 Lookups: reference, circular; Text: Circular References; Tail: (reference, circular); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 18964 in perlref.pod
@@ -128,7 +128,9 @@ Lookups: reference, creation; Text: Making References; Tail: (reference, creatio
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2629 in perlref.pod
 Lookups: reference, hard; Text: In contrast, hard references are more like hard links in a Unix file system: They are used to access an underlying object without concern...; Tail: (reference, hard); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2221 in perlref.pod
-Lookups: reference, hash; Text: 3.; Tail: (reference, hash); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: reference, hash; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: (reference, hash); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4782 in perlref.pod
 Lookups: reference, numeric context; Text: Using a string or number as a reference produces a symbolic reference, as explained above.  Using a reference as a number produces an int...; Tail: (reference, numeric context); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17261 in perlref.pod
@@ -140,7 +142,8 @@ Lookups: reference, string context; Text: Using a reference as a string produces
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 17753 in perlref.pod
 Lookups: reference, string context; Text: WARNING: Don't use references as hash keys; Tail: (reference, string context); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28091 in perlref.pod
-Lookups: reference, subroutine; Text: 4.; Tail: (reference, subroutine); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: reference, subroutine; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (reference, subroutine); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6411 in perlref.pod
 Lookups: reference, symbolic; Text: Symbolic references are names of variables or other objects, just as a symbolic link in a Unix filesystem contains merely the name of a f...; Tail: (reference, symbolic); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1836 in perlref.pod
@@ -154,7 +157,8 @@ Lookups: reference; Text: NAME; Tail: (reference); Type: Index; Icon: /perl5lang
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 12 in perlref.pod
 Lookups: referencing; Text: Making References; Tail: (referencing); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 2652 in perlref.pod
-Lookups: scope, lexical; Text: 4.; Tail: (scope, lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: scope, lexical; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (scope, lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6436 in perlref.pod
 Lookups: scope, lexical; Text: Function Templates; Tail: (scope, lexical); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24267 in perlref.pod
@@ -162,7 +166,8 @@ Lookups: soft reference; Text: Symbolic references are names of variables or oth
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1900 in perlref.pod
 Lookups: soft reference; Text: Symbolic references; Tail: (soft reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20832 in perlref.pod
-Lookups: square bracket; Text: 2.; Tail: (square bracket); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: square bracket; Text: A reference to an anonymous array can be created using square brackets:      $arrayref = [1, 2, ['a', 'b', 'c']];
+ Here we've created a r...; Tail: (square bracket); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3674 in perlref.pod
 Lookups: struct; Text: NAME; Tail: (struct); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 67 in perlref.pod
@@ -172,19 +177,25 @@ Lookups: sub, local; Text: Function Templates; Tail: (sub, local); Type: Index; 
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24382 in perlref.pod
 Lookups: sub, nested; Text: Function Templates; Tail: (sub, nested); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24346 in perlref.pod
-Lookups: subroutine, anonymous; Text: 4.; Tail: (subroutine, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: subroutine, anonymous; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (subroutine, anonymous); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6361 in perlref.pod
 Lookups: subroutine, local; Text: Function Templates; Tail: (subroutine, local); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24361 in perlref.pod
 Lookups: subroutine, nested; Text: Function Templates; Tail: (subroutine, nested); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 24324 in perlref.pod
-Lookups: subroutine, reference; Text: 4.; Tail: (subroutine, reference); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: subroutine, reference; Text: A reference to an anonymous subroutine can be created by using sub without a subname:      $coderef = sub { print "Boink!\n" };
+ Note the...; Tail: (subroutine, reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 6386 in perlref.pod
 Lookups: symbolic reference; Text: Symbolic references are names of variables or other objects, just as a symbolic link in a Unix filesystem contains merely the name of a f...; Tail: (symbolic reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1878 in perlref.pod
 Lookups: symbolic reference; Text: Symbolic references; Tail: (symbolic reference); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 20810 in perlref.pod
-Lookups: {; Text: 3.; Tail: ({); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: {; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: ({); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4698 in perlref.pod
-Lookups: {}; Text: 3.; Tail: ({}); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: {}; Text: A reference to an anonymous hash can be created using curly brackets:      $hashref = {
+        'Adam'  => 'Eve',
+        'Clyde' => 'Bon...; Tail: ({}); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4703 in perlref.pod

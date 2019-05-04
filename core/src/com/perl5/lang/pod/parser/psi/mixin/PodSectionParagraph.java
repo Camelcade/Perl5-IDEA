@@ -17,8 +17,10 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
@@ -36,6 +38,16 @@ public class PodSectionParagraph extends PodStubBasedSection {
 
   public PodSectionParagraph(@NotNull ASTNode node) {
     super(node);
+  }
+
+  @NotNull
+  @Override
+  public String getPresentableText() {
+    PodSectionStub stub = getGreenStub();
+    if (stub != null) {
+      return stub.getContent();
+    }
+    return StringUtil.notNullize(PodLinkCompletionProvider.trimItemText(PodRenderUtil.renderPsiElementAsText(this)));
   }
 
   @Override

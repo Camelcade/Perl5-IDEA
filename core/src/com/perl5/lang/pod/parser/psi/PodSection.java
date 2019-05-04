@@ -50,4 +50,13 @@ public interface PodSection extends PodCompositeElement, PodRenderableElement {
   default void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
     renderElementContentAsText(builder, new PodRenderingContext());
   }
+
+  @Override
+  default boolean isIndexed() {
+    PsiElement contentBlock = getContentBlock();
+    if (contentBlock instanceof PodCompositeElement && ((PodCompositeElement)contentBlock).isIndexed()) {
+      return true;
+    }
+    return PodCompositeElement.super.isIndexed();
+  }
 }

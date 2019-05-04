@@ -32,11 +32,6 @@ public class PodCompletionTest extends PodLightTestCase {
     withPerlPod();
   }
 
-  @Override
-  protected boolean restrictFilesParsing() {
-    return false;
-  }
-
   public void testHeading2() {
     myFixture.copyFileToProject("test.pm");
     doTest("=head2 <caret>");

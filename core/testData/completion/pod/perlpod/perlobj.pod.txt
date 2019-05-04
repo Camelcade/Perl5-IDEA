@@ -1,11 +1,5 @@
 Lookups: -E<gt>, ->; Text: Method Invocation; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7675 in perlobj.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1047 in perlobj.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1133 in perlobj.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1233 in perlobj.pod
 Lookups: @ISA; Text: A Class is Simply a Package; Tail: (@ISA); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5277 in perlobj.pod
 Lookups: A Class is Simply a Package; Text: A Class is Simply a Package; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

@@ -132,7 +132,7 @@ Lookups: POD, interior sequence; Text: Formatting Codes; Tail: (POD, interior se
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9592 in perlpod.pod
 Lookups: POD, ordinary paragraph; Text: Ordinary Paragraph; Tail: (POD, ordinary paragraph); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 635 in perlpod.pod
-Lookups: POD, validating; Text: POD, validating; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: POD, validating; Text: The podchecker command is provided for checking Pod syntax for errors and warnings.  For example, it checks for completely blank lines in...; Tail: (POD, validating); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19764 in perlpod.pod
 Lookups: POD, verbatim paragraph; Text: Verbatim Paragraph; Tail: (POD, verbatim paragraph); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1262 in perlpod.pod
@@ -212,7 +212,7 @@ Lookups: plain old documentation; Text: NAME; Tail: (plain old documentation); T
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 126 in perlpod.pod
 Lookups: pod; Text: =pod; Tail: (pod); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 5212 in perlpod.pod
-Lookups: podchecker; Text: podchecker; Tail: null; Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: podchecker; Text: The podchecker command is provided for checking Pod syntax for errors and warnings.  For example, it checks for completely blank lines in...; Tail: (podchecker); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 19750 in perlpod.pod
 Lookups: verbatim; Text: Verbatim Paragraph; Tail: (verbatim); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 1289 in perlpod.pod

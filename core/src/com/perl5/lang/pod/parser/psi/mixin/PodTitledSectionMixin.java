@@ -21,14 +21,13 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PodTitledSectionMixin extends PodStubBasedTitledSection implements PodTitledSection {
+public class PodTitledSectionMixin extends PodStubBasedTitledSection {
   public PodTitledSectionMixin(@NotNull ASTNode node) {
     super(node);
   }
@@ -36,12 +35,6 @@ public class PodTitledSectionMixin extends PodStubBasedTitledSection implements 
   public PodTitledSectionMixin(@NotNull PodSectionStub stub,
                                @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
-  }
-
-  @Nullable
-  @Override
-  public String getPresentableText() {
-    return getTitleText();
   }
 
   @Nullable

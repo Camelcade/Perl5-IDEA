@@ -52,10 +52,6 @@ Lookups: /%s/: Unrecognized escape \\%c in character class passed through, E<sol
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 85230 in perl561delta.pod
 Lookups: 64-bit support; Text: 64-bit support; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 25700 in perl561delta.pod
-Lookups: 64-bit support; Text: 64-bit support; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 120962 in perl561delta.pod
-Lookups: 64-bit support; Text: 64-bit support; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7905 in perl561delta.pod
 Lookups: <HANDLE> on empty files, E<lt>HANDLEE<gt> on empty files; Text: <HANDLE> on empty files; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77849 in perl561delta.pod
 Lookups: @- and @+ provide starting/ending offsets of regex submatches, @- and @+ provide startingE<sol>ending offsets of regex submatches; Text: @- and @+ provide starting/ending offsets of regex submatches; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

@@ -1,9 +1,5 @@
 Lookups:  is a wild-card; Text:  is a wild-card; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11411 in perluniprops.pod
-Lookups:  underscores separating digits in numbers; Text:  underscores separating digits in numbers; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4245 in perluniprops.pod
-Lookups:  white space adjacent to a non-word character; Text:  white space adjacent to a non-word character; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 4191 in perluniprops.pod
 Lookups: (\d+) in the info column gives the number of Unicode code points matched by this property.; Text: (\d+) in the info column gives the number of Unicode code points matched by this property.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 11441 in perluniprops.pod
 Lookups: BidiCharacterTest.txt; Text: BidiCharacterTest.txt; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

@@ -47,11 +47,6 @@ public class PodCompletionComplexTest extends PodLightTestCase {
     withPerlPod();
   }
 
-  @Override
-  protected boolean restrictFilesParsing() {
-    return false;
-  }
-
   public void testPerlPod() {
     doTest("L<perlpod/<caret>>");
   }

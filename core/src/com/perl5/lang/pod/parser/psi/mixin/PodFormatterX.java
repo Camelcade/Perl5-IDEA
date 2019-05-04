@@ -21,18 +21,16 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.pod.parser.psi.PodFormatter;
-import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import com.perl5.lang.pod.parser.psi.PodSectionTitle;
-import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PodFormatterX extends PodStubBasedTitledSection implements PodTitledSection, PodFormatter {
+public class PodFormatterX extends PodStubBasedTitledSection implements PodFormatter {
   public PodFormatterX(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
@@ -96,8 +94,13 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodTitle
    */
   @Nullable
   public PsiElement getIndexTarget() {
+    PodSectionStub stub = getStub();
+    if (stub != null) {
+      StubElement parentStub = stub.getParentStub();
+      return parentStub == null ? null : parentStub.getPsi();
+    }
     PsiElement parent = getParent();
-    if (parent instanceof PodSectionTitle) {
+    if (parent instanceof PodSectionTitle || parent instanceof PodSectionContent) {
       return parent.getParent();
     }
     return parent;

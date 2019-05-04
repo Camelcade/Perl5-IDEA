@@ -6,12 +6,6 @@ Lookups: &; Text: The interesting thing about & is that you can generate new syn
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 56249 in perlsub.pod
 Lookups: *; Text: Passing Symbol Table Entries (typeglobs); Tail: (*); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 43454 in perlsub.pod
-Lookups: 1.; Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 45581 in perlsub.pod
-Lookups: 2.; Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 46168 in perlsub.pod
-Lookups: 3.; Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47159 in perlsub.pod
 Lookups: @_; Text: Any arguments passed in show up in the array @_. (They may also show up in lexical variables introduced by a signature; see /Signatures b...; Tail: (@_); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 3515 in perlsub.pod
 Lookups: AUTOLOAD; Text: Autoloading; Tail: (AUTOLOAD); Type: Index; Icon: /perl5language.png; Type Icon: null

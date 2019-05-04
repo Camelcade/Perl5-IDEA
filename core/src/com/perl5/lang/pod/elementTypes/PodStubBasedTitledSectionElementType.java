@@ -22,6 +22,8 @@ import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedTitledSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public abstract class PodStubBasedTitledSectionElementType<Psi extends PodStubBasedTitledSection>
   extends PodStubBasedSectionElementType<Psi> {
   public PodStubBasedTitledSectionElementType(@NotNull String debugName) {
@@ -31,7 +33,7 @@ public abstract class PodStubBasedTitledSectionElementType<Psi extends PodStubBa
   @NotNull
   @Override
   public PodSectionStub createStub(@NotNull PodStubBasedTitledSection psi, StubElement parentStub) {
-    return new PodSectionStub(parentStub, this, psi.getTitleText());
+    return new PodSectionStub(parentStub, this, Objects.requireNonNull(psi.getTitleText()));
   }
 
   @Override

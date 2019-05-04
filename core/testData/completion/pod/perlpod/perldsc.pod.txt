@@ -1,13 +1,3 @@
-Lookups:  arrays of arrays; Text:  arrays of arrays; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1601 in perldsc.pod
-Lookups:  arrays of hashes; Text:  arrays of hashes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1653 in perldsc.pod
-Lookups:  hashes of arrays; Text:  hashes of arrays; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1627 in perldsc.pod
-Lookups:  hashes of hashes; Text:  hashes of hashes; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1679 in perldsc.pod
-Lookups:  more elaborate constructs; Text:  more elaborate constructs; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 1705 in perldsc.pod
 Lookups: -E<gt>, ->; Text: Speaking of things like @{$AoA[$i]}, the following are actually the same thing:; Tail: (->); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 9454 in perldsc.pod
 Lookups: ARRAYS OF ARRAYS; Text: ARRAYS OF ARRAYS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null

@@ -20,15 +20,18 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedSection;
+import org.jetbrains.annotations.NotNull;
 
 public class PodSectionStub extends StubBase<PodStubBasedSection> implements StubElement<PodStubBasedSection> {
+  @NotNull
   private String myContent;
 
-  public PodSectionStub(StubElement parent, IStubElementType elementType, String myContent) {
+  public PodSectionStub(StubElement parent, IStubElementType elementType, @NotNull String myContent) {
     super(parent, elementType);
     this.myContent = myContent;
   }
 
+  @NotNull
   public String getContent() {
     return myContent;
   }

@@ -10,8 +10,6 @@ Lookups: -; Text: -; Tail: null; Type: List Item; Icon: /perl5language.png; Type
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7006 in perldebug.pod
 Lookups: -d; Text: If you invoke Perl with the -d switch, your script runs under the Perl source debugger.  This works like an interactive Perl environment,...; Tail: (-d); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 892 in perldebug.pod
-Lookups: .; Text: .; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 7160 in perldebug.pod
 Lookups: < [ command ], E<lt> [ command ]; Text: < [ command ]; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 13850 in perldebug.pod
 Lookups: <CR>, E<lt>CRE<gt>; Text: <CR>; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -196,7 +194,7 @@ Lookups: debugger command, !; Text: ! pattern; Tail: (debugger command, !); Type
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 15881 in perldebug.pod
 Lookups: debugger command, -; Text: -; Tail: (debugger command, -); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7014 in perldebug.pod
-Lookups: debugger command, .; Text: .; Tail: (debugger command, .); Type: Index; Icon: /perl5language.png; Type Icon: null
+Lookups: debugger command, .; Text: Return the internal debugger pointer to the line last executed, and print out that line.; Tail: (debugger command, .); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 7168 in perldebug.pod
 Lookups: debugger command, <<, debugger command, E<lt>E<lt>; Text: << command; Tail: (debugger command, <<); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 14134 in perldebug.pod

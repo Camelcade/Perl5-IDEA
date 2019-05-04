@@ -19,8 +19,8 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
@@ -28,7 +28,7 @@ import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
+import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_NUMBER;
 
 public class PodSectionItem extends PodTitledSectionMixin {
   public PodSectionItem(@NotNull ASTNode node) {
@@ -43,18 +43,42 @@ public class PodSectionItem extends PodTitledSectionMixin {
   @Nullable
   @Override
   public String getPresentableText() {
-    if (!isNumbered() && !isBulleted()) {
+    PodSectionStub greenStub = getGreenStub();
+    if (greenStub != null) {
+      String content = greenStub.getContent();
+      return content.isEmpty() ? "" : content.substring(1);
+    }
+
+    if (isTargetable()) {
       return super.getPresentableText();
     }
     PsiElement contentBlock = getContentBlock();
     if (contentBlock == null) {
       return null;
     }
-    PsiElement firstChild = contentBlock.getFirstChild();
-    if (firstChild == null) {
-      return null;
+    return PodLinkCompletionProvider.trimItemText(PodRenderUtil.renderPsiElementAsText(contentBlock));
+  }
+
+  @Nullable
+  @Override
+  public String getTitleText() {
+    PodSectionStub greenStub = getGreenStub();
+    if (greenStub != null) {
+      String content = greenStub.getContent();
+      return content.isEmpty() ? "" : content.substring(1);
     }
-    return PodRenderUtil.renderPsiElementAsText(firstChild);
+    return super.getTitleText();
+  }
+
+  /**
+   * @return true iff this item may be targeted from link (has title)
+   */
+  public boolean isTargetable() {
+    PodSectionStub stub = getGreenStub();
+    if (stub != null) {
+      return stub.getContent().startsWith("+");
+    }
+    return getTitleElement() != null;
   }
 
   /**
@@ -63,28 +87,25 @@ public class PodSectionItem extends PodTitledSectionMixin {
    * @return true if list should be bulleted
    */
   public boolean isBulleted() {
-    IElementType elementType = getFirstTitleTokenElementType();
-    return elementType == POD_NEWLINE || elementType == POD_ASTERISK;
-  }
-
-  @Nullable
-  private IElementType getFirstTitleTokenElementType() {
-    PsiElement titleBlock = getTitleElement();
-
-    if (titleBlock == null) {
-      return null;
-    }
-    return PsiUtilCore.getElementType(titleBlock.getFirstChild());
+    return !isTargetable() && !isNumbered();
   }
 
   /**
    * @return true iff this item is numbered one
    */
   public boolean isNumbered() {
-    IElementType elementType = getFirstTitleTokenElementType();
-    return elementType == POD_NUMBER;
+    if (isTargetable()) {
+      return false;
+    }
+    PsiElement run = getFirstChild();
+    while (run != null) {
+      if (PsiUtilCore.getElementType(run) == POD_NUMBER) {
+        return true;
+      }
+      run = run.getNextSibling();
+    }
+    return false;
   }
-
 
   /**
    * Check if this item container is bulleted

@@ -21,11 +21,9 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
 import com.perl5.lang.pod.parser.psi.mixin.*;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
-import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import com.perl5.lang.pod.psi.impl.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -365,7 +363,7 @@ public class PodElementTypeFactory {
         @NotNull
         @Override
         public PodSectionStub createStub(@NotNull PodSectionParagraph psi, StubElement parentStub) {
-          return new PodSectionStub(parentStub, this, PodLinkCompletionProvider.trimItemText(PodRenderUtil.renderPsiElementAsText(psi)));
+          return new PodSectionStub(parentStub, this, psi.getPresentableText());
         }
 
         @NotNull

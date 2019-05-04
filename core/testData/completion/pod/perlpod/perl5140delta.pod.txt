@@ -1,19 +1,3 @@
-Lookups:  allow FooE<sol>Bar.pm on the command line to mean Foo::Bar,  allow Foo/Bar.pm on the command line to mean Foo::Bar; Text:  allow Foo/Bar.pm on the command line to mean Foo::Bar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53738 in perl5140delta.pod
-Lookups:  automatic mirror selection; Text:  automatic mirror selection; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53584 in perl5140delta.pod
-Lookups:  iron out all known bugs in configure_requires; Text:  iron out all known bugs in configure_requires; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53620 in perl5140delta.pod
-Lookups:  much less configuration dialog hassle; Text:  much less configuration dialog hassle; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53387 in perl5140delta.pod
-Lookups:  support for HTTP::Tiny to reduce the dependency on FTP sites; Text:  support for HTTP::Tiny to reduce the dependency on FTP sites; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53510 in perl5140delta.pod
-Lookups:  support for METAE<sol>MYMETA.json,  support for META/MYMETA.json; Text:  support for META/MYMETA.json; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53434 in perl5140delta.pod
-Lookups:  support for distributions compressed with bzip2(1); Text:  support for distributions compressed with bzip2(1); Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53675 in perl5140delta.pod
-Lookups:  support for local::lib; Text:  support for local::lib; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53475 in perl5140delta.pod
 Lookups: "Safe signals" optimisation; Text: "Safe signals" optimisation; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 40277 in perl5140delta.pod
 Lookups: "\B{" is deprecated; use "\B\{" instead; Text: "\B{" is deprecated; use "\B\{" instead; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null

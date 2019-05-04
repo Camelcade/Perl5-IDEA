@@ -1,9 +1,3 @@
-Lookups:  Regular expression lookahead; Text:  Regular expression lookahead; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 44880 in perlunicode.pod
-Lookups:  There are additional methods for regular expression patterns; Text:  There are additional methods for regular expression patterns; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 10212 in perlunicode.pod
-Lookups:  When the string has been upgraded to UTF-8; Text:  When the string has been upgraded to UTF-8; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 9959 in perlunicode.pod
 Lookups: ASCII Rules versus Unicode Rules; Text: ASCII Rules versus Unicode Rules; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 7355 in perlunicode.pod
 Lookups: BUGS; Text: BUGS; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null

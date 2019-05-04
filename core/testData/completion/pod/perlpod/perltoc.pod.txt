@@ -919,8 +919,6 @@ Lookups: Backward compatible boilerplate; Text: Backward compatible boilerplate;
 Lookups: Blocks versus Scripts; Text: Blocks versus Scripts; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 706687 in perltoc.pod
 Lookups: CAVEAT; Text: CAVEAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700992 in perltoc.pod
-Lookups: CAVEAT; Text: CAVEAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701317 in perltoc.pod
 Lookups: CAVEAT; Text: CAVEAT; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701642 in perltoc.pod
@@ -934,12 +932,6 @@ Lookups: Character Data; Text: Character Data; Tail: null; Type: List Item; Icon
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 703674 in perltoc.pod
 Lookups: Constructor; Text: Constructor; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701969 in perltoc.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700451 in perltoc.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700662 in perltoc.pod
-Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700973 in perltoc.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701298 in perltoc.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1007,14 +999,6 @@ Lookups: S; Text: I<text> -- italic text    , B<text> -- bold text    , C<code> 
 Lookups: S; Text: S; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 129768 in perltoc.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700170 in perltoc.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700470 in perltoc.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700681 in perltoc.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701006 in perltoc.pod
-Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701331 in perltoc.pod
 Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701656 in perltoc.pod
@@ -1026,12 +1010,6 @@ Lookups: SEE ALSO; Text: SEE ALSO; Tail: null; Type: List Item; Icon: /perl5lang
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707753 in perltoc.pod
 Lookups: SUBSCRIPT_SEPARATOR; Text: $ARG, $_  , @ARG, @_  , $LIST_SEPARATOR, $"  , $PROCESS_ID, $PID, $$   , $PROGRAM_NAME, $0  , $REAL_GROUP_ID, $GID, $(   , $EFFECTIVE_GRO...; Tail: (SUBSCRIPT_SEPARATOR); Type: Index; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 70680 in perltoc.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700435 in perltoc.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700646 in perltoc.pod
-Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 700957 in perltoc.pod
 Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 701282 in perltoc.pod
 Lookups: SYNOPSIS; Text: SYNOPSIS; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
@@ -1052,12 +1030,6 @@ Lookups: System Specifics; Text: System Specifics; Tail: null; Type: List Item; 
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707165 in perltoc.pod
 Lookups: The most hairy case; Text: The most hairy case; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 707529 in perltoc.pod
-Lookups: Unicode::Collate::CJK::JISX0208 - weighting JIS KANJI for Unicode::Collate; Text: Unicode::Collate::CJK::JISX0208 - weighting JIS KANJI for Unicode::Collate; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 700343 in perltoc.pod
-Lookups: Unicode::Collate::CJK::Korean - weighting CJK Unified Ideographs for Unicode::Collate; Text: Unicode::Collate::CJK::Korean - weighting CJK Unified Ideographs for Unicode::Collate; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 700543 in perltoc.pod
-Lookups: Unicode::Collate::CJK::Pinyin - weighting CJK Unified Ideographs for Unicode::Collate; Text: Unicode::Collate::CJK::Pinyin - weighting CJK Unified Ideographs for Unicode::Collate; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 700854 in perltoc.pod
 Lookups: Unicode::Collate::CJK::Stroke - weighting CJK Unified Ideographs for Unicode::Collate; Text: Unicode::Collate::CJK::Stroke - weighting CJK Unified Ideographs for Unicode::Collate; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 701179 in perltoc.pod
 Lookups: Unicode::Collate::CJK::Zhuyin - weighting CJK Unified Ideographs for Unicode::Collate; Text: Unicode::Collate::CJK::Zhuyin - weighting CJK Unified Ideographs for Unicode::Collate; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null

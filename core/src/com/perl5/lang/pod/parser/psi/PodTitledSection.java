@@ -30,6 +30,13 @@ public interface PodTitledSection extends PodSection,
                                           PodStructureElement,
                                           PsiNameIdentifierOwner,
                                           NavigationItem {
+
+  @Nullable
+  @Override
+  default String getPresentableText() {
+    return getTitleText();
+  }
+
   /**
    * @return text representation of section
    */
@@ -107,6 +114,9 @@ public interface PodTitledSection extends PodSection,
   @Override
   default boolean isIndexed() {
     PsiElement titleBlock = getTitleElement();
-    return titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed();
+    if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed()) {
+      return true;
+    }
+    return PodSection.super.isIndexed();
   }
 }

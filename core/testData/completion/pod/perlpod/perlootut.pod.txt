@@ -1,25 +1,3 @@
-Lookups:  A miniature type system; Text:  A miniature type system; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18427 in perlootut.pod
-Lookups:  Class::Accessor; Text:  Class::Accessor; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24789 in perlootut.pod
-Lookups:  Class::Tiny; Text:  Class::Tiny; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25096 in perlootut.pod
-Lookups:  Declarative sugar; Text:  Declarative sugar; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 17486 in perlootut.pod
-Lookups:  Full introspection and manipulation; Text:  Full introspection and manipulation; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18717 in perlootut.pod
-Lookups:  Many more features; Text:  Many more features; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19504 in perlootut.pod
-Lookups:  Moose; Text:  Moose; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 24537 in perlootut.pod
-Lookups:  Rich ecosystem; Text:  Rich ecosystem; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19231 in perlootut.pod
-Lookups:  Role::Tiny; Text:  Role::Tiny; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 25357 in perlootut.pod
-Lookups:  Roles built-in; Text:  Roles built-in; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 18092 in perlootut.pod
-Lookups:  Self-hosted and extensible; Text:  Self-hosted and extensible; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 19044 in perlootut.pod
 Lookups: Attributes; Text: Attributes; Tail: null; Type: 2nd Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 6596 in perlootut.pod
 Lookups: Blessing; Text: Blessing; Tail: null; Type: 3d Heading; Icon: /perl5language.png; Type Icon: null

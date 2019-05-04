@@ -1,17 +1,3 @@
-Lookups:  http://learn.perl.org/,  http:E<sol>E<sol>learn.perl.orgE<sol>; Text:  http://learn.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3985 in perlfaq2.pod
-Lookups:  http://learn.perl.org/,  http:E<sol>E<sol>learn.perl.orgE<sol>; Text:  http://learn.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5336 in perlfaq2.pod
-Lookups:  http:E<sol>E<sol>jobs.perl.orgE<sol>,  http://jobs.perl.org/; Text:  http://jobs.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5371 in perlfaq2.pod
-Lookups:  http:E<sol>E<sol>lists.perl.orgE<sol>,  http://lists.perl.org/; Text:  http://lists.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5405 in perlfaq2.pod
-Lookups:  http:E<sol>E<sol>perldoc.perl.orgE<sol>,  http://perldoc.perl.org/; Text:  http://perldoc.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3948 in perlfaq2.pod
-Lookups:  http:E<sol>E<sol>www.perl.orgE<sol>,  http://www.perl.org/; Text:  http://www.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 3915 in perlfaq2.pod
-Lookups:  http:E<sol>E<sol>www.perl.orgE<sol>,  http://www.perl.org/; Text:  http://www.perl.org/; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-    PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 5303 in perlfaq2.pod
 Lookups: AUTHOR AND COPYRIGHT; Text: AUTHOR AND COPYRIGHT; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
     PsiElement: PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 8933 in perlfaq2.pod
 Lookups: DESCRIPTION; Text: DESCRIPTION; Tail: null; Type: 1st Heading; Icon: /perl5language.png; Type Icon: null
