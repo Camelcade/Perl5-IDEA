@@ -61,6 +61,7 @@ NUMBER_BIN = "0"[bB][01_]+
 NUMBER = {NUMBER_HEX} | {NUMBER_BIN}| {NUMBER_INT} | {NUMBER_SMALL}
 IDENTIFIER = [\w_]+
 IDENTIFIER_SUFFIX = [IBCLEFSXZ] "<"
+VERSION = [\d]+ ("."[\d]+)+
 
 HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 
@@ -138,6 +139,7 @@ HEAD2_TOKEN= "=head2" | "=method" | "=func" | "=attr"
 "X" / "<" {yybegin(OPENING_ANGLE);return POD_X;}
 "Z" / "<" {yybegin(OPENING_ANGLE);return POD_Z;}
 
+{VERSION}       {return POD_IDENTIFIER;}
 {NUMBER} 	{return POD_NUMBER;}
 {IDENTIFIER} / {IDENTIFIER_SUFFIX}   {return POD_IDENTIFIER;}
 {IDENTIFIER}    {return POD_IDENTIFIER;}

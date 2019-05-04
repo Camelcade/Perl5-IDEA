@@ -2214,7 +2214,7 @@ POD file
             PodIdentifierImpl(Perl5 POD: identifier)('As')
             PodIdentifierImpl(Perl5 POD: identifier)('of')
             PodIdentifierImpl(Perl5 POD: identifier)('Perl')
-            PsiElement(Perl5 POD: number)('5.10')
+            PodIdentifierImpl(Perl5 POD: identifier)('5.10')
             PsiElement(Perl5 POD: symbol)(',')
             PodIdentifierImpl(Perl5 POD: identifier)('it')
             PodIdentifierImpl(Perl5 POD: identifier)('even')

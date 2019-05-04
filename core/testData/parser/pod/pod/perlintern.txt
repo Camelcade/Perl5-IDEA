@@ -9623,7 +9623,7 @@ POD file
                 PodIdentifierImpl(Perl5 POD: identifier)('old')
                 PsiElement(Perl5 POD: ()('(')
                 PodIdentifierImpl(Perl5 POD: identifier)('Perl')
-                PsiElement(Perl5 POD: number)('5.005')
+                PodIdentifierImpl(Perl5 POD: identifier)('5.005')
                 PsiElement(Perl5 POD: ))(')')
                 PodIdentifierImpl(Perl5 POD: identifier)('thread')
                 PodIdentifierImpl(Perl5 POD: identifier)('model')

@@ -717,7 +717,7 @@ POD file
         PodIdentifierImpl(Perl5 POD: identifier)('line')
         PodIdentifierImpl(Perl5 POD: identifier)('which')
         PodIdentifierImpl(Perl5 POD: identifier)('takes')
-        PsiElement(Perl5 POD: number)('0.01')
+        PodIdentifierImpl(Perl5 POD: identifier)('0.01')
         PodIdentifierImpl(Perl5 POD: identifier)('of')
         PodIdentifierImpl(Perl5 POD: identifier)('a')
         PodIdentifierImpl(Perl5 POD: identifier)('second')

@@ -2038,7 +2038,7 @@ POD file
         PsiElement(Perl5 POD: NL)('\n')
       PsiPodParagraphImpl(Perl5 POD: POD_PARAGRAPH)
         PodIdentifierImpl(Perl5 POD: identifier)('Since')
-        PsiElement(Perl5 POD: number)('3.26')
+        PodIdentifierImpl(Perl5 POD: identifier)('3.26')
         PsiElement(Perl5 POD: symbol)(',')
         PodIdentifierImpl(Perl5 POD: identifier)('using')
         PsiPodFormatCodeImpl(Perl5 POD: POD_FORMAT_CODE)

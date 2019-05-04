@@ -230,7 +230,7 @@ POD file
         PodIdentifierImpl(Perl5 POD: identifier)('years')
         PodIdentifierImpl(Perl5 POD: identifier)('since')
         PodIdentifierImpl(Perl5 POD: identifier)('Perl')
-        PsiElement(Perl5 POD: number)('5.0')
+        PodIdentifierImpl(Perl5 POD: identifier)('5.0')
         PodIdentifierImpl(Perl5 POD: identifier)('we')
         PsiElement(Perl5 POD: ')(''')
         PodIdentifierImpl(Perl5 POD: identifier)('ve')

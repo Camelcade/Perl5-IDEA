@@ -1,0 +1,15 @@
+=over
+
+=item 5.6.0
+
+Initial port of perl to WinCE. It was performed in separate directory
+
+=item 5.8.0
+
+wince port was kept in the same F<./wince> directory, and F<wince/Makefile.ce>
+
+=item 5.9.4
+
+Two directories F<./win32> and F<./wince> were merged, so perlce build
+
+=back

@@ -4056,7 +4056,7 @@ POD file
         PodIdentifierImpl(Perl5 POD: identifier)('Starting')
         PodIdentifierImpl(Perl5 POD: identifier)('from')
         PodIdentifierImpl(Perl5 POD: identifier)('Perl')
-        PsiElement(Perl5 POD: number)('5.8')
+        PodIdentifierImpl(Perl5 POD: identifier)('5.8')
         PodIdentifierImpl(Perl5 POD: identifier)('Filter')
         PsiElement(Perl5 POD: :)(':')
         PsiElement(Perl5 POD: :)(':')

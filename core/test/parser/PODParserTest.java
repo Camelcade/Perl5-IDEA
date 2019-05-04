@@ -28,6 +28,8 @@ public class PODParserTest extends PerlParserTestBase {
     return "testData/parser/pod";
   }
 
+  public void testVersionConfusedNumbers() {doTest();}
+
   public void testIndexedItems() {doTest();}
 
   public void testIndexedParagraphTop() {doTest();}

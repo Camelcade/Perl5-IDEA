@@ -1142,7 +1142,7 @@ POD file
                     PodIdentifierImpl(Perl5 POD: identifier)('available')
                     PodIdentifierImpl(Perl5 POD: identifier)('in')
                     PodIdentifierImpl(Perl5 POD: identifier)('perl')
-                    PsiElement(Perl5 POD: number)('5.10')
+                    PodIdentifierImpl(Perl5 POD: identifier)('5.10')
                     PodIdentifierImpl(Perl5 POD: identifier)('or')
                     PodIdentifierImpl(Perl5 POD: identifier)('newer')
                     PsiElement(Perl5 POD: number)('.')
