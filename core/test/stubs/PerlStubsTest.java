@@ -17,7 +17,6 @@
 package stubs;
 
 import base.PerlLightTestCase;
-import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlStubsTest extends PerlLightTestCase {
@@ -55,7 +54,7 @@ public class PerlStubsTest extends PerlLightTestCase {
   @NotNull
   @Override
   protected String computeAnswerFileName(@NotNull String appendix) {
-    return StringUtil.replace(super.computeAnswerFileName(appendix), "_", ".");
+    return getTestName(true).replace('_', '.') + ".txt";
   }
 
   private void doTest() {

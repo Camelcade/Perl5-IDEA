@@ -28,6 +28,12 @@ public class PODParserTest extends PerlParserTestBase {
     return "testData/parser/pod";
   }
 
+  public void testIndexedItems() {doTest();}
+
+  public void testIndexedParagraphTop() {doTest();}
+
+  public void testIndexedSectionContent() {doTest();}
+
   public void testItems() {doTest();}
 
   public void testItemsIndexed() {doTest();}

@@ -1,0 +1,52 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Foo::Bar
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    *:PerlGlobStubImpl
+	Namespace name: Foo::Bar
+	Variable name: someglob
+	Is left side: true
+
+    *:PerlGlobStubImpl
+	Namespace name: main
+	Variable name: someglob
+	Is left side: true
+
+    *:PerlGlobStubImpl
+	Namespace name: Foo::Bar
+	Variable name: otherglob
+	Is left side: false
+
+    *:PerlGlobStubImpl
+	Namespace name: Foo::Bar
+	Variable name: thirdglob
+	Is left side: true
+
+    *:PerlGlobStubImpl
+	Namespace name: Foo::Bar
+	Variable name: blaglob
+	Is left side: true
+
+    *:PerlGlobStubImpl
+	Namespace name: Foo::Bar
+	Variable name: lastglob
+	Is left side: false
+
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

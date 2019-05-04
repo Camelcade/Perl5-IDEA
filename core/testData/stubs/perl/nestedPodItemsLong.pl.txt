@@ -1,0 +1,25 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  SUB_DEFINITION:PerlSubDefinitionStub
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl
+  Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: +Item with long text Item with long text Item with long text Item with long text Item with long text Item with long text       Item with long text Item with long text Item with long text Item with long text Item with long text Item with long text       Item with long text Item with long text Item with long text Item with long text Item with long text Item with long text       Item with long text Item with long text Item with long text Item with long text Item with long text Item with long text
+    Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: -Item with long text Item with long text Item with long text Item with long text Item with long text Item with long text Item with long te...
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: bulleted item index
+      Perl5 POD: ITEM_SECTION:PodSectionStub
+	Content: -Item with long text Item with long text Item with long text Item with long text Item with long text Item with long text Item with long te...
+        Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: numeric index

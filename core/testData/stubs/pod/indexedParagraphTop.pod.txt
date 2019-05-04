@@ -1,0 +1,14 @@
+Language: Perl5 POD
+PsiFileStubImpl
+  Perl5 POD: HEAD_2_SECTION:PodSectionStub
+	Content: Scalar values
+    Perl5 POD: POD_PARAGRAPH:PodSectionStub
+	Content: A scalar value is interpreted as FALSE in the Boolean sense if it is undefined, the null string or the number 0 (or its
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: truth
+      Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: falsehood
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: truth
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: falsehood

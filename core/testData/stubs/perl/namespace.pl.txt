@@ -1,0 +1,30 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Foo::Bar
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStubImpl
+	Package name: strict
+	Outer package name: Foo::Bar
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStubImpl
+	Package name: warnings
+	Outer package name: Foo::Bar
+	Import options: [FATAL, all]
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

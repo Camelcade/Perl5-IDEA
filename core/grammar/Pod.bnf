@@ -153,6 +153,7 @@ private pod_file_item ::=
 private any_level_item ::=
 	pod_section
 	| over_section
+	| pod_format_indexes
 //	| begin_section
 	| for_section
 	| encoding_section
@@ -161,6 +162,8 @@ private any_level_item ::=
 	| pod_paragraph
 	| pod_verbatim_paragraph
 	| 'NL'+
+
+private pod_format_indexes ::= pod_format_index+ {'NL'+ | <<eof>>}
 
 pod_paragraph ::= pod_paragraph_content
 pod_verbatim_paragraph ::= 'code'

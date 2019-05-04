@@ -16,11 +16,10 @@
 
 package stubs;
 
-import base.PerlLightTestCase;
-import com.intellij.openapi.util.text.StringUtil;
+import base.PodLightTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class PodStubsTest extends PerlLightTestCase {
+public class PodStubsTest extends PodLightTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/stubs/pod";
@@ -38,10 +37,14 @@ public class PodStubsTest extends PerlLightTestCase {
     doTest();
   }
 
+  public void testIndexedParagraphTop_pod() {doTest();}
+
+  public void testIndexedSectionContent_pod() {doTest();}
+
   @NotNull
   @Override
   protected String computeAnswerFileName(@NotNull String appendix) {
-    return StringUtil.replace(super.computeAnswerFileName(appendix), "_", ".");
+    return getTestName(true).replace('_', '.') + ".txt";
   }
 
   private void doTest() {

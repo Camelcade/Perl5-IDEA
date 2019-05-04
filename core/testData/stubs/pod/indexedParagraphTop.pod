@@ -1,0 +1,15 @@
+=head2 Scalar values
+
+All data in Perl is a scalar, an array of scalars, or a hash of
+scalars.  A scalar may contain one single value in any of three
+
+references are strongly-typed, uncastable pointers with builtin
+reference-counting and destructor invocation.
+
+X<truth>
+X<falsehood>
+A scalar value is interpreted as FALSE in the Boolean sense
+if it is undefined, the null string or the number 0 (or its
+
+X<truth>
+X<falsehood>

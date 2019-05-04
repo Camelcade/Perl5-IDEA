@@ -1,0 +1,13 @@
+X<switch> X<case> X<given> X<when> X<default>
+
+=head2 Switch Statements
+
+X<switch> X<case> X<given> X<when> X<default>
+
+Starting from Perl 5.10.1 (well, 5.10.0, but it didn't work
+right), you can say
+
+X<switch> X<case> X<given> X<when> X<default>
+
+Starting from Perl 5.10.1 (well, 5.10.0, but it didn't work
+right), you can say

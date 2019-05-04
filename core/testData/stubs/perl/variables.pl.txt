@@ -1,0 +1,80 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  USE_STATEMENT:PerlUseStatementStubImpl
+	Package name: vars
+	Outer package name: main
+	Import options: []
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: main
+	Variable name: scalar
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: main
+	Variable name: array
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: main
+	Variable name: hash
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Foo::Bar
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Foo::Bar
+	Variable name: scalar2
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Foo::Bar
+	Variable name: array2
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Foo::Bar
+	Variable name: hash2
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Foo::Bar
+	Variable name: scalarvalue
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: deprecated
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Foo::Bar
+	Variable name: arrayvalue
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Foo::Bar
+	Variable name: hashvalue
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: null
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl

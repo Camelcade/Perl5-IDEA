@@ -1,0 +1,34 @@
+Language: Perl5 POD
+PsiFileStubImpl
+  Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: switch
+  Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: case
+  Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: given
+  Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: when
+  Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: default
+  Perl5 POD: HEAD_2_SECTION:PodSectionStub
+	Content: Switch Statements
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: switch
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: case
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: given
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: when
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: default
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: switch
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: case
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: given
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: when
+    Perl5 POD: POD_FORMAT_INDEX:PodSectionStub
+	Content: default
