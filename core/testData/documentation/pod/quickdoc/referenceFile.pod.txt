@@ -67,7 +67,9 @@ equivalent:</p>
     chomp
     chomp($_)</code></pre></div>
 <p style="padding-bottom: 10px;">Here are the places where Perl will assume <code>$_</code> even if you don't use it:</p>
-<ul><li><p style="padding-bottom: 10px;">The following functions use <code>$_</code> as a default argument:</p>
+<ul><li>
+
+<p style="padding-bottom: 10px;">The following functions use <code>$_</code> as a default argument:</p>
 <p style="padding-bottom: 10px;">abs, alarm, chomp, chop, chr, chroot,
 cos, defined, eval, evalbytes, exp, fc, glob, hex, int, lc,
 lcfirst, length, log, lstat, mkdir, oct, ord, pos, print, printf,
@@ -75,15 +77,27 @@ quotemeta, readlink, readpipe, ref, require, reverse (in scalar context only),
 rmdir, say, sin, split (for its second
 argument), sqrt, stat, study, uc, ucfirst,
 unlink, unpack.</p></li>
-<li><p style="padding-bottom: 10px;">All file tests (<code>-f</code>, <code>-d</code>) except for <code>-t</code>, which defaults to STDIN.
+<li>
+
+<p style="padding-bottom: 10px;">All file tests (<code>-f</code>, <code>-d</code>) except for <code>-t</code>, which defaults to STDIN.
 See <a href="psi_element://perlfunc%2F-X">-X in perlfunc</a></p></li>
-<li><p style="padding-bottom: 10px;">The pattern matching operations <code>m//</code>, <code>s///</code> and <code>tr///</code> (aka <code>y///</code>)
+<li>
+
+<p style="padding-bottom: 10px;">The pattern matching operations <code>m//</code>, <code>s///</code> and <code>tr///</code> (aka <code>y///</code>)
 when used without an <code>=~</code> operator.</p></li>
-<li><p style="padding-bottom: 10px;">The default iterator variable in a <code>foreach</code> loop if no other
+<li>
+
+<p style="padding-bottom: 10px;">The default iterator variable in a <code>foreach</code> loop if no other
 variable is supplied.</p></li>
-<li><p style="padding-bottom: 10px;">The implicit iterator variable in the <code>grep()</code> and <code>map()</code> functions.</p></li>
-<li><p style="padding-bottom: 10px;">The implicit variable of <code>given()</code>.</p></li>
-<li><p style="padding-bottom: 10px;">The default place to put the next value or input record
+<li>
+
+<p style="padding-bottom: 10px;">The implicit iterator variable in the <code>grep()</code> and <code>map()</code> functions.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">The implicit variable of <code>given()</code>.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">The default place to put the next value or input record
 when a <code>&lt;FH&gt;</code>, <code>readline</code>, <code>readdir</code> or <code>each</code>
 operation's result is tested by itself as the sole criterion of a <code>while</code>
 test.  Outside a <code>while</code> test, this will not happen.</p></li></ul>
@@ -1416,22 +1430,48 @@ part describes the output layers.</p>
 <dt style="padding-bottom:4px;font-weight:bold;">$^P
  </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The internal variable for debugging support.  The meanings of the
 various bits are subject to change, but currently indicate:</p>
-<dl><dt style="padding-bottom:4px;font-weight:bold;">0x01</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Debug subroutine enter/exit.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x02</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Line-by-line debugging.  Causes <code>DB::DB()</code> subroutine to be called for
+<dl><dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Debug subroutine enter/exit.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Line-by-line debugging.  Causes <code>DB::DB()</code> subroutine to be called for
 each statement executed.  Also causes saving source code lines (like
 0x400).</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x04</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Switch off optimizations.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x08</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Preserve more data for future interactive inspections.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x10</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Keep info about source lines on which a subroutine is defined.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x20</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Start with single-step on.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x40</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Use subroutine address instead of name when reporting.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x80</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Report <code>goto &amp;subroutine</code> as well.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x100</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Provide informative &quot;file&quot; names for evals based on the place they were compiled.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x200</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Provide informative names to anonymous subroutines based on the place they
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Switch off optimizations.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Preserve more data for future interactive inspections.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Keep info about source lines on which a subroutine is defined.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Start with single-step on.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Use subroutine address instead of name when reporting.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Report <code>goto &amp;subroutine</code> as well.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Provide informative &quot;file&quot; names for evals based on the place they were compiled.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Provide informative names to anonymous subroutines based on the place they
 were compiled.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x400</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Save source code lines into <code>@{&quot;_&lt;$filename&quot;}</code>.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x800</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When saving source, include evals that generate no subroutines.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">0x1000</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">When saving source, include source that did not compile.</p></dd></dl>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Save source code lines into <code>@{&quot;_&lt;$filename&quot;}</code>.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">When saving source, include evals that generate no subroutines.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">When saving source, include source that did not compile.</p></dd></dl>
 <p style="padding-bottom: 10px;">Some bits may be relevant at compile-time only, some at
 run-time only.  This is a new mechanism and the details may change.
 See also <a href="psi_element://perldebguts">perldebguts</a>.</p></dd>

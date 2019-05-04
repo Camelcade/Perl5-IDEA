@@ -118,16 +118,24 @@ gained the hex and bit string format specifiers.</p>
 addition, let alone the story behind them.</p>
 
 <p style="padding-bottom: 10px;">The following rules apply:</p>
-<ul><li><p style="padding-bottom: 10px;">Each letter may optionally be followed by a number indicating the repeat
+<ul><li>
+
+<p style="padding-bottom: 10px;">Each letter may optionally be followed by a number indicating the repeat
 count.  A numeric repeat count may optionally be enclosed in brackets, as
 in <code>pack(&quot;C[80]&quot;, @arr)</code>.  The repeat count gobbles that many values from
 the LIST when used with all format types other than <code>a</code>, <code>A</code>, <code>Z</code>, <code>b</code>,
 <code>B</code>, <code>h</code>, <code>H</code>, <code>@</code>, <code>.</code>, <code>x</code>, <code>X</code>, and <code>P</code>, where it means
 something else, described below.  Supplying a <code>*</code> for the repeat count
 instead of a number means to use however many items are left, except for:</p>
-<ul><li><p style="padding-bottom: 10px;"><code>@</code>, <code>x</code>, and <code>X</code>, where it is equivalent to <code>0</code>.</p></li>
-<li><p style="padding-bottom: 10px;">&lt;.&gt;, where it means relative to the start of the string.</p></li>
-<li><p style="padding-bottom: 10px;"><code>u</code>, where it is equivalent to 1 (or 45, which here is equivalent).</p></li></ul>
+<ul><li>
+
+<p style="padding-bottom: 10px;"><code>@</code>, <code>x</code>, and <code>X</code>, where it is equivalent to <code>0</code>.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">&lt;.&gt;, where it means relative to the start of the string.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;"><code>u</code>, where it is equivalent to 1 (or 45, which here is equivalent).</p></li></ul>
 <p style="padding-bottom: 10px;">One can replace a numeric repeat count with a template letter enclosed in
 brackets to use the packed byte length of the bracketed template for the
 repeat count.</p>
@@ -143,16 +151,24 @@ the byte length of the item itself.</p>
 of the innermost <code>()</code> group.</p>
 <p style="padding-bottom: 10px;">When used with <code>.</code>, the repeat count determines the starting position to
 calculate the value offset as follows:</p>
-<ul><li><p style="padding-bottom: 10px;">If the repeat count is <code>0</code>, it's relative to the current position.</p></li>
-<li><p style="padding-bottom: 10px;">If the repeat count is <code>*</code>, the offset is relative to the start of the
+<ul><li>
+
+<p style="padding-bottom: 10px;">If the repeat count is <code>0</code>, it's relative to the current position.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">If the repeat count is <code>*</code>, the offset is relative to the start of the
 packed string.</p></li>
-<li><p style="padding-bottom: 10px;">And if it's an integer <i>n</i>, the offset is relative to the start of the
+<li>
+
+<p style="padding-bottom: 10px;">And if it's an integer <i>n</i>, the offset is relative to the start of the
 <i>n</i>th innermost <code>( )</code> group, or to the start of the string if <i>n</i> is
 bigger then the group level.</p></li></ul>
 <p style="padding-bottom: 10px;">The repeat count for <code>u</code> is interpreted as the maximal number of bytes
 to encode per line of output, with 0, 1 and 2 replaced by 45.  The repeat
 count should not be more than 65.</p></li>
-<li><p style="padding-bottom: 10px;">The <code>a</code>, <code>A</code>, and <code>Z</code> types gobble just one value, but pack it as a
+<li>
+
+<p style="padding-bottom: 10px;">The <code>a</code>, <code>A</code>, and <code>Z</code> types gobble just one value, but pack it as a
 string of length count, padding with nulls or spaces as needed.  When
 unpacking, <code>A</code> strips trailing whitespace and nulls, <code>Z</code> strips everything
 after the first null, and <code>a</code> returns data with no stripping at all.</p>
@@ -160,7 +176,9 @@ after the first null, and <code>a</code> returns data with no stripping at all.<
 long and an explicit count is provided, <code>Z</code> packs only <code>$count-1</code> bytes,
 followed by a null byte.  Thus <code>Z</code> always packs a trailing null, except
 when the count is 0.</p></li>
-<li><p style="padding-bottom: 10px;">Likewise, the <code>b</code> and <code>B</code> formats pack a string that's that many bits long.
+<li>
+
+<p style="padding-bottom: 10px;">Likewise, the <code>b</code> and <code>B</code> formats pack a string that's that many bits long.
 Each such format generates 1 bit of the result.  These are typically followed
 by a repeat count like <code>B8</code> or <code>B64</code>.</p>
 <p style="padding-bottom: 10px;">Each result bit is based on the least-significant bit of the corresponding
@@ -177,7 +195,9 @@ at the end.  Similarly during unpacking, &quot;extra&quot; bits are ignored.</p>
 <p style="padding-bottom: 10px;">If the input string is longer than needed, remaining characters are ignored.</p>
 <p style="padding-bottom: 10px;">A <code>*</code> for the repeat count uses all characters of the input field.
 On unpacking, bits are converted to a string of <code>0</code>s and <code>1</code>s.</p></li>
-<li><p style="padding-bottom: 10px;">The <code>h</code> and <code>H</code> formats pack a string that many nybbles (4-bit groups,
+<li>
+
+<p style="padding-bottom: 10px;">The <code>h</code> and <code>H</code> formats pack a string that many nybbles (4-bit groups,
 representable as hexadecimal digits, <code>&quot;0&quot;..&quot;9&quot;</code> <code>&quot;a&quot;..&quot;f&quot;</code>) long.</p>
 <p style="padding-bottom: 10px;">For each such format, <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> generates 4 bits of result.
 With non-alphabetical characters, the result is based on the 4 least-significant
@@ -200,7 +220,9 @@ unpacking.</p>
 <p style="padding-bottom: 10px;">A <code>*</code> for the repeat count uses all characters of the input field.  For
 <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>, nybbles are converted to a string of
 hexadecimal digits.</p></li>
-<li><p style="padding-bottom: 10px;">The <code>p</code> format packs a pointer to a null-terminated string.  You are
+<li>
+
+<p style="padding-bottom: 10px;">The <code>p</code> format packs a pointer to a null-terminated string.  You are
 responsible for ensuring that the string is not a temporary value, as that
 could potentially get deallocated before you got around to using the packed
 result.  The <code>P</code> format packs a pointer to a structure of the size indicated
@@ -212,7 +234,9 @@ by the length.  A null pointer is created if the corresponding value for
 big as an int nor as big as a long--it may not be possible to pack or
 unpack pointers in big- or little-endian byte order.  Attempting to do
 so raises an exception.</p></li>
-<li><p style="padding-bottom: 10px;">The <code>/</code> template character allows packing and unpacking of a sequence of
+<li>
+
+<p style="padding-bottom: 10px;">The <code>/</code> template character allows packing and unpacking of a sequence of
 items where the packed structure contains a packed item count followed by
 the packed items themselves.  This is useful when the structure you're
 unpacking has encoded the sizes or repeat counts for some of its fields
@@ -250,7 +274,9 @@ length.  For example:</p>
 <code>A</code>, <code>a</code>, or <code>Z</code>.  Packing with a <i>length-item</i> of <code>a</code> or <code>Z</code> may
 introduce <code>&quot;\000&quot;</code> characters, which Perl does not regard as legal in
 numeric strings.</p></li>
-<li><p style="padding-bottom: 10px;">The integer types <code>s</code>, <code>S</code>, <code>l</code>, and <code>L</code> may be
+<li>
+
+<p style="padding-bottom: 10px;">The integer types <code>s</code>, <code>S</code>, <code>l</code>, and <code>L</code> may be
 followed by a <code>!</code> modifier to specify native shorts or
 longs.  As shown in the example above, a bare <code>l</code> means
 exactly 32 bits, although the native <code>long</code> as seen by the local C compiler
@@ -280,7 +306,9 @@ the command line:</p>
        print $Config{longlongsize}, &quot;\n&quot;;</code></pre></div>
 <p style="padding-bottom: 10px;"><code>$Config{longlongsize}</code> is undefined on systems without
 long long support.</p></li>
-<li><p style="padding-bottom: 10px;">The integer formats <code>s</code>, <code>S</code>, <code>i</code>, <code>I</code>, <code>l</code>, <code>L</code>, <code>j</code>, and <code>J</code> are
+<li>
+
+<p style="padding-bottom: 10px;">The integer formats <code>s</code>, <code>S</code>, <code>i</code>, <code>I</code>, <code>l</code>, <code>L</code>, <code>j</code>, and <code>J</code> are
 inherently non-portable between processors and operating systems because
 they obey native byteorder and endianness.  For example, a 4-byte integer
 0x12345678 (305419896 decimal) would be ordered natively (arranged in and
@@ -315,7 +343,9 @@ one must use runtime probing.</p>
 <p style="padding-bottom: 10px;">For portably packed integers, either use the formats <code>n</code>, <code>N</code>, <code>v</code>,
 and <code>V</code> or else use the <code>&gt;</code> and <code>&lt;</code> modifiers described
 immediately below.  See also <a href="psi_element://perlport">perlport</a>.</p></li>
-<li><p style="padding-bottom: 10px;">Also floating point numbers have endianness.  Usually (but not always)
+<li>
+
+<p style="padding-bottom: 10px;">Also floating point numbers have endianness.  Usually (but not always)
 this agrees with the integer endianness.  Even though most platforms
 these days use the IEEE 754 binary format, there are differences,
 especially if the long doubles are involved.  You can see the
@@ -324,32 +354,44 @@ especially if the long doubles are involved.  You can see the
 <p style="padding-bottom: 10px;">Portability-wise the best option is probably to keep to the IEEE 754
 64-bit doubles, and of agreed-upon endianness.  Another possibility
 is the <code>&quot;%a&quot;</code>) format of <a href="psi_element://pod%3A%3Aperlfunc%2Fprintf+FILEHANDLE+FORMAT%2C+LIST"><code>printf</code></a>.</p></li>
-<li><p style="padding-bottom: 10px;">Starting with Perl 5.10.0, integer and floating-point formats, along with
+<li>
+
+<p style="padding-bottom: 10px;">Starting with Perl 5.10.0, integer and floating-point formats, along with
 the <code>p</code> and <code>P</code> formats and <code>()</code> groups, may all be followed by the
 <code>&gt;</code> or <code>&lt;</code> endianness modifiers to respectively enforce big-
 or little-endian byte-order.  These modifiers are especially useful
 given how <code>n</code>, <code>N</code>, <code>v</code>, and <code>V</code> don't cover signed integers,
 64-bit integers, or floating-point values.</p>
 <p style="padding-bottom: 10px;">Here are some concerns to keep in mind when using an endianness modifier:</p>
-<ul><li><p style="padding-bottom: 10px;">Exchanging signed integers between different platforms works only
+<ul><li>
+
+<p style="padding-bottom: 10px;">Exchanging signed integers between different platforms works only
 when all platforms store them in the same format.  Most platforms store
 signed integers in two's-complement notation, so usually this is not an issue.</p></li>
-<li><p style="padding-bottom: 10px;">The <code>&gt;</code> or <code>&lt;</code> modifiers can only be used on floating-point
+<li>
+
+<p style="padding-bottom: 10px;">The <code>&gt;</code> or <code>&lt;</code> modifiers can only be used on floating-point
 formats on big- or little-endian machines.  Otherwise, attempting to
 use them raises an exception.</p></li>
-<li><p style="padding-bottom: 10px;">Forcing big- or little-endian byte-order on floating-point values for
+<li>
+
+<p style="padding-bottom: 10px;">Forcing big- or little-endian byte-order on floating-point values for
 data exchange can work only if all platforms use the same
 binary representation such as IEEE floating-point.  Even if all
 platforms are using IEEE, there may still be subtle differences.  Being able
 to use <code>&gt;</code> or <code>&lt;</code> on floating-point values can be useful,
 but also dangerous if you don't know exactly what you're doing.
 It is not a general way to portably store floating-point values.</p></li>
-<li><p style="padding-bottom: 10px;">When using <code>&gt;</code> or <code>&lt;</code> on a <code>()</code> group, this affects
+<li>
+
+<p style="padding-bottom: 10px;">When using <code>&gt;</code> or <code>&lt;</code> on a <code>()</code> group, this affects
 all types inside the group that accept byte-order modifiers,
 including all subgroups.  It is silently ignored for all other
 types.  You are not allowed to override the byte-order within a group
 that already has a byte-order modifier suffix.</p></li></ul></li>
-<li><p style="padding-bottom: 10px;">Real numbers (floats and doubles) are in native machine format only.
+<li>
+
+<p style="padding-bottom: 10px;">Real numbers (floats and doubles) are in native machine format only.
 Due to the multiplicity of floating-point formats and the lack of a
 standard &quot;network&quot; representation for them, no facility for interchange has been
 made.  This means that packed floating-point data written on one machine
@@ -362,7 +404,9 @@ modifiers to force big- or little-endian byte-order on floating-point values.</p
 all numeric calculation, converting from double into float and thence
 to double again loses precision, so <code>unpack(&quot;f&quot;, pack(&quot;f&quot;, $foo)</code>)
 will not in general equal $foo.</p></li>
-<li><p style="padding-bottom: 10px;">Pack and unpack can operate in two modes: character mode (<code>C0</code> mode) where
+<li>
+
+<p style="padding-bottom: 10px;">Pack and unpack can operate in two modes: character mode (<code>C0</code> mode) where
 the packed string is processed per character, and UTF-8 byte mode (<code>U0</code> mode)
 where the packed string is processed in its UTF-8-encoded Unicode form on
 a byte-by-byte basis.  Character mode is the default
@@ -388,19 +432,25 @@ is what you want:</p>
 <p style="padding-bottom: 10px;">Those examples also illustrate that you should not try to use
 <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>/<a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a> as a
 substitute for the <a href="psi_element://Encode" style="color:red">Encode</a> module.</p></li>
-<li><p style="padding-bottom: 10px;">You must yourself do any alignment or padding by inserting, for example,
+<li>
+
+<p style="padding-bottom: 10px;">You must yourself do any alignment or padding by inserting, for example,
 enough <code>&quot;x&quot;</code>es while packing.  There is no way for
 <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> and <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>
 to know where characters are going to or coming from, so they
 handle their output and input as flat sequences of characters.</p></li>
-<li><p style="padding-bottom: 10px;">A <code>()</code> group is a sub-TEMPLATE enclosed in parentheses.  A group may
+<li>
+
+<p style="padding-bottom: 10px;">A <code>()</code> group is a sub-TEMPLATE enclosed in parentheses.  A group may
 take a repeat count either as postfix, or for
 <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a>, also via the <code>/</code>
 template character.  Within each repetition of a group, positioning with
 <code>@</code> starts over at 0.  Therefore, the result of</p>
 <div style="padding-bottom: 10px;"><pre><code>    pack(&quot;@1A((@2A)@3A)&quot;, qw[X Y Z])</code></pre></div>
 <p style="padding-bottom: 10px;">is the string <code>&quot;\0X\0\0YZ&quot;</code>.</p></li>
-<li><p style="padding-bottom: 10px;"><code>x</code> and <code>X</code> accept the <code>!</code> modifier to act as alignment commands: they
+<li>
+
+<p style="padding-bottom: 10px;"><code>x</code> and <code>X</code> accept the <code>!</code> modifier to act as alignment commands: they
 jump forward or back to the closest position aligned at a multiple of <code>count</code>
 characters.  For example, to <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a> or
 <a href="psi_element://pod%3A%3Aperlfunc%2Funpack+TEMPLATE%2CEXPR"><code>unpack</code></a> a C structure like</p>
@@ -413,22 +463,30 @@ characters.  For example, to <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEM
 doubles must be aligned to the size of double.</p>
 <p style="padding-bottom: 10px;">For alignment commands, a <code>count</code> of 0 is equivalent to a <code>count</code> of 1;
 both are no-ops.</p></li>
-<li><p style="padding-bottom: 10px;"><code>n</code>, <code>N</code>, <code>v</code> and <code>V</code> accept the <code>!</code> modifier to
+<li>
+
+<p style="padding-bottom: 10px;"><code>n</code>, <code>N</code>, <code>v</code> and <code>V</code> accept the <code>!</code> modifier to
 represent signed 16-/32-bit integers in big-/little-endian order.
 This is portable only when all platforms sharing packed data use the
 same binary representation for signed integers; for example, when all
 platforms use two's-complement representation.</p></li>
-<li><p style="padding-bottom: 10px;">Comments can be embedded in a TEMPLATE using <code>#</code> through the end of line.
+<li>
+
+<p style="padding-bottom: 10px;">Comments can be embedded in a TEMPLATE using <code>#</code> through the end of line.
 White space can separate pack codes from each other, but modifiers and
 repeat counts must follow immediately.  Breaking complex templates into
 individual line-by-line components, suitably annotated, can do as much to
 improve legibility and maintainability of pack/unpack formats as <code>/x</code> can
 for complicated pattern matches.</p></li>
-<li><p style="padding-bottom: 10px;">If TEMPLATE requires more arguments than <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>
+<li>
+
+<p style="padding-bottom: 10px;">If TEMPLATE requires more arguments than <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>
 is given, <a href="psi_element://pod%3A%3Aperlfunc%2Fpack+TEMPLATE%2CLIST"><code>pack</code></a>
 assumes additional <code>&quot;&quot;</code> arguments.  If TEMPLATE requires fewer arguments
 than given, extra arguments are ignored.</p></li>
-<li><p style="padding-bottom: 10px;">Attempting to pack the special floating point values <code>Inf</code> and <code>NaN</code>
+<li>
+
+<p style="padding-bottom: 10px;">Attempting to pack the special floating point values <code>Inf</code> and <code>NaN</code>
 (infinity, also in negative, and not-a-number) into packed integer values
 (like <code>&quot;L&quot;</code>) is a fatal error.  The reason for this is that there simply
 isn't any sensible mapping for these special values into integers.</p></li></ul>

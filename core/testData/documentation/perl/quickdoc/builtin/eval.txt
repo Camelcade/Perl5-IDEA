@@ -94,9 +94,13 @@ rules for a Perl program with the given state of <span style="white-space: nowra
 <dt style="padding-bottom:4px;font-weight:bold;">Outside the <code>&quot;unicode_eval&quot;</code> feature</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">In this case, the behavior is problematic and is not so easily
 described.  Here are two bugs that cannot easily be fixed without
 breaking existing programs:</p>
-<ul><li><p style="padding-bottom: 10px;">It can lose track of whether something should be encoded as UTF-8 or
+<ul><li>
+
+<p style="padding-bottom: 10px;">It can lose track of whether something should be encoded as UTF-8 or
 not.</p></li>
-<li><p style="padding-bottom: 10px;">Source filters activated within <code>eval</code> leak out into whichever file
+<li>
+
+<p style="padding-bottom: 10px;">Source filters activated within <code>eval</code> leak out into whichever file
 scope is currently being compiled.  To give an example with the CPAN module
 <a href="psi_element://Semi%3A%3ASemicolons" style="color:red">Semi::Semicolons</a>:</p>
 <div style="padding-bottom: 10px;"><pre><code> BEGIN { eval &quot;use Semi::Semicolons; # not filtered&quot; }

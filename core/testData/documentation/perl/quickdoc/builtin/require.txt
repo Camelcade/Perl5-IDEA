@@ -116,10 +116,16 @@ subroutine gets called with two parameters, the first a reference to
 itself, and the second the name of the file to be included (e.g.,
 <i>Foo/Bar.pm</i>).  The subroutine should return either nothing or else a
 list of up to four values in the following order:</p>
-<dl><dt style="padding-bottom:4px;font-weight:bold;">1</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">A reference to a scalar, containing any initial source code to prepend to
+<dl><dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">A reference to a scalar, containing any initial source code to prepend to
 the file or generator output.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">2</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">A filehandle, from which the file will be read.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">3</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">A reference to a subroutine.  If there is no filehandle (previous item),
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">A filehandle, from which the file will be read.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">A reference to a subroutine.  If there is no filehandle (previous item),
 then this subroutine is expected to generate one line of source code per
 call, writing the line into <a href="psi_element://perlvar%2F%24_"><code>$_</code></a> and returning 1, then
 finally at end of file returning 0.  If there is a filehandle, then the
@@ -129,7 +135,9 @@ Again, return 1 for each valid line, and 0 after all lines have been
 returned.
 For historical reasons the subroutine will receive a meaningless argument
 (in fact always the numeric value zero) as <code>$_[0]</code>.</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">4</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Optional state for the subroutine.  The state is passed in as <code>$_[1]</code>.</p></dd></dl>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">Optional state for the subroutine.  The state is passed in as <code>$_[1]</code>.</p></dd></dl>
 <p style="padding-bottom: 10px;">If an empty list, <a href="psi_element://pod%3A%3Aperlfunc%2Fundef+EXPR"><code>undef</code></a>, or nothing that matches the
 first 3 values above is returned, then <a href="psi_element://pod%3A%3Aperlfunc%2Frequire+VERSION"><code>require</code></a>
 looks at the remaining elements of <a href="psi_element://perlvar%2F%40INC"><code>@INC</code></a>.

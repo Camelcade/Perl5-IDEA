@@ -33,16 +33,22 @@ after the trailing delimiter.
 Once upon a time, Perl would recompile regular expressions
 unnecessarily, and this modifier was useful to tell it not to do so, in the
 interests of speed.  But now, the only reasons to use <code>/o</code> are one of:</p>
-<dl><dt style="padding-bottom:4px;font-weight:bold;">1</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The variables are thousands of characters long and you know that they
+<dl><dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">The variables are thousands of characters long and you know that they
 don't change, and you need to wring out the last little bit of speed by
 having Perl skip testing for that.  (There is a maintenance penalty for
 doing this, as mentioning <code>/o</code> constitutes a promise that you won't
 change the variables in the pattern.  If you do change them, Perl won't
 even notice.)</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">2</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">you want the pattern to use the initial values of the variables
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">you want the pattern to use the initial values of the variables
 regardless of whether they change or not.  (But there are saner ways
 of accomplishing this than using <code>/o</code>.)</p></dd>
-<dt style="padding-bottom:4px;font-weight:bold;">3</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">If the pattern contains embedded code, such as</p>
+<dt style="padding-bottom:4px;font-weight:bold;"></dt><dd style="padding-top:6px;">
+
+<p style="padding-bottom: 10px;">If the pattern contains embedded code, such as</p>
 <div style="padding-bottom: 10px;"><pre><code>    use re 'eval';
     $code = 'foo(?{ $x })';
     /$code/</code></pre></div>

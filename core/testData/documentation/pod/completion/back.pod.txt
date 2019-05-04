@@ -16,12 +16,20 @@ use formatting codes, as seen here:</p>
 &quot;<a href="psi_element://pod%3A%3Aperlpod%2FFormatting+Codes">Formatting Codes</a>&quot; section, below.</p>
 <p style="padding-bottom: 10px;">Note also that there are some basic rules to using &quot;=over&quot; ...
 &quot;=back&quot; regions:</p>
-<ul><li><p style="padding-bottom: 10px;">Don't use &quot;=item&quot;s outside of an &quot;=over&quot; ... &quot;=back&quot; region.</p></li>
-<li><p style="padding-bottom: 10px;">The first thing after the &quot;=over&quot; command should be an &quot;=item&quot;, unless
+<ul><li>
+
+<p style="padding-bottom: 10px;">Don't use &quot;=item&quot;s outside of an &quot;=over&quot; ... &quot;=back&quot; region.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">The first thing after the &quot;=over&quot; command should be an &quot;=item&quot;, unless
 there aren't going to be any items at all in this &quot;=over&quot; ... &quot;=back&quot;
 region.</p></li>
-<li><p style="padding-bottom: 10px;">Don't put &quot;=head<i>n</i>&quot; commands inside an &quot;=over&quot; ... &quot;=back&quot; region.</p></li>
-<li><p style="padding-bottom: 10px;">And perhaps most importantly, keep the items consistent: either use
+<li>
+
+<p style="padding-bottom: 10px;">Don't put &quot;=head<i>n</i>&quot; commands inside an &quot;=over&quot; ... &quot;=back&quot; region.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">And perhaps most importantly, keep the items consistent: either use
 &quot;=item *&quot; for all of them, to produce bullets; or use &quot;=item 1.&quot;,
 &quot;=item 2.&quot;, etc., to produce numbered lists; or use &quot;=item foo&quot;,
 &quot;=item bar&quot;, etc.--namely, things that look nothing like bullets or

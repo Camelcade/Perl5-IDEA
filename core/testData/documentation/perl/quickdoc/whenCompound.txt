@@ -1,4 +1,5 @@
-<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Switch Statements</h2><p style="padding-bottom: 10px;">    </p>
+<p><a href="psi_element://pod%3A%3Aperlsyn">pod::perlsyn</a>: <a href="psi_element://pod%3A%3Aperlsyn%2FDESCRIPTION">DESCRIPTION</a></p><h2>Switch Statements</h2>    
+
 <p style="padding-bottom: 10px;">Starting from Perl 5.10.1 (well, 5.10.0, but it didn't work
 right), you can say</p>
 <div style="padding-bottom: 10px;"><pre><code>    use feature &quot;switch&quot;;</code></pre></div>

@@ -14,7 +14,9 @@ equivalent:</p>
     chomp
     chomp($_)</code></pre></div>
 <p style="padding-bottom: 10px;">Here are the places where Perl will assume <code>$_</code> even if you don't use it:</p>
-<ul><li><p style="padding-bottom: 10px;">The following functions use <code>$_</code> as a default argument:</p>
+<ul><li>
+
+<p style="padding-bottom: 10px;">The following functions use <code>$_</code> as a default argument:</p>
 <p style="padding-bottom: 10px;">abs, alarm, chomp, chop, chr, chroot,
 cos, defined, eval, evalbytes, exp, fc, glob, hex, int, lc,
 lcfirst, length, log, lstat, mkdir, oct, ord, pos, print, printf,
@@ -22,15 +24,27 @@ quotemeta, readlink, readpipe, ref, require, reverse (in scalar context only),
 rmdir, say, sin, split (for its second
 argument), sqrt, stat, study, uc, ucfirst,
 unlink, unpack.</p></li>
-<li><p style="padding-bottom: 10px;">All file tests (<code>-f</code>, <code>-d</code>) except for <code>-t</code>, which defaults to STDIN.
+<li>
+
+<p style="padding-bottom: 10px;">All file tests (<code>-f</code>, <code>-d</code>) except for <code>-t</code>, which defaults to STDIN.
 See <a href="psi_element://perlfunc%2F-X">-X in perlfunc</a></p></li>
-<li><p style="padding-bottom: 10px;">The pattern matching operations <code>m//</code>, <code>s///</code> and <code>tr///</code> (aka <code>y///</code>)
+<li>
+
+<p style="padding-bottom: 10px;">The pattern matching operations <code>m//</code>, <code>s///</code> and <code>tr///</code> (aka <code>y///</code>)
 when used without an <code>=~</code> operator.</p></li>
-<li><p style="padding-bottom: 10px;">The default iterator variable in a <code>foreach</code> loop if no other
+<li>
+
+<p style="padding-bottom: 10px;">The default iterator variable in a <code>foreach</code> loop if no other
 variable is supplied.</p></li>
-<li><p style="padding-bottom: 10px;">The implicit iterator variable in the <code>grep()</code> and <code>map()</code> functions.</p></li>
-<li><p style="padding-bottom: 10px;">The implicit variable of <code>given()</code>.</p></li>
-<li><p style="padding-bottom: 10px;">The default place to put the next value or input record
+<li>
+
+<p style="padding-bottom: 10px;">The implicit iterator variable in the <code>grep()</code> and <code>map()</code> functions.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">The implicit variable of <code>given()</code>.</p></li>
+<li>
+
+<p style="padding-bottom: 10px;">The default place to put the next value or input record
 when a <code>&lt;FH&gt;</code>, <code>readline</code>, <code>readdir</code> or <code>each</code>
 operation's result is tested by itself as the sole criterion of a <code>while</code>
 test.  Outside a <code>while</code> test, this will not happen.</p></li></ul>

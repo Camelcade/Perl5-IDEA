@@ -2,15 +2,21 @@
    </dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">There are various syntaxes, listed below.  In the syntaxes given,
 <code>text</code>, <code>name</code>, and <code>section</code> cannot contain the characters
 '/' and '|'; and any '&lt;' or '&gt;' should be matched.</p>
-<ul><li><p style="padding-bottom: 10px;"><code>L&lt;name&gt;</code></p>
+<ul><li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;name&gt;</code></p>
 <p style="padding-bottom: 10px;">Link to a Perl manual page (e.g., <code>L&lt;Net::Ping&gt;</code>).  Note
 that <code>name</code> should not contain spaces.  This syntax
 is also occasionally used for references to Unix man pages, as in
 <code>L&lt;crontab(5)&gt;</code>.</p></li>
-<li><p style="padding-bottom: 10px;"><code>L&lt;name/&quot;sec&quot;&gt;</code> or <code>L&lt;name/sec&gt;</code></p>
+<li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;name/&quot;sec&quot;&gt;</code> or <code>L&lt;name/sec&gt;</code></p>
 <p style="padding-bottom: 10px;">Link to a section in other manual page.  E.g.,
 <code>L&lt;perlsyn/&quot;For Loops&quot;&gt;</code></p></li>
-<li><p style="padding-bottom: 10px;"><code>L&lt;/&quot;sec&quot;&gt;</code> or <code>L&lt;/sec&gt;</code></p>
+<li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;/&quot;sec&quot;&gt;</code> or <code>L&lt;/sec&gt;</code></p>
 <p style="padding-bottom: 10px;">Link to a section in this manual page.  E.g.,
 <code>L&lt;/&quot;Object Methods&quot;&gt;</code></p></li></ul>
 <p style="padding-bottom: 10px;">A section is started by the named heading or item.  For
@@ -21,18 +27,26 @@ both link to the section started by &quot;<code>=head2 For Loops</code>&quot;
 in perlsyn.</p>
 <p style="padding-bottom: 10px;">To control what text is used for display, you
 use &quot;<code>L&lt;text|...&gt;</code>&quot;, as in:</p>
-<ul><li><p style="padding-bottom: 10px;"><code>L&lt;text|name&gt;</code></p>
+<ul><li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;text|name&gt;</code></p>
 <p style="padding-bottom: 10px;">Link this text to that manual page.  E.g.,
 <code>L&lt;Perl Error Messages|perldiag&gt;</code></p></li>
-<li><p style="padding-bottom: 10px;"><code>L&lt;text|name/&quot;sec&quot;&gt;</code> or <code>L&lt;text|name/sec&gt;</code></p>
+<li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;text|name/&quot;sec&quot;&gt;</code> or <code>L&lt;text|name/sec&gt;</code></p>
 <p style="padding-bottom: 10px;">Link this text to that section in that manual page.  E.g.,
 <code>L&lt;postfix &quot;if&quot;|perlsyn/&quot;Statement Modifiers&quot;&gt;</code></p></li>
-<li><p style="padding-bottom: 10px;"><code>L&lt;text|/&quot;sec&quot;&gt;</code> or <code>L&lt;text|/sec&gt;</code>
+<li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;text|/&quot;sec&quot;&gt;</code> or <code>L&lt;text|/sec&gt;</code>
 or <code>L&lt;text|&quot;sec&quot;&gt;</code></p>
 <p style="padding-bottom: 10px;">Link this text to that section in this manual page.  E.g.,
 <code>L&lt;the various attributes|/&quot;Member Data&quot;&gt;</code></p></li></ul>
 <p style="padding-bottom: 10px;">Or you can link to a web page:</p>
-<ul><li><p style="padding-bottom: 10px;"><code>L&lt;scheme:...&gt;</code></p>
+<ul><li>
+
+<p style="padding-bottom: 10px;"><code>L&lt;scheme:...&gt;</code></p>
 <p style="padding-bottom: 10px;"><code>L&lt;text|scheme:...&gt;</code></p>
 <p style="padding-bottom: 10px;">Links to an absolute URL.  For example, <code>L&lt;http://www.perl.org/&gt;</code> or
 <code>L&lt;The Perl Home Page|http://www.perl.org/&gt;</code>.</p></li></ul></dd></dl>
