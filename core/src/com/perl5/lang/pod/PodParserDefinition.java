@@ -28,7 +28,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.pod.elementTypes.PodFileElementType;
 import com.perl5.lang.pod.lexer.PodDebuggingLexerAdapter;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.PodParser;
@@ -40,8 +39,6 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
   public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
   public static final TokenSet ALL_WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, POD_NEWLINE);
   public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
-
-  public static final IFileElementType FILE = new PodFileElementType("Plain old document");
 
   @NotNull
   @Override

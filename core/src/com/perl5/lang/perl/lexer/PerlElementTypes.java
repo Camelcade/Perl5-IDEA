@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,7 @@ package com.perl5.lang.perl.lexer;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 
-/**
- * Created by hurricup on 30.03.2016.
- */
-public interface PerlElementTypes extends PerlElementTypesGenerated, PodElementTypes {
+public interface PerlElementTypes extends PerlElementTypesGenerated {
   IElementType POD_BLOCK = new PodTemplatingElementType("POD_BLOCK", PerlLanguage.INSTANCE);
 }

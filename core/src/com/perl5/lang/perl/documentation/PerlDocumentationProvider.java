@@ -42,6 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.TAGS_TOKEN_SET;
+import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
   private static final TokenSet FORCE_AS_OPERATORS_TOKENSET = TokenSet.orSet(

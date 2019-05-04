@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,6 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.HTMLMasonParserImpl;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 05.03.2016.
- */
 public class HTMLMasonParserDefinition extends PerlParserDefinition implements HTMLMasonElementTypes {
 
   public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,

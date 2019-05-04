@@ -17,8 +17,11 @@
 package com.perl5.lang.pod.lexer;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IFileElementType;
+import com.perl5.lang.pod.elementTypes.PodFileElementType;
 import com.perl5.lang.pod.elementTypes.PodTokenType;
 
 public interface PodElementTypes extends PodElementTypesGenerated {
   IElementType POD_OUTER = new PodTokenType("POD_OUTER");
+  IFileElementType FILE = new PodFileElementType("Plain old document");
 }
