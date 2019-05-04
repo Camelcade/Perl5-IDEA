@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2019 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,14 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by hurricup on 12.11.2015.
- */
 public class PerlRecursiveVisitor extends PerlVisitor {
   @Override
   public void visitElement(@NotNull PsiElement element) {
+    ProgressManager.checkCanceled();
     element.acceptChildren(this);
   }
 }
