@@ -1,0 +1,25 @@
+=item *
+X<someindex>
+
+Bullted with text
+
+=item * Bullted with text
+X<someindex>
+
+=item 1.
+X<someindex>
+
+Numeric with text
+
+=item 1. Numeric with text
+X<someindex>
+
+=item Regular one with text
+X<someindex>
+
+=item
+X<someindex>
+
+Implicit bulleted
+
+

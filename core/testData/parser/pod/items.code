@@ -1,0 +1,19 @@
+=item *
+
+Bullted with text
+
+=item * Bullted with text
+
+=item 1.
+
+Numeric with text
+
+=item 1. Numeric with text
+
+=item Regular one with text
+
+=item
+
+Implicit bulleted
+
+

@@ -172,8 +172,8 @@ pod_section ::= '=pod'
 private parse_section_title ::= section_title 'NL'*
 section_title ::= pod_term*
 
-private parse_item_section_title ::= item_section_title 'NL'*
-item_section_title ::= pod_term*
+private parse_item_section_title ::= '*' pod_format_index* | POD_NUMBER pod_format_index* | item_section_title 'NL'*
+item_section_title ::= pod_term+
 
 head1_section ::= '=head1' [ parse_section_title [head1_section_content]] {pin=1}
 head1_section_content ::= head1_section_item *
