@@ -993,6 +993,10 @@ public class PerlPsiUtil implements PerlElementTypes {
   }
 
   public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
+    StubElement<?> stubElement = getStubFromElement(rootElement);
+    if (stubElement != null) {
+      return processElementsFromStubs(stubElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
+    }
     return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
   }
 
